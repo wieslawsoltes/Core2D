@@ -1100,49 +1100,53 @@
         <DataTemplate DataType="core:Options">
             <TabControl Classes="default">
                 <TabItem Header="General" Classes="property">
-                    <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,50,*">
-                        <TextBlock Text="SnapToGrid" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                        <CheckBox IsChecked="{Binding Path=SnapToGrid, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"/>
-                        <TextBlock Text="SnapX" Classes="left" Grid.Row="1" Grid.Column="0"/>
-                        <TextBox Text="{Binding Path=SnapX, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
-                        <ScrollBar Classes="slider" Minimum="0" Maximum="30" ViewportSize="1" Grid.Row="1" Grid.Column="2">
-                            <ScrollBar.Value>
-                                <Binding Path="SnapX" Mode="TwoWay" Converter="{Static converters:RoundedDoubleToDoubleConverter.Instance}"/>
-                            </ScrollBar.Value>
-                        </ScrollBar>
-                        <TextBlock Text="SnapY" Classes="left" Grid.Row="2" Grid.Column="0"/>
-                        <TextBox Text="{Binding Path=SnapY, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
-                        <ScrollBar Classes="slider" Minimum="0" Maximum="30" ViewportSize="1" Grid.Row="2" Grid.Column="2">
-                            <ScrollBar.Value>
-                                <Binding Path="SnapY" Mode="TwoWay" Converter="{Static converters:RoundedDoubleToDoubleConverter.Instance}"/>
-                            </ScrollBar.Value>
-                        </ScrollBar>
-                        <TextBlock Text="HitTreshold" Classes="left" Grid.Row="3" Grid.Column="0"/>
-                        <TextBox Text="{Binding Path=HitTreshold, Mode=TwoWay}" Classes="left" Grid.Row="3" Grid.Column="1"/>
-                        <ScrollBar Classes="slider" Minimum="0" Maximum="30" ViewportSize="1" Grid.Row="3" Grid.Column="2">
-                            <ScrollBar.Value>
-                                <Binding Path="HitTreshold" Mode="TwoWay" Converter="{Static converters:RoundedDoubleToDoubleConverter.Instance}"/>
-                            </ScrollBar.Value>
-                        </ScrollBar>
-                        <TextBlock Text="MoveMode" Classes="left" Grid.Row="4" Grid.Column="0"/>
-                        <DropDown Items="{Static core:Enums.MoveModeValues}" SelectedItem="{Binding Path=MoveMode, Mode=TwoWay}" Classes="default" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2"/>
-                        <TextBlock Text="TryToConnect" Classes="left" Grid.Row="5" Grid.Column="0"/>
-                        <CheckBox IsChecked="{Binding Path=TryToConnect, Mode=TwoWay}" Classes="left" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2"/>
-                    </Grid>
+                    <ScrollViewer>
+                        <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,50,*">
+                            <TextBlock Text="SnapToGrid" Classes="left" Grid.Row="0" Grid.Column="0"/>
+                            <CheckBox IsChecked="{Binding Path=SnapToGrid, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"/>
+                            <TextBlock Text="SnapX" Classes="left" Grid.Row="1" Grid.Column="0"/>
+                            <TextBox Text="{Binding Path=SnapX, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
+                            <ScrollBar Classes="slider" Minimum="0" Maximum="30" ViewportSize="1" Grid.Row="1" Grid.Column="2">
+                                <ScrollBar.Value>
+                                    <Binding Path="SnapX" Mode="TwoWay" Converter="{Static converters:RoundedDoubleToDoubleConverter.Instance}"/>
+                                </ScrollBar.Value>
+                            </ScrollBar>
+                            <TextBlock Text="SnapY" Classes="left" Grid.Row="2" Grid.Column="0"/>
+                            <TextBox Text="{Binding Path=SnapY, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
+                            <ScrollBar Classes="slider" Minimum="0" Maximum="30" ViewportSize="1" Grid.Row="2" Grid.Column="2">
+                                <ScrollBar.Value>
+                                    <Binding Path="SnapY" Mode="TwoWay" Converter="{Static converters:RoundedDoubleToDoubleConverter.Instance}"/>
+                                </ScrollBar.Value>
+                            </ScrollBar>
+                            <TextBlock Text="HitTreshold" Classes="left" Grid.Row="3" Grid.Column="0"/>
+                            <TextBox Text="{Binding Path=HitTreshold, Mode=TwoWay}" Classes="left" Grid.Row="3" Grid.Column="1"/>
+                            <ScrollBar Classes="slider" Minimum="0" Maximum="30" ViewportSize="1" Grid.Row="3" Grid.Column="2">
+                                <ScrollBar.Value>
+                                    <Binding Path="HitTreshold" Mode="TwoWay" Converter="{Static converters:RoundedDoubleToDoubleConverter.Instance}"/>
+                                </ScrollBar.Value>
+                            </ScrollBar>
+                            <TextBlock Text="MoveMode" Classes="left" Grid.Row="4" Grid.Column="0"/>
+                            <DropDown Items="{Static core:Enums.MoveModeValues}" SelectedItem="{Binding Path=MoveMode, Mode=TwoWay}" Classes="default" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2"/>
+                            <TextBlock Text="TryToConnect" Classes="left" Grid.Row="5" Grid.Column="0"/>
+                            <CheckBox IsChecked="{Binding Path=TryToConnect, Mode=TwoWay}" Classes="left" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2"/>
+                        </Grid>
+                    </ScrollViewer>
                 </TabItem>
                 <TabItem Header="Defaults" Classes="property">
-                    <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
-                        <TextBlock Text="IsStroked" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                        <CheckBox IsChecked="{Binding Path=DefaultIsStroked, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
-                        <TextBlock Text="IsFilled" Classes="left" Grid.Row="1" Grid.Column="0"/>
-                        <CheckBox IsChecked="{Binding Path=DefaultIsFilled, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
-                        <TextBlock Text="IsClosed" Classes="left" Grid.Row="2" Grid.Column="0"/>
-                        <CheckBox IsChecked="{Binding Path=DefaultIsClosed, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
-                        <TextBlock Text="IsSmoothJoin" Classes="left" Grid.Row="3" Grid.Column="0"/>
-                        <CheckBox IsChecked="{Binding Path=DefaultIsSmoothJoin, Mode=TwoWay}" Classes="left" Grid.Row="3" Grid.Column="1"/>
-                        <TextBlock Text="FillRule" Classes="left" Grid.Row="4" Grid.Column="0"/>
-                        <DropDown Items="{Static core:Enums.XFillRuleValues}" SelectedItem="{Binding Path=DefaultFillRule, Mode=TwoWay}" Classes="default" Grid.Row="4" Grid.Column="1"/>
-                    </Grid>
+                    <ScrollViewer>
+                        <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
+                            <TextBlock Text="IsStroked" Classes="left" Grid.Row="0" Grid.Column="0"/>
+                            <CheckBox IsChecked="{Binding Path=DefaultIsStroked, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                            <TextBlock Text="IsFilled" Classes="left" Grid.Row="1" Grid.Column="0"/>
+                            <CheckBox IsChecked="{Binding Path=DefaultIsFilled, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
+                            <TextBlock Text="IsClosed" Classes="left" Grid.Row="2" Grid.Column="0"/>
+                            <CheckBox IsChecked="{Binding Path=DefaultIsClosed, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
+                            <TextBlock Text="IsSmoothJoin" Classes="left" Grid.Row="3" Grid.Column="0"/>
+                            <CheckBox IsChecked="{Binding Path=DefaultIsSmoothJoin, Mode=TwoWay}" Classes="left" Grid.Row="3" Grid.Column="1"/>
+                            <TextBlock Text="FillRule" Classes="left" Grid.Row="4" Grid.Column="0"/>
+                            <DropDown Items="{Static core:Enums.XFillRuleValues}" SelectedItem="{Binding Path=DefaultFillRule, Mode=TwoWay}" Classes="default" Grid.Row="4" Grid.Column="1"/>
+                        </Grid>
+                    </ScrollViewer>
                 </TabItem>
                 <TabItem Header="Advanced" Classes="property">
                     <TabControl Classes="default">
@@ -1171,27 +1175,58 @@
             </TabControl>
         </DataTemplate>
         <DataTemplate DataType="core:Project">
-            <Grid RowDefinitions="Auto,*,Auto" ColumnDefinitions="*">
-                <TextBox Text="{Binding Path=Name, Mode=TwoWay}" Classes="left" Grid.Row="0"/>
-                <TreeView
-                    Items="{Binding Path=Documents, Mode=TwoWay}"
-                    SelectedItem="{Binding Path=Selected, Mode=TwoWay}"
-                    Grid.Row="1"
-                    Classes="default">
-                    <TreeView.DataTemplates>
-                        <TreeDataTemplate DataType="core:Document" ItemsSource="{Binding Path=Containers, Mode=TwoWay}">
-                            <TextBlock Text="{Binding Path=Name, Mode=TwoWay}" Classes="default"/>
-                        </TreeDataTemplate>
-                        <DataTemplate DataType="core:Container">
-                            <TextBlock Text="{Binding Path=Name, Mode=TwoWay}" Classes="default"/>
-                        </DataTemplate>
-                    </TreeView.DataTemplates>
-                </TreeView>
-                <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="2">
-                    <TextBlock Text="Selected" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                    <TextBox Text="{Binding Path=Selected.Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
-                </Grid>
-            </Grid>
+            <TabControl Classes="default">
+                <TabItem Header="Project" Classes="property">
+                    <Grid RowDefinitions="Auto,Auto,*,Auto" ColumnDefinitions="*">
+                        <Menu Grid.Row="0" HorizontalAlignment="Right">
+                            <MenuItem Header="+" Command="{Static core:Commands.NewCommand}" CommandParameter="{Binding Path=Selected}"/>
+                            <MenuItem Header="-" Command="{Static core:Commands.DeleteCommand}" CommandParameter="{Binding Path=Selected}"/>
+                        </Menu>
+                        <TextBox Text="{Binding Path=Name, Mode=TwoWay}" Classes="left" Grid.Row="1"/>
+                        <TreeView
+                            Items="{Binding Path=Documents, Mode=TwoWay}"
+                            SelectedItem="{Binding Path=Selected, Mode=TwoWay}"
+                            Grid.Row="2"
+                            Classes="default">
+                            <TreeView.DataTemplates>
+                                <TreeDataTemplate DataType="core:Document" ItemsSource="{Binding Path=Containers, Mode=TwoWay}">
+                                    <TextBlock Text="{Binding Path=Name, Mode=TwoWay}" Classes="default"/>
+                                </TreeDataTemplate>
+                                <DataTemplate DataType="core:Container">
+                                    <TextBlock Text="{Binding Path=Name, Mode=TwoWay}" Classes="default"/>
+                                </DataTemplate>
+                            </TreeView.DataTemplates>
+                        </TreeView>
+                        <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="3">
+                            <TextBlock Text="Selected" Classes="left" Grid.Row="0" Grid.Column="0"/>
+                            <TextBox Text="{Binding Path=Selected.Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                        </Grid>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Options" Classes="property">
+                    <ContentControl Content="{Binding Path=Options, Mode=TwoWay}"/>
+                </TabItem>
+                <TabItem Header="Images" Classes="property">
+                    <ScrollViewer>
+                        <Grid RowDefinitions="Auto,Auto,*" ColumnDefinitions="*" >
+                            <Menu Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right">
+                                <MenuItem Header="+" Command="{Static core:Commands.AddImageKeyCommand}"/>
+                            </Menu>
+                            <TextBlock Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" Text="Key" Classes="default"/>
+                            <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="2" Items="{Binding Path=Keys}">
+                                <ItemsControl.DataTemplates>
+                                    <DataTemplate DataType="core:ImageKey">
+                                        <Grid VerticalAlignment="Top" ColumnDefinitions="*,30">
+                                            <TextBox VerticalAlignment="Center" Text="{Binding Path=Key, Mode=OneWay}" Classes="default" Grid.Column="0"/>
+                                            <Button VerticalAlignment="Center" Content="-" Classes="default" Grid.Column="1" Command="{Static core:Commands.RemoveImageKeyCommand}" CommandParameter="{Binding Path=Key}"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.DataTemplates>
+                            </ItemsControl>
+                        </Grid>
+                    </ScrollViewer>
+                </TabItem>
+            </TabControl>
         </DataTemplate>
         <DataTemplate DataType="core:Document">
             <TabControl Classes="default">
@@ -1394,42 +1429,7 @@
     </UserControl.DataTemplates>
     <Grid RowDefinitions="50*,50*" ColumnDefinitions="200,Auto,*,Auto,250">
         <Border Classes="leftTop" Grid.Row="0" Grid.Column="0">
-            <TabControl Classes="default">
-                <TabItem Header="Project" Classes="property">
-                    <Grid RowDefinitions="Auto,*">
-                        <Menu Grid.Row="0" HorizontalAlignment="Right">
-                            <MenuItem Header="+" Command="{Static core:Commands.NewCommand}" CommandParameter="{Binding Path=Editor.Project.Selected}"/>
-                            <MenuItem Header="-" Command="{Static core:Commands.DeleteCommand}" CommandParameter="{Binding Path=Editor.Project.Selected}"/>
-                        </Menu>
-                        <ContentControl Content="{Binding Path=Editor.Project, Mode=TwoWay}" Grid.Row="1"/>
-                    </Grid>
-                </TabItem>
-                <TabItem Header="Options" Classes="property">
-                    <ScrollViewer>
-                        <ContentControl Content="{Binding Path=Editor.Project.Options, Mode=TwoWay}"/>
-                    </ScrollViewer>
-                </TabItem>
-                <TabItem Header="Images" Classes="property">
-                    <ScrollViewer>
-                        <Grid RowDefinitions="Auto,Auto,*" ColumnDefinitions="*" >
-                            <Menu Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right">
-                                <MenuItem Header="+" Command="{Static core:Commands.AddImageKeyCommand}"/>
-                            </Menu>
-                            <TextBlock Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" Text="Key" Classes="default"/>
-                            <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="2" Items="{Binding Path=Editor.Project.Keys}">
-                                <ItemsControl.DataTemplates>
-                                    <DataTemplate DataType="core:ImageKey">
-                                        <Grid VerticalAlignment="Top" ColumnDefinitions="*,30">
-                                            <TextBox VerticalAlignment="Center" Text="{Binding Path=Key, Mode=OneWay}" Classes="default" Grid.Column="0"/>
-                                            <Button VerticalAlignment="Center" Content="-" Classes="default" Grid.Column="1" Command="{Static core:Commands.RemoveImageKeyCommand}" CommandParameter="{Binding Path=Key}"/>
-                                        </Grid>
-                                    </DataTemplate>
-                                </ItemsControl.DataTemplates>
-                            </ItemsControl>
-                        </Grid>
-                    </ScrollViewer>
-                </TabItem>
-            </TabControl>
+            <ContentControl Content="{Binding Path=Editor.Project, Mode=TwoWay}"/>
         </Border>
         <Border Classes="leftBottom" Grid.Row="1" Grid.Column="0">
             <TabControl Classes="default">
@@ -1472,7 +1472,7 @@
                         </ListBox>
                     </Grid>
                 </TabItem>
-                <TabItem Header="Database" Classes="property">
+                <TabItem Header="Databases" Classes="property">
                     <Grid RowDefinitions="Auto,Auto,*">
                         <Menu Grid.Row="0" HorizontalAlignment="Right">
                             <MenuItem Header="+" Command="{Static core:Commands.AddDatabaseCommand}"/>
@@ -1618,24 +1618,9 @@
                     </ScrollViewer>
                 </TabItem>
                 <TabItem Header="Container" Classes="property">
-                    <Grid RowDefinitions="Auto,*" ColumnDefinitions="Auto,*">
-                        <TextBlock Text="Template" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                        <DropDown
-                            Items="{Binding Path=Editor.Project.Templates}"
-                            SelectedItem="{Binding Path=Editor.Project.CurrentContainer.Template, Mode=TwoWay}"
-                            Grid.Row="0" 
-                            Grid.Column="1"
-                            Classes="default">
-                            <DropDown.DataTemplates>
-                                <DataTemplate DataType="core:Container">
-                                    <TextBlock Text="{Binding Path=Name}" Classes="default"/>
-                                </DataTemplate>
-                            </DropDown.DataTemplates>
-                        </DropDown>
-                        <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
-                            <ContentControl Content="{Binding Path=Editor.Project.CurrentContainer, Mode=TwoWay}"/>
-                        </ScrollViewer>
-                    </Grid>
+                    <ScrollViewer>
+                        <ContentControl Content="{Binding Path=Editor.Project.CurrentContainer, Mode=TwoWay}"/>
+                    </ScrollViewer>
                 </TabItem>
                 <TabItem Header="Template" Classes="property">
                     <ScrollViewer>
