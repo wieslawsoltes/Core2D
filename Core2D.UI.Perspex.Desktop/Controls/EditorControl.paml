@@ -1356,13 +1356,16 @@
                     </Grid>
                 </TabItem>
                 <TabItem Header="Styles" Classes="property">
-                    <ListBox Items="{Binding Path=Styles}" Classes="default">
+                    <ListBox Name="styles" Items="{Binding Path=Styles}" Classes="default">
                         <ListBox.DataTemplates>
                             <DataTemplate DataType="core:ShapeStyle">
                                 <TextBlock Text="{Binding Path=Name}" Classes="default"/>
                             </DataTemplate>
                         </ListBox.DataTemplates>
                     </ListBox>
+                </TabItem>
+                <TabItem Header="Selected" Classes="property">
+                    <ContentControl Content="{Binding Path=#styles.SelectedItem, Mode=TwoWay}"/>
                 </TabItem>
             </TabControl>
         </DataTemplate>
@@ -1375,13 +1378,16 @@
                     </Grid>
                 </TabItem>
                 <TabItem Header="Groups" Classes="property">
-                    <ListBox Items="{Binding Path=Groups}" Classes="default">
+                    <ListBox Name="groups" Items="{Binding Path=Groups}" Classes="default">
                         <ListBox.DataTemplates>
                             <DataTemplate DataType="core:XGroup">
                                 <TextBlock Text="{Binding Path=Name}" Classes="default"/>
                             </DataTemplate>
                         </ListBox.DataTemplates>
                     </ListBox>
+                </TabItem>
+                <TabItem Header="Selected" Classes="property">
+                    <ContentControl Content="{Binding Path=#groups.SelectedItem, Mode=TwoWay}"/>
                 </TabItem>
             </TabControl>
         </DataTemplate>
