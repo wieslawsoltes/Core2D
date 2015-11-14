@@ -1256,6 +1256,21 @@
                 </TabItem>
             </TabControl>
         </DataTemplate>
+        <DataTemplate DataType="core:Layer">
+            <TabControl Classes="default">
+                <TabItem Header="Layer" Classes="property">
+                    <Grid RowDefinitions="Auto,Auyo" ColumnDefinitions="Auto,*">
+                        <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
+                        <TextBox Text="{Binding Path=Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                        <TextBlock Text="IsVisible" Classes="left" Grid.Row="1" Grid.Column="0"/>
+                        <CheckBox IsChecked="{Binding Path=IsVisible, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Owner" Classes="property">
+                    <ContentControl Content="{Binding Path=Owner}"/>
+                </TabItem>
+            </TabControl>
+        </DataTemplate>  
         <DataTemplate DataType="core:StyleLibrary">
             <TabControl Classes="default">
                 <TabItem Header="StyleLibrary" Classes="property">
