@@ -31,7 +31,7 @@ namespace Core2D
         private Document _documentToCopy = default(Document);
 
         /// <summary>
-        /// 
+        /// Gets or sets editor commands.
         /// </summary>
         public Commands Commands
         {
@@ -40,7 +40,7 @@ namespace Core2D
         }
 
         /// <summary>
-        ///
+        /// Gets or sets current editor.
         /// </summary>
         public Editor Editor
         {
@@ -49,7 +49,7 @@ namespace Core2D
         }
 
         /// <summary>
-        ///
+        /// Gets or sets editor view.
         /// </summary>
         public IView View
         {
@@ -58,7 +58,7 @@ namespace Core2D
         }
 
         /// <summary>
-        ///
+        /// Gets or sets editor renderers.
         /// </summary>
         public IRenderer[] Renderers
         {
@@ -67,7 +67,7 @@ namespace Core2D
         }
 
         /// <summary>
-        ///
+        ///Gets or sets project fctory.
         /// </summary>
         public IProjectFactory ProjectFactory
         {
@@ -76,7 +76,7 @@ namespace Core2D
         }
 
         /// <summary>
-        ///
+        /// Gets or sets text clipboard.
         /// </summary>
         public ITextClipboard TextClipboard
         {
@@ -85,7 +85,7 @@ namespace Core2D
         }
 
         /// <summary>
-        ///
+        /// Gets or sets object serializer.
         /// </summary>
         public ISerializer Serializer
         {
@@ -94,7 +94,7 @@ namespace Core2D
         }
 
         /// <summary>
-        ///
+        /// Gets or sets Pdf file writer.
         /// </summary>
         public IFileWriter PdfWriter
         {
@@ -103,7 +103,7 @@ namespace Core2D
         }
 
         /// <summary>
-        ///
+        /// Gets or sets Dxf file writer.
         /// </summary>
         public IFileWriter DxfWriter
         {
@@ -112,7 +112,7 @@ namespace Core2D
         }
 
         /// <summary>
-        ///
+        /// Gets or sets Csv file reader.
         /// </summary>
         public ITextFieldReader<Database> CsvReader
         {
@@ -121,7 +121,7 @@ namespace Core2D
         }
 
         /// <summary>
-        ///
+        /// Gets or sets Csv file writer.
         /// </summary>
         public ITextFieldWriter<Database> CsvWriter
         {
@@ -130,7 +130,7 @@ namespace Core2D
         }
 
         /// <summary>
-        ///
+        /// Gets or sets recent projects collection.
         /// </summary>
         public ImmutableArray<RecentProject> RecentProjects
         {
@@ -139,7 +139,7 @@ namespace Core2D
         }
 
         /// <summary>
-        ///
+        /// Gets or sets current recent project.
         /// </summary>
         public RecentProject CurrentRecentProject
         {
@@ -148,11 +148,11 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Initializes new <see cref="Core2D.Editor"/> instance.
         /// </summary>
-        /// <param name="log"></param>
-        /// <param name="logFileName"></param>
-        /// <param name="createProject"></param>
+        /// <param name="log">The logger object.</param>
+        /// <param name="logFileName">The log file name.</param>
+        /// <param name="createProject">The flag indicating whether to create project.</param>
         public void InitializeEditor(ILog log = null, string logFileName = null, bool createProject = true)
         {
             try
@@ -2448,11 +2448,11 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Drop group in current container at specified location.
         /// </summary>
-        /// <param name="group"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <param name="group">The group object.</param>
+        /// <param name="x">The X coordinate in container.</param>
+        /// <param name="y">The Y coordinate in container.</param>
         public void DropAsClone(XGroup group, double x, double y)
         {
             try
