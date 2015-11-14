@@ -1066,7 +1066,7 @@
                     </TreeView>
                 </TabItem>
                 <TabItem Header="Selected" Classes="property">
-                    <ContentControl Content="{Binding #tree.SelectedItem}"/>
+                    <ContentControl Content="{Binding Path=#tree.SelectedItem, Mode=TwoWay}"/>
                 </TabItem>
             </TabControl>
         </DataTemplate>
@@ -1251,7 +1251,7 @@
                                 </Grid>
                             </TabItem>
                             <TabItem Header="Selected" Classes="property">
-                                <ContentControl Content="{Binding #layers.SelectedItem}"/>
+                                <ContentControl Content="{Binding Path=CurrentLayer, Mode=TwoWay}"/>
                             </TabItem>
                         </TabControl>
                     </Grid>
@@ -1283,7 +1283,7 @@
                                 </Grid>
                             </TabItem>
                             <TabItem Header="Selected" Classes="property">
-                                <ContentControl Content="{Binding #shapes.SelectedItem}"/>
+                                <ContentControl Content="{Binding Path=CurrentShape, Mode=TwoWay}"/>
                             </TabItem>
                         </TabControl>
                     </Grid>
