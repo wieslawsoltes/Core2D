@@ -10,574 +10,574 @@ using System.Windows.Input;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Project editor commands.
     /// </summary>
     public class Commands
     {
         /// <summary>
-        /// 
+        /// New project.
         /// </summary>
         public static ICommand NewCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Open project.
         /// </summary>
         public static ICommand OpenCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Close project.
         /// </summary>
         public static ICommand CloseCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Save project.
         /// </summary>
         public static ICommand SaveCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Save project as.
         /// </summary>
         public static ICommand SaveAsCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Export project, document or container.
         /// </summary>
         public static ICommand ExportCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Close application view.
         /// </summary>
         public static ICommand ExitCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Import database.
         /// </summary>
         public static ICommand ImportDataCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Export database.
         /// </summary>
         public static ICommand ExportDataCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Update database.
         /// </summary>
         public static ICommand UpdateDataCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Import style.
         /// </summary>
         public static ICommand ImportStyleCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Import styles.
         /// </summary>
         public static ICommand ImportStylesCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Import style library.
         /// </summary>
         public static ICommand ImportStyleLibraryCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Import style libraries.
         /// </summary>
         public static ICommand ImportStyleLibrariesCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Import group.
         /// </summary>
         public static ICommand ImportGroupCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Import groups.
         /// </summary>
         public static ICommand ImportGroupsCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Import group library.
         /// </summary>
         public static ICommand ImportGroupLibraryCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Import group libraries.
         /// </summary>
         public static ICommand ImportGroupLibrariesCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Import template.
         /// </summary>
         public static ICommand ImportTemplateCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Import templates.
         /// </summary>
         public static ICommand ImportTemplatesCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Export style.
         /// </summary>
         public static ICommand ExportStyleCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Export styles.
         /// </summary>
         public static ICommand ExportStylesCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Export style library.
         /// </summary>
         public static ICommand ExportStyleLibraryCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Export style libraries.
         /// </summary>
         public static ICommand ExportStyleLibrariesCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Export group.
         /// </summary>
         public static ICommand ExportGroupCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Export groups.
         /// </summary>
         public static ICommand ExportGroupsCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Export group library.
         /// </summary>
         public static ICommand ExportGroupLibraryCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Export group libraries.
         /// </summary>
         public static ICommand ExportGroupLibrariesCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Export template.
         /// </summary>
         public static ICommand ExportTemplateCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Export templates.
         /// </summary>
         public static ICommand ExportTemplatesCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Add image key.
         /// </summary>
         public static ICommand AddImageKeyCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Remove image key.
         /// </summary>
         public static ICommand RemoveImageKeyCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Undo last action.
         /// </summary>
         public static ICommand UndoCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Redo last action.
         /// </summary>
         public static ICommand RedoCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Copy container or selected shapes to clipboard.
         /// </summary>
         public static ICommand CopyAsEmfCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Cut selected shapes.
         /// </summary>
         public static ICommand CutCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Copy selected shapes.
         /// </summary>
         public static ICommand CopyCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Paste text from clipboard as shapes.
         /// </summary>
         public static ICommand PasteCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Delete selected shapes.
         /// </summary>
         public static ICommand DeleteCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Select all shapes.
         /// </summary>
         public static ICommand SelectAllCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// De-select all shapes.
         /// </summary>
         public static ICommand DeselectAllCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Remove all shapes.
         /// </summary>
         public static ICommand ClearAllCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Group selected shapes.
         /// </summary>
         public static ICommand GroupCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Ungroup selected shapes.
         /// </summary>
         public static ICommand UngroupCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Bring selected shapes to front.
         /// </summary>
         public static ICommand BringToFrontCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Bring selected shapes forward.
         /// </summary>
         public static ICommand BringForwardCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Send selected shapes backward.
         /// </summary>
         public static ICommand SendBackwardCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Send selected shapes to back.
         /// </summary>
         public static ICommand SendToBackCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Move selected shapes up.
         /// </summary>
         public static ICommand MoveUpCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Move selected shapes down.
         /// </summary>
         public static ICommand MoveDownCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Move selected shapes left.
         /// </summary>
         public static ICommand MoveLeftCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Move selected shapes right.
         /// </summary>
         public static ICommand MoveRightCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Set current tool to <see cref="Tool.None"/>.
         /// </summary>
         public static ICommand ToolNoneCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Set current tool to <see cref="Tool.Selection"/>.
         /// </summary>
         public static ICommand ToolSelectionCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Set current tool to <see cref="Tool.Point"/>.
         /// </summary>
         public static ICommand ToolPointCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Set current tool to <see cref="Tool.Line"/> or  current path tool to <see cref="PathTool.Line"/>.
         /// </summary>
         public static ICommand ToolLineCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Set current tool to <see cref="Tool.Arc"/> or  current path tool to <see cref="PathTool.Arc"/>.
         /// </summary>
         public static ICommand ToolArcCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Set current tool to <see cref="Tool.Bezier"/> or  current path tool to <see cref="PathTool.Bezier"/>.
         /// </summary>
         public static ICommand ToolBezierCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Set current tool to <see cref="Tool.QBezier"/> or  current path tool to <see cref="PathTool.QBezier"/>.
         /// </summary>
         public static ICommand ToolQBezierCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Set current tool to <see cref="Tool.Point"/>.
         /// </summary>
         public static ICommand ToolPathCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Set current tool to <see cref="Tool.Rectangle"/>.
         /// </summary>
         public static ICommand ToolRectangleCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Set current tool to <see cref="Tool.Ellipse"/>.
         /// </summary>
         public static ICommand ToolEllipseCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Set current tool to <see cref="Tool.Text"/>.
         /// </summary>
         public static ICommand ToolTextCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Set current tool to <see cref="Tool.Image"/>.
         /// </summary>
         public static ICommand ToolImageCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Set current path tool to <see cref="PathTool.Move"/>.
         /// </summary>
         public static ICommand ToolMoveCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Toggle <see cref="Options.DefaultIsStroked"/> option.
         /// </summary>
         public static ICommand DefaultIsStrokedCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Toggle <see cref="Options.DefaultIsFilled"/> option.
         /// </summary>
         public static ICommand DefaultIsFilledCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Toggle <see cref="Options.DefaultIsClosed"/> option.
         /// </summary>
         public static ICommand DefaultIsClosedCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Toggle <see cref="Options.DefaultIsSmoothJoin"/> option.
         /// </summary>
         public static ICommand DefaultIsSmoothJoinCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Toggle <see cref="Options.SnapToGrid"/> option.
         /// </summary>
         public static ICommand SnapToGridCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Toggle <see cref="Options.TryToConnect"/> option.
         /// </summary>
         public static ICommand TryToConnectCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Add database.
         /// </summary>
         public static ICommand AddDatabaseCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Remove database.
         /// </summary>
         public static ICommand RemoveDatabaseCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Add column to database columns collection.
         /// </summary>
         public static ICommand AddColumnCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Remove column from database columns collection.
         /// </summary>
         public static ICommand RemoveColumnCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Add record to database records collection.
         /// </summary>
         public static ICommand AddRecordCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Remove record from database records collection.
         /// </summary>
         public static ICommand RemoveRecordCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Reset data record for current shape.
         /// </summary>
         public static ICommand ResetRecordCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Set current record as selected shape data record.
         /// </summary>
         public static ICommand ApplyRecordCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Add binding.
         /// </summary>
         public static ICommand AddBindingCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Remove binding.
         /// </summary>
         public static ICommand RemoveBindingCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Add property.
         /// </summary>
         public static ICommand AddPropertyCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Remove property.
         /// </summary>
         public static ICommand RemovePropertyCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Add group library.
         /// </summary>
         public static ICommand AddGroupLibraryCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Remove group library.
         /// </summary>
         public static ICommand RemoveGroupLibraryCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Add group.
         /// </summary>
         public static ICommand AddGroupCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Remove group.
         /// </summary>
         public static ICommand RemoveGroupCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Insert current group to container.
         /// </summary>
         public static ICommand InsertGroupCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Add layer.
         /// </summary>
         public static ICommand AddLayerCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Remove layer.
         /// </summary>
         public static ICommand RemoveLayerCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Add style library.
         /// </summary>
         public static ICommand AddStyleLibraryCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Remove style library.
         /// </summary>
         public static ICommand RemoveStyleLibraryCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Add style.
         /// </summary>
         public static ICommand AddStyleCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Remove style.
         /// </summary>
         public static ICommand RemoveStyleCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Set current style as selected shape style.
         /// </summary>
         public static ICommand ApplyStyleCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Remove selected shape.
         /// </summary>
         public static ICommand RemoveShapeCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Reset zoom to defaults.
         /// </summary>
         public static ICommand ZoomResetCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Zoom to available extents.
         /// </summary>
         public static ICommand ZoomExtentCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Add template.
         /// </summary>
         public static ICommand AddTemplateCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Remove template.
         /// </summary>
         public static ICommand RemoveTemplateCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Edit current template.
         /// </summary>
         public static ICommand EditTemplateCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Set current template as current container's template.
         /// </summary>
         public static ICommand ApplyTemplateCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Notifies when selected project tree item changed.
         /// </summary>
         public static ICommand SelectedItemChangedCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Add container.
         /// </summary>
         public static ICommand AddContainerCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Insert container before current container.
         /// </summary>
         public static ICommand InsertContainerBeforeCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Insert container after current container.
         /// </summary>
         public static ICommand InsertContainerAfterCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Add document.
         /// </summary>
         public static ICommand AddDocumentCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Insert document before current document.
         /// </summary>
         public static ICommand InsertDocumentBeforeCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Insert document after current document.
         /// </summary>
         public static ICommand InsertDocumentAfterCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Load main window layout.
         /// </summary>
         public static ICommand LoadWindowLayoutCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Save main window layout.
         /// </summary>
         public static ICommand SaveWindowLayoutCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Reset main window layout to default state.
         /// </summary>
         public static ICommand ResetWindowLayoutCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Initialize non-platform specific editor commands.
         /// </summary>
-        /// <param name="context"></param>
+        /// <param name="context">The editor context.</param>
         public static void InitializeCommonCommands(EditorContext context)
         {
             NewCommand =
@@ -977,7 +977,7 @@ namespace Core2D
         }
 
         /// <summary>
-        ///
+        /// Raise <see cref="Command.CanExecuteChanged"/> or <see cref="Command{T}.CanExecuteChanged"/> event for all commands.
         /// </summary>
         public static void NotifyCanExecuteChanged()
         {
