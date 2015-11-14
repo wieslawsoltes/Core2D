@@ -183,7 +183,7 @@ namespace Core2D.UI.WinForms
         /// Draws background rectangle with specified color.
         /// </summary>
         /// <param name="g">The drawing context.</param>
-        /// <param name="c">The backgroud color.</param>
+        /// <param name="c">The background color.</param>
         /// <param name="width">The width of background rectangle.</param>
         /// <param name="height">The height of background rectangle.</param>
         private void DrawBackground(Graphics g, ArgbColor c, double width, double height)

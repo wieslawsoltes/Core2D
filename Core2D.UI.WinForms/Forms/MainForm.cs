@@ -97,7 +97,7 @@ namespace Core2D.UI.WinForms
         }
 
         /// <summary>
-        /// Deinitialize <see cref="EditorContext"/> object.
+        /// De-initialize <see cref="EditorContext"/> object.
         /// </summary>
         private void DeInitializeContext()
         {
