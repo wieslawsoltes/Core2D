@@ -34,7 +34,7 @@ namespace Core2D.UI.Perspex.Desktop.Converters
         {
             if (value != null && value != PerspexProperty.UnsetValue)
             {
-                return value.GetType().ToString();
+                return value.ToString().Split('.').Last();
             }
 
             return PerspexProperty.UnsetValue;
