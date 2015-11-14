@@ -1363,6 +1363,7 @@
                             </DropDown.DataTemplates>
                         </DropDown>
                         <Menu Grid.Row="3" HorizontalAlignment="Right">
+                            <MenuItem Header="insert" Command="{Static core:Commands.InsertGroupCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentGroupLibrary.CurrentGroup}"/>
                             <MenuItem Header="+" Command="{Static core:Commands.AddGroupCommand}"/>
                             <MenuItem Header="-" Command="{Static core:Commands.RemoveGroupCommand}"/>
                         </Menu>

@@ -794,6 +794,22 @@ namespace Core2D
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="parameter"></param>
+        public void OnInsertGroup(object parameter)
+        {
+            if (_editor.Project == null || _editor.Project.CurrentContainer == null)
+                return;
+
+            if (parameter is XGroup)
+            {
+                var group = parameter as XGroup;
+                DropAsClone(group, 0.0, 0.0);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public void OnAddTemplate()
         {
             if (_editor.Project == null)

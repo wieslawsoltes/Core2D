@@ -452,6 +452,11 @@ namespace Core2D
         /// <summary>
         /// 
         /// </summary>
+        public static ICommand InsertGroupCommand { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public static ICommand AddLayerCommand { get; set; }
 
         /// <summary>
@@ -860,6 +865,11 @@ namespace Core2D
                     () => context.OnRemoveGroup(),
                     () => context.IsEditMode());
 
+            InsertGroupCommand =
+                Command<object>.Create(
+                    (parameter) => context.OnInsertGroup(parameter),
+                    (parameter) => context.IsEditMode());
+
             AddLayerCommand =
                 Command.Create(
                     () => context.Editor.AddLayer(),
@@ -1070,6 +1080,7 @@ namespace Core2D
 
             (AddGroupCommand as Command).NotifyCanExecuteChanged();
             (RemoveGroupCommand as Command).NotifyCanExecuteChanged();
+            (InsertGroupCommand as Command<object>).NotifyCanExecuteChanged();
 
             (AddLayerCommand as Command).NotifyCanExecuteChanged();
             (RemoveLayerCommand as Command).NotifyCanExecuteChanged();
