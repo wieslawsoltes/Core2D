@@ -1226,33 +1226,67 @@
                             <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
                             <TextBox Text="{Binding Path=CurrentLayer.Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
                         </Grid>
-                        <ListBox
-                            Items="{Binding Path=Layers}"
-                            SelectedItem="{Binding Path=CurrentLayer, Mode=TwoWay}"
-                            Grid.Row="1"
-                            Classes="default">
-                            <ListBox.DataTemplates>
-                                <DataTemplate DataType="core:Layer">
-                                    <Grid ColumnDefinitions="Auto,*">
-                                        <CheckBox Content="" IsChecked="{Binding Path=IsVisible, Mode=TwoWay}" Classes="default" Grid.Column="0"/>
-                                        <TextBlock Text="{Binding Path=Name}" Classes="default" Grid.Column="1"/>
-                                    </Grid>
-                                </DataTemplate>
-                            </ListBox.DataTemplates>
-                        </ListBox>
+                        <TabControl Classes="default" Grid.Row="1">
+                            <TabItem Header="Layers" Classes="property">
+                                <Grid RowDefinitions="Auto,*">
+                                    <Menu Grid.Row="0" HorizontalAlignment="Right">
+                                        <MenuItem Header="+" Command="{Static core:Commands.AddLayerCommand}"/>
+                                        <MenuItem Header="-" Command="{Static core:Commands.RemoveLayerCommand}"/>
+                                    </Menu>
+                                    <ListBox
+                                        Name="layers"
+                                        Items="{Binding Path=Layers}"
+                                        SelectedItem="{Binding Path=CurrentLayer, Mode=TwoWay}"
+                                        Classes="default"
+                                        Grid.Row="1">
+                                        <ListBox.DataTemplates>
+                                            <DataTemplate DataType="core:Layer">
+                                                <Grid ColumnDefinitions="Auto,*">
+                                                    <CheckBox Content="" IsChecked="{Binding Path=IsVisible, Mode=TwoWay}" Classes="default" Grid.Column="0"/>
+                                                    <TextBlock Text="{Binding Path=Name}" Classes="default" Grid.Column="1"/>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ListBox.DataTemplates>
+                                    </ListBox>
+                                </Grid>
+                            </TabItem>
+                            <TabItem Header="Selected" Classes="property">
+                                <ContentControl Content="{Binding #layers.SelectedItem}"/>
+                            </TabItem>
+                        </TabControl>
                     </Grid>
                 </TabItem>
                 <TabItem Header="Shapes" Classes="property">
-                    <ListBox
-                        Items="{Binding Path=CurrentLayer.Shapes}"
-                        SelectedItem="{Binding Path=CurrentShape, Mode=TwoWay}"
-                        Classes="default">
-                        <ListBox.DataTemplates>
-                            <DataTemplate DataType="core:BaseShape">
-                                <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="default"/>
-                            </DataTemplate>
-                        </ListBox.DataTemplates>
-                    </ListBox>
+                    <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
+                        <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="0">
+                            <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
+                            <TextBox Text="{Binding Path=CurrentShape.Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                        </Grid>
+                        <TabControl Classes="default" Grid.Row="1">
+                            <TabItem Header="Shapes" Classes="property">
+                                <Grid RowDefinitions="Auto,*">
+                                    <Menu Grid.Row="0" HorizontalAlignment="Right">
+                                        <MenuItem Header="-" Command="{Static core:Commands.RemoveShapeCommand}"/>
+                                    </Menu>
+                                    <ListBox
+                                        Name="shapes"
+                                        Items="{Binding Path=CurrentLayer.Shapes}"
+                                        SelectedItem="{Binding Path=CurrentShape, Mode=TwoWay}"
+                                        Classes="default"
+                                        Grid.Row="1">
+                                        <ListBox.DataTemplates>
+                                            <DataTemplate DataType="core:BaseShape">
+                                                <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="default"/>
+                                            </DataTemplate>
+                                        </ListBox.DataTemplates>
+                                    </ListBox>
+                                </Grid>
+                            </TabItem>
+                            <TabItem Header="Selected" Classes="property">
+                                <ContentControl Content="{Binding #shapes.SelectedItem}"/>
+                            </TabItem>
+                        </TabControl>
+                    </Grid>
                 </TabItem>
             </TabControl>
         </DataTemplate>
