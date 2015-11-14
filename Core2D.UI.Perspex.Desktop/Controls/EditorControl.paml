@@ -1301,7 +1301,8 @@
                     </Grid>
                 </TabItem>
                 <TabItem Header="Owner" Classes="property">
-                    <ContentControl Content="{Binding Path=Owner}"/>
+                    <ContentControl Content="{Binding Path=Owner, Mode=TwoWay}"/>
+                </TabItem>
                 </TabItem>
             </TabControl>
         </DataTemplate>  
