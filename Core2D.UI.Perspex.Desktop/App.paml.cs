@@ -362,10 +362,14 @@ namespace Core2D.UI.Perspex.Desktop
                 Command.Create(
                     () =>
                     {
-                        var drawable = _mainWindow.FindControl<Controls.DrawableControl>("drawable");
-                        if (drawable != null)
+                        var editor = _mainWindow.FindControl<Controls.EditorControl>("editor");
+                        if (editor != null)
                         {
-                            drawable.OnZoomReset();
+                            var drawable = editor.FindControl<Controls.DrawableControl>("drawable");
+                            if (drawable != null)
+                            {
+                                drawable.OnZoomReset();
+                            }
                         }
                     },
                     () => true);
@@ -374,10 +378,14 @@ namespace Core2D.UI.Perspex.Desktop
                 Command.Create(
                     () =>
                     {
-                        var drawable = _mainWindow.FindControl<Controls.DrawableControl>("drawable");
-                        if (drawable != null)
+                        var editor = _mainWindow.FindControl<Controls.EditorControl>("editor");
+                        if (editor != null)
                         {
-                            drawable.OnZoomExtent();
+                            var drawable = editor.FindControl<Controls.DrawableControl>("drawable");
+                            if (drawable != null)
+                            {
+                                drawable.OnZoomExtent();
+                            }
                         }
                     },
                     () => true);

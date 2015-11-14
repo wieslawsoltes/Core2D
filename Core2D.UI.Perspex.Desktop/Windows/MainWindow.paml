@@ -16,10 +16,10 @@
             <Binding Path="Editor.IsProjectDirty"/>
         </MultiBinding>
     </Window.Title>
-    <Grid RowDefinitions="Auto,*,Auto">
-        <controls:MenuControl Grid.Row="0"/>
-        <controls:EditorControl Grid.Row="1" IsVisible="{Binding Path=Editor.Project, Converter={Static converters:IsNotNullConverter.Instance}}"/>
-        <controls:DashboardControl Grid.Row="1" IsVisible="{Binding Path=Editor.Project, Converter={Static converters:IsNullConverter.Instance}}"/>
-        <controls:StatusControl Grid.Row="2" IsVisible="{Binding Path=Editor.Project, Converter={Static converters:IsNotNullConverter.Instance}}"/>
+    <Grid Name="layout" RowDefinitions="Auto,*,Auto">
+        <controls:MenuControl Name="menu" Grid.Row="0"/>
+        <controls:EditorControl Name="editor" Grid.Row="1" IsVisible="{Binding Path=Editor.Project, Converter={Static converters:IsNotNullConverter.Instance}}"/>
+        <controls:DashboardControl Name="dashboard" Grid.Row="1" IsVisible="{Binding Path=Editor.Project, Converter={Static converters:IsNullConverter.Instance}}"/>
+        <controls:StatusControl Name="status" Grid.Row="2" IsVisible="{Binding Path=Editor.Project, Converter={Static converters:IsNotNullConverter.Instance}}"/>
     </Grid>
 </Window>
