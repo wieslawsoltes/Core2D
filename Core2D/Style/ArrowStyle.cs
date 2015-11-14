@@ -94,8 +94,8 @@ namespace Core2D
         /// Creates a new <see cref="ArrowStyle"/> instance.
         /// </summary>
         /// <param name="arrowType">The arrow type.</param>
-        /// <param name="isStroked">The arow shape stroke flag.</param>
-        /// <param name="isFilled">The arow shape fill flag.</param>
+        /// <param name="isStroked">The arrow shape stroke flag.</param>
+        /// <param name="isFilled">The arrow shape fill flag.</param>
         /// <param name="radiusX">The arrow X axis radius.</param>
         /// <param name="radiusY">The arrow Y axis radius.</param>
         /// <returns>The new instance of the ArrowStyle class.</returns>
@@ -121,8 +121,8 @@ namespace Core2D
         /// <param name="name">The arrow style name.</param>
         /// <param name="source">The BaseStyle source object.</param>
         /// <param name="arrowType">The arrow type.</param>
-        /// <param name="isStroked">The arow shape stroke flag.</param>
-        /// <param name="isFilled">The arow shape fill flag.</param>
+        /// <param name="isStroked">The arrow shape stroke flag.</param>
+        /// <param name="isFilled">The arrow shape fill flag.</param>
         /// <param name="radiusX">The arrow X axis radius.</param>
         /// <param name="radiusY">The arrow Y axis radius.</param>
         /// <returns>The new instance of the ArrowStyle class.</returns>

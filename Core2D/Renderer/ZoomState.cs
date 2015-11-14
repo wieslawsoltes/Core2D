@@ -5,7 +5,7 @@ using System;
 namespace Core2D
 {
     /// <summary>
-    /// The zoon state object used for pan and zoom transformations.
+    /// The zoom state object used for pan and zoom transformations.
     /// </summary>
     public class ZoomState
     {
@@ -287,7 +287,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Autofit container in parent panel.
+        /// Auto-fit container in parent panel.
         /// </summary>
         /// <param name="pwidth">The parent panel width.</param>
         /// <param name="pheight">The parent panel height.</param>

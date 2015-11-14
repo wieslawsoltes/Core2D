@@ -30,7 +30,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Update property backing field and notify observers about property chnage.
+        /// Update property backing field and notify observers about property change.
         /// </summary>
         /// <typeparam name="T">The type of field.</typeparam>
         /// <param name="field">The field to update.</param>

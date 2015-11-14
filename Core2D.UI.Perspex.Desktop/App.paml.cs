@@ -392,7 +392,7 @@ namespace Core2D.UI.Perspex.Desktop
         }
 
         /// <summary>
-        /// Deinitialize <see cref="EditorContext"/> object.
+        /// De-initialize <see cref="EditorContext"/> object.
         /// </summary>
         public void DeInitializeContext()
         {

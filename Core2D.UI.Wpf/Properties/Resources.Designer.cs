@@ -1321,7 +1321,7 @@ namespace Core2D.UI.Wpf.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Autofit.
+        ///   Looks up a localized string similar to Auto-fit.
         /// </summary>
         public static string StatusOptionsAutofit {
             get {

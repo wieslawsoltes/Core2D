@@ -580,7 +580,7 @@
     <value>0</value>
   </data>
   <data name="StatusOptionsAutofit" xml:space="preserve">
-    <value>Autofit</value>
+    <value>Auto-fit</value>
   </data>
   <data name="StatusOptionsClosed" xml:space="preserve">
     <value>Closed</value>

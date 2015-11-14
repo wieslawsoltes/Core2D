@@ -12,7 +12,7 @@ namespace Core2D
     public static class MathHelpers
     {
         /// <summary>
-        /// Converts an angle in decimal degress to radians.
+        /// Converts an angle in decimal degrees to radians.
         /// </summary>
         /// <param name="angleInDegrees">Angle in decimal degrees.</param>
         /// <returns>Angle in radians.</returns>
@@ -22,7 +22,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Converts an angle in radians to decimal degress.
+        /// Converts an angle in radians to decimal degrees.
         /// </summary>
         /// <param name="angleInRadians">Angle in radians</param>
         /// <returns>Angle in decimal degrees.</returns>
@@ -256,7 +256,7 @@ namespace Core2D
                 }
             }
 
-            // to calulate clipped line position
+            // to calculate clipped line position
             // x0clip = x0 + t0 * dx;
             // y0clip = y0 + t0 * dy;
             // x1clip = x0 + t1 * dx;

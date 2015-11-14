@@ -1550,7 +1550,7 @@ namespace Core2D
                 }
             }
 
-            Verbose("Removee Style: " + style.Name);
+            Verbose("Remove Style: " + style.Name);
         }
 
         /// <summary>
@@ -1563,7 +1563,7 @@ namespace Core2D
                 return;
 
             binding.PropertyChanged += BindingObserver;
-            Verbose("Add Bnding: " + binding.Property + ", path: " + binding.Path);
+            Verbose("Add Binding: " + binding.Property + ", path: " + binding.Path);
         }
 
         /// <summary>
@@ -1576,7 +1576,7 @@ namespace Core2D
                 return;
 
             binding.PropertyChanged += BindingObserver;
-            Verbose("Remove Bnding: " + binding.Property + ", path: " + binding.Path);
+            Verbose("Remove Binding: " + binding.Property + ", path: " + binding.Path);
         }
 
         /// <summary>

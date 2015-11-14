@@ -58,7 +58,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Gets or sets editor renderers.
+        /// Gets or sets editor renderer's.
         /// </summary>
         public IRenderer[] Renderers
         {
@@ -67,7 +67,7 @@ namespace Core2D
         }
 
         /// <summary>
-        ///Gets or sets project fctory.
+        ///Gets or sets project factory.
         /// </summary>
         public IProjectFactory ProjectFactory
         {

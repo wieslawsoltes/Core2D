@@ -59,7 +59,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Adds line sgement.
+        /// Adds line segment.
         /// </summary>
         /// <param name="point">The end point.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
@@ -77,7 +77,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Adds arc sgement.
+        /// Adds arc segment.
         /// </summary>
         /// <param name="point">The end point.</param>
         /// <param name="size">The arc size.</param>
@@ -107,7 +107,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Adds cubic bezier sgement.
+        /// Adds cubic bezier segment.
         /// </summary>
         /// <param name="point1">The first control point.</param>
         /// <param name="point2">The second control point.</param>
@@ -131,7 +131,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Adds quadratic bezier sgement.
+        /// Adds quadratic bezier segment.
         /// </summary>
         /// <param name="point1">The control point.</param>
         /// <param name="point2">The end point.</param>

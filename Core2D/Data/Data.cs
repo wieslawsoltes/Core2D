@@ -17,7 +17,7 @@ namespace Core2D
         private object _owner;
 
         /// <summary>
-        /// Gets or sets a colletion <see cref="Binding"/> that will be used during drawing.
+        /// Gets or sets a collection <see cref="Binding"/> that will be used during drawing.
         /// </summary>
         public ImmutableArray<Binding> Bindings
         {
@@ -26,7 +26,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Gets or sets a colletion <see cref="Property"/> that will be used during drawing.
+        /// Gets or sets a collection <see cref="Property"/> that will be used during drawing.
         /// </summary>
         public ImmutableArray<Property> Properties
         {

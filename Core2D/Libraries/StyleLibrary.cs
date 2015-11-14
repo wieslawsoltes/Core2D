@@ -24,7 +24,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Gets or sets a colletion <see cref="ShapeStyle"/>.
+        /// Gets or sets a collection <see cref="ShapeStyle"/>.
         /// </summary>
         public ImmutableArray<ShapeStyle> Styles
         {
@@ -33,7 +33,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Gets or sets currenly selected style from <see cref="Styles"/> collection.
+        /// Gets or sets currently selected style from <see cref="Styles"/> collection.
         /// </summary>
         public ShapeStyle CurrentStyle
         {

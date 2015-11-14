@@ -75,7 +75,7 @@
             <CheckBox Classes="default" Content="SmoothJoin" IsChecked="{Binding Editor.Project.Options.DefaultIsSmoothJoin, Mode=TwoWay}"/>
             <CheckBox Classes="default" Content="Snap" IsChecked="{Binding Editor.Project.Options.SnapToGrid, Mode=TwoWay}"/>
             <CheckBox Classes="default" Content="Connect" IsChecked="{Binding Editor.Project.Options.TryToConnect, Mode=TwoWay}"/>
-            <CheckBox Classes="default" Content="Autofit" IsChecked="{Binding Editor.Renderers[0].State.EnableAutofit, Mode=TwoWay}"/>
+            <CheckBox Classes="default" Content="Auto-fit" IsChecked="{Binding Editor.Renderers[0].State.EnableAutofit, Mode=TwoWay}"/>
         </WrapPanel>
     </Grid>
 </UserControl>

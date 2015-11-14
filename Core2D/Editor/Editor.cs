@@ -68,7 +68,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Gets or sets current renderers.
+        /// Gets or sets current renderer's.
         /// </summary>
         public IRenderer[] Renderers
         {
@@ -3083,7 +3083,7 @@ namespace Core2D
         /// Creates a new <see cref="Editor"/> instance.
         /// </summary>
         /// <param name="project">The project to edit.</param>
-        /// <param name="renderers">The shape renderers.</param>
+        /// <param name="renderers">The shape renderer's.</param>
         /// <param name="enableObserver">Enable project observer.</param>
         /// <param name="enableHistory">Enable project history.</param>
         /// <param name="currentTool">The current tool.</param>

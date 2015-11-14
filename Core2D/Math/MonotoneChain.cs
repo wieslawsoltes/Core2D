@@ -14,7 +14,7 @@ namespace Core2D
         /// <summary>
         /// 2D cross product of OA and OB vectors, i.e. z-component of their 3D cross product.
         /// Returns a positive value, if OAB makes a counter-clockwise turn,
-        /// negative for clockwise turn, and zero if the vertices are collinear.
+        /// negative for clockwise turn, and zero if the vertices's are collinear.
         /// </summary>
         /// <param name="p1"></param>
         /// <param name="p2"></param>
@@ -26,7 +26,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Returns a list of vertices on the convex hull in counter-clockwise order.
+        /// Returns a list of vertices's on the convex hull in counter-clockwise order.
         /// Note: the last vertice in the returned list is the same as the first one.
         /// </summary>
         /// <param name="vertices"></param>

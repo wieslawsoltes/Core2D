@@ -53,7 +53,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Gets or sets hit test treshold radius.
+        /// Gets or sets hit test threshold radius.
         /// </summary>
         public double HitTreshold
         {

@@ -24,7 +24,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Gets or sets a colletion <see cref="XGroup"/>.
+        /// Gets or sets a collection <see cref="XGroup"/>.
         /// </summary>
         public ImmutableArray<XGroup> Groups
         {
@@ -33,7 +33,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Gets or sets currenly selected group from <see cref="Groups"/> collection.
+        /// Gets or sets currently selected group from <see cref="Groups"/> collection.
         /// </summary>
         public XGroup CurrentGroup
         {

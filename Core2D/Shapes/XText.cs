@@ -156,7 +156,7 @@ namespace Core2D
         /// <param name="bindings">The bindings database used for binding.</param>
         /// <param name="db">The properties database used for binding.</param>
         /// <param name="propertyName">The target property name.</param>
-        /// <param name="value">The string bound to properies.</param>
+        /// <param name="value">The string bound to properties.</param>
         /// <returns>True if binding was successful.</returns>
         private static bool TryToBind(
             ImmutableArray<Binding> bindings,
@@ -187,7 +187,7 @@ namespace Core2D
         /// <summary>
         /// Convert shape <see cref="Property"/>'s array to arguments array.
         /// </summary>
-        /// <param name="properties">The properties arry.</param>
+        /// <param name="properties">The properties array.</param>
         /// <returns>The object arguments array.</returns>
         private static object[] ToArgs(ImmutableArray<Property> properties)
         {
@@ -199,7 +199,7 @@ namespace Core2D
         /// </summary>
         /// <param name="db">The properties database used for binding.</param>
         /// <param name="r">The external data record used for binding.</param>
-        /// <returns>The string bound to properies or data record.</returns>
+        /// <returns>The string bound to properties or data record.</returns>
         public string BindToTextProperty(ImmutableArray<Property> db, Record r)
         {
             var record = r ?? this.Data.Record;

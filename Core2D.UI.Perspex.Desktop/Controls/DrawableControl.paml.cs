@@ -197,7 +197,7 @@ namespace Core2D.UI.Perspex.Desktop.Controls
         }
 
         /// <summary>
-        /// Autofits control using zoom and pan properties.
+        /// Auto-fits control using zoom and pan properties.
         /// </summary>
         /// <param name="width">The control width.</param>
         /// <param name="height">The control height.</param>
@@ -255,7 +255,7 @@ namespace Core2D.UI.Perspex.Desktop.Controls
         /// Draws background rectangle with specified color.
         /// </summary>
         /// <param name="dc">The drawing context.</param>
-        /// <param name="c">The backgroud color.</param>
+        /// <param name="c">The background color.</param>
         /// <param name="width">The width of background rectangle.</param>
         /// <param name="height">The height of background rectangle.</param>
         private void DrawBackground(DrawingContext dc, ArgbColor c, double width, double height)
