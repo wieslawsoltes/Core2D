@@ -1293,7 +1293,7 @@
         <DataTemplate DataType="core:Layer">
             <TabControl Classes="default">
                 <TabItem Header="Layer" Classes="property">
-                    <Grid RowDefinitions="Auto,Auyo" ColumnDefinitions="Auto,*">
+                    <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*">
                         <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
                         <TextBox Text="{Binding Path=Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
                         <TextBlock Text="IsVisible" Classes="left" Grid.Row="1" Grid.Column="0"/>
