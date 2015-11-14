@@ -1054,11 +1054,6 @@
                     </Grid>
                 </TabItem>
                 <TabItem Header="Figures" Classes="property">
-                    <Grid ColumnDefinitions="*">
-                        <ListBox Items="{Binding Path=Figures}" Grid.Column="0" Classes="default"/>
-                    </Grid>
-                </TabItem>
-                <TabItem Header="Tree" Classes="property">
                     <TreeView Name="tree" Items="{Binding Path=Figures}" Classes="default">
                         <TreeView.DataTemplates>
                             <TreeDataTemplate DataType="core:XPathFigure" ItemsSource="{Binding Path=Segments}">
