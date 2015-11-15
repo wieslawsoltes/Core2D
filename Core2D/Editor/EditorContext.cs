@@ -2057,13 +2057,13 @@ namespace Core2D
                     .Distinct(new StyleComparer())
                     .ToDictionary(s => s.Name);
 
-                // reset point shape to container default
+                // Reset point shape to container default.
                 foreach (var point in Editor.GetAllPoints(shapes, ShapeStateFlags.Connector))
                 {
                     point.Shape = _editor.Project.Options.PointShape;
                 }
 
-                // try to restore shape styles
+                // Try to restore shape styles.
                 foreach (var shape in Editor.GetAllShapes(shapes))
                 {
                     if (shape.Style == null)
@@ -2072,12 +2072,12 @@ namespace Core2D
                     ShapeStyle style;
                     if (styles.TryGetValue(shape.Style.Name, out style))
                     {
-                        // use existing style
+                        // Use existing style.
                         shape.Style = style;
                     }
                     else
                     {
-                        // create Imported style library
+                        // Create Imported style library.
                         if (_editor.Project.CurrentStyleLibrary == null)
                         {
                             var sg = StyleLibrary.Create(Constants.ImportedStyleLibraryName);
@@ -2085,10 +2085,10 @@ namespace Core2D
                             _editor.Project.CurrentStyleLibrary = sg;
                         }
 
-                        // add missing style
+                        // Add missing style.
                         _editor.Project.CurrentStyleLibrary.Styles = _editor.Project.CurrentStyleLibrary.Styles.Add(shape.Style);
 
-                        // recreate styles dictionary
+                        // Recreate styles dictionary.
                         styles = _editor.Project.StyleLibraries
                             .Where(sg => sg.Styles != null && sg.Styles.Length > 0)
                             .SelectMany(sg => sg.Styles)
@@ -2125,7 +2125,7 @@ namespace Core2D
                     .SelectMany(d => d.Records)
                     .ToDictionary(s => s.Id);
 
-                // try to restore shape record
+                // Try to restore shape record.
                 foreach (var shape in Editor.GetAllShapes(shapes))
                 {
                     if (shape.Data.Record == null)
@@ -2134,12 +2134,12 @@ namespace Core2D
                     Record record;
                     if (records.TryGetValue(shape.Data.Record.Id, out record))
                     {
-                        // use existing record
+                        // Use existing record.
                         shape.Data.Record = record;
                     }
                     else
                     {
-                        // create Imported database
+                        // Create Imported database.
                         if (_editor.Project.CurrentDatabase == null)
                         {
                             var db = Database.Create(Constants.ImportedDatabaseName, shape.Data.Record.Columns);
@@ -2147,10 +2147,10 @@ namespace Core2D
                             _editor.Project.CurrentDatabase = db;
                         }
 
-                        // add missing data record
+                        // Add missing data record.
                         _editor.Project.CurrentDatabase.Records = _editor.Project.CurrentDatabase.Records.Add(shape.Data.Record);
 
-                        // recreate records dictionary
+                        // Recreate records dictionary.
                         records = _editor.Project.Databases
                             .Where(d => d.Records != null && d.Records.Length > 0)
                             .SelectMany(d => d.Records)
