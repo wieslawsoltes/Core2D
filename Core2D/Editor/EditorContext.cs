@@ -197,16 +197,16 @@ namespace Core2D
         }
 
         /// <summary>
-        ///
+        /// Checks if edit mode is active.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Return true if edit mode is active.</returns>
         public bool IsEditMode()
         {
             return true;
         }
 
         /// <summary>
-        ///
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
         /// </summary>
         public void Dispose()
         {
@@ -215,7 +215,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
         /// </summary>
         ~EditorContext()
         {
@@ -223,9 +223,9 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
         /// </summary>
-        /// <param name="disposing"></param>
+        /// <param name="disposing">The flag indicating whether disposing.</param>
         protected virtual void Dispose(bool disposing)
         {
             if (disposing)
@@ -238,9 +238,9 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Create new project, document or container.
         /// </summary>
-        /// <param name="item"></param>
+        /// <param name="item">The parent item.</param>
         public void OnNew(object item)
         {
             if (item is Container)
@@ -352,7 +352,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Close project.
         /// </summary>
         public void OnClose()
         {
@@ -360,7 +360,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Close application view.
         /// </summary>
         public void OnExit()
         {
@@ -371,7 +371,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Undo last action.
         /// </summary>
         public void OnUndo()
         {
@@ -396,7 +396,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Redo last action.
         /// </summary>
         public void OnRedo()
         {
@@ -421,7 +421,7 @@ namespace Core2D
         }
 
         /// <summary>
-        ///
+        /// Cut selected document, container or shapes to clipboard.
         /// </summary>
         public void OnCut()
         {
@@ -447,7 +447,7 @@ namespace Core2D
         }
 
         /// <summary>
-        ///
+        /// Copy document, container or shapes to clipboard.
         /// </summary>
         public void OnCopy()
         {
@@ -479,7 +479,7 @@ namespace Core2D
         }
 
         /// <summary>
-        ///
+        /// Paste text from clipboard as document, container or shapes.
         /// </summary>
         public async void OnPaste()
         {
@@ -507,9 +507,9 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Cut selected document, container or shapes.
         /// </summary>
-        /// <param name="item"></param>
+        /// <param name="item">The item to cut.</param>
         public void OnCut(object item)
         {
             if (item is Container)
@@ -533,9 +533,9 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Copy document, container or shapes to clipboard.
         /// </summary>
-        /// <param name="item"></param>
+        /// <param name="item">The item to copy.</param>
         public void OnCopy(object item)
         {
             if (item is Container)
@@ -557,9 +557,9 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Paste text from clipboard as document, container or shapes.
         /// </summary>
-        /// <param name="item"></param>
+        /// <param name="item">The item to paste.</param>
         public void OnPaste(object item)
         {
             if (item is Container)
@@ -645,9 +645,9 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Delete selected document, container or shapes.
         /// </summary>
-        /// <param name="item"></param>
+        /// <param name="item">The item to delete.</param>
         public void OnDelete(object item)
         {
             if (item is Container)
@@ -667,7 +667,7 @@ namespace Core2D
         }
 
         /// <summary>
-        ///
+        /// Select all shapes.
         /// </summary>
         public void OnSelectAll()
         {
@@ -691,7 +691,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// De-select all shapes.
         /// </summary>
         public void OnDeselectAll()
         {
@@ -712,7 +712,7 @@ namespace Core2D
         }
 
         /// <summary>
-        ///
+        /// Remove all shapes.
         /// </summary>
         public void OnClearAll()
         {
@@ -735,9 +735,9 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Set current record as selected shape data record.
         /// </summary>
-        /// <param name="item"></param>
+        /// <param name="item">The data record item.</param>
         public void OnApplyRecord(object item)
         {
             if (_editor.Project == null || _editor.Project.CurrentContainer == null)
@@ -750,9 +750,9 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Set current style as selected shape style.
         /// </summary>
-        /// <param name="item"></param>
+        /// <param name="item">The shape style item.</param>
         public void OnApplyStyle(object item)
         {
             if (_editor.Project == null || _editor.Project.CurrentContainer == null)
@@ -765,7 +765,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Add group.
         /// </summary>
         public void OnAddGroup()
         {
@@ -784,7 +784,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Remove group.
         /// </summary>
         public void OnRemoveGroup()
         {
@@ -792,9 +792,9 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Insert current group to container.
         /// </summary>
-        /// <param name="parameter"></param>
+        /// <param name="parameter">The group parameter.</param>
         public void OnInsertGroup(object parameter)
         {
             if (_editor.Project == null || _editor.Project.CurrentContainer == null)
@@ -808,7 +808,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Add template.
         /// </summary>
         public void OnAddTemplate()
         {
@@ -829,7 +829,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Remove template.
         /// </summary>
         public void OnRemoveTemplate()
         {
@@ -837,7 +837,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Edit current template.
         /// </summary>
         public void OnEditTemplate()
         {
@@ -853,9 +853,9 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Set current template as current container's template.
         /// </summary>
-        /// <param name="item"></param>
+        /// <param name="item">The container item.</param>
         public void OnApplyTemplate(object item)
         {
             if (_editor.Project == null || _editor.Project.CurrentContainer == null)
@@ -868,9 +868,9 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Notifies when selected project tree item changed.
         /// </summary>
-        /// <param name="item"></param>
+        /// <param name="item">The selected item.</param>
         public void OnSelectedItemChanged(object item)
         {
             if (_editor.Project == null)
@@ -880,9 +880,9 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Add container.
         /// </summary>
-        /// <param name="item"></param>
+        /// <param name="item">The parent item.</param>
         public void OnAddContainer(object item)
         {
             if (_editor.Project == null || _editor.Project.CurrentDocument == null)
@@ -903,9 +903,9 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Insert container before current container.
         /// </summary>
-        /// <param name="item"></param>
+        /// <param name="item">The parent item.</param>
         public void OnInsertContainerBefore(object item)
         {
             if (_editor.Project == null || _editor.Project.CurrentDocument == null)
@@ -932,9 +932,9 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Insert container after current container.
         /// </summary>
-        /// <param name="item"></param>
+        /// <param name="item">The parent item.</param>
         public void OnInsertContainerAfter(object item)
         {
             if (_editor.Project == null || _editor.Project.CurrentDocument == null)
@@ -961,9 +961,9 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Add document.
         /// </summary>
-        /// <param name="item"></param>
+        /// <param name="item">The parent item.</param>
         public void OnAddDocument(object item)
         {
             if (_editor.Project == null)
@@ -985,9 +985,9 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Insert document before current document.
         /// </summary>
-        /// <param name="item"></param>
+        /// <param name="item">The parent item.</param>
         public void OnInsertDocumentBefore(object item)
         {
             if (_editor.Project == null)
@@ -1015,9 +1015,9 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Insert document after current document.
         /// </summary>
-        /// <param name="item"></param>
+        /// <param name="item">The parent item.</param>
         public void OnInsertDocumentAfter(object item)
         {
             if (_editor.Project == null)
@@ -1045,7 +1045,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Set current tool to <see cref="Tool.None"/>.
         /// </summary>
         public void OnToolNone()
         {
@@ -1053,7 +1053,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Set current tool to <see cref="Tool.Selection"/>.
         /// </summary>
         public void OnToolSelection()
         {
@@ -1061,7 +1061,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Set current tool to <see cref="Tool.Point"/>.
         /// </summary>
         public void OnToolPoint()
         {
@@ -1069,7 +1069,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        ///  Set current tool to <see cref="Tool.Line"/> or current path tool to <see cref="PathTool.Line"/>.
         /// </summary>
         public void OnToolLine()
         {
@@ -1084,7 +1084,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Set current tool to <see cref="Tool.Arc"/> or current path tool to <see cref="PathTool.Arc"/>.
         /// </summary>
         public void OnToolArc()
         {
@@ -1099,7 +1099,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Set current tool to <see cref="Tool.Bezier"/> or current path tool to <see cref="PathTool.Bezier"/>.
         /// </summary>
         public void OnToolBezier()
         {
@@ -1114,7 +1114,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Set current tool to <see cref="Tool.QBezier"/> or current path tool to <see cref="PathTool.QBezier"/>.
         /// </summary>
         public void OnToolQBezier()
         {
@@ -1129,7 +1129,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Set current tool to <see cref="Tool.Path"/>.
         /// </summary>
         public void OnToolPath()
         {
@@ -1137,7 +1137,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Set current tool to <see cref="Tool.Rectangle"/>.
         /// </summary>
         public void OnToolRectangle()
         {
@@ -1145,7 +1145,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Set current tool to <see cref="Tool.Ellipse"/>.
         /// </summary>
         public void OnToolEllipse()
         {
@@ -1153,7 +1153,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Set current tool to <see cref="Tool.Text"/>.
         /// </summary>
         public void OnToolText()
         {
@@ -1161,7 +1161,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Set current tool to <see cref="Tool.Image"/>.
         /// </summary>
         public void OnToolImage()
         {
@@ -1169,7 +1169,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Set current path tool to <see cref="PathTool.Move"/>.
         /// </summary>
         public void OnToolMove()
         {
@@ -1180,7 +1180,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Toggle <see cref="Options.DefaultIsStroked"/> option.
         /// </summary>
         public void OnToggleDefaultIsStroked()
         {
@@ -1191,7 +1191,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Toggle <see cref="Options.DefaultIsFilled"/> option.
         /// </summary>
         public void OnToggleDefaultIsFilled()
         {
@@ -1202,7 +1202,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Toggle <see cref="Options.DefaultIsClosed"/> option.
         /// </summary>
         public void OnToggleDefaultIsClosed()
         {
@@ -1213,7 +1213,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Toggle <see cref="Options.DefaultIsSmoothJoin"/> option.
         /// </summary>
         public void OnToggleDefaultIsSmoothJoin()
         {
@@ -1224,7 +1224,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Toggle <see cref="Options.SnapToGrid"/> option.
         /// </summary>
         public void OnToggleSnapToGrid()
         {
@@ -1235,7 +1235,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Toggle <see cref="Options.TryToConnect"/> option.
         /// </summary>
         public void OnToggleTryToConnect()
         {
@@ -1246,9 +1246,9 @@ namespace Core2D
         }
 
         /// <summary>
-        ///
+        /// Invalidates renderer's cache.
         /// </summary>
-        /// <param name="isZooming"></param>
+        /// <param name="isZooming">The flag indicating whether is zooming.</param>
         public void InvalidateCache(bool isZooming)
         {
             try
@@ -1273,9 +1273,9 @@ namespace Core2D
         }
 
         /// <summary>
-        ///
+        /// Open project.
         /// </summary>
-        /// <param name="path"></param>
+        /// <param name="path">The project file path.</param>
         public void Open(string path)
         {
             if (_serializer == null)
@@ -1308,9 +1308,9 @@ namespace Core2D
         }
 
         /// <summary>
-        ///
+        /// Save project.
         /// </summary>
-        /// <param name="path"></param>
+        /// <param name="path">The project file path.</param>
         public void Save(string path)
         {
             if (_serializer == null)
@@ -1342,7 +1342,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Close project.
         /// </summary>
         public void Close()
         {
@@ -1355,10 +1355,10 @@ namespace Core2D
         }
 
         /// <summary>
-        ///
+        /// Export item as Pdf.
         /// </summary>
-        /// <param name="path"></param>
-        /// <param name="item"></param>
+        /// <param name="path">The Pdf file path.</param>
+        /// <param name="item">The item to export.</param>
         public void ExportAsPdf(string path, object item)
         {
             try
@@ -1381,9 +1381,9 @@ namespace Core2D
         }
 
         /// <summary>
-        ///
+        /// Export current container as Dxf.
         /// </summary>
-        /// <param name="path"></param>
+        /// <param name="path">The Dxf file path.</param>
         public void ExportAsDxf(string path)
         {
             try
@@ -1406,11 +1406,11 @@ namespace Core2D
         }
 
         /// <summary>
-        ///
+        /// Import object from file.
         /// </summary>
-        /// <param name="path"></param>
-        /// <param name="item"></param>
-        /// <param name="type"></param>
+        /// <param name="path">The object file path.</param>
+        /// <param name="item">The parent object.</param>
+        /// <param name="type">The object type.</param>
         public void ImportObject(string path, object item, ImportType type)
         {
             if (_serializer == null)
@@ -1679,11 +1679,11 @@ namespace Core2D
         }
 
         /// <summary>
-        ///
+        /// Export object to a file.
         /// </summary>
-        /// <param name="path"></param>
-        /// <param name="item"></param>
-        /// <param name="type"></param>
+        /// <param name="path">The object file path.</param>
+        /// <param name="item">The parent object.</param>
+        /// <param name="type">The object type.</param>
         public void ExportObject(string path, object item, ExportType type)
         {
             if (_serializer == null)
@@ -1768,9 +1768,9 @@ namespace Core2D
         }
 
         /// <summary>
-        ///
+        /// Import database.
         /// </summary>
-        /// <param name="path"></param>
+        /// <param name="path">The database file path.</param>
         public void ImportData(string path)
         {
             if (_editor.Project == null)
@@ -1798,10 +1798,10 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Export database.
         /// </summary>
-        /// <param name="path"></param>
-        /// <param name="database"></param>
+        /// <param name="path">The database file path.</param>
+        /// <param name="database">The database object.</param>
         public void ExportData(string path, Database database)
         {
             try
@@ -1824,10 +1824,10 @@ namespace Core2D
         }
 
         /// <summary>
-        ///
+        /// Update database.
         /// </summary>
-        /// <param name="path"></param>
-        /// <param name="database"></param>
+        /// <param name="path">The database file path.</param>
+        /// <param name="database">The database object.</param>
         public void UpdateData(string path, Database database)
         {
             try
@@ -1951,18 +1951,18 @@ namespace Core2D
         }
 
         /// <summary>
-        ///
+        /// Checks if can copy.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Returns true if can copy.</returns>
         public bool CanCopy()
         {
             return _editor.IsSelectionAvailable();
         }
 
         /// <summary>
-        ///
+        /// Checks if can paste.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Returns true if can paste.</returns>
         public async Task<bool> CanPaste()
         {
             try
@@ -1983,7 +1983,7 @@ namespace Core2D
         }
 
         /// <summary>
-        ///
+        /// Copy selected shapes to clipboard.
         /// </summary>
         /// <param name="shapes"></param>
         private void Copy(IList<BaseShape> shapes)
@@ -2012,7 +2012,7 @@ namespace Core2D
         }
 
         /// <summary>
-        ///
+        /// Paste Json text from clipboard as shapes.
         /// </summary>
         /// <param name="json"></param>
         public void Paste(string json)
@@ -2041,9 +2041,9 @@ namespace Core2D
         }
 
         /// <summary>
-        ///
+        /// Try to restore shapes styles.
         /// </summary>
-        /// <param name="shapes"></param>
+        /// <param name="shapes">The shapes collection.</param>
         private void TryToRestoreStyles(IEnumerable<BaseShape> shapes)
         {
             try
@@ -2110,9 +2110,9 @@ namespace Core2D
         }
 
         /// <summary>
-        ///
+        /// Try to restore shapes records.
         /// </summary>
-        /// <param name="shapes"></param>
+        /// <param name="shapes">The shapes collection.</param>
         private void TryToRestoreRecords(IEnumerable<BaseShape> shapes)
         {
             try
@@ -2171,9 +2171,9 @@ namespace Core2D
         }
 
         /// <summary>
-        ///
+        /// Paste shapes to current container.
         /// </summary>
-        /// <param name="shapes"></param>
+        /// <param name="shapes">The shapes collection.</param>
         public void Paste(IEnumerable<BaseShape> shapes)
         {
             try
@@ -2225,10 +2225,10 @@ namespace Core2D
         }
 
         /// <summary>
-        ///
+        /// Clones the <see cref="XGroup"/> object.
         /// </summary>
-        /// <param name="group"></param>
-        /// <returns></returns>
+        /// <param name="group">The <see cref="XGroup"/> object.</param>
+        /// <returns>The cloned <see cref="XGroup"/> object.</returns>
         public XGroup Clone(XGroup group)
         {
             if (_serializer == null)
@@ -2264,10 +2264,10 @@ namespace Core2D
         }
 
         /// <summary>
-        ///
+        /// Clones the <see cref="Container"/> object.
         /// </summary>
-        /// <param name="container"></param>
-        /// <returns></returns>
+        /// <param name="container">The <see cref="Container"/> object.</param>
+        /// <returns>The cloned <see cref="Container"/> object.</returns>
         public Container Clone(Container container)
         {
             if (_serializer == null)
@@ -2305,10 +2305,10 @@ namespace Core2D
         }
 
         /// <summary>
-        ///
+        /// Clones the <see cref="Document"/> object.
         /// </summary>
-        /// <param name="document"></param>
-        /// <returns></returns>
+        /// <param name="document">The <see cref="Document"/> object.</param>
+        /// <returns>The cloned <see cref="Document"/> object.</returns>
         public Document Clone(Document document)
         {
             if (_serializer == null)
@@ -2350,10 +2350,10 @@ namespace Core2D
         }
 
         /// <summary>
-        ///
+        /// Process dropped files.
         /// </summary>
-        /// <param name="files"></param>
-        /// <returns></returns>
+        /// <param name="files">The files array.</param>
+        /// <returns>Returns true if success.</returns>
         public bool Drop(string[] files)
         {
             try
@@ -2448,9 +2448,9 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Drop group in current container at specified location.
+        /// Drop <see cref="XGroup"/> object in current container at specified location.
         /// </summary>
-        /// <param name="group">The group object.</param>
+        /// <param name="group">The <see cref="XGroup"/> object.</param>
         /// <param name="x">The X coordinate in container.</param>
         /// <param name="y">The Y coordinate in container.</param>
         public void DropAsClone(XGroup group, double x, double y)
@@ -2489,11 +2489,11 @@ namespace Core2D
         }
 
         /// <summary>
-        ///
+        /// Drop <see cref="Record"/> object in current container at specified location.
         /// </summary>
-        /// <param name="record"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <param name="record">The <see cref="Record"/> object.</param>
+        /// <param name="x">The X coordinate in container.</param>
+        /// <param name="y">The Y coordinate in container.</param>
         public void Drop(Record record, double x, double y)
         {
             try
@@ -2549,11 +2549,11 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Drop <see cref="Record"/> object in current container at specified location as shape bound to this record.
         /// </summary>
-        /// <param name="record"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <param name="record">The <see cref="Record"/> object.</param>
+        /// <param name="x">The X coordinate in container.</param>
+        /// <param name="y">The Y coordinate in container.</param>
         public void DropAsShapeAndBind(Record record, double x, double y)
         {
             switch (_editor.CurrentTool)
@@ -2768,11 +2768,11 @@ namespace Core2D
         }
 
         /// <summary>
-        ///
+        /// Drop <see cref="Record"/> object in current container at specified location as group bound to this record.
         /// </summary>
-        /// <param name="record"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <param name="record">The <see cref="Record"/> object.</param>
+        /// <param name="x">The X coordinate in container.</param>
+        /// <param name="y">The Y coordinate in container.</param>
         public void DropAsGroup(Record record, double x, double y)
         {
             var g = XGroup.Create("g");
@@ -2838,11 +2838,11 @@ namespace Core2D
         }
 
         /// <summary>
-        ///
+        /// Drop <see cref="ShapeStyle"/> object in current container at specified location.
         /// </summary>
-        /// <param name="style"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <param name="style">The <see cref="ShapeStyle"/> object.</param>
+        /// <param name="x">The X coordinate in container.</param>
+        /// <param name="y">The Y coordinate in container.</param>
         public void Drop(ShapeStyle style, double x, double y)
         {
             try
@@ -2870,18 +2870,18 @@ namespace Core2D
         }
 
         /// <summary>
-        ///
+        /// Checks if can undo.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Returns true if can undo.</returns>
         public bool CanUndo()
         {
             return _editor.EnableHistory && _editor.History.CanUndo();
         }
 
         /// <summary>
-        ///
+        /// Checks if can redo.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Returns true if can redo.</returns>
         public bool CanRedo()
         {
             return _editor.EnableHistory && _editor.History.CanRedo();
