@@ -3108,7 +3108,7 @@ namespace Core2D
         /// <param name="enableHistory">Enable project history.</param>
         /// <param name="currentTool">The current tool.</param>
         /// <param name="currentPathTool">The current path tool.</param>
-        /// <returns></returns>
+        /// <returns>The new instance of the <see cref="Editor"/> class.</returns>
         public static Editor Create(
             Project project,
             IRenderer[] renderers = null,
