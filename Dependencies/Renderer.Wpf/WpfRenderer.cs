@@ -22,22 +22,20 @@ namespace Dependencies
     public class WpfRenderer : ObservableObject, IRenderer
     {
         private const bool _enableGuidelines = true;
-        private bool _enableStyleCache = true;
         private bool _enableArrowStyleCache = true;
         private bool _enableArcCache = true;
         private bool _enableBezierCache = true;
         private bool _enableQBezierCache = true;
         private bool _enableTextCache = true;
-        private bool _enableImageCache = true;
         // TODO: Enable XPath caching. Cache is disabled to enable PathHelper to work.
         private bool _enablePathCache = false;
-        private IDictionary<ShapeStyle, Tuple<Brush, Pen>> _styleCache;
+        private Cache<ShapeStyle, Tuple<Brush, Pen>> _styleCache = Cache<ShapeStyle, Tuple<Brush, Pen>>.Create();
         private IDictionary<ArrowStyle, Tuple<Brush, Pen>> _arrowStyleCache;
         private IDictionary<XArc, PathGeometry> _arcCache;
         private IDictionary<XBezier, PathGeometry> _bezierCache;
         private IDictionary<XQBezier, PathGeometry> _qbezierCache;
         private IDictionary<XText, Tuple<string, FormattedText, ShapeStyle>> _textCache;
-        private IDictionary<string, BitmapImage> _biCache;
+        private Cache<string, BitmapImage> _biCache = Cache<string, BitmapImage>.Create(bi => bi.StreamSource.Dispose());
         private IDictionary<XPath, Tuple<XPathGeometry, StreamGeometry, ShapeStyle>> _pathCache;
         private RendererState _state = new RendererState();
 
@@ -425,7 +423,7 @@ namespace Dependencies
         /// <inheritdoc/>
         public void ClearCache(bool isZooming)
         {
-            _styleCache = new Dictionary<ShapeStyle, Tuple<Brush, Pen>>();
+            _styleCache.Reset();
             _arrowStyleCache = new Dictionary<ArrowStyle, Tuple<Brush, Pen>>();
 
             if (!isZooming)
@@ -434,17 +432,7 @@ namespace Dependencies
                 _bezierCache = new Dictionary<XBezier, PathGeometry>();
                 _qbezierCache = new Dictionary<XQBezier, PathGeometry>();
                 _textCache = new Dictionary<XText, Tuple<string, FormattedText, ShapeStyle>>();
-
-                if (_biCache != null)
-                {
-                    foreach (var kvp in _biCache)
-                    {
-                        kvp.Value.StreamSource.Dispose();
-                    }
-                    _biCache.Clear();
-                }
-                _biCache = new Dictionary<string, BitmapImage>();
-
+                _biCache.Reset();
                 _pathCache = new Dictionary<XPath, Tuple<XPathGeometry, StreamGeometry, ShapeStyle>>();
             }
         }
@@ -506,21 +494,19 @@ namespace Dependencies
             double halfEndArrow = thicknessEndArrow / 2.0;
 
             // line style
-            Tuple<Brush, Pen> lineCache = null;
+            Tuple<Brush, Pen> styleCached = _styleCache.Get(style);
             Brush fillLine;
             Pen strokeLine;
-            if (_enableStyleCache
-                && _styleCache.TryGetValue(style, out lineCache))
+            if (styleCached != null)
             {
-                fillLine = lineCache.Item1;
-                strokeLine = lineCache.Item2;
+                fillLine = styleCached.Item1;
+                strokeLine = styleCached.Item2;
             }
             else
             {
                 fillLine = CreateBrush(style.Fill);
                 strokeLine = CreatePen(style, thicknessLine);
-                if (_enableStyleCache)
-                    _styleCache.Add(style, Tuple.Create(fillLine, strokeLine));
+                _styleCache.Add(style, Tuple.Create(fillLine, strokeLine));
             }
 
             // start arrow style
@@ -703,21 +689,19 @@ namespace Dependencies
             double thickness = style.Thickness / _state.Zoom;
             double half = thickness / 2.0;
 
-            Tuple<Brush, Pen> cache = null;
+            Tuple<Brush, Pen> styleCached = _styleCache.Get(style);
             Brush fill;
             Pen stroke;
-            if (_enableStyleCache
-                && _styleCache.TryGetValue(style, out cache))
+            if (styleCached != null)
             {
-                fill = cache.Item1;
-                stroke = cache.Item2;
+                fill = styleCached.Item1;
+                stroke = styleCached.Item2;
             }
             else
             {
                 fill = CreateBrush(style.Fill);
                 stroke = CreatePen(style, thickness);
-                if (_enableStyleCache)
-                    _styleCache.Add(style, Tuple.Create(fill, stroke));
+                _styleCache.Add(style, Tuple.Create(fill, stroke));
             }
 
             var rect = CreateRect(
@@ -757,21 +741,19 @@ namespace Dependencies
             double thickness = style.Thickness / _state.Zoom;
             double half = thickness / 2.0;
 
-            Tuple<Brush, Pen> cache = null;
+            Tuple<Brush, Pen> styleCached = _styleCache.Get(style);
             Brush fill;
             Pen stroke;
-            if (_enableStyleCache
-                && _styleCache.TryGetValue(style, out cache))
+            if (styleCached != null)
             {
-                fill = cache.Item1;
-                stroke = cache.Item2;
+                fill = styleCached.Item1;
+                stroke = styleCached.Item2;
             }
             else
             {
                 fill = CreateBrush(style.Fill);
                 stroke = CreatePen(style, thickness);
-                if (_enableStyleCache)
-                    _styleCache.Add(style, Tuple.Create(fill, stroke));
+                _styleCache.Add(style, Tuple.Create(fill, stroke));
             }
 
             var rect = CreateRect(
@@ -803,21 +785,19 @@ namespace Dependencies
             double thickness = style.Thickness / _state.Zoom;
             double half = thickness / 2.0;
 
-            Tuple<Brush, Pen> cache = null;
+            Tuple<Brush, Pen> styleCached = _styleCache.Get(style);
             Brush fill;
             Pen stroke;
-            if (_enableStyleCache
-                && _styleCache.TryGetValue(style, out cache))
+            if (styleCached != null)
             {
-                fill = cache.Item1;
-                stroke = cache.Item2;
+                fill = styleCached.Item1;
+                stroke = styleCached.Item2;
             }
             else
             {
                 fill = CreateBrush(style.Fill);
                 stroke = CreatePen(style, thickness);
-                if (_enableStyleCache)
-                    _styleCache.Add(style, Tuple.Create(fill, stroke));
+                _styleCache.Add(style, Tuple.Create(fill, stroke));
             }
 
             var a = WpfArc.FromXArc(arc, dx, dy);
@@ -876,21 +856,19 @@ namespace Dependencies
             double thickness = style.Thickness / _state.Zoom;
             double half = thickness / 2.0;
 
-            Tuple<Brush, Pen> cache = null;
+            Tuple<Brush, Pen> styleCached = _styleCache.Get(style);
             Brush fill;
             Pen stroke;
-            if (_enableStyleCache
-                && _styleCache.TryGetValue(style, out cache))
+            if (styleCached != null)
             {
-                fill = cache.Item1;
-                stroke = cache.Item2;
+                fill = styleCached.Item1;
+                stroke = styleCached.Item2;
             }
             else
             {
                 fill = CreateBrush(style.Fill);
                 stroke = CreatePen(style, thickness);
-                if (_enableStyleCache)
-                    _styleCache.Add(style, Tuple.Create(fill, stroke));
+                _styleCache.Add(style, Tuple.Create(fill, stroke));
             }
 
             PathGeometry pg = null;
@@ -944,21 +922,19 @@ namespace Dependencies
             double thickness = style.Thickness / _state.Zoom;
             double half = thickness / 2.0;
 
-            Tuple<Brush, Pen> cache = null;
+            Tuple<Brush, Pen> styleCached = _styleCache.Get(style);
             Brush fill;
             Pen stroke;
-            if (_enableStyleCache
-                && _styleCache.TryGetValue(style, out cache))
+            if (styleCached != null)
             {
-                fill = cache.Item1;
-                stroke = cache.Item2;
+                fill = styleCached.Item1;
+                stroke = styleCached.Item2;
             }
             else
             {
                 fill = CreateBrush(style.Fill);
                 stroke = CreatePen(style, thickness);
-                if (_enableStyleCache)
-                    _styleCache.Add(style, Tuple.Create(fill, stroke));
+                _styleCache.Add(style, Tuple.Create(fill, stroke));
             }
 
             PathGeometry pg = null;
@@ -1015,21 +991,19 @@ namespace Dependencies
             double thickness = style.Thickness / _state.Zoom;
             double half = thickness / 2.0;
 
-            Tuple<Brush, Pen> cache = null;
+            Tuple<Brush, Pen> styleCached = _styleCache.Get(style);
             Brush fill;
             Pen stroke;
-            if (_enableStyleCache
-                && _styleCache.TryGetValue(style, out cache))
+            if (styleCached != null)
             {
-                fill = cache.Item1;
-                stroke = cache.Item2;
+                fill = styleCached.Item1;
+                stroke = styleCached.Item2;
             }
             else
             {
                 fill = CreateBrush(style.Fill);
                 stroke = CreatePen(style, thickness);
-                if (_enableStyleCache)
-                    _styleCache.Add(style, Tuple.Create(fill, stroke));
+                _styleCache.Add(style, Tuple.Create(fill, stroke));
             }
 
             var rect = CreateRect(
@@ -1136,21 +1110,19 @@ namespace Dependencies
             double thickness = style.Thickness / _state.Zoom;
             double half = thickness / 2.0;
 
-            Tuple<Brush, Pen> cache = null;
+            Tuple<Brush, Pen> styleCached = _styleCache.Get(style);
             Brush fill;
             Pen stroke;
-            if (_enableStyleCache
-                && _styleCache.TryGetValue(style, out cache))
+            if (styleCached != null)
             {
-                fill = cache.Item1;
-                stroke = cache.Item2;
+                fill = styleCached.Item1;
+                stroke = styleCached.Item2;
             }
             else
             {
                 fill = CreateBrush(style.Fill);
                 stroke = CreatePen(style, thickness);
-                if (_enableStyleCache)
-                    _styleCache.Add(style, Tuple.Create(fill, stroke));
+                _styleCache.Add(style, Tuple.Create(fill, stroke));
             }
 
             var rect = CreateRect(
@@ -1160,12 +1132,12 @@ namespace Dependencies
 
             DrawRectangleInternal(_dc, half, fill, stroke, image.IsStroked, image.IsFilled, ref rect);
 
-            if (_enableImageCache
-                && _biCache.ContainsKey(image.Key))
+            var imageCached = _biCache.Get(image.Key);
+            if (imageCached != null)
             {
                 try
                 {
-                    _dc.DrawImage(_biCache[image.Key], rect);
+                    _dc.DrawImage(imageCached, rect);
                 }
                 catch (Exception ex)
                 {
@@ -1190,8 +1162,8 @@ namespace Dependencies
                         bi.EndInit();
                         bi.Freeze();
 
-                        if (_enableImageCache)
-                            _biCache[image.Key] = bi;
+
+                        _biCache.Add(image.Key, bi);
 
                         _dc.DrawImage(bi, rect);
                     }
@@ -1219,21 +1191,19 @@ namespace Dependencies
             double thickness = style.Thickness / _state.Zoom;
             double half = thickness / 2.0;
 
-            Tuple<Brush, Pen> cache = null;
+            Tuple<Brush, Pen> styleCached = _styleCache.Get(style);
             Brush fill;
             Pen stroke;
-            if (_enableStyleCache
-                && _styleCache.TryGetValue(style, out cache))
+            if (styleCached != null)
             {
-                fill = cache.Item1;
-                stroke = cache.Item2;
+                fill = styleCached.Item1;
+                stroke = styleCached.Item2;
             }
             else
             {
                 fill = CreateBrush(style.Fill);
                 stroke = CreatePen(style, thickness);
-                if (_enableStyleCache)
-                    _styleCache.Add(style, Tuple.Create(fill, stroke));
+                _styleCache.Add(style, Tuple.Create(fill, stroke));
             }
 
             Tuple<XPathGeometry, StreamGeometry, ShapeStyle> pcache = null;
