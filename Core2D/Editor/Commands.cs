@@ -15,7 +15,7 @@ namespace Core2D
     public class Commands
     {
         /// <summary>
-        /// New project.
+        /// Create new project, document or container.
         /// </summary>
         public static ICommand NewCommand { get; set; }
 
@@ -185,27 +185,27 @@ namespace Core2D
         public static ICommand RedoCommand { get; set; }
 
         /// <summary>
-        /// Copy container or selected shapes to clipboard.
+        /// Copy container or selected shapes to clipboard as Emf.
         /// </summary>
         public static ICommand CopyAsEmfCommand { get; set; }
 
         /// <summary>
-        /// Cut selected shapes.
+        /// Cut selected document, container or shapes to clipboard.
         /// </summary>
         public static ICommand CutCommand { get; set; }
 
         /// <summary>
-        /// Copy selected shapes.
+        /// Copy document, container or shapes to clipboard.
         /// </summary>
         public static ICommand CopyCommand { get; set; }
 
         /// <summary>
-        /// Paste text from clipboard as shapes.
+        /// Paste text from clipboard as document, container or shapes.
         /// </summary>
         public static ICommand PasteCommand { get; set; }
 
         /// <summary>
-        /// Delete selected shapes.
+        /// Delete selected document, container or shapes.
         /// </summary>
         public static ICommand DeleteCommand { get; set; }
 
@@ -290,27 +290,27 @@ namespace Core2D
         public static ICommand ToolPointCommand { get; set; }
 
         /// <summary>
-        /// Set current tool to <see cref="Tool.Line"/> or  current path tool to <see cref="PathTool.Line"/>.
+        /// Set current tool to <see cref="Tool.Line"/> or current path tool to <see cref="PathTool.Line"/>.
         /// </summary>
         public static ICommand ToolLineCommand { get; set; }
 
         /// <summary>
-        /// Set current tool to <see cref="Tool.Arc"/> or  current path tool to <see cref="PathTool.Arc"/>.
+        /// Set current tool to <see cref="Tool.Arc"/> or current path tool to <see cref="PathTool.Arc"/>.
         /// </summary>
         public static ICommand ToolArcCommand { get; set; }
 
         /// <summary>
-        /// Set current tool to <see cref="Tool.Bezier"/> or  current path tool to <see cref="PathTool.Bezier"/>.
+        /// Set current tool to <see cref="Tool.Bezier"/> or current path tool to <see cref="PathTool.Bezier"/>.
         /// </summary>
         public static ICommand ToolBezierCommand { get; set; }
 
         /// <summary>
-        /// Set current tool to <see cref="Tool.QBezier"/> or  current path tool to <see cref="PathTool.QBezier"/>.
+        /// Set current tool to <see cref="Tool.QBezier"/> or current path tool to <see cref="PathTool.QBezier"/>.
         /// </summary>
         public static ICommand ToolQBezierCommand { get; set; }
 
         /// <summary>
-        /// Set current tool to <see cref="Tool.Point"/>.
+        /// Set current tool to <see cref="Tool.Path"/>.
         /// </summary>
         public static ICommand ToolPathCommand { get; set; }
 
