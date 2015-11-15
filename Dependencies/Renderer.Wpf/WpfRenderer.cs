@@ -21,7 +21,6 @@ namespace Dependencies
     /// </summary>
     public class WpfRenderer : ObservableObject, IRenderer
     {
-        private const bool _enableGuidelines = true;
         private bool _enableArrowStyleCache = true;
         private bool _enableArcCache = true;
         private bool _enableBezierCache = true;
@@ -197,18 +196,14 @@ namespace Dependencies
             if (!isStroked)
                 return;
 
-            if (_enableGuidelines)
-            {
-                var gs = new GuidelineSet(
-                    new double[] { p0.X + half, p1.X + half },
-                    new double[] { p0.Y + half, p1.Y + half });
-                dc.PushGuidelineSet(gs);
-            }
+            var gs = new GuidelineSet(
+                new double[] { p0.X + half, p1.X + half },
+                new double[] { p0.Y + half, p1.Y + half });
+            dc.PushGuidelineSet(gs);
 
             dc.DrawLine(isStroked ? pen : null, p0, p1);
 
-            if (_enableGuidelines)
-                dc.Pop();
+            dc.Pop();
         }
 
         /// <summary>
@@ -233,29 +228,24 @@ namespace Dependencies
             if (!isStroked && !isFilled)
                 return;
 
-            if (_enableGuidelines)
-            {
-                var gs = new GuidelineSet(
-                    new double[]
-                        {
-                            rect.TopLeft.X + half,
-                            rect.BottomRight.X + half
-                        },
-                    new double[]
-                        {
-                            rect.TopLeft.Y + half,
-                            rect.BottomRight.Y + half
-                        });
-                dc.PushGuidelineSet(gs);
-            }
+            var gs = new GuidelineSet(
+                new double[]
+                    {
+                        rect.TopLeft.X + half,
+                        rect.BottomRight.X + half
+                    },
+                new double[]
+                    {
+                        rect.TopLeft.Y + half,
+                        rect.BottomRight.Y + half
+                    });
+            dc.PushGuidelineSet(gs);
 
             dc.DrawRectangle(
                 isFilled ? brush : null,
                 isStroked ? pen : null,
                 rect);
-
-            if (_enableGuidelines)
-                dc.Pop();
+            dc.Pop();
         }
 
         /// <summary>
@@ -283,21 +273,18 @@ namespace Dependencies
             if (!isStroked && !isFilled)
                 return;
 
-            if (_enableGuidelines)
-            {
-                var gs = new GuidelineSet(
-                    new double[]
-                        {
-                            center.X - rx + half,
-                            center.X + rx + half
-                        },
-                    new double[]
-                        {
-                            center.Y - ry + half,
-                            center.Y + ry + half
-                        });
-                dc.PushGuidelineSet(gs);
-            }
+            var gs = new GuidelineSet(
+                new double[]
+                    {
+                        center.X - rx + half,
+                        center.X + rx + half
+                    },
+                new double[]
+                    {
+                        center.Y - ry + half,
+                        center.Y + ry + half
+                    });
+            dc.PushGuidelineSet(gs);
 
             dc.DrawEllipse(
                 isFilled ? brush : null,
@@ -305,8 +292,7 @@ namespace Dependencies
                 center,
                 rx, ry);
 
-            if (_enableGuidelines)
-                dc.Pop();
+            dc.Pop();
         }
 
         /// <summary>
@@ -331,26 +317,22 @@ namespace Dependencies
             if (!isStroked && !isFilled)
                 return;
 
-            if (_enableGuidelines)
-            {
-                var gs = new GuidelineSet(
-                    new double[]
-                        {
-                            pg.Bounds.TopLeft.X + half,
-                            pg.Bounds.BottomRight.X + half
-                        },
-                    new double[]
-                        {
-                            pg.Bounds.TopLeft.Y + half,
-                            pg.Bounds.BottomRight.Y + half
-                        });
-                dc.PushGuidelineSet(gs);
-            }
+            var gs = new GuidelineSet(
+                new double[]
+                    {
+                        pg.Bounds.TopLeft.X + half,
+                        pg.Bounds.BottomRight.X + half
+                    },
+                new double[]
+                    {
+                        pg.Bounds.TopLeft.Y + half,
+                        pg.Bounds.BottomRight.Y + half
+                    });
+            dc.PushGuidelineSet(gs);
 
             dc.DrawGeometry(isFilled ? brush : null, isStroked ? pen : null, pg);
 
-            if (_enableGuidelines)
-                dc.Pop();
+            dc.Pop();
         }
 
         /// <summary>
