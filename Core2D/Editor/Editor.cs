@@ -28,6 +28,8 @@ namespace Core2D
         private bool _enableHistory;
         private History _history;
         private Action _invalidate;
+        private Action _resetZoom;
+        private Action _extentZoom;
         private bool _cancelAvailable;
         private BaseShape _hover;
 
@@ -137,6 +139,24 @@ namespace Core2D
         {
             get { return _invalidate; }
             set { Update(ref _invalidate, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets reset zoom action.
+        /// </summary>
+        public Action ResetZoom
+        {
+            get { return _resetZoom; }
+            set { Update(ref _resetZoom, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets extent zoom action.
+        /// </summary>
+        public Action ExtentZoom
+        {
+            get { return _extentZoom; }
+            set { Update(ref _extentZoom, value); }
         }
 
         /// <summary>
@@ -3138,6 +3158,8 @@ namespace Core2D
             }
 
             editor.Invalidate = () => { };
+            editor.ResetZoom = () => { };
+            editor.ExtentZoom = () => { };
 
             if (editor.EnableObserver)
             {

@@ -88,6 +88,18 @@ namespace Test.Uwp
             _context.Editor.GetImageKey = async () => await Task.Run(() => _imagePath);
             _context.Editor.Invalidate = () => canvas.Invalidate();
 
+            _context.Editor.ResetZoom = () =>
+            {
+                ResetZoom();
+                _context.Editor.Invalidate();
+            };
+
+            _context.Editor.ExtentZoom = () =>
+            {
+                AutoFit();
+                _context.Editor.Invalidate();
+            };
+
             Core2D.Commands.InitializeCommonCommands(_context);
 
             Core2D.Commands.OpenCommand =
@@ -492,59 +504,37 @@ namespace Test.Uwp
                 switch (args.VirtualKey)
                 {
                     case VirtualKey.N:
-                        {
-                            OnNew();
-                        }
+                        OnNew();
                         break;
                     case VirtualKey.O:
-                        {
-                            await OnOpen();
-                        }
+                        await OnOpen();
                         break;
                     case VirtualKey.S:
-                        {
-                            await OnSaveAs();
-                        }
+                        await OnSaveAs();
                         break;
                     case VirtualKey.Z:
-                        {
-                            Core2D.Commands.UndoCommand.Execute(null);
-                        }
+                        Core2D.Commands.UndoCommand.Execute(null);
                         break;
                     case VirtualKey.Y:
-                        {
-                            Core2D.Commands.RedoCommand.Execute(null);
-                        }
+                        Core2D.Commands.RedoCommand.Execute(null);
                         break;
                     case VirtualKey.X:
-                        {
-                            Core2D.Commands.CutCommand.Execute(null);
-                        }
+                        Core2D.Commands.CutCommand.Execute(null);
                         break;
                     case VirtualKey.C:
-                        {
-                            Core2D.Commands.CopyCommand.Execute(null);
-                        }
+                        Core2D.Commands.CopyCommand.Execute(null);
                         break;
                     case VirtualKey.V:
-                        {
-                            Core2D.Commands.PasteCommand.Execute(null);
-                        }
+                        Core2D.Commands.PasteCommand.Execute(null);
                         break;
                     case VirtualKey.A:
-                        {
-                            Core2D.Commands.SelectAllCommand.Execute(null);
-                        }
+                        Core2D.Commands.SelectAllCommand.Execute(null);
                         break;
                     case VirtualKey.G:
-                        {
-                            Core2D.Commands.GroupCommand.Execute(null);
-                        }
+                        Core2D.Commands.GroupCommand.Execute(null);
                         break;
                     case VirtualKey.U:
-                        {
-                            Core2D.Commands.UngroupCommand.Execute(null);
-                        }
+                        Core2D.Commands.UngroupCommand.Execute(null);
                         break;
                 }
             }

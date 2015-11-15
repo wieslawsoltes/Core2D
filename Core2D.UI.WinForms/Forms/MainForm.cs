@@ -94,6 +94,8 @@ namespace Core2D.UI.WinForms
             _context.Editor.Renderers[0].State.DrawShapeState.Flags = ShapeStateFlags.Visible;
             _context.Editor.GetImageKey = async () => await GetImageKey();
             _context.Editor.Invalidate = () => _drawable.Invalidate();
+            _context.Editor.ResetZoom = () => ResetZoom();
+            _context.Editor.ExtentZoom = () => AutoFit();
         }
 
         /// <summary>

@@ -55,6 +55,8 @@ namespace Core2D.UI.Perspex.Desktop.Controls
                 return;
 
             context.Editor.Invalidate = () => this.InvalidateVisual();
+            context.Editor.ResetZoom = () => this.OnZoomReset();
+            context.Editor.ExtentZoom = () => this.OnZoomExtent();
 
             _state = new ZoomState(context.Editor);
 

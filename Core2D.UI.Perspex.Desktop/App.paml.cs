@@ -359,34 +359,12 @@ namespace Core2D.UI.Perspex.Desktop
 
             Commands.ZoomResetCommand =
                 Command.Create(
-                    () =>
-                    {
-                        var editor = _mainWindow.FindControl<Controls.EditorControl>("editor");
-                        if (editor != null)
-                        {
-                            var drawable = editor.FindControl<Controls.DrawableControl>("drawable");
-                            if (drawable != null)
-                            {
-                                drawable.OnZoomReset();
-                            }
-                        }
-                    },
+                    () => context.Editor.ResetZoom(),
                     () => true);
 
             Commands.ZoomExtentCommand =
                 Command.Create(
-                    () =>
-                    {
-                        var editor = _mainWindow.FindControl<Controls.EditorControl>("editor");
-                        if (editor != null)
-                        {
-                            var drawable = editor.FindControl<Controls.DrawableControl>("drawable");
-                            if (drawable != null)
-                            {
-                                drawable.OnZoomExtent();
-                            }
-                        }
-                    },
+                    () => context.Editor.ExtentZoom(),
                     () => true);
         }
 
