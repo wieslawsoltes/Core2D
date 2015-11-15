@@ -18,7 +18,7 @@
     <DrawingBrush x:Key="CheckerBoard" Viewport="0,0,20,20" ViewportUnits="Absolute" Stretch="None" TileMode="Tile">
         <DrawingBrush.Drawing>
             <DrawingGroup>
-                <GeometryDrawing Brush="DarkGray}">
+                <GeometryDrawing Brush="DarkGray">
                     <GeometryDrawing.Geometry>
                         <GeometryGroup>
                             <RectangleGeometry Rect="0,0,10,10"/>
