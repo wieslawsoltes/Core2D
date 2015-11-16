@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Helper class for <see cref="Tool.Path"/> editor.
     /// </summary>
     public class PathHelper : Helper
     {
@@ -54,20 +55,20 @@ namespace Core2D
         private XPoint _qbezierHelperPoint3;
 
         /// <summary>
-        /// 
+        /// Initialize new instance of <see cref="PathHelper"/> class.
         /// </summary>
-        /// <param name="editor"></param>
+        /// <param name="editor">The current <see cref="Editor"/> object.</param>
         public PathHelper(Editor editor)
         {
             _editor = editor;
         }
 
         /// <summary>
-        /// 
+        /// Try to get connection point at specified location.
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <returns></returns>
+        /// <param name="x">The X coordinate of point.</param>
+        /// <param name="y">The Y coordinate of point.</param>
+        /// <returns>The connected point if success.</returns>
         public XPoint TryToGetConnectionPoint(double x, double y)
         {
             if (_editor.Project.Options.TryToConnect)
@@ -1160,11 +1161,7 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <inheritdoc/>
         public override void LeftDown(double x, double y)
         {
             if (_isInitialized && _editor.CurrentPathTool != _previousPathTool)
@@ -1203,20 +1200,12 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <inheritdoc/>
         public override void LeftUp(double x, double y)
         {
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <inheritdoc/>
         public override void RightDown(double x, double y)
         {
             switch (_editor.CurrentPathTool)
@@ -1244,20 +1233,12 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <inheritdoc/>
         public override void RightUp(double x, double y)
         {
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <inheritdoc/>
         public override void Move(double x, double y)
         {
             if (_isInitialized && _editor.CurrentPathTool != _previousPathTool)
@@ -1295,9 +1276,7 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <inheritdoc/>
         public override void ToStateOne()
         {
             switch (_editor.CurrentPathTool)
@@ -1325,9 +1304,7 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <inheritdoc/>
         public override void ToStateTwo()
         {
             switch (_editor.CurrentPathTool)
@@ -1352,9 +1329,7 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <inheritdoc/>
         public override void ToStateThree()
         {
             switch (_editor.CurrentPathTool)
@@ -1376,17 +1351,12 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <inheritdoc/>
         public override void ToStateFour()
         {
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="shape"></param>
+        /// <inheritdoc/>
         public override void Move(BaseShape shape)
         {
             switch (_editor.CurrentPathTool)
@@ -1414,17 +1384,12 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="shape"></param>
+        /// <inheritdoc/>
         public override void Finalize(BaseShape shape)
         {
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <inheritdoc/>
         public override void Remove()
         {
             switch (_editor.CurrentPathTool)

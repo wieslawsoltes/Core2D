@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Helper class for <see cref="Tool.Line"/> editor.
     /// </summary>
     public class LineHelper : Helper
     {
@@ -21,21 +21,21 @@ namespace Core2D
         private XPoint _endHelperPoint;
 
         /// <summary>
-        /// 
+        /// Initialize new instance of <see cref="LineHelper"/> class.
         /// </summary>
-        /// <param name="editor"></param>
+        /// <param name="editor">The current <see cref="Editor"/> object.</param>
         public LineHelper(Editor editor)
         {
             _editor = editor;
         }
 
         /// <summary>
-        /// 
+        /// Try to connect <see cref="XLine.Start"/> point at specified location.
         /// </summary>
-        /// <param name="line"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <returns></returns>
+        /// <param name="line">The line object.</param>
+        /// <param name="x">The X coordinate of point.</param>
+        /// <param name="y">The Y coordinate of point.</param>
+        /// <returns>True if connected.</returns>
         public bool TryToConnectStart(XLine line, double x, double y)
         {
             var result = ShapeBounds.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitTreshold);
@@ -48,12 +48,12 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Try to connect <see cref="XLine.End"/> point at specified location.
         /// </summary>
-        /// <param name="line"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <returns></returns>
+        /// <param name="line">The line object.</param>
+        /// <param name="x">The X coordinate of point.</param>
+        /// <param name="y">The Y coordinate of point.</param>
+        /// <returns>True if connected.</returns>
         public bool TryToConnectEnd(XLine line, double x, double y)
         {
             var result = ShapeBounds.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitTreshold);
@@ -65,11 +65,7 @@ namespace Core2D
             return false;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <inheritdoc/>
         public override void LeftDown(double x, double y)
         {
             double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
@@ -127,20 +123,12 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <inheritdoc/>
         public override void LeftUp(double x, double y)
         {
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <inheritdoc/>
         public override void RightDown(double x, double y)
         {
             switch (_currentState)
@@ -160,20 +148,12 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <inheritdoc/>
         public override void RightUp(double x, double y)
         {
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <inheritdoc/>
         public override void Move(double x, double y)
         {
             double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
@@ -208,9 +188,7 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <inheritdoc/>
         public override void ToStateOne()
         {
             _startHelperPoint = XPoint.Create(0, 0, _editor.Project.Options.PointShape);
@@ -219,31 +197,22 @@ namespace Core2D
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_endHelperPoint);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <inheritdoc/>
         public override void ToStateTwo()
         {
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <inheritdoc/>
         public override void ToStateThree()
         {
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <inheritdoc/>
         public override void ToStateFour()
         {
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="shape"></param>
+        /// <inheritdoc/>
         public override void Move(BaseShape shape)
         {
             if (_startHelperPoint != null)
@@ -259,17 +228,12 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="shape"></param>
+        /// <inheritdoc/>
         public override void Finalize(BaseShape shape)
         {
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <inheritdoc/>
         public override void Remove()
         {
             if (_startHelperPoint != null)

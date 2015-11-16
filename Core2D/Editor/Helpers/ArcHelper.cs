@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Helper class for <see cref="Tool.Arc"/> editor.
     /// </summary>
     public class ArcHelper : Helper
     {
@@ -30,21 +30,21 @@ namespace Core2D
         private bool _connectedP4;
 
         /// <summary>
-        /// 
+        /// Initialize new instance of <see cref="ArcHelper"/> class.
         /// </summary>
-        /// <param name="editor"></param>
+        /// <param name="editor">The current <see cref="Editor"/> object.</param>
         public ArcHelper(Editor editor)
         {
             _editor = editor;
         }
 
         /// <summary>
-        /// 
+        /// Try to connect <see cref="XArc.Point1"/> point at specified location.
         /// </summary>
-        /// <param name="arc"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <returns></returns>
+        /// <param name="arc">The arc object.</param>
+        /// <param name="x">The X coordinate of point.</param>
+        /// <param name="y">The Y coordinate of point.</param>
+        /// <returns>True if connected.</returns>
         public bool TryToConnectPoint1(XArc arc, double x, double y)
         {
             var result = ShapeBounds.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitTreshold);
@@ -57,12 +57,12 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Try to connect <see cref="XArc.Point2"/> point at specified location.
         /// </summary>
-        /// <param name="arc"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <returns></returns>
+        /// <param name="arc">The arc object.</param>
+        /// <param name="x">The X coordinate of point.</param>
+        /// <param name="y">The Y coordinate of point.</param>
+        /// <returns>True if connected.</returns>
         public bool TryToConnectPoint2(XArc arc, double x, double y)
         {
             var result = ShapeBounds.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitTreshold);
@@ -75,12 +75,12 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Try to connect <see cref="XArc.Point3"/> point at specified location.
         /// </summary>
-        /// <param name="arc"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <returns></returns>
+        /// <param name="arc">The arc object.</param>
+        /// <param name="x">The X coordinate of point.</param>
+        /// <param name="y">The Y coordinate of point.</param>
+        /// <returns>True if connected.</returns>
         public bool TryToConnectPoint3(XArc arc, double x, double y)
         {
             var result = ShapeBounds.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitTreshold);
@@ -93,12 +93,12 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Try to connect <see cref="XArc.Point4"/> point at specified location.
         /// </summary>
-        /// <param name="arc"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <returns></returns>
+        /// <param name="arc">The arc object.</param>
+        /// <param name="x">The X coordinate of point.</param>
+        /// <param name="y">The Y coordinate of point.</param>
+        /// <returns>True if connected.</returns>
         public bool TryToConnectPoint4(XArc arc, double x, double y)
         {
             var result = ShapeBounds.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitTreshold);
@@ -110,11 +110,7 @@ namespace Core2D
             return false;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <inheritdoc/>
         public override void LeftDown(double x, double y)
         {
             double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
@@ -206,20 +202,12 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <inheritdoc/>
         public override void LeftUp(double x, double y)
         {
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <inheritdoc/>
         public override void RightDown(double x, double y)
         {
             switch (_currentState)
@@ -241,20 +229,12 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <inheritdoc/>
         public override void RightUp(double x, double y)
         {
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <inheritdoc/>
         public override void Move(double x, double y)
         {
             double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
@@ -320,9 +300,7 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <inheritdoc/>
         public override void ToStateOne()
         {
             _style = _editor.Project.Options.HelperStyle;
@@ -336,9 +314,7 @@ namespace Core2D
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_centerHelperPoint);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <inheritdoc/>
         public override void ToStateTwo()
         {
             if (_p1HelperPoint != null)
@@ -359,9 +335,7 @@ namespace Core2D
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_startHelperPoint);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <inheritdoc/>
         public override void ToStateThree()
         {
             if (_ellipse != null)
@@ -376,17 +350,12 @@ namespace Core2D
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_endHelperPoint);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <inheritdoc/>
         public override void ToStateFour()
         {
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="shape"></param>
+        /// <inheritdoc/>
         public override void Move(BaseShape shape)
         {
             var arc = shape as XArc;
@@ -447,10 +416,7 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="shape"></param>
+        /// <inheritdoc/>
         public override void Finalize(BaseShape shape)
         {
             var arc = shape as XArc;
@@ -469,9 +435,7 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <inheritdoc/>
         public override void Remove()
         {
             if (_ellipse != null)

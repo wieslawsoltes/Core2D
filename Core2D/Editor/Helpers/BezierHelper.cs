@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Helper class for <see cref="Tool.Bezier"/> editor.
     /// </summary>
     public class BezierHelper : Helper
     {
@@ -27,20 +27,21 @@ namespace Core2D
         private XPoint _helperPoint4;
 
         /// <summary>
-        /// 
+        /// Initialize new instance of <see cref="BezierHelper"/> class.
         /// </summary>
-        /// <param name="editor"></param>
+        /// <param name="editor">The current <see cref="Editor"/> object.</param>
         public BezierHelper(Editor editor)
         {
             _editor = editor;
         }
 
         /// <summary>
-        /// 
+        /// Try to connect <see cref="XBezier.Point1"/> point at specified location.
         /// </summary>
-        /// <param name="bezier"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <param name="bezier">The bezier object.</param>
+        /// <param name="x">The X coordinate of point.</param>
+        /// <param name="y">The Y coordinate of point.</param>
+        /// <returns>True if connected.</returns>
         public void TryToConnectPoint1(XBezier bezier, double x, double y)
         {
             var result = ShapeBounds.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitTreshold);
@@ -51,11 +52,12 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Try to connect <see cref="XBezier.Point2"/> point at specified location.
         /// </summary>
-        /// <param name="bezier"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <param name="bezier">The bezier object.</param>
+        /// <param name="x">The X coordinate of point.</param>
+        /// <param name="y">The Y coordinate of point.</param>
+        /// <returns>True if connected.</returns>
         public void TryToConnectPoint2(XBezier bezier, double x, double y)
         {
             var result = ShapeBounds.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitTreshold);
@@ -66,11 +68,12 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Try to connect <see cref="XBezier.Point3"/> point at specified location.
         /// </summary>
-        /// <param name="bezier"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <param name="bezier">The bezier object.</param>
+        /// <param name="x">The X coordinate of point.</param>
+        /// <param name="y">The Y coordinate of point.</param>
+        /// <returns>True if connected.</returns>
         public void TryToConnectPoint3(XBezier bezier, double x, double y)
         {
             var result = ShapeBounds.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitTreshold);
@@ -81,11 +84,12 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Try to connect <see cref="XBezier.Point4"/> point at specified location.
         /// </summary>
-        /// <param name="bezier"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <param name="bezier">The bezier object.</param>
+        /// <param name="x">The X coordinate of point.</param>
+        /// <param name="y">The Y coordinate of point.</param>
+        /// <returns>True if connected.</returns>
         public void TryToConnectPoint4(XBezier bezier, double x, double y)
         {
             var result = ShapeBounds.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitTreshold);
@@ -95,11 +99,7 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <inheritdoc/>
         public override void LeftDown(double x, double y)
         {
             double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
@@ -190,20 +190,12 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <inheritdoc/>
         public override void LeftUp(double x, double y)
         {
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <inheritdoc/>
         public override void RightDown(double x, double y)
         {
             switch (_currentState)
@@ -225,20 +217,12 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <inheritdoc/>
         public override void RightUp(double x, double y)
         {
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <inheritdoc/>
         public override void Move(double x, double y)
         {
             double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
@@ -311,9 +295,7 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <inheritdoc/>
         public override void ToStateOne()
         {
             _style = _editor.Project.Options.HelperStyle;
@@ -323,9 +305,7 @@ namespace Core2D
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_helperPoint4);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <inheritdoc/>
         public override void ToStateTwo()
         {
             _style = _editor.Project.Options.HelperStyle;
@@ -335,9 +315,7 @@ namespace Core2D
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_helperPoint2);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <inheritdoc/>
         public override void ToStateThree()
         {
             _line43 = XLine.Create(0, 0, _style, null);
@@ -348,17 +326,12 @@ namespace Core2D
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_helperPoint3);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <inheritdoc/>
         public override void ToStateFour()
         {
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="shape"></param>
+        /// <inheritdoc/>
         public override void Move(BaseShape shape)
         {
             var bezier = shape as XBezier;
@@ -412,17 +385,12 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="shape"></param>
+        /// <inheritdoc/>
         public override void Finalize(BaseShape shape)
         {
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <inheritdoc/>
         public override void Remove()
         {
             if (_line12 != null)

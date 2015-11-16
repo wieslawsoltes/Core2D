@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Helper class for <see cref="Tool.Selection"/> editor.
     /// </summary>
     public class SelectionHelper : Helper
     {
@@ -24,19 +24,105 @@ namespace Core2D
         private IEnumerable<BaseShape> _shapesCache;
 
         /// <summary>
-        /// 
+        /// Initialize new instance of <see cref="SelectionHelper"/> class.
         /// </summary>
-        /// <param name="editor"></param>
+        /// <param name="editor">The current <see cref="Editor"/> object.</param>
         public SelectionHelper(Editor editor)
         {
             _editor = editor;
         }
 
         /// <summary>
-        /// 
+        /// Generate selected shapes cache.
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        private void GenerateMoveSelectionCache()
+        {
+            if (_editor.Renderers[0].State.SelectedShape != null)
+            {
+                var state = _editor.Renderers[0].State.SelectedShape.State;
+
+                switch (_editor.Project.Options.MoveMode)
+                {
+                    case MoveMode.Point:
+                        {
+                            if (!state.Flags.HasFlag(ShapeStateFlags.Locked))
+                            {
+                                var shape = _editor.Renderers[0].State.SelectedShape;
+                                var shapes = Enumerable.Repeat(shape, 1);
+                                _pointsCache = Editor.GetAllPoints(shapes, ShapeStateFlags.Connector).Distinct().ToList();
+                            }
+                        }
+                        break;
+                    case MoveMode.Shape:
+                        {
+                            if (!state.Flags.HasFlag(ShapeStateFlags.Locked) && !state.Flags.HasFlag(ShapeStateFlags.Connector))
+                            {
+                                var shape = _editor.Renderers[0].State.SelectedShape;
+                                var shapes = Enumerable.Repeat(shape, 1).ToList();
+                                _shapesCache = shapes;
+                            }
+                        }
+                        break;
+                }
+            }
+
+            if (_editor.Renderers[0].State.SelectedShapes != null)
+            {
+                var shapes = _editor.Renderers[0].State.SelectedShapes.Where(s => !s.State.Flags.HasFlag(ShapeStateFlags.Locked));
+
+                switch (_editor.Project.Options.MoveMode)
+                {
+                    case MoveMode.Point:
+                        {
+                            _pointsCache = Editor.GetAllPoints(shapes, ShapeStateFlags.Connector).Distinct().ToList();
+                        }
+                        break;
+                    case MoveMode.Shape:
+                        {
+                            _shapesCache = shapes.ToList();
+                        }
+                        break;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Dispose selected shapes cache.
+        /// </summary>
+        private void DisposeMoveSelectionCache()
+        {
+            _pointsCache = null;
+            _shapesCache = null;
+        }
+
+        /// <summary>
+        /// Move selected shapes to new location.
+        /// </summary>
+        /// <param name="x">The X coordinate of point.</param>
+        /// <param name="y">The Y coordinate of point.</param>
+        private void MoveSelectionCacheTo(double x, double y)
+        {
+            double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
+            double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
+
+            double dx = sx - _startX;
+            double dy = sy - _startY;
+
+            _startX = sx;
+            _startY = sy;
+
+            if (_pointsCache != null)
+            {
+                Editor.MovePointsBy(_pointsCache, dx, dy);
+            }
+
+            if (_shapesCache != null)
+            {
+                Editor.MoveShapesBy(_shapesCache, dx, dy);
+            }
+        }
+
+        /// <inheritdoc/>
         public override void LeftDown(double x, double y)
         {
             switch (_currentState)
@@ -101,11 +187,7 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <inheritdoc/>
         public override void LeftUp(double x, double y)
         {
             switch (_currentState)
@@ -176,11 +258,7 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <inheritdoc/>
         public override void RightDown(double x, double y)
         {
             switch (_currentState)
@@ -199,110 +277,12 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <inheritdoc/>
         public override void RightUp(double x, double y)
         {
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        private void GenerateMoveSelectionCache()
-        {
-            if (_editor.Renderers[0].State.SelectedShape != null)
-            {
-                var state = _editor.Renderers[0].State.SelectedShape.State;
-
-                switch (_editor.Project.Options.MoveMode)
-                {
-                    case MoveMode.Point:
-                        {
-                            if (!state.Flags.HasFlag(ShapeStateFlags.Locked))
-                            {
-                                var shape = _editor.Renderers[0].State.SelectedShape;
-                                var shapes = Enumerable.Repeat(shape, 1);
-                                _pointsCache = Editor.GetAllPoints(shapes, ShapeStateFlags.Connector).Distinct().ToList();
-                            }
-                        }
-                        break;
-                    case MoveMode.Shape:
-                        {
-                            if (!state.Flags.HasFlag(ShapeStateFlags.Locked) && !state.Flags.HasFlag(ShapeStateFlags.Connector))
-                            {
-                                var shape = _editor.Renderers[0].State.SelectedShape;
-                                var shapes = Enumerable.Repeat(shape, 1).ToList();
-                                _shapesCache = shapes;
-                            }
-                        }
-                        break;
-                }
-            }
-
-            if (_editor.Renderers[0].State.SelectedShapes != null)
-            {
-                var shapes = _editor.Renderers[0].State.SelectedShapes.Where(s => !s.State.Flags.HasFlag(ShapeStateFlags.Locked));
-
-                switch (_editor.Project.Options.MoveMode)
-                {
-                    case MoveMode.Point:
-                        {
-                            _pointsCache = Editor.GetAllPoints(shapes, ShapeStateFlags.Connector).Distinct().ToList();
-                        }
-                        break;
-                    case MoveMode.Shape:
-                        {
-                            _shapesCache = shapes.ToList();
-                        }
-                        break;
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private void DisposeMoveSelectionCache()
-        {
-            _pointsCache = null;
-            _shapesCache = null;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        private void MoveSelectionTo(double x, double y)
-        {
-            double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
-            double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
-
-            double dx = sx - _startX;
-            double dy = sy - _startY;
-
-            _startX = sx;
-            _startY = sy;
-
-            if (_pointsCache != null)
-            {
-                Editor.MovePointsBy(_pointsCache, dx, dy);
-            }
-
-            if (_shapesCache != null)
-            {
-                Editor.MoveShapesBy(_shapesCache, dx, dy);
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <inheritdoc/>
         public override void Move(double x, double y)
         {
             switch (_currentState)
@@ -316,7 +296,7 @@ namespace Core2D
                     {
                         if (_editor.IsSelectionAvailable())
                         {
-                            MoveSelectionTo(x, y);
+                            MoveSelectionCacheTo(x, y);
                             _editor.Project.CurrentContainer.CurrentLayer.Invalidate();
                             break;
                         }
@@ -333,53 +313,37 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <inheritdoc/>
         public override void ToStateOne()
         {
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <inheritdoc/>
         public override void ToStateTwo()
         {
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <inheritdoc/>
         public override void ToStateThree()
         {
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <inheritdoc/>
         public override void ToStateFour()
         {
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="shape"></param>
+        /// <inheritdoc/>
         public override void Move(BaseShape shape)
         {
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="shape"></param>
+        /// <inheritdoc/>
         public override void Finalize(BaseShape shape)
         {
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <inheritdoc/>
         public override void Remove()
         {
         }
