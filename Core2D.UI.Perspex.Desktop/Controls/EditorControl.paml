@@ -9,10 +9,14 @@
              xmlns:core="clr-namespace:Core2D;assembly=Core2D">
     <Grid RowDefinitions="50*,50*" ColumnDefinitions="200,Auto,*,Auto,250">
         <Border Classes="leftTop" Grid.Row="0" Grid.Column="0">
-            <ContentControl Content="{Binding Path=Editor.Project, Mode=TwoWay}"/>
+            <TabControl Classes="bottom">
+                <TabItem Header="Project" Classes="property">
+                    <ContentControl Content="{Binding Path=Editor.Project, Mode=TwoWay}"/>
+                </TabItem>
+            </TabControl>
         </Border>
         <Border Classes="leftBottom" Grid.Row="1" Grid.Column="0">
-            <TabControl Classes="default">
+            <TabControl Classes="bottom">
                 <TabItem Header="Groups" Classes="property">
                     <Grid RowDefinitions="Auto,Auto,Auto,Auto,*">
                         <Menu Grid.Row="0" HorizontalAlignment="Right">
@@ -113,7 +117,7 @@
         </Grid>
         <GridSplitter Grid.Row="0" Grid.RowSpan="2" Grid.Column="3" Width="8"/>
         <Border Classes="rightTop" Grid.Row="0" Grid.Column="4">
-            <TabControl Classes="default">
+            <TabControl Classes="bottom">
                 <TabItem Header="Styles" Classes="property">
                     <Grid RowDefinitions="Auto,Auto,Auto,Auto,*">
                         <Menu Grid.Row="0" HorizontalAlignment="Right">
@@ -181,7 +185,7 @@
             </TabControl>
         </Border>
         <Border Classes="rightBottom" Grid.Row="1" Grid.Column="4">
-            <TabControl Classes="default">
+            <TabControl Classes="bottom">
                 <TabItem Header="Shape" Classes="property">
                     <ScrollViewer>
                         <ContentControl Content="{Binding Path=Editor.Project.CurrentContainer.CurrentShape, Mode=TwoWay}"/>
