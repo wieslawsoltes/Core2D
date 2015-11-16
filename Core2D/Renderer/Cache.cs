@@ -57,13 +57,20 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Adds new value to storage.
+        /// Sets or adds new value to storage.
         /// </summary>
         /// <param name="key">The key object.</param>
         /// <param name="value">The value object.</param>
-        public void Add(TKey key, TValue value)
+        public void Set(TKey key, TValue value)
         {
-            _storage.Add(key, value);
+            if (_storage.ContainsKey(key))
+            {
+                _storage[key] = value;
+            }
+            else
+            { 
+                _storage.Add(key, value);
+            }
         }
 
         /// <summary>
