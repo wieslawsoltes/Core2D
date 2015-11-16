@@ -6,7 +6,7 @@ using System.Collections.Immutable;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    ///  The renderer state object.
     /// </summary>
     public class RendererState : ObservableObject
     {
@@ -20,7 +20,7 @@ namespace Core2D
         private IImageCache _imageCache;
 
         /// <summary>
-        /// 
+        /// The X coordinate of current pan position.
         /// </summary>
         public double PanX
         {
@@ -29,7 +29,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// The Y coordinate of current pan position.
         /// </summary>
         public double PanY
         {
@@ -38,7 +38,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// The current zoom value.
         /// </summary>
         public double Zoom
         {
@@ -47,7 +47,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Flag indicating whether auto-fit is enabled.
         /// </summary>
         public bool EnableAutofit
         {
@@ -56,7 +56,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Flag indicating shape state to enable its drawing.
         /// </summary>
         public ShapeState DrawShapeState
         {
@@ -65,7 +65,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Currently selected shape.
         /// </summary>
         public BaseShape SelectedShape
         {
@@ -74,7 +74,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Currently selected shapes.
         /// </summary>
         public ImmutableHashSet<BaseShape> SelectedShapes
         {
@@ -83,7 +83,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Image cache repository.
         /// </summary>
         public IImageCache ImageCache
         {
