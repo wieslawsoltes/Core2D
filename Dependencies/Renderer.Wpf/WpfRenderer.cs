@@ -21,19 +21,14 @@ namespace Dependencies
     /// </summary>
     public class WpfRenderer : ObservableObject, IRenderer
     {
-        private bool _enableArrowStyleCache = true;
-        private bool _enableArcCache = true;
-        private bool _enableBezierCache = true;
-        private bool _enableQBezierCache = true;
-        private bool _enableTextCache = true;
         // TODO: Enable XPath caching. Cache is disabled to enable PathHelper to work.
         private bool _enablePathCache = false;
         private Cache<ShapeStyle, Tuple<Brush, Pen>> _styleCache = Cache<ShapeStyle, Tuple<Brush, Pen>>.Create();
-        private IDictionary<ArrowStyle, Tuple<Brush, Pen>> _arrowStyleCache;
-        private IDictionary<XArc, PathGeometry> _arcCache;
-        private IDictionary<XBezier, PathGeometry> _bezierCache;
-        private IDictionary<XQBezier, PathGeometry> _qbezierCache;
-        private IDictionary<XText, Tuple<string, FormattedText, ShapeStyle>> _textCache;
+        private Cache<ArrowStyle, Tuple<Brush, Pen>> _arrowStyleCache = Cache<ArrowStyle, Tuple<Brush, Pen>>.Create();
+        private Cache<XArc, PathGeometry> _arcCache = Cache<XArc, PathGeometry>.Create();
+        private Cache<XBezier, PathGeometry> _bezierCache = Cache<XBezier, PathGeometry>.Create();
+        private Cache<XQBezier, PathGeometry> _qbezierCache = Cache<XQBezier, PathGeometry>.Create();
+        private Cache<XText, Tuple<string, FormattedText, ShapeStyle>> _textCache = Cache<XText, Tuple<string, FormattedText, ShapeStyle>>.Create();
         private Cache<string, BitmapImage> _biCache = Cache<string, BitmapImage>.Create(bi => bi.StreamSource.Dispose());
         private IDictionary<XPath, Tuple<XPathGeometry, StreamGeometry, ShapeStyle>> _pathCache;
         private RendererState _state = new RendererState();
@@ -406,14 +401,14 @@ namespace Dependencies
         public void ClearCache(bool isZooming)
         {
             _styleCache.Reset();
-            _arrowStyleCache = new Dictionary<ArrowStyle, Tuple<Brush, Pen>>();
+            _arrowStyleCache.Reset();
 
             if (!isZooming)
             {
-                _arcCache = new Dictionary<XArc, PathGeometry>();
-                _bezierCache = new Dictionary<XBezier, PathGeometry>();
-                _qbezierCache = new Dictionary<XQBezier, PathGeometry>();
-                _textCache = new Dictionary<XText, Tuple<string, FormattedText, ShapeStyle>>();
+                _arcCache.Reset();
+                _bezierCache.Reset();
+                _qbezierCache.Reset();
+                _textCache.Reset();
                 _biCache.Reset();
                 _pathCache = new Dictionary<XPath, Tuple<XPathGeometry, StreamGeometry, ShapeStyle>>();
             }
@@ -475,7 +470,7 @@ namespace Dependencies
             double thicknessEndArrow = style.EndArrowStyle.Thickness / zoom;
             double halfEndArrow = thicknessEndArrow / 2.0;
 
-            // line style
+            // Line style.
             Tuple<Brush, Pen> styleCached = _styleCache.Get(style);
             Brush fillLine;
             Pen strokeLine;
@@ -488,15 +483,14 @@ namespace Dependencies
             {
                 fillLine = CreateBrush(style.Fill);
                 strokeLine = CreatePen(style, thicknessLine);
-                _styleCache.Add(style, Tuple.Create(fillLine, strokeLine));
+                _styleCache.Set(style, Tuple.Create(fillLine, strokeLine));
             }
 
-            // start arrow style
-            Tuple<Brush, Pen> startArrowCache = null;
+            // Start arrow style.
+            Tuple<Brush, Pen> startArrowCache = _arrowStyleCache.Get(style.StartArrowStyle);
             Brush fillStartArrow;
             Pen strokeStartArrow;
-            if (_enableArrowStyleCache
-                && _arrowStyleCache.TryGetValue(style.StartArrowStyle, out startArrowCache))
+            if (startArrowCache != null)
             {
                 fillStartArrow = startArrowCache.Item1;
                 strokeStartArrow = startArrowCache.Item2;
@@ -505,16 +499,14 @@ namespace Dependencies
             {
                 fillStartArrow = CreateBrush(style.StartArrowStyle.Fill);
                 strokeStartArrow = CreatePen(style.StartArrowStyle, thicknessStartArrow);
-                if (_enableArrowStyleCache)
-                    _arrowStyleCache.Add(style.StartArrowStyle, Tuple.Create(fillStartArrow, strokeStartArrow));
+                _arrowStyleCache.Set(style.StartArrowStyle, Tuple.Create(fillStartArrow, strokeStartArrow));
             }
 
-            // end arrow style
-            Tuple<Brush, Pen> endArrowCache = null;
+            // End arrow style.
+            Tuple<Brush, Pen> endArrowCache = _arrowStyleCache.Get(style.EndArrowStyle);
             Brush fillEndArrow;
             Pen strokeEndArrow;
-            if (_enableArrowStyleCache
-                && _arrowStyleCache.TryGetValue(style.EndArrowStyle, out endArrowCache))
+            if (endArrowCache != null)
             {
                 fillEndArrow = endArrowCache.Item1;
                 strokeEndArrow = endArrowCache.Item2;
@@ -523,11 +515,10 @@ namespace Dependencies
             {
                 fillEndArrow = CreateBrush(style.EndArrowStyle.Fill);
                 strokeEndArrow = CreatePen(style.EndArrowStyle, thicknessEndArrow);
-                if (_enableArrowStyleCache)
-                    _arrowStyleCache.Add(style.EndArrowStyle, Tuple.Create(fillEndArrow, strokeEndArrow));
+                _arrowStyleCache.Set(style.EndArrowStyle, Tuple.Create(fillEndArrow, strokeEndArrow));
             }
 
-            // line max length
+            // Line max length.
             double x1 = line.Start.X + dx;
             double y1 = line.Start.Y + dy;
             double x2 = line.End.X + dx;
@@ -535,7 +526,7 @@ namespace Dependencies
 
             XLine.SetMaxLength(line, ref x1, ref y1, ref x2, ref y2);
 
-            // arrow transforms
+            // Arrow transforms.
             var sas = style.StartArrowStyle;
             var eas = style.EndArrowStyle;
             double a1 = Math.Atan2(y1 - y2, x1 - x2) * 180.0 / Math.PI;
@@ -549,7 +540,7 @@ namespace Dependencies
             Point pt1;
             Point pt2;
 
-            // draw start arrow
+            // Draw start arrow.
             double radiusX1 = sas.RadiusX;
             double radiusY1 = sas.RadiusY;
             double sizeX1 = 2.0 * radiusX1;
@@ -602,7 +593,7 @@ namespace Dependencies
                     break;
             }
 
-            // draw end arrow
+            // Draw end arrow.
             double radiusX2 = eas.RadiusX;
             double radiusY2 = eas.RadiusY;
             double sizeX2 = 2.0 * radiusX2;
@@ -655,7 +646,7 @@ namespace Dependencies
                     break;
             }
 
-            // draw line using points from arrow transforms
+            // Draw line using points from arrow transforms.
             DrawLineInternal(_dc, halfLine, strokeLine, line.IsStroked, ref pt1, ref pt2);
         }
 
@@ -683,7 +674,7 @@ namespace Dependencies
             {
                 fill = CreateBrush(style.Fill);
                 stroke = CreatePen(style, thickness);
-                _styleCache.Add(style, Tuple.Create(fill, stroke));
+                _styleCache.Set(style, Tuple.Create(fill, stroke));
             }
 
             var rect = CreateRect(
@@ -735,7 +726,7 @@ namespace Dependencies
             {
                 fill = CreateBrush(style.Fill);
                 stroke = CreatePen(style, thickness);
-                _styleCache.Add(style, Tuple.Create(fill, stroke));
+                _styleCache.Set(style, Tuple.Create(fill, stroke));
             }
 
             var rect = CreateRect(
@@ -779,14 +770,13 @@ namespace Dependencies
             {
                 fill = CreateBrush(style.Fill);
                 stroke = CreatePen(style, thickness);
-                _styleCache.Add(style, Tuple.Create(fill, stroke));
+                _styleCache.Set(style, Tuple.Create(fill, stroke));
             }
 
             var a = WpfArc.FromXArc(arc, dx, dy);
 
-            PathGeometry pg = null;
-            if (_enableArcCache
-                && _arcCache.TryGetValue(arc, out pg))
+            PathGeometry pg = _arcCache.Get(arc);
+            if (pg != null)
             {
                 var pf = pg.Figures[0];
                 pf.StartPoint = new Point(a.Start.X, a.Start.Y);
@@ -819,8 +809,7 @@ namespace Dependencies
                 pg.Figures.Add(pf);
                 //pg.Freeze();
 
-                if (_enableArcCache)
-                    _arcCache.Add(arc, pg);
+                _arcCache.Set(arc, pg);
             }
 
             DrawPathGeometryInternal(_dc, half, fill, stroke, arc.IsStroked, arc.IsFilled, pg);
@@ -850,12 +839,11 @@ namespace Dependencies
             {
                 fill = CreateBrush(style.Fill);
                 stroke = CreatePen(style, thickness);
-                _styleCache.Add(style, Tuple.Create(fill, stroke));
+                _styleCache.Set(style, Tuple.Create(fill, stroke));
             }
 
-            PathGeometry pg = null;
-            if (_enableBezierCache
-                && _bezierCache.TryGetValue(bezier, out pg))
+            PathGeometry pg = _bezierCache.Get(bezier);
+            if (pg != null)
             {
                 var pf = pg.Figures[0];
                 pf.StartPoint = new Point(bezier.Point1.X + dx, bezier.Point1.Y + dy);
@@ -885,8 +873,7 @@ namespace Dependencies
                 pg.Figures.Add(pf);
                 //pg.Freeze();
 
-                if (_enableBezierCache)
-                    _bezierCache.Add(bezier, pg);
+                _bezierCache.Set(bezier, pg);
             }
 
             DrawPathGeometryInternal(_dc, half, fill, stroke, bezier.IsStroked, bezier.IsFilled, pg);
@@ -916,13 +903,11 @@ namespace Dependencies
             {
                 fill = CreateBrush(style.Fill);
                 stroke = CreatePen(style, thickness);
-                _styleCache.Add(style, Tuple.Create(fill, stroke));
+                _styleCache.Set(style, Tuple.Create(fill, stroke));
             }
 
-            PathGeometry pg = null;
-
-            if (_enableQBezierCache
-                && _qbezierCache.TryGetValue(qbezier, out pg))
+            PathGeometry pg = _qbezierCache.Get(qbezier);
+            if (pg != null)
             {
                 var pf = pg.Figures[0];
                 pf.StartPoint = new Point(qbezier.Point1.X + dx, qbezier.Point1.Y + dy);
@@ -950,8 +935,8 @@ namespace Dependencies
                 pg = new PathGeometry();
                 pg.Figures.Add(pf);
                 //pg.Freeze();
-                if (_enableQBezierCache)
-                    _qbezierCache.Add(qbezier, pg);
+
+                _qbezierCache.Set(qbezier, pg);
             }
 
             DrawPathGeometryInternal(_dc, half, fill, stroke, qbezier.IsStroked, qbezier.IsFilled, pg);
@@ -985,7 +970,7 @@ namespace Dependencies
             {
                 fill = CreateBrush(style.Fill);
                 stroke = CreatePen(style, thickness);
-                _styleCache.Add(style, Tuple.Create(fill, stroke));
+                _styleCache.Set(style, Tuple.Create(fill, stroke));
             }
 
             var rect = CreateRect(
@@ -993,13 +978,10 @@ namespace Dependencies
                 text.BottomRight,
                 dx, dy);
 
-            Tuple<string, FormattedText, ShapeStyle> tcache = null;
+            Tuple<string, FormattedText, ShapeStyle> tcache = _textCache.Get(text);
             FormattedText ft;
             string ct;
-            if (_enableTextCache
-                && _textCache.TryGetValue(text, out tcache)
-                && string.Compare(tcache.Item1, tbind) == 0
-                && tcache.Item3 == style)
+            if (tcache != null && string.Compare(tcache.Item1, tbind) == 0 && tcache.Item3 == style)
             {
                 ct = tcache.Item1;
                 ft = tcache.Item2;
@@ -1058,18 +1040,7 @@ namespace Dependencies
                     ft.SetTextDecorations(decorations);
                 }
 
-                if (_enableTextCache)
-                {
-                    var tuple = Tuple.Create(tbind, ft, style);
-                    if (_textCache.ContainsKey(text))
-                    {
-                        _textCache[text] = tuple;
-                    }
-                    else
-                    {
-                        _textCache.Add(text, tuple);
-                    }
-                }
+                _textCache.Set(text, Tuple.Create(tbind, ft, style));
 
                 _dc.DrawText(
                     ft,
@@ -1104,7 +1075,7 @@ namespace Dependencies
             {
                 fill = CreateBrush(style.Fill);
                 stroke = CreatePen(style, thickness);
-                _styleCache.Add(style, Tuple.Create(fill, stroke));
+                _styleCache.Set(style, Tuple.Create(fill, stroke));
             }
 
             var rect = CreateRect(
@@ -1145,7 +1116,7 @@ namespace Dependencies
                         bi.Freeze();
 
 
-                        _biCache.Add(image.Key, bi);
+                        _biCache.Set(image.Key, bi);
 
                         _dc.DrawImage(bi, rect);
                     }
@@ -1185,7 +1156,7 @@ namespace Dependencies
             {
                 fill = CreateBrush(style.Fill);
                 stroke = CreatePen(style, thickness);
-                _styleCache.Add(style, Tuple.Create(fill, stroke));
+                _styleCache.Set(style, Tuple.Create(fill, stroke));
             }
 
             Tuple<XPathGeometry, StreamGeometry, ShapeStyle> pcache = null;
