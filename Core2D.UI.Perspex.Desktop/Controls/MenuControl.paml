@@ -3,6 +3,7 @@
 <UserControl x:Class="Core2D.UI.Perspex.Desktop.Controls.MenuControl"
              xmlns="https://github.com/perspex"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:local="clr-namespace:Core2D.UI.Perspex.Desktop;assembly=Core2D.UI.Perspex.Desktop"
              xmlns:converters="clr-namespace:Core2D.UI.Perspex.Desktop.Converters;assembly=Core2D.UI.Perspex.Desktop"
              xmlns:core="clr-namespace:Core2D;assembly=Core2D">
@@ -15,7 +16,7 @@
             <MenuItem Header="_Recent" Items="{Binding Path=RecentProjects}">
                 <MenuItem.DataTemplates>
                     <DataTemplate DataType="core:RecentProject">
-                        <TextBlock Text="{Binding Path=Name}" ToolTip.Tip="{Binding Path=Path}"/>
+                        <MenuItem Header="{Binding Path=Name}" Command="{Static core:Commands.OpenCommand}" CommandParameter="{Binding Path=Path}"/>
                     </DataTemplate>
                 </MenuItem.DataTemplates>
             </MenuItem>
@@ -37,7 +38,7 @@
             <MenuItem Header="_Recent" Items="{Binding Path=RecentProjects}">
                 <MenuItem.DataTemplates>
                     <DataTemplate DataType="core:RecentProject">
-                        <TextBlock Text="{Binding Path=Name}" ToolTip.Tip="{Binding Path=Path}"/>
+                        <MenuItem Header="{Binding Path=Name}" Command="{Static core:Commands.OpenCommand}" CommandParameter="{Binding Path=Path}"/>
                     </DataTemplate>
                 </MenuItem.DataTemplates>
             </MenuItem>
@@ -70,11 +71,9 @@
             </MenuItem>
         </MenuItem>
         <MenuItem Header="_View" IsVisible="{Binding Path=Editor.Project, Converter={Static converters:IsNotNullConverter.Instance}}">
-            <MenuItem Header="_Zoom">
-                <MenuItem Header="_Reset Zoom" HotKey="Z" Command="{Static core:Commands.ZoomResetCommand}"/>
-                <Separator/>
-                <MenuItem Header="Zoom to _Extent" HotKey="X" Command="{Static core:Commands.ZoomExtentCommand}"/>
-            </MenuItem>
+            <MenuItem Header="_Reset Zoom" HotKey="Z" Command="{Static core:Commands.ZoomResetCommand}"/>
+            <Separator/>
+            <MenuItem Header="Zoom to _Extent" HotKey="X" Command="{Static core:Commands.ZoomExtentCommand}"/>
         </MenuItem>
         <MenuItem Header="_Project" IsVisible="{Binding Path=Editor.Project, Converter={Static converters:IsNotNullConverter.Instance}}">
             <MenuItem Header="_Add Document" Command="{Static core:Commands.AddDocumentCommand}" CommandParameter="{Binding Path=Editor.Project}"/>
@@ -237,7 +236,7 @@
         <MenuItem Header="Te_mplate" Items="{Binding Path=Editor.Project.Templates}" IsVisible="{Binding Path=Editor.Project, Converter={Static converters:IsNotNullConverter.Instance}}">
             <MenuItem.DataTemplates>
                 <DataTemplate DataType="core:Container">
-                    <TextBlock Text="{Binding Path=Name}"/>
+                    <MenuItem Header="{Binding Path=Name}" Command="{Static core:Commands.ApplyTemplateCommand}" CommandParameter="{Binding}"/>
                 </DataTemplate>
             </MenuItem.DataTemplates>
         </MenuItem>
