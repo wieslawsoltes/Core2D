@@ -7,6 +7,7 @@
              xmlns:converters="clr-namespace:Core2D.UI.Perspex.Desktop.Converters;assembly=Core2D.UI.Perspex.Desktop"
              xmlns:core="clr-namespace:Core2D;assembly=Core2D">
     <Application.Styles>
+        <!-- TextBlock -->
         <Style Selector="TextBlock.default">
             <Setter Property="Margin" Value="1"/>
             <Setter Property="FontSize" Value="12"/>
@@ -48,6 +49,7 @@
             <Setter Property="Margin" Value="9,6,9,6"/>
             <Setter Property="FontSize" Value="14"/>
         </Style>
+        <!-- TextBox -->
         <Style Selector="TextBox.default">
             <Setter Property="Margin" Value="3,1,3,1"/>
             <Setter Property="FontSize" Value="12"/>
@@ -71,6 +73,7 @@
             <Setter Property="BorderBrush" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="0"/>
         </Style>
+        <!-- CheckBox -->
         <Style Selector="CheckBox.default">
             <Setter Property="Margin" Value="3,1,3,1"/>
             <Setter Property="FontSize" Value="12"/>
@@ -85,6 +88,7 @@
             <Setter Property="BorderBrush" Value="#FFACACAC"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
+        <!-- DropDown -->
         <Style Selector="DropDown.default">
             <Setter Property="Margin" Value="3,1,3,1"/>
             <Setter Property="Background" Value="#FFDEDEDE"/>
@@ -96,6 +100,7 @@
             <Setter Property="BorderBrush" Value="#FFACACAC"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
+        <!-- Button -->
         <Style Selector="Button.default">
             <Setter Property="Margin" Value="3,0,3,0"/>
             <Setter Property="FontSize" Value="12"/>
@@ -104,6 +109,7 @@
             <Setter Property="Margin" Value="0"/>
             <Setter Property="FontSize" Value="18"/>
         </Style>
+        <!-- ScrollBar -->
         <Style Selector="ScrollBar.slider">
             <Setter Property="Visibility" Value="Visible"/>
             <Setter Property="Orientation" Value="Horizontal"/>
@@ -112,22 +118,110 @@
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
             <Setter Property="VerticalAlignment" Value="Stretch"/>
         </Style>
+        <!-- ListBox -->
         <Style Selector="ListBox.default">
             <Setter Property="Margin" Value="0"/>
             <Setter Property="BorderThickness" Value="0"/>
         </Style>
+        <!-- TreeView -->
         <Style Selector="TreeView.default">
             <Setter Property="Margin" Value="0"/>
             <Setter Property="BorderThickness" Value="0"/>
         </Style>
+        <!-- TabControl -->
         <Style Selector="TabControl.default">
             <Setter Property="Margin" Value="0"/>
         </Style>
+        <Style Selector="TabControl.top">
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Grid RowDefinitions="Auto,*">
+                        <TabStrip Items="{TemplateBinding Items}"
+                                  SelectedIndex="{TemplateBinding Path=SelectedIndex, Mode=TwoWay}"/>
+                        <Carousel Items="{TemplateBinding Items}"
+                                  MemberSelector="Content"
+                                  SelectedIndex="{TemplateBinding Path=SelectedIndex}"
+                                  Transition="{TemplateBinding Transition}"
+                                  Grid.Row="1"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter>
+        </Style>
+        <Style Selector="TabControl.bottom">
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Grid RowDefinitions="*,Auto">
+                        <Carousel Items="{TemplateBinding Items}"
+                                  MemberSelector="Content"
+                                  SelectedIndex="{TemplateBinding Path=SelectedIndex}"
+                                  Transition="{TemplateBinding Transition}"/>
+                        <TabStrip Items="{TemplateBinding Items}"
+                                  SelectedIndex="{TemplateBinding Path=SelectedIndex, Mode=TwoWay}"
+                                  Grid.Row="1"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter>
+        </Style>
+        <Style Selector="TabControl.left">
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Grid ColumnDefinitions="Auto,*">
+                        <Border>
+                            <ScrollViewer>
+                                <TabStrip Items="{TemplateBinding Items}"
+                                          SelectedIndex="{TemplateBinding Path=SelectedIndex, Mode=TwoWay}">
+                                    <TabStrip.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Vertical"/>
+                                        </ItemsPanelTemplate>
+                                    </TabStrip.ItemsPanel>
+                                </TabStrip>
+                            </ScrollViewer>
+                        </Border>
+                        <Carousel Items="{TemplateBinding Items}"
+                                  MemberSelector="Content"
+                                  SelectedIndex="{TemplateBinding Path=SelectedIndex}"
+                                  Transition="{TemplateBinding Transition}"
+                                  Grid.Column="1"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter>
+        </Style>
+        <Style Selector="TabControl.right">
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Carousel Items="{TemplateBinding Items}"
+                                  MemberSelector="Content"
+                                  SelectedIndex="{TemplateBinding Path=SelectedIndex}"
+                                  Transition="{TemplateBinding Transition}"/>
+                        <Border Grid.Column="1">
+                            <ScrollViewer>
+                                <TabStrip Items="{TemplateBinding Items}"
+                                          SelectedIndex="{TemplateBinding Path=SelectedIndex, Mode=TwoWay}">
+                                    <TabStrip.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Vertical"/>
+                                        </ItemsPanelTemplate>
+                                    </TabStrip.ItemsPanel>
+                                </TabStrip>
+                            </ScrollViewer>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter>
+        </Style>
+        <!-- TabItem -->
         <Style Selector="TabItem.property">
             <Setter Property="Margin" Value="3"/>
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="FontWeight" Value="Normal"/>
         </Style>
+        <!-- Border -->
         <Style Selector="Border.leftTop">
             <Setter Property="Margin" Value="4,6,0,4"/>
             <Setter Property="Padding" Value="3,3,3,3"/>
@@ -165,7 +259,7 @@
         </Style>
     </Application.Styles>
     <Application.DataTemplates>
-        <!-- style -->
+        <!-- Style -->
         <DataTemplate DataType="core:ArgbColor">
             <Grid RowDefinitions="22,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,50,*">
                 <Border Classes="color" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
@@ -411,7 +505,7 @@
                 </TabItem>
             </TabControl>
         </DataTemplate>
-        <!-- data -->
+        <!-- Data -->
         <DataTemplate DataType="core:Record">
             <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*">
                 <GridSplitter Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Width="10"/>
@@ -538,7 +632,7 @@
                 </TabItem>
             </TabControl>
         </DataTemplate>
-        <!-- state -->
+        <!-- State -->
         <DataTemplate DataType="core:ShapeState">
             <StackPanel>
                 <CheckBox Content="Default" IsChecked="{Binding Path=Default, Mode=TwoWay}" Classes="default"/>
@@ -552,7 +646,7 @@
                 <CheckBox Content="Output" IsChecked="{Binding Path=Output, Mode=TwoWay}" Classes="default"/>
             </StackPanel>
         </DataTemplate>
-        <!-- shapes -->
+        <!-- Shapes -->
         <DataTemplate DataType="core:XPoint">
             <TabControl Classes="default">
                 <TabItem Header="Point" Classes="property">
@@ -956,7 +1050,7 @@
                 </TabItem>
             </TabControl>
         </DataTemplate>
-        <!-- path -->
+        <!-- Path -->
         <DataTemplate DataType="core:XPathSize">
             <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*">
                 <TextBlock Text="Width" Classes="left" Grid.Row="0" Grid.Column="0"/>
@@ -1131,7 +1225,7 @@
                 </TabItem>
             </TabControl>
         </DataTemplate>
-        <!-- project -->
+        <!-- Project -->
         <DataTemplate DataType="core:Options">
             <TabControl Classes="default">
                 <TabItem Header="General" Classes="property">
