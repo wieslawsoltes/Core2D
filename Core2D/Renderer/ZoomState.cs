@@ -69,7 +69,7 @@ namespace Core2D
         /// <summary>
         /// Initialize new instance of <see cref="ZoomState"/> class.
         /// </summary>
-        /// <param name="editor">The current editor object.</param>
+        /// <param name="editor">The current <see cref="Editor"/> object.</param>
         public ZoomState(Editor editor)
         {
             _editor = editor;
@@ -102,7 +102,7 @@ namespace Core2D
         }
         
         /// <summary>
-        /// Handle mouse right left button down events.
+        /// Handle mouse left button down events.
         /// </summary>
         /// <param name="x">The X coordinate of point.</param>
         /// <param name="y">The Y coordinate of point.</param>
@@ -118,7 +118,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Handle mouse right left button up events.
+        /// Handle mouse left button up events.
         /// </summary>
         /// <param name="x">The X coordinate of point.</param>
         /// <param name="y">The Y coordinate of point.</param>
