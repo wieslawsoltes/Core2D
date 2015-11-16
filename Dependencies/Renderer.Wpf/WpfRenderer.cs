@@ -21,16 +21,30 @@ namespace Dependencies
     /// </summary>
     public class WpfRenderer : ObservableObject, IRenderer
     {
-        // TODO: Enable XPath caching. Cache is disabled to enable PathHelper to work.
-        private bool _enablePathCache = false;
-        private Cache<ShapeStyle, Tuple<Brush, Pen>> _styleCache = Cache<ShapeStyle, Tuple<Brush, Pen>>.Create();
-        private Cache<ArrowStyle, Tuple<Brush, Pen>> _arrowStyleCache = Cache<ArrowStyle, Tuple<Brush, Pen>>.Create();
-        private Cache<XArc, PathGeometry> _arcCache = Cache<XArc, PathGeometry>.Create();
-        private Cache<XBezier, PathGeometry> _bezierCache = Cache<XBezier, PathGeometry>.Create();
-        private Cache<XQBezier, PathGeometry> _qbezierCache = Cache<XQBezier, PathGeometry>.Create();
-        private Cache<XText, Tuple<string, FormattedText, ShapeStyle>> _textCache = Cache<XText, Tuple<string, FormattedText, ShapeStyle>>.Create();
-        private Cache<string, BitmapImage> _biCache = Cache<string, BitmapImage>.Create(bi => bi.StreamSource.Dispose());
-        private IDictionary<XPath, Tuple<XPathGeometry, StreamGeometry, ShapeStyle>> _pathCache;
+        private Cache<ShapeStyle, Tuple<Brush, Pen>> _styleCache = 
+            Cache<ShapeStyle, Tuple<Brush, Pen>>.Create();
+
+        private Cache<ArrowStyle, Tuple<Brush, Pen>> _arrowStyleCache = 
+            Cache<ArrowStyle, Tuple<Brush, Pen>>.Create();
+
+        private Cache<XArc, PathGeometry> _arcCache = 
+            Cache<XArc, PathGeometry>.Create();
+
+        private Cache<XBezier, PathGeometry> _bezierCache = 
+            Cache<XBezier, PathGeometry>.Create();
+
+        private Cache<XQBezier, PathGeometry> _qbezierCache = 
+            Cache<XQBezier, PathGeometry>.Create();
+
+        private Cache<XText, Tuple<string, FormattedText, ShapeStyle>> _textCache = 
+            Cache<XText, Tuple<string, FormattedText, ShapeStyle>>.Create();
+
+        private Cache<string, BitmapImage> _biCache = 
+            Cache<string, BitmapImage>.Create(bi => bi.StreamSource.Dispose());
+
+        private Cache<XPath, Tuple<XPathGeometry, StreamGeometry, ShapeStyle>> _pathCache =
+            Cache<XPath, Tuple<XPathGeometry, StreamGeometry, ShapeStyle>>.Create();
+
         private RendererState _state = new RendererState();
 
         /// <inheritdoc/>
@@ -410,7 +424,7 @@ namespace Dependencies
                 _qbezierCache.Reset();
                 _textCache.Reset();
                 _biCache.Reset();
-                _pathCache = new Dictionary<XPath, Tuple<XPathGeometry, StreamGeometry, ShapeStyle>>();
+                _pathCache.Reset();
             }
         }
 
@@ -1115,7 +1129,6 @@ namespace Dependencies
                         bi.EndInit();
                         bi.Freeze();
 
-
                         _biCache.Set(image.Key, bi);
 
                         _dc.DrawImage(bi, rect);
@@ -1159,11 +1172,10 @@ namespace Dependencies
                 _styleCache.Set(style, Tuple.Create(fill, stroke));
             }
 
-            Tuple<XPathGeometry, StreamGeometry, ShapeStyle> pcache = null;
+            Tuple<XPathGeometry, StreamGeometry, ShapeStyle> pcache = _pathCache.Get(path);
             StreamGeometry sg;
 
-            if (_enablePathCache
-                && _pathCache.TryGetValue(path, out pcache)
+            if (pcache != null
                 && pcache.Item1 == path.Geometry
                 && pcache.Item3 == style)
             {
@@ -1174,18 +1186,8 @@ namespace Dependencies
             {
                 sg = path.Geometry.ToStreamGeometry();
 
-                if (_enablePathCache)
-                {
-                    var tuple = Tuple.Create(path.Geometry, sg, style);
-                    if (_pathCache.ContainsKey(path))
-                    {
-                        _pathCache[path] = tuple;
-                    }
-                    else
-                    {
-                        _pathCache.Add(path, tuple);
-                    }
-                }
+                // TODO: Enable XPath caching, cache is disabled to enable PathHelper to work.
+                //_pathCache.Set(path, Tuple.Create(path.Geometry, sg, style));
 
                 _dc.DrawGeometry(path.IsFilled ? fill : null, path.IsStroked ? stroke : null, sg);
             }
