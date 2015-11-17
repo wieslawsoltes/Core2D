@@ -249,10 +249,10 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets all points in the path.
         /// </summary>
-        /// <param name="path"></param>
-        /// <returns></returns>
+        /// <param name="path">The <see cref="XPath"/> object.</param>
+        /// <returns>All points in the path.</returns>
         public static IEnumerable<XPoint> GetAllPathPoints(XPath path)
         {
             if (path == null || path.Geometry == null)
@@ -316,11 +316,11 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets all points in the shapes collection.
         /// </summary>
-        /// <param name="shapes"></param>
-        /// <param name="exclude"></param>
-        /// <returns></returns>
+        /// <param name="shapes">The shapes collection.</param>
+        /// <param name="exclude">The shapes to exclude.</param>
+        /// <returns>All points in the shapes collection</returns>
         public static IEnumerable<XPoint> GetAllPoints(IEnumerable<BaseShape> shapes, ShapeStateFlags exclude)
         {
             if (shapes == null)
@@ -507,10 +507,10 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets all shapes including grouped shapes.
         /// </summary>
-        /// <param name="shapes"></param>
-        /// <returns></returns>
+        /// <param name="shapes">The shapes collection.</param>
+        /// <returns>All shapes including grouped shapes.</returns>
         public static IEnumerable<BaseShape> GetAllShapes(IEnumerable<BaseShape> shapes)
         {
             if (shapes == null)
@@ -571,24 +571,22 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets all shapes including grouped shapes of specified type.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="shapes"></param>
-        /// <returns></returns>
+        /// <typeparam name="T">The type of shape to include.</typeparam>
+        /// <param name="shapes">The shapes collection.</param>
+        /// <returns>All shapes including grouped shapes of specified type.</returns>
         public static IEnumerable<T> GetAllShapes<T>(IEnumerable<BaseShape> shapes)
         {
-            return GetAllShapes(shapes)
-                .Where(s => s is T)
-                .Cast<T>();
+            return GetAllShapes(shapes).Where(s => s is T).Cast<T>();
         }
 
         /// <summary>
-        /// 
+        /// Gets all shapes including grouped shapes of specified type.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="project"></param>
-        /// <returns></returns>
+        /// <typeparam name="T">The type of shapes to include.</typeparam>
+        /// <param name="project">The project object.</param>
+        /// <returns>All shapes including grouped shapes of specified type.</returns>
         public static IEnumerable<T> GetAllShapes<T>(Project project)
         {
             var shapes = project.Documents
@@ -596,9 +594,7 @@ namespace Core2D
                 .SelectMany(c => c.Layers)
                 .SelectMany(l => l.Shapes);
 
-            return GetAllShapes(shapes)
-                .Where(s => s is T)
-                .Cast<T>();
+            return GetAllShapes(shapes).Where(s => s is T).Cast<T>();
         }
 
         /// <summary>
