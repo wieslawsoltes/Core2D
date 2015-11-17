@@ -70,22 +70,6 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public override void Bind(Record r)
-        {
-            var record = r ?? this.Data.Record;
-
-            foreach (var shape in Shapes)
-            {
-                shape.Bind(record);
-            }
-
-            foreach (var connector in Connectors)
-            {
-                connector.Bind(record);
-            }
-        }
-
-        /// <inheritdoc/>
         public override void Draw(object dc, IRenderer renderer, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var record = r ?? this.Data.Record;
@@ -208,7 +192,6 @@ namespace Core2D
                 Style = default(ShapeStyle),
                 Data = new Data()
                 {
-                    Bindings = ImmutableArray.Create<Binding>(),
                     Properties = ImmutableArray.Create<Property>()
                 },
                 Shapes = ImmutableArray.Create<BaseShape>(),

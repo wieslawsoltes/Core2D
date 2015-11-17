@@ -838,7 +838,7 @@ namespace Dependencies
         {
             var _doc = dc as DxfDocument;
 
-            var tbind = text.BindToTextProperty(db, r);
+            var tbind = text.BindText(db, r);
             if (string.IsNullOrEmpty(tbind))
                 return;
 

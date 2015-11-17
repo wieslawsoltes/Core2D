@@ -23,12 +23,6 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public override void Bind(Record r)
-        {
-            base.Bind(r ?? this.Data.Record);
-        }
-
-        /// <inheritdoc/>
         public override void Draw(object dc, IRenderer renderer, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var record = r ?? this.Data.Record;
@@ -74,7 +68,6 @@ namespace Core2D
                 IsFilled = isFilled,
                 Data = new Data()
                 {
-                    Bindings = ImmutableArray.Create<Binding>(),
                     Properties = ImmutableArray.Create<Property>()
                 },
                 TopLeft = XPoint.Create(x1, y1, point),
@@ -142,7 +135,6 @@ namespace Core2D
                 IsFilled = isFilled,
                 Data = new Data()
                 {
-                    Bindings = ImmutableArray.Create<Binding>(),
                     Properties = ImmutableArray.Create<Property>()
                 },
                 TopLeft = topLeft,

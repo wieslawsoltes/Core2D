@@ -741,7 +741,7 @@ namespace Dependencies
         {
             var _gfx = dc as Graphics;
 
-            var tbind = text.BindToTextProperty(db, r);
+            var tbind = text.BindText(db, r);
             if (string.IsNullOrEmpty(tbind))
                 return;
 

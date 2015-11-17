@@ -584,7 +584,7 @@ namespace Test.Uwp
         {
             var _ds = ds as CanvasDrawingSession;
 
-            var tbind = text.BindToTextProperty(db, r);
+            var tbind = text.BindText(db, r);
             if (string.IsNullOrEmpty(tbind))
                 return;
 

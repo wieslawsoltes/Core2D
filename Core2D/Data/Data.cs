@@ -11,19 +11,8 @@ namespace Core2D
     /// </summary>
     public class Data : ObservableObject
     {
-        private ImmutableArray<Binding> _bindings;
         private ImmutableArray<Property> _properties;
         private Record _record;
-        private object _owner;
-
-        /// <summary>
-        /// Gets or sets a collection <see cref="Binding"/> that will be used during drawing.
-        /// </summary>
-        public ImmutableArray<Binding> Bindings
-        {
-            get { return _bindings; }
-            set { Update(ref _bindings, value); }
-        }
 
         /// <summary>
         /// Gets or sets a collection <see cref="Property"/> that will be used during drawing.
@@ -41,15 +30,6 @@ namespace Core2D
         {
             get { return _record; }
             set { Update(ref _record, value); }
-        }
-
-        /// <summary>
-        /// Gets or sets data owner object.
-        /// </summary>
-        public object Owner
-        {
-            get { return _owner; }
-            set { Update(ref _owner, value); }
         }
 
         /// <summary>
@@ -89,23 +69,15 @@ namespace Core2D
         /// <summary>
         /// Creates a new <see cref="Data"/> instance.
         /// </summary>
-        /// <param name="bindings"></param>
         /// <param name="properties"></param>
         /// <param name="record"></param>
-        /// <param name="owner"></param>
         /// <returns></returns>
-        public static Data Create(
-            ImmutableArray<Binding> bindings,
-            ImmutableArray<Property> properties,
-            Record record,
-            object owner)
+        public static Data Create(ImmutableArray<Property> properties, Record record)
         {
             return new Data()
             {
-                Bindings = bindings,
                 Properties = properties,
-                Record = record,
-                Owner = owner
+                Record = record
             };
         }
     }

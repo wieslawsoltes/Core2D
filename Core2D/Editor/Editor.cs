@@ -934,26 +934,6 @@ namespace Core2D
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="data"></param>
-        /// <param name="binding"></param>
-        public void AddBinding(Data data, Binding binding)
-        {
-            if (_enableHistory)
-            {
-                var previous = data.Bindings;
-                var next = data.Bindings.Add(binding);
-                _history.Snapshot(previous, next, (p) => data.Bindings = p);
-                data.Bindings = next;
-            }
-            else
-            {
-                data.Bindings = data.Bindings.Add(binding);
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         /// <param name="container"></param>
         /// <param name="property"></param>
         public void AddProperty(Container container, Property property)
@@ -1085,26 +1065,6 @@ namespace Core2D
             else
             {
                 db.Records = db.Records.Add(record);
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="owner"></param>
-        /// <param name="property"></param>
-        /// <param name="path"></param>
-        public void AddBinding(object owner, string property = "", string path = "")
-        {
-            if (owner != null && owner is Data)
-            {
-                var data = owner as Data;
-                if (data.Bindings == null)
-                {
-                    data.Bindings = ImmutableArray.Create<Binding>();
-                }
-
-                AddBinding(data, Binding.Create(property, path, data));
             }
         }
 
@@ -1593,38 +1553,6 @@ namespace Core2D
                     else
                     {
                         data.Record = default(Record);
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="parameter"></param>
-        public void RemoveBinding(object parameter)
-        {
-            if (parameter != null && parameter is Binding)
-            {
-                var binding = parameter as Binding;
-                var owner = binding.Owner;
-
-                if (owner != null && owner is Data)
-                {
-                    var data = owner;
-                    if (data.Bindings != null)
-                    {
-                        if (_enableHistory)
-                        {
-                            var previous = data.Bindings;
-                            var next = data.Bindings.Remove(binding);
-                            _history.Snapshot(previous, next, (p) => data.Bindings = p);
-                            data.Bindings = next;
-                        }
-                        else
-                        {
-                            data.Bindings = data.Bindings.Remove(binding);
-                        }
                     }
                 }
             }

@@ -43,14 +43,6 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public override void Bind(Record r)
-        {
-            var record = r ?? this.Data.Record;
-            _topLeft.TryToBind("TopLeft", this.Data.Bindings, record);
-            _bottomRight.TryToBind("BottomRight", this.Data.Bindings, record);
-        }
-
-        /// <inheritdoc/>
         public override void Draw(object dc, IRenderer renderer, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var record = r ?? this.Data.Record;
@@ -102,47 +94,34 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Try binding data record to one of <see cref="XText"/> shape properties.
+        /// Try binding data record to <see cref="XText.Text"/> shape property containing column name.
         /// </summary>
-        /// <param name="bindings">The bindings database used for binding.</param>
         /// <param name="r">The external data record used for binding.</param>
-        /// <param name="propertyName">The target property name.</param>
+        /// <param name="columnName">The column name.</param>
         /// <param name="value">The output string bound to data record.</param>
         /// <returns>True if binding was successful.</returns>
-        private static bool TryToBind(
-            ImmutableArray<Binding> bindings,
-            Record r,
-            string propertyName,
-            out string value)
+        private static bool TryToBind(Record r, string columnName, out string value)
         {
-            if (r == null || bindings == null || bindings.Length <= 0)
-            {
-                value = null;
-                return false;
-            }
-
-            if (r.Columns == null || r.Values == null || r.Columns.Length != r.Values.Length)
+            if (string.IsNullOrEmpty(columnName) || r == null)
             {
                 value = null;
                 return false;
             }
 
             var columns = r.Columns;
-            foreach (var binding in bindings)
+            var values = r.Values;
+            if (columns == null || values == null || columns.Length != values.Length)
             {
-                if (string.IsNullOrEmpty(binding.Property) || string.IsNullOrEmpty(binding.Path))
-                    continue;
+                value = null;
+                return false;
+            }
 
-                if (binding.Property != propertyName)
-                    continue;
-
-                for (int i = 0; i < columns.Length; i++)
+            for (int i = 0; i < columns.Length; i++)
+            {
+                if (columns[i].Name == columnName)
                 {
-                    if (columns[i].Name == binding.Path)
-                    {
-                        value = r.Values[i].Content;
-                        return true;
-                    }
+                    value = values[i].Content;
+                    return true;
                 }
             }
 
@@ -153,45 +132,27 @@ namespace Core2D
         /// <summary>
         /// Try binding properties array to one of <see cref="XText"/> shape properties.
         /// </summary>
-        /// <param name="bindings">The bindings database used for binding.</param>
         /// <param name="db">The properties database used for binding.</param>
         /// <param name="propertyName">The target property name.</param>
         /// <param name="value">The string bound to properties.</param>
         /// <returns>True if binding was successful.</returns>
-        private static bool TryToBind(
-            ImmutableArray<Binding> bindings,
-            ImmutableArray<Property> db,
-            string propertyName,
-            out string value)
+        private static bool TryToBind(ImmutableArray<Property> db, string propertyName, out string value)
         {
-            foreach (var binding in bindings)
+            if (string.IsNullOrEmpty(propertyName) || db == null)
             {
-                if (string.IsNullOrEmpty(binding.Property) || string.IsNullOrEmpty(binding.Path))
-                    continue;
+                value = null;
+                return false;
+            }
 
-                if (binding.Property != propertyName)
-                    continue;
-
-                var result = db.FirstOrDefault(p => p.Name == binding.Path);
-                if (result != null && result.Value != null)
-                {
-                    value = result.Value.ToString();
-                    return true;
-                }
+            var result = db.FirstOrDefault(p => p.Name == propertyName);
+            if (result != null && result.Value != null)
+            {
+                value = result.Value.ToString();
+                return true;
             }
 
             value = null;
             return false;
-        }
-
-        /// <summary>
-        /// Convert shape <see cref="Property"/>'s array to arguments array.
-        /// </summary>
-        /// <param name="properties">The properties array.</param>
-        /// <returns>The object arguments array.</returns>
-        private static object[] ToArgs(ImmutableArray<Property> properties)
-        {
-            return properties.Where(x => x != null).Select(x => x.Value).ToArray();
         }
 
         /// <summary>
@@ -200,52 +161,56 @@ namespace Core2D
         /// <param name="db">The properties database used for binding.</param>
         /// <param name="r">The external data record used for binding.</param>
         /// <returns>The string bound to properties or data record.</returns>
-        public string BindToTextProperty(ImmutableArray<Property> db, Record r)
+        public string BindText(ImmutableArray<Property> db, Record r)
         {
             var record = r ?? this.Data.Record;
 
-            // Try to bind to internal (this.Data.Record) or external (r) data record using Bindings.
-            if (record != null
-                && this.Data.Bindings != null
-                && this.Data.Bindings.Length > 0)
+            if (!string.IsNullOrEmpty(_text))
             {
-                string value;
-                bool success = TryToBind(this.Data.Bindings, record, "Text", out value);
-                if (success)
+                var text = _text.Trim();
+                if (text.Length >= 3 && text.TrimStart().StartsWith("{") && text.TrimEnd().EndsWith("}"))
                 {
-                    return value;
-                }
-            }
+                    var bidning = text.Substring(1, text.Length - 2);
 
-            // Try to bind to external properties database using Bindings.
-            if (db != null
-                && this.Data.Bindings != null
-                && this.Data.Bindings.Length > 0)
-            {
-                string value;
-                bool success = TryToBind(this.Data.Bindings, db, "Text", out value);
-                if (success)
-                {
-                    return value;
+                    // Try to bind to internal Data.Record or external (r) data record using Text property as Column.Name name.
+                    if (record != null)
+                    {
+                        string value;
+                        bool success = TryToBind(record, bidning, out value);
+                        if (success)
+                        {
+                            return value;
+                        }
+                    }
+
+                    // Try to bind to external Properties database (e.g. Container.Data.Properties) using Text property as Property.Name name.
+                    if (db != null)
+                    {
+                        string value;
+                        bool success = TryToBind(db, bidning, out value);
+                        if (success)
+                        {
+                            return value;
+                        }
+                    }
                 }
             }
 
             // Try to bind to Properties using Text as formatting.
-            if (this.Data.Properties != null
-                && this.Data.Properties.Length > 0)
+            if (this.Data.Properties != null && this.Data.Properties.Length > 0)
             {
                 try
                 {
-                    var args = ToArgs(this.Data.Properties);
-                    if (this.Text != null && args != null && args.Length > 0)
+                    var args = this.Data.Properties.Where(x => x != null).Select(x => x.Value).ToArray();
+                    if (_text != null && args != null && args.Length > 0)
                     {
-                        return string.Format(this.Text, args);
+                        return string.Format(_text, args);
                     }
                 }
                 catch (FormatException) { }
             }
 
-            return this.Text;
+            return _text;
         }
 
         /// <summary>
@@ -277,7 +242,6 @@ namespace Core2D
                 IsStroked = isStroked,
                 Data = new Data()
                 {
-                    Bindings = ImmutableArray.Create<Binding>(),
                     Properties = ImmutableArray.Create<Property>()
                 },
                 TopLeft = XPoint.Create(x1, y1, point),
@@ -335,7 +299,6 @@ namespace Core2D
                 IsStroked = isStroked,
                 Data = new Data()
                 {
-                    Bindings = ImmutableArray.Create<Binding>(),
                     Properties = ImmutableArray.Create<Property>()
                 },
                 TopLeft = topLeft,

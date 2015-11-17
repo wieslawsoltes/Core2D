@@ -113,8 +113,6 @@
             </MenuItem>
             <Separator/>
             <MenuItem Header="Sha_pe">
-                <MenuItem Header="_Add Binding" Command="{Static core:Commands.AddBindingCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentContainer.CurrentShape.Data}"/>
-                <Separator/>
                 <MenuItem Header="_Add Property" Command="{Static core:Commands.AddPropertyCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentContainer.CurrentShape.Data}"/>
                 <Separator/>
                 <MenuItem Header="_Reset Record" Command="{Static core:Commands.ResetRecordCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentContainer.CurrentShape.Data}"/>

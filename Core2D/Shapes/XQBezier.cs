@@ -43,15 +43,6 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public override void Bind(Record r)
-        {
-            var record = r ?? this.Data.Record;
-            _point1.TryToBind("Point1", this.Data.Bindings, record);
-            _point2.TryToBind("Point2", this.Data.Bindings, record);
-            _point3.TryToBind("Point3", this.Data.Bindings, record);
-        }
-
-        /// <inheritdoc/>
         public override void Draw(object dc, IRenderer renderer, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var record = r ?? this.Data.Record;
@@ -146,7 +137,6 @@ namespace Core2D
                 IsFilled = isFilled,
                 Data = new Data()
                 {
-                    Bindings = ImmutableArray.Create<Binding>(),
                     Properties = ImmutableArray.Create<Property>()
                 },
                 Point1 = XPoint.Create(x1, y1, point),
@@ -207,7 +197,6 @@ namespace Core2D
                 IsFilled = isFilled,
                 Data = new Data()
                 {
-                    Bindings = ImmutableArray.Create<Binding>(),
                     Properties = ImmutableArray.Create<Property>()
                 },
                 Point1 = point1,

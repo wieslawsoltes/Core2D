@@ -2521,17 +2521,7 @@ namespace Core2D
                         }
                         else
                         {
-                            if (_editor.CurrentTool == Tool.None
-                                || _editor.CurrentTool == Tool.Selection
-                                || _editor.CurrentTool == Tool.Image
-                                || _editor.CurrentTool == Tool.Path)
-                            {
-                                DropAsGroup(record, x, y);
-                            }
-                            else
-                            {
-                                DropAsShapeAndBind(record, x, y);
-                            }
+                            DropAsGroup(record, x, y);
                         }
                     }
                 }
@@ -2547,226 +2537,7 @@ namespace Core2D
                 }
             }
         }
-
-        /// <summary>
-        /// Drop <see cref="Record"/> object in current container at specified location as shape bound to this record.
-        /// </summary>
-        /// <param name="record">The <see cref="Record"/> object.</param>
-        /// <param name="x">The X coordinate in container.</param>
-        /// <param name="y">The Y coordinate in container.</param>
-        public void DropAsShapeAndBind(Record record, double x, double y)
-        {
-            switch (_editor.CurrentTool)
-            {
-                case Tool.Point:
-                    {
-                        var point = XPoint.Create(x, y, _editor.Project.Options.PointShape);
-                        point.Data.Record = record;
-
-                        if (record.Columns.Length >= 2)
-                        {
-                            point.Data.Bindings = point.Data.Bindings.Add(Binding.Create("X", record.Columns[0].Name, point.Data));
-                            point.Data.Bindings = point.Data.Bindings.Add(Binding.Create("Y", record.Columns[1].Name, point.Data));
-                        }
-
-                        _editor.AddShape(point);
-                    }
-                    break;
-                case Tool.Line:
-                    {
-                        var line = XLine.Create(
-                            x, y,
-                            _editor.Project.CurrentStyleLibrary.CurrentStyle,
-                            _editor.Project.Options.PointShape);
-                        line.Data.Record = record;
-
-                        if (record.Columns.Length >= 2)
-                        {
-                            line.Data.Bindings = line.Data.Bindings.Add(Binding.Create("Start.X", record.Columns[0].Name, line.Data));
-                            line.Data.Bindings = line.Data.Bindings.Add(Binding.Create("Start.Y", record.Columns[1].Name, line.Data));
-                        }
-
-                        if (record.Columns.Length >= 4)
-                        {
-                            line.Data.Bindings = line.Data.Bindings.Add(Binding.Create("End.X", record.Columns[2].Name, line.Data));
-                            line.Data.Bindings = line.Data.Bindings.Add(Binding.Create("End.Y", record.Columns[3].Name, line.Data));
-                        }
-
-                        _editor.AddShape(line);
-                    }
-                    break;
-                case Tool.Rectangle:
-                    {
-                        var rectangle = XRectangle.Create(
-                            x, y,
-                            _editor.Project.CurrentStyleLibrary.CurrentStyle,
-                            _editor.Project.Options.PointShape);
-                        rectangle.Data.Record = record;
-
-                        if (record.Columns.Length >= 2)
-                        {
-                            rectangle.Data.Bindings = rectangle.Data.Bindings.Add(Binding.Create("TopLeft.X", record.Columns[0].Name, rectangle.Data));
-                            rectangle.Data.Bindings = rectangle.Data.Bindings.Add(Binding.Create("TopLeft.Y", record.Columns[1].Name, rectangle.Data));
-                        }
-
-                        if (record.Columns.Length >= 4)
-                        {
-                            rectangle.Data.Bindings = rectangle.Data.Bindings.Add(Binding.Create("BottomRight.X", record.Columns[2].Name, rectangle.Data));
-                            rectangle.Data.Bindings = rectangle.Data.Bindings.Add(Binding.Create("BottomRight.Y", record.Columns[3].Name, rectangle.Data));
-                        }
-
-                        _editor.AddShape(rectangle);
-                    }
-                    break;
-                case Tool.Ellipse:
-                    {
-                        var ellipse = XEllipse.Create(
-                            x, y,
-                            _editor.Project.CurrentStyleLibrary.CurrentStyle,
-                            _editor.Project.Options.PointShape);
-                        ellipse.Data.Record = record;
-
-                        if (record.Columns.Length >= 2)
-                        {
-                            ellipse.Data.Bindings = ellipse.Data.Bindings.Add(Binding.Create("TopLeft.X", record.Columns[0].Name, ellipse.Data));
-                            ellipse.Data.Bindings = ellipse.Data.Bindings.Add(Binding.Create("TopLeft.Y", record.Columns[1].Name, ellipse.Data));
-                        }
-
-                        if (record.Columns.Length >= 4)
-                        {
-                            ellipse.Data.Bindings = ellipse.Data.Bindings.Add(Binding.Create("BottomRight.X", record.Columns[2].Name, ellipse.Data));
-                            ellipse.Data.Bindings = ellipse.Data.Bindings.Add(Binding.Create("BottomRight.Y", record.Columns[3].Name, ellipse.Data));
-                        }
-
-                        _editor.AddShape(ellipse);
-                    }
-                    break;
-                case Tool.Arc:
-                    {
-                        var arc = XArc.Create(
-                            x, y,
-                            _editor.Project.CurrentStyleLibrary.CurrentStyle,
-                            _editor.Project.Options.PointShape);
-                        arc.Data.Record = record;
-
-                        if (record.Columns.Length >= 2)
-                        {
-                            arc.Data.Bindings = arc.Data.Bindings.Add(Binding.Create("Point1.X", record.Columns[0].Name, arc.Data));
-                            arc.Data.Bindings = arc.Data.Bindings.Add(Binding.Create("Point1.Y", record.Columns[1].Name, arc.Data));
-                        }
-
-                        if (record.Columns.Length >= 4)
-                        {
-                            arc.Data.Bindings = arc.Data.Bindings.Add(Binding.Create("Point2.X", record.Columns[2].Name, arc.Data));
-                            arc.Data.Bindings = arc.Data.Bindings.Add(Binding.Create("Point2.Y", record.Columns[3].Name, arc.Data));
-                        }
-
-                        if (record.Columns.Length >= 6)
-                        {
-                            arc.Data.Bindings = arc.Data.Bindings.Add(Binding.Create("Point3.X", record.Columns[4].Name, arc.Data));
-                            arc.Data.Bindings = arc.Data.Bindings.Add(Binding.Create("Point3.Y", record.Columns[5].Name, arc.Data));
-                        }
-
-                        if (record.Columns.Length >= 8)
-                        {
-                            arc.Data.Bindings = arc.Data.Bindings.Add(Binding.Create("Point4.X", record.Columns[6].Name, arc.Data));
-                            arc.Data.Bindings = arc.Data.Bindings.Add(Binding.Create("Point4.Y", record.Columns[7].Name, arc.Data));
-                        }
-
-                        _editor.AddShape(arc);
-                    }
-                    break;
-                case Tool.Bezier:
-                    {
-                        var bezier = XBezier.Create(
-                            x, y,
-                            _editor.Project.CurrentStyleLibrary.CurrentStyle,
-                            _editor.Project.Options.PointShape);
-                        bezier.Data.Record = record;
-
-                        if (record.Columns.Length >= 2)
-                        {
-                            bezier.Data.Bindings = bezier.Data.Bindings.Add(Binding.Create("Point1.X", record.Columns[0].Name, bezier.Data));
-                            bezier.Data.Bindings = bezier.Data.Bindings.Add(Binding.Create("Point1.Y", record.Columns[1].Name, bezier.Data));
-                        }
-
-                        if (record.Columns.Length >= 4)
-                        {
-                            bezier.Data.Bindings = bezier.Data.Bindings.Add(Binding.Create("Point2.X", record.Columns[2].Name, bezier.Data));
-                            bezier.Data.Bindings = bezier.Data.Bindings.Add(Binding.Create("Point2.Y", record.Columns[3].Name, bezier.Data));
-                        }
-
-                        if (record.Columns.Length >= 6)
-                        {
-                            bezier.Data.Bindings = bezier.Data.Bindings.Add(Binding.Create("Point3.X", record.Columns[4].Name, bezier.Data));
-                            bezier.Data.Bindings = bezier.Data.Bindings.Add(Binding.Create("Point3.Y", record.Columns[5].Name, bezier.Data));
-                        }
-
-                        if (record.Columns.Length >= 8)
-                        {
-                            bezier.Data.Bindings = bezier.Data.Bindings.Add(Binding.Create("Point4.X", record.Columns[6].Name, bezier.Data));
-                            bezier.Data.Bindings = bezier.Data.Bindings.Add(Binding.Create("Point4.Y", record.Columns[7].Name, bezier.Data));
-                        }
-
-                        _editor.AddShape(bezier);
-                    }
-                    break;
-                case Tool.QBezier:
-                    {
-                        var qbezier = XQBezier.Create(
-                            x, y,
-                            _editor.Project.CurrentStyleLibrary.CurrentStyle,
-                            _editor.Project.Options.PointShape);
-                        qbezier.Data.Record = record;
-
-                        if (record.Columns.Length >= 2)
-                        {
-                            qbezier.Data.Bindings = qbezier.Data.Bindings.Add(Binding.Create("Point1.X", record.Columns[0].Name, qbezier.Data));
-                            qbezier.Data.Bindings = qbezier.Data.Bindings.Add(Binding.Create("Point1.Y", record.Columns[1].Name, qbezier.Data));
-                        }
-
-                        if (record.Columns.Length >= 4)
-                        {
-                            qbezier.Data.Bindings = qbezier.Data.Bindings.Add(Binding.Create("Point2.X", record.Columns[2].Name, qbezier.Data));
-                            qbezier.Data.Bindings = qbezier.Data.Bindings.Add(Binding.Create("Point2.Y", record.Columns[3].Name, qbezier.Data));
-                        }
-
-                        if (record.Columns.Length >= 6)
-                        {
-                            qbezier.Data.Bindings = qbezier.Data.Bindings.Add(Binding.Create("Point3.X", record.Columns[4].Name, qbezier.Data));
-                            qbezier.Data.Bindings = qbezier.Data.Bindings.Add(Binding.Create("Point3.Y", record.Columns[5].Name, qbezier.Data));
-                        }
-
-                        _editor.AddShape(qbezier);
-                    }
-                    break;
-                case Tool.Text:
-                    {
-                        var text = XText.Create(
-                            x, y,
-                            _editor.Project.CurrentStyleLibrary.CurrentStyle,
-                            _editor.Project.Options.PointShape,
-                            "Text");
-                        text.Data.Record = record;
-
-                        if (record.Columns.Length >= 2)
-                        {
-                            text.Data.Bindings = text.Data.Bindings.Add(Binding.Create("TopLeft.X", record.Columns[0].Name, text.Data));
-                            text.Data.Bindings = text.Data.Bindings.Add(Binding.Create("TopLeft.Y", record.Columns[1].Name, text.Data));
-                        }
-
-                        if (record.Columns.Length >= 4)
-                        {
-                            text.Data.Bindings = text.Data.Bindings.Add(Binding.Create("BottomRight.X", record.Columns[2].Name, text.Data));
-                            text.Data.Bindings = text.Data.Bindings.Add(Binding.Create("BottomRight.Y", record.Columns[3].Name, text.Data));
-                        }
-
-                        _editor.AddShape(text);
-                    }
-                    break;
-            }
-        }
-
+        
         /// <summary>
         /// Drop <see cref="Record"/> object in current container at specified location as group bound to this record.
         /// </summary>
@@ -2792,13 +2563,16 @@ namespace Core2D
                 var column = record.Columns[i];
                 if (column.IsVisible)
                 {
+                    var binding = "{" + record.Columns[i].Name + "}";
+
                     var text = XText.Create(
                         px, py,
-                        px + width, py + height,
+                        px + width, 
+                        py + height,
                         _editor.Project.CurrentStyleLibrary.CurrentStyle,
-                        _editor.Project.Options.PointShape, "");
-                    var binding = Binding.Create("Text", record.Columns[i].Name, text.Data);
-                    text.Data.Bindings = text.Data.Bindings.Add(binding);
+                        _editor.Project.Options.PointShape, 
+                        binding);
+
                     g.AddShape(text);
 
                     py += height;

@@ -82,12 +82,6 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Binds shape properties to <see cref="Core2D.Record"/> data.
-        /// </summary>
-        /// <param name="r">The external data record used for binding.</param>
-        public abstract void Bind(Record r);
-
-        /// <summary>
         /// Draws shape using current <see cref="IRenderer"/>.
         /// </summary>
         /// <param name="dc">The generic drawing context object</param>

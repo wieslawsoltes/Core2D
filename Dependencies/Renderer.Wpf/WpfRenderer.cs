@@ -455,11 +455,6 @@ namespace Dependencies
 
             foreach (var shape in layer.Shapes)
             {
-                shape.Bind(r);
-            }
-
-            foreach (var shape in layer.Shapes)
-            {
                 if (shape.State.Flags.HasFlag(_state.DrawShapeState.Flags))
                 {
                     shape.Draw(_dc, this, 0, 0, db, r);
@@ -965,7 +960,7 @@ namespace Dependencies
             if (style == null)
                 return;
 
-            var tbind = text.BindToTextProperty(db, r);
+            var tbind = text.BindText(db, r);
             if (string.IsNullOrEmpty(tbind))
                 return;
 

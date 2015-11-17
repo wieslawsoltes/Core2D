@@ -410,16 +410,6 @@ namespace Core2D
         public static ICommand ApplyRecordCommand { get; set; }
 
         /// <summary>
-        /// Add binding.
-        /// </summary>
-        public static ICommand AddBindingCommand { get; set; }
-
-        /// <summary>
-        /// Remove binding.
-        /// </summary>
-        public static ICommand RemoveBindingCommand { get; set; }
-
-        /// <summary>
         /// Add property.
         /// </summary>
         public static ICommand AddPropertyCommand { get; set; }
@@ -825,16 +815,6 @@ namespace Core2D
                     (item) => context.OnApplyRecord(item),
                     (item) => context.IsEditMode());
 
-            AddBindingCommand =
-                Command<object>.Create(
-                    (owner) => context.Editor.AddBinding(owner),
-                    (owner) => context.IsEditMode());
-
-            RemoveBindingCommand =
-                Command<object>.Create(
-                    (parameter) => context.Editor.RemoveBinding(parameter),
-                    (parameter) => context.IsEditMode());
-
             AddPropertyCommand =
                 Command<object>.Create(
                     (owner) => context.Editor.AddProperty(owner),
@@ -1068,9 +1048,6 @@ namespace Core2D
             (RemoveRecordCommand as Command).NotifyCanExecuteChanged();
             (ResetRecordCommand as Command<object>).NotifyCanExecuteChanged();
             (ApplyRecordCommand as Command<object>).NotifyCanExecuteChanged();
-
-            (AddBindingCommand as Command<object>).NotifyCanExecuteChanged();
-            (RemoveBindingCommand as Command<object>).NotifyCanExecuteChanged();
 
             (AddPropertyCommand as Command<object>).NotifyCanExecuteChanged();
             (RemovePropertyCommand as Command<object>).NotifyCanExecuteChanged();

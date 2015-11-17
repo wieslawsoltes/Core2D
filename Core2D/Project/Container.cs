@@ -227,7 +227,6 @@ namespace Core2D
                 Name = name,
                 Data = new Data()
                 {
-                    Bindings = ImmutableArray.Create<Binding>(),
                     Properties = ImmutableArray.Create<Property>()
                 },
                 Layers = ImmutableArray.Create<Layer>(),

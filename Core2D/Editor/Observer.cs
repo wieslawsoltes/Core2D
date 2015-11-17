@@ -421,18 +421,6 @@ namespace Core2D
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void BindingObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            Verbose("Property: " + sender.GetType() + ", Property: " + e.PropertyName);
-            _invalidateShapes();
-            MarkAsDirty();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void PropertyObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             Verbose("Property: " + sender.GetType() + ", Property: " + e.PropertyName);
@@ -448,13 +436,6 @@ namespace Core2D
         private void DataObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             Verbose("Data: " + sender.GetType() + ", Property: " + e.PropertyName);
-
-            if (e.PropertyName == "Bindings")
-            {
-                var data = sender as Data;
-                Remove(data.Bindings);
-                Add(data.Bindings);
-            }
 
             if (e.PropertyName == "Properties")
             {
@@ -944,11 +925,6 @@ namespace Core2D
 
             if (shape.Data != null)
             {
-                if (shape.Data.Bindings != null)
-                {
-                    Add(shape.Data.Bindings);
-                }
-
                 if (shape.Data.Properties != null)
                 {
                     Add(shape.Data.Properties);
@@ -1145,11 +1121,6 @@ namespace Core2D
 
             if (shape.Data != null)
             {
-                if (shape.Data.Bindings != null)
-                {
-                    Remove(shape.Data.Bindings);
-                }
-
                 if (shape.Data.Properties != null)
                 {
                     Remove(shape.Data.Properties);
@@ -1556,32 +1527,6 @@ namespace Core2D
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="binding"></param>
-        public void Add(Binding binding)
-        {
-            if (binding == null)
-                return;
-
-            binding.PropertyChanged += BindingObserver;
-            Verbose("Add Binding: " + binding.Property + ", path: " + binding.Path);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="binding"></param>
-        public void Remove(Binding binding)
-        {
-            if (binding == null)
-                return;
-
-            binding.PropertyChanged += BindingObserver;
-            Verbose("Remove Binding: " + binding.Property + ", path: " + binding.Path);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         /// <param name="property"></param>
         public void Add(Property property)
         {
@@ -1933,37 +1878,7 @@ namespace Core2D
             {
                 Remove(g);
             }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="bindings"></param>
-        public void Add(IEnumerable<Binding> bindings)
-        {
-            if (bindings == null)
-                return;
-
-            foreach (var binding in bindings)
-            {
-                Add(binding);
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="bindings"></param>
-        public void Remove(IEnumerable<Binding> bindings)
-        {
-            if (bindings == null)
-                return;
-
-            foreach (var binding in bindings)
-            {
-                Remove(binding);
-            }
-        }
+        }      
 
         /// <summary>
         /// 

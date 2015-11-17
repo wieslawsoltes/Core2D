@@ -43,91 +43,6 @@ namespace Core2D
             set { Update(ref _y, value); }
         }
 
-        /// <summary>
-        /// Try binding data record to one of <see cref="XPoint"/> shape properties.
-        /// </summary>
-        /// <param name="binding">The binding object used for binding.</param>
-        /// <param name="r">The external data record used for binding.</param>
-        /// <param name="value">The output double value bound to data record.</param>
-        private static void BindToDouble(Binding binding, Record r, ref double value)
-        {
-            var columns = r.Columns;
-            for (int i = 0; i < columns.Length; i++)
-            {
-                if (columns[i].Name != binding.Path)
-                    continue;
-
-                double result;
-                bool success = double.TryParse(
-                    r.Values[i].Content,
-                    NumberStyles.Any, CultureInfo.InvariantCulture,
-                    out result);
-                if (success)
-                {
-                    value = result;
-                    break;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Try binding data record to one of <see cref="XPoint"/> shape properties.
-        /// </summary>
-        /// <param name="bindings">The bindings database used for binding.</param>
-        /// <param name="r">The external data record used for binding.</param>
-        /// <param name="propertyNameX">The target X property name.</param>
-        /// <param name="propertyNameY">The target Y property name.</param>
-        private void TryToBind(
-            ImmutableArray<Binding> bindings,
-            Record r,
-            string propertyNameX,
-            string propertyNameY)
-        {
-            if (r == null || bindings == null || bindings.Length <= 0)
-                return;
-
-            if (r.Columns == null || r.Values == null || r.Columns.Length != r.Values.Length)
-                return;
-
-            foreach (var binding in bindings)
-            {
-                if (string.IsNullOrEmpty(binding.Property) || string.IsNullOrEmpty(binding.Path))
-                    continue;
-
-                if (binding.Property == propertyNameX)
-                {
-                    BindToDouble(binding, r, ref _x);
-                }
-                else if (binding.Property == propertyNameY)
-                {
-                    BindToDouble(binding, r, ref _y);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Try binding data record to <see cref="XPoint"/> shape property.
-        /// </summary>
-        /// <param name="propertyName">The target property name.</param>
-        /// <param name="bindings">The bindings database used for binding.</param>
-        /// <param name="record">The external data record used for binding.</param>
-        public void TryToBind(string propertyName, ImmutableArray<Binding> bindings, Record record)
-        {
-            string propertyNameX = propertyName + ".X";
-            string propertyNameY = propertyName + ".Y";
-            TryToBind(bindings, record, propertyNameX, propertyNameY);
-        }
-
-        /// <inheritdoc/>
-        public override void Bind(Record r)
-        {
-            var record = r ?? this.Data.Record;
-            var bindings = this.Data.Bindings;
-            string propertyNameX = "X";
-            string propertyNameY = "Y";
-            TryToBind(bindings, record, propertyNameX, propertyNameY);
-        }
-
         /// <inheritdoc/>
         public override void Draw(object dc, IRenderer renderer, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
@@ -169,7 +84,6 @@ namespace Core2D
                 Style = default(ShapeStyle),
                 Data = new Data()
                 {
-                    Bindings = ImmutableArray.Create<Binding>(),
                     Properties = ImmutableArray.Create<Property>()
                 },
                 X = x,

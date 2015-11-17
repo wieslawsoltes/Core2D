@@ -564,43 +564,6 @@
         </DataTemplate>
         <DataTemplate DataType="core:Data">
             <TabControl Classes="default">
-                <TabItem Header="Record" Classes="property">
-                    <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
-                        <Menu Grid.Row="0" HorizontalAlignment="Right" IsVisible="{Binding Path=Record, Converter={Static converters:IsNotNullConverter.Instance}}">
-                            <MenuItem Header="X" Command="{Static core:Commands.ResetRecordCommand}" CommandParameter="{Binding}"/>
-                        </Menu>
-                        <ContentControl Content="{Binding Path=Record, Mode=TwoWay}" Grid.Row="1"/>
-                    </Grid>
-                </TabItem>
-                <TabItem Header="Bindings" Classes="property">
-                    <Grid RowDefinitions="Auto,Auto,*" ColumnDefinitions="50*,Auto,50*">
-                        <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Right">
-                            <MenuItem Header="+" Command="{Static core:Commands.AddBindingCommand}" CommandParameter="{Binding}"/>
-                        </Menu>
-                        <GridSplitter Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Width="10"/>
-                        <TextBlock Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" Text="Property" Classes="default"/>
-                        <TextBlock Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" Text="Path" Classes="default"/>
-                        <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="2" Items="{Binding Path=Bindings}">
-                            <ItemsControl.DataTemplates>
-                                <DataTemplate DataType="core:Binding">
-                                    <Grid VerticalAlignment="Top">
-                                        <TextBox VerticalAlignment="Center" Text="{Binding Path=Property, Mode=TwoWay}" Classes="default"/>
-                                    </Grid>
-                                </DataTemplate>
-                            </ItemsControl.DataTemplates>
-                        </ItemsControl>
-                        <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="2" Items="{Binding Path=Bindings}">
-                            <ItemsControl.DataTemplates>
-                                <DataTemplate DataType="core:Binding">
-                                    <Grid VerticalAlignment="Top" ColumnDefinitions="*,30">
-                                        <TextBox VerticalAlignment="Center" Text="{Binding Path=Path, Mode=TwoWay}" Classes="default" Grid.Column="0"/>
-                                        <Button VerticalAlignment="Center" Content="-" Classes="default" Grid.Column="1" Command="{Static core:Commands.RemoveBindingCommand}" CommandParameter="{Binding}"/>
-                                    </Grid>
-                                </DataTemplate>
-                            </ItemsControl.DataTemplates>
-                        </ItemsControl>
-                    </Grid>
-                </TabItem>
                 <TabItem Header="Properties" Classes="property">
                     <Grid RowDefinitions="Auto,Auto,*" ColumnDefinitions="50*,Auto,50*">
                         <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Right">
@@ -628,6 +591,14 @@
                                 </DataTemplate>
                             </ItemsControl.DataTemplates>
                         </ItemsControl>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Record" Classes="property">
+                    <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
+                        <Menu Grid.Row="0" HorizontalAlignment="Right" IsVisible="{Binding Path=Record, Converter={Static converters:IsNotNullConverter.Instance}}">
+                            <MenuItem Header="X" Command="{Static core:Commands.ResetRecordCommand}" CommandParameter="{Binding}"/>
+                        </Menu>
+                        <ContentControl Content="{Binding Path=Record, Mode=TwoWay}" Grid.Row="1"/>
                     </Grid>
                 </TabItem>
             </TabControl>

@@ -95,12 +95,6 @@ namespace Core2D
 
             return builder.ToImmutable();
         }
-        
-        /// <inheritdoc/>
-        public override void Bind(Record r)
-        {
-            // TODO: Implement Bind() method.
-        }
 
         /// <inheritdoc/>
         public override void Draw(object dc, IRenderer renderer, double dx, double dy, ImmutableArray<Property> db, Record r)
@@ -182,7 +176,6 @@ namespace Core2D
                 IsFilled = isFilled,
                 Data = new Data()
                 {
-                    Bindings = ImmutableArray.Create<Binding>(),
                     Properties = ImmutableArray.Create<Property>()
                 },
                 Geometry = geometry

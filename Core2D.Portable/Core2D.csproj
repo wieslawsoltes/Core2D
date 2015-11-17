@@ -42,9 +42,6 @@
     <Compile Include="..\Core2D\Core\ObservableObject.cs">
       <Link>Core\ObservableObject.cs</Link>
     </Compile>
-    <Compile Include="..\Core2D\Data\Binding.cs">
-      <Link>Data\Binding.cs</Link>
-    </Compile>
     <Compile Include="..\Core2D\Data\Column.cs">
       <Link>Data\Column.cs</Link>
     </Compile>
