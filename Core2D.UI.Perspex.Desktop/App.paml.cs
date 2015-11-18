@@ -804,12 +804,12 @@ namespace Core2D.UI.Perspex.Desktop
                         case ExportType.Styles:
                             name = "Styles";
                             ext = "styles";
-                            initial = (item as StyleLibrary).Name;
+                            initial = (item as Library<ShapeStyle>).Name;
                             break;
                         case ExportType.StyleLibrary:
                             name = "StyleLibrary";
                             ext = "stylelibrary";
-                            initial = (item as StyleLibrary).Name;
+                            initial = (item as Library<ShapeStyle>).Name;
                             break;
                         case ExportType.StyleLibraries:
                             name = "StyleLibraries";
@@ -824,12 +824,12 @@ namespace Core2D.UI.Perspex.Desktop
                         case ExportType.Groups:
                             name = "Groups";
                             ext = "groups";
-                            initial = (item as GroupLibrary).Name;
+                            initial = (item as Library<XGroup>).Name;
                             break;
                         case ExportType.GroupLibrary:
                             name = "GroupLibrary";
                             ext = "grouplibrary";
-                            initial = (item as GroupLibrary).Name;
+                            initial = (item as Library<XGroup>).Name;
                             break;
                         case ExportType.GroupLibraries:
                             name = "GroupLibraries";

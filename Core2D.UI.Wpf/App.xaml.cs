@@ -690,11 +690,11 @@ namespace Core2D.UI.Wpf
                     break;
                 case ExportType.Styles:
                     filter = "Styles (*.styles)|*.styles|All (*.*)|*.*";
-                    name = (item as StyleLibrary).Name;
+                    name = (item as Library<ShapeStyle>).Name;
                     break;
                 case ExportType.StyleLibrary:
                     filter = "StyleLibrary (*.stylelibrary)|*.stylelibrary|All (*.*)|*.*";
-                    name = (item as StyleLibrary).Name;
+                    name = (item as Library<ShapeStyle>).Name;
                     break;
                 case ExportType.StyleLibraries:
                     filter = "StyleLibraries (*.stylelibraries)|*.stylelibraries|All (*.*)|*.*";
@@ -706,11 +706,11 @@ namespace Core2D.UI.Wpf
                     break;
                 case ExportType.Groups:
                     filter = "Groups (*.groups)|*.groups|All (*.*)|*.*";
-                    name = (item as GroupLibrary).Name;
+                    name = (item as Library<XGroup>).Name;
                     break;
                 case ExportType.GroupLibrary:
                     filter = "GroupLibrary (*.grouplibrary)|*.grouplibrary|All (*.*)|*.*";
-                    name = (item as GroupLibrary).Name;
+                    name = (item as Library<XGroup>).Name;
                     break;
                 case ExportType.GroupLibraries:
                     filter = "GroupLibraries (*.grouplibraries)|*.grouplibraries|All (*.*)|*.*";
