@@ -45,14 +45,14 @@ namespace Core2D.UI.Wpf.Controls
 
             if (editor.EnableHistory)
             {
-                var previous = gl.Groups;
+                var previous = gl.Items;
                 var next = array;
-                editor.History.Snapshot(previous, next, (p) => gl.Groups = p);
-                gl.Groups = next;
+                editor.History.Snapshot(previous, next, (p) => gl.Items = p);
+                gl.Items = next;
             }
             else
             {
-                gl.Groups = array;
+                gl.Items = array;
             }
         }
     }

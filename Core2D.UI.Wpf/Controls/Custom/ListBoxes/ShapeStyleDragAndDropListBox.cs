@@ -45,14 +45,14 @@ namespace Core2D.UI.Wpf.Controls
 
             if (editor.EnableHistory)
             {
-                var previous = sg.Styles;
+                var previous = sg.Items;
                 var next = array;
-                editor.History.Snapshot(previous, next, (p) => sg.Styles = p);
-                sg.Styles = next;
+                editor.History.Snapshot(previous, next, (p) => sg.Items = p);
+                sg.Items = next;
             }
             else
             {
-                sg.Styles = array;
+                sg.Items = array;
             }
         }
     }
