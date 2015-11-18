@@ -203,6 +203,16 @@ namespace Core2D
 
             project.Selected = document.Containers.FirstOrDefault();
 
+            // Databases
+            var db = Database.Create("Db");
+            var columnsBuilder = db.Columns.ToBuilder();
+            columnsBuilder.Add(Column.Create("Column0", db));
+            columnsBuilder.Add(Column.Create("Column1", db));
+            db.Columns = columnsBuilder.ToImmutable();
+            project.Databases = project.Databases.Add(db);
+
+            project.CurrentDatabase = db;
+            
             return project;
         }
     }
