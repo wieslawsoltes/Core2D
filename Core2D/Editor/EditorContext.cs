@@ -206,7 +206,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// Performs freeing, releasing, or resetting unmanaged resources.
         /// </summary>
         public void Dispose()
         {
@@ -215,7 +215,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// Performs freeing, releasing, or resetting unmanaged resources.
         /// </summary>
         ~EditorContext()
         {
@@ -223,7 +223,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// Performs freeing, releasing, or resetting unmanaged resources.
         /// </summary>
         /// <param name="disposing">The flag indicating whether disposing.</param>
         protected virtual void Dispose(bool disposing)
@@ -1422,30 +1422,30 @@ namespace Core2D
                 {
                     case ImportType.Style:
                         {
-                            var sg = item as StyleLibrary;
-                            var json = Utf8TextFile.Read(path);
+                            var sg = item as Library<ShapeStyle>;
+                            var json = Project.ReadUtf8Text(path);
                             var import = _serializer.Deserialize<ShapeStyle>(json);
 
                             if (_editor.EnableHistory)
                             {
-                                var previous = sg.Styles;
-                                var next = sg.Styles.Add(import);
-                                _editor.History.Snapshot(previous, next, (p) => sg.Styles = p);
-                                sg.Styles = next;
+                                var previous = sg.Items;
+                                var next = sg.Items.Add(import);
+                                _editor.History.Snapshot(previous, next, (p) => sg.Items = p);
+                                sg.Items = next;
                             }
                             else
                             {
-                                sg.Styles = sg.Styles.Add(import);
+                                sg.Items = sg.Items.Add(import);
                             }
                         }
                         break;
                     case ImportType.Styles:
                         {
-                            var sg = item as StyleLibrary;
-                            var json = Utf8TextFile.Read(path);
+                            var sg = item as Library<ShapeStyle>;
+                            var json = Project.ReadUtf8Text(path);
                             var import = _serializer.Deserialize<IList<ShapeStyle>>(json);
 
-                            var builder = sg.Styles.ToBuilder();
+                            var builder = sg.Items.ToBuilder();
                             foreach (var style in import)
                             {
                                 builder.Add(style);
@@ -1453,22 +1453,22 @@ namespace Core2D
 
                             if (_editor.EnableHistory)
                             {
-                                var previous = sg.Styles;
+                                var previous = sg.Items;
                                 var next = builder.ToImmutable();
-                                _editor.History.Snapshot(previous, next, (p) => sg.Styles = p);
-                                sg.Styles = next;
+                                _editor.History.Snapshot(previous, next, (p) => sg.Items = p);
+                                sg.Items = next;
                             }
                             else
                             {
-                                sg.Styles = builder.ToImmutable();
+                                sg.Items = builder.ToImmutable();
                             }
                         }
                         break;
                     case ImportType.StyleLibrary:
                         {
                             var project = item as Project;
-                            var json = Utf8TextFile.Read(path);
-                            var import = _serializer.Deserialize<StyleLibrary>(json);
+                            var json = Project.ReadUtf8Text(path);
+                            var import = _serializer.Deserialize<Library<ShapeStyle>>(json);
 
                             if (_editor.EnableHistory)
                             {
@@ -1486,8 +1486,8 @@ namespace Core2D
                     case ImportType.StyleLibraries:
                         {
                             var project = item as Project;
-                            var json = Utf8TextFile.Read(path);
-                            var import = _serializer.Deserialize<IList<StyleLibrary>>(json);
+                            var json = Project.ReadUtf8Text(path);
+                            var import = _serializer.Deserialize<IList<Library<ShapeStyle>>>(json);
 
                             var builder = project.StyleLibraries.ToBuilder();
                             foreach (var sg in import)
@@ -1510,8 +1510,8 @@ namespace Core2D
                         break;
                     case ImportType.Group:
                         {
-                            var gl = item as GroupLibrary;
-                            var json = Utf8TextFile.Read(path);
+                            var gl = item as Library<XGroup>;
+                            var json = Project.ReadUtf8Text(path);
                             var import = _serializer.Deserialize<XGroup>(json);
 
                             var shapes = Enumerable.Repeat(import as XGroup, 1);
@@ -1520,28 +1520,28 @@ namespace Core2D
 
                             if (_editor.EnableHistory)
                             {
-                                var previous = gl.Groups;
-                                var next = gl.Groups.Add(import);
-                                _editor.History.Snapshot(previous, next, (p) => gl.Groups = p);
-                                gl.Groups = next;
+                                var previous = gl.Items;
+                                var next = gl.Items.Add(import);
+                                _editor.History.Snapshot(previous, next, (p) => gl.Items = p);
+                                gl.Items = next;
                             }
                             else
                             {
-                                gl.Groups = gl.Groups.Add(import);
+                                gl.Items = gl.Items.Add(import);
                             }
                         }
                         break;
                     case ImportType.Groups:
                         {
-                            var gl = item as GroupLibrary;
-                            var json = Utf8TextFile.Read(path);
+                            var gl = item as Library<XGroup>;
+                            var json = Project.ReadUtf8Text(path);
                             var import = _serializer.Deserialize<IList<XGroup>>(json);
 
                             var shapes = import;
                             TryToRestoreStyles(shapes);
                             TryToRestoreRecords(shapes);
 
-                            var builder = gl.Groups.ToBuilder();
+                            var builder = gl.Items.ToBuilder();
                             foreach (var group in import)
                             {
                                 builder.Add(group);
@@ -1549,24 +1549,24 @@ namespace Core2D
 
                             if (_editor.EnableHistory)
                             {
-                                var previous = gl.Groups;
+                                var previous = gl.Items;
                                 var next = builder.ToImmutable();
-                                _editor.History.Snapshot(previous, next, (p) => gl.Groups = p);
-                                gl.Groups = next;
+                                _editor.History.Snapshot(previous, next, (p) => gl.Items = p);
+                                gl.Items = next;
                             }
                             else
                             {
-                                gl.Groups = builder.ToImmutable();
+                                gl.Items = builder.ToImmutable();
                             }
                         }
                         break;
                     case ImportType.GroupLibrary:
                         {
                             var project = item as Project;
-                            var json = Utf8TextFile.Read(path);
-                            var import = _serializer.Deserialize<GroupLibrary>(json);
+                            var json = Project.ReadUtf8Text(path);
+                            var import = _serializer.Deserialize<Library<XGroup>>(json);
 
-                            var shapes = import.Groups;
+                            var shapes = import.Items;
                             TryToRestoreStyles(shapes);
                             TryToRestoreRecords(shapes);
 
@@ -1586,10 +1586,10 @@ namespace Core2D
                     case ImportType.GroupLibraries:
                         {
                             var project = item as Project;
-                            var json = Utf8TextFile.Read(path);
-                            var import = _serializer.Deserialize<IList<GroupLibrary>>(json);
+                            var json = Project.ReadUtf8Text(path);
+                            var import = _serializer.Deserialize<IList<Library<XGroup>>>(json);
 
-                            var shapes = import.SelectMany(x => x.Groups);
+                            var shapes = import.SelectMany(x => x.Items);
                             TryToRestoreStyles(shapes);
                             TryToRestoreRecords(shapes);
 
@@ -1615,7 +1615,7 @@ namespace Core2D
                     case ImportType.Template:
                         {
                             var project = item as Project;
-                            var json = Utf8TextFile.Read(path);
+                            var json = Project.ReadUtf8Text(path);
                             var import = _serializer.Deserialize<Container>(json);
 
                             var shapes = import.Layers.SelectMany(x => x.Shapes);
@@ -1638,7 +1638,7 @@ namespace Core2D
                     case ImportType.Templates:
                         {
                             var project = item as Project;
-                            var json = Utf8TextFile.Read(path);
+                            var json = Project.ReadUtf8Text(path);
                             var import = _serializer.Deserialize<IList<Container>>(json);
 
                             var shapes = import.SelectMany(x => x.Layers).SelectMany(x => x.Shapes);
@@ -1696,61 +1696,61 @@ namespace Core2D
                     case ExportType.Style:
                         {
                             var json = _serializer.Serialize(item as ShapeStyle);
-                            Utf8TextFile.Write(path, json);
+                            Project.WriteUtf8Text(path, json);
                         }
                         break;
                     case ExportType.Styles:
                         {
-                            var json = _serializer.Serialize((item as StyleLibrary).Styles);
-                            Utf8TextFile.Write(path, json);
+                            var json = _serializer.Serialize((item as Library<ShapeStyle>).Items);
+                            Project.WriteUtf8Text(path, json);
                         }
                         break;
                     case ExportType.StyleLibrary:
                         {
-                            var json = _serializer.Serialize((item as StyleLibrary));
-                            Utf8TextFile.Write(path, json);
+                            var json = _serializer.Serialize((item as Library<ShapeStyle>));
+                            Project.WriteUtf8Text(path, json);
                         }
                         break;
                     case ExportType.StyleLibraries:
                         {
                             var json = _serializer.Serialize((item as Project).StyleLibraries);
-                            Utf8TextFile.Write(path, json);
+                            Project.WriteUtf8Text(path, json);
                         }
                         break;
                     case ExportType.Group:
                         {
                             var json = _serializer.Serialize(item as XGroup);
-                            Utf8TextFile.Write(path, json);
+                            Project.WriteUtf8Text(path, json);
                         }
                         break;
                     case ExportType.Groups:
                         {
-                            var json = _serializer.Serialize((item as GroupLibrary).Groups);
-                            Utf8TextFile.Write(path, json);
+                            var json = _serializer.Serialize((item as Library<XGroup>).Items);
+                            Project.WriteUtf8Text(path, json);
                         }
                         break;
                     case ExportType.GroupLibrary:
                         {
-                            var json = _serializer.Serialize(item as GroupLibrary);
-                            Utf8TextFile.Write(path, json);
+                            var json = _serializer.Serialize(item as Library<XGroup>);
+                            Project.WriteUtf8Text(path, json);
                         }
                         break;
                     case ExportType.GroupLibraries:
                         {
                             var json = _serializer.Serialize((item as Project).GroupLibraries);
-                            Utf8TextFile.Write(path, json);
+                            Project.WriteUtf8Text(path, json);
                         }
                         break;
                     case ExportType.Template:
                         {
                             var json = _serializer.Serialize(item as Container);
-                            Utf8TextFile.Write(path, json);
+                            Project.WriteUtf8Text(path, json);
                         }
                         break;
                     case ExportType.Templates:
                         {
                             var json = _serializer.Serialize((item as Project).Templates);
-                            Utf8TextFile.Write(path, json);
+                            Project.WriteUtf8Text(path, json);
                         }
                         break;
                 }
@@ -1885,7 +1885,7 @@ namespace Core2D
 
             try
             {
-                var json = Utf8TextFile.Read(path);
+                var json = Project.ReadUtf8Text(path);
                 var recent = _serializer.Deserialize<Recent>(json);
 
                 if (recent != null)
@@ -1936,7 +1936,7 @@ namespace Core2D
             {
                 var recent = Recent.Create(_recentProjects, _currentRecentProject);
                 var json = _serializer.Serialize(recent);
-                Utf8TextFile.Write(path, json);
+                Project.WriteUtf8Text(path, json);
             }
             catch (Exception ex)
             {
@@ -2052,8 +2052,8 @@ namespace Core2D
                     return;
 
                 var styles = _editor.Project.StyleLibraries
-                    .Where(sg => sg.Styles != null && sg.Styles.Length > 0)
-                    .SelectMany(sg => sg.Styles)
+                    .Where(sg => sg.Items != null && sg.Items.Length > 0)
+                    .SelectMany(sg => sg.Items)
                     .Distinct(new StyleComparer())
                     .ToDictionary(s => s.Name);
 
@@ -2080,18 +2080,18 @@ namespace Core2D
                         // Create Imported style library.
                         if (_editor.Project.CurrentStyleLibrary == null)
                         {
-                            var sg = StyleLibrary.Create(Constants.ImportedStyleLibraryName);
+                            var sg = Library<ShapeStyle>.Create(Constants.ImportedStyleLibraryName);
                             _editor.Project.StyleLibraries = _editor.Project.StyleLibraries.Add(sg);
                             _editor.Project.CurrentStyleLibrary = sg;
                         }
 
                         // Add missing style.
-                        _editor.Project.CurrentStyleLibrary.Styles = _editor.Project.CurrentStyleLibrary.Styles.Add(shape.Style);
+                        _editor.Project.CurrentStyleLibrary.Items = _editor.Project.CurrentStyleLibrary.Items.Add(shape.Style);
 
                         // Recreate styles dictionary.
                         styles = _editor.Project.StyleLibraries
-                            .Where(sg => sg.Styles != null && sg.Styles.Length > 0)
-                            .SelectMany(sg => sg.Styles)
+                            .Where(sg => sg.Items != null && sg.Items.Length > 0)
+                            .SelectMany(sg => sg.Items)
                             .Distinct(new StyleComparer())
                             .ToDictionary(s => s.Name);
                     }
@@ -2569,7 +2569,7 @@ namespace Core2D
                         px, py,
                         px + width, 
                         py + height,
-                        _editor.Project.CurrentStyleLibrary.CurrentStyle,
+                        _editor.Project.CurrentStyleLibrary.Selected,
                         _editor.Project.Options.PointShape, 
                         binding);
 
@@ -2582,7 +2582,7 @@ namespace Core2D
             var rectangle = XRectangle.Create(
                 sx, sy,
                 sx + width, sy + (double)length * height,
-                _editor.Project.CurrentStyleLibrary.CurrentStyle,
+                _editor.Project.CurrentStyleLibrary.Selected,
                 _editor.Project.Options.PointShape);
             g.AddShape(rectangle);
 
