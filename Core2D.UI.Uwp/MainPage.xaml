@@ -104,15 +104,15 @@
                                 Grid.Row="0"
                                 HorizontalAlignment="Stretch">
                                 <ComboBox.ItemTemplate>
-                                    <DataTemplate x:DataType="core:StyleLibrary">
+                                    <DataTemplate>
                                         <TextBlock Text="{Binding Name}"/>
                                     </DataTemplate>
                                 </ComboBox.ItemTemplate>
                             </ComboBox>
                             <ListBox 
                                 x:Name="StylesListBox"
-                                ItemsSource="{Binding Editor.Project.CurrentStyleLibrary.Styles, Mode=TwoWay}" 
-                                SelectedItem="{Binding Editor.Project.CurrentStyleLibrary.CurrentStyle, Mode=TwoWay}" 
+                                ItemsSource="{Binding Editor.Project.CurrentStyleLibrary.Items, Mode=TwoWay}" 
+                                SelectedItem="{Binding Editor.Project.CurrentStyleLibrary.Selected, Mode=TwoWay}" 
                                 Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
                                 Grid.Row="1">
                                 <ListBox.ItemTemplate>
