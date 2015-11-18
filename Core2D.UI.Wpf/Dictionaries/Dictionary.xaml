@@ -108,7 +108,7 @@
         <Separator/>
         <MenuItem Header="E_xport" InputGestureText="Ctrl+E" Command="{x:Static core:Commands.ExportCommand}" CommandParameter="{Binding}"/>
     </ContextMenu>
-    <!-- styles -->
+    <!-- styles --> 
     <Style x:Key="TextBlockLeftStyleKey" TargetType="TextBlock">
         <Setter Property="Margin" Value="5,2,5,2"/>
         <Setter Property="TextAlignment" Value="Left"/>
@@ -485,6 +485,7 @@
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="60"/>
@@ -492,66 +493,80 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Name" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
                 <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" BorderBrush="{x:Null}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="0" Grid.Column="1"/>
+                <TabControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+                    <TabItem Header="Columns">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Control Template="{StaticResource ColumnsMenuControlTemplateKey}" Grid.Row="0" Margin="2,0,2,0"/>
+                            <Grid Height="Auto" VerticalAlignment="Top" Grid.Row="1">
+                                <Grid.Style>
+                                    <Style TargetType="Grid">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Columns.Length, FallbackValue=0}" Value="0">
+                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Grid.Style>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="30"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Column="0" Grid.Row="0" Margin="5,2,5,2" VerticalAlignment="Center" Text="Name"/>
+                            </Grid>
+                            <ItemsControl x:Name="columnsItemsControls" VerticalContentAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="2" ItemsSource="{Binding Columns, UpdateSourceTrigger=PropertyChanged}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Height="Auto" VerticalAlignment="Top">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="30"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                                <RowDefinition Height="*"/>
+                                            </Grid.RowDefinitions>
+                                            <TextBox Grid.Column="0" Grid.Row="0" Margin="5,2,5,2" VerticalAlignment="Center" Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                            <Button Grid.Column="1" Grid.Row="0" Margin="5,2,5,2" VerticalAlignment="Center" Content="-" Command="{x:Static core:Commands.RemoveColumnCommand}" CommandParameter="{Binding}"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="Current Record">
+                        <ContentControl Content="{Binding CurrentRecord}"/>
+                    </TabItem>
+                </TabControl>
             </Grid>
-            <Expander Header="Columns" IsExpanded="True">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Control Template="{StaticResource ColumnsMenuControlTemplateKey}" Grid.Row="0" Margin="2,0,2,0"/>
-                    <Grid Height="Auto" VerticalAlignment="Top" Grid.Row="1">
-                        <Grid.Style>
-                            <Style TargetType="Grid">
-                                <Setter Property="Visibility" Value="Visible"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Columns.Length, FallbackValue=0}" Value="0">
-                                        <Setter Property="Visibility" Value="Collapsed"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Grid.Style>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="30"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <TextBlock Grid.Column="0" Grid.Row="0" Margin="5,2,5,2" VerticalAlignment="Center" Text="Name"/>
-                    </Grid>
-                    <ItemsControl x:Name="columnsItemsControls" VerticalContentAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="2" ItemsSource="{Binding Columns, UpdateSourceTrigger=PropertyChanged}">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Grid Height="Auto" VerticalAlignment="Top">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="30"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition/>
-                                        <RowDefinition/>
-                                        <RowDefinition Height="*"/>
-                                    </Grid.RowDefinitions>
-                                    <TextBox Grid.Column="0" Grid.Row="0" Margin="5,2,5,2" VerticalAlignment="Center" Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                                    <Button Grid.Column="1" Grid.Row="0" Margin="5,2,5,2" VerticalAlignment="Center" Content="-" Command="{x:Static core:Commands.RemoveColumnCommand}" CommandParameter="{Binding}"/>
-                                </Grid>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </Grid>
-            </Expander>
-            <Expander Header="Current Record" IsExpanded="True">
-                <ContentControl Content="{Binding CurrentRecord}"/>
-            </Expander>
         </StackPanel>
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:Data}">
         <TabControl>
+            <TabItem Header="Record">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Control Template="{StaticResource RecordMenuControlTemplateKey}" Grid.Row="0" Margin="2,0,2,0"/>
+                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                        <ContentControl Content="{Binding Record}"/>
+                    </ScrollViewer>
+                </Grid>
+            </TabItem>
             <TabItem Header="Properties">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -615,16 +630,6 @@
                     </ItemsControl>
                 </Grid>
             </TabItem>
-            <TabItem Header="Record">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <Control Template="{StaticResource RecordMenuControlTemplateKey}" Grid.Row="0" Margin="2,0,2,0"/>
-                    <ContentControl Content="{Binding Record}" Grid.Row="1"/>
-                </Grid>
-            </TabItem>
         </TabControl>
     </DataTemplate>
     <!-- state -->
@@ -645,47 +650,28 @@
     <DataTemplate DataType="{x:Type core:XPoint}">
         <TabControl>
             <TabItem Header="Point">
-                <StackPanel>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="60"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Text="Name" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
-                        <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" BorderBrush="{x:Null}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="0" Grid.Column="1"/>
-                    </Grid>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="60"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Text="X" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
-                        <TextBox Text="{Binding X, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="0" Grid.Column="1"/>
-                    </Grid>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="60"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Text="Y" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
-                        <TextBox Text="{Binding Y, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="0" Grid.Column="1"/>
-                    </Grid>
-                    <Expander Header="State">
-                        <ContentControl Content="{Binding State}"/>
-                    </Expander>
-                    <Expander Header="Data">
-                        <ContentControl Content="{Binding Data}"/>
-                    </Expander>
-                </StackPanel>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Name" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                    <TextBlock Text="X" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="1" Grid.Column="0"/>
+                    <TextBox Text="{Binding X, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="1" Grid.Column="1"/>
+                    <TextBlock Text="Y" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="2" Grid.Column="0"/>
+                    <TextBox Text="{Binding Y, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="2" Grid.Column="1"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="State">
+                <ContentControl Content="{Binding State}"/>
+            </TabItem>
+            <TabItem Header="Data">
+                <ContentControl Content="{Binding Data}"/>
             </TabItem>
             <TabItem Header="Shape">
                 <ContentControl Content="{Binding Shape}"/>
@@ -714,7 +700,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Style" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
-                <ComboBox ItemsSource="{Binding Path=DataContext.Editor.Project.CurrentStyleLibrary.Styles, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" SelectedItem="{Binding Path=DataContext.Style, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="0" Grid.Column="1">
+                <ComboBox ItemsSource="{Binding Path=DataContext.Editor.Project.CurrentStyleLibrary.Items, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" SelectedItem="{Binding Path=DataContext.Style, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="0" Grid.Column="1">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
@@ -751,79 +737,47 @@
         </StackPanel>
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:XRectangle}">
-        <StackPanel>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="Name" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
-                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" BorderBrush="{x:Null}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="0" Grid.Column="1"/>
-            </Grid>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="Style" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
-                <ComboBox ItemsSource="{Binding Path=DataContext.Editor.Project.CurrentStyleLibrary.Styles, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" SelectedItem="{Binding Path=DataContext.Style, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="0" Grid.Column="1">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
-            </Grid>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="IsStroked" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
-                <CheckBox Content="" IsChecked="{Binding IsStroked}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="0" Grid.Column="1"/>
-            </Grid>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="IsFilled" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
-                <CheckBox Content="" IsChecked="{Binding IsFilled}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="0" Grid.Column="1"/>
-            </Grid>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="Text" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
-                <ComboBox IsEditable="True" Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
-                    <ComboBoxItem>{0}</ComboBoxItem>
-                    <ComboBoxItem>{0} {1}</ComboBoxItem>
-                    <ComboBoxItem>{0} {1} {2}</ComboBoxItem>
-                </ComboBox>
-            </Grid>
-            <Expander Header="TopLeft">
-                <ContentControl Content="{Binding TopLeft}"/>
-            </Expander>
-            <Expander Header="BottomRight">
-                <ContentControl Content="{Binding BottomRight}"/>
-            </Expander>
-            <Expander Header="Grid">
+        <TabControl>
+            <TabItem Header="Rectangle">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Name" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                    <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" BorderBrush="{x:Null}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="0" Grid.Column="1"/>
+                    <TextBlock Text="IsStroked" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="1" Grid.Column="0"/>
+                    <CheckBox Content="" IsChecked="{Binding IsStroked}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="1" Grid.Column="1"/>
+                    <TextBlock Text="IsFilled" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="2" Grid.Column="0"/>
+                    <CheckBox Content="" IsChecked="{Binding IsFilled}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="2" Grid.Column="1"/>
+                    <TextBlock Text="Text" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="3" Grid.Column="0"/>
+                    <ComboBox IsEditable="True" Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center">
+                        <ComboBoxItem>{0}</ComboBoxItem>
+                        <ComboBoxItem>{0} {1}</ComboBoxItem>
+                        <ComboBoxItem>{0} {1} {2}</ComboBoxItem>
+                        <ComboBoxItem>{Column0}</ComboBoxItem>
+                        <ComboBoxItem>{Column1}</ComboBoxItem>
+                        <ComboBoxItem>{Column2}</ComboBoxItem>
+                        <ComboBoxItem>{Column3}</ComboBoxItem>
+                    </ComboBox>
+                    <TabControl Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2">
+                        <TabItem Header="TopLeft">
+                            <ContentControl Content="{Binding TopLeft}"/>
+                        </TabItem>
+                        <TabItem Header="BottomRight">
+                            <ContentControl Content="{Binding BottomRight}"/>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Grid">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -852,17 +806,17 @@
                     <TextBox Text="{Binding CellWidth, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxCenterStyleKey}" Grid.Row="3" Grid.Column="2"/>
                     <TextBox Text="{Binding CellHeight, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxCenterStyleKey}" Grid.Row="4" Grid.Column="2"/>
                 </Grid>
-            </Expander>
-            <Expander Header="State">
+            </TabItem>
+            <TabItem Header="State">
                 <ContentControl Content="{Binding State}"/>
-            </Expander>
-            <Expander Header="Data">
+            </TabItem>
+            <TabItem Header="Data">
                 <ContentControl Content="{Binding Data}"/>
-            </Expander>
-            <Expander Header="Style">
+            </TabItem>
+            <TabItem Header="Style">
                 <ContentControl Content="{Binding Style}"/>
-            </Expander>
-        </StackPanel>
+            </TabItem>
+        </TabControl>
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:XEllipse}">
         <StackPanel>
@@ -886,7 +840,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Style" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
-                <ComboBox ItemsSource="{Binding Path=DataContext.Editor.Project.CurrentStyleLibrary.Styles, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" SelectedItem="{Binding Path=DataContext.Style, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="0" Grid.Column="1">
+                <ComboBox ItemsSource="{Binding Path=DataContext.Editor.Project.CurrentStyleLibrary.Items, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" SelectedItem="{Binding Path=DataContext.Style, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="0" Grid.Column="1">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
@@ -929,6 +883,10 @@
                     <ComboBoxItem>{0}</ComboBoxItem>
                     <ComboBoxItem>{0} {1}</ComboBoxItem>
                     <ComboBoxItem>{0} {1} {2}</ComboBoxItem>
+                    <ComboBoxItem>{Column0}</ComboBoxItem>
+                    <ComboBoxItem>{Column1}</ComboBoxItem>
+                    <ComboBoxItem>{Column2}</ComboBoxItem>
+                    <ComboBoxItem>{Column3}</ComboBoxItem>
                 </ComboBox>
             </Grid>
             <Expander Header="TopLeft">
@@ -970,7 +928,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Style" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
-                <ComboBox ItemsSource="{Binding Path=DataContext.Editor.Project.CurrentStyleLibrary.Styles, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" SelectedItem="{Binding Path=DataContext.Style, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="0" Grid.Column="1">
+                <ComboBox ItemsSource="{Binding Path=DataContext.Editor.Project.CurrentStyleLibrary.Items, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" SelectedItem="{Binding Path=DataContext.Style, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="0" Grid.Column="1">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
@@ -1045,7 +1003,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Style" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
-                <ComboBox ItemsSource="{Binding Path=DataContext.Editor.Project.CurrentStyleLibrary.Styles, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" SelectedItem="{Binding Path=DataContext.Style, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="0" Grid.Column="1">
+                <ComboBox ItemsSource="{Binding Path=DataContext.Editor.Project.CurrentStyleLibrary.Items, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" SelectedItem="{Binding Path=DataContext.Style, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="0" Grid.Column="1">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
@@ -1120,7 +1078,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Style" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
-                <ComboBox ItemsSource="{Binding Path=DataContext.Editor.Project.CurrentStyleLibrary.Styles, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" SelectedItem="{Binding Path=DataContext.Style, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="0" Grid.Column="1">
+                <ComboBox ItemsSource="{Binding Path=DataContext.Editor.Project.CurrentStyleLibrary.Items, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" SelectedItem="{Binding Path=DataContext.Style, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="0" Grid.Column="1">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
@@ -1192,7 +1150,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Style" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
-                <ComboBox ItemsSource="{Binding Path=DataContext.Editor.Project.CurrentStyleLibrary.Styles, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" SelectedItem="{Binding Path=DataContext.Style, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="0" Grid.Column="1">
+                <ComboBox ItemsSource="{Binding Path=DataContext.Editor.Project.CurrentStyleLibrary.Items, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" SelectedItem="{Binding Path=DataContext.Style, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="0" Grid.Column="1">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
@@ -1213,6 +1171,10 @@
                     <ComboBoxItem>{0}</ComboBoxItem>
                     <ComboBoxItem>{0} {1}</ComboBoxItem>
                     <ComboBoxItem>{0} {1} {2}</ComboBoxItem>
+                    <ComboBoxItem>{Column0}</ComboBoxItem>
+                    <ComboBoxItem>{Column1}</ComboBoxItem>
+                    <ComboBoxItem>{Column2}</ComboBoxItem>
+                    <ComboBoxItem>{Column3}</ComboBoxItem>
                 </ComboBox>
             </Grid>
             <Expander Header="TopLeft">
@@ -1254,7 +1216,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Style" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
-                <ComboBox ItemsSource="{Binding Path=DataContext.Editor.Project.CurrentStyleLibrary.Styles, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" SelectedItem="{Binding Path=DataContext.Style, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="0" Grid.Column="1">
+                <ComboBox ItemsSource="{Binding Path=DataContext.Editor.Project.CurrentStyleLibrary.Items, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" SelectedItem="{Binding Path=DataContext.Style, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="0" Grid.Column="1">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
@@ -1297,6 +1259,10 @@
                     <ComboBoxItem>{0}</ComboBoxItem>
                     <ComboBoxItem>{0} {1}</ComboBoxItem>
                     <ComboBoxItem>{0} {1} {2}</ComboBoxItem>
+                    <ComboBoxItem>{Column0}</ComboBoxItem>
+                    <ComboBoxItem>{Column1}</ComboBoxItem>
+                    <ComboBoxItem>{Column2}</ComboBoxItem>
+                    <ComboBoxItem>{Column3}</ComboBoxItem>
                 </ComboBox>
             </Grid>
             <Expander Header="Key">
@@ -1456,7 +1422,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Style" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
-                <ComboBox ItemsSource="{Binding Path=DataContext.Editor.Project.CurrentStyleLibrary.Styles, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" SelectedItem="{Binding Path=DataContext.Style, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="0" Grid.Column="1">
+                <ComboBox ItemsSource="{Binding Path=DataContext.Editor.Project.CurrentStyleLibrary.Items, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" SelectedItem="{Binding Path=DataContext.Style, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="0" Grid.Column="1">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
@@ -2009,11 +1975,5 @@
                 <ContentControl Content="{Binding Data}"/>
             </Expander>
         </StackPanel>
-    </DataTemplate>
-    <DataTemplate DataType="{x:Type core:StyleLibrary}">
-        <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" BorderBrush="{x:Null}" TextAlignment="Left" VerticalAlignment="Center"/>
-    </DataTemplate>
-    <DataTemplate DataType="{x:Type core:GroupLibrary}">
-        <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" BorderBrush="{x:Null}" TextAlignment="Left" VerticalAlignment="Center"/>
     </DataTemplate>
 </ResourceDictionary>
