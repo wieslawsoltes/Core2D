@@ -189,15 +189,6 @@
     <Compile Include="..\Core2D\Interfaces\IView.cs">
       <Link>Interfaces\IView.cs</Link>
     </Compile>
-    <Compile Include="..\Core2D\IO\Utf8TextFile.cs">
-      <Link>IO\Utf8TextFile.cs</Link>
-    </Compile>
-    <Compile Include="..\Core2D\Libraries\GroupLibrary.cs">
-      <Link>Libraries\GroupLibrary.cs</Link>
-    </Compile>
-    <Compile Include="..\Core2D\Libraries\StyleLibrary.cs">
-      <Link>Libraries\StyleLibrary.cs</Link>
-    </Compile>
     <Compile Include="..\Core2D\Math\Arc\GdiArc.cs">
       <Link>Math\Arc\GdiArc.cs</Link>
     </Compile>
@@ -242,6 +233,9 @@
     </Compile>
     <Compile Include="..\Core2D\Project\Layer.cs">
       <Link>Project\Layer.cs</Link>
+    </Compile>
+    <Compile Include="..\Core2D\Project\Library`1.cs">
+      <Link>Project\Library`1.cs</Link>
     </Compile>
     <Compile Include="..\Core2D\Project\MoveMode.cs">
       <Link>Project\MoveMode.cs</Link>

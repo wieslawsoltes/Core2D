@@ -92,7 +92,6 @@
     <Compile Include="Interfaces\ITextFieldReader.cs" />
     <Compile Include="Interfaces\ITextFieldWriter.cs" />
     <Compile Include="Interfaces\IView.cs" />
-    <Compile Include="IO\Utf8TextFile.cs" />
     <Compile Include="Math\Arc\GdiArc.cs" />
     <Compile Include="Math\Arc\WpfArc.cs" />
     <Compile Include="Math\Core\Point2.cs" />
@@ -105,13 +104,12 @@
     <Compile Include="Math\Sat\MinimumTranslationVector.cs" />
     <Compile Include="Math\Sat\Projection.cs" />
     <Compile Include="Math\Sat\SeparatingAxisTheorem.cs" />
+    <Compile Include="Project\Library`1.cs" />
     <Compile Include="Properties\SharedAssemblyInfo.cs" />
     <Compile Include="Data\Column.cs" />
     <Compile Include="Data\Database.cs" />
     <Compile Include="Data\Record.cs" />
     <Compile Include="Data\Value.cs" />
-    <Compile Include="Libraries\GroupLibrary.cs" />
-    <Compile Include="Libraries\StyleLibrary.cs" />
     <Compile Include="Core\ObservableObject.cs" />
     <Compile Include="Project\Container.cs" />
     <Compile Include="Project\Document.cs" />
