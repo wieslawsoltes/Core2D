@@ -2537,7 +2537,7 @@ namespace Core2D
                 }
             }
         }
-        
+
         /// <summary>
         /// Drop <see cref="Record"/> object in current container at specified location as group bound to this record.
         /// </summary>
@@ -2567,10 +2567,10 @@ namespace Core2D
 
                     var text = XText.Create(
                         px, py,
-                        px + width, 
+                        px + width,
                         py + height,
                         _editor.Project.CurrentStyleLibrary.Selected,
-                        _editor.Project.Options.PointShape, 
+                        _editor.Project.Options.PointShape,
                         binding);
 
                     g.AddShape(text);
