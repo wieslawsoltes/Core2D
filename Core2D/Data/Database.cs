@@ -125,7 +125,7 @@ namespace Core2D
 
             if (columns.Length >= 1 && columns[0].Name == IdColumnName)
             {
-                // use existing record Id's
+                // Use existing record Id.
                 var tempRecords = fields
                     .Skip(1)
                     .Select(v =>
@@ -141,7 +141,7 @@ namespace Core2D
             }
             else
             {
-                // create records with new Id's
+                // Create records with new Id.
                 var tempRecords = fields
                     .Skip(1)
                     .Select(v =>
