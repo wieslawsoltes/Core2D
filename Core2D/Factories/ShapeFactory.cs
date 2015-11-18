@@ -48,7 +48,7 @@ namespace Core2D
             var line = XLine.Create(
                 x1, y1,
                 x2, y2,
-                _editor.Project.CurrentStyleLibrary.CurrentStyle,
+                _editor.Project.CurrentStyleLibrary.Selected,
                 _editor.Project.Options.PointShape,
                 isStroked);
             _editor.AddShape(line);
@@ -61,7 +61,7 @@ namespace Core2D
             var line = XLine.Create(
                 start,
                 end,
-                _editor.Project.CurrentStyleLibrary.CurrentStyle,
+                _editor.Project.CurrentStyleLibrary.Selected,
                 _editor.Project.Options.PointShape,
                 isStroked);
             _editor.AddShape(line);
@@ -82,7 +82,7 @@ namespace Core2D
                 x2, y2,
                 x3, y3,
                 x4, y4,
-                _editor.Project.CurrentStyleLibrary.CurrentStyle,
+                _editor.Project.CurrentStyleLibrary.Selected,
                 _editor.Project.Options.PointShape,
                 isStroked,
                 isFilled);
@@ -104,7 +104,7 @@ namespace Core2D
                 point2,
                 point3,
                 point4,
-                _editor.Project.CurrentStyleLibrary.CurrentStyle,
+                _editor.Project.CurrentStyleLibrary.Selected,
                 _editor.Project.Options.PointShape,
                 isStroked,
                 isFilled);
@@ -126,7 +126,7 @@ namespace Core2D
                 x2, y2,
                 x3, y3,
                 x4, y4,
-                _editor.Project.CurrentStyleLibrary.CurrentStyle,
+                _editor.Project.CurrentStyleLibrary.Selected,
                 _editor.Project.Options.PointShape,
                 isStroked,
                 isFilled);
@@ -148,7 +148,7 @@ namespace Core2D
                 point2,
                 point3,
                 point4,
-                _editor.Project.CurrentStyleLibrary.CurrentStyle,
+                _editor.Project.CurrentStyleLibrary.Selected,
                 _editor.Project.Options.PointShape,
                 isStroked,
                 isFilled);
@@ -168,7 +168,7 @@ namespace Core2D
                 x1, y1,
                 x2, y2,
                 x3, y3,
-                _editor.Project.CurrentStyleLibrary.CurrentStyle,
+                _editor.Project.CurrentStyleLibrary.Selected,
                 _editor.Project.Options.PointShape,
                 isStroked,
                 isFilled);
@@ -188,7 +188,7 @@ namespace Core2D
                 point1,
                 point2,
                 point3,
-                _editor.Project.CurrentStyleLibrary.CurrentStyle,
+                _editor.Project.CurrentStyleLibrary.Selected,
                 _editor.Project.Options.PointShape,
                 isStroked,
                 isFilled);
@@ -212,7 +212,7 @@ namespace Core2D
         {
             var path = XPath.Create(
                 "",
-                _editor.Project.CurrentStyleLibrary.CurrentStyle,
+                _editor.Project.CurrentStyleLibrary.Selected,
                 geometry,
                 isStroked,
                 isFilled);
@@ -231,7 +231,7 @@ namespace Core2D
             var rectangle = XRectangle.Create(
                 x1, y1,
                 x2, y2,
-                _editor.Project.CurrentStyleLibrary.CurrentStyle,
+                _editor.Project.CurrentStyleLibrary.Selected,
                 _editor.Project.Options.PointShape,
                 isStroked,
                 isFilled,
@@ -251,7 +251,7 @@ namespace Core2D
             var rectangle = XRectangle.Create(
                 topLeft,
                 bottomRight,
-                _editor.Project.CurrentStyleLibrary.CurrentStyle,
+                _editor.Project.CurrentStyleLibrary.Selected,
                 _editor.Project.Options.PointShape,
                 isStroked,
                 isFilled,
@@ -271,7 +271,7 @@ namespace Core2D
             var ellipse = XEllipse.Create(
                 x1, y1,
                 x2, y2,
-                _editor.Project.CurrentStyleLibrary.CurrentStyle,
+                _editor.Project.CurrentStyleLibrary.Selected,
                 _editor.Project.Options.PointShape,
                 isStroked,
                 isFilled,
@@ -291,7 +291,7 @@ namespace Core2D
             var ellipse = XEllipse.Create(
                 topLeft,
                 bottomRight,
-                _editor.Project.CurrentStyleLibrary.CurrentStyle,
+                _editor.Project.CurrentStyleLibrary.Selected,
                 _editor.Project.Options.PointShape,
                 isStroked,
                 isFilled,
@@ -310,7 +310,7 @@ namespace Core2D
             var txt = XText.Create(
                 x1, y1,
                 x2, y2,
-                _editor.Project.CurrentStyleLibrary.CurrentStyle,
+                _editor.Project.CurrentStyleLibrary.Selected,
                 _editor.Project.Options.PointShape,
                 text,
                 isStroked);
@@ -328,7 +328,7 @@ namespace Core2D
             var txt = XText.Create(
                 topLeft,
                 bottomRight,
-                _editor.Project.CurrentStyleLibrary.CurrentStyle,
+                _editor.Project.CurrentStyleLibrary.Selected,
                 _editor.Project.Options.PointShape,
                 text,
                 isStroked);
@@ -348,7 +348,7 @@ namespace Core2D
             var image = XImage.Create(
                 x1, y1,
                 x2, y2,
-                _editor.Project.CurrentStyleLibrary.CurrentStyle,
+                _editor.Project.CurrentStyleLibrary.Selected,
                 _editor.Project.Options.PointShape,
                 path,
                 isStroked,
@@ -372,7 +372,7 @@ namespace Core2D
             var image = XImage.Create(
                 topLeft,
                 bottomRight,
-                _editor.Project.CurrentStyleLibrary.CurrentStyle,
+                _editor.Project.CurrentStyleLibrary.Selected,
                 _editor.Project.Options.PointShape,
                 key,
                 isStroked,
