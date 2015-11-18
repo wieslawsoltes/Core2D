@@ -1482,49 +1482,5 @@
                 </TabItem>
             </TabControl>
         </DataTemplate>
-        <DataTemplate DataType="core:StyleLibrary">
-            <TabControl Classes="default">
-                <TabItem Header="StyleLibrary" Classes="property">
-                    <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*">
-                        <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                        <TextBox Text="{Binding Path=Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
-                    </Grid>
-                </TabItem>
-                <TabItem Header="Styles" Classes="property">
-                    <ListBox Name="styles" Items="{Binding Path=Styles}" Classes="default">
-                        <ListBox.DataTemplates>
-                            <DataTemplate DataType="core:ShapeStyle">
-                                <TextBlock Text="{Binding Path=Name}" Classes="default"/>
-                            </DataTemplate>
-                        </ListBox.DataTemplates>
-                    </ListBox>
-                </TabItem>
-                <TabItem Header="Selected" Classes="property">
-                    <ContentControl Content="{Binding Path=#styles.SelectedItem, Mode=TwoWay}"/>
-                </TabItem>
-            </TabControl>
-        </DataTemplate>
-        <DataTemplate DataType="core:GroupLibrary">
-            <TabControl Classes="default">
-                <TabItem Header="GroupLibrary" Classes="property">
-                    <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*">
-                        <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                        <TextBox Text="{Binding Path=Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
-                    </Grid>
-                </TabItem>
-                <TabItem Header="Groups" Classes="property">
-                    <ListBox Name="groups" Items="{Binding Path=Groups}" Classes="default">
-                        <ListBox.DataTemplates>
-                            <DataTemplate DataType="core:XGroup">
-                                <TextBlock Text="{Binding Path=Name}" Classes="default"/>
-                            </DataTemplate>
-                        </ListBox.DataTemplates>
-                    </ListBox>
-                </TabItem>
-                <TabItem Header="Selected" Classes="property">
-                    <ContentControl Content="{Binding Path=#groups.SelectedItem, Mode=TwoWay}"/>
-                </TabItem>
-            </TabControl>
-        </DataTemplate>
-    </Application.DataTemplates>
+     </Application.DataTemplates>
 </Application>
