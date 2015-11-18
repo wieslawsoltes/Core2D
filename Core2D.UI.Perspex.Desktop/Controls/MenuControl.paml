@@ -179,13 +179,13 @@
             </MenuItem>
             <Separator/>
             <MenuItem Header="Expor_t">
-                <MenuItem Header="_Style..." Command="{Static core:Commands.ExportStyleCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentStyleLibrary.CurrentStyle}"/>
+                <MenuItem Header="_Style..." Command="{Static core:Commands.ExportStyleCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentStyleLibrary.Selected}"/>
                 <MenuItem Header="S_tyles..." Command="{Static core:Commands.ExportStylesCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentStyleLibrary}"/>
                 <Separator/>
                 <MenuItem Header="St_yle Library..." Command="{Static core:Commands.ExportStyleLibraryCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentStyleLibrary}"/>
                 <MenuItem Header="Sty_le Libraries..." Command="{Static core:Commands.ExportStyleLibrariesCommand}" CommandParameter="{Binding Path=Editor.Project}"/>
                 <Separator/>
-                <MenuItem Header="_Group..." Command="{Static core:Commands.ExportGroupCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentGroupLibrary.CurrentGroup}"/>
+                <MenuItem Header="_Group..." Command="{Static core:Commands.ExportGroupCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentGroupLibrary.Selected}"/>
                 <MenuItem Header="G_roups..." Command="{Static core:Commands.ExportGroupsCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentGroupLibrary}"/>
                 <Separator/>
                 <MenuItem Header="Gr_oup Library..." Command="{Static core:Commands.ExportGroupLibraryCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentGroupLibrary}"/>

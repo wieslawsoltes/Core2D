@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:Core2D.UI.Perspex.Desktop;assembly=Core2D.UI.Perspex.Desktop"
              xmlns:converters="clr-namespace:Core2D.UI.Perspex.Desktop.Converters;assembly=Core2D.UI.Perspex.Desktop"
              xmlns:controls="clr-namespace:Core2D.UI.Perspex.Desktop.Controls;assembly=Core2D.UI.Perspex.Desktop"
-             xmlns:core="clr-namespace:Core2D;assembly=Core2D">
+             xmlns:core="clr-namespace:Core2D;assembly=Core2D"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib">
     <Grid RowDefinitions="50*,50*" ColumnDefinitions="200,Auto,*,Auto,250">
         <Border Classes="leftTop" Grid.Row="0" Grid.Column="0">
             <TabControl Classes="bottom">
@@ -30,22 +31,24 @@
                         <DropDown
                             Items="{Binding Path=Editor.Project.GroupLibraries}"
                             SelectedItem="{Binding Path=Editor.Project.CurrentGroupLibrary, Mode=TwoWay}"
+                            SelectionBoxItem="{Binding Path=Editor.Project.CurrentGroupLibrary.Name}"
+                            MemberSelector="Name"
                             Classes="default"
-                            Grid.Row="2">
+                            Grid.Row="2">       
                             <DropDown.DataTemplates>
-                                <DataTemplate DataType="core:GroupLibrary">
-                                    <TextBlock Text="{Binding Path=Name}" Classes="default"/>
+                                <DataTemplate DataType="sys:String">
+                                    <TextBlock Text="{Binding}" Classes="default"/>
                                 </DataTemplate>
                             </DropDown.DataTemplates>
                         </DropDown>
                         <Menu Grid.Row="3" HorizontalAlignment="Right">
-                            <MenuItem Header="insert" Command="{Static core:Commands.InsertGroupCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentGroupLibrary.CurrentGroup}"/>
+                            <MenuItem Header="insert" Command="{Static core:Commands.InsertGroupCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentGroupLibrary.Selected}"/>
                             <MenuItem Header="+" Command="{Static core:Commands.AddGroupCommand}"/>
                             <MenuItem Header="-" Command="{Static core:Commands.RemoveGroupCommand}"/>
                         </Menu>
                         <ListBox
-                            Items="{Binding Path=Editor.Project.CurrentGroupLibrary.Groups}"
-                            SelectedItem="{Binding Path=Editor.Project.CurrentGroupLibrary.CurrentGroup, Mode=TwoWay}"
+                            Items="{Binding Path=Editor.Project.CurrentGroupLibrary.Items}"
+                            SelectedItem="{Binding Path=Editor.Project.CurrentGroupLibrary.Selected, Mode=TwoWay}"
                             Grid.Row="4"
                             Classes="default">
                             <ListBox.DataTemplates>
@@ -131,22 +134,24 @@
                         <DropDown
                             Items="{Binding Path=Editor.Project.StyleLibraries}"
                             SelectedItem="{Binding Path=Editor.Project.CurrentStyleLibrary, Mode=TwoWay}"
+                            SelectionBoxItem="{Binding Path=Editor.Project.CurrentStyleLibrary.Name}"
+                            MemberSelector="Name"
                             Grid.Row="2"
                             Classes="default">
                             <DropDown.DataTemplates>
-                                <DataTemplate DataType="core:StyleLibrary">
-                                    <TextBlock Text="{Binding Path=Name}" Classes="default"/>
+                                <DataTemplate DataType="sys:String">
+                                    <TextBlock Text="{Binding}" Classes="default"/>
                                 </DataTemplate>
                             </DropDown.DataTemplates>
                         </DropDown>
                         <Menu Grid.Row="3" HorizontalAlignment="Right">
-                            <MenuItem Header="apply" Command="{Static core:Commands.ApplyStyleCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentStyleLibrary.CurrentStyle}"/>
+                            <MenuItem Header="apply" Command="{Static core:Commands.ApplyStyleCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentStyleLibrary.Selected}"/>
                             <MenuItem Header="+" Command="{Static core:Commands.AddStyleCommand}"/>
                             <MenuItem Header="-" Command="{Static core:Commands.RemoveStyleCommand}"/>
                         </Menu>
                         <ListBox
-                            Items="{Binding Path=Editor.Project.CurrentStyleLibrary.Styles}"
-                            SelectedItem="{Binding Path=Editor.Project.CurrentStyleLibrary.CurrentStyle, Mode=TwoWay}"
+                            Items="{Binding Path=Editor.Project.CurrentStyleLibrary.Items}"
+                            SelectedItem="{Binding Path=Editor.Project.CurrentStyleLibrary.Selected, Mode=TwoWay}"
                             Grid.Row="4"
                             Classes="default">
                             <ListBox.DataTemplates>
@@ -198,7 +203,7 @@
                 </TabItem>
                 <TabItem Header="Style" Classes="property">
                     <ScrollViewer>
-                        <ContentControl Content="{Binding Path=Editor.Project.CurrentStyleLibrary.CurrentStyle, Mode=TwoWay}"/>
+                        <ContentControl Content="{Binding Path=Editor.Project.CurrentStyleLibrary.Selected, Mode=TwoWay}"/>
                     </ScrollViewer>
                 </TabItem>
                 <TabItem Header="Container" Classes="property">
