@@ -142,7 +142,7 @@ namespace Core2D.UI.Wpf.Controls
         /// <param name="e"></param>
         private void DatabaseObserver(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "Columns")
+            if (e.PropertyName == nameof(Database.Columns))
             {
                 InitializeColumnsView();
             }
