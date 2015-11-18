@@ -98,7 +98,7 @@ namespace Core2D
 
             _path = XPath.Create(
                 "Path",
-                _editor.Project.CurrentStyleLibrary.CurrentStyle,
+                _editor.Project.CurrentStyleLibrary.Selected,
                 _geometry,
                 _editor.Project.Options.DefaultIsStroked,
                 _editor.Project.Options.DefaultIsFilled);

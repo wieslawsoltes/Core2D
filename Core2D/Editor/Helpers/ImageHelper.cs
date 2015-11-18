@@ -77,7 +77,7 @@ namespace Core2D
 
                         _shape = XImage.Create(
                             sx, sy,
-                            _editor.Project.CurrentStyleLibrary.CurrentStyle,
+                            _editor.Project.CurrentStyleLibrary.Selected,
                             _editor.Project.Options.PointShape,
                             key);
                         if (_editor.Project.Options.TryToConnect)

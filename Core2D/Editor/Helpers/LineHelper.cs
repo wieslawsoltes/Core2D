@@ -76,7 +76,7 @@ namespace Core2D
                     {
                         _shape = XLine.Create(
                             sx, sy,
-                            _editor.Project.CurrentStyleLibrary.CurrentStyle,
+                            _editor.Project.CurrentStyleLibrary.Selected,
                             _editor.Project.Options.PointShape,
                             _editor.Project.Options.DefaultIsStroked);
                         if (_editor.Project.Options.TryToConnect)
