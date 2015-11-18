@@ -21,6 +21,7 @@
                         <MenuItem Header="_Template..." Command="{x:Static core:Commands.ExportTemplateCommand}" CommandParameter="{Binding Editor.Project.CurrentTemplate}" InputGestureText=""/>
                         <MenuItem Header="T_emplates..." Command="{x:Static core:Commands.ExportTemplatesCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText=""/>
                     </MenuItem>
+                    <MenuItem Header="apply" Command="{x:Static core:Commands.ApplyTemplateCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentTemplate}"/>
                     <MenuItem Command="{x:Static core:Commands.EditTemplateCommand}" Header="edit"/>
                     <MenuItem Command="{x:Static core:Commands.AddTemplateCommand}" Header="+"/>
                     <MenuItem Command="{x:Static core:Commands.RemoveTemplateCommand}" Header="-"/>

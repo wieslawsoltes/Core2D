@@ -35,6 +35,7 @@
                         <MenuItem Header="_Style..." Command="{x:Static core:Commands.ExportStyleCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleLibrary.CurrentStyle}" InputGestureText=""/>
                         <MenuItem Header="S_tyles..." Command="{x:Static core:Commands.ExportStylesCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleLibrary}" InputGestureText=""/>
                     </MenuItem>
+                    <MenuItem Header="apply" Command="{x:Static core:Commands.ApplyStyleCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentStyleLibrary.Selected}"/>
                     <MenuItem Command="{x:Static core:Commands.AddStyleCommand}" Header="+"/>
                     <MenuItem Command="{x:Static core:Commands.RemoveStyleCommand}" Header="-"/>
                 </Menu>

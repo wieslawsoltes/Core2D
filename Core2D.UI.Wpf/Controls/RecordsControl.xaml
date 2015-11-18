@@ -18,6 +18,7 @@
                         <Separator/>
                         <MenuItem Header="_Update..." Command="{x:Static core:Commands.UpdateDataCommand}" InputGestureText=""/>
                     </MenuItem>
+                    <MenuItem Header="apply" Command="{x:Static core:Commands.ApplyRecordCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentDatabase.CurrentRecord}"/>
                     <MenuItem Command="{x:Static core:Commands.AddRecordCommand}" Header="+"/>
                     <MenuItem Command="{x:Static core:Commands.RemoveRecordCommand}" Header="-"/>
                 </Menu>
