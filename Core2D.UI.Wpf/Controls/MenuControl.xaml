@@ -67,13 +67,11 @@
             </MenuItem>
         </MenuItem>
         <MenuItem Header="{x:Static p:Resources.MenuView}">
-            <MenuItem Header="{x:Static p:Resources.MenuViewZoom}">
-                <MenuItem Header="{x:Static p:Resources.MenuViewZoomReset}" Command="{x:Static core:Commands.ZoomResetCommand}" InputGestureText="Z"/>
-                <Separator/>
-                <MenuItem Header="{x:Static p:Resources.MenuViewZoomExtent}" Command="{x:Static core:Commands.ZoomExtentCommand}" InputGestureText="X"/>
-                <Separator/>
-                <MenuItem Header="{x:Static p:Resources.MenuViewZoomAutofit}" IsCheckable="True" IsChecked="{Binding Editor.Renderers[0].State.EnableAutofit, Mode=TwoWay}" InputGestureText=""/>
-            </MenuItem>
+            <MenuItem Header="{x:Static p:Resources.MenuViewZoomReset}" Command="{x:Static core:Commands.ZoomResetCommand}" InputGestureText="Z"/>
+            <Separator/>
+            <MenuItem Header="{x:Static p:Resources.MenuViewZoomExtent}" Command="{x:Static core:Commands.ZoomExtentCommand}" InputGestureText="X"/>
+            <Separator/>
+            <MenuItem Header="{x:Static p:Resources.MenuViewZoomAutofit}" IsCheckable="True" IsChecked="{Binding Editor.Renderers[0].State.EnableAutofit, Mode=TwoWay}" InputGestureText=""/>
         </MenuItem>
         <MenuItem Header="{x:Static p:Resources.MenuProject}">
             <MenuItem Header="{x:Static p:Resources.MenuProjectSubMenuImport}">
