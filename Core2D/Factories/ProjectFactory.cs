@@ -11,33 +11,33 @@ namespace Core2D
     public class ProjectFactory : IProjectFactory
     {
         /// <summary>
-        /// Creates a new instance of the <see cref="StyleLibrary"/> class.
+        /// Creates a new instance of the <see cref="Library{ShapeStyle}"/> class.
         /// </summary>
-        /// <returns>The new instance of the <see cref="StyleLibrary"/>.</returns>
-        public static StyleLibrary DefaultStyleLibrary()
+        /// <returns>The new instance of the <see cref="Library{ShapeStyle}"/>.</returns>
+        public static Library<ShapeStyle> DefaultStyleLibrary()
         {
-            var sgd = StyleLibrary.Create("Default");
+            var sgd = Library<ShapeStyle>.Create("Default");
 
-            var builder = sgd.Styles.ToBuilder();
+            var builder = sgd.Items.ToBuilder();
             builder.Add(ShapeStyle.Create("Black", 255, 0, 0, 0, 80, 0, 0, 0, 2.0));
             builder.Add(ShapeStyle.Create("Yellow", 255, 255, 255, 0, 80, 255, 255, 0, 2.0));
             builder.Add(ShapeStyle.Create("Red", 255, 255, 0, 0, 80, 255, 0, 0, 2.0));
             builder.Add(ShapeStyle.Create("Green", 255, 0, 255, 0, 80, 0, 255, 0, 2.0));
             builder.Add(ShapeStyle.Create("Blue", 255, 0, 0, 255, 80, 0, 0, 255, 2.0));
-            sgd.Styles = builder.ToImmutable();
+            sgd.Items = builder.ToImmutable();
 
-            sgd.CurrentStyle = sgd.Styles.FirstOrDefault();
+            sgd.Selected = sgd.Items.FirstOrDefault();
 
             return sgd;
         }
 
         /// <summary>
-        /// Creates a new instance of the <see cref="StyleLibrary"/> class.
+        /// Creates a new instance of the <see cref="Library{ShapeStyle}"/> class.
         /// </summary>
-        /// <returns>The new instance of the <see cref="StyleLibrary"/>.</returns>
-        public static StyleLibrary LinesStyleLibrary()
+        /// <returns>The new instance of the <see cref="Library{ShapeStyle}"/>.</returns>
+        public static Library<ShapeStyle> LinesStyleLibrary()
         {
-            var sgdl = StyleLibrary.Create("Lines");
+            var sgdl = Library<ShapeStyle>.Create("Lines");
 
             var solid = ShapeStyle.Create("Solid", 255, 0, 0, 0, 80, 0, 0, 0, 2.0);
             solid.Dashes = default(string);
@@ -59,33 +59,33 @@ namespace Core2D
             dashDotDot.Dashes = "2 2 0 2 0 2";
             dashDotDot.DashOffset = 1.0;
 
-            var builder = sgdl.Styles.ToBuilder();
+            var builder = sgdl.Items.ToBuilder();
             builder.Add(solid);
             builder.Add(dash);
             builder.Add(dot);
             builder.Add(dashDot);
             builder.Add(dashDotDot);
-            sgdl.Styles = builder.ToImmutable();
+            sgdl.Items = builder.ToImmutable();
 
-            sgdl.CurrentStyle = sgdl.Styles.FirstOrDefault();
+            sgdl.Selected = sgdl.Items.FirstOrDefault();
 
             return sgdl;
         }
 
         /// <summary>
-        /// Creates a new instance of the <see cref="StyleLibrary"/> class.
+        /// Creates a new instance of the <see cref="Library{ShapeStyle}"/> class.
         /// </summary>
-        /// <returns>The new instance of the <see cref="StyleLibrary"/>.</returns>
-        public static StyleLibrary TemplateStyleLibrary()
+        /// <returns>The new instance of the <see cref="Library{ShapeStyle}"/>.</returns>
+        public static Library<ShapeStyle> TemplateStyleLibrary()
         {
-            var sgt = StyleLibrary.Create("Template");
+            var sgt = Library<ShapeStyle>.Create("Template");
             var gs = ShapeStyle.Create("Grid", 255, 222, 222, 222, 255, 222, 222, 222, 1.0);
 
-            var builder = sgt.Styles.ToBuilder();
+            var builder = sgt.Items.ToBuilder();
             builder.Add(gs);
-            sgt.Styles = builder.ToImmutable();
+            sgt.Items = builder.ToImmutable();
 
-            sgt.CurrentStyle = sgt.Styles.FirstOrDefault();
+            sgt.Selected = sgt.Items.FirstOrDefault();
 
             return sgt;
         }
@@ -102,7 +102,7 @@ namespace Core2D
 
             var style = project
                 .StyleLibraries.FirstOrDefault(g => g.Name == "Template")
-                .Styles.FirstOrDefault(s => s.Name == "Grid");
+                .Items.FirstOrDefault(s => s.Name == "Grid");
             var layer = template.Layers.FirstOrDefault();
             var builder = layer.Shapes.ToBuilder();
             var grid = XRectangle.Create(
@@ -170,19 +170,23 @@ namespace Core2D
         {
             var project = Project.Create();
 
+            // Group Libraries
             var glBuilder = project.GroupLibraries.ToBuilder();
-            glBuilder.Add(GroupLibrary.Create("Default"));
+            glBuilder.Add(Library<XGroup>.Create("Default"));
             project.GroupLibraries = glBuilder.ToImmutable();
-
+            
+            project.CurrentGroupLibrary = project.GroupLibraries.FirstOrDefault();
+            
+            // Style Libraries
             var sgBuilder = project.StyleLibraries.ToBuilder();
             sgBuilder.Add(DefaultStyleLibrary());
             sgBuilder.Add(LinesStyleLibrary());
             sgBuilder.Add(TemplateStyleLibrary());
             project.StyleLibraries = sgBuilder.ToImmutable();
 
-            project.CurrentGroupLibrary = project.GroupLibraries.FirstOrDefault();
             project.CurrentStyleLibrary = project.StyleLibraries.FirstOrDefault();
 
+            // Templates
             var templateBuilder = project.Templates.ToBuilder();
             templateBuilder.Add(GetTemplate(project, "Empty"));
             templateBuilder.Add(CreateGridTemplate(project, "Grid"));
@@ -190,6 +194,7 @@ namespace Core2D
 
             project.CurrentTemplate = project.Templates.FirstOrDefault(t => t.Name == "Grid");
 
+            // Documents and Containers
             var document = GetDocument(project, "Document");
             var container = GetContainer(project, "Container");
 
