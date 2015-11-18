@@ -32,7 +32,7 @@
                         <MenuItem Header="S_tyles..." Command="{x:Static core:Commands.ImportStylesCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleLibrary}" InputGestureText=""/>
                     </MenuItem>
                     <MenuItem Header="export">
-                        <MenuItem Header="_Style..." Command="{x:Static core:Commands.ExportStyleCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleLibrary.CurrentStyle}" InputGestureText=""/>
+                        <MenuItem Header="_Style..." Command="{x:Static core:Commands.ExportStyleCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleLibrary.Selected}" InputGestureText=""/>
                         <MenuItem Header="S_tyles..." Command="{x:Static core:Commands.ExportStylesCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleLibrary}" InputGestureText=""/>
                     </MenuItem>
                     <MenuItem Header="apply" Command="{x:Static core:Commands.ApplyStyleCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentStyleLibrary.Selected}"/>
@@ -49,18 +49,18 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Control Template="{StaticResource StyleLibrariesMenu}" Grid.Row="0" Margin="2,0,2,0"/>
-        <ContentControl Content="{Binding Editor.Project.CurrentStyleLibrary}" Grid.Row="1" Margin="2,0,2,0">
-            <ContentControl.Style>
-                <Style TargetType="ContentControl">
+        <TextBox Text="{Binding Editor.Project.CurrentStyleLibrary.Name, UpdateSourceTrigger=PropertyChanged}" BorderBrush="{x:Null}" TextAlignment="Left" VerticalAlignment="Center" Grid.Row="1" Margin="2,0,2,0">
+            <TextBox.Style>
+                <Style TargetType="TextBox">
                     <Setter Property="Visibility" Value="Visible"/>
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding}" Value="{x:Null}">
+                        <DataTrigger Binding="{Binding Editor.Project.CurrentStyleLibrary}" Value="{x:Null}">
                             <Setter Property="Visibility" Value="Hidden"/>
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
-            </ContentControl.Style>
-        </ContentControl>
+            </TextBox.Style>
+        </TextBox>
         <ComboBox ItemsSource="{Binding Editor.Project.StyleLibraries}" SelectedItem="{Binding Editor.Project.CurrentStyleLibrary}" Grid.Row="2" Margin="2,2,2,2">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
@@ -69,7 +69,7 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
         <Control Template="{StaticResource StylesMenu}" Grid.Row="3" Margin="2,0,2,0"/>
-        <controls:ShapeStyleDragAndDropListBox DataContext="{Binding Editor.Project.CurrentStyleLibrary.Styles}" Tag="{Binding DataContext.Editor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" ItemsSource="{Binding}" SelectedItem="{Binding DataContext.Editor.Project.CurrentStyleLibrary.CurrentStyle, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" BorderBrush="{x:Null}" HorizontalContentAlignment="Stretch" Grid.Row="4">
+        <controls:ShapeStyleDragAndDropListBox DataContext="{Binding Editor.Project.CurrentStyleLibrary.Items}" Tag="{Binding DataContext.Editor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" ItemsSource="{Binding}" SelectedItem="{Binding DataContext.Editor.Project.CurrentStyleLibrary.Selected, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" BorderBrush="{x:Null}" HorizontalContentAlignment="Stretch" Grid.Row="4">
             <controls:ShapeStyleDragAndDropListBox.Resources>
                 <ContextMenu x:Key="StyleContextMenu" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
                     <MenuItem Header="_Add Style" InputGestureText="Ctrl+N" Command="{x:Static core:Commands.AddStyleCommand}"/>

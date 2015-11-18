@@ -32,7 +32,7 @@
                         <MenuItem Header="G_roups..." Command="{x:Static core:Commands.ImportGroupsCommand}" CommandParameter="{Binding Editor.Project.CurrentGroupLibrary}" InputGestureText=""/>
                     </MenuItem>
                     <MenuItem Header="export">
-                        <MenuItem Header="_Group..." Command="{x:Static core:Commands.ExportGroupCommand}" CommandParameter="{Binding Editor.Project.CurrentGroupLibrary.CurrentGroup}" InputGestureText=""/>
+                        <MenuItem Header="_Group..." Command="{x:Static core:Commands.ExportGroupCommand}" CommandParameter="{Binding Editor.Project.CurrentGroupLibrary.Selected}" InputGestureText=""/>
                         <MenuItem Header="G_roups..." Command="{x:Static core:Commands.ExportGroupsCommand}" CommandParameter="{Binding Editor.Project.CurrentGroupLibrary}" InputGestureText=""/>
                     </MenuItem>
                     <MenuItem Command="{x:Static core:Commands.AddGroupCommand}" Header="+"/>
@@ -49,18 +49,18 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Control Template="{StaticResource GroupLibrariesMenu}" Grid.Row="0" Margin="2,0,2,0"/>
-        <ContentControl Content="{Binding Editor.Project.CurrentGroupLibrary}" Grid.Row="1" Margin="2,0,2,0">
-            <ContentControl.Style>
-                <Style TargetType="ContentControl">
+        <TextBox Text="{Binding Editor.Project.CurrentGroupLibrary.Name, UpdateSourceTrigger=PropertyChanged}" BorderBrush="{x:Null}" TextAlignment="Left" VerticalAlignment="Center" Grid.Row="1" Margin="2,0,2,0">
+            <TextBox.Style>
+                <Style TargetType="TextBox">
                     <Setter Property="Visibility" Value="Visible"/>
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding}" Value="{x:Null}">
+                        <DataTrigger Binding="{Binding Editor.Project.CurrentGroupLibrary}" Value="{x:Null}">
                             <Setter Property="Visibility" Value="Hidden"/>
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
-            </ContentControl.Style>
-        </ContentControl>
+            </TextBox.Style>
+        </TextBox>
         <ComboBox ItemsSource="{Binding Editor.Project.GroupLibraries}" SelectedItem="{Binding Editor.Project.CurrentGroupLibrary}" Grid.Row="2" Margin="2,2,2,2">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
@@ -69,7 +69,7 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
         <Control Template="{StaticResource GroupsMenu}" Grid.Row="3" Margin="2,0,2,0"/>
-        <controls:XGroupDragAndDropListBox x:Name="groupsListBox" DataContext="{Binding Editor.Project.CurrentGroupLibrary.Groups}" Tag="{Binding DataContext.Editor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" ItemsSource="{Binding}" SelectedItem="{Binding DataContext.Editor.Project.CurrentGroupLibrary.CurrentGroup, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" BorderBrush="{x:Null}" HorizontalContentAlignment="Stretch" Grid.Row="4">
+        <controls:XGroupDragAndDropListBox x:Name="groupsListBox" DataContext="{Binding Editor.Project.CurrentGroupLibrary.Items}" Tag="{Binding DataContext.Editor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" ItemsSource="{Binding}" SelectedItem="{Binding DataContext.Editor.Project.CurrentGroupLibrary.Selected, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" BorderBrush="{x:Null}" HorizontalContentAlignment="Stretch" Grid.Row="4">
             <controls:XGroupDragAndDropListBox.Resources>
                 <ContextMenu x:Key="GroupContextMenu" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
                     <MenuItem Header="_Add Group" InputGestureText="Ctrl+N" Command="{x:Static core:Commands.AddGroupCommand}"/>

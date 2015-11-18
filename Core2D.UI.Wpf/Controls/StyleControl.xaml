@@ -18,12 +18,12 @@
                     <Setter Property="Content" Value="{Binding Editor.Renderers[0].State.SelectedShape.Style}"/>
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding Editor.Renderers[0].State.SelectedShape.Style}" Value="{x:Null}">
-                            <Setter Property="Content" Value="{Binding Editor.Project.CurrentStyleLibrary.CurrentStyle}"/>
+                            <Setter Property="Content" Value="{Binding Editor.Project.CurrentStyleLibrary.Selected}"/>
                         </DataTrigger>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding Editor.Renderers[0].State.SelectedShape.Style}" Value="{x:Null}"/>
-                                <Condition Binding="{Binding Editor.Project.CurrentStyleLibrary.CurrentStyle}" Value="{x:Null}"/>
+                                <Condition Binding="{Binding Editor.Project.CurrentStyleLibrary.Selected}" Value="{x:Null}"/>
                             </MultiDataTrigger.Conditions>
                             <Setter Property="Visibility" Value="Hidden"/>
                             <Setter Property="Content" Value="{x:Null}"/>
