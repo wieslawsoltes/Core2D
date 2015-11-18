@@ -16,11 +16,11 @@
     </LayoutAnchorablePaneGroup>
     <LayoutDocumentPaneGroup Orientation="Horizontal">
       <LayoutDocumentPane>
-        <LayoutDocument Title="Canvas" IsSelected="True" IsLastFocusedDocument="True" ContentId="canvas" CanClose="False" LastActivationTimeStamp="11/07/2015 17:11:39" />
+        <LayoutDocument Title="Canvas" IsSelected="True" IsLastFocusedDocument="True" ContentId="canvas" CanClose="False" LastActivationTimeStamp="11/18/2015 18:54:05" />
       </LayoutDocumentPane>
     </LayoutDocumentPaneGroup>
-    <LayoutAnchorablePaneGroup Orientation="Vertical" DockWidth="210">
-      <LayoutAnchorablePane DockWidth="210">
+    <LayoutAnchorablePaneGroup Orientation="Vertical" DockWidth="230">
+      <LayoutAnchorablePane DockWidth="230">
         <LayoutAnchorable AutoHideWidth="210" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Styles" IsSelected="True" ContentId="styles" CanClose="False" />
         <LayoutAnchorable AutoHideWidth="210" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Templates" ContentId="templates" CanClose="False" />
       </LayoutAnchorablePane>
