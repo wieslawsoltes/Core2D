@@ -1303,7 +1303,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Removes the <see cref="Project.CurrentGroupLibrary"/> <see cref="GroupLibrary.CurrentGroup"/> object from the <see cref="Project.CurrentGroupLibrary"/> <see cref="GroupLibrary.Groups"/> collection.
+        /// Removes the <see cref="Project.CurrentGroupLibrary"/> <see cref="Library{XGroup}.Selected"/> object from the <see cref="Project.CurrentGroupLibrary"/> <see cref="Library{XGroup}.Items"/> collection.
         /// </summary>
         public void RemoveCurrentGroup()
         {
@@ -1417,7 +1417,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Removes the <see cref="Project.CurrentStyleLibrary"/> <see cref="StyleLibrary.CurrentStyle"/> object from the <see cref="Project.CurrentStyleLibrary"/> <see cref="StyleLibrary.Styles"/> collection.
+        /// Removes the <see cref="Project.CurrentStyleLibrary"/> <see cref="Library{ShapeStyle}.Selected"/> object from the <see cref="Project.CurrentStyleLibrary"/> <see cref="Library{ShapeStyle}.Items"/> collection.
         /// </summary>
         public void RemoveCurrentStyle()
         {
@@ -1624,7 +1624,7 @@ namespace Core2D
                     var shapes = GetAllShapes((shape as XGroup).Shapes);
                     if (_enableHistory)
                     {
-                        foreach (var child in shapes) 
+                        foreach (var child in shapes)
                         {
                             var previous = child.Style;
                             var next = style;
@@ -1634,7 +1634,7 @@ namespace Core2D
                     }
                     else
                     {
-                        foreach (var child in shapes) 
+                        foreach (var child in shapes)
                         {
                             child.Style = style;
                         }
@@ -1656,7 +1656,7 @@ namespace Core2D
                 }
             }
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
