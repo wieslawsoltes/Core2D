@@ -15,19 +15,12 @@
             <ContentControl.Style>
                 <Style TargetType="ContentControl">
                     <Setter Property="Visibility" Value="Visible"/>
-                    <Setter Property="Content" Value="{Binding Editor.Renderers[0].State.SelectedShape.Style}"/>
+                    <Setter Property="Content" Value="{Binding Editor.Project.CurrentStyleLibrary.Selected}"/>
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding Editor.Renderers[0].State.SelectedShape.Style}" Value="{x:Null}">
-                            <Setter Property="Content" Value="{Binding Editor.Project.CurrentStyleLibrary.Selected}"/>
-                        </DataTrigger>
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding Editor.Renderers[0].State.SelectedShape.Style}" Value="{x:Null}"/>
-                                <Condition Binding="{Binding Editor.Project.CurrentStyleLibrary.Selected}" Value="{x:Null}"/>
-                            </MultiDataTrigger.Conditions>
+                        <DataTrigger Binding="{Binding Editor.Project.CurrentStyleLibrary.Selected}" Value="{x:Null}">
                             <Setter Property="Visibility" Value="Hidden"/>
                             <Setter Property="Content" Value="{x:Null}"/>
-                        </MultiDataTrigger>
+                        </DataTrigger>
                     </Style.Triggers>
                 </Style>
             </ContentControl.Style>
