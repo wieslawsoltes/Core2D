@@ -211,9 +211,10 @@ namespace Core2D
         /// </summary>
         public void Unload()
         {
-            if (_enableObserver && _project != null)
+            if (_enableObserver && _project != null && Observer != null)
             {
-                Observer.Remove(_project);
+                Observer.Dispose();
+                Observer = null;
             }
 
             Deselect();
@@ -1110,7 +1111,7 @@ namespace Core2D
             if (_project == null || _project.GroupLibraries == null)
                 return;
 
-            var gl = GroupLibrary.Create(name);
+            var gl = Library<XGroup>.Create(name);
 
             if (_enableHistory)
             {
@@ -1134,7 +1135,7 @@ namespace Core2D
             if (_project == null || _project.StyleLibraries == null)
                 return;
 
-            var sl = StyleLibrary.Create(name);
+            var sl = Library<ShapeStyle>.Create(name);
 
             if (_enableHistory)
             {
@@ -1162,14 +1163,14 @@ namespace Core2D
 
             if (_enableHistory)
             {
-                var previous = sl.Styles;
-                var next = sl.Styles.Add(ShapeStyle.Create(name));
-                _history.Snapshot(previous, next, (p) => sl.Styles = p);
-                sl.Styles = next;
+                var previous = sl.Items;
+                var next = sl.Items.Add(ShapeStyle.Create(name));
+                _history.Snapshot(previous, next, (p) => sl.Items = p);
+                sl.Items = next;
             }
             else
             {
-                sl.Styles = sl.Styles.Add(ShapeStyle.Create(name));
+                sl.Items = sl.Items.Add(ShapeStyle.Create(name));
             }
         }
 
@@ -1186,14 +1187,14 @@ namespace Core2D
 
             if (_enableHistory)
             {
-                var previous = gl.Groups;
-                var next = gl.Groups.Add(group);
-                _history.Snapshot(previous, next, (p) => gl.Groups = p);
-                gl.Groups = next;
+                var previous = gl.Items;
+                var next = gl.Items.Add(group);
+                _history.Snapshot(previous, next, (p) => gl.Items = p);
+                gl.Items = next;
             }
             else
             {
-                gl.Groups = gl.Groups.Add(group);
+                gl.Items = gl.Items.Add(group);
             }
         }
 
@@ -1211,14 +1212,14 @@ namespace Core2D
 
             if (_enableHistory)
             {
-                var previous = gl.Groups;
-                var next = gl.Groups.Add(group);
-                _history.Snapshot(previous, next, (p) => gl.Groups = p);
-                gl.Groups = next;
+                var previous = gl.Items;
+                var next = gl.Items.Add(group);
+                _history.Snapshot(previous, next, (p) => gl.Items = p);
+                gl.Items = next;
             }
             else
             {
-                gl.Groups = gl.Groups.Add(group);
+                gl.Items = gl.Items.Add(group);
             }
         }
 
@@ -1309,7 +1310,7 @@ namespace Core2D
             if (_project == null || _project.CurrentGroupLibrary == null)
                 return;
 
-            var group = _project.CurrentGroupLibrary.CurrentGroup;
+            var group = _project.CurrentGroupLibrary.Selected;
             if (group == null)
                 return;
 
@@ -1317,17 +1318,17 @@ namespace Core2D
 
             if (_enableHistory)
             {
-                var previous = gl.Groups;
-                var next = gl.Groups.Remove(group);
-                _history.Snapshot(previous, next, (p) => gl.Groups = p);
-                gl.Groups = next;
+                var previous = gl.Items;
+                var next = gl.Items.Remove(group);
+                _history.Snapshot(previous, next, (p) => gl.Items = p);
+                gl.Items = next;
             }
             else
             {
-                gl.Groups = gl.Groups.Remove(group);
+                gl.Items = gl.Items.Remove(group);
             }
 
-            _project.CurrentGroupLibrary.CurrentGroup = _project.CurrentGroupLibrary.Groups.FirstOrDefault();
+            _project.CurrentGroupLibrary.Selected = _project.CurrentGroupLibrary.Items.FirstOrDefault();
         }
 
         /// <summary>
@@ -1423,7 +1424,7 @@ namespace Core2D
             if (_project == null || _project.CurrentStyleLibrary == null)
                 return;
 
-            var style = _project.CurrentStyleLibrary.CurrentStyle;
+            var style = _project.CurrentStyleLibrary.Selected;
             if (style == null)
                 return;
 
@@ -1431,17 +1432,17 @@ namespace Core2D
 
             if (_enableHistory)
             {
-                var previous = sg.Styles;
-                var next = sg.Styles.Remove(style);
-                _history.Snapshot(previous, next, (p) => sg.Styles = p);
-                sg.Styles = next;
+                var previous = sg.Items;
+                var next = sg.Items.Remove(style);
+                _history.Snapshot(previous, next, (p) => sg.Items = p);
+                sg.Items = next;
             }
             else
             {
-                sg.Styles = sg.Styles.Remove(style);
+                sg.Items = sg.Items.Remove(style);
             }
 
-            _project.CurrentStyleLibrary.CurrentStyle = _project.CurrentStyleLibrary.Styles.FirstOrDefault();
+            _project.CurrentStyleLibrary.Selected = _project.CurrentStyleLibrary.Items.FirstOrDefault();
         }
 
         /// <summary>
@@ -1612,68 +1613,69 @@ namespace Core2D
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="shape"></param>
         /// <param name="style"></param>
-        public void ApplyStyle(ShapeStyle style)
+        public void ApplyStyle(BaseShape shape, ShapeStyle style)
         {
-            if (_project == null || _project.CurrentContainer == null)
-                return;
-
-            var container = _project.CurrentContainer;
-
-            if (_enableHistory)
+            if (shape != null)
             {
-                if (_renderers[0].State.SelectedShape != null)
+                if (shape is XGroup)
                 {
-                    var shape = _renderers[0].State.SelectedShape;
-                    var previous = shape.Style;
-                    var next = style;
-                    _history.Snapshot(previous, next, (p) => shape.Style = p);
-                    shape.Style = next;
+                    var shapes = GetAllShapes((shape as XGroup).Shapes);
+                    if (_enableHistory)
+                    {
+                        foreach (var child in shapes) 
+                        {
+                            var previous = child.Style;
+                            var next = style;
+                            _history.Snapshot(previous, next, (p) => child.Style = p);
+                            child.Style = next;
+                        }
+                    }
+                    else
+                    {
+                        foreach (var child in shapes) 
+                        {
+                            child.Style = style;
+                        }
+                    }
                 }
-                else if (_renderers[0].State.SelectedShapes != null && _renderers[0].State.SelectedShapes.Count > 0)
+                else
                 {
-                    foreach (var shape in _renderers[0].State.SelectedShapes)
+                    if (_enableHistory)
                     {
                         var previous = shape.Style;
                         var next = style;
                         _history.Snapshot(previous, next, (p) => shape.Style = p);
                         shape.Style = next;
                     }
-                }
-            }
-            else
-            {
-                if (_renderers[0].State.SelectedShape != null)
-                {
-                    _renderers[0].State.SelectedShape.Style = style;
-                }
-                else if (_renderers[0].State.SelectedShapes != null && _renderers[0].State.SelectedShapes.Count > 0)
-                {
-                    foreach (var shape in _renderers[0].State.SelectedShapes)
+                    else
                     {
                         shape.Style = style;
                     }
                 }
             }
         }
-
+        
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="shape"></param>
         /// <param name="style"></param>
-        public void ApplyStyle(BaseShape shape, ShapeStyle style)
+        public void ApplyStyle(ShapeStyle style)
         {
-            if (_enableHistory)
+            if (_project == null || _project.CurrentContainer == null)
+                return;
+
+            if (_renderers[0].State.SelectedShape != null)
             {
-                var previous = shape.Style;
-                var next = style;
-                _history.Snapshot(previous, next, (p) => shape.Style = p);
-                shape.Style = next;
+                ApplyStyle(_renderers[0].State.SelectedShape, style);
             }
-            else
+            else if (_renderers[0].State.SelectedShapes != null && _renderers[0].State.SelectedShapes.Count > 0)
             {
-                shape.Style = style;
+                foreach (var shape in _renderers[0].State.SelectedShapes)
+                {
+                    ApplyStyle(shape, style);
+                }
             }
         }
 
@@ -1692,17 +1694,7 @@ namespace Core2D
             var result = ShapeBounds.HitTest(container, new Vector2(x, y), _project.Options.HitTreshold);
             if (result != null)
             {
-                if (_enableHistory)
-                {
-                    var previous = result.Style;
-                    var next = style;
-                    _history.Snapshot(previous, next, (p) => result.Style = p);
-                    result.Style = next;
-                }
-                else
-                {
-                    result.Style = style;
-                }
+                ApplyStyle(result, style);
             }
         }
 
@@ -2904,7 +2896,7 @@ namespace Core2D
                 && _project.CurrentContainer.CurrentLayer != null
                 && _project.CurrentContainer.CurrentLayer.IsVisible
                 && _project.CurrentStyleLibrary != null
-                && _project.CurrentStyleLibrary.CurrentStyle != null;
+                && _project.CurrentStyleLibrary.Selected != null;
         }
 
         /// <summary>
@@ -2918,7 +2910,7 @@ namespace Core2D
                 && _project.CurrentContainer.CurrentLayer != null
                 && _project.CurrentContainer.CurrentLayer.IsVisible
                 && _project.CurrentStyleLibrary != null
-                && _project.CurrentStyleLibrary.CurrentStyle != null;
+                && _project.CurrentStyleLibrary.Selected != null;
         }
 
         /// <summary>
@@ -2932,7 +2924,7 @@ namespace Core2D
                 && _project.CurrentContainer.CurrentLayer != null
                 && _project.CurrentContainer.CurrentLayer.IsVisible
                 && _project.CurrentStyleLibrary != null
-                && _project.CurrentStyleLibrary.CurrentStyle != null;
+                && _project.CurrentStyleLibrary.Selected != null;
         }
 
         /// <summary>
@@ -2946,7 +2938,7 @@ namespace Core2D
                 && _project.CurrentContainer.CurrentLayer != null
                 && _project.CurrentContainer.CurrentLayer.IsVisible
                 && _project.CurrentStyleLibrary != null
-                && _project.CurrentStyleLibrary.CurrentStyle != null;
+                && _project.CurrentStyleLibrary.Selected != null;
         }
 
         /// <summary>
@@ -2960,7 +2952,7 @@ namespace Core2D
                 && _project.CurrentContainer.CurrentLayer != null
                 && _project.CurrentContainer.CurrentLayer.IsVisible
                 && _project.CurrentStyleLibrary != null
-                && _project.CurrentStyleLibrary.CurrentStyle != null;
+                && _project.CurrentStyleLibrary.Selected != null;
         }
 
         /// <summary>
