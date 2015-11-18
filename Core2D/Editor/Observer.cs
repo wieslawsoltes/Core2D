@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Core2D
 {
     /// <summary>
-    /// Observe edited project chnages.
+    /// Observe edited project changes.
     /// </summary>
     public class Observer : IDisposable
     {
@@ -121,7 +121,7 @@ namespace Core2D
                 }
             }
         }
-  
+
         private void MarkAsDirty()
         {
             if (_editor != null)
@@ -132,14 +132,15 @@ namespace Core2D
 
         private void DatabaseObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "Columns")
+
+            if (e.PropertyName == nameof(Database.Columns))
             {
                 var database = sender as Database;
                 Remove(database.Columns);
                 Add(database.Columns);
             }
 
-            if (e.PropertyName == "Records")
+            if (e.PropertyName == nameof(Database.Records))
             {
                 var database = sender as Database;
                 Remove(database.Records);
@@ -158,14 +159,14 @@ namespace Core2D
 
         private void RecordObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "Columns")
+            if (e.PropertyName == nameof(Record.Columns))
             {
                 var record = sender as Record;
                 Remove(record.Columns);
                 Add(record.Columns);
             }
 
-            if (e.PropertyName == "Values")
+            if (e.PropertyName == nameof(Record.Values))
             {
                 var record = sender as Record;
                 Remove(record.Values);
@@ -184,35 +185,35 @@ namespace Core2D
 
         private void ProjectObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "Databases")
+            if (e.PropertyName == nameof(Project.Databases))
             {
                 var project = sender as Project;
                 Remove(project.Databases);
                 Add(project.Databases);
             }
 
-            if (e.PropertyName == "StyleLibraries")
+            if (e.PropertyName == nameof(Project.StyleLibraries))
             {
                 var project = sender as Project;
                 Remove(project.StyleLibraries);
                 Add(project.StyleLibraries);
             }
 
-            if (e.PropertyName == "GroupLibraries")
+            if (e.PropertyName == nameof(Project.GroupLibraries))
             {
                 var project = sender as Project;
                 Remove(project.GroupLibraries);
                 Add(project.GroupLibraries);
             }
 
-            if (e.PropertyName == "Templates")
+            if (e.PropertyName == nameof(Project.Templates))
             {
                 var project = sender as Project;
                 Remove(project.Templates);
                 Add(project.Templates);
             }
 
-            if (e.PropertyName == "Documents")
+            if (e.PropertyName == nameof(Project.Documents))
             {
                 var project = sender as Project;
                 Remove(project.Documents);
@@ -230,7 +231,7 @@ namespace Core2D
 
         private void DocumentObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "Containers")
+            if (e.PropertyName == nameof(Document.Containers))
             {
                 var document = sender as Document;
                 Remove(document.Containers);
@@ -243,14 +244,14 @@ namespace Core2D
 
         private void ContainerObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "Properties")
+            if (e.PropertyName == nameof(Data.Properties))
             {
                 var container = sender as Container;
                 Remove(container.Data.Properties);
                 Add(container.Data.Properties);
             }
 
-            if (e.PropertyName == "Layers")
+            if (e.PropertyName == nameof(Container.Layers))
             {
                 var container = sender as Container;
                 Remove(container.Layers);
@@ -261,8 +262,8 @@ namespace Core2D
 
             // NOTE: Do not mark project as dirty when current shape changes.
             // NOTE: Do not mark project as dirty when current layer changes.
-            if (e.PropertyName != "CurrentShape"
-                && e.PropertyName != "CurrentLayer")
+            if (e.PropertyName != nameof(Container.CurrentShape)
+                && e.PropertyName != nameof(Container.CurrentLayer))
             {
                 MarkAsDirty();
             }
@@ -270,10 +271,10 @@ namespace Core2D
 
         private void ContainerBackgroudObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            _editor.Project.CurrentContainer.Notify("Background");
+            _editor.Project.CurrentContainer.Notify(nameof(Container.Background));
             if (_editor.Project.CurrentContainer.Template != null)
             {
-                _editor.Project.CurrentContainer.Template.Notify("Background");
+                _editor.Project.CurrentContainer.Template.Notify(nameof(Container.Background));
             }
             MarkAsDirty();
         }
@@ -288,7 +289,7 @@ namespace Core2D
 
         private void LayerObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "Shapes")
+            if (e.PropertyName == nameof(Layer.Shapes))
             {
                 var layer = sender as Layer;
                 Remove(layer.Shapes);
@@ -307,7 +308,7 @@ namespace Core2D
 
         private void StyleLibraryObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "Styles")
+            if (e.PropertyName == nameof(Library<ShapeStyle>.Items))
             {
                 var sg = sender as Library<ShapeStyle>;
                 Remove(sg.Items);
@@ -317,7 +318,7 @@ namespace Core2D
             _invalidateStyles();
 
             // NOTE: Do not mark project as dirty when current style changes.
-            if (e.PropertyName != "CurrentStyle")
+            if (e.PropertyName != nameof(Library<ShapeStyle>.Selected))
             {
                 MarkAsDirty();
             }
@@ -325,14 +326,18 @@ namespace Core2D
 
         private void GroupLibraryObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "Groups")
+            if (e.PropertyName == nameof(Library<XGroup>.Items))
             {
                 var sg = sender as Library<XGroup>;
                 Remove(sg.Items);
                 Add(sg.Items);
             }
 
-            MarkAsDirty();
+            // NOTE: Do not mark project as dirty when current group changes.
+            if (e.PropertyName != nameof(Library<XGroup>.Selected))
+            {
+                MarkAsDirty();
+            }
         }
 
         private void StyleObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -349,7 +354,7 @@ namespace Core2D
 
         private void DataObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "Properties")
+            if (e.PropertyName == nameof(Data.Properties))
             {
                 var data = sender as Data;
                 Remove(data.Properties);
@@ -1540,7 +1545,7 @@ namespace Core2D
             {
                 Remove(g);
             }
-        }      
+        }
 
         private void Add(IEnumerable<Property> properties)
         {
