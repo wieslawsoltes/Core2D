@@ -71,11 +71,11 @@ namespace Core2D.Sample
             project.CurrentStyleLibrary = project.StyleLibraries.FirstOrDefault();
 
             editor.AddStyle();
-            project.CurrentStyleLibrary.CurrentStyle = project.CurrentStyleLibrary.Styles.FirstOrDefault();
+            project.CurrentStyleLibrary.Selected = project.CurrentStyleLibrary.Items.FirstOrDefault();
 
-            var line = XLine.Create(30, 30, 60, 30, project.CurrentStyleLibrary.CurrentStyle, project.Options.PointShape);
+            var line = XLine.Create(30, 30, 60, 30, project.CurrentStyleLibrary.Selected, project.Options.PointShape);
             editor.AddShape(line);
-            var text = XText.Create(30, 30, 60, 60, project.CurrentStyleLibrary.CurrentStyle, project.Options.PointShape, "Sample3");
+            var text = XText.Create(30, 30, 60, 60, project.CurrentStyleLibrary.Selected, project.Options.PointShape, "Sample3");
             editor.AddShape(text);
 
             Project.Save(project, "sample3.project", new NewtonsoftSerializer());
