@@ -1,10 +1,8 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-//#define VERBOSE
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,9 +10,9 @@ using System.Threading.Tasks;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Observe edited project chnages.
     /// </summary>
-    public class Observer
+    public class Observer : IDisposable
     {
         private readonly Editor _editor;
         private readonly Action _invalidateContainer;
@@ -23,14 +21,14 @@ namespace Core2D
         private readonly Action _invalidateShapes;
 
         /// <summary>
-        /// 
+        /// Gets or sets flag indicating whether observer is paused.
         /// </summary>
         public bool IsPaused { get; set; }
 
         /// <summary>
-        /// 
+        /// Initializes a new instance of the <see cref="Observer"/> class.
         /// </summary>
-        /// <param name="editor"></param>
+        /// <param name="editor">The current <see cref="Editor"/> object.</param>
         public Observer(Editor editor)
         {
             _editor = editor;
@@ -93,18 +91,37 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Performs freeing, releasing, or resetting unmanaged resources.
         /// </summary>
-        /// <param name="text"></param>
-        [Conditional("VERBOSE")]
-        private void Verbose(string text)
+        public void Dispose()
         {
-            Debug.WriteLine(text);
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         /// <summary>
-        /// 
+        /// Performs freeing, releasing, or resetting unmanaged resources.
         /// </summary>
+        ~Observer()
+        {
+            Dispose(false);
+        }
+
+        /// <summary>
+        /// Performs freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        /// <param name="disposing">The flag indicating whether disposing.</param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (_editor != null && _editor.Project != null)
+                {
+                    Remove(_editor.Project);
+                }
+            }
+        }
+  
         private void MarkAsDirty()
         {
             if (_editor != null)
@@ -113,15 +130,8 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void DatabaseObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            Verbose("Database: " + sender.GetType() + ", Property: " + e.PropertyName);
-
             if (e.PropertyName == "Columns")
             {
                 var database = sender as Database;
@@ -140,27 +150,14 @@ namespace Core2D
             MarkAsDirty();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void ColumnObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            Verbose("Column: " + sender.GetType() + ", Property: " + e.PropertyName);
             _invalidateShapes();
             MarkAsDirty();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void RecordObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            Verbose("Record: " + sender.GetType() + ", Property: " + e.PropertyName);
-
             if (e.PropertyName == "Columns")
             {
                 var record = sender as Record;
@@ -179,27 +176,14 @@ namespace Core2D
             MarkAsDirty();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void ValueObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            Verbose("Value: " + sender.GetType() + ", Property: " + e.PropertyName);
             _invalidateShapes();
             MarkAsDirty();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void ProjectObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            Verbose("Project: " + sender.GetType() + ", Property: " + e.PropertyName);
-
             if (e.PropertyName == "Databases")
             {
                 var project = sender as Project;
@@ -244,15 +228,8 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void DocumentObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            Verbose("Document: " + sender.GetType() + ", Property: " + e.PropertyName);
-
             if (e.PropertyName == "Containers")
             {
                 var document = sender as Document;
@@ -264,15 +241,8 @@ namespace Core2D
             MarkAsDirty();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void ContainerObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            Verbose("Container: " + (sender is Container ? (sender as Container).Name : sender.GetType().ToString()) + ", Property: " + e.PropertyName);
-
             if (e.PropertyName == "Properties")
             {
                 var container = sender as Container;
@@ -298,15 +268,8 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void ContainerBackgroudObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            Verbose("Background: " + sender.GetType().ToString() + ", Property: " + e.PropertyName);
-
             _editor.Project.CurrentContainer.Notify("Background");
             if (_editor.Project.CurrentContainer.Template != null)
             {
@@ -315,11 +278,6 @@ namespace Core2D
             MarkAsDirty();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void InvalidateLayerObserver(object sender, InvalidateLayerEventArgs e)
         {
             if (_editor.Invalidate != null)
@@ -328,15 +286,8 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void LayerObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            Verbose("Layer: " + (sender is Layer ? (sender as Layer).Name : sender.GetType().ToString()) + ", Property: " + e.PropertyName);
-
             if (e.PropertyName == "Shapes")
             {
                 var layer = sender as Layer;
@@ -348,32 +299,19 @@ namespace Core2D
             MarkAsDirty();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void ShapeObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            Verbose("Shape: " + sender.GetType() + ", Property: " + e.PropertyName);
             _invalidateShapes();
             MarkAsDirty();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void StyleLibraryObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            Verbose("Style Library: " + (sender is StyleLibrary ? (sender as StyleLibrary).Name : sender.GetType().ToString()) + ", Property: " + e.PropertyName);
-
             if (e.PropertyName == "Styles")
             {
-                var sg = sender as StyleLibrary;
-                Remove(sg.Styles);
-                Add(sg.Styles);
+                var sg = sender as Library<ShapeStyle>;
+                Remove(sg.Items);
+                Add(sg.Items);
             }
 
             _invalidateStyles();
@@ -385,58 +323,32 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void GroupLibraryObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            Verbose("Group Library: " + (sender is GroupLibrary ? (sender as GroupLibrary).Name : sender.GetType().ToString()) + ", Property: " + e.PropertyName);
-
             if (e.PropertyName == "Groups")
             {
-                var sg = sender as GroupLibrary;
-                Remove(sg.Groups);
-                Add(sg.Groups);
+                var sg = sender as Library<XGroup>;
+                Remove(sg.Items);
+                Add(sg.Items);
             }
 
             MarkAsDirty();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void StyleObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            Verbose("Style: " + (sender is ShapeStyle ? (sender as ShapeStyle).Name : sender.GetType().ToString()) + ", Property: " + e.PropertyName);
             _invalidateStyles();
             MarkAsDirty();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void PropertyObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            Verbose("Property: " + sender.GetType() + ", Property: " + e.PropertyName);
             _invalidateShapes();
             MarkAsDirty();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void DataObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            Verbose("Data: " + sender.GetType() + ", Property: " + e.PropertyName);
-
             if (e.PropertyName == "Properties")
             {
                 var data = sender as Data;
@@ -448,30 +360,18 @@ namespace Core2D
             MarkAsDirty();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void StateObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            Verbose("State: " + sender.GetType() + ", Property: " + e.PropertyName);
             _invalidateShapes();
             MarkAsDirty();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="database"></param>
-        public void Add(Database database)
+        private void Add(Database database)
         {
             if (database == null)
                 return;
 
             database.PropertyChanged += DatabaseObserver;
-
-            Verbose("Add Database: " + database.Name);
 
             if (database.Columns != null)
             {
@@ -484,18 +384,12 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="database"></param>
-        public void Remove(Database database)
+        private void Remove(Database database)
         {
             if (database == null)
                 return;
 
             database.PropertyChanged -= DatabaseObserver;
-
-            Verbose("Remove Database: " + database.Name);
 
             if (database.Columns != null)
             {
@@ -508,39 +402,23 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="column"></param>
-        public void Add(Column column)
+        private void Add(Column column)
         {
             if (column == null)
                 return;
 
             column.PropertyChanged += ColumnObserver;
-
-            Verbose("Add Column: " + column.Id);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="column"></param>
-        public void Remove(Column column)
+        private void Remove(Column column)
         {
             if (column == null)
                 return;
 
             column.PropertyChanged -= ColumnObserver;
-
-            Verbose("Remove Column: " + column.Id);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="record"></param>
-        public void Add(Record record)
+        private void Add(Record record)
         {
             if (record == null)
                 return;
@@ -551,15 +429,9 @@ namespace Core2D
             {
                 Add(record.Values);
             }
-
-            Verbose("Add Record: " + record.Id);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="record"></param>
-        public void Remove(Record record)
+        private void Remove(Record record)
         {
             if (record == null)
                 return;
@@ -570,43 +442,25 @@ namespace Core2D
             {
                 Remove(record.Values);
             }
-
-            Verbose("Remove Record: " + record.Id);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="value"></param>
-        public void Add(Value value)
+        private void Add(Value value)
         {
             if (value == null)
                 return;
 
             value.PropertyChanged += ValueObserver;
-
-            Verbose("Add Value");
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="value"></param>
-        public void Remove(Value value)
+        private void Remove(Value value)
         {
             if (value == null)
                 return;
 
             value.PropertyChanged -= ValueObserver;
-
-            Verbose("Remove Value");
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="options"></param>
-        public void Add(Options options)
+        private void Add(Options options)
         {
             if (options == null)
                 return;
@@ -632,11 +486,7 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="options"></param>
-        public void Remove(Options options)
+        private void Remove(Options options)
         {
             if (options == null)
                 return;
@@ -662,18 +512,12 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="project"></param>
-        public void Add(Project project)
+        private void Add(Project project)
         {
             if (project == null)
                 return;
 
             project.PropertyChanged += ProjectObserver;
-
-            Verbose("Add Project: " + project.Name);
 
             Add(project.Options);
 
@@ -710,18 +554,12 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="project"></param>
-        public void Remove(Project project)
+        private void Remove(Project project)
         {
             if (project == null)
                 return;
 
             project.PropertyChanged -= ProjectObserver;
-
-            Verbose("Remove Project: " + project.Name);
 
             Remove(project.Options);
 
@@ -758,18 +596,12 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="document"></param>
-        public void Add(Document document)
+        private void Add(Document document)
         {
             if (document == null)
                 return;
 
             document.PropertyChanged += DocumentObserver;
-
-            Verbose("Add Document: " + document.Name);
 
             if (document.Containers != null)
             {
@@ -780,18 +612,12 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="document"></param>
-        public void Remove(Document document)
+        private void Remove(Document document)
         {
             if (document == null)
                 return;
 
             document.PropertyChanged -= DocumentObserver;
-
-            Verbose("Remove Document: " + document.Name);
 
             if (document.Containers != null)
             {
@@ -802,11 +628,7 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="container"></param>
-        public void Add(Container container)
+        private void Add(Container container)
         {
             if (container == null)
                 return;
@@ -817,8 +639,6 @@ namespace Core2D
             {
                 container.Background.PropertyChanged += ContainerBackgroudObserver;
             }
-
-            Verbose("Add Container: " + container.Name);
 
             if (container.Layers != null)
             {
@@ -832,15 +652,12 @@ namespace Core2D
 
             container.WorkingLayer.InvalidateLayer += InvalidateLayerObserver;
             container.HelperLayer.InvalidateLayer += InvalidateLayerObserver;
+
             //Add(container.WorkingLayer);
             //Add(container.HelperLayer);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="container"></param>
-        public void Remove(Container container)
+        private void Remove(Container container)
         {
             if (container == null)
                 return;
@@ -851,8 +668,6 @@ namespace Core2D
             {
                 container.Background.PropertyChanged -= ContainerBackgroudObserver;
             }
-
-            Verbose("Remove Container: " + container.Name);
 
             if (container.Layers != null)
             {
@@ -866,22 +681,17 @@ namespace Core2D
 
             container.WorkingLayer.InvalidateLayer -= InvalidateLayerObserver;
             container.HelperLayer.InvalidateLayer -= InvalidateLayerObserver;
+
             //Remove(container.WorkingLayer);
             //Remove(container.HelperLayer);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="layer"></param>
-        public void Add(Layer layer)
+        private void Add(Layer layer)
         {
             if (layer == null)
                 return;
 
             layer.PropertyChanged += LayerObserver;
-
-            Verbose("Add Layer: " + layer.Name);
 
             if (layer.Shapes != null)
             {
@@ -891,18 +701,12 @@ namespace Core2D
             layer.InvalidateLayer += InvalidateLayerObserver;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="layer"></param>
-        public void Remove(Layer layer)
+        private void Remove(Layer layer)
         {
             if (layer == null)
                 return;
 
             layer.PropertyChanged -= LayerObserver;
-
-            Verbose("Remove Layer: " + layer.Name);
 
             if (layer.Shapes != null)
             {
@@ -912,11 +716,7 @@ namespace Core2D
             layer.InvalidateLayer -= InvalidateLayerObserver;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="shape"></param>
-        public void Add(BaseShape shape)
+        private void Add(BaseShape shape)
         {
             if (shape == null)
                 return;
@@ -1104,15 +904,9 @@ namespace Core2D
                     }
                 }
             }
-
-            Verbose("Add Shape: " + shape.GetType());
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="shape"></param>
-        public void Remove(BaseShape shape)
+        private void Remove(BaseShape shape)
         {
             if (shape == null)
                 return;
@@ -1300,87 +1094,61 @@ namespace Core2D
                     }
                 }
             }
-
-            Verbose("Remove Shape: " + shape.GetType());
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sg"></param>
-        public void Add(StyleLibrary sg)
+        private void Add(Library<ShapeStyle> sg)
         {
             if (sg == null)
                 return;
 
-            if (sg.Styles != null)
+            if (sg.Items != null)
             {
-                Add(sg.Styles);
+                Add(sg.Items);
             }
 
             sg.PropertyChanged += StyleLibraryObserver;
-            Verbose("Add Style Library: " + sg.Name);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sg"></param>
-        public void Remove(StyleLibrary sg)
+        private void Remove(Library<ShapeStyle> sg)
         {
             if (sg == null)
                 return;
 
-            if (sg.Styles != null)
+            if (sg.Items != null)
             {
-                Remove(sg.Styles);
+                Remove(sg.Items);
             }
 
             sg.PropertyChanged -= StyleLibraryObserver;
-            Verbose("Remove Style Library: " + sg.Name);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="gl"></param>
-        public void Add(GroupLibrary gl)
+        private void Add(Library<XGroup> gl)
         {
             if (gl == null)
                 return;
 
-            if (gl.Groups != null)
+            if (gl.Items != null)
             {
-                Add(gl.Groups);
+                Add(gl.Items);
             }
 
             gl.PropertyChanged += GroupLibraryObserver;
-            Verbose("Add Group Library: " + gl.Name);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="gl"></param>
-        public void Remove(GroupLibrary gl)
+        private void Remove(Library<XGroup> gl)
         {
             if (gl == null)
                 return;
 
-            if (gl.Groups != null)
+            if (gl.Items != null)
             {
-                Remove(gl.Groups);
+                Remove(gl.Items);
             }
 
             gl.PropertyChanged -= GroupLibraryObserver;
-            Verbose("Remove Group Library: " + gl.Name);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="style"></param>
-        public void Add(ShapeStyle style)
+        private void Add(ShapeStyle style)
         {
             if (style == null)
                 return;
@@ -1446,15 +1214,9 @@ namespace Core2D
                     style.TextStyle.FontStyle.PropertyChanged += StyleObserver;
                 }
             }
-
-            Verbose("Add Style: " + style.Name);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="style"></param>
-        public void Remove(ShapeStyle style)
+        private void Remove(ShapeStyle style)
         {
             if (style == null)
                 return;
@@ -1520,41 +1282,25 @@ namespace Core2D
                     style.TextStyle.FontStyle.PropertyChanged -= StyleObserver;
                 }
             }
-
-            Verbose("Remove Style: " + style.Name);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="property"></param>
-        public void Add(Property property)
+        private void Add(Property property)
         {
             if (property == null)
                 return;
 
             property.PropertyChanged += PropertyObserver;
-            Verbose("Add Property: " + property.Name + ", type: " + property.Value.GetType());
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="property"></param>
-        public void Remove(Property property)
+        private void Remove(Property property)
         {
             if (property == null)
                 return;
 
             property.PropertyChanged += PropertyObserver;
-            Verbose("Remove Property: " + property.Name + ", type: " + property.Value.GetType());
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="databases"></param>
-        public void Add(IEnumerable<Database> databases)
+        private void Add(IEnumerable<Database> databases)
         {
             if (databases == null)
                 return;
@@ -1565,11 +1311,7 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="databases"></param>
-        public void Remove(IEnumerable<Database> databases)
+        private void Remove(IEnumerable<Database> databases)
         {
             if (databases == null)
                 return;
@@ -1580,11 +1322,7 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="columns"></param>
-        public void Add(IEnumerable<Column> columns)
+        private void Add(IEnumerable<Column> columns)
         {
             if (columns == null)
                 return;
@@ -1595,11 +1333,7 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="columns"></param>
-        public void Remove(IEnumerable<Column> columns)
+        private void Remove(IEnumerable<Column> columns)
         {
             if (columns == null)
                 return;
@@ -1610,11 +1344,7 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="records"></param>
-        public void Add(IEnumerable<Record> records)
+        private void Add(IEnumerable<Record> records)
         {
             if (records == null)
                 return;
@@ -1625,11 +1355,7 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="records"></param>
-        public void Remove(IEnumerable<Record> records)
+        private void Remove(IEnumerable<Record> records)
         {
             if (records == null)
                 return;
@@ -1640,11 +1366,7 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="values"></param>
-        public void Add(IEnumerable<Value> values)
+        private void Add(IEnumerable<Value> values)
         {
             if (values == null)
                 return;
@@ -1655,11 +1377,7 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="values"></param>
-        public void Remove(IEnumerable<Value> values)
+        private void Remove(IEnumerable<Value> values)
         {
             if (values == null)
                 return;
@@ -1670,11 +1388,7 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="documents"></param>
-        public void Add(IEnumerable<Document> documents)
+        private void Add(IEnumerable<Document> documents)
         {
             if (documents == null)
                 return;
@@ -1685,11 +1399,7 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="documents"></param>
-        public void Remove(IEnumerable<Document> documents)
+        private void Remove(IEnumerable<Document> documents)
         {
             if (documents == null)
                 return;
@@ -1700,11 +1410,7 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="containers"></param>
-        public void Add(IEnumerable<Container> containers)
+        private void Add(IEnumerable<Container> containers)
         {
             if (containers == null)
                 return;
@@ -1715,11 +1421,7 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="containers"></param>
-        public void Remove(IEnumerable<Container> containers)
+        private void Remove(IEnumerable<Container> containers)
         {
             if (containers == null)
                 return;
@@ -1730,11 +1432,7 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="layers"></param>
-        public void Add(IEnumerable<Layer> layers)
+        private void Add(IEnumerable<Layer> layers)
         {
             if (layers == null)
                 return;
@@ -1745,11 +1443,7 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="layers"></param>
-        public void Remove(IEnumerable<Layer> layers)
+        private void Remove(IEnumerable<Layer> layers)
         {
             if (layers == null)
                 return;
@@ -1760,11 +1454,7 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="shapes"></param>
-        public void Add(IEnumerable<BaseShape> shapes)
+        private void Add(IEnumerable<BaseShape> shapes)
         {
             if (shapes == null)
                 return;
@@ -1775,11 +1465,7 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="shapes"></param>
-        public void Remove(IEnumerable<BaseShape> shapes)
+        private void Remove(IEnumerable<BaseShape> shapes)
         {
             if (shapes == null)
                 return;
@@ -1790,11 +1476,7 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="styles"></param>
-        public void Add(IEnumerable<ShapeStyle> styles)
+        private void Add(IEnumerable<ShapeStyle> styles)
         {
             if (styles == null)
                 return;
@@ -1805,11 +1487,7 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="styles"></param>
-        public void Remove(IEnumerable<ShapeStyle> styles)
+        private void Remove(IEnumerable<ShapeStyle> styles)
         {
             if (styles == null)
                 return;
@@ -1820,11 +1498,7 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sgs"></param>
-        public void Add(IEnumerable<StyleLibrary> sgs)
+        private void Add(IEnumerable<Library<ShapeStyle>> sgs)
         {
             if (sgs == null)
                 return;
@@ -1835,11 +1509,7 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sgs"></param>
-        public void Remove(IEnumerable<StyleLibrary> sgs)
+        private void Remove(IEnumerable<Library<ShapeStyle>> sgs)
         {
             if (sgs == null)
                 return;
@@ -1850,11 +1520,7 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="gl"></param>
-        public void Add(IEnumerable<GroupLibrary> gl)
+        private void Add(IEnumerable<Library<XGroup>> gl)
         {
             if (gl == null)
                 return;
@@ -1865,11 +1531,7 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="gl"></param>
-        public void Remove(IEnumerable<GroupLibrary> gl)
+        private void Remove(IEnumerable<Library<XGroup>> gl)
         {
             if (gl == null)
                 return;
@@ -1880,11 +1542,7 @@ namespace Core2D
             }
         }      
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="properties"></param>
-        public void Add(IEnumerable<Property> properties)
+        private void Add(IEnumerable<Property> properties)
         {
             if (properties == null)
                 return;
@@ -1895,11 +1553,7 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="properties"></param>
-        public void Remove(IEnumerable<Property> properties)
+        private void Remove(IEnumerable<Property> properties)
         {
             if (properties == null)
                 return;
