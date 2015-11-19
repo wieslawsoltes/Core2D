@@ -680,62 +680,42 @@
         </TabControl>
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:XLine}">
-        <StackPanel>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="Name" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
-                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" BorderBrush="{x:Null}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="0" Grid.Column="1"/>
-            </Grid>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="Style" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
-                <ComboBox ItemsSource="{Binding Path=DataContext.Editor.Project.CurrentStyleLibrary.Items, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" SelectedItem="{Binding Path=DataContext.Style, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="0" Grid.Column="1">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
-            </Grid>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="IsStroked" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
-                <CheckBox Content="" IsChecked="{Binding IsStroked}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="0" Grid.Column="1"/>
-            </Grid>
-            <Expander Header="Start">
-                <ContentControl Content="{Binding Start}"/>
-            </Expander>
-            <Expander Header="End">
-                <ContentControl Content="{Binding End}"/>
-            </Expander>
-            <Expander Header="State">
+        <TabControl>
+            <TabItem Header="Line">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Name" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                    <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" BorderBrush="{x:Null}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="0" Grid.Column="1"/>
+                    <TextBlock Text="IsStroked" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="1" Grid.Column="0"/>
+                    <CheckBox Content="" IsChecked="{Binding IsStroked}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="1" Grid.Column="1"/>
+                    <TabControl Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
+                        <TabItem Header="Start">
+                            <ContentControl Content="{Binding Start}"/>
+                        </TabItem>
+                        <TabItem Header="End">
+                            <ContentControl Content="{Binding End}"/>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+            </TabItem>
+            <TabItem Header="State">
                 <ContentControl Content="{Binding State}"/>
-            </Expander>
-            <Expander Header="Data">
+            </TabItem>
+            <TabItem Header="Data">
                 <ContentControl Content="{Binding Data}"/>
-            </Expander>
-            <Expander Header="Style">
+            </TabItem>
+            <TabItem Header="Style">
                 <ContentControl Content="{Binding Style}"/>
-            </Expander>
-        </StackPanel>
+            </TabItem>
+        </TabControl>
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:XRectangle}">
         <TabControl>
