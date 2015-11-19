@@ -7,13 +7,13 @@
                     xmlns:converters="clr-namespace:Core2D.UI.Wpf.Converters" 
                     xmlns:controls="clr-namespace:Core2D.UI.Wpf.Controls" 
                     xmlns:p="clr-namespace:Core2D.UI.Wpf.Properties">
-    <!-- converters -->
+    <!-- Converters -->
     <converters:ArgbColorToBrushConverter x:Key="ArgbColorToBrushConverter"/>
     <converters:ArgbColorToBrushMultiConverter x:Key="ArgbColorToBrushMultiConverter"/>
     <converters:BooleanToStringConverter x:Key="BooleanToStarConverter" FalseValue="" TrueValue="*"/>
     <converters:EnumToBooleanConverter x:Key="EnumToBooleanConverter"/>
     <converters:ObjectEqualityConverter x:Key="ObjectEqualityConverter"/>
-    <!-- brushes -->
+    <!-- Brushes -->
     <SolidColorBrush x:Key="BackgroundColor" Color="White"/>
     <DrawingBrush x:Key="CheckerBoard" Viewport="0,0,20,20" ViewportUnits="Absolute" Stretch="None" TileMode="Tile">
         <DrawingBrush.Drawing>
@@ -37,7 +37,7 @@
             </DrawingGroup>
         </DrawingBrush.Drawing>
     </DrawingBrush>
-    <!-- menus -->
+    <!-- Menus -->
     <ControlTemplate x:Key="PropertiesMenuControlTemplateKey">
         <Menu Background="Transparent" HorizontalAlignment="Right">
             <MenuItem Command="{x:Static core:Commands.AddPropertyCommand}" CommandParameter="{Binding}" Header="+"/>
@@ -53,7 +53,7 @@
             <MenuItem Command="{x:Static core:Commands.AddColumnCommand}" CommandParameter="{Binding}" Header="+"/>
         </Menu>
     </ControlTemplate>
-    <!-- context menus -->
+    <!-- Context Menus -->
     <ContextMenu x:Key="ContainerContextMenuKey" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
         <MenuItem Header="Te_mplate" Tag="{Binding Path=DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" DataContext="{Binding Path=DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" ItemsSource="{Binding Editor.Project.Templates}">
             <MenuItem.ItemContainerStyle>
@@ -108,7 +108,7 @@
         <Separator/>
         <MenuItem Header="E_xport" InputGestureText="Ctrl+E" Command="{x:Static core:Commands.ExportCommand}" CommandParameter="{Binding}"/>
     </ContextMenu>
-    <!-- styles --> 
+    <!-- Styles --> 
     <Style x:Key="TextBlockLeftStyleKey" TargetType="TextBlock">
         <Setter Property="Margin" Value="5,2,5,2"/>
         <Setter Property="TextAlignment" Value="Left"/>
@@ -140,7 +140,7 @@
     <Style x:Key="SliderStyleKey" TargetType="Slider">
         <Setter Property="Margin" Value="5,2,5,2"/>
     </Style>
-    <!-- style -->
+    <!-- Style -->
     <DataTemplate DataType="{x:Type core:ArgbColor}">
         <Grid>
             <Grid.RowDefinitions>
@@ -423,7 +423,7 @@
             </TabItem>
         </TabControl>
     </DataTemplate>
-    <!-- data -->
+    <!-- Data -->
     <DataTemplate DataType="{x:Type core:Record}">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -632,7 +632,7 @@
             </TabItem>
         </TabControl>
     </DataTemplate>
-    <!-- state -->
+    <!-- State -->
     <DataTemplate DataType="{x:Type core:ShapeState}">
         <StackPanel Margin="5,2,5,2">
             <CheckBox Content="Default" Margin="1" IsChecked="{Binding Default}"/>
@@ -646,7 +646,7 @@
             <CheckBox Content="Output" Margin="1" IsChecked="{Binding Output}"/>
         </StackPanel>
     </DataTemplate>
-    <!-- shapes -->
+    <!-- Shapes -->
     <DataTemplate DataType="{x:Type core:XPoint}">
         <TabControl>
             <TabItem Header="Point">
@@ -1466,7 +1466,7 @@
             </Expander>
         </StackPanel>
     </DataTemplate>
-    <!-- path -->
+    <!-- Path -->
     <DataTemplate DataType="{x:Type core:XPathSize}">
         <Grid>
             <Grid.RowDefinitions>
@@ -1791,7 +1791,7 @@
             </TabControl>
         </StackPanel>
     </DataTemplate>
-    <!-- project -->
+    <!-- Project -->
     <DataTemplate DataType="{x:Type core:Options}">
         <TabControl>
             <TabItem Header="{x:Static p:Resources.OptionsHeaderGeneral}">
