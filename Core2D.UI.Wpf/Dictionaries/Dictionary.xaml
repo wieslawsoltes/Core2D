@@ -661,6 +661,7 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="Name" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                    <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" BorderBrush="{x:Null}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="0" Grid.Column="1"/>
                     <TextBlock Text="X" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="1" Grid.Column="0"/>
                     <TextBox Text="{Binding X, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="1" Grid.Column="1"/>
                     <TextBlock Text="Y" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="2" Grid.Column="0"/>
