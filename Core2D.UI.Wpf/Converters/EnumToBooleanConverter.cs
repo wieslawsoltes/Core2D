@@ -2,38 +2,39 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Globalization;
+using System.Windows.Data;
 
 namespace Core2D.UI.Wpf.Converters
 {
     /// <summary>
     /// Enum to Boolean value converter.
     /// </summary>
-    public class EnumToBooleanConverter : System.Windows.Data.IValueConverter
+    public class EnumToBooleanConverter : IValueConverter
     {
         /// <summary>
-        /// Convert enum [value] to boolean, true if matches [param].
+        /// Convert enum value to boolean, true if matches parameter.
         /// </summary>
-        /// <param name="value"></param>
-        /// <param name="targetType"></param>
-        /// <param name="param"></param>
-        /// <param name="culture"></param>
-        /// <returns></returns>
-        public object Convert(object value, Type targetType, object param, CultureInfo culture)
+        /// <param name="value">The value produced by the binding source.</param>
+        /// <param name="targetType">The type of the binding target property.</param>
+        /// <param name="parameter">The converter parameter to use.</param>
+        /// <param name="culture">The culture to use in the converter.</param>
+        /// <returns>A converted value. If the method returns null, the valid null value is used.</returns>
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value.Equals(param);
+            return value.Equals(parameter);
         }
 
         /// <summary>
-        /// Convert boolean to enum, returning [param] if true.
+        /// Convert boolean to enum, returning parameter if true.
         /// </summary>
-        /// <param name="value"></param>
-        /// <param name="targetType"></param>
-        /// <param name="param"></param>
-        /// <param name="culture"></param>
-        /// <returns></returns>
-        public object ConvertBack(object value, Type targetType, object param, CultureInfo culture)
+        /// <param name="value">The value that is produced by the binding target.</param>
+        /// <param name="targetType">The type to convert to.</param>
+        /// <param name="parameter">The converter parameter to use.</param>
+        /// <param name="culture">The culture to use in the converter.</param>
+        /// <returns>A converted value. If the method returns null, the valid null value is used.</returns>
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (bool)value ? param : System.Windows.Data.Binding.DoNothing;
+            return (bool)value ? parameter : Binding.DoNothing;
         }
     }
 }
