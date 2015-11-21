@@ -22,9 +22,6 @@
         <Grid.Resources>
             <ControlTemplate x:Key="DatabasesMenu">
                 <Menu Background="Transparent" HorizontalAlignment="Right">
-                    <MenuItem Header="database">
-                        <MenuItem Header="_Import..." Command="{x:Static core:Commands.ImportDataCommand}" InputGestureText=""/>
-                    </MenuItem>
                     <MenuItem Command="{x:Static core:Commands.AddDatabaseCommand}" Header="+"/>
                     <MenuItem Command="{x:Static core:Commands.RemoveDatabaseCommand}" CommandParameter="{Binding Editor.Project.CurrentDatabase}" Header="-"/>
                 </Menu>
