@@ -294,6 +294,9 @@
     <Compile Include="..\Core2D\Shapes\Path\XPathGeometry.cs">
       <Link>Shapes\Path\XPathGeometry.cs</Link>
     </Compile>
+    <Compile Include="..\Core2D\Shapes\Path\XPathGeometryParser.cs">
+      <Link>Shapes\Path\XPathGeometryParser.cs</Link>
+    </Compile>
     <Compile Include="..\Core2D\Shapes\Path\XPathSegment.cs">
       <Link>Shapes\Path\XPathSegment.cs</Link>
     </Compile>
