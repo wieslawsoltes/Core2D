@@ -23,28 +23,12 @@
         <Grid.Resources>
             <ControlTemplate x:Key="GroupLibrariesMenu">
                 <Menu Background="Transparent" HorizontalAlignment="Right">
-                    <MenuItem Header="import">
-                        <MenuItem Header="Gr_oup Library..." Command="{x:Static core:Commands.ImportGroupLibraryCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText=""/>
-                        <MenuItem Header="Gro_up Libraries..." Command="{x:Static core:Commands.ImportGroupLibrariesCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText=""/>
-                    </MenuItem>
-                    <MenuItem Header="export">
-                        <MenuItem Header="Gr_oup Library..." Command="{x:Static core:Commands.ExportGroupLibraryCommand}" CommandParameter="{Binding Editor.Project.CurrentGroupLibrary}" InputGestureText=""/>
-                        <MenuItem Header="Gro_up Libraries..." Command="{x:Static core:Commands.ExportGroupLibrariesCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText=""/>
-                    </MenuItem>
                     <MenuItem Command="{x:Static core:Commands.AddGroupLibraryCommand}" Header="+"/>
                     <MenuItem Command="{x:Static core:Commands.RemoveGroupLibraryCommand}" Header="-"/>
                 </Menu>
             </ControlTemplate>
             <ControlTemplate x:Key="GroupsMenu">
                 <Menu Background="Transparent" HorizontalAlignment="Right">
-                    <MenuItem Header="import">
-                        <MenuItem Header="_Group..." Command="{x:Static core:Commands.ImportGroupCommand}" CommandParameter="{Binding Editor.Project.CurrentGroupLibrary}" InputGestureText=""/>
-                        <MenuItem Header="G_roups..." Command="{x:Static core:Commands.ImportGroupsCommand}" CommandParameter="{Binding Editor.Project.CurrentGroupLibrary}" InputGestureText=""/>
-                    </MenuItem>
-                    <MenuItem Header="export">
-                        <MenuItem Header="_Group..." Command="{x:Static core:Commands.ExportGroupCommand}" CommandParameter="{Binding Editor.Project.CurrentGroupLibrary.Selected}" InputGestureText=""/>
-                        <MenuItem Header="G_roups..." Command="{x:Static core:Commands.ExportGroupsCommand}" CommandParameter="{Binding Editor.Project.CurrentGroupLibrary}" InputGestureText=""/>
-                    </MenuItem>
                     <MenuItem Command="{x:Static core:Commands.AddGroupCommand}" Header="+"/>
                     <MenuItem Command="{x:Static core:Commands.RemoveGroupCommand}" Header="-"/>
                 </Menu>
