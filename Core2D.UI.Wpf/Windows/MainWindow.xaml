@@ -40,6 +40,22 @@
         <KeyBinding Command="{x:Static core:Commands.UngroupCommand}" Gesture="Ctrl+U"/>
     </Window.InputBindings>
     <Window.Resources>
+        <Style x:Key="DashboardVisibilityStyle" TargetType="{x:Type controls:DashboardControl}">
+            <Setter Property="Visibility" Value="Collapsed"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Editor.Project}" Value="{x:Null}">
+                    <Setter Property="Visibility" Value="Visible"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="DockingManagerVisibilityStyle" TargetType="{x:Type ad:DockingManager}">
+            <Setter Property="Visibility" Value="Visible"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Editor.Project}" Value="{x:Null}">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
         <Style TargetType="{x:Type ad:LayoutDocumentPaneControl}">
             <Setter Property="Background" Value="{StaticResource BackgroundColor}"/>
         </Style>
@@ -96,7 +112,8 @@
             <RowDefinition Height="3"/>
         </Grid.RowDefinitions>
         <controls:MenuControl Grid.Row="0"/>
-        <ad:DockingManager x:Name="dockingManager" Grid.Row="2" Margin="0,5,0,0">
+        <controls:DashboardControl Style="{StaticResource DashboardVisibilityStyle}" Grid.Row="2" Margin="0,5,0,0"/>
+        <ad:DockingManager x:Name="dockingManager" Style="{StaticResource DockingManagerVisibilityStyle}" Grid.Row="2" Margin="0,5,0,0">
             <ad:LayoutRoot>
                 <ad:LayoutPanel Orientation="Horizontal">
                     <ad:LayoutAnchorablePaneGroup Orientation="Vertical" DockWidth="210">
@@ -160,7 +177,7 @@
                             </ad:LayoutDocument>
                         </ad:LayoutDocumentPane>
                     </ad:LayoutDocumentPaneGroup>
-                    <ad:LayoutAnchorablePaneGroup Orientation="Vertical" DockWidth="230">
+                    <ad:LayoutAnchorablePaneGroup Orientation="Vertical" DockWidth="250">
                         <ad:LayoutAnchorablePane>
                             <ad:LayoutAnchorable x:Name="stylesWindow" CanClose="False" ContentId="styles" Title="{x:Static p:Resources.WindowTitleStyles}" AutoHideWidth="210">
                                 <controls:StylesControl x:Name="stylesControl"/>
