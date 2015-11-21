@@ -193,7 +193,7 @@
             <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuOptionsTryToConnect}" IsCheckable="True" IsChecked="{Binding Editor.Project.Options.TryToConnect, Mode=OneWay}" Command="{x:Static core:Commands.TryToConnectCommand}" InputGestureText="C"/>
         </MenuItem>
-        <MenuItem Header="{x:Static p:Resources.MenuWindow}">
+        <MenuItem Header="{x:Static p:Resources.MenuWindow}" Style="{StaticResource MenuItemVisibilityStyle}">
             <MenuItem Header="{x:Static p:Resources.MenuWindowLoadLayout}" Command="{x:Static core:Commands.LoadWindowLayoutCommand}" InputGestureText=""/>
             <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuWindowSaveLayout}" Command="{x:Static core:Commands.SaveWindowLayoutCommand}" InputGestureText=""/>
