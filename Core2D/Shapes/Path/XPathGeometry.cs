@@ -59,6 +59,15 @@ namespace Core2D
         }
 
         /// <summary>
+        /// Sets the current closed state of the figure. 
+        /// </summary>
+        /// <param name="isClosed">The flag indicating whether figure is closed.</param>
+        public void SetClosedState(bool isClosed)
+        {
+            _currentFigure.IsClosed = isClosed;
+        }
+
+        /// <summary>
         /// Adds line segment.
         /// </summary>
         /// <param name="point">The end point.</param>
