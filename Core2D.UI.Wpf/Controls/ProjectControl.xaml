@@ -95,7 +95,7 @@
                 </HierarchicalDataTemplate>
             </TreeView.ItemTemplate>
         </TreeView>
-        <Grid Grid.Row="3" Margin="2">
+        <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Margin="2">
             <Grid.Style>
                 <Style TargetType="Grid">
                     <Setter Property="Visibility" Value="Visible"/>
