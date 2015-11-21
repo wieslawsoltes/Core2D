@@ -136,6 +136,7 @@
     <Compile Include="Shapes\Path\XFillRule.cs" />
     <Compile Include="Shapes\Path\XPathFigure.cs" />
     <Compile Include="Shapes\Path\XPathGeometry.cs" />
+    <Compile Include="Shapes\Path\XPathGeometryParser.cs" />
     <Compile Include="Shapes\Path\XPathSegment.cs" />
     <Compile Include="Shapes\Path\XPathSize.cs" />
     <Compile Include="Shapes\Path\XSweepDirection.cs" />
