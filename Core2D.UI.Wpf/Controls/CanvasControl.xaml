@@ -13,16 +13,6 @@
              Width="{Binding Editor.Project.CurrentContainer.Template.Width}" 
              Height="{Binding Editor.Project.CurrentContainer.Template.Height}" 
              controls:LayerElement.Renderer="{Binding Editor.Renderers[0]}">
-    <UserControl.Style>
-        <Style TargetType="UserControl">
-            <Setter Property="Visibility" Value="Visible"/>
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding Editor.Project}" Value="{x:Null}">
-                    <Setter Property="Visibility" Value="Hidden"/>
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
-    </UserControl.Style>
     <UserControl.InputBindings>
         <KeyBinding Command="{x:Static core:Commands.DeleteCommand}" CommandParameter="{Binding}" Key="Delete" Modifiers=""/>
         <KeyBinding Command="{x:Static core:Commands.SendToBackCommand}" Key="OemMinus" Modifiers="Shift"/>

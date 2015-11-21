@@ -12,16 +12,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="20" d:DesignWidth="1324">
     <StatusBar Background="Transparent">
-        <StatusBar.Style>
-            <Style TargetType="StatusBar">
-                <Setter Property="Visibility" Value="Visible"/>
-                <Style.Triggers>
-                    <DataTrigger Binding="{Binding Editor.Project}" Value="{x:Null}">
-                        <Setter Property="Visibility" Value="Hidden"/>
-                    </DataTrigger>
-                </Style.Triggers>
-            </Style>
-        </StatusBar.Style>
         <StatusBar.ItemsPanel>
             <ItemsPanelTemplate>
                 <Grid>

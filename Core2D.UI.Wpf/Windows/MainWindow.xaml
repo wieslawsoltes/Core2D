@@ -14,7 +14,9 @@
         Background="{StaticResource BackgroundColor}" 
         WindowStartupLocation="CenterScreen" WindowState="Maximized" 
         UseLayoutRounding="True" SnapsToDevicePixels="True" 
-        TextOptions.TextFormattingMode="Display" TextOptions.TextHintingMode="Auto" TextOptions.TextRenderingMode="Auto">
+        TextOptions.TextFormattingMode="Display" 
+        TextOptions.TextHintingMode="Auto" 
+        TextOptions.TextRenderingMode="Auto">
     <Window.Title>
         <MultiBinding StringFormat="{}{0}{1} - Core2D" FallbackValue="Core2D" TargetNullValue="Core2D">
             <Binding Path="Editor.Project.Name"/>
@@ -49,6 +51,14 @@
             </Style.Triggers>
         </Style>
         <Style x:Key="DockingManagerVisibilityStyle" TargetType="{x:Type ad:DockingManager}">
+            <Setter Property="Visibility" Value="Visible"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Editor.Project}" Value="{x:Null}">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="StatusVisibilityStyle" TargetType="{x:Type controls:StatusControl}">
             <Setter Property="Visibility" Value="Visible"/>
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Editor.Project}" Value="{x:Null}">
@@ -232,6 +242,6 @@
                 </ad:LayoutPanel>
             </ad:LayoutRoot>
         </ad:DockingManager>
-        <controls:StatusControl Grid.Row="4" Margin="5,0,5,0"/>
+        <controls:StatusControl Style="{StaticResource StatusVisibilityStyle}" Grid.Row="4" Margin="5,0,5,0"/>
     </Grid>
 </Window>

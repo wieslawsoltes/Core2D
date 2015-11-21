@@ -9,16 +9,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="200">
     <Grid>
-        <Grid.Style>
-            <Style TargetType="Grid">
-                <Setter Property="Visibility" Value="Visible"/>
-                <Style.Triggers>
-                    <DataTrigger Binding="{Binding Editor.Project}" Value="{x:Null}">
-                        <Setter Property="Visibility" Value="Hidden"/>
-                    </DataTrigger>
-                </Style.Triggers>
-            </Style>
-        </Grid.Style>
         <ContentControl Margin="2">
             <ContentControl.Style>
                 <Style TargetType="ContentControl">

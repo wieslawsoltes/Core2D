@@ -8,16 +8,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="200">
     <Grid>
-        <Grid.Style>
-            <Style TargetType="Grid">
-                <Setter Property="Visibility" Value="Visible"/>
-                <Style.Triggers>
-                    <DataTrigger Binding="{Binding Editor.Project}" Value="{x:Null}">
-                        <Setter Property="Visibility" Value="Hidden"/>
-                    </DataTrigger>
-                </Style.Triggers>
-            </Style>
-        </Grid.Style>
         <ContentControl DataContext="{Binding Editor.Renderers[0].State.SelectedShape, FallbackValue={x:Null}}" Content="{Binding Data}" Margin="2,2,2,2"/>
     </Grid>
 </UserControl>
