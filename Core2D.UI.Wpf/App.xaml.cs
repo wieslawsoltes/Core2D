@@ -67,7 +67,9 @@ namespace Core2D.UI.Wpf
                     }
                 };
 
-            _mainWindow.Unloaded += (sender, e) =>
+            _mainWindow.Unloaded += (sender, e) => { };
+
+            _mainWindow.Closed += (sender, e) =>
             {
                 if (!_isLoaded)
                     return;
