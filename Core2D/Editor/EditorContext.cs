@@ -487,10 +487,10 @@ namespace Core2D
             {
                 if (_textClipboard != null && await CanPaste())
                 {
-                    var json = await _textClipboard.GetText();
-                    if (!string.IsNullOrEmpty(json))
+                    var text = await _textClipboard.GetText();
+                    if (!string.IsNullOrEmpty(text))
                     {
-                        Paste(json);
+                        Paste(text);
                     }
                 }
             }
@@ -2012,20 +2012,47 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Paste Json text from clipboard as shapes.
+        /// Paste text from clipboard as shapes.
         /// </summary>
-        /// <param name="json"></param>
-        public void Paste(string json)
+        /// <param name="text">The text string.</param>
+        public void Paste(string text)
         {
-            if (_serializer == null)
-                return;
-
             try
             {
-                var shapes = _serializer.Deserialize<IList<BaseShape>>(json);
-                if (shapes != null && shapes.Count() > 0)
+                bool havePath =  false;
+                
+                // Try to parse SVG path geometry. 
+                try
                 {
-                    Paste(shapes);
+                    var geometry = XPathGeometryParser.Parse(text);
+
+                    var path = XPath.Create(
+                        "Path",
+                        _editor.Project.CurrentStyleLibrary.Selected,
+                        geometry,
+                        _editor.Project.Options.DefaultIsStroked,
+                        _editor.Project.Options.DefaultIsFilled);
+
+                    Paste(Enumerable.Repeat(path, 1));
+                    
+                    havePath = true;
+                }
+                catch (Exception)
+                {
+                    havePath = false;
+                }
+                
+                // If not successful try to deserialize Json.
+                if (!havePath)
+                {
+                    if (_serializer == null)
+                        return;
+                    
+                    var shapes = _serializer.Deserialize<IList<BaseShape>>(text);
+                    if (shapes != null && shapes.Count() > 0)
+                    {
+                        Paste(shapes);
+                    }
                 }
             }
             catch (Exception ex)
