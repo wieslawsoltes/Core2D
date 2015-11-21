@@ -65,6 +65,18 @@ namespace Core2D
         }
 
         /// <summary>
+        /// Calculates distance between points.
+        /// </summary>
+        /// <param name="point">The other point</param>
+        /// <returns>The distance between points.</returns>
+        public double DistanceTo(XPoint point)
+        {
+            double dx = this.X - point.X;
+            double dy = this.Y - point.Y;
+            return Math.Sqrt(dx * dx + dy * dy);
+        }
+
+        /// <summary>
         /// Creates a new <see cref="XPoint"/> instance.
         /// </summary>
         /// <param name="x">The X coordinate of point.</param>
@@ -91,17 +103,64 @@ namespace Core2D
                 Shape = shape
             };
         }
-
+        
         /// <summary>
-        /// Calculates distance between points.
+        /// Creates a new <see cref="XPoint"/> instance.
         /// </summary>
-        /// <param name="point">The other point</param>
-        /// <returns>The distance between points.</returns>
-        public double Distance(XPoint point)
+        /// <param name="point">The source point.</param>
+        /// <returns>The new instance of the <see cref="XPoint"/> class.</returns>
+        public static XPoint FromPoint2(Point2 point)
         {
-            double dx = this.X - point.X;
-            double dy = this.Y - point.Y;
-            return Math.Sqrt(dx * dx + dy * dy);
+            return new XPoint()
+            {
+                Name = "",
+                Style = default(ShapeStyle),
+                Data = new Data()
+                {
+                    Properties = ImmutableArray.Create<Property>()
+                },
+                X = point.X,
+                Y = point.Y,
+                Shape = null
+            };
+        }
+        
+        /// <summary>
+        /// Clone current instance of the <see cref="XPoint"/>.
+        /// </summary>
+        /// <returns>The new instance of the <see cref="XPoint"/> class.</returns>
+        public XPoint Clone()
+        {
+            var data = new Data()
+            {
+                Properties = ImmutableArray.Create<Property>(),
+                Record = this.Data.Record
+            };
+
+            // TODO: The property Value is of type object and is not cloned.
+            if (this.Data.Properties.Length > 0)
+            {
+                var builder = data.Properties.ToBuilder();
+                foreach (var property in this.Data.Properties) 
+                {
+                    builder.Add(
+                        Property.Create(
+                            property.Name, 
+                            property.Value, 
+                            data));
+                }
+                data.Properties = builder.ToImmutable();
+            }
+
+            return new XPoint()
+            {
+                Name = this.Name,
+                Style = this.Style,
+                Data = data,
+                X = this.X,
+                Y = this.Y,
+                Shape = this.Shape
+            };
         }
     }
 }
