@@ -2741,8 +2741,8 @@ namespace Core2D
                     _project.Options.PointShape,
                     line.IsStroked);
 
-                double ds = point.Distance(line.Start);
-                double de = point.Distance(line.End);
+                double ds = point.DistanceTo(line.Start);
+                double de = point.DistanceTo(line.End);
 
                 if (ds < de)
                 {
