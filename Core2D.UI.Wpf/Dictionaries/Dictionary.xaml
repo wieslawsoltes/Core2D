@@ -1723,32 +1723,23 @@
                         </Expander.Style>
                         <ContentControl Content="{Binding Background}"/>
                     </Expander>
-                    <Expander Header="{x:Static p:Resources.ContainerTemplate}">
-                        <Expander.Style>
-                            <Style TargetType="Expander">
-                                <Setter Property="Visibility" Value="Collapsed"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding IsTemplate}" Value="False">
-                                        <Setter Property="Visibility" Value="Visible"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Expander.Style>
-                        <StackPanel>
-                            <ComboBox ItemsSource="{Binding Path=DataContext.Editor.Project.Templates, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" SelectedItem="{Binding Path=DataContext.Template, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}" Style="{StaticResource ComboBoxStyleKey}">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
-                            <ContentControl Content="{Binding Template}"/>
-                        </StackPanel>
-                    </Expander>
                     <Expander Header="{x:Static p:Resources.ContainerProperties}" IsExpanded="True">
                         <ContentControl Content="{Binding Data}"/>
                     </Expander>
                 </StackPanel>
+            </TabItem>
+            <TabItem Header="{x:Static p:Resources.ContainerTemplate}">
+                <TabItem.Style>
+                    <Style TargetType="TabItem">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsTemplate}" Value="False">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TabItem.Style>
+                <ContentControl Content="{Binding Template}"/>
             </TabItem>
             <TabItem Header="{x:Static p:Resources.WindowTitleLayers}">
                 <Grid>
