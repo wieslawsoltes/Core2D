@@ -19,7 +19,7 @@ Core2D is an application for making data driven 2D diagrams.
 ### Supported Platforms
 
 * Windows 7/8/8.1/10 for `WPF` and `Perspex` builds.
-* XUbuntu 15.04 for `Perspex` build.
+* XUbuntu 15.10 for `Perspex` build.
 
 The core library and editor are portable and should work on all platforms where C# is supported. For basic usage of core library see project `Core2D.Sample`.
 
