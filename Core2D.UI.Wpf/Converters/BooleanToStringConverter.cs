@@ -2,7 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 
-namespace Core2D.UI.Wpf.Converters
+namespace Core2D.Wpf.Converters
 {
     /// <summary>
     /// Provides a way to apply custom logic to a binding.

@@ -4,7 +4,7 @@ using System;
 using System.Globalization;
 using System.Windows.Data;
 
-namespace Core2D.UI.Wpf.Converters
+namespace Core2D.Wpf.Converters
 {
     /// <summary>
     /// Provides a way to apply custom logic to a binding.

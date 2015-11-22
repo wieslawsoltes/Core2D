@@ -4,9 +4,9 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
                     xmlns:sys="clr-namespace:System;assembly=mscorlib" 
                     xmlns:core="clr-namespace:Core2D;assembly=Core2D" 
-                    xmlns:converters="clr-namespace:Core2D.UI.Wpf.Converters" 
-                    xmlns:controls="clr-namespace:Core2D.UI.Wpf.Controls" 
-                    xmlns:p="clr-namespace:Core2D.UI.Wpf.Properties">
+                    xmlns:converters="clr-namespace:Core2D.Wpf.Converters" 
+                    xmlns:controls="clr-namespace:Core2D.Wpf.Controls" 
+                    xmlns:p="clr-namespace:Core2D.Wpf.Properties">
     <!-- Converters -->
     <converters:ArgbColorToBrushConverter x:Key="ArgbColorToBrushConverter"/>
     <converters:ArgbColorToBrushMultiConverter x:Key="ArgbColorToBrushMultiConverter"/>

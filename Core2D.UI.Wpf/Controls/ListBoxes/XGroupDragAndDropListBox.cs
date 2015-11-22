@@ -3,7 +3,7 @@
 using System;
 using System.Collections.Immutable;
 
-namespace Core2D.UI.Wpf.Controls
+namespace Core2D.Wpf.Controls
 {
     /// <summary>
     /// 

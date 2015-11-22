@@ -16,7 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Core2D;
 
-namespace Core2D.UI.Wpf.Controls
+namespace Core2D.Wpf.Controls
 {
     /// <summary>
     /// Interaction logic for <see cref="GroupsControl"/> xaml.

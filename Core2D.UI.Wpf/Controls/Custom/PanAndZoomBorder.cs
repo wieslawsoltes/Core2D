@@ -6,7 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 
-namespace Core2D.UI.Wpf.PanAndZoom
+namespace Core2D.Wpf.PanAndZoom
 {
     /// <summary>
     /// 

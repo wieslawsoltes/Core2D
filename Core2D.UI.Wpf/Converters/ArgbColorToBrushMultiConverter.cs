@@ -5,7 +5,7 @@ using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media;
 
-namespace Core2D.UI.Wpf.Converters
+namespace Core2D.Wpf.Converters
 {
     /// <summary>
     /// Provides a way to apply custom logic in a <see cref="MultiBinding"/>.

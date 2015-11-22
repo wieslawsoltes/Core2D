@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using Dependencies;
 
-namespace Core2D.UI.Wpf
+namespace Core2D.Wpf
 {
     /// <summary>
     /// Encapsulates a WPF application.

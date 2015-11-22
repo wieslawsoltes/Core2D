@@ -19,15 +19,15 @@ using System.Windows.Shapes;
 using Xceed.Wpf.AvalonDock.Layout;
 using Xceed.Wpf.AvalonDock.Layout.Serialization;
 
-namespace Core2D.UI.Wpf.Windows
+namespace Core2D.Wpf.Windows
 {
     /// <summary>
     /// Interaction logic for <see cref="MainWindow"/> xaml.
     /// </summary>
     public partial class MainWindow : Window, IView
     {
-        private string _resourceLayoutRoot = "Core2D.UI.Wpf.Layouts.";
-        private string _resourceLayoutFileName = "Core2D.UI.Wpf.layout";
+        private string _resourceLayoutRoot = "Core2D.Wpf.Layouts.";
+        private string _resourceLayoutFileName = "Core2D.Wpf.layout";
         private string _defaultLayoutFileName = "Core2D.layout";
 
         /// <summary>

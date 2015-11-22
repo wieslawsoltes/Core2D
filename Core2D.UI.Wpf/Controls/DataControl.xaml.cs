@@ -15,7 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Core2D.UI.Wpf.Controls
+namespace Core2D.Wpf.Controls
 {
     /// <summary>
     /// Interaction logic for <see cref="DataControl"/> xaml.
