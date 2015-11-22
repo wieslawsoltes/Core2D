@@ -1,0 +1,253 @@
+﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
+<!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
+<UserControl x:Class="Core2D.Perspex.Controls.MenuControl"
+             xmlns="https://github.com/perspex"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:local="clr-namespace:Core2D.Perspex;assembly=Core2D.Perspex"
+             xmlns:converters="clr-namespace:Core2D.Perspex.Converters;assembly=Core2D.Perspex"
+             xmlns:core="clr-namespace:Core2D;assembly=Core2D">
+    <Menu>
+        <MenuItem Header="_File" IsVisible="{Binding Path=Editor.Project, Converter={Static converters:IsNullConverter.Instance}}">
+            <MenuItem Header="_New" HotKey="Ctrl+N" Command="{Static core:Commands.NewCommand}"/>
+            <Separator/>
+            <MenuItem Header="_Open..." HotKey="Ctrl+O" Command="{Static core:Commands.OpenCommand}"/>
+            <Separator/>
+            <MenuItem Header="_Recent" Items="{Binding Path=RecentProjects}">
+                <MenuItem.DataTemplates>
+                    <DataTemplate DataType="core:RecentProject">
+                        <MenuItem Header="{Binding Path=Name}" Command="{Static core:Commands.OpenCommand}" CommandParameter="{Binding Path=Path}"/>
+                    </DataTemplate>
+                </MenuItem.DataTemplates>
+            </MenuItem>
+            <Separator/>
+            <MenuItem Header="E_xit" HotKey="Alt+F4" Command="{Static core:Commands.ExitCommand}"/>
+        </MenuItem>
+        <MenuItem Header="_File" IsVisible="{Binding Path=Editor.Project, Converter={Static converters:IsNotNullConverter.Instance}}">
+            <MenuItem Header="_New"  HotKey="Ctrl+N" Command="{Static core:Commands.NewCommand}"/>
+            <Separator/>
+            <MenuItem Header="_Open..." HotKey="Ctrl+O" Command="{Static core:Commands.OpenCommand}"/>
+            <Separator/>
+            <MenuItem Header="_Close" HotKey="Ctrl+F4" Command="{Static core:Commands.CloseCommand}"/>
+            <Separator/>
+            <MenuItem Header="_Save" HotKey="Ctrl+S" Command="{Static core:Commands.SaveCommand}"/>
+            <MenuItem Header="Save _As..." HotKey="Ctrl+Shift+S" Command="{Static core:Commands.SaveAsCommand}"/>
+            <Separator/>
+            <MenuItem Header="_Export..." HotKey="Ctrl+E" Command="{Static core:Commands.ExportCommand}"/>
+            <Separator/>
+            <MenuItem Header="_Recent" Items="{Binding Path=RecentProjects}">
+                <MenuItem.DataTemplates>
+                    <DataTemplate DataType="core:RecentProject">
+                        <MenuItem Header="{Binding Path=Name}" Command="{Static core:Commands.OpenCommand}" CommandParameter="{Binding Path=Path}"/>
+                    </DataTemplate>
+                </MenuItem.DataTemplates>
+            </MenuItem>
+            <Separator/>
+            <MenuItem Header="E_xit" HotKey="Alt+F4" Command="{Static core:Commands.ExitCommand}"/>
+        </MenuItem>
+        <MenuItem Header="_Edit" IsVisible="{Binding Path=Editor.Project, Converter={Static converters:IsNotNullConverter.Instance}}">
+            <MenuItem Header="_Undo" HotKey="Ctrl+Z" Command="{Static core:Commands.UndoCommand}"/>
+            <MenuItem Header="_Redo" HotKey="Ctrl+Y" Command="{Static core:Commands.RedoCommand}"/>
+            <Separator/>
+            <MenuItem Header="Cu_t" HotKey="Ctrl+X" Command="{Static core:Commands.CutCommand}"/>
+            <MenuItem Header="_Copy" HotKey="Ctrl+C" Command="{Static core:Commands.CopyCommand}"/>
+            <MenuItem Header="_Paste" HotKey="Ctrl+V" Command="{Static core:Commands.PasteCommand}"/>
+            <MenuItem Header="_Delete" HotKey="Delete" Command="{Static core:Commands.DeleteCommand}"/>
+            <Separator/>
+            <MenuItem Header="Select _All" HotKey="Ctrl+A" Command="{Static core:Commands.SelectAllCommand}"/>
+            <MenuItem Header="De_select All" HotKey="Escape" Command="{Static core:Commands.DeselectAllCommand}"/>
+            <Separator/>
+            <MenuItem Header="Cl_ear All" Command="{Static core:Commands.ClearAllCommand}"/>
+            <Separator/>
+            <MenuItem Header="_Group" HotKey="Ctrl+G" Command="{Static core:Commands.GroupCommand}"/>
+            <MenuItem Header="U_ngroup" HotKey="Ctrl+U" Command="{Static core:Commands.UngroupCommand}"/>
+            <Separator/>
+            <MenuItem Header="_Order">
+                <MenuItem Header="Send to _Back" HotKey="Shift+-" Command="{Static core:Commands.SendToBackCommand}"/>
+                <MenuItem Header="Send Ba_ckward" HotKey="-" Command="{Static core:Commands.SendBackwardCommand}"/>
+                <Separator/>
+                <MenuItem Header="Bring Fo_rward" HotKey="+" Command="{Static core:Commands.BringForwardCommand}"/>
+                <MenuItem Header="Bring to _Front" HotKey="Shift++" Command="{Static core:Commands.BringToFrontCommand}"/>
+            </MenuItem>
+        </MenuItem>
+        <MenuItem Header="_View" IsVisible="{Binding Path=Editor.Project, Converter={Static converters:IsNotNullConverter.Instance}}">
+            <MenuItem Header="_Reset Zoom" HotKey="Z" Command="{Static core:Commands.ZoomResetCommand}"/>
+            <Separator/>
+            <MenuItem Header="Zoom to _Extent" HotKey="X" Command="{Static core:Commands.ZoomExtentCommand}"/>
+        </MenuItem>
+        <MenuItem Header="_Project" IsVisible="{Binding Path=Editor.Project, Converter={Static converters:IsNotNullConverter.Instance}}">
+            <MenuItem Header="_Add Document" Command="{Static core:Commands.AddDocumentCommand}" CommandParameter="{Binding Path=Editor.Project}"/>
+            <MenuItem Header="_Add Container" Command="{Static core:Commands.AddContainerCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentDocument}"/>
+            <Separator/>
+            <MenuItem Header="_Document">
+                <MenuItem Header="Insert Document Bef_ore" Command="{Static core:Commands.InsertDocumentBeforeCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentDocument}"/>
+                <MenuItem Header="Insert Document Aft_er" Command="{Static core:Commands.InsertDocumentAfterCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentDocument}"/>
+                <Separator/>
+                <MenuItem Header="Cu_t Document" Command="{Static core:Commands.CutCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentDocument}"/>
+                <MenuItem Header="_Copy Document" Command="{Static core:Commands.CopyCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentDocument}"/>
+                <MenuItem Header="_Paste Document" Command="{Static core:Commands.PasteCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentDocument}"/>
+                <Separator/>
+                <MenuItem Header="_Delete Document" Command="{Static core:Commands.DeleteCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentDocument}"/>
+                <Separator/>
+                <MenuItem Header="E_xport Document" Command="{Static core:Commands.ExportCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentDocument}"/>
+            </MenuItem>
+            <MenuItem Header="_Container">
+                <MenuItem Header="Insert Container Bef_ore" Command="{Static core:Commands.InsertContainerBeforeCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentContainer}"/>
+                <MenuItem Header="Insert Container Aft_er" Command="{Static core:Commands.InsertContainerAfterCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentContainer}"/>
+                <Separator/>
+                <MenuItem Header="Cu_t Container" Command="{Static core:Commands.CutCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentContainer}"/>
+                <MenuItem Header="_Copy Container" Command="{Static core:Commands.CopyCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentContainer}"/>
+                <MenuItem Header="_Paste Container" Command="{Static core:Commands.PasteCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentContainer}"/>
+                <Separator/>
+                <MenuItem Header="_Delete Container" Command="{Static core:Commands.DeleteCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentContainer}"/>
+                <Separator/>
+                <MenuItem Header="E_xport Container" Command="{Static core:Commands.ExportCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentContainer}"/>
+            </MenuItem>
+            <MenuItem Header="_Layers">
+                <MenuItem Header="_Add Layer" Command="{Static core:Commands.AddLayerCommand}"/>
+                <Separator/>
+                <MenuItem Header="_Delete Layer" Command="{Static core:Commands.RemoveLayerCommand}"/>
+            </MenuItem>
+            <MenuItem Header="S_hapes">
+                <MenuItem Header="_Delete Shape" Command="{Static core:Commands.RemoveShapeCommand}"/>
+            </MenuItem>
+            <Separator/>
+            <MenuItem Header="Sha_pe">
+                <MenuItem Header="_Add Property" Command="{Static core:Commands.AddPropertyCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentContainer.CurrentShape.Data}"/>
+                <Separator/>
+                <MenuItem Header="_Reset Record" Command="{Static core:Commands.ResetRecordCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentContainer.CurrentShape.Data}"/>
+            </MenuItem>
+            <Separator/>
+            <MenuItem Header="Style Li_braries">
+                <MenuItem Header="_Add Style Library" Command="{Static core:Commands.AddStyleLibraryCommand}"/>
+                <Separator/>
+                <MenuItem Header="_Delete Style Library" Command="{Static core:Commands.RemoveStyleLibraryCommand}"/>
+            </MenuItem>
+            <MenuItem Header="_Styles">
+                <MenuItem Header="_Add Style" Command="{Static core:Commands.AddStyleCommand}"/>
+                <Separator/>
+                <MenuItem Header="_Delete Style" Command="{Static core:Commands.RemoveStyleCommand}"/>
+            </MenuItem>
+            <Separator/>
+            <MenuItem Header="Group _Libraries">
+                <MenuItem Header="_Add Group Library" Command="{Static core:Commands.AddGroupLibraryCommand}"/>
+                <Separator/>
+                <MenuItem Header="_Delete Group Library" Command="{Static core:Commands.RemoveGroupLibraryCommand}"/>
+            </MenuItem>
+            <MenuItem Header="_Groups">
+                <MenuItem Header="_Add Group" Command="{Static core:Commands.AddGroupCommand}"/>
+                <Separator/>
+                <MenuItem Header="_Delete Group" Command="{Static core:Commands.RemoveGroupCommand}"/>
+            </MenuItem>
+            <Separator/>
+            <MenuItem Header="_Templates">
+                <MenuItem Header="_Edit Template" Command="{Static core:Commands.EditTemplateCommand}"/>
+                <Separator/>
+                <MenuItem Header="_Add Template" Command="{Static core:Commands.AddTemplateCommand}"/>
+                <Separator/>
+                <MenuItem Header="_Delete Template" Command="{Static core:Commands.RemoveTemplateCommand}"/>
+            </MenuItem>
+            <Separator/>
+            <MenuItem Header="_Databases">
+                <MenuItem Header="_Add Database" Command="{Static core:Commands.AddDatabaseCommand}"/>
+                <Separator/>
+                <MenuItem Header="_Delete Database" Command="{Static core:Commands.RemoveDatabaseCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentDatabase}"/>
+            </MenuItem>
+            <MenuItem Header="Data_base">
+                <MenuItem Header="Add _Record" Command="{Static core:Commands.AddRecordCommand}"/>
+                <Separator/>
+                <MenuItem Header="Delete Recor_d" Command="{Static core:Commands.RemoveRecordCommand}"/>
+                <Separator/>
+                <MenuItem Header="Add _Column" Command="{Static core:Commands.AddColumnCommand}"/>
+            </MenuItem>
+            <Separator/>
+            <MenuItem Header="I_mport">
+                <MenuItem Header="_Style..." Command="{Static core:Commands.ImportStyleCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentStyleLibrary}"/>
+                <MenuItem Header="S_tyles..." Command="{Static core:Commands.ImportStylesCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentStyleLibrary}"/>
+                <Separator/>
+                <MenuItem Header="St_yle Library..." Command="{Static core:Commands.ImportStyleLibraryCommand}" CommandParameter="{Binding Path=Editor.Project}"/>
+                <MenuItem Header="Sty_le Libraries..." Command="{Static core:Commands.ImportStyleLibrariesCommand}" CommandParameter="{Binding Path=Editor.Project}"/>
+                <Separator/>
+                <MenuItem Header="_Group..." Command="{Static core:Commands.ImportGroupCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentGroupLibrary}"/>
+                <MenuItem Header="G_roups..." Command="{Static core:Commands.ImportGroupsCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentGroupLibrary}"/>
+                <Separator/>
+                <MenuItem Header="Gr_oup Library..." Command="{Static core:Commands.ImportGroupLibraryCommand}" CommandParameter="{Binding Path=Editor.Project}"/>
+                <MenuItem Header="Gro_up Libraries..." Command="{Static core:Commands.ImportGroupLibrariesCommand}" CommandParameter="{Binding Path=Editor.Project}"/>
+                <Separator/>
+                <MenuItem Header="_Template..." Command="{Static core:Commands.ImportTemplateCommand}" CommandParameter="{Binding Path=Editor.Project}"/>
+                <MenuItem Header="T_emplates..." Command="{Static core:Commands.ImportTemplatesCommand}" CommandParameter="{Binding Path=Editor.Project}"/>
+            </MenuItem>
+            <Separator/>
+            <MenuItem Header="Expor_t">
+                <MenuItem Header="_Style..." Command="{Static core:Commands.ExportStyleCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentStyleLibrary.Selected}"/>
+                <MenuItem Header="S_tyles..." Command="{Static core:Commands.ExportStylesCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentStyleLibrary}"/>
+                <Separator/>
+                <MenuItem Header="St_yle Library..." Command="{Static core:Commands.ExportStyleLibraryCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentStyleLibrary}"/>
+                <MenuItem Header="Sty_le Libraries..." Command="{Static core:Commands.ExportStyleLibrariesCommand}" CommandParameter="{Binding Path=Editor.Project}"/>
+                <Separator/>
+                <MenuItem Header="_Group..." Command="{Static core:Commands.ExportGroupCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentGroupLibrary.Selected}"/>
+                <MenuItem Header="G_roups..." Command="{Static core:Commands.ExportGroupsCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentGroupLibrary}"/>
+                <Separator/>
+                <MenuItem Header="Gr_oup Library..." Command="{Static core:Commands.ExportGroupLibraryCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentGroupLibrary}"/>
+                <MenuItem Header="Gro_up Libraries..." Command="{Static core:Commands.ExportGroupLibrariesCommand}" CommandParameter="{Binding Path=Editor.Project}"/>
+                <Separator/>
+                <MenuItem Header="_Template..." Command="{Static core:Commands.ExportTemplateCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentTemplate}"/>
+                <MenuItem Header="T_emplates..." Command="{Static core:Commands.ExportTemplatesCommand}" CommandParameter="{Binding Path=Editor.Project}"/>
+            </MenuItem>
+        </MenuItem>
+        <MenuItem Header="_Tool" IsVisible="{Binding Path=Editor.Project, Converter={Static converters:IsNotNullConverter.Instance}}">
+            <MenuItem Header="_None" HotKey="N" Command="{Static core:Commands.ToolNoneCommand}"/>
+            <Separator/>
+            <MenuItem Header="_Selection" HotKey="S" Command="{Static core:Commands.ToolSelectionCommand}"/>
+            <Separator/>
+            <MenuItem Header="_Point" HotKey="P" Command="{Static core:Commands.ToolPointCommand}"/>
+            <Separator/>
+            <MenuItem Header="_Line" HotKey="L" Command="{Static core:Commands.ToolLineCommand}"/>
+            <MenuItem Header="_Arc" HotKey="A" Command="{Static core:Commands.ToolArcCommand}"/>
+            <MenuItem Header="_Bezier" HotKey="B" Command="{Static core:Commands.ToolBezierCommand}"/>
+            <MenuItem Header="_QBezier" HotKey="Q" Command="{Static core:Commands.ToolQBezierCommand}"/>
+            <Separator/>
+            <MenuItem Header="Pat_h" HotKey="H" Command="{Static core:Commands.ToolPathCommand}"/>
+            <MenuItem Header="Path T_ool">
+                <MenuItem Header="_Line" Command="{Static core:Commands.ToolLineCommand}"/>
+                <MenuItem Header="_Arc" Command="{Static core:Commands.ToolArcCommand}"/>
+                <MenuItem Header="_Bezier" Command="{Static core:Commands.ToolBezierCommand}"/>
+                <MenuItem Header="_QBezier" Command="{Static core:Commands.ToolQBezierCommand}"/>
+                <Separator/>
+                <MenuItem Header="_Move" HotKey="M" Command="{Static core:Commands.ToolMoveCommand}"/>
+            </MenuItem>
+            <Separator/>
+            <MenuItem Header="_Rectangle" HotKey="R" Command="{Static core:Commands.ToolRectangleCommand}"/>
+            <MenuItem Header="_Ellipse" HotKey="E" Command="{Static core:Commands.ToolEllipseCommand}"/>
+            <Separator/>
+            <MenuItem Header="_Text" HotKey="T" Command="{Static core:Commands.ToolTextCommand}"/>
+            <Separator/>
+            <MenuItem Header="_Image" HotKey="I" Command="{Static core:Commands.ToolImageCommand}"/>
+        </MenuItem>
+        <MenuItem Header="_Data" IsVisible="{Binding Path=Editor.Project, Converter={Static converters:IsNotNullConverter.Instance}}">
+            <MenuItem Header="_Import..." Command="{Static core:Commands.ImportDataCommand}"/>
+            <Separator/>
+            <MenuItem Header="_Export..." Command="{Static core:Commands.ExportDataCommand}"/>
+            <Separator/>
+            <MenuItem Header="_Update..." Command="{Static core:Commands.UpdateDataCommand}"/>
+        </MenuItem>
+        <MenuItem Header="Te_mplate" Items="{Binding Path=Editor.Project.Templates}" IsVisible="{Binding Path=Editor.Project, Converter={Static converters:IsNotNullConverter.Instance}}">
+            <MenuItem.DataTemplates>
+                <DataTemplate DataType="core:Container">
+                    <MenuItem Header="{Binding Path=Name}" Command="{Static core:Commands.ApplyTemplateCommand}" CommandParameter="{Binding}"/>
+                </DataTemplate>
+            </MenuItem.DataTemplates>
+        </MenuItem>
+        <MenuItem Header="_Options" IsVisible="{Binding Path=Editor.Project, Converter={Static converters:IsNotNullConverter.Instance}}">
+            <MenuItem Header="Default is Stro_ked" HotKey="K" Command="{Static core:Commands.DefaultIsStrokedCommand}"/>
+            <MenuItem Header="Default is _Filled" HotKey="F" Command="{Static core:Commands.DefaultIsFilledCommand}"/>
+            <Separator/>
+            <MenuItem Header="Default is Close_d" HotKey="D" Command="{Static core:Commands.DefaultIsClosedCommand}"/>
+            <MenuItem Header="Default is Smooth _Join" HotKey="J" Command="{Static core:Commands.DefaultIsSmoothJoinCommand}"/>
+            <Separator/>
+            <MenuItem Header="Snap to _Grid" HotKey="G" Command="{Static core:Commands.SnapToGridCommand}"/>
+            <Separator/>
+            <MenuItem Header="Try To _Connect" HotKey="C" Command="{Static core:Commands.TryToConnectCommand}"/>
+        </MenuItem>
+    </Menu>
+</UserControl>
