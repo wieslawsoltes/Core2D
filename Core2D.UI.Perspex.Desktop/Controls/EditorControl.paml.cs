@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using Perspex.Controls;
 using Perspex.Markup.Xaml;
 
-namespace Core2D.UI.Perspex.Desktop.Controls
+namespace Core2D.Perspex.Controls
 {
     /// <summary>
     /// Interaction logic for <see cref="EditorControl"/> xaml.

@@ -6,8 +6,8 @@
     <ProjectGuid>{4868069E-3AD4-497E-9B8E-148D1EEACFD7}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Core2D.UI.Perspex.Desktop</RootNamespace>
-    <AssemblyName>Core2D.UI.Perspex.Desktop</AssemblyName>
+    <RootNamespace>Core2D.Perspex</RootNamespace>
+    <AssemblyName>Core2D.Perspex</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
@@ -33,7 +33,7 @@
     <RegisterForComInterop>False</RegisterForComInterop>
     <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <DocumentationFile>bin\Debug\Core2D.UI.Perspex.Desktop.XML</DocumentationFile>
+    <DocumentationFile>bin\Debug\Core2D.Perspex.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -47,7 +47,7 @@
     <RegisterForComInterop>False</RegisterForComInterop>
     <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <DocumentationFile>bin\Release\Core2D.UI.Perspex.Desktop.XML</DocumentationFile>
+    <DocumentationFile>bin\Release\Core2D.Perspex.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>

@@ -39,7 +39,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Renderer.Perspex", "Depende
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D", "Core2D\Core2D.csproj", "{8C419CD0-F8A2-4A85-B72B-84BC7FF59616}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.UI.Perspex.Desktop", "Core2D.UI.Perspex.Desktop\Core2D.UI.Perspex.Desktop.csproj", "{4868069E-3AD4-497E-9B8E-148D1EEACFD7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.Perspex", "Core2D.UI.Perspex.Desktop\Core2D.Perspex.csproj", "{4868069E-3AD4-497E-9B8E-148D1EEACFD7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.Sample", "Core2D.Sample\Core2D.Sample.csproj", "{F2888147-DA69-4061-B8F4-3EB75AF4C559}"
 EndProject

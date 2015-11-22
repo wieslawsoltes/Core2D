@@ -10,7 +10,7 @@ using Perspex;
 using Perspex.Markup;
 using Perspex.Media;
 
-namespace Core2D.UI.Perspex.Desktop.Converters
+namespace Core2D.Perspex.Converters
 {
     /// <summary>
     /// Converts a binding value object from <see cref="object"/> to <see cref="bool"/> False if value is not equal to null otherwise return True.

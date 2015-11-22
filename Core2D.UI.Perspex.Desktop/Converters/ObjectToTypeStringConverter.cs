@@ -10,7 +10,7 @@ using Perspex;
 using Perspex.Markup;
 using Perspex.Media;
 
-namespace Core2D.UI.Perspex.Desktop.Converters
+namespace Core2D.Perspex.Converters
 {
     /// <summary>
     /// Converts a binding value <see cref="object"/> <see cref="Type"/> to a <see cref="string"/>.

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using Perspex;
 using Perspex.Markup;
 
-namespace Core2D.UI.Perspex.Desktop.Converters
+namespace Core2D.Perspex.Converters
 {
     /// <summary>
     /// Converts a binding value object from <see cref="object"/> to <see cref="bool"/> True if value is equal to parameter otherwise return False.

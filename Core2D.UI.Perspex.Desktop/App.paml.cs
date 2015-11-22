@@ -26,7 +26,7 @@ using Perspex.Skia;
 #endif
 using Dependencies;
 
-namespace Core2D.UI.Perspex.Desktop
+namespace Core2D.Perspex
 {
     /// <summary>
     /// Encapsulates a Core2D Prespex application.

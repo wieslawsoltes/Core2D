@@ -11,7 +11,7 @@ using Perspex;
 using Perspex.Markup;
 using Perspex.Media;
 
-namespace Core2D.UI.Perspex.Desktop.Converters
+namespace Core2D.Perspex.Converters
 {
     /// <summary>
     /// Pass-through a binding value <see cref="object"/> as <see cref="object"/> to avoid <see cref="PerspexProperty.UnsetValue"/>.

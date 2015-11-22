@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using Perspex;
 using Perspex.Markup;
 
-namespace Core2D.UI.Perspex.Desktop.Converters
+namespace Core2D.Perspex.Converters
 {
     /// <summary>
     /// Converts multi-binding inputs to a final value.

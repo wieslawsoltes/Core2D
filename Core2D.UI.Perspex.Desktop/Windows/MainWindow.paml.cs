@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using Perspex.Controls;
 using Perspex.Markup.Xaml;
 
-namespace Core2D.UI.Perspex.Desktop.Windows
+namespace Core2D.Perspex.Windows
 {
     /// <summary>
     /// Interaction logic for <see cref="MainWindow"/> xaml.
