@@ -16,7 +16,6 @@ namespace Core2D.Sample
         {
             CreateProjectUsingContext();
             CreateProjectUsingEditor();
-            CreateProjectUsingEditorWithoutFactories();
         }
         
         static void CreateProjectUsingContext()
@@ -47,38 +46,6 @@ namespace Core2D.Sample
             factory.Text(30, 30, 60, 60, "Sample2");
             
             Project.Save(project, "sample2.project", new NewtonsoftSerializer());
-        }
-
-        static void CreateProjectUsingEditorWithoutFactories()
-        {
-            var project = Project.Create();
-            var editor = Editor.Create(project, null, false, false);
-
-            var document = Document.Create();
-            editor.AddDocument(document);
-            project.CurrentDocument = document;
-
-            var container = Container.Create();
-            container.Template = Container.Create(isTemplate: true);
-            editor.AddContainer(container);
-            project.CurrentContainer = container;
-
-            var layer = Layer.Create(owner: container);
-            editor.AddLayer(layer);
-            project.CurrentContainer.CurrentLayer = layer;
-
-            editor.AddStyleLibrary();
-            project.CurrentStyleLibrary = project.StyleLibraries.FirstOrDefault();
-
-            editor.AddStyle();
-            project.CurrentStyleLibrary.Selected = project.CurrentStyleLibrary.Items.FirstOrDefault();
-
-            var line = XLine.Create(30, 30, 60, 30, project.CurrentStyleLibrary.Selected, project.Options.PointShape);
-            editor.AddShape(line);
-            var text = XText.Create(30, 30, 60, 60, project.CurrentStyleLibrary.Selected, project.Options.PointShape, "Sample3");
-            editor.AddShape(text);
-
-            Project.Save(project, "sample3.project", new NewtonsoftSerializer());
         }
     }
 }
