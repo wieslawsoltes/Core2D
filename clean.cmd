@@ -48,26 +48,17 @@ rmdir /Q /S Dependencies\TextFieldReader.CsvHelper\obj
 rmdir /Q /S Dependencies\TextFieldWriter.CsvHelper\bin
 rmdir /Q /S Dependencies\TextFieldWriter.CsvHelper\obj
 
-rmdir /Q /S Core2D.Portable\bin
-rmdir /Q /S Core2D.Portable\obj
-
 rmdir /Q /S Core2D\bin
 rmdir /Q /S Core2D\obj
 
 rmdir /Q /S Core2D.Sample\bin
 rmdir /Q /S Core2D.Sample\obj
 
-rmdir /Q /S Core2D.UI.Perspex.Desktop\bin
-rmdir /Q /S Core2D.UI.Perspex.Desktop\obj
+rmdir /Q /S Core2D.Perspex\bin
+rmdir /Q /S Core2D.Perspex\obj
 
-rmdir /Q /S Core2D.UI.Uwp\bin
-rmdir /Q /S Core2D.UI.Uwp\obj
-
-rmdir /Q /S Core2D.UI.WinForms\bin
-rmdir /Q /S Core2D.UI.WinForms\obj
-
-rmdir /Q /S Core2D.UI.Wpf\bin
-rmdir /Q /S Core2D.UI.Wpf\obj
+rmdir /Q /S Core2D.Wpf\bin
+rmdir /Q /S Core2D.Wpf\obj
 
 rmdir /Q /S packages
 
