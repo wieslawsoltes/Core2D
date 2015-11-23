@@ -2,16 +2,17 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Collections.Immutable;
+using System.Windows.Controls;
 
 namespace Core2D.Wpf.Controls
 {
     /// <summary>
-    /// 
+    /// The <see cref="ListBox"/> control for <see cref="BaseShape"/> items with drag and drop support.
     /// </summary>
     public class BaseShapeDragAndDropListBox : DragAndDropListBox<BaseShape>
     {
         /// <summary>
-        /// 
+        /// Initializes a new instance of the <see cref="BaseShapeDragAndDropListBox"/> class.
         /// </summary>
         public BaseShapeDragAndDropListBox()
             : base()

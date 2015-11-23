@@ -68,7 +68,7 @@ namespace Core2D.Wpf.Windows
                         var container = context.Editor.Project.CurrentContainer;
                         if (container.Template == null)
                         {
-                            border.AutoFit(
+                            border.FitTo(
                                 width,
                                 height,
                                 container.Width,
@@ -76,7 +76,7 @@ namespace Core2D.Wpf.Windows
                         }
                         else
                         {
-                            border.AutoFit(
+                            border.FitTo(
                                 width,
                                 height,
                                 container.Template.Width,

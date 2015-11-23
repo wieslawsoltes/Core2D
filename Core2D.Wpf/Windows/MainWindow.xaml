@@ -7,7 +7,6 @@
         xmlns:core="clr-namespace:Core2D;assembly=Core2D" 
         xmlns:converters="clr-namespace:Core2D.Wpf.Converters" 
         xmlns:controls="clr-namespace:Core2D.Wpf.Controls" 
-        xmlns:paz="clr-namespace:Core2D.Wpf.PanAndZoom" 
         xmlns:ad="http://schemas.xceed.com/wpf/xaml/avalondock" 
         xmlns:p="clr-namespace:Core2D.Wpf.Properties" 
         Height="724" Width="1324" 
@@ -156,10 +155,10 @@
                     <ad:LayoutDocumentPaneGroup Orientation="Horizontal">
                         <ad:LayoutDocumentPane>
                             <ad:LayoutDocument x:Name="canvasWindow" CanClose="False" ContentId="canvas" Title="{x:Static p:Resources.WindowTitleCanvas}">
-                                <paz:PanAndZoomGrid x:Name="panAndZoomGrid" ClipToBounds="True" Background="Transparent" FocusVisualStyle="{x:Null}" Focusable="False" EnableAutoFit="{Binding Editor.Renderers[0].State.EnableAutofit}">
-                                    <paz:PanAndZoomBorder x:Name="border" ClipToBounds="False" Background="Transparent" BorderBrush="{x:Null}" BorderThickness="0" FocusVisualStyle="{x:Null}" Focusable="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Tag="{Binding Editor.CancelAvailable}">
-                                        <paz:PanAndZoomBorder.Style>
-                                            <Style TargetType="{x:Type paz:PanAndZoomBorder}">
+                                <controls:PanAndZoomGrid x:Name="panAndZoomGrid" ClipToBounds="True" Background="Transparent" FocusVisualStyle="{x:Null}" Focusable="False" EnableAutoFit="{Binding Editor.Renderers[0].State.EnableAutofit}">
+                                    <controls:PanAndZoomBorder x:Name="border" ClipToBounds="False" Background="Transparent" BorderBrush="{x:Null}" BorderThickness="0" FocusVisualStyle="{x:Null}" Focusable="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Tag="{Binding Editor.CancelAvailable}">
+                                        <controls:PanAndZoomBorder.Style>
+                                            <Style TargetType="{x:Type controls:PanAndZoomBorder}">
                                                 <Setter Property="Width" Value="{Binding Editor.Project.CurrentContainer.Template.Width}"/>
                                                 <Setter Property="Height" Value="{Binding Editor.Project.CurrentContainer.Template.Height}"/>
                                                 <Style.Triggers>
@@ -169,7 +168,7 @@
                                                     </DataTrigger>
                                                 </Style.Triggers>
                                             </Style>
-                                        </paz:PanAndZoomBorder.Style>
+                                        </controls:PanAndZoomBorder.Style>
                                         <controls:CanvasControl x:Name="canvasControl">
                                             <controls:CanvasControl.Style>
                                                 <Style TargetType="controls:CanvasControl">
@@ -182,8 +181,8 @@
                                                 </Style>
                                             </controls:CanvasControl.Style>
                                         </controls:CanvasControl>
-                                    </paz:PanAndZoomBorder>
-                                </paz:PanAndZoomGrid>
+                                    </controls:PanAndZoomBorder>
+                                </controls:PanAndZoomGrid>
                             </ad:LayoutDocument>
                         </ad:LayoutDocumentPane>
                     </ad:LayoutDocumentPaneGroup>

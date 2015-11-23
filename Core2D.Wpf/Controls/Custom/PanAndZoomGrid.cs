@@ -4,15 +4,15 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Core2D.Wpf.PanAndZoom
+namespace Core2D.Wpf.Controls
 {
     /// <summary>
-    /// 
+    /// The custom pan and zoom control.
     /// </summary>
     public class PanAndZoomGrid : Grid
     {
         /// <summary>
-        /// 
+        /// Gets or sets flag indicating whether auto-fit is enabled.
         /// </summary>
         public bool EnableAutoFit
         {
@@ -21,13 +21,13 @@ namespace Core2D.Wpf.PanAndZoom
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets flag indicating whether auto-fit is enabled.
         /// </summary>
         public static readonly DependencyProperty EnableAutoFitProperty =
             DependencyProperty.Register("EnableAutoFit", typeof(bool), typeof(PanAndZoomGrid), new PropertyMetadata(true));
 
         /// <summary>
-        /// 
+        /// Stretch view to the available extents.
         /// </summary>
         public void AutoFit()
         {
@@ -44,7 +44,7 @@ namespace Core2D.Wpf.PanAndZoom
         }
 
         /// <summary>
-        /// 
+        /// Reset pan and zoom to default state.
         /// </summary>
         public void ResetZoomAndPan()
         {
@@ -58,11 +58,7 @@ namespace Core2D.Wpf.PanAndZoom
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="arrangeSize"></param>
-        /// <returns></returns>
+        /// <inheritdoc/>
         protected override Size ArrangeOverride(Size arrangeSize)
         {
             if (EnableAutoFit

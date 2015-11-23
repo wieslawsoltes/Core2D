@@ -15,19 +15,13 @@ using System.Windows.Media;
 namespace Core2D.Wpf.Controls
 {
     /// <summary>
-    /// 
+    /// The <see cref="Database.Records"/> view control.
     /// </summary>
     public class RecordsListView : ListView
     {
         private bool _isLoaded = false;
         private Point dragStartPoint;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <typeparam name="P"></typeparam>
-        /// <param name="child"></param>
-        /// <returns></returns>
         private P FindVisualParent<P>(DependencyObject child)
             where P : DependencyObject
         {
@@ -43,7 +37,7 @@ namespace Core2D.Wpf.Controls
         }
 
         /// <summary>
-        /// 
+        /// Initializes a new instance of the <see cref="RecordsListView"/> class.
         /// </summary>
         public RecordsListView()
         {
@@ -75,7 +69,7 @@ namespace Core2D.Wpf.Controls
         }
 
         /// <summary>
-        /// 
+        /// Initialize the columns view.
         /// </summary>
         public void InitializeColumnsView()
         {
@@ -92,11 +86,6 @@ namespace Core2D.Wpf.Controls
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="columns"></param>
-        /// <returns></returns>
         private GridView CreateColumnsView(ImmutableArray<Column> columns)
         {
             var gv = new GridView();
@@ -125,21 +114,11 @@ namespace Core2D.Wpf.Controls
             return gv;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void ColumnObserver(object sender, PropertyChangedEventArgs e)
         {
             InitializeColumnsView();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void DatabaseObserver(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(Database.Columns))
@@ -148,10 +127,6 @@ namespace Core2D.Wpf.Controls
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="database"></param>
         private void StartObservingColumns(Database database)
         {
             if (database == null || database.Columns == null)
@@ -165,10 +140,6 @@ namespace Core2D.Wpf.Controls
             database.PropertyChanged += DatabaseObserver;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="database"></param>
         private void StopObservingColumns(Database database)
         {
             if (database == null || database.Columns == null)
@@ -182,21 +153,11 @@ namespace Core2D.Wpf.Controls
             database.PropertyChanged -= DatabaseObserver;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void ListView_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             dragStartPoint = e.GetPosition(null);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void ListView_PreviewMouseMove(object sender, MouseEventArgs e)
         {
             Point point = e.GetPosition(null);

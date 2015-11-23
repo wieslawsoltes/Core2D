@@ -19,13 +19,14 @@ using System.Windows.Shapes;
 namespace Core2D.Wpf.Controls
 {
     /// <summary>
-    /// 
+    /// The generic <see cref="ListBox"/> control with drag and drop support.
     /// </summary>
+    /// <typeparam name="T">The type of <see cref="ListBox"/> items.</typeparam>
     public class DragAndDropListBox<T> : ListBox
         where T : class
     {
         /// <summary>
-        /// 
+        /// Gets or sets <see cref="ListBox"/> drop mode.
         /// </summary>
         public ListBoxDropMode DropMode { get; set; }
 
@@ -46,14 +47,14 @@ namespace Core2D.Wpf.Controls
         }
 
         /// <summary>
-        /// 
+        /// Initializes a new instance of the <see cref="DragAndDropListBox{T}"/> class.
         /// </summary>
         public DragAndDropListBox()
         {
         }
 
         /// <summary>
-        /// 
+        /// Initialize the <see cref="ListBox"/> style and event handlers.
         /// </summary>
         public void Initialize()
         {

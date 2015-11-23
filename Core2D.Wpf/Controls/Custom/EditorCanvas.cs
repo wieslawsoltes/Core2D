@@ -14,19 +14,18 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Core2D;
 
 namespace Core2D.Wpf.Controls
 {
     /// <summary>
-    /// 
+    /// The custom <see cref="Editor"/> canvas control.
     /// </summary>
-    internal class EditorCanvas : Canvas
+    public class EditorCanvas : Canvas
     {
         private bool _isLoaded = false;
 
         /// <summary>
-        /// 
+        /// Initializes a new instance of the <see cref="EditorCanvas"/> class.
         /// </summary>
         public EditorCanvas()
         {
@@ -123,9 +122,6 @@ namespace Core2D.Wpf.Controls
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
         private void Initialize()
         {
             this.PreviewMouseLeftButtonDown += EditorCanvas_PreviewMouseLeftButtonDown;
@@ -137,9 +133,6 @@ namespace Core2D.Wpf.Controls
             this.Focus();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
         private void DeInitialize()
         {
             this.PreviewMouseLeftButtonDown -= EditorCanvas_PreviewMouseLeftButtonDown;

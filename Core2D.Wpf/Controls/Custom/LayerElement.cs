@@ -15,37 +15,36 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Core2D;
 
 namespace Core2D.Wpf.Controls
 {
     /// <summary>
-    /// 
+    /// The custom layer control.
     /// </summary>
-    internal class LayerElement : FrameworkElement
+    public class LayerElement : FrameworkElement
     {
         /// <summary>
-        /// 
+        /// Gets the <see cref="IRenderer"/> from <see cref="DependencyProperty"/> object.
         /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
+        /// <param name="obj">The <see cref="DependencyProperty"/> object.</param>
+        /// <returns>The <see cref="IRenderer"/> value.</returns>
         public static IRenderer GetRenderer(DependencyObject obj)
         {
             return (IRenderer)obj.GetValue(RendererProperty);
         }
 
         /// <summary>
-        /// 
+        /// Sets the <see cref="DependencyProperty"/> object value as <see cref="IRenderer"/>.
         /// </summary>
-        /// <param name="obj"></param>
-        /// <param name="value"></param>
+        /// <param name="obj">The <see cref="DependencyProperty"/> object.</param>
+        /// <param name="value">The <see cref="IRenderer"/> value.</param>
         public static void SetRenderer(DependencyObject obj, IRenderer value)
         {
             obj.SetValue(RendererProperty, value);
         }
 
         /// <summary>
-        /// 
+        /// The attached <see cref="DependencyProperty"/> for <see cref="IRenderer"/> type.
         /// </summary>
         public static readonly DependencyProperty RendererProperty =
             DependencyProperty.RegisterAttached(
@@ -64,7 +63,7 @@ namespace Core2D.Wpf.Controls
         private Layer _layer = default(Layer);
 
         /// <summary>
-        /// 
+        /// Initializes a new instance of the <see cref="LayerElement"/> class.
         /// </summary>
         public LayerElement()
         {
@@ -111,11 +110,6 @@ namespace Core2D.Wpf.Controls
                 BitmapScalingMode.HighQuality);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void Invalidate(object sender, InvalidateLayerEventArgs e)
         {
             Dispatcher.Invoke(
@@ -125,9 +119,6 @@ namespace Core2D.Wpf.Controls
                 });
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
         private void Initialize()
         {
             if (_layer != null)
@@ -143,9 +134,6 @@ namespace Core2D.Wpf.Controls
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
         private void DeInitialize()
         {
             if (_layer != null)
@@ -155,10 +143,7 @@ namespace Core2D.Wpf.Controls
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="drawingContext"></param>
+        /// <inheritdoc/>
         protected override void OnRender(DrawingContext drawingContext)
         {
             base.OnRender(drawingContext);
@@ -166,10 +151,6 @@ namespace Core2D.Wpf.Controls
             Render(drawingContext);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="drawingContext"></param>
         private void Render(DrawingContext drawingContext)
         {
             var layer = DataContext as Layer;
