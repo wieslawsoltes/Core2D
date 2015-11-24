@@ -139,21 +139,13 @@ namespace Dependencies
                             var polyQuadraticSegment = segment as XPolyQuadraticBezierSegment;
                             if (polyQuadraticSegment.Points.Count >= 2)
                             {
-                                var p1 = previous;
-                                var p2 = polyQuadraticSegment.Points[0];
-                                var p3 = polyQuadraticSegment.Points[1];
-                                double x1 = p1.X;
-                                double y1 = p1.Y;
-                                double x2 = p1.X + (2.0 * (p2.X - p1.X)) / 3.0;
-                                double y2 = p1.Y + (2.0 * (p2.Y - p1.Y)) / 3.0;
-                                double x3 = x2 + (p3.X - p1.X) / 3.0;
-                                double y3 = y2 + (p3.Y - p1.Y) / 3.0;
-                                double x4 = p3.X;
-                                double y4 = p3.Y;
-                                sgc.BezierTo(
-                                    new Point(x2, y2),
-                                    new Point(x3, y3),
-                                    new Point(x4, y4));
+                                sgc.QuadraticBezierTo(
+                                    new Point(
+                                        polyQuadraticSegment.Points[0].X,
+                                        polyQuadraticSegment.Points[0].Y),
+                                    new Point(
+                                        polyQuadraticSegment.Points[1].X,
+                                        polyQuadraticSegment.Points[1].Y));
 
                                 previous = polyQuadraticSegment.Points[1];
                             }
@@ -163,21 +155,13 @@ namespace Dependencies
                             {
                                 for (int i = 3; i < polyQuadraticSegment.Points.Count; i += 3)
                                 {
-                                    var p1 = polyQuadraticSegment.Points[i - 1];
-                                    var p2 = polyQuadraticSegment.Points[i];
-                                    var p3 = polyQuadraticSegment.Points[i + 1];
-                                    double x1 = p1.X;
-                                    double y1 = p1.Y;
-                                    double x2 = p1.X + (2.0 * (p2.X - p1.X)) / 3.0;
-                                    double y2 = p1.Y + (2.0 * (p2.Y - p1.Y)) / 3.0;
-                                    double x3 = x2 + (p3.X - p1.X) / 3.0;
-                                    double y3 = y2 + (p3.Y - p1.Y) / 3.0;
-                                    double x4 = p3.X;
-                                    double y4 = p3.Y;
-                                    sgc.BezierTo(
-                                        new Point(x2, y2),
-                                        new Point(x3, y3),
-                                        new Point(x4, y4));
+                                    sgc.QuadraticBezierTo(
+                                        new Point(
+                                            polyQuadraticSegment.Points[i].X,
+                                            polyQuadraticSegment.Points[i].Y),
+                                        new Point(
+                                            polyQuadraticSegment.Points[i + 1].X,
+                                            polyQuadraticSegment.Points[i + 1].Y));
 
                                     previous = polyQuadraticSegment.Points[i + 1];
                                 }
@@ -186,21 +170,13 @@ namespace Dependencies
                         else if (segment is XQuadraticBezierSegment)
                         {
                             var qbezierSegment = segment as XQuadraticBezierSegment;
-                            var p1 = previous;
-                            var p2 = qbezierSegment.Point1;
-                            var p3 = qbezierSegment.Point2;
-                            double x1 = p1.X;
-                            double y1 = p1.Y;
-                            double x2 = p1.X + (2.0 * (p2.X - p1.X)) / 3.0;
-                            double y2 = p1.Y + (2.0 * (p2.Y - p1.Y)) / 3.0;
-                            double x3 = x2 + (p3.X - p1.X) / 3.0;
-                            double y3 = y2 + (p3.Y - p1.Y) / 3.0;
-                            double x4 = p3.X;
-                            double y4 = p3.Y;
-                            sgc.BezierTo(
-                                new Point(x2, y2),
-                                new Point(x3, y3),
-                                new Point(x4, y4));
+                            sgc.QuadraticBezierTo(
+                                new Point(
+                                    qbezierSegment.Point1.X,
+                                    qbezierSegment.Point1.Y),
+                                new Point(
+                                    qbezierSegment.Point2.X,
+                                    qbezierSegment.Point2.Y));
 
                             previous = qbezierSegment.Point2;
                         }
