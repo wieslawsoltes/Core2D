@@ -510,7 +510,7 @@ namespace Dependencies
             //    var _dc = dc as DrawingContext;
             //    DrawTemplateBackgroundInternal(_dc, template);
             //}
-            
+
             foreach (var layer in container.Layers)
             {
                 if (layer.IsVisible)
@@ -665,7 +665,7 @@ namespace Dependencies
                     new Point(bezier.Point1.X, bezier.Point1.Y),
                     bezier.IsFilled);
 
-                sgc.BezierTo(
+                sgc.CubicBezierTo(
                     new Point(bezier.Point2.X, bezier.Point2.Y),
                     new Point(bezier.Point3.X, bezier.Point3.Y),
                     new Point(bezier.Point4.X, bezier.Point4.Y));
@@ -701,7 +701,7 @@ namespace Dependencies
                     new Point(qbezier.Point1.X, qbezier.Point1.Y),
                     qbezier.IsFilled);
 
-                sgc.QuadTo(
+                sgc.QuadraticBezierTo(
                     new Point(qbezier.Point2.X, qbezier.Point2.Y),
                     new Point(qbezier.Point3.X, qbezier.Point3.Y));
 
@@ -835,16 +835,16 @@ namespace Dependencies
                         using (var ms = new System.IO.MemoryStream(bytes))
                         {
                             var bi = new Bitmap(ms);
-    
+
                             if (_enableImageCache)
                                 _biCache[image.Key] = bi;
-    
+
                             _dc.DrawImage(
                                 bi,
                                 1.0,
                                 new Rect(0, 0, bi.PixelWidth, bi.PixelHeight),
                                 new Rect(rect.X, rect.Y, rect.Width, rect.Height));
-    
+
                             // TODO:
                             //if (!_enableImageCache)
                             //    bi.Dispose();
