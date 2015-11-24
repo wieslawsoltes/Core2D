@@ -134,86 +134,19 @@
         </Style>
         <Style Selector="TabControl.top">
             <Setter Property="Margin" Value="0"/>
-            <Setter Property="Template">
-                <ControlTemplate>
-                    <Grid RowDefinitions="Auto,*">
-                        <TabStrip Items="{TemplateBinding Items}"
-                                  SelectedIndex="{TemplateBinding Path=SelectedIndex, Mode=TwoWay}"/>
-                        <Carousel Items="{TemplateBinding Items}"
-                                  MemberSelector="Content"
-                                  SelectedIndex="{TemplateBinding Path=SelectedIndex}"
-                                  Transition="{TemplateBinding Transition}"
-                                  Grid.Row="1"/>
-                    </Grid>
-                </ControlTemplate>
-            </Setter>
+            <Setter Property="TabStripPlacement" Value="Top"/>
         </Style>
         <Style Selector="TabControl.bottom">
             <Setter Property="Margin" Value="0"/>
-            <Setter Property="Template">
-                <ControlTemplate>
-                    <Grid RowDefinitions="*,Auto">
-                        <Carousel Items="{TemplateBinding Items}"
-                                  MemberSelector="Content"
-                                  SelectedIndex="{TemplateBinding Path=SelectedIndex}"
-                                  Transition="{TemplateBinding Transition}"/>
-                        <TabStrip Items="{TemplateBinding Items}"
-                                  SelectedIndex="{TemplateBinding Path=SelectedIndex, Mode=TwoWay}"
-                                  Grid.Row="1"/>
-                    </Grid>
-                </ControlTemplate>
-            </Setter>
+            <Setter Property="TabStripPlacement" Value="Bottom"/>
         </Style>
         <Style Selector="TabControl.left">
             <Setter Property="Margin" Value="0"/>
-            <Setter Property="Template">
-                <ControlTemplate>
-                    <Grid ColumnDefinitions="Auto,*">
-                        <Border>
-                            <ScrollViewer>
-                                <TabStrip Items="{TemplateBinding Items}"
-                                          SelectedIndex="{TemplateBinding Path=SelectedIndex, Mode=TwoWay}">
-                                    <TabStrip.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <StackPanel Orientation="Vertical"/>
-                                        </ItemsPanelTemplate>
-                                    </TabStrip.ItemsPanel>
-                                </TabStrip>
-                            </ScrollViewer>
-                        </Border>
-                        <Carousel Items="{TemplateBinding Items}"
-                                  MemberSelector="Content"
-                                  SelectedIndex="{TemplateBinding Path=SelectedIndex}"
-                                  Transition="{TemplateBinding Transition}"
-                                  Grid.Column="1"/>
-                    </Grid>
-                </ControlTemplate>
-            </Setter>
+            <Setter Property="TabStripPlacement" Value="Left"/>
         </Style>
         <Style Selector="TabControl.right">
             <Setter Property="Margin" Value="0"/>
-            <Setter Property="Template">
-                <ControlTemplate>
-                    <Grid ColumnDefinitions="*,Auto">
-                        <Carousel Items="{TemplateBinding Items}"
-                                  MemberSelector="Content"
-                                  SelectedIndex="{TemplateBinding Path=SelectedIndex}"
-                                  Transition="{TemplateBinding Transition}"/>
-                        <Border Grid.Column="1">
-                            <ScrollViewer>
-                                <TabStrip Items="{TemplateBinding Items}"
-                                          SelectedIndex="{TemplateBinding Path=SelectedIndex, Mode=TwoWay}">
-                                    <TabStrip.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <StackPanel Orientation="Vertical"/>
-                                        </ItemsPanelTemplate>
-                                    </TabStrip.ItemsPanel>
-                                </TabStrip>
-                            </ScrollViewer>
-                        </Border>
-                    </Grid>
-                </ControlTemplate>
-            </Setter>
+            <Setter Property="TabStripPlacement" Value="Right"/>
         </Style>
         <!-- TabItem -->
         <Style Selector="TabItem.property">
