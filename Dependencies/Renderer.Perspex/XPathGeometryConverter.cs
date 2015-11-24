@@ -54,7 +54,7 @@ namespace Dependencies
                         else if (segment is XBezierSegment)
                         {
                             var bezierSegment = segment as XBezierSegment;
-                            sgc.BezierTo(
+                            sgc.CubicBezierTo(
                                 new Point(bezierSegment.Point1.X, bezierSegment.Point1.Y),
                                 new Point(bezierSegment.Point2.X, bezierSegment.Point2.Y),
                                 new Point(bezierSegment.Point3.X, bezierSegment.Point3.Y));
@@ -74,7 +74,7 @@ namespace Dependencies
                             var polyBezierSegment = segment as XPolyBezierSegment;
                             if (polyBezierSegment.Points.Count >= 3)
                             {
-                                sgc.BezierTo(
+                                sgc.CubicBezierTo(
                                     new Point(
                                         polyBezierSegment.Points[0].X,
                                         polyBezierSegment.Points[0].Y),
@@ -93,7 +93,7 @@ namespace Dependencies
                             {
                                 for (int i = 3; i < polyBezierSegment.Points.Count; i += 3)
                                 {
-                                    sgc.BezierTo(
+                                    sgc.CubicBezierTo(
                                         new Point(
                                             polyBezierSegment.Points[i].X,
                                             polyBezierSegment.Points[i].Y),
