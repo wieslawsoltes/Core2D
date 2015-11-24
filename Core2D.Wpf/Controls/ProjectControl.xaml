@@ -8,7 +8,7 @@
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
              xmlns:core="clr-namespace:Core2D;assembly=Core2D" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="200">
+             d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <Grid.Resources>
             <ControlTemplate x:Key="ProjectMenu">

@@ -6,8 +6,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="200">
-    <Grid>
-        <ContentControl DataContext="{Binding Editor.Renderers[0].State.SelectedShape, FallbackValue={x:Null}}" Content="{Binding Data}" Margin="2,2,2,2"/>
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid Margin="2">
+        <ContentControl Content="{Binding Editor.Renderers[0].State.SelectedShape.Data, FallbackValue={x:Null}}"/>
     </Grid>
 </UserControl>

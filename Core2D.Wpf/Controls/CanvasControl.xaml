@@ -9,7 +9,7 @@
              xmlns:controls="clr-namespace:Core2D.Wpf.Controls" 
              xmlns:converters="clr-namespace:Core2D.Wpf.Converters" 
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="600" 
+             d:DesignHeight="300" d:DesignWidth="300" 
              Width="{Binding Editor.Project.CurrentContainer.Template.Width}" 
              Height="{Binding Editor.Project.CurrentContainer.Template.Height}" 
              controls:LayerElement.Renderer="{Binding Editor.Renderers[0]}">
