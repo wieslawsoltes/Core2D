@@ -223,6 +223,39 @@
     <Compile Include="Controls\StatusControl.paml.cs">
       <DependentUpon>StatusControl.paml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ContainerControl.paml.cs">
+      <DependentUpon>ContainerControl.paml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DatabasesControl.paml.cs">
+      <DependentUpon>DatabasesControl.paml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DataControl.paml.cs">
+      <DependentUpon>DataControl.paml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\GroupsControl.paml.cs">
+      <DependentUpon>GroupsControl.paml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ProjectControl.paml.cs">
+      <DependentUpon>ProjectControl.paml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\RecordsControl.paml.cs">
+      <DependentUpon>RecordsControl.paml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ShapeControl.paml.cs">
+      <DependentUpon>ShapeControl.paml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\StyleControl.paml.cs">
+      <DependentUpon>StyleControl.paml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\StylesControl.paml.cs">
+      <DependentUpon>StylesControl.paml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TemplateControl.paml.cs">
+      <DependentUpon>TemplateControl.paml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TemplatesControl.paml.cs">
+      <DependentUpon>TemplatesControl.paml</DependentUpon>
+    </Compile>
     <Compile Include="Converters\ArgbColorToBrushMultiConverter.cs" />
     <Compile Include="Converters\ByteToDoubleConverter.cs" />
     <Compile Include="Converters\ByteToStringConverter.cs" />
@@ -302,6 +335,39 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\StatusControl.paml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ContainerControl.paml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DatabasesControl.paml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DataControl.paml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\GroupsControl.paml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ProjectControl.paml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\RecordsControl.paml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ShapeControl.paml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\StyleControl.paml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\StylesControl.paml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\TemplateControl.paml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\TemplatesControl.paml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\MainWindow.paml">
