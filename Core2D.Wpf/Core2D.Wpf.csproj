@@ -210,9 +210,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\TemplatesControl.xaml" />
-    <Page Include="Dictionaries\Dictionary.xaml">
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Controls\MenuControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
