@@ -106,9 +106,9 @@ namespace Core2D.Wpf.Windows
         /// <param name="context">The editor context instance.</param>
         public void InitializeDrop(EditorContext context)
         {
-            canvasControl.AllowDrop = true;
+            drawableControl.AllowDrop = true;
 
-            canvasControl.DragEnter +=
+            drawableControl.DragEnter +=
                 (s, e) =>
                 {
                     if (!e.Data.GetDataPresent(DataFormats.FileDrop)
@@ -121,7 +121,7 @@ namespace Core2D.Wpf.Windows
                     }
                 };
 
-            canvasControl.Drop +=
+            drawableControl.Drop +=
                 (s, e) =>
                 {
                     if (e.Data.GetDataPresent(DataFormats.FileDrop))
@@ -153,7 +153,7 @@ namespace Core2D.Wpf.Windows
                             var group = e.Data.GetData(typeof(XGroup)) as XGroup;
                             if (group != null)
                             {
-                                var p = e.GetPosition(canvasControl);
+                                var p = e.GetPosition(drawableControl);
                                 context.DropAsClone(group, p.X, p.Y);
                                 e.Handled = true;
                             }
@@ -177,7 +177,7 @@ namespace Core2D.Wpf.Windows
                             var record = e.Data.GetData(typeof(Record)) as Record;
                             if (record != null)
                             {
-                                var p = e.GetPosition(canvasControl);
+                                var p = e.GetPosition(drawableControl);
                                 context.Drop(record, p.X, p.Y);
                                 e.Handled = true;
                             }
@@ -201,7 +201,7 @@ namespace Core2D.Wpf.Windows
                             var style = e.Data.GetData(typeof(ShapeStyle)) as ShapeStyle;
                             if (style != null)
                             {
-                                var p = e.GetPosition(canvasControl);
+                                var p = e.GetPosition(drawableControl);
                                 context.Drop(style, p.X, p.Y);
                                 e.Handled = true;
                             }

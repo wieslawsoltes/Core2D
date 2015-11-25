@@ -104,8 +104,8 @@
     <Compile Include="..\Core2D\Properties\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Controls\CanvasControl.xaml.cs">
-      <DependentUpon>CanvasControl.xaml</DependentUpon>
+    <Compile Include="Controls\DrawableControl.xaml.cs">
+      <DependentUpon>DrawableControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Custom\DragAndDropListBox.cs" />
     <Compile Include="Controls\Custom\EditorCanvas.cs" />
@@ -172,7 +172,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Util\TextClipboard.cs" />
-    <Page Include="Controls\CanvasControl.xaml">
+    <Page Include="Controls\DrawableControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

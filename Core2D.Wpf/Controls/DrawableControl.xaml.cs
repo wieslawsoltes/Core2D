@@ -18,14 +18,14 @@ using System.Windows.Shapes;
 namespace Core2D.Wpf.Controls
 {
     /// <summary>
-    /// Interaction logic for <see cref="CanvasControl"/> xaml.
+    /// Interaction logic for <see cref="DrawableControl"/> xaml.
     /// </summary>
-    public partial class CanvasControl : UserControl
+    public partial class DrawableControl : UserControl
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="CanvasControl"/> class.
+        /// Initializes a new instance of the <see cref="DrawableControl"/> class.
         /// </summary>
-        public CanvasControl()
+        public DrawableControl()
         {
             InitializeComponent();
         }

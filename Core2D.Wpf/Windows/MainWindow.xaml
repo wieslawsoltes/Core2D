@@ -169,9 +169,9 @@
                                                 </Style.Triggers>
                                             </Style>
                                         </controls:PanAndZoomBorder.Style>
-                                        <controls:CanvasControl x:Name="canvasControl">
-                                            <controls:CanvasControl.Style>
-                                                <Style TargetType="controls:CanvasControl">
+                                        <controls:DrawableControl x:Name="drawableControl">
+                                            <controls:DrawableControl.Style>
+                                                <Style TargetType="controls:DrawableControl">
                                                     <Setter Property="Visibility" Value="Visible"/>
                                                     <Style.Triggers>
                                                         <DataTrigger Binding="{Binding Editor.Project.CurrentContainer}" Value="{x:Null}">
@@ -179,8 +179,8 @@
                                                         </DataTrigger>
                                                     </Style.Triggers>
                                                 </Style>
-                                            </controls:CanvasControl.Style>
-                                        </controls:CanvasControl>
+                                            </controls:DrawableControl.Style>
+                                        </controls:DrawableControl>
                                     </controls:PanAndZoomBorder>
                                 </controls:PanAndZoomGrid>
                             </ad:LayoutDocument>
