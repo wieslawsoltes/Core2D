@@ -17,7 +17,7 @@ namespace Core2D
         private Commands _commands = new Commands();
         private Editor _editor;
         private IView _view;
-        private IRenderer[] _renderers;
+        private Renderer[] _renderers;
         private IProjectFactory _projectFactory;
         private ITextClipboard _textClipboard;
         private ISerializer _serializer;
@@ -60,7 +60,7 @@ namespace Core2D
         /// <summary>
         /// Gets or sets editor renderer's.
         /// </summary>
-        public IRenderer[] Renderers
+        public Renderer[] Renderers
         {
             get { return _renderers; }
             set { Update(ref _renderers, value); }

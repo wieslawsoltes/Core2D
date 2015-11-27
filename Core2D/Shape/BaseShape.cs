@@ -21,7 +21,7 @@ namespace Core2D
         /// <summary>
         /// Gets or sets shape name.
         /// </summary>
-        public string Name
+        public virtual string Name
         {
             get { return _name; }
             set { Update(ref _name, value); }
@@ -30,7 +30,7 @@ namespace Core2D
         /// <summary>
         /// Gets or sets shape owner shape.
         /// </summary>
-        public BaseShape Owner
+        public virtual BaseShape Owner
         {
             get { return _owner; }
             set { Update(ref _owner, value); }
@@ -39,7 +39,7 @@ namespace Core2D
         /// <summary>
         /// Indicates shape state options.
         /// </summary>
-        public ShapeState State
+        public virtual ShapeState State
         {
             get { return _state; }
             set { Update(ref _state, value); }
@@ -48,7 +48,7 @@ namespace Core2D
         /// <summary>
         /// Get or sets shape drawing style.
         /// </summary>
-        public ShapeStyle Style
+        public virtual ShapeStyle Style
         {
             get { return _style; }
             set { Update(ref _style, value); }
@@ -57,7 +57,7 @@ namespace Core2D
         /// <summary>
         /// Gets or sets flag indicating whether shape is stroked.
         /// </summary>
-        public bool IsStroked
+        public virtual bool IsStroked
         {
             get { return _isStroked; }
             set { Update(ref _isStroked, value); }
@@ -66,7 +66,7 @@ namespace Core2D
         /// <summary>
         /// Gets or sets flag indicating whether shape is filled.
         /// </summary>
-        public bool IsFilled
+        public virtual bool IsFilled
         {
             get { return _isFilled; }
             set { Update(ref _isFilled, value); }
@@ -75,14 +75,14 @@ namespace Core2D
         /// <summary>
         /// Gets or sets shape <see cref="Core2D.Data"/>.
         /// </summary>
-        public Data Data
+        public virtual Data Data
         {
             get { return _data; }
             set { Update(ref _data, value); }
         }
 
         /// <summary>
-        /// Draws shape using current <see cref="IRenderer"/>.
+        /// Draws shape using current <see cref="Renderer"/>.
         /// </summary>
         /// <param name="dc">The generic drawing context object</param>
         /// <param name="renderer">The generic renderer object used to draw shape.</param>
@@ -90,7 +90,7 @@ namespace Core2D
         /// <param name="dy">The Y axis draw position offset.</param>
         /// <param name="db">The properties database used for binding.</param>
         /// <param name="r">The external data record used for binding.</param>
-        public abstract void Draw(object dc, IRenderer renderer, double dx, double dy, ImmutableArray<Property> db, Record r);
+        public abstract void Draw(object dc, Renderer renderer, double dx, double dy, ImmutableArray<Property> db, Record r);
 
         /// <summary>
         /// Moves shape to new position using X and Y axis offset.

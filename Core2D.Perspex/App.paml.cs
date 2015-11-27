@@ -199,7 +199,7 @@ namespace Core2D.Perspex
         {
             _context = new EditorContext()
             {
-                Renderers = new IRenderer[] { new PerspexRenderer() },
+                Renderers = new Renderer[] { new PerspexRenderer() },
                 ProjectFactory = new ProjectFactory(),
                 TextClipboard = new TextClipboard(),
                 Serializer = new NewtonsoftSerializer(),

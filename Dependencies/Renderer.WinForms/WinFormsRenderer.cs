@@ -17,18 +17,10 @@ namespace Dependencies
     /// <summary>
     /// Native Windows Forms shape renderer.
     /// </summary>
-    public class WinFormsRenderer : ObservableObject, IRenderer
+    public class WinFormsRenderer : Renderer
     {
         private bool _enableImageCache = true;
         private IDictionary<string, Image> _biCache;
-        private RendererState _state = new RendererState();
-
-        /// <inheritdoc/>
-        public RendererState State
-        {
-            get { return _state; }
-            set { Update(ref _state, value); }
-        }
 
         /// <summary>
         /// 
@@ -56,7 +48,7 @@ namespace Dependencies
         /// Creates a new <see cref="WinFormsRenderer"/> instance.
         /// </summary>
         /// <returns>The new instance of the <see cref="WinFormsRenderer"/> class.</returns>
-        public static IRenderer Create()
+        public static Renderer Create()
         {
             return new WinFormsRenderer();
         }
@@ -83,7 +75,7 @@ namespace Dependencies
         /// <returns></returns>
         private Pen ToPen(BaseStyle style, Func<double, float> scale)
         {
-            var pen = new Pen(ToColor(style.Stroke), (float)(style.Thickness / _state.Zoom));
+            var pen = new Pen(ToColor(style.Stroke), (float)(style.Thickness / State.Zoom));
             switch (style.LineCap)
             {
                 case Core2D.LineCap.Flat:
@@ -280,26 +272,8 @@ namespace Dependencies
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="gfx"></param>
-        /// <param name="template"></param>
-        private void DrawTemplateBackgroundInternal(Graphics gfx, Container template)
-        {
-            Brush brush = ToSolidBrush(template.Background);
-            var rect = Rect2.Create(0, 0, template.Width, template.Height);
-            gfx.FillRectangle(
-                brush,
-                _scaleToPage(rect.X),
-                _scaleToPage(rect.Y),
-                _scaleToPage(rect.Width),
-                _scaleToPage(rect.Height));
-            brush.Dispose();
-        }
-
         /// <inheritdoc/>
-        public void ClearCache(bool isZooming)
+        public override void ClearCache(bool isZooming)
         {
             if (!isZooming)
             {
@@ -316,39 +290,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, Container container, ImmutableArray<Property> db, Record r)
-        {
-            // NOTE: Template background is drawn in drawable control.
-            //var template = container.Template;
-            //if (template != null)
-            //{
-            //    var _gfx = gfx as Graphics;
-            //    DrawTemplateBackgroundInternal(_gfx, template);
-            //}
-
-            foreach (var layer in container.Layers)
-            {
-                if (layer.IsVisible)
-                {
-                    Draw(dc, layer, db, r);
-                }
-            }
-        }
-
-        /// <inheritdoc/>
-        public void Draw(object dc, Layer layer, ImmutableArray<Property> db, Record r)
-        {
-            foreach (var shape in layer.Shapes)
-            {
-                if (shape.State.Flags.HasFlag(_state.DrawShapeState.Flags))
-                {
-                    shape.Draw(dc, this, 0, 0, db, r);
-                }
-            }
-        }
-
-        /// <inheritdoc/>
-        public void Draw(object dc, XLine line, double dx, double dy, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, XLine line, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var _gfx = dc as Graphics;
 
@@ -520,7 +462,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, XRectangle rectangle, double dx, double dy, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, XRectangle rectangle, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var _gfx = dc as Graphics;
 
@@ -568,7 +510,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, XEllipse ellipse, double dx, double dy, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, XEllipse ellipse, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var _gfx = dc as Graphics;
 
@@ -605,7 +547,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, XArc arc, double dx, double dy, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, XArc arc, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var a = GdiArc.FromXArc(arc, dx, dy);
             if (a.Width <= 0.0 || a.Height <= 0.0)
@@ -646,7 +588,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, XBezier bezier, double dx, double dy, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, XBezier bezier, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var _gfx = dc as Graphics;
 
@@ -687,7 +629,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, XQBezier qbezier, double dx, double dy, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, XQBezier qbezier, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var _gfx = dc as Graphics;
 
@@ -737,7 +679,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, XText text, double dx, double dy, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, XText text, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var _gfx = dc as Graphics;
 
@@ -826,7 +768,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, XImage image, double dx, double dy, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, XImage image, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var _gfx = dc as Graphics;
 
@@ -867,10 +809,10 @@ namespace Dependencies
             }
             else
             {
-                if (_state.ImageCache == null || string.IsNullOrEmpty(image.Key))
+                if (State.ImageCache == null || string.IsNullOrEmpty(image.Key))
                     return;
 
-                var bytes = _state.ImageCache.GetImage(image.Key);
+                var bytes = State.ImageCache.GetImage(image.Key);
                 if (bytes != null)
                 {
                     var ms = new System.IO.MemoryStream(bytes);
@@ -891,7 +833,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, XPath path, double dx, double dy, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, XPath path, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var _gfx = dc as Graphics;
 

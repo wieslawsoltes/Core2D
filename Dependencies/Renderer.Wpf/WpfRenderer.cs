@@ -19,7 +19,7 @@ namespace Dependencies
     /// <summary>
     /// Native Windows Presentation Foundation shape renderer.
     /// </summary>
-    public class WpfRenderer : ObservableObject, IRenderer
+    public class WpfRenderer : Renderer
     {
         private Cache<ShapeStyle, Tuple<Brush, Pen>> _styleCache = 
             Cache<ShapeStyle, Tuple<Brush, Pen>>.Create();
@@ -48,7 +48,7 @@ namespace Dependencies
         private RendererState _state = new RendererState();
 
         /// <inheritdoc/>
-        public RendererState State
+        public override RendererState State
         {
             get { return _state; }
             set { Update(ref _state, value); }
@@ -66,7 +66,7 @@ namespace Dependencies
         /// Creates a new <see cref="WpfRenderer"/> instance.
         /// </summary>
         /// <returns>The new instance of the <see cref="WpfRenderer"/> class.</returns>
-        public static IRenderer Create()
+        public static Renderer Create()
         {
             return new WpfRenderer();
         }
@@ -395,12 +395,7 @@ namespace Dependencies
         private static void DrawTemplateBackground(DrawingContext dc, Container template)
         {
             var brush = CreateBrush(template.Background);
-            var rect = new Rect(
-                0,
-                0,
-                template.Width,
-                template.Height);
-
+            var rect = new Rect(0, 0, template.Width, template.Height);
             DrawRectangleInternal(
                 dc,
                 0.5,
@@ -412,7 +407,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public void ClearCache(bool isZooming)
+        public override void ClearCache(bool isZooming)
         {
             _styleCache.Reset();
             _arrowStyleCache.Reset();
@@ -429,7 +424,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, Container container, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, Container container, ImmutableArray<Property> db, Record r)
         {
             var _dc = dc as DrawingContext;
 
@@ -449,7 +444,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, Layer layer, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, Layer layer, ImmutableArray<Property> db, Record r)
         {
             var _dc = dc as DrawingContext;
 
@@ -463,7 +458,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, XLine line, double dx, double dy, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, XLine line, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var _dc = dc as DrawingContext;
 
@@ -660,7 +655,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, XRectangle rectangle, double dx, double dy, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, XRectangle rectangle, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var _dc = dc as DrawingContext;
 
@@ -712,7 +707,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, XEllipse ellipse, double dx, double dy, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, XEllipse ellipse, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var _dc = dc as DrawingContext;
 
@@ -756,7 +751,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, XArc arc, double dx, double dy, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, XArc arc, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var _dc = dc as DrawingContext;
 
@@ -825,7 +820,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, XBezier bezier, double dx, double dy, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, XBezier bezier, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var _dc = dc as DrawingContext;
 
@@ -889,7 +884,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, XQBezier qbezier, double dx, double dy, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, XQBezier qbezier, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var _dc = dc as DrawingContext;
 
@@ -952,7 +947,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, XText text, double dx, double dy, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, XText text, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var _dc = dc as DrawingContext;
 
@@ -1058,7 +1053,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, XImage image, double dx, double dy, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, XImage image, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             if (image.Key == null)
                 return;
@@ -1138,7 +1133,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, XPath path, double dx, double dy, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, XPath path, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             if (path.Geometry == null)
                 return;

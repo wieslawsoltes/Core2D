@@ -178,7 +178,7 @@ namespace Core2D.Wpf
         {
             _context = new EditorContext()
             {
-                Renderers = new IRenderer[] { new WpfRenderer(), new WpfRenderer() },
+                Renderers = new Renderer[] { new WpfRenderer(), new WpfRenderer() },
                 ProjectFactory = new ProjectFactory(),
                 TextClipboard = new TextClipboard(),
                 Serializer = new NewtonsoftSerializer(),

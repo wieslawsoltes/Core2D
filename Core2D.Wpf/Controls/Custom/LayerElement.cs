@@ -24,32 +24,32 @@ namespace Core2D.Wpf.Controls
     public class LayerElement : FrameworkElement
     {
         /// <summary>
-        /// Gets the <see cref="IRenderer"/> from <see cref="DependencyProperty"/> object.
+        /// Gets the <see cref="Renderer"/> from <see cref="DependencyProperty"/> object.
         /// </summary>
         /// <param name="obj">The <see cref="DependencyProperty"/> object.</param>
-        /// <returns>The <see cref="IRenderer"/> value.</returns>
-        public static IRenderer GetRenderer(DependencyObject obj)
+        /// <returns>The <see cref="Renderer"/> value.</returns>
+        public static Renderer GetRenderer(DependencyObject obj)
         {
-            return (IRenderer)obj.GetValue(RendererProperty);
+            return (Renderer)obj.GetValue(RendererProperty);
         }
 
         /// <summary>
-        /// Sets the <see cref="DependencyProperty"/> object value as <see cref="IRenderer"/>.
+        /// Sets the <see cref="DependencyProperty"/> object value as <see cref="Renderer"/>.
         /// </summary>
         /// <param name="obj">The <see cref="DependencyProperty"/> object.</param>
-        /// <param name="value">The <see cref="IRenderer"/> value.</param>
-        public static void SetRenderer(DependencyObject obj, IRenderer value)
+        /// <param name="value">The <see cref="Renderer"/> value.</param>
+        public static void SetRenderer(DependencyObject obj, Renderer value)
         {
             obj.SetValue(RendererProperty, value);
         }
 
         /// <summary>
-        /// The attached <see cref="DependencyProperty"/> for <see cref="IRenderer"/> type.
+        /// The attached <see cref="DependencyProperty"/> for <see cref="Renderer"/> type.
         /// </summary>
         public static readonly DependencyProperty RendererProperty =
             DependencyProperty.RegisterAttached(
                 "Renderer",
-                typeof(IRenderer),
+                typeof(Renderer),
                 typeof(LayerElement),
                 new FrameworkPropertyMetadata(
                     null,

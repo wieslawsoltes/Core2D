@@ -20,7 +20,7 @@ namespace Core2D
         private Project _project;
         private string _projectPath;
         private bool _isProjectDirty;
-        private IRenderer[] _renderers;
+        private Renderer[] _renderers;
         private Tool _currentTool;
         private PathTool _currentPathTool;
         private bool _enableObserver;
@@ -72,7 +72,7 @@ namespace Core2D
         /// <summary>
         /// Gets or sets current renderer's.
         /// </summary>
-        public IRenderer[] Renderers
+        public Renderer[] Renderers
         {
             get { return _renderers; }
             set { Update(ref _renderers, value); }
@@ -3027,7 +3027,7 @@ namespace Core2D
         /// <returns>The new instance of the <see cref="Editor"/> class.</returns>
         public static Editor Create(
             Project project,
-            IRenderer[] renderers = null,
+            Renderer[] renderers = null,
             bool enableObserver = true,
             bool enableHistory = true,
             Tool currentTool = Tool.Selection,

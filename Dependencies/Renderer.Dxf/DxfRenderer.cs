@@ -20,7 +20,7 @@ namespace Dependencies
     /// <summary>
     /// Native netDxf shape renderer.
     /// </summary>
-    public class DxfRenderer : Core2D.ObservableObject, Core2D.IRenderer
+    public class DxfRenderer : Core2D.Renderer
     {
         private bool _enableImageCache = true;
         private IDictionary<string, ImageDef> _biCache;
@@ -28,14 +28,6 @@ namespace Dependencies
         private double _pageHeight;
         private string _outputPath;
         private Layer _currentLayer;
-        private Core2D.RendererState _state = new Core2D.RendererState();
-
-        /// <inheritdoc/>
-        public Core2D.RendererState State
-        {
-            get { return _state; }
-            set { Update(ref _state, value); }
-        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DxfRenderer"/> class.
@@ -49,7 +41,7 @@ namespace Dependencies
         /// Creates a new <see cref="DxfRenderer"/> instance.
         /// </summary>
         /// <returns>The new instance of the <see cref="DxfRenderer"/> class.</returns>
-        public static Core2D.IRenderer Create()
+        public static Core2D.Renderer Create()
         {
             return new DxfRenderer();
         }
@@ -557,7 +549,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public void ClearCache(bool isZooming)
+        public override void ClearCache(bool isZooming)
         {
             if (!isZooming)
             {
@@ -570,7 +562,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, Core2D.Container container, ImmutableArray<Core2D.Property> db, Core2D.Record r)
+        public override void Draw(object dc, Core2D.Container container, ImmutableArray<Core2D.Property> db, Core2D.Record r)
         {
             var _doc = dc as DxfDocument;
 
@@ -590,13 +582,13 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, Core2D.Layer layer, ImmutableArray<Core2D.Property> db, Core2D.Record r)
+        public override void Draw(object dc, Core2D.Layer layer, ImmutableArray<Core2D.Property> db, Core2D.Record r)
         {
             var _doc = dc as DxfDocument;
 
             foreach (var shape in layer.Shapes)
             {
-                if (shape.State.Flags.HasFlag(_state.DrawShapeState.Flags))
+                if (shape.State.Flags.HasFlag(State.DrawShapeState.Flags))
                 {
                     shape.Draw(_doc, this, 0, 0, db, r);
                 }
@@ -604,7 +596,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, Core2D.XLine line, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
+        public override void Draw(object dc, Core2D.XLine line, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
         {
             if (!line.IsStroked)
                 return;
@@ -638,7 +630,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, Core2D.XRectangle rectangle, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
+        public override void Draw(object dc, Core2D.XRectangle rectangle, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
         {
             if (!rectangle.IsStroked && !rectangle.IsFilled && !rectangle.IsGrid)
                 return;
@@ -662,7 +654,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, Core2D.XEllipse ellipse, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
+        public override void Draw(object dc, Core2D.XEllipse ellipse, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
         {
             if (!ellipse.IsStroked && !ellipse.IsFilled)
                 return;
@@ -675,7 +667,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, Core2D.XArc arc, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
+        public override void Draw(object dc, Core2D.XArc arc, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
         {
             var _doc = dc as DxfDocument;
             var style = arc.Style;
@@ -722,7 +714,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, Core2D.XBezier bezier, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
+        public override void Draw(object dc, Core2D.XBezier bezier, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
         {
             if (!bezier.IsStroked && !bezier.IsFilled)
                 return;
@@ -779,7 +771,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, Core2D.XQBezier qbezier, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
+        public override void Draw(object dc, Core2D.XQBezier qbezier, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
         {
             if (!qbezier.IsStroked && !qbezier.IsFilled)
                 return;
@@ -834,7 +826,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, Core2D.XText text, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
+        public override void Draw(object dc, Core2D.XText text, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
         {
             var _doc = dc as DxfDocument;
 
@@ -955,11 +947,11 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, Core2D.XImage image, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
+        public override void Draw(object dc, Core2D.XImage image, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
         {
             var _doc = dc as DxfDocument;
 
-            var bytes = _state.ImageCache.GetImage(image.Key);
+            var bytes = State.ImageCache.GetImage(image.Key);
             if (bytes != null)
             {
                 var rect = Core2D.Rect2.Create(image.TopLeft, image.BottomRight, dx, dy);
@@ -977,7 +969,7 @@ namespace Dependencies
                 }
                 else
                 {
-                    if (_state.ImageCache == null || string.IsNullOrEmpty(image.Key))
+                    if (State.ImageCache == null || string.IsNullOrEmpty(image.Key))
                         return;
 
                     var path = System.IO.Path.Combine(_outputPath, System.IO.Path.GetFileName(image.Key));
@@ -998,7 +990,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public void Draw(object dc, Core2D.XPath path, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
+        public override void Draw(object dc, Core2D.XPath path, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
         {
             if (!path.IsStroked && !path.IsFilled)
                 return;
