@@ -9,13 +9,11 @@
         xmlns:controls="clr-namespace:Core2D.Wpf.Controls" 
         xmlns:ad="http://schemas.xceed.com/wpf/xaml/avalondock" 
         xmlns:p="clr-namespace:Core2D.Wpf.Properties" 
-        Height="724" Width="1324" 
+        Width="1324" Height="724"
         Background="{StaticResource BackgroundColor}" 
         WindowStartupLocation="CenterScreen" WindowState="Maximized" 
         UseLayoutRounding="True" SnapsToDevicePixels="True" 
-        TextOptions.TextFormattingMode="Display" 
-        TextOptions.TextHintingMode="Auto" 
-        TextOptions.TextRenderingMode="Auto">
+        TextOptions.TextFormattingMode="Display" TextOptions.TextHintingMode="Auto" TextOptions.TextRenderingMode="Auto">
     <Window.Title>
         <MultiBinding StringFormat="{}{0}{1} - Core2D" FallbackValue="Core2D" TargetNullValue="Core2D">
             <Binding Path="Editor.Project.Name"/>
