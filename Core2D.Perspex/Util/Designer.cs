@@ -30,8 +30,10 @@ namespace Core2D.Perspex
         static Designer()
         {
             InitializeContext();
+
             Commands.InitializeCommonCommands(_context);
             InitializePlatformCommands(_context);
+
             _context.OnNew(null);
         }
 
