@@ -5,11 +5,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Core2D.Wpf" 
              xmlns:core="clr-namespace:Core2D;assembly=Core2D" 
              xmlns:converters="clr-namespace:Core2D.Wpf.Converters" 
              xmlns:controls="clr-namespace:Core2D.Wpf.Controls" 
              xmlns:p="clr-namespace:Core2D.Wpf.Properties" 
              mc:Ignorable="d" 
+             d:DataContext="{x:Static local:Designer.Context}"
              d:DesignHeight="20" d:DesignWidth="1324">
     <StatusBar Background="Transparent">
         <StatusBar.ItemsPanel>
