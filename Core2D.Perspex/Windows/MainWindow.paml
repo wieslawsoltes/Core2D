@@ -9,7 +9,9 @@
         xmlns:core="clr-namespace:Core2D;assembly=Core2D"
         Width="1324" Height="670"
         Background="#FFFFFFFF"
-        UseLayoutRounding="True">
+        UseLayoutRounding="True"
+        Design.DataContext="{Static local:Designer.Context}"
+        Design.Width="1000" Design.Height="670">
     <Window.Title>
         <MultiBinding Mode="OneWay" Converter="{Static converters:EditorToTitleMultiConverter.Instance}">
             <Binding Path="Editor.Project.Name"/>
