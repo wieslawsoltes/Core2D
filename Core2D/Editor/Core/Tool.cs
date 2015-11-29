@@ -18,10 +18,6 @@ namespace Core2D
         /// </summary>
         Selection,
         /// <summary>
-        /// Group tool.
-        /// </summary>
-        Group,
-        /// <summary>
         /// Point tool.
         /// </summary>
         Point,
