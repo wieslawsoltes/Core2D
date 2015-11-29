@@ -25,28 +25,32 @@ The core library and editor are portable and should work on all platforms where 
 
 ### NuGet Packages
 
-* System.Collections.Immutable
-* Newtonsoft.Json
-* CsvHelper
-* PDFsharp (`PDFsharp` core for `Perspex` Linux builds.)
-* PDFsharp-wpf (`PDFsharp `core does not implement `XGraphicsPath.AddArc` method.)
-* System.Windows.Interactivity.WPF
-* Xceed.Wpf.AvalonDock
-* Xceed.Products.Wpf.Toolkit.AvalonDock
+* Common
+  * System.Collections.Immutable
+  * Newtonsoft.Json
+  * CsvHelper
+  * netdxf (Currently using git submodule as NuGet version is outdated.)
+* WPF
+  * PDFsharp-wpf (`PDFsharp` core does not implement `XGraphicsPath.AddArc` method.)
+  * Xceed.Wpf.AvalonDock
+  * Xceed.Products.Wpf.Toolkit.AvalonDock
+  * System.Windows.Interactivity.WPF
 * Perspex
-* Perspex.Desktop
-* Perspex.Skia.Desktop
-* Rx-Core
-* Rx-Interfaces
-* Rx-Linq
-* Rx-Main
-* Rx-PlatformServices
-* Serilog
-* SharpDX
-* SharpDX.Direct2D1
-* SharpDX.DXGI
-* Splat
-* Sprache
+  * PDFsharp (`PDFsharp` core for `Perspex` non-windows builds.)
+  * Perspex
+  * Perspex.Desktop
+  * Perspex.Skia.Desktop
+  * Rx-Core
+  * Rx-Interfaces
+  * Rx-Linq
+  * Rx-Main
+  * Rx-PlatformServices
+  * Serilog
+  * SharpDX
+  * SharpDX.Direct2D1
+  * SharpDX.DXGI
+  * Splat
+  * Sprache
 
 ### NuGet Package Sources
 
