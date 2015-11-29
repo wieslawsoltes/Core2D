@@ -23,7 +23,7 @@ namespace Dependencies
     public class DxfRenderer : Core2D.Renderer
     {
         private bool _enableImageCache = true;
-        private IDictionary<string, ImageDef> _biCache;
+        private IDictionary<string, ImageDefinition> _biCache;
         private double _pageWidth;
         private double _pageHeight;
         private string _outputPath;
@@ -368,7 +368,7 @@ namespace Dependencies
             }
         }
 
-        private void CreateHatchBoundsAndEntitiess(Core2D.XPathGeometry pg, double dx, double dy, out ICollection<HatchBoundaryPath> bounds, out ICollection<EntityObject> entities)
+        private void CreateHatchBoundsAndEntitiess(Core2D.XPathGeometry pg, double dx, double dy, out IList<HatchBoundaryPath> bounds, out ICollection<EntityObject> entities)
         {
             bounds = new List<HatchBoundaryPath>();
             entities = new List<EntityObject>();
@@ -557,7 +557,7 @@ namespace Dependencies
                 {
                     _biCache.Clear();
                 }
-                _biCache = new Dictionary<string, ImageDef>();
+                _biCache = new Dictionary<string, ImageDefinition>();
             }
         }
 
@@ -974,7 +974,7 @@ namespace Dependencies
 
                     var path = System.IO.Path.Combine(_outputPath, System.IO.Path.GetFileName(image.Key));
                     System.IO.File.WriteAllBytes(path, bytes);
-                    var dxfImageDefinition = new ImageDef(path);
+                    var dxfImageDefinition = new ImageDefinition(path);
 
                     if (_enableImageCache)
                         _biCache[image.Key] = dxfImageDefinition;
@@ -998,7 +998,7 @@ namespace Dependencies
             var _doc = dc as DxfDocument;
             var style = path.Style;
 
-            ICollection<HatchBoundaryPath> bounds;
+            IList<HatchBoundaryPath> bounds;
             ICollection<EntityObject> entities;
             CreateHatchBoundsAndEntitiess(path.Geometry, dx, dy, out bounds, out entities);
             if (entities == null || bounds == null)
