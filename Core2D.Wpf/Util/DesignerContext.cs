@@ -7,57 +7,55 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using Dependencies;
 
-namespace Core2D.Perspex
+namespace Core2D
 {
     /// <summary>
-    /// The Xaml designer helper class.
+    /// The design time <see cref="EditorContext"/> helper class.
     /// </summary>
-    public static class Designer
+    public class DesignerContext
     {
-        private static EditorContext _context;
+        private EditorContext _context;
 
         /// <summary>
-        /// The Xaml designer DataContext.
+        /// The design time <see cref="EditorContext"/>.
         /// </summary>
-        public static EditorContext Context
+        public virtual EditorContext Context
         {
             get { return _context; }
             set { _context = value; }
         }
 
-        static Designer()
-        {
-            InitializeContext();
-
-            Commands.InitializeCommonCommands(_context);
-            InitializePlatformCommands(_context);
-
-            _context.OnNew(null);
-        }
-
-        private static void InitializeContext()
+        /// <summary>
+        /// Initialize <see cref="EditorContext"/> object.
+        /// </summary>
+        /// <param name="renderer">The design time renderer instance.</param>
+        /// <param name="clipboard">The design time clipboard instance</param>
+        /// <param name="serializer">The design time serializer instance</param>
+        public virtual void InitializeContext(Renderer renderer, ITextClipboard clipboard, ISerializer serializer)
         {
             _context = new EditorContext()
             {
-                Renderers = new Renderer[] { new PerspexRenderer() },
+                Renderers = new Renderer[] { renderer },
                 ProjectFactory = new ProjectFactory(),
-                TextClipboard = new TextClipboard(),
-                Serializer = new NewtonsoftSerializer(),
-                PdfWriter = new PdfWriter(),
-                DxfWriter = new DxfWriter(),
-                CsvReader = new CsvHelperReader(),
-                CsvWriter = new CsvHelperWriter()
+                TextClipboard = clipboard,
+                Serializer = serializer,
+                PdfWriter = null,
+                DxfWriter = null,
+                CsvReader = null,
+                CsvWriter = null
             };
 
             _context.Renderers[0].State.EnableAutofit = true;
-
             _context.InitializeEditor(null, null, false);
             _context.Editor.Renderers[0].State.DrawShapeState.Flags = ShapeStateFlags.Visible;
         }
 
-        private static void InitializePlatformCommands(EditorContext context)
+        /// <summary>
+        /// Initialize platform commands used by <see cref="EditorContext"/>.
+        /// </summary>
+        /// <param name="context">The editor context instance.</param>
+        public virtual void InitializePlatformCommands(EditorContext context)
         {
             Commands.OpenCommand =
                 Command<object>.Create(
@@ -203,6 +201,27 @@ namespace Core2D.Perspex
                 Command.Create(
                     () => context.Editor.ExtentZoom(),
                     () => true);
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="DesignerContext"/> instance.
+        /// </summary>
+        /// <param name="renderer">The design time renderer instance.</param>
+        /// <param name="clipboard">The design time clipboard instance</param>
+        /// <param name="serializer">The design time serializer instance</param>
+        /// <returns>The new instance of the <see cref="DesignerContext"/> class.</returns>
+        public static DesignerContext Create(Renderer renderer, ITextClipboard clipboard, ISerializer serializer)
+        {
+            var dc = new DesignerContext();
+
+            dc.InitializeContext(renderer, clipboard, serializer);
+
+            Commands.InitializeCommonCommands(dc.Context);
+            dc.InitializePlatformCommands(dc.Context);
+
+            dc.Context.OnNew(null);
+
+            return dc;
         }
     }
 }

@@ -7,7 +7,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Core2D.Wpf" 
              mc:Ignorable="d" 
-             d:DataContext="{x:Static local:Designer.Context}"
+             d:DataContext="{x:Static local:DesignerHelper.DataContext}"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid Margin="2">
         <ContentControl Content="{Binding Editor.Project.CurrentContainer.CurrentShape, FallbackValue={x:Null}}"/>

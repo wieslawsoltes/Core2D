@@ -171,7 +171,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Util\Designer.cs" />
+    <Compile Include="Util\DesignerHelper.cs" />
+    <Compile Include="Util\DesignerContext.cs" />
     <Compile Include="Util\TextClipboard.cs" />
     <Page Include="Controls\DrawableControl.xaml">
       <Generator>MSBuild:Compile</Generator>
