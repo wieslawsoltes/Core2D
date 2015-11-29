@@ -28,7 +28,16 @@ after_build:
 
     appveyor PushArtifact Core2D.Wpf-%CONFIGURATION%-%APPVEYOR_BUILD_VERSION%.zip
 test: off
-deploy: off
+deploy:
+- provider: GitHub
+  tag: $(appveyor_build_version)
+  release: $(appveyor_build_version)
+  auth_token:
+    secure: 6jHUhHqAmyx5NOZWctCi0A72lGgaGxhT5tRWnBNMz1JYHOgg1PEID1DFEG1jiQeO
+  artifact: /.*\.zip/
+  prerelease: true
+  on:
+    branch: master
 notifications:
 - provider: Webhook
   url: https://webhooks.gitter.im/e/cc9eb0e869ca5a539718
