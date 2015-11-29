@@ -39,11 +39,7 @@ namespace Core2D
                 Renderers = new Renderer[] { renderer },
                 ProjectFactory = new ProjectFactory(),
                 TextClipboard = clipboard,
-                Serializer = serializer,
-                PdfWriter = null,
-                DxfWriter = null,
-                CsvReader = null,
-                CsvWriter = null
+                Serializer = serializer
             };
 
             _context.Renderers[0].State.EnableAutofit = true;
