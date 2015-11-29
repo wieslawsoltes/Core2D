@@ -126,7 +126,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Perspex.Skia.Desktop, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Perspex.Skia.Desktop.9999.0.850-nightly\lib\net45\Perspex.Skia.Desktop.dll</HintPath>
+      <HintPath>..\packages\Perspex.Skia.Desktop.9999.0.856-nightly\lib\net45\Perspex.Skia.Desktop.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Perspex.Styling, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
@@ -384,10 +384,10 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\SharpDX.2.6.3\build\SharpDX.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SharpDX.2.6.3\build\SharpDX.targets'))" />
-    <Error Condition="!Exists('..\packages\Perspex.Skia.Desktop.9999.0.850-nightly\build\net45\Perspex.Skia.Desktop.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Perspex.Skia.Desktop.9999.0.850-nightly\build\net45\Perspex.Skia.Desktop.targets'))" />
+    <Error Condition="!Exists('..\packages\Perspex.Skia.Desktop.9999.0.856-nightly\build\net45\Perspex.Skia.Desktop.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Perspex.Skia.Desktop.9999.0.856-nightly\build\net45\Perspex.Skia.Desktop.targets'))" />
   </Target>
   <Import Project="..\packages\SharpDX.2.6.3\build\SharpDX.targets" Condition="Exists('..\packages\SharpDX.2.6.3\build\SharpDX.targets')" />
-  <Import Project="..\packages\Perspex.Skia.Desktop.9999.0.850-nightly\build\net45\Perspex.Skia.Desktop.targets" Condition="Exists('..\packages\Perspex.Skia.Desktop.9999.0.850-nightly\build\net45\Perspex.Skia.Desktop.targets')" />
+  <Import Project="..\packages\Perspex.Skia.Desktop.9999.0.856-nightly\build\net45\Perspex.Skia.Desktop.targets" Condition="Exists('..\packages\Perspex.Skia.Desktop.9999.0.856-nightly\build\net45\Perspex.Skia.Desktop.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
