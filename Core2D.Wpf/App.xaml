@@ -269,22 +269,22 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="90"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="50"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="40"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="FontName" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
-                <TextBlock Text="FontFile" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="1" Grid.Column="0"/>
-                <TextBlock Text="FontSize" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="2" Grid.Column="0"/>
-                <TextBlock Text="FontStyle" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="3" Grid.Column="0"/>
-                <TextBlock Text="HAlignment" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="4" Grid.Column="0"/>
-                <TextBlock Text="VAlignment" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="5" Grid.Column="0"/>
-                <Slider Value="{Binding FontSize}" Style="{StaticResource SliderStyleKey}" Minimum="0" Maximum="72" TickFrequency="1" IsSnapToTickEnabled="True" Grid.Row="2" Grid.Column="1"/>
                 <TextBox Text="{Binding FontName, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"/>
+                <TextBlock Text="FontFile" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="1" Grid.Column="0"/>
                 <TextBox Text="{Binding FontFile, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"/>
-                <TextBox Text="{Binding FontSize, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxCenterStyleKey}" Grid.Row="2" Grid.Column="2"/>
+                <TextBlock Text="FontSize" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="2" Grid.Column="0"/>
+                <TextBox Text="{Binding FontSize, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxCenterStyleKey}" Grid.Row="2" Grid.Column="1"/>
+                <Slider Value="{Binding FontSize}" Style="{StaticResource SliderStyleKey}" Minimum="0" Maximum="72" TickFrequency="1" IsSnapToTickEnabled="True" Grid.Row="2" Grid.Column="2"/>
+                <TextBlock Text="FontStyle" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="3" Grid.Column="0"/>
                 <ContentControl Content="{Binding FontStyle}" Margin="5,2,5,2" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"/>
+                <TextBlock Text="HAlignment" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="4" Grid.Column="0"/>
                 <ComboBox ItemsSource="{x:Static core:Enums.TextHAlignmentValues}" SelectedItem="{Binding TextHAlignment}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2"/>
+                <TextBlock Text="VAlignment" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="5" Grid.Column="0"/>
                 <ComboBox ItemsSource="{x:Static core:Enums.TextVAlignmentValues}" SelectedItem="{Binding TextVAlignment}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2"/>
             </Grid>
         </DataTemplate>
