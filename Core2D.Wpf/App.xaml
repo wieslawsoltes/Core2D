@@ -1523,22 +1523,21 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="40"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="{x:Static p:Resources.OptionsSnapToGrid}" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                        <CheckBox Content="" IsChecked="{Binding SnapToGrid}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="0" Grid.Column="1"/>
                         <TextBlock Text="{x:Static p:Resources.OptionsSnapX}" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="1" Grid.Column="0"/>
+                        <TextBox Text="{Binding SnapX, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="1" Grid.Column="1"/>
                         <TextBlock Text="{x:Static p:Resources.OptionsSnapY}" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="2" Grid.Column="0"/>
+                        <TextBox Text="{Binding SnapY, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="2" Grid.Column="1"/>
                         <TextBlock Text="{x:Static p:Resources.OptionsHitTreshold}" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="3" Grid.Column="0"/>
+                        <TextBox Text="{Binding HitTreshold, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="3" Grid.Column="1"/>
                         <TextBlock Text="{x:Static p:Resources.OptionsMoveMode}" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="4" Grid.Column="0"/>
+                        <ComboBox ItemsSource="{x:Static core:Enums.MoveModeValues}" SelectedItem="{Binding MoveMode}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="4" Grid.Column="1"/>
                         <TextBlock Text="{x:Static p:Resources.OptionsTryToConnect}" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="5" Grid.Column="0"/>
-                        <CheckBox Content="" IsChecked="{Binding SnapToGrid}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"/>
-                        <TextBox Text="{Binding SnapX, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"/>
-                        <TextBox Text="{Binding SnapY, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"/>
-                        <TextBox Text="{Binding HitTreshold, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"/>
-                        <ComboBox ItemsSource="{x:Static core:Enums.MoveModeValues}" SelectedItem="{Binding MoveMode}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2"/>
-                        <CheckBox Content="" IsChecked="{Binding TryToConnect}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2"/>
+                        <CheckBox Content="" IsChecked="{Binding TryToConnect}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="5" Grid.Column="1"/>
                     </Grid>
                 </TabItem>
                 <TabItem Header="{x:Static p:Resources.OptionsHeaderDefaults}">
@@ -1551,37 +1550,36 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="40"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="{x:Static p:Resources.OptionsDefaultIsStroked}" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                        <CheckBox Content="" IsChecked="{Binding DefaultIsStroked}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="0" Grid.Column="1"/>
                         <TextBlock Text="{x:Static p:Resources.OptionsDefaultIsFilled}" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="1" Grid.Column="0"/>
+                        <CheckBox Content="" IsChecked="{Binding DefaultIsFilled}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="1" Grid.Column="1"/>
                         <TextBlock Text="{x:Static p:Resources.OptionsDefaultIsClosed}" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="2" Grid.Column="0"/>
+                        <CheckBox Content="" IsChecked="{Binding DefaultIsClosed}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="2" Grid.Column="1"/>
                         <TextBlock Text="{x:Static p:Resources.OptionsDefaultIsSmoothJoin}" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="3" Grid.Column="0"/>
+                        <CheckBox Content="" IsChecked="{Binding DefaultIsSmoothJoin}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="3" Grid.Column="1"/>
                         <TextBlock Text="{x:Static p:Resources.OptionsDefaultFillRule}" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="4" Grid.Column="0"/>
-                        <CheckBox Content="" IsChecked="{Binding DefaultIsStroked}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"/>
-                        <CheckBox Content="" IsChecked="{Binding DefaultIsFilled}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"/>
-                        <CheckBox Content="" IsChecked="{Binding DefaultIsClosed}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"/>
-                        <CheckBox Content="" IsChecked="{Binding DefaultIsSmoothJoin}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"/>
-                        <ComboBox ItemsSource="{x:Static core:Enums.XFillRuleValues}" SelectedItem="{Binding DefaultFillRule}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2"/>
+                        <ComboBox ItemsSource="{x:Static core:Enums.XFillRuleValues}" SelectedItem="{Binding DefaultFillRule}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="4" Grid.Column="1"/>
                     </Grid>
                 </TabItem>
                 <TabItem Header="{x:Static p:Resources.OptionsHeaderAdvanced}">
-                    <StackPanel>
-                        <Expander Header="{x:Static p:Resources.OptionsPointShape}">
+                    <TabControl>
+                        <TabItem Header="PointShape">
                             <ContentControl Content="{Binding PointShape}"/>
-                        </Expander>
-                        <Expander Header="{x:Static p:Resources.OptionsPointStyle}">
+                        </TabItem>
+                        <TabItem Header="PointStyle">
                             <ContentControl Content="{Binding PointStyle}"/>
-                        </Expander>
-                        <Expander Header="{x:Static p:Resources.OptionsSelectionStyle}">
+                        </TabItem>
+                        <TabItem Header="SelectionStyle">
                             <ContentControl Content="{Binding SelectionStyle}"/>
-                        </Expander>
-                        <Expander Header="{x:Static p:Resources.OptionsHelperStyle}">
+                        </TabItem>
+                        <TabItem Header="HelperStyle">
                             <ContentControl Content="{Binding HelperStyle}"/>
-                        </Expander>
-                    </StackPanel>
+                        </TabItem>
+                    </TabControl>
                 </TabItem>
             </TabControl>
         </DataTemplate>
