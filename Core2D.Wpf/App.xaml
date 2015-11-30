@@ -288,33 +288,58 @@
                 <ComboBox ItemsSource="{x:Static core:Enums.TextVAlignmentValues}" SelectedItem="{Binding TextVAlignment}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2"/>
             </Grid>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type core:LineStyle}">
+        <DataTemplate DataType="{x:Type core:LineFixedLength}">
             <TabControl>
-                <TabItem Header="Flags">
-                    <StackPanel Margin="5,2,5,2" DataContext="{Binding FixedLength}">
-                        <CheckBox Content="Disabled" Margin="1" IsChecked="{Binding Disabled}"/>
-                        <CheckBox Content="Start" Margin="1" IsChecked="{Binding Start}"/>
-                        <CheckBox Content="End" Margin="1" IsChecked="{Binding End}"/>
-                        <CheckBox Content="Vertical" Margin="1" IsChecked="{Binding Vertical}"/>
-                        <CheckBox Content="Horizontal" Margin="1" IsChecked="{Binding Horizontal}"/>
-                        <CheckBox Content="All" Margin="1" IsChecked="{Binding All}"/>
-                    </StackPanel>
-                </TabItem>
-                <TabItem Header="Length">
+                <TabItem Header="FixedLength">
                     <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="50"/>
                             <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="40"/>
                         </Grid.ColumnDefinitions>
-                        <Slider Value="{Binding FixedLength.Length}" Style="{StaticResource SliderStyleKey}" Minimum="0" Maximum="30" TickFrequency="0.1" SmallChange="0.1" LargeChange="1" IsSnapToTickEnabled="True" Grid.Column="0"/>
-                        <TextBox Text="{Binding FixedLength.Length, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxCenterStyleKey}" Grid.Column="1"/>
+                        <TextBlock Text="Length" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                        <TextBox Text="{Binding Length, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxCenterStyleKey}" Grid.Row="0" Grid.Column="1"/>
+                        <Slider Value="{Binding Length}" Style="{StaticResource SliderStyleKey}" Minimum="0" Maximum="30" TickFrequency="0.1" SmallChange="0.1" LargeChange="1" IsSnapToTickEnabled="True" Grid.Row="0" Grid.Column="2"/>
+                        <TextBlock Text="Flags" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="1" Grid.Column="0"/>
+                        <StackPanel Margin="5,2,5,2" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
+                            <CheckBox Content="Disabled" Margin="1" IsChecked="{Binding Disabled}"/>
+                            <CheckBox Content="Start" Margin="1" IsChecked="{Binding Start}"/>
+                            <CheckBox Content="End" Margin="1" IsChecked="{Binding End}"/>
+                            <CheckBox Content="Vertical" Margin="1" IsChecked="{Binding Vertical}"/>
+                            <CheckBox Content="Horizontal" Margin="1" IsChecked="{Binding Horizontal}"/>
+                            <CheckBox Content="All" Margin="1" IsChecked="{Binding All}"/>
+                        </StackPanel>
                     </Grid>
                 </TabItem>
                 <TabItem Header="StartTrigger">
-                    <ContentControl Content="{Binding FixedLength.StartTrigger}"/>
+                    <ContentControl Content="{Binding StartTrigger}"/>
                 </TabItem>
                 <TabItem Header="EndTrigger">
-                    <ContentControl Content="{Binding FixedLength.EndTrigger}"/>
+                    <ContentControl Content="{Binding EndTrigger}"/>
+                </TabItem>
+            </TabControl>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type core:LineStyle}">
+            <TabControl>
+                <TabItem Header="LineStyle">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Name" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                        <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" BorderBrush="{x:Null}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="0" Grid.Column="1"/>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="FixedLength">
+                    <ContentControl Content="{Binding FixedLength}"/>
                 </TabItem>
             </TabControl>
         </DataTemplate>
@@ -430,77 +455,75 @@
             </Grid>
         </DataTemplate>
         <DataTemplate DataType="{x:Type core:Database}">
-            <StackPanel>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="60"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Text="Name" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
-                    <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" BorderBrush="{x:Null}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="0" Grid.Column="1"/>
-                    <TabControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
-                        <TabItem Header="Columns">
-                            <Grid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Name" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" BorderBrush="{x:Null}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="0" Grid.Column="1"/>
+                <TabControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+                    <TabItem Header="Columns">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Control Template="{StaticResource ColumnsMenuControlTemplateKey}" Grid.Row="0" Margin="2,0,2,0"/>
+                            <Grid Height="Auto" VerticalAlignment="Top" Grid.Row="1">
+                                <Grid.Style>
+                                    <Style TargetType="Grid">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Columns.Length, FallbackValue=0}" Value="0">
+                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Grid.Style>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="30"/>
+                                </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
                                     <RowDefinition Height="*"/>
-                                    <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
-                                <Control Template="{StaticResource ColumnsMenuControlTemplateKey}" Grid.Row="0" Margin="2,0,2,0"/>
-                                <Grid Height="Auto" VerticalAlignment="Top" Grid.Row="1">
-                                    <Grid.Style>
-                                        <Style TargetType="Grid">
-                                            <Setter Property="Visibility" Value="Visible"/>
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding Columns.Length, FallbackValue=0}" Value="0">
-                                                    <Setter Property="Visibility" Value="Collapsed"/>
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </Grid.Style>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="30"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition/>
-                                        <RowDefinition/>
-                                        <RowDefinition Height="*"/>
-                                    </Grid.RowDefinitions>
-                                    <TextBlock Grid.Column="0" Grid.Row="0" Margin="5,2,5,2" VerticalAlignment="Center" Text="Name"/>
-                                </Grid>
-                                <ItemsControl x:Name="columnsItemsControls" VerticalContentAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="2" ItemsSource="{Binding Columns, UpdateSourceTrigger=PropertyChanged}">
-                                    <ItemsControl.ItemTemplate>
-                                        <DataTemplate>
-                                            <Grid Height="Auto" VerticalAlignment="Top">
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="*"/>
-                                                    <ColumnDefinition Width="30"/>
-                                                </Grid.ColumnDefinitions>
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition/>
-                                                    <RowDefinition/>
-                                                    <RowDefinition Height="*"/>
-                                                </Grid.RowDefinitions>
-                                                <TextBox Grid.Column="0" Grid.Row="0" Margin="5,2,5,2" VerticalAlignment="Center" Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                                                <Button Grid.Column="1" Grid.Row="0" Margin="5,2,5,2" VerticalAlignment="Center" Content="-" Command="{x:Static core:Commands.RemoveColumnCommand}" CommandParameter="{Binding}"/>
-                                            </Grid>
-                                        </DataTemplate>
-                                    </ItemsControl.ItemTemplate>
-                                </ItemsControl>
+                                <TextBlock Grid.Column="0" Grid.Row="0" Margin="5,2,5,2" VerticalAlignment="Center" Text="Name"/>
                             </Grid>
-                        </TabItem>
-                        <TabItem Header="Current Record">
-                            <ContentControl Content="{Binding CurrentRecord}"/>
-                        </TabItem>
-                    </TabControl>
-                </Grid>
-            </StackPanel>
+                            <ItemsControl x:Name="columnsItemsControls" VerticalContentAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="2" ItemsSource="{Binding Columns, UpdateSourceTrigger=PropertyChanged}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Height="Auto" VerticalAlignment="Top">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="30"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                                <RowDefinition Height="*"/>
+                                            </Grid.RowDefinitions>
+                                            <TextBox Grid.Column="0" Grid.Row="0" Margin="5,2,5,2" VerticalAlignment="Center" Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                            <Button Grid.Column="1" Grid.Row="0" Margin="5,2,5,2" VerticalAlignment="Center" Content="-" Command="{x:Static core:Commands.RemoveColumnCommand}" CommandParameter="{Binding}"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="Current Record">
+                        <ContentControl Content="{Binding CurrentRecord}"/>
+                    </TabItem>
+                </TabControl>
+            </Grid>
         </DataTemplate>
         <DataTemplate DataType="{x:Type core:Data}">
             <TabControl>
