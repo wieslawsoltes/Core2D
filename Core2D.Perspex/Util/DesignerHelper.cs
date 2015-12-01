@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Dependencies;
+using Design = Perspex.Design;
 
 namespace Core2D.Perspex
 {
