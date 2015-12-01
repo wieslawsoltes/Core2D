@@ -23,7 +23,7 @@ namespace Core2D.Wpf
         /// </summary>
         public static object DataContext
         {
-            get { return _dc.Context; }
+            get { return _dc == null ? null : _dc.Context; }
         }
 
         static DesignerHelper()
