@@ -91,38 +91,45 @@ namespace Core2D.Perspex
         /// </summary>
         public void Start()
         {
-            InitializeContext();
-            LoadRecent();
-
-            Commands.InitializeCommonCommands(_context);
-            InitializePlatformCommands(_context);
-
-            _mainWindow = new Windows.MainWindow();
-
-            _mainWindow.Closed +=
-                (sender, e) =>
-                {
-                    SaveRecent();
-                    DeInitializeContext();
-                };
-
-            _context.View = _mainWindow;
-
-            _mainWindow.DataContext = _context;
-            _mainWindow.Show();
-
             try
             {
+                InitializeContext();
+                Commands.InitializeCommonCommands(_context);
+                InitializePlatformCommands(_context);
+
+                LoadRecent();
+
+                _mainWindow = new Windows.MainWindow();
+
+                _mainWindow.Closed +=
+                    (sender, e) =>
+                    {
+                        SaveRecent();
+                        DeInitializeContext();
+                    };
+
+                _context.View = _mainWindow;
+
+                _mainWindow.DataContext = _context;
+                _mainWindow.Show();
+
                 Run(_mainWindow);
             }
             catch (Exception ex)
             {
-                if (_context.Editor.Log != null)
+                if (_context != null && _context.Editor != null && _context.Editor.Log != null)
                 {
                     _context.Editor.Log.LogError("{0}{1}{2}",
                         ex.Message,
                         Environment.NewLine,
                         ex.StackTrace);
+                }
+                else
+                {
+                    Trace.WriteLine(string.Format("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace));
                 }
             }
         }
