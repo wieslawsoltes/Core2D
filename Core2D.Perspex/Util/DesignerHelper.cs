@@ -29,10 +29,13 @@ namespace Core2D.Perspex
 
         static DesignerHelper()
         {
-            _dc = DesignerContext.Create(
-                new PerspexRenderer(),
-                new TextClipboard(),
-                new NewtonsoftSerializer());
+            if (Design.IsDesignMode)
+            {
+                _dc = DesignerContext.Create(
+                    new PerspexRenderer(),
+                    new TextClipboard(),
+                    new NewtonsoftSerializer());
+            }
         }
     }
 }
