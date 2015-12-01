@@ -7,7 +7,8 @@
              xmlns:local="clr-namespace:Core2D.Perspex;assembly=Core2D.Perspex"
              xmlns:converters="clr-namespace:Core2D.Perspex.Converters;assembly=Core2D.Perspex"
              xmlns:core="clr-namespace:Core2D;assembly=Core2D"
-             Design.DataContext="{Static local:DesignerHelper.DataContext}">
+             Design.DataContext="{Static local:DesignerHelper.DataContext}"
+             Design.Width="800" Design.Height="20">
     <Menu>
         <MenuItem Header="_File" IsVisible="{Binding Path=Editor.Project, Converter={Static converters:IsNullConverter.Instance}}">
             <MenuItem Header="_New" HotKey="Ctrl+N" Command="{Static core:Commands.NewCommand}"/>

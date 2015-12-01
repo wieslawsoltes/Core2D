@@ -7,7 +7,8 @@
              xmlns:converters="clr-namespace:Core2D.Perspex.Converters;assembly=Core2D.Perspex"
              xmlns:core="clr-namespace:Core2D;assembly=Core2D"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
-             Design.DataContext="{Static local:DesignerHelper.DataContext}">
+             Design.DataContext="{Static local:DesignerHelper.DataContext}"
+             Design.Width="250" Design.Height="400">
     <Grid RowDefinitions="Auto,Auto,Auto,Auto,*">
         <Menu Grid.Row="0" HorizontalAlignment="Right">
             <MenuItem Header="+" Command="{Static core:Commands.AddStyleLibraryCommand}"/>
