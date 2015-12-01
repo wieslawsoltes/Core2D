@@ -36,6 +36,14 @@ namespace Core2D.Perspex
                     new TextClipboard(),
                     new NewtonsoftSerializer());
             }
+            else
+            {
+                // TODO: Remove after issue in binding to null is resolved.
+                _dc = new DesignerContext()
+                {
+                    Context = new EditorContext()
+                };
+            }
         }
     }
 }
