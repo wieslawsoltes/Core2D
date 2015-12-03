@@ -223,6 +223,9 @@
     <Compile Include="Controls\MenuControl.paml.cs">
       <DependentUpon>MenuControl.paml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\PropertiesControl.paml.cs">
+      <DependentUpon>PropertiesControl.paml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\StatusControl.paml.cs">
       <DependentUpon>StatusControl.paml</DependentUpon>
     </Compile>
@@ -280,6 +283,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <EmbeddedResource Include="Controls\PropertiesControl.paml" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
@@ -378,6 +382,7 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

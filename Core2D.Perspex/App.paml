@@ -5,7 +5,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Core2D.Perspex;assembly=Core2D.Perspex"
              xmlns:converters="clr-namespace:Core2D.Perspex.Converters;assembly=Core2D.Perspex"
-             xmlns:core="clr-namespace:Core2D;assembly=Core2D">
+             xmlns:core="clr-namespace:Core2D;assembly=Core2D"
+             xmlns:controls="clr-namespace:Core2D.Perspex.Controls;assembly=Core2D.Perspex">
     <Application.Styles>
         <!-- TextBlock -->
         <Style Selector="TextBlock.default">
@@ -512,33 +513,7 @@
                     </Grid>
                 </TabItem>
                 <TabItem Header="Properties" Classes="property">
-                    <Grid RowDefinitions="Auto,Auto,*" ColumnDefinitions="50*,Auto,50*">
-                        <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Right">
-                            <MenuItem Header="+" Command="{Static core:Commands.AddPropertyCommand}" CommandParameter="{Binding}"/>
-                        </Menu>
-                        <GridSplitter Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Width="10"/>
-                        <TextBlock Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" Text="Name" Classes="default"/>
-                        <TextBlock Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" Text="Value" Classes="default"/>
-                        <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="2" Items="{Binding Path=Properties}">
-                            <ItemsControl.DataTemplates>
-                                <DataTemplate DataType="core:Property">
-                                    <Grid VerticalAlignment="Top">
-                                        <TextBox VerticalAlignment="Center" Text="{Binding Path=Name, Mode=TwoWay}" Classes="default"/>
-                                    </Grid>
-                                </DataTemplate>
-                            </ItemsControl.DataTemplates>
-                        </ItemsControl>
-                        <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="2" Items="{Binding Path=Properties}">
-                            <ItemsControl.DataTemplates>
-                                <DataTemplate DataType="core:Property">
-                                    <Grid VerticalAlignment="Top" ColumnDefinitions="*,30">
-                                        <TextBox VerticalAlignment="Center" Text="{Binding Path=Value, Mode=TwoWay}" Classes="default" Grid.Column="0"/>
-                                        <Button VerticalAlignment="Center" Content="-" Classes="default" Grid.Column="1" Command="{Static core:Commands.RemovePropertyCommand}" CommandParameter="{Binding}"/>
-                                    </Grid>
-                                </DataTemplate>
-                            </ItemsControl.DataTemplates>
-                        </ItemsControl>
-                    </Grid>
+                    <controls:PropertiesControl/>
                 </TabItem>
             </TabControl>
         </DataTemplate>
