@@ -3,7 +3,7 @@
 using Perspex.Controls;
 using Perspex.Markup.Xaml;
 
-namespace Core2D.Perspex.Controls.Project
+namespace Core2D.Perspex.Controls.Data
 {
     /// <summary>
     /// Interaction logic for <see cref="RecordsControl"/> xaml.
