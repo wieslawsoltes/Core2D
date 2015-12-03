@@ -1,23 +1,9 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Perspex;
-using Perspex.Animation;
-using Perspex.Collections;
 using Perspex.Controls;
-using Perspex.Controls.Primitives;
-using Perspex.Controls.Shapes;
-using Perspex.Controls.Templates;
-using Perspex.Diagnostics;
 using Perspex.Input;
-using Perspex.Layout;
 using Perspex.Media;
-using Perspex.Media.Imaging;
 using Perspex.Markup.Xaml;
 
 namespace Core2D.Perspex.Controls
