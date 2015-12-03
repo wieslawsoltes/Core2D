@@ -211,6 +211,9 @@
     <Compile Include="App.paml.cs">
       <DependentUpon>App.paml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Data\ColumnsControl.paml.cs">
+      <DependentUpon>ColumnsControl.paml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Data\DatabaseControl.paml.cs">
       <DependentUpon>DatabaseControl.paml</DependentUpon>
     </Compile>
@@ -328,7 +331,7 @@
     <Compile Include="Controls\Project\GroupsControl.paml.cs">
       <DependentUpon>GroupsControl.paml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Project\RecordsControl.paml.cs">
+    <Compile Include="Controls\Data\RecordsControl.paml.cs">
       <DependentUpon>RecordsControl.paml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Project\StylesControl.paml.cs">
@@ -418,6 +421,7 @@
     <EmbeddedResource Include="Controls\Project\ContainerControl.paml" />
     <EmbeddedResource Include="Controls\Project\LayerControl.paml" />
     <EmbeddedResource Include="Controls\Project\ImagesControl.paml" />
+    <EmbeddedResource Include="Controls\Data\ColumnsControl.paml" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
@@ -485,7 +489,7 @@
     <EmbeddedResource Include="Controls\Project\GroupsControl.paml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Project\RecordsControl.paml">
+    <EmbeddedResource Include="Controls\Data\RecordsControl.paml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Project\StylesControl.paml">
