@@ -108,6 +108,9 @@
         <Style Selector="Button.project">
             <Setter Property="Margin" Value="0"/>
             <Setter Property="FontSize" Value="18"/>
+            <Setter Property="BorderBrush" Value="#FFACACAC"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Background" Value="#FFFFFFFF"/>
         </Style>
         <!-- ScrollBar -->
         <Style Selector="ScrollBar.slider">
