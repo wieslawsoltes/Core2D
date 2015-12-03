@@ -1,0 +1,57 @@
+﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
+<!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
+<UserControl x:Class="Core2D.Perspex.Controls.Style.ShapeStyleControl"
+             xmlns="https://github.com/perspex"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Core2D.Perspex;assembly=Core2D.Perspex"
+             xmlns:converters="clr-namespace:Core2D.Perspex.Converters;assembly=Core2D.Perspex"
+             xmlns:core="clr-namespace:Core2D;assembly=Core2D">
+    <TabControl Classes="default">
+        <TabItem Header="Style" Classes="property">
+            <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,50,*">
+                <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
+                <TextBox Text="{Binding Path=Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"/>
+                <TextBlock Text="Thickness" Classes="left" Grid.Row="1" Grid.Column="0"/>
+                <TextBox Text="{Binding Path=Thickness, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
+                <ScrollBar Classes="slider" Minimum="0" Maximum="30" ViewportSize="1" Grid.Row="1" Grid.Column="2">
+                    <ScrollBar.Value>
+                        <Binding Path="Thickness" Mode="TwoWay" Converter="{Static converters:RoundedDoubleToDoubleConverter.Instance}"/>
+                    </ScrollBar.Value>
+                </ScrollBar>
+                <TextBlock Text="Line Cap" Classes="left" Grid.Row="2" Grid.Column="0"/>
+                <DropDown Items="{Static core:Enums.LineCapValues}" SelectedItem="{Binding Path=LineCap, Mode=TwoWay}" Classes="default" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"/>
+                <TextBlock Text="Dashes" Classes="left" Grid.Row="3" Grid.Column="0"/>
+                <TextBox Text="{Binding Path=Dashes, Mode=TwoWay}" Classes="left" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"/>
+                <TextBlock Text="Dash Offset" Classes="left" Grid.Row="4" Grid.Column="0"/>
+                <TextBox Text="{Binding Path=DashOffset, Mode=TwoWay}" Classes="left" Grid.Row="4" Grid.Column="1"/>
+                <ScrollBar Classes="slider" Minimum="0" Maximum="20" ViewportSize="1" Grid.Row="4" Grid.Column="2">
+                    <ScrollBar.Value>
+                        <Binding Path="DashOffset" Mode="TwoWay" Converter="{Static converters:RoundedDoubleToDoubleConverter.Instance}"/>
+                    </ScrollBar.Value>
+                </ScrollBar>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Stroke" Classes="property">
+            <ContentControl Content="{Binding Path=Stroke, Mode=TwoWay}"/>
+        </TabItem>
+        <TabItem Header="Fill" Classes="property">
+            <ContentControl Content="{Binding Path=Fill, Mode=TwoWay}"/>
+        </TabItem>
+        <TabItem Header="Text" Classes="property">
+            <ContentControl Content="{Binding Path=TextStyle, Mode=TwoWay}"/>
+        </TabItem>
+        <TabItem Header="Line" Classes="property">
+            <TabControl Classes="default">
+                <TabItem Header="StartArrow" Classes="property">
+                    <ContentControl Content="{Binding Path=StartArrowStyle, Mode=TwoWay}"/>
+                </TabItem>
+                <TabItem Header="EndArrow" Classes="property">
+                    <ContentControl Content="{Binding Path=EndArrowStyle, Mode=TwoWay}"/>
+                </TabItem>
+                <TabItem Header="LineStyle" Classes="property">
+                    <ContentControl Content="{Binding Path=LineStyle, Mode=TwoWay}"/>
+                </TabItem>
+            </TabControl>
+        </TabItem>
+    </TabControl>
+</UserControl>

@@ -1,0 +1,31 @@
+﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
+<!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
+<UserControl x:Class="Core2D.Perspex.Controls.Path.ArcSegmentControl"
+             xmlns="https://github.com/perspex"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Core2D.Perspex;assembly=Core2D.Perspex"
+             xmlns:converters="clr-namespace:Core2D.Perspex.Converters;assembly=Core2D.Perspex"
+             xmlns:core="clr-namespace:Core2D;assembly=Core2D">
+    <TabControl Classes="default">
+        <TabItem Header="ArcSegment" Classes="property">
+            <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
+                <TextBlock Text="IsStroked" Classes="left" Grid.Row="0" Grid.Column="0"/>
+                <CheckBox IsChecked="{Binding Path=IsStroked, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                <TextBlock Text="IsSmoothJoin" Classes="left" Grid.Row="1" Grid.Column="0"/>
+                <CheckBox IsChecked="{Binding Path=IsSmoothJoin, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
+                <TextBlock Text="RotationAngle" Classes="left" Grid.Row="2" Grid.Column="0"/>
+                <TextBox Text="{Binding Path=RotationAngle, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
+                <TextBlock Text="IsLargeArc" Classes="left" Grid.Row="3" Grid.Column="0"/>
+                <CheckBox IsChecked="{Binding Path=IsLargeArc, Mode=TwoWay}" Classes="left" Grid.Row="3" Grid.Column="1"/>
+                <TextBlock Text="SweepDirection" Classes="left" Grid.Row="4" Grid.Column="0"/>
+                <DropDown Items="{Static core:Enums.XSweepDirectionValues}" SelectedItem="{Binding Path=SweepDirection, Mode=TwoWay}" Classes="default" Grid.Row="4" Grid.Column="1"/>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Point" Classes="property">
+            <ContentControl Content="{Binding Path=Point, Mode=TwoWay}"/>
+        </TabItem>
+        <TabItem Header="Size" Classes="property">
+            <ContentControl Content="{Binding Path=Size, Mode=TwoWay}"/>
+        </TabItem>
+    </TabControl>
+</UserControl>
