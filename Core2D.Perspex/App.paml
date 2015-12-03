@@ -126,6 +126,11 @@
             <Setter Property="Margin" Value="0"/>
             <Setter Property="BorderThickness" Value="0"/>
         </Style>
+        <Style Selector="ListBox.recents">
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="BorderBrush" Value="#FFACACAC"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
         <!-- TreeView -->
         <Style Selector="TreeView.default">
             <Setter Property="Margin" Value="0"/>
