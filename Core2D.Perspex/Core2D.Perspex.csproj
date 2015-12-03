@@ -280,11 +280,17 @@
     <Compile Include="Controls\Project\LayerControl.paml.cs">
       <DependentUpon>LayerControl.paml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Project\LayersControl.paml.cs">
+      <DependentUpon>LayersControl.paml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Project\OptionsControl.paml.cs">
       <DependentUpon>OptionsControl.paml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Project\ProjectControl.paml.cs">
       <DependentUpon>ProjectControl.paml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Project\ShapesControl.paml.cs">
+      <DependentUpon>ShapesControl.paml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Shapes\ArcControl.paml.cs">
       <DependentUpon>ArcControl.paml</DependentUpon>
@@ -355,6 +361,9 @@
     <Compile Include="Controls\Style\ShapeStyleControl.paml.cs">
       <DependentUpon>ShapeStyleControl.paml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Style\StyleControl.paml.cs">
+      <DependentUpon>StyleControl.paml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Style\TextStyleControl.paml.cs">
       <DependentUpon>TextStyleControl.paml</DependentUpon>
     </Compile>
@@ -384,12 +393,16 @@
     <None Include="app.config" />
     <EmbeddedResource Include="Controls\Data\PropertiesControl.paml" />
     <EmbeddedResource Include="Controls\Style\ArgbColorControl.paml" />
-    <EmbeddedResource Include="Controls\Style\ArrowStyleControl.paml" />
+    <EmbeddedResource Include="Controls\Style\ArrowStyleControl.paml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\Style\FontStyleControl.paml" />
     <EmbeddedResource Include="Controls\Style\TextStyleControl.paml" />
     <EmbeddedResource Include="Controls\Style\LineFixedLengthControl.paml" />
     <EmbeddedResource Include="Controls\Style\LineStyleControl.paml" />
-    <EmbeddedResource Include="Controls\Style\ShapeStyleControl.paml" />
+    <EmbeddedResource Include="Controls\Style\ShapeStyleControl.paml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\Data\RecordControl.paml" />
     <EmbeddedResource Include="Controls\Data\DatabaseControl.paml" />
     <EmbeddedResource Include="Controls\Data\DataControl.paml" />
@@ -422,6 +435,11 @@
     <EmbeddedResource Include="Controls\Project\LayerControl.paml" />
     <EmbeddedResource Include="Controls\Project\ImagesControl.paml" />
     <EmbeddedResource Include="Controls\Data\ColumnsControl.paml" />
+    <EmbeddedResource Include="Controls\Project\LayersControl.paml" />
+    <EmbeddedResource Include="Controls\Project\ShapesControl.paml" />
+    <EmbeddedResource Include="Controls\Style\StyleControl.paml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
