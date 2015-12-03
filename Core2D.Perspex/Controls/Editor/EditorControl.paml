@@ -30,9 +30,6 @@
                 <TabItem Header="Databases" Classes="property">
                     <project:DatabasesControl DataContext="{Binding Path=Editor.Project, Mode=TwoWay}"/>
                 </TabItem>
-                <TabItem Header="Records" Classes="property">
-                    <project:RecordsControl DataContext="{Binding Path=Editor.Project, Mode=TwoWay}"/>
-                </TabItem>
             </TabControl>
         </Border>
         <GridSplitter Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" Width="8"/>
