@@ -17,7 +17,10 @@
             </Grid>
         </TabItem>
         <TabItem Header="Points" Classes="property">
-            <ListBox Items="{Binding Path=Points}" Classes="default"/>
+            <ListBox Name="points" Items="{Binding Path=Points}" Classes="default"/>
+        </TabItem>
+        <TabItem Header="Selected" Classes="property">
+            <ContentControl Content="{Binding Path=#points.SelectedItem, Mode=TwoWay}"/>
         </TabItem>
     </TabControl>
 </UserControl>
