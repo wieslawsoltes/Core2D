@@ -202,9 +202,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Core2D.Wpf\Util\DesignerContext.cs">
-      <Link>Util\DesignerContext.cs</Link>
-    </Compile>
     <Compile Include="..\Core2D\Properties\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
@@ -382,7 +379,6 @@
     <Compile Include="Converters\ObjectToObjectConverter.cs" />
     <Compile Include="Converters\ObjectToTypeStringConverter.cs" />
     <Compile Include="Converters\RoundedDoubleToDoubleConverter.cs" />
-    <Compile Include="Util\DesignerHelper.cs" />
     <Compile Include="Windows\MainWindow.paml.cs">
       <DependentUpon>MainWindow.paml</DependentUpon>
     </Compile>
