@@ -40,6 +40,17 @@ namespace Core2D.Perspex
         private bool _enableRecent = true;
 
         /// <summary>
+        /// Initializes static data.
+        /// </summary>
+        static App()
+        {
+            DesignerContext.InitializeContext(
+                new PerspexRenderer(),
+                new TextClipboard(),
+                new NewtonsoftSerializer());
+        }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="App"/> class.
         /// </summary>
         public App()
