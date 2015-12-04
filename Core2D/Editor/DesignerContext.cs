@@ -18,6 +18,31 @@ namespace Core2D
         public static EditorContext Context { get; set; }
 
         /// <summary>
+        /// The design time <see cref="Core2D.Container"/>.
+        /// </summary>
+        public static Container Container { get; set; }
+
+        /// <summary>
+        /// The design time <see cref="Core2D.Document"/>.
+        /// </summary>
+        public static Document Document { get; set; }
+
+        /// <summary>
+        /// The design time <see cref="Core2D.Layer"/>.
+        /// </summary>
+        public static Layer Layer { get; set; }
+
+        /// <summary>
+        /// The design time <see cref="Core2D.Options"/>.
+        /// </summary>
+        public static Options Options { get; set; }
+
+        /// <summary>
+        /// The design time <see cref="Core2D.Project"/>.
+        /// </summary>
+        public static Project Project { get; set; }
+
+        /// <summary>
         /// The design time <see cref="Core2D.ShapeState"/>.
         /// </summary>
         public static ShapeState State { get; set; }
@@ -325,6 +350,19 @@ namespace Core2D
             Data = Data.Create(ImmutableArray.Create<Property>(), record);
             Record = record;
 
+            // Project
+
+            Container = Container.Create();
+            var layer = Container.Layers.FirstOrDefault();
+            layer.Shapes = layer.Shapes.Add(XLine.Create(0, 0, null, null));
+            Container.CurrentLayer = layer;
+            Container.CurrentShape = layer.Shapes.FirstOrDefault();
+
+            Document = Document.Create();
+            Layer = Layer.Create();
+            Options = Options.Create();
+            Project = (new ProjectFactory()).GetProject();
+
             // State
 
             State = ShapeState.Create();
@@ -338,8 +376,6 @@ namespace Core2D
             LineStyle = LineStyle.Create();
             Style = ShapeStyle.Create("Default");
             TextStyle = TextStyle.Create();
-
-            // Project
 
             // Shapes
 
@@ -356,6 +392,8 @@ namespace Core2D
             Text = XText.Create(0, 0, Style, null, "Text");
 
             // Path
+
+            // TODO: 
         }
     }
 }
