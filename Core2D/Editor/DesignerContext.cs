@@ -38,9 +38,39 @@ namespace Core2D
         public static Record Record { get; set; }
 
         /// <summary>
+        /// The design time <see cref="Core2D.ArgbColor"/>.
+        /// </summary>
+        public static ArgbColor ArgbColor { get; set; }
+
+        /// <summary>
+        /// The design time <see cref="Core2D.ArrowStyle"/>.
+        /// </summary>
+        public static ArrowStyle ArrowStyle { get; set; }
+
+        /// <summary>
+        /// The design time <see cref="Core2D.FontStyle"/>.
+        /// </summary>
+        public static FontStyle FontStyle { get; set; }
+
+        /// <summary>
+        /// The design time <see cref="Core2D.LineFixedLength"/>.
+        /// </summary>
+        public static LineFixedLength LineFixedLength { get; set; }
+
+        /// <summary>
+        /// The design time <see cref="Core2D.LineStyle"/>.
+        /// </summary>
+        public static LineStyle LineStyle { get; set; }
+
+        /// <summary>
         /// The design time <see cref="Core2D.ShapeStyle"/>.
         /// </summary>
         public static ShapeStyle Style { get; set; }
+
+        /// <summary>
+        /// The design time <see cref="Core2D.TextStyle"/>.
+        /// </summary>
+        public static TextStyle TextStyle { get; set; }
 
         /// <summary>
         /// The design time <see cref="Core2D.XArc"/>.
@@ -301,7 +331,13 @@ namespace Core2D
 
             // Style
 
+            ArgbColor = ArgbColor.Create();
+            ArrowStyle = ArrowStyle.Create();
+            FontStyle = FontStyle.Create();
+            LineFixedLength = LineFixedLength.Create();
+            LineStyle = LineStyle.Create();
             Style = ShapeStyle.Create("Default");
+            TextStyle = TextStyle.Create();
 
             // Project
 
