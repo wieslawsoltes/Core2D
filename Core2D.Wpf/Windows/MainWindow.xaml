@@ -12,7 +12,7 @@
         xmlns:ad="http://schemas.xceed.com/wpf/xaml/avalondock" 
         xmlns:p="clr-namespace:Core2D.Wpf.Properties" 
         mc:Ignorable="d" 
-        d:DataContext="{x:Static local:DesignerHelper.DataContext}"
+        d:DataContext="{x:Static core:DesignerContext.Context}"
         d:DesignWidth="1324" d:DesignHeight="724" 
         Width="1324" Height="724"
         Background="{StaticResource BackgroundColor}" 

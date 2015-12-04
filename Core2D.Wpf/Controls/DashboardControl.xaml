@@ -8,7 +8,7 @@
              xmlns:local="clr-namespace:Core2D.Wpf" 
              xmlns:core="clr-namespace:Core2D;assembly=Core2D" 
              mc:Ignorable="d" 
-             d:DataContext="{x:Static local:DesignerHelper.DataContext}"
+             d:DataContext="{x:Static core:DesignerContext.Context}"
              d:DesignHeight="600" d:DesignWidth="800">
     <UserControl.Resources>
         <Style x:Key="TitleTextBlockStyleKey" TargetType="TextBlock">

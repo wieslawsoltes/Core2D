@@ -6,8 +6,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Core2D.Wpf" 
+             xmlns:core="clr-namespace:Core2D;assembly=Core2D"
              mc:Ignorable="d" 
-             d:DataContext="{x:Static local:DesignerHelper.DataContext}"
+             d:DataContext="{x:Static core:DesignerContext.Context}"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid Margin="2">
         <ContentControl Content="{Binding Editor.Project.CurrentContainer, FallbackValue={x:Null}}"/>
