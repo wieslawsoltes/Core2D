@@ -288,6 +288,8 @@ namespace Core2D
         /// <returns>The new instance of the <see cref="DesignerContext"/> class.</returns>
         public static void InitializeContext(Renderer renderer, ITextClipboard clipboard, ISerializer serializer)
         {
+            // Editor
+
             Context = new EditorContext()
             {
                 Renderers = new Renderer[] { renderer },
@@ -322,8 +324,6 @@ namespace Core2D
             Database = db;
             Data = Data.Create(ImmutableArray.Create<Property>(), record);
             Record = record;
-
-            // Editor
 
             // State
 
