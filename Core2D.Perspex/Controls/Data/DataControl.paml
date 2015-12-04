@@ -7,6 +7,7 @@
              xmlns:converters="clr-namespace:Core2D.Perspex.Converters;assembly=Core2D.Perspex"
              xmlns:core="clr-namespace:Core2D;assembly=Core2D"
              xmlns:data="clr-namespace:Core2D.Perspex.Controls.Data;assembly=Core2D.Perspex"
+             Design.DataContext="{Static core:DesignerContext.Data}"
              Design.Width="250" Design.Height="400">
     <TabControl Classes="default">
         <TabItem Header="Record" Classes="property">
