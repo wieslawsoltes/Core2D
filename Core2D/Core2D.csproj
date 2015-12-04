@@ -65,6 +65,7 @@
     <Compile Include="Editor\Core\State.cs" />
     <Compile Include="Editor\Core\Tool.cs" />
     <Compile Include="Editor\Core\UndoRedo.cs" />
+    <Compile Include="Editor\DesignerContext.cs" />
     <Compile Include="Editor\Editor.cs" />
     <Compile Include="Editor\Commands.cs" />
     <Compile Include="Editor\Constants.cs" />
