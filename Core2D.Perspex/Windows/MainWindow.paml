@@ -10,7 +10,7 @@
         Width="1324" Height="670"
         Background="#FFFFFFFF"
         UseLayoutRounding="True"
-        Design.DataContext="{Static local:DesignerHelper.DataContext}"
+        Design.DataContext="{Static core:DesignerContext.Context}"
         Design.Width="1200" Design.Height="580">
     <Window.Title>
         <MultiBinding Mode="OneWay" Converter="{Static converters:EditorToTitleMultiConverter.Instance}">
