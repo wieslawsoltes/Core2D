@@ -18,6 +18,11 @@ namespace Core2D
         public static EditorContext Context { get; set; }
 
         /// <summary>
+        /// The design time <see cref="Core2D.ShapeState"/>.
+        /// </summary>
+        public static ShapeState State { get; set; }
+
+        /// <summary>
         /// The design time <see cref="Core2D.Database"/>.
         /// </summary>
         public static Database Database { get; set; }
@@ -291,6 +296,8 @@ namespace Core2D
             // Editor
 
             // State
+
+            State = ShapeState.Create();
 
             // Style
 
