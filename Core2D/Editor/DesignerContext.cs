@@ -153,6 +153,56 @@ namespace Core2D
         public static XText Text { get; set; }
 
         /// <summary>
+        /// The design time <see cref="Core2D.XArcSegment"/>.
+        /// </summary>
+        public static XArcSegment ArcSegment { get; set; }
+
+        /// <summary>
+        /// The design time <see cref="Core2D.XBezierSegment"/>.
+        /// </summary>
+        public static XBezierSegment BezierSegment { get; set; }
+
+        /// <summary>
+        /// The design time <see cref="Core2D.XLineSegment"/>.
+        /// </summary>
+        public static XLineSegment LineSegment { get; set; }
+
+        /// <summary>
+        /// The design time <see cref="Core2D.XPathFigure"/>.
+        /// </summary>
+        public static XPathFigure PathFigure { get; set; }
+
+        /// <summary>
+        /// The design time <see cref="Core2D.XPathGeometry"/>.
+        /// </summary>
+        public static XPathGeometry PathGeometry { get; set; }
+
+        /// <summary>
+        /// The design time <see cref="Core2D.XPathSize"/>.
+        /// </summary>
+        public static XPathSize PathSize { get; set; }
+
+        /// <summary>
+        /// The design time <see cref="Core2D.XPolyBezierSegment"/>.
+        /// </summary>
+        public static XPolyBezierSegment PolyBezierSegment { get; set; }
+
+        /// <summary>
+        /// The design time <see cref="Core2D.XPolyLineSegment"/>.
+        /// </summary>
+        public static XPolyLineSegment PolyLineSegment { get; set; }
+
+        /// <summary>
+        /// The design time <see cref="Core2D.XPolyQuadraticBezierSegment"/>.
+        /// </summary>
+        public static XPolyQuadraticBezierSegment PolyQuadraticBezierSegment { get; set; }
+
+        /// <summary>
+        /// The design time <see cref="Core2D.XQuadraticBezierSegment"/>.
+        /// </summary>
+        public static XQuadraticBezierSegment QuadraticBezierSegment { get; set; }
+
+        /// <summary>
         /// Initialize platform commands used by <see cref="EditorContext"/>.
         /// </summary>
         /// <param name="context">The editor context instance.</param>
@@ -393,7 +443,16 @@ namespace Core2D
 
             // Path
 
-            // TODO: 
+            ArcSegment = XArcSegment.Create(XPoint.Create(), XPathSize.Create(), 180, true, XSweepDirection.Clockwise, true, true);
+            BezierSegment = XBezierSegment.Create(XPoint.Create(), XPoint.Create(), XPoint.Create(), true, true);
+            LineSegment = XLineSegment.Create(XPoint.Create(), true, true);
+            PathFigure = XPathFigure.Create(XPoint.Create(), ImmutableArray.Create<XPathSegment>(), false, true);
+            PathGeometry = XPathGeometry.Create(ImmutableArray.Create<XPathFigure>(), XFillRule.EvenOdd);
+            PathSize = XPathSize.Create();
+            PolyBezierSegment = XPolyBezierSegment.Create(ImmutableArray.Create<XPoint>(), true, true);
+            PolyLineSegment = XPolyLineSegment.Create(ImmutableArray.Create<XPoint>(), true, true);
+            PolyQuadraticBezierSegment = XPolyQuadraticBezierSegment.Create(ImmutableArray.Create<XPoint>(), true, true);
+            QuadraticBezierSegment = XQuadraticBezierSegment.Create(XPoint.Create(), XPoint.Create(), true, true);
         }
     }
 }
