@@ -10,9 +10,39 @@
              xmlns:core="clr-namespace:Core2D;assembly=Core2D"
              xmlns:custom="clr-namespace:Core2D.Wpf.Controls.Custom"
              mc:Ignorable="d" 
-             d:DataContext="{x:Static core:DesignerContext.Context}"
+             d:DataContext="{x:Static core:DesignerContext.ArcSegment}"
              d:DesignWidth="250" d:DesignHeight="400">
-    <Grid>
-            
-    </Grid>
+    <TabControl>
+        <TabItem Header="ArcSegment">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="IsStroked" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <CheckBox Content="" IsChecked="{Binding IsStroked}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="0" Grid.Column="1"/>
+                <TextBlock Text="IsSmoothJoin" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="1" Grid.Column="0"/>
+                <CheckBox Content="" IsChecked="{Binding IsSmoothJoin}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="1" Grid.Column="1"/>
+                <TextBlock Text="RotationAngle" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="2" Grid.Column="0"/>
+                <TextBox Text="{Binding RotationAngle, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="2" Grid.Column="1"/>
+                <TextBlock Text="IsLargeArc" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="3" Grid.Column="0"/>
+                <CheckBox Content="" IsChecked="{Binding IsLargeArc}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="3" Grid.Column="1"/>
+                <TextBlock Text="SweepDirection" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="4" Grid.Column="0"/>
+                <ComboBox ItemsSource="{x:Static core:Enums.XSweepDirectionValues}" SelectedItem="{Binding SweepDirection}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="4" Grid.Column="1"/>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Point">
+            <ContentControl Content="{Binding Point}"/>
+        </TabItem>
+        <TabItem Header="Size">
+            <ContentControl Content="{Binding Size}"/>
+        </TabItem>
+    </TabControl>
 </UserControl>

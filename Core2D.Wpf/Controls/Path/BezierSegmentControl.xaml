@@ -10,9 +10,33 @@
              xmlns:core="clr-namespace:Core2D;assembly=Core2D"
              xmlns:custom="clr-namespace:Core2D.Wpf.Controls.Custom"
              mc:Ignorable="d" 
-             d:DataContext="{x:Static core:DesignerContext.Context}"
+             d:DataContext="{x:Static core:DesignerContext.BezierSegment}"
              d:DesignWidth="250" d:DesignHeight="400">
-    <Grid>
-            
-    </Grid>
+    <TabControl>
+        <TabItem Header="BezierSegment">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="IsStroked" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <CheckBox Content="" IsChecked="{Binding IsStroked}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="0" Grid.Column="1"/>
+                <TextBlock Text="IsSmoothJoin" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="1" Grid.Column="0"/>
+                <CheckBox Content="" IsChecked="{Binding IsSmoothJoin}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="1" Grid.Column="1"/>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Point1">
+            <ContentControl Content="{Binding Point1}"/>
+        </TabItem>
+        <TabItem Header="Point2">
+            <ContentControl Content="{Binding Point2}"/>
+        </TabItem>
+        <TabItem Header="Point3">
+            <ContentControl Content="{Binding Point3}"/>
+        </TabItem>
+    </TabControl>
 </UserControl>
