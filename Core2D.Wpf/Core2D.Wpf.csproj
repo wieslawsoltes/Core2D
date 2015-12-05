@@ -104,6 +104,18 @@
     <Compile Include="..\Core2D\Properties\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Controls\Data\ColumnsControl.xaml.cs">
+      <DependentUpon>ColumnsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Data\DatabaseControl.xaml.cs">
+      <DependentUpon>DatabaseControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Data\PropertiesControl.xaml.cs">
+      <DependentUpon>PropertiesControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Data\RecordControl.xaml.cs">
+      <DependentUpon>RecordControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Editor\DrawableControl.xaml.cs">
       <DependentUpon>DrawableControl.xaml</DependentUpon>
     </Compile>
@@ -119,8 +131,50 @@
     <Compile Include="Controls\Data\DataControl.xaml.cs">
       <DependentUpon>DataControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ListBoxes\GroupConnectorsDragAndDropListBox.cs" />
-    <Compile Include="Controls\ListBoxes\GroupShapesDragAndDropListBox.cs" />
+    <Compile Include="Controls\Custom\Lists\GroupConnectorsDragAndDropListBox.cs" />
+    <Compile Include="Controls\Custom\Lists\GroupShapesDragAndDropListBox.cs" />
+    <Compile Include="Controls\Path\ArcSegmentControl.xaml.cs">
+      <DependentUpon>ArcSegmentControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Path\BezierSegmentControl.xaml.cs">
+      <DependentUpon>BezierSegmentControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Path\LineSegmentControl.xaml.cs">
+      <DependentUpon>LineSegmentControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Path\PathFigureControl.xaml.cs">
+      <DependentUpon>PathFigureControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Path\PathGeometryControl.xaml.cs">
+      <DependentUpon>PathGeometryControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Path\PathSizeControl.xaml.cs">
+      <DependentUpon>PathSizeControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Path\PolyBezierSegmentControl.xaml.cs">
+      <DependentUpon>PolyBezierSegmentControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Path\PolyLineSegmentControl.xaml.cs">
+      <DependentUpon>PolyLineSegmentControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Path\PolyQuadraticBezierSegmentControl.xaml.cs">
+      <DependentUpon>PolyQuadraticBezierSegmentControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Path\QuadraticBezierSegmentControl.xaml.cs">
+      <DependentUpon>QuadraticBezierSegmentControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Project\DocumentControl.xaml.cs">
+      <DependentUpon>DocumentControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Project\ImagesControl.xaml.cs">
+      <DependentUpon>ImagesControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Project\LayerControl.xaml.cs">
+      <DependentUpon>LayerControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Project\LayersControl.xaml.cs">
+      <DependentUpon>LayersControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Project\OptionsControl.xaml.cs">
       <DependentUpon>OptionsControl.xaml</DependentUpon>
     </Compile>
@@ -130,11 +184,11 @@
     <Compile Include="Controls\Project\DatabasesControl.xaml.cs">
       <DependentUpon>DatabasesControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ListBoxes\BaseShapeDragAndDropListBox.cs" />
-    <Compile Include="Controls\ListBoxes\TemplateDragAndDropListBox.cs" />
-    <Compile Include="Controls\ListBoxes\LayerDragAndDropListBox.cs" />
-    <Compile Include="Controls\ListBoxes\ShapeStyleDragAndDropListBox.cs" />
-    <Compile Include="Controls\ListBoxes\XGroupDragAndDropListBox.cs" />
+    <Compile Include="Controls\Custom\Lists\BaseShapeDragAndDropListBox.cs" />
+    <Compile Include="Controls\Custom\Lists\TemplateDragAndDropListBox.cs" />
+    <Compile Include="Controls\Custom\Lists\LayerDragAndDropListBox.cs" />
+    <Compile Include="Controls\Custom\Lists\ShapeStyleDragAndDropListBox.cs" />
+    <Compile Include="Controls\Custom\Lists\XGroupDragAndDropListBox.cs" />
     <Compile Include="Controls\Project\GroupsControl.xaml.cs">
       <DependentUpon>GroupsControl.xaml</DependentUpon>
     </Compile>
@@ -151,12 +205,72 @@
     <Compile Include="Controls\Editor\StatusControl.xaml.cs">
       <DependentUpon>StatusControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Project\ShapesControl.xaml.cs">
+      <DependentUpon>ShapesControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Shapes\ArcControl.xaml.cs">
+      <DependentUpon>ArcControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Shapes\BezierControl.xaml.cs">
+      <DependentUpon>BezierControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Shapes\EllipseControl.xaml.cs">
+      <DependentUpon>EllipseControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Shapes\GroupControl.xaml.cs">
+      <DependentUpon>GroupControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Shapes\ImageControl.xaml.cs">
+      <DependentUpon>ImageControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Shapes\LineControl.xaml.cs">
+      <DependentUpon>LineControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Shapes\PathControl.xaml.cs">
+      <DependentUpon>PathControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Shapes\PointControl.xaml.cs">
+      <DependentUpon>PointControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Shapes\QBezierControl.xaml.cs">
+      <DependentUpon>QBezierControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Shapes\RectangleControl.xaml.cs">
+      <DependentUpon>RectangleControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Shapes\TextControl.xaml.cs">
+      <DependentUpon>TextControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\State\ShapeStateControl.xaml.cs">
+      <DependentUpon>ShapeStateControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Style\ArgbColorControl.xaml.cs">
+      <DependentUpon>ArgbColorControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Style\ArrowStyleControl.xaml.cs">
+      <DependentUpon>ArrowStyleControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Style\FontStyleControl.xaml.cs">
+      <DependentUpon>FontStyleControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Style\LineFixedLengthControl.xaml.cs">
+      <DependentUpon>LineFixedLengthControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Style\LineStyleControl.xaml.cs">
+      <DependentUpon>LineStyleControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Style\ShapeStyleControl.xaml.cs">
+      <DependentUpon>ShapeStyleControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Style\StyleControl.xaml.cs">
       <DependentUpon>StyleControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Project\TemplatesControl.xaml.cs">
       <DependentUpon>TemplatesControl.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controls\Style\TextStyleControl.xaml.cs">
+      <DependentUpon>TextStyleControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\ArgbColorToBrushConverter.cs" />
     <Compile Include="Converters\ArgbColorToBrushMultiConverter.cs" />
@@ -172,12 +286,84 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Util\TextClipboard.cs" />
+    <Page Include="Controls\Data\ColumnsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Data\DatabaseControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Data\PropertiesControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Data\RecordControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\Editor\DrawableControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\Editor\DashboardControl.xaml" />
     <Page Include="Controls\Data\DataControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Path\ArcSegmentControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Path\BezierSegmentControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Path\LineSegmentControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Path\PathFigureControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Path\PathGeometryControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Path\PathSizeControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Path\PolyBezierSegmentControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Path\PolyLineSegmentControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Path\PolyQuadraticBezierSegmentControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Path\QuadraticBezierSegmentControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Project\DocumentControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Project\ImagesControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Project\LayerControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Project\LayersControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -209,12 +395,88 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\Project\ShapesControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\Project\TemplatesControl.xaml" />
     <Page Include="Controls\Editor\MenuControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\Editor\ShapeControl.xaml" />
+    <Page Include="Controls\Shapes\ArcControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Shapes\BezierControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Shapes\EllipseControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Shapes\GroupControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Shapes\ImageControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Shapes\LineControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Shapes\PathControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Shapes\PointControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Shapes\QBezierControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Shapes\RectangleControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Shapes\TextControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\State\ShapeStateControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Style\ArgbColorControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Style\ArrowStyleControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Style\FontStyleControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Style\LineFixedLengthControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Style\LineStyleControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Style\ShapeStyleControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\Style\StyleControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -222,6 +484,10 @@
     <Page Include="Controls\Project\StylesControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Style\TextStyleControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -308,11 +574,7 @@
       <Name>TextFieldReader.CsvHelper</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controls\Path\" />
-    <Folder Include="Controls\Shapes\" />
-    <Folder Include="Controls\State\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

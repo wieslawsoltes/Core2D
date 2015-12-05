@@ -1,16 +1,18 @@
 ﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
 <!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
-<UserControl x:Class="Core2D.Wpf.Controls.GroupsControl" 
+<UserControl x:Class="Core2D.Wpf.Controls.Project.GroupsControl" 
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Core2D.Wpf" 
+             xmlns:converters="clr-namespace:Core2D.Wpf.Converters" 
              xmlns:core="clr-namespace:Core2D;assembly=Core2D" 
-             xmlns:controls="clr-namespace:Core2D.Wpf.Controls" 
+             xmlns:custom="clr-namespace:Core2D.Wpf.Controls.Custom"
+             xmlns:lists="clr-namespace:Core2D.Wpf.Controls.Custom.Lists"
              mc:Ignorable="d" 
              d:DataContext="{x:Static core:DesignerContext.Context}"
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignWidth="250" d:DesignHeight="400">
     <Grid>
         <Grid.Resources>
             <ControlTemplate x:Key="GroupLibrariesMenu">
@@ -58,8 +60,8 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
         <Control Template="{StaticResource GroupsMenu}" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="2,0,2,0"/>
-        <controls:XGroupDragAndDropListBox x:Name="groupsListBox" DataContext="{Binding Editor.Project.CurrentGroupLibrary.Items}" Tag="{Binding DataContext.Editor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" ItemsSource="{Binding}" SelectedItem="{Binding DataContext.Editor.Project.CurrentGroupLibrary.Selected, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" BorderBrush="{x:Null}" HorizontalContentAlignment="Stretch" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
-            <controls:XGroupDragAndDropListBox.Resources>
+        <lists:XGroupDragAndDropListBox x:Name="groupsListBox" DataContext="{Binding Editor.Project.CurrentGroupLibrary.Items}" Tag="{Binding DataContext.Editor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" ItemsSource="{Binding}" SelectedItem="{Binding DataContext.Editor.Project.CurrentGroupLibrary.Selected, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" BorderBrush="{x:Null}" HorizontalContentAlignment="Stretch" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
+            <lists:XGroupDragAndDropListBox.Resources>
                 <ContextMenu x:Key="GroupContextMenu" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
                     <MenuItem Header="_Add Group" InputGestureText="Ctrl+N" Command="{x:Static core:Commands.AddGroupCommand}"/>
                     <Separator/>
@@ -67,22 +69,22 @@
                     <Separator/>
                     <MenuItem Header="E_xport" InputGestureText="Ctrl+E" Command="{x:Static core:Commands.ExportGroupCommand}" CommandParameter="{Binding}"/>
                 </ContextMenu>
-            </controls:XGroupDragAndDropListBox.Resources>
-            <controls:XGroupDragAndDropListBox.InputBindings>
-                <KeyBinding Command="{x:Static core:Commands.AddGroupCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:XGroupDragAndDropListBox}}}" Gesture="Ctrl+N"/>
-                <KeyBinding Command="{x:Static core:Commands.RemoveGroupCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:XGroupDragAndDropListBox}}}" Gesture="Del"/>
-                <KeyBinding Command="{x:Static core:Commands.ExportGroupCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:XGroupDragAndDropListBox}}}" Gesture="Ctrl+E"/>
-            </controls:XGroupDragAndDropListBox.InputBindings>
-            <controls:XGroupDragAndDropListBox.ItemContainerStyle>
+            </lists:XGroupDragAndDropListBox.Resources>
+            <lists:XGroupDragAndDropListBox.InputBindings>
+                <KeyBinding Command="{x:Static core:Commands.AddGroupCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type lists:XGroupDragAndDropListBox}}}" Gesture="Ctrl+N"/>
+                <KeyBinding Command="{x:Static core:Commands.RemoveGroupCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type lists:XGroupDragAndDropListBox}}}" Gesture="Del"/>
+                <KeyBinding Command="{x:Static core:Commands.ExportGroupCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type lists:XGroupDragAndDropListBox}}}" Gesture="Ctrl+E"/>
+            </lists:XGroupDragAndDropListBox.InputBindings>
+            <lists:XGroupDragAndDropListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
                     <Setter Property="ContextMenu" Value="{StaticResource GroupContextMenu}"/>
                 </Style>
-            </controls:XGroupDragAndDropListBox.ItemContainerStyle>
-            <controls:XGroupDragAndDropListBox.ItemTemplate>
+            </lists:XGroupDragAndDropListBox.ItemContainerStyle>
+            <lists:XGroupDragAndDropListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}" Margin="0,5,0,5"/>
                 </DataTemplate>
-            </controls:XGroupDragAndDropListBox.ItemTemplate>
-        </controls:XGroupDragAndDropListBox>
+            </lists:XGroupDragAndDropListBox.ItemTemplate>
+        </lists:XGroupDragAndDropListBox>
     </Grid>
 </UserControl>

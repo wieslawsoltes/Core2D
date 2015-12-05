@@ -1,10 +1,9 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using System;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Core2D.Wpf.Controls
+namespace Core2D.Wpf.Controls.Custom
 {
     /// <summary>
     /// The custom pan and zoom control.

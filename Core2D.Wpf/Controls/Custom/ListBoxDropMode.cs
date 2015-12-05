@@ -1,8 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using System;
 
-namespace Core2D.Wpf.Controls
+namespace Core2D.Wpf.Controls.Custom
 {
     /// <summary>
     /// The <see cref="DragAndDropListBox{T}"/> drop mode.

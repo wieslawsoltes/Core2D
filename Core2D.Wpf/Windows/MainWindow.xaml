@@ -6,9 +6,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
         xmlns:local="clr-namespace:Core2D.Wpf" 
-        xmlns:core="clr-namespace:Core2D;assembly=Core2D" 
         xmlns:converters="clr-namespace:Core2D.Wpf.Converters" 
-        xmlns:controls="clr-namespace:Core2D.Wpf.Controls" 
+        xmlns:core="clr-namespace:Core2D;assembly=Core2D" 
+        xmlns:custom="clr-namespace:Core2D.Wpf.Controls.Custom"
+        xmlns:lists="clr-namespace:Core2D.Wpf.Controls.Custom.Lists"
+        xmlns:data="clr-namespace:Core2D.Wpf.Controls.Data"
+        xmlns:editor="clr-namespace:Core2D.Wpf.Controls.Editor"
+        xmlns:path="clr-namespace:Core2D.Wpf.Controls.Path"
+        xmlns:project="clr-namespace:Core2D.Wpf.Controls.Project"
+        xmlns:shapes="clr-namespace:Core2D.Wpf.Controls.Shapes"
+        xmlns:state="clr-namespace:Core2D.Wpf.Controls.State"
+        xmlns:style="clr-namespace:Core2D.Wpf.Controls.Style"
         xmlns:ad="http://schemas.xceed.com/wpf/xaml/avalondock" 
         xmlns:p="clr-namespace:Core2D.Wpf.Properties" 
         mc:Ignorable="d" 
@@ -44,7 +52,7 @@
         <KeyBinding Command="{x:Static core:Commands.UngroupCommand}" Gesture="Ctrl+U"/>
     </Window.InputBindings>
     <Window.Resources>
-        <Style x:Key="DashboardVisibilityStyle" TargetType="{x:Type controls:DashboardControl}">
+        <Style x:Key="DashboardVisibilityStyle" TargetType="{x:Type editor:DashboardControl}">
             <Setter Property="Visibility" Value="Collapsed"/>
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Editor.Project}" Value="{x:Null}">
@@ -60,7 +68,7 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
-        <Style x:Key="StatusVisibilityStyle" TargetType="{x:Type controls:StatusControl}">
+        <Style x:Key="StatusVisibilityStyle" TargetType="{x:Type editor:StatusControl}">
             <Setter Property="Visibility" Value="Visible"/>
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Editor.Project}" Value="{x:Null}">
@@ -123,34 +131,34 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="3"/>
         </Grid.RowDefinitions>
-        <controls:MenuControl Grid.Row="0"/>
-        <controls:DashboardControl Style="{StaticResource DashboardVisibilityStyle}" Grid.Row="2" Margin="0,5,0,0"/>
+        <editor:MenuControl Grid.Row="0"/>
+        <editor:DashboardControl Style="{StaticResource DashboardVisibilityStyle}" Grid.Row="2" Margin="0,5,0,0"/>
         <ad:DockingManager x:Name="dockingManager" Style="{StaticResource DockingManagerVisibilityStyle}" Grid.Row="2" Margin="0,5,0,0">
             <ad:LayoutRoot>
                 <ad:LayoutPanel Orientation="Horizontal">
                     <ad:LayoutAnchorablePaneGroup Orientation="Vertical" DockWidth="210">
                         <ad:LayoutAnchorablePane>
                             <ad:LayoutAnchorable x:Name="projectWindow" CanClose="False" ContentId="project" Title="{x:Static p:Resources.WindowTitleProject}" AutoHideWidth="210">
-                                <controls:ProjectControl x:Name="projectControl"/>
+                                <project:ProjectControl x:Name="projectControl"/>
                             </ad:LayoutAnchorable>
                             <ad:LayoutAnchorable x:Name="optionsWindow" CanClose="False" ContentId="options" Title="{x:Static p:Resources.WindowTitleOptions}" AutoHideWidth="210">
                                 <ScrollViewer x:Name="optionsScrollViewer" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Focusable="True">
-                                    <controls:OptionsControl/>
+                                    <project:OptionsControl/>
                                 </ScrollViewer>
                             </ad:LayoutAnchorable>
                         </ad:LayoutAnchorablePane>
                         <ad:LayoutAnchorablePaneGroup Orientation="Horizontal" DockWidth="210">
                             <ad:LayoutAnchorablePane>
                                 <ad:LayoutAnchorable x:Name="groupsWindow" CanClose="False" ContentId="groups" Title="{x:Static p:Resources.WindowTitleGroups}" AutoHideWidth="210">
-                                    <controls:GroupsControl x:Name="groupsControl"/>
+                                    <project:GroupsControl x:Name="groupsControl"/>
                                 </ad:LayoutAnchorable>
                                 <ad:LayoutAnchorable x:Name="databasesWindow" CanClose="False" ContentId="databases" Title="{x:Static p:Resources.WindowTitleDatabases}" AutoHideWidth="210">
                                     <ScrollViewer x:Name="databasesControl" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Focusable="True">
-                                        <controls:DatabasesControl/>
+                                        <project:DatabasesControl/>
                                     </ScrollViewer>
                                 </ad:LayoutAnchorable>
                                 <ad:LayoutAnchorable x:Name="recordsWindow" CanClose="False" ContentId="records" Title="{x:Static p:Resources.WiWindowTitleRecords}" AutoHideWidth="210">
-                                    <controls:RecordsControl x:Name="recordsControl"/>
+                                    <data:RecordsControl x:Name="recordsControl"/>
                                 </ad:LayoutAnchorable>
                             </ad:LayoutAnchorablePane>
                         </ad:LayoutAnchorablePaneGroup>
@@ -158,10 +166,10 @@
                     <ad:LayoutDocumentPaneGroup Orientation="Horizontal">
                         <ad:LayoutDocumentPane>
                             <ad:LayoutDocument x:Name="canvasWindow" CanClose="False" ContentId="canvas" Title="{x:Static p:Resources.WindowTitleCanvas}">
-                                <controls:PanAndZoomGrid x:Name="panAndZoomGrid" ClipToBounds="True" Background="Transparent" FocusVisualStyle="{x:Null}" Focusable="False" EnableAutoFit="{Binding Editor.Renderers[0].State.EnableAutofit}">
-                                    <controls:PanAndZoomBorder x:Name="border" ClipToBounds="False" Background="Transparent" BorderBrush="{x:Null}" BorderThickness="0" FocusVisualStyle="{x:Null}" Focusable="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Tag="{Binding Editor.CancelAvailable}">
-                                        <controls:PanAndZoomBorder.Style>
-                                            <Style TargetType="{x:Type controls:PanAndZoomBorder}">
+                                <custom:PanAndZoomGrid x:Name="panAndZoomGrid" ClipToBounds="True" Background="Transparent" FocusVisualStyle="{x:Null}" Focusable="False" EnableAutoFit="{Binding Editor.Renderers[0].State.EnableAutofit}">
+                                    <custom:PanAndZoomBorder x:Name="border" ClipToBounds="False" Background="Transparent" BorderBrush="{x:Null}" BorderThickness="0" FocusVisualStyle="{x:Null}" Focusable="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Tag="{Binding Editor.CancelAvailable}">
+                                        <custom:PanAndZoomBorder.Style>
+                                            <Style TargetType="{x:Type custom:PanAndZoomBorder}">
                                                 <Setter Property="Width" Value="{Binding Editor.Project.CurrentContainer.Template.Width}"/>
                                                 <Setter Property="Height" Value="{Binding Editor.Project.CurrentContainer.Template.Height}"/>
                                                 <Style.Triggers>
@@ -171,10 +179,10 @@
                                                     </DataTrigger>
                                                 </Style.Triggers>
                                             </Style>
-                                        </controls:PanAndZoomBorder.Style>
-                                        <controls:DrawableControl x:Name="drawableControl">
-                                            <controls:DrawableControl.Style>
-                                                <Style TargetType="controls:DrawableControl">
+                                        </custom:PanAndZoomBorder.Style>
+                                        <editor:DrawableControl x:Name="drawableControl">
+                                            <editor:DrawableControl.Style>
+                                                <Style TargetType="editor:DrawableControl">
                                                     <Setter Property="Visibility" Value="Visible"/>
                                                     <Style.Triggers>
                                                         <DataTrigger Binding="{Binding Editor.Project.CurrentContainer}" Value="{x:Null}">
@@ -182,32 +190,32 @@
                                                         </DataTrigger>
                                                     </Style.Triggers>
                                                 </Style>
-                                            </controls:DrawableControl.Style>
-                                        </controls:DrawableControl>
-                                    </controls:PanAndZoomBorder>
-                                </controls:PanAndZoomGrid>
+                                            </editor:DrawableControl.Style>
+                                        </editor:DrawableControl>
+                                    </custom:PanAndZoomBorder>
+                                </custom:PanAndZoomGrid>
                             </ad:LayoutDocument>
                         </ad:LayoutDocumentPane>
                     </ad:LayoutDocumentPaneGroup>
                     <ad:LayoutAnchorablePaneGroup Orientation="Vertical" DockWidth="250">
                         <ad:LayoutAnchorablePane>
                             <ad:LayoutAnchorable x:Name="stylesWindow" CanClose="False" ContentId="styles" Title="{x:Static p:Resources.WindowTitleStyles}" AutoHideWidth="210">
-                                <controls:StylesControl x:Name="stylesControl"/>
+                                <project:StylesControl x:Name="stylesControl"/>
                             </ad:LayoutAnchorable>
                             <ad:LayoutAnchorable x:Name="templatesWindow" CanClose="False" ContentId="templates" Title="{x:Static p:Resources.WindowTitleTemplates}" AutoHideWidth="210">
-                                <controls:TemplatesControl x:Name="templatesControl"/>
+                                <project:TemplatesControl x:Name="templatesControl"/>
                             </ad:LayoutAnchorable>
                         </ad:LayoutAnchorablePane>
                         <ad:LayoutAnchorablePane>
                             <ad:LayoutAnchorable x:Name="shapeWindow" CanClose="False" ContentId="shape" Title="{x:Static p:Resources.WindowTitleShape}" AutoHideWidth="210">
                                 <ScrollViewer x:Name="shapeScrollViewer" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Focusable="True">
-                                    <controls:ShapeControl/>
+                                    <editor:ShapeControl/>
                                 </ScrollViewer>
                             </ad:LayoutAnchorable>
                             <ad:LayoutAnchorable x:Name="dataWindow" CanClose="False" ContentId="data" Title="{x:Static p:Resources.WindowTitleData}" AutoHideWidth="210">
-                                <controls:DataControl x:Name="dataControl">
-                                    <controls:DataControl.Style>
-                                        <Style TargetType="controls:DataControl">
+                                <data:DataControl x:Name="dataControl">
+                                    <data:DataControl.Style>
+                                        <Style TargetType="data:DataControl">
                                             <Setter Property="Visibility" Value="Visible"/>
                                             <Style.Triggers>
                                                 <DataTrigger Binding="{Binding Editor.Renderers[0].State.SelectedShape}" Value="{x:Null}">
@@ -215,19 +223,19 @@
                                                 </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
-                                    </controls:DataControl.Style>
-                                </controls:DataControl>
+                                    </data:DataControl.Style>
+                                </data:DataControl>
                             </ad:LayoutAnchorable>
                             <ad:LayoutAnchorable x:Name="styleWindow" CanClose="False" ContentId="style" Title="{x:Static p:Resources.WindowTitleStyle}" AutoHideWidth="210">
                                 <ScrollViewer x:Name="styleScrollViewer" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Focusable="True">
-                                    <controls:StyleControl/>
+                                    <style:StyleControl/>
                                 </ScrollViewer>
                             </ad:LayoutAnchorable>
                             <ad:LayoutAnchorable x:Name="containerWindow" CanClose="False" ContentId="container" Title="{x:Static p:Resources.WindowTitleContainer}" AutoHideWidth="210">
                                 <ScrollViewer x:Name="containerScrollViewer" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Focusable="True">
-                                    <controls:ContainerControl x:Name="containerControl">
-                                        <controls:ContainerControl.Style>
-                                            <Style TargetType="controls:ContainerControl">
+                                    <project:ContainerControl x:Name="containerControl">
+                                        <project:ContainerControl.Style>
+                                            <Style TargetType="project:ContainerControl">
                                                 <Setter Property="Visibility" Value="Visible"/>
                                                 <Style.Triggers>
                                                     <DataTrigger Binding="{Binding Editor.Project.CurrentContainer}" Value="{x:Null}">
@@ -235,8 +243,8 @@
                                                     </DataTrigger>
                                                 </Style.Triggers>
                                             </Style>
-                                        </controls:ContainerControl.Style>
-                                    </controls:ContainerControl>
+                                        </project:ContainerControl.Style>
+                                    </project:ContainerControl>
                                 </ScrollViewer>
                             </ad:LayoutAnchorable>
                         </ad:LayoutAnchorablePane>
@@ -244,6 +252,6 @@
                 </ad:LayoutPanel>
             </ad:LayoutRoot>
         </ad:DockingManager>
-        <controls:StatusControl Style="{StaticResource StatusVisibilityStyle}" Grid.Row="4" Margin="5,0,5,0"/>
+        <editor:StatusControl Style="{StaticResource StatusVisibilityStyle}" Grid.Row="4" Margin="5,0,5,0"/>
     </Grid>
 </Window>

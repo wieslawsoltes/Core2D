@@ -4,17 +4,17 @@ using System;
 using System.Collections.Immutable;
 using System.Windows.Controls;
 
-namespace Core2D.Wpf.Controls
+namespace Core2D.Wpf.Controls.Custom.Lists
 {
     /// <summary>
-    /// The <see cref="ListBox"/> control for <see cref="ShapeStyle"/> items with drag and drop support.
+    /// The <see cref="ListBox"/> control for <see cref="Layer"/> items with drag and drop support.
     /// </summary>
-    public class ShapeStyleDragAndDropListBox : DragAndDropListBox<ShapeStyle>
+    public class LayerDragAndDropListBox : DragAndDropListBox<Layer>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ShapeStyleDragAndDropListBox"/> class.
+        /// Initializes a new instance of the <see cref="LayerDragAndDropListBox"/> class.
         /// </summary>
-        public ShapeStyleDragAndDropListBox()
+        public LayerDragAndDropListBox()
             : base()
         {
             this.Initialized += (s, e) => base.Initialize();
@@ -24,22 +24,22 @@ namespace Core2D.Wpf.Controls
         /// Updates DataContext binding to ImmutableArray collection property.
         /// </summary>
         /// <param name="array">The updated immutable array.</param>
-        public override void UpdateDataContext(ImmutableArray<ShapeStyle> array)
+        public override void UpdateDataContext(ImmutableArray<Layer> array)
         {
-            var editor = (Editor)this.Tag;
+            var editor = (Core2D.Editor)this.Tag;
 
-            var sg = editor.Project.CurrentStyleLibrary;
+            var container = editor.Project.CurrentContainer;
 
             if (editor.EnableHistory)
             {
-                var previous = sg.Items;
+                var previous = container.Layers;
                 var next = array;
-                editor.History.Snapshot(previous, next, (p) => sg.Items = p);
-                sg.Items = next;
+                editor.History.Snapshot(previous, next, (p) => container.Layers = p);
+                container.Layers = next;
             }
             else
             {
-                sg.Items = array;
+                container.Layers = array;
             }
         }
     }

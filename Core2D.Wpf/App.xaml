@@ -4,9 +4,18 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:sys="clr-namespace:System;assembly=mscorlib" 
-             xmlns:core="clr-namespace:Core2D;assembly=Core2D" 
+             xmlns:local="clr-namespace:Core2D.Wpf" 
              xmlns:converters="clr-namespace:Core2D.Wpf.Converters" 
-             xmlns:controls="clr-namespace:Core2D.Wpf.Controls" 
+             xmlns:core="clr-namespace:Core2D;assembly=Core2D" 
+             xmlns:custom="clr-namespace:Core2D.Wpf.Controls.Custom"
+             xmlns:lists="clr-namespace:Core2D.Wpf.Controls.Custom.Lists"
+             xmlns:data="clr-namespace:Core2D.Wpf.Controls.Data"
+             xmlns:editor="clr-namespace:Core2D.Wpf.Controls.Editor"
+             xmlns:path="clr-namespace:Core2D.Wpf.Controls.Path"
+             xmlns:project="clr-namespace:Core2D.Wpf.Controls.Project"
+             xmlns:shapes="clr-namespace:Core2D.Wpf.Controls.Shapes"
+             xmlns:state="clr-namespace:Core2D.Wpf.Controls.State"
+             xmlns:style="clr-namespace:Core2D.Wpf.Controls.Style"
              xmlns:p="clr-namespace:Core2D.Wpf.Properties">
     <Application.Resources>
         <!-- Converters -->
@@ -1147,13 +1156,13 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <controls:GroupShapesDragAndDropListBox x:Name="shapesListBox" Tag="{Binding DataContext.Editor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" ItemsSource="{Binding Shapes}" BorderBrush="{x:Null}" Grid.Row="0">
-                            <controls:GroupShapesDragAndDropListBox.ItemTemplate>
+                        <lists:GroupShapesDragAndDropListBox x:Name="shapesListBox" Tag="{Binding DataContext.Editor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" ItemsSource="{Binding Shapes}" BorderBrush="{x:Null}" Grid.Row="0">
+                            <lists:GroupShapesDragAndDropListBox.ItemTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding}" Margin="0,5,0,5"/>
                                 </DataTemplate>
-                            </controls:GroupShapesDragAndDropListBox.ItemTemplate>
-                        </controls:GroupShapesDragAndDropListBox>
+                            </lists:GroupShapesDragAndDropListBox.ItemTemplate>
+                        </lists:GroupShapesDragAndDropListBox>
                         <ContentControl Content="{Binding ElementName=shapesListBox, Path=SelectedItem}" Grid.Row="1" Margin="5,2,5,2"/>
                     </Grid>
                 </TabItem>
@@ -1163,13 +1172,13 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <controls:GroupConnectorsDragAndDropListBox x:Name="connectorsListBox" Tag="{Binding DataContext.Editor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" ItemsSource="{Binding Connectors}" BorderBrush="{x:Null}" Grid.Row="0">
-                            <controls:GroupConnectorsDragAndDropListBox.ItemTemplate>
+                        <lists:GroupConnectorsDragAndDropListBox x:Name="connectorsListBox" Tag="{Binding DataContext.Editor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" ItemsSource="{Binding Connectors}" BorderBrush="{x:Null}" Grid.Row="0">
+                            <lists:GroupConnectorsDragAndDropListBox.ItemTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding}" Margin="0,5,0,5"/>
                                 </DataTemplate>
-                            </controls:GroupConnectorsDragAndDropListBox.ItemTemplate>
-                        </controls:GroupConnectorsDragAndDropListBox>
+                            </lists:GroupConnectorsDragAndDropListBox.ItemTemplate>
+                        </lists:GroupConnectorsDragAndDropListBox>
                         <ContentControl Content="{Binding ElementName=connectorsListBox, Path=SelectedItem}" Grid.Row="1" Margin="5,2,5,2"/>
                     </Grid>
                 </TabItem>
@@ -1671,24 +1680,24 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Control Template="{StaticResource LayersMenu}" Grid.Row="0" Margin="2,0,2,0"/>
-                        <controls:LayerDragAndDropListBox DataContext="{Binding Layers}" Tag="{Binding DataContext.Editor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" ItemsSource="{Binding}" SelectedItem="{Binding DataContext.Editor.Project.CurrentContainer.CurrentLayer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" HorizontalContentAlignment="Stretch" BorderBrush="{x:Null}" Grid.Row="1">
-                            <controls:LayerDragAndDropListBox.Resources>
+                        <lists:LayerDragAndDropListBox DataContext="{Binding Layers}" Tag="{Binding DataContext.Editor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" ItemsSource="{Binding}" SelectedItem="{Binding DataContext.Editor.Project.CurrentContainer.CurrentLayer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" HorizontalContentAlignment="Stretch" BorderBrush="{x:Null}" Grid.Row="1">
+                            <lists:LayerDragAndDropListBox.Resources>
                                 <ContextMenu x:Key="LayerContextMenu" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
                                     <MenuItem Header="_Add Layer" InputGestureText="Ctrl+N" Command="{x:Static core:Commands.AddLayerCommand}"/>
                                     <Separator/>
                                     <MenuItem Header="_Delete" InputGestureText="Del" Command="{x:Static core:Commands.RemoveLayerCommand}"/>
                                 </ContextMenu>
-                            </controls:LayerDragAndDropListBox.Resources>
-                            <controls:LayerDragAndDropListBox.InputBindings>
-                                <KeyBinding Command="{x:Static core:Commands.AddLayerCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:LayerDragAndDropListBox}}}" Gesture="Ctrl+N"/>
-                                <KeyBinding Command="{x:Static core:Commands.RemoveLayerCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:LayerDragAndDropListBox}}}" Gesture="Del"/>
-                            </controls:LayerDragAndDropListBox.InputBindings>
-                            <controls:LayerDragAndDropListBox.ItemContainerStyle>
+                            </lists:LayerDragAndDropListBox.Resources>
+                            <lists:LayerDragAndDropListBox.InputBindings>
+                                <KeyBinding Command="{x:Static core:Commands.AddLayerCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type lists:LayerDragAndDropListBox}}}" Gesture="Ctrl+N"/>
+                                <KeyBinding Command="{x:Static core:Commands.RemoveLayerCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type lists:LayerDragAndDropListBox}}}" Gesture="Del"/>
+                            </lists:LayerDragAndDropListBox.InputBindings>
+                            <lists:LayerDragAndDropListBox.ItemContainerStyle>
                                 <Style TargetType="ListBoxItem">
                                     <Setter Property="ContextMenu" Value="{StaticResource LayerContextMenu}"/>
                                 </Style>
-                            </controls:LayerDragAndDropListBox.ItemContainerStyle>
-                            <controls:LayerDragAndDropListBox.ItemTemplate>
+                            </lists:LayerDragAndDropListBox.ItemContainerStyle>
+                            <lists:LayerDragAndDropListBox.ItemTemplate>
                                 <DataTemplate>
                                     <Grid>
                                         <Grid.ColumnDefinitions>
@@ -1699,8 +1708,8 @@
                                         <TextBlock Text="{Binding Name}" Margin="0,5,0,5" Grid.Column="1"/>
                                     </Grid>
                                 </DataTemplate>
-                            </controls:LayerDragAndDropListBox.ItemTemplate>
-                        </controls:LayerDragAndDropListBox>
+                            </lists:LayerDragAndDropListBox.ItemTemplate>
+                        </lists:LayerDragAndDropListBox>
                         <StackPanel Grid.Row="2" Margin="2">
                             <StackPanel.Style>
                                 <Style TargetType="StackPanel">
@@ -1741,26 +1750,26 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
                         <Control Template="{StaticResource ShapesMenu}" Grid.Row="0" Margin="2,0,2,0"/>
-                        <controls:BaseShapeDragAndDropListBox DataContext="{Binding CurrentLayer.Shapes}" Tag="{Binding DataContext.Editor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" ItemsSource="{Binding}" SelectedItem="{Binding DataContext.Editor.Project.CurrentContainer.CurrentShape, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" BorderBrush="{x:Null}" HorizontalContentAlignment="Stretch" Grid.Row="1">
-                            <controls:BaseShapeDragAndDropListBox.Resources>
+                        <lists:BaseShapeDragAndDropListBox DataContext="{Binding CurrentLayer.Shapes}" Tag="{Binding DataContext.Editor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" ItemsSource="{Binding}" SelectedItem="{Binding DataContext.Editor.Project.CurrentContainer.CurrentShape, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" BorderBrush="{x:Null}" HorizontalContentAlignment="Stretch" Grid.Row="1">
+                            <lists:BaseShapeDragAndDropListBox.Resources>
                                 <ContextMenu x:Key="ShapeContextMenu" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
                                     <MenuItem Header="_Delete" InputGestureText="Del" Command="{x:Static core:Commands.RemoveShapeCommand}"/>
                                 </ContextMenu>
-                            </controls:BaseShapeDragAndDropListBox.Resources>
-                            <controls:BaseShapeDragAndDropListBox.InputBindings>
-                                <KeyBinding Command="{x:Static core:Commands.RemoveShapeCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:BaseShapeDragAndDropListBox}}}" Gesture="Del"/>
-                            </controls:BaseShapeDragAndDropListBox.InputBindings>
-                            <controls:BaseShapeDragAndDropListBox.ItemContainerStyle>
+                            </lists:BaseShapeDragAndDropListBox.Resources>
+                            <lists:BaseShapeDragAndDropListBox.InputBindings>
+                                <KeyBinding Command="{x:Static core:Commands.RemoveShapeCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type lists:BaseShapeDragAndDropListBox}}}" Gesture="Del"/>
+                            </lists:BaseShapeDragAndDropListBox.InputBindings>
+                            <lists:BaseShapeDragAndDropListBox.ItemContainerStyle>
                                 <Style TargetType="ListBoxItem">
                                     <Setter Property="ContextMenu" Value="{StaticResource ShapeContextMenu}"/>
                                 </Style>
-                            </controls:BaseShapeDragAndDropListBox.ItemContainerStyle>
-                            <controls:BaseShapeDragAndDropListBox.ItemTemplate>
+                            </lists:BaseShapeDragAndDropListBox.ItemContainerStyle>
+                            <lists:BaseShapeDragAndDropListBox.ItemTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding}" Margin="0,5,0,5"/>
                                 </DataTemplate>
-                            </controls:BaseShapeDragAndDropListBox.ItemTemplate>
-                        </controls:BaseShapeDragAndDropListBox>
+                            </lists:BaseShapeDragAndDropListBox.ItemTemplate>
+                        </lists:BaseShapeDragAndDropListBox>
                     </Grid>
                 </TabItem>
             </TabControl>

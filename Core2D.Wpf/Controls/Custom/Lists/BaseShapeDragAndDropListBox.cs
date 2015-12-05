@@ -1,10 +1,9 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using System;
 using System.Collections.Immutable;
 using System.Windows.Controls;
 
-namespace Core2D.Wpf.Controls
+namespace Core2D.Wpf.Controls.Custom.Lists
 {
     /// <summary>
     /// The <see cref="ListBox"/> control for <see cref="BaseShape"/> items with drag and drop support.
@@ -26,7 +25,7 @@ namespace Core2D.Wpf.Controls
         /// <param name="array">The updated immutable array.</param>
         public override void UpdateDataContext(ImmutableArray<BaseShape> array)
         {
-            var editor = (Editor)this.Tag;
+            var editor = (Core2D.Editor)this.Tag;
 
             var layer = editor.Project.CurrentContainer.CurrentLayer;
 
