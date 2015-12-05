@@ -382,17 +382,7 @@
         </DataTemplate>
         <!-- State -->
         <DataTemplate DataType="{x:Type core:ShapeState}">
-            <StackPanel Margin="5,2,5,2">
-                <CheckBox Content="Default" Margin="1" IsChecked="{Binding Default}"/>
-                <CheckBox Content="Visible" Margin="1" IsChecked="{Binding Visible}"/>
-                <CheckBox Content="Printable" Margin="1" IsChecked="{Binding Printable}"/>
-                <CheckBox Content="Locked" Margin="1" IsChecked="{Binding Locked}"/>
-                <CheckBox Content="Connector" Margin="1" IsChecked="{Binding Connector}"/>
-                <CheckBox Content="None" Margin="1" IsChecked="{Binding None}"/>
-                <CheckBox Content="Standalone" Margin="1" IsChecked="{Binding Standalone}"/>
-                <CheckBox Content="Input" Margin="1" IsChecked="{Binding Input}"/>
-                <CheckBox Content="Output" Margin="1" IsChecked="{Binding Output}"/>
-            </StackPanel>
+            <state:ShapeStateControl/>
         </DataTemplate>
         <!-- Shapes -->
         <DataTemplate DataType="{x:Type core:XPoint}">

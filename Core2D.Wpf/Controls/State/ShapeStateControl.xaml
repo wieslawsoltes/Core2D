@@ -10,9 +10,17 @@
              xmlns:core="clr-namespace:Core2D;assembly=Core2D" 
              xmlns:custom="clr-namespace:Core2D.Wpf.Controls.Custom"
              mc:Ignorable="d" 
-             d:DataContext="{x:Static core:DesignerContext.Context}"
+             d:DataContext="{x:Static core:DesignerContext.State}"
              d:DesignWidth="250" d:DesignHeight="400">
-    <Grid>
-            
-    </Grid>
+    <StackPanel Margin="5,2,5,2">
+        <CheckBox Content="Default" Margin="1" IsChecked="{Binding Default}"/>
+        <CheckBox Content="Visible" Margin="1" IsChecked="{Binding Visible}"/>
+        <CheckBox Content="Printable" Margin="1" IsChecked="{Binding Printable}"/>
+        <CheckBox Content="Locked" Margin="1" IsChecked="{Binding Locked}"/>
+        <CheckBox Content="Connector" Margin="1" IsChecked="{Binding Connector}"/>
+        <CheckBox Content="None" Margin="1" IsChecked="{Binding None}"/>
+        <CheckBox Content="Standalone" Margin="1" IsChecked="{Binding Standalone}"/>
+        <CheckBox Content="Input" Margin="1" IsChecked="{Binding Input}"/>
+        <CheckBox Content="Output" Margin="1" IsChecked="{Binding Output}"/>
+    </StackPanel>
 </UserControl>
