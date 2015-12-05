@@ -9,10 +9,31 @@
              xmlns:converters="clr-namespace:Core2D.Wpf.Converters" 
              xmlns:core="clr-namespace:Core2D;assembly=Core2D" 
              xmlns:custom="clr-namespace:Core2D.Wpf.Controls.Custom"
+             xmlns:data="clr-namespace:Core2D.Wpf.Controls.Data"
              mc:Ignorable="d" 
-             d:DataContext="{x:Static core:DesignerContext.Context}"
+             d:DataContext="{x:Static core:DesignerContext.Database}"
              d:DesignWidth="250" d:DesignHeight="400">
-    <Grid>
-            
-    </Grid>
+    <TabControl>
+        <TabItem Header="Database">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Name" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" BorderBrush="{x:Null}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="0" Grid.Column="1"/>
+                <data:RecordsControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"/>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Columns">
+            <data:ColumnsControl/>
+        </TabItem>
+        <TabItem Header="Record">
+            <ContentControl Content="{Binding CurrentRecord}"/>
+        </TabItem>
+    </TabControl>
 </UserControl>

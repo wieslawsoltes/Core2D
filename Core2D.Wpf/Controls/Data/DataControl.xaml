@@ -9,10 +9,32 @@
              xmlns:converters="clr-namespace:Core2D.Wpf.Converters" 
              xmlns:core="clr-namespace:Core2D;assembly=Core2D" 
              xmlns:custom="clr-namespace:Core2D.Wpf.Controls.Custom"
+             xmlns:data="clr-namespace:Core2D.Wpf.Controls.Data"
              mc:Ignorable="d" 
-             d:DataContext="{x:Static core:DesignerContext.Context}"
+             d:DataContext="{x:Static core:DesignerContext.Data}"
              d:DesignWidth="250" d:DesignHeight="400">
-    <Grid Margin="2">
-        <ContentControl Content="{Binding Editor.Renderers[0].State.SelectedShape.Data, FallbackValue={x:Null}}"/>
-    </Grid>
+    <TabControl>
+        <TabItem Header="Record">
+            <Grid>
+                <Grid.Resources>
+                    <ControlTemplate x:Key="RecordMenuControlTemplateKey">
+                        <Menu Background="Transparent" HorizontalAlignment="Right">
+                            <MenuItem Command="{x:Static core:Commands.ResetRecordCommand}" CommandParameter="{Binding}" Header="X"/>
+                        </Menu>
+                    </ControlTemplate>
+                </Grid.Resources>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Control Template="{StaticResource RecordMenuControlTemplateKey}" Grid.Row="0" Margin="2,0,2,0"/>
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                    <ContentControl Content="{Binding Record}"/>
+                </ScrollViewer>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Properties">
+            <data:PropertiesControl/>
+        </TabItem>
+    </TabControl>
 </UserControl>

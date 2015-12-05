@@ -157,9 +157,6 @@
                                         <project:DatabasesControl/>
                                     </ScrollViewer>
                                 </ad:LayoutAnchorable>
-                                <ad:LayoutAnchorable x:Name="recordsWindow" CanClose="False" ContentId="records" Title="{x:Static p:Resources.WiWindowTitleRecords}" AutoHideWidth="210">
-                                    <data:RecordsControl x:Name="recordsControl"/>
-                                </ad:LayoutAnchorable>
                             </ad:LayoutAnchorablePane>
                         </ad:LayoutAnchorablePaneGroup>
                     </ad:LayoutAnchorablePaneGroup>
@@ -213,18 +210,20 @@
                                 </ScrollViewer>
                             </ad:LayoutAnchorable>
                             <ad:LayoutAnchorable x:Name="dataWindow" CanClose="False" ContentId="data" Title="{x:Static p:Resources.WindowTitleData}" AutoHideWidth="210">
-                                <data:DataControl x:Name="dataControl">
-                                    <data:DataControl.Style>
-                                        <Style TargetType="data:DataControl">
-                                            <Setter Property="Visibility" Value="Visible"/>
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding Editor.Renderers[0].State.SelectedShape}" Value="{x:Null}">
-                                                    <Setter Property="Visibility" Value="Hidden"/>
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </data:DataControl.Style>
-                                </data:DataControl>
+                                <ScrollViewer x:Name="dataScrollViewer" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Focusable="True">
+                                    <data:DataControl DataContext="{Binding Editor.Renderers[0].State.SelectedShape.Data, FallbackValue={x:Null}}">
+                                        <data:DataControl.Style>
+                                            <Style TargetType="data:DataControl">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding}" Value="{x:Null}">
+                                                        <Setter Property="Visibility" Value="Hidden"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </data:DataControl.Style>
+                                    </data:DataControl>
+                                </ScrollViewer>
                             </ad:LayoutAnchorable>
                             <ad:LayoutAnchorable x:Name="styleWindow" CanClose="False" ContentId="style" Title="{x:Static p:Resources.WindowTitleStyle}" AutoHideWidth="210">
                                 <ScrollViewer x:Name="styleScrollViewer" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Focusable="True">

@@ -10,9 +10,63 @@
              xmlns:core="clr-namespace:Core2D;assembly=Core2D" 
              xmlns:custom="clr-namespace:Core2D.Wpf.Controls.Custom"
              mc:Ignorable="d" 
-             d:DataContext="{x:Static core:DesignerContext.Context}"
+             d:DataContext="{x:Static core:DesignerContext.Database}"
              d:DesignWidth="250" d:DesignHeight="400">
     <Grid>
-            
+        <Grid.Resources>
+            <ControlTemplate x:Key="ColumnsMenuControlTemplateKey">
+                <Menu Background="Transparent" HorizontalAlignment="Right">
+                    <MenuItem Command="{x:Static core:Commands.AddColumnCommand}" CommandParameter="{Binding}" Header="+"/>
+                </Menu>
+            </ControlTemplate>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Control Template="{StaticResource ColumnsMenuControlTemplateKey}" Grid.Row="0" Margin="2,0,2,0"/>
+        <Grid Height="Auto" VerticalAlignment="Top" Grid.Row="1">
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Setter Property="Visibility" Value="Visible"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Columns.Length, FallbackValue=0}" Value="0">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="30"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Column="0" Grid.Row="0" Margin="5,2,5,2" VerticalAlignment="Center" Text="Name"/>
+        </Grid>
+        <ItemsControl x:Name="columnsItemsControls" VerticalContentAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="2" ItemsSource="{Binding Columns, UpdateSourceTrigger=PropertyChanged}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Grid Height="Auto" VerticalAlignment="Top">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="30"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <TextBox Grid.Column="0" Grid.Row="0" Margin="5,2,5,2" VerticalAlignment="Center" Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Button Grid.Column="1" Grid.Row="0" Margin="5,2,5,2" VerticalAlignment="Center" Content="-" Command="{x:Static core:Commands.RemoveColumnCommand}" CommandParameter="{Binding}"/>
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
     </Grid>
 </UserControl>

@@ -10,13 +10,12 @@
         <LayoutAnchorablePane>
           <LayoutAnchorable AutoHideWidth="210" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Groups" IsSelected="True" ContentId="groups" CanClose="False" />
           <LayoutAnchorable AutoHideWidth="210" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Databases" ContentId="databases" CanClose="False" />
-          <LayoutAnchorable AutoHideWidth="210" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Records" ContentId="records" CanClose="False" />
         </LayoutAnchorablePane>
       </LayoutAnchorablePaneGroup>
     </LayoutAnchorablePaneGroup>
     <LayoutDocumentPaneGroup Orientation="Horizontal">
       <LayoutDocumentPane>
-        <LayoutDocument Title="Canvas" IsSelected="True" IsLastFocusedDocument="True" ContentId="canvas" CanClose="False" LastActivationTimeStamp="11/21/2015 11:59:15" />
+        <LayoutDocument Title="Canvas" IsSelected="True" IsLastFocusedDocument="True" ContentId="canvas" CanClose="False" LastActivationTimeStamp="12/05/2015 22:20:58" />
       </LayoutDocumentPane>
     </LayoutDocumentPaneGroup>
     <LayoutAnchorablePaneGroup Orientation="Vertical" DockWidth="250">
