@@ -9,10 +9,35 @@
              xmlns:converters="clr-namespace:Core2D.Wpf.Converters" 
              xmlns:core="clr-namespace:Core2D;assembly=Core2D" 
              xmlns:custom="clr-namespace:Core2D.Wpf.Controls.Custom"
+             xmlns:style="clr-namespace:Core2D.Wpf.Controls.Style"
              mc:Ignorable="d" 
-             d:DataContext="{x:Static core:DesignerContext.Context}"
+             d:DataContext="{x:Static core:DesignerContext.Style}"
              d:DesignWidth="250" d:DesignHeight="400">
-    <Grid>
-            
-    </Grid>
+    <TabControl>
+        <TabItem Header="Style">
+            <style:StyleControl/>
+        </TabItem>
+        <TabItem Header="Stroke">
+            <ContentControl Content="{Binding Stroke}"/>
+        </TabItem>
+        <TabItem Header="Fill">
+            <ContentControl Content="{Binding Fill}"/>
+        </TabItem>
+        <TabItem Header="Text">
+            <ContentControl Content="{Binding TextStyle}"/>
+        </TabItem>
+        <TabItem Header="Line">
+            <TabControl>
+                <TabItem Header="StartArrow">
+                    <ContentControl Content="{Binding StartArrowStyle}"/>
+                </TabItem>
+                <TabItem Header="EndArrow">
+                    <ContentControl Content="{Binding EndArrowStyle}"/>
+                </TabItem>
+                <TabItem Header="LineStyle">
+                    <ContentControl Content="{Binding LineStyle}"/>
+                </TabItem>
+            </TabControl>
+        </TabItem>
+    </TabControl>
 </UserControl>

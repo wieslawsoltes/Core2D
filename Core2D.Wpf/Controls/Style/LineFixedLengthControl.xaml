@@ -10,9 +10,39 @@
              xmlns:core="clr-namespace:Core2D;assembly=Core2D" 
              xmlns:custom="clr-namespace:Core2D.Wpf.Controls.Custom"
              mc:Ignorable="d" 
-             d:DataContext="{x:Static core:DesignerContext.Context}"
+             d:DataContext="{x:Static core:DesignerContext.LineFixedLength}"
              d:DesignWidth="250" d:DesignHeight="400">
-    <Grid>
-            
-    </Grid>
+    <TabControl>
+        <TabItem Header="FixedLength">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Length" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <TextBox Text="{Binding Length, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxCenterStyleKey}" Grid.Row="0" Grid.Column="1"/>
+                <Slider Value="{Binding Length}" Style="{StaticResource SliderStyleKey}" Minimum="0" Maximum="30" TickFrequency="0.1" SmallChange="0.1" LargeChange="1" IsSnapToTickEnabled="True" Grid.Row="0" Grid.Column="2"/>
+                <TextBlock Text="Flags" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="1" Grid.Column="0"/>
+                <StackPanel Margin="5,2,5,2" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
+                    <CheckBox Content="Disabled" Margin="1" IsChecked="{Binding Disabled}"/>
+                    <CheckBox Content="Start" Margin="1" IsChecked="{Binding Start}"/>
+                    <CheckBox Content="End" Margin="1" IsChecked="{Binding End}"/>
+                    <CheckBox Content="Vertical" Margin="1" IsChecked="{Binding Vertical}"/>
+                    <CheckBox Content="Horizontal" Margin="1" IsChecked="{Binding Horizontal}"/>
+                    <CheckBox Content="All" Margin="1" IsChecked="{Binding All}"/>
+                </StackPanel>
+            </Grid>
+        </TabItem>
+        <TabItem Header="StartTrigger">
+            <ContentControl Content="{Binding StartTrigger}"/>
+        </TabItem>
+        <TabItem Header="EndTrigger">
+            <ContentControl Content="{Binding EndTrigger}"/>
+        </TabItem>
+    </TabControl>
 </UserControl>

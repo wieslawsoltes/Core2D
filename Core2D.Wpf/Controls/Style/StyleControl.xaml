@@ -10,9 +10,32 @@
              xmlns:core="clr-namespace:Core2D;assembly=Core2D" 
              xmlns:custom="clr-namespace:Core2D.Wpf.Controls.Custom"
              mc:Ignorable="d" 
-             d:DataContext="{x:Static core:DesignerContext.Context}"
+             d:DataContext="{x:Static core:DesignerContext.Style}"
              d:DesignWidth="250" d:DesignHeight="400">
-    <Grid Margin="2">
-        <ContentControl Content="{Binding Editor.Project.CurrentStyleLibrary.Selected, FallbackValue={x:Null}}"/>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="Name" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+        <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" BorderBrush="{x:Null}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"/>
+        <TextBlock Text="Thickness" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="1" Grid.Column="0"/>
+        <TextBox Text="{Binding Thickness, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxCenterStyleKey}" Grid.Row="1" Grid.Column="1"/>
+        <Slider Value="{Binding Thickness}" Style="{StaticResource SliderStyleKey}" Minimum="0" Maximum="50" TickFrequency="0.1" SmallChange="0.1" LargeChange="1" IsSnapToTickEnabled="True" Grid.Row="1" Grid.Column="2"/>
+        <TextBlock Text="Line Cap" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="2" Grid.Column="0"/>
+        <ComboBox ItemsSource="{x:Static core:Enums.LineCapValues}" SelectedItem="{Binding LineCap}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"/>
+        <TextBlock Text="Dashes" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="3" Grid.Column="0"/>
+        <TextBox Text="{Binding Dashes}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"/>
+        <TextBlock Text="Dash Offset" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="4" Grid.Column="0"/>
+        <TextBox Text="{Binding DashOffset, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxCenterStyleKey}" Grid.Row="4" Grid.Column="1"/>
+        <Slider Value="{Binding DashOffset}" Style="{StaticResource SliderStyleKey}" Minimum="0" Maximum="15" TickFrequency="0.1" SmallChange="0.1" LargeChange="1" IsSnapToTickEnabled="True" Grid.Row="4" Grid.Column="2"/>
     </Grid>
 </UserControl>

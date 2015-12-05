@@ -10,9 +10,13 @@
              xmlns:core="clr-namespace:Core2D;assembly=Core2D" 
              xmlns:custom="clr-namespace:Core2D.Wpf.Controls.Custom"
              mc:Ignorable="d" 
-             d:DataContext="{x:Static core:DesignerContext.Context}"
+             d:DataContext="{x:Static core:DesignerContext.FontStyle}"
              d:DesignWidth="250" d:DesignHeight="400">
-    <Grid>
-            
-    </Grid>
+    <StackPanel Margin="5,2,5,2">
+        <CheckBox Content="Regular" Margin="1" IsChecked="{Binding Regular}"/>
+        <CheckBox Content="Bold" Margin="1" IsChecked="{Binding Bold}"/>
+        <CheckBox Content="Italic" Margin="1" IsChecked="{Binding Italic}"/>
+        <CheckBox Content="Underline" Margin="1" IsChecked="{Binding Underline}"/>
+        <CheckBox Content="Strikeout" Margin="1" IsChecked="{Binding Strikeout}"/>
+    </StackPanel>
 </UserControl>
