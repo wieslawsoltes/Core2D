@@ -10,9 +10,56 @@
              xmlns:core="clr-namespace:Core2D;assembly=Core2D" 
              xmlns:custom="clr-namespace:Core2D.Wpf.Controls.Custom"
              mc:Ignorable="d" 
-             d:DataContext="{x:Static core:DesignerContext.Context}"
+             d:DataContext="{x:Static core:DesignerContext.Ellipse}"
              d:DesignWidth="250" d:DesignHeight="400">
-    <Grid>
-            
-    </Grid>
+    <TabControl>
+        <TabItem Header="Ellipse">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Name" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" BorderBrush="{x:Null}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="0" Grid.Column="1"/>
+                <TextBlock Text="IsStroked" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="1" Grid.Column="0"/>
+                <CheckBox Content="" IsChecked="{Binding IsStroked}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="1" Grid.Column="1"/>
+                <TextBlock Text="IsFilled" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="2" Grid.Column="0"/>
+                <CheckBox Content="" IsChecked="{Binding IsFilled}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="2" Grid.Column="1"/>
+                <TextBlock Text="Text" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="3" Grid.Column="0"/>
+                <ComboBox IsEditable="True" Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center">
+                    <ComboBoxItem>{0}</ComboBoxItem>
+                    <ComboBoxItem>{0} {1}</ComboBoxItem>
+                    <ComboBoxItem>{0} {1} {2}</ComboBoxItem>
+                    <ComboBoxItem>{Column0}</ComboBoxItem>
+                    <ComboBoxItem>{Column1}</ComboBoxItem>
+                    <ComboBoxItem>{Column2}</ComboBoxItem>
+                    <ComboBoxItem>{Column3}</ComboBoxItem>
+                </ComboBox>
+                <TabControl Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2">
+                    <TabItem Header="TopLeft">
+                        <ContentControl Content="{Binding TopLeft}"/>
+                    </TabItem>
+                    <TabItem Header="BottomRight">
+                        <ContentControl Content="{Binding BottomRight}"/>
+                    </TabItem>
+                </TabControl>
+            </Grid>
+        </TabItem>
+        <TabItem Header="State">
+            <ContentControl Content="{Binding State}"/>
+        </TabItem>
+        <TabItem Header="Data">
+            <ContentControl Content="{Binding Data}"/>
+        </TabItem>
+        <TabItem Header="Style">
+            <ContentControl Content="{Binding Style}"/>
+        </TabItem>
+    </TabControl>
 </UserControl>
