@@ -9,10 +9,21 @@
              xmlns:converters="clr-namespace:Core2D.Wpf.Converters" 
              xmlns:core="clr-namespace:Core2D;assembly=Core2D" 
              xmlns:custom="clr-namespace:Core2D.Wpf.Controls.Custom"
+             xmlns:p="clr-namespace:Core2D.Wpf.Properties"
              mc:Ignorable="d" 
-             d:DataContext="{x:Static core:DesignerContext.Context}"
+             d:DataContext="{x:Static core:DesignerContext.Document}"
              d:DesignWidth="250" d:DesignHeight="400">
-    <Grid>
-            
-    </Grid>
+    <StackPanel>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="{x:Static p:Resources.DocumentName}" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+            <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="0" Grid.Column="1"/>
+        </Grid>
+    </StackPanel>
 </UserControl>

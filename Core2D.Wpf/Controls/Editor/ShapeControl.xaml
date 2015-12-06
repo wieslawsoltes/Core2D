@@ -12,7 +12,7 @@
              mc:Ignorable="d" 
              d:DataContext="{x:Static core:DesignerContext.Context}"
              d:DesignWidth="250" d:DesignHeight="400">
-    <Grid Margin="2">
+    <Grid>
         <ContentControl Content="{Binding Editor.Project.CurrentContainer.CurrentShape, FallbackValue={x:Null}}"/>
     </Grid>
 </UserControl>

@@ -9,10 +9,86 @@
              xmlns:converters="clr-namespace:Core2D.Wpf.Converters" 
              xmlns:core="clr-namespace:Core2D;assembly=Core2D" 
              xmlns:custom="clr-namespace:Core2D.Wpf.Controls.Custom"
+             xmlns:lists="clr-namespace:Core2D.Wpf.Controls.Custom.Lists"
+             xmlns:project="clr-namespace:Core2D.Wpf.Controls.Project"
+             xmlns:p="clr-namespace:Core2D.Wpf.Properties"
              mc:Ignorable="d" 
-             d:DataContext="{x:Static core:DesignerContext.Context}"
+             d:DataContext="{x:Static core:DesignerContext.Container}"
              d:DesignWidth="250" d:DesignHeight="400">
-    <Grid Margin="2">
-        <ContentControl Content="{Binding Editor.Project.CurrentContainer, FallbackValue={x:Null}}"/>
-    </Grid>
+    <TabControl>
+        <TabItem Header="{x:Static p:Resources.WindowTitleContainer}">
+            <StackPanel>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="{x:Static p:Resources.ContainerName}" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                    <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" BorderBrush="{x:Null}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="0" Grid.Column="1"/>
+                </Grid>
+                <Grid>
+                    <Grid.Style>
+                        <Style TargetType="Grid">
+                            <Setter Property="Visibility" Value="Visible"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsTemplate}" Value="False">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Grid.Style>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="{x:Static p:Resources.ContainerWidth}" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                    <TextBlock Text="{x:Static p:Resources.ContainerHeight}" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="1" Grid.Column="0"/>
+                    <TextBox Text="{Binding Width, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="0" Grid.Column="1"/>
+                    <TextBox Text="{Binding Height, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="1" Grid.Column="1"/>
+                </Grid>
+                <Expander Header="{x:Static p:Resources.ContainerBackground}">
+                    <Expander.Style>
+                        <Style TargetType="Expander">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsTemplate}" Value="True">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Expander.Style>
+                    <ContentControl Content="{Binding Background}"/>
+                </Expander>
+                <Expander Header="{x:Static p:Resources.ContainerProperties}" IsExpanded="True">
+                    <ContentControl Content="{Binding Data}"/>
+                </Expander>
+            </StackPanel>
+        </TabItem>
+        <TabItem Header="{x:Static p:Resources.ContainerTemplate}">
+            <TabItem.Style>
+                <Style TargetType="TabItem">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsTemplate}" Value="False">
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TabItem.Style>
+            <ContentControl Content="{Binding Template}"/>
+        </TabItem>
+        <TabItem Header="{x:Static p:Resources.WindowTitleLayers}">
+            <project:LayersControl/>
+        </TabItem>
+        <TabItem Header="{x:Static p:Resources.WindowTitleShapes}">
+            <project:ShapesControl/>
+        </TabItem>
+    </TabControl>
 </UserControl>

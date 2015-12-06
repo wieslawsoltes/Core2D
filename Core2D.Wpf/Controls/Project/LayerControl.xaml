@@ -10,9 +10,43 @@
              xmlns:core="clr-namespace:Core2D;assembly=Core2D" 
              xmlns:custom="clr-namespace:Core2D.Wpf.Controls.Custom"
              mc:Ignorable="d" 
-             d:DataContext="{x:Static core:DesignerContext.Context}"
+             d:DataContext="{x:Static core:DesignerContext.Layer}"
              d:DesignWidth="250" d:DesignHeight="400">
-    <Grid>
-            
-    </Grid>
+    <TabControl>
+        <TabItem Header="Layer">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Name" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <TextBox Text="{Binding Path=Name, Mode=TwoWay}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="0" Grid.Column="1"/>
+                <TextBlock Text="IsVisible" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="1" Grid.Column="0"/>
+                <CheckBox IsChecked="{Binding Path=IsVisible, Mode=TwoWay}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="1" Grid.Column="1"/>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Owner">
+            <ContentControl Content="{Binding Path=Owner, Mode=TwoWay}"/>
+        </TabItem>
+        <TabItem Header="Shapes">
+            <TabControl>
+                <TabItem Header="Shapes">
+                    <ListBox Name="shapes" ItemsSource="{Binding Path=Shapes}">
+                        <ListBox.Resources>
+                            <DataTemplate DataType="{x:Type core:BaseShape}">
+                                <TextBlock Text="{Binding}"/>
+                            </DataTemplate>
+                        </ListBox.Resources>
+                    </ListBox>
+                </TabItem>
+                <TabItem Header="Selected">
+                    <ContentControl Content="{Binding ElementName=shapes, Path=SelectedItem, Mode=TwoWay}"/>
+                </TabItem>
+            </TabControl>
+        </TabItem>
+    </TabControl>
 </UserControl>

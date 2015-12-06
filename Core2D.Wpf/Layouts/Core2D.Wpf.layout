@@ -4,7 +4,6 @@
     <LayoutAnchorablePaneGroup Orientation="Vertical" DockWidth="210">
       <LayoutAnchorablePane DockWidth="210">
         <LayoutAnchorable AutoHideWidth="210" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Project" IsSelected="True" ContentId="project" CanClose="False" />
-        <LayoutAnchorable AutoHideWidth="210" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Options" ContentId="options" CanClose="False" />
       </LayoutAnchorablePane>
       <LayoutAnchorablePaneGroup Orientation="Horizontal" DockWidth="210">
         <LayoutAnchorablePane>
@@ -15,7 +14,7 @@
     </LayoutAnchorablePaneGroup>
     <LayoutDocumentPaneGroup Orientation="Horizontal">
       <LayoutDocumentPane>
-        <LayoutDocument Title="Canvas" IsSelected="True" IsLastFocusedDocument="True" ContentId="canvas" CanClose="False" LastActivationTimeStamp="12/05/2015 22:20:58" />
+        <LayoutDocument Title="Canvas" IsSelected="True" IsLastFocusedDocument="True" ContentId="canvas" CanClose="False" LastActivationTimeStamp="12/06/2015 20:32:53" />
       </LayoutDocumentPane>
     </LayoutDocumentPaneGroup>
     <LayoutAnchorablePaneGroup Orientation="Vertical" DockWidth="250">
