@@ -12,7 +12,7 @@
              xmlns:custom="clr-namespace:Core2D.Wpf.Controls.Custom"
              xmlns:project="clr-namespace:Core2D.Wpf.Controls.Project"
              mc:Ignorable="d" 
-             d:DataContext="{x:Static core:DesignerContext.Project}"
+             d:DataContext="{x:Static local:DesignerHelper.Project}"
              d:DesignWidth="250" d:DesignHeight="400">
     <TabControl>
         <TabItem Header="Project">

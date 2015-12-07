@@ -11,7 +11,7 @@
              xmlns:custom="clr-namespace:Core2D.Wpf.Controls.Custom"
              xmlns:lists="clr-namespace:Core2D.Wpf.Controls.Custom.Lists"
              mc:Ignorable="d" 
-             d:DataContext="{x:Static core:DesignerContext.Project}"
+             d:DataContext="{x:Static local:DesignerHelper.Project}"
              d:DesignWidth="250" d:DesignHeight="400">
     <Grid>
         <Grid.Resources>

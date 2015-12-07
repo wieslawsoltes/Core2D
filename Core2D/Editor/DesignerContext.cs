@@ -8,9 +8,9 @@ using System.Collections.Immutable;
 namespace Core2D
 {
     /// <summary>
-    /// The design time DataContext helper class.
+    /// The design time DataContext base class.
     /// </summary>
-    public static class DesignerContext
+    public class DesignerContext
     {
         /// <summary>
         /// The design time <see cref="Core2D.EditorContext"/>.
@@ -382,6 +382,23 @@ namespace Core2D
 
             Context.OnNew(null);
 
+            // Editor
+            /*
+            {
+                var document = Context.Editor.Project.Documents.FirstOrDefault();
+                var container = document.Containers.FirstOrDefault();
+                var layer = container.Layers.FirstOrDefault();
+                layer.Shapes = layer.Shapes.Add(
+                    XLine.Create(
+                        30, 30, 
+                        300, 30, 
+                        Context.Editor.Project.StyleLibraries.FirstOrDefault().Selected, 
+                        Context.Editor.Project.Options.PointShape));
+                container.CurrentLayer = layer;
+                container.CurrentShape = layer.Shapes.FirstOrDefault();
+            }
+            */
+
             // Data
 
             var db = Database.Create("Db");
@@ -402,11 +419,13 @@ namespace Core2D
 
             // Project
 
-            Container = Container.Create();
-            var layer = Container.Layers.FirstOrDefault();
-            layer.Shapes = layer.Shapes.Add(XLine.Create(0, 0, null, null));
-            Container.CurrentLayer = layer;
-            Container.CurrentShape = layer.Shapes.FirstOrDefault();
+            {
+                Container = Container.Create();
+                var layer = Container.Layers.FirstOrDefault();
+                layer.Shapes = layer.Shapes.Add(XLine.Create(0, 0, null, null));
+                Container.CurrentLayer = layer;
+                Container.CurrentShape = layer.Shapes.FirstOrDefault();
+            }
 
             Document = Document.Create();
             Layer = Layer.Create();

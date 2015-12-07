@@ -11,7 +11,7 @@
              xmlns:custom="clr-namespace:Core2D.Wpf.Controls.Custom"
              xmlns:p="clr-namespace:Core2D.Wpf.Properties" 
              mc:Ignorable="d" 
-             d:DataContext="{x:Static core:DesignerContext.Context}"
+             d:DataContext="{x:Static local:DesignerHelper.Context}"
              d:DesignWidth="1324" d:DesignHeight="20">
     <StatusBar Background="Transparent">
         <StatusBar.ItemsPanel>

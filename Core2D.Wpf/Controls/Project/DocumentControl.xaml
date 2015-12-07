@@ -11,7 +11,7 @@
              xmlns:custom="clr-namespace:Core2D.Wpf.Controls.Custom"
              xmlns:p="clr-namespace:Core2D.Wpf.Properties"
              mc:Ignorable="d" 
-             d:DataContext="{x:Static core:DesignerContext.Document}"
+             d:DataContext="{x:Static local:DesignerHelper.Document}"
              d:DesignWidth="250" d:DesignHeight="400">
     <StackPanel>
         <Grid>

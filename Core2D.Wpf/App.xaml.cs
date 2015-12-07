@@ -25,17 +25,6 @@ namespace Core2D.Wpf
         private bool _restoreLayout = true;
 
         /// <summary>
-        /// Initializes static data.
-        /// </summary>
-        static App()
-        {
-            DesignerContext.InitializeContext(
-                new WpfRenderer(),
-                new TextClipboard(),
-                new NewtonsoftSerializer());
-        }
-
-        /// <summary>
         /// Raises the <see cref="Application.Startup"/> event.
         /// </summary>
         /// <param name="e">A <see cref="StartupEventArgs"/> that contains the event data.</param>

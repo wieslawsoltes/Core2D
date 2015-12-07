@@ -11,7 +11,7 @@
              xmlns:custom="clr-namespace:Core2D.Wpf.Controls.Custom"
              xmlns:data="clr-namespace:Core2D.Wpf.Controls.Data"
              mc:Ignorable="d" 
-             d:DataContext="{x:Static core:DesignerContext.Data}"
+             d:DataContext="{x:Static local:DesignerHelper.Data}"
              d:DesignWidth="250" d:DesignHeight="400">
     <TabControl>
         <TabItem Header="Record">

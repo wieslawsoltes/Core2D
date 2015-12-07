@@ -13,7 +13,7 @@
              xmlns:project="clr-namespace:Core2D.Wpf.Controls.Project"
              xmlns:p="clr-namespace:Core2D.Wpf.Properties"
              mc:Ignorable="d" 
-             d:DataContext="{x:Static core:DesignerContext.Container}"
+             d:DataContext="{x:Static local:DesignerHelper.Container}"
              d:DesignWidth="250" d:DesignHeight="400">
     <TabControl>
         <TabItem Header="{x:Static p:Resources.WindowTitleContainer}">

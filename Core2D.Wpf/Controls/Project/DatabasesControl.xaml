@@ -10,7 +10,7 @@
              xmlns:core="clr-namespace:Core2D;assembly=Core2D" 
              xmlns:custom="clr-namespace:Core2D.Wpf.Controls.Custom"
              mc:Ignorable="d" 
-             d:DataContext="{x:Static core:DesignerContext.Project}"
+             d:DataContext="{x:Static local:DesignerHelper.Project}"
              d:DesignWidth="250" d:DesignHeight="400">
     <Grid>
         <Grid.Resources>

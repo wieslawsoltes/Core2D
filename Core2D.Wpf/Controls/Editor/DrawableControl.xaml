@@ -11,7 +11,7 @@
              xmlns:custom="clr-namespace:Core2D.Wpf.Controls.Custom"
              xmlns:editor="clr-namespace:Core2D.Wpf.Controls.Editor"
              mc:Ignorable="d" 
-             d:DataContext="{x:Static core:DesignerContext.Context}"
+             d:DataContext="{x:Static local:DesignerHelper.Context}"
              d:DesignWidth="250" d:DesignHeight="400"
              Width="{Binding Editor.Project.CurrentContainer.Template.Width}" 
              Height="{Binding Editor.Project.CurrentContainer.Template.Height}" 
