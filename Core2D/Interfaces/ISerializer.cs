@@ -16,6 +16,7 @@ namespace Core2D
         /// <param name="value"></param>
         /// <returns></returns>
         string Serialize<T>(T value);
+
         /// <summary>
         /// 
         /// </summary>

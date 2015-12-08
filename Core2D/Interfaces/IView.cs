@@ -13,6 +13,7 @@ namespace Core2D
         /// 
         /// </summary>
         object DataContext { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
