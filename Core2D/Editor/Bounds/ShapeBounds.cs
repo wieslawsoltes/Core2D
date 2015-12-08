@@ -12,8 +12,6 @@ namespace Core2D
     /// </summary>
     public static class ShapeBounds
     {
-        #region Bounds
-
         /// <summary>
         /// Get the bounding rectangle for <see cref="XPoint"/> shape.
         /// </summary>
@@ -105,10 +103,6 @@ namespace Core2D
         {
             return Rect2.Create(image.TopLeft, image.BottomRight, dx, dy);
         }
-
-        #endregion
-
-        #region HitTest Point
 
         /// <summary>
         /// Hit test point in <see cref="XLine"/> shape bounds.
@@ -419,10 +413,6 @@ namespace Core2D
             return null;
         }
 
-        #endregion
-
-        #region HitTest Rect
-
         /// <summary>
         /// Hit test rectangle in <see cref="Container"/> shapes bounds.
         /// </summary>
@@ -684,7 +674,5 @@ namespace Core2D
 
             return builder.ToImmutableHashSet();
         }
-
-        #endregion
     }
 }

@@ -9,41 +9,47 @@ namespace Core2D
     /// </summary>
     public struct Vector2 : IComparable<Vector2>
     {
-        #region Properties
-
         /// <summary>
         /// 
         /// </summary>
         public double X { get; private set; }
+
         /// <summary>
         /// 
         /// </summary>
         public double Y { get; private set; }
 
-        #endregion
-
-        #region Vectors
+        /// <summary>
+        /// 
+        /// </summary>
+        public static Vector2 One
+        {
+            get { return new Vector2(1.0); }
+        }
 
         /// <summary>
         /// 
         /// </summary>
-        public static Vector2 One { get { return new Vector2(1.0); } }
-        /// <summary>
-        /// 
-        /// </summary>
-        public static Vector2 Zero { get { return new Vector2(0.0); } }
-        /// <summary>
-        /// 
-        /// </summary>
-        public static Vector2 UnitX { get { return new Vector2(1.0, 0.0); } }
-        /// <summary>
-        /// 
-        /// </summary>
-        public static Vector2 UnitY { get { return new Vector2(0.0, 1.0); } }
+        public static Vector2 Zero
+        {
+            get { return new Vector2(0.0); }
+        }
 
-        #endregion
+        /// <summary>
+        /// 
+        /// </summary>
+        public static Vector2 UnitX
+        {
+            get { return new Vector2(1.0, 0.0); }
+        }
 
-        #region Constructor
+        /// <summary>
+        /// 
+        /// </summary>
+        public static Vector2 UnitY
+        {
+            get { return new Vector2(0.0, 1.0); }
+        }
 
         /// <summary>
         /// Initializes a new <see cref="Vector2"/> instance.
@@ -68,10 +74,6 @@ namespace Core2D
             this.Y = y;
         }
 
-        #endregion
-
-        #region ToString
-
         /// <summary>
         /// 
         /// </summary>
@@ -80,10 +82,6 @@ namespace Core2D
         {
             return string.Concat(X, System.Globalization.CultureInfo.CurrentCulture.NumberFormat.NumberGroupSeparator, Y);
         }
-
-        #endregion
-
-        #region IComparable
 
         /// <summary>
         /// 
@@ -117,10 +115,6 @@ namespace Core2D
             return (this > v) ? -1 : ((this < v) ? 1 : 0);
         }
 
-        #endregion
-
-        #region Equals
-
         /// <summary>
         /// 
         /// </summary>
@@ -153,10 +147,6 @@ namespace Core2D
         {
             return this.X.GetHashCode() + this.Y.GetHashCode();
         }
-
-        #endregion
-
-        #region Arithmetic
 
         /// <summary>
         /// 
@@ -274,10 +264,6 @@ namespace Core2D
         {
             return (this.X * v.Y) - (this.Y * v.X);
         }
-
-        #endregion
-
-        #region Operators
 
         /// <summary>
         /// 
@@ -399,10 +385,6 @@ namespace Core2D
                 v1.Y / v2.Y);
         }
 
-        #endregion
-
-        #region Vector
-
         /// <summary>
         /// 
         /// </summary>
@@ -505,10 +487,6 @@ namespace Core2D
                 this.Y > v.Y ? this.Y : v.Y);
         }
 
-        #endregion
-
-        #region Interpolation
-
         /// <summary>
         /// 
         /// </summary>
@@ -545,10 +523,6 @@ namespace Core2D
             return this.Lerp(v, amount).Normalize();
         }
 
-        #endregion
-
-        #region Point
-
         /// <summary>
         /// 
         /// </summary>
@@ -584,14 +558,11 @@ namespace Core2D
             return (this - a).Project(b - a) + a;
         }
 
-        #endregion
-
-        #region Math
-
         /// <summary>
         /// 
         /// </summary>
         public const double RadiansToDegrees = 180.0 / Math.PI;
+
         /// <summary>
         /// 
         /// </summary>
@@ -608,7 +579,5 @@ namespace Core2D
         {
             return value > max ? max : value < min ? min : value;
         }
-
-        #endregion
     }
 }
