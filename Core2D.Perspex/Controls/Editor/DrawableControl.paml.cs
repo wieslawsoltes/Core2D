@@ -252,7 +252,6 @@ namespace Core2D.Perspex.Controls.Editor
             var brush = new SolidColorBrush(color);
             var rect = new Rect(0, 0, width, height);
             dc.FillRectangle(brush, rect);
-            // TODO: brush.Dispose();
         }
 
         /// <summary>
@@ -272,7 +271,6 @@ namespace Core2D.Perspex.Controls.Editor
             if (container == null)
                 return;
 
-            // TODO: Disable anti-aliasing.
             var translate = dc.PushPreTransform(Matrix.CreateTranslation(_state.PanX, _state.PanY));
             var scale = dc.PushPreTransform(Matrix.CreateScale(_state.Zoom, _state.Zoom));
 

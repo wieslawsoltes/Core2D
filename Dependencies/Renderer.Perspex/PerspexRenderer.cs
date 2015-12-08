@@ -341,12 +341,6 @@ namespace Dependencies
                     }
                     break;
             }
-
-            // TODO: fillStartArrow.Dispose();
-            // TODO: strokeStartArrow.Dispose();
-
-            // TODO: fillEndArrow.Dispose();
-            // TODO: strokeEndArrow.Dispose();
         }
 
         /// <summary>
@@ -409,8 +403,6 @@ namespace Dependencies
                 isFilled ? brush : null,
                 isStroked ? pen : null,
                 g);
-
-            // TODO: g.Dispose();
         }
 
         /// <summary>
@@ -469,10 +461,6 @@ namespace Dependencies
             {
                 if (_biCache != null)
                 {
-                    foreach (var kvp in _biCache)
-                    {
-                        // TODO: kvp.Value.Dispose();
-                    }
                     _biCache.Clear();
                 }
                 _biCache = new Dictionary<string, Bitmap>();
@@ -489,8 +477,6 @@ namespace Dependencies
 
             DrawLineArrowsInternal(_dc, line, dx, dy, out pt1, out pt2);
             DrawLineInternal(_dc, strokeLine, line.IsStroked, ref pt1, ref pt2);
-
-            // TODO: strokeLine.Dispose();
         }
 
         /// <inheritdoc/>
@@ -524,9 +510,6 @@ namespace Dependencies
                     rectangle.CellWidth, rectangle.CellHeight,
                     true);
             }
-
-            // TODO: brush.Dispose();
-            // TODO: pen.Dispose();
         }
 
         /// <inheritdoc/>
@@ -549,9 +532,6 @@ namespace Dependencies
                 ellipse.IsStroked,
                 ellipse.IsFilled,
                 ref rect);
-
-            // TODO: brush.Dispose();
-            // TODO: pen.Dispose();
         }
 
         /// <inheritdoc/>
@@ -588,10 +568,6 @@ namespace Dependencies
                 arc.IsFilled ? brush : null,
                 arc.IsStroked ? pen : null,
                 sg);
-
-            // TODO: sg.Dispose();
-            // TODO: brush.Dispose();
-            // TODO: pen.Dispose();
         }
 
         /// <inheritdoc/>
@@ -624,10 +600,6 @@ namespace Dependencies
                 bezier.IsFilled ? brush : null,
                 bezier.IsStroked ? pen : null,
                 sg);
-
-            // TODO: sg.Dispose();
-            // TODO: brush.Dispose();
-            // TODO: pen.Dispose();
         }
 
         /// <inheritdoc/>
@@ -659,10 +631,6 @@ namespace Dependencies
                 qbezier.IsFilled ? brush : null,
                 qbezier.IsStroked ? pen : null,
                 sg);
-
-            // TODO: sg.Dispose();
-            // TODO: brush.Dispose();
-            // TODO: pen.Dispose();
         }
 
         /// <inheritdoc/>
@@ -720,7 +688,6 @@ namespace Dependencies
 
             _gfx.DrawText(brush, origin, ft);
 
-            // TODO: brush.Dispose();
             ft.Dispose();
         }
 
@@ -746,9 +713,6 @@ namespace Dependencies
                     image.IsStroked,
                     image.IsFilled,
                     ref rect);
-
-                // TODO: brush.Dispose();
-                // TODO: pen.Dispose();
             }
 
             if (_enableImageCache
@@ -791,10 +755,6 @@ namespace Dependencies
                                 1.0,
                                 new Rect(0, 0, bi.PixelWidth, bi.PixelHeight),
                                 new Rect(rect.X, rect.Y, rect.Width, rect.Height));
-
-                            // TODO:
-                            //if (!_enableImageCache)
-                            //    bi.Dispose();
                         }
                     }
                 }
@@ -822,10 +782,6 @@ namespace Dependencies
                 path.IsFilled ? brush : null,
                 path.IsStroked ? pen : null,
                 g);
-
-            // TODO: g.Dispose();
-            // TODO: brush.Dispose();
-            // TODO: pen.Dispose();
         }
     }
 }

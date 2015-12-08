@@ -190,7 +190,7 @@ namespace Dependencies
                 }
             }
 
-            // TODO: Perspex has not yet implemented FillRule.
+            // TODO: Implement FillRule after Perspex adds support for it.
             //sg.FillRule = xpg.FillRule == XFillRule.Nonzero ? FillRule.Nonzero : FillRule.EvenOdd;
 
             return sg;
