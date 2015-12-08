@@ -586,13 +586,11 @@ namespace Core2D.Perspex
                     if (ext == ".pdf")
                     {
                         _context.ExportAsPdf(result, item);
-                        Process.Start(result);
                     }
 
                     if (ext == ".dxf")
                     {
                         _context.ExportAsDxf(result);
-                        Process.Start(result);
                     }
                 }
             }

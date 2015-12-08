@@ -524,15 +524,12 @@ namespace Core2D.Wpf
                 {
                     case 1:
                         _context.ExportAsPdf(dlg.FileName, item);
-                        Process.Start(dlg.FileName);
                         break;
                     case 2:
                         ExportAsEmf(dlg.FileName);
-                        Process.Start(dlg.FileName);
                         break;
                     case 3:
                         _context.ExportAsDxf(dlg.FileName);
-                        Process.Start(dlg.FileName);
                         break;
                     default:
                         break;
