@@ -1,27 +1,23 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core2D
 {
     /// <summary>
     /// Helper class for <see cref="Tool.Point"/> editor.
     /// </summary>
-    public class PointHelper : Helper
+    public class ToolPoint : ToolBase
     {
         private Editor _editor;
         private State _currentState = State.None;
         private XPoint _shape;
 
         /// <summary>
-        /// Initialize new instance of <see cref="PointHelper"/> class.
+        /// Initialize new instance of <see cref="ToolPoint"/> class.
         /// </summary>
         /// <param name="editor">The current <see cref="Editor"/> object.</param>
-        public PointHelper(Editor editor)
+        public ToolPoint(Editor editor)
+            : base()
         {
             _editor = editor;
         }
@@ -29,6 +25,8 @@ namespace Core2D
         /// <inheritdoc/>
         public override void LeftDown(double x, double y)
         {
+            base.LeftDown(x, y);
+
             double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
             double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
             switch (_currentState)
@@ -54,23 +52,10 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public override void LeftUp(double x, double y)
-        {
-        }
-
-        /// <inheritdoc/>
-        public override void RightDown(double x, double y)
-        {
-        }
-
-        /// <inheritdoc/>
-        public override void RightUp(double x, double y)
-        {
-        }
-
-        /// <inheritdoc/>
         public override void Move(double x, double y)
         {
+            base.Move(x, y);
+
             double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
             double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
             switch (_currentState)
@@ -84,41 +69,6 @@ namespace Core2D
                     }
                     break;
             }
-        }
-
-        /// <inheritdoc/>
-        public override void ToStateOne()
-        {
-        }
-
-        /// <inheritdoc/>
-        public override void ToStateTwo()
-        {
-        }
-
-        /// <inheritdoc/>
-        public override void ToStateThree()
-        {
-        }
-
-        /// <inheritdoc/>
-        public override void ToStateFour()
-        {
-        }
-
-        /// <inheritdoc/>
-        public override void Move(BaseShape shape)
-        {
-        }
-
-        /// <inheritdoc/>
-        public override void Finalize(BaseShape shape)
-        {
-        }
-
-        /// <inheritdoc/>
-        public override void Remove()
-        {
         }
     }
 }

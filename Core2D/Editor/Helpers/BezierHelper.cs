@@ -1,17 +1,12 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core2D
 {
     /// <summary>
     /// Helper class for <see cref="Tool.Bezier"/> editor.
     /// </summary>
-    public class BezierHelper : Helper
+    public class ToolBezier : ToolBase
     {
         private Editor _editor;
         private State _currentState = State.None;
@@ -27,10 +22,11 @@ namespace Core2D
         private XPoint _helperPoint4;
 
         /// <summary>
-        /// Initialize new instance of <see cref="BezierHelper"/> class.
+        /// Initialize new instance of <see cref="ToolBezier"/> class.
         /// </summary>
         /// <param name="editor">The current <see cref="Editor"/> object.</param>
-        public BezierHelper(Editor editor)
+        public ToolBezier(Editor editor)
+            : base()
         {
             _editor = editor;
         }
@@ -102,6 +98,8 @@ namespace Core2D
         /// <inheritdoc/>
         public override void LeftDown(double x, double y)
         {
+            base.LeftDown(x, y);
+
             double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
             double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
             switch (_currentState)
@@ -191,13 +189,10 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public override void LeftUp(double x, double y)
-        {
-        }
-
-        /// <inheritdoc/>
         public override void RightDown(double x, double y)
         {
+            base.RightDown(x, y);
+
             switch (_currentState)
             {
                 case State.None:
@@ -218,13 +213,10 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public override void RightUp(double x, double y)
-        {
-        }
-
-        /// <inheritdoc/>
         public override void Move(double x, double y)
         {
+            base.Move(x, y);
+
             double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
             double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
             switch (_currentState)
@@ -298,6 +290,8 @@ namespace Core2D
         /// <inheritdoc/>
         public override void ToStateOne()
         {
+            base.ToStateOne();
+
             _style = _editor.Project.Options.HelperStyle;
             _helperPoint1 = XPoint.Create(0, 0, _editor.Project.Options.PointShape);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_helperPoint1);
@@ -308,6 +302,8 @@ namespace Core2D
         /// <inheritdoc/>
         public override void ToStateTwo()
         {
+            base.ToStateTwo();
+
             _style = _editor.Project.Options.HelperStyle;
             _line12 = XLine.Create(0, 0, _style, null);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_line12);
@@ -318,6 +314,8 @@ namespace Core2D
         /// <inheritdoc/>
         public override void ToStateThree()
         {
+            base.ToStateThree();
+
             _line43 = XLine.Create(0, 0, _style, null);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_line43);
             _line23 = XLine.Create(0, 0, _style, null);
@@ -327,13 +325,10 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public override void ToStateFour()
-        {
-        }
-
-        /// <inheritdoc/>
         public override void Move(BaseShape shape)
         {
+            base.Move(shape);
+
             var bezier = shape as XBezier;
 
             if (_line12 != null)
@@ -386,13 +381,10 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public override void Finalize(BaseShape shape)
-        {
-        }
-
-        /// <inheritdoc/>
         public override void Remove()
         {
+            base.Remove();
+
             if (_line12 != null)
             {
                 _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_line12);

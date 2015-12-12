@@ -3,11 +3,8 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.ComponentModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace Core2D
 {
@@ -176,7 +173,7 @@ namespace Core2D
         /// <summary>
         /// Gets or sets editor tool helpers dictionary.
         /// </summary>
-        public ImmutableDictionary<Tool, Helper> Helpers { get; set; }
+        public ImmutableDictionary<Tool, ToolBase> Tools { get; set; }
 
         /// <summary>
         /// Loads project.
@@ -2972,7 +2969,7 @@ namespace Core2D
         /// <param name="y"></param>
         public void LeftDown(double x, double y)
         {
-            Helpers[CurrentTool].LeftDown(x, y);
+            Tools[CurrentTool].LeftDown(x, y);
         }
 
         /// <summary>
@@ -2982,7 +2979,7 @@ namespace Core2D
         /// <param name="y"></param>
         public void LeftUp(double x, double y)
         {
-            Helpers[CurrentTool].LeftUp(x, y);
+            Tools[CurrentTool].LeftUp(x, y);
         }
 
         /// <summary>
@@ -2992,7 +2989,7 @@ namespace Core2D
         /// <param name="y"></param>
         public void RightDown(double x, double y)
         {
-            Helpers[CurrentTool].RightDown(x, y);
+            Tools[CurrentTool].RightDown(x, y);
         }
 
         /// <summary>
@@ -3002,7 +2999,7 @@ namespace Core2D
         /// <param name="y"></param>
         public void RightUp(double x, double y)
         {
-            Helpers[CurrentTool].RightUp(x, y);
+            Tools[CurrentTool].RightUp(x, y);
         }
 
         /// <summary>
@@ -3012,7 +3009,7 @@ namespace Core2D
         /// <param name="y"></param>
         public void Move(double x, double y)
         {
-            Helpers[CurrentTool].Move(x, y);
+            Tools[CurrentTool].Move(x, y);
         }
 
         /// <summary>
@@ -3041,20 +3038,20 @@ namespace Core2D
                 EnableHistory = enableHistory
             };
 
-            var helpers = ImmutableDictionary.CreateBuilder<Tool, Helper>();
-            helpers.Add(Tool.None, new NoneHelper(editor));
-            helpers.Add(Tool.Selection, new SelectionHelper(editor));
-            helpers.Add(Tool.Point, new PointHelper(editor));
-            helpers.Add(Tool.Line, new LineHelper(editor));
-            helpers.Add(Tool.Arc, new ArcHelper(editor));
-            helpers.Add(Tool.Bezier, new BezierHelper(editor));
-            helpers.Add(Tool.QBezier, new QBezierHelper(editor));
-            helpers.Add(Tool.Path, new PathHelper(editor));
-            helpers.Add(Tool.Rectangle, new RectangleHelper(editor));
-            helpers.Add(Tool.Ellipse, new EllipseHelper(editor));
-            helpers.Add(Tool.Text, new TextHelper(editor));
-            helpers.Add(Tool.Image, new ImageHelper(editor));
-            editor.Helpers = helpers.ToImmutable();
+            var tools = ImmutableDictionary.CreateBuilder<Tool, ToolBase>();
+            tools.Add(Tool.None, new ToolNone(editor));
+            tools.Add(Tool.Selection, new ToolSelection(editor));
+            tools.Add(Tool.Point, new ToolPoint(editor));
+            tools.Add(Tool.Line, new ToolLine(editor));
+            tools.Add(Tool.Arc, new ToolArc(editor));
+            tools.Add(Tool.Bezier, new ToolBezier(editor));
+            tools.Add(Tool.QBezier, new ToolQBezier(editor));
+            tools.Add(Tool.Path, new ToolPath(editor));
+            tools.Add(Tool.Rectangle, new ToolRectangle(editor));
+            tools.Add(Tool.Ellipse, new ToolEllipse(editor));
+            tools.Add(Tool.Text, new ToolText(editor));
+            tools.Add(Tool.Image, new ToolImage(editor));
+            editor.Tools = tools.ToImmutable();
 
             editor.Project = project;
             editor.ProjectPath = string.Empty;

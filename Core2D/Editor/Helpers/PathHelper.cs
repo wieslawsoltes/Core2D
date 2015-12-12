@@ -1,18 +1,14 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core2D
 {
     /// <summary>
     /// Helper class for <see cref="Tool.Path"/> editor.
     /// </summary>
-    public class PathHelper : Helper
+    public class ToolPath : ToolBase
     {
         private Editor _editor;
         private State _currentState = State.None;
@@ -55,10 +51,11 @@ namespace Core2D
         private XPoint _qbezierHelperPoint3;
 
         /// <summary>
-        /// Initialize new instance of <see cref="PathHelper"/> class.
+        /// Initialize new instance of <see cref="ToolPath"/> class.
         /// </summary>
         /// <param name="editor">The current <see cref="Editor"/> object.</param>
-        public PathHelper(Editor editor)
+        public ToolPath(Editor editor)
+            : base()
         {
             _editor = editor;
         }
@@ -1164,6 +1161,8 @@ namespace Core2D
         /// <inheritdoc/>
         public override void LeftDown(double x, double y)
         {
+            base.LeftDown(x, y);
+
             if (_isInitialized && _editor.CurrentPathTool != _previousPathTool)
             {
                 SwitchPathTool(x, y);
@@ -1201,13 +1200,10 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public override void LeftUp(double x, double y)
-        {
-        }
-
-        /// <inheritdoc/>
         public override void RightDown(double x, double y)
         {
+            base.RightDown(x, y);
+
             switch (_editor.CurrentPathTool)
             {
                 case PathTool.Line:
@@ -1234,13 +1230,10 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public override void RightUp(double x, double y)
-        {
-        }
-
-        /// <inheritdoc/>
         public override void Move(double x, double y)
         {
+            base.Move(x, y);
+
             if (_isInitialized && _editor.CurrentPathTool != _previousPathTool)
             {
                 SwitchPathTool(x, y);
@@ -1279,6 +1272,8 @@ namespace Core2D
         /// <inheritdoc/>
         public override void ToStateOne()
         {
+            base.ToStateOne();
+
             switch (_editor.CurrentPathTool)
             {
                 case PathTool.Line:
@@ -1307,6 +1302,8 @@ namespace Core2D
         /// <inheritdoc/>
         public override void ToStateTwo()
         {
+            base.ToStateTwo();
+
             switch (_editor.CurrentPathTool)
             {
                 case PathTool.Line:
@@ -1332,6 +1329,8 @@ namespace Core2D
         /// <inheritdoc/>
         public override void ToStateThree()
         {
+            base.ToStateThree();
+
             switch (_editor.CurrentPathTool)
             {
                 case PathTool.Line:
@@ -1352,13 +1351,10 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public override void ToStateFour()
-        {
-        }
-
-        /// <inheritdoc/>
         public override void Move(BaseShape shape)
         {
+            base.Move(shape);
+
             switch (_editor.CurrentPathTool)
             {
                 case PathTool.Line:
@@ -1385,13 +1381,10 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public override void Finalize(BaseShape shape)
-        {
-        }
-
-        /// <inheritdoc/>
         public override void Remove()
         {
+            base.Remove();
+
             switch (_editor.CurrentPathTool)
             {
                 case PathTool.Line:
