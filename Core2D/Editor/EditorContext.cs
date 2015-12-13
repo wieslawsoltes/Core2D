@@ -14,7 +14,6 @@ namespace Core2D
     /// </summary>
     public class EditorContext : ObservableObject, IDisposable
     {
-        private Commands _commands = new Commands();
         private Editor _editor;
         private IView _view;
         private Renderer[] _renderers;
@@ -29,15 +28,6 @@ namespace Core2D
         private RecentProject _currentRecentProject = default(RecentProject);
         private Container _containerToCopy = default(Container);
         private Document _documentToCopy = default(Document);
-
-        /// <summary>
-        /// Gets or sets editor commands.
-        /// </summary>
-        public Commands Commands
-        {
-            get { return _commands; }
-            set { Update(ref _commands, value); }
-        }
 
         /// <summary>
         /// Gets or sets current editor.
