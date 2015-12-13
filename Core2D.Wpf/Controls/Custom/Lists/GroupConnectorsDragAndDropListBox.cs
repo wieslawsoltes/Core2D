@@ -30,17 +30,10 @@ namespace Core2D.Wpf.Controls.Custom.Lists
             if (group == null)
                 return;
 
-            if (editor.EnableHistory)
-            {
-                var previous = group.Connectors;
-                var next = array;
-                editor.History.Snapshot(previous, next, (p) => group.Connectors = p);
-                group.Connectors = next;
-            }
-            else
-            {
-                group.Connectors = array;
-            }
+            var previous = group.Connectors;
+            var next = array;
+            editor.History.Snapshot(previous, next, (p) => group.Connectors = p);
+            group.Connectors = next;
         }
     }
 }

@@ -29,17 +29,10 @@ namespace Core2D.Wpf.Controls.Custom.Lists
 
             var container = editor.Project.CurrentContainer;
 
-            if (editor.EnableHistory)
-            {
-                var previous = container.Layers;
-                var next = array;
-                editor.History.Snapshot(previous, next, (p) => container.Layers = p);
-                container.Layers = next;
-            }
-            else
-            {
-                container.Layers = array;
-            }
+            var previous = container.Layers;
+            var next = array;
+            editor.History.Snapshot(previous, next, (p) => container.Layers = p);
+            container.Layers = next;
         }
     }
 }

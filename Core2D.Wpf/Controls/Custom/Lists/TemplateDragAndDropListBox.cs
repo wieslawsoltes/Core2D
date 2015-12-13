@@ -29,17 +29,10 @@ namespace Core2D.Wpf.Controls.Custom.Lists
 
             var project = editor.Project;
 
-            if (editor.EnableHistory)
-            {
-                var previous = project.Templates;
-                var next = array;
-                editor.History.Snapshot(previous, next, (p) => project.Templates = p);
-                project.Templates = next;
-            }
-            else
-            {
-                project.Templates = array;
-            }
+            var previous = project.Templates;
+            var next = array;
+            editor.History.Snapshot(previous, next, (p) => project.Templates = p);
+            project.Templates = next;
         }
     }
 }

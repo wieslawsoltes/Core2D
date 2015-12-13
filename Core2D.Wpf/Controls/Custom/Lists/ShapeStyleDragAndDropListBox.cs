@@ -29,17 +29,10 @@ namespace Core2D.Wpf.Controls.Custom.Lists
 
             var sg = editor.Project.CurrentStyleLibrary;
 
-            if (editor.EnableHistory)
-            {
-                var previous = sg.Items;
-                var next = array;
-                editor.History.Snapshot(previous, next, (p) => sg.Items = p);
-                sg.Items = next;
-            }
-            else
-            {
-                sg.Items = array;
-            }
+            var previous = sg.Items;
+            var next = array;
+            editor.History.Snapshot(previous, next, (p) => sg.Items = p);
+            sg.Items = next;
         }
     }
 }

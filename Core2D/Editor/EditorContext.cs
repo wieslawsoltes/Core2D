@@ -259,17 +259,10 @@ namespace Core2D
                         container = Container.Create(Constants.DefaultContainerName);
                     }
 
-                    if (_editor.EnableHistory)
-                    {
-                        var previous = document.Containers;
-                        var next = document.Containers.Add(container);
-                        _editor.History.Snapshot(previous, next, (p) => document.Containers = p);
-                        document.Containers = next;
-                    }
-                    else
-                    {
-                        document.Containers = document.Containers.Add(container);
-                    }
+                    var previous = document.Containers;
+                    var next = document.Containers.Add(container);
+                    _editor.History.Snapshot(previous, next, (p) => document.Containers = p);
+                    document.Containers = next;
 
                     _editor.Project.CurrentContainer = container;
                 }
@@ -288,17 +281,10 @@ namespace Core2D
                     container = Container.Create(Constants.DefaultContainerName);
                 }
 
-                if (_editor.EnableHistory)
-                {
-                    var previous = selected.Containers;
-                    var next = selected.Containers.Add(container);
-                    _editor.History.Snapshot(previous, next, (p) => selected.Containers = p);
-                    selected.Containers = next;
-                }
-                else
-                {
-                    selected.Containers = selected.Containers.Add(container);
-                }
+                var previous = selected.Containers;
+                var next = selected.Containers.Add(container);
+                _editor.History.Snapshot(previous, next, (p) => selected.Containers = p);
+                selected.Containers = next;
 
                 _editor.Project.CurrentContainer = container;
             }
@@ -314,27 +300,17 @@ namespace Core2D
                     document = Document.Create(Constants.DefaultDocumentName);
                 }
 
-                if (_editor.EnableHistory)
-                {
-                    var previous = _editor.Project.Documents;
-                    var next = _editor.Project.Documents.Add(document);
-                    _editor.History.Snapshot(previous, next, (p) => _editor.Project.Documents = p);
-                    _editor.Project.Documents = next;
-                }
-                else
-                {
-                    _editor.Project.Documents = _editor.Project.Documents.Add(document);
-                }
+                var previous = _editor.Project.Documents;
+                var next = _editor.Project.Documents.Add(document);
+                _editor.History.Snapshot(previous, next, (p) => _editor.Project.Documents = p);
+                _editor.Project.Documents = next;
 
                 _editor.Project.CurrentDocument = document;
                 _editor.Project.CurrentContainer = document.Containers.FirstOrDefault();
             }
             else if (item is EditorContext || item == null)
             {
-                if (_editor.EnableHistory)
-                {
-                    _editor.History.Reset();
-                }
+                _editor.History.Reset();
 
                 _editor.Unload();
 
@@ -377,7 +353,7 @@ namespace Core2D
         {
             try
             {
-                if (_editor.EnableHistory && _editor.History.CanUndo())
+                if (_editor.History.CanUndo())
                 {
                     _editor.Deselect();
                     _editor.History.Undo();
@@ -402,7 +378,7 @@ namespace Core2D
         {
             try
             {
-                if (_editor.EnableHistory && _editor.History.CanRedo())
+                if (_editor.History.CanRedo())
                 {
                     _editor.Deselect();
                     _editor.History.Redo();
@@ -577,17 +553,10 @@ namespace Core2D
                         builder[index] = clone;
                         document.Containers = builder.ToImmutable();
 
-                        if (_editor.EnableHistory)
-                        {
-                            var previous = document.Containers;
-                            var next = builder.ToImmutable();
-                            _editor.History.Snapshot(previous, next, (p) => document.Containers = p);
-                            document.Containers = next;
-                        }
-                        else
-                        {
-                            document.Containers = builder.ToImmutable();
-                        }
+                        var previous = document.Containers;
+                        var next = builder.ToImmutable();
+                        _editor.History.Snapshot(previous, next, (p) => document.Containers = p);
+                        document.Containers = next;
 
                         _editor.Project.CurrentContainer = clone;
                     }
@@ -600,17 +569,10 @@ namespace Core2D
                     var document = item as Document;
                     var clone = Clone(_containerToCopy);
 
-                    if (_editor.EnableHistory)
-                    {
-                        var previous = document.Containers;
-                        var next = document.Containers.Add(clone);
-                        _editor.History.Snapshot(previous, next, (p) => document.Containers = p);
-                        document.Containers = next;
-                    }
-                    else
-                    {
-                        document.Containers = document.Containers.Add(clone);
-                    }
+                    var previous = document.Containers;
+                    var next = document.Containers.Add(clone);
+                    _editor.History.Snapshot(previous, next, (p) => document.Containers = p);
+                    document.Containers = next;
 
                     _editor.Project.CurrentContainer = clone;
                 }
@@ -623,17 +585,10 @@ namespace Core2D
                     var builder = _editor.Project.Documents.ToBuilder();
                     builder[index] = clone;
 
-                    if (_editor.EnableHistory)
-                    {
-                        var previous = _editor.Project.Documents;
-                        var next = builder.ToImmutable();
-                        _editor.History.Snapshot(previous, next, (p) => _editor.Project.Documents = p);
-                        _editor.Project.Documents = next;
-                    }
-                    else
-                    {
-                        _editor.Project.Documents = builder.ToImmutable();
-                    }
+                    var previous = _editor.Project.Documents;
+                    var next = builder.ToImmutable();
+                    _editor.History.Snapshot(previous, next, (p) => _editor.Project.Documents = p);
+                    _editor.Project.Documents = next;
 
                     _editor.Project.CurrentDocument = clone;
                 }
@@ -1285,10 +1240,7 @@ namespace Core2D
             {
                 var project = Project.Open(path, _serializer);
 
-                if (_editor.EnableHistory)
-                {
-                    _editor.History.Reset();
-                }
+                _editor.History.Reset();
 
                 _editor.Unload();
                 _editor.Load(project, path);
@@ -1346,11 +1298,7 @@ namespace Core2D
         /// </summary>
         public void Close()
         {
-            if (_editor.EnableHistory)
-            {
-                _editor.History.Reset();
-            }
-
+            _editor.History.Reset();
             _editor.Unload();
         }
 
@@ -1426,17 +1374,10 @@ namespace Core2D
                             var json = Project.ReadUtf8Text(path);
                             var import = _serializer.Deserialize<ShapeStyle>(json);
 
-                            if (_editor.EnableHistory)
-                            {
-                                var previous = sg.Items;
-                                var next = sg.Items.Add(import);
-                                _editor.History.Snapshot(previous, next, (p) => sg.Items = p);
-                                sg.Items = next;
-                            }
-                            else
-                            {
-                                sg.Items = sg.Items.Add(import);
-                            }
+                            var previous = sg.Items;
+                            var next = sg.Items.Add(import);
+                            _editor.History.Snapshot(previous, next, (p) => sg.Items = p);
+                            sg.Items = next;
                         }
                         break;
                     case ImportType.Styles:
@@ -1451,17 +1392,10 @@ namespace Core2D
                                 builder.Add(style);
                             }
 
-                            if (_editor.EnableHistory)
-                            {
-                                var previous = sg.Items;
-                                var next = builder.ToImmutable();
-                                _editor.History.Snapshot(previous, next, (p) => sg.Items = p);
-                                sg.Items = next;
-                            }
-                            else
-                            {
-                                sg.Items = builder.ToImmutable();
-                            }
+                            var previous = sg.Items;
+                            var next = builder.ToImmutable();
+                            _editor.History.Snapshot(previous, next, (p) => sg.Items = p);
+                            sg.Items = next;
                         }
                         break;
                     case ImportType.StyleLibrary:
@@ -1470,17 +1404,10 @@ namespace Core2D
                             var json = Project.ReadUtf8Text(path);
                             var import = _serializer.Deserialize<Library<ShapeStyle>>(json);
 
-                            if (_editor.EnableHistory)
-                            {
-                                var previous = project.StyleLibraries;
-                                var next = project.StyleLibraries.Add(import);
-                                _editor.History.Snapshot(previous, next, (p) => project.StyleLibraries = p);
-                                project.StyleLibraries = next;
-                            }
-                            else
-                            {
-                                project.StyleLibraries = project.StyleLibraries.Add(import);
-                            }
+                            var previous = project.StyleLibraries;
+                            var next = project.StyleLibraries.Add(import);
+                            _editor.History.Snapshot(previous, next, (p) => project.StyleLibraries = p);
+                            project.StyleLibraries = next;
                         }
                         break;
                     case ImportType.StyleLibraries:
@@ -1495,17 +1422,10 @@ namespace Core2D
                                 builder.Add(sg);
                             }
 
-                            if (_editor.EnableHistory)
-                            {
-                                var previous = project.StyleLibraries;
-                                var next = builder.ToImmutable();
-                                _editor.History.Snapshot(previous, next, (p) => project.StyleLibraries = p);
-                                project.StyleLibraries = next;
-                            }
-                            else
-                            {
-                                project.StyleLibraries = builder.ToImmutable();
-                            }
+                            var previous = project.StyleLibraries;
+                            var next = builder.ToImmutable();
+                            _editor.History.Snapshot(previous, next, (p) => project.StyleLibraries = p);
+                            project.StyleLibraries = next;
                         }
                         break;
                     case ImportType.Group:
@@ -1518,17 +1438,10 @@ namespace Core2D
                             TryToRestoreStyles(shapes);
                             TryToRestoreRecords(shapes);
 
-                            if (_editor.EnableHistory)
-                            {
-                                var previous = gl.Items;
-                                var next = gl.Items.Add(import);
-                                _editor.History.Snapshot(previous, next, (p) => gl.Items = p);
-                                gl.Items = next;
-                            }
-                            else
-                            {
-                                gl.Items = gl.Items.Add(import);
-                            }
+                            var previous = gl.Items;
+                            var next = gl.Items.Add(import);
+                            _editor.History.Snapshot(previous, next, (p) => gl.Items = p);
+                            gl.Items = next;
                         }
                         break;
                     case ImportType.Groups:
@@ -1547,17 +1460,10 @@ namespace Core2D
                                 builder.Add(group);
                             }
 
-                            if (_editor.EnableHistory)
-                            {
-                                var previous = gl.Items;
-                                var next = builder.ToImmutable();
-                                _editor.History.Snapshot(previous, next, (p) => gl.Items = p);
-                                gl.Items = next;
-                            }
-                            else
-                            {
-                                gl.Items = builder.ToImmutable();
-                            }
+                            var previous = gl.Items;
+                            var next = builder.ToImmutable();
+                            _editor.History.Snapshot(previous, next, (p) => gl.Items = p);
+                            gl.Items = next;
                         }
                         break;
                     case ImportType.GroupLibrary:
@@ -1570,17 +1476,10 @@ namespace Core2D
                             TryToRestoreStyles(shapes);
                             TryToRestoreRecords(shapes);
 
-                            if (_editor.EnableHistory)
-                            {
-                                var previous = project.GroupLibraries;
-                                var next = project.GroupLibraries.Add(import);
-                                _editor.History.Snapshot(previous, next, (p) => project.GroupLibraries = p);
-                                project.GroupLibraries = next;
-                            }
-                            else
-                            {
-                                project.GroupLibraries = project.GroupLibraries.Add(import);
-                            }
+                            var previous = project.GroupLibraries;
+                            var next = project.GroupLibraries.Add(import);
+                            _editor.History.Snapshot(previous, next, (p) => project.GroupLibraries = p);
+                            project.GroupLibraries = next;
                         }
                         break;
                     case ImportType.GroupLibraries:
@@ -1599,17 +1498,10 @@ namespace Core2D
                                 builder.Add(library);
                             }
 
-                            if (_editor.EnableHistory)
-                            {
-                                var previous = project.GroupLibraries;
-                                var next = builder.ToImmutable();
-                                _editor.History.Snapshot(previous, next, (p) => project.GroupLibraries = p);
-                                project.GroupLibraries = next;
-                            }
-                            else
-                            {
-                                project.GroupLibraries = builder.ToImmutable();
-                            }
+                            var previous = project.GroupLibraries;
+                            var next = builder.ToImmutable();
+                            _editor.History.Snapshot(previous, next, (p) => project.GroupLibraries = p);
+                            project.GroupLibraries = next;
                         }
                         break;
                     case ImportType.Template:
@@ -1622,17 +1514,10 @@ namespace Core2D
                             TryToRestoreStyles(shapes);
                             TryToRestoreRecords(shapes);
 
-                            if (_editor.EnableHistory)
-                            {
-                                var previous = project.Templates;
-                                var next = project.Templates.Add(import);
-                                _editor.History.Snapshot(previous, next, (p) => project.Templates = p);
-                                project.Templates = next;
-                            }
-                            else
-                            {
-                                project.Templates = project.Templates.Add(import);
-                            }
+                            var previous = project.Templates;
+                            var next = project.Templates.Add(import);
+                            _editor.History.Snapshot(previous, next, (p) => project.Templates = p);
+                            project.Templates = next;
                         }
                         break;
                     case ImportType.Templates:
@@ -1651,17 +1536,10 @@ namespace Core2D
                                 builder.Add(template);
                             }
 
-                            if (_editor.EnableHistory)
-                            {
-                                var previous = project.Templates;
-                                var next = builder.ToImmutable();
-                                _editor.History.Snapshot(previous, next, (p) => project.Templates = p);
-                                project.Templates = next;
-                            }
-                            else
-                            {
-                                project.Templates = builder.ToImmutable();
-                            }
+                            var previous = project.Templates;
+                            var next = builder.ToImmutable();
+                            _editor.History.Snapshot(previous, next, (p) => project.Templates = p);
+                            project.Templates = next;
                         }
                         break;
                 }
@@ -2019,8 +1897,8 @@ namespace Core2D
         {
             try
             {
-                bool havePath =  false;
-                
+                bool havePath = false;
+
                 // Try to parse SVG path geometry. 
                 try
                 {
@@ -2034,20 +1912,20 @@ namespace Core2D
                         _editor.Project.Options.DefaultIsFilled);
 
                     Paste(Enumerable.Repeat(path, 1));
-                    
+
                     havePath = true;
                 }
                 catch (Exception)
                 {
                     havePath = false;
                 }
-                
+
                 // If not successful try to deserialize Json.
                 if (!havePath)
                 {
                     if (_serializer == null)
                         return;
-                    
+
                     var shapes = _serializer.Deserialize<IList<BaseShape>>(text);
                     if (shapes != null && shapes.Count() > 0)
                     {
@@ -2218,17 +2096,10 @@ namespace Core2D
                     builder.Add(shape);
                 }
 
-                if (_editor.EnableHistory)
-                {
-                    var previous = layer.Shapes;
-                    var next = builder.ToImmutable();
-                    _editor.History.Snapshot(previous, next, (p) => layer.Shapes = p);
-                    layer.Shapes = next;
-                }
-                else
-                {
-                    layer.Shapes = builder.ToImmutable();
-                }
+                var previous = layer.Shapes;
+                var next = builder.ToImmutable();
+                _editor.History.Snapshot(previous, next, (p) => layer.Shapes = p);
+                layer.Shapes = next;
 
                 if (shapes.Count() == 1)
                 {
@@ -2676,7 +2547,7 @@ namespace Core2D
         /// <returns>Returns true if can undo.</returns>
         public bool CanUndo()
         {
-            return _editor.EnableHistory && _editor.History.CanUndo();
+            return _editor.History.CanUndo();
         }
 
         /// <summary>
@@ -2685,7 +2556,7 @@ namespace Core2D
         /// <returns>Returns true if can redo.</returns>
         public bool CanRedo()
         {
-            return _editor.EnableHistory && _editor.History.CanRedo();
+            return _editor.History.CanRedo();
         }
     }
 }

@@ -21,7 +21,7 @@ namespace Core2D.Sample
             };
 
             var project = context.ProjectFactory.GetProject();
-            context.Editor = Editor.Create(project, null, false, false);
+            context.Editor = Editor.Create(project);
 
             var factory = new ShapeFactory(context.Editor);
             factory.Line(30, 30, 60, 30);
@@ -33,7 +33,7 @@ namespace Core2D.Sample
         static void CreateProjectUsingEditor()
         {
             var project = new ProjectFactory().GetProject();
-            var editor = Editor.Create(project, null, false, false);
+            var editor = Editor.Create(project);
 
             var factory = new ShapeFactory(editor);
             factory.Line(30, 30, 60, 30);
