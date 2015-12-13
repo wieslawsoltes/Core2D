@@ -258,6 +258,34 @@ namespace Core2D
         }
 
         /// <summary>
+        /// Initializes default <see cref="Editor"/> state.
+        /// </summary>
+        /// <param name="currentTool">The current tool.</param>
+        /// <param name="currentPathTool">The current path tool.</param>
+        public void Initialize(Tool currentTool = Tool.Selection, PathTool currentPathTool = PathTool.Line)
+        {
+            CurrentTool = currentTool;
+            CurrentPathTool = currentPathTool;
+
+            var tools = ImmutableDictionary.CreateBuilder<Tool, ToolBase>();
+            tools.Add(Tool.None, new ToolNone(this));
+            tools.Add(Tool.Selection, new ToolSelection(this));
+            tools.Add(Tool.Point, new ToolPoint(this));
+            tools.Add(Tool.Line, new ToolLine(this));
+            tools.Add(Tool.Arc, new ToolArc(this));
+            tools.Add(Tool.Bezier, new ToolBezier(this));
+            tools.Add(Tool.QBezier, new ToolQBezier(this));
+            tools.Add(Tool.Path, new ToolPath(this));
+            tools.Add(Tool.Rectangle, new ToolRectangle(this));
+            tools.Add(Tool.Ellipse, new ToolEllipse(this));
+            tools.Add(Tool.Text, new ToolText(this));
+            tools.Add(Tool.Image, new ToolImage(this));
+            Tools = tools.ToImmutable();
+
+            History = new History();
+        }
+
+        /// <summary>
         /// Loads project.
         /// </summary>
         /// <param name="project">The project to load.</param>
@@ -2717,38 +2745,6 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Performs freeing, releasing, or resetting unmanaged resources.
-        /// </summary>
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        /// <summary>
-        /// Performs freeing, releasing, or resetting unmanaged resources.
-        /// </summary>
-        ~Editor()
-        {
-            Dispose(false);
-        }
-
-        /// <summary>
-        /// Performs freeing, releasing, or resetting unmanaged resources.
-        /// </summary>
-        /// <param name="disposing">The flag indicating whether disposing.</param>
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                if (_log != null)
-                {
-                    _log.Close();
-                }
-            }
-        }
-
-        /// <summary>
         /// Create new project, document or container.
         /// </summary>
         /// <param name="item">The parent item.</param>
@@ -5074,31 +5070,35 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Initializes default <see cref="Editor"/> state.
+        /// Performs freeing, releasing, or resetting unmanaged resources.
         /// </summary>
-        /// <param name="currentTool">The current tool.</param>
-        /// <param name="currentPathTool">The current path tool.</param>
-        public void Initialize(Tool currentTool = Tool.Selection, PathTool currentPathTool = PathTool.Line)
+        public void Dispose()
         {
-            CurrentTool = currentTool;
-            CurrentPathTool = currentPathTool;
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
 
-            var tools = ImmutableDictionary.CreateBuilder<Tool, ToolBase>();
-            tools.Add(Tool.None, new ToolNone(this));
-            tools.Add(Tool.Selection, new ToolSelection(this));
-            tools.Add(Tool.Point, new ToolPoint(this));
-            tools.Add(Tool.Line, new ToolLine(this));
-            tools.Add(Tool.Arc, new ToolArc(this));
-            tools.Add(Tool.Bezier, new ToolBezier(this));
-            tools.Add(Tool.QBezier, new ToolQBezier(this));
-            tools.Add(Tool.Path, new ToolPath(this));
-            tools.Add(Tool.Rectangle, new ToolRectangle(this));
-            tools.Add(Tool.Ellipse, new ToolEllipse(this));
-            tools.Add(Tool.Text, new ToolText(this));
-            tools.Add(Tool.Image, new ToolImage(this));
-            Tools = tools.ToImmutable();
+        /// <summary>
+        /// Performs freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        ~Editor()
+        {
+            Dispose(false);
+        }
 
-            History = new History();
+        /// <summary>
+        /// Performs freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        /// <param name="disposing">The flag indicating whether disposing.</param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (_log != null)
+                {
+                    _log.Close();
+                }
+            }
         }
     }
 }
