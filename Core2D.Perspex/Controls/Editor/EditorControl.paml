@@ -13,23 +13,23 @@
              xmlns:state="clr-namespace:Core2D.Perspex.Controls.State;assembly=Core2D.Perspex"
              xmlns:style="clr-namespace:Core2D.Perspex.Controls.Style;assembly=Core2D.Perspex"
              xmlns:editor="clr-namespace:Core2D.Perspex.Controls.Editor;assembly=Core2D.Perspex"
-             Design.DataContext="{Static core:DesignerContext.Context}"
+             Design.DataContext="{Static core:DesignerContext.Editor}"
              Design.Width="1200"  Design.Height="540">
     <Grid RowDefinitions="50*,50*" ColumnDefinitions="200,Auto,*,Auto,250">
         <Border Classes="leftTop" Grid.Row="0" Grid.Column="0">
             <TabControl Classes="bottom">
                 <TabItem Header="Project" Classes="property">
-                    <project:ProjectControl DataContext="{Binding Path=Editor.Project, Mode=TwoWay}"/>
+                    <project:ProjectControl DataContext="{Binding Path=Project, Mode=TwoWay}"/>
                 </TabItem>
             </TabControl>
         </Border>
         <Border Classes="leftBottom" Grid.Row="1" Grid.Column="0">
             <TabControl Classes="bottom">
                 <TabItem Header="Groups" Classes="property">
-                    <project:GroupsControl DataContext="{Binding Path=Editor.Project, Mode=TwoWay}"/>
+                    <project:GroupsControl DataContext="{Binding Path=Project, Mode=TwoWay}"/>
                 </TabItem>
                 <TabItem Header="Databases" Classes="property">
-                    <project:DatabasesControl DataContext="{Binding Path=Editor.Project, Mode=TwoWay}"/>
+                    <project:DatabasesControl DataContext="{Binding Path=Project, Mode=TwoWay}"/>
                 </TabItem>
             </TabControl>
         </Border>
@@ -43,10 +43,10 @@
         <Border Classes="rightTop" Grid.Row="0" Grid.Column="4">
             <TabControl Classes="bottom">
                 <TabItem Header="Styles" Classes="property">
-                    <project:StylesControl DataContext="{Binding Path=Editor.Project, Mode=TwoWay}"/>
+                    <project:StylesControl DataContext="{Binding Path=Project, Mode=TwoWay}"/>
                 </TabItem>
                 <TabItem Header="Templates" Classes="property">
-                    <project:TemplatesControl DataContext="{Binding Path=Editor.Project, Mode=TwoWay}"/>
+                    <project:TemplatesControl DataContext="{Binding Path=Project, Mode=TwoWay}"/>
                 </TabItem>
             </TabControl>
         </Border>
@@ -54,27 +54,27 @@
             <TabControl Classes="bottom">
                 <TabItem Header="Shape" Classes="property">
                     <ScrollViewer>
-                        <ContentControl Content="{Binding Path=Editor.Project.CurrentContainer.CurrentShape, Mode=TwoWay}"/>
+                        <ContentControl Content="{Binding Path=Project.CurrentContainer.CurrentShape, Mode=TwoWay}"/>
                     </ScrollViewer>
                 </TabItem>
                 <TabItem Header="Data" Classes="property">
                     <ScrollViewer>
-                        <data:DataControl DataContext="{Binding Path=Editor.Renderers[0].State.SelectedShape.Data, Mode=TwoWay}"/>
+                        <data:DataControl DataContext="{Binding Path=Renderers[0].State.SelectedShape.Data, Mode=TwoWay}"/>
                     </ScrollViewer>
                 </TabItem>
                 <TabItem Header="Style" Classes="property">
                     <ScrollViewer>
-                        <style:ShapeStyleControl DataContext="{Binding Path=Editor.Project.CurrentStyleLibrary.Selected, Mode=TwoWay}"/>
+                        <style:ShapeStyleControl DataContext="{Binding Path=Project.CurrentStyleLibrary.Selected, Mode=TwoWay}"/>
                     </ScrollViewer>
                 </TabItem>
                 <TabItem Header="Container" Classes="property">
                     <ScrollViewer>
-                        <project:ContainerControl DataContext="{Binding Path=Editor.Project.CurrentContainer, Mode=TwoWay}"/>
+                        <project:ContainerControl DataContext="{Binding Path=Project.CurrentContainer, Mode=TwoWay}"/>
                     </ScrollViewer>
                 </TabItem>
                 <TabItem Header="Template" Classes="property">
                     <ScrollViewer>
-                        <project:ContainerControl DataContext="{Binding Path=Editor.Project.CurrentTemplate, Mode=TwoWay}"/>
+                        <project:ContainerControl DataContext="{Binding Path=Project.CurrentTemplate, Mode=TwoWay}"/>
                     </ScrollViewer>
                 </TabItem>
             </TabControl>

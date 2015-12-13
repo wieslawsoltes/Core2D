@@ -29,7 +29,7 @@ namespace Core2D.Perspex
     /// </summary>
     public class App : Application
     {
-        private EditorContext _context;
+        private Editor _editor;
         private Windows.MainWindow _mainWindow;
         private string _recentFileName = "Core2D.recent";
         private string _logFileName = "Core2D.log";
@@ -100,9 +100,9 @@ namespace Core2D.Perspex
         {
             try
             {
-                InitializeContext();
-                Commands.InitializeCommonCommands(_context);
-                InitializePlatformCommands(_context);
+                InitializeEditor();
+                Commands.InitializeCommonCommands(_editor);
+                InitializePlatformCommands(_editor);
 
                 LoadRecent();
 
@@ -112,21 +112,21 @@ namespace Core2D.Perspex
                     (sender, e) =>
                     {
                         SaveRecent();
-                        DeInitializeContext();
+                        DeInitializeEditor();
                     };
 
-                _context.View = _mainWindow;
+                _editor.View = _mainWindow;
 
-                _mainWindow.DataContext = _context;
+                _mainWindow.DataContext = _editor;
                 _mainWindow.Show();
 
                 Run(_mainWindow);
             }
             catch (Exception ex)
             {
-                if (_context != null && _context.Editor != null && _context.Editor.Log != null)
+                if (_editor != null && _editor != null && _editor.Log != null)
                 {
-                    _context.Editor.Log.LogError("{0}{1}{2}",
+                    _editor.Log.LogError("{0}{1}{2}",
                         ex.Message,
                         Environment.NewLine,
                         ex.StackTrace);
@@ -165,14 +165,14 @@ namespace Core2D.Perspex
                     var path = System.IO.Path.Combine(GetAssemblyPath(), _recentFileName);
                     if (System.IO.File.Exists(path))
                     {
-                        _context.LoadRecent(path);
+                        _editor.LoadRecent(path);
                     }
                 }
                 catch (Exception ex)
                 {
-                    if (_context.Editor.Log != null)
+                    if (_editor.Log != null)
                     {
-                        _context.Editor.Log.LogError("{0}{1}{2}",
+                        _editor.Log.LogError("{0}{1}{2}",
                             ex.Message,
                             Environment.NewLine,
                             ex.StackTrace);
@@ -191,13 +191,13 @@ namespace Core2D.Perspex
                 try
                 {
                     var path = System.IO.Path.Combine(GetAssemblyPath(), _recentFileName);
-                    _context.SaveRecent(path);
+                    _editor.SaveRecent(path);
                 }
                 catch (Exception ex)
                 {
-                    if (_context.Editor.Log != null)
+                    if (_editor.Log != null)
                     {
-                        _context.Editor.Log.LogError("{0}{1}{2}",
+                        _editor.Log.LogError("{0}{1}{2}",
                             ex.Message,
                             Environment.NewLine,
                             ex.StackTrace);
@@ -207,11 +207,11 @@ namespace Core2D.Perspex
         }
 
         /// <summary>
-        /// Initialize <see cref="EditorContext"/> object.
+        /// Initialize <see cref="Editor"/> object.
         /// </summary>
-        public void InitializeContext()
+        public void InitializeEditor()
         {
-            _context = new EditorContext()
+            _editor = new Editor()
             {
                 Renderers = new Renderer[] { new PerspexRenderer() },
                 ProjectFactory = new ProjectFactory(),
@@ -223,171 +223,174 @@ namespace Core2D.Perspex
                 CsvWriter = new CsvHelperWriter()
             };
 
-            _context.Renderers[0].State.EnableAutofit = true;
 
-            _context.InitializeEditor(new TraceLog(), System.IO.Path.Combine(GetAssemblyPath(), _logFileName), false);
-            _context.Editor.Renderers[0].State.DrawShapeState.Flags = ShapeStateFlags.Visible;
-            _context.Editor.GetImageKey = async () => await OnGetImageKey();
+            _editor.Initialize();
+
+            _editor.Renderers[0].State.EnableAutofit = true;
+            _editor.Log = new TraceLog();
+            _editor.Log.Initialize(System.IO.Path.Combine(GetAssemblyPath(), _logFileName));
+            _editor.Renderers[0].State.DrawShapeState.Flags = ShapeStateFlags.Visible;
+            _editor.GetImageKey = async () => await OnGetImageKey();
         }
 
         /// <summary>
-        /// Initialize platform commands used by <see cref="EditorContext"/>.
+        /// Initialize platform commands used by <see cref="Editor"/>.
         /// </summary>
-        /// <param name="context">The editor context instance.</param>
-        private void InitializePlatformCommands(EditorContext context)
+        /// <param name="editor">The editor instance.</param>
+        private void InitializePlatformCommands(Editor editor)
         {
             Commands.OpenCommand =
                 Command<object>.Create(
                     async (parameter) => await OnOpen(parameter),
-                    (parameter) => context.IsEditMode());
+                    (parameter) => editor.IsEditMode());
 
             Commands.SaveCommand =
                 Command.Create(
                     async () => await OnSave(),
-                    () => context.IsEditMode());
+                    () => editor.IsEditMode());
 
             Commands.SaveAsCommand =
                 Command.Create(
                     async () => await OnSaveAs(),
-                    () => context.IsEditMode());
+                    () => editor.IsEditMode());
 
             Commands.ExportCommand =
                 Command<object>.Create(
                     async (item) => await OnExport(item),
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ImportDataCommand =
                 Command<object>.Create(
                     async (item) => await OnImportData(),
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ExportDataCommand =
                 Command<object>.Create(
                     async (item) => await OnExportData(),
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.UpdateDataCommand =
                 Command<object>.Create(
                     async (item) => await OnUpdateData(),
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ImportStyleCommand =
                 Command<object>.Create(
                     async (item) => await OnImportObject(item, ImportType.Style),
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ImportStylesCommand =
                 Command<object>.Create(
                     async (item) => await OnImportObject(item, ImportType.Styles),
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ImportStyleLibraryCommand =
                 Command<object>.Create(
                     async (item) => await OnImportObject(item, ImportType.StyleLibrary),
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ImportStyleLibrariesCommand =
                 Command<object>.Create(
                     async (item) => await OnImportObject(item, ImportType.StyleLibraries),
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ImportGroupCommand =
                 Command<object>.Create(
                     async (item) => await OnImportObject(item, ImportType.Group),
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ImportGroupsCommand =
                 Command<object>.Create(
                     async (item) => await OnImportObject(item, ImportType.Groups),
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ImportGroupLibraryCommand =
                 Command<object>.Create(
                     async (item) => await OnImportObject(item, ImportType.GroupLibrary),
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ImportGroupLibrariesCommand =
                 Command<object>.Create(
                     async (item) => await OnImportObject(item, ImportType.GroupLibraries),
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ImportTemplateCommand =
                 Command<object>.Create(
                     async (item) => await OnImportObject(item, ImportType.Template),
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ImportTemplatesCommand =
                 Command<object>.Create(
                     async (item) => await OnImportObject(item, ImportType.Templates),
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ExportStyleCommand =
                 Command<object>.Create(
                     async (item) => await OnExportObject(item, ExportType.Style),
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ExportStylesCommand =
                 Command<object>.Create(
                     async (item) => await OnExportObject(item, ExportType.Styles),
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ExportStyleLibraryCommand =
                 Command<object>.Create(
                     async (item) => await OnExportObject(item, ExportType.StyleLibrary),
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ExportStyleLibrariesCommand =
                 Command<object>.Create(
                     async (item) => await OnExportObject(item, ExportType.StyleLibraries),
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ExportGroupCommand =
                 Command<object>.Create(
                     async (item) => await OnExportObject(item, ExportType.Group),
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ExportGroupsCommand =
                 Command<object>.Create(
                     async (item) => await OnExportObject(item, ExportType.Groups),
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ExportGroupLibraryCommand =
                 Command<object>.Create(
                     async (item) => await OnExportObject(item, ExportType.GroupLibrary),
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ExportGroupLibrariesCommand =
                 Command<object>.Create(
                     async (item) => await OnExportObject(item, ExportType.GroupLibraries),
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ExportTemplateCommand =
                 Command<object>.Create(
                     async (item) => await OnExportObject(item, ExportType.Template),
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ExportTemplatesCommand =
                 Command<object>.Create(
                     async (item) => await OnExportObject(item, ExportType.Templates),
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ZoomResetCommand =
                 Command.Create(
-                    () => context.Editor.ResetZoom(),
+                    () => editor.ResetZoom(),
                     () => true);
 
             Commands.ZoomExtentCommand =
                 Command.Create(
-                    () => context.Editor.ExtentZoom(),
+                    () => editor.ExtentZoom(),
                     () => true);
         }
 
         /// <summary>
-        /// De-initialize <see cref="EditorContext"/> object.
+        /// De-initialize <see cref="Editor"/> object.
         /// </summary>
-        public void DeInitializeContext()
+        public void DeInitializeEditor()
         {
-            _context.Dispose();
+            _editor.Dispose();
         }
 
         /// <summary>
@@ -405,16 +408,16 @@ namespace Core2D.Perspex
                 {
                     var path = result.FirstOrDefault();
                     var bytes = System.IO.File.ReadAllBytes(path);
-                    var key = _context.Editor.Project.AddImageFromFile(path, bytes);
+                    var key = _editor.Project.AddImageFromFile(path, bytes);
                     return key;
                 }
                 return null;
             }
             catch (Exception ex)
             {
-                if (_context.Editor.Log != null)
+                if (_editor.Log != null)
                 {
-                    _context.Editor.Log.LogError("{0}{1}{2}",
+                    _editor.Log.LogError("{0}{1}{2}",
                         ex.Message,
                         Environment.NewLine,
                         ex.StackTrace);
@@ -441,8 +444,8 @@ namespace Core2D.Perspex
                     if (result != null)
                     {
                         var path = result.FirstOrDefault();
-                        _context.Open(path);
-                        _context.Editor.Invalidate();
+                        _editor.Open(path);
+                        _editor.Invalidate();
                     }
                 }
                 else
@@ -450,15 +453,15 @@ namespace Core2D.Perspex
                     string path = parameter as string;
                     if (path != null && System.IO.File.Exists(path))
                     {
-                        _context.Open(path);
+                        _editor.Open(path);
                     }
                 }
             }
             catch (Exception ex)
             {
-                if (_context.Editor.Log != null)
+                if (_editor.Log != null)
                 {
-                    _context.Editor.Log.LogError("{0}{1}{2}",
+                    _editor.Log.LogError("{0}{1}{2}",
                         ex.Message,
                         Environment.NewLine,
                         ex.StackTrace);
@@ -474,9 +477,9 @@ namespace Core2D.Perspex
         {
             try
             {
-                if (!string.IsNullOrEmpty(_context.Editor.ProjectPath))
+                if (!string.IsNullOrEmpty(_editor.ProjectPath))
                 {
-                    _context.Save(_context.Editor.ProjectPath);
+                    _editor.Save(_editor.ProjectPath);
                 }
                 else
                 {
@@ -485,9 +488,9 @@ namespace Core2D.Perspex
             }
             catch (Exception ex)
             {
-                if (_context.Editor.Log != null)
+                if (_editor.Log != null)
                 {
-                    _context.Editor.Log.LogError("{0}{1}{2}",
+                    _editor.Log.LogError("{0}{1}{2}",
                         ex.Message,
                         Environment.NewLine,
                         ex.StackTrace);
@@ -503,24 +506,24 @@ namespace Core2D.Perspex
         {
             try
             {
-                if (_context.Editor.Project != null)
+                if (_editor.Project != null)
                 {
                     var dlg = new SaveFileDialog();
                     dlg.Filters.Add(new FileDialogFilter() { Name = "Project", Extensions = { "project" } });
                     dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
-                    dlg.InitialFileName = _context.Editor.Project.Name;
+                    dlg.InitialFileName = _editor.Project.Name;
                     var result = await dlg.ShowAsync(_mainWindow);
                     if (result != null)
                     {
-                        _context.Save(result);
+                        _editor.Save(result);
                     }
                 }
             }
             catch (Exception ex)
             {
-                if (_context.Editor.Log != null)
+                if (_editor.Log != null)
                 {
-                    _context.Editor.Log.LogError("{0}{1}{2}",
+                    _editor.Log.LogError("{0}{1}{2}",
                         ex.Message,
                         Environment.NewLine,
                         ex.StackTrace);
@@ -551,9 +554,9 @@ namespace Core2D.Perspex
                 {
                     name = (item as Project).Name;
                 }
-                else if (item is EditorContext)
+                else if (item is Editor)
                 {
-                    var editor = (item as EditorContext).Editor;
+                    var editor = (item as Editor);
                     if (editor.Project == null)
                         return;
 
@@ -562,11 +565,11 @@ namespace Core2D.Perspex
                 }
                 else if (item == null)
                 {
-                    if (_context.Editor.Project == null)
+                    if (_editor.Project == null)
                         return;
 
-                    name = _context.Editor.Project.Name;
-                    item = _context.Editor.Project;
+                    name = _editor.Project.Name;
+                    item = _editor.Project;
                 }
 
                 var dlg = new SaveFileDialog();
@@ -581,20 +584,20 @@ namespace Core2D.Perspex
 
                     if (ext == ".pdf")
                     {
-                        _context.ExportAsPdf(result, item);
+                        _editor.ExportAsPdf(result, item);
                     }
 
                     if (ext == ".dxf")
                     {
-                        _context.ExportAsDxf(result);
+                        _editor.ExportAsDxf(result);
                     }
                 }
             }
             catch (Exception ex)
             {
-                if (_context.Editor.Log != null)
+                if (_editor.Log != null)
                 {
-                    _context.Editor.Log.LogError("{0}{1}{2}",
+                    _editor.Log.LogError("{0}{1}{2}",
                         ex.Message,
                         Environment.NewLine,
                         ex.StackTrace);
@@ -610,7 +613,7 @@ namespace Core2D.Perspex
         {
             try
             {
-                if (_context.Editor.Project != null)
+                if (_editor.Project != null)
                 {
                     var dlg = new OpenFileDialog();
                     dlg.Filters.Add(new FileDialogFilter() { Name = "Csv", Extensions = { "csv" } });
@@ -619,15 +622,15 @@ namespace Core2D.Perspex
                     if (result != null)
                     {
                         var path = result.FirstOrDefault();
-                        _context.ImportData(path);
+                        _editor.ImportData(path);
                     }
                 }
             }
             catch (Exception ex)
             {
-                if (_context.Editor.Log != null)
+                if (_editor.Log != null)
                 {
-                    _context.Editor.Log.LogError("{0}{1}{2}",
+                    _editor.Log.LogError("{0}{1}{2}",
                         ex.Message,
                         Environment.NewLine,
                         ex.StackTrace);
@@ -643,9 +646,9 @@ namespace Core2D.Perspex
         {
             try
             {
-                if (_context.Editor.Project != null && _context.Editor.Project.CurrentDatabase != null)
+                if (_editor.Project != null && _editor.Project.CurrentDatabase != null)
                 {
-                    var database = _context.Editor.Project.CurrentDatabase;
+                    var database = _editor.Project.CurrentDatabase;
 
                     var dlg = new SaveFileDialog();
                     dlg.Filters.Add(new FileDialogFilter() { Name = "Csv", Extensions = { "csv" } });
@@ -654,15 +657,15 @@ namespace Core2D.Perspex
                     var result = await dlg.ShowAsync(_mainWindow);
                     if (result != null)
                     {
-                        _context.ExportData(result, database);
+                        _editor.ExportData(result, database);
                     }
                 }
             }
             catch (Exception ex)
             {
-                if (_context.Editor.Log != null)
+                if (_editor.Log != null)
                 {
-                    _context.Editor.Log.LogError("{0}{1}{2}",
+                    _editor.Log.LogError("{0}{1}{2}",
                         ex.Message,
                         Environment.NewLine,
                         ex.StackTrace);
@@ -678,9 +681,9 @@ namespace Core2D.Perspex
         {
             try
             {
-                if (_context.Editor.Project != null && _context.Editor.Project.CurrentDatabase != null)
+                if (_editor.Project != null && _editor.Project.CurrentDatabase != null)
                 {
-                    var database = _context.Editor.Project.CurrentDatabase;
+                    var database = _editor.Project.CurrentDatabase;
 
                     var dlg = new OpenFileDialog();
                     dlg.Filters.Add(new FileDialogFilter() { Name = "Csv", Extensions = { "csv" } });
@@ -689,15 +692,15 @@ namespace Core2D.Perspex
                     if (result != null)
                     {
                         var path = result.FirstOrDefault();
-                        _context.UpdateData(path, database);
+                        _editor.UpdateData(path, database);
                     }
                 }
             }
             catch (Exception ex)
             {
-                if (_context.Editor.Log != null)
+                if (_editor.Log != null)
                 {
-                    _context.Editor.Log.LogError("{0}{1}{2}",
+                    _editor.Log.LogError("{0}{1}{2}",
                         ex.Message,
                         Environment.NewLine,
                         ex.StackTrace);
@@ -773,16 +776,16 @@ namespace Core2D.Perspex
                     {
                         foreach (var path in results)
                         {
-                            _context.ImportObject(path, item, type);
+                            _editor.ImportObject(path, item, type);
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                if (_context.Editor.Log != null)
+                if (_editor.Log != null)
                 {
-                    _context.Editor.Log.LogError("{0}{1}{2}",
+                    _editor.Log.LogError("{0}{1}{2}",
                         ex.Message,
                         Environment.NewLine,
                         ex.StackTrace);
@@ -867,15 +870,15 @@ namespace Core2D.Perspex
                     var result = await dlg.ShowAsync(_mainWindow);
                     if (result != null)
                     {
-                        _context.ExportObject(result, item, type);
+                        _editor.ExportObject(result, item, type);
                     }
                 }
             }
             catch (Exception ex)
             {
-                if (_context.Editor.Log != null)
+                if (_editor.Log != null)
                 {
-                    _context.Editor.Log.LogError("{0}{1}{2}",
+                    _editor.Log.LogError("{0}{1}{2}",
                         ex.Message,
                         Environment.NewLine,
                         ex.StackTrace);

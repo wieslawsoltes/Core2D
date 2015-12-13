@@ -10,18 +10,18 @@
         Width="1324" Height="670"
         Background="#FFFFFFFF"
         UseLayoutRounding="True"
-        Design.DataContext="{Static core:DesignerContext.Context}"
+        Design.DataContext="{Static core:DesignerContext.Editor}"
         Design.Width="1200" Design.Height="580">
     <Window.Title>
         <MultiBinding Mode="OneWay" Converter="{Static converters:EditorToTitleMultiConverter.Instance}">
-            <Binding Path="Editor.Project.Name"/>
-            <Binding Path="Editor.IsProjectDirty"/>
+            <Binding Path="Project.Name"/>
+            <Binding Path="IsProjectDirty"/>
         </MultiBinding>
     </Window.Title>
     <Grid Name="layout" RowDefinitions="Auto,*,Auto">
         <editor:MenuControl Name="menu" Grid.Row="0"/>
-        <editor:EditorControl Name="editor" Grid.Row="1" IsVisible="{Binding Path=Editor.Project, Converter={Static converters:IsNotNullConverter.Instance}}"/>
-        <editor:DashboardControl Name="dashboard" Grid.Row="1" IsVisible="{Binding Path=Editor.Project, Converter={Static converters:IsNullConverter.Instance}}"/>
-        <editor:StatusControl Name="status" Grid.Row="2" IsVisible="{Binding Path=Editor.Project, Converter={Static converters:IsNotNullConverter.Instance}}"/>
+        <editor:EditorControl Name="editor" Grid.Row="1" IsVisible="{Binding Path=Project, Converter={Static converters:IsNotNullConverter.Instance}}"/>
+        <editor:DashboardControl Name="dashboard" Grid.Row="1" IsVisible="{Binding Path=Project, Converter={Static converters:IsNullConverter.Instance}}"/>
+        <editor:StatusControl Name="status" Grid.Row="2" IsVisible="{Binding Path=Project, Converter={Static converters:IsNotNullConverter.Instance}}"/>
     </Grid>
 </Window>

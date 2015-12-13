@@ -36,17 +36,17 @@ namespace Core2D.Perspex.Controls.Editor
         /// </summary>
         private void InitializeState()
         {
-            var context = this.DataContext as EditorContext;
-            if (context == null)
+            var editor = this.DataContext as Core2D.Editor;
+            if (editor == null)
                 return;
 
-            context.Editor.Invalidate = () => this.InvalidateVisual();
-            context.Editor.ResetZoom = () => this.OnZoomReset();
-            context.Editor.ExtentZoom = () => this.OnZoomExtent();
+            editor.Invalidate = () => this.InvalidateVisual();
+            editor.ResetZoom = () => this.OnZoomReset();
+            editor.ExtentZoom = () => this.OnZoomExtent();
 
-            _state = new ZoomState(context.Editor);
+            _state = new ZoomState(editor);
 
-            if (context.Renderers != null && context.Renderers[0].State.EnableAutofit)
+            if (editor.Renderers != null && editor.Renderers[0].State.EnableAutofit)
             {
                 AutoFit(this.Bounds.Width, this.Bounds.Height);
             }
@@ -111,10 +111,10 @@ namespace Core2D.Perspex.Controls.Editor
                     if (_state == null)
                         return;
 
-                    if (context == null || context.Editor == null || context.Editor.Project == null)
+                    if (editor == null || editor.Project == null)
                         return;
 
-                    var container = context.Editor.Project.CurrentContainer;
+                    var container = editor.Project.CurrentContainer;
                     if (container == null)
                         return;
 
@@ -137,12 +137,10 @@ namespace Core2D.Perspex.Controls.Editor
         /// <returns>The actual size used.</returns>
         protected override Size ArrangeOverride(Size finalSize)
         {
-            var context = this.DataContext as EditorContext;
-            if (context != null
-                && context.Editor != null
-                && context.Editor.Project != null)
+            var editor = this.DataContext as Core2D.Editor;
+            if (editor != null && editor.Project != null)
             {
-                if (context.Renderers != null && context.Renderers[0].State.EnableAutofit)
+                if (editor.Renderers != null && editor.Renderers[0].State.EnableAutofit)
                 {
                     AutoFit(finalSize.Width, finalSize.Height);
                 }
@@ -165,13 +163,11 @@ namespace Core2D.Perspex.Controls.Editor
             if (_state == null)
                 return;
 
-            var context = this.DataContext as EditorContext;
-            if (context == null
-                || context.Editor == null
-                || context.Editor.Project == null)
+            var editor = this.DataContext as Core2D.Editor;
+            if (editor == null || editor.Project == null)
                 return;
 
-            var container = context.Editor.Project.CurrentContainer;
+            var container = editor.Project.CurrentContainer;
             if (container == null)
                 return;
 
@@ -181,7 +177,7 @@ namespace Core2D.Perspex.Controls.Editor
                 container.Template.Width,
                 container.Template.Height);
 
-            context.Editor.Invalidate();
+            editor.Invalidate();
         }
 
         /// <summary>
@@ -194,13 +190,11 @@ namespace Core2D.Perspex.Controls.Editor
             if (_state == null)
                 return;
 
-            var context = this.DataContext as EditorContext;
-            if (context == null
-                || context.Editor == null
-                || context.Editor.Project == null)
+            var editor = this.DataContext as Core2D.Editor;
+            if (editor == null || editor.Project == null)
                 return;
 
-            var container = context.Editor.Project.CurrentContainer;
+            var container = editor.Project.CurrentContainer;
             if (container == null)
                 return;
 
@@ -210,7 +204,7 @@ namespace Core2D.Perspex.Controls.Editor
                 container.Template.Width,
                 container.Template.Height);
 
-            context.Editor.Invalidate();
+            editor.Invalidate();
         }
 
         /// <summary>
@@ -218,12 +212,12 @@ namespace Core2D.Perspex.Controls.Editor
         /// </summary>
         public void OnZoomReset()
         {
-            var context = this.DataContext as EditorContext;
-            if (context == null)
+            var editor = this.DataContext as Core2D.Editor;
+            if (editor == null)
                 return;
 
             ResetZoom(this.Bounds.Width, this.Bounds.Height);
-            context.Editor.Invalidate();
+            editor.Invalidate();
         }
 
         /// <summary>
@@ -231,12 +225,12 @@ namespace Core2D.Perspex.Controls.Editor
         /// </summary>
         public void OnZoomExtent()
         {
-            var context = this.DataContext as EditorContext;
-            if (context == null)
+            var editor = this.DataContext as Core2D.Editor;
+            if (editor == null)
                 return;
 
             AutoFit(this.Bounds.Width, this.Bounds.Height);
-            context.Editor.Invalidate();
+            editor.Invalidate();
         }
 
         /// <summary>
@@ -260,14 +254,12 @@ namespace Core2D.Perspex.Controls.Editor
         /// <param name="dc">The drawing context.</param>
         private void Draw(DrawingContext dc)
         {
-            var context = this.DataContext as EditorContext;
-            if (context == null
-                || context.Editor == null
-                || context.Editor.Project == null)
+            var editor = this.DataContext as Core2D.Editor;
+            if (editor == null || editor.Project == null)
                 return;
 
-            var renderer = context.Editor.Renderers[0];
-            var container = context.Editor.Project.CurrentContainer;
+            var renderer = editor.Renderers[0];
+            var container = editor.Project.CurrentContainer;
             if (container == null)
                 return;
 
