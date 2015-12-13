@@ -15,7 +15,7 @@ namespace Core2D.Wpf
     /// </summary>
     public partial class App : Application
     {
-        private EditorContext _context;
+        private Editor _editor;
         private Windows.MainWindow _mainWindow;
         private bool _isLoaded = false;
         private string _recentFileName = "Core2D.recent";
@@ -38,16 +38,16 @@ namespace Core2D.Wpf
         /// </summary>
         public void Start()
         {
-            InitializeContext();
+            InitializeEditor();
             LoadRecent();
 
-            Commands.InitializeCommonCommands(_context);
-            InitializePlatformCommands(_context);
+            Commands.InitializeCommonCommands(_editor);
+            InitializePlatformCommands(_editor);
 
             _mainWindow = new Windows.MainWindow();
 
-            _mainWindow.InitializeZoom(_context);
-            _mainWindow.InitializeDrop(_context);
+            _mainWindow.InitializeZoom(_editor);
+            _mainWindow.InitializeDrop(_editor);
 
             _mainWindow.Loaded +=
                 (sender, e) =>
@@ -59,7 +59,7 @@ namespace Core2D.Wpf
 
                     if (_restoreLayout)
                     {
-                        _mainWindow.AutoLoadLayout(_context);
+                        _mainWindow.AutoLoadLayout(_editor);
                     }
                 };
 
@@ -76,15 +76,15 @@ namespace Core2D.Wpf
 
                 if (_restoreLayout)
                 {
-                    _mainWindow.AutoSaveLayout(_context);
+                    _mainWindow.AutoSaveLayout(_editor);
                 }
 
                 DeInitializeContext();
             };
 
-            _context.View = _mainWindow;
+            _editor.View = _mainWindow;
 
-            _mainWindow.DataContext = _context;
+            _mainWindow.DataContext = _editor;
 
             try
             {
@@ -92,9 +92,9 @@ namespace Core2D.Wpf
             }
             catch (Exception ex)
             {
-                if (_context.Editor.Log != null)
+                if (_editor.Log != null)
                 {
-                    _context.Editor.Log.LogError("{0}{1}{2}",
+                    _editor.Log.LogError("{0}{1}{2}",
                         ex.Message,
                         Environment.NewLine,
                         ex.StackTrace);
@@ -126,14 +126,14 @@ namespace Core2D.Wpf
                     var path = System.IO.Path.Combine(GetAssemblyPath(), _recentFileName);
                     if (System.IO.File.Exists(path))
                     {
-                        _context.LoadRecent(path);
+                        _editor.LoadRecent(path);
                     }
                 }
                 catch (Exception ex)
                 {
-                    if (_context.Editor.Log != null)
+                    if (_editor.Log != null)
                     {
-                        _context.Editor.Log.LogError("{0}{1}{2}",
+                        _editor.Log.LogError("{0}{1}{2}",
                             ex.Message,
                             Environment.NewLine,
                             ex.StackTrace);
@@ -152,13 +152,13 @@ namespace Core2D.Wpf
                 try
                 {
                     var path = System.IO.Path.Combine(GetAssemblyPath(), _recentFileName);
-                    _context.SaveRecent(path);
+                    _editor.SaveRecent(path);
                 }
                 catch (Exception ex)
                 {
-                    if (_context.Editor.Log != null)
+                    if (_editor.Log != null)
                     {
-                        _context.Editor.Log.LogError("{0}{1}{2}",
+                        _editor.Log.LogError("{0}{1}{2}",
                             ex.Message,
                             Environment.NewLine,
                             ex.StackTrace);
@@ -168,11 +168,11 @@ namespace Core2D.Wpf
         }
 
         /// <summary>
-        /// Initialize <see cref="EditorContext"/> object.
+        /// Initialize <see cref="Editor"/> object.
         /// </summary>
-        private void InitializeContext()
+        private void InitializeEditor()
         {
-            _context = new EditorContext()
+            _editor = new Editor()
             {
                 Renderers = new Renderer[] { new WpfRenderer(), new WpfRenderer() },
                 ProjectFactory = new ProjectFactory(),
@@ -184,159 +184,161 @@ namespace Core2D.Wpf
                 CsvWriter = new CsvHelperWriter()
             };
 
-            _context.Renderers[0].State.EnableAutofit = true;
+            _editor.Initialize();
 
-            _context.InitializeEditor(new TraceLog(), System.IO.Path.Combine(GetAssemblyPath(), _logFileName), false);
-            _context.Editor.Renderers[0].State.DrawShapeState.Flags = ShapeStateFlags.Visible;
-            _context.Editor.Renderers[1].State.DrawShapeState.Flags = ShapeStateFlags.Visible;
-            _context.Editor.GetImageKey = async () => await GetImageKey();
+            _editor.Renderers[0].State.EnableAutofit = true;
+            _editor.Log = new TraceLog();
+            _editor.Log.Initialize(System.IO.Path.Combine(GetAssemblyPath(), _logFileName));
+            _editor.Renderers[0].State.DrawShapeState.Flags = ShapeStateFlags.Visible;
+            _editor.Renderers[1].State.DrawShapeState.Flags = ShapeStateFlags.Visible;
+            _editor.GetImageKey = async () => await GetImageKey();
         }
 
         /// <summary>
-        /// Initialize platform commands used by <see cref="EditorContext"/>.
+        /// Initialize platform commands used by <see cref="Editor"/>.
         /// </summary>
-        /// <param name="context">The editor context instance.</param>
-        private void InitializePlatformCommands(EditorContext context)
+        /// <param name="editor">The editor instance.</param>
+        private void InitializePlatformCommands(Editor editor)
         {
             Commands.OpenCommand =
                 Command<object>.Create(
                     (parameter) => OnOpen(parameter),
-                    (parameter) => context.IsEditMode());
+                    (parameter) => editor.IsEditMode());
 
             Commands.SaveCommand =
                 Command.Create(
                     () => OnSave(),
-                    () => context.IsEditMode());
+                    () => editor.IsEditMode());
 
             Commands.SaveAsCommand =
                 Command.Create(
                     () => OnSaveAs(),
-                    () => context.IsEditMode());
+                    () => editor.IsEditMode());
 
             Commands.ExportCommand =
                 Command<object>.Create(
                     (item) => OnExport(item),
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ImportDataCommand =
                 Command<object>.Create(
                     (item) => OnImportData(),
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ExportDataCommand =
                 Command<object>.Create(
                     (item) => OnExportData(),
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.UpdateDataCommand =
                 Command<object>.Create(
                     (item) => OnUpdateData(),
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ImportStyleCommand =
                 Command<object>.Create(
                     (item) => OnImportObject(item, ImportType.Style),
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ImportStylesCommand =
                 Command<object>.Create(
                     (item) => OnImportObject(item, ImportType.Styles),
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ImportStyleLibraryCommand =
                 Command<object>.Create(
                     (item) => OnImportObject(item, ImportType.StyleLibrary),
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ImportStyleLibrariesCommand =
                 Command<object>.Create(
                     (item) => OnImportObject(item, ImportType.StyleLibraries),
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ImportGroupCommand =
                 Command<object>.Create(
                     (item) => OnImportObject(item, ImportType.Group),
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ImportGroupsCommand =
                 Command<object>.Create(
                     (item) => OnImportObject(item, ImportType.Groups),
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ImportGroupLibraryCommand =
                 Command<object>.Create(
                     (item) => OnImportObject(item, ImportType.GroupLibrary),
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ImportGroupLibrariesCommand =
                 Command<object>.Create(
                     (item) => OnImportObject(item, ImportType.GroupLibraries),
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ImportTemplateCommand =
                 Command<object>.Create(
                     (item) => OnImportObject(item, ImportType.Template),
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ImportTemplatesCommand =
                 Command<object>.Create(
                     (item) => OnImportObject(item, ImportType.Templates),
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ExportStyleCommand =
                 Command<object>.Create(
                     (item) => OnExportObject(item, ExportType.Style),
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ExportStylesCommand =
                 Command<object>.Create(
                     (item) => OnExportObject(item, ExportType.Styles),
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ExportStyleLibraryCommand =
                 Command<object>.Create(
                     (item) => OnExportObject(item, ExportType.StyleLibrary),
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ExportStyleLibrariesCommand =
                 Command<object>.Create(
                     (item) => OnExportObject(item, ExportType.StyleLibraries),
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ExportGroupCommand =
                 Command<object>.Create(
                     (item) => OnExportObject(item, ExportType.Group),
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ExportGroupsCommand =
                 Command<object>.Create(
                     (item) => OnExportObject(item, ExportType.Groups),
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ExportGroupLibraryCommand =
                 Command<object>.Create(
                     (item) => OnExportObject(item, ExportType.GroupLibrary),
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ExportGroupLibrariesCommand =
                 Command<object>.Create(
                     (item) => OnExportObject(item, ExportType.GroupLibraries),
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ExportTemplateCommand =
                 Command<object>.Create(
                     (item) => OnExportObject(item, ExportType.Template),
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ExportTemplatesCommand =
                 Command<object>.Create(
                     (item) => OnExportObject(item, ExportType.Templates),
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.CopyAsEmfCommand =
                 Command.Create(
                     () => OnCopyAsEmf(),
-                    () => context.IsEditMode());
+                    () => editor.IsEditMode());
 
             Commands.ZoomResetCommand =
                 Command.Create(
@@ -365,11 +367,11 @@ namespace Core2D.Wpf
         }
 
         /// <summary>
-        /// De-initialize <see cref="EditorContext"/> object.
+        /// De-initialize <see cref="Editor"/> object.
         /// </summary>
         private void DeInitializeContext()
         {
-            _context.Dispose();
+            _editor.Dispose();
         }
 
         /// <summary>
@@ -391,14 +393,14 @@ namespace Core2D.Wpf
                 {
                     var path = dlg.FileName;
                     var bytes = System.IO.File.ReadAllBytes(path);
-                    var key = _context.Editor.Project.AddImageFromFile(path, bytes);
+                    var key = _editor.Project.AddImageFromFile(path, bytes);
                     return await Task.Run(() => key);
                 }
                 catch (Exception ex)
                 {
-                    if (_context.Editor.Log != null)
+                    if (_editor.Log != null)
                     {
-                        _context.Editor.Log.LogError("{0}{1}{2}",
+                        _editor.Log.LogError("{0}{1}{2}",
                             ex.Message,
                             Environment.NewLine,
                             ex.StackTrace);
@@ -425,7 +427,7 @@ namespace Core2D.Wpf
 
                 if (dlg.ShowDialog(_mainWindow) == true)
                 {
-                    _context.Open(dlg.FileName);
+                    _editor.Open(dlg.FileName);
                 }
             }
             else
@@ -433,7 +435,7 @@ namespace Core2D.Wpf
                 string path = parameter as string;
                 if (path != null && System.IO.File.Exists(path))
                 {
-                    _context.Open(path);
+                    _editor.Open(path);
                 }
             }
         }
@@ -443,9 +445,9 @@ namespace Core2D.Wpf
         /// </summary>
         private void OnSave()
         {
-            if (!string.IsNullOrEmpty(_context.Editor.ProjectPath))
+            if (!string.IsNullOrEmpty(_editor.ProjectPath))
             {
-                _context.Save(_context.Editor.ProjectPath);
+                _editor.Save(_editor.ProjectPath);
             }
             else
             {
@@ -462,12 +464,12 @@ namespace Core2D.Wpf
             {
                 Filter = "Project (*.project)|*.project|All (*.*)|*.*",
                 FilterIndex = 0,
-                FileName = _context.Editor.Project.Name
+                FileName = _editor.Project.Name
             };
 
             if (dlg.ShowDialog(_mainWindow) == true)
             {
-                _context.Save(dlg.FileName);
+                _editor.Save(dlg.FileName);
             }
         }
 
@@ -491,9 +493,9 @@ namespace Core2D.Wpf
             {
                 name = (item as Project).Name;
             }
-            else if (item is EditorContext)
+            else if (item is Editor)
             {
-                var editor = (item as EditorContext).Editor;
+                var editor = (item as Editor);
                 if (editor.Project == null)
                     return;
 
@@ -502,12 +504,11 @@ namespace Core2D.Wpf
             }
             else if (item == null)
             {
-                var editor = _context.Editor;
-                if (editor.Project == null)
+                if (_editor.Project == null)
                     return;
 
-                name = editor.Project.Name;
-                item = editor.Project;
+                name = _editor.Project.Name;
+                item = _editor.Project;
             }
 
             var dlg = new SaveFileDialog()
@@ -522,13 +523,13 @@ namespace Core2D.Wpf
                 switch (dlg.FilterIndex)
                 {
                     case 1:
-                        _context.ExportAsPdf(dlg.FileName, item);
+                        _editor.ExportAsPdf(dlg.FileName, item);
                         break;
                     case 2:
                         ExportAsEmf(dlg.FileName);
                         break;
                     case 3:
-                        _context.ExportAsDxf(dlg.FileName);
+                        _editor.ExportAsDxf(dlg.FileName);
                         break;
                     default:
                         break;
@@ -550,7 +551,7 @@ namespace Core2D.Wpf
 
             if (dlg.ShowDialog(_mainWindow) == true)
             {
-                _context.ImportData(dlg.FileName);
+                _editor.ImportData(dlg.FileName);
             }
         }
 
@@ -559,10 +560,10 @@ namespace Core2D.Wpf
         /// </summary>
         private void OnExportData()
         {
-            if (_context.Editor.Project == null || _context.Editor.Project.CurrentDatabase == null)
+            if (_editor.Project == null || _editor.Project.CurrentDatabase == null)
                 return;
 
-            var database = _context.Editor.Project.CurrentDatabase;
+            var database = _editor.Project.CurrentDatabase;
 
             var dlg = new SaveFileDialog()
             {
@@ -573,7 +574,7 @@ namespace Core2D.Wpf
 
             if (dlg.ShowDialog(_mainWindow) == true)
             {
-                _context.ExportData(dlg.FileName, database);
+                _editor.ExportData(dlg.FileName, database);
             }
         }
 
@@ -582,10 +583,10 @@ namespace Core2D.Wpf
         /// </summary>
         private void OnUpdateData()
         {
-            if (_context.Editor.Project == null || _context.Editor.Project.CurrentDatabase == null)
+            if (_editor.Project == null || _editor.Project.CurrentDatabase == null)
                 return;
 
-            var database = _context.Editor.Project.CurrentDatabase;
+            var database = _editor.Project.CurrentDatabase;
 
             var dlg = new OpenFileDialog()
             {
@@ -596,7 +597,7 @@ namespace Core2D.Wpf
 
             if (dlg.ShowDialog(_mainWindow) == true)
             {
-                _context.UpdateData(dlg.FileName, database);
+                _editor.UpdateData(dlg.FileName, database);
             }
         }
 
@@ -659,7 +660,7 @@ namespace Core2D.Wpf
 
                 foreach (var path in paths)
                 {
-                    _context.ImportObject(path, item, type);
+                    _editor.ImportObject(path, item, type);
                 }
             }
         }
@@ -730,7 +731,7 @@ namespace Core2D.Wpf
 
             if (dlg.ShowDialog(_mainWindow) == true)
             {
-                _context.ExportObject(dlg.FileName, item, type);
+                _editor.ExportObject(dlg.FileName, item, type);
             }
         }
 
@@ -739,16 +740,16 @@ namespace Core2D.Wpf
         /// </summary>
         private void OnCopyAsEmf()
         {
-            if (_context.Editor.Project == null || _context.Editor.Project.CurrentContainer == null)
+            if (_editor.Project == null || _editor.Project.CurrentContainer == null)
                 return;
 
-            var project = _context.Editor.Project;
-            var container = _context.Editor.Project.CurrentContainer;
+            var project = _editor.Project;
+            var container = _editor.Project.CurrentContainer;
             var writer = new EmfWriter();
 
-            if (_context.Editor.Renderers[0].State.SelectedShape != null)
+            if (_editor.Renderers[0].State.SelectedShape != null)
             {
-                var shapes = Enumerable.Repeat(_context.Editor.Renderers[0].State.SelectedShape, 1).ToList();
+                var shapes = Enumerable.Repeat(_editor.Renderers[0].State.SelectedShape, 1).ToList();
                 writer.SetClipboard(
                     shapes,
                     container.Template.Width,
@@ -756,9 +757,9 @@ namespace Core2D.Wpf
                     container.Data.Properties,
                     project);
             }
-            else if (_context.Editor.Renderers[0].State.SelectedShapes != null)
+            else if (_editor.Renderers[0].State.SelectedShapes != null)
             {
-                var shapes = _context.Editor.Renderers[0].State.SelectedShapes.ToList();
+                var shapes = _editor.Renderers[0].State.SelectedShapes.ToList();
                 writer.SetClipboard(
                     shapes,
                     container.Template.Width,
@@ -783,14 +784,14 @@ namespace Core2D.Wpf
                 var writer = new EmfWriter();
                 writer.Save(
                     path,
-                    _context.Editor.Project.CurrentContainer,
-                    _context.Editor.Project);
+                    _editor.Project.CurrentContainer,
+                    _editor.Project);
             }
             catch (Exception ex)
             {
-                if (_context.Editor.Log != null)
+                if (_editor.Log != null)
                 {
-                    _context.Editor.Log.LogError("{0}{1}{2}",
+                    _editor.Log.LogError("{0}{1}{2}",
                         ex.Message,
                         Environment.NewLine,
                         ex.StackTrace);

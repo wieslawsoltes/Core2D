@@ -10,9 +10,9 @@
              xmlns:core="clr-namespace:Core2D;assembly=Core2D" 
              xmlns:custom="clr-namespace:Core2D.Wpf.Controls.Custom"
              mc:Ignorable="d" 
-             d:DataContext="{x:Static local:DesignerHelper.Context}"
+             d:DataContext="{x:Static local:DesignerHelper.Editor}"
              d:DesignWidth="250" d:DesignHeight="400">
     <Grid>
-        <ContentControl Content="{Binding Editor.Project.CurrentContainer.CurrentShape, FallbackValue={x:Null}}"/>
+        <ContentControl Content="{Binding Project.CurrentContainer.CurrentShape, FallbackValue={x:Null}}"/>
     </Grid>
 </UserControl>

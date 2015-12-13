@@ -60,7 +60,7 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
         <Control Template="{StaticResource StylesMenu}" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="2,0,2,0"/>
-        <lists:ShapeStyleDragAndDropListBox DataContext="{Binding CurrentStyleLibrary.Items}" Tag="{Binding DataContext.Editor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" ItemsSource="{Binding}" SelectedItem="{Binding DataContext.CurrentStyleLibrary.Selected, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" BorderBrush="{x:Null}" HorizontalContentAlignment="Stretch" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
+        <lists:ShapeStyleDragAndDropListBox DataContext="{Binding CurrentStyleLibrary.Items}" Tag="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" ItemsSource="{Binding}" SelectedItem="{Binding DataContext.CurrentStyleLibrary.Selected, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" BorderBrush="{x:Null}" HorizontalContentAlignment="Stretch" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
             <lists:ShapeStyleDragAndDropListBox.Resources>
                 <ContextMenu x:Key="StyleContextMenu" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
                     <MenuItem Header="_Add Style" InputGestureText="Ctrl+N" Command="{x:Static core:Commands.AddStyleCommand}"/>

@@ -28,19 +28,19 @@ namespace Core2D.Wpf.Windows
         /// <summary>
         /// Initializes the zoom border control.
         /// </summary>
-        /// <param name="context">The editor context instance.</param>
-        public void InitializeZoom(EditorContext context)
+        /// <param name="editor">The editor instance.</param>
+        public void InitializeZoom(Editor editor)
         {
             border.InvalidateChild =
                 (z, x, y) =>
                 {
-                    bool invalidate = context.Editor.Renderers[0].State.Zoom != z;
-                    context.Editor.Renderers[0].State.Zoom = z;
-                    context.Editor.Renderers[0].State.PanX = x;
-                    context.Editor.Renderers[0].State.PanY = y;
+                    bool invalidate = editor.Renderers[0].State.Zoom != z;
+                    editor.Renderers[0].State.Zoom = z;
+                    editor.Renderers[0].State.PanX = x;
+                    editor.Renderers[0].State.PanY = y;
                     if (invalidate)
                     {
-                        context.InvalidateCache(isZooming: true);
+                        editor.InvalidateCache(isZooming: true);
                     }
                 };
 
@@ -48,11 +48,11 @@ namespace Core2D.Wpf.Windows
                 (width, height) =>
                 {
                     if (border != null
-                        && context != null
-                        && context.Editor.Project != null
-                        && context.Editor.Project.CurrentContainer != null)
+                        && editor != null
+                        && editor.Project != null
+                        && editor.Project.CurrentContainer != null)
                     {
-                        var container = context.Editor.Project.CurrentContainer;
+                        var container = editor.Project.CurrentContainer;
                         if (container.Template == null)
                         {
                             border.FitTo(
@@ -90,8 +90,8 @@ namespace Core2D.Wpf.Windows
         /// <summary>
         /// Initializes canvas control drag and drop handler.
         /// </summary>
-        /// <param name="context">The editor context instance.</param>
-        public void InitializeDrop(EditorContext context)
+        /// <param name="editor">The editor instance.</param>
+        public void InitializeDrop(Editor editor)
         {
             drawableControl.AllowDrop = true;
 
@@ -116,16 +116,16 @@ namespace Core2D.Wpf.Windows
                         try
                         {
                             var files = (string[])e.Data.GetData(DataFormats.FileDrop);
-                            if (context.Drop(files))
+                            if (editor.Drop(files))
                             {
                                 e.Handled = true;
                             }
                         }
                         catch (Exception ex)
                         {
-                            if (context.Editor.Log != null)
+                            if (editor.Log != null)
                             {
-                                context.Editor.Log.LogError("{0}{1}{2}",
+                                editor.Log.LogError("{0}{1}{2}",
                                     ex.Message,
                                     Environment.NewLine,
                                     ex.StackTrace);
@@ -141,15 +141,15 @@ namespace Core2D.Wpf.Windows
                             if (group != null)
                             {
                                 var p = e.GetPosition(drawableControl);
-                                context.DropAsClone(group, p.X, p.Y);
+                                editor.DropAsClone(group, p.X, p.Y);
                                 e.Handled = true;
                             }
                         }
                         catch (Exception ex)
                         {
-                            if (context.Editor.Log != null)
+                            if (editor.Log != null)
                             {
-                                context.Editor.Log.LogError("{0}{1}{2}",
+                                editor.Log.LogError("{0}{1}{2}",
                                     ex.Message,
                                     Environment.NewLine,
                                     ex.StackTrace);
@@ -165,15 +165,15 @@ namespace Core2D.Wpf.Windows
                             if (record != null)
                             {
                                 var p = e.GetPosition(drawableControl);
-                                context.Drop(record, p.X, p.Y);
+                                editor.Drop(record, p.X, p.Y);
                                 e.Handled = true;
                             }
                         }
                         catch (Exception ex)
                         {
-                            if (context.Editor.Log != null)
+                            if (editor.Log != null)
                             {
-                                context.Editor.Log.LogError("{0}{1}{2}",
+                                editor.Log.LogError("{0}{1}{2}",
                                     ex.Message,
                                     Environment.NewLine,
                                     ex.StackTrace);
@@ -189,15 +189,15 @@ namespace Core2D.Wpf.Windows
                             if (style != null)
                             {
                                 var p = e.GetPosition(drawableControl);
-                                context.Drop(style, p.X, p.Y);
+                                editor.Drop(style, p.X, p.Y);
                                 e.Handled = true;
                             }
                         }
                         catch (Exception ex)
                         {
-                            if (context.Editor.Log != null)
+                            if (editor.Log != null)
                             {
-                                context.Editor.Log.LogError("{0}{1}{2}",
+                                editor.Log.LogError("{0}{1}{2}",
                                     ex.Message,
                                     Environment.NewLine,
                                     ex.StackTrace);
@@ -280,18 +280,18 @@ namespace Core2D.Wpf.Windows
         /// <summary>
         /// Auto load docking manager layout.
         /// </summary>
-        /// <param name="context"></param>
-        public void AutoLoadLayout(EditorContext context)
+        /// <param name="editor">The editor instance.</param>
+        public void AutoLoadLayout(Editor editor)
         {
             try
             {
-                LoadLayout(_defaultLayoutFileName, context);
+                LoadLayout(_defaultLayoutFileName, editor);
             }
             catch (Exception ex)
             {
-                if (context.Editor.Log != null)
+                if (editor.Log != null)
                 {
-                    context.Editor.Log.LogError("{0}{1}{2}",
+                    editor.Log.LogError("{0}{1}{2}",
                         ex.Message,
                         Environment.NewLine,
                         ex.StackTrace);
@@ -302,8 +302,8 @@ namespace Core2D.Wpf.Windows
         /// <summary>
         /// Auto save docking manager layout.
         /// </summary>
-        /// <param name="context"></param>
-        public void AutoSaveLayout(EditorContext context)
+        /// <param name="editor">The editor instance.</param>
+        public void AutoSaveLayout(Editor editor)
         {
             try
             {
@@ -311,9 +311,9 @@ namespace Core2D.Wpf.Windows
             }
             catch (Exception ex)
             {
-                if (context.Editor.Log != null)
+                if (editor.Log != null)
                 {
-                    context.Editor.Log.LogError("{0}{1}{2}",
+                    editor.Log.LogError("{0}{1}{2}",
                         ex.Message,
                         Environment.NewLine,
                         ex.StackTrace);
@@ -326,8 +326,8 @@ namespace Core2D.Wpf.Windows
         /// </summary>
         public void OnLoadLayout()
         {
-            var context = DataContext as EditorContext;
-            if (context == null)
+            var editor = DataContext as Editor;
+            if (editor == null)
                 return;
 
             var dlg = new OpenFileDialog()
@@ -341,13 +341,13 @@ namespace Core2D.Wpf.Windows
             {
                 try
                 {
-                    LoadLayout(dlg.FileName, context);
+                    LoadLayout(dlg.FileName, editor);
                 }
                 catch (Exception ex)
                 {
-                    if (context.Editor.Log != null)
+                    if (editor.Log != null)
                     {
-                        context.Editor.Log.LogError("{0}{1}{2}",
+                        editor.Log.LogError("{0}{1}{2}",
                             ex.Message,
                             Environment.NewLine,
                             ex.StackTrace);
@@ -361,8 +361,8 @@ namespace Core2D.Wpf.Windows
         /// </summary>
         public void OnSaveLayout()
         {
-            var context = DataContext as EditorContext;
-            if (context == null)
+            var editor = DataContext as Editor;
+            if (editor == null)
                 return;
 
             var dlg = new SaveFileDialog()
@@ -380,9 +380,9 @@ namespace Core2D.Wpf.Windows
                 }
                 catch (Exception ex)
                 {
-                    if (context.Editor.Log != null)
+                    if (editor.Log != null)
                     {
-                        context.Editor.Log.LogError("{0}{1}{2}",
+                        editor.Log.LogError("{0}{1}{2}",
                             ex.Message,
                             Environment.NewLine,
                             ex.StackTrace);
@@ -396,19 +396,19 @@ namespace Core2D.Wpf.Windows
         /// </summary>
         public void OnResetLayout()
         {
-            var context = DataContext as EditorContext;
-            if (context == null)
+            var editor = DataContext as Editor;
+            if (editor == null)
                 return;
 
             try
             {
-                LoadLayoutFromResource(_resourceLayoutRoot + _resourceLayoutFileName, context);
+                LoadLayoutFromResource(_resourceLayoutRoot + _resourceLayoutFileName, editor);
             }
             catch (Exception ex)
             {
-                if (context.Editor.Log != null)
+                if (editor.Log != null)
                 {
-                    context.Editor.Log.LogError("{0}{1}{2}",
+                    editor.Log.LogError("{0}{1}{2}",
                         ex.Message,
                         Environment.NewLine,
                         ex.StackTrace);

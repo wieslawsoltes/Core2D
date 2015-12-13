@@ -20,7 +20,7 @@
         xmlns:ad="http://schemas.xceed.com/wpf/xaml/avalondock" 
         xmlns:p="clr-namespace:Core2D.Wpf.Properties" 
         mc:Ignorable="d" 
-        d:DataContext="{x:Static local:DesignerHelper.Context}"
+        d:DataContext="{x:Static local:DesignerHelper.Editor}"
         d:DesignWidth="1324" d:DesignHeight="724" 
         Width="1324" Height="724"
         Background="{StaticResource BackgroundColor}" 
@@ -29,8 +29,8 @@
         TextOptions.TextFormattingMode="Display" TextOptions.TextHintingMode="Auto" TextOptions.TextRenderingMode="Auto">
     <Window.Title>
         <MultiBinding StringFormat="{}{0}{1} - Core2D" FallbackValue="Core2D" TargetNullValue="Core2D">
-            <Binding Path="Editor.Project.Name"/>
-            <Binding Path="Editor.IsProjectDirty" Converter="{StaticResource BooleanToStarConverter}"/>
+            <Binding Path="Project.Name"/>
+            <Binding Path="IsProjectDirty" Converter="{StaticResource BooleanToStarConverter}"/>
         </MultiBinding>
     </Window.Title>
     <Window.InputBindings>
@@ -55,7 +55,7 @@
         <Style x:Key="DashboardVisibilityStyle" TargetType="{x:Type editor:DashboardControl}">
             <Setter Property="Visibility" Value="Collapsed"/>
             <Style.Triggers>
-                <DataTrigger Binding="{Binding Editor.Project}" Value="{x:Null}">
+                <DataTrigger Binding="{Binding Project}" Value="{x:Null}">
                     <Setter Property="Visibility" Value="Visible"/>
                 </DataTrigger>
             </Style.Triggers>
@@ -63,7 +63,7 @@
         <Style x:Key="DockingManagerVisibilityStyle" TargetType="{x:Type ad:DockingManager}">
             <Setter Property="Visibility" Value="Visible"/>
             <Style.Triggers>
-                <DataTrigger Binding="{Binding Editor.Project}" Value="{x:Null}">
+                <DataTrigger Binding="{Binding Project}" Value="{x:Null}">
                     <Setter Property="Visibility" Value="Collapsed"/>
                 </DataTrigger>
             </Style.Triggers>
@@ -71,7 +71,7 @@
         <Style x:Key="StatusVisibilityStyle" TargetType="{x:Type editor:StatusControl}">
             <Setter Property="Visibility" Value="Visible"/>
             <Style.Triggers>
-                <DataTrigger Binding="{Binding Editor.Project}" Value="{x:Null}">
+                <DataTrigger Binding="{Binding Project}" Value="{x:Null}">
                     <Setter Property="Visibility" Value="Collapsed"/>
                 </DataTrigger>
             </Style.Triggers>
@@ -140,7 +140,7 @@
                         <ad:LayoutAnchorablePane>
                             <ad:LayoutAnchorable x:Name="projectWindow" CanClose="False" ContentId="project" Title="{x:Static p:Resources.WindowTitleProject}" AutoHideWidth="210">
                                 <Border x:Name="projectControl" BorderBrush="{x:Null}" BorderThickness="0">
-                                    <project:ProjectControl DataContext="{Binding Editor.Project}"/>
+                                    <project:ProjectControl DataContext="{Binding Project}"/>
                                 </Border>
                             </ad:LayoutAnchorable>
                         </ad:LayoutAnchorablePane>
@@ -148,12 +148,12 @@
                             <ad:LayoutAnchorablePane>
                                 <ad:LayoutAnchorable x:Name="groupsWindow" CanClose="False" ContentId="groups" Title="{x:Static p:Resources.WindowTitleGroups}" AutoHideWidth="210">
                                     <Border x:Name="groupsControl" BorderBrush="{x:Null}" BorderThickness="0">
-                                        <project:GroupsControl DataContext="{Binding Editor.Project}"/>
+                                        <project:GroupsControl DataContext="{Binding Project}"/>
                                     </Border>
                                 </ad:LayoutAnchorable>
                                 <ad:LayoutAnchorable x:Name="databasesWindow" CanClose="False" ContentId="databases" Title="{x:Static p:Resources.WindowTitleDatabases}" AutoHideWidth="210">
                                     <Border x:Name="databasesControl" BorderBrush="{x:Null}" BorderThickness="0">
-                                        <project:DatabasesControl DataContext="{Binding Editor.Project}"/>
+                                        <project:DatabasesControl DataContext="{Binding Project}"/>
                                     </Border>
                                 </ad:LayoutAnchorable>
                             </ad:LayoutAnchorablePane>
@@ -162,16 +162,16 @@
                     <ad:LayoutDocumentPaneGroup Orientation="Horizontal">
                         <ad:LayoutDocumentPane>
                             <ad:LayoutDocument x:Name="canvasWindow" CanClose="False" ContentId="canvas" Title="{x:Static p:Resources.WindowTitleCanvas}">
-                                <custom:PanAndZoomGrid x:Name="panAndZoomGrid" ClipToBounds="True" Background="Transparent" FocusVisualStyle="{x:Null}" Focusable="False" EnableAutoFit="{Binding Editor.Renderers[0].State.EnableAutofit}">
-                                    <custom:PanAndZoomBorder x:Name="border" ClipToBounds="False" Background="Transparent" BorderBrush="{x:Null}" BorderThickness="0" FocusVisualStyle="{x:Null}" Focusable="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Tag="{Binding Editor.CancelAvailable}">
+                                <custom:PanAndZoomGrid x:Name="panAndZoomGrid" ClipToBounds="True" Background="Transparent" FocusVisualStyle="{x:Null}" Focusable="False" EnableAutoFit="{Binding Renderers[0].State.EnableAutofit}">
+                                    <custom:PanAndZoomBorder x:Name="border" ClipToBounds="False" Background="Transparent" BorderBrush="{x:Null}" BorderThickness="0" FocusVisualStyle="{x:Null}" Focusable="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Tag="{Binding CancelAvailable}">
                                         <custom:PanAndZoomBorder.Style>
                                             <Style TargetType="{x:Type custom:PanAndZoomBorder}">
-                                                <Setter Property="Width" Value="{Binding Editor.Project.CurrentContainer.Template.Width}"/>
-                                                <Setter Property="Height" Value="{Binding Editor.Project.CurrentContainer.Template.Height}"/>
+                                                <Setter Property="Width" Value="{Binding Project.CurrentContainer.Template.Width}"/>
+                                                <Setter Property="Height" Value="{Binding Project.CurrentContainer.Template.Height}"/>
                                                 <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding Editor.Project.CurrentContainer.IsTemplate}" Value="True">
-                                                        <Setter Property="Width" Value="{Binding Editor.Project.CurrentContainer.Width}"/>
-                                                        <Setter Property="Height" Value="{Binding Editor.Project.CurrentContainer.Height}"/>
+                                                    <DataTrigger Binding="{Binding Project.CurrentContainer.IsTemplate}" Value="True">
+                                                        <Setter Property="Width" Value="{Binding Project.CurrentContainer.Width}"/>
+                                                        <Setter Property="Height" Value="{Binding Project.CurrentContainer.Height}"/>
                                                     </DataTrigger>
                                                 </Style.Triggers>
                                             </Style>
@@ -181,7 +181,7 @@
                                                 <Style TargetType="editor:DrawableControl">
                                                     <Setter Property="Visibility" Value="Visible"/>
                                                     <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding Editor.Project.CurrentContainer}" Value="{x:Null}">
+                                                        <DataTrigger Binding="{Binding Project.CurrentContainer}" Value="{x:Null}">
                                                             <Setter Property="Visibility" Value="Hidden"/>
                                                         </DataTrigger>
                                                     </Style.Triggers>
@@ -197,12 +197,12 @@
                         <ad:LayoutAnchorablePane>
                             <ad:LayoutAnchorable x:Name="stylesWindow" CanClose="False" ContentId="styles" Title="{x:Static p:Resources.WindowTitleStyles}" AutoHideWidth="210">
                                 <Border x:Name="stylesControl" BorderBrush="{x:Null}" BorderThickness="0">
-                                    <project:StylesControl DataContext="{Binding Editor.Project}"/>
+                                    <project:StylesControl DataContext="{Binding Project}"/>
                                 </Border>
                             </ad:LayoutAnchorable>
                             <ad:LayoutAnchorable x:Name="templatesWindow" CanClose="False" ContentId="templates" Title="{x:Static p:Resources.WindowTitleTemplates}" AutoHideWidth="210">
                                 <Border x:Name="templatesControl" BorderBrush="{x:Null}" BorderThickness="0">
-                                    <project:TemplatesControl DataContext="{Binding Editor.Project}"/>
+                                    <project:TemplatesControl DataContext="{Binding Project}"/>
                                 </Border>
                             </ad:LayoutAnchorable>
                         </ad:LayoutAnchorablePane>
@@ -214,7 +214,7 @@
                             </ad:LayoutAnchorable>
                             <ad:LayoutAnchorable x:Name="dataWindow" CanClose="False" ContentId="data" Title="{x:Static p:Resources.WindowTitleData}" AutoHideWidth="210">
                                 <ScrollViewer x:Name="dataScrollViewer" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Focusable="True">
-                                    <data:DataControl DataContext="{Binding Editor.Renderers[0].State.SelectedShape.Data, FallbackValue={x:Null}}">
+                                    <data:DataControl DataContext="{Binding Renderers[0].State.SelectedShape.Data, FallbackValue={x:Null}}">
                                         <data:DataControl.Style>
                                             <Style TargetType="data:DataControl">
                                                 <Setter Property="Visibility" Value="Visible"/>
@@ -230,12 +230,12 @@
                             </ad:LayoutAnchorable>
                             <ad:LayoutAnchorable x:Name="styleWindow" CanClose="False" ContentId="style" Title="{x:Static p:Resources.WindowTitleStyle}" AutoHideWidth="210">
                                 <ScrollViewer x:Name="styleScrollViewer" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Focusable="True">
-                                    <style:ShapeStyleControl DataContext="{Binding Editor.Project.CurrentStyleLibrary.Selected}"/>
+                                    <style:ShapeStyleControl DataContext="{Binding Project.CurrentStyleLibrary.Selected}"/>
                                 </ScrollViewer>
                             </ad:LayoutAnchorable>
                             <ad:LayoutAnchorable x:Name="containerWindow" CanClose="False" ContentId="container" Title="{x:Static p:Resources.WindowTitleContainer}" AutoHideWidth="210">
                                 <ScrollViewer x:Name="containerScrollViewer" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Focusable="True">
-                                    <project:ContainerControl DataContext="{Binding Editor.Project.CurrentContainer, FallbackValue={x:Null}}">
+                                    <project:ContainerControl DataContext="{Binding Project.CurrentContainer, FallbackValue={x:Null}}">
                                         <project:ContainerControl.Style>
                                             <Style TargetType="project:ContainerControl">
                                                 <Setter Property="Visibility" Value="Visible"/>

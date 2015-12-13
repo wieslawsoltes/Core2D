@@ -10,7 +10,7 @@
              xmlns:core="clr-namespace:Core2D;assembly=Core2D" 
              xmlns:custom="clr-namespace:Core2D.Wpf.Controls.Custom"
              mc:Ignorable="d" 
-             d:DataContext="{x:Static local:DesignerHelper.Context}"
+             d:DataContext="{x:Static local:DesignerHelper.Editor}"
              d:DesignWidth="800" d:DesignHeight="600">
     <UserControl.Resources>
         <Style x:Key="TitleTextBlockStyleKey" TargetType="TextBlock">

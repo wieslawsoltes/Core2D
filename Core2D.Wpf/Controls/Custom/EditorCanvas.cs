@@ -42,71 +42,71 @@ namespace Core2D.Wpf.Controls.Custom
 
         private void EditorCanvas_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            var context = this.Tag as EditorContext;
-            if (context == null)
+            var editor = this.Tag as Core2D.Editor;
+            if (editor == null)
                 return;
 
             this.Focus();
-            if (context.Editor.IsLeftDownAvailable())
+            if (editor.IsLeftDownAvailable())
             {
                 var p = e.GetPosition(this);
-                context.Editor.LeftDown(p.X, p.Y);
+                editor.LeftDown(p.X, p.Y);
             }
         }
 
         private void EditorCanvas_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            var context = this.Tag as EditorContext;
-            if (context == null)
+            var editor = this.Tag as Core2D.Editor;
+            if (editor == null)
                 return;
 
             this.Focus();
-            if (context.Editor.IsLeftUpAvailable())
+            if (editor.IsLeftUpAvailable())
             {
                 var p = e.GetPosition(this);
-                context.Editor.LeftUp(p.X, p.Y);
+                editor.LeftUp(p.X, p.Y);
             }
         }
 
         private void EditorCanvas_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            var context = this.Tag as EditorContext;
-            if (context == null)
+            var editor = this.Tag as Core2D.Editor;
+            if (editor == null)
                 return;
 
             this.Focus();
-            if (context.Editor.IsRightDownAvailable())
+            if (editor.IsRightDownAvailable())
             {
                 var p = e.GetPosition(this);
-                context.Editor.RightDown(p.X, p.Y);
+                editor.RightDown(p.X, p.Y);
             }
         }
 
         private void EditorCanvas_PreviewMouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
-            var context = this.Tag as EditorContext;
-            if (context == null)
+            var editor = this.Tag as Core2D.Editor;
+            if (editor == null)
                 return;
 
             this.Focus();
-            if (context.Editor.IsRightUpAvailable())
+            if (editor.IsRightUpAvailable())
             {
                 var p = e.GetPosition(this);
-                context.Editor.RightUp(p.X, p.Y);
+                editor.RightUp(p.X, p.Y);
             }
         }
 
         private void EditorCanvas_PreviewMouseMove(object sender, MouseEventArgs e)
         {
-            var context = this.Tag as EditorContext;
-            if (context == null)
+            var editor = this.Tag as Core2D.Editor;
+            if (editor == null)
                 return;
 
             this.Focus();
-            if (context.Editor.IsMoveAvailable())
+            if (editor.IsMoveAvailable())
             {
                 var p = e.GetPosition(this);
-                context.Editor.Move(p.X, p.Y);
+                editor.Move(p.X, p.Y);
             }
         }
 

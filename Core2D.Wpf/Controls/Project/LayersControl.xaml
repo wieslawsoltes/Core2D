@@ -28,7 +28,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Control Template="{StaticResource LayersMenu}" Grid.Row="0" Margin="2,0,2,0"/>
-        <lists:LayerDragAndDropListBox DataContext="{Binding Layers}" Tag="{Binding DataContext.Editor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" ItemsSource="{Binding}" SelectedItem="{Binding DataContext.Editor.Project.CurrentContainer.CurrentLayer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" HorizontalContentAlignment="Stretch" BorderBrush="{x:Null}" Grid.Row="1">
+        <lists:LayerDragAndDropListBox DataContext="{Binding Layers}" Tag="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" ItemsSource="{Binding}" SelectedItem="{Binding DataContext.Project.CurrentContainer.CurrentLayer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" HorizontalContentAlignment="Stretch" BorderBrush="{x:Null}" Grid.Row="1">
             <lists:LayerDragAndDropListBox.Resources>
                 <ContextMenu x:Key="LayerContextMenu" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
                     <MenuItem Header="_Add Layer" InputGestureText="Ctrl+N" Command="{x:Static core:Commands.AddLayerCommand}"/>
