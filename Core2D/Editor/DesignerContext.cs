@@ -11,9 +11,9 @@ namespace Core2D
     public class DesignerContext
     {
         /// <summary>
-        /// The design time <see cref="Core2D.EditorContext"/>.
+        /// The design time <see cref="Core2D.Editor"/>.
         /// </summary>
-        public static EditorContext Context { get; set; }
+        public static Editor Editor { get; set; }
 
         /// <summary>
         /// The design time <see cref="Core2D.Container"/>.
@@ -201,154 +201,154 @@ namespace Core2D
         public static XQuadraticBezierSegment QuadraticBezierSegment { get; set; }
 
         /// <summary>
-        /// Initialize platform commands used by <see cref="EditorContext"/>.
+        /// Initialize platform commands used by <see cref="Editor"/>.
         /// </summary>
-        /// <param name="context">The editor context instance.</param>
-        public static void InitializePlatformCommands(EditorContext context)
+        /// <param name="editor">The editor instance.</param>
+        public static void InitializePlatformCommands(Editor editor)
         {
             Commands.OpenCommand =
                 Command<object>.Create(
                     (parameter) => { },
-                    (parameter) => context.IsEditMode());
+                    (parameter) => editor.IsEditMode());
 
             Commands.SaveCommand =
                 Command.Create(
                     () => { },
-                    () => context.IsEditMode());
+                    () => editor.IsEditMode());
 
             Commands.SaveAsCommand =
                 Command.Create(
                     () => { },
-                    () => context.IsEditMode());
+                    () => editor.IsEditMode());
 
             Commands.ExportCommand =
                 Command<object>.Create(
                     (item) => { },
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ImportDataCommand =
                 Command<object>.Create(
                     (item) => { },
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ExportDataCommand =
                 Command<object>.Create(
                     (item) => { },
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.UpdateDataCommand =
                 Command<object>.Create(
                     (item) => { },
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ImportStyleCommand =
                 Command<object>.Create(
                     (item) => { },
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ImportStylesCommand =
                 Command<object>.Create(
                     (item) => { },
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ImportStyleLibraryCommand =
                 Command<object>.Create(
                     (item) => { },
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ImportStyleLibrariesCommand =
                 Command<object>.Create(
                     (item) => { },
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ImportGroupCommand =
                 Command<object>.Create(
                     (item) => { },
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ImportGroupsCommand =
                 Command<object>.Create(
                     (item) => { },
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ImportGroupLibraryCommand =
                 Command<object>.Create(
                     (item) => { },
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ImportGroupLibrariesCommand =
                 Command<object>.Create(
                     (item) => { },
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ImportTemplateCommand =
                 Command<object>.Create(
                     (item) => { },
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ImportTemplatesCommand =
                 Command<object>.Create(
                     (item) => { },
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ExportStyleCommand =
                 Command<object>.Create(
                     (item) => { },
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ExportStylesCommand =
                 Command<object>.Create(
                     (item) => { },
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ExportStyleLibraryCommand =
                 Command<object>.Create(
                     (item) => { },
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ExportStyleLibrariesCommand =
                 Command<object>.Create(
                     (item) => { },
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ExportGroupCommand =
                 Command<object>.Create(
                     (item) => { },
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ExportGroupsCommand =
                 Command<object>.Create(
                     (item) => { },
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ExportGroupLibraryCommand =
                 Command<object>.Create(
                     (item) => { },
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ExportGroupLibrariesCommand =
                 Command<object>.Create(
                     (item) => { },
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ExportTemplateCommand =
                 Command<object>.Create(
                     (item) => { },
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ExportTemplatesCommand =
                 Command<object>.Create(
                     (item) => { },
-                    (item) => context.IsEditMode());
+                    (item) => editor.IsEditMode());
 
             Commands.ZoomResetCommand =
                 Command.Create(
-                    () => context.Editor.ResetZoom(),
+                    () => editor.ResetZoom(),
                     () => true);
 
             Commands.ZoomExtentCommand =
                 Command.Create(
-                    () => context.Editor.ExtentZoom(),
+                    () => editor.ExtentZoom(),
                     () => true);
         }
 
@@ -363,7 +363,7 @@ namespace Core2D
         {
             // Editor
 
-            Context = new EditorContext()
+            Editor = new Editor()
             {
                 Renderers = new Renderer[] { renderer },
                 ProjectFactory = new ProjectFactory(),
@@ -371,27 +371,29 @@ namespace Core2D
                 Serializer = serializer
             };
 
-            Context.Renderers[0].State.EnableAutofit = true;
-            Context.InitializeEditor(null, null, false);
-            Context.Editor.Renderers[0].State.DrawShapeState.Flags = ShapeStateFlags.Visible;
+            Editor.Renderers[0].State.EnableAutofit = true;
+            Editor.Project = Editor.ProjectFactory.GetProject();
+            Editor.Renderers[0].State.DrawShapeState.Flags = ShapeStateFlags.Visible;
 
-            Commands.InitializeCommonCommands(Context);
-            InitializePlatformCommands(Context);
+            Editor.Initialize();
 
-            Context.OnNew(null);
+            Commands.InitializeCommonCommands(Editor);
+            InitializePlatformCommands(Editor);
+
+            Editor.OnNew(null);
 
             // Editor
             /*
             {
-                var document = Context.Editor.Project.Documents.FirstOrDefault();
+                var document = Editor.Project.Documents.FirstOrDefault();
                 var container = document.Containers.FirstOrDefault();
                 var layer = container.Layers.FirstOrDefault();
                 layer.Shapes = layer.Shapes.Add(
                     XLine.Create(
                         30, 30, 
                         300, 30, 
-                        Context.Editor.Project.StyleLibraries.FirstOrDefault().Selected, 
-                        Context.Editor.Project.Options.PointShape));
+                        Editor.Project.StyleLibraries.FirstOrDefault().Selected, 
+                        Editor.Project.Options.PointShape));
                 container.CurrentLayer = layer;
                 container.CurrentShape = layer.Shapes.FirstOrDefault();
             }
