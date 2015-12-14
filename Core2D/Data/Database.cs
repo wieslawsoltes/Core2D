@@ -78,9 +78,7 @@ namespace Core2D
         /// <param name="name"></param>
         /// <param name="columns"></param>
         /// <returns></returns>
-        public static Database Create(
-            string name,
-            ImmutableArray<Column> columns)
+        public static Database Create(string name, ImmutableArray<Column> columns)
         {
             return new Database()
             {
@@ -97,10 +95,7 @@ namespace Core2D
         /// <param name="columns"></param>
         /// <param name="records"></param>
         /// <returns></returns>
-        public static Database Create(
-            string name,
-            ImmutableArray<Column> columns,
-            ImmutableArray<Record> records)
+        public static Database Create(string name, ImmutableArray<Column> columns, ImmutableArray<Record> records)
         {
             return new Database()
             {

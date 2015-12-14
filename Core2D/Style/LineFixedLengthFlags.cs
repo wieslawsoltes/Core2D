@@ -14,22 +14,27 @@ namespace Core2D
         /// 
         /// </summary>
         Disabled = 0,
+
         /// <summary>
         /// 
         /// </summary>
         Start = 1,
+
         /// <summary>
         /// 
         /// </summary>
         End = 2,
+
         /// <summary>
         /// 
         /// </summary>
         Vertical = 4,
+
         /// <summary>
         /// 
         /// </summary>
         Horizontal = 8,
+
         /// <summary>
         /// 
         /// </summary>

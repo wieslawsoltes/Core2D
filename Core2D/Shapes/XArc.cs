@@ -150,16 +150,7 @@ namespace Core2D
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="XArc"/> class.</returns>
-        public static XArc Create(
-            double x1, double y1,
-            double x2, double y2,
-            double x3, double y3,
-            double x4, double y4,
-            ShapeStyle style,
-            BaseShape point,
-            bool isStroked = true,
-            bool isFilled = false,
-            string name = "")
+        public static XArc Create(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, ShapeStyle style, BaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
         {
             return new XArc()
             {
@@ -189,13 +180,7 @@ namespace Core2D
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="XArc"/> class.</returns>
-        public static XArc Create(
-            double x, double y,
-            ShapeStyle style,
-            BaseShape point,
-            bool isStroked = true,
-            bool isFilled = false,
-            string name = "")
+        public static XArc Create(double x, double y, ShapeStyle style, BaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
         {
             return Create(x, y, x, y, x, y, x, y, style, point, isStroked, isFilled, name);
         }
@@ -213,16 +198,7 @@ namespace Core2D
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="XArc"/> class.</returns>
-        public static XArc Create(
-            XPoint point1,
-            XPoint point2,
-            XPoint point3,
-            XPoint point4,
-            ShapeStyle style,
-            BaseShape point,
-            bool isStroked = true,
-            bool isFilled = false,
-            string name = "")
+        public static XArc Create(XPoint point1, XPoint point2, XPoint point3, XPoint point4, ShapeStyle style, BaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
         {
             return new XArc()
             {

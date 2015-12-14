@@ -57,11 +57,7 @@ namespace Core2D
         /// <param name="g">The green color channel.</param>
         /// <param name="b">The blue color channel.</param>
         /// <returns>The new instance of the <see cref="ArgbColor"/> class.</returns>
-        public static ArgbColor Create(
-            byte a = 0xFF,
-            byte r = 0x00,
-            byte g = 0x00,
-            byte b = 0x00)
+        public static ArgbColor Create(byte a = 0xFF, byte r = 0x00, byte g = 0x00, byte b = 0x00)
         {
             return new ArgbColor()
             {

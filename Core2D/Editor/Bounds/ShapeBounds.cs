@@ -424,14 +424,7 @@ namespace Core2D
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <returns></returns>
-        private static bool HitTest(
-            BaseShape shape,
-            Rect2 rect,
-            Vector2[] selection,
-            ImmutableHashSet<BaseShape>.Builder builder,
-            double treshold,
-            double dx,
-            double dy)
+        private static bool HitTest(BaseShape shape, Rect2 rect, Vector2[] selection, ImmutableHashSet<BaseShape>.Builder builder, double treshold, double dx, double dy)
         {
             if (shape is XPoint)
             {
@@ -630,14 +623,7 @@ namespace Core2D
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <returns></returns>
-        private static bool HitTest(
-            IEnumerable<BaseShape> shapes,
-            Rect2 rect,
-            Vector2[] selection,
-            ImmutableHashSet<BaseShape>.Builder builder,
-            double treshold,
-            double dx,
-            double dy)
+        private static bool HitTest(IEnumerable<BaseShape> shapes, Rect2 rect, Vector2[] selection, ImmutableHashSet<BaseShape>.Builder builder, double treshold, double dx, double dy)
         {
             foreach (var shape in shapes)
             {

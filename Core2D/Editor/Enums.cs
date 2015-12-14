@@ -9,32 +9,15 @@ namespace Core2D
     /// </summary>
     public static class Enums
     {
-        private static Tool[] _toolValues =
-            (Tool[])Enum.GetValues(typeof(Tool));
-
-        private static PathTool[] _pathToolValues =
-            (PathTool[])Enum.GetValues(typeof(PathTool));
-
-        private static LineCap[] _lineCapValues =
-            (LineCap[])Enum.GetValues(typeof(LineCap));
-
-        private static ArrowType[] _arrowTypeValues =
-            (ArrowType[])Enum.GetValues(typeof(ArrowType));
-
-        private static TextHAlignment[] _textHAlignmentValues =
-            (TextHAlignment[])Enum.GetValues(typeof(TextHAlignment));
-
-        private static TextVAlignment[] _textVAlignmentValues =
-            (TextVAlignment[])Enum.GetValues(typeof(TextVAlignment));
-
-        private static MoveMode[] _moveModeValues =
-            (MoveMode[])Enum.GetValues(typeof(MoveMode));
-
-        private static XFillRule[] _xFillRuleValues =
-            (XFillRule[])Enum.GetValues(typeof(XFillRule));
-
-        private static XSweepDirection[] _xSweepDirectionValues =
-            (XSweepDirection[])Enum.GetValues(typeof(XSweepDirection));
+        private static Tool[] _toolValues = (Tool[])Enum.GetValues(typeof(Tool));
+        private static PathTool[] _pathToolValues = (PathTool[])Enum.GetValues(typeof(PathTool));
+        private static LineCap[] _lineCapValues = (LineCap[])Enum.GetValues(typeof(LineCap));
+        private static ArrowType[] _arrowTypeValues = (ArrowType[])Enum.GetValues(typeof(ArrowType));
+        private static TextHAlignment[] _textHAlignmentValues = (TextHAlignment[])Enum.GetValues(typeof(TextHAlignment));
+        private static TextVAlignment[] _textVAlignmentValues = (TextVAlignment[])Enum.GetValues(typeof(TextVAlignment));
+        private static MoveMode[] _moveModeValues = (MoveMode[])Enum.GetValues(typeof(MoveMode));
+        private static XFillRule[] _xFillRuleValues = (XFillRule[])Enum.GetValues(typeof(XFillRule));
+        private static XSweepDirection[] _xSweepDirectionValues = (XSweepDirection[])Enum.GetValues(typeof(XSweepDirection));
 
         /// <summary>
         /// The <see cref="Tool"/> enum values.

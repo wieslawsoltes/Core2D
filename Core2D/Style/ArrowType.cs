@@ -12,14 +12,17 @@ namespace Core2D
         /// No arrow is drawn.
         /// </summary>
         None,
+
         /// <summary>
         /// Draw rectangle shape as arrow.
         /// </summary>
         Rectangle,
+
         /// <summary>
         /// Draw ellipse shapes as arrow
         /// </summary>
         Ellipse,
+
         /// <summary>
         /// Draw two line shapes as arrow.
         /// </summary>

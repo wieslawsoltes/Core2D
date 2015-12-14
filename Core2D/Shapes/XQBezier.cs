@@ -126,15 +126,7 @@ namespace Core2D
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="XQBezier"/> class.</returns>
-        public static XQBezier Create(
-            double x1, double y1,
-            double x2, double y2,
-            double x3, double y3,
-            ShapeStyle style,
-            BaseShape point,
-            bool isStroked = true,
-            bool isFilled = false,
-            string name = "")
+        public static XQBezier Create(double x1, double y1, double x2, double y2, double x3, double y3, ShapeStyle style, BaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
         {
             return new XQBezier()
             {
@@ -163,13 +155,7 @@ namespace Core2D
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="XQBezier"/> class.</returns>
-        public static XQBezier Create(
-            double x, double y,
-            ShapeStyle style,
-            BaseShape point,
-            bool isStroked = true,
-            bool isFilled = false,
-            string name = "")
+        public static XQBezier Create(double x, double y, ShapeStyle style, BaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
         {
             return Create(x, y, x, y, x, y, style, point, isStroked, isFilled, name);
         }
@@ -186,15 +172,7 @@ namespace Core2D
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="XQBezier"/> class.</returns>
-        public static XQBezier Create(
-            XPoint point1,
-            XPoint point2,
-            XPoint point3,
-            ShapeStyle style,
-            BaseShape point,
-            bool isStroked = true,
-            bool isFilled = false,
-            string name = "")
+        public static XQBezier Create(XPoint point1, XPoint point2, XPoint point3, ShapeStyle style, BaseShape point, bool isStroked = true, bool isFilled = false, string name = "")
         {
             return new XQBezier()
             {

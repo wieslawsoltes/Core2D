@@ -234,14 +234,7 @@ namespace Core2D
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="XText"/> class.</returns>
-        public static XText Create(
-            double x1, double y1,
-            double x2, double y2,
-            ShapeStyle style,
-            BaseShape point,
-            string text,
-            bool isStroked = true,
-            string name = "")
+        public static XText Create(double x1, double y1, double x2, double y2, ShapeStyle style, BaseShape point, string text, bool isStroked = true, string name = "")
         {
             return new XText()
             {
@@ -269,13 +262,7 @@ namespace Core2D
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="XText"/> class.</returns>
-        public static XText Create(
-            double x, double y,
-            ShapeStyle style,
-            BaseShape point,
-            string text,
-            bool isStroked = true,
-            string name = "")
+        public static XText Create(double x, double y, ShapeStyle style, BaseShape point, string text, bool isStroked = true, string name = "")
         {
             return Create(x, y, x, y, style, point, text, isStroked, name);
         }
@@ -291,14 +278,7 @@ namespace Core2D
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="XText"/> class.</returns>
-        public static XText Create(
-            XPoint topLeft,
-            XPoint bottomRight,
-            ShapeStyle style,
-            BaseShape point,
-            string text,
-            bool isStroked = true,
-            string name = "")
+        public static XText Create(XPoint topLeft, XPoint bottomRight, ShapeStyle style, BaseShape point, string text, bool isStroked = true, string name = "")
         {
             return new XText()
             {

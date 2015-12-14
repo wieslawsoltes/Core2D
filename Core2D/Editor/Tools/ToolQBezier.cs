@@ -11,7 +11,6 @@ namespace Core2D
         private Editor _editor;
         private State _currentState = State.None;
         private XQBezier _shape;
-
         private ShapeStyle _style;
         private XLine _line12;
         private XLine _line32;

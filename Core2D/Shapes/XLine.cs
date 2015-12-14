@@ -100,13 +100,7 @@ namespace Core2D
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="XLine"/> class.</returns>
-        public static XLine Create(
-            XPoint start,
-            XPoint end,
-            ShapeStyle style,
-            BaseShape point,
-            bool isStroked = true,
-            string name = "")
+        public static XLine Create(XPoint start, XPoint end, ShapeStyle style, BaseShape point, bool isStroked = true, string name = "")
         {
             return new XLine()
             {
@@ -135,13 +129,7 @@ namespace Core2D
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="XLine"/> class.</returns>
-        public static XLine Create(
-            double x1, double y1,
-            double x2, double y2,
-            ShapeStyle style,
-            BaseShape point,
-            bool isStroked = true,
-            string name = "")
+        public static XLine Create(double x1, double y1, double x2, double y2, ShapeStyle style, BaseShape point, bool isStroked = true, string name = "")
         {
             return new XLine()
             {
@@ -168,12 +156,7 @@ namespace Core2D
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="XLine"/> class.</returns>
-        public static XLine Create(
-            double x, double y,
-            ShapeStyle style,
-            BaseShape point,
-            bool isStroked = true,
-            string name = "")
+        public static XLine Create(double x, double y, ShapeStyle style, BaseShape point, bool isStroked = true, string name = "")
         {
             return Create(x, y, x, y, style, point, isStroked, name);
         }
@@ -186,10 +169,7 @@ namespace Core2D
         /// <param name="y1">The calculated Y coordinate for <see cref="XLine.Start"/> point.</param>
         /// <param name="x2">The calculated X coordinate for <see cref="XLine.End"/> point.</param>
         /// <param name="y2">The calculated Y coordinate for <see cref="XLine.End"/> point.</param>
-        public static void SetMaxLength(
-            XLine line,
-            ref double x1, ref double y1,
-            ref double x2, ref double y2)
+        public static void SetMaxLength(XLine line, ref double x1, ref double y1, ref double x2, ref double y2)
         {
             var ls = line.Style.LineStyle;
 
@@ -230,10 +210,7 @@ namespace Core2D
         /// <param name="y1">The calculated Y coordinate for <see cref="XLine.Start"/> point.</param>
         /// <param name="x2">The calculated X coordinate for <see cref="XLine.End"/> point.</param>
         /// <param name="y2">The calculated Y coordinate for <see cref="XLine.End"/> point.</param>
-        public static void SetMaxLengthAll(
-            XLine line,
-            ref double x1, ref double y1,
-            ref double x2, ref double y2)
+        public static void SetMaxLengthAll(XLine line, ref double x1, ref double y1, ref double x2, ref double y2)
         {
             var ls = line.Style.LineStyle;
 

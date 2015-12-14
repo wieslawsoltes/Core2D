@@ -86,38 +86,6 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// Performs freeing, releasing, or resetting unmanaged resources.
-        /// </summary>
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        /// <summary>
-        /// Performs freeing, releasing, or resetting unmanaged resources.
-        /// </summary>
-        ~Observer()
-        {
-            Dispose(false);
-        }
-
-        /// <summary>
-        /// Performs freeing, releasing, or resetting unmanaged resources.
-        /// </summary>
-        /// <param name="disposing">The flag indicating whether disposing.</param>
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                if (_editor != null && _editor.Project != null)
-                {
-                    Remove(_editor.Project);
-                }
-            }
-        }
-
         private void MarkAsDirty()
         {
             if (_editor != null)
@@ -1562,6 +1530,38 @@ namespace Core2D
             foreach (var property in properties)
             {
                 Remove(property);
+            }
+        }
+
+        /// <summary>
+        /// Performs freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// Performs freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        ~Observer()
+        {
+            Dispose(false);
+        }
+
+        /// <summary>
+        /// Performs freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        /// <param name="disposing">The flag indicating whether disposing.</param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (_editor != null && _editor.Project != null)
+                {
+                    Remove(_editor.Project);
+                }
             }
         }
     }

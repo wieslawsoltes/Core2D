@@ -61,9 +61,7 @@ namespace Core2D
         /// <param name="centerPoint"></param>
         /// <param name="angleInDegrees"></param>
         /// <returns></returns>
-        public Point2 RotateAt(
-            Point2 centerPoint,
-            double angleInDegrees)
+        public Point2 RotateAt(Point2 centerPoint, double angleInDegrees)
         {
             double angleInRadians = angleInDegrees * (Math.PI / 180.0);
             double cosTheta = Math.Cos(angleInRadians);

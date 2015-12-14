@@ -12,18 +12,22 @@ namespace Core2D
         /// None state.
         /// </summary>
         None,
+
         /// <summary>
         /// One state.
         /// </summary>
         One,
+
         /// <summary>
         /// Two state.
         /// </summary>
         Two,
+
         /// <summary>
         /// Three state.
         /// </summary>
         Three,
+
         /// <summary>
         /// Four state.
         /// </summary>

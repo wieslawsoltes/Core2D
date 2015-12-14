@@ -35,9 +35,7 @@ namespace Core2D
         /// <param name="name"></param>
         /// <param name="fixedLength"></param>
         /// <returns></returns>
-        public static LineStyle Create(
-            string name = "",
-            LineFixedLength fixedLength = null)
+        public static LineStyle Create(string name = "", LineFixedLength fixedLength = null)
         {
             return new LineStyle()
             {

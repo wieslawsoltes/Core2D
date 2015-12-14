@@ -12,18 +12,22 @@ namespace Core2D
         /// Line tool.
         /// </summary>
         Line,
+
         /// <summary>
         /// Arc tool.
         /// </summary>
         Arc,
+
         /// <summary>
         /// Bezier tool.
         /// </summary>
         Bezier,
+
         /// <summary>
         /// QBezier tool.
         /// </summary>
         QBezier,
+
         /// <summary>
         /// Move tool.
         /// </summary>

@@ -52,11 +52,7 @@ namespace Core2D
         /// <param name="isFilled">The flag indicating whether path is filled.</param>
         /// <param name="isClosed">The flag indicating whether path is closed.</param>
         /// <returns>The new instance of the <see cref="XPathFigure"/> class.</returns>
-        public static XPathFigure Create(
-            XPoint startPoint,
-            IList<XPathSegment> segments,
-            bool isFilled,
-            bool isClosed)
+        public static XPathFigure Create(XPoint startPoint, IList<XPathSegment> segments, bool isFilled, bool isClosed)
         {
             return new XPathFigure()
             {

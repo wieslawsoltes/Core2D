@@ -69,7 +69,8 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Gets or sets property Value using Name as key for data Properties array values. If property with the specified key does not exist it is created.
+        /// Gets or sets property Value using Name as key for data Properties array values. 
+        /// If property with the specified key does not exist it is created.
         /// </summary>
         /// <param name="name">The property name value.</param>
         /// <returns>The property Value.</returns>
@@ -215,11 +216,7 @@ namespace Core2D
         /// <param name="width"></param>
         /// <param name="height"></param>
         /// <returns></returns>
-        public static Container Create(
-            string name = "Container", 
-            bool isTemplate = false, 
-            double width = 840, 
-            double height = 600)
+        public static Container Create(string name = "Container", bool isTemplate = false, double width = 840, double height = 600)
         {
             var container = new Container()
             {
@@ -231,7 +228,7 @@ namespace Core2D
                 Layers = ImmutableArray.Create<Layer>(),
                 IsTemplate = isTemplate
             };
-            
+
             if (isTemplate)
             {
                 container.Background = ArgbColor.Create(0x00, 0xFF, 0xFF, 0xFF);

@@ -97,12 +97,7 @@ namespace Core2D
         /// <param name="radiusX">The arrow X axis radius.</param>
         /// <param name="radiusY">The arrow Y axis radius.</param>
         /// <returns>The new instance of the ArrowStyle class.</returns>
-        public static ArrowStyle Create(
-            ArrowType arrowType = ArrowType.None,
-            bool isStroked = true,
-            bool isFilled = false,
-            double radiusX = 5.0,
-            double radiusY = 3.0)
+        public static ArrowStyle Create(ArrowType arrowType = ArrowType.None, bool isStroked = true, bool isFilled = false, double radiusX = 5.0, double radiusY = 3.0)
         {
             return new ArrowStyle()
             {
@@ -124,14 +119,7 @@ namespace Core2D
         /// <param name="radiusX">The arrow X axis radius.</param>
         /// <param name="radiusY">The arrow Y axis radius.</param>
         /// <returns>The new instance of the ArrowStyle class.</returns>
-        public static ArrowStyle Create(
-            string name,
-            BaseStyle source,
-            ArrowType arrowType = ArrowType.None,
-            bool isStroked = true,
-            bool isFilled = false,
-            double radiusX = 5.0,
-            double radiusY = 5.0)
+        public static ArrowStyle Create(string name, BaseStyle source, ArrowType arrowType = ArrowType.None, bool isStroked = true, bool isFilled = false, double radiusX = 5.0, double radiusY = 5.0)
         {
             return new ArrowStyle(source)
             {

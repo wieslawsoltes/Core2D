@@ -70,18 +70,7 @@ namespace Core2D
         /// <param name="dashes"></param>
         /// <param name="dashOffset"></param>
         /// <returns></returns>
-        public static ShapeStyle Create(
-            string name = "",
-            byte sa = 0xFF, byte sr = 0x00, byte sg = 0x00, byte sb = 0x00,
-            byte fa = 0xFF, byte fr = 0x00, byte fg = 0x00, byte fb = 0x00,
-            double thickness = 2.0,
-            TextStyle textStyle = null,
-            LineStyle lineStyle = null,
-            ArrowStyle startArrowStyle = null,
-            ArrowStyle endArrowStyle = null,
-            LineCap lineCap = LineCap.Round,
-            string dashes = default(string),
-            double dashOffset = 0.0)
+        public static ShapeStyle Create(string name = "", byte sa = 0xFF, byte sr = 0x00, byte sg = 0x00, byte sb = 0x00, byte fa = 0xFF, byte fr = 0x00, byte fg = 0x00, byte fb = 0x00, double thickness = 2.0, TextStyle textStyle = null, LineStyle lineStyle = null, ArrowStyle startArrowStyle = null, ArrowStyle endArrowStyle = null, LineCap lineCap = LineCap.Round, string dashes = default(string), double dashOffset = 0.0)
         {
             var style = new ShapeStyle()
             {
@@ -114,15 +103,7 @@ namespace Core2D
         /// <param name="startArrowStyle"></param>
         /// <param name="endArrowStyle"></param>
         /// <returns></returns>
-        public static ShapeStyle Create(
-            string name,
-            ArgbColor stroke,
-            ArgbColor fill,
-            double thickness,
-            TextStyle textStyle,
-            LineStyle lineStyle,
-            ArrowStyle startArrowStyle,
-            ArrowStyle endArrowStyle)
+        public static ShapeStyle Create(string name, ArgbColor stroke, ArgbColor fill, double thickness, TextStyle textStyle, LineStyle lineStyle, ArrowStyle startArrowStyle, ArrowStyle endArrowStyle)
         {
             return new ShapeStyle()
             {

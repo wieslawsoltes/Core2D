@@ -38,9 +38,7 @@ namespace Core2D
         /// <param name="line2Start"></param>
         /// <param name="line2End"></param>
         /// <returns></returns>
-        public static double AngleLineSegments(
-            Point2 line1Start, Point2 line1End,
-            Point2 line2Start, Point2 line2End)
+        public static double AngleLineSegments(Point2 line1Start, Point2 line1End, Point2 line2Start, Point2 line2End)
         {
             double angle1 = Math.Atan2(line1Start.Y - line1End.Y, line1Start.X - line1End.X);
             double angle2 = Math.Atan2(line2Start.Y - line2End.Y, line2Start.X - line2End.X);
@@ -58,10 +56,7 @@ namespace Core2D
         /// <param name="p2"></param>
         /// <param name="onlySegment"></param>
         /// <returns></returns>
-        public static IList<Point2> FindEllipseSegmentIntersections(
-            Rect2 rect,
-            Point2 p1, Point2 p2,
-            bool onlySegment)
+        public static IList<Point2> FindEllipseSegmentIntersections(Rect2 rect, Point2 p1, Point2 p2, bool onlySegment)
         {
             if ((rect.Width == 0) || (rect.Height == 0) || ((p1.X == p2.X) && (p1.Y == p2.Y)))
                 return new Point2[] { };

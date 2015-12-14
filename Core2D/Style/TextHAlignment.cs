@@ -12,10 +12,12 @@ namespace Core2D
         /// 
         /// </summary>
         Left,
+
         /// <summary>
         /// 
         /// </summary>
         Center,
+
         /// <summary>
         /// 
         /// </summary>

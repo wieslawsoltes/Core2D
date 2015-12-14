@@ -68,11 +68,7 @@ namespace Core2D
         /// <param name="width"></param>
         /// <param name="isVisible"></param>
         /// <returns></returns>
-        public static Column Create(
-            string name,
-            Database owner,
-            double width = double.NaN,
-            bool isVisible = true)
+        public static Column Create(string name, Database owner, double width = double.NaN, bool isVisible = true)
         {
             return new Column()
             {

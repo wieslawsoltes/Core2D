@@ -100,10 +100,7 @@ namespace Core2D
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <returns></returns>
-        public static Rect2 Create(
-            double x1, double y1,
-            double x2, double y2,
-            double dx = 0.0, double dy = 0.0)
+        public static Rect2 Create(double x1, double y1, double x2, double y2, double dx = 0.0, double dy = 0.0)
         {
             double tlx = Math.Min(x1, x2);
             double tly = Math.Min(y1, y2);
@@ -124,9 +121,7 @@ namespace Core2D
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <returns></returns>
-        public static Rect2 Create(
-            Point2 tl, Point2 br,
-            double dx = 0.0, double dy = 0.0)
+        public static Rect2 Create(Point2 tl, Point2 br, double dx = 0.0, double dy = 0.0)
         {
             return Rect2.Create(tl.X, tl.Y, br.X, br.Y, dx, dy);
         }
@@ -139,9 +134,7 @@ namespace Core2D
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <returns></returns>
-        public static Rect2 Create(
-            XPoint tl, XPoint br,
-            double dx = 0.0, double dy = 0.0)
+        public static Rect2 Create(XPoint tl, XPoint br, double dx = 0.0, double dy = 0.0)
         {
             return Rect2.Create(tl.X, tl.Y, br.X, br.Y, dx, dy);
         }

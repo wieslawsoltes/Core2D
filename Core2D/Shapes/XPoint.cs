@@ -89,11 +89,7 @@ namespace Core2D
         /// <param name="shape">The point template.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="XPoint"/> class.</returns>
-        public static XPoint Create(
-            double x = 0.0,
-            double y = 0.0,
-            BaseShape shape = null,
-            string name = "")
+        public static XPoint Create(double x = 0.0, double y = 0.0, BaseShape shape = null, string name = "")
         {
             return new XPoint()
             {

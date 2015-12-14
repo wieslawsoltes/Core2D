@@ -12,38 +12,47 @@ namespace Core2D
         /// 
         /// </summary>
         Style,
+
         /// <summary>
         /// 
         /// </summary>
         Styles,
+
         /// <summary>
         /// 
         /// </summary>
         StyleLibrary,
+
         /// <summary>
         /// 
         /// </summary>
         StyleLibraries,
+
         /// <summary>
         /// 
         /// </summary>
         Group,
+
         /// <summary>
         /// 
         /// </summary>
         Groups,
+
         /// <summary>
         /// 
         /// </summary>
         GroupLibrary,
+
         /// <summary>
         /// 
         /// </summary>
         GroupLibraries,
+
         /// <summary>
         /// 
         /// </summary>
         Template,
+
         /// <summary>
         /// 
         /// </summary>

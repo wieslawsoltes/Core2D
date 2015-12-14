@@ -110,10 +110,7 @@ namespace Core2D
         /// <param name="vertices2"></param>
         /// <param name="mtv"></param>
         /// <returns></returns>
-        public bool MinimumTranslationVector(
-            Vector2[] vertices1,
-            Vector2[] vertices2,
-            out MinimumTranslationVector? mtv)
+        public bool MinimumTranslationVector(Vector2[] vertices1, Vector2[] vertices2, out MinimumTranslationVector? mtv)
         {
             double overlap = Double.PositiveInfinity; // really large value;
             Vector2 smallest = default(Vector2);
@@ -186,10 +183,7 @@ namespace Core2D
         /// <param name="vertices2"></param>
         /// <param name="mtv"></param>
         /// <returns></returns>
-        public bool MinimumTranslationVectorWithContainment(
-            Vector2[] vertices1,
-            Vector2[] vertices2,
-            out MinimumTranslationVector? mtv)
+        public bool MinimumTranslationVectorWithContainment(Vector2[] vertices1, Vector2[] vertices2, out MinimumTranslationVector? mtv)
         {
             double overlap = Double.PositiveInfinity; // really large value;
             Vector2 smallest = default(Vector2);

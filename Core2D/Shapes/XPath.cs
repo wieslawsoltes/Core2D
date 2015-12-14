@@ -98,12 +98,7 @@ namespace Core2D
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
         /// <returns>The new instance of the <see cref="XPath"/> class.</returns>
-        public static XPath Create(
-            string name,
-            ShapeStyle style,
-            XPathGeometry geometry,
-            bool isStroked = true,
-            bool isFilled = true)
+        public static XPath Create(string name, ShapeStyle style, XPathGeometry geometry, bool isStroked = true, bool isFilled = true)
         {
             return new XPath()
             {

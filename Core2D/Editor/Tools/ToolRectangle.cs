@@ -11,7 +11,6 @@ namespace Core2D
         private Editor _editor;
         private State _currentState = State.None;
         private XRectangle _shape;
-
         private XPoint _topLeftHelperPoint;
         private XPoint _bottomRightHelperPoint;
 

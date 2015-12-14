@@ -35,15 +35,7 @@ namespace Core2D
         /// <param name="text">The text string.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="XEllipse"/> class.</returns>
-        public static XEllipse Create(
-            double x1, double y1,
-            double x2, double y2,
-            ShapeStyle style,
-            BaseShape point,
-            bool isStroked = true,
-            bool isFilled = false,
-            string text = null,
-            string name = "")
+        public static XEllipse Create(double x1, double y1, double x2, double y2, ShapeStyle style, BaseShape point, bool isStroked = true, bool isFilled = false, string text = null, string name = "")
         {
             return new XEllipse()
             {
@@ -73,14 +65,7 @@ namespace Core2D
         /// <param name="text">The text string.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="XEllipse"/> class.</returns>
-        public static XEllipse Create(
-            double x, double y,
-            ShapeStyle style,
-            BaseShape point,
-            bool isStroked = true,
-            bool isFilled = false,
-            string text = null,
-            string name = "")
+        public static XEllipse Create(double x, double y, ShapeStyle style, BaseShape point, bool isStroked = true, bool isFilled = false, string text = null, string name = "")
         {
             return Create(x, y, x, y, style, point, isStroked, isFilled, text, name);
         }
@@ -97,15 +82,7 @@ namespace Core2D
         /// <param name="text">The text string.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="XEllipse"/> class.</returns>
-        public static XEllipse Create(
-            XPoint topLeft,
-            XPoint bottomRight,
-            ShapeStyle style,
-            BaseShape point,
-            bool isStroked = true,
-            bool isFilled = false,
-            string text = null,
-            string name = "")
+        public static XEllipse Create(XPoint topLeft, XPoint bottomRight, ShapeStyle style, BaseShape point, bool isStroked = true, bool isFilled = false, string text = null, string name = "")
         {
             return new XEllipse()
             {

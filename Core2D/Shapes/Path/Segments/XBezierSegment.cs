@@ -41,12 +41,7 @@ namespace Core2D
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
         /// <returns>The new instance of the <see cref="XBezierSegment"/> class.</returns>
-        public static XBezierSegment Create(
-            XPoint point1,
-            XPoint point2,
-            XPoint point3,
-            bool isStroked,
-            bool isSmoothJoin)
+        public static XBezierSegment Create(XPoint point1, XPoint point2, XPoint point3, bool isStroked, bool isSmoothJoin)
         {
             return new XBezierSegment()
             {

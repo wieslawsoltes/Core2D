@@ -11,7 +11,6 @@ namespace Core2D
         private Editor _editor;
         private State _currentState = State.None;
         private XLine _shape;
-
         private XPoint _startHelperPoint;
         private XPoint _endHelperPoint;
 

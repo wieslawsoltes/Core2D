@@ -12,6 +12,7 @@ namespace Core2D
         /// 
         /// </summary>
         public Vector2 Smallest { get; private set; }
+
         /// <summary>
         /// 
         /// </summary>

@@ -430,15 +430,15 @@ namespace Core2D
             return this / this.Length();
         }
 
-        //public double Component(Vector2 v)
-        //{
-        //    return this.Dot(v.Normalize());
-        //}
-
-        //public Vector2 Project(Vector2 v)
-        //{
-        //    return v.Normalize() * this.Component(v);
-        //}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="v"></param>
+        /// <returns></returns>
+        public double Component(Vector2 v)
+        {
+            return this.Dot(v.Normalize());
+        }
 
         /// <summary>
         /// 
@@ -448,6 +448,7 @@ namespace Core2D
         public Vector2 Project(Vector2 v)
         {
             return v * (this.Dot(v) / v.Dot(v));
+            //return v.Normalize() * this.Component(v);
         }
 
         /// <summary>

@@ -11,7 +11,6 @@ namespace Core2D
         private Editor _editor;
         private State _currentState = State.None;
         private XArc _shape;
-
         private ShapeStyle _style;
         private XLine _startLine;
         private XLine _endLine;

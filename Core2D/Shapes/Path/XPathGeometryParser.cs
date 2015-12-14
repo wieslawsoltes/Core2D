@@ -23,7 +23,7 @@ namespace Core2D
         {
             var fillRule = XFillRule.EvenOdd;
             var geometry = XPathGeometry.Create(new List<XPathFigure>(), fillRule);
-            
+
             if (source != null)
             {
                 int curIndex = 0;
@@ -54,10 +54,10 @@ namespace Core2D
                 }
 
                 var parser = new SvgPathGeometryParser();
-        
+
                 parser.Parse(geometry, source, curIndex);
             }
- 
+
             geometry.FillRule = fillRule;
 
             return geometry;
@@ -84,25 +84,25 @@ namespace Core2D
         private Point2 _secondLastPoint;
         private char _token;
         private XPathGeometry _geometry;
-        
+
         private void InvalidToken()
         {
-            throw new FormatException(string.Format("Unexpectedt token {0} at index {1}.", _pathString, _curIndex - 1));
+            throw new FormatException(string.Format("Unexpected token {0} at index {1}.", _pathString, _curIndex - 1));
         }
- 
+
         private bool HaveMore()
         {
             return _curIndex < _pathLength;
         }
-        
+
         private bool SkipWhiteSpace(bool allowComma)
         {
             bool commaMet = false;
-            
+
             while (HaveMore())
             {
                 char ch = _pathString[_curIndex];
-                
+
                 switch (ch)
                 {
                     case ' ':
@@ -130,17 +130,17 @@ namespace Core2D
                         }
                         break;
                 }
-                
+
                 _curIndex++;
             }
-            
+
             return commaMet;
         }
- 
+
         private bool ReadToken()
         {
             SkipWhiteSpace(!_allowComma);
- 
+
             if (HaveMore())
             {
                 _token = _pathString[_curIndex++];
@@ -148,11 +148,11 @@ namespace Core2D
             }
             return false;
         }
-        
+
         private bool IsNumber(bool allowComma)
         {
             bool commaMet = SkipWhiteSpace(allowComma);
-            
+
             if (HaveMore())
             {
                 _token = _pathString[_curIndex];
@@ -164,22 +164,22 @@ namespace Core2D
                     return true;
                 }
             }
- 
+
             if (commaMet)
             {
                 InvalidToken();
             }
-            
+
             return false;
         }
-        
+
         private void SkipDigits(bool signAllowed)
         {
             if (signAllowed && HaveMore() && ((_pathString[_curIndex] == '-') || _pathString[_curIndex] == '+'))
             {
                 _curIndex++;
             }
-        
+
             while (HaveMore() && (_pathString[_curIndex] >= '0') && (_pathString[_curIndex] <= '9'))
             {
                 _curIndex++;
@@ -192,15 +192,15 @@ namespace Core2D
             {
                 InvalidToken();
             }
-            
+
             bool simple = true;
             int start = _curIndex;
-            
+
             if (HaveMore() && ((_pathString[_curIndex] == '-') || _pathString[_curIndex] == '+'))
             {
                 _curIndex++;
             }
- 
+
             if (HaveMore() && (_pathString[_curIndex] == 'I'))
             {
                 _curIndex = Math.Min(_curIndex + 8, _pathLength);
@@ -214,14 +214,14 @@ namespace Core2D
             else
             {
                 SkipDigits(!_allowSign);
- 
+
                 if (HaveMore() && (_pathString[_curIndex] == '.'))
                 {
                     simple = false;
                     _curIndex++;
                     SkipDigits(!_allowSign);
                 }
- 
+
                 if (HaveMore() && ((_pathString[_curIndex] == 'E') || (_pathString[_curIndex] == 'e')))
                 {
                     simple = false;
@@ -229,11 +229,11 @@ namespace Core2D
                     SkipDigits(_allowSign);
                 }
             }
- 
+
             if (simple && (_curIndex <= (start + 8)))
             {
                 int sign = 1;
-                
+
                 if (_pathString[start] == '+')
                 {
                     start++;
@@ -243,15 +243,15 @@ namespace Core2D
                     start++;
                     sign = -1;
                 }
-                
+
                 int value = 0;
-                
+
                 while (start < _curIndex)
                 {
                     value = value * 10 + (_pathString[start] - '0');
                     start++;
                 }
-                
+
                 return value * sign;
             }
             else
@@ -267,15 +267,15 @@ namespace Core2D
                 }
             }
         }
-        
+
         private bool ReadBool()
         {
             SkipWhiteSpace(_allowComma);
- 
+
             if (HaveMore())
             {
                 _token = _pathString[_curIndex++];
- 
+
                 if (_token == '0')
                 {
                     return false;
@@ -285,31 +285,31 @@ namespace Core2D
                     return true;
                 }
             }
- 
+
             InvalidToken();
-            
+
             return false;
         }
-        
+
         private Point2 ReadPoint(char cmd, bool allowcomma)
         {
             double x = ReadNumber(allowcomma);
             double y = ReadNumber(_allowComma);
- 
+
             if (cmd >= 'a')
             {
                 x += _lastPoint.X;
                 y += _lastPoint.Y;
             }
- 
+
             return Point2.Create(x, y);
         }
-    
+
         private Point2 Reflect()
         {
             return Point2.Create(2 * _lastPoint.X - _secondLastPoint.X, 2 * _lastPoint.Y - _secondLastPoint.Y);
         }
-        
+
         private void EnsureFigure()
         {
             if (!_figureStarted)
@@ -337,11 +337,11 @@ namespace Core2D
             _figureStarted = false;
             bool first = true;
             char last_cmd = ' ';
- 
+
             while (ReadToken())
             {
                 char cmd = _token;
- 
+
                 if (first)
                 {
                     if ((cmd != 'M') && (cmd != 'm'))
@@ -351,7 +351,7 @@ namespace Core2D
 
                     first = false;
                 }
-                
+
                 switch (cmd)
                 {
                     case 'm':
@@ -362,7 +362,7 @@ namespace Core2D
                         _figureStarted = true;
                         _lastStart = _lastPoint;
                         last_cmd = 'M';
-                    
+
                         while (IsNumber(_allowComma))
                         {
                             _lastPoint = ReadPoint(cmd, !_allowComma);
@@ -370,7 +370,7 @@ namespace Core2D
                             last_cmd = 'L';
                         }
                         break;
- 
+
                     case 'l':
                     case 'L':
                     case 'h':
@@ -378,7 +378,7 @@ namespace Core2D
                     case 'v':
                     case 'V':
                         EnsureFigure();
- 
+
                         do
                         {
                             switch (cmd)
@@ -402,14 +402,14 @@ namespace Core2D
                                     _lastPoint.Y = ReadNumber(!_allowComma);
                                     break;
                             }
- 
+
                             context.LineTo(XPoint.FromPoint2(_lastPoint), _isStroked, !_isSmoothJoin);
                         }
                         while (IsNumber(_allowComma));
- 
+
                         last_cmd = 'L';
                         break;
- 
+
                     case 'c':
                     case 'C':
                     case 's':
@@ -419,7 +419,7 @@ namespace Core2D
                         do
                         {
                             Point2 p;
-                        
+
                             if ((cmd == 's') || (cmd == 'S'))
                             {
                                 if (last_cmd == 'C')
@@ -430,16 +430,16 @@ namespace Core2D
                                 {
                                     p = _lastPoint;
                                 }
- 
+
                                 _secondLastPoint = ReadPoint(cmd, !_allowComma);
                             }
                             else
                             {
                                 p = ReadPoint(cmd, !_allowComma);
- 
+
                                 _secondLastPoint = ReadPoint(cmd, _allowComma);
                             }
-                            
+
                             _lastPoint = ReadPoint(cmd, _allowComma);
                             context.BezierTo(
                                 XPoint.FromPoint2(p),
@@ -447,19 +447,19 @@ namespace Core2D
                                 XPoint.FromPoint2(_lastPoint),
                                 _isStroked,
                                 !_isSmoothJoin);
-                        
+
                             last_cmd = 'C';
                         }
                         while (IsNumber(_allowComma));
-                    
+
                         break;
-                    
+
                     case 'q':
                     case 'Q':
                     case 't':
                     case 'T':
                         EnsureFigure();
-                    
+
                         do
                         {
                             if ((cmd == 't') || (cmd == 'T'))
@@ -472,7 +472,7 @@ namespace Core2D
                                 {
                                     _secondLastPoint = _lastPoint;
                                 }
- 
+
                                 _lastPoint = ReadPoint(cmd, !_allowComma);
                             }
                             else
@@ -480,7 +480,7 @@ namespace Core2D
                                 _secondLastPoint = ReadPoint(cmd, !_allowComma);
                                 _lastPoint = ReadPoint(cmd, _allowComma);
                             }
- 
+
                             context.QuadraticBezierTo(
                                 XPoint.FromPoint2(_secondLastPoint),
                                 XPoint.FromPoint2(_lastPoint),
@@ -490,13 +490,13 @@ namespace Core2D
                             last_cmd = 'Q';
                         }
                         while (IsNumber(_allowComma));
-                    
+
                         break;
-                    
+
                     case 'a':
                     case 'A':
                         EnsureFigure();
-                    
+
                         do
                         {
                             double w = ReadNumber(!_allowComma);
@@ -506,7 +506,7 @@ namespace Core2D
                             bool sweep = ReadBool();
 
                             _lastPoint = ReadPoint(cmd, _allowComma);
- 
+
                             context.ArcTo(
                                 XPoint.FromPoint2(_lastPoint),
                                 XPathSize.Create(w, h),
@@ -517,10 +517,10 @@ namespace Core2D
                                 !_isSmoothJoin);
                         }
                         while (IsNumber(_allowComma));
-                    
+
                         last_cmd = 'A';
                         break;
-                    
+
                     case 'z':
                     case 'Z':
                         EnsureFigure();

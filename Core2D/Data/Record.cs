@@ -58,10 +58,7 @@ namespace Core2D
         /// <param name="values"></param>
         /// <param name="owner"></param>
         /// <returns></returns>
-        public static Record Create(
-            ImmutableArray<Column> columns,
-            ImmutableArray<Value> values,
-            Database owner)
+        public static Record Create(ImmutableArray<Column> columns, ImmutableArray<Value> values, Database owner)
         {
             return new Record()
             {
@@ -80,11 +77,7 @@ namespace Core2D
         /// <param name="values"></param>
         /// <param name="owner"></param>
         /// <returns></returns>
-        public static Record Create(
-            string id,
-            ImmutableArray<Column> columns,
-            ImmutableArray<Value> values,
-            Database owner)
+        public static Record Create(string id, ImmutableArray<Column> columns, ImmutableArray<Value> values, Database owner)
         {
             return new Record()
             {

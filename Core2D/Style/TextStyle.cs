@@ -90,14 +90,7 @@ namespace Core2D
         /// <param name="textHAlignment"></param>
         /// <param name="textVAlignment"></param>
         /// <returns></returns>
-        public static TextStyle Create(
-            string name = "",
-            string fontName = "Calibri",
-            string fontFile = "calibri.ttf",
-            double fontSize = 12.0,
-            FontStyle fontStyle = null,
-            TextHAlignment textHAlignment = TextHAlignment.Center,
-            TextVAlignment textVAlignment = TextVAlignment.Center)
+        public static TextStyle Create(string name = "", string fontName = "Calibri", string fontFile = "calibri.ttf", double fontSize = 12.0, FontStyle fontStyle = null, TextHAlignment textHAlignment = TextHAlignment.Center, TextVAlignment textVAlignment = TextVAlignment.Center)
         {
             return new TextStyle()
             {

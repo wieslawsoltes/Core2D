@@ -51,14 +51,7 @@ namespace Core2D
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
         /// <returns>The new instance of the <see cref="XArcSegment"/> class.</returns>
-        public static XArcSegment Create(
-            XPoint point,
-            XPathSize size,
-            double rotationAngle,
-            bool isLargeArc,
-            XSweepDirection sweepDirection,
-            bool isStroked,
-            bool isSmoothJoin)
+        public static XArcSegment Create(XPoint point, XPathSize size, double rotationAngle, bool isLargeArc, XSweepDirection sweepDirection, bool isStroked, bool isSmoothJoin)
         {
             return new XArcSegment()
             {

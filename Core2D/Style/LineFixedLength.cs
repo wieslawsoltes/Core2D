@@ -156,11 +156,7 @@ namespace Core2D
         /// <param name="startTrigger"></param>
         /// <param name="endTrigger"></param>
         /// <returns></returns>
-        public static LineFixedLength Create(
-            LineFixedLengthFlags flags = LineFixedLengthFlags.Disabled,
-            double length = 15.0,
-            ShapeState startTrigger = null,
-            ShapeState endTrigger = null)
+        public static LineFixedLength Create(LineFixedLengthFlags flags = LineFixedLengthFlags.Disabled, double length = 15.0, ShapeState startTrigger = null, ShapeState endTrigger = null)
         {
             return new LineFixedLength()
             {

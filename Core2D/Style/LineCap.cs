@@ -12,10 +12,12 @@ namespace Core2D
         /// 
         /// </summary>
         Flat = 0,
+
         /// <summary>
         /// 
         /// </summary>
         Square = 1,
+
         /// <summary>
         /// 
         /// </summary>

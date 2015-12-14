@@ -27,10 +27,7 @@ namespace Core2D
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
         /// <returns>The new instance of the <see cref="XLineSegment"/> class.</returns>
-        public static XLineSegment Create(
-            XPoint point,
-            bool isStroked,
-            bool isSmoothJoin)
+        public static XLineSegment Create(XPoint point, bool isStroked, bool isSmoothJoin)
         {
             return new XLineSegment()
             {

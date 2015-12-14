@@ -12,6 +12,7 @@ namespace Core2D.Wpf.Controls.Custom
         /// Move item to new index.
         /// </summary>
         Move,
+
         /// <summary>
         /// Swap item indexes.
         /// </summary>

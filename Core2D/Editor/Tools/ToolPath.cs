@@ -12,30 +12,30 @@ namespace Core2D
     {
         private Editor _editor;
         private State _currentState = State.None;
-        // path
+        // Path Tool
         private XPath _path;
         private XPathGeometry _geometry;
         private bool _isInitialized = false;
         private PathTool _previousPathTool;
         private PathTool _movePathTool;
-        // line
+        // Line Tool
         private XPoint _lineStart;
         private XPoint _lineEnd;
-        // bezier
+        // Bezier Tool
         private XPoint _bezierPoint1;
         private XPoint _bezierPoint2;
         private XPoint _bezierPoint3;
         private XPoint _bezierPoint4;
-        // qbezier
+        // QBezier Tool
         private XPoint _qbezierPoint1;
         private XPoint _qbezierPoint2;
         private XPoint _qbezierPoint3;
-        // helpers
+        // Helpers Style
         private ShapeStyle _style;
-        // line helper
+        // Line Helper
         private XPoint _lineStartHelperPoint;
         private XPoint _lineEndHelperPoint;
-        // bezier helper
+        // Bezier Helper
         private XLine _bezierLine12;
         private XLine _bezierLine43;
         private XLine _bezierLine23;
@@ -43,7 +43,7 @@ namespace Core2D
         private XPoint _bezierHelperPoint2;
         private XPoint _bezierHelperPoint3;
         private XPoint _bezierHelperPoint4;
-        // qbezier helper
+        // QBezier Helper
         private XLine _qbezierLine12;
         private XLine _qbezierLine32;
         private XPoint _qbezierHelperPoint1;

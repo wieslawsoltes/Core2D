@@ -12,6 +12,7 @@ namespace Core2D
         /// Point mode.
         /// </summary>
         Point,
+
         /// <summary>
         /// Shape mode.
         /// </summary>

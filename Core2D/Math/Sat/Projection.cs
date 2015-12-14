@@ -13,6 +13,7 @@ namespace Core2D
         /// 
         /// </summary>
         public double Min { get; private set; }
+
         /// <summary>
         /// 
         /// </summary>
