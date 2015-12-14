@@ -4,16 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-using System.Text;
 using netDxf;
-using netDxf.Blocks;
-using netDxf.Collections;
 using netDxf.Entities;
 using netDxf.Header;
-using netDxf.IO;
 using netDxf.Objects;
 using netDxf.Tables;
-using netDxf.Units;
 
 namespace Dependencies
 {
