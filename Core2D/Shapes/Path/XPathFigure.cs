@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Core2D
 {
@@ -28,6 +29,20 @@ namespace Core2D
         /// Gets or sets flag indicating whether path is closed.
         /// </summary>
         public bool IsClosed { get; set; }
+
+        /// <summary>
+        /// Get all points in the figure.
+        /// </summary>
+        /// <returns>All points in the figure.</returns>
+        public IEnumerable<XPoint> GetPoints()
+        {
+            yield return StartPoint;
+            
+            foreach (var point in Segments.SelectMany(s => s.GetPoints()))
+            {
+                yield return point;
+            }
+        }
 
         /// <summary>
         /// Creates a new <see cref="XPathFigure"/> instance.

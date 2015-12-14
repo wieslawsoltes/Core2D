@@ -341,7 +341,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Snaps value by specified snap parameter.
+        /// Snaps value by specified snap amount.
         /// </summary>
         /// <param name="value">The value to snap.</param>
         /// <param name="snap">The snap amount.</param>
@@ -350,264 +350,6 @@ namespace Core2D
         {
             double r = value % snap;
             return r >= snap / 2.0 ? value + snap - r : value - r;
-        }
-
-        /// <summary>
-        /// Gets all points in the path.
-        /// </summary>
-        /// <param name="path">The <see cref="XPath"/> object.</param>
-        /// <returns>All points in the path.</returns>
-        public static IEnumerable<XPoint> GetAllPathPoints(XPath path)
-        {
-            if (path == null || path.Geometry == null)
-                yield break;
-
-            foreach (var figure in path.Geometry.Figures)
-            {
-                yield return figure.StartPoint;
-
-                foreach (var segment in figure.Segments)
-                {
-                    if (segment is XArcSegment)
-                    {
-                        var arcSegment = segment as XArcSegment;
-                        yield return arcSegment.Point;
-                    }
-                    else if (segment is XBezierSegment)
-                    {
-                        var bezierSegment = segment as XBezierSegment;
-                        yield return bezierSegment.Point1;
-                        yield return bezierSegment.Point2;
-                        yield return bezierSegment.Point3;
-                    }
-                    else if (segment is XLineSegment)
-                    {
-                        var lineSegment = segment as XLineSegment;
-                        yield return lineSegment.Point;
-                    }
-                    else if (segment is XPolyBezierSegment)
-                    {
-                        var polyBezierSegment = segment as XPolyBezierSegment;
-                        foreach (var point in polyBezierSegment.Points)
-                        {
-                            yield return point;
-                        }
-                    }
-                    else if (segment is XPolyLineSegment)
-                    {
-                        var polyLineSegment = segment as XPolyLineSegment;
-                        foreach (var point in polyLineSegment.Points)
-                        {
-                            yield return point;
-                        }
-                    }
-                    else if (segment is XPolyQuadraticBezierSegment)
-                    {
-                        var polyQuadraticSegment = segment as XPolyQuadraticBezierSegment;
-                        foreach (var point in polyQuadraticSegment.Points)
-                        {
-                            yield return point;
-                        }
-                    }
-                    else if (segment is XQuadraticBezierSegment)
-                    {
-                        var qbezierSegment = segment as XQuadraticBezierSegment;
-                        yield return qbezierSegment.Point1;
-                        yield return qbezierSegment.Point2;
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// Gets all points in the shapes collection.
-        /// </summary>
-        /// <param name="shapes">The shapes collection.</param>
-        /// <param name="exclude">The shapes to exclude.</param>
-        /// <returns>All points in the shapes collection</returns>
-        public static IEnumerable<XPoint> GetAllPoints(IEnumerable<BaseShape> shapes, ShapeStateFlags exclude)
-        {
-            if (shapes == null)
-                yield break;
-
-            foreach (var shape in shapes)
-            {
-                if (shape is XPoint)
-                {
-                    var point = shape as XPoint;
-
-                    if (!point.State.Flags.HasFlag(exclude))
-                    {
-                        yield return shape as XPoint;
-                    }
-                }
-                else if (shape is XLine)
-                {
-                    var line = shape as XLine;
-
-                    if (!line.Start.State.Flags.HasFlag(exclude))
-                    {
-                        yield return line.Start;
-                    }
-
-                    if (!line.End.State.Flags.HasFlag(exclude))
-                    {
-                        yield return line.End;
-                    }
-                }
-                else if (shape is XRectangle)
-                {
-                    var rectangle = shape as XRectangle;
-
-                    if (!rectangle.TopLeft.State.Flags.HasFlag(exclude))
-                    {
-                        yield return rectangle.TopLeft;
-                    }
-
-                    if (!rectangle.BottomRight.State.Flags.HasFlag(exclude))
-                    {
-                        yield return rectangle.BottomRight;
-                    }
-                }
-                else if (shape is XEllipse)
-                {
-                    var ellipse = shape as XEllipse;
-
-                    if (!ellipse.TopLeft.State.Flags.HasFlag(exclude))
-                    {
-                        yield return ellipse.TopLeft;
-                    }
-
-                    if (!ellipse.BottomRight.State.Flags.HasFlag(exclude))
-                    {
-                        yield return ellipse.BottomRight;
-                    }
-                }
-                else if (shape is XArc)
-                {
-                    var arc = shape as XArc;
-
-                    if (!arc.Point1.State.Flags.HasFlag(exclude))
-                    {
-                        yield return arc.Point1;
-                    }
-
-                    if (!arc.Point2.State.Flags.HasFlag(exclude))
-                    {
-                        yield return arc.Point2;
-                    }
-
-                    if (!arc.Point3.State.Flags.HasFlag(exclude))
-                    {
-                        yield return arc.Point3;
-                    }
-
-                    if (!arc.Point4.State.Flags.HasFlag(exclude))
-                    {
-                        yield return arc.Point4;
-                    }
-                }
-                else if (shape is XBezier)
-                {
-                    var bezier = shape as XBezier;
-
-                    if (!bezier.Point1.State.Flags.HasFlag(exclude))
-                    {
-                        yield return bezier.Point1;
-                    }
-
-                    if (!bezier.Point2.State.Flags.HasFlag(exclude))
-                    {
-                        yield return bezier.Point2;
-                    }
-
-                    if (!bezier.Point3.State.Flags.HasFlag(exclude))
-                    {
-                        yield return bezier.Point3;
-                    }
-
-                    if (!bezier.Point4.State.Flags.HasFlag(exclude))
-                    {
-                        yield return bezier.Point4;
-                    }
-                }
-                else if (shape is XQBezier)
-                {
-                    var qbezier = shape as XQBezier;
-
-                    if (!qbezier.Point1.State.Flags.HasFlag(exclude))
-                    {
-                        yield return qbezier.Point1;
-                    }
-
-                    if (!qbezier.Point2.State.Flags.HasFlag(exclude))
-                    {
-                        yield return qbezier.Point2;
-                    }
-
-                    if (!qbezier.Point3.State.Flags.HasFlag(exclude))
-                    {
-                        yield return qbezier.Point3;
-                    }
-                }
-                else if (shape is XText)
-                {
-                    var text = shape as XText;
-
-                    if (!text.TopLeft.State.Flags.HasFlag(exclude))
-                    {
-                        yield return text.TopLeft;
-                    }
-
-                    if (!text.BottomRight.State.Flags.HasFlag(exclude))
-                    {
-                        yield return text.BottomRight;
-                    }
-                }
-                else if (shape is XImage)
-                {
-                    var image = shape as XImage;
-
-                    if (!image.TopLeft.State.Flags.HasFlag(exclude))
-                    {
-                        yield return image.TopLeft;
-                    }
-
-                    if (!image.BottomRight.State.Flags.HasFlag(exclude))
-                    {
-                        yield return image.BottomRight;
-                    }
-                }
-                else if (shape is XPath)
-                {
-                    var path = shape as XPath;
-
-                    foreach (var point in GetAllPathPoints(path))
-                    {
-                        if (!point.State.Flags.HasFlag(exclude))
-                        {
-                            yield return point;
-                        }
-                    }
-                }
-                else if (shape is XGroup)
-                {
-                    var group = shape as XGroup;
-
-                    foreach (var point in GetAllPoints(group.Shapes, exclude))
-                    {
-                        if (!point.State.Flags.HasFlag(exclude))
-                        {
-                            yield return point;
-                        }
-                    }
-
-                    foreach (var point in group.Connectors)
-                    {
-                        yield return point;
-                    }
-                }
-            }
         }
 
         /// <summary>
@@ -622,53 +364,17 @@ namespace Core2D
 
             foreach (var shape in shapes)
             {
-                if (shape is XPoint)
-                {
-                    yield return shape;
-                }
-                else if (shape is XLine)
-                {
-                    yield return shape;
-                }
-                else if (shape is XRectangle)
-                {
-                    yield return shape;
-                }
-                else if (shape is XEllipse)
-                {
-                    yield return shape;
-                }
-                else if (shape is XArc)
-                {
-                    yield return shape;
-                }
-                else if (shape is XBezier)
-                {
-                    yield return shape;
-                }
-                else if (shape is XQBezier)
-                {
-                    yield return shape;
-                }
-                else if (shape is XText)
-                {
-                    yield return shape;
-                }
-                else if (shape is XImage)
-                {
-                    yield return shape;
-                }
-                else if (shape is XPath)
-                {
-                    yield return shape;
-                }
-                else if (shape is XGroup)
+                if (shape is XGroup)
                 {
                     foreach (var s in GetAllShapes((shape as XGroup).Shapes))
                     {
                         yield return s;
                     }
 
+                    yield return shape;
+                }
+                else
+                {
                     yield return shape;
                 }
             }
@@ -2049,7 +1755,7 @@ namespace Core2D
                             {
                                 var shape = _renderers[0].State.SelectedShape;
                                 var shapes = Enumerable.Repeat(shape, 1);
-                                var points = GetAllPoints(shapes, ShapeStateFlags.Connector).Distinct().ToList();
+                                var points = shapes.SelectMany(s => s.GetPoints()).Distinct().ToList();
 
                                 MovePointsBy(points, dx, dy);
 
@@ -2085,7 +1791,7 @@ namespace Core2D
                 {
                     case MoveMode.Point:
                         {
-                            var points = GetAllPoints(shapes, ShapeStateFlags.Connector).Distinct().ToList();
+                            var points = shapes.SelectMany(s => s.GetPoints()).Distinct().ToList();
 
                             MovePointsBy(points, dx, dy);
 
@@ -2555,7 +2261,7 @@ namespace Core2D
             var layer = _project.CurrentContainer.CurrentLayer;
             if (group.Connectors.Length > 0)
             {
-                var wires = Editor.GetAllShapes<XLine>(layer.Shapes);
+                var wires = GetAllShapes<XLine>(layer.Shapes);
                 var dict = new Dictionary<XLine, IList<XPoint>>();
 
                 // Find possible group to line connections.
@@ -4456,7 +4162,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Try to restore shapes styles.
+        /// Try to restore shape styles.
         /// </summary>
         /// <param name="shapes">The shapes collection.</param>
         private void TryToRestoreStyles(IEnumerable<BaseShape> shapes)
@@ -4473,13 +4179,13 @@ namespace Core2D
                     .ToDictionary(s => s.Name);
 
                 // Reset point shape to container default.
-                foreach (var point in Editor.GetAllPoints(shapes, ShapeStateFlags.Connector))
+                foreach (var point in shapes.SelectMany(s => s.GetPoints()))
                 {
                     point.Shape = _project.Options.PointShape;
                 }
 
                 // Try to restore shape styles.
-                foreach (var shape in Editor.GetAllShapes(shapes))
+                foreach (var shape in GetAllShapes(shapes))
                 {
                     if (shape.Style == null)
                         continue;
@@ -4525,7 +4231,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Try to restore shapes records.
+        /// Try to restore shape records.
         /// </summary>
         /// <param name="shapes">The shapes collection.</param>
         private void TryToRestoreRecords(IEnumerable<BaseShape> shapes)
@@ -4541,7 +4247,7 @@ namespace Core2D
                     .ToDictionary(s => s.Id);
 
                 // Try to restore shape record.
-                foreach (var shape in Editor.GetAllShapes(shapes))
+                foreach (var shape in GetAllShapes(shapes))
                 {
                     if (shape.Data.Record == null)
                         continue;
@@ -4865,8 +4571,8 @@ namespace Core2D
         {
             try
             {
-                double sx = _project.Options.SnapToGrid ? Editor.Snap(x, _project.Options.SnapX) : x;
-                double sy = _project.Options.SnapToGrid ? Editor.Snap(y, _project.Options.SnapY) : y;
+                double sx = _project.Options.SnapToGrid ? Snap(x, _project.Options.SnapX) : x;
+                double sy = _project.Options.SnapToGrid ? Snap(y, _project.Options.SnapY) : y;
 
                 var clone = Clone(group);
                 if (clone != null)
@@ -4957,8 +4663,8 @@ namespace Core2D
             var g = XGroup.Create("g");
             g.Data.Record = record;
 
-            double sx = _project.Options.SnapToGrid ? Editor.Snap(x, _project.Options.SnapX) : x;
-            double sy = _project.Options.SnapToGrid ? Editor.Snap(y, _project.Options.SnapY) : y;
+            double sx = _project.Options.SnapToGrid ? Snap(x, _project.Options.SnapX) : x;
+            double sy = _project.Options.SnapToGrid ? Snap(y, _project.Options.SnapY) : y;
 
             var length = record.Values.Length;
             double px = sx;

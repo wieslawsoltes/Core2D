@@ -47,7 +47,7 @@ namespace Core2D
                             {
                                 var shape = _editor.Renderers[0].State.SelectedShape;
                                 var shapes = Enumerable.Repeat(shape, 1);
-                                _pointsCache = Editor.GetAllPoints(shapes, ShapeStateFlags.Connector).Distinct().ToList();
+                                _pointsCache = shapes.SelectMany(s => s.GetPoints()).Distinct().ToList();
                             }
                         }
                         break;
@@ -72,7 +72,7 @@ namespace Core2D
                 {
                     case MoveMode.Point:
                         {
-                            _pointsCache = Editor.GetAllPoints(shapes, ShapeStateFlags.Connector).Distinct().ToList();
+                            _pointsCache = shapes.SelectMany(s => s.GetPoints()).Distinct().ToList();
                         }
                         break;
                     case MoveMode.Shape:

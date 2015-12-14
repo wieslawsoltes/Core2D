@@ -333,7 +333,7 @@ namespace Core2D
 
                 if (path.Geometry != null)
                 {
-                    var points = path.GetAllPoints();
+                    var points = path.GetPoints().ToImmutableArray();
                     foreach (var point in points)
                     {
                         if (GetPointBounds(point, treshold, dx, dy).Contains(p))
@@ -583,7 +583,7 @@ namespace Core2D
             {
                 if ((shape as XPath).Geometry != null)
                 {
-                    var points = (shape as XPath).GetAllPoints();
+                    var points = shape.GetPoints().ToImmutableArray();
                     if (ConvexHullBounds.Overlap(selection, ConvexHullBounds.GetVertices(points, dx, dy)))
                     {
                         if (builder != null)

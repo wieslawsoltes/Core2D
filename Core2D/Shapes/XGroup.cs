@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 
 namespace Core2D
 {
@@ -129,6 +130,12 @@ namespace Core2D
             {
                 connector.Move(dx, dy);
             }
+        }
+
+        /// <inheritdoc/>
+        public override IEnumerable<XPoint> GetPoints()
+        {
+            return Enumerable.Concat(Shapes.SelectMany(s => s.GetPoints()), Connectors);
         }
 
         /// <summary>

@@ -14,6 +14,12 @@ namespace Core2D
         /// </summary>
         public IList<XPoint> Points { get; set; }
 
+        /// <inheritdoc/>
+        public override IEnumerable<XPoint> GetPoints()
+        {
+            return Points;
+        }
+
         /// <summary>
         /// Creates a new <see cref="XPolyBezierSegment"/> instance.
         /// </summary>

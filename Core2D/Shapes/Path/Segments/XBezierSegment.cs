@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System.Collections.Generic;
 
 namespace Core2D
 {
@@ -22,6 +23,14 @@ namespace Core2D
         /// Gets or sets end point.
         /// </summary>
         public XPoint Point3 { get; set; }
+
+        /// <inheritdoc/>
+        public override IEnumerable<XPoint> GetPoints()
+        {
+            yield return Point1;
+            yield return Point2;
+            yield return Point3;
+        }
 
         /// <summary>
         /// Creates a new <see cref="XBezierSegment"/> instance.

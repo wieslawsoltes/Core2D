@@ -1,6 +1,8 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 
 namespace Core2D
 {
@@ -25,76 +27,6 @@ namespace Core2D
             set { Update(ref _geometry, value); }
         }
 
-        /// <summary>
-        /// Gets all points from <see cref="XPathGeometry.Figures"/>. 
-        /// </summary>
-        /// <returns>The <see cref="XPoint"/> array.</returns>
-        public ImmutableArray<XPoint> GetAllPoints()
-        {
-            var builder = ImmutableArray.CreateBuilder<XPoint>();
-
-            if (this.Geometry != null)
-            {
-                foreach (var figure in this.Geometry.Figures)
-                {
-                    builder.Add(figure.StartPoint);
-
-                    foreach (var segment in figure.Segments)
-                    {
-                        if (segment is XArcSegment)
-                        {
-                            var arcSegment = segment as XArcSegment;
-                            builder.Add(arcSegment.Point);
-                        }
-                        else if (segment is XBezierSegment)
-                        {
-                            var bezierSegment = segment as XBezierSegment;
-                            builder.Add(bezierSegment.Point1);
-                            builder.Add(bezierSegment.Point2);
-                            builder.Add(bezierSegment.Point3);
-                        }
-                        else if (segment is XLineSegment)
-                        {
-                            var lineSegment = segment as XLineSegment;
-                            builder.Add(lineSegment.Point);
-                        }
-                        else if (segment is XPolyBezierSegment)
-                        {
-                            var polyBezierSegment = segment as XPolyBezierSegment;
-                            foreach (var point in polyBezierSegment.Points)
-                            {
-                                builder.Add(point);
-                            }
-                        }
-                        else if (segment is XPolyLineSegment)
-                        {
-                            var polyLineSegment = segment as XPolyLineSegment;
-                            foreach (var point in polyLineSegment.Points)
-                            {
-                                builder.Add(point);
-                            }
-                        }
-                        else if (segment is XPolyQuadraticBezierSegment)
-                        {
-                            var polyQuadraticSegment = segment as XPolyQuadraticBezierSegment;
-                            foreach (var point in polyQuadraticSegment.Points)
-                            {
-                                builder.Add(point);
-                            }
-                        }
-                        else if (segment is XQuadraticBezierSegment)
-                        {
-                            var qbezierSegment = segment as XQuadraticBezierSegment;
-                            builder.Add(qbezierSegment.Point1);
-                            builder.Add(qbezierSegment.Point2);
-                        }
-                    }
-                }
-            }
-
-            return builder.ToImmutable();
-        }
-
         /// <inheritdoc/>
         public override void Draw(object dc, Renderer renderer, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
@@ -109,7 +41,7 @@ namespace Core2D
             {
                 if (this == renderer.State.SelectedShape)
                 {
-                    var points = this.GetAllPoints();
+                    var points = this.GetPoints();
                     foreach (var point in points)
                     {
                         point.Draw(dc, renderer, dx, dy, db, record);
@@ -117,7 +49,7 @@ namespace Core2D
                 }
                 else
                 {
-                    var points = this.GetAllPoints();
+                    var points = this.GetPoints();
                     foreach (var point in points)
                     {
                         if (point == renderer.State.SelectedShape)
@@ -132,7 +64,7 @@ namespace Core2D
             {
                 if (renderer.State.SelectedShapes.Contains(this))
                 {
-                    var points = this.GetAllPoints();
+                    var points = this.GetPoints();
                     foreach (var point in points)
                     {
                         point.Draw(dc, renderer, dx, dy, db, record);
@@ -144,11 +76,17 @@ namespace Core2D
         /// <inheritdoc/>
         public override void Move(double dx, double dy)
         {
-            var points = this.GetAllPoints();
+            var points = this.GetPoints();
             foreach (var point in points)
             {
                 point.Move(dx, dy);
             }
+        }
+
+        /// <inheritdoc/>
+        public override IEnumerable<XPoint> GetPoints()
+        {
+            return Geometry.Figures.SelectMany(f => f.GetPoints());
         }
 
         /// <summary>

@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System.Collections.Generic;
 using System.Collections.Immutable;
 
 namespace Core2D
@@ -121,6 +122,15 @@ namespace Core2D
             {
                 Point4.Move(dx, dy);
             }
+        }
+
+        /// <inheritdoc/>
+        public override IEnumerable<XPoint> GetPoints()
+        {
+            yield return Point1;
+            yield return Point2;
+            yield return Point3;
+            yield return Point4;
         }
 
         /// <summary>

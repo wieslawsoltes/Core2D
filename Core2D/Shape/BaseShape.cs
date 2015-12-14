@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System.Collections.Generic;
 using System.Collections.Immutable;
 
 namespace Core2D
@@ -97,5 +98,11 @@ namespace Core2D
         /// <param name="dx">The X axis position offset.</param>
         /// <param name="dy">The Y axis position offset.</param>
         public abstract void Move(double dx, double dy);
+
+        /// <summary>
+        /// Get all points in the shape.
+        /// </summary>
+        /// <returns>All points in the shape.</returns>
+        public abstract IEnumerable<XPoint> GetPoints();
     }
 }
