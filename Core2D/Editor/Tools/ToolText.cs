@@ -98,7 +98,7 @@ namespace Core2D
                             _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_shape);
                             Remove();
                             Finalize(_shape);
-                            _editor.AddShape(_shape);
+                            _editor.Project.AddShape(_shape);
                             _currentState = State.None;
                             _editor.CancelAvailable = false;
                         }
