@@ -772,37 +772,37 @@ namespace Core2D
 
             AddDatabaseCommand =
                 Command.Create(
-                    () => editor.AddDatabase(),
+                    () => editor.Project.AddDatabase(),
                     () => editor.IsEditMode());
 
             RemoveDatabaseCommand =
                 Command<object>.Create(
-                    (db) => editor.RemoveDatabase(db),
+                    (db) => editor.Project.RemoveDatabase(db),
                     (db) => editor.IsEditMode());
 
             AddColumnCommand =
                 Command<object>.Create(
-                    (owner) => editor.AddColumn(owner),
+                    (owner) => editor.Project.AddColumn(owner),
                     (owner) => editor.IsEditMode());
 
             RemoveColumnCommand =
                 Command<object>.Create(
-                    (parameter) => editor.RemoveColumn(parameter),
+                    (parameter) => editor.Project.RemoveColumn(parameter),
                     (parameter) => editor.IsEditMode());
 
             AddRecordCommand =
                 Command.Create(
-                    () => editor.AddRecord(),
+                    () => editor.Project.AddRecord(),
                     () => editor.IsEditMode());
 
             RemoveRecordCommand =
                 Command.Create(
-                    () => editor.RemoveRecord(),
+                    () => editor.Project.RemoveRecord(),
                     () => editor.IsEditMode());
 
             ResetRecordCommand =
                 Command<object>.Create(
-                    (owner) => editor.ResetRecord(owner),
+                    (owner) => editor.Project.ResetRecord(owner),
                     (owner) => editor.IsEditMode());
 
             ApplyRecordCommand =
@@ -812,22 +812,22 @@ namespace Core2D
 
             AddPropertyCommand =
                 Command<object>.Create(
-                    (owner) => editor.AddProperty(owner),
+                    (owner) => editor.Project.AddProperty(owner),
                     (owner) => editor.IsEditMode());
 
             RemovePropertyCommand =
                 Command<object>.Create(
-                    (parameter) => editor.RemoveProperty(parameter),
+                    (parameter) => editor.Project.RemoveProperty(parameter),
                     (parameter) => editor.IsEditMode());
 
             AddGroupLibraryCommand =
                 Command.Create(
-                    () => editor.AddGroupLibrary(),
+                    () => editor.Project.AddGroupLibrary(),
                     () => editor.IsEditMode());
 
             RemoveGroupLibraryCommand =
                 Command.Create(
-                    () => editor.RemoveCurrentGroupLibrary(),
+                    () => editor.Project.RemoveCurrentGroupLibrary(),
                     () => editor.IsEditMode());
 
             AddGroupCommand =
@@ -847,32 +847,32 @@ namespace Core2D
 
             AddLayerCommand =
                 Command.Create(
-                    () => editor.AddLayer(),
+                    () => editor.Project.AddLayer(),
                     () => editor.IsEditMode());
 
             RemoveLayerCommand =
                 Command.Create(
-                    () => editor.RemoveCurrentLayer(),
+                    () => editor.Project.RemoveCurrentLayer(),
                     () => editor.IsEditMode());
 
             AddStyleLibraryCommand =
                 Command.Create(
-                    () => editor.AddStyleLibrary(),
+                    () => editor.Project.AddStyleLibrary(),
                     () => editor.IsEditMode());
 
             RemoveStyleLibraryCommand =
                 Command.Create(
-                    () => editor.RemoveCurrentStyleLibrary(),
+                    () => editor.Project.RemoveCurrentStyleLibrary(),
                     () => editor.IsEditMode());
 
             AddStyleCommand =
                 Command.Create(
-                    () => editor.AddStyle(),
+                    () => editor.Project.AddStyle(),
                     () => editor.IsEditMode());
 
             RemoveStyleCommand =
                 Command.Create(
-                    () => editor.RemoveCurrentStyle(),
+                    () => editor.Project.RemoveCurrentStyle(),
                     () => editor.IsEditMode());
 
             ApplyStyleCommand =
@@ -882,7 +882,7 @@ namespace Core2D
 
             RemoveShapeCommand =
                 Command.Create(
-                    () => editor.RemoveCurrentShape(),
+                    () => editor.Project.RemoveCurrentShape(),
                     () => editor.IsEditMode());
 
             AddTemplateCommand =
