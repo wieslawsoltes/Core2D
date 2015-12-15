@@ -365,6 +365,9 @@ namespace Core2D
 
             Editor = new Editor()
             {
+                CurrentTool = Tool.Selection,
+                CurrentPathTool = PathTool.Line,
+                History = new History(),
                 Renderers = new Renderer[] { renderer },
                 ProjectFactory = new ProjectFactory(),
                 TextClipboard = clipboard,
@@ -372,32 +375,14 @@ namespace Core2D
             };
 
             Editor.Renderers[0].State.EnableAutofit = true;
-            Editor.Project = Editor.ProjectFactory.GetProject();
             Editor.Renderers[0].State.DrawShapeState.Flags = ShapeStateFlags.Visible;
 
-            Editor.Initialize();
+            Editor.DefaultTools();
 
             Commands.InitializeCommonCommands(Editor);
             InitializePlatformCommands(Editor);
 
             Editor.OnNew(null);
-
-            // Editor
-            /*
-            {
-                var document = Editor.Project.Documents.FirstOrDefault();
-                var container = document.Containers.FirstOrDefault();
-                var layer = container.Layers.FirstOrDefault();
-                layer.Shapes = layer.Shapes.Add(
-                    XLine.Create(
-                        30, 30, 
-                        300, 30, 
-                        Editor.Project.StyleLibraries.FirstOrDefault().Selected, 
-                        Editor.Project.Options.PointShape));
-                container.CurrentLayer = layer;
-                container.CurrentShape = layer.Shapes.FirstOrDefault();
-            }
-            */
 
             // Data
 
@@ -419,13 +404,11 @@ namespace Core2D
 
             // Project
 
-            {
-                Container = Container.Create();
-                var layer = Container.Layers.FirstOrDefault();
-                layer.Shapes = layer.Shapes.Add(XLine.Create(0, 0, null, null));
-                Container.CurrentLayer = layer;
-                Container.CurrentShape = layer.Shapes.FirstOrDefault();
-            }
+            Container = Container.Create();
+            var layer = Container.Layers.FirstOrDefault();
+            layer.Shapes = layer.Shapes.Add(XLine.Create(0, 0, null, null));
+            Container.CurrentLayer = layer;
+            Container.CurrentShape = layer.Shapes.FirstOrDefault();
 
             Document = Document.Create();
             Layer = Layer.Create();

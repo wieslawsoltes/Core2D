@@ -258,31 +258,25 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Initializes default <see cref="Editor"/> state.
+        /// Initialize default <see cref="Editor"/> tools.
         /// </summary>
-        /// <param name="currentTool">The current tool.</param>
-        /// <param name="currentPathTool">The current path tool.</param>
-        public void Initialize(Tool currentTool = Tool.Selection, PathTool currentPathTool = PathTool.Line)
+        public void DefaultTools()
         {
-            CurrentTool = currentTool;
-            CurrentPathTool = currentPathTool;
-
-            var tools = ImmutableDictionary.CreateBuilder<Tool, ToolBase>();
-            tools.Add(Tool.None, new ToolNone(this));
-            tools.Add(Tool.Selection, new ToolSelection(this));
-            tools.Add(Tool.Point, new ToolPoint(this));
-            tools.Add(Tool.Line, new ToolLine(this));
-            tools.Add(Tool.Arc, new ToolArc(this));
-            tools.Add(Tool.Bezier, new ToolBezier(this));
-            tools.Add(Tool.QBezier, new ToolQBezier(this));
-            tools.Add(Tool.Path, new ToolPath(this));
-            tools.Add(Tool.Rectangle, new ToolRectangle(this));
-            tools.Add(Tool.Ellipse, new ToolEllipse(this));
-            tools.Add(Tool.Text, new ToolText(this));
-            tools.Add(Tool.Image, new ToolImage(this));
-            Tools = tools.ToImmutable();
-
-            History = new History();
+            Tools = new Dictionary<Tool, ToolBase>
+            {
+                { Tool.None,      new ToolNone(this)      },
+                { Tool.Selection, new ToolSelection(this) },
+                { Tool.Point,     new ToolPoint(this)     },
+                { Tool.Line,      new ToolLine(this)      },
+                { Tool.Arc,       new ToolArc(this)       },
+                { Tool.Bezier,    new ToolBezier(this)    },
+                { Tool.QBezier,   new ToolQBezier(this)   },
+                { Tool.Path,      new ToolPath(this)      },
+                { Tool.Rectangle, new ToolRectangle(this) },
+                { Tool.Ellipse,   new ToolEllipse(this)   },
+                { Tool.Text,      new ToolText(this)      },
+                { Tool.Image,     new ToolImage(this)     }
+            }.ToImmutableDictionary();
         }
 
         /// <summary>

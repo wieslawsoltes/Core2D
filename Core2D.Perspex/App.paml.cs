@@ -101,8 +101,6 @@ namespace Core2D.Perspex
             try
             {
                 InitializeEditor();
-                Commands.InitializeCommonCommands(_editor);
-                InitializePlatformCommands(_editor);
 
                 LoadRecent();
 
@@ -213,6 +211,9 @@ namespace Core2D.Perspex
         {
             _editor = new Editor()
             {
+                CurrentTool = Tool.Selection,
+                CurrentPathTool = PathTool.Line,
+                History = new History(),
                 Renderers = new Renderer[] { new PerspexRenderer() },
                 ProjectFactory = new ProjectFactory(),
                 TextClipboard = new TextClipboard(),
@@ -223,14 +224,18 @@ namespace Core2D.Perspex
                 CsvWriter = new CsvHelperWriter()
             };
 
-
-            _editor.Initialize();
-
-            _editor.Renderers[0].State.EnableAutofit = true;
             _editor.Log = new TraceLog();
             _editor.Log.Initialize(System.IO.Path.Combine(GetAssemblyPath(), _logFileName));
+
+            _editor.Renderers[0].State.EnableAutofit = true;
             _editor.Renderers[0].State.DrawShapeState.Flags = ShapeStateFlags.Visible;
+
             _editor.GetImageKey = async () => await OnGetImageKey();
+
+            _editor.DefaultTools();
+
+            Commands.InitializeCommonCommands(_editor);
+            InitializePlatformCommands(_editor);
         }
 
         /// <summary>

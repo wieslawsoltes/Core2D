@@ -41,9 +41,6 @@ namespace Core2D.Wpf
             InitializeEditor();
             LoadRecent();
 
-            Commands.InitializeCommonCommands(_editor);
-            InitializePlatformCommands(_editor);
-
             _mainWindow = new Windows.MainWindow();
 
             _mainWindow.InitializeZoom(_editor);
@@ -174,6 +171,9 @@ namespace Core2D.Wpf
         {
             _editor = new Editor()
             {
+                CurrentTool = Tool.Selection,
+                CurrentPathTool = PathTool.Line,
+                History = new History(),
                 Renderers = new Renderer[] { new WpfRenderer(), new WpfRenderer() },
                 ProjectFactory = new ProjectFactory(),
                 TextClipboard = new TextClipboard(),
@@ -184,14 +184,19 @@ namespace Core2D.Wpf
                 CsvWriter = new CsvHelperWriter()
             };
 
-            _editor.Initialize();
-
-            _editor.Renderers[0].State.EnableAutofit = true;
             _editor.Log = new TraceLog();
             _editor.Log.Initialize(System.IO.Path.Combine(GetAssemblyPath(), _logFileName));
+
+            _editor.Renderers[0].State.EnableAutofit = true;
             _editor.Renderers[0].State.DrawShapeState.Flags = ShapeStateFlags.Visible;
             _editor.Renderers[1].State.DrawShapeState.Flags = ShapeStateFlags.Visible;
+
             _editor.GetImageKey = async () => await GetImageKey();
+
+            _editor.DefaultTools();
+
+            Commands.InitializeCommonCommands(_editor);
+            InitializePlatformCommands(_editor);
         }
 
         /// <summary>
