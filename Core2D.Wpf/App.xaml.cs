@@ -173,7 +173,6 @@ namespace Core2D.Wpf
             {
                 CurrentTool = Tool.Selection,
                 CurrentPathTool = PathTool.Line,
-                History = new History(),
                 Renderers = new Renderer[] { new WpfRenderer(), new WpfRenderer() },
                 ProjectFactory = new ProjectFactory(),
                 TextClipboard = new TextClipboard(),

@@ -21,7 +21,6 @@ namespace Core2D
         private Tool _currentTool;
         private PathTool _currentPathTool;
         private Observer _observer;
-        private History _history;
         private Action _invalidate;
         private Action _resetZoom;
         private Action _extentZoom;
@@ -110,15 +109,6 @@ namespace Core2D
         {
             get { return _observer; }
             set { Update(ref _observer, value); }
-        }
-
-        /// <summary>
-        /// Gets or sets undo/redo history handler.
-        /// </summary>
-        public History History
-        {
-            get { return _history; }
-            set { Update(ref _history, value); }
         }
 
         /// <summary>
