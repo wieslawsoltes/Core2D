@@ -627,52 +627,52 @@ namespace Core2D
 
             GroupCommand =
                 Command.Create(
-                    () => editor.GroupSelected(),
+                    () => editor.OnGroupSelected(),
                     () => editor.IsEditMode() /* && editor.IsSelectionAvailable() */);
 
             UngroupCommand =
                 Command.Create(
-                    () => editor.UngroupSelected(),
+                    () => editor.OnUngroupSelected(),
                     () => editor.IsEditMode() /* && editor.IsSelectionAvailable() */);
 
             BringToFrontCommand =
                 Command.Create(
-                    () => editor.BringToFrontSelected(),
+                    () => editor.OnBringToFrontSelected(),
                     () => editor.IsEditMode() /* && editor.IsSelectionAvailable() */);
 
             SendToBackCommand =
                 Command.Create(
-                    () => editor.SendToBackSelected(),
+                    () => editor.OnSendToBackSelected(),
                     () => editor.IsEditMode() /* && editor.IsSelectionAvailable() */);
 
             BringForwardCommand =
                 Command.Create(
-                    () => editor.BringForwardSelected(),
+                    () => editor.OnBringForwardSelected(),
                     () => editor.IsEditMode() /* && editor.IsSelectionAvailable() */);
 
             SendBackwardCommand =
                 Command.Create(
-                    () => editor.SendBackwardSelected(),
+                    () => editor.OnSendBackwardSelected(),
                     () => editor.IsEditMode() /* && editor.IsSelectionAvailable() */);
 
             MoveUpCommand =
                 Command.Create(
-                    () => editor.MoveUpSelected(),
+                    () => editor.OnMoveUpSelected(),
                     () => editor.IsEditMode() /* && editor.IsSelectionAvailable() */);
 
             MoveDownCommand =
                 Command.Create(
-                    () => editor.MoveDownSelected(),
+                    () => editor.OnMoveDownSelected(),
                     () => editor.IsEditMode() /* && editor.IsSelectionAvailable() */);
 
             MoveLeftCommand =
                 Command.Create(
-                    () => editor.MoveLeftSelected(),
+                    () => editor.OnMoveLeftSelected(),
                     () => editor.IsEditMode() /* && editor.IsSelectionAvailable() */);
 
             MoveRightCommand =
                 Command.Create(
-                    () => editor.MoveRightSelected(),
+                    () => editor.OnMoveRightSelected(),
                     () => editor.IsEditMode() /* && editor.IsSelectionAvailable() */);
 
             ToolNoneCommand =

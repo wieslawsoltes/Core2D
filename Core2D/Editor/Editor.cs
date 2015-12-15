@@ -473,261 +473,48 @@ namespace Core2D
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="name"></param>
-        public XGroup GroupSelected(string name = "g")
+        public void OnGroupSelected()
         {
-            var shapes = _renderers[0].State.SelectedShapes;
-            var layer = _project.CurrentContainer.CurrentLayer;
-            if (shapes == null)
-                return null;
-
-            // TODO: Group method changes SelectedShapes State properties.
-            var g = XGroup.Group(name, shapes);
-
-            var builder = layer.Shapes.ToBuilder();
-            foreach (var shape in shapes)
+            var group = _project.Group(_renderers[0].State.SelectedShapes);
+            if (group != null)
             {
-                builder.Remove(shape);
+                Select(_project.CurrentContainer, group);
             }
-            builder.Add(g);
-
-            var previous = layer.Shapes;
-            var next = builder.ToImmutable();
-            _history.Snapshot(previous, next, (p) => layer.Shapes = p);
-            layer.Shapes = next;
-
-            Select(_project.CurrentContainer, g);
-
-            return g;
         }
-
+ 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="shapes"></param>
-        /// <param name="original"></param>
-        /// <param name="groupShapes"></param>
-        private void Ungroup(IEnumerable<BaseShape> shapes, IList<BaseShape> original, bool groupShapes)
+        public void OnUngroupSelected()
         {
-            if (shapes == null)
-                return;
-
-            foreach (var shape in shapes)
+            var result = _project.Ungroup(_renderers[0].State.SelectedShape, _renderers[0].State.SelectedShapes);
+            if (result == true)
             {
-                if (shape is XGroup)
-                {
-                    var g = shape as XGroup;
-                    Ungroup(g.Shapes, original, groupShapes: true);
-                    Ungroup(g.Connectors, original, groupShapes: true);
-                    original.Remove(g);
-                }
-                else if (groupShapes)
-                {
-                    if (shape is XPoint)
-                    {
-                        shape.State.Flags &=
-                            ~(ShapeStateFlags.Connector
-                            | ShapeStateFlags.None
-                            | ShapeStateFlags.Input
-                            | ShapeStateFlags.Output);
-                        shape.State.Flags |= ShapeStateFlags.Standalone;
-                        original.Add(shape);
-                    }
-                    else
-                    {
-                        shape.State.Flags |= ShapeStateFlags.Standalone;
-                        original.Add(shape);
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public void UngroupSelected()
-        {
-            var shapes = _renderers[0].State.SelectedShapes;
-            var shape = _renderers[0].State.SelectedShape;
-            var layer = _project.CurrentContainer.CurrentLayer;
-
-            if (shape != null && shape is XGroup && layer != null)
-            {
-                var builder = layer.Shapes.ToBuilder();
-
-                var g = shape as XGroup;
-                Ungroup(g.Shapes, builder, groupShapes: true);
-                Ungroup(g.Connectors, builder, groupShapes: true);
-                builder.Remove(g);
-
-                var previous = layer.Shapes;
-                var next = builder.ToImmutable();
-                _history.Snapshot(previous, next, (p) => layer.Shapes = p);
-                layer.Shapes = next;
-
                 _renderers[0].State.SelectedShape = null;
-                layer.Invalidate();
-            }
-
-            if (shapes != null && layer != null)
-            {
-                var builder = layer.Shapes.ToBuilder();
-
-                Ungroup(shapes, builder, groupShapes: false);
-
-                var previous = layer.Shapes;
-                var next = builder.ToImmutable();
-                _history.Snapshot(previous, next, (p) => layer.Shapes = p);
-                layer.Shapes = next;
-
-                layer.Invalidate();
                 _renderers[0].State.SelectedShapes = null;
-            }
-        }
-
-        /// <summary>
-        /// Move shape from source index to target index position in an array. 
-        /// </summary>
-        /// <param name="source"></param>
-        /// <param name="sourceIndex"></param>
-        /// <param name="targetIndex"></param>
-        private void Move(BaseShape source, int sourceIndex, int targetIndex)
-        {
-            if (sourceIndex < targetIndex)
-            {
-                var layer = _project.CurrentContainer.CurrentLayer;
-                var items = layer.Shapes;
-                if (items != null)
+                /*
+                var container = _project.CurrentContainer;
+                if (container != null)
                 {
-                    var builder = items.ToBuilder();
-                    builder.Insert(targetIndex + 1, source);
-                    builder.RemoveAt(sourceIndex);
-
-                    var previous = layer.Shapes;
-                    var next = builder.ToImmutable();
-                    _history.Snapshot(previous, next, (p) => layer.Shapes = p);
-                    layer.Shapes = next;
-                }
-            }
-            else
-            {
-                var layer = _project.CurrentContainer.CurrentLayer;
-                var items = layer.Shapes;
-                if (items != null)
-                {
-                    int removeIndex = sourceIndex + 1;
-                    if (items.Length + 1 > removeIndex)
+                    var layer = container.CurrentLayer;
+                    if (layer != null)
                     {
-                        var builder = items.ToBuilder();
-                        builder.Insert(targetIndex, source);
-                        builder.RemoveAt(removeIndex);
-
-                        var previous = layer.Shapes;
-                        var next = builder.ToImmutable();
-                        _history.Snapshot(previous, next, (p) => layer.Shapes = p);
-                        layer.Shapes = next;
+                        layer.Invalidate();
                     }
                 }
-            }
-        }
-
-        /// <summary>
-        /// Bring a shape to the top of the stack.
-        /// </summary>
-        /// <param name="source"></param>
-        public void BringToFront(BaseShape source)
-        {
-            if (_project == null
-                || _project.CurrentContainer == null
-                || _project.CurrentContainer.CurrentLayer == null)
-                return;
-
-            var layer = _project.CurrentContainer.CurrentLayer;
-            var items = layer.Shapes;
-
-            int sourceIndex = items.IndexOf(source);
-            int targetIndex = items.Length - 1;
-            if (targetIndex >= 0 && sourceIndex != targetIndex)
-            {
-                Move(source, sourceIndex, targetIndex);
-            }
-        }
-
-        /// <summary>
-        /// Move a shape one step closer to the front of the stack.
-        /// </summary>
-        /// <param name="source"></param>
-        public void BringForward(BaseShape source)
-        {
-            if (_project == null
-                || _project.CurrentContainer == null
-                || _project.CurrentContainer.CurrentLayer == null)
-                return;
-
-            var layer = _project.CurrentContainer.CurrentLayer;
-            var items = layer.Shapes;
-
-            int sourceIndex = items.IndexOf(source);
-            int targetIndex = sourceIndex + 1;
-            if (targetIndex < items.Length)
-            {
-                Move(source, sourceIndex, targetIndex);
-            }
-        }
-
-        /// <summary>
-        /// Move a shape one step down within the stack.
-        /// </summary>
-        /// <param name="source"></param>
-        public void SendBackward(BaseShape source)
-        {
-            if (_project == null
-                || _project.CurrentContainer == null
-                || _project.CurrentContainer.CurrentLayer == null)
-                return;
-
-            var layer = _project.CurrentContainer.CurrentLayer;
-            var items = layer.Shapes;
-
-            int sourceIndex = items.IndexOf(source);
-            int targetIndex = sourceIndex - 1;
-            if (targetIndex >= 0)
-            {
-                Move(source, sourceIndex, targetIndex);
-            }
-        }
-
-        /// <summary>
-        /// Move a shape to the bottom of the stack.
-        /// </summary>
-        /// <param name="source"></param>
-        public void SendToBack(BaseShape source)
-        {
-            if (_project == null
-                || _project.CurrentContainer == null
-                || _project.CurrentContainer.CurrentLayer == null)
-                return;
-
-            var layer = _project.CurrentContainer.CurrentLayer;
-            var items = layer.Shapes;
-
-            int sourceIndex = items.IndexOf(source);
-            int targetIndex = 0;
-            if (sourceIndex != targetIndex)
-            {
-                Move(source, sourceIndex, targetIndex);
+                */
             }
         }
 
         /// <summary>
         /// Bring selected shapes to the top of the stack.
         /// </summary>
-        public void BringToFrontSelected()
+        public void OnBringToFrontSelected()
         {
             var source = _renderers[0].State.SelectedShape;
             if (source != null)
             {
-                BringToFront(source);
+                _project.BringToFront(source);
             }
 
             var sources = _renderers[0].State.SelectedShapes;
@@ -735,7 +522,7 @@ namespace Core2D
             {
                 foreach (var s in sources)
                 {
-                    BringToFront(s);
+                    _project.BringToFront(s);
                 }
             }
         }
@@ -743,12 +530,12 @@ namespace Core2D
         /// <summary>
         /// Move selected shapes one step closer to the front of the stack.
         /// </summary>
-        public void BringForwardSelected()
+        public void OnBringForwardSelected()
         {
             var source = _renderers[0].State.SelectedShape;
             if (source != null)
             {
-                BringForward(source);
+                _project.BringForward(source);
             }
 
             var sources = _renderers[0].State.SelectedShapes;
@@ -756,7 +543,7 @@ namespace Core2D
             {
                 foreach (var s in sources)
                 {
-                    BringForward(s);
+                    _project.BringForward(s);
                 }
             }
         }
@@ -764,12 +551,12 @@ namespace Core2D
         /// <summary>
         /// Move selected shapes one step down within the stack.
         /// </summary>
-        public void SendBackwardSelected()
+        public void OnSendBackwardSelected()
         {
             var source = _renderers[0].State.SelectedShape;
             if (source != null)
             {
-                SendBackward(source);
+                _project.SendBackward(source);
             }
 
             var sources = _renderers[0].State.SelectedShapes;
@@ -777,7 +564,7 @@ namespace Core2D
             {
                 foreach (var s in sources.Reverse())
                 {
-                    SendBackward(s);
+                    _project.SendBackward(s);
                 }
             }
         }
@@ -785,12 +572,12 @@ namespace Core2D
         /// <summary>
         /// Move selected shapes to the bottom of the stack.
         /// </summary>
-        public void SendToBackSelected()
+        public void OnSendToBackSelected()
         {
             var source = _renderers[0].State.SelectedShape;
             if (source != null)
             {
-                SendToBack(source);
+                _project.SendToBack(source);
             }
 
             var sources = _renderers[0].State.SelectedShapes;
@@ -798,7 +585,7 @@ namespace Core2D
             {
                 foreach (var s in sources.Reverse())
                 {
-                    SendToBack(s);
+                    _project.SendToBack(s);
                 }
             }
         }
@@ -808,112 +595,44 @@ namespace Core2D
         /// </summary>
         /// <param name="dx"></param>
         /// <param name="dy"></param>
-        public void MoveSelectedByWithHistory(double dx, double dy)
+        public void MoveSelectedBy(double dx, double dy)
         {
-            if (_renderers[0].State.SelectedShape != null)
-            {
-                var state = _renderers[0].State.SelectedShape.State;
-
-                switch (_project.Options.MoveMode)
-                {
-                    case MoveMode.Point:
-                        {
-                            if (!state.Flags.HasFlag(ShapeStateFlags.Locked))
-                            {
-                                var shape = _renderers[0].State.SelectedShape;
-                                var shapes = Enumerable.Repeat(shape, 1);
-                                var points = shapes.SelectMany(s => s.GetPoints()).Distinct().ToList();
-
-                                MovePointsBy(points, dx, dy);
-
-                                var previous = new { DeltaX = -dx, DeltaY = -dy, Points = points };
-                                var next = new { DeltaX = dx, DeltaY = dy, Points = points };
-                                _history.Snapshot(previous, next, (s) => MovePointsBy(s.Points, s.DeltaX, s.DeltaY));
-                            }
-                        }
-                        break;
-                    case MoveMode.Shape:
-                        {
-                            if (!state.Flags.HasFlag(ShapeStateFlags.Locked) && !state.Flags.HasFlag(ShapeStateFlags.Connector))
-                            {
-                                var shape = _renderers[0].State.SelectedShape;
-                                var shapes = Enumerable.Repeat(shape, 1).ToList();
-
-                                MoveShapesBy(shapes, dx, dy);
-
-                                var previous = new { DeltaX = -dx, DeltaY = -dy, Shapes = shapes };
-                                var next = new { DeltaX = dx, DeltaY = dy, Shapes = shapes };
-                                _history.Snapshot(previous, next, (s) => MoveShapesBy(s.Shapes, s.DeltaX, s.DeltaY));
-                            }
-                        }
-                        break;
-                }
-            }
-
-            if (_renderers[0].State.SelectedShapes != null)
-            {
-                var shapes = _renderers[0].State.SelectedShapes.Where(s => !s.State.Flags.HasFlag(ShapeStateFlags.Locked));
-
-                switch (_project.Options.MoveMode)
-                {
-                    case MoveMode.Point:
-                        {
-                            var points = shapes.SelectMany(s => s.GetPoints()).Distinct().ToList();
-
-                            MovePointsBy(points, dx, dy);
-
-                            var previous = new { DeltaX = -dx, DeltaY = -dy, Points = points };
-                            var next = new { DeltaX = dx, DeltaY = dy, Points = points };
-                            _history.Snapshot(previous, next, (s) => MovePointsBy(s.Points, s.DeltaX, s.DeltaY));
-                        }
-                        break;
-                    case MoveMode.Shape:
-                        {
-                            MoveShapesBy(shapes, dx, dy);
-
-                            var previous = new { DeltaX = -dx, DeltaY = -dy, Shapes = shapes.ToList() };
-                            var next = new { DeltaX = dx, DeltaY = dy, Shapes = shapes.ToList() };
-                            _history.Snapshot(previous, next, (s) => MoveShapesBy(s.Shapes, s.DeltaX, s.DeltaY));
-                        }
-                        break;
-                }
-            }
+            _project.MoveBy(
+                _renderers[0].State.SelectedShape,
+                _renderers[0].State.SelectedShapes,
+                dx, dy);
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public void MoveUpSelected()
+        public void OnMoveUpSelected()
         {
-            double dy = _project.Options.SnapToGrid ? -_project.Options.SnapY : -1.0;
-            MoveSelectedByWithHistory(0.0, dy);
+            MoveSelectedBy(0.0, _project.Options.SnapToGrid ? -_project.Options.SnapY : -1.0);
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public void MoveDownSelected()
+        public void OnMoveDownSelected()
         {
-            double dy = _project.Options.SnapToGrid ? _project.Options.SnapY : 1.0;
-            MoveSelectedByWithHistory(0.0, dy);
+            MoveSelectedBy(0.0, _project.Options.SnapToGrid ? _project.Options.SnapY : 1.0);
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public void MoveLeftSelected()
+        public void OnMoveLeftSelected()
         {
-            double dx = _project.Options.SnapToGrid ? -_project.Options.SnapX : -1.0;
-            MoveSelectedByWithHistory(dx, 0.0);
+            MoveSelectedBy(_project.Options.SnapToGrid ? -_project.Options.SnapX : -1.0, 0.0);
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public void MoveRightSelected()
+        public void OnMoveRightSelected()
         {
-            double dx = _project.Options.SnapToGrid ? _project.Options.SnapX : 1.0;
-            MoveSelectedByWithHistory(dx, 0.0);
+            MoveSelectedBy(_project.Options.SnapToGrid ? _project.Options.SnapX : 1.0, 0.0);
         }
 
         /// <summary>
