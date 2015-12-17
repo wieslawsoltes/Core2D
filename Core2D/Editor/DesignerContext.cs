@@ -367,7 +367,6 @@ namespace Core2D
             {
                 CurrentTool = Tool.Selection,
                 CurrentPathTool = PathTool.Line,
-                History = new History(),
                 Renderers = new Renderer[] { renderer },
                 ProjectFactory = new ProjectFactory(),
                 TextClipboard = clipboard,

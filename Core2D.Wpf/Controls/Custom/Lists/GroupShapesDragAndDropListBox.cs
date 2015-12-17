@@ -32,7 +32,7 @@ namespace Core2D.Wpf.Controls.Custom.Lists
 
             var previous = group.Shapes;
             var next = array;
-            editor.History.Snapshot(previous, next, (p) => group.Shapes = p);
+            editor.Project.History.Snapshot(previous, next, (p) => group.Shapes = p);
             group.Shapes = next;
         }
     }

@@ -19,6 +19,7 @@ namespace Core2D
         private IDictionary<string, byte[]> _images;
         private string _name;
         private Options _options;
+        private History _history;
         private ImmutableArray<Database> _databases;
         private Database _currentDatabase;
         private ImmutableArray<Library<ShapeStyle>> _styleLibraries;
@@ -59,6 +60,15 @@ namespace Core2D
         {
             get { return _options; }
             set { Update(ref _options, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets undo/redo history handler.
+        /// </summary>
+        public History History
+        {
+            get { return _history; }
+            set { Update(ref _history, value); }
         }
 
         /// <summary>

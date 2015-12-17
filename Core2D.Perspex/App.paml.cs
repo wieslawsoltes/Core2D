@@ -213,7 +213,6 @@ namespace Core2D.Perspex
             {
                 CurrentTool = Tool.Selection,
                 CurrentPathTool = PathTool.Line,
-                History = new History(),
                 Renderers = new Renderer[] { new PerspexRenderer() },
                 ProjectFactory = new ProjectFactory(),
                 TextClipboard = new TextClipboard(),
