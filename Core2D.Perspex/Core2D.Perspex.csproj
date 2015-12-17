@@ -142,11 +142,11 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Perspex.Xaml.Interactions, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Perspex.Xaml.Behaviors.9999.0.20-nightly\lib\portable-windows8+net45\Perspex.Xaml.Interactions.dll</HintPath>
+      <HintPath>..\packages\Perspex.Xaml.Behaviors.9999.0.24-nightly\lib\portable-windows8+net45\Perspex.Xaml.Interactions.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Perspex.Xaml.Interactivity, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Perspex.Xaml.Behaviors.9999.0.20-nightly\lib\portable-windows8+net45\Perspex.Xaml.Interactivity.dll</HintPath>
+      <HintPath>..\packages\Perspex.Xaml.Behaviors.9999.0.24-nightly\lib\portable-windows8+net45\Perspex.Xaml.Interactivity.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Serilog, Version=1.5.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
