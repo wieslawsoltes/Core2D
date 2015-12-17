@@ -56,6 +56,7 @@ The core library and editor are portable and should work on all platforms where 
 
 * https://www.nuget.org/api/v2/
 * https://www.myget.org/F/perspex-nightly/api/v2
+* https://www.myget.org/F/xamlbehaviors-nightly/api/v2
 
 ### Other Dependencies
 
