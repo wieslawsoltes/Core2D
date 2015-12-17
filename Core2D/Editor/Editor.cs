@@ -299,10 +299,19 @@ namespace Core2D
         /// </summary>
         public void Unload()
         {
-            if (_project != null && Observer != null)
+            if (_project != null)
             {
-                Observer.Dispose();
-                Observer = null;
+                if (Observer != null)
+                {
+                    Observer.Dispose();
+                    Observer = null;
+                }
+
+                if (_project.History != null)
+                {
+                    _project.History.Reset();
+                    _project.History = null;
+                }
             }
 
             Deselect();
@@ -649,7 +658,7 @@ namespace Core2D
             {
                 var previous = document.Containers;
                 var next = document.Containers.Remove(container);
-                _history.Snapshot(previous, next, (p) => document.Containers = p);
+                _project.History.Snapshot(previous, next, (p) => document.Containers = p);
                 document.Containers = next;
 
                 _project.CurrentDocument = document;
@@ -669,7 +678,7 @@ namespace Core2D
 
             var previous = _project.Documents;
             var next = _project.Documents.Remove(document);
-            _history.Snapshot(previous, next, (p) => _project.Documents = p);
+            _project.History.Snapshot(previous, next, (p) => _project.Documents = p);
             _project.Documents = next;
 
             _project.CurrentDocument = _project.Documents.FirstOrDefault();
@@ -700,7 +709,7 @@ namespace Core2D
 
                 var previous = layer.Shapes;
                 var next = layer.Shapes.Remove(_renderers[0].State.SelectedShape);
-                _history.Snapshot(previous, next, (p) => layer.Shapes = p);
+                _project.History.Snapshot(previous, next, (p) => layer.Shapes = p);
                 layer.Shapes = next;
 
                 _project.CurrentContainer.CurrentLayer.Invalidate();
@@ -719,7 +728,7 @@ namespace Core2D
 
                 var previous = layer.Shapes;
                 var next = builder.ToImmutable();
-                _history.Snapshot(previous, next, (p) => layer.Shapes = p);
+                _project.History.Snapshot(previous, next, (p) => layer.Shapes = p);
                 layer.Shapes = next;
 
                 _renderers[0].State.SelectedShapes = default(ImmutableHashSet<BaseShape>);
@@ -1260,7 +1269,7 @@ namespace Core2D
 
                     var previous = document.Containers;
                     var next = document.Containers.Add(container);
-                    _history.Snapshot(previous, next, (p) => document.Containers = p);
+                    _project.History.Snapshot(previous, next, (p) => document.Containers = p);
                     document.Containers = next;
 
                     _project.CurrentContainer = container;
@@ -1282,7 +1291,7 @@ namespace Core2D
 
                 var previous = selected.Containers;
                 var next = selected.Containers.Add(container);
-                _history.Snapshot(previous, next, (p) => selected.Containers = p);
+                _project.History.Snapshot(previous, next, (p) => selected.Containers = p);
                 selected.Containers = next;
 
                 _project.CurrentContainer = container;
@@ -1301,7 +1310,7 @@ namespace Core2D
 
                 var previous = _project.Documents;
                 var next = _project.Documents.Add(document);
-                _history.Snapshot(previous, next, (p) => _project.Documents = p);
+                _project.History.Snapshot(previous, next, (p) => _project.Documents = p);
                 _project.Documents = next;
 
                 _project.CurrentDocument = document;
@@ -1309,8 +1318,6 @@ namespace Core2D
             }
             else if (item is Editor || item == null)
             {
-                _history.Reset();
-
                 Unload();
 
                 if (_projectFactory != null)
@@ -1355,10 +1362,10 @@ namespace Core2D
         {
             try
             {
-                if (_history.CanUndo())
+                if (_project.History.CanUndo())
                 {
                     Deselect();
-                    _history.Undo();
+                    _project.History.Undo();
                 }
             }
             catch (Exception ex)
@@ -1380,10 +1387,10 @@ namespace Core2D
         {
             try
             {
-                if (_history.CanRedo())
+                if (_project.History.CanRedo())
                 {
                     Deselect();
-                    _history.Redo();
+                    _project.History.Redo();
                 }
             }
             catch (Exception ex)
@@ -1557,7 +1564,7 @@ namespace Core2D
 
                         var previous = document.Containers;
                         var next = builder.ToImmutable();
-                        _history.Snapshot(previous, next, (p) => document.Containers = p);
+                        _project.History.Snapshot(previous, next, (p) => document.Containers = p);
                         document.Containers = next;
 
                         _project.CurrentContainer = clone;
@@ -1573,7 +1580,7 @@ namespace Core2D
 
                     var previous = document.Containers;
                     var next = document.Containers.Add(clone);
-                    _history.Snapshot(previous, next, (p) => document.Containers = p);
+                    _project.History.Snapshot(previous, next, (p) => document.Containers = p);
                     document.Containers = next;
 
                     _project.CurrentContainer = clone;
@@ -1589,7 +1596,7 @@ namespace Core2D
 
                     var previous = _project.Documents;
                     var next = builder.ToImmutable();
-                    _history.Snapshot(previous, next, (p) => _project.Documents = p);
+                    _project.History.Snapshot(previous, next, (p) => _project.Documents = p);
                     _project.Documents = next;
 
                     _project.CurrentDocument = clone;
@@ -2248,8 +2255,6 @@ namespace Core2D
             {
                 var project = Project.Open(path, _serializer);
 
-                _history.Reset();
-
                 Unload();
                 Load(project, path);
 
@@ -2306,7 +2311,7 @@ namespace Core2D
         /// </summary>
         public void Close()
         {
-            _history.Reset();
+            _project.History.Reset();
             Unload();
         }
 
@@ -2384,7 +2389,7 @@ namespace Core2D
 
                             var previous = sg.Items;
                             var next = sg.Items.Add(import);
-                            _history.Snapshot(previous, next, (p) => sg.Items = p);
+                            _project.History.Snapshot(previous, next, (p) => sg.Items = p);
                             sg.Items = next;
                         }
                         break;
@@ -2402,7 +2407,7 @@ namespace Core2D
 
                             var previous = sg.Items;
                             var next = builder.ToImmutable();
-                            _history.Snapshot(previous, next, (p) => sg.Items = p);
+                            _project.History.Snapshot(previous, next, (p) => sg.Items = p);
                             sg.Items = next;
                         }
                         break;
@@ -2414,7 +2419,7 @@ namespace Core2D
 
                             var previous = project.StyleLibraries;
                             var next = project.StyleLibraries.Add(import);
-                            _history.Snapshot(previous, next, (p) => project.StyleLibraries = p);
+                            _project.History.Snapshot(previous, next, (p) => project.StyleLibraries = p);
                             project.StyleLibraries = next;
                         }
                         break;
@@ -2432,7 +2437,7 @@ namespace Core2D
 
                             var previous = project.StyleLibraries;
                             var next = builder.ToImmutable();
-                            _history.Snapshot(previous, next, (p) => project.StyleLibraries = p);
+                            _project.History.Snapshot(previous, next, (p) => project.StyleLibraries = p);
                             project.StyleLibraries = next;
                         }
                         break;
@@ -2448,7 +2453,7 @@ namespace Core2D
 
                             var previous = gl.Items;
                             var next = gl.Items.Add(import);
-                            _history.Snapshot(previous, next, (p) => gl.Items = p);
+                            _project.History.Snapshot(previous, next, (p) => gl.Items = p);
                             gl.Items = next;
                         }
                         break;
@@ -2470,7 +2475,7 @@ namespace Core2D
 
                             var previous = gl.Items;
                             var next = builder.ToImmutable();
-                            _history.Snapshot(previous, next, (p) => gl.Items = p);
+                            _project.History.Snapshot(previous, next, (p) => gl.Items = p);
                             gl.Items = next;
                         }
                         break;
@@ -2486,7 +2491,7 @@ namespace Core2D
 
                             var previous = project.GroupLibraries;
                             var next = project.GroupLibraries.Add(import);
-                            _history.Snapshot(previous, next, (p) => project.GroupLibraries = p);
+                            _project.History.Snapshot(previous, next, (p) => project.GroupLibraries = p);
                             project.GroupLibraries = next;
                         }
                         break;
@@ -2508,7 +2513,7 @@ namespace Core2D
 
                             var previous = project.GroupLibraries;
                             var next = builder.ToImmutable();
-                            _history.Snapshot(previous, next, (p) => project.GroupLibraries = p);
+                            _project.History.Snapshot(previous, next, (p) => project.GroupLibraries = p);
                             project.GroupLibraries = next;
                         }
                         break;
@@ -2524,7 +2529,7 @@ namespace Core2D
 
                             var previous = project.Templates;
                             var next = project.Templates.Add(import);
-                            _history.Snapshot(previous, next, (p) => project.Templates = p);
+                            _project.History.Snapshot(previous, next, (p) => project.Templates = p);
                             project.Templates = next;
                         }
                         break;
@@ -2546,7 +2551,7 @@ namespace Core2D
 
                             var previous = project.Templates;
                             var next = builder.ToImmutable();
-                            _history.Snapshot(previous, next, (p) => project.Templates = p);
+                            _project.History.Snapshot(previous, next, (p) => project.Templates = p);
                             project.Templates = next;
                         }
                         break;
@@ -3106,7 +3111,7 @@ namespace Core2D
 
                 var previous = layer.Shapes;
                 var next = builder.ToImmutable();
-                _history.Snapshot(previous, next, (p) => layer.Shapes = p);
+                _project.History.Snapshot(previous, next, (p) => layer.Shapes = p);
                 layer.Shapes = next;
 
                 if (shapes.Count() == 1)
@@ -3557,7 +3562,7 @@ namespace Core2D
         /// <returns>Returns true if can undo.</returns>
         public bool CanUndo()
         {
-            return _history.CanUndo();
+            return _project.History.CanUndo();
         }
 
         /// <summary>
@@ -3566,7 +3571,7 @@ namespace Core2D
         /// <returns>Returns true if can redo.</returns>
         public bool CanRedo()
         {
-            return _history.CanRedo();
+            return _project.History.CanRedo();
         }
 
         /// <summary>

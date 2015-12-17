@@ -31,7 +31,7 @@ namespace Core2D.Wpf.Controls.Custom.Lists
 
             var previous = project.Templates;
             var next = array;
-            editor.History.Snapshot(previous, next, (p) => project.Templates = p);
+            editor.Project.History.Snapshot(previous, next, (p) => project.Templates = p);
             project.Templates = next;
         }
     }
