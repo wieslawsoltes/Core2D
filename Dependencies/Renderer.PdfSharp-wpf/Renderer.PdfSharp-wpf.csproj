@@ -34,12 +34,12 @@
     <DocumentationFile>bin\Release\Renderer.PdfSharp-wpf.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="PdfSharp-wpf, Version=1.50.3995.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\PDFsharp-wpf.1.50.3995-beta3a\lib\net30\PdfSharp-wpf.dll</HintPath>
+    <Reference Include="PdfSharp-wpf, Version=1.50.4000.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\PDFsharp-wpf.1.50.4000-beta3b\lib\net30\PdfSharp-wpf.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="PdfSharp.Charting-wpf, Version=1.50.3995.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\PDFsharp-wpf.1.50.3995-beta3a\lib\net30\PdfSharp.Charting-wpf.dll</HintPath>
+    <Reference Include="PdfSharp.Charting-wpf, Version=1.50.4000.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\PDFsharp-wpf.1.50.4000-beta3b\lib\net30\PdfSharp.Charting-wpf.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="PresentationCore" />
