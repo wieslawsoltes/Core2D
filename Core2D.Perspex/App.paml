@@ -168,6 +168,12 @@
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="FontWeight" Value="Normal"/>
         </Style>
+        <Style Selector="TabStripItem">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Margin" Value="3"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+        </Style>
         <!-- Border -->
         <Style Selector="Border.leftTop">
             <Setter Property="Margin" Value="4,6,0,4"/>
