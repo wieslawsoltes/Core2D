@@ -270,6 +270,22 @@ namespace Core2D
         }
 
         /// <summary>
+        /// Set renderer's image cache.
+        /// </summary>
+        /// <param name="cache">The image cache instance.</param>
+        private void SetRenderersImageCache(IImageCache cache)
+        {
+            if (_renderers != null)
+            {
+                foreach (var renderer in _renderers)
+                {
+                    renderer.ClearCache(isZooming: false);
+                    renderer.State.ImageCache = cache;
+                }
+            }
+        }
+
+        /// <summary>
         /// Load project.
         /// </summary>
         /// <param name="project">The project instance.</param>
@@ -277,15 +293,7 @@ namespace Core2D
         public void Load(Project project, string path = null)
         {
             Deselect();
-
-            if (_renderers != null)
-            {
-                foreach (var renderer in _renderers)
-                {
-                    renderer.ClearCache(isZooming: false);
-                    renderer.State.ImageCache = project;
-                }
-            }
+            SetRenderersImageCache(project);
 
             Project = project;
             Project.History = new History();
@@ -312,22 +320,12 @@ namespace Core2D
                     _project.History.Reset();
                     _project.History = null;
                 }
+
+                _project.PurgeUnusedImages(Enumerable.Empty<string>().ToImmutableHashSet());
             }
 
             Deselect();
-
-            if (_renderers != null)
-            {
-                foreach (var renderer in _renderers)
-                {
-                    renderer.ClearCache(isZooming: false);
-                }
-            }
-
-            if (_project != null)
-            {
-                _project.PurgeUnusedImages(new HashSet<string>(Enumerable.Empty<string>()));
-            }
+            SetRenderersImageCache(null);
 
             Project = null;
             ProjectPath = string.Empty;
