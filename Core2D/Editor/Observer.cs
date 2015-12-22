@@ -17,72 +17,41 @@ namespace Core2D
         private readonly Action _invalidateShapes;
 
         /// <summary>
-        /// Gets or sets flag indicating whether observer is paused.
-        /// </summary>
-        public bool IsPaused { get; set; }
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="Observer"/> class.
         /// </summary>
         /// <param name="editor">The current <see cref="Editor"/> object.</param>
         public Observer(Editor editor)
         {
-            _editor = editor;
-
-            _invalidateContainer = () =>
+            if (editor != null && editor.Project != null)
             {
-                if (IsPaused)
-                {
-                    return;
-                }
-            };
+                _editor = editor;
 
-            _invalidateStyles = () =>
-            {
-                if (IsPaused)
-                {
-                    return;
-                }
+                _invalidateContainer = () => { };
+                _invalidateStyles = () => InvalidateAndClearCache();
+                _invalidateLayers = () => Invalidate();
+                _invalidateShapes = () => Invalidate();
 
-                if (_editor.Project != null && _editor.Project.CurrentContainer != null)
-                {
-                    foreach (var renderer in _editor.Renderers)
-                    {
-                        renderer.ClearCache(isZooming: false);
-                    }
-                    _editor.Project.CurrentContainer.Invalidate();
-                }
-            };
-
-            _invalidateLayers = () =>
-            {
-                if (IsPaused)
-                {
-                    return;
-                }
-
-                if (_editor.Project != null && _editor.Project.CurrentContainer != null)
-                {
-                    _editor.Project.CurrentContainer.Invalidate();
-                }
-            };
-
-            _invalidateShapes = () =>
-            {
-                if (IsPaused)
-                {
-                    return;
-                }
-
-                if (_editor.Project != null && _editor.Project.CurrentContainer != null)
-                {
-                    _editor.Project.CurrentContainer.Invalidate();
-                }
-            };
-
-            if (_editor.Project != null)
-            {
                 Add(_editor.Project);
+            }
+        }
+
+        private void Invalidate()
+        {
+            if (_editor != null && _editor.Project != null && _editor.Project.CurrentContainer != null)
+            {
+                _editor.Project.CurrentContainer.Invalidate();
+            }
+        }
+
+        private void InvalidateAndClearCache()
+        {
+            if (_editor != null && _editor.Project != null && _editor.Project.CurrentContainer != null)
+            {
+                foreach (var renderer in _editor.Renderers)
+                {
+                    renderer.ClearCache(isZooming: false);
+                }
+                _editor.Project.CurrentContainer.Invalidate();
             }
         }
 
