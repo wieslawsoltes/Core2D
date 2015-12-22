@@ -10,13 +10,83 @@ using System.Text;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// The <see cref="IImageCache"/> implementation for <see cref="Project"/> class.
     /// </summary>
-    public class Project : ObservableObject, IImageCache
+    public partial class Project : ObservableObject, IImageCache
     {
         private static string ProjectEntryName = "Project.json";
         private static string ImageEntryNamePrefix = "Images\\";
-        private IDictionary<string, byte[]> _images;
+        private IDictionary<string, byte[]> _images = new Dictionary<string, byte[]>();
+
+        /// <inheritdoc/>
+        public IEnumerable<ImageKey> Keys
+        {
+            get
+            {
+                return _images.Select(i => new ImageKey() { Key = i.Key }).ToList();
+            }
+        }
+
+        /// <inheritdoc/>
+        public string AddImageFromFile(string path, byte[] bytes)
+        {
+            var name = System.IO.Path.GetFileName(path);
+            var key = ImageEntryNamePrefix + name;
+
+            if (_images.Keys.Contains(key))
+                return key;
+
+            _images.Add(key, bytes);
+            Notify("Keys");
+            return key;
+        }
+
+        /// <inheritdoc/>
+        public void AddImage(string key, byte[] bytes)
+        {
+            if (_images.Keys.Contains(key))
+                return;
+
+            _images.Add(key, bytes);
+            Notify("Keys");
+        }
+
+        /// <inheritdoc/>
+        public byte[] GetImage(string key)
+        {
+            byte[] bytes;
+            if (_images.TryGetValue(key, out bytes))
+                return bytes;
+            else
+                return null;
+        }
+
+        /// <inheritdoc/>
+        public void RemoveImage(string key)
+        {
+            _images.Remove(key);
+            Notify("Keys");
+        }
+
+        /// <inheritdoc/>
+        public void PurgeUnusedImages(ICollection<string> used)
+        {
+            foreach (var kvp in _images.ToList())
+            {
+                if (!used.Contains(kvp.Key))
+                {
+                    _images.Remove(kvp.Key);
+                }
+            }
+            Notify("Keys");
+        }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public partial class Project : ObservableObject
+    {
         private string _name;
         private Options _options;
         private History _history;
@@ -33,17 +103,6 @@ namespace Core2D
         private Container _currentContainer;
         private object _selected;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public IEnumerable<ImageKey> Keys
-        {
-            get
-            {
-                return _images.Select(i => new ImageKey() { Key = i.Key }).ToList();
-            }
-        }
-        
         /// <summary>
         /// 
         /// </summary>
@@ -199,87 +258,6 @@ namespace Core2D
 
                 Update(ref _selected, value);
             }
-        }
-        
-        /// <summary>
-        /// Initializes a new <see cref="Project"/> instance.
-        /// </summary>
-        public Project()
-        {
-            _images = new Dictionary<string, byte[]>();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="path"></param>
-        /// <param name="bytes"></param>
-        /// <returns></returns>
-        public string AddImageFromFile(string path, byte[] bytes)
-        {
-            var name = System.IO.Path.GetFileName(path);
-            var key = ImageEntryNamePrefix + name;
-
-            if (_images.Keys.Contains(key))
-                return key;
-
-            _images.Add(key, bytes);
-            Notify("Keys");
-            return key;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="key"></param>
-        /// <param name="bytes"></param>
-        public void AddImage(string key, byte[] bytes)
-        {
-            if (_images.Keys.Contains(key))
-                return;
-
-            _images.Add(key, bytes);
-            Notify("Keys");
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="key"></param>
-        /// <returns></returns>
-        public byte[] GetImage(string key)
-        {
-            byte[] bytes;
-            if (_images.TryGetValue(key, out bytes))
-                return bytes;
-            else
-                return null;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="key"></param>
-        public void RemoveImage(string key)
-        {
-            _images.Remove(key);
-            Notify("Keys");
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="used"></param>
-        public void PurgeUnusedImages(ICollection<string> used)
-        {
-            foreach (var kvp in _images.ToList())
-            {
-                if (!used.Contains(kvp.Key))
-                {
-                    _images.Remove(kvp.Key);
-                }
-            }
-            Notify("Keys");
         }
 
         /// <summary>
