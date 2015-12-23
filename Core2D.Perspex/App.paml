@@ -13,6 +13,10 @@
              xmlns:state="clr-namespace:Core2D.Perspex.Controls.State;assembly=Core2D.Perspex"
              xmlns:style="clr-namespace:Core2D.Perspex.Controls.Style;assembly=Core2D.Perspex">
     <Application.Styles>
+        <!-- GridSplitter -->
+        <Style Selector="GridSplitter">
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
         <!-- TextBlock -->
         <Style Selector="TextBlock.default">
             <Setter Property="Margin" Value="1"/>
