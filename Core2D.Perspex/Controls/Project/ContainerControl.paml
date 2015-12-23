@@ -19,14 +19,14 @@
                         <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,50,*">
                             <TextBlock Text="Width" Classes="left" Grid.Row="0" Grid.Column="0"/>
                             <TextBox Text="{Binding Path=Width, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
-                            <ScrollBar Classes="slider" Minimum="0" Maximum="10000" ViewportSize="1" Grid.Row="0" Grid.Column="2">
+                            <ScrollBar Classes="slider" Minimum="0" Maximum="10000" ViewportSize="500" Grid.Row="0" Grid.Column="2">
                                 <ScrollBar.Value>
                                     <Binding Path="Width" Mode="TwoWay" Converter="{Static converters:RoundedDoubleToDoubleConverter.Instance}"/>
                                 </ScrollBar.Value>
                             </ScrollBar>
                             <TextBlock Text="Height" Classes="left" Grid.Row="1" Grid.Column="0"/>
                             <TextBox Text="{Binding Path=Height, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
-                            <ScrollBar Classes="slider" Minimum="0" Maximum="10000" ViewportSize="1" Grid.Row="1" Grid.Column="2">
+                            <ScrollBar Classes="slider" Minimum="0" Maximum="10000" ViewportSize="500" Grid.Row="1" Grid.Column="2">
                                 <ScrollBar.Value>
                                     <Binding Path="Height" Mode="TwoWay" Converter="{Static converters:RoundedDoubleToDoubleConverter.Instance}"/>
                                 </ScrollBar.Value>

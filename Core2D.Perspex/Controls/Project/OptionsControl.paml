@@ -16,21 +16,21 @@
                     <CheckBox IsChecked="{Binding Path=SnapToGrid, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"/>
                     <TextBlock Text="SnapX" Classes="left" Grid.Row="1" Grid.Column="0"/>
                     <TextBox Text="{Binding Path=SnapX, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
-                    <ScrollBar Classes="slider" Minimum="0" Maximum="30" ViewportSize="1" Grid.Row="1" Grid.Column="2">
+                    <ScrollBar Classes="slider" Minimum="0" Maximum="30" ViewportSize="2" Grid.Row="1" Grid.Column="2">
                         <ScrollBar.Value>
                             <Binding Path="SnapX" Mode="TwoWay" Converter="{Static converters:RoundedDoubleToDoubleConverter.Instance}"/>
                         </ScrollBar.Value>
                     </ScrollBar>
                     <TextBlock Text="SnapY" Classes="left" Grid.Row="2" Grid.Column="0"/>
                     <TextBox Text="{Binding Path=SnapY, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
-                    <ScrollBar Classes="slider" Minimum="0" Maximum="30" ViewportSize="1" Grid.Row="2" Grid.Column="2">
+                    <ScrollBar Classes="slider" Minimum="0" Maximum="30" ViewportSize="2" Grid.Row="2" Grid.Column="2">
                         <ScrollBar.Value>
                             <Binding Path="SnapY" Mode="TwoWay" Converter="{Static converters:RoundedDoubleToDoubleConverter.Instance}"/>
                         </ScrollBar.Value>
                     </ScrollBar>
                     <TextBlock Text="HitTreshold" Classes="left" Grid.Row="3" Grid.Column="0"/>
                     <TextBox Text="{Binding Path=HitTreshold, Mode=TwoWay}" Classes="left" Grid.Row="3" Grid.Column="1"/>
-                    <ScrollBar Classes="slider" Minimum="0" Maximum="30" ViewportSize="1" Grid.Row="3" Grid.Column="2">
+                    <ScrollBar Classes="slider" Minimum="0" Maximum="30" ViewportSize="2" Grid.Row="3" Grid.Column="2">
                         <ScrollBar.Value>
                             <Binding Path="HitTreshold" Mode="TwoWay" Converter="{Static converters:RoundedDoubleToDoubleConverter.Instance}"/>
                         </ScrollBar.Value>

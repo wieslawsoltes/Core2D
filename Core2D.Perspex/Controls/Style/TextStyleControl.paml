@@ -17,7 +17,7 @@
         <TextBox Text="{Binding Path=FontFile, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"/>
         <TextBlock Text="FontSize" Classes="left" Grid.Row="3" Grid.Column="0"/>
         <TextBox Text="{Binding Path=FontSize, Mode=TwoWay}" Classes="left" Grid.Row="3" Grid.Column="1"/>
-        <ScrollBar Classes="slider" Minimum="0" Maximum="72" ViewportSize="1" Grid.Row="3" Grid.Column="2">
+        <ScrollBar Classes="slider" Minimum="0" Maximum="72" ViewportSize="5" Grid.Row="3" Grid.Column="2">
             <ScrollBar.Value>
                 <Binding Path="FontSize" Mode="TwoWay" Converter="{Static converters:RoundedDoubleToDoubleConverter.Instance}"/>
             </ScrollBar.Value>
