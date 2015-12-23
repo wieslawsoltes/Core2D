@@ -14,72 +14,76 @@
              xmlns:style="clr-namespace:Core2D.Perspex.Controls.Style;assembly=Core2D.Perspex"
              xmlns:editor="clr-namespace:Core2D.Perspex.Controls.Editor;assembly=Core2D.Perspex"
              Design.DataContext="{Static core:DesignerContext.Editor}"
-             Design.Width="1200"  Design.Height="540">
-    <Grid RowDefinitions="50*,Auto,50*" ColumnDefinitions="200,Auto,*,Auto,250">
-        <Border Classes="leftTop" Grid.Row="0" Grid.Column="0">
-            <TabControl Classes="bottom">
-                <TabItem Header="Project" Classes="property">
-                    <project:ProjectControl DataContext="{Binding Path=Project, Mode=TwoWay}"/>
-                </TabItem>
-            </TabControl>
-        </Border>
-        <GridSplitter Classes="horizontal" Grid.Row="1" Grid.Column="0" Height="6"/>
-        <Border Classes="leftBottom" Grid.Row="2" Grid.Column="0">
-            <TabControl Classes="bottom">
-                <TabItem Header="Groups" Classes="property">
-                    <project:GroupsControl DataContext="{Binding Path=Project, Mode=TwoWay}"/>
-                </TabItem>
-                <TabItem Header="Databases" Classes="property">
-                    <project:DatabasesControl DataContext="{Binding Path=Project, Mode=TwoWay}"/>
-                </TabItem>
-            </TabControl>
-        </Border>
-        <GridSplitter Classes="vertical" Grid.Row="0" Grid.RowSpan="3" Grid.Column="1" Width="10"/>
+             Design.Width="1200" Design.Height="540">
+    <Grid ColumnDefinitions="200,Auto,*,Auto,250">
+        <Grid RowDefinitions="50*,Auto,50*" Grid.Column="0">
+            <Border Classes="leftTop" Grid.Row="0">
+                <TabControl Classes="bottom">
+                    <TabItem Header="Project" Classes="property">
+                        <project:ProjectControl DataContext="{Binding Path=Project, Mode=TwoWay}"/>
+                    </TabItem>
+                </TabControl>
+            </Border>
+            <GridSplitter Classes="horizontal" Grid.Row="1" Height="6"/>
+            <Border Classes="leftBottom" Grid.Row="2">
+                <TabControl Classes="bottom">
+                    <TabItem Header="Groups" Classes="property">
+                        <project:GroupsControl DataContext="{Binding Path=Project, Mode=TwoWay}"/>
+                    </TabItem>
+                    <TabItem Header="Databases" Classes="property">
+                        <project:DatabasesControl DataContext="{Binding Path=Project, Mode=TwoWay}"/>
+                    </TabItem>
+                </TabControl>
+            </Border>
+        </Grid>
+        <GridSplitter Classes="vertical" Grid.Column="1" Width="10"/>
         <Grid Grid.Row="0" Grid.RowSpan="3" Grid.Column="2">
             <Border Classes="drawable">
                 <editor:DrawableControl Name="drawable" ClipToBounds="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
             </Border>
         </Grid>
-        <GridSplitter Classes="vertical" Grid.Row="0" Grid.RowSpan="3" Grid.Column="3" Width="10"/>
-        <Border Classes="rightTop" Grid.Row="0" Grid.Column="4">
-            <TabControl Classes="bottom">
-                <TabItem Header="Styles" Classes="property">
-                    <project:StylesControl DataContext="{Binding Path=Project, Mode=TwoWay}"/>
-                </TabItem>
-                <TabItem Header="Templates" Classes="property">
-                    <project:TemplatesControl DataContext="{Binding Path=Project, Mode=TwoWay}"/>
-                </TabItem>
-            </TabControl>
-        </Border>
-        <GridSplitter Classes="horizontal" Grid.Row="1" Grid.Column="4" Height="6"/>
-        <Border Classes="rightBottom" Grid.Row="2" Grid.Column="4">
-            <TabControl Classes="bottom">
-                <TabItem Header="Shape" Classes="property">
-                    <ScrollViewer>
-                        <ContentControl Content="{Binding Path=Project.CurrentContainer.CurrentShape, Mode=TwoWay}"/>
-                    </ScrollViewer>
-                </TabItem>
-                <TabItem Header="Data" Classes="property">
-                    <ScrollViewer>
-                        <data:DataControl DataContext="{Binding Path=Renderers[0].State.SelectedShape.Data, Mode=TwoWay}"/>
-                    </ScrollViewer>
-                </TabItem>
-                <TabItem Header="Style" Classes="property">
-                    <ScrollViewer>
-                        <style:ShapeStyleControl DataContext="{Binding Path=Project.CurrentStyleLibrary.Selected, Mode=TwoWay}"/>
-                    </ScrollViewer>
-                </TabItem>
-                <TabItem Header="Container" Classes="property">
-                    <ScrollViewer>
-                        <project:ContainerControl DataContext="{Binding Path=Project.CurrentContainer, Mode=TwoWay}"/>
-                    </ScrollViewer>
-                </TabItem>
-                <TabItem Header="Template" Classes="property">
-                    <ScrollViewer>
-                        <project:ContainerControl DataContext="{Binding Path=Project.CurrentTemplate, Mode=TwoWay}"/>
-                    </ScrollViewer>
-                </TabItem>
-            </TabControl>
-        </Border>
+        <GridSplitter Classes="vertical" Grid.Row="0" Grid.Column="3" Width="10"/>
+        <Grid RowDefinitions="50*,Auto,50*" Grid.Column="4">
+            <Border Classes="rightTop" Grid.Row="0">
+                <TabControl Classes="bottom">
+                    <TabItem Header="Styles" Classes="property">
+                        <project:StylesControl DataContext="{Binding Path=Project, Mode=TwoWay}"/>
+                    </TabItem>
+                    <TabItem Header="Templates" Classes="property">
+                        <project:TemplatesControl DataContext="{Binding Path=Project, Mode=TwoWay}"/>
+                    </TabItem>
+                </TabControl>
+            </Border>
+            <GridSplitter Classes="horizontal" Grid.Row="1" Height="6"/>
+            <Border Classes="rightBottom" Grid.Row="2">
+                <TabControl Classes="bottom">
+                    <TabItem Header="Shape" Classes="property">
+                        <ScrollViewer>
+                            <ContentControl Content="{Binding Path=Project.CurrentContainer.CurrentShape, Mode=TwoWay}"/>
+                        </ScrollViewer>
+                    </TabItem>
+                    <TabItem Header="Data" Classes="property">
+                        <ScrollViewer>
+                            <data:DataControl DataContext="{Binding Path=Renderers[0].State.SelectedShape.Data, Mode=TwoWay}"/>
+                        </ScrollViewer>
+                    </TabItem>
+                    <TabItem Header="Style" Classes="property">
+                        <ScrollViewer>
+                            <style:ShapeStyleControl DataContext="{Binding Path=Project.CurrentStyleLibrary.Selected, Mode=TwoWay}"/>
+                        </ScrollViewer>
+                    </TabItem>
+                    <TabItem Header="Container" Classes="property">
+                        <ScrollViewer>
+                            <project:ContainerControl DataContext="{Binding Path=Project.CurrentContainer, Mode=TwoWay}"/>
+                        </ScrollViewer>
+                    </TabItem>
+                    <TabItem Header="Template" Classes="property">
+                        <ScrollViewer>
+                            <project:ContainerControl DataContext="{Binding Path=Project.CurrentTemplate, Mode=TwoWay}"/>
+                        </ScrollViewer>
+                    </TabItem>
+                </TabControl>
+            </Border>
+        </Grid>
     </Grid>
 </UserControl>
