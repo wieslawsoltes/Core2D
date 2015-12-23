@@ -12,7 +12,7 @@
         <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Right">
             <MenuItem Header="+" Command="{Static core:Commands.AddPropertyCommand}" CommandParameter="{Binding}"/>
         </Menu>
-        <GridSplitter Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Width="10"/>
+        <GridSplitter Classes="vertical" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Width="10"/>
         <TextBlock Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" Text="Name" Classes="default"/>
         <TextBlock Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" Text="Value" Classes="default"/>
         <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="2" Items="{Binding Path=Properties}">

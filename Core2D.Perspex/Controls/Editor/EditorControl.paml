@@ -33,13 +33,13 @@
                 </TabItem>
             </TabControl>
         </Border>
-        <GridSplitter Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" Width="8"/>
+        <GridSplitter Classes="vertical" Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" Width="8"/>
         <Grid Grid.Row="0" Grid.RowSpan="2" Grid.Column="2">
             <Border Classes="drawable">
                 <editor:DrawableControl Name="drawable" ClipToBounds="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
             </Border>
         </Grid>
-        <GridSplitter Grid.Row="0" Grid.RowSpan="2" Grid.Column="3" Width="8"/>
+        <GridSplitter Classes="vertical" Grid.Row="0" Grid.RowSpan="2" Grid.Column="3" Width="8"/>
         <Border Classes="rightTop" Grid.Row="0" Grid.Column="4">
             <TabControl Classes="bottom">
                 <TabItem Header="Styles" Classes="property">
