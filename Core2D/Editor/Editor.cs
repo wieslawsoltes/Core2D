@@ -248,1005 +248,6 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Initialize default <see cref="Editor"/> tools.
-        /// </summary>
-        public void DefaultTools()
-        {
-            Tools = new Dictionary<Tool, ToolBase>
-            {
-                { Tool.None,      new ToolNone(this)      },
-                { Tool.Selection, new ToolSelection(this) },
-                { Tool.Point,     new ToolPoint(this)     },
-                { Tool.Line,      new ToolLine(this)      },
-                { Tool.Arc,       new ToolArc(this)       },
-                { Tool.Bezier,    new ToolBezier(this)    },
-                { Tool.QBezier,   new ToolQBezier(this)   },
-                { Tool.Path,      new ToolPath(this)      },
-                { Tool.Rectangle, new ToolRectangle(this) },
-                { Tool.Ellipse,   new ToolEllipse(this)   },
-                { Tool.Text,      new ToolText(this)      },
-                { Tool.Image,     new ToolImage(this)     }
-            }.ToImmutableDictionary();
-        }
-
-        /// <summary>
-        /// Set renderer's image cache.
-        /// </summary>
-        /// <param name="cache">The image cache instance.</param>
-        private void SetRenderersImageCache(IImageCache cache)
-        {
-            if (_renderers != null)
-            {
-                foreach (var renderer in _renderers)
-                {
-                    renderer.ClearCache(isZooming: false);
-                    renderer.State.ImageCache = cache;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Load project.
-        /// </summary>
-        /// <param name="project">The project instance.</param>
-        /// <param name="path">The project path.</param>
-        public void Load(Project project, string path = null)
-        {
-            Deselect();
-            SetRenderersImageCache(project);
-
-            Project = project;
-            Project.History = new History();
-            ProjectPath = path;
-            IsProjectDirty = false;
-            Observer = new Observer(this);
-        }
-
-        /// <summary>
-        /// Unload project.
-        /// </summary>
-        public void Unload()
-        {
-            if (_project != null)
-            {
-                if (Observer != null)
-                {
-                    Observer.Dispose();
-                    Observer = null;
-                }
-
-                if (_project.History != null)
-                {
-                    _project.History.Reset();
-                    _project.History = null;
-                }
-
-                _project.PurgeUnusedImages(Enumerable.Empty<string>().ToImmutableHashSet());
-            }
-
-            Deselect();
-            SetRenderersImageCache(null);
-
-            Project = null;
-            ProjectPath = string.Empty;
-            IsProjectDirty = false;
-        }
-
-        /// <summary>
-        /// Snaps value by specified snap amount.
-        /// </summary>
-        /// <param name="value">The value to snap.</param>
-        /// <param name="snap">The snap amount.</param>
-        /// <returns>The snapped value.</returns>
-        public static double Snap(double value, double snap)
-        {
-            double r = value % snap;
-            return r >= snap / 2.0 ? value + snap - r : value - r;
-        }
-
-        /// <summary>
-        /// Gets all shapes including grouped shapes.
-        /// </summary>
-        /// <param name="shapes">The shapes collection.</param>
-        /// <returns>All shapes including grouped shapes.</returns>
-        public static IEnumerable<BaseShape> GetAllShapes(IEnumerable<BaseShape> shapes)
-        {
-            if (shapes == null)
-                yield break;
-
-            foreach (var shape in shapes)
-            {
-                if (shape is XGroup)
-                {
-                    foreach (var s in GetAllShapes((shape as XGroup).Shapes))
-                    {
-                        yield return s;
-                    }
-
-                    yield return shape;
-                }
-                else
-                {
-                    yield return shape;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Gets all shapes including grouped shapes of specified type.
-        /// </summary>
-        /// <typeparam name="T">The type of shape to include.</typeparam>
-        /// <param name="shapes">The shapes collection.</param>
-        /// <returns>All shapes including grouped shapes of specified type.</returns>
-        public static IEnumerable<T> GetAllShapes<T>(IEnumerable<BaseShape> shapes)
-        {
-            return GetAllShapes(shapes).Where(s => s is T).Cast<T>();
-        }
-
-        /// <summary>
-        /// Gets all shapes including grouped shapes of specified type.
-        /// </summary>
-        /// <typeparam name="T">The type of shapes to include.</typeparam>
-        /// <param name="project">The project object.</param>
-        /// <returns>All shapes including grouped shapes of specified type.</returns>
-        public static IEnumerable<T> GetAllShapes<T>(Project project)
-        {
-            var shapes = project.Documents
-                .SelectMany(d => d.Containers)
-                .SelectMany(c => c.Layers)
-                .SelectMany(l => l.Shapes);
-
-            return GetAllShapes(shapes).Where(s => s is T).Cast<T>();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="points"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        public static void MovePointsBy(IEnumerable<XPoint> points, double dx, double dy)
-        {
-            foreach (var point in points)
-            {
-                if (!point.State.Flags.HasFlag(ShapeStateFlags.Locked))
-                {
-                    point.Move(dx, dy);
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="shapes"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        public static void MoveShapesBy(IEnumerable<BaseShape> shapes, double dx, double dy)
-        {
-            foreach (var shape in shapes)
-            {
-                if (!shape.State.Flags.HasFlag(ShapeStateFlags.Locked))
-                {
-                    shape.Move(dx, dy);
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="path"></param>
-        public async Task<string> AddImageKey(string path)
-        {
-            if (_project == null)
-                return null;
-
-            if (path == null || string.IsNullOrEmpty(path))
-            {
-                var key = await GetImageKey();
-                if (key == null || string.IsNullOrEmpty(key))
-                    return null;
-
-                return key;
-            }
-            else
-            {
-                var bytes = System.IO.File.ReadAllBytes(path);
-                var key = _project.AddImageFromFile(path, bytes);
-                return key;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="parameter"></param>
-        public void RemoveImageKey(object parameter)
-        {
-            if (_project == null)
-                return;
-
-            if (parameter == null)
-                return;
-
-            var key = parameter as string;
-            if (key != null)
-            {
-                _project.RemoveImage(key);
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public void OnGroupSelected()
-        {
-            var group = _project.Group(_renderers[0].State.SelectedShapes);
-            if (group != null)
-            {
-                Select(_project.CurrentContainer, group);
-            }
-        }
- 
-        /// <summary>
-        /// 
-        /// </summary>
-        public void OnUngroupSelected()
-        {
-            var result = _project.Ungroup(_renderers[0].State.SelectedShape, _renderers[0].State.SelectedShapes);
-            if (result == true)
-            {
-                _renderers[0].State.SelectedShape = null;
-                _renderers[0].State.SelectedShapes = null;
-                /*
-                var container = _project.CurrentContainer;
-                if (container != null)
-                {
-                    var layer = container.CurrentLayer;
-                    if (layer != null)
-                    {
-                        layer.Invalidate();
-                    }
-                }
-                */
-            }
-        }
-
-        /// <summary>
-        /// Bring selected shapes to the top of the stack.
-        /// </summary>
-        public void OnBringToFrontSelected()
-        {
-            var source = _renderers[0].State.SelectedShape;
-            if (source != null)
-            {
-                _project.BringToFront(source);
-            }
-
-            var sources = _renderers[0].State.SelectedShapes;
-            if (sources != null)
-            {
-                foreach (var s in sources)
-                {
-                    _project.BringToFront(s);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Move selected shapes one step closer to the front of the stack.
-        /// </summary>
-        public void OnBringForwardSelected()
-        {
-            var source = _renderers[0].State.SelectedShape;
-            if (source != null)
-            {
-                _project.BringForward(source);
-            }
-
-            var sources = _renderers[0].State.SelectedShapes;
-            if (sources != null)
-            {
-                foreach (var s in sources)
-                {
-                    _project.BringForward(s);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Move selected shapes one step down within the stack.
-        /// </summary>
-        public void OnSendBackwardSelected()
-        {
-            var source = _renderers[0].State.SelectedShape;
-            if (source != null)
-            {
-                _project.SendBackward(source);
-            }
-
-            var sources = _renderers[0].State.SelectedShapes;
-            if (sources != null)
-            {
-                foreach (var s in sources.Reverse())
-                {
-                    _project.SendBackward(s);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Move selected shapes to the bottom of the stack.
-        /// </summary>
-        public void OnSendToBackSelected()
-        {
-            var source = _renderers[0].State.SelectedShape;
-            if (source != null)
-            {
-                _project.SendToBack(source);
-            }
-
-            var sources = _renderers[0].State.SelectedShapes;
-            if (sources != null)
-            {
-                foreach (var s in sources.Reverse())
-                {
-                    _project.SendToBack(s);
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public void OnMoveUpSelected()
-        {
-            _project.MoveBy(
-                _renderers[0].State.SelectedShape,
-                _renderers[0].State.SelectedShapes,
-                0.0,
-                _project.Options.SnapToGrid ? -_project.Options.SnapY : -1.0);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public void OnMoveDownSelected()
-        {
-            _project.MoveBy(
-                _renderers[0].State.SelectedShape,
-                _renderers[0].State.SelectedShapes,
-                0.0,
-                _project.Options.SnapToGrid ? _project.Options.SnapY : 1.0);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public void OnMoveLeftSelected()
-        {
-            _project.MoveBy(
-                _renderers[0].State.SelectedShape,
-                _renderers[0].State.SelectedShapes,
-                _project.Options.SnapToGrid ? -_project.Options.SnapX : -1.0,
-                0.0);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public void OnMoveRightSelected()
-        {
-            _project.MoveBy(
-                _renderers[0].State.SelectedShape,
-                _renderers[0].State.SelectedShapes,
-                _project.Options.SnapToGrid ? _project.Options.SnapX : 1.0,
-                0.0);
-        }
-
-        /// <summary>
-        /// Removes container object from owner document <see cref="Document.Containers"/> collection.
-        /// </summary>
-        /// <param name="container">The container object to remove from document <see cref="Document.Containers"/> collection.</param>
-        public void Delete(Container container)
-        {
-            if (_project == null || _project.Documents == null)
-                return;
-
-            var document = _project.Documents.FirstOrDefault(d => d.Containers.Contains(container));
-            if (document != null)
-            {
-                var previous = document.Containers;
-                var next = document.Containers.Remove(container);
-                _project.History.Snapshot(previous, next, (p) => document.Containers = p);
-                document.Containers = next;
-
-                _project.CurrentDocument = document;
-                _project.CurrentContainer = document.Containers.FirstOrDefault();
-                _project.Selected = _project.CurrentContainer;
-            }
-        }
-
-        /// <summary>
-        /// Removes document object from project <see cref="Project.Documents"/> collection.
-        /// </summary>
-        /// <param name="document">The document object to remove from project <see cref="Project.Documents"/> collection.</param>
-        public void Delete(Document document)
-        {
-            if (_project == null || _project.Documents == null)
-                return;
-
-            var previous = _project.Documents;
-            var next = _project.Documents.Remove(document);
-            _project.History.Snapshot(previous, next, (p) => _project.Documents = p);
-            _project.Documents = next;
-
-            _project.CurrentDocument = _project.Documents.FirstOrDefault();
-            if (_project.CurrentDocument != null)
-            {
-                _project.CurrentContainer = _project.CurrentDocument.Containers.FirstOrDefault();
-            }
-            else
-            {
-                _project.CurrentContainer = default(Container);
-            }
-            _project.Selected = _project.CurrentContainer;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public void DeleteSelected()
-        {
-            if (_project == null
-                || _project.CurrentContainer == null
-                || _project.CurrentContainer.CurrentLayer == null)
-                return;
-
-            if (_renderers[0].State.SelectedShape != null)
-            {
-                var layer = _project.CurrentContainer.CurrentLayer;
-
-                var previous = layer.Shapes;
-                var next = layer.Shapes.Remove(_renderers[0].State.SelectedShape);
-                _project.History.Snapshot(previous, next, (p) => layer.Shapes = p);
-                layer.Shapes = next;
-
-                _project.CurrentContainer.CurrentLayer.Invalidate();
-                _renderers[0].State.SelectedShape = default(BaseShape);
-            }
-
-            if (_renderers[0].State.SelectedShapes != null && _renderers[0].State.SelectedShapes.Count > 0)
-            {
-                var layer = _project.CurrentContainer.CurrentLayer;
-
-                var builder = layer.Shapes.ToBuilder();
-                foreach (var shape in _renderers[0].State.SelectedShapes)
-                {
-                    builder.Remove(shape);
-                }
-
-                var previous = layer.Shapes;
-                var next = builder.ToImmutable();
-                _project.History.Snapshot(previous, next, (p) => layer.Shapes = p);
-                layer.Shapes = next;
-
-                _renderers[0].State.SelectedShapes = default(ImmutableHashSet<BaseShape>);
-                layer.Invalidate();
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="container"></param>
-        /// <param name="shape"></param>
-        public void Select(Container container, BaseShape shape)
-        {
-            if (container == null)
-                return;
-
-            container.CurrentShape = shape;
-            _renderers[0].State.SelectedShape = shape;
-            _renderers[0].State.SelectedShapes = default(ImmutableHashSet<BaseShape>);
-            container.CurrentLayer.Invalidate();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="container"></param>
-        /// <param name="shapes"></param>
-        public void Select(Container container, ImmutableHashSet<BaseShape> shapes)
-        {
-            if (container == null)
-                return;
-
-            container.CurrentShape = default(BaseShape);
-            _renderers[0].State.SelectedShape = default(BaseShape);
-            _renderers[0].State.SelectedShapes = shapes;
-            container.CurrentLayer.Invalidate();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public void Deselect()
-        {
-            if (_renderers == null)
-                return;
-
-            _renderers[0].State.SelectedShape = default(BaseShape);
-            _renderers[0].State.SelectedShapes = default(ImmutableHashSet<BaseShape>);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="container"></param>
-        public void Deselect(Container container)
-        {
-            if (container == null || _renderers == null)
-                return;
-
-            if (_renderers[0].State.SelectedShape != null
-                || _renderers[0].State.SelectedShapes != null)
-            {
-                _renderers[0].State.SelectedShape = default(BaseShape);
-                _renderers[0].State.SelectedShapes = default(ImmutableHashSet<BaseShape>);
-
-                container.CurrentShape = default(BaseShape);
-                container.CurrentLayer.Invalidate();
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="container"></param>
-        /// <param name="rectangle"></param>
-        /// <returns></returns>
-        public bool TryToSelectShapes(Container container, XRectangle rectangle)
-        {
-            if (container == null)
-                return false;
-
-            var rect = Rect2.Create(rectangle.TopLeft, rectangle.BottomRight);
-
-            var result = ShapeBounds.HitTest(container, rect, _project.Options.HitTreshold);
-            if (result != null)
-            {
-                if (result.Count > 0)
-                {
-                    if (result.Count == 1)
-                    {
-                        Select(container, result.FirstOrDefault());
-                    }
-                    else
-                    {
-                        Select(container, result);
-                    }
-                    return true;
-                }
-            }
-
-            Deselect(container);
-
-            return false;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="container"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <returns></returns>
-        public bool TryToSelectShape(Container container, double x, double y)
-        {
-            if (container == null)
-                return false;
-
-            var result = ShapeBounds.HitTest(container, new Vector2(x, y), _project.Options.HitTreshold);
-            if (result != null)
-            {
-                Select(container, result);
-                return true;
-            }
-
-            Deselect(container);
-
-            return false;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="shape"></param>
-        public void Hover(BaseShape shape)
-        {
-            Select(_project.CurrentContainer, shape);
-            _hover = shape;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public void Dehover()
-        {
-            _hover = default(BaseShape);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="container"></param>
-        public void Dehover(Container container)
-        {
-            _hover = default(BaseShape);
-            Deselect(container);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        public bool TryToHoverShape(double x, double y)
-        {
-            if (_project == null || _project.CurrentContainer == null)
-                return false;
-
-            if (_renderers[0].State.SelectedShapes == null
-                && !(_renderers[0].State.SelectedShape != null && _hover != _renderers[0].State.SelectedShape))
-            {
-                var result = ShapeBounds.HitTest(
-                    _project.CurrentContainer,
-                    new Vector2(x, y),
-                    _project.Options.HitTreshold);
-                if (result != null)
-                {
-                    Select(_project.CurrentContainer, result);
-                    _hover = result;
-
-                    return true;
-                }
-                else
-                {
-                    if (_renderers[0].State.SelectedShape != null
-                        && _renderers[0].State.SelectedShape == _hover)
-                    {
-                        _hover = default(BaseShape);
-                        Deselect(_project.CurrentContainer);
-                    }
-                }
-            }
-
-            return false;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <param name="point"></param>
-        /// <param name="select"></param>
-        /// <returns></returns>
-        public bool TryToSplitLine(double x, double y, XPoint point, bool select = false)
-        {
-            if (_project == null || _project.CurrentContainer == null || _project.Options == null)
-                return false;
-
-            var result = ShapeBounds.HitTest(
-                _project.CurrentContainer,
-                new Vector2(x, y),
-                _project.Options.HitTreshold);
-
-            if (result is XLine)
-            {
-                var line = result as XLine;
-
-                if (!_project.Options.SnapToGrid)
-                {
-                    var a = new Vector2(line.Start.X, line.Start.Y);
-                    var b = new Vector2(line.End.X, line.End.Y);
-                    var nearest = MathHelpers.NearestPointOnLine(a, b, new Vector2(x, y));
-                    point.X = nearest.X;
-                    point.Y = nearest.Y;
-                }
-
-                var split = XLine.Create(
-                    x, y,
-                    line.Style,
-                    _project.Options.PointShape,
-                    line.IsStroked);
-
-                double ds = point.DistanceTo(line.Start);
-                double de = point.DistanceTo(line.End);
-
-                if (ds < de)
-                {
-                    split.Start = line.Start;
-                    split.End = point;
-
-                    line.Start = point;
-                }
-                else
-                {
-                    split.Start = point;
-                    split.End = line.End;
-
-                    line.End = point;
-                }
-
-                _project.AddShape(split);
-
-                if (select)
-                {
-                    Select(_project.CurrentContainer, point);
-                }
-
-                return true;
-            }
-
-            return false;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="line"></param>
-        /// <param name="p0"></param>
-        /// <param name="p1"></param>
-        /// <returns></returns>
-        public bool TryToSplitLine(XLine line, XPoint p0, XPoint p1)
-        {
-            if (_project == null || _project.Options == null)
-                return false;
-
-            // Points must be aligned horizontally or vertically.
-            if (p0.X != p1.X && p0.Y != p1.Y)
-                return false;
-
-            // Line must be horizontal or vertical.
-            if (line.Start.X != line.End.X && line.Start.Y != line.End.Y)
-                return false;
-
-            XLine split;
-            if (line.Start.X > line.End.X || line.Start.Y > line.End.Y)
-            {
-                split = XLine.Create(
-                    p0,
-                    line.End,
-                    line.Style,
-                    _project.Options.PointShape,
-                    line.IsStroked);
-                line.End = p1;
-            }
-            else
-            {
-                split = XLine.Create(
-                    p1,
-                    line.End,
-                    line.Style,
-                    _project.Options.PointShape,
-                    line.IsStroked);
-                line.End = p0;
-            }
-
-            _project.AddShape(split);
-
-            return true;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="group"></param>
-        /// <returns></returns>
-        public bool TryToConnect(XGroup group)
-        {
-            if (_project == null
-                || _project.CurrentContainer == null
-                || _project.CurrentContainer.CurrentLayer == null
-                || _project.Options == null)
-                return false;
-
-            var layer = _project.CurrentContainer.CurrentLayer;
-            if (group.Connectors.Length > 0)
-            {
-                var wires = GetAllShapes<XLine>(layer.Shapes);
-                var dict = new Dictionary<XLine, IList<XPoint>>();
-
-                // Find possible group to line connections.
-                foreach (var connector in group.Connectors)
-                {
-                    var p = new Vector2(connector.X, connector.Y);
-                    var t = _project.Options.HitTreshold;
-                    XLine result = null;
-                    foreach (var line in wires)
-                    {
-                        if (ShapeBounds.HitTestLine(line, p, t, 0, 0))
-                        {
-                            result = line;
-                            break;
-                        }
-                    }
-
-                    if (result != null)
-                    {
-                        if (dict.ContainsKey(result))
-                        {
-                            dict[result].Add(connector);
-                        }
-                        else
-                        {
-                            dict.Add(result, new List<XPoint>());
-                            dict[result].Add(connector);
-                        }
-                    }
-                }
-
-                bool success = false;
-
-                // Try to split lines using group connectors.
-                foreach (var kv in dict)
-                {
-                    IList<XPoint> points = kv.Value;
-                    if (points.Count == 2)
-                    {
-                        success = TryToSplitLine(kv.Key, points[0], points[1]);
-                    }
-                }
-
-                return success;
-            }
-
-            return false;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public bool IsLeftDownAvailable()
-        {
-            return _project != null
-                && _project.CurrentContainer != null
-                && _project.CurrentContainer.CurrentLayer != null
-                && _project.CurrentContainer.CurrentLayer.IsVisible
-                && _project.CurrentStyleLibrary != null
-                && _project.CurrentStyleLibrary.Selected != null;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public bool IsLeftUpAvailable()
-        {
-            return _project != null
-                && _project.CurrentContainer != null
-                && _project.CurrentContainer.CurrentLayer != null
-                && _project.CurrentContainer.CurrentLayer.IsVisible
-                && _project.CurrentStyleLibrary != null
-                && _project.CurrentStyleLibrary.Selected != null;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public bool IsRightDownAvailable()
-        {
-            return _project != null
-                && _project.CurrentContainer != null
-                && _project.CurrentContainer.CurrentLayer != null
-                && _project.CurrentContainer.CurrentLayer.IsVisible
-                && _project.CurrentStyleLibrary != null
-                && _project.CurrentStyleLibrary.Selected != null;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public bool IsRightUpAvailable()
-        {
-            return _project != null
-                && _project.CurrentContainer != null
-                && _project.CurrentContainer.CurrentLayer != null
-                && _project.CurrentContainer.CurrentLayer.IsVisible
-                && _project.CurrentStyleLibrary != null
-                && _project.CurrentStyleLibrary.Selected != null;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public bool IsMoveAvailable()
-        {
-            return _project != null
-                && _project.CurrentContainer != null
-                && _project.CurrentContainer.CurrentLayer != null
-                && _project.CurrentContainer.CurrentLayer.IsVisible
-                && _project.CurrentStyleLibrary != null
-                && _project.CurrentStyleLibrary.Selected != null;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public bool IsSelectionAvailable()
-        {
-            return _renderers[0].State.SelectedShape != null
-                || _renderers[0].State.SelectedShapes != null;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        public void LeftDown(double x, double y)
-        {
-            Tools[CurrentTool].LeftDown(x, y);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        public void LeftUp(double x, double y)
-        {
-            Tools[CurrentTool].LeftUp(x, y);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        public void RightDown(double x, double y)
-        {
-            Tools[CurrentTool].RightDown(x, y);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        public void RightUp(double x, double y)
-        {
-            Tools[CurrentTool].RightUp(x, y);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        public void Move(double x, double y)
-        {
-            Tools[CurrentTool].Move(x, y);
-        }
-
-        /// <summary>
-        /// Checks if edit mode is active.
-        /// </summary>
-        /// <returns>Return true if edit mode is active.</returns>
-        public bool IsEditMode()
-        {
-            return true;
-        }
-
-        /// <summary>
         /// Create new project, document or container.
         /// </summary>
         /// <param name="item">The parent item.</param>
@@ -1338,11 +339,76 @@ namespace Core2D
         }
 
         /// <summary>
+        /// Open project.
+        /// </summary>
+        /// <param name="path">The project file path.</param>
+        public void Open(string path)
+        {
+            if (_serializer == null)
+                return;
+
+            try
+            {
+                var project = Project.Open(path, _serializer);
+
+                Unload();
+                Load(project, path);
+
+                AddRecent(path, project.Name);
+            }
+            catch (Exception ex)
+            {
+                if (_log != null)
+                {
+                    _log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
+                }
+            }
+        }
+
+        /// <summary>
         /// Close project.
         /// </summary>
         public void OnClose()
         {
-            Close();
+            _project.History.Reset();
+            Unload();
+        }
+
+        /// <summary>
+        /// Save project.
+        /// </summary>
+        /// <param name="path">The project file path.</param>
+        public void Save(string path)
+        {
+            if (_serializer == null)
+                return;
+
+            try
+            {
+                Project.Save(_project, path, _serializer);
+
+                AddRecent(path, _project.Name);
+
+                if (string.IsNullOrEmpty(_projectPath))
+                {
+                    _projectPath = path;
+                }
+
+                IsProjectDirty = false;
+            }
+            catch (Exception ex)
+            {
+                if (_log != null)
+                {
+                    _log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
+                }
+            }
         }
 
         /// <summary>
@@ -1353,6 +419,425 @@ namespace Core2D
             if (_view != null)
             {
                 _view.Close();
+            }
+        }
+
+        /// <summary>
+        /// Import database.
+        /// </summary>
+        /// <param name="path">The database file path.</param>
+        public void ImportData(string path)
+        {
+            if (_project == null)
+                return;
+
+            try
+            {
+                if (_csvReader == null)
+                    return;
+
+                var db = _csvReader.Read(path);
+                _project.AddDatabase(db);
+                _project.CurrentDatabase = db;
+            }
+            catch (Exception ex)
+            {
+                if (_log != null)
+                {
+                    _log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Export database.
+        /// </summary>
+        /// <param name="path">The database file path.</param>
+        /// <param name="database">The database object.</param>
+        public void ExportData(string path, Database database)
+        {
+            try
+            {
+                if (_csvWriter == null)
+                    return;
+
+                _csvWriter.Write(path, database);
+            }
+            catch (Exception ex)
+            {
+                if (_log != null)
+                {
+                    _log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Update database.
+        /// </summary>
+        /// <param name="path">The database file path.</param>
+        /// <param name="database">The database object.</param>
+        public void UpdateData(string path, Database database)
+        {
+            try
+            {
+                if (_csvReader == null)
+                    return;
+
+                var db = _csvReader.Read(path);
+                _project.ApplyDatabase(database, db);
+            }
+            catch (Exception ex)
+            {
+                if (_log != null)
+                {
+                    _log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Import object from file.
+        /// </summary>
+        /// <param name="path">The object file path.</param>
+        /// <param name="item">The parent object.</param>
+        /// <param name="type">The object type.</param>
+        public void ImportObject(string path, object item, ImportType type)
+        {
+            if (_serializer == null)
+                return;
+
+            try
+            {
+                switch (type)
+                {
+                    case ImportType.Style:
+                        {
+                            var sg = item as Library<ShapeStyle>;
+                            var json = Project.ReadUtf8Text(path);
+                            var import = _serializer.Deserialize<ShapeStyle>(json);
+
+                            var previous = sg.Items;
+                            var next = sg.Items.Add(import);
+                            _project.History.Snapshot(previous, next, (p) => sg.Items = p);
+                            sg.Items = next;
+                        }
+                        break;
+                    case ImportType.Styles:
+                        {
+                            var sg = item as Library<ShapeStyle>;
+                            var json = Project.ReadUtf8Text(path);
+                            var import = _serializer.Deserialize<IList<ShapeStyle>>(json);
+
+                            var builder = sg.Items.ToBuilder();
+                            foreach (var style in import)
+                            {
+                                builder.Add(style);
+                            }
+
+                            var previous = sg.Items;
+                            var next = builder.ToImmutable();
+                            _project.History.Snapshot(previous, next, (p) => sg.Items = p);
+                            sg.Items = next;
+                        }
+                        break;
+                    case ImportType.StyleLibrary:
+                        {
+                            var project = item as Project;
+                            var json = Project.ReadUtf8Text(path);
+                            var import = _serializer.Deserialize<Library<ShapeStyle>>(json);
+
+                            var previous = project.StyleLibraries;
+                            var next = project.StyleLibraries.Add(import);
+                            _project.History.Snapshot(previous, next, (p) => project.StyleLibraries = p);
+                            project.StyleLibraries = next;
+                        }
+                        break;
+                    case ImportType.StyleLibraries:
+                        {
+                            var project = item as Project;
+                            var json = Project.ReadUtf8Text(path);
+                            var import = _serializer.Deserialize<IList<Library<ShapeStyle>>>(json);
+
+                            var builder = project.StyleLibraries.ToBuilder();
+                            foreach (var sg in import)
+                            {
+                                builder.Add(sg);
+                            }
+
+                            var previous = project.StyleLibraries;
+                            var next = builder.ToImmutable();
+                            _project.History.Snapshot(previous, next, (p) => project.StyleLibraries = p);
+                            project.StyleLibraries = next;
+                        }
+                        break;
+                    case ImportType.Group:
+                        {
+                            var gl = item as Library<XGroup>;
+                            var json = Project.ReadUtf8Text(path);
+                            var import = _serializer.Deserialize<XGroup>(json);
+
+                            var shapes = Enumerable.Repeat(import as XGroup, 1);
+                            TryToRestoreStyles(shapes);
+                            TryToRestoreRecords(shapes);
+
+                            var previous = gl.Items;
+                            var next = gl.Items.Add(import);
+                            _project.History.Snapshot(previous, next, (p) => gl.Items = p);
+                            gl.Items = next;
+                        }
+                        break;
+                    case ImportType.Groups:
+                        {
+                            var gl = item as Library<XGroup>;
+                            var json = Project.ReadUtf8Text(path);
+                            var import = _serializer.Deserialize<IList<XGroup>>(json);
+
+                            var shapes = import;
+                            TryToRestoreStyles(shapes);
+                            TryToRestoreRecords(shapes);
+
+                            var builder = gl.Items.ToBuilder();
+                            foreach (var group in import)
+                            {
+                                builder.Add(group);
+                            }
+
+                            var previous = gl.Items;
+                            var next = builder.ToImmutable();
+                            _project.History.Snapshot(previous, next, (p) => gl.Items = p);
+                            gl.Items = next;
+                        }
+                        break;
+                    case ImportType.GroupLibrary:
+                        {
+                            var project = item as Project;
+                            var json = Project.ReadUtf8Text(path);
+                            var import = _serializer.Deserialize<Library<XGroup>>(json);
+
+                            var shapes = import.Items;
+                            TryToRestoreStyles(shapes);
+                            TryToRestoreRecords(shapes);
+
+                            var previous = project.GroupLibraries;
+                            var next = project.GroupLibraries.Add(import);
+                            _project.History.Snapshot(previous, next, (p) => project.GroupLibraries = p);
+                            project.GroupLibraries = next;
+                        }
+                        break;
+                    case ImportType.GroupLibraries:
+                        {
+                            var project = item as Project;
+                            var json = Project.ReadUtf8Text(path);
+                            var import = _serializer.Deserialize<IList<Library<XGroup>>>(json);
+
+                            var shapes = import.SelectMany(x => x.Items);
+                            TryToRestoreStyles(shapes);
+                            TryToRestoreRecords(shapes);
+
+                            var builder = project.GroupLibraries.ToBuilder();
+                            foreach (var library in import)
+                            {
+                                builder.Add(library);
+                            }
+
+                            var previous = project.GroupLibraries;
+                            var next = builder.ToImmutable();
+                            _project.History.Snapshot(previous, next, (p) => project.GroupLibraries = p);
+                            project.GroupLibraries = next;
+                        }
+                        break;
+                    case ImportType.Template:
+                        {
+                            var project = item as Project;
+                            var json = Project.ReadUtf8Text(path);
+                            var import = _serializer.Deserialize<Container>(json);
+
+                            var shapes = import.Layers.SelectMany(x => x.Shapes);
+                            TryToRestoreStyles(shapes);
+                            TryToRestoreRecords(shapes);
+
+                            var previous = project.Templates;
+                            var next = project.Templates.Add(import);
+                            _project.History.Snapshot(previous, next, (p) => project.Templates = p);
+                            project.Templates = next;
+                        }
+                        break;
+                    case ImportType.Templates:
+                        {
+                            var project = item as Project;
+                            var json = Project.ReadUtf8Text(path);
+                            var import = _serializer.Deserialize<IList<Container>>(json);
+
+                            var shapes = import.SelectMany(x => x.Layers).SelectMany(x => x.Shapes);
+                            TryToRestoreStyles(shapes);
+                            TryToRestoreRecords(shapes);
+
+                            var builder = project.Templates.ToBuilder();
+                            foreach (var template in import)
+                            {
+                                builder.Add(template);
+                            }
+
+                            var previous = project.Templates;
+                            var next = builder.ToImmutable();
+                            _project.History.Snapshot(previous, next, (p) => project.Templates = p);
+                            project.Templates = next;
+                        }
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                if (_log != null)
+                {
+                    _log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Export object to a file.
+        /// </summary>
+        /// <param name="path">The object file path.</param>
+        /// <param name="item">The parent object.</param>
+        /// <param name="type">The object type.</param>
+        public void ExportObject(string path, object item, ExportType type)
+        {
+            if (_serializer == null)
+                return;
+
+            try
+            {
+                switch (type)
+                {
+                    case ExportType.Style:
+                        {
+                            var json = _serializer.Serialize(item as ShapeStyle);
+                            Project.WriteUtf8Text(path, json);
+                        }
+                        break;
+                    case ExportType.Styles:
+                        {
+                            var json = _serializer.Serialize((item as Library<ShapeStyle>).Items);
+                            Project.WriteUtf8Text(path, json);
+                        }
+                        break;
+                    case ExportType.StyleLibrary:
+                        {
+                            var json = _serializer.Serialize((item as Library<ShapeStyle>));
+                            Project.WriteUtf8Text(path, json);
+                        }
+                        break;
+                    case ExportType.StyleLibraries:
+                        {
+                            var json = _serializer.Serialize((item as Project).StyleLibraries);
+                            Project.WriteUtf8Text(path, json);
+                        }
+                        break;
+                    case ExportType.Group:
+                        {
+                            var json = _serializer.Serialize(item as XGroup);
+                            Project.WriteUtf8Text(path, json);
+                        }
+                        break;
+                    case ExportType.Groups:
+                        {
+                            var json = _serializer.Serialize((item as Library<XGroup>).Items);
+                            Project.WriteUtf8Text(path, json);
+                        }
+                        break;
+                    case ExportType.GroupLibrary:
+                        {
+                            var json = _serializer.Serialize(item as Library<XGroup>);
+                            Project.WriteUtf8Text(path, json);
+                        }
+                        break;
+                    case ExportType.GroupLibraries:
+                        {
+                            var json = _serializer.Serialize((item as Project).GroupLibraries);
+                            Project.WriteUtf8Text(path, json);
+                        }
+                        break;
+                    case ExportType.Template:
+                        {
+                            var json = _serializer.Serialize(item as Container);
+                            Project.WriteUtf8Text(path, json);
+                        }
+                        break;
+                    case ExportType.Templates:
+                        {
+                            var json = _serializer.Serialize((item as Project).Templates);
+                            Project.WriteUtf8Text(path, json);
+                        }
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                if (_log != null)
+                {
+                    _log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        public async Task<string> AddImageKey(string path)
+        {
+            if (_project == null)
+                return null;
+
+            if (path == null || string.IsNullOrEmpty(path))
+            {
+                var key = await GetImageKey();
+                if (key == null || string.IsNullOrEmpty(key))
+                    return null;
+
+                return key;
+            }
+            else
+            {
+                var bytes = System.IO.File.ReadAllBytes(path);
+                var key = _project.AddImageFromFile(path, bytes);
+                return key;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="parameter"></param>
+        public void RemoveImageKey(object parameter)
+        {
+            if (_project == null)
+                return;
+
+            if (parameter == null)
+                return;
+
+            var key = parameter as string;
+            if (key != null)
+            {
+                _project.RemoveImage(key);
             }
         }
 
@@ -1700,6 +1185,375 @@ namespace Core2D
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public void OnGroupSelected()
+        {
+            var group = _project.Group(_renderers[0].State.SelectedShapes);
+            if (group != null)
+            {
+                Select(_project.CurrentContainer, group);
+            }
+        }
+ 
+        /// <summary>
+        /// 
+        /// </summary>
+        public void OnUngroupSelected()
+        {
+            var result = _project.Ungroup(_renderers[0].State.SelectedShape, _renderers[0].State.SelectedShapes);
+            if (result == true)
+            {
+                _renderers[0].State.SelectedShape = null;
+                _renderers[0].State.SelectedShapes = null;
+                /*
+                var container = _project.CurrentContainer;
+                if (container != null)
+                {
+                    var layer = container.CurrentLayer;
+                    if (layer != null)
+                    {
+                        layer.Invalidate();
+                    }
+                }
+                */
+            }
+        }
+
+        /// <summary>
+        /// Bring selected shapes to the top of the stack.
+        /// </summary>
+        public void OnBringToFrontSelected()
+        {
+            var source = _renderers[0].State.SelectedShape;
+            if (source != null)
+            {
+                _project.BringToFront(source);
+            }
+
+            var sources = _renderers[0].State.SelectedShapes;
+            if (sources != null)
+            {
+                foreach (var s in sources)
+                {
+                    _project.BringToFront(s);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Move selected shapes one step closer to the front of the stack.
+        /// </summary>
+        public void OnBringForwardSelected()
+        {
+            var source = _renderers[0].State.SelectedShape;
+            if (source != null)
+            {
+                _project.BringForward(source);
+            }
+
+            var sources = _renderers[0].State.SelectedShapes;
+            if (sources != null)
+            {
+                foreach (var s in sources)
+                {
+                    _project.BringForward(s);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Move selected shapes one step down within the stack.
+        /// </summary>
+        public void OnSendBackwardSelected()
+        {
+            var source = _renderers[0].State.SelectedShape;
+            if (source != null)
+            {
+                _project.SendBackward(source);
+            }
+
+            var sources = _renderers[0].State.SelectedShapes;
+            if (sources != null)
+            {
+                foreach (var s in sources.Reverse())
+                {
+                    _project.SendBackward(s);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Move selected shapes to the bottom of the stack.
+        /// </summary>
+        public void OnSendToBackSelected()
+        {
+            var source = _renderers[0].State.SelectedShape;
+            if (source != null)
+            {
+                _project.SendToBack(source);
+            }
+
+            var sources = _renderers[0].State.SelectedShapes;
+            if (sources != null)
+            {
+                foreach (var s in sources.Reverse())
+                {
+                    _project.SendToBack(s);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void OnMoveUpSelected()
+        {
+            _project.MoveBy(
+                _renderers[0].State.SelectedShape,
+                _renderers[0].State.SelectedShapes,
+                0.0,
+                _project.Options.SnapToGrid ? -_project.Options.SnapY : -1.0);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void OnMoveDownSelected()
+        {
+            _project.MoveBy(
+                _renderers[0].State.SelectedShape,
+                _renderers[0].State.SelectedShapes,
+                0.0,
+                _project.Options.SnapToGrid ? _project.Options.SnapY : 1.0);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void OnMoveLeftSelected()
+        {
+            _project.MoveBy(
+                _renderers[0].State.SelectedShape,
+                _renderers[0].State.SelectedShapes,
+                _project.Options.SnapToGrid ? -_project.Options.SnapX : -1.0,
+                0.0);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void OnMoveRightSelected()
+        {
+            _project.MoveBy(
+                _renderers[0].State.SelectedShape,
+                _renderers[0].State.SelectedShapes,
+                _project.Options.SnapToGrid ? _project.Options.SnapX : 1.0,
+                0.0);
+        }
+
+        /// <summary>
+        /// Set current tool to <see cref="Tool.None"/>.
+        /// </summary>
+        public void OnToolNone()
+        {
+            CurrentTool = Tool.None;
+        }
+
+        /// <summary>
+        /// Set current tool to <see cref="Tool.Selection"/>.
+        /// </summary>
+        public void OnToolSelection()
+        {
+            CurrentTool = Tool.Selection;
+        }
+
+        /// <summary>
+        /// Set current tool to <see cref="Tool.Point"/>.
+        /// </summary>
+        public void OnToolPoint()
+        {
+            CurrentTool = Tool.Point;
+        }
+
+        /// <summary>
+        ///  Set current tool to <see cref="Tool.Line"/> or current path tool to <see cref="PathTool.Line"/>.
+        /// </summary>
+        public void OnToolLine()
+        {
+            if (CurrentTool == Tool.Path && CurrentPathTool != PathTool.Line)
+            {
+                CurrentPathTool = PathTool.Line;
+            }
+            else
+            {
+                CurrentTool = Tool.Line;
+            }
+        }
+
+        /// <summary>
+        /// Set current tool to <see cref="Tool.Arc"/> or current path tool to <see cref="PathTool.Arc"/>.
+        /// </summary>
+        public void OnToolArc()
+        {
+            if (CurrentTool == Tool.Path && CurrentPathTool != PathTool.Arc)
+            {
+                CurrentPathTool = PathTool.Arc;
+            }
+            else
+            {
+                CurrentTool = Tool.Arc;
+            }
+        }
+
+        /// <summary>
+        /// Set current tool to <see cref="Tool.Bezier"/> or current path tool to <see cref="PathTool.Bezier"/>.
+        /// </summary>
+        public void OnToolBezier()
+        {
+            if (CurrentTool == Tool.Path && CurrentPathTool != PathTool.Bezier)
+            {
+                CurrentPathTool = PathTool.Bezier;
+            }
+            else
+            {
+                CurrentTool = Tool.Bezier;
+            }
+        }
+
+        /// <summary>
+        /// Set current tool to <see cref="Tool.QBezier"/> or current path tool to <see cref="PathTool.QBezier"/>.
+        /// </summary>
+        public void OnToolQBezier()
+        {
+            if (CurrentTool == Tool.Path && CurrentPathTool != PathTool.QBezier)
+            {
+                CurrentPathTool = PathTool.QBezier;
+            }
+            else
+            {
+                CurrentTool = Tool.QBezier;
+            }
+        }
+
+        /// <summary>
+        /// Set current tool to <see cref="Tool.Path"/>.
+        /// </summary>
+        public void OnToolPath()
+        {
+            CurrentTool = Tool.Path;
+        }
+
+        /// <summary>
+        /// Set current tool to <see cref="Tool.Rectangle"/>.
+        /// </summary>
+        public void OnToolRectangle()
+        {
+            CurrentTool = Tool.Rectangle;
+        }
+
+        /// <summary>
+        /// Set current tool to <see cref="Tool.Ellipse"/>.
+        /// </summary>
+        public void OnToolEllipse()
+        {
+            CurrentTool = Tool.Ellipse;
+        }
+
+        /// <summary>
+        /// Set current tool to <see cref="Tool.Text"/>.
+        /// </summary>
+        public void OnToolText()
+        {
+            CurrentTool = Tool.Text;
+        }
+
+        /// <summary>
+        /// Set current tool to <see cref="Tool.Image"/>.
+        /// </summary>
+        public void OnToolImage()
+        {
+            CurrentTool = Tool.Image;
+        }
+
+        /// <summary>
+        /// Set current path tool to <see cref="PathTool.Move"/>.
+        /// </summary>
+        public void OnToolMove()
+        {
+            if (CurrentTool == Tool.Path && CurrentPathTool != PathTool.Move)
+            {
+                CurrentPathTool = PathTool.Move;
+            }
+        }
+
+        /// <summary>
+        /// Toggle <see cref="Options.DefaultIsStroked"/> option.
+        /// </summary>
+        public void OnToggleDefaultIsStroked()
+        {
+            if (_project == null || _project.Options == null)
+                return;
+
+            _project.Options.DefaultIsStroked = !_project.Options.DefaultIsStroked;
+        }
+
+        /// <summary>
+        /// Toggle <see cref="Options.DefaultIsFilled"/> option.
+        /// </summary>
+        public void OnToggleDefaultIsFilled()
+        {
+            if (_project == null || _project.Options == null)
+                return;
+
+            _project.Options.DefaultIsFilled = !_project.Options.DefaultIsFilled;
+        }
+
+        /// <summary>
+        /// Toggle <see cref="Options.DefaultIsClosed"/> option.
+        /// </summary>
+        public void OnToggleDefaultIsClosed()
+        {
+            if (_project == null || _project.Options == null)
+                return;
+
+            _project.Options.DefaultIsClosed = !_project.Options.DefaultIsClosed;
+        }
+
+        /// <summary>
+        /// Toggle <see cref="Options.DefaultIsSmoothJoin"/> option.
+        /// </summary>
+        public void OnToggleDefaultIsSmoothJoin()
+        {
+            if (_project == null || _project.Options == null)
+                return;
+
+            _project.Options.DefaultIsSmoothJoin = !_project.Options.DefaultIsSmoothJoin;
+        }
+
+        /// <summary>
+        /// Toggle <see cref="Options.SnapToGrid"/> option.
+        /// </summary>
+        public void OnToggleSnapToGrid()
+        {
+            if (_project == null || _project.Options == null)
+                return;
+
+            _project.Options.SnapToGrid = !_project.Options.SnapToGrid;
+        }
+
+        /// <summary>
+        /// Toggle <see cref="Options.TryToConnect"/> option.
+        /// </summary>
+        public void OnToggleTryToConnect()
+        {
+            if (_project == null || _project.Options == null)
+                return;
+
+            _project.Options.TryToConnect = !_project.Options.TryToConnect;
+        }
+
+        /// <summary>
         /// Set current record as selected shape data record.
         /// </summary>
         /// <param name="item">The data record item.</param>
@@ -1712,24 +1566,6 @@ namespace Core2D
             {
                 _project.ApplyRecord(
                     item as Record,
-                    _renderers[0].State.SelectedShape,
-                    _renderers[0].State.SelectedShapes);
-            }
-        }
-
-        /// <summary>
-        /// Set current style as selected shape style.
-        /// </summary>
-        /// <param name="item">The shape style item.</param>
-        public void OnApplyStyle(object item)
-        {
-            if (_project == null || _project.CurrentContainer == null)
-                return;
-
-            if (item is ShapeStyle)
-            {
-                _project.ApplyStyle(
-                    item as ShapeStyle,
                     _renderers[0].State.SelectedShape,
                     _renderers[0].State.SelectedShapes);
             }
@@ -1775,6 +1611,24 @@ namespace Core2D
             {
                 var group = parameter as XGroup;
                 DropAsClone(group, 0.0, 0.0);
+            }
+        }
+
+        /// <summary>
+        /// Set current style as selected shape style.
+        /// </summary>
+        /// <param name="item">The shape style item.</param>
+        public void OnApplyStyle(object item)
+        {
+            if (_project == null || _project.CurrentContainer == null)
+                return;
+
+            if (item is ShapeStyle)
+            {
+                _project.ApplyStyle(
+                    item as ShapeStyle,
+                    _renderers[0].State.SelectedShape,
+                    _renderers[0].State.SelectedShapes);
             }
         }
 
@@ -2016,204 +1870,189 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Set current tool to <see cref="Tool.None"/>.
+        /// Initialize default <see cref="Editor"/> tools.
         /// </summary>
-        public void OnToolNone()
+        public void DefaultTools()
         {
-            CurrentTool = Tool.None;
+            Tools = new Dictionary<Tool, ToolBase>
+            {
+                { Tool.None,      new ToolNone(this)      },
+                { Tool.Selection, new ToolSelection(this) },
+                { Tool.Point,     new ToolPoint(this)     },
+                { Tool.Line,      new ToolLine(this)      },
+                { Tool.Arc,       new ToolArc(this)       },
+                { Tool.Bezier,    new ToolBezier(this)    },
+                { Tool.QBezier,   new ToolQBezier(this)   },
+                { Tool.Path,      new ToolPath(this)      },
+                { Tool.Rectangle, new ToolRectangle(this) },
+                { Tool.Ellipse,   new ToolEllipse(this)   },
+                { Tool.Text,      new ToolText(this)      },
+                { Tool.Image,     new ToolImage(this)     }
+            }.ToImmutableDictionary();
         }
 
         /// <summary>
-        /// Set current tool to <see cref="Tool.Selection"/>.
+        /// Set renderer's image cache.
         /// </summary>
-        public void OnToolSelection()
+        /// <param name="cache">The image cache instance.</param>
+        private void SetRenderersImageCache(IImageCache cache)
         {
-            CurrentTool = Tool.Selection;
-        }
-
-        /// <summary>
-        /// Set current tool to <see cref="Tool.Point"/>.
-        /// </summary>
-        public void OnToolPoint()
-        {
-            CurrentTool = Tool.Point;
-        }
-
-        /// <summary>
-        ///  Set current tool to <see cref="Tool.Line"/> or current path tool to <see cref="PathTool.Line"/>.
-        /// </summary>
-        public void OnToolLine()
-        {
-            if (CurrentTool == Tool.Path && CurrentPathTool != PathTool.Line)
+            if (_renderers != null)
             {
-                CurrentPathTool = PathTool.Line;
-            }
-            else
-            {
-                CurrentTool = Tool.Line;
-            }
-        }
-
-        /// <summary>
-        /// Set current tool to <see cref="Tool.Arc"/> or current path tool to <see cref="PathTool.Arc"/>.
-        /// </summary>
-        public void OnToolArc()
-        {
-            if (CurrentTool == Tool.Path && CurrentPathTool != PathTool.Arc)
-            {
-                CurrentPathTool = PathTool.Arc;
-            }
-            else
-            {
-                CurrentTool = Tool.Arc;
+                foreach (var renderer in _renderers)
+                {
+                    renderer.ClearCache(isZooming: false);
+                    renderer.State.ImageCache = cache;
+                }
             }
         }
 
         /// <summary>
-        /// Set current tool to <see cref="Tool.Bezier"/> or current path tool to <see cref="PathTool.Bezier"/>.
+        /// Load project.
         /// </summary>
-        public void OnToolBezier()
+        /// <param name="project">The project instance.</param>
+        /// <param name="path">The project path.</param>
+        public void Load(Project project, string path = null)
         {
-            if (CurrentTool == Tool.Path && CurrentPathTool != PathTool.Bezier)
+            Deselect();
+            SetRenderersImageCache(project);
+
+            Project = project;
+            Project.History = new History();
+            ProjectPath = path;
+            IsProjectDirty = false;
+            Observer = new Observer(this);
+        }
+
+        /// <summary>
+        /// Unload project.
+        /// </summary>
+        public void Unload()
+        {
+            if (_project != null)
             {
-                CurrentPathTool = PathTool.Bezier;
+                if (Observer != null)
+                {
+                    Observer.Dispose();
+                    Observer = null;
+                }
+
+                if (_project.History != null)
+                {
+                    _project.History.Reset();
+                    _project.History = null;
+                }
+
+                _project.PurgeUnusedImages(Enumerable.Empty<string>().ToImmutableHashSet());
             }
-            else
+
+            Deselect();
+            SetRenderersImageCache(null);
+
+            Project = null;
+            ProjectPath = string.Empty;
+            IsProjectDirty = false;
+        }
+
+        /// <summary>
+        /// Snaps value by specified snap amount.
+        /// </summary>
+        /// <param name="value">The value to snap.</param>
+        /// <param name="snap">The snap amount.</param>
+        /// <returns>The snapped value.</returns>
+        public static double Snap(double value, double snap)
+        {
+            double r = value % snap;
+            return r >= snap / 2.0 ? value + snap - r : value - r;
+        }
+
+        /// <summary>
+        /// Gets all shapes including grouped shapes.
+        /// </summary>
+        /// <param name="shapes">The shapes collection.</param>
+        /// <returns>All shapes including grouped shapes.</returns>
+        public static IEnumerable<BaseShape> GetAllShapes(IEnumerable<BaseShape> shapes)
+        {
+            if (shapes == null)
+                yield break;
+
+            foreach (var shape in shapes)
             {
-                CurrentTool = Tool.Bezier;
+                if (shape is XGroup)
+                {
+                    foreach (var s in GetAllShapes((shape as XGroup).Shapes))
+                    {
+                        yield return s;
+                    }
+
+                    yield return shape;
+                }
+                else
+                {
+                    yield return shape;
+                }
             }
         }
 
         /// <summary>
-        /// Set current tool to <see cref="Tool.QBezier"/> or current path tool to <see cref="PathTool.QBezier"/>.
+        /// Gets all shapes including grouped shapes of specified type.
         /// </summary>
-        public void OnToolQBezier()
+        /// <typeparam name="T">The type of shape to include.</typeparam>
+        /// <param name="shapes">The shapes collection.</param>
+        /// <returns>All shapes including grouped shapes of specified type.</returns>
+        public static IEnumerable<T> GetAllShapes<T>(IEnumerable<BaseShape> shapes)
         {
-            if (CurrentTool == Tool.Path && CurrentPathTool != PathTool.QBezier)
+            return GetAllShapes(shapes).Where(s => s is T).Cast<T>();
+        }
+
+        /// <summary>
+        /// Gets all shapes including grouped shapes of specified type.
+        /// </summary>
+        /// <typeparam name="T">The type of shapes to include.</typeparam>
+        /// <param name="project">The project object.</param>
+        /// <returns>All shapes including grouped shapes of specified type.</returns>
+        public static IEnumerable<T> GetAllShapes<T>(Project project)
+        {
+            var shapes = project.Documents
+                .SelectMany(d => d.Containers)
+                .SelectMany(c => c.Layers)
+                .SelectMany(l => l.Shapes);
+
+            return GetAllShapes(shapes).Where(s => s is T).Cast<T>();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="points"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
+        public static void MovePointsBy(IEnumerable<XPoint> points, double dx, double dy)
+        {
+            foreach (var point in points)
             {
-                CurrentPathTool = PathTool.QBezier;
+                if (!point.State.Flags.HasFlag(ShapeStateFlags.Locked))
+                {
+                    point.Move(dx, dy);
+                }
             }
-            else
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shapes"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
+        public static void MoveShapesBy(IEnumerable<BaseShape> shapes, double dx, double dy)
+        {
+            foreach (var shape in shapes)
             {
-                CurrentTool = Tool.QBezier;
+                if (!shape.State.Flags.HasFlag(ShapeStateFlags.Locked))
+                {
+                    shape.Move(dx, dy);
+                }
             }
-        }
-
-        /// <summary>
-        /// Set current tool to <see cref="Tool.Path"/>.
-        /// </summary>
-        public void OnToolPath()
-        {
-            CurrentTool = Tool.Path;
-        }
-
-        /// <summary>
-        /// Set current tool to <see cref="Tool.Rectangle"/>.
-        /// </summary>
-        public void OnToolRectangle()
-        {
-            CurrentTool = Tool.Rectangle;
-        }
-
-        /// <summary>
-        /// Set current tool to <see cref="Tool.Ellipse"/>.
-        /// </summary>
-        public void OnToolEllipse()
-        {
-            CurrentTool = Tool.Ellipse;
-        }
-
-        /// <summary>
-        /// Set current tool to <see cref="Tool.Text"/>.
-        /// </summary>
-        public void OnToolText()
-        {
-            CurrentTool = Tool.Text;
-        }
-
-        /// <summary>
-        /// Set current tool to <see cref="Tool.Image"/>.
-        /// </summary>
-        public void OnToolImage()
-        {
-            CurrentTool = Tool.Image;
-        }
-
-        /// <summary>
-        /// Set current path tool to <see cref="PathTool.Move"/>.
-        /// </summary>
-        public void OnToolMove()
-        {
-            if (CurrentTool == Tool.Path && CurrentPathTool != PathTool.Move)
-            {
-                CurrentPathTool = PathTool.Move;
-            }
-        }
-
-        /// <summary>
-        /// Toggle <see cref="Options.DefaultIsStroked"/> option.
-        /// </summary>
-        public void OnToggleDefaultIsStroked()
-        {
-            if (_project == null || _project.Options == null)
-                return;
-
-            _project.Options.DefaultIsStroked = !_project.Options.DefaultIsStroked;
-        }
-
-        /// <summary>
-        /// Toggle <see cref="Options.DefaultIsFilled"/> option.
-        /// </summary>
-        public void OnToggleDefaultIsFilled()
-        {
-            if (_project == null || _project.Options == null)
-                return;
-
-            _project.Options.DefaultIsFilled = !_project.Options.DefaultIsFilled;
-        }
-
-        /// <summary>
-        /// Toggle <see cref="Options.DefaultIsClosed"/> option.
-        /// </summary>
-        public void OnToggleDefaultIsClosed()
-        {
-            if (_project == null || _project.Options == null)
-                return;
-
-            _project.Options.DefaultIsClosed = !_project.Options.DefaultIsClosed;
-        }
-
-        /// <summary>
-        /// Toggle <see cref="Options.DefaultIsSmoothJoin"/> option.
-        /// </summary>
-        public void OnToggleDefaultIsSmoothJoin()
-        {
-            if (_project == null || _project.Options == null)
-                return;
-
-            _project.Options.DefaultIsSmoothJoin = !_project.Options.DefaultIsSmoothJoin;
-        }
-
-        /// <summary>
-        /// Toggle <see cref="Options.SnapToGrid"/> option.
-        /// </summary>
-        public void OnToggleSnapToGrid()
-        {
-            if (_project == null || _project.Options == null)
-                return;
-
-            _project.Options.SnapToGrid = !_project.Options.SnapToGrid;
-        }
-
-        /// <summary>
-        /// Toggle <see cref="Options.TryToConnect"/> option.
-        /// </summary>
-        public void OnToggleTryToConnect()
-        {
-            if (_project == null || _project.Options == null)
-                return;
-
-            _project.Options.TryToConnect = !_project.Options.TryToConnect;
         }
 
         /// <summary>
@@ -2241,79 +2080,6 @@ namespace Core2D
                         ex.StackTrace);
                 }
             }
-        }
-
-        /// <summary>
-        /// Open project.
-        /// </summary>
-        /// <param name="path">The project file path.</param>
-        public void Open(string path)
-        {
-            if (_serializer == null)
-                return;
-
-            try
-            {
-                var project = Project.Open(path, _serializer);
-
-                Unload();
-                Load(project, path);
-
-                AddRecent(path, project.Name);
-            }
-            catch (Exception ex)
-            {
-                if (_log != null)
-                {
-                    _log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Save project.
-        /// </summary>
-        /// <param name="path">The project file path.</param>
-        public void Save(string path)
-        {
-            if (_serializer == null)
-                return;
-
-            try
-            {
-                Project.Save(_project, path, _serializer);
-
-                AddRecent(path, _project.Name);
-
-                if (string.IsNullOrEmpty(_projectPath))
-                {
-                    _projectPath = path;
-                }
-
-                IsProjectDirty = false;
-            }
-            catch (Exception ex)
-            {
-                if (_log != null)
-                {
-                    _log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Close project.
-        /// </summary>
-        public void Close()
-        {
-            _project.History.Reset();
-            Unload();
         }
 
         /// <summary>
@@ -2354,381 +2120,6 @@ namespace Core2D
                 {
                     _dxfWriter.Save(path, _project.CurrentContainer, _project);
                 }
-            }
-            catch (Exception ex)
-            {
-                if (_log != null)
-                {
-                    _log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Import object from file.
-        /// </summary>
-        /// <param name="path">The object file path.</param>
-        /// <param name="item">The parent object.</param>
-        /// <param name="type">The object type.</param>
-        public void ImportObject(string path, object item, ImportType type)
-        {
-            if (_serializer == null)
-                return;
-
-            try
-            {
-                switch (type)
-                {
-                    case ImportType.Style:
-                        {
-                            var sg = item as Library<ShapeStyle>;
-                            var json = Project.ReadUtf8Text(path);
-                            var import = _serializer.Deserialize<ShapeStyle>(json);
-
-                            var previous = sg.Items;
-                            var next = sg.Items.Add(import);
-                            _project.History.Snapshot(previous, next, (p) => sg.Items = p);
-                            sg.Items = next;
-                        }
-                        break;
-                    case ImportType.Styles:
-                        {
-                            var sg = item as Library<ShapeStyle>;
-                            var json = Project.ReadUtf8Text(path);
-                            var import = _serializer.Deserialize<IList<ShapeStyle>>(json);
-
-                            var builder = sg.Items.ToBuilder();
-                            foreach (var style in import)
-                            {
-                                builder.Add(style);
-                            }
-
-                            var previous = sg.Items;
-                            var next = builder.ToImmutable();
-                            _project.History.Snapshot(previous, next, (p) => sg.Items = p);
-                            sg.Items = next;
-                        }
-                        break;
-                    case ImportType.StyleLibrary:
-                        {
-                            var project = item as Project;
-                            var json = Project.ReadUtf8Text(path);
-                            var import = _serializer.Deserialize<Library<ShapeStyle>>(json);
-
-                            var previous = project.StyleLibraries;
-                            var next = project.StyleLibraries.Add(import);
-                            _project.History.Snapshot(previous, next, (p) => project.StyleLibraries = p);
-                            project.StyleLibraries = next;
-                        }
-                        break;
-                    case ImportType.StyleLibraries:
-                        {
-                            var project = item as Project;
-                            var json = Project.ReadUtf8Text(path);
-                            var import = _serializer.Deserialize<IList<Library<ShapeStyle>>>(json);
-
-                            var builder = project.StyleLibraries.ToBuilder();
-                            foreach (var sg in import)
-                            {
-                                builder.Add(sg);
-                            }
-
-                            var previous = project.StyleLibraries;
-                            var next = builder.ToImmutable();
-                            _project.History.Snapshot(previous, next, (p) => project.StyleLibraries = p);
-                            project.StyleLibraries = next;
-                        }
-                        break;
-                    case ImportType.Group:
-                        {
-                            var gl = item as Library<XGroup>;
-                            var json = Project.ReadUtf8Text(path);
-                            var import = _serializer.Deserialize<XGroup>(json);
-
-                            var shapes = Enumerable.Repeat(import as XGroup, 1);
-                            TryToRestoreStyles(shapes);
-                            TryToRestoreRecords(shapes);
-
-                            var previous = gl.Items;
-                            var next = gl.Items.Add(import);
-                            _project.History.Snapshot(previous, next, (p) => gl.Items = p);
-                            gl.Items = next;
-                        }
-                        break;
-                    case ImportType.Groups:
-                        {
-                            var gl = item as Library<XGroup>;
-                            var json = Project.ReadUtf8Text(path);
-                            var import = _serializer.Deserialize<IList<XGroup>>(json);
-
-                            var shapes = import;
-                            TryToRestoreStyles(shapes);
-                            TryToRestoreRecords(shapes);
-
-                            var builder = gl.Items.ToBuilder();
-                            foreach (var group in import)
-                            {
-                                builder.Add(group);
-                            }
-
-                            var previous = gl.Items;
-                            var next = builder.ToImmutable();
-                            _project.History.Snapshot(previous, next, (p) => gl.Items = p);
-                            gl.Items = next;
-                        }
-                        break;
-                    case ImportType.GroupLibrary:
-                        {
-                            var project = item as Project;
-                            var json = Project.ReadUtf8Text(path);
-                            var import = _serializer.Deserialize<Library<XGroup>>(json);
-
-                            var shapes = import.Items;
-                            TryToRestoreStyles(shapes);
-                            TryToRestoreRecords(shapes);
-
-                            var previous = project.GroupLibraries;
-                            var next = project.GroupLibraries.Add(import);
-                            _project.History.Snapshot(previous, next, (p) => project.GroupLibraries = p);
-                            project.GroupLibraries = next;
-                        }
-                        break;
-                    case ImportType.GroupLibraries:
-                        {
-                            var project = item as Project;
-                            var json = Project.ReadUtf8Text(path);
-                            var import = _serializer.Deserialize<IList<Library<XGroup>>>(json);
-
-                            var shapes = import.SelectMany(x => x.Items);
-                            TryToRestoreStyles(shapes);
-                            TryToRestoreRecords(shapes);
-
-                            var builder = project.GroupLibraries.ToBuilder();
-                            foreach (var library in import)
-                            {
-                                builder.Add(library);
-                            }
-
-                            var previous = project.GroupLibraries;
-                            var next = builder.ToImmutable();
-                            _project.History.Snapshot(previous, next, (p) => project.GroupLibraries = p);
-                            project.GroupLibraries = next;
-                        }
-                        break;
-                    case ImportType.Template:
-                        {
-                            var project = item as Project;
-                            var json = Project.ReadUtf8Text(path);
-                            var import = _serializer.Deserialize<Container>(json);
-
-                            var shapes = import.Layers.SelectMany(x => x.Shapes);
-                            TryToRestoreStyles(shapes);
-                            TryToRestoreRecords(shapes);
-
-                            var previous = project.Templates;
-                            var next = project.Templates.Add(import);
-                            _project.History.Snapshot(previous, next, (p) => project.Templates = p);
-                            project.Templates = next;
-                        }
-                        break;
-                    case ImportType.Templates:
-                        {
-                            var project = item as Project;
-                            var json = Project.ReadUtf8Text(path);
-                            var import = _serializer.Deserialize<IList<Container>>(json);
-
-                            var shapes = import.SelectMany(x => x.Layers).SelectMany(x => x.Shapes);
-                            TryToRestoreStyles(shapes);
-                            TryToRestoreRecords(shapes);
-
-                            var builder = project.Templates.ToBuilder();
-                            foreach (var template in import)
-                            {
-                                builder.Add(template);
-                            }
-
-                            var previous = project.Templates;
-                            var next = builder.ToImmutable();
-                            _project.History.Snapshot(previous, next, (p) => project.Templates = p);
-                            project.Templates = next;
-                        }
-                        break;
-                }
-            }
-            catch (Exception ex)
-            {
-                if (_log != null)
-                {
-                    _log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Export object to a file.
-        /// </summary>
-        /// <param name="path">The object file path.</param>
-        /// <param name="item">The parent object.</param>
-        /// <param name="type">The object type.</param>
-        public void ExportObject(string path, object item, ExportType type)
-        {
-            if (_serializer == null)
-                return;
-
-            try
-            {
-                switch (type)
-                {
-                    case ExportType.Style:
-                        {
-                            var json = _serializer.Serialize(item as ShapeStyle);
-                            Project.WriteUtf8Text(path, json);
-                        }
-                        break;
-                    case ExportType.Styles:
-                        {
-                            var json = _serializer.Serialize((item as Library<ShapeStyle>).Items);
-                            Project.WriteUtf8Text(path, json);
-                        }
-                        break;
-                    case ExportType.StyleLibrary:
-                        {
-                            var json = _serializer.Serialize((item as Library<ShapeStyle>));
-                            Project.WriteUtf8Text(path, json);
-                        }
-                        break;
-                    case ExportType.StyleLibraries:
-                        {
-                            var json = _serializer.Serialize((item as Project).StyleLibraries);
-                            Project.WriteUtf8Text(path, json);
-                        }
-                        break;
-                    case ExportType.Group:
-                        {
-                            var json = _serializer.Serialize(item as XGroup);
-                            Project.WriteUtf8Text(path, json);
-                        }
-                        break;
-                    case ExportType.Groups:
-                        {
-                            var json = _serializer.Serialize((item as Library<XGroup>).Items);
-                            Project.WriteUtf8Text(path, json);
-                        }
-                        break;
-                    case ExportType.GroupLibrary:
-                        {
-                            var json = _serializer.Serialize(item as Library<XGroup>);
-                            Project.WriteUtf8Text(path, json);
-                        }
-                        break;
-                    case ExportType.GroupLibraries:
-                        {
-                            var json = _serializer.Serialize((item as Project).GroupLibraries);
-                            Project.WriteUtf8Text(path, json);
-                        }
-                        break;
-                    case ExportType.Template:
-                        {
-                            var json = _serializer.Serialize(item as Container);
-                            Project.WriteUtf8Text(path, json);
-                        }
-                        break;
-                    case ExportType.Templates:
-                        {
-                            var json = _serializer.Serialize((item as Project).Templates);
-                            Project.WriteUtf8Text(path, json);
-                        }
-                        break;
-                }
-            }
-            catch (Exception ex)
-            {
-                if (_log != null)
-                {
-                    _log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Import database.
-        /// </summary>
-        /// <param name="path">The database file path.</param>
-        public void ImportData(string path)
-        {
-            if (_project == null)
-                return;
-
-            try
-            {
-                if (_csvReader == null)
-                    return;
-
-                var db = _csvReader.Read(path);
-                _project.AddDatabase(db);
-                _project.CurrentDatabase = db;
-            }
-            catch (Exception ex)
-            {
-                if (_log != null)
-                {
-                    _log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Export database.
-        /// </summary>
-        /// <param name="path">The database file path.</param>
-        /// <param name="database">The database object.</param>
-        public void ExportData(string path, Database database)
-        {
-            try
-            {
-                if (_csvWriter == null)
-                    return;
-
-                _csvWriter.Write(path, database);
-            }
-            catch (Exception ex)
-            {
-                if (_log != null)
-                {
-                    _log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Update database.
-        /// </summary>
-        /// <param name="path">The database file path.</param>
-        /// <param name="database">The database object.</param>
-        public void UpdateData(string path, Database database)
-        {
-            try
-            {
-                if (_csvReader == null)
-                    return;
-
-                var db = _csvReader.Read(path);
-                _project.ApplyDatabase(database, db);
             }
             catch (Exception ex)
             {
@@ -3573,6 +2964,607 @@ namespace Core2D
         public bool CanRedo()
         {
             return _project.History.CanRedo();
+        }
+
+        /// <summary>
+        /// Removes container object from owner document <see cref="Document.Containers"/> collection.
+        /// </summary>
+        /// <param name="container">The container object to remove from document <see cref="Document.Containers"/> collection.</param>
+        public void Delete(Container container)
+        {
+            if (_project == null || _project.Documents == null)
+                return;
+
+            var document = _project.Documents.FirstOrDefault(d => d.Containers.Contains(container));
+            if (document != null)
+            {
+                var previous = document.Containers;
+                var next = document.Containers.Remove(container);
+                _project.History.Snapshot(previous, next, (p) => document.Containers = p);
+                document.Containers = next;
+
+                _project.CurrentDocument = document;
+                _project.CurrentContainer = document.Containers.FirstOrDefault();
+                _project.Selected = _project.CurrentContainer;
+            }
+        }
+
+        /// <summary>
+        /// Removes document object from project <see cref="Project.Documents"/> collection.
+        /// </summary>
+        /// <param name="document">The document object to remove from project <see cref="Project.Documents"/> collection.</param>
+        public void Delete(Document document)
+        {
+            if (_project == null || _project.Documents == null)
+                return;
+
+            var previous = _project.Documents;
+            var next = _project.Documents.Remove(document);
+            _project.History.Snapshot(previous, next, (p) => _project.Documents = p);
+            _project.Documents = next;
+
+            _project.CurrentDocument = _project.Documents.FirstOrDefault();
+            if (_project.CurrentDocument != null)
+            {
+                _project.CurrentContainer = _project.CurrentDocument.Containers.FirstOrDefault();
+            }
+            else
+            {
+                _project.CurrentContainer = default(Container);
+            }
+            _project.Selected = _project.CurrentContainer;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void DeleteSelected()
+        {
+            if (_project == null
+                || _project.CurrentContainer == null
+                || _project.CurrentContainer.CurrentLayer == null)
+                return;
+
+            if (_renderers[0].State.SelectedShape != null)
+            {
+                var layer = _project.CurrentContainer.CurrentLayer;
+
+                var previous = layer.Shapes;
+                var next = layer.Shapes.Remove(_renderers[0].State.SelectedShape);
+                _project.History.Snapshot(previous, next, (p) => layer.Shapes = p);
+                layer.Shapes = next;
+
+                _project.CurrentContainer.CurrentLayer.Invalidate();
+                _renderers[0].State.SelectedShape = default(BaseShape);
+            }
+
+            if (_renderers[0].State.SelectedShapes != null && _renderers[0].State.SelectedShapes.Count > 0)
+            {
+                var layer = _project.CurrentContainer.CurrentLayer;
+
+                var builder = layer.Shapes.ToBuilder();
+                foreach (var shape in _renderers[0].State.SelectedShapes)
+                {
+                    builder.Remove(shape);
+                }
+
+                var previous = layer.Shapes;
+                var next = builder.ToImmutable();
+                _project.History.Snapshot(previous, next, (p) => layer.Shapes = p);
+                layer.Shapes = next;
+
+                _renderers[0].State.SelectedShapes = default(ImmutableHashSet<BaseShape>);
+                layer.Invalidate();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="container"></param>
+        /// <param name="shape"></param>
+        public void Select(Container container, BaseShape shape)
+        {
+            if (container == null)
+                return;
+
+            container.CurrentShape = shape;
+            _renderers[0].State.SelectedShape = shape;
+            _renderers[0].State.SelectedShapes = default(ImmutableHashSet<BaseShape>);
+            container.CurrentLayer.Invalidate();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="container"></param>
+        /// <param name="shapes"></param>
+        public void Select(Container container, ImmutableHashSet<BaseShape> shapes)
+        {
+            if (container == null)
+                return;
+
+            container.CurrentShape = default(BaseShape);
+            _renderers[0].State.SelectedShape = default(BaseShape);
+            _renderers[0].State.SelectedShapes = shapes;
+            container.CurrentLayer.Invalidate();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Deselect()
+        {
+            if (_renderers == null)
+                return;
+
+            _renderers[0].State.SelectedShape = default(BaseShape);
+            _renderers[0].State.SelectedShapes = default(ImmutableHashSet<BaseShape>);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="container"></param>
+        public void Deselect(Container container)
+        {
+            if (container == null || _renderers == null)
+                return;
+
+            if (_renderers[0].State.SelectedShape != null
+                || _renderers[0].State.SelectedShapes != null)
+            {
+                _renderers[0].State.SelectedShape = default(BaseShape);
+                _renderers[0].State.SelectedShapes = default(ImmutableHashSet<BaseShape>);
+
+                container.CurrentShape = default(BaseShape);
+                container.CurrentLayer.Invalidate();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="container"></param>
+        /// <param name="rectangle"></param>
+        /// <returns></returns>
+        public bool TryToSelectShapes(Container container, XRectangle rectangle)
+        {
+            if (container == null)
+                return false;
+
+            var rect = Rect2.Create(rectangle.TopLeft, rectangle.BottomRight);
+
+            var result = ShapeBounds.HitTest(container, rect, _project.Options.HitTreshold);
+            if (result != null)
+            {
+                if (result.Count > 0)
+                {
+                    if (result.Count == 1)
+                    {
+                        Select(container, result.FirstOrDefault());
+                    }
+                    else
+                    {
+                        Select(container, result);
+                    }
+                    return true;
+                }
+            }
+
+            Deselect(container);
+
+            return false;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="container"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        public bool TryToSelectShape(Container container, double x, double y)
+        {
+            if (container == null)
+                return false;
+
+            var result = ShapeBounds.HitTest(container, new Vector2(x, y), _project.Options.HitTreshold);
+            if (result != null)
+            {
+                Select(container, result);
+                return true;
+            }
+
+            Deselect(container);
+
+            return false;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shape"></param>
+        public void Hover(BaseShape shape)
+        {
+            Select(_project.CurrentContainer, shape);
+            _hover = shape;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Dehover()
+        {
+            _hover = default(BaseShape);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="container"></param>
+        public void Dehover(Container container)
+        {
+            _hover = default(BaseShape);
+            Deselect(container);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        public bool TryToHoverShape(double x, double y)
+        {
+            if (_project == null || _project.CurrentContainer == null)
+                return false;
+
+            if (_renderers[0].State.SelectedShapes == null
+                && !(_renderers[0].State.SelectedShape != null && _hover != _renderers[0].State.SelectedShape))
+            {
+                var result = ShapeBounds.HitTest(
+                    _project.CurrentContainer,
+                    new Vector2(x, y),
+                    _project.Options.HitTreshold);
+                if (result != null)
+                {
+                    Select(_project.CurrentContainer, result);
+                    _hover = result;
+
+                    return true;
+                }
+                else
+                {
+                    if (_renderers[0].State.SelectedShape != null
+                        && _renderers[0].State.SelectedShape == _hover)
+                    {
+                        _hover = default(BaseShape);
+                        Deselect(_project.CurrentContainer);
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="point"></param>
+        /// <param name="select"></param>
+        /// <returns></returns>
+        public bool TryToSplitLine(double x, double y, XPoint point, bool select = false)
+        {
+            if (_project == null || _project.CurrentContainer == null || _project.Options == null)
+                return false;
+
+            var result = ShapeBounds.HitTest(
+                _project.CurrentContainer,
+                new Vector2(x, y),
+                _project.Options.HitTreshold);
+
+            if (result is XLine)
+            {
+                var line = result as XLine;
+
+                if (!_project.Options.SnapToGrid)
+                {
+                    var a = new Vector2(line.Start.X, line.Start.Y);
+                    var b = new Vector2(line.End.X, line.End.Y);
+                    var nearest = MathHelpers.NearestPointOnLine(a, b, new Vector2(x, y));
+                    point.X = nearest.X;
+                    point.Y = nearest.Y;
+                }
+
+                var split = XLine.Create(
+                    x, y,
+                    line.Style,
+                    _project.Options.PointShape,
+                    line.IsStroked);
+
+                double ds = point.DistanceTo(line.Start);
+                double de = point.DistanceTo(line.End);
+
+                if (ds < de)
+                {
+                    split.Start = line.Start;
+                    split.End = point;
+
+                    line.Start = point;
+                }
+                else
+                {
+                    split.Start = point;
+                    split.End = line.End;
+
+                    line.End = point;
+                }
+
+                _project.AddShape(split);
+
+                if (select)
+                {
+                    Select(_project.CurrentContainer, point);
+                }
+
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="line"></param>
+        /// <param name="p0"></param>
+        /// <param name="p1"></param>
+        /// <returns></returns>
+        public bool TryToSplitLine(XLine line, XPoint p0, XPoint p1)
+        {
+            if (_project == null || _project.Options == null)
+                return false;
+
+            // Points must be aligned horizontally or vertically.
+            if (p0.X != p1.X && p0.Y != p1.Y)
+                return false;
+
+            // Line must be horizontal or vertical.
+            if (line.Start.X != line.End.X && line.Start.Y != line.End.Y)
+                return false;
+
+            XLine split;
+            if (line.Start.X > line.End.X || line.Start.Y > line.End.Y)
+            {
+                split = XLine.Create(
+                    p0,
+                    line.End,
+                    line.Style,
+                    _project.Options.PointShape,
+                    line.IsStroked);
+                line.End = p1;
+            }
+            else
+            {
+                split = XLine.Create(
+                    p1,
+                    line.End,
+                    line.Style,
+                    _project.Options.PointShape,
+                    line.IsStroked);
+                line.End = p0;
+            }
+
+            _project.AddShape(split);
+
+            return true;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="group"></param>
+        /// <returns></returns>
+        public bool TryToConnect(XGroup group)
+        {
+            if (_project == null
+                || _project.CurrentContainer == null
+                || _project.CurrentContainer.CurrentLayer == null
+                || _project.Options == null)
+                return false;
+
+            var layer = _project.CurrentContainer.CurrentLayer;
+            if (group.Connectors.Length > 0)
+            {
+                var wires = GetAllShapes<XLine>(layer.Shapes);
+                var dict = new Dictionary<XLine, IList<XPoint>>();
+
+                // Find possible group to line connections.
+                foreach (var connector in group.Connectors)
+                {
+                    var p = new Vector2(connector.X, connector.Y);
+                    var t = _project.Options.HitTreshold;
+                    XLine result = null;
+                    foreach (var line in wires)
+                    {
+                        if (ShapeBounds.HitTestLine(line, p, t, 0, 0))
+                        {
+                            result = line;
+                            break;
+                        }
+                    }
+
+                    if (result != null)
+                    {
+                        if (dict.ContainsKey(result))
+                        {
+                            dict[result].Add(connector);
+                        }
+                        else
+                        {
+                            dict.Add(result, new List<XPoint>());
+                            dict[result].Add(connector);
+                        }
+                    }
+                }
+
+                bool success = false;
+
+                // Try to split lines using group connectors.
+                foreach (var kv in dict)
+                {
+                    IList<XPoint> points = kv.Value;
+                    if (points.Count == 2)
+                    {
+                        success = TryToSplitLine(kv.Key, points[0], points[1]);
+                    }
+                }
+
+                return success;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public bool IsLeftDownAvailable()
+        {
+            return _project != null
+                && _project.CurrentContainer != null
+                && _project.CurrentContainer.CurrentLayer != null
+                && _project.CurrentContainer.CurrentLayer.IsVisible
+                && _project.CurrentStyleLibrary != null
+                && _project.CurrentStyleLibrary.Selected != null;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public bool IsLeftUpAvailable()
+        {
+            return _project != null
+                && _project.CurrentContainer != null
+                && _project.CurrentContainer.CurrentLayer != null
+                && _project.CurrentContainer.CurrentLayer.IsVisible
+                && _project.CurrentStyleLibrary != null
+                && _project.CurrentStyleLibrary.Selected != null;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public bool IsRightDownAvailable()
+        {
+            return _project != null
+                && _project.CurrentContainer != null
+                && _project.CurrentContainer.CurrentLayer != null
+                && _project.CurrentContainer.CurrentLayer.IsVisible
+                && _project.CurrentStyleLibrary != null
+                && _project.CurrentStyleLibrary.Selected != null;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public bool IsRightUpAvailable()
+        {
+            return _project != null
+                && _project.CurrentContainer != null
+                && _project.CurrentContainer.CurrentLayer != null
+                && _project.CurrentContainer.CurrentLayer.IsVisible
+                && _project.CurrentStyleLibrary != null
+                && _project.CurrentStyleLibrary.Selected != null;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public bool IsMoveAvailable()
+        {
+            return _project != null
+                && _project.CurrentContainer != null
+                && _project.CurrentContainer.CurrentLayer != null
+                && _project.CurrentContainer.CurrentLayer.IsVisible
+                && _project.CurrentStyleLibrary != null
+                && _project.CurrentStyleLibrary.Selected != null;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public bool IsSelectionAvailable()
+        {
+            return _renderers[0].State.SelectedShape != null
+                || _renderers[0].State.SelectedShapes != null;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        public void LeftDown(double x, double y)
+        {
+            Tools[CurrentTool].LeftDown(x, y);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        public void LeftUp(double x, double y)
+        {
+            Tools[CurrentTool].LeftUp(x, y);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        public void RightDown(double x, double y)
+        {
+            Tools[CurrentTool].RightDown(x, y);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        public void RightUp(double x, double y)
+        {
+            Tools[CurrentTool].RightUp(x, y);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        public void Move(double x, double y)
+        {
+            Tools[CurrentTool].Move(x, y);
+        }
+
+        /// <summary>
+        /// Checks if edit mode is active.
+        /// </summary>
+        /// <returns>Return true if edit mode is active.</returns>
+        public bool IsEditMode()
+        {
+            return true;
         }
 
         /// <summary>
