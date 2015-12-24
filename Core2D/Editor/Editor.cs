@@ -600,22 +600,13 @@ namespace Core2D
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        public void MoveSelectedBy(double dx, double dy)
+        public void OnMoveUpSelected()
         {
             _project.MoveBy(
                 _renderers[0].State.SelectedShape,
                 _renderers[0].State.SelectedShapes,
-                dx, dy);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public void OnMoveUpSelected()
-        {
-            MoveSelectedBy(0.0, _project.Options.SnapToGrid ? -_project.Options.SnapY : -1.0);
+                0.0,
+                _project.Options.SnapToGrid ? -_project.Options.SnapY : -1.0);
         }
 
         /// <summary>
@@ -623,7 +614,11 @@ namespace Core2D
         /// </summary>
         public void OnMoveDownSelected()
         {
-            MoveSelectedBy(0.0, _project.Options.SnapToGrid ? _project.Options.SnapY : 1.0);
+            _project.MoveBy(
+                _renderers[0].State.SelectedShape,
+                _renderers[0].State.SelectedShapes,
+                0.0,
+                _project.Options.SnapToGrid ? _project.Options.SnapY : 1.0);
         }
 
         /// <summary>
@@ -631,7 +626,11 @@ namespace Core2D
         /// </summary>
         public void OnMoveLeftSelected()
         {
-            MoveSelectedBy(_project.Options.SnapToGrid ? -_project.Options.SnapX : -1.0, 0.0);
+            _project.MoveBy(
+                _renderers[0].State.SelectedShape,
+                _renderers[0].State.SelectedShapes,
+                _project.Options.SnapToGrid ? -_project.Options.SnapX : -1.0,
+                0.0);
         }
 
         /// <summary>
@@ -639,7 +638,11 @@ namespace Core2D
         /// </summary>
         public void OnMoveRightSelected()
         {
-            MoveSelectedBy(_project.Options.SnapToGrid ? _project.Options.SnapX : 1.0, 0.0);
+            _project.MoveBy(
+                _renderers[0].State.SelectedShape,
+                _renderers[0].State.SelectedShapes,
+                _project.Options.SnapToGrid ? _project.Options.SnapX : 1.0,
+                0.0);
         }
 
         /// <summary>
