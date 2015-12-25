@@ -241,6 +241,66 @@ namespace Core2D
         /// 
         /// </summary>
         /// <param name="project">The project instance.</param>
+        /// <param name="owner"></param>
+        /// <param name="name"></param>
+        /// <param name="value"></param>
+        public static void AddProperty(this Project project, object owner, string name = "New", string value = "")
+        {
+            if (owner != null)
+            {
+                if (owner is Data)
+                {
+                    var data = owner as Data;
+                    if (data.Properties == null)
+                    {
+                        data.Properties = ImmutableArray.Create<Property>();
+                    }
+
+                    project.AddProperty(data, Property.Create(name, value, data));
+                }
+                else if (owner is Container)
+                {
+                    var container = owner as Container;
+                    if (container.Data.Properties == null)
+                    {
+                        container.Data.Properties = ImmutableArray.Create<Property>();
+                    }
+
+                    project.AddProperty(container, Property.Create(name, value, container.Data));
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="project">The project instance.</param>
+        /// <param name="parameter"></param>
+        public static void RemoveProperty(this Project project, object parameter)
+        {
+            if (parameter != null && parameter is Property)
+            {
+                var property = parameter as Property;
+                var owner = property.Owner;
+
+                if (owner is Data)
+                {
+                    var data = owner;
+                    if (data.Properties != null)
+                    {
+                        var previous = data.Properties;
+                        var next = data.Properties.Remove(property);
+                        project.History.Snapshot(previous, next, (p) => data.Properties = p);
+                        data.Properties = next;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="project">The project instance.</param>
         /// <param name="name"></param>
         /// <param name="columns"></param>
         public static void AddDatabase(this Project project, string name = "Db", int columns = 2)
@@ -320,66 +380,6 @@ namespace Core2D
             var next = db.Records.Add(record);
             project.History.Snapshot(previous, next, (p) => db.Records = p);
             db.Records = next;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="project">The project instance.</param>
-        /// <param name="owner"></param>
-        /// <param name="name"></param>
-        /// <param name="value"></param>
-        public static void AddProperty(this Project project, object owner, string name = "New", string value = "")
-        {
-            if (owner != null)
-            {
-                if (owner is Data)
-                {
-                    var data = owner as Data;
-                    if (data.Properties == null)
-                    {
-                        data.Properties = ImmutableArray.Create<Property>();
-                    }
-
-                    project.AddProperty(data, Property.Create(name, value, data));
-                }
-                else if (owner is Container)
-                {
-                    var container = owner as Container;
-                    if (container.Data.Properties == null)
-                    {
-                        container.Data.Properties = ImmutableArray.Create<Property>();
-                    }
-
-                    project.AddProperty(container, Property.Create(name, value, container.Data));
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="project">The project instance.</param>
-        /// <param name="parameter"></param>
-        public static void RemoveProperty(this Project project, object parameter)
-        {
-            if (parameter != null && parameter is Property)
-            {
-                var property = parameter as Property;
-                var owner = property.Owner;
-
-                if (owner is Data)
-                {
-                    var data = owner;
-                    if (data.Properties != null)
-                    {
-                        var previous = data.Properties;
-                        var next = data.Properties.Remove(property);
-                        project.History.Snapshot(previous, next, (p) => data.Properties = p);
-                        data.Properties = next;
-                    }
-                }
-            }
         }
 
         /// <summary>
