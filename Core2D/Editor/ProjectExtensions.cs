@@ -336,6 +336,24 @@ namespace Core2D
         }
 
         /// <summary>
+        /// Removes the <see cref="Database"/> object from the <see cref="Project.Databases"/> collection.
+        /// </summary>
+        /// <param name="project">The project instance.</param>
+        /// <param name="db">The <see cref="Database"/> to remove.</param>
+        public static void RemoveDatabase(this Project project, object db)
+        {
+            if (db != null && db is Database)
+            {
+                var previous = project.Databases;
+                var next = project.Databases.Remove(db as Database);
+                project.History.Snapshot(previous, next, (p) => project.Databases = p);
+                project.Databases = next;
+
+                project.CurrentDatabase = project.Databases.FirstOrDefault();
+            }
+        }
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="project">The project instance.</param>
@@ -355,6 +373,32 @@ namespace Core2D
                 var next = db.Columns.Add(Column.Create(name + db.Columns.Length, db));
                 project.History.Snapshot(previous, next, (p) => db.Columns = p);
                 db.Columns = next;
+            }
+        }
+
+        /// <summary>
+        /// Removes the <see cref="Column"/> object from <see cref="Column.Owner"/> <see cref="Database.Columns"/> collection.
+        /// </summary>
+        /// <param name="project">The project instance.</param>
+        /// <param name="parameter">The <see cref="Column"/> to remove.</param>
+        public static void RemoveColumn(this Project project, object parameter)
+        {
+            if (parameter != null && parameter is Column)
+            {
+                var column = parameter as Column;
+                var owner = column.Owner;
+
+                if (owner is Database)
+                {
+                    var db = owner as Database;
+                    if (db.Columns != null)
+                    {
+                        var previous = db.Columns;
+                        var next = db.Columns.Remove(column);
+                        project.History.Snapshot(previous, next, (p) => db.Columns = p);
+                        db.Columns = next;
+                    }
+                }
             }
         }
 
@@ -380,6 +424,121 @@ namespace Core2D
             var next = db.Records.Add(record);
             project.History.Snapshot(previous, next, (p) => db.Records = p);
             db.Records = next;
+        }
+
+        /// <summary>
+        /// Removes the <see cref="Project.CurrentDatabase"/> <see cref="Database.CurrentRecord"/> object from the <see cref="Project.CurrentDatabase"/> <see cref="Database.Records"/> collection.
+        /// </summary>
+        /// <param name="project">The project instance.</param>
+        public static void RemoveRecord(this Project project)
+        {
+            var db = project.CurrentDatabase;
+            if (db != null)
+            {
+                var record = db.CurrentRecord;
+                if (record != null)
+                {
+                    var previous = db.Records;
+                    var next = db.Records.Remove(record);
+                    project.History.Snapshot(previous, next, (p) => db.Records = p);
+                    db.Records = next;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="project">The project instance.</param>
+        /// <param name="owner"></param>
+        public static void ResetRecord(this Project project, object owner)
+        {
+            if (owner != null && owner is Data)
+            {
+                var data = owner as Data;
+                var record = data.Record;
+
+                if (record != null)
+                {
+                    var previous = record;
+                    var next = default(Record);
+                    project.History.Snapshot(previous, next, (p) => data.Record = p);
+                    data.Record = next;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="project">The project instance.</param>
+        /// <param name="record">The record instance.</param>
+        /// <param name="shape">The selected shape.</param>
+        /// <param name="shapes">The selected shapes.</param>
+        public static void ApplyRecord(this Project project, Record record, BaseShape shape, ImmutableHashSet<BaseShape> shapes)
+        {
+            if (project == null || project.CurrentContainer == null)
+                return;
+
+            var container = project.CurrentContainer;
+            if (container != null)
+            {
+                if (shape != null)
+                {
+                    var previous = shape.Data.Record;
+                    var next = record;
+                    project.History.Snapshot(previous, next, (p) => shape.Data.Record = p);
+                    shape.Data.Record = next;
+                }
+
+                if (shapes != null && shapes.Count > 0)
+                {
+                    foreach (var s in shapes)
+                    {
+                        var previous = s.Data.Record;
+                        var next = record;
+                        project.History.Snapshot(previous, next, (p) => s.Data.Record = p);
+                        s.Data.Record = next;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="project">The project instance.</param>
+        /// <param name="shape"></param>
+        /// <param name="record"></param>
+        public static void ApplyRecord(this Project project, BaseShape shape, Record record)
+        {
+            var previous = shape.Data.Record;
+            var next = record;
+            project.History.Snapshot(previous, next, (p) => shape.Data.Record = p);
+            shape.Data.Record = next;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="project">The project instance.</param>
+        /// <param name="record"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        public static void ApplyRecord(this Project project, Record record, double x, double y)
+        {
+            var container = project.CurrentContainer;
+            if (container != null)
+            {
+                var result = ShapeBounds.HitTest(container, new Vector2(x, y), project.Options.HitTreshold);
+                if (result != null)
+                {
+                    var previous = result.Data.Record;
+                    var next = record;
+                    project.History.Snapshot(previous, next, (p) => result.Data.Record = p);
+                    result.Data.Record = next;
+                }
+            }
         }
 
         /// <summary>
@@ -437,6 +596,80 @@ namespace Core2D
         /// 
         /// </summary>
         /// <param name="project">The project instance.</param>
+        /// <param name="shape"></param>
+        /// <param name="style"></param>
+        public static void ApplyStyle(this Project project, BaseShape shape, ShapeStyle style)
+        {
+            if (shape != null)
+            {
+                if (shape is XGroup)
+                {
+                    var shapes = Editor.GetAllShapes((shape as XGroup).Shapes);
+                    foreach (var child in shapes)
+                    {
+                        var previous = child.Style;
+                        var next = style;
+                        project.History.Snapshot(previous, next, (p) => child.Style = p);
+                        child.Style = next;
+                    }
+                }
+                else
+                {
+                    var previous = shape.Style;
+                    var next = style;
+                    project.History.Snapshot(previous, next, (p) => shape.Style = p);
+                    shape.Style = next;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="project">The project instance.</param>
+        /// <param name="style">The style instance.</param>
+        /// <param name="shape">The selected shape.</param>
+        /// <param name="shapes">The selected shapes.</param>
+        public static void ApplyStyle(this Project project, ShapeStyle style, BaseShape shape, ImmutableHashSet<BaseShape> shapes)
+        {
+            if (shape != null)
+            {
+                project.ApplyStyle(shape, style);
+            }
+
+            if (shapes != null && shapes.Count > 0)
+            {
+                foreach (var s in shapes)
+                {
+                    project.ApplyStyle(s, style);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="project">The project instance.</param>
+        /// <param name="style"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        public static void ApplyStyle(this Project project, ShapeStyle style, double x, double y)
+        {
+            var container = project.CurrentContainer;
+            if (container != null)
+            {
+                var result = ShapeBounds.HitTest(container, new Vector2(x, y), project.Options.HitTreshold);
+                if (result != null)
+                {
+                    project.ApplyStyle(result, style);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="project">The project instance.</param>
         /// <param name="group"></param>
         public static void AddGroup(this Project project, XGroup group)
         {
@@ -465,92 +698,6 @@ namespace Core2D
                 var next = gl.Items.Add(group);
                 project.History.Snapshot(previous, next, (p) => gl.Items = p);
                 gl.Items = next;
-            }
-        }
-
-        /// <summary>
-        /// Removes the <see cref="Database"/> object from the <see cref="Project.Databases"/> collection.
-        /// </summary>
-        /// <param name="project">The project instance.</param>
-        /// <param name="db">The <see cref="Database"/> to remove.</param>
-        public static void RemoveDatabase(this Project project, object db)
-        {
-            if (db != null && db is Database)
-            {
-                var previous = project.Databases;
-                var next = project.Databases.Remove(db as Database);
-                project.History.Snapshot(previous, next, (p) => project.Databases = p);
-                project.Databases = next;
-
-                project.CurrentDatabase = project.Databases.FirstOrDefault();
-            }
-        }
-
-        /// <summary>
-        /// Removes the <see cref="Column"/> object from <see cref="Column.Owner"/> <see cref="Database.Columns"/> collection.
-        /// </summary>
-        /// <param name="project">The project instance.</param>
-        /// <param name="parameter">The <see cref="Column"/> to remove.</param>
-        public static void RemoveColumn(this Project project, object parameter)
-        {
-            if (parameter != null && parameter is Column)
-            {
-                var column = parameter as Column;
-                var owner = column.Owner;
-
-                if (owner is Database)
-                {
-                    var db = owner as Database;
-                    if (db.Columns != null)
-                    {
-                        var previous = db.Columns;
-                        var next = db.Columns.Remove(column);
-                        project.History.Snapshot(previous, next, (p) => db.Columns = p);
-                        db.Columns = next;
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// Removes the <see cref="Project.CurrentDatabase"/> <see cref="Database.CurrentRecord"/> object from the <see cref="Project.CurrentDatabase"/> <see cref="Database.Records"/> collection.
-        /// </summary>
-        /// <param name="project">The project instance.</param>
-        public static void RemoveRecord(this Project project)
-        {
-            var db = project.CurrentDatabase;
-            if (db != null)
-            {
-                var record = db.CurrentRecord;
-                if (record != null)
-                {
-                    var previous = db.Records;
-                    var next = db.Records.Remove(record);
-                    project.History.Snapshot(previous, next, (p) => db.Records = p);
-                    db.Records = next;
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="project">The project instance.</param>
-        /// <param name="owner"></param>
-        public static void ResetRecord(this Project project, object owner)
-        {
-            if (owner != null && owner is Data)
-            {
-                var data = owner as Data;
-                var record = data.Record;
-
-                if (record != null)
-                {
-                    var previous = record;
-                    var next = default(Record);
-                    project.History.Snapshot(previous, next, (p) => data.Record = p);
-                    data.Record = next;
-                }
             }
         }
 
@@ -701,80 +848,6 @@ namespace Core2D
         /// 
         /// </summary>
         /// <param name="project">The project instance.</param>
-        /// <param name="shape"></param>
-        /// <param name="style"></param>
-        public static void ApplyStyle(this Project project, BaseShape shape, ShapeStyle style)
-        {
-            if (shape != null)
-            {
-                if (shape is XGroup)
-                {
-                    var shapes = Editor.GetAllShapes((shape as XGroup).Shapes);
-                    foreach (var child in shapes)
-                    {
-                        var previous = child.Style;
-                        var next = style;
-                        project.History.Snapshot(previous, next, (p) => child.Style = p);
-                        child.Style = next;
-                    }
-                }
-                else
-                {
-                    var previous = shape.Style;
-                    var next = style;
-                    project.History.Snapshot(previous, next, (p) => shape.Style = p);
-                    shape.Style = next;
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="project">The project instance.</param>
-        /// <param name="style">The style instance.</param>
-        /// <param name="shape">The selected shape.</param>
-        /// <param name="shapes">The selected shapes.</param>
-        public static void ApplyStyle(this Project project, ShapeStyle style, BaseShape shape, ImmutableHashSet<BaseShape> shapes)
-        {
-            if (shape != null)
-            {
-                project.ApplyStyle(shape, style);
-            }
-
-            if (shapes != null && shapes.Count > 0)
-            {
-                foreach (var s in shapes)
-                {
-                    project.ApplyStyle(s, style);
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="project">The project instance.</param>
-        /// <param name="style"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        public static void ApplyStyle(this Project project, ShapeStyle style, double x, double y)
-        {
-            var container = project.CurrentContainer;
-            if (container != null)
-            {
-                var result = ShapeBounds.HitTest(container, new Vector2(x, y), project.Options.HitTreshold);
-                if (result != null)
-                {
-                    project.ApplyStyle(result, style);
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="project">The project instance.</param>
         /// <param name="template"></param>
         public static void ApplyTemplate(this Project project, Container template)
         {
@@ -859,79 +932,6 @@ namespace Core2D
                 var next = builder.ToImmutable();
                 project.History.Snapshot(previous, next, (p) => project.Databases = p);
                 project.Databases = next;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="project">The project instance.</param>
-        /// <param name="record">The record instance.</param>
-        /// <param name="shape">The selected shape.</param>
-        /// <param name="shapes">The selected shapes.</param>
-        public static void ApplyRecord(this Project project, Record record, BaseShape shape, ImmutableHashSet<BaseShape> shapes)
-        {
-            if (project == null || project.CurrentContainer == null)
-                return;
-
-            var container = project.CurrentContainer;
-            if (container != null)
-            {
-                if (shape != null)
-                {
-                    var previous = shape.Data.Record;
-                    var next = record;
-                    project.History.Snapshot(previous, next, (p) => shape.Data.Record = p);
-                    shape.Data.Record = next;
-                }
-
-                if (shapes != null && shapes.Count > 0)
-                {
-                    foreach (var s in shapes)
-                    {
-                        var previous = s.Data.Record;
-                        var next = record;
-                        project.History.Snapshot(previous, next, (p) => s.Data.Record = p);
-                        s.Data.Record = next;
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="project">The project instance.</param>
-        /// <param name="shape"></param>
-        /// <param name="record"></param>
-        public static void ApplyRecord(this Project project, BaseShape shape, Record record)
-        {
-            var previous = shape.Data.Record;
-            var next = record;
-            project.History.Snapshot(previous, next, (p) => shape.Data.Record = p);
-            shape.Data.Record = next;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="project">The project instance.</param>
-        /// <param name="record"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        public static void ApplyRecord(this Project project, Record record, double x, double y)
-        {
-            var container = project.CurrentContainer;
-            if (container != null)
-            {
-                var result = ShapeBounds.HitTest(container, new Vector2(x, y), project.Options.HitTreshold);
-                if (result != null)
-                {
-                    var previous = result.Data.Record;
-                    var next = record;
-                    project.History.Snapshot(previous, next, (p) => result.Data.Record = p);
-                    result.Data.Record = next;
-                }
             }
         }
 
