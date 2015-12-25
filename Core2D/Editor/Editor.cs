@@ -1102,13 +1102,11 @@ namespace Core2D
         {
             if (item is Container)
             {
-                var container = item as Container;
-                _project.RemoveContainer(container);
+                _project.RemoveContainer(item as Container);
             }
             else if (item is Document)
             {
-                var document = item as Document;
-                _project.RemoveDocument(document);
+                _project.RemoveDocument(item as Document);
             }
             else if (item is Editor || item == null)
             {
