@@ -360,6 +360,32 @@ namespace Core2D
         /// 
         /// </summary>
         /// <param name="project">The project instance.</param>
+        /// <param name="parameter"></param>
+        public static void RemoveProperty(this Project project, object parameter)
+        {
+            if (parameter != null && parameter is Property)
+            {
+                var property = parameter as Property;
+                var owner = property.Owner;
+
+                if (owner is Data)
+                {
+                    var data = owner;
+                    if (data.Properties != null)
+                    {
+                        var previous = data.Properties;
+                        var next = data.Properties.Remove(property);
+                        project.History.Snapshot(previous, next, (p) => data.Properties = p);
+                        data.Properties = next;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="project">The project instance.</param>
         /// <param name="name"></param>
         public static void AddGroupLibrary(this Project project, string name = "New")
         {
@@ -524,32 +550,6 @@ namespace Core2D
                     var next = default(Record);
                     project.History.Snapshot(previous, next, (p) => data.Record = p);
                     data.Record = next;
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="project">The project instance.</param>
-        /// <param name="parameter"></param>
-        public static void RemoveProperty(this Project project, object parameter)
-        {
-            if (parameter != null && parameter is Property)
-            {
-                var property = parameter as Property;
-                var owner = property.Owner;
-
-                if (owner is Data)
-                {
-                    var data = owner;
-                    if (data.Properties != null)
-                    {
-                        var previous = data.Properties;
-                        var next = data.Properties.Remove(property);
-                        project.History.Snapshot(previous, next, (p) => data.Properties = p);
-                        data.Properties = next;
-                    }
                 }
             }
         }
