@@ -1595,7 +1595,7 @@ namespace Core2D
         /// </summary>
         public void OnRemoveGroup()
         {
-            _project.RemoveCurrentGroup();
+            _project.RemoveGroup();
         }
 
         /// <summary>
@@ -1658,7 +1658,7 @@ namespace Core2D
         /// </summary>
         public void OnRemoveTemplate()
         {
-            _project.RemoveCurrentTemplate();
+            _project.RemoveTemplate();
         }
 
         /// <summary>

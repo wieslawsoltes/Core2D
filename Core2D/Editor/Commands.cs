@@ -827,7 +827,7 @@ namespace Core2D
 
             RemoveGroupLibraryCommand =
                 Command.Create(
-                    () => editor.Project.RemoveCurrentGroupLibrary(),
+                    () => editor.Project.RemoveGroupLibrary(),
                     () => editor.IsEditMode());
 
             AddGroupCommand =
@@ -852,7 +852,7 @@ namespace Core2D
 
             RemoveLayerCommand =
                 Command.Create(
-                    () => editor.Project.RemoveCurrentLayer(),
+                    () => editor.Project.RemoveLayer(),
                     () => editor.IsEditMode());
 
             AddStyleLibraryCommand =
@@ -862,7 +862,7 @@ namespace Core2D
 
             RemoveStyleLibraryCommand =
                 Command.Create(
-                    () => editor.Project.RemoveCurrentStyleLibrary(),
+                    () => editor.Project.RemoveStyleLibrary(),
                     () => editor.IsEditMode());
 
             AddStyleCommand =
@@ -872,7 +872,7 @@ namespace Core2D
 
             RemoveStyleCommand =
                 Command.Create(
-                    () => editor.Project.RemoveCurrentStyle(),
+                    () => editor.Project.RemoveStyle(),
                     () => editor.IsEditMode());
 
             ApplyStyleCommand =
@@ -882,7 +882,7 @@ namespace Core2D
 
             RemoveShapeCommand =
                 Command.Create(
-                    () => editor.Project.RemoveCurrentShape(),
+                    () => editor.Project.RemoveShape(),
                     () => editor.IsEditMode());
 
             AddTemplateCommand =
