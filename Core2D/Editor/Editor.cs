@@ -988,14 +988,14 @@ namespace Core2D
                 var container = item as Container;
                 _containerToCopy = container;
                 _documentToCopy = default(Document);
-                Delete(container);
+                _project.RemoveContainer(container);
             }
             else if (item is Document)
             {
                 var document = item as Document;
                 _containerToCopy = default(Container);
                 _documentToCopy = document;
-                Delete(document);
+                _project.RemoveDocument(document);
             }
             else if (item is Editor || item == null)
             {
@@ -1103,12 +1103,12 @@ namespace Core2D
             if (item is Container)
             {
                 var container = item as Container;
-                Delete(container);
+                _project.RemoveContainer(container);
             }
             else if (item is Document)
             {
                 var document = item as Document;
-                Delete(document);
+                _project.RemoveDocument(document);
             }
             else if (item is Editor || item == null)
             {
@@ -2965,56 +2965,7 @@ namespace Core2D
         {
             return _project.History.CanRedo();
         }
-
-        /// <summary>
-        /// Removes container object from owner document <see cref="Document.Containers"/> collection.
-        /// </summary>
-        /// <param name="container">The container object to remove from document <see cref="Document.Containers"/> collection.</param>
-        public void Delete(Container container)
-        {
-            if (_project == null || _project.Documents == null)
-                return;
-
-            var document = _project.Documents.FirstOrDefault(d => d.Containers.Contains(container));
-            if (document != null)
-            {
-                var previous = document.Containers;
-                var next = document.Containers.Remove(container);
-                _project.History.Snapshot(previous, next, (p) => document.Containers = p);
-                document.Containers = next;
-
-                _project.CurrentDocument = document;
-                _project.CurrentContainer = document.Containers.FirstOrDefault();
-                _project.Selected = _project.CurrentContainer;
-            }
-        }
-
-        /// <summary>
-        /// Removes document object from project <see cref="Project.Documents"/> collection.
-        /// </summary>
-        /// <param name="document">The document object to remove from project <see cref="Project.Documents"/> collection.</param>
-        public void Delete(Document document)
-        {
-            if (_project == null || _project.Documents == null)
-                return;
-
-            var previous = _project.Documents;
-            var next = _project.Documents.Remove(document);
-            _project.History.Snapshot(previous, next, (p) => _project.Documents = p);
-            _project.Documents = next;
-
-            _project.CurrentDocument = _project.Documents.FirstOrDefault();
-            if (_project.CurrentDocument != null)
-            {
-                _project.CurrentContainer = _project.CurrentDocument.Containers.FirstOrDefault();
-            }
-            else
-            {
-                _project.CurrentContainer = default(Container);
-            }
-            _project.Selected = _project.CurrentContainer;
-        }
-
+        
         /// <summary>
         /// 
         /// </summary>

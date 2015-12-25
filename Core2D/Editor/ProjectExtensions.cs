@@ -53,6 +53,33 @@ namespace Core2D
         }
 
         /// <summary>
+        /// Remove document object from project <see cref="Project.Documents"/> collection.
+        /// </summary>
+        /// <param name="project">The project instance.</param>
+        /// <param name="document">The document object to remove from project <see cref="Project.Documents"/> collection.</param>
+        public static void RemoveDocument(this Project project, Document document)
+        {
+            if (project != null && project.Documents != null)
+            {
+                var previous = project.Documents;
+                var next = project.Documents.Remove(document);
+                project.History.Snapshot(previous, next, (p) => project.Documents = p);
+                project.Documents = next;
+
+                project.CurrentDocument = project.Documents.FirstOrDefault();
+                if (project.CurrentDocument != null)
+                {
+                    project.CurrentContainer = project.CurrentDocument.Containers.FirstOrDefault();
+                }
+                else
+                {
+                    project.CurrentContainer = default(Container);
+                }
+                project.Selected = project.CurrentContainer;
+            }
+        }
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="project">The project instance.</param>
@@ -102,6 +129,30 @@ namespace Core2D
                 var next = document.Containers.Insert(index, container);
                 project.History.Snapshot(previous, next, (p) => document.Containers = p);
                 document.Containers = next;
+            }
+        }
+
+        /// <summary>
+        /// Remove container object from owner document <see cref="Document.Containers"/> collection.
+        /// </summary>
+        /// <param name="project">The project instance.</param>
+        /// <param name="container">The container object to remove from document <see cref="Document.Containers"/> collection.</param>
+        public static void RemoveContainer(this Project project, Container container)
+        {
+            if (project != null && project.Documents != null)
+            {
+                var document = project.Documents.FirstOrDefault(d => d.Containers.Contains(container));
+                if (document != null)
+                {
+                    var previous = document.Containers;
+                    var next = document.Containers.Remove(container);
+                    project.History.Snapshot(previous, next, (p) => document.Containers = p);
+                    document.Containers = next;
+
+                    project.CurrentDocument = document;
+                    project.CurrentContainer = document.Containers.FirstOrDefault();
+                    project.Selected = project.CurrentContainer;
+                }
             }
         }
 
