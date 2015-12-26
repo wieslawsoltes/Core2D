@@ -1856,8 +1856,6 @@ namespace Core2D
             }
         }
 
-
-
         /// <summary>
         /// Initialize default <see cref="Editor"/> tools.
         /// </summary>
