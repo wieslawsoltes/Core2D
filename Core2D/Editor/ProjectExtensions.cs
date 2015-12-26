@@ -15,20 +15,6 @@ namespace Core2D
         /// 
         /// </summary>
         /// <param name="project">The project instance.</param>
-        /// <param name="name"></param>
-        public static void AddDocument(this Project project, string name = "New")
-        {
-            var document = Document.Create(name);
-            var previous = project.Documents;
-            var next = project.Documents.Add(document);
-            project.History.Snapshot(previous, next, (p) => project.Documents = p);
-            project.Documents = next;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="project">The project instance.</param>
         /// <param name="document"></param>
         public static void AddDocument(this Project project, Document document)
         {
@@ -76,24 +62,6 @@ namespace Core2D
                     project.CurrentContainer = default(Container);
                 }
                 project.Selected = project.CurrentContainer;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="project">The project instance.</param>
-        /// <param name="name"></param>
-        public static void AddContainer(this Project project, string name = "New")
-        {
-            var document = project.CurrentDocument;
-            if (document != null)
-            {
-                var container = Container.Create(name);
-                var previous = document.Containers;
-                var next = document.Containers.Add(container);
-                project.History.Snapshot(previous, next, (p) => document.Containers = p);
-                document.Containers = next;
             }
         }
 
@@ -154,20 +122,6 @@ namespace Core2D
                     project.Selected = project.CurrentContainer;
                 }
             }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="project">The project instance.</param>
-        /// <param name="name"></param>
-        public static void AddTemplate(this Project project, string name = "New")
-        {
-            var template = Container.Create(name, true);
-            var previous = project.Templates;
-            var next = project.Templates.Add(template);
-            project.History.Snapshot(previous, next, (p) => project.Templates = p);
-            project.Templates = next;
         }
 
         /// <summary>
