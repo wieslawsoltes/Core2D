@@ -207,9 +207,9 @@ namespace Core2D
         public static void InitializePlatformCommands(Editor editor)
         {
             Commands.OpenCommand =
-                Command<object>.Create(
-                    (parameter) => { },
-                    (parameter) => editor.IsEditMode());
+                Command<string>.Create(
+                    (path) => { },
+                    (path) => editor.IsEditMode());
 
             Commands.SaveCommand =
                 Command.Create(
@@ -227,117 +227,117 @@ namespace Core2D
                     (item) => editor.IsEditMode());
 
             Commands.ImportDataCommand =
-                Command<object>.Create(
-                    (item) => { },
-                    (item) => editor.IsEditMode());
+                Command<Project>.Create(
+                    (project) => { },
+                    (project) => editor.IsEditMode());
 
             Commands.ExportDataCommand =
-                Command<object>.Create(
-                    (item) => { },
-                    (item) => editor.IsEditMode());
+                Command<Database>.Create(
+                    (db) => { },
+                    (db) => editor.IsEditMode());
 
             Commands.UpdateDataCommand =
-                Command<object>.Create(
-                    (item) => { },
-                    (item) => editor.IsEditMode());
+                Command<Database>.Create(
+                    (db) => { },
+                    (db) => editor.IsEditMode());
 
             Commands.ImportStyleCommand =
-                Command<object>.Create(
+                Command<Library<ShapeStyle>>.Create(
                     (item) => { },
                     (item) => editor.IsEditMode());
 
             Commands.ImportStylesCommand =
-                Command<object>.Create(
+                Command<Library<ShapeStyle>>.Create(
                     (item) => { },
                     (item) => editor.IsEditMode());
 
             Commands.ImportStyleLibraryCommand =
-                Command<object>.Create(
+                Command<Project>.Create(
                     (item) => { },
                     (item) => editor.IsEditMode());
 
             Commands.ImportStyleLibrariesCommand =
-                Command<object>.Create(
+                Command<Project>.Create(
                     (item) => { },
                     (item) => editor.IsEditMode());
 
             Commands.ImportGroupCommand =
-                Command<object>.Create(
+                Command<Library<XGroup>>.Create(
                     (item) => { },
                     (item) => editor.IsEditMode());
 
             Commands.ImportGroupsCommand =
-                Command<object>.Create(
+                Command<Library<XGroup>>.Create(
                     (item) => { },
                     (item) => editor.IsEditMode());
 
             Commands.ImportGroupLibraryCommand =
-                Command<object>.Create(
+                Command<Project>.Create(
                     (item) => { },
                     (item) => editor.IsEditMode());
 
             Commands.ImportGroupLibrariesCommand =
-                Command<object>.Create(
+                Command<Project>.Create(
                     (item) => { },
                     (item) => editor.IsEditMode());
 
             Commands.ImportTemplateCommand =
-                Command<object>.Create(
+                Command<Project>.Create(
                     (item) => { },
                     (item) => editor.IsEditMode());
 
             Commands.ImportTemplatesCommand =
-                Command<object>.Create(
+                Command<Project>.Create(
                     (item) => { },
                     (item) => editor.IsEditMode());
 
             Commands.ExportStyleCommand =
-                Command<object>.Create(
+                Command<ShapeStyle>.Create(
                     (item) => { },
                     (item) => editor.IsEditMode());
 
             Commands.ExportStylesCommand =
-                Command<object>.Create(
+                Command<Library<ShapeStyle>>.Create(
                     (item) => { },
                     (item) => editor.IsEditMode());
 
             Commands.ExportStyleLibraryCommand =
-                Command<object>.Create(
+                Command<Library<ShapeStyle>>.Create(
                     (item) => { },
                     (item) => editor.IsEditMode());
 
             Commands.ExportStyleLibrariesCommand =
-                Command<object>.Create(
+                Command<Project>.Create(
                     (item) => { },
                     (item) => editor.IsEditMode());
 
             Commands.ExportGroupCommand =
-                Command<object>.Create(
+                Command<XGroup>.Create(
                     (item) => { },
                     (item) => editor.IsEditMode());
 
             Commands.ExportGroupsCommand =
-                Command<object>.Create(
+                Command<Library<XGroup>>.Create(
                     (item) => { },
                     (item) => editor.IsEditMode());
 
             Commands.ExportGroupLibraryCommand =
-                Command<object>.Create(
+                Command<Library<XGroup>>.Create(
                     (item) => { },
                     (item) => editor.IsEditMode());
 
             Commands.ExportGroupLibrariesCommand =
-                Command<object>.Create(
+                Command<Project>.Create(
                     (item) => { },
                     (item) => editor.IsEditMode());
 
             Commands.ExportTemplateCommand =
-                Command<object>.Create(
+                Command<Container>.Create(
                     (item) => { },
                     (item) => editor.IsEditMode());
 
             Commands.ExportTemplatesCommand =
-                Command<object>.Create(
+                Command<Project>.Create(
                     (item) => { },
                     (item) => editor.IsEditMode());
 
@@ -349,6 +349,21 @@ namespace Core2D
             Commands.ZoomExtentCommand =
                 Command.Create(
                     () => editor.ExtentZoom(),
+                    () => true);
+
+            Commands.LoadWindowLayoutCommand =
+                Command.Create(
+                    () => { },
+                    () => true);
+
+            Commands.SaveWindowLayoutCommand =
+                Command.Create(
+                    () => { },
+                    () => true);
+
+            Commands.ResetWindowLayoutCommand =
+                Command.Create(
+                    () => { },
                     () => true);
         }
 

@@ -244,9 +244,9 @@ namespace Core2D.Perspex
         private void InitializePlatformCommands(Editor editor)
         {
             Commands.OpenCommand =
-                Command<object>.Create(
-                    async (parameter) => await OnOpen(parameter),
-                    (parameter) => editor.IsEditMode());
+                Command<string>.Create(
+                    async (path) => await OnOpen(path),
+                    (path) => editor.IsEditMode());
 
             Commands.SaveCommand =
                 Command.Create(
@@ -264,117 +264,117 @@ namespace Core2D.Perspex
                     (item) => editor.IsEditMode());
 
             Commands.ImportDataCommand =
-                Command<object>.Create(
-                    async (item) => await OnImportData(),
-                    (item) => editor.IsEditMode());
+                Command<Project>.Create(
+                    async (project) => await OnImportData(),
+                    (project) => editor.IsEditMode());
 
             Commands.ExportDataCommand =
-                Command<object>.Create(
-                    async (item) => await OnExportData(),
-                    (item) => editor.IsEditMode());
+                Command<Database>.Create(
+                    async (db) => await OnExportData(),
+                    (db) => editor.IsEditMode());
 
             Commands.UpdateDataCommand =
-                Command<object>.Create(
-                    async (item) => await OnUpdateData(),
-                    (item) => editor.IsEditMode());
+                Command<Database>.Create(
+                    async (db) => await OnUpdateData(),
+                    (db) => editor.IsEditMode());
 
             Commands.ImportStyleCommand =
-                Command<object>.Create(
+                Command<Library<ShapeStyle>>.Create(
                     async (item) => await OnImportObject(item, ImportType.Style),
                     (item) => editor.IsEditMode());
 
             Commands.ImportStylesCommand =
-                Command<object>.Create(
+                Command<Library<ShapeStyle>>.Create(
                     async (item) => await OnImportObject(item, ImportType.Styles),
                     (item) => editor.IsEditMode());
 
             Commands.ImportStyleLibraryCommand =
-                Command<object>.Create(
+                Command<Project>.Create(
                     async (item) => await OnImportObject(item, ImportType.StyleLibrary),
                     (item) => editor.IsEditMode());
 
             Commands.ImportStyleLibrariesCommand =
-                Command<object>.Create(
+                Command<Project>.Create(
                     async (item) => await OnImportObject(item, ImportType.StyleLibraries),
                     (item) => editor.IsEditMode());
 
             Commands.ImportGroupCommand =
-                Command<object>.Create(
+                Command<Library<XGroup>>.Create(
                     async (item) => await OnImportObject(item, ImportType.Group),
                     (item) => editor.IsEditMode());
 
             Commands.ImportGroupsCommand =
-                Command<object>.Create(
+                Command<Library<XGroup>>.Create(
                     async (item) => await OnImportObject(item, ImportType.Groups),
                     (item) => editor.IsEditMode());
 
             Commands.ImportGroupLibraryCommand =
-                Command<object>.Create(
+                Command<Project>.Create(
                     async (item) => await OnImportObject(item, ImportType.GroupLibrary),
                     (item) => editor.IsEditMode());
 
             Commands.ImportGroupLibrariesCommand =
-                Command<object>.Create(
+                Command<Project>.Create(
                     async (item) => await OnImportObject(item, ImportType.GroupLibraries),
                     (item) => editor.IsEditMode());
 
             Commands.ImportTemplateCommand =
-                Command<object>.Create(
+                Command<Project>.Create(
                     async (item) => await OnImportObject(item, ImportType.Template),
                     (item) => editor.IsEditMode());
 
             Commands.ImportTemplatesCommand =
-                Command<object>.Create(
+                Command<Project>.Create(
                     async (item) => await OnImportObject(item, ImportType.Templates),
                     (item) => editor.IsEditMode());
 
             Commands.ExportStyleCommand =
-                Command<object>.Create(
+                Command<ShapeStyle>.Create(
                     async (item) => await OnExportObject(item, ExportType.Style),
                     (item) => editor.IsEditMode());
 
             Commands.ExportStylesCommand =
-                Command<object>.Create(
+                Command<Library<ShapeStyle>>.Create(
                     async (item) => await OnExportObject(item, ExportType.Styles),
                     (item) => editor.IsEditMode());
 
             Commands.ExportStyleLibraryCommand =
-                Command<object>.Create(
+                Command<Library<ShapeStyle>>.Create(
                     async (item) => await OnExportObject(item, ExportType.StyleLibrary),
                     (item) => editor.IsEditMode());
 
             Commands.ExportStyleLibrariesCommand =
-                Command<object>.Create(
+                Command<Project>.Create(
                     async (item) => await OnExportObject(item, ExportType.StyleLibraries),
                     (item) => editor.IsEditMode());
 
             Commands.ExportGroupCommand =
-                Command<object>.Create(
+                Command<XGroup>.Create(
                     async (item) => await OnExportObject(item, ExportType.Group),
                     (item) => editor.IsEditMode());
 
             Commands.ExportGroupsCommand =
-                Command<object>.Create(
+                Command<Library<XGroup>>.Create(
                     async (item) => await OnExportObject(item, ExportType.Groups),
                     (item) => editor.IsEditMode());
 
             Commands.ExportGroupLibraryCommand =
-                Command<object>.Create(
+                Command<Library<XGroup>>.Create(
                     async (item) => await OnExportObject(item, ExportType.GroupLibrary),
                     (item) => editor.IsEditMode());
 
             Commands.ExportGroupLibrariesCommand =
-                Command<object>.Create(
+                Command<Project>.Create(
                     async (item) => await OnExportObject(item, ExportType.GroupLibraries),
                     (item) => editor.IsEditMode());
 
             Commands.ExportTemplateCommand =
-                Command<object>.Create(
+                Command<Container>.Create(
                     async (item) => await OnExportObject(item, ExportType.Template),
                     (item) => editor.IsEditMode());
 
             Commands.ExportTemplatesCommand =
-                Command<object>.Create(
+                Command<Project>.Create(
                     async (item) => await OnExportObject(item, ExportType.Templates),
                     (item) => editor.IsEditMode());
 
@@ -386,6 +386,21 @@ namespace Core2D.Perspex
             Commands.ZoomExtentCommand =
                 Command.Create(
                     () => editor.ExtentZoom(),
+                    () => true);
+
+            Commands.LoadWindowLayoutCommand =
+                Command.Create(
+                    () => { },
+                    () => true);
+
+            Commands.SaveWindowLayoutCommand =
+                Command.Create(
+                    () => { },
+                    () => true);
+
+            Commands.ResetWindowLayoutCommand =
+                Command.Create(
+                    () => { },
                     () => true);
         }
 

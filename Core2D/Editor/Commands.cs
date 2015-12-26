@@ -12,552 +12,552 @@ namespace Core2D
         /// <summary>
         /// Create new project, document or container.
         /// </summary>
-        public static ICommand NewCommand { get; set; }
+        public static ICoreCommand<object> NewCommand { get; set; }
 
         /// <summary>
         /// Open project.
         /// </summary>
-        public static ICommand OpenCommand { get; set; }
+        public static ICoreCommand<string> OpenCommand { get; set; }
 
         /// <summary>
         /// Close project.
         /// </summary>
-        public static ICommand CloseCommand { get; set; }
+        public static ICoreCommand CloseCommand { get; set; }
 
         /// <summary>
         /// Save project.
         /// </summary>
-        public static ICommand SaveCommand { get; set; }
+        public static ICoreCommand SaveCommand { get; set; }
 
         /// <summary>
         /// Save project as.
         /// </summary>
-        public static ICommand SaveAsCommand { get; set; }
+        public static ICoreCommand SaveAsCommand { get; set; }
 
         /// <summary>
         /// Export project, document or container.
         /// </summary>
-        public static ICommand ExportCommand { get; set; }
+        public static ICoreCommand<object> ExportCommand { get; set; }
 
         /// <summary>
         /// Close application view.
         /// </summary>
-        public static ICommand ExitCommand { get; set; }
+        public static ICoreCommand ExitCommand { get; set; }
 
         /// <summary>
         /// Import database.
         /// </summary>
-        public static ICommand ImportDataCommand { get; set; }
+        public static ICoreCommand<Project> ImportDataCommand { get; set; }
 
         /// <summary>
         /// Export database.
         /// </summary>
-        public static ICommand ExportDataCommand { get; set; }
+        public static ICoreCommand<Database> ExportDataCommand { get; set; }
 
         /// <summary>
         /// Update database.
         /// </summary>
-        public static ICommand UpdateDataCommand { get; set; }
+        public static ICoreCommand<Database> UpdateDataCommand { get; set; }
 
         /// <summary>
         /// Import style.
         /// </summary>
-        public static ICommand ImportStyleCommand { get; set; }
+        public static ICoreCommand<Library<ShapeStyle>> ImportStyleCommand { get; set; }
 
         /// <summary>
         /// Import styles.
         /// </summary>
-        public static ICommand ImportStylesCommand { get; set; }
+        public static ICoreCommand<Library<ShapeStyle>> ImportStylesCommand { get; set; }
 
         /// <summary>
         /// Import style library.
         /// </summary>
-        public static ICommand ImportStyleLibraryCommand { get; set; }
+        public static ICoreCommand<Project> ImportStyleLibraryCommand { get; set; }
 
         /// <summary>
         /// Import style libraries.
         /// </summary>
-        public static ICommand ImportStyleLibrariesCommand { get; set; }
+        public static ICoreCommand<Project> ImportStyleLibrariesCommand { get; set; }
 
         /// <summary>
         /// Import group.
         /// </summary>
-        public static ICommand ImportGroupCommand { get; set; }
+        public static ICoreCommand<Library<XGroup>> ImportGroupCommand { get; set; }
 
         /// <summary>
         /// Import groups.
         /// </summary>
-        public static ICommand ImportGroupsCommand { get; set; }
+        public static ICoreCommand<Library<XGroup>> ImportGroupsCommand { get; set; }
 
         /// <summary>
         /// Import group library.
         /// </summary>
-        public static ICommand ImportGroupLibraryCommand { get; set; }
+        public static ICoreCommand<Project> ImportGroupLibraryCommand { get; set; }
 
         /// <summary>
         /// Import group libraries.
         /// </summary>
-        public static ICommand ImportGroupLibrariesCommand { get; set; }
+        public static ICoreCommand<Project> ImportGroupLibrariesCommand { get; set; }
 
         /// <summary>
         /// Import template.
         /// </summary>
-        public static ICommand ImportTemplateCommand { get; set; }
+        public static ICoreCommand<Project> ImportTemplateCommand { get; set; }
 
         /// <summary>
         /// Import templates.
         /// </summary>
-        public static ICommand ImportTemplatesCommand { get; set; }
+        public static ICoreCommand<Project> ImportTemplatesCommand { get; set; }
 
         /// <summary>
         /// Export style.
         /// </summary>
-        public static ICommand ExportStyleCommand { get; set; }
+        public static ICoreCommand<ShapeStyle> ExportStyleCommand { get; set; }
 
         /// <summary>
         /// Export styles.
         /// </summary>
-        public static ICommand ExportStylesCommand { get; set; }
+        public static ICoreCommand<Library<ShapeStyle>> ExportStylesCommand { get; set; }
 
         /// <summary>
         /// Export style library.
         /// </summary>
-        public static ICommand ExportStyleLibraryCommand { get; set; }
+        public static ICoreCommand<Library<ShapeStyle>> ExportStyleLibraryCommand { get; set; }
 
         /// <summary>
         /// Export style libraries.
         /// </summary>
-        public static ICommand ExportStyleLibrariesCommand { get; set; }
+        public static ICoreCommand<Project> ExportStyleLibrariesCommand { get; set; }
 
         /// <summary>
         /// Export group.
         /// </summary>
-        public static ICommand ExportGroupCommand { get; set; }
+        public static ICoreCommand<XGroup> ExportGroupCommand { get; set; }
 
         /// <summary>
         /// Export groups.
         /// </summary>
-        public static ICommand ExportGroupsCommand { get; set; }
+        public static ICoreCommand<Library<XGroup>> ExportGroupsCommand { get; set; }
 
         /// <summary>
         /// Export group library.
         /// </summary>
-        public static ICommand ExportGroupLibraryCommand { get; set; }
+        public static ICoreCommand<Library<XGroup>> ExportGroupLibraryCommand { get; set; }
 
         /// <summary>
         /// Export group libraries.
         /// </summary>
-        public static ICommand ExportGroupLibrariesCommand { get; set; }
+        public static ICoreCommand<Project> ExportGroupLibrariesCommand { get; set; }
 
         /// <summary>
         /// Export template.
         /// </summary>
-        public static ICommand ExportTemplateCommand { get; set; }
+        public static ICoreCommand<Container> ExportTemplateCommand { get; set; }
 
         /// <summary>
         /// Export templates.
         /// </summary>
-        public static ICommand ExportTemplatesCommand { get; set; }
-
-        /// <summary>
-        /// Add image key.
-        /// </summary>
-        public static ICommand AddImageKeyCommand { get; set; }
-
-        /// <summary>
-        /// Remove image key.
-        /// </summary>
-        public static ICommand RemoveImageKeyCommand { get; set; }
+        public static ICoreCommand<Project> ExportTemplatesCommand { get; set; }
 
         /// <summary>
         /// Undo last action.
         /// </summary>
-        public static ICommand UndoCommand { get; set; }
+        public static ICoreCommand UndoCommand { get; set; }
 
         /// <summary>
         /// Redo last action.
         /// </summary>
-        public static ICommand RedoCommand { get; set; }
+        public static ICoreCommand RedoCommand { get; set; }
 
         /// <summary>
         /// Copy container or selected shapes to clipboard as Emf.
         /// </summary>
-        public static ICommand CopyAsEmfCommand { get; set; }
+        public static ICoreCommand CopyAsEmfCommand { get; set; }
 
         /// <summary>
         /// Cut selected document, container or shapes to clipboard.
         /// </summary>
-        public static ICommand CutCommand { get; set; }
+        public static ICoreCommand<object> CutCommand { get; set; }
 
         /// <summary>
         /// Copy document, container or shapes to clipboard.
         /// </summary>
-        public static ICommand CopyCommand { get; set; }
+        public static ICoreCommand<object> CopyCommand { get; set; }
 
         /// <summary>
         /// Paste text from clipboard as document, container or shapes.
         /// </summary>
-        public static ICommand PasteCommand { get; set; }
+        public static ICoreCommand<object> PasteCommand { get; set; }
 
         /// <summary>
         /// Delete selected document, container or shapes.
         /// </summary>
-        public static ICommand DeleteCommand { get; set; }
+        public static ICoreCommand<object> DeleteCommand { get; set; }
 
         /// <summary>
         /// Select all shapes.
         /// </summary>
-        public static ICommand SelectAllCommand { get; set; }
+        public static ICoreCommand SelectAllCommand { get; set; }
 
         /// <summary>
         /// De-select all shapes.
         /// </summary>
-        public static ICommand DeselectAllCommand { get; set; }
+        public static ICoreCommand DeselectAllCommand { get; set; }
 
         /// <summary>
         /// Remove all shapes.
         /// </summary>
-        public static ICommand ClearAllCommand { get; set; }
+        public static ICoreCommand ClearAllCommand { get; set; }
 
         /// <summary>
         /// Group selected shapes.
         /// </summary>
-        public static ICommand GroupCommand { get; set; }
+        public static ICoreCommand GroupCommand { get; set; }
 
         /// <summary>
         /// Ungroup selected shapes.
         /// </summary>
-        public static ICommand UngroupCommand { get; set; }
+        public static ICoreCommand UngroupCommand { get; set; }
 
         /// <summary>
         /// Bring selected shapes to front.
         /// </summary>
-        public static ICommand BringToFrontCommand { get; set; }
+        public static ICoreCommand BringToFrontCommand { get; set; }
 
         /// <summary>
         /// Bring selected shapes forward.
         /// </summary>
-        public static ICommand BringForwardCommand { get; set; }
+        public static ICoreCommand BringForwardCommand { get; set; }
 
         /// <summary>
         /// Send selected shapes backward.
         /// </summary>
-        public static ICommand SendBackwardCommand { get; set; }
+        public static ICoreCommand SendBackwardCommand { get; set; }
 
         /// <summary>
         /// Send selected shapes to back.
         /// </summary>
-        public static ICommand SendToBackCommand { get; set; }
+        public static ICoreCommand SendToBackCommand { get; set; }
 
         /// <summary>
         /// Move selected shapes up.
         /// </summary>
-        public static ICommand MoveUpCommand { get; set; }
+        public static ICoreCommand MoveUpCommand { get; set; }
 
         /// <summary>
         /// Move selected shapes down.
         /// </summary>
-        public static ICommand MoveDownCommand { get; set; }
+        public static ICoreCommand MoveDownCommand { get; set; }
 
         /// <summary>
         /// Move selected shapes left.
         /// </summary>
-        public static ICommand MoveLeftCommand { get; set; }
+        public static ICoreCommand MoveLeftCommand { get; set; }
 
         /// <summary>
         /// Move selected shapes right.
         /// </summary>
-        public static ICommand MoveRightCommand { get; set; }
+        public static ICoreCommand MoveRightCommand { get; set; }
 
         /// <summary>
         /// Set current tool to <see cref="Tool.None"/>.
         /// </summary>
-        public static ICommand ToolNoneCommand { get; set; }
+        public static ICoreCommand ToolNoneCommand { get; set; }
 
         /// <summary>
         /// Set current tool to <see cref="Tool.Selection"/>.
         /// </summary>
-        public static ICommand ToolSelectionCommand { get; set; }
+        public static ICoreCommand ToolSelectionCommand { get; set; }
 
         /// <summary>
         /// Set current tool to <see cref="Tool.Point"/>.
         /// </summary>
-        public static ICommand ToolPointCommand { get; set; }
+        public static ICoreCommand ToolPointCommand { get; set; }
 
         /// <summary>
         /// Set current tool to <see cref="Tool.Line"/> or current path tool to <see cref="PathTool.Line"/>.
         /// </summary>
-        public static ICommand ToolLineCommand { get; set; }
+        public static ICoreCommand ToolLineCommand { get; set; }
 
         /// <summary>
         /// Set current tool to <see cref="Tool.Arc"/> or current path tool to <see cref="PathTool.Arc"/>.
         /// </summary>
-        public static ICommand ToolArcCommand { get; set; }
+        public static ICoreCommand ToolArcCommand { get; set; }
 
         /// <summary>
         /// Set current tool to <see cref="Tool.Bezier"/> or current path tool to <see cref="PathTool.Bezier"/>.
         /// </summary>
-        public static ICommand ToolBezierCommand { get; set; }
+        public static ICoreCommand ToolBezierCommand { get; set; }
 
         /// <summary>
         /// Set current tool to <see cref="Tool.QBezier"/> or current path tool to <see cref="PathTool.QBezier"/>.
         /// </summary>
-        public static ICommand ToolQBezierCommand { get; set; }
+        public static ICoreCommand ToolQBezierCommand { get; set; }
 
         /// <summary>
         /// Set current tool to <see cref="Tool.Path"/>.
         /// </summary>
-        public static ICommand ToolPathCommand { get; set; }
+        public static ICoreCommand ToolPathCommand { get; set; }
 
         /// <summary>
         /// Set current tool to <see cref="Tool.Rectangle"/>.
         /// </summary>
-        public static ICommand ToolRectangleCommand { get; set; }
+        public static ICoreCommand ToolRectangleCommand { get; set; }
 
         /// <summary>
         /// Set current tool to <see cref="Tool.Ellipse"/>.
         /// </summary>
-        public static ICommand ToolEllipseCommand { get; set; }
+        public static ICoreCommand ToolEllipseCommand { get; set; }
 
         /// <summary>
         /// Set current tool to <see cref="Tool.Text"/>.
         /// </summary>
-        public static ICommand ToolTextCommand { get; set; }
+        public static ICoreCommand ToolTextCommand { get; set; }
 
         /// <summary>
         /// Set current tool to <see cref="Tool.Image"/>.
         /// </summary>
-        public static ICommand ToolImageCommand { get; set; }
+        public static ICoreCommand ToolImageCommand { get; set; }
 
         /// <summary>
         /// Set current path tool to <see cref="PathTool.Move"/>.
         /// </summary>
-        public static ICommand ToolMoveCommand { get; set; }
+        public static ICoreCommand ToolMoveCommand { get; set; }
 
         /// <summary>
         /// Toggle <see cref="Options.DefaultIsStroked"/> option.
         /// </summary>
-        public static ICommand DefaultIsStrokedCommand { get; set; }
+        public static ICoreCommand DefaultIsStrokedCommand { get; set; }
 
         /// <summary>
         /// Toggle <see cref="Options.DefaultIsFilled"/> option.
         /// </summary>
-        public static ICommand DefaultIsFilledCommand { get; set; }
+        public static ICoreCommand DefaultIsFilledCommand { get; set; }
 
         /// <summary>
         /// Toggle <see cref="Options.DefaultIsClosed"/> option.
         /// </summary>
-        public static ICommand DefaultIsClosedCommand { get; set; }
+        public static ICoreCommand DefaultIsClosedCommand { get; set; }
 
         /// <summary>
         /// Toggle <see cref="Options.DefaultIsSmoothJoin"/> option.
         /// </summary>
-        public static ICommand DefaultIsSmoothJoinCommand { get; set; }
+        public static ICoreCommand DefaultIsSmoothJoinCommand { get; set; }
 
         /// <summary>
         /// Toggle <see cref="Options.SnapToGrid"/> option.
         /// </summary>
-        public static ICommand SnapToGridCommand { get; set; }
+        public static ICoreCommand SnapToGridCommand { get; set; }
 
         /// <summary>
         /// Toggle <see cref="Options.TryToConnect"/> option.
         /// </summary>
-        public static ICommand TryToConnectCommand { get; set; }
+        public static ICoreCommand TryToConnectCommand { get; set; }
 
         /// <summary>
         /// Add database.
         /// </summary>
-        public static ICommand AddDatabaseCommand { get; set; }
+        public static ICoreCommand AddDatabaseCommand { get; set; }
 
         /// <summary>
         /// Remove database.
         /// </summary>
-        public static ICommand RemoveDatabaseCommand { get; set; }
+        public static ICoreCommand<Database> RemoveDatabaseCommand { get; set; }
 
         /// <summary>
         /// Add column to database columns collection.
         /// </summary>
-        public static ICommand AddColumnCommand { get; set; }
+        public static ICoreCommand<Database> AddColumnCommand { get; set; }
 
         /// <summary>
         /// Remove column from database columns collection.
         /// </summary>
-        public static ICommand RemoveColumnCommand { get; set; }
+        public static ICoreCommand<Column> RemoveColumnCommand { get; set; }
 
         /// <summary>
         /// Add record to database records collection.
         /// </summary>
-        public static ICommand AddRecordCommand { get; set; }
+        public static ICoreCommand AddRecordCommand { get; set; }
 
         /// <summary>
         /// Remove record from database records collection.
         /// </summary>
-        public static ICommand RemoveRecordCommand { get; set; }
+        public static ICoreCommand RemoveRecordCommand { get; set; }
 
         /// <summary>
         /// Reset data record for current shape.
         /// </summary>
-        public static ICommand ResetRecordCommand { get; set; }
+        public static ICoreCommand<Data> ResetRecordCommand { get; set; }
 
         /// <summary>
         /// Set current record as selected shape data record.
         /// </summary>
-        public static ICommand ApplyRecordCommand { get; set; }
-
-        /// <summary>
-        /// Add property.
-        /// </summary>
-        public static ICommand AddPropertyCommand { get; set; }
-
-        /// <summary>
-        /// Remove property.
-        /// </summary>
-        public static ICommand RemovePropertyCommand { get; set; }
-
-        /// <summary>
-        /// Add group library.
-        /// </summary>
-        public static ICommand AddGroupLibraryCommand { get; set; }
-
-        /// <summary>
-        /// Remove group library.
-        /// </summary>
-        public static ICommand RemoveGroupLibraryCommand { get; set; }
-
-        /// <summary>
-        /// Add group.
-        /// </summary>
-        public static ICommand AddGroupCommand { get; set; }
-
-        /// <summary>
-        /// Remove group.
-        /// </summary>
-        public static ICommand RemoveGroupCommand { get; set; }
-
-        /// <summary>
-        /// Insert current group to container.
-        /// </summary>
-        public static ICommand InsertGroupCommand { get; set; }
-
-        /// <summary>
-        /// Add layer.
-        /// </summary>
-        public static ICommand AddLayerCommand { get; set; }
-
-        /// <summary>
-        /// Remove layer.
-        /// </summary>
-        public static ICommand RemoveLayerCommand { get; set; }
-
-        /// <summary>
-        /// Add style library.
-        /// </summary>
-        public static ICommand AddStyleLibraryCommand { get; set; }
-
-        /// <summary>
-        /// Remove style library.
-        /// </summary>
-        public static ICommand RemoveStyleLibraryCommand { get; set; }
-
-        /// <summary>
-        /// Add style.
-        /// </summary>
-        public static ICommand AddStyleCommand { get; set; }
-
-        /// <summary>
-        /// Remove style.
-        /// </summary>
-        public static ICommand RemoveStyleCommand { get; set; }
-
-        /// <summary>
-        /// Set current style as selected shape style.
-        /// </summary>
-        public static ICommand ApplyStyleCommand { get; set; }
+        public static ICoreCommand<Record> ApplyRecordCommand { get; set; }
 
         /// <summary>
         /// Remove selected shape.
         /// </summary>
-        public static ICommand RemoveShapeCommand { get; set; }
+        public static ICoreCommand RemoveShapeCommand { get; set; }
 
         /// <summary>
-        /// Reset zoom to defaults.
+        /// Add property.
         /// </summary>
-        public static ICommand ZoomResetCommand { get; set; }
+        public static ICoreCommand<Data> AddPropertyCommand { get; set; }
 
         /// <summary>
-        /// Zoom to available extents.
+        /// Remove property.
         /// </summary>
-        public static ICommand ZoomExtentCommand { get; set; }
+        public static ICoreCommand<Property> RemovePropertyCommand { get; set; }
+
+        /// <summary>
+        /// Add group library.
+        /// </summary>
+        public static ICoreCommand AddGroupLibraryCommand { get; set; }
+
+        /// <summary>
+        /// Remove group library.
+        /// </summary>
+        public static ICoreCommand RemoveGroupLibraryCommand { get; set; }
+
+        /// <summary>
+        /// Add group.
+        /// </summary>
+        public static ICoreCommand AddGroupCommand { get; set; }
+
+        /// <summary>
+        /// Remove group.
+        /// </summary>
+        public static ICoreCommand RemoveGroupCommand { get; set; }
+
+        /// <summary>
+        /// Insert current group to container.
+        /// </summary>
+        public static ICoreCommand<XGroup> InsertGroupCommand { get; set; }
+
+        /// <summary>
+        /// Add layer.
+        /// </summary>
+        public static ICoreCommand AddLayerCommand { get; set; }
+
+        /// <summary>
+        /// Remove layer.
+        /// </summary>
+        public static ICoreCommand RemoveLayerCommand { get; set; }
+
+        /// <summary>
+        /// Add style library.
+        /// </summary>
+        public static ICoreCommand AddStyleLibraryCommand { get; set; }
+
+        /// <summary>
+        /// Remove style library.
+        /// </summary>
+        public static ICoreCommand RemoveStyleLibraryCommand { get; set; }
+
+        /// <summary>
+        /// Add style.
+        /// </summary>
+        public static ICoreCommand AddStyleCommand { get; set; }
+
+        /// <summary>
+        /// Remove style.
+        /// </summary>
+        public static ICoreCommand RemoveStyleCommand { get; set; }
+
+        /// <summary>
+        /// Set current style as selected shape style.
+        /// </summary>
+        public static ICoreCommand<ShapeStyle> ApplyStyleCommand { get; set; }
 
         /// <summary>
         /// Add template.
         /// </summary>
-        public static ICommand AddTemplateCommand { get; set; }
+        public static ICoreCommand AddTemplateCommand { get; set; }
 
         /// <summary>
         /// Remove template.
         /// </summary>
-        public static ICommand RemoveTemplateCommand { get; set; }
+        public static ICoreCommand RemoveTemplateCommand { get; set; }
 
         /// <summary>
         /// Edit current template.
         /// </summary>
-        public static ICommand EditTemplateCommand { get; set; }
+        public static ICoreCommand EditTemplateCommand { get; set; }
 
         /// <summary>
         /// Set current template as current container's template.
         /// </summary>
-        public static ICommand ApplyTemplateCommand { get; set; }
+        public static ICoreCommand<Container> ApplyTemplateCommand { get; set; }
+
+        /// <summary>
+        /// Add image key.
+        /// </summary>
+        public static ICoreCommand AddImageKeyCommand { get; set; }
+
+        /// <summary>
+        /// Remove image key.
+        /// </summary>
+        public static ICoreCommand<string> RemoveImageKeyCommand { get; set; }
 
         /// <summary>
         /// Notifies when selected project tree item changed.
         /// </summary>
-        public static ICommand SelectedItemChangedCommand { get; set; }
+        public static ICoreCommand<object> SelectedItemChangedCommand { get; set; }
 
         /// <summary>
         /// Add container.
         /// </summary>
-        public static ICommand AddContainerCommand { get; set; }
+        public static ICoreCommand<object> AddContainerCommand { get; set; }
 
         /// <summary>
         /// Insert container before current container.
         /// </summary>
-        public static ICommand InsertContainerBeforeCommand { get; set; }
+        public static ICoreCommand<object> InsertContainerBeforeCommand { get; set; }
 
         /// <summary>
         /// Insert container after current container.
         /// </summary>
-        public static ICommand InsertContainerAfterCommand { get; set; }
+        public static ICoreCommand<object> InsertContainerAfterCommand { get; set; }
 
         /// <summary>
         /// Add document.
         /// </summary>
-        public static ICommand AddDocumentCommand { get; set; }
+        public static ICoreCommand<object> AddDocumentCommand { get; set; }
 
         /// <summary>
         /// Insert document before current document.
         /// </summary>
-        public static ICommand InsertDocumentBeforeCommand { get; set; }
+        public static ICoreCommand<object> InsertDocumentBeforeCommand { get; set; }
 
         /// <summary>
         /// Insert document after current document.
         /// </summary>
-        public static ICommand InsertDocumentAfterCommand { get; set; }
+        public static ICoreCommand<object> InsertDocumentAfterCommand { get; set; }
+
+        /// <summary>
+        /// Reset zoom to defaults.
+        /// </summary>
+        public static ICoreCommand ZoomResetCommand { get; set; }
+
+        /// <summary>
+        /// Zoom to available extents.
+        /// </summary>
+        public static ICoreCommand ZoomExtentCommand { get; set; }
 
         /// <summary>
         /// Load main window layout.
         /// </summary>
-        public static ICommand LoadWindowLayoutCommand { get; set; }
+        public static ICoreCommand LoadWindowLayoutCommand { get; set; }
 
         /// <summary>
         /// Save main window layout.
         /// </summary>
-        public static ICommand SaveWindowLayoutCommand { get; set; }
+        public static ICoreCommand SaveWindowLayoutCommand { get; set; }
 
         /// <summary>
         /// Reset main window layout to default state.
         /// </summary>
-        public static ICommand ResetWindowLayoutCommand { get; set; }
+        public static ICoreCommand ResetWindowLayoutCommand { get; set; }
 
         /// <summary>
         /// Initialize non-platform specific editor commands.
@@ -806,9 +806,9 @@ namespace Core2D
                     (data) => editor.IsEditMode());
 
             ApplyRecordCommand =
-                Command<object>.Create(
-                    (item) => editor.OnApplyRecord(item),
-                    (item) => editor.IsEditMode());
+                Command<Record>.Create(
+                    (record) => editor.OnApplyRecord(record),
+                    (record) => editor.IsEditMode());
 
             AddPropertyCommand =
                 Command<Data>.Create(
@@ -895,16 +895,6 @@ namespace Core2D
                     () => editor.OnRemoveTemplate(),
                     () => editor.IsEditMode());
 
-            AddImageKeyCommand =
-                Command.Create(
-                    async () => await editor.AddImageKey(null),
-                    () => editor.IsEditMode());
-
-            RemoveImageKeyCommand =
-                Command<string>.Create(
-                    (key) => editor.RemoveImageKey(key),
-                    (key) => editor.IsEditMode());
-
             EditTemplateCommand =
                 Command.Create(
                     () => editor.OnEditTemplate(),
@@ -914,6 +904,16 @@ namespace Core2D
                 Command<Container>.Create(
                     (template) => editor.OnApplyTemplate(template),
                     (template) => true);
+
+            AddImageKeyCommand =
+                Command.Create(
+                    async () => await editor.AddImageKey(null),
+                    () => editor.IsEditMode());
+
+            RemoveImageKeyCommand =
+                Command<string>.Create(
+                    (key) => editor.RemoveImageKey(key),
+                    (key) => editor.IsEditMode());
 
             SelectedItemChangedCommand =
                 Command<object>.Create(
@@ -956,140 +956,140 @@ namespace Core2D
         /// </summary>
         public static void NotifyCanExecuteChanged()
         {
-            (NewCommand as Command<object>).NotifyCanExecuteChanged();
-            (OpenCommand as Command<object>).NotifyCanExecuteChanged();
-            (CloseCommand as Command).NotifyCanExecuteChanged();
-            (SaveCommand as Command).NotifyCanExecuteChanged();
-            (SaveAsCommand as Command).NotifyCanExecuteChanged();
-            (ExportCommand as Command<object>).NotifyCanExecuteChanged();
-            (ExitCommand as Command).NotifyCanExecuteChanged();
+            NewCommand.NotifyCanExecuteChanged();
+            OpenCommand.NotifyCanExecuteChanged();
+            CloseCommand.NotifyCanExecuteChanged();
+            SaveCommand.NotifyCanExecuteChanged();
+            SaveAsCommand.NotifyCanExecuteChanged();
+            ExportCommand.NotifyCanExecuteChanged();
+            ExitCommand.NotifyCanExecuteChanged();
 
-            (ImportDataCommand as Command<object>).NotifyCanExecuteChanged();
-            (ExportDataCommand as Command<object>).NotifyCanExecuteChanged();
-            (UpdateDataCommand as Command<object>).NotifyCanExecuteChanged();
+            ImportDataCommand.NotifyCanExecuteChanged();
+            ExportDataCommand.NotifyCanExecuteChanged();
+            UpdateDataCommand.NotifyCanExecuteChanged();
 
-            (ImportStyleCommand as Command<object>).NotifyCanExecuteChanged();
-            (ImportStylesCommand as Command<object>).NotifyCanExecuteChanged();
-            (ImportStyleLibraryCommand as Command<object>).NotifyCanExecuteChanged();
-            (ImportStyleLibrariesCommand as Command<object>).NotifyCanExecuteChanged();
-            (ImportGroupCommand as Command<object>).NotifyCanExecuteChanged();
-            (ImportGroupsCommand as Command<object>).NotifyCanExecuteChanged();
-            (ImportGroupLibraryCommand as Command<object>).NotifyCanExecuteChanged();
-            (ImportGroupLibrariesCommand as Command<object>).NotifyCanExecuteChanged();
-            (ImportTemplateCommand as Command<object>).NotifyCanExecuteChanged();
-            (ImportTemplatesCommand as Command<object>).NotifyCanExecuteChanged();
-            (ExportStyleCommand as Command<object>).NotifyCanExecuteChanged();
-            (ExportStylesCommand as Command<object>).NotifyCanExecuteChanged();
-            (ExportStyleLibraryCommand as Command<object>).NotifyCanExecuteChanged();
-            (ExportStyleLibrariesCommand as Command<object>).NotifyCanExecuteChanged();
-            (ExportGroupCommand as Command<object>).NotifyCanExecuteChanged();
-            (ExportGroupsCommand as Command<object>).NotifyCanExecuteChanged();
-            (ExportGroupLibraryCommand as Command<object>).NotifyCanExecuteChanged();
-            (ExportGroupLibrariesCommand as Command<object>).NotifyCanExecuteChanged();
-            (ExportTemplateCommand as Command<object>).NotifyCanExecuteChanged();
-            (ExportTemplatesCommand as Command<object>).NotifyCanExecuteChanged();
+            ImportStyleCommand.NotifyCanExecuteChanged();
+            ImportStylesCommand.NotifyCanExecuteChanged();
+            ImportStyleLibraryCommand.NotifyCanExecuteChanged();
+            ImportStyleLibrariesCommand.NotifyCanExecuteChanged();
+            ImportGroupCommand.NotifyCanExecuteChanged();
+            ImportGroupsCommand.NotifyCanExecuteChanged();
+            ImportGroupLibraryCommand.NotifyCanExecuteChanged();
+            ImportGroupLibrariesCommand.NotifyCanExecuteChanged();
+            ImportTemplateCommand.NotifyCanExecuteChanged();
+            ImportTemplatesCommand.NotifyCanExecuteChanged();
+            ExportStyleCommand.NotifyCanExecuteChanged();
+            ExportStylesCommand.NotifyCanExecuteChanged();
+            ExportStyleLibraryCommand.NotifyCanExecuteChanged();
+            ExportStyleLibrariesCommand.NotifyCanExecuteChanged();
+            ExportGroupCommand.NotifyCanExecuteChanged();
+            ExportGroupsCommand.NotifyCanExecuteChanged();
+            ExportGroupLibraryCommand.NotifyCanExecuteChanged();
+            ExportGroupLibrariesCommand.NotifyCanExecuteChanged();
+            ExportTemplateCommand.NotifyCanExecuteChanged();
+            ExportTemplatesCommand.NotifyCanExecuteChanged();
 
-            (UndoCommand as Command).NotifyCanExecuteChanged();
-            (RedoCommand as Command).NotifyCanExecuteChanged();
-            (CopyAsEmfCommand as Command).NotifyCanExecuteChanged();
-            (CutCommand as Command<object>).NotifyCanExecuteChanged();
-            (CopyCommand as Command<object>).NotifyCanExecuteChanged();
-            (PasteCommand as Command<object>).NotifyCanExecuteChanged();
-            (DeleteCommand as Command<object>).NotifyCanExecuteChanged();
-            (SelectAllCommand as Command).NotifyCanExecuteChanged();
-            (DeselectAllCommand as Command).NotifyCanExecuteChanged();
-            (ClearAllCommand as Command).NotifyCanExecuteChanged();
-            (GroupCommand as Command).NotifyCanExecuteChanged();
-            (UngroupCommand as Command).NotifyCanExecuteChanged();
+            UndoCommand.NotifyCanExecuteChanged();
+            RedoCommand.NotifyCanExecuteChanged();
+            CopyAsEmfCommand.NotifyCanExecuteChanged();
+            CutCommand.NotifyCanExecuteChanged();
+            CopyCommand.NotifyCanExecuteChanged();
+            PasteCommand.NotifyCanExecuteChanged();
+            DeleteCommand.NotifyCanExecuteChanged();
+            SelectAllCommand.NotifyCanExecuteChanged();
+            DeselectAllCommand.NotifyCanExecuteChanged();
+            ClearAllCommand.NotifyCanExecuteChanged();
+            GroupCommand.NotifyCanExecuteChanged();
+            UngroupCommand.NotifyCanExecuteChanged();
 
-            (BringToFrontCommand as Command).NotifyCanExecuteChanged();
-            (BringForwardCommand as Command).NotifyCanExecuteChanged();
-            (SendBackwardCommand as Command).NotifyCanExecuteChanged();
-            (SendToBackCommand as Command).NotifyCanExecuteChanged();
+            BringToFrontCommand.NotifyCanExecuteChanged();
+            BringForwardCommand.NotifyCanExecuteChanged();
+            SendBackwardCommand.NotifyCanExecuteChanged();
+            SendToBackCommand.NotifyCanExecuteChanged();
 
-            (MoveUpCommand as Command).NotifyCanExecuteChanged();
-            (MoveDownCommand as Command).NotifyCanExecuteChanged();
-            (MoveLeftCommand as Command).NotifyCanExecuteChanged();
-            (MoveRightCommand as Command).NotifyCanExecuteChanged();
+            MoveUpCommand.NotifyCanExecuteChanged();
+            MoveDownCommand.NotifyCanExecuteChanged();
+            MoveLeftCommand.NotifyCanExecuteChanged();
+            MoveRightCommand.NotifyCanExecuteChanged();
 
-            (ToolNoneCommand as Command).NotifyCanExecuteChanged();
-            (ToolSelectionCommand as Command).NotifyCanExecuteChanged();
-            (ToolPointCommand as Command).NotifyCanExecuteChanged();
-            (ToolLineCommand as Command).NotifyCanExecuteChanged();
-            (ToolArcCommand as Command).NotifyCanExecuteChanged();
-            (ToolBezierCommand as Command).NotifyCanExecuteChanged();
-            (ToolQBezierCommand as Command).NotifyCanExecuteChanged();
-            (ToolRectangleCommand as Command).NotifyCanExecuteChanged();
-            (ToolEllipseCommand as Command).NotifyCanExecuteChanged();
-            (ToolPathCommand as Command).NotifyCanExecuteChanged();
-            (ToolTextCommand as Command).NotifyCanExecuteChanged();
-            (ToolImageCommand as Command).NotifyCanExecuteChanged();
-            (ToolMoveCommand as Command).NotifyCanExecuteChanged();
+            ToolNoneCommand.NotifyCanExecuteChanged();
+            ToolSelectionCommand.NotifyCanExecuteChanged();
+            ToolPointCommand.NotifyCanExecuteChanged();
+            ToolLineCommand.NotifyCanExecuteChanged();
+            ToolArcCommand.NotifyCanExecuteChanged();
+            ToolBezierCommand.NotifyCanExecuteChanged();
+            ToolQBezierCommand.NotifyCanExecuteChanged();
+            ToolRectangleCommand.NotifyCanExecuteChanged();
+            ToolEllipseCommand.NotifyCanExecuteChanged();
+            ToolPathCommand.NotifyCanExecuteChanged();
+            ToolTextCommand.NotifyCanExecuteChanged();
+            ToolImageCommand.NotifyCanExecuteChanged();
+            ToolMoveCommand.NotifyCanExecuteChanged();
 
-            (DefaultIsStrokedCommand as Command).NotifyCanExecuteChanged();
-            (DefaultIsFilledCommand as Command).NotifyCanExecuteChanged();
-            (DefaultIsClosedCommand as Command).NotifyCanExecuteChanged();
-            (DefaultIsSmoothJoinCommand as Command).NotifyCanExecuteChanged();
-            (SnapToGridCommand as Command).NotifyCanExecuteChanged();
-            (TryToConnectCommand as Command).NotifyCanExecuteChanged();
+            DefaultIsStrokedCommand.NotifyCanExecuteChanged();
+            DefaultIsFilledCommand.NotifyCanExecuteChanged();
+            DefaultIsClosedCommand.NotifyCanExecuteChanged();
+            DefaultIsSmoothJoinCommand.NotifyCanExecuteChanged();
+            SnapToGridCommand.NotifyCanExecuteChanged();
+            TryToConnectCommand.NotifyCanExecuteChanged();
 
-            (AddDatabaseCommand as Command).NotifyCanExecuteChanged();
-            (RemoveDatabaseCommand as Command<Database>).NotifyCanExecuteChanged();
+            AddDatabaseCommand.NotifyCanExecuteChanged();
+            RemoveDatabaseCommand.NotifyCanExecuteChanged();
 
-            (AddColumnCommand as Command<Database>).NotifyCanExecuteChanged();
-            (RemoveColumnCommand as Command<Column>).NotifyCanExecuteChanged();
+            AddColumnCommand.NotifyCanExecuteChanged();
+            RemoveColumnCommand.NotifyCanExecuteChanged();
 
-            (AddRecordCommand as Command).NotifyCanExecuteChanged();
-            (RemoveRecordCommand as Command).NotifyCanExecuteChanged();
-            (ResetRecordCommand as Command<Data>).NotifyCanExecuteChanged();
-            (ApplyRecordCommand as Command<object>).NotifyCanExecuteChanged();
+            AddRecordCommand.NotifyCanExecuteChanged();
+            RemoveRecordCommand.NotifyCanExecuteChanged();
+            ResetRecordCommand.NotifyCanExecuteChanged();
+            ApplyRecordCommand.NotifyCanExecuteChanged();
 
-            (AddPropertyCommand as Command<Data>).NotifyCanExecuteChanged();
-            (RemovePropertyCommand as Command<Property>).NotifyCanExecuteChanged();
+            RemoveShapeCommand.NotifyCanExecuteChanged();
 
-            (AddGroupLibraryCommand as Command).NotifyCanExecuteChanged();
-            (RemoveGroupLibraryCommand as Command).NotifyCanExecuteChanged();
+            AddPropertyCommand.NotifyCanExecuteChanged();
+            RemovePropertyCommand.NotifyCanExecuteChanged();
 
-            (AddGroupCommand as Command).NotifyCanExecuteChanged();
-            (RemoveGroupCommand as Command).NotifyCanExecuteChanged();
-            (InsertGroupCommand as Command<XGroup>).NotifyCanExecuteChanged();
+            AddGroupLibraryCommand.NotifyCanExecuteChanged();
+            RemoveGroupLibraryCommand.NotifyCanExecuteChanged();
 
-            (AddLayerCommand as Command).NotifyCanExecuteChanged();
-            (RemoveLayerCommand as Command).NotifyCanExecuteChanged();
+            AddGroupCommand.NotifyCanExecuteChanged();
+            RemoveGroupCommand.NotifyCanExecuteChanged();
+            InsertGroupCommand.NotifyCanExecuteChanged();
 
-            (AddStyleCommand as Command).NotifyCanExecuteChanged();
-            (RemoveStyleCommand as Command).NotifyCanExecuteChanged();
-            (ApplyStyleCommand as Command<ShapeStyle>).NotifyCanExecuteChanged();
+            AddLayerCommand.NotifyCanExecuteChanged();
+            RemoveLayerCommand.NotifyCanExecuteChanged();
 
-            (AddStyleLibraryCommand as Command).NotifyCanExecuteChanged();
-            (RemoveStyleLibraryCommand as Command).NotifyCanExecuteChanged();
+            AddStyleCommand.NotifyCanExecuteChanged();
+            RemoveStyleCommand.NotifyCanExecuteChanged();
+            ApplyStyleCommand.NotifyCanExecuteChanged();
 
-            (RemoveShapeCommand as Command).NotifyCanExecuteChanged();
+            AddStyleLibraryCommand.NotifyCanExecuteChanged();
+            RemoveStyleLibraryCommand.NotifyCanExecuteChanged();
 
-            (ZoomResetCommand as Command).NotifyCanExecuteChanged();
-            (ZoomExtentCommand as Command).NotifyCanExecuteChanged();
+            AddTemplateCommand.NotifyCanExecuteChanged();
+            RemoveTemplateCommand.NotifyCanExecuteChanged();
+            EditTemplateCommand.NotifyCanExecuteChanged();
+            ApplyTemplateCommand.NotifyCanExecuteChanged();
 
-            (AddTemplateCommand as Command).NotifyCanExecuteChanged();
-            (RemoveTemplateCommand as Command).NotifyCanExecuteChanged();
-            (EditTemplateCommand as Command).NotifyCanExecuteChanged();
-            (ApplyTemplateCommand as Command<Container>).NotifyCanExecuteChanged();
+            AddImageKeyCommand.NotifyCanExecuteChanged();
+            RemoveImageKeyCommand.NotifyCanExecuteChanged();
 
-            (AddImageKeyCommand as Command).NotifyCanExecuteChanged();
-            (RemoveImageKeyCommand as Command<string>).NotifyCanExecuteChanged();
+            SelectedItemChangedCommand.NotifyCanExecuteChanged();
 
-            (SelectedItemChangedCommand as Command<object>).NotifyCanExecuteChanged();
+            AddContainerCommand.NotifyCanExecuteChanged();
+            InsertContainerBeforeCommand.NotifyCanExecuteChanged();
+            InsertContainerAfterCommand.NotifyCanExecuteChanged();
 
-            (AddContainerCommand as Command<object>).NotifyCanExecuteChanged();
-            (InsertContainerBeforeCommand as Command<object>).NotifyCanExecuteChanged();
-            (InsertContainerAfterCommand as Command<object>).NotifyCanExecuteChanged();
+            AddDocumentCommand.NotifyCanExecuteChanged();
+            InsertDocumentBeforeCommand.NotifyCanExecuteChanged();
+            InsertDocumentAfterCommand.NotifyCanExecuteChanged();
 
-            (AddDocumentCommand as Command<object>).NotifyCanExecuteChanged();
-            (InsertDocumentBeforeCommand as Command<object>).NotifyCanExecuteChanged();
-            (InsertDocumentAfterCommand as Command<object>).NotifyCanExecuteChanged();
+            ZoomResetCommand.NotifyCanExecuteChanged();
+            ZoomExtentCommand.NotifyCanExecuteChanged();
 
-            (LoadWindowLayoutCommand as Command).NotifyCanExecuteChanged();
-            (SaveWindowLayoutCommand as Command).NotifyCanExecuteChanged();
-            (ResetWindowLayoutCommand as Command).NotifyCanExecuteChanged();
+            LoadWindowLayoutCommand.NotifyCanExecuteChanged();
+            SaveWindowLayoutCommand.NotifyCanExecuteChanged();
+            ResetWindowLayoutCommand.NotifyCanExecuteChanged();
         }
     }
 }

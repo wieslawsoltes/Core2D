@@ -1550,16 +1550,16 @@ namespace Core2D
         /// <summary>
         /// Set current record as selected shape data record.
         /// </summary>
-        /// <param name="item">The data record item.</param>
-        public void OnApplyRecord(object item)
+        /// <param name="record">The data record item.</param>
+        public void OnApplyRecord(Record record)
         {
             if (_project == null)
                 return;
 
-            if (item is Record)
+            if (record != null)
             {
                 _project.ApplyRecord(
-                    item as Record,
+                    record as Record,
                     _renderers[0].State.SelectedShape,
                     _renderers[0].State.SelectedShapes);
             }
@@ -1855,6 +1855,8 @@ namespace Core2D
                 _project.CurrentContainer = document.Containers.FirstOrDefault();
             }
         }
+
+
 
         /// <summary>
         /// Initialize default <see cref="Editor"/> tools.
