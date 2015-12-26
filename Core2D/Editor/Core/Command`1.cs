@@ -9,7 +9,7 @@ namespace Core2D
     /// 
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class Command<T> : ICommand where T : class
+    public class Command<T> : ICoreCommand<T> where T : class
     {
         /// <summary>
         /// 
@@ -71,7 +71,7 @@ namespace Core2D
         /// <param name="execute"></param>
         /// <param name="canExecute"></param>
         /// <returns></returns>
-        public static ICommand Create(Action<T> execute, Func<T, bool> canExecute = null)
+        public static ICoreCommand<T> Create(Action<T> execute, Func<T, bool> canExecute = null)
         {
             return new Command<T>(execute, canExecute);
         }

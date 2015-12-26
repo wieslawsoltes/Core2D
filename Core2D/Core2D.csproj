@@ -56,6 +56,8 @@
     <Compile Include="Editor\Core\Command.cs" />
     <Compile Include="Editor\Core\Command`1.cs" />
     <Compile Include="Editor\Core\ExportType.cs" />
+    <Compile Include="Editor\Core\ICoreCommand.cs" />
+    <Compile Include="Editor\Core\ICoreCommand`1.cs" />
     <Compile Include="Editor\Core\ToolBase.cs" />
     <Compile Include="Editor\Core\History.cs" />
     <Compile Include="Editor\Core\ImportType.cs" />

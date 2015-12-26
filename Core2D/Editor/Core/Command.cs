@@ -8,7 +8,7 @@ namespace Core2D
     /// <summary>
     /// 
     /// </summary>
-    public class Command : ICommand
+    public class Command : ICoreCommand
     {
         /// <summary>
         /// 
@@ -70,7 +70,7 @@ namespace Core2D
         /// <param name="execute"></param>
         /// <param name="canExecute"></param>
         /// <returns></returns>
-        public static ICommand Create(Action execute, Func<bool> canExecute = null)
+        public static ICoreCommand Create(Action execute, Func<bool> canExecute = null)
         {
             return new Command(execute, canExecute);
         }
