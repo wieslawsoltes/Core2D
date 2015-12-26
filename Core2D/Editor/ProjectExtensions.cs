@@ -291,47 +291,19 @@ namespace Core2D
         /// 
         /// </summary>
         /// <param name="project">The project instance.</param>
-        /// <param name="container"></param>
-        /// <param name="property"></param>
-        public static void AddProperty(this Project project, Container container, Property property)
-        {
-            var previous = container.Data.Properties;
-            var next = container.Data.Properties.Add(property);
-            project.History.Snapshot(previous, next, (p) => container.Data.Properties = p);
-            container.Data.Properties = next;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="project">The project instance.</param>
-        /// <param name="owner"></param>
+        /// <param name="data"></param>
         /// <param name="name"></param>
         /// <param name="value"></param>
-        public static void AddProperty(this Project project, object owner, string name = "New", string value = "")
+        public static void AddProperty(this Project project, Data data, string name = "New", string value = "")
         {
-            if (owner != null)
+            if (data != null)
             {
-                if (owner is Data)
+                if (data.Properties == null)
                 {
-                    var data = owner as Data;
-                    if (data.Properties == null)
-                    {
-                        data.Properties = ImmutableArray.Create<Property>();
-                    }
-
-                    project.AddProperty(data, Property.Create(name, value, data));
+                    data.Properties = ImmutableArray.Create<Property>();
                 }
-                else if (owner is Container)
-                {
-                    var container = owner as Container;
-                    if (container.Data.Properties == null)
-                    {
-                        container.Data.Properties = ImmutableArray.Create<Property>();
-                    }
 
-                    project.AddProperty(container, Property.Create(name, value, container.Data));
-                }
+                project.AddProperty(data, Property.Create(name, value, data));
             }
         }
 
@@ -339,14 +311,12 @@ namespace Core2D
         /// 
         /// </summary>
         /// <param name="project">The project instance.</param>
-        /// <param name="parameter"></param>
-        public static void RemoveProperty(this Project project, object parameter)
+        /// <param name="property"></param>
+        public static void RemoveProperty(this Project project, Property property)
         {
-            if (parameter != null && parameter is Property)
+            if (property != null)
             {
-                var property = parameter as Property;
                 var owner = property.Owner;
-
                 if (owner is Data)
                 {
                     var data = owner;
@@ -404,12 +374,12 @@ namespace Core2D
         /// </summary>
         /// <param name="project">The project instance.</param>
         /// <param name="db">The <see cref="Database"/> to remove.</param>
-        public static void RemoveDatabase(this Project project, object db)
+        public static void RemoveDatabase(this Project project, Database db)
         {
-            if (db != null && db is Database)
+            if (db != null)
             {
                 var previous = project.Databases;
-                var next = project.Databases.Remove(db as Database);
+                var next = project.Databases.Remove(db);
                 project.History.Snapshot(previous, next, (p) => project.Databases = p);
                 project.Databases = next;
 
@@ -495,13 +465,12 @@ namespace Core2D
         /// 
         /// </summary>
         /// <param name="project">The project instance.</param>
-        /// <param name="owner"></param>
+        /// <param name="db"></param>
         /// <param name="name"></param>
-        public static void AddColumn(this Project project, object owner, string name = "Column")
+        public static void AddColumn(this Project project, Database db, string name = "Column")
         {
-            if (owner != null && owner is Database)
+            if (db != null)
             {
-                var db = owner as Database;
                 if (db.Columns == null)
                 {
                     db.Columns = ImmutableArray.Create<Column>();
@@ -518,24 +487,18 @@ namespace Core2D
         /// Remove the <see cref="Column"/> object from <see cref="Column.Owner"/> <see cref="Database.Columns"/> collection.
         /// </summary>
         /// <param name="project">The project instance.</param>
-        /// <param name="parameter">The <see cref="Column"/> to remove.</param>
-        public static void RemoveColumn(this Project project, object parameter)
+        /// <param name="column">The <see cref="Column"/> to remove.</param>
+        public static void RemoveColumn(this Project project, Column column)
         {
-            if (parameter != null && parameter is Column)
+            if (column != null)
             {
-                var column = parameter as Column;
-                var owner = column.Owner;
-
-                if (owner is Database)
+                var db = column.Owner;
+                if (db != null && db.Columns != null)
                 {
-                    var db = owner as Database;
-                    if (db.Columns != null)
-                    {
-                        var previous = db.Columns;
-                        var next = db.Columns.Remove(column);
-                        project.History.Snapshot(previous, next, (p) => db.Columns = p);
-                        db.Columns = next;
-                    }
+                    var previous = db.Columns;
+                    var next = db.Columns.Remove(column);
+                    project.History.Snapshot(previous, next, (p) => db.Columns = p);
+                    db.Columns = next;
                 }
             }
         }
@@ -544,15 +507,14 @@ namespace Core2D
         /// 
         /// </summary>
         /// <param name="project">The project instance.</param>
-        /// <param name="value"></param>
-        public static void AddRecord(this Project project, string value = "<empty>")
+        public static void AddRecord(this Project project)
         {
             if (project == null || project.CurrentDatabase == null)
                 return;
 
             var db = project.CurrentDatabase;
 
-            var values = Enumerable.Repeat(value, db.Columns.Length).Select(c => Value.Create(c));
+            var values = Enumerable.Repeat("<empty>", db.Columns.Length).Select(c => Value.Create(c));
             var record = Record.Create(
                 db.Columns,
                 ImmutableArray.CreateRange<Value>(values),
@@ -588,14 +550,12 @@ namespace Core2D
         /// 
         /// </summary>
         /// <param name="project">The project instance.</param>
-        /// <param name="owner"></param>
-        public static void ResetRecord(this Project project, object owner)
+        /// <param name="data"></param>
+        public static void ResetRecord(this Project project, Data data)
         {
-            if (owner != null && owner is Data)
+            if (data != null)
             {
-                var data = owner as Data;
                 var record = data.Record;
-
                 if (record != null)
                 {
                     var previous = record;

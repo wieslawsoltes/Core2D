@@ -825,16 +825,12 @@ namespace Core2D
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="parameter"></param>
-        public void RemoveImageKey(object parameter)
+        /// <param name="key"></param>
+        public void RemoveImageKey(string key)
         {
             if (_project == null)
                 return;
 
-            if (parameter == null)
-                return;
-
-            var key = parameter as string;
             if (key != null)
             {
                 _project.RemoveImage(key);
@@ -1599,35 +1595,28 @@ namespace Core2D
         /// <summary>
         /// Insert current group to container.
         /// </summary>
-        /// <param name="parameter">The group parameter.</param>
-        public void OnInsertGroup(object parameter)
+        /// <param name="group">The group instance.</param>
+        public void OnInsertGroup(XGroup group)
         {
             if (_project == null || _project.CurrentContainer == null)
                 return;
 
-            if (parameter is XGroup)
-            {
-                var group = parameter as XGroup;
-                DropAsClone(group, 0.0, 0.0);
-            }
+            DropAsClone(group, 0.0, 0.0);
         }
 
         /// <summary>
         /// Set current style as selected shape style.
         /// </summary>
-        /// <param name="item">The shape style item.</param>
-        public void OnApplyStyle(object item)
+        /// <param name="style">The shape style item.</param>
+        public void OnApplyStyle(ShapeStyle style)
         {
             if (_project == null || _project.CurrentContainer == null)
                 return;
 
-            if (item is ShapeStyle)
-            {
-                _project.ApplyStyle(
-                    item as ShapeStyle,
-                    _renderers[0].State.SelectedShape,
-                    _renderers[0].State.SelectedShapes);
-            }
+            _project.ApplyStyle(
+                style,
+                _renderers[0].State.SelectedShape,
+                _renderers[0].State.SelectedShapes);
         }
 
         /// <summary>
@@ -1678,15 +1667,15 @@ namespace Core2D
         /// <summary>
         /// Set current template as current container's template.
         /// </summary>
-        /// <param name="item">The container item.</param>
-        public void OnApplyTemplate(object item)
+        /// <param name="container">The container item.</param>
+        public void OnApplyTemplate(Container container)
         {
             if (_project == null || _project.CurrentContainer == null)
                 return;
 
-            if (item is Container)
+            if (container != null)
             {
-                _project.ApplyTemplate(item as Container);
+                _project.ApplyTemplate(container);
             }
         }
 

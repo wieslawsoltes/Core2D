@@ -776,19 +776,19 @@ namespace Core2D
                     () => editor.IsEditMode());
 
             RemoveDatabaseCommand =
-                Command<object>.Create(
+                Command<Database>.Create(
                     (db) => editor.Project.RemoveDatabase(db),
                     (db) => editor.IsEditMode());
 
             AddColumnCommand =
-                Command<object>.Create(
-                    (owner) => editor.Project.AddColumn(owner),
-                    (owner) => editor.IsEditMode());
+                Command<Database>.Create(
+                    (db) => editor.Project.AddColumn(db),
+                    (db) => editor.IsEditMode());
 
             RemoveColumnCommand =
-                Command<object>.Create(
-                    (parameter) => editor.Project.RemoveColumn(parameter),
-                    (parameter) => editor.IsEditMode());
+                Command<Column>.Create(
+                    (column) => editor.Project.RemoveColumn(column),
+                    (column) => editor.IsEditMode());
 
             AddRecordCommand =
                 Command.Create(
@@ -801,9 +801,9 @@ namespace Core2D
                     () => editor.IsEditMode());
 
             ResetRecordCommand =
-                Command<object>.Create(
-                    (owner) => editor.Project.ResetRecord(owner),
-                    (owner) => editor.IsEditMode());
+                Command<Data>.Create(
+                    (data) => editor.Project.ResetRecord(data),
+                    (data) => editor.IsEditMode());
 
             ApplyRecordCommand =
                 Command<object>.Create(
@@ -811,14 +811,14 @@ namespace Core2D
                     (item) => editor.IsEditMode());
 
             AddPropertyCommand =
-                Command<object>.Create(
-                    (owner) => editor.Project.AddProperty(owner),
-                    (owner) => editor.IsEditMode());
+                Command<Data>.Create(
+                    (data) => editor.Project.AddProperty(data),
+                    (data) => editor.IsEditMode());
 
             RemovePropertyCommand =
-                Command<object>.Create(
-                    (parameter) => editor.Project.RemoveProperty(parameter),
-                    (parameter) => editor.IsEditMode());
+                Command<Property>.Create(
+                    (property) => editor.Project.RemoveProperty(property),
+                    (property) => editor.IsEditMode());
 
             AddGroupLibraryCommand =
                 Command.Create(
@@ -841,9 +841,9 @@ namespace Core2D
                     () => editor.IsEditMode());
 
             InsertGroupCommand =
-                Command<object>.Create(
-                    (parameter) => editor.OnInsertGroup(parameter),
-                    (parameter) => editor.IsEditMode());
+                Command<XGroup>.Create(
+                    (group) => editor.OnInsertGroup(group),
+                    (group) => editor.IsEditMode());
 
             AddLayerCommand =
                 Command.Create(
@@ -876,9 +876,9 @@ namespace Core2D
                     () => editor.IsEditMode());
 
             ApplyStyleCommand =
-                Command<object>.Create(
-                    (item) => editor.OnApplyStyle(item),
-                    (item) => editor.IsEditMode());
+                Command<ShapeStyle>.Create(
+                    (style) => editor.OnApplyStyle(style),
+                    (style) => editor.IsEditMode());
 
             RemoveShapeCommand =
                 Command.Create(
@@ -901,9 +901,9 @@ namespace Core2D
                     () => editor.IsEditMode());
 
             RemoveImageKeyCommand =
-                Command<object>.Create(
-                    (parameter) => editor.RemoveImageKey(parameter),
-                    (parameter) => editor.IsEditMode());
+                Command<string>.Create(
+                    (key) => editor.RemoveImageKey(key),
+                    (key) => editor.IsEditMode());
 
             EditTemplateCommand =
                 Command.Create(
@@ -911,9 +911,9 @@ namespace Core2D
                     () => editor.IsEditMode());
 
             ApplyTemplateCommand =
-                Command<object>.Create(
-                    (item) => editor.OnApplyTemplate(item),
-                    (item) => true);
+                Command<Container>.Create(
+                    (template) => editor.OnApplyTemplate(template),
+                    (template) => true);
 
             SelectedItemChangedCommand =
                 Command<object>.Create(
@@ -1034,32 +1034,32 @@ namespace Core2D
             (TryToConnectCommand as Command).NotifyCanExecuteChanged();
 
             (AddDatabaseCommand as Command).NotifyCanExecuteChanged();
-            (RemoveDatabaseCommand as Command<object>).NotifyCanExecuteChanged();
+            (RemoveDatabaseCommand as Command<Database>).NotifyCanExecuteChanged();
 
-            (AddColumnCommand as Command<object>).NotifyCanExecuteChanged();
-            (RemoveColumnCommand as Command<object>).NotifyCanExecuteChanged();
+            (AddColumnCommand as Command<Database>).NotifyCanExecuteChanged();
+            (RemoveColumnCommand as Command<Column>).NotifyCanExecuteChanged();
 
             (AddRecordCommand as Command).NotifyCanExecuteChanged();
             (RemoveRecordCommand as Command).NotifyCanExecuteChanged();
-            (ResetRecordCommand as Command<object>).NotifyCanExecuteChanged();
+            (ResetRecordCommand as Command<Data>).NotifyCanExecuteChanged();
             (ApplyRecordCommand as Command<object>).NotifyCanExecuteChanged();
 
-            (AddPropertyCommand as Command<object>).NotifyCanExecuteChanged();
-            (RemovePropertyCommand as Command<object>).NotifyCanExecuteChanged();
+            (AddPropertyCommand as Command<Data>).NotifyCanExecuteChanged();
+            (RemovePropertyCommand as Command<Property>).NotifyCanExecuteChanged();
 
             (AddGroupLibraryCommand as Command).NotifyCanExecuteChanged();
             (RemoveGroupLibraryCommand as Command).NotifyCanExecuteChanged();
 
             (AddGroupCommand as Command).NotifyCanExecuteChanged();
             (RemoveGroupCommand as Command).NotifyCanExecuteChanged();
-            (InsertGroupCommand as Command<object>).NotifyCanExecuteChanged();
+            (InsertGroupCommand as Command<XGroup>).NotifyCanExecuteChanged();
 
             (AddLayerCommand as Command).NotifyCanExecuteChanged();
             (RemoveLayerCommand as Command).NotifyCanExecuteChanged();
 
             (AddStyleCommand as Command).NotifyCanExecuteChanged();
             (RemoveStyleCommand as Command).NotifyCanExecuteChanged();
-            (ApplyStyleCommand as Command<object>).NotifyCanExecuteChanged();
+            (ApplyStyleCommand as Command<ShapeStyle>).NotifyCanExecuteChanged();
 
             (AddStyleLibraryCommand as Command).NotifyCanExecuteChanged();
             (RemoveStyleLibraryCommand as Command).NotifyCanExecuteChanged();
@@ -1072,10 +1072,10 @@ namespace Core2D
             (AddTemplateCommand as Command).NotifyCanExecuteChanged();
             (RemoveTemplateCommand as Command).NotifyCanExecuteChanged();
             (EditTemplateCommand as Command).NotifyCanExecuteChanged();
-            (ApplyTemplateCommand as Command<object>).NotifyCanExecuteChanged();
+            (ApplyTemplateCommand as Command<Container>).NotifyCanExecuteChanged();
 
             (AddImageKeyCommand as Command).NotifyCanExecuteChanged();
-            (RemoveImageKeyCommand as Command<object>).NotifyCanExecuteChanged();
+            (RemoveImageKeyCommand as Command<string>).NotifyCanExecuteChanged();
 
             (SelectedItemChangedCommand as Command<object>).NotifyCanExecuteChanged();
 
