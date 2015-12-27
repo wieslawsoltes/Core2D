@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Globalization;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
 
@@ -24,6 +25,14 @@ namespace Core2D.Wpf.Converters
         {
             if (values != null && values.Length == 4)
             {
+                for (int i = 0; i < 4; i++)
+                {
+                    if (values[i].GetType() != typeof(byte))
+                    {
+                        return DependencyProperty.UnsetValue;
+                    }
+                }
+
                 var brush = new SolidColorBrush(
                     Color.FromArgb(
                         (byte)values[0],
@@ -33,7 +42,7 @@ namespace Core2D.Wpf.Converters
                 brush.Freeze();
                 return brush;
             }
-            return null;
+            return DependencyProperty.UnsetValue;
         }
 
         /// <summary>
