@@ -504,11 +504,8 @@
   <data name="ContainerName" xml:space="preserve">
     <value>Name</value>
   </data>
-  <data name="ContainerProperties" xml:space="preserve">
-    <value>Properties</value>
-  </data>
-  <data name="ContainerTemplate" xml:space="preserve">
-    <value>Template</value>
+  <data name="ContainerData" xml:space="preserve">
+    <value>Data</value>
   </data>
   <data name="ContainerWidth" xml:space="preserve">
     <value>Width</value>
@@ -668,5 +665,11 @@
   </data>
   <data name="WiWindowTitleRecords" xml:space="preserve">
     <value>Records</value>
+  </data>
+  <data name="ContainerTemplate" xml:space="preserve">
+    <value>Template</value>
+  </data>
+  <data name="ContainerSize" xml:space="preserve">
+    <value>Size</value>
   </data>
 </root>

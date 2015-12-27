@@ -70,6 +70,15 @@ namespace Core2D.Wpf.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Data.
+        /// </summary>
+        public static string ContainerData {
+            get {
+                return ResourceManager.GetString("ContainerData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Height.
         /// </summary>
         public static string ContainerHeight {
@@ -88,11 +97,11 @@ namespace Core2D.Wpf.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Properties.
+        ///   Looks up a localized string similar to Size.
         /// </summary>
-        public static string ContainerProperties {
+        public static string ContainerSize {
             get {
-                return ResourceManager.GetString("ContainerProperties", resourceCulture);
+                return ResourceManager.GetString("ContainerSize", resourceCulture);
             }
         }
         
