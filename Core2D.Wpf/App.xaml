@@ -26,6 +26,28 @@
         <converters:ObjectEqualityConverter x:Key="ObjectEqualityConverter"/>
         <!-- Brushes -->
         <SolidColorBrush x:Key="BackgroundColor" Color="White"/>
+        <DrawingBrush x:Key="CheckerBoard" Viewport="0,0,20,20" ViewportUnits="Absolute" Stretch="None" TileMode="Tile">
+            <DrawingBrush.Drawing>
+                <DrawingGroup>
+                    <GeometryDrawing Brush="DarkGray">
+                        <GeometryDrawing.Geometry>
+                            <GeometryGroup>
+                                <RectangleGeometry Rect="0,0,10,10"/>
+                                <RectangleGeometry Rect="10,10,10,10"/>
+                            </GeometryGroup>
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                    <GeometryDrawing Brush="LightGray">
+                        <GeometryDrawing.Geometry>
+                            <GeometryGroup>
+                                <RectangleGeometry Rect="10,0,10,10"/>
+                                <RectangleGeometry Rect="0,10,10,10"/>
+                            </GeometryGroup>
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                </DrawingGroup>
+            </DrawingBrush.Drawing>
+        </DrawingBrush>
         <!-- Styles -->
         <Style x:Key="TextBlockLeftStyleKey" TargetType="TextBlock">
             <Setter Property="Margin" Value="5,2,5,2"/>
