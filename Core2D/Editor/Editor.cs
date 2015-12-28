@@ -167,7 +167,7 @@ namespace Core2D
         }
 
         /// <summary>
-        ///Gets or sets project factory.
+        /// Gets or sets project factory.
         /// </summary>
         public IProjectFactory ProjectFactory
         {
@@ -1160,17 +1160,6 @@ namespace Core2D
             {
                 _renderers[0].State.SelectedShape = null;
                 _renderers[0].State.SelectedShapes = null;
-                /*
-                var container = _project.CurrentContainer;
-                if (container != null)
-                {
-                    var layer = container.CurrentLayer;
-                    if (layer != null)
-                    {
-                        layer.Invalidate();
-                    }
-                }
-                */
             }
         }
 
@@ -1640,9 +1629,9 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Add image key.
         /// </summary>
-        /// <param name="path"></param>
+        /// <param name="path">The image path.</param>
         public async Task<string> OnAddImageKey(string path)
         {
             if (_project == null)
@@ -1665,9 +1654,9 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Remove image key.
         /// </summary>
-        /// <param name="key"></param>
+        /// <param name="key">The image key.</param>
         public void OnRemoveImageKey(string key)
         {
             if (_project == null)
@@ -1942,7 +1931,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Snaps value by specified snap amount.
+        /// Snap value by specified snap amount.
         /// </summary>
         /// <param name="value">The value to snap.</param>
         /// <param name="snap">The snap amount.</param>
@@ -1954,7 +1943,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Gets all shapes including grouped shapes.
+        /// Get all shapes including grouped shapes.
         /// </summary>
         /// <param name="shapes">The shapes collection.</param>
         /// <returns>All shapes including grouped shapes.</returns>
@@ -1982,7 +1971,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Gets all shapes including grouped shapes of specified type.
+        /// Get all shapes including grouped shapes of specified type.
         /// </summary>
         /// <typeparam name="T">The type of shape to include.</typeparam>
         /// <param name="shapes">The shapes collection.</param>
@@ -1993,7 +1982,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Gets all shapes including grouped shapes of specified type.
+        /// Get all shapes including grouped shapes of specified type.
         /// </summary>
         /// <typeparam name="T">The type of shapes to include.</typeparam>
         /// <param name="project">The project object.</param>
@@ -2043,7 +2032,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Invalidates renderer's cache.
+        /// Invalidate renderer's cache.
         /// </summary>
         /// <param name="isZooming">The flag indicating whether is zooming.</param>
         public void InvalidateCache(bool isZooming)
@@ -2515,7 +2504,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Clones the <see cref="XGroup"/> object.
+        /// Clone the <see cref="XGroup"/> object.
         /// </summary>
         /// <param name="group">The <see cref="XGroup"/> object.</param>
         /// <returns>The cloned <see cref="XGroup"/> object.</returns>
@@ -2554,7 +2543,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Clones the <see cref="Container"/> object.
+        /// Clone the <see cref="Container"/> object.
         /// </summary>
         /// <param name="container">The <see cref="Container"/> object.</param>
         /// <returns>The cloned <see cref="Container"/> object.</returns>
@@ -2595,7 +2584,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Clones the <see cref="Document"/> object.
+        /// Clone the <see cref="Document"/> object.
         /// </summary>
         /// <param name="document">The <see cref="Document"/> object.</param>
         /// <returns>The cloned <see cref="Document"/> object.</returns>
@@ -2936,7 +2925,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Checks if can undo.
+        /// Check if can perform the undo action.
         /// </summary>
         /// <returns>Returns true if can undo.</returns>
         public bool CanUndo()
@@ -2945,7 +2934,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Checks if can redo.
+        /// Check if can perform the redo action.
         /// </summary>
         /// <returns>Returns true if can redo.</returns>
         public bool CanRedo()
@@ -2954,7 +2943,7 @@ namespace Core2D
         }
         
         /// <summary>
-        /// 
+        /// Remove selected shapes.
         /// </summary>
         public void DeleteSelected()
         {
@@ -2997,66 +2986,66 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Select shape.
         /// </summary>
-        /// <param name="container"></param>
-        /// <param name="shape"></param>
+        /// <param name="container">The owner container.</param>
+        /// <param name="shape">The shape to select.</param>
         public void Select(Container container, BaseShape shape)
         {
-            if (container == null)
-                return;
-
-            container.CurrentShape = shape;
-            _renderers[0].State.SelectedShape = shape;
-            _renderers[0].State.SelectedShapes = default(ImmutableHashSet<BaseShape>);
-            container.CurrentLayer.Invalidate();
+            if (container != null)
+            {
+                container.CurrentShape = shape;
+                _renderers[0].State.SelectedShape = shape;
+                _renderers[0].State.SelectedShapes = default(ImmutableHashSet<BaseShape>);
+                container.CurrentLayer.Invalidate();
+            }
         }
 
         /// <summary>
-        /// 
+        /// Select shape.s
         /// </summary>
-        /// <param name="container"></param>
-        /// <param name="shapes"></param>
+        /// <param name="container">The owner container.</param>
+        /// <param name="shapes">The shapes to select.</param>
         public void Select(Container container, ImmutableHashSet<BaseShape> shapes)
         {
-            if (container == null)
-                return;
-
-            container.CurrentShape = default(BaseShape);
-            _renderers[0].State.SelectedShape = default(BaseShape);
-            _renderers[0].State.SelectedShapes = shapes;
-            container.CurrentLayer.Invalidate();
+            if (container != null)
+            {
+                container.CurrentShape = default(BaseShape);
+                _renderers[0].State.SelectedShape = default(BaseShape);
+                _renderers[0].State.SelectedShapes = shapes;
+                container.CurrentLayer.Invalidate();
+            }
         }
 
         /// <summary>
-        /// 
+        /// De-select selected shape(s).
         /// </summary>
         public void Deselect()
         {
-            if (_renderers == null)
-                return;
-
-            _renderers[0].State.SelectedShape = default(BaseShape);
-            _renderers[0].State.SelectedShapes = default(ImmutableHashSet<BaseShape>);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="container"></param>
-        public void Deselect(Container container)
-        {
-            if (container == null || _renderers == null)
-                return;
-
-            if (_renderers[0].State.SelectedShape != null
-                || _renderers[0].State.SelectedShapes != null)
+            if (_renderers != null)
             {
                 _renderers[0].State.SelectedShape = default(BaseShape);
                 _renderers[0].State.SelectedShapes = default(ImmutableHashSet<BaseShape>);
+            }
+        }
 
-                container.CurrentShape = default(BaseShape);
-                container.CurrentLayer.Invalidate();
+        /// <summary>
+        ///  De-select selected shape(s).
+        /// </summary>
+        /// <param name="container">The container object.</param>
+        public void Deselect(Container container)
+        {
+            if (container != null && _renderers != null)
+            {
+                if (_renderers[0].State.SelectedShape != null
+                    || _renderers[0].State.SelectedShapes != null)
+                {
+                    _renderers[0].State.SelectedShape = default(BaseShape);
+                    _renderers[0].State.SelectedShapes = default(ImmutableHashSet<BaseShape>);
+
+                    container.CurrentShape = default(BaseShape);
+                    container.CurrentLayer.Invalidate();
+                }
             }
         }
 
@@ -3068,29 +3057,29 @@ namespace Core2D
         /// <returns></returns>
         public bool TryToSelectShapes(Container container, XRectangle rectangle)
         {
-            if (container == null)
-                return false;
-
-            var rect = Rect2.Create(rectangle.TopLeft, rectangle.BottomRight);
-
-            var result = ShapeBounds.HitTest(container, rect, _project.Options.HitTreshold);
-            if (result != null)
+            if (container != null)
             {
-                if (result.Count > 0)
-                {
-                    if (result.Count == 1)
-                    {
-                        Select(container, result.FirstOrDefault());
-                    }
-                    else
-                    {
-                        Select(container, result);
-                    }
-                    return true;
-                }
-            }
+                var rect = Rect2.Create(rectangle.TopLeft, rectangle.BottomRight);
 
-            Deselect(container);
+                var result = ShapeBounds.HitTest(container, rect, _project.Options.HitTreshold);
+                if (result != null)
+                {
+                    if (result.Count > 0)
+                    {
+                        if (result.Count == 1)
+                        {
+                            Select(container, result.FirstOrDefault());
+                        }
+                        else
+                        {
+                            Select(container, result);
+                        }
+                        return true;
+                    }
+                }
+
+                Deselect(container);
+            }
 
             return false;
         }
@@ -3104,17 +3093,17 @@ namespace Core2D
         /// <returns></returns>
         public bool TryToSelectShape(Container container, double x, double y)
         {
-            if (container == null)
-                return false;
-
-            var result = ShapeBounds.HitTest(container, new Vector2(x, y), _project.Options.HitTreshold);
-            if (result != null)
+            if (container != null)
             {
-                Select(container, result);
-                return true;
-            }
+                var result = ShapeBounds.HitTest(container, new Vector2(x, y), _project.Options.HitTreshold);
+                if (result != null)
+                {
+                    Select(container, result);
+                    return true;
+                }
 
-            Deselect(container);
+                Deselect(container);
+            }
 
             return false;
         }
@@ -3447,50 +3436,50 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Handle mouse left button down events.
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <param name="x">The X coordinate of point.</param>
+        /// <param name="y">The Y coordinate of point.</param>
         public void LeftDown(double x, double y)
         {
             Tools[CurrentTool].LeftDown(x, y);
         }
 
         /// <summary>
-        /// 
+        /// Handle mouse left button up events.
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <param name="x">The X coordinate of point.</param>
+        /// <param name="y">The Y coordinate of point.</param>
         public void LeftUp(double x, double y)
         {
             Tools[CurrentTool].LeftUp(x, y);
         }
 
         /// <summary>
-        /// 
+        /// Handle mouse right button down events.
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <param name="x">The X coordinate of point.</param>
+        /// <param name="y">The Y coordinate of point.</param>
         public void RightDown(double x, double y)
         {
             Tools[CurrentTool].RightDown(x, y);
         }
 
         /// <summary>
-        /// 
+        /// Handle mouse right button up events.
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <param name="x">The X coordinate of point.</param>
+        /// <param name="y">The Y coordinate of point.</param>
         public void RightUp(double x, double y)
         {
             Tools[CurrentTool].RightUp(x, y);
         }
 
         /// <summary>
-        /// 
+        /// Handle mouse move events.
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <param name="x">The X coordinate of point.</param>
+        /// <param name="y">The Y coordinate of point.</param>
         public void Move(double x, double y)
         {
             Tools[CurrentTool].Move(x, y);
@@ -3506,7 +3495,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Performs freeing, releasing, or resetting unmanaged resources.
+        /// Dispose unmanaged resources.
         /// </summary>
         public void Dispose()
         {
@@ -3515,7 +3504,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Performs freeing, releasing, or resetting unmanaged resources.
+        /// Dispose unmanaged resources.
         /// </summary>
         ~Editor()
         {
@@ -3523,17 +3512,14 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Performs freeing, releasing, or resetting unmanaged resources.
+        /// Dispose unmanaged resources.
         /// </summary>
         /// <param name="disposing">The flag indicating whether disposing.</param>
         protected virtual void Dispose(bool disposing)
         {
-            if (disposing)
+            if (disposing && _log != null)
             {
-                if (_log != null)
-                {
-                    _log.Close();
-                }
+                _log.Close();
             }
         }
     }
