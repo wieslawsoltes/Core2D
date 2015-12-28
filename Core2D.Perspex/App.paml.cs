@@ -641,7 +641,7 @@ namespace Core2D.Perspex
                     if (result != null)
                     {
                         var path = result.FirstOrDefault();
-                        _editor.ImportData(path);
+                        _editor.OnImportData(path);
                     }
                 }
             }
@@ -676,7 +676,7 @@ namespace Core2D.Perspex
                     var result = await dlg.ShowAsync(_mainWindow);
                     if (result != null)
                     {
-                        _editor.ExportData(result, database);
+                        _editor.OnExportData(result, database);
                     }
                 }
             }
@@ -711,7 +711,7 @@ namespace Core2D.Perspex
                     if (result != null)
                     {
                         var path = result.FirstOrDefault();
-                        _editor.UpdateData(path, database);
+                        _editor.OnUpdateData(path, database);
                     }
                 }
             }
@@ -795,7 +795,7 @@ namespace Core2D.Perspex
                     {
                         foreach (var path in results)
                         {
-                            _editor.ImportObject(path, item, type);
+                            _editor.OnImportObject(path, item, type);
                         }
                     }
                 }
@@ -889,7 +889,7 @@ namespace Core2D.Perspex
                     var result = await dlg.ShowAsync(_mainWindow);
                     if (result != null)
                     {
-                        _editor.ExportObject(result, item, type);
+                        _editor.OnExportObject(result, item, type);
                     }
                 }
             }

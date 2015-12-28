@@ -554,7 +554,7 @@ namespace Core2D.Wpf
 
             if (dlg.ShowDialog(_mainWindow) == true)
             {
-                _editor.ImportData(dlg.FileName);
+                _editor.OnImportData(dlg.FileName);
             }
         }
 
@@ -577,7 +577,7 @@ namespace Core2D.Wpf
 
             if (dlg.ShowDialog(_mainWindow) == true)
             {
-                _editor.ExportData(dlg.FileName, database);
+                _editor.OnExportData(dlg.FileName, database);
             }
         }
 
@@ -600,7 +600,7 @@ namespace Core2D.Wpf
 
             if (dlg.ShowDialog(_mainWindow) == true)
             {
-                _editor.UpdateData(dlg.FileName, database);
+                _editor.OnUpdateData(dlg.FileName, database);
             }
         }
 
@@ -663,7 +663,7 @@ namespace Core2D.Wpf
 
                 foreach (var path in paths)
                 {
-                    _editor.ImportObject(path, item, type);
+                    _editor.OnImportObject(path, item, type);
                 }
             }
         }
@@ -734,7 +734,7 @@ namespace Core2D.Wpf
 
             if (dlg.ShowDialog(_mainWindow) == true)
             {
-                _editor.ExportObject(dlg.FileName, item, type);
+                _editor.OnExportObject(dlg.FileName, item, type);
             }
         }
 

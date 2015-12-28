@@ -907,12 +907,12 @@ namespace Core2D
 
             AddImageKeyCommand =
                 Command.Create(
-                    async () => await editor.AddImageKey(null),
+                    async () => await editor.OnAddImageKey(null),
                     () => editor.IsEditMode());
 
             RemoveImageKeyCommand =
                 Command<string>.Create(
-                    (key) => editor.RemoveImageKey(key),
+                    (key) => editor.OnRemoveImageKey(key),
                     (key) => editor.IsEditMode());
 
             SelectedItemChangedCommand =

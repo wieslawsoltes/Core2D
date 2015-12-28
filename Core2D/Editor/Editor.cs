@@ -426,7 +426,7 @@ namespace Core2D
         /// Import database.
         /// </summary>
         /// <param name="path">The database file path.</param>
-        public void ImportData(string path)
+        public void OnImportData(string path)
         {
             if (_project == null)
                 return;
@@ -457,7 +457,7 @@ namespace Core2D
         /// </summary>
         /// <param name="path">The database file path.</param>
         /// <param name="database">The database object.</param>
-        public void ExportData(string path, Database database)
+        public void OnExportData(string path, Database database)
         {
             try
             {
@@ -483,7 +483,7 @@ namespace Core2D
         /// </summary>
         /// <param name="path">The database file path.</param>
         /// <param name="database">The database object.</param>
-        public void UpdateData(string path, Database database)
+        public void OnUpdateData(string path, Database database)
         {
             try
             {
@@ -511,7 +511,7 @@ namespace Core2D
         /// <param name="path">The object file path.</param>
         /// <param name="item">The parent object.</param>
         /// <param name="type">The object type.</param>
-        public void ImportObject(string path, object item, ImportType type)
+        public void OnImportObject(string path, object item, ImportType type)
         {
             if (_serializer == null)
                 return;
@@ -714,7 +714,7 @@ namespace Core2D
         /// <param name="path">The object file path.</param>
         /// <param name="item">The parent object.</param>
         /// <param name="type">The object type.</param>
-        public void ExportObject(string path, object item, ExportType type)
+        public void OnExportObject(string path, object item, ExportType type)
         {
             if (_serializer == null)
                 return;
@@ -794,46 +794,6 @@ namespace Core2D
                         Environment.NewLine,
                         ex.StackTrace);
                 }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="path"></param>
-        public async Task<string> AddImageKey(string path)
-        {
-            if (_project == null)
-                return null;
-
-            if (path == null || string.IsNullOrEmpty(path))
-            {
-                var key = await GetImageKey();
-                if (key == null || string.IsNullOrEmpty(key))
-                    return null;
-
-                return key;
-            }
-            else
-            {
-                var bytes = System.IO.File.ReadAllBytes(path);
-                var key = _project.AddImageFromFile(path, bytes);
-                return key;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="key"></param>
-        public void RemoveImageKey(string key)
-        {
-            if (_project == null)
-                return;
-
-            if (key != null)
-            {
-                _project.RemoveImage(key);
             }
         }
 
@@ -1676,6 +1636,46 @@ namespace Core2D
             if (container != null)
             {
                 _project.ApplyTemplate(container);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        public async Task<string> OnAddImageKey(string path)
+        {
+            if (_project == null)
+                return null;
+
+            if (path == null || string.IsNullOrEmpty(path))
+            {
+                var key = await GetImageKey();
+                if (key == null || string.IsNullOrEmpty(key))
+                    return null;
+
+                return key;
+            }
+            else
+            {
+                var bytes = System.IO.File.ReadAllBytes(path);
+                var key = _project.AddImageFromFile(path, bytes);
+                return key;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="key"></param>
+        public void OnRemoveImageKey(string key)
+        {
+            if (_project == null)
+                return;
+
+            if (key != null)
+            {
+                _project.RemoveImage(key);
             }
         }
 
@@ -2665,57 +2665,57 @@ namespace Core2D
                         }
                         else if (string.Compare(ext, Constants.CsvExtension, true) == 0)
                         {
-                            ImportData(path);
+                            OnImportData(path);
                             result = true;
                         }
                         else if (string.Compare(ext, Constants.StyleExtension, true) == 0)
                         {
-                            ImportObject(path, _project.CurrentStyleLibrary, ImportType.Style);
+                            OnImportObject(path, _project.CurrentStyleLibrary, ImportType.Style);
                             result = true;
                         }
                         else if (string.Compare(ext, Constants.StylesExtension, true) == 0)
                         {
-                            ImportObject(path, _project.CurrentStyleLibrary, ImportType.Styles);
+                            OnImportObject(path, _project.CurrentStyleLibrary, ImportType.Styles);
                             result = true;
                         }
                         else if (string.Compare(ext, Constants.StyleLibraryExtension, true) == 0)
                         {
-                            ImportObject(path, _project, ImportType.StyleLibrary);
+                            OnImportObject(path, _project, ImportType.StyleLibrary);
                             result = true;
                         }
                         else if (string.Compare(ext, Constants.StyleLibrariesExtension, true) == 0)
                         {
-                            ImportObject(path, _project, ImportType.StyleLibraries);
+                            OnImportObject(path, _project, ImportType.StyleLibraries);
                             result = true;
                         }
                         else if (string.Compare(ext, Constants.GroupExtension, true) == 0)
                         {
-                            ImportObject(path, _project.CurrentGroupLibrary, ImportType.Group);
+                            OnImportObject(path, _project.CurrentGroupLibrary, ImportType.Group);
                             result = true;
                         }
                         else if (string.Compare(ext, Constants.GroupsExtension, true) == 0)
                         {
-                            ImportObject(path, _project.CurrentGroupLibrary, ImportType.Groups);
+                            OnImportObject(path, _project.CurrentGroupLibrary, ImportType.Groups);
                             result = true;
                         }
                         else if (string.Compare(ext, Constants.GroupLibraryExtension, true) == 0)
                         {
-                            ImportObject(path, _project, ImportType.GroupLibrary);
+                            OnImportObject(path, _project, ImportType.GroupLibrary);
                             result = true;
                         }
                         else if (string.Compare(ext, Constants.GroupLibrariesExtension, true) == 0)
                         {
-                            ImportObject(path, _project, ImportType.GroupLibraries);
+                            OnImportObject(path, _project, ImportType.GroupLibraries);
                             result = true;
                         }
                         else if (string.Compare(ext, Constants.TemplateExtension, true) == 0)
                         {
-                            ImportObject(path, _project, ImportType.Template);
+                            OnImportObject(path, _project, ImportType.Template);
                             result = true;
                         }
                         else if (string.Compare(ext, Constants.TemplatesExtension, true) == 0)
                         {
-                            ImportObject(path, _project, ImportType.Templates);
+                            OnImportObject(path, _project, ImportType.Templates);
                             result = true;
                         }
                     }
