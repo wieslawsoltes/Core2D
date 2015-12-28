@@ -12,10 +12,10 @@ namespace Core2D
     public static class ProjectExtensions
     {
         /// <summary>
-        /// 
+        /// Add document.
         /// </summary>
         /// <param name="project">The project instance.</param>
-        /// <param name="document"></param>
+        /// <param name="document">The document instance.</param>
         public static void AddDocument(this Project project, Document document)
         {
             var previous = project.Documents;
@@ -25,11 +25,11 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Add document at specified index.
         /// </summary>
         /// <param name="project">The project instance.</param>
-        /// <param name="document"></param>
-        /// <param name="index"></param>
+        /// <param name="document">The document instance.</param>
+        /// <param name="index">The document index.</param>
         public static void AddDocumentAt(this Project project, Document document, int index)
         {
             var previous = project.Documents;
@@ -66,10 +66,10 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Add container.
         /// </summary>
         /// <param name="project">The project instance.</param>
-        /// <param name="container"></param>
+        /// <param name="container">The container instance.</param>
         public static void AddContainer(this Project project, Container container)
         {
             var document = project.CurrentDocument;
@@ -83,11 +83,11 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Add container at specified index.
         /// </summary>
         /// <param name="project">The project instance.</param>
-        /// <param name="container"></param>
-        /// <param name="index"></param>
+        /// <param name="container">The container instance.</param>
+        /// <param name="index">The container index.</param>
         public static void AddContainerAt(this Project project, Container container, int index)
         {
             var document = project.CurrentDocument;
@@ -125,10 +125,10 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Add template.
         /// </summary>
         /// <param name="project">The project instance.</param>
-        /// <param name="template"></param>
+        /// <param name="template">The template instance.</param>
         public static void AddTemplate(this Project project, Container template)
         {
             var previous = project.Templates;
@@ -1151,13 +1151,13 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Move shape(s) by specified offset.
         /// </summary>
         /// <param name="project">The project instance.</param>
         /// <param name="shape">The selected shape.</param>
         /// <param name="shapes">The selected shapes.</param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
+        /// <param name="dx">The X coordinate offset.</param>
+        /// <param name="dy">The Y coordinate offset.</param>
         public static void MoveBy(this Project project, BaseShape shape, ImmutableHashSet<BaseShape> shapes, double dx, double dy)
         {
             if (shape != null)
