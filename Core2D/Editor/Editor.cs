@@ -1139,7 +1139,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Group selected shapes.
         /// </summary>
         public void OnGroupSelected()
         {
@@ -1149,9 +1149,9 @@ namespace Core2D
                 Select(_project.CurrentContainer, group);
             }
         }
- 
+
         /// <summary>
-        /// 
+        /// Ungroup selected shapes.
         /// </summary>
         public void OnUngroupSelected()
         {
@@ -1248,7 +1248,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Move selected shapes up.
         /// </summary>
         public void OnMoveUpSelected()
         {
@@ -1260,7 +1260,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Move selected shapes down.
         /// </summary>
         public void OnMoveDownSelected()
         {
@@ -1272,7 +1272,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Move selected shapes left.
         /// </summary>
         public void OnMoveLeftSelected()
         {
@@ -1284,7 +1284,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Move selected shapes right.
         /// </summary>
         public void OnMoveRightSelected()
         {
@@ -1998,11 +1998,11 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Move points by specified offset.
         /// </summary>
-        /// <param name="points"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
+        /// <param name="points">The points collection.</param>
+        /// <param name="dx">The X coordinate offset.</param>
+        /// <param name="dy">The Y coordinate offset.</param>
         public static void MovePointsBy(IEnumerable<XPoint> points, double dx, double dy)
         {
             foreach (var point in points)
@@ -2015,11 +2015,11 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Move shapes by specified offset.
         /// </summary>
-        /// <param name="shapes"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
+        /// <param name="shapes">The shapes collection.</param>
+        /// <param name="dx">The X coordinate offset.</param>
+        /// <param name="dy">The Y coordinate offset.</param>
         public static void MoveShapesBy(IEnumerable<BaseShape> shapes, double dx, double dy)
         {
             foreach (var shape in shapes)
@@ -3050,11 +3050,11 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Try to selected shapes inside selection rectangle.
         /// </summary>
-        /// <param name="container"></param>
-        /// <param name="rectangle"></param>
-        /// <returns></returns>
+        /// <param name="container">The container object.</param>
+        /// <param name="rectangle">The selection rectangle.</param>
+        /// <returns>True if selecting shapes was successful.</returns>
         public bool TryToSelectShapes(Container container, XRectangle rectangle)
         {
             if (container != null)
@@ -3085,12 +3085,12 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Try to selected shape at specified coordinates.
         /// </summary>
-        /// <param name="container"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <returns></returns>
+        /// <param name="container">The container object.</param>
+        /// <param name="x">The X coordinate in container.</param>
+        /// <param name="y">The Y coordinate in container.</param>
+        /// <returns>True if selecting shape was successful.</returns>
         public bool TryToSelectShape(Container container, double x, double y)
         {
             if (container != null)
@@ -3109,9 +3109,9 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Hover shape.
         /// </summary>
-        /// <param name="shape"></param>
+        /// <param name="shape">The shape to hover.</param>
         public void Hover(BaseShape shape)
         {
             Select(_project.CurrentContainer, shape);
@@ -3119,7 +3119,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// De-hover shape.
         /// </summary>
         public void Dehover()
         {
@@ -3127,9 +3127,9 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// De-hover shape.
         /// </summary>
-        /// <param name="container"></param>
+        /// <param name="container">The container object.</param>
         public void Dehover(Container container)
         {
             _hover = default(BaseShape);
@@ -3137,10 +3137,11 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Try to hover shape at specified coordinates.
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <param name="x">The X coordinate in container.</param>
+        /// <param name="y">The Y coordinate in container.</param>
+        /// <returns>True if hovering shape was successful.</returns>
         public bool TryToHoverShape(double x, double y)
         {
             if (_project == null || _project.CurrentContainer == null)
@@ -3175,13 +3176,13 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Try to split line at specified coordinates.
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <param name="point"></param>
-        /// <param name="select"></param>
-        /// <returns></returns>
+        /// <param name="x">The X coordinate in container.</param>
+        /// <param name="y">The Y coordinate in container.</param>
+        /// <param name="point">The point used for split line start or end.</param>
+        /// <param name="select">The flag indicating whether to select split line.</param>
+        /// <returns>True if line split was successful.</returns>
         public bool TryToSplitLine(double x, double y, XPoint point, bool select = false)
         {
             if (_project == null || _project.CurrentContainer == null || _project.Options == null)
@@ -3243,12 +3244,12 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Try to split lines using group connectors.
         /// </summary>
-        /// <param name="line"></param>
-        /// <param name="p0"></param>
-        /// <param name="p1"></param>
-        /// <returns></returns>
+        /// <param name="line">The line to split.</param>
+        /// <param name="p0">The first connector point.</param>
+        /// <param name="p1">The second connector point.</param>
+        /// <returns>True if line split was successful.</returns>
         public bool TryToSplitLine(XLine line, XPoint p0, XPoint p1)
         {
             if (_project == null || _project.Options == null)
@@ -3290,10 +3291,10 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Try to connect group connectors to lines.
         /// </summary>
-        /// <param name="group"></param>
-        /// <returns></returns>
+        /// <param name="group">The group to connect.</param>
+        /// <returns>True if connection was successful.</returns>
         public bool TryToConnect(XGroup group)
         {
             if (_project == null
@@ -3356,9 +3357,9 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Check if left down action is available.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>True if left down action is available.</returns>
         public bool IsLeftDownAvailable()
         {
             return _project != null
@@ -3370,9 +3371,9 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Check if left up action is available.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>True if left up action is available.</returns>
         public bool IsLeftUpAvailable()
         {
             return _project != null
@@ -3384,9 +3385,9 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Check if right down action is available.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>True if right down action is available.</returns>
         public bool IsRightDownAvailable()
         {
             return _project != null
@@ -3398,9 +3399,9 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Check if right up action is available.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>True if right up action is available.</returns>
         public bool IsRightUpAvailable()
         {
             return _project != null
@@ -3412,9 +3413,9 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Check if move action is available.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>True if move action is available.</returns>
         public bool IsMoveAvailable()
         {
             return _project != null
@@ -3426,9 +3427,9 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Check if selection is available.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>True if selection is available.</returns>
         public bool IsSelectionAvailable()
         {
             return _renderers[0].State.SelectedShape != null
