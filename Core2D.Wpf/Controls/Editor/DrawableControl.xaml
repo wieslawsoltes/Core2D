@@ -68,7 +68,7 @@
                 <Setter Property="BorderThickness" Value="0"/>
                 <Style.Triggers>
                     <DataTrigger Binding="{Binding IsTemplate}" Value="True">
-                        <Setter Property="Background" Value="{StaticResource CheckerBoard}"/>
+                        <Setter Property="Background" Value="{StaticResource TemplateCheckerBoard}"/>
                         <Setter Property="Width" Value="{Binding Width}"/>
                         <Setter Property="Height" Value="{Binding Height}"/>
                     </DataTrigger>
