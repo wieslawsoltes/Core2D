@@ -36,7 +36,7 @@ namespace Core2D
         }
 
         /// <summary>
-        ///  Handle mouse right button up events.
+        /// Handle mouse right button up events.
         /// </summary>
         /// <param name="x">The X coordinate of point.</param>
         /// <param name="y">The Y coordinate of point.</param>
