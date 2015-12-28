@@ -167,7 +167,7 @@
             <MenuItem.ItemContainerStyle>
                 <Style TargetType="MenuItem">
                     <Setter Property="Header" Value="{Binding Name}"/>
-                    <Setter Property="Command" Value="{Binding Path=Tag.Commands.ApplyTemplateCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type MenuItem}}}"/>
+                    <Setter Property="Command" Value="{x:Static core:Commands.ApplyTemplateCommand}"/>
                     <Setter Property="CommandParameter" Value="{Binding}"/>
                     <Setter Property="IsCheckable" Value="True"/>
                     <Setter Property="IsChecked" Value="False"/>
