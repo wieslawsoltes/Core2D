@@ -17,6 +17,28 @@
              Height="{Binding Project.CurrentContainer.Template.Height}" 
              custom:LayerElement.Renderer="{Binding Renderers[0]}">
     <UserControl.Resources>
+        <DrawingBrush x:Key="TemplateCheckerBoard" Viewport="0,0,20,20" ViewportUnits="Absolute" Stretch="None" TileMode="Tile">
+            <DrawingBrush.Drawing>
+                <DrawingGroup>
+                    <GeometryDrawing Brush="#FFF0F0F0">
+                        <GeometryDrawing.Geometry>
+                            <GeometryGroup>
+                                <RectangleGeometry Rect="0,0,10,10"/>
+                                <RectangleGeometry Rect="10,10,10,10"/>
+                            </GeometryGroup>
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                    <GeometryDrawing Brush="#FFF5F5F5">
+                        <GeometryDrawing.Geometry>
+                            <GeometryGroup>
+                                <RectangleGeometry Rect="10,0,10,10"/>
+                                <RectangleGeometry Rect="0,10,10,10"/>
+                            </GeometryGroup>
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                </DrawingGroup>
+            </DrawingBrush.Drawing>
+        </DrawingBrush>
         <ControlTemplate x:Key="TemplateControlTemplateKey">
             <ItemsControl ItemsSource="{Binding Layers}">
                 <ItemsControl.ItemsPanel>
