@@ -26,6 +26,68 @@ namespace Core2D.Wpf.Windows
         }
 
         /// <summary>
+        /// Initializes the mouse events.
+        /// </summary>
+        /// <param name="editor">The editor instance.</param>
+        public void InitializeMouse(Editor editor)
+        {
+            panAndZoomGrid.PreviewMouseLeftButtonDown +=
+                (sender, e) =>
+                {
+                    panAndZoomGrid.Focus();
+                    if (editor.IsLeftDownAvailable())
+                    {
+                        var p = e.GetPosition(drawableControl);
+                        editor.LeftDown(p.X, p.Y);
+                    }
+                };
+
+            panAndZoomGrid.PreviewMouseLeftButtonUp +=
+                (sender, e) =>
+                {
+                    panAndZoomGrid.Focus();
+                    if (editor.IsLeftUpAvailable())
+                    {
+                        var p = e.GetPosition(drawableControl);
+                        editor.LeftUp(p.X, p.Y);
+                    }
+                };
+
+            panAndZoomGrid.PreviewMouseRightButtonDown +=
+                (sender, e) =>
+                {
+                    panAndZoomGrid.Focus();
+                    if (editor.IsRightDownAvailable())
+                    {
+                        var p = e.GetPosition(drawableControl);
+                        editor.RightDown(p.X, p.Y);
+                    }
+                };
+
+            panAndZoomGrid.PreviewMouseRightButtonUp +=
+                (sender, e) =>
+                {
+                    panAndZoomGrid.Focus();
+                    if (editor.IsRightUpAvailable())
+                    {
+                        var p = e.GetPosition(drawableControl);
+                        editor.RightUp(p.X, p.Y);
+                    }
+                };
+
+            panAndZoomGrid.PreviewMouseMove +=
+                (sender, e) =>
+                {
+                    panAndZoomGrid.Focus();
+                    if (editor.IsMoveAvailable())
+                    {
+                        var p = e.GetPosition(drawableControl);
+                        editor.Move(p.X, p.Y);
+                    }
+                };
+        }
+
+        /// <summary>
         /// Initializes the zoom border control.
         /// </summary>
         /// <param name="editor">The editor instance.</param>

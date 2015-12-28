@@ -43,6 +43,7 @@ namespace Core2D.Wpf
 
             _mainWindow = new Windows.MainWindow();
 
+            _mainWindow.InitializeMouse(_editor);
             _mainWindow.InitializeZoom(_editor);
             _mainWindow.InitializeDrop(_editor);
 
