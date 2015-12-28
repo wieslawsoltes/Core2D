@@ -1503,7 +1503,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Performs freeing, releasing, or resetting unmanaged resources.
+        /// Dispose unmanaged resources.
         /// </summary>
         public void Dispose()
         {
@@ -1512,7 +1512,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Performs freeing, releasing, or resetting unmanaged resources.
+        /// Dispose unmanaged resources.
         /// </summary>
         ~Observer()
         {
@@ -1520,7 +1520,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Performs freeing, releasing, or resetting unmanaged resources.
+        /// Dispose unmanaged resources.
         /// </summary>
         /// <param name="disposing">The flag indicating whether disposing.</param>
         protected virtual void Dispose(bool disposing)
