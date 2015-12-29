@@ -13,6 +13,6 @@
              d:DataContext="{x:Static local:DesignerHelper.Editor}"
              d:DesignWidth="250" d:DesignHeight="400">
     <Grid>
-        <ContentControl Content="{Binding Project.CurrentContainer.CurrentShape, FallbackValue={x:Null}}"/>
+        <ContentControl x:Name="content" Content="{Binding Project.CurrentContainer.CurrentShape, FallbackValue={x:Null}}"/>
     </Grid>
 </UserControl>
