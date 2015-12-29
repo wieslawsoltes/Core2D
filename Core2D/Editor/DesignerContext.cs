@@ -337,7 +337,7 @@ namespace Core2D
                     (item) => editor.IsEditMode());
 
             Commands.ExportTemplateCommand =
-                Command<Container>.Create(
+                Command<Template>.Create(
                     (item) => { },
                     (item) => editor.IsEditMode());
 

@@ -9,7 +9,7 @@ namespace Core2D
     public class Commands
     {
         /// <summary>
-        /// Create new project, document or container.
+        /// Create new project, document or page.
         /// </summary>
         public static ICoreCommand<object> NewCommand { get; set; }
 
@@ -34,7 +34,7 @@ namespace Core2D
         public static ICoreCommand SaveAsCommand { get; set; }
 
         /// <summary>
-        /// Export project, document or container.
+        /// Export project, document or page.
         /// </summary>
         public static ICoreCommand<object> ExportCommand { get; set; }
 
@@ -151,7 +151,7 @@ namespace Core2D
         /// <summary>
         /// Export template.
         /// </summary>
-        public static ICoreCommand<Container> ExportTemplateCommand { get; set; }
+        public static ICoreCommand<Template> ExportTemplateCommand { get; set; }
 
         /// <summary>
         /// Export templates.
@@ -169,27 +169,27 @@ namespace Core2D
         public static ICoreCommand RedoCommand { get; set; }
 
         /// <summary>
-        /// Copy container or selected shapes to clipboard as Emf.
+        /// Copy page or selected shapes to clipboard as Emf.
         /// </summary>
         public static ICoreCommand CopyAsEmfCommand { get; set; }
 
         /// <summary>
-        /// Cut selected document, container or shapes to clipboard.
+        /// Cut selected document, page or shapes to clipboard.
         /// </summary>
         public static ICoreCommand<object> CutCommand { get; set; }
 
         /// <summary>
-        /// Copy document, container or shapes to clipboard.
+        /// Copy document, page or shapes to clipboard.
         /// </summary>
         public static ICoreCommand<object> CopyCommand { get; set; }
 
         /// <summary>
-        /// Paste text from clipboard as document, container or shapes.
+        /// Paste text from clipboard as document, page or shapes.
         /// </summary>
         public static ICoreCommand<object> PasteCommand { get; set; }
 
         /// <summary>
-        /// Delete selected document, container or shapes.
+        /// Delete selected document, page or shapes.
         /// </summary>
         public static ICoreCommand<object> DeleteCommand { get; set; }
 
@@ -484,7 +484,7 @@ namespace Core2D
         public static ICoreCommand EditTemplateCommand { get; set; }
 
         /// <summary>
-        /// Set current template as current container's template.
+        /// Set current template as current page's template.
         /// </summary>
         public static ICoreCommand<Template> ApplyTemplateCommand { get; set; }
 

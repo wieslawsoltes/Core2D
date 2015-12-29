@@ -248,7 +248,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Create new project, document or container.
+        /// Create new project, document or page.
         /// </summary>
         /// <param name="item">The parent item.</param>
         public void OnNew(object item)
@@ -848,7 +848,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Cut selected document, container or shapes to clipboard.
+        /// Cut selected document, page or shapes to clipboard.
         /// </summary>
         public void OnCut()
         {
@@ -874,7 +874,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Copy document, container or shapes to clipboard.
+        /// Copy document, page or shapes to clipboard.
         /// </summary>
         public void OnCopy()
         {
@@ -906,7 +906,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Paste text from clipboard as document, container or shapes.
+        /// Paste text from clipboard as document, page or shapes.
         /// </summary>
         public async void OnPaste()
         {
@@ -934,7 +934,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Cut selected document, container or shapes.
+        /// Cut selected document, page or shapes.
         /// </summary>
         /// <param name="item">The item to cut.</param>
         public void OnCut(object item)
@@ -960,7 +960,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Copy document, container or shapes to clipboard.
+        /// Copy document, page or shapes to clipboard.
         /// </summary>
         /// <param name="item">The item to copy.</param>
         public void OnCopy(object item)
@@ -984,7 +984,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Paste text from clipboard as document, container or shapes.
+        /// Paste text from clipboard as document, page or shapes.
         /// </summary>
         /// <param name="item">The item to paste.</param>
         public void OnPaste(object item)
@@ -1051,7 +1051,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Delete selected document, container or shapes.
+        /// Delete selected document, page or shapes.
         /// </summary>
         /// <param name="item">The item to delete.</param>
         public void OnDelete(object item)

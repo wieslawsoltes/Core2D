@@ -331,7 +331,7 @@ namespace Core2D.Wpf
                     (item) => editor.IsEditMode());
 
             Commands.ExportTemplateCommand =
-                Command<Container>.Create(
+                Command<Template>.Create(
                     (item) => OnExportObject(item, ExportType.Template),
                     (item) => editor.IsEditMode());
 
