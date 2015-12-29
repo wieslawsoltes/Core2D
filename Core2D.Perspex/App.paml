@@ -335,6 +335,12 @@
         <DataTemplate DataType="core:Container">
             <project:ContainerControl/>
         </DataTemplate>
+        <DataTemplate DataType="core:Template">
+            <project:TemplateControl/>
+        </DataTemplate>
+        <DataTemplate DataType="core:Page">
+            <project:PageControl/>
+        </DataTemplate>
         <DataTemplate DataType="core:Layer">
             <project:LayerControl/>
         </DataTemplate>

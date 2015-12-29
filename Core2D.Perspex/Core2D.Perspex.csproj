@@ -291,11 +291,17 @@
     <Compile Include="Controls\Project\OptionsControl.paml.cs">
       <DependentUpon>OptionsControl.paml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Project\PageControl.paml.cs">
+      <DependentUpon>PageControl.paml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Project\ProjectControl.paml.cs">
       <DependentUpon>ProjectControl.paml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Project\ShapesControl.paml.cs">
       <DependentUpon>ShapesControl.paml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Project\TemplateControl.paml.cs">
+      <DependentUpon>TemplateControl.paml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Shapes\ArcControl.paml.cs">
       <DependentUpon>ArcControl.paml</DependentUpon>
@@ -435,13 +441,21 @@
     <EmbeddedResource Include="Controls\Project\OptionsControl.paml" />
     <EmbeddedResource Include="Controls\Project\ProjectControl.paml" />
     <EmbeddedResource Include="Controls\Project\DocumentControl.paml" />
-    <EmbeddedResource Include="Controls\Project\ContainerControl.paml" />
+    <EmbeddedResource Include="Controls\Project\ContainerControl.paml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\Project\LayerControl.paml" />
     <EmbeddedResource Include="Controls\Project\ImagesControl.paml" />
     <EmbeddedResource Include="Controls\Data\ColumnsControl.paml" />
     <EmbeddedResource Include="Controls\Project\LayersControl.paml" />
     <EmbeddedResource Include="Controls\Project\ShapesControl.paml" />
     <EmbeddedResource Include="Controls\Style\StyleControl.paml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Project\PageControl.paml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Project\TemplateControl.paml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="packages.config">

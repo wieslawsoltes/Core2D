@@ -38,15 +38,15 @@ namespace Core2D.Perspex.Converters
             if (values != null && values.Count() == 6 && values.All(x => x != PerspexProperty.UnsetValue))
             {
                 var documentsLength = (int)values[0];
-                var containersLength = (int)values[1];
+                var pagesLength = (int)values[1];
                 var layersLength = (int)values[2];
                 var shapesLength = (int)values[3];
                 var selectedShape = (BaseShape)values[4];
                 var selectedShapes = (ImmutableHashSet<BaseShape>)values[5];
 
-                return string.Format("Documents: {0} - Containers: {1} - Layers: {2} - Shapes: {3} - Selected: {4}",
+                return string.Format("Documents: {0} - Pages: {1} - Layers: {2} - Shapes: {3} - Selected: {4}",
                     documentsLength,
-                    containersLength,
+                    pagesLength,
                     layersLength,
                     shapesLength,
                     selectedShape != null ? 1 : (selectedShapes != null) ? selectedShapes.Count : 0);

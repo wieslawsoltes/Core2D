@@ -15,10 +15,10 @@
                 <TextBox Text="{Binding Path=Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
             </Grid>
         </TabItem>
-        <TabItem Header="Containers" Classes="property">
-            <ListBox Items="{Binding Path=Containers}" Classes="default">
+        <TabItem Header="Pages" Classes="property">
+            <ListBox Items="{Binding Path=Pages}" Classes="default">
                 <ListBox.DataTemplates>
-                    <DataTemplate DataType="core:Container">
+                    <DataTemplate DataType="core:Page">
                         <TextBlock Text="{Binding Path=Name}" Classes="default"/>
                     </DataTemplate>
                 </ListBox.DataTemplates>

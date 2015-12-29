@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System.Collections.Immutable;
 using Perspex;
 using Perspex.Controls;
 using Perspex.Input;
@@ -119,14 +120,32 @@ namespace Core2D.Perspex.Controls.Editor
                         return;
 
                     var p = e.GetPosition(this);
-                    _state.Wheel(
-                        p.X,
-                        p.Y,
-                        e.Delta.Y,
-                        this.Bounds.Width,
-                        this.Bounds.Height,
-                        container.Template.Width,
-                        container.Template.Height);
+
+                    if (container is Template)
+                    {
+                        var template = container as Template;
+                        _state.Wheel(
+                            p.X,
+                            p.Y,
+                            e.Delta.Y,
+                            this.Bounds.Width,
+                            this.Bounds.Height,
+                            template.Width,
+                            template.Height);
+                    }
+
+                    if (container is Page)
+                    {
+                        var page = container as Page;
+                        _state.Wheel(
+                            p.X,
+                            p.Y,
+                            e.Delta.Y,
+                            this.Bounds.Width,
+                            this.Bounds.Height,
+                            page.Template.Width,
+                            page.Template.Height);
+                    }
                 };
         }
 
@@ -171,11 +190,25 @@ namespace Core2D.Perspex.Controls.Editor
             if (container == null)
                 return;
 
-            _state.CenterTo(
-                width,
-                height,
-                container.Template.Width,
-                container.Template.Height);
+            if (container is Template)
+            {
+                var template = container as Template;
+                _state.CenterTo(
+                    width,
+                    height,
+                    template.Width,
+                    template.Height);
+            }
+
+            if (container is Page)
+            {
+                var page = container as Page;
+                _state.CenterTo(
+                    width,
+                    height,
+                    page.Template.Width,
+                    page.Template.Height);
+            }
 
             editor.Invalidate();
         }
@@ -198,11 +231,25 @@ namespace Core2D.Perspex.Controls.Editor
             if (container == null)
                 return;
 
-            _state.FitTo(
-                width,
-                height,
-                container.Template.Width,
-                container.Template.Height);
+            if (container is Template)
+            {
+                var template = container as Template;
+                _state.FitTo(
+                    width,
+                    height,
+                    template.Width,
+                    template.Height);
+            }
+            
+            if (container is Page)
+            {
+                var page = container as Page;
+                _state.FitTo(
+                    width,
+                    height,
+                    page.Template.Width,
+                    page.Template.Height);
+            }
 
             editor.Invalidate();
         }
@@ -266,9 +313,10 @@ namespace Core2D.Perspex.Controls.Editor
             var translate = dc.PushPreTransform(Matrix.CreateTranslation(_state.PanX, _state.PanY));
             var scale = dc.PushPreTransform(Matrix.CreateScale(_state.Zoom, _state.Zoom));
 
-            var template = container.Template;
-            if (template != null)
+            if (container is Template)
             {
+                var template = container as Template;
+
                 DrawBackground(
                     dc,
                     template.Background,
@@ -278,40 +326,61 @@ namespace Core2D.Perspex.Controls.Editor
                 renderer.Draw(
                     dc,
                     template,
-                    container.Data.Properties,
+                    default(ImmutableArray<Property>),
                     null);
+
+                if (template.WorkingLayer != null)
+                {
+                    renderer.Draw(
+                        dc,
+                        template.WorkingLayer,
+                        default(ImmutableArray<Property>),
+                        null);
+                }
+
+                if (template.HelperLayer != null)
+                {
+                    renderer.Draw(
+                        dc,
+                        template.HelperLayer,
+                        default(ImmutableArray<Property>),
+                        null);
+                }
             }
-            else
+
+            if (container is Page)
             {
+                var page = container as Page;
+
                 DrawBackground(
                     dc,
-                    container.Background,
-                    container.Width,
-                    container.Height);
-            }
+                    page.Template.Background,
+                    page.Template.Width,
+                    page.Template.Height);
 
-            renderer.Draw(
-                dc,
-                container,
-                container.Data.Properties,
-                null);
-
-            if (container.WorkingLayer != null)
-            {
                 renderer.Draw(
                     dc,
-                    container.WorkingLayer,
-                    container.Data.Properties,
+                    page,
+                    page.Data.Properties,
                     null);
-            }
 
-            if (container.HelperLayer != null)
-            {
-                renderer.Draw(
-                    dc,
-                    container.HelperLayer,
-                    container.Data.Properties,
-                    null);
+                if (page.WorkingLayer != null)
+                {
+                    renderer.Draw(
+                        dc,
+                        page.WorkingLayer,
+                        page.Data.Properties,
+                        null);
+                }
+
+                if (page.HelperLayer != null)
+                {
+                    renderer.Draw(
+                        dc,
+                        page.HelperLayer,
+                        page.Data.Properties,
+                        null);
+                }
             }
 
             scale.Dispose();

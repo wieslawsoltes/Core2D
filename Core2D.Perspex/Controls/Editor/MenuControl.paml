@@ -79,7 +79,7 @@
         </MenuItem>
         <MenuItem Header="_Project" IsVisible="{Binding Path=Project, Converter={Static converters:IsNotNullConverter.Instance}}">
             <MenuItem Header="_Add Document" Command="{Static core:Commands.AddDocumentCommand}" CommandParameter="{Binding Path=Project}"/>
-            <MenuItem Header="_Add Container" Command="{Static core:Commands.AddContainerCommand}" CommandParameter="{Binding Path=Project.CurrentDocument}"/>
+            <MenuItem Header="_Add Page" Command="{Static core:Commands.AddPageCommand}" CommandParameter="{Binding Path=Project.CurrentDocument}"/>
             <Separator/>
             <MenuItem Header="_Document">
                 <MenuItem Header="Insert Document Bef_ore" Command="{Static core:Commands.InsertDocumentBeforeCommand}" CommandParameter="{Binding Path=Project.CurrentDocument}"/>
@@ -93,9 +93,9 @@
                 <Separator/>
                 <MenuItem Header="E_xport Document" Command="{Static core:Commands.ExportCommand}" CommandParameter="{Binding Path=Project.CurrentDocument}"/>
             </MenuItem>
-            <MenuItem Header="_Container">
-                <MenuItem Header="Insert Container Bef_ore" Command="{Static core:Commands.InsertContainerBeforeCommand}" CommandParameter="{Binding Path=Project.CurrentContainer}"/>
-                <MenuItem Header="Insert Container Aft_er" Command="{Static core:Commands.InsertContainerAfterCommand}" CommandParameter="{Binding Path=Project.CurrentContainer}"/>
+            <MenuItem Header="_Page">
+                <MenuItem Header="Insert Page Bef_ore" Command="{Static core:Commands.InsertPageBeforeCommand}" CommandParameter="{Binding Path=Project.CurrentContainer}"/>
+                <MenuItem Header="Insert Page Aft_er" Command="{Static core:Commands.InsertPageAfterCommand}" CommandParameter="{Binding Path=Project.CurrentContainer}"/>
                 <Separator/>
                 <MenuItem Header="Cu_t Container" Command="{Static core:Commands.CutCommand}" CommandParameter="{Binding Path=Project.CurrentContainer}"/>
                 <MenuItem Header="_Copy Container" Command="{Static core:Commands.CopyCommand}" CommandParameter="{Binding Path=Project.CurrentContainer}"/>
