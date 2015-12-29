@@ -1525,7 +1525,7 @@ namespace Core2D
             var group = _renderers[0].State.SelectedShape;
             if (group != null && group is XGroup)
             {
-                var clone = Clone(group as XGroup);
+                var clone = CloneGroup(group as XGroup);
                 if (clone != null)
                 {
                     _project.AddGroup(clone);
@@ -1550,7 +1550,7 @@ namespace Core2D
             if (_project == null || _project.CurrentContainer == null)
                 return;
 
-            DropAsClone(group, 0.0, 0.0);
+            DropGroupAsClone(group, 0.0, 0.0);
         }
 
         /// <summary>
@@ -2504,11 +2504,50 @@ namespace Core2D
         }
 
         /// <summary>
+        /// Clone the <see cref="BaseShape"/> object.
+        /// </summary>
+        /// <param name="shape">The <see cref="BaseShape"/> object.</param>
+        /// <returns>The cloned <see cref="BaseShape"/> object.</returns>
+        public BaseShape CloneShape(BaseShape shape)
+        {
+            if (_serializer == null)
+                return null;
+
+            try
+            {
+                var json = _serializer.Serialize(shape);
+                if (!string.IsNullOrEmpty(json))
+                {
+                    var clone = _serializer.Deserialize<BaseShape>(json);
+                    if (clone != null)
+                    {
+                        var shapes = Enumerable.Repeat(clone, 1).ToList();
+                        TryToRestoreStyles(shapes);
+                        TryToRestoreRecords(shapes);
+                        return clone;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                if (_log != null)
+                {
+                    _log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
+                }
+            }
+
+            return null;
+        }
+
+        /// <summary>
         /// Clone the <see cref="XGroup"/> object.
         /// </summary>
         /// <param name="group">The <see cref="XGroup"/> object.</param>
         /// <returns>The cloned <see cref="XGroup"/> object.</returns>
-        public XGroup Clone(XGroup group)
+        public XGroup CloneGroup(XGroup group)
         {
             if (_serializer == null)
                 return null;
@@ -2766,19 +2805,127 @@ namespace Core2D
         }
 
         /// <summary>
+        /// Drop <see cref="BaseShape"/> object in current container at specified location.
+        /// </summary>
+        /// <param name="shape">The <see cref="BaseShape"/> object.</param>
+        /// <param name="x">The X coordinate in container.</param>
+        /// <param name="y">The Y coordinate in container.</param>
+        public void DropShape(BaseShape shape, double x, double y)
+        {
+            try
+            {
+                if (_renderers[0].State.SelectedShape != null)
+                {
+                    var target = _renderers[0].State.SelectedShape;
+                    if (target is XPoint)
+                    {
+                        var point = target as XPoint;
+                        if (point != null)
+                        {
+                            point.Shape = shape;
+                        }
+                    }
+                }
+                else if (_renderers[0].State.SelectedShapes != null && _renderers[0].State.SelectedShapes.Count > 0)
+                {
+                    foreach (var target in _renderers[0].State.SelectedShapes)
+                    {
+                        if (target is XPoint)
+                        {
+                            var point = target as XPoint;
+                            if (point != null)
+                            {
+                                point.Shape = shape;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    var container = _project.CurrentContainer;
+                    if (container != null)
+                    {
+                        var target = ShapeBounds.HitTest(container, new Vector2(x, y), _project.Options.HitTreshold);
+                        if (target != null)
+                        {
+                            if (target is XPoint)
+                            {
+                                var point = target as XPoint;
+                                if (point != null)
+                                {
+                                    point.Shape = shape;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            DropShapeAsClone(shape, x, y);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                if (_log != null)
+                {
+                    _log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Drop <see cref="BaseShape"/> object in current container at specified location.
+        /// </summary>
+        /// <param name="shape">The <see cref="BaseShape"/> object.</param>
+        /// <param name="x">The X coordinate in container.</param>
+        /// <param name="y">The Y coordinate in container.</param>
+        public void DropShapeAsClone(BaseShape shape, double x, double y)
+        {
+            double sx = _project.Options.SnapToGrid ? Snap(x, _project.Options.SnapX) : x;
+            double sy = _project.Options.SnapToGrid ? Snap(y, _project.Options.SnapY) : y;
+
+            try
+            {
+                var clone = CloneShape(shape);
+                if (clone != null)
+                {
+                    Deselect(_project.CurrentContainer);
+                    clone.Move(sx, sy);
+
+                    _project.AddShape(clone);
+
+                    Select(_project.CurrentContainer, clone);
+                }
+            }
+            catch (Exception ex)
+            {
+                if (_log != null)
+                {
+                    _log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
+                }
+            }
+        }
+
+        /// <summary>
         /// Drop <see cref="XGroup"/> object in current container at specified location.
         /// </summary>
         /// <param name="group">The <see cref="XGroup"/> object.</param>
         /// <param name="x">The X coordinate in container.</param>
         /// <param name="y">The Y coordinate in container.</param>
-        public void DropAsClone(XGroup group, double x, double y)
+        public void DropGroupAsClone(XGroup group, double x, double y)
         {
             try
             {
                 double sx = _project.Options.SnapToGrid ? Snap(x, _project.Options.SnapX) : x;
                 double sy = _project.Options.SnapToGrid ? Snap(y, _project.Options.SnapY) : y;
 
-                var clone = Clone(group);
+                var clone = CloneGroup(group);
                 if (clone != null)
                 {
                     Deselect(_project.CurrentContainer);

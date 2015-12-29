@@ -165,6 +165,7 @@ namespace Core2D.Wpf.Windows
                 (s, e) =>
                 {
                     if (!e.Data.GetDataPresent(DataFormats.FileDrop)
+                        && !e.Data.GetDataPresent(typeof(BaseShape))
                         && !e.Data.GetDataPresent(typeof(XGroup))
                         && !e.Data.GetDataPresent(typeof(Record))
                         && !e.Data.GetDataPresent(typeof(ShapeStyle)))
@@ -199,6 +200,30 @@ namespace Core2D.Wpf.Windows
                         }
                     }
 
+                    if (e.Data.GetDataPresent(typeof(BaseShape)))
+                    {
+                        try
+                        {
+                            var shape = e.Data.GetData(typeof(BaseShape)) as BaseShape;
+                            if (shape != null)
+                            {
+                                var p = e.GetPosition(drawableControl);
+                                editor.DropShape(shape, p.X, p.Y);
+                                e.Handled = true;
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            if (editor.Log != null)
+                            {
+                                editor.Log.LogError("{0}{1}{2}",
+                                    ex.Message,
+                                    Environment.NewLine,
+                                    ex.StackTrace);
+                            }
+                        }
+                    }
+
                     if (e.Data.GetDataPresent(typeof(XGroup)))
                     {
                         try
@@ -207,7 +232,7 @@ namespace Core2D.Wpf.Windows
                             if (group != null)
                             {
                                 var p = e.GetPosition(drawableControl);
-                                editor.DropAsClone(group, p.X, p.Y);
+                                editor.DropGroupAsClone(group, p.X, p.Y);
                                 e.Handled = true;
                             }
                         }
