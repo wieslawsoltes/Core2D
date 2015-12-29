@@ -153,22 +153,22 @@ namespace Dependencies
         /// <returns></returns>
         private PdfPage Add(PdfDocument pdf, Core2D.Page page)
         {
-            // create A4 page with landscape orientation
+            // Create A3 page size with Landscape orientation.
             PdfPage pdfPage = pdf.AddPage();
             pdfPage.Size = PageSize.A3;
             pdfPage.Orientation = PageOrientation.Landscape;
 
             using (XGraphics gfx = XGraphics.FromPdfPage(pdfPage))
             {
-                // calculate x and y page scale factors
+                // Calculate x and y page scale factors.
                 double scaleX = pdfPage.Width.Value / page.Template.Width;
                 double scaleY = pdfPage.Height.Value / page.Template.Height;
                 double scale = Math.Min(scaleX, scaleY);
 
-                // set scaling function
+                // Set scaling function.
                 _scaleToPage = (value) => value * scale;
 
-                // draw container template contents to pdf graphics
+                // Draw container template contents to pdf graphics.
                 if (page.Template.Background.A > 0)
                 {
                     DrawBackgroundInternal(
@@ -176,10 +176,12 @@ namespace Dependencies
                         page.Template.Background,
                         Core2D.Rect2.Create(0, 0, pdfPage.Width.Value / scale, pdfPage.Height.Value / scale));
                 }
-                Draw(gfx, page.Template, page.Data.Properties, null);
 
-                // draw container contents to pdf graphics
-                Draw(gfx, page, page.Data.Properties, null);
+                // Draw template contents to pdf graphics.
+                Draw(gfx, page.Template, page.Data.Properties, page.Data.Record);
+
+                // Draw page contents to pdf graphics.
+                Draw(gfx, page, page.Data.Properties, page.Data.Record);
             }
 
             return pdfPage;
