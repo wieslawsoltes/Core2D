@@ -66,14 +66,14 @@ namespace Dependencies
             {
                 _pageWidth = page.Template.Width;
                 _pageHeight = page.Template.Height;
-                Draw(doc, page.Template, page.Data.Properties, null);
+                Draw(doc, page.Template, page.Data.Properties, page.Data.Record);
             }
             else
             {
                 throw new NullReferenceException("Container template must be set.");
             }
 
-            Draw(doc, page, page.Data.Properties, null);
+            Draw(doc, page, page.Data.Properties, page.Data.Record);
         }
 
         private static double LineweightFactor = 96.0 / 2540.0;

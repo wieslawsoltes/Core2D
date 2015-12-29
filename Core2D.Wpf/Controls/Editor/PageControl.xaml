@@ -12,7 +12,8 @@
              xmlns:editor="clr-namespace:Core2D.Wpf.Controls.Editor"
              mc:Ignorable="d" 
              d:DataContext="{x:Static local:DesignerHelper.Page}"
-             d:DesignWidth="250" d:DesignHeight="400">
+             d:DesignWidth="250" d:DesignHeight="400"
+             custom:LayerElement.Data="{Binding Data}">
     <UserControl.Style>
         <Style TargetType="UserControl">
             <Setter Property="Width" Value="{Binding Template.Width}"/>

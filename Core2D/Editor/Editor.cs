@@ -1497,7 +1497,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Set current record as selected shape data record.
+        /// Set current record as selected shape(s) or current page data record.
         /// </summary>
         /// <param name="record">The data record item.</param>
         public void OnApplyRecord(Record record)

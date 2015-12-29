@@ -25,12 +25,14 @@ namespace Dependencies
         /// <param name="bitmap"></param>
         /// <param name="shapes"></param>
         /// <param name="properties"></param>
+        /// <param name="record"></param>
         /// <param name="ic"></param>
         /// <returns></returns>
         public MemoryStream MakeMetafileStream(
             Bitmap bitmap,
             IEnumerable<BaseShape> shapes,
             ImmutableArray<Property> properties,
+            Record record,
             IImageCache ic)
         {
             var g = default(Graphics);
@@ -63,7 +65,7 @@ namespace Dependencies
                     {
                         foreach (var shape in shapes)
                         {
-                            shape.Draw(g, r, 0, 0, properties, null);
+                            shape.Draw(g, r, 0, 0, properties, record);
                         }
                     }
 
@@ -123,8 +125,8 @@ namespace Dependencies
 
                     g.PageUnit = GraphicsUnit.Display;
 
-                    r.Draw(g, page.Template, page.Data.Properties, null);
-                    r.Draw(g, page, page.Data.Properties, null);
+                    r.Draw(g, page.Template, page.Data.Properties, page.Data.Record);
+                    r.Draw(g, page, page.Data.Properties, page.Data.Record);
 
                     r.ClearCache(isZooming: false);
                 }
@@ -151,19 +153,21 @@ namespace Dependencies
         /// <param name="width"></param>
         /// <param name="height"></param>
         /// <param name="properties"></param>
+        /// <param name="record"></param>
         /// <param name="ic"></param>
         public void SetClipboard(
             IEnumerable<BaseShape> shapes,
             double width,
             double height,
             ImmutableArray<Property> properties,
+            Record record,
             IImageCache ic)
         {
             try
             {
                 using (var bitmap = new Bitmap((int)width, (int)height))
                 {
-                    using (var ms = MakeMetafileStream(bitmap, shapes, properties, ic))
+                    using (var ms = MakeMetafileStream(bitmap, shapes, properties, record, ic))
                     {
                         var data = new WPF.DataObject();
                         data.SetData(WPF.DataFormats.EnhancedMetafile, ms);

@@ -46,7 +46,7 @@ namespace Core2D
         /// <inheritdoc/>
         public override void Draw(object dc, Renderer renderer, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
-            var record = r ?? this.Data.Record;
+            var record = this.Data.Record ?? r;
 
             if (State.Flags.HasFlag(ShapeStateFlags.Visible))
             {
@@ -171,7 +171,7 @@ namespace Core2D
         /// <returns>The string bound to properties or data record.</returns>
         public string BindText(ImmutableArray<Property> db, Record r)
         {
-            var record = r ?? this.Data.Record;
+            var record = this.Data.Record ?? r;
 
             if (!string.IsNullOrEmpty(_text))
             {

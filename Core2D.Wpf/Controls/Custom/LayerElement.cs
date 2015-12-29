@@ -12,32 +12,68 @@ namespace Core2D.Wpf.Controls.Custom
     public class LayerElement : FrameworkElement
     {
         /// <summary>
-        /// Gets the <see cref="Renderer"/> from <see cref="DependencyProperty"/> object.
+        /// Gets the <see cref="Core2D.Data"/> from <see cref="DependencyProperty"/> object.
         /// </summary>
         /// <param name="obj">The <see cref="DependencyProperty"/> object.</param>
-        /// <returns>The <see cref="Renderer"/> value.</returns>
-        public static Renderer GetRenderer(DependencyObject obj)
+        /// <returns>The <see cref="Data"/> value.</returns>
+        public static Core2D.Data GetData(DependencyObject obj)
         {
-            return (Renderer)obj.GetValue(RendererProperty);
+            return (Core2D.Data)obj.GetValue(DataProperty);
         }
 
         /// <summary>
         /// Sets the <see cref="DependencyProperty"/> object value as <see cref="Renderer"/>.
         /// </summary>
         /// <param name="obj">The <see cref="DependencyProperty"/> object.</param>
-        /// <param name="value">The <see cref="Renderer"/> value.</param>
-        public static void SetRenderer(DependencyObject obj, Renderer value)
+        /// <param name="value">The <see cref="Core2D.Data"/> value.</param>
+        public static void SetData(DependencyObject obj, Core2D.Data value)
+        {
+            obj.SetValue(DataProperty, value);
+        }
+
+        /// <summary>
+        /// The attached <see cref="DependencyProperty"/> for <see cref="Core2D.Data"/> type.
+        /// </summary>
+        public static readonly DependencyProperty DataProperty =
+            DependencyProperty.RegisterAttached(
+                "Data",
+                typeof(Core2D.Data),
+                typeof(LayerElement),
+                new FrameworkPropertyMetadata(
+                    null,
+                    FrameworkPropertyMetadataOptions.Inherits |
+                    FrameworkPropertyMetadataOptions.AffectsRender |
+                    FrameworkPropertyMetadataOptions.AffectsMeasure |
+                    FrameworkPropertyMetadataOptions.AffectsArrange |
+                    FrameworkPropertyMetadataOptions.SubPropertiesDoNotAffectRender));
+
+        /// <summary>
+        /// Gets the <see cref="Core2D.Renderer"/> from <see cref="DependencyProperty"/> object.
+        /// </summary>
+        /// <param name="obj">The <see cref="DependencyProperty"/> object.</param>
+        /// <returns>The <see cref="Core2D.Renderer"/> value.</returns>
+        public static Core2D.Renderer GetRenderer(DependencyObject obj)
+        {
+            return (Core2D.Renderer)obj.GetValue(RendererProperty);
+        }
+
+        /// <summary>
+        /// Sets the <see cref="DependencyProperty"/> object value as <see cref="Core2D.Renderer"/>.
+        /// </summary>
+        /// <param name="obj">The <see cref="DependencyProperty"/> object.</param>
+        /// <param name="value">The <see cref="Core2D.Renderer"/> value.</param>
+        public static void SetRenderer(DependencyObject obj, Core2D.Renderer value)
         {
             obj.SetValue(RendererProperty, value);
         }
 
         /// <summary>
-        /// The attached <see cref="DependencyProperty"/> for <see cref="Renderer"/> type.
+        /// The attached <see cref="DependencyProperty"/> for <see cref="Core2D.Renderer"/> type.
         /// </summary>
         public static readonly DependencyProperty RendererProperty =
             DependencyProperty.RegisterAttached(
                 "Renderer",
-                typeof(Renderer),
+                typeof(Core2D.Renderer),
                 typeof(LayerElement),
                 new FrameworkPropertyMetadata(
                     null,
@@ -147,14 +183,15 @@ namespace Core2D.Wpf.Controls.Custom
                 var renderer = LayerElement.GetRenderer(this);
                 if (renderer != null)
                 {
-                    var properties = (layer.Owner != null && layer.Owner is Page) ?
-                        (layer.Owner as Page).Data.Properties : default(ImmutableArray<Property>);
+                    var data = LayerElement.GetData(this);
+                    var properties = data != null ? data.Properties : default(ImmutableArray<Property>);
+                    var record = data != null ? data.Record : default(Record);
 
                     renderer.Draw(
                         drawingContext,
                         layer,
                         properties,
-                        null);
+                        record);
                 }
             }
         }

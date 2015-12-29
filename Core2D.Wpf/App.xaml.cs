@@ -762,6 +762,7 @@ namespace Core2D.Wpf
                         page.Template.Width,
                         page.Template.Height,
                         page.Data.Properties,
+                        page.Data.Record,
                         project);
                 }
                 else if (_editor.Renderers[0].State.SelectedShapes != null)
@@ -772,6 +773,7 @@ namespace Core2D.Wpf
                         page.Template.Width,
                         page.Template.Height,
                         page.Data.Properties,
+                        page.Data.Record,
                         project);
                 }
                 else

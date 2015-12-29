@@ -327,7 +327,7 @@ namespace Core2D.Perspex.Controls.Editor
                     dc,
                     template,
                     default(ImmutableArray<Property>),
-                    null);
+                    default(Record));
 
                 if (template.WorkingLayer != null)
                 {
@@ -335,7 +335,7 @@ namespace Core2D.Perspex.Controls.Editor
                         dc,
                         template.WorkingLayer,
                         default(ImmutableArray<Property>),
-                        null);
+                        default(Record));
                 }
 
                 if (template.HelperLayer != null)
@@ -344,7 +344,7 @@ namespace Core2D.Perspex.Controls.Editor
                         dc,
                         template.HelperLayer,
                         default(ImmutableArray<Property>),
-                        null);
+                        default(Record));
                 }
             }
 
@@ -362,7 +362,7 @@ namespace Core2D.Perspex.Controls.Editor
                     dc,
                     page,
                     page.Data.Properties,
-                    null);
+                    page.Data.Record);
 
                 if (page.WorkingLayer != null)
                 {
@@ -370,7 +370,7 @@ namespace Core2D.Perspex.Controls.Editor
                         dc,
                         page.WorkingLayer,
                         page.Data.Properties,
-                        null);
+                        page.Data.Record);
                 }
 
                 if (page.HelperLayer != null)
@@ -379,7 +379,7 @@ namespace Core2D.Perspex.Controls.Editor
                         dc,
                         page.HelperLayer,
                         page.Data.Properties,
-                        null);
+                        page.Data.Record);
                 }
             }
 

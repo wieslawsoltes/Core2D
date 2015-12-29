@@ -389,7 +389,7 @@ namespace Core2D
         public static ICoreCommand<Data> ResetRecordCommand { get; set; }
 
         /// <summary>
-        /// Set current record as selected shape data record.
+        /// Set current record as selected shape(s) or current page data record.
         /// </summary>
         public static ICoreCommand<Record> ApplyRecordCommand { get; set; }
 
