@@ -23,6 +23,7 @@
             </ControlTemplate>
             <ControlTemplate x:Key="GroupsMenu">
                 <Menu Background="Transparent" HorizontalAlignment="Right">
+                    <MenuItem Header="insert" Command="{x:Static core:Commands.InsertGroupCommand}" CommandParameter="{Binding CurrentGroupLibrary.Selected}"/>
                     <MenuItem Command="{x:Static core:Commands.AddGroupCommand}" Header="+"/>
                     <MenuItem Command="{x:Static core:Commands.RemoveGroupCommand}" Header="-"/>
                 </Menu>
