@@ -751,29 +751,33 @@ namespace Core2D.Wpf
             var container = _editor.Project.CurrentContainer;
             var writer = new EmfWriter();
 
-            if (_editor.Renderers[0].State.SelectedShape != null)
+            if (container is Page)
             {
-                var shapes = Enumerable.Repeat(_editor.Renderers[0].State.SelectedShape, 1).ToList();
-                writer.SetClipboard(
-                    shapes,
-                    container.Template.Width,
-                    container.Template.Height,
-                    container.Data.Properties,
-                    project);
-            }
-            else if (_editor.Renderers[0].State.SelectedShapes != null)
-            {
-                var shapes = _editor.Renderers[0].State.SelectedShapes.ToList();
-                writer.SetClipboard(
-                    shapes,
-                    container.Template.Width,
-                    container.Template.Height,
-                    container.Data.Properties,
-                    project);
-            }
-            else
-            {
-                writer.SetClipboard(container, project);
+                var page = container as Page;
+                if (_editor.Renderers[0].State.SelectedShape != null)
+                {
+                    var shapes = Enumerable.Repeat(_editor.Renderers[0].State.SelectedShape, 1).ToList();
+                    writer.SetClipboard(
+                        shapes,
+                        page.Template.Width,
+                        page.Template.Height,
+                        page.Data.Properties,
+                        project);
+                }
+                else if (_editor.Renderers[0].State.SelectedShapes != null)
+                {
+                    var shapes = _editor.Renderers[0].State.SelectedShapes.ToList();
+                    writer.SetClipboard(
+                        shapes,
+                        page.Template.Width,
+                        page.Template.Height,
+                        page.Data.Properties,
+                        project);
+                }
+                else
+                {
+                    writer.SetClipboard(page, project);
+                }
             }
         }
 

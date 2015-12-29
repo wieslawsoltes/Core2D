@@ -115,21 +115,25 @@ namespace Core2D.Wpf.Windows
                         && editor.Project.CurrentContainer != null)
                     {
                         var container = editor.Project.CurrentContainer;
-                        if (container.Template == null)
+
+                        if (container is Template)
                         {
+                            var template = container as Template;
                             border.FitTo(
                                 width,
                                 height,
-                                container.Width,
-                                container.Height);
+                                template.Width,
+                                template.Height);
                         }
-                        else
+
+                        if (container is Page)
                         {
+                            var page = container as Page;
                             border.FitTo(
                                 width,
                                 height,
-                                container.Template.Width,
-                                container.Template.Height);
+                                page.Template.Width,
+                                page.Template.Height);
                         }
                     }
                 };
@@ -155,9 +159,9 @@ namespace Core2D.Wpf.Windows
         /// <param name="editor">The editor instance.</param>
         public void InitializeDrop(Editor editor)
         {
-            drawableControl.AllowDrop = true;
+            panAndZoomGrid.AllowDrop = true;
 
-            drawableControl.DragEnter +=
+            panAndZoomGrid.DragEnter +=
                 (s, e) =>
                 {
                     if (!e.Data.GetDataPresent(DataFormats.FileDrop)
@@ -170,7 +174,7 @@ namespace Core2D.Wpf.Windows
                     }
                 };
 
-            drawableControl.Drop +=
+            panAndZoomGrid.Drop +=
                 (s, e) =>
                 {
                     if (e.Data.GetDataPresent(DataFormats.FileDrop))

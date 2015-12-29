@@ -21,7 +21,7 @@
         xmlns:p="clr-namespace:Core2D.Wpf.Properties" 
         mc:Ignorable="d" 
         d:DataContext="{x:Static local:DesignerHelper.Editor}"
-        d:DesignWidth="1324" d:DesignHeight="724" 
+        d:DesignWidth="1340" d:DesignHeight="740" 
         Width="1324" Height="724"
         Background="{StaticResource BackgroundColor}" 
         WindowStartupLocation="CenterScreen" WindowState="Maximized" 
@@ -166,12 +166,14 @@
                                     <Border x:Name="marginBorder" ClipToBounds="False" Background="Transparent" FocusVisualStyle="{x:Null}" Focusable="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="5">
                                         <Border.Style>
                                             <Style TargetType="Border">
-                                                <Setter Property="BorderBrush" Value="Transparent"/>
-                                                <Setter Property="BorderThickness" Value="0"/>
                                                 <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding Project.CurrentContainer.IsTemplate}" Value="True">
+                                                    <DataTrigger Binding="{Binding Project.CurrentContainer, Converter={StaticResource ObjectToTypeConverter}}" Value="{x:Type core:Template}">
                                                         <Setter Property="BorderBrush" Value="Red"/>
                                                         <Setter Property="BorderThickness" Value="2"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Project.CurrentContainer, Converter={StaticResource ObjectToTypeConverter}}" Value="{x:Type core:Page}">
+                                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                                        <Setter Property="BorderThickness" Value="0"/>
                                                     </DataTrigger>
                                                 </Style.Triggers>
                                             </Style>
@@ -217,19 +219,21 @@
                                             <custom:PanAndZoomBorder x:Name="border" ClipToBounds="False" Background="Transparent" BorderBrush="{x:Null}" BorderThickness="0" FocusVisualStyle="{x:Null}" Focusable="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Tag="{Binding CancelAvailable}">
                                                 <custom:PanAndZoomBorder.Style>
                                                     <Style TargetType="{x:Type custom:PanAndZoomBorder}">
-                                                        <Setter Property="Width" Value="{Binding Project.CurrentContainer.Template.Width}"/>
-                                                        <Setter Property="Height" Value="{Binding Project.CurrentContainer.Template.Height}"/>
-                                                        <Style.Triggers>
-                                                            <DataTrigger Binding="{Binding Project.CurrentContainer.IsTemplate}" Value="True">
-                                                                <Setter Property="Width" Value="{Binding Project.CurrentContainer.Width}"/>
-                                                                <Setter Property="Height" Value="{Binding Project.CurrentContainer.Height}"/>
-                                                            </DataTrigger>
-                                                        </Style.Triggers>
+                                                        <Setter Property="Width" Value="{Binding Project.CurrentContainer.Width}"/>
+                                                        <Setter Property="Height" Value="{Binding Project.CurrentContainer.Height}"/>
                                                     </Style>
                                                 </custom:PanAndZoomBorder.Style>
-                                                <editor:DrawableControl x:Name="drawableControl">
-                                                    <editor:DrawableControl.Style>
-                                                        <Style TargetType="editor:DrawableControl">
+                                                <ContentControl x:Name="drawableControl" Content="{Binding Project.CurrentContainer}" custom:LayerElement.Renderer="{Binding Renderers[0]}">
+                                                    <ContentControl.Resources>
+                                                        <DataTemplate DataType="{x:Type core:Template}">
+                                                            <editor:TemplateControl/>
+                                                        </DataTemplate>
+                                                        <DataTemplate DataType="{x:Type core:Page}">
+                                                            <editor:PageControl/>
+                                                        </DataTemplate>
+                                                    </ContentControl.Resources>
+                                                    <ContentControl.Style>
+                                                        <Style TargetType="ContentControl">
                                                             <Setter Property="Visibility" Value="Visible"/>
                                                             <Style.Triggers>
                                                                 <DataTrigger Binding="{Binding Project.CurrentContainer}" Value="{x:Null}">
@@ -237,8 +241,8 @@
                                                                 </DataTrigger>
                                                             </Style.Triggers>
                                                         </Style>
-                                                    </editor:DrawableControl.Style>
-                                                </editor:DrawableControl>
+                                                    </ContentControl.Style>
+                                                </ContentControl>
                                             </custom:PanAndZoomBorder>
                                         </custom:PanAndZoomGrid>
                                     </Border>
@@ -288,18 +292,7 @@
                             </ad:LayoutAnchorable>
                             <ad:LayoutAnchorable x:Name="containerWindow" CanClose="False" ContentId="container" Title="{x:Static p:Resources.WindowTitleContainer}" AutoHideWidth="210">
                                 <ScrollViewer x:Name="containerScrollViewer" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Focusable="True">
-                                    <project:ContainerControl DataContext="{Binding Project.CurrentContainer, FallbackValue={x:Null}}">
-                                        <project:ContainerControl.Style>
-                                            <Style TargetType="project:ContainerControl">
-                                                <Setter Property="Visibility" Value="Visible"/>
-                                                <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding}" Value="{x:Null}">
-                                                        <Setter Property="Visibility" Value="Hidden"/>
-                                                    </DataTrigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </project:ContainerControl.Style>
-                                    </project:ContainerControl>
+                                    <ContentControl Content="{Binding Project.CurrentContainer, FallbackValue={x:Null}}"/>
                                 </ScrollViewer>
                             </ad:LayoutAnchorable>
                         </ad:LayoutAnchorablePane>

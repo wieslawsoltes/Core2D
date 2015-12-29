@@ -147,10 +147,13 @@ namespace Core2D.Wpf.Controls.Custom
                 var renderer = LayerElement.GetRenderer(this);
                 if (renderer != null)
                 {
+                    var properties = (layer.Owner != null && layer.Owner is Page) ?
+                        (layer.Owner as Page).Data.Properties : default(ImmutableArray<Property>);
+
                     renderer.Draw(
                         drawingContext,
                         layer,
-                        layer.Owner != null ? layer.Owner.Data.Properties : default(ImmutableArray<Property>),
+                        properties,
                         null);
                 }
             }
