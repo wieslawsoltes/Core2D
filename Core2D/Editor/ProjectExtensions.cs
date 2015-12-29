@@ -582,6 +582,7 @@ namespace Core2D
             var container = project.CurrentContainer;
             if (container != null)
             {
+                // Selected shape.
                 if (shape != null)
                 {
                     var previous = shape.Data.Record;
@@ -590,6 +591,7 @@ namespace Core2D
                     shape.Data.Record = next;
                 }
 
+                // Selected shapes.
                 if (shapes != null && shapes.Count > 0)
                 {
                     foreach (var s in shapes)
@@ -598,6 +600,19 @@ namespace Core2D
                         var next = record;
                         project.History.Snapshot(previous, next, (p) => s.Data.Record = p);
                         s.Data.Record = next;
+                    }
+                }
+
+                // Current page.
+                if (shape == null && shapes == null)
+                {
+                    var page = container as Page;
+                    if (page != null)
+                    {
+                        var previous = page.Data.Record;
+                        var next = record;
+                        project.History.Snapshot(previous, next, (p) => page.Data.Record = p);
+                        page.Data.Record = next;
                     }
                 }
             }
