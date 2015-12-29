@@ -164,22 +164,22 @@ namespace Core2D
 
         private void DocumentObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(Document.Containers))
+            if (e.PropertyName == nameof(Document.Pages))
             {
                 var document = sender as Document;
-                Remove(document.Containers);
-                Add(document.Containers);
+                Remove(document.Pages);
+                Add(document.Pages);
             }
 
             _invalidateShapes();
             MarkAsDirty();
         }
 
-        private void ContainerObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void PageObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(Data.Properties))
             {
-                var container = sender as Container;
+                var container = sender as Page;
                 Remove(container.Data.Properties);
                 Add(container.Data.Properties);
             }
@@ -202,13 +202,15 @@ namespace Core2D
             }
         }
 
-        private void ContainerBackgroudObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void TemplateBackgroudObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            _editor.Project.CurrentContainer.Notify(nameof(Container.Background));
-            if (_editor.Project.CurrentContainer.Template != null)
+            _editor.Project.CurrentContainer.Notify(nameof(Template.Background));
+            var page = _editor.Project.CurrentContainer as Page;
+            if (page != null)
             {
-                _editor.Project.CurrentContainer.Template.Notify(nameof(Container.Background));
+                page.Template.Notify(nameof(Template.Background));
             }
+            _invalidateLayers();
             MarkAsDirty();
         }
 
@@ -541,9 +543,9 @@ namespace Core2D
 
             document.PropertyChanged += DocumentObserver;
 
-            if (document.Containers != null)
+            if (document.Pages != null)
             {
-                foreach (var container in document.Containers)
+                foreach (var container in document.Pages)
                 {
                     Add(container);
                 }
@@ -557,71 +559,98 @@ namespace Core2D
 
             document.PropertyChanged -= DocumentObserver;
 
-            if (document.Containers != null)
+            if (document.Pages != null)
             {
-                foreach (var container in document.Containers)
+                foreach (var container in document.Pages)
                 {
                     Remove(container);
                 }
             }
         }
 
-        private void Add(Container container)
+        private void Add(Page page)
         {
-            if (container == null)
+            if (page == null)
                 return;
 
-            container.PropertyChanged += ContainerObserver;
+            page.PropertyChanged += PageObserver;
 
-            if (container.Background != null)
+            if (page.Layers != null)
             {
-                container.Background.PropertyChanged += ContainerBackgroudObserver;
+                Add(page.Layers);
             }
 
-            if (container.Layers != null)
+            if (page.Data.Properties != null)
             {
-                Add(container.Layers);
+                Add(page.Data.Properties);
             }
 
-            if (container.Data.Properties != null)
-            {
-                Add(container.Data.Properties);
-            }
-
-            container.WorkingLayer.InvalidateLayer += InvalidateLayerObserver;
-            container.HelperLayer.InvalidateLayer += InvalidateLayerObserver;
-
-            //Add(container.WorkingLayer);
-            //Add(container.HelperLayer);
+            page.WorkingLayer.InvalidateLayer += InvalidateLayerObserver;
+            page.HelperLayer.InvalidateLayer += InvalidateLayerObserver;
         }
 
-        private void Remove(Container container)
+        private void Remove(Page page)
         {
-            if (container == null)
+            if (page == null)
                 return;
 
-            container.PropertyChanged -= ContainerObserver;
+            page.PropertyChanged -= PageObserver;
 
-            if (container.Background != null)
+            if (page.Layers != null)
             {
-                container.Background.PropertyChanged -= ContainerBackgroudObserver;
+                Add(page.Layers);
             }
 
-            if (container.Layers != null)
+            if (page.Data.Properties != null)
             {
-                Add(container.Layers);
+                Remove(page.Data.Properties);
             }
 
-            if (container.Data.Properties != null)
+            page.WorkingLayer.InvalidateLayer -= InvalidateLayerObserver;
+            page.HelperLayer.InvalidateLayer -= InvalidateLayerObserver;
+        }
+
+
+        private void Add(Template template)
+        {
+            if (template == null)
+                return;
+
+            template.PropertyChanged += PageObserver;
+
+            if (template.Background != null)
             {
-                Remove(container.Data.Properties);
+                template.Background.PropertyChanged += TemplateBackgroudObserver;
             }
 
-            container.WorkingLayer.InvalidateLayer -= InvalidateLayerObserver;
-            container.HelperLayer.InvalidateLayer -= InvalidateLayerObserver;
+            if (template.Layers != null)
+            {
+                Add(template.Layers);
+            }
 
-            //Remove(container.WorkingLayer);
-            //Remove(container.HelperLayer);
+            template.WorkingLayer.InvalidateLayer += InvalidateLayerObserver;
+            template.HelperLayer.InvalidateLayer += InvalidateLayerObserver;
+        }
+
+        private void Remove(Template template)
+        {
+            if (template == null)
+                return;
+
+            template.PropertyChanged -= PageObserver;
+
+            if (template.Background != null)
+            {
+                template.Background.PropertyChanged -= TemplateBackgroudObserver;
+            }
+
+            if (template.Layers != null)
+            {
+                Add(template.Layers);
+            }
+
+            template.WorkingLayer.InvalidateLayer -= InvalidateLayerObserver;
+            template.HelperLayer.InvalidateLayer -= InvalidateLayerObserver;
         }
 
         private void Add(Layer layer)
@@ -1348,25 +1377,47 @@ namespace Core2D
             }
         }
 
-        private void Add(IEnumerable<Container> containers)
+        private void Add(IEnumerable<Page> pages)
         {
-            if (containers == null)
+            if (pages == null)
                 return;
 
-            foreach (var container in containers)
+            foreach (var page in pages)
             {
-                Add(container);
+                Add(page);
             }
         }
 
-        private void Remove(IEnumerable<Container> containers)
+        private void Remove(IEnumerable<Page> pages)
         {
-            if (containers == null)
+            if (pages == null)
                 return;
 
-            foreach (var container in containers)
+            foreach (var page in pages)
             {
-                Remove(container);
+                Remove(page);
+            }
+        }
+
+        private void Add(IEnumerable<Template> templates)
+        {
+            if (templates == null)
+                return;
+
+            foreach (var template in templates)
+            {
+                Add(template);
+            }
+        }
+
+        private void Remove(IEnumerable<Template> templates)
+        {
+            if (templates == null)
+                return;
+
+            foreach (var template in templates)
+            {
+                Remove(template);
             }
         }
 

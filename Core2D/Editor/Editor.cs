@@ -36,7 +36,7 @@ namespace Core2D
         private ITextFieldWriter<Database> _csvWriter;
         private ImmutableArray<RecentProject> _recentProjects = ImmutableArray.Create<RecentProject>();
         private RecentProject _currentRecentProject = default(RecentProject);
-        private Container _containerToCopy = default(Container);
+        private Page _pageToCopy = default(Page);
         private Document _documentToCopy = default(Document);
 
         /// <summary>
@@ -253,50 +253,50 @@ namespace Core2D
         /// <param name="item">The parent item.</param>
         public void OnNew(object item)
         {
-            if (item is Container)
+            if (item is Page)
             {
-                var selected = item as Container;
-                var document = _project.Documents.FirstOrDefault(d => d.Containers.Contains(selected));
+                var selected = item as Page;
+                var document = _project.Documents.FirstOrDefault(d => d.Pages.Contains(selected));
                 if (document != null)
                 {
-                    var container = default(Container);
+                    var page = default(Page);
                     if (_projectFactory != null)
                     {
-                        container = _projectFactory.GetContainer(_project, Constants.DefaultContainerName);
+                        page = _projectFactory.GetPage(_project, Constants.DefaultPageName);
                     }
                     else
                     {
-                        container = Container.Create(Constants.DefaultContainerName);
+                        page = Page.Create(Constants.DefaultPageName);
                     }
 
-                    var previous = document.Containers;
-                    var next = document.Containers.Add(container);
-                    _project.History.Snapshot(previous, next, (p) => document.Containers = p);
-                    document.Containers = next;
+                    var previous = document.Pages;
+                    var next = document.Pages.Add(page);
+                    _project.History.Snapshot(previous, next, (p) => document.Pages = p);
+                    document.Pages = next;
 
-                    _project.CurrentContainer = container;
+                    _project.CurrentContainer = page;
                 }
             }
             else if (item is Document)
             {
                 var selected = item as Document;
 
-                var container = default(Container);
+                var page = default(Page);
                 if (_projectFactory != null)
                 {
-                    container = _projectFactory.GetContainer(_project, Constants.DefaultContainerName);
+                    page = _projectFactory.GetPage(_project, Constants.DefaultPageName);
                 }
                 else
                 {
-                    container = Container.Create(Constants.DefaultContainerName);
+                    page = Page.Create(Constants.DefaultPageName);
                 }
 
-                var previous = selected.Containers;
-                var next = selected.Containers.Add(container);
-                _project.History.Snapshot(previous, next, (p) => selected.Containers = p);
-                selected.Containers = next;
+                var previous = selected.Pages;
+                var next = selected.Pages.Add(page);
+                _project.History.Snapshot(previous, next, (p) => selected.Pages = p);
+                selected.Pages = next;
 
-                _project.CurrentContainer = container;
+                _project.CurrentContainer = page;
             }
             else if (item is Project)
             {
@@ -316,7 +316,7 @@ namespace Core2D
                 _project.Documents = next;
 
                 _project.CurrentDocument = document;
-                _project.CurrentContainer = document.Containers.FirstOrDefault();
+                _project.CurrentContainer = document.Pages.FirstOrDefault();
             }
             else if (item is Editor || item == null)
             {
@@ -660,7 +660,7 @@ namespace Core2D
                         {
                             var project = item as Project;
                             var json = Project.ReadUtf8Text(path);
-                            var import = _serializer.Deserialize<Container>(json);
+                            var import = _serializer.Deserialize<Template>(json);
 
                             var shapes = import.Layers.SelectMany(x => x.Shapes);
                             TryToRestoreStyles(shapes);
@@ -676,7 +676,7 @@ namespace Core2D
                         {
                             var project = item as Project;
                             var json = Project.ReadUtf8Text(path);
-                            var import = _serializer.Deserialize<IList<Container>>(json);
+                            var import = _serializer.Deserialize<IList<Template>>(json);
 
                             var shapes = import.SelectMany(x => x.Layers).SelectMany(x => x.Shapes);
                             TryToRestoreStyles(shapes);
@@ -939,17 +939,17 @@ namespace Core2D
         /// <param name="item">The item to cut.</param>
         public void OnCut(object item)
         {
-            if (item is Container)
+            if (item is Page)
             {
-                var container = item as Container;
-                _containerToCopy = container;
+                var page = item as Page;
+                _pageToCopy = page;
                 _documentToCopy = default(Document);
-                _project.RemoveContainer(container);
+                _project.RemovePage(page);
             }
             else if (item is Document)
             {
                 var document = item as Document;
-                _containerToCopy = default(Container);
+                _pageToCopy = default(Page);
                 _documentToCopy = document;
                 _project.RemoveDocument(document);
             }
@@ -965,16 +965,16 @@ namespace Core2D
         /// <param name="item">The item to copy.</param>
         public void OnCopy(object item)
         {
-            if (item is Container)
+            if (item is Page)
             {
-                var container = item as Container;
-                _containerToCopy = container;
+                var page = item as Page;
+                _pageToCopy = page;
                 _documentToCopy = default(Document);
             }
             else if (item is Document)
             {
                 var document = item as Document;
-                _containerToCopy = default(Container);
+                _pageToCopy = default(Page);
                 _documentToCopy = document;
             }
             else if (item is Editor || item == null)
@@ -989,25 +989,25 @@ namespace Core2D
         /// <param name="item">The item to paste.</param>
         public void OnPaste(object item)
         {
-            if (item is Container)
+            if (item is Page)
             {
-                if (_containerToCopy != null)
+                if (_pageToCopy != null)
                 {
-                    var container = item as Container;
-                    var document = _project.Documents.FirstOrDefault(d => d.Containers.Contains(container));
+                    var page = item as Page;
+                    var document = _project.Documents.FirstOrDefault(d => d.Pages.Contains(page));
                     if (document != null)
                     {
-                        int index = document.Containers.IndexOf(container);
-                        var clone = Clone(_containerToCopy);
+                        int index = document.Pages.IndexOf(page);
+                        var clone = Clone(_pageToCopy);
 
-                        var builder = document.Containers.ToBuilder();
+                        var builder = document.Pages.ToBuilder();
                         builder[index] = clone;
-                        document.Containers = builder.ToImmutable();
+                        document.Pages = builder.ToImmutable();
 
-                        var previous = document.Containers;
+                        var previous = document.Pages;
                         var next = builder.ToImmutable();
-                        _project.History.Snapshot(previous, next, (p) => document.Containers = p);
-                        document.Containers = next;
+                        _project.History.Snapshot(previous, next, (p) => document.Pages = p);
+                        document.Pages = next;
 
                         _project.CurrentContainer = clone;
                     }
@@ -1015,15 +1015,15 @@ namespace Core2D
             }
             else if (item is Document)
             {
-                if (_containerToCopy != null)
+                if (_pageToCopy != null)
                 {
                     var document = item as Document;
-                    var clone = Clone(_containerToCopy);
+                    var clone = Clone(_pageToCopy);
 
-                    var previous = document.Containers;
-                    var next = document.Containers.Add(clone);
-                    _project.History.Snapshot(previous, next, (p) => document.Containers = p);
-                    document.Containers = next;
+                    var previous = document.Pages;
+                    var next = document.Pages.Add(clone);
+                    _project.History.Snapshot(previous, next, (p) => document.Pages = p);
+                    document.Pages = next;
 
                     _project.CurrentContainer = clone;
                 }
@@ -1056,9 +1056,9 @@ namespace Core2D
         /// <param name="item">The item to delete.</param>
         public void OnDelete(object item)
         {
-            if (item is Container)
+            if (item is Page)
             {
-                _project.RemoveContainer(item as Container);
+                _project.RemovePage(item as Page);
             }
             else if (item is Document)
             {
@@ -1576,14 +1576,14 @@ namespace Core2D
             if (_project == null)
                 return;
 
-            var template = default(Container);
+            var template = default(Template);
             if (_projectFactory != null)
             {
                 template = _projectFactory.GetTemplate(_project, "Empty");
             }
             else
             {
-                template = Container.Create(Constants.DefaultContainerName, true);
+                template = Template.Create(Constants.DefaultTemplateName);
             }
 
             _project.AddTemplate(template);
@@ -1614,10 +1614,10 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Set current template as current container's template.
+        /// Set current template as current page's template.
         /// </summary>
-        /// <param name="container">The container item.</param>
-        public void OnApplyTemplate(Container container)
+        /// <param name="container">The template object.</param>
+        public void OnApplyTemplate(Template container)
         {
             if (_project == null || _project.CurrentContainer == null)
                 return;
@@ -1681,22 +1681,22 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Add container.
+        /// Add page.
         /// </summary>
         /// <param name="item">The parent item.</param>
-        public void OnAddContainer(object item)
+        public void OnAddPage(object item)
         {
             if (_project == null || _project.CurrentDocument == null)
                 return;
 
-            var container = default(Container);
+            var container = default(Page);
             if (_projectFactory != null)
             {
-                container = _projectFactory.GetContainer(_project, Constants.DefaultContainerName);
+                container = _projectFactory.GetPage(_project, Constants.DefaultPageName);
             }
             else
             {
-                container = Container.Create(Constants.DefaultContainerName);
+                container = Page.Create(Constants.DefaultPageName);
             }
 
             _project.AddContainer(container);
@@ -1704,59 +1704,59 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Insert container before current container.
+        /// Insert page before current page.
         /// </summary>
         /// <param name="item">The parent item.</param>
-        public void OnInsertContainerBefore(object item)
+        public void OnInsertPageBefore(object item)
         {
             if (_project == null || _project.CurrentDocument == null)
                 return;
 
-            if (item is Container)
+            if (item is Page)
             {
-                var selected = item as Container;
-                int index = _project.CurrentDocument.Containers.IndexOf(selected);
+                var selected = item as Page;
+                int index = _project.CurrentDocument.Pages.IndexOf(selected);
 
-                var container = default(Container);
+                var container = default(Page);
                 if (_projectFactory != null)
                 {
-                    container = _projectFactory.GetContainer(_project, Constants.DefaultContainerName);
+                    container = _projectFactory.GetPage(_project, Constants.DefaultPageName);
                 }
                 else
                 {
-                    container = Container.Create(Constants.DefaultContainerName);
+                    container = Page.Create(Constants.DefaultPageName);
                 }
 
-                _project.AddContainerAt(container, index);
+                _project.AddPageAt(container, index);
                 _project.CurrentContainer = container;
             }
         }
 
         /// <summary>
-        /// Insert container after current container.
+        /// Insert page after current page.
         /// </summary>
         /// <param name="item">The parent item.</param>
-        public void OnInsertContainerAfter(object item)
+        public void OnInsertPageAfter(object item)
         {
             if (_project == null || _project.CurrentDocument == null)
                 return;
 
-            if (item is Container)
+            if (item is Page)
             {
-                var selected = item as Container;
-                int index = _project.CurrentDocument.Containers.IndexOf(selected);
+                var selected = item as Page;
+                int index = _project.CurrentDocument.Pages.IndexOf(selected);
 
-                var container = default(Container);
+                var container = default(Page);
                 if (_projectFactory != null)
                 {
-                    container = _projectFactory.GetContainer(_project, Constants.DefaultContainerName);
+                    container = _projectFactory.GetPage(_project, Constants.DefaultPageName);
                 }
                 else
                 {
-                    container = Container.Create(Constants.DefaultContainerName);
+                    container = Page.Create(Constants.DefaultPageName);
                 }
 
-                _project.AddContainerAt(container, index + 1);
+                _project.AddPageAt(container, index + 1);
                 _project.CurrentContainer = container;
             }
         }
@@ -1782,7 +1782,7 @@ namespace Core2D
 
             _project.AddDocument(document);
             _project.CurrentDocument = document;
-            _project.CurrentContainer = document.Containers.FirstOrDefault();
+            _project.CurrentContainer = document.Pages.FirstOrDefault();
         }
 
         /// <summary>
@@ -1811,7 +1811,7 @@ namespace Core2D
 
                 _project.AddDocumentAt(document, index);
                 _project.CurrentDocument = document;
-                _project.CurrentContainer = document.Containers.FirstOrDefault();
+                _project.CurrentContainer = document.Pages.FirstOrDefault();
             }
         }
 
@@ -1841,7 +1841,7 @@ namespace Core2D
 
                 _project.AddDocumentAt(document, index + 1);
                 _project.CurrentDocument = document;
-                _project.CurrentContainer = document.Containers.FirstOrDefault();
+                _project.CurrentContainer = document.Pages.FirstOrDefault();
             }
         }
 
@@ -1990,7 +1990,7 @@ namespace Core2D
         public static IEnumerable<T> GetAllShapes<T>(Project project)
         {
             var shapes = project.Documents
-                .SelectMany(d => d.Containers)
+                .SelectMany(d => d.Pages)
                 .SelectMany(c => c.Layers)
                 .SelectMany(l => l.Shapes);
 
@@ -2543,22 +2543,61 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Clone the <see cref="Container"/> object.
+        /// Clone the <see cref="Template"/> object.
         /// </summary>
-        /// <param name="container">The <see cref="Container"/> object.</param>
-        /// <returns>The cloned <see cref="Container"/> object.</returns>
-        public Container Clone(Container container)
+        /// <param name="template">The <see cref="Template"/> object.</param>
+        /// <returns>The cloned <see cref="Template"/> object.</returns>
+        public Container Clone(Template template)
         {
             if (_serializer == null)
                 return null;
 
             try
             {
-                var template = container.Template;
-                var json = _serializer.Serialize(container);
+                var json = _serializer.Serialize(template);
                 if (!string.IsNullOrEmpty(json))
                 {
-                    var clone = _serializer.Deserialize<Container>(json);
+                    var clone = _serializer.Deserialize<Page>(json);
+                    if (clone != null)
+                    {
+                        var shapes = clone.Layers.SelectMany(l => l.Shapes);
+                        TryToRestoreStyles(shapes);
+                        TryToRestoreRecords(shapes);
+                        return clone;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                if (_log != null)
+                {
+                    _log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
+                }
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Clone the <see cref="Page"/> object.
+        /// </summary>
+        /// <param name="page">The <see cref="Page"/> object.</param>
+        /// <returns>The cloned <see cref="Page"/> object.</returns>
+        public Page Clone(Page page)
+        {
+            if (_serializer == null)
+                return null;
+
+            try
+            {
+                var template = page.Template;
+                var json = _serializer.Serialize(page);
+                if (!string.IsNullOrEmpty(json))
+                {
+                    var clone = _serializer.Deserialize<Page>(json);
                     if (clone != null)
                     {
                         var shapes = clone.Layers.SelectMany(l => l.Shapes);
@@ -2595,16 +2634,16 @@ namespace Core2D
 
             try
             {
-                var templates = document.Containers.Select(c => c.Template).ToArray();
+                var templates = document.Pages.Select(c => c.Template).ToArray();
                 var json = _serializer.Serialize(document);
                 if (!string.IsNullOrEmpty(json))
                 {
                     var clone = _serializer.Deserialize<Document>(json);
                     if (clone != null)
                     {
-                        for (int i = 0; i < clone.Containers.Length; i++)
+                        for (int i = 0; i < clone.Pages.Length; i++)
                         {
-                            var container = clone.Containers[i];
+                            var container = clone.Pages[i];
                             var shapes = container.Layers.SelectMany(l => l.Shapes);
                             TryToRestoreStyles(shapes);
                             TryToRestoreRecords(shapes);

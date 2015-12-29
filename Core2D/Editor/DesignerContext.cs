@@ -16,9 +16,14 @@ namespace Core2D
         public static Editor Editor { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Container"/>.
+        /// The design time <see cref="Core2D.Template"/>.
         /// </summary>
-        public static Container Container { get; set; }
+        public static Template Template { get; set; }
+
+        /// <summary>
+        /// The design time <see cref="Core2D.Page"/>.
+        /// </summary>
+        public static Page Page { get; set; }
 
         /// <summary>
         /// The design time <see cref="Core2D.Document"/>.
@@ -418,11 +423,13 @@ namespace Core2D
 
             // Project
 
-            Container = Container.Create();
-            var layer = Container.Layers.FirstOrDefault();
+            Template = Template.Create();
+            Page = Page.Create();
+            var layer = Page.Layers.FirstOrDefault();
             layer.Shapes = layer.Shapes.Add(XLine.Create(0, 0, null, null));
-            Container.CurrentLayer = layer;
-            Container.CurrentShape = layer.Shapes.FirstOrDefault();
+            Page.CurrentLayer = layer;
+            Page.CurrentShape = layer.Shapes.FirstOrDefault();
+            Page.Template = Template;
 
             Document = Document.Create();
             Layer = Layer.Create();

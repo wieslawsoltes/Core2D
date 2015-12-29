@@ -27,6 +27,31 @@ namespace Core2D
         public virtual void ClearCache(bool isZooming) { }
 
         /// <summary>
+        /// Draws a <see cref="Page"/> using drawing context.
+        /// </summary>
+        /// <param name="dc">The native drawing context.</param>
+        /// <param name="page">The <see cref="Page"/> object.</param>
+        /// <param name="db">The properties database.</param>
+        /// <param name="r">The data record.</param>
+        public virtual void Draw(object dc, Page page, ImmutableArray<Property> db, Record r)
+        {
+            Draw(dc, page.Template as Container, db, r);
+            Draw(dc, page as Container, db, r);
+        }
+
+        /// <summary>
+        /// Draws a <see cref="Template"/> using drawing context.
+        /// </summary>
+        /// <param name="dc">The native drawing context.</param>
+        /// <param name="template">The <see cref="Template"/> object.</param>
+        /// <param name="db">The properties database.</param>
+        /// <param name="r">The data record.</param>
+        public virtual void Draw(object dc, Template template, ImmutableArray<Property> db, Record r)
+        {
+            Draw(dc, template as Container, db, r);
+        }
+
+        /// <summary>
         /// Draws a <see cref="Container"/> using drawing context.
         /// </summary>
         /// <param name="dc">The native drawing context.</param>

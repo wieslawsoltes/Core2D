@@ -486,7 +486,7 @@ namespace Core2D
         /// <summary>
         /// Set current template as current container's template.
         /// </summary>
-        public static ICoreCommand<Container> ApplyTemplateCommand { get; set; }
+        public static ICoreCommand<Template> ApplyTemplateCommand { get; set; }
 
         /// <summary>
         /// Add image key.
@@ -504,19 +504,19 @@ namespace Core2D
         public static ICoreCommand<object> SelectedItemChangedCommand { get; set; }
 
         /// <summary>
-        /// Add container.
+        /// Add page.
         /// </summary>
-        public static ICoreCommand<object> AddContainerCommand { get; set; }
+        public static ICoreCommand<object> AddPageCommand { get; set; }
 
         /// <summary>
-        /// Insert container before current container.
+        /// Insert page before current page.
         /// </summary>
-        public static ICoreCommand<object> InsertContainerBeforeCommand { get; set; }
+        public static ICoreCommand<object> InsertPageBeforeCommand { get; set; }
 
         /// <summary>
-        /// Insert container after current container.
+        /// Insert page after current page.
         /// </summary>
-        public static ICoreCommand<object> InsertContainerAfterCommand { get; set; }
+        public static ICoreCommand<object> InsertPageAfterCommand { get; set; }
 
         /// <summary>
         /// Add document.
@@ -900,7 +900,7 @@ namespace Core2D
                     () => editor.IsEditMode());
 
             ApplyTemplateCommand =
-                Command<Container>.Create(
+                Command<Template>.Create(
                     (template) => editor.OnApplyTemplate(template),
                     (template) => true);
 
@@ -919,19 +919,19 @@ namespace Core2D
                     (item) => editor.OnSelectedItemChanged(item),
                     (item) => editor.IsEditMode());
 
-            AddContainerCommand =
+            AddPageCommand =
                 Command<object>.Create(
-                    (item) => editor.OnAddContainer(item),
+                    (item) => editor.OnAddPage(item),
                     (item) => editor.IsEditMode());
 
-            InsertContainerBeforeCommand =
+            InsertPageBeforeCommand =
                 Command<object>.Create(
-                    (item) => editor.OnInsertContainerBefore(item),
+                    (item) => editor.OnInsertPageBefore(item),
                     (item) => editor.IsEditMode());
 
-            InsertContainerAfterCommand =
+            InsertPageAfterCommand =
                 Command<object>.Create(
-                    (item) => editor.OnInsertContainerAfter(item),
+                    (item) => editor.OnInsertPageAfter(item),
                     (item) => editor.IsEditMode());
 
             AddDocumentCommand =
@@ -1075,9 +1075,9 @@ namespace Core2D
 
             SelectedItemChangedCommand.NotifyCanExecuteChanged();
 
-            AddContainerCommand.NotifyCanExecuteChanged();
-            InsertContainerBeforeCommand.NotifyCanExecuteChanged();
-            InsertContainerAfterCommand.NotifyCanExecuteChanged();
+            AddPageCommand.NotifyCanExecuteChanged();
+            InsertPageBeforeCommand.NotifyCanExecuteChanged();
+            InsertPageAfterCommand.NotifyCanExecuteChanged();
 
             AddDocumentCommand.NotifyCanExecuteChanged();
             InsertDocumentBeforeCommand.NotifyCanExecuteChanged();
