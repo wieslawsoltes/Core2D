@@ -22,6 +22,17 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
+        <Style x:Key="TemplateMenuItemVisibilityStyle" TargetType="MenuItem">
+            <Setter Property="Visibility" Value="Visible"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Project}" Value="{x:Null}">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Project.CurrentContainer, Converter={StaticResource ObjectToTypeConverter}}" Value="{x:Type core:Template}">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
         <Style x:Key="SeparatorVisibilityStyle" TargetType="Separator">
             <Setter Property="Visibility" Value="Visible"/>
             <Style.Triggers>
@@ -163,7 +174,7 @@
             <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuDataExport}" Command="{x:Static core:Commands.ExportDataCommand}" InputGestureText=""/>
         </MenuItem>
-        <MenuItem Header="{x:Static p:Resources.MenuTemplate}" Tag="{Binding}" ItemsSource="{Binding Project.Templates}" Style="{StaticResource MenuItemVisibilityStyle}">
+        <MenuItem Header="{x:Static p:Resources.MenuTemplate}" Tag="{Binding}" ItemsSource="{Binding Project.Templates}" Style="{StaticResource TemplateMenuItemVisibilityStyle}">
             <MenuItem.ItemContainerStyle>
                 <Style TargetType="MenuItem">
                     <Setter Property="Header" Value="{Binding Name}"/>
