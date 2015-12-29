@@ -178,6 +178,7 @@ namespace Core2D.Wpf.Windows
             panAndZoomGrid.Drop +=
                 (s, e) =>
                 {
+                    // Files.
                     if (e.Data.GetDataPresent(DataFormats.FileDrop))
                     {
                         try
@@ -200,6 +201,7 @@ namespace Core2D.Wpf.Windows
                         }
                     }
 
+                    // Shapes.
                     if (e.Data.GetDataPresent(typeof(BaseShape)))
                     {
                         try
@@ -224,6 +226,7 @@ namespace Core2D.Wpf.Windows
                         }
                     }
 
+                    // Groups.
                     if (e.Data.GetDataPresent(typeof(XGroup)))
                     {
                         try
@@ -248,6 +251,7 @@ namespace Core2D.Wpf.Windows
                         }
                     }
 
+                    // Records.
                     if (e.Data.GetDataPresent(typeof(Record)))
                     {
                         try
@@ -272,6 +276,7 @@ namespace Core2D.Wpf.Windows
                         }
                     }
 
+                    // Styles.
                     if (e.Data.GetDataPresent(typeof(ShapeStyle)))
                     {
                         try
@@ -296,6 +301,7 @@ namespace Core2D.Wpf.Windows
                         }
                     }
 
+                    // Templates.
                     if (e.Data.GetDataPresent(typeof(Template)))
                     {
                         try
