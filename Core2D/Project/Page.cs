@@ -60,7 +60,7 @@ namespace Core2D
         /// <summary>
         /// 
         /// </summary>
-        public Template Template
+        public new Template Template
         {
             get { return _template; }
             set { Update(ref _template, value); }

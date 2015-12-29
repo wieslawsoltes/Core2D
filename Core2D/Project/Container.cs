@@ -73,7 +73,15 @@ namespace Core2D
         /// <summary>
         /// 
         /// </summary>
-        public void Clear()
+        public virtual Container Template
+        {
+            get { return this; }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public virtual void Clear()
         {
             foreach (var layer in Layers)
             {
