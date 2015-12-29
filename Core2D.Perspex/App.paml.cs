@@ -369,7 +369,7 @@ namespace Core2D.Perspex
                     (item) => editor.IsEditMode());
 
             Commands.ExportTemplateCommand =
-                Command<Container>.Create(
+                Command<Template>.Create(
                     async (item) => await OnExportObject(item, ExportType.Template),
                     (item) => editor.IsEditMode());
 
