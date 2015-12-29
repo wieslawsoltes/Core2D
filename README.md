@@ -60,7 +60,7 @@ The core library and editor are portable and should work on all platforms where 
 
 ### Other Dependencies
 
-* [.net dxf Reader-Writer](http://netdxf.codeplex.com/) Run `git submodule update --init` in project directory.
+* [.net dxf Reader-Writer](http://netdxf.codeplex.com/) Run `git submodule update --init --recursive` in project directory.
 * [GTK# for .NET](http://www.mono-project.com/download/#download-win) Needed for Gtk on Windows.
 
 ## Contact
