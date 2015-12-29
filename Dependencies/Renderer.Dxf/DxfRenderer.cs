@@ -45,12 +45,12 @@ namespace Dependencies
         /// 
         /// </summary>
         /// <param name="path"></param>
-        /// <param name="container"></param>
-        public void Save(string path, Core2D.Container container)
+        /// <param name="page"></param>
+        public void Save(string path, Core2D.Page page)
         {
             _outputPath = System.IO.Path.GetDirectoryName(path);
             var doc = new DxfDocument(DxfVersion.AutoCad2010);
-            Add(doc, container);
+            Add(doc, page);
             doc.Save(path);
             ClearCache(isZooming: false);
         }
@@ -59,21 +59,21 @@ namespace Dependencies
         /// 
         /// </summary>
         /// <param name="doc"></param>
-        /// <param name="container"></param>
-        private void Add(DxfDocument doc, Core2D.Container container)
+        /// <param name="page"></param>
+        private void Add(DxfDocument doc, Core2D.Page page)
         {
-            if (container.Template != null)
+            if (page.Template != null)
             {
-                _pageWidth = container.Template.Width;
-                _pageHeight = container.Template.Height;
-                Draw(doc, container.Template, container.Data.Properties, null);
+                _pageWidth = page.Template.Width;
+                _pageHeight = page.Template.Height;
+                Draw(doc, page.Template, page.Data.Properties, null);
             }
             else
             {
                 throw new NullReferenceException("Container template must be set.");
             }
 
-            Draw(doc, container, container.Data.Properties, null);
+            Draw(doc, page, page.Data.Properties, null);
         }
 
         private static double LineweightFactor = 96.0 / 2540.0;

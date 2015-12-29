@@ -89,12 +89,12 @@ namespace Dependencies
         /// 
         /// </summary>
         /// <param name="bitmap"></param>
-        /// <param name="container"></param>
+        /// <param name="page"></param>
         /// <param name="ic"></param>
         /// <returns></returns>
         public MemoryStream MakeMetafileStream(
             Bitmap bitmap,
-            Container container,
+            Page page,
             IImageCache ic)
         {
             var g = default(Graphics);
@@ -123,12 +123,9 @@ namespace Dependencies
 
                     g.PageUnit = GraphicsUnit.Display;
 
-                    if (container.Template != null)
-                    {
-                        r.Draw(g, container.Template, container.Data.Properties, null);
-                    }
+                    r.Draw(g, page.Template, page.Data.Properties, null);
+                    r.Draw(g, page, page.Data.Properties, null);
 
-                    r.Draw(g, container, container.Data.Properties, null);
                     r.ClearCache(isZooming: false);
                 }
             }
@@ -184,18 +181,18 @@ namespace Dependencies
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="container"></param>
+        /// <param name="page"></param>
         /// <param name="ic"></param>
-        public void SetClipboard(Container container, IImageCache ic)
+        public void SetClipboard(Page page, IImageCache ic)
         {
             try
             {
-                if (container == null || container.Template == null)
+                if (page == null || page.Template == null)
                     return;
                 
-                using (var bitmap = new Bitmap((int)container.Template.Width, (int)container.Template.Height))
+                using (var bitmap = new Bitmap((int)page.Template.Width, (int)page.Template.Height))
                 {
-                    using (var ms = MakeMetafileStream(bitmap, container, ic))
+                    using (var ms = MakeMetafileStream(bitmap, page, ic))
                     {
                         var data = new WPF.DataObject();
                         data.SetData(WPF.DataFormats.EnhancedMetafile, ms);
@@ -214,16 +211,16 @@ namespace Dependencies
         /// 
         /// </summary>
         /// <param name="path"></param>
-        /// <param name="container"></param>
+        /// <param name="page"></param>
         /// <param name="ic"></param>
-        public void Save(string path, Container container, IImageCache ic)
+        public void Save(string path, Page page, IImageCache ic)
         {
-            if (container == null || container.Template == null)
+            if (page == null || page.Template == null)
                 return;
             
-            using (var bitmap = new Bitmap((int)container.Template.Width, (int)container.Template.Height))
+            using (var bitmap = new Bitmap((int)page.Template.Width, (int)page.Template.Height))
             {
-                using (var ms = MakeMetafileStream(bitmap, container, ic))
+                using (var ms = MakeMetafileStream(bitmap, page, ic))
                 {
                     using (var fs = File.Create(path))
                     {

@@ -44,12 +44,12 @@ namespace Dependencies
         /// 
         /// </summary>
         /// <param name="path"></param>
-        /// <param name="container"></param>
-        public void Save(string path, Core2D.Container container)
+        /// <param name="page"></param>
+        public void Save(string path, Core2D.Page page)
         {
             using (var pdf = new PdfDocument())
             {
-                Add(pdf, container);
+                Add(pdf, page);
                 pdf.Save(path);
             }
         }
@@ -65,7 +65,7 @@ namespace Dependencies
             {
                 var documentOutline = default(PdfOutline);
 
-                foreach (var container in document.Containers)
+                foreach (var container in document.Pages)
                 {
                     var page = Add(pdf, container);
 
@@ -107,7 +107,7 @@ namespace Dependencies
                 {
                     var documentOutline = default(PdfOutline);
 
-                    foreach (var container in document.Containers)
+                    foreach (var container in document.Pages)
                     {
                         var page = Add(pdf, container);
 
@@ -149,53 +149,40 @@ namespace Dependencies
         /// 
         /// </summary>
         /// <param name="pdf"></param>
-        /// <param name="container"></param>
+        /// <param name="page"></param>
         /// <returns></returns>
-        private PdfPage Add(PdfDocument pdf, Core2D.Container container)
+        private PdfPage Add(PdfDocument pdf, Core2D.Page page)
         {
             // create A4 page with landscape orientation
-            PdfPage page = pdf.AddPage();
-            page.Size = PageSize.A3;
-            page.Orientation = PageOrientation.Landscape;
+            PdfPage pdfPage = pdf.AddPage();
+            pdfPage.Size = PageSize.A3;
+            pdfPage.Orientation = PageOrientation.Landscape;
 
-            using (XGraphics gfx = XGraphics.FromPdfPage(page))
+            using (XGraphics gfx = XGraphics.FromPdfPage(pdfPage))
             {
                 // calculate x and y page scale factors
-                double scaleX = page.Width.Value / (container.Template != null ? container.Template.Width : container.Width);
-                double scaleY = page.Height.Value / (container.Template != null ? container.Template.Height : container.Height);
+                double scaleX = pdfPage.Width.Value / page.Template.Width;
+                double scaleY = pdfPage.Height.Value / page.Template.Height;
                 double scale = Math.Min(scaleX, scaleY);
 
                 // set scaling function
                 _scaleToPage = (value) => value * scale;
 
                 // draw container template contents to pdf graphics
-                if (container.Template != null)
+                if (page.Template.Background.A > 0)
                 {
-                    if (container.Template.Background.A > 0)
-                    {
-                        DrawBackgroundInternal(
-                            gfx,
-                            container.Template.Background,
-                            Core2D.Rect2.Create(0, 0, page.Width.Value / scale, page.Height.Value / scale));
-                    }
-                    Draw(gfx, container.Template, container.Data.Properties, null);
+                    DrawBackgroundInternal(
+                        gfx,
+                        page.Template.Background,
+                        Core2D.Rect2.Create(0, 0, pdfPage.Width.Value / scale, pdfPage.Height.Value / scale));
                 }
-                else
-                {
-                    if (container.Background.A > 0)
-                    {
-                        DrawBackgroundInternal(
-                            gfx,
-                            container.Background,
-                            Core2D.Rect2.Create(0, 0, page.Width.Value / scale, page.Height.Value / scale));
-                    }
-                }
+                Draw(gfx, page.Template, page.Data.Properties, null);
 
                 // draw container contents to pdf graphics
-                Draw(gfx, container, container.Data.Properties, null);
+                Draw(gfx, page, page.Data.Properties, null);
             }
 
-            return page;
+            return pdfPage;
         }
 
         /// <summary>
