@@ -73,22 +73,22 @@
         </TabItem>
         <TabItem Header="{x:Static p:Resources.OptionsHeaderAdvanced}">
             <TabControl>
-                <TabItem Header="PointShape">
+                <TabItem x:Name="pointShape" Header="PointShape">
                     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                         <ContentControl Content="{Binding PointShape}"/>
                     </ScrollViewer>
                 </TabItem>
-                <TabItem Header="PointStyle">
+                <TabItem x:Name="pointStyle" Header="PointStyle">
                     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                         <ContentControl Content="{Binding PointStyle}"/>
                     </ScrollViewer>
                 </TabItem>
-                <TabItem Header="SelectionStyle">
+                <TabItem x:Name="selectionStyle" Header="SelectionStyle">
                     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                         <ContentControl Content="{Binding SelectionStyle}"/>
                     </ScrollViewer>
                 </TabItem>
-                <TabItem Header="HelperStyle">
+                <TabItem x:Name="helperStyle" Header="HelperStyle">
                     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                         <ContentControl Content="{Binding HelperStyle}"/>
                     </ScrollViewer>
