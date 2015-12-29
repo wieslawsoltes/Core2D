@@ -1616,15 +1616,15 @@ namespace Core2D
         /// <summary>
         /// Set current template as current page's template.
         /// </summary>
-        /// <param name="container">The template object.</param>
-        public void OnApplyTemplate(Template container)
+        /// <param name="template">The template object.</param>
+        public void OnApplyTemplate(Template template)
         {
             if (_project == null || _project.CurrentContainer == null)
                 return;
 
-            if (container != null)
+            if (template != null)
             {
-                _project.ApplyTemplate(container);
+                _project.ApplyTemplate(template);
             }
         }
 
@@ -2949,6 +2949,34 @@ namespace Core2D
                 else
                 {
                     _project.ApplyStyle(style, x, y);
+                }
+            }
+            catch (Exception ex)
+            {
+                if (_log != null)
+                {
+                    _log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Drop <see cref="Template"/> object in current container at specified location.
+        /// </summary>
+        /// <param name="template">The <see cref="Template"/> object.</param>
+        public void Drop(Template template)
+        {
+            try
+            {
+                if (_project == null || _project.CurrentContainer == null)
+                    return;
+
+                if (template != null)
+                {
+                    _project.ApplyTemplate(template);
                 }
             }
             catch (Exception ex)

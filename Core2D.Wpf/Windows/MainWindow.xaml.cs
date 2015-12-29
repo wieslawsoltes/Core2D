@@ -270,6 +270,29 @@ namespace Core2D.Wpf.Windows
                             }
                         }
                     }
+
+                    if (e.Data.GetDataPresent(typeof(Template)))
+                    {
+                        try
+                        {
+                            var template = e.Data.GetData(typeof(Template)) as Template;
+                            if (template != null)
+                            {
+                                editor.Drop(template);
+                                e.Handled = true;
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            if (editor.Log != null)
+                            {
+                                editor.Log.LogError("{0}{1}{2}",
+                                    ex.Message,
+                                    Environment.NewLine,
+                                    ex.StackTrace);
+                            }
+                        }
+                    }
                 };
         }
 
