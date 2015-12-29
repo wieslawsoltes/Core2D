@@ -28,9 +28,9 @@ namespace Dependencies
             r.State.DrawShapeState.Flags = ShapeStateFlags.Printable;
             r.State.ImageCache = ic;
 
-            if (item is Container)
+            if (item is Page)
             {
-                r.Save(path, item as Container);
+                r.Save(path, item as Page);
             }
             else if (item is Document)
             {

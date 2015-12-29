@@ -24,8 +24,53 @@
         <converters:BooleanToStringConverter x:Key="BooleanToStarConverter" FalseValue="" TrueValue="*"/>
         <converters:EnumToBooleanConverter x:Key="EnumToBooleanConverter"/>
         <converters:ObjectEqualityConverter x:Key="ObjectEqualityConverter"/>
+        <converters:ObjectToTypeConverter x:Key="ObjectToTypeConverter"/>
         <!-- Brushes -->
         <SolidColorBrush x:Key="BackgroundColor" Color="White"/>
+        <DrawingBrush x:Key="ColorCheckerBoard" Viewport="0,0,20,20" ViewportUnits="Absolute" Stretch="None" TileMode="Tile">
+            <DrawingBrush.Drawing>
+                <DrawingGroup>
+                    <GeometryDrawing Brush="DarkGray">
+                        <GeometryDrawing.Geometry>
+                            <GeometryGroup>
+                                <RectangleGeometry Rect="0,0,10,10"/>
+                                <RectangleGeometry Rect="10,10,10,10"/>
+                            </GeometryGroup>
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                    <GeometryDrawing Brush="LightGray">
+                        <GeometryDrawing.Geometry>
+                            <GeometryGroup>
+                                <RectangleGeometry Rect="10,0,10,10"/>
+                                <RectangleGeometry Rect="0,10,10,10"/>
+                            </GeometryGroup>
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                </DrawingGroup>
+            </DrawingBrush.Drawing>
+        </DrawingBrush>
+        <DrawingBrush x:Key="TemplateCheckerBoard" Viewport="0,0,20,20" ViewportUnits="Absolute" Stretch="None" TileMode="Tile">
+            <DrawingBrush.Drawing>
+                <DrawingGroup>
+                    <GeometryDrawing Brush="#FFF0F0F0">
+                        <GeometryDrawing.Geometry>
+                            <GeometryGroup>
+                                <RectangleGeometry Rect="0,0,10,10"/>
+                                <RectangleGeometry Rect="10,10,10,10"/>
+                            </GeometryGroup>
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                    <GeometryDrawing Brush="#FFF5F5F5">
+                        <GeometryDrawing.Geometry>
+                            <GeometryGroup>
+                                <RectangleGeometry Rect="10,0,10,10"/>
+                                <RectangleGeometry Rect="0,10,10,10"/>
+                            </GeometryGroup>
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                </DrawingGroup>
+            </DrawingBrush.Drawing>
+        </DrawingBrush>
         <!-- Styles -->
         <Style x:Key="TextBlockLeftStyleKey" TargetType="TextBlock">
             <Setter Property="Margin" Value="5,2,5,2"/>
@@ -171,6 +216,12 @@
         </DataTemplate>
         <DataTemplate DataType="{x:Type core:Container}">
             <project:ContainerControl/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type core:Template}">
+            <project:TemplateControl/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type core:Page}">
+            <project:PageControl/>
         </DataTemplate>
         <DataTemplate DataType="{x:Type core:Layer}">
             <project:LayerControl/>

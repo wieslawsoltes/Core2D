@@ -12,30 +12,6 @@
              mc:Ignorable="d" 
              d:DataContext="{x:Static local:DesignerHelper.ArgbColor}"
              d:DesignWidth="250" d:DesignHeight="400">
-    <UserControl.Resources>
-        <DrawingBrush x:Key="ColorCheckerBoard" Viewport="0,0,20,20" ViewportUnits="Absolute" Stretch="None" TileMode="Tile">
-            <DrawingBrush.Drawing>
-                <DrawingGroup>
-                    <GeometryDrawing Brush="DarkGray">
-                        <GeometryDrawing.Geometry>
-                            <GeometryGroup>
-                                <RectangleGeometry Rect="0,0,10,10"/>
-                                <RectangleGeometry Rect="10,10,10,10"/>
-                            </GeometryGroup>
-                        </GeometryDrawing.Geometry>
-                    </GeometryDrawing>
-                    <GeometryDrawing Brush="LightGray">
-                        <GeometryDrawing.Geometry>
-                            <GeometryGroup>
-                                <RectangleGeometry Rect="10,0,10,10"/>
-                                <RectangleGeometry Rect="0,10,10,10"/>
-                            </GeometryGroup>
-                        </GeometryDrawing.Geometry>
-                    </GeometryDrawing>
-                </DrawingGroup>
-            </DrawingBrush.Drawing>
-        </DrawingBrush>
-    </UserControl.Resources>
     <Grid>
         <Grid>
             <Grid.RowDefinitions>

@@ -10,7 +10,7 @@ namespace Core2D
     public class Document : ObservableObject
     {
         private string _name;
-        private ImmutableArray<Container> _containers;
+        private ImmutableArray<Page> _pages;
 
         /// <summary>
         /// 
@@ -24,10 +24,10 @@ namespace Core2D
         /// <summary>
         /// 
         /// </summary>
-        public ImmutableArray<Container> Containers
+        public ImmutableArray<Page> Pages
         {
-            get { return _containers; }
-            set { Update(ref _containers, value); }
+            get { return _pages; }
+            set { Update(ref _pages, value); }
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace Core2D
             return new Document()
             {
                 Name = name,
-                Containers = ImmutableArray.Create<Container>()
+                Pages = ImmutableArray.Create<Page>()
             };
         }
     }

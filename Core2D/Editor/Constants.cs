@@ -11,7 +11,12 @@ namespace Core2D
         /// <summary>
         /// 
         /// </summary>
-        public const string DefaultContainerName = "Container";
+        public const string DefaultTemplateName = "Template";
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public const string DefaultPageName = "Page";
 
         /// <summary>
         /// 

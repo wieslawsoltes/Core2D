@@ -9,20 +9,20 @@ namespace Core2D
     public interface IProjectFactory
     {
         /// <summary>
-        /// Creates a new instance of the <see cref="Container"/> class.
+        /// Creates a new instance of the <see cref="Template"/> class.
         /// </summary>
-        /// <param name="project">The new container owner project.</param>
-        /// <param name="name">The new container name.</param>
-        /// <returns>The new instance of the <see cref="Container"/>.</returns>
-        Container GetTemplate(Project project, string name);
+        /// <param name="project">The new template owner project.</param>
+        /// <param name="name">The new template name.</param>
+        /// <returns>The new instance of the <see cref="Template"/>.</returns>
+        Template GetTemplate(Project project, string name);
 
         /// <summary>
-        /// Creates a new instance of the <see cref="Container"/> class.
+        /// Creates a new instance of the <see cref="Page"/> class.
         /// </summary>
-        /// <param name="project">The new container owner project.</param>
-        /// <param name="name">The new container name.</param>
-        /// <returns>The new instance of the <see cref="Container"/>.</returns>
-        Container GetContainer(Project project, string name);
+        /// <param name="project">The new page owner project.</param>
+        /// <param name="name">The new page name.</param>
+        /// <returns>The new instance of the <see cref="Page"/>.</returns>
+        Page GetPage(Project project, string name);
 
         /// <summary>
         /// Creates a new instance of the <see cref="Document"/> class.

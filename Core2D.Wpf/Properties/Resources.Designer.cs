@@ -1258,15 +1258,6 @@ namespace Core2D.Wpf.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Containers.
-        /// </summary>
-        public static string StatusContainers {
-            get {
-                return ResourceManager.GetString("StatusContainers", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Documents.
         /// </summary>
         public static string StatusDocuments {
@@ -1287,15 +1278,6 @@ namespace Core2D.Wpf.Properties {
         /// <summary>
         ///   Looks up a localized string similar to 0.
         /// </summary>
-        public static string StatusNoContainers {
-            get {
-                return ResourceManager.GetString("StatusNoContainers", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 0.
-        /// </summary>
         public static string StatusNoDocuments {
             get {
                 return ResourceManager.GetString("StatusNoDocuments", resourceCulture);
@@ -1308,6 +1290,15 @@ namespace Core2D.Wpf.Properties {
         public static string StatusNoLayers {
             get {
                 return ResourceManager.GetString("StatusNoLayers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 0.
+        /// </summary>
+        public static string StatusNoPages {
+            get {
+                return ResourceManager.GetString("StatusNoPages", resourceCulture);
             }
         }
         
@@ -1389,6 +1380,15 @@ namespace Core2D.Wpf.Properties {
         public static string StatusOptionsStroked {
             get {
                 return ResourceManager.GetString("StatusOptionsStroked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pages.
+        /// </summary>
+        public static string StatusPages {
+            get {
+                return ResourceManager.GetString("StatusPages", resourceCulture);
             }
         }
         
@@ -1641,6 +1641,15 @@ namespace Core2D.Wpf.Properties {
         public static string WindowTitleOptions {
             get {
                 return ResourceManager.GetString("WindowTitleOptions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Page.
+        /// </summary>
+        public static string WindowTitlePage {
+            get {
+                return ResourceManager.GetString("WindowTitlePage", resourceCulture);
             }
         }
         

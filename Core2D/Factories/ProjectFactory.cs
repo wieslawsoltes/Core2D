@@ -90,12 +90,12 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Creates a new instance of the <see cref="Container"/> class.
+        /// Creates a new instance of the <see cref="Template"/> class.
         /// </summary>
         /// <param name="project">The new container owner project.</param>
         /// <param name="name">The new container name.</param>
-        /// <returns>The new instance of the <see cref="Container"/>.</returns>
-        private Container CreateGridTemplate(Project project, string name)
+        /// <returns>The new instance of the <see cref="Template"/>.</returns>
+        private Template CreateGridTemplate(Project project, string name)
         {
             var template = GetTemplate(project, name);
 
@@ -124,24 +124,24 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public Container GetTemplate(Project project, string name)
+        public Template GetTemplate(Project project, string name)
         {
-            var container = Container.Create(name, true);
+            var template = Template.Create(name);
 
-            container.Background = ArgbColor.Create(0xFF, 0xFF, 0xFF, 0xFF);
+            template.Background = ArgbColor.Create(0xFF, 0xFF, 0xFF, 0xFF);
 
-            foreach (var layer in container.Layers)
+            foreach (var layer in template.Layers)
             {
                 layer.Name = string.Concat("Template", layer.Name);
             }
 
-            return container;
+            return template;
         }
 
         /// <inheritdoc/>
-        public Container GetContainer(Project project, string name)
+        public Page GetPage(Project project, string name)
         {
-            var container = Container.Create(name);
+            var container = Page.Create(name);
 
             if (project.CurrentTemplate == null)
             {
@@ -193,19 +193,19 @@ namespace Core2D
 
             project.CurrentTemplate = project.Templates.FirstOrDefault(t => t.Name == "Grid");
 
-            // Documents and Containers
+            // Documents and Pages
             var document = GetDocument(project, "Document");
-            var container = GetContainer(project, "Container");
+            var page = GetPage(project, "Page");
 
-            var containerBuilder = document.Containers.ToBuilder();
-            containerBuilder.Add(container);
-            document.Containers = containerBuilder.ToImmutable();
+            var pageBuilder = document.Pages.ToBuilder();
+            pageBuilder.Add(page);
+            document.Pages = pageBuilder.ToImmutable();
 
             var documentBuilder = project.Documents.ToBuilder();
             documentBuilder.Add(document);
             project.Documents = documentBuilder.ToImmutable();
 
-            project.Selected = document.Containers.FirstOrDefault();
+            project.Selected = document.Pages.FirstOrDefault();
 
             // Databases
             var db = Database.Create("Db");

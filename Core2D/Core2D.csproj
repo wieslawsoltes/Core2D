@@ -110,6 +110,8 @@
     <Compile Include="Math\Sat\Projection.cs" />
     <Compile Include="Math\Sat\SeparatingAxisTheorem.cs" />
     <Compile Include="Project\Library`1.cs" />
+    <Compile Include="Project\Page.cs" />
+    <Compile Include="Project\Template.cs" />
     <Compile Include="Properties\SharedAssemblyInfo.cs" />
     <Compile Include="Data\Column.cs" />
     <Compile Include="Data\Database.cs" />

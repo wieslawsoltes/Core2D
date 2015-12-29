@@ -14,7 +14,7 @@
                 <TextBlock.Text>
                     <MultiBinding Mode="OneWay" Converter="{Static converters:EditorToStatsMultiConverter.Instance}">
                         <Binding Path="Project.Documents.Length"/>
-                        <Binding Path="Project.CurrentDocument.Containers.Length"/>
+                        <Binding Path="Project.CurrentDocument.Pages.Length"/>
                         <Binding Path="Project.CurrentContainer.Layers.Length"/>
                         <Binding Path="Project.CurrentContainer.CurrentLayer.Shapes.Length"/>
                         <Binding Path="Renderers[0].State.SelectedShape" Converter="{Static converters:ObjectToObjectConverter.Instance}"/>

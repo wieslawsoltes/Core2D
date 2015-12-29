@@ -55,8 +55,8 @@
                 <TextBlock VerticalAlignment="Center">
                     <TextBlock.Text>
                         <MultiBinding StringFormat="{}{0}: {1}">
-                            <Binding Source="{x:Static p:Resources.StatusContainers}"/>
-                            <Binding Path="Project.CurrentDocument.Containers.Length" FallbackValue="{x:Static p:Resources.StatusNoContainers}"/>
+                            <Binding Source="{x:Static p:Resources.StatusPages}"/>
+                            <Binding Path="Project.CurrentDocument.Pages.Length" FallbackValue="{x:Static p:Resources.StatusNoPages}"/>
                         </MultiBinding>
                     </TextBlock.Text>
                 </TextBlock>

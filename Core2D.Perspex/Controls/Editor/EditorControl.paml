@@ -74,12 +74,12 @@
                     </TabItem>
                     <TabItem Header="Container" Classes="property">
                         <ScrollViewer>
-                            <project:ContainerControl DataContext="{Binding Path=Project.CurrentContainer, Mode=TwoWay}"/>
+                            <ContentControl Content="{Binding Path=Project.CurrentContainer, Mode=TwoWay}"/>
                         </ScrollViewer>
                     </TabItem>
                     <TabItem Header="Template" Classes="property">
                         <ScrollViewer>
-                            <project:ContainerControl DataContext="{Binding Path=Project.CurrentTemplate, Mode=TwoWay}"/>
+                            <project:TemplateControl DataContext="{Binding Path=Project.CurrentTemplate, Mode=TwoWay}"/>
                         </ScrollViewer>
                     </TabItem>
                 </TabControl>

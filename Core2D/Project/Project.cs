@@ -96,8 +96,8 @@ namespace Core2D
         private Library<ShapeStyle> _currentStyleLibrary;
         private ImmutableArray<Library<XGroup>> _groupLibraries;
         private Library<XGroup> _currentGroupLibrary;
-        private ImmutableArray<Container> _templates;
-        private Container _currentTemplate;
+        private ImmutableArray<Template> _templates;
+        private Template _currentTemplate;
         private ImmutableArray<Document> _documents;
         private Document _currentDocument;
         private Container _currentContainer;
@@ -187,7 +187,7 @@ namespace Core2D
         /// <summary>
         /// 
         /// </summary>
-        public ImmutableArray<Container> Templates
+        public ImmutableArray<Template> Templates
         {
             get { return _templates; }
             set { Update(ref _templates, value); }
@@ -196,7 +196,7 @@ namespace Core2D
         /// <summary>
         /// 
         /// </summary>
-        public Container CurrentTemplate
+        public Template CurrentTemplate
         {
             get { return _currentTemplate; }
             set { Update(ref _currentTemplate, value); }
@@ -242,7 +242,7 @@ namespace Core2D
                 if (item is Container && _documents != null)
                 {
                     var container = item as Container;
-                    var document = _documents.FirstOrDefault(d => d.Containers.Contains(container));
+                    var document = _documents.FirstOrDefault(d => d.Pages.Contains(container));
                     if (document != null)
                     {
                         CurrentDocument = document;
@@ -478,7 +478,7 @@ namespace Core2D
                 Databases = ImmutableArray.Create<Database>(),
                 StyleLibraries = ImmutableArray.Create<Library<ShapeStyle>>(),
                 GroupLibraries = ImmutableArray.Create<Library<XGroup>>(),
-                Templates = ImmutableArray.Create<Container>(),
+                Templates = ImmutableArray.Create<Template>(),
                 Documents = ImmutableArray.Create<Document>(),
             };
             return p;

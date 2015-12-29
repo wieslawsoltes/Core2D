@@ -23,10 +23,10 @@
                     Grid.Row="2"
                     Classes="default">
                     <TreeView.DataTemplates>
-                        <TreeDataTemplate DataType="core:Document" ItemsSource="{Binding Path=Containers, Mode=TwoWay}">
+                        <TreeDataTemplate DataType="core:Document" ItemsSource="{Binding Path=Pages, Mode=TwoWay}">
                             <TextBlock Text="{Binding Path=Name, Mode=TwoWay}" Classes="default"/>
                         </TreeDataTemplate>
-                        <DataTemplate DataType="core:Container">
+                        <DataTemplate DataType="core:Page">
                             <TextBlock Text="{Binding Path=Name, Mode=TwoWay}" Classes="default"/>
                         </DataTemplate>
                     </TreeView.DataTemplates>

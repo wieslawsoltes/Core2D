@@ -388,7 +388,7 @@ namespace Dependencies
         /// </summary>
         /// <param name="dc"></param>
         /// <param name="template"></param>
-        private static void DrawTemplateBackground(DrawingContext dc, Container template)
+        private static void DrawTemplateBackground(DrawingContext dc, Template template)
         {
             var brush = CreateBrush(template.Background);
             var rect = new Rect(0, 0, template.Width, template.Height);
@@ -420,23 +420,11 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Container container, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, Page page, ImmutableArray<Property> db, Record r)
         {
-            var _dc = dc as DrawingContext;
+            DrawTemplateBackground(dc as DrawingContext, page.Template);
 
-            var template = container.Template;
-            if (template != null)
-            {
-                DrawTemplateBackground(_dc, template);
-            }
-
-            foreach (var layer in container.Layers)
-            {
-                if (layer.IsVisible)
-                {
-                    Draw(dc, layer, db, r);
-                }
-            }
+            base.Draw(dc, page, db, r);
         }
 
         /// <inheritdoc/>

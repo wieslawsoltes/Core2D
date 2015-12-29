@@ -552,8 +552,8 @@
   <data name="MenuViewZoomAutofit" xml:space="preserve">
     <value>Enable _Autofit</value>
   </data>
-  <data name="StatusContainers" xml:space="preserve">
-    <value>Containers</value>
+  <data name="StatusPages" xml:space="preserve">
+    <value>Pages</value>
   </data>
   <data name="StatusDocuments" xml:space="preserve">
     <value>Documents</value>
@@ -561,7 +561,7 @@
   <data name="StatusLayers" xml:space="preserve">
     <value>Layers</value>
   </data>
-  <data name="StatusNoContainers" xml:space="preserve">
+  <data name="StatusNoPages" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="StatusNoDocuments" xml:space="preserve">
@@ -671,5 +671,8 @@
   </data>
   <data name="ContainerSize" xml:space="preserve">
     <value>Size</value>
+  </data>
+  <data name="WindowTitlePage" xml:space="preserve">
+    <value>Page</value>
   </data>
 </root>

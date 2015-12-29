@@ -116,9 +116,6 @@
     <Compile Include="Controls\Data\RecordControl.xaml.cs">
       <DependentUpon>RecordControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Editor\DrawableControl.xaml.cs">
-      <DependentUpon>DrawableControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\Custom\DragAndDropListBox.cs" />
     <Compile Include="Controls\Custom\LayerElement.cs" />
     <Compile Include="Controls\Custom\ListBoxDropMode.cs" />
@@ -132,6 +129,12 @@
     </Compile>
     <Compile Include="Controls\Custom\Lists\GroupConnectorsDragAndDropListBox.cs" />
     <Compile Include="Controls\Custom\Lists\GroupShapesDragAndDropListBox.cs" />
+    <Compile Include="Controls\Editor\PageControl.xaml.cs">
+      <DependentUpon>PageControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Editor\TemplateControl.xaml.cs">
+      <DependentUpon>TemplateControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Path\ArcSegmentControl.xaml.cs">
       <DependentUpon>ArcSegmentControl.xaml</DependentUpon>
     </Compile>
@@ -161,6 +164,9 @@
     </Compile>
     <Compile Include="Controls\Path\QuadraticBezierSegmentControl.xaml.cs">
       <DependentUpon>QuadraticBezierSegmentControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Project\ContainerControl.xaml.cs">
+      <DependentUpon>ContainerControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Project\DocumentControl.xaml.cs">
       <DependentUpon>DocumentControl.xaml</DependentUpon>
@@ -198,14 +204,17 @@
       <DependentUpon>ShapeControl.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Controls\Project\ContainerControl.xaml.cs">
-      <DependentUpon>ContainerControl.xaml</DependentUpon>
+    <Compile Include="Controls\Project\PageControl.xaml.cs">
+      <DependentUpon>PageControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Editor\StatusControl.xaml.cs">
       <DependentUpon>StatusControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Project\ShapesControl.xaml.cs">
       <DependentUpon>ShapesControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Project\TemplateControl.xaml.cs">
+      <DependentUpon>TemplateControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Shapes\ArcControl.xaml.cs">
       <DependentUpon>ArcControl.xaml</DependentUpon>
@@ -279,6 +288,7 @@
     <Compile Include="Converters\ObjectEqualityConverter.cs" />
     <Compile Include="Controls\Custom\PanAndZoomBorder.cs" />
     <Compile Include="Controls\Custom\PanAndZoomGrid.cs" />
+    <Compile Include="Converters\ObjectToTypeConverter.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -302,12 +312,16 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\Editor\DrawableControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Controls\Editor\DashboardControl.xaml" />
     <Page Include="Controls\Data\DataControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Editor\PageControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Editor\TemplateControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -351,6 +365,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\Project\ContainerControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\Project\DocumentControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -387,7 +405,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\Project\ContainerControl.xaml">
+    <Page Include="Controls\Project\PageControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -396,6 +414,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Project\ShapesControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Project\TemplateControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

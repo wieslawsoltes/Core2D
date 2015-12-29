@@ -55,7 +55,7 @@ namespace Core2D
                 project.CurrentDocument = project.Documents.FirstOrDefault();
                 if (project.CurrentDocument != null)
                 {
-                    project.CurrentContainer = project.CurrentDocument.Containers.FirstOrDefault();
+                    project.CurrentContainer = project.CurrentDocument.Pages.FirstOrDefault();
                 }
                 else
                 {
@@ -66,59 +66,59 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Add container.
+        /// Add page.
         /// </summary>
         /// <param name="project">The project instance.</param>
-        /// <param name="container">The container instance.</param>
-        public static void AddContainer(this Project project, Container container)
+        /// <param name="page">The page instance.</param>
+        public static void AddContainer(this Project project, Page page)
         {
             var document = project.CurrentDocument;
             if (document != null)
             {
-                var previous = document.Containers;
-                var next = document.Containers.Add(container);
-                project.History.Snapshot(previous, next, (p) => document.Containers = p);
-                document.Containers = next;
+                var previous = document.Pages;
+                var next = document.Pages.Add(page);
+                project.History.Snapshot(previous, next, (p) => document.Pages = p);
+                document.Pages = next;
             }
         }
 
         /// <summary>
-        /// Add container at specified index.
+        /// Add page at specified index.
         /// </summary>
         /// <param name="project">The project instance.</param>
-        /// <param name="container">The container instance.</param>
-        /// <param name="index">The container index.</param>
-        public static void AddContainerAt(this Project project, Container container, int index)
+        /// <param name="page">The page instance.</param>
+        /// <param name="index">The page index.</param>
+        public static void AddPageAt(this Project project, Page page, int index)
         {
             var document = project.CurrentDocument;
             if (document != null)
             {
-                var previous = document.Containers;
-                var next = document.Containers.Insert(index, container);
-                project.History.Snapshot(previous, next, (p) => document.Containers = p);
-                document.Containers = next;
+                var previous = document.Pages;
+                var next = document.Pages.Insert(index, page);
+                project.History.Snapshot(previous, next, (p) => document.Pages = p);
+                document.Pages = next;
             }
         }
 
         /// <summary>
-        /// Remove container object from owner document <see cref="Document.Containers"/> collection.
+        /// Remove page object from owner document <see cref="Document.Pages"/> collection.
         /// </summary>
         /// <param name="project">The project instance.</param>
-        /// <param name="container">The container object to remove from document <see cref="Document.Containers"/> collection.</param>
-        public static void RemoveContainer(this Project project, Container container)
+        /// <param name="page">The page object to remove from document <see cref="Document.Pages"/> collection.</param>
+        public static void RemovePage(this Project project, Page page)
         {
             if (project != null && project.Documents != null)
             {
-                var document = project.Documents.FirstOrDefault(d => d.Containers.Contains(container));
+                var document = project.Documents.FirstOrDefault(d => d.Pages.Contains(page));
                 if (document != null)
                 {
-                    var previous = document.Containers;
-                    var next = document.Containers.Remove(container);
-                    project.History.Snapshot(previous, next, (p) => document.Containers = p);
-                    document.Containers = next;
+                    var previous = document.Pages;
+                    var next = document.Pages.Remove(page);
+                    project.History.Snapshot(previous, next, (p) => document.Pages = p);
+                    document.Pages = next;
 
                     project.CurrentDocument = document;
-                    project.CurrentContainer = document.Containers.FirstOrDefault();
+                    project.CurrentContainer = document.Pages.FirstOrDefault();
                     project.Selected = project.CurrentContainer;
                 }
             }
@@ -129,7 +129,7 @@ namespace Core2D
         /// </summary>
         /// <param name="project">The project instance.</param>
         /// <param name="template">The template instance.</param>
-        public static void AddTemplate(this Project project, Container template)
+        public static void AddTemplate(this Project project, Template template)
         {
             var previous = project.Templates;
             var next = project.Templates.Add(template);
@@ -160,15 +160,16 @@ namespace Core2D
         /// </summary>
         /// <param name="project">The project instance.</param>
         /// <param name="template"></param>
-        public static void ApplyTemplate(this Project project, Container template)
+        public static void ApplyTemplate(this Project project, Template template)
         {
             var container = project.CurrentContainer;
-            if (container != null)
+            if (container != null && container is Page)
             {
-                var previous = container.Template;
+                var page = container as Page;
+                var previous = page.Template;
                 var next = template;
-                project.History.Snapshot(previous, next, (p) => container.Template = p);
-                container.Template = next;
+                project.History.Snapshot(previous, next, (p) => page.Template = p);
+                page.Template = next;
             }
         }
 

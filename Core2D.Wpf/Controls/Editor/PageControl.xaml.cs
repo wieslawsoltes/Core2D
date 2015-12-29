@@ -5,14 +5,14 @@ using System.Windows.Controls;
 namespace Core2D.Wpf.Controls.Editor
 {
     /// <summary>
-    /// Interaction logic for <see cref="DrawableControl"/> xaml.
+    /// Interaction logic for <see cref="PageControl"/> xaml.
     /// </summary>
-    public partial class DrawableControl : UserControl
+    public partial class PageControl : UserControl
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="DrawableControl"/> class.
+        /// Initializes a new instance of the <see cref="PageControl"/> class.
         /// </summary>
-        public DrawableControl()
+        public PageControl()
         {
             InitializeComponent();
         }

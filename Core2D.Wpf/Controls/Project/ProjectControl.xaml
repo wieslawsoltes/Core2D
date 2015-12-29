@@ -48,8 +48,8 @@
                             </MenuItem.ItemContainerStyle>
                         </MenuItem>
                         <Separator/>
-                        <MenuItem Header="Insert Container Bef_ore" InputGestureText="" Command="{x:Static core:Commands.InsertContainerBeforeCommand}" CommandParameter="{Binding}"/>
-                        <MenuItem Header="Insert Container Aft_er" InputGestureText="" Command="{x:Static core:Commands.InsertContainerAfterCommand}" CommandParameter="{Binding}"/>
+                        <MenuItem Header="Insert Page Bef_ore" InputGestureText="" Command="{x:Static core:Commands.InsertPageBeforeCommand}" CommandParameter="{Binding}"/>
+                        <MenuItem Header="Insert Page Aft_er" InputGestureText="" Command="{x:Static core:Commands.InsertPageAfterCommand}" CommandParameter="{Binding}"/>
                         <Separator/>
                         <MenuItem Header="Cu_t" InputGestureText="Ctrl+X" Command="{x:Static core:Commands.CutCommand}" CommandParameter="{Binding}"/>
                         <MenuItem Header="_Copy" InputGestureText="Ctrl+C" Command="{x:Static core:Commands.CopyCommand}" CommandParameter="{Binding}"/>
@@ -60,7 +60,7 @@
                         <MenuItem Header="E_xport" InputGestureText="Ctrl+E" Command="{x:Static core:Commands.ExportCommand}" CommandParameter="{Binding}"/>
                     </ContextMenu>
                     <ContextMenu x:Key="DocumentContextMenuKey" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
-                        <MenuItem Header="_Add Container" InputGestureText="Ctrl+N" Command="{x:Static core:Commands.AddContainerCommand}" CommandParameter="{Binding}"/>
+                        <MenuItem Header="_Add Page" InputGestureText="Ctrl+N" Command="{x:Static core:Commands.AddPageCommand}" CommandParameter="{Binding}"/>
                         <Separator/>
                         <MenuItem Header="Insert Document Bef_ore" InputGestureText="" Command="{x:Static core:Commands.InsertDocumentBeforeCommand}" CommandParameter="{Binding}"/>
                         <MenuItem Header="Insert Document Aft_er" InputGestureText="" Command="{x:Static core:Commands.InsertDocumentAfterCommand}" CommandParameter="{Binding}"/>
@@ -136,7 +136,7 @@
                         </Style>
                     </TreeView.ItemContainerStyle>
                     <TreeView.ItemTemplate>
-                        <HierarchicalDataTemplate ItemsSource="{Binding Containers}" ItemContainerStyle="{StaticResource ContainerTreeViewItemStyleKey}">
+                        <HierarchicalDataTemplate ItemsSource="{Binding Pages}" ItemContainerStyle="{StaticResource ContainerTreeViewItemStyleKey}">
                             <HierarchicalDataTemplate.ItemTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Name}" FontWeight="Normal"/>
