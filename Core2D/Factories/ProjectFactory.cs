@@ -19,10 +19,12 @@ namespace Core2D
 
             var builder = sgd.Items.ToBuilder();
             builder.Add(ShapeStyle.Create("Black", 255, 0, 0, 0, 80, 0, 0, 0, 2.0));
-            builder.Add(ShapeStyle.Create("Yellow", 255, 255, 255, 0, 80, 255, 255, 0, 2.0));
             builder.Add(ShapeStyle.Create("Red", 255, 255, 0, 0, 80, 255, 0, 0, 2.0));
             builder.Add(ShapeStyle.Create("Green", 255, 0, 255, 0, 80, 0, 255, 0, 2.0));
             builder.Add(ShapeStyle.Create("Blue", 255, 0, 0, 255, 80, 0, 0, 255, 2.0));
+            builder.Add(ShapeStyle.Create("Cyan", 255, 0, 255, 255, 80, 0, 255, 255, 2.0));
+            builder.Add(ShapeStyle.Create("Magenta", 255, 255, 0, 255, 80, 255, 0, 255, 2.0));
+            builder.Add(ShapeStyle.Create("Yellow", 255, 255, 255, 0, 80, 255, 255, 0, 2.0));
             sgd.Items = builder.ToImmutable();
 
             sgd.Selected = sgd.Items.FirstOrDefault();
