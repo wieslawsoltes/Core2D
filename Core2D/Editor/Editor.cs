@@ -491,7 +491,7 @@ namespace Core2D
                     return;
 
                 var db = _csvReader.Read(path);
-                _project.ApplyDatabase(database, db);
+                _project.UpdateDatabase(database, db);
             }
             catch (Exception ex)
             {
