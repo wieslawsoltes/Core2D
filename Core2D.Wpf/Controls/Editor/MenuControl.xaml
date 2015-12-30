@@ -173,6 +173,8 @@
             <MenuItem Header="{x:Static p:Resources.MenuDataImport}" Command="{x:Static core:Commands.ImportDataCommand}" InputGestureText=""/>
             <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuDataExport}" Command="{x:Static core:Commands.ExportDataCommand}" InputGestureText=""/>
+            <Separator/>
+            <MenuItem Header="{x:Static p:Resources.MenuDataUpdate}" Command="{x:Static core:Commands.UpdateDataCommand}" InputGestureText=""/>
         </MenuItem>
         <MenuItem Header="{x:Static p:Resources.MenuTemplate}" Tag="{Binding}" ItemsSource="{Binding Project.Templates}" Style="{StaticResource TemplateMenuItemVisibilityStyle}">
             <MenuItem.ItemContainerStyle>

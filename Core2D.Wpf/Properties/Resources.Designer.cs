@@ -160,6 +160,15 @@ namespace Core2D.Wpf.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to _Update....
+        /// </summary>
+        public static string MenuDataUpdate {
+            get {
+                return ResourceManager.GetString("MenuDataUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to _Edit.
         /// </summary>
         public static string MenuEdit {
@@ -1722,15 +1731,6 @@ namespace Core2D.Wpf.Properties {
         public static string WindowTitleTemplates {
             get {
                 return ResourceManager.GetString("WindowTitleTemplates", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Records.
-        /// </summary>
-        public static string WiWindowTitleRecords {
-            get {
-                return ResourceManager.GetString("WiWindowTitleRecords", resourceCulture);
             }
         }
     }
