@@ -32,10 +32,11 @@ namespace Core2D.Wpf.Converters
         /// <returns>A converted value.</returns>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value == null)
-                return FalseValue;
-            else
+            if (value != null)
+            {
                 return (bool)value ? TrueValue : FalseValue;
+            }
+            return DependencyProperty.UnsetValue;
         }
 
         /// <summary>
@@ -48,7 +49,11 @@ namespace Core2D.Wpf.Converters
         /// <returns>A converted value.</returns>
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value != null ? value.Equals(TrueValue) : false;
+            if (value != null)
+            {
+                return value != null ? value.Equals(TrueValue) : false;
+            }
+            return DependencyProperty.UnsetValue;
         }
     }
 }

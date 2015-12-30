@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Globalization;
+using System.Windows;
 using System.Windows.Data;
 
 namespace Core2D.Wpf.Converters
@@ -21,7 +22,11 @@ namespace Core2D.Wpf.Converters
         /// <returns>A converted value.</returns>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value.GetType();
+            if (value != null)
+            {
+                return value.GetType();
+            }
+            return DependencyProperty.UnsetValue;
         }
 
         /// <summary>

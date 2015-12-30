@@ -22,7 +22,11 @@ namespace Core2D.Wpf.Converters
         /// <returns>A converted value.</returns>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value.Equals(parameter);
+            if (value != null)
+            {
+                return value.Equals(parameter);
+            }
+            return DependencyProperty.UnsetValue;
         }
 
         /// <summary>
@@ -35,7 +39,11 @@ namespace Core2D.Wpf.Converters
         /// <returns>A converted value.</returns>
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (bool)value ? parameter : Binding.DoNothing;
+            if (value != null)
+            {
+                return (bool)value ? parameter : Binding.DoNothing;
+            }
+            return DependencyProperty.UnsetValue;
         }
     }
 }
