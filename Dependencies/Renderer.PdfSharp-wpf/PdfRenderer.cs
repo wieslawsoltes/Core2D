@@ -585,7 +585,7 @@ namespace Dependencies
                     _scaleToPage(rect.Height));
             }
 
-            if (rectangle.IsGrid && rectangle.IsStroked)
+            if (rectangle.IsGrid)
             {
                 DrawGridInternal(
                     _gfx,
