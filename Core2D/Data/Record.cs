@@ -81,7 +81,7 @@ namespace Core2D
         {
             return new Record()
             {
-                Id = Guid.Parse(id),
+                Id = string.IsNullOrWhiteSpace(id) ? Guid.NewGuid() : Guid.Parse(id),
                 Columns = columns,
                 Values = values,
                 Owner = owner
