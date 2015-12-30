@@ -11,7 +11,7 @@
              xmlns:custom="clr-namespace:Core2D.Wpf.Controls.Custom"
              mc:Ignorable="d" 
              d:DataContext="{x:Static local:DesignerHelper.Database}"
-             d:DesignWidth="250" d:DesignHeight="400">
+             d:DesignWidth="540" d:DesignHeight="400">
     <Grid>
         <Grid.Resources>
             <ControlTemplate x:Key="RecordsMenu">
@@ -25,9 +25,32 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Control Template="{StaticResource RecordsMenu}" Grid.Row="0" Margin="2,0,2,0"/>
-        <custom:RecordsListView ItemsSource="{Binding Records}" SelectedItem="{Binding CurrentRecord}" HorizontalContentAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" Margin="2,2,2,0"/>
+        <TabControl Grid.Row="1" Margin="2,2,2,0">
+            <TabControl.Resources>
+                <Style TargetType="DataGrid">
+                    <Setter Property="CanUserReorderColumns" Value="True"/>
+                    <Setter Property="CanUserResizeColumns" Value="True"/>
+                    <Setter Property="CanUserResizeRows" Value="True"/>
+                    <Setter Property="CanUserSortColumns" Value="True"/>
+                </Style>
+            </TabControl.Resources>
+            <TabItem Header="Records">
+                <custom:RecordsListView ItemsSource="{Binding Records}" SelectedItem="{Binding CurrentRecord}" HorizontalContentAlignment="Stretch" VerticalAlignment="Stretch"/>
+            </TabItem>
+            <TabItem Header="Columns">
+                <DataGrid ItemsSource="{Binding Columns}"/>
+            </TabItem>
+            <TabItem Header="Values">
+                <DataGrid ItemsSource="{Binding Records}">
+                    <DataGrid.RowDetailsTemplate>
+                        <DataTemplate>
+                            <DataGrid ItemsSource="{Binding Values}"/>
+                        </DataTemplate>
+                    </DataGrid.RowDetailsTemplate>
+                </DataGrid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </UserControl>
