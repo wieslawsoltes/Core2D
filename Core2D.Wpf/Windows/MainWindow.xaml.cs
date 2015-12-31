@@ -235,7 +235,7 @@ namespace Core2D.Wpf.Windows
                             if (group != null)
                             {
                                 var p = e.GetPosition(drawableControl);
-                                editor.DropGroupAsClone(group, p.X, p.Y);
+                                editor.DropShapeAsClone(group, p.X, p.Y);
                                 e.Handled = true;
                             }
                         }

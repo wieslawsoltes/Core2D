@@ -1522,10 +1522,10 @@ namespace Core2D
             if (_renderers != null && _project == null || _project.CurrentGroupLibrary == null)
                 return;
 
-            var group = _renderers[0].State.SelectedShape;
-            if (group != null && group is XGroup)
+            var group = _renderers[0].State.SelectedShape as XGroup;
+            if (group != null)
             {
-                var clone = CloneGroup(group as XGroup);
+                var clone = CloneShape(group);
                 if (clone != null)
                 {
                     _project.AddGroup(clone);
@@ -1550,7 +1550,7 @@ namespace Core2D
             if (_project == null || _project.CurrentContainer == null)
                 return;
 
-            DropGroupAsClone(group, 0.0, 0.0);
+            DropShapeAsClone(group, 0.0, 0.0);
         }
 
         /// <summary>
@@ -2210,6 +2210,24 @@ namespace Core2D
         }
 
         /// <summary>
+        /// Check if can perform the undo action.
+        /// </summary>
+        /// <returns>Returns true if can undo.</returns>
+        public bool CanUndo()
+        {
+            return _project.History.CanUndo();
+        }
+
+        /// <summary>
+        /// Check if can perform the redo action.
+        /// </summary>
+        /// <returns>Returns true if can redo.</returns>
+        public bool CanRedo()
+        {
+            return _project.History.CanRedo();
+        }
+
+        /// <summary>
         /// Checks if can copy.
         /// </summary>
         /// <returns>Returns true if can copy.</returns>
@@ -2506,19 +2524,20 @@ namespace Core2D
         /// <summary>
         /// Clone the <see cref="BaseShape"/> object.
         /// </summary>
+        /// <typeparam name="T">The shape type.</typeparam>
         /// <param name="shape">The <see cref="BaseShape"/> object.</param>
         /// <returns>The cloned <see cref="BaseShape"/> object.</returns>
-        public BaseShape CloneShape(BaseShape shape)
+        public T CloneShape<T>(T shape) where T : BaseShape
         {
             if (_serializer == null)
-                return null;
+                return default(T);
 
             try
             {
                 var json = _serializer.Serialize(shape);
                 if (!string.IsNullOrEmpty(json))
                 {
-                    var clone = _serializer.Deserialize<BaseShape>(json);
+                    var clone = _serializer.Deserialize<T>(json);
                     if (clone != null)
                     {
                         var shapes = Enumerable.Repeat(clone, 1).ToList();
@@ -2539,46 +2558,7 @@ namespace Core2D
                 }
             }
 
-            return null;
-        }
-
-        /// <summary>
-        /// Clone the <see cref="XGroup"/> object.
-        /// </summary>
-        /// <param name="group">The <see cref="XGroup"/> object.</param>
-        /// <returns>The cloned <see cref="XGroup"/> object.</returns>
-        public XGroup CloneGroup(XGroup group)
-        {
-            if (_serializer == null)
-                return null;
-
-            try
-            {
-                var json = _serializer.Serialize(group);
-                if (!string.IsNullOrEmpty(json))
-                {
-                    var clone = _serializer.Deserialize<XGroup>(json);
-                    if (clone != null)
-                    {
-                        var shapes = Enumerable.Repeat(clone, 1).ToList();
-                        TryToRestoreStyles(shapes);
-                        TryToRestoreRecords(shapes);
-                        return clone;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                if (_log != null)
-                {
-                    _log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
-                }
-            }
-
-            return null;
+            return default(T);
         }
 
         /// <summary>
@@ -2589,7 +2569,7 @@ namespace Core2D
         public Container Clone(Template template)
         {
             if (_serializer == null)
-                return null;
+                return default(Template);
 
             try
             {
@@ -2617,7 +2597,7 @@ namespace Core2D
                 }
             }
 
-            return null;
+            return default(Template);
         }
 
         /// <summary>
@@ -2628,7 +2608,7 @@ namespace Core2D
         public Page Clone(Page page)
         {
             if (_serializer == null)
-                return null;
+                return default(Page);
 
             try
             {
@@ -2658,7 +2638,7 @@ namespace Core2D
                 }
             }
 
-            return null;
+            return default(Page);
         }
 
         /// <summary>
@@ -2669,7 +2649,7 @@ namespace Core2D
         public Document Clone(Document document)
         {
             if (_serializer == null)
-                return null;
+                return default(Document);
 
             try
             {
@@ -2703,7 +2683,7 @@ namespace Core2D
                 }
             }
 
-            return null;
+            return default(Document);
         }
 
         /// <summary>
@@ -2845,7 +2825,7 @@ namespace Core2D
                     var container = _project.CurrentContainer;
                     if (container != null)
                     {
-                        var target = ShapeBounds.HitTest(container, new Vector2(x, y), _project.Options.HitTreshold);
+                        var target = ShapeBounds.HitTest(container, new Vector2(x, y), _project.Options.HitThreshold);
                         if (target != null)
                         {
                             if (target is XPoint)
@@ -2879,10 +2859,11 @@ namespace Core2D
         /// <summary>
         /// Drop <see cref="BaseShape"/> object in current container at specified location.
         /// </summary>
+        /// <typeparam name="T">The shape type.</typeparam>
         /// <param name="shape">The <see cref="BaseShape"/> object.</param>
         /// <param name="x">The X coordinate in container.</param>
         /// <param name="y">The Y coordinate in container.</param>
-        public void DropShapeAsClone(BaseShape shape, double x, double y)
+        public void DropShapeAsClone<T>(T shape, double x, double y) where T : BaseShape
         {
             double sx = _project.Options.SnapToGrid ? Snap(x, _project.Options.SnapX) : x;
             double sy = _project.Options.SnapToGrid ? Snap(y, _project.Options.SnapY) : y;
@@ -2898,46 +2879,17 @@ namespace Core2D
                     _project.AddShape(clone);
 
                     Select(_project.CurrentContainer, clone);
-                }
-            }
-            catch (Exception ex)
-            {
-                if (_log != null)
-                {
-                    _log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Drop <see cref="XGroup"/> object in current container at specified location.
-        /// </summary>
-        /// <param name="group">The <see cref="XGroup"/> object.</param>
-        /// <param name="x">The X coordinate in container.</param>
-        /// <param name="y">The Y coordinate in container.</param>
-        public void DropGroupAsClone(XGroup group, double x, double y)
-        {
-            try
-            {
-                double sx = _project.Options.SnapToGrid ? Snap(x, _project.Options.SnapX) : x;
-                double sy = _project.Options.SnapToGrid ? Snap(y, _project.Options.SnapY) : y;
-
-                var clone = CloneGroup(group);
-                if (clone != null)
-                {
-                    Deselect(_project.CurrentContainer);
-                    clone.Move(sx, sy);
-
-                    _project.AddShape(clone);
-
-                    Select(_project.CurrentContainer, clone);
 
                     if (_project.Options.TryToConnect)
                     {
-                        TryToConnect(clone);
+                        if (clone is XGroup)
+                        {
+                            var group = clone as XGroup;
+                            var lines = GetAllShapes<XLine>(_project.CurrentContainer.CurrentLayer.Shapes);
+                            var connectors = group.Connectors;
+                            var threshold = _project.Options.HitThreshold;
+                            TryToConnectLines(lines, connectors, threshold);
+                        }
                     }
                 }
             }
@@ -2979,7 +2931,7 @@ namespace Core2D
                     var container = _project.CurrentContainer;
                     if (container != null)
                     {
-                        var result = ShapeBounds.HitTest(container, new Vector2(x, y), _project.Options.HitTreshold);
+                        var result = ShapeBounds.HitTest(container, new Vector2(x, y), _project.Options.HitThreshold);
                         if (result != null)
                         {
                             _project.ApplyRecord(result, record);
@@ -3012,6 +2964,7 @@ namespace Core2D
         public void DropAsGroup(Record record, double x, double y)
         {
             var g = XGroup.Create("g");
+
             g.Data.Record = record;
 
             double sx = _project.Options.SnapToGrid ? Snap(x, _project.Options.SnapX) : x;
@@ -3029,7 +2982,6 @@ namespace Core2D
                 if (column.IsVisible)
                 {
                     var binding = "{" + record.Columns[i].Name + "}";
-
                     var text = XText.Create(
                         px, py,
                         px + width,
@@ -3039,7 +2991,6 @@ namespace Core2D
                         binding);
 
                     g.AddShape(text);
-
                     py += height;
                 }
             }
@@ -3051,22 +3002,10 @@ namespace Core2D
                 _project.Options.PointShape);
             g.AddShape(rectangle);
 
-            double ptx = sx + width / 2;
-            double pty = sy;
-
-            double pbx = sx + width / 2;
-            double pby = sy + (double)length * height;
-
-            double plx = sx;
-            double ply = sy + ((double)length * height) / 2;
-
-            double prx = sx + width;
-            double pry = sy + ((double)length * height) / 2;
-
-            var pt = XPoint.Create(ptx, pty, _project.Options.PointShape);
-            var pb = XPoint.Create(pbx, pby, _project.Options.PointShape);
-            var pl = XPoint.Create(plx, ply, _project.Options.PointShape);
-            var pr = XPoint.Create(prx, pry, _project.Options.PointShape);
+            var pt = XPoint.Create(sx + width / 2, sy, _project.Options.PointShape);
+            var pb = XPoint.Create(sx + width / 2, sy + (double)length * height, _project.Options.PointShape);
+            var pl = XPoint.Create(sx, sy + ((double)length * height) / 2, _project.Options.PointShape);
+            var pr = XPoint.Create(sx + width, sy + ((double)length * height) / 2, _project.Options.PointShape);
 
             g.AddConnectorAsNone(pt);
             g.AddConnectorAsNone(pb);
@@ -3138,24 +3077,6 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// Check if can perform the undo action.
-        /// </summary>
-        /// <returns>Returns true if can undo.</returns>
-        public bool CanUndo()
-        {
-            return _project.History.CanUndo();
-        }
-
-        /// <summary>
-        /// Check if can perform the redo action.
-        /// </summary>
-        /// <returns>Returns true if can redo.</returns>
-        public bool CanRedo()
-        {
-            return _project.History.CanRedo();
-        }
-        
         /// <summary>
         /// Remove selected shapes.
         /// </summary>
@@ -3264,6 +3185,30 @@ namespace Core2D
         }
 
         /// <summary>
+        /// Try to selected shape at specified coordinates.
+        /// </summary>
+        /// <param name="container">The container object.</param>
+        /// <param name="x">The X coordinate in container.</param>
+        /// <param name="y">The Y coordinate in container.</param>
+        /// <returns>True if selecting shape was successful.</returns>
+        public bool TryToSelectShape(Container container, double x, double y)
+        {
+            if (container != null)
+            {
+                var result = ShapeBounds.HitTest(container, new Vector2(x, y), _project.Options.HitThreshold);
+                if (result != null)
+                {
+                    Select(container, result);
+                    return true;
+                }
+
+                Deselect(container);
+            }
+
+            return false;
+        }
+
+        /// <summary>
         /// Try to selected shapes inside selection rectangle.
         /// </summary>
         /// <param name="container">The container object.</param>
@@ -3275,7 +3220,7 @@ namespace Core2D
             {
                 var rect = Rect2.Create(rectangle.TopLeft, rectangle.BottomRight);
 
-                var result = ShapeBounds.HitTest(container, rect, _project.Options.HitTreshold);
+                var result = ShapeBounds.HitTest(container, rect, _project.Options.HitThreshold);
                 if (result != null)
                 {
                     if (result.Count > 0)
@@ -3290,30 +3235,6 @@ namespace Core2D
                         }
                         return true;
                     }
-                }
-
-                Deselect(container);
-            }
-
-            return false;
-        }
-
-        /// <summary>
-        /// Try to selected shape at specified coordinates.
-        /// </summary>
-        /// <param name="container">The container object.</param>
-        /// <param name="x">The X coordinate in container.</param>
-        /// <param name="y">The Y coordinate in container.</param>
-        /// <returns>True if selecting shape was successful.</returns>
-        public bool TryToSelectShape(Container container, double x, double y)
-        {
-            if (container != null)
-            {
-                var result = ShapeBounds.HitTest(container, new Vector2(x, y), _project.Options.HitTreshold);
-                if (result != null)
-                {
-                    Select(container, result);
-                    return true;
                 }
 
                 Deselect(container);
@@ -3367,7 +3288,7 @@ namespace Core2D
                 var result = ShapeBounds.HitTest(
                     _project.CurrentContainer,
                     new Vector2(x, y),
-                    _project.Options.HitTreshold);
+                    _project.Options.HitThreshold);
                 if (result != null)
                 {
                     Select(_project.CurrentContainer, result);
@@ -3405,7 +3326,7 @@ namespace Core2D
             var result = ShapeBounds.HitTest(
                 _project.CurrentContainer,
                 new Vector2(x, y),
-                _project.Options.HitTreshold);
+                _project.Options.HitThreshold);
 
             if (result is XLine)
             {
@@ -3505,33 +3426,25 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Try to connect group connectors to lines.
+        ///  Try to connect lines to connectors.
         /// </summary>
-        /// <param name="group">The group to connect.</param>
+        /// <param name="lines">The lines to connect.</param>
+        /// <param name="connectors">The connectors array.</param>
+        /// <param name="threshold">The connection threshold.</param>
         /// <returns>True if connection was successful.</returns>
-        public bool TryToConnect(XGroup group)
+        public bool TryToConnectLines(IEnumerable<XLine> lines, ImmutableArray<XPoint> connectors, double threshold)
         {
-            if (_project == null
-                || _project.CurrentContainer == null
-                || _project.CurrentContainer.CurrentLayer == null
-                || _project.Options == null)
-                return false;
-
-            var layer = _project.CurrentContainer.CurrentLayer;
-            if (group.Connectors.Length > 0)
+            if (connectors.Length > 0)
             {
-                var wires = GetAllShapes<XLine>(layer.Shapes);
-                var dict = new Dictionary<XLine, IList<XPoint>>();
+                var lineToPoints = new Dictionary<XLine, IList<XPoint>>();
 
-                // Find possible group to line connections.
-                foreach (var connector in group.Connectors)
+                // Find possible connector to line connections.
+                foreach (var connector in connectors)
                 {
-                    var p = new Vector2(connector.X, connector.Y);
-                    var t = _project.Options.HitTreshold;
                     XLine result = null;
-                    foreach (var line in wires)
+                    foreach (var line in lines)
                     {
-                        if (ShapeBounds.HitTestLine(line, p, t, 0, 0))
+                        if (ShapeBounds.HitTestLine(line, new Vector2(connector.X, connector.Y), threshold, 0, 0))
                         {
                             result = line;
                             break;
@@ -3540,27 +3453,27 @@ namespace Core2D
 
                     if (result != null)
                     {
-                        if (dict.ContainsKey(result))
+                        if (lineToPoints.ContainsKey(result))
                         {
-                            dict[result].Add(connector);
+                            lineToPoints[result].Add(connector);
                         }
                         else
                         {
-                            dict.Add(result, new List<XPoint>());
-                            dict[result].Add(connector);
+                            lineToPoints.Add(result, new List<XPoint>());
+                            lineToPoints[result].Add(connector);
                         }
                     }
                 }
 
+                // Try to split lines using connectors.
                 bool success = false;
-
-                // Try to split lines using group connectors.
-                foreach (var kv in dict)
+                foreach (var kv in lineToPoints)
                 {
+                    XLine line = kv.Key;
                     IList<XPoint> points = kv.Value;
                     if (points.Count == 2)
                     {
-                        success = TryToSplitLine(kv.Key, points[0], points[1]);
+                        success = TryToSplitLine(line, points[0], points[1]);
                     }
                 }
 
@@ -3568,6 +3481,15 @@ namespace Core2D
             }
 
             return false;
+        }
+
+        /// <summary>
+        /// Checks if edit mode is active.
+        /// </summary>
+        /// <returns>Return true if edit mode is active.</returns>
+        public bool IsEditMode()
+        {
+            return true;
         }
 
         /// <summary>
@@ -3698,15 +3620,6 @@ namespace Core2D
         public void Move(double x, double y)
         {
             Tools[CurrentTool].Move(x, y);
-        }
-
-        /// <summary>
-        /// Checks if edit mode is active.
-        /// </summary>
-        /// <returns>Return true if edit mode is active.</returns>
-        public bool IsEditMode()
-        {
-            return true;
         }
 
         /// <summary>
