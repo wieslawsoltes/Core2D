@@ -3249,8 +3249,11 @@ namespace Core2D
         /// <param name="shape">The shape to hover.</param>
         public void Hover(Container container, BaseShape shape)
         {
-            Select(container, shape);
-            _hover = shape;
+            if (container != null)
+            {
+                Select(container, shape);
+                _hover = shape;
+            }
         }
 
         /// <summary>
@@ -3259,8 +3262,11 @@ namespace Core2D
         /// <param name="container">The container object.</param>
         public void Dehover(Container container)
         {
-            _hover = default(BaseShape);
-            Deselect(container);
+            if (container != null)
+            {
+                _hover = default(BaseShape);
+                Deselect(container);
+            }
         }
 
         /// <summary>
