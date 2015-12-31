@@ -3095,8 +3095,8 @@ namespace Core2D
                 _project.History.Snapshot(previous, next, (p) => layer.Shapes = p);
                 layer.Shapes = next;
 
-                _project.CurrentContainer.CurrentLayer.Invalidate();
                 _renderers[0].State.SelectedShape = default(BaseShape);
+                layer.Invalidate();
             }
 
             if (_renderers[0].State.SelectedShapes != null && _renderers[0].State.SelectedShapes.Count > 0)
@@ -3122,16 +3122,80 @@ namespace Core2D
         /// <summary>
         /// Select shape.
         /// </summary>
+        /// <param name="shape">The shape to select.</param>
+        public void Select(BaseShape shape)
+        {
+            if (_renderers != null)
+            {
+                _renderers[0].State.SelectedShape = shape;
+
+                if (_renderers[0].State.SelectedShapes != null)
+                {
+                    _renderers[0].State.SelectedShapes = default(ImmutableHashSet<BaseShape>);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Select shapes.
+        /// </summary>
+        /// <param name="shapes">The shapes to select.</param>
+        public void Select(ImmutableHashSet<BaseShape> shapes)
+        {
+            if (_renderers != null)
+            {
+                if (_renderers[0].State.SelectedShape != null)
+                {
+                    _renderers[0].State.SelectedShape = default(BaseShape);
+                }
+
+                _renderers[0].State.SelectedShapes = shapes;
+            }
+        }
+
+        /// <summary>
+        /// De-select shape(s).
+        /// </summary>
+        public void Deselect()
+        {
+            if (_renderers != null)
+            {
+                if (_renderers[0].State.SelectedShape != null)
+                {
+                    _renderers[0].State.SelectedShape = default(BaseShape);
+                }
+
+                if (_renderers[0].State.SelectedShapes != null)
+                {
+                    _renderers[0].State.SelectedShapes = default(ImmutableHashSet<BaseShape>);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Select shape.
+        /// </summary>
         /// <param name="container">The owner container.</param>
         /// <param name="shape">The shape to select.</param>
         public void Select(Container container, BaseShape shape)
         {
             if (container != null)
             {
+                Select(shape);
+
                 container.CurrentShape = shape;
-                _renderers[0].State.SelectedShape = shape;
-                _renderers[0].State.SelectedShapes = default(ImmutableHashSet<BaseShape>);
-                container.CurrentLayer.Invalidate();
+
+                if (container.CurrentLayer != null)
+                {
+                    container.CurrentLayer.Invalidate();
+                }
+                else
+                {
+                    if (Invalidate != null)
+                    {
+                        Invalidate();
+                    }
+                }
             }
         }
 
@@ -3144,47 +3208,58 @@ namespace Core2D
         {
             if (container != null)
             {
-                container.CurrentShape = default(BaseShape);
-                _renderers[0].State.SelectedShape = default(BaseShape);
-                _renderers[0].State.SelectedShapes = shapes;
-                container.CurrentLayer.Invalidate();
-            }
-        }
+                Select(shapes);
 
-        /// <summary>
-        /// De-select selected shape(s).
-        /// </summary>
-        public void Deselect()
-        {
-            if (_renderers != null)
-            {
-                _renderers[0].State.SelectedShape = default(BaseShape);
-                _renderers[0].State.SelectedShapes = default(ImmutableHashSet<BaseShape>);
-            }
-        }
-
-        /// <summary>
-        ///  De-select selected shape(s).
-        /// </summary>
-        /// <param name="container">The container object.</param>
-        public void Deselect(Container container)
-        {
-            if (container != null && _renderers != null)
-            {
-                if (_renderers[0].State.SelectedShape != null
-                    || _renderers[0].State.SelectedShapes != null)
+                if (container.CurrentShape != null)
                 {
-                    _renderers[0].State.SelectedShape = default(BaseShape);
-                    _renderers[0].State.SelectedShapes = default(ImmutableHashSet<BaseShape>);
-
                     container.CurrentShape = default(BaseShape);
+                }
+
+                if (container.CurrentLayer != null)
+                {
                     container.CurrentLayer.Invalidate();
+                }
+                else
+                {
+                    if (Invalidate != null)
+                    {
+                        Invalidate();
+                    }
                 }
             }
         }
 
         /// <summary>
-        /// Try to selected shape at specified coordinates.
+        /// De-select shape(s).
+        /// </summary>
+        /// <param name="container">The container object.</param>
+        public void Deselect(Container container)
+        {
+            if (container != null)
+            {
+                Deselect();
+
+                if (container.CurrentShape != null)
+                {
+                    container.CurrentShape = default(BaseShape);
+                }
+
+                if (container.CurrentLayer != null)
+                {
+                    container.CurrentLayer.Invalidate();
+                }
+                else
+                {
+                    if (Invalidate != null)
+                    {
+                        Invalidate();
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Try to select shape at specified coordinates.
         /// </summary>
         /// <param name="container">The container object.</param>
         /// <param name="x">The X coordinate in container.</param>
@@ -3208,7 +3283,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Try to selected shapes inside selection rectangle.
+        /// Try to select shapes inside rectangle.
         /// </summary>
         /// <param name="container">The container object.</param>
         /// <param name="rectangle">The selection rectangle.</param>
@@ -3218,7 +3293,6 @@ namespace Core2D
             if (container != null)
             {
                 var rect = Rect2.Create(rectangle.TopLeft, rectangle.BottomRight);
-
                 var result = ShapeBounds.HitTest(container, rect, _project.Options.HitThreshold);
                 if (result != null)
                 {
@@ -3262,7 +3336,7 @@ namespace Core2D
         /// <param name="container">The container object.</param>
         public void Dehover(Container container)
         {
-            if (container != null)
+            if (container != null && _hover != null)
             {
                 _hover = default(BaseShape);
                 Deselect(container);
