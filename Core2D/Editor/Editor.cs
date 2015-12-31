@@ -2884,11 +2884,10 @@ namespace Core2D
                     {
                         if (clone is XGroup)
                         {
-                            var group = clone as XGroup;
-                            var lines = GetAllShapes<XLine>(_project.CurrentContainer.CurrentLayer.Shapes);
-                            var connectors = group.Connectors;
-                            var threshold = _project.Options.HitThreshold;
-                            TryToConnectLines(lines, connectors, threshold);
+                            TryToConnectLines(
+                                GetAllShapes<XLine>(_project.CurrentContainer.CurrentLayer.Shapes), 
+                                (clone as XGroup).Connectors, 
+                                _project.Options.HitThreshold);
                         }
                     }
                 }
