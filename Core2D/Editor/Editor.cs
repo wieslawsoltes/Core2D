@@ -3245,19 +3245,12 @@ namespace Core2D
         /// <summary>
         /// Hover shape.
         /// </summary>
+        /// <param name="container">The container object.</param>
         /// <param name="shape">The shape to hover.</param>
-        public void Hover(BaseShape shape)
+        public void Hover(Container container, BaseShape shape)
         {
-            Select(_project.CurrentContainer, shape);
+            Select(container, shape);
             _hover = shape;
-        }
-
-        /// <summary>
-        /// De-hover shape.
-        /// </summary>
-        public void Dehover()
-        {
-            _hover = default(BaseShape);
         }
 
         /// <summary>
@@ -3284,24 +3277,17 @@ namespace Core2D
             if (_renderers[0].State.SelectedShapes == null
                 && !(_renderers[0].State.SelectedShape != null && _hover != _renderers[0].State.SelectedShape))
             {
-                var result = ShapeBounds.HitTest(
-                    _project.CurrentContainer,
-                    new Vector2(x, y),
-                    _project.Options.HitThreshold);
+                var result = ShapeBounds.HitTest(_project.CurrentContainer, new Vector2(x, y), _project.Options.HitThreshold);
                 if (result != null)
                 {
-                    Select(_project.CurrentContainer, result);
-                    _hover = result;
-
+                    Hover(_project.CurrentContainer, result);
                     return true;
                 }
                 else
                 {
-                    if (_renderers[0].State.SelectedShape != null
-                        && _renderers[0].State.SelectedShape == _hover)
+                    if (_renderers[0].State.SelectedShape != null && _renderers[0].State.SelectedShape == _hover)
                     {
-                        _hover = default(BaseShape);
-                        Deselect(_project.CurrentContainer);
+                        Dehover(_project.CurrentContainer);
                     }
                 }
             }

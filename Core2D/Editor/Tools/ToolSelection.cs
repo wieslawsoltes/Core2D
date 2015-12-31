@@ -129,7 +129,7 @@ namespace Core2D
             {
                 case State.None:
                     {
-                        _editor.Dehover();
+                        _editor.Dehover(_editor.Project.CurrentContainer);
                         if (_editor.Renderers[0].State.SelectedShape == null
                             && _editor.Renderers[0].State.SelectedShapes != null)
                         {
@@ -267,7 +267,7 @@ namespace Core2D
             {
                 case State.None:
                     {
-                        _editor.Dehover();
+                        _editor.Dehover(_editor.Project.CurrentContainer);
                     }
                     break;
                 case State.One:
