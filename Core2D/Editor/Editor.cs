@@ -3354,14 +3354,22 @@ namespace Core2D
                     split.Start = line.Start;
                     split.End = point;
 
-                    line.Start = point;
+                    // Swap line start point.
+                    var previous = line.Start;
+                    var next = point;
+                    _project.History.Snapshot(previous, next, (p) => line.Start = p);
+                    line.Start = next;
                 }
                 else
                 {
                     split.Start = point;
                     split.End = line.End;
 
-                    line.End = point;
+                    // Swap line end point.
+                    var previous = line.End;
+                    var next = point;
+                    _project.History.Snapshot(previous, next, (p) => line.End = p);
+                    line.End = next;
                 }
 
                 _project.AddShape(split);
@@ -3406,7 +3414,12 @@ namespace Core2D
                     line.Style,
                     _project.Options.PointShape,
                     line.IsStroked);
-                line.End = p1;
+
+                // Swap line end point.
+                var previous = line.End;
+                var next = p1;
+                _project.History.Snapshot(previous, next, (p) => line.End = p);
+                line.End = next;
             }
             else
             {
@@ -3416,7 +3429,12 @@ namespace Core2D
                     line.Style,
                     _project.Options.PointShape,
                     line.IsStroked);
-                line.End = p0;
+
+                // Swap line end point.
+                var previous = line.End;
+                var next = p0;
+                _project.History.Snapshot(previous, next, (p) => line.End = p);
+                line.End = next;
             }
 
             _project.AddShape(split);
