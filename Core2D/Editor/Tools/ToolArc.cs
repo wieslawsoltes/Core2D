@@ -42,7 +42,7 @@ namespace Core2D
         /// <returns>True if connected.</returns>
         public bool TryToConnectPoint1(XArc arc, double x, double y)
         {
-            var result = ShapeBounds.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitTreshold);
+            var result = ShapeBounds.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitThreshold);
             if (result != null && result is XPoint)
             {
                 arc.Point1 = result as XPoint;
@@ -60,7 +60,7 @@ namespace Core2D
         /// <returns>True if connected.</returns>
         public bool TryToConnectPoint2(XArc arc, double x, double y)
         {
-            var result = ShapeBounds.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitTreshold);
+            var result = ShapeBounds.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitThreshold);
             if (result != null && result is XPoint)
             {
                 arc.Point2 = result as XPoint;
@@ -78,7 +78,7 @@ namespace Core2D
         /// <returns>True if connected.</returns>
         public bool TryToConnectPoint3(XArc arc, double x, double y)
         {
-            var result = ShapeBounds.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitTreshold);
+            var result = ShapeBounds.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitThreshold);
             if (result != null && result is XPoint)
             {
                 arc.Point3 = result as XPoint;
@@ -96,7 +96,7 @@ namespace Core2D
         /// <returns>True if connected.</returns>
         public bool TryToConnectPoint4(XArc arc, double x, double y)
         {
-            var result = ShapeBounds.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitTreshold);
+            var result = ShapeBounds.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitThreshold);
             if (result != null && result is XPoint)
             {
                 arc.Point4 = result as XPoint;

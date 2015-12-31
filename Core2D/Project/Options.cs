@@ -11,7 +11,7 @@ namespace Core2D
         private bool _snapToGrid = true;
         private double _snapX = 15.0;
         private double _snapY = 15.0;
-        private double _hitTreshold = 7.0;
+        private double _hitThreshold = 7.0;
         private MoveMode _moveMode = MoveMode.Point;
         private bool _defaultIsStroked = true;
         private bool _defaultIsFilled = false;
@@ -54,10 +54,10 @@ namespace Core2D
         /// <summary>
         /// Gets or sets hit test threshold radius.
         /// </summary>
-        public double HitTreshold
+        public double HitThreshold
         {
-            get { return _hitTreshold; }
-            set { Update(ref _hitTreshold, value); }
+            get { return _hitThreshold; }
+            set { Update(ref _hitThreshold, value); }
         }
 
         /// <summary>
@@ -170,7 +170,7 @@ namespace Core2D
                 SnapToGrid = true,
                 SnapX = 15.0,
                 SnapY = 15.0,
-                HitTreshold = 7.0,
+                HitThreshold = 7.0,
                 MoveMode = MoveMode.Point,
                 DefaultIsStroked = true,
                 DefaultIsFilled = false,

@@ -423,8 +423,8 @@
   <data name="OptionsHelperStyle" xml:space="preserve">
     <value>HelperStyle</value>
   </data>
-  <data name="OptionsHitTreshold" xml:space="preserve">
-    <value>HitTreshold</value>
+  <data name="OptionsHitThreshold" xml:space="preserve">
+    <value>HitThreshold</value>
   </data>
   <data name="OptionsMoveMode" xml:space="preserve">
     <value>MoveMode</value>

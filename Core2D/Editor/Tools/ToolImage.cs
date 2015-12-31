@@ -32,7 +32,7 @@ namespace Core2D
         /// <param name="y">The Y coordinate of point.</param>
         public void TryToConnectTopLeft(XImage image, double x, double y)
         {
-            var result = ShapeBounds.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitTreshold);
+            var result = ShapeBounds.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitThreshold);
             if (result != null && result is XPoint)
             {
                 image.TopLeft = result as XPoint;
@@ -47,7 +47,7 @@ namespace Core2D
         /// <param name="y">The Y coordinate of point.</param>
         public void TryToConnectBottomRight(XImage image, double x, double y)
         {
-            var result = ShapeBounds.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitTreshold);
+            var result = ShapeBounds.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitThreshold);
             if (result != null && result is XPoint)
             {
                 image.BottomRight = result as XPoint;

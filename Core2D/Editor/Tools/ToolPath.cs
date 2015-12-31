@@ -73,7 +73,7 @@ namespace Core2D
                 var result = ShapeBounds.HitTest(
                     _editor.Project.CurrentContainer,
                     new Vector2(x, y),
-                    _editor.Project.Options.HitTreshold);
+                    _editor.Project.Options.HitThreshold);
                 if (result != null && result is XPoint)
                 {
                     return result as XPoint;

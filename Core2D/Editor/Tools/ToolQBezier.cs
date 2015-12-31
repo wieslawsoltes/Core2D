@@ -37,7 +37,7 @@ namespace Core2D
         /// <returns>True if connected.</returns>
         public void TryToConnectPoint1(XQBezier qbezier, double x, double y)
         {
-            var result = ShapeBounds.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitTreshold);
+            var result = ShapeBounds.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitThreshold);
             if (result != null && result is XPoint)
             {
                 qbezier.Point1 = result as XPoint;
@@ -53,7 +53,7 @@ namespace Core2D
         /// <returns>True if connected.</returns>
         public void TryToConnectPoint2(XQBezier qbezier, double x, double y)
         {
-            var result = ShapeBounds.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitTreshold);
+            var result = ShapeBounds.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitThreshold);
             if (result != null && result is XPoint)
             {
                 qbezier.Point2 = result as XPoint;
@@ -69,7 +69,7 @@ namespace Core2D
         /// <returns>True if connected.</returns>
         public void TryToConnectPoint3(XQBezier qbezier, double x, double y)
         {
-            var result = ShapeBounds.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitTreshold);
+            var result = ShapeBounds.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitThreshold);
             if (result != null && result is XPoint)
             {
                 qbezier.Point3 = result as XPoint;

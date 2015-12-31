@@ -39,7 +39,7 @@ namespace Core2D
         /// <returns>True if connected.</returns>
         public void TryToConnectPoint1(XBezier bezier, double x, double y)
         {
-            var result = ShapeBounds.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitTreshold);
+            var result = ShapeBounds.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitThreshold);
             if (result != null && result is XPoint)
             {
                 bezier.Point1 = result as XPoint;
@@ -55,7 +55,7 @@ namespace Core2D
         /// <returns>True if connected.</returns>
         public void TryToConnectPoint2(XBezier bezier, double x, double y)
         {
-            var result = ShapeBounds.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitTreshold);
+            var result = ShapeBounds.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitThreshold);
             if (result != null && result is XPoint)
             {
                 bezier.Point2 = result as XPoint;
@@ -71,7 +71,7 @@ namespace Core2D
         /// <returns>True if connected.</returns>
         public void TryToConnectPoint3(XBezier bezier, double x, double y)
         {
-            var result = ShapeBounds.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitTreshold);
+            var result = ShapeBounds.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitThreshold);
             if (result != null && result is XPoint)
             {
                 bezier.Point3 = result as XPoint;
@@ -87,7 +87,7 @@ namespace Core2D
         /// <returns>True if connected.</returns>
         public void TryToConnectPoint4(XBezier bezier, double x, double y)
         {
-            var result = ShapeBounds.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitTreshold);
+            var result = ShapeBounds.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitThreshold);
             if (result != null && result is XPoint)
             {
                 bezier.Point4 = result as XPoint;

@@ -133,7 +133,7 @@ namespace Core2D
                         if (_editor.Renderers[0].State.SelectedShape == null
                             && _editor.Renderers[0].State.SelectedShapes != null)
                         {
-                            var result = ShapeBounds.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitTreshold);
+                            var result = ShapeBounds.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitThreshold);
                             if (result != null)
                             {
                                 _startX = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;

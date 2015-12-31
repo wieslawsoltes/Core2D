@@ -659,7 +659,7 @@ namespace Core2D
             var container = project.CurrentContainer;
             if (container != null)
             {
-                var result = ShapeBounds.HitTest(container, new Vector2(x, y), project.Options.HitTreshold);
+                var result = ShapeBounds.HitTest(container, new Vector2(x, y), project.Options.HitThreshold);
                 if (result != null)
                 {
                     var previous = result.Data.Record;
@@ -845,7 +845,7 @@ namespace Core2D
             var container = project.CurrentContainer;
             if (container != null)
             {
-                var result = ShapeBounds.HitTest(container, new Vector2(x, y), project.Options.HitTreshold);
+                var result = ShapeBounds.HitTest(container, new Vector2(x, y), project.Options.HitThreshold);
                 if (result != null)
                 {
                     project.ApplyStyle(result, style);

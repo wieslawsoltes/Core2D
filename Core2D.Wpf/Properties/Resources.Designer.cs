@@ -1168,11 +1168,11 @@ namespace Core2D.Wpf.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to HitTreshold.
+        ///   Looks up a localized string similar to HitThreshold.
         /// </summary>
-        public static string OptionsHitTreshold {
+        public static string OptionsHitThreshold {
             get {
-                return ResourceManager.GetString("OptionsHitTreshold", resourceCulture);
+                return ResourceManager.GetString("OptionsHitThreshold", resourceCulture);
             }
         }
         
