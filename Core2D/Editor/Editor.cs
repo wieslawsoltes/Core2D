@@ -3136,7 +3136,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Select shape.s
+        /// Select shapes.
         /// </summary>
         /// <param name="container">The owner container.</param>
         /// <param name="shapes">The shapes to select.</param>
