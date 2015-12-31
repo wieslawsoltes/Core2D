@@ -6,6 +6,8 @@
 
 Data driven 2D diagram editor.
 
+<a href='https://www.youtube.com/watch?v=P7G0kmX7EcU' target='_blank'>![](https://i.ytimg.com/vi/P7G0kmX7EcU/hqdefault.jpg)<a/>
+
 ## About
 
 Core2D is an application for making data driven 2D diagrams.
