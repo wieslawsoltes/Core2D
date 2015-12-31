@@ -2885,8 +2885,8 @@ namespace Core2D
                         if (clone is XGroup)
                         {
                             TryToConnectLines(
-                                GetAllShapes<XLine>(_project.CurrentContainer.CurrentLayer.Shapes), 
-                                (clone as XGroup).Connectors, 
+                                GetAllShapes<XLine>(_project.CurrentContainer.CurrentLayer.Shapes),
+                                (clone as XGroup).Connectors,
                                 _project.Options.HitThreshold);
                         }
                     }
