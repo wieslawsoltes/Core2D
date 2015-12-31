@@ -3490,7 +3490,36 @@ namespace Core2D
                     IList<XPoint> points = kv.Value;
                     if (points.Count == 2)
                     {
-                        success = TryToSplitLine(line, points[0], points[1]);
+                        var p0 = points[0];
+                        var p1 = points[1];
+                        bool horizontal = Math.Abs(p0.Y - p1.Y) < threshold;
+                        bool vertical = Math.Abs(p0.X - p1.X) < threshold;
+
+                        // Points are aligned horizontally.
+                        if (horizontal && !vertical)
+                        {
+                            if (p0.X <= p1.X)
+                            {
+                                success = TryToSplitLine(line, p0, p1);
+                            }
+                            else
+                            {
+                                success = TryToSplitLine(line, p1, p0);
+                            }
+                        }
+
+                        // Points are aligned vertically.
+                        if (!horizontal && vertical)
+                        {
+                            if (p0.Y >= p1.Y)
+                            {
+                                success = TryToSplitLine(line, p1, p0);
+                            }
+                            else
+                            {
+                                success = TryToSplitLine(line, p0, p1);
+                            }
+                        }
                     }
                 }
 
