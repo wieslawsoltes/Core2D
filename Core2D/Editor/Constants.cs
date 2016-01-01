@@ -26,6 +26,26 @@ namespace Core2D
         /// <summary>
         /// 
         /// </summary>
+        public const string DefaultDatabaseName = "Db";
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public const string DefaulColumnName = "Column";
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public const string DefaulPropertyName = "Property";
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public const string DefaulValue = "<empty>";
+
+        /// <summary>
+        /// 
+        /// </summary>
         public const string ImportedStyleLibraryName = "Imported";
 
         /// <summary>
