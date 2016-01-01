@@ -11,9 +11,9 @@
     <Grid RowDefinitions="Auto,Auto,*">
         <Menu Grid.Row="0" HorizontalAlignment="Right">
             <MenuItem Header="apply" Command="{Static core:Commands.ApplyTemplateCommand}" CommandParameter="{Binding Path=CurrentTemplate}"/>
-            <MenuItem Header="edit" Command="{Static core:Commands.EditTemplateCommand}"/>
+            <MenuItem Header="edit" Command="{Static core:Commands.EditTemplateCommand}" CommandParameter="{Binding Path=CurrentTemplate}"/>
             <MenuItem Header="+" Command="{Static core:Commands.AddTemplateCommand}"/>
-            <MenuItem Header="-" Command="{Static core:Commands.RemoveTemplateCommand}"/>
+            <MenuItem Header="-" Command="{Static core:Commands.RemoveTemplateCommand}" CommandParameter="{Binding Path=CurrentTemplate}"/>
         </Menu>
         <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="1">
             <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>

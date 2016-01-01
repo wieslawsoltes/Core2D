@@ -18,10 +18,13 @@ namespace Core2D
         /// <param name="document">The document instance.</param>
         public static void AddDocument(this Project project, Document document)
         {
-            var previous = project.Documents;
-            var next = project.Documents.Add(document);
-            project.History.Snapshot(previous, next, (p) => project.Documents = p);
-            project.Documents = next;
+            if (project.Documents != null && document != null)
+            {
+                var previous = project.Documents;
+                var next = project.Documents.Add(document);
+                project.History.Snapshot(previous, next, (p) => project.Documents = p);
+                project.Documents = next;
+            }
         }
 
         /// <summary>
@@ -32,10 +35,13 @@ namespace Core2D
         /// <param name="index">The document index.</param>
         public static void AddDocumentAt(this Project project, Document document, int index)
         {
-            var previous = project.Documents;
-            var next = project.Documents.Insert(index, document);
-            project.History.Snapshot(previous, next, (p) => project.Documents = p);
-            project.Documents = next;
+            if (project.Documents != null && document != null && index >= 0)
+            {
+                var previous = project.Documents;
+                var next = project.Documents.Insert(index, document);
+                project.History.Snapshot(previous, next, (p) => project.Documents = p);
+                project.Documents = next;
+            }
         }
 
         /// <summary>
@@ -45,7 +51,7 @@ namespace Core2D
         /// <param name="document">The document object to remove from project <see cref="Project.Documents"/> collection.</param>
         public static void RemoveDocument(this Project project, Document document)
         {
-            if (project != null && project.Documents != null)
+            if (project.Documents != null && document != null)
             {
                 var previous = project.Documents;
                 var next = project.Documents.Remove(document);
@@ -69,11 +75,11 @@ namespace Core2D
         /// Add page.
         /// </summary>
         /// <param name="project">The project instance.</param>
+        /// <param name="document">The document instance.</param>
         /// <param name="page">The page instance.</param>
-        public static void AddContainer(this Project project, Page page)
+        public static void AddPage(this Project project, Document document, Page page)
         {
-            var document = project.CurrentDocument;
-            if (document != null)
+            if (document != null && page != null)
             {
                 var previous = document.Pages;
                 var next = document.Pages.Add(page);
@@ -86,12 +92,12 @@ namespace Core2D
         /// Add page at specified index.
         /// </summary>
         /// <param name="project">The project instance.</param>
+        /// <param name="document">The document instance.</param>
         /// <param name="page">The page instance.</param>
         /// <param name="index">The page index.</param>
-        public static void AddPageAt(this Project project, Page page, int index)
+        public static void AddPageAt(this Project project, Document document, Page page, int index)
         {
-            var document = project.CurrentDocument;
-            if (document != null)
+            if (document != null && page != null && index >= 0)
             {
                 var previous = document.Pages;
                 var next = document.Pages.Insert(index, page);
@@ -138,13 +144,13 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Remove the <see cref="Project.CurrentTemplate"/> object from the <see cref="Project.Templates"/> collection.
+        /// Remove template.
         /// </summary>
         /// <param name="project">The project instance.</param>
-        public static void RemoveTemplate(this Project project)
+        /// <param name="template">The template instance</param>
+        public static void RemoveTemplate(this Project project, Template template)
         {
-            var template = project.CurrentTemplate;
-            if (template != null)
+            if (project.Templates != null && template != null)
             {
                 var previous = project.Templates;
                 var next = project.Templates.Remove(project.CurrentTemplate);

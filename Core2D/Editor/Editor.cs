@@ -1592,21 +1592,21 @@ namespace Core2D
         /// <summary>
         /// Remove template.
         /// </summary>
-        public void OnRemoveTemplate()
+        /// <param name="template">The template object.</param>
+        public void OnRemoveTemplate(Template template)
         {
-            _project.RemoveTemplate();
+            if (_project != null && template != null)
+            {
+                _project.RemoveTemplate(template);
+            }
         }
 
         /// <summary>
-        /// Edit current template.
+        /// Edit template.
         /// </summary>
-        public void OnEditTemplate()
+        public void OnEditTemplate(Template template)
         {
-            if (_project == null || _project.CurrentTemplate == null)
-                return;
-
-            var template = _project.CurrentTemplate;
-            if (template != null)
+            if (_project != null && template != null)
             {
                 _project.CurrentContainer = template;
                 _project.CurrentContainer.Invalidate();
@@ -1614,7 +1614,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Set current template as current page's template.
+        /// Set page template.
         /// </summary>
         /// <param name="template">The template object.</param>
         public void OnApplyTemplate(Template template)
@@ -1700,7 +1700,7 @@ namespace Core2D
                 container = Page.Create(Constants.DefaultPageName);
             }
 
-            _project.AddContainer(container);
+            _project.AddPage(_project.CurrentDocument, container);
             _project.CurrentContainer = container;
         }
 
@@ -1728,7 +1728,7 @@ namespace Core2D
                     container = Page.Create(Constants.DefaultPageName);
                 }
 
-                _project.AddPageAt(container, index);
+                _project.AddPageAt(_project.CurrentDocument, container, index);
                 _project.CurrentContainer = container;
             }
         }
@@ -1757,7 +1757,7 @@ namespace Core2D
                     container = Page.Create(Constants.DefaultPageName);
                 }
 
-                _project.AddPageAt(container, index + 1);
+                _project.AddPageAt(_project.CurrentDocument, container, index + 1);
                 _project.CurrentContainer = container;
             }
         }

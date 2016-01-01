@@ -476,12 +476,12 @@ namespace Core2D
         /// <summary>
         /// Remove template.
         /// </summary>
-        public static ICoreCommand RemoveTemplateCommand { get; set; }
+        public static ICoreCommand<Template> RemoveTemplateCommand { get; set; }
 
         /// <summary>
-        /// Edit current template.
+        /// Edit template.
         /// </summary>
-        public static ICoreCommand EditTemplateCommand { get; set; }
+        public static ICoreCommand<Template> EditTemplateCommand { get; set; }
 
         /// <summary>
         /// Set page template.
@@ -890,14 +890,14 @@ namespace Core2D
                     () => editor.IsEditMode());
 
             RemoveTemplateCommand =
-                Command.Create(
-                    () => editor.OnRemoveTemplate(),
-                    () => editor.IsEditMode());
+                Command<Template>.Create(
+                    (template) => editor.OnRemoveTemplate(template),
+                    (template) => editor.IsEditMode());
 
             EditTemplateCommand =
-                Command.Create(
-                    () => editor.OnEditTemplate(),
-                    () => editor.IsEditMode());
+                Command<Template>.Create(
+                    (template) => editor.OnEditTemplate(template),
+                    (template) => editor.IsEditMode());
 
             ApplyTemplateCommand =
                 Command<Template>.Create(
