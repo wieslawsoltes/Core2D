@@ -256,7 +256,7 @@ namespace Core2D
                     project.History.Snapshot(previous, next, (p) => layer.Shapes = p);
                     layer.Shapes = next;
 
-                    project.CurrentContainer.CurrentShape = project.CurrentContainer.CurrentLayer.Shapes.FirstOrDefault();
+                    container.CurrentShape = layer.Shapes.FirstOrDefault();
                 }
             }
         }
