@@ -97,70 +97,13 @@
                 <MenuItem Header="Insert Page Bef_ore" Command="{Static core:Commands.InsertPageBeforeCommand}" CommandParameter="{Binding Path=Project.CurrentContainer}"/>
                 <MenuItem Header="Insert Page Aft_er" Command="{Static core:Commands.InsertPageAfterCommand}" CommandParameter="{Binding Path=Project.CurrentContainer}"/>
                 <Separator/>
-                <MenuItem Header="Cu_t Container" Command="{Static core:Commands.CutCommand}" CommandParameter="{Binding Path=Project.CurrentContainer}"/>
-                <MenuItem Header="_Copy Container" Command="{Static core:Commands.CopyCommand}" CommandParameter="{Binding Path=Project.CurrentContainer}"/>
-                <MenuItem Header="_Paste Container" Command="{Static core:Commands.PasteCommand}" CommandParameter="{Binding Path=Project.CurrentContainer}"/>
+                <MenuItem Header="Cu_t Page" Command="{Static core:Commands.CutCommand}" CommandParameter="{Binding Path=Project.CurrentContainer}"/>
+                <MenuItem Header="_Copy Page" Command="{Static core:Commands.CopyCommand}" CommandParameter="{Binding Path=Project.CurrentContainer}"/>
+                <MenuItem Header="_Paste Page" Command="{Static core:Commands.PasteCommand}" CommandParameter="{Binding Path=Project.CurrentContainer}"/>
                 <Separator/>
-                <MenuItem Header="_Delete Container" Command="{Static core:Commands.DeleteCommand}" CommandParameter="{Binding Path=Project.CurrentContainer}"/>
+                <MenuItem Header="_Delete Page" Command="{Static core:Commands.DeleteCommand}" CommandParameter="{Binding Path=Project.CurrentContainer}"/>
                 <Separator/>
-                <MenuItem Header="E_xport Container" Command="{Static core:Commands.ExportCommand}" CommandParameter="{Binding Path=Project.CurrentContainer}"/>
-            </MenuItem>
-            <MenuItem Header="_Layers">
-                <MenuItem Header="_Add Layer" Command="{Static core:Commands.AddLayerCommand}"/>
-                <Separator/>
-                <MenuItem Header="_Delete Layer" Command="{Static core:Commands.RemoveLayerCommand}"/>
-            </MenuItem>
-            <MenuItem Header="S_hapes">
-                <MenuItem Header="_Delete Shape" Command="{Static core:Commands.RemoveShapeCommand}"/>
-            </MenuItem>
-            <Separator/>
-            <MenuItem Header="Sha_pe">
-                <MenuItem Header="_Add Property" Command="{Static core:Commands.AddPropertyCommand}" CommandParameter="{Binding Path=Project.CurrentContainer.CurrentShape.Data}"/>
-                <Separator/>
-                <MenuItem Header="_Reset Record" Command="{Static core:Commands.ResetRecordCommand}" CommandParameter="{Binding Path=Project.CurrentContainer.CurrentShape.Data}"/>
-            </MenuItem>
-            <Separator/>
-            <MenuItem Header="Style Li_braries">
-                <MenuItem Header="_Add Style Library" Command="{Static core:Commands.AddStyleLibraryCommand}"/>
-                <Separator/>
-                <MenuItem Header="_Delete Style Library" Command="{Static core:Commands.RemoveStyleLibraryCommand}"/>
-            </MenuItem>
-            <MenuItem Header="_Styles">
-                <MenuItem Header="_Add Style" Command="{Static core:Commands.AddStyleCommand}"/>
-                <Separator/>
-                <MenuItem Header="_Delete Style" Command="{Static core:Commands.RemoveStyleCommand}"/>
-            </MenuItem>
-            <Separator/>
-            <MenuItem Header="Group _Libraries">
-                <MenuItem Header="_Add Group Library" Command="{Static core:Commands.AddGroupLibraryCommand}"/>
-                <Separator/>
-                <MenuItem Header="_Delete Group Library" Command="{Static core:Commands.RemoveGroupLibraryCommand}"/>
-            </MenuItem>
-            <MenuItem Header="_Groups">
-                <MenuItem Header="_Add Group" Command="{Static core:Commands.AddGroupCommand}"/>
-                <Separator/>
-                <MenuItem Header="_Delete Group" Command="{Static core:Commands.RemoveGroupCommand}"/>
-            </MenuItem>
-            <Separator/>
-            <MenuItem Header="_Templates">
-                <MenuItem Header="_Edit Template" Command="{Static core:Commands.EditTemplateCommand}"/>
-                <Separator/>
-                <MenuItem Header="_Add Template" Command="{Static core:Commands.AddTemplateCommand}"/>
-                <Separator/>
-                <MenuItem Header="_Delete Template" Command="{Static core:Commands.RemoveTemplateCommand}"/>
-            </MenuItem>
-            <Separator/>
-            <MenuItem Header="_Databases">
-                <MenuItem Header="_Add Database" Command="{Static core:Commands.AddDatabaseCommand}"/>
-                <Separator/>
-                <MenuItem Header="_Delete Database" Command="{Static core:Commands.RemoveDatabaseCommand}" CommandParameter="{Binding Path=Project.CurrentDatabase}"/>
-            </MenuItem>
-            <MenuItem Header="Data_base">
-                <MenuItem Header="Add _Record" Command="{Static core:Commands.AddRecordCommand}"/>
-                <Separator/>
-                <MenuItem Header="Delete Recor_d" Command="{Static core:Commands.RemoveRecordCommand}"/>
-                <Separator/>
-                <MenuItem Header="Add _Column" Command="{Static core:Commands.AddColumnCommand}"/>
+                <MenuItem Header="E_xport Page" Command="{Static core:Commands.ExportCommand}" CommandParameter="{Binding Path=Project.CurrentContainer}"/>
             </MenuItem>
             <Separator/>
             <MenuItem Header="I_mport">
