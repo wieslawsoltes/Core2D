@@ -182,13 +182,12 @@ namespace Core2D
         /// Add layer.
         /// </summary>
         /// <param name="project">The project instance.</param>
-        /// <param name="name">The layer name.</param>
-        public static void AddLayer(this Project project, string name = "New")
+        /// <param name="container">The container instance.</param>
+        /// <param name="layer">The layer instance.</param>
+        public static void AddLayer(this Project project, Container container, Layer layer)
         {
-            var container = project.CurrentContainer;
-            if (container != null)
+            if (container != null && layer != null)
             {
-                var layer = Layer.Create(name, container);
                 var previous = container.Layers;
                 var next = container.Layers.Add(layer);
                 project.History.Snapshot(previous, next, (p) => container.Layers = p);
@@ -197,40 +196,23 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Add layer.
+        /// Remove layer.
         /// </summary>
         /// <param name="project">The project instance.</param>
         /// <param name="layer">The layer instance.</param>
-        public static void AddLayer(this Project project, Layer layer)
+        public static void RemoveLayer(this Project project, Layer layer)
         {
-            var container = project.CurrentContainer;
-            if (container != null)
+            if (layer != null)
             {
-                var previous = container.Layers;
-                var next = container.Layers.Add(layer);
-                project.History.Snapshot(previous, next, (p) => container.Layers = p);
-                container.Layers = next;
-            }
-        }
-
-        /// <summary>
-        /// Remove the <see cref="Project.CurrentContainer"/> <see cref="Container.CurrentLayer"/> object from the <see cref="Project.CurrentContainer"/> <see cref="Container.Layers"/> collection.
-        /// </summary>
-        /// <param name="project">The project instance.</param>
-        public static void RemoveLayer(this Project project)
-        {
-            var container = project.CurrentContainer;
-            if (container != null)
-            {
-                var layer = container.CurrentLayer;
-                if (layer != null)
+                var container = layer.Owner;
+                if (container != null && container.Layers != null)
                 {
                     var previous = container.Layers;
                     var next = container.Layers.Remove(layer);
                     project.History.Snapshot(previous, next, (p) => container.Layers = p);
                     container.Layers = next;
 
-                    project.CurrentContainer.CurrentLayer = project.CurrentContainer.Layers.FirstOrDefault();
+                    container.CurrentLayer = container.Layers.FirstOrDefault();
                 }
             }
         }
@@ -631,30 +613,29 @@ namespace Core2D
         /// Add group library.
         /// </summary>
         /// <param name="project">The project instance.</param>
-        /// <param name="name">The group library name.</param>
-        public static void AddGroupLibrary(this Project project, string name = "New")
+        /// <param name="library">The group library instance.</param>
+        public static void AddGroupLibrary(this Project project, Library<XGroup> library)
         {
-            if (project.GroupLibraries != null)
+            if (project.GroupLibraries != null && library != null)
             {
-                var gl = Library<XGroup>.Create(name);
                 var previous = project.GroupLibraries;
-                var next = project.GroupLibraries.Add(gl);
+                var next = project.GroupLibraries.Add(library);
                 project.History.Snapshot(previous, next, (p) => project.GroupLibraries = p);
                 project.GroupLibraries = next;
             }
         }
 
         /// <summary>
-        /// Remove the <see cref="Project.CurrentGroupLibrary"/> object from the <see cref="Project.GroupLibraries"/> collection.
+        /// Remove group library.
         /// </summary>
         /// <param name="project">The project instance.</param>
-        public static void RemoveGroupLibrary(this Project project)
+        /// <param name="library">The group library instance.</param>
+        public static void RemoveGroupLibrary(this Project project, Library<XGroup> library)
         {
-            var gl = project.CurrentGroupLibrary;
-            if (gl != null)
+            if (project.GroupLibraries != null && library != null)
             {
                 var previous = project.GroupLibraries;
-                var next = project.GroupLibraries.Remove(gl);
+                var next = project.GroupLibraries.Remove(library);
                 project.History.Snapshot(previous, next, (p) => project.GroupLibraries = p);
                 project.GroupLibraries = next;
 
@@ -666,30 +647,29 @@ namespace Core2D
         /// Add style library.
         /// </summary>
         /// <param name="project">The project instance.</param>
-        /// <param name="name">The style library name.</param>
-        public static void AddStyleLibrary(this Project project, string name = "New")
+        /// <param name="library">The style library instance.</param>
+        public static void AddStyleLibrary(this Project project, Library<ShapeStyle> library)
         {
             if (project.StyleLibraries != null)
             {
-                var sl = Library<ShapeStyle>.Create(name);
                 var previous = project.StyleLibraries;
-                var next = project.StyleLibraries.Add(sl);
+                var next = project.StyleLibraries.Add(library);
                 project.History.Snapshot(previous, next, (p) => project.StyleLibraries = p);
                 project.StyleLibraries = next;
             }
         }
 
         /// <summary>
-        /// Remove the <see cref="Project.CurrentStyleLibrary"/> object from the <see cref="Project.StyleLibraries"/> collection.
+        /// Remove style library.
         /// </summary>
         /// <param name="project">The project instance.</param>
-        public static void RemoveStyleLibrary(this Project project)
+        /// <param name="library">The style library instance.</param>
+        public static void RemoveStyleLibrary(this Project project, Library<ShapeStyle> library)
         {
-            var sl = project.CurrentStyleLibrary;
-            if (sl != null)
+            if (project.CurrentStyleLibrary != null && library != null)
             {
                 var previous = project.StyleLibraries;
-                var next = project.StyleLibraries.Remove(sl);
+                var next = project.StyleLibraries.Remove(library);
                 project.History.Snapshot(previous, next, (p) => project.StyleLibraries = p);
                 project.StyleLibraries = next;
 
@@ -701,37 +681,37 @@ namespace Core2D
         /// Add style.
         /// </summary>
         /// <param name="project">The project instance.</param>
-        /// <param name="name">The style name.</param>
-        public static void AddStyle(this Project project, string name = "New")
+        /// <param name="library">The style library instance.</param>
+        /// <param name="style">The style instance.</param>
+        public static void AddStyle(this Project project, Library<ShapeStyle> library, ShapeStyle style)
         {
-            var sl = project.CurrentStyleLibrary;
-            if (sl != null)
+            if (library != null && style != null)
             {
-                var previous = sl.Items;
-                var next = sl.Items.Add(ShapeStyle.Create(name));
-                project.History.Snapshot(previous, next, (p) => sl.Items = p);
-                sl.Items = next;
+                var previous = library.Items;
+                var next = library.Items.Add(style);
+                project.History.Snapshot(previous, next, (p) => library.Items = p);
+                library.Items = next;
             }
         }
 
         /// <summary>
-        /// Removes the <see cref="Project.CurrentStyleLibrary"/> <see cref="Library{ShapeStyle}.Selected"/> object from the <see cref="Project.CurrentStyleLibrary"/> <see cref="Library{ShapeStyle}.Items"/> collection.
+        /// Remove style.
         /// </summary>
         /// <param name="project">The project instance.</param>
-        public static void RemoveStyle(this Project project)
+        /// <param name="style">The style instance.</param>
+        public static void RemoveStyle(this Project project, ShapeStyle style)
         {
-            var sl = project.CurrentStyleLibrary;
-            if (sl != null)
+            if (project.StyleLibraries != null && style != null)
             {
-                var style = sl.Selected;
-                if (style != null)
+                var library = project.StyleLibraries.FirstOrDefault(l => l.Items.Contains(style));
+                if (library != null)
                 {
-                    var previous = sl.Items;
-                    var next = sl.Items.Remove(style);
-                    project.History.Snapshot(previous, next, (p) => sl.Items = p);
-                    sl.Items = next;
+                    var previous = library.Items;
+                    var next = library.Items.Remove(style);
+                    project.History.Snapshot(previous, next, (p) => library.Items = p);
+                    library.Items = next;
 
-                    project.CurrentStyleLibrary.Selected = project.CurrentStyleLibrary.Items.FirstOrDefault();
+                    library.Selected = library.Items.FirstOrDefault();
                 }
             }
         }
@@ -814,55 +794,37 @@ namespace Core2D
         /// Add group.
         /// </summary>
         /// <param name="project">The project instance.</param>
+        /// <param name="library">The group library instance.</param>
         /// <param name="group">The group instance.</param>
-        public static void AddGroup(this Project project, XGroup group)
+        public static void AddGroup(this Project project, Library<XGroup> library, XGroup group)
         {
-            var gl = project.CurrentGroupLibrary;
-            if (gl != null)
+            if (library != null && group != null)
             {
-                var previous = gl.Items;
-                var next = gl.Items.Add(group);
-                project.History.Snapshot(previous, next, (p) => gl.Items = p);
-                gl.Items = next;
+                var previous = library.Items;
+                var next = library.Items.Add(group);
+                project.History.Snapshot(previous, next, (p) => library.Items = p);
+                library.Items = next;
             }
         }
 
         /// <summary>
-        /// Add group.
+        /// Remove group.
         /// </summary>
         /// <param name="project">The project instance.</param>
-        /// <param name="name">The group name.</param>
-        public static void AddGroup(this Project project, string name = "New")
+        /// <param name="group">The group instance.</param>
+        public static void RemoveGroup(this Project project, XGroup group)
         {
-            var gl = project.CurrentGroupLibrary;
-            if (gl != null)
+            if (project.GroupLibraries != null && group != null)
             {
-                var group = XGroup.Create(name);
-                var previous = gl.Items;
-                var next = gl.Items.Add(group);
-                project.History.Snapshot(previous, next, (p) => gl.Items = p);
-                gl.Items = next;
-            }
-        }
-
-        /// <summary>
-        /// Remove the <see cref="Project.CurrentGroupLibrary"/> <see cref="Library{XGroup}.Selected"/> object from the <see cref="Project.CurrentGroupLibrary"/> <see cref="Library{XGroup}.Items"/> collection.
-        /// </summary>
-        /// <param name="project">The project instance.</param>
-        public static void RemoveGroup(this Project project)
-        {
-            var gl = project.CurrentGroupLibrary;
-            if (gl != null)
-            {
-                var group = gl.Selected;
-                if (group != null)
+                var library = project.GroupLibraries.FirstOrDefault(l => l.Items.Contains(group));
+                if (library != null)
                 {
-                    var previous = gl.Items;
-                    var next = gl.Items.Remove(group);
-                    project.History.Snapshot(previous, next, (p) => gl.Items = p);
-                    gl.Items = next;
+                    var previous = library.Items;
+                    var next = library.Items.Remove(group);
+                    project.History.Snapshot(previous, next, (p) => library.Items = p);
+                    library.Items = next;
 
-                    project.CurrentGroupLibrary.Selected = project.CurrentGroupLibrary.Items.FirstOrDefault();
+                    library.Selected = library.Items.FirstOrDefault();
                 }
             }
         }
@@ -873,7 +835,7 @@ namespace Core2D
         /// <param name="project">The project instance.</param>
         /// <param name="shapes">The selected shapes.</param>
         /// <param name="name">The group name.</param>
-        public static XGroup Group(this Project project, ImmutableHashSet<BaseShape> shapes, string name = "g")
+        public static XGroup Group(this Project project, ImmutableHashSet<BaseShape> shapes, string name)
         {
             var container = project.CurrentContainer;
             if (container != null)

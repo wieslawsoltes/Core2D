@@ -1143,7 +1143,7 @@ namespace Core2D
         /// </summary>
         public void OnGroupSelected()
         {
-            var group = _project.Group(_renderers[0].State.SelectedShapes);
+            var group = _project.Group(_renderers[0].State.SelectedShapes, Constants.DefaulGroupName);
             if (group != null)
             {
                 Select(_project.CurrentContainer, group);
@@ -1517,9 +1517,10 @@ namespace Core2D
         /// <summary>
         /// Add group.
         /// </summary>
-        public void OnAddGroup()
+        /// <param name="library">The group library.</param>
+        public void OnAddGroup(Library<XGroup> library)
         {
-            if (_renderers != null && _project == null || _project.CurrentGroupLibrary == null)
+            if (_renderers != null && _project == null || library == null)
                 return;
 
             var group = _renderers[0].State.SelectedShape as XGroup;
@@ -1528,7 +1529,7 @@ namespace Core2D
                 var clone = CloneShape(group);
                 if (clone != null)
                 {
-                    _project.AddGroup(clone);
+                    _project.AddGroup(library, clone);
                 }
             }
         }
@@ -1536,9 +1537,16 @@ namespace Core2D
         /// <summary>
         /// Remove group.
         /// </summary>
-        public void OnRemoveGroup()
+        /// <param name="group">The group item.</param>
+        public void OnRemoveGroup(XGroup group)
         {
-            _project.RemoveGroup();
+            if (_project == null)
+                return;
+
+            if (group != null)
+            {
+                _project.RemoveGroup(group);
+            }
         }
 
         /// <summary>

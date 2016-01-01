@@ -416,17 +416,17 @@ namespace Core2D
         /// <summary>
         /// Remove group library.
         /// </summary>
-        public static ICoreCommand RemoveGroupLibraryCommand { get; set; }
+        public static ICoreCommand<Library<XGroup>> RemoveGroupLibraryCommand { get; set; }
 
         /// <summary>
         /// Add group.
         /// </summary>
-        public static ICoreCommand AddGroupCommand { get; set; }
+        public static ICoreCommand<Library<XGroup>> AddGroupCommand { get; set; }
 
         /// <summary>
         /// Remove group.
         /// </summary>
-        public static ICoreCommand RemoveGroupCommand { get; set; }
+        public static ICoreCommand<XGroup> RemoveGroupCommand { get; set; }
 
         /// <summary>
         /// Insert current group to container.
@@ -436,12 +436,12 @@ namespace Core2D
         /// <summary>
         /// Add layer.
         /// </summary>
-        public static ICoreCommand AddLayerCommand { get; set; }
+        public static ICoreCommand<Container> AddLayerCommand { get; set; }
 
         /// <summary>
         /// Remove layer.
         /// </summary>
-        public static ICoreCommand RemoveLayerCommand { get; set; }
+        public static ICoreCommand<Layer> RemoveLayerCommand { get; set; }
 
         /// <summary>
         /// Add style library.
@@ -451,17 +451,17 @@ namespace Core2D
         /// <summary>
         /// Remove style library.
         /// </summary>
-        public static ICoreCommand RemoveStyleLibraryCommand { get; set; }
+        public static ICoreCommand<Library<ShapeStyle>> RemoveStyleLibraryCommand { get; set; }
 
         /// <summary>
         /// Add style.
         /// </summary>
-        public static ICoreCommand AddStyleCommand { get; set; }
+        public static ICoreCommand<Library<ShapeStyle>> AddStyleCommand { get; set; }
 
         /// <summary>
         /// Remove style.
         /// </summary>
-        public static ICoreCommand RemoveStyleCommand { get; set; }
+        public static ICoreCommand<ShapeStyle> RemoveStyleCommand { get; set; }
 
         /// <summary>
         /// Set shape style.
@@ -821,23 +821,23 @@ namespace Core2D
 
             AddGroupLibraryCommand =
                 Command.Create(
-                    () => editor.Project.AddGroupLibrary(),
+                    () => editor.Project.AddGroupLibrary(Library<XGroup>.Create(Constants.DefaulGroupLibraryName)),
                     () => editor.IsEditMode());
 
             RemoveGroupLibraryCommand =
-                Command.Create(
-                    () => editor.Project.RemoveGroupLibrary(),
-                    () => editor.IsEditMode());
+                Command<Library<XGroup>>.Create(
+                    (library) => editor.Project.RemoveGroupLibrary(library),
+                    (library) => editor.IsEditMode());
 
             AddGroupCommand =
-                Command.Create(
-                    () => editor.OnAddGroup(),
-                    () => editor.IsEditMode());
+                Command<Library<XGroup>>.Create(
+                    (library) => editor.OnAddGroup(library),
+                    (library) => editor.IsEditMode());
 
             RemoveGroupCommand =
-                Command.Create(
-                    () => editor.OnRemoveGroup(),
-                    () => editor.IsEditMode());
+                Command<XGroup>.Create(
+                    (group) => editor.OnRemoveGroup(group),
+                    (group) => editor.IsEditMode());
 
             InsertGroupCommand =
                 Command<XGroup>.Create(
@@ -845,34 +845,34 @@ namespace Core2D
                     (group) => editor.IsEditMode());
 
             AddLayerCommand =
-                Command.Create(
-                    () => editor.Project.AddLayer(),
-                    () => editor.IsEditMode());
+                Command<Container>.Create(
+                    (container) => editor.Project.AddLayer(container, Layer.Create(Constants.DefaultLayerName, container)),
+                    (container) => editor.IsEditMode());
 
             RemoveLayerCommand =
-                Command.Create(
-                    () => editor.Project.RemoveLayer(),
-                    () => editor.IsEditMode());
+                Command<Layer>.Create(
+                    (layer) => editor.Project.RemoveLayer(layer),
+                    (layer) => editor.IsEditMode());
 
             AddStyleLibraryCommand =
                 Command.Create(
-                    () => editor.Project.AddStyleLibrary(),
+                    () => editor.Project.AddStyleLibrary(Library<ShapeStyle>.Create(Constants.DefaulStyleLibraryName)),
                     () => editor.IsEditMode());
 
             RemoveStyleLibraryCommand =
-                Command.Create(
-                    () => editor.Project.RemoveStyleLibrary(),
-                    () => editor.IsEditMode());
+                Command<Library<ShapeStyle>>.Create(
+                    (library) => editor.Project.RemoveStyleLibrary(library),
+                    (library) => editor.IsEditMode());
 
             AddStyleCommand =
-                Command.Create(
-                    () => editor.Project.AddStyle(),
-                    () => editor.IsEditMode());
+                Command<Library<ShapeStyle>>.Create(
+                    (library) => editor.Project.AddStyle(library, ShapeStyle.Create(Constants.DefaulStyleName)),
+                    (library) => editor.IsEditMode());
 
             RemoveStyleCommand =
-                Command.Create(
-                    () => editor.Project.RemoveStyle(),
-                    () => editor.IsEditMode());
+                Command<ShapeStyle>.Create(
+                    (style) => editor.Project.RemoveStyle(style),
+                    (style) => editor.IsEditMode());
 
             ApplyStyleCommand =
                 Command<ShapeStyle>.Create(
