@@ -394,7 +394,7 @@ namespace Core2D
         public static ICoreCommand<Record> ApplyRecordCommand { get; set; }
 
         /// <summary>
-        /// Remove selected shape.
+        /// Remove shape.
         /// </summary>
         public static ICoreCommand RemoveShapeCommand { get; set; }
 

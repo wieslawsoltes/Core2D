@@ -239,7 +239,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Remove the <see cref="Project.CurrentContainer"/> <see cref="Container.CurrentShape"/> object from the <see cref="Project.CurrentContainer"/> <see cref="Container.CurrentLayer"/> <see cref="Layer.Shapes"/> collection.
+        /// Remove shape.
         /// </summary>
         /// <param name="project">The project instance.</param>
         public static void RemoveShape(this Project project)
