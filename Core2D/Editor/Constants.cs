@@ -11,6 +11,11 @@ namespace Core2D
         /// <summary>
         /// 
         /// </summary>
+        public const string DefaultLayerName = "Layer";
+
+        /// <summary>
+        /// 
+        /// </summary>
         public const string DefaultTemplateName = "Template";
 
         /// <summary>
@@ -51,7 +56,17 @@ namespace Core2D
         /// <summary>
         /// 
         /// </summary>
+        public const string DefaulGroupName = "Group";
+
+        /// <summary>
+        /// 
+        /// </summary>
         public const string DefaulStyleLibraryName = "Styles";
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public const string DefaulStyleName = "Style";
 
         /// <summary>
         /// 
