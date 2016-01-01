@@ -159,13 +159,12 @@ namespace Core2D
         /// 
         /// </summary>
         /// <param name="project">The project instance.</param>
+        /// <param name="page"></param>
         /// <param name="template"></param>
-        public static void ApplyTemplate(this Project project, Template template)
+        public static void ApplyTemplate(this Project project, Page page, Template template)
         {
-            var container = project.CurrentContainer;
-            if (container != null && container is Page)
+            if (page != null && template != null)
             {
-                var page = container as Page;
                 var previous = page.Template;
                 var next = template;
                 project.History.Snapshot(previous, next, (p) => page.Template = p);
@@ -586,10 +585,10 @@ namespace Core2D
         /// 
         /// </summary>
         /// <param name="project">The project instance.</param>
-        /// <param name="record">The record instance.</param>
         /// <param name="shape">The selected shape.</param>
         /// <param name="shapes">The selected shapes.</param>
-        public static void ApplyRecord(this Project project, Record record, BaseShape shape, ImmutableHashSet<BaseShape> shapes)
+        /// <param name="record">The record instance.</param>
+        public static void ApplyRecord(this Project project, BaseShape shape, ImmutableHashSet<BaseShape> shapes, Record record)
         {
             if (project == null || project.CurrentContainer == null)
                 return;
@@ -814,10 +813,10 @@ namespace Core2D
         /// 
         /// </summary>
         /// <param name="project">The project instance.</param>
-        /// <param name="style">The style instance.</param>
         /// <param name="shape">The selected shape.</param>
         /// <param name="shapes">The selected shapes.</param>
-        public static void ApplyStyle(this Project project, ShapeStyle style, BaseShape shape, ImmutableHashSet<BaseShape> shapes)
+        /// <param name="style">The style instance.</param>
+        public static void ApplyStyle(this Project project, BaseShape shape, ImmutableHashSet<BaseShape> shapes, ShapeStyle style)
         {
             if (shape != null)
             {

@@ -1508,9 +1508,9 @@ namespace Core2D
             if (record != null)
             {
                 _project.ApplyRecord(
-                    record as Record,
                     _renderers[0].State.SelectedShape,
-                    _renderers[0].State.SelectedShapes);
+                    _renderers[0].State.SelectedShapes,
+                    record as Record);
             }
         }
 
@@ -1563,9 +1563,9 @@ namespace Core2D
                 return;
 
             _project.ApplyStyle(
-                style,
                 _renderers[0].State.SelectedShape,
-                _renderers[0].State.SelectedShapes);
+                _renderers[0].State.SelectedShapes,
+                style);
         }
 
         /// <summary>
@@ -1619,12 +1619,13 @@ namespace Core2D
         /// <param name="template">The template object.</param>
         public void OnApplyTemplate(Template template)
         {
-            if (_project == null || _project.CurrentContainer == null)
+            if (_project == null)
                 return;
 
-            if (template != null)
+            var page = _project.CurrentContainer as Page;
+            if (page != null && template != null)
             {
-                _project.ApplyTemplate(template);
+                _project.ApplyTemplate(page, template);
             }
         }
 
@@ -3027,41 +3028,13 @@ namespace Core2D
                 if (_renderers[0].State.SelectedShape != null
                     || (_renderers[0].State.SelectedShapes != null && _renderers[0].State.SelectedShapes.Count > 0))
                 {
-                    _project.ApplyStyle(style,
-                        _renderers[0].State.SelectedShape,
-                        _renderers[0].State.SelectedShapes);
+                    _project.ApplyStyle(_renderers[0].State.SelectedShape,
+                        _renderers[0].State.SelectedShapes,
+                        style);
                 }
                 else
                 {
                     _project.ApplyStyle(style, x, y);
-                }
-            }
-            catch (Exception ex)
-            {
-                if (_log != null)
-                {
-                    _log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Drop <see cref="Template"/> object in current container at specified location.
-        /// </summary>
-        /// <param name="template">The <see cref="Template"/> object.</param>
-        public void Drop(Template template)
-        {
-            try
-            {
-                if (_project == null || _project.CurrentContainer == null)
-                    return;
-
-                if (template != null)
-                {
-                    _project.ApplyTemplate(template);
                 }
             }
             catch (Exception ex)

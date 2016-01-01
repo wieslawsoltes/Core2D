@@ -309,7 +309,7 @@ namespace Core2D.Wpf.Windows
                             var template = e.Data.GetData(typeof(Template)) as Template;
                             if (template != null)
                             {
-                                editor.Drop(template);
+                                editor.OnApplyTemplate(template);
                                 e.Handled = true;
                             }
                         }
