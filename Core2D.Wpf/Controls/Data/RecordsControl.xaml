@@ -17,8 +17,8 @@
             <ControlTemplate x:Key="RecordsMenu">
                 <Menu Background="Transparent" HorizontalAlignment="Right">
                     <MenuItem Header="apply" Command="{x:Static core:Commands.ApplyRecordCommand}" CommandParameter="{Binding CurrentRecord}"/>
-                    <MenuItem Command="{x:Static core:Commands.AddRecordCommand}" Header="+"/>
-                    <MenuItem Command="{x:Static core:Commands.RemoveRecordCommand}" Header="-"/>
+                    <MenuItem Command="{x:Static core:Commands.AddRecordCommand}" CommandParameter="{Binding}" Header="+"/>
+                    <MenuItem Command="{x:Static core:Commands.RemoveRecordCommand}" CommandParameter="{Binding CurrentRecord}" Header="-"/>
                 </Menu>
             </ControlTemplate>
             <ControlTemplate x:Key="ColumnsMenuControlTemplateKey">
