@@ -18,14 +18,14 @@
             <ControlTemplate x:Key="StyleLibrariesMenu">
                 <Menu Background="Transparent" HorizontalAlignment="Right">
                     <MenuItem Command="{x:Static core:Commands.AddStyleLibraryCommand}" Header="+"/>
-                    <MenuItem Command="{x:Static core:Commands.RemoveStyleLibraryCommand}" Header="-"/>
+                    <MenuItem Command="{x:Static core:Commands.RemoveStyleLibraryCommand}" CommandParameter="{Binding CurrentStyleLibrary}" Header="-"/>
                 </Menu>
             </ControlTemplate>
             <ControlTemplate x:Key="StylesMenu">
                 <Menu Background="Transparent" HorizontalAlignment="Right">
                     <MenuItem Header="apply" Command="{x:Static core:Commands.ApplyStyleCommand}" CommandParameter="{Binding CurrentStyleLibrary.Selected}"/>
-                    <MenuItem Command="{x:Static core:Commands.AddStyleCommand}" Header="+"/>
-                    <MenuItem Command="{x:Static core:Commands.RemoveStyleCommand}" Header="-"/>
+                    <MenuItem Command="{x:Static core:Commands.AddStyleCommand}" CommandParameter="{Binding CurrentStyleLibrary}" Header="+"/>
+                    <MenuItem Command="{x:Static core:Commands.RemoveStyleCommand}" CommandParameter="{Binding CurrentStyleLibrary.Selected}" Header="-"/>
                 </Menu>
             </ControlTemplate>
         </Grid.Resources>
@@ -65,7 +65,7 @@
                 <ContextMenu x:Key="StyleContextMenu" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
                     <MenuItem Header="_Add Style" InputGestureText="Ctrl+N" Command="{x:Static core:Commands.AddStyleCommand}"/>
                     <Separator/>
-                    <MenuItem Header="_Delete" InputGestureText="Del" Command="{x:Static core:Commands.RemoveStyleCommand}"/>
+                    <MenuItem Header="_Delete" InputGestureText="Del" Command="{x:Static core:Commands.RemoveStyleCommand}" CommandParameter="{Binding}"/>
                     <Separator/>
                     <MenuItem Header="E_xport" InputGestureText="Ctrl+E" Command="{x:Static core:Commands.ExportStyleCommand}" CommandParameter="{Binding}"/>
                 </ContextMenu>
