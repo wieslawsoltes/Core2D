@@ -12,7 +12,7 @@
     <Grid RowDefinitions="Auto,Auto,Auto,Auto,*">
         <Menu Grid.Row="0" HorizontalAlignment="Right">
             <MenuItem Header="+" Command="{Static core:Commands.AddGroupLibraryCommand}"/>
-            <MenuItem Header="-" Command="{Static core:Commands.RemoveGroupLibraryCommand}"/>
+            <MenuItem Header="-" Command="{Static core:Commands.RemoveGroupLibraryCommand}" CommandParameter="{Binding Path=CurrentGroupLibrary}"/>
         </Menu>
         <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="1">
             <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
@@ -33,8 +33,8 @@
         </DropDown>
         <Menu Grid.Row="3" HorizontalAlignment="Right">
             <MenuItem Header="insert" Command="{Static core:Commands.InsertGroupCommand}" CommandParameter="{Binding Path=CurrentGroupLibrary.Selected}"/>
-            <MenuItem Header="+" Command="{Static core:Commands.AddGroupCommand}"/>
-            <MenuItem Header="-" Command="{Static core:Commands.RemoveGroupCommand}"/>
+            <MenuItem Header="+" Command="{Static core:Commands.AddGroupCommand}" CommandParameter="{Binding Path=CurrentGroupLibrary}"/>
+            <MenuItem Header="-" Command="{Static core:Commands.RemoveGroupCommand}" CommandParameter="{Binding Path=CurrentGroupLibrary.Selected}"/>
         </Menu>
         <ListBox
             Items="{Binding Path=CurrentGroupLibrary.Items}"

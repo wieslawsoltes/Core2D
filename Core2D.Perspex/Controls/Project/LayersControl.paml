@@ -17,8 +17,8 @@
             <TabItem Header="Layers" Classes="property">
                 <Grid RowDefinitions="Auto,*">
                     <Menu Grid.Row="0" HorizontalAlignment="Right">
-                        <MenuItem Header="+" Command="{Static core:Commands.AddLayerCommand}"/>
-                        <MenuItem Header="-" Command="{Static core:Commands.RemoveLayerCommand}"/>
+                        <MenuItem Header="+" Command="{Static core:Commands.AddLayerCommand}" CommandParameter="{Binding}"/>
+                        <MenuItem Header="-" Command="{Static core:Commands.RemoveLayerCommand}" CommandParameter="{Binding Path=CurrentLayer}"/>
                     </Menu>
                     <ListBox
                         Name="layers"

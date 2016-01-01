@@ -17,7 +17,7 @@
             <ContentControl Content="{Binding Path=Data, Mode=TwoWay}"/>
         </TabItem>
         <TabItem Header="Template" Classes="property">
-            <project:TemplateControl DataContext="{Binding Template}"/>
+            <project:TemplateControl DataContext="{Binding Path=Template}"/>
         </TabItem>
     </TabControl>
 </UserControl>

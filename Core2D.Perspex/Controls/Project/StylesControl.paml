@@ -12,7 +12,7 @@
     <Grid RowDefinitions="Auto,Auto,Auto,Auto,*">
         <Menu Grid.Row="0" HorizontalAlignment="Right">
             <MenuItem Header="+" Command="{Static core:Commands.AddStyleLibraryCommand}"/>
-            <MenuItem Header="-" Command="{Static core:Commands.RemoveStyleLibraryCommand}"/>
+            <MenuItem Header="-" Command="{Static core:Commands.RemoveStyleLibraryCommand}" CommandParameter="{Binding Path=CurrentStyleLibrary}"/>
         </Menu>
         <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="1">
             <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
@@ -33,8 +33,8 @@
         </DropDown>
         <Menu Grid.Row="3" HorizontalAlignment="Right">
             <MenuItem Header="apply" Command="{Static core:Commands.ApplyStyleCommand}" CommandParameter="{Binding Path=CurrentStyleLibrary.Selected}"/>
-            <MenuItem Header="+" Command="{Static core:Commands.AddStyleCommand}"/>
-            <MenuItem Header="-" Command="{Static core:Commands.RemoveStyleCommand}"/>
+            <MenuItem Header="+" Command="{Static core:Commands.AddStyleCommand}" CommandParameter="{Binding Path=CurrentStyleLibrary}"/>
+            <MenuItem Header="-" Command="{Static core:Commands.RemoveStyleCommand}" CommandParameter="{Binding Path=CurrentStyleLibrary.Selected}"/>
         </Menu>
         <ListBox
             Items="{Binding Path=CurrentStyleLibrary.Items}"
