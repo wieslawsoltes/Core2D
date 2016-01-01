@@ -46,6 +46,16 @@ namespace Core2D
         /// <summary>
         /// 
         /// </summary>
+        public const string DefaulGroupLibraryName = "Groups";
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public const string DefaulStyleLibraryName = "Styles";
+
+        /// <summary>
+        /// 
+        /// </summary>
         public const string ImportedStyleLibraryName = "Imported";
 
         /// <summary>
