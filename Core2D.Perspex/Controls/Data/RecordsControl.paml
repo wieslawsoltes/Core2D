@@ -11,8 +11,8 @@
     <Grid RowDefinitions="Auto,Auto,*">
         <Menu Grid.Row="1" HorizontalAlignment="Right">
             <MenuItem Header="apply" Command="{Static core:Commands.ApplyRecordCommand}" CommandParameter="{Binding Path=CurrentRecord}"/>
-            <MenuItem Header="+" Command="{Static core:Commands.AddRecordCommand}"/>
-            <MenuItem Header="-" Command="{Static core:Commands.RemoveRecordCommand}"/>
+            <MenuItem Header="+" Command="{Static core:Commands.AddRecordCommand}" CommandParameter="{Binding}"/>
+            <MenuItem Header="-" Command="{Static core:Commands.RemoveRecordCommand}" CommandParameter="{Binding Path=CurrentRecord}"/>
         </Menu>
         <ListBox
             Items="{Binding Path=Records}"
