@@ -50,7 +50,7 @@ namespace Core2D
                     }
                     else
                     {
-                        var property = Property.Create(name, value, _data);
+                        var property = Property.Create(_data, name, value);
                         _data.Properties = _data.Properties.Add(property);
                     }
                 }

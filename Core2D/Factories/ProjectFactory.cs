@@ -212,8 +212,8 @@ namespace Core2D
             // Databases
             var db = Database.Create("Db");
             var columnsBuilder = db.Columns.ToBuilder();
-            columnsBuilder.Add(Column.Create("Column0", db));
-            columnsBuilder.Add(Column.Create("Column1", db));
+            columnsBuilder.Add(Column.Create(db, "Column0"));
+            columnsBuilder.Add(Column.Create(db, "Column1"));
             db.Columns = columnsBuilder.ToImmutable();
             project.Databases = project.Databases.Add(db);
 

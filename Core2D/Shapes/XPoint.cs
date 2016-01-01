@@ -146,9 +146,9 @@ namespace Core2D
                 {
                     builder.Add(
                         Property.Create(
-                            property.Name, 
-                            property.Value, 
-                            data));
+                            data,
+                            property.Name,
+                            property.Value));
                 }
                 data.Properties = builder.ToImmutable();
             }

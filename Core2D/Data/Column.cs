@@ -63,12 +63,12 @@ namespace Core2D
         /// <summary>
         /// Creates a new <see cref="Column"/> instance.
         /// </summary>
-        /// <param name="name"></param>
         /// <param name="owner"></param>
+        /// <param name="name"></param>
         /// <param name="width"></param>
         /// <param name="isVisible"></param>
         /// <returns></returns>
-        public static Column Create(string name, Database owner, double width = double.NaN, bool isVisible = true)
+        public static Column Create(Database owner, string name, double width = double.NaN, bool isVisible = true)
         {
             return new Column()
             {

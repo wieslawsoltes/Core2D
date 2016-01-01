@@ -42,11 +42,11 @@ namespace Core2D
         /// <summary>
         /// Creates a new <see cref="Property"/> instance.
         /// </summary>
+        /// <param name="owner"></param>
         /// <param name="name"></param>
         /// <param name="value"></param>
-        /// <param name="owner"></param>
         /// <returns></returns>
-        public static Property Create(string name, object value, Data owner)
+        public static Property Create(Data owner, string name, object value)
         {
             return new Property()
             {

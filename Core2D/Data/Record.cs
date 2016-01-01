@@ -54,11 +54,11 @@ namespace Core2D
         /// <summary>
         /// Creates a new <see cref="Record"/> instance.
         /// </summary>
+        /// <param name="owner"></param>
         /// <param name="columns"></param>
         /// <param name="values"></param>
-        /// <param name="owner"></param>
         /// <returns></returns>
-        public static Record Create(ImmutableArray<Column> columns, ImmutableArray<Value> values, Database owner)
+        public static Record Create(Database owner, ImmutableArray<Column> columns, ImmutableArray<Value> values)
         {
             return new Record()
             {
@@ -72,12 +72,12 @@ namespace Core2D
         /// <summary>
         /// Creates a new <see cref="Record"/> instance.
         /// </summary>
+        /// <param name="owner"></param>
         /// <param name="id"></param>
         /// <param name="columns"></param>
         /// <param name="values"></param>
-        /// <param name="owner"></param>
         /// <returns></returns>
-        public static Record Create(string id, ImmutableArray<Column> columns, ImmutableArray<Value> values, Database owner)
+        public static Record Create(Database owner, string id, ImmutableArray<Column> columns, ImmutableArray<Value> values)
         {
             return new Record()
             {

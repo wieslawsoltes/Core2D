@@ -407,13 +407,13 @@ namespace Core2D
 
             var db = Database.Create("Db");
             var fields = new string[] { "Column0", "Column1" };
-            var columns = ImmutableArray.CreateRange(fields.Select(c => Column.Create(c, db)));
+            var columns = ImmutableArray.CreateRange(fields.Select(c => Column.Create(db, c)));
             db.Columns = columns;
             var values = Enumerable.Repeat("<empty>", db.Columns.Length).Select(c => Value.Create(c));
             var record = Record.Create(
+                db,
                 db.Columns,
-                ImmutableArray.CreateRange(values),
-                db);
+                ImmutableArray.CreateRange(values));
             db.Records = db.Records.Add(record);
             db.CurrentRecord = record;
 
