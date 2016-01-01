@@ -522,91 +522,17 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Set record as shape(s) or current page data record.
+        /// Set data record.
         /// </summary>
         /// <param name="project">The project instance.</param>
-        /// <param name="shape">The selected shape.</param>
-        /// <param name="shapes">The selected shapes.</param>
+        /// <param name="data">The data instance.</param>
         /// <param name="record">The record instance.</param>
-        public static void ApplyRecord(this Project project, BaseShape shape, ImmutableHashSet<BaseShape> shapes, Record record)
+        public static void ApplyRecord(this Project project, Data data, Record record)
         {
-            if (project == null || project.CurrentContainer == null)
-                return;
-
-            var container = project.CurrentContainer;
-            if (container != null)
-            {
-                // Selected shape.
-                if (shape != null)
-                {
-                    var previous = shape.Data.Record;
-                    var next = record;
-                    project.History.Snapshot(previous, next, (p) => shape.Data.Record = p);
-                    shape.Data.Record = next;
-                }
-
-                // Selected shapes.
-                if (shapes != null && shapes.Count > 0)
-                {
-                    foreach (var s in shapes)
-                    {
-                        var previous = s.Data.Record;
-                        var next = record;
-                        project.History.Snapshot(previous, next, (p) => s.Data.Record = p);
-                        s.Data.Record = next;
-                    }
-                }
-
-                // Current page.
-                if (shape == null && shapes == null)
-                {
-                    var page = container as Page;
-                    if (page != null)
-                    {
-                        var previous = page.Data.Record;
-                        var next = record;
-                        project.History.Snapshot(previous, next, (p) => page.Data.Record = p);
-                        page.Data.Record = next;
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// Set shape record.
-        /// </summary>
-        /// <param name="project">The project instance.</param>
-        /// <param name="shape">The shape instance.</param>
-        /// <param name="record">The record instance.</param>
-        public static void ApplyRecord(this Project project, BaseShape shape, Record record)
-        {
-            var previous = shape.Data.Record;
+            var previous = data.Record;
             var next = record;
-            project.History.Snapshot(previous, next, (p) => shape.Data.Record = p);
-            shape.Data.Record = next;
-        }
-
-        /// <summary>
-        /// Set shape record at specified coordinates.
-        /// </summary>
-        /// <param name="project">The project instance.</param>
-        /// <param name="record">The record instance.</param>
-        /// <param name="x">The X coordinate in container.</param>
-        /// <param name="y">The Y coordinate in container.</param>
-        public static void ApplyRecord(this Project project, Record record, double x, double y)
-        {
-            var container = project.CurrentContainer;
-            if (container != null)
-            {
-                var result = ShapeBounds.HitTest(container, new Vector2(x, y), project.Options.HitThreshold);
-                if (result != null)
-                {
-                    var previous = result.Data.Record;
-                    var next = record;
-                    project.History.Snapshot(previous, next, (p) => result.Data.Record = p);
-                    result.Data.Record = next;
-                }
-            }
+            project.History.Snapshot(previous, next, (p) => data.Record = p);
+            data.Record = next;
         }
 
         /// <summary>

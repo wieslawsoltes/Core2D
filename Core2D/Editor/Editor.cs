@@ -1507,10 +1507,30 @@ namespace Core2D
 
             if (record != null)
             {
-                _project.ApplyRecord(
-                    _renderers[0].State.SelectedShape,
-                    _renderers[0].State.SelectedShapes,
-                    record as Record);
+                // Selected shape.
+                if (_renderers[0].State.SelectedShape != null)
+                {
+                    _project.ApplyRecord(_renderers[0].State.SelectedShape.Data, record);
+                }
+
+                // Selected shapes.
+                if (_renderers[0].State.SelectedShapes != null && _renderers[0].State.SelectedShapes.Count > 0)
+                {
+                    foreach (var shape in _renderers[0].State.SelectedShapes)
+                    {
+                        _project.ApplyRecord(shape.Data, record);
+                    }
+                }
+
+                // Current page.
+                if (_renderers[0].State.SelectedShape == null && _renderers[0].State.SelectedShapes == null)
+                {
+                    var page = _project.CurrentContainer as Page;
+                    if (page != null)
+                    {
+                        _project.ApplyRecord(page.Data, record);
+                    }
+                }
             }
         }
 
@@ -2925,13 +2945,13 @@ namespace Core2D
             {
                 if (_renderers[0].State.SelectedShape != null)
                 {
-                    _project.ApplyRecord(_renderers[0].State.SelectedShape, record);
+                    _project.ApplyRecord(_renderers[0].State.SelectedShape.Data, record);
                 }
                 else if (_renderers[0].State.SelectedShapes != null && _renderers[0].State.SelectedShapes.Count > 0)
                 {
                     foreach (var shape in _renderers[0].State.SelectedShapes)
                     {
-                        _project.ApplyRecord(shape, record);
+                        _project.ApplyRecord(shape.Data, record);
                     }
                 }
                 else
@@ -2942,7 +2962,7 @@ namespace Core2D
                         var result = ShapeBounds.HitTest(container, new Vector2(x, y), _project.Options.HitThreshold);
                         if (result != null)
                         {
-                            _project.ApplyRecord(result, record);
+                            _project.ApplyRecord(result.Data, record);
                         }
                         else
                         {
