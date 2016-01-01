@@ -156,11 +156,11 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Set page template.
         /// </summary>
         /// <param name="project">The project instance.</param>
-        /// <param name="page"></param>
-        /// <param name="template"></param>
+        /// <param name="page">The page instance.</param>
+        /// <param name="template">The template instance.</param>
         public static void ApplyTemplate(this Project project, Page page, Template template)
         {
             if (page != null && template != null)
@@ -173,10 +173,10 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Add layer.
         /// </summary>
         /// <param name="project">The project instance.</param>
-        /// <param name="name"></param>
+        /// <param name="name">The layer name.</param>
         public static void AddLayer(this Project project, string name = "New")
         {
             var container = project.CurrentContainer;
@@ -191,10 +191,10 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Add layer.
         /// </summary>
         /// <param name="project">The project instance.</param>
-        /// <param name="layer"></param>
+        /// <param name="layer">The layer instance.</param>
         public static void AddLayer(this Project project, Layer layer)
         {
             var container = project.CurrentContainer;
@@ -230,10 +230,10 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Add shape.
         /// </summary>
         /// <param name="project">The project instance.</param>
-        /// <param name="shape"></param>
+        /// <param name="shape">The shape instance.</param>
         public static void AddShape(this Project project, BaseShape shape)
         {
             var container = project.CurrentContainer;
@@ -274,44 +274,27 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Add property.
         /// </summary>
         /// <param name="project">The project instance.</param>
-        /// <param name="data"></param>
-        /// <param name="property"></param>
+        /// <param name="data">The data instance.</param>
+        /// <param name="property">The property instance.</param>
         public static void AddProperty(this Project project, Data data, Property property)
         {
-            var previous = data.Properties;
-            var next = data.Properties.Add(property);
-            project.History.Snapshot(previous, next, (p) => data.Properties = p);
-            data.Properties = next;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="project">The project instance.</param>
-        /// <param name="data"></param>
-        /// <param name="name"></param>
-        /// <param name="value"></param>
-        public static void AddProperty(this Project project, Data data, string name = "New", string value = "")
-        {
-            if (data != null)
+            if (data != null && data.Properties != null && property != null)
             {
-                if (data.Properties == null)
-                {
-                    data.Properties = ImmutableArray.Create<Property>();
-                }
-
-                project.AddProperty(data, Property.Create(name, value, data));
+                var previous = data.Properties;
+                var next = data.Properties.Add(property);
+                project.History.Snapshot(previous, next, (p) => data.Properties = p);
+                data.Properties = next;
             }
         }
 
         /// <summary>
-        /// 
+        /// Remove property.
         /// </summary>
         /// <param name="project">The project instance.</param>
-        /// <param name="property"></param>
+        /// <param name="property">The property instance.</param>
         public static void RemoveProperty(this Project project, Property property)
         {
             if (property != null)
@@ -332,41 +315,21 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Add database.
         /// </summary>
         /// <param name="project">The project instance.</param>
-        /// <param name="name"></param>
-        /// <param name="columns"></param>
-        public static void AddDatabase(this Project project, string name = "Db", int columns = 2)
-        {
-            var db = Database.Create(name);
-
-            var builder = ImmutableArray.CreateBuilder<Column>();
-            for (int i = 0; i < columns; i++)
-            {
-                builder.Add(Column.Create("Column" + i, db));
-            }
-            db.Columns = builder.ToImmutable();
-
-            var previous = project.Databases;
-            var next = project.Databases.Add(db);
-            project.History.Snapshot(previous, next, (p) => project.Databases = p);
-            project.Databases = next;
-
-            project.CurrentDatabase = db;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="project">The project instance.</param>
-        /// <param name="db"></param>
+        /// <param name="db">The database instance.</param>
         public static void AddDatabase(this Project project, Database db)
         {
-            var previous = project.Databases;
-            var next = project.Databases.Add(db);
-            project.History.Snapshot(previous, next, (p) => project.Databases = p);
-            project.Databases = next;
+            if (project.Databases != null && db != null)
+            {
+                var previous = project.Databases;
+                var next = project.Databases.Add(db);
+                project.History.Snapshot(previous, next, (p) => project.Databases = p);
+                project.Databases = next;
+
+                project.CurrentDatabase = db;
+            }
         }
 
         /// <summary>
@@ -376,7 +339,7 @@ namespace Core2D
         /// <param name="db">The <see cref="Database"/> to remove.</param>
         public static void RemoveDatabase(this Project project, Database db)
         {
-            if (db != null)
+            if (project.Databases != null && db != null)
             {
                 var previous = project.Databases;
                 var next = project.Databases.Remove(db);
@@ -477,22 +440,17 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Add column to database columns collection.
         /// </summary>
         /// <param name="project">The project instance.</param>
-        /// <param name="db"></param>
-        /// <param name="name"></param>
-        public static void AddColumn(this Project project, Database db, string name = "Column")
+        /// <param name="db">The database instance.</param>
+        /// <param name="column">The column instance.</param>
+        public static void AddColumn(this Project project, Database db, Column column)
         {
-            if (db != null)
+            if (db != null && db.Columns != null && column != null)
             {
-                if (db.Columns == null)
-                {
-                    db.Columns = ImmutableArray.Create<Column>();
-                }
-
                 var previous = db.Columns;
-                var next = db.Columns.Add(Column.Create(name + db.Columns.Length, db));
+                var next = db.Columns.Add(column);
                 project.History.Snapshot(previous, next, (p) => db.Columns = p);
                 db.Columns = next;
             }
@@ -519,39 +477,33 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Add record to database records collection.
         /// </summary>
         /// <param name="project">The project instance.</param>
-        public static void AddRecord(this Project project)
+        /// <param name="db">The database instance.</param>
+        /// <param name="record">The record instance.</param>
+        public static void AddRecord(this Project project, Database db, Record record)
         {
-            if (project == null || project.CurrentDatabase == null)
-                return;
-
-            var db = project.CurrentDatabase;
-
-            var values = Enumerable.Repeat("<empty>", db.Columns.Length).Select(c => Value.Create(c));
-            var record = Record.Create(
-                db.Columns,
-                ImmutableArray.CreateRange<Value>(values),
-                db);
-
-            var previous = db.Records;
-            var next = db.Records.Add(record);
-            project.History.Snapshot(previous, next, (p) => db.Records = p);
-            db.Records = next;
+            if (db != null && db.Records != null)
+            {
+                var previous = db.Records;
+                var next = db.Records.Add(record);
+                project.History.Snapshot(previous, next, (p) => db.Records = p);
+                db.Records = next;
+            }
         }
 
         /// <summary>
-        /// Remove the <see cref="Project.CurrentDatabase"/> <see cref="Database.CurrentRecord"/> object from the <see cref="Project.CurrentDatabase"/> <see cref="Database.Records"/> collection.
+        /// Remove record from database records collection.
         /// </summary>
         /// <param name="project">The project instance.</param>
-        public static void RemoveRecord(this Project project)
+        /// <param name="record">The record instance.</param>
+        public static void RemoveRecord(this Project project, Record record)
         {
-            var db = project.CurrentDatabase;
-            if (db != null)
+            if (record != null)
             {
-                var record = db.CurrentRecord;
-                if (record != null)
+                var db = record.Owner;
+                if (db != null && db.Records != null)
                 {
                     var previous = db.Records;
                     var next = db.Records.Remove(record);
@@ -562,10 +514,10 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Reset data record.
         /// </summary>
         /// <param name="project">The project instance.</param>
-        /// <param name="data"></param>
+        /// <param name="data">The data instance.</param>
         public static void ResetRecord(this Project project, Data data)
         {
             if (data != null)
@@ -582,7 +534,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Set record as shape(s) or current page data record.
         /// </summary>
         /// <param name="project">The project instance.</param>
         /// <param name="shape">The selected shape.</param>
@@ -633,11 +585,11 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Set shape record.
         /// </summary>
         /// <param name="project">The project instance.</param>
-        /// <param name="shape"></param>
-        /// <param name="record"></param>
+        /// <param name="shape">The shape instance.</param>
+        /// <param name="record">The record instance.</param>
         public static void ApplyRecord(this Project project, BaseShape shape, Record record)
         {
             var previous = shape.Data.Record;
@@ -647,12 +599,12 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Set shape record at specified coordinates.
         /// </summary>
         /// <param name="project">The project instance.</param>
-        /// <param name="record"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <param name="record">The record instance.</param>
+        /// <param name="x">The X coordinate in container.</param>
+        /// <param name="y">The Y coordinate in container.</param>
         public static void ApplyRecord(this Project project, Record record, double x, double y)
         {
             var container = project.CurrentContainer;
@@ -670,10 +622,10 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Add group library.
         /// </summary>
         /// <param name="project">The project instance.</param>
-        /// <param name="name"></param>
+        /// <param name="name">The group library name.</param>
         public static void AddGroupLibrary(this Project project, string name = "New")
         {
             if (project.GroupLibraries != null)
@@ -705,10 +657,10 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Add style library.
         /// </summary>
         /// <param name="project">The project instance.</param>
-        /// <param name="name"></param>
+        /// <param name="name">The style library name.</param>
         public static void AddStyleLibrary(this Project project, string name = "New")
         {
             if (project.StyleLibraries != null)
@@ -740,10 +692,10 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Add style.
         /// </summary>
         /// <param name="project">The project instance.</param>
-        /// <param name="name"></param>
+        /// <param name="name">The style name.</param>
         public static void AddStyle(this Project project, string name = "New")
         {
             var sl = project.CurrentStyleLibrary;
@@ -779,11 +731,11 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Set shape style.
         /// </summary>
         /// <param name="project">The project instance.</param>
-        /// <param name="shape"></param>
-        /// <param name="style"></param>
+        /// <param name="shape">The shape instance.</param>
+        /// <param name="style">The style instance.</param>
         public static void ApplyStyle(this Project project, BaseShape shape, ShapeStyle style)
         {
             if (shape != null)
@@ -810,7 +762,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Set shape(s) style.
         /// </summary>
         /// <param name="project">The project instance.</param>
         /// <param name="shape">The selected shape.</param>
@@ -833,12 +785,12 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Set shape style at specified coordinates.
         /// </summary>
         /// <param name="project">The project instance.</param>
         /// <param name="style"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <param name="x">The X coordinate in container.</param>
+        /// <param name="y">The Y coordinate in container.</param>
         public static void ApplyStyle(this Project project, ShapeStyle style, double x, double y)
         {
             var container = project.CurrentContainer;
@@ -853,10 +805,10 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Add group.
         /// </summary>
         /// <param name="project">The project instance.</param>
-        /// <param name="group"></param>
+        /// <param name="group">The group instance.</param>
         public static void AddGroup(this Project project, XGroup group)
         {
             var gl = project.CurrentGroupLibrary;
@@ -870,10 +822,10 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Add group.
         /// </summary>
         /// <param name="project">The project instance.</param>
-        /// <param name="name"></param>
+        /// <param name="name">The group name.</param>
         public static void AddGroup(this Project project, string name = "New")
         {
             var gl = project.CurrentGroupLibrary;
@@ -910,7 +862,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Group shapes.
         /// </summary>
         /// <param name="project">The project instance.</param>
         /// <param name="shapes">The selected shapes.</param>
@@ -945,11 +897,11 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Ungroup shapes.
         /// </summary>
-        /// <param name="shapes"></param>
-        /// <param name="original"></param>
-        /// <param name="groupShapes"></param>
+        /// <param name="shapes">The selected shapes.</param>
+        /// <param name="original">The ungroup-ed shapes.</param>
+        /// <param name="groupShapes">The flag indicating whether shapes originate from group object.</param>
         private static void Ungroup(IEnumerable<BaseShape> shapes, IList<BaseShape> original, bool groupShapes)
         {
             if (shapes != null)
@@ -986,7 +938,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Ungroup shapes.
         /// </summary>
         /// <param name="project">The project instance.</param>
         /// <param name="shape">The selected shape.</param>

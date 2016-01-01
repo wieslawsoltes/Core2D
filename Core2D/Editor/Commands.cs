@@ -376,20 +376,20 @@ namespace Core2D
         /// <summary>
         /// Add record to database records collection.
         /// </summary>
-        public static ICoreCommand AddRecordCommand { get; set; }
+        public static ICoreCommand<Database> AddRecordCommand { get; set; }
 
         /// <summary>
         /// Remove record from database records collection.
         /// </summary>
-        public static ICoreCommand RemoveRecordCommand { get; set; }
+        public static ICoreCommand<Record> RemoveRecordCommand { get; set; }
 
         /// <summary>
-        /// Reset data record for current shape.
+        /// Reset data record.
         /// </summary>
         public static ICoreCommand<Data> ResetRecordCommand { get; set; }
 
         /// <summary>
-        /// Set current record as selected shape(s) or current page data record.
+        /// Set record as shape(s) or current page data record.
         /// </summary>
         public static ICoreCommand<Record> ApplyRecordCommand { get; set; }
 
@@ -464,7 +464,7 @@ namespace Core2D
         public static ICoreCommand RemoveStyleCommand { get; set; }
 
         /// <summary>
-        /// Set current style as selected shape style.
+        /// Set shape style.
         /// </summary>
         public static ICoreCommand<ShapeStyle> ApplyStyleCommand { get; set; }
 
@@ -484,7 +484,7 @@ namespace Core2D
         public static ICoreCommand EditTemplateCommand { get; set; }
 
         /// <summary>
-        /// Set current template as current page's template.
+        /// Set page template.
         /// </summary>
         public static ICoreCommand<Template> ApplyTemplateCommand { get; set; }
 
@@ -771,7 +771,7 @@ namespace Core2D
 
             AddDatabaseCommand =
                 Command.Create(
-                    () => editor.Project.AddDatabase(),
+                    () => editor.Project.AddDatabase(Database.Create(Constants.DefaultDatabaseName)),
                     () => editor.IsEditMode());
 
             RemoveDatabaseCommand =
@@ -781,7 +781,7 @@ namespace Core2D
 
             AddColumnCommand =
                 Command<Database>.Create(
-                    (db) => editor.Project.AddColumn(db),
+                    (db) => editor.Project.AddColumn(db, Column.Create(db, Constants.DefaulColumnName)),
                     (db) => editor.IsEditMode());
 
             RemoveColumnCommand =
@@ -790,14 +790,14 @@ namespace Core2D
                     (column) => editor.IsEditMode());
 
             AddRecordCommand =
-                Command.Create(
-                    () => editor.Project.AddRecord(),
-                    () => editor.IsEditMode());
+                Command<Database>.Create(
+                    (db) => editor.Project.AddRecord(db, Record.Create(db, Constants.DefaulValue)),
+                    (db) => editor.IsEditMode());
 
             RemoveRecordCommand =
-                Command.Create(
-                    () => editor.Project.RemoveRecord(),
-                    () => editor.IsEditMode());
+                Command<Record>.Create(
+                    (record) => editor.Project.RemoveRecord(record),
+                    (record) => editor.IsEditMode());
 
             ResetRecordCommand =
                 Command<Data>.Create(
@@ -811,7 +811,7 @@ namespace Core2D
 
             AddPropertyCommand =
                 Command<Data>.Create(
-                    (data) => editor.Project.AddProperty(data),
+                    (data) => editor.Project.AddProperty(data, Property.Create(data, Constants.DefaulPropertyName, Constants.DefaulValue)),
                     (data) => editor.IsEditMode());
 
             RemovePropertyCommand =
