@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Collections.Immutable;
+using System.Linq;
 
 namespace Core2D
 {
@@ -84,6 +85,26 @@ namespace Core2D
                 Id = string.IsNullOrWhiteSpace(id) ? Guid.NewGuid() : Guid.Parse(id),
                 Columns = columns,
                 Values = values,
+                Owner = owner
+            };
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="Record"/> instance.
+        /// </summary>
+        /// <param name="owner"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static Record Create(Database owner, string value)
+        {
+            return new Record()
+            {
+                Id = Guid.NewGuid(),
+                Columns = owner.Columns,
+                Values = ImmutableArray.CreateRange(
+                    Enumerable.Repeat(
+                        Constants.DefaulValue, 
+                        owner.Columns.Length).Select(c => Value.Create(c))),
                 Owner = owner
             };
         }
