@@ -3062,7 +3062,15 @@ namespace Core2D
                 }
                 else
                 {
-                    _project.ApplyStyle(style, x, y);
+                    var container = _project.CurrentContainer;
+                    if (container != null)
+                    {
+                        var result = ShapeBounds.HitTest(container, new Vector2(x, y), _project.Options.HitThreshold);
+                        if (result != null)
+                        {
+                            _project.ApplyStyle(result, style);
+                        }
+                    }
                 }
             }
             catch (Exception ex)

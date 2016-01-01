@@ -697,26 +697,6 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Set shape style at specified coordinates.
-        /// </summary>
-        /// <param name="project">The project instance.</param>
-        /// <param name="style"></param>
-        /// <param name="x">The X coordinate in container.</param>
-        /// <param name="y">The Y coordinate in container.</param>
-        public static void ApplyStyle(this Project project, ShapeStyle style, double x, double y)
-        {
-            var container = project.CurrentContainer;
-            if (container != null)
-            {
-                var result = ShapeBounds.HitTest(container, new Vector2(x, y), project.Options.HitThreshold);
-                if (result != null)
-                {
-                    project.ApplyStyle(result, style);
-                }
-            }
-        }
-
-        /// <summary>
         /// Add group.
         /// </summary>
         /// <param name="project">The project instance.</param>
