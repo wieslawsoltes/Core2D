@@ -17,7 +17,7 @@
         <Grid.Resources>
             <ControlTemplate x:Key="ShapesMenu">
                 <Menu Background="Transparent" HorizontalAlignment="Right">
-                    <MenuItem Command="{x:Static core:Commands.RemoveShapeCommand}" Header="-"/>
+                    <MenuItem Command="{x:Static core:Commands.RemoveShapeCommand}" CommandParameter="{Binding CurrentShape}" Header="-"/>
                 </Menu>
             </ControlTemplate>
         </Grid.Resources>
@@ -26,10 +26,10 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Control Template="{StaticResource ShapesMenu}" Grid.Row="0" Margin="2,0,2,0"/>
-        <lists:BaseShapeDragAndDropListBox DataContext="{Binding CurrentLayer.Shapes}" Tag="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" ItemsSource="{Binding}" SelectedItem="{Binding DataContext.Project.CurrentContainer.CurrentShape, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" BorderBrush="{x:Null}" HorizontalContentAlignment="Stretch" Grid.Row="1">
+        <lists:BaseShapeDragAndDropListBox DataContext="{Binding CurrentLayer.Shapes}" Tag="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" ItemsSource="{Binding}" SelectedItem="{Binding DataContext.CurrentShape, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" BorderBrush="{x:Null}" HorizontalContentAlignment="Stretch" Grid.Row="1">
             <lists:BaseShapeDragAndDropListBox.Resources>
                 <ContextMenu x:Key="ShapeContextMenu" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
-                    <MenuItem Header="_Delete" InputGestureText="Del" Command="{x:Static core:Commands.RemoveShapeCommand}"/>
+                    <MenuItem Header="_Delete" InputGestureText="Del" Command="{x:Static core:Commands.RemoveShapeCommand}" CommandParameter="{Binding}"/>
                 </ContextMenu>
             </lists:BaseShapeDragAndDropListBox.Resources>
             <lists:BaseShapeDragAndDropListBox.InputBindings>

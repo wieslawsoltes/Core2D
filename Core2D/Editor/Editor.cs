@@ -1587,13 +1587,60 @@ namespace Core2D
         /// <param name="style">The shape style item.</param>
         public void OnApplyStyle(ShapeStyle style)
         {
+            if (_project == null)
+                return;
+
+            if (style != null)
+            {
+                // Selected shape.
+                if (_renderers[0].State.SelectedShape != null)
+                {
+                    _project.ApplyStyle(_renderers[0].State.SelectedShape, style);
+                }
+
+                // Selected shapes.
+                if (_renderers[0].State.SelectedShapes != null && _renderers[0].State.SelectedShapes.Count > 0)
+                {
+                    foreach (var shape in _renderers[0].State.SelectedShapes)
+                    {
+                        _project.ApplyStyle(shape, style);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Add shape.
+        /// </summary>
+        /// <param name="shape">The shape instance.</param>
+        public void OnAddShape(BaseShape shape)
+        {
             if (_project == null || _project.CurrentContainer == null)
                 return;
 
-            _project.ApplyStyle(
-                _renderers[0].State.SelectedShape,
-                _renderers[0].State.SelectedShapes,
-                style);
+            var layer = _project.CurrentContainer.CurrentLayer;
+            if (layer != null && shape != null)
+            {
+                _project.AddShape(layer, shape);
+            }
+
+        }
+
+        /// <summary>
+        /// Remove shape.
+        /// </summary>
+        /// <param name="shape">The shape instance.</param>
+        public void OnRemoveShape(BaseShape shape)
+        {
+            if (_project == null || _project.CurrentContainer == null)
+                return;
+
+            var layer = _project.CurrentContainer.CurrentLayer;
+            if (layer != null && shape != null)
+            {
+                _project.RemoveShape(layer, shape);
+                _project.CurrentContainer.CurrentShape = layer.Shapes.FirstOrDefault();
+            }
         }
 
         /// <summary>
@@ -2905,7 +2952,7 @@ namespace Core2D
                     Deselect(_project.CurrentContainer);
                     clone.Move(sx, sy);
 
-                    _project.AddShape(clone);
+                    _project.AddShape(_project.CurrentContainer.CurrentLayer, clone);
 
                     Select(_project.CurrentContainer, clone);
 
@@ -2943,16 +2990,10 @@ namespace Core2D
         {
             try
             {
-                if (_renderers[0].State.SelectedShape != null)
+                if (_renderers[0].State.SelectedShape != null
+                    || (_renderers[0].State.SelectedShapes != null && _renderers[0].State.SelectedShapes.Count > 0))
                 {
-                    _project.ApplyRecord(_renderers[0].State.SelectedShape.Data, record);
-                }
-                else if (_renderers[0].State.SelectedShapes != null && _renderers[0].State.SelectedShapes.Count > 0)
-                {
-                    foreach (var shape in _renderers[0].State.SelectedShapes)
-                    {
-                        _project.ApplyRecord(shape.Data, record);
-                    }
+                    OnApplyRecord(record);
                 }
                 else
                 {
@@ -3040,7 +3081,7 @@ namespace Core2D
             g.AddConnectorAsNone(pl);
             g.AddConnectorAsNone(pr);
 
-            _project.AddShape(g);
+            _project.AddShape(_project.CurrentContainer.CurrentLayer, g);
         }
 
         /// <summary>
@@ -3056,9 +3097,7 @@ namespace Core2D
                 if (_renderers[0].State.SelectedShape != null
                     || (_renderers[0].State.SelectedShapes != null && _renderers[0].State.SelectedShapes.Count > 0))
                 {
-                    _project.ApplyStyle(_renderers[0].State.SelectedShape,
-                        _renderers[0].State.SelectedShapes,
-                        style);
+                    OnApplyStyle(style);
                 }
                 else
                 {
@@ -3447,7 +3486,7 @@ namespace Core2D
                     line.End = next;
                 }
 
-                _project.AddShape(split);
+                _project.AddShape(_project.CurrentContainer.CurrentLayer, split);
 
                 if (select)
                 {
@@ -3512,7 +3551,7 @@ namespace Core2D
                 line.End = next;
             }
 
-            _project.AddShape(split);
+            _project.AddShape(_project.CurrentContainer.CurrentLayer, split);
 
             return true;
         }

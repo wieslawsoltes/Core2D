@@ -547,7 +547,7 @@ namespace Core2D
                         if (_path.Geometry.Figures.LastOrDefault().Segments.Count > 0)
                         {
                             Finalize(null);
-                            _editor.Project.AddShape(_path);
+                            _editor.Project.AddShape(_editor.Project.CurrentContainer.CurrentLayer, _path);
                         }
                         else
                         {
@@ -584,7 +584,7 @@ namespace Core2D
                         if (_path.Geometry.Figures.LastOrDefault().Segments.Count > 0)
                         {
                             Finalize(null);
-                            _editor.Project.AddShape(_path);
+                            _editor.Project.AddShape(_editor.Project.CurrentContainer.CurrentLayer, _path);
                         }
                         else
                         {
@@ -615,7 +615,7 @@ namespace Core2D
                         if (_path.Geometry.Figures.LastOrDefault().Segments.Count > 0)
                         {
                             Finalize(null);
-                            _editor.Project.AddShape(_path);
+                            _editor.Project.AddShape(_editor.Project.CurrentContainer.CurrentLayer, _path);
                         }
                         else
                         {

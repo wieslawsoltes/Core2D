@@ -141,7 +141,7 @@ namespace Core2D
                             _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_shape);
                             Remove();
                             Finalize(_shape as XQBezier);
-                            _editor.Project.AddShape(_shape);
+                            _editor.Project.AddShape(_editor.Project.CurrentContainer.CurrentLayer, _shape);
                             _currentState = State.None;
                             _editor.CancelAvailable = false;
                         }

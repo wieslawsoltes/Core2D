@@ -113,7 +113,7 @@ namespace Core2D
         /// <param name="page">The page object to remove from document <see cref="Document.Pages"/> collection.</param>
         public static void RemovePage(this Project project, Page page)
         {
-            if (project != null && project.Documents != null)
+            if (project.Documents != null && page != null)
             {
                 var document = project.Documents.FirstOrDefault(d => d.Pages.Contains(page));
                 if (document != null)
@@ -221,20 +221,16 @@ namespace Core2D
         /// Add shape.
         /// </summary>
         /// <param name="project">The project instance.</param>
+        /// <param name="layer">The layer instance.</param>
         /// <param name="shape">The shape instance.</param>
-        public static void AddShape(this Project project, BaseShape shape)
+        public static void AddShape(this Project project, Layer layer, BaseShape shape)
         {
-            var container = project.CurrentContainer;
-            if (container != null)
+            if (layer != null && shape != null)
             {
-                var layer = container.CurrentLayer;
-                if (layer != null)
-                {
-                    var previous = layer.Shapes;
-                    var next = layer.Shapes.Add(shape);
-                    project.History.Snapshot(previous, next, (p) => layer.Shapes = p);
-                    layer.Shapes = next;
-                }
+                var previous = layer.Shapes;
+                var next = layer.Shapes.Add(shape);
+                project.History.Snapshot(previous, next, (p) => layer.Shapes = p);
+                layer.Shapes = next;
             }
         }
 
@@ -242,21 +238,32 @@ namespace Core2D
         /// Remove shape.
         /// </summary>
         /// <param name="project">The project instance.</param>
-        public static void RemoveShape(this Project project)
+        /// <param name="layer">The layer instance.</param>
+        /// <param name="shape">The shape instance.</param>
+        public static void RemoveShape(this Project project, Layer layer, BaseShape shape)
         {
-            var container = project.CurrentContainer;
-            if (container != null)
+            if (layer != null && shape != null)
             {
-                var shape = container.CurrentShape;
-                var layer = container.CurrentLayer;
-                if (shape != null && layer != null)
-                {
-                    var previous = layer.Shapes;
-                    var next = layer.Shapes.Remove(shape);
-                    project.History.Snapshot(previous, next, (p) => layer.Shapes = p);
-                    layer.Shapes = next;
+                var previous = layer.Shapes;
+                var next = layer.Shapes.Remove(shape);
+                project.History.Snapshot(previous, next, (p) => layer.Shapes = p);
+                layer.Shapes = next;
+            }
+        }
 
-                    container.CurrentShape = layer.Shapes.FirstOrDefault();
+        /// <summary>
+        /// Remove shape.
+        /// </summary>
+        /// <param name="project">The project instance.</param>
+        /// <param name="shape">The shape instance.</param>
+        public static void RemoveShape(this Project project, BaseShape shape)
+        {
+            if (shape != null && project.Documents != null)
+            {
+                var layer = project.Documents.SelectMany(d => d.Pages).SelectMany(p => p.Layers).FirstOrDefault(l => l.Shapes.Contains(shape));
+                if (layer != null)
+                {
+                    project.RemoveShape(layer, shape);
                 }
             }
         }
@@ -321,7 +328,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Remove the <see cref="Database"/> object from the <see cref="Project.Databases"/> collection.
+        /// Remove database.
         /// </summary>
         /// <param name="project">The project instance.</param>
         /// <param name="db">The <see cref="Database"/> to remove.</param>
@@ -339,7 +346,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Update the destination <see cref="Database"/> using data from source <see cref="Database"/>.
+        /// Update the destination database using data from source database.
         /// </summary>
         /// <param name="project">The project instance.</param>
         /// <param name="destination">The destination database.</param>
@@ -445,7 +452,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Remove the <see cref="Column"/> object from <see cref="Column.Owner"/> <see cref="Database.Columns"/> collection.
+        /// Remove column from database columns collection.
         /// </summary>
         /// <param name="project">The project instance.</param>
         /// <param name="column">The <see cref="Column"/> to remove.</param>
@@ -669,29 +676,6 @@ namespace Core2D
                     var next = style;
                     project.History.Snapshot(previous, next, (p) => shape.Style = p);
                     shape.Style = next;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Set shape(s) style.
-        /// </summary>
-        /// <param name="project">The project instance.</param>
-        /// <param name="shape">The selected shape.</param>
-        /// <param name="shapes">The selected shapes.</param>
-        /// <param name="style">The style instance.</param>
-        public static void ApplyStyle(this Project project, BaseShape shape, ImmutableHashSet<BaseShape> shapes, ShapeStyle style)
-        {
-            if (shape != null)
-            {
-                project.ApplyStyle(shape, style);
-            }
-
-            if (shapes != null && shapes.Count > 0)
-            {
-                foreach (var s in shapes)
-                {
-                    project.ApplyStyle(s, style);
                 }
             }
         }

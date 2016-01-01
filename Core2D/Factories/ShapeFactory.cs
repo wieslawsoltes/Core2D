@@ -28,7 +28,7 @@ namespace Core2D
                 _editor.Project.Options.PointShape);
             if (isStandalone)
             {
-                _editor.Project.AddShape(point);
+                _editor.Project.AddShape(_editor.Project.CurrentContainer.CurrentLayer, point);
             }
             return point;
         }
@@ -42,7 +42,7 @@ namespace Core2D
                 _editor.Project.CurrentStyleLibrary.Selected,
                 _editor.Project.Options.PointShape,
                 isStroked);
-            _editor.Project.AddShape(line);
+            _editor.Project.AddShape(_editor.Project.CurrentContainer.CurrentLayer, line);
             return line;
         }
 
@@ -55,7 +55,7 @@ namespace Core2D
                 _editor.Project.CurrentStyleLibrary.Selected,
                 _editor.Project.Options.PointShape,
                 isStroked);
-            _editor.Project.AddShape(line);
+            _editor.Project.AddShape(_editor.Project.CurrentContainer.CurrentLayer, line);
             return line;
         }
 
@@ -71,7 +71,7 @@ namespace Core2D
                 _editor.Project.Options.PointShape,
                 isStroked,
                 isFilled);
-            _editor.Project.AddShape(arc);
+            _editor.Project.AddShape(_editor.Project.CurrentContainer.CurrentLayer, arc);
             return arc;
         }
 
@@ -87,7 +87,7 @@ namespace Core2D
                 _editor.Project.Options.PointShape,
                 isStroked,
                 isFilled);
-            _editor.Project.AddShape(arc);
+            _editor.Project.AddShape(_editor.Project.CurrentContainer.CurrentLayer, arc);
             return arc;
         }
 
@@ -103,7 +103,7 @@ namespace Core2D
                 _editor.Project.Options.PointShape,
                 isStroked,
                 isFilled);
-            _editor.Project.AddShape(bezier);
+            _editor.Project.AddShape(_editor.Project.CurrentContainer.CurrentLayer, bezier);
             return bezier;
         }
 
@@ -119,7 +119,7 @@ namespace Core2D
                 _editor.Project.Options.PointShape,
                 isStroked,
                 isFilled);
-            _editor.Project.AddShape(bezier);
+            _editor.Project.AddShape(_editor.Project.CurrentContainer.CurrentLayer, bezier);
             return bezier;
         }
 
@@ -134,7 +134,7 @@ namespace Core2D
                 _editor.Project.Options.PointShape,
                 isStroked,
                 isFilled);
-            _editor.Project.AddShape(qbezier);
+            _editor.Project.AddShape(_editor.Project.CurrentContainer.CurrentLayer, qbezier);
             return qbezier;
         }
 
@@ -149,7 +149,7 @@ namespace Core2D
                 _editor.Project.Options.PointShape,
                 isStroked,
                 isFilled);
-            _editor.Project.AddShape(qbezier);
+            _editor.Project.AddShape(_editor.Project.CurrentContainer.CurrentLayer, qbezier);
             return qbezier;
         }
 
@@ -170,7 +170,7 @@ namespace Core2D
                 geometry,
                 isStroked,
                 isFilled);
-            _editor.Project.AddShape(path);
+            _editor.Project.AddShape(_editor.Project.CurrentContainer.CurrentLayer, path);
             return path;
         }
 
@@ -185,7 +185,7 @@ namespace Core2D
                 isStroked,
                 isFilled,
                 text);
-            _editor.Project.AddShape(rectangle);
+            _editor.Project.AddShape(_editor.Project.CurrentContainer.CurrentLayer, rectangle);
             return rectangle;
         }
 
@@ -200,7 +200,7 @@ namespace Core2D
                 isStroked,
                 isFilled,
                 text);
-            _editor.Project.AddShape(rectangle);
+            _editor.Project.AddShape(_editor.Project.CurrentContainer.CurrentLayer, rectangle);
             return rectangle;
         }
 
@@ -215,7 +215,7 @@ namespace Core2D
                 isStroked,
                 isFilled,
                 text);
-            _editor.Project.AddShape(ellipse);
+            _editor.Project.AddShape(_editor.Project.CurrentContainer.CurrentLayer, ellipse);
             return ellipse;
         }
 
@@ -230,7 +230,7 @@ namespace Core2D
                 isStroked,
                 isFilled,
                 text);
-            _editor.Project.AddShape(ellipse);
+            _editor.Project.AddShape(_editor.Project.CurrentContainer.CurrentLayer, ellipse);
             return ellipse;
         }
 
@@ -244,7 +244,7 @@ namespace Core2D
                 _editor.Project.Options.PointShape,
                 text,
                 isStroked);
-            _editor.Project.AddShape(txt);
+            _editor.Project.AddShape(_editor.Project.CurrentContainer.CurrentLayer, txt);
             return txt;
         }
 
@@ -258,7 +258,7 @@ namespace Core2D
                 _editor.Project.Options.PointShape,
                 text,
                 isStroked);
-            _editor.Project.AddShape(txt);
+            _editor.Project.AddShape(_editor.Project.CurrentContainer.CurrentLayer, txt);
             return txt;
         }
 
@@ -274,7 +274,7 @@ namespace Core2D
                 isStroked,
                 isFilled,
                 text);
-            _editor.Project.AddShape(image);
+            _editor.Project.AddShape(_editor.Project.CurrentContainer.CurrentLayer, image);
             return image;
         }
 
@@ -292,7 +292,7 @@ namespace Core2D
                 isStroked,
                 isFilled,
                 text);
-            _editor.Project.AddShape(image);
+            _editor.Project.AddShape(_editor.Project.CurrentContainer.CurrentLayer, image);
             return image;
         }
     }

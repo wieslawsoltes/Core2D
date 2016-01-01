@@ -394,9 +394,14 @@ namespace Core2D
         public static ICoreCommand<Record> ApplyRecordCommand { get; set; }
 
         /// <summary>
+        /// Add shape.
+        /// </summary>
+        public static ICoreCommand<BaseShape> AddShapeCommand { get; set; }
+
+        /// <summary>
         /// Remove shape.
         /// </summary>
-        public static ICoreCommand RemoveShapeCommand { get; set; }
+        public static ICoreCommand<BaseShape> RemoveShapeCommand { get; set; }
 
         /// <summary>
         /// Add property.
@@ -879,10 +884,15 @@ namespace Core2D
                     (style) => editor.OnApplyStyle(style),
                     (style) => editor.IsEditMode());
 
+            AddShapeCommand =
+                Command<BaseShape>.Create(
+                    (shape) => editor.OnAddShape(shape),
+                    (shape) => editor.IsEditMode());
+
             RemoveShapeCommand =
-                Command.Create(
-                    () => editor.Project.RemoveShape(),
-                    () => editor.IsEditMode());
+                Command<BaseShape>.Create(
+                    (shape) => editor.OnRemoveShape(shape),
+                    (shape) => editor.IsEditMode());
 
             AddTemplateCommand =
                 Command.Create(
@@ -1043,6 +1053,7 @@ namespace Core2D
             ResetRecordCommand.NotifyCanExecuteChanged();
             ApplyRecordCommand.NotifyCanExecuteChanged();
 
+            AddShapeCommand.NotifyCanExecuteChanged();
             RemoveShapeCommand.NotifyCanExecuteChanged();
 
             AddPropertyCommand.NotifyCanExecuteChanged();
