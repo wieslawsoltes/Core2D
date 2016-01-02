@@ -370,6 +370,7 @@
     <Compile Include="Style\ArrowStyle.cs" />
     <Compile Include="Style\ArrowType.cs" />
     <Compile Include="Style\BaseStyle.cs" />
+    <Compile Include="Style\Colors.cs" />
     <Compile Include="Style\FontStyle.cs" />
     <Compile Include="Style\FontStyleFlags.cs" />
     <Compile Include="Style\LineFixedLength.cs" />
@@ -381,6 +382,7 @@
     <Compile Include="Style\TextHAlignment.cs" />
     <Compile Include="Style\TextStyle.cs" />
     <Compile Include="Style\TextVAlignment.cs" />
+    <Compile Include="Xaml\Converters\ArgbColorTypeConverter.cs" />
     <Compile Include="Xaml\Core2DXamlLoader.cs" />
     <Compile Include="Xaml\DefaultParserFactory.cs" />
     <Compile Include="Xaml\DefaultXamlLoader.cs" />
@@ -394,6 +396,7 @@
   <ItemGroup>
     <Content Include="OmniXAML\Source\OmniXaml\OmniXaml.csproj" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
