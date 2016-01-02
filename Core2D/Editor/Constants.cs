@@ -137,5 +137,10 @@ namespace Core2D
         /// 
         /// </summary>
         public const string TemplatesExtension = ".templates";
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public const string XamlExtension = ".xaml";
     }
 }
