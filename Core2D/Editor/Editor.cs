@@ -2841,6 +2841,15 @@ namespace Core2D
                             OnImportObject(path, _project, ImportType.Templates);
                             result = true;
                         }
+                        else if (string.Compare(ext, Constants.XamlExtension, true) == 0)
+                        {
+                            var item = Core2DXamlLoader.Load(path);
+                            if (item != null)
+                            {
+                                // TODO:
+                            }
+                            result = true;
+                        }
                     }
 
                     return result;
