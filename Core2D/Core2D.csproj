@@ -381,6 +381,9 @@
     <Compile Include="Style\TextHAlignment.cs" />
     <Compile Include="Style\TextStyle.cs" />
     <Compile Include="Style\TextVAlignment.cs" />
+    <Compile Include="Xaml\Core2DXamlLoader.cs" />
+    <Compile Include="Xaml\DefaultParserFactory.cs" />
+    <Compile Include="Xaml\DefaultXamlLoader.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="OmniXAML\Source\Glass\ChangeTracking\packages.config" />
