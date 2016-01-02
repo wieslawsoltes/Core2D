@@ -1,5 +1,9 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
+using System.Globalization;
+using System.Linq;
+using System.Reflection;
 
 namespace Core2D
 {
@@ -66,6 +70,59 @@ namespace Core2D
                 G = g,
                 B = b
             };
+        }
+
+        /// <summary>
+        /// Creates a <see cref="ArgbColor"/> from an integer.
+        /// </summary>
+        /// <param name="value">The integer value.</param>
+        /// <returns>The color.</returns>
+        public static ArgbColor FromUInt32(uint value)
+        {
+            return new ArgbColor
+            {
+                A = (byte)((value >> 24) & 0xff),
+                R = (byte)((value >> 16) & 0xff),
+                G = (byte)((value >> 8) & 0xff),
+                B = (byte)(value & 0xff),
+            };
+        }
+
+        /// <summary>
+        /// Parses a color string.
+        /// </summary>
+        /// <param name="s">The color string.</param>
+        /// <returns>The <see cref="ArgbColor"/>.</returns>
+        public static ArgbColor Parse(string s)
+        {
+            if (s[0] == '#')
+            {
+                var or = 0u;
+
+                if (s.Length == 7)
+                {
+                    or = 0xff000000;
+                }
+                else if (s.Length != 9)
+                {
+                    throw new FormatException($"Invalid color string: '{s}'.");
+                }
+
+                return FromUInt32(uint.Parse(s.Substring(1), NumberStyles.HexNumber, CultureInfo.InvariantCulture) | or);
+            }
+            else
+            {
+                var upper = s.ToUpperInvariant();
+                var member = typeof(Colors).GetTypeInfo().DeclaredProperties.FirstOrDefault(x => x.Name.ToUpperInvariant() == upper);
+                if (member != null)
+                {
+                    return (ArgbColor)member.GetValue(null);
+                }
+                else
+                {
+                    throw new FormatException($"Invalid color string: '{s}'.");
+                }
+            }
         }
     }
 }
