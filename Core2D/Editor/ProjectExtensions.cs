@@ -1,6 +1,5 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 
@@ -352,84 +351,23 @@ namespace Core2D
         /// <param name="source">The source database.</param>
         public static void UpdateDatabase(this Project project, Database destination, Database source)
         {
-            if (source.Columns.Length <= 1)
-                return;
-
-            // Check for the Id column.
-            if (source.Columns[0].Name != Database.IdColumnName)
-                return;
-
-            // Check columns length.
-            if (source.Columns.Length - 1 != destination.Columns.Length)
-                return;
-
-            // Check column names.
-            for (int i = 1; i < source.Columns.Length; i++)
+            if (destination != null && source != null)
             {
-                if (source.Columns[i].Name != destination.Columns[i - 1].Name)
+                ImmutableArray<Record>.Builder records;
+                bool isDirty = Database.Update(destination, source, out records);
+
+                if (isDirty && records != null)
                 {
-                    return;
+                    var builder = project.Databases.ToBuilder();
+                    var index = builder.IndexOf(destination);
+                    destination.Records = records.ToImmutable();
+                    builder[index] = destination;
+
+                    var previous = project.Databases;
+                    var next = builder.ToImmutable();
+                    project.History.Snapshot(previous, next, (p) => project.Databases = p);
+                    project.Databases = next;
                 }
-            }
-
-            bool isDirty = false;
-            var recordsBuilder = destination.Records.ToBuilder();
-
-            // Update or remove existing records.
-            for (int i = 0; i < destination.Records.Length; i++)
-            {
-                var record = destination.Records[i];
-                var result = source.Records.FirstOrDefault(r => r.Id == record.Id);
-                if (result != null)
-                {
-                    // Update existing record.
-                    for (int j = 1; j < result.Values.Length; j++)
-                    {
-                        var valuesBuilder = record.Values.ToBuilder();
-                        valuesBuilder[j - 1] = result.Values[j];
-                        record.Values = valuesBuilder.ToImmutable();
-                    }
-                    isDirty = true;
-                }
-                else
-                {
-                    // Remove existing record.
-                    recordsBuilder.Remove(record);
-                    isDirty = true;
-                }
-            }
-
-            // Add new records.
-            for (int i = 0; i < source.Records.Length; i++)
-            {
-                var record = source.Records[i];
-                var result = destination.Records.FirstOrDefault(r => r.Id == record.Id);
-                if (result == null)
-                {
-                    var r = source.Records[i];
-
-                    // Use existing columns.
-                    r.Columns = destination.Columns;
-
-                    // Skip Id column.
-                    r.Values = r.Values.Skip(1).ToImmutableArray();
-
-                    recordsBuilder.Add(r);
-                    isDirty = true;
-                }
-            }
-
-            if (isDirty)
-            {
-                var builder = project.Databases.ToBuilder();
-                var index = builder.IndexOf(destination);
-                destination.Records = recordsBuilder.ToImmutable();
-                builder[index] = destination;
-
-                var previous = project.Databases;
-                var next = builder.ToImmutable();
-                project.History.Snapshot(previous, next, (p) => project.Databases = p);
-                project.Databases = next;
             }
         }
 
