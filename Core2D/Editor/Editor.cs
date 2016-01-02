@@ -2846,7 +2846,12 @@ namespace Core2D
                             var item = Core2DXamlLoader.Load(path);
                             if (item != null)
                             {
-                                // TODO:
+                                if (item is ShapeStyle)
+                                {
+                                    _project.AddStyle(_project.CurrentStyleLibrary, item as ShapeStyle);
+                                }
+
+                                // TODO: Handle other item types.
                             }
                             result = true;
                         }
