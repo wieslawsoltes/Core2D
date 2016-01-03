@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
 
 namespace Core2D
 {
@@ -173,6 +174,21 @@ namespace Core2D
         /// <returns></returns>
         public static ShapeState Create(ShapeStateFlags flags = ShapeStateFlags.Default)
         {
+            return new ShapeState()
+            {
+                Flags = flags
+            };
+        }
+
+        /// <summary>
+        /// Parses a shape state string.
+        /// </summary>
+        /// <param name="s">The shape state string.</param>
+        /// <returns>The <see cref="ShapeState"/>.</returns>
+        public static ShapeState Parse(string s)
+        {
+            var flags = (ShapeStateFlags)Enum.Parse(typeof(ShapeStateFlags), s, true);
+
             return new ShapeState()
             {
                 Flags = flags
