@@ -3,7 +3,7 @@
 using OmniXaml;
 using System.IO;
 
-namespace Core2D
+namespace Core2D.Xaml
 {
     internal class DefaultXamlLoader : IXamlLoader
     {
