@@ -1,0 +1,35 @@
+<Options xmlns="https://github.com/Core2D">
+    <Options.SnapToGrid>True</Options.SnapToGrid>
+    <Options.SnapX>15</Options.SnapX>
+    <Options.SnapY>15</Options.SnapY>
+    <Options.HitThreshold>7</Options.HitThreshold>
+    <Options.MoveMode>Point</Options.MoveMode>
+    <Options.DefaultIsStroked>True</Options.DefaultIsStroked>
+    <Options.DefaultIsFilled>False</Options.DefaultIsFilled>
+    <Options.DefaultIsClosed>True</Options.DefaultIsClosed>
+    <Options.DefaultIsSmoothJoin>True</Options.DefaultIsSmoothJoin>
+    <Options.DefaultFillRule>EvenOdd</Options.DefaultFillRule>
+    <Options.TryToConnect>False</Options.TryToConnect>
+    <Options.PointShape>
+        <XRectangle IsStroked="True" IsFilled="False">
+            <XRectangle.TopLeft>
+                <XPoint X="-4" Y="-4" State="Visible,Printable,Standalone"/>
+            </XRectangle.TopLeft>
+            <XRectangle.BottomRight>
+                <XPoint X="4" Y="4" State="Visible,Printable,Standalone"/>
+            </XRectangle.BottomRight>
+            <XRectangle.Style>
+                <ShapeStyle Stroke="#FF000000" Fill="#FF000000" Thickness="1" LineCap="Round"/>
+            </XRectangle.Style>
+        </XRectangle>
+    </Options.PointShape>
+    <Options.PointStyle>
+        <ShapeStyle Name="Point" Stroke="#FF000000" Fill="#FF000000" Thickness="1" LineCap="Round"/>
+    </Options.PointStyle>
+    <Options.SelectionStyle>
+        <ShapeStyle Name="Selection" Stroke="#7F3333FF" Fill="#4F3333FF" Thickness="1" LineCap="Round"/>
+    </Options.SelectionStyle>
+    <Options.HelperStyle>
+        <ShapeStyle Name="Helper" Stroke="#FF000000" Fill="#FF000000" Thickness="1" LineCap="Round"/>
+    </Options.HelperStyle>
+</Options>
