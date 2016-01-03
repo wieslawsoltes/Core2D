@@ -460,7 +460,7 @@ namespace Core2D
             Arc = XArc.Create(0, 0, Style, null);
             Bezier = XBezier.Create(0, 0, Style, null);
             Ellipse = XEllipse.Create(0, 0, Style, null);
-            Group = XGroup.Create("Group");
+            Group = XGroup.Create(Constants.DefaulGroupName);
             Image = XImage.Create(0, 0, Style, null, "key");
             Line = XLine.Create(0, 0, Style, null);
             Path = XPath.Create("Path", Style, null);
