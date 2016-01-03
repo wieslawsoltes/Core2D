@@ -523,6 +523,7 @@ namespace Core2D
         /// - The <see cref="Core2D.Template"/> class.
         /// - The <see cref="Core2D.Page"/> class.
         /// - The <see cref="Core2D.Document"/> class.
+        /// - The <see cref="Core2D.Options"/> class.
         /// - The <see cref="Core2D.Project"/> class.
         /// </remarks>
         /// <param name="path">The xaml file path.</param>
@@ -590,6 +591,10 @@ namespace Core2D
                 else if (item is Document)
                 {
                     _project.AddDocument(item as Document);
+                }
+                else if (item is Options)
+                {
+                    _project.Options = item as Options;
                 }
                 else if (item is Project)
                 {
