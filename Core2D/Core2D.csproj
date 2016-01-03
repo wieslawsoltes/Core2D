@@ -394,12 +394,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="OmniXAML\Source\Glass\ChangeTracking\packages.config" />
-    <None Include="OmniXAML\Source\OmniXaml\OmniXaml.nuspec" />
     <None Include="OmniXAML\Source\OmniXaml\packages.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="OmniXAML\Source\OmniXaml\OmniXaml.csproj" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
