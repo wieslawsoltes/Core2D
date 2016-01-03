@@ -3,7 +3,7 @@
 using OmniXaml;
 using OmniXaml.Services.DotNetFx;
 
-namespace Core2D
+namespace Core2D.Xaml
 {
     public static class Core2DXamlLoader
     {
