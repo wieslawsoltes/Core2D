@@ -1,0 +1,7 @@
+<Data xmlns="https://github.com/Core2D">
+    <Data.Properties>
+        <Property Name="Property1" Value="Value1"/>
+        <Property Name="Property2" Value="Value2"/>
+        <Property Name="Property3" Value="Value3"/>
+    </Data.Properties>
+</Data>
