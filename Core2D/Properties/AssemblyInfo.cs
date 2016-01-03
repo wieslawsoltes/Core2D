@@ -22,3 +22,5 @@ using OmniXaml.Attributes;
 [assembly: Guid("05402dd2-93c8-4b30-ac03-139feaffd186")]
 
 [assembly: XmlnsDefinition("https://github.com/Core2D", "Core2D")]
+[assembly: XmlnsDefinition("https://github.com/Core2D", "Core2D.Xaml")]
+[assembly: XmlnsDefinition("https://github.com/Core2D", "Core2D.Xaml.Collections")]
