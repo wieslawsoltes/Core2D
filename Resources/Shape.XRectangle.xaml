@@ -13,9 +13,9 @@
                     <XRectangle.TopLeft>
                         <XPoint X="-4" Y="-4" State="Visible,Printable,Standalone"/>
                     </XRectangle.TopLeft>
-                    <XRectangle.TopLeft>
+                    <XRectangle.BottomRight>
                         <XPoint X="4" Y="4" State="Visible,Printable,Standalone"/>
-                    </XRectangle.TopLeft>
+                    </XRectangle.BottomRight>
                     <XRectangle.Style>
                         <ShapeStyle Stroke="#FF000000" Fill="#FF000000" Thickness="1" LineCap="Round"/>
                     </XRectangle.Style>
@@ -30,9 +30,9 @@
                     <XRectangle.TopLeft>
                         <XPoint X="-4" Y="-4" State="Visible,Printable,Standalone"/>
                     </XRectangle.TopLeft>
-                    <XRectangle.TopLeft>
+                    <XRectangle.BottomRight>
                         <XPoint X="4" Y="4" State="Visible,Printable,Standalone"/>
-                    </XRectangle.TopLeft>
+                    </XRectangle.BottomRight>
                     <XRectangle.Style>
                         <ShapeStyle Stroke="#FF000000" Fill="#FF000000" Thickness="1" LineCap="Round"/>
                     </XRectangle.Style>
