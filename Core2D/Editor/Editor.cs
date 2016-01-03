@@ -3178,7 +3178,7 @@ namespace Core2D
         /// <param name="y">The Y coordinate in container.</param>
         public void DropAsGroup(Record record, double x, double y)
         {
-            var g = XGroup.Create("g");
+            var g = XGroup.Create(Constants.DefaulGroupName);
 
             g.Data.Record = record;
 
