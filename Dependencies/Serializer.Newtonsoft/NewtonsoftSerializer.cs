@@ -5,6 +5,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Core2D;
 
@@ -15,8 +16,6 @@ namespace Dependencies
     /// </summary>
     internal class ProjectContractResolver : DefaultContractResolver
     {
-        // NOTE: The UWP is missing Type.IsGenericType property.
-        /*
         /// <summary>
         /// Use ImmutableArray for IList contract.
         /// </summary>
@@ -32,7 +31,6 @@ namespace Dependencies
             }
             return base.ResolveContract(type);
         }
-        */
 
         /// <summary>
         /// Serialize only writable properties. 
