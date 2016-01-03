@@ -20,8 +20,8 @@ namespace Core2D
         /// 
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="json"></param>
+        /// <param name="text"></param>
         /// <returns></returns>
-        T Deserialize<T>(string json);
+        T Deserialize<T>(string text);
     }
 }
