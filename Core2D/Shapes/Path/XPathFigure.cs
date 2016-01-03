@@ -31,6 +31,14 @@ namespace Core2D
         public bool IsClosed { get; set; }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="XPathFigure"/> class.
+        /// </summary>
+        public XPathFigure()
+        {
+            Segments = new List<XPathSegment>();
+        }
+
+        /// <summary>
         /// Get all points in the figure.
         /// </summary>
         /// <returns>All points in the figure.</returns>
@@ -48,16 +56,14 @@ namespace Core2D
         /// Creates a new <see cref="XPathFigure"/> instance.
         /// </summary>
         /// <param name="startPoint">The start point.</param>
-        /// <param name="segments">The segments collection.</param>
         /// <param name="isFilled">The flag indicating whether path is filled.</param>
         /// <param name="isClosed">The flag indicating whether path is closed.</param>
         /// <returns>The new instance of the <see cref="XPathFigure"/> class.</returns>
-        public static XPathFigure Create(XPoint startPoint, IList<XPathSegment> segments, bool isFilled, bool isClosed)
+        public static XPathFigure Create(XPoint startPoint, bool isFilled = true, bool isClosed = true)
         {
             return new XPathFigure()
             {
                 StartPoint = startPoint,
-                Segments = segments,
                 IsFilled = isFilled,
                 IsClosed = isClosed
             };

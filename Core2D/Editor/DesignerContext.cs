@@ -474,7 +474,7 @@ namespace Core2D
             ArcSegment = XArcSegment.Create(XPoint.Create(), XPathSize.Create(), 180, true, XSweepDirection.Clockwise, true, true);
             BezierSegment = XBezierSegment.Create(XPoint.Create(), XPoint.Create(), XPoint.Create(), true, true);
             LineSegment = XLineSegment.Create(XPoint.Create(), true, true);
-            PathFigure = XPathFigure.Create(XPoint.Create(), ImmutableArray.Create<XPathSegment>(), false, true);
+            PathFigure = XPathFigure.Create(XPoint.Create(), false, true);
             PathGeometry = XPathGeometry.Create(ImmutableArray.Create<XPathFigure>(), XFillRule.EvenOdd);
             PathSize = XPathSize.Create();
             PolyBezierSegment = XPolyBezierSegment.Create(ImmutableArray.Create<XPoint>(), true, true);
