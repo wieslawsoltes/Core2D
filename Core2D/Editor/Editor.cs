@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
+using Core2D.Xaml;
+using Core2D.Xaml.Collections;
 
 namespace Core2D
 {
@@ -501,6 +503,104 @@ namespace Core2D
                         ex.Message,
                         Environment.NewLine,
                         ex.StackTrace);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Import Xaml from file.
+        /// </summary>
+        /// <remarks>
+        /// Supported Xaml types:
+        /// - The shape style <see cref="ShapeStyle"/>.
+        /// - The shapes based on <see cref="BaseShape"/> class.
+        /// - The styles library using <see cref="Styles"/> container.
+        /// - The shapes library using <see cref="Shapes"/> container.
+        /// - The groups library using <see cref="Groups"/> container.
+        /// - The data for current container using <see cref="Data"/> class.
+        /// - The <see cref="Database"/> class.
+        /// - The <see cref="Layer"/> class.
+        /// - The <see cref="Template"/> class.
+        /// - The <see cref="Page"/> class.
+        /// - The <see cref="Document"/> class.
+        /// - The <see cref="Project"/> class.
+        /// </remarks>
+        /// <param name="path">The xaml file path.</param>
+        public void OnImportXaml(string path)
+        {
+            var item = Core2DXamlLoader.Load(path);
+            if (item != null)
+            {
+                if (item is ShapeStyle)
+                {
+                    _project.AddStyle(_project.CurrentStyleLibrary, item as ShapeStyle);
+                }
+                else if (item is BaseShape)
+                {
+                    _project.AddShape(_project.CurrentContainer.CurrentLayer, item as BaseShape);
+                }
+                else if (item is Styles)
+                {
+                    var styles = item as Styles;
+                    var library = Library<ShapeStyle>.Create(styles.Name, styles.Children);
+                    _project.AddStyleLibrary(library);
+                }
+                else if (item is Shapes)
+                {
+                    var shapes = item as Shapes;
+                    if (shapes.Children.Count > 0)
+                    {
+                        var layer = _project.CurrentContainer.CurrentLayer;
+                        foreach (var shape in shapes.Children)
+                        {
+                            _project.AddShape(layer, shape);
+                        }
+                    }
+                }
+                else if (item is Groups)
+                {
+                    var groups = item as Groups;
+                    var library = Library<XGroup>.Create(groups.Name, groups.Children);
+                    _project.AddGroupLibrary(library);
+                }
+                else if (item is Data)
+                {
+                    var page = _project.CurrentContainer as Page;
+                    if (page != null)
+                    {
+                        page.Data = item as Data;
+                    }
+                }
+                else if (item is Database)
+                {
+                    _project.AddDatabase(item as Database);
+                }
+                else if (item is Layer)
+                {
+                    _project.AddLayer(_project.CurrentContainer, item as Layer);
+                }
+                else if (item is Template)
+                {
+                    _project.AddTemplate(item as Template);
+                }
+                else if (item is Page)
+                {
+                    _project.AddPage(_project.CurrentDocument, item as Page);
+                }
+                else if (item is Document)
+                {
+                    _project.AddDocument(item as Document);
+                }
+                else if (item is Project)
+                {
+                    var project = item as Project;
+                    Unload();
+                    Load(project, path);
+                    AddRecent(path, project.Name);
+                }
+                else
+                {
+                    throw new NotSupportedException("Not supported Xaml object.");
                 }
             }
         }
@@ -2843,16 +2943,7 @@ namespace Core2D
                         }
                         else if (string.Compare(ext, Constants.XamlExtension, true) == 0)
                         {
-                            var item = Core2DXamlLoader.Load(path);
-                            if (item != null)
-                            {
-                                if (item is ShapeStyle)
-                                {
-                                    _project.AddStyle(_project.CurrentStyleLibrary, item as ShapeStyle);
-                                }
-
-                                // TODO: Handle other item types.
-                            }
+                            OnImportXaml(path);
                             result = true;
                         }
                     }
