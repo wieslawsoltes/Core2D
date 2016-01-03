@@ -258,6 +258,11 @@ namespace Core2D.Perspex
                     async () => await OnSaveAs(),
                     () => editor.IsEditMode());
 
+            Commands.ImportXamlCommand =
+                Command<string>.Create(
+                    async (path) => await OnImportXaml(path),
+                    (path) => editor.IsEditMode());
+
             Commands.ExportCommand =
                 Command<object>.Create(
                     async (item) => await OnExport(item),
@@ -535,6 +540,48 @@ namespace Core2D.Perspex
                     if (result != null)
                     {
                         _editor.Save(result);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                if (_editor.Log != null)
+                {
+                    _editor.Log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Import Xaml from file.
+        /// </summary>
+        /// <param name="parameter">The Xaml file path.</param>
+        /// <returns>The await <see cref="Task"/>.</returns>
+        private async Task OnImportXaml(string parameter)
+        {
+            try
+            {
+                if (parameter == null)
+                {
+                    var dlg = new OpenFileDialog();
+                    dlg.Filters.Add(new FileDialogFilter() { Name = "Xaml", Extensions = { "xaml" } });
+                    dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
+                    var result = await dlg.ShowAsync(_mainWindow);
+                    if (result != null)
+                    {
+                        var path = result.FirstOrDefault();
+                        _editor.OnImportXaml(path);
+                    }
+                }
+                else
+                {
+                    string path = parameter;
+                    if (path != null && System.IO.File.Exists(path))
+                    {
+                        _editor.OnImportXaml(path);
                     }
                 }
             }

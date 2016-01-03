@@ -53,6 +53,8 @@
             <MenuItem Header="{x:Static p:Resources.MenuFileSave}" Command="{x:Static core:Commands.SaveCommand}" InputGestureText="Ctrl+S" Style="{StaticResource MenuItemVisibilityStyle}"/>
             <MenuItem Header="{x:Static p:Resources.MenuFileSaveAs}" Command="{x:Static core:Commands.SaveAsCommand}" InputGestureText="Ctrl+Shift+S" Style="{StaticResource MenuItemVisibilityStyle}"/>
             <Separator Style="{StaticResource SeparatorVisibilityStyle}"/>
+            <MenuItem Header="{x:Static p:Resources.MenuFileImportXaml}" Command="{x:Static core:Commands.ImportXamlCommand}" InputGestureText="Ctrl+I" Style="{StaticResource MenuItemVisibilityStyle}"/>
+            <Separator Style="{StaticResource SeparatorVisibilityStyle}"/>
             <MenuItem Header="{x:Static p:Resources.MenuFileExport}" Command="{x:Static core:Commands.ExportCommand}" CommandParameter="{Binding Project}" InputGestureText="Ctrl+E" Style="{StaticResource MenuItemVisibilityStyle}"/>
             <Separator Style="{StaticResource SeparatorVisibilityStyle}"/>
             <MenuItem Header="{x:Static p:Resources.MenuFileRecent}" ItemsSource="{Binding RecentProjects}">

@@ -367,6 +367,15 @@ namespace Core2D.Wpf.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to _Import Xaml....
+        /// </summary>
+        public static string MenuFileImportXaml {
+            get {
+                return ResourceManager.GetString("MenuFileImportXaml", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to _New.
         /// </summary>
         public static string MenuFileNew {

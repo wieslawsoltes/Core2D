@@ -34,6 +34,11 @@ namespace Core2D
         public static ICoreCommand SaveAsCommand { get; set; }
 
         /// <summary>
+        /// Import xaml.
+        /// </summary>
+        public static ICoreCommand<string> ImportXamlCommand { get; set; }
+
+        /// <summary>
         /// Export project, document or page.
         /// </summary>
         public static ICoreCommand<object> ExportCommand { get; set; }
@@ -970,6 +975,7 @@ namespace Core2D
             CloseCommand.NotifyCanExecuteChanged();
             SaveCommand.NotifyCanExecuteChanged();
             SaveAsCommand.NotifyCanExecuteChanged();
+            ImportXamlCommand.NotifyCanExecuteChanged();
             ExportCommand.NotifyCanExecuteChanged();
             ExitCommand.NotifyCanExecuteChanged();
 

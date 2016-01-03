@@ -226,6 +226,11 @@ namespace Core2D
                     () => { },
                     () => editor.IsEditMode());
 
+            Commands.ImportXamlCommand =
+                Command<string>.Create(
+                    (path) => { },
+                    (path) => editor.IsEditMode());
+
             Commands.ExportCommand =
                 Command<object>.Create(
                     (item) => { },
