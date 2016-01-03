@@ -14,6 +14,15 @@ namespace Core2D
         private Template _template;
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="Page"/> class.
+        /// </summary>
+        public Page()
+            : base()
+        {
+            Data = new Data();
+        }
+
+        /// <summary>
         /// 
         /// </summary>
         public Data Data
@@ -105,10 +114,6 @@ namespace Core2D
             var page = new Page()
             {
                 Name = name,
-                Data = new Data()
-                {
-                    Properties = ImmutableArray.Create<Property>()
-                },
                 Layers = ImmutableArray.Create<Layer>()
             };
 

@@ -19,6 +19,15 @@ namespace Core2D
         private Data _data;
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="BaseShape"/> class.
+        /// </summary>
+        public BaseShape()
+            : base()
+        {
+            Data = new Data();
+        }
+
+        /// <summary>
         /// Gets or sets shape name.
         /// </summary>
         public virtual string Name

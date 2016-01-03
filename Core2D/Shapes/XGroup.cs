@@ -196,10 +196,6 @@ namespace Core2D
             {
                 Name = name,
                 Style = default(ShapeStyle),
-                Data = new Data()
-                {
-                    Properties = ImmutableArray.Create<Property>()
-                },
                 Shapes = ImmutableArray.Create<BaseShape>(),
                 Connectors = ImmutableArray.Create<XPoint>()
             };

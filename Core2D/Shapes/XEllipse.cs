@@ -43,10 +43,6 @@ namespace Core2D
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
-                Data = new Data()
-                {
-                    Properties = ImmutableArray.Create<Property>()
-                },
                 TopLeft = XPoint.Create(x1, y1, point),
                 BottomRight = XPoint.Create(x2, y2, point),
                 Text = text,
@@ -90,10 +86,6 @@ namespace Core2D
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
-                Data = new Data()
-                {
-                    Properties = ImmutableArray.Create<Property>()
-                },
                 TopLeft = topLeft,
                 BottomRight = bottomRight,
                 Text = text,

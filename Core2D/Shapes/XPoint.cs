@@ -95,10 +95,6 @@ namespace Core2D
             {
                 Name = name,
                 Style = default(ShapeStyle),
-                Data = new Data()
-                {
-                    Properties = ImmutableArray.Create<Property>()
-                },
                 X = x,
                 Y = y,
                 Shape = shape
@@ -116,10 +112,6 @@ namespace Core2D
             {
                 Name = "",
                 Style = default(ShapeStyle),
-                Data = new Data()
-                {
-                    Properties = ImmutableArray.Create<Property>()
-                },
                 X = point.X,
                 Y = point.Y,
                 Shape = null
@@ -132,11 +124,7 @@ namespace Core2D
         /// <returns>The new instance of the <see cref="XPoint"/> class.</returns>
         public XPoint Clone()
         {
-            var data = new Data()
-            {
-                Properties = ImmutableArray.Create<Property>(),
-                Record = this.Data.Record
-            };
+            var data = Data.Create(this.Data.Record);
 
             // TODO: The property Value is of type object and is not cloned.
             if (this.Data.Properties.Length > 0)

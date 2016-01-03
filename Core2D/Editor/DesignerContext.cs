@@ -423,7 +423,7 @@ namespace Core2D
             db.CurrentRecord = record;
 
             Database = db;
-            Data = Data.Create(ImmutableArray.Create<Property>(), record);
+            Data = Data.Create(record);
             Record = record;
 
             // Project
