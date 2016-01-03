@@ -13,15 +13,15 @@ namespace Core2D
         private string _name;
         private Options _options;
         private History _history;
-        private ImmutableArray<Database> _databases;
-        private Database _currentDatabase;
         private ImmutableArray<Library<ShapeStyle>> _styleLibraries;
-        private Library<ShapeStyle> _currentStyleLibrary;
         private ImmutableArray<Library<XGroup>> _groupLibraries;
-        private Library<XGroup> _currentGroupLibrary;
+        private ImmutableArray<Database> _databases;
         private ImmutableArray<Template> _templates;
-        private Template _currentTemplate;
         private ImmutableArray<Document> _documents;
+        private Library<ShapeStyle> _currentStyleLibrary;
+        private Library<XGroup> _currentGroupLibrary;
+        private Database _currentDatabase;
+        private Template _currentTemplate;
         private Document _currentDocument;
         private Container _currentContainer;
         private object _selected;
@@ -56,37 +56,10 @@ namespace Core2D
         /// <summary>
         /// 
         /// </summary>
-        public Database CurrentDatabase
-        {
-            get { return _currentDatabase; }
-            set { Update(ref _currentDatabase, value); }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public ImmutableArray<Database> Databases
-        {
-            get { return _databases; }
-            set { Update(ref _databases, value); }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         public ImmutableArray<Library<ShapeStyle>> StyleLibraries
         {
             get { return _styleLibraries; }
             set { Update(ref _styleLibraries, value); }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public Library<ShapeStyle> CurrentStyleLibrary
-        {
-            get { return _currentStyleLibrary; }
-            set { Update(ref _currentStyleLibrary, value); }
         }
 
         /// <summary>
@@ -101,10 +74,10 @@ namespace Core2D
         /// <summary>
         /// 
         /// </summary>
-        public Library<XGroup> CurrentGroupLibrary
+        public ImmutableArray<Database> Databases
         {
-            get { return _currentGroupLibrary; }
-            set { Update(ref _currentGroupLibrary, value); }
+            get { return _databases; }
+            set { Update(ref _databases, value); }
         }
 
         /// <summary>
@@ -119,19 +92,46 @@ namespace Core2D
         /// <summary>
         /// 
         /// </summary>
-        public Template CurrentTemplate
+        public ImmutableArray<Document> Documents
         {
-            get { return _currentTemplate; }
-            set { Update(ref _currentTemplate, value); }
+            get { return _documents; }
+            set { Update(ref _documents, value); }
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public ImmutableArray<Document> Documents
+        public Library<ShapeStyle> CurrentStyleLibrary
         {
-            get { return _documents; }
-            set { Update(ref _documents, value); }
+            get { return _currentStyleLibrary; }
+            set { Update(ref _currentStyleLibrary, value); }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Library<XGroup> CurrentGroupLibrary
+        {
+            get { return _currentGroupLibrary; }
+            set { Update(ref _currentGroupLibrary, value); }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Database CurrentDatabase
+        {
+            get { return _currentDatabase; }
+            set { Update(ref _currentDatabase, value); }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Template CurrentTemplate
+        {
+            get { return _currentTemplate; }
+            set { Update(ref _currentTemplate, value); }
         }
 
         /// <summary>
@@ -184,21 +184,29 @@ namespace Core2D
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="Project"/> class.
+        /// </summary>
+        public Project()
+            : base()
+        {
+            _options = Options.Create();
+            _styleLibraries = ImmutableArray.Create<Library<ShapeStyle>>();
+            _groupLibraries = ImmutableArray.Create<Library<XGroup>>();
+            _databases = ImmutableArray.Create<Database>();
+            _templates = ImmutableArray.Create<Template>();
+            _documents = ImmutableArray.Create<Document>();
+        }
+
+        /// <summary>
         /// Creates a new <see cref="Project"/> instance.
         /// </summary>
-        /// <param name="name"></param>
-        /// <returns></returns>
+        /// <param name="name">The project name.</param>
+        /// <returns>The new instance of the <see cref="Project"/> class.</returns>
         public static Project Create(string name = "Project")
         {
             return new Project()
             {
-                Name = name,
-                Options = Options.Create(),
-                Databases = ImmutableArray.Create<Database>(),
-                StyleLibraries = ImmutableArray.Create<Library<ShapeStyle>>(),
-                GroupLibraries = ImmutableArray.Create<Library<XGroup>>(),
-                Templates = ImmutableArray.Create<Template>(),
-                Documents = ImmutableArray.Create<Document>(),
+                Name = name
             };
         }
     }

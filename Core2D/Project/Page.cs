@@ -1,6 +1,5 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using System.Collections.Immutable;
 using System.Linq;
 
 namespace Core2D
@@ -12,15 +11,6 @@ namespace Core2D
     {
         private Data _data;
         private Template _template;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Page"/> class.
-        /// </summary>
-        public Page()
-            : base()
-        {
-            Data = new Data();
-        }
 
         /// <summary>
         /// 
@@ -92,6 +82,15 @@ namespace Core2D
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="Page"/> class.
+        /// </summary>
+        public Page()
+            : base()
+        {
+            Data = new Data();
+        }
+
+        /// <summary>
         /// 
         /// </summary>
         public override void Invalidate()
@@ -113,8 +112,7 @@ namespace Core2D
         {
             var page = new Page()
             {
-                Name = name,
-                Layers = ImmutableArray.Create<Layer>()
+                Name = name
             };
 
             var builder = page.Layers.ToBuilder();

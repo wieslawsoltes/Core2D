@@ -1,6 +1,5 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using System.Collections.Immutable;
 using System.Linq;
 
 namespace Core2D
@@ -13,6 +12,14 @@ namespace Core2D
         private double _width;
         private double _height;
         private ArgbColor _background;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Template"/> class.
+        /// </summary>
+        public Template()
+            : base()
+        {
+        }
 
         /// <summary>
         /// 
@@ -52,8 +59,7 @@ namespace Core2D
         {
             var template = new Template()
             {
-                Name = name,
-                Layers = ImmutableArray.Create<Layer>(),
+                Name = name
             };
 
             template.Background = ArgbColor.Create(0x00, 0xFF, 0xFF, 0xFF);

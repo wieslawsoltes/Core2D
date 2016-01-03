@@ -79,6 +79,15 @@ namespace Core2D
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="Container"/> class.
+        /// </summary>
+        public Container()
+            : base()
+        {
+            _layers = ImmutableArray.Create<Layer>();
+        }
+
+        /// <summary>
         /// 
         /// </summary>
         public virtual void Clear()

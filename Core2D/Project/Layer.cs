@@ -29,7 +29,7 @@ namespace Core2D
 
         private string _name;
         private Container _owner;
-        private bool _isVisible;
+        private bool _isVisible = true;
         private ImmutableArray<BaseShape> _shapes;
 
         /// <summary>
@@ -69,6 +69,15 @@ namespace Core2D
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="Layer"/> class.
+        /// </summary>
+        public Layer()
+            : base()
+        {
+            _shapes = ImmutableArray.Create<BaseShape>();
+        }
+
+        /// <summary>
         /// 
         /// </summary>
         public void Invalidate()
@@ -93,8 +102,7 @@ namespace Core2D
             {
                 Name = name,
                 Owner = owner,
-                IsVisible = isVisible,
-                Shapes = ImmutableArray.Create<BaseShape>()
+                IsVisible = isVisible
             };
         }
     }
