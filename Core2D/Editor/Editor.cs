@@ -517,7 +517,7 @@ namespace Core2D
         /// - The styles library using <see cref="Core2D.Xaml.Collections.Styles"/> container.
         /// - The shapes library using <see cref="Core2D.Xaml.Collections.Shapes"/> container.
         /// - The groups library using <see cref="Core2D.Xaml.Collections.Groups"/> container.
-        /// - The data for current container using <see cref="Core2D.Data"/> class.
+        /// - The <see cref="Core2D.Data"/> class.
         /// - The <see cref="Core2D.Database"/> class.
         /// - The <see cref="Core2D.Layer"/> class.
         /// - The <see cref="Core2D.Template"/> class.
@@ -566,10 +566,18 @@ namespace Core2D
                 }
                 else if (item is Data)
                 {
-                    var page = _project.CurrentContainer as Page;
-                    if (page != null)
+                    if (_renderers[0].State.SelectedShape != null
+                        || (_renderers[0].State.SelectedShapes != null && _renderers[0].State.SelectedShapes.Count > 0))
                     {
-                        page.Data = item as Data;
+                        OnApplyData(item as Data);
+                    }
+                    else
+                    {
+                        var page = _project.CurrentContainer as Page;
+                        if (page != null)
+                        {
+                            page.Data = item as Data;
+                        }
                     }
                 }
                 else if (item is Database)
