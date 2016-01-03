@@ -9,43 +9,12 @@ namespace Core2D
     /// </summary>
     public class Template : Container
     {
-        private double _width;
-        private double _height;
-        private ArgbColor _background;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Template"/> class.
         /// </summary>
         public Template()
             : base()
         {
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public double Width
-        {
-            get { return _width; }
-            set { Update(ref _width, value); }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public double Height
-        {
-            get { return _height; }
-            set { Update(ref _height, value); }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public ArgbColor Background
-        {
-            get { return _background; }
-            set { Update(ref _background, value); }
         }
 
         /// <summary>

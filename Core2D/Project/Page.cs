@@ -10,7 +10,6 @@ namespace Core2D
     public class Page : Container
     {
         private Data _data;
-        private Template _template;
 
         /// <summary>
         /// 
@@ -59,26 +58,14 @@ namespace Core2D
         /// <summary>
         /// 
         /// </summary>
-        public new Template Template
+        public override void Invalidate()
         {
-            get { return _template; }
-            set { Update(ref _template, value); }
-        }
+            if (Template != null)
+            {
+                Template.Invalidate();
+            }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public double Width
-        {
-            get { return _template.Width; }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public double Height
-        {
-            get { return _template.Height; }
+            base.Invalidate();
         }
 
         /// <summary>
@@ -88,19 +75,6 @@ namespace Core2D
             : base()
         {
             Data = new Data();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public override void Invalidate()
-        {
-            if (Template != null)
-            {
-                Template.Invalidate();
-            }
-
-            base.Invalidate();
         }
 
         /// <summary>
