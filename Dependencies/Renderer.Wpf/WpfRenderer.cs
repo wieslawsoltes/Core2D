@@ -388,7 +388,7 @@ namespace Dependencies
         /// </summary>
         /// <param name="dc"></param>
         /// <param name="template"></param>
-        private static void DrawTemplateBackground(DrawingContext dc, Template template)
+        private static void DrawTemplateBackground(DrawingContext dc, Container template)
         {
             var brush = CreateBrush(template.Background);
             var rect = new Rect(0, 0, template.Width, template.Height);
