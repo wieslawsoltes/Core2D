@@ -17,6 +17,7 @@ namespace Core2D.Xaml
             featureProvider.AddTypeConverter(new TypeConverterRegistration(typeof(ArgbColor), new ArgbColorTypeConverter()));
             featureProvider.AddTypeConverter(new TypeConverterRegistration(typeof(FontStyle), new FontStyleTypeConverter()));
             featureProvider.AddTypeConverter(new TypeConverterRegistration(typeof(ShapeState), new ShapeStateTypeConverter()));
+            featureProvider.AddTypeConverter(new TypeConverterRegistration(typeof(XPathGeometry), new XPathGeometryTypeConverter()));
 
             var loader = new DefaultXamlLoader(wiringContext);
             return loader.FromPath(path);

@@ -388,6 +388,7 @@
     <Compile Include="Xaml\Converters\ArgbColorTypeConverter.cs" />
     <Compile Include="Xaml\Converters\FontStyleTypeConverter.cs" />
     <Compile Include="Xaml\Converters\ShapeStateTypeConverter.cs" />
+    <Compile Include="Xaml\Converters\XPathGeometryTypeConverter.cs" />
     <Compile Include="Xaml\Core2DXamlLoader.cs" />
     <Compile Include="Xaml\DefaultParserFactory.cs" />
     <Compile Include="Xaml\DefaultXamlLoader.cs" />
