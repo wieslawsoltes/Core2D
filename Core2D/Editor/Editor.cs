@@ -1715,6 +1715,34 @@ namespace Core2D
         }
 
         /// <summary>
+        /// Set current data as selected shape data.
+        /// </summary>
+        /// <param name="data">The data item.</param>
+        public void OnApplyData(Data data)
+        {
+            if (_project == null)
+                return;
+
+            if (data != null)
+            {
+                // Selected shape.
+                if (_renderers[0].State.SelectedShape != null)
+                {
+                    _project.ApplyData(_renderers[0].State.SelectedShape, data);
+                }
+
+                // Selected shapes.
+                if (_renderers[0].State.SelectedShapes != null && _renderers[0].State.SelectedShapes.Count > 0)
+                {
+                    foreach (var shape in _renderers[0].State.SelectedShapes)
+                    {
+                        _project.ApplyData(shape, data);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
         /// Add shape.
         /// </summary>
         /// <param name="shape">The shape instance.</param>
