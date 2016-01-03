@@ -226,6 +226,11 @@ namespace Core2D
                     () => { },
                     () => editor.IsEditMode());
 
+            Commands.ImportXamlCommand =
+                Command<string>.Create(
+                    (path) => { },
+                    (path) => editor.IsEditMode());
+
             Commands.ExportCommand =
                 Command<object>.Create(
                     (item) => { },
@@ -418,7 +423,7 @@ namespace Core2D
             db.CurrentRecord = record;
 
             Database = db;
-            Data = Data.Create(ImmutableArray.Create<Property>(), record);
+            Data = Data.Create(record);
             Record = record;
 
             // Project
@@ -455,7 +460,7 @@ namespace Core2D
             Arc = XArc.Create(0, 0, Style, null);
             Bezier = XBezier.Create(0, 0, Style, null);
             Ellipse = XEllipse.Create(0, 0, Style, null);
-            Group = XGroup.Create("Group");
+            Group = XGroup.Create(Constants.DefaulGroupName);
             Image = XImage.Create(0, 0, Style, null, "key");
             Line = XLine.Create(0, 0, Style, null);
             Path = XPath.Create("Path", Style, null);
@@ -469,7 +474,7 @@ namespace Core2D
             ArcSegment = XArcSegment.Create(XPoint.Create(), XPathSize.Create(), 180, true, XSweepDirection.Clockwise, true, true);
             BezierSegment = XBezierSegment.Create(XPoint.Create(), XPoint.Create(), XPoint.Create(), true, true);
             LineSegment = XLineSegment.Create(XPoint.Create(), true, true);
-            PathFigure = XPathFigure.Create(XPoint.Create(), ImmutableArray.Create<XPathSegment>(), false, true);
+            PathFigure = XPathFigure.Create(XPoint.Create(), false, true);
             PathGeometry = XPathGeometry.Create(ImmutableArray.Create<XPathFigure>(), XFillRule.EvenOdd);
             PathSize = XPathSize.Create();
             PolyBezierSegment = XPolyBezierSegment.Create(ImmutableArray.Create<XPoint>(), true, true);

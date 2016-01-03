@@ -35,6 +35,8 @@
             <MenuItem Header="_Save" HotKey="Ctrl+S" Command="{Static core:Commands.SaveCommand}"/>
             <MenuItem Header="Save _As..." HotKey="Ctrl+Shift+S" Command="{Static core:Commands.SaveAsCommand}"/>
             <Separator/>
+            <MenuItem Header="_Import Xaml..." HotKey="Ctrl+I" Command="{Static core:Commands.ImportXamlCommand}"/>
+            <Separator/>
             <MenuItem Header="_Export..." HotKey="Ctrl+E" Command="{Static core:Commands.ExportCommand}"/>
             <Separator/>
             <MenuItem Header="_Recent" Items="{Binding Path=RecentProjects}">

@@ -675,4 +675,7 @@
   <data name="MenuDataUpdate" xml:space="preserve">
     <value>_Update...</value>
   </data>
+  <data name="MenuFileImportXaml" xml:space="preserve">
+    <value>_Import Xaml...</value>
+  </data>
 </root>

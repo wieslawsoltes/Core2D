@@ -14,6 +14,15 @@ namespace Core2D
         /// </summary>
         public IList<XPoint> Points { get; set; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="XPolyLineSegment"/> class.
+        /// </summary>
+        public XPolyLineSegment()
+            : base()
+        {
+            Points = new List<XPoint>();
+        }
+
         /// <inheritdoc/>
         public override IEnumerable<XPoint> GetPoints()
         {

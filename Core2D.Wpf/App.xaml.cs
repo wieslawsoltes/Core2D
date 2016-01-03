@@ -220,6 +220,11 @@ namespace Core2D.Wpf
                     () => OnSaveAs(),
                     () => editor.IsEditMode());
 
+            Commands.ImportXamlCommand =
+                Command<string>.Create(
+                    (path) => OnImportXaml(path),
+                    (path) => editor.IsEditMode());
+
             Commands.ExportCommand =
                 Command<object>.Create(
                     (item) => OnExport(item),
@@ -474,6 +479,35 @@ namespace Core2D.Wpf
             if (dlg.ShowDialog(_mainWindow) == true)
             {
                 _editor.Save(dlg.FileName);
+            }
+        }
+
+        /// <summary>
+        /// Import Xaml from file.
+        /// </summary>
+        /// <param name="path">The Xaml file path.</param>
+        private void OnImportXaml(string path)
+        {
+            if (path == null)
+            {
+                var dlg = new OpenFileDialog()
+                {
+                    Filter = "Xaml (*.xaml)|*.xaml|All (*.*)|*.*",
+                    FilterIndex = 0,
+                    FileName = ""
+                };
+
+                if (dlg.ShowDialog(_mainWindow) == true)
+                {
+                    _editor.OnImportXaml(dlg.FileName);
+                }
+            }
+            else
+            {
+                if (path != null && System.IO.File.Exists(path))
+                {
+                    _editor.OnImportXaml(path);
+                }
             }
         }
 

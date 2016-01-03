@@ -106,10 +106,6 @@ namespace Core2D
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
-                Data = new Data()
-                {
-                    Properties = ImmutableArray.Create<Property>()
-                },
                 Geometry = geometry
             };
         }

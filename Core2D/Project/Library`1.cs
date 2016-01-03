@@ -1,6 +1,8 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 
 namespace Core2D
 {
@@ -52,6 +54,22 @@ namespace Core2D
                 Name = name,
                 Items = ImmutableArray.Create<T>(),
                 Selected = default(T)
+            };
+        }
+
+        /// <summary>
+        /// Creates a new instance of the <see cref="Library{T}"/> class.
+        /// </summary>
+        /// <param name="name">The library name.</param>
+        /// <param name="items">The items collection.</param>
+        /// <returns>The new instance of the <see cref="Library{T}"/> class.</returns>
+        public static Library<T> Create(string name, IEnumerable<T> items)
+        {
+            return new Library<T>()
+            {
+                Name = name,
+                Items = ImmutableArray.CreateRange<T>(items),
+                Selected = items.FirstOrDefault()
             };
         }
     }

@@ -6,12 +6,22 @@ using System.Linq;
 namespace Core2D
 {
     /// <summary>
-    /// Core2D data context.
+    /// The data context.
     /// </summary>
     public class Data : ObservableObject
     {
         private ImmutableArray<Property> _properties;
         private Record _record;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Data"/> class.
+        /// </summary>
+        public Data()
+            : base()
+        {
+            _properties = ImmutableArray.Create<Property>();
+            _record = null;
+        }
 
         /// <summary>
         /// Gets or sets a collection <see cref="Property"/> that will be used during drawing.
@@ -68,14 +78,21 @@ namespace Core2D
         /// <summary>
         /// Creates a new <see cref="Data"/> instance.
         /// </summary>
-        /// <param name="properties"></param>
+        /// <returns>The new instance of the <see cref="Data"/> class.</returns>
+        public static Data Create()
+        {
+            return new Data();
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="Data"/> instance.
+        /// </summary>
         /// <param name="record"></param>
-        /// <returns></returns>
-        public static Data Create(ImmutableArray<Property> properties, Record record)
+        /// <returns>The new instance of the <see cref="Data"/> class.</returns>
+        public static Data Create(Record record)
         {
             return new Data()
             {
-                Properties = properties,
                 Record = record
             };
         }

@@ -69,6 +69,16 @@ namespace Core2D
             set { Update(ref _connectors, value); }
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="XGroup"/> class.
+        /// </summary>
+        public XGroup()
+            : base()
+        {
+            _shapes = ImmutableArray.Create<BaseShape>();
+            _connectors = ImmutableArray.Create<XPoint>();
+        }
+
         /// <inheritdoc/>
         public override void Draw(object dc, Renderer renderer, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
@@ -195,13 +205,7 @@ namespace Core2D
             return new XGroup()
             {
                 Name = name,
-                Style = default(ShapeStyle),
-                Data = new Data()
-                {
-                    Properties = ImmutableArray.Create<Property>()
-                },
-                Shapes = ImmutableArray.Create<BaseShape>(),
-                Connectors = ImmutableArray.Create<XPoint>()
+                Style = default(ShapeStyle)
             };
         }
 

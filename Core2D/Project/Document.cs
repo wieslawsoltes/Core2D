@@ -31,16 +31,24 @@ namespace Core2D
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="Document"/> class.
+        /// </summary>
+        public Document()
+            : base()
+        {
+            _pages = ImmutableArray.Create<Page>();
+        }
+
+        /// <summary>
         /// Creates a new <see cref="Document"/> instance.
         /// </summary>
         /// <param name="name"></param>
-        /// <returns></returns>
+        /// <returns>The new instance of the <see cref="Document"/> class.</returns>
         public static Document Create(string name = "Document")
         {
             return new Document()
             {
-                Name = name,
-                Pages = ImmutableArray.Create<Page>()
+                Name = name
             };
         }
     }

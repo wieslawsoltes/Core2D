@@ -12,18 +12,27 @@ Data driven 2D diagram editor.
 
 Core2D is an application for making data driven 2D diagrams.
 
-## Building Core2D
+## Data Formats
 
-* [Visual Studio Community 2015](https://www.visualstudio.com/en-us/products/visual-studio-community-vs.aspx) for Windows builds.
-* [SharpDevelop](http://www.icsharpcode.net/OpenSource/SD/Download/#SharpDevelop5x) for Windows builds.
-* [MonoDevelop](http://www.monodevelop.com/) for Linux builds.
+* Project files are stored in `zip` archives.
+* The project data is loaded/saved as `Json` from `zip` archives.
+* The image data is saved in `zip` archives as files.
+* Project resources can be defined in `Json` or `Xaml` format. 
+* `Json` format is supported for imported and exported of resources. 
+* `Xaml` format is supported for imported resources. 
+* Database's records can be imported, exported and updated from `csv` file format.
 
-### Supported Platforms
+## Supported Platforms
 
 * Windows 7/8/8.1/10 for `Core2D.Wpf` and `Core2D.Perspex` builds.
 * XUbuntu 15.10 for `Core2D.Perspex` build.
 
 The core library and editor are portable and should work on all platforms where C# is supported.
+
+## Building Core2D
+
+* [Visual Studio Community 2015](https://www.visualstudio.com/en-us/products/visual-studio-community-vs.aspx) for Windows builds.
+* [MonoDevelop](http://www.monodevelop.com/) for Linux builds.
 
 ### NuGet Packages
 
@@ -53,6 +62,13 @@ The core library and editor are portable and should work on all platforms where 
   * SharpDX.DXGI
   * Splat
   * Sprache
+* OmniXAML
+  * Rx-Core
+  * Rx-Interfaces
+  * Rx-Linq
+  * Rx-Main
+  * Rx-PlatformServices
+  * Sprache
 
 ### NuGet Package Sources
 
@@ -62,8 +78,11 @@ The core library and editor are portable and should work on all platforms where 
 
 ### Other Dependencies
 
+* [OmniXAML The Cross-platform XAML Framework](https://github.com/SuperJMN/OmniXAML) Run `git submodule update --init --recursive` in project directory.
 * [.net dxf Reader-Writer](http://netdxf.codeplex.com/) Run `git submodule update --init --recursive` in project directory.
 * [GTK# for .NET](http://www.mono-project.com/download/#download-win) Needed for Gtk on Windows.
+
+For building Core2D mirror repositories are used for [OmniXAML](https://github.com/Core2D/OmniXAML) and [.net dxf](https://github.com/Core2D/netdxf)
 
 ## Contact
 

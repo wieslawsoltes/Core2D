@@ -44,11 +44,7 @@ namespace Core2D
         /// <param name="isClosed">The flag indicating whether figure is closed.</param>
         public void BeginFigure(XPoint startPoint, bool isFilled = true, bool isClosed = true)
         {
-            _currentFigure = XPathFigure.Create(
-                startPoint,
-                new List<XPathSegment>(),
-                isFilled,
-                isClosed);
+            _currentFigure = XPathFigure.Create(startPoint, isFilled, isClosed);
             Figures.Add(_currentFigure);
         }
 

@@ -158,10 +158,6 @@ namespace Core2D
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
-                Data = new Data()
-                {
-                    Properties = ImmutableArray.Create<Property>()
-                },
                 Point1 = XPoint.Create(x1, y1, point),
                 Point2 = XPoint.Create(x2, y2, point),
                 Point3 = XPoint.Create(x3, y3, point),
@@ -206,10 +202,6 @@ namespace Core2D
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
-                Data = new Data()
-                {
-                    Properties = ImmutableArray.Create<Property>()
-                },
                 Point1 = point1,
                 Point2 = point2,
                 Point3 = point3,

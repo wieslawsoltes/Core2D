@@ -10,11 +10,15 @@ namespace Core2D
     public abstract class Container : ObservableObject
     {
         private string _name;
+        private double _width;
+        private double _height;
+        private ArgbColor _background;
         private ImmutableArray<Layer> _layers;
         private Layer _currentLayer;
         private Layer _workingLayer;
         private Layer _helperLayer;
         private BaseShape _currentShape;
+        private Container _template;
 
         /// <summary>
         /// 
@@ -23,6 +27,33 @@ namespace Core2D
         {
             get { return _name; }
             set { Update(ref _name, value); }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double Width
+        {
+            get { return _template != null ? _template.Width : _width; }
+            set { Update(ref _width, value); }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double Height
+        {
+            get { return _template != null ? _template.Height : _height; }
+            set { Update(ref _height, value); }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public ArgbColor Background
+        {
+            get { return _template != null ? _template.Background : _background; }
+            set { Update(ref _background, value); }
         }
 
         /// <summary>
@@ -73,9 +104,19 @@ namespace Core2D
         /// <summary>
         /// 
         /// </summary>
-        public virtual Container Template
+        public Container Template
         {
-            get { return this; }
+            get { return _template; }
+            set { Update(ref _template, value); }
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Container"/> class.
+        /// </summary>
+        public Container()
+            : base()
+        {
+            _layers = ImmutableArray.Create<Layer>();
         }
 
         /// <summary>

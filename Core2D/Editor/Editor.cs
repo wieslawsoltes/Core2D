@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
+using Core2D.Xaml;
+using Core2D.Xaml.Collections;
 
 namespace Core2D
 {
@@ -492,6 +494,130 @@ namespace Core2D
 
                 var db = _csvReader.Read(path);
                 _project.UpdateDatabase(database, db);
+            }
+            catch (Exception ex)
+            {
+                if (_log != null)
+                {
+                    _log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Import Xaml from file.
+        /// </summary>
+        /// <remarks>
+        /// Supported Xaml types:
+        /// - The shape style <see cref="Core2D.ShapeStyle"/>.
+        /// - The shape object based on <see cref="Core2D.BaseShape"/> class.
+        /// - The styles library using <see cref="Core2D.Xaml.Collections.Styles"/> container.
+        /// - The shapes library using <see cref="Core2D.Xaml.Collections.Shapes"/> container.
+        /// - The groups library using <see cref="Core2D.Xaml.Collections.Groups"/> container.
+        /// - The <see cref="Core2D.Data"/> class.
+        /// - The <see cref="Core2D.Database"/> class.
+        /// - The <see cref="Core2D.Layer"/> class.
+        /// - The <see cref="Core2D.Template"/> class.
+        /// - The <see cref="Core2D.Page"/> class.
+        /// - The <see cref="Core2D.Document"/> class.
+        /// - The <see cref="Core2D.Options"/> class.
+        /// - The <see cref="Core2D.Project"/> class.
+        /// </remarks>
+        /// <param name="path">The xaml file path.</param>
+        public void OnImportXaml(string path)
+        {
+            try
+            {
+                var item = Core2DXamlLoader.Load(path);
+                if (item != null)
+                {
+                    if (item is ShapeStyle)
+                    {
+                        _project.AddStyle(_project.CurrentStyleLibrary, item as ShapeStyle);
+                    }
+                    else if (item is BaseShape)
+                    {
+                        _project.AddShape(_project.CurrentContainer.CurrentLayer, item as BaseShape);
+                    }
+                    else if (item is Styles)
+                    {
+                        var styles = item as Styles;
+                        var library = Library<ShapeStyle>.Create(styles.Name, styles.Children);
+                        _project.AddStyleLibrary(library);
+                    }
+                    else if (item is Shapes)
+                    {
+                        var shapes = item as Shapes;
+                        if (shapes.Children.Count > 0)
+                        {
+                            var layer = _project.CurrentContainer.CurrentLayer;
+                            foreach (var shape in shapes.Children)
+                            {
+                                _project.AddShape(layer, shape);
+                            }
+                        }
+                    }
+                    else if (item is Groups)
+                    {
+                        var groups = item as Groups;
+                        var library = Library<XGroup>.Create(groups.Name, groups.Children);
+                        _project.AddGroupLibrary(library);
+                    }
+                    else if (item is Data)
+                    {
+                        if (_renderers[0].State.SelectedShape != null
+                            || (_renderers[0].State.SelectedShapes != null && _renderers[0].State.SelectedShapes.Count > 0))
+                        {
+                            OnApplyData(item as Data);
+                        }
+                        else
+                        {
+                            var page = _project.CurrentContainer as Page;
+                            if (page != null)
+                            {
+                                page.Data = item as Data;
+                            }
+                        }
+                    }
+                    else if (item is Database)
+                    {
+                        _project.AddDatabase(item as Database);
+                    }
+                    else if (item is Layer)
+                    {
+                        _project.AddLayer(_project.CurrentContainer, item as Layer);
+                    }
+                    else if (item is Template)
+                    {
+                        _project.AddTemplate(item as Template);
+                    }
+                    else if (item is Page)
+                    {
+                        _project.AddPage(_project.CurrentDocument, item as Page);
+                    }
+                    else if (item is Document)
+                    {
+                        _project.AddDocument(item as Document);
+                    }
+                    else if (item is Options)
+                    {
+                        _project.Options = item as Options;
+                    }
+                    else if (item is Project)
+                    {
+                        var project = item as Project;
+                        Unload();
+                        Load(project, path);
+                        AddRecent(path, project.Name);
+                    }
+                    else
+                    {
+                        throw new NotSupportedException("Not supported Xaml object.");
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -1604,6 +1730,34 @@ namespace Core2D
                     foreach (var shape in _renderers[0].State.SelectedShapes)
                     {
                         _project.ApplyStyle(shape, style);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Set current data as selected shape data.
+        /// </summary>
+        /// <param name="data">The data item.</param>
+        public void OnApplyData(Data data)
+        {
+            if (_project == null)
+                return;
+
+            if (data != null)
+            {
+                // Selected shape.
+                if (_renderers[0].State.SelectedShape != null)
+                {
+                    _project.ApplyData(_renderers[0].State.SelectedShape, data);
+                }
+
+                // Selected shapes.
+                if (_renderers[0].State.SelectedShapes != null && _renderers[0].State.SelectedShapes.Count > 0)
+                {
+                    foreach (var shape in _renderers[0].State.SelectedShapes)
+                    {
+                        _project.ApplyData(shape, data);
                     }
                 }
             }
@@ -2841,6 +2995,11 @@ namespace Core2D
                             OnImportObject(path, _project, ImportType.Templates);
                             result = true;
                         }
+                        else if (string.Compare(ext, Constants.XamlExtension, true) == 0)
+                        {
+                            OnImportXaml(path);
+                            result = true;
+                        }
                     }
 
                     return result;
@@ -3032,7 +3191,7 @@ namespace Core2D
         /// <param name="y">The Y coordinate in container.</param>
         public void DropAsGroup(Record record, double x, double y)
         {
-            var g = XGroup.Create("g");
+            var g = XGroup.Create(Constants.DefaulGroupName);
 
             g.Data.Record = record;
 

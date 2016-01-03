@@ -1,0 +1,20 @@
+<Project xmlns="https://github.com/Core2D" Name="Project">
+    <Project.Documents>
+        <Document Name="Document">
+            <Document.Pages>
+                <Page Name="Page">
+                    <Page.Template>
+                        <Template Name="Template" Width="800" Height="600" Background="#00FFFFFF">
+                            <Template.Layers>
+                                <Layer Name="TemplateLayer"/>
+                            </Template.Layers>
+                        </Template>
+                    </Page.Template>
+                    <Page.Layers>
+                        <Layer Name="Layer"/>
+                    </Page.Layers>
+                </Page>
+            </Document.Pages>
+        </Document>
+    </Project.Documents>
+</Project>

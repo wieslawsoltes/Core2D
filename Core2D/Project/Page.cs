@@ -1,6 +1,5 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using System.Collections.Immutable;
 using System.Linq;
 
 namespace Core2D
@@ -11,7 +10,6 @@ namespace Core2D
     public class Page : Container
     {
         private Data _data;
-        private Template _template;
 
         /// <summary>
         /// 
@@ -60,31 +58,6 @@ namespace Core2D
         /// <summary>
         /// 
         /// </summary>
-        public new Template Template
-        {
-            get { return _template; }
-            set { Update(ref _template, value); }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public double Width
-        {
-            get { return _template.Width; }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public double Height
-        {
-            get { return _template.Height; }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         public override void Invalidate()
         {
             if (Template != null)
@@ -96,6 +69,15 @@ namespace Core2D
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="Page"/> class.
+        /// </summary>
+        public Page()
+            : base()
+        {
+            Data = new Data();
+        }
+
+        /// <summary>
         /// Creates a new <see cref="Page"/> instance.
         /// </summary>
         /// <param name="name">The page name.</param>
@@ -104,12 +86,7 @@ namespace Core2D
         {
             var page = new Page()
             {
-                Name = name,
-                Data = new Data()
-                {
-                    Properties = ImmutableArray.Create<Property>()
-                },
-                Layers = ImmutableArray.Create<Layer>()
+                Name = name
             };
 
             var builder = page.Layers.ToBuilder();

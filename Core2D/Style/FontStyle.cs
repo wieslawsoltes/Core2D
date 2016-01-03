@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
 
 namespace Core2D
 {
@@ -109,6 +110,21 @@ namespace Core2D
         /// <returns>The new instance of the <see cref="FontStyle"/> class.</returns>
         public static FontStyle Create(FontStyleFlags flags = FontStyleFlags.Regular)
         {
+            return new FontStyle()
+            {
+                Flags = flags
+            };
+        }
+
+        /// <summary>
+        /// Parses a font style string.
+        /// </summary>
+        /// <param name="s">The font style string.</param>
+        /// <returns>The <see cref="FontStyle"/>.</returns>
+        public static FontStyle Parse(string s)
+        {
+            var flags = (FontStyleFlags)Enum.Parse(typeof(FontStyleFlags), s, true);
+
             return new FontStyle()
             {
                 Flags = flags
