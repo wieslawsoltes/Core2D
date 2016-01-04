@@ -2616,7 +2616,8 @@ namespace Core2D
                         continue;
 
                     ShapeStyle style;
-                    if (styles.TryGetValue(shape.Style.Name, out style))
+                    if (!string.IsNullOrWhiteSpace(shape.Style.Name) 
+                        && styles.TryGetValue(shape.Style.Name, out style))
                     {
                         // Use existing style.
                         shape.Style = style;
