@@ -487,7 +487,7 @@ namespace Core2D
         /// </summary>
         /// <param name="project">The project instance.</param>
         /// <param name="shape">The shape instance.</param>
-        /// <param name="style">The data instance.</param>
+        /// <param name="data">The data instance.</param>
         public static void ApplyData(this Project project, BaseShape shape, Data data)
         {
             if (shape != null && data != null)
