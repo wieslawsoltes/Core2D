@@ -2693,7 +2693,7 @@ namespace Core2D
             }
         }
 
-        private IDictionary<Guid, Record> GenerateRecordsDictionaryById()
+        private IDictionary<Guid, Record> GenerateRecordDictionaryById()
         {
             return _project.Databases
                 .Where(d => d.Records != null && d.Records.Length > 0)
@@ -2712,7 +2712,7 @@ namespace Core2D
                 if (_project.Databases == null)
                     return;
 
-                var records = GenerateRecordsDictionaryById();
+                var records = GenerateRecordDictionaryById();
 
                 // Try to restore shape record.
                 foreach (var shape in GetAllShapes(shapes))
@@ -2741,7 +2741,7 @@ namespace Core2D
                         _project.AddRecord(_project.CurrentDatabase, shape.Data.Record);
 
                         // Recreate records dictionary.
-                        records = GenerateRecordsDictionaryById();
+                        records = GenerateRecordDictionaryById();
                     }
                 }
             }
