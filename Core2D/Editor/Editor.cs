@@ -518,6 +518,32 @@ namespace Core2D
         /// <summary>
         /// Import Xaml from file.
         /// </summary>
+        /// <param name="path">The xaml file path.</param>
+        public void OnImportXaml(string path)
+        {
+            try
+            {
+                var xaml = Project.ReadUtf8Text(path);
+                if (!string.IsNullOrWhiteSpace(xaml))
+                {
+                    OnImportXamlString(xaml);
+                }
+            }
+            catch (Exception ex)
+            {
+                if (_log != null)
+                {
+                    _log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Import Xaml string.
+        /// </summary>
         /// <remarks>
         /// Supported Xaml types:
         /// - The shape style <see cref="Core2D.ShapeStyle"/>.
@@ -534,111 +560,98 @@ namespace Core2D
         /// - The <see cref="Core2D.Options"/> class.
         /// - The <see cref="Core2D.Project"/> class.
         /// </remarks>
-        /// <param name="path">The xaml file path.</param>
-        public void OnImportXaml(string path)
+        /// <param name="xaml">The xaml string.</param>
+        public void OnImportXamlString(string xaml)
         {
             if (_xamlSerializer == null)
                 return;
 
-            try
+            var item = _xamlSerializer.Deserialize<object>(xaml);
+            if (item != null)
             {
-                var xaml = Project.ReadUtf8Text(path);
-                var item = _xamlSerializer.Deserialize<object>(xaml);
-                if (item != null)
+                if (item is ShapeStyle)
                 {
-                    if (item is ShapeStyle)
+                    _project.AddStyle(_project.CurrentStyleLibrary, item as ShapeStyle);
+                }
+                else if (item is BaseShape)
+                {
+                    var shapes = Enumerable.Repeat(item as BaseShape, 1);
+                    TryToRestoreStyles(shapes);
+                    TryToRestoreRecords(shapes);
+
+                    _project.AddShape(_project.CurrentContainer.CurrentLayer, item as BaseShape);
+                }
+                else if (item is Styles)
+                {
+                    var styles = item as Styles;
+                    var library = Library<ShapeStyle>.Create(styles.Name, styles.Children);
+                    _project.AddStyleLibrary(library);
+                }
+                else if (item is Shapes)
+                {
+                    var shapes = (item as Shapes).Children;
+                    if (shapes.Count > 0)
                     {
-                        _project.AddStyle(_project.CurrentStyleLibrary, item as ShapeStyle);
+                        TryToRestoreStyles(shapes);
+                        TryToRestoreRecords(shapes);
+
+                        _project.AddShapes(_project.CurrentContainer.CurrentLayer, shapes);
                     }
-                    else if (item is BaseShape)
+                }
+                else if (item is Groups)
+                {
+                    var groups = item as Groups;
+                    var library = Library<XGroup>.Create(groups.Name, groups.Children);
+                    _project.AddGroupLibrary(library);
+                }
+                else if (item is Data)
+                {
+                    if (_renderers[0].State.SelectedShape != null
+                        || (_renderers[0].State.SelectedShapes != null && _renderers[0].State.SelectedShapes.Count > 0))
                     {
-                        _project.AddShape(_project.CurrentContainer.CurrentLayer, item as BaseShape);
-                    }
-                    else if (item is Styles)
-                    {
-                        var styles = item as Styles;
-                        var library = Library<ShapeStyle>.Create(styles.Name, styles.Children);
-                        _project.AddStyleLibrary(library);
-                    }
-                    else if (item is Shapes)
-                    {
-                        var shapes = item as Shapes;
-                        if (shapes.Children.Count > 0)
-                        {
-                            var layer = _project.CurrentContainer.CurrentLayer;
-                            foreach (var shape in shapes.Children)
-                            {
-                                _project.AddShape(layer, shape);
-                            }
-                        }
-                    }
-                    else if (item is Groups)
-                    {
-                        var groups = item as Groups;
-                        var library = Library<XGroup>.Create(groups.Name, groups.Children);
-                        _project.AddGroupLibrary(library);
-                    }
-                    else if (item is Data)
-                    {
-                        if (_renderers[0].State.SelectedShape != null
-                            || (_renderers[0].State.SelectedShapes != null && _renderers[0].State.SelectedShapes.Count > 0))
-                        {
-                            OnApplyData(item as Data);
-                        }
-                        else
-                        {
-                            var page = _project.CurrentContainer as Page;
-                            if (page != null)
-                            {
-                                page.Data = item as Data;
-                            }
-                        }
-                    }
-                    else if (item is Database)
-                    {
-                        _project.AddDatabase(item as Database);
-                    }
-                    else if (item is Layer)
-                    {
-                        _project.AddLayer(_project.CurrentContainer, item as Layer);
-                    }
-                    else if (item is Template)
-                    {
-                        _project.AddTemplate(item as Template);
-                    }
-                    else if (item is Page)
-                    {
-                        _project.AddPage(_project.CurrentDocument, item as Page);
-                    }
-                    else if (item is Document)
-                    {
-                        _project.AddDocument(item as Document);
-                    }
-                    else if (item is Options)
-                    {
-                        _project.Options = item as Options;
-                    }
-                    else if (item is Project)
-                    {
-                        var project = item as Project;
-                        Unload();
-                        Load(project, path);
-                        AddRecent(path, project.Name);
+                        OnApplyData(item as Data);
                     }
                     else
                     {
-                        throw new NotSupportedException("Not supported Xaml object.");
+                        var page = _project.CurrentContainer as Page;
+                        if (page != null)
+                        {
+                            page.Data = item as Data;
+                        }
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                if (_log != null)
+                else if (item is Database)
                 {
-                    _log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
+                    _project.AddDatabase(item as Database);
+                }
+                else if (item is Layer)
+                {
+                    _project.AddLayer(_project.CurrentContainer, item as Layer);
+                }
+                else if (item is Template)
+                {
+                    _project.AddTemplate(item as Template);
+                }
+                else if (item is Page)
+                {
+                    _project.AddPage(_project.CurrentDocument, item as Page);
+                }
+                else if (item is Document)
+                {
+                    _project.AddDocument(item as Document);
+                }
+                else if (item is Options)
+                {
+                    _project.Options = item as Options;
+                }
+                else if (item is Project)
+                {
+                    Unload();
+                    Load(item as Project, string.Empty);
+                }
+                else
+                {
+                    throw new NotSupportedException("Not supported Xaml object.");
                 }
             }
         }
@@ -2538,13 +2551,12 @@ namespace Core2D
         {
             try
             {
-                bool havePath = false;
+                var exception = default(Exception);
 
                 // Try to parse SVG path geometry. 
                 try
                 {
                     var geometry = XPathGeometryParser.Parse(text);
-
                     var path = XPath.Create(
                         "Path",
                         _project.CurrentStyleLibrary.Selected,
@@ -2553,26 +2565,43 @@ namespace Core2D
                         _project.Options.DefaultIsFilled);
 
                     Paste(Enumerable.Repeat(path, 1));
-
-                    havePath = true;
+                    return;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    havePath = false;
+                    exception = ex;
                 }
 
-                // If not successful try to deserialize Json.
-                if (!havePath)
+                // Try to deserialize Xaml.
+                try
                 {
-                    if (_jsonSerializer == null)
-                        return;
+                    OnImportXamlString(text);
+                    return;
+                }
+                catch (Exception ex)
+                {
+                    exception = ex;
+                }
 
-                    var shapes = _jsonSerializer.Deserialize<IList<BaseShape>>(text);
-                    if (shapes != null && shapes.Count() > 0)
+                // Try to deserialize Json.
+                try
+                {
+                    if (_jsonSerializer != null)
                     {
-                        Paste(shapes);
+                        var shapes = _jsonSerializer.Deserialize<IList<BaseShape>>(text);
+                        if (shapes != null && shapes.Count() > 0)
+                        {
+                            Paste(shapes);
+                        }
+                        return;
                     }
                 }
+                catch (Exception ex)
+                {
+                    exception = ex;
+                }
+
+                throw exception;
             }
             catch (Exception ex)
             {
