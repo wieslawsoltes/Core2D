@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 
@@ -231,6 +232,26 @@ namespace Core2D
             {
                 var previous = layer.Shapes;
                 var next = layer.Shapes.Add(shape);
+                project.History.Snapshot(previous, next, (p) => layer.Shapes = p);
+                layer.Shapes = next;
+            }
+        }
+
+        /// <summary>
+        /// Add shapes.
+        /// </summary>
+        /// <param name="project">The project instance.</param>
+        /// <param name="layer">The layer instance.</param>
+        /// <param name="shapes">The shapes collection.</param>
+        public static void AddShapes(this Project project, Layer layer, IEnumerable<BaseShape> shapes)
+        {
+            if (layer != null && layer.Shapes != null && shapes != null)
+            {
+                var builder = layer.Shapes.ToBuilder();
+                builder.AddRange(shapes);
+
+                var previous = layer.Shapes;
+                var next = builder.ToImmutable();
                 project.History.Snapshot(previous, next, (p) => layer.Shapes = p);
                 layer.Shapes = next;
             }
