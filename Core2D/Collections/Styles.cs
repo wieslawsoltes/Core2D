@@ -6,12 +6,25 @@ using OmniXaml.Attributes;
 
 namespace Core2D
 {
+    /// <summary>
+    /// The <see cref="ShapeStyle"/> collection container.
+    /// </summary>
     [ContentProperty("Children")]
     public class Styles
     {
+        /// <summary>
+        /// Gets or sets container name.
+        /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        /// Gets or sets children collection.
+        /// </summary>
         public ICollection<ShapeStyle> Children { get; set; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Styles"/> class.
+        /// </summary>
         public Styles()
         {
             Children = new Collection<ShapeStyle>();
