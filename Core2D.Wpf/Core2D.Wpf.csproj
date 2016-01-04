@@ -555,6 +555,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core2D.Xaml\Core2D.Xaml.csproj">
+      <Project>{26bc14e6-a039-440e-bf6f-bf45f025f114}</Project>
+      <Name>Core2D.Xaml</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Dependencies\FileWriter.Dxf\FileWriter.Dxf.csproj">
       <Project>{d40b3bcd-0a26-40bb-960b-9464d248c934}</Project>
       <Name>FileWriter.Dxf</Name>

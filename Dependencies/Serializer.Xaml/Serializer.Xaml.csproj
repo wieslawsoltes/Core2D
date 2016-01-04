@@ -56,6 +56,10 @@
     <Compile Include="DefaultXamlLoader.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Core2D.Xaml\Core2D.Xaml.csproj">
+      <Project>{26bc14e6-a039-440e-bf6f-bf45f025f114}</Project>
+      <Name>Core2D.Xaml</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Core2D\Core2D.csproj">
       <Project>{8c419cd0-f8a2-4a85-b72b-84bc7ff59616}</Project>
       <Name>Core2D</Name>

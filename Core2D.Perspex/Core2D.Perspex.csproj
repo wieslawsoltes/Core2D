@@ -463,6 +463,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core2D.Xaml\Core2D.Xaml.csproj">
+      <Project>{26bc14e6-a039-440e-bf6f-bf45f025f114}</Project>
+      <Name>Core2D.Xaml</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Dependencies\FileWriter.Dxf\FileWriter.Dxf.csproj">
       <Project>{D40B3BCD-0A26-40BB-960B-9464D248C934}</Project>
       <Name>FileWriter.Dxf</Name>
