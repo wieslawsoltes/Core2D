@@ -5,7 +5,7 @@ using OmniXaml.ObjectAssembler;
 using OmniXaml.Parsers.ProtoParser;
 using OmniXaml.Parsers.XamlInstructions;
 
-namespace Core2D.Xaml
+namespace Dependencies
 {
     public class DefaultParserFactory : IXamlParserFactory
     {

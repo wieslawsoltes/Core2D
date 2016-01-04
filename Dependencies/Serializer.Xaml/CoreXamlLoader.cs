@@ -3,13 +3,13 @@
 using OmniXaml;
 using OmniXaml.Builder;
 using OmniXaml.Services.DotNetFx;
-using Core2D.Xaml.Converters;
+using Core2D;
 
-namespace Core2D.Xaml
+namespace Dependencies
 {
-    public static class Core2DXamlLoader
+    public static class CoreXamlLoader
     {
-        public static object Load(string path)
+        public static object Load(string xaml)
         {
             var wiringContext = WiringContext.FromAttributes(Assemblies.AssembliesInAppFolder);
 
@@ -20,7 +20,7 @@ namespace Core2D.Xaml
             featureProvider.AddTypeConverter(new TypeConverterRegistration(typeof(XPathGeometry), new XPathGeometryTypeConverter()));
 
             var loader = new DefaultXamlLoader(wiringContext);
-            return loader.FromPath(path);
+            return loader.FromString(xaml);
         }
     }
 }

@@ -483,6 +483,10 @@
       <Project>{08E4E8BF-E513-4A8D-835C-1EED6ECB4A21}</Project>
       <Name>Serializer.Newtonsoft</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Dependencies\Serializer.Xaml\Serializer.Xaml.csproj">
+      <Project>{5b85143e-a53c-4126-8666-031a3172efdf}</Project>
+      <Name>Serializer.Xaml</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Dependencies\TextFieldReader.CsvHelper\TextFieldReader.CsvHelper.csproj">
       <Project>{64BAE9E8-93B5-4EDC-8AD6-5A3DCBA8C051}</Project>
       <Name>TextFieldReader.CsvHelper</Name>

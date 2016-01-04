@@ -71,6 +71,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Collections\Groups.cs" />
+    <Compile Include="Collections\Shapes.cs" />
+    <Compile Include="Collections\Styles.cs" />
     <Compile Include="Data\Data.cs" />
     <Compile Include="Data\Property.cs" />
     <Compile Include="Editor\Bounds\ConvexHullBounds.cs" />
@@ -382,16 +385,6 @@
     <Compile Include="Style\TextHAlignment.cs" />
     <Compile Include="Style\TextStyle.cs" />
     <Compile Include="Style\TextVAlignment.cs" />
-    <Compile Include="Xaml\Collections\Groups.cs" />
-    <Compile Include="Xaml\Collections\Shapes.cs" />
-    <Compile Include="Xaml\Collections\Styles.cs" />
-    <Compile Include="Xaml\Converters\ArgbColorTypeConverter.cs" />
-    <Compile Include="Xaml\Converters\FontStyleTypeConverter.cs" />
-    <Compile Include="Xaml\Converters\ShapeStateTypeConverter.cs" />
-    <Compile Include="Xaml\Converters\XPathGeometryTypeConverter.cs" />
-    <Compile Include="Xaml\Core2DXamlLoader.cs" />
-    <Compile Include="Xaml\DefaultParserFactory.cs" />
-    <Compile Include="Xaml\DefaultXamlLoader.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="OmniXAML\Source\Glass\ChangeTracking\packages.config" />

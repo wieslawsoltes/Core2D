@@ -381,10 +381,11 @@ namespace Core2D
         /// Creates a new <see cref="DesignerContext"/> instance.
         /// </summary>
         /// <param name="renderer">The design time renderer instance.</param>
-        /// <param name="clipboard">The design time clipboard instance</param>
-        /// <param name="serializer">The design time serializer instance</param>
+        /// <param name="clipboard">The design time clipboard instance.</param>
+        /// <param name="jsonSerializer">The design time Json serializer instance.</param>
+        /// <param name="xamlSerializer">The design time Xaml serializer instance.</param>
         /// <returns>The new instance of the <see cref="DesignerContext"/> class.</returns>
-        public static void InitializeContext(Renderer renderer, ITextClipboard clipboard, ISerializer serializer)
+        public static void InitializeContext(Renderer renderer, ITextClipboard clipboard, ISerializer jsonSerializer, ISerializer xamlSerializer)
         {
             // Editor
 
@@ -395,7 +396,8 @@ namespace Core2D
                 Renderers = new Renderer[] { renderer },
                 ProjectFactory = new ProjectFactory(),
                 TextClipboard = clipboard,
-                Serializer = serializer
+                JsonSerializer = jsonSerializer,
+                XamlSerializer = xamlSerializer
             };
 
             Editor.Renderers[0].State.EnableAutofit = true;

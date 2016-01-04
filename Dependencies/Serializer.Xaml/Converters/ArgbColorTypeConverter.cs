@@ -3,8 +3,9 @@
 using System;
 using System.Globalization;
 using OmniXaml.TypeConversion;
+using Core2D;
 
-namespace Core2D.Xaml.Converters
+namespace Dependencies
 {
     public class ArgbColorTypeConverter : ITypeConverter
     {

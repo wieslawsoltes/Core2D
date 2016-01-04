@@ -17,7 +17,8 @@ namespace Core2D.Wpf
             InitializeContext(
                 new WpfRenderer(),
                 new TextClipboard(),
-                new NewtonsoftSerializer());
+                new NewtonsoftSerializer(),
+                new CoreXamlSerializer());
         }
     }
 }

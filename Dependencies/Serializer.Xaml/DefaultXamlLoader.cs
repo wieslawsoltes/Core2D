@@ -1,9 +1,9 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using OmniXaml;
 using System.IO;
+using OmniXaml;
 
-namespace Core2D.Xaml
+namespace Dependencies
 {
     internal class DefaultXamlLoader : IXamlLoader
     {

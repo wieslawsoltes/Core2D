@@ -3,10 +3,11 @@
 using System;
 using System.Globalization;
 using OmniXaml.TypeConversion;
+using Core2D;
 
-namespace Core2D.Xaml.Converters
+namespace Dependencies
 {
-    public class ShapeStateTypeConverter : ITypeConverter
+    public class XPathGeometryTypeConverter : ITypeConverter
     {
         public bool CanConvertFrom(IXamlTypeConverterContext context, Type sourceType)
         {
@@ -20,7 +21,7 @@ namespace Core2D.Xaml.Converters
 
         public object ConvertFrom(IXamlTypeConverterContext context, CultureInfo culture, object value)
         {
-            return ShapeState.Parse((string)value);
+            return XPathGeometryParser.Parse((string)value);
         }
 
         public object ConvertTo(IXamlTypeConverterContext context, CultureInfo culture, object value, Type destinationType)

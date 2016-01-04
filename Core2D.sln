@@ -41,6 +41,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D", "Core2D\Core2D.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.Perspex", "Core2D.Perspex\Core2D.Perspex.csproj", "{4868069E-3AD4-497E-9B8E-148D1EEACFD7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serializer.Xaml", "Dependencies\Serializer.Xaml\Serializer.Xaml.csproj", "{5B85143E-A53C-4126-8666-031A3172EFDF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -119,6 +121,10 @@ Global
 		{4868069E-3AD4-497E-9B8E-148D1EEACFD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4868069E-3AD4-497E-9B8E-148D1EEACFD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4868069E-3AD4-497E-9B8E-148D1EEACFD7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B85143E-A53C-4126-8666-031A3172EFDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B85143E-A53C-4126-8666-031A3172EFDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B85143E-A53C-4126-8666-031A3172EFDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B85143E-A53C-4126-8666-031A3172EFDF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -139,5 +145,6 @@ Global
 		{68A36926-DF55-4F05-9F89-B9AB1463227E} = {2D76C6F5-844B-4D2D-96D8-B39D49C70706}
 		{785380E0-CEB9-4C34-82E5-60D0E33E848E} = {2D76C6F5-844B-4D2D-96D8-B39D49C70706}
 		{DEE86BE6-43B1-45FB-8A56-7977C1D0964E} = {2D76C6F5-844B-4D2D-96D8-B39D49C70706}
+		{5B85143E-A53C-4126-8666-031A3172EFDF} = {2D76C6F5-844B-4D2D-96D8-B39D49C70706}
 	EndGlobalSection
 EndGlobal
