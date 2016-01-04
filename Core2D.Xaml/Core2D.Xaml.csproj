@@ -1,0 +1,271 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{26BC14E6-A039-440E-BF6F-BF45F025F114}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Core2D.Xaml</RootNamespace>
+    <AssemblyName>Core2D.Xaml</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>CS0659</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>CS0659</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Sprache, Version=2.0.0.47, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sprache.2.0.0.47\lib\portable-net4+netcore45+win8+wp8+sl5+MonoAndroid1+MonoTouch1\Sprache.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Collections" />
+    <Reference Include="System.Collections.Immutable, Version=1.1.36.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Collections.Immutable.1.1.36\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Reactive.Core, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rx-Core.2.2.5\lib\net45\System.Reactive.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Reactive.Interfaces, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rx-Interfaces.2.2.5\lib\net45\System.Reactive.Interfaces.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Reactive.Linq, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rx-Linq.2.2.5\lib\net45\System.Reactive.Linq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Reactive.PlatformServices, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rx-PlatformServices.2.2.5\lib\net45\System.Reactive.PlatformServices.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Core2D\Properties\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="OmniXAML\Source\Glass\AutoKeyDictionary.cs" />
+    <Compile Include="OmniXAML\Source\Glass\ChangeTracking\ObservableProperty.cs" />
+    <Compile Include="OmniXAML\Source\Glass\ChangeTracking\ObservablePropertyChain.cs" />
+    <Compile Include="OmniXAML\Source\Glass\ChangeTracking\Property.cs" />
+    <Compile Include="OmniXAML\Source\Glass\ChangeTracking\PropertyChain.cs" />
+    <Compile Include="OmniXAML\Source\Glass\ChangeTracking\ValueTypePropertyChain.cs" />
+    <Compile Include="OmniXAML\Source\Glass\DependencySorter.cs" />
+    <Compile Include="OmniXAML\Source\Glass\Extensions.cs" />
+    <Compile Include="OmniXAML\Source\Glass\Guard.cs" />
+    <Compile Include="OmniXAML\Source\Glass\IAdd.cs" />
+    <Compile Include="OmniXAML\Source\Glass\IDependency.cs" />
+    <Compile Include="OmniXAML\Source\Glass\ReflectionExtensions.cs" />
+    <Compile Include="OmniXAML\Source\Glass\StackingLinkedList.cs" />
+    <Compile Include="OmniXAML\Source\Glass\StackingLinkedListMixin.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml.Services.DotNetFx\Assemblies.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml.Services.DotNetFx\InflatableTranslator.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml.Services.DotNetFx\LoadMixin.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml.Services.DotNetFx\Types.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml.Services\AutoInflatingTypeFactory.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml.Services\IInflatableTranslator.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml.Services\MultiFactory.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml.Services\TypeFactoryRegistration.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Attributes\ContentPropertyAttribute.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Attributes\DependsOnAttribute.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Attributes\XmlnsDefinitionAttribute.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Builder\AddressPack.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Builder\AssemblyNameConfig.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Builder\ConfiguredAssembly.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Builder\ConfiguredAssemblyWithNamespaces.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Builder\ContentProperties.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Builder\ContentPropertyDefinition.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Builder\Converters.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Builder\Route.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Builder\TypeConverterRegistration.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Builder\XamlInstructionBuilder.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Builder\XamlNamespace.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\ContentPropertyProvider.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\DefaultObjectAssemblerFactory.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\DefaultParserFactory.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\DefaultXamlLoader.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\DeferredLoaderMapping.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\DependencySortingVisitor.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\IContentPropertyProvider.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\IDeferredLoader.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\IMarkupExtension.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\INameScope.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\InstanceLifeCycleHandler.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\InstructionNode.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\InstructionTreeBuilder.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\IObjectAssembler.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\IObjectAssemblerFactory.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\ITypeContext.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\ITypeFactory.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\ITypeFeatureProvider.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\ITypeProvider.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\IValueConverter.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\IWiringContext.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\IXamlLoader.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\IXamlParser.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\IXamlParserFactory.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\IXamlXmlLoader.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\LoadMixin.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\LookaheadBuffer.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\MarkupExtension.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\MarkupExtensionContext.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\MemberDependencyNodeSorter.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\MemberReverserVisitor.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\NamespaceDeclaration.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\NamespacePrefix.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\ObjectAssemblerMixin.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\ObjectAssembler\Command.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\ObjectAssembler\Commands\EndMemberCommand.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\ObjectAssembler\Commands\EndObjectCommand.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\ObjectAssembler\Commands\GetObjectCommand.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\ObjectAssembler\Commands\ITopDownValueContext.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\ObjectAssembler\Commands\NamespaceDeclarationCommand.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\ObjectAssembler\Commands\StartMemberCommand.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\ObjectAssembler\Commands\StartObjectCommand.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\ObjectAssembler\Commands\ValueCommand.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\ObjectAssembler\ConstructionArgument.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\ObjectAssembler\CurrentLevelWrapper.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\ObjectAssembler\InstanceLifeCycleNotifier.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\ObjectAssembler\InstanceProperties.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\ObjectAssembler\Level.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\ObjectAssembler\NullLevel.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\ObjectAssembler\ObjectAssembler.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\ObjectAssembler\ObjectAssemblerSettings.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\ObjectAssembler\PreviousLevelWrapper.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\ObjectAssembler\StateCommuter.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\ObjectAssembler\TopDownValueContext.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\ObjectAssembler\TypeOperations.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\ObjectAssembler\ValuePipeline.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\ObjectAssembler\ValueProcessingMode.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\ObjectAssembler\XamlSetValueEventArgs.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Parsers\Inject.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Parsers\IParser.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Parsers\MarkupExtensions\AssignmentNode.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Parsers\MarkupExtensions\IdentifierNode.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Parsers\MarkupExtensions\MarkupExtensionNode.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Parsers\MarkupExtensions\MarkupExtensionNodeToXamlNodesConverter.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Parsers\MarkupExtensions\MarkupExtensionParser.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Parsers\MarkupExtensions\Option.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Parsers\MarkupExtensions\OptionsCollection.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Parsers\MarkupExtensions\PositionalOption.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Parsers\MarkupExtensions\PropertyOption.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Parsers\MarkupExtensions\StringNode.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Parsers\MarkupExtensions\TreeNode.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Parsers\ProtoParser\AttributeAssignment.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Parsers\ProtoParser\AttributeFeed.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Parsers\ProtoParser\AttributeParser.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Parsers\ProtoParser\DirectiveAssignment.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Parsers\ProtoParser\IProtoParser.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Parsers\ProtoParser\IXmlReader.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Parsers\ProtoParser\NodeType.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Parsers\ProtoParser\NsPrefix.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Parsers\ProtoParser\UnprocessedAttributeBase.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Parsers\ProtoParser\XamlProtoInstructionParser.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Parsers\ProtoParser\XmlCompatibilityReader.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Parsers\XamlInstructions\IXamlInstructionParser.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Parsers\XamlInstructions\OrderAwareXamlInstructionParser.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Parsers\XamlInstructions\XamlInstructionParser.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\PhaseParserKit.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\PrefixRegistrationMode.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\ProtoInstructionBuilder.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\ProtoXamlInstruction.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Sequence.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\TemplateHostingObjectAssembler.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\TypeContext.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\TypeConversion\BuiltInConverters\BooleanConverter.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\TypeConversion\BuiltInConverters\DoubleTypeConverter.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\TypeConversion\BuiltInConverters\IntTypeConverter.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\TypeConversion\BuiltInConverters\StringTypeConverter.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\TypeConversion\BuiltInConverters\TypeTypeConverter.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\TypeConversion\ITypeConverter.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\TypeConversion\ITypeConverterProvider.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\TypeConversion\IXamlTypeConverterContext.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\TypeConversion\TypeConverterAttribute.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\TypeConversion\TypeConverterProvider.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\TypeConversion\XamlTypeConverterContext.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\TypeFactory.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\TypeFactoryMixin.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\TypeFeatureProvider.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\TypeFeatureProviderBuilder.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\TypeNotFoundException.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Typing\AttachableXamlMember.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Typing\ClrNamespace.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Typing\CoreTypes.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Typing\DependencyRegistration.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Typing\DependencyRegistrations.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Typing\GenericMetadata.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Typing\IXamlMemberValuePlugin.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Typing\IXamlNamespaceRegistry.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Typing\IXamlTypeRepository.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Typing\MemberValuePlugin.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Typing\Metadata.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Typing\MetadataProvider.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Typing\MutableXamlMember.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Typing\Namespace.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Typing\PrefixRegistration.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Typing\PropertyLocator.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Typing\XamlDirective.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Typing\XamlMember.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Typing\XamlMemberBase.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Typing\XamlName.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Typing\XamlNamespaceRegistry.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Typing\XamlQualifiedName.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Typing\XamlType.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Typing\XamlTypeName.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Typing\XamlTypeRepository.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Typing\XamlTypeRepositoryMixin.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\ValueConversionException.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Visualization\IVisitor.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Visualization\NodeType.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Visualization\NodeVisualizer.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Visualization\VisualizationNode.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\Visualization\VisualizationTag.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\WiringContext.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\XamlInstruction.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\XamlInstructionType.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\XamlLoadException.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\XamlParseException.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\XamlXmlLoader.cs" />
+    <Compile Include="OmniXAML\Source\OmniXaml\XamlXmlParser.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
