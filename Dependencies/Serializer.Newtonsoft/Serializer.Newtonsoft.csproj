@@ -54,6 +54,10 @@
     <Compile Include="..\..\Core2D\Properties\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Converters\ArgbColorJsonConverter.cs" />
+    <Compile Include="Converters\FontStyleConverter.cs" />
+    <Compile Include="Converters\ShapeStateConverter.cs" />
+    <Compile Include="JsonSerializationBinder.cs" />
     <Compile Include="NewtonsoftSerializer.cs" />
     <Compile Include="ProjectContractResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
