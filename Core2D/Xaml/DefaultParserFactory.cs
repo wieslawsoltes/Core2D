@@ -32,7 +32,7 @@ namespace Core2D.Xaml
             var xamlInstructionParser = new OrderAwareXamlInstructionParser(new XamlInstructionParser(wiringContext));
 
             var phaseParserKit = new PhaseParserKit(
-                new XamlProtoInstructionParser(wiringContext),
+                new XamlProtoInstructionParser(wiringContext.TypeContext),
                 xamlInstructionParser,
                 objectAssemblerForUndefinedRoot);
 
@@ -41,7 +41,7 @@ namespace Core2D.Xaml
 
         private IObjectAssembler GetObjectAssemblerForUndefinedRoot()
         {
-            return new ObjectAssembler(wiringContext, new TopDownValueContext());
+            return new ObjectAssembler(wiringContext.TypeContext, new TopDownValueContext());
         }
 
         public IXamlParser CreateForReadingSpecificInstance(object rootInstance)
@@ -53,7 +53,7 @@ namespace Core2D.Xaml
 
         private IObjectAssembler GetObjectAssemblerForSpecificRoot(object rootInstance)
         {
-            return new ObjectAssembler(wiringContext, new TopDownValueContext(), new ObjectAssemblerSettings { RootInstance = rootInstance });
+            return new ObjectAssembler(wiringContext.TypeContext, new TopDownValueContext(), new ObjectAssemblerSettings { RootInstance = rootInstance });
         }
     }
 }
