@@ -5,12 +5,12 @@ using System.Windows.Input;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// The core command interface.
     /// </summary>
     public interface ICoreCommand : ICommand
     {
         /// <summary>
-        /// 
+        /// Raise <see cref="ICommand.CanExecuteChanged"/> event.
         /// </summary>
         void NotifyCanExecuteChanged();
     }
