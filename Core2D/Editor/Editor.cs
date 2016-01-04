@@ -2586,6 +2586,23 @@ namespace Core2D
             }
         }
 
+        private void ResetPointShapeToDefault(IEnumerable<BaseShape> shapes)
+        {
+            foreach (var point in shapes.SelectMany(s => s.GetPoints()))
+            {
+                point.Shape = _project.Options.PointShape;
+            }
+        }
+
+        private IDictionary<string, ShapeStyle> GenerateStyleDictionaryByName()
+        {
+            return _project.StyleLibraries
+                .Where(sl => sl.Items != null && sl.Items.Length > 0)
+                .SelectMany(sl => sl.Items)
+                .Distinct(new StyleComparer())
+                .ToDictionary(s => s.Name);
+        }
+
         /// <summary>
         /// Try to restore shape styles.
         /// </summary>
@@ -2597,17 +2614,10 @@ namespace Core2D
                 if (_project.StyleLibraries == null)
                     return;
 
-                var styles = _project.StyleLibraries
-                    .Where(sg => sg.Items != null && sg.Items.Length > 0)
-                    .SelectMany(sg => sg.Items)
-                    .Distinct(new StyleComparer())
-                    .ToDictionary(s => s.Name);
+                var styles = GenerateStyleDictionaryByName();
 
-                // Reset point shape to container default.
-                foreach (var point in shapes.SelectMany(s => s.GetPoints()))
-                {
-                    point.Shape = _project.Options.PointShape;
-                }
+                // Reset point shape to defaults.
+                ResetPointShapeToDefault(shapes);
 
                 // Try to restore shape styles.
                 foreach (var shape in GetAllShapes(shapes))
@@ -2615,32 +2625,30 @@ namespace Core2D
                     if (shape.Style == null)
                         continue;
 
-                    ShapeStyle style;
-                    if (!string.IsNullOrWhiteSpace(shape.Style.Name) 
-                        && styles.TryGetValue(shape.Style.Name, out style))
+                    if (!string.IsNullOrWhiteSpace(shape.Style.Name))
                     {
-                        // Use existing style.
-                        shape.Style = style;
-                    }
-                    else
-                    {
-                        // Create Imported style library.
-                        if (_project.CurrentStyleLibrary == null)
+                        ShapeStyle style;
+                        if (styles.TryGetValue(shape.Style.Name, out style))
                         {
-                            var sg = Library<ShapeStyle>.Create(Constants.ImportedStyleLibraryName);
-                            _project.StyleLibraries = _project.StyleLibraries.Add(sg);
-                            _project.CurrentStyleLibrary = sg;
+                            // Use existing style.
+                            shape.Style = style;
                         }
+                        else
+                        {
+                            // Create Imported style library.
+                            if (_project.CurrentStyleLibrary == null)
+                            {
+                                var sl = Library<ShapeStyle>.Create(Constants.ImportedStyleLibraryName);
+                                _project.AddStyleLibrary(sl);
+                                _project.CurrentStyleLibrary = sl;
+                            }
 
-                        // Add missing style.
-                        _project.CurrentStyleLibrary.Items = _project.CurrentStyleLibrary.Items.Add(shape.Style);
+                            // Add missing style.
+                            _project.AddStyle(_project.CurrentStyleLibrary, shape.Style);
 
-                        // Recreate styles dictionary.
-                        styles = _project.StyleLibraries
-                            .Where(sg => sg.Items != null && sg.Items.Length > 0)
-                            .SelectMany(sg => sg.Items)
-                            .Distinct(new StyleComparer())
-                            .ToDictionary(s => s.Name);
+                            // Recreate styles dictionary.
+                            styles = GenerateStyleDictionaryByName();
+                        }
                     }
                 }
             }
@@ -2656,6 +2664,14 @@ namespace Core2D
             }
         }
 
+        private IDictionary<Guid, Record> GenerateRecordsDictionaryById()
+        {
+            return _project.Databases
+                .Where(d => d.Records != null && d.Records.Length > 0)
+                .SelectMany(d => d.Records)
+                .ToDictionary(s => s.Id);
+        }
+
         /// <summary>
         /// Try to restore shape records.
         /// </summary>
@@ -2667,10 +2683,7 @@ namespace Core2D
                 if (_project.Databases == null)
                     return;
 
-                var records = _project.Databases
-                    .Where(d => d.Records != null && d.Records.Length > 0)
-                    .SelectMany(d => d.Records)
-                    .ToDictionary(s => s.Id);
+                var records = GenerateRecordsDictionaryById();
 
                 // Try to restore shape record.
                 foreach (var shape in GetAllShapes(shapes))
@@ -2690,18 +2703,16 @@ namespace Core2D
                         if (_project.CurrentDatabase == null)
                         {
                             var db = Database.Create(Constants.ImportedDatabaseName, shape.Data.Record.Columns);
-                            _project.Databases = _project.Databases.Add(db);
+                            _project.AddDatabase(db);
                             _project.CurrentDatabase = db;
                         }
 
                         // Add missing data record.
-                        _project.CurrentDatabase.Records = _project.CurrentDatabase.Records.Add(shape.Data.Record);
+                        shape.Data.Record.Owner = _project.CurrentDatabase;
+                        _project.AddRecord(_project.CurrentDatabase, shape.Data.Record);
 
                         // Recreate records dictionary.
-                        records = _project.Databases
-                            .Where(d => d.Records != null && d.Records.Length > 0)
-                            .SelectMany(d => d.Records)
-                            .ToDictionary(s => s.Id);
+                        records = GenerateRecordsDictionaryById();
                     }
                 }
             }
@@ -2730,27 +2741,9 @@ namespace Core2D
                 TryToRestoreStyles(shapes);
                 TryToRestoreRecords(shapes);
 
-                var layer = _project.CurrentContainer.CurrentLayer;
+                _project.AddShapes(_project.CurrentContainer.CurrentLayer, shapes);
 
-                var builder = layer.Shapes.ToBuilder();
-                foreach (var shape in shapes)
-                {
-                    builder.Add(shape);
-                }
-
-                var previous = layer.Shapes;
-                var next = builder.ToImmutable();
-                _project.History.Snapshot(previous, next, (p) => layer.Shapes = p);
-                layer.Shapes = next;
-
-                if (shapes.Count() == 1)
-                {
-                    Select(_project.CurrentContainer, shapes.FirstOrDefault());
-                }
-                else
-                {
-                    Select(_project.CurrentContainer, ImmutableHashSet.CreateRange<BaseShape>(shapes));
-                }
+                Select(shapes);
             }
             catch (Exception ex)
             {
@@ -2761,6 +2754,22 @@ namespace Core2D
                         Environment.NewLine,
                         ex.StackTrace);
                 }
+            }
+        }
+
+        /// <summary>
+        /// Select shapes.
+        /// </summary>
+        /// <param name="shapes">The shapes collection.</param>
+        private void Select(IEnumerable<BaseShape> shapes)
+        {
+            if (shapes.Count() == 1)
+            {
+                Select(_project.CurrentContainer, shapes.FirstOrDefault());
+            }
+            else
+            {
+                Select(_project.CurrentContainer, ImmutableHashSet.CreateRange<BaseShape>(shapes));
             }
         }
 
