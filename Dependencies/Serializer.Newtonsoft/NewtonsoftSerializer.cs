@@ -17,10 +17,18 @@ namespace Dependencies
             var settings = new JsonSerializerSettings()
             {
                 Formatting = Formatting.Indented,
-                TypeNameHandling = TypeNameHandling.Objects,
+                TypeNameHandling = TypeNameHandling.Auto,
                 PreserveReferencesHandling = PreserveReferencesHandling.Objects,
                 ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
-                ContractResolver = new ProjectContractResolver()
+                ContractResolver = new ProjectContractResolver(),
+                NullValueHandling = NullValueHandling.Ignore,
+                Binder = new JsonSerializationBinder("Core2D", "Core2D"),
+                Converters =
+                {
+                    new ArgbColorJsonConverter(),
+                    new FontStyleConverter(),
+                    new ShapeStateConverter()
+                }
             };
             settings.Converters.Add(new KeyValuePairConverter());
             var text = JsonConvert.SerializeObject(value, settings);
@@ -33,10 +41,18 @@ namespace Dependencies
             var settings = new JsonSerializerSettings()
             {
                 Formatting = Formatting.Indented,
-                TypeNameHandling = TypeNameHandling.Objects,
+                TypeNameHandling = TypeNameHandling.Auto,
                 PreserveReferencesHandling = PreserveReferencesHandling.Objects,
                 ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
-                ContractResolver = new ProjectContractResolver()
+                ContractResolver = new ProjectContractResolver(),
+                NullValueHandling = NullValueHandling.Ignore,
+                Binder = new JsonSerializationBinder("Core2D", "Core2D"),
+                Converters =
+                {
+                    new ArgbColorJsonConverter(),
+                    new FontStyleConverter(),
+                    new ShapeStateConverter()
+                }
             };
             settings.Converters.Add(new KeyValuePairConverter());
             var value = JsonConvert.DeserializeObject<T>(text, settings);
