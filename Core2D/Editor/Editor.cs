@@ -522,9 +522,9 @@ namespace Core2D
         /// Supported Xaml types:
         /// - The shape style <see cref="Core2D.ShapeStyle"/>.
         /// - The shape object based on <see cref="Core2D.BaseShape"/> class.
-        /// - The styles library using <see cref="Core2D.Xaml.Collections.Styles"/> container.
-        /// - The shapes library using <see cref="Core2D.Xaml.Collections.Shapes"/> container.
-        /// - The groups library using <see cref="Core2D.Xaml.Collections.Groups"/> container.
+        /// - The styles library using <see cref="Styles"/> container.
+        /// - The shapes library using <see cref="Shapes"/> container.
+        /// - The groups library using <see cref="Groups"/> container.
         /// - The <see cref="Core2D.Data"/> class.
         /// - The <see cref="Core2D.Database"/> class.
         /// - The <see cref="Core2D.Layer"/> class.
