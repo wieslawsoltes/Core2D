@@ -42,13 +42,12 @@ namespace Dependencies
                 Binder = new JsonSerializationBinder(AssemblyName, NamespacePrefix),
                 Converters =
                 {
+                    new KeyValuePairConverter(),
                     new ArgbColorJsonConverter(),
                     new FontStyleConverter(),
                     new ShapeStateConverter()
                 }
             };
-
-            Settings.Converters.Add(new KeyValuePairConverter());
         }
 
         /// <inheritdoc/>
