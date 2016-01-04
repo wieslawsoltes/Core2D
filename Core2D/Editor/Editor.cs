@@ -4269,6 +4269,402 @@ namespace Core2D
         }
 
         /// <summary>
+        /// Initialize non-platform specific editor commands.
+        /// </summary>
+        public void InitializeCommands()
+        {
+            Commands.NewCommand =
+                Command<object>.Create(
+                    (item) => OnNew(item),
+                    (item) => IsEditMode());
+
+            Commands.CloseCommand =
+                Command.Create(
+                    () => OnClose(),
+                    () => IsEditMode());
+
+            Commands.ExitCommand =
+                Command.Create(
+                    () => OnExit(),
+                    () => true);
+
+            Commands.UndoCommand =
+                Command.Create(
+                    () => OnUndo(),
+                    () => IsEditMode() /* && CanUndo() */);
+
+            Commands.RedoCommand =
+                Command.Create(
+                    () => OnRedo(),
+                    () => IsEditMode() /* && CanRedo() */);
+
+            Commands.CutCommand =
+                Command<object>.Create(
+                    (item) => OnCut(item),
+                    (item) => IsEditMode() /* && CanCopy() */);
+
+            Commands.CopyCommand =
+                Command<object>.Create(
+                    (item) => OnCopy(item),
+                    (item) => IsEditMode() /* && CanCopy() */);
+
+            Commands.PasteCommand =
+                Command<object>.Create(
+                    (item) => OnPaste(item),
+                    (item) => IsEditMode() /* && CanPaste() */);
+
+            Commands.DeleteCommand =
+                Command<object>.Create(
+                    (item) => OnDelete(item),
+                    (item) => IsEditMode() /* && IsSelectionAvailable() */);
+
+            Commands.SelectAllCommand =
+                Command.Create(
+                    () => OnSelectAll(),
+                    () => IsEditMode());
+
+            Commands.DeselectAllCommand =
+                Command.Create(
+                    () => OnDeselectAll(),
+                    () => IsEditMode());
+
+            Commands.ClearAllCommand =
+                Command.Create(
+                    () => OnClearAll(),
+                    () => IsEditMode());
+
+            Commands.GroupCommand =
+                Command.Create(
+                    () => OnGroupSelected(),
+                    () => IsEditMode() /* && IsSelectionAvailable() */);
+
+            Commands.UngroupCommand =
+                Command.Create(
+                    () => OnUngroupSelected(),
+                    () => IsEditMode() /* && IsSelectionAvailable() */);
+
+            Commands.BringToFrontCommand =
+                Command.Create(
+                    () => OnBringToFrontSelected(),
+                    () => IsEditMode() /* && IsSelectionAvailable() */);
+
+            Commands.SendToBackCommand =
+                Command.Create(
+                    () => OnSendToBackSelected(),
+                    () => IsEditMode() /* && IsSelectionAvailable() */);
+
+            Commands.BringForwardCommand =
+                Command.Create(
+                    () => OnBringForwardSelected(),
+                    () => IsEditMode() /* && IsSelectionAvailable() */);
+
+            Commands.SendBackwardCommand =
+                Command.Create(
+                    () => OnSendBackwardSelected(),
+                    () => IsEditMode() /* && IsSelectionAvailable() */);
+
+            Commands.MoveUpCommand =
+                Command.Create(
+                    () => OnMoveUpSelected(),
+                    () => IsEditMode() /* && IsSelectionAvailable() */);
+
+            Commands.MoveDownCommand =
+                Command.Create(
+                    () => OnMoveDownSelected(),
+                    () => IsEditMode() /* && IsSelectionAvailable() */);
+
+            Commands.MoveLeftCommand =
+                Command.Create(
+                    () => OnMoveLeftSelected(),
+                    () => IsEditMode() /* && IsSelectionAvailable() */);
+
+            Commands.MoveRightCommand =
+                Command.Create(
+                    () => OnMoveRightSelected(),
+                    () => IsEditMode() /* && IsSelectionAvailable() */);
+
+            Commands.ToolNoneCommand =
+                Command.Create(
+                    () => OnToolNone(),
+                    () => IsEditMode());
+
+            Commands.ToolSelectionCommand =
+                Command.Create(
+                    () => OnToolSelection(),
+                    () => IsEditMode());
+
+            Commands.ToolPointCommand =
+                Command.Create(
+                    () => OnToolPoint(),
+                    () => IsEditMode());
+
+            Commands.ToolLineCommand =
+                Command.Create(
+                    () => OnToolLine(),
+                    () => IsEditMode());
+
+            Commands.ToolArcCommand =
+                Command.Create(
+                    () => OnToolArc(),
+                    () => IsEditMode());
+
+            Commands.ToolBezierCommand =
+                Command.Create(
+                    () => OnToolBezier(),
+                    () => IsEditMode());
+
+            Commands.ToolQBezierCommand =
+                Command.Create(
+                    () => OnToolQBezier(),
+                    () => IsEditMode());
+
+            Commands.ToolPathCommand =
+                Command.Create(
+                    () => OnToolPath(),
+                    () => IsEditMode());
+
+            Commands.ToolRectangleCommand =
+                Command.Create(
+                    () => OnToolRectangle(),
+                    () => IsEditMode());
+
+            Commands.ToolEllipseCommand =
+                Command.Create(
+                    () => OnToolEllipse(),
+                    () => IsEditMode());
+
+            Commands.ToolTextCommand =
+                Command.Create(
+                    () => OnToolText(),
+                    () => IsEditMode());
+
+            Commands.ToolImageCommand =
+                Command.Create(
+                    () => OnToolImage(),
+                    () => IsEditMode());
+
+            Commands.ToolMoveCommand =
+                Command.Create(
+                    () => OnToolMove(),
+                    () => IsEditMode());
+
+            Commands.DefaultIsStrokedCommand =
+                Command.Create(
+                    () => OnToggleDefaultIsStroked(),
+                    () => IsEditMode());
+
+            Commands.DefaultIsFilledCommand =
+                Command.Create(
+                    () => OnToggleDefaultIsFilled(),
+                    () => IsEditMode());
+
+            Commands.DefaultIsClosedCommand =
+                Command.Create(
+                    () => OnToggleDefaultIsClosed(),
+                    () => IsEditMode());
+
+            Commands.DefaultIsSmoothJoinCommand =
+                Command.Create(
+                    () => OnToggleDefaultIsSmoothJoin(),
+                    () => IsEditMode());
+
+            Commands.SnapToGridCommand =
+                Command.Create(
+                    () => OnToggleSnapToGrid(),
+                    () => IsEditMode());
+
+            Commands.TryToConnectCommand =
+                Command.Create(
+                    () => OnToggleTryToConnect(),
+                    () => IsEditMode());
+
+            Commands.AddDatabaseCommand =
+                Command.Create(
+                    () => Project.AddDatabase(Database.Create(Constants.DefaultDatabaseName)),
+                    () => IsEditMode());
+
+            Commands.RemoveDatabaseCommand =
+                Command<Database>.Create(
+                    (db) => Project.RemoveDatabase(db),
+                    (db) => IsEditMode());
+
+            Commands.AddColumnCommand =
+                Command<Database>.Create(
+                    (db) => Project.AddColumn(db, Column.Create(db, Constants.DefaulColumnName)),
+                    (db) => IsEditMode());
+
+            Commands.RemoveColumnCommand =
+                Command<Column>.Create(
+                    (column) => Project.RemoveColumn(column),
+                    (column) => IsEditMode());
+
+            Commands.AddRecordCommand =
+                Command<Database>.Create(
+                    (db) => Project.AddRecord(db, Record.Create(db, Constants.DefaulValue)),
+                    (db) => IsEditMode());
+
+            Commands.RemoveRecordCommand =
+                Command<Record>.Create(
+                    (record) => Project.RemoveRecord(record),
+                    (record) => IsEditMode());
+
+            Commands.ResetRecordCommand =
+                Command<Data>.Create(
+                    (data) => Project.ResetRecord(data),
+                    (data) => IsEditMode());
+
+            Commands.ApplyRecordCommand =
+                Command<Record>.Create(
+                    (record) => OnApplyRecord(record),
+                    (record) => IsEditMode());
+
+            Commands.AddPropertyCommand =
+                Command<Data>.Create(
+                    (data) => Project.AddProperty(data, Property.Create(data, Constants.DefaulPropertyName, Constants.DefaulValue)),
+                    (data) => IsEditMode());
+
+            Commands.RemovePropertyCommand =
+                Command<Property>.Create(
+                    (property) => Project.RemoveProperty(property),
+                    (property) => IsEditMode());
+
+            Commands.AddGroupLibraryCommand =
+                Command.Create(
+                    () => Project.AddGroupLibrary(Library<XGroup>.Create(Constants.DefaulGroupLibraryName)),
+                    () => IsEditMode());
+
+            Commands.RemoveGroupLibraryCommand =
+                Command<Library<XGroup>>.Create(
+                    (library) => Project.RemoveGroupLibrary(library),
+                    (library) => IsEditMode());
+
+            Commands.AddGroupCommand =
+                Command<Library<XGroup>>.Create(
+                    (library) => OnAddGroup(library),
+                    (library) => IsEditMode());
+
+            Commands.RemoveGroupCommand =
+                Command<XGroup>.Create(
+                    (group) => OnRemoveGroup(group),
+                    (group) => IsEditMode());
+
+            Commands.InsertGroupCommand =
+                Command<XGroup>.Create(
+                    (group) => OnInsertGroup(group),
+                    (group) => IsEditMode());
+
+            Commands.AddLayerCommand =
+                Command<Container>.Create(
+                    (container) => Project.AddLayer(container, Layer.Create(Constants.DefaultLayerName, container)),
+                    (container) => IsEditMode());
+
+            Commands.RemoveLayerCommand =
+                Command<Layer>.Create(
+                    (layer) => Project.RemoveLayer(layer),
+                    (layer) => IsEditMode());
+
+            Commands.AddStyleLibraryCommand =
+                Command.Create(
+                    () => Project.AddStyleLibrary(Library<ShapeStyle>.Create(Constants.DefaulStyleLibraryName)),
+                    () => IsEditMode());
+
+            Commands.RemoveStyleLibraryCommand =
+                Command<Library<ShapeStyle>>.Create(
+                    (library) => Project.RemoveStyleLibrary(library),
+                    (library) => IsEditMode());
+
+            Commands.AddStyleCommand =
+                Command<Library<ShapeStyle>>.Create(
+                    (library) => Project.AddStyle(library, ShapeStyle.Create(Constants.DefaulStyleName)),
+                    (library) => IsEditMode());
+
+            Commands.RemoveStyleCommand =
+                Command<ShapeStyle>.Create(
+                    (style) => Project.RemoveStyle(style),
+                    (style) => IsEditMode());
+
+            Commands.ApplyStyleCommand =
+                Command<ShapeStyle>.Create(
+                    (style) => OnApplyStyle(style),
+                    (style) => IsEditMode());
+
+            Commands.AddShapeCommand =
+                Command<BaseShape>.Create(
+                    (shape) => OnAddShape(shape),
+                    (shape) => IsEditMode());
+
+            Commands.RemoveShapeCommand =
+                Command<BaseShape>.Create(
+                    (shape) => OnRemoveShape(shape),
+                    (shape) => IsEditMode());
+
+            Commands.AddTemplateCommand =
+                Command.Create(
+                    () => OnAddTemplate(),
+                    () => IsEditMode());
+
+            Commands.RemoveTemplateCommand =
+                Command<Template>.Create(
+                    (template) => OnRemoveTemplate(template),
+                    (template) => IsEditMode());
+
+            Commands.EditTemplateCommand =
+                Command<Template>.Create(
+                    (template) => OnEditTemplate(template),
+                    (template) => IsEditMode());
+
+            Commands.ApplyTemplateCommand =
+                Command<Template>.Create(
+                    (template) => OnApplyTemplate(template),
+                    (template) => true);
+
+            Commands.AddImageKeyCommand =
+                Command.Create(
+                    async () => await OnAddImageKey(null),
+                    () => IsEditMode());
+
+            Commands.RemoveImageKeyCommand =
+                Command<string>.Create(
+                    (key) => OnRemoveImageKey(key),
+                    (key) => IsEditMode());
+
+            Commands.SelectedItemChangedCommand =
+                Command<object>.Create(
+                    (item) => OnSelectedItemChanged(item),
+                    (item) => IsEditMode());
+
+            Commands.AddPageCommand =
+                Command<object>.Create(
+                    (item) => OnAddPage(item),
+                    (item) => IsEditMode());
+
+            Commands.InsertPageBeforeCommand =
+                Command<object>.Create(
+                    (item) => OnInsertPageBefore(item),
+                    (item) => IsEditMode());
+
+            Commands.InsertPageAfterCommand =
+                Command<object>.Create(
+                    (item) => OnInsertPageAfter(item),
+                    (item) => IsEditMode());
+
+            Commands.AddDocumentCommand =
+                Command<object>.Create(
+                    (item) => OnAddDocument(item),
+                    (item) => IsEditMode());
+
+            Commands.InsertDocumentBeforeCommand =
+                Command<object>.Create(
+                    (item) => OnInsertDocumentBefore(item),
+                    (item) => IsEditMode());
+
+            Commands.InsertDocumentAfterCommand =
+                Command<object>.Create(
+                    (item) => OnInsertDocumentAfter(item),
+                    (item) => IsEditMode());
+        }
+
+        /// <summary>
         /// Dispose unmanaged resources.
         /// </summary>
         public void Dispose()

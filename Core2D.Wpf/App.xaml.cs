@@ -196,15 +196,16 @@ namespace Core2D.Wpf
 
             _editor.DefaultTools();
 
-            Commands.InitializeCommonCommands(_editor);
-            InitializePlatformCommands(_editor);
+            _editor.InitializeCommands();
+            InitializeCommands(_editor);
+            Commands.Register();
         }
 
         /// <summary>
-        /// Initialize platform commands used by <see cref="Editor"/>.
+        /// Initialize platform specific commands used by <see cref="Editor"/>.
         /// </summary>
         /// <param name="editor">The editor instance.</param>
-        private void InitializePlatformCommands(Editor editor)
+        private void InitializeCommands(Editor editor)
         {
             Commands.OpenCommand =
                 Command<string>.Create(

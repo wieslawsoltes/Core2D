@@ -206,10 +206,10 @@ namespace Core2D
         public static XQuadraticBezierSegment QuadraticBezierSegment { get; set; }
 
         /// <summary>
-        /// Initialize platform commands used by <see cref="Editor"/>.
+        /// Initialize platform specific commands used by <see cref="Editor"/>.
         /// </summary>
         /// <param name="editor">The editor instance.</param>
-        public static void InitializePlatformCommands(Editor editor)
+        public static void InitializeCommands(Editor editor)
         {
             Commands.OpenCommand =
                 Command<string>.Create(
@@ -405,8 +405,9 @@ namespace Core2D
 
             Editor.DefaultTools();
 
-            Commands.InitializeCommonCommands(Editor);
-            InitializePlatformCommands(Editor);
+            Editor.InitializeCommands();
+            InitializeCommands(Editor);
+            Commands.Register();
 
             Editor.OnNew(null);
 
