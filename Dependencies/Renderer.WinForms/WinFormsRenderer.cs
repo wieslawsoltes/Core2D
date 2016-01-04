@@ -685,24 +685,27 @@ namespace Dependencies
             Brush brush = ToSolidBrush(text.Style.Stroke);
 
             var fontStyle = System.Drawing.FontStyle.Regular;
-            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Bold))
+            if (text.Style.TextStyle.FontStyle != null)
             {
-                fontStyle |= System.Drawing.FontStyle.Bold;
-            }
+                if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Bold))
+                {
+                    fontStyle |= System.Drawing.FontStyle.Bold;
+                }
 
-            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Italic))
-            {
-                fontStyle |= System.Drawing.FontStyle.Italic;
-            }
+                if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Italic))
+                {
+                    fontStyle |= System.Drawing.FontStyle.Italic;
+                }
 
-            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Underline))
-            {
-                fontStyle |= System.Drawing.FontStyle.Underline;
-            }
+                if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Underline))
+                {
+                    fontStyle |= System.Drawing.FontStyle.Underline;
+                }
 
-            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Strikeout))
-            {
-                fontStyle |= System.Drawing.FontStyle.Strikeout;
+                if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Strikeout))
+                {
+                    fontStyle |= System.Drawing.FontStyle.Strikeout;
+                }
             }
 
             Font font = new Font(

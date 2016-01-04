@@ -983,15 +983,19 @@ namespace Dependencies
                 var ci = CultureInfo.InvariantCulture;
 
                 var fontStyle = System.Windows.FontStyles.Normal;
-                if (style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Italic))
-                {
-                    fontStyle = System.Windows.FontStyles.Italic;
-                }
-
                 var fontWeight = FontWeights.Regular;
-                if (style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Bold))
+
+                if (style.TextStyle.FontStyle != null)
                 {
-                    fontWeight = FontWeights.Bold;
+                    if (style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Italic))
+                    {
+                        fontStyle = System.Windows.FontStyles.Italic;
+                    }
+
+                    if (style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Bold))
+                    {
+                        fontWeight = FontWeights.Bold;
+                    }
                 }
 
                 var tf = new Typeface(
@@ -1008,24 +1012,27 @@ namespace Dependencies
                     style.TextStyle.FontSize > 0.0 ? style.TextStyle.FontSize : double.Epsilon,
                     stroke.Brush, null, TextFormattingMode.Ideal);
 
-                if (style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Underline)
-                    || style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Strikeout))
+                if (style.TextStyle.FontStyle != null)
                 {
-                    var decorations = new TextDecorationCollection();
-
-                    if (style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Underline))
+                    if (style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Underline)
+                    || style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Strikeout))
                     {
-                        decorations = new TextDecorationCollection(
-                            decorations.Union(TextDecorations.Underline));
-                    }
+                        var decorations = new TextDecorationCollection();
 
-                    if (style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Strikeout))
-                    {
-                        decorations = new TextDecorationCollection(
-                            decorations.Union(TextDecorations.Strikethrough));
-                    }
+                        if (style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Underline))
+                        {
+                            decorations = new TextDecorationCollection(
+                                decorations.Union(TextDecorations.Underline));
+                        }
 
-                    ft.SetTextDecorations(decorations);
+                        if (style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Strikeout))
+                        {
+                            decorations = new TextDecorationCollection(
+                                decorations.Union(TextDecorations.Strikethrough));
+                        }
+
+                        ft.SetTextDecorations(decorations);
+                    }
                 }
 
                 _textCache.Set(text, Tuple.Create(tbind, ft, style));

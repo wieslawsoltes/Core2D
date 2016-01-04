@@ -923,12 +923,15 @@ namespace Dependencies
                 ts);
             dxfMText.AttachmentPoint = attachmentPoint;
 
-            var fs = text.Style.TextStyle.FontStyle;
             var options = new MTextFormattingOptions(dxfMText.Style);
-            options.Bold = fs.Flags.HasFlag(Core2D.FontStyleFlags.Bold);
-            options.Italic = fs.Flags.HasFlag(Core2D.FontStyleFlags.Italic);
-            options.Underline = fs.Flags.HasFlag(Core2D.FontStyleFlags.Underline);
-            options.StrikeThrough = fs.Flags.HasFlag(Core2D.FontStyleFlags.Strikeout);
+            var fs = text.Style.TextStyle.FontStyle;
+            if (fs != null)
+            {
+                options.Bold = fs.Flags.HasFlag(Core2D.FontStyleFlags.Bold);
+                options.Italic = fs.Flags.HasFlag(Core2D.FontStyleFlags.Italic);
+                options.Underline = fs.Flags.HasFlag(Core2D.FontStyleFlags.Underline);
+                options.StrikeThrough = fs.Flags.HasFlag(Core2D.FontStyleFlags.Strikeout);
+            }
 
             options.Aligment = MTextFormattingOptions.TextAligment.Default;
             options.Color = null;

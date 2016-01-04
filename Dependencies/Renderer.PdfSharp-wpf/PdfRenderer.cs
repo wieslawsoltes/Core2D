@@ -807,24 +807,27 @@ namespace Dependencies
             var options = new XPdfFontOptions(PdfFontEncoding.Unicode);
 
             var fontStyle = XFontStyle.Regular;
-            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Bold))
+            if (text.Style.TextStyle.FontStyle != null)
             {
-                fontStyle |= XFontStyle.Bold;
-            }
+                if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Bold))
+                {
+                    fontStyle |= XFontStyle.Bold;
+                }
 
-            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Italic))
-            {
-                fontStyle |= XFontStyle.Italic;
-            }
+                if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Italic))
+                {
+                    fontStyle |= XFontStyle.Italic;
+                }
 
-            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Underline))
-            {
-                fontStyle |= XFontStyle.Underline;
-            }
+                if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Underline))
+                {
+                    fontStyle |= XFontStyle.Underline;
+                }
 
-            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Strikeout))
-            {
-                fontStyle |= XFontStyle.Strikeout;
+                if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Strikeout))
+                {
+                    fontStyle |= XFontStyle.Strikeout;
+                }
             }
 
             var font = new XFont(

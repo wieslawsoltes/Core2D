@@ -642,30 +642,34 @@ namespace Dependencies
             Brush brush = ToSolidBrush(text.Style.Stroke);
 
             var fontStyle = Perspex.Media.FontStyle.Normal;
-            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Italic))
-            {
-                fontStyle |= Perspex.Media.FontStyle.Italic;
-            }
-
             var fontWeight = Perspex.Media.FontWeight.Normal;
-            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Bold))
-            {
-                fontWeight |= Perspex.Media.FontWeight.Bold;
-            }
+            //var fontDecoration = Perspex.Media.FontDecoration.None;
 
-            // TODO: Implement font decoration after Perspex adds support for them.
-            /*
-            var fontDecoration = Perspex.Media.FontDecoration.None;
-            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Underline))
+            if (text.Style.TextStyle.FontStyle != null)
             {
-                fontDecoration |= Perspex.Media.FontDecoration.Underline;
-            }
+                if (text.Style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Italic))
+                {
+                    fontStyle |= Perspex.Media.FontStyle.Italic;
+                }
 
-            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Strikeout))
-            {
-                fontDecoration |= Perspex.Media.FontDecoration.Strikethrough;
+                if (text.Style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Bold))
+                {
+                    fontWeight |= Perspex.Media.FontWeight.Bold;
+                }
+
+                // TODO: Implement font decoration after Perspex adds support.
+                /*
+                if (text.Style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Underline))
+                {
+                    fontDecoration |= Perspex.Media.FontDecoration.Underline;
+                }
+
+                if (text.Style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Strikeout))
+                {
+                    fontDecoration |= Perspex.Media.FontDecoration.Strikethrough;
+                }
+                */
             }
-            */
 
             var ft = new FormattedText(
                 tbind,
