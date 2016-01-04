@@ -1,0 +1,275 @@
+﻿{
+  "$id": "1",
+  "Name": "Grid",
+  "Width": 840.0,
+  "Height": 600.0,
+  "Background": "#FFFFFFFF",
+  "Layers": [
+    {
+      "$id": "2",
+      "Name": "TemplateLayer1",
+      "Owner": {
+        "$ref": "1"
+      },
+      "IsVisible": true,
+      "Shapes": [
+        {
+          "$id": "3",
+          "$type": "XRectangle",
+          "IsGrid": true,
+          "OffsetX": 30.0,
+          "OffsetY": 30.0,
+          "CellWidth": 30.0,
+          "CellHeight": 30.0,
+          "TopLeft": {
+            "$id": "4",
+            "Shape": {
+              "$id": "5",
+              "$type": "XRectangle",
+              "IsGrid": false,
+              "OffsetX": 30.0,
+              "OffsetY": 30.0,
+              "CellWidth": 30.0,
+              "CellHeight": 30.0,
+              "TopLeft": {
+                "$id": "6",
+                "X": -4.0,
+                "Y": -4.0,
+                "Name": "",
+                "State": "Visible, Printable, Standalone",
+                "IsStroked": false,
+                "IsFilled": false,
+                "Data": {
+                  "$id": "7",
+                  "Properties": []
+                }
+              },
+              "BottomRight": {
+                "$id": "8",
+                "X": 4.0,
+                "Y": 4.0,
+                "Name": "",
+                "State": "Visible, Printable, Standalone",
+                "IsStroked": false,
+                "IsFilled": false,
+                "Data": {
+                  "$id": "9",
+                  "Properties": []
+                }
+              },
+              "Name": "",
+              "State": "Visible, Printable, Standalone",
+              "Style": {
+                "$id": "10",
+                "LineStyle": {
+                  "$id": "11",
+                  "Name": "Line",
+                  "FixedLength": {
+                    "$id": "12",
+                    "Flags": 0,
+                    "Disabled": true,
+                    "Start": false,
+                    "End": false,
+                    "Vertical": false,
+                    "Horizontal": false,
+                    "All": false,
+                    "Length": 15.0,
+                    "StartTrigger": "Connector, Output",
+                    "EndTrigger": "Connector, Input"
+                  }
+                },
+                "StartArrowStyle": {
+                  "$id": "13",
+                  "ArrowType": 0,
+                  "IsStroked": true,
+                  "IsFilled": false,
+                  "RadiusX": 5.0,
+                  "RadiusY": 5.0,
+                  "Name": "Start",
+                  "Stroke": "#FF000000",
+                  "Fill": "#FF000000",
+                  "Thickness": 1.0,
+                  "LineCap": 2,
+                  "DashOffset": 0.0
+                },
+                "EndArrowStyle": {
+                  "$id": "14",
+                  "ArrowType": 0,
+                  "IsStroked": true,
+                  "IsFilled": false,
+                  "RadiusX": 5.0,
+                  "RadiusY": 5.0,
+                  "Name": "End",
+                  "Stroke": "#FF000000",
+                  "Fill": "#FF000000",
+                  "Thickness": 1.0,
+                  "LineCap": 2,
+                  "DashOffset": 0.0
+                },
+                "TextStyle": {
+                  "$id": "15",
+                  "Name": "Text",
+                  "FontName": "Calibri",
+                  "FontFile": "C:\\Windows\\Fonts\\calibri.ttf",
+                  "FontSize": 12.0,
+                  "FontStyle": "Regular",
+                  "TextHAlignment": 1,
+                  "TextVAlignment": 1
+                },
+                "Name": "Point",
+                "Stroke": "#FF000000",
+                "Fill": "#FF000000",
+                "Thickness": 1.0,
+                "LineCap": 2,
+                "DashOffset": 0.0
+              },
+              "IsStroked": true,
+              "IsFilled": false,
+              "Data": {
+                "$id": "16",
+                "Properties": []
+              }
+            },
+            "X": 0.0,
+            "Y": 0.0,
+            "Name": "",
+            "State": "Visible, Printable, Standalone",
+            "IsStroked": false,
+            "IsFilled": false,
+            "Data": {
+              "$id": "17",
+              "Properties": []
+            }
+          },
+          "BottomRight": {
+            "$id": "18",
+            "Shape": {
+              "$ref": "5"
+            },
+            "X": 840.0,
+            "Y": 600.0,
+            "Name": "",
+            "State": "Visible, Printable, Standalone",
+            "IsStroked": false,
+            "IsFilled": false,
+            "Data": {
+              "$id": "19",
+              "Properties": []
+            }
+          },
+          "Name": "",
+          "State": "Visible, Standalone",
+          "Style": {
+            "$id": "20",
+            "LineStyle": {
+              "$id": "21",
+              "Name": "Line",
+              "FixedLength": {
+                "$id": "22",
+                "Flags": 0,
+                "Disabled": true,
+                "Start": false,
+                "End": false,
+                "Vertical": false,
+                "Horizontal": false,
+                "All": false,
+                "Length": 15.0,
+                "StartTrigger": "Connector, Output",
+                "EndTrigger": "Connector, Input"
+              }
+            },
+            "StartArrowStyle": {
+              "$id": "23",
+              "ArrowType": 0,
+              "IsStroked": true,
+              "IsFilled": false,
+              "RadiusX": 5.0,
+              "RadiusY": 5.0,
+              "Name": "Start",
+              "Stroke": "#FFDEDEDE",
+              "Fill": "#FFDEDEDE",
+              "Thickness": 1.0,
+              "LineCap": 2,
+              "DashOffset": 0.0
+            },
+            "EndArrowStyle": {
+              "$id": "24",
+              "ArrowType": 0,
+              "IsStroked": true,
+              "IsFilled": false,
+              "RadiusX": 5.0,
+              "RadiusY": 5.0,
+              "Name": "End",
+              "Stroke": "#FFDEDEDE",
+              "Fill": "#FFDEDEDE",
+              "Thickness": 1.0,
+              "LineCap": 2,
+              "DashOffset": 0.0
+            },
+            "TextStyle": {
+              "$id": "25",
+              "Name": "Text",
+              "FontName": "Calibri",
+              "FontFile": "C:\\Windows\\Fonts\\calibri.ttf",
+              "FontSize": 12.0,
+              "FontStyle": "Regular",
+              "TextHAlignment": 1,
+              "TextVAlignment": 1
+            },
+            "Name": "Grid",
+            "Stroke": "#FFDEDEDE",
+            "Fill": "#FFDEDEDE",
+            "Thickness": 1.0,
+            "LineCap": 2,
+            "DashOffset": 0.0
+          },
+          "IsStroked": false,
+          "IsFilled": false,
+          "Data": {
+            "$id": "26",
+            "Properties": []
+          }
+        }
+      ]
+    },
+    {
+      "$id": "27",
+      "Name": "TemplateLayer2",
+      "Owner": {
+        "$ref": "1"
+      },
+      "IsVisible": true,
+      "Shapes": []
+    },
+    {
+      "$id": "28",
+      "Name": "TemplateLayer3",
+      "Owner": {
+        "$ref": "1"
+      },
+      "IsVisible": true,
+      "Shapes": []
+    }
+  ],
+  "CurrentLayer": {
+    "$ref": "2"
+  },
+  "WorkingLayer": {
+    "$id": "29",
+    "Name": "Working",
+    "Owner": {
+      "$ref": "1"
+    },
+    "IsVisible": true,
+    "Shapes": []
+  },
+  "HelperLayer": {
+    "$id": "30",
+    "Name": "Helper",
+    "Owner": {
+      "$ref": "1"
+    },
+    "IsVisible": true,
+    "Shapes": []
+  }
+}

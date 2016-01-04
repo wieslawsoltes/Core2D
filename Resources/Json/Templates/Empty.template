@@ -1,0 +1,57 @@
+﻿{
+  "$id": "1",
+  "Name": "Empty",
+  "Width": 840.0,
+  "Height": 600.0,
+  "Background": "#FFFFFFFF",
+  "Layers": [
+    {
+      "$id": "2",
+      "Name": "TemplateLayer1",
+      "Owner": {
+        "$ref": "1"
+      },
+      "IsVisible": true,
+      "Shapes": []
+    },
+    {
+      "$id": "3",
+      "Name": "TemplateLayer2",
+      "Owner": {
+        "$ref": "1"
+      },
+      "IsVisible": true,
+      "Shapes": []
+    },
+    {
+      "$id": "4",
+      "Name": "TemplateLayer3",
+      "Owner": {
+        "$ref": "1"
+      },
+      "IsVisible": true,
+      "Shapes": []
+    }
+  ],
+  "CurrentLayer": {
+    "$ref": "2"
+  },
+  "WorkingLayer": {
+    "$id": "5",
+    "Name": "Working",
+    "Owner": {
+      "$ref": "1"
+    },
+    "IsVisible": true,
+    "Shapes": []
+  },
+  "HelperLayer": {
+    "$id": "6",
+    "Name": "Helper",
+    "Owner": {
+      "$ref": "1"
+    },
+    "IsVisible": true,
+    "Shapes": []
+  }
+}
