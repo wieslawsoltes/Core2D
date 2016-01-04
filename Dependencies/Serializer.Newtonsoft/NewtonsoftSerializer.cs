@@ -7,14 +7,31 @@ using Core2D;
 namespace Dependencies
 {
     /// <summary>
-    /// 
+    /// Json serializer.
     /// </summary>
     public class NewtonsoftSerializer : ISerializer
     {
-        /// <inheritdoc/>
-        public string Serialize<T>(T value)
+        /// <summary>
+        /// The class library assembly name.
+        /// </summary>
+        public static string AssemblyName = "Core2D";
+
+        /// <summary>
+        /// The class library namespace prefix.
+        /// </summary>
+        public static string NamespacePrefix = "Core2D";
+
+        /// <summary>
+        /// Specifies the settings on a <see cref="JsonSerializer"/> object.
+        /// </summary>
+        public static JsonSerializerSettings Settings;
+
+        /// <summary>
+        /// Initializes static data.
+        /// </summary>
+        static NewtonsoftSerializer()
         {
-            var settings = new JsonSerializerSettings()
+            Settings = new JsonSerializerSettings()
             {
                 Formatting = Formatting.Indented,
                 TypeNameHandling = TypeNameHandling.Auto,
@@ -22,7 +39,7 @@ namespace Dependencies
                 ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
                 ContractResolver = new ProjectContractResolver(),
                 NullValueHandling = NullValueHandling.Ignore,
-                Binder = new JsonSerializationBinder("Core2D", "Core2D"),
+                Binder = new JsonSerializationBinder(AssemblyName, NamespacePrefix),
                 Converters =
                 {
                     new ArgbColorJsonConverter(),
@@ -30,33 +47,20 @@ namespace Dependencies
                     new ShapeStateConverter()
                 }
             };
-            settings.Converters.Add(new KeyValuePairConverter());
-            var text = JsonConvert.SerializeObject(value, settings);
-            return text;
+
+            Settings.Converters.Add(new KeyValuePairConverter());
+        }
+
+        /// <inheritdoc/>
+        public string Serialize<T>(T value)
+        {
+            return JsonConvert.SerializeObject(value, Settings);
         }
 
         /// <inheritdoc/>
         public T Deserialize<T>(string text)
         {
-            var settings = new JsonSerializerSettings()
-            {
-                Formatting = Formatting.Indented,
-                TypeNameHandling = TypeNameHandling.Auto,
-                PreserveReferencesHandling = PreserveReferencesHandling.Objects,
-                ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
-                ContractResolver = new ProjectContractResolver(),
-                NullValueHandling = NullValueHandling.Ignore,
-                Binder = new JsonSerializationBinder("Core2D", "Core2D"),
-                Converters =
-                {
-                    new ArgbColorJsonConverter(),
-                    new FontStyleConverter(),
-                    new ShapeStateConverter()
-                }
-            };
-            settings.Converters.Add(new KeyValuePairConverter());
-            var value = JsonConvert.DeserializeObject<T>(text, settings);
-            return value;
+            return JsonConvert.DeserializeObject<T>(text, Settings);
         }
     }
 }

@@ -9,17 +9,17 @@ namespace Dependencies
     internal class JsonSerializationBinder : SerializationBinder
     {
         private readonly string _assemblyName;
-        private readonly string _namespaceName;
+        private readonly string _namespacePrefix;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JsonSerializationBinder"/> class.
         /// </summary>
-        /// <param name="assemblyName">The assembly name.</param>
-        /// <param name="namespaceName">The namespace name.</param>
-        public JsonSerializationBinder(string assemblyName, string namespaceName)
+        /// <param name="assemblyName">The class library assembly name.</param>
+        /// <param name="namespacePrefix">The class library namespace prefix.</param>
+        public JsonSerializationBinder(string assemblyName, string namespacePrefix)
         {
             _assemblyName = assemblyName;
-            _namespaceName = namespaceName;
+            _namespacePrefix = namespacePrefix;
         }
 
         /// <inheritdoc/>
@@ -32,7 +32,7 @@ namespace Dependencies
         /// <inheritdoc/>
         public override Type BindToType(string assemblyName, string typeName)
         {
-            string restoredTypeName = string.Concat(_namespaceName, ".", typeName, ", ", _assemblyName);
+            string restoredTypeName = string.Concat(_namespacePrefix, ".", typeName, ", ", _assemblyName);
             return Type.GetType(restoredTypeName, true);
         }
     }
