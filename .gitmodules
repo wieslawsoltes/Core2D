@@ -2,5 +2,5 @@
 	path = Dependencies/netDxf
 	url = https://github.com/Core2D/netdxf.git
 [submodule "Core2D/OmniXAML"]
-	path = Core2D/OmniXAML
+	path = Core2D.Xaml/OmniXAML
 	url = https://github.com/Core2D/OmniXAML.git
