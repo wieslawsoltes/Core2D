@@ -124,5 +124,15 @@ namespace Core2D
                 }
             }
         }
+
+        /// <summary>
+        /// Converts a color to string.
+        /// </summary>
+        /// <param name="c">The color instance.</param>
+        /// <returns>The color string.</returns>
+        public static string ToHtml(ArgbColor c)
+        {
+            return string.Concat('#', c.A.ToString("X2"), c.R.ToString("X2"), c.G.ToString("X2"), c.B.ToString("X2"));
+        }
     }
 }
