@@ -1099,15 +1099,7 @@ namespace Core2D
                     var document = item as Document;
                     int index = _project.Documents.IndexOf(document);
                     var clone = Clone(_documentToCopy);
-
-                    var builder = _project.Documents.ToBuilder();
-                    builder[index] = clone;
-
-                    var previous = _project.Documents;
-                    var next = builder.ToImmutable();
-                    _project.History.Snapshot(previous, next, (p) => _project.Documents = p);
-                    _project.Documents = next;
-
+                    _project.ReplaceDocument(clone, index);
                     _project.CurrentDocument = clone;
                 }
             }
