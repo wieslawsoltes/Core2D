@@ -1200,9 +1200,14 @@ namespace Core2D
         {
             try
             {
-                // TODO: Add history snapshot.
-                _project.CurrentContainer.Clear();
-                _project.CurrentContainer.Invalidate();
+                var container = _project.CurrentContainer;
+                if (container != null)
+                {
+                    ClearLayers(container.Layers);
+                    container.WorkingLayer.Shapes = ImmutableArray.Create<BaseShape>();
+                    container.HelperLayer.Shapes = ImmutableArray.Create<BaseShape>();
+                    _project.CurrentContainer.Invalidate();
+                }
             }
             catch (Exception ex)
             {
