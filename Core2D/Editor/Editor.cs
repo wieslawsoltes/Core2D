@@ -2099,7 +2099,6 @@ namespace Core2D
 
             Deselect();
             SetRenderersImageCache(null);
-
             Project = null;
             ProjectPath = string.Empty;
             IsProjectDirty = false;
