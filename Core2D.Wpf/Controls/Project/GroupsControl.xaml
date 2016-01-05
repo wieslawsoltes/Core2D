@@ -87,5 +87,26 @@
                 </DataTemplate>
             </lists:XGroupDragAndDropListBox.ItemTemplate>
         </lists:XGroupDragAndDropListBox>
+        <Grid Grid.Row="4" Grid.ColumnSpan="2">
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Setter Property="Visibility" Value="Visible"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding CurrentGroupLibrary.Selected}" Value="{x:Null}">
+                            <Setter Property="Visibility" Value="Hidden"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Name" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+            <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Delay=500}" DataContext="{Binding CurrentGroupLibrary.Selected}" BorderBrush="{x:Null}" Margin="5,2,5,2" TextAlignment="Left" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1"/>
+        </Grid>
     </Grid>
 </UserControl>

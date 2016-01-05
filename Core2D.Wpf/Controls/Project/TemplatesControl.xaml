@@ -27,6 +27,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Control Template="{StaticResource TemplatesMenu}" Grid.Row="0" Margin="2,0,2,0"/>
         <lists:TemplateDragAndDropListBox DataContext="{Binding Templates}" Tag="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" ItemsSource="{Binding}" SelectedItem="{Binding DataContext.CurrentTemplate, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" BorderBrush="{x:Null}" HorizontalContentAlignment="Stretch" Grid.Row="1">
@@ -57,5 +58,26 @@
                 </DataTemplate>
             </lists:TemplateDragAndDropListBox.ItemTemplate>
         </lists:TemplateDragAndDropListBox>
+        <Grid Grid.Row="2">
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Setter Property="Visibility" Value="Visible"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding CurrentTemplate}" Value="{x:Null}">
+                            <Setter Property="Visibility" Value="Hidden"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Name" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+            <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Delay=500}" DataContext="{Binding CurrentTemplate}" BorderBrush="{x:Null}" Margin="5,2,5,2" TextAlignment="Left" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1"/>
+        </Grid>
     </Grid>
 </UserControl>
