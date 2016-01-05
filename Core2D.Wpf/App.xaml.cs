@@ -174,7 +174,7 @@ namespace Core2D.Wpf
             {
                 CurrentTool = Tool.Selection,
                 CurrentPathTool = PathTool.Line,
-                Renderers = new Renderer[] { new WpfRenderer(), new WpfRenderer() },
+                Renderers = new Renderer[] { new WpfRenderer() },
                 ProjectFactory = new ProjectFactory(),
                 TextClipboard = new TextClipboard(),
                 JsonSerializer = new NewtonsoftSerializer(),
@@ -190,7 +190,6 @@ namespace Core2D.Wpf
 
             _editor.Renderers[0].State.EnableAutofit = true;
             _editor.Renderers[0].State.DrawShapeState.Flags = ShapeStateFlags.Visible;
-            _editor.Renderers[1].State.DrawShapeState.Flags = ShapeStateFlags.Visible;
 
             _editor.GetImageKey = async () => await OnGetImageKey();
 
