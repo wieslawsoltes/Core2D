@@ -63,7 +63,7 @@
         <lists:ShapeStyleDragAndDropListBox DataContext="{Binding CurrentStyleLibrary.Items}" Tag="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" ItemsSource="{Binding}" SelectedItem="{Binding DataContext.CurrentStyleLibrary.Selected, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" BorderBrush="{x:Null}" HorizontalContentAlignment="Stretch" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
             <lists:ShapeStyleDragAndDropListBox.Resources>
                 <ContextMenu x:Key="StyleContextMenu" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
-                    <MenuItem Header="_Add Style" InputGestureText="Ctrl+N" Command="{x:Static core:Commands.AddStyleCommand}"/>
+                    <MenuItem Header="_Add Style" InputGestureText="Ctrl+N" Command="{x:Static core:Commands.AddStyleCommand}" CommandParameter="{Binding DataContext.CurrentStyleLibrary, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"/>
                     <Separator/>
                     <MenuItem Header="_Delete" InputGestureText="Del" Command="{x:Static core:Commands.RemoveStyleCommand}" CommandParameter="{Binding}"/>
                     <Separator/>
@@ -71,7 +71,7 @@
                 </ContextMenu>
             </lists:ShapeStyleDragAndDropListBox.Resources>
             <lists:ShapeStyleDragAndDropListBox.InputBindings>
-                <KeyBinding Command="{x:Static core:Commands.AddStyleCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type lists:ShapeStyleDragAndDropListBox}}}" Gesture="Ctrl+N"/>
+                <KeyBinding Command="{x:Static core:Commands.AddStyleCommand}" CommandParameter="{Binding DataContext.CurrentStyleLibrary, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Gesture="Ctrl+N"/>
                 <KeyBinding Command="{x:Static core:Commands.RemoveStyleCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type lists:ShapeStyleDragAndDropListBox}}}" Gesture="Del"/>
                 <KeyBinding Command="{x:Static core:Commands.ExportStyleCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type lists:ShapeStyleDragAndDropListBox}}}" Gesture="Ctrl+E"/>
             </lists:ShapeStyleDragAndDropListBox.InputBindings>
