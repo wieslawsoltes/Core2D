@@ -1733,7 +1733,7 @@ namespace Core2D
         /// <param name="shape">The shape instance.</param>
         public void OnRemoveShape(BaseShape shape)
         {
-            if (_project != null && _project.CurrentContainer == null)
+            if (_project != null && _project.CurrentContainer != null)
             {
                 var layer = _project.CurrentContainer.CurrentLayer;
                 if (layer != null && shape != null)
