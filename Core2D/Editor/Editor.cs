@@ -939,7 +939,6 @@ namespace Core2D
                 if (CanCopy())
                 {
                     OnCopy();
-
                     DeleteSelected();
                 }
             }
