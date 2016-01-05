@@ -391,6 +391,29 @@ namespace Core2D
         }
 
         /// <summary>
+        /// Swap shape at specified indexes.
+        /// </summary>
+        /// <param name="project">The project instance.</param>
+        /// <param name="layer">The layer instance.</param>
+        /// <param name="shape">The shape instance.</param>
+        /// <param name="insertIndex">The shape insert index.</param>
+        /// <param name="removeIndex">The shape remove index.</param>
+        public static void SwapShape(this Project project, Layer layer, BaseShape shape, int insertIndex, int removeIndex)
+        {
+            if (layer != null && shape != null && insertIndex >= 0 && removeIndex >= 0)
+            {
+                var builder = layer.Shapes.ToBuilder();
+                builder.Insert(insertIndex, shape);
+                builder.RemoveAt(removeIndex);
+
+                var previous = layer.Shapes;
+                var next = builder.ToImmutable();
+                project.History.Snapshot(previous, next, (p) => layer.Shapes = p);
+                layer.Shapes = next;
+            }
+        }
+
+        /// <summary>
         /// Add property.
         /// </summary>
         /// <param name="project">The project instance.</param>
