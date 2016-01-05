@@ -122,19 +122,6 @@ namespace Core2D
         /// <summary>
         /// 
         /// </summary>
-        public virtual void Clear()
-        {
-            foreach (var layer in Layers)
-            {
-                layer.Shapes = ImmutableArray.Create<BaseShape>();
-            }
-            WorkingLayer.Shapes = ImmutableArray.Create<BaseShape>();
-            HelperLayer.Shapes = ImmutableArray.Create<BaseShape>();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         public virtual void Invalidate()
         {
             if (Layers != null)
