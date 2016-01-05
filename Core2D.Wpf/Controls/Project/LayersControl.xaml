@@ -31,9 +31,9 @@
         <lists:LayerDragAndDropListBox DataContext="{Binding Layers}" Tag="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" ItemsSource="{Binding}" SelectedItem="{Binding DataContext.CurrentLayer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" HorizontalContentAlignment="Stretch" BorderBrush="{x:Null}" Grid.Row="1">
             <lists:LayerDragAndDropListBox.Resources>
                 <ContextMenu x:Key="LayerContextMenu" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
-                    <MenuItem Header="_Add Layer" InputGestureText="Ctrl+N" Command="{x:Static core:Commands.AddLayerCommand}"/>
+                    <MenuItem Header="_Add Layer" InputGestureText="Ctrl+N" Command="{x:Static core:Commands.AddLayerCommand}" CommandParameter="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"/>
                     <Separator/>
-                    <MenuItem Header="_Delete" InputGestureText="Del" Command="{x:Static core:Commands.RemoveLayerCommand}"/>
+                    <MenuItem Header="_Delete" InputGestureText="Del" Command="{x:Static core:Commands.RemoveLayerCommand}"  CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type lists:LayerDragAndDropListBox}}}"/>
                 </ContextMenu>
             </lists:LayerDragAndDropListBox.Resources>
             <lists:LayerDragAndDropListBox.InputBindings>
