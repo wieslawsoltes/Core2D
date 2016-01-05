@@ -1518,10 +1518,10 @@ namespace Core2D
         /// </summary>
         public void OnToggleDefaultIsStroked()
         {
-            if (_project == null || _project.Options == null)
-                return;
-
-            _project.Options.DefaultIsStroked = !_project.Options.DefaultIsStroked;
+            if (_project != null && _project.Options != null)
+            {
+                _project.Options.DefaultIsStroked = !_project.Options.DefaultIsStroked;
+            }
         }
 
         /// <summary>
@@ -1529,10 +1529,10 @@ namespace Core2D
         /// </summary>
         public void OnToggleDefaultIsFilled()
         {
-            if (_project == null || _project.Options == null)
-                return;
-
-            _project.Options.DefaultIsFilled = !_project.Options.DefaultIsFilled;
+            if (_project != null && _project.Options != null)
+            {
+                _project.Options.DefaultIsFilled = !_project.Options.DefaultIsFilled;
+            }
         }
 
         /// <summary>
@@ -1540,10 +1540,10 @@ namespace Core2D
         /// </summary>
         public void OnToggleDefaultIsClosed()
         {
-            if (_project == null || _project.Options == null)
-                return;
-
-            _project.Options.DefaultIsClosed = !_project.Options.DefaultIsClosed;
+            if (_project != null && _project.Options != null)
+            {
+                _project.Options.DefaultIsClosed = !_project.Options.DefaultIsClosed;
+            }
         }
 
         /// <summary>
@@ -1551,10 +1551,10 @@ namespace Core2D
         /// </summary>
         public void OnToggleDefaultIsSmoothJoin()
         {
-            if (_project == null || _project.Options == null)
-                return;
-
-            _project.Options.DefaultIsSmoothJoin = !_project.Options.DefaultIsSmoothJoin;
+            if (_project != null && _project.Options != null)
+            {
+                _project.Options.DefaultIsSmoothJoin = !_project.Options.DefaultIsSmoothJoin;
+            }
         }
 
         /// <summary>
@@ -1562,10 +1562,10 @@ namespace Core2D
         /// </summary>
         public void OnToggleSnapToGrid()
         {
-            if (_project == null || _project.Options == null)
-                return;
-
-            _project.Options.SnapToGrid = !_project.Options.SnapToGrid;
+            if (_project != null && _project.Options != null)
+            {
+                _project.Options.SnapToGrid = !_project.Options.SnapToGrid;
+            }
         }
 
         /// <summary>
@@ -1573,10 +1573,10 @@ namespace Core2D
         /// </summary>
         public void OnToggleTryToConnect()
         {
-            if (_project == null || _project.Options == null)
-                return;
-
-            _project.Options.TryToConnect = !_project.Options.TryToConnect;
+            if (_project != null && _project.Options != null)
+            {
+                _project.Options.TryToConnect = !_project.Options.TryToConnect;
+            }
         }
 
         /// <summary>
@@ -1643,10 +1643,7 @@ namespace Core2D
         /// <param name="group">The group item.</param>
         public void OnRemoveGroup(XGroup group)
         {
-            if (_project == null)
-                return;
-
-            if (group != null)
+            if (_project != null && group != null)
             {
                 _project.RemoveGroup(group);
             }
@@ -1658,10 +1655,10 @@ namespace Core2D
         /// <param name="group">The group instance.</param>
         public void OnInsertGroup(XGroup group)
         {
-            if (_project == null || _project.CurrentContainer == null)
-                return;
-
-            DropShapeAsClone(group, 0.0, 0.0);
+            if (_project != null && _project.CurrentContainer != null)
+            {
+                DropShapeAsClone(group, 0.0, 0.0);
+            }
         }
 
         /// <summary>
@@ -1670,10 +1667,7 @@ namespace Core2D
         /// <param name="style">The shape style item.</param>
         public void OnApplyStyle(ShapeStyle style)
         {
-            if (_project == null)
-                return;
-
-            if (style != null)
+            if (_project != null && style != null)
             {
                 // Selected shape.
                 if (_renderers[0].State.SelectedShape != null)
@@ -1698,10 +1692,7 @@ namespace Core2D
         /// <param name="data">The data item.</param>
         public void OnApplyData(Data data)
         {
-            if (_project == null)
-                return;
-
-            if (data != null)
+            if (_project != null && data != null)
             {
                 // Selected shape.
                 if (_renderers[0].State.SelectedShape != null)
@@ -1726,15 +1717,14 @@ namespace Core2D
         /// <param name="shape">The shape instance.</param>
         public void OnAddShape(BaseShape shape)
         {
-            if (_project == null || _project.CurrentContainer == null)
-                return;
-
-            var layer = _project.CurrentContainer.CurrentLayer;
-            if (layer != null && shape != null)
+            if (_project != null && _project.CurrentContainer != null)
             {
-                _project.AddShape(layer, shape);
+                var layer = _project.CurrentContainer.CurrentLayer;
+                if (layer != null && shape != null)
+                {
+                    _project.AddShape(layer, shape);
+                }
             }
-
         }
 
         /// <summary>
@@ -1743,14 +1733,14 @@ namespace Core2D
         /// <param name="shape">The shape instance.</param>
         public void OnRemoveShape(BaseShape shape)
         {
-            if (_project == null || _project.CurrentContainer == null)
-                return;
-
-            var layer = _project.CurrentContainer.CurrentLayer;
-            if (layer != null && shape != null)
+            if (_project != null && _project.CurrentContainer == null)
             {
-                _project.RemoveShape(layer, shape);
-                _project.CurrentContainer.CurrentShape = layer.Shapes.FirstOrDefault();
+                var layer = _project.CurrentContainer.CurrentLayer;
+                if (layer != null && shape != null)
+                {
+                    _project.RemoveShape(layer, shape);
+                    _project.CurrentContainer.CurrentShape = layer.Shapes.FirstOrDefault();
+                }
             }
         }
 
@@ -1759,20 +1749,20 @@ namespace Core2D
         /// </summary>
         public void OnAddTemplate()
         {
-            if (_project == null)
-                return;
-
-            var template = default(Template);
-            if (_projectFactory != null)
+            if (_project != null)
             {
-                template = _projectFactory.GetTemplate(_project, "Empty");
-            }
-            else
-            {
-                template = Template.Create(Constants.DefaultTemplateName);
-            }
+                var template = default(Template);
+                if (_projectFactory != null)
+                {
+                    template = _projectFactory.GetTemplate(_project, "Empty");
+                }
+                else
+                {
+                    template = Template.Create(Constants.DefaultTemplateName);
+                }
 
-            _project.AddTemplate(template);
+                _project.AddTemplate(template);
+            }
         }
 
         /// <summary>
@@ -1805,13 +1795,13 @@ namespace Core2D
         /// <param name="template">The template object.</param>
         public void OnApplyTemplate(Template template)
         {
-            if (_project == null)
-                return;
-
-            var page = _project.CurrentContainer as Page;
-            if (page != null && template != null)
+            if (_project != null)
             {
-                _project.ApplyTemplate(page, template);
+                var page = _project.CurrentContainer as Page;
+                if (page != null && template != null)
+                {
+                    _project.ApplyTemplate(page, template);
+                }
             }
         }
 
@@ -1821,23 +1811,25 @@ namespace Core2D
         /// <param name="path">The image path.</param>
         public async Task<string> OnAddImageKey(string path)
         {
-            if (_project == null)
-                return null;
-
-            if (path == null || string.IsNullOrEmpty(path))
+            if (_project != null)
             {
-                var key = await GetImageKey();
-                if (key == null || string.IsNullOrEmpty(key))
-                    return null;
+                if (path == null || string.IsNullOrEmpty(path))
+                {
+                    var key = await GetImageKey();
+                    if (key == null || string.IsNullOrEmpty(key))
+                        return null;
 
-                return key;
+                    return key;
+                }
+                else
+                {
+                    var bytes = System.IO.File.ReadAllBytes(path);
+                    var key = _project.AddImageFromFile(path, bytes);
+                    return key;
+                }
             }
-            else
-            {
-                var bytes = System.IO.File.ReadAllBytes(path);
-                var key = _project.AddImageFromFile(path, bytes);
-                return key;
-            }
+
+            return null;
         }
 
         /// <summary>
@@ -1846,10 +1838,7 @@ namespace Core2D
         /// <param name="key">The image key.</param>
         public void OnRemoveImageKey(string key)
         {
-            if (_project == null)
-                return;
-
-            if (key != null)
+            if (_project != null && key != null)
             {
                 _project.RemoveImage(key);
             }
@@ -1861,10 +1850,10 @@ namespace Core2D
         /// <param name="item">The selected item.</param>
         public void OnSelectedItemChanged(object item)
         {
-            if (_project == null)
-                return;
-
-            _project.Selected = item;
+            if (_project != null)
+            {
+                _project.Selected = item;
+            }
         }
 
         /// <summary>
@@ -1873,37 +1862,8 @@ namespace Core2D
         /// <param name="item">The parent item.</param>
         public void OnAddPage(object item)
         {
-            if (_project == null || _project.CurrentDocument == null)
-                return;
-
-            var container = default(Page);
-            if (_projectFactory != null)
+            if (_project != null && _project.CurrentDocument != null)
             {
-                container = _projectFactory.GetPage(_project, Constants.DefaultPageName);
-            }
-            else
-            {
-                container = Page.Create(Constants.DefaultPageName);
-            }
-
-            _project.AddPage(_project.CurrentDocument, container);
-            _project.CurrentContainer = container;
-        }
-
-        /// <summary>
-        /// Insert page before current page.
-        /// </summary>
-        /// <param name="item">The parent item.</param>
-        public void OnInsertPageBefore(object item)
-        {
-            if (_project == null || _project.CurrentDocument == null)
-                return;
-
-            if (item is Page)
-            {
-                var selected = item as Page;
-                int index = _project.CurrentDocument.Pages.IndexOf(selected);
-
                 var container = default(Page);
                 if (_projectFactory != null)
                 {
@@ -1914,8 +1874,37 @@ namespace Core2D
                     container = Page.Create(Constants.DefaultPageName);
                 }
 
-                _project.AddPageAt(_project.CurrentDocument, container, index);
+                _project.AddPage(_project.CurrentDocument, container);
                 _project.CurrentContainer = container;
+            }
+        }
+
+        /// <summary>
+        /// Insert page before current page.
+        /// </summary>
+        /// <param name="item">The parent item.</param>
+        public void OnInsertPageBefore(object item)
+        {
+            if (_project != null && _project.CurrentDocument != null)
+            {
+                if (item is Page)
+                {
+                    var selected = item as Page;
+                    int index = _project.CurrentDocument.Pages.IndexOf(selected);
+
+                    var container = default(Page);
+                    if (_projectFactory != null)
+                    {
+                        container = _projectFactory.GetPage(_project, Constants.DefaultPageName);
+                    }
+                    else
+                    {
+                        container = Page.Create(Constants.DefaultPageName);
+                    }
+
+                    _project.AddPageAt(_project.CurrentDocument, container, index);
+                    _project.CurrentContainer = container;
+                }
             }
         }
 
@@ -1925,26 +1914,26 @@ namespace Core2D
         /// <param name="item">The parent item.</param>
         public void OnInsertPageAfter(object item)
         {
-            if (_project == null || _project.CurrentDocument == null)
-                return;
-
-            if (item is Page)
+            if (_project != null && _project.CurrentDocument != null)
             {
-                var selected = item as Page;
-                int index = _project.CurrentDocument.Pages.IndexOf(selected);
-
-                var container = default(Page);
-                if (_projectFactory != null)
+                if (item is Page)
                 {
-                    container = _projectFactory.GetPage(_project, Constants.DefaultPageName);
-                }
-                else
-                {
-                    container = Page.Create(Constants.DefaultPageName);
-                }
+                    var selected = item as Page;
+                    int index = _project.CurrentDocument.Pages.IndexOf(selected);
 
-                _project.AddPageAt(_project.CurrentDocument, container, index + 1);
-                _project.CurrentContainer = container;
+                    var container = default(Page);
+                    if (_projectFactory != null)
+                    {
+                        container = _projectFactory.GetPage(_project, Constants.DefaultPageName);
+                    }
+                    else
+                    {
+                        container = Page.Create(Constants.DefaultPageName);
+                    }
+
+                    _project.AddPageAt(_project.CurrentDocument, container, index + 1);
+                    _project.CurrentContainer = container;
+                }
             }
         }
 
@@ -1954,38 +1943,8 @@ namespace Core2D
         /// <param name="item">The parent item.</param>
         public void OnAddDocument(object item)
         {
-            if (_project == null)
-                return;
-
-            var document = default(Document);
-            if (_projectFactory != null)
+            if (_project != null)
             {
-                document = _projectFactory.GetDocument(_project, Constants.DefaultDocumentName);
-            }
-            else
-            {
-                document = Document.Create(Constants.DefaultDocumentName);
-            }
-
-            _project.AddDocument(document);
-            _project.CurrentDocument = document;
-            _project.CurrentContainer = document.Pages.FirstOrDefault();
-        }
-
-        /// <summary>
-        /// Insert document before current document.
-        /// </summary>
-        /// <param name="item">The parent item.</param>
-        public void OnInsertDocumentBefore(object item)
-        {
-            if (_project == null)
-                return;
-
-            if (item is Document)
-            {
-                var selected = item as Document;
-                int index = _project.Documents.IndexOf(selected);
-
                 var document = default(Document);
                 if (_projectFactory != null)
                 {
@@ -1996,9 +1955,39 @@ namespace Core2D
                     document = Document.Create(Constants.DefaultDocumentName);
                 }
 
-                _project.AddDocumentAt(document, index);
+                _project.AddDocument(document);
                 _project.CurrentDocument = document;
                 _project.CurrentContainer = document.Pages.FirstOrDefault();
+            }
+        }
+
+        /// <summary>
+        /// Insert document before current document.
+        /// </summary>
+        /// <param name="item">The parent item.</param>
+        public void OnInsertDocumentBefore(object item)
+        {
+            if (_project != null)
+            {
+                if (item is Document)
+                {
+                    var selected = item as Document;
+                    int index = _project.Documents.IndexOf(selected);
+
+                    var document = default(Document);
+                    if (_projectFactory != null)
+                    {
+                        document = _projectFactory.GetDocument(_project, Constants.DefaultDocumentName);
+                    }
+                    else
+                    {
+                        document = Document.Create(Constants.DefaultDocumentName);
+                    }
+
+                    _project.AddDocumentAt(document, index);
+                    _project.CurrentDocument = document;
+                    _project.CurrentContainer = document.Pages.FirstOrDefault();
+                }
             }
         }
 
@@ -2008,27 +1997,27 @@ namespace Core2D
         /// <param name="item">The parent item.</param>
         public void OnInsertDocumentAfter(object item)
         {
-            if (_project == null)
-                return;
-
-            if (item is Document)
+            if (_project != null)
             {
-                var selected = item as Document;
-                int index = _project.Documents.IndexOf(selected);
-
-                var document = default(Document);
-                if (_projectFactory != null)
+                if (item is Document)
                 {
-                    document = _projectFactory.GetDocument(_project, Constants.DefaultDocumentName);
-                }
-                else
-                {
-                    document = Document.Create(Constants.DefaultDocumentName);
-                }
+                    var selected = item as Document;
+                    int index = _project.Documents.IndexOf(selected);
 
-                _project.AddDocumentAt(document, index + 1);
-                _project.CurrentDocument = document;
-                _project.CurrentContainer = document.Pages.FirstOrDefault();
+                    var document = default(Document);
+                    if (_projectFactory != null)
+                    {
+                        document = _projectFactory.GetDocument(_project, Constants.DefaultDocumentName);
+                    }
+                    else
+                    {
+                        document = Document.Create(Constants.DefaultDocumentName);
+                    }
+
+                    _project.AddDocumentAt(document, index + 1);
+                    _project.CurrentDocument = document;
+                    _project.CurrentContainer = document.Pages.FirstOrDefault();
+                }
             }
         }
 
@@ -2079,7 +2068,6 @@ namespace Core2D
         {
             Deselect();
             SetRenderersImageCache(project);
-
             Project = project;
             Project.History = new History();
             ProjectPath = path;
