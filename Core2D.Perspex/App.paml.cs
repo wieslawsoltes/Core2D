@@ -102,7 +102,6 @@ namespace Core2D.Perspex
             try
             {
                 InitializeEditor();
-
                 LoadRecent();
 
                 _mainWindow = new Windows.MainWindow();
