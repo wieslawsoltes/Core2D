@@ -1139,7 +1139,7 @@ namespace Core2D
                 Deselect(_project.CurrentContainer);
                 Select(
                     _project.CurrentContainer,
-                    ImmutableHashSet.CreateRange<BaseShape>(_project.CurrentContainer.CurrentLayer.Shapes));
+                    ImmutableHashSet.CreateRange(_project.CurrentContainer.CurrentLayer.Shapes));
             }
             catch (Exception ex)
             {
