@@ -147,6 +147,25 @@ namespace Core2D
         }
 
         /// <summary>
+        /// Add templates.
+        /// </summary>
+        /// <param name="project">The project instance.</param>
+        /// <param name="templates">The templates collection.</param>
+        public static void AddTemplates(this Project project, IEnumerable<Template> templates)
+        {
+            if (project.Templates != null && templates != null)
+            {
+                var builder = project.Templates.ToBuilder();
+                builder.AddRange(templates);
+
+                var previous = project.Templates;
+                var next = builder.ToImmutable();
+                project.History.Snapshot(previous, next, (p) => project.Templates = p);
+                project.Templates = next;
+            }
+        }
+
+        /// <summary>
         /// Remove template.
         /// </summary>
         /// <param name="project">The project instance.</param>
