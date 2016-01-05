@@ -64,15 +64,15 @@
         <lists:XGroupDragAndDropListBox x:Name="groupsListBox" DataContext="{Binding CurrentGroupLibrary.Items}" Tag="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" ItemsSource="{Binding}" SelectedItem="{Binding DataContext.CurrentGroupLibrary.Selected, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" BorderBrush="{x:Null}" HorizontalContentAlignment="Stretch" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
             <lists:XGroupDragAndDropListBox.Resources>
                 <ContextMenu x:Key="GroupContextMenu" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
-                    <MenuItem Header="_Add Group" InputGestureText="Ctrl+N" Command="{x:Static core:Commands.AddGroupCommand}"/>
+                    <MenuItem Header="_Add Group" InputGestureText="Ctrl+N" Command="{x:Static core:Commands.AddGroupCommand}" CommandParameter="{Binding DataContext.CurrentGroupLibrary, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"/>
                     <Separator/>
-                    <MenuItem Header="_Delete" InputGestureText="Del" Command="{x:Static core:Commands.RemoveGroupCommand}"/>
+                    <MenuItem Header="_Delete" InputGestureText="Del" Command="{x:Static core:Commands.RemoveGroupCommand}" CommandParameter="{Binding}"/>
                     <Separator/>
                     <MenuItem Header="E_xport" InputGestureText="Ctrl+E" Command="{x:Static core:Commands.ExportGroupCommand}" CommandParameter="{Binding}"/>
                 </ContextMenu>
             </lists:XGroupDragAndDropListBox.Resources>
             <lists:XGroupDragAndDropListBox.InputBindings>
-                <KeyBinding Command="{x:Static core:Commands.AddGroupCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type lists:XGroupDragAndDropListBox}}}" Gesture="Ctrl+N"/>
+                <KeyBinding Command="{x:Static core:Commands.AddGroupCommand}" CommandParameter="{Binding DataContext.CurrentGroupLibrary, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Gesture="Ctrl+N"/>
                 <KeyBinding Command="{x:Static core:Commands.RemoveGroupCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type lists:XGroupDragAndDropListBox}}}" Gesture="Del"/>
                 <KeyBinding Command="{x:Static core:Commands.ExportGroupCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type lists:XGroupDragAndDropListBox}}}" Gesture="Ctrl+E"/>
             </lists:XGroupDragAndDropListBox.InputBindings>

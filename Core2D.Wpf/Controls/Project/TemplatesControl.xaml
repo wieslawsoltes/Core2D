@@ -32,17 +32,17 @@
         <lists:TemplateDragAndDropListBox DataContext="{Binding Templates}" Tag="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" ItemsSource="{Binding}" SelectedItem="{Binding DataContext.CurrentTemplate, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" BorderBrush="{x:Null}" HorizontalContentAlignment="Stretch" Grid.Row="1">
             <lists:TemplateDragAndDropListBox.Resources>
                 <ContextMenu x:Key="TemplateContextMenu" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
-                    <MenuItem Header="_Edit Template" InputGestureText="" Command="{x:Static core:Commands.EditTemplateCommand}"/>
+                    <MenuItem Header="_Edit Template" InputGestureText="" Command="{x:Static core:Commands.EditTemplateCommand}" CommandParameter="{Binding}"/>
                     <Separator/>
                     <MenuItem Header="_Add Template" InputGestureText="Ctrl+N" Command="{x:Static core:Commands.AddTemplateCommand}"/>
                     <Separator/>
-                    <MenuItem Header="_Delete" InputGestureText="Del" Command="{x:Static core:Commands.RemoveTemplateCommand}"/>
+                    <MenuItem Header="_Delete" InputGestureText="Del" Command="{x:Static core:Commands.RemoveTemplateCommand}" CommandParameter="{Binding}"/>
                     <Separator/>
                     <MenuItem Header="E_xport" InputGestureText="Ctrl+E" Command="{x:Static core:Commands.ExportTemplateCommand}" CommandParameter="{Binding}"/>
                 </ContextMenu>
             </lists:TemplateDragAndDropListBox.Resources>
             <lists:TemplateDragAndDropListBox.InputBindings>
-                <KeyBinding Command="{x:Static core:Commands.AddTemplateCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type lists:TemplateDragAndDropListBox}}}" Gesture="Ctrl+N"/>
+                <KeyBinding Command="{x:Static core:Commands.AddTemplateCommand}" Gesture="Ctrl+N"/>
                 <KeyBinding Command="{x:Static core:Commands.RemoveTemplateCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type lists:TemplateDragAndDropListBox}}}" Gesture="Del"/>
                 <KeyBinding Command="{x:Static core:Commands.ExportTemplateCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type lists:TemplateDragAndDropListBox}}}" Gesture="Ctrl+E"/>
             </lists:TemplateDragAndDropListBox.InputBindings>

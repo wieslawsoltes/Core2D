@@ -58,12 +58,12 @@
                 </DataTemplate>
             </lists:LayerDragAndDropListBox.ItemTemplate>
         </lists:LayerDragAndDropListBox>
-        <Grid Grid.Row="2" Margin="2">
+        <Grid Grid.Row="2">
             <Grid.Style>
                 <Style TargetType="Grid">
                     <Setter Property="Visibility" Value="Visible"/>
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding}" Value="{x:Null}">
+                        <DataTrigger Binding="{Binding CurrentLayer}" Value="{x:Null}">
                             <Setter Property="Visibility" Value="Hidden"/>
                         </DataTrigger>
                     </Style.Triggers>
