@@ -111,7 +111,7 @@ namespace Core2D
 
             if (_pointsCache != null)
             {
-                Editor.MovePointsBy(_pointsCache, dx, dy);
+                Editor.MoveShapesBy(_pointsCache, dx, dy);
             }
 
             if (_shapesCache != null)
@@ -226,7 +226,7 @@ namespace Core2D
                                     {
                                         if (state.Points != null)
                                         {
-                                            Editor.MovePointsBy(state.Points, state.DeltaX, state.DeltaY);
+                                            Editor.MoveShapesBy(state.Points, state.DeltaX, state.DeltaY);
                                         }
 
                                         if (state.Shapes != null)
