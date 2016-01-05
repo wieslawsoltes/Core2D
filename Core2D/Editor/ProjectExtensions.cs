@@ -370,6 +370,27 @@ namespace Core2D
         }
 
         /// <summary>
+        /// Replace shape at specified index.
+        /// </summary>
+        /// <param name="project">The project instance.</param>
+        /// <param name="layer">The layer instance.</param>
+        /// <param name="shape">The shape instance.</param>
+        /// /// <param name="index">The shape index.</param>
+        public static void ReplaceShape(this Project project, Layer layer, BaseShape shape, int index)
+        {
+            if (layer != null && shape != null && index >= 0)
+            {
+                var builder = layer.Shapes.ToBuilder();
+                builder[index] = shape;
+
+                var previous = layer.Shapes;
+                var next = builder.ToImmutable();
+                project.History.Snapshot(previous, next, (p) => layer.Shapes = p);
+                layer.Shapes = next;
+            }
+        }
+
+        /// <summary>
         /// Add property.
         /// </summary>
         /// <param name="project">The project instance.</param>
