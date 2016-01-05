@@ -151,6 +151,27 @@ namespace Core2D
         }
 
         /// <summary>
+        /// Replace page at specified index.
+        /// </summary>
+        /// <param name="project">The project instance.</param>
+        /// <param name="document">The document instance.</param>
+        /// <param name="page">The page instance.</param>
+        /// <param name="index">The page index.</param>
+        public static void ReplacePage(this Project project, Document document, Page page, int index)
+        {
+            if (document != null && page != null && index >= 0)
+            {
+                var builder = document.Pages.ToBuilder();
+                builder[index] = page;
+
+                var previous = document.Pages;
+                var next = builder.ToImmutable();
+                project.History.Snapshot(previous, next, (p) => document.Pages = p);
+                document.Pages = next;
+            }
+        }
+
+        /// <summary>
         /// Add template.
         /// </summary>
         /// <param name="project">The project instance.</param>
