@@ -1174,6 +1174,25 @@ namespace Core2D
             }
         }
 
+        private void ClearLayer(Layer layer)
+        {
+            if (layer != null)
+            {
+                var previous = layer.Shapes;
+                var next = ImmutableArray.Create<BaseShape>();
+                _project.History.Snapshot(previous, next, (p) => layer.Shapes = p);
+                layer.Shapes = next;
+            }
+        }
+
+        private void ClearLayers(IEnumerable<Layer> layers)
+        {
+            foreach (var layer in layers)
+            {
+                ClearLayer(layer);
+            }
+        }
+
         /// <summary>
         /// Remove all shapes.
         /// </summary>
