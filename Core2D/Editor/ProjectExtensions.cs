@@ -609,6 +609,25 @@ namespace Core2D
         }
 
         /// <summary>
+        /// Add style libraries.
+        /// </summary>
+        /// <param name="project">The project instance.</param>
+        /// <param name="libraries">The style libraries collection.</param>
+        public static void AddStyleLibraries(this Project project, IEnumerable<Library<ShapeStyle>> libraries)
+        {
+            if (project.StyleLibraries != null && libraries != null)
+            {
+                var builder = project.StyleLibraries.ToBuilder();
+                builder.AddRange(libraries);
+
+                var previous = project.StyleLibraries;
+                var next = builder.ToImmutable();
+                project.History.Snapshot(previous, next, (p) => project.StyleLibraries = p);
+                project.StyleLibraries = next;
+            }
+        }
+
+        /// <summary>
         /// Remove style library.
         /// </summary>
         /// <param name="project">The project instance.</param>
