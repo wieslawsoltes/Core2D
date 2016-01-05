@@ -77,7 +77,7 @@ namespace Core2D.Wpf
                     _mainWindow.AutoSaveLayout(_editor);
                 }
 
-                DeInitializeContext();
+                DeInitializeEditor();
             };
 
             _editor.View = _mainWindow;
@@ -192,7 +192,7 @@ namespace Core2D.Wpf
             _editor.Renderers[0].State.DrawShapeState.Flags = ShapeStateFlags.Visible;
             _editor.Renderers[1].State.DrawShapeState.Flags = ShapeStateFlags.Visible;
 
-            _editor.GetImageKey = async () => await GetImageKey();
+            _editor.GetImageKey = async () => await OnGetImageKey();
 
             _editor.DefaultTools();
 
@@ -381,7 +381,7 @@ namespace Core2D.Wpf
         /// <summary>
         /// De-initialize <see cref="Editor"/> object.
         /// </summary>
-        private void DeInitializeContext()
+        private void DeInitializeEditor()
         {
             _editor.Dispose();
         }
@@ -390,7 +390,7 @@ namespace Core2D.Wpf
         /// Get the <see cref="XImage"/> key from file path.
         /// </summary>
         /// <returns>The image key.</returns>
-        private async Task<string> GetImageKey()
+        private async Task<string> OnGetImageKey()
         {
             var dlg = new OpenFileDialog()
             {
@@ -566,7 +566,7 @@ namespace Core2D.Wpf
                         _editor.ExportAsPdf(dlg.FileName, item);
                         break;
                     case 2:
-                        ExportAsEmf(dlg.FileName);
+                        OnExportAsEmf(dlg.FileName);
                         break;
                     case 3:
                         _editor.ExportAsDxf(dlg.FileName);
@@ -823,7 +823,7 @@ namespace Core2D.Wpf
         /// Save currently selected shapes as enhanced metafile.
         /// </summary>
         /// <param name="path">The file path.</param>
-        private void ExportAsEmf(string path)
+        private void OnExportAsEmf(string path)
         {
             try
             {
