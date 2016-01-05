@@ -37,7 +37,7 @@
                 </ContextMenu>
             </lists:LayerDragAndDropListBox.Resources>
             <lists:LayerDragAndDropListBox.InputBindings>
-                <KeyBinding Command="{x:Static core:Commands.AddLayerCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type lists:LayerDragAndDropListBox}}}" Gesture="Ctrl+N"/>
+                <KeyBinding Command="{x:Static core:Commands.AddLayerCommand}" CommandParameter="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Gesture="Ctrl+N"/>
                 <KeyBinding Command="{x:Static core:Commands.RemoveLayerCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type lists:LayerDragAndDropListBox}}}" Gesture="Del"/>
             </lists:LayerDragAndDropListBox.InputBindings>
             <lists:LayerDragAndDropListBox.ItemContainerStyle>
