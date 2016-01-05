@@ -1091,12 +1091,7 @@ namespace Core2D
                 {
                     var document = item as Document;
                     var clone = Clone(_pageToCopy);
-
-                    var previous = document.Pages;
-                    var next = document.Pages.Add(clone);
-                    _project.History.Snapshot(previous, next, (p) => document.Pages = p);
-                    document.Pages = next;
-
+                    _project.AddPage(document, clone);
                     _project.CurrentContainer = clone;
                 }
                 else if (_documentToCopy != null)
