@@ -653,13 +653,7 @@ namespace Core2D
         /// <param name="style">The style instance.</param>
         public static void AddStyle(this Project project, Library<ShapeStyle> library, ShapeStyle style)
         {
-            if (library != null && library.Items != null && style != null)
-            {
-                var previous = library.Items;
-                var next = library.Items.Add(style);
-                project.History.Snapshot(previous, next, (p) => library.Items = p);
-                library.Items = next;
-            }
+            AddItem(project, library, style);
         }
 
         /// <summary>
@@ -723,13 +717,7 @@ namespace Core2D
         /// <param name="group">The group instance.</param>
         public static void AddGroup(this Project project, Library<XGroup> library, XGroup group)
         {
-            if (library != null && library.Items != null && group != null)
-            {
-                var previous = library.Items;
-                var next = library.Items.Add(group);
-                project.History.Snapshot(previous, next, (p) => library.Items = p);
-                library.Items = next;
-            }
+            AddItem(project, library, group);
         }
 
         /// <summary>
