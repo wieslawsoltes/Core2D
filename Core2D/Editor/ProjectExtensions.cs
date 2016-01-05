@@ -72,6 +72,26 @@ namespace Core2D
         }
 
         /// <summary>
+        /// Replace document at specified index.
+        /// </summary>
+        /// <param name="project">The project instance.</param>
+        /// <param name="document">The document instance.</param>
+        /// <param name="index">The document index.</param>
+        public static void ReplaceDocument(this Project project, Document document, int index)
+        {
+            if (document != null && index >= 0)
+            {
+                var builder = project.Documents.ToBuilder();
+                builder[index] = document;
+
+                var previous = project.Documents;
+                var next = builder.ToImmutable();
+                project.History.Snapshot(previous, next, (p) => project.Documents = p);
+                project.Documents = next;
+            }
+        }
+
+        /// <summary>
         /// Add page.
         /// </summary>
         /// <param name="project">The project instance.</param>
