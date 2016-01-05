@@ -298,6 +298,24 @@ namespace Core2D
         }
 
         /// <summary>
+        /// Add shape at specified index.
+        /// </summary>
+        /// <param name="project">The project instance.</param>
+        /// <param name="layer">The layer instance.</param>
+        /// <param name="shape">The shape instance.</param>
+        /// <param name="index">The shape index.</param>
+        public static void AddShapeAt(this Project project, Layer layer, BaseShape shape, int index)
+        {
+            if (layer != null && layer.Shapes != null && shape != null)
+            {
+                var previous = layer.Shapes;
+                var next = layer.Shapes.Insert(index, shape);
+                project.History.Snapshot(previous, next, (p) => layer.Shapes = p);
+                layer.Shapes = next;
+            }
+        }
+
+        /// <summary>
         /// Add shapes.
         /// </summary>
         /// <param name="project">The project instance.</param>
