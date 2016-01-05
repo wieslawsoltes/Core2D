@@ -1080,16 +1080,7 @@ namespace Core2D
                     {
                         int index = document.Pages.IndexOf(page);
                         var clone = Clone(_pageToCopy);
-
-                        var builder = document.Pages.ToBuilder();
-                        builder[index] = clone;
-                        document.Pages = builder.ToImmutable();
-
-                        var previous = document.Pages;
-                        var next = builder.ToImmutable();
-                        _project.History.Snapshot(previous, next, (p) => document.Pages = p);
-                        document.Pages = next;
-
+                        _project.ReplacePage(document, clone, index);
                         _project.CurrentContainer = clone;
                     }
                 }
