@@ -556,6 +556,25 @@ namespace Core2D
         }
 
         /// <summary>
+        /// Add group libraries.
+        /// </summary>
+        /// <param name="project">The project instance.</param>
+        /// <param name="libraries">The group libraries collection.</param>
+        public static void AddGroupLibraries(this Project project, IEnumerable<Library<XGroup>> libraries)
+        {
+            if (project.GroupLibraries != null && libraries != null)
+            {
+                var builder = project.GroupLibraries.ToBuilder();
+                builder.AddRange(libraries);
+
+                var previous = project.GroupLibraries;
+                var next = builder.ToImmutable();
+                project.History.Snapshot(previous, next, (p) => project.GroupLibraries = p);
+                project.GroupLibraries = next;
+            }
+        }
+
+        /// <summary>
         /// Remove group library.
         /// </summary>
         /// <param name="project">The project instance.</param>
