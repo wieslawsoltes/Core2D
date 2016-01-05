@@ -279,17 +279,13 @@ namespace Core2D
                         page = Page.Create(Constants.DefaultPageName);
                     }
 
-                    var previous = document.Pages;
-                    var next = document.Pages.Add(page);
-                    _project.History.Snapshot(previous, next, (p) => document.Pages = p);
-                    document.Pages = next;
-
+                    _project.AddPage(document, page);
                     _project.CurrentContainer = page;
                 }
             }
             else if (item is Document)
             {
-                var selected = item as Document;
+                var document = item as Document;
 
                 var page = default(Page);
                 if (_projectFactory != null)
@@ -301,11 +297,7 @@ namespace Core2D
                     page = Page.Create(Constants.DefaultPageName);
                 }
 
-                var previous = selected.Pages;
-                var next = selected.Pages.Add(page);
-                _project.History.Snapshot(previous, next, (p) => selected.Pages = p);
-                selected.Pages = next;
-
+                _project.AddPage(document, page);
                 _project.CurrentContainer = page;
             }
             else if (item is Project)
@@ -320,11 +312,7 @@ namespace Core2D
                     document = Document.Create(Constants.DefaultDocumentName);
                 }
 
-                var previous = _project.Documents;
-                var next = _project.Documents.Add(document);
-                _project.History.Snapshot(previous, next, (p) => _project.Documents = p);
-                _project.Documents = next;
-
+                _project.AddDocument(document);
                 _project.CurrentDocument = document;
                 _project.CurrentContainer = document.Pages.FirstOrDefault();
             }
@@ -360,11 +348,12 @@ namespace Core2D
             try
             {
                 var project = Project.Open(path, _jsonSerializer);
-
-                Unload();
-                Load(project, path);
-
-                AddRecent(path, project.Name);
+                if (project != null)
+                {
+                    Unload();
+                    Load(project, path);
+                    AddRecent(path, project.Name);
+                }
             }
             catch (Exception ex)
             {
@@ -383,7 +372,11 @@ namespace Core2D
         /// </summary>
         public void OnClose()
         {
-            _project.History.Reset();
+            if (_project != null)
+            {
+                _project.History.Reset();
+            }
+
             Unload();
         }
 
@@ -673,32 +666,20 @@ namespace Core2D
                 {
                     case ImportType.Style:
                         {
-                            var sg = item as Library<ShapeStyle>;
+                            var sl = item as Library<ShapeStyle>;
                             var json = Project.ReadUtf8Text(path);
                             var import = _jsonSerializer.Deserialize<ShapeStyle>(json);
 
-                            var previous = sg.Items;
-                            var next = sg.Items.Add(import);
-                            _project.History.Snapshot(previous, next, (p) => sg.Items = p);
-                            sg.Items = next;
+                            _project.AddStyle(sl, import);
                         }
                         break;
                     case ImportType.Styles:
                         {
-                            var sg = item as Library<ShapeStyle>;
+                            var sl = item as Library<ShapeStyle>;
                             var json = Project.ReadUtf8Text(path);
                             var import = _jsonSerializer.Deserialize<IList<ShapeStyle>>(json);
 
-                            var builder = sg.Items.ToBuilder();
-                            foreach (var style in import)
-                            {
-                                builder.Add(style);
-                            }
-
-                            var previous = sg.Items;
-                            var next = builder.ToImmutable();
-                            _project.History.Snapshot(previous, next, (p) => sg.Items = p);
-                            sg.Items = next;
+                            _project.AddItems(sl, import);
                         }
                         break;
                     case ImportType.StyleLibrary:
@@ -707,10 +688,7 @@ namespace Core2D
                             var json = Project.ReadUtf8Text(path);
                             var import = _jsonSerializer.Deserialize<Library<ShapeStyle>>(json);
 
-                            var previous = project.StyleLibraries;
-                            var next = project.StyleLibraries.Add(import);
-                            _project.History.Snapshot(previous, next, (p) => project.StyleLibraries = p);
-                            project.StyleLibraries = next;
+                            _project.AddStyleLibrary(import);
                         }
                         break;
                     case ImportType.StyleLibraries:
@@ -719,16 +697,7 @@ namespace Core2D
                             var json = Project.ReadUtf8Text(path);
                             var import = _jsonSerializer.Deserialize<IList<Library<ShapeStyle>>>(json);
 
-                            var builder = project.StyleLibraries.ToBuilder();
-                            foreach (var sg in import)
-                            {
-                                builder.Add(sg);
-                            }
-
-                            var previous = project.StyleLibraries;
-                            var next = builder.ToImmutable();
-                            _project.History.Snapshot(previous, next, (p) => project.StyleLibraries = p);
-                            project.StyleLibraries = next;
+                            _project.AddStyleLibraries(import);
                         }
                         break;
                     case ImportType.Group:
@@ -741,10 +710,7 @@ namespace Core2D
                             TryToRestoreStyles(shapes);
                             TryToRestoreRecords(shapes);
 
-                            var previous = gl.Items;
-                            var next = gl.Items.Add(import);
-                            _project.History.Snapshot(previous, next, (p) => gl.Items = p);
-                            gl.Items = next;
+                            _project.AddGroup(gl, import);
                         }
                         break;
                     case ImportType.Groups:
@@ -753,20 +719,10 @@ namespace Core2D
                             var json = Project.ReadUtf8Text(path);
                             var import = _jsonSerializer.Deserialize<IList<XGroup>>(json);
 
-                            var shapes = import;
-                            TryToRestoreStyles(shapes);
-                            TryToRestoreRecords(shapes);
+                            TryToRestoreStyles(import);
+                            TryToRestoreRecords(import);
 
-                            var builder = gl.Items.ToBuilder();
-                            foreach (var group in import)
-                            {
-                                builder.Add(group);
-                            }
-
-                            var previous = gl.Items;
-                            var next = builder.ToImmutable();
-                            _project.History.Snapshot(previous, next, (p) => gl.Items = p);
-                            gl.Items = next;
+                            _project.AddItems(gl, import);
                         }
                         break;
                     case ImportType.GroupLibrary:
@@ -775,14 +731,10 @@ namespace Core2D
                             var json = Project.ReadUtf8Text(path);
                             var import = _jsonSerializer.Deserialize<Library<XGroup>>(json);
 
-                            var shapes = import.Items;
-                            TryToRestoreStyles(shapes);
-                            TryToRestoreRecords(shapes);
+                            TryToRestoreStyles(import.Items);
+                            TryToRestoreRecords(import.Items);
 
-                            var previous = project.GroupLibraries;
-                            var next = project.GroupLibraries.Add(import);
-                            _project.History.Snapshot(previous, next, (p) => project.GroupLibraries = p);
-                            project.GroupLibraries = next;
+                            _project.AddGroupLibrary(import);
                         }
                         break;
                     case ImportType.GroupLibraries:
@@ -795,16 +747,7 @@ namespace Core2D
                             TryToRestoreStyles(shapes);
                             TryToRestoreRecords(shapes);
 
-                            var builder = project.GroupLibraries.ToBuilder();
-                            foreach (var library in import)
-                            {
-                                builder.Add(library);
-                            }
-
-                            var previous = project.GroupLibraries;
-                            var next = builder.ToImmutable();
-                            _project.History.Snapshot(previous, next, (p) => project.GroupLibraries = p);
-                            project.GroupLibraries = next;
+                            _project.AddGroupLibraries(import);
                         }
                         break;
                     case ImportType.Template:
@@ -817,10 +760,7 @@ namespace Core2D
                             TryToRestoreStyles(shapes);
                             TryToRestoreRecords(shapes);
 
-                            var previous = project.Templates;
-                            var next = project.Templates.Add(import);
-                            _project.History.Snapshot(previous, next, (p) => project.Templates = p);
-                            project.Templates = next;
+                            _project.AddTemplate(import);
                         }
                         break;
                     case ImportType.Templates:
@@ -833,16 +773,7 @@ namespace Core2D
                             TryToRestoreStyles(shapes);
                             TryToRestoreRecords(shapes);
 
-                            var builder = project.Templates.ToBuilder();
-                            foreach (var template in import)
-                            {
-                                builder.Add(template);
-                            }
-
-                            var previous = project.Templates;
-                            var next = builder.ToImmutable();
-                            _project.History.Snapshot(previous, next, (p) => project.Templates = p);
-                            project.Templates = next;
+                            _project.AddTemplates(import);
                         }
                         break;
                 }
