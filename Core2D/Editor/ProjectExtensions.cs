@@ -770,5 +770,25 @@ namespace Core2D
                 library.Items = next;
             }
         }
+
+        /// <summary>
+        /// Add items.
+        /// </summary>
+        /// <param name="project">The project instance.</param>
+        /// <param name="library">The library instance.</param>
+        /// <param name="items">The items collection.</param>
+        public static void AddItems<T>(this Project project, Library<T> library, IEnumerable<T> items)
+        {
+            if (library != null && library.Items != null && items != null)
+            {
+                var builder = library.Items.ToBuilder();
+                builder.AddRange(items);
+
+                var previous = library.Items;
+                var next = builder.ToImmutable();
+                project.History.Snapshot(previous, next, (p) => library.Items = p);
+                library.Items = next;
+            }
+        }
     }
 }
