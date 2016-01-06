@@ -585,8 +585,15 @@ namespace Core2D
                 Add(page.Data.Properties);
             }
 
-            page.WorkingLayer.InvalidateLayer += InvalidateLayerObserver;
-            page.HelperLayer.InvalidateLayer += InvalidateLayerObserver;
+            if (page.WorkingLayer != null)
+            {
+                page.WorkingLayer.InvalidateLayer += InvalidateLayerObserver;
+            }
+
+            if (page.HelperLayer != null)
+            {
+                page.HelperLayer.InvalidateLayer += InvalidateLayerObserver;
+            }
         }
 
         private void Remove(Page page)
@@ -606,8 +613,15 @@ namespace Core2D
                 Remove(page.Data.Properties);
             }
 
-            page.WorkingLayer.InvalidateLayer -= InvalidateLayerObserver;
-            page.HelperLayer.InvalidateLayer -= InvalidateLayerObserver;
+            if (page.WorkingLayer != null)
+            {
+                page.WorkingLayer.InvalidateLayer -= InvalidateLayerObserver;
+            }
+
+            if (page.HelperLayer != null)
+            {
+                page.HelperLayer.InvalidateLayer -= InvalidateLayerObserver;
+            }
         }
 
 
@@ -628,8 +642,15 @@ namespace Core2D
                 Add(template.Layers);
             }
 
-            template.WorkingLayer.InvalidateLayer += InvalidateLayerObserver;
-            template.HelperLayer.InvalidateLayer += InvalidateLayerObserver;
+            if (template.WorkingLayer != null)
+            {
+                template.WorkingLayer.InvalidateLayer += InvalidateLayerObserver;
+            }
+
+            if (template.HelperLayer != null)
+            {
+                template.HelperLayer.InvalidateLayer += InvalidateLayerObserver;
+            }
         }
 
         private void Remove(Template template)
@@ -649,8 +670,15 @@ namespace Core2D
                 Add(template.Layers);
             }
 
-            template.WorkingLayer.InvalidateLayer -= InvalidateLayerObserver;
-            template.HelperLayer.InvalidateLayer -= InvalidateLayerObserver;
+            if (template.WorkingLayer != null)
+            {
+                template.WorkingLayer.InvalidateLayer -= InvalidateLayerObserver;
+            }
+
+            if (template.HelperLayer != null)
+            {
+                template.HelperLayer.InvalidateLayer -= InvalidateLayerObserver;
+            }
         }
 
         private void Add(Layer layer)
