@@ -34,6 +34,10 @@
     <DocumentationFile>bin\Release\Core2D.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Portable.Xaml, Version=0.7.5849.36622, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Portable.Xaml.0.8.0-alpha\lib\dotnet\Portable.Xaml.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Collections" />
     <Reference Include="System.Collections.Immutable, Version=1.1.36.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -52,6 +56,11 @@
     <Compile Include="Collections\Groups.cs" />
     <Compile Include="Collections\Shapes.cs" />
     <Compile Include="Collections\Styles.cs" />
+    <Compile Include="Converters\ArgbColorTypeConverter.cs" />
+    <Compile Include="Converters\FontStyleTypeConverter.cs" />
+    <Compile Include="Converters\ShapeStateTypeConverter.cs" />
+    <Compile Include="Converters\XPathGeometryTypeConverter.cs" />
+    <Compile Include="Core\ObservableResource.cs" />
     <Compile Include="Data\Data.cs" />
     <Compile Include="Data\Property.cs" />
     <Compile Include="Editor\Bounds\ConvexHullBounds.cs" />
@@ -183,12 +192,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Core2D.Xaml\Core2D.Xaml.csproj">
-      <Project>{26bc14e6-a039-440e-bf6f-bf45f025f114}</Project>
-      <Name>Core2D.Xaml</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

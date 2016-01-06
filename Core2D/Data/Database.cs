@@ -3,12 +3,14 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using Portable.Xaml.Markup;
 
 namespace Core2D
 {
     /// <summary>
     /// 
     /// </summary>
+    [ContentProperty("Records")]
     public class Database : ObservableObject
     {
         private string _name;

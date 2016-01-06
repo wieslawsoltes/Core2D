@@ -3,12 +3,15 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using Portable.Xaml.Markup;
 
 namespace Core2D
 {
     /// <summary>
     /// Named items library.
     /// </summary>
+    [ContentProperty("Items")]
+    [RuntimeNameProperty("Name")]
     public class Library<T> : ObservableObject
     {
         private string _name;

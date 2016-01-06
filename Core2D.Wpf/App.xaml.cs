@@ -486,28 +486,34 @@ namespace Core2D.Wpf
         /// <summary>
         /// Import Xaml from file.
         /// </summary>
-        /// <param name="path">The Xaml file path.</param>
-        private void OnImportXaml(string path)
+        /// <param name="parameter">The Xaml file path.</param>
+        private void OnImportXaml(string parameter)
         {
-            if (path == null)
+            if (parameter == null)
             {
                 var dlg = new OpenFileDialog()
                 {
                     Filter = "Xaml (*.xaml)|*.xaml|All (*.*)|*.*",
                     FilterIndex = 0,
+                    Multiselect = true,
                     FileName = ""
                 };
 
                 if (dlg.ShowDialog(_mainWindow) == true)
                 {
-                    _editor.OnImportXaml(dlg.FileName);
+                    var paths = dlg.FileNames;
+
+                    foreach (var path in paths)
+                    {
+                        _editor.OnImportXaml(path);
+                    }
                 }
             }
             else
             {
-                if (path != null && System.IO.File.Exists(path))
+                if (parameter != null && System.IO.File.Exists(parameter))
                 {
-                    _editor.OnImportXaml(path);
+                    _editor.OnImportXaml(parameter);
                 }
             }
         }

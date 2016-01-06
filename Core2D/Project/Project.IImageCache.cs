@@ -8,7 +8,7 @@ namespace Core2D
     /// <summary>
     /// The <see cref="IImageCache"/> implementation for <see cref="Project"/> class.
     /// </summary>
-    public partial class Project : ObservableObject, IImageCache
+    public partial class Project : ObservableResource, IImageCache
     {
         private static string ProjectEntryName = "Project.json";
         private static string ImageEntryNamePrefix = "Images\\";

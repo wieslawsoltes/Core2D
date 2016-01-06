@@ -569,13 +569,17 @@ namespace Core2D.Perspex
                 if (parameter == null)
                 {
                     var dlg = new OpenFileDialog();
+                    dlg.AllowMultiple = true;
                     dlg.Filters.Add(new FileDialogFilter() { Name = "Xaml", Extensions = { "xaml" } });
                     dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
-                    var result = await dlg.ShowAsync(_mainWindow);
-                    if (result != null)
+
+                    var results = await dlg.ShowAsync(_mainWindow);
+                    if (results != null)
                     {
-                        var path = result.FirstOrDefault();
-                        _editor.OnImportXaml(path);
+                        foreach (var path in results)
+                        {
+                            _editor.OnImportXaml(path);
+                        }
                     }
                 }
                 else

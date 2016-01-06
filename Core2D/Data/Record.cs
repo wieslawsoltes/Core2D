@@ -3,12 +3,15 @@
 using System;
 using System.Collections.Immutable;
 using System.Linq;
+using Portable.Xaml.Markup;
 
 namespace Core2D
 {
     /// <summary>
     /// 
     /// </summary>
+    /// 
+    [ContentProperty("Values")]
     public class Record : ObservableObject
     {
         private Guid _id;

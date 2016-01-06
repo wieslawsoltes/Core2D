@@ -2,13 +2,15 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using Portable.Xaml.Markup;
 
 namespace Core2D
 {
     /// <summary>
     /// Base class for shapes.
     /// </summary>
-    public abstract class BaseShape : ObservableObject
+    [RuntimeNameProperty("Name")]
+    public abstract class BaseShape : ObservableResource
     {
         private string _name;
         private BaseShape _owner;

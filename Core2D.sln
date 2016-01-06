@@ -43,8 +43,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.Perspex", "Core2D.Pe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serializer.Xaml", "Dependencies\Serializer.Xaml\Serializer.Xaml.csproj", "{5B85143E-A53C-4126-8666-031A3172EFDF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.Xaml", "Core2D.Xaml\Core2D.Xaml.csproj", "{26BC14E6-A039-440E-BF6F-BF45F025F114}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -127,10 +125,6 @@ Global
 		{5B85143E-A53C-4126-8666-031A3172EFDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B85143E-A53C-4126-8666-031A3172EFDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B85143E-A53C-4126-8666-031A3172EFDF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{26BC14E6-A039-440E-BF6F-BF45F025F114}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{26BC14E6-A039-440E-BF6F-BF45F025F114}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{26BC14E6-A039-440E-BF6F-BF45F025F114}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{26BC14E6-A039-440E-BF6F-BF45F025F114}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

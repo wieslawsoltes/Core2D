@@ -1,13 +1,16 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System.Collections.Immutable;
+using Portable.Xaml.Markup;
 
 namespace Core2D
 {
     /// <summary>
     /// 
     /// </summary>
-    public abstract class Container : ObservableObject
+    [ContentProperty("Layers")]
+    [RuntimeNameProperty("Name")]
+    public abstract class Container : ObservableResource
     {
         private string _name;
         private double _width;

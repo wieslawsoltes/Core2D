@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
+using System.IO;
 using Core2D;
 
 namespace Dependencies
@@ -19,7 +20,10 @@ namespace Dependencies
         /// <inheritdoc/>
         public T Deserialize<T>(string text)
         {
-            return (T)CoreXamlLoader.Load(text);
+            using (var textReader = new StringReader(text))
+            {
+                return (T)CoreXamlReader.Load(textReader);
+            }
         }
     }
 }

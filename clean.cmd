@@ -42,6 +42,9 @@ rmdir /Q /S Dependencies\Renderer.Wpf\obj
 rmdir /Q /S Dependencies\Serializer.Newtonsoft\bin
 rmdir /Q /S Dependencies\Serializer.Newtonsoft\obj
 
+rmdir /Q /S Dependencies\Serializer.Xaml\bin
+rmdir /Q /S Dependencies\Serializer.Xaml\obj
+
 rmdir /Q /S Dependencies\TextFieldReader.CsvHelper\bin
 rmdir /Q /S Dependencies\TextFieldReader.CsvHelper\obj
 
@@ -50,9 +53,6 @@ rmdir /Q /S Dependencies\TextFieldWriter.CsvHelper\obj
 
 rmdir /Q /S Core2D\bin
 rmdir /Q /S Core2D\obj
-
-rmdir /Q /S Core2D.Sample\bin
-rmdir /Q /S Core2D.Sample\obj
 
 rmdir /Q /S Core2D.Perspex\bin
 rmdir /Q /S Core2D.Perspex\obj

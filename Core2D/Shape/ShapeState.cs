@@ -1,12 +1,16 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
+using Portable.Xaml.Markup;
+using Portable.Xaml.ComponentModel;
 
 namespace Core2D
 {
     /// <summary>
     /// 
     /// </summary>
+    [ContentProperty("Flags")]
+    [TypeConverter(typeof(ShapeStateTypeConverter))]
     public class ShapeState : ObservableObject
     {
         private ShapeStateFlags _flags;

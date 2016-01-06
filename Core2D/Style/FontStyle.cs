@@ -1,12 +1,16 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
+using Portable.Xaml.Markup;
+using Portable.Xaml.ComponentModel;
 
 namespace Core2D
 {
     /// <summary>
     /// Specifies style flags proxy information applied to text.
     /// </summary>
+    [ContentProperty("Flags")]
+    [TypeConverter(typeof(FontStyleTypeConverter))]
     public class FontStyle : ObservableObject
     {
         private FontStyleFlags _flags;
