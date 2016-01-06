@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System.Collections.Generic;
 using Portable.Xaml.Markup;
+using Portable.Xaml.ComponentModel;
 
 namespace Core2D
 {
@@ -9,6 +10,7 @@ namespace Core2D
     /// Path geometry.
     /// </summary>
     [ContentProperty("Figures")]
+    [TypeConverter(typeof(XPathGeometryTypeConverter))]
     public class XPathGeometry
     {
         private XPathFigure _currentFigure;

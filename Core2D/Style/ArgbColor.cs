@@ -4,12 +4,14 @@ using System;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
+using Portable.Xaml.ComponentModel;
 
 namespace Core2D
 {
     /// <summary>
     /// Specifies the Alpha, Red, Green and Blue color channels used for shape stroke and fill.
     /// </summary>
+    [TypeConverter(typeof(ArgbColorTypeConverter))]
     public class ArgbColor : ObservableObject
     {
         private byte _a;
