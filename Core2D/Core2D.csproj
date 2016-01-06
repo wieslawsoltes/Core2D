@@ -60,6 +60,7 @@
     <Compile Include="Converters\FontStyleTypeConverter.cs" />
     <Compile Include="Converters\ShapeStateTypeConverter.cs" />
     <Compile Include="Converters\XPathGeometryTypeConverter.cs" />
+    <Compile Include="Core\ObservableResource.cs" />
     <Compile Include="Data\Data.cs" />
     <Compile Include="Data\Property.cs" />
     <Compile Include="Editor\Bounds\ConvexHullBounds.cs" />
