@@ -184,12 +184,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Core2D.Xaml\Core2D.Xaml.csproj">
-      <Project>{26bc14e6-a039-440e-bf6f-bf45f025f114}</Project>
-      <Name>Core2D.Xaml</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
