@@ -21,6 +21,7 @@ namespace Core2D
     /// 
     /// </summary>
     public class Layer : ObservableObject
+    public class Layer : ObservableResource
     {
         /// <summary>
         /// 

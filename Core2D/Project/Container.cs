@@ -8,6 +8,7 @@ namespace Core2D
     /// 
     /// </summary>
     public abstract class Container : ObservableObject
+    public abstract class Container : ObservableResource
     {
         private string _name;
         private double _width;

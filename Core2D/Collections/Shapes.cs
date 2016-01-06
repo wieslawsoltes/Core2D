@@ -11,6 +11,7 @@ namespace Core2D
     /// </summary>
     [ContentProperty("Children")]
     public class Shapes
+    public class Shapes : ObservableResource
     {
         /// <summary>
         /// Gets or sets container name.

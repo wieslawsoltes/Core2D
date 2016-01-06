@@ -8,6 +8,7 @@ namespace Core2D
     /// 
     /// </summary>
     public class Document : ObservableObject
+    public class Document : ObservableResource
     {
         private string _name;
         private ImmutableArray<Page> _pages;

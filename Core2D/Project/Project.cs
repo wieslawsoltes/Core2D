@@ -9,6 +9,7 @@ namespace Core2D
     /// 
     /// </summary>
     public partial class Project : ObservableObject
+    public partial class Project : ObservableResource
     {
         private string _name;
         private Options _options;

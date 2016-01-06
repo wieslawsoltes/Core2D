@@ -11,6 +11,7 @@ namespace Core2D
     /// 
     /// </summary>
     public class BaseStyle : ObservableObject
+    public class BaseStyle : ObservableResource
     {
         private string _name;
         private ArgbColor _stroke;
