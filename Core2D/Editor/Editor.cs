@@ -569,9 +569,6 @@ namespace Core2D
                 else if (item is BaseShape)
                 {
                     var shapes = Enumerable.Repeat(item as BaseShape, 1);
-                    TryToRestoreStyles(shapes);
-                    TryToRestoreRecords(shapes);
-
                     _project.AddShape(_project.CurrentContainer.CurrentLayer, item as BaseShape);
                 }
                 else if (item is Styles)
@@ -585,9 +582,6 @@ namespace Core2D
                     var shapes = (item as Shapes).Children;
                     if (shapes.Count > 0)
                     {
-                        TryToRestoreStyles(shapes);
-                        TryToRestoreRecords(shapes);
-
                         _project.AddShapes(_project.CurrentContainer.CurrentLayer, shapes);
                     }
                 }
