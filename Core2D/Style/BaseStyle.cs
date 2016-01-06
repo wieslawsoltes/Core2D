@@ -4,13 +4,14 @@ using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Globalization;
+using Portable.Xaml.Markup;
 
 namespace Core2D
 {
     /// <summary>
     /// 
     /// </summary>
-    public class BaseStyle : ObservableObject
+    [RuntimeNameProperty("Name")]
     public class BaseStyle : ObservableResource
     {
         private string _name;

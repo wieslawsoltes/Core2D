@@ -2,13 +2,15 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System.Collections.Immutable;
 using System.Linq;
+using Portable.Xaml.Markup;
 
 namespace Core2D
 {
     /// <summary>
     /// 
     /// </summary>
-    public partial class Project : ObservableObject
+    [ContentProperty("Documents")]
+    [RuntimeNameProperty("Name")]
     public partial class Project : ObservableResource
     {
         private string _name;

@@ -2,7 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using OmniXaml.Attributes;
+using Portable.Xaml.Markup;
 
 namespace Core2D
 {
@@ -10,7 +10,7 @@ namespace Core2D
     /// The <see cref="BaseShape"/> collection container.
     /// </summary>
     [ContentProperty("Children")]
-    public class Shapes
+    [RuntimeNameProperty("Name")]
     public class Shapes : ObservableResource
     {
         /// <summary>

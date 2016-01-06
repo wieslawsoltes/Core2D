@@ -2,12 +2,15 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System.Collections.Immutable;
 using System.Linq;
+using Portable.Xaml.Markup;
 
 namespace Core2D
 {
     /// <summary>
     /// The data context.
     /// </summary>
+    [ContentProperty("Properties")]
+    [RuntimeNameProperty("Name")]
     public class Data : ObservableObject
     {
         private ImmutableArray<Property> _properties;

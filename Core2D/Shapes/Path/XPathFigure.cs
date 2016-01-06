@@ -2,12 +2,14 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System.Collections.Generic;
 using System.Linq;
+using Portable.Xaml.Markup;
 
 namespace Core2D
 {
     /// <summary>
     /// Path figure.
     /// </summary>
+    [ContentProperty("Segments")]
     public class XPathFigure
     {
         /// <summary>

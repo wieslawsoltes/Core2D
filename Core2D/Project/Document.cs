@@ -1,13 +1,15 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System.Collections.Immutable;
+using Portable.Xaml.Markup;
 
 namespace Core2D
 {
     /// <summary>
     /// 
     /// </summary>
-    public class Document : ObservableObject
+    [ContentProperty("Pages")]
+    [RuntimeNameProperty("Name")]
     public class Document : ObservableResource
     {
         private string _name;
