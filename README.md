@@ -38,6 +38,7 @@ The core library and editor are portable and should work on all platforms where 
 
 * Common
   * System.Collections.Immutable
+  * Portable.Xaml
   * Newtonsoft.Json
   * CsvHelper
   * netdxf (Currently using git submodule as NuGet version is outdated.)
@@ -62,27 +63,21 @@ The core library and editor are portable and should work on all platforms where 
   * SharpDX.DXGI
   * Splat
   * Sprache
-* OmniXAML
-  * Rx-Core
-  * Rx-Interfaces
-  * Rx-Linq
-  * Rx-Main
-  * Rx-PlatformServices
-  * Sprache
 
 ### NuGet Package Sources
 
 * https://www.nuget.org/api/v2/
+* https://ci.appveyor.com/nuget/portable-xaml
 * https://www.myget.org/F/perspex-nightly/api/v2
 * https://www.myget.org/F/xamlbehaviors-nightly/api/v2
 
 ### Other Dependencies
 
-* [OmniXAML The Cross-platform XAML Framework](https://github.com/SuperJMN/OmniXAML) Run `git submodule update --init --recursive` in project directory.
+* [Portable .NET library for reading/writing xaml files.](https://github.com/cwensley/Portable.Xaml) Needed for Xaml support.
 * [.net dxf Reader-Writer](http://netdxf.codeplex.com/) Run `git submodule update --init --recursive` in project directory.
 * [GTK# for .NET](http://www.mono-project.com/download/#download-win) Needed for Gtk on Windows.
 
-For building Core2D mirror repositories are used for [OmniXAML](https://github.com/Core2D/OmniXAML) and [.net dxf](https://github.com/Core2D/netdxf)
+For building Core2D mirror repository is used for [.net dxf](https://github.com/Core2D/netdxf)
 
 ## Contact
 
