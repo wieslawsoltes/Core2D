@@ -90,13 +90,7 @@ namespace Core2D.Wpf
             }
             catch (Exception ex)
             {
-                if (_editor.Log != null)
-                {
-                    _editor.Log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
-                }
+                _editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
@@ -124,18 +118,12 @@ namespace Core2D.Wpf
                     var path = System.IO.Path.Combine(GetAssemblyPath(), _recentFileName);
                     if (System.IO.File.Exists(path))
                     {
-                        _editor.LoadRecent(path);
+                        _editor?.LoadRecent(path);
                     }
                 }
                 catch (Exception ex)
                 {
-                    if (_editor.Log != null)
-                    {
-                        _editor.Log.LogError("{0}{1}{2}",
-                            ex.Message,
-                            Environment.NewLine,
-                            ex.StackTrace);
-                    }
+                    _editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
                 }
             }
         }
@@ -150,17 +138,11 @@ namespace Core2D.Wpf
                 try
                 {
                     var path = System.IO.Path.Combine(GetAssemblyPath(), _recentFileName);
-                    _editor.SaveRecent(path);
+                    _editor?.SaveRecent(path);
                 }
                 catch (Exception ex)
                 {
-                    if (_editor.Log != null)
-                    {
-                        _editor.Log.LogError("{0}{1}{2}",
-                            ex.Message,
-                            Environment.NewLine,
-                            ex.StackTrace);
-                    }
+                    _editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
                 }
             }
         }
@@ -382,7 +364,7 @@ namespace Core2D.Wpf
         /// </summary>
         private void DeInitializeEditor()
         {
-            _editor.Dispose();
+            _editor?.Dispose();
         }
 
         /// <summary>
@@ -404,18 +386,12 @@ namespace Core2D.Wpf
                 {
                     var path = dlg.FileName;
                     var bytes = System.IO.File.ReadAllBytes(path);
-                    var key = _editor.Project.AddImageFromFile(path, bytes);
+                    var key = _editor?.Project.AddImageFromFile(path, bytes);
                     return await Task.Run(() => key);
                 }
                 catch (Exception ex)
                 {
-                    if (_editor.Log != null)
-                    {
-                        _editor.Log.LogError("{0}{1}{2}",
-                            ex.Message,
-                            Environment.NewLine,
-                            ex.StackTrace);
-                    }
+                    _editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
                 }
             }
             return null;
@@ -438,14 +414,14 @@ namespace Core2D.Wpf
 
                 if (dlg.ShowDialog(_mainWindow) == true)
                 {
-                    _editor.Open(dlg.FileName);
+                    _editor?.Open(dlg.FileName);
                 }
             }
             else
             {
                 if (path != null && System.IO.File.Exists(path))
                 {
-                    _editor.Open(path);
+                    _editor?.Open(path);
                 }
             }
         }
@@ -455,9 +431,9 @@ namespace Core2D.Wpf
         /// </summary>
         private void OnSave()
         {
-            if (!string.IsNullOrEmpty(_editor.ProjectPath))
+            if (!string.IsNullOrEmpty(_editor?.ProjectPath))
             {
-                _editor.Save(_editor.ProjectPath);
+                _editor?.Save(_editor?.ProjectPath);
             }
             else
             {
@@ -474,12 +450,12 @@ namespace Core2D.Wpf
             {
                 Filter = "Project (*.project)|*.project|All (*.*)|*.*",
                 FilterIndex = 0,
-                FileName = _editor.Project.Name
+                FileName = _editor?.Project?.Name
             };
 
             if (dlg.ShowDialog(_mainWindow) == true)
             {
-                _editor.Save(dlg.FileName);
+                _editor?.Save(dlg.FileName);
             }
         }
 
@@ -505,7 +481,7 @@ namespace Core2D.Wpf
 
                     foreach (var path in paths)
                     {
-                        _editor.OnImportXaml(path);
+                        _editor?.OnImportXaml(path);
                     }
                 }
             }
@@ -513,7 +489,7 @@ namespace Core2D.Wpf
             {
                 if (parameter != null && System.IO.File.Exists(parameter))
                 {
-                    _editor.OnImportXaml(parameter);
+                    _editor?.OnImportXaml(parameter);
                 }
             }
         }
@@ -541,19 +517,19 @@ namespace Core2D.Wpf
             else if (item is Editor)
             {
                 var editor = (item as Editor);
-                if (editor.Project == null)
+                if (editor?.Project == null)
                     return;
 
-                name = editor.Project.Name;
-                item = editor.Project;
+                name = editor?.Project?.Name;
+                item = editor?.Project;
             }
             else if (item == null)
             {
                 if (_editor.Project == null)
                     return;
 
-                name = _editor.Project.Name;
-                item = _editor.Project;
+                name = _editor?.Project?.Name;
+                item = _editor?.Project;
             }
 
             var dlg = new SaveFileDialog()
@@ -568,13 +544,13 @@ namespace Core2D.Wpf
                 switch (dlg.FilterIndex)
                 {
                     case 1:
-                        _editor.ExportAsPdf(dlg.FileName, item);
+                        _editor?.ExportAsPdf(dlg.FileName, item);
                         break;
                     case 2:
                         OnExportAsEmf(dlg.FileName);
                         break;
                     case 3:
-                        _editor.ExportAsDxf(dlg.FileName);
+                        _editor?.ExportAsDxf(dlg.FileName);
                         break;
                     default:
                         break;
@@ -596,7 +572,7 @@ namespace Core2D.Wpf
 
             if (dlg.ShowDialog(_mainWindow) == true)
             {
-                _editor.OnImportData(dlg.FileName);
+                _editor?.OnImportData(dlg.FileName);
             }
         }
 
@@ -605,21 +581,20 @@ namespace Core2D.Wpf
         /// </summary>
         private void OnExportData()
         {
-            if (_editor.Project == null || _editor.Project.CurrentDatabase == null)
-                return;
-
-            var database = _editor.Project.CurrentDatabase;
-
-            var dlg = new SaveFileDialog()
+            var database = _editor?.Project?.CurrentDatabase;
+            if (database != null)
             {
-                Filter = "Csv (*.csv)|*.csv|All (*.*)|*.*",
-                FilterIndex = 0,
-                FileName = database.Name
-            };
+                var dlg = new SaveFileDialog()
+                {
+                    Filter = "Csv (*.csv)|*.csv|All (*.*)|*.*",
+                    FilterIndex = 0,
+                    FileName = database.Name
+                };
 
-            if (dlg.ShowDialog(_mainWindow) == true)
-            {
-                _editor.OnExportData(dlg.FileName, database);
+                if (dlg.ShowDialog(_mainWindow) == true)
+                {
+                    _editor?.OnExportData(dlg.FileName, database);
+                }
             }
         }
 
@@ -628,21 +603,20 @@ namespace Core2D.Wpf
         /// </summary>
         private void OnUpdateData()
         {
-            if (_editor.Project == null || _editor.Project.CurrentDatabase == null)
-                return;
-
-            var database = _editor.Project.CurrentDatabase;
-
-            var dlg = new OpenFileDialog()
+            var database = _editor?.Project?.CurrentDatabase;
+            if (database != null)
             {
-                Filter = "Csv (*.csv)|*.csv|All (*.*)|*.*",
-                FilterIndex = 0,
-                FileName = ""
-            };
+                var dlg = new OpenFileDialog()
+                {
+                    Filter = "Csv (*.csv)|*.csv|All (*.*)|*.*",
+                    FilterIndex = 0,
+                    FileName = ""
+                };
 
-            if (dlg.ShowDialog(_mainWindow) == true)
-            {
-                _editor.OnUpdateData(dlg.FileName, database);
+                if (dlg.ShowDialog(_mainWindow) == true)
+                {
+                    _editor?.OnUpdateData(dlg.FileName, database);
+                } 
             }
         }
 
@@ -705,7 +679,7 @@ namespace Core2D.Wpf
 
                 foreach (var path in paths)
                 {
-                    _editor.OnImportObject(path, item, type);
+                    _editor?.OnImportObject(path, item, type);
                 }
             }
         }
@@ -776,7 +750,7 @@ namespace Core2D.Wpf
 
             if (dlg.ShowDialog(_mainWindow) == true)
             {
-                _editor.OnExportObject(dlg.FileName, item, type);
+                _editor?.OnExportObject(dlg.FileName, item, type);
             }
         }
 
@@ -785,17 +759,12 @@ namespace Core2D.Wpf
         /// </summary>
         private void OnCopyAsEmf()
         {
-            if (_editor.Project == null || _editor.Project.CurrentContainer == null)
-                return;
-
-            var project = _editor.Project;
-            var container = _editor.Project.CurrentContainer;
-            var writer = new EmfWriter();
-
-            if (container is Page)
+            var page = _editor?.Project?.CurrentContainer as Page;
+            if (page != null)
             {
-                var page = container as Page;
-                if (_editor.Renderers[0].State.SelectedShape != null)
+                var writer = new EmfWriter();
+
+                if (_editor?.Renderers[0]?.State?.SelectedShape != null)
                 {
                     var shapes = Enumerable.Repeat(_editor.Renderers[0].State.SelectedShape, 1).ToList();
                     writer.SetClipboard(
@@ -804,9 +773,9 @@ namespace Core2D.Wpf
                         page.Template.Height,
                         page.Data.Properties,
                         page.Data.Record,
-                        project);
+                        _editor.Project);
                 }
-                else if (_editor.Renderers[0].State.SelectedShapes != null)
+                else if (_editor?.Renderers?[0]?.State?.SelectedShapes != null)
                 {
                     var shapes = _editor.Renderers[0].State.SelectedShapes.ToList();
                     writer.SetClipboard(
@@ -815,11 +784,11 @@ namespace Core2D.Wpf
                         page.Template.Height,
                         page.Data.Properties,
                         page.Data.Record,
-                        project);
+                        _editor.Project);
                 }
                 else
                 {
-                    writer.SetClipboard(page, project);
+                    writer.SetClipboard(page, _editor.Project);
                 }
             }
         }
@@ -832,21 +801,18 @@ namespace Core2D.Wpf
         {
             try
             {
-                var writer = new EmfWriter();
-                writer.Save(
-                    path,
-                    _editor.Project.CurrentContainer,
-                    _editor.Project);
+                if (_editor?.Project?.CurrentContainer != null)
+                {
+                    var writer = new EmfWriter();
+                    writer.Save(
+                        path,
+                        _editor.Project.CurrentContainer,
+                        _editor.Project);
+                }
             }
             catch (Exception ex)
             {
-                if (_editor.Log != null)
-                {
-                    _editor.Log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
-                }
+                _editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
     }

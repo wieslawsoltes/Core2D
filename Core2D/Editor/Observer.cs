@@ -22,7 +22,7 @@ namespace Core2D
         /// <param name="editor">The current <see cref="Editor"/> object.</param>
         public Observer(Editor editor)
         {
-            if (editor != null && editor.Project != null)
+            if (editor?.Project != null)
             {
                 _editor = editor;
 
@@ -37,7 +37,7 @@ namespace Core2D
 
         private void Invalidate()
         {
-            if (_editor != null && _editor.Project != null && _editor.Project.CurrentContainer != null)
+            if (_editor?.Project?.CurrentContainer != null)
             {
                 _editor.Project.CurrentContainer.Invalidate();
             }
@@ -45,7 +45,7 @@ namespace Core2D
 
         private void InvalidateAndClearCache()
         {
-            if (_editor != null && _editor.Project != null && _editor.Project.CurrentContainer != null)
+            if (_editor?.Project?.CurrentContainer != null)
             {
                 foreach (var renderer in _editor.Renderers)
                 {
@@ -65,7 +65,6 @@ namespace Core2D
 
         private void DatabaseObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-
             if (e.PropertyName == nameof(Database.Columns))
             {
                 var database = sender as Database;
@@ -216,10 +215,7 @@ namespace Core2D
 
         private void InvalidateLayerObserver(object sender, InvalidateLayerEventArgs e)
         {
-            if (_editor.Invalidate != null)
-            {
-                _editor.Invalidate();
-            }
+            _editor?.Invalidate?.Invoke();
         }
 
         private void LayerObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -623,7 +619,6 @@ namespace Core2D
                 page.HelperLayer.InvalidateLayer -= InvalidateLayerObserver;
             }
         }
-
 
         private void Add(Template template)
         {
@@ -1604,12 +1599,9 @@ namespace Core2D
         /// <param name="disposing">The flag indicating whether disposing.</param>
         protected virtual void Dispose(bool disposing)
         {
-            if (disposing)
+            if (disposing && _editor?.Project != null)
             {
-                if (_editor != null && _editor.Project != null)
-                {
-                    Remove(_editor.Project);
-                }
+                Remove(_editor.Project);
             }
         }
     }

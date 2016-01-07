@@ -191,13 +191,7 @@ namespace Core2D.Wpf.Windows
                         }
                         catch (Exception ex)
                         {
-                            if (editor.Log != null)
-                            {
-                                editor.Log.LogError("{0}{1}{2}",
-                                    ex.Message,
-                                    Environment.NewLine,
-                                    ex.StackTrace);
-                            }
+                            editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
                         }
                     }
 
@@ -216,13 +210,7 @@ namespace Core2D.Wpf.Windows
                         }
                         catch (Exception ex)
                         {
-                            if (editor.Log != null)
-                            {
-                                editor.Log.LogError("{0}{1}{2}",
-                                    ex.Message,
-                                    Environment.NewLine,
-                                    ex.StackTrace);
-                            }
+                            editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
                         }
                     }
 
@@ -241,13 +229,7 @@ namespace Core2D.Wpf.Windows
                         }
                         catch (Exception ex)
                         {
-                            if (editor.Log != null)
-                            {
-                                editor.Log.LogError("{0}{1}{2}",
-                                    ex.Message,
-                                    Environment.NewLine,
-                                    ex.StackTrace);
-                            }
+                            editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
                         }
                     }
 
@@ -266,13 +248,7 @@ namespace Core2D.Wpf.Windows
                         }
                         catch (Exception ex)
                         {
-                            if (editor.Log != null)
-                            {
-                                editor.Log.LogError("{0}{1}{2}",
-                                    ex.Message,
-                                    Environment.NewLine,
-                                    ex.StackTrace);
-                            }
+                            editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
                         }
                     }
 
@@ -291,13 +267,7 @@ namespace Core2D.Wpf.Windows
                         }
                         catch (Exception ex)
                         {
-                            if (editor.Log != null)
-                            {
-                                editor.Log.LogError("{0}{1}{2}",
-                                    ex.Message,
-                                    Environment.NewLine,
-                                    ex.StackTrace);
-                            }
+                            editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
                         }
                     }
 
@@ -315,13 +285,7 @@ namespace Core2D.Wpf.Windows
                         }
                         catch (Exception ex)
                         {
-                            if (editor.Log != null)
-                            {
-                                editor.Log.LogError("{0}{1}{2}",
-                                    ex.Message,
-                                    Environment.NewLine,
-                                    ex.StackTrace);
-                            }
+                            editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
                         }
                     }
                 };
@@ -409,13 +373,7 @@ namespace Core2D.Wpf.Windows
             }
             catch (Exception ex)
             {
-                if (editor.Log != null)
-                {
-                    editor.Log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
-                }
+                editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
@@ -431,13 +389,7 @@ namespace Core2D.Wpf.Windows
             }
             catch (Exception ex)
             {
-                if (editor.Log != null)
-                {
-                    editor.Log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
-                }
+                editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
@@ -465,13 +417,7 @@ namespace Core2D.Wpf.Windows
                 }
                 catch (Exception ex)
                 {
-                    if (editor.Log != null)
-                    {
-                        editor.Log.LogError("{0}{1}{2}",
-                            ex.Message,
-                            Environment.NewLine,
-                            ex.StackTrace);
-                    }
+                    editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
                 }
             }
         }
@@ -500,13 +446,7 @@ namespace Core2D.Wpf.Windows
                 }
                 catch (Exception ex)
                 {
-                    if (editor.Log != null)
-                    {
-                        editor.Log.LogError("{0}{1}{2}",
-                            ex.Message,
-                            Environment.NewLine,
-                            ex.StackTrace);
-                    }
+                    editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
                 }
             }
         }
@@ -526,13 +466,7 @@ namespace Core2D.Wpf.Windows
             }
             catch (Exception ex)
             {
-                if (editor.Log != null)
-                {
-                    editor.Log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
-                }
+                editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 

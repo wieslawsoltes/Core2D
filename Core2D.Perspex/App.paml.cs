@@ -122,19 +122,13 @@ namespace Core2D.Perspex
             }
             catch (Exception ex)
             {
-                if (_editor != null && _editor != null && _editor.Log != null)
+                if (_editor?.Log != null)
                 {
-                    _editor.Log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
+                    _editor.Log.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
                 }
                 else
                 {
-                    Trace.WriteLine(string.Format("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace));
+                    Trace.WriteLine($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
                 }
             }
         }
@@ -168,13 +162,7 @@ namespace Core2D.Perspex
                 }
                 catch (Exception ex)
                 {
-                    if (_editor.Log != null)
-                    {
-                        _editor.Log.LogError("{0}{1}{2}",
-                            ex.Message,
-                            Environment.NewLine,
-                            ex.StackTrace);
-                    }
+                    _editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
                 }
             }
         }
@@ -193,13 +181,7 @@ namespace Core2D.Perspex
                 }
                 catch (Exception ex)
                 {
-                    if (_editor.Log != null)
-                    {
-                        _editor.Log.LogError("{0}{1}{2}",
-                            ex.Message,
-                            Environment.NewLine,
-                            ex.StackTrace);
-                    }
+                    _editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
                 }
             }
         }
@@ -416,7 +398,7 @@ namespace Core2D.Perspex
         /// </summary>
         public void DeInitializeEditor()
         {
-            _editor.Dispose();
+            _editor?.Dispose();
         }
 
         /// <summary>
@@ -434,20 +416,14 @@ namespace Core2D.Perspex
                 {
                     var path = result.FirstOrDefault();
                     var bytes = System.IO.File.ReadAllBytes(path);
-                    var key = _editor.Project.AddImageFromFile(path, bytes);
+                    var key = _editor?.Project?.AddImageFromFile(path, bytes);
                     return key;
                 }
                 return null;
             }
             catch (Exception ex)
             {
-                if (_editor.Log != null)
-                {
-                    _editor.Log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
-                }
+                _editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
                 return null;
             }
         }
@@ -470,8 +446,8 @@ namespace Core2D.Perspex
                     if (result != null)
                     {
                         var path = result.FirstOrDefault();
-                        _editor.Open(path);
-                        _editor.Invalidate();
+                        _editor?.Open(path);
+                        _editor?.Invalidate?.Invoke();
                     }
                 }
                 else
@@ -485,13 +461,7 @@ namespace Core2D.Perspex
             }
             catch (Exception ex)
             {
-                if (_editor.Log != null)
-                {
-                    _editor.Log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
-                }
+                _editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
@@ -503,9 +473,9 @@ namespace Core2D.Perspex
         {
             try
             {
-                if (!string.IsNullOrEmpty(_editor.ProjectPath))
+                if (!string.IsNullOrEmpty(_editor?.ProjectPath))
                 {
-                    _editor.Save(_editor.ProjectPath);
+                    _editor?.Save(_editor?.ProjectPath);
                 }
                 else
                 {
@@ -514,13 +484,7 @@ namespace Core2D.Perspex
             }
             catch (Exception ex)
             {
-                if (_editor.Log != null)
-                {
-                    _editor.Log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
-                }
+                _editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
@@ -532,7 +496,7 @@ namespace Core2D.Perspex
         {
             try
             {
-                if (_editor.Project != null)
+                if (_editor?.Project != null)
                 {
                     var dlg = new SaveFileDialog();
                     dlg.Filters.Add(new FileDialogFilter() { Name = "Project", Extensions = { "project" } });
@@ -541,19 +505,13 @@ namespace Core2D.Perspex
                     var result = await dlg.ShowAsync(_mainWindow);
                     if (result != null)
                     {
-                        _editor.Save(result);
+                        _editor?.Save(result);
                     }
                 }
             }
             catch (Exception ex)
             {
-                if (_editor.Log != null)
-                {
-                    _editor.Log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
-                }
+                _editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
@@ -578,7 +536,7 @@ namespace Core2D.Perspex
                     {
                         foreach (var path in results)
                         {
-                            _editor.OnImportXaml(path);
+                            _editor?.OnImportXaml(path);
                         }
                     }
                 }
@@ -587,19 +545,13 @@ namespace Core2D.Perspex
                     string path = parameter;
                     if (path != null && System.IO.File.Exists(path))
                     {
-                        _editor.OnImportXaml(path);
+                        _editor?.OnImportXaml(path);
                     }
                 }
             }
             catch (Exception ex)
             {
-                if (_editor.Log != null)
-                {
-                    _editor.Log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
-                }
+                _editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
@@ -629,19 +581,19 @@ namespace Core2D.Perspex
                 else if (item is Editor)
                 {
                     var editor = (item as Editor);
-                    if (editor.Project == null)
+                    if (editor?.Project == null)
                         return;
 
-                    name = editor.Project.Name;
-                    item = editor.Project;
+                    name = editor?.Project?.Name;
+                    item = editor?.Project;
                 }
                 else if (item == null)
                 {
-                    if (_editor.Project == null)
+                    if (_editor?.Project == null)
                         return;
 
-                    name = _editor.Project.Name;
-                    item = _editor.Project;
+                    name = _editor?.Project?.Name;
+                    item = _editor?.Project;
                 }
 
                 var dlg = new SaveFileDialog();
@@ -656,24 +608,18 @@ namespace Core2D.Perspex
 
                     if (ext == ".pdf")
                     {
-                        _editor.ExportAsPdf(result, item);
+                        _editor?.ExportAsPdf(result, item);
                     }
 
                     if (ext == ".dxf")
                     {
-                        _editor.ExportAsDxf(result);
+                        _editor?.ExportAsDxf(result);
                     }
                 }
             }
             catch (Exception ex)
             {
-                if (_editor.Log != null)
-                {
-                    _editor.Log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
-                }
+                _editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
@@ -685,7 +631,7 @@ namespace Core2D.Perspex
         {
             try
             {
-                if (_editor.Project != null)
+                if (_editor?.Project != null)
                 {
                     var dlg = new OpenFileDialog();
                     dlg.Filters.Add(new FileDialogFilter() { Name = "Csv", Extensions = { "csv" } });
@@ -694,19 +640,13 @@ namespace Core2D.Perspex
                     if (result != null)
                     {
                         var path = result.FirstOrDefault();
-                        _editor.OnImportData(path);
+                        _editor?.OnImportData(path);
                     }
                 }
             }
             catch (Exception ex)
             {
-                if (_editor.Log != null)
-                {
-                    _editor.Log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
-                }
+                _editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
@@ -718,10 +658,9 @@ namespace Core2D.Perspex
         {
             try
             {
-                if (_editor.Project != null && _editor.Project.CurrentDatabase != null)
+                var database = _editor?.Project?.CurrentDatabase;
+                if (database != null)
                 {
-                    var database = _editor.Project.CurrentDatabase;
-
                     var dlg = new SaveFileDialog();
                     dlg.Filters.Add(new FileDialogFilter() { Name = "Csv", Extensions = { "csv" } });
                     dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
@@ -729,19 +668,13 @@ namespace Core2D.Perspex
                     var result = await dlg.ShowAsync(_mainWindow);
                     if (result != null)
                     {
-                        _editor.OnExportData(result, database);
+                        _editor?.OnExportData(result, database);
                     }
                 }
             }
             catch (Exception ex)
             {
-                if (_editor.Log != null)
-                {
-                    _editor.Log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
-                }
+                _editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
@@ -753,10 +686,9 @@ namespace Core2D.Perspex
         {
             try
             {
-                if (_editor.Project != null && _editor.Project.CurrentDatabase != null)
+                var database = _editor?.Project?.CurrentDatabase;
+                if (database != null)
                 {
-                    var database = _editor.Project.CurrentDatabase;
-
                     var dlg = new OpenFileDialog();
                     dlg.Filters.Add(new FileDialogFilter() { Name = "Csv", Extensions = { "csv" } });
                     dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
@@ -764,19 +696,13 @@ namespace Core2D.Perspex
                     if (result != null)
                     {
                         var path = result.FirstOrDefault();
-                        _editor.OnUpdateData(path, database);
+                        _editor?.OnUpdateData(path, database);
                     }
                 }
             }
             catch (Exception ex)
             {
-                if (_editor.Log != null)
-                {
-                    _editor.Log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
-                }
+                _editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
@@ -848,20 +774,14 @@ namespace Core2D.Perspex
                     {
                         foreach (var path in results)
                         {
-                            _editor.OnImportObject(path, item, type);
+                            _editor?.OnImportObject(path, item, type);
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                if (_editor.Log != null)
-                {
-                    _editor.Log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
-                }
+                _editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
@@ -942,19 +862,13 @@ namespace Core2D.Perspex
                     var result = await dlg.ShowAsync(_mainWindow);
                     if (result != null)
                     {
-                        _editor.OnExportObject(result, item, type);
+                        _editor?.OnExportObject(result, item, type);
                     }
                 }
             }
             catch (Exception ex)
             {
-                if (_editor.Log != null)
-                {
-                    _editor.Log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
-                }
+                _editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
     }

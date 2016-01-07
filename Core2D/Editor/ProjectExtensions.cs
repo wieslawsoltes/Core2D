@@ -18,7 +18,7 @@ namespace Core2D
         /// <param name="document">The document instance.</param>
         public static void AddDocument(this Project project, Document document)
         {
-            if (project.Documents != null && document != null)
+            if (project?.Documents != null && document != null)
             {
                 var previous = project.Documents;
                 var next = project.Documents.Add(document);
@@ -35,7 +35,7 @@ namespace Core2D
         /// <param name="index">The document index.</param>
         public static void AddDocumentAt(this Project project, Document document, int index)
         {
-            if (project.Documents != null && document != null && index >= 0)
+            if (project?.Documents != null && document != null && index >= 0)
             {
                 var previous = project.Documents;
                 var next = project.Documents.Insert(index, document);
@@ -51,7 +51,7 @@ namespace Core2D
         /// <param name="document">The document object to remove from project <see cref="Project.Documents"/> collection.</param>
         public static void RemoveDocument(this Project project, Document document)
         {
-            if (project.Documents != null && document != null)
+            if (project?.Documents != null && document != null)
             {
                 var previous = project.Documents;
                 var next = project.Documents.Remove(document);
@@ -133,7 +133,7 @@ namespace Core2D
         /// <param name="page">The page object to remove from document <see cref="Document.Pages"/> collection.</param>
         public static void RemovePage(this Project project, Page page)
         {
-            if (project.Documents != null && page != null)
+            if (project?.Documents != null && page != null)
             {
                 var document = project.Documents.FirstOrDefault(d => d.Pages.Contains(page));
                 if (document != null)
@@ -178,7 +178,7 @@ namespace Core2D
         /// <param name="template">The template instance.</param>
         public static void AddTemplate(this Project project, Template template)
         {
-            if (project.Templates != null && template != null)
+            if (project?.Templates != null && template != null)
             {
                 var previous = project.Templates;
                 var next = project.Templates.Add(template);
@@ -194,7 +194,7 @@ namespace Core2D
         /// <param name="templates">The templates collection.</param>
         public static void AddTemplates(this Project project, IEnumerable<Template> templates)
         {
-            if (project.Templates != null && templates != null)
+            if (project?.Templates != null && templates != null)
             {
                 var builder = project.Templates.ToBuilder();
                 builder.AddRange(templates);
@@ -213,7 +213,7 @@ namespace Core2D
         /// <param name="template">The template instance</param>
         public static void RemoveTemplate(this Project project, Template template)
         {
-            if (project.Templates != null && template != null)
+            if (project?.Templates != null && template != null)
             {
                 var previous = project.Templates;
                 var next = project.Templates.Remove(project.CurrentTemplate);
@@ -265,18 +265,15 @@ namespace Core2D
         /// <param name="layer">The layer instance.</param>
         public static void RemoveLayer(this Project project, Layer layer)
         {
-            if (layer != null)
+            var container = layer?.Owner;
+            if (container != null && container.Layers != null)
             {
-                var container = layer.Owner;
-                if (container != null && container.Layers != null)
-                {
-                    var previous = container.Layers;
-                    var next = container.Layers.Remove(layer);
-                    project.History.Snapshot(previous, next, (p) => container.Layers = p);
-                    container.Layers = next;
+                var previous = container.Layers;
+                var next = container.Layers.Remove(layer);
+                project.History.Snapshot(previous, next, (p) => container.Layers = p);
+                container.Layers = next;
 
-                    container.CurrentLayer = container.Layers.FirstOrDefault();
-                }
+                container.CurrentLayer = container.Layers.FirstOrDefault();
             }
         }
 
@@ -306,7 +303,7 @@ namespace Core2D
         /// <param name="index">The shape index.</param>
         public static void AddShapeAt(this Project project, Layer layer, BaseShape shape, int index)
         {
-            if (layer != null && layer.Shapes != null && shape != null)
+            if (layer?.Shapes != null && shape != null)
             {
                 var previous = layer.Shapes;
                 var next = layer.Shapes.Insert(index, shape);
@@ -323,7 +320,7 @@ namespace Core2D
         /// <param name="shapes">The shapes collection.</param>
         public static void AddShapes(this Project project, Layer layer, IEnumerable<BaseShape> shapes)
         {
-            if (layer != null && layer.Shapes != null && shapes != null)
+            if (layer?.Shapes != null && shapes != null)
             {
                 var builder = layer.Shapes.ToBuilder();
                 builder.AddRange(shapes);
@@ -343,7 +340,7 @@ namespace Core2D
         /// <param name="shape">The shape instance.</param>
         public static void RemoveShape(this Project project, Layer layer, BaseShape shape)
         {
-            if (layer != null && layer.Shapes != null && shape != null)
+            if (layer?.Shapes != null && shape != null)
             {
                 var previous = layer.Shapes;
                 var next = layer.Shapes.Remove(shape);
@@ -359,7 +356,7 @@ namespace Core2D
         /// <param name="shape">The shape instance.</param>
         public static void RemoveShape(this Project project, BaseShape shape)
         {
-            if (shape != null && project.Documents != null)
+            if (project?.Documents != null && shape != null)
             {
                 var layer = project.Documents.SelectMany(d => d.Pages).SelectMany(p => p.Layers).FirstOrDefault(l => l.Shapes.Contains(shape));
                 if (layer != null)
@@ -421,7 +418,7 @@ namespace Core2D
         /// <param name="property">The property instance.</param>
         public static void AddProperty(this Project project, Data data, Property property)
         {
-            if (data != null && data.Properties != null && property != null)
+            if (data?.Properties != null && property != null)
             {
                 var previous = data.Properties;
                 var next = data.Properties.Add(property);
@@ -437,16 +434,13 @@ namespace Core2D
         /// <param name="property">The property instance.</param>
         public static void RemoveProperty(this Project project, Property property)
         {
-            if (property != null)
+            var data = property?.Owner;
+            if (data != null && data.Properties != null)
             {
-                var data = property.Owner;
-                if (data != null && data.Properties != null)
-                {
-                    var previous = data.Properties;
-                    var next = data.Properties.Remove(property);
-                    project.History.Snapshot(previous, next, (p) => data.Properties = p);
-                    data.Properties = next;
-                }
+                var previous = data.Properties;
+                var next = data.Properties.Remove(property);
+                project.History.Snapshot(previous, next, (p) => data.Properties = p);
+                data.Properties = next;
             }
         }
 
@@ -457,7 +451,7 @@ namespace Core2D
         /// <param name="db">The database instance.</param>
         public static void AddDatabase(this Project project, Database db)
         {
-            if (project.Databases != null && db != null)
+            if (project?.Databases != null && db != null)
             {
                 var previous = project.Databases;
                 var next = project.Databases.Add(db);
@@ -475,7 +469,7 @@ namespace Core2D
         /// <param name="db">The <see cref="Database"/> to remove.</param>
         public static void RemoveDatabase(this Project project, Database db)
         {
-            if (project.Databases != null && db != null)
+            if (project?.Databases != null && db != null)
             {
                 var previous = project.Databases;
                 var next = project.Databases.Remove(db);
@@ -522,7 +516,7 @@ namespace Core2D
         /// <param name="column">The column instance.</param>
         public static void AddColumn(this Project project, Database db, Column column)
         {
-            if (db != null && db.Columns != null && column != null)
+            if (db?.Columns != null && column != null)
             {
                 var previous = db.Columns;
                 var next = db.Columns.Add(column);
@@ -538,16 +532,13 @@ namespace Core2D
         /// <param name="column">The <see cref="Column"/> to remove.</param>
         public static void RemoveColumn(this Project project, Column column)
         {
-            if (column != null)
+            var db = column?.Owner;
+            if (db != null && db.Columns != null)
             {
-                var db = column.Owner;
-                if (db != null && db.Columns != null)
-                {
-                    var previous = db.Columns;
-                    var next = db.Columns.Remove(column);
-                    project.History.Snapshot(previous, next, (p) => db.Columns = p);
-                    db.Columns = next;
-                }
+                var previous = db.Columns;
+                var next = db.Columns.Remove(column);
+                project.History.Snapshot(previous, next, (p) => db.Columns = p);
+                db.Columns = next;
             }
         }
 
@@ -559,7 +550,7 @@ namespace Core2D
         /// <param name="record">The record instance.</param>
         public static void AddRecord(this Project project, Database db, Record record)
         {
-            if (db != null && db.Records != null)
+            if (db?.Records != null)
             {
                 var previous = db.Records;
                 var next = db.Records.Add(record);
@@ -575,16 +566,13 @@ namespace Core2D
         /// <param name="record">The record instance.</param>
         public static void RemoveRecord(this Project project, Record record)
         {
-            if (record != null)
+            var db = record?.Owner;
+            if (db != null && db.Records != null)
             {
-                var db = record.Owner;
-                if (db != null && db.Records != null)
-                {
-                    var previous = db.Records;
-                    var next = db.Records.Remove(record);
-                    project.History.Snapshot(previous, next, (p) => db.Records = p);
-                    db.Records = next;
-                }
+                var previous = db.Records;
+                var next = db.Records.Remove(record);
+                project.History.Snapshot(previous, next, (p) => db.Records = p);
+                db.Records = next;
             }
         }
 
@@ -595,16 +583,13 @@ namespace Core2D
         /// <param name="data">The data instance.</param>
         public static void ResetRecord(this Project project, Data data)
         {
-            if (data != null)
+            var record = data?.Record;
+            if (record != null)
             {
-                var record = data.Record;
-                if (record != null)
-                {
-                    var previous = record;
-                    var next = default(Record);
-                    project.History.Snapshot(previous, next, (p) => data.Record = p);
-                    data.Record = next;
-                }
+                var previous = record;
+                var next = default(Record);
+                project.History.Snapshot(previous, next, (p) => data.Record = p);
+                data.Record = next;
             }
         }
 
@@ -649,7 +634,7 @@ namespace Core2D
         /// <param name="library">The group library instance.</param>
         public static void AddGroupLibrary(this Project project, Library<XGroup> library)
         {
-            if (project.GroupLibraries != null && library != null)
+            if (project?.GroupLibraries != null && library != null)
             {
                 var previous = project.GroupLibraries;
                 var next = project.GroupLibraries.Add(library);
@@ -665,7 +650,7 @@ namespace Core2D
         /// <param name="libraries">The group libraries collection.</param>
         public static void AddGroupLibraries(this Project project, IEnumerable<Library<XGroup>> libraries)
         {
-            if (project.GroupLibraries != null && libraries != null)
+            if (project?.GroupLibraries != null && libraries != null)
             {
                 var builder = project.GroupLibraries.ToBuilder();
                 builder.AddRange(libraries);
@@ -684,7 +669,7 @@ namespace Core2D
         /// <param name="library">The group library instance.</param>
         public static void RemoveGroupLibrary(this Project project, Library<XGroup> library)
         {
-            if (project.GroupLibraries != null && library != null)
+            if (project?.GroupLibraries != null && library != null)
             {
                 var previous = project.GroupLibraries;
                 var next = project.GroupLibraries.Remove(library);
@@ -702,7 +687,7 @@ namespace Core2D
         /// <param name="library">The style library instance.</param>
         public static void AddStyleLibrary(this Project project, Library<ShapeStyle> library)
         {
-            if (project.StyleLibraries != null && library != null)
+            if (project?.StyleLibraries != null && library != null)
             {
                 var previous = project.StyleLibraries;
                 var next = project.StyleLibraries.Add(library);
@@ -718,7 +703,7 @@ namespace Core2D
         /// <param name="libraries">The style libraries collection.</param>
         public static void AddStyleLibraries(this Project project, IEnumerable<Library<ShapeStyle>> libraries)
         {
-            if (project.StyleLibraries != null && libraries != null)
+            if (project?.StyleLibraries != null && libraries != null)
             {
                 var builder = project.StyleLibraries.ToBuilder();
                 builder.AddRange(libraries);
@@ -737,7 +722,7 @@ namespace Core2D
         /// <param name="library">The style library instance.</param>
         public static void RemoveStyleLibrary(this Project project, Library<ShapeStyle> library)
         {
-            if (project.CurrentStyleLibrary != null && library != null)
+            if (project?.CurrentStyleLibrary != null && library != null)
             {
                 var previous = project.StyleLibraries;
                 var next = project.StyleLibraries.Remove(library);
@@ -766,10 +751,10 @@ namespace Core2D
         /// <param name="style">The style instance.</param>
         public static void RemoveStyle(this Project project, ShapeStyle style)
         {
-            if (project.StyleLibraries != null && style != null)
+            if (project?.StyleLibraries != null && style != null)
             {
                 var library = project.StyleLibraries.FirstOrDefault(l => l.Items.Contains(style));
-                if (library != null && library.Items != null)
+                if (library?.Items != null)
                 {
                     var previous = library.Items;
                     var next = library.Items.Remove(style);
@@ -830,10 +815,10 @@ namespace Core2D
         /// <param name="group">The group instance.</param>
         public static void RemoveGroup(this Project project, XGroup group)
         {
-            if (project.GroupLibraries != null && group != null)
+            if (project?.GroupLibraries != null && group != null)
             {
                 var library = project.GroupLibraries.FirstOrDefault(l => l.Items.Contains(group));
-                if (library != null && library.Items != null)
+                if (library?.Items != null)
                 {
                     var previous = library.Items;
                     var next = library.Items.Remove(group);
@@ -853,7 +838,7 @@ namespace Core2D
         /// <param name="item">The item instance.</param>
         public static void AddItem<T>(this Project project, Library<T> library, T item)
         {
-            if (library != null && library.Items != null && item != null)
+            if (library?.Items != null && item != null)
             {
                 var previous = library.Items;
                 var next = library.Items.Add(item);
@@ -870,7 +855,7 @@ namespace Core2D
         /// <param name="items">The items collection.</param>
         public static void AddItems<T>(this Project project, Library<T> library, IEnumerable<T> items)
         {
-            if (library != null && library.Items != null && items != null)
+            if (library?.Items != null && items != null)
             {
                 var builder = library.Items.ToBuilder();
                 builder.AddRange(items);

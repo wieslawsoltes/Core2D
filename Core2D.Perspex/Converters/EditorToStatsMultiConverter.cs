@@ -43,8 +43,8 @@ namespace Core2D.Perspex.Converters
                 var shapesLength = (int)values[3];
                 var selectedShape = (BaseShape)values[4];
                 var selectedShapes = (ImmutableHashSet<BaseShape>)values[5];
-
-                return string.Format("Documents: {0} - Pages: {1} - Layers: {2} - Shapes: {3} - Selected: {4}",
+                return string.Format(
+                    "Documents: {0} - Pages: {1} - Layers: {2} - Shapes: {3} - Selected: {4}",
                     documentsLength,
                     pagesLength,
                     layersLength,

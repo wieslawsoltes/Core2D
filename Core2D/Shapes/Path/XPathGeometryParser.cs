@@ -87,7 +87,7 @@ namespace Core2D
 
         private void InvalidToken()
         {
-            throw new FormatException(string.Format("Unexpected token {0} at index {1}.", _pathString, _curIndex - 1));
+            throw new FormatException($"Unexpected token {_pathString} at index {_curIndex - 1}.");
         }
 
         private bool HaveMore()
@@ -261,9 +261,9 @@ namespace Core2D
                 {
                     return Convert.ToDouble(subString, CultureInfo.InvariantCulture);
                 }
-                catch (FormatException except)
+                catch (FormatException ex)
                 {
-                    throw new FormatException(string.Format("Unexpected token {0} at index {1}.", _pathString, start), except);
+                    throw new FormatException($"Unexpected token {_pathString} at index {start}.", ex);
                 }
             }
         }
