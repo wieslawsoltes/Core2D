@@ -69,8 +69,9 @@
       <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Portable.Xaml, Version=0.7.5849.36622, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Portable.Xaml, Version=0.7.5850.5655, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Portable.Xaml.0.8.0-alpha\lib\dotnet\Portable.Xaml.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
