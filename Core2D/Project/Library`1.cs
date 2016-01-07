@@ -10,8 +10,8 @@ namespace Core2D
     /// <summary>
     /// Named items library.
     /// </summary>
-    [ContentProperty("Items")]
-    [RuntimeNameProperty("Name")]
+    [ContentProperty(nameof(Items))]
+    [RuntimeNameProperty(nameof(Name))]
     public class Library<T> : ObservableObject
     {
         private string _name;

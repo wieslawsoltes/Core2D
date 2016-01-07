@@ -9,7 +9,7 @@ namespace Core2D
     /// <summary>
     /// Specifies style flags proxy information applied to text.
     /// </summary>
-    [ContentProperty("Flags")]
+    [ContentProperty(nameof(Flags))]
     [TypeConverter(typeof(FontStyleTypeConverter))]
     public class FontStyle : ObservableObject
     {
@@ -24,11 +24,11 @@ namespace Core2D
             set
             {
                 Update(ref _flags, value);
-                Notify("Regular");
-                Notify("Bold");
-                Notify("Italic");
-                Notify("Underline");
-                Notify("Strikeout");
+                Notify(nameof(Regular));
+                Notify(nameof(Bold));
+                Notify(nameof(Italic));
+                Notify(nameof(Underline));
+                Notify(nameof(Strikeout));
             }
         }
 

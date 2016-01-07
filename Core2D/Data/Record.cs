@@ -10,8 +10,7 @@ namespace Core2D
     /// <summary>
     /// 
     /// </summary>
-    /// 
-    [ContentProperty("Values")]
+    [ContentProperty(nameof(Values))]
     public class Record : ObservableObject
     {
         private Guid _id;

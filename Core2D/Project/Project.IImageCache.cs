@@ -33,7 +33,7 @@ namespace Core2D
                 return key;
 
             _images.Add(key, bytes);
-            Notify("Keys");
+            Notify(nameof(Keys));
             return key;
         }
 
@@ -44,7 +44,7 @@ namespace Core2D
                 return;
 
             _images.Add(key, bytes);
-            Notify("Keys");
+            Notify(nameof(Keys));
         }
 
         /// <inheritdoc/>
@@ -61,7 +61,7 @@ namespace Core2D
         public void RemoveImage(string key)
         {
             _images.Remove(key);
-            Notify("Keys");
+            Notify(nameof(Keys));
         }
 
         /// <inheritdoc/>
@@ -74,7 +74,7 @@ namespace Core2D
                     _images.Remove(kvp.Key);
                 }
             }
-            Notify("Keys");
+            Notify(nameof(Keys));
         }
     }
 }

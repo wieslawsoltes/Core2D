@@ -11,7 +11,7 @@ namespace Core2D
     /// <summary>
     /// 
     /// </summary>
-    [RuntimeNameProperty("Name")]
+    [RuntimeNameProperty(nameof(Name))]
     public class BaseStyle : ObservableResource
     {
         private string _name;

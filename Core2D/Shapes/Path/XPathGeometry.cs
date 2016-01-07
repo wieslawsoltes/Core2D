@@ -9,7 +9,7 @@ namespace Core2D
     /// <summary>
     /// Path geometry.
     /// </summary>
-    [ContentProperty("Figures")]
+    [ContentProperty(nameof(Figures))]
     [TypeConverter(typeof(XPathGeometryTypeConverter))]
     public class XPathGeometry
     {

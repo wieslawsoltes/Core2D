@@ -9,8 +9,8 @@ namespace Core2D
     /// <summary>
     /// The <see cref="XGroup"/> collection container.
     /// </summary>
-    [ContentProperty("Children")]
-    [RuntimeNameProperty("Name")]
+    [ContentProperty(nameof(Children))]
+    [RuntimeNameProperty(nameof(Name))]
     public class Groups : ObservableResource
     {
         /// <summary>

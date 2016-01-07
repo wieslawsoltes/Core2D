@@ -9,7 +9,7 @@ namespace Core2D
     /// <summary>
     /// 
     /// </summary>
-    [ContentProperty("Flags")]
+    [ContentProperty(nameof(Flags))]
     [TypeConverter(typeof(ShapeStateTypeConverter))]
     public class ShapeState : ObservableObject
     {
@@ -24,15 +24,15 @@ namespace Core2D
             set
             {
                 Update(ref _flags, value);
-                Notify("Default");
-                Notify("Visible");
-                Notify("Printable");
-                Notify("Locked");
-                Notify("Connector");
-                Notify("None");
-                Notify("Standalone");
-                Notify("Input");
-                Notify("Output");
+                Notify(nameof(Default));
+                Notify(nameof(Visible));
+                Notify(nameof(Printable));
+                Notify(nameof(Locked));
+                Notify(nameof(Connector));
+                Notify(nameof(None));
+                Notify(nameof(Standalone));
+                Notify(nameof(Input));
+                Notify(nameof(Output));
             }
         }
 

@@ -7,7 +7,7 @@ namespace Core2D
     /// <summary>
     /// 
     /// </summary>
-    [ContentProperty("Value")]
+    [ContentProperty(nameof(Value))]
     public class Property : ObservableObject
     {
         private string _name;

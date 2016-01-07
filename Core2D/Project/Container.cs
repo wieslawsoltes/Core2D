@@ -8,8 +8,8 @@ namespace Core2D
     /// <summary>
     /// 
     /// </summary>
-    [ContentProperty("Layers")]
-    [RuntimeNameProperty("Name")]
+    [ContentProperty(nameof(Layers))]
+    [RuntimeNameProperty(nameof(Name))]
     public abstract class Container : ObservableResource
     {
         private string _name;

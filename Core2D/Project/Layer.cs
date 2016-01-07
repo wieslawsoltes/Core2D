@@ -21,8 +21,8 @@ namespace Core2D
     /// <summary>
     /// 
     /// </summary>
-    [ContentProperty("Shapes")]
-    [RuntimeNameProperty("Name")]
+    [ContentProperty(nameof(Shapes))]
+    [RuntimeNameProperty(nameof(Name))]
     public class Layer : ObservableResource
     {
         /// <summary>

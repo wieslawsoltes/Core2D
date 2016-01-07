@@ -9,7 +9,7 @@ namespace Core2D
     /// <summary>
     /// Base class for class with Xaml resources.
     /// </summary>
-    [ContentProperty("Resources")]
+    [ContentProperty(nameof(Resources))]
     public abstract class ObservableResource : ObservableObject
     {
         private IList<ObservableObject> _resources;

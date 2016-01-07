@@ -9,8 +9,7 @@ namespace Core2D
     /// <summary>
     /// The data context.
     /// </summary>
-    [ContentProperty("Properties")]
-    [RuntimeNameProperty("Name")]
+    [ContentProperty(nameof(Properties))]
     public class Data : ObservableObject
     {
         private ImmutableArray<Property> _properties;

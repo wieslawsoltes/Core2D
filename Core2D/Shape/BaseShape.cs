@@ -9,7 +9,7 @@ namespace Core2D
     /// <summary>
     /// Base class for shapes.
     /// </summary>
-    [RuntimeNameProperty("Name")]
+    [RuntimeNameProperty(nameof(Name))]
     public abstract class BaseShape : ObservableResource
     {
         private string _name;

@@ -10,7 +10,7 @@ namespace Core2D
     /// <summary>
     /// 
     /// </summary>
-    [ContentProperty("Records")]
+    [ContentProperty(nameof(Records))]
     public class Database : ObservableObject
     {
         private string _name;

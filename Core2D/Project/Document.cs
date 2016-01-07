@@ -8,8 +8,8 @@ namespace Core2D
     /// <summary>
     /// 
     /// </summary>
-    [ContentProperty("Pages")]
-    [RuntimeNameProperty("Name")]
+    [ContentProperty(nameof(Pages))]
+    [RuntimeNameProperty(nameof(Name))]
     public class Document : ObservableResource
     {
         private string _name;

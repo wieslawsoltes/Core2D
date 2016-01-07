@@ -8,7 +8,7 @@ namespace Core2D
     /// <summary>
     /// 
     /// </summary>
-    [ContentProperty("Name")]
+    [ContentProperty(nameof(Name))]
     public class Column : ObservableObject
     {
         private Guid _id;

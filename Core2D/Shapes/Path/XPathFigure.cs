@@ -9,7 +9,7 @@ namespace Core2D
     /// <summary>
     /// Path figure.
     /// </summary>
-    [ContentProperty("Segments")]
+    [ContentProperty(nameof(Segments))]
     public class XPathFigure
     {
         /// <summary>

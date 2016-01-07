@@ -9,8 +9,8 @@ namespace Core2D
     /// <summary>
     /// 
     /// </summary>
-    [ContentProperty("Documents")]
-    [RuntimeNameProperty("Name")]
+    [ContentProperty(nameof(Documents))]
+    [RuntimeNameProperty(nameof(Name))]
     public partial class Project : ObservableResource
     {
         private string _name;

@@ -7,7 +7,7 @@ namespace Core2D
     /// <summary>
     /// 
     /// </summary>
-    [ContentProperty("Flags")]
+    [ContentProperty(nameof(Flags))]
     public class LineFixedLength : ObservableObject
     {
         private LineFixedLengthFlags _flags;
@@ -24,12 +24,12 @@ namespace Core2D
             set
             {
                 Update(ref _flags, value);
-                Notify("Disabled");
-                Notify("Start");
-                Notify("End");
-                Notify("Vertical");
-                Notify("Horizontal");
-                Notify("All");
+                Notify(nameof(Disabled));
+                Notify(nameof(Start));
+                Notify(nameof(End));
+                Notify(nameof(Vertical));
+                Notify(nameof(Horizontal));
+                Notify(nameof(All));
             }
         }
 
