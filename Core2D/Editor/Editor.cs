@@ -1860,18 +1860,18 @@ namespace Core2D
         {
             Tools = new Dictionary<Tool, ToolBase>
             {
-                { Tool.None,      new ToolNone(this)      },
-                { Tool.Selection, new ToolSelection(this) },
-                { Tool.Point,     new ToolPoint(this)     },
-                { Tool.Line,      new ToolLine(this)      },
-                { Tool.Arc,       new ToolArc(this)       },
-                { Tool.Bezier,    new ToolBezier(this)    },
-                { Tool.QBezier,   new ToolQBezier(this)   },
-                { Tool.Path,      new ToolPath(this)      },
-                { Tool.Rectangle, new ToolRectangle(this) },
-                { Tool.Ellipse,   new ToolEllipse(this)   },
-                { Tool.Text,      new ToolText(this)      },
-                { Tool.Image,     new ToolImage(this)     }
+                [Tool.None]      = new ToolNone(this),
+                [Tool.Selection] = new ToolSelection(this),
+                [Tool.Point]     = new ToolPoint(this),
+                [Tool.Line]      = new ToolLine(this),
+                [Tool.Arc]       = new ToolArc(this),
+                [Tool.Bezier]    = new ToolBezier(this),
+                [Tool.QBezier]   = new ToolQBezier(this),
+                [Tool.Path]      = new ToolPath(this),
+                [Tool.Rectangle] = new ToolRectangle(this),
+                [Tool.Ellipse]   = new ToolEllipse(this),
+                [Tool.Text]      = new ToolText(this) ,
+                [Tool.Image]     = new ToolImage(this)
             }.ToImmutableDictionary();
         }
 
