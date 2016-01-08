@@ -32,7 +32,7 @@ namespace Core2D.Wpf.Controls.Custom.Lists
 
             var previous = group.Connectors;
             var next = array;
-            editor.Project.History.Snapshot(previous, next, (p) => group.Connectors = p);
+            editor.project?.History?.Snapshot(previous, next, (p) => group.Connectors = p);
             group.Connectors = next;
         }
     }
