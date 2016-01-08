@@ -221,7 +221,7 @@ namespace Core2D
                                     Points = _pointsCache,
                                     Shapes = _shapesCache
                                 };
-                                _editor.Project.History.Snapshot(previous, next,
+                                _editor.project?.History?.Snapshot(previous, next,
                                     (state) =>
                                     {
                                         if (state.Points != null)
