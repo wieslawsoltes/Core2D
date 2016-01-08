@@ -31,7 +31,7 @@ namespace Core2D.Wpf.Controls.Custom.Lists
 
             var previous = layer.Shapes;
             var next = array;
-            editor.Project.History.Snapshot(previous, next, (p) => layer.Shapes = p);
+            editor.project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
             layer.Shapes = next;
         }
     }
