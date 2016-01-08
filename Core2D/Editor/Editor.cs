@@ -2905,7 +2905,7 @@ namespace Core2D
 
                 var previous = layer.Shapes;
                 var next = layer.Shapes.Remove(_renderers[0].State.SelectedShape);
-                _project.History.Snapshot(previous, next, (p) => layer.Shapes = p);
+                _project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
                 layer.Shapes = next;
 
                 _renderers[0].State.SelectedShape = default(BaseShape);
@@ -2924,7 +2924,7 @@ namespace Core2D
 
                 var previous = layer.Shapes;
                 var next = builder.ToImmutable();
-                _project.History.Snapshot(previous, next, (p) => layer.Shapes = p);
+                _project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
                 layer.Shapes = next;
 
                 _renderers[0].State.SelectedShapes = default(ImmutableHashSet<BaseShape>);
@@ -3185,7 +3185,7 @@ namespace Core2D
             {
                 var previous = line.Start;
                 var next = point;
-                _project.History.Snapshot(previous, next, (p) => line.Start = p);
+                _project?.History?.Snapshot(previous, next, (p) => line.Start = p);
                 line.Start = next; 
             }
         }
@@ -3196,7 +3196,7 @@ namespace Core2D
             {
                 var previous = line.End;
                 var next = point;
-                _project.History.Snapshot(previous, next, (p) => line.End = p);
+                _project?.History?.Snapshot(previous, next, (p) => line.End = p);
                 line.End = next; 
             }
         }
@@ -3412,7 +3412,7 @@ namespace Core2D
 
                 var previous = layer.Shapes;
                 var next = source.ToImmutable();
-                _project.History.Snapshot(previous, next, (p) => layer.Shapes = p);
+                _project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
                 layer.Shapes = next;
 
                 return group; 
@@ -3431,7 +3431,7 @@ namespace Core2D
 
                 var previous = layer.Shapes;
                 var next = source.ToImmutable();
-                _project.History.Snapshot(previous, next, (p) => layer.Shapes = p);
+                _project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
                 layer.Shapes = next; 
             }
         }
