@@ -22,7 +22,7 @@ namespace Core2D
             {
                 var previous = project.Documents;
                 var next = project.Documents.Add(document);
-                project.History.Snapshot(previous, next, (p) => project.Documents = p);
+                project?.History?.Snapshot(previous, next, (p) => project.Documents = p);
                 project.Documents = next;
             }
         }
@@ -39,7 +39,7 @@ namespace Core2D
             {
                 var previous = project.Documents;
                 var next = project.Documents.Insert(index, document);
-                project.History.Snapshot(previous, next, (p) => project.Documents = p);
+                project?.History?.Snapshot(previous, next, (p) => project.Documents = p);
                 project.Documents = next;
             }
         }
@@ -55,7 +55,7 @@ namespace Core2D
             {
                 var previous = project.Documents;
                 var next = project.Documents.Remove(document);
-                project.History.Snapshot(previous, next, (p) => project.Documents = p);
+                project?.History?.Snapshot(previous, next, (p) => project.Documents = p);
                 project.Documents = next;
 
                 project.CurrentDocument = project.Documents.FirstOrDefault();
@@ -86,7 +86,7 @@ namespace Core2D
 
                 var previous = project.Documents;
                 var next = builder.ToImmutable();
-                project.History.Snapshot(previous, next, (p) => project.Documents = p);
+                project?.History?.Snapshot(previous, next, (p) => project.Documents = p);
                 project.Documents = next;
             }
         }
@@ -103,7 +103,7 @@ namespace Core2D
             {
                 var previous = document.Pages;
                 var next = document.Pages.Add(page);
-                project.History.Snapshot(previous, next, (p) => document.Pages = p);
+                project?.History?.Snapshot(previous, next, (p) => document.Pages = p);
                 document.Pages = next;
             }
         }
@@ -121,7 +121,7 @@ namespace Core2D
             {
                 var previous = document.Pages;
                 var next = document.Pages.Insert(index, page);
-                project.History.Snapshot(previous, next, (p) => document.Pages = p);
+                project?.History?.Snapshot(previous, next, (p) => document.Pages = p);
                 document.Pages = next;
             }
         }
@@ -140,7 +140,7 @@ namespace Core2D
                 {
                     var previous = document.Pages;
                     var next = document.Pages.Remove(page);
-                    project.History.Snapshot(previous, next, (p) => document.Pages = p);
+                    project?.History?.Snapshot(previous, next, (p) => document.Pages = p);
                     document.Pages = next;
 
                     project.CurrentDocument = document;
@@ -166,7 +166,7 @@ namespace Core2D
 
                 var previous = document.Pages;
                 var next = builder.ToImmutable();
-                project.History.Snapshot(previous, next, (p) => document.Pages = p);
+                project?.History?.Snapshot(previous, next, (p) => document.Pages = p);
                 document.Pages = next;
             }
         }
@@ -182,7 +182,7 @@ namespace Core2D
             {
                 var previous = project.Templates;
                 var next = project.Templates.Add(template);
-                project.History.Snapshot(previous, next, (p) => project.Templates = p);
+                project?.History?.Snapshot(previous, next, (p) => project.Templates = p);
                 project.Templates = next;
             }
         }
@@ -201,7 +201,7 @@ namespace Core2D
 
                 var previous = project.Templates;
                 var next = builder.ToImmutable();
-                project.History.Snapshot(previous, next, (p) => project.Templates = p);
+                project?.History?.Snapshot(previous, next, (p) => project.Templates = p);
                 project.Templates = next;
             }
         }
@@ -217,7 +217,7 @@ namespace Core2D
             {
                 var previous = project.Templates;
                 var next = project.Templates.Remove(project.CurrentTemplate);
-                project.History.Snapshot(previous, next, (p) => project.Templates = p);
+                project?.History?.Snapshot(previous, next, (p) => project.Templates = p);
                 project.Templates = next;
 
                 project.CurrentTemplate = project.Templates.FirstOrDefault();
@@ -236,7 +236,7 @@ namespace Core2D
             {
                 var previous = page.Template;
                 var next = template;
-                project.History.Snapshot(previous, next, (p) => page.Template = p);
+                project?.History?.Snapshot(previous, next, (p) => page.Template = p);
                 page.Template = next;
             }
         }
@@ -253,7 +253,7 @@ namespace Core2D
             {
                 var previous = container.Layers;
                 var next = container.Layers.Add(layer);
-                project.History.Snapshot(previous, next, (p) => container.Layers = p);
+                project?.History?.Snapshot(previous, next, (p) => container.Layers = p);
                 container.Layers = next;
             }
         }
@@ -270,7 +270,7 @@ namespace Core2D
             {
                 var previous = container.Layers;
                 var next = container.Layers.Remove(layer);
-                project.History.Snapshot(previous, next, (p) => container.Layers = p);
+                project?.History?.Snapshot(previous, next, (p) => container.Layers = p);
                 container.Layers = next;
 
                 container.CurrentLayer = container.Layers.FirstOrDefault();
@@ -288,7 +288,7 @@ namespace Core2D
             {
                 var previous = layer.Shapes;
                 var next = ImmutableArray.Create<BaseShape>();
-                _project.History.Snapshot(previous, next, (p) => layer.Shapes = p);
+                project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
                 layer.Shapes = next;
             }
         }
@@ -305,7 +305,7 @@ namespace Core2D
             {
                 var previous = layer.Shapes;
                 var next = layer.Shapes.Add(shape);
-                project.History.Snapshot(previous, next, (p) => layer.Shapes = p);
+                project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
                 layer.Shapes = next;
             }
         }
@@ -323,7 +323,7 @@ namespace Core2D
             {
                 var previous = layer.Shapes;
                 var next = layer.Shapes.Insert(index, shape);
-                project.History.Snapshot(previous, next, (p) => layer.Shapes = p);
+                project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
                 layer.Shapes = next;
             }
         }
@@ -343,7 +343,7 @@ namespace Core2D
 
                 var previous = layer.Shapes;
                 var next = builder.ToImmutable();
-                project.History.Snapshot(previous, next, (p) => layer.Shapes = p);
+                project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
                 layer.Shapes = next;
             }
         }
@@ -360,7 +360,7 @@ namespace Core2D
             {
                 var previous = layer.Shapes;
                 var next = layer.Shapes.Remove(shape);
-                project.History.Snapshot(previous, next, (p) => layer.Shapes = p);
+                project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
                 layer.Shapes = next;
             }
         }
@@ -398,7 +398,7 @@ namespace Core2D
 
                 var previous = layer.Shapes;
                 var next = builder.ToImmutable();
-                project.History.Snapshot(previous, next, (p) => layer.Shapes = p);
+                project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
                 layer.Shapes = next;
             }
         }
@@ -421,7 +421,7 @@ namespace Core2D
 
                 var previous = layer.Shapes;
                 var next = builder.ToImmutable();
-                project.History.Snapshot(previous, next, (p) => layer.Shapes = p);
+                project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
                 layer.Shapes = next;
             }
         }
@@ -438,7 +438,7 @@ namespace Core2D
             {
                 var previous = data.Properties;
                 var next = data.Properties.Add(property);
-                project.History.Snapshot(previous, next, (p) => data.Properties = p);
+                project?.History?.Snapshot(previous, next, (p) => data.Properties = p);
                 data.Properties = next;
             }
         }
@@ -455,7 +455,7 @@ namespace Core2D
             {
                 var previous = data.Properties;
                 var next = data.Properties.Remove(property);
-                project.History.Snapshot(previous, next, (p) => data.Properties = p);
+                project?.History?.Snapshot(previous, next, (p) => data.Properties = p);
                 data.Properties = next;
             }
         }
@@ -471,7 +471,7 @@ namespace Core2D
             {
                 var previous = project.Databases;
                 var next = project.Databases.Add(db);
-                project.History.Snapshot(previous, next, (p) => project.Databases = p);
+                project?.History?.Snapshot(previous, next, (p) => project.Databases = p);
                 project.Databases = next;
 
                 project.CurrentDatabase = db;
@@ -489,7 +489,7 @@ namespace Core2D
             {
                 var previous = project.Databases;
                 var next = project.Databases.Remove(db);
-                project.History.Snapshot(previous, next, (p) => project.Databases = p);
+                project?.History?.Snapshot(previous, next, (p) => project.Databases = p);
                 project.Databases = next;
 
                 project.CurrentDatabase = project.Databases.FirstOrDefault();
@@ -518,7 +518,7 @@ namespace Core2D
 
                     var previous = project.Databases;
                     var next = builder.ToImmutable();
-                    project.History.Snapshot(previous, next, (p) => project.Databases = p);
+                    project?.History?.Snapshot(previous, next, (p) => project.Databases = p);
                     project.Databases = next;
                 }
             }
@@ -536,7 +536,7 @@ namespace Core2D
             {
                 var previous = db.Columns;
                 var next = db.Columns.Add(column);
-                project.History.Snapshot(previous, next, (p) => db.Columns = p);
+                project?.History?.Snapshot(previous, next, (p) => db.Columns = p);
                 db.Columns = next;
             }
         }
@@ -553,7 +553,7 @@ namespace Core2D
             {
                 var previous = db.Columns;
                 var next = db.Columns.Remove(column);
-                project.History.Snapshot(previous, next, (p) => db.Columns = p);
+                project?.History?.Snapshot(previous, next, (p) => db.Columns = p);
                 db.Columns = next;
             }
         }
@@ -570,7 +570,7 @@ namespace Core2D
             {
                 var previous = db.Records;
                 var next = db.Records.Add(record);
-                project.History.Snapshot(previous, next, (p) => db.Records = p);
+                project?.History?.Snapshot(previous, next, (p) => db.Records = p);
                 db.Records = next;
             }
         }
@@ -587,7 +587,7 @@ namespace Core2D
             {
                 var previous = db.Records;
                 var next = db.Records.Remove(record);
-                project.History.Snapshot(previous, next, (p) => db.Records = p);
+                project?.History?.Snapshot(previous, next, (p) => db.Records = p);
                 db.Records = next;
             }
         }
@@ -604,7 +604,7 @@ namespace Core2D
             {
                 var previous = record;
                 var next = default(Record);
-                project.History.Snapshot(previous, next, (p) => data.Record = p);
+                project?.History?.Snapshot(previous, next, (p) => data.Record = p);
                 data.Record = next;
             }
         }
@@ -621,7 +621,7 @@ namespace Core2D
             {
                 var previous = data.Record;
                 var next = record;
-                project.History.Snapshot(previous, next, (p) => data.Record = p);
+                project?.History?.Snapshot(previous, next, (p) => data.Record = p);
                 data.Record = next;
             }
         }
@@ -638,7 +638,7 @@ namespace Core2D
             {
                 var previous = shape.Data;
                 var next = data;
-                project.History.Snapshot(previous, next, (p) => shape.Data = p);
+                project?.History?.Snapshot(previous, next, (p) => shape.Data = p);
                 shape.Data = data;
             }
         }
@@ -654,7 +654,7 @@ namespace Core2D
             {
                 var previous = project.GroupLibraries;
                 var next = project.GroupLibraries.Add(library);
-                project.History.Snapshot(previous, next, (p) => project.GroupLibraries = p);
+                project?.History?.Snapshot(previous, next, (p) => project.GroupLibraries = p);
                 project.GroupLibraries = next;
             }
         }
@@ -673,7 +673,7 @@ namespace Core2D
 
                 var previous = project.GroupLibraries;
                 var next = builder.ToImmutable();
-                project.History.Snapshot(previous, next, (p) => project.GroupLibraries = p);
+                project?.History?.Snapshot(previous, next, (p) => project.GroupLibraries = p);
                 project.GroupLibraries = next;
             }
         }
@@ -689,7 +689,7 @@ namespace Core2D
             {
                 var previous = project.GroupLibraries;
                 var next = project.GroupLibraries.Remove(library);
-                project.History.Snapshot(previous, next, (p) => project.GroupLibraries = p);
+                project?.History?.Snapshot(previous, next, (p) => project.GroupLibraries = p);
                 project.GroupLibraries = next;
 
                 project.CurrentGroupLibrary = project.GroupLibraries.FirstOrDefault();
@@ -707,7 +707,7 @@ namespace Core2D
             {
                 var previous = project.StyleLibraries;
                 var next = project.StyleLibraries.Add(library);
-                project.History.Snapshot(previous, next, (p) => project.StyleLibraries = p);
+                project?.History?.Snapshot(previous, next, (p) => project.StyleLibraries = p);
                 project.StyleLibraries = next;
             }
         }
@@ -726,7 +726,7 @@ namespace Core2D
 
                 var previous = project.StyleLibraries;
                 var next = builder.ToImmutable();
-                project.History.Snapshot(previous, next, (p) => project.StyleLibraries = p);
+                project?.History?.Snapshot(previous, next, (p) => project.StyleLibraries = p);
                 project.StyleLibraries = next;
             }
         }
@@ -742,7 +742,7 @@ namespace Core2D
             {
                 var previous = project.StyleLibraries;
                 var next = project.StyleLibraries.Remove(library);
-                project.History.Snapshot(previous, next, (p) => project.StyleLibraries = p);
+                project?.History?.Snapshot(previous, next, (p) => project.StyleLibraries = p);
                 project.StyleLibraries = next;
 
                 project.CurrentStyleLibrary = project.StyleLibraries.FirstOrDefault();
@@ -774,7 +774,7 @@ namespace Core2D
                 {
                     var previous = library.Items;
                     var next = library.Items.Remove(style);
-                    project.History.Snapshot(previous, next, (p) => library.Items = p);
+                    project?.History?.Snapshot(previous, next, (p) => library.Items = p);
                     library.Items = next;
 
                     library.Selected = library.Items.FirstOrDefault();
@@ -799,7 +799,7 @@ namespace Core2D
                     {
                         var previous = child.Style;
                         var next = style;
-                        project.History.Snapshot(previous, next, (p) => child.Style = p);
+                        project?.History?.Snapshot(previous, next, (p) => child.Style = p);
                         child.Style = next;
                     }
                 }
@@ -807,7 +807,7 @@ namespace Core2D
                 {
                     var previous = shape.Style;
                     var next = style;
-                    project.History.Snapshot(previous, next, (p) => shape.Style = p);
+                    project?.History?.Snapshot(previous, next, (p) => shape.Style = p);
                     shape.Style = next;
                 }
             }
@@ -838,7 +838,7 @@ namespace Core2D
                 {
                     var previous = library.Items;
                     var next = library.Items.Remove(group);
-                    project.History.Snapshot(previous, next, (p) => library.Items = p);
+                    project?.History?.Snapshot(previous, next, (p) => library.Items = p);
                     library.Items = next;
 
                     library.Selected = library.Items.FirstOrDefault();
@@ -858,7 +858,7 @@ namespace Core2D
             {
                 var previous = library.Items;
                 var next = library.Items.Add(item);
-                project.History.Snapshot(previous, next, (p) => library.Items = p);
+                project?.History?.Snapshot(previous, next, (p) => library.Items = p);
                 library.Items = next;
             }
         }
@@ -878,7 +878,7 @@ namespace Core2D
 
                 var previous = library.Items;
                 var next = builder.ToImmutable();
-                project.History.Snapshot(previous, next, (p) => library.Items = p);
+                project?.History?.Snapshot(previous, next, (p) => library.Items = p);
                 library.Items = next;
             }
         }
