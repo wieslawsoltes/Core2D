@@ -31,7 +31,7 @@ namespace Core2D.Wpf.Controls.Custom.Lists
 
             var previous = gl.Items;
             var next = array;
-            editor.project?.History?.Snapshot(previous, next, (p) => gl.Items = p);
+            editor.Project?.History?.Snapshot(previous, next, (p) => gl.Items = p);
             gl.Items = next;
         }
     }
