@@ -278,6 +278,22 @@ namespace Core2D
         }
 
         /// <summary>
+        /// Clear layer.
+        /// </summary>
+        /// <param name="project">The project instance.</param>
+        /// <param name="layer">The layer instance.</param>
+        public static void ClearLayer(this Project project, Layer layer)
+        {
+            if (layer != null)
+            {
+                var previous = layer.Shapes;
+                var next = ImmutableArray.Create<BaseShape>();
+                _project.History.Snapshot(previous, next, (p) => layer.Shapes = p);
+                layer.Shapes = next;
+            }
+        }
+
+        /// <summary>
         /// Add shape.
         /// </summary>
         /// <param name="project">The project instance.</param>
