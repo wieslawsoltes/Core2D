@@ -266,7 +266,7 @@ namespace Core2D
             if (item is Page)
             {
                 var selected = item as Page;
-                var document = _project.Documents.FirstOrDefault(d => d.Pages.Contains(selected));
+                var document = _project?.Documents.FirstOrDefault(d => d.Pages.Contains(selected));
                 if (document != null)
                 {
                     var page = _projectFactory?.GetPage(_project, Constants.DefaultPageName);
@@ -282,7 +282,6 @@ namespace Core2D
             else if (item is Document)
             {
                 var document = item as Document;
-
                 var page = _projectFactory?.GetPage(_project, Constants.DefaultPageName);
                 if (page == null)
                 {
@@ -324,17 +323,17 @@ namespace Core2D
         /// <param name="path">The project file path.</param>
         public void Open(string path)
         {
-            if (_jsonSerializer == null)
-                return;
-
             try
             {
-                var project = Project.Open(path, _jsonSerializer);
-                if (project != null)
+                if (_jsonSerializer != null)
                 {
-                    Unload();
-                    Load(project, path);
-                    AddRecent(path, project.Name);
+                    var project = Project.Open(path, _jsonSerializer);
+                    if (project != null)
+                    {
+                        Unload();
+                        Load(project, path);
+                        AddRecent(path, project.Name);
+                    }
                 }
             }
             catch (Exception ex)
@@ -358,21 +357,20 @@ namespace Core2D
         /// <param name="path">The project file path.</param>
         public void Save(string path)
         {
-            if (_project != null || _jsonSerializer == null)
-                return;
-
             try
             {
-                Project.Save(_project, path, _jsonSerializer);
-
-                AddRecent(path, _project.Name);
-
-                if (string.IsNullOrEmpty(_projectPath))
+                if (_project != null && _jsonSerializer != null)
                 {
-                    _projectPath = path;
+                    Project.Save(_project, path, _jsonSerializer);
+                    AddRecent(path, _project.Name);
+    
+                    if (string.IsNullOrEmpty(_projectPath))
+                    {
+                        _projectPath = path;
+                    }
+    
+                    IsProjectDirty = false;
                 }
-
-                IsProjectDirty = false;
             }
             catch (Exception ex)
             {
@@ -492,51 +490,47 @@ namespace Core2D
         /// <param name="xaml">The xaml string.</param>
         public void OnImportXamlString(string xaml)
         {
-            if (_project == null || _xamlSerializer == null)
-                return;
-
-            var item = _xamlSerializer.Deserialize<object>(xaml);
+            var item = _xamlSerializer?.Deserialize<object>(xaml);
             if (item != null)
             {
                 if (item is ShapeStyle)
                 {
-                    _project.AddStyle(_project.CurrentStyleLibrary, item as ShapeStyle);
+                    _project.AddStyle(_project?.CurrentStyleLibrary, item as ShapeStyle);
                 }
                 else if (item is BaseShape)
                 {
                     var shapes = Enumerable.Repeat(item as BaseShape, 1);
-                    _project.AddShape(_project.CurrentContainer.CurrentLayer, item as BaseShape);
+                    _project?.AddShape(_project.CurrentContainer.CurrentLayer, item as BaseShape);
                 }
                 else if (item is Styles)
                 {
                     var styles = item as Styles;
                     var library = Library<ShapeStyle>.Create(styles.Name, styles.Children);
-                    _project.AddStyleLibrary(library);
+                    _project?.AddStyleLibrary(library);
                 }
                 else if (item is Shapes)
                 {
                     var shapes = (item as Shapes).Children;
                     if (shapes.Count > 0)
                     {
-                        _project.AddShapes(_project.CurrentContainer.CurrentLayer, shapes);
+                        _project?.AddShapes(_project.CurrentContainer.CurrentLayer, shapes);
                     }
                 }
                 else if (item is Groups)
                 {
                     var groups = item as Groups;
                     var library = Library<XGroup>.Create(groups.Name, groups.Children);
-                    _project.AddGroupLibrary(library);
+                    _project?.AddGroupLibrary(library);
                 }
                 else if (item is Data)
                 {
-                    if (_renderers[0].State.SelectedShape != null
-                        || (_renderers[0].State.SelectedShapes != null && _renderers[0].State.SelectedShapes.Count > 0))
+                    if (_renderers?[0]?.State?.SelectedShape != null || (_renderers?[0]?.State?.SelectedShapes?.Count > 0))
                     {
                         OnApplyData(item as Data);
                     }
                     else
                     {
-                        var page = _project.CurrentContainer as Page;
+                        var page = _project?.CurrentContainer as Page;
                         if (page != null)
                         {
                             page.Data = item as Data;
@@ -545,23 +539,23 @@ namespace Core2D
                 }
                 else if (item is Database)
                 {
-                    _project.AddDatabase(item as Database);
+                    _project?.AddDatabase(item as Database);
                 }
                 else if (item is Layer)
                 {
-                    _project.AddLayer(_project.CurrentContainer, item as Layer);
+                    _project?.AddLayer(_project.CurrentContainer, item as Layer);
                 }
                 else if (item is Template)
                 {
-                    _project.AddTemplate(item as Template);
+                    _project?.AddTemplate(item as Template);
                 }
                 else if (item is Page)
                 {
-                    _project.AddPage(_project.CurrentDocument, item as Page);
+                    _project?.AddPage(_project.CurrentDocument, item as Page);
                 }
                 else if (item is Document)
                 {
-                    _project.AddDocument(item as Document);
+                    _project?.AddDocument(item as Document);
                 }
                 else if (item is Options)
                 {
@@ -965,7 +959,7 @@ namespace Core2D
                 if (_pageToCopy != null)
                 {
                     var page = item as Page;
-                    var document = _project.Documents.FirstOrDefault(d => d.Pages.Contains(page));
+                    var document = _project?.Documents.FirstOrDefault(d => d.Pages.Contains(page));
                     if (document != null)
                     {
                         int index = document.Pages.IndexOf(page);
@@ -1029,7 +1023,7 @@ namespace Core2D
                 Deselect(_project?.CurrentContainer);
                 Select(
                     _project?.CurrentContainer,
-                    ImmutableHashSet.CreateRange(_project.CurrentContainer.CurrentLayer.Shapes));
+                    ImmutableHashSet.CreateRange(_project?.CurrentContainer?.CurrentLayer?.Shapes));
             }
             catch (Exception ex)
             {
@@ -1052,25 +1046,6 @@ namespace Core2D
             }
         }
 
-        private void ClearLayer(Layer layer)
-        {
-            if (layer != null)
-            {
-                var previous = layer.Shapes;
-                var next = ImmutableArray.Create<BaseShape>();
-                _project.History.Snapshot(previous, next, (p) => layer.Shapes = p);
-                layer.Shapes = next;
-            }
-        }
-
-        private void ClearLayers(IEnumerable<Layer> layers)
-        {
-            foreach (var layer in layers)
-            {
-                ClearLayer(layer);
-            }
-        }
-
         /// <summary>
         /// Remove all shapes.
         /// </summary>
@@ -1081,9 +1056,14 @@ namespace Core2D
                 var container = _project?.CurrentContainer;
                 if (container != null)
                 {
-                    ClearLayers(container.Layers);
+                    foreach (var layer in container.Layers)
+                    {
+                        _project?.ClearLayer(layer);
+                    }
+
                     container.WorkingLayer.Shapes = ImmutableArray.Create<BaseShape>();
                     container.HelperLayer.Shapes = ImmutableArray.Create<BaseShape>();
+
                     _project.CurrentContainer.Invalidate();
                 }
             }
