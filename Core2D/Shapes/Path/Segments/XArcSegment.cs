@@ -64,5 +64,18 @@ namespace Core2D
                 IsSmoothJoin = isSmoothJoin
             };
         }
+
+        /// <inheritdoc/>
+        public override string ToString()
+        {
+            return string.Format(
+                     "A{1}{0}{2}{0}{3}{0}{4}{0}{5}",
+                     " ",
+                     Size,
+                     RotationAngle,
+                     IsLargeArc ? "1" : "0",
+                     SweepDirection == XSweepDirection.Clockwise ? "1" : "0",
+                     Point);
+        }
     }
 }

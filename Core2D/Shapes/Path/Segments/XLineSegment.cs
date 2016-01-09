@@ -36,5 +36,11 @@ namespace Core2D
                 IsSmoothJoin = isSmoothJoin
             };
         }
+
+        /// <inheritdoc/>
+        public override string ToString()
+        {
+            return "L" + Point.ToString();
+        }
     }
 }

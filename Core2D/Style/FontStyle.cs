@@ -133,5 +133,11 @@ namespace Core2D
                 Flags = flags
             };
         }
+
+        /// <inheritdoc/>
+        public override string ToString()
+        {
+            return _flags.ToString();
+        }
     }
 }

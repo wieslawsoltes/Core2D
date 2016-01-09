@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Portable.Xaml.Markup;
 
 namespace Core2D
@@ -69,6 +70,27 @@ namespace Core2D
                 IsFilled = isFilled,
                 IsClosed = isClosed
             };
+        }
+
+        private string ToString(IList<XPathSegment> segments)
+        {
+            if (segments.Count == 0)
+            {
+                return string.Empty;
+            }
+
+            var sb = new StringBuilder();
+            for (int i = 0; i < segments.Count; i++)
+            {
+                sb.Append(segments[i].ToString());
+            }
+            return sb.ToString();
+        }
+
+        /// <inheritdoc/>
+        public override string ToString()
+        {
+            return "M" + StartPoint.ToString() + (Segments != null ? ToString(Segments) : "") + (IsClosed ? "z" : "");
         }
     }
 }
