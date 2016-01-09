@@ -701,44 +701,44 @@ namespace Core2D.Wpf
             switch (type)
             {
                 case ExportType.Style:
-                    filter = "Style (*.style)|*.style|All (*.*)|*.*";
+                    filter = "Style (*.style)|*.style|Style (*.xaml)|*.xaml|All (*.*)|*.*";
                     name = (item as ShapeStyle).Name;
                     break;
                 case ExportType.Styles:
-                    filter = "Styles (*.styles)|*.styles|All (*.*)|*.*";
+                    filter = "Styles (*.styles)|*.styles|Styles (*.xaml)|*.xaml|All (*.*)|*.*";
                     name = (item as Library<ShapeStyle>).Name;
                     break;
                 case ExportType.StyleLibrary:
-                    filter = "StyleLibrary (*.stylelibrary)|*.stylelibrary|All (*.*)|*.*";
+                    filter = "StyleLibrary (*.stylelibrary)|*.stylelibrary|StyleLibrary (*.xaml)|*.xaml|All (*.*)|*.*";
                     name = (item as Library<ShapeStyle>).Name;
                     break;
                 case ExportType.StyleLibraries:
-                    filter = "StyleLibraries (*.stylelibraries)|*.stylelibraries|All (*.*)|*.*";
-                    name = (item as Project).Name;
+                    filter = "StyleLibraries (*.stylelibraries)|*.stylelibraries|StyleLibraries (*.xaml)|*.xaml|All (*.*)|*.*";
+                    name = "StyleLibraries";
                     break;
                 case ExportType.Group:
-                    filter = "Group (*.group)|*.group|All (*.*)|*.*";
+                    filter = "Group (*.group)|*.group|Group (*.xaml)|*.xaml|All (*.*)|*.*";
                     name = (item as XGroup).Name;
                     break;
                 case ExportType.Groups:
-                    filter = "Groups (*.groups)|*.groups|All (*.*)|*.*";
+                    filter = "Groups (*.groups)|*.groups|Groups (*.xaml)|*.xaml|All (*.*)|*.*";
                     name = (item as Library<XGroup>).Name;
                     break;
                 case ExportType.GroupLibrary:
-                    filter = "GroupLibrary (*.grouplibrary)|*.grouplibrary|All (*.*)|*.*";
+                    filter = "GroupLibrary (*.grouplibrary)|*.grouplibrary|GroupLibrary (*.xaml)|*.xaml|All (*.*)|*.*";
                     name = (item as Library<XGroup>).Name;
                     break;
                 case ExportType.GroupLibraries:
-                    filter = "GroupLibraries (*.grouplibraries)|*.grouplibraries|All (*.*)|*.*";
-                    name = (item as Project).Name;
+                    filter = "GroupLibraries (*.grouplibraries)|*.grouplibraries|GroupLibraries (*.xaml)|*.xaml|All (*.*)|*.*";
+                    name = "GroupLibraries";
                     break;
                 case ExportType.Template:
-                    filter = "Template (*.template)|*.template|All (*.*)|*.*";
-                    name = (item as Container).Name;
+                    filter = "Template (*.template)|*.template|Template (*.xaml)|*.xaml|All (*.*)|*.*";
+                    name = (item as Template).Name;
                     break;
                 case ExportType.Templates:
-                    filter = "Templates (*.templates)|*.templates|All (*.*)|*.*";
-                    name = (item as Project).Name;
+                    filter = "Templates (*.templates)|*.templates|Templates (*.xaml)|*.xaml|All (*.*)|*.*";
+                    name = "Templates";
                     break;
             }
 

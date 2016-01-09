@@ -800,64 +800,65 @@ namespace Core2D.Perspex
                 {
                     string initial = string.Empty;
                     string name = string.Empty;
-                    string ext = string.Empty;
+                    string extension = string.Empty;
 
                     switch (type)
                     {
                         case ExportType.Style:
                             name = "Style";
-                            ext = "style";
+                            extension = "style";
                             initial = (item as ShapeStyle).Name;
                             break;
                         case ExportType.Styles:
                             name = "Styles";
-                            ext = "styles";
+                            extension = "styles";
                             initial = (item as Library<ShapeStyle>).Name;
                             break;
                         case ExportType.StyleLibrary:
                             name = "StyleLibrary";
-                            ext = "stylelibrary";
+                            extension = "stylelibrary";
                             initial = (item as Library<ShapeStyle>).Name;
                             break;
                         case ExportType.StyleLibraries:
                             name = "StyleLibraries";
-                            ext = "stylelibraries";
-                            initial = (item as Project).Name;
+                            extension = "stylelibraries";
+                            initial = "StyleLibraries";
                             break;
                         case ExportType.Group:
                             name = "Group";
-                            ext = "group";
+                            extension = "group";
                             initial = (item as XGroup).Name;
                             break;
                         case ExportType.Groups:
                             name = "Groups";
-                            ext = "groups";
+                            extension = "groups";
                             initial = (item as Library<XGroup>).Name;
                             break;
                         case ExportType.GroupLibrary:
                             name = "GroupLibrary";
-                            ext = "grouplibrary";
+                            extension = "grouplibrary";
                             initial = (item as Library<XGroup>).Name;
                             break;
                         case ExportType.GroupLibraries:
                             name = "GroupLibraries";
-                            ext = "grouplibraries";
-                            initial = (item as Project).Name;
+                            extension = "grouplibraries";
+                            initial = "GroupLibraries";
                             break;
                         case ExportType.Template:
                             name = "Template";
-                            ext = "template";
-                            initial = (item as Container).Name;
+                            extension = "template";
+                            initial = (item as Template).Name;
                             break;
                         case ExportType.Templates:
                             name = "Templates";
-                            ext = "templates";
-                            initial = (item as Project).Name;
+                            extension = "templates";
+                            initial = "Templates";
                             break;
                     }
 
                     var dlg = new SaveFileDialog();
-                    dlg.Filters.Add(new FileDialogFilter() { Name = name, Extensions = { ext } });
+                    dlg.Filters.Add(new FileDialogFilter() { Name = name, Extensions = { extension } });
+                    dlg.Filters.Add(new FileDialogFilter() { Name = name, Extensions = { "xaml" } });
                     dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
                     dlg.InitialFileName = initial;
                     var result = await dlg.ShowAsync(_mainWindow);
