@@ -18,7 +18,7 @@ namespace Core2D
         /// <inheritdoc/>
         public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
         {
-            return false;
+            return destinationType == typeof(string);
         }
 
         /// <inheritdoc/>
@@ -30,7 +30,12 @@ namespace Core2D
         /// <inheritdoc/>
         public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
         {
-            throw new NotImplementedException();
+            var state = value as ShapeState;
+            if (state != null)
+            {
+                return state.ToString();
+            }
+            throw new NotSupportedException();
         }
     }
 }
