@@ -55,6 +55,7 @@
     <Compile Include="Xaml\CoreXamlSchemaContext.cs" />
     <Compile Include="Xaml\CoreXamlType.cs" />
     <Compile Include="Xaml\CoreXamlTypeInvoker.cs" />
+    <Compile Include="Xaml\CoreXamlWriter.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Core2D\Core2D.csproj">
