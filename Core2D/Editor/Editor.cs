@@ -574,6 +574,27 @@ namespace Core2D
         }
 
         /// <summary>
+        /// Export Xaml from file.
+        /// </summary>
+        /// <param name="path">The xaml file path.</param>
+        /// <param name="item">The object item.</param>
+        public void OnExportXaml(string path, object item)
+        {
+            try
+            {
+                var xaml = _xamlSerializer?.Serialize(item);
+                if (!string.IsNullOrWhiteSpace(xaml))
+                {
+                    Project.WriteUtf8Text(path, xaml);
+                }
+            }
+            catch (Exception ex)
+            {
+                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+            }
+        }
+
+        /// <summary>
         /// Import object from file.
         /// </summary>
         /// <param name="path">The object file path.</param>
