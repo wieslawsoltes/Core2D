@@ -864,7 +864,15 @@ namespace Core2D.Perspex
                     var result = await dlg.ShowAsync(_mainWindow);
                     if (result != null)
                     {
-                        _editor?.OnExportObject(result, item, type);
+                        string resultExtension = System.IO.Path.GetExtension(result);
+                        if (string.Compare(resultExtension, ".xaml", true) == 0)
+                        {
+                            _editor?.OnExportXaml(result, item);
+                        }
+                        else
+                        {
+                            _editor?.OnExportObject(result, item, type);
+                        }
                     }
                 }
             }

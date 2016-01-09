@@ -751,7 +751,19 @@ namespace Core2D.Wpf
 
             if (dlg.ShowDialog(_mainWindow) == true)
             {
-                _editor?.OnExportObject(dlg.FileName, item, type);
+                switch (dlg.FilterIndex)
+                {
+                    case 1:
+                        _editor?.OnExportObject(dlg.FileName, item, type);
+                        break;
+                    case 2:
+                        _editor?.OnExportXaml(dlg.FileName, item);
+                        break;
+                    case 3:
+                        throw new NotSupportedException();
+                    default:
+                        break;
+                }
             }
         }
 
