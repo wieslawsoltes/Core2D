@@ -743,7 +743,7 @@ namespace Core2D
                         break;
                     case ExportType.StyleLibraries:
                         {
-                            var json = _jsonSerializer.Serialize((item as Project).StyleLibraries);
+                            var json = _jsonSerializer.Serialize(item as IEnumerable<Library<ShapeStyle>>);
                             Project.WriteUtf8Text(path, json);
                         }
                         break;
@@ -767,19 +767,19 @@ namespace Core2D
                         break;
                     case ExportType.GroupLibraries:
                         {
-                            var json = _jsonSerializer.Serialize((item as Project).GroupLibraries);
+                            var json = _jsonSerializer.Serialize(item as IEnumerable<Library<XGroup>>);
                             Project.WriteUtf8Text(path, json);
                         }
                         break;
                     case ExportType.Template:
                         {
-                            var json = _jsonSerializer.Serialize(item as Container);
+                            var json = _jsonSerializer.Serialize(item as Template);
                             Project.WriteUtf8Text(path, json);
                         }
                         break;
                     case ExportType.Templates:
                         {
-                            var json = _jsonSerializer.Serialize((item as Project).Templates);
+                            var json = _jsonSerializer.Serialize(item as IEnumerable<Template>);
                             Project.WriteUtf8Text(path, json);
                         }
                         break;

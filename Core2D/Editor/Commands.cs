@@ -135,7 +135,7 @@ namespace Core2D
         /// <summary>
         /// Export style libraries.
         /// </summary>
-        public static ICoreCommand<Project> ExportStyleLibrariesCommand { get; set; }
+        public static ICoreCommand<IEnumerable<Library<ShapeStyle>>> ExportStyleLibrariesCommand { get; set; }
 
         /// <summary>
         /// Export group.
@@ -155,7 +155,7 @@ namespace Core2D
         /// <summary>
         /// Export group libraries.
         /// </summary>
-        public static ICoreCommand<Project> ExportGroupLibrariesCommand { get; set; }
+        public static ICoreCommand<IEnumerable<Library<XGroup>>> ExportGroupLibrariesCommand { get; set; }
 
         /// <summary>
         /// Export template.
@@ -165,7 +165,7 @@ namespace Core2D
         /// <summary>
         /// Export templates.
         /// </summary>
-        public static ICoreCommand<Project> ExportTemplatesCommand { get; set; }
+        public static ICoreCommand<IEnumerable<Template>> ExportTemplatesCommand { get; set; }
 
         /// <summary>
         /// Undo last action.

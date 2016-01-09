@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -294,7 +295,7 @@ namespace Core2D.Wpf
                     (item) => editor.IsEditMode());
 
             Commands.ExportStyleLibrariesCommand =
-                Command<Project>.Create(
+                Command<IEnumerable<Library<ShapeStyle>>>.Create(
                     (item) => OnExportObject(item, ExportType.StyleLibraries),
                     (item) => editor.IsEditMode());
 
@@ -314,7 +315,7 @@ namespace Core2D.Wpf
                     (item) => editor.IsEditMode());
 
             Commands.ExportGroupLibrariesCommand =
-                Command<Project>.Create(
+                Command<IEnumerable<Library<XGroup>>>.Create(
                     (item) => OnExportObject(item, ExportType.GroupLibraries),
                     (item) => editor.IsEditMode());
 
@@ -324,7 +325,7 @@ namespace Core2D.Wpf
                     (item) => editor.IsEditMode());
 
             Commands.ExportTemplatesCommand =
-                Command<Project>.Create(
+                Command<IEnumerable<Template>>.Create(
                     (item) => OnExportObject(item, ExportType.Templates),
                     (item) => editor.IsEditMode());
 

@@ -3,6 +3,7 @@
 //#define SKIA_WIN
 //#define SKIA_GTK
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
@@ -333,7 +334,7 @@ namespace Core2D.Perspex
                     (item) => editor.IsEditMode());
 
             Commands.ExportStyleLibrariesCommand =
-                Command<Project>.Create(
+                Command<IEnumerable<Library<ShapeStyle>>>.Create(
                     async (item) => await OnExportObject(item, ExportType.StyleLibraries),
                     (item) => editor.IsEditMode());
 
@@ -353,7 +354,7 @@ namespace Core2D.Perspex
                     (item) => editor.IsEditMode());
 
             Commands.ExportGroupLibrariesCommand =
-                Command<Project>.Create(
+                Command<IEnumerable<Library<XGroup>>>.Create(
                     async (item) => await OnExportObject(item, ExportType.GroupLibraries),
                     (item) => editor.IsEditMode());
 
@@ -363,7 +364,7 @@ namespace Core2D.Perspex
                     (item) => editor.IsEditMode());
 
             Commands.ExportTemplatesCommand =
-                Command<Project>.Create(
+                Command<IEnumerable<Template>>.Create(
                     async (item) => await OnExportObject(item, ExportType.Templates),
                     (item) => editor.IsEditMode());
 

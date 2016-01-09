@@ -130,16 +130,16 @@
                 <MenuItem Header="{x:Static p:Resources.MenuProjectExportStyles}" Command="{x:Static core:Commands.ExportStylesCommand}" CommandParameter="{Binding Project.CurrentStyleLibrary}" InputGestureText=""/>
                 <Separator/>
                 <MenuItem Header="{x:Static p:Resources.MenuProjectExportStyleLibrary}" Command="{x:Static core:Commands.ExportStyleLibraryCommand}" CommandParameter="{Binding Project.CurrentStyleLibrary}" InputGestureText=""/>
-                <MenuItem Header="{x:Static p:Resources.MenuProjectExportStyleLibraries}" Command="{x:Static core:Commands.ExportStyleLibrariesCommand}" CommandParameter="{Binding Project}" InputGestureText=""/>
+                <MenuItem Header="{x:Static p:Resources.MenuProjectExportStyleLibraries}" Command="{x:Static core:Commands.ExportStyleLibrariesCommand}" CommandParameter="{Binding Project.StyleLibraries}" InputGestureText=""/>
                 <Separator/>
                 <MenuItem Header="{x:Static p:Resources.MenuProjectExportGroup}" Command="{x:Static core:Commands.ExportGroupCommand}" CommandParameter="{Binding Project.CurrentGroupLibrary.Selected}" InputGestureText=""/>
                 <MenuItem Header="{x:Static p:Resources.MenuProjectExportGroups}" Command="{x:Static core:Commands.ExportGroupsCommand}" CommandParameter="{Binding Project.CurrentGroupLibrary}" InputGestureText=""/>
                 <Separator/>
                 <MenuItem Header="{x:Static p:Resources.MenuProjectExportGroupLibrary}" Command="{x:Static core:Commands.ExportGroupLibraryCommand}" CommandParameter="{Binding Project.CurrentGroupLibrary}" InputGestureText=""/>
-                <MenuItem Header="{x:Static p:Resources.MenuProjectExportGroupLibraries}" Command="{x:Static core:Commands.ExportGroupLibrariesCommand}" CommandParameter="{Binding Project}" InputGestureText=""/>
+                <MenuItem Header="{x:Static p:Resources.MenuProjectExportGroupLibraries}" Command="{x:Static core:Commands.ExportGroupLibrariesCommand}" CommandParameter="{Binding Project.GroupLibraries}" InputGestureText=""/>
                 <Separator/>
                 <MenuItem Header="{x:Static p:Resources.MenuProjectExportTemplate}" Command="{x:Static core:Commands.ExportTemplateCommand}" CommandParameter="{Binding Project.CurrentTemplate}" InputGestureText=""/>
-                <MenuItem Header="{x:Static p:Resources.MenuProjectExportTemplates}" Command="{x:Static core:Commands.ExportTemplatesCommand}" CommandParameter="{Binding Project}" InputGestureText=""/>
+                <MenuItem Header="{x:Static p:Resources.MenuProjectExportTemplates}" Command="{x:Static core:Commands.ExportTemplatesCommand}" CommandParameter="{Binding Project.Templates}" InputGestureText=""/>
             </MenuItem>
         </MenuItem>
         <MenuItem Header="{x:Static p:Resources.MenuTool}" Style="{StaticResource MenuItemVisibilityStyle}">
