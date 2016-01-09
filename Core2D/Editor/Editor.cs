@@ -712,7 +712,7 @@ namespace Core2D
         /// Export object to a file.
         /// </summary>
         /// <param name="path">The object file path.</param>
-        /// <param name="item">The parent object.</param>
+        /// <param name="item">The object item.</param>
         /// <param name="type">The object type.</param>
         public void OnExportObject(string path, object item, ExportType type)
         {
