@@ -128,7 +128,6 @@ namespace Core2D
         public static FontStyle Parse(string s)
         {
             var flags = (FontStyleFlags)Enum.Parse(typeof(FontStyleFlags), s, true);
-
             return new FontStyle()
             {
                 Flags = flags
