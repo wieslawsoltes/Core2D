@@ -34,7 +34,7 @@
     <DocumentationFile>bin\Release\Core2D.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Portable.Xaml, Version=0.7.5850.5655, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Portable.Xaml, Version=0.7.5853.10944, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Portable.Xaml.0.8.0-alpha\lib\dotnet\Portable.Xaml.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
       <Private>True</Private>
