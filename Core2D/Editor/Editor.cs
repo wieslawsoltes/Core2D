@@ -449,7 +449,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Import Xaml from file.
+        /// Import Xaml from a file.
         /// </summary>
         /// <param name="path">The xaml file path.</param>
         public void OnImportXaml(string path)
@@ -574,7 +574,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Export Xaml from file.
+        /// Export Xaml to a file.
         /// </summary>
         /// <param name="path">The xaml file path.</param>
         /// <param name="item">The object item.</param>
@@ -595,7 +595,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Import object from file.
+        /// Import object from a file.
         /// </summary>
         /// <param name="path">The object file path.</param>
         /// <param name="item">The parent object.</param>
