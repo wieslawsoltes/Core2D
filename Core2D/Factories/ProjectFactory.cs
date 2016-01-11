@@ -137,18 +137,7 @@ namespace Core2D
         public Page GetPage(Project project, string name)
         {
             var container = Page.Create(name);
-
-            if (project.CurrentTemplate == null)
-            {
-                var template = GetTemplate(project, "Empty");
-                var templateBuilder = project.Templates.ToBuilder();
-                templateBuilder.Add(template);
-                project.Templates = templateBuilder.ToImmutable();
-                project.CurrentTemplate = template;
-            }
-
-            container.Template = project.CurrentTemplate;
-
+            container.Template = project.CurrentTemplate ?? GetTemplate(project, "Empty");
             return container;
         }
 
