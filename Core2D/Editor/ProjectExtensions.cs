@@ -57,17 +57,6 @@ namespace Core2D
                 var next = project.Documents.Remove(document);
                 project?.History?.Snapshot(previous, next, (p) => project.Documents = p);
                 project.Documents = next;
-
-                project.CurrentDocument = project.Documents.FirstOrDefault();
-                if (project.CurrentDocument != null)
-                {
-                    project.CurrentContainer = project.CurrentDocument.Pages.FirstOrDefault();
-                }
-                else
-                {
-                    project.CurrentContainer = default(Container);
-                }
-                project.Selected = project.CurrentContainer;
             }
         }
 
@@ -131,7 +120,8 @@ namespace Core2D
         /// </summary>
         /// <param name="project">The project instance.</param>
         /// <param name="page">The page object to remove from document <see cref="Document.Pages"/> collection.</param>
-        public static void RemovePage(this Project project, Page page)
+        /// <returns>The owner document.</returns>
+        public static Document RemovePage(this Project project, Page page)
         {
             if (project?.Documents != null && page != null)
             {
@@ -142,12 +132,10 @@ namespace Core2D
                     var next = document.Pages.Remove(page);
                     project?.History?.Snapshot(previous, next, (p) => document.Pages = p);
                     document.Pages = next;
-
-                    project.CurrentDocument = document;
-                    project.CurrentContainer = document.Pages.FirstOrDefault();
-                    project.Selected = project.CurrentContainer;
                 }
+                return document;
             }
+            return null;
         }
 
         /// <summary>
@@ -216,11 +204,9 @@ namespace Core2D
             if (project?.Templates != null && template != null)
             {
                 var previous = project.Templates;
-                var next = project.Templates.Remove(project.CurrentTemplate);
+                var next = project.Templates.Remove(template);
                 project?.History?.Snapshot(previous, next, (p) => project.Templates = p);
                 project.Templates = next;
-
-                project.CurrentTemplate = project.Templates.FirstOrDefault();
             }
         }
 
@@ -272,8 +258,6 @@ namespace Core2D
                 var next = container.Layers.Remove(layer);
                 project?.History?.Snapshot(previous, next, (p) => container.Layers = p);
                 container.Layers = next;
-
-                container.CurrentLayer = container.Layers.FirstOrDefault();
             }
         }
 
@@ -370,7 +354,8 @@ namespace Core2D
         /// </summary>
         /// <param name="project">The project instance.</param>
         /// <param name="shape">The shape instance.</param>
-        public static void RemoveShape(this Project project, BaseShape shape)
+        /// <returns>The owner layer.</returns>
+        public static Layer RemoveShape(this Project project, BaseShape shape)
         {
             if (project?.Documents != null && shape != null)
             {
@@ -379,7 +364,9 @@ namespace Core2D
                 {
                     project.RemoveShape(layer, shape);
                 }
+                return layer;
             }
+            return null;
         }
 
         /// <summary>
@@ -473,8 +460,6 @@ namespace Core2D
                 var next = project.Databases.Add(db);
                 project?.History?.Snapshot(previous, next, (p) => project.Databases = p);
                 project.Databases = next;
-
-                project.CurrentDatabase = db;
             }
         }
 
@@ -491,8 +476,6 @@ namespace Core2D
                 var next = project.Databases.Remove(db);
                 project?.History?.Snapshot(previous, next, (p) => project.Databases = p);
                 project.Databases = next;
-
-                project.CurrentDatabase = project.Databases.FirstOrDefault();
             }
         }
 
@@ -691,8 +674,6 @@ namespace Core2D
                 var next = project.GroupLibraries.Remove(library);
                 project?.History?.Snapshot(previous, next, (p) => project.GroupLibraries = p);
                 project.GroupLibraries = next;
-
-                project.CurrentGroupLibrary = project.GroupLibraries.FirstOrDefault();
             }
         }
 
@@ -744,8 +725,6 @@ namespace Core2D
                 var next = project.StyleLibraries.Remove(library);
                 project?.History?.Snapshot(previous, next, (p) => project.StyleLibraries = p);
                 project.StyleLibraries = next;
-
-                project.CurrentStyleLibrary = project.StyleLibraries.FirstOrDefault();
             }
         }
 
@@ -765,7 +744,8 @@ namespace Core2D
         /// </summary>
         /// <param name="project">The project instance.</param>
         /// <param name="style">The style instance.</param>
-        public static void RemoveStyle(this Project project, ShapeStyle style)
+        /// <returns>The owner style library.</returns>
+        public static Library<ShapeStyle> RemoveStyle(this Project project, ShapeStyle style)
         {
             if (project?.StyleLibraries != null && style != null)
             {
@@ -776,10 +756,10 @@ namespace Core2D
                     var next = library.Items.Remove(style);
                     project?.History?.Snapshot(previous, next, (p) => library.Items = p);
                     library.Items = next;
-
-                    library.Selected = library.Items.FirstOrDefault();
                 }
+                return library;
             }
+            return null;
         }
 
         /// <summary>
@@ -829,7 +809,8 @@ namespace Core2D
         /// </summary>
         /// <param name="project">The project instance.</param>
         /// <param name="group">The group instance.</param>
-        public static void RemoveGroup(this Project project, XGroup group)
+        /// <returns>The owner group library.</returns>
+        public static Library<XGroup> RemoveGroup(this Project project, XGroup group)
         {
             if (project?.GroupLibraries != null && group != null)
             {
@@ -840,10 +821,10 @@ namespace Core2D
                     var next = library.Items.Remove(group);
                     project?.History?.Snapshot(previous, next, (p) => library.Items = p);
                     library.Items = next;
-
-                    library.Selected = library.Items.FirstOrDefault();
                 }
+                return library;
             }
+            return null;
         }
 
         /// <summary>

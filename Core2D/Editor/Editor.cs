@@ -269,47 +269,39 @@ namespace Core2D
                 var document = _project?.Documents.FirstOrDefault(d => d.Pages.Contains(selected));
                 if (document != null)
                 {
-                    var page = _projectFactory?.GetPage(_project, Constants.DefaultPageName);
-                    if (page == null)
-                    {
-                        page = Page.Create(Constants.DefaultPageName);
-                    }
+                    var page =
+                        _projectFactory?.GetPage(_project, Constants.DefaultPageName)
+                        ?? Page.Create(Constants.DefaultPageName);
 
                     _project.AddPage(document, page);
-                    _project.CurrentContainer = page;
+                    _project.SetCurrentContainer(page);
                 }
             }
             else if (item is Document)
             {
                 var document = item as Document;
-                var page = _projectFactory?.GetPage(_project, Constants.DefaultPageName);
-                if (page == null)
-                {
-                    page = Page.Create(Constants.DefaultPageName);
-                }
+                var page =
+                    _projectFactory?.GetPage(_project, Constants.DefaultPageName)
+                    ?? Page.Create(Constants.DefaultPageName);
 
                 _project.AddPage(document, page);
-                _project.CurrentContainer = page;
+                _project.SetCurrentContainer(page);
             }
             else if (item is Project)
             {
-                var document = _projectFactory?.GetDocument(_project, Constants.DefaultDocumentName);
-                if (document == null)
-                {
-                    document = Document.Create(Constants.DefaultDocumentName);
-                }
+                var document =
+                    _projectFactory?.GetDocument(_project, Constants.DefaultDocumentName)
+                    ?? Document.Create(Constants.DefaultDocumentName);
 
                 _project.AddDocument(document);
-                _project.CurrentDocument = document;
-                _project.CurrentContainer = document.Pages.FirstOrDefault();
+                _project.SetCurrentDocument(document);
+                _project.SetCurrentContainer(document?.Pages.FirstOrDefault());
             }
             else if (item is Editor || item == null)
             {
-                var project = _projectFactory?.GetProject();
-                if (project == null)
-                {
-                    project = Project.Create();
-                }
+                var project =
+                    _projectFactory?.GetProject()
+                    ?? Project.Create();
 
                 Unload();
                 Load(project, string.Empty);
@@ -363,12 +355,12 @@ namespace Core2D
                 {
                     Project.Save(_project, path, _jsonSerializer);
                     AddRecent(path, _project.Name);
-    
+
                     if (string.IsNullOrEmpty(_projectPath))
                     {
                         _projectPath = path;
                     }
-    
+
                     IsProjectDirty = false;
                 }
             }
@@ -400,7 +392,7 @@ namespace Core2D
                     if (db != null)
                     {
                         _project.AddDatabase(db);
-                        _project.CurrentDatabase = db;
+                        _project.SetCurrentDatabase(db);
                     }
                 }
             }
@@ -539,7 +531,9 @@ namespace Core2D
                 }
                 else if (item is Database)
                 {
-                    _project?.AddDatabase(item as Database);
+                    var db = item as Database;
+                    _project?.AddDatabase(db);
+                    _project?.SetCurrentDatabase(db);
                 }
                 else if (item is Layer)
                 {
@@ -931,6 +925,7 @@ namespace Core2D
                 _pageToCopy = page;
                 _documentToCopy = default(Document);
                 _project?.RemovePage(page);
+                _project?.SetCurrentContainer(_project?.CurrentDocument?.Pages.FirstOrDefault());
             }
             else if (item is Document)
             {
@@ -938,6 +933,10 @@ namespace Core2D
                 _pageToCopy = default(Page);
                 _documentToCopy = document;
                 _project?.RemoveDocument(document);
+
+                var selected = _project?.Documents.FirstOrDefault();
+                _project?.SetCurrentDocument(selected);
+                _project?.SetCurrentContainer(selected?.Pages.FirstOrDefault());
             }
             else if (item is Editor || item == null)
             {
@@ -986,7 +985,7 @@ namespace Core2D
                         int index = document.Pages.IndexOf(page);
                         var clone = Clone(_pageToCopy);
                         _project.ReplacePage(document, clone, index);
-                        _project.CurrentContainer = clone;
+                        _project.SetCurrentContainer(clone);
                     }
                 }
             }
@@ -997,7 +996,7 @@ namespace Core2D
                     var document = item as Document;
                     var clone = Clone(_pageToCopy);
                     _project?.AddPage(document, clone);
-                    _project.CurrentContainer = clone;
+                    _project.SetCurrentContainer(clone);
                 }
                 else if (_documentToCopy != null)
                 {
@@ -1005,7 +1004,8 @@ namespace Core2D
                     int index = _project.Documents.IndexOf(document);
                     var clone = Clone(_documentToCopy);
                     _project.ReplaceDocument(clone, index);
-                    _project.CurrentDocument = clone;
+                    _project.SetCurrentDocument(clone);
+                    _project.SetCurrentContainer(clone?.Pages.FirstOrDefault());
                 }
             }
             else if (item is Editor || item == null)
@@ -1023,10 +1023,15 @@ namespace Core2D
             if (item is Page)
             {
                 _project?.RemovePage(item as Page);
+                _project?.SetCurrentContainer(_project?.CurrentDocument?.Pages.FirstOrDefault());
             }
             else if (item is Document)
             {
                 _project?.RemoveDocument(item as Document);
+
+                var selected = _project?.Documents.FirstOrDefault();
+                _project?.SetCurrentDocument(selected);
+                _project.SetCurrentContainer(selected?.Pages.FirstOrDefault());
             }
             else if (item is Editor || item == null)
             {
@@ -1515,7 +1520,8 @@ namespace Core2D
         {
             if (_project != null && group != null)
             {
-                _project.RemoveGroup(group);
+                var library = _project.RemoveGroup(group);
+                library?.SetSelected(library?.Items.FirstOrDefault());
             }
         }
 
@@ -1634,6 +1640,7 @@ namespace Core2D
             if (template != null)
             {
                 _project?.RemoveTemplate(template);
+                _project?.SetCurrentTemplate(_project?.Templates.FirstOrDefault());
             }
         }
 
@@ -1644,7 +1651,7 @@ namespace Core2D
         {
             if (_project != null && template != null)
             {
-                _project.CurrentContainer = template;
+                _project.SetCurrentContainer(template);
                 _project.CurrentContainer.Invalidate();
             }
         }
@@ -1721,14 +1728,12 @@ namespace Core2D
         {
             if (_project?.CurrentDocument != null)
             {
-                var container = _projectFactory?.GetPage(_project, Constants.DefaultPageName);
-                if (container == null)
-                {
-                    container = Page.Create(Constants.DefaultPageName);
-                }
+                var page =
+                    _projectFactory?.GetPage(_project, Constants.DefaultPageName)
+                    ?? Page.Create(Constants.DefaultPageName);
 
-                _project.AddPage(_project.CurrentDocument, container);
-                _project.CurrentContainer = container;
+                _project.AddPage(_project.CurrentDocument, page);
+                _project.SetCurrentContainer(page);
             }
         }
 
@@ -1744,15 +1749,12 @@ namespace Core2D
                 {
                     var selected = item as Page;
                     int index = _project.CurrentDocument.Pages.IndexOf(selected);
+                    var page =
+                        _projectFactory?.GetPage(_project, Constants.DefaultPageName)
+                        ?? Page.Create(Constants.DefaultPageName);
 
-                    var container = _projectFactory?.GetPage(_project, Constants.DefaultPageName);
-                    if (container == null)
-                    {
-                        container = Page.Create(Constants.DefaultPageName);
-                    }
-
-                    _project.AddPageAt(_project.CurrentDocument, container, index);
-                    _project.CurrentContainer = container;
+                    _project.AddPageAt(_project.CurrentDocument, page, index);
+                    _project.SetCurrentContainer(page);
                 }
             }
         }
@@ -1769,15 +1771,12 @@ namespace Core2D
                 {
                     var selected = item as Page;
                     int index = _project.CurrentDocument.Pages.IndexOf(selected);
+                    var page =
+                        _projectFactory?.GetPage(_project, Constants.DefaultPageName)
+                        ?? Page.Create(Constants.DefaultPageName);
 
-                    var container = _projectFactory?.GetPage(_project, Constants.DefaultPageName);
-                    if (container == null)
-                    {
-                        container = Page.Create(Constants.DefaultPageName);
-                    }
-
-                    _project.AddPageAt(_project.CurrentDocument, container, index + 1);
-                    _project.CurrentContainer = container;
+                    _project.AddPageAt(_project.CurrentDocument, page, index + 1);
+                    _project.SetCurrentContainer(page);
                 }
             }
         }
@@ -1790,15 +1789,13 @@ namespace Core2D
         {
             if (_project != null)
             {
-                var document = _projectFactory?.GetDocument(_project, Constants.DefaultDocumentName);
-                if (document == null)
-                {
-                    document = Document.Create(Constants.DefaultDocumentName);
-                }
+                var document =
+                    _projectFactory?.GetDocument(_project, Constants.DefaultDocumentName)
+                    ?? Document.Create(Constants.DefaultDocumentName);
 
                 _project.AddDocument(document);
-                _project.CurrentDocument = document;
-                _project.CurrentContainer = document.Pages.FirstOrDefault();
+                _project.SetCurrentDocument(document);
+                _project.SetCurrentContainer(document?.Pages.FirstOrDefault());
             }
         }
 
@@ -1814,16 +1811,13 @@ namespace Core2D
                 {
                     var selected = item as Document;
                     int index = _project.Documents.IndexOf(selected);
-
-                    var document = _projectFactory?.GetDocument(_project, Constants.DefaultDocumentName);
-                    if (document == null)
-                    {
-                        document = Document.Create(Constants.DefaultDocumentName);
-                    }
+                    var document =
+                        _projectFactory?.GetDocument(_project, Constants.DefaultDocumentName)
+                        ?? Document.Create(Constants.DefaultDocumentName);
 
                     _project.AddDocumentAt(document, index);
-                    _project.CurrentDocument = document;
-                    _project.CurrentContainer = document.Pages.FirstOrDefault();
+                    _project.SetCurrentDocument(document);
+                    _project.SetCurrentContainer(document?.Pages.FirstOrDefault());
                 }
             }
         }
@@ -1840,16 +1834,13 @@ namespace Core2D
                 {
                     var selected = item as Document;
                     int index = _project.Documents.IndexOf(selected);
-
-                    var document = _projectFactory?.GetDocument(_project, Constants.DefaultDocumentName);
-                    if (document == null)
-                    {
-                        document = Document.Create(Constants.DefaultDocumentName);
-                    }
+                    var document =
+                        _projectFactory?.GetDocument(_project, Constants.DefaultDocumentName)
+                        ?? Document.Create(Constants.DefaultDocumentName);
 
                     _project.AddDocumentAt(document, index + 1);
-                    _project.CurrentDocument = document;
-                    _project.CurrentContainer = document.Pages.FirstOrDefault();
+                    _project.SetCurrentDocument(document);
+                    _project.SetCurrentContainer(document?.Pages.FirstOrDefault());
                 }
             }
         }
@@ -1861,18 +1852,18 @@ namespace Core2D
         {
             Tools = new Dictionary<Tool, ToolBase>
             {
-                [Tool.None]      = new ToolNone(this),
+                [Tool.None] = new ToolNone(this),
                 [Tool.Selection] = new ToolSelection(this),
-                [Tool.Point]     = new ToolPoint(this),
-                [Tool.Line]      = new ToolLine(this),
-                [Tool.Arc]       = new ToolArc(this),
-                [Tool.Bezier]    = new ToolBezier(this),
-                [Tool.QBezier]   = new ToolQBezier(this),
-                [Tool.Path]      = new ToolPath(this),
+                [Tool.Point] = new ToolPoint(this),
+                [Tool.Line] = new ToolLine(this),
+                [Tool.Arc] = new ToolArc(this),
+                [Tool.Bezier] = new ToolBezier(this),
+                [Tool.QBezier] = new ToolQBezier(this),
+                [Tool.Path] = new ToolPath(this),
                 [Tool.Rectangle] = new ToolRectangle(this),
-                [Tool.Ellipse]   = new ToolEllipse(this),
-                [Tool.Text]      = new ToolText(this) ,
-                [Tool.Image]     = new ToolImage(this)
+                [Tool.Ellipse] = new ToolEllipse(this),
+                [Tool.Text] = new ToolText(this),
+                [Tool.Image] = new ToolImage(this)
             }.ToImmutableDictionary();
         }
 
@@ -1907,7 +1898,7 @@ namespace Core2D
                 Project.History = new History();
                 ProjectPath = path;
                 IsProjectDirty = false;
-                Observer = new Observer(this); 
+                Observer = new Observer(this);
             }
         }
 
@@ -2014,7 +2005,7 @@ namespace Core2D
                     foreach (var renderer in _renderers)
                     {
                         renderer.ClearCache(isZooming);
-                    } 
+                    }
                 }
 
                 _project?.CurrentContainer?.Invalidate();
@@ -2331,7 +2322,7 @@ namespace Core2D
                             {
                                 var sl = Library<ShapeStyle>.Create(Constants.ImportedStyleLibraryName);
                                 _project.AddStyleLibrary(sl);
-                                _project.CurrentStyleLibrary = sl;
+                                _project.SetCurrentStyleLibrary(sl);
                             }
 
                             // Add missing style.
@@ -2389,7 +2380,7 @@ namespace Core2D
                         {
                             var db = Database.Create(Constants.ImportedDatabaseName, shape.Data.Record.Columns);
                             _project.AddDatabase(db);
-                            _project.CurrentDatabase = db;
+                            _project.SetCurrentDatabase(db);
                         }
 
                         // Add missing data record.
@@ -2861,8 +2852,8 @@ namespace Core2D
             var rectangle = XRectangle.Create(
                 sx, sy,
                 sx + width, sy + (double)length * height,
-                _project.CurrentStyleLibrary.Selected,
-                _project.Options.PointShape);
+                _project?.CurrentStyleLibrary?.Selected,
+                _project?.Options?.PointShape);
             g.AddShape(rectangle);
 
             var pt = XPoint.Create(sx + width / 2, sy, _project?.Options?.PointShape);
@@ -3207,7 +3198,7 @@ namespace Core2D
                 var previous = line.Start;
                 var next = point;
                 _project?.History?.Snapshot(previous, next, (p) => line.Start = p);
-                line.Start = next; 
+                line.Start = next;
             }
         }
 
@@ -3218,7 +3209,7 @@ namespace Core2D
                 var previous = line.End;
                 var next = point;
                 _project?.History?.Snapshot(previous, next, (p) => line.End = p);
-                line.End = next; 
+                line.End = next;
             }
         }
 
@@ -3436,7 +3427,7 @@ namespace Core2D
                 _project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
                 layer.Shapes = next;
 
-                return group; 
+                return group;
             }
 
             return null;
@@ -3453,7 +3444,7 @@ namespace Core2D
                 var previous = layer.Shapes;
                 var next = source.ToImmutable();
                 _project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
-                layer.Shapes = next; 
+                layer.Shapes = next;
             }
         }
 
@@ -3468,7 +3459,7 @@ namespace Core2D
                 var previous = layer.Shapes;
                 var next = source.ToImmutable();
                 _project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
-                layer.Shapes = next; 
+                layer.Shapes = next;
             }
         }
 
@@ -4031,12 +4022,21 @@ namespace Core2D
 
             Commands.AddDatabaseCommand =
                 Command.Create(
-                    () => Project.AddDatabase(Database.Create(Constants.DefaultDatabaseName)),
+                    () =>
+                    {
+                        var db = Database.Create(Constants.DefaultDatabaseName);
+                        Project.AddDatabase(db);
+                        Project.SetCurrentDatabase(db);
+                    },
                     () => IsEditMode());
 
             Commands.RemoveDatabaseCommand =
                 Command<Database>.Create(
-                    (db) => Project.RemoveDatabase(db),
+                    (db) =>
+                    {
+                        Project.RemoveDatabase(db);
+                        Project.SetCurrentDatabase(Project.Databases.FirstOrDefault());
+                    },
                     (db) => IsEditMode());
 
             Commands.AddColumnCommand =
@@ -4086,7 +4086,11 @@ namespace Core2D
 
             Commands.RemoveGroupLibraryCommand =
                 Command<Library<XGroup>>.Create(
-                    (library) => Project.RemoveGroupLibrary(library),
+                    (library) =>
+                    {
+                        Project.RemoveGroupLibrary(library);
+                        Project.SetCurrentGroupLibrary(_project?.GroupLibraries.FirstOrDefault());
+                    },
                     (library) => IsEditMode());
 
             Commands.AddGroupCommand =
@@ -4111,7 +4115,11 @@ namespace Core2D
 
             Commands.RemoveLayerCommand =
                 Command<Layer>.Create(
-                    (layer) => Project.RemoveLayer(layer),
+                    (layer) =>
+                    {
+                        Project.RemoveLayer(layer);
+                        layer.Owner.SetCurrentLayer(layer.Owner.Layers.FirstOrDefault());
+                    },
                     (layer) => IsEditMode());
 
             Commands.AddStyleLibraryCommand =
@@ -4121,7 +4129,11 @@ namespace Core2D
 
             Commands.RemoveStyleLibraryCommand =
                 Command<Library<ShapeStyle>>.Create(
-                    (library) => Project.RemoveStyleLibrary(library),
+                    (library) =>
+                    {
+                        Project.RemoveStyleLibrary(library);
+                        Project.SetCurrentStyleLibrary(_project?.StyleLibraries.FirstOrDefault());
+                    },
                     (library) => IsEditMode());
 
             Commands.AddStyleCommand =
@@ -4131,7 +4143,11 @@ namespace Core2D
 
             Commands.RemoveStyleCommand =
                 Command<ShapeStyle>.Create(
-                    (style) => Project.RemoveStyle(style),
+                    (style) =>
+                    {
+                        var library = Project.RemoveStyle(style);
+                        library?.SetSelected(library?.Items.FirstOrDefault());
+                    },
                     (style) => IsEditMode());
 
             Commands.ApplyStyleCommand =
