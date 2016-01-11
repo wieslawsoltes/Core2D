@@ -131,12 +131,6 @@ namespace Core2D
             var template = Template.Create(name);
 
             template.Background = ArgbColor.Create(0xFF, 0xFF, 0xFF, 0xFF);
-
-            foreach (var layer in template.Layers)
-            {
-                layer.Name = string.Concat("Template", layer.Name);
-            }
-
             return template;
         }
 

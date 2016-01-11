@@ -36,14 +36,14 @@ namespace Core2D
             template.Height = height;
 
             var builder = template.Layers.ToBuilder();
-            builder.Add(Layer.Create("Layer1", template));
-            builder.Add(Layer.Create("Layer2", template));
-            builder.Add(Layer.Create("Layer3", template));
+            builder.Add(Layer.Create("TemplateLayer1", template));
+            builder.Add(Layer.Create("TemplateLayer2", template));
+            builder.Add(Layer.Create("TemplateLayer3", template));
             template.Layers = builder.ToImmutable();
 
             template.CurrentLayer = template.Layers.FirstOrDefault();
-            template.WorkingLayer = Layer.Create("Working", template);
-            template.HelperLayer = Layer.Create("Helper", template);
+            template.WorkingLayer = Layer.Create("TemplateWorking", template);
+            template.HelperLayer = Layer.Create("TemplateHelper", template);
 
             return template;
         }
