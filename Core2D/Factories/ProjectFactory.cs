@@ -157,9 +157,9 @@ namespace Core2D
             var glBuilder = project.GroupLibraries.ToBuilder();
             glBuilder.Add(Library<XGroup>.Create("Default"));
             project.GroupLibraries = glBuilder.ToImmutable();
-            
-            project.CurrentGroupLibrary = project.GroupLibraries.FirstOrDefault();
-            
+
+            project.SetCurrentGroupLibrary(project.GroupLibraries.FirstOrDefault());
+
             // Style Libraries
             var sgBuilder = project.StyleLibraries.ToBuilder();
             sgBuilder.Add(DefaultStyleLibrary());
@@ -167,7 +167,7 @@ namespace Core2D
             sgBuilder.Add(TemplateStyleLibrary());
             project.StyleLibraries = sgBuilder.ToImmutable();
 
-            project.CurrentStyleLibrary = project.StyleLibraries.FirstOrDefault();
+            project.SetCurrentStyleLibrary(project.StyleLibraries.FirstOrDefault());
 
             // Templates
             var templateBuilder = project.Templates.ToBuilder();
@@ -175,7 +175,7 @@ namespace Core2D
             templateBuilder.Add(CreateGridTemplate(project, "Grid"));
             project.Templates = templateBuilder.ToImmutable();
 
-            project.CurrentTemplate = project.Templates.FirstOrDefault(t => t.Name == "Grid");
+            project.SetCurrentTemplate(project.Templates.FirstOrDefault(t => t.Name == "Grid"));
 
             // Documents and Pages
             var document = GetDocument(project, "Document");
@@ -199,8 +199,8 @@ namespace Core2D
             db.Columns = columnsBuilder.ToImmutable();
             project.Databases = project.Databases.Add(db);
 
-            project.CurrentDatabase = db;
-            
+            project.SetCurrentDatabase(db);
+
             return project;
         }
     }
