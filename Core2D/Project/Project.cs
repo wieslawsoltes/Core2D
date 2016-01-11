@@ -183,6 +183,61 @@ namespace Core2D
         }
 
         /// <summary>
+        /// Set current document.
+        /// </summary>
+        /// <param name="document">The document instance.</param>
+        public void SetCurrentDocument(Document document)
+        {
+            CurrentDocument = document;
+        }
+
+        /// <summary>
+        /// Set current container.
+        /// </summary>
+        /// <param name="container">The container instance.</param>
+        public void SetCurrentContainer(Container container)
+        {
+            CurrentContainer = container;
+            Selected = container;
+        }
+
+        /// <summary>
+        /// Set current template.
+        /// </summary>
+        /// <param name="template">The template instance.</param>
+        public void SetCurrentTemplate(Template template)
+        {
+            CurrentTemplate = template;
+        }
+
+        /// <summary>
+        /// Set current database.
+        /// </summary>
+        /// <param name="db">The database instance.</param>
+        public void SetCurrentDatabase(Database db)
+        {
+            CurrentDatabase = db;
+        }
+
+        /// <summary>
+        /// Set current group library.
+        /// </summary>
+        /// <param name="library">The group library instance.</param>
+        public void SetCurrentGroupLibrary(Library<XGroup> library)
+        {
+            CurrentGroupLibrary = library;
+        }
+
+        /// <summary>
+        /// Set current group.
+        /// </summary>
+        /// <param name="library">The style library instance.</param>
+        public void SetCurrentStyleLibrary(Library<ShapeStyle> library)
+        {
+            CurrentStyleLibrary = library;
+        }
+
+        /// <summary>
         /// Set selected value.
         /// </summary>
         /// <param name="value">The value instance.</param>
