@@ -46,6 +46,15 @@ namespace Core2D
         }
 
         /// <summary>
+        /// Set selected.
+        /// </summary>
+        /// <param name="item">The item instance.</param>
+        public void SetSelected(T item)
+        {
+            Selected = item;
+        }
+
+        /// <summary>
         /// Creates a new instance of the <see cref="Library{T}"/> class.
         /// </summary>
         /// <param name="name">The library name.</param>
