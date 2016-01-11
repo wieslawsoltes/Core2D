@@ -129,7 +129,6 @@ namespace Core2D
         public Template GetTemplate(Project project, string name)
         {
             var template = Template.Create(name);
-
             template.Background = ArgbColor.Create(0xFF, 0xFF, 0xFF, 0xFF);
             return template;
         }
