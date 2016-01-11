@@ -163,25 +163,7 @@ namespace Core2D
             get { return _selected; }
             set
             {
-                var item = value;
-
-                if (item is Container && _documents != null)
-                {
-                    var container = item as Container;
-                    var document = _documents.FirstOrDefault(d => d.Pages.Contains(container));
-                    if (document != null)
-                    {
-                        CurrentDocument = document;
-                        CurrentContainer = container;
-                        CurrentContainer.Invalidate();
-                    }
-                }
-                else if (item is Document)
-                {
-                    var document = item as Document;
-                    CurrentDocument = document;
-                }
-
+                SetSelected(value);
                 Update(ref _selected, value);
             }
         }
@@ -198,6 +180,31 @@ namespace Core2D
             _databases = ImmutableArray.Create<Database>();
             _templates = ImmutableArray.Create<Template>();
             _documents = ImmutableArray.Create<Document>();
+        }
+
+        /// <summary>
+        /// Set selected value.
+        /// </summary>
+        /// <param name="value">The value instance.</param>
+        public void SetSelected(object value)
+        {
+            if (value != null)
+            {
+                if (value is Container && _documents != null)
+                {
+                    var document = _documents.FirstOrDefault(d => d.Pages.Contains(value as Container));
+                    if (document != null)
+                    {
+                        CurrentDocument = document;
+                        CurrentContainer = value as Container;
+                        CurrentContainer.Invalidate();
+                    }
+                }
+                else if (value is Document)
+                {
+                    CurrentDocument = value as Document;
+                }
+            }
         }
 
         /// <summary>
