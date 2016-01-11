@@ -32,22 +32,22 @@ namespace Core2D
         /// <summary>
         /// 
         /// </summary>
-        public double Left { get { return X; } }
+        public double Left => X;
 
         /// <summary>
         /// 
         /// </summary>
-        public double Right { get { return Width + X; } }
+        public double Right => Width + X;
 
         /// <summary>
         /// 
         /// </summary>
-        public double Top { get { return Y; } }
+        public double Top => Y;
 
         /// <summary>
         /// 
         /// </summary>
-        public double Bottom { get { return Y + Height; } }
+        public double Bottom => Y + Height;
 
         /// <summary>
         /// Initializes a new <see cref="Rect2"/> instance.
