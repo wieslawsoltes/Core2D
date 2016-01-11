@@ -7,7 +7,7 @@ using Portable.Xaml.Markup;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// The documents container.
     /// </summary>
     [ContentProperty(nameof(Documents))]
     [RuntimeNameProperty(nameof(Name))]
@@ -30,7 +30,7 @@ namespace Core2D
         private object _selected;
 
         /// <summary>
-        /// 
+        /// Gets or sets project name.
         /// </summary>
         public string Name
         {
@@ -39,7 +39,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets project options.
         /// </summary>
         public Options Options
         {
@@ -57,7 +57,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets project style libraries.
         /// </summary>
         public ImmutableArray<Library<ShapeStyle>> StyleLibraries
         {
@@ -66,7 +66,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets project group libraries.
         /// </summary>
         public ImmutableArray<Library<XGroup>> GroupLibraries
         {
@@ -75,7 +75,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets project databases.
         /// </summary>
         public ImmutableArray<Database> Databases
         {
@@ -84,7 +84,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets project templates.
         /// </summary>
         public ImmutableArray<Template> Templates
         {
@@ -93,7 +93,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets project documents.
         /// </summary>
         public ImmutableArray<Document> Documents
         {
@@ -102,7 +102,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets project current style library.
         /// </summary>
         public Library<ShapeStyle> CurrentStyleLibrary
         {
@@ -111,7 +111,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets project current group library.
         /// </summary>
         public Library<XGroup> CurrentGroupLibrary
         {
@@ -120,7 +120,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets project current database.
         /// </summary>
         public Database CurrentDatabase
         {
@@ -129,7 +129,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets project current template.
         /// </summary>
         public Template CurrentTemplate
         {
@@ -138,7 +138,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets project current document.
         /// </summary>
         public Document CurrentDocument
         {
@@ -147,7 +147,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets project current container.
         /// </summary>
         public Container CurrentContainer
         {
@@ -156,7 +156,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets currently selected object.
         /// </summary>
         public object Selected
         {

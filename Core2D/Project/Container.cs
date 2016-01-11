@@ -7,7 +7,7 @@ using Portable.Xaml.Markup;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// The layers container.
     /// </summary>
     [ContentProperty(nameof(Layers))]
     [RuntimeNameProperty(nameof(Name))]
@@ -25,7 +25,7 @@ namespace Core2D
         private Container _template;
 
         /// <summary>
-        /// 
+        /// Gets or sets container name.
         /// </summary>
         public string Name
         {
@@ -34,7 +34,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets container width.
         /// </summary>
         public double Width
         {
@@ -43,7 +43,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets container height.
         /// </summary>
         public double Height
         {
@@ -52,7 +52,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets container background color.
         /// </summary>
         public ArgbColor Background
         {
@@ -61,7 +61,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets container layers.
         /// </summary>
         public ImmutableArray<Layer> Layers
         {
@@ -70,7 +70,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets current container layer.
         /// </summary>
         public Layer CurrentLayer
         {
@@ -79,7 +79,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets working container layer.
         /// </summary>
         public Layer WorkingLayer
         {
@@ -88,7 +88,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets helper container layer.
         /// </summary>
         public Layer HelperLayer
         {
@@ -97,7 +97,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets current container shape.
         /// </summary>
         public BaseShape CurrentShape
         {
@@ -106,7 +106,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets container template.
         /// </summary>
         public Container Template
         {
@@ -133,7 +133,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Invalidate container layers.
         /// </summary>
         public virtual void Invalidate()
         {

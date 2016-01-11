@@ -7,26 +7,26 @@ using Portable.Xaml.Markup;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Invalidate layer event arguments.
     /// </summary>
     public class InvalidateLayerEventArgs : EventArgs { }
 
     /// <summary>
-    /// 
+    /// Invalidate layer event handler delegate.
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name="sender">The sender object.</param>
+    /// <param name="e">The event arguments.</param>
     public delegate void InvalidateLayerEventHandler(object sender, InvalidateLayerEventArgs e);
 
     /// <summary>
-    /// 
+    /// The shapes container.
     /// </summary>
     [ContentProperty(nameof(Shapes))]
     [RuntimeNameProperty(nameof(Name))]
     public class Layer : ObservableResource
     {
         /// <summary>
-        /// 
+        /// Invalidate layer event.
         /// </summary>
         public event InvalidateLayerEventHandler InvalidateLayer;
 
@@ -36,7 +36,7 @@ namespace Core2D
         private ImmutableArray<BaseShape> _shapes;
 
         /// <summary>
-        /// 
+        /// Gets or sets layer name.
         /// </summary>
         public string Name
         {
@@ -45,7 +45,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets layer owner.
         /// </summary>
         public Container Owner
         {
@@ -54,7 +54,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets flag indicating whether layer is visible.
         /// </summary>
         public bool IsVisible
         {
@@ -63,7 +63,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets layer shapes.
         /// </summary>
         public ImmutableArray<BaseShape> Shapes
         {
@@ -81,7 +81,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Invalidate layer shapes.
         /// </summary>
         public void Invalidate()
         {
@@ -95,10 +95,10 @@ namespace Core2D
         /// <summary>
         /// Creates a new <see cref="Layer"/> instance.
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="owner"></param>
-        /// <param name="isVisible"></param>
-        /// <returns></returns>
+        /// <param name="name">The layer name.</param>
+        /// <param name="owner">The layer owner.</param>
+        /// <param name="isVisible">The flag indicating whether layer is visible.</param>
+        /// <returns>The new instance of the <see cref="Layer"/>.</returns>
         public static Layer Create(string name = "Layer", Container owner = null, bool isVisible = true)
         {
             return new Layer()

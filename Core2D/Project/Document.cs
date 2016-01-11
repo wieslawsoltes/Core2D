@@ -6,7 +6,7 @@ using Portable.Xaml.Markup;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// The pages container.
     /// </summary>
     [ContentProperty(nameof(Pages))]
     [RuntimeNameProperty(nameof(Name))]
@@ -16,7 +16,7 @@ namespace Core2D
         private ImmutableArray<Page> _pages;
 
         /// <summary>
-        /// 
+        /// Gets or sets document name.
         /// </summary>
         public string Name
         {
@@ -25,7 +25,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets document pages.
         /// </summary>
         public ImmutableArray<Page> Pages
         {
@@ -45,7 +45,7 @@ namespace Core2D
         /// <summary>
         /// Creates a new <see cref="Document"/> instance.
         /// </summary>
-        /// <param name="name"></param>
+        /// <param name="name">The document name.</param>
         /// <returns>The new instance of the <see cref="Document"/> class.</returns>
         public static Document Create(string name = "Document")
         {

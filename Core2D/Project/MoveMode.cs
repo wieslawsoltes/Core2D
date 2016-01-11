@@ -4,17 +4,17 @@
 namespace Core2D
 {
     /// <summary>
-    /// The shape move mode.
+    /// The move mode.
     /// </summary>
     public enum MoveMode
     {
         /// <summary>
-        /// Point mode.
+        /// Point move mode.
         /// </summary>
         Point,
 
         /// <summary>
-        /// Shape mode.
+        /// Shape move mode.
         /// </summary>
         Shape
     }

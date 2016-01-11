@@ -5,14 +5,14 @@ using System.Linq;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// The page layers container.
     /// </summary>
     public class Page : Container
     {
         private Data _data;
 
         /// <summary>
-        /// 
+        /// Gets or sets page data.
         /// </summary>
         public Data Data
         {
@@ -25,7 +25,7 @@ namespace Core2D
         /// </summary>
         /// <remarks>If property with the specified key does not exist it is created.</remarks>
         /// <param name="name">The property name value.</param>
-        /// <returns>The property Value.</returns>
+        /// <returns>The property value.</returns>
         public object this[string name]
         {
             get
@@ -56,7 +56,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Invalidate page layers.
         /// </summary>
         public override void Invalidate()
         {

@@ -5,7 +5,7 @@ using System.Linq;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// The template layers container.
     /// </summary>
     public class Template : Container
     {
