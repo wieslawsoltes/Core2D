@@ -102,6 +102,7 @@
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="BorderBrush" Value="#FFACACAC"/>
             <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
         <!-- DropDown -->
         <Style Selector="DropDown.default">
