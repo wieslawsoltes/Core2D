@@ -4,7 +4,7 @@
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Minimum translation vector for Separating Axis Theorem implementation.
     /// </summary>
     public struct MinimumTranslationVector
     {

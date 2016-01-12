@@ -5,7 +5,7 @@ using System;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Projection for Separating Axis Theorem implementation.
     /// </summary>
     public struct Projection
     {

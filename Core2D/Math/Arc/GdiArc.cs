@@ -5,7 +5,7 @@ using System;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Convert <see cref="XArc"/> coordinates to GDI arc coordinates.
     /// </summary>
     public struct GdiArc
     {

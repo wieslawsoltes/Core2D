@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Math helper methods.
     /// </summary>
     public static class MathHelpers
     {
@@ -31,13 +31,13 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Calculates angle between two lines.
         /// </summary>
-        /// <param name="line1Start"></param>
-        /// <param name="line1End"></param>
-        /// <param name="line2Start"></param>
-        /// <param name="line2End"></param>
-        /// <returns></returns>
+        /// <param name="line1Start">The first line start point.</param>
+        /// <param name="line1End">The first line end point.</param>
+        /// <param name="line2Start">The second line start point.</param>
+        /// <param name="line2End">The second line end point.</param>
+        /// <returns>The angle between line in degrees.</returns>
         public static double AngleLineSegments(Point2 line1Start, Point2 line1End, Point2 line2Start, Point2 line2End)
         {
             double angle1 = Math.Atan2(line1Start.Y - line1End.Y, line1Start.X - line1End.X);
@@ -49,13 +49,13 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Calculate ellipse line segment intersection points.
         /// </summary>
         /// <param name="rect"></param>
-        /// <param name="p1"></param>
-        /// <param name="p2"></param>
-        /// <param name="onlySegment"></param>
-        /// <returns></returns>
+        /// <param name="p1">The line segment start point.</param>
+        /// <param name="p2">The line segment end point.</param>
+        /// <param name="onlySegment">Include only line segment solutions.</param>
+        /// <returns>The ellipse line segment intersection point list.</returns>
         public static IList<Point2> FindEllipseSegmentIntersections(Rect2 rect, Point2 p1, Point2 p2, bool onlySegment)
         {
             if ((rect.Width == 0) || (rect.Height == 0) || ((p1.X == p2.X) && (p1.Y == p2.Y)))
@@ -120,13 +120,13 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Calculate distance between two points.
         /// </summary>
-        /// <param name="x1"></param>
-        /// <param name="y1"></param>
-        /// <param name="x2"></param>
-        /// <param name="y2"></param>
-        /// <returns></returns>
+        /// <param name="x1">The X coordinate of first point.</param>
+        /// <param name="y1">The Y coordinate of first point.</param>
+        /// <param name="x2">The X coordinate of second point.</param>
+        /// <param name="y2">The Y coordinate of second point.</param>
+        /// <returns>The  distance between two points.</returns>
         public static double Distance(double x1, double y1, double x2, double y2)
         {
             double dx = x1 - x2;
@@ -135,25 +135,25 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Calculate coordinates of line segment middle point.
         /// </summary>
-        /// <param name="x1"></param>
-        /// <param name="y1"></param>
-        /// <param name="x2"></param>
-        /// <param name="y2"></param>
-        /// <returns></returns>
+        /// <param name="x1">The X coordinate of line segment start point.</param>
+        /// <param name="y1">The Y coordinate of line segment start point.</param>
+        /// <param name="x2">The X coordinate of line segment end point.</param>
+        /// <param name="y2">The Y coordinate of line segment end point.</param>
+        /// <returns>The coordinates of line segment middle point.</returns>
         public static Vector2 Middle(double x1, double y1, double x2, double y2)
         {
             return new Vector2((x1 + x2) / 2.0, (y1 + y2) / 2.0);
         }
 
         /// <summary>
-        /// 
+        ///  Calculate coordinates of nearest point on line to the specified point.
         /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
-        /// <param name="p"></param>
-        /// <returns></returns>
+        /// <param name="a">The line segment start point.</param>
+        /// <param name="b">The line segment start end.</param>
+        /// <param name="p">The point</param>
+        /// <returns>The coordinates of nearest point on line to the specified point.</returns>
         public static Vector2 NearestPointOnLine(Vector2 a, Vector2 b, Vector2 p)
         {
             double ax = p.X - a.X;
@@ -175,9 +175,9 @@ namespace Core2D
         /// <summary>
         /// Check if line intersects with rectangle using Liang-Barsky line clipping algorithm.
         /// </summary>
-        /// <param name="rect"></param>
-        /// <param name="p0"></param>
-        /// <param name="p1"></param>
+        /// <param name="rect">The rectangle shape.</param>
+        /// <param name="p0">The line start point.</param>
+        /// <param name="p1">The line end point.</param>
         /// <returns>True if line intersects with rectangle.</returns>
         public static bool LineIntersectsWithRect(Rect2 rect, Point2 p0, Point2 p1)
         {

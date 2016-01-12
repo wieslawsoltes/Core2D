@@ -6,7 +6,7 @@ using System.Globalization;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Two dimensional vector.
     /// </summary>
     public struct Vector2 : IComparable<Vector2>
     {

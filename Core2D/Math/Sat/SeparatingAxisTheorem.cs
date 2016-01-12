@@ -5,8 +5,11 @@ using System;
 namespace Core2D
 {
     /// <summary>
-    /// SAT Separating Axis Theorem based on pseudo code http://www.codezealot.org/archives/55.
+    /// SAT Separating Axis Theorem.
     /// </summary>
+    /// <remarks>
+    /// Based on pseudo code from http://www.codezealot.org/archives/55.
+    /// </remarks>
     public class SeparatingAxisTheorem
     {
         /// <summary>

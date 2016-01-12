@@ -5,7 +5,7 @@ using System;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Rectangle shape.
     /// </summary>
     public struct Rect2
     {

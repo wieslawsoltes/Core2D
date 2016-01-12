@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace Core2D
 {
     /// <summary>
-    /// Key based image data cache.
+    /// Defines key based image data cache contract.
     /// </summary>
     public interface IImageCache
     {

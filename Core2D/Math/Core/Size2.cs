@@ -4,7 +4,7 @@
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Size definition.
     /// </summary>
     public struct Size2
     {

@@ -29,11 +29,13 @@ namespace Core2D
 
         /// <summary>
         /// Returns a list of vertices's on the convex hull in counter-clockwise order.
-        /// Note: the last vertice in the returned list is the same as the first one.
         /// </summary>
-        /// <param name="vertices"></param>
-        /// <param name="hull"></param>
-        /// <param name="k"></param>
+        /// <remarks>
+        /// The last vertice in the returned list is the same as the first one.
+        /// </remarks>
+        /// <param name="vertices">The raw vertices array.</param>
+        /// <param name="hull">The output hull vertices array.</param>
+        /// <param name="k">The number of output hull vertices.</param>
         public void ConvexHull(Vector2[] vertices, out Vector2[] hull, out int k)
         {
             int n = vertices.Length;

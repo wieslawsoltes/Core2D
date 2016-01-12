@@ -4,7 +4,7 @@
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Polygon shape.
     /// </summary>
     public struct Polygon2
     {

@@ -5,7 +5,7 @@ using System;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Two dimensional point.
     /// </summary>
     public struct Point2
     {

@@ -6,7 +6,7 @@ using System.Linq;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Convert <see cref="XArc"/> coordinates to WPF arc coordinates.
     /// </summary>
     public struct WpfArc
     {
