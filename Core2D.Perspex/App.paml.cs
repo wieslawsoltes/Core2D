@@ -270,102 +270,102 @@ namespace Core2D.Perspex
 
             Commands.ImportStyleCommand =
                 Command<Library<ShapeStyle>>.Create(
-                    async (item) => await OnImportObject(item, ImportType.Style),
+                    async (item) => await OnImportObject(item, CoreType.Style),
                     (item) => editor.IsEditMode());
 
             Commands.ImportStylesCommand =
                 Command<Library<ShapeStyle>>.Create(
-                    async (item) => await OnImportObject(item, ImportType.Styles),
+                    async (item) => await OnImportObject(item, CoreType.Styles),
                     (item) => editor.IsEditMode());
 
             Commands.ImportStyleLibraryCommand =
                 Command<Project>.Create(
-                    async (item) => await OnImportObject(item, ImportType.StyleLibrary),
+                    async (item) => await OnImportObject(item, CoreType.StyleLibrary),
                     (item) => editor.IsEditMode());
 
             Commands.ImportStyleLibrariesCommand =
                 Command<Project>.Create(
-                    async (item) => await OnImportObject(item, ImportType.StyleLibraries),
+                    async (item) => await OnImportObject(item, CoreType.StyleLibraries),
                     (item) => editor.IsEditMode());
 
             Commands.ImportGroupCommand =
                 Command<Library<XGroup>>.Create(
-                    async (item) => await OnImportObject(item, ImportType.Group),
+                    async (item) => await OnImportObject(item, CoreType.Group),
                     (item) => editor.IsEditMode());
 
             Commands.ImportGroupsCommand =
                 Command<Library<XGroup>>.Create(
-                    async (item) => await OnImportObject(item, ImportType.Groups),
+                    async (item) => await OnImportObject(item, CoreType.Groups),
                     (item) => editor.IsEditMode());
 
             Commands.ImportGroupLibraryCommand =
                 Command<Project>.Create(
-                    async (item) => await OnImportObject(item, ImportType.GroupLibrary),
+                    async (item) => await OnImportObject(item, CoreType.GroupLibrary),
                     (item) => editor.IsEditMode());
 
             Commands.ImportGroupLibrariesCommand =
                 Command<Project>.Create(
-                    async (item) => await OnImportObject(item, ImportType.GroupLibraries),
+                    async (item) => await OnImportObject(item, CoreType.GroupLibraries),
                     (item) => editor.IsEditMode());
 
             Commands.ImportTemplateCommand =
                 Command<Project>.Create(
-                    async (item) => await OnImportObject(item, ImportType.Template),
+                    async (item) => await OnImportObject(item, CoreType.Template),
                     (item) => editor.IsEditMode());
 
             Commands.ImportTemplatesCommand =
                 Command<Project>.Create(
-                    async (item) => await OnImportObject(item, ImportType.Templates),
+                    async (item) => await OnImportObject(item, CoreType.Templates),
                     (item) => editor.IsEditMode());
 
             Commands.ExportStyleCommand =
                 Command<ShapeStyle>.Create(
-                    async (item) => await OnExportObject(item, ExportType.Style),
+                    async (item) => await OnExportObject(item, CoreType.Style),
                     (item) => editor.IsEditMode());
 
             Commands.ExportStylesCommand =
                 Command<Library<ShapeStyle>>.Create(
-                    async (item) => await OnExportObject(item, ExportType.Styles),
+                    async (item) => await OnExportObject(item, CoreType.Styles),
                     (item) => editor.IsEditMode());
 
             Commands.ExportStyleLibraryCommand =
                 Command<Library<ShapeStyle>>.Create(
-                    async (item) => await OnExportObject(item, ExportType.StyleLibrary),
+                    async (item) => await OnExportObject(item, CoreType.StyleLibrary),
                     (item) => editor.IsEditMode());
 
             Commands.ExportStyleLibrariesCommand =
                 Command<IEnumerable<Library<ShapeStyle>>>.Create(
-                    async (item) => await OnExportObject(item, ExportType.StyleLibraries),
+                    async (item) => await OnExportObject(item, CoreType.StyleLibraries),
                     (item) => editor.IsEditMode());
 
             Commands.ExportGroupCommand =
                 Command<XGroup>.Create(
-                    async (item) => await OnExportObject(item, ExportType.Group),
+                    async (item) => await OnExportObject(item, CoreType.Group),
                     (item) => editor.IsEditMode());
 
             Commands.ExportGroupsCommand =
                 Command<Library<XGroup>>.Create(
-                    async (item) => await OnExportObject(item, ExportType.Groups),
+                    async (item) => await OnExportObject(item, CoreType.Groups),
                     (item) => editor.IsEditMode());
 
             Commands.ExportGroupLibraryCommand =
                 Command<Library<XGroup>>.Create(
-                    async (item) => await OnExportObject(item, ExportType.GroupLibrary),
+                    async (item) => await OnExportObject(item, CoreType.GroupLibrary),
                     (item) => editor.IsEditMode());
 
             Commands.ExportGroupLibrariesCommand =
                 Command<IEnumerable<Library<XGroup>>>.Create(
-                    async (item) => await OnExportObject(item, ExportType.GroupLibraries),
+                    async (item) => await OnExportObject(item, CoreType.GroupLibraries),
                     (item) => editor.IsEditMode());
 
             Commands.ExportTemplateCommand =
                 Command<Template>.Create(
-                    async (item) => await OnExportObject(item, ExportType.Template),
+                    async (item) => await OnExportObject(item, CoreType.Template),
                     (item) => editor.IsEditMode());
 
             Commands.ExportTemplatesCommand =
                 Command<IEnumerable<Template>>.Create(
-                    async (item) => await OnExportObject(item, ExportType.Templates),
+                    async (item) => await OnExportObject(item, CoreType.Templates),
                     (item) => editor.IsEditMode());
 
             Commands.ZoomResetCommand =
@@ -713,7 +713,7 @@ namespace Core2D.Perspex
         /// <param name="item">The item object to import.</param>
         /// <param name="type">The type of item object.</param>
         /// <returns>The await <see cref="Task"/>.</returns>
-        private async Task OnImportObject(object item, ImportType type)
+        private async Task OnImportObject(object item, CoreType type)
         {
             try
             {
@@ -724,43 +724,43 @@ namespace Core2D.Perspex
 
                     switch (type)
                     {
-                        case ImportType.Style:
+                        case CoreType.Style:
                             name = "Style";
                             ext = "style";
                             break;
-                        case ImportType.Styles:
+                        case CoreType.Styles:
                             name = "Styles";
                             ext = "styles";
                             break;
-                        case ImportType.StyleLibrary:
+                        case CoreType.StyleLibrary:
                             name = "StyleLibrary";
                             ext = "stylelibrary";
                             break;
-                        case ImportType.StyleLibraries:
+                        case CoreType.StyleLibraries:
                             name = "StyleLibraries";
                             ext = "stylelibraries";
                             break;
-                        case ImportType.Group:
+                        case CoreType.Group:
                             name = "Group";
                             ext = "group";
                             break;
-                        case ImportType.Groups:
+                        case CoreType.Groups:
                             name = "Groups";
                             ext = "groups";
                             break;
-                        case ImportType.GroupLibrary:
+                        case CoreType.GroupLibrary:
                             name = "GroupLibrary";
                             ext = "grouplibrary";
                             break;
-                        case ImportType.GroupLibraries:
+                        case CoreType.GroupLibraries:
                             name = "GroupLibraries";
                             ext = "grouplibraries";
                             break;
-                        case ImportType.Template:
+                        case CoreType.Template:
                             name = "Template";
                             ext = "template";
                             break;
-                        case ImportType.Templates:
+                        case CoreType.Templates:
                             name = "Templates";
                             ext = "templates";
                             break;
@@ -792,7 +792,7 @@ namespace Core2D.Perspex
         /// <param name="item">The item object to export.</param>
         /// <param name="type">The type of item object.</param>
         /// <returns>The await <see cref="Task"/>.</returns>
-        private async Task OnExportObject(object item, ExportType type)
+        private async Task OnExportObject(object item, CoreType type)
         {
             try
             {
@@ -804,52 +804,52 @@ namespace Core2D.Perspex
 
                     switch (type)
                     {
-                        case ExportType.Style:
+                        case CoreType.Style:
                             name = "Style";
                             extension = "style";
                             initial = (item as ShapeStyle).Name;
                             break;
-                        case ExportType.Styles:
+                        case CoreType.Styles:
                             name = "Styles";
                             extension = "styles";
                             initial = (item as Library<ShapeStyle>).Name;
                             break;
-                        case ExportType.StyleLibrary:
+                        case CoreType.StyleLibrary:
                             name = "StyleLibrary";
                             extension = "stylelibrary";
                             initial = (item as Library<ShapeStyle>).Name;
                             break;
-                        case ExportType.StyleLibraries:
+                        case CoreType.StyleLibraries:
                             name = "StyleLibraries";
                             extension = "stylelibraries";
                             initial = "StyleLibraries";
                             break;
-                        case ExportType.Group:
+                        case CoreType.Group:
                             name = "Group";
                             extension = "group";
                             initial = (item as XGroup).Name;
                             break;
-                        case ExportType.Groups:
+                        case CoreType.Groups:
                             name = "Groups";
                             extension = "groups";
                             initial = (item as Library<XGroup>).Name;
                             break;
-                        case ExportType.GroupLibrary:
+                        case CoreType.GroupLibrary:
                             name = "GroupLibrary";
                             extension = "grouplibrary";
                             initial = (item as Library<XGroup>).Name;
                             break;
-                        case ExportType.GroupLibraries:
+                        case CoreType.GroupLibraries:
                             name = "GroupLibraries";
                             extension = "grouplibraries";
                             initial = "GroupLibraries";
                             break;
-                        case ExportType.Template:
+                        case CoreType.Template:
                             name = "Template";
                             extension = "template";
                             initial = (item as Template).Name;
                             break;
-                        case ExportType.Templates:
+                        case CoreType.Templates:
                             name = "Templates";
                             extension = "templates";
                             initial = "Templates";

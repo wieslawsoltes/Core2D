@@ -594,7 +594,7 @@ namespace Core2D
         /// <param name="path">The object file path.</param>
         /// <param name="item">The parent object.</param>
         /// <param name="type">The object type.</param>
-        public void OnImportObject(string path, object item, ImportType type)
+        public void OnImportObject(string path, object item, CoreType type)
         {
             if (_project == null || _jsonSerializer == null)
                 return;
@@ -603,7 +603,7 @@ namespace Core2D
             {
                 switch (type)
                 {
-                    case ImportType.Style:
+                    case CoreType.Style:
                         {
                             var sl = item as Library<ShapeStyle>;
                             var json = Project.ReadUtf8Text(path);
@@ -612,7 +612,7 @@ namespace Core2D
                             _project.AddStyle(sl, import);
                         }
                         break;
-                    case ImportType.Styles:
+                    case CoreType.Styles:
                         {
                             var sl = item as Library<ShapeStyle>;
                             var json = Project.ReadUtf8Text(path);
@@ -621,7 +621,7 @@ namespace Core2D
                             _project.AddItems(sl, import);
                         }
                         break;
-                    case ImportType.StyleLibrary:
+                    case CoreType.StyleLibrary:
                         {
                             var project = item as Project;
                             var json = Project.ReadUtf8Text(path);
@@ -630,7 +630,7 @@ namespace Core2D
                             _project.AddStyleLibrary(import);
                         }
                         break;
-                    case ImportType.StyleLibraries:
+                    case CoreType.StyleLibraries:
                         {
                             var project = item as Project;
                             var json = Project.ReadUtf8Text(path);
@@ -639,7 +639,7 @@ namespace Core2D
                             _project.AddStyleLibraries(import);
                         }
                         break;
-                    case ImportType.Group:
+                    case CoreType.Group:
                         {
                             var gl = item as Library<XGroup>;
                             var json = Project.ReadUtf8Text(path);
@@ -652,7 +652,7 @@ namespace Core2D
                             _project.AddGroup(gl, import);
                         }
                         break;
-                    case ImportType.Groups:
+                    case CoreType.Groups:
                         {
                             var gl = item as Library<XGroup>;
                             var json = Project.ReadUtf8Text(path);
@@ -664,7 +664,7 @@ namespace Core2D
                             _project.AddItems(gl, import);
                         }
                         break;
-                    case ImportType.GroupLibrary:
+                    case CoreType.GroupLibrary:
                         {
                             var project = item as Project;
                             var json = Project.ReadUtf8Text(path);
@@ -676,7 +676,7 @@ namespace Core2D
                             _project.AddGroupLibrary(import);
                         }
                         break;
-                    case ImportType.GroupLibraries:
+                    case CoreType.GroupLibraries:
                         {
                             var project = item as Project;
                             var json = Project.ReadUtf8Text(path);
@@ -689,7 +689,7 @@ namespace Core2D
                             _project.AddGroupLibraries(import);
                         }
                         break;
-                    case ImportType.Template:
+                    case CoreType.Template:
                         {
                             var project = item as Project;
                             var json = Project.ReadUtf8Text(path);
@@ -702,7 +702,7 @@ namespace Core2D
                             _project.AddTemplate(import);
                         }
                         break;
-                    case ImportType.Templates:
+                    case CoreType.Templates:
                         {
                             var project = item as Project;
                             var json = Project.ReadUtf8Text(path);
@@ -729,7 +729,7 @@ namespace Core2D
         /// <param name="path">The object file path.</param>
         /// <param name="item">The object item.</param>
         /// <param name="type">The object type.</param>
-        public void OnExportObject(string path, object item, ExportType type)
+        public void OnExportObject(string path, object item, CoreType type)
         {
             if (_jsonSerializer == null)
                 return;
@@ -738,61 +738,61 @@ namespace Core2D
             {
                 switch (type)
                 {
-                    case ExportType.Style:
+                    case CoreType.Style:
                         {
                             var json = _jsonSerializer.Serialize(item as ShapeStyle);
                             Project.WriteUtf8Text(path, json);
                         }
                         break;
-                    case ExportType.Styles:
+                    case CoreType.Styles:
                         {
                             var json = _jsonSerializer.Serialize((item as Library<ShapeStyle>).Items);
                             Project.WriteUtf8Text(path, json);
                         }
                         break;
-                    case ExportType.StyleLibrary:
+                    case CoreType.StyleLibrary:
                         {
                             var json = _jsonSerializer.Serialize((item as Library<ShapeStyle>));
                             Project.WriteUtf8Text(path, json);
                         }
                         break;
-                    case ExportType.StyleLibraries:
+                    case CoreType.StyleLibraries:
                         {
                             var json = _jsonSerializer.Serialize(item as IEnumerable<Library<ShapeStyle>>);
                             Project.WriteUtf8Text(path, json);
                         }
                         break;
-                    case ExportType.Group:
+                    case CoreType.Group:
                         {
                             var json = _jsonSerializer.Serialize(item as XGroup);
                             Project.WriteUtf8Text(path, json);
                         }
                         break;
-                    case ExportType.Groups:
+                    case CoreType.Groups:
                         {
                             var json = _jsonSerializer.Serialize((item as Library<XGroup>).Items);
                             Project.WriteUtf8Text(path, json);
                         }
                         break;
-                    case ExportType.GroupLibrary:
+                    case CoreType.GroupLibrary:
                         {
                             var json = _jsonSerializer.Serialize(item as Library<XGroup>);
                             Project.WriteUtf8Text(path, json);
                         }
                         break;
-                    case ExportType.GroupLibraries:
+                    case CoreType.GroupLibraries:
                         {
                             var json = _jsonSerializer.Serialize(item as IEnumerable<Library<XGroup>>);
                             Project.WriteUtf8Text(path, json);
                         }
                         break;
-                    case ExportType.Template:
+                    case CoreType.Template:
                         {
                             var json = _jsonSerializer.Serialize(item as Template);
                             Project.WriteUtf8Text(path, json);
                         }
                         break;
-                    case ExportType.Templates:
+                    case CoreType.Templates:
                         {
                             var json = _jsonSerializer.Serialize(item as IEnumerable<Template>);
                             Project.WriteUtf8Text(path, json);
@@ -2597,52 +2597,52 @@ namespace Core2D
                         }
                         else if (string.Compare(ext, Constants.StyleExtension, true) == 0)
                         {
-                            OnImportObject(path, _project.CurrentStyleLibrary, ImportType.Style);
+                            OnImportObject(path, _project.CurrentStyleLibrary, CoreType.Style);
                             result = true;
                         }
                         else if (string.Compare(ext, Constants.StylesExtension, true) == 0)
                         {
-                            OnImportObject(path, _project.CurrentStyleLibrary, ImportType.Styles);
+                            OnImportObject(path, _project.CurrentStyleLibrary, CoreType.Styles);
                             result = true;
                         }
                         else if (string.Compare(ext, Constants.StyleLibraryExtension, true) == 0)
                         {
-                            OnImportObject(path, _project, ImportType.StyleLibrary);
+                            OnImportObject(path, _project, CoreType.StyleLibrary);
                             result = true;
                         }
                         else if (string.Compare(ext, Constants.StyleLibrariesExtension, true) == 0)
                         {
-                            OnImportObject(path, _project, ImportType.StyleLibraries);
+                            OnImportObject(path, _project, CoreType.StyleLibraries);
                             result = true;
                         }
                         else if (string.Compare(ext, Constants.GroupExtension, true) == 0)
                         {
-                            OnImportObject(path, _project.CurrentGroupLibrary, ImportType.Group);
+                            OnImportObject(path, _project.CurrentGroupLibrary, CoreType.Group);
                             result = true;
                         }
                         else if (string.Compare(ext, Constants.GroupsExtension, true) == 0)
                         {
-                            OnImportObject(path, _project.CurrentGroupLibrary, ImportType.Groups);
+                            OnImportObject(path, _project.CurrentGroupLibrary, CoreType.Groups);
                             result = true;
                         }
                         else if (string.Compare(ext, Constants.GroupLibraryExtension, true) == 0)
                         {
-                            OnImportObject(path, _project, ImportType.GroupLibrary);
+                            OnImportObject(path, _project, CoreType.GroupLibrary);
                             result = true;
                         }
                         else if (string.Compare(ext, Constants.GroupLibrariesExtension, true) == 0)
                         {
-                            OnImportObject(path, _project, ImportType.GroupLibraries);
+                            OnImportObject(path, _project, CoreType.GroupLibraries);
                             result = true;
                         }
                         else if (string.Compare(ext, Constants.TemplateExtension, true) == 0)
                         {
-                            OnImportObject(path, _project, ImportType.Template);
+                            OnImportObject(path, _project, CoreType.Template);
                             result = true;
                         }
                         else if (string.Compare(ext, Constants.TemplatesExtension, true) == 0)
                         {
-                            OnImportObject(path, _project, ImportType.Templates);
+                            OnImportObject(path, _project, CoreType.Templates);
                             result = true;
                         }
                         else if (string.Compare(ext, Constants.XamlExtension, true) == 0)

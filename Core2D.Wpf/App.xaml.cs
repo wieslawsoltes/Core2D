@@ -231,102 +231,102 @@ namespace Core2D.Wpf
 
             Commands.ImportStyleCommand =
                 Command<Library<ShapeStyle>>.Create(
-                    (item) => OnImportObject(item, ImportType.Style),
+                    (item) => OnImportObject(item, CoreType.Style),
                     (item) => editor.IsEditMode());
 
             Commands.ImportStylesCommand =
                 Command<Library<ShapeStyle>>.Create(
-                    (item) => OnImportObject(item, ImportType.Styles),
+                    (item) => OnImportObject(item, CoreType.Styles),
                     (item) => editor.IsEditMode());
 
             Commands.ImportStyleLibraryCommand =
                 Command<Project>.Create(
-                    (item) => OnImportObject(item, ImportType.StyleLibrary),
+                    (item) => OnImportObject(item, CoreType.StyleLibrary),
                     (item) => editor.IsEditMode());
 
             Commands.ImportStyleLibrariesCommand =
                 Command<Project>.Create(
-                    (item) => OnImportObject(item, ImportType.StyleLibraries),
+                    (item) => OnImportObject(item, CoreType.StyleLibraries),
                     (item) => editor.IsEditMode());
 
             Commands.ImportGroupCommand =
                 Command<Library<XGroup>>.Create(
-                    (item) => OnImportObject(item, ImportType.Group),
+                    (item) => OnImportObject(item, CoreType.Group),
                     (item) => editor.IsEditMode());
 
             Commands.ImportGroupsCommand =
                 Command<Library<XGroup>>.Create(
-                    (item) => OnImportObject(item, ImportType.Groups),
+                    (item) => OnImportObject(item, CoreType.Groups),
                     (item) => editor.IsEditMode());
 
             Commands.ImportGroupLibraryCommand =
                 Command<Project>.Create(
-                    (item) => OnImportObject(item, ImportType.GroupLibrary),
+                    (item) => OnImportObject(item, CoreType.GroupLibrary),
                     (item) => editor.IsEditMode());
 
             Commands.ImportGroupLibrariesCommand =
                 Command<Project>.Create(
-                    (item) => OnImportObject(item, ImportType.GroupLibraries),
+                    (item) => OnImportObject(item, CoreType.GroupLibraries),
                     (item) => editor.IsEditMode());
 
             Commands.ImportTemplateCommand =
                 Command<Project>.Create(
-                    (item) => OnImportObject(item, ImportType.Template),
+                    (item) => OnImportObject(item, CoreType.Template),
                     (item) => editor.IsEditMode());
 
             Commands.ImportTemplatesCommand =
                 Command<Project>.Create(
-                    (item) => OnImportObject(item, ImportType.Templates),
+                    (item) => OnImportObject(item, CoreType.Templates),
                     (item) => editor.IsEditMode());
 
             Commands.ExportStyleCommand =
                 Command<ShapeStyle>.Create(
-                    (item) => OnExportObject(item, ExportType.Style),
+                    (item) => OnExportObject(item, CoreType.Style),
                     (item) => editor.IsEditMode());
 
             Commands.ExportStylesCommand =
                 Command<Library<ShapeStyle>>.Create(
-                    (item) => OnExportObject(item, ExportType.Styles),
+                    (item) => OnExportObject(item, CoreType.Styles),
                     (item) => editor.IsEditMode());
 
             Commands.ExportStyleLibraryCommand =
                 Command<Library<ShapeStyle>>.Create(
-                    (item) => OnExportObject(item, ExportType.StyleLibrary),
+                    (item) => OnExportObject(item, CoreType.StyleLibrary),
                     (item) => editor.IsEditMode());
 
             Commands.ExportStyleLibrariesCommand =
                 Command<IEnumerable<Library<ShapeStyle>>>.Create(
-                    (item) => OnExportObject(item, ExportType.StyleLibraries),
+                    (item) => OnExportObject(item, CoreType.StyleLibraries),
                     (item) => editor.IsEditMode());
 
             Commands.ExportGroupCommand =
                 Command<XGroup>.Create(
-                    (item) => OnExportObject(item, ExportType.Group),
+                    (item) => OnExportObject(item, CoreType.Group),
                     (item) => editor.IsEditMode());
 
             Commands.ExportGroupsCommand =
                 Command<Library<XGroup>>.Create(
-                    (item) => OnExportObject(item, ExportType.Groups),
+                    (item) => OnExportObject(item, CoreType.Groups),
                     (item) => editor.IsEditMode());
 
             Commands.ExportGroupLibraryCommand =
                 Command<Library<XGroup>>.Create(
-                    (item) => OnExportObject(item, ExportType.GroupLibrary),
+                    (item) => OnExportObject(item, CoreType.GroupLibrary),
                     (item) => editor.IsEditMode());
 
             Commands.ExportGroupLibrariesCommand =
                 Command<IEnumerable<Library<XGroup>>>.Create(
-                    (item) => OnExportObject(item, ExportType.GroupLibraries),
+                    (item) => OnExportObject(item, CoreType.GroupLibraries),
                     (item) => editor.IsEditMode());
 
             Commands.ExportTemplateCommand =
                 Command<Template>.Create(
-                    (item) => OnExportObject(item, ExportType.Template),
+                    (item) => OnExportObject(item, CoreType.Template),
                     (item) => editor.IsEditMode());
 
             Commands.ExportTemplatesCommand =
                 Command<IEnumerable<Template>>.Create(
-                    (item) => OnExportObject(item, ExportType.Templates),
+                    (item) => OnExportObject(item, CoreType.Templates),
                     (item) => editor.IsEditMode());
 
             Commands.CopyAsEmfCommand =
@@ -626,7 +626,7 @@ namespace Core2D.Wpf
         /// </summary>
         /// <param name="item">The item object to import.</param>
         /// <param name="type">The type of item object.</param>
-        private void OnImportObject(object item, ImportType type)
+        private void OnImportObject(object item, CoreType type)
         {
             if (item == null)
                 return;
@@ -635,34 +635,34 @@ namespace Core2D.Wpf
 
             switch (type)
             {
-                case ImportType.Style:
+                case CoreType.Style:
                     filter = "Style (*.style)|*.style|All (*.*)|*.*";
                     break;
-                case ImportType.Styles:
+                case CoreType.Styles:
                     filter = "Styles (*.styles)|*.styles|All (*.*)|*.*";
                     break;
-                case ImportType.StyleLibrary:
+                case CoreType.StyleLibrary:
                     filter = "StyleLibrary (*.stylelibrary)|*.stylelibrary|All (*.*)|*.*";
                     break;
-                case ImportType.StyleLibraries:
+                case CoreType.StyleLibraries:
                     filter = "StyleLibraries (*.styleLibraries)|*.stylelibraries|All (*.*)|*.*";
                     break;
-                case ImportType.Group:
+                case CoreType.Group:
                     filter = "Group (*.group)|*.group|All (*.*)|*.*";
                     break;
-                case ImportType.Groups:
+                case CoreType.Groups:
                     filter = "Groups (*.groups)|*.groups|All (*.*)|*.*";
                     break;
-                case ImportType.GroupLibrary:
+                case CoreType.GroupLibrary:
                     filter = "GroupLibrary (*.grouplibrary)|*.grouplibrary|All (*.*)|*.*";
                     break;
-                case ImportType.GroupLibraries:
+                case CoreType.GroupLibraries:
                     filter = "GroupLibraries (*.grouplibraries)|*.grouplibraries|All (*.*)|*.*";
                     break;
-                case ImportType.Template:
+                case CoreType.Template:
                     filter = "Template (*.template)|*.template|All (*.*)|*.*";
                     break;
-                case ImportType.Templates:
+                case CoreType.Templates:
                     filter = "Templates (*.templates)|*.templates|All (*.*)|*.*";
                     break;
             }
@@ -690,7 +690,7 @@ namespace Core2D.Wpf
         /// </summary>
         /// <param name="item">The item object to export.</param>
         /// <param name="type">The type of item object.</param>
-        private void OnExportObject(object item, ExportType type)
+        private void OnExportObject(object item, CoreType type)
         {
             if (item == null)
                 return;
@@ -700,43 +700,43 @@ namespace Core2D.Wpf
 
             switch (type)
             {
-                case ExportType.Style:
+                case CoreType.Style:
                     filter = "Style (*.style)|*.style|Style (*.xaml)|*.xaml|All (*.*)|*.*";
                     name = (item as ShapeStyle).Name;
                     break;
-                case ExportType.Styles:
+                case CoreType.Styles:
                     filter = "Styles (*.styles)|*.styles|Styles (*.xaml)|*.xaml|All (*.*)|*.*";
                     name = (item as Library<ShapeStyle>).Name;
                     break;
-                case ExportType.StyleLibrary:
+                case CoreType.StyleLibrary:
                     filter = "StyleLibrary (*.stylelibrary)|*.stylelibrary|StyleLibrary (*.xaml)|*.xaml|All (*.*)|*.*";
                     name = (item as Library<ShapeStyle>).Name;
                     break;
-                case ExportType.StyleLibraries:
+                case CoreType.StyleLibraries:
                     filter = "StyleLibraries (*.stylelibraries)|*.stylelibraries|StyleLibraries (*.xaml)|*.xaml|All (*.*)|*.*";
                     name = "StyleLibraries";
                     break;
-                case ExportType.Group:
+                case CoreType.Group:
                     filter = "Group (*.group)|*.group|Group (*.xaml)|*.xaml|All (*.*)|*.*";
                     name = (item as XGroup).Name;
                     break;
-                case ExportType.Groups:
+                case CoreType.Groups:
                     filter = "Groups (*.groups)|*.groups|Groups (*.xaml)|*.xaml|All (*.*)|*.*";
                     name = (item as Library<XGroup>).Name;
                     break;
-                case ExportType.GroupLibrary:
+                case CoreType.GroupLibrary:
                     filter = "GroupLibrary (*.grouplibrary)|*.grouplibrary|GroupLibrary (*.xaml)|*.xaml|All (*.*)|*.*";
                     name = (item as Library<XGroup>).Name;
                     break;
-                case ExportType.GroupLibraries:
+                case CoreType.GroupLibraries:
                     filter = "GroupLibraries (*.grouplibraries)|*.grouplibraries|GroupLibraries (*.xaml)|*.xaml|All (*.*)|*.*";
                     name = "GroupLibraries";
                     break;
-                case ExportType.Template:
+                case CoreType.Template:
                     filter = "Template (*.template)|*.template|Template (*.xaml)|*.xaml|All (*.*)|*.*";
                     name = (item as Template).Name;
                     break;
-                case ExportType.Templates:
+                case CoreType.Templates:
                     filter = "Templates (*.templates)|*.templates|Templates (*.xaml)|*.xaml|All (*.*)|*.*";
                     name = "Templates";
                     break;

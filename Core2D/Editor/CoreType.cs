@@ -4,57 +4,57 @@
 namespace Core2D
 {
     /// <summary>
-    /// Specifies import types.
+    /// Specifies core object types.
     /// </summary>
-    public enum ImportType
+    public enum CoreType
     {
         /// <summary>
-        /// 
+        /// Shape style.
         /// </summary>
         Style,
 
         /// <summary>
-        /// 
+        /// Shape styles.
         /// </summary>
         Styles,
 
         /// <summary>
-        /// 
+        /// Shape style library.
         /// </summary>
         StyleLibrary,
 
         /// <summary>
-        /// 
+        /// Shape style libraries.
         /// </summary>
         StyleLibraries,
 
         /// <summary>
-        /// 
+        /// Group shape.
         /// </summary>
         Group,
 
         /// <summary>
-        /// 
+        /// Group shapes.
         /// </summary>
         Groups,
 
         /// <summary>
-        /// 
+        /// Group library.
         /// </summary>
         GroupLibrary,
 
         /// <summary>
-        /// 
+        /// Group libraries.
         /// </summary>
         GroupLibraries,
 
         /// <summary>
-        /// 
+        /// Page template.
         /// </summary>
         Template,
 
         /// <summary>
-        /// 
+        /// Page templates.
         /// </summary>
         Templates
     }
