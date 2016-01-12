@@ -64,11 +64,11 @@
     <Compile Include="Data\Property.cs" />
     <Compile Include="Editor\Bounds\ConvexHullBounds.cs" />
     <Compile Include="Editor\Bounds\ShapeBounds.cs" />
-    <Compile Include="Editor\Core\Command.cs" />
-    <Compile Include="Editor\Core\Command`1.cs" />
+    <Compile Include="Core\Command.cs" />
+    <Compile Include="Core\Command`1.cs" />
     <Compile Include="Editor\Core\ExportType.cs" />
-    <Compile Include="Editor\Core\ICoreCommand.cs" />
-    <Compile Include="Editor\Core\ICoreCommand`1.cs" />
+    <Compile Include="Core\ICoreCommand.cs" />
+    <Compile Include="Core\ICoreCommand`1.cs" />
     <Compile Include="Editor\Core\ToolBase.cs" />
     <Compile Include="Editor\Core\History.cs" />
     <Compile Include="Editor\Core\ImportType.cs" />
