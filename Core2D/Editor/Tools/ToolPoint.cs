@@ -9,7 +9,7 @@ namespace Core2D
     public class ToolPoint : ToolBase
     {
         private Editor _editor;
-        private State _currentState = State.None;
+        private ToolState _currentState = ToolState.None;
         private XPoint _shape;
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace Core2D
             double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
             switch (_currentState)
             {
-                case State.None:
+                case ToolState.None:
                     {
                         _shape = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
 
@@ -60,7 +60,7 @@ namespace Core2D
             double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
             switch (_currentState)
             {
-                case State.None:
+                case ToolState.None:
                     {
                         if (_editor.Project.Options.TryToConnect)
                         {

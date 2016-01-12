@@ -11,7 +11,7 @@ namespace Core2D
     public class ToolPath : ToolBase
     {
         private Editor _editor;
-        private State _currentState = State.None;
+        private ToolState _currentState = ToolState.None;
         // Path Tool
         private XPath _path;
         private XPathGeometry _geometry;
@@ -267,7 +267,7 @@ namespace Core2D
             double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
             switch (_currentState)
             {
-                case State.None:
+                case ToolState.None:
                     {
                         _lineStart = TryToGetConnectionPoint(sx, sy) ?? XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
                         if (!_isInitialized)
@@ -288,11 +288,11 @@ namespace Core2D
                         ToStateOne();
                         Move(null);
                         _editor.Project.CurrentContainer.HelperLayer.Invalidate();
-                        _currentState = State.One;
+                        _currentState = ToolState.One;
                         _editor.CancelAvailable = true;
                     }
                     break;
-                case State.One:
+                case ToolState.One:
                     {
                         _lineEnd.X = sx;
                         _lineEnd.Y = sy;
@@ -315,7 +315,7 @@ namespace Core2D
                         _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         Move(null);
                         _editor.Project.CurrentContainer.HelperLayer.Invalidate();
-                        _currentState = State.One;
+                        _currentState = ToolState.One;
                     }
                     break;
             }
@@ -332,7 +332,7 @@ namespace Core2D
             double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
             switch (_currentState)
             {
-                case State.None:
+                case ToolState.None:
                     {
                         _bezierPoint1 = TryToGetConnectionPoint(sx, sy) ?? XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
                         if (!_isInitialized)
@@ -357,11 +357,11 @@ namespace Core2D
                         ToStateOne();
                         Move(null);
                         _editor.Project.CurrentContainer.HelperLayer.Invalidate();
-                        _currentState = State.One;
+                        _currentState = ToolState.One;
                         _editor.CancelAvailable = true;
                     }
                     break;
-                case State.One:
+                case ToolState.One:
                     {
                         _bezierPoint4.X = sx;
                         _bezierPoint4.Y = sy;
@@ -380,10 +380,10 @@ namespace Core2D
                         ToStateTwo();
                         Move(null);
                         _editor.Project.CurrentContainer.HelperLayer.Invalidate();
-                        _currentState = State.Two;
+                        _currentState = ToolState.Two;
                     }
                     break;
-                case State.Two:
+                case ToolState.Two:
                     {
                         _bezierPoint2.X = sx;
                         _bezierPoint2.Y = sy;
@@ -402,10 +402,10 @@ namespace Core2D
                         ToStateThree();
                         Move(null);
                         _editor.Project.CurrentContainer.HelperLayer.Invalidate();
-                        _currentState = State.Three;
+                        _currentState = ToolState.Three;
                     }
                     break;
-                case State.Three:
+                case ToolState.Three:
                     {
                         _bezierPoint3.X = sx;
                         _bezierPoint3.Y = sy;
@@ -436,7 +436,7 @@ namespace Core2D
                         ToStateOne();
                         Move(null);
                         _editor.Project.CurrentContainer.HelperLayer.Invalidate();
-                        _currentState = State.One;
+                        _currentState = ToolState.One;
                     }
                     break;
             }
@@ -448,7 +448,7 @@ namespace Core2D
             double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
             switch (_currentState)
             {
-                case State.None:
+                case ToolState.None:
                     {
                         _qbezierPoint1 = TryToGetConnectionPoint(sx, sy) ?? XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
                         if (!_isInitialized)
@@ -471,11 +471,11 @@ namespace Core2D
                         ToStateOne();
                         Move(null);
                         _editor.Project.CurrentContainer.HelperLayer.Invalidate();
-                        _currentState = State.One;
+                        _currentState = ToolState.One;
                         _editor.CancelAvailable = true;
                     }
                     break;
-                case State.One:
+                case ToolState.One:
                     {
                         _qbezierPoint3.X = sx;
                         _qbezierPoint3.Y = sy;
@@ -494,10 +494,10 @@ namespace Core2D
                         ToStateTwo();
                         Move(null);
                         _editor.Project.CurrentContainer.HelperLayer.Invalidate();
-                        _currentState = State.Two;
+                        _currentState = ToolState.Two;
                     }
                     break;
-                case State.Two:
+                case ToolState.Two:
                     {
                         _qbezierPoint2.X = sx;
                         _qbezierPoint2.Y = sy;
@@ -526,7 +526,7 @@ namespace Core2D
                         ToStateOne();
                         Move(null);
                         _editor.Project.CurrentContainer.HelperLayer.Invalidate();
-                        _currentState = State.One;
+                        _currentState = ToolState.One;
                     }
                     break;
             }
@@ -536,9 +536,9 @@ namespace Core2D
         {
             switch (_currentState)
             {
-                case State.None:
+                case ToolState.None:
                     break;
-                case State.One:
+                case ToolState.One:
                     {
                         RemoveLastLineSegment();
 
@@ -555,7 +555,7 @@ namespace Core2D
                             _editor.Project.CurrentContainer.HelperLayer.Invalidate();
                         }
                         DeInitializeWorkingPath();
-                        _currentState = State.None;
+                        _currentState = ToolState.None;
                         _editor.CancelAvailable = false;
                     }
                     break;
@@ -571,11 +571,11 @@ namespace Core2D
         {
             switch (_currentState)
             {
-                case State.None:
+                case ToolState.None:
                     break;
-                case State.One:
-                case State.Two:
-                case State.Three:
+                case ToolState.One:
+                case ToolState.Two:
+                case ToolState.Three:
                     {
                         RemoveLastBezierSegment();
 
@@ -592,7 +592,7 @@ namespace Core2D
                             _editor.Project.CurrentContainer.HelperLayer.Invalidate();
                         }
                         DeInitializeWorkingPath();
-                        _currentState = State.None;
+                        _currentState = ToolState.None;
                         _editor.CancelAvailable = false;
                     }
                     break;
@@ -603,10 +603,10 @@ namespace Core2D
         {
             switch (_currentState)
             {
-                case State.None:
+                case ToolState.None:
                     break;
-                case State.One:
-                case State.Two:
+                case ToolState.One:
+                case ToolState.Two:
                     {
                         RemoveLastQBezierSegment();
 
@@ -623,7 +623,7 @@ namespace Core2D
                             _editor.Project.CurrentContainer.HelperLayer.Invalidate();
                         }
                         DeInitializeWorkingPath();
-                        _currentState = State.None;
+                        _currentState = ToolState.None;
                         _editor.CancelAvailable = false;
                     }
                     break;
@@ -636,7 +636,7 @@ namespace Core2D
             double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
             switch (_currentState)
             {
-                case State.None:
+                case ToolState.None:
                     {
                         if (_editor.Project.Options.TryToConnect)
                         {
@@ -644,7 +644,7 @@ namespace Core2D
                         }
                     }
                     break;
-                case State.One:
+                case ToolState.One:
                     {
                         if (_editor.Project.Options.TryToConnect)
                         {
@@ -671,7 +671,7 @@ namespace Core2D
             double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
             switch (_currentState)
             {
-                case State.None:
+                case ToolState.None:
                     {
                         if (_editor.Project.Options.TryToConnect)
                         {
@@ -679,7 +679,7 @@ namespace Core2D
                         }
                     }
                     break;
-                case State.One:
+                case ToolState.One:
                     {
                         if (_editor.Project.Options.TryToConnect)
                         {
@@ -696,7 +696,7 @@ namespace Core2D
                         _editor.Project.CurrentContainer.HelperLayer.Invalidate();
                     }
                     break;
-                case State.Two:
+                case ToolState.Two:
                     {
                         if (_editor.Project.Options.TryToConnect)
                         {
@@ -709,7 +709,7 @@ namespace Core2D
                         _editor.Project.CurrentContainer.HelperLayer.Invalidate();
                     }
                     break;
-                case State.Three:
+                case ToolState.Three:
                     {
                         if (_editor.Project.Options.TryToConnect)
                         {
@@ -731,7 +731,7 @@ namespace Core2D
             double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
             switch (_currentState)
             {
-                case State.None:
+                case ToolState.None:
                     {
                         if (_editor.Project.Options.TryToConnect)
                         {
@@ -739,7 +739,7 @@ namespace Core2D
                         }
                     }
                     break;
-                case State.One:
+                case ToolState.One:
                     {
                         if (_editor.Project.Options.TryToConnect)
                         {
@@ -754,7 +754,7 @@ namespace Core2D
                         _editor.Project.CurrentContainer.HelperLayer.Invalidate();
                     }
                     break;
-                case State.Two:
+                case ToolState.Two:
                     {
                         if (_editor.Project.Options.TryToConnect)
                         {
@@ -1084,7 +1084,7 @@ namespace Core2D
                     break;
             }
 
-            _currentState = State.None;
+            _currentState = ToolState.None;
 
             switch (_editor.CurrentPathTool)
             {
@@ -1147,7 +1147,7 @@ namespace Core2D
             double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
             switch (_currentState)
             {
-                case State.None:
+                case ToolState.None:
                     {
                         if (_editor.Project.Options.TryToConnect)
                         {

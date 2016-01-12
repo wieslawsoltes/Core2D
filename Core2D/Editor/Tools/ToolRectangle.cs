@@ -9,7 +9,7 @@ namespace Core2D
     public class ToolRectangle : ToolBase
     {
         private Editor _editor;
-        private State _currentState = State.None;
+        private ToolState _currentState = ToolState.None;
         private XRectangle _shape;
         private XPoint _topLeftHelperPoint;
         private XPoint _bottomRightHelperPoint;
@@ -63,7 +63,7 @@ namespace Core2D
             double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
             switch (_currentState)
             {
-                case State.None:
+                case ToolState.None:
                     {
                         _shape = XRectangle.Create(
                             sx, sy,
@@ -80,11 +80,11 @@ namespace Core2D
                         ToStateOne();
                         Move(_shape);
                         _editor.Project.CurrentContainer.HelperLayer.Invalidate();
-                        _currentState = State.One;
+                        _currentState = ToolState.One;
                         _editor.CancelAvailable = true;
                     }
                     break;
-                case State.One:
+                case ToolState.One:
                     {
                         var rectangle = _shape as XRectangle;
                         if (rectangle != null)
@@ -99,7 +99,7 @@ namespace Core2D
                             Remove();
                             Finalize(_shape);
                             _editor.Project.AddShape(_editor.Project.CurrentContainer.CurrentLayer, _shape);
-                            _currentState = State.None;
+                            _currentState = ToolState.None;
                             _editor.CancelAvailable = false;
                         }
                     }
@@ -114,15 +114,15 @@ namespace Core2D
 
             switch (_currentState)
             {
-                case State.None:
+                case ToolState.None:
                     break;
-                case State.One:
+                case ToolState.One:
                     {
                         _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_shape);
                         _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         Remove();
                         _editor.Project.CurrentContainer.HelperLayer.Invalidate();
-                        _currentState = State.None;
+                        _currentState = ToolState.None;
                         _editor.CancelAvailable = false;
                     }
                     break;
@@ -138,7 +138,7 @@ namespace Core2D
             double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
             switch (_currentState)
             {
-                case State.None:
+                case ToolState.None:
                     {
                         if (_editor.Project.Options.TryToConnect)
                         {
@@ -146,7 +146,7 @@ namespace Core2D
                         }
                     }
                     break;
-                case State.One:
+                case ToolState.One:
                     {
                         var rectangle = _shape as XRectangle;
                         if (rectangle != null)

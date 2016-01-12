@@ -6,7 +6,7 @@ namespace Core2D
     /// <summary>
     /// Specifies tool state.
     /// </summary>
-    public enum State
+    public enum ToolState
     {
         /// <summary>
         /// None state.

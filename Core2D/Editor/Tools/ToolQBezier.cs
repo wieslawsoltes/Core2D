@@ -9,7 +9,7 @@ namespace Core2D
     public class ToolQBezier : ToolBase
     {
         private Editor _editor;
-        private State _currentState = State.None;
+        private ToolState _currentState = ToolState.None;
         private XQBezier _shape;
         private ShapeStyle _style;
         private XLine _line12;
@@ -85,7 +85,7 @@ namespace Core2D
             double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
             switch (_currentState)
             {
-                case State.None:
+                case ToolState.None:
                     {
                         _shape = XQBezier.Create(
                             sx, sy,
@@ -102,11 +102,11 @@ namespace Core2D
                         ToStateOne();
                         Move(_shape as XQBezier);
                         _editor.Project.CurrentContainer.HelperLayer.Invalidate();
-                        _currentState = State.One;
+                        _currentState = ToolState.One;
                         _editor.CancelAvailable = true;
                     }
                     break;
-                case State.One:
+                case ToolState.One:
                     {
                         var qbezier = _shape as XQBezier;
                         if (qbezier != null)
@@ -123,11 +123,11 @@ namespace Core2D
                             ToStateTwo();
                             Move(_shape as XQBezier);
                             _editor.Project.CurrentContainer.HelperLayer.Invalidate();
-                            _currentState = State.Two;
+                            _currentState = ToolState.Two;
                         }
                     }
                     break;
-                case State.Two:
+                case ToolState.Two:
                     {
                         var qbezier = _shape as XQBezier;
                         if (qbezier != null)
@@ -142,7 +142,7 @@ namespace Core2D
                             Remove();
                             Finalize(_shape as XQBezier);
                             _editor.Project.AddShape(_editor.Project.CurrentContainer.CurrentLayer, _shape);
-                            _currentState = State.None;
+                            _currentState = ToolState.None;
                             _editor.CancelAvailable = false;
                         }
                     }
@@ -157,16 +157,16 @@ namespace Core2D
 
             switch (_currentState)
             {
-                case State.None:
+                case ToolState.None:
                     break;
-                case State.One:
-                case State.Two:
+                case ToolState.One:
+                case ToolState.Two:
                     {
                         _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_shape);
                         _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         Remove();
                         _editor.Project.CurrentContainer.HelperLayer.Invalidate();
-                        _currentState = State.None;
+                        _currentState = ToolState.None;
                         _editor.CancelAvailable = false;
                     }
                     break;
@@ -182,7 +182,7 @@ namespace Core2D
             double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
             switch (_currentState)
             {
-                case State.None:
+                case ToolState.None:
                     {
                         if (_editor.Project.Options.TryToConnect)
                         {
@@ -190,7 +190,7 @@ namespace Core2D
                         }
                     }
                     break;
-                case State.One:
+                case ToolState.One:
                     {
                         var qbezier = _shape as XQBezier;
                         if (qbezier != null)
@@ -209,7 +209,7 @@ namespace Core2D
                         }
                     }
                     break;
-                case State.Two:
+                case ToolState.Two:
                     {
                         var qbezier = _shape as XQBezier;
                         if (qbezier != null)

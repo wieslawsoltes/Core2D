@@ -154,7 +154,7 @@ namespace Core2D
         public Func<Task<string>> GetImageKey { get; set; }
 
         /// <summary>
-        /// Gets or sets editor tool helpers dictionary.
+        /// Gets or sets editor tools dictionary.
         /// </summary>
         public ImmutableDictionary<Tool, ToolBase> Tools { get; set; }
 
