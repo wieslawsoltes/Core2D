@@ -4,12 +4,12 @@
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Image key.
     /// </summary>
     public struct ImageKey
     {
         /// <summary>
-        /// 
+        /// Gets or sets image key.
         /// </summary>
         public string Key { get; set; }
     }

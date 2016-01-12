@@ -5,7 +5,7 @@ using Portable.Xaml.Markup;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Text style.
     /// </summary>
     [RuntimeNameProperty(nameof(Name))]
     public class TextStyle : ObservableObject
@@ -19,7 +19,7 @@ namespace Core2D
         private TextVAlignment _textVAlignment;
 
         /// <summary>
-        /// 
+        /// Gets or sets text style name.
         /// </summary>
         public string Name
         {
@@ -28,7 +28,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets font name.
         /// </summary>
         public string FontName
         {
@@ -37,7 +37,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets font file path.
         /// </summary>
         public string FontFile
         {
@@ -46,7 +46,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets font size.
         /// </summary>
         public double FontSize
         {
@@ -55,7 +55,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets font style.
         /// </summary>
         public FontStyle FontStyle
         {
@@ -64,7 +64,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets text horizontal alignment.
         /// </summary>
         public TextHAlignment TextHAlignment
         {
@@ -73,7 +73,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets text vertical alignment.
         /// </summary>
         public TextVAlignment TextVAlignment
         {
@@ -84,14 +84,14 @@ namespace Core2D
         /// <summary>
         /// Creates a new <see cref="TextStyle"/> instance.
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="fontName"></param>
-        /// <param name="fontFile"></param>
-        /// <param name="fontSize"></param>
-        /// <param name="fontStyle"></param>
-        /// <param name="textHAlignment"></param>
-        /// <param name="textVAlignment"></param>
-        /// <returns></returns>
+        /// <param name="name">The text style name.</param>
+        /// <param name="fontName">The font name.</param>
+        /// <param name="fontFile">The font file path.</param>
+        /// <param name="fontSize">The font size.</param>
+        /// <param name="fontStyle">The font style.</param>
+        /// <param name="textHAlignment">The text horizontal alignment.</param>
+        /// <param name="textVAlignment">The text vertical alignment.</param>
+        /// <returns>The new instance of the <see cref="TextStyle"/> class.</returns>
         public static TextStyle Create(string name = "", string fontName = "Calibri", string fontFile = @"C:\Windows\Fonts\calibri.ttf", double fontSize = 12.0, FontStyle fontStyle = null, TextHAlignment textHAlignment = TextHAlignment.Center, TextVAlignment textVAlignment = TextVAlignment.Center)
         {
             return new TextStyle()

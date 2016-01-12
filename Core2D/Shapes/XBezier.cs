@@ -6,7 +6,7 @@ using System.Collections.Immutable;
 namespace Core2D
 {
     /// <summary>
-    /// Object representing cubic bezier shape.
+    /// Cubic bezier shape.
     /// </summary>
     public class XBezier : BaseShape
     {

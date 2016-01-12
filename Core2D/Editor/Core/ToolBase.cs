@@ -4,7 +4,7 @@
 namespace Core2D
 {
     /// <summary>
-    /// Base class for editor helpers.
+    /// Editor helper tool base class.
     /// </summary>
     public abstract class ToolBase
     {

@@ -7,7 +7,7 @@ using System.Linq;
 namespace Core2D
 {
     /// <summary>
-    /// Object representing path shape.
+    /// Path shape.
     /// </summary>
     public class XPath : BaseShape
     {

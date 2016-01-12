@@ -4,7 +4,7 @@
 namespace Core2D
 {
     /// <summary>
-    /// Factory used to create shapes.
+    /// Defines shape factory contract.
     /// </summary>
     public interface IShapeFactory
     {

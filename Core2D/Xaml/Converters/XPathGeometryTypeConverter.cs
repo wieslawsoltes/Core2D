@@ -6,7 +6,9 @@ using Portable.Xaml.ComponentModel;
 
 namespace Core2D
 {
-    /// <inheritdoc/>
+    /// <summary>
+    /// Defines <see cref="XPathGeometry"/> type converter.
+    /// </summary>
     public class XPathGeometryTypeConverter : TypeConverter
     {
         /// <inheritdoc/>

@@ -7,7 +7,7 @@ using Portable.Xaml.Markup;
 namespace Core2D
 {
     /// <summary>
-    /// The layers container.
+    /// Container base class.
     /// </summary>
     [ContentProperty(nameof(Layers))]
     [RuntimeNameProperty(nameof(Name))]

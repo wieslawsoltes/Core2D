@@ -4,7 +4,7 @@
 namespace Core2D
 {
     /// <summary>
-    /// Fill rules for <see cref="XPathGeometry"/>
+    /// Specifies fill rules.
     /// </summary>
     public enum XFillRule
     {

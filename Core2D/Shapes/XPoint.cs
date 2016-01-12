@@ -7,7 +7,7 @@ using System.Collections.Immutable;
 namespace Core2D
 {
     /// <summary>
-    /// Object representing point shape.
+    /// Point shape.
     /// </summary>
     public class XPoint : BaseShape
     {

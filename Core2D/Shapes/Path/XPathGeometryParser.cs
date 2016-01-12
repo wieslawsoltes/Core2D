@@ -7,7 +7,7 @@ using System.Globalization;
 namespace Core2D
 {
     /// <summary>
-    /// Parse a mini-language string representation of the <see cref="XPathGeometry"/>.
+    /// <see cref="XPathGeometry"/> mini-language string representation parser.
     /// </summary>
     public static class XPathGeometryParser
     {

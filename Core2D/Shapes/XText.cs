@@ -8,7 +8,7 @@ using System.Linq;
 namespace Core2D
 {
     /// <summary>
-    /// Object representing text string shape.
+    /// Text shape.
     /// </summary>
     public class XText : BaseShape
     {

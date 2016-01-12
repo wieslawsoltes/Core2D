@@ -4,16 +4,16 @@
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Defines text field writer contract.
     /// </summary>
-    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="T">The database type.</typeparam>
     public interface ITextFieldWriter<T>
     {
         /// <summary>
-        /// 
+        /// Write database records to text based file format.
         /// </summary>
-        /// <param name="path"></param>
-        /// <param name="database"></param>
+        /// <param name="path">The fields file path.</param>
+        /// <param name="database">The source records database.</param>
         void Write(string path, T database);
     }
 }

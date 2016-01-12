@@ -6,7 +6,7 @@ using System.Linq;
 namespace Core2D
 {
     /// <summary>
-    /// The <see cref="IImageCache"/> implementation for <see cref="Project"/> class.
+    /// Project <see cref="IImageCache"/> implementation.
     /// </summary>
     public partial class Project : ObservableResource, IImageCache
     {

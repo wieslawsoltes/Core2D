@@ -4,7 +4,7 @@
 namespace Core2D
 {
     /// <summary>
-    /// Editor export type.
+    /// Specifies export types.
     /// </summary>
     public enum ExportType
     {

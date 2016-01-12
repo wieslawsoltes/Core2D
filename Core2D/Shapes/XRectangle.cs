@@ -5,7 +5,7 @@ using System.Collections.Immutable;
 namespace Core2D
 {
     /// <summary>
-    /// Object representing rectangle shape.
+    /// Rectangle shape.
     /// </summary>
     public class XRectangle : XText
     {

@@ -4,7 +4,7 @@
 namespace Core2D
 {
     /// <summary>
-    /// Specifies the arrow style used to draw line endings.
+    /// Line ending arrow style.
     /// </summary>
     public class ArrowStyle : BaseStyle
     {
@@ -60,17 +60,17 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Default <see cref="ArrowStyle"/> constructor.
+        /// Initializes a new instance of the <see cref="ArrowStyle"/> class.
         /// </summary>
-        public ArrowStyle()
+        public ArrowStyle() : base()
         {
         }
 
         /// <summary>
-        /// Copy base style from <see cref="BaseStyle"/> source.
+        /// Initializes a new instance of the <see cref="ArrowStyle"/> class.
         /// </summary>
-        /// <param name="source">The BaseStyle source object.</param>
-        public ArrowStyle(BaseStyle source)
+        /// <param name="source">The source style.</param>
+        public ArrowStyle(BaseStyle source) : base()
         {
             Stroke = ArgbColor.Create
                 (source.Stroke.A,
@@ -96,7 +96,7 @@ namespace Core2D
         /// <param name="isFilled">The arrow shape fill flag.</param>
         /// <param name="radiusX">The arrow X axis radius.</param>
         /// <param name="radiusY">The arrow Y axis radius.</param>
-        /// <returns>The new instance of the ArrowStyle class.</returns>
+        /// <returns>The new instance of the <see cref="ArrowStyle"/> class.</returns>
         public static ArrowStyle Create(ArrowType arrowType = ArrowType.None, bool isStroked = true, bool isFilled = false, double radiusX = 5.0, double radiusY = 3.0)
         {
             return new ArrowStyle()
@@ -112,13 +112,13 @@ namespace Core2D
         /// Creates a new <see cref="ArrowStyle"/> instance.
         /// </summary>
         /// <param name="name">The arrow style name.</param>
-        /// <param name="source">The BaseStyle source object.</param>
+        /// <param name="source">The source style.</param>
         /// <param name="arrowType">The arrow type.</param>
         /// <param name="isStroked">The arrow shape stroke flag.</param>
         /// <param name="isFilled">The arrow shape fill flag.</param>
         /// <param name="radiusX">The arrow X axis radius.</param>
         /// <param name="radiusY">The arrow Y axis radius.</param>
-        /// <returns>The new instance of the ArrowStyle class.</returns>
+        /// <returns>The new instance of the <see cref="ArrowStyle"/> class.</returns>
         public static ArrowStyle Create(string name, BaseStyle source, ArrowType arrowType = ArrowType.None, bool isStroked = true, bool isFilled = false, double radiusX = 5.0, double radiusY = 5.0)
         {
             return new ArrowStyle(source)

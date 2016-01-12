@@ -4,7 +4,7 @@
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Recent project.
     /// </summary>
     public class RecentProject : ObservableObject
     {
@@ -12,7 +12,7 @@ namespace Core2D
         private string _path;
 
         /// <summary>
-        /// 
+        /// Gets or sets recent project name.
         /// </summary>
         public string Name
         {
@@ -21,7 +21,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets recent project path.
         /// </summary>
         public string Path
         {
@@ -32,9 +32,9 @@ namespace Core2D
         /// <summary>
         /// Creates a new <see cref="RecentProject"/> instance.
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="path"></param>
-        /// <returns></returns>
+        /// <param name="name">The recent project name.</param>
+        /// <param name="path">The recent project path.</param>
+        /// <returns>The new instance of the <see cref="RecentProject"/> class.</returns>
         public static RecentProject Create(string name, string path)
         {
             return new RecentProject()

@@ -7,7 +7,7 @@ using System.Linq;
 namespace Core2D
 {
     /// <summary>
-    /// Object representing grouped shapes.
+    /// Group shape.
     /// </summary>
     public class XGroup : BaseShape
     {

@@ -5,7 +5,7 @@ using System.Collections.Immutable;
 namespace Core2D
 {
     /// <summary>
-    /// Object representing ellipse shape.
+    /// Ellipse shape.
     /// </summary>
     public class XEllipse : XText
     {

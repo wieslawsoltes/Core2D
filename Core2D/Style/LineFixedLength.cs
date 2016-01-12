@@ -5,7 +5,7 @@ using Portable.Xaml.Markup;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Line fixed length.
     /// </summary>
     [ContentProperty(nameof(Flags))]
     public class LineFixedLength : ObservableObject
@@ -16,7 +16,7 @@ namespace Core2D
         private ShapeState _endTrigger;
 
         /// <summary>
-        /// 
+        /// Get or sets line fixed length flags.
         /// </summary>
         public LineFixedLengthFlags Flags
         {
@@ -34,7 +34,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets <see cref="LineFixedLengthFlags.Disabled"/> flag.
         /// </summary>
         public bool Disabled
         {
@@ -49,7 +49,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets <see cref="LineFixedLengthFlags.Start"/> flag.
         /// </summary>
         public bool Start
         {
@@ -64,7 +64,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets <see cref="LineFixedLengthFlags.End"/> flag.
         /// </summary>
         public bool End
         {
@@ -79,7 +79,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets <see cref="LineFixedLengthFlags.Vertical"/> flag.
         /// </summary>
         public bool Vertical
         {
@@ -94,7 +94,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets <see cref="LineFixedLengthFlags.Horizontal"/> flag.
         /// </summary>
         public bool Horizontal
         {
@@ -109,7 +109,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets <see cref="LineFixedLengthFlags.All"/> flag.
         /// </summary>
         public bool All
         {
@@ -124,7 +124,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets line fixed length.
         /// </summary>
         public double Length
         {
@@ -133,7 +133,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets line start point state trigger.
         /// </summary>
         public ShapeState StartTrigger
         {
@@ -142,7 +142,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets line end point state trigger.
         /// </summary>
         public ShapeState EndTrigger
         {
@@ -153,11 +153,11 @@ namespace Core2D
         /// <summary>
         /// Creates a new <see cref="LineFixedLength"/> instance.
         /// </summary>
-        /// <param name="flags"></param>
-        /// <param name="length"></param>
-        /// <param name="startTrigger"></param>
-        /// <param name="endTrigger"></param>
-        /// <returns></returns>
+        /// <param name="flags">The line fixed length flags.</param>
+        /// <param name="length">The line fixed length.</param>
+        /// <param name="startTrigger">The line start point state trigger.</param>
+        /// <param name="endTrigger">The line end point state trigger.</param>
+        /// <returns>he new instance of the <see cref="LineFixedLength"/> class.</returns>
         public static LineFixedLength Create(LineFixedLengthFlags flags = LineFixedLengthFlags.Disabled, double length = 15.0, ShapeState startTrigger = null, ShapeState endTrigger = null)
         {
             return new LineFixedLength()

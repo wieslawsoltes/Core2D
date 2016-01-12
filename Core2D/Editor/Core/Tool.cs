@@ -4,7 +4,7 @@
 namespace Core2D
 {
     /// <summary>
-    /// Editor tools.
+    /// Specifies editor tools.
     /// </summary>
     public enum Tool
     {

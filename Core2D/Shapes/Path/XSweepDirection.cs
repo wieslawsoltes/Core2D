@@ -4,7 +4,7 @@
 namespace Core2D
 {
     /// <summary>
-    /// Sweep direction used by <see cref="XArcSegment"/>.
+    /// Specifies sweep directions.
     /// </summary>
     public enum XSweepDirection
     {

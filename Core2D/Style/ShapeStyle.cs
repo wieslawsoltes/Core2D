@@ -4,7 +4,7 @@
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Shape style.
     /// </summary>
     public class ShapeStyle : BaseStyle
     {
@@ -14,7 +14,7 @@ namespace Core2D
         private TextStyle _textStyle;
 
         /// <summary>
-        /// 
+        /// Gets or sets line style.
         /// </summary>
         public LineStyle LineStyle
         {
@@ -23,7 +23,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets start arrow style.
         /// </summary>
         public ArrowStyle StartArrowStyle
         {
@@ -32,7 +32,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets end arrow style.
         /// </summary>
         public ArrowStyle EndArrowStyle
         {
@@ -41,7 +41,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets text style.
         /// </summary>
         public TextStyle TextStyle
         {
@@ -52,24 +52,24 @@ namespace Core2D
         /// <summary>
         /// Creates a new <see cref="ShapeStyle"/> instance.
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="sa"></param>
-        /// <param name="sr"></param>
-        /// <param name="sg"></param>
-        /// <param name="sb"></param>
-        /// <param name="fa"></param>
-        /// <param name="fr"></param>
-        /// <param name="fg"></param>
-        /// <param name="fb"></param>
-        /// <param name="thickness"></param>
-        /// <param name="textStyle"></param>
-        /// <param name="lineStyle"></param>
-        /// <param name="startArrowStyle"></param>
-        /// <param name="endArrowStyle"></param>
-        /// <param name="lineCap"></param>
-        /// <param name="dashes"></param>
-        /// <param name="dashOffset"></param>
-        /// <returns></returns>
+        /// <param name="name">The shape style name.</param>
+        /// <param name="sa">The stroke color alpha channel.</param>
+        /// <param name="sr">The stroke color red channel.</param>
+        /// <param name="sg">The stroke color green channel.</param>
+        /// <param name="sb">The stroke color blue channel.</param>
+        /// <param name="fa">The fill color alpha channel.</param>
+        /// <param name="fr">The fill color red channel.</param>
+        /// <param name="fg">The fill color green channel.</param>
+        /// <param name="fb">The fill color blue channel.</param>
+        /// <param name="thickness">The stroke thickness.</param>
+        /// <param name="textStyle">The text style.</param>
+        /// <param name="lineStyle">The line style.</param>
+        /// <param name="startArrowStyle">The start arrow style.</param>
+        /// <param name="endArrowStyle">The end arrow style.</param>
+        /// <param name="lineCap">The line cap.</param>
+        /// <param name="dashes">The line dashes.</param>
+        /// <param name="dashOffset">The line dash offset.</param>
+        /// <returns>The new instance of the <see cref="ShapeStyle"/> class.</returns>
         public static ShapeStyle Create(string name = "", byte sa = 0xFF, byte sr = 0x00, byte sg = 0x00, byte sb = 0x00, byte fa = 0xFF, byte fr = 0x00, byte fg = 0x00, byte fb = 0x00, double thickness = 2.0, TextStyle textStyle = null, LineStyle lineStyle = null, ArrowStyle startArrowStyle = null, ArrowStyle endArrowStyle = null, LineCap lineCap = LineCap.Round, string dashes = default(string), double dashOffset = 0.0)
         {
             var style = new ShapeStyle()
@@ -94,15 +94,15 @@ namespace Core2D
         /// <summary>
         /// Creates a new <see cref="ShapeStyle"/> instance.
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="stroke"></param>
-        /// <param name="fill"></param>
-        /// <param name="thickness"></param>
-        /// <param name="textStyle"></param>
-        /// <param name="lineStyle"></param>
-        /// <param name="startArrowStyle"></param>
-        /// <param name="endArrowStyle"></param>
-        /// <returns></returns>
+        /// <param name="name">The shape style name.</param>
+        /// <param name="stroke">The stroke color.</param>
+        /// <param name="fill">The fill color.</param>
+        /// <param name="thickness">The stroke thickness.</param>
+        /// <param name="textStyle">The text style.</param>
+        /// <param name="lineStyle">The line style.</param>
+        /// <param name="startArrowStyle">The start arrow style.</param>
+        /// <param name="endArrowStyle">The end arrow style.</param>
+        /// <returns>The new instance of the <see cref="ShapeStyle"/> class.</returns>
         public static ShapeStyle Create(string name, ArgbColor stroke, ArgbColor fill, double thickness, TextStyle textStyle, LineStyle lineStyle, ArrowStyle startArrowStyle, ArrowStyle endArrowStyle)
         {
             return new ShapeStyle()

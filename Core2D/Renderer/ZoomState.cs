@@ -5,7 +5,7 @@ using System;
 namespace Core2D
 {
     /// <summary>
-    /// The zoom state object used for pan and zoom transformations.
+    /// Zoom and pan state.
     /// </summary>
     public class ZoomState
     {

@@ -9,7 +9,7 @@ using Portable.Xaml.ComponentModel;
 namespace Core2D
 {
     /// <summary>
-    /// Specifies the Alpha, Red, Green and Blue color channels used for shape stroke and fill.
+    /// Color definition using alpha, red, green and blue channels.
     /// </summary>
     [TypeConverter(typeof(ArgbColorTypeConverter))]
     public class ArgbColor : ObservableObject

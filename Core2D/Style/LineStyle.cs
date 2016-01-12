@@ -5,7 +5,7 @@ using Portable.Xaml.Markup;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Line style.
     /// </summary>
     [RuntimeNameProperty(nameof(Name))]
     public class LineStyle : ObservableObject
@@ -14,7 +14,7 @@ namespace Core2D
         private LineFixedLength _fixedLength;
 
         /// <summary>
-        /// 
+        /// Gets or sets line style name.
         /// </summary>
         public string Name
         {
@@ -23,7 +23,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets line fixed length.
         /// </summary>
         public LineFixedLength FixedLength
         {
@@ -34,9 +34,9 @@ namespace Core2D
         /// <summary>
         /// Creates a new <see cref="LineStyle"/> instance.
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="fixedLength"></param>
-        /// <returns></returns>
+        /// <param name="name">The line style name.</param>
+        /// <param name="fixedLength">The line style fixed length.</param>
+        /// <returns>The new instance of the <see cref="LineStyle"/> class.</returns>
         public static LineStyle Create(string name = "", LineFixedLength fixedLength = null)
         {
             return new LineStyle()

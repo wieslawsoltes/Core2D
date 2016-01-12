@@ -8,7 +8,7 @@ using System.Text;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Project input/output.
     /// </summary>
     public partial class Project
     {

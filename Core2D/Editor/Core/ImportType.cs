@@ -4,7 +4,7 @@
 namespace Core2D
 {
     /// <summary>
-    /// Editor import type.
+    /// Specifies import types.
     /// </summary>
     public enum ImportType
     {

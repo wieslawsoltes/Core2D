@@ -4,7 +4,7 @@
 namespace Core2D
 {
     /// <summary>
-    /// Message logger interface.
+    /// Defines logger contract.
     /// </summary>
     public interface ILog
     {

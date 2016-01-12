@@ -7,15 +7,10 @@ using Core2D;
 namespace Dependencies
 {
     /// <summary>
-    /// 
+    /// Defines the text fields to <see cref="Database"/> reader.
     /// </summary>
     public class CsvHelperReader : ITextFieldReader<Database>
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="path"></param>
-        /// <returns></returns>
         private IEnumerable<string[]> ReadInternal(string path)
         {
             using (var reader = new System.IO.StreamReader(path))
@@ -40,10 +35,10 @@ namespace Dependencies
         }
 
         /// <summary>
-        /// 
+        /// Read fields from text database file format.
         /// </summary>
-        /// <param name="path"></param>
-        /// <returns></returns>
+        /// <param name="path">The fields file path.</param>
+        /// <returns>The new instance of the <see cref="Database"/> class</returns>
         public Database Read(string path)
         {
             var fields = ReadInternal(path);

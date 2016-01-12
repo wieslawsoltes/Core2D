@@ -4,7 +4,7 @@
 namespace Core2D
 {
     /// <summary>
-    /// Path tools.
+    /// Specifies path tools.
     /// </summary>
     public enum PathTool
     {

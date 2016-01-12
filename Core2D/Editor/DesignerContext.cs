@@ -7,7 +7,7 @@ using System.Collections.Immutable;
 namespace Core2D
 {
     /// <summary>
-    /// The design time DataContext base class.
+    /// Design time DataContext base class.
     /// </summary>
     public class DesignerContext
     {

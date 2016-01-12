@@ -6,9 +6,11 @@ namespace Core2D
 {
     /// <summary>
     /// Implementation of Andrew's monotone chain 2D convex hull algorithm.
+    /// </summary>
+    /// <remarks>
     /// http://en.wikibooks.org/wiki/Algorithm_Implementation/Geometry/Convex_hull/Monotone_chain
     /// Asymptotic complexity O(n log n).
-    /// </summary>
+    /// </remarks>
     public class MonotoneChain
     {
         /// <summary>

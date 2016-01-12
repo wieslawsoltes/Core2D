@@ -19,7 +19,7 @@ namespace Core2D
     public delegate void InvalidateLayerEventHandler(object sender, InvalidateLayerEventArgs e);
 
     /// <summary>
-    /// The shapes container.
+    /// Container layer.
     /// </summary>
     [ContentProperty(nameof(Shapes))]
     [RuntimeNameProperty(nameof(Name))]

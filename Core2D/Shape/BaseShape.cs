@@ -39,7 +39,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Gets or sets shape owner shape.
+        /// Gets or sets shape owner.
         /// </summary>
         public virtual BaseShape Owner
         {

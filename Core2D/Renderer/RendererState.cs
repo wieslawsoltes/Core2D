@@ -5,7 +5,7 @@ using System.Collections.Immutable;
 namespace Core2D
 {
     /// <summary>
-    ///  The renderer state object.
+    /// Renderer state.
     /// </summary>
     public class RendererState : ObservableObject
     {

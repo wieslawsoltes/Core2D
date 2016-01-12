@@ -5,7 +5,7 @@ using System.Collections.Immutable;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Recent projects.
     /// </summary>
     public class Recent : ObservableObject
     {
@@ -13,7 +13,7 @@ namespace Core2D
         private RecentProject _currentRecentProject = default(RecentProject);
         
         /// <summary>
-        ///
+        /// Gets or sets recent projects.
         /// </summary>
         public ImmutableArray<RecentProject> RecentProjects
         {
@@ -22,20 +22,20 @@ namespace Core2D
         }
         
         /// <summary>
-        ///
+        /// Gets or sets current recent project.
         /// </summary>
         public RecentProject CurrentRecentProject
         {
             get { return _currentRecentProject; }
             set { Update(ref _currentRecentProject, value); }
         }
-        
+
         /// <summary>
-        /// 
+        /// Creates a new <see cref="Command"/> instance.
         /// </summary>
-        /// <param name="recentProjects"></param>
-        /// <param name="currentRecentProject"></param>
-        /// <returns></returns>
+        /// <param name="recentProjects">The recent projects.</param>
+        /// <param name="currentRecentProject">The current recent project.</param>
+        /// <returns>The new instance of the <see cref="Recent"/> class.</returns>
         public static Recent Create(ImmutableArray<RecentProject> recentProjects, RecentProject currentRecentProject)
         {
             return new Recent()

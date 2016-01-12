@@ -4,7 +4,7 @@
 namespace Core2D
 {
     /// <summary>
-    /// File writer interface.
+    /// Defines file writer contract.
     /// </summary>
     public interface IFileWriter
     {

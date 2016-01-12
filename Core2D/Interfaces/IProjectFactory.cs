@@ -4,7 +4,7 @@
 namespace Core2D
 {
     /// <summary>
-    /// Factory used to create new projects, documents and containers.
+    /// Defines project factory contract.
     /// </summary>
     public interface IProjectFactory
     {

@@ -7,7 +7,7 @@ using Portable.Xaml.Markup;
 namespace Core2D
 {
     /// <summary>
-    /// The <see cref="BaseShape"/> collection container.
+    /// Observable <see cref="BaseShape"/> collection.
     /// </summary>
     [ContentProperty(nameof(Children))]
     [RuntimeNameProperty(nameof(Name))]

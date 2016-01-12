@@ -7,7 +7,7 @@ using Portable.Xaml.Markup;
 namespace Core2D
 {
     /// <summary>
-    /// Base class for objects with observable resources.
+    /// Observable resources base class.
     /// </summary>
     [ContentProperty(nameof(Resources))]
     public abstract class ObservableResource : ObservableObject

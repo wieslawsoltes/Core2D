@@ -6,7 +6,7 @@ using System.Collections.Immutable;
 namespace Core2D
 {
     /// <summary>
-    /// Object representing arc shape.
+    /// Arc shape.
     /// </summary>
     public class XArc : BaseShape
     {

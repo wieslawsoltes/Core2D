@@ -4,24 +4,24 @@
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Defines text string serializer contract.
     /// </summary>
     public interface ISerializer
     {
         /// <summary>
-        /// 
+        /// Serialize the object value to text string.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="value"></param>
+        /// <typeparam name="T">The object type.</typeparam>
+        /// <param name="value">The object value.</param>
         /// <returns></returns>
         string Serialize<T>(T value);
 
         /// <summary>
-        /// 
+        /// Deserialize the text string to object.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="text"></param>
-        /// <returns></returns>
+        /// <typeparam name="T">The object type.</typeparam>
+        /// <param name="text">The text string.</param>
+        /// <returns>The new instance of object of type <typeparamref name="T"/>.</returns>
         T Deserialize<T>(string text);
     }
 }

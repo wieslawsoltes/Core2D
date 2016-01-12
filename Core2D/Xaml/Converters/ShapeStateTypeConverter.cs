@@ -6,7 +6,9 @@ using Portable.Xaml.ComponentModel;
 
 namespace Core2D
 {
-    /// <inheritdoc/>
+    /// <summary>
+    /// Defines <see cref="ShapeState"/> type converter.
+    /// </summary>
     public class ShapeStateTypeConverter : TypeConverter
     {
         /// <inheritdoc/>

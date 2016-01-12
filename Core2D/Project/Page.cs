@@ -5,7 +5,7 @@ using System.Linq;
 namespace Core2D
 {
     /// <summary>
-    /// The page layers container.
+    /// Page container.
     /// </summary>
     public class Page : Container
     {

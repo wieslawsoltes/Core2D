@@ -8,15 +8,15 @@ using Core2D;
 namespace Dependencies
 {
     /// <summary>
-    /// 
+    /// Defines <see cref="Database"/> to the text fields writer.
     /// </summary>
     public class CsvHelperWriter : ITextFieldWriter<Database>
     {
         /// <summary>
-        ///
+        /// Write database records to text based file format.
         /// </summary>
-        /// <param name="path"></param>
-        /// <param name="database"></param>
+        /// <param name="path">The fields file path.</param>
+        /// <param name="database">The source records database.</param>
         public void Write(string path, Database database)
         {
             try

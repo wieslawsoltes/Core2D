@@ -5,7 +5,7 @@ using System.Collections.Immutable;
 namespace Core2D
 {
     /// <summary>
-    /// Base class for native shape renderer.
+    /// Native shape renderer base class.
     /// </summary>
     public abstract class Renderer : ObservableObject
     {

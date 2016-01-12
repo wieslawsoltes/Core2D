@@ -4,7 +4,7 @@
 namespace Core2D
 {
     /// <summary>
-    /// The move mode.
+    /// Specifies move modes.
     /// </summary>
     public enum MoveMode
     {

@@ -4,16 +4,16 @@
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Defines text field reader contract.
     /// </summary>
-    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="T">The database type.</typeparam>
     public interface ITextFieldReader<T>
     {
         /// <summary>
-        /// 
+        /// Read fields from text database file format.
         /// </summary>
-        /// <param name="path"></param>
-        /// <returns></returns>
+        /// <param name="path">The fields file path.</param>
+        /// <returns>The new instance of the database.</returns>
         T Read(string path);
     }
 }

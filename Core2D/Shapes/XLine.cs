@@ -7,7 +7,7 @@ using System.Collections.Immutable;
 namespace Core2D
 {
     /// <summary>
-    /// Object representing line shape.
+    /// Line shape.
     /// </summary>
     public class XLine : BaseShape
     {

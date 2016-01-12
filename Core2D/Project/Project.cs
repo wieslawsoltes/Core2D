@@ -7,7 +7,7 @@ using Portable.Xaml.Markup;
 namespace Core2D
 {
     /// <summary>
-    /// The documents container.
+    /// Project model.
     /// </summary>
     [ContentProperty(nameof(Documents))]
     [RuntimeNameProperty(nameof(Name))]

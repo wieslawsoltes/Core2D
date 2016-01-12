@@ -4,7 +4,7 @@
 namespace Core2D
 {
     /// <summary>
-    /// Editor helper state.
+    /// Specifies tool state.
     /// </summary>
     public enum State
     {

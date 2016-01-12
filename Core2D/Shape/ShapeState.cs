@@ -7,7 +7,7 @@ using Portable.Xaml.ComponentModel;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Shape state.
     /// </summary>
     [ContentProperty(nameof(Flags))]
     [TypeConverter(typeof(ShapeStateTypeConverter))]
@@ -16,7 +16,7 @@ namespace Core2D
         private ShapeStateFlags _flags;
 
         /// <summary>
-        /// 
+        /// Gets or sets shape state flags.
         /// </summary>
         public ShapeStateFlags Flags
         {
@@ -37,7 +37,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets <see cref="ShapeStateFlags.Default"/> flag.
         /// </summary>
         public bool Default
         {
@@ -52,7 +52,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets <see cref="ShapeStateFlags.Visible"/> flag.
         /// </summary>
         public bool Visible
         {
@@ -67,7 +67,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets <see cref="ShapeStateFlags.Printable"/> flag.
         /// </summary>
         public bool Printable
         {
@@ -82,7 +82,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets <see cref="ShapeStateFlags.Default"/> flag.
         /// </summary>
         public bool Locked
         {
@@ -97,7 +97,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets <see cref="ShapeStateFlags.Connector"/> flag.
         /// </summary>
         public bool Connector
         {
@@ -112,7 +112,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets <see cref="ShapeStateFlags.None"/> flag.
         /// </summary>
         public bool None
         {
@@ -127,7 +127,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets <see cref="ShapeStateFlags.Standalone"/> flag.
         /// </summary>
         public bool Standalone
         {
@@ -142,7 +142,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets <see cref="ShapeStateFlags.Input"/> flag.
         /// </summary>
         public bool Input
         {
@@ -157,7 +157,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets <see cref="ShapeStateFlags.Output"/> flag.
         /// </summary>
         public bool Output
         {
@@ -174,8 +174,8 @@ namespace Core2D
         /// <summary>
         /// Creates a new <see cref="ShapeState"/> instance.
         /// </summary>
-        /// <param name="flags"></param>
-        /// <returns></returns>
+        /// <param name="flags">The state flags.</param>
+        /// <returns>The new instance of the <see cref="ShapeState"/> class.</returns>
         public static ShapeState Create(ShapeStateFlags flags = ShapeStateFlags.Default)
         {
             return new ShapeState()

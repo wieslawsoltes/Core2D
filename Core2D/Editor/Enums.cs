@@ -5,7 +5,7 @@ using System;
 namespace Core2D
 {
     /// <summary>
-    /// The static enum value properties.
+    /// Static enum value arrays.
     /// </summary>
     public static class Enums
     {

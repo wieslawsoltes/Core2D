@@ -5,7 +5,7 @@ using System.Collections.Immutable;
 namespace Core2D
 {
     /// <summary>
-    /// Object representing image shape.
+    /// Image shape.
     /// </summary>
     public class XImage : XText
     {

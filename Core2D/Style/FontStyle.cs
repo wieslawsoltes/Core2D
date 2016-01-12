@@ -16,7 +16,7 @@ namespace Core2D
         private FontStyleFlags _flags;
 
         /// <summary>
-        /// Specifies style flags information applied to text.
+        /// Get or sets font style flags.
         /// </summary>
         public FontStyleFlags Flags
         {
@@ -33,7 +33,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Normal text.
+        /// Gets or sets <see cref="FontStyleFlags.Regular"/> flag.
         /// </summary>
         public bool Regular
         {
@@ -48,7 +48,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Bold text.
+        /// Gets or sets <see cref="FontStyleFlags.Bold"/> flag.
         /// </summary>
         public bool Bold
         {
@@ -63,7 +63,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Italic text.
+        /// Gets or sets <see cref="FontStyleFlags.Italic"/> flag.
         /// </summary>
         public bool Italic
         {
@@ -78,7 +78,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Underlined text.
+        /// Gets or sets <see cref="FontStyleFlags.Underline"/> flag.
         /// </summary>
         public bool Underline
         {
@@ -93,7 +93,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Text with a line through the middle.
+        /// Gets or sets <see cref="FontStyleFlags.Strikeout"/> flag.
         /// </summary>
         public bool Strikeout
         {

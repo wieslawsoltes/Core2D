@@ -6,7 +6,7 @@ using System.Text;
 namespace Core2D
 {
     /// <summary>
-    /// Base class for <see cref="XPathFigure"/> segments.
+    /// <see cref="XPathFigure"/> segment base class.
     /// </summary>
     public abstract class XPathSegment
     {

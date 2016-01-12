@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace Core2D
 {
     /// <summary>
-    /// Observe edited project changes.
+    /// Project property changes observer.
     /// </summary>
     public class Observer : IDisposable
     {

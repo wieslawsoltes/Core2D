@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace Core2D
 {
     /// <summary>
-    /// Generic cache collection.
+    /// Generic key value cache.
     /// </summary>
     /// <typeparam name="TKey">The input type.</typeparam>
     /// <typeparam name="TValue">The output type.</typeparam>
@@ -18,7 +18,7 @@ namespace Core2D
         private Action<TValue> _dispose;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Cache{TIn, TOut}"/> class.
+        /// Initializes a new instance of the <see cref="Cache{TKey, TValue}"/> class.
         /// </summary>
         /// <param name="dispose">The dispose action.</param>
         public Cache(Action<TValue> dispose = null)
@@ -28,10 +28,10 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Creates a new <see cref="Editor"/> instance.
+        /// Creates a new <see cref="Cache{TKey, TValue}"/> instance.
         /// </summary>
         /// <param name="dispose">The dispose action.</param>
-        /// <returns>The new instance of the <see cref="Cache{TIn, TOut}"/> class.</returns>
+        /// <returns>The new instance of the <see cref="Cache{TKey, TValue}"/> class.</returns>
         public static Cache<TKey, TValue> Create(Action<TValue> dispose = null)
         {
             return new Cache<TKey, TValue>(dispose);

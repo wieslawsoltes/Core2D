@@ -5,53 +5,53 @@ using System;
 namespace Core2D
 {
     /// <summary>
-    /// Shape state flags.
+    /// Specifies shape state flags.
     /// </summary>
     [Flags]
     public enum ShapeStateFlags
     {
         /// <summary>
-        /// Default state flag.
+        /// Default shape state.
         /// </summary>
         Default = 0,
 
         /// <summary>
-        /// Visible state flag.
+        /// Shape is visible.
         /// </summary>
         Visible = 1,
 
         /// <summary>
-        /// Printable state flag.
+        /// Shape is printable.
         /// </summary>
         Printable = 2,
 
         /// <summary>
-        /// Locked state flag.
+        /// Shape position is locked.
         /// </summary>
         Locked = 4,
 
         /// <summary>
-        /// Connector state flag.
+        /// Shape is connector.
         /// </summary>
         Connector = 8,
 
         /// <summary>
-        /// None state flag.
+        /// Shape in none.
         /// </summary>
         None = 16,
 
         /// <summary>
-        /// Standalone state flag.
+        /// Shape is standalone.
         /// </summary>
         Standalone = 32,
 
         /// <summary>
-        /// Input state flag.
+        /// Shape is an input.
         /// </summary>
         Input = 64,
 
         /// <summary>
-        /// Output state flag.
+        /// Shape is and output.
         /// </summary>
         Output = 128
     }

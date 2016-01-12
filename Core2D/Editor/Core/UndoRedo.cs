@@ -5,7 +5,7 @@ using System;
 namespace Core2D
 {
     /// <summary>
-    /// The Undo/Redo action pair.
+    /// Undo/redo action pair.
     /// </summary>
     internal struct UndoRedo
     {

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 namespace Core2D
 {
     /// <summary>
-    /// Text clipboard interface.
+    /// Defines text clipboard contract.
     /// </summary>
     public interface ITextClipboard
     {

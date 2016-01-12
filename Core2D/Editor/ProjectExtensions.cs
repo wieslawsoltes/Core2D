@@ -7,7 +7,7 @@ using System.Linq;
 namespace Core2D
 {
     /// <summary>
-    /// The <see cref="Project"/> extension methods.
+    /// <see cref="Project"/> extension methods.
     /// </summary>
     public static class ProjectExtensions
     {
