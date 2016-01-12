@@ -12,7 +12,7 @@ namespace Core2D
     public class InvalidateLayerEventArgs : EventArgs { }
 
     /// <summary>
-    /// Invalidate layer event handler delegate.
+    /// Invalidate layer event handler.
     /// </summary>
     /// <param name="sender">The sender object.</param>
     /// <param name="e">The event arguments.</param>
