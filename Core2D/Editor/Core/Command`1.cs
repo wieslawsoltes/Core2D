@@ -1,64 +1,39 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
-using System.Windows.Input;
 
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Generic input command.
     /// </summary>
-    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="T">The command parameter type.</typeparam>
     public class Command<T> : ICoreCommand<T> where T : class
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        public event EventHandler CanExecuteChanged;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public void NotifyCanExecuteChanged()
-        {
-            var handler = CanExecuteChanged;
-            if (handler != null)
-            {
-                handler(this, EventArgs.Empty);
-            }
-        }
-
         private Action<T> _execute;
         private Func<T, bool> _canExecute;
 
         /// <summary>
-        /// 
+        /// Initializes a new instance of the <see cref="Command"/> class.
         /// </summary>
-        /// <param name="execute"></param>
-        /// <param name="canExecute"></param>
+        /// <param name="execute">The execute action.</param>
+        /// <param name="canExecute">The can execute function.</param>
         public Command(Action<T> execute, Func<T, bool> canExecute = null)
         {
             _execute = execute;
             _canExecute = canExecute;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="parameter"></param>
-        /// <returns></returns>
-        public bool CanExecute(object parameter)
+        /// <inheritdoc/>
+        public override bool CanExecute(object parameter)
         {
             if (_canExecute == null)
                 return true;
             return _canExecute(parameter as T);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="parameter"></param>
-        public void Execute(object parameter)
+        /// <inheritdoc/>
+        public override void Execute(object parameter)
         {
             if (_execute == null)
                 return;
@@ -68,9 +43,9 @@ namespace Core2D
         /// <summary>
         /// Creates a new <see cref="Command"/> instance.
         /// </summary>
-        /// <param name="execute"></param>
-        /// <param name="canExecute"></param>
-        /// <returns></returns>
+        /// <param name="execute">The execute action.</param>
+        /// <param name="canExecute">The can execute function.</param>
+        /// <returns>The new instance of the <see cref="Command{T}"/> class.</returns>
         public static ICoreCommand<T> Create(Action<T> execute, Func<T, bool> canExecute = null)
         {
             return new Command<T>(execute, canExecute);

@@ -4,10 +4,10 @@
 namespace Core2D
 {
     /// <summary>
-    /// The generic core command interface.
+    /// Generic input command.
     /// </summary>
     /// <typeparam name="T">The command parameter type.</typeparam>
-    public interface ICoreCommand<T> : ICoreCommand
+    public abstract class ICoreCommand<T> : ICoreCommand
     {
     }
 }
