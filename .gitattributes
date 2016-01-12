@@ -35,3 +35,6 @@
 
 # NuGet packages
 packages export-ignore
+
+# API Documentation
+api export-ignore
