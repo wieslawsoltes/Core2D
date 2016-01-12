@@ -9,7 +9,7 @@ using Portable.Xaml.Markup;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Base style.
     /// </summary>
     [RuntimeNameProperty(nameof(Name))]
     public class BaseStyle : ObservableResource
@@ -23,7 +23,7 @@ namespace Core2D
         private double _dashOffset;
 
         /// <summary>
-        /// 
+        /// Gets or sets style name.
         /// </summary>
         public string Name
         {
@@ -32,7 +32,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets stroke color.
         /// </summary>
         public ArgbColor Stroke
         {
@@ -41,7 +41,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets fill color.
         /// </summary>
         public ArgbColor Fill
         {
@@ -50,7 +50,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets stroke thickness.
         /// </summary>
         public double Thickness
         {
@@ -59,7 +59,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets line cap.
         /// </summary>
         public LineCap LineCap
         {
@@ -68,7 +68,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets line dashes.
         /// </summary>
         public string Dashes
         {
@@ -77,20 +77,20 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets line dash offset.
         /// </summary>
         public double DashOffset
         {
             get { return _dashOffset; }
             set { Update(ref _dashOffset, value); }
         }
-        
+
         /// <summary>
-        /// 
+        /// Convert line dashes doubles array to string format.
         /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        public static string DoubleArrayToDashes(double[] value)
+        /// <param name="value">The line dashes doubles array.</param>
+        /// <returns>The converted line dashes string.</returns>
+        public static string ConvertDoubleArrayToDashes(double[] value)
         {
             try
             {
@@ -109,13 +109,13 @@ namespace Core2D
 
             return null;
         }
-        
+
         /// <summary>
-        /// 
+        /// Convert line dashes floats array to string format.
         /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        public static string FloatArrayToDashes(float[] value)
+        /// <param name="value">The line dashes floats array.</param>
+        /// <returns>The converted line dashes string.</returns>
+        public static string ConvertFloatArrayToDashes(float[] value)
         {
             try
             {
@@ -134,13 +134,13 @@ namespace Core2D
 
             return null;
         }
-        
+
         /// <summary>
-        /// 
+        /// Convert line dashes string format to doubles array.
         /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        public static double[] DashesToDoubleArray(string value)
+        /// <param name="value">The line dashes string.</param>
+        /// <returns>The converted line dashes doubles array.</returns>
+        public static double[] ConvertDashesToDoubleArray(string value)
         {
             try
             {
@@ -163,13 +163,13 @@ namespace Core2D
 
             return null;
         }
-        
+
         /// <summary>
-        /// 
+        /// Convert line dashes string format to floats array.
         /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        public static float[] DashesToFloatArray(string value)
+        /// <param name="value">The line dashes string.</param>
+        /// <returns>The converted line dashes floats array.</returns>
+        public static float[] ConvertDashesToFloatArray(string value)
         {
             try
             {
