@@ -7,9 +7,9 @@
              xmlns:converters="clr-namespace:Core2D.Perspex.Converters;assembly=Core2D.Perspex"
              xmlns:core="clr-namespace:Core2D;assembly=Core2D"
              Design.DataContext="{Static core:DesignerContext.Editor}"
-             Design.Width="1000" Design.Height="26">
+             Design.Width="1100" Design.Height="26">
     <Grid ColumnDefinitions="Auto,*,Auto">
-        <StackPanel Grid.Column="0" HorizontalAlignment="Left" Orientation="Horizontal" Margin="2">
+        <StackPanel Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal" Margin="2">
             <TextBlock Classes="stats">
                 <TextBlock.Text>
                     <MultiBinding Mode="OneWay" Converter="{Static converters:EditorToStatsMultiConverter.Instance}">
@@ -23,7 +23,7 @@
                 </TextBlock.Text>
             </TextBlock>
         </StackPanel>
-        <WrapPanel Grid.Column="1" HorizontalAlignment="Center" Orientation="Horizontal" Margin="2">
+        <WrapPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Margin="2">
             <DropDown Classes="tool" 
                       Width="110" 
                       Items="{Static core:Enums.ToolValues}" 
@@ -43,7 +43,7 @@
                 -->
             </DropDown>
         </WrapPanel>
-        <WrapPanel Grid.Column="2" HorizontalAlignment="Right" Orientation="Horizontal" Margin="2">
+        <StackPanel Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Horizontal" Margin="2">
             <CheckBox Classes="options" Content="Stroked" IsChecked="{Binding Project.Options.DefaultIsStroked, Mode=TwoWay}"/>
             <CheckBox Classes="options" Content="Filled" IsChecked="{Binding Project.Options.DefaultIsFilled, Mode=TwoWay}"/>
             <CheckBox Classes="options" Content="Closed" IsChecked="{Binding Project.Options.DefaultIsClosed, Mode=TwoWay}"/>
@@ -51,6 +51,6 @@
             <CheckBox Classes="options" Content="Snap" IsChecked="{Binding Project.Options.SnapToGrid, Mode=TwoWay}"/>
             <CheckBox Classes="options" Content="Connect" IsChecked="{Binding Project.Options.TryToConnect, Mode=TwoWay}"/>
             <CheckBox Classes="options" Content="Auto-fit" IsChecked="{Binding Renderers[0].State.EnableAutofit, Mode=TwoWay}"/>
-        </WrapPanel>
+        </StackPanel>
     </Grid>
 </UserControl>
