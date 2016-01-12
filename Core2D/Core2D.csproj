@@ -52,13 +52,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Collections\Groups.cs" />
-    <Compile Include="Collections\Shapes.cs" />
-    <Compile Include="Collections\Styles.cs" />
-    <Compile Include="Converters\ArgbColorTypeConverter.cs" />
-    <Compile Include="Converters\FontStyleTypeConverter.cs" />
-    <Compile Include="Converters\ShapeStateTypeConverter.cs" />
-    <Compile Include="Converters\XPathGeometryTypeConverter.cs" />
+    <Compile Include="Xaml\Collections\Groups.cs" />
+    <Compile Include="Xaml\Collections\Shapes.cs" />
+    <Compile Include="Xaml\Collections\Styles.cs" />
+    <Compile Include="Xaml\Converters\ArgbColorTypeConverter.cs" />
+    <Compile Include="Xaml\Converters\FontStyleTypeConverter.cs" />
+    <Compile Include="Xaml\Converters\ShapeStateTypeConverter.cs" />
+    <Compile Include="Xaml\Converters\XPathGeometryTypeConverter.cs" />
     <Compile Include="Core\ObservableResource.cs" />
     <Compile Include="Data\Data.cs" />
     <Compile Include="Data\Property.cs" />
