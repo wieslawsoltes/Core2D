@@ -92,7 +92,7 @@ namespace Dependencies
             if (style.Dashes != null)
             {
                 // TODO: Convert to correct dash values.
-                pen.DashPattern = ShapeStyle.DashesToFloatArray(style.Dashes);
+                pen.DashPattern = ShapeStyle.ConvertDashesToFloatArray(style.Dashes);
             }
             pen.DashOffset = (float)style.DashOffset;
             return pen;

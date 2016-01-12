@@ -133,7 +133,7 @@ namespace Dependencies
             if (style.Dashes != null)
             {
                 dashStyle = new DashStyle(
-                    ShapeStyle.DashesToDoubleArray(style.Dashes),
+                    ShapeStyle.ConvertDashesToDoubleArray(style.Dashes),
                     style.DashOffset);
             }
 

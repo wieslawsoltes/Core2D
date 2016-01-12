@@ -155,7 +155,7 @@ namespace Dependencies
                     break;
             }
             pen.DashStyle = new DashStyle(
-                ShapeStyle.DashesToDoubleArray(style.Dashes),
+                ShapeStyle.ConvertDashesToDoubleArray(style.Dashes),
                 style.DashOffset);
             pen.DashStyle.Offset = style.DashOffset;
             pen.Freeze();
