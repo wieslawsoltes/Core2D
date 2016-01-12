@@ -7,7 +7,7 @@ using Portable.Xaml.Markup;
 namespace Core2D
 {
     /// <summary>
-    /// The data context.
+    /// Data context.
     /// </summary>
     [ContentProperty(nameof(Properties))]
     public class Data : ObservableObject
