@@ -5,7 +5,7 @@ using Portable.Xaml.Markup;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Record value.
     /// </summary>
     [ContentProperty(nameof(Content))]
     public class Value : ObservableObject
@@ -13,7 +13,7 @@ namespace Core2D
         private string _content;
 
         /// <summary>
-        /// 
+        /// Gets or sets value content.
         /// </summary>
         public string Content
         {
@@ -24,8 +24,8 @@ namespace Core2D
         /// <summary>
         /// Creates a new <see cref="Value"/> instance.
         /// </summary>
-        /// <param name="content"></param>
-        /// <returns></returns>
+        /// <param name="content">The value content.</param>
+        /// <returns>The new instance of the <see cref="Value"/> class.</returns>
         public static Value Create(string content)
         {
             return new Value()

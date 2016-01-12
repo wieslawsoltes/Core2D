@@ -6,7 +6,7 @@ using Portable.Xaml.Markup;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Database column.
     /// </summary>
     [ContentProperty(nameof(Name))]
     public class Column : ObservableObject
@@ -18,7 +18,7 @@ namespace Core2D
         private Database _owner;
 
         /// <summary>
-        /// 
+        /// Gets or sets column Id.
         /// </summary>
         public Guid Id
         {
@@ -27,7 +27,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets column name.
         /// </summary>
         public string Name
         {
@@ -36,7 +36,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets column display width.
         /// </summary>
         public double Width
         {
@@ -45,7 +45,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets flag indicating whether column is visible.
         /// </summary>
         public bool IsVisible
         {
@@ -65,11 +65,11 @@ namespace Core2D
         /// <summary>
         /// Creates a new <see cref="Column"/> instance.
         /// </summary>
-        /// <param name="owner"></param>
-        /// <param name="name"></param>
-        /// <param name="width"></param>
-        /// <param name="isVisible"></param>
-        /// <returns></returns>
+        /// <param name="owner">The owner instance.</param>
+        /// <param name="name">The column name.</param>
+        /// <param name="width">The column width.</param>
+        /// <param name="isVisible">The flag indicating whether column is visible.</param>
+        /// <returns>The new instance of the <see cref="Column"/> class.</returns>
         public static Column Create(Database owner, string name, double width = double.NaN, bool isVisible = true)
         {
             return new Column()

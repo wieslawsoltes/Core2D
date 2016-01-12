@@ -89,7 +89,7 @@ namespace Core2D
         /// <summary>
         /// Creates a new <see cref="Data"/> instance.
         /// </summary>
-        /// <param name="record"></param>
+        /// <param name="record">The record instance.</param>
         /// <returns>The new instance of the <see cref="Data"/> class.</returns>
         public static Data Create(Record record)
         {

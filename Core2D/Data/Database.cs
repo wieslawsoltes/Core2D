@@ -8,7 +8,7 @@ using Portable.Xaml.Markup;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Records database.
     /// </summary>
     [ContentProperty(nameof(Records))]
     public class Database : ObservableObject
@@ -19,12 +19,12 @@ namespace Core2D
         private Record _currentRecord;
 
         /// <summary>
-        /// 
+        /// Default Id column name.
         /// </summary>
         public const string IdColumnName = "Id";
 
         /// <summary>
-        /// 
+        /// Gets or sets database name.
         /// </summary>
         public string Name
         {
@@ -33,7 +33,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets database columns.
         /// </summary>
         public ImmutableArray<Column> Columns
         {
@@ -42,7 +42,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets database records.
         /// </summary>
         public ImmutableArray<Record> Records
         {
@@ -51,7 +51,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets database current record.
         /// </summary>
         public Record CurrentRecord
         {
@@ -62,8 +62,8 @@ namespace Core2D
         /// <summary>
         /// Creates a new <see cref="Database"/> instance.
         /// </summary>
-        /// <param name="name"></param>
-        /// <returns></returns>
+        /// <param name="name">The database name.</param>
+        /// <returns>The new instance of the <see cref="Database"/> class.</returns>
         public static Database Create(string name)
         {
             return new Database()
@@ -77,9 +77,9 @@ namespace Core2D
         /// <summary>
         /// Creates a new <see cref="Database"/> instance.
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="columns"></param>
-        /// <returns></returns>
+        /// <param name="name">The database name.</param>
+        /// <param name="columns">The database columns.</param>
+        /// <returns>The new instance of the <see cref="Database"/> class.</returns>
         public static Database Create(string name, ImmutableArray<Column> columns)
         {
             return new Database()
@@ -93,10 +93,10 @@ namespace Core2D
         /// <summary>
         /// Creates a new <see cref="Database"/> instance.
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="columns"></param>
-        /// <param name="records"></param>
-        /// <returns></returns>
+        /// <param name="name">The database name.</param>
+        /// <param name="columns">The database columns.</param>
+        /// <param name="records">The database records.</param>
+        /// <returns>The new instance of the <see cref="Database"/> class.</returns>
         public static Database Create(string name, ImmutableArray<Column> columns, ImmutableArray<Record> records)
         {
             return new Database()
@@ -110,9 +110,9 @@ namespace Core2D
         /// <summary>
         /// Creates a new <see cref="Database"/> instance.
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="fields"></param>
-        /// <returns></returns>
+        /// <param name="name">The database name.</param>
+        /// <param name="fields">The fields collection.</param>
+        /// <returns>The new instance of the <see cref="Database"/> class.</returns>
         public static Database Create(string name, IEnumerable<string[]> fields)
         {
             var db = Database.Create(name);

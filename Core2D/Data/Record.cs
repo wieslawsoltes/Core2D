@@ -8,7 +8,7 @@ using Portable.Xaml.Markup;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Database record.
     /// </summary>
     [ContentProperty(nameof(Values))]
     public class Record : ObservableObject
@@ -19,7 +19,7 @@ namespace Core2D
         private Database _owner;
 
         /// <summary>
-        /// 
+        /// Gets or sets record Id.
         /// </summary>
         public Guid Id
         {
@@ -28,7 +28,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets record columns.
         /// </summary>
         public ImmutableArray<Column> Columns
         {
@@ -37,7 +37,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets record values.
         /// </summary>
         public ImmutableArray<Value> Values
         {
@@ -46,7 +46,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Gets or sets record owner object.
+        /// Gets or sets record owner.
         /// </summary>
         public Database Owner
         {
@@ -57,10 +57,10 @@ namespace Core2D
         /// <summary>
         /// Creates a new <see cref="Record"/> instance.
         /// </summary>
-        /// <param name="owner"></param>
-        /// <param name="columns"></param>
-        /// <param name="values"></param>
-        /// <returns></returns>
+        /// <param name="owner">The record owner.</param>
+        /// <param name="columns">The record columns.</param>
+        /// <param name="values">The record values.</param>
+        /// <returns>The new instance of the <see cref="Record"/> class.</returns>
         public static Record Create(Database owner, ImmutableArray<Column> columns, ImmutableArray<Value> values)
         {
             return new Record()
@@ -75,11 +75,11 @@ namespace Core2D
         /// <summary>
         /// Creates a new <see cref="Record"/> instance.
         /// </summary>
-        /// <param name="owner"></param>
-        /// <param name="id"></param>
-        /// <param name="columns"></param>
-        /// <param name="values"></param>
-        /// <returns></returns>
+        /// <param name="owner">The record owner.</param>
+        /// <param name="id">The record Id.</param>
+        /// <param name="columns">The record columns.</param>
+        /// <param name="values">The record values.</param>
+        /// <returns>The new instance of the <see cref="Record"/> class.</returns>
         public static Record Create(Database owner, string id, ImmutableArray<Column> columns, ImmutableArray<Value> values)
         {
             return new Record()
@@ -94,9 +94,9 @@ namespace Core2D
         /// <summary>
         /// Creates a new <see cref="Record"/> instance.
         /// </summary>
-        /// <param name="owner"></param>
-        /// <param name="value"></param>
-        /// <returns></returns>
+        /// <param name="owner">The record owner.</param>
+        /// <param name="value">The record value.</param>
+        /// <returns>The new instance of the <see cref="Record"/> class.</returns>
         public static Record Create(Database owner, string value)
         {
             return new Record()

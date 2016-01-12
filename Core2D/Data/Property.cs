@@ -5,7 +5,7 @@ using Portable.Xaml.Markup;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Data property.
     /// </summary>
     [ContentProperty(nameof(Value))]
     public class Property : ObservableObject
@@ -15,7 +15,7 @@ namespace Core2D
         private Data _owner;
 
         /// <summary>
-        /// 
+        /// Gets or sets property name.
         /// </summary>
         public string Name
         {
@@ -24,7 +24,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets property value.
         /// </summary>
         public object Value
         {
@@ -33,7 +33,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Gets or sets property owner object.
+        /// Gets or sets property owner.
         /// </summary>
         public Data Owner
         {
@@ -44,10 +44,10 @@ namespace Core2D
         /// <summary>
         /// Creates a new <see cref="Property"/> instance.
         /// </summary>
-        /// <param name="owner"></param>
-        /// <param name="name"></param>
-        /// <param name="value"></param>
-        /// <returns></returns>
+        /// <param name="owner">The property owner.</param>
+        /// <param name="name">The property name.</param>
+        /// <param name="value">The property value.</param>
+        /// <returns>The new instance of the <see cref="Property"/> class.</returns>
         public static Property Create(Data owner, string name, object value)
         {
             return new Property()
@@ -58,10 +58,7 @@ namespace Core2D
             };
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
+        /// <inheritdoc/>
         public override string ToString()
         {
             return _value.ToString();
