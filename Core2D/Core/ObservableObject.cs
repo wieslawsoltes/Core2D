@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 namespace Core2D
 {
     /// <summary>
-    /// Base class for objects with observable property changes.
+    /// Base class for objects with observable properties.
     /// </summary>
     public abstract class ObservableObject : INotifyPropertyChanged
     {
