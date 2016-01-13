@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Editor\History\IHistory.cs" />
     <Compile Include="Xaml\Collections\Groups.cs" />
     <Compile Include="Xaml\Collections\Shapes.cs" />
     <Compile Include="Xaml\Collections\Styles.cs" />

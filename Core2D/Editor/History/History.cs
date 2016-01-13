@@ -6,19 +6,14 @@ using System.Collections.Generic;
 namespace Core2D
 {
     /// <summary>
-    /// Undo/redo action history.
+    /// Undo/redo stack based action history.
     /// </summary>
-    public class History
+    public class History : IHistory
     {
         private Stack<UndoRedo> _undos = new Stack<UndoRedo>();
         private Stack<UndoRedo> _redos = new Stack<UndoRedo>();
 
-        /// <summary>
-        /// Make undo/redo history snapshot.
-        /// </summary>
-        /// <param name="previous">The previous state.</param>
-        /// <param name="next">The next state</param>
-        /// <param name="update">The update method.</param>
+        /// <inheritdoc/>
         public void Snapshot<T>(T previous, T next, Action<T> update)
         {
             var undo = UndoRedo.Create(() => update(previous), () => update(next));
@@ -27,28 +22,19 @@ namespace Core2D
             _undos.Push(undo);
         }
 
-        /// <summary>
-        /// Check if undo action can execute.
-        /// </summary>
-        /// <returns>True if undo action can execute.</returns>
+        /// <inheritdoc/>
         public bool CanUndo()
         {
             return _undos.Count > 0;
         }
 
-        /// <summary>
-        /// Check if redo action can execute.
-        /// </summary>
-        /// <returns>True if redo action can execute.</returns>
+        /// <inheritdoc/>
         public bool CanRedo()
         {
             return _redos.Count > 0;
         }
 
-        /// <summary>
-        /// Execute undo action.
-        /// </summary>
-        /// <returns>True if undo action was executed.</returns>
+        /// <inheritdoc/>
         public bool Undo()
         {
             if (_undos.Count <= 0)
@@ -68,10 +54,7 @@ namespace Core2D
             return false;
         }
 
-        /// <summary>
-        /// Execute redo action.
-        /// </summary>
-        /// <returns>True if redo action was executed.</returns>
+        /// <inheritdoc/>
         public bool Redo()
         {
             if (_redos.Count <= 0)
@@ -91,9 +74,7 @@ namespace Core2D
             return false;
         }
 
-        /// <summary>
-        /// Reset undo/redo actions history.
-        /// </summary>
+        /// <inheritdoc/>
         public void Reset()
         {
             if (_undos != null && _undos.Count > 0)

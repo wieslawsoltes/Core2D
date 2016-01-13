@@ -813,11 +813,10 @@ namespace Core2D
         {
             try
             {
-                var history = _project?.History;
-                if (history != null && history.CanUndo())
+                if (_project?.History.CanUndo() ?? false)
                 {
                     Deselect();
-                    history.Undo();
+                    _project?.History.Undo();
                 }
             }
             catch (Exception ex)
@@ -833,11 +832,10 @@ namespace Core2D
         {
             try
             {
-                var history = _project?.History;
-                if (history != null && history.CanRedo())
+                if (_project?.History.CanRedo() ?? false)
                 {
                     Deselect();
-                    history.Redo();
+                    _project?.History.Redo();
                 }
             }
             catch (Exception ex)
@@ -2140,23 +2138,21 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Check if can perform the undo action.
+        /// Check if undo action is available.
         /// </summary>
-        /// <returns>Returns true if can undo.</returns>
+        /// <returns>Returns true if undo action is available.</returns>
         public bool CanUndo()
         {
-            var history = _project?.History;
-            return history != null ? history.CanUndo() : false;
+            return _project?.History?.CanUndo() ?? false;
         }
 
         /// <summary>
-        /// Check if can perform the redo action.
+        /// Check if redo action is available.
         /// </summary>
-        /// <returns>Returns true if can redo.</returns>
+        /// <returns>Returns true if redo action is available.</returns>
         public bool CanRedo()
         {
-            var history = _project?.History;
-            return history != null ? history.CanRedo() : false;
+            return _project?.History?.CanRedo() ?? false;
         }
 
         /// <summary>
