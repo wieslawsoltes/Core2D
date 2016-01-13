@@ -31,7 +31,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Creates a new <see cref="Command"/> instance.
+        /// Creates a new <see cref="Recent"/> instance.
         /// </summary>
         /// <param name="recentProjects">The recent projects.</param>
         /// <param name="currentRecentProject">The current recent project.</param>
