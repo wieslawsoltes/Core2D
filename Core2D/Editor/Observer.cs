@@ -576,9 +576,9 @@ namespace Core2D
                 Add(page.Layers);
             }
 
-            if (page.Data.Properties != null)
+            if (page.Data != null)
             {
-                Add(page.Data.Properties);
+                Add(page.Data);
             }
 
             if (page.WorkingLayer != null)
@@ -604,9 +604,9 @@ namespace Core2D
                 Add(page.Layers);
             }
 
-            if (page.Data.Properties != null)
+            if (page.Data != null)
             {
-                Remove(page.Data.Properties);
+                Remove(page.Data);
             }
 
             if (page.WorkingLayer != null)
@@ -715,12 +715,7 @@ namespace Core2D
 
             if (shape.Data != null)
             {
-                if (shape.Data.Properties != null)
-                {
-                    Add(shape.Data.Properties);
-                }
-
-                shape.Data.PropertyChanged += DataObserver;
+                Add(shape.Data);
             }
 
             if (shape.State != null)
@@ -905,12 +900,7 @@ namespace Core2D
 
             if (shape.Data != null)
             {
-                if (shape.Data.Properties != null)
-                {
-                    Remove(shape.Data.Properties);
-                }
-
-                shape.Data.PropertyChanged -= DataObserver;
+                Remove(shape.Data);
             }
 
             if (shape.State != null)
@@ -1084,6 +1074,32 @@ namespace Core2D
                     }
                 }
             }
+        }
+
+        private void Add(Data data)
+        {
+            if (data == null)
+                return;
+
+            if (data.Properties != null)
+            {
+                Add(data.Properties);
+            }
+
+            data.PropertyChanged += DataObserver;
+        }
+
+        private void Remove(Data data)
+        {
+            if (data == null)
+                return;
+
+            if (data.Properties != null)
+            {
+                Remove(data.Properties);
+            }
+
+            data.PropertyChanged -= DataObserver;
         }
 
         private void Add(Library<ShapeStyle> sg)
