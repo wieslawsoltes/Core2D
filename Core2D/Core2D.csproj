@@ -98,11 +98,11 @@
     <Compile Include="Editor\Tools\ToolRectangle.cs" />
     <Compile Include="Editor\Tools\ToolSelection.cs" />
     <Compile Include="Editor\Tools\ToolText.cs" />
-    <Compile Include="Interfaces\IShapeFactory.cs" />
+    <Compile Include="Editor\Factories\IShapeFactory.cs" />
     <Compile Include="Editor\Observer.cs" />
     <Compile Include="Interfaces\IFileWriter.cs" />
     <Compile Include="Interfaces\ILog.cs" />
-    <Compile Include="Interfaces\IProjectFactory.cs" />
+    <Compile Include="Editor\Factories\IProjectFactory.cs" />
     <Compile Include="Interfaces\ISerializer.cs" />
     <Compile Include="Interfaces\ITextClipboard.cs" />
     <Compile Include="Interfaces\ITextFieldReader.cs" />
