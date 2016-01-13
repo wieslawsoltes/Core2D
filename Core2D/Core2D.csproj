@@ -65,11 +65,11 @@
     <Compile Include="Data\Property.cs" />
     <Compile Include="Editor\Bounds\ConvexHullBounds.cs" />
     <Compile Include="Editor\Bounds\ShapeBounds.cs" />
-    <Compile Include="Input\Command.cs" />
-    <Compile Include="Input\Command`1.cs" />
+    <Compile Include="Editor\Input\Command.cs" />
+    <Compile Include="Editor\Input\Command`1.cs" />
     <Compile Include="Editor\CoreType.cs" />
-    <Compile Include="Input\ICoreCommand.cs" />
-    <Compile Include="Input\ICoreCommand`1.cs" />
+    <Compile Include="Editor\Input\ICoreCommand.cs" />
+    <Compile Include="Editor\Input\ICoreCommand`1.cs" />
     <Compile Include="Editor\ToolBase.cs" />
     <Compile Include="Editor\History\History.cs" />
     <Compile Include="Editor\PathTool.cs" />
