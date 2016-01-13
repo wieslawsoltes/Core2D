@@ -85,8 +85,8 @@
     <Compile Include="Editor\Enums.cs" />
     <Compile Include="Editor\ProjectExtensions.cs" />
     <Compile Include="Editor\Tools\ToolNone.cs" />
-    <Compile Include="Factories\ProjectFactory.cs" />
-    <Compile Include="Factories\ShapeFactory.cs" />
+    <Compile Include="Editor\Factories\ProjectFactory.cs" />
+    <Compile Include="Editor\Factories\ShapeFactory.cs" />
     <Compile Include="Editor\Tools\ToolArc.cs" />
     <Compile Include="Editor\Tools\ToolBezier.cs" />
     <Compile Include="Editor\Tools\ToolEllipse.cs" />
