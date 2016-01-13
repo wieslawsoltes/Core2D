@@ -14,7 +14,7 @@ namespace Core2D
         private Func<T, bool> _canExecute;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Command"/> class.
+        /// Initializes a new instance of the <see cref="Command{T}"/> class.
         /// </summary>
         /// <param name="execute">The execute action.</param>
         /// <param name="canExecute">The can execute function.</param>
@@ -41,7 +41,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Creates a new <see cref="Command"/> instance.
+        /// Creates a new <see cref="Command{T}"/> instance.
         /// </summary>
         /// <param name="execute">The execute action.</param>
         /// <param name="canExecute">The can execute function.</param>
