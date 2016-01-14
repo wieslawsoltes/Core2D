@@ -72,15 +72,15 @@ namespace Dependencies
 
         private static short[] Lineweights = { -3, -2, -1, 0, 5, 9, 13, 15, 18, 20, 25, 30, 35, 40, 50, 53, 60, 70, 80, 90, 100, 106, 120, 140, 158, 200, 211 };
 
-        private static short ThicknessToLineweight(double thickness)
+        private static short ToLineweight(double thickness)
         {
             short lineweight = (short)(thickness / LineweightFactor);
             return Lineweights.OrderBy(x => Math.Abs((long)x - lineweight)).First();
         }
 
-        private static AciColor GetColor(Core2D.ArgbColor color) => new AciColor(color.R, color.G, color.B);
+        private static AciColor ToColor(Core2D.ArgbColor color) => new AciColor(color.R, color.G, color.B);
 
-        private static short GetTransparency(Core2D.ArgbColor color) => (short)(90.0 - color.A * 90.0 / 255.0);
+        private static short ToTransparency(Core2D.ArgbColor color) => (short)(90.0 - color.A * 90.0 / 255.0);
 
         private double ToDxfX(double x) => x;
 
@@ -196,8 +196,8 @@ namespace Dependencies
 
             if (isFilled)
             {
-                var fill = GetColor(style.Fill);
-                var fillTransparency = GetTransparency(style.Fill);
+                var fill = ToColor(style.Fill);
+                var fillTransparency = ToTransparency(style.Fill);
 
                 var bounds =
                     new List<HatchBoundaryPath>
@@ -222,9 +222,9 @@ namespace Dependencies
 
             if (isStroked)
             {
-                var stroke = GetColor(style.Stroke);
-                var strokeTansparency = GetTransparency(style.Stroke);
-                var lineweight = ThicknessToLineweight(style.Thickness);
+                var stroke = ToColor(style.Stroke);
+                var strokeTansparency = ToTransparency(style.Stroke);
+                var lineweight = ToLineweight(style.Thickness);
 
                 dxfLine1.Layer = layer;
                 dxfLine1.Color = stroke;
@@ -259,8 +259,8 @@ namespace Dependencies
 
             if (isFilled)
             {
-                var fill = GetColor(style.Fill);
-                var fillTransparency = GetTransparency(style.Fill);
+                var fill = ToColor(style.Fill);
+                var fillTransparency = ToTransparency(style.Fill);
 
                 // TODO: The netDxf does not create hatch for Ellipse with end angle equal to 360.
                 var bounds =
@@ -283,9 +283,9 @@ namespace Dependencies
 
             if (isStroked)
             {
-                var stroke = GetColor(style.Stroke);
-                var strokeTansparency = GetTransparency(style.Stroke);
-                var lineweight = ThicknessToLineweight(style.Thickness);
+                var stroke = ToColor(style.Stroke);
+                var strokeTansparency = ToTransparency(style.Stroke);
+                var lineweight = ToLineweight(style.Thickness);
 
                 dxfEllipse.Layer = layer;
                 dxfEllipse.Color = stroke;
@@ -298,9 +298,9 @@ namespace Dependencies
 
         private void DrawGridInternal(DxfDocument doc, Layer layer, Core2D.ShapeStyle style, double offsetX, double offsetY, double cellWidth, double cellHeight, ref Core2D.Rect2 rect)
         {
-            var stroke = GetColor(style.Stroke);
-            var strokeTansparency = GetTransparency(style.Stroke);
-            var lineweight = ThicknessToLineweight(style.Thickness);
+            var stroke = ToColor(style.Stroke);
+            var strokeTansparency = ToTransparency(style.Stroke);
+            var lineweight = ToLineweight(style.Thickness);
 
             double ox = rect.X;
             double oy = rect.Y;
@@ -566,9 +566,9 @@ namespace Dependencies
             var _doc = dc as DxfDocument;
 
             var style = line.Style;
-            var stroke = GetColor(style.Stroke);
-            var strokeTansparency = GetTransparency(style.Stroke);
-            var lineweight = ThicknessToLineweight(style.Thickness);
+            var stroke = ToColor(style.Stroke);
+            var strokeTansparency = ToTransparency(style.Stroke);
+            var lineweight = ToLineweight(style.Thickness);
 
             double _x1 = line.Start.X + dx;
             double _y1 = line.Start.Y + dy;
@@ -638,8 +638,8 @@ namespace Dependencies
 
             if (arc.IsFilled)
             {
-                var fill = GetColor(style.Fill);
-                var fillTransparency = GetTransparency(style.Fill);
+                var fill = ToColor(style.Fill);
+                var fillTransparency = ToTransparency(style.Fill);
 
                 // TODO: The netDxf does not create hatch for Ellipse with end angle equal to 360.
                 var bounds =
@@ -662,9 +662,9 @@ namespace Dependencies
 
             if (arc.IsStroked)
             {
-                var stroke = GetColor(style.Stroke);
-                var strokeTansparency = GetTransparency(style.Stroke);
-                var lineweight = ThicknessToLineweight(style.Thickness);
+                var stroke = ToColor(style.Stroke);
+                var strokeTansparency = ToTransparency(style.Stroke);
+                var lineweight = ToLineweight(style.Thickness);
 
                 dxfEllipse.Layer = _currentLayer;
                 dxfEllipse.Color = stroke;
@@ -696,8 +696,8 @@ namespace Dependencies
 
             if (bezier.IsFilled)
             {
-                var fill = GetColor(style.Fill);
-                var fillTransparency = GetTransparency(style.Fill);
+                var fill = ToColor(style.Fill);
+                var fillTransparency = ToTransparency(style.Fill);
 
                 var bounds =
                     new List<HatchBoundaryPath>
@@ -719,9 +719,9 @@ namespace Dependencies
 
             if (bezier.IsStroked)
             {
-                var stroke = GetColor(style.Stroke);
-                var strokeTansparency = GetTransparency(style.Stroke);
-                var lineweight = ThicknessToLineweight(style.Thickness);
+                var stroke = ToColor(style.Stroke);
+                var strokeTansparency = ToTransparency(style.Stroke);
+                var lineweight = ToLineweight(style.Thickness);
 
                 dxfSpline.Layer = _currentLayer;
                 dxfSpline.Color = stroke;
@@ -751,8 +751,8 @@ namespace Dependencies
 
             if (qbezier.IsFilled)
             {
-                var fill = GetColor(style.Fill);
-                var fillTransparency = GetTransparency(style.Fill);
+                var fill = ToColor(style.Fill);
+                var fillTransparency = ToTransparency(style.Fill);
 
                 var bounds =
                     new List<HatchBoundaryPath>
@@ -774,9 +774,9 @@ namespace Dependencies
 
             if (qbezier.IsStroked)
             {
-                var stroke = GetColor(style.Stroke);
-                var strokeTansparency = GetTransparency(style.Stroke);
-                var lineweight = ThicknessToLineweight(style.Thickness);
+                var stroke = ToColor(style.Stroke);
+                var strokeTansparency = ToTransparency(style.Stroke);
+                var lineweight = ToLineweight(style.Thickness);
 
                 dxfSpline.Layer = _currentLayer;
                 dxfSpline.Color = stroke;
@@ -797,8 +797,8 @@ namespace Dependencies
                 return;
 
             var style = text.Style;
-            var stroke = GetColor(style.Stroke);
-            var strokeTansparency = GetTransparency(style.Stroke);
+            var stroke = ToColor(style.Stroke);
+            var strokeTansparency = ToTransparency(style.Stroke);
 
             var attachmentPoint = default(MTextAttachmentPoint);
             double x, y;
@@ -971,8 +971,8 @@ namespace Dependencies
 
             if (path.IsFilled)
             {
-                var fill = GetColor(style.Fill);
-                var fillTransparency = GetTransparency(style.Fill);
+                var fill = ToColor(style.Fill);
+                var fillTransparency = ToTransparency(style.Fill);
 
                 var hatch = new Hatch(HatchPattern.Solid, bounds, false);
                 hatch.Layer = _currentLayer;
@@ -986,9 +986,9 @@ namespace Dependencies
             {
                 // TODO: Add support for Closed paths.
 
-                var stroke = GetColor(style.Stroke);
-                var strokeTansparency = GetTransparency(style.Stroke);
-                var lineweight = ThicknessToLineweight(style.Thickness);
+                var stroke = ToColor(style.Stroke);
+                var strokeTansparency = ToTransparency(style.Stroke);
+                var lineweight = ToLineweight(style.Thickness);
 
                 foreach (var entity in entities)
                 {
