@@ -27,6 +27,14 @@ namespace Dependencies
             {
                 r.Save(path, item as Page);
             }
+            else if (item is Document)
+            {
+                r.Save(path, item as Document);
+            }
+            else if (item is Project)
+            {
+                r.Save(path, item as Project);
+            }
         }
     }
 }

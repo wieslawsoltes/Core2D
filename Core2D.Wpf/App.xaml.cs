@@ -551,7 +551,7 @@ namespace Core2D.Wpf
                         OnExportAsEmf(dlg.FileName);
                         break;
                     case 3:
-                        _editor?.ExportAsDxf(dlg.FileName);
+                        _editor?.ExportAsDxf(dlg.FileName, item);
                         break;
                     default:
                         break;

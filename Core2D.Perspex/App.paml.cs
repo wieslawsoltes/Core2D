@@ -614,7 +614,7 @@ namespace Core2D.Perspex
 
                     if (ext == ".dxf")
                     {
-                        _editor?.ExportAsDxf(result);
+                        _editor?.ExportAsDxf(result, item);
                     }
                 }
             }

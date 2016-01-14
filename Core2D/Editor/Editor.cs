@@ -2032,14 +2032,15 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Export current container as Dxf.
+        /// Export item as Dxf.
         /// </summary>
         /// <param name="path">The Dxf file path.</param>
-        public void ExportAsDxf(string path)
+        /// <param name="item">The item to export.</param>
+        public void ExportAsDxf(string path, object item)
         {
             try
             {
-                _dxfWriter?.Save(path, _project.CurrentContainer, _project);
+                _dxfWriter?.Save(path, item, _project);
             }
             catch (Exception ex)
             {

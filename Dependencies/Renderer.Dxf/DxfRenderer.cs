@@ -17,8 +17,7 @@ namespace Dependencies
     /// </summary>
     public class DxfRenderer : Core2D.Renderer
     {
-        private bool _enableImageCache = true;
-        private IDictionary<string, ImageDefinition> _biCache;
+        private Core2D.Cache<string, ImageDefinition> _biCache = Core2D.Cache<string, ImageDefinition>.Create();
         private double _pageWidth;
         private double _pageHeight;
         private string _outputPath;
@@ -46,26 +45,80 @@ namespace Dependencies
         public void Save(string path, Core2D.Page page)
         {
             _outputPath = System.IO.Path.GetDirectoryName(path);
-            var doc = new DxfDocument(DxfVersion.AutoCad2010);
-            Add(doc, page);
-            doc.Save(path);
+            var dxf = new DxfDocument(DxfVersion.AutoCad2010);
+
+            Add(dxf, page);
+
+            dxf.Save(path);
             ClearCache(isZooming: false);
         }
 
-        private void Add(DxfDocument doc, Core2D.Page page)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="document"></param>
+        public void Save(string path, Core2D.Document document)
+        {
+            _outputPath = System.IO.Path.GetDirectoryName(path);
+            var dxf = new DxfDocument(DxfVersion.AutoCad2010);
+
+            Add(dxf, document);
+
+            dxf.Save(path);
+            ClearCache(isZooming: false);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="project"></param>
+        public void Save(string path, Core2D.Project project)
+        {
+            _outputPath = System.IO.Path.GetDirectoryName(path);
+            var dxf = new DxfDocument(DxfVersion.AutoCad2010);
+
+            Add(dxf, project);
+
+            dxf.Save(path);
+            ClearCache(isZooming: false);
+        }
+
+        private void Add(DxfDocument dxf, Core2D.Page page)
         {
             if (page.Template != null)
             {
                 _pageWidth = page.Template.Width;
                 _pageHeight = page.Template.Height;
-                Draw(doc, page.Template, page.Data.Properties, page.Data.Record);
+                Draw(dxf, page.Template, page.Data.Properties, page.Data.Record);
             }
             else
             {
                 throw new NullReferenceException("Container template must be set.");
             }
 
-            Draw(doc, page, page.Data.Properties, page.Data.Record);
+            Draw(dxf, page, page.Data.Properties, page.Data.Record);
+        }
+
+        private void Add(DxfDocument dxf, Core2D.Document document)
+        {
+            foreach (var page in document.Pages)
+            {
+                var layout = new Layout(page.Name);
+                dxf.Layouts.Add(layout);
+                dxf.ActiveLayout = layout.Name;
+
+                Add(dxf, page);
+            }
+        }
+
+        private void Add(DxfDocument dxf, Core2D.Project project)
+        {
+            foreach (var document in project.Documents)
+            {
+                Add(dxf, document);
+            }
         }
 
         private static double LineweightFactor = 96.0 / 2540.0;
@@ -182,7 +235,7 @@ namespace Dependencies
                 }, 3);
         }
 
-        private void DrawRectangleInternal(DxfDocument doc, Layer layer, bool isFilled, bool isStroked, Core2D.BaseStyle style, ref Core2D.Rect2 rect)
+        private void DrawRectangleInternal(DxfDocument dxf, Layer layer, bool isFilled, bool isStroked, Core2D.BaseStyle style, ref Core2D.Rect2 rect)
         {
             double x = rect.X;
             double y = rect.Y;
@@ -217,7 +270,7 @@ namespace Dependencies
                 hatch.Color = fill;
                 hatch.Transparency.Value = fillTransparency;
 
-                doc.AddEntity(hatch);
+                dxf.AddEntity(hatch);
             }
 
             if (isStroked)
@@ -246,14 +299,14 @@ namespace Dependencies
                 dxfLine4.Transparency.Value = strokeTansparency;
                 dxfLine4.Lineweight.Value = lineweight;
 
-                doc.AddEntity(dxfLine1);
-                doc.AddEntity(dxfLine2);
-                doc.AddEntity(dxfLine3);
-                doc.AddEntity(dxfLine4);
+                dxf.AddEntity(dxfLine1);
+                dxf.AddEntity(dxfLine2);
+                dxf.AddEntity(dxfLine3);
+                dxf.AddEntity(dxfLine4);
             }
         }
 
-        private void DrawEllipseInternal(DxfDocument doc, Layer layer, bool isFilled, bool isStroked, Core2D.BaseStyle style, ref Core2D.Rect2 rect)
+        private void DrawEllipseInternal(DxfDocument dxf, Layer layer, bool isFilled, bool isStroked, Core2D.BaseStyle style, ref Core2D.Rect2 rect)
         {
             var dxfEllipse = CreateEllipse(rect.X, rect.Y, rect.Width, rect.Height);
 
@@ -278,7 +331,7 @@ namespace Dependencies
                 hatch.Color = fill;
                 hatch.Transparency.Value = fillTransparency;
 
-                doc.AddEntity(hatch);
+                dxf.AddEntity(hatch);
             }
 
             if (isStroked)
@@ -292,11 +345,11 @@ namespace Dependencies
                 dxfEllipse.Transparency.Value = strokeTansparency;
                 dxfEllipse.Lineweight.Value = lineweight;
 
-                doc.AddEntity(dxfEllipse);
+                dxf.AddEntity(dxfEllipse);
             }
         }
 
-        private void DrawGridInternal(DxfDocument doc, Layer layer, Core2D.ShapeStyle style, double offsetX, double offsetY, double cellWidth, double cellHeight, ref Core2D.Rect2 rect)
+        private void DrawGridInternal(DxfDocument dxf, Layer layer, Core2D.ShapeStyle style, double offsetX, double offsetY, double cellWidth, double cellHeight, ref Core2D.Rect2 rect)
         {
             var stroke = ToColor(style.Stroke);
             var strokeTansparency = ToTransparency(style.Stroke);
@@ -316,7 +369,7 @@ namespace Dependencies
                 dxfLine.Color = stroke;
                 dxfLine.Transparency.Value = strokeTansparency;
                 dxfLine.Lineweight.Value = lineweight;
-                doc.AddEntity(dxfLine);
+                dxf.AddEntity(dxfLine);
             }
 
             for (double gy = sy; gy < ey; gy += cellHeight)
@@ -326,7 +379,7 @@ namespace Dependencies
                 dxfLine.Color = stroke;
                 dxfLine.Transparency.Value = strokeTansparency;
                 dxfLine.Lineweight.Value = lineweight;
-                doc.AddEntity(dxfLine);
+                dxf.AddEntity(dxfLine);
             }
         }
 
@@ -515,18 +568,14 @@ namespace Dependencies
         {
             if (!isZooming)
             {
-                if (_biCache != null)
-                {
-                    _biCache.Clear();
-                }
-                _biCache = new Dictionary<string, ImageDefinition>();
+                _biCache.Reset();
             }
         }
 
         /// <inheritdoc/>
         public override void Draw(object dc, Core2D.Container container, ImmutableArray<Core2D.Property> db, Core2D.Record r)
         {
-            var _doc = dc as DxfDocument;
+            var _dxf = dc as DxfDocument;
 
             foreach (var layer in container.Layers)
             {
@@ -535,7 +584,7 @@ namespace Dependencies
                     IsVisible = layer.IsVisible
                 };
 
-                _doc.Layers.Add(dxfLayer);
+                _dxf.Layers.Add(dxfLayer);
 
                 _currentLayer = dxfLayer;
 
@@ -546,13 +595,13 @@ namespace Dependencies
         /// <inheritdoc/>
         public override void Draw(object dc, Core2D.Layer layer, ImmutableArray<Core2D.Property> db, Core2D.Record r)
         {
-            var _doc = dc as DxfDocument;
+            var _dxf = dc as DxfDocument;
 
             foreach (var shape in layer.Shapes)
             {
                 if (shape.State.Flags.HasFlag(State.DrawShapeState.Flags))
                 {
-                    shape.Draw(_doc, this, 0, 0, db, r);
+                    shape.Draw(_dxf, this, 0, 0, db, r);
                 }
             }
         }
@@ -563,7 +612,7 @@ namespace Dependencies
             if (!line.IsStroked)
                 return;
 
-            var _doc = dc as DxfDocument;
+            var _dxf = dc as DxfDocument;
 
             var style = line.Style;
             var stroke = ToColor(style.Stroke);
@@ -588,7 +637,7 @@ namespace Dependencies
             dxfLine.Transparency.Value = strokeTansparency;
             dxfLine.Lineweight.Value = lineweight;
 
-            _doc.AddEntity(dxfLine);
+            _dxf.AddEntity(dxfLine);
         }
 
         /// <inheritdoc/>
@@ -597,16 +646,16 @@ namespace Dependencies
             if (!rectangle.IsStroked && !rectangle.IsFilled && !rectangle.IsGrid)
                 return;
 
-            var _doc = dc as DxfDocument;
+            var _dxf = dc as DxfDocument;
             var style = rectangle.Style;
             var rect = Core2D.Rect2.Create(rectangle.TopLeft, rectangle.BottomRight, dx, dy);
 
-            DrawRectangleInternal(_doc, _currentLayer, rectangle.IsFilled, rectangle.IsStroked, style, ref rect);
+            DrawRectangleInternal(_dxf, _currentLayer, rectangle.IsFilled, rectangle.IsStroked, style, ref rect);
 
             if (rectangle.IsGrid)
             {
                 DrawGridInternal(
-                    _doc,
+                    _dxf,
                     _currentLayer,
                     style,
                     rectangle.OffsetX, rectangle.OffsetY,
@@ -621,17 +670,17 @@ namespace Dependencies
             if (!ellipse.IsStroked && !ellipse.IsFilled)
                 return;
 
-            var _doc = dc as DxfDocument;
+            var dxf = dc as DxfDocument;
             var style = ellipse.Style;
             var rect = Core2D.Rect2.Create(ellipse.TopLeft, ellipse.BottomRight, dx, dy);
 
-            DrawEllipseInternal(_doc, _currentLayer, ellipse.IsFilled, ellipse.IsStroked, style, ref rect);
+            DrawEllipseInternal(dxf, _currentLayer, ellipse.IsFilled, ellipse.IsStroked, style, ref rect);
         }
 
         /// <inheritdoc/>
         public override void Draw(object dc, Core2D.XArc arc, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
         {
-            var _doc = dc as DxfDocument;
+            var _dxf = dc as DxfDocument;
             var style = arc.Style;
 
             var dxfEllipse = CreateEllipticalArc(arc, dx, dy);
@@ -657,7 +706,7 @@ namespace Dependencies
                 hatch.Color = fill;
                 hatch.Transparency.Value = fillTransparency;
 
-                _doc.AddEntity(hatch);
+                _dxf.AddEntity(hatch);
             }
 
             if (arc.IsStroked)
@@ -671,7 +720,7 @@ namespace Dependencies
                 dxfEllipse.Transparency.Value = strokeTansparency;
                 dxfEllipse.Lineweight.Value = lineweight;
 
-                _doc.AddEntity(dxfEllipse);
+                _dxf.AddEntity(dxfEllipse);
             }
         }
 
@@ -681,7 +730,7 @@ namespace Dependencies
             if (!bezier.IsStroked && !bezier.IsFilled)
                 return;
 
-            var _doc = dc as DxfDocument;
+            var _dxf = dc as DxfDocument;
             var style = bezier.Style;
 
             var dxfSpline = CreateCubicSpline(
@@ -714,7 +763,7 @@ namespace Dependencies
                 hatch.Color = fill;
                 hatch.Transparency.Value = fillTransparency;
 
-                _doc.AddEntity(hatch);
+                _dxf.AddEntity(hatch);
             }
 
             if (bezier.IsStroked)
@@ -728,7 +777,7 @@ namespace Dependencies
                 dxfSpline.Transparency.Value = strokeTansparency;
                 dxfSpline.Lineweight.Value = lineweight;
 
-                _doc.AddEntity(dxfSpline);
+                _dxf.AddEntity(dxfSpline);
             }
         }
 
@@ -738,7 +787,7 @@ namespace Dependencies
             if (!qbezier.IsStroked && !qbezier.IsFilled)
                 return;
 
-            var _doc = dc as DxfDocument;
+            var _dxf = dc as DxfDocument;
             var style = qbezier.Style;
 
             var dxfSpline = CreateQuadraticSpline(
@@ -769,7 +818,7 @@ namespace Dependencies
                 hatch.Color = fill;
                 hatch.Transparency.Value = fillTransparency;
 
-                _doc.AddEntity(hatch);
+                _dxf.AddEntity(hatch);
             }
 
             if (qbezier.IsStroked)
@@ -783,14 +832,14 @@ namespace Dependencies
                 dxfSpline.Transparency.Value = strokeTansparency;
                 dxfSpline.Lineweight.Value = lineweight;
 
-                _doc.AddEntity(dxfSpline);
+                _dxf.AddEntity(dxfSpline);
             }
         }
 
         /// <inheritdoc/>
         public override void Draw(object dc, Core2D.XText text, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
         {
-            var _doc = dc as DxfDocument;
+            var _dxf = dc as DxfDocument;
 
             var tbind = text.BindText(db, r);
             if (string.IsNullOrEmpty(tbind))
@@ -908,29 +957,28 @@ namespace Dependencies
             dxfMText.Transparency.Value = strokeTansparency;
             dxfMText.Color = stroke;
 
-            _doc.AddEntity(dxfMText);
+            _dxf.AddEntity(dxfMText);
         }
 
         /// <inheritdoc/>
         public override void Draw(object dc, Core2D.XImage image, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
         {
-            var _doc = dc as DxfDocument;
+            var _dxf = dc as DxfDocument;
 
             var bytes = State.ImageCache.GetImage(image.Key);
             if (bytes != null)
             {
                 var rect = Core2D.Rect2.Create(image.TopLeft, image.BottomRight, dx, dy);
 
-                if (_enableImageCache
-                    && _biCache.ContainsKey(image.Key))
+                var dxfImageDefinitionCached = _biCache.Get(image.Key);
+                if (dxfImageDefinitionCached != null)
                 {
-                    var dxfImageDefinition = _biCache[image.Key];
                     var dxfImage = new Image(
-                        dxfImageDefinition,
+                        dxfImageDefinitionCached,
                         new Vector3(ToDxfX(rect.X), ToDxfY(rect.Y + rect.Height), 0),
                         rect.Width,
                         rect.Height);
-                    _doc.AddEntity(dxfImage);
+                    _dxf.AddEntity(dxfImage);
                 }
                 else
                 {
@@ -941,15 +989,14 @@ namespace Dependencies
                     System.IO.File.WriteAllBytes(path, bytes);
                     var dxfImageDefinition = new ImageDefinition(path);
 
-                    if (_enableImageCache)
-                        _biCache[image.Key] = dxfImageDefinition;
+                    _biCache.Set(image.Key, dxfImageDefinition);
 
                     var dxfImage = new Image(
                         dxfImageDefinition,
                         new Vector3(ToDxfX(rect.X), ToDxfY(rect.Y + rect.Height), 0),
                         rect.Width,
                         rect.Height);
-                    _doc.AddEntity(dxfImage);
+                    _dxf.AddEntity(dxfImage);
                 }
             }
         }
@@ -960,7 +1007,7 @@ namespace Dependencies
             if (!path.IsStroked && !path.IsFilled)
                 return;
 
-            var _doc = dc as DxfDocument;
+            var _dxf = dc as DxfDocument;
             var style = path.Style;
 
             IList<HatchBoundaryPath> bounds;
@@ -979,7 +1026,7 @@ namespace Dependencies
                 hatch.Color = fill;
                 hatch.Transparency.Value = fillTransparency;
 
-                _doc.AddEntity(hatch);
+                _dxf.AddEntity(hatch);
             }
 
             if (path.IsStroked)
@@ -996,7 +1043,7 @@ namespace Dependencies
                     entity.Color = stroke;
                     entity.Transparency.Value = strokeTansparency;
                     entity.Lineweight.Value = lineweight;
-                    _doc.AddEntity(entity);
+                    _dxf.AddEntity(entity);
                 }
             }
         }
