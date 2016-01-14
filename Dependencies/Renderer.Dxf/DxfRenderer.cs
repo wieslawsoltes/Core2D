@@ -52,11 +52,6 @@ namespace Dependencies
             ClearCache(isZooming: false);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="doc"></param>
-        /// <param name="page"></param>
         private void Add(DxfDocument doc, Core2D.Page page)
         {
             if (page.Template != null)
