@@ -86,38 +86,13 @@ namespace Dependencies
             return Lineweights.OrderBy(x => Math.Abs((long)x - lineweight)).First();
         }
 
-        private static AciColor GetColor(Core2D.ArgbColor color)
-        {
-            return new AciColor(
-                color.R, 
-                color.G, 
-                color.B);
-        }
+        private static AciColor GetColor(Core2D.ArgbColor color) => new AciColor(color.R, color.G, color.B);
 
-        private static short GetTransparency(Core2D.ArgbColor color)
-        {
-            return (short)(90.0 - color.A * 90.0 / 255.0);
-        }
+        private static short GetTransparency(Core2D.ArgbColor color) => (short)(90.0 - color.A * 90.0 / 255.0);
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <returns></returns>
-        private double ToDxfX(double x)
-        {
-            return x;
-        }
+        private double ToDxfX(double x) => x;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="y"></param>
-        /// <returns></returns>
-        private double ToDxfY(double y)
-        {
-            return _pageHeight - y;
-        }
+        private double ToDxfY(double y) => _pageHeight - y;
 
         private Line CreateLine(double x1, double y1, double x2, double y2)
         {
