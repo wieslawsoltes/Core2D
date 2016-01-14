@@ -15,7 +15,7 @@ using Core2D;
 namespace Dependencies
 {
     /// <summary>
-    /// 
+    /// WinForms file writer.
     /// </summary>
     public class EmfWriter : IFileWriter
     {
@@ -234,12 +234,7 @@ namespace Dependencies
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="path"></param>
-        /// <param name="item"></param>
-        /// <param name="options"></param>
+        /// <inheritdoc/>
         public void Save(string path, object item, object options)
         {
             if (string.IsNullOrEmpty(path) || item == null)

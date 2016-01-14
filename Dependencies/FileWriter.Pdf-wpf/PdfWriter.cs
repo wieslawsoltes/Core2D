@@ -5,16 +5,11 @@ using Core2D;
 namespace Dependencies
 {
     /// <summary>
-    /// 
+    /// PdfSharp file writer.
     /// </summary>
     public class PdfWriter : IFileWriter
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="path"></param>
-        /// <param name="item"></param>
-        /// <param name="options"></param>
+        /// <inheritdoc/>
         public void Save(string path, object item, object options)
         {
             if (string.IsNullOrEmpty(path) || item == null)
