@@ -36,10 +36,7 @@ namespace Dependencies
         /// Creates a new <see cref="DxfRenderer"/> instance.
         /// </summary>
         /// <returns>The new instance of the <see cref="DxfRenderer"/> class.</returns>
-        public static Core2D.Renderer Create()
-        {
-            return new DxfRenderer();
-        }
+        public static Core2D.Renderer Create() => new DxfRenderer();
 
         /// <summary>
         /// 
