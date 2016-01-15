@@ -149,9 +149,8 @@
       <HintPath>..\packages\Perspex.Xaml.Behaviors.9999.0.33-nightly\lib\portable-windows8+net45\Perspex.Xaml.Interactivity.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Portable.Xaml, Version=0.7.5856.32235, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Portable.Xaml.0.8.0-alpha\lib\dotnet\Portable.Xaml.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Portable.Xaml, Version=0.8.5858.3627, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Portable.Xaml.0.9.0-alpha\lib\dotnet\Portable.Xaml.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Serilog, Version=1.5.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
