@@ -245,7 +245,15 @@ namespace Core2D
         {
             if (value != null)
             {
-                if (value is Container && _documents != null)
+                if (value is Layer)
+                {
+                    var layer = value as Layer;
+                    if (layer?.Owner != null)
+                    {
+                        layer.Owner.CurrentLayer = value as Layer;
+                    }
+                }
+                else if (value is Container && _documents != null)
                 {
                     var document = _documents.FirstOrDefault(d => d.Pages.Contains(value as Container));
                     if (document != null)
