@@ -198,7 +198,7 @@ namespace Core2D
         public static ICoreCommand<object> PasteCommand { get; set; }
 
         /// <summary>
-        /// Delete selected document, page or shapes.
+        /// Delete selected document, page, layer or shapes.
         /// </summary>
         public static ICoreCommand<object> DeleteCommand { get; set; }
 

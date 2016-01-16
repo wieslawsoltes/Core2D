@@ -1063,15 +1063,25 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Delete selected document, page or shapes.
+        /// Delete selected document, page, layer or shapes.
         /// </summary>
         /// <param name="item">The item to delete.</param>
         public void OnDelete(object item)
         {
+            if (item is Layer)
+            {
+                var layer = item as Layer;
+                _project?.RemoveLayer(item as Layer);
+
+                var selected = _project?.CurrentContainer?.Layers.FirstOrDefault();
+                layer?.Owner?.SetCurrentLayer(selected);
+            }
             if (item is Page)
             {
                 _project?.RemovePage(item as Page);
-                _project?.SetCurrentContainer(_project?.CurrentDocument?.Pages.FirstOrDefault());
+
+                var selected = _project?.CurrentDocument?.Pages.FirstOrDefault();
+                _project?.SetCurrentContainer(selected);
             }
             else if (item is Document)
             {
@@ -1079,7 +1089,7 @@ namespace Core2D
 
                 var selected = _project?.Documents.FirstOrDefault();
                 _project?.SetCurrentDocument(selected);
-                _project.SetCurrentContainer(selected?.Pages.FirstOrDefault());
+                _project?.SetCurrentContainer(selected?.Pages.FirstOrDefault());
             }
             else if (item is Editor || item == null)
             {
