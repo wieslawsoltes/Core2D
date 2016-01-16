@@ -24,7 +24,12 @@
                             <MenuItem Command="{x:Static core:Commands.DeleteCommand}" CommandParameter="{Binding Path=SelectedItem, ElementName=projectTreeView}" Header="-"/>
                         </Menu>
                     </ControlTemplate>
-                    <ContextMenu x:Key="ContainerContextMenuKey" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
+                    <ContextMenu x:Key="LayerContextMenuKey" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
+                        <MenuItem Header="_Add Layer" InputGestureText="Ctrl+N" Command="{x:Static core:Commands.AddLayerCommand}" CommandParameter="{Binding Owner}"/>
+                        <Separator/>
+                        <MenuItem Header="_Delete" InputGestureText="Del" Command="{x:Static core:Commands.RemoveLayerCommand}" CommandParameter="{Binding}"/>
+                    </ContextMenu>
+                    <ContextMenu x:Key="PageContextMenuKey" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
                         <MenuItem Header="Te_mplate" Tag="{Binding Path=DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" DataContext="{Binding Path=DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" ItemsSource="{Binding Templates}">
                             <MenuItem.ItemContainerStyle>
                                 <Style TargetType="MenuItem">
@@ -92,9 +97,26 @@
                 <Control Template="{StaticResource ProjectMenu}" Grid.Row="0" Grid.Column="1" Margin="2,0,2,0"/>
                 <TreeView x:Name="projectTreeView" Tag="{Binding}" ItemsSource="{Binding Documents}" BorderBrush="{x:Null}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
                     <TreeView.Resources>
-                        <Style x:Key="ContainerTreeViewItemStyleKey" TargetType="TreeViewItem">
+                        <Style x:Key="LayerTreeViewItemStyleKey" TargetType="TreeViewItem">
                             <Setter Property="IsExpanded" Value="False"/>
-                            <Setter Property="ContextMenu" Value="{StaticResource ContainerContextMenuKey}"/>
+                            <Setter Property="ContextMenu" Value="{StaticResource LayerContextMenuKey}"/>
+                            <EventSetter Event="TreeViewItem.MouseRightButtonDown" Handler="TreeViewItem_MouseRightButtonDown"/>
+                            <Setter Property="IsSelected" Value="False"/>
+                            <Style.Triggers>
+                                <DataTrigger Value="True">
+                                    <DataTrigger.Binding>
+                                        <MultiBinding Converter="{StaticResource ObjectEqualityConverter}">
+                                            <Binding Path="Tag.CurrentContainer.CurrentLayer" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type TreeView}}"/>
+                                            <Binding Path="DataContext" RelativeSource="{RelativeSource Self}"/>
+                                        </MultiBinding>
+                                    </DataTrigger.Binding>
+                                    <Setter Property="IsSelected" Value="True"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                        <Style x:Key="PageTreeViewItemStyleKey" TargetType="TreeViewItem">
+                            <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}"/>
+                            <Setter Property="ContextMenu" Value="{StaticResource PageContextMenuKey}"/>
                             <EventSetter Event="TreeViewItem.MouseRightButtonDown" Handler="TreeViewItem_MouseRightButtonDown"/>
                             <Setter Property="IsSelected" Value="False"/>
                             <Style.Triggers>
@@ -130,19 +152,27 @@
                     </TreeView.Style>
                     <TreeView.ItemContainerStyle>
                         <Style TargetType="TreeViewItem">
-                            <Setter Property="IsExpanded" Value="True"/>
+                            <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}"/>
                             <Setter Property="ContextMenu" Value="{StaticResource DocumentContextMenuKey}"/>
                             <EventSetter Event="TreeViewItem.MouseRightButtonDown" Handler="TreeViewItem_MouseRightButtonDown"/>
                         </Style>
                     </TreeView.ItemContainerStyle>
                     <TreeView.ItemTemplate>
-                        <HierarchicalDataTemplate ItemsSource="{Binding Pages}" ItemContainerStyle="{StaticResource ContainerTreeViewItemStyleKey}">
+                        <HierarchicalDataTemplate ItemsSource="{Binding Pages}" ItemContainerStyle="{StaticResource PageTreeViewItemStyleKey}">
                             <HierarchicalDataTemplate.ItemTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Name}" FontWeight="Normal"/>
-                                </DataTemplate>
+                                <HierarchicalDataTemplate ItemsSource="{Binding Layers}" ItemContainerStyle="{StaticResource LayerTreeViewItemStyleKey}">
+                                    <HierarchicalDataTemplate.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch">
+                                                <CheckBox IsChecked="{Binding IsVisible}" Margin="1"/>
+                                                <TextBlock Text="{Binding Name}" FontWeight="Normal" Margin="1"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </HierarchicalDataTemplate.ItemTemplate>
+                                    <TextBlock Text="{Binding Name}" FontWeight="Normal" Margin="1"/>
+                                </HierarchicalDataTemplate>
                             </HierarchicalDataTemplate.ItemTemplate>
-                            <TextBlock Text="{Binding Name}" FontWeight="Normal"/>
+                            <TextBlock Text="{Binding Name}" FontWeight="Normal" Margin="1"/>
                         </HierarchicalDataTemplate>
                     </TreeView.ItemTemplate>
                 </TreeView>
