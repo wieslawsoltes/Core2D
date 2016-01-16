@@ -13,6 +13,7 @@ namespace Core2D
     public class Document : ObservableResource
     {
         private string _name;
+        private bool _isExpanded = true;
         private ImmutableArray<Page> _pages;
 
         /// <summary>
@@ -22,6 +23,15 @@ namespace Core2D
         {
             get { return _name; }
             set { Update(ref _name, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets flag indicating whether document is expanded.
+        /// </summary>
+        public bool IsExpanded
+        {
+            get { return _isExpanded; }
+            set { Update(ref _isExpanded, value); }
         }
 
         /// <summary>

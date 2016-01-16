@@ -10,6 +10,7 @@ namespace Core2D
     public class Page : Container
     {
         private Data _data;
+        private bool _isExpanded = false;
 
         /// <summary>
         /// Gets or sets page data.
@@ -18,6 +19,15 @@ namespace Core2D
         {
             get { return _data; }
             set { Update(ref _data, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets flag indicating whether page is expanded.
+        /// </summary>
+        public bool IsExpanded
+        {
+            get { return _isExpanded; }
+            set { Update(ref _isExpanded, value); }
         }
 
         /// <summary>
