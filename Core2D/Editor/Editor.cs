@@ -265,48 +265,98 @@ namespace Core2D
         {
             if (item is Page)
             {
-                var selected = item as Page;
-                var document = _project?.Documents.FirstOrDefault(d => d.Pages.Contains(selected));
-                if (document != null)
-                {
-                    var page =
-                        _projectFactory?.GetPage(_project, Constants.DefaultPageName)
-                        ?? Page.Create(Constants.DefaultPageName);
-
-                    _project.AddPage(document, page);
-                    _project.SetCurrentContainer(page);
-                }
+                OnNewPage(item as Page);
             }
             else if (item is Document)
             {
-                var document = item as Document;
+                OnNewPage(item as Document);
+            }
+            else if (item is Project)
+            {
+                OnNewDocument();
+            }
+            else if (item is Editor)
+            {
+                OnNewProject();
+            }
+            else if (item == null)
+            {
+                if (_project == null)
+                {
+                    OnNewProject();
+                }
+                else
+                {
+                    if (_project.CurrentDocument == null)
+                    {
+                        OnNewDocument();
+                    }
+                    else
+                    {
+                        OnNewPage(_project.CurrentDocument);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Create new page.
+        /// </summary>
+        /// <param name="selected">The selected page.</param>
+        private void OnNewPage(Page selected)
+        {
+            var document = _project?.Documents.FirstOrDefault(d => d.Pages.Contains(selected));
+            if (document != null)
+            {
                 var page =
                     _projectFactory?.GetPage(_project, Constants.DefaultPageName)
                     ?? Page.Create(Constants.DefaultPageName);
 
-                _project.AddPage(document, page);
-                _project.SetCurrentContainer(page);
+                _project?.AddPage(document, page);
+                _project?.SetCurrentContainer(page);
             }
-            else if (item is Project)
-            {
-                var document =
-                    _projectFactory?.GetDocument(_project, Constants.DefaultDocumentName)
-                    ?? Document.Create(Constants.DefaultDocumentName);
+        }
 
-                _project.AddDocument(document);
-                _project.SetCurrentDocument(document);
-                _project.SetCurrentContainer(document?.Pages.FirstOrDefault());
-            }
-            else if (item is Editor || item == null)
-            {
-                var project =
-                    _projectFactory?.GetProject()
-                    ?? Project.Create();
+        /// <summary>
+        /// Create new page.
+        /// </summary>
+        /// <param name="selected">The selected document.</param>
+        private void OnNewPage(Document selected)
+        {
+            var page =
+                _projectFactory?.GetPage(_project, Constants.DefaultPageName)
+                ?? Page.Create(Constants.DefaultPageName);
 
-                Unload();
-                Load(project, string.Empty);
-                Invalidate?.Invoke();
-            }
+            _project?.AddPage(selected, page);
+            _project?.SetCurrentContainer(page);
+        }
+
+        /// <summary>
+        /// Create new document.
+        /// </summary>
+        private void OnNewDocument()
+        {
+            var document =
+                _projectFactory?.GetDocument(_project, Constants.DefaultDocumentName)
+                ?? Document.Create(Constants.DefaultDocumentName);
+
+            _project?.AddDocument(document);
+            _project?.SetCurrentDocument(document);
+            _project?.SetCurrentContainer(document?.Pages.FirstOrDefault());
+        }
+
+        /// <summary>
+        /// Create new project.
+        /// </summary>
+        private void OnNewProject()
+        {
+            var project =
+                _projectFactory?.GetProject()
+                ?? Project.Create();
+
+            Unload();
+            Load(project, string.Empty);
+            Invalidate?.Invoke();
         }
 
         /// <summary>
