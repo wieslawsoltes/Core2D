@@ -21,13 +21,11 @@
         <DropDown
             Items="{Binding Path=StyleLibraries}"
             SelectedItem="{Binding Path=CurrentStyleLibrary, Mode=TwoWay}"
-            SelectionBoxItem="{Binding Path=CurrentStyleLibrary.Name}"
-            MemberSelector="Name"
             Grid.Row="2"
             Classes="default">
             <DropDown.DataTemplates>
-                <DataTemplate DataType="sys:String">
-                    <TextBlock Text="{Binding}" Classes="default"/>
+                <DataTemplate DataType="sys:Object">
+                    <TextBlock Text="{Binding Name}" Classes="default"/>
                 </DataTemplate>
             </DropDown.DataTemplates>
         </DropDown>
