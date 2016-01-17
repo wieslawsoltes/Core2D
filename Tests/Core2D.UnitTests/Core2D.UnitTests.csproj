@@ -66,6 +66,7 @@
     <Compile Include="Core\ObservableObjectTests.cs" />
     <Compile Include="Core\ObservableResourceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Shape\ShapeStateFlagsTests.cs" />
     <Compile Include="Utilities\PropertyChangedObserver.cs" />
   </ItemGroup>
   <ItemGroup>
