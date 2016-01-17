@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using Portable.Xaml.Markup;
 
@@ -12,3 +13,4 @@ using Portable.Xaml.Markup;
 [assembly: ComVisible(false)]
 [assembly: Guid("05402dd2-93c8-4b30-ac03-139feaffd186")]
 [assembly: XmlnsDefinition("https://github.com/Core2D", "Core2D")]
+[assembly: InternalsVisibleTo("Core2D.UnitTests")]
