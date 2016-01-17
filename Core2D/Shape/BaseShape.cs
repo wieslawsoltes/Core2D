@@ -14,7 +14,7 @@ namespace Core2D
     {
         private string _name;
         private BaseShape _owner;
-        private ShapeState _state = ShapeState.Create(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone);
+        private ShapeState _state;
         private ShapeStyle _style;
         private bool _isStroked;
         private bool _isFilled;
@@ -26,7 +26,8 @@ namespace Core2D
         public BaseShape()
             : base()
         {
-            Data = new Data();
+            State = ShapeState.Create(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone);
+            Data = Data.Create();
         }
 
         /// <summary>
