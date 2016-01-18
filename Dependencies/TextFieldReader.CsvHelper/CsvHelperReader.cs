@@ -43,7 +43,7 @@ namespace Dependencies
         {
             var fields = ReadInternal(path);
             var name = System.IO.Path.GetFileNameWithoutExtension(path);
-            return Database.Create(name, fields);
+            return Database.FromFields(name, fields);
         }
     }
 }

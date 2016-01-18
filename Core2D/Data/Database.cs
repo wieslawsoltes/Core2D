@@ -14,6 +14,7 @@ namespace Core2D
     public class Database : ObservableObject
     {
         private string _name;
+        private string _idColumnName;
         private ImmutableArray<Column> _columns;
         private ImmutableArray<Record> _records;
         private Record _currentRecord;
@@ -21,7 +22,7 @@ namespace Core2D
         /// <summary>
         /// Default Id column name.
         /// </summary>
-        public const string IdColumnName = "Id";
+        public const string DefaultIdColumnName = "Id";
 
         /// <summary>
         /// Gets or sets database name.
@@ -30,6 +31,15 @@ namespace Core2D
         {
             get { return _name; }
             set { Update(ref _name, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets Id column name.
+        /// </summary>
+        public string IdColumnName
+        {
+            get { return _idColumnName; }
+            set { Update(ref _idColumnName, value); }
         }
 
         /// <summary>
@@ -63,12 +73,14 @@ namespace Core2D
         /// Creates a new <see cref="Database"/> instance.
         /// </summary>
         /// <param name="name">The database name.</param>
+        /// <param name="idColumnName">The Id column name.</param>
         /// <returns>The new instance of the <see cref="Database"/> class.</returns>
-        public static Database Create(string name)
+        public static Database Create(string name, string idColumnName = DefaultIdColumnName)
         {
             return new Database()
             {
                 Name = name,
+                IdColumnName = idColumnName,
                 Columns = ImmutableArray.Create<Column>(),
                 Records = ImmutableArray.Create<Record>()
             };
@@ -79,12 +91,14 @@ namespace Core2D
         /// </summary>
         /// <param name="name">The database name.</param>
         /// <param name="columns">The database columns.</param>
+        /// <param name="idColumnName">The Id column name.</param>
         /// <returns>The new instance of the <see cref="Database"/> class.</returns>
-        public static Database Create(string name, ImmutableArray<Column> columns)
+        public static Database Create(string name, ImmutableArray<Column> columns, string idColumnName = DefaultIdColumnName)
         {
             return new Database()
             {
                 Name = name,
+                IdColumnName = idColumnName,
                 Columns = columns,
                 Records = ImmutableArray.Create<Record>()
             };
@@ -96,12 +110,14 @@ namespace Core2D
         /// <param name="name">The database name.</param>
         /// <param name="columns">The database columns.</param>
         /// <param name="records">The database records.</param>
+        /// <param name="idColumnName">The Id column name.</param>
         /// <returns>The new instance of the <see cref="Database"/> class.</returns>
-        public static Database Create(string name, ImmutableArray<Column> columns, ImmutableArray<Record> records)
+        public static Database Create(string name, ImmutableArray<Column> columns, ImmutableArray<Record> records, string idColumnName = DefaultIdColumnName)
         {
             return new Database()
             {
                 Name = name,
+                IdColumnName = idColumnName,
                 Columns = columns,
                 Records = records
             };
@@ -112,14 +128,15 @@ namespace Core2D
         /// </summary>
         /// <param name="name">The database name.</param>
         /// <param name="fields">The fields collection.</param>
+        /// <param name="idColumnName">The Id column name.</param>
         /// <returns>The new instance of the <see cref="Database"/> class.</returns>
-        public static Database Create(string name, IEnumerable<string[]> fields)
+        public static Database FromFields(string name, IEnumerable<string[]> fields, string idColumnName = DefaultIdColumnName)
         {
-            var db = Database.Create(name);
+            var db = Database.Create(name, idColumnName);
             var tempColumns = fields.FirstOrDefault().Select(c => Column.Create(db, c));
             var columns = ImmutableArray.CreateRange<Column>(tempColumns);
 
-            if (columns.Length >= 1 && columns[0].Name == IdColumnName)
+            if (columns.Length >= 1 && columns[0].Name == idColumnName)
             {
                 // Use existing record Id.
                 var tempRecords = fields
@@ -178,7 +195,7 @@ namespace Core2D
             }
 
             // Check for presence of the Id column in the source database.
-            if (source.Columns[0].Name != Database.IdColumnName)
+            if (source.Columns[0].Name != destination.IdColumnName)
             {
                 return isDirty;
             }
