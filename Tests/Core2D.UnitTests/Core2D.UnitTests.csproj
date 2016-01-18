@@ -68,6 +68,7 @@
     <Compile Include="Data\ColumnTests.cs" />
     <Compile Include="Data\DatabaseTests.cs" />
     <Compile Include="Data\DataTests.cs" />
+    <Compile Include="Data\PropertyTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shape\ShapeStateFlagsTests.cs" />
     <Compile Include="Shape\ShapeStateTests.cs" />
