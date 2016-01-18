@@ -105,7 +105,7 @@ namespace Core2D
                 Columns = owner.Columns,
                 Values = ImmutableArray.CreateRange(
                     Enumerable.Repeat(
-                        Constants.DefaulValue, 
+                        value, 
                         owner.Columns.Length).Select(c => Value.Create(c))),
                 Owner = owner
             };
