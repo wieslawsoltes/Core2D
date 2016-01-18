@@ -22,7 +22,6 @@ namespace Core2D
             : base()
         {
             _properties = ImmutableArray.Create<Property>();
-            _record = null;
         }
 
         /// <summary>
