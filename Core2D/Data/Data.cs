@@ -43,10 +43,13 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Gets or sets property Value using Name as key for Properties array values. If property with the specified key does not exist it is created.
+        /// Gets or sets <see cref="Property.Value"/> using name as key for <see cref="Properties"/> array values.
         /// </summary>
-        /// <param name="name">The property name value.</param>
-        /// <returns>The property Value.</returns>
+        /// <remarks>
+        /// If property with the specified key does not exist it is created.
+        /// </remarks>
+        /// <param name="name">The property value.</param>
+        /// <returns>The property value.</returns>
         public object this[string name]
         {
             get
