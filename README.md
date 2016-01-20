@@ -77,7 +77,7 @@ The core library and editor are portable and should work on all platforms where 
 * [.net dxf Reader-Writer](http://netdxf.codeplex.com/) Run `git submodule update --init --recursive` in project directory.
 * [GTK# for .NET](http://www.mono-project.com/download/#download-win) Needed for Gtk on Windows.
 
-For building Core2D mirror repository is used for [.net dxf](https://github.com/Core2D/netdxf)
+For building Core2D mirror repository is used for [.net dxf Reader-Writer](https://github.com/Core2D/netdxf)
 
 ## Contact
 
