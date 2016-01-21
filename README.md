@@ -19,7 +19,7 @@ Core2D is an application for making data driven 2D diagrams.
 * The image data is saved in `zip` archives as files.
 * Project resources can be defined in `Json` or `Xaml` format. 
 * `Json` format is supported for imported and exported of resources. 
-* `Xaml` format is supported for imported resources. 
+* `Xaml` format is supported for imported and exported of resources. 
 * Database's records can be imported, exported and updated from `csv` file format.
 
 ## Supported Platforms
