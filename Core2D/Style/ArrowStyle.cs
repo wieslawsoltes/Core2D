@@ -70,7 +70,7 @@ namespace Core2D
         /// Initializes a new instance of the <see cref="ArrowStyle"/> class.
         /// </summary>
         /// <param name="source">The source style.</param>
-        public ArrowStyle(BaseStyle source) : base()
+        public ArrowStyle(BaseStyle source) : this()
         {
             Stroke = ArgbColor.Create
                 (source.Stroke.A,
