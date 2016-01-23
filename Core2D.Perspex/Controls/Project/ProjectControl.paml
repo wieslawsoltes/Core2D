@@ -22,6 +22,11 @@
                     SelectedItem="{Binding Path=Selected, Mode=TwoWay}"
                     Grid.Row="2"
                     Classes="default">
+                    <TreeView.Styles>
+                        <Style Selector="TreeViewItem">
+                            <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}"/>
+                        </Style>
+                    </TreeView.Styles>
                     <TreeView.DataTemplates>
                         <TreeDataTemplate DataType="core:Document" ItemsSource="{Binding Path=Pages, Mode=TwoWay}">
                             <TextBlock Text="{Binding Path=Name, Mode=TwoWay}" Classes="default"/>
