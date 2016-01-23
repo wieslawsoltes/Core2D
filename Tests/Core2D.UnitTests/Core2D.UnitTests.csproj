@@ -80,6 +80,7 @@
     <Compile Include="Style\BaseStyleTests.cs" />
     <Compile Include="Style\FontStyleFlagsTests.cs" />
     <Compile Include="Style\FontStyleTests.cs" />
+    <Compile Include="Style\LineFixedLengthFlagsTests.cs" />
     <Compile Include="Utilities\PropertyChangedObserver.cs" />
   </ItemGroup>
   <ItemGroup>
