@@ -193,10 +193,7 @@ namespace Core2D
         {
             var flags = (ShapeStateFlags)Enum.Parse(typeof(ShapeStateFlags), s, true);
 
-            return new ShapeState()
-            {
-                Flags = flags
-            };
+            return ShapeState.Create(flags);
         }
 
         /// <inheritdoc/>
