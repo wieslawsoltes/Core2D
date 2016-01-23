@@ -75,6 +75,7 @@
     <Compile Include="Project\DocumentTests.cs" />
     <Compile Include="Project\LayerTests.cs" />
     <Compile Include="Project\LibraryTests.cs" />
+    <Compile Include="Project\OptionsTests.cs" />
     <Compile Include="Project\PageTests.cs" />
     <Compile Include="Project\TemplateTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
