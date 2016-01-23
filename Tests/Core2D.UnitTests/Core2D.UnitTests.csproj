@@ -74,6 +74,7 @@
     <Compile Include="Project\ContainerTests.cs" />
     <Compile Include="Project\LayerTests.cs" />
     <Compile Include="Project\PageTests.cs" />
+    <Compile Include="Project\TemplateTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shape\ShapeStateFlagsTests.cs" />
     <Compile Include="Shape\ShapeStateTests.cs" />
