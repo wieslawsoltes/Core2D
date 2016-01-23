@@ -169,5 +169,17 @@ namespace Core2D
                 EndTrigger = endTrigger ?? ShapeState.Create(ShapeStateFlags.Connector | ShapeStateFlags.Input)
             };
         }
+
+        /// <summary>
+        /// Parses a line fixed length string.
+        /// </summary>
+        /// <param name="s">The line fixed length string.</param>
+        /// <returns>The <see cref="LineFixedLength"/>.</returns>
+        public static LineFixedLength Parse(string s)
+        {
+            var flags = (LineFixedLengthFlags)Enum.Parse(typeof(LineFixedLengthFlags), s, true);
+
+            return LineFixedLength.Create(flags);
+        }
     }
 }
