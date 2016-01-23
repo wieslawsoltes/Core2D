@@ -181,5 +181,11 @@ namespace Core2D
 
             return LineFixedLength.Create(flags);
         }
+
+        /// <inheritdoc/>
+        public override string ToString()
+        {
+            return _flags.ToString();
+        }
     }
 }
