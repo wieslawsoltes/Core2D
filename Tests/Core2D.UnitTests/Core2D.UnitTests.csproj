@@ -75,6 +75,7 @@
     <Compile Include="Shape\ShapeStateFlagsTests.cs" />
     <Compile Include="Shape\ShapeStateTests.cs" />
     <Compile Include="Shape\BaseShapeTests.cs" />
+    <Compile Include="Style\ArgbColorTests.cs" />
     <Compile Include="Utilities\PropertyChangedObserver.cs" />
   </ItemGroup>
   <ItemGroup>
