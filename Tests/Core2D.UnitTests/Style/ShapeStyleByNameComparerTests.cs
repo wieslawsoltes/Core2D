@@ -1,0 +1,54 @@
+﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System.Collections.Generic;
+using Xunit;
+
+namespace Core2D.UnitTests
+{
+    public class ShapeStyleByNameComparerTests
+    {
+        [Fact]
+        public void Implements_IEqualityComparer_Interface()
+        {
+            var target = new ShapeStyleByNameComparer();
+            Assert.True(target is IEqualityComparer<ShapeStyle>);
+        }
+
+        [Fact]
+        public void Equals_Same_Object_Return_True()
+        {
+            var x = ShapeStyle.Create();
+            Assert.Equal(x, x, new ShapeStyleByNameComparer());
+        }
+
+        [Fact]
+        public void Equals_First_Object_Null_Return_False()
+        {
+            var x = ShapeStyle.Create();
+            Assert.NotEqual(null, x, new ShapeStyleByNameComparer());
+        }
+
+        [Fact]
+        public void Equals_Second_Object_Null_Return_False()
+        {
+            var y = ShapeStyle.Create();
+            Assert.NotEqual(y, null, new ShapeStyleByNameComparer());
+        }
+
+        [Fact]
+        public void Equals_Same_Name_Return_True()
+        {
+            var x = ShapeStyle.Create("Style1");
+            var y = ShapeStyle.Create("Style1");
+            Assert.Equal(x, y, new ShapeStyleByNameComparer());
+        }
+
+        [Fact]
+        public void Equals_Different_Name_Return_False()
+        {
+            var x = ShapeStyle.Create("Style1");
+            var y = ShapeStyle.Create("Style2");
+            Assert.NotEqual(x, y, new ShapeStyleByNameComparer());
+        }
+    }
+}

@@ -83,6 +83,7 @@
     <Compile Include="Style\LineFixedLengthFlagsTests.cs" />
     <Compile Include="Style\LineFixedLengthTests.cs" />
     <Compile Include="Style\LineStyleTests.cs" />
+    <Compile Include="Style\ShapeStyleByNameComparerTests.cs" />
     <Compile Include="Utilities\PropertyChangedObserver.cs" />
   </ItemGroup>
   <ItemGroup>
