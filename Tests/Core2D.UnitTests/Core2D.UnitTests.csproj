@@ -78,6 +78,7 @@
     <Compile Include="Style\ArgbColorTests.cs" />
     <Compile Include="Style\ArrowStyleTests.cs" />
     <Compile Include="Style\BaseStyleTests.cs" />
+    <Compile Include="Style\FontStyleFlagsTests.cs" />
     <Compile Include="Utilities\PropertyChangedObserver.cs" />
   </ItemGroup>
   <ItemGroup>
