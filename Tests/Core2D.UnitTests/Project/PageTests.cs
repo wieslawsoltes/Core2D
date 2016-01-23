@@ -14,7 +14,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        public void Data_NotNull()
+        public void Data_Not_Null()
         {
             var target = new Page();
             Assert.NotNull(target.Data);
