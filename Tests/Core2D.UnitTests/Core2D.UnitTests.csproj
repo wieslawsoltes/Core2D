@@ -77,6 +77,7 @@
     <Compile Include="Shape\BaseShapeTests.cs" />
     <Compile Include="Style\ArgbColorTests.cs" />
     <Compile Include="Style\ArrowStyleTests.cs" />
+    <Compile Include="Style\BaseStyleTests.cs" />
     <Compile Include="Utilities\PropertyChangedObserver.cs" />
   </ItemGroup>
   <ItemGroup>
