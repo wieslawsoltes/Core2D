@@ -78,6 +78,7 @@
     <Compile Include="Project\OptionsTests.cs" />
     <Compile Include="Project\PageTests.cs" />
     <Compile Include="Project\ProjectTests_IImageCache.cs" />
+    <Compile Include="Project\ProjectTests_IO.cs" />
     <Compile Include="Project\ProjectTests.cs" />
     <Compile Include="Project\TemplateTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
