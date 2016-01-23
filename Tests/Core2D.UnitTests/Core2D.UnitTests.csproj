@@ -71,6 +71,7 @@
     <Compile Include="Data\PropertyTests.cs" />
     <Compile Include="Data\RecordTests.cs" />
     <Compile Include="Data\ValueTests.cs" />
+    <Compile Include="Project\ContainerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shape\ShapeStateFlagsTests.cs" />
     <Compile Include="Shape\ShapeStateTests.cs" />
