@@ -10,8 +10,6 @@ namespace Core2D
     /// </summary>
     public partial class Project : ObservableResource, IImageCache
     {
-        private static string ProjectEntryName = "Project.json";
-        private static string ImageEntryNamePrefix = "Images\\";
         private IDictionary<string, byte[]> _images = new Dictionary<string, byte[]>();
 
         /// <inheritdoc/>
