@@ -60,9 +60,9 @@ namespace Core2D.UnitTests
         [Fact]
         public void ToHtml_Should_Return_Color_String_Statring_With_Hash()
         {
-            var color = ArgbColor.Create(0xFF, 0x7F, 0x5A, 0x45);
+            var target = ArgbColor.Create(0xFF, 0x7F, 0x5A, 0x45);
 
-            Assert.Equal("#FF7F5A45", ArgbColor.ToHtml(color));
+            Assert.Equal("#FF7F5A45", ArgbColor.ToHtml(target));
         }
     }
 }

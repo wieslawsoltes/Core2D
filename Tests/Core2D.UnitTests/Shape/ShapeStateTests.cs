@@ -16,13 +16,13 @@ namespace Core2D.UnitTests
         [Fact]
         public void Flags_On_Set_Notify_Events_Are_Raised()
         {
-            var target = new ShapeState();
-            var observer = new PropertyChangedObserver(target);
+            var state = new ShapeState();
+            var target = new PropertyChangedObserver(state);
 
-            target.Flags = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone;
+            state.Flags = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone;
 
-            Assert.Equal(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone, target.Flags);
-            Assert.Equal(10, observer.PropertyNames.Count);
+            Assert.Equal(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone, state.Flags);
+            Assert.Equal(10, target.PropertyNames.Count);
 
             var propertyNames = new string[]
             {
@@ -38,7 +38,7 @@ namespace Core2D.UnitTests
                 nameof(ShapeState.Output)
             };
 
-            Assert.Equal(propertyNames, observer.PropertyNames);
+            Assert.Equal(propertyNames, target.PropertyNames);
         }
 
         [Fact]
@@ -152,9 +152,9 @@ namespace Core2D.UnitTests
         [Fact]
         public void Parse_Shape_StateFlags_String()
         {
-            var result = ShapeState.Parse("Visible, Printable, Standalone");
+            var target = ShapeState.Parse("Visible, Printable, Standalone");
 
-            Assert.Equal(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone, result.Flags);
+            Assert.Equal(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone, target.Flags);
         }
 
         [Fact]
