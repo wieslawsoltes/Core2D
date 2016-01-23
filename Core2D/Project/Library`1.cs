@@ -46,6 +46,16 @@ namespace Core2D
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="Library{T}"/> class.
+        /// </summary>
+        public Library()
+            : base()
+        {
+            _items = ImmutableArray.Create<T>();
+            _selected = default(T);
+        }
+
+        /// <summary>
         /// Set selected.
         /// </summary>
         /// <param name="item">The item instance.</param>
@@ -63,9 +73,7 @@ namespace Core2D
         {
             return new Library<T>()
             {
-                Name = name,
-                Items = ImmutableArray.Create<T>(),
-                Selected = default(T)
+                Name = name
             };
         }
 
