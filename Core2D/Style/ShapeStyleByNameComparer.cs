@@ -8,7 +8,7 @@ namespace Core2D
     /// <summary>
     /// Defines methods to support the comparison of <see cref="ShapeStyle"/> objects for equality.
     /// </summary>
-    public class StyleComparer : IEqualityComparer<ShapeStyle>
+    public class ShapeStyleByNameComparer : IEqualityComparer<ShapeStyle>
     {
         /// <summary>
         /// Determines whether the specified objects are equal.

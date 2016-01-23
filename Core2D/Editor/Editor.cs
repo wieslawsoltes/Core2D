@@ -2338,7 +2338,7 @@ namespace Core2D
             return _project?.StyleLibraries
                 .Where(sl => sl?.Items != null && sl?.Items.Length > 0)
                 .SelectMany(sl => sl.Items)
-                .Distinct(new StyleComparer())
+                .Distinct(new ShapeStyleByNameComparer())
                 .ToDictionary(s => s.Name);
         }
 

@@ -183,7 +183,7 @@
     <Compile Include="Style\LineStyle.cs" />
     <Compile Include="Style\LineFixedLengthFlags.cs" />
     <Compile Include="Style\ShapeStyle.cs" />
-    <Compile Include="Style\StyleComparer.cs" />
+    <Compile Include="Style\ShapeStyleByNameComparer.cs" />
     <Compile Include="Style\TextHAlignment.cs" />
     <Compile Include="Style\TextStyle.cs" />
     <Compile Include="Style\TextVAlignment.cs" />
