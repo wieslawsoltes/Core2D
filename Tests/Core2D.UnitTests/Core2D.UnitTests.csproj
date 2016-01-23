@@ -85,6 +85,7 @@
     <Compile Include="Style\LineStyleTests.cs" />
     <Compile Include="Style\ShapeStyleByNameComparerTests.cs" />
     <Compile Include="Style\ShapeStyleTests.cs" />
+    <Compile Include="Style\TextStyleTests.cs" />
     <Compile Include="Utilities\PropertyChangedObserver.cs" />
   </ItemGroup>
   <ItemGroup>
