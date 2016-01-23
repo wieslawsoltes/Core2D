@@ -12,7 +12,7 @@ namespace Core2D
     /// Base style.
     /// </summary>
     [RuntimeNameProperty(nameof(Name))]
-    public class BaseStyle : ObservableResource
+    public abstract class BaseStyle : ObservableResource
     {
         private string _name;
         private ArgbColor _stroke;
