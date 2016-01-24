@@ -25,6 +25,8 @@ namespace Dependencies
             {
                 var previous = default(XPoint);
 
+                sgc.SetFillRule(xpg.FillRule == XFillRule.Nonzero ? FillRule.NonZero : FillRule.EvenOdd);
+
                 foreach (var xpf in xpg.Figures)
                 {
                     sgc.BeginFigure(
@@ -185,9 +187,6 @@ namespace Dependencies
                     sgc.EndFigure(xpf.IsClosed);
                 }
             }
-
-            // TODO: Implement FillRule after Perspex adds support for it.
-            //sg.FillRule = xpg.FillRule == XFillRule.Nonzero ? FillRule.Nonzero : FillRule.EvenOdd;
 
             return sg;
         }
