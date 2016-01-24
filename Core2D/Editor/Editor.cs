@@ -379,7 +379,7 @@ namespace Core2D
             {
                 if (_jsonSerializer != null)
                 {
-                    var project = Project.Open(path, _jsonSerializer);
+                    var project = Project.Open(path, _fileIO, _jsonSerializer);
                     if (project != null)
                     {
                         Unload();
@@ -413,7 +413,7 @@ namespace Core2D
             {
                 if (_project != null && _jsonSerializer != null)
                 {
-                    Project.Save(_project, path, _jsonSerializer);
+                    Project.Save(_project, path, _fileIO, _jsonSerializer);
                     AddRecent(path, _project.Name);
 
                     if (string.IsNullOrEmpty(_projectPath))
@@ -508,7 +508,7 @@ namespace Core2D
         {
             try
             {
-                var xaml = Project.ReadUtf8Text(path);
+                var xaml = _fileIO.ReadUtf8Text(path);
                 if (!string.IsNullOrWhiteSpace(xaml))
                 {
                     OnImportXamlString(xaml);
@@ -639,7 +639,7 @@ namespace Core2D
                 var xaml = _xamlSerializer?.Serialize(item);
                 if (!string.IsNullOrWhiteSpace(xaml))
                 {
-                    Project.WriteUtf8Text(path, xaml);
+                    _fileIO.WriteUtf8Text(path, xaml);
                 }
             }
             catch (Exception ex)
@@ -666,7 +666,7 @@ namespace Core2D
                     case CoreType.Style:
                         {
                             var sl = item as Library<ShapeStyle>;
-                            var json = Project.ReadUtf8Text(path);
+                            var json = _fileIO.ReadUtf8Text(path);
                             var import = _jsonSerializer.Deserialize<ShapeStyle>(json);
 
                             _project.AddStyle(sl, import);
@@ -675,7 +675,7 @@ namespace Core2D
                     case CoreType.Styles:
                         {
                             var sl = item as Library<ShapeStyle>;
-                            var json = Project.ReadUtf8Text(path);
+                            var json = _fileIO.ReadUtf8Text(path);
                             var import = _jsonSerializer.Deserialize<IList<ShapeStyle>>(json);
 
                             _project.AddItems(sl, import);
@@ -684,7 +684,7 @@ namespace Core2D
                     case CoreType.StyleLibrary:
                         {
                             var project = item as Project;
-                            var json = Project.ReadUtf8Text(path);
+                            var json = _fileIO.ReadUtf8Text(path);
                             var import = _jsonSerializer.Deserialize<Library<ShapeStyle>>(json);
 
                             _project.AddStyleLibrary(import);
@@ -693,7 +693,7 @@ namespace Core2D
                     case CoreType.StyleLibraries:
                         {
                             var project = item as Project;
-                            var json = Project.ReadUtf8Text(path);
+                            var json = _fileIO.ReadUtf8Text(path);
                             var import = _jsonSerializer.Deserialize<IList<Library<ShapeStyle>>>(json);
 
                             _project.AddStyleLibraries(import);
@@ -702,7 +702,7 @@ namespace Core2D
                     case CoreType.Group:
                         {
                             var gl = item as Library<XGroup>;
-                            var json = Project.ReadUtf8Text(path);
+                            var json = _fileIO.ReadUtf8Text(path);
                             var import = _jsonSerializer.Deserialize<XGroup>(json);
 
                             var shapes = Enumerable.Repeat(import as XGroup, 1);
@@ -715,7 +715,7 @@ namespace Core2D
                     case CoreType.Groups:
                         {
                             var gl = item as Library<XGroup>;
-                            var json = Project.ReadUtf8Text(path);
+                            var json = _fileIO.ReadUtf8Text(path);
                             var import = _jsonSerializer.Deserialize<IList<XGroup>>(json);
 
                             TryToRestoreStyles(import);
@@ -727,7 +727,7 @@ namespace Core2D
                     case CoreType.GroupLibrary:
                         {
                             var project = item as Project;
-                            var json = Project.ReadUtf8Text(path);
+                            var json = _fileIO.ReadUtf8Text(path);
                             var import = _jsonSerializer.Deserialize<Library<XGroup>>(json);
 
                             TryToRestoreStyles(import.Items);
@@ -739,7 +739,7 @@ namespace Core2D
                     case CoreType.GroupLibraries:
                         {
                             var project = item as Project;
-                            var json = Project.ReadUtf8Text(path);
+                            var json = _fileIO.ReadUtf8Text(path);
                             var import = _jsonSerializer.Deserialize<IList<Library<XGroup>>>(json);
 
                             var shapes = import.SelectMany(x => x.Items);
@@ -752,7 +752,7 @@ namespace Core2D
                     case CoreType.Template:
                         {
                             var project = item as Project;
-                            var json = Project.ReadUtf8Text(path);
+                            var json = _fileIO.ReadUtf8Text(path);
                             var import = _jsonSerializer.Deserialize<Template>(json);
 
                             var shapes = import.Layers.SelectMany(x => x.Shapes);
@@ -765,7 +765,7 @@ namespace Core2D
                     case CoreType.Templates:
                         {
                             var project = item as Project;
-                            var json = Project.ReadUtf8Text(path);
+                            var json = _fileIO.ReadUtf8Text(path);
                             var import = _jsonSerializer.Deserialize<IList<Template>>(json);
 
                             var shapes = import.SelectMany(x => x.Layers).SelectMany(x => x.Shapes);
@@ -801,61 +801,61 @@ namespace Core2D
                     case CoreType.Style:
                         {
                             var json = _jsonSerializer.Serialize(item as ShapeStyle);
-                            Project.WriteUtf8Text(path, json);
+                            _fileIO.WriteUtf8Text(path, json);
                         }
                         break;
                     case CoreType.Styles:
                         {
                             var json = _jsonSerializer.Serialize((item as Library<ShapeStyle>).Items);
-                            Project.WriteUtf8Text(path, json);
+                            _fileIO.WriteUtf8Text(path, json);
                         }
                         break;
                     case CoreType.StyleLibrary:
                         {
                             var json = _jsonSerializer.Serialize((item as Library<ShapeStyle>));
-                            Project.WriteUtf8Text(path, json);
+                            _fileIO.WriteUtf8Text(path, json);
                         }
                         break;
                     case CoreType.StyleLibraries:
                         {
                             var json = _jsonSerializer.Serialize(item as IEnumerable<Library<ShapeStyle>>);
-                            Project.WriteUtf8Text(path, json);
+                            _fileIO.WriteUtf8Text(path, json);
                         }
                         break;
                     case CoreType.Group:
                         {
                             var json = _jsonSerializer.Serialize(item as XGroup);
-                            Project.WriteUtf8Text(path, json);
+                            _fileIO.WriteUtf8Text(path, json);
                         }
                         break;
                     case CoreType.Groups:
                         {
                             var json = _jsonSerializer.Serialize((item as Library<XGroup>).Items);
-                            Project.WriteUtf8Text(path, json);
+                            _fileIO.WriteUtf8Text(path, json);
                         }
                         break;
                     case CoreType.GroupLibrary:
                         {
                             var json = _jsonSerializer.Serialize(item as Library<XGroup>);
-                            Project.WriteUtf8Text(path, json);
+                            _fileIO.WriteUtf8Text(path, json);
                         }
                         break;
                     case CoreType.GroupLibraries:
                         {
                             var json = _jsonSerializer.Serialize(item as IEnumerable<Library<XGroup>>);
-                            Project.WriteUtf8Text(path, json);
+                            _fileIO.WriteUtf8Text(path, json);
                         }
                         break;
                     case CoreType.Template:
                         {
                             var json = _jsonSerializer.Serialize(item as Template);
-                            Project.WriteUtf8Text(path, json);
+                            _fileIO.WriteUtf8Text(path, json);
                         }
                         break;
                     case CoreType.Templates:
                         {
                             var json = _jsonSerializer.Serialize(item as IEnumerable<Template>);
-                            Project.WriteUtf8Text(path, json);
+                            _fileIO.WriteUtf8Text(path, json);
                         }
                         break;
                 }
@@ -2155,7 +2155,7 @@ namespace Core2D
             {
                 try
                 {
-                    var json = Project.ReadUtf8Text(path);
+                    var json = _fileIO.ReadUtf8Text(path);
                     var recent = _jsonSerializer.Deserialize<Recent>(json);
                     if (recent != null)
                     {
@@ -2199,7 +2199,7 @@ namespace Core2D
                 {
                     var recent = Recent.Create(_recentProjects, _currentRecentProject);
                     var json = _jsonSerializer.Serialize(recent);
-                    Project.WriteUtf8Text(path, json);
+                    _fileIO.WriteUtf8Text(path, json);
                 }
                 catch (Exception ex)
                 {
