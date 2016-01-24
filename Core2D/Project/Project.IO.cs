@@ -12,8 +12,15 @@ namespace Core2D
     /// </summary>
     public partial class Project
     {
-        private static string ProjectEntryName = "Project.json";
-        private static string ImageEntryNamePrefix = "Images\\";
+        /// <summary>
+        /// Project Json data entry name.
+        /// </summary>
+        public const string ProjectEntryName = "Project.json";
+
+        /// <summary>
+        /// Image Key prefix entry name.
+        /// </summary>
+        public const string ImageEntryNamePrefix = "Images\\";
 
         /// <summary>
         /// 
