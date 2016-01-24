@@ -61,24 +61,16 @@
         <TabItem Header="Advanced" Classes="property">
             <TabControl Classes="default">
                 <TabItem Header="PointShape" Classes="property">
-                    <ScrollViewer>
-                        <ContentControl Content="{Binding Path=PointShape, Mode=TwoWay}"/>
-                    </ScrollViewer>
+                    <ScrollViewer Content="{Binding Path=PointShape, Mode=TwoWay}"/>
                 </TabItem>
                 <TabItem Header="PointStyle" Classes="property">
-                    <ScrollViewer>
-                        <ContentControl Content="{Binding Path=PointStyle, Mode=TwoWay}"/>
-                    </ScrollViewer>
+                    <ScrollViewer Content="{Binding Path=PointStyle, Mode=TwoWay}"/>
                 </TabItem>
                 <TabItem Header="SelectionStyle" Classes="property">
-                    <ScrollViewer>
-                        <ContentControl Content="{Binding Path=SelectionStyle, Mode=TwoWay}"/>
-                    </ScrollViewer>
+                    <ScrollViewer Content="{Binding Path=SelectionStyle, Mode=TwoWay}"/>
                 </TabItem>
                 <TabItem Header="HelperStyle" Classes="property">
-                    <ScrollViewer>
-                        <ContentControl Content="{Binding Path=HelperStyle, Mode=TwoWay}"/>
-                    </ScrollViewer>
+                    <ScrollViewer Content="{Binding Path=HelperStyle, Mode=TwoWay}"/>
                 </TabItem>
             </TabControl>
         </TabItem>
