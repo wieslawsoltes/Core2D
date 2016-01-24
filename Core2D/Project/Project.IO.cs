@@ -3,7 +3,6 @@
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
-using System.Text;
 
 namespace Core2D
 {
@@ -26,16 +25,32 @@ namespace Core2D
         /// 
         /// </summary>
         /// <param name="path"></param>
+        /// <param name="fileIO"></param>
         /// <param name="serializer"></param>
         /// <returns></returns>
-        public static Project Open(string path, ISerializer serializer)
+        public static Project Open(string path, IFileSystem fileIO, ISerializer serializer)
         {
-            if (string.IsNullOrEmpty(path) || !File.Exists(path) || serializer == null)
+            if (string.IsNullOrEmpty(path) || !File.Exists(path) || fileIO == null || serializer == null)
                 return null;
 
-            using (var stream = new FileStream(path, FileMode.Open))
+            using (var stream = fileIO.Open(path))
             {
-                return Open(stream, serializer);
+                return Open(stream, fileIO, serializer);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="project"></param>
+        /// <param name="path"></param>
+        /// <param name="fileIO"></param>
+        /// <param name="serializer"></param>
+        public static void Save(Project project, string path, IFileSystem fileIO, ISerializer serializer)
+        {
+            using (var stream = fileIO.Create(path))
+            {
+                Save(project, stream, fileIO, serializer);
             }
         }
 
@@ -43,9 +58,10 @@ namespace Core2D
         /// 
         /// </summary>
         /// <param name="stream"></param>
+        /// <param name="fileIO"></param>
         /// <param name="serializer"></param>
         /// <returns></returns>
-        public static Project Open(Stream stream, ISerializer serializer)
+        private static Project Open(Stream stream, IFileSystem fileIO, ISerializer serializer)
         {
             using (var archive = new ZipArchive(stream, ZipArchiveMode.Read))
             {
@@ -55,27 +71,23 @@ namespace Core2D
 
                 var project = default(Project);
 
-                // First step is to read project entry and deserialize project object.
+                // Read project entry and deserialize from json.
                 using (var entryStream = projectEntry.Open())
                 {
-                    string json = ReadUtf8Text(entryStream);
+                    string json = fileIO.ReadUtf8Text(entryStream);
                     project = serializer.Deserialize<Project>(json);
                 }
 
-                // Second step is to read (if any) project images.
+                // Read image entries.
                 foreach (var entry in archive.Entries)
                 {
                     if (entry.FullName.StartsWith(ImageEntryNamePrefix))
                     {
                         using (var entryStream = entry.Open())
                         {
-                            var bytes = ReadBinary(entryStream);
+                            var bytes = fileIO.ReadBinary(entryStream);
                             project.AddImage(entry.FullName, bytes);
                         }
-                    }
-                    else
-                    {
-                        // Ignore all other entries.
                     }
                 }
 
@@ -87,141 +99,31 @@ namespace Core2D
         /// 
         /// </summary>
         /// <param name="project"></param>
-        /// <param name="path"></param>
-        /// <param name="serializer"></param>
-        /// <returns></returns>
-        public static void Save(Project project, string path, ISerializer serializer)
-        {
-            using (var stream = new FileStream(path, FileMode.Create))
-            {
-                Save(project, stream, serializer);
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="project"></param>
         /// <param name="stream"></param>
+        /// <param name="fileIO"></param>
         /// <param name="serializer"></param>
-        public static void Save(Project project, Stream stream, ISerializer serializer)
+        private static void Save(Project project, Stream stream, IFileSystem fileIO, ISerializer serializer)
         {
             using (var archive = new ZipArchive(stream, ZipArchiveMode.Create))
             {
-                // First step is to write project entry.
+                // Write project as json.
                 var jsonEntry = archive.CreateEntry(ProjectEntryName);
                 using (var jsonStream = jsonEntry.Open())
                 {
-                    var json = serializer.Serialize(project);
-                    WriteUtf8Text(jsonStream, json);
+                    fileIO.WriteUtf8Text(jsonStream, serializer.Serialize(project));
                 }
 
-                // Second step is to write (if any) project images.
+                // Get only used image keys so unused image data is removed when saving project to a file.
                 var keys = Editor.GetAllShapes<XImage>(project).Select(i => i.Key).Distinct();
+
+                // Write only used project images.
                 foreach (var key in keys)
                 {
-                    var bytes = project.GetImage(key);
-                    if (bytes != null)
+                    var imageEntry = archive.CreateEntry(key);
+                    using (var imageStream = imageEntry.Open())
                     {
-                        var imageEntry = archive.CreateEntry(key);
-                        using (var imageStream = imageEntry.Open())
-                        {
-                            WriteBinary(imageStream, bytes);
-                        }
+                        fileIO.WriteBinary(imageStream, project.GetImage(key));
                     }
-                }
-
-                // NOTE: Purge deleted images from memory is not called here to enable Undo/Redo.
-                //project.PurgeUnusedImages(new HashSet<string>(keys));
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="stream"></param>
-        /// <returns></returns>
-        public static byte[] ReadBinary(Stream stream)
-        {
-            byte[] buffer = new byte[16 * 1024];
-            using (MemoryStream ms = new MemoryStream())
-            {
-                int read;
-                while ((read = stream.Read(buffer, 0, buffer.Length)) > 0)
-                {
-                    ms.Write(buffer, 0, read);
-                }
-                return ms.ToArray();
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="stream"></param>
-        /// <param name="bytes"></param>
-        public static void WriteBinary(Stream stream, byte[] bytes)
-        {
-            using (var bw = new BinaryWriter(stream))
-            {
-                bw.Write(bytes);
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="stream"></param>
-        /// <returns></returns>
-        public static string ReadUtf8Text(Stream stream)
-        {
-            using (var sr = new StreamReader(stream, Encoding.UTF8))
-            {
-                return sr.ReadToEnd();
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="stream"></param>
-        /// <param name="text"></param>
-        public static void WriteUtf8Text(Stream stream, string text)
-        {
-            using (var sw = new StreamWriter(stream, Encoding.UTF8))
-            {
-                sw.Write(text);
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="path"></param>
-        /// <returns></returns>
-        public static string ReadUtf8Text(string path)
-        {
-            using (var fs = File.OpenRead(path))
-            {
-                using (var sr = new StreamReader(fs, Encoding.UTF8))
-                {
-                    return sr.ReadToEnd();
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="path"></param>
-        /// <param name="text"></param>
-        public static void WriteUtf8Text(string path, string text)
-        {
-            using (var fs = File.Create(path))
-            {
-                using (var sw = new StreamWriter(fs, Encoding.UTF8))
-                {
-                    sw.Write(text);
                 }
             }
         }
