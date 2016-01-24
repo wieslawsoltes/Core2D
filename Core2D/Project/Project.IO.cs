@@ -30,9 +30,6 @@ namespace Core2D
         /// <returns></returns>
         public static Project Open(string path, IFileSystem fileIO, ISerializer serializer)
         {
-            if (string.IsNullOrEmpty(path) || !File.Exists(path) || fileIO == null || serializer == null)
-                return null;
-
             using (var stream = fileIO.Open(path))
             {
                 return Open(stream, fileIO, serializer);

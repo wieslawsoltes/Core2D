@@ -377,14 +377,17 @@ namespace Core2D
         {
             try
             {
-                if (_jsonSerializer != null)
+                if (_fileIO != null && _jsonSerializer != null)
                 {
-                    var project = Project.Open(path, _fileIO, _jsonSerializer);
-                    if (project != null)
+                    if (!string.IsNullOrEmpty(path) && System.IO.File.Exists(path))
                     {
-                        Unload();
-                        Load(project, path);
-                        AddRecent(path, project.Name);
+                        var project = Project.Open(path, _fileIO, _jsonSerializer);
+                        if (project != null)
+                        {
+                            Unload();
+                            Load(project, path);
+                            AddRecent(path, project.Name);
+                        }
                     }
                 }
             }
@@ -411,7 +414,7 @@ namespace Core2D
         {
             try
             {
-                if (_project != null && _jsonSerializer != null)
+                if (_project != null && _fileIO != null && _jsonSerializer != null)
                 {
                     Project.Save(_project, path, _fileIO, _jsonSerializer);
                     AddRecent(path, _project.Name);
