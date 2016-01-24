@@ -171,6 +171,8 @@ namespace Core2D.Wpf
             _editor.Log = new TraceLog();
             _editor.Log.Initialize(System.IO.Path.Combine(GetAssemblyPath(), _logFileName));
 
+            _editor.FileIO = new FileSystem();
+
             _editor.Renderers[0].State.EnableAutofit = true;
             _editor.Renderers[0].State.DrawShapeState.Flags = ShapeStateFlags.Visible;
 
