@@ -58,9 +58,7 @@
             <Border Classes="rightBottom" Grid.Row="2">
                 <TabControl Classes="bottom">
                     <TabItem Header="Shape" Classes="property">
-                        <ScrollViewer>
-                            <ContentControl Content="{Binding Path=Project.CurrentContainer.CurrentShape, Mode=TwoWay}"/>
-                        </ScrollViewer>
+                        <ScrollViewer Content="{Binding Path=Project.CurrentContainer.CurrentShape}"/>
                     </TabItem>
                     <TabItem Header="Data" Classes="property">
                         <ScrollViewer>
@@ -73,9 +71,7 @@
                         </ScrollViewer>
                     </TabItem>
                     <TabItem Header="Container" Classes="property">
-                        <ScrollViewer>
-                            <ContentControl Content="{Binding Path=Project.CurrentContainer, Mode=TwoWay}"/>
-                        </ScrollViewer>
+                        <ScrollViewer Content="{Binding Path=Project.CurrentContainer, Mode=TwoWay}"/>
                     </TabItem>
                     <TabItem Header="Template" Classes="property">
                         <ScrollViewer>
