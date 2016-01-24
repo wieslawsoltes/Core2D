@@ -61,7 +61,7 @@ namespace Core2D
         /// <param name="fileIO"></param>
         /// <param name="serializer"></param>
         /// <returns></returns>
-        private static Project Open(Stream stream, IFileSystem fileIO, ISerializer serializer)
+        public static Project Open(Stream stream, IFileSystem fileIO, ISerializer serializer)
         {
             using (var archive = new ZipArchive(stream, ZipArchiveMode.Read))
             {
@@ -102,7 +102,7 @@ namespace Core2D
         /// <param name="stream"></param>
         /// <param name="fileIO"></param>
         /// <param name="serializer"></param>
-        private static void Save(Project project, Stream stream, IFileSystem fileIO, ISerializer serializer)
+        public static void Save(Project project, Stream stream, IFileSystem fileIO, ISerializer serializer)
         {
             using (var archive = new ZipArchive(stream, ZipArchiveMode.Create))
             {
