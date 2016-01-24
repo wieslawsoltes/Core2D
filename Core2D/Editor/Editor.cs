@@ -14,6 +14,7 @@ namespace Core2D
     public class Editor : ObservableObject, IDisposable
     {
         private ILog _log;
+        private IFileSystem _fileIO;
         private Project _project;
         private string _projectPath;
         private bool _isProjectDirty;
@@ -47,6 +48,15 @@ namespace Core2D
         {
             get { return _log; }
             set { Update(ref _log, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets current file system.
+        /// </summary>
+        public IFileSystem FileIO
+        {
+            get { return _fileIO; }
+            set { Update(ref _fileIO, value); }
         }
 
         /// <summary>
