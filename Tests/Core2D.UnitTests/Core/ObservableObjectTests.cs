@@ -63,13 +63,30 @@ namespace Core2D.UnitTests
             Assert.Equal(1, count);
         }
 
+        [Fact]
+        public void Update_Returns_Boolean()
+        {
+            var target = new Class1();
+
+            target.TestProperty = "Test";
+            Assert.True(target.TestPropertyUpdated);
+
+            target.TestProperty = "Test";
+            Assert.False(target.TestPropertyUpdated);
+        }
+
         private class Class1 : ObservableObject
         {
+            public bool TestPropertyUpdated;
+
             private string _testProperty;
             public string TestProperty
             {
                 get { return _testProperty; }
-                set { Update(ref _testProperty, value); }
+                set
+                {
+                    TestPropertyUpdated = Update(ref _testProperty, value);
+                }
             }
         }
     }
