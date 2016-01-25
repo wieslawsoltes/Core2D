@@ -8,6 +8,7 @@ namespace Core2D.UnitTests
     public class DatabaseTests
     {
         [Fact]
+        [Trait("Core2D", "Data")]
         public void Inherits_From_ObservableObject()
         {
             var target = new Database();
@@ -15,6 +16,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Data")]
         public void FromFields_Existing_Record_Ids()
         {
             var fields = new string[][]
@@ -42,6 +44,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Data")]
         public void FromFields_New_Record_Ids()
         {
             var fields = new string[][]
@@ -71,6 +74,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Data")]
         public void Update_Destination()
         {
             var destinationFields = new string[][]

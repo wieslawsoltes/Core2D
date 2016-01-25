@@ -7,6 +7,7 @@ namespace Core2D.UnitTests
     public class RecordTests
     {
         [Fact]
+        [Trait("Core2D", "Data")]
         public void Inherits_From_ObservableObject()
         {
             var target = new Record();

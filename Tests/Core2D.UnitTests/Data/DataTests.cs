@@ -7,6 +7,7 @@ namespace Core2D.UnitTests
     public class DataTests
     {
         [Fact]
+        [Trait("Core2D", "Data")]
         public void Inherits_From_ObservableObject()
         {
             var target = new Data();
@@ -14,6 +15,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Data")]
         public void Properties_Not_Null()
         {
             var target = new Data();
@@ -21,6 +23,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Data")]
         public void this_Operator_Returns_Null()
         {
             var target = new Data();
@@ -28,6 +31,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Data")]
         public void this_Operator_Returns_Property_Value()
         {
             var target = new Data();
@@ -37,6 +41,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Data")]
         public void this_Operator_Sets_Property_Value()
         {
             var target = new Data();
@@ -47,6 +52,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Data")]
         public void this_Operator_Creates_Property()
         {
             var target = new Data();

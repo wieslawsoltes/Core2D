@@ -7,6 +7,7 @@ namespace Core2D.UnitTests
     public class PropertyTests
     {
         [Fact]
+        [Trait("Core2D", "Data")]
         public void Inherits_From_ObservableObject()
         {
             var target = new Property();
@@ -14,6 +15,7 @@ namespace Core2D.UnitTests
         }
         
         [Fact]
+        [Trait("Core2D", "Data")]
         public void ToString_Should_Return_Value_String()
         {
             var target = Property.Create(null, "Property1", "Value1");
