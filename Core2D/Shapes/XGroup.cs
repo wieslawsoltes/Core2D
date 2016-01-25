@@ -57,7 +57,13 @@ namespace Core2D
         public ImmutableArray<BaseShape> Shapes
         {
             get { return _shapes; }
-            set { Update(ref _shapes, value); }
+            set
+            {
+                if(Update(ref _shapes, value))
+                {
+                    _shapesProperties = default(ImmutableArray<Property>);
+                }
+            }
         }
 
         /// <summary>
@@ -66,7 +72,13 @@ namespace Core2D
         public ImmutableArray<XPoint> Connectors
         {
             get { return _connectors; }
-            set { Update(ref _connectors, value); }
+            set
+            {
+                if (Update(ref _connectors, value))
+                {
+                    _shapesProperties = default(ImmutableArray<Property>);
+                }
+            }
         }
 
         /// <summary>
