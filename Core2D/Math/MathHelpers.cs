@@ -250,7 +250,7 @@ namespace Core2D
                 }
             }
 
-            // to calculate clipped line position
+            // Calculate clipped line position.
             // x0clip = x0 + t0 * dx;
             // y0clip = y0 + t0 * dy;
             // x1clip = x0 + t1 * dx;
