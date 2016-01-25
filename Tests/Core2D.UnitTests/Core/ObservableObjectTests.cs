@@ -8,6 +8,7 @@ namespace Core2D.UnitTests
     public class ObservableObjectTests
     {
         [Fact]
+        [Trait("Core2D", "Core")]
         public void Implements_INotifyPropertyChanged_Interface()
         {
             var target = new Class1();
@@ -15,6 +16,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Core")]
         public void Notify_PropertyChanged_Event_Is_Raised()
         {
             var target = new Class1();
@@ -30,6 +32,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Core")]
         public void Update_Backing_Field_And_Raise_PropertyChanged_Event()
         {
             var target = new Class1();
@@ -47,6 +50,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Core")]
         public void Do_Not_Update_Backing_Field_If_Value_Is_Equal()
         {
             var target = new Class1();
@@ -64,6 +68,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Core")]
         public void Update_Returns_Boolean()
         {
             var target = new Class1();
