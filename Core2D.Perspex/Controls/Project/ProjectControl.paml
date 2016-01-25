@@ -20,6 +20,7 @@
                 <TreeView
                     Items="{Binding Path=Documents, Mode=TwoWay}"
                     SelectedItem="{Binding Path=Selected, Mode=TwoWay}"
+                    AutoScrollToSelectedItem="True"
                     Grid.Row="2"
                     Classes="default">
                     <TreeView.Styles>
