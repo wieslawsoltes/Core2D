@@ -31,13 +31,16 @@ namespace Core2D
         /// <param name="field">The field to update.</param>
         /// <param name="value">The new field value.</param>
         /// <param name="propertyName">The property name that changed.</param>
-        public void Update<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+        /// <returns>True if backing field value changed.</returns>
+        public bool Update<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
         {
             if (!Equals(field, value))
             {
                 field = value;
                 Notify(propertyName);
+                return true;
             }
+            return false;
         }
     }
 }
