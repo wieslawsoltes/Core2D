@@ -7,6 +7,7 @@ namespace Core2D.UnitTests
     public class ProjectTests
     {
         [Fact]
+        [Trait("Core2D", "Project")]
         public void Inherits_From_ObservableResource()
         {
             var target = new Project();
@@ -14,6 +15,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Project")]
         public void Options_Not_Null()
         {
             var target = new Project();
@@ -21,6 +23,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Project")]
         public void StyleLibraries_Not_Null()
         {
             var target = new Project();
@@ -28,6 +31,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Project")]
         public void GroupLibraries_Not_Null()
         {
             var target = new Project();
@@ -35,6 +39,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Project")]
         public void Databases_Not_Null()
         {
             var target = new Project();
@@ -42,6 +47,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Project")]
         public void Templates_Not_Null()
         {
             var target = new Project();
@@ -49,6 +55,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Project")]
         public void Documents_Not_Null()
         {
             var target = new Project();
@@ -56,6 +63,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Project")]
         public void SetCurrentDocument_Sets_CurrentDocument()
         {
             var target = new Project();
@@ -69,6 +77,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Project")]
         public void SetCurrentContainer_Sets_CurrentContainer_And_Selected()
         {
             var target = new Project();
@@ -86,6 +95,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Project")]
         public void SetCurrentTemplate_Sets_CurrentTemplate()
         {
             var target = new Project();
@@ -99,6 +109,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Project")]
         public void SetCurrentDatabase_Sets_CurrentDatabase()
         {
             var target = new Project();
@@ -112,6 +123,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Project")]
         public void SetCurrentGroupLibrary_Sets_CurrentGroupLibrary()
         {
             var target = new Project();
@@ -125,6 +137,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Project")]
         public void SetCurrentStyleLibrary_Sets_CurrentStyleLibrary()
         {
             var target = new Project();
@@ -138,6 +151,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Project")]
         public void SetSelected_Layer()
         {
             var target = new Project();
@@ -151,6 +165,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Project")]
         public void SetSelected_Container()
         {
             var target = new Project();
@@ -179,6 +194,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Project")]
         public void SetSelected_Document()
         {
             var target = new Project();
@@ -192,6 +208,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Project")]
         public void Setting_Selected_Should_Call_SetSelected()
         {
             var target = new Project();

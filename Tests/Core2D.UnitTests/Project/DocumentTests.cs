@@ -7,6 +7,7 @@ namespace Core2D.UnitTests
     public class DocumentTests
     {
         [Fact]
+        [Trait("Core2D", "Project")]
         public void Inherits_From_ObservableResource()
         {
             var target = new Document();
@@ -14,6 +15,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Project")]
         public void Pages_Not_Null()
         {
             var target = new Document();

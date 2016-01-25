@@ -7,6 +7,7 @@ namespace Core2D.UnitTests
     public class LibraryTests
     {
         [Fact]
+        [Trait("Core2D", "Project")]
         public void Inherits_From_ObservableObject()
         {
             var target = new Library<Template>();
@@ -14,6 +15,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Project")]
         public void Items_Not_Null()
         {
             var target = new Library<Template>();
@@ -21,6 +23,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Project")]
         public void Selected_Is_Null()
         {
             var target = new Library<Template>();
@@ -28,6 +31,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Project")]
         public void SetSelected_Sets_Selected()
         {
             var target = new Library<Template>();

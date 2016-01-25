@@ -9,6 +9,7 @@ namespace Core2D.UnitTests
     public class ProjectTests_IImageCache
     {
         [Fact]
+        [Trait("Core2D", "Project")]
         public void Implements_IImageCache_Interface()
         {
             var target = new Project();
@@ -16,6 +17,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Project")]
         public void Inherits_From_ObservableResource()
         {
             var target = new Project();
@@ -23,6 +25,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Project")]
         public void Keys_Not_Null()
         {
             var target = new Project();
@@ -30,6 +33,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Project")]
         public void AddImageFromFile_Add_Key_And_Notify()
         {
             var target = new Project();
@@ -48,6 +52,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Project")]
         public void AddImageFromFile_Do_Not_Add_Duplicate()
         {
             var target = new Project();
@@ -68,6 +73,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Project")]
         public void AddImage_Add_Key_And_Notify()
         {
             var target = new Project();
@@ -88,6 +94,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Project")]
         public void AddImage_Do_Not_Add_Duplicate()
         {
             var target = new Project();
@@ -109,6 +116,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Project")]
         public void GetImage_Returns_Byte_Array()
         {
             var project = new Project();
@@ -124,6 +132,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Project")]
         public void GetImage_Returns_Null()
         {
             var project = new Project();
@@ -136,6 +145,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Project")]
         public void RemoveImage_Remove_Key_And_Notify()
         {
             var target = new Project();
@@ -156,6 +166,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Project")]
         public void PurgeUnusedImages_Remove_All_Keys_And_Notify()
         {
             var target = new Project();
@@ -183,6 +194,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Project")]
         public void PurgeUnusedImages_Remove_Only_Unused_Keys_And_Notify()
         {
             var target = new Project();
