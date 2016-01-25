@@ -8,6 +8,7 @@ namespace Core2D.UnitTests
     public class ShapeStyleByNameComparerTests
     {
         [Fact]
+        [Trait("Core2D", "Style")]
         public void Implements_IEqualityComparer_Interface()
         {
             var target = new ShapeStyleByNameComparer();
@@ -15,6 +16,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Style")]
         public void Equals_Same_Object_Return_True()
         {
             var x = ShapeStyle.Create();
@@ -22,6 +24,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Style")]
         public void Equals_First_Object_Null_Return_False()
         {
             var x = ShapeStyle.Create();
@@ -29,6 +32,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Style")]
         public void Equals_Second_Object_Null_Return_False()
         {
             var y = ShapeStyle.Create();
@@ -36,6 +40,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Style")]
         public void Equals_Same_Name_Return_True()
         {
             var x = ShapeStyle.Create("Style1");
@@ -44,6 +49,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Style")]
         public void Equals_Different_Name_Return_False()
         {
             var x = ShapeStyle.Create("Style1");

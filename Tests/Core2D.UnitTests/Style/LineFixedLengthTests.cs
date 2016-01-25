@@ -7,6 +7,7 @@ namespace Core2D.UnitTests
     public class LineFixedLengthTests
     {
         [Fact]
+        [Trait("Core2D", "Style")]
         public void Inherits_From_ObservableObject()
         {
             var target = new LineFixedLength();
@@ -14,6 +15,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Style")]
         public void Flags_On_Set_Notify_Events_Are_Raised()
         {
             var state = new LineFixedLength();
@@ -45,6 +47,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Style")]
         public void Disabled_Property()
         {
             var target = new LineFixedLength();
@@ -57,6 +60,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Style")]
         public void Start_Property()
         {
             var target = new LineFixedLength();
@@ -69,6 +73,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Style")]
         public void End_Property()
         {
             var target = new LineFixedLength();
@@ -81,6 +86,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Style")]
         public void Vertical_Property()
         {
             var target = new LineFixedLength();
@@ -93,6 +99,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Style")]
         public void Horizontal_Property()
         {
             var target = new LineFixedLength();
@@ -105,6 +112,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Style")]
         public void All_Property()
         {
             var target = new LineFixedLength();
@@ -117,6 +125,7 @@ namespace Core2D.UnitTests
         }
         
         [Fact]
+        [Trait("Core2D", "Style")]
         public void Parse_LineFixedLengthFlags_String()
         {
             var target = LineFixedLength.Parse("Start, Vertical, Horizontal");
@@ -128,6 +137,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Style")]
         public void ToString_Should_Return_Flags_String()
         {
             var target = LineFixedLength.Create(

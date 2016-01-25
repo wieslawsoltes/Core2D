@@ -7,6 +7,7 @@ namespace Core2D.UnitTests
     public class ArgbColorTests
     {
         [Fact]
+        [Trait("Core2D", "Style")]
         public void Inherits_From_ObservableObject()
         {
             var target = new ArgbColor();
@@ -14,6 +15,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Style")]
         public void FromUInt32_Should_Convert_From_UInit32()
         {
             var target = ArgbColor.FromUInt32(0x07ABCDEF);
@@ -25,6 +27,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Style")]
         public void Parse_String_Statring_With_Hash_And_Alpha_Channel()
         {
             var target = ArgbColor.Parse("#07ABCDEF");
@@ -36,6 +39,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Style")]
         public void Parse_String_Statring_With_Hash_And_No_Alpha_Channel()
         {
             var target = ArgbColor.Parse("#ABCDEF");
@@ -47,6 +51,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Style")]
         public void Parse_String_Using_Predefined_Color_Names()
         {
             var target = ArgbColor.Parse("Magenta");
@@ -58,6 +63,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Style")]
         public void ToHtml_Should_Return_Color_String_Statring_With_Hash()
         {
             var target = ArgbColor.Create(0xFF, 0x7F, 0x5A, 0x45);
