@@ -7,6 +7,7 @@ namespace Core2D.UnitTests
     public class ShapeStateTests
     {
         [Fact]
+        [Trait("Core2D", "Shape")]
         public void Inherits_From_ObservableObject()
         {
             var target = new ShapeState();
@@ -14,6 +15,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Shape")]
         public void Flags_On_Set_Notify_Events_Are_Raised()
         {
             var state = new ShapeState();
@@ -48,6 +50,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Shape")]
         public void Default_Property()
         {
             var target = new ShapeState();
@@ -60,6 +63,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Shape")]
         public void Visible_Property()
         {
             var target = new ShapeState();
@@ -72,6 +76,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Shape")]
         public void Printable_Property()
         {
             var target = new ShapeState();
@@ -84,6 +89,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Shape")]
         public void Locked_Property()
         {
             var target = new ShapeState();
@@ -96,6 +102,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Shape")]
         public void Connector_Property()
         {
             var target = new ShapeState();
@@ -108,6 +115,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Shape")]
         public void None_Property()
         {
             var target = new ShapeState();
@@ -120,6 +128,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Shape")]
         public void Standalone_Property()
         {
             var target = new ShapeState();
@@ -132,6 +141,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Shape")]
         public void Input_Property()
         {
             var target = new ShapeState();
@@ -144,6 +154,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Shape")]
         public void Output_Property()
         {
             var target = new ShapeState();
@@ -156,6 +167,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Shape")]
         public void Parse_ShapeStateFlags_String()
         {
             var target = ShapeState.Parse("Visible, Printable, Standalone");
@@ -167,6 +179,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Shape")]
         public void ToString_Should_Return_Flags_String()
         {
             var target = ShapeState.Create(

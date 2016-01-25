@@ -10,6 +10,7 @@ namespace Core2D.UnitTests
     public class BaseShapeTests
     {
         [Fact]
+        [Trait("Core2D", "Shape")]
         public void Inherits_From_ObservableResource()
         {
             var target = new Class1();
@@ -17,6 +18,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Shape")]
         public void State_Not_Null()
         {
             var target = new Class1();
@@ -24,6 +26,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Shape")]
         public void Default_ShapeStateFlags_Value()
         {
             var target = new Class1();
@@ -31,6 +34,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
+        [Trait("Core2D", "Shape")]
         public void Data_Not_Null()
         {
             var target = new Class1();
