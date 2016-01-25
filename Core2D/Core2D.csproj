@@ -117,7 +117,7 @@
     <Compile Include="Math\Core\Size2.cs" />
     <Compile Include="Math\Core\Vector2.cs" />
     <Compile Include="Math\MathHelpers.cs" />
-    <Compile Include="Math\MonotoneChain.cs" />
+    <Compile Include="Math\ConvexHull\MonotoneChain.cs" />
     <Compile Include="Math\Sat\MinimumTranslationVector.cs" />
     <Compile Include="Math\Sat\Projection.cs" />
     <Compile Include="Math\Sat\SeparatingAxisTheorem.cs" />
