@@ -82,6 +82,17 @@
     <Compile Include="Project\ProjectTests.cs" />
     <Compile Include="Project\TemplateTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Shapes\XArcTests.cs" />
+    <Compile Include="Shapes\XBezierTests.cs" />
+    <Compile Include="Shapes\XEllipseTests.cs" />
+    <Compile Include="Shapes\XGroupTests.cs" />
+    <Compile Include="Shapes\XImageTests.cs" />
+    <Compile Include="Shapes\XLineTests.cs" />
+    <Compile Include="Shapes\XPathTests.cs" />
+    <Compile Include="Shapes\XPointTests.cs" />
+    <Compile Include="Shapes\XQBezierTests.cs" />
+    <Compile Include="Shapes\XRectangleTests.cs" />
+    <Compile Include="Shapes\XTextTests.cs" />
     <Compile Include="Shape\ShapeStateFlagsTests.cs" />
     <Compile Include="Shape\ShapeStateTests.cs" />
     <Compile Include="Shape\BaseShapeTests.cs" />
