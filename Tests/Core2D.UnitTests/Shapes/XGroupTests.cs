@@ -1,5 +1,8 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
+using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Xunit;
 
@@ -156,6 +159,24 @@ namespace Core2D.UnitTests
         public void Ungroup_Shapes_And_Add_To_Source()
         {
 
+        }
+
+        public class Class1 : BaseShape
+        {
+            public override void Draw(object dc, Renderer renderer, double dx, double dy, ImmutableArray<Property> db, Record r)
+            {
+                throw new NotImplementedException();
+            }
+
+            public override IEnumerable<XPoint> GetPoints()
+            {
+                throw new NotImplementedException();
+            }
+
+            public override void Move(double dx, double dy)
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 }
