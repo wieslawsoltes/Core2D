@@ -40,9 +40,9 @@ namespace Core2D.UnitTests
         {
             var target = new XGroup();
 
-            var text = new XText();
-            text.Data.Properties = text.Data.Properties.Add(new Property());
-            target.Shapes = target.Shapes.Add(text);
+            var shape = new Class1();
+            shape.Data.Properties = shape.Data.Properties.Add(new Property());
+            target.Shapes = target.Shapes.Add(shape);
 
             var point = new XPoint();
             point.Data.Properties = point.Data.Properties.Add(new Property());
@@ -57,15 +57,15 @@ namespace Core2D.UnitTests
         {
             var target = new XGroup();
 
-            var text1 = new XText();
-            text1.Data.Properties = text1.Data.Properties.Add(new Property());
-            target.Shapes = target.Shapes.Add(text1);
+            var shape1 = new Class1();
+            shape1.Data.Properties = shape1.Data.Properties.Add(new Property());
+            target.Shapes = target.Shapes.Add(shape1);
 
             Assert.Equal(1, target.ShapesProperties.Length);
 
-            var text2 = new XText();
-            text2.Data.Properties = text2.Data.Properties.Add(new Property());
-            target.Shapes = target.Shapes.Add(text2);
+            var shape2 = new Class1();
+            shape2.Data.Properties = shape2.Data.Properties.Add(new Property());
+            target.Shapes = target.Shapes.Add(shape2);
 
             Assert.Equal(2, target.ShapesProperties.Length);
         }
