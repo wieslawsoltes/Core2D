@@ -197,11 +197,25 @@ namespace Core2D.UnitTests
             Assert.Equal(1, source.Count);
         }
 
-        [Fact(Skip = "Need to write test.")]
+        [Fact]
         [Trait("Core2D", "Shapes")]
         public void Group_Shapes_Do_Not_Update_Source()
         {
+            var shape1 = new Class1();
+            var shape2 = new Class1();
+            var point1 = new XPoint();
+            var point2 = new XPoint();
 
+            var shapes = new BaseShape[] { shape1, shape2, point1, point2 };
+            var source = shapes.ToList();
+
+            var target = XGroup.Group("g", shapes, null);
+
+            Assert.Contains(shape1, source);
+            Assert.Contains(shape2, source);
+            Assert.Contains(point1, source);
+            Assert.Contains(point2, source);
+            Assert.Equal(4, source.Count);
         }
 
         [Fact(Skip = "Need to write test.")]
