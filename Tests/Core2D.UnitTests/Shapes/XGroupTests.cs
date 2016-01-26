@@ -169,11 +169,32 @@ namespace Core2D.UnitTests
             Assert.Equal(1, target.Connectors.Length);
         }
 
-        [Fact(Skip = "Need to write test.")]
+        [Fact]
         [Trait("Core2D", "Shapes")]
         public void Group_Shapes_Remove_And_Add_To_Source()
         {
+            var shape1 = new Class1();
+            var shape2 = new Class1();
+            var point1 = new XPoint();
+            var point2 = new XPoint();
 
+            var shapes = new BaseShape[] { shape1, shape2, point1, point2 };
+            var source = shapes.ToList();
+
+            var target = XGroup.Group("g", shapes, source);
+
+            Assert.Equal("g", target.Name);
+
+            Assert.Contains(shape1, target.Shapes);
+            Assert.Contains(shape2, target.Shapes);
+            Assert.Equal(2, target.Shapes.Length);
+
+            Assert.Contains(point1, target.Connectors);
+            Assert.Contains(point2, target.Connectors);
+            Assert.Equal(2, target.Connectors.Length);
+
+            Assert.Contains(target, source);
+            Assert.Equal(1, source.Count);
         }
 
         [Fact(Skip = "Need to write test.")]
