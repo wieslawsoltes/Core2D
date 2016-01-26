@@ -216,8 +216,7 @@ namespace Core2D
         {
             return new XGroup()
             {
-                Name = name,
-                Style = default(ShapeStyle)
+                Name = name
             };
         }
 
@@ -261,83 +260,59 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Ungroup shapes.
+        /// Ungroup shape.
         /// </summary>
-        /// <param name="shapes">The selected shapes.</param>
+        /// <param name="shape">The shape instance.</param>
         /// <param name="source">The source shapes collection.</param>
-        /// <param name="isShapeFromGroup">The flag indicating whether shapes originate from group object.</param>
-        private static void Ungroup(IEnumerable<BaseShape> shapes, IList<BaseShape> source, bool isShapeFromGroup)
+        /// <param name="isShapeFromGroup">The flag indicating whether shape originates from group.</param>
+        public static void Ungroup(BaseShape shape, IList<BaseShape> source, bool isShapeFromGroup = false)
         {
-            if (shapes != null)
+            if (shape != null && source != null)
             {
-                foreach (var shape in shapes)
+                if (shape is XGroup)
                 {
-                    if (shape is XGroup)
+                    var group = shape as XGroup;
+                    Ungroup(group.Shapes, source, isShapeFromGroup: true);
+                    Ungroup(group.Connectors, source, isShapeFromGroup: true);
+
+                    // Remove group from source collection.
+                    source.Remove(group);
+                }
+                else if (isShapeFromGroup)
+                {
+                    if (shape is XPoint)
                     {
-                        var group = shape as XGroup;
-                        Ungroup(group.Shapes, source, isShapeFromGroup: true);
-                        Ungroup(group.Connectors, source, isShapeFromGroup: true);
-
-                        // Remove group from source collection.
-                        source.Remove(group);
+                        // Remove connector related state flags.
+                        shape.State.Flags &=
+                            ~(ShapeStateFlags.Connector
+                            | ShapeStateFlags.None
+                            | ShapeStateFlags.Input
+                            | ShapeStateFlags.Output);
                     }
-                    else if (isShapeFromGroup)
-                    {
-                        if (shape is XPoint)
-                        {
-                            // Remove state flag related to group point/connector.
-                            shape.State.Flags &=
-                                ~(ShapeStateFlags.Connector
-                                | ShapeStateFlags.None
-                                | ShapeStateFlags.Input
-                                | ShapeStateFlags.Output);
 
-                            // Make point standalone.
-                            shape.State.Flags |= ShapeStateFlags.Standalone;
+                    // Add shape standalone flag.
+                    shape.State.Flags |= ShapeStateFlags.Standalone;
 
-                            // Add un-grouped point to source collection.
-                            source.Add(shape);
-                        }
-                        else
-                        {
-                            // Make shape standalone.
-                            shape.State.Flags |= ShapeStateFlags.Standalone;
-
-                            // Add un-grouped shape to source collection.
-                            source.Add(shape);
-                        }
-                    }
+                    // Add shape to source collection.
+                    source.Add(shape);
                 }
             }
         }
 
         /// <summary>
-        /// Ungroup shape.
-        /// </summary>
-        /// <param name="group">The group instance.</param>
-        /// <param name="source">The source shapes collection.</param>
-        public static void Ungroup(XGroup group, IList<BaseShape> source)
-        {
-            if (group != null && source != null)
-            {
-                Ungroup(group.Shapes, source, isShapeFromGroup: true);
-                Ungroup(group.Connectors, source, isShapeFromGroup: true);
-
-                // Remove group from source collection.
-                source.Remove(group);
-            }
-        }
-
-        /// <summary>
         /// Ungroup shapes.
         /// </summary>
-        /// <param name="shapes">The shape instances.</param>
+        /// <param name="shapes">The shapes collection.</param>
         /// <param name="source">The source shapes collection.</param>
-        public static void Ungroup(ImmutableHashSet<BaseShape> shapes, IList<BaseShape> source)
+        /// <param name="isShapeFromGroup">The flag indicating whether shapes originate from group.</param>
+        public static void Ungroup(IEnumerable<BaseShape> shapes, IList<BaseShape> source, bool isShapeFromGroup = false)
         {
             if (shapes != null && source != null)
             {
-                Ungroup(shapes, source, isShapeFromGroup: false);
+                foreach (var shape in shapes)
+                {
+                    Ungroup(shape, source, isShapeFromGroup);
+                }
             }
         }
     }
