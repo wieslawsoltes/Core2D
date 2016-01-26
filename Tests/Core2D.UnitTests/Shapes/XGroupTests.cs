@@ -106,11 +106,18 @@ namespace Core2D.UnitTests
             Assert.Equal(3, target.GetPoints().Count());
         }
 
-        [Fact(Skip = "Need to write test.")]
+        [Fact]
         [Trait("Core2D", "Shapes")]
         public void AddShape_Add_Shape_To_Shapes()
         {
+            var target = new XGroup();
+            var shape = new Class1();
 
+            target.AddShape(shape);
+
+            Assert.Equal(shape.Owner, target);
+            Assert.False(shape.State.Flags.HasFlag(ShapeStateFlags.Standalone));
+            Assert.Contains(shape, target.Shapes);
         }
 
         [Fact(Skip = "Need to write test.")]
