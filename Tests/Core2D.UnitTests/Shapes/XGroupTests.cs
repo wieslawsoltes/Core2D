@@ -135,11 +135,19 @@ namespace Core2D.UnitTests
             Assert.Contains(point, target.Connectors);
         }
 
-        [Fact(Skip = "Need to write test.")]
+        [Fact]
         [Trait("Core2D", "Shapes")]
         public void AddConnectorAsInput_Add_Point_To_Connectors_As_Input()
         {
+            var target = new XGroup();
+            var point = new XPoint();
 
+            target.AddConnectorAsInput(point);
+
+            Assert.Equal(point.Owner, target);
+            Assert.True(point.State.Flags.HasFlag(ShapeStateFlags.Connector | ShapeStateFlags.Input));
+            Assert.False(point.State.Flags.HasFlag(ShapeStateFlags.Standalone));
+            Assert.Contains(point, target.Connectors);
         }
 
         [Fact(Skip = "Need to write test.")]
