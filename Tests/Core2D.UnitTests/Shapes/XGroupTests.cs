@@ -118,6 +118,7 @@ namespace Core2D.UnitTests
             Assert.Equal(shape.Owner, target);
             Assert.False(shape.State.Flags.HasFlag(ShapeStateFlags.Standalone));
             Assert.Contains(shape, target.Shapes);
+            Assert.Equal(1, target.Shapes.Length);
         }
 
         [Fact]
@@ -133,6 +134,7 @@ namespace Core2D.UnitTests
             Assert.True(point.State.Flags.HasFlag(ShapeStateFlags.Connector | ShapeStateFlags.None));
             Assert.False(point.State.Flags.HasFlag(ShapeStateFlags.Standalone));
             Assert.Contains(point, target.Connectors);
+            Assert.Equal(1, target.Connectors.Length);
         }
 
         [Fact]
@@ -148,6 +150,7 @@ namespace Core2D.UnitTests
             Assert.True(point.State.Flags.HasFlag(ShapeStateFlags.Connector | ShapeStateFlags.Input));
             Assert.False(point.State.Flags.HasFlag(ShapeStateFlags.Standalone));
             Assert.Contains(point, target.Connectors);
+            Assert.Equal(1, target.Connectors.Length);
         }
 
         [Fact]
@@ -163,6 +166,7 @@ namespace Core2D.UnitTests
             Assert.True(point.State.Flags.HasFlag(ShapeStateFlags.Connector | ShapeStateFlags.Output));
             Assert.False(point.State.Flags.HasFlag(ShapeStateFlags.Standalone));
             Assert.Contains(point, target.Connectors);
+            Assert.Equal(1, target.Connectors.Length);
         }
 
         [Fact(Skip = "Need to write test.")]
