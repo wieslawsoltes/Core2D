@@ -218,18 +218,40 @@ namespace Core2D.UnitTests
             Assert.Equal(4, source.Count);
         }
 
-        [Fact(Skip = "Need to write test.")]
+        [Fact]
         [Trait("Core2D", "Shapes")]
-        public void Ungroup_Group_And_Add_To_Source()
+        public void Ungroup_Shape_Remove_And_Add_To_Source()
         {
+            var shape = new Class1();
+            var point1 = new XPoint();
+            var point2 = new XPoint();
+            var point3 = new XPoint();
 
-        }
+            var target = new XGroup();
 
-        [Fact(Skip = "Need to write test.")]
-        [Trait("Core2D", "Shapes")]
-        public void Ungroup_Shapes_And_Add_To_Source()
-        {
+            target.AddShape(shape);
+            target.AddConnectorAsNone(point1);
+            target.AddConnectorAsInput(point2);
+            target.AddConnectorAsOutput(point3);
 
+            var source = new List<BaseShape> { target };
+
+            XGroup.Ungroup(target, source);
+
+            Assert.Contains(shape, source);
+            Assert.Contains(point1, source);
+            Assert.Contains(point2, source);
+            Assert.Contains(point3, source);
+            Assert.Equal(4, source.Count);
+
+            Assert.False(point1.State.Flags.HasFlag(ShapeStateFlags.Connector | ShapeStateFlags.None));
+            Assert.False(point2.State.Flags.HasFlag(ShapeStateFlags.Connector | ShapeStateFlags.Input));
+            Assert.False(point3.State.Flags.HasFlag(ShapeStateFlags.Connector | ShapeStateFlags.Output));
+
+            Assert.True(shape.State.Flags.HasFlag(ShapeStateFlags.Standalone));
+            Assert.True(point1.State.Flags.HasFlag(ShapeStateFlags.Standalone));
+            Assert.True(point2.State.Flags.HasFlag(ShapeStateFlags.Standalone));
+            Assert.True(point3.State.Flags.HasFlag(ShapeStateFlags.Standalone));
         }
 
         public class Class1 : BaseShape
