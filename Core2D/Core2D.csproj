@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Editor\History\IHistory.cs" />
+    <Compile Include="Interfaces\IStreamSerializer.cs" />
     <Compile Include="IO\FileSystem.cs" />
     <Compile Include="IO\IFileSystem.cs" />
     <Compile Include="Xaml\Collections\Groups.cs" />
