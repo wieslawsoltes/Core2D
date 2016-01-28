@@ -386,7 +386,7 @@ namespace Core2D
         /// <param name="jsonSerializer">The design time Json serializer instance.</param>
         /// <param name="xamlSerializer">The design time Xaml serializer instance.</param>
         /// <returns>The new instance of the <see cref="DesignerContext"/> class.</returns>
-        public static void InitializeContext(Renderer renderer, ITextClipboard clipboard, ISerializer jsonSerializer, ISerializer xamlSerializer)
+        public static void InitializeContext(Renderer renderer, ITextClipboard clipboard, ITextSerializer jsonSerializer, ITextSerializer xamlSerializer)
         {
             // Editor
 

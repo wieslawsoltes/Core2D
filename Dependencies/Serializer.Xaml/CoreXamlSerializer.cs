@@ -11,7 +11,7 @@ namespace Dependencies
     /// <summary>
     /// Xaml serializer.
     /// </summary>
-    public class CoreXamlSerializer : ISerializer
+    public class CoreXamlSerializer : ITextSerializer
     {
         internal static readonly XmlWriterSettings settings = new XmlWriterSettings()
         {

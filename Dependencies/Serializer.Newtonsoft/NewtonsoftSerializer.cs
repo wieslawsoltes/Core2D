@@ -9,7 +9,7 @@ namespace Dependencies
     /// <summary>
     /// Json serializer.
     /// </summary>
-    public class NewtonsoftSerializer : ISerializer
+    public class NewtonsoftSerializer : ITextSerializer
     {
         /// <summary>
         /// The class library assembly name.

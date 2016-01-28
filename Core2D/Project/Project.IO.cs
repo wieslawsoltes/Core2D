@@ -28,7 +28,7 @@ namespace Core2D
         /// <param name="fileIO"></param>
         /// <param name="serializer"></param>
         /// <returns></returns>
-        public static Project Open(string path, IFileSystem fileIO, ISerializer serializer)
+        public static Project Open(string path, IFileSystem fileIO, ITextSerializer serializer)
         {
             using (var stream = fileIO.Open(path))
             {
@@ -43,7 +43,7 @@ namespace Core2D
         /// <param name="path"></param>
         /// <param name="fileIO"></param>
         /// <param name="serializer"></param>
-        public static void Save(Project project, string path, IFileSystem fileIO, ISerializer serializer)
+        public static void Save(Project project, string path, IFileSystem fileIO, ITextSerializer serializer)
         {
             using (var stream = fileIO.Create(path))
             {
@@ -58,7 +58,7 @@ namespace Core2D
         /// <param name="fileIO"></param>
         /// <param name="serializer"></param>
         /// <returns></returns>
-        public static Project Open(Stream stream, IFileSystem fileIO, ISerializer serializer)
+        public static Project Open(Stream stream, IFileSystem fileIO, ITextSerializer serializer)
         {
             using (var archive = new ZipArchive(stream, ZipArchiveMode.Read))
             {
@@ -99,7 +99,7 @@ namespace Core2D
         /// <param name="stream"></param>
         /// <param name="fileIO"></param>
         /// <param name="serializer"></param>
-        public static void Save(Project project, Stream stream, IFileSystem fileIO, ISerializer serializer)
+        public static void Save(Project project, Stream stream, IFileSystem fileIO, ITextSerializer serializer)
         {
             using (var archive = new ZipArchive(stream, ZipArchiveMode.Create))
             {

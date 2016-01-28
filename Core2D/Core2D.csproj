@@ -104,7 +104,7 @@
     <Compile Include="Interfaces\IFileWriter.cs" />
     <Compile Include="Interfaces\ILog.cs" />
     <Compile Include="Editor\Factories\IProjectFactory.cs" />
-    <Compile Include="Interfaces\ISerializer.cs" />
+    <Compile Include="Interfaces\ITextSerializer.cs" />
     <Compile Include="Interfaces\ITextClipboard.cs" />
     <Compile Include="Interfaces\ITextFieldReader.cs" />
     <Compile Include="Interfaces\ITextFieldWriter.cs" />

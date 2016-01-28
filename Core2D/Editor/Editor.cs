@@ -30,8 +30,8 @@ namespace Core2D
         private IView _view;
         private IProjectFactory _projectFactory;
         private ITextClipboard _textClipboard;
-        private ISerializer _jsonSerializer;
-        private ISerializer _xamlSerializer;
+        private ITextSerializer _jsonSerializer;
+        private ITextSerializer _xamlSerializer;
         private IFileWriter _pdfWriter;
         private IFileWriter _dxfWriter;
         private ITextFieldReader<Database> _csvReader;
@@ -198,7 +198,7 @@ namespace Core2D
         /// <summary>
         /// Gets or sets Json serializer.
         /// </summary>
-        public ISerializer JsonSerializer
+        public ITextSerializer JsonSerializer
         {
             get { return _jsonSerializer; }
             set { Update(ref _jsonSerializer, value); }
@@ -207,7 +207,7 @@ namespace Core2D
         /// <summary>
         /// Gets or sets Xaml serializer.
         /// </summary>
-        public ISerializer XamlSerializer
+        public ITextSerializer XamlSerializer
         {
             get { return _xamlSerializer; }
             set { Update(ref _xamlSerializer, value); }
