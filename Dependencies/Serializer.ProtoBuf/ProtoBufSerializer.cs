@@ -11,23 +11,29 @@ namespace Dependencies
     /// </summary>
     public class ProtoBufSerializer : IStreamSerializer
     {
-        private static readonly TypeModel _model;
+        /// <summary>
+        /// The ProtoBuf type model.
+        /// </summary>
+        public static TypeModel Model;
 
+        /// <summary>
+        /// Initializes static data.
+        /// </summary>
         static ProtoBufSerializer()
         {
-            _model = ProtoBufModel.Create().Compile();
+            Model = ProtoBufModel.Create().Compile();
         }
 
         /// <inheritdoc/>
         public void Serialize<T>(Stream destination, T value)
         {
-            _model.Serialize(destination, value);
+            Model.Serialize(destination, value);
         }
 
         /// <inheritdoc/>
         public T Deserialize<T>(Stream source, T value)
         {
-            return (T)_model.Deserialize(source, value, typeof(T));
+            return (T)Model.Deserialize(source, value, typeof(T));
         }
     }
 }
