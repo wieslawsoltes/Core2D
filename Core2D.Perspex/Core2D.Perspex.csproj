@@ -484,6 +484,10 @@
       <Project>{08E4E8BF-E513-4A8D-835C-1EED6ECB4A21}</Project>
       <Name>Serializer.Newtonsoft</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Dependencies\Serializer.ProtoBuf\Serializer.ProtoBuf.csproj">
+      <Project>{83191601-fcac-48a7-abf9-2179fec1b2ce}</Project>
+      <Name>Serializer.ProtoBuf</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Dependencies\Serializer.Xaml\Serializer.Xaml.csproj">
       <Project>{5b85143e-a53c-4126-8666-031a3172efdf}</Project>
       <Name>Serializer.Xaml</Name>
