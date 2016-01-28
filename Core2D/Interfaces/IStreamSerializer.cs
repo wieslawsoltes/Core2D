@@ -14,15 +14,15 @@ namespace Core2D
         /// </summary>
         /// <typeparam name="T">The object type.</typeparam>
         /// <param name="destination">The destination stream.</param>
-        /// <param name="value">The existing object instance (which may be null).</param>
+        /// <param name="value">The object instance.</param>
         void Serialize<T>(Stream destination, T value);
 
         /// <summary>
-        /// Deserialize the text string to object.
+        /// Deserialize the source stream to object.
         /// </summary>
         /// <typeparam name="T">The object type.</typeparam>
         /// <param name="source">The source stream.</param>
-        /// <param name="value">The existing object instance.</param>
+        /// <param name="value">The existing object instance (which may be null).</param>
         /// <returns>The new instance of object of type <typeparamref name="T"/>.</returns>
         T Deserialize<T>(Stream source, T value);
     }
