@@ -387,11 +387,11 @@ namespace Core2D
         {
             try
             {
-                if (_fileIO != null && _jsonSerializer != null)
+                if (_fileIO != null && _protoBufSerializer != null)
                 {
                     if (!string.IsNullOrEmpty(path) && System.IO.File.Exists(path))
                     {
-                        var project = Project.Open(path, _fileIO, _jsonSerializer);
+                        var project = Project.Open(path, _fileIO, _protoBufSerializer);
                         if (project != null)
                         {
                             Unload();
@@ -424,9 +424,9 @@ namespace Core2D
         {
             try
             {
-                if (_project != null && _fileIO != null && _jsonSerializer != null)
+                if (_project != null && _fileIO != null && _protoBufSerializer != null)
                 {
-                    Project.Save(_project, path, _fileIO, _jsonSerializer);
+                    Project.Save(_project, path, _fileIO, _protoBufSerializer);
                     AddRecent(path, _project.Name);
 
                     if (string.IsNullOrEmpty(_projectPath))
