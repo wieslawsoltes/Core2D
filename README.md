@@ -14,10 +14,11 @@ Core2D is an application for making data driven 2D diagrams.
 
 ## Data Formats
 
-* Project files are stored in `zip` archives.
-* The project data is loaded/saved as `Json` from `zip` archives.
-* The image data is saved in `zip` archives as files.
-* Project resources can be defined in `Json` or `Xaml` format. 
+* Project files are stored as `zip` archives.
+* The project data is stored as `ProtoBuf` or `Json` in `zip` archives.
+* The image data is stored  as files in `zip` archives.
+* Project resources can be defined in `ProtoBuf`, `Json` or `Xaml` format.
+* `ProtoBuf` format is supported for imported and exported of resources. 
 * `Json` format is supported for imported and exported of resources. 
 * `Xaml` format is supported for imported and exported of resources. 
 * Database's records can be imported, exported and updated from `csv` file format.
@@ -39,6 +40,7 @@ The core library and editor are portable and should work on all platforms where 
 * Common
   * System.Collections.Immutable
   * Portable.Xaml
+  * protobuf-net
   * Newtonsoft.Json
   * CsvHelper
   * netdxf (Currently using git submodule as NuGet version is outdated.)

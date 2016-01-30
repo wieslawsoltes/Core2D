@@ -8,70 +8,56 @@ namespace Core2D.UnitTests
     {
         [Fact(Skip = "Need to write test.")]
         [Trait("Core2D", "Project")]
-        public void Open_From_Path()
+        public void Open_From_Path_Using_IStreamSerializer()
         {
 
         }
 
         [Fact(Skip = "Need to write test.")]
         [Trait("Core2D", "Project")]
-        public void Open_From_Stream()
+        public void Open_From_Stream_Using_IStreamSerializer()
         {
 
         }
 
         [Fact(Skip = "Need to write test.")]
         [Trait("Core2D", "Project")]
-        public void Save_To_Path()
+        public void Save_To_Path_Using_IStreamSerializer()
         {
 
         }
 
         [Fact(Skip = "Need to write test.")]
         [Trait("Core2D", "Project")]
-        public void Save_To_Stream()
+        public void Save_To_Stream_Using_IStreamSerializer()
         {
 
         }
 
         [Fact(Skip = "Need to write test.")]
         [Trait("Core2D", "Project")]
-        public void ReadBinary_Read_All_Bytes_From_Stream()
+        public void Open_From_Path_Using_ITextSerializer()
         {
 
         }
 
         [Fact(Skip = "Need to write test.")]
         [Trait("Core2D", "Project")]
-        public void WriteBinary_Write_All_Bytes_To_Stream()
+        public void Open_From_Stream_Using_ITextSerializer()
         {
 
         }
 
         [Fact(Skip = "Need to write test.")]
         [Trait("Core2D", "Project")]
-        public void ReadUtf8Text_Read_String_From_Stream()
+        public void Save_To_Path_Using_ITextSerializer()
         {
 
         }
 
         [Fact(Skip = "Need to write test.")]
         [Trait("Core2D", "Project")]
-        public void WriteUtf8Text_Write_String_To_Stream()
-        {
-
-        }
-
-        [Fact(Skip = "Need to write test.")]
-        [Trait("Core2D", "Project")]
-        public void ReadUtf8Text_Read_String_From_Path()
-        {
-
-        }
-
-        [Fact(Skip = "Need to write test.")]
-        [Trait("Core2D", "Project")]
-        public void WriteUtf8Text_Write_String_To_Path()
+        public void Save_To_Stream_Using_ITextSerializer()
         {
 
         }

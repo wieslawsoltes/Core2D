@@ -17,6 +17,22 @@ namespace Core2D.UnitTests
 
         [Fact]
         [Trait("Core2D", "Data")]
+        public void Columns_Not_Null()
+        {
+            var target = new Database();
+            Assert.NotNull(target.Columns);
+        }
+
+        [Fact]
+        [Trait("Core2D", "Data")]
+        public void Records_Not_Null()
+        {
+            var target = new Database();
+            Assert.NotNull(target.Records);
+        }
+
+        [Fact]
+        [Trait("Core2D", "Data")]
         public void FromFields_Existing_Record_Ids()
         {
             var fields = new string[][]
@@ -80,7 +96,7 @@ namespace Core2D.UnitTests
             var destinationFields = new string[][]
             {
                 new string[] { "Column0", "Column1", "Column2" },
-                new string[] { "Row0Value0", "Row0Value1", "Row0Value2" }, 
+                new string[] { "Row0Value0", "Row0Value1", "Row0Value2" },
                 new string[] { "Row1Value0", "Row1Value1", "Row1Value2" },
                 new string[] { "Row2Value0", "Row2Value1", "Row2Value2" }
             };

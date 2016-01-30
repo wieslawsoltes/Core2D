@@ -9,7 +9,7 @@ namespace Dependencies
     /// <summary>
     /// Json serializer.
     /// </summary>
-    public class NewtonsoftSerializer : ITextSerializer
+    public class NewtonsoftTextSerializer : ITextSerializer
     {
         /// <summary>
         /// The class library assembly name.
@@ -29,7 +29,7 @@ namespace Dependencies
         /// <summary>
         /// Initializes static data.
         /// </summary>
-        static NewtonsoftSerializer()
+        static NewtonsoftTextSerializer()
         {
             Settings = new JsonSerializerSettings()
             {

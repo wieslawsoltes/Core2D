@@ -23,7 +23,7 @@ namespace Core2D
     /// </summary>
     [ContentProperty(nameof(Shapes))]
     [RuntimeNameProperty(nameof(Name))]
-    public class Layer : ObservableResource
+    public class Layer : Selectable
     {
         /// <summary>
         /// Invalidate layer event.

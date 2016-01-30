@@ -20,6 +20,16 @@ namespace Core2D
         private Record _currentRecord;
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="Database"/> class.
+        /// </summary>
+        public Database()
+            : base()
+        {
+            _columns = ImmutableArray.Create<Column>();
+            _records = ImmutableArray.Create<Record>();
+        }
+
+        /// <summary>
         /// Default Id column name.
         /// </summary>
         public const string DefaultIdColumnName = "Id";

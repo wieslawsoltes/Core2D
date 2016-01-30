@@ -13,5 +13,21 @@ namespace Core2D.UnitTests
             var target = new Record();
             Assert.True(target is ObservableObject);
         }
+
+        [Fact]
+        [Trait("Core2D", "Data")]
+        public void Columns_Not_Null()
+        {
+            var target = new Record();
+            Assert.NotNull(target.Columns);
+        }
+
+        [Fact]
+        [Trait("Core2D", "Data")]
+        public void Values_Not_Null()
+        {
+            var target = new Record();
+            Assert.NotNull(target.Values);
+        }
     }
 }

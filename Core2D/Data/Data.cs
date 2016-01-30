@@ -50,7 +50,7 @@ namespace Core2D
         /// </remarks>
         /// <param name="name">The property value.</param>
         /// <returns>The property value.</returns>
-        public object this[string name]
+        public string this[string name]
         {
             get
             {

@@ -11,7 +11,7 @@ namespace Core2D
     /// </summary>
     [ContentProperty(nameof(Layers))]
     [RuntimeNameProperty(nameof(Name))]
-    public abstract class Container : ObservableResource
+    public abstract class Container : Selectable
     {
         private string _name;
         private double _width;

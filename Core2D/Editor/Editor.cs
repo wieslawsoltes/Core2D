@@ -30,6 +30,7 @@ namespace Core2D
         private IView _view;
         private IProjectFactory _projectFactory;
         private ITextClipboard _textClipboard;
+        private IStreamSerializer _protoBufSerializer;
         private ITextSerializer _jsonSerializer;
         private ITextSerializer _xamlSerializer;
         private IFileWriter _pdfWriter;
@@ -193,6 +194,15 @@ namespace Core2D
         {
             get { return _textClipboard; }
             set { Update(ref _textClipboard, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets ProtoBuf serializer.
+        /// </summary>
+        public IStreamSerializer ProtoBufSerializer
+        {
+            get { return _protoBufSerializer; }
+            set { Update(ref _protoBufSerializer, value); }
         }
 
         /// <summary>
@@ -377,11 +387,11 @@ namespace Core2D
         {
             try
             {
-                if (_fileIO != null && _jsonSerializer != null)
+                if (_fileIO != null && _protoBufSerializer != null)
                 {
                     if (!string.IsNullOrEmpty(path) && System.IO.File.Exists(path))
                     {
-                        var project = Project.Open(path, _fileIO, _jsonSerializer);
+                        var project = Project.Open(path, _fileIO, _protoBufSerializer);
                         if (project != null)
                         {
                             Unload();
@@ -414,9 +424,9 @@ namespace Core2D
         {
             try
             {
-                if (_project != null && _fileIO != null && _jsonSerializer != null)
+                if (_project != null && _fileIO != null && _protoBufSerializer != null)
                 {
-                    Project.Save(_project, path, _fileIO, _jsonSerializer);
+                    Project.Save(_project, path, _fileIO, _protoBufSerializer);
                     AddRecent(path, _project.Name);
 
                     if (string.IsNullOrEmpty(_projectPath))
@@ -1783,7 +1793,7 @@ namespace Core2D
         /// Notifies when selected project tree item changed.
         /// </summary>
         /// <param name="item">The selected item.</param>
-        public void OnSelectedItemChanged(object item)
+        public void OnSelectedItemChanged(Selectable item)
         {
             if (_project != null)
             {
@@ -4266,7 +4276,7 @@ namespace Core2D
                     (key) => IsEditMode());
 
             Commands.SelectedItemChangedCommand =
-                Command<object>.Create(
+                Command<Selectable>.Create(
                     (item) => OnSelectedItemChanged(item),
                     (item) => IsEditMode());
 

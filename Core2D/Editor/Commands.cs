@@ -515,7 +515,7 @@ namespace Core2D
         /// <summary>
         /// Notifies when selected project tree item changed.
         /// </summary>
-        public static ICoreCommand<object> SelectedItemChangedCommand { get; set; }
+        public static ICoreCommand<Selectable> SelectedItemChangedCommand { get; set; }
 
         /// <summary>
         /// Add page.

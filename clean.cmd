@@ -42,6 +42,12 @@ rmdir /Q /S Dependencies\Renderer.Wpf\obj
 rmdir /Q /S Dependencies\Serializer.Newtonsoft\bin
 rmdir /Q /S Dependencies\Serializer.Newtonsoft\obj
 
+rmdir /Q /S Dependencies\Serializer.ProtoBuf\bin
+rmdir /Q /S Dependencies\Serializer.ProtoBuf\obj
+
+rmdir /Q /S Dependencies\Serializer.ProtoBuf.Generate\bin
+rmdir /Q /S Dependencies\Serializer.ProtoBuf.Generate\obj
+
 rmdir /Q /S Dependencies\Serializer.Xaml\bin
 rmdir /Q /S Dependencies\Serializer.Xaml\obj
 
@@ -61,5 +67,7 @@ rmdir /Q /S Core2D.Wpf\bin
 rmdir /Q /S Core2D.Wpf\obj
 
 rmdir /Q /S packages
+
+del /Q Dependencies/Serializer.ProtoBuf.Generate/Serializer/*.dll
 
 pause
