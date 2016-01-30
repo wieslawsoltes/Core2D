@@ -11,7 +11,7 @@ namespace Core2D
     public class Property : ObservableObject
     {
         private string _name;
-        private object _value;
+        private string _value;
         private Data _owner;
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace Core2D
         /// <summary>
         /// Gets or sets property value.
         /// </summary>
-        public object Value
+        public string Value
         {
             get { return _value; }
             set { Update(ref _value, value); }
@@ -48,7 +48,7 @@ namespace Core2D
         /// <param name="name">The property name.</param>
         /// <param name="value">The property value.</param>
         /// <returns>The new instance of the <see cref="Property"/> class.</returns>
-        public static Property Create(Data owner, string name, object value)
+        public static Property Create(Data owner, string name, string value)
         {
             return new Property()
             {

@@ -36,7 +36,7 @@ namespace Core2D
         /// <remarks>If property with the specified key does not exist it is created.</remarks>
         /// <param name="name">The property name value.</param>
         /// <returns>The property value.</returns>
-        public object this[string name]
+        public string this[string name]
         {
             get
             {
