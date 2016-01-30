@@ -30,6 +30,7 @@ namespace Core2D
         private IView _view;
         private IProjectFactory _projectFactory;
         private ITextClipboard _textClipboard;
+        private IStreamSerializer _protoBufSerializer;
         private ITextSerializer _jsonSerializer;
         private ITextSerializer _xamlSerializer;
         private IFileWriter _pdfWriter;
@@ -193,6 +194,15 @@ namespace Core2D
         {
             get { return _textClipboard; }
             set { Update(ref _textClipboard, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets ProtoBuf serializer.
+        /// </summary>
+        public IStreamSerializer ProtoBufSerializer
+        {
+            get { return _protoBufSerializer; }
+            set { Update(ref _protoBufSerializer, value); }
         }
 
         /// <summary>
