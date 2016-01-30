@@ -161,7 +161,7 @@ namespace Core2D.Wpf
                 ProjectFactory = new ProjectFactory(),
                 TextClipboard = new TextClipboard(),
                 ProtoBufSerializer = new ProtoBufSerializer(),
-                JsonSerializer = new NewtonsoftSerializer(),
+                JsonSerializer = new NewtonsoftTextSerializer(),
                 XamlSerializer = new CoreXamlSerializer(),
                 PdfWriter = new PdfWriter(),
                 DxfWriter = new DxfWriter(),

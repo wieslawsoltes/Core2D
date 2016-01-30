@@ -45,7 +45,7 @@ namespace Core2D.Perspex
                 new PerspexRenderer(),
                 new TextClipboard(),
                 new ProtoBufSerializer(),
-                new NewtonsoftSerializer(),
+                new NewtonsoftTextSerializer(),
                 new CoreXamlSerializer());
         }
 
@@ -201,7 +201,7 @@ namespace Core2D.Perspex
                 ProjectFactory = new ProjectFactory(),
                 TextClipboard = new TextClipboard(),
                 ProtoBufSerializer = new ProtoBufSerializer(),
-                JsonSerializer = new NewtonsoftSerializer(),
+                JsonSerializer = new NewtonsoftTextSerializer(),
                 XamlSerializer = new CoreXamlSerializer(),
                 PdfWriter = new PdfWriter(),
                 DxfWriter = new DxfWriter(),
