@@ -68,4 +68,6 @@ rmdir /Q /S Core2D.Wpf\obj
 
 rmdir /Q /S packages
 
+del /Q Dependencies/Serializer.ProtoBuf.Generate/Serializer/*.dll
+
 pause
