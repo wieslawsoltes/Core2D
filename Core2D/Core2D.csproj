@@ -55,6 +55,7 @@
     <Compile Include="Interfaces\IStreamSerializer.cs" />
     <Compile Include="IO\FileSystem.cs" />
     <Compile Include="IO\IFileSystem.cs" />
+    <Compile Include="Project\Selectable.cs" />
     <Compile Include="Xaml\Collections\Groups.cs" />
     <Compile Include="Xaml\Collections\Shapes.cs" />
     <Compile Include="Xaml\Collections\Styles.cs" />
