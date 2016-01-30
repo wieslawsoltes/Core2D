@@ -11,18 +11,9 @@ namespace Core2D
     /// </summary>
     public class XPoint : BaseShape
     {
-        private BaseShape _shape;
         private double _x;
         private double _y;
-
-        /// <summary>
-        /// Gets or sets point template shape.
-        /// </summary>
-        public BaseShape Shape
-        {
-            get { return _shape; }
-            set { Update(ref _shape, value); }
-        }
+        private BaseShape _shape;
 
         /// <summary>
         /// Gets or sets X coordinate of point.
@@ -40,6 +31,15 @@ namespace Core2D
         {
             get { return _y; }
             set { Update(ref _y, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets point template shape.
+        /// </summary>
+        public BaseShape Shape
+        {
+            get { return _shape; }
+            set { Update(ref _shape, value); }
         }
 
         /// <inheritdoc/>
@@ -100,7 +100,7 @@ namespace Core2D
                 Shape = shape
             };
         }
-        
+
         /// <summary>
         /// Creates a new <see cref="XPoint"/> instance.
         /// </summary>
@@ -117,7 +117,7 @@ namespace Core2D
                 Shape = null
             };
         }
-        
+
         /// <summary>
         /// Clone current instance of the <see cref="XPoint"/>.
         /// </summary>
@@ -130,7 +130,7 @@ namespace Core2D
             if (this.Data.Properties.Length > 0)
             {
                 var builder = data.Properties.ToBuilder();
-                foreach (var property in this.Data.Properties) 
+                foreach (var property in this.Data.Properties)
                 {
                     builder.Add(
                         Property.Create(
