@@ -19,6 +19,16 @@ namespace Core2D
         private Database _owner;
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="Record"/> class.
+        /// </summary>
+        public Record()
+            : base()
+        {
+            _columns = ImmutableArray.Create<Column>();
+            _values = ImmutableArray.Create<Value>();
+        }
+
+        /// <summary>
         /// Gets or sets record Id.
         /// </summary>
         public Guid Id
