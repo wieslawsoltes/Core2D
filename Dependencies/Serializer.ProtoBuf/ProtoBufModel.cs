@@ -276,52 +276,6 @@ namespace Dependencies
 
         public static RuntimeTypeModel AddProject(this RuntimeTypeModel model)
         {
-            var layer = model.Add(typeof(Layer), false);
-            layer.AsReferenceDefault = true;
-            layer.AddField(1, nameof(Layer.Name));
-            layer.AddField(2, nameof(Layer.Owner)).AsReference = true;
-            layer.AddField(3, nameof(Layer.IsVisible));
-            layer.AddField(4, nameof(Layer.Shapes)).AsReference = true;
-
-            var container = model.Add(typeof(Container), false);
-            container.AsReferenceDefault = true;
-            container.AddField(1, nameof(Container.Name));
-            container.AddField(2, nameof(Container.Width));
-            container.AddField(3, nameof(Container.Height));
-            container.AddField(4, nameof(Container.Background)).AsReference = true;
-            container.AddField(5, nameof(Container.Layers)).AsReference = true;
-            container.AddField(6, nameof(Container.CurrentLayer)).AsReference = true;
-            container.AddField(7, nameof(Container.WorkingLayer)).AsReference = true;
-            container.AddField(8, nameof(Container.HelperLayer)).AsReference = true;
-            container.AddField(9, nameof(Container.CurrentShape)).AsReference = true;
-            container.AddField(10, nameof(Container.Template)).AsReference = true;
-            container.AddSubType(101, typeof(Template));
-            container.AddSubType(102, typeof(Page));
-
-            // Template : Container
-
-            // Page : Container
-            model[typeof(Page)].AddField(1, nameof(Page.Data)).AsReference = true;
-            model[typeof(Page)].AddField(2, nameof(Page.IsExpanded));
-
-            var shapeStyleLibrary = model.Add(typeof(Library<ShapeStyle>), false);
-            shapeStyleLibrary.AsReferenceDefault = true;
-            shapeStyleLibrary.AddField(1, nameof(Library<ShapeStyle>.Name));
-            shapeStyleLibrary.AddField(2, nameof(Library<ShapeStyle>.Items)).AsReference = true;
-            shapeStyleLibrary.AddField(3, nameof(Library<ShapeStyle>.Selected)).AsReference = true;
-
-            var groupLibrary = model.Add(typeof(Library<XGroup>), false);
-            groupLibrary.AsReferenceDefault = true;
-            groupLibrary.AddField(1, nameof(Library<XGroup>.Name));
-            groupLibrary.AddField(2, nameof(Library<XGroup>.Items)).AsReference = true;
-            groupLibrary.AddField(3, nameof(Library<XGroup>.Selected)).AsReference = true;
-
-            var document = model.Add(typeof(Document), false);
-            document.AsReferenceDefault = true;
-            document.AddField(1, nameof(Document.Name));
-            document.AddField(2, nameof(Document.IsExpanded));
-            document.AddField(3, nameof(Document.Pages)).AsReference = true;
-
             var options = model.Add(typeof(Options), false);
             options.AsReferenceDefault = true;
             options.AddField(1, nameof(Options.SnapToGrid));
@@ -340,23 +294,72 @@ namespace Dependencies
             options.AddField(14, nameof(Options.SelectionStyle)).AsReference = true;
             options.AddField(15, nameof(Options.HelperStyle)).AsReference = true;
 
-            var project = model.Add(typeof(Project), false);
-            project.AsReferenceDefault = true;
-            project.AddField(1, nameof(Project.Name));
-            project.AddField(2, nameof(Project.Options)).AsReference = true;
-            project.AddField(3, nameof(Project.History)).AsReference = true;
-            project.AddField(4, nameof(Project.StyleLibraries)).AsReference = true;
-            project.AddField(5, nameof(Project.GroupLibraries)).AsReference = true;
-            project.AddField(6, nameof(Project.Databases)).AsReference = true;
-            project.AddField(7, nameof(Project.Templates)).AsReference = true;
-            project.AddField(8, nameof(Project.Documents)).AsReference = true;
-            project.AddField(9, nameof(Project.CurrentStyleLibrary)).AsReference = true;
-            project.AddField(10, nameof(Project.CurrentGroupLibrary)).AsReference = true;
-            project.AddField(11, nameof(Project.CurrentDatabase)).AsReference = true;
-            project.AddField(12, nameof(Project.CurrentTemplate)).AsReference = true;
-            project.AddField(13, nameof(Project.CurrentDocument)).AsReference = true;
-            project.AddField(14, nameof(Project.CurrentContainer)).AsReference = true;
-            project.AddField(15, nameof(Project.Selected)).AsReference = true;
+            var shapeStyleLibrary = model.Add(typeof(Library<ShapeStyle>), false);
+            shapeStyleLibrary.AsReferenceDefault = true;
+            shapeStyleLibrary.AddField(1, nameof(Library<ShapeStyle>.Name));
+            shapeStyleLibrary.AddField(2, nameof(Library<ShapeStyle>.Items)).AsReference = true;
+            shapeStyleLibrary.AddField(3, nameof(Library<ShapeStyle>.Selected)).AsReference = true;
+
+            var groupLibrary = model.Add(typeof(Library<XGroup>), false);
+            groupLibrary.AsReferenceDefault = true;
+            groupLibrary.AddField(1, nameof(Library<XGroup>.Name));
+            groupLibrary.AddField(2, nameof(Library<XGroup>.Items)).AsReference = true;
+            groupLibrary.AddField(3, nameof(Library<XGroup>.Selected)).AsReference = true;
+
+            var selectable = model.Add(typeof(Selectable), false);
+            selectable.AsReferenceDefault = true;
+            selectable.AddSubType(101, typeof(Layer));
+            selectable.AddSubType(102, typeof(Container));
+            selectable.AddSubType(103, typeof(Document));
+            selectable.AddSubType(104, typeof(Project));
+
+            // Layer : Selectable
+            model[typeof(Layer)].AddField(1, nameof(Layer.Name));
+            model[typeof(Layer)].AddField(2, nameof(Layer.Owner)).AsReference = true;
+            model[typeof(Layer)].AddField(3, nameof(Layer.IsVisible));
+            model[typeof(Layer)].AddField(4, nameof(Layer.Shapes)).AsReference = true;
+
+            // Container : Selectable
+            model[typeof(Container)].AddField(1, nameof(Container.Name));
+            model[typeof(Container)].AddField(2, nameof(Container.Width));
+            model[typeof(Container)].AddField(3, nameof(Container.Height));
+            model[typeof(Container)].AddField(4, nameof(Container.Background)).AsReference = true;
+            model[typeof(Container)].AddField(5, nameof(Container.Layers)).AsReference = true;
+            model[typeof(Container)].AddField(6, nameof(Container.CurrentLayer)).AsReference = true;
+            model[typeof(Container)].AddField(7, nameof(Container.WorkingLayer)).AsReference = true;
+            model[typeof(Container)].AddField(8, nameof(Container.HelperLayer)).AsReference = true;
+            model[typeof(Container)].AddField(9, nameof(Container.CurrentShape)).AsReference = true;
+            model[typeof(Container)].AddField(10, nameof(Container.Template)).AsReference = true;
+            model[typeof(Container)].AddSubType(101, typeof(Template));
+            model[typeof(Container)].AddSubType(102, typeof(Page));
+
+            // Template : Container
+
+            // Page : Container
+            model[typeof(Page)].AddField(1, nameof(Page.Data)).AsReference = true;
+            model[typeof(Page)].AddField(2, nameof(Page.IsExpanded));
+
+            // Document : Selectable
+            model[typeof(Document)].AddField(1, nameof(Document.Name));
+            model[typeof(Document)].AddField(2, nameof(Document.IsExpanded));
+            model[typeof(Document)].AddField(3, nameof(Document.Pages)).AsReference = true;
+
+            // Project : Selectable
+            model[typeof(Project)].AddField(1, nameof(Project.Name));
+            model[typeof(Project)].AddField(2, nameof(Project.Options)).AsReference = true;
+            model[typeof(Project)].AddField(3, nameof(Project.History)).AsReference = true;
+            model[typeof(Project)].AddField(4, nameof(Project.StyleLibraries)).AsReference = true;
+            model[typeof(Project)].AddField(5, nameof(Project.GroupLibraries)).AsReference = true;
+            model[typeof(Project)].AddField(6, nameof(Project.Databases)).AsReference = true;
+            model[typeof(Project)].AddField(7, nameof(Project.Templates)).AsReference = true;
+            model[typeof(Project)].AddField(8, nameof(Project.Documents)).AsReference = true;
+            model[typeof(Project)].AddField(9, nameof(Project.CurrentStyleLibrary)).AsReference = true;
+            model[typeof(Project)].AddField(10, nameof(Project.CurrentGroupLibrary)).AsReference = true;
+            model[typeof(Project)].AddField(11, nameof(Project.CurrentDatabase)).AsReference = true;
+            model[typeof(Project)].AddField(12, nameof(Project.CurrentTemplate)).AsReference = true;
+            model[typeof(Project)].AddField(13, nameof(Project.CurrentDocument)).AsReference = true;
+            model[typeof(Project)].AddField(14, nameof(Project.CurrentContainer)).AsReference = true;
+            model[typeof(Project)].AddField(15, nameof(Project.Selected)).AsReference = true;
 
             return model;
         }
