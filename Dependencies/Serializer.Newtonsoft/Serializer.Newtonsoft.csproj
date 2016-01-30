@@ -57,7 +57,7 @@
     <Compile Include="Converters\FontStyleConverter.cs" />
     <Compile Include="Converters\ShapeStateConverter.cs" />
     <Compile Include="JsonSerializationBinder.cs" />
-    <Compile Include="NewtonsoftSerializer.cs" />
+    <Compile Include="NewtonsoftTextSerializer.cs" />
     <Compile Include="ProjectContractResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
