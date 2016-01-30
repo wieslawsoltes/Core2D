@@ -71,6 +71,7 @@
     <Compile Include="Data\PropertyTests.cs" />
     <Compile Include="Data\RecordTests.cs" />
     <Compile Include="Data\ValueTests.cs" />
+    <Compile Include="IO\FileSystemTests.cs" />
     <Compile Include="Project\ContainerTests.cs" />
     <Compile Include="Project\DocumentTests.cs" />
     <Compile Include="Project\LayerTests.cs" />
