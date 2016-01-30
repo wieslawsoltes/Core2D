@@ -51,7 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Editor\History\IHistory.cs" />
+    <Compile Include="Project\History\IHistory.cs" />
     <Compile Include="Interfaces\IStreamSerializer.cs" />
     <Compile Include="IO\FileSystem.cs" />
     <Compile Include="IO\IFileSystem.cs" />
@@ -73,13 +73,13 @@
     <Compile Include="Editor\Input\ICoreCommand.cs" />
     <Compile Include="Editor\Input\ICoreCommand`1.cs" />
     <Compile Include="Editor\ToolBase.cs" />
-    <Compile Include="Editor\History\History.cs" />
+    <Compile Include="Project\History\History.cs" />
     <Compile Include="Editor\PathTool.cs" />
     <Compile Include="Editor\Recent\Recent.cs" />
     <Compile Include="Editor\Recent\RecentProject.cs" />
     <Compile Include="Editor\ToolState.cs" />
     <Compile Include="Editor\Tool.cs" />
-    <Compile Include="Editor\History\UndoRedo.cs" />
+    <Compile Include="Project\History\UndoRedo.cs" />
     <Compile Include="Editor\Designer\DesignerContext.cs" />
     <Compile Include="Editor\Editor.cs" />
     <Compile Include="Editor\Commands.cs" />
