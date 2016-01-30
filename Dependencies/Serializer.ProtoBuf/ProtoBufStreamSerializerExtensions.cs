@@ -6,7 +6,7 @@ using Core2D;
 namespace Dependencies
 {
     /// <summary>
-    /// ProtoBuf serializer extensions methods.
+    /// ProtoBuf stream serializer extensions methods.
     /// </summary>
     public static class ProtoBufSerializerExtensions
     {
@@ -26,7 +26,7 @@ namespace Dependencies
         }
 
         /// <summary>
-        ///  Deserialize the file from path to object.
+        /// Deserialize the file from path to object.
         /// </summary>
         /// <typeparam name="T">The object type.</typeparam>
         /// <param name="serializer">The protobuf serializer.</param>

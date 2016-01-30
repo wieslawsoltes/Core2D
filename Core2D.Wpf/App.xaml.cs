@@ -160,7 +160,7 @@ namespace Core2D.Wpf
                 Renderers = new Renderer[] { new WpfRenderer() },
                 ProjectFactory = new ProjectFactory(),
                 TextClipboard = new TextClipboard(),
-                ProtoBufSerializer = new ProtoBufSerializer(),
+                ProtoBufSerializer = new ProtoBufStreamSerializer(),
                 JsonSerializer = new NewtonsoftTextSerializer(),
                 XamlSerializer = new CoreXamlSerializer(),
                 PdfWriter = new PdfWriter(),

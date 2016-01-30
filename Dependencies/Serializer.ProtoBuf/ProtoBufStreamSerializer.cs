@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System.IO;
-using ProtoBuf.Meta;
 using Core2D;
 
 namespace Dependencies
@@ -9,31 +8,23 @@ namespace Dependencies
     /// <summary>
     /// ProtoBuf serializer.
     /// </summary>
-    public class ProtoBufSerializer : IStreamSerializer
+    public class ProtoBufStreamSerializer : IStreamSerializer
     {
         /// <summary>
-        /// The ProtoBuf type model.
+        /// The compiled ProtoBuf serializer.
         /// </summary>
-        public static TypeModel Model;
-
-        /// <summary>
-        /// Initializes static data.
-        /// </summary>
-        static ProtoBufSerializer()
-        {
-            Model = ProtoBufModel.ForProject().Compile();
-        }
+        public static ProtoBufSerializer Serializer = new ProtoBufSerializer();
 
         /// <inheritdoc/>
         public void Serialize<T>(Stream destination, T value)
         {
-            Model.Serialize(destination, value);
+            Serializer.Serialize(destination, value);
         }
 
         /// <inheritdoc/>
         public T Deserialize<T>(Stream source, T value)
         {
-            return (T)Model.Deserialize(source, value, typeof(T));
+            return (T)Serializer.Deserialize(source, value, typeof(T));
         }
     }
 }
