@@ -141,15 +141,12 @@ namespace Dependencies
             shape.AddField(7, nameof(BaseShape.Data)).AsReference = true;
             shape.AddSubType(101, typeof(XPoint));
             shape.AddSubType(102, typeof(XLine));
-            shape.AddSubType(103, typeof(XRectangle));
-            shape.AddSubType(104, typeof(XEllipse));
-            shape.AddSubType(105, typeof(XBezier));
-            shape.AddSubType(106, typeof(XQBezier));
-            shape.AddSubType(107, typeof(XArc));
-            shape.AddSubType(108, typeof(XPath));
-            shape.AddSubType(109, typeof(XText));
-            shape.AddSubType(110, typeof(XImage));
-            shape.AddSubType(111, typeof(XGroup));
+            shape.AddSubType(103, typeof(XBezier));
+            shape.AddSubType(104, typeof(XQBezier));
+            shape.AddSubType(105, typeof(XArc));
+            shape.AddSubType(106, typeof(XPath));
+            shape.AddSubType(107, typeof(XText));
+            shape.AddSubType(108, typeof(XGroup));
 
             // XPoint : BaseShape
             model[typeof(XPoint)].AddField(1, nameof(XPoint.X));
@@ -164,6 +161,9 @@ namespace Dependencies
             model[typeof(XText)].AddField(1, nameof(XText.TopLeft)).AsReference = true;
             model[typeof(XText)].AddField(2, nameof(XText.BottomRight)).AsReference = true;
             model[typeof(XText)].AddField(3, nameof(XText.Text));
+            model[typeof(XText)].AddSubType(101, typeof(XRectangle));
+            model[typeof(XText)].AddSubType(102, typeof(XEllipse));
+            model[typeof(XText)].AddSubType(103, typeof(XImage));
 
             // XRectangle : BaseShape
             model[typeof(XRectangle)].AddField(1, nameof(XRectangle.IsGrid));
