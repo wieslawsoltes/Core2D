@@ -11,7 +11,7 @@ namespace Core2D
     /// </summary>
     [ContentProperty(nameof(Documents))]
     [RuntimeNameProperty(nameof(Name))]
-    public partial class Project : ObservableResource
+    public partial class Project : Selectable
     {
         private string _name;
         private Options _options;
@@ -27,7 +27,7 @@ namespace Core2D
         private Template _currentTemplate;
         private Document _currentDocument;
         private Container _currentContainer;
-        private object _selected;
+        private Selectable _selected;
 
         /// <summary>
         /// Gets or sets project name.
@@ -158,7 +158,7 @@ namespace Core2D
         /// <summary>
         /// Gets or sets currently selected object.
         /// </summary>
-        public object Selected
+        public Selectable Selected
         {
             get { return _selected; }
             set
@@ -241,7 +241,7 @@ namespace Core2D
         /// Set selected value.
         /// </summary>
         /// <param name="value">The value instance.</param>
-        public void SetSelected(object value)
+        public void SetSelected(Selectable value)
         {
             if (value != null)
             {

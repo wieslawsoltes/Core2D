@@ -10,7 +10,7 @@ namespace Core2D
     /// </summary>
     [ContentProperty(nameof(Pages))]
     [RuntimeNameProperty(nameof(Name))]
-    public class Document : ObservableResource
+    public class Document : Selectable
     {
         private string _name;
         private bool _isExpanded = true;

@@ -8,7 +8,7 @@ namespace Core2D
     /// <summary>
     /// Project <see cref="IImageCache"/> implementation.
     /// </summary>
-    public partial class Project : ObservableResource, IImageCache
+    public partial class Project : Selectable, IImageCache
     {
         private IDictionary<string, byte[]> _images = new Dictionary<string, byte[]>();
 
