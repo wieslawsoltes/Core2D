@@ -21,7 +21,7 @@ namespace Dependencies
         /// </summary>
         static ProtoBufSerializer()
         {
-            Model = ProtoBufModel.Create().Compile();
+            Model = ProtoBufModel.ForProject().Compile();
         }
 
         /// <inheritdoc/>
