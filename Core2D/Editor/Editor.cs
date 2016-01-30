@@ -1793,7 +1793,7 @@ namespace Core2D
         /// Notifies when selected project tree item changed.
         /// </summary>
         /// <param name="item">The selected item.</param>
-        public void OnSelectedItemChanged(object item)
+        public void OnSelectedItemChanged(Selectable item)
         {
             if (_project != null)
             {
@@ -4276,7 +4276,7 @@ namespace Core2D
                     (key) => IsEditMode());
 
             Commands.SelectedItemChangedCommand =
-                Command<object>.Create(
+                Command<Selectable>.Create(
                     (item) => OnSelectedItemChanged(item),
                     (item) => IsEditMode());
 
