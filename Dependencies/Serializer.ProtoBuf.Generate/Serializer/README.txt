@@ -1,0 +1,1 @@
+Output directory for generated ProtoBuf serializer dll during post-build event.
