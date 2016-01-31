@@ -18,9 +18,9 @@ Core2D is an application for making data driven 2D diagrams.
 * The project data is stored as `ProtoBuf` or `Json` in `zip` archives.
 * The image data is stored  as files in `zip` archives.
 * Project resources can be defined in `ProtoBuf`, `Json` or `Xaml` format.
-* `ProtoBuf` format is supported for imported and exported of resources. 
-* `Json` format is supported for imported and exported of resources. 
-* `Xaml` format is supported for imported and exported of resources. 
+* `ProtoBuf` format is supported for imported and exported resources. 
+* `Json` format is supported for imported and exported resources. 
+* `Xaml` format is supported for imported and exported resources. 
 * Database's records can be imported, exported and updated from `csv` file format.
 
 ## Supported Platforms
@@ -41,6 +41,7 @@ The core library and editor are portable and should work on all platforms where 
   * System.Collections.Immutable
   * Portable.Xaml
   * protobuf-net
+  * System.Reflection.Emit
   * Newtonsoft.Json
   * CsvHelper
   * netdxf (Currently using git submodule as NuGet version is outdated.)
@@ -75,8 +76,10 @@ The core library and editor are portable and should work on all platforms where 
 
 ### Other Dependencies
 
+* [Protocol Buffers library for idiomatic .NET.](https://github.com/mgravell/protobuf-net) Needed for ProtoBuf support.
 * [Portable .NET library for reading/writing xaml files.](https://github.com/cwensley/Portable.Xaml) Needed for Xaml support.
 * [.net dxf Reader-Writer](http://netdxf.codeplex.com/) Run `git submodule update --init --recursive` in project directory.
+* [xUnit.net unit testing tool for the .NET Framework.](https://github.com/xunit/xunit) Needed to run tests.
 * [GTK# for .NET](http://www.mono-project.com/download/#download-win) Needed for Gtk on Windows.
 
 For building Core2D mirror repository is used for [.net dxf Reader-Writer](https://github.com/Core2D/netdxf)
