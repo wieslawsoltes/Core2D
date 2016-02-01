@@ -38,6 +38,7 @@ namespace Core2D
         /// </summary>
         public XPathFigure()
         {
+            StartPoint = new XPoint();
             Segments = new List<XPathSegment>();
         }
 
