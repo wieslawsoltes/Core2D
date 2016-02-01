@@ -51,7 +51,7 @@ namespace Core2D
         /// <inheritdoc/>
         public override string ToString()
         {
-            return (Points == null) || (Points.Count < 1) ? "C" + ToString(Points) : "";
+            return (Points != null) && (Points.Count >= 1) ? "C" + ToString(Points) : "";
         }
     }
 }
