@@ -35,13 +35,15 @@ namespace Dependencies
         /// <returns></returns>
         public static XPathGeometry ToXPathGeometry(this PathGeometry pg)
         {
-            var xpg = XPathGeometry.Create(
+            var geometry = XPathGeometry.Create(
                 new List<XPathFigure>(),
                 pg.FillRule == FillRule.EvenOdd ? XFillRule.EvenOdd : XFillRule.Nonzero);
 
+            var context = new XPathGeometryContext(geometry);
+
             foreach (var pf in pg.Figures)
             {
-                xpg.BeginFigure(
+                context.BeginFigure(
                     XPoint.Create(pf.StartPoint.X, pf.StartPoint.Y),
                     pf.IsFilled,
                     pf.IsClosed);
@@ -51,7 +53,7 @@ namespace Dependencies
                     if (segment is ArcSegment)
                     {
                         var arcSegment = segment as ArcSegment;
-                        xpg.ArcTo(
+                        context.ArcTo(
                             XPoint.Create(arcSegment.Point.X, arcSegment.Point.Y),
                             XPathSize.Create(arcSegment.Size.Width, arcSegment.Size.Height),
                             arcSegment.RotationAngle,
@@ -63,7 +65,7 @@ namespace Dependencies
                     else if (segment is BezierSegment)
                     {
                         var bezierSegment = segment as BezierSegment;
-                        xpg.BezierTo(
+                        context.BezierTo(
                             XPoint.Create(bezierSegment.Point1.X, bezierSegment.Point1.Y),
                             XPoint.Create(bezierSegment.Point2.X, bezierSegment.Point2.Y),
                             XPoint.Create(bezierSegment.Point3.X, bezierSegment.Point3.Y),
@@ -73,7 +75,7 @@ namespace Dependencies
                     else if (segment is LineSegment)
                     {
                         var lineSegment = segment as LineSegment;
-                        xpg.LineTo(
+                        context.LineTo(
                             XPoint.Create(lineSegment.Point.X, lineSegment.Point.Y),
                             lineSegment.IsStroked,
                             lineSegment.IsSmoothJoin);
@@ -81,7 +83,7 @@ namespace Dependencies
                     else if (segment is PolyBezierSegment)
                     {
                         var polyBezierSegment = segment as PolyBezierSegment;
-                        xpg.PolyBezierTo(
+                        context.PolyBezierTo(
                             ToXPoints(polyBezierSegment.Points),
                             polyBezierSegment.IsStroked,
                             polyBezierSegment.IsSmoothJoin);
@@ -89,7 +91,7 @@ namespace Dependencies
                     else if (segment is PolyLineSegment)
                     {
                         var polyLineSegment = segment as PolyLineSegment;
-                        xpg.PolyLineTo(
+                        context.PolyLineTo(
                             ToXPoints(polyLineSegment.Points),
                             polyLineSegment.IsStroked,
                             polyLineSegment.IsSmoothJoin);
@@ -97,7 +99,7 @@ namespace Dependencies
                     else if (segment is PolyQuadraticBezierSegment)
                     {
                         var polyQuadraticSegment = segment as PolyQuadraticBezierSegment;
-                        xpg.PolyQuadraticBezierTo(
+                        context.PolyQuadraticBezierTo(
                             ToXPoints(polyQuadraticSegment.Points),
                             polyQuadraticSegment.IsStroked,
                             polyQuadraticSegment.IsSmoothJoin);
@@ -105,7 +107,7 @@ namespace Dependencies
                     else if (segment is QuadraticBezierSegment)
                     {
                         var qbezierSegment = segment as QuadraticBezierSegment;
-                        xpg.QuadraticBezierTo(
+                        context.QuadraticBezierTo(
                             XPoint.Create(qbezierSegment.Point1.X, qbezierSegment.Point1.Y),
                             XPoint.Create(qbezierSegment.Point2.X, qbezierSegment.Point2.Y),
                             qbezierSegment.IsStroked,
@@ -118,7 +120,7 @@ namespace Dependencies
                 }
             }
 
-            return xpg;
+            return geometry;
         }
 
         /// <summary>

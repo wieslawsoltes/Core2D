@@ -57,6 +57,8 @@
     <Compile Include="IO\IFileSystem.cs" />
     <Compile Include="Project\Selectable.cs" />
     <Compile Include="Shapes\Path\Parser\SvgToXPathGeometryParser.cs" />
+    <Compile Include="Shapes\Path\XGeometryContext.cs" />
+    <Compile Include="Shapes\Path\XPathGeometryContext.cs" />
     <Compile Include="Xaml\Collections\Groups.cs" />
     <Compile Include="Xaml\Collections\Shapes.cs" />
     <Compile Include="Xaml\Collections\Styles.cs" />

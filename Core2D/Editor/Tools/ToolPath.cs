@@ -15,6 +15,7 @@ namespace Core2D
         // Path Tool
         private XPath _path;
         private XPathGeometry _geometry;
+        private XGeometryContext _context;
         private bool _isInitialized = false;
         private PathTool _previousPathTool;
         private PathTool _movePathTool;
@@ -88,7 +89,9 @@ namespace Core2D
                 new List<XPathFigure>(),
                 _editor.Project.Options.DefaultFillRule);
 
-            _geometry.BeginFigure(
+            _context = new XPathGeometryContext(_geometry);
+
+            _context.BeginFigure(
                 start,
                 _editor.Project.Options.DefaultIsFilled,
                 _editor.Project.Options.DefaultIsClosed);
@@ -110,6 +113,7 @@ namespace Core2D
         {
             _isInitialized = false;
             _geometry = null;
+            _context = null;
             _path = null;
         }
 
@@ -280,7 +284,7 @@ namespace Core2D
                         }
 
                         _lineEnd = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
-                        _geometry.LineTo(
+                        _context.LineTo(
                             _lineEnd,
                             _editor.Project.Options.DefaultIsStroked,
                             _editor.Project.Options.DefaultIsSmoothJoin);
@@ -309,7 +313,7 @@ namespace Core2D
 
                         _lineStart = _lineEnd;
                         _lineEnd = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
-                        _geometry.LineTo(_lineEnd,
+                        _context.LineTo(_lineEnd,
                             _editor.Project.Options.DefaultIsStroked,
                             _editor.Project.Options.DefaultIsSmoothJoin);
                         _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
@@ -347,7 +351,7 @@ namespace Core2D
                         _bezierPoint2 = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
                         _bezierPoint3 = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
                         _bezierPoint4 = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
-                        _geometry.BezierTo(
+                        _context.BezierTo(
                             _bezierPoint2,
                             _bezierPoint3,
                             _bezierPoint4,
@@ -425,7 +429,7 @@ namespace Core2D
                         _bezierPoint2 = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
                         _bezierPoint3 = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
                         _bezierPoint4 = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
-                        _geometry.BezierTo(
+                        _context.BezierTo(
                             _bezierPoint2,
                             _bezierPoint3,
                             _bezierPoint4,
@@ -462,7 +466,7 @@ namespace Core2D
 
                         _qbezierPoint2 = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
                         _qbezierPoint3 = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
-                        _geometry.QuadraticBezierTo(
+                        _context.QuadraticBezierTo(
                             _qbezierPoint2,
                             _qbezierPoint3,
                             _editor.Project.Options.DefaultIsStroked,
@@ -516,7 +520,7 @@ namespace Core2D
                         _qbezierPoint1 = _qbezierPoint3;
                         _qbezierPoint2 = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
                         _qbezierPoint3 = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
-                        _geometry.QuadraticBezierTo(
+                        _context.QuadraticBezierTo(
                             _qbezierPoint2,
                             _qbezierPoint3,
                             _editor.Project.Options.DefaultIsStroked,
@@ -1131,7 +1135,7 @@ namespace Core2D
 
             // start new figure
             var start = TryToGetConnectionPoint(sx, sy) ?? XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
-            _geometry.BeginFigure(
+            _context.BeginFigure(
                 start,
                 _editor.Project.Options.DefaultIsFilled,
                 _editor.Project.Options.DefaultIsClosed);

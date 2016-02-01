@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
-using System.Collections.Generic;
 using System.Globalization;
 
 namespace Core2D
@@ -9,7 +8,7 @@ namespace Core2D
     /// <summary>
     /// Parser for SVG path geometry http://www.w3.org/TR/SVG11/paths.html.
     /// </summary>
-    public class SvgToXPathGeometryParser
+    public sealed class SvgToXPathGeometryParser
     {
         private const bool _allowSign = true;
         private const bool _allowComma = true;
@@ -25,7 +24,7 @@ namespace Core2D
         private Point2 _lastPoint;
         private Point2 _secondLastPoint;
         private char _token;
-        private XPathGeometry _geometry;
+        private XGeometryContext _context;
 
         private void InvalidToken()
         {
@@ -256,7 +255,7 @@ namespace Core2D
         {
             if (!_figureStarted)
             {
-                _geometry.BeginFigure(XPoint.FromPoint2(_lastStart), _isFilled, !_isClosed);
+                _context.BeginFigure(XPoint.FromPoint2(_lastStart), _isFilled, !_isClosed);
                 _figureStarted = true;
             }
         }
@@ -264,12 +263,12 @@ namespace Core2D
         /// <summary>
         /// Parse a SVG path geometry string.
         /// </summary>
-        /// <param name="context">The path geometry.</param>
+        /// <param name="context">The geometry context.</param>
         /// <param name="pathString">The path geometry string</param>
         /// <param name="startIndex">The string start index.</param>
-        public void Parse(XPathGeometry context, string pathString, int startIndex)
+        public void Parse(XGeometryContext context, string pathString, int startIndex)
         {
-            _geometry = context;
+            _context = context;
             _pathString = pathString;
             _pathLength = pathString.Length;
             _curIndex = startIndex;
@@ -300,7 +299,7 @@ namespace Core2D
                     case 'M':
                         _lastPoint = ReadPoint(cmd, !_allowComma);
 
-                        context.BeginFigure(XPoint.FromPoint2(_lastPoint), _isFilled, !_isClosed);
+                        _context.BeginFigure(XPoint.FromPoint2(_lastPoint), _isFilled, !_isClosed);
                         _figureStarted = true;
                         _lastStart = _lastPoint;
                         last_cmd = 'M';
@@ -308,7 +307,7 @@ namespace Core2D
                         while (IsNumber(_allowComma))
                         {
                             _lastPoint = ReadPoint(cmd, !_allowComma);
-                            context.LineTo(XPoint.FromPoint2(_lastPoint), _isStroked, !_isSmoothJoin);
+                            _context.LineTo(XPoint.FromPoint2(_lastPoint), _isStroked, !_isSmoothJoin);
                             last_cmd = 'L';
                         }
                         break;
@@ -345,7 +344,7 @@ namespace Core2D
                                     break;
                             }
 
-                            context.LineTo(XPoint.FromPoint2(_lastPoint), _isStroked, !_isSmoothJoin);
+                            _context.LineTo(XPoint.FromPoint2(_lastPoint), _isStroked, !_isSmoothJoin);
                         }
                         while (IsNumber(_allowComma));
 
@@ -383,7 +382,7 @@ namespace Core2D
                             }
 
                             _lastPoint = ReadPoint(cmd, _allowComma);
-                            context.BezierTo(
+                            _context.BezierTo(
                                 XPoint.FromPoint2(p),
                                 XPoint.FromPoint2(_secondLastPoint),
                                 XPoint.FromPoint2(_lastPoint),
@@ -423,7 +422,7 @@ namespace Core2D
                                 _lastPoint = ReadPoint(cmd, _allowComma);
                             }
 
-                            context.QuadraticBezierTo(
+                            _context.QuadraticBezierTo(
                                 XPoint.FromPoint2(_secondLastPoint),
                                 XPoint.FromPoint2(_lastPoint),
                                 _isStroked,
@@ -449,7 +448,7 @@ namespace Core2D
 
                             _lastPoint = ReadPoint(cmd, _allowComma);
 
-                            context.ArcTo(
+                            _context.ArcTo(
                                 XPoint.FromPoint2(_lastPoint),
                                 XPathSize.Create(w, h),
                                 rotation,
@@ -466,7 +465,7 @@ namespace Core2D
                     case 'z':
                     case 'Z':
                         EnsureFigure();
-                        context.SetClosedState(_isClosed);
+                        _context.SetClosedState(_isClosed);
 
                         _figureStarted = false;
                         last_cmd = 'Z';

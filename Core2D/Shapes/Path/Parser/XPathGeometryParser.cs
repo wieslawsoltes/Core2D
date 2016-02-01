@@ -2,7 +2,6 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 
 namespace Core2D
 {
@@ -54,8 +53,9 @@ namespace Core2D
                 }
 
                 var parser = new SvgToXPathGeometryParser();
+                var context = new XPathGeometryContext(geometry);
 
-                parser.Parse(geometry, source, curIndex);
+                parser.Parse(context, source, curIndex);
             }
 
             geometry.FillRule = fillRule;
