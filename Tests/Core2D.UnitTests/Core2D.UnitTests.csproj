@@ -83,6 +83,13 @@
     <Compile Include="Project\ProjectTests.cs" />
     <Compile Include="Project\TemplateTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Shapes\Path\Segments\XArcSegmentTests.cs" />
+    <Compile Include="Shapes\Path\Segments\XBezierSegmentTests.cs" />
+    <Compile Include="Shapes\Path\Segments\XLineSegmentTests.cs" />
+    <Compile Include="Shapes\Path\Segments\XPolyBezierSegmentTests.cs" />
+    <Compile Include="Shapes\Path\Segments\XPolyLineSegmentTests.cs" />
+    <Compile Include="Shapes\Path\Segments\XPolyQuadraticBezierSegmentTests.cs" />
+    <Compile Include="Shapes\Path\Segments\XQuadraticBezierSegmentTests.cs" />
     <Compile Include="Shapes\Path\XPathFigureTests.cs" />
     <Compile Include="Shapes\XArcTests.cs" />
     <Compile Include="Shapes\XBezierTests.cs" />
