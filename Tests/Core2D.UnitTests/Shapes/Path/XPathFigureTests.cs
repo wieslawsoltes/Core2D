@@ -9,7 +9,7 @@ namespace Core2D.UnitTests
     public class XPathFigureTests
     {
         [Fact]
-        [Trait("Core2D", "Shapes")]
+        [Trait("Core2D", "Path")]
         public void StartPoint_Not_Null()
         {
             var target = new XPathFigure();
@@ -17,7 +17,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Shapes")]
+        [Trait("Core2D", "Path")]
         public void Segments_Not_Null()
         {
             var target = new XPathFigure();
@@ -25,7 +25,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Shapes")]
+        [Trait("Core2D", "Path")]
         public void IsFilled_By_Default_Is_False()
         {
             var target = new XPathFigure();
@@ -33,7 +33,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Shapes")]
+        [Trait("Core2D", "Path")]
         public void IsClosed_By_Default_Is_False()
         {
             var target = new XPathFigure();
@@ -41,7 +41,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Shapes")]
+        [Trait("Core2D", "Path")]
         public void GetPoints_Should_Return_All_Segment_Points()
         {
             var figure = new XPathFigure();
@@ -62,7 +62,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Shapes")]
+        [Trait("Core2D", "Path")]
         public void ToString_Should_Path_Markup_Empty_Not_Closed()
         {
             var target = new XPathFigure();
@@ -73,7 +73,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Shapes")]
+        [Trait("Core2D", "Path")]
         public void ToString_Should_Path_Markup_Empty_Closed()
         {
             var target = new XPathFigure() { IsClosed = true };
