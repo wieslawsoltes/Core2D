@@ -13,7 +13,7 @@ namespace Core2D.Wpf.Controls.Custom
     /// The generic <see cref="ListBox"/> control with drag and drop support.
     /// </summary>
     /// <typeparam name="T">The type of <see cref="ListBox"/> items.</typeparam>
-    public class DragAndDropListBox<T> : ListBox
+    public abstract class DragAndDropListBox<T> : ListBox
         where T : class
     {
         /// <summary>
@@ -142,7 +142,7 @@ namespace Core2D.Wpf.Controls.Custom
         /// Updates DataContext binding to ImmutableArray collection property.
         /// </summary>
         /// <param name="array">The updated immutable array.</param>
-        public virtual void UpdateDataContext(ImmutableArray<T> array) { }
+        protected virtual void UpdateDataContext(ImmutableArray<T> array) { }
 
         private void Move(T source, int sourceIndex, int targetIndex)
         {

@@ -10,7 +10,7 @@ namespace Core2D.Wpf.Converters
     /// <summary>
     /// Provides a way to apply custom logic to a binding.
     /// </summary>
-    public class BooleanToValueConverter<T> : IValueConverter
+    public abstract class BooleanToValueConverter<T> : IValueConverter
     {
         /// <summary>
         /// Gets or sets False value substitution.
