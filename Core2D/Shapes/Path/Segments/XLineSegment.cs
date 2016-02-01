@@ -7,7 +7,7 @@ namespace Core2D
     /// <summary>
     /// Line path segment.
     /// </summary>
-    public class XLineSegment : XPathSegment
+    public sealed class XLineSegment : XPathSegment
     {
         /// <summary>
         /// Gets or sets end point.

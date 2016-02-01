@@ -7,7 +7,7 @@ namespace Core2D
     /// <summary>
     /// Quadratic bezier path segment.
     /// </summary>
-    public class XQuadraticBezierSegment : XPathSegment
+    public sealed class XQuadraticBezierSegment : XPathSegment
     {
         /// <summary>
         /// Gets or sets control point.

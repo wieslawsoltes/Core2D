@@ -7,7 +7,7 @@ namespace Core2D
     /// <summary>
     /// Arc path segment.
     /// </summary>
-    public class XArcSegment : XPathSegment
+    public sealed class XArcSegment : XPathSegment
     {
         /// <summary>
         /// Gets or sets end point.

@@ -11,7 +11,7 @@ namespace Core2D
     /// Path figure.
     /// </summary>
     [ContentProperty(nameof(Segments))]
-    public class XPathFigure
+    public sealed class XPathFigure
     {
         /// <summary>
         /// Gets or sets start point.

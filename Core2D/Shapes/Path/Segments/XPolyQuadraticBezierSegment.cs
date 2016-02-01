@@ -9,7 +9,7 @@ namespace Core2D
     /// Poly quadratic bezier path segment.
     /// </summary>
     [ContentProperty(nameof(Points))]
-    public class XPolyQuadraticBezierSegment : XPathSegment
+    public sealed class XPolyQuadraticBezierSegment : XPathSegment
     {
         /// <summary>
         /// Gets or sets points array.

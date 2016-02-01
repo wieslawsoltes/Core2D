@@ -9,7 +9,7 @@ namespace Core2D
     /// Poly line path segment.
     /// </summary>
     [ContentProperty(nameof(Points))]
-    public class XPolyLineSegment : XPathSegment
+    public sealed class XPolyLineSegment : XPathSegment
     {
         /// <summary>
         /// Gets or sets points array.

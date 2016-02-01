@@ -9,7 +9,7 @@ namespace Core2D
     /// Poly bezier path segment.
     /// </summary>
     [ContentProperty(nameof(Points))]
-    public class XPolyBezierSegment : XPathSegment
+    public sealed class XPolyBezierSegment : XPathSegment
     {
         /// <summary>
         /// Gets or sets points array.

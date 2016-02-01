@@ -7,7 +7,7 @@ namespace Core2D
     /// <summary>
     /// Bezier path segment.
     /// </summary>
-    public class XBezierSegment : XPathSegment
+    public sealed class XBezierSegment : XPathSegment
     {
         /// <summary>
         /// Gets or sets first control point.

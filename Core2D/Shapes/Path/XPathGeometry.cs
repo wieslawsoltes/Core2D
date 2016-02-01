@@ -12,7 +12,7 @@ namespace Core2D
     /// </summary>
     [ContentProperty(nameof(Figures))]
     [TypeConverter(typeof(XPathGeometryTypeConverter))]
-    public class XPathGeometry
+    public sealed class XPathGeometry
     {
         private XPathFigure _currentFigure;
 
