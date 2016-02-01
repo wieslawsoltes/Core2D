@@ -91,7 +91,10 @@ namespace Core2D
         /// <inheritdoc/>
         public override string ToString()
         {
-            return "M" + StartPoint.ToString() + (Segments != null ? ToString(Segments) : "") + (IsClosed ? "z" : "");
+            return 
+                (StartPoint != null ? "M" + StartPoint.ToString() : "") 
+                + (Segments != null ? ToString(Segments) : "") 
+                + (IsClosed ? "z" : "");
         }
     }
 }
