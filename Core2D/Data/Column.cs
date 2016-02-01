@@ -9,7 +9,7 @@ namespace Core2D
     /// Database column.
     /// </summary>
     [ContentProperty(nameof(Name))]
-    public class Column : ObservableObject
+    public sealed class Column : ObservableObject
     {
         private Guid _id;
         private string _name;

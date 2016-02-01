@@ -7,7 +7,7 @@ namespace Core2D
     /// <summary>
     /// Page container.
     /// </summary>
-    public class Page : Container
+    public sealed class Page : Container
     {
         private Data _data;
         private bool _isExpanded = false;

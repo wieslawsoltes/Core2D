@@ -10,7 +10,7 @@ namespace Core2D.Perspex.Converters
     /// <summary>
     /// Rounds a double-precision floating-point binding value to a specified number of fractional digits.
     /// </summary>
-    public class RoundedDoubleToDoubleConverter : IValueConverter
+    public sealed class RoundedDoubleToDoubleConverter : IValueConverter
     {
         /// <summary>
         /// Gets an instance of a <see cref="RoundedDoubleToDoubleConverter"/>.

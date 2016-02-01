@@ -10,7 +10,7 @@ namespace Core2D.Wpf.Converters
     /// <summary>
     /// Provides a way to apply custom logic in a <see cref="MultiBinding"/>.
     /// </summary>
-    public class ObjectEqualityConverter : IMultiValueConverter
+    public sealed class ObjectEqualityConverter : IMultiValueConverter
     {
         /// <summary>
         /// Converts source values to a value for the binding target.

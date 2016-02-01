@@ -8,7 +8,7 @@ namespace Core2D
     /// <summary>
     /// File system implementation using System.IO.
     /// </summary>
-    public class FileSystem : IFileSystem
+    public sealed class FileSystem : IFileSystem
     {
         /// <inheritdoc/>
         public Stream Open(string path)

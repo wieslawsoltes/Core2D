@@ -11,7 +11,7 @@ namespace Core2D
     /// Database record.
     /// </summary>
     [ContentProperty(nameof(Values))]
-    public class Record : ObservableObject
+    public sealed class Record : ObservableObject
     {
         private Guid _id;
         private ImmutableArray<Column> _columns;

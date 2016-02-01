@@ -13,7 +13,7 @@ namespace Core2D.Perspex.Converters
     /// <summary>
     /// Converts multi-binding inputs to a final value.
     /// </summary>
-    public class ArgbColorToBrushMultiConverter : IMultiValueConverter
+    public sealed class ArgbColorToBrushMultiConverter : IMultiValueConverter
     {
         /// <summary>
         /// Gets an instance of a <see cref="ArgbColorToBrushMultiConverter"/>.

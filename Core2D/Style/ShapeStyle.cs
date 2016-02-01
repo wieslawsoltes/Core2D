@@ -6,7 +6,7 @@ namespace Core2D
     /// <summary>
     /// Shape style.
     /// </summary>
-    public class ShapeStyle : BaseStyle
+    public sealed class ShapeStyle : BaseStyle
     {
         private LineStyle _lineStyle;
         private ArrowStyle _startArrowStyle;

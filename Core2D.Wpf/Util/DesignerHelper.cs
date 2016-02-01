@@ -7,7 +7,7 @@ namespace Core2D.Wpf
     /// <summary>
     /// The design time DataContext helper class.
     /// </summary>
-    public class DesignerHelper : DesignerContext
+    public sealed class DesignerHelper : DesignerContext
     {
         /// <summary>
         /// Initializes static data.

@@ -11,7 +11,7 @@ namespace Core2D
     /// </summary>
     [ContentProperty(nameof(Children))]
     [RuntimeNameProperty(nameof(Name))]
-    public class Shapes : ObservableResource
+    public sealed class Shapes : ObservableResource
     {
         /// <summary>
         /// Gets or sets container name.

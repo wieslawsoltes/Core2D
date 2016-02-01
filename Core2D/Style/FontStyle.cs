@@ -11,7 +11,7 @@ namespace Core2D
     /// </summary>
     [ContentProperty(nameof(Flags))]
     [TypeConverter(typeof(FontStyleTypeConverter))]
-    public class FontStyle : ObservableObject
+    public sealed class FontStyle : ObservableObject
     {
         private FontStyleFlags _flags;
 

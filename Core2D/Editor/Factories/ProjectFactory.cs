@@ -7,7 +7,7 @@ namespace Core2D
     /// <summary>
     /// Factory used to create new projects, documents and containers.
     /// </summary>
-    public class ProjectFactory : IProjectFactory
+    public sealed class ProjectFactory : IProjectFactory
     {
         /// <summary>
         /// Creates a new instance of the <see cref="Library{ShapeStyle}"/> class.

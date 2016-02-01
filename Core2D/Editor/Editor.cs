@@ -11,7 +11,7 @@ namespace Core2D
     /// <summary>
     /// Project editor.
     /// </summary>
-    public class Editor : ObservableObject, IDisposable
+    public sealed class Editor : ObservableObject, IDisposable
     {
         private ILog _log;
         private IFileSystem _fileIO;
@@ -4332,7 +4332,7 @@ namespace Core2D
         /// Dispose unmanaged resources.
         /// </summary>
         /// <param name="disposing">The flag indicating whether disposing.</param>
-        protected virtual void Dispose(bool disposing)
+        private void Dispose(bool disposing)
         {
             if (disposing)
             {

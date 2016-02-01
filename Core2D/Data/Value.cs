@@ -8,7 +8,7 @@ namespace Core2D
     /// Record value.
     /// </summary>
     [ContentProperty(nameof(Content))]
-    public class Value : ObservableObject
+    public sealed class Value : ObservableObject
     {
         private string _content;
 

@@ -9,7 +9,7 @@ namespace Core2D
     /// <summary>
     /// Defines <see cref="FontStyle"/> type converter.
     /// </summary>
-    public class FontStyleTypeConverter : TypeConverter
+    public sealed class FontStyleTypeConverter : TypeConverter
     {
         /// <inheritdoc/>
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)

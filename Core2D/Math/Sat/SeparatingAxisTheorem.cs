@@ -10,7 +10,7 @@ namespace Core2D
     /// <remarks>
     /// Based on pseudo code from http://www.codezealot.org/archives/55.
     /// </remarks>
-    public class SeparatingAxisTheorem
+    public sealed class SeparatingAxisTheorem
     {
         /// <summary>
         /// 

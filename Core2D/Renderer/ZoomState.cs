@@ -7,7 +7,7 @@ namespace Core2D
     /// <summary>
     /// Zoom and pan state.
     /// </summary>
-    public class ZoomState
+    public sealed class ZoomState
     {
         private Editor _editor;
 

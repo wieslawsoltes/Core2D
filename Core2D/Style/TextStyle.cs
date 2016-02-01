@@ -8,7 +8,7 @@ namespace Core2D
     /// Text style.
     /// </summary>
     [RuntimeNameProperty(nameof(Name))]
-    public class TextStyle : ObservableObject
+    public sealed class TextStyle : ObservableObject
     {
         private string _name;
         private string _fontName;

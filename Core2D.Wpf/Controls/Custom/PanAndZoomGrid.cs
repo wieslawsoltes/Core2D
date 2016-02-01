@@ -8,7 +8,7 @@ namespace Core2D.Wpf.Controls.Custom
     /// <summary>
     /// The custom pan and zoom control.
     /// </summary>
-    public class PanAndZoomGrid : Grid
+    public sealed class PanAndZoomGrid : Grid
     {
         /// <summary>
         /// Gets or sets flag indicating whether auto-fit is enabled.

@@ -11,7 +11,7 @@ namespace Core2D
     /// Records database.
     /// </summary>
     [ContentProperty(nameof(Records))]
-    public class Database : ObservableObject
+    public sealed class Database : ObservableObject
     {
         private string _name;
         private string _idColumnName;

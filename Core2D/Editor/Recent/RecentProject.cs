@@ -6,7 +6,7 @@ namespace Core2D
     /// <summary>
     /// Recent project.
     /// </summary>
-    public class RecentProject : ObservableObject
+    public sealed class RecentProject : ObservableObject
     {
         private string _name;
         private string _path;

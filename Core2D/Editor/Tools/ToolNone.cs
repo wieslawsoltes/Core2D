@@ -6,7 +6,7 @@ namespace Core2D
     /// <summary>
     /// Helper class for <see cref="Tool.None"/> editor.
     /// </summary>
-    public class ToolNone : ToolBase
+    public sealed class ToolNone : ToolBase
     {
         private Editor _editor;
 

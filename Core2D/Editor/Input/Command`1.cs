@@ -8,7 +8,7 @@ namespace Core2D
     /// Generic input command.
     /// </summary>
     /// <typeparam name="T">The command parameter type.</typeparam>
-    public class Command<T> : ICoreCommand<T> where T : class
+    public sealed class Command<T> : ICoreCommand<T> where T : class
     {
         private Action<T> _execute;
         private Func<T, bool> _canExecute;

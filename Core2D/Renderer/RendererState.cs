@@ -7,7 +7,7 @@ namespace Core2D
     /// <summary>
     /// Renderer state.
     /// </summary>
-    public class RendererState : ObservableObject
+    public sealed class RendererState : ObservableObject
     {
         private double _panX;
         private double _panY;

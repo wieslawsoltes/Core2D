@@ -8,7 +8,7 @@ namespace Core2D.Wpf.Controls.Custom.Lists
     /// <summary>
     /// The <see cref="ListBox"/> control for <see cref="Template"/> items with drag and drop support.
     /// </summary>
-    public class TemplateDragAndDropListBox : DragAndDropListBox<Template>
+    public sealed class TemplateDragAndDropListBox : DragAndDropListBox<Template>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TemplateDragAndDropListBox"/> class.
@@ -23,7 +23,7 @@ namespace Core2D.Wpf.Controls.Custom.Lists
         /// Updates DataContext collection ImmutableArray property.
         /// </summary>
         /// <param name="array">The updated immutable array.</param>
-        public override void UpdateDataContext(ImmutableArray<Template> array)
+        protected override void UpdateDataContext(ImmutableArray<Template> array)
         {
             var editor = (Core2D.Editor)this.Tag;
 

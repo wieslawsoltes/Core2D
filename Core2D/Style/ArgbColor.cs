@@ -12,7 +12,7 @@ namespace Core2D
     /// Color definition using alpha, red, green and blue channels.
     /// </summary>
     [TypeConverter(typeof(ArgbColorTypeConverter))]
-    public class ArgbColor : ObservableObject
+    public sealed class ArgbColor : ObservableObject
     {
         private byte _a;
         private byte _r;

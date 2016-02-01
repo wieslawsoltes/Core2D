@@ -8,7 +8,7 @@ namespace Core2D
     /// <summary>
     /// Helper class for <see cref="Tool.Selection"/> editor.
     /// </summary>
-    public class ToolSelection : ToolBase
+    public sealed class ToolSelection : ToolBase
     {
         private Editor _editor;
         private ToolState _currentState = ToolState.None;

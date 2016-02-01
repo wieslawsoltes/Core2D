@@ -6,7 +6,7 @@ namespace Core2D
     /// <summary>
     /// Line ending arrow style.
     /// </summary>
-    public class ArrowStyle : BaseStyle
+    public sealed class ArrowStyle : BaseStyle
     {
         private ArrowType _arrowType;
         private bool _isStroked;

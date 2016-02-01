@@ -8,7 +8,7 @@ namespace Core2D
     /// Line style.
     /// </summary>
     [RuntimeNameProperty(nameof(Name))]
-    public class LineStyle : ObservableObject
+    public sealed class LineStyle : ObservableObject
     {
         private string _name;
         private LineFixedLength _fixedLength;

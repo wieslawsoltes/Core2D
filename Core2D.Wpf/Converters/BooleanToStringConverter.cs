@@ -6,7 +6,7 @@ namespace Core2D.Wpf.Converters
     /// <summary>
     /// Provides a way to apply custom logic to a binding.
     /// </summary>
-    public class BooleanToStringConverter : BooleanToValueConverter<string>
+    public sealed class BooleanToStringConverter : BooleanToValueConverter<string>
     {
     }
 }

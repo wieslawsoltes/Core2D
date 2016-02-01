@@ -9,7 +9,7 @@ namespace Core2D
     /// Line fixed length.
     /// </summary>
     [ContentProperty(nameof(Flags))]
-    public class LineFixedLength : ObservableObject
+    public sealed class LineFixedLength : ObservableObject
     {
         private LineFixedLengthFlags _flags;
         private double _length;

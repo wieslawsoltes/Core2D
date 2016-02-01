@@ -9,7 +9,7 @@ namespace Core2D
     /// <summary>
     /// Defines <see cref="ArgbColor"/> type converter.
     /// </summary>
-    public class ArgbColorTypeConverter : TypeConverter
+    public sealed class ArgbColorTypeConverter : TypeConverter
     {
         /// <inheritdoc/>
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)

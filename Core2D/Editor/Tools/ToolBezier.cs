@@ -6,7 +6,7 @@ namespace Core2D
     /// <summary>
     /// Helper class for <see cref="Tool.Bezier"/> editor.
     /// </summary>
-    public class ToolBezier : ToolBase
+    public sealed class ToolBezier : ToolBase
     {
         private Editor _editor;
         private ToolState _currentState = ToolState.None;

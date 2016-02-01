@@ -9,7 +9,7 @@ namespace Core2D
     /// <summary>
     /// Defines <see cref="XPathGeometry"/> type converter.
     /// </summary>
-    public class XPathGeometryTypeConverter : TypeConverter
+    public sealed class XPathGeometryTypeConverter : TypeConverter
     {
         /// <inheritdoc/>
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)

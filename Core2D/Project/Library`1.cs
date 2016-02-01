@@ -12,7 +12,7 @@ namespace Core2D
     /// </summary>
     [ContentProperty(nameof(Items))]
     [RuntimeNameProperty(nameof(Name))]
-    public class Library<T> : ObservableObject
+    public sealed class Library<T> : ObservableObject
     {
         private string _name;
         private ImmutableArray<T> _items;

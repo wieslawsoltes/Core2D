@@ -13,7 +13,7 @@ namespace Core2D.Wpf.Controls.Custom
     /// <summary>
     /// The <see cref="Database.Records"/> view control.
     /// </summary>
-    public class RecordsListView : ListView
+    public sealed class RecordsListView : ListView
     {
         private bool _isLoaded = false;
         private Point dragStartPoint;

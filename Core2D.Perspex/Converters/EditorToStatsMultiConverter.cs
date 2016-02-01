@@ -13,7 +13,7 @@ namespace Core2D.Perspex.Converters
     /// <summary>
     /// Converts multi-binding inputs to a final value.
     /// </summary>
-    public class EditorToStatsMultiConverter : IMultiValueConverter
+    public sealed class EditorToStatsMultiConverter : IMultiValueConverter
     {
         /// <summary>
         /// Default stats result.

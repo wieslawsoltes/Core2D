@@ -10,7 +10,7 @@ namespace Core2D.Wpf.Converters
     /// <summary>
     /// Enum to Boolean value converter.
     /// </summary>
-    public class EnumToBooleanConverter : IValueConverter
+    public sealed class EnumToBooleanConverter : IValueConverter
     {
         /// <summary>
         /// Convert enum value to boolean, true if matches parameter.

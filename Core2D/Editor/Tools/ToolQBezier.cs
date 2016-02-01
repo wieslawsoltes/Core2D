@@ -6,7 +6,7 @@ namespace Core2D
     /// <summary>
     /// Helper class for <see cref="Tool.QBezier"/> editor.
     /// </summary>
-    public class ToolQBezier : ToolBase
+    public sealed class ToolQBezier : ToolBase
     {
         private Editor _editor;
         private ToolState _currentState = ToolState.None;

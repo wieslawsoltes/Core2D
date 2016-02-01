@@ -10,7 +10,7 @@ namespace Core2D.Perspex.Converters
     /// <summary>
     /// Converts a binding value object from <see cref="object"/> to <see cref="bool"/> True if value is equal to parameter otherwise return False.
     /// </summary>
-    public class ObjectEqualsConverter : IValueConverter
+    public sealed class ObjectEqualsConverter : IValueConverter
     {
         /// <summary>
         /// Gets an instance of a <see cref="ObjectEqualsConverter"/>.

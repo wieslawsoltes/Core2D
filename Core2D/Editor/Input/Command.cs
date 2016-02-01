@@ -7,7 +7,7 @@ namespace Core2D
     /// <summary>
     /// Input command.
     /// </summary>
-    public class Command : ICoreCommand
+    public sealed class Command : ICoreCommand
     {
         private Action _execute;
         private Func<bool> _canExecute;

@@ -11,7 +11,7 @@ namespace Core2D.Wpf.Controls.Custom
     /// <summary>
     /// The custom pan and zoom control.
     /// </summary>
-    public class PanAndZoomBorder : Border
+    public sealed class PanAndZoomBorder : Border
     {
         private const double _minimum = 0.01;
         private const double _maximum = 1000.0;

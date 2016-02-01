@@ -8,7 +8,7 @@ namespace Core2D
     /// <summary>
     /// Project property changes observer.
     /// </summary>
-    public class Observer : IDisposable
+    public sealed class Observer : IDisposable
     {
         private readonly Editor _editor;
         private readonly Action _invalidateContainer;
@@ -1613,7 +1613,7 @@ namespace Core2D
         /// Dispose unmanaged resources.
         /// </summary>
         /// <param name="disposing">The flag indicating whether disposing.</param>
-        protected virtual void Dispose(bool disposing)
+        private void Dispose(bool disposing)
         {
             if (disposing && _editor?.Project != null)
             {

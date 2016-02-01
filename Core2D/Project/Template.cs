@@ -7,7 +7,7 @@ namespace Core2D
     /// <summary>
     /// Template container.
     /// </summary>
-    public class Template : Container
+    public sealed class Template : Container
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Template"/> class.

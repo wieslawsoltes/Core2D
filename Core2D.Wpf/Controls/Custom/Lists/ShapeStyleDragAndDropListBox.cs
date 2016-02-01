@@ -8,7 +8,7 @@ namespace Core2D.Wpf.Controls.Custom.Lists
     /// <summary>
     /// The <see cref="ListBox"/> control for <see cref="ShapeStyle"/> items with drag and drop support.
     /// </summary>
-    public class ShapeStyleDragAndDropListBox : DragAndDropListBox<ShapeStyle>
+    public sealed class ShapeStyleDragAndDropListBox : DragAndDropListBox<ShapeStyle>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ShapeStyleDragAndDropListBox"/> class.
@@ -23,7 +23,7 @@ namespace Core2D.Wpf.Controls.Custom.Lists
         /// Updates DataContext binding to ImmutableArray collection property.
         /// </summary>
         /// <param name="array">The updated immutable array.</param>
-        public override void UpdateDataContext(ImmutableArray<ShapeStyle> array)
+        protected override void UpdateDataContext(ImmutableArray<ShapeStyle> array)
         {
             var editor = (Core2D.Editor)this.Tag;
 

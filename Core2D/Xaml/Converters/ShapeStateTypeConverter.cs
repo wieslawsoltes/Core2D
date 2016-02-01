@@ -9,7 +9,7 @@ namespace Core2D
     /// <summary>
     /// Defines <see cref="ShapeState"/> type converter.
     /// </summary>
-    public class ShapeStateTypeConverter : TypeConverter
+    public sealed class ShapeStateTypeConverter : TypeConverter
     {
         /// <inheritdoc/>
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)

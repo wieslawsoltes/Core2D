@@ -7,7 +7,7 @@ namespace Core2D
     /// <summary>
     /// Recent projects.
     /// </summary>
-    public class Recent : ObservableObject
+    public sealed class Recent : ObservableObject
     {
         private ImmutableArray<RecentProject> _recentProjects = ImmutableArray.Create<RecentProject>();
         private RecentProject _currentRecentProject = default(RecentProject);

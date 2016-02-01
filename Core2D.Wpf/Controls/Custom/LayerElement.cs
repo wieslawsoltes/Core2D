@@ -9,7 +9,7 @@ namespace Core2D.Wpf.Controls.Custom
     /// <summary>
     /// The custom layer control.
     /// </summary>
-    public class LayerElement : FrameworkElement
+    public sealed class LayerElement : FrameworkElement
     {
         /// <summary>
         /// Gets the <see cref="Core2D.Data"/> from <see cref="DependencyProperty"/> object.

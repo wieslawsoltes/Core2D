@@ -11,7 +11,7 @@ namespace Core2D
     /// </summary>
     [ContentProperty(nameof(Documents))]
     [RuntimeNameProperty(nameof(Name))]
-    public partial class Project : Selectable
+    public sealed partial class Project : Selectable
     {
         private string _name;
         private Options _options;

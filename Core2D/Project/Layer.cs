@@ -9,7 +9,7 @@ namespace Core2D
     /// <summary>
     /// Invalidate layer event arguments.
     /// </summary>
-    public class InvalidateLayerEventArgs : EventArgs { }
+    public sealed class InvalidateLayerEventArgs : EventArgs { }
 
     /// <summary>
     /// Invalidate layer event handler.
@@ -23,7 +23,7 @@ namespace Core2D
     /// </summary>
     [ContentProperty(nameof(Shapes))]
     [RuntimeNameProperty(nameof(Name))]
-    public class Layer : Selectable
+    public sealed class Layer : Selectable
     {
         /// <summary>
         /// Invalidate layer event.

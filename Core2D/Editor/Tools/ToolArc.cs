@@ -6,7 +6,7 @@ namespace Core2D
     /// <summary>
     /// Helper class for <see cref="Tool.Arc"/> editor.
     /// </summary>
-    public class ToolArc : ToolBase
+    public sealed class ToolArc : ToolBase
     {
         private Editor _editor;
         private ToolState _currentState = ToolState.None;

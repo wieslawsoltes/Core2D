@@ -11,7 +11,7 @@ namespace Core2D
     /// </summary>
     [ContentProperty(nameof(Flags))]
     [TypeConverter(typeof(ShapeStateTypeConverter))]
-    public class ShapeState : ObservableObject
+    public sealed class ShapeState : ObservableObject
     {
         private ShapeStateFlags _flags;
 

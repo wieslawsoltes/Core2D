@@ -8,7 +8,7 @@ namespace Core2D.Wpf.Controls.Custom.Lists
     /// <summary>
     /// The <see cref="ListBox"/> control for <see cref="XGroup"/> items with drag and drop support.
     /// </summary>
-    public class XGroupDragAndDropListBox : DragAndDropListBox<XGroup>
+    public sealed class XGroupDragAndDropListBox : DragAndDropListBox<XGroup>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="XGroupDragAndDropListBox"/> class.
@@ -23,7 +23,7 @@ namespace Core2D.Wpf.Controls.Custom.Lists
         /// Updates DataContext collection ImmutableArray property.
         /// </summary>
         /// <param name="array">The updated immutable array.</param>
-        public override void UpdateDataContext(ImmutableArray<XGroup> array)
+        protected override void UpdateDataContext(ImmutableArray<XGroup> array)
         {
             var editor = (Core2D.Editor)this.Tag;
 

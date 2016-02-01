@@ -10,7 +10,7 @@ namespace Core2D
     /// Data context.
     /// </summary>
     [ContentProperty(nameof(Properties))]
-    public class Data : ObservableObject
+    public sealed class Data : ObservableObject
     {
         private ImmutableArray<Property> _properties;
         private Record _record;

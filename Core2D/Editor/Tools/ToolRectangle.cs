@@ -6,7 +6,7 @@ namespace Core2D
     /// <summary>
     /// Helper class for <see cref="Tool.Rectangle"/> editor.
     /// </summary>
-    public class ToolRectangle : ToolBase
+    public sealed class ToolRectangle : ToolBase
     {
         private Editor _editor;
         private ToolState _currentState = ToolState.None;

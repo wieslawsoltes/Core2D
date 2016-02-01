@@ -6,7 +6,7 @@ namespace Core2D
     /// <summary>
     /// Helper class for <see cref="Tool.Point"/> editor.
     /// </summary>
-    public class ToolPoint : ToolBase
+    public sealed class ToolPoint : ToolBase
     {
         private Editor _editor;
         private ToolState _currentState = ToolState.None;
