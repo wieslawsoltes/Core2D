@@ -17,12 +17,7 @@
                     <MenuItem Header="-" Command="{Static core:Commands.DeleteCommand}" CommandParameter="{Binding Path=Selected}"/>
                 </Menu>
                 <TextBox Text="{Binding Path=Name, Mode=TwoWay}" Classes="left" Grid.Row="1"/>
-                <TreeView
-                    Items="{Binding Path=Documents, Mode=TwoWay}"
-                    SelectedItem="{Binding Path=Selected, Mode=TwoWay}"
-                    AutoScrollToSelectedItem="True"
-                    Grid.Row="2"
-                    Classes="default">
+                <TreeView Items="{Binding Path=Documents, Mode=TwoWay}" SelectedItem="{Binding Path=Selected, Mode=TwoWay}" AutoScrollToSelectedItem="True" Grid.Row="2" Classes="default">
                     <TreeView.Styles>
                         <Style Selector="TreeViewItem">
                             <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}"/>
