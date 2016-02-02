@@ -57,6 +57,15 @@ rmdir /Q /S Dependencies\TextFieldReader.CsvHelper\obj
 rmdir /Q /S Dependencies\TextFieldWriter.CsvHelper\bin
 rmdir /Q /S Dependencies\TextFieldWriter.CsvHelper\obj
 
+rmdir /Q /S Tests\Core2D.UnitTests\bin
+rmdir /Q /S Tests\Core2D.UnitTests\obj
+
+rmdir /Q /S Tests\Core2D.Perspex.UnitTests\bin
+rmdir /Q /S Tests\Core2D.Perspex.UnitTests\obj
+
+rmdir /Q /S Tests\Core2D.Wpf.UnitTests\bin
+rmdir /Q /S Tests\Core2D.Wpf.UnitTests\obj
+
 rmdir /Q /S Core2D\bin
 rmdir /Q /S Core2D\obj
 
