@@ -25,6 +25,14 @@ namespace Core2D
         public XFillRule FillRule { get; set; }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="XPathGeometry"/> class.
+        /// </summary>
+        public XPathGeometry()
+        {
+            Figures = new List<XPathFigure>();
+        }
+
+        /// <summary>
         /// Creates a new <see cref="XPathGeometry"/> instance.
         /// </summary>
         /// <param name="figures">The figures collection.</param>
