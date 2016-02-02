@@ -725,25 +725,25 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.XBezier bezier, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
+        public override void Draw(object dc, Core2D.XCubicBezier cubicBezier, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
         {
-            if (!bezier.IsStroked && !bezier.IsFilled)
+            if (!cubicBezier.IsStroked && !cubicBezier.IsFilled)
                 return;
 
             var _dxf = dc as DxfDocument;
-            var style = bezier.Style;
+            var style = cubicBezier.Style;
 
             var dxfSpline = CreateCubicSpline(
-                bezier.Point1.X + dx,
-                bezier.Point1.Y + dy,
-                bezier.Point2.X + dx,
-                bezier.Point2.Y + dy,
-                bezier.Point3.X + dx,
-                bezier.Point3.Y + dy,
-                bezier.Point4.X + dx,
-                bezier.Point4.Y + dy);
+                cubicBezier.Point1.X + dx,
+                cubicBezier.Point1.Y + dy,
+                cubicBezier.Point2.X + dx,
+                cubicBezier.Point2.Y + dy,
+                cubicBezier.Point3.X + dx,
+                cubicBezier.Point3.Y + dy,
+                cubicBezier.Point4.X + dx,
+                cubicBezier.Point4.Y + dy);
 
-            if (bezier.IsFilled)
+            if (cubicBezier.IsFilled)
             {
                 var fill = ToColor(style.Fill);
                 var fillTransparency = ToTransparency(style.Fill);
@@ -766,7 +766,7 @@ namespace Dependencies
                 _dxf.AddEntity(hatch);
             }
 
-            if (bezier.IsStroked)
+            if (cubicBezier.IsStroked)
             {
                 var stroke = ToColor(style.Stroke);
                 var strokeTansparency = ToTransparency(style.Stroke);
@@ -782,23 +782,23 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.XQBezier qbezier, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
+        public override void Draw(object dc, Core2D.XQuadraticBezier quadraticBezier, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
         {
-            if (!qbezier.IsStroked && !qbezier.IsFilled)
+            if (!quadraticBezier.IsStroked && !quadraticBezier.IsFilled)
                 return;
 
             var _dxf = dc as DxfDocument;
-            var style = qbezier.Style;
+            var style = quadraticBezier.Style;
 
             var dxfSpline = CreateQuadraticSpline(
-                qbezier.Point1.X + dx,
-                qbezier.Point1.Y + dy,
-                qbezier.Point2.X + dx,
-                qbezier.Point2.Y + dy,
-                qbezier.Point3.X + dx,
-                qbezier.Point3.Y + dy);
+                quadraticBezier.Point1.X + dx,
+                quadraticBezier.Point1.Y + dy,
+                quadraticBezier.Point2.X + dx,
+                quadraticBezier.Point2.Y + dy,
+                quadraticBezier.Point3.X + dx,
+                quadraticBezier.Point3.Y + dy);
 
-            if (qbezier.IsFilled)
+            if (quadraticBezier.IsFilled)
             {
                 var fill = ToColor(style.Fill);
                 var fillTransparency = ToTransparency(style.Fill);
@@ -821,7 +821,7 @@ namespace Dependencies
                 _dxf.AddEntity(hatch);
             }
 
-            if (qbezier.IsStroked)
+            if (quadraticBezier.IsStroked)
             {
                 var stroke = ToColor(style.Stroke);
                 var strokeTansparency = ToTransparency(style.Stroke);

@@ -5,14 +5,14 @@ using System.Windows.Controls;
 namespace Core2D.Wpf.Controls.Shapes
 {
     /// <summary>
-    /// Interaction logic for <see cref="QBezierControl"/> xaml.
+    /// Interaction logic for <see cref="QuadraticBezierControl"/> xaml.
     /// </summary>
-    public partial class QBezierControl : UserControl
+    public partial class QuadraticBezierControl : UserControl
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="QBezierControl"/> class.
+        /// Initializes a new instance of the <see cref="QuadraticBezierControl"/> class.
         /// </summary>
-        public QBezierControl()
+        public QuadraticBezierControl()
         {
             InitializeComponent();
         }

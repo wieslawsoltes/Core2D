@@ -165,14 +165,14 @@
     <Compile Include="Path\XPathSize.cs" />
     <Compile Include="Path\XSweepDirection.cs" />
     <Compile Include="Shapes\XArc.cs" />
-    <Compile Include="Shapes\XBezier.cs" />
+    <Compile Include="Shapes\XCubicBezier.cs" />
     <Compile Include="Shapes\XEllipse.cs" />
     <Compile Include="Shapes\XGroup.cs" />
     <Compile Include="Shapes\XImage.cs" />
     <Compile Include="Shapes\XLine.cs" />
     <Compile Include="Shapes\XPath.cs" />
     <Compile Include="Shapes\XPoint.cs" />
-    <Compile Include="Shapes\XQBezier.cs" />
+    <Compile Include="Shapes\XQuadraticBezier.cs" />
     <Compile Include="Shapes\XRectangle.cs" />
     <Compile Include="Shapes\XText.cs" />
     <Compile Include="Shape\BaseShape.cs" />

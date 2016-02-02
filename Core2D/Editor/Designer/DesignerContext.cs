@@ -107,9 +107,9 @@ namespace Core2D
         public static XArc Arc { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.XBezier"/>.
+        /// The design time <see cref="Core2D.XCubicBezier"/>.
         /// </summary>
-        public static XBezier Bezier { get; set; }
+        public static XCubicBezier CubicBezier { get; set; }
 
         /// <summary>
         /// The design time <see cref="Core2D.XEllipse"/>.
@@ -142,9 +142,9 @@ namespace Core2D
         public static XPoint Point { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.XQBezier"/>.
+        /// The design time <see cref="Core2D.XQuadraticBezier"/>.
         /// </summary>
-        public static XQBezier QBezier { get; set; }
+        public static XQuadraticBezier QuadraticBezier { get; set; }
 
         /// <summary>
         /// The design time <see cref="Core2D.XRectangle"/>.
@@ -464,14 +464,14 @@ namespace Core2D
             // Shapes
 
             Arc = XArc.Create(0, 0, Style, null);
-            Bezier = XBezier.Create(0, 0, Style, null);
+            CubicBezier = XCubicBezier.Create(0, 0, Style, null);
             Ellipse = XEllipse.Create(0, 0, Style, null);
             Group = XGroup.Create(Constants.DefaulGroupName);
             Image = XImage.Create(0, 0, Style, null, "key");
             Line = XLine.Create(0, 0, Style, null);
             Path = XPath.Create("Path", Style, null);
             Point = XPoint.Create();
-            QBezier = XQBezier.Create(0, 0, Style, null);
+            QuadraticBezier = XQuadraticBezier.Create(0, 0, Style, null);
             Rectangle = XRectangle.Create(0, 0, Style, null);
             Text = XText.Create(0, 0, Style, null, "Text");
 

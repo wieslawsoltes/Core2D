@@ -141,8 +141,8 @@ namespace Dependencies
             shape.AddField(7, nameof(BaseShape.Data)).AsReference = true;
             shape.AddSubType(101, typeof(XPoint));
             shape.AddSubType(102, typeof(XLine));
-            shape.AddSubType(103, typeof(XBezier));
-            shape.AddSubType(104, typeof(XQBezier));
+            shape.AddSubType(103, typeof(XCubicBezier));
+            shape.AddSubType(104, typeof(XQuadraticBezier));
             shape.AddSubType(105, typeof(XArc));
             shape.AddSubType(106, typeof(XPath));
             shape.AddSubType(107, typeof(XText));
@@ -177,16 +177,16 @@ namespace Dependencies
             // XImage : BaseShape
             model[typeof(XImage)].AddField(1, nameof(XImage.Key));
 
-            // XBezier : BaseShape
-            model[typeof(XBezier)].AddField(1, nameof(XBezier.Point1)).AsReference = true;
-            model[typeof(XBezier)].AddField(2, nameof(XBezier.Point2)).AsReference = true;
-            model[typeof(XBezier)].AddField(3, nameof(XBezier.Point3)).AsReference = true;
-            model[typeof(XBezier)].AddField(4, nameof(XBezier.Point4)).AsReference = true;
+            // XCubicBezier : BaseShape
+            model[typeof(XCubicBezier)].AddField(1, nameof(XCubicBezier.Point1)).AsReference = true;
+            model[typeof(XCubicBezier)].AddField(2, nameof(XCubicBezier.Point2)).AsReference = true;
+            model[typeof(XCubicBezier)].AddField(3, nameof(XCubicBezier.Point3)).AsReference = true;
+            model[typeof(XCubicBezier)].AddField(4, nameof(XCubicBezier.Point4)).AsReference = true;
 
-            // XQBezier : BaseShape
-            model[typeof(XQBezier)].AddField(1, nameof(XQBezier.Point1)).AsReference = true;
-            model[typeof(XQBezier)].AddField(2, nameof(XQBezier.Point2)).AsReference = true;
-            model[typeof(XQBezier)].AddField(3, nameof(XQBezier.Point3)).AsReference = true;
+            // XQuadraticBezier : BaseShape
+            model[typeof(XQuadraticBezier)].AddField(1, nameof(XQuadraticBezier.Point1)).AsReference = true;
+            model[typeof(XQuadraticBezier)].AddField(2, nameof(XQuadraticBezier.Point2)).AsReference = true;
+            model[typeof(XQuadraticBezier)].AddField(3, nameof(XQuadraticBezier.Point3)).AsReference = true;
 
             // XArc : BaseShape
             model[typeof(XArc)].AddField(1, nameof(XArc.Point1)).AsReference = true;

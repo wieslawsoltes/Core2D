@@ -215,7 +215,7 @@ namespace Core2D
                     }
                     else if (segment is XArcSegment)
                     {
-                        // TODO: Set bezier first point using last arc point.
+                        // TODO: Set cubic bezier first point using last arc point.
                     }
                     else if (segment is XCubicBezierSegment)
                     {
@@ -247,7 +247,7 @@ namespace Core2D
                     }
                     else if (segment is XArcSegment)
                     {
-                        // TODO: Set qbezier first point using last arc point.
+                        // TODO: Set quadratic bezier first point using last arc point.
                     }
                     else if (segment is XCubicBezierSegment)
                     {
@@ -375,8 +375,8 @@ namespace Core2D
                             if (point3 != null)
                             {
                                 var figure = _geometry.Figures.LastOrDefault();
-                                var bezier = figure.Segments.LastOrDefault() as XCubicBezierSegment;
-                                bezier.Point3 = point3;
+                                var cubicBezier = figure.Segments.LastOrDefault() as XCubicBezierSegment;
+                                cubicBezier.Point3 = point3;
                                 _cubicBezierPoint4 = point3;
                             }
                         }
@@ -397,8 +397,8 @@ namespace Core2D
                             if (point1 != null)
                             {
                                 var figure = _geometry.Figures.LastOrDefault();
-                                var bezier = figure.Segments.LastOrDefault() as XCubicBezierSegment;
-                                bezier.Point1 = point1;
+                                var cubicBezier = figure.Segments.LastOrDefault() as XCubicBezierSegment;
+                                cubicBezier.Point1 = point1;
                                 _cubicBezierPoint2 = point1;
                             }
                         }
@@ -419,8 +419,8 @@ namespace Core2D
                             if (point2 != null)
                             {
                                 var figure = _geometry.Figures.LastOrDefault();
-                                var bezier = figure.Segments.LastOrDefault() as XCubicBezierSegment;
-                                bezier.Point2 = point2;
+                                var cubicBezier = figure.Segments.LastOrDefault() as XCubicBezierSegment;
+                                cubicBezier.Point2 = point2;
                                 _cubicBezierPoint3 = point2;
                             }
                         }
@@ -489,8 +489,8 @@ namespace Core2D
                             if (point2 != null)
                             {
                                 var figure = _geometry.Figures.LastOrDefault();
-                                var qbezier = figure.Segments.LastOrDefault() as XQuadraticBezierSegment;
-                                qbezier.Point2 = point2;
+                                var quadraticBezier = figure.Segments.LastOrDefault() as XQuadraticBezierSegment;
+                                quadraticBezier.Point2 = point2;
                                 _quadraticBezierPoint3 = point2;
                             }
                         }
@@ -511,8 +511,8 @@ namespace Core2D
                             if (point1 != null)
                             {
                                 var figure = _geometry.Figures.LastOrDefault();
-                                var qbezier = figure.Segments.LastOrDefault() as XQuadraticBezierSegment;
-                                qbezier.Point1 = point1;
+                                var quadraticBezier = figure.Segments.LastOrDefault() as XQuadraticBezierSegment;
+                                quadraticBezier.Point1 = point1;
                                 _quadraticBezierPoint2 = point1;
                             }
                         }

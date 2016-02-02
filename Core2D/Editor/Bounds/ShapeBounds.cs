@@ -153,13 +153,13 @@ namespace Core2D
             {
                 return HitTestArc(shape, p, threshold, dx, dy);
             }
-            else if (shape is XBezier)
+            else if (shape is XCubicBezier)
             {
-                return HitTestBezier(shape, p, threshold, dx, dy);
+                return HitTestCubicBezier(shape, p, threshold, dx, dy);
             }
-            else if (shape is XQBezier)
+            else if (shape is XQuadraticBezier)
             {
-                return HitTestQBezier(shape, p, threshold, dx, dy);
+                return HitTestQuadraticBezier(shape, p, threshold, dx, dy);
             }
             else if (shape is XText)
             {
@@ -285,59 +285,59 @@ namespace Core2D
             return null;
         }
 
-        private static BaseShape HitTestBezier(BaseShape shape, Vector2 p, double threshold, double dx, double dy)
+        private static BaseShape HitTestCubicBezier(BaseShape shape, Vector2 p, double threshold, double dx, double dy)
         {
-            var bezier = shape as XBezier;
+            var cubicBezier = shape as XCubicBezier;
 
-            if (GetPointBounds(bezier.Point1, threshold, dx, dy).Contains(p))
+            if (GetPointBounds(cubicBezier.Point1, threshold, dx, dy).Contains(p))
             {
-                return bezier.Point1;
+                return cubicBezier.Point1;
             }
 
-            if (GetPointBounds(bezier.Point2, threshold, dx, dy).Contains(p))
+            if (GetPointBounds(cubicBezier.Point2, threshold, dx, dy).Contains(p))
             {
-                return bezier.Point2;
+                return cubicBezier.Point2;
             }
 
-            if (GetPointBounds(bezier.Point3, threshold, dx, dy).Contains(p))
+            if (GetPointBounds(cubicBezier.Point3, threshold, dx, dy).Contains(p))
             {
-                return bezier.Point3;
+                return cubicBezier.Point3;
             }
 
-            if (GetPointBounds(bezier.Point4, threshold, dx, dy).Contains(p))
+            if (GetPointBounds(cubicBezier.Point4, threshold, dx, dy).Contains(p))
             {
-                return bezier.Point4;
+                return cubicBezier.Point4;
             }
 
-            if (ConvexHullBounds.Contains(bezier, p, dx, dy))
+            if (ConvexHullBounds.Contains(cubicBezier, p, dx, dy))
             {
-                return bezier;
+                return cubicBezier;
             }
             return null;
         }
 
-        private static BaseShape HitTestQBezier(BaseShape shape, Vector2 p, double threshold, double dx, double dy)
+        private static BaseShape HitTestQuadraticBezier(BaseShape shape, Vector2 p, double threshold, double dx, double dy)
         {
-            var qbezier = shape as XQBezier;
+            var quadraticBezier = shape as XQuadraticBezier;
 
-            if (GetPointBounds(qbezier.Point1, threshold, dx, dy).Contains(p))
+            if (GetPointBounds(quadraticBezier.Point1, threshold, dx, dy).Contains(p))
             {
-                return qbezier.Point1;
+                return quadraticBezier.Point1;
             }
 
-            if (GetPointBounds(qbezier.Point2, threshold, dx, dy).Contains(p))
+            if (GetPointBounds(quadraticBezier.Point2, threshold, dx, dy).Contains(p))
             {
-                return qbezier.Point2;
+                return quadraticBezier.Point2;
             }
 
-            if (GetPointBounds(qbezier.Point3, threshold, dx, dy).Contains(p))
+            if (GetPointBounds(quadraticBezier.Point3, threshold, dx, dy).Contains(p))
             {
-                return qbezier.Point3;
+                return quadraticBezier.Point3;
             }
 
-            if (ConvexHullBounds.Contains(qbezier, p, dx, dy))
+            if (ConvexHullBounds.Contains(quadraticBezier, p, dx, dy))
             {
-                return qbezier;
+                return quadraticBezier;
             }
             return null;
         }
@@ -501,13 +501,13 @@ namespace Core2D
             {
                 return HitTestArc(shape, rect, builder, dx, dy);
             }
-            else if (shape is XBezier)
+            else if (shape is XCubicBezier)
             {
-                return HitTestBezier(shape, selection, builder, dx, dy);
+                return HitTestCubicBezier(shape, selection, builder, dx, dy);
             }
-            else if (shape is XQBezier)
+            else if (shape is XQuadraticBezier)
             {
-                return HitTestQBezier(shape, selection, builder, dx, dy);
+                return HitTestQadraticBezier(shape, selection, builder, dx, dy);
             }
             else if (shape is XText)
             {
@@ -616,9 +616,9 @@ namespace Core2D
             return false;
         }
 
-        private static bool HitTestBezier(BaseShape shape, Vector2[] selection, ImmutableHashSet<BaseShape>.Builder builder, double dx, double dy)
+        private static bool HitTestCubicBezier(BaseShape shape, Vector2[] selection, ImmutableHashSet<BaseShape>.Builder builder, double dx, double dy)
         {
-            if (ConvexHullBounds.Overlap(selection, ConvexHullBounds.GetVertices(shape as XBezier, dx, dy)))
+            if (ConvexHullBounds.Overlap(selection, ConvexHullBounds.GetVertices(shape as XCubicBezier, dx, dy)))
             {
                 if (builder != null)
                 {
@@ -633,9 +633,9 @@ namespace Core2D
             return false;
         }
 
-        private static bool HitTestQBezier(BaseShape shape, Vector2[] selection, ImmutableHashSet<BaseShape>.Builder builder, double dx, double dy)
+        private static bool HitTestQadraticBezier(BaseShape shape, Vector2[] selection, ImmutableHashSet<BaseShape>.Builder builder, double dx, double dy)
         {
-            if (ConvexHullBounds.Overlap(selection, ConvexHullBounds.GetVertices(shape as XQBezier, dx, dy)))
+            if (ConvexHullBounds.Overlap(selection, ConvexHullBounds.GetVertices(shape as XQuadraticBezier, dx, dy)))
             {
                 if (builder != null)
                 {

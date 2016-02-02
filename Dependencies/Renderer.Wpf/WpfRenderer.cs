@@ -26,11 +26,11 @@ namespace Dependencies
         private Cache<XArc, PathGeometry> _arcCache = 
             Cache<XArc, PathGeometry>.Create();
 
-        private Cache<XBezier, PathGeometry> _bezierCache = 
-            Cache<XBezier, PathGeometry>.Create();
+        private Cache<XCubicBezier, PathGeometry> _cubicBezierCache = 
+            Cache<XCubicBezier, PathGeometry>.Create();
 
-        private Cache<XQBezier, PathGeometry> _qbezierCache = 
-            Cache<XQBezier, PathGeometry>.Create();
+        private Cache<XQuadraticBezier, PathGeometry> _quadraticBezierCache = 
+            Cache<XQuadraticBezier, PathGeometry>.Create();
 
         private Cache<XText, Tuple<string, FormattedText, ShapeStyle>> _textCache = 
             Cache<XText, Tuple<string, FormattedText, ShapeStyle>>.Create();
@@ -411,8 +411,8 @@ namespace Dependencies
             if (!isZooming)
             {
                 _arcCache.Reset();
-                _bezierCache.Reset();
-                _qbezierCache.Reset();
+                _cubicBezierCache.Reset();
+                _quadraticBezierCache.Reset();
                 _textCache.Reset();
                 _biCache.Reset();
                 _pathCache.Reset();
@@ -804,11 +804,11 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XBezier bezier, double dx, double dy, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, XCubicBezier cubicBezier, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var _dc = dc as DrawingContext;
 
-            var style = bezier.Style;
+            var style = cubicBezier.Style;
             if (style == null)
                 return;
 
@@ -830,30 +830,30 @@ namespace Dependencies
                 _styleCache.Set(style, Tuple.Create(fill, stroke));
             }
 
-            PathGeometry pg = _bezierCache.Get(bezier);
+            PathGeometry pg = _cubicBezierCache.Get(cubicBezier);
             if (pg != null)
             {
                 var pf = pg.Figures[0];
-                pf.StartPoint = new Point(bezier.Point1.X + dx, bezier.Point1.Y + dy);
-                pf.IsFilled = bezier.IsFilled;
+                pf.StartPoint = new Point(cubicBezier.Point1.X + dx, cubicBezier.Point1.Y + dy);
+                pf.IsFilled = cubicBezier.IsFilled;
                 var bs = pf.Segments[0] as BezierSegment;
-                bs.Point1 = new Point(bezier.Point2.X + dx, bezier.Point2.Y + dy);
-                bs.Point2 = new Point(bezier.Point3.X + dx, bezier.Point3.Y + dy);
-                bs.Point3 = new Point(bezier.Point4.X + dx, bezier.Point4.Y + dy);
-                bs.IsStroked = bezier.IsStroked;
+                bs.Point1 = new Point(cubicBezier.Point2.X + dx, cubicBezier.Point2.Y + dy);
+                bs.Point2 = new Point(cubicBezier.Point3.X + dx, cubicBezier.Point3.Y + dy);
+                bs.Point3 = new Point(cubicBezier.Point4.X + dx, cubicBezier.Point4.Y + dy);
+                bs.IsStroked = cubicBezier.IsStroked;
             }
             else
             {
                 var pf = new PathFigure()
                 {
-                    StartPoint = new Point(bezier.Point1.X + dx, bezier.Point1.Y + dy),
-                    IsFilled = bezier.IsFilled
+                    StartPoint = new Point(cubicBezier.Point1.X + dx, cubicBezier.Point1.Y + dy),
+                    IsFilled = cubicBezier.IsFilled
                 };
                 var bs = new BezierSegment(
-                        new Point(bezier.Point2.X + dx, bezier.Point2.Y + dy),
-                        new Point(bezier.Point3.X + dx, bezier.Point3.Y + dy),
-                        new Point(bezier.Point4.X + dx, bezier.Point4.Y + dy),
-                        bezier.IsStroked);
+                        new Point(cubicBezier.Point2.X + dx, cubicBezier.Point2.Y + dy),
+                        new Point(cubicBezier.Point3.X + dx, cubicBezier.Point3.Y + dy),
+                        new Point(cubicBezier.Point4.X + dx, cubicBezier.Point4.Y + dy),
+                        cubicBezier.IsStroked);
                 //bs.Freeze();
                 pf.Segments.Add(bs);
                 //pf.Freeze();
@@ -861,18 +861,18 @@ namespace Dependencies
                 pg.Figures.Add(pf);
                 //pg.Freeze();
 
-                _bezierCache.Set(bezier, pg);
+                _cubicBezierCache.Set(cubicBezier, pg);
             }
 
-            DrawPathGeometryInternal(_dc, half, fill, stroke, bezier.IsStroked, bezier.IsFilled, pg);
+            DrawPathGeometryInternal(_dc, half, fill, stroke, cubicBezier.IsStroked, cubicBezier.IsFilled, pg);
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XQBezier qbezier, double dx, double dy, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, XQuadraticBezier quadraticBezier, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var _dc = dc as DrawingContext;
 
-            var style = qbezier.Style;
+            var style = quadraticBezier.Style;
             if (style == null)
                 return;
 
@@ -894,29 +894,29 @@ namespace Dependencies
                 _styleCache.Set(style, Tuple.Create(fill, stroke));
             }
 
-            PathGeometry pg = _qbezierCache.Get(qbezier);
+            PathGeometry pg = _quadraticBezierCache.Get(quadraticBezier);
             if (pg != null)
             {
                 var pf = pg.Figures[0];
-                pf.StartPoint = new Point(qbezier.Point1.X + dx, qbezier.Point1.Y + dy);
-                pf.IsFilled = qbezier.IsFilled;
+                pf.StartPoint = new Point(quadraticBezier.Point1.X + dx, quadraticBezier.Point1.Y + dy);
+                pf.IsFilled = quadraticBezier.IsFilled;
                 var qbs = pf.Segments[0] as QuadraticBezierSegment;
-                qbs.Point1 = new Point(qbezier.Point2.X + dx, qbezier.Point2.Y + dy);
-                qbs.Point2 = new Point(qbezier.Point3.X + dx, qbezier.Point3.Y + dy);
-                qbs.IsStroked = qbezier.IsStroked;
+                qbs.Point1 = new Point(quadraticBezier.Point2.X + dx, quadraticBezier.Point2.Y + dy);
+                qbs.Point2 = new Point(quadraticBezier.Point3.X + dx, quadraticBezier.Point3.Y + dy);
+                qbs.IsStroked = quadraticBezier.IsStroked;
             }
             else
             {
                 var pf = new PathFigure()
                 {
-                    StartPoint = new Point(qbezier.Point1.X + dx, qbezier.Point1.Y + dy),
-                    IsFilled = qbezier.IsFilled
+                    StartPoint = new Point(quadraticBezier.Point1.X + dx, quadraticBezier.Point1.Y + dy),
+                    IsFilled = quadraticBezier.IsFilled
                 };
 
                 var qbs = new QuadraticBezierSegment(
-                        new Point(qbezier.Point2.X + dx, qbezier.Point2.Y + dy),
-                        new Point(qbezier.Point3.X + dx, qbezier.Point3.Y + dy),
-                        qbezier.IsStroked);
+                        new Point(quadraticBezier.Point2.X + dx, quadraticBezier.Point2.Y + dy),
+                        new Point(quadraticBezier.Point3.X + dx, quadraticBezier.Point3.Y + dy),
+                        quadraticBezier.IsStroked);
                 //bs.Freeze();
                 pf.Segments.Add(qbs);
                 //pf.Freeze();
@@ -924,10 +924,10 @@ namespace Dependencies
                 pg.Figures.Add(pf);
                 //pg.Freeze();
 
-                _qbezierCache.Set(qbezier, pg);
+                _quadraticBezierCache.Set(quadraticBezier, pg);
             }
 
-            DrawPathGeometryInternal(_dc, half, fill, stroke, qbezier.IsStroked, qbezier.IsFilled, pg);
+            DrawPathGeometryInternal(_dc, half, fill, stroke, quadraticBezier.IsStroked, quadraticBezier.IsFilled, pg);
         }
 
         /// <inheritdoc/>

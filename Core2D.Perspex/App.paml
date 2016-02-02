@@ -280,11 +280,11 @@
         <DataTemplate DataType="core:XArc">
             <shapes:ArcControl/>
         </DataTemplate>
-        <DataTemplate DataType="core:XBezier">
-            <shapes:BezierControl/>
+        <DataTemplate DataType="core:XCubicBezier">
+            <shapes:CubicBezierControl/>
         </DataTemplate>
-        <DataTemplate DataType="core:XQBezier">
-            <shapes:QBezierControl/>
+        <DataTemplate DataType="core:XQuadraticBezier">
+            <shapes:QuadraticBezierControl/>
         </DataTemplate>
         <DataTemplate DataType="core:XGroup">
             <shapes:GroupControl/>

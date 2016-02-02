@@ -10,7 +10,7 @@ namespace Core2D
     {
         private Editor _editor;
         private ToolState _currentState = ToolState.None;
-        private XBezier _shape;
+        private XCubicBezier _shape;
         private ShapeStyle _style;
         private XLine _line12;
         private XLine _line43;
@@ -31,66 +31,66 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Try to connect <see cref="XBezier.Point1"/> point at specified location.
+        /// Try to connect <see cref="XCubicBezier.Point1"/> point at specified location.
         /// </summary>
-        /// <param name="bezier">The bezier object.</param>
+        /// <param name="cubicBezier">The cubic bezier object.</param>
         /// <param name="x">The X coordinate of point.</param>
         /// <param name="y">The Y coordinate of point.</param>
         /// <returns>True if connected.</returns>
-        public void TryToConnectPoint1(XBezier bezier, double x, double y)
+        public void TryToConnectPoint1(XCubicBezier cubicBezier, double x, double y)
         {
             var result = ShapeBounds.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitThreshold);
             if (result != null && result is XPoint)
             {
-                bezier.Point1 = result as XPoint;
+                cubicBezier.Point1 = result as XPoint;
             }
         }
 
         /// <summary>
-        /// Try to connect <see cref="XBezier.Point2"/> point at specified location.
+        /// Try to connect <see cref="XCubicBezier.Point2"/> point at specified location.
         /// </summary>
-        /// <param name="bezier">The bezier object.</param>
+        /// <param name="cubicBezier">The cubic bezier object.</param>
         /// <param name="x">The X coordinate of point.</param>
         /// <param name="y">The Y coordinate of point.</param>
         /// <returns>True if connected.</returns>
-        public void TryToConnectPoint2(XBezier bezier, double x, double y)
+        public void TryToConnectPoint2(XCubicBezier cubicBezier, double x, double y)
         {
             var result = ShapeBounds.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitThreshold);
             if (result != null && result is XPoint)
             {
-                bezier.Point2 = result as XPoint;
+                cubicBezier.Point2 = result as XPoint;
             }
         }
 
         /// <summary>
-        /// Try to connect <see cref="XBezier.Point3"/> point at specified location.
+        /// Try to connect <see cref="XCubicBezier.Point3"/> point at specified location.
         /// </summary>
-        /// <param name="bezier">The bezier object.</param>
+        /// <param name="cubicBezier">The cubic bezier object.</param>
         /// <param name="x">The X coordinate of point.</param>
         /// <param name="y">The Y coordinate of point.</param>
         /// <returns>True if connected.</returns>
-        public void TryToConnectPoint3(XBezier bezier, double x, double y)
+        public void TryToConnectPoint3(XCubicBezier cubicBezier, double x, double y)
         {
             var result = ShapeBounds.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitThreshold);
             if (result != null && result is XPoint)
             {
-                bezier.Point3 = result as XPoint;
+                cubicBezier.Point3 = result as XPoint;
             }
         }
 
         /// <summary>
-        /// Try to connect <see cref="XBezier.Point4"/> point at specified location.
+        /// Try to connect <see cref="XCubicBezier.Point4"/> point at specified location.
         /// </summary>
-        /// <param name="bezier">The bezier object.</param>
+        /// <param name="cubicBezier">The cubic bezier object.</param>
         /// <param name="x">The X coordinate of point.</param>
         /// <param name="y">The Y coordinate of point.</param>
         /// <returns>True if connected.</returns>
-        public void TryToConnectPoint4(XBezier bezier, double x, double y)
+        public void TryToConnectPoint4(XCubicBezier cubicBezier, double x, double y)
         {
             var result = ShapeBounds.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitThreshold);
             if (result != null && result is XPoint)
             {
-                bezier.Point4 = result as XPoint;
+                cubicBezier.Point4 = result as XPoint;
             }
         }
 
@@ -105,7 +105,7 @@ namespace Core2D
             {
                 case ToolState.None:
                     {
-                        _shape = XBezier.Create(
+                        _shape = XCubicBezier.Create(
                             sx, sy,
                             _editor.Project.CurrentStyleLibrary.Selected,
                             _editor.Project.Options.PointShape,
@@ -113,12 +113,12 @@ namespace Core2D
                             _editor.Project.Options.DefaultIsFilled);
                         if (_editor.Project.Options.TryToConnect)
                         {
-                            TryToConnectPoint1(_shape as XBezier, sx, sy);
+                            TryToConnectPoint1(_shape as XCubicBezier, sx, sy);
                         }
                         _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_shape);
                         _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         ToStateOne();
-                        Move(_shape as XBezier);
+                        Move(_shape as XCubicBezier);
                         _editor.Project.CurrentContainer.HelperLayer.Invalidate();
                         _currentState = ToolState.One;
                         _editor.CancelAvailable = true;
@@ -126,20 +126,20 @@ namespace Core2D
                     break;
                 case ToolState.One:
                     {
-                        var bezier = _shape as XBezier;
-                        if (bezier != null)
+                        var cubicBezier = _shape as XCubicBezier;
+                        if (cubicBezier != null)
                         {
-                            bezier.Point3.X = sx;
-                            bezier.Point3.Y = sy;
-                            bezier.Point4.X = sx;
-                            bezier.Point4.Y = sy;
+                            cubicBezier.Point3.X = sx;
+                            cubicBezier.Point3.Y = sy;
+                            cubicBezier.Point4.X = sx;
+                            cubicBezier.Point4.Y = sy;
                             if (_editor.Project.Options.TryToConnect)
                             {
-                                TryToConnectPoint4(_shape as XBezier, sx, sy);
+                                TryToConnectPoint4(_shape as XCubicBezier, sx, sy);
                             }
                             _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                             ToStateTwo();
-                            Move(_shape as XBezier);
+                            Move(_shape as XCubicBezier);
                             _editor.Project.CurrentContainer.HelperLayer.Invalidate();
                             _currentState = ToolState.Two;
                         }
@@ -147,18 +147,18 @@ namespace Core2D
                     break;
                 case ToolState.Two:
                     {
-                        var bezier = _shape as XBezier;
-                        if (bezier != null)
+                        var cubicBezier = _shape as XCubicBezier;
+                        if (cubicBezier != null)
                         {
-                            bezier.Point2.X = sx;
-                            bezier.Point2.Y = sy;
+                            cubicBezier.Point2.X = sx;
+                            cubicBezier.Point2.Y = sy;
                             if (_editor.Project.Options.TryToConnect)
                             {
-                                TryToConnectPoint2(_shape as XBezier, sx, sy);
+                                TryToConnectPoint2(_shape as XCubicBezier, sx, sy);
                             }
                             _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                             ToStateThree();
-                            Move(_shape as XBezier);
+                            Move(_shape as XCubicBezier);
                             _editor.Project.CurrentContainer.HelperLayer.Invalidate();
                             _currentState = ToolState.Three;
                         }
@@ -166,18 +166,18 @@ namespace Core2D
                     break;
                 case ToolState.Three:
                     {
-                        var bezier = _shape as XBezier;
-                        if (bezier != null)
+                        var cubicBezier = _shape as XCubicBezier;
+                        if (cubicBezier != null)
                         {
-                            bezier.Point3.X = sx;
-                            bezier.Point3.Y = sy;
+                            cubicBezier.Point3.X = sx;
+                            cubicBezier.Point3.Y = sy;
                             if (_editor.Project.Options.TryToConnect)
                             {
-                                TryToConnectPoint3(_shape as XBezier, sx, sy);
+                                TryToConnectPoint3(_shape as XCubicBezier, sx, sy);
                             }
                             _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_shape);
                             Remove();
-                            Finalize(_shape as XBezier);
+                            Finalize(_shape as XCubicBezier);
                             _editor.Project.AddShape(_editor.Project.CurrentContainer.CurrentLayer, _shape);
                             _currentState = ToolState.None;
                             _editor.CancelAvailable = false;
@@ -230,55 +230,55 @@ namespace Core2D
                     break;
                 case ToolState.One:
                     {
-                        var bezier = _shape as XBezier;
-                        if (bezier != null)
+                        var cubicBezier = _shape as XCubicBezier;
+                        if (cubicBezier != null)
                         {
                             if (_editor.Project.Options.TryToConnect)
                             {
                                 _editor.TryToHoverShape(sx, sy);
                             }
-                            bezier.Point2.X = sx;
-                            bezier.Point2.Y = sy;
-                            bezier.Point3.X = sx;
-                            bezier.Point3.Y = sy;
-                            bezier.Point4.X = sx;
-                            bezier.Point4.Y = sy;
+                            cubicBezier.Point2.X = sx;
+                            cubicBezier.Point2.Y = sy;
+                            cubicBezier.Point3.X = sx;
+                            cubicBezier.Point3.Y = sy;
+                            cubicBezier.Point4.X = sx;
+                            cubicBezier.Point4.Y = sy;
                             _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
-                            Move(_shape as XBezier);
+                            Move(_shape as XCubicBezier);
                             _editor.Project.CurrentContainer.HelperLayer.Invalidate();
                         }
                     }
                     break;
                 case ToolState.Two:
                     {
-                        var bezier = _shape as XBezier;
-                        if (bezier != null)
+                        var cubicBezier = _shape as XCubicBezier;
+                        if (cubicBezier != null)
                         {
                             if (_editor.Project.Options.TryToConnect)
                             {
                                 _editor.TryToHoverShape(sx, sy);
                             }
-                            bezier.Point2.X = sx;
-                            bezier.Point2.Y = sy;
+                            cubicBezier.Point2.X = sx;
+                            cubicBezier.Point2.Y = sy;
                             _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
-                            Move(_shape as XBezier);
+                            Move(_shape as XCubicBezier);
                             _editor.Project.CurrentContainer.HelperLayer.Invalidate();
                         }
                     }
                     break;
                 case ToolState.Three:
                     {
-                        var bezier = _shape as XBezier;
-                        if (bezier != null)
+                        var cubicBezier = _shape as XCubicBezier;
+                        if (cubicBezier != null)
                         {
                             if (_editor.Project.Options.TryToConnect)
                             {
                                 _editor.TryToHoverShape(sx, sy);
                             }
-                            bezier.Point3.X = sx;
-                            bezier.Point3.Y = sy;
+                            cubicBezier.Point3.X = sx;
+                            cubicBezier.Point3.Y = sy;
                             _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
-                            Move(_shape as XBezier);
+                            Move(_shape as XCubicBezier);
                             _editor.Project.CurrentContainer.HelperLayer.Invalidate();
                         }
                     }
@@ -328,54 +328,54 @@ namespace Core2D
         {
             base.Move(shape);
 
-            var bezier = shape as XBezier;
+            var cubicBezier = shape as XCubicBezier;
 
             if (_line12 != null)
             {
-                _line12.Start.X = bezier.Point1.X;
-                _line12.Start.Y = bezier.Point1.Y;
-                _line12.End.X = bezier.Point2.X;
-                _line12.End.Y = bezier.Point2.Y;
+                _line12.Start.X = cubicBezier.Point1.X;
+                _line12.Start.Y = cubicBezier.Point1.Y;
+                _line12.End.X = cubicBezier.Point2.X;
+                _line12.End.Y = cubicBezier.Point2.Y;
             }
 
             if (_line43 != null)
             {
-                _line43.Start.X = bezier.Point4.X;
-                _line43.Start.Y = bezier.Point4.Y;
-                _line43.End.X = bezier.Point3.X;
-                _line43.End.Y = bezier.Point3.Y;
+                _line43.Start.X = cubicBezier.Point4.X;
+                _line43.Start.Y = cubicBezier.Point4.Y;
+                _line43.End.X = cubicBezier.Point3.X;
+                _line43.End.Y = cubicBezier.Point3.Y;
             }
 
             if (_line23 != null)
             {
-                _line23.Start.X = bezier.Point2.X;
-                _line23.Start.Y = bezier.Point2.Y;
-                _line23.End.X = bezier.Point3.X;
-                _line23.End.Y = bezier.Point3.Y;
+                _line23.Start.X = cubicBezier.Point2.X;
+                _line23.Start.Y = cubicBezier.Point2.Y;
+                _line23.End.X = cubicBezier.Point3.X;
+                _line23.End.Y = cubicBezier.Point3.Y;
             }
 
             if (_helperPoint1 != null)
             {
-                _helperPoint1.X = bezier.Point1.X;
-                _helperPoint1.Y = bezier.Point1.Y;
+                _helperPoint1.X = cubicBezier.Point1.X;
+                _helperPoint1.Y = cubicBezier.Point1.Y;
             }
 
             if (_helperPoint2 != null)
             {
-                _helperPoint2.X = bezier.Point2.X;
-                _helperPoint2.Y = bezier.Point2.Y;
+                _helperPoint2.X = cubicBezier.Point2.X;
+                _helperPoint2.Y = cubicBezier.Point2.Y;
             }
 
             if (_helperPoint3 != null)
             {
-                _helperPoint3.X = bezier.Point3.X;
-                _helperPoint3.Y = bezier.Point3.Y;
+                _helperPoint3.X = cubicBezier.Point3.X;
+                _helperPoint3.Y = cubicBezier.Point3.Y;
             }
 
             if (_helperPoint4 != null)
             {
-                _helperPoint4.X = bezier.Point4.X;
-                _helperPoint4.Y = bezier.Point4.Y;
+                _helperPoint4.X = cubicBezier.Point4.X;
+                _helperPoint4.Y = cubicBezier.Point4.Y;
             }
         }
 

@@ -307,8 +307,8 @@
     <Compile Include="Controls\Shapes\ArcControl.paml.cs">
       <DependentUpon>ArcControl.paml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Shapes\BezierControl.paml.cs">
-      <DependentUpon>BezierControl.paml</DependentUpon>
+    <Compile Include="Controls\Shapes\CubicBezierControl.paml.cs">
+      <DependentUpon>CubicBezierControl.paml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Shapes\EllipseControl.paml.cs">
       <DependentUpon>EllipseControl.paml</DependentUpon>
@@ -328,8 +328,8 @@
     <Compile Include="Controls\Shapes\PointControl.paml.cs">
       <DependentUpon>PointControl.paml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Shapes\QBezierControl.paml.cs">
-      <DependentUpon>QBezierControl.paml</DependentUpon>
+    <Compile Include="Controls\Shapes\QuadraticBezierControl.paml.cs">
+      <DependentUpon>QuadraticBezierControl.paml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Shapes\RectangleControl.paml.cs">
       <DependentUpon>RectangleControl.paml</DependentUpon>
@@ -425,8 +425,8 @@
     <EmbeddedResource Include="Controls\Shapes\EllipseControl.paml" />
     <EmbeddedResource Include="Controls\Shapes\ImageControl.paml" />
     <EmbeddedResource Include="Controls\Shapes\ArcControl.paml" />
-    <EmbeddedResource Include="Controls\Shapes\BezierControl.paml" />
-    <EmbeddedResource Include="Controls\Shapes\QBezierControl.paml" />
+    <EmbeddedResource Include="Controls\Shapes\CubicBezierControl.paml" />
+    <EmbeddedResource Include="Controls\Shapes\QuadraticBezierControl.paml" />
     <EmbeddedResource Include="Controls\Shapes\GroupControl.paml" />
     <EmbeddedResource Include="Controls\Shapes\PathControl.paml" />
     <EmbeddedResource Include="Controls\Path\PathSizeControl.paml" />

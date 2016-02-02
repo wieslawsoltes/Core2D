@@ -92,9 +92,9 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public XBezier Bezier(double x1 = 30, double y1 = 30, double x2 = 30, double y2 = 60, double x3 = 60, double y3 = 60, double x4 = 60, double y4 = 30, bool isStroked = true, bool isFilled = false)
+        public XCubicBezier CubicBezier(double x1 = 30, double y1 = 30, double x2 = 30, double y2 = 60, double x3 = 60, double y3 = 60, double x4 = 60, double y4 = 30, bool isStroked = true, bool isFilled = false)
         {
-            var bezier = XBezier.Create(
+            var cubicBezier = XCubicBezier.Create(
                 x1, y1,
                 x2, y2,
                 x3, y3,
@@ -103,14 +103,14 @@ namespace Core2D
                 _editor.Project.Options.PointShape,
                 isStroked,
                 isFilled);
-            _editor.Project.AddShape(_editor.Project.CurrentContainer.CurrentLayer, bezier);
-            return bezier;
+            _editor.Project.AddShape(_editor.Project.CurrentContainer.CurrentLayer, cubicBezier);
+            return cubicBezier;
         }
 
         /// <inheritdoc/>
-        public XBezier Bezier(XPoint point1, XPoint point2, XPoint point3, XPoint point4, bool isStroked = true, bool isFilled = false)
+        public XCubicBezier CubicBezier(XPoint point1, XPoint point2, XPoint point3, XPoint point4, bool isStroked = true, bool isFilled = false)
         {
-            var bezier = XBezier.Create(
+            var cubicBezier = XCubicBezier.Create(
                 point1,
                 point2,
                 point3,
@@ -119,14 +119,14 @@ namespace Core2D
                 _editor.Project.Options.PointShape,
                 isStroked,
                 isFilled);
-            _editor.Project.AddShape(_editor.Project.CurrentContainer.CurrentLayer, bezier);
-            return bezier;
+            _editor.Project.AddShape(_editor.Project.CurrentContainer.CurrentLayer, cubicBezier);
+            return cubicBezier;
         }
 
         /// <inheritdoc/>
-        public XQBezier QBezier(double x1 = 30, double y1 = 30, double x2 = 45, double y2 = 60, double x3 = 60, double y3 = 30, bool isStroked = true, bool isFilled = false)
+        public XQuadraticBezier QuadraticBezier(double x1 = 30, double y1 = 30, double x2 = 45, double y2 = 60, double x3 = 60, double y3 = 30, bool isStroked = true, bool isFilled = false)
         {
-            var qbezier = XQBezier.Create(
+            var quadraticBezier = XQuadraticBezier.Create(
                 x1, y1,
                 x2, y2,
                 x3, y3,
@@ -134,14 +134,14 @@ namespace Core2D
                 _editor.Project.Options.PointShape,
                 isStroked,
                 isFilled);
-            _editor.Project.AddShape(_editor.Project.CurrentContainer.CurrentLayer, qbezier);
-            return qbezier;
+            _editor.Project.AddShape(_editor.Project.CurrentContainer.CurrentLayer, quadraticBezier);
+            return quadraticBezier;
         }
 
         /// <inheritdoc/>
-        public XQBezier QBezier(XPoint point1, XPoint point2, XPoint point3, bool isStroked = true, bool isFilled = false)
+        public XQuadraticBezier QuadraticBezier(XPoint point1, XPoint point2, XPoint point3, bool isStroked = true, bool isFilled = false)
         {
-            var qbezier = XQBezier.Create(
+            var quadraticBezier = XQuadraticBezier.Create(
                 point1,
                 point2,
                 point3,
@@ -149,8 +149,8 @@ namespace Core2D
                 _editor.Project.Options.PointShape,
                 isStroked,
                 isFilled);
-            _editor.Project.AddShape(_editor.Project.CurrentContainer.CurrentLayer, qbezier);
-            return qbezier;
+            _editor.Project.AddShape(_editor.Project.CurrentContainer.CurrentLayer, quadraticBezier);
+            return quadraticBezier;
         }
 
         /// <inheritdoc/>

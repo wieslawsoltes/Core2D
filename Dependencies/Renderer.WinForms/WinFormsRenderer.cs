@@ -583,40 +583,40 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XBezier bezier, double dx, double dy, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, XCubicBezier cubicBezier, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var _gfx = dc as Graphics;
 
-            Brush brush = ToSolidBrush(bezier.Style.Fill);
-            Pen pen = ToPen(bezier.Style, _scaleToPage);
+            Brush brush = ToSolidBrush(cubicBezier.Style.Fill);
+            Pen pen = ToPen(cubicBezier.Style, _scaleToPage);
 
-            if (bezier.IsFilled)
+            if (cubicBezier.IsFilled)
             {
                 var path = new GraphicsPath();
                 path.AddBezier(
-                    _scaleToPage(bezier.Point1.X),
-                    _scaleToPage(bezier.Point1.Y),
-                    _scaleToPage(bezier.Point2.X),
-                    _scaleToPage(bezier.Point2.Y),
-                    _scaleToPage(bezier.Point3.X),
-                    _scaleToPage(bezier.Point3.Y),
-                    _scaleToPage(bezier.Point4.X),
-                    _scaleToPage(bezier.Point4.Y));
+                    _scaleToPage(cubicBezier.Point1.X),
+                    _scaleToPage(cubicBezier.Point1.Y),
+                    _scaleToPage(cubicBezier.Point2.X),
+                    _scaleToPage(cubicBezier.Point2.Y),
+                    _scaleToPage(cubicBezier.Point3.X),
+                    _scaleToPage(cubicBezier.Point3.Y),
+                    _scaleToPage(cubicBezier.Point4.X),
+                    _scaleToPage(cubicBezier.Point4.Y));
                 _gfx.FillPath(brush, path);
             }
 
-            if (bezier.IsStroked)
+            if (cubicBezier.IsStroked)
             {
                 _gfx.DrawBezier(
                     pen,
-                    _scaleToPage(bezier.Point1.X),
-                    _scaleToPage(bezier.Point1.Y),
-                    _scaleToPage(bezier.Point2.X),
-                    _scaleToPage(bezier.Point2.Y),
-                    _scaleToPage(bezier.Point3.X),
-                    _scaleToPage(bezier.Point3.Y),
-                    _scaleToPage(bezier.Point4.X),
-                    _scaleToPage(bezier.Point4.Y));
+                    _scaleToPage(cubicBezier.Point1.X),
+                    _scaleToPage(cubicBezier.Point1.Y),
+                    _scaleToPage(cubicBezier.Point2.X),
+                    _scaleToPage(cubicBezier.Point2.Y),
+                    _scaleToPage(cubicBezier.Point3.X),
+                    _scaleToPage(cubicBezier.Point3.Y),
+                    _scaleToPage(cubicBezier.Point4.X),
+                    _scaleToPage(cubicBezier.Point4.Y));
             }
 
             brush.Dispose();
@@ -624,23 +624,23 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XQBezier qbezier, double dx, double dy, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, XQuadraticBezier quadraticBezier, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var _gfx = dc as Graphics;
 
-            Brush brush = ToSolidBrush(qbezier.Style.Fill);
-            Pen pen = ToPen(qbezier.Style, _scaleToPage);
+            Brush brush = ToSolidBrush(quadraticBezier.Style.Fill);
+            Pen pen = ToPen(quadraticBezier.Style, _scaleToPage);
 
-            double x1 = qbezier.Point1.X;
-            double y1 = qbezier.Point1.Y;
-            double x2 = qbezier.Point1.X + (2.0 * (qbezier.Point2.X - qbezier.Point1.X)) / 3.0;
-            double y2 = qbezier.Point1.Y + (2.0 * (qbezier.Point2.Y - qbezier.Point1.Y)) / 3.0;
-            double x3 = x2 + (qbezier.Point3.X - qbezier.Point1.X) / 3.0;
-            double y3 = y2 + (qbezier.Point3.Y - qbezier.Point1.Y) / 3.0;
-            double x4 = qbezier.Point3.X;
-            double y4 = qbezier.Point3.Y;
+            double x1 = quadraticBezier.Point1.X;
+            double y1 = quadraticBezier.Point1.Y;
+            double x2 = quadraticBezier.Point1.X + (2.0 * (quadraticBezier.Point2.X - quadraticBezier.Point1.X)) / 3.0;
+            double y2 = quadraticBezier.Point1.Y + (2.0 * (quadraticBezier.Point2.Y - quadraticBezier.Point1.Y)) / 3.0;
+            double x3 = x2 + (quadraticBezier.Point3.X - quadraticBezier.Point1.X) / 3.0;
+            double y3 = y2 + (quadraticBezier.Point3.Y - quadraticBezier.Point1.Y) / 3.0;
+            double x4 = quadraticBezier.Point3.X;
+            double y4 = quadraticBezier.Point3.Y;
 
-            if (qbezier.IsFilled)
+            if (quadraticBezier.IsFilled)
             {
                 var path = new GraphicsPath();
                 path.AddBezier(
@@ -655,7 +655,7 @@ namespace Dependencies
                 _gfx.FillPath(brush, path);
             }
 
-            if (qbezier.IsStroked)
+            if (quadraticBezier.IsStroked)
             {
                 _gfx.DrawBezier(
                     pen,
