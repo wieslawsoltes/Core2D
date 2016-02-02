@@ -28,6 +28,32 @@
         </TabItem>
         <TabItem Header="Figures">
             <TreeView x:Name="tree" ItemsSource="{Binding Figures}" BorderBrush="{x:Null}" BorderThickness="0" HorizontalContentAlignment="Stretch" VerticalAlignment="Stretch">
+                <TreeView.Resources>
+                    <DataTemplate DataType="{x:Type core:XPathFigure}">
+                        <TextBlock Text="Figure"/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type core:XLineSegment}">
+                        <TextBlock Text="LineSegment"/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type core:XBezierSegment}">
+                        <TextBlock Text="BezierSegment"/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type core:XQuadraticBezierSegment}">
+                        <TextBlock Text="QuadraticBezierSegment"/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type core:XArcSegment}">
+                        <TextBlock Text="ArcSegment"/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type core:XPolyLineSegment}">
+                        <TextBlock Text="PolyLineSegment"/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type core:XPolyBezierSegment}">
+                        <TextBlock Text="PolyBezierSegment"/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type core:XPolyQuadraticBezierSegment}">
+                        <TextBlock Text="PolyQuadraticBezierSegment"/>
+                    </DataTemplate>
+                </TreeView.Resources>
                 <TreeView.ItemContainerStyle>
                     <Style TargetType="TreeViewItem">
                         <Setter Property="IsExpanded" Value="True"/>
@@ -42,10 +68,10 @@
                         </HierarchicalDataTemplate.ItemContainerStyle>
                         <HierarchicalDataTemplate.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding}"/>
+                                <ContentControl Content="{Binding}"/>
                             </DataTemplate>
                         </HierarchicalDataTemplate.ItemTemplate>
-                        <TextBlock Text="{Binding}"/>
+                        <ContentControl Content="{Binding}"/>
                     </HierarchicalDataTemplate>
                 </TreeView.ItemTemplate>
             </TreeView>
