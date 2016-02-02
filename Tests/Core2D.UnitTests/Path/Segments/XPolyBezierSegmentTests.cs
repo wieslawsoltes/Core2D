@@ -35,7 +35,7 @@ namespace Core2D.UnitTests
 
         [Fact]
         [Trait("Core2D", "Path")]
-        public void ToString_Should_Path_Markup()
+        public void ToString_Should_Return_Path_Markup()
         {
             var target = new XPolyBezierSegment();
             target.Points.Add(new XPoint());

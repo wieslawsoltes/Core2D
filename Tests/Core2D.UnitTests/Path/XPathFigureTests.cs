@@ -63,7 +63,7 @@ namespace Core2D.UnitTests
 
         [Fact]
         [Trait("Core2D", "Path")]
-        public void ToString_Should_Path_Markup_Empty_Not_Closed()
+        public void ToString_Should_Return_Path_Markup_Empty_Not_Closed()
         {
             var target = new XPathFigure();
 
@@ -74,7 +74,7 @@ namespace Core2D.UnitTests
 
         [Fact]
         [Trait("Core2D", "Path")]
-        public void ToString_Should_Path_Markup_Empty_Closed()
+        public void ToString_Should_Return_Path_Markup_Empty_Closed()
         {
             var target = new XPathFigure() { IsClosed = true };
 
