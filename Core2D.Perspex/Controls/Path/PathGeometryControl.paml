@@ -17,6 +17,11 @@
         </TabItem>
         <TabItem Header="Figures" Classes="property">
             <TreeView Name="tree" Items="{Binding Path=Figures}" Classes="default">
+                <TreeView.Styles>
+                    <Style Selector="TreeViewItem">
+                        <Setter Property="IsExpanded" Value="True"/>
+                    </Style>
+                </TreeView.Styles>
                 <TreeView.DataTemplates>
                     <TreeDataTemplate DataType="core:XPathFigure" ItemsSource="{Binding Path=Segments}">
                         <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="default"/>
