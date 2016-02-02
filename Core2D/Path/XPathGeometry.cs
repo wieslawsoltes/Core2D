@@ -47,9 +47,14 @@ namespace Core2D
             };
         }
 
-        private string ToString(IList<XPathFigure> figures)
+        /// <summary>
+        /// Creates a string representation of figures collection.
+        /// </summary>
+        /// <param name="figures">The figures collection.</param>
+        /// <returns>A string representation of figures collection.</returns>
+        public string ToString(IList<XPathFigure> figures)
         {
-            if (figures.Count == 0)
+            if (figures?.Count == 0)
             {
                 return string.Empty;
             }
@@ -71,19 +76,17 @@ namespace Core2D
         {
             string figuresString = string.Empty;
 
-            if (Figures != null)
+            if (Figures?.Count > 0)
             {
                 figuresString = ToString(Figures);
             }
 
-            if (FillRule != XFillRule.EvenOdd)
+            if (FillRule == XFillRule.Nonzero)
             {
                 return "F1" + figuresString;
             }
-            else
-            {
-                return figuresString;
-            }
+
+            return figuresString;
         }
     }
 }
