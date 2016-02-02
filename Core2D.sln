@@ -54,6 +54,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serializer.ProtoBuf", "Depe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serializer.ProtoBuf.Generate", "Dependencies\Serializer.ProtoBuf.Generate\Serializer.ProtoBuf.Generate.csproj", "{50A4E393-386B-4354-8FB7-A20044986094}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.Wpf.UnitTests", "Tests\Core2D.Wpf.UnitTests\Core2D.Wpf.UnitTests.csproj", "{E9C30F6F-00DD-494A-8E7C-253A5C76E999}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.Perspex.UnitTests", "Tests\Core2D.Perspex.UnitTests\Core2D.Perspex.UnitTests.csproj", "{AD91E9DC-52E7-4883-B03C-7BA87A2B44A5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -148,6 +152,14 @@ Global
 		{50A4E393-386B-4354-8FB7-A20044986094}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{50A4E393-386B-4354-8FB7-A20044986094}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{50A4E393-386B-4354-8FB7-A20044986094}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9C30F6F-00DD-494A-8E7C-253A5C76E999}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9C30F6F-00DD-494A-8E7C-253A5C76E999}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9C30F6F-00DD-494A-8E7C-253A5C76E999}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9C30F6F-00DD-494A-8E7C-253A5C76E999}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD91E9DC-52E7-4883-B03C-7BA87A2B44A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD91E9DC-52E7-4883-B03C-7BA87A2B44A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD91E9DC-52E7-4883-B03C-7BA87A2B44A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD91E9DC-52E7-4883-B03C-7BA87A2B44A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -172,5 +184,7 @@ Global
 		{AB31E0E2-9090-4461-84BE-5C5AAA19758F} = {D5DF7EE8-7191-4B8D-B18B-4F3785F91E21}
 		{83191601-FCAC-48A7-ABF9-2179FEC1B2CE} = {2D76C6F5-844B-4D2D-96D8-B39D49C70706}
 		{50A4E393-386B-4354-8FB7-A20044986094} = {2D76C6F5-844B-4D2D-96D8-B39D49C70706}
+		{E9C30F6F-00DD-494A-8E7C-253A5C76E999} = {D5DF7EE8-7191-4B8D-B18B-4F3785F91E21}
+		{AD91E9DC-52E7-4883-B03C-7BA87A2B44A5} = {D5DF7EE8-7191-4B8D-B18B-4F3785F91E21}
 	EndGlobalSection
 EndGlobal
