@@ -73,9 +73,14 @@ namespace Core2D
             };
         }
 
-        private string ToString(IList<XPathSegment> segments)
+        /// <summary>
+        /// Creates a string representation of segments collection.
+        /// </summary>
+        /// <param name="segments">The segments collection.</param>
+        /// <returns>A string representation of segments collection.</returns>
+        public string ToString(IList<XPathSegment> segments)
         {
-            if (segments.Count == 0)
+            if (segments?.Count == 0)
             {
                 return string.Empty;
             }
