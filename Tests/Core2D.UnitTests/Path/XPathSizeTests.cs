@@ -6,6 +6,13 @@ namespace Core2D.UnitTests
 {
     public class XPathSizeTests
     {
-        // TODO: Write XPathSizeTests tests.
+        [Fact]
+        [Trait("Core2D", "Path")]
+        public void ToString_Should_Return_Width_And_Height()
+        {
+            var target = new XPathSize() { Width = 50, Height = 30 };
+            var actual = target.ToString();
+            Assert.Equal("50,30", actual);
+        }
     }
 }
