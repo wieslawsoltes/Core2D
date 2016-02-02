@@ -797,47 +797,47 @@ namespace Core2D
                     arc.Point4.PropertyChanged += ShapeObserver;
                 }
             }
-            else if (shape is XBezier)
+            else if (shape is XCubicBezier)
             {
-                var bezier = shape as XBezier;
+                var cubicBezier = shape as XCubicBezier;
 
-                if (bezier.Point1 != null)
+                if (cubicBezier.Point1 != null)
                 {
-                    bezier.Point1.PropertyChanged += ShapeObserver;
+                    cubicBezier.Point1.PropertyChanged += ShapeObserver;
                 }
 
-                if (bezier.Point2 != null)
+                if (cubicBezier.Point2 != null)
                 {
-                    bezier.Point2.PropertyChanged += ShapeObserver;
+                    cubicBezier.Point2.PropertyChanged += ShapeObserver;
                 }
 
-                if (bezier.Point3 != null)
+                if (cubicBezier.Point3 != null)
                 {
-                    bezier.Point3.PropertyChanged += ShapeObserver;
+                    cubicBezier.Point3.PropertyChanged += ShapeObserver;
                 }
 
-                if (bezier.Point4 != null)
+                if (cubicBezier.Point4 != null)
                 {
-                    bezier.Point4.PropertyChanged += ShapeObserver;
+                    cubicBezier.Point4.PropertyChanged += ShapeObserver;
                 }
             }
-            else if (shape is XQBezier)
+            else if (shape is XQuadraticBezier)
             {
-                var qbezier = shape as XQBezier;
+                var quadraticBezier = shape as XQuadraticBezier;
 
-                if (qbezier.Point1 != null)
+                if (quadraticBezier.Point1 != null)
                 {
-                    qbezier.Point1.PropertyChanged += ShapeObserver;
+                    quadraticBezier.Point1.PropertyChanged += ShapeObserver;
                 }
 
-                if (qbezier.Point2 != null)
+                if (quadraticBezier.Point2 != null)
                 {
-                    qbezier.Point2.PropertyChanged += ShapeObserver;
+                    quadraticBezier.Point2.PropertyChanged += ShapeObserver;
                 }
 
-                if (qbezier.Point3 != null)
+                if (quadraticBezier.Point3 != null)
                 {
-                    qbezier.Point3.PropertyChanged += ShapeObserver;
+                    quadraticBezier.Point3.PropertyChanged += ShapeObserver;
                 }
             }
             else if (shape is XText)
@@ -982,47 +982,47 @@ namespace Core2D
                     arc.Point4.PropertyChanged -= ShapeObserver;
                 }
             }
-            else if (shape is XBezier)
+            else if (shape is XCubicBezier)
             {
-                var bezier = shape as XBezier;
+                var cubicBezier = shape as XCubicBezier;
 
-                if (bezier.Point1 != null)
+                if (cubicBezier.Point1 != null)
                 {
-                    bezier.Point1.PropertyChanged -= ShapeObserver;
+                    cubicBezier.Point1.PropertyChanged -= ShapeObserver;
                 }
 
-                if (bezier.Point2 != null)
+                if (cubicBezier.Point2 != null)
                 {
-                    bezier.Point2.PropertyChanged -= ShapeObserver;
+                    cubicBezier.Point2.PropertyChanged -= ShapeObserver;
                 }
 
-                if (bezier.Point3 != null)
+                if (cubicBezier.Point3 != null)
                 {
-                    bezier.Point3.PropertyChanged -= ShapeObserver;
+                    cubicBezier.Point3.PropertyChanged -= ShapeObserver;
                 }
 
-                if (bezier.Point4 != null)
+                if (cubicBezier.Point4 != null)
                 {
-                    bezier.Point4.PropertyChanged -= ShapeObserver;
+                    cubicBezier.Point4.PropertyChanged -= ShapeObserver;
                 }
             }
-            else if (shape is XQBezier)
+            else if (shape is XQuadraticBezier)
             {
-                var qbezier = shape as XQBezier;
+                var quadraticBezier = shape as XQuadraticBezier;
 
-                if (qbezier.Point1 != null)
+                if (quadraticBezier.Point1 != null)
                 {
-                    qbezier.Point1.PropertyChanged -= ShapeObserver;
+                    quadraticBezier.Point1.PropertyChanged -= ShapeObserver;
                 }
 
-                if (qbezier.Point2 != null)
+                if (quadraticBezier.Point2 != null)
                 {
-                    qbezier.Point2.PropertyChanged -= ShapeObserver;
+                    quadraticBezier.Point2.PropertyChanged -= ShapeObserver;
                 }
 
-                if (qbezier.Point3 != null)
+                if (quadraticBezier.Point3 != null)
                 {
-                    qbezier.Point3.PropertyChanged -= ShapeObserver;
+                    quadraticBezier.Point3.PropertyChanged -= ShapeObserver;
                 }
             }
             else if (shape is XText)

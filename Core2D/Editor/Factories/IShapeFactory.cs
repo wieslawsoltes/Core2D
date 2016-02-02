@@ -66,57 +66,57 @@ namespace Core2D
         XArc Arc(XPoint point1, XPoint point2, XPoint point3, XPoint point4, bool isStroked, bool isFilled);
 
         /// <summary>
-        /// Creates a new instance of the <see cref="XArc"/> class.
+        /// Creates a new instance of the <see cref="XCubicBezier"/> class.
         /// </summary>
-        /// <param name="x1">The X coordinate of <see cref="XBezier.Point1"/> point.</param>
-        /// <param name="y1">The Y coordinate of <see cref="XBezier.Point1"/> point.</param>
-        /// <param name="x2">The X coordinate of <see cref="XBezier.Point2"/> point.</param>
-        /// <param name="y2">The Y coordinate of <see cref="XBezier.Point2"/> point.</param>
-        /// <param name="x3">The X coordinate of <see cref="XBezier.Point3"/> point.</param>
-        /// <param name="y3">The Y coordinate of <see cref="XBezier.Point3"/> point.</param>
-        /// <param name="x4">The X coordinate of <see cref="XBezier.Point4"/> point.</param>
-        /// <param name="y4">The Y coordinate of <see cref="XBezier.Point4"/> point.</param>
+        /// <param name="x1">The X coordinate of <see cref="XCubicBezier.Point1"/> point.</param>
+        /// <param name="y1">The Y coordinate of <see cref="XCubicBezier.Point1"/> point.</param>
+        /// <param name="x2">The X coordinate of <see cref="XCubicBezier.Point2"/> point.</param>
+        /// <param name="y2">The Y coordinate of <see cref="XCubicBezier.Point2"/> point.</param>
+        /// <param name="x3">The X coordinate of <see cref="XCubicBezier.Point3"/> point.</param>
+        /// <param name="y3">The Y coordinate of <see cref="XCubicBezier.Point3"/> point.</param>
+        /// <param name="x4">The X coordinate of <see cref="XCubicBezier.Point4"/> point.</param>
+        /// <param name="y4">The Y coordinate of <see cref="XCubicBezier.Point4"/> point.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
-        /// <returns>The new instance of the <see cref="XBezier"/> class.</returns>
-        XBezier Bezier(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, bool isStroked, bool isFilled);
+        /// <returns>The new instance of the <see cref="XCubicBezier"/> class.</returns>
+        XCubicBezier CubicBezier(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, bool isStroked, bool isFilled);
 
         /// <summary>
-        /// Creates a new instance of the <see cref="XBezier"/> class.
+        /// Creates a new instance of the <see cref="XCubicBezier"/> class.
         /// </summary>
-        /// <param name="point1">The <see cref="XBezier.Point1"/> point.</param>
-        /// <param name="point2">The <see cref="XBezier.Point2"/> point.</param>
-        /// <param name="point3">The <see cref="XBezier.Point3"/> point.</param>
-        /// <param name="point4">The <see cref="XBezier.Point4"/> point.</param>
+        /// <param name="point1">The <see cref="XCubicBezier.Point1"/> point.</param>
+        /// <param name="point2">The <see cref="XCubicBezier.Point2"/> point.</param>
+        /// <param name="point3">The <see cref="XCubicBezier.Point3"/> point.</param>
+        /// <param name="point4">The <see cref="XCubicBezier.Point4"/> point.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
-        /// <returns>The new instance of the <see cref="XBezier"/> class.</returns>
-        XBezier Bezier(XPoint point1, XPoint point2, XPoint point3, XPoint point4, bool isStroked, bool isFilled);
+        /// <returns>The new instance of the <see cref="XCubicBezier"/> class.</returns>
+        XCubicBezier CubicBezier(XPoint point1, XPoint point2, XPoint point3, XPoint point4, bool isStroked, bool isFilled);
 
         /// <summary>
-        /// Creates a new instance of the <see cref="XQBezier"/> class.
+        /// Creates a new instance of the <see cref="XQuadraticBezier"/> class.
         /// </summary>
-        /// <param name="x1">The X coordinate of <see cref="XQBezier.Point1"/> point.</param>
-        /// <param name="y1">The Y coordinate of <see cref="XQBezier.Point1"/> point.</param>
-        /// <param name="x2">The X coordinate of <see cref="XQBezier.Point2"/> point.</param>
-        /// <param name="y2">The Y coordinate of <see cref="XQBezier.Point2"/> point.</param>
-        /// <param name="x3">The X coordinate of <see cref="XQBezier.Point3"/> point.</param>
-        /// <param name="y3">The Y coordinate of <see cref="XQBezier.Point3"/> point.</param>
+        /// <param name="x1">The X coordinate of <see cref="XQuadraticBezier.Point1"/> point.</param>
+        /// <param name="y1">The Y coordinate of <see cref="XQuadraticBezier.Point1"/> point.</param>
+        /// <param name="x2">The X coordinate of <see cref="XQuadraticBezier.Point2"/> point.</param>
+        /// <param name="y2">The Y coordinate of <see cref="XQuadraticBezier.Point2"/> point.</param>
+        /// <param name="x3">The X coordinate of <see cref="XQuadraticBezier.Point3"/> point.</param>
+        /// <param name="y3">The Y coordinate of <see cref="XQuadraticBezier.Point3"/> point.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
-        /// <returns>The new instance of the <see cref="XQBezier"/> class.</returns>
-        XQBezier QBezier(double x1, double y1, double x2, double y2, double x3, double y3, bool isStroked, bool isFilled);
+        /// <returns>The new instance of the <see cref="XQuadraticBezier"/> class.</returns>
+        XQuadraticBezier QuadraticBezier(double x1, double y1, double x2, double y2, double x3, double y3, bool isStroked, bool isFilled);
 
         /// <summary>
-        /// Creates a new instance of the <see cref="XQBezier"/> class.
+        /// Creates a new instance of the <see cref="XQuadraticBezier"/> class.
         /// </summary>
-        /// <param name="point1">The <see cref="XQBezier.Point1"/> point.</param>
-        /// <param name="point2">The <see cref="XQBezier.Point2"/> point.</param>
-        /// <param name="point3">The <see cref="XQBezier.Point3"/> point.</param>
+        /// <param name="point1">The <see cref="XQuadraticBezier.Point1"/> point.</param>
+        /// <param name="point2">The <see cref="XQuadraticBezier.Point2"/> point.</param>
+        /// <param name="point3">The <see cref="XQuadraticBezier.Point3"/> point.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
-        /// <returns>The new instance of the <see cref="XQBezier"/> class.</returns>
-        XQBezier QBezier(XPoint point1, XPoint point2, XPoint point3, bool isStroked, bool isFilled);
+        /// <returns>The new instance of the <see cref="XQuadraticBezier"/> class.</returns>
+        XQuadraticBezier QuadraticBezier(XPoint point1, XPoint point2, XPoint point3, bool isStroked, bool isFilled);
 
         /// <summary>
         /// Creates a new instance of the <see cref="XPathGeometry"/> class.

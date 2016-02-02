@@ -6,14 +6,14 @@ using Perspex.Markup.Xaml;
 namespace Core2D.Perspex.Controls.Shapes
 {
     /// <summary>
-    /// Interaction logic for <see cref="BezierControl"/> xaml.
+    /// Interaction logic for <see cref="QuadraticBezierControl"/> xaml.
     /// </summary>
-    public class BezierControl : UserControl
+    public class QuadraticBezierControl : UserControl
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="BezierControl"/> class.
+        /// Initializes a new instance of the <see cref="QuadraticBezierControl"/> class.
         /// </summary>
-        public BezierControl()
+        public QuadraticBezierControl()
         {
             this.InitializeComponent();
         }

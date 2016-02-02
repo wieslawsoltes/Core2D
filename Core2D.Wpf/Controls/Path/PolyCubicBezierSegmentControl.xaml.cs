@@ -2,17 +2,17 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System.Windows.Controls;
 
-namespace Core2D.Wpf.Controls.Shapes
+namespace Core2D.Wpf.Controls.Path
 {
     /// <summary>
-    /// Interaction logic for <see cref="QBezierControl"/> xaml.
+    /// Interaction logic for <see cref="PolyCubicBezierSegmentControl"/> xaml.
     /// </summary>
-    public partial class QBezierControl : UserControl
+    public partial class PolyCubicBezierSegmentControl : UserControl
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="QBezierControl"/> class.
+        /// Initializes a new instance of the <see cref="PolyCubicBezierSegmentControl"/> class.
         /// </summary>
-        public QBezierControl()
+        public PolyCubicBezierSegmentControl()
         {
             InitializeComponent();
         }

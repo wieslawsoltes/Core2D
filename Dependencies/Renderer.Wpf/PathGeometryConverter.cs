@@ -64,13 +64,13 @@ namespace Dependencies
                     }
                     else if (segment is BezierSegment)
                     {
-                        var bezierSegment = segment as BezierSegment;
-                        context.BezierTo(
-                            XPoint.Create(bezierSegment.Point1.X, bezierSegment.Point1.Y),
-                            XPoint.Create(bezierSegment.Point2.X, bezierSegment.Point2.Y),
-                            XPoint.Create(bezierSegment.Point3.X, bezierSegment.Point3.Y),
-                            bezierSegment.IsStroked,
-                            bezierSegment.IsSmoothJoin);
+                        var cubicBezierSegment = segment as BezierSegment;
+                        context.CubicBezierTo(
+                            XPoint.Create(cubicBezierSegment.Point1.X, cubicBezierSegment.Point1.Y),
+                            XPoint.Create(cubicBezierSegment.Point2.X, cubicBezierSegment.Point2.Y),
+                            XPoint.Create(cubicBezierSegment.Point3.X, cubicBezierSegment.Point3.Y),
+                            cubicBezierSegment.IsStroked,
+                            cubicBezierSegment.IsSmoothJoin);
                     }
                     else if (segment is LineSegment)
                     {
@@ -82,11 +82,11 @@ namespace Dependencies
                     }
                     else if (segment is PolyBezierSegment)
                     {
-                        var polyBezierSegment = segment as PolyBezierSegment;
-                        context.PolyBezierTo(
-                            ToXPoints(polyBezierSegment.Points),
-                            polyBezierSegment.IsStroked,
-                            polyBezierSegment.IsSmoothJoin);
+                        var polyCubicBezierSegment = segment as PolyBezierSegment;
+                        context.PolyCubicBezierTo(
+                            ToXPoints(polyCubicBezierSegment.Points),
+                            polyCubicBezierSegment.IsStroked,
+                            polyCubicBezierSegment.IsSmoothJoin);
                     }
                     else if (segment is PolyLineSegment)
                     {
@@ -106,12 +106,12 @@ namespace Dependencies
                     }
                     else if (segment is QuadraticBezierSegment)
                     {
-                        var qbezierSegment = segment as QuadraticBezierSegment;
+                        var quadraticBezierSegment = segment as QuadraticBezierSegment;
                         context.QuadraticBezierTo(
-                            XPoint.Create(qbezierSegment.Point1.X, qbezierSegment.Point1.Y),
-                            XPoint.Create(qbezierSegment.Point2.X, qbezierSegment.Point2.Y),
-                            qbezierSegment.IsStroked,
-                            qbezierSegment.IsSmoothJoin);
+                            XPoint.Create(quadraticBezierSegment.Point1.X, quadraticBezierSegment.Point1.Y),
+                            XPoint.Create(quadraticBezierSegment.Point2.X, quadraticBezierSegment.Point2.Y),
+                            quadraticBezierSegment.IsStroked,
+                            quadraticBezierSegment.IsSmoothJoin);
                     }
                     else
                     {

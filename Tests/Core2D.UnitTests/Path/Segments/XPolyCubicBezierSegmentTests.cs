@@ -5,13 +5,13 @@ using Xunit;
 
 namespace Core2D.UnitTests
 {
-    public class XPolyBezierSegmentTests
+    public class XPolyCubicBezierSegmentTests
     {
         [Fact]
         [Trait("Core2D", "Path")]
         public void Points_Not_Null()
         {
-            var target = new XPolyBezierSegment();
+            var target = new XPolyCubicBezierSegment();
             Assert.NotNull(target.Points);
         }
 
@@ -19,7 +19,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D", "Path")]
         public void GetPoints_Should_Return_All_Segment_Points()
         {
-            var segment = new XPolyBezierSegment();
+            var segment = new XPolyCubicBezierSegment();
             segment.Points.Add(new XPoint());
             segment.Points.Add(new XPoint());
             segment.Points.Add(new XPoint());
@@ -37,7 +37,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D", "Path")]
         public void ToString_Should_Return_Path_Markup()
         {
-            var target = new XPolyBezierSegment();
+            var target = new XPolyCubicBezierSegment();
             target.Points.Add(new XPoint());
             target.Points.Add(new XPoint());
             target.Points.Add(new XPoint());

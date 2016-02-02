@@ -687,70 +687,70 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.XBezier bezier, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
+        public override void Draw(object dc, Core2D.XCubicBezier cubicBezier, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
         {
             var _gfx = dc as XGraphics;
 
-            if (bezier.IsFilled)
+            if (cubicBezier.IsFilled)
             {
                 var path = new XGraphicsPath();
                 path.AddBezier(
-                    _scaleToPage(bezier.Point1.X + dx),
-                    _scaleToPage(bezier.Point1.Y + dy),
-                    _scaleToPage(bezier.Point2.X + dx),
-                    _scaleToPage(bezier.Point2.Y + dy),
-                    _scaleToPage(bezier.Point3.X + dx),
-                    _scaleToPage(bezier.Point3.Y + dy),
-                    _scaleToPage(bezier.Point4.X + dx),
-                    _scaleToPage(bezier.Point4.Y + dy));
+                    _scaleToPage(cubicBezier.Point1.X + dx),
+                    _scaleToPage(cubicBezier.Point1.Y + dy),
+                    _scaleToPage(cubicBezier.Point2.X + dx),
+                    _scaleToPage(cubicBezier.Point2.Y + dy),
+                    _scaleToPage(cubicBezier.Point3.X + dx),
+                    _scaleToPage(cubicBezier.Point3.Y + dy),
+                    _scaleToPage(cubicBezier.Point4.X + dx),
+                    _scaleToPage(cubicBezier.Point4.Y + dy));
 
-                if (bezier.IsStroked)
+                if (cubicBezier.IsStroked)
                 {
                     _gfx.DrawPath(
-                        ToXPen(bezier.Style, _scaleToPage),
-                        ToXSolidBrush(bezier.Style.Fill),
+                        ToXPen(cubicBezier.Style, _scaleToPage),
+                        ToXSolidBrush(cubicBezier.Style.Fill),
                         path);
                 }
                 else
                 {
                     _gfx.DrawPath(
-                        ToXSolidBrush(bezier.Style.Fill),
+                        ToXSolidBrush(cubicBezier.Style.Fill),
                         path);
                 }
             }
             else
             {
-                if (bezier.IsStroked)
+                if (cubicBezier.IsStroked)
                 {
                     _gfx.DrawBezier(
-                        ToXPen(bezier.Style, _scaleToPage),
-                        _scaleToPage(bezier.Point1.X + dx),
-                        _scaleToPage(bezier.Point1.Y + dy),
-                        _scaleToPage(bezier.Point2.X + dx),
-                        _scaleToPage(bezier.Point2.Y + dy),
-                        _scaleToPage(bezier.Point3.X + dx),
-                        _scaleToPage(bezier.Point3.Y + dy),
-                        _scaleToPage(bezier.Point4.X + dx),
-                        _scaleToPage(bezier.Point4.Y + dy));
+                        ToXPen(cubicBezier.Style, _scaleToPage),
+                        _scaleToPage(cubicBezier.Point1.X + dx),
+                        _scaleToPage(cubicBezier.Point1.Y + dy),
+                        _scaleToPage(cubicBezier.Point2.X + dx),
+                        _scaleToPage(cubicBezier.Point2.Y + dy),
+                        _scaleToPage(cubicBezier.Point3.X + dx),
+                        _scaleToPage(cubicBezier.Point3.Y + dy),
+                        _scaleToPage(cubicBezier.Point4.X + dx),
+                        _scaleToPage(cubicBezier.Point4.Y + dy));
                 }
             }
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.XQBezier qbezier, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
+        public override void Draw(object dc, Core2D.XQuadraticBezier quadraticBezier, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
         {
             var _gfx = dc as XGraphics;
 
-            double x1 = qbezier.Point1.X;
-            double y1 = qbezier.Point1.Y;
-            double x2 = qbezier.Point1.X + (2.0 * (qbezier.Point2.X - qbezier.Point1.X)) / 3.0;
-            double y2 = qbezier.Point1.Y + (2.0 * (qbezier.Point2.Y - qbezier.Point1.Y)) / 3.0;
-            double x3 = x2 + (qbezier.Point3.X - qbezier.Point1.X) / 3.0;
-            double y3 = y2 + (qbezier.Point3.Y - qbezier.Point1.Y) / 3.0;
-            double x4 = qbezier.Point3.X;
-            double y4 = qbezier.Point3.Y;
+            double x1 = quadraticBezier.Point1.X;
+            double y1 = quadraticBezier.Point1.Y;
+            double x2 = quadraticBezier.Point1.X + (2.0 * (quadraticBezier.Point2.X - quadraticBezier.Point1.X)) / 3.0;
+            double y2 = quadraticBezier.Point1.Y + (2.0 * (quadraticBezier.Point2.Y - quadraticBezier.Point1.Y)) / 3.0;
+            double x3 = x2 + (quadraticBezier.Point3.X - quadraticBezier.Point1.X) / 3.0;
+            double y3 = y2 + (quadraticBezier.Point3.Y - quadraticBezier.Point1.Y) / 3.0;
+            double x4 = quadraticBezier.Point3.X;
+            double y4 = quadraticBezier.Point3.Y;
 
-            if (qbezier.IsFilled)
+            if (quadraticBezier.IsFilled)
             {
                 var path = new XGraphicsPath();
                 path.AddBezier(
@@ -763,26 +763,26 @@ namespace Dependencies
                     _scaleToPage(x4 + dx),
                     _scaleToPage(y4 + dy));
 
-                if (qbezier.IsStroked)
+                if (quadraticBezier.IsStroked)
                 {
                     _gfx.DrawPath(
-                        ToXPen(qbezier.Style, _scaleToPage),
-                        ToXSolidBrush(qbezier.Style.Fill),
+                        ToXPen(quadraticBezier.Style, _scaleToPage),
+                        ToXSolidBrush(quadraticBezier.Style.Fill),
                         path);
                 }
                 else
                 {
                     _gfx.DrawPath(
-                        ToXSolidBrush(qbezier.Style.Fill),
+                        ToXSolidBrush(quadraticBezier.Style.Fill),
                         path);
                 }
             }
             else
             {
-                if (qbezier.IsStroked)
+                if (quadraticBezier.IsStroked)
                 {
                     _gfx.DrawBezier(
-                        ToXPen(qbezier.Style, _scaleToPage),
+                        ToXPen(quadraticBezier.Style, _scaleToPage),
                         _scaleToPage(x1 + dx),
                         _scaleToPage(y1 + dy),
                         _scaleToPage(x2 + dx),

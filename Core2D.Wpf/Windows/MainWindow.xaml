@@ -201,8 +201,8 @@
                                                 <KeyBinding Command="{x:Static core:Commands.ToolRectangleCommand}" Key="R" Modifiers=""/>
                                                 <KeyBinding Command="{x:Static core:Commands.ToolEllipseCommand}" Key="E" Modifiers=""/>
                                                 <KeyBinding Command="{x:Static core:Commands.ToolArcCommand}" Key="A" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static core:Commands.ToolBezierCommand}" Key="B" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static core:Commands.ToolQBezierCommand}" Key="Q" Modifiers=""/>
+                                                <KeyBinding Command="{x:Static core:Commands.ToolCubicBezierCommand}" Key="B" Modifiers=""/>
+                                                <KeyBinding Command="{x:Static core:Commands.ToolQuadraticBezierCommand}" Key="Q" Modifiers=""/>
                                                 <KeyBinding Command="{x:Static core:Commands.ToolTextCommand}" Key="T" Modifiers=""/>
                                                 <KeyBinding Command="{x:Static core:Commands.ToolImageCommand}" Key="I" Modifiers=""/>
                                                 <KeyBinding Command="{x:Static core:Commands.ToolPathCommand}" Key="H" Modifiers=""/>

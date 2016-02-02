@@ -132,26 +132,26 @@ namespace Core2D
         public abstract void Draw(object dc, XArc arc, double dx, double dy, ImmutableArray<Property> db, Record r);
 
         /// <summary>
-        /// Draws a <see cref="XBezier"/> shape using drawing context.
+        /// Draws a <see cref="XCubicBezier"/> shape using drawing context.
         /// </summary>
         /// <param name="dc">The native drawing context.</param>
-        /// <param name="bezier">The <see cref="XBezier"/> shape.</param>
+        /// <param name="cubicBezier">The <see cref="XCubicBezier"/> shape.</param>
         /// <param name="dx">The X coordinate offset.</param>
         /// <param name="dy">The Y coordinate offset.</param>
         /// <param name="db">The properties database.</param>
         /// <param name="r">The data record.</param>
-        public abstract void Draw(object dc, XBezier bezier, double dx, double dy, ImmutableArray<Property> db, Record r);
+        public abstract void Draw(object dc, XCubicBezier cubicBezier, double dx, double dy, ImmutableArray<Property> db, Record r);
 
         /// <summary>
-        /// Draws a <see cref="XQBezier"/> shape using drawing context.
+        /// Draws a <see cref="XQuadraticBezier"/> shape using drawing context.
         /// </summary>
         /// <param name="dc">The native drawing context.</param>
-        /// <param name="qbezier">The <see cref="XQBezier"/> shape.</param>
+        /// <param name="quadraticBezier">The <see cref="XQuadraticBezier"/> shape.</param>
         /// <param name="dx">The X coordinate offset.</param>
         /// <param name="dy">The Y coordinate offset.</param>
         /// <param name="db">The properties database.</param>
         /// <param name="r">The data record.</param>
-        public abstract void Draw(object dc, XQBezier qbezier, double dx, double dy, ImmutableArray<Property> db, Record r);
+        public abstract void Draw(object dc, XQuadraticBezier quadraticBezier, double dx, double dy, ImmutableArray<Property> db, Record r);
 
         /// <summary>
         /// Draws a <see cref="XText"/> shape using drawing context.

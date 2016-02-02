@@ -382,7 +382,7 @@ namespace Core2D
                             }
 
                             _lastPoint = ReadPoint(cmd, _allowComma);
-                            _context.BezierTo(
+                            _context.CubicBezierTo(
                                 XPoint.FromPoint2(p),
                                 XPoint.FromPoint2(_secondLastPoint),
                                 XPoint.FromPoint2(_lastPoint),

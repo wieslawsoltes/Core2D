@@ -4,75 +4,93 @@
 namespace Core2D
 {
     /// <summary>
-    /// Helper class for <see cref="Tool.QBezier"/> editor.
+    /// Helper class for <see cref="Tool.CubicBezier"/> editor.
     /// </summary>
-    public sealed class ToolQBezier : ToolBase
+    public sealed class ToolCubicBezier : ToolBase
     {
         private Editor _editor;
         private ToolState _currentState = ToolState.None;
-        private XQBezier _shape;
+        private XCubicBezier _shape;
         private ShapeStyle _style;
         private XLine _line12;
-        private XLine _line32;
+        private XLine _line43;
+        private XLine _line23;
         private XPoint _helperPoint1;
         private XPoint _helperPoint2;
         private XPoint _helperPoint3;
+        private XPoint _helperPoint4;
 
         /// <summary>
-        /// Initialize new instance of <see cref="ToolQBezier"/> class.
+        /// Initialize new instance of <see cref="ToolCubicBezier"/> class.
         /// </summary>
         /// <param name="editor">The current <see cref="Editor"/> object.</param>
-        public ToolQBezier(Editor editor)
+        public ToolCubicBezier(Editor editor)
             : base()
         {
             _editor = editor;
         }
 
         /// <summary>
-        /// Try to connect <see cref="XQBezier.Point1"/> point at specified location.
+        /// Try to connect <see cref="XCubicBezier.Point1"/> point at specified location.
         /// </summary>
-        /// <param name="qbezier">The qbezier object.</param>
+        /// <param name="cubicBezier">The cubic bezier object.</param>
         /// <param name="x">The X coordinate of point.</param>
         /// <param name="y">The Y coordinate of point.</param>
         /// <returns>True if connected.</returns>
-        public void TryToConnectPoint1(XQBezier qbezier, double x, double y)
+        public void TryToConnectPoint1(XCubicBezier cubicBezier, double x, double y)
         {
             var result = ShapeBounds.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitThreshold);
             if (result != null && result is XPoint)
             {
-                qbezier.Point1 = result as XPoint;
+                cubicBezier.Point1 = result as XPoint;
             }
         }
 
         /// <summary>
-        /// Try to connect <see cref="XQBezier.Point2"/> point at specified location.
+        /// Try to connect <see cref="XCubicBezier.Point2"/> point at specified location.
         /// </summary>
-        /// <param name="qbezier">The qbezier object.</param>
+        /// <param name="cubicBezier">The cubic bezier object.</param>
         /// <param name="x">The X coordinate of point.</param>
         /// <param name="y">The Y coordinate of point.</param>
         /// <returns>True if connected.</returns>
-        public void TryToConnectPoint2(XQBezier qbezier, double x, double y)
+        public void TryToConnectPoint2(XCubicBezier cubicBezier, double x, double y)
         {
             var result = ShapeBounds.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitThreshold);
             if (result != null && result is XPoint)
             {
-                qbezier.Point2 = result as XPoint;
+                cubicBezier.Point2 = result as XPoint;
             }
         }
 
         /// <summary>
-        /// Try to connect <see cref="XQBezier.Point3"/> point at specified location.
+        /// Try to connect <see cref="XCubicBezier.Point3"/> point at specified location.
         /// </summary>
-        /// <param name="qbezier">The qbezier object.</param>
+        /// <param name="cubicBezier">The cubic bezier object.</param>
         /// <param name="x">The X coordinate of point.</param>
         /// <param name="y">The Y coordinate of point.</param>
         /// <returns>True if connected.</returns>
-        public void TryToConnectPoint3(XQBezier qbezier, double x, double y)
+        public void TryToConnectPoint3(XCubicBezier cubicBezier, double x, double y)
         {
             var result = ShapeBounds.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitThreshold);
             if (result != null && result is XPoint)
             {
-                qbezier.Point3 = result as XPoint;
+                cubicBezier.Point3 = result as XPoint;
+            }
+        }
+
+        /// <summary>
+        /// Try to connect <see cref="XCubicBezier.Point4"/> point at specified location.
+        /// </summary>
+        /// <param name="cubicBezier">The cubic bezier object.</param>
+        /// <param name="x">The X coordinate of point.</param>
+        /// <param name="y">The Y coordinate of point.</param>
+        /// <returns>True if connected.</returns>
+        public void TryToConnectPoint4(XCubicBezier cubicBezier, double x, double y)
+        {
+            var result = ShapeBounds.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitThreshold);
+            if (result != null && result is XPoint)
+            {
+                cubicBezier.Point4 = result as XPoint;
             }
         }
 
@@ -87,7 +105,7 @@ namespace Core2D
             {
                 case ToolState.None:
                     {
-                        _shape = XQBezier.Create(
+                        _shape = XCubicBezier.Create(
                             sx, sy,
                             _editor.Project.CurrentStyleLibrary.Selected,
                             _editor.Project.Options.PointShape,
@@ -95,12 +113,12 @@ namespace Core2D
                             _editor.Project.Options.DefaultIsFilled);
                         if (_editor.Project.Options.TryToConnect)
                         {
-                            TryToConnectPoint1(_shape as XQBezier, sx, sy);
+                            TryToConnectPoint1(_shape as XCubicBezier, sx, sy);
                         }
                         _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_shape);
                         _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         ToStateOne();
-                        Move(_shape as XQBezier);
+                        Move(_shape as XCubicBezier);
                         _editor.Project.CurrentContainer.HelperLayer.Invalidate();
                         _currentState = ToolState.One;
                         _editor.CancelAvailable = true;
@@ -108,20 +126,20 @@ namespace Core2D
                     break;
                 case ToolState.One:
                     {
-                        var qbezier = _shape as XQBezier;
-                        if (qbezier != null)
+                        var cubicBezier = _shape as XCubicBezier;
+                        if (cubicBezier != null)
                         {
-                            qbezier.Point2.X = sx;
-                            qbezier.Point2.Y = sy;
-                            qbezier.Point3.X = sx;
-                            qbezier.Point3.Y = sy;
+                            cubicBezier.Point3.X = sx;
+                            cubicBezier.Point3.Y = sy;
+                            cubicBezier.Point4.X = sx;
+                            cubicBezier.Point4.Y = sy;
                             if (_editor.Project.Options.TryToConnect)
                             {
-                                TryToConnectPoint3(_shape as XQBezier, sx, sy);
+                                TryToConnectPoint4(_shape as XCubicBezier, sx, sy);
                             }
                             _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                             ToStateTwo();
-                            Move(_shape as XQBezier);
+                            Move(_shape as XCubicBezier);
                             _editor.Project.CurrentContainer.HelperLayer.Invalidate();
                             _currentState = ToolState.Two;
                         }
@@ -129,18 +147,37 @@ namespace Core2D
                     break;
                 case ToolState.Two:
                     {
-                        var qbezier = _shape as XQBezier;
-                        if (qbezier != null)
+                        var cubicBezier = _shape as XCubicBezier;
+                        if (cubicBezier != null)
                         {
-                            qbezier.Point2.X = sx;
-                            qbezier.Point2.Y = sy;
+                            cubicBezier.Point2.X = sx;
+                            cubicBezier.Point2.Y = sy;
                             if (_editor.Project.Options.TryToConnect)
                             {
-                                TryToConnectPoint2(_shape as XQBezier, sx, sy);
+                                TryToConnectPoint2(_shape as XCubicBezier, sx, sy);
+                            }
+                            _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                            ToStateThree();
+                            Move(_shape as XCubicBezier);
+                            _editor.Project.CurrentContainer.HelperLayer.Invalidate();
+                            _currentState = ToolState.Three;
+                        }
+                    }
+                    break;
+                case ToolState.Three:
+                    {
+                        var cubicBezier = _shape as XCubicBezier;
+                        if (cubicBezier != null)
+                        {
+                            cubicBezier.Point3.X = sx;
+                            cubicBezier.Point3.Y = sy;
+                            if (_editor.Project.Options.TryToConnect)
+                            {
+                                TryToConnectPoint3(_shape as XCubicBezier, sx, sy);
                             }
                             _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_shape);
                             Remove();
-                            Finalize(_shape as XQBezier);
+                            Finalize(_shape as XCubicBezier);
                             _editor.Project.AddShape(_editor.Project.CurrentContainer.CurrentLayer, _shape);
                             _currentState = ToolState.None;
                             _editor.CancelAvailable = false;
@@ -161,6 +198,7 @@ namespace Core2D
                     break;
                 case ToolState.One:
                 case ToolState.Two:
+                case ToolState.Three:
                     {
                         _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_shape);
                         _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
@@ -192,36 +230,55 @@ namespace Core2D
                     break;
                 case ToolState.One:
                     {
-                        var qbezier = _shape as XQBezier;
-                        if (qbezier != null)
+                        var cubicBezier = _shape as XCubicBezier;
+                        if (cubicBezier != null)
                         {
                             if (_editor.Project.Options.TryToConnect)
                             {
                                 _editor.TryToHoverShape(sx, sy);
                             }
-                            qbezier.Point2.X = sx;
-                            qbezier.Point2.Y = sy;
-                            qbezier.Point3.X = sx;
-                            qbezier.Point3.Y = sy;
+                            cubicBezier.Point2.X = sx;
+                            cubicBezier.Point2.Y = sy;
+                            cubicBezier.Point3.X = sx;
+                            cubicBezier.Point3.Y = sy;
+                            cubicBezier.Point4.X = sx;
+                            cubicBezier.Point4.Y = sy;
                             _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
-                            Move(_shape as XQBezier);
+                            Move(_shape as XCubicBezier);
                             _editor.Project.CurrentContainer.HelperLayer.Invalidate();
                         }
                     }
                     break;
                 case ToolState.Two:
                     {
-                        var qbezier = _shape as XQBezier;
-                        if (qbezier != null)
+                        var cubicBezier = _shape as XCubicBezier;
+                        if (cubicBezier != null)
                         {
                             if (_editor.Project.Options.TryToConnect)
                             {
                                 _editor.TryToHoverShape(sx, sy);
                             }
-                            qbezier.Point2.X = sx;
-                            qbezier.Point2.Y = sy;
+                            cubicBezier.Point2.X = sx;
+                            cubicBezier.Point2.Y = sy;
                             _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
-                            Move(_shape as XQBezier);
+                            Move(_shape as XCubicBezier);
+                            _editor.Project.CurrentContainer.HelperLayer.Invalidate();
+                        }
+                    }
+                    break;
+                case ToolState.Three:
+                    {
+                        var cubicBezier = _shape as XCubicBezier;
+                        if (cubicBezier != null)
+                        {
+                            if (_editor.Project.Options.TryToConnect)
+                            {
+                                _editor.TryToHoverShape(sx, sy);
+                            }
+                            cubicBezier.Point3.X = sx;
+                            cubicBezier.Point3.Y = sy;
+                            _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                            Move(_shape as XCubicBezier);
                             _editor.Project.CurrentContainer.HelperLayer.Invalidate();
                         }
                     }
@@ -237,8 +294,8 @@ namespace Core2D
             _style = _editor.Project.Options.HelperStyle;
             _helperPoint1 = XPoint.Create(0, 0, _editor.Project.Options.PointShape);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_helperPoint1);
-            _helperPoint3 = XPoint.Create(0, 0, _editor.Project.Options.PointShape);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_helperPoint3);
+            _helperPoint4 = XPoint.Create(0, 0, _editor.Project.Options.PointShape);
+            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_helperPoint4);
         }
 
         /// <inheritdoc/>
@@ -249,10 +306,21 @@ namespace Core2D
             _style = _editor.Project.Options.HelperStyle;
             _line12 = XLine.Create(0, 0, _style, null);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_line12);
-            _line32 = XLine.Create(0, 0, _style, null);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_line32);
             _helperPoint2 = XPoint.Create(0, 0, _editor.Project.Options.PointShape);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_helperPoint2);
+        }
+
+        /// <inheritdoc/>
+        public override void ToStateThree()
+        {
+            base.ToStateThree();
+
+            _line43 = XLine.Create(0, 0, _style, null);
+            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_line43);
+            _line23 = XLine.Create(0, 0, _style, null);
+            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_line23);
+            _helperPoint3 = XPoint.Create(0, 0, _editor.Project.Options.PointShape);
+            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_helperPoint3);
         }
 
         /// <inheritdoc/>
@@ -260,40 +328,54 @@ namespace Core2D
         {
             base.Move(shape);
 
-            var qbezier = shape as XQBezier;
+            var cubicBezier = shape as XCubicBezier;
 
             if (_line12 != null)
             {
-                _line12.Start.X = qbezier.Point1.X;
-                _line12.Start.Y = qbezier.Point1.Y;
-                _line12.End.X = qbezier.Point2.X;
-                _line12.End.Y = qbezier.Point2.Y;
+                _line12.Start.X = cubicBezier.Point1.X;
+                _line12.Start.Y = cubicBezier.Point1.Y;
+                _line12.End.X = cubicBezier.Point2.X;
+                _line12.End.Y = cubicBezier.Point2.Y;
             }
 
-            if (_line32 != null)
+            if (_line43 != null)
             {
-                _line32.Start.X = qbezier.Point3.X;
-                _line32.Start.Y = qbezier.Point3.Y;
-                _line32.End.X = qbezier.Point2.X;
-                _line32.End.Y = qbezier.Point2.Y;
+                _line43.Start.X = cubicBezier.Point4.X;
+                _line43.Start.Y = cubicBezier.Point4.Y;
+                _line43.End.X = cubicBezier.Point3.X;
+                _line43.End.Y = cubicBezier.Point3.Y;
+            }
+
+            if (_line23 != null)
+            {
+                _line23.Start.X = cubicBezier.Point2.X;
+                _line23.Start.Y = cubicBezier.Point2.Y;
+                _line23.End.X = cubicBezier.Point3.X;
+                _line23.End.Y = cubicBezier.Point3.Y;
             }
 
             if (_helperPoint1 != null)
             {
-                _helperPoint1.X = qbezier.Point1.X;
-                _helperPoint1.Y = qbezier.Point1.Y;
+                _helperPoint1.X = cubicBezier.Point1.X;
+                _helperPoint1.Y = cubicBezier.Point1.Y;
             }
 
             if (_helperPoint2 != null)
             {
-                _helperPoint2.X = qbezier.Point2.X;
-                _helperPoint2.Y = qbezier.Point2.Y;
+                _helperPoint2.X = cubicBezier.Point2.X;
+                _helperPoint2.Y = cubicBezier.Point2.Y;
             }
 
             if (_helperPoint3 != null)
             {
-                _helperPoint3.X = qbezier.Point3.X;
-                _helperPoint3.Y = qbezier.Point3.Y;
+                _helperPoint3.X = cubicBezier.Point3.X;
+                _helperPoint3.Y = cubicBezier.Point3.Y;
+            }
+
+            if (_helperPoint4 != null)
+            {
+                _helperPoint4.X = cubicBezier.Point4.X;
+                _helperPoint4.Y = cubicBezier.Point4.Y;
             }
         }
 
@@ -308,10 +390,16 @@ namespace Core2D
                 _line12 = null;
             }
 
-            if (_line32 != null)
+            if (_line43 != null)
             {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_line32);
-                _line32 = null;
+                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_line43);
+                _line43 = null;
+            }
+
+            if (_line23 != null)
+            {
+                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_line23);
+                _line23 = null;
             }
 
             if (_helperPoint1 != null)
@@ -330,6 +418,12 @@ namespace Core2D
             {
                 _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_helperPoint3);
                 _helperPoint3 = null;
+            }
+
+            if (_helperPoint4 != null)
+            {
+                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_helperPoint4);
+                _helperPoint4 = null;
             }
 
             _style = null;

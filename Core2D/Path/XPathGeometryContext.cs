@@ -64,9 +64,9 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public override void BezierTo(XPoint point1, XPoint point2, XPoint point3, bool isStroked = true, bool isSmoothJoin = true)
+        public override void CubicBezierTo(XPoint point1, XPoint point2, XPoint point3, bool isStroked = true, bool isSmoothJoin = true)
         {
-            var segment = XBezierSegment.Create(
+            var segment = XCubicBezierSegment.Create(
                 point1,
                 point2,
                 point3,
@@ -97,9 +97,9 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public override void PolyBezierTo(IList<XPoint> points, bool isStroked = true, bool isSmoothJoin = true)
+        public override void PolyCubicBezierTo(IList<XPoint> points, bool isStroked = true, bool isSmoothJoin = true)
         {
-            var segment = XPolyBezierSegment.Create(
+            var segment = XPolyCubicBezierSegment.Create(
                 points,
                 isStroked,
                 isSmoothJoin);

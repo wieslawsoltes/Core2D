@@ -6,10 +6,10 @@ using Portable.Xaml.Markup;
 namespace Core2D
 {
     /// <summary>
-    /// Poly bezier path segment.
+    /// Poly cubic bezier path segment.
     /// </summary>
     [ContentProperty(nameof(Points))]
-    public sealed class XPolyBezierSegment : XPathSegment
+    public sealed class XPolyCubicBezierSegment : XPathSegment
     {
         /// <summary>
         /// Gets or sets points array.
@@ -17,9 +17,9 @@ namespace Core2D
         public IList<XPoint> Points { get; set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="XPolyBezierSegment"/> class.
+        /// Initializes a new instance of the <see cref="XPolyCubicBezierSegment"/> class.
         /// </summary>
-        public XPolyBezierSegment()
+        public XPolyCubicBezierSegment()
             : base()
         {
             Points = new List<XPoint>();
@@ -32,15 +32,15 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Creates a new <see cref="XPolyBezierSegment"/> instance.
+        /// Creates a new <see cref="XPolyCubicBezierSegment"/> instance.
         /// </summary>
         /// <param name="points">The points array.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
-        /// <returns>The new instance of the <see cref="XPolyBezierSegment"/> class.</returns>
-        public static XPolyBezierSegment Create(IList<XPoint> points, bool isStroked, bool isSmoothJoin)
+        /// <returns>The new instance of the <see cref="XPolyCubicBezierSegment"/> class.</returns>
+        public static XPolyCubicBezierSegment Create(IList<XPoint> points, bool isStroked, bool isSmoothJoin)
         {
-            return new XPolyBezierSegment()
+            return new XPolyCubicBezierSegment()
             {
                 Points = points,
                 IsStroked = isStroked,

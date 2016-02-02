@@ -4,13 +4,13 @@ using Xunit;
 
 namespace Core2D.UnitTests
 {
-    public class XBezierTests
+    public class XCubicBezierTests
     {
         [Fact]
         [Trait("Core2D", "Shapes")]
         public void Inherits_From_BaseShape()
         {
-            var target = new XBezier();
+            var target = new XCubicBezier();
             Assert.True(target is BaseShape);
         }
     }

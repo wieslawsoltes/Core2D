@@ -31,8 +31,8 @@ message BaseShape {
    // the following represent sub-types; at most 1 should have a value
    optional XPoint XPoint = 101;
    optional XLine XLine = 102;
-   optional XBezier XBezier = 103;
-   optional XQBezier XQBezier = 104;
+   optional XCubicBezier XCubicBezier = 103;
+   optional XQuadraticBezier XQuadraticBezier = 104;
    optional XArc XArc = 105;
    optional XPath XPath = 106;
    optional XText XText = 107;
@@ -262,13 +262,13 @@ message XArcSegment {
    optional bool IsLargeArc = 4;
    optional XSweepDirection SweepDirection = 5;
 }
-message XBezier {
+message XCubicBezier {
    optional bcl.NetObjectProxy Point1 = 1; // reference-tracked BaseShape
    optional bcl.NetObjectProxy Point2 = 2; // reference-tracked BaseShape
    optional bcl.NetObjectProxy Point3 = 3; // reference-tracked BaseShape
    optional bcl.NetObjectProxy Point4 = 4; // reference-tracked BaseShape
 }
-message XBezierSegment {
+message XCubicBezierSegment {
    optional bcl.NetObjectProxy Point1 = 1; // reference-tracked BaseShape
    optional bcl.NetObjectProxy Point2 = 2; // reference-tracked BaseShape
    optional bcl.NetObjectProxy Point3 = 3; // reference-tracked BaseShape
@@ -311,11 +311,11 @@ message XPathSegment {
    optional bool IsSmoothJoin = 2;
    // the following represent sub-types; at most 1 should have a value
    optional XLineSegment XLineSegment = 101;
-   optional XBezierSegment XBezierSegment = 102;
+   optional XCubicBezierSegment XCubicBezierSegment = 102;
    optional XQuadraticBezierSegment XQuadraticBezierSegment = 103;
    optional XArcSegment XArcSegment = 104;
    optional XPolyLineSegment XPolyLineSegment = 105;
-   optional XPolyBezierSegment XPolyBezierSegment = 106;
+   optional XPolyCubicBezierSegment XPolyCubicBezierSegment = 106;
    optional XPolyQuadraticBezierSegment XPolyQuadraticBezierSegment = 107;
 }
 message XPathSize {
@@ -327,7 +327,7 @@ message XPoint {
    optional double Y = 2;
    optional bcl.NetObjectProxy Shape = 3; // reference-tracked BaseShape
 }
-message XPolyBezierSegment {
+message XPolyCubicBezierSegment {
    repeated bcl.NetObjectProxy Points = 1; // reference-tracked BaseShape
 }
 message XPolyLineSegment {
@@ -336,7 +336,7 @@ message XPolyLineSegment {
 message XPolyQuadraticBezierSegment {
    repeated bcl.NetObjectProxy Points = 1; // reference-tracked BaseShape
 }
-message XQBezier {
+message XQuadraticBezier {
    optional bcl.NetObjectProxy Point1 = 1; // reference-tracked BaseShape
    optional bcl.NetObjectProxy Point2 = 2; // reference-tracked BaseShape
    optional bcl.NetObjectProxy Point3 = 3; // reference-tracked BaseShape

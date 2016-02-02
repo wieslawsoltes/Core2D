@@ -502,11 +502,11 @@ namespace Core2D.Wpf.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to _Bezier.
+        ///   Looks up a localized string similar to Cubic _Bezier.
         /// </summary>
-        public static string MenuPathToolBezier {
+        public static string MenuPathToolCubicBezier {
             get {
-                return ResourceManager.GetString("MenuPathToolBezier", resourceCulture);
+                return ResourceManager.GetString("MenuPathToolCubicBezier", resourceCulture);
             }
         }
         
@@ -529,11 +529,11 @@ namespace Core2D.Wpf.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to _QBezier.
+        ///   Looks up a localized string similar to _Quadratic Bezier.
         /// </summary>
-        public static string MenuPathToolQBezier {
+        public static string MenuPathToolQuadraticBezier {
             get {
-                return ResourceManager.GetString("MenuPathToolQBezier", resourceCulture);
+                return ResourceManager.GetString("MenuPathToolQuadraticBezier", resourceCulture);
             }
         }
         
@@ -772,11 +772,11 @@ namespace Core2D.Wpf.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to _Bezier.
+        ///   Looks up a localized string similar to Cubic _Bezier.
         /// </summary>
-        public static string MenuToolBezier {
+        public static string MenuToolCubicBezier {
             get {
-                return ResourceManager.GetString("MenuToolBezier", resourceCulture);
+                return ResourceManager.GetString("MenuToolCubicBezier", resourceCulture);
             }
         }
         
@@ -835,11 +835,11 @@ namespace Core2D.Wpf.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to _QBezier.
+        ///   Looks up a localized string similar to _Quadratic Bezier.
         /// </summary>
-        public static string MenuToolQBezier {
+        public static string MenuToolQuadraticBezier {
             get {
-                return ResourceManager.GetString("MenuToolQBezier", resourceCulture);
+                return ResourceManager.GetString("MenuToolQuadraticBezier", resourceCulture);
             }
         }
         
@@ -1420,11 +1420,11 @@ namespace Core2D.Wpf.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bezier.
+        ///   Looks up a localized string similar to CubicBezier.
         /// </summary>
-        public static string StatusPathToolBezier {
+        public static string StatusPathToolCubicBezier {
             get {
-                return ResourceManager.GetString("StatusPathToolBezier", resourceCulture);
+                return ResourceManager.GetString("StatusPathToolCubicBezier", resourceCulture);
             }
         }
         
@@ -1447,11 +1447,11 @@ namespace Core2D.Wpf.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to QBezier.
+        ///   Looks up a localized string similar to QuadraticBezier.
         /// </summary>
-        public static string StatusPathToolQBezier {
+        public static string StatusPathToolQuadraticBezier {
             get {
-                return ResourceManager.GetString("StatusPathToolQBezier", resourceCulture);
+                return ResourceManager.GetString("StatusPathToolQuadraticBezier", resourceCulture);
             }
         }
         
@@ -1492,11 +1492,11 @@ namespace Core2D.Wpf.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bezier.
+        ///   Looks up a localized string similar to Cubic Bezier.
         /// </summary>
-        public static string StatusToolBezier {
+        public static string StatusToolCubicBezier {
             get {
-                return ResourceManager.GetString("StatusToolBezier", resourceCulture);
+                return ResourceManager.GetString("StatusToolCubicBezier", resourceCulture);
             }
         }
         
@@ -1555,11 +1555,11 @@ namespace Core2D.Wpf.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to QBezier.
+        ///   Looks up a localized string similar to Quadratic Bezier.
         /// </summary>
-        public static string StatusToolQBezier {
+        public static string StatusToolQuadraticBezier {
             get {
-                return ResourceManager.GetString("StatusToolQBezier", resourceCulture);
+                return ResourceManager.GetString("StatusToolQuadraticBezier", resourceCulture);
             }
         }
         

@@ -11,7 +11,7 @@
              Design.Width="800" Design.Height="20">
     <Menu>
         <MenuItem Header="_File" IsVisible="{Binding Path=Project, Converter={Static converters:IsNullConverter.Instance}}">
-            <MenuItem Header="_New" HotKey="Ctrl+N" Command="{Static core:Commands.NewCommand}"/>
+            <MenuItem Header="_New" HotKey="Ctrl+N" Command="{Static core:Commands.NewCommand}" CommandParameter="{Binding}"/>
             <Separator/>
             <MenuItem Header="_Open..." HotKey="Ctrl+O" Command="{Static core:Commands.OpenCommand}"/>
             <Separator/>
@@ -26,7 +26,7 @@
             <MenuItem Header="E_xit" HotKey="Alt+F4" Command="{Static core:Commands.ExitCommand}"/>
         </MenuItem>
         <MenuItem Header="_File" IsVisible="{Binding Path=Project, Converter={Static converters:IsNotNullConverter.Instance}}">
-            <MenuItem Header="_New"  HotKey="Ctrl+N" Command="{Static core:Commands.NewCommand}"/>
+            <MenuItem Header="_New"  HotKey="Ctrl+N" Command="{Static core:Commands.NewCommand}" CommandParameter="{Binding}"/>
             <Separator/>
             <MenuItem Header="_Open..." HotKey="Ctrl+O" Command="{Static core:Commands.OpenCommand}"/>
             <Separator/>
@@ -151,15 +151,15 @@
             <Separator/>
             <MenuItem Header="_Line" HotKey="L" Command="{Static core:Commands.ToolLineCommand}"/>
             <MenuItem Header="_Arc" HotKey="A" Command="{Static core:Commands.ToolArcCommand}"/>
-            <MenuItem Header="_Bezier" HotKey="B" Command="{Static core:Commands.ToolBezierCommand}"/>
-            <MenuItem Header="_QBezier" HotKey="Q" Command="{Static core:Commands.ToolQBezierCommand}"/>
+            <MenuItem Header="Cubic _Bezier" HotKey="B" Command="{Static core:Commands.ToolCubicBezierCommand}"/>
+            <MenuItem Header="_Quadratic Bezier" HotKey="Q" Command="{Static core:Commands.ToolQuadraticBezierCommand}"/>
             <Separator/>
             <MenuItem Header="Pat_h" HotKey="H" Command="{Static core:Commands.ToolPathCommand}"/>
             <MenuItem Header="Path T_ool">
                 <MenuItem Header="_Line" Command="{Static core:Commands.ToolLineCommand}"/>
                 <MenuItem Header="_Arc" Command="{Static core:Commands.ToolArcCommand}"/>
-                <MenuItem Header="_Bezier" Command="{Static core:Commands.ToolBezierCommand}"/>
-                <MenuItem Header="_QBezier" Command="{Static core:Commands.ToolQBezierCommand}"/>
+                <MenuItem Header="Cubic _Bezier" Command="{Static core:Commands.ToolCubicBezierCommand}"/>
+                <MenuItem Header="_Quadratic Bezier" Command="{Static core:Commands.ToolQuadraticBezierCommand}"/>
                 <Separator/>
                 <MenuItem Header="_Move" HotKey="M" Command="{Static core:Commands.ToolMoveCommand}"/>
             </MenuItem>

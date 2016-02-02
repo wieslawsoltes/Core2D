@@ -141,8 +141,8 @@
     <Compile Include="Controls\Path\ArcSegmentControl.xaml.cs">
       <DependentUpon>ArcSegmentControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Path\BezierSegmentControl.xaml.cs">
-      <DependentUpon>BezierSegmentControl.xaml</DependentUpon>
+    <Compile Include="Controls\Path\CubicBezierSegmentControl.xaml.cs">
+      <DependentUpon>CubicBezierSegmentControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Path\LineSegmentControl.xaml.cs">
       <DependentUpon>LineSegmentControl.xaml</DependentUpon>
@@ -156,8 +156,8 @@
     <Compile Include="Controls\Path\PathSizeControl.xaml.cs">
       <DependentUpon>PathSizeControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Path\PolyBezierSegmentControl.xaml.cs">
-      <DependentUpon>PolyBezierSegmentControl.xaml</DependentUpon>
+    <Compile Include="Controls\Path\PolyCubicBezierSegmentControl.xaml.cs">
+      <DependentUpon>PolyCubicBezierSegmentControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Path\PolyLineSegmentControl.xaml.cs">
       <DependentUpon>PolyLineSegmentControl.xaml</DependentUpon>
@@ -222,8 +222,8 @@
     <Compile Include="Controls\Shapes\ArcControl.xaml.cs">
       <DependentUpon>ArcControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Shapes\BezierControl.xaml.cs">
-      <DependentUpon>BezierControl.xaml</DependentUpon>
+    <Compile Include="Controls\Shapes\CubicBezierControl.xaml.cs">
+      <DependentUpon>CubicBezierControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Shapes\EllipseControl.xaml.cs">
       <DependentUpon>EllipseControl.xaml</DependentUpon>
@@ -243,8 +243,8 @@
     <Compile Include="Controls\Shapes\PointControl.xaml.cs">
       <DependentUpon>PointControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Shapes\QBezierControl.xaml.cs">
-      <DependentUpon>QBezierControl.xaml</DependentUpon>
+    <Compile Include="Controls\Shapes\QuadraticBezierControl.xaml.cs">
+      <DependentUpon>QuadraticBezierControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Shapes\RectangleControl.xaml.cs">
       <DependentUpon>RectangleControl.xaml</DependentUpon>
@@ -332,7 +332,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\Path\BezierSegmentControl.xaml">
+    <Page Include="Controls\Path\CubicBezierSegmentControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -352,7 +352,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\Path\PolyBezierSegmentControl.xaml">
+    <Page Include="Controls\Path\PolyCubicBezierSegmentControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -434,7 +434,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\Shapes\BezierControl.xaml">
+    <Page Include="Controls\Shapes\CubicBezierControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -462,7 +462,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\Shapes\QBezierControl.xaml">
+    <Page Include="Controls\Shapes\QuadraticBezierControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -546,6 +546,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

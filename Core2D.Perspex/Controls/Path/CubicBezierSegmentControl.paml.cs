@@ -3,17 +3,17 @@
 using Perspex.Controls;
 using Perspex.Markup.Xaml;
 
-namespace Core2D.Perspex.Controls.Shapes
+namespace Core2D.Perspex.Controls.Path
 {
     /// <summary>
-    /// Interaction logic for <see cref="QBezierControl"/> xaml.
+    /// Interaction logic for <see cref="CubicBezierSegmentControl"/> xaml.
     /// </summary>
-    public class QBezierControl : UserControl
+    public class CubicBezierSegmentControl : UserControl
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="QBezierControl"/> class.
+        /// Initializes a new instance of the <see cref="CubicBezierSegmentControl"/> class.
         /// </summary>
-        public QBezierControl()
+        public CubicBezierSegmentControl()
         {
             this.InitializeComponent();
         }

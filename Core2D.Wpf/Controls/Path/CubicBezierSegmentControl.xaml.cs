@@ -5,14 +5,14 @@ using System.Windows.Controls;
 namespace Core2D.Wpf.Controls.Path
 {
     /// <summary>
-    /// Interaction logic for <see cref="PolyBezierSegmentControl"/> xaml.
+    /// Interaction logic for <see cref="CubicBezierSegmentControl"/> xaml.
     /// </summary>
-    public partial class PolyBezierSegmentControl : UserControl
+    public partial class CubicBezierSegmentControl : UserControl
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PolyBezierSegmentControl"/> class.
+        /// Initializes a new instance of the <see cref="CubicBezierSegmentControl"/> class.
         /// </summary>
-        public PolyBezierSegmentControl()
+        public CubicBezierSegmentControl()
         {
             InitializeComponent();
         }

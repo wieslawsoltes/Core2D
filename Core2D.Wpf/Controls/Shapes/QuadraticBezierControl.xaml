@@ -1,6 +1,6 @@
 ﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
 <!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
-<UserControl x:Class="Core2D.Wpf.Controls.Shapes.QBezierControl"
+<UserControl x:Class="Core2D.Wpf.Controls.Shapes.QuadraticBezierControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -10,10 +10,10 @@
              xmlns:core="clr-namespace:Core2D;assembly=Core2D" 
              xmlns:custom="clr-namespace:Core2D.Wpf.Controls.Custom"
              mc:Ignorable="d" 
-             d:DataContext="{x:Static local:DesignerHelper.QBezier}"
+             d:DataContext="{x:Static local:DesignerHelper.QuadraticBezier}"
              d:DesignWidth="250" d:DesignHeight="400">
     <TabControl>
-        <TabItem Header="QBezier">
+        <TabItem Header="QuadraticBezier">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>

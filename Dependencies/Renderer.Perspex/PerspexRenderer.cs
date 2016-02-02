@@ -568,65 +568,65 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XBezier bezier, double dx, double dy, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, XCubicBezier cubicBezier, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
-            if (!bezier.IsFilled && !bezier.IsStroked)
+            if (!cubicBezier.IsFilled && !cubicBezier.IsStroked)
                 return;
 
             var _dc = dc as DrawingContext;
 
-            Brush brush = ToSolidBrush(bezier.Style.Fill);
-            Pen pen = ToPen(bezier.Style, _scaleToPage);
+            Brush brush = ToSolidBrush(cubicBezier.Style.Fill);
+            Pen pen = ToPen(cubicBezier.Style, _scaleToPage);
 
             var sg = new StreamGeometry();
             using (var sgc = sg.Open())
             {
                 sgc.BeginFigure(
-                    new Point(bezier.Point1.X, bezier.Point1.Y),
-                    bezier.IsFilled);
+                    new Point(cubicBezier.Point1.X, cubicBezier.Point1.Y),
+                    cubicBezier.IsFilled);
 
                 sgc.CubicBezierTo(
-                    new Point(bezier.Point2.X, bezier.Point2.Y),
-                    new Point(bezier.Point3.X, bezier.Point3.Y),
-                    new Point(bezier.Point4.X, bezier.Point4.Y));
+                    new Point(cubicBezier.Point2.X, cubicBezier.Point2.Y),
+                    new Point(cubicBezier.Point3.X, cubicBezier.Point3.Y),
+                    new Point(cubicBezier.Point4.X, cubicBezier.Point4.Y));
 
                 sgc.EndFigure(false);
             }
 
             _dc.DrawGeometry(
-                bezier.IsFilled ? brush : null,
-                bezier.IsStroked ? pen : null,
+                cubicBezier.IsFilled ? brush : null,
+                cubicBezier.IsStroked ? pen : null,
                 sg);
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XQBezier qbezier, double dx, double dy, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, XQuadraticBezier quadraticBezier, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
-            if (!qbezier.IsFilled && !qbezier.IsStroked)
+            if (!quadraticBezier.IsFilled && !quadraticBezier.IsStroked)
                 return;
 
             var _dc = dc as DrawingContext;
 
-            Brush brush = ToSolidBrush(qbezier.Style.Fill);
-            Pen pen = ToPen(qbezier.Style, _scaleToPage);
+            Brush brush = ToSolidBrush(quadraticBezier.Style.Fill);
+            Pen pen = ToPen(quadraticBezier.Style, _scaleToPage);
 
             var sg = new StreamGeometry();
             using (var sgc = sg.Open())
             {
                 sgc.BeginFigure(
-                    new Point(qbezier.Point1.X, qbezier.Point1.Y),
-                    qbezier.IsFilled);
+                    new Point(quadraticBezier.Point1.X, quadraticBezier.Point1.Y),
+                    quadraticBezier.IsFilled);
 
                 sgc.QuadraticBezierTo(
-                    new Point(qbezier.Point2.X, qbezier.Point2.Y),
-                    new Point(qbezier.Point3.X, qbezier.Point3.Y));
+                    new Point(quadraticBezier.Point2.X, quadraticBezier.Point2.Y),
+                    new Point(quadraticBezier.Point3.X, quadraticBezier.Point3.Y));
 
                 sgc.EndFigure(false);
             }
 
             _dc.DrawGeometry(
-                qbezier.IsFilled ? brush : null,
-                qbezier.IsStroked ? pen : null,
+                quadraticBezier.IsFilled ? brush : null,
+                quadraticBezier.IsStroked ? pen : null,
                 sg);
         }
 

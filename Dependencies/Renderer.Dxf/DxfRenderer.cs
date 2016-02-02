@@ -404,21 +404,21 @@ namespace Dependencies
                         // TODO: Convert WPF/SVG elliptical arc segment format to DXF ellipse arc.
                         //startPoint = arcSegment.Point;
                     }
-                    else if (segment is Core2D.XBezierSegment)
+                    else if (segment is Core2D.XCubicBezierSegment)
                     {
-                        var bezierSegment = segment as Core2D.XBezierSegment;
+                        var cubicBezierSegment = segment as Core2D.XCubicBezierSegment;
                         var dxfSpline = CreateCubicSpline(
                             startPoint.X + dx,
                             startPoint.Y + dy,
-                            bezierSegment.Point1.X + dx,
-                            bezierSegment.Point1.Y + dy,
-                            bezierSegment.Point2.X + dx,
-                            bezierSegment.Point2.Y + dy,
-                            bezierSegment.Point3.X + dx,
-                            bezierSegment.Point3.Y + dy);
+                            cubicBezierSegment.Point1.X + dx,
+                            cubicBezierSegment.Point1.Y + dy,
+                            cubicBezierSegment.Point2.X + dx,
+                            cubicBezierSegment.Point2.Y + dy,
+                            cubicBezierSegment.Point3.X + dx,
+                            cubicBezierSegment.Point3.Y + dy);
                         edges.Add(dxfSpline);
                         entities.Add((Spline)dxfSpline.Clone());
-                        startPoint = bezierSegment.Point3;
+                        startPoint = cubicBezierSegment.Point3;
                     }
                     else if (segment is Core2D.XLineSegment)
                     {
@@ -432,44 +432,44 @@ namespace Dependencies
                         entities.Add((Line)dxfLine.Clone());
                         startPoint = lineSegment.Point;
                     }
-                    else if (segment is Core2D.XPolyBezierSegment)
+                    else if (segment is Core2D.XPolyCubicBezierSegment)
                     {
-                        var polyBezierSegment = segment as Core2D.XPolyBezierSegment;
-                        if (polyBezierSegment.Points.Count >= 3)
+                        var polyCubicBezierSegment = segment as Core2D.XPolyCubicBezierSegment;
+                        if (polyCubicBezierSegment.Points.Count >= 3)
                         {
                             var dxfSpline = CreateCubicSpline(
                                 startPoint.X + dx,
                                 startPoint.Y + dy,
-                                polyBezierSegment.Points[0].X + dx,
-                                polyBezierSegment.Points[0].Y + dy,
-                                polyBezierSegment.Points[1].X + dx,
-                                polyBezierSegment.Points[1].Y + dy,
-                                polyBezierSegment.Points[2].X + dx,
-                                polyBezierSegment.Points[2].Y + dy);
+                                polyCubicBezierSegment.Points[0].X + dx,
+                                polyCubicBezierSegment.Points[0].Y + dy,
+                                polyCubicBezierSegment.Points[1].X + dx,
+                                polyCubicBezierSegment.Points[1].Y + dy,
+                                polyCubicBezierSegment.Points[2].X + dx,
+                                polyCubicBezierSegment.Points[2].Y + dy);
                             edges.Add(dxfSpline);
                             entities.Add((Spline)dxfSpline.Clone());
                         }
 
-                        if (polyBezierSegment.Points.Count > 3
-                            && polyBezierSegment.Points.Count % 3 == 0)
+                        if (polyCubicBezierSegment.Points.Count > 3
+                            && polyCubicBezierSegment.Points.Count % 3 == 0)
                         {
-                            for (int i = 3; i < polyBezierSegment.Points.Count; i += 3)
+                            for (int i = 3; i < polyCubicBezierSegment.Points.Count; i += 3)
                             {
                                 var dxfSpline = CreateCubicSpline(
-                                    polyBezierSegment.Points[i - 1].X + dx,
-                                    polyBezierSegment.Points[i - 1].Y + dy,
-                                    polyBezierSegment.Points[i].X + dx,
-                                    polyBezierSegment.Points[i].Y + dy,
-                                    polyBezierSegment.Points[i + 1].X + dx,
-                                    polyBezierSegment.Points[i + 1].Y + dy,
-                                    polyBezierSegment.Points[i + 2].X + dx,
-                                    polyBezierSegment.Points[i + 2].Y + dy);
+                                    polyCubicBezierSegment.Points[i - 1].X + dx,
+                                    polyCubicBezierSegment.Points[i - 1].Y + dy,
+                                    polyCubicBezierSegment.Points[i].X + dx,
+                                    polyCubicBezierSegment.Points[i].Y + dy,
+                                    polyCubicBezierSegment.Points[i + 1].X + dx,
+                                    polyCubicBezierSegment.Points[i + 1].Y + dy,
+                                    polyCubicBezierSegment.Points[i + 2].X + dx,
+                                    polyCubicBezierSegment.Points[i + 2].Y + dy);
                                 edges.Add(dxfSpline);
                                 entities.Add((Spline)dxfSpline.Clone());
                             }
                         }
 
-                        startPoint = polyBezierSegment.Points.Last();
+                        startPoint = polyCubicBezierSegment.Points.Last();
                     }
                     else if (segment is Core2D.XPolyLineSegment)
                     {
@@ -538,17 +538,17 @@ namespace Dependencies
                     }
                     else if (segment is Core2D.XQuadraticBezierSegment)
                     {
-                        var qbezierSegment = segment as Core2D.XQuadraticBezierSegment;
+                        var quadraticBezierSegment = segment as Core2D.XQuadraticBezierSegment;
                         var dxfSpline = CreateQuadraticSpline(
                             startPoint.X + dx,
                             startPoint.Y + dy,
-                            qbezierSegment.Point1.X + dx,
-                            qbezierSegment.Point1.Y + dy,
-                            qbezierSegment.Point2.X + dx,
-                            qbezierSegment.Point2.Y + dy);
+                            quadraticBezierSegment.Point1.X + dx,
+                            quadraticBezierSegment.Point1.Y + dy,
+                            quadraticBezierSegment.Point2.X + dx,
+                            quadraticBezierSegment.Point2.Y + dy);
                         edges.Add(dxfSpline);
                         entities.Add((Spline)dxfSpline.Clone());
-                        startPoint = qbezierSegment.Point2;
+                        startPoint = quadraticBezierSegment.Point2;
                     }
                     else
                     {
@@ -725,25 +725,25 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.XBezier bezier, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
+        public override void Draw(object dc, Core2D.XCubicBezier cubicBezier, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
         {
-            if (!bezier.IsStroked && !bezier.IsFilled)
+            if (!cubicBezier.IsStroked && !cubicBezier.IsFilled)
                 return;
 
             var _dxf = dc as DxfDocument;
-            var style = bezier.Style;
+            var style = cubicBezier.Style;
 
             var dxfSpline = CreateCubicSpline(
-                bezier.Point1.X + dx,
-                bezier.Point1.Y + dy,
-                bezier.Point2.X + dx,
-                bezier.Point2.Y + dy,
-                bezier.Point3.X + dx,
-                bezier.Point3.Y + dy,
-                bezier.Point4.X + dx,
-                bezier.Point4.Y + dy);
+                cubicBezier.Point1.X + dx,
+                cubicBezier.Point1.Y + dy,
+                cubicBezier.Point2.X + dx,
+                cubicBezier.Point2.Y + dy,
+                cubicBezier.Point3.X + dx,
+                cubicBezier.Point3.Y + dy,
+                cubicBezier.Point4.X + dx,
+                cubicBezier.Point4.Y + dy);
 
-            if (bezier.IsFilled)
+            if (cubicBezier.IsFilled)
             {
                 var fill = ToColor(style.Fill);
                 var fillTransparency = ToTransparency(style.Fill);
@@ -766,7 +766,7 @@ namespace Dependencies
                 _dxf.AddEntity(hatch);
             }
 
-            if (bezier.IsStroked)
+            if (cubicBezier.IsStroked)
             {
                 var stroke = ToColor(style.Stroke);
                 var strokeTansparency = ToTransparency(style.Stroke);
@@ -782,23 +782,23 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.XQBezier qbezier, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
+        public override void Draw(object dc, Core2D.XQuadraticBezier quadraticBezier, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
         {
-            if (!qbezier.IsStroked && !qbezier.IsFilled)
+            if (!quadraticBezier.IsStroked && !quadraticBezier.IsFilled)
                 return;
 
             var _dxf = dc as DxfDocument;
-            var style = qbezier.Style;
+            var style = quadraticBezier.Style;
 
             var dxfSpline = CreateQuadraticSpline(
-                qbezier.Point1.X + dx,
-                qbezier.Point1.Y + dy,
-                qbezier.Point2.X + dx,
-                qbezier.Point2.Y + dy,
-                qbezier.Point3.X + dx,
-                qbezier.Point3.Y + dy);
+                quadraticBezier.Point1.X + dx,
+                quadraticBezier.Point1.Y + dy,
+                quadraticBezier.Point2.X + dx,
+                quadraticBezier.Point2.Y + dy,
+                quadraticBezier.Point3.X + dx,
+                quadraticBezier.Point3.Y + dy);
 
-            if (qbezier.IsFilled)
+            if (quadraticBezier.IsFilled)
             {
                 var fill = ToColor(style.Fill);
                 var fillTransparency = ToTransparency(style.Fill);
@@ -821,7 +821,7 @@ namespace Dependencies
                 _dxf.AddEntity(hatch);
             }
 
-            if (qbezier.IsStroked)
+            if (quadraticBezier.IsStroked)
             {
                 var stroke = ToColor(style.Stroke);
                 var strokeTansparency = ToTransparency(style.Stroke);

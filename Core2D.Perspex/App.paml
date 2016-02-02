@@ -280,11 +280,11 @@
         <DataTemplate DataType="core:XArc">
             <shapes:ArcControl/>
         </DataTemplate>
-        <DataTemplate DataType="core:XBezier">
-            <shapes:BezierControl/>
+        <DataTemplate DataType="core:XCubicBezier">
+            <shapes:CubicBezierControl/>
         </DataTemplate>
-        <DataTemplate DataType="core:XQBezier">
-            <shapes:QBezierControl/>
+        <DataTemplate DataType="core:XQuadraticBezier">
+            <shapes:QuadraticBezierControl/>
         </DataTemplate>
         <DataTemplate DataType="core:XGroup">
             <shapes:GroupControl/>
@@ -299,14 +299,14 @@
         <DataTemplate DataType="core:XArcSegment">
             <path:ArcSegmentControl/>
         </DataTemplate>
-        <DataTemplate DataType="core:XBezierSegment">
-            <path:BezierSegmentControl/>
+        <DataTemplate DataType="core:XCubicBezierSegment">
+            <path:CubicBezierSegmentControl/>
         </DataTemplate>
         <DataTemplate DataType="core:XLineSegment">
             <path:LineSegmentControl/>
         </DataTemplate>
-        <DataTemplate DataType="core:XPolyBezierSegment">
-            <path:PolyBezierSegmentControl/>
+        <DataTemplate DataType="core:XPolyCubicBezierSegment">
+            <path:PolyCubicBezierSegmentControl/>
         </DataTemplate>
         <DataTemplate DataType="core:XPolyLineSegment">
             <path:PolyLineSegmentControl/>

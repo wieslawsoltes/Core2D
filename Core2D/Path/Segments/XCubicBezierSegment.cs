@@ -5,9 +5,9 @@ using System.Collections.Generic;
 namespace Core2D
 {
     /// <summary>
-    /// Bezier path segment.
+    /// Cubic bezier path segment.
     /// </summary>
-    public sealed class XBezierSegment : XPathSegment
+    public sealed class XCubicBezierSegment : XPathSegment
     {
         /// <summary>
         /// Gets or sets first control point.
@@ -33,17 +33,17 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Creates a new <see cref="XBezierSegment"/> instance.
+        /// Creates a new <see cref="XCubicBezierSegment"/> instance.
         /// </summary>
         /// <param name="point1">The first control point.</param>
         /// <param name="point2">The second control point.</param>
         /// <param name="point3">The end point.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
-        /// <returns>The new instance of the <see cref="XBezierSegment"/> class.</returns>
-        public static XBezierSegment Create(XPoint point1, XPoint point2, XPoint point3, bool isStroked, bool isSmoothJoin)
+        /// <returns>The new instance of the <see cref="XCubicBezierSegment"/> class.</returns>
+        public static XCubicBezierSegment Create(XPoint point1, XPoint point2, XPoint point3, bool isStroked, bool isSmoothJoin)
         {
-            return new XBezierSegment()
+            return new XCubicBezierSegment()
             {
                 Point1 = point1,
                 Point2 = point2,
