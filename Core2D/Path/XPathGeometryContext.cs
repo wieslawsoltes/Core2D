@@ -50,7 +50,7 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public override void ArcTo(XPoint point, XPathSize size, double rotationAngle, bool isLargeArc = false, XSweepDirection sweepDirection = XSweepDirection.Clockwise, bool isStroked = true, bool isSmoothJoin = true)
+        public override void ArcTo(XPoint point, XPathSize size, double rotationAngle = 0.0, bool isLargeArc = false, XSweepDirection sweepDirection = XSweepDirection.Clockwise, bool isStroked = true, bool isSmoothJoin = true)
         {
             var segment = XArcSegment.Create(
                 point,
