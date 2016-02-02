@@ -141,8 +141,8 @@
     <Compile Include="Controls\Path\ArcSegmentControl.xaml.cs">
       <DependentUpon>ArcSegmentControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Path\BezierSegmentControl.xaml.cs">
-      <DependentUpon>BezierSegmentControl.xaml</DependentUpon>
+    <Compile Include="Controls\Path\CubicBezierSegmentControl.xaml.cs">
+      <DependentUpon>CubicBezierSegmentControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Path\LineSegmentControl.xaml.cs">
       <DependentUpon>LineSegmentControl.xaml</DependentUpon>
@@ -332,7 +332,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\Path\BezierSegmentControl.xaml">
+    <Page Include="Controls\Path\CubicBezierSegmentControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -546,6 +546,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

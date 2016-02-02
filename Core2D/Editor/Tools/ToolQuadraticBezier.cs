@@ -4,9 +4,9 @@
 namespace Core2D
 {
     /// <summary>
-    /// Helper class for <see cref="Tool.QBezier"/> editor.
+    /// Helper class for <see cref="Tool.QuadraticBezier"/> editor.
     /// </summary>
-    public sealed class ToolQBezier : ToolBase
+    public sealed class ToolQuadraticBezier : ToolBase
     {
         private Editor _editor;
         private ToolState _currentState = ToolState.None;
@@ -19,10 +19,10 @@ namespace Core2D
         private XPoint _helperPoint3;
 
         /// <summary>
-        /// Initialize new instance of <see cref="ToolQBezier"/> class.
+        /// Initialize new instance of <see cref="ToolQuadraticBezier"/> class.
         /// </summary>
         /// <param name="editor">The current <see cref="Editor"/> object.</param>
-        public ToolQBezier(Editor editor)
+        public ToolQuadraticBezier(Editor editor)
             : base()
         {
             _editor = editor;

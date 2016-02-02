@@ -49,15 +49,15 @@ namespace Dependencies
 
                             previous = arcSegment.Point;
                         }
-                        else if (segment is XBezierSegment)
+                        else if (segment is XCubicBezierSegment)
                         {
-                            var bezierSegment = segment as XBezierSegment;
+                            var cubicBezierSegment = segment as XCubicBezierSegment;
                             sgc.CubicBezierTo(
-                                new Point(bezierSegment.Point1.X, bezierSegment.Point1.Y),
-                                new Point(bezierSegment.Point2.X, bezierSegment.Point2.Y),
-                                new Point(bezierSegment.Point3.X, bezierSegment.Point3.Y));
+                                new Point(cubicBezierSegment.Point1.X, cubicBezierSegment.Point1.Y),
+                                new Point(cubicBezierSegment.Point2.X, cubicBezierSegment.Point2.Y),
+                                new Point(cubicBezierSegment.Point3.X, cubicBezierSegment.Point3.Y));
 
-                            previous = bezierSegment.Point3;
+                            previous = cubicBezierSegment.Point3;
                         }
                         else if (segment is XLineSegment)
                         {
@@ -167,16 +167,16 @@ namespace Dependencies
                         }
                         else if (segment is XQuadraticBezierSegment)
                         {
-                            var qbezierSegment = segment as XQuadraticBezierSegment;
+                            var quadraticBezierSegment = segment as XQuadraticBezierSegment;
                             sgc.QuadraticBezierTo(
                                 new Point(
-                                    qbezierSegment.Point1.X,
-                                    qbezierSegment.Point1.Y),
+                                    quadraticBezierSegment.Point1.X,
+                                    quadraticBezierSegment.Point1.Y),
                                 new Point(
-                                    qbezierSegment.Point2.X,
-                                    qbezierSegment.Point2.Y));
+                                    quadraticBezierSegment.Point2.X,
+                                    quadraticBezierSegment.Point2.Y));
 
-                            previous = qbezierSegment.Point2;
+                            previous = quadraticBezierSegment.Point2;
                         }
                         else
                         {

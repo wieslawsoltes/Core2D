@@ -180,8 +180,8 @@
         <DataTemplate DataType="{x:Type core:XArcSegment}">
             <path:ArcSegmentControl/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type core:XBezierSegment}">
-            <path:BezierSegmentControl/>
+        <DataTemplate DataType="{x:Type core:XCubicBezierSegment}">
+            <path:CubicBezierSegmentControl/>
         </DataTemplate>
         <DataTemplate DataType="{x:Type core:XLineSegment}">
             <path:LineSegmentControl/>

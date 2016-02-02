@@ -86,7 +86,7 @@
     <Compile Include="Path\Parser\SvgToXPathGeometryParserTests.cs" />
     <Compile Include="Path\Parser\XPathGeometryParserTests.cs" />
     <Compile Include="Path\Segments\XArcSegmentTests.cs" />
-    <Compile Include="Path\Segments\XBezierSegmentTests.cs" />
+    <Compile Include="Path\Segments\XCubicBezierSegmentTests.cs" />
     <Compile Include="Path\Segments\XLineSegmentTests.cs" />
     <Compile Include="Path\Segments\XPolyCubicBezierSegmentTests.cs" />
     <Compile Include="Path\Segments\XPolyLineSegmentTests.cs" />

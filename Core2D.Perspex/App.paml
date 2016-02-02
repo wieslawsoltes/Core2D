@@ -299,8 +299,8 @@
         <DataTemplate DataType="core:XArcSegment">
             <path:ArcSegmentControl/>
         </DataTemplate>
-        <DataTemplate DataType="core:XBezierSegment">
-            <path:BezierSegmentControl/>
+        <DataTemplate DataType="core:XCubicBezierSegment">
+            <path:CubicBezierSegmentControl/>
         </DataTemplate>
         <DataTemplate DataType="core:XLineSegment">
             <path:LineSegmentControl/>

@@ -38,19 +38,19 @@ namespace Dependencies
                         // TODO: Convert WPF/SVG elliptical arc segment format to GDI+ bezier curves.
                         //startPoint = arcSegment.Point;
                     }
-                    else if (segment is Core2D.XBezierSegment)
+                    else if (segment is Core2D.XCubicBezierSegment)
                     {
-                        var bezierSegment = segment as Core2D.XBezierSegment;
+                        var cubicBezierSegment = segment as Core2D.XCubicBezierSegment;
                         gp.AddBezier(
                             scale(startPoint.X),
                             scale(startPoint.Y),
-                            scale(bezierSegment.Point1.X),
-                            scale(bezierSegment.Point1.Y),
-                            scale(bezierSegment.Point2.X),
-                            scale(bezierSegment.Point2.Y),
-                            scale(bezierSegment.Point3.X),
-                            scale(bezierSegment.Point3.Y));
-                        startPoint = bezierSegment.Point3;
+                            scale(cubicBezierSegment.Point1.X),
+                            scale(cubicBezierSegment.Point1.Y),
+                            scale(cubicBezierSegment.Point2.X),
+                            scale(cubicBezierSegment.Point2.Y),
+                            scale(cubicBezierSegment.Point3.X),
+                            scale(cubicBezierSegment.Point3.Y));
+                        startPoint = cubicBezierSegment.Point3;
                     }
                     else if (segment is Core2D.XLineSegment)
                     {
@@ -182,10 +182,10 @@ namespace Dependencies
                     }
                     else if (segment is Core2D.XQuadraticBezierSegment)
                     {
-                        var qbezierSegment = segment as Core2D.XQuadraticBezierSegment;
+                        var quadraticBezierSegment = segment as Core2D.XQuadraticBezierSegment;
                         var p1 = startPoint;
-                        var p2 = qbezierSegment.Point1;
-                        var p3 = qbezierSegment.Point2;
+                        var p2 = quadraticBezierSegment.Point1;
+                        var p3 = quadraticBezierSegment.Point2;
                         double x1 = p1.X;
                         double y1 = p1.Y;
                         double x2 = p1.X + (2.0 * (p2.X - p1.X)) / 3.0;
@@ -203,7 +203,7 @@ namespace Dependencies
                             scale(y3 + dy),
                             scale(x4 + dx),
                             scale(y4 + dy));
-                        startPoint = qbezierSegment.Point2;
+                        startPoint = quadraticBezierSegment.Point2;
                     }
                     else
                     {

@@ -59,15 +59,15 @@ namespace Dependencies
                             arcSegment.IsStroked,
                             arcSegment.IsSmoothJoin);
                     }
-                    else if (segment is XBezierSegment)
+                    else if (segment is XCubicBezierSegment)
                     {
-                        var bezierSegment = segment as XBezierSegment;
+                        var cubicBezierSegment = segment as XCubicBezierSegment;
                         sgc.BezierTo(
-                            new Point(bezierSegment.Point1.X, bezierSegment.Point1.Y),
-                            new Point(bezierSegment.Point2.X, bezierSegment.Point2.Y),
-                            new Point(bezierSegment.Point3.X, bezierSegment.Point3.Y),
-                            bezierSegment.IsStroked,
-                            bezierSegment.IsSmoothJoin);
+                            new Point(cubicBezierSegment.Point1.X, cubicBezierSegment.Point1.Y),
+                            new Point(cubicBezierSegment.Point2.X, cubicBezierSegment.Point2.Y),
+                            new Point(cubicBezierSegment.Point3.X, cubicBezierSegment.Point3.Y),
+                            cubicBezierSegment.IsStroked,
+                            cubicBezierSegment.IsSmoothJoin);
                     }
                     else if (segment is XLineSegment)
                     {
@@ -103,12 +103,12 @@ namespace Dependencies
                     }
                     else if (segment is XQuadraticBezierSegment)
                     {
-                        var qbezierSegment = segment as XQuadraticBezierSegment;
+                        var quadraticBezierSegment = segment as XQuadraticBezierSegment;
                         sgc.QuadraticBezierTo(
-                            new Point(qbezierSegment.Point1.X, qbezierSegment.Point1.Y),
-                            new Point(qbezierSegment.Point2.X, qbezierSegment.Point2.Y),
-                            qbezierSegment.IsStroked,
-                            qbezierSegment.IsSmoothJoin);
+                            new Point(quadraticBezierSegment.Point1.X, quadraticBezierSegment.Point1.Y),
+                            new Point(quadraticBezierSegment.Point2.X, quadraticBezierSegment.Point2.Y),
+                            quadraticBezierSegment.IsStroked,
+                            quadraticBezierSegment.IsSmoothJoin);
                     }
                     else
                     {

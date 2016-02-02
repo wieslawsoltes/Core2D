@@ -94,13 +94,13 @@
     <Compile Include="Editor\Factories\ProjectFactory.cs" />
     <Compile Include="Editor\Factories\ShapeFactory.cs" />
     <Compile Include="Editor\Tools\ToolArc.cs" />
-    <Compile Include="Editor\Tools\ToolBezier.cs" />
+    <Compile Include="Editor\Tools\ToolCubicBezier.cs" />
     <Compile Include="Editor\Tools\ToolEllipse.cs" />
     <Compile Include="Editor\Tools\ToolImage.cs" />
     <Compile Include="Editor\Tools\ToolLine.cs" />
     <Compile Include="Editor\Tools\ToolPath.cs" />
     <Compile Include="Editor\Tools\ToolPoint.cs" />
-    <Compile Include="Editor\Tools\ToolQBezier.cs" />
+    <Compile Include="Editor\Tools\ToolQuadraticBezier.cs" />
     <Compile Include="Editor\Tools\ToolRectangle.cs" />
     <Compile Include="Editor\Tools\ToolSelection.cs" />
     <Compile Include="Editor\Tools\ToolText.cs" />
@@ -151,7 +151,7 @@
     <Compile Include="Renderer\RendererState.cs" />
     <Compile Include="Renderer\ZoomState.cs" />
     <Compile Include="Path\Segments\XArcSegment.cs" />
-    <Compile Include="Path\Segments\XBezierSegment.cs" />
+    <Compile Include="Path\Segments\XCubicBezierSegment.cs" />
     <Compile Include="Path\Segments\XLineSegment.cs" />
     <Compile Include="Path\Segments\XPolyCubicBezierSegment.cs" />
     <Compile Include="Path\Segments\XPolyLineSegment.cs" />

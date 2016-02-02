@@ -348,11 +348,11 @@
   <data name="MenuToolArc" xml:space="preserve">
     <value>_Arc</value>
   </data>
-  <data name="MenuToolBezier" xml:space="preserve">
-    <value>_Bezier</value>
+  <data name="MenuToolCubicBezier" xml:space="preserve">
+    <value>Cubic _Bezier</value>
   </data>
-  <data name="MenuToolQBezier" xml:space="preserve">
-    <value>_QBezier</value>
+  <data name="MenuToolQuadraticBezier" xml:space="preserve">
+    <value>_Quadratic Bezier</value>
   </data>
   <data name="MenuToolPath" xml:space="preserve">
     <value>Pat_h</value>
@@ -537,8 +537,8 @@
   <data name="MenuPathToolArc" xml:space="preserve">
     <value>_Arc</value>
   </data>
-  <data name="MenuPathToolBezier" xml:space="preserve">
-    <value>_Bezier</value>
+  <data name="MenuPathToolCubicBezier" xml:space="preserve">
+    <value>Cubic _Bezier</value>
   </data>
   <data name="MenuPathToolLine" xml:space="preserve">
     <value>_Line</value>
@@ -546,8 +546,8 @@
   <data name="MenuPathToolMove" xml:space="preserve">
     <value>_Move</value>
   </data>
-  <data name="MenuPathToolQBezier" xml:space="preserve">
-    <value>_QBezier</value>
+  <data name="MenuPathToolQuadraticBezier" xml:space="preserve">
+    <value>_Quadratic Bezier</value>
   </data>
   <data name="MenuViewZoomAutofit" xml:space="preserve">
     <value>Enable _Autofit</value>
@@ -600,8 +600,8 @@
   <data name="StatusPathToolArc" xml:space="preserve">
     <value>Arc</value>
   </data>
-  <data name="StatusPathToolBezier" xml:space="preserve">
-    <value>Bezier</value>
+  <data name="StatusPathToolCubicBezier" xml:space="preserve">
+    <value>CubicBezier</value>
   </data>
   <data name="StatusPathToolLine" xml:space="preserve">
     <value>Line</value>
@@ -609,8 +609,8 @@
   <data name="StatusPathToolMove" xml:space="preserve">
     <value>Move</value>
   </data>
-  <data name="StatusPathToolQBezier" xml:space="preserve">
-    <value>QBezier</value>
+  <data name="StatusPathToolQuadraticBezier" xml:space="preserve">
+    <value>QuadraticBezier</value>
   </data>
   <data name="StatusSelected" xml:space="preserve">
     <value>Selected</value>
@@ -624,8 +624,8 @@
   <data name="StatusToolArc" xml:space="preserve">
     <value>Arc</value>
   </data>
-  <data name="StatusToolBezier" xml:space="preserve">
-    <value>Bezier</value>
+  <data name="StatusToolCubicBezier" xml:space="preserve">
+    <value>Cubic Bezier</value>
   </data>
   <data name="StatusToolEllipse" xml:space="preserve">
     <value>Ellipse</value>
@@ -645,8 +645,8 @@
   <data name="StatusToolPoint" xml:space="preserve">
     <value>Point</value>
   </data>
-  <data name="StatusToolQBezier" xml:space="preserve">
-    <value>QBezier</value>
+  <data name="StatusToolQuadraticBezier" xml:space="preserve">
+    <value>Quadratic Bezier</value>
   </data>
   <data name="StatusToolRectangle" xml:space="preserve">
     <value>Rectangle</value>

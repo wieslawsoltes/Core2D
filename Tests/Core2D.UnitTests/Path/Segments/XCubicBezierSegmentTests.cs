@@ -5,13 +5,13 @@ using Xunit;
 
 namespace Core2D.UnitTests
 {
-    public class XBezierSegmentTests
+    public class XCubicBezierSegmentTests
     {
         [Fact]
         [Trait("Core2D", "Path")]
         public void GetPoints_Should_Return_All_Segment_Points()
         {
-            var segment = new XBezierSegment()
+            var segment = new XCubicBezierSegment()
             {
                 Point1 = new XPoint(),
                 Point2 = new XPoint(),
@@ -31,7 +31,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D", "Path")]
         public void ToString_Should_Return_Path_Markup()
         {
-            var target = new XBezierSegment()
+            var target = new XCubicBezierSegment()
             {
                 Point1 = new XPoint(),
                 Point2 = new XPoint(),

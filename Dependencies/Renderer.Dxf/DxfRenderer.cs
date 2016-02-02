@@ -404,21 +404,21 @@ namespace Dependencies
                         // TODO: Convert WPF/SVG elliptical arc segment format to DXF ellipse arc.
                         //startPoint = arcSegment.Point;
                     }
-                    else if (segment is Core2D.XBezierSegment)
+                    else if (segment is Core2D.XCubicBezierSegment)
                     {
-                        var bezierSegment = segment as Core2D.XBezierSegment;
+                        var cubicBezierSegment = segment as Core2D.XCubicBezierSegment;
                         var dxfSpline = CreateCubicSpline(
                             startPoint.X + dx,
                             startPoint.Y + dy,
-                            bezierSegment.Point1.X + dx,
-                            bezierSegment.Point1.Y + dy,
-                            bezierSegment.Point2.X + dx,
-                            bezierSegment.Point2.Y + dy,
-                            bezierSegment.Point3.X + dx,
-                            bezierSegment.Point3.Y + dy);
+                            cubicBezierSegment.Point1.X + dx,
+                            cubicBezierSegment.Point1.Y + dy,
+                            cubicBezierSegment.Point2.X + dx,
+                            cubicBezierSegment.Point2.Y + dy,
+                            cubicBezierSegment.Point3.X + dx,
+                            cubicBezierSegment.Point3.Y + dy);
                         edges.Add(dxfSpline);
                         entities.Add((Spline)dxfSpline.Clone());
-                        startPoint = bezierSegment.Point3;
+                        startPoint = cubicBezierSegment.Point3;
                     }
                     else if (segment is Core2D.XLineSegment)
                     {
@@ -538,17 +538,17 @@ namespace Dependencies
                     }
                     else if (segment is Core2D.XQuadraticBezierSegment)
                     {
-                        var qbezierSegment = segment as Core2D.XQuadraticBezierSegment;
+                        var quadraticBezierSegment = segment as Core2D.XQuadraticBezierSegment;
                         var dxfSpline = CreateQuadraticSpline(
                             startPoint.X + dx,
                             startPoint.Y + dy,
-                            qbezierSegment.Point1.X + dx,
-                            qbezierSegment.Point1.Y + dy,
-                            qbezierSegment.Point2.X + dx,
-                            qbezierSegment.Point2.Y + dy);
+                            quadraticBezierSegment.Point1.X + dx,
+                            quadraticBezierSegment.Point1.Y + dy,
+                            quadraticBezierSegment.Point2.X + dx,
+                            quadraticBezierSegment.Point2.Y + dy);
                         edges.Add(dxfSpline);
                         entities.Add((Spline)dxfSpline.Clone());
-                        startPoint = qbezierSegment.Point2;
+                        startPoint = quadraticBezierSegment.Point2;
                     }
                     else
                     {

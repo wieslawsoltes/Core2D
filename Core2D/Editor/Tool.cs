@@ -34,14 +34,14 @@ namespace Core2D
         Arc,
 
         /// <summary>
-        /// Bezier tool.
+        /// Cubic bezier tool.
         /// </summary>
-        Bezier,
+        CubicBezier,
 
         /// <summary>
-        /// QBezier tool.
+        /// Quadratic bezier tool.
         /// </summary>
-        QBezier,
+        QuadraticBezier,
 
         /// <summary>
         /// Path tool.

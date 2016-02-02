@@ -227,7 +227,7 @@ namespace Dependencies
             segment.AddField(1, nameof(XPathSegment.IsStroked));
             segment.AddField(2, nameof(XPathSegment.IsSmoothJoin));
             segment.AddSubType(101, typeof(XLineSegment));
-            segment.AddSubType(102, typeof(XBezierSegment));
+            segment.AddSubType(102, typeof(XCubicBezierSegment));
             segment.AddSubType(103, typeof(XQuadraticBezierSegment));
             segment.AddSubType(104, typeof(XArcSegment));
             segment.AddSubType(105, typeof(XPolyLineSegment));
@@ -237,10 +237,10 @@ namespace Dependencies
             // XLineSegment : XPathSegment
             model[typeof(XLineSegment)].AddField(1, nameof(XLineSegment.Point)).AsReference = true;
 
-            // XBezierSegment : XPathSegment
-            model[typeof(XBezierSegment)].AddField(1, nameof(XBezierSegment.Point1)).AsReference = true;
-            model[typeof(XBezierSegment)].AddField(2, nameof(XBezierSegment.Point2)).AsReference = true;
-            model[typeof(XBezierSegment)].AddField(3, nameof(XBezierSegment.Point3)).AsReference = true;
+            // XCubicBezierSegment : XPathSegment
+            model[typeof(XCubicBezierSegment)].AddField(1, nameof(XCubicBezierSegment.Point1)).AsReference = true;
+            model[typeof(XCubicBezierSegment)].AddField(2, nameof(XCubicBezierSegment.Point2)).AsReference = true;
+            model[typeof(XCubicBezierSegment)].AddField(3, nameof(XCubicBezierSegment.Point3)).AsReference = true;
 
             // XQuadraticBezierSegment : XPathSegment
             model[typeof(XQuadraticBezierSegment)].AddField(1, nameof(XQuadraticBezierSegment.Point1)).AsReference = true;

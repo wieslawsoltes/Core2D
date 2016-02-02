@@ -162,9 +162,9 @@ namespace Core2D
         public static XArcSegment ArcSegment { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.XBezierSegment"/>.
+        /// The design time <see cref="Core2D.XCubicBezierSegment"/>.
         /// </summary>
-        public static XBezierSegment BezierSegment { get; set; }
+        public static XCubicBezierSegment CubicBezierSegment { get; set; }
 
         /// <summary>
         /// The design time <see cref="Core2D.XLineSegment"/>.
@@ -478,7 +478,7 @@ namespace Core2D
             // Path
 
             ArcSegment = XArcSegment.Create(XPoint.Create(), XPathSize.Create(), 180, true, XSweepDirection.Clockwise, true, true);
-            BezierSegment = XBezierSegment.Create(XPoint.Create(), XPoint.Create(), XPoint.Create(), true, true);
+            CubicBezierSegment = XCubicBezierSegment.Create(XPoint.Create(), XPoint.Create(), XPoint.Create(), true, true);
             LineSegment = XLineSegment.Create(XPoint.Create(), true, true);
             PathFigure = XPathFigure.Create(XPoint.Create(), false, true);
             PathGeometry = XPathGeometry.Create(ImmutableArray.Create<XPathFigure>(), XFillRule.EvenOdd);

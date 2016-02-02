@@ -268,7 +268,7 @@ message XBezier {
    optional bcl.NetObjectProxy Point3 = 3; // reference-tracked BaseShape
    optional bcl.NetObjectProxy Point4 = 4; // reference-tracked BaseShape
 }
-message XBezierSegment {
+message XCubicBezierSegment {
    optional bcl.NetObjectProxy Point1 = 1; // reference-tracked BaseShape
    optional bcl.NetObjectProxy Point2 = 2; // reference-tracked BaseShape
    optional bcl.NetObjectProxy Point3 = 3; // reference-tracked BaseShape
@@ -311,7 +311,7 @@ message XPathSegment {
    optional bool IsSmoothJoin = 2;
    // the following represent sub-types; at most 1 should have a value
    optional XLineSegment XLineSegment = 101;
-   optional XBezierSegment XBezierSegment = 102;
+   optional XCubicBezierSegment XCubicBezierSegment = 102;
    optional XQuadraticBezierSegment XQuadraticBezierSegment = 103;
    optional XArcSegment XArcSegment = 104;
    optional XPolyLineSegment XPolyLineSegment = 105;

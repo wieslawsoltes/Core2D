@@ -111,8 +111,8 @@
                     <Separator/>
                     <MenuItem Header="{x:Static p:Resources.MenuToolLine}" Command="{x:Static core:Commands.ToolLineCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:Tool.Line}}" InputGestureText="L"/>
                     <MenuItem Header="{x:Static p:Resources.MenuToolArc}" Command="{x:Static core:Commands.ToolArcCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:Tool.Arc}}" InputGestureText="A"/>
-                    <MenuItem Header="{x:Static p:Resources.MenuToolBezier}" Command="{x:Static core:Commands.ToolBezierCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:Tool.Bezier}}" InputGestureText="B"/>
-                    <MenuItem Header="{x:Static p:Resources.MenuToolQBezier}" Command="{x:Static core:Commands.ToolQBezierCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:Tool.QBezier}}" InputGestureText="Q"/>
+                    <MenuItem Header="{x:Static p:Resources.MenuToolCubicBezier}" Command="{x:Static core:Commands.ToolCubicBezierCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:Tool.CubicBezier}}" InputGestureText="B"/>
+                    <MenuItem Header="{x:Static p:Resources.MenuToolQuadraticBezier}" Command="{x:Static core:Commands.ToolQuadraticBezierCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:Tool.QuadraticBezier}}" InputGestureText="Q"/>
                     <Separator/>
                     <MenuItem Header="{x:Static p:Resources.MenuToolPath}" Command="{x:Static core:Commands.ToolPathCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:Tool.Path}}" InputGestureText="H"/>
                     <Separator/>
@@ -144,11 +144,11 @@
                             <DataTrigger Binding="{Binding Path=CurrentTool}" Value="{x:Static core:Tool.Arc}">
                                 <Setter Property="Text" Value="{x:Static p:Resources.StatusToolArc}"/>
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding Path=CurrentTool}" Value="{x:Static core:Tool.Bezier}">
-                                <Setter Property="Text" Value="{x:Static p:Resources.StatusToolBezier}"/>
+                            <DataTrigger Binding="{Binding Path=CurrentTool}" Value="{x:Static core:Tool.CubicBezier}">
+                                <Setter Property="Text" Value="{x:Static p:Resources.StatusToolCubicBezier}"/>
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding Path=CurrentTool}" Value="{x:Static core:Tool.QBezier}">
-                                <Setter Property="Text" Value="{x:Static p:Resources.StatusToolQBezier}"/>
+                            <DataTrigger Binding="{Binding Path=CurrentTool}" Value="{x:Static core:Tool.QuadraticBezier}">
+                                <Setter Property="Text" Value="{x:Static p:Resources.StatusToolQuadraticBezier}"/>
                             </DataTrigger>
                             <DataTrigger Binding="{Binding Path=CurrentTool}" Value="{x:Static core:Tool.Path}">
                                 <Setter Property="Text" Value="{x:Static p:Resources.StatusToolPath}"/>
@@ -197,8 +197,8 @@
                 <ContextMenu>
                     <MenuItem Header="{x:Static p:Resources.MenuPathToolLine}" Command="{x:Static core:Commands.ToolLineCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentPathTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:PathTool.Line}}" InputGestureText="L"/>
                     <MenuItem Header="{x:Static p:Resources.MenuPathToolArc}" Command="{x:Static core:Commands.ToolArcCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentPathTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:PathTool.Arc}}" InputGestureText="A"/>
-                    <MenuItem Header="{x:Static p:Resources.MenuPathToolBezier}" Command="{x:Static core:Commands.ToolBezierCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentPathTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:PathTool.Bezier}}" InputGestureText="B"/>
-                    <MenuItem Header="{x:Static p:Resources.MenuPathToolQBezier}" Command="{x:Static core:Commands.ToolQBezierCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentPathTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:PathTool.QBezier}}" InputGestureText="Q"/>
+                    <MenuItem Header="{x:Static p:Resources.MenuPathToolCubicBezier}" Command="{x:Static core:Commands.ToolCubicBezierCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentPathTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:PathTool.CubicBezier}}" InputGestureText="B"/>
+                    <MenuItem Header="{x:Static p:Resources.MenuPathToolQuadraticBezier}" Command="{x:Static core:Commands.ToolQuadraticBezierCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentPathTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:PathTool.QuadraticBezier}}" InputGestureText="Q"/>
                     <Separator/>
                     <MenuItem Header="{x:Static p:Resources.MenuPathToolMove}" Command="{x:Static core:Commands.ToolMoveCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentPathTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:PathTool.Move}}" InputGestureText="M"/>
                 </ContextMenu>
@@ -214,11 +214,11 @@
                             <DataTrigger Binding="{Binding Path=CurrentPathTool}" Value="{x:Static core:PathTool.Arc}">
                                 <Setter Property="Text" Value="{x:Static p:Resources.StatusPathToolArc}"/>
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding Path=CurrentPathTool}" Value="{x:Static core:PathTool.Bezier}">
-                                <Setter Property="Text" Value="{x:Static p:Resources.StatusPathToolBezier}"/>
+                            <DataTrigger Binding="{Binding Path=CurrentPathTool}" Value="{x:Static core:PathTool.CubicBezier}">
+                                <Setter Property="Text" Value="{x:Static p:Resources.StatusPathToolCubicBezier}"/>
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding Path=CurrentPathTool}" Value="{x:Static core:PathTool.QBezier}">
-                                <Setter Property="Text" Value="{x:Static p:Resources.StatusPathToolQBezier}"/>
+                            <DataTrigger Binding="{Binding Path=CurrentPathTool}" Value="{x:Static core:PathTool.QuadraticBezier}">
+                                <Setter Property="Text" Value="{x:Static p:Resources.StatusPathToolQuadraticBezier}"/>
                             </DataTrigger>
                             <DataTrigger Binding="{Binding Path=CurrentPathTool}" Value="{x:Static core:PathTool.Move}">
                                 <Setter Property="Text" Value="{x:Static p:Resources.StatusPathToolMove}"/>

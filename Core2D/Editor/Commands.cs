@@ -293,14 +293,14 @@ namespace Core2D
         public static ICoreCommand ToolArcCommand { get; set; }
 
         /// <summary>
-        /// Set current tool to <see cref="Tool.Bezier"/> or current path tool to <see cref="PathTool.Bezier"/>.
+        /// Set current tool to <see cref="Tool.CubicBezier"/> or current path tool to <see cref="PathTool.CubicBezier"/>.
         /// </summary>
-        public static ICoreCommand ToolBezierCommand { get; set; }
+        public static ICoreCommand ToolCubicBezierCommand { get; set; }
 
         /// <summary>
-        /// Set current tool to <see cref="Tool.QBezier"/> or current path tool to <see cref="PathTool.QBezier"/>.
+        /// Set current tool to <see cref="Tool.QuadraticBezier"/> or current path tool to <see cref="PathTool.QuadraticBezier"/>.
         /// </summary>
-        public static ICoreCommand ToolQBezierCommand { get; set; }
+        public static ICoreCommand ToolQuadraticBezierCommand { get; set; }
 
         /// <summary>
         /// Set current tool to <see cref="Tool.Path"/>.

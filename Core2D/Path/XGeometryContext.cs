@@ -51,7 +51,7 @@ namespace Core2D
         /// <param name="point3">The end point.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
-        public abstract void BezierTo(XPoint point1, XPoint point2, XPoint point3, bool isStroked = true, bool isSmoothJoin = true);
+        public abstract void CubicBezierTo(XPoint point1, XPoint point2, XPoint point3, bool isStroked = true, bool isSmoothJoin = true);
 
         /// <summary>
         /// Adds quadratic bezier segment.

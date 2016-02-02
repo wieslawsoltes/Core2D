@@ -1392,32 +1392,32 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Set current tool to <see cref="Tool.Bezier"/> or current path tool to <see cref="PathTool.Bezier"/>.
+        /// Set current tool to <see cref="Tool.CubicBezier"/> or current path tool to <see cref="PathTool.CubicBezier"/>.
         /// </summary>
-        public void OnToolBezier()
+        public void OnToolCubicBezier()
         {
-            if (CurrentTool == Tool.Path && CurrentPathTool != PathTool.Bezier)
+            if (CurrentTool == Tool.Path && CurrentPathTool != PathTool.CubicBezier)
             {
-                CurrentPathTool = PathTool.Bezier;
+                CurrentPathTool = PathTool.CubicBezier;
             }
             else
             {
-                CurrentTool = Tool.Bezier;
+                CurrentTool = Tool.CubicBezier;
             }
         }
 
         /// <summary>
-        /// Set current tool to <see cref="Tool.QBezier"/> or current path tool to <see cref="PathTool.QBezier"/>.
+        /// Set current tool to <see cref="Tool.QuadraticBezier"/> or current path tool to <see cref="PathTool.QuadraticBezier"/>.
         /// </summary>
-        public void OnToolQBezier()
+        public void OnToolQuadraticBezier()
         {
-            if (CurrentTool == Tool.Path && CurrentPathTool != PathTool.QBezier)
+            if (CurrentTool == Tool.Path && CurrentPathTool != PathTool.QuadraticBezier)
             {
-                CurrentPathTool = PathTool.QBezier;
+                CurrentPathTool = PathTool.QuadraticBezier;
             }
             else
             {
-                CurrentTool = Tool.QBezier;
+                CurrentTool = Tool.QuadraticBezier;
             }
         }
 
@@ -1938,8 +1938,8 @@ namespace Core2D
                 [Tool.Point] = new ToolPoint(this),
                 [Tool.Line] = new ToolLine(this),
                 [Tool.Arc] = new ToolArc(this),
-                [Tool.Bezier] = new ToolBezier(this),
-                [Tool.QBezier] = new ToolQBezier(this),
+                [Tool.CubicBezier] = new ToolCubicBezier(this),
+                [Tool.QuadraticBezier] = new ToolQuadraticBezier(this),
                 [Tool.Path] = new ToolPath(this),
                 [Tool.Rectangle] = new ToolRectangle(this),
                 [Tool.Ellipse] = new ToolEllipse(this),
@@ -4030,14 +4030,14 @@ namespace Core2D
                     () => OnToolArc(),
                     () => IsEditMode());
 
-            Commands.ToolBezierCommand =
+            Commands.ToolCubicBezierCommand =
                 Command.Create(
-                    () => OnToolBezier(),
+                    () => OnToolCubicBezier(),
                     () => IsEditMode());
 
-            Commands.ToolQBezierCommand =
+            Commands.ToolQuadraticBezierCommand =
                 Command.Create(
-                    () => OnToolQBezier(),
+                    () => OnToolQuadraticBezier(),
                     () => IsEditMode());
 
             Commands.ToolPathCommand =

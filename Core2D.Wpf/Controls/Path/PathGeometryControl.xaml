@@ -35,8 +35,8 @@
                     <DataTemplate DataType="{x:Type core:XLineSegment}">
                         <TextBlock Text="LineSegment"/>
                     </DataTemplate>
-                    <DataTemplate DataType="{x:Type core:XBezierSegment}">
-                        <TextBlock Text="BezierSegment"/>
+                    <DataTemplate DataType="{x:Type core:XCubicBezierSegment}">
+                        <TextBlock Text="CubicBezierSegment"/>
                     </DataTemplate>
                     <DataTemplate DataType="{x:Type core:XQuadraticBezierSegment}">
                         <TextBlock Text="QuadraticBezierSegment"/>
