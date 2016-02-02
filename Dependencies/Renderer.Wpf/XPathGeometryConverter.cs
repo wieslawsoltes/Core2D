@@ -77,13 +77,13 @@ namespace Dependencies
                             lineSegment.IsStroked,
                             lineSegment.IsSmoothJoin);
                     }
-                    else if (segment is XPolyBezierSegment)
+                    else if (segment is XPolyCubicBezierSegment)
                     {
-                        var polyBezierSegment = segment as XPolyBezierSegment;
+                        var polyCubicBezierSegment = segment as XPolyCubicBezierSegment;
                         sgc.PolyBezierTo(
-                            ToPoints(polyBezierSegment.Points),
-                            polyBezierSegment.IsStroked,
-                            polyBezierSegment.IsSmoothJoin);
+                            ToPoints(polyCubicBezierSegment.Points),
+                            polyCubicBezierSegment.IsStroked,
+                            polyCubicBezierSegment.IsSmoothJoin);
                     }
                     else if (segment is XPolyLineSegment)
                     {

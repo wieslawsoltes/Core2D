@@ -76,7 +76,7 @@ namespace Core2D
         /// <param name="points">The points array.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
-        public abstract void PolyBezierTo(IList<XPoint> points, bool isStroked = true, bool isSmoothJoin = true);
+        public abstract void PolyCubicBezierTo(IList<XPoint> points, bool isStroked = true, bool isSmoothJoin = true);
 
         /// <summary>
         /// Adds poly quadratic bezier segment.

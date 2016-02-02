@@ -315,7 +315,7 @@ message XPathSegment {
    optional XQuadraticBezierSegment XQuadraticBezierSegment = 103;
    optional XArcSegment XArcSegment = 104;
    optional XPolyLineSegment XPolyLineSegment = 105;
-   optional XPolyBezierSegment XPolyBezierSegment = 106;
+   optional XPolyCubicBezierSegment XPolyCubicBezierSegment = 106;
    optional XPolyQuadraticBezierSegment XPolyQuadraticBezierSegment = 107;
 }
 message XPathSize {
@@ -327,7 +327,7 @@ message XPoint {
    optional double Y = 2;
    optional bcl.NetObjectProxy Shape = 3; // reference-tracked BaseShape
 }
-message XPolyBezierSegment {
+message XPolyCubicBezierSegment {
    repeated bcl.NetObjectProxy Points = 1; // reference-tracked BaseShape
 }
 message XPolyLineSegment {

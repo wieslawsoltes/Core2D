@@ -262,8 +262,8 @@
     <Compile Include="Controls\Path\PathSizeControl.paml.cs">
       <DependentUpon>PathSizeControl.paml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Path\PolyBezierSegmentControl.paml.cs">
-      <DependentUpon>PolyBezierSegmentControl.paml</DependentUpon>
+    <Compile Include="Controls\Path\PolyCubicBezierSegmentControl.paml.cs">
+      <DependentUpon>PolyCubicBezierSegmentControl.paml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Path\PolyLineSegmentControl.paml.cs">
       <DependentUpon>PolyLineSegmentControl.paml</DependentUpon>
@@ -433,7 +433,7 @@
     <EmbeddedResource Include="Controls\Path\ArcSegmentControl.paml" />
     <EmbeddedResource Include="Controls\Path\BezierSegmentControl.paml" />
     <EmbeddedResource Include="Controls\Path\LineSegmentControl.paml" />
-    <EmbeddedResource Include="Controls\Path\PolyBezierSegmentControl.paml" />
+    <EmbeddedResource Include="Controls\Path\PolyCubicBezierSegmentControl.paml" />
     <EmbeddedResource Include="Controls\Path\PolyLineSegmentControl.paml" />
     <EmbeddedResource Include="Controls\Path\PolyQuadraticBezierSegmentControl.paml" />
     <EmbeddedResource Include="Controls\Path\QuadraticBezierSegmentControl.paml" />

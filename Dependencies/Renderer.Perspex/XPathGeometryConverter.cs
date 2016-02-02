@@ -67,42 +67,42 @@ namespace Dependencies
 
                             previous = lineSegment.Point;
                         }
-                        else if (segment is XPolyBezierSegment)
+                        else if (segment is XPolyCubicBezierSegment)
                         {
-                            var polyBezierSegment = segment as XPolyBezierSegment;
-                            if (polyBezierSegment.Points.Count >= 3)
+                            var polyCubicBezierSegment = segment as XPolyCubicBezierSegment;
+                            if (polyCubicBezierSegment.Points.Count >= 3)
                             {
                                 sgc.CubicBezierTo(
                                     new Point(
-                                        polyBezierSegment.Points[0].X,
-                                        polyBezierSegment.Points[0].Y),
+                                        polyCubicBezierSegment.Points[0].X,
+                                        polyCubicBezierSegment.Points[0].Y),
                                     new Point(
-                                        polyBezierSegment.Points[1].X,
-                                        polyBezierSegment.Points[1].Y),
+                                        polyCubicBezierSegment.Points[1].X,
+                                        polyCubicBezierSegment.Points[1].Y),
                                     new Point(
-                                        polyBezierSegment.Points[2].X,
-                                        polyBezierSegment.Points[2].Y));
+                                        polyCubicBezierSegment.Points[2].X,
+                                        polyCubicBezierSegment.Points[2].Y));
 
-                                previous = polyBezierSegment.Points[2];
+                                previous = polyCubicBezierSegment.Points[2];
                             }
 
-                            if (polyBezierSegment.Points.Count > 3
-                                && polyBezierSegment.Points.Count % 3 == 0)
+                            if (polyCubicBezierSegment.Points.Count > 3
+                                && polyCubicBezierSegment.Points.Count % 3 == 0)
                             {
-                                for (int i = 3; i < polyBezierSegment.Points.Count; i += 3)
+                                for (int i = 3; i < polyCubicBezierSegment.Points.Count; i += 3)
                                 {
                                     sgc.CubicBezierTo(
                                         new Point(
-                                            polyBezierSegment.Points[i].X,
-                                            polyBezierSegment.Points[i].Y),
+                                            polyCubicBezierSegment.Points[i].X,
+                                            polyCubicBezierSegment.Points[i].Y),
                                         new Point(
-                                            polyBezierSegment.Points[i + 1].X,
-                                            polyBezierSegment.Points[i + 1].Y),
+                                            polyCubicBezierSegment.Points[i + 1].X,
+                                            polyCubicBezierSegment.Points[i + 1].Y),
                                         new Point(
-                                            polyBezierSegment.Points[i + 2].X,
-                                            polyBezierSegment.Points[i + 2].Y));
+                                            polyCubicBezierSegment.Points[i + 2].X,
+                                            polyCubicBezierSegment.Points[i + 2].Y));
 
-                                    previous = polyBezierSegment.Points[i + 2];
+                                    previous = polyCubicBezierSegment.Points[i + 2];
                                 }
                             }
                         }

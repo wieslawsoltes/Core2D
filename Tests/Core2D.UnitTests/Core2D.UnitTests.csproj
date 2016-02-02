@@ -88,7 +88,7 @@
     <Compile Include="Path\Segments\XArcSegmentTests.cs" />
     <Compile Include="Path\Segments\XBezierSegmentTests.cs" />
     <Compile Include="Path\Segments\XLineSegmentTests.cs" />
-    <Compile Include="Path\Segments\XPolyBezierSegmentTests.cs" />
+    <Compile Include="Path\Segments\XPolyCubicBezierSegmentTests.cs" />
     <Compile Include="Path\Segments\XPolyLineSegmentTests.cs" />
     <Compile Include="Path\Segments\XPolyQuadraticBezierSegmentTests.cs" />
     <Compile Include="Path\Segments\XQuadraticBezierSegmentTests.cs" />

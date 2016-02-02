@@ -132,18 +132,18 @@ namespace Core2D.UnitTests
 
         [Fact]
         [Trait("Core2D", "Path")]
-        public void PolyBezierTo_Adds_New_XPolyBezierSegment()
+        public void PolyCubicBezierTo_Adds_New_XPolyCubicBezierSegment()
         {
             var geometry = new XPathGeometry();
             var target = new XPathGeometryContext(geometry);
             target.BeginFigure(new XPoint());
             Assert.Equal(0, geometry.Figures[0].Segments.Count);
 
-            target.PolyBezierTo(new List<XPoint>() { new XPoint(), new XPoint(), new XPoint() });
+            target.PolyCubicBezierTo(new List<XPoint>() { new XPoint(), new XPoint(), new XPoint() });
             Assert.Equal(1, geometry.Figures[0].Segments.Count);
 
             var segment = geometry.Figures[0].Segments[0];
-            Assert.IsType<XPolyBezierSegment>(segment);
+            Assert.IsType<XPolyCubicBezierSegment>(segment);
             Assert.True(segment.IsStroked);
             Assert.True(segment.IsSmoothJoin);
         }

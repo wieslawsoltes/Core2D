@@ -156,8 +156,8 @@
     <Compile Include="Controls\Path\PathSizeControl.xaml.cs">
       <DependentUpon>PathSizeControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Path\PolyBezierSegmentControl.xaml.cs">
-      <DependentUpon>PolyBezierSegmentControl.xaml</DependentUpon>
+    <Compile Include="Controls\Path\PolyCubicBezierSegmentControl.xaml.cs">
+      <DependentUpon>PolyCubicBezierSegmentControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Path\PolyLineSegmentControl.xaml.cs">
       <DependentUpon>PolyLineSegmentControl.xaml</DependentUpon>
@@ -352,7 +352,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\Path\PolyBezierSegmentControl.xaml">
+    <Page Include="Controls\Path\PolyCubicBezierSegmentControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

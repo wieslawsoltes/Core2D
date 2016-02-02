@@ -6,14 +6,14 @@ using Perspex.Markup.Xaml;
 namespace Core2D.Perspex.Controls.Path
 {
     /// <summary>
-    /// Interaction logic for <see cref="PolyBezierSegmentControl"/> xaml.
+    /// Interaction logic for <see cref="PolyCubicBezierSegmentControl"/> xaml.
     /// </summary>
-    public class PolyBezierSegmentControl : UserControl
+    public class PolyCubicBezierSegmentControl : UserControl
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PolyBezierSegmentControl"/> class.
+        /// Initializes a new instance of the <see cref="PolyCubicBezierSegmentControl"/> class.
         /// </summary>
-        public PolyBezierSegmentControl()
+        public PolyCubicBezierSegmentControl()
         {
             this.InitializeComponent();
         }

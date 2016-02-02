@@ -305,8 +305,8 @@
         <DataTemplate DataType="core:XLineSegment">
             <path:LineSegmentControl/>
         </DataTemplate>
-        <DataTemplate DataType="core:XPolyBezierSegment">
-            <path:PolyBezierSegmentControl/>
+        <DataTemplate DataType="core:XPolyCubicBezierSegment">
+            <path:PolyCubicBezierSegmentControl/>
         </DataTemplate>
         <DataTemplate DataType="core:XPolyLineSegment">
             <path:PolyLineSegmentControl/>

@@ -83,40 +83,40 @@ namespace Dependencies
                             scale(lineSegment.Point.Y));
                         startPoint = lineSegment.Point;
                     }
-                    else if (segment is Core2D.XPolyBezierSegment)
+                    else if (segment is Core2D.XPolyCubicBezierSegment)
                     {
-                        var polyBezierSegment = segment as Core2D.XPolyBezierSegment;
-                        if (polyBezierSegment.Points.Count >= 3)
+                        var polyCubicBezierSegment = segment as Core2D.XPolyCubicBezierSegment;
+                        if (polyCubicBezierSegment.Points.Count >= 3)
                         {
                             gp.AddBezier(
                                 scale(startPoint.X),
                                 scale(startPoint.Y),
-                                scale(polyBezierSegment.Points[0].X),
-                                scale(polyBezierSegment.Points[0].Y),
-                                scale(polyBezierSegment.Points[1].X),
-                                scale(polyBezierSegment.Points[1].Y),
-                                scale(polyBezierSegment.Points[2].X),
-                                scale(polyBezierSegment.Points[2].Y));
+                                scale(polyCubicBezierSegment.Points[0].X),
+                                scale(polyCubicBezierSegment.Points[0].Y),
+                                scale(polyCubicBezierSegment.Points[1].X),
+                                scale(polyCubicBezierSegment.Points[1].Y),
+                                scale(polyCubicBezierSegment.Points[2].X),
+                                scale(polyCubicBezierSegment.Points[2].Y));
                         }
 
-                        if (polyBezierSegment.Points.Count > 3
-                            && polyBezierSegment.Points.Count % 3 == 0)
+                        if (polyCubicBezierSegment.Points.Count > 3
+                            && polyCubicBezierSegment.Points.Count % 3 == 0)
                         {
-                            for (int i = 3; i < polyBezierSegment.Points.Count; i += 3)
+                            for (int i = 3; i < polyCubicBezierSegment.Points.Count; i += 3)
                             {
                                 gp.AddBezier(
-                                    scale(polyBezierSegment.Points[i - 1].X),
-                                    scale(polyBezierSegment.Points[i - 1].Y),
-                                    scale(polyBezierSegment.Points[i].X),
-                                    scale(polyBezierSegment.Points[i].Y),
-                                    scale(polyBezierSegment.Points[i + 1].X),
-                                    scale(polyBezierSegment.Points[i + 1].Y),
-                                    scale(polyBezierSegment.Points[i + 2].X),
-                                    scale(polyBezierSegment.Points[i + 2].Y));
+                                    scale(polyCubicBezierSegment.Points[i - 1].X),
+                                    scale(polyCubicBezierSegment.Points[i - 1].Y),
+                                    scale(polyCubicBezierSegment.Points[i].X),
+                                    scale(polyCubicBezierSegment.Points[i].Y),
+                                    scale(polyCubicBezierSegment.Points[i + 1].X),
+                                    scale(polyCubicBezierSegment.Points[i + 1].Y),
+                                    scale(polyCubicBezierSegment.Points[i + 2].X),
+                                    scale(polyCubicBezierSegment.Points[i + 2].Y));
                             }
                         }
 
-                        startPoint = polyBezierSegment.Points.Last();
+                        startPoint = polyCubicBezierSegment.Points.Last();
                     }
                     else if (segment is Core2D.XPolyLineSegment)
                     {

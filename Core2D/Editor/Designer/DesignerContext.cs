@@ -187,9 +187,9 @@ namespace Core2D
         public static XPathSize PathSize { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.XPolyBezierSegment"/>.
+        /// The design time <see cref="Core2D.XPolyCubicBezierSegment"/>.
         /// </summary>
-        public static XPolyBezierSegment PolyBezierSegment { get; set; }
+        public static XPolyCubicBezierSegment PolyCubicBezierSegment { get; set; }
 
         /// <summary>
         /// The design time <see cref="Core2D.XPolyLineSegment"/>.
@@ -483,7 +483,7 @@ namespace Core2D
             PathFigure = XPathFigure.Create(XPoint.Create(), false, true);
             PathGeometry = XPathGeometry.Create(ImmutableArray.Create<XPathFigure>(), XFillRule.EvenOdd);
             PathSize = XPathSize.Create();
-            PolyBezierSegment = XPolyBezierSegment.Create(ImmutableArray.Create<XPoint>(), true, true);
+            PolyCubicBezierSegment = XPolyCubicBezierSegment.Create(ImmutableArray.Create<XPoint>(), true, true);
             PolyLineSegment = XPolyLineSegment.Create(ImmutableArray.Create<XPoint>(), true, true);
             PolyQuadraticBezierSegment = XPolyQuadraticBezierSegment.Create(ImmutableArray.Create<XPoint>(), true, true);
             QuadraticBezierSegment = XQuadraticBezierSegment.Create(XPoint.Create(), XPoint.Create(), true, true);

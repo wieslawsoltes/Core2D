@@ -231,7 +231,7 @@ namespace Dependencies
             segment.AddSubType(103, typeof(XQuadraticBezierSegment));
             segment.AddSubType(104, typeof(XArcSegment));
             segment.AddSubType(105, typeof(XPolyLineSegment));
-            segment.AddSubType(106, typeof(XPolyBezierSegment));
+            segment.AddSubType(106, typeof(XPolyCubicBezierSegment));
             segment.AddSubType(107, typeof(XPolyQuadraticBezierSegment));
 
             // XLineSegment : XPathSegment
@@ -256,8 +256,8 @@ namespace Dependencies
             // XPolyLineSegment : XPathSegment
             model[typeof(XPolyLineSegment)].AddField(1, nameof(XPolyLineSegment.Points)).AsReference = true;
 
-            // XPolyBezierSegment : XPathSegment
-            model[typeof(XPolyBezierSegment)].AddField(1, nameof(XPolyBezierSegment.Points)).AsReference = true;
+            // XPolyCubicBezierSegment : XPathSegment
+            model[typeof(XPolyCubicBezierSegment)].AddField(1, nameof(XPolyCubicBezierSegment.Points)).AsReference = true;
 
             // XPolyQuadraticBezierSegment : XPathSegment
             model[typeof(XPolyQuadraticBezierSegment)].AddField(1, nameof(XPolyQuadraticBezierSegment.Points)).AsReference = true;

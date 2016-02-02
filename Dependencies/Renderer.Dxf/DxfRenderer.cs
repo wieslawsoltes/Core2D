@@ -432,44 +432,44 @@ namespace Dependencies
                         entities.Add((Line)dxfLine.Clone());
                         startPoint = lineSegment.Point;
                     }
-                    else if (segment is Core2D.XPolyBezierSegment)
+                    else if (segment is Core2D.XPolyCubicBezierSegment)
                     {
-                        var polyBezierSegment = segment as Core2D.XPolyBezierSegment;
-                        if (polyBezierSegment.Points.Count >= 3)
+                        var polyCubicBezierSegment = segment as Core2D.XPolyCubicBezierSegment;
+                        if (polyCubicBezierSegment.Points.Count >= 3)
                         {
                             var dxfSpline = CreateCubicSpline(
                                 startPoint.X + dx,
                                 startPoint.Y + dy,
-                                polyBezierSegment.Points[0].X + dx,
-                                polyBezierSegment.Points[0].Y + dy,
-                                polyBezierSegment.Points[1].X + dx,
-                                polyBezierSegment.Points[1].Y + dy,
-                                polyBezierSegment.Points[2].X + dx,
-                                polyBezierSegment.Points[2].Y + dy);
+                                polyCubicBezierSegment.Points[0].X + dx,
+                                polyCubicBezierSegment.Points[0].Y + dy,
+                                polyCubicBezierSegment.Points[1].X + dx,
+                                polyCubicBezierSegment.Points[1].Y + dy,
+                                polyCubicBezierSegment.Points[2].X + dx,
+                                polyCubicBezierSegment.Points[2].Y + dy);
                             edges.Add(dxfSpline);
                             entities.Add((Spline)dxfSpline.Clone());
                         }
 
-                        if (polyBezierSegment.Points.Count > 3
-                            && polyBezierSegment.Points.Count % 3 == 0)
+                        if (polyCubicBezierSegment.Points.Count > 3
+                            && polyCubicBezierSegment.Points.Count % 3 == 0)
                         {
-                            for (int i = 3; i < polyBezierSegment.Points.Count; i += 3)
+                            for (int i = 3; i < polyCubicBezierSegment.Points.Count; i += 3)
                             {
                                 var dxfSpline = CreateCubicSpline(
-                                    polyBezierSegment.Points[i - 1].X + dx,
-                                    polyBezierSegment.Points[i - 1].Y + dy,
-                                    polyBezierSegment.Points[i].X + dx,
-                                    polyBezierSegment.Points[i].Y + dy,
-                                    polyBezierSegment.Points[i + 1].X + dx,
-                                    polyBezierSegment.Points[i + 1].Y + dy,
-                                    polyBezierSegment.Points[i + 2].X + dx,
-                                    polyBezierSegment.Points[i + 2].Y + dy);
+                                    polyCubicBezierSegment.Points[i - 1].X + dx,
+                                    polyCubicBezierSegment.Points[i - 1].Y + dy,
+                                    polyCubicBezierSegment.Points[i].X + dx,
+                                    polyCubicBezierSegment.Points[i].Y + dy,
+                                    polyCubicBezierSegment.Points[i + 1].X + dx,
+                                    polyCubicBezierSegment.Points[i + 1].Y + dy,
+                                    polyCubicBezierSegment.Points[i + 2].X + dx,
+                                    polyCubicBezierSegment.Points[i + 2].Y + dy);
                                 edges.Add(dxfSpline);
                                 entities.Add((Spline)dxfSpline.Clone());
                             }
                         }
 
-                        startPoint = polyBezierSegment.Points.Last();
+                        startPoint = polyCubicBezierSegment.Points.Last();
                     }
                     else if (segment is Core2D.XPolyLineSegment)
                     {

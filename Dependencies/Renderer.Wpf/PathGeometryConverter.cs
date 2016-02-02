@@ -82,11 +82,11 @@ namespace Dependencies
                     }
                     else if (segment is PolyBezierSegment)
                     {
-                        var polyBezierSegment = segment as PolyBezierSegment;
-                        context.PolyBezierTo(
-                            ToXPoints(polyBezierSegment.Points),
-                            polyBezierSegment.IsStroked,
-                            polyBezierSegment.IsSmoothJoin);
+                        var polyCubicBezierSegment = segment as PolyBezierSegment;
+                        context.PolyCubicBezierTo(
+                            ToXPoints(polyCubicBezierSegment.Points),
+                            polyCubicBezierSegment.IsStroked,
+                            polyCubicBezierSegment.IsSmoothJoin);
                     }
                     else if (segment is PolyLineSegment)
                     {

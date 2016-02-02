@@ -153,7 +153,7 @@
     <Compile Include="Path\Segments\XArcSegment.cs" />
     <Compile Include="Path\Segments\XBezierSegment.cs" />
     <Compile Include="Path\Segments\XLineSegment.cs" />
-    <Compile Include="Path\Segments\XPolyBezierSegment.cs" />
+    <Compile Include="Path\Segments\XPolyCubicBezierSegment.cs" />
     <Compile Include="Path\Segments\XPolyLineSegment.cs" />
     <Compile Include="Path\Segments\XPolyQuadraticBezierSegment.cs" />
     <Compile Include="Path\Segments\XQuadraticBezierSegment.cs" />

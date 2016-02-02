@@ -97,9 +97,9 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public override void PolyBezierTo(IList<XPoint> points, bool isStroked = true, bool isSmoothJoin = true)
+        public override void PolyCubicBezierTo(IList<XPoint> points, bool isStroked = true, bool isSmoothJoin = true)
         {
-            var segment = XPolyBezierSegment.Create(
+            var segment = XPolyCubicBezierSegment.Create(
                 points,
                 isStroked,
                 isSmoothJoin);
