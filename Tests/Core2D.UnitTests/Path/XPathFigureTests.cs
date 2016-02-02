@@ -63,6 +63,18 @@ namespace Core2D.UnitTests
 
         [Fact]
         [Trait("Core2D", "Path")]
+        public void ToString_Should_Return_Empty()
+        {
+            var figure = new XPathFigure();
+
+            var target = new List<XPathSegment>();
+            var actual = figure.ToString(target);
+
+            Assert.Equal(string.Empty, actual);
+        }
+
+        [Fact]
+        [Trait("Core2D", "Path")]
         public void ToString_Should_Return_Path_Markup_Empty_Not_Closed()
         {
             var target = new XPathFigure();
