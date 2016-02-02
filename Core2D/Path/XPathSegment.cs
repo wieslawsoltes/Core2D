@@ -33,7 +33,7 @@ namespace Core2D
         /// <returns>A string representation of points collection.</returns>
         public string ToString(IList<XPoint> points)
         {
-            if (points.Count == 0)
+            if (points?.Count == 0)
             {
                 return string.Empty;
             }
