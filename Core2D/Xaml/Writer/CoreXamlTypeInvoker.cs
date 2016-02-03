@@ -2,7 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Portable.Xaml.Schema;
 
-namespace Dependencies
+namespace Core2D
 {
     internal class CoreXamlTypeInvoker : XamlTypeInvoker
     {

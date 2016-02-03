@@ -3,7 +3,7 @@
 using System;
 using Portable.Xaml;
 
-namespace Dependencies
+namespace Core2D
 {
     internal class CoreXamlSchemaContext : XamlSchemaContext
     {

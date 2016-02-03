@@ -4,7 +4,7 @@ using System;
 using Portable.Xaml;
 using Portable.Xaml.Schema;
 
-namespace Dependencies
+namespace Core2D
 {
     internal class CoreXamlType : XamlType
     {

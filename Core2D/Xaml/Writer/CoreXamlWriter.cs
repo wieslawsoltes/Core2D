@@ -4,9 +4,9 @@ using System.IO;
 using System.Xml;
 using Portable.Xaml;
 
-namespace Dependencies
+namespace Core2D
 {
-    public static class CoreXamlWriter
+    internal static class CoreXamlWriter
     {
         internal static readonly CoreXamlSchemaContext context = new CoreXamlSchemaContext();
 

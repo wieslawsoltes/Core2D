@@ -196,6 +196,7 @@
     <Compile Include="Style\TextVAlignment.cs" />
     <Compile Include="Xaml\Writer\CoreXamlReader.cs" />
     <Compile Include="Xaml\Writer\CoreXamlSchemaContext.cs" />
+    <Compile Include="Xaml\Writer\CoreXamlSerializer.cs" />
     <Compile Include="Xaml\Writer\CoreXamlType.cs" />
     <Compile Include="Xaml\Writer\CoreXamlTypeInvoker.cs" />
     <Compile Include="Xaml\Writer\CoreXamlWriter.cs" />
