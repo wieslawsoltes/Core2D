@@ -9,7 +9,7 @@ namespace Core2D.UnitTests
     public class XPathGeometryContextTests
     {
         [Fact]
-        [Trait("Core2D", "Path")]
+        [Trait("Core2D.Path", "Geometry")]
         public void Inherits_From_XGeometryContext()
         {
             var target = new XPathGeometryContext(new XPathGeometry());
@@ -17,14 +17,14 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Path")]
+        [Trait("Core2D.Path", "Geometry")]
         public void Should_Throw_ArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>(() => new XPathGeometryContext(null));
         }
 
         [Fact]
-        [Trait("Core2D", "Path")]
+        [Trait("Core2D.Path", "Geometry")]
         public void BeginFigure_Adds_New_Figure()
         {
             var geometry = new XPathGeometry();
@@ -41,7 +41,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Path")]
+        [Trait("Core2D.Path", "Geometry")]
         public void LineTo_Adds_New_XLineSegment()
         {
             var geometry = new XPathGeometry();
@@ -59,7 +59,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Path")]
+        [Trait("Core2D.Path", "Geometry")]
         public void ArcTo_Adds_New_XArcSegment()
         {
             var geometry = new XPathGeometry();
@@ -77,7 +77,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Path")]
+        [Trait("Core2D.Path", "Geometry")]
         public void CubicBezierTo_Adds_New_XCubicBezierSegment()
         {
             var geometry = new XPathGeometry();
@@ -95,7 +95,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Path")]
+        [Trait("Core2D.Path", "Geometry")]
         public void QuadraticBezierTo_Adds_New_XQuadraticBezierSegment()
         {
             var geometry = new XPathGeometry();
@@ -113,7 +113,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Path")]
+        [Trait("Core2D.Path", "Geometry")]
         public void PolyLineTo_Adds_New_XPolyLineSegment()
         {
             var geometry = new XPathGeometry();
@@ -131,7 +131,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Path")]
+        [Trait("Core2D.Path", "Geometry")]
         public void PolyCubicBezierTo_Adds_New_XPolyCubicBezierSegment()
         {
             var geometry = new XPathGeometry();
@@ -149,7 +149,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Path")]
+        [Trait("Core2D.Path", "Geometry")]
         public void PolyQuadraticBezierTo_Adds_New_XPolyQuadraticBezierSegment()
         {
             var geometry = new XPathGeometry();

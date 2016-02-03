@@ -8,7 +8,7 @@ namespace Core2D.UnitTests
     public class XLineSegmentTests
     {
         [Fact]
-        [Trait("Core2D", "Path")]
+        [Trait("Core2D.Path", "Segments")]
         public void GetPoints_Should_Return_All_Segment_Points()
         {
             var segment = new XLineSegment()
@@ -24,7 +24,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Path")]
+        [Trait("Core2D.Path", "Segments")]
         public void ToString_Should_Return_Path_Markup()
         {
             var target = new XLineSegment()

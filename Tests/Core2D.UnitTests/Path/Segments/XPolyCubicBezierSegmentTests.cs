@@ -8,7 +8,7 @@ namespace Core2D.UnitTests
     public class XPolyCubicBezierSegmentTests
     {
         [Fact]
-        [Trait("Core2D", "Path")]
+        [Trait("Core2D.Path", "Segments")]
         public void Points_Not_Null()
         {
             var target = new XPolyCubicBezierSegment();
@@ -16,7 +16,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Path")]
+        [Trait("Core2D.Path", "Segments")]
         public void GetPoints_Should_Return_All_Segment_Points()
         {
             var segment = new XPolyCubicBezierSegment();
@@ -34,7 +34,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Path")]
+        [Trait("Core2D.Path", "Segments")]
         public void ToString_Should_Return_Path_Markup()
         {
             var target = new XPolyCubicBezierSegment();

@@ -9,7 +9,7 @@ namespace Core2D.UnitTests
     public class XPathFigureTests
     {
         [Fact]
-        [Trait("Core2D", "Path")]
+        [Trait("Core2D.Path", "Geometry")]
         public void StartPoint_Not_Null()
         {
             var target = new XPathFigure();
@@ -17,7 +17,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Path")]
+        [Trait("Core2D.Path", "Geometry")]
         public void Segments_Not_Null()
         {
             var target = new XPathFigure();
@@ -25,7 +25,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Path")]
+        [Trait("Core2D.Path", "Geometry")]
         public void IsFilled_By_Default_Is_False()
         {
             var target = new XPathFigure();
@@ -33,7 +33,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Path")]
+        [Trait("Core2D.Path", "Geometry")]
         public void IsClosed_By_Default_Is_False()
         {
             var target = new XPathFigure();
@@ -41,7 +41,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Path")]
+        [Trait("Core2D.Path", "Geometry")]
         public void GetPoints_Should_Return_All_Segment_Points()
         {
             var figure = new XPathFigure();
@@ -62,7 +62,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Path")]
+        [Trait("Core2D.Path", "Geometry")]
         public void ToString_Should_Return_Empty()
         {
             var figure = new XPathFigure();
@@ -74,7 +74,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Path")]
+        [Trait("Core2D.Path", "Geometry")]
         public void ToString_Should_Return_Path_Markup_Empty_Not_Closed()
         {
             var target = new XPathFigure();
@@ -85,7 +85,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Path")]
+        [Trait("Core2D.Path", "Geometry")]
         public void ToString_Should_Return_Path_Markup_Empty_Closed()
         {
             var target = new XPathFigure() { IsClosed = true };

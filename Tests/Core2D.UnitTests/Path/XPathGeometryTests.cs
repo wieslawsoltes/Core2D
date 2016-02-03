@@ -8,7 +8,7 @@ namespace Core2D.UnitTests
     public class XPathGeometryTests
     {
         [Fact]
-        [Trait("Core2D", "Path")]
+        [Trait("Core2D.Path", "Geometry")]
         public void Figures_Not_Null()
         {
             var target = new XPathGeometry();
@@ -16,7 +16,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Path")]
+        [Trait("Core2D.Path", "Geometry")]
         public void FillRule_Set_To_Nonzero_By_Default()
         {
             var target = new XPathGeometry();
@@ -24,7 +24,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Path")]
+        [Trait("Core2D.Path", "Geometry")]
         public void ToString_Should_Return_Empty()
         {
             var geometry = new XPathGeometry();
@@ -36,7 +36,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Path")]
+        [Trait("Core2D.Path", "Geometry")]
         public void ToString_Should_Return_Path_Markup_Empty_Nonzero()
         {
             var target = new XPathGeometry();
@@ -47,7 +47,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Path")]
+        [Trait("Core2D.Path", "Geometry")]
         public void ToString_Should_Return_Path_Markup_Empty_EvenOdd()
         {
             var target = new XPathGeometry() { FillRule = XFillRule.EvenOdd };

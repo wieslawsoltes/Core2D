@@ -7,7 +7,7 @@ namespace Core2D.UnitTests
     public class XPathSizeTests
     {
         [Fact]
-        [Trait("Core2D", "Path")]
+        [Trait("Core2D.Path", "Geometry")]
         public void ToString_Should_Return_Width_And_Height()
         {
             var target = new XPathSize() { Width = 50, Height = 30 };

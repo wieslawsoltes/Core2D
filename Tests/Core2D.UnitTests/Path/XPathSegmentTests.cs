@@ -9,7 +9,7 @@ namespace Core2D.UnitTests
     public class XPathSegmentTests
     {
         [Fact]
-        [Trait("Core2D", "Path")]
+        [Trait("Core2D.Path", "Geometry")]
         public void ToString_Should_Return_Empty()
         {
             var segment = new Class1();
@@ -21,7 +21,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Path")]
+        [Trait("Core2D.Path", "Geometry")]
         public void ToString_Should_Return_Points()
         {
             var segment = new Class1();
