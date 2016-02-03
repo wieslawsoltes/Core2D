@@ -151,7 +151,7 @@
     <Folder Include="Renderer\" />
     <Folder Include="Xaml\Collections\" />
     <Folder Include="Xaml\Converters\" />
-    <Folder Include="Xaml\Writer\" />
+    <Folder Include="Xaml\Serializer\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
