@@ -48,7 +48,7 @@
     <Compile Include="..\..\Core2D\Properties\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="CoreXamlSerializer.cs" />
+    <Compile Include="PortableXamlSerializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

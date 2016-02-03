@@ -9,9 +9,9 @@ using Core2D;
 namespace Dependencies
 {
     /// <summary>
-    /// Xaml serializer.
+    /// Portable Xaml serializer.
     /// </summary>
-    public class CoreXamlSerializer : ITextSerializer
+    public class PortableXamlSerializer : ITextSerializer
     {
         internal static readonly XmlWriterSettings settings = new XmlWriterSettings()
         {

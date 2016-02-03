@@ -19,7 +19,7 @@ namespace Core2D.Wpf
                 new TextClipboard(),
                 new ProtoBufStreamSerializer(),
                 new NewtonsoftTextSerializer(),
-                new CoreXamlSerializer());
+                new PortableXamlSerializer());
         }
     }
 }
