@@ -265,9 +265,6 @@
         <DataTemplate DataType="core:XLine">
             <shapes:LineControl/>
         </DataTemplate>
-        <DataTemplate DataType="core:XText">
-            <shapes:TextControl/>
-        </DataTemplate>
         <DataTemplate DataType="core:XRectangle">
             <shapes:RectangleControl/>
         </DataTemplate>
@@ -276,6 +273,9 @@
         </DataTemplate>
         <DataTemplate DataType="core:XImage">
             <shapes:ImageControl/>
+        </DataTemplate>
+        <DataTemplate DataType="core:XText">
+            <shapes:TextControl/>
         </DataTemplate>
         <DataTemplate DataType="core:XArc">
             <shapes:ArcControl/>
@@ -333,14 +333,14 @@
         <DataTemplate DataType="core:Document">
             <project:DocumentControl/>
         </DataTemplate>
-        <DataTemplate DataType="core:Container">
-            <project:ContainerControl/>
-        </DataTemplate>
         <DataTemplate DataType="core:Template">
             <project:TemplateControl/>
         </DataTemplate>
         <DataTemplate DataType="core:Page">
             <project:PageControl/>
+        </DataTemplate>
+        <DataTemplate DataType="core:Container">
+            <project:ContainerControl/>
         </DataTemplate>
         <DataTemplate DataType="core:Layer">
             <project:LayerControl/>
