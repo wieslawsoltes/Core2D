@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using Perspex;
 using Perspex.Markup;
 
 namespace Core2D.Perspex.Converters
@@ -27,7 +28,11 @@ namespace Core2D.Perspex.Converters
         /// <returns>The converted value.</returns>
         public object Convert(IList<object> values, Type targetType, object parameter, CultureInfo culture)
         {
-            return (values[0] == values[1]) ? true : false;
+            if (values != null && values.Count == 2 && values[0] != PerspexProperty.UnsetValue && values[1] != PerspexProperty.UnsetValue)
+            {
+                return values[0].Equals(values[1]);
+            }
+            return PerspexProperty.UnsetValue; 
         }
     }
 }
