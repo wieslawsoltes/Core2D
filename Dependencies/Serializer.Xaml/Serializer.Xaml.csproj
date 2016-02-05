@@ -31,7 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Portable.Xaml, Version=0.9.5877.11155, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Portable.Xaml, Version=0.9.5879.9947, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Portable.Xaml.0.10.0-alpha\lib\dotnet\Portable.Xaml.dll</HintPath>
       <Private>True</Private>
     </Reference>
