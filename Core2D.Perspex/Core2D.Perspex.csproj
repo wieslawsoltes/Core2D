@@ -142,11 +142,11 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Perspex.Xaml.Interactions, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Perspex.Xaml.Behaviors.9999.0.53-nightly\lib\portable-windows8+net45\Perspex.Xaml.Interactions.dll</HintPath>
+      <HintPath>..\packages\Perspex.Xaml.Behaviors.9999.0.54-nightly\lib\portable-windows8+net45\Perspex.Xaml.Interactions.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Perspex.Xaml.Interactivity, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Perspex.Xaml.Behaviors.9999.0.53-nightly\lib\portable-windows8+net45\Perspex.Xaml.Interactivity.dll</HintPath>
+      <HintPath>..\packages\Perspex.Xaml.Behaviors.9999.0.54-nightly\lib\portable-windows8+net45\Perspex.Xaml.Interactivity.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Portable.Xaml, Version=0.9.5877.11155, Culture=neutral, processorArchitecture=MSIL">
