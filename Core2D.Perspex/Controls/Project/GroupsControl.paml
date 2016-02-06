@@ -17,11 +17,7 @@
             <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
             <TextBox Text="{Binding Path=CurrentGroupLibrary.Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
         </Grid>
-        <DropDown
-            Items="{Binding Path=GroupLibraries}"
-            SelectedItem="{Binding Path=CurrentGroupLibrary, Mode=TwoWay}"
-            Classes="default"
-            Grid.Row="2">
+        <DropDown Items="{Binding Path=GroupLibraries}" SelectedItem="{Binding Path=CurrentGroupLibrary, Mode=TwoWay}" Classes="default" Grid.Row="2">
             <DropDown.DataTemplates>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}" Classes="default"/>
@@ -33,11 +29,7 @@
             <MenuItem Header="+" Command="{Static core:Commands.AddGroupCommand}" CommandParameter="{Binding Path=CurrentGroupLibrary}"/>
             <MenuItem Header="-" Command="{Static core:Commands.RemoveGroupCommand}" CommandParameter="{Binding Path=CurrentGroupLibrary.Selected}"/>
         </Menu>
-        <ListBox
-            Items="{Binding Path=CurrentGroupLibrary.Items}"
-            SelectedItem="{Binding Path=CurrentGroupLibrary.Selected, Mode=TwoWay}"
-            Grid.Row="4"
-            Classes="default">
+        <ListBox Items="{Binding Path=CurrentGroupLibrary.Items}" SelectedItem="{Binding Path=CurrentGroupLibrary.Selected, Mode=TwoWay}" Grid.Row="4" Classes="default">
             <ListBox.DataTemplates>
                 <DataTemplate DataType="core:XGroup">
                     <TextBlock Text="{Binding Path=Name}" Classes="default"/>

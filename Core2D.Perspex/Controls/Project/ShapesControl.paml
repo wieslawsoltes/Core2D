@@ -19,12 +19,7 @@
                     <Menu Grid.Row="0" HorizontalAlignment="Right">
                         <MenuItem Header="-" Command="{Static core:Commands.RemoveShapeCommand}"/>
                     </Menu>
-                    <ListBox
-                        Name="shapes"
-                        Items="{Binding Path=CurrentLayer.Shapes}"
-                        SelectedItem="{Binding Path=CurrentShape, Mode=TwoWay}"
-                        Classes="default"
-                        Grid.Row="1">
+                    <ListBox Name="shapes" Items="{Binding Path=CurrentLayer.Shapes}" SelectedItem="{Binding Path=CurrentShape, Mode=TwoWay}" Classes="default" Grid.Row="1">
                         <ListBox.DataTemplates>
                             <DataTemplate DataType="core:BaseShape">
                                 <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="default"/>

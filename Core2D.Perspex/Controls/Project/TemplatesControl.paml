@@ -19,11 +19,7 @@
             <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
             <TextBox Text="{Binding Path=CurrentTemplate.Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
         </Grid>
-        <ListBox
-            Items="{Binding Path=Templates}"
-            SelectedItem="{Binding Path=CurrentTemplate, Mode=TwoWay}"
-            Grid.Row="2"
-            Classes="default">
+        <ListBox Items="{Binding Path=Templates}" SelectedItem="{Binding Path=CurrentTemplate, Mode=TwoWay}" Grid.Row="2" Classes="default">
             <ListBox.DataTemplates>
                 <DataTemplate DataType="core:Container">
                     <TextBlock Text="{Binding Path=Name, Mode=TwoWay}" Classes="default"/>

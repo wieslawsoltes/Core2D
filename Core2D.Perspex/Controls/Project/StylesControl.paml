@@ -17,11 +17,7 @@
             <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
             <TextBox Text="{Binding Path=CurrentStyleLibrary.Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
         </Grid>
-        <DropDown
-            Items="{Binding Path=StyleLibraries}"
-            SelectedItem="{Binding Path=CurrentStyleLibrary, Mode=TwoWay}"
-            Grid.Row="2"
-            Classes="default">
+        <DropDown Items="{Binding Path=StyleLibraries}" SelectedItem="{Binding Path=CurrentStyleLibrary, Mode=TwoWay}" Grid.Row="2" Classes="default">
             <DropDown.DataTemplates>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}" Classes="default"/>
@@ -33,11 +29,7 @@
             <MenuItem Header="+" Command="{Static core:Commands.AddStyleCommand}" CommandParameter="{Binding Path=CurrentStyleLibrary}"/>
             <MenuItem Header="-" Command="{Static core:Commands.RemoveStyleCommand}" CommandParameter="{Binding Path=CurrentStyleLibrary.Selected}"/>
         </Menu>
-        <ListBox
-            Items="{Binding Path=CurrentStyleLibrary.Items}"
-            SelectedItem="{Binding Path=CurrentStyleLibrary.Selected, Mode=TwoWay}"
-            Grid.Row="4"
-            Classes="default">
+        <ListBox Items="{Binding Path=CurrentStyleLibrary.Items}" SelectedItem="{Binding Path=CurrentStyleLibrary.Selected, Mode=TwoWay}" Grid.Row="4" Classes="default">
             <ListBox.DataTemplates>
                 <DataTemplate DataType="core:ShapeStyle">
                     <TextBlock Text="{Binding Path=Name}" Classes="default"/>
