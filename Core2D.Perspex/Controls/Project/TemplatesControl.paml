@@ -22,7 +22,13 @@
         <ListBox Items="{Binding Path=Templates}" SelectedItem="{Binding Path=CurrentTemplate, Mode=TwoWay}" Grid.Row="2" Classes="default">
             <ListBox.DataTemplates>
                 <DataTemplate DataType="core:Container">
-                    <TextBlock Text="{Binding Path=Name, Mode=TwoWay}" Classes="default"/>
+                    <TextBlock Text="{Binding Path=Name, Mode=TwoWay}" Classes="default">
+                        <TextBlock.ContextMenu>
+                            <ContextMenu>
+
+                            </ContextMenu>
+                        </TextBlock.ContextMenu>
+                    </TextBlock>
                 </DataTemplate>
             </ListBox.DataTemplates>
         </ListBox>

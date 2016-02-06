@@ -32,7 +32,13 @@
         <ListBox Items="{Binding Path=CurrentGroupLibrary.Items}" SelectedItem="{Binding Path=CurrentGroupLibrary.Selected, Mode=TwoWay}" Grid.Row="4" Classes="default">
             <ListBox.DataTemplates>
                 <DataTemplate DataType="core:XGroup">
-                    <TextBlock Text="{Binding Path=Name}" Classes="default"/>
+                    <TextBlock Text="{Binding Path=Name}" Classes="default">
+                        <TextBlock.ContextMenu>
+                            <ContextMenu>
+
+                            </ContextMenu>
+                        </TextBlock.ContextMenu>
+                    </TextBlock>
                 </DataTemplate>
             </ListBox.DataTemplates>
         </ListBox>
