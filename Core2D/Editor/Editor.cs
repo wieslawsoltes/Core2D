@@ -11,7 +11,7 @@ namespace Core2D
     /// <summary>
     /// Project editor.
     /// </summary>
-    public sealed class Editor : ObservableObject, IDisposable
+    public sealed class Editor : ObservableObject
     {
         private ILog _log;
         private IFileSystem _fileIO;
@@ -4309,35 +4309,6 @@ namespace Core2D
                 Command<object>.Create(
                     (item) => OnInsertDocumentAfter(item),
                     (item) => IsEditMode());
-        }
-
-        /// <summary>
-        /// Dispose unmanaged resources.
-        /// </summary>
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        /// <summary>
-        /// Dispose unmanaged resources.
-        /// </summary>
-        ~Editor()
-        {
-            Dispose(false);
-        }
-
-        /// <summary>
-        /// Dispose unmanaged resources.
-        /// </summary>
-        /// <param name="disposing">The flag indicating whether disposing.</param>
-        private void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                _log?.Close();
-            }
         }
     }
 }
