@@ -92,5 +92,34 @@ namespace Dependencies
             Trace.TraceError(format, args);
             LastMessage = "Error: " + string.Format(format, args);
         }
+
+        /// <summary>
+        /// Dispose unmanaged resources.
+        /// </summary>
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// Dispose unmanaged resources.
+        /// </summary>
+        ~TraceLog()
+        {
+            Dispose(false);
+        }
+
+        /// <summary>
+        /// Dispose unmanaged resources.
+        /// </summary>
+        /// <param name="disposing">The flag indicating whether disposing.</param>
+        private void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                Close();
+            }
+        }
     }
 }
