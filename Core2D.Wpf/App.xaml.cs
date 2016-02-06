@@ -85,8 +85,6 @@ namespace Core2D.Wpf
                         }
                     };
 
-                    _editor.View = _mainWindow;
-
                     _mainWindow.DataContext = _editor;
                     _mainWindow.ShowDialog();
                 }
@@ -222,6 +220,11 @@ namespace Core2D.Wpf
                 Command<object>.Create(
                     (item) => OnExport(item),
                     (item) => editor.IsEditMode());
+
+            Commands.ExitCommand =
+                Command.Create(
+                    () => OnExit(),
+                    () => true);
 
             Commands.ImportDataCommand =
                 Command<Project>.Create(
@@ -558,6 +561,14 @@ namespace Core2D.Wpf
                         break;
                 }
             }
+        }
+
+        /// <summary>
+        /// Close application view.
+        /// </summary>
+        public void OnExit()
+        {
+            _mainWindow?.Close();
         }
 
         /// <summary>

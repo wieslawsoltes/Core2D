@@ -27,7 +27,6 @@ namespace Core2D
         private Action _extentZoom;
         private bool _cancelAvailable;
         private BaseShape _hover;
-        private IView _view;
         private IProjectFactory _projectFactory;
         private ITextClipboard _textClipboard;
         private IStreamSerializer _protoBufSerializer;
@@ -168,15 +167,6 @@ namespace Core2D
         /// Gets or sets editor tools dictionary.
         /// </summary>
         public ImmutableDictionary<Tool, ToolBase> Tools { get; set; }
-
-        /// <summary>
-        /// Gets or sets editor view.
-        /// </summary>
-        public IView View
-        {
-            get { return _view; }
-            set { Update(ref _view, value); }
-        }
 
         /// <summary>
         /// Gets or sets project factory.
@@ -441,14 +431,6 @@ namespace Core2D
             {
                 _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
-        }
-
-        /// <summary>
-        /// Close application view.
-        /// </summary>
-        public void OnExit()
-        {
-            _view?.Close();
         }
 
         /// <summary>
@@ -3904,11 +3886,6 @@ namespace Core2D
                 Command.Create(
                     () => OnClose(),
                     () => IsEditMode());
-
-            Commands.ExitCommand =
-                Command.Create(
-                    () => OnExit(),
-                    () => true);
 
             Commands.UndoCommand =
                 Command.Create(

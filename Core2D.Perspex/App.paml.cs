@@ -4,7 +4,6 @@
 //#define SKIA_GTK
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -113,8 +112,6 @@ namespace Core2D.Perspex
                     _mainWindow = new Windows.MainWindow();
 
                     _mainWindow.Closed += (sender, e) => SaveRecent();
-
-                    _editor.View = _mainWindow;
 
                     _mainWindow.DataContext = _editor;
                     _mainWindow.Show();
@@ -252,6 +249,11 @@ namespace Core2D.Perspex
                 Command<object>.Create(
                     async (item) => await OnExport(item),
                     (item) => editor.IsEditMode());
+
+            Commands.ExitCommand =
+                Command.Create(
+                    () => OnExit(),
+                    () => true);
 
             Commands.ImportDataCommand =
                 Command<Project>.Create(
@@ -614,6 +616,14 @@ namespace Core2D.Perspex
             {
                 _editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
+        }
+
+        /// <summary>
+        /// Close application view.
+        /// </summary>
+        public void OnExit()
+        {
+            _mainWindow?.Close();
         }
 
         /// <summary>
