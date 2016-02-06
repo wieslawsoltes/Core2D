@@ -20,12 +20,7 @@
                         <MenuItem Header="+" Command="{Static core:Commands.AddLayerCommand}" CommandParameter="{Binding}"/>
                         <MenuItem Header="-" Command="{Static core:Commands.RemoveLayerCommand}" CommandParameter="{Binding Path=CurrentLayer}"/>
                     </Menu>
-                    <ListBox
-                        Name="layers"
-                        Items="{Binding Path=Layers}"
-                        SelectedItem="{Binding Path=CurrentLayer, Mode=TwoWay}"
-                        Classes="default"
-                        Grid.Row="1">
+                    <ListBox Name="layers" Items="{Binding Path=Layers}" SelectedItem="{Binding Path=CurrentLayer, Mode=TwoWay}" Classes="default" Grid.Row="1">
                         <ListBox.DataTemplates>
                             <DataTemplate DataType="core:Layer">
                                 <Grid ColumnDefinitions="Auto,*">
