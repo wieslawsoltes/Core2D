@@ -39,59 +39,65 @@ namespace Core2D.Wpf
         /// </summary>
         public void Start()
         {
-            InitializeEditor();
-            LoadRecent();
+            using (var log = new TraceLog())
+            {
+                log.Initialize(System.IO.Path.Combine(GetAssemblyPath(), _logFileName));
 
-            _mainWindow = new Windows.MainWindow();
-
-            _mainWindow.InitializeMouse(_editor);
-            _mainWindow.InitializeZoom(_editor);
-            _mainWindow.InitializeDrop(_editor);
-
-            _mainWindow.Loaded +=
-                (sender, e) =>
+                try
                 {
-                    if (_isLoaded)
-                        return;
-                    else
-                        _isLoaded = true;
+                    InitializeEditor(log);
+                    LoadRecent();
 
-                    if (_restoreLayout)
+                    _mainWindow = new Windows.MainWindow();
+
+                    _mainWindow.InitializeMouse(_editor);
+                    _mainWindow.InitializeZoom(_editor);
+                    _mainWindow.InitializeDrop(_editor);
+
+                    _mainWindow.Loaded +=
+                        (sender, e) =>
+                        {
+                            if (_isLoaded)
+                                return;
+                            else
+                                _isLoaded = true;
+
+                            if (_restoreLayout)
+                            {
+                                _mainWindow.AutoLoadLayout(_editor);
+                            }
+                        };
+
+                    _mainWindow.Unloaded += (sender, e) => { };
+
+                    _mainWindow.Closed += (sender, e) =>
                     {
-                        _mainWindow.AutoLoadLayout(_editor);
-                    }
-                };
+                        if (!_isLoaded)
+                            return;
+                        else
+                            _isLoaded = false;
 
-            _mainWindow.Unloaded += (sender, e) => { };
+                        SaveRecent();
 
-            _mainWindow.Closed += (sender, e) =>
-            {
-                if (!_isLoaded)
-                    return;
-                else
-                    _isLoaded = false;
+                        if (_restoreLayout)
+                        {
+                            _mainWindow.AutoSaveLayout(_editor);
+                        }
+                    };
 
-                SaveRecent();
+                    _editor.View = _mainWindow;
 
-                if (_restoreLayout)
-                {
-                    _mainWindow.AutoSaveLayout(_editor);
+                    _mainWindow.DataContext = _editor;
+                    _mainWindow.ShowDialog();
                 }
-
-                DeInitializeEditor();
-            };
-
-            _editor.View = _mainWindow;
-
-            _mainWindow.DataContext = _editor;
-
-            try
-            {
-                _mainWindow.ShowDialog();
-            }
-            catch (Exception ex)
-            {
-                _editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                catch (Exception ex)
+                {
+                    log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                    if (ex.InnerException != null)
+                    {
+                        log?.LogError($"{ex.InnerException.Message}{Environment.NewLine}{ex.InnerException.StackTrace}");
+                    }
+                }
             }
         }
 
@@ -151,7 +157,8 @@ namespace Core2D.Wpf
         /// <summary>
         /// Initialize <see cref="Editor"/> object.
         /// </summary>
-        private void InitializeEditor()
+        /// <param name="log">The log instance.</param>
+        private void InitializeEditor(ILog log)
         {
             _editor = new Editor()
             {
@@ -169,8 +176,7 @@ namespace Core2D.Wpf
                 CsvWriter = new CsvHelperWriter()
             };
 
-            _editor.Log = new TraceLog();
-            _editor.Log.Initialize(System.IO.Path.Combine(GetAssemblyPath(), _logFileName));
+            _editor.Log = log;
 
             _editor.FileIO = new FileSystem();
 
@@ -361,14 +367,6 @@ namespace Core2D.Wpf
                 Command.Create(
                     () => _mainWindow.OnResetLayout(),
                     () => true);
-        }
-
-        /// <summary>
-        /// De-initialize <see cref="Editor"/> object.
-        /// </summary>
-        private void DeInitializeEditor()
-        {
-            _editor?.Dispose();
         }
 
         /// <summary>

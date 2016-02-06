@@ -101,36 +101,32 @@ namespace Core2D.Perspex
         /// </summary>
         public void Start()
         {
-            try
+            using (var log = new TraceLog())
             {
-                InitializeEditor();
-                LoadRecent();
+                log.Initialize(System.IO.Path.Combine(GetAssemblyPath(), _logFileName));
 
-                _mainWindow = new Windows.MainWindow();
-
-                _mainWindow.Closed +=
-                    (sender, e) =>
-                    {
-                        SaveRecent();
-                        DeInitializeEditor();
-                    };
-
-                _editor.View = _mainWindow;
-
-                _mainWindow.DataContext = _editor;
-                _mainWindow.Show();
-
-                Run(_mainWindow);
-            }
-            catch (Exception ex)
-            {
-                if (_editor?.Log != null)
+                try
                 {
-                    _editor.Log.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                    InitializeEditor(log);
+                    LoadRecent();
+
+                    _mainWindow = new Windows.MainWindow();
+
+                    _mainWindow.Closed += (sender, e) => SaveRecent();
+
+                    _editor.View = _mainWindow;
+
+                    _mainWindow.DataContext = _editor;
+                    _mainWindow.Show();
+                    Run(_mainWindow);
                 }
-                else
+                catch (Exception ex)
                 {
-                    Trace.WriteLine($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                    log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                    if (ex.InnerException != null)
+                    {
+                        log?.LogError($"{ex.InnerException.Message}{Environment.NewLine}{ex.InnerException.StackTrace}");
+                    }
                 }
             }
         }
@@ -191,7 +187,8 @@ namespace Core2D.Perspex
         /// <summary>
         /// Initialize <see cref="Editor"/> object.
         /// </summary>
-        public void InitializeEditor()
+        /// <param name="log">The log instance.</param>
+        public void InitializeEditor(ILog log)
         {
             _editor = new Editor()
             {
@@ -209,8 +206,7 @@ namespace Core2D.Perspex
                 CsvWriter = new CsvHelperWriter()
             };
 
-            _editor.Log = new TraceLog();
-            _editor.Log.Initialize(System.IO.Path.Combine(GetAssemblyPath(), _logFileName));
+            _editor.Log = log;
 
             _editor.FileIO = new FileSystem();
 
@@ -396,14 +392,6 @@ namespace Core2D.Perspex
                 Command.Create(
                     () => { },
                     () => true);
-        }
-
-        /// <summary>
-        /// De-initialize <see cref="Editor"/> object.
-        /// </summary>
-        public void DeInitializeEditor()
-        {
-            _editor?.Dispose();
         }
 
         /// <summary>
