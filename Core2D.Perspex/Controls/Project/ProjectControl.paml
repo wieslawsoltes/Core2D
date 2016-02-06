@@ -18,6 +18,11 @@
                 </Menu>
                 <TextBox Text="{Binding Path=Name, Mode=TwoWay}" Classes="left" Grid.Row="1"/>
                 <TreeView Items="{Binding Path=Documents, Mode=TwoWay}" SelectedItem="{Binding Path=Selected, Mode=TwoWay}" AutoScrollToSelectedItem="True" Grid.Row="2" Classes="default">
+                    <TreeView.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="TreeView"/>
+                        </ContextMenu>
+                    </TreeView.ContextMenu>
                     <TreeView.Styles>
                         <Style Selector="TreeViewItem">
                             <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}"/>
@@ -25,10 +30,33 @@
                     </TreeView.Styles>
                     <TreeView.DataTemplates>
                         <TreeDataTemplate DataType="core:Document" ItemsSource="{Binding Path=Pages, Mode=TwoWay}">
-                            <TextBlock Text="{Binding Path=Name, Mode=TwoWay}" Classes="default"/>
+                            <TextBlock Text="{Binding Path=Name, Mode=TwoWay}" Classes="default">
+                                <TextBlock.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="Document"/>
+                                    </ContextMenu>
+                                </TextBlock.ContextMenu>
+                            </TextBlock>
                         </TreeDataTemplate>
-                        <DataTemplate DataType="core:Page">
-                            <TextBlock Text="{Binding Path=Name, Mode=TwoWay}" Classes="default"/>
+                        <TreeDataTemplate DataType="core:Page" ItemsSource="{Binding Path=Layers, Mode=TwoWay}">
+                            <TextBlock Text="{Binding Path=Name, Mode=TwoWay}" Classes="default">
+                                <TextBlock.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="Page"/>
+                                    </ContextMenu>
+                                </TextBlock.ContextMenu>
+                            </TextBlock>
+                        </TreeDataTemplate>
+                        <DataTemplate DataType="core:Layer">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch">
+                                <StackPanel.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="Layer"/>
+                                    </ContextMenu>
+                                </StackPanel.ContextMenu>
+                                <CheckBox IsChecked="{Binding IsVisible, Mode=TwoWay}" Classes="default"/>
+                                <TextBlock Text="{Binding Name, Mode=TwoWay}" Classes="default"/>
+                            </StackPanel>
                         </DataTemplate>
                     </TreeView.DataTemplates>
                 </TreeView>
