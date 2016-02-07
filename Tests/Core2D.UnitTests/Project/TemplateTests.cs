@@ -7,7 +7,7 @@ namespace Core2D.UnitTests
     public class TemplateTests
     {
         [Fact]
-        [Trait("Core2D", "Project")]
+        [Trait("Core2D.Project", "Project")]
         public void Inherits_From_Container()
         {
             var target = new Template();

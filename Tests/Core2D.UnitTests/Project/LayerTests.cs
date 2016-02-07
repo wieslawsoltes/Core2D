@@ -7,7 +7,7 @@ namespace Core2D.UnitTests
     public class LayerTests
     {
         [Fact]
-        [Trait("Core2D", "Project")]
+        [Trait("Core2D.Project", "Project")]
         public void Inherits_From_Selectable()
         {
             var target = new Layer();
@@ -15,7 +15,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Project")]
+        [Trait("Core2D.Project", "Project")]
         public void Shapes_Not_Null()
         {
             var target = new Layer();
@@ -23,7 +23,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Project")]
+        [Trait("Core2D.Project", "Project")]
         public void Setting_IsVisible_Should_Invalidate_Layer()
         {
             var target = Layer.Create("Layer1");
@@ -41,7 +41,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Project")]
+        [Trait("Core2D.Project", "Project")]
         public void Invalidate_Raises_InvalidateLayer_Event()
         {
             var target = Layer.Create("Layer1");
@@ -59,7 +59,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Project")]
+        [Trait("Core2D.Project", "Project")]
         public void Invalidate_Sets_EventArgs()
         {
             var target = Layer.Create("Layer1");

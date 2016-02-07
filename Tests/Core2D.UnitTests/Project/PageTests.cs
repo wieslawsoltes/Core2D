@@ -7,7 +7,7 @@ namespace Core2D.UnitTests
     public class PageTests
     {
         [Fact]
-        [Trait("Core2D", "Project")]
+        [Trait("Core2D.Project", "Project")]
         public void Inherits_From_Container()
         {
             var target = new Page();
@@ -15,7 +15,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Project")]
+        [Trait("Core2D.Project", "Project")]
         public void Data_Not_Null()
         {
             var target = new Page();
@@ -23,7 +23,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Project")]
+        [Trait("Core2D.Project", "Project")]
         public void this_Operator_Returns_Null()
         {
             var target = new Page();
@@ -31,7 +31,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Project")]
+        [Trait("Core2D.Project", "Project")]
         public void this_Operator_Returns_Property_Value()
         {
             var target = new Page();
@@ -41,7 +41,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Project")]
+        [Trait("Core2D.Project", "Project")]
         public void this_Operator_Sets_Property_Value()
         {
             var target = new Page();
@@ -52,7 +52,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Project")]
+        [Trait("Core2D.Project", "Project")]
         public void this_Operator_Creates_Property()
         {
             var target = new Page();
@@ -65,7 +65,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Project")]
+        [Trait("Core2D.Project", "Project")]
         public void Invalidate_Should_Invalidate_Template()
         {
             var target = new Page()

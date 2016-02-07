@@ -7,7 +7,7 @@ namespace Core2D.UnitTests
     public class ContainerTests
     {
         [Fact]
-        [Trait("Core2D", "Project")]
+        [Trait("Core2D.Project", "Project")]
         public void Inherits_From_Selectable()
         {
             var target = new Class1();
@@ -15,7 +15,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Project")]
+        [Trait("Core2D.Project", "Project")]
         public void Layers_Not_Null()
         {
             var target = new Class1();
@@ -23,7 +23,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Project")]
+        [Trait("Core2D.Project", "Project")]
         public void SetCurrentLayer_Sets_CurrentLayer()
         {
             var target = new Class1();
@@ -37,7 +37,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Project")]
+        [Trait("Core2D.Project", "Project")]
         public void Invalidate_Should_Invalidate_All_Layers()
         {
             var target = new Class1();
@@ -65,7 +65,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Project")]
+        [Trait("Core2D.Project", "Project")]
         public void Template_Not_Null_Width_Returns_Template_Width()
         {
             var target = new Class1()
@@ -81,7 +81,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Project")]
+        [Trait("Core2D.Project", "Project")]
         public void Template_Not_Null_Width_Returns_Template_Height()
         {
             var target = new Class1()
@@ -97,7 +97,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Project")]
+        [Trait("Core2D.Project", "Project")]
         public void Template_Not_Null_Background_Returns_Template_Background()
         {
             var target = new Class1()

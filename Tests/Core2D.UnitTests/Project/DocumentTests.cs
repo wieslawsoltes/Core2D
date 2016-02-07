@@ -7,7 +7,7 @@ namespace Core2D.UnitTests
     public class DocumentTests
     {
         [Fact]
-        [Trait("Core2D", "Project")]
+        [Trait("Core2D.Project", "Project")]
         public void Inherits_From_Selectable()
         {
             var target = new Document();
@@ -15,7 +15,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Project")]
+        [Trait("Core2D.Project", "Project")]
         public void Pages_Not_Null()
         {
             var target = new Document();

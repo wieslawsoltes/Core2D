@@ -7,7 +7,7 @@ namespace Core2D.UnitTests
     public class OptionsTests
     {
         [Fact]
-        [Trait("Core2D", "Project")]
+        [Trait("Core2D.Project", "Project")]
         public void Inherits_From_ObservableObject()
         {
             var target = new Options();
