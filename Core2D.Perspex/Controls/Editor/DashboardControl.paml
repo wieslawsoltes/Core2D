@@ -14,11 +14,7 @@
         <Button Content="Open Project" Classes="project" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="1" Grid.RowSpan="1" Command="{Static core:Commands.OpenCommand}"/>
         <Button Content="Open Recent" Classes="project" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="1" Grid.RowSpan="1" CommandParameter="{Binding Path=CurrentRecentProject.Path}" Command="{Static core:Commands.OpenCommand}"/>
         <TextBlock Text="recent" Classes="recent" Grid.Column="3" Grid.ColumnSpan="1" Grid.Row="2" Grid.RowSpan="1"/>
-        <ListBox x:Name="recentProjects" 
-                 Items="{Binding Path=RecentProjects}" 
-                 SelectedItem="{Binding Path=CurrentRecentProject, Mode=TwoWay}"
-                 Classes="recents"
-                 Grid.Column="3" Grid.Row="3" Grid.ColumnSpan="1" Grid.RowSpan="5">
+        <ListBox Items="{Binding Path=RecentProjects}" SelectedItem="{Binding Path=CurrentRecentProject, Mode=TwoWay}" Classes="recents" Grid.Column="3" Grid.Row="3" Grid.ColumnSpan="1" Grid.RowSpan="5">
             <ListBox.DataTemplates>
                 <DataTemplate DataType="core:RecentProject">
                     <TextBlock Text="{Binding Path=Name}" Classes="recents" ToolTip.Tip="{Binding Path=Path}"/>
