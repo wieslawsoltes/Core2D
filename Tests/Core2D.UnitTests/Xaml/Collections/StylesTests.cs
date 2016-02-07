@@ -6,6 +6,20 @@ namespace Core2D.UnitTests
 {
     public class StylesTests
     {
-        // TODO: Write StylesTests tests.
+        [Fact]
+        [Trait("Core2D.Xaml", "Collections")]
+        public void Inherits_From_ObservableResource()
+        {
+            var target = new Styles();
+            Assert.True(target is ObservableResource);
+        }
+
+        [Fact]
+        [Trait("Core2D.Xaml", "Collections")]
+        public void Children_Not_Null()
+        {
+            var target = new Styles();
+            Assert.NotNull(target.Children);
+        }
     }
 }
