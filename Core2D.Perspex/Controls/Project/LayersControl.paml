@@ -24,6 +24,13 @@
                         <ListBox.DataTemplates>
                             <DataTemplate DataType="core:Layer">
                                 <Grid ColumnDefinitions="Auto,*">
+                                    <Grid.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="_Add Layer" Command="{Static core:Commands.AddLayerCommand}" CommandParameter="{Binding Path=DataContext, ElementName=layers, Mode=OneWay}"/>
+                                            <!--<Separator/>-->
+                                            <MenuItem Header="_Delete" Command="{Static core:Commands.RemoveLayerCommand}"  CommandParameter="{Binding Mode=OneWay}"/>
+                                        </ContextMenu>
+                                    </Grid.ContextMenu>
                                     <CheckBox Content="" IsChecked="{Binding Path=IsVisible, Mode=TwoWay}" Classes="default" Grid.Column="0"/>
                                     <TextBlock Text="{Binding Path=Name}" Classes="default" Grid.Column="1"/>
                                 </Grid>

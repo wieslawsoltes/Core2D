@@ -17,11 +17,7 @@
             <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
             <TextBox Text="{Binding Path=CurrentStyleLibrary.Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
         </Grid>
-        <DropDown
-            Items="{Binding Path=StyleLibraries}"
-            SelectedItem="{Binding Path=CurrentStyleLibrary, Mode=TwoWay}"
-            Grid.Row="2"
-            Classes="default">
+        <DropDown Items="{Binding Path=StyleLibraries}" SelectedItem="{Binding Path=CurrentStyleLibrary, Mode=TwoWay}" Grid.Row="2" Classes="default">
             <DropDown.DataTemplates>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}" Classes="default"/>
@@ -33,14 +29,20 @@
             <MenuItem Header="+" Command="{Static core:Commands.AddStyleCommand}" CommandParameter="{Binding Path=CurrentStyleLibrary}"/>
             <MenuItem Header="-" Command="{Static core:Commands.RemoveStyleCommand}" CommandParameter="{Binding Path=CurrentStyleLibrary.Selected}"/>
         </Menu>
-        <ListBox
-            Items="{Binding Path=CurrentStyleLibrary.Items}"
-            SelectedItem="{Binding Path=CurrentStyleLibrary.Selected, Mode=TwoWay}"
-            Grid.Row="4"
-            Classes="default">
+        <ListBox Name="styles" Items="{Binding Path=CurrentStyleLibrary.Items}" SelectedItem="{Binding Path=CurrentStyleLibrary.Selected, Mode=TwoWay}" Grid.Row="4" Classes="default">
             <ListBox.DataTemplates>
                 <DataTemplate DataType="core:ShapeStyle">
-                    <TextBlock Text="{Binding Path=Name}" Classes="default"/>
+                    <TextBlock Text="{Binding Path=Name}" Classes="default">
+                        <TextBlock.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="_Add Style" Command="{Static core:Commands.AddStyleCommand}" CommandParameter="{Binding Path=DataContext.CurrentStyleLibrary, ElementName=styles, Mode=OneWay}"/>
+                                <!--<Separator/>-->
+                                <MenuItem Header="_Delete" Command="{Static core:Commands.RemoveStyleCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                <!--<Separator/>-->
+                                <MenuItem Header="E_xport" Command="{Static core:Commands.ExportStyleCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                            </ContextMenu>
+                        </TextBlock.ContextMenu>
+                    </TextBlock>
                 </DataTemplate>
             </ListBox.DataTemplates>
         </ListBox>
