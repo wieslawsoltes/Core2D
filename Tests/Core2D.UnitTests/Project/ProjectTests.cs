@@ -8,10 +8,10 @@ namespace Core2D.UnitTests
     {
         [Fact]
         [Trait("Core2D", "Project")]
-        public void Inherits_From_ObservableResource()
+        public void Inherits_From_Selectable()
         {
             var target = new Project();
-            Assert.True(target is ObservableResource);
+            Assert.True(target is Selectable);
         }
 
         [Fact]
