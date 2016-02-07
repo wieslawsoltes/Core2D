@@ -19,13 +19,19 @@
             <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
             <TextBox Text="{Binding Path=CurrentTemplate.Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
         </Grid>
-        <ListBox Items="{Binding Path=Templates}" SelectedItem="{Binding Path=CurrentTemplate, Mode=TwoWay}" Grid.Row="2" Classes="default">
+        <ListBox Name="templates" Items="{Binding Path=Templates}" SelectedItem="{Binding Path=CurrentTemplate, Mode=TwoWay}" Grid.Row="2" Classes="default">
             <ListBox.DataTemplates>
                 <DataTemplate DataType="core:Container">
                     <TextBlock Text="{Binding Path=Name, Mode=TwoWay}" Classes="default">
                         <TextBlock.ContextMenu>
                             <ContextMenu>
-
+                                <MenuItem Header="_Edit Template" Command="{Static core:Commands.EditTemplateCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                <!--<Separator/>-->
+                                <MenuItem Header="_Add Template" Command="{Static core:Commands.AddTemplateCommand}"/>
+                                <!--<Separator/>-->
+                                <MenuItem Header="_Delete" Command="{Static core:Commands.RemoveTemplateCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                <!--<Separator/>-->
+                                <MenuItem Header="E_xport" Command="{Static core:Commands.ExportTemplateCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                             </ContextMenu>
                         </TextBlock.ContextMenu>
                     </TextBlock>
