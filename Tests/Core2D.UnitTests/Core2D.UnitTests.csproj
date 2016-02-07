@@ -71,7 +71,44 @@
     <Compile Include="Data\PropertyTests.cs" />
     <Compile Include="Data\RecordTests.cs" />
     <Compile Include="Data\ValueTests.cs" />
+    <Compile Include="Editor\Bounds\ConvexHullBoundsTests.cs" />
+    <Compile Include="Editor\Bounds\ShapeBoundsTests.cs" />
+    <Compile Include="Editor\CommandsTests.cs" />
+    <Compile Include="Editor\Designer\DesignerContextTests.cs" />
+    <Compile Include="Editor\EditorTests.cs" />
+    <Compile Include="Editor\Input\CommandTests.cs" />
+    <Compile Include="Editor\Input\CommandOfTTests.cs" />
+    <Compile Include="Editor\Factories\ProjectFactoryTests.cs" />
+    <Compile Include="Editor\Factories\ShapeFactoryTests.cs" />
+    <Compile Include="Editor\ObserverTests.cs" />
+    <Compile Include="Editor\ProjectExtensionsTests.cs" />
+    <Compile Include="Editor\Recent\RecentProjectTests.cs" />
+    <Compile Include="Editor\Recent\RecentTests.cs" />
+    <Compile Include="Editor\Tools\ToolArcTests.cs" />
+    <Compile Include="Editor\Tools\ToolCubicBezierTests.cs" />
+    <Compile Include="Editor\Tools\ToolEllipseTests.cs" />
+    <Compile Include="Editor\Tools\ToolImageTests.cs" />
+    <Compile Include="Editor\Tools\ToolLineTests.cs" />
+    <Compile Include="Editor\Tools\ToolNoneTests.cs" />
+    <Compile Include="Editor\Tools\ToolPathTests.cs" />
+    <Compile Include="Editor\Tools\ToolPointTests.cs" />
+    <Compile Include="Editor\Tools\ToolQuadraticBezierTests.cs" />
+    <Compile Include="Editor\Tools\ToolRectangleTests.cs" />
+    <Compile Include="Editor\Tools\ToolSelectionTests.cs" />
+    <Compile Include="Editor\Tools\ToolTextTests.cs" />
+    <Compile Include="History\HistoryTests.cs" />
     <Compile Include="IO\FileSystemTests.cs" />
+    <Compile Include="Math\Arc\GdiArcTests.cs" />
+    <Compile Include="Math\Arc\WpfArcTests.cs" />
+    <Compile Include="Math\ConvexHull\MonotoneChainTests.cs" />
+    <Compile Include="Math\Core\Point2Tests.cs" />
+    <Compile Include="Math\Core\Polygon2Tests.cs" />
+    <Compile Include="Math\Core\Rect2Tests.cs" />
+    <Compile Include="Math\Core\Size2Tests.cs" />
+    <Compile Include="Math\Core\Vector2Tests.cs" />
+    <Compile Include="Math\MathHelpersTests.cs" />
+    <Compile Include="Math\Sat\ProjectionTests.cs" />
+    <Compile Include="Math\Sat\SeparatingAxisTheoremTests.cs" />
     <Compile Include="Project\ContainerTests.cs" />
     <Compile Include="Project\DocumentTests.cs" />
     <Compile Include="Project\LayerTests.cs" />
@@ -97,6 +134,10 @@
     <Compile Include="Path\XPathGeometryTests.cs" />
     <Compile Include="Path\XPathSegmentTests.cs" />
     <Compile Include="Path\XPathSizeTests.cs" />
+    <Compile Include="Renderer\CacheTests.cs" />
+    <Compile Include="Renderer\RendererStateTests.cs" />
+    <Compile Include="Renderer\RendererTests.cs" />
+    <Compile Include="Renderer\ZoomStateTests.cs" />
     <Compile Include="Shapes\XArcTests.cs" />
     <Compile Include="Shapes\XCubicBezierTests.cs" />
     <Compile Include="Shapes\XEllipseTests.cs" />
@@ -123,6 +164,14 @@
     <Compile Include="Style\ShapeStyleTests.cs" />
     <Compile Include="Style\TextStyleTests.cs" />
     <Compile Include="Utilities\PropertyChangedObserver.cs" />
+    <Compile Include="Xaml\Collections\GroupsTests.cs" />
+    <Compile Include="Xaml\Collections\ShapesTests.cs" />
+    <Compile Include="Xaml\Collections\StylesTests.cs" />
+    <Compile Include="Xaml\Converters\ArgbColorTypeConverterTests.cs" />
+    <Compile Include="Xaml\Converters\FontStyleTypeConverterTests.cs" />
+    <Compile Include="Xaml\Converters\ShapeStateTypeConverterTests.cs" />
+    <Compile Include="Xaml\Converters\XPathGeometryTypeConverterTests.cs" />
+    <Compile Include="Xaml\Serializer\CoreXamlSerializerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -136,23 +185,7 @@
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Editor\Bounds\" />
-    <Folder Include="Editor\Designer\" />
-    <Folder Include="Editor\Factories\" />
-    <Folder Include="Editor\Input\" />
-    <Folder Include="Editor\Recent\" />
-    <Folder Include="Editor\Tools\" />
-    <Folder Include="History\" />
-    <Folder Include="Math\Arc\" />
-    <Folder Include="Math\ConvexHull\" />
-    <Folder Include="Math\Core\" />
-    <Folder Include="Math\Sat\" />
-    <Folder Include="Renderer\" />
-    <Folder Include="Xaml\Collections\" />
-    <Folder Include="Xaml\Converters\" />
-    <Folder Include="Xaml\Serializer\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
