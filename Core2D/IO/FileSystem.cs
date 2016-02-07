@@ -69,10 +69,7 @@ namespace Core2D
         {
             using (var fs = File.OpenRead(path))
             {
-                using (var sr = new StreamReader(fs, Encoding.UTF8))
-                {
-                    return sr.ReadToEnd();
-                }
+                return ReadUtf8Text(fs);
             }
         }
 
@@ -81,10 +78,7 @@ namespace Core2D
         {
             using (var fs = File.Create(path))
             {
-                using (var sw = new StreamWriter(fs, Encoding.UTF8))
-                {
-                    sw.Write(text);
-                }
+                WriteUtf8Text(fs, text);
             }
         }
     }
