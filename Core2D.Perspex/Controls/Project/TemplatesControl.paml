@@ -26,11 +26,11 @@
                         <TextBlock.ContextMenu>
                             <ContextMenu>
                                 <MenuItem Header="_Edit Template" Command="{Static core:Commands.EditTemplateCommand}" CommandParameter="{Binding Mode=OneWay}"/>
-                                <!--<Separator/>-->
+                                <Separator/>
                                 <MenuItem Header="_Add Template" Command="{Static core:Commands.AddTemplateCommand}"/>
-                                <!--<Separator/>-->
+                                <Separator/>
                                 <MenuItem Header="_Delete" Command="{Static core:Commands.RemoveTemplateCommand}" CommandParameter="{Binding Mode=OneWay}"/>
-                                <!--<Separator/>-->
+                                <Separator/>
                                 <MenuItem Header="E_xport" Command="{Static core:Commands.ExportTemplateCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                             </ContextMenu>
                         </TextBlock.ContextMenu>

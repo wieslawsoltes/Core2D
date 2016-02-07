@@ -21,7 +21,7 @@
                     <TreeView.ContextMenu>
                         <ContextMenu>
                             <MenuItem Header="_Add Document" Command="{Static core:Commands.AddDocumentCommand}" CommandParameter="{Binding Mode=OneWay}"/>
-                            <!--<Separator/>-->
+                            <Separator/>
                             <MenuItem Header="E_xport" Command="{Static core:Commands.ExportCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                         </ContextMenu>
                     </TreeView.ContextMenu>
@@ -36,16 +36,16 @@
                                 <TextBlock.ContextMenu>
                                     <ContextMenu>
                                         <MenuItem Header="_Add Page" Command="{Static core:Commands.AddPageCommand}" CommandParameter="{Binding Mode=OneWay}"/>
-                                        <!--<Separator/>-->
+                                        <Separator/>
                                         <MenuItem Header="Insert Document Bef_ore" Command="{Static core:Commands.InsertDocumentBeforeCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                                         <MenuItem Header="Insert Document Aft_er" Command="{Static core:Commands.InsertDocumentAfterCommand}" CommandParameter="{Binding Mode=OneWay}"/>
-                                        <!--<Separator/>-->
+                                        <Separator/>
                                         <MenuItem Header="Cu_t" Command="{Static core:Commands.CutCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                                         <MenuItem Header="_Copy" Command="{Static core:Commands.CopyCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                                         <MenuItem Header="_Paste" Command="{Static core:Commands.PasteCommand}" CommandParameter="{Binding Mode=OneWay}"/>
-                                        <!--<Separator/>-->
+                                        <Separator/>
                                         <MenuItem Header="_Delete" Command="{Static core:Commands.DeleteCommand}" CommandParameter="{Binding Mode=OneWay}"/>
-                                        <!--<Separator/>-->
+                                        <Separator/>
                                         <MenuItem Header="E_xport" Command="{Static core:Commands.ExportCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                                     </ContextMenu>
                                 </TextBlock.ContextMenu>
@@ -62,16 +62,16 @@
                                                 </DataTemplate>
                                             </MenuItem.DataTemplates>
                                         </MenuItem>
-                                        <!--<Separator/>-->
+                                        <Separator/>
                                         <MenuItem Header="Insert Page Bef_ore" Command="{Static core:Commands.InsertPageBeforeCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                                         <MenuItem Header="Insert Page Aft_er" Command="{Static core:Commands.InsertPageAfterCommand}" CommandParameter="{Binding Mode=OneWay}"/>
-                                        <!--<Separator/>-->
+                                        <Separator/>
                                         <MenuItem Header="Cu_t" Command="{Static core:Commands.CutCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                                         <MenuItem Header="_Copy" Command="{Static core:Commands.CopyCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                                         <MenuItem Header="_Paste" Command="{Static core:Commands.PasteCommand}" CommandParameter="{Binding Mode=OneWay}"/>
-                                        <!--<Separator/>-->
+                                        <Separator/>
                                         <MenuItem Header="_Delete" Command="{Static core:Commands.DeleteCommand}" CommandParameter="{Binding Mode=OneWay}"/>
-                                        <!--<Separator/>-->
+                                        <Separator/>
                                         <MenuItem Header="E_xport" Command="{Static core:Commands.ExportCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                                     </ContextMenu>
                                 </TextBlock.ContextMenu>
@@ -82,7 +82,7 @@
                                 <StackPanel.ContextMenu>
                                     <ContextMenu>
                                         <MenuItem Header="_Add Layer" Command="{Static core:Commands.AddLayerCommand}" CommandParameter="{Binding Path=Owner, Mode=OneWay}"/>
-                                        <!--<Separator/>-->
+                                        <Separator/>
                                         <MenuItem Header="_Delete" Command="{Static core:Commands.RemoveLayerCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                                     </ContextMenu>
                                 </StackPanel.ContextMenu>

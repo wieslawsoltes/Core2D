@@ -27,7 +27,7 @@
                                     <Grid.ContextMenu>
                                         <ContextMenu>
                                             <MenuItem Header="_Add Layer" Command="{Static core:Commands.AddLayerCommand}" CommandParameter="{Binding Path=DataContext, ElementName=layers, Mode=OneWay}"/>
-                                            <!--<Separator/>-->
+                                            <Separator/>
                                             <MenuItem Header="_Delete" Command="{Static core:Commands.RemoveLayerCommand}"  CommandParameter="{Binding Mode=OneWay}"/>
                                         </ContextMenu>
                                     </Grid.ContextMenu>
