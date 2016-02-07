@@ -11,12 +11,12 @@ namespace Core2D
         /// <summary>
         /// 
         /// </summary>
-        public Vector2 Smallest { get; private set; }
+        public Vector2 Smallest { get; }
 
         /// <summary>
         /// 
         /// </summary>
-        public double Overlap { get; private set; }
+        public double Overlap { get; }
 
         /// <summary>
         /// 

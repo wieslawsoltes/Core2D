@@ -12,12 +12,12 @@ namespace Core2D
         /// <summary>
         /// 
         /// </summary>
-        public double Min { get; private set; }
+        public double Min { get; }
 
         /// <summary>
         /// 
         /// </summary>
-        public double Max { get; private set; }
+        public double Max { get; }
 
         /// <summary>
         /// 
