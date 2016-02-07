@@ -55,7 +55,7 @@
                             <TextBlock Text="{Binding Path=Name, Mode=TwoWay}" Classes="default">
                                 <TextBlock.ContextMenu>
                                     <ContextMenu>
-                                        <MenuItem Header="Te_mplate" Items="{Binding Path=Project.Templates, ElementName=documents}">
+                                        <MenuItem Header="Te_mplate" Items="{Binding Path=DataContext.Templates, ElementName=documents, Mode=OneWay}">
                                             <MenuItem.DataTemplates>
                                                 <DataTemplate DataType="core:Container">
                                                     <MenuItem Header="{Binding Path=Name}" Command="{Static core:Commands.ApplyTemplateCommand}" CommandParameter="{Binding Mode=OneWay}"/>
