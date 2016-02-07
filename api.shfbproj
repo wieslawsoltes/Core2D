@@ -14,7 +14,7 @@
     <Name>Documentation</Name>
     <!-- SHFB properties -->
     <FrameworkVersion>.NET Framework 4.5</FrameworkVersion>
-    <OutputPath>api\</OutputPath>
+    <OutputPath>Documentation\</OutputPath>
     <HtmlHelpName>Core2D</HtmlHelpName>
     <Language>en-US</Language>
     <HelpFileVersion>0.1.0.0</HelpFileVersion>
