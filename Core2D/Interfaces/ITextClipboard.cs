@@ -2,7 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System.Threading.Tasks;
 
-namespace Core2D
+namespace Core2D.Interfaces
 {
     /// <summary>
     /// Defines text clipboard contract.
