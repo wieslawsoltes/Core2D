@@ -4,7 +4,7 @@ using System.IO;
 using System.Xml;
 using Portable.Xaml;
 
-namespace Core2D
+namespace Core2D.Xaml.Serializer
 {
     internal static class CoreXamlWriter
     {

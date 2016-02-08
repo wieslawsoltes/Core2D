@@ -5,7 +5,7 @@ using System.IO;
 using System.Text;
 using System.Xml;
 
-namespace Core2D
+namespace Core2D.Xaml.Serializer
 {
     /// <summary>
     /// Xaml serializer.

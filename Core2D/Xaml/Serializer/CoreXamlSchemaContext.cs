@@ -3,7 +3,7 @@
 using System;
 using Portable.Xaml;
 
-namespace Core2D
+namespace Core2D.Xaml.Serializer
 {
     internal class CoreXamlSchemaContext : XamlSchemaContext
     {

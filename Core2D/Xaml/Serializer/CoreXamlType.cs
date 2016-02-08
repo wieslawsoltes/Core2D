@@ -4,7 +4,7 @@ using System;
 using Portable.Xaml;
 using Portable.Xaml.Schema;
 
-namespace Core2D
+namespace Core2D.Xaml.Serializer
 {
     internal class CoreXamlType : XamlType
     {
