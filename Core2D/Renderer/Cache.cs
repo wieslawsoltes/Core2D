@@ -3,7 +3,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Core2D
+namespace Core2D.Renderer
 {
     /// <summary>
     /// Generic key value cache.

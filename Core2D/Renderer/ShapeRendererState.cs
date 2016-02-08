@@ -1,13 +1,14 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Shape;
 using System.Collections.Immutable;
 
-namespace Core2D
+namespace Core2D.Renderer
 {
     /// <summary>
-    /// Renderer state.
+    /// Shape renderer state.
     /// </summary>
-    public sealed class RendererState : ObservableObject
+    public sealed class ShapeRendererState : ObservableObject
     {
         private double _panX;
         private double _panY;
@@ -91,9 +92,9 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Initializes a new <see cref="RendererState"/> instance.
+        /// Initializes a new <see cref="ShapeRendererState"/> instance.
         /// </summary>
-        public RendererState()
+        public ShapeRendererState()
         {
             _panX = 0.0;
             _panY = 0.0;

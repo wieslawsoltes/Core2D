@@ -1,15 +1,16 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using System;
+using Core2D.Editor;
+using static System.Math;
 
-namespace Core2D
+namespace Core2D.Renderer
 {
     /// <summary>
     /// Zoom and pan state.
     /// </summary>
     public sealed class ZoomState
     {
-        private Editor _editor;
+        private ShapeEditor _editor;
 
         /// <summary>
         /// The minimum zoom value that can be set.
@@ -69,8 +70,8 @@ namespace Core2D
         /// <summary>
         /// Initialize new instance of <see cref="ZoomState"/> class.
         /// </summary>
-        /// <param name="editor">The current <see cref="Editor"/> object.</param>
-        public ZoomState(Editor editor)
+        /// <param name="editor">The current <see cref="ShapeEditor"/> object.</param>
+        public ZoomState(ShapeEditor editor)
         {
             _editor = editor;
         }
@@ -295,7 +296,7 @@ namespace Core2D
         /// <param name="cheight">The container height.</param>
         public void FitTo(double pwidth, double pheight, double cwidth, double cheight)
         {
-            double zoom = Math.Min(pwidth / cwidth, pheight / cheight) - 0.001;
+            double zoom = Min(pwidth / cwidth, pheight / cheight) - 0.001;
             double px = (pwidth - (cwidth * zoom)) / 2.0;
             double py = (pheight - (cheight * zoom)) / 2.0;
             Zoom = zoom;

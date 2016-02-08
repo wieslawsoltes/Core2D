@@ -1,20 +1,24 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Data;
+using Core2D.Data.Database;
+using Core2D.Project;
+using Core2D.Shapes;
 using System.Collections.Immutable;
 
-namespace Core2D
+namespace Core2D.Renderer
 {
     /// <summary>
     /// Native shape renderer base class.
     /// </summary>
-    public abstract class Renderer : ObservableObject
+    public abstract class ShapeRenderer : ObservableObject
     {
-        private RendererState _state = new RendererState();
+        private ShapeRendererState _state = new ShapeRendererState();
 
         /// <summary>
         /// Gets or sets renderer state.
         /// </summary>
-        public virtual RendererState State
+        public virtual ShapeRendererState State
         {
             get { return _state; }
             set { Update(ref _state, value); }
@@ -27,38 +31,38 @@ namespace Core2D
         public virtual void ClearCache(bool isZooming) { }
 
         /// <summary>
-        /// Draws a <see cref="Page"/> using drawing context.
+        /// Draws a <see cref="XPage"/> using drawing context.
         /// </summary>
         /// <param name="dc">The native drawing context.</param>
-        /// <param name="page">The <see cref="Page"/> object.</param>
+        /// <param name="page">The <see cref="XPage"/> object.</param>
         /// <param name="db">The properties database.</param>
         /// <param name="r">The data record.</param>
-        public virtual void Draw(object dc, Page page, ImmutableArray<Property> db, Record r)
+        public virtual void Draw(object dc, XPage page, ImmutableArray<XProperty> db, XRecord r)
         {
-            Draw(dc, page.Template as Container, db, r);
-            Draw(dc, page as Container, db, r);
+            Draw(dc, page.Template as XContainer, db, r);
+            Draw(dc, page as XContainer, db, r);
         }
 
         /// <summary>
-        /// Draws a <see cref="Template"/> using drawing context.
+        /// Draws a <see cref="XTemplate"/> using drawing context.
         /// </summary>
         /// <param name="dc">The native drawing context.</param>
-        /// <param name="template">The <see cref="Template"/> object.</param>
+        /// <param name="template">The <see cref="XTemplate"/> object.</param>
         /// <param name="db">The properties database.</param>
         /// <param name="r">The data record.</param>
-        public virtual void Draw(object dc, Template template, ImmutableArray<Property> db, Record r)
+        public virtual void Draw(object dc, XTemplate template, ImmutableArray<XProperty> db, XRecord r)
         {
-            Draw(dc, template as Container, db, r);
+            Draw(dc, template as XContainer, db, r);
         }
 
         /// <summary>
-        /// Draws a <see cref="Container"/> using drawing context.
+        /// Draws a <see cref="XContainer"/> using drawing context.
         /// </summary>
         /// <param name="dc">The native drawing context.</param>
-        /// <param name="container">The <see cref="Container"/> object.</param>
+        /// <param name="container">The <see cref="XContainer"/> object.</param>
         /// <param name="db">The properties database.</param>
         /// <param name="r">The data record.</param>
-        public virtual void Draw(object dc, Container container, ImmutableArray<Property> db, Record r)
+        public virtual void Draw(object dc, XContainer container, ImmutableArray<XProperty> db, XRecord r)
         {
             foreach (var layer in container.Layers)
             {
@@ -70,13 +74,13 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Draws a <see cref="Layer"/> using drawing context.
+        /// Draws a <see cref="XLayer"/> using drawing context.
         /// </summary>
         /// <param name="dc">The native drawing context.</param>
-        /// <param name="layer">The <see cref="Layer"/> object.</param>
+        /// <param name="layer">The <see cref="XLayer"/> object.</param>
         /// <param name="db">The properties database.</param>
         /// <param name="r">The data record.</param>
-        public virtual void Draw(object dc, Layer layer, ImmutableArray<Property> db, Record r)
+        public virtual void Draw(object dc, XLayer layer, ImmutableArray<XProperty> db, XRecord r)
         {
             foreach (var shape in layer.Shapes)
             {
@@ -96,7 +100,7 @@ namespace Core2D
         /// <param name="dy">The Y coordinate offset.</param>
         /// <param name="db">The properties database.</param>
         /// <param name="r">The data record.</param>
-        public abstract void Draw(object dc, XLine line, double dx, double dy, ImmutableArray<Property> db, Record r);
+        public abstract void Draw(object dc, XLine line, double dx, double dy, ImmutableArray<XProperty> db, XRecord r);
 
         /// <summary>
         /// Draws a <see cref="XRectangle"/> shape using drawing context.
@@ -107,7 +111,7 @@ namespace Core2D
         /// <param name="dy">The Y coordinate offset.</param>
         /// <param name="db">The properties database.</param>
         /// <param name="r">The data record.</param>
-        public abstract void Draw(object dc, XRectangle rectangle, double dx, double dy, ImmutableArray<Property> db, Record r);
+        public abstract void Draw(object dc, XRectangle rectangle, double dx, double dy, ImmutableArray<XProperty> db, XRecord r);
 
         /// <summary>
         /// Draws a <see cref="XEllipse"/> shape using drawing context.
@@ -118,7 +122,7 @@ namespace Core2D
         /// <param name="dy">The Y coordinate offset.</param>
         /// <param name="db">The properties database.</param>
         /// <param name="r">The data record.</param>
-        public abstract void Draw(object dc, XEllipse ellipse, double dx, double dy, ImmutableArray<Property> db, Record r);
+        public abstract void Draw(object dc, XEllipse ellipse, double dx, double dy, ImmutableArray<XProperty> db, XRecord r);
 
         /// <summary>
         /// Draws a <see cref="XArc"/> shape using drawing context.
@@ -129,7 +133,7 @@ namespace Core2D
         /// <param name="dy">The Y coordinate offset.</param>
         /// <param name="db">The properties database.</param>
         /// <param name="r">The data record.</param>
-        public abstract void Draw(object dc, XArc arc, double dx, double dy, ImmutableArray<Property> db, Record r);
+        public abstract void Draw(object dc, XArc arc, double dx, double dy, ImmutableArray<XProperty> db, XRecord r);
 
         /// <summary>
         /// Draws a <see cref="XCubicBezier"/> shape using drawing context.
@@ -140,7 +144,7 @@ namespace Core2D
         /// <param name="dy">The Y coordinate offset.</param>
         /// <param name="db">The properties database.</param>
         /// <param name="r">The data record.</param>
-        public abstract void Draw(object dc, XCubicBezier cubicBezier, double dx, double dy, ImmutableArray<Property> db, Record r);
+        public abstract void Draw(object dc, XCubicBezier cubicBezier, double dx, double dy, ImmutableArray<XProperty> db, XRecord r);
 
         /// <summary>
         /// Draws a <see cref="XQuadraticBezier"/> shape using drawing context.
@@ -151,7 +155,7 @@ namespace Core2D
         /// <param name="dy">The Y coordinate offset.</param>
         /// <param name="db">The properties database.</param>
         /// <param name="r">The data record.</param>
-        public abstract void Draw(object dc, XQuadraticBezier quadraticBezier, double dx, double dy, ImmutableArray<Property> db, Record r);
+        public abstract void Draw(object dc, XQuadraticBezier quadraticBezier, double dx, double dy, ImmutableArray<XProperty> db, XRecord r);
 
         /// <summary>
         /// Draws a <see cref="XText"/> shape using drawing context.
@@ -162,7 +166,7 @@ namespace Core2D
         /// <param name="dy">The Y coordinate offset.</param>
         /// <param name="db">The properties database.</param>
         /// <param name="r">The data record.</param>
-        public abstract void Draw(object dc, XText text, double dx, double dy, ImmutableArray<Property> db, Record r);
+        public abstract void Draw(object dc, XText text, double dx, double dy, ImmutableArray<XProperty> db, XRecord r);
 
         /// <summary>
         /// Draws a <see cref="XImage"/> shape using drawing context.
@@ -173,7 +177,7 @@ namespace Core2D
         /// <param name="dy">The Y coordinate offset.</param>
         /// <param name="db">The properties database.</param>
         /// <param name="r">The data record.</param>
-        public abstract void Draw(object dc, XImage image, double dx, double dy, ImmutableArray<Property> db, Record r);
+        public abstract void Draw(object dc, XImage image, double dx, double dy, ImmutableArray<XProperty> db, XRecord r);
 
         /// <summary>
         /// Draws a <see cref="XPath"/> shape using drawing context.
@@ -184,6 +188,6 @@ namespace Core2D
         /// <param name="dy">The Y coordinate offset.</param>
         /// <param name="db">The properties database.</param>
         /// <param name="r">The data record.</param>
-        public abstract void Draw(object dc, XPath path, double dx, double dy, ImmutableArray<Property> db, Record r);
+        public abstract void Draw(object dc, XPath path, double dx, double dy, ImmutableArray<XProperty> db, XRecord r);
     }
 }
