@@ -1,14 +1,18 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Editor.Bounds;
+using Core2D.Math;
+using Core2D.Shape;
+using Core2D.Shapes;
 
-namespace Core2D
+namespace Core2D.Editor.Tools
 {
     /// <summary>
     /// Helper class for <see cref="Tool.Text"/> editor.
     /// </summary>
     public sealed class ToolText : ToolBase
     {
-        private Editor _editor;
+        private ShapeEditor _editor;
         private ToolState _currentState = ToolState.None;
         private XText _shape;
         private XPoint _topLeftHelperPoint;
@@ -17,8 +21,8 @@ namespace Core2D
         /// <summary>
         /// Initialize new instance of <see cref="ToolText"/> class.
         /// </summary>
-        /// <param name="editor">The current <see cref="Editor"/> object.</param>
-        public ToolText(Editor editor)
+        /// <param name="editor">The current <see cref="ShapeEditor"/> object.</param>
+        public ToolText(ShapeEditor editor)
             : base()
         {
             _editor = editor;
@@ -59,8 +63,8 @@ namespace Core2D
         {
             base.LeftDown(x, y);
 
-            double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
-            double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
+            double sx = _editor.Project.Options.SnapToGrid ? ShapeEditor.Snap(x, _editor.Project.Options.SnapX) : x;
+            double sy = _editor.Project.Options.SnapToGrid ? ShapeEditor.Snap(y, _editor.Project.Options.SnapY) : y;
             switch (_currentState)
             {
                 case ToolState.None:
@@ -134,8 +138,8 @@ namespace Core2D
         {
             base.Move(x, y);
 
-            double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
-            double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
+            double sx = _editor.Project.Options.SnapToGrid ? ShapeEditor.Snap(x, _editor.Project.Options.SnapX) : x;
+            double sy = _editor.Project.Options.SnapToGrid ? ShapeEditor.Snap(y, _editor.Project.Options.SnapY) : y;
             switch (_currentState)
             {
                 case ToolState.None:
