@@ -3,7 +3,28 @@
     {
       "src": [
         {
-          "files": ["/Core2D/Core2D.csproj"],
+          "files": [
+            "/Core2D/Core2D.csproj",
+            "/Core2D.Wpf/Core2D.Wpf.csproj",
+            "/Core2D.Perspex/Core2D.Perspex.csproj",
+            "/Dependencies/FileWriter.Dxf/FileWriter.Dxf.csproj",
+            "/Dependencies/FileWriter.Emf/FileWriter.Emf.csproj",
+            "/Dependencies/FileWriter.Pdf-core/FileWriter.Pdf-core.csproj",
+            "/Dependencies/FileWriter.Pdf-wpf/FileWriter.Pdf-wpf.csproj",
+            "/Dependencies/Log.Trace/Log.Trace.csproj",
+            "/Dependencies/Renderer.Dxf/Renderer.Dxf.csproj",
+            "/Dependencies/Renderer.PdfSharp-core/Renderer.PdfSharp-core.csproj",
+            "/Dependencies/Renderer.PdfSharp-wpf/Renderer.PdfSharp-wpf.csproj",
+            "/Dependencies/Renderer.Perspex/Renderer.Perspex.csproj",
+            "/Dependencies/Renderer.WinForms/Renderer.WinForms.csproj",
+            "/Dependencies/Renderer.Wpf/Renderer.Wpf.csproj",
+            "/Dependencies/Serializer.Newtonsoft/Serializer.Newtonsoft.csproj",
+            "/Dependencies/Serializer.ProtoBuf/Serializer.ProtoBuf.csproj",
+            "/Dependencies/Serializer.ProtoBuf.Generate/Serializer.ProtoBuf.Generate.csproj",
+            "/Dependencies/Serializer.Xaml/Serializer.Xaml.csproj",
+            "/Dependencies/TextFieldReader.CsvHelper/TextFieldReader.CsvHelper.csproj",
+            "/Dependencies/TextFieldWriter.CsvHelper/TextFieldWriter.CsvHelper.csproj"
+          ],
           "exclude": [ "**/bin/**", "**/obj/**" ], 
           "cwd": ".."
         }
