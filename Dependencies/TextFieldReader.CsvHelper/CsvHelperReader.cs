@@ -1,15 +1,16 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Data.Database;
+using Core2D.Interfaces;
 using System.Collections.Generic;
 using System.Globalization;
-using Core2D;
 
 namespace Dependencies
 {
     /// <summary>
-    /// Defines the text fields to <see cref="Database"/> reader.
+    /// Defines the text fields to <see cref="XDatabase"/> reader.
     /// </summary>
-    public class CsvHelperReader : ITextFieldReader<Database>
+    public class CsvHelperReader : ITextFieldReader<XDatabase>
     {
         private IEnumerable<string[]> ReadInternal(string path)
         {
@@ -38,12 +39,12 @@ namespace Dependencies
         /// Read fields from text database file format.
         /// </summary>
         /// <param name="path">The fields file path.</param>
-        /// <returns>The new instance of the <see cref="Database"/> class</returns>
-        public Database Read(string path)
+        /// <returns>The new instance of the <see cref="XDatabase"/> class</returns>
+        public XDatabase Read(string path)
         {
             var fields = ReadInternal(path);
             var name = System.IO.Path.GetFileNameWithoutExtension(path);
-            return Database.FromFields(name, fields);
+            return XDatabase.FromFields(name, fields);
         }
     }
 }

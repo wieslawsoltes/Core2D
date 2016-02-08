@@ -1,8 +1,9 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D;
+using Core2D.Interfaces;
 using System;
 using System.Diagnostics;
-using Core2D;
 
 namespace Dependencies
 {
@@ -11,6 +12,10 @@ namespace Dependencies
     /// </summary>
     public class TraceLog : ObservableObject, ILog
     {
+        private const string InformationPrefix = "Information: ";
+        private const string WarningPrefix = "Warning: ";
+        private const string ErrorPrefix = "Error: ";
+
         private string _lastMessage;
 
         /// <inheritdoc/>
@@ -25,10 +30,7 @@ namespace Dependencies
         {
             try
             {
-                Trace.Listeners.Add(
-                    new TextWriterTraceListener(
-                        path,
-                        "listener"));
+                Trace.Listeners.Add(new TextWriterTraceListener(path, "listener"));
             }
             catch (Exception ex)
             {
@@ -55,42 +57,42 @@ namespace Dependencies
         public void LogInformation(string message)
         {
             Trace.TraceInformation(message);
-            LastMessage = "Information: " + message;
+            LastMessage = InformationPrefix + message;
         }
 
         /// <inheritdoc/>
         public void LogInformation(string format, params object[] args)
         {
             Trace.TraceInformation(format, args);
-            LastMessage = "Information: " + string.Format(format, args);
+            LastMessage = InformationPrefix + string.Format(format, args);
         }
 
         /// <inheritdoc/>
         public void LogWarning(string message)
         {
             Trace.TraceWarning(message);
-            LastMessage = "Warning: " + message;
+            LastMessage = WarningPrefix + message;
         }
 
         /// <inheritdoc/>
         public void LogWarning(string format, params object[] args)
         {
             Trace.TraceWarning(format, args);
-            LastMessage = "Warning: " + string.Format(format, args);
+            LastMessage = WarningPrefix + string.Format(format, args);
         }
 
         /// <inheritdoc/>
         public void LogError(string message)
         {
             Trace.TraceError(message);
-            LastMessage = "Error: " + message;
+            LastMessage = ErrorPrefix + message;
         }
 
         /// <inheritdoc/>
         public void LogError(string format, params object[] args)
         {
             Trace.TraceError(format, args);
-            LastMessage = "Error: " + string.Format(format, args);
+            LastMessage = ErrorPrefix + string.Format(format, args);
         }
 
         /// <summary>

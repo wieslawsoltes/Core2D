@@ -1,23 +1,24 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Data.Database;
+using Core2D.Interfaces;
 using System;
 using System.Diagnostics;
 using System.Globalization;
-using Core2D;
 
 namespace Dependencies
 {
     /// <summary>
-    /// Defines <see cref="Database"/> to the text fields writer.
+    /// Defines <see cref="XDatabase"/> to the text fields writer.
     /// </summary>
-    public class CsvHelperWriter : ITextFieldWriter<Database>
+    public class CsvHelperWriter : ITextFieldWriter<XDatabase>
     {
         /// <summary>
         /// Write database records to text based file format.
         /// </summary>
         /// <param name="path">The fields file path.</param>
         /// <param name="database">The source records database.</param>
-        public void Write(string path, Database database)
+        public void Write(string path, XDatabase database)
         {
             try
             {

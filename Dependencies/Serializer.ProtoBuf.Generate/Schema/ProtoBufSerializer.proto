@@ -1,4 +1,3 @@
-package Core2D;
 import "bcl.proto"; // schema for protobuf-net's handling of core .NET types
 
 message ArgbColor {
@@ -27,7 +26,7 @@ message BaseShape {
    optional bcl.NetObjectProxy Style = 4; // reference-tracked BaseStyle
    optional bool IsStroked = 5;
    optional bool IsFilled = 6;
-   optional bcl.NetObjectProxy Data = 7; // reference-tracked Data
+   optional bcl.NetObjectProxy Data = 7; // reference-tracked XContext
    // the following represent sub-types; at most 1 should have a value
    optional XPoint XPoint = 101;
    optional XLine XLine = 102;
@@ -50,44 +49,6 @@ message BaseStyle {
    optional ArrowStyle ArrowStyle = 101;
    optional ShapeStyle ShapeStyle = 102;
 }
-message Column {
-   optional bcl.Guid Id = 1;
-   optional string Name = 2;
-   optional double Width = 3;
-   optional bool IsVisible = 4;
-   optional bcl.NetObjectProxy Owner = 5; // reference-tracked Database
-}
-message Container {
-   optional string Name = 1;
-   optional double Width = 2;
-   optional double Height = 3;
-   optional bcl.NetObjectProxy Background = 4; // reference-tracked ArgbColor
-   repeated bcl.NetObjectProxy Layers = 5; // reference-tracked Selectable
-   optional bcl.NetObjectProxy CurrentLayer = 6; // reference-tracked Selectable
-   optional bcl.NetObjectProxy WorkingLayer = 7; // reference-tracked Selectable
-   optional bcl.NetObjectProxy HelperLayer = 8; // reference-tracked Selectable
-   optional bcl.NetObjectProxy CurrentShape = 9; // reference-tracked BaseShape
-   optional bcl.NetObjectProxy Template = 10; // reference-tracked Selectable
-   // the following represent sub-types; at most 1 should have a value
-   optional Template Template = 101;
-   optional Page Page = 102;
-}
-message Data {
-   repeated bcl.NetObjectProxy Properties = 1; // reference-tracked Property
-   optional bcl.NetObjectProxy Record = 2; // reference-tracked Record
-}
-message Database {
-   optional string Name = 1;
-   optional string IdColumnName = 2;
-   repeated bcl.NetObjectProxy Columns = 3; // reference-tracked Column
-   repeated bcl.NetObjectProxy Records = 4; // reference-tracked Record
-   optional bcl.NetObjectProxy CurrentRecord = 5; // reference-tracked Record
-}
-message Document {
-   optional string Name = 1;
-   optional bool IsExpanded = 2;
-   repeated bcl.NetObjectProxy Pages = 3; // reference-tracked Selectable
-}
 message FontStyle {
    optional FontStyleFlags Flags = 1;
 }
@@ -99,27 +60,9 @@ enum FontStyleFlags {
    Underline = 4;
    Strikeout = 8;
 }
-message History {
-}
 message IHistory {
    // the following represent sub-types; at most 1 should have a value
-   optional History History = 101;
-}
-message Layer {
-   optional string Name = 1;
-   optional bcl.NetObjectProxy Owner = 2; // reference-tracked Selectable
-   optional bool IsVisible = 3;
-   repeated bcl.NetObjectProxy Shapes = 4; // reference-tracked BaseShape
-}
-message Library_ShapeStyle {
-   optional string Name = 1;
-   repeated bcl.NetObjectProxy Items = 2; // reference-tracked BaseStyle
-   optional bcl.NetObjectProxy Selected = 3; // reference-tracked BaseStyle
-}
-message Library_XGroup {
-   optional string Name = 1;
-   repeated bcl.NetObjectProxy Items = 2; // reference-tracked BaseShape
-   optional bcl.NetObjectProxy Selected = 3; // reference-tracked BaseShape
+   optional StackHistory StackHistory = 101;
 }
 enum LineCap {
    Flat = 0;
@@ -144,66 +87,6 @@ message LineStyle {
    optional string Name = 1;
    optional bcl.NetObjectProxy FixedLength = 2; // reference-tracked LineFixedLength
 }
-enum MoveMode {
-   Point = 0;
-   Shape = 1;
-}
-message Options {
-   optional bool SnapToGrid = 1;
-   optional double SnapX = 2;
-   optional double SnapY = 3;
-   optional double HitThreshold = 4;
-   optional MoveMode MoveMode = 5;
-   optional bool DefaultIsStroked = 6;
-   optional bool DefaultIsFilled = 7;
-   optional bool DefaultIsClosed = 8;
-   optional bool DefaultIsSmoothJoin = 9;
-   optional XFillRule DefaultFillRule = 10;
-   optional bool TryToConnect = 11;
-   optional bcl.NetObjectProxy PointShape = 12; // reference-tracked BaseShape
-   optional bcl.NetObjectProxy PointStyle = 13; // reference-tracked BaseStyle
-   optional bcl.NetObjectProxy SelectionStyle = 14; // reference-tracked BaseStyle
-   optional bcl.NetObjectProxy HelperStyle = 15; // reference-tracked BaseStyle
-}
-message Page {
-   optional bcl.NetObjectProxy Data = 1; // reference-tracked Data
-   optional bool IsExpanded = 2;
-}
-message Project {
-   optional string Name = 1;
-   optional bcl.NetObjectProxy Options = 2; // reference-tracked Options
-   optional bcl.NetObjectProxy History = 3; // reference-tracked IHistory
-   repeated bcl.NetObjectProxy StyleLibraries = 4; // reference-tracked Library_ShapeStyle
-   repeated bcl.NetObjectProxy GroupLibraries = 5; // reference-tracked Library_XGroup
-   repeated bcl.NetObjectProxy Databases = 6; // reference-tracked Database
-   repeated bcl.NetObjectProxy Templates = 7; // reference-tracked Selectable
-   repeated bcl.NetObjectProxy Documents = 8; // reference-tracked Selectable
-   optional bcl.NetObjectProxy CurrentStyleLibrary = 9; // reference-tracked Library_ShapeStyle
-   optional bcl.NetObjectProxy CurrentGroupLibrary = 10; // reference-tracked Library_XGroup
-   optional bcl.NetObjectProxy CurrentDatabase = 11; // reference-tracked Database
-   optional bcl.NetObjectProxy CurrentTemplate = 12; // reference-tracked Selectable
-   optional bcl.NetObjectProxy CurrentDocument = 13; // reference-tracked Selectable
-   optional bcl.NetObjectProxy CurrentContainer = 14; // reference-tracked Selectable
-   optional bcl.NetObjectProxy Selected = 15; // reference-tracked Selectable
-}
-message Property {
-   optional string Name = 1;
-   optional bcl.NetObjectProxy Value = 2; // reference-tracked string
-   optional bcl.NetObjectProxy Owner = 3; // reference-tracked Data
-}
-message Record {
-   optional bcl.Guid Id = 1;
-   repeated bcl.NetObjectProxy Columns = 2; // reference-tracked Column
-   repeated bcl.NetObjectProxy Values = 3; // reference-tracked Value
-   optional bcl.NetObjectProxy Owner = 4; // reference-tracked Database
-}
-message Selectable {
-   // the following represent sub-types; at most 1 should have a value
-   optional Layer Layer = 101;
-   optional Container Container = 102;
-   optional Document Document = 103;
-   optional Project Project = 104;
-}
 message ShapeState {
    optional ShapeStateFlags Flags = 1;
 }
@@ -225,7 +108,7 @@ message ShapeStyle {
    optional bcl.NetObjectProxy EndArrowStyle = 3; // reference-tracked BaseStyle
    optional bcl.NetObjectProxy TextStyle = 4; // reference-tracked TextStyle
 }
-message Template {
+message StackHistory {
 }
 enum TextHAlignment {
    Left = 0;
@@ -246,9 +129,6 @@ enum TextVAlignment {
    Center = 1;
    Bottom = 2;
 }
-message Value {
-   optional string Content = 1;
-}
 message XArc {
    optional bcl.NetObjectProxy Point1 = 1; // reference-tracked BaseShape
    optional bcl.NetObjectProxy Point2 = 2; // reference-tracked BaseShape
@@ -262,6 +142,32 @@ message XArcSegment {
    optional bool IsLargeArc = 4;
    optional XSweepDirection SweepDirection = 5;
 }
+message XColumn {
+   optional bcl.Guid Id = 1;
+   optional string Name = 2;
+   optional double Width = 3;
+   optional bool IsVisible = 4;
+   optional bcl.NetObjectProxy Owner = 5; // reference-tracked XDatabase
+}
+message XContainer {
+   optional string Name = 1;
+   optional double Width = 2;
+   optional double Height = 3;
+   optional bcl.NetObjectProxy Background = 4; // reference-tracked ArgbColor
+   repeated bcl.NetObjectProxy Layers = 5; // reference-tracked XSelectable
+   optional bcl.NetObjectProxy CurrentLayer = 6; // reference-tracked XSelectable
+   optional bcl.NetObjectProxy WorkingLayer = 7; // reference-tracked XSelectable
+   optional bcl.NetObjectProxy HelperLayer = 8; // reference-tracked XSelectable
+   optional bcl.NetObjectProxy CurrentShape = 9; // reference-tracked BaseShape
+   optional bcl.NetObjectProxy Template = 10; // reference-tracked XSelectable
+   // the following represent sub-types; at most 1 should have a value
+   optional XTemplate XTemplate = 101;
+   optional XPage XPage = 102;
+}
+message XContext {
+   repeated bcl.NetObjectProxy Properties = 1; // reference-tracked XProperty
+   optional bcl.NetObjectProxy Record = 2; // reference-tracked XRecord
+}
 message XCubicBezier {
    optional bcl.NetObjectProxy Point1 = 1; // reference-tracked BaseShape
    optional bcl.NetObjectProxy Point2 = 2; // reference-tracked BaseShape
@@ -272,6 +178,18 @@ message XCubicBezierSegment {
    optional bcl.NetObjectProxy Point1 = 1; // reference-tracked BaseShape
    optional bcl.NetObjectProxy Point2 = 2; // reference-tracked BaseShape
    optional bcl.NetObjectProxy Point3 = 3; // reference-tracked BaseShape
+}
+message XDatabase {
+   optional string Name = 1;
+   optional string IdColumnName = 2;
+   repeated bcl.NetObjectProxy Columns = 3; // reference-tracked XColumn
+   repeated bcl.NetObjectProxy Records = 4; // reference-tracked XRecord
+   optional bcl.NetObjectProxy CurrentRecord = 5; // reference-tracked XRecord
+}
+message XDocument {
+   optional string Name = 1;
+   optional bool IsExpanded = 2;
+   repeated bcl.NetObjectProxy Pages = 3; // reference-tracked XSelectable
 }
 message XEllipse {
 }
@@ -286,12 +204,53 @@ message XGroup {
 message XImage {
    optional string Key = 1;
 }
+message XLayer {
+   optional string Name = 1;
+   optional bcl.NetObjectProxy Owner = 2; // reference-tracked XSelectable
+   optional bool IsVisible = 3;
+   repeated bcl.NetObjectProxy Shapes = 4; // reference-tracked BaseShape
+}
+message XLibrary_ShapeStyle {
+   optional string Name = 1;
+   repeated bcl.NetObjectProxy Items = 2; // reference-tracked BaseStyle
+   optional bcl.NetObjectProxy Selected = 3; // reference-tracked BaseStyle
+}
+message XLibrary_XGroup {
+   optional string Name = 1;
+   repeated bcl.NetObjectProxy Items = 2; // reference-tracked BaseShape
+   optional bcl.NetObjectProxy Selected = 3; // reference-tracked BaseShape
+}
 message XLine {
    optional bcl.NetObjectProxy Start = 1; // reference-tracked BaseShape
    optional bcl.NetObjectProxy End = 2; // reference-tracked BaseShape
 }
 message XLineSegment {
    optional bcl.NetObjectProxy Point = 1; // reference-tracked BaseShape
+}
+enum XMoveMode {
+   Point = 0;
+   Shape = 1;
+}
+message XOptions {
+   optional bool SnapToGrid = 1;
+   optional double SnapX = 2;
+   optional double SnapY = 3;
+   optional double HitThreshold = 4;
+   optional XMoveMode MoveMode = 5;
+   optional bool DefaultIsStroked = 6;
+   optional bool DefaultIsFilled = 7;
+   optional bool DefaultIsClosed = 8;
+   optional bool DefaultIsSmoothJoin = 9;
+   optional XFillRule DefaultFillRule = 10;
+   optional bool TryToConnect = 11;
+   optional bcl.NetObjectProxy PointShape = 12; // reference-tracked BaseShape
+   optional bcl.NetObjectProxy PointStyle = 13; // reference-tracked BaseStyle
+   optional bcl.NetObjectProxy SelectionStyle = 14; // reference-tracked BaseStyle
+   optional bcl.NetObjectProxy HelperStyle = 15; // reference-tracked BaseStyle
+}
+message XPage {
+   optional bcl.NetObjectProxy Data = 1; // reference-tracked XContext
+   optional bool IsExpanded = 2;
 }
 message XPath {
    optional bcl.NetObjectProxy Geometry = 1; // reference-tracked XPathGeometry
@@ -336,6 +295,28 @@ message XPolyLineSegment {
 message XPolyQuadraticBezierSegment {
    repeated bcl.NetObjectProxy Points = 1; // reference-tracked BaseShape
 }
+message XProject {
+   optional string Name = 1;
+   optional bcl.NetObjectProxy Options = 2; // reference-tracked XOptions
+   optional bcl.NetObjectProxy History = 3; // reference-tracked IHistory
+   repeated bcl.NetObjectProxy StyleLibraries = 4; // reference-tracked XLibrary_ShapeStyle
+   repeated bcl.NetObjectProxy GroupLibraries = 5; // reference-tracked XLibrary_XGroup
+   repeated bcl.NetObjectProxy Databases = 6; // reference-tracked XDatabase
+   repeated bcl.NetObjectProxy Templates = 7; // reference-tracked XSelectable
+   repeated bcl.NetObjectProxy Documents = 8; // reference-tracked XSelectable
+   optional bcl.NetObjectProxy CurrentStyleLibrary = 9; // reference-tracked XLibrary_ShapeStyle
+   optional bcl.NetObjectProxy CurrentGroupLibrary = 10; // reference-tracked XLibrary_XGroup
+   optional bcl.NetObjectProxy CurrentDatabase = 11; // reference-tracked XDatabase
+   optional bcl.NetObjectProxy CurrentTemplate = 12; // reference-tracked XSelectable
+   optional bcl.NetObjectProxy CurrentDocument = 13; // reference-tracked XSelectable
+   optional bcl.NetObjectProxy CurrentContainer = 14; // reference-tracked XSelectable
+   optional bcl.NetObjectProxy Selected = 15; // reference-tracked XSelectable
+}
+message XProperty {
+   optional string Name = 1;
+   optional bcl.NetObjectProxy Value = 2; // reference-tracked string
+   optional bcl.NetObjectProxy Owner = 3; // reference-tracked XContext
+}
 message XQuadraticBezier {
    optional bcl.NetObjectProxy Point1 = 1; // reference-tracked BaseShape
    optional bcl.NetObjectProxy Point2 = 2; // reference-tracked BaseShape
@@ -345,6 +326,12 @@ message XQuadraticBezierSegment {
    optional bcl.NetObjectProxy Point1 = 1; // reference-tracked BaseShape
    optional bcl.NetObjectProxy Point2 = 2; // reference-tracked BaseShape
 }
+message XRecord {
+   optional bcl.Guid Id = 1;
+   repeated bcl.NetObjectProxy Columns = 2; // reference-tracked XColumn
+   repeated bcl.NetObjectProxy Values = 3; // reference-tracked XValue
+   optional bcl.NetObjectProxy Owner = 4; // reference-tracked XDatabase
+}
 message XRectangle {
    optional bool IsGrid = 1;
    optional double OffsetX = 2;
@@ -352,9 +339,18 @@ message XRectangle {
    optional double CellWidth = 4;
    optional double CellHeight = 5;
 }
+message XSelectable {
+   // the following represent sub-types; at most 1 should have a value
+   optional XLayer XLayer = 101;
+   optional XContainer XContainer = 102;
+   optional XDocument XDocument = 103;
+   optional XProject XProject = 104;
+}
 enum XSweepDirection {
    Clockwise = 0;
    Counterclockwise = 1;
+}
+message XTemplate {
 }
 message XText {
    optional bcl.NetObjectProxy TopLeft = 1; // reference-tracked BaseShape
@@ -364,4 +360,7 @@ message XText {
    optional XRectangle XRectangle = 101;
    optional XEllipse XEllipse = 102;
    optional XImage XImage = 103;
+}
+message XValue {
+   optional string Content = 1;
 }

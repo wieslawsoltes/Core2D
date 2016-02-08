@@ -15,7 +15,7 @@ namespace Dependencies
     /// <summary>
     /// Native PdfSharp shape renderer.
     /// </summary>
-    public class PdfRenderer : Core2D.Renderer
+    public class PdfRenderer : Core2D.Renderer.ShapeRenderer
     {
         private bool _enableImageCache = true;
         private IDictionary<string, XImage> _biCache;
@@ -35,7 +35,7 @@ namespace Dependencies
         /// Creates a new <see cref="PdfRenderer"/> instance.
         /// </summary>
         /// <returns>The new instance of the <see cref="PdfRenderer"/> class.</returns>
-        public static Core2D.Renderer Create()
+        public static Core2D.Renderer.ShapeRenderer Create()
         {
             return new PdfRenderer();
         }
@@ -45,7 +45,7 @@ namespace Dependencies
         /// </summary>
         /// <param name="path"></param>
         /// <param name="page"></param>
-        public void Save(string path, Core2D.Page page)
+        public void Save(string path, Core2D.Project.XPage page)
         {
             using (var pdf = new PdfDocument())
             {
@@ -59,7 +59,7 @@ namespace Dependencies
         /// </summary>
         /// <param name="path"></param>
         /// <param name="document"></param>
-        public void Save(string path, Core2D.Document document)
+        public void Save(string path, Core2D.Project.XDocument document)
         {
             using (var pdf = new PdfDocument())
             {
@@ -97,7 +97,7 @@ namespace Dependencies
         /// </summary>
         /// <param name="path"></param>
         /// <param name="project"></param>
-        public void Save(string path, Core2D.Project project)
+        public void Save(string path, Core2D.Project.XProject project)
         {
             using (var pdf = new PdfDocument())
             {
@@ -151,7 +151,7 @@ namespace Dependencies
         /// <param name="pdf"></param>
         /// <param name="page"></param>
         /// <returns></returns>
-        private PdfPage Add(PdfDocument pdf, Core2D.Page page)
+        private PdfPage Add(PdfDocument pdf, Core2D.Project.XPage page)
         {
             // Create A3 page size with Landscape orientation.
             PdfPage pdfPage = pdf.AddPage();
@@ -174,7 +174,7 @@ namespace Dependencies
                     DrawBackgroundInternal(
                         gfx,
                         page.Template.Background,
-                        Core2D.Rect2.Create(0, 0, pdfPage.Width.Value / scale, pdfPage.Height.Value / scale));
+                        Core2D.Math.Rect2.Create(0, 0, pdfPage.Width.Value / scale, pdfPage.Height.Value / scale));
                 }
 
                 // Draw template contents to pdf graphics.
@@ -192,7 +192,7 @@ namespace Dependencies
         /// </summary>
         /// <param name="color"></param>
         /// <returns></returns>
-        private static XColor ToXColor(Core2D.ArgbColor color)
+        private static XColor ToXColor(Core2D.Style.ArgbColor color)
         {
             return XColor.FromArgb(
                 color.A,
@@ -207,25 +207,25 @@ namespace Dependencies
         /// <param name="style"></param>
         /// <param name="scale"></param>
         /// <returns></returns>
-        private static XPen ToXPen(Core2D.BaseStyle style, Func<double, double> scale)
+        private static XPen ToXPen(Core2D.Style.BaseStyle style, Func<double, double> scale)
         {
             var pen = new XPen(ToXColor(style.Stroke), XUnit.FromPresentation(style.Thickness));
             switch (style.LineCap)
             {
-                case Core2D.LineCap.Flat:
+                case Core2D.Style.LineCap.Flat:
                     pen.LineCap = XLineCap.Flat;
                     break;
-                case Core2D.LineCap.Square:
+                case Core2D.Style.LineCap.Square:
                     pen.LineCap = XLineCap.Square;
                     break;
-                case Core2D.LineCap.Round:
+                case Core2D.Style.LineCap.Round:
                     pen.LineCap = XLineCap.Round;
                     break;
             }
             if (style.Dashes != null)
             {
                 // TODO: Convert to correct dash values.
-                pen.DashPattern = Core2D.ShapeStyle.ConvertDashesToDoubleArray(style.Dashes);
+                pen.DashPattern = Core2D.Style.ShapeStyle.ConvertDashesToDoubleArray(style.Dashes);
             }
             pen.DashOffset = style.DashOffset;
             return pen;
@@ -236,7 +236,7 @@ namespace Dependencies
         /// </summary>
         /// <param name="color"></param>
         /// <returns></returns>
-        private static XSolidBrush ToXSolidBrush(Core2D.ArgbColor color)
+        private static XSolidBrush ToXSolidBrush(Core2D.Style.ArgbColor color)
         {
             return new XSolidBrush(ToXColor(color));
         }
@@ -338,7 +338,7 @@ namespace Dependencies
         private void DrawGridInternal(
             XGraphics gfx,
             XPen stroke,
-            ref Core2D.Rect2 rect,
+            ref Core2D.Math.Rect2 rect,
             double offsetX, double offsetY,
             double cellWidth, double cellHeight,
             bool isStroked)
@@ -379,7 +379,7 @@ namespace Dependencies
         /// <param name="gfx"></param>
         /// <param name="color"></param>
         /// <param name="rect"></param>
-        private void DrawBackgroundInternal(XGraphics gfx, Core2D.ArgbColor color, Core2D.Rect2 rect)
+        private void DrawBackgroundInternal(XGraphics gfx, Core2D.Style.ArgbColor color, Core2D.Math.Rect2 rect)
         {
             gfx.DrawRectangle(
                 null,
@@ -408,7 +408,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.XLine line, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
+        public override void Draw(object dc, Core2D.Shapes.XLine line, double dx, double dy, ImmutableArray<Core2D.Data.XProperty> db, Core2D.Data.Database.XRecord r)
         {
             if (!line.IsStroked)
                 return;
@@ -428,7 +428,7 @@ namespace Dependencies
             double _x2 = line.End.X + dx;
             double _y2 = line.End.Y + dy;
 
-            Core2D.XLine.SetMaxLength(line, ref _x1, ref _y1, ref _x2, ref _y2);
+            Core2D.Shapes.XLine.SetMaxLength(line, ref _x1, ref _y1, ref _x2, ref _y2);
 
             double x1 = _scaleToPage(_x1);
             double y1 = _scaleToPage(_y1);
@@ -459,12 +459,12 @@ namespace Dependencies
             switch (sas.ArrowType)
             {
                 default:
-                case Core2D.ArrowType.None:
+                case Core2D.Style.ArrowType.None:
                     {
                         pt1 = new XPoint(x1, y1);
                     }
                     break;
-                case Core2D.ArrowType.Rectangle:
+                case Core2D.Style.ArrowType.Rectangle:
                     {
                         pt1 = t1.Transform(new XPoint(x1 - sizeX1, y1));
                         var rect = new XRect(x1 - sizeX1, y1 - radiusY1, sizeX1, sizeY1);
@@ -474,7 +474,7 @@ namespace Dependencies
                         _gfx.Restore();
                     }
                     break;
-                case Core2D.ArrowType.Ellipse:
+                case Core2D.Style.ArrowType.Ellipse:
                     {
                         pt1 = t1.Transform(new XPoint(x1 - sizeX1, y1));
                         _gfx.Save();
@@ -484,7 +484,7 @@ namespace Dependencies
                         _gfx.Restore();
                     }
                     break;
-                case Core2D.ArrowType.Arrow:
+                case Core2D.Style.ArrowType.Arrow:
                     {
                         pt1 = t1.Transform(new XPoint(x1, y1));
                         var p11 = t1.Transform(new XPoint(x1 - sizeX1, y1 + sizeY1));
@@ -505,12 +505,12 @@ namespace Dependencies
             switch (eas.ArrowType)
             {
                 default:
-                case Core2D.ArrowType.None:
+                case Core2D.Style.ArrowType.None:
                     {
                         pt2 = new XPoint(x2, y2);
                     }
                     break;
-                case Core2D.ArrowType.Rectangle:
+                case Core2D.Style.ArrowType.Rectangle:
                     {
                         pt2 = t2.Transform(new XPoint(x2 - sizeX2, y2));
                         var rect = new XRect(x2 - sizeX2, y2 - radiusY2, sizeX2, sizeY2);
@@ -520,7 +520,7 @@ namespace Dependencies
                         _gfx.Restore();
                     }
                     break;
-                case Core2D.ArrowType.Ellipse:
+                case Core2D.Style.ArrowType.Ellipse:
                     {
                         pt2 = t2.Transform(new XPoint(x2 - sizeX2, y2));
                         _gfx.Save();
@@ -530,7 +530,7 @@ namespace Dependencies
                         _gfx.Restore();
                     }
                     break;
-                case Core2D.ArrowType.Arrow:
+                case Core2D.Style.ArrowType.Arrow:
                     {
                         pt2 = t2.Transform(new XPoint(x2, y2));
                         var p11 = t2.Transform(new XPoint(x2 - sizeX2, y2 + sizeY2));
@@ -547,11 +547,11 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.XRectangle rectangle, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
+        public override void Draw(object dc, Core2D.Shapes.XRectangle rectangle, double dx, double dy, ImmutableArray<Core2D.Data.XProperty> db, Core2D.Data.Database.XRecord r)
         {
             var _gfx = dc as XGraphics;
 
-            var rect = Core2D.Rect2.Create(
+            var rect = Core2D.Math.Rect2.Create(
                 rectangle.TopLeft,
                 rectangle.BottomRight,
                 dx, dy);
@@ -598,11 +598,11 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.XEllipse ellipse, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
+        public override void Draw(object dc, Core2D.Shapes.XEllipse ellipse, double dx, double dy, ImmutableArray<Core2D.Data.XProperty> db, Core2D.Data.Database.XRecord r)
         {
             var _gfx = dc as XGraphics;
 
-            var rect = Core2D.Rect2.Create(
+            var rect = Core2D.Math.Rect2.Create(
                 ellipse.TopLeft,
                 ellipse.BottomRight,
                 dx, dy);
@@ -638,11 +638,11 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.XArc arc, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)  
+        public override void Draw(object dc, Core2D.Shapes.XArc arc, double dx, double dy, ImmutableArray<Core2D.Data.XProperty> db, Core2D.Data.Database.XRecord r)  
         {
             var _gfx = dc as XGraphics;
 
-            var a = Core2D.GdiArc.FromXArc(arc, dx, dy);
+            var a = Core2D.Math.Arc.GdiArc.FromXArc(arc, dx, dy);
 
             if (arc.IsFilled)
             {
@@ -687,7 +687,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.XCubicBezier cubicBezier, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
+        public override void Draw(object dc, Core2D.Shapes.XCubicBezier cubicBezier, double dx, double dy, ImmutableArray<Core2D.Data.XProperty> db, Core2D.Data.Database.XRecord r)
         {
             var _gfx = dc as XGraphics;
 
@@ -737,7 +737,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.XQuadraticBezier quadraticBezier, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
+        public override void Draw(object dc, Core2D.Shapes.XQuadraticBezier quadraticBezier, double dx, double dy, ImmutableArray<Core2D.Data.XProperty> db, Core2D.Data.Database.XRecord r)
         {
             var _gfx = dc as XGraphics;
 
@@ -796,7 +796,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.XText text, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
+        public override void Draw(object dc, Core2D.Shapes.XText text, double dx, double dy, ImmutableArray<Core2D.Data.XProperty> db, Core2D.Data.Database.XRecord r)
         {
             var _gfx = dc as XGraphics;
 
@@ -809,22 +809,22 @@ namespace Dependencies
             var fontStyle = XFontStyle.Regular;
             if (text.Style.TextStyle.FontStyle != null)
             {
-                if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Bold))
+                if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Core2D.Style.FontStyleFlags.Bold))
                 {
                     fontStyle |= XFontStyle.Bold;
                 }
 
-                if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Italic))
+                if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Core2D.Style.FontStyleFlags.Italic))
                 {
                     fontStyle |= XFontStyle.Italic;
                 }
 
-                if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Underline))
+                if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Core2D.Style.FontStyleFlags.Underline))
                 {
                     fontStyle |= XFontStyle.Underline;
                 }
 
-                if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Strikeout))
+                if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Core2D.Style.FontStyleFlags.Strikeout))
                 {
                     fontStyle |= XFontStyle.Strikeout;
                 }
@@ -836,7 +836,7 @@ namespace Dependencies
                 fontStyle,
                 options);
 
-            var rect = Core2D.Rect2.Create(
+            var rect = Core2D.Math.Rect2.Create(
                 text.TopLeft,
                 text.BottomRight,
                 dx, dy);
@@ -850,26 +850,26 @@ namespace Dependencies
             var format = new XStringFormat();
             switch (text.Style.TextStyle.TextHAlignment)
             {
-                case Core2D.TextHAlignment.Left:
+                case Core2D.Style.TextHAlignment.Left:
                     format.Alignment = XStringAlignment.Near;
                     break;
-                case Core2D.TextHAlignment.Center:
+                case Core2D.Style.TextHAlignment.Center:
                     format.Alignment = XStringAlignment.Center;
                     break;
-                case Core2D.TextHAlignment.Right:
+                case Core2D.Style.TextHAlignment.Right:
                     format.Alignment = XStringAlignment.Far;
                     break;
             }
 
             switch (text.Style.TextStyle.TextVAlignment)
             {
-                case Core2D.TextVAlignment.Top:
+                case Core2D.Style.TextVAlignment.Top:
                     format.LineAlignment = XLineAlignment.Near;
                     break;
-                case Core2D.TextVAlignment.Center:
+                case Core2D.Style.TextVAlignment.Center:
                     format.LineAlignment = XLineAlignment.Center;
                     break;
-                case Core2D.TextVAlignment.Bottom:
+                case Core2D.Style.TextVAlignment.Bottom:
                     format.LineAlignment = XLineAlignment.Far;
                     break;
             }
@@ -883,11 +883,11 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.XImage image, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
+        public override void Draw(object dc, Core2D.Shapes.XImage image, double dx, double dy, ImmutableArray<Core2D.Data.XProperty> db, Core2D.Data.Database.XRecord r)
         {
             var _gfx = dc as XGraphics;
 
-            var rect = Core2D.Rect2.Create(
+            var rect = Core2D.Math.Rect2.Create(
                 image.TopLeft,
                 image.BottomRight,
                 dx, dy);
@@ -954,7 +954,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.XPath path, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
+        public override void Draw(object dc, Core2D.Shapes.XPath path, double dx, double dy, ImmutableArray<Core2D.Data.XProperty> db, Core2D.Data.Database.XRecord r)
         {
             var _gfx = dc as XGraphics;
 

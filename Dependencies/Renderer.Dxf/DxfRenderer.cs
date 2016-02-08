@@ -1,23 +1,23 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Linq;
 using netDxf;
 using netDxf.Entities;
 using netDxf.Header;
 using netDxf.Objects;
 using netDxf.Tables;
+using System;
+using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Linq;
 
 namespace Dependencies
 {
     /// <summary>
     /// Native netDxf shape renderer.
     /// </summary>
-    public class DxfRenderer : Core2D.Renderer
+    public class DxfRenderer : Core2D.Renderer.ShapeRenderer
     {
-        private Core2D.Cache<string, ImageDefinition> _biCache = Core2D.Cache<string, ImageDefinition>.Create();
+        private Core2D.Renderer.Cache<string, ImageDefinition> _biCache = Core2D.Renderer.Cache<string, ImageDefinition>.Create();
         private double _pageWidth;
         private double _pageHeight;
         private string _outputPath;
@@ -35,14 +35,14 @@ namespace Dependencies
         /// Creates a new <see cref="DxfRenderer"/> instance.
         /// </summary>
         /// <returns>The new instance of the <see cref="DxfRenderer"/> class.</returns>
-        public static Core2D.Renderer Create() => new DxfRenderer();
+        public static Core2D.Renderer.ShapeRenderer Create() => new DxfRenderer();
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="path"></param>
         /// <param name="page"></param>
-        public void Save(string path, Core2D.Page page)
+        public void Save(string path, Core2D.Project.XPage page)
         {
             _outputPath = System.IO.Path.GetDirectoryName(path);
             var dxf = new DxfDocument(DxfVersion.AutoCad2010);
@@ -58,7 +58,7 @@ namespace Dependencies
         /// </summary>
         /// <param name="path"></param>
         /// <param name="document"></param>
-        public void Save(string path, Core2D.Document document)
+        public void Save(string path, Core2D.Project.XDocument document)
         {
             _outputPath = System.IO.Path.GetDirectoryName(path);
             var dxf = new DxfDocument(DxfVersion.AutoCad2010);
@@ -74,7 +74,7 @@ namespace Dependencies
         /// </summary>
         /// <param name="path"></param>
         /// <param name="project"></param>
-        public void Save(string path, Core2D.Project project)
+        public void Save(string path, Core2D.Project.XProject project)
         {
             _outputPath = System.IO.Path.GetDirectoryName(path);
             var dxf = new DxfDocument(DxfVersion.AutoCad2010);
@@ -85,7 +85,7 @@ namespace Dependencies
             ClearCache(isZooming: false);
         }
 
-        private void Add(DxfDocument dxf, Core2D.Page page)
+        private void Add(DxfDocument dxf, Core2D.Project.XPage page)
         {
             if (page.Template != null)
             {
@@ -101,7 +101,7 @@ namespace Dependencies
             Draw(dxf, page, page.Data.Properties, page.Data.Record);
         }
 
-        private void Add(DxfDocument dxf, Core2D.Document document)
+        private void Add(DxfDocument dxf, Core2D.Project.XDocument document)
         {
             foreach (var page in document.Pages)
             {
@@ -113,7 +113,7 @@ namespace Dependencies
             }
         }
 
-        private void Add(DxfDocument dxf, Core2D.Project project)
+        private void Add(DxfDocument dxf, Core2D.Project.XProject project)
         {
             foreach (var document in project.Documents)
             {
@@ -131,9 +131,9 @@ namespace Dependencies
             return Lineweights.OrderBy(x => Math.Abs((long)x - lineweight)).First();
         }
 
-        private static AciColor ToColor(Core2D.ArgbColor color) => new AciColor(color.R, color.G, color.B);
+        private static AciColor ToColor(Core2D.Style.ArgbColor color) => new AciColor(color.R, color.G, color.B);
 
-        private static short ToTransparency(Core2D.ArgbColor color) => (short)(90.0 - color.A * 90.0 / 255.0);
+        private static short ToTransparency(Core2D.Style.ArgbColor color) => (short)(90.0 - color.A * 90.0 / 255.0);
 
         private double ToDxfX(double x) => x;
 
@@ -166,9 +166,9 @@ namespace Dependencies
             };
         }
 
-        private Ellipse CreateEllipticalArc(Core2D.XArc arc, double dx, double dy)
+        private Ellipse CreateEllipticalArc(Core2D.Shapes.XArc arc, double dx, double dy)
         {
-            var a = Core2D.GdiArc.FromXArc(arc, dx, dy);
+            var a = Core2D.Math.Arc.GdiArc.FromXArc(arc, dx, dy);
 
             double _cx = ToDxfX(a.X + a.Width / 2.0);
             double _cy = ToDxfY(a.Y + a.Height / 2.0);
@@ -235,7 +235,7 @@ namespace Dependencies
                 }, 3);
         }
 
-        private void DrawRectangleInternal(DxfDocument dxf, Layer layer, bool isFilled, bool isStroked, Core2D.BaseStyle style, ref Core2D.Rect2 rect)
+        private void DrawRectangleInternal(DxfDocument dxf, Layer layer, bool isFilled, bool isStroked, Core2D.Style.BaseStyle style, ref Core2D.Math.Rect2 rect)
         {
             double x = rect.X;
             double y = rect.Y;
@@ -306,7 +306,7 @@ namespace Dependencies
             }
         }
 
-        private void DrawEllipseInternal(DxfDocument dxf, Layer layer, bool isFilled, bool isStroked, Core2D.BaseStyle style, ref Core2D.Rect2 rect)
+        private void DrawEllipseInternal(DxfDocument dxf, Layer layer, bool isFilled, bool isStroked, Core2D.Style.BaseStyle style, ref Core2D.Math.Rect2 rect)
         {
             var dxfEllipse = CreateEllipse(rect.X, rect.Y, rect.Width, rect.Height);
 
@@ -349,7 +349,7 @@ namespace Dependencies
             }
         }
 
-        private void DrawGridInternal(DxfDocument dxf, Layer layer, Core2D.ShapeStyle style, double offsetX, double offsetY, double cellWidth, double cellHeight, ref Core2D.Rect2 rect)
+        private void DrawGridInternal(DxfDocument dxf, Layer layer, Core2D.Style.ShapeStyle style, double offsetX, double offsetY, double cellWidth, double cellHeight, ref Core2D.Math.Rect2 rect)
         {
             var stroke = ToColor(style.Stroke);
             var strokeTansparency = ToTransparency(style.Stroke);
@@ -383,12 +383,12 @@ namespace Dependencies
             }
         }
 
-        private void CreateHatchBoundsAndEntitiess(Core2D.XPathGeometry pg, double dx, double dy, out IList<HatchBoundaryPath> bounds, out ICollection<EntityObject> entities)
+        private void CreateHatchBoundsAndEntitiess(Core2D.Path.XPathGeometry pg, double dx, double dy, out IList<HatchBoundaryPath> bounds, out ICollection<EntityObject> entities)
         {
             bounds = new List<HatchBoundaryPath>();
             entities = new List<EntityObject>();
 
-            // TODO: FillMode = pg.FillRule == Core2D.XFillRule.EvenOdd ? FillMode.Alternate : FillMode.Winding;
+            // TODO: FillMode = pg.FillRule == XFillRule.EvenOdd ? FillMode.Alternate : FillMode.Winding;
 
             foreach (var pf in pg.Figures)
             {
@@ -397,16 +397,16 @@ namespace Dependencies
 
                 foreach (var segment in pf.Segments)
                 {
-                    if (segment is Core2D.XArcSegment)
+                    if (segment is Core2D.Path.Segments.XArcSegment)
                     {
                         throw new NotSupportedException("Not supported segment type: " + segment.GetType());
-                        //var arcSegment = segment as Core2D.XArcSegment;
+                        //var arcSegment = segment as XArcSegment;
                         // TODO: Convert WPF/SVG elliptical arc segment format to DXF ellipse arc.
                         //startPoint = arcSegment.Point;
                     }
-                    else if (segment is Core2D.XCubicBezierSegment)
+                    else if (segment is Core2D.Path.Segments.XCubicBezierSegment)
                     {
-                        var cubicBezierSegment = segment as Core2D.XCubicBezierSegment;
+                        var cubicBezierSegment = segment as Core2D.Path.Segments.XCubicBezierSegment;
                         var dxfSpline = CreateCubicSpline(
                             startPoint.X + dx,
                             startPoint.Y + dy,
@@ -420,9 +420,9 @@ namespace Dependencies
                         entities.Add((Spline)dxfSpline.Clone());
                         startPoint = cubicBezierSegment.Point3;
                     }
-                    else if (segment is Core2D.XLineSegment)
+                    else if (segment is Core2D.Path.Segments.XLineSegment)
                     {
-                        var lineSegment = segment as Core2D.XLineSegment;
+                        var lineSegment = segment as Core2D.Path.Segments.XLineSegment;
                         var dxfLine = CreateLine(
                             startPoint.X + dx,
                             startPoint.Y + dy,
@@ -432,9 +432,9 @@ namespace Dependencies
                         entities.Add((Line)dxfLine.Clone());
                         startPoint = lineSegment.Point;
                     }
-                    else if (segment is Core2D.XPolyCubicBezierSegment)
+                    else if (segment is Core2D.Path.Segments.XPolyCubicBezierSegment)
                     {
-                        var polyCubicBezierSegment = segment as Core2D.XPolyCubicBezierSegment;
+                        var polyCubicBezierSegment = segment as Core2D.Path.Segments.XPolyCubicBezierSegment;
                         if (polyCubicBezierSegment.Points.Count >= 3)
                         {
                             var dxfSpline = CreateCubicSpline(
@@ -471,9 +471,9 @@ namespace Dependencies
 
                         startPoint = polyCubicBezierSegment.Points.Last();
                     }
-                    else if (segment is Core2D.XPolyLineSegment)
+                    else if (segment is Core2D.Path.Segments.XPolyLineSegment)
                     {
-                        var polyLineSegment = segment as Core2D.XPolyLineSegment;
+                        var polyLineSegment = segment as Core2D.Path.Segments.XPolyLineSegment;
                         if (polyLineSegment.Points.Count >= 1)
                         {
                             var dxfLine = CreateLine(
@@ -501,9 +501,9 @@ namespace Dependencies
 
                         startPoint = polyLineSegment.Points.Last();
                     }
-                    else if (segment is Core2D.XPolyQuadraticBezierSegment)
+                    else if (segment is Core2D.Path.Segments.XPolyQuadraticBezierSegment)
                     {
-                        var polyQuadraticSegment = segment as Core2D.XPolyQuadraticBezierSegment;
+                        var polyQuadraticSegment = segment as Core2D.Path.Segments.XPolyQuadraticBezierSegment;
                         if (polyQuadraticSegment.Points.Count >= 2)
                         {
                             var dxfSpline = CreateQuadraticSpline(
@@ -536,9 +536,9 @@ namespace Dependencies
 
                         startPoint = polyQuadraticSegment.Points.Last();
                     }
-                    else if (segment is Core2D.XQuadraticBezierSegment)
+                    else if (segment is Core2D.Path.Segments.XQuadraticBezierSegment)
                     {
-                        var quadraticBezierSegment = segment as Core2D.XQuadraticBezierSegment;
+                        var quadraticBezierSegment = segment as Core2D.Path.Segments.XQuadraticBezierSegment;
                         var dxfSpline = CreateQuadraticSpline(
                             startPoint.X + dx,
                             startPoint.Y + dy,
@@ -573,7 +573,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.Container container, ImmutableArray<Core2D.Property> db, Core2D.Record r)
+        public override void Draw(object dc, Core2D.Project.XContainer container, ImmutableArray<Core2D.Data.XProperty> db, Core2D.Data.Database.XRecord r)
         {
             var _dxf = dc as DxfDocument;
 
@@ -593,7 +593,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.Layer layer, ImmutableArray<Core2D.Property> db, Core2D.Record r)
+        public override void Draw(object dc, Core2D.Project.XLayer layer, ImmutableArray<Core2D.Data.XProperty> db, Core2D.Data.Database.XRecord r)
         {
             var _dxf = dc as DxfDocument;
 
@@ -607,7 +607,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.XLine line, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
+        public override void Draw(object dc, Core2D.Shapes.XLine line, double dx, double dy, ImmutableArray<Core2D.Data.XProperty> db, Core2D.Data.Database.XRecord r)
         {
             if (!line.IsStroked)
                 return;
@@ -624,7 +624,7 @@ namespace Dependencies
             double _x2 = line.End.X + dx;
             double _y2 = line.End.Y + dy;
 
-            Core2D.XLine.SetMaxLength(line, ref _x1, ref _y1, ref _x2, ref _y2);
+            Core2D.Shapes.XLine.SetMaxLength(line, ref _x1, ref _y1, ref _x2, ref _y2);
 
             var dxfLine = CreateLine(_x1, _y1, _x2, _y2);
 
@@ -641,14 +641,14 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.XRectangle rectangle, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
+        public override void Draw(object dc, Core2D.Shapes.XRectangle rectangle, double dx, double dy, ImmutableArray<Core2D.Data.XProperty> db, Core2D.Data.Database.XRecord r)
         {
             if (!rectangle.IsStroked && !rectangle.IsFilled && !rectangle.IsGrid)
                 return;
 
             var _dxf = dc as DxfDocument;
             var style = rectangle.Style;
-            var rect = Core2D.Rect2.Create(rectangle.TopLeft, rectangle.BottomRight, dx, dy);
+            var rect = Core2D.Math.Rect2.Create(rectangle.TopLeft, rectangle.BottomRight, dx, dy);
 
             DrawRectangleInternal(_dxf, _currentLayer, rectangle.IsFilled, rectangle.IsStroked, style, ref rect);
 
@@ -665,20 +665,20 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.XEllipse ellipse, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
+        public override void Draw(object dc, Core2D.Shapes.XEllipse ellipse, double dx, double dy, ImmutableArray<Core2D.Data.XProperty> db, Core2D.Data.Database.XRecord r)
         {
             if (!ellipse.IsStroked && !ellipse.IsFilled)
                 return;
 
             var dxf = dc as DxfDocument;
             var style = ellipse.Style;
-            var rect = Core2D.Rect2.Create(ellipse.TopLeft, ellipse.BottomRight, dx, dy);
+            var rect = Core2D.Math.Rect2.Create(ellipse.TopLeft, ellipse.BottomRight, dx, dy);
 
             DrawEllipseInternal(dxf, _currentLayer, ellipse.IsFilled, ellipse.IsStroked, style, ref rect);
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.XArc arc, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
+        public override void Draw(object dc, Core2D.Shapes.XArc arc, double dx, double dy, ImmutableArray<Core2D.Data.XProperty> db, Core2D.Data.Database.XRecord r)
         {
             var _dxf = dc as DxfDocument;
             var style = arc.Style;
@@ -725,7 +725,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.XCubicBezier cubicBezier, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
+        public override void Draw(object dc, Core2D.Shapes.XCubicBezier cubicBezier, double dx, double dy, ImmutableArray<Core2D.Data.XProperty> db, Core2D.Data.Database.XRecord r)
         {
             if (!cubicBezier.IsStroked && !cubicBezier.IsFilled)
                 return;
@@ -782,7 +782,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.XQuadraticBezier quadraticBezier, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
+        public override void Draw(object dc, Core2D.Shapes.XQuadraticBezier quadraticBezier, double dx, double dy, ImmutableArray<Core2D.Data.XProperty> db, Core2D.Data.Database.XRecord r)
         {
             if (!quadraticBezier.IsStroked && !quadraticBezier.IsFilled)
                 return;
@@ -837,7 +837,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.XText text, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
+        public override void Draw(object dc, Core2D.Shapes.XText text, double dx, double dy, ImmutableArray<Core2D.Data.XProperty> db, Core2D.Data.Database.XRecord r)
         {
             var _dxf = dc as DxfDocument;
 
@@ -851,18 +851,18 @@ namespace Dependencies
 
             var attachmentPoint = default(MTextAttachmentPoint);
             double x, y;
-            var rect = Core2D.Rect2.Create(text.TopLeft, text.BottomRight, dx, dy);
+            var rect = Core2D.Math.Rect2.Create(text.TopLeft, text.BottomRight, dx, dy);
 
             switch (text.Style.TextStyle.TextHAlignment)
             {
                 default:
-                case Core2D.TextHAlignment.Left:
+                case Core2D.Style.TextHAlignment.Left:
                     x = rect.X;
                     break;
-                case Core2D.TextHAlignment.Center:
+                case Core2D.Style.TextHAlignment.Center:
                     x = rect.X + rect.Width / 2.0;
                     break;
-                case Core2D.TextHAlignment.Right:
+                case Core2D.Style.TextHAlignment.Right:
                     x = rect.X + rect.Width;
                     break;
             }
@@ -870,13 +870,13 @@ namespace Dependencies
             switch (text.Style.TextStyle.TextVAlignment)
             {
                 default:
-                case Core2D.TextVAlignment.Top:
+                case Core2D.Style.TextVAlignment.Top:
                     y = rect.Y;
                     break;
-                case Core2D.TextVAlignment.Center:
+                case Core2D.Style.TextVAlignment.Center:
                     y = rect.Y + rect.Height / 2.0;
                     break;
-                case Core2D.TextVAlignment.Bottom:
+                case Core2D.Style.TextVAlignment.Bottom:
                     y = rect.Y + rect.Height;
                     break;
             }
@@ -884,47 +884,47 @@ namespace Dependencies
             switch (text.Style.TextStyle.TextVAlignment)
             {
                 default:
-                case Core2D.TextVAlignment.Top:
+                case Core2D.Style.TextVAlignment.Top:
                     switch (text.Style.TextStyle.TextHAlignment)
                     {
                         default:
-                        case Core2D.TextHAlignment.Left:
+                        case Core2D.Style.TextHAlignment.Left:
                             attachmentPoint = MTextAttachmentPoint.TopLeft;
                             break;
-                        case Core2D.TextHAlignment.Center:
+                        case Core2D.Style.TextHAlignment.Center:
                             attachmentPoint = MTextAttachmentPoint.TopCenter;
                             break;
-                        case Core2D.TextHAlignment.Right:
+                        case Core2D.Style.TextHAlignment.Right:
                             attachmentPoint = MTextAttachmentPoint.TopRight;
                             break;
                     }
                     break;
-                case Core2D.TextVAlignment.Center:
+                case Core2D.Style.TextVAlignment.Center:
                     switch (text.Style.TextStyle.TextHAlignment)
                     {
                         default:
-                        case Core2D.TextHAlignment.Left:
+                        case Core2D.Style.TextHAlignment.Left:
                             attachmentPoint = MTextAttachmentPoint.MiddleLeft;
                             break;
-                        case Core2D.TextHAlignment.Center:
+                        case Core2D.Style.TextHAlignment.Center:
                             attachmentPoint = MTextAttachmentPoint.MiddleCenter;
                             break;
-                        case Core2D.TextHAlignment.Right:
+                        case Core2D.Style.TextHAlignment.Right:
                             attachmentPoint = MTextAttachmentPoint.MiddleRight;
                             break;
                     }
                     break;
-                case Core2D.TextVAlignment.Bottom:
+                case Core2D.Style.TextVAlignment.Bottom:
                     switch (text.Style.TextStyle.TextHAlignment)
                     {
                         default:
-                        case Core2D.TextHAlignment.Left:
+                        case Core2D.Style.TextHAlignment.Left:
                             attachmentPoint = MTextAttachmentPoint.BottomLeft;
                             break;
-                        case Core2D.TextHAlignment.Center:
+                        case Core2D.Style.TextHAlignment.Center:
                             attachmentPoint = MTextAttachmentPoint.BottomCenter;
                             break;
-                        case Core2D.TextHAlignment.Right:
+                        case Core2D.Style.TextHAlignment.Right:
                             attachmentPoint = MTextAttachmentPoint.BottomRight;
                             break;
                     }
@@ -943,10 +943,10 @@ namespace Dependencies
             var fs = text.Style.TextStyle.FontStyle;
             if (fs != null)
             {
-                options.Bold = fs.Flags.HasFlag(Core2D.FontStyleFlags.Bold);
-                options.Italic = fs.Flags.HasFlag(Core2D.FontStyleFlags.Italic);
-                options.Underline = fs.Flags.HasFlag(Core2D.FontStyleFlags.Underline);
-                options.StrikeThrough = fs.Flags.HasFlag(Core2D.FontStyleFlags.Strikeout);
+                options.Bold = fs.Flags.HasFlag(Core2D.Style.FontStyleFlags.Bold);
+                options.Italic = fs.Flags.HasFlag(Core2D.Style.FontStyleFlags.Italic);
+                options.Underline = fs.Flags.HasFlag(Core2D.Style.FontStyleFlags.Underline);
+                options.StrikeThrough = fs.Flags.HasFlag(Core2D.Style.FontStyleFlags.Strikeout);
             }
 
             options.Aligment = MTextFormattingOptions.TextAligment.Default;
@@ -961,14 +961,14 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.XImage image, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
+        public override void Draw(object dc, Core2D.Shapes.XImage image, double dx, double dy, ImmutableArray<Core2D.Data.XProperty> db, Core2D.Data.Database.XRecord r)
         {
             var _dxf = dc as DxfDocument;
 
             var bytes = State.ImageCache.GetImage(image.Key);
             if (bytes != null)
             {
-                var rect = Core2D.Rect2.Create(image.TopLeft, image.BottomRight, dx, dy);
+                var rect = Core2D.Math.Rect2.Create(image.TopLeft, image.BottomRight, dx, dy);
 
                 var dxfImageDefinitionCached = _biCache.Get(image.Key);
                 if (dxfImageDefinitionCached != null)
@@ -1002,7 +1002,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.XPath path, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
+        public override void Draw(object dc, Core2D.Shapes.XPath path, double dx, double dy, ImmutableArray<Core2D.Data.XProperty> db, Core2D.Data.Database.XRecord r)
         {
             if (!path.IsStroked && !path.IsFilled)
                 return;
