@@ -1,8 +1,8 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using System;
+using static System.Math;
 
-namespace Core2D
+namespace Core2D.Math.Sat
 {
     /// <summary>
     /// Projection for Separating Axis Theorem implementation.
@@ -36,31 +36,20 @@ namespace Core2D
         /// </summary>
         /// <param name="p"></param>
         /// <returns></returns>
-        public bool Overlap(Projection p)
-        {
-            return !(this.Min > p.Max || p.Min > this.Max);
-        }
+        public bool Overlap(Projection p) => !(this.Min > p.Max || p.Min > this.Max);
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="p"></param>
         /// <returns></returns>
-        public double GetOverlap(Projection p)
-        {
-            return !this.Overlap(p) ?
-                0.0 :
-                Math.Abs(Math.Max(this.Min, p.Min) - Math.Min(this.Max, p.Max));
-        }
+        public double GetOverlap(Projection p) => !this.Overlap(p) ? 0.0 : Abs(Max(this.Min, p.Min) - Min(this.Max, p.Max));
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="p"></param>
         /// <returns></returns>
-        public bool Contains(Projection p)
-        {
-            return (this.Min <= p.Min && this.Max >= p.Max);
-        }
+        public bool Contains(Projection p) => (this.Min <= p.Min && this.Max >= p.Max);
     }
 }

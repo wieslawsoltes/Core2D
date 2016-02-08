@@ -1,8 +1,9 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
+using static System.Math;
 
-namespace Core2D
+namespace Core2D.Math.Sat
 {
     /// <summary>
     /// SAT Separating Axis Theorem.
@@ -214,8 +215,8 @@ namespace Core2D
                     if (p1.Contains(p2) || p2.Contains(p1))
                     {
                         // get the overlap plus the distance from the minimum end points
-                        double mins = Math.Abs(p1.Min - p2.Min);
-                        double maxs = Math.Abs(p1.Max - p2.Max);
+                        double mins = Abs(p1.Min - p2.Min);
+                        double maxs = Abs(p1.Max - p2.Max);
                         // NOTE: depending on which is smaller you may need to
                         // negate the separating axis!!
                         if (mins < maxs)
@@ -258,8 +259,8 @@ namespace Core2D
                     if (p1.Contains(p2) || p2.Contains(p1))
                     {
                         // get the overlap plus the distance from the minimum end points
-                        double mins = Math.Abs(p1.Min - p2.Min);
-                        double maxs = Math.Abs(p1.Max - p2.Max);
+                        double mins = Abs(p1.Min - p2.Min);
+                        double maxs = Abs(p1.Max - p2.Max);
                         // NOTE: depending on which is smaller you may need to
                         // negate the separating axis!!
                         if (mins < maxs)
