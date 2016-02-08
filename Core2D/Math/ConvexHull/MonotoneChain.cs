@@ -2,7 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 
-namespace Core2D
+namespace Core2D.Math.ConvexHull
 {
     /// <summary>
     /// Implementation of Andrew's monotone chain 2D convex hull algorithm.
