@@ -97,7 +97,6 @@
     <Compile Include="Editor\Tools\ToolSelectionTests.cs" />
     <Compile Include="Editor\Tools\ToolTextTests.cs" />
     <Compile Include="History\HistoryTests.cs" />
-    <Compile Include="IO\FileSystemTests.cs" />
     <Compile Include="Math\Arc\GdiArcTests.cs" />
     <Compile Include="Math\Arc\WpfArcTests.cs" />
     <Compile Include="Math\ConvexHull\MonotoneChainTests.cs" />
