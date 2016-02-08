@@ -408,9 +408,9 @@ namespace Core2D
 
             Editor.DefaultTools();
 
+            Editor.CommandManager = new CommandManager();
             Editor.InitializeCommands();
             InitializeCommands(Editor);
-            Commands.Register();
 
             Editor.OnNew(null);
 
