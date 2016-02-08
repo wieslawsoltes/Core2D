@@ -2,8 +2,9 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Globalization;
+using static System.Math;
 
-namespace Core2D
+namespace Core2D.Math
 {
     /// <summary>
     /// Two dimensional vector.
@@ -179,7 +180,7 @@ namespace Core2D
         /// </summary>
         /// <param name="v"></param>
         /// <returns></returns>
-        public double Angle(Vector2 v) => Math.Acos(Dot(v));
+        public double Angle(Vector2 v) => Acos(Dot(v));
 
         /// <summary>
         /// 
@@ -275,7 +276,7 @@ namespace Core2D
         /// 
         /// </summary>
         /// <returns></returns>
-        public double Magnitude() => Math.Sqrt(X * X + Y * Y);
+        public double Magnitude() => Sqrt(X * X + Y * Y);
 
         /// <summary>
         /// 
@@ -287,7 +288,7 @@ namespace Core2D
         /// 
         /// </summary>
         /// <returns></returns>
-        public double Length() => Math.Sqrt(X * X + Y * Y);
+        public double Length() => Sqrt(X * X + Y * Y);
 
         /// <summary>
         /// 
@@ -360,9 +361,9 @@ namespace Core2D
         public Vector2 Slerp(Vector2 v, double amount)
         {
             double dot = Clamp(this.Dot(v), -1.0, 1.0);
-            double theta = Math.Acos(dot) * amount;
+            double theta = Acos(dot) * amount;
             Vector2 relative = (v - this * dot).Normalize();
-            return ((this * Math.Cos(theta)) + (relative * Math.Sin(theta)));
+            return ((this * Cos(theta)) + (relative * Sin(theta)));
         }
 
         /// <summary>
@@ -382,7 +383,7 @@ namespace Core2D
         {
             double dx = X - v.X;
             double dy = Y - v.Y;
-            return Math.Sqrt(dx * dx + dy * dy);
+            return Sqrt(dx * dx + dy * dy);
         }
 
         /// <summary>
@@ -403,12 +404,12 @@ namespace Core2D
         /// <summary>
         /// 
         /// </summary>
-        public const double RadiansToDegrees = 180.0 / Math.PI;
+        public const double RadiansToDegrees = 180.0 / PI;
 
         /// <summary>
         /// 
         /// </summary>
-        public const double DegreesToRadians = Math.PI / 180.0;
+        public const double DegreesToRadians = PI / 180.0;
 
         /// <summary>
         /// 

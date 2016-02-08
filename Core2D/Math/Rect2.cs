@@ -1,8 +1,9 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using System;
+using Core2D.Shapes;
+using static System.Math;
 
-namespace Core2D
+namespace Core2D.Math
 {
     /// <summary>
     /// Rectangle shape.
@@ -102,10 +103,10 @@ namespace Core2D
         /// <returns></returns>
         public static Rect2 Create(double x1, double y1, double x2, double y2, double dx = 0.0, double dy = 0.0)
         {
-            double tlx = Math.Min(x1, x2);
-            double tly = Math.Min(y1, y2);
-            double brx = Math.Max(x1, x2);
-            double bry = Math.Max(y1, y2);
+            double tlx = Min(x1, x2);
+            double tly = Min(y1, y2);
+            double brx = Max(x1, x2);
+            double bry = Max(y1, y2);
             double x = tlx + dx;
             double y = tly + dy;
             double width = (brx + dx) - x;

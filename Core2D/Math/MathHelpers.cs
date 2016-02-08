@@ -1,9 +1,9 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using System;
+using static System.Math;
 using System.Collections.Generic;
 
-namespace Core2D
+namespace Core2D.Math
 {
     /// <summary>
     /// Math helper methods.
@@ -17,7 +17,7 @@ namespace Core2D
         /// <returns>Angle in radians.</returns>
         public static double DegreesToRadians(double angleInDegrees)
         {
-            return angleInDegrees * (Math.PI / 180.0);
+            return angleInDegrees * (PI / 180.0);
         }
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace Core2D
         /// <returns>Angle in decimal degrees.</returns>
         public static double RadiansToDegrees(double angleInRadians)
         {
-            return angleInRadians * (180.0 / Math.PI);
+            return angleInRadians * (180.0 / PI);
         }
 
         /// <summary>
@@ -40,9 +40,9 @@ namespace Core2D
         /// <returns>The angle between line in degrees.</returns>
         public static double AngleLineSegments(Point2 line1Start, Point2 line1End, Point2 line2Start, Point2 line2End)
         {
-            double angle1 = Math.Atan2(line1Start.Y - line1End.Y, line1Start.X - line1End.X);
-            double angle2 = Math.Atan2(line2Start.Y - line2End.Y, line2Start.X - line2End.X);
-            double result = (angle2 - angle1) * 180.0 / Math.PI;
+            double angle1 = Atan2(line1Start.Y - line1End.Y, line1Start.X - line1End.X);
+            double angle2 = Atan2(line2Start.Y - line2End.Y, line2Start.X - line2End.X);
+            double result = (angle2 - angle1) * 180.0 / PI;
             if (result < 0)
                 result += 360.0;
             return result;
@@ -100,8 +100,8 @@ namespace Core2D
             }
             else if (discriminant > 0)
             {
-                solutions.Add((-B + Math.Sqrt(discriminant)) / 2 / A);
-                solutions.Add((-B - Math.Sqrt(discriminant)) / 2 / A);
+                solutions.Add((-B + Sqrt(discriminant)) / 2 / A);
+                solutions.Add((-B - Sqrt(discriminant)) / 2 / A);
             }
 
             var points = new List<Point2>();
@@ -131,7 +131,7 @@ namespace Core2D
         {
             double dx = x1 - x2;
             double dy = y1 - y2;
-            return Math.Sqrt(dx * dx + dy * dy);
+            return Sqrt(dx * dx + dy * dy);
         }
 
         /// <summary>

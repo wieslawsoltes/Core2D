@@ -1,8 +1,8 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using System;
+using static System.Math;
 
-namespace Core2D
+namespace Core2D.Math
 {
     /// <summary>
     /// Two dimensional point.
@@ -39,7 +39,7 @@ namespace Core2D
         {
             double dx = this.X - point.X;
             double dy = this.Y - point.Y;
-            return Math.Sqrt(dx * dx + dy * dy);
+            return Sqrt(dx * dx + dy * dy);
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace Core2D
         {
             double dx = this.X - x;
             double dy = this.Y - y;
-            return Math.Sqrt(dx * dx + dy * dy);
+            return Sqrt(dx * dx + dy * dy);
         }
 
         /// <summary>
@@ -63,9 +63,9 @@ namespace Core2D
         /// <returns></returns>
         public Point2 RotateAt(Point2 centerPoint, double angleInDegrees)
         {
-            double angleInRadians = angleInDegrees * (Math.PI / 180.0);
-            double cosTheta = Math.Cos(angleInRadians);
-            double sinTheta = Math.Sin(angleInRadians);
+            double angleInRadians = angleInDegrees * (PI / 180.0);
+            double cosTheta = Cos(angleInRadians);
+            double sinTheta = Sin(angleInRadians);
             return new Point2
             {
                 X = (cosTheta * (this.X - centerPoint.X) - sinTheta * (this.Y - centerPoint.Y) + centerPoint.X),
