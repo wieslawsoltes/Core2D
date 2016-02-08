@@ -84,9 +84,10 @@ The core library and editor are portable and should work on all platforms where 
 
 For building Core2D mirror repository is used for [.net dxf Reader-Writer](https://github.com/Core2D/netdxf)
 
-## Contact
+## Resources
 
-https://github.com/Core2D/Core2D
+* [Project website and API Reference.](http://core2d.github.io/)
+* [GitHub sourcer code respository.](https://github.com/Core2D/Core2D)
 
 ## License
 
