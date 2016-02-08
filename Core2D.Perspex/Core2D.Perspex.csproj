@@ -466,6 +466,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core2D\Core2D.csproj">
+      <Project>{4ee581b0-45f3-4d7e-beae-277abf5f3fdd}</Project>
+      <Name>Core2D</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Dependencies\FileWriter.Dxf\FileWriter.Dxf.csproj">
       <Project>{D40B3BCD-0A26-40BB-960B-9464D248C934}</Project>
       <Name>FileWriter.Dxf</Name>
@@ -501,10 +505,6 @@
     <ProjectReference Include="..\Dependencies\TextFieldWriter.CsvHelper\TextFieldWriter.CsvHelper.csproj">
       <Project>{87302D12-1184-402D-BF23-A5699F3D0BB4}</Project>
       <Name>TextFieldWriter.CsvHelper</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Core2D\Core2D.csproj">
-      <Project>{8C419CD0-F8A2-4A85-B72B-84BC7FF59616}</Project>
-      <Name>Core2D</Name>
     </ProjectReference>
     <ProjectReference Include="..\Dependencies\Renderer.Perspex\Renderer.Perspex.csproj">
       <Project>{dee86be6-43b1-45fb-8a56-7977c1d0964e}</Project>
