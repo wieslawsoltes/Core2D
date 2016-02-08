@@ -3,7 +3,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Core2D
+namespace Core2D.Path.Parser
 {
     /// <summary>
     /// <see cref="XPathGeometry"/> mini-language string representation parser.
