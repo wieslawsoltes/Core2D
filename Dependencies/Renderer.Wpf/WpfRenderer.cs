@@ -1,5 +1,13 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Data;
+using Core2D.Data.Database;
+using Core2D.Math.Arc;
+using Core2D.Path;
+using Core2D.Project;
+using Core2D.Renderer;
+using Core2D.Shapes;
+using Core2D.Style;
 using System;
 using System.Collections.Immutable;
 using System.Diagnostics;
@@ -8,14 +16,13 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using Core2D;
 
 namespace Dependencies
 {
     /// <summary>
     /// Native Windows Presentation Foundation shape renderer.
     /// </summary>
-    public class WpfRenderer : Renderer
+    public class WpfRenderer : ShapeRenderer
     {
         private Cache<ShapeStyle, Tuple<Brush, Pen>> _styleCache = 
             Cache<ShapeStyle, Tuple<Brush, Pen>>.Create();
@@ -41,10 +48,10 @@ namespace Dependencies
         private Cache<XPath, Tuple<XPathGeometry, StreamGeometry, ShapeStyle>> _pathCache =
             Cache<XPath, Tuple<XPathGeometry, StreamGeometry, ShapeStyle>>.Create();
 
-        private RendererState _state = new RendererState();
+        private ShapeRendererState _state = new ShapeRendererState();
 
         /// <inheritdoc/>
-        public override RendererState State
+        public override ShapeRendererState State
         {
             get { return _state; }
             set { Update(ref _state, value); }
@@ -62,7 +69,7 @@ namespace Dependencies
         /// Creates a new <see cref="WpfRenderer"/> instance.
         /// </summary>
         /// <returns>The new instance of the <see cref="WpfRenderer"/> class.</returns>
-        public static Renderer Create()
+        public static ShapeRenderer Create()
         {
             return new WpfRenderer();
         }
@@ -388,7 +395,7 @@ namespace Dependencies
         /// </summary>
         /// <param name="dc"></param>
         /// <param name="template"></param>
-        private static void DrawTemplateBackground(DrawingContext dc, Container template)
+        private static void DrawTemplateBackground(DrawingContext dc, XContainer template)
         {
             var brush = CreateBrush(template.Background);
             var rect = new Rect(0, 0, template.Width, template.Height);
@@ -420,7 +427,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Page page, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, XPage page, ImmutableArray<XProperty> db, XRecord r)
         {
             DrawTemplateBackground(dc as DrawingContext, page.Template);
 
@@ -428,7 +435,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Layer layer, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, XLayer layer, ImmutableArray<XProperty> db, XRecord r)
         {
             var _dc = dc as DrawingContext;
 
@@ -442,7 +449,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XLine line, double dx, double dy, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, XLine line, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
         {
             var _dc = dc as DrawingContext;
 
@@ -639,7 +646,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XRectangle rectangle, double dx, double dy, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, XRectangle rectangle, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
         {
             var _dc = dc as DrawingContext;
 
@@ -691,7 +698,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XEllipse ellipse, double dx, double dy, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, XEllipse ellipse, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
         {
             var _dc = dc as DrawingContext;
 
@@ -735,7 +742,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XArc arc, double dx, double dy, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, XArc arc, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
         {
             var _dc = dc as DrawingContext;
 
@@ -804,7 +811,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XCubicBezier cubicBezier, double dx, double dy, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, XCubicBezier cubicBezier, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
         {
             var _dc = dc as DrawingContext;
 
@@ -868,7 +875,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XQuadraticBezier quadraticBezier, double dx, double dy, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, XQuadraticBezier quadraticBezier, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
         {
             var _dc = dc as DrawingContext;
 
@@ -931,7 +938,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XText text, double dx, double dy, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, XText text, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
         {
             var _dc = dc as DrawingContext;
 
@@ -987,12 +994,12 @@ namespace Dependencies
 
                 if (style.TextStyle.FontStyle != null)
                 {
-                    if (style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Italic))
+                    if (style.TextStyle.FontStyle.Flags.HasFlag(Core2D.Style.FontStyleFlags.Italic))
                     {
                         fontStyle = System.Windows.FontStyles.Italic;
                     }
 
-                    if (style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Bold))
+                    if (style.TextStyle.FontStyle.Flags.HasFlag(Core2D.Style.FontStyleFlags.Bold))
                     {
                         fontWeight = FontWeights.Bold;
                     }
@@ -1014,18 +1021,18 @@ namespace Dependencies
 
                 if (style.TextStyle.FontStyle != null)
                 {
-                    if (style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Underline)
-                    || style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Strikeout))
+                    if (style.TextStyle.FontStyle.Flags.HasFlag(Core2D.Style.FontStyleFlags.Underline)
+                    || style.TextStyle.FontStyle.Flags.HasFlag(Core2D.Style.FontStyleFlags.Strikeout))
                     {
                         var decorations = new TextDecorationCollection();
 
-                        if (style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Underline))
+                        if (style.TextStyle.FontStyle.Flags.HasFlag(Core2D.Style.FontStyleFlags.Underline))
                         {
                             decorations = new TextDecorationCollection(
                                 decorations.Union(TextDecorations.Underline));
                         }
 
-                        if (style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Strikeout))
+                        if (style.TextStyle.FontStyle.Flags.HasFlag(Core2D.Style.FontStyleFlags.Strikeout))
                         {
                             decorations = new TextDecorationCollection(
                                 decorations.Union(TextDecorations.Strikethrough));
@@ -1044,7 +1051,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XImage image, double dx, double dy, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, XImage image, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
         {
             if (image.Key == null)
                 return;
@@ -1124,7 +1131,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XPath path, double dx, double dy, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, XPath path, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
         {
             if (path.Geometry == null)
                 return;

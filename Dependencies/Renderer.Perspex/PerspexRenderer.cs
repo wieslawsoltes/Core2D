@@ -1,20 +1,26 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Data;
+using Core2D.Data.Database;
+using Core2D.Math;
+using Core2D.Math.Arc;
+using Core2D.Renderer;
+using Core2D.Shapes;
+using Core2D.Style;
+using Perspex;
+using Perspex.Media;
+using Perspex.Media.Imaging;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
-using Perspex;
-using Perspex.Media;
-using Perspex.Media.Imaging;
-using Core2D;
 
 namespace Dependencies
 {
     /// <summary>
     /// Native Perspex shape renderer.
     /// </summary>
-    public class PerspexRenderer : Renderer
+    public class PerspexRenderer : ShapeRenderer
     {
         private bool _enableImageCache = true;
         private IDictionary<string, Bitmap> _biCache;
@@ -45,7 +51,7 @@ namespace Dependencies
         /// Creates a new <see cref="PerspexRenderer"/> instance.
         /// </summary>
         /// <returns>The new instance of the <see cref="PerspexRenderer"/> class.</returns>
-        public static Renderer Create()
+        public static ShapeRenderer Create()
         {
             return new PerspexRenderer();
         }
@@ -465,7 +471,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XLine line, double dx, double dy, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, XLine line, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
         {
             var _dc = dc as DrawingContext;
 
@@ -477,7 +483,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XRectangle rectangle, double dx, double dy, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, XRectangle rectangle, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
         {
             var _dc = dc as DrawingContext;
 
@@ -510,7 +516,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XEllipse ellipse, double dx, double dy, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, XEllipse ellipse, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
         {
             var _dc = dc as DrawingContext;
 
@@ -532,7 +538,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XArc arc, double dx, double dy, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, XArc arc, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
         {
             if (!arc.IsFilled && !arc.IsStroked)
                 return;
@@ -568,7 +574,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XCubicBezier cubicBezier, double dx, double dy, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, XCubicBezier cubicBezier, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
         {
             if (!cubicBezier.IsFilled && !cubicBezier.IsStroked)
                 return;
@@ -600,7 +606,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XQuadraticBezier quadraticBezier, double dx, double dy, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, XQuadraticBezier quadraticBezier, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
         {
             if (!quadraticBezier.IsFilled && !quadraticBezier.IsStroked)
                 return;
@@ -631,7 +637,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XText text, double dx, double dy, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, XText text, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
         {
             var _gfx = dc as DrawingContext;
 
@@ -693,7 +699,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XImage image, double dx, double dy, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, XImage image, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
         {
             var _dc = dc as DrawingContext;
 
@@ -768,7 +774,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XPath path, double dx, double dy, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, XPath path, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
         {
             if (!path.IsFilled && !path.IsStroked)
                 return;
