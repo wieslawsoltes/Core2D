@@ -1,11 +1,16 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Data;
+using Core2D.Data.Database;
+using Core2D.Renderer;
+using Core2D.Shape;
+using Core2D.Style;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 
-namespace Core2D
+namespace Core2D.Shapes
 {
     /// <summary>
     /// Text shape.
@@ -44,7 +49,7 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Renderer renderer, double dx, double dy, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, ShapeRenderer renderer, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
         {
             var record = this.Data.Record ?? r;
 
@@ -108,7 +113,7 @@ namespace Core2D
         /// <param name="columnName">The column name.</param>
         /// <param name="value">The output string bound to data record.</param>
         /// <returns>True if binding was successful.</returns>
-        private static bool TryToBind(Record r, string columnName, out string value)
+        private static bool TryToBind(XRecord r, string columnName, out string value)
         {
             if (string.IsNullOrEmpty(columnName) || r == null)
             {
@@ -144,7 +149,7 @@ namespace Core2D
         /// <param name="propertyName">The target property name.</param>
         /// <param name="value">The string bound to properties.</param>
         /// <returns>True if binding was successful.</returns>
-        private static bool TryToBind(ImmutableArray<Property> db, string propertyName, out string value)
+        private static bool TryToBind(ImmutableArray<XProperty> db, string propertyName, out string value)
         {
             if (string.IsNullOrEmpty(propertyName) || db == null)
             {
@@ -169,7 +174,7 @@ namespace Core2D
         /// <param name="db">The properties database used for binding.</param>
         /// <param name="r">The external data record used for binding.</param>
         /// <returns>The string bound to properties or data record.</returns>
-        public string BindText(ImmutableArray<Property> db, Record r)
+        public string BindText(ImmutableArray<XProperty> db, XRecord r)
         {
             var record = this.Data.Record ?? r;
 

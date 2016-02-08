@@ -1,10 +1,15 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using System;
+using Core2D.Data;
+using Core2D.Data.Database;
+using Core2D.Renderer;
+using Core2D.Shape;
+using Core2D.Style;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using static System.Math;
 
-namespace Core2D
+namespace Core2D.Shapes
 {
     /// <summary>
     /// Line shape.
@@ -33,7 +38,7 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Renderer renderer, double dx, double dy, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, ShapeRenderer renderer, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
         {
             var record = this.Data.Record ?? r;
 
@@ -176,7 +181,7 @@ namespace Core2D
             {
                 if (ls.FixedLength.Flags.HasFlag(LineFixedLengthFlags.Vertical))
                 {
-                    bool isVertical = Math.Round(x1, 1) == Math.Round(x2, 1);
+                    bool isVertical = Round(x1, 1) == Round(x2, 1);
                     if (isVertical)
                     {
                         SetMaxLengthVertical(line, ref y1, ref y2);
@@ -185,7 +190,7 @@ namespace Core2D
 
                 if (ls.FixedLength.Flags.HasFlag(LineFixedLengthFlags.Horizontal))
                 {
-                    bool isHorizontal = Math.Round(y1, 1) == Math.Round(y2, 1);
+                    bool isHorizontal = Round(y1, 1) == Round(y2, 1);
                     if (isHorizontal)
                     {
                         SetMaxLengthHorizontal(line, ref x1, ref x2);
@@ -218,7 +223,7 @@ namespace Core2D
             {
                 double dx = x1 - x2;
                 double dy = y1 - y2;
-                double distance = Math.Sqrt(dx * dx + dy * dy);
+                double distance = Sqrt(dx * dx + dy * dy);
                 x1 = x2 - (x2 - x1) / distance * ls.FixedLength.Length;
                 y1 = y2 - (y2 - y1) / distance * ls.FixedLength.Length;
             }
@@ -227,7 +232,7 @@ namespace Core2D
             {
                 double dx = x2 - x1;
                 double dy = y2 - y1;
-                double distance = Math.Sqrt(dx * dx + dy * dy);
+                double distance = Sqrt(dx * dx + dy * dy);
                 x2 = x1 - (x1 - x2) / distance * ls.FixedLength.Length;
                 y2 = y1 - (y1 - y2) / distance * ls.FixedLength.Length;
             }
