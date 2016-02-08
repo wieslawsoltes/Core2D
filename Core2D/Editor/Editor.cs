@@ -14,6 +14,7 @@ namespace Core2D
     public sealed class Editor : ObservableObject
     {
         private ILog _log;
+        private ICommandManager _commandManager;
         private IFileSystem _fileIO;
         private Project _project;
         private string _projectPath;
@@ -48,6 +49,15 @@ namespace Core2D
         {
             get { return _log; }
             set { Update(ref _log, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets current command manager.
+        /// </summary>
+        public ICommandManager CommandManager
+        {
+            get { return _commandManager; }
+            set { Update(ref _commandManager, value); }
         }
 
         /// <summary>
