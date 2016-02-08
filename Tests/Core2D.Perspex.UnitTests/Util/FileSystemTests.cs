@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using Xunit;
 
-namespace Core2D.UnitTests
+namespace Core2D.Perspex.UnitTests
 {
     public class FileSystemTests
     {
         [Fact]
-        [Trait("Core2D", "IO")]
+        [Trait("Core2D.Perspex", "Util")]
         public void Implements_IFileSystem_Interface()
         {
             var target = new FileSystem();
@@ -18,7 +18,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "IO")]
+        [Trait("Core2D.Perspex", "Util")]
         public void Open_Path_Throws_FileNotFoundException()
         {
             var target = new FileSystem();
@@ -30,7 +30,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "IO")]
+        [Trait("Core2D.Perspex", "Util")]
         public void Create_Path_Creates_New_File()
         {
             var target = new FileSystem();
@@ -43,7 +43,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "IO")]
+        [Trait("Core2D.Perspex", "Util")]
         public void ReadBinary_Read_All_Bytes_From_Stream()
         {
             var target = new FileSystem();
@@ -59,7 +59,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "IO")]
+        [Trait("Core2D.Perspex", "Util")]
         public void WriteBinary_Write_All_Bytes_To_Stream()
         {
             var target = new FileSystem();
@@ -76,7 +76,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "IO")]
+        [Trait("Core2D.Perspex", "Util")]
         public void ReadUtf8Text_Read_String_From_Stream()
         {
             var target = new FileSystem();
@@ -92,7 +92,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "IO")]
+        [Trait("Core2D.Perspex", "Util")]
         public void WriteUtf8Text_Write_String_To_Stream()
         {
             var target = new FileSystem();
@@ -111,7 +111,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "IO")]
+        [Trait("Core2D.Perspex", "Util")]
         public void ReadUtf8Text_Read_String_From_Path()
         {
             var target = new FileSystem();
@@ -123,7 +123,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "IO")]
+        [Trait("Core2D.Perspex", "Util")]
         public void WriteUtf8Text_Write_String_To_Path()
         {
             var target = new FileSystem();

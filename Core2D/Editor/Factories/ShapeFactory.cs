@@ -281,7 +281,11 @@ namespace Core2D
         /// <inheritdoc/>
         public XImage Image(string path, XPoint topLeft, XPoint bottomRight, bool isStroked = false, bool isFilled = false, string text = null)
         {
-            var bytes = System.IO.File.ReadAllBytes(path);
+            byte[] bytes;
+            using (var stream = _editor.FileIO?.Open(path))
+            {
+                bytes = _editor.FileIO?.ReadBinary(stream);
+            }
             var key = _editor.Project.AddImageFromFile(path, bytes);
             var image = XImage.Create(
                 topLeft,

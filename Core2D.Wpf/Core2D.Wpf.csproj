@@ -298,6 +298,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Util\DesignerHelper.cs" />
+    <Compile Include="Util\EditorCommandManager.cs" />
+    <Compile Include="Util\FileSystem.cs" />
     <Compile Include="Util\TextClipboard.cs" />
     <Page Include="Controls\Data\ColumnsControl.xaml">
       <SubType>Designer</SubType>
@@ -559,6 +561,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core2D\Core2D.csproj">
+      <Project>{4ee581b0-45f3-4d7e-beae-277abf5f3fdd}</Project>
+      <Name>Core2D</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Dependencies\FileWriter.Dxf\FileWriter.Dxf.csproj">
       <Project>{d40b3bcd-0a26-40bb-960b-9464d248c934}</Project>
       <Name>FileWriter.Dxf</Name>
@@ -598,10 +604,6 @@
     <ProjectReference Include="..\Dependencies\TextFieldWriter.CsvHelper\TextFieldWriter.CsvHelper.csproj">
       <Project>{87302d12-1184-402d-bf23-a5699f3d0bb4}</Project>
       <Name>TextFieldWriter.CsvHelper</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Core2D\Core2D.csproj">
-      <Project>{8c419cd0-f8a2-4a85-b72b-84bc7ff59616}</Project>
-      <Name>Core2D</Name>
     </ProjectReference>
     <ProjectReference Include="..\Dependencies\TextFieldReader.CsvHelper\TextFieldReader.CsvHelper.csproj">
       <Project>{64bae9e8-93b5-4edc-8ad6-5a3dcba8c051}</Project>

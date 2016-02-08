@@ -37,8 +37,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "netDxf", "Dependencies\netD
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Renderer.Perspex", "Dependencies\Renderer.Perspex\Renderer.Perspex.csproj", "{DEE86BE6-43B1-45FB-8A56-7977C1D0964E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D", "Core2D\Core2D.csproj", "{8C419CD0-F8A2-4A85-B72B-84BC7FF59616}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.Perspex", "Core2D.Perspex\Core2D.Perspex.csproj", "{4868069E-3AD4-497E-9B8E-148D1EEACFD7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serializer.Xaml", "Dependencies\Serializer.Xaml\Serializer.Xaml.csproj", "{5B85143E-A53C-4126-8666-031A3172EFDF}"
@@ -57,6 +55,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.Wpf.UnitTests", "Tests\Core2D.Wpf.UnitTests\Core2D.Wpf.UnitTests.csproj", "{E9C30F6F-00DD-494A-8E7C-253A5C76E999}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.Perspex.UnitTests", "Tests\Core2D.Perspex.UnitTests\Core2D.Perspex.UnitTests.csproj", "{AD91E9DC-52E7-4883-B03C-7BA87A2B44A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D", "Core2D\Core2D.csproj", "{4EE581B0-45F3-4D7E-BEAE-277ABF5F3FDD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -128,10 +128,6 @@ Global
 		{DEE86BE6-43B1-45FB-8A56-7977C1D0964E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DEE86BE6-43B1-45FB-8A56-7977C1D0964E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DEE86BE6-43B1-45FB-8A56-7977C1D0964E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8C419CD0-F8A2-4A85-B72B-84BC7FF59616}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8C419CD0-F8A2-4A85-B72B-84BC7FF59616}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8C419CD0-F8A2-4A85-B72B-84BC7FF59616}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8C419CD0-F8A2-4A85-B72B-84BC7FF59616}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4868069E-3AD4-497E-9B8E-148D1EEACFD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4868069E-3AD4-497E-9B8E-148D1EEACFD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4868069E-3AD4-497E-9B8E-148D1EEACFD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -160,6 +156,10 @@ Global
 		{AD91E9DC-52E7-4883-B03C-7BA87A2B44A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD91E9DC-52E7-4883-B03C-7BA87A2B44A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD91E9DC-52E7-4883-B03C-7BA87A2B44A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4EE581B0-45F3-4D7E-BEAE-277ABF5F3FDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EE581B0-45F3-4D7E-BEAE-277ABF5F3FDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EE581B0-45F3-4D7E-BEAE-277ABF5F3FDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EE581B0-45F3-4D7E-BEAE-277ABF5F3FDD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

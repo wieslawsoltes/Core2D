@@ -14,6 +14,7 @@ namespace Core2D
     public sealed class Editor : ObservableObject
     {
         private ILog _log;
+        private ICommandManager _commandManager;
         private IFileSystem _fileIO;
         private Project _project;
         private string _projectPath;
@@ -48,6 +49,15 @@ namespace Core2D
         {
             get { return _log; }
             set { Update(ref _log, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets current command manager.
+        /// </summary>
+        public ICommandManager CommandManager
+        {
+            get { return _commandManager; }
+            set { Update(ref _commandManager, value); }
         }
 
         /// <summary>
@@ -379,7 +389,7 @@ namespace Core2D
             {
                 if (_fileIO != null && _protoBufSerializer != null)
                 {
-                    if (!string.IsNullOrEmpty(path) && System.IO.File.Exists(path))
+                    if (!string.IsNullOrEmpty(path) && _fileIO.Exists(path))
                     {
                         var project = Project.Open(path, _fileIO, _protoBufSerializer);
                         if (project != null)
@@ -1750,7 +1760,11 @@ namespace Core2D
                 }
                 else
                 {
-                    var bytes = System.IO.File.ReadAllBytes(path);
+                    byte[] bytes;
+                    using (var stream = _fileIO?.Open(path))
+                    {
+                        bytes = _fileIO?.ReadBinary(stream);
+                    }
                     var key = _project.AddImageFromFile(path, bytes);
                     return key;
                 }
@@ -2154,7 +2168,7 @@ namespace Core2D
                     var recent = _jsonSerializer.Deserialize<Recent>(json);
                     if (recent != null)
                     {
-                        var remove = recent.RecentProjects.Where(x => System.IO.File.Exists(x.Path) == false).ToList();
+                        var remove = recent.RecentProjects.Where(x => _fileIO?.Exists(x.Path) == false).ToList();
                         var builder = recent.RecentProjects.ToBuilder();
 
                         foreach (var file in remove)
@@ -2165,7 +2179,7 @@ namespace Core2D
                         RecentProjects = builder.ToImmutable();
 
                         if (recent.CurrentRecentProject != null
-                            && System.IO.File.Exists(recent.CurrentRecentProject.Path))
+                            && (_fileIO?.Exists(recent.CurrentRecentProject.Path) ?? false))
                         {
                             CurrentRecentProject = recent.CurrentRecentProject;
                         }
@@ -2647,67 +2661,67 @@ namespace Core2D
 
                         string ext = System.IO.Path.GetExtension(path);
 
-                        if (string.Compare(ext, Constants.ProjectExtension, true) == 0)
+                        if (string.Compare(ext, Constants.ProjectExtension, StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             Open(path);
                             result = true;
                         }
-                        else if (string.Compare(ext, Constants.CsvExtension, true) == 0)
+                        else if (string.Compare(ext, Constants.CsvExtension, StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             OnImportData(path);
                             result = true;
                         }
-                        else if (string.Compare(ext, Constants.StyleExtension, true) == 0)
+                        else if (string.Compare(ext, Constants.StyleExtension, StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             OnImportObject(path, _project.CurrentStyleLibrary, CoreType.Style);
                             result = true;
                         }
-                        else if (string.Compare(ext, Constants.StylesExtension, true) == 0)
+                        else if (string.Compare(ext, Constants.StylesExtension, StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             OnImportObject(path, _project.CurrentStyleLibrary, CoreType.Styles);
                             result = true;
                         }
-                        else if (string.Compare(ext, Constants.StyleLibraryExtension, true) == 0)
+                        else if (string.Compare(ext, Constants.StyleLibraryExtension, StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             OnImportObject(path, _project, CoreType.StyleLibrary);
                             result = true;
                         }
-                        else if (string.Compare(ext, Constants.StyleLibrariesExtension, true) == 0)
+                        else if (string.Compare(ext, Constants.StyleLibrariesExtension, StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             OnImportObject(path, _project, CoreType.StyleLibraries);
                             result = true;
                         }
-                        else if (string.Compare(ext, Constants.GroupExtension, true) == 0)
+                        else if (string.Compare(ext, Constants.GroupExtension, StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             OnImportObject(path, _project.CurrentGroupLibrary, CoreType.Group);
                             result = true;
                         }
-                        else if (string.Compare(ext, Constants.GroupsExtension, true) == 0)
+                        else if (string.Compare(ext, Constants.GroupsExtension, StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             OnImportObject(path, _project.CurrentGroupLibrary, CoreType.Groups);
                             result = true;
                         }
-                        else if (string.Compare(ext, Constants.GroupLibraryExtension, true) == 0)
+                        else if (string.Compare(ext, Constants.GroupLibraryExtension, StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             OnImportObject(path, _project, CoreType.GroupLibrary);
                             result = true;
                         }
-                        else if (string.Compare(ext, Constants.GroupLibrariesExtension, true) == 0)
+                        else if (string.Compare(ext, Constants.GroupLibrariesExtension, StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             OnImportObject(path, _project, CoreType.GroupLibraries);
                             result = true;
                         }
-                        else if (string.Compare(ext, Constants.TemplateExtension, true) == 0)
+                        else if (string.Compare(ext, Constants.TemplateExtension, StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             OnImportObject(path, _project, CoreType.Template);
                             result = true;
                         }
-                        else if (string.Compare(ext, Constants.TemplatesExtension, true) == 0)
+                        else if (string.Compare(ext, Constants.TemplatesExtension, StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             OnImportObject(path, _project, CoreType.Templates);
                             result = true;
                         }
-                        else if (string.Compare(ext, Constants.XamlExtension, true) == 0)
+                        else if (string.Compare(ext, Constants.XamlExtension, StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             OnImportXaml(path);
                             result = true;

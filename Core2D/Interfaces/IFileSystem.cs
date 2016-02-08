@@ -14,6 +14,13 @@ namespace Core2D
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
+        bool Exists(string path);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
         Stream Open(string path);
 
         /// <summary>

@@ -64,9 +64,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Util\FileSystemTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core2D.Perspex\Core2D.Perspex.csproj">
+      <Project>{4868069e-3ad4-497e-9b8e-148d1eeacfd7}</Project>
+      <Name>Core2D.Perspex</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core2D\Core2D.csproj">
+      <Project>{4ee581b0-45f3-4d7e-beae-277abf5f3fdd}</Project>
+      <Name>Core2D</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

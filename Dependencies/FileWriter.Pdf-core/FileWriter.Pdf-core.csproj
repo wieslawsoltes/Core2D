@@ -50,13 +50,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Core2D\Core2D.csproj">
+      <Project>{4ee581b0-45f3-4d7e-beae-277abf5f3fdd}</Project>
+      <Name>Core2D</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Renderer.PdfSharp-core\Renderer.PdfSharp-core.csproj">
       <Project>{34c8ee31-a1fe-4a74-be36-c1f38bc06fec}</Project>
       <Name>Renderer.PdfSharp-core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Core2D\Core2D.csproj">
-      <Project>{8c419cd0-f8a2-4a85-b72b-84bc7ff59616}</Project>
-      <Name>Core2D</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

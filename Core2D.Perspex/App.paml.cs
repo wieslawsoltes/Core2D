@@ -216,7 +216,10 @@ namespace Core2D.Perspex
 
             _editor.InitializeCommands();
             InitializeCommands(_editor);
-            Commands.Register();
+
+            var manager = new EditorCommandManager();
+            manager.RegisterCommands();
+            _editor.CommandManager = manager;
         }
 
         /// <summary>

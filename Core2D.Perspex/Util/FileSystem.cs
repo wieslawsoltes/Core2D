@@ -3,13 +3,19 @@
 using System.IO;
 using System.Text;
 
-namespace Core2D
+namespace Core2D.Perspex
 {
     /// <summary>
     /// File system implementation using System.IO.
     /// </summary>
     public sealed class FileSystem : IFileSystem
     {
+        /// <inheritdoc/>
+        public bool Exists(string path)
+        {
+            return File.Exists(path);
+        }
+
         /// <inheritdoc/>
         public Stream Open(string path)
         {
