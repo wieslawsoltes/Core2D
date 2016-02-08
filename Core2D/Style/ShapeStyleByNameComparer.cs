@@ -3,7 +3,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Core2D
+namespace Core2D.Style
 {
     /// <summary>
     /// Defines methods to support the comparison of <see cref="ShapeStyle"/> objects for equality.
