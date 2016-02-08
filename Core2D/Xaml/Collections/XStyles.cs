@@ -1,17 +1,18 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Style;
+using Portable.Xaml.Markup;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using Portable.Xaml.Markup;
 
-namespace Core2D
+namespace Core2D.Xaml.Collections
 {
     /// <summary>
     /// Observable <see cref="ShapeStyle"/> collection.
     /// </summary>
     [ContentProperty(nameof(Children))]
     [RuntimeNameProperty(nameof(Name))]
-    public sealed class Styles : ObservableResource
+    public sealed class XStyles : ObservableResource
     {
         /// <summary>
         /// Gets or sets container name.
@@ -24,9 +25,9 @@ namespace Core2D
         public ICollection<ShapeStyle> Children { get; set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Styles"/> class.
+        /// Initializes a new instance of the <see cref="XStyles"/> class.
         /// </summary>
-        public Styles()
+        public XStyles()
         {
             Children = new Collection<ShapeStyle>();
         }
