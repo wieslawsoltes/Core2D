@@ -3,7 +3,7 @@
 using System.Collections.Generic;
 using System.Windows.Input;
 
-namespace Core2D
+namespace Core2D.Editor.Input
 {
     /// <summary>
     /// Defines command manager contract.

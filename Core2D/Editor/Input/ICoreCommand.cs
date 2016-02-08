@@ -3,7 +3,7 @@
 using System;
 using System.Windows.Input;
 
-namespace Core2D
+namespace Core2D.Editor.Input
 {
     /// <summary>
     /// Input command.
