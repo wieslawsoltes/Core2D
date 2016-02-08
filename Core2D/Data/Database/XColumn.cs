@@ -1,21 +1,21 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using System;
 using Portable.Xaml.Markup;
+using System;
 
-namespace Core2D
+namespace Core2D.Data.Database
 {
     /// <summary>
     /// Database column.
     /// </summary>
     [ContentProperty(nameof(Name))]
-    public sealed class Column : ObservableObject
+    public sealed class XColumn : ObservableObject
     {
         private Guid _id;
         private string _name;
         private double _width;
         private bool _isVisible;
-        private Database _owner;
+        private XDatabase _owner;
 
         /// <summary>
         /// Gets or sets column Id.
@@ -56,23 +56,23 @@ namespace Core2D
         /// <summary>
         /// Gets or sets column owner object.
         /// </summary>
-        public Database Owner
+        public XDatabase Owner
         {
             get { return _owner; }
             set { Update(ref _owner, value); }
         }
 
         /// <summary>
-        /// Creates a new <see cref="Column"/> instance.
+        /// Creates a new <see cref="XColumn"/> instance.
         /// </summary>
         /// <param name="owner">The owner instance.</param>
         /// <param name="name">The column name.</param>
         /// <param name="width">The column width.</param>
         /// <param name="isVisible">The flag indicating whether column is visible.</param>
-        /// <returns>The new instance of the <see cref="Column"/> class.</returns>
-        public static Column Create(Database owner, string name, double width = double.NaN, bool isVisible = true)
+        /// <returns>The new instance of the <see cref="XColumn"/> class.</returns>
+        public static XColumn Create(XDatabase owner, string name, double width = double.NaN, bool isVisible = true)
         {
-            return new Column()
+            return new XColumn()
             {
                 Id = Guid.NewGuid(),
                 Name = name,

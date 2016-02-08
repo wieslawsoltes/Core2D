@@ -2,17 +2,17 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Portable.Xaml.Markup;
 
-namespace Core2D
+namespace Core2D.Data
 {
     /// <summary>
     /// Data property.
     /// </summary>
     [ContentProperty(nameof(Value))]
-    public sealed class Property : ObservableObject
+    public sealed class XProperty : ObservableObject
     {
         private string _name;
         private string _value;
-        private Data _owner;
+        private XContext _owner;
 
         /// <summary>
         /// Gets or sets property name.
@@ -35,22 +35,22 @@ namespace Core2D
         /// <summary>
         /// Gets or sets property owner.
         /// </summary>
-        public Data Owner
+        public XContext Owner
         {
             get { return _owner; }
             set { Update(ref _owner, value); }
         }
 
         /// <summary>
-        /// Creates a new <see cref="Property"/> instance.
+        /// Creates a new <see cref="XProperty"/> instance.
         /// </summary>
         /// <param name="owner">The property owner.</param>
         /// <param name="name">The property name.</param>
         /// <param name="value">The property value.</param>
-        /// <returns>The new instance of the <see cref="Property"/> class.</returns>
-        public static Property Create(Data owner, string name, string value)
+        /// <returns>The new instance of the <see cref="XProperty"/> class.</returns>
+        public static XProperty Create(XContext owner, string name, string value)
         {
-            return new Property()
+            return new XProperty()
             {
                 Name = name,
                 Value = value,

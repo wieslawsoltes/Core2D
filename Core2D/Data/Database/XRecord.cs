@@ -1,31 +1,31 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Portable.Xaml.Markup;
 using System;
 using System.Collections.Immutable;
 using System.Linq;
-using Portable.Xaml.Markup;
 
-namespace Core2D
+namespace Core2D.Data.Database
 {
     /// <summary>
     /// Database record.
     /// </summary>
     [ContentProperty(nameof(Values))]
-    public sealed class Record : ObservableObject
+    public sealed class XRecord : ObservableObject
     {
         private Guid _id;
-        private ImmutableArray<Column> _columns;
-        private ImmutableArray<Value> _values;
-        private Database _owner;
+        private ImmutableArray<XColumn> _columns;
+        private ImmutableArray<XValue> _values;
+        private XDatabase _owner;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Record"/> class.
+        /// Initializes a new instance of the <see cref="XRecord"/> class.
         /// </summary>
-        public Record()
+        public XRecord()
             : base()
         {
-            _columns = ImmutableArray.Create<Column>();
-            _values = ImmutableArray.Create<Value>();
+            _columns = ImmutableArray.Create<XColumn>();
+            _values = ImmutableArray.Create<XValue>();
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace Core2D
         /// <summary>
         /// Gets or sets record columns.
         /// </summary>
-        public ImmutableArray<Column> Columns
+        public ImmutableArray<XColumn> Columns
         {
             get { return _columns; }
             set { Update(ref _columns, value); }
@@ -49,7 +49,7 @@ namespace Core2D
         /// <summary>
         /// Gets or sets record values.
         /// </summary>
-        public ImmutableArray<Value> Values
+        public ImmutableArray<XValue> Values
         {
             get { return _values; }
             set { Update(ref _values, value); }
@@ -58,22 +58,22 @@ namespace Core2D
         /// <summary>
         /// Gets or sets record owner.
         /// </summary>
-        public Database Owner
+        public XDatabase Owner
         {
             get { return _owner; }
             set { Update(ref _owner, value); }
         }
 
         /// <summary>
-        /// Creates a new <see cref="Record"/> instance.
+        /// Creates a new <see cref="XRecord"/> instance.
         /// </summary>
         /// <param name="owner">The record owner.</param>
         /// <param name="columns">The record columns.</param>
         /// <param name="values">The record values.</param>
-        /// <returns>The new instance of the <see cref="Record"/> class.</returns>
-        public static Record Create(Database owner, ImmutableArray<Column> columns, ImmutableArray<Value> values)
+        /// <returns>The new instance of the <see cref="XRecord"/> class.</returns>
+        public static XRecord Create(XDatabase owner, ImmutableArray<XColumn> columns, ImmutableArray<XValue> values)
         {
-            return new Record()
+            return new XRecord()
             {
                 Id = Guid.NewGuid(),
                 Columns = columns,
@@ -83,16 +83,16 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Creates a new <see cref="Record"/> instance.
+        /// Creates a new <see cref="XRecord"/> instance.
         /// </summary>
         /// <param name="owner">The record owner.</param>
         /// <param name="id">The record Id.</param>
         /// <param name="columns">The record columns.</param>
         /// <param name="values">The record values.</param>
-        /// <returns>The new instance of the <see cref="Record"/> class.</returns>
-        public static Record Create(Database owner, string id, ImmutableArray<Column> columns, ImmutableArray<Value> values)
+        /// <returns>The new instance of the <see cref="XRecord"/> class.</returns>
+        public static XRecord Create(XDatabase owner, string id, ImmutableArray<XColumn> columns, ImmutableArray<XValue> values)
         {
-            return new Record()
+            return new XRecord()
             {
                 Id = string.IsNullOrWhiteSpace(id) ? Guid.NewGuid() : Guid.Parse(id),
                 Columns = columns,
@@ -102,21 +102,21 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Creates a new <see cref="Record"/> instance.
+        /// Creates a new <see cref="XRecord"/> instance.
         /// </summary>
         /// <param name="owner">The record owner.</param>
         /// <param name="value">The record value.</param>
-        /// <returns>The new instance of the <see cref="Record"/> class.</returns>
-        public static Record Create(Database owner, string value)
+        /// <returns>The new instance of the <see cref="XRecord"/> class.</returns>
+        public static XRecord Create(XDatabase owner, string value)
         {
-            return new Record()
+            return new XRecord()
             {
                 Id = Guid.NewGuid(),
                 Columns = owner.Columns,
                 Values = ImmutableArray.CreateRange(
                     Enumerable.Repeat(
                         value, 
-                        owner.Columns.Length).Select(c => Value.Create(c))),
+                        owner.Columns.Length).Select(c => XValue.Create(c))),
                 Owner = owner
             };
         }

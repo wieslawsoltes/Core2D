@@ -1,32 +1,32 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Portable.Xaml.Markup;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-using Portable.Xaml.Markup;
 
-namespace Core2D
+namespace Core2D.Data.Database
 {
     /// <summary>
     /// Records database.
     /// </summary>
     [ContentProperty(nameof(Records))]
-    public sealed class Database : ObservableObject
+    public sealed class XDatabase : ObservableObject
     {
         private string _name;
         private string _idColumnName;
-        private ImmutableArray<Column> _columns;
-        private ImmutableArray<Record> _records;
-        private Record _currentRecord;
+        private ImmutableArray<XColumn> _columns;
+        private ImmutableArray<XRecord> _records;
+        private XRecord _currentRecord;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Database"/> class.
+        /// Initializes a new instance of the <see cref="XDatabase"/> class.
         /// </summary>
-        public Database()
+        public XDatabase()
             : base()
         {
-            _columns = ImmutableArray.Create<Column>();
-            _records = ImmutableArray.Create<Record>();
+            _columns = ImmutableArray.Create<XColumn>();
+            _records = ImmutableArray.Create<XRecord>();
         }
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace Core2D
         /// <summary>
         /// Gets or sets database columns.
         /// </summary>
-        public ImmutableArray<Column> Columns
+        public ImmutableArray<XColumn> Columns
         {
             get { return _columns; }
             set { Update(ref _columns, value); }
@@ -64,7 +64,7 @@ namespace Core2D
         /// <summary>
         /// Gets or sets database records.
         /// </summary>
-        public ImmutableArray<Record> Records
+        public ImmutableArray<XRecord> Records
         {
             get { return _records; }
             set { Update(ref _records, value); }
@@ -73,58 +73,58 @@ namespace Core2D
         /// <summary>
         /// Gets or sets database current record.
         /// </summary>
-        public Record CurrentRecord
+        public XRecord CurrentRecord
         {
             get { return _currentRecord; }
             set { Update(ref _currentRecord, value); }
         }
 
         /// <summary>
-        /// Creates a new <see cref="Database"/> instance.
+        /// Creates a new <see cref="XDatabase"/> instance.
         /// </summary>
         /// <param name="name">The database name.</param>
         /// <param name="idColumnName">The Id column name.</param>
-        /// <returns>The new instance of the <see cref="Database"/> class.</returns>
-        public static Database Create(string name, string idColumnName = DefaultIdColumnName)
+        /// <returns>The new instance of the <see cref="XDatabase"/> class.</returns>
+        public static XDatabase Create(string name, string idColumnName = DefaultIdColumnName)
         {
-            return new Database()
+            return new XDatabase()
             {
                 Name = name,
                 IdColumnName = idColumnName,
-                Columns = ImmutableArray.Create<Column>(),
-                Records = ImmutableArray.Create<Record>()
+                Columns = ImmutableArray.Create<XColumn>(),
+                Records = ImmutableArray.Create<XRecord>()
             };
         }
 
         /// <summary>
-        /// Creates a new <see cref="Database"/> instance.
+        /// Creates a new <see cref="XDatabase"/> instance.
         /// </summary>
         /// <param name="name">The database name.</param>
         /// <param name="columns">The database columns.</param>
         /// <param name="idColumnName">The Id column name.</param>
-        /// <returns>The new instance of the <see cref="Database"/> class.</returns>
-        public static Database Create(string name, ImmutableArray<Column> columns, string idColumnName = DefaultIdColumnName)
+        /// <returns>The new instance of the <see cref="XDatabase"/> class.</returns>
+        public static XDatabase Create(string name, ImmutableArray<XColumn> columns, string idColumnName = DefaultIdColumnName)
         {
-            return new Database()
+            return new XDatabase()
             {
                 Name = name,
                 IdColumnName = idColumnName,
                 Columns = columns,
-                Records = ImmutableArray.Create<Record>()
+                Records = ImmutableArray.Create<XRecord>()
             };
         }
 
         /// <summary>
-        /// Creates a new <see cref="Database"/> instance.
+        /// Creates a new <see cref="XDatabase"/> instance.
         /// </summary>
         /// <param name="name">The database name.</param>
         /// <param name="columns">The database columns.</param>
         /// <param name="records">The database records.</param>
         /// <param name="idColumnName">The Id column name.</param>
-        /// <returns>The new instance of the <see cref="Database"/> class.</returns>
-        public static Database Create(string name, ImmutableArray<Column> columns, ImmutableArray<Record> records, string idColumnName = DefaultIdColumnName)
+        /// <returns>The new instance of the <see cref="XDatabase"/> class.</returns>
+        public static XDatabase Create(string name, ImmutableArray<XColumn> columns, ImmutableArray<XRecord> records, string idColumnName = DefaultIdColumnName)
         {
-            return new Database()
+            return new XDatabase()
             {
                 Name = name,
                 IdColumnName = idColumnName,
@@ -134,17 +134,17 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Creates a new <see cref="Database"/> instance.
+        /// Creates a new <see cref="XDatabase"/> instance.
         /// </summary>
         /// <param name="name">The database name.</param>
         /// <param name="fields">The fields collection.</param>
         /// <param name="idColumnName">The Id column name.</param>
-        /// <returns>The new instance of the <see cref="Database"/> class.</returns>
-        public static Database FromFields(string name, IEnumerable<string[]> fields, string idColumnName = DefaultIdColumnName)
+        /// <returns>The new instance of the <see cref="XDatabase"/> class.</returns>
+        public static XDatabase FromFields(string name, IEnumerable<string[]> fields, string idColumnName = DefaultIdColumnName)
         {
-            var db = Database.Create(name, idColumnName);
-            var tempColumns = fields.FirstOrDefault().Select(c => Column.Create(db, c));
-            var columns = ImmutableArray.CreateRange<Column>(tempColumns);
+            var db = XDatabase.Create(name, idColumnName);
+            var tempColumns = fields.FirstOrDefault().Select(c => XColumn.Create(db, c));
+            var columns = ImmutableArray.CreateRange<XColumn>(tempColumns);
 
             if (columns.Length >= 1 && columns[0].Name == idColumnName)
             {
@@ -152,12 +152,12 @@ namespace Core2D
                 var tempRecords = fields
                     .Skip(1)
                     .Select(v =>
-                            Record.Create(
+                            XRecord.Create(
                                 db,
                                 v.FirstOrDefault(),
                                 columns,
-                                ImmutableArray.CreateRange<Value>(v.Select(c => Value.Create(c)))));
-                var records = ImmutableArray.CreateRange<Record>(tempRecords);
+                                ImmutableArray.CreateRange<XValue>(v.Select(c => XValue.Create(c)))));
+                var records = ImmutableArray.CreateRange<XRecord>(tempRecords);
 
                 db.Columns = columns;
                 db.Records = records;
@@ -168,11 +168,11 @@ namespace Core2D
                 var tempRecords = fields
                     .Skip(1)
                     .Select(v =>
-                            Record.Create(
+                            XRecord.Create(
                                 db,
                                 columns,
-                                ImmutableArray.CreateRange<Value>(v.Select(c => Value.Create(c)))));
-                var records = ImmutableArray.CreateRange<Record>(tempRecords);
+                                ImmutableArray.CreateRange<XValue>(v.Select(c => XValue.Create(c)))));
+                var records = ImmutableArray.CreateRange<XRecord>(tempRecords);
 
                 db.Columns = columns;
                 db.Records = records;
@@ -188,7 +188,7 @@ namespace Core2D
         /// <param name="source">The source database.</param>
         /// <param name="records">The updated records from destination database.</param>
         /// <returns>True if destination database was updated.</returns>
-        public static bool Update(Database destination, Database source, out ImmutableArray<Record>.Builder records)
+        public static bool Update(XDatabase destination, XDatabase source, out ImmutableArray<XRecord>.Builder records)
         {
             bool isDirty = false;
             records = null;

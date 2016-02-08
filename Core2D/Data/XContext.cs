@@ -1,33 +1,34 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Data.Database;
+using Portable.Xaml.Markup;
 using System.Collections.Immutable;
 using System.Linq;
-using Portable.Xaml.Markup;
 
-namespace Core2D
+namespace Core2D.Data
 {
     /// <summary>
     /// Data context.
     /// </summary>
     [ContentProperty(nameof(Properties))]
-    public sealed class Data : ObservableObject
+    public sealed class XContext : ObservableObject
     {
-        private ImmutableArray<Property> _properties;
-        private Record _record;
+        private ImmutableArray<XProperty> _properties;
+        private XRecord _record;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Data"/> class.
+        /// Initializes a new instance of the <see cref="XContext"/> class.
         /// </summary>
-        public Data()
+        public XContext()
             : base()
         {
-            _properties = ImmutableArray.Create<Property>();
+            _properties = ImmutableArray.Create<XProperty>();
         }
 
         /// <summary>
-        /// Gets or sets a collection <see cref="Property"/> that will be used during drawing.
+        /// Gets or sets a collection <see cref="XProperty"/> that will be used during drawing.
         /// </summary>
-        public ImmutableArray<Property> Properties
+        public ImmutableArray<XProperty> Properties
         {
             get { return _properties; }
             set { Update(ref _properties, value); }
@@ -36,14 +37,14 @@ namespace Core2D
         /// <summary>
         /// Gets or sets shape data record.
         /// </summary>
-        public Record Record
+        public XRecord Record
         {
             get { return _record; }
             set { Update(ref _record, value); }
         }
 
         /// <summary>
-        /// Gets or sets <see cref="Property.Value"/> using name as key for <see cref="Properties"/> array values.
+        /// Gets or sets <see cref="XProperty.Value"/> using name as key for <see cref="Properties"/> array values.
         /// </summary>
         /// <remarks>
         /// If property with the specified key does not exist it is created.
@@ -72,7 +73,7 @@ namespace Core2D
                     }
                     else
                     {
-                        var property = Property.Create(this, name, value);
+                        var property = XProperty.Create(this, name, value);
                         Properties = Properties.Add(property);
                     }
                 }
@@ -80,22 +81,22 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Creates a new <see cref="Data"/> instance.
+        /// Creates a new <see cref="XContext"/> instance.
         /// </summary>
-        /// <returns>The new instance of the <see cref="Data"/> class.</returns>
-        public static Data Create()
+        /// <returns>The new instance of the <see cref="XContext"/> class.</returns>
+        public static XContext Create()
         {
-            return new Data();
+            return new XContext();
         }
 
         /// <summary>
-        /// Creates a new <see cref="Data"/> instance.
+        /// Creates a new <see cref="XContext"/> instance.
         /// </summary>
         /// <param name="record">The record instance.</param>
-        /// <returns>The new instance of the <see cref="Data"/> class.</returns>
-        public static Data Create(Record record)
+        /// <returns>The new instance of the <see cref="XContext"/> class.</returns>
+        public static XContext Create(XRecord record)
         {
-            return new Data()
+            return new XContext()
             {
                 Record = record
             };
