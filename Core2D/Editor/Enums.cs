@@ -1,8 +1,11 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Path;
+using Core2D.Project;
+using Core2D.Style;
 using System;
 
-namespace Core2D
+namespace Core2D.Editor
 {
     /// <summary>
     /// Static enum value arrays.
@@ -15,7 +18,7 @@ namespace Core2D
         private static ArrowType[] _arrowTypeValues = (ArrowType[])Enum.GetValues(typeof(ArrowType));
         private static TextHAlignment[] _textHAlignmentValues = (TextHAlignment[])Enum.GetValues(typeof(TextHAlignment));
         private static TextVAlignment[] _textVAlignmentValues = (TextVAlignment[])Enum.GetValues(typeof(TextVAlignment));
-        private static MoveMode[] _moveModeValues = (MoveMode[])Enum.GetValues(typeof(MoveMode));
+        private static XMoveMode[] _moveModeValues = (XMoveMode[])Enum.GetValues(typeof(XMoveMode));
         private static XFillRule[] _xFillRuleValues = (XFillRule[])Enum.GetValues(typeof(XFillRule));
         private static XSweepDirection[] _xSweepDirectionValues = (XSweepDirection[])Enum.GetValues(typeof(XSweepDirection));
 
@@ -68,9 +71,9 @@ namespace Core2D
         }
 
         /// <summary>
-        /// The <see cref="MoveMode"/> enum values.
+        /// The <see cref="XMoveMode"/> enum values.
         /// </summary>
-        public static MoveMode[] MoveModeValues
+        public static XMoveMode[] MoveModeValues
         {
             get { return _moveModeValues; }
         }

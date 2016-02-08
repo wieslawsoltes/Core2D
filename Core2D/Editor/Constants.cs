@@ -1,7 +1,12 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Data;
+using Core2D.Data.Database;
+using Core2D.Project;
+using Core2D.Shapes;
+using Core2D.Style;
 
-namespace Core2D
+namespace Core2D.Editor
 {
     /// <summary>
     /// Editor constants.
@@ -9,37 +14,37 @@ namespace Core2D
     public static class Constants
     {
         /// <summary>
-        /// Default <see cref="Layer"/> name.
+        /// Default <see cref="XLayer"/> name.
         /// </summary>
         public const string DefaultLayerName = "Layer";
 
         /// <summary>
-        /// Default <see cref="Template"/> name.
+        /// Default <see cref="XTemplate"/> name.
         /// </summary>
         public const string DefaultTemplateName = "Template";
 
         /// <summary>
-        /// Default <see cref="Page"/> name.
+        /// Default <see cref="XPage"/> name.
         /// </summary>
         public const string DefaultPageName = "Page";
 
         /// <summary>
-        /// Default <see cref="Document"/> name.
+        /// Default <see cref="XDocument"/> name.
         /// </summary>
         public const string DefaultDocumentName = "Document";
 
         /// <summary>
-        /// Default <see cref="Database"/> name.
+        /// Default <see cref="XDatabase"/> name.
         /// </summary>
         public const string DefaultDatabaseName = "Db";
 
         /// <summary>
-        /// Default <see cref="Column"/> name.
+        /// Default <see cref="XColumn"/> name.
         /// </summary>
         public const string DefaulColumnName = "Column";
 
         /// <summary>
-        /// Default <see cref="Property"/> name.
+        /// Default <see cref="XProperty"/> name.
         /// </summary>
         public const string DefaulPropertyName = "Property";
 
@@ -49,7 +54,7 @@ namespace Core2D
         public const string DefaulValue = "<empty>";
 
         /// <summary>
-        /// Default <see cref="Library{XGroup}"/> name.
+        /// Default <see cref="XLibrary{XGroup}"/> name.
         /// </summary>
         public const string DefaulGroupLibraryName = "Groups";
 
@@ -59,7 +64,7 @@ namespace Core2D
         public const string DefaulGroupName = "Group";
 
         /// <summary>
-        /// Default <see cref="Library{ShapeStyle}"/> name.
+        /// Default <see cref="XLibrary{ShapeStyle}"/> name.
         /// </summary>
         public const string DefaulStyleLibraryName = "Styles";
 
@@ -69,12 +74,12 @@ namespace Core2D
         public const string DefaulStyleName = "Style";
 
         /// <summary>
-        /// Default imported <see cref="Library{ShapeStyle}"/> name.
+        /// Default imported <see cref="XLibrary{ShapeStyle}"/> name.
         /// </summary>
         public const string ImportedStyleLibraryName = "Imported";
 
         /// <summary>
-        ///  Default imported <see cref="Database"/> name.
+        ///  Default imported <see cref="XDatabase"/> name.
         /// </summary>
         public const string ImportedDatabaseName = "Imported";
 

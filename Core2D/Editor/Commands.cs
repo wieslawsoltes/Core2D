@@ -1,11 +1,15 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Data;
+using Core2D.Data.Database;
+using Core2D.Editor.Input;
+using Core2D.Project;
+using Core2D.Shape;
+using Core2D.Shapes;
+using Core2D.Style;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Windows.Input;
 
-namespace Core2D
+namespace Core2D.Editor
 {
     /// <summary>
     /// Project editor commands.
@@ -55,67 +59,67 @@ namespace Core2D
         /// <summary>
         /// Import database.
         /// </summary>
-        public static ICoreCommand<Project> ImportDataCommand { get; set; }
+        public static ICoreCommand<XProject> ImportDataCommand { get; set; }
 
         /// <summary>
         /// Export database.
         /// </summary>
-        public static ICoreCommand<Database> ExportDataCommand { get; set; }
+        public static ICoreCommand<XDatabase> ExportDataCommand { get; set; }
 
         /// <summary>
         /// Update database.
         /// </summary>
-        public static ICoreCommand<Database> UpdateDataCommand { get; set; }
+        public static ICoreCommand<XDatabase> UpdateDataCommand { get; set; }
 
         /// <summary>
         /// Import style.
         /// </summary>
-        public static ICoreCommand<Library<ShapeStyle>> ImportStyleCommand { get; set; }
+        public static ICoreCommand<XLibrary<ShapeStyle>> ImportStyleCommand { get; set; }
 
         /// <summary>
         /// Import styles.
         /// </summary>
-        public static ICoreCommand<Library<ShapeStyle>> ImportStylesCommand { get; set; }
+        public static ICoreCommand<XLibrary<ShapeStyle>> ImportStylesCommand { get; set; }
 
         /// <summary>
         /// Import style library.
         /// </summary>
-        public static ICoreCommand<Project> ImportStyleLibraryCommand { get; set; }
+        public static ICoreCommand<XProject> ImportStyleLibraryCommand { get; set; }
 
         /// <summary>
         /// Import style libraries.
         /// </summary>
-        public static ICoreCommand<Project> ImportStyleLibrariesCommand { get; set; }
+        public static ICoreCommand<XProject> ImportStyleLibrariesCommand { get; set; }
 
         /// <summary>
         /// Import group.
         /// </summary>
-        public static ICoreCommand<Library<XGroup>> ImportGroupCommand { get; set; }
+        public static ICoreCommand<XLibrary<XGroup>> ImportGroupCommand { get; set; }
 
         /// <summary>
         /// Import groups.
         /// </summary>
-        public static ICoreCommand<Library<XGroup>> ImportGroupsCommand { get; set; }
+        public static ICoreCommand<XLibrary<XGroup>> ImportGroupsCommand { get; set; }
 
         /// <summary>
         /// Import group library.
         /// </summary>
-        public static ICoreCommand<Project> ImportGroupLibraryCommand { get; set; }
+        public static ICoreCommand<XProject> ImportGroupLibraryCommand { get; set; }
 
         /// <summary>
         /// Import group libraries.
         /// </summary>
-        public static ICoreCommand<Project> ImportGroupLibrariesCommand { get; set; }
+        public static ICoreCommand<XProject> ImportGroupLibrariesCommand { get; set; }
 
         /// <summary>
         /// Import template.
         /// </summary>
-        public static ICoreCommand<Project> ImportTemplateCommand { get; set; }
+        public static ICoreCommand<XProject> ImportTemplateCommand { get; set; }
 
         /// <summary>
         /// Import templates.
         /// </summary>
-        public static ICoreCommand<Project> ImportTemplatesCommand { get; set; }
+        public static ICoreCommand<XProject> ImportTemplatesCommand { get; set; }
 
         /// <summary>
         /// Export style.
@@ -125,17 +129,17 @@ namespace Core2D
         /// <summary>
         /// Export styles.
         /// </summary>
-        public static ICoreCommand<Library<ShapeStyle>> ExportStylesCommand { get; set; }
+        public static ICoreCommand<XLibrary<ShapeStyle>> ExportStylesCommand { get; set; }
 
         /// <summary>
         /// Export style library.
         /// </summary>
-        public static ICoreCommand<Library<ShapeStyle>> ExportStyleLibraryCommand { get; set; }
+        public static ICoreCommand<XLibrary<ShapeStyle>> ExportStyleLibraryCommand { get; set; }
 
         /// <summary>
         /// Export style libraries.
         /// </summary>
-        public static ICoreCommand<IEnumerable<Library<ShapeStyle>>> ExportStyleLibrariesCommand { get; set; }
+        public static ICoreCommand<IEnumerable<XLibrary<ShapeStyle>>> ExportStyleLibrariesCommand { get; set; }
 
         /// <summary>
         /// Export group.
@@ -145,27 +149,27 @@ namespace Core2D
         /// <summary>
         /// Export groups.
         /// </summary>
-        public static ICoreCommand<Library<XGroup>> ExportGroupsCommand { get; set; }
+        public static ICoreCommand<XLibrary<XGroup>> ExportGroupsCommand { get; set; }
 
         /// <summary>
         /// Export group library.
         /// </summary>
-        public static ICoreCommand<Library<XGroup>> ExportGroupLibraryCommand { get; set; }
+        public static ICoreCommand<XLibrary<XGroup>> ExportGroupLibraryCommand { get; set; }
 
         /// <summary>
         /// Export group libraries.
         /// </summary>
-        public static ICoreCommand<IEnumerable<Library<XGroup>>> ExportGroupLibrariesCommand { get; set; }
+        public static ICoreCommand<IEnumerable<XLibrary<XGroup>>> ExportGroupLibrariesCommand { get; set; }
 
         /// <summary>
         /// Export template.
         /// </summary>
-        public static ICoreCommand<Template> ExportTemplateCommand { get; set; }
+        public static ICoreCommand<XTemplate> ExportTemplateCommand { get; set; }
 
         /// <summary>
         /// Export templates.
         /// </summary>
-        public static ICoreCommand<IEnumerable<Template>> ExportTemplatesCommand { get; set; }
+        public static ICoreCommand<IEnumerable<XTemplate>> ExportTemplatesCommand { get; set; }
 
         /// <summary>
         /// Undo last action.
@@ -333,32 +337,32 @@ namespace Core2D
         public static ICoreCommand ToolMoveCommand { get; set; }
 
         /// <summary>
-        /// Toggle <see cref="Options.DefaultIsStroked"/> option.
+        /// Toggle <see cref="XOptions.DefaultIsStroked"/> option.
         /// </summary>
         public static ICoreCommand DefaultIsStrokedCommand { get; set; }
 
         /// <summary>
-        /// Toggle <see cref="Options.DefaultIsFilled"/> option.
+        /// Toggle <see cref="XOptions.DefaultIsFilled"/> option.
         /// </summary>
         public static ICoreCommand DefaultIsFilledCommand { get; set; }
 
         /// <summary>
-        /// Toggle <see cref="Options.DefaultIsClosed"/> option.
+        /// Toggle <see cref="XOptions.DefaultIsClosed"/> option.
         /// </summary>
         public static ICoreCommand DefaultIsClosedCommand { get; set; }
 
         /// <summary>
-        /// Toggle <see cref="Options.DefaultIsSmoothJoin"/> option.
+        /// Toggle <see cref="XOptions.DefaultIsSmoothJoin"/> option.
         /// </summary>
         public static ICoreCommand DefaultIsSmoothJoinCommand { get; set; }
 
         /// <summary>
-        /// Toggle <see cref="Options.SnapToGrid"/> option.
+        /// Toggle <see cref="XOptions.SnapToGrid"/> option.
         /// </summary>
         public static ICoreCommand SnapToGridCommand { get; set; }
 
         /// <summary>
-        /// Toggle <see cref="Options.TryToConnect"/> option.
+        /// Toggle <see cref="XOptions.TryToConnect"/> option.
         /// </summary>
         public static ICoreCommand TryToConnectCommand { get; set; }
 
@@ -370,37 +374,37 @@ namespace Core2D
         /// <summary>
         /// Remove database.
         /// </summary>
-        public static ICoreCommand<Database> RemoveDatabaseCommand { get; set; }
+        public static ICoreCommand<XDatabase> RemoveDatabaseCommand { get; set; }
 
         /// <summary>
         /// Add column to database columns collection.
         /// </summary>
-        public static ICoreCommand<Database> AddColumnCommand { get; set; }
+        public static ICoreCommand<XDatabase> AddColumnCommand { get; set; }
 
         /// <summary>
         /// Remove column from database columns collection.
         /// </summary>
-        public static ICoreCommand<Column> RemoveColumnCommand { get; set; }
+        public static ICoreCommand<XColumn> RemoveColumnCommand { get; set; }
 
         /// <summary>
         /// Add record to database records collection.
         /// </summary>
-        public static ICoreCommand<Database> AddRecordCommand { get; set; }
+        public static ICoreCommand<XDatabase> AddRecordCommand { get; set; }
 
         /// <summary>
         /// Remove record from database records collection.
         /// </summary>
-        public static ICoreCommand<Record> RemoveRecordCommand { get; set; }
+        public static ICoreCommand<XRecord> RemoveRecordCommand { get; set; }
 
         /// <summary>
         /// Reset data record.
         /// </summary>
-        public static ICoreCommand<Data> ResetRecordCommand { get; set; }
+        public static ICoreCommand<XContext> ResetRecordCommand { get; set; }
 
         /// <summary>
         /// Set record as shape(s) or current page data record.
         /// </summary>
-        public static ICoreCommand<Record> ApplyRecordCommand { get; set; }
+        public static ICoreCommand<XRecord> ApplyRecordCommand { get; set; }
 
         /// <summary>
         /// Add shape.
@@ -415,12 +419,12 @@ namespace Core2D
         /// <summary>
         /// Add property.
         /// </summary>
-        public static ICoreCommand<Data> AddPropertyCommand { get; set; }
+        public static ICoreCommand<XContext> AddPropertyCommand { get; set; }
 
         /// <summary>
         /// Remove property.
         /// </summary>
-        public static ICoreCommand<Property> RemovePropertyCommand { get; set; }
+        public static ICoreCommand<XProperty> RemovePropertyCommand { get; set; }
 
         /// <summary>
         /// Add group library.
@@ -430,12 +434,12 @@ namespace Core2D
         /// <summary>
         /// Remove group library.
         /// </summary>
-        public static ICoreCommand<Library<XGroup>> RemoveGroupLibraryCommand { get; set; }
+        public static ICoreCommand<XLibrary<XGroup>> RemoveGroupLibraryCommand { get; set; }
 
         /// <summary>
         /// Add group.
         /// </summary>
-        public static ICoreCommand<Library<XGroup>> AddGroupCommand { get; set; }
+        public static ICoreCommand<XLibrary<XGroup>> AddGroupCommand { get; set; }
 
         /// <summary>
         /// Remove group.
@@ -450,12 +454,12 @@ namespace Core2D
         /// <summary>
         /// Add layer.
         /// </summary>
-        public static ICoreCommand<Container> AddLayerCommand { get; set; }
+        public static ICoreCommand<XContainer> AddLayerCommand { get; set; }
 
         /// <summary>
         /// Remove layer.
         /// </summary>
-        public static ICoreCommand<Layer> RemoveLayerCommand { get; set; }
+        public static ICoreCommand<XLayer> RemoveLayerCommand { get; set; }
 
         /// <summary>
         /// Add style library.
@@ -465,12 +469,12 @@ namespace Core2D
         /// <summary>
         /// Remove style library.
         /// </summary>
-        public static ICoreCommand<Library<ShapeStyle>> RemoveStyleLibraryCommand { get; set; }
+        public static ICoreCommand<XLibrary<ShapeStyle>> RemoveStyleLibraryCommand { get; set; }
 
         /// <summary>
         /// Add style.
         /// </summary>
-        public static ICoreCommand<Library<ShapeStyle>> AddStyleCommand { get; set; }
+        public static ICoreCommand<XLibrary<ShapeStyle>> AddStyleCommand { get; set; }
 
         /// <summary>
         /// Remove style.
@@ -490,17 +494,17 @@ namespace Core2D
         /// <summary>
         /// Remove template.
         /// </summary>
-        public static ICoreCommand<Template> RemoveTemplateCommand { get; set; }
+        public static ICoreCommand<XTemplate> RemoveTemplateCommand { get; set; }
 
         /// <summary>
         /// Edit template.
         /// </summary>
-        public static ICoreCommand<Template> EditTemplateCommand { get; set; }
+        public static ICoreCommand<XTemplate> EditTemplateCommand { get; set; }
 
         /// <summary>
         /// Set page template.
         /// </summary>
-        public static ICoreCommand<Template> ApplyTemplateCommand { get; set; }
+        public static ICoreCommand<XTemplate> ApplyTemplateCommand { get; set; }
 
         /// <summary>
         /// Add image key.
@@ -515,7 +519,7 @@ namespace Core2D
         /// <summary>
         /// Notifies when selected project tree item changed.
         /// </summary>
-        public static ICoreCommand<Selectable> SelectedItemChangedCommand { get; set; }
+        public static ICoreCommand<XSelectable> SelectedItemChangedCommand { get; set; }
 
         /// <summary>
         /// Add page.
