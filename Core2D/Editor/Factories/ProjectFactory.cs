@@ -1,8 +1,13 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Data.Database;
+using Core2D.Project;
+using Core2D.Shape;
+using Core2D.Shapes;
+using Core2D.Style;
 using System.Linq;
 
-namespace Core2D
+namespace Core2D.Editor.Factories
 {
     /// <summary>
     /// Factory used to create new projects, documents and containers.
@@ -10,12 +15,12 @@ namespace Core2D
     public sealed class ProjectFactory : IProjectFactory
     {
         /// <summary>
-        /// Creates a new instance of the <see cref="Library{ShapeStyle}"/> class.
+        /// Creates a new instance of the <see cref="XLibrary{ShapeStyle}"/> class.
         /// </summary>
-        /// <returns>The new instance of the <see cref="Library{ShapeStyle}"/>.</returns>
-        public static Library<ShapeStyle> DefaultStyleLibrary()
+        /// <returns>The new instance of the <see cref="XLibrary{ShapeStyle}"/>.</returns>
+        public static XLibrary<ShapeStyle> DefaultStyleLibrary()
         {
-            var sgd = Library<ShapeStyle>.Create("Default");
+            var sgd = XLibrary<ShapeStyle>.Create("Default");
 
             var builder = sgd.Items.ToBuilder();
             builder.Add(ShapeStyle.Create("Black", 255, 0, 0, 0, 80, 0, 0, 0, 2.0));
@@ -33,12 +38,12 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Creates a new instance of the <see cref="Library{ShapeStyle}"/> class.
+        /// Creates a new instance of the <see cref="XLibrary{ShapeStyle}"/> class.
         /// </summary>
-        /// <returns>The new instance of the <see cref="Library{ShapeStyle}"/>.</returns>
-        public static Library<ShapeStyle> LinesStyleLibrary()
+        /// <returns>The new instance of the <see cref="XLibrary{ShapeStyle}"/>.</returns>
+        public static XLibrary<ShapeStyle> LinesStyleLibrary()
         {
-            var sgdl = Library<ShapeStyle>.Create("Lines");
+            var sgdl = XLibrary<ShapeStyle>.Create("Lines");
 
             var solid = ShapeStyle.Create("Solid", 255, 0, 0, 0, 80, 0, 0, 0, 2.0);
             solid.Dashes = default(string);
@@ -74,12 +79,12 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Creates a new instance of the <see cref="Library{ShapeStyle}"/> class.
+        /// Creates a new instance of the <see cref="XLibrary{ShapeStyle}"/> class.
         /// </summary>
-        /// <returns>The new instance of the <see cref="Library{ShapeStyle}"/>.</returns>
-        public static Library<ShapeStyle> TemplateStyleLibrary()
+        /// <returns>The new instance of the <see cref="XLibrary{ShapeStyle}"/>.</returns>
+        public static XLibrary<ShapeStyle> TemplateStyleLibrary()
         {
-            var sgt = Library<ShapeStyle>.Create("Template");
+            var sgt = XLibrary<ShapeStyle>.Create("Template");
             var gs = ShapeStyle.Create("Grid", 255, 222, 222, 222, 255, 222, 222, 222, 1.0);
 
             var builder = sgt.Items.ToBuilder();
@@ -92,12 +97,12 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Creates a new instance of the <see cref="Template"/> class.
+        /// Creates a new instance of the <see cref="XTemplate"/> class.
         /// </summary>
         /// <param name="project">The new container owner project.</param>
         /// <param name="name">The new container name.</param>
-        /// <returns>The new instance of the <see cref="Template"/>.</returns>
-        private Template CreateGridTemplate(Project project, string name)
+        /// <returns>The new instance of the <see cref="XTemplate"/>.</returns>
+        private XTemplate CreateGridTemplate(XProject project, string name)
         {
             var template = GetTemplate(project, name);
 
@@ -126,36 +131,36 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public Template GetTemplate(Project project, string name)
+        public XTemplate GetTemplate(XProject project, string name)
         {
-            var template = Template.Create(name);
+            var template = XTemplate.Create(name);
             template.Background = ArgbColor.Create(0xFF, 0xFF, 0xFF, 0xFF);
             return template;
         }
 
         /// <inheritdoc/>
-        public Page GetPage(Project project, string name)
+        public XPage GetPage(XProject project, string name)
         {
-            var container = Page.Create(name);
+            var container = XPage.Create(name);
             container.Template = project.CurrentTemplate ?? GetTemplate(project, "Empty");
             return container;
         }
 
         /// <inheritdoc/>
-        public Document GetDocument(Project project, string name)
+        public XDocument GetDocument(XProject project, string name)
         {
-            var document = Document.Create(name);
+            var document = XDocument.Create(name);
             return document;
         }
 
         /// <inheritdoc/>
-        public Project GetProject()
+        public XProject GetProject()
         {
-            var project = Project.Create();
+            var project = XProject.Create();
 
             // Group Libraries
             var glBuilder = project.GroupLibraries.ToBuilder();
-            glBuilder.Add(Library<XGroup>.Create("Default"));
+            glBuilder.Add(XLibrary<XGroup>.Create("Default"));
             project.GroupLibraries = glBuilder.ToImmutable();
 
             project.SetCurrentGroupLibrary(project.GroupLibraries.FirstOrDefault());
@@ -192,10 +197,10 @@ namespace Core2D
             project.Selected = document.Pages.FirstOrDefault();
 
             // Databases
-            var db = Database.Create("Db");
+            var db = XDatabase.Create("Db");
             var columnsBuilder = db.Columns.ToBuilder();
-            columnsBuilder.Add(Column.Create(db, "Column0"));
-            columnsBuilder.Add(Column.Create(db, "Column1"));
+            columnsBuilder.Add(XColumn.Create(db, "Column0"));
+            columnsBuilder.Add(XColumn.Create(db, "Column1"));
             db.Columns = columnsBuilder.ToImmutable();
             project.Databases = project.Databases.Add(db);
 

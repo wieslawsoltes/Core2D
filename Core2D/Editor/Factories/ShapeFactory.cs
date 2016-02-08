@@ -1,21 +1,23 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Path;
+using Core2D.Shapes;
 using System.Collections.Generic;
 
-namespace Core2D
+namespace Core2D.Editor.Factories
 {
     /// <summary>
     /// Factory used to create shapes.
     /// </summary>
     public sealed class ShapeFactory : IShapeFactory
     {
-        private Editor _editor;
+        private ShapeEditor _editor;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ShapeFactory"/> class.
         /// </summary>
-        /// <param name="editor">The current <see cref="Editor"/> instance.</param>
-        public ShapeFactory(Editor editor)
+        /// <param name="editor">The current <see cref="ShapeEditor"/> instance.</param>
+        public ShapeFactory(ShapeEditor editor)
         {
             _editor = editor;
         }

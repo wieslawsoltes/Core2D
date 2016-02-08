@@ -1,7 +1,8 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Project;
 
-namespace Core2D
+namespace Core2D.Editor.Factories
 {
     /// <summary>
     /// Defines project factory contract.
@@ -9,33 +10,33 @@ namespace Core2D
     public interface IProjectFactory
     {
         /// <summary>
-        /// Creates a new instance of the <see cref="Template"/> class.
+        /// Creates a new instance of the <see cref="XTemplate"/> class.
         /// </summary>
         /// <param name="project">The new template owner project.</param>
         /// <param name="name">The new template name.</param>
-        /// <returns>The new instance of the <see cref="Template"/>.</returns>
-        Template GetTemplate(Project project, string name);
+        /// <returns>The new instance of the <see cref="XTemplate"/>.</returns>
+        XTemplate GetTemplate(XProject project, string name);
 
         /// <summary>
-        /// Creates a new instance of the <see cref="Page"/> class.
+        /// Creates a new instance of the <see cref="XPage"/> class.
         /// </summary>
         /// <param name="project">The new page owner project.</param>
         /// <param name="name">The new page name.</param>
-        /// <returns>The new instance of the <see cref="Page"/>.</returns>
-        Page GetPage(Project project, string name);
+        /// <returns>The new instance of the <see cref="XPage"/>.</returns>
+        XPage GetPage(XProject project, string name);
 
         /// <summary>
-        /// Creates a new instance of the <see cref="Document"/> class.
+        /// Creates a new instance of the <see cref="XDocument"/> class.
         /// </summary>
         /// <param name="project">The new document owner project.</param>
         /// <param name="name">The new document name.</param>
-        /// <returns>The new instance of the <see cref="Document"/>.</returns>
-        Document GetDocument(Project project, string name);
+        /// <returns>The new instance of the <see cref="XDocument"/>.</returns>
+        XDocument GetDocument(XProject project, string name);
 
         /// <summary>
-        /// Creates a new instance of the <see cref="Project"/> class.
+        /// Creates a new instance of the <see cref="XProject"/> class.
         /// </summary>
-        /// <returns>The new instance of the <see cref="Project"/>.</returns>
-        Project GetProject();
+        /// <returns>The new instance of the <see cref="XProject"/>.</returns>
+        XProject GetProject();
     }
 }
