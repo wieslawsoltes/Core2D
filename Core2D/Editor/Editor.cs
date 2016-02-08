@@ -2661,67 +2661,67 @@ namespace Core2D
 
                         string ext = System.IO.Path.GetExtension(path);
 
-                        if (string.Compare(ext, Constants.ProjectExtension, true) == 0)
+                        if (string.Compare(ext, Constants.ProjectExtension, StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             Open(path);
                             result = true;
                         }
-                        else if (string.Compare(ext, Constants.CsvExtension, true) == 0)
+                        else if (string.Compare(ext, Constants.CsvExtension, StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             OnImportData(path);
                             result = true;
                         }
-                        else if (string.Compare(ext, Constants.StyleExtension, true) == 0)
+                        else if (string.Compare(ext, Constants.StyleExtension, StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             OnImportObject(path, _project.CurrentStyleLibrary, CoreType.Style);
                             result = true;
                         }
-                        else if (string.Compare(ext, Constants.StylesExtension, true) == 0)
+                        else if (string.Compare(ext, Constants.StylesExtension, StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             OnImportObject(path, _project.CurrentStyleLibrary, CoreType.Styles);
                             result = true;
                         }
-                        else if (string.Compare(ext, Constants.StyleLibraryExtension, true) == 0)
+                        else if (string.Compare(ext, Constants.StyleLibraryExtension, StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             OnImportObject(path, _project, CoreType.StyleLibrary);
                             result = true;
                         }
-                        else if (string.Compare(ext, Constants.StyleLibrariesExtension, true) == 0)
+                        else if (string.Compare(ext, Constants.StyleLibrariesExtension, StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             OnImportObject(path, _project, CoreType.StyleLibraries);
                             result = true;
                         }
-                        else if (string.Compare(ext, Constants.GroupExtension, true) == 0)
+                        else if (string.Compare(ext, Constants.GroupExtension, StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             OnImportObject(path, _project.CurrentGroupLibrary, CoreType.Group);
                             result = true;
                         }
-                        else if (string.Compare(ext, Constants.GroupsExtension, true) == 0)
+                        else if (string.Compare(ext, Constants.GroupsExtension, StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             OnImportObject(path, _project.CurrentGroupLibrary, CoreType.Groups);
                             result = true;
                         }
-                        else if (string.Compare(ext, Constants.GroupLibraryExtension, true) == 0)
+                        else if (string.Compare(ext, Constants.GroupLibraryExtension, StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             OnImportObject(path, _project, CoreType.GroupLibrary);
                             result = true;
                         }
-                        else if (string.Compare(ext, Constants.GroupLibrariesExtension, true) == 0)
+                        else if (string.Compare(ext, Constants.GroupLibrariesExtension, StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             OnImportObject(path, _project, CoreType.GroupLibraries);
                             result = true;
                         }
-                        else if (string.Compare(ext, Constants.TemplateExtension, true) == 0)
+                        else if (string.Compare(ext, Constants.TemplateExtension, StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             OnImportObject(path, _project, CoreType.Template);
                             result = true;
                         }
-                        else if (string.Compare(ext, Constants.TemplatesExtension, true) == 0)
+                        else if (string.Compare(ext, Constants.TemplatesExtension, StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             OnImportObject(path, _project, CoreType.Templates);
                             result = true;
                         }
-                        else if (string.Compare(ext, Constants.XamlExtension, true) == 0)
+                        else if (string.Compare(ext, Constants.XamlExtension, StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             OnImportXaml(path);
                             result = true;
