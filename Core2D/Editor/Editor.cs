@@ -389,7 +389,7 @@ namespace Core2D
             {
                 if (_fileIO != null && _protoBufSerializer != null)
                 {
-                    if (!string.IsNullOrEmpty(path) && System.IO.File.Exists(path))
+                    if (!string.IsNullOrEmpty(path) && _fileIO.Exists(path))
                     {
                         var project = Project.Open(path, _fileIO, _protoBufSerializer);
                         if (project != null)
@@ -1760,7 +1760,11 @@ namespace Core2D
                 }
                 else
                 {
-                    var bytes = System.IO.File.ReadAllBytes(path);
+                    byte[] bytes;
+                    using (var stream = _fileIO?.Open(path))
+                    {
+                        bytes = _fileIO?.ReadBinary(stream);
+                    }
                     var key = _project.AddImageFromFile(path, bytes);
                     return key;
                 }
@@ -2164,7 +2168,7 @@ namespace Core2D
                     var recent = _jsonSerializer.Deserialize<Recent>(json);
                     if (recent != null)
                     {
-                        var remove = recent.RecentProjects.Where(x => System.IO.File.Exists(x.Path) == false).ToList();
+                        var remove = recent.RecentProjects.Where(x => _fileIO?.Exists(x.Path) == false).ToList();
                         var builder = recent.RecentProjects.ToBuilder();
 
                         foreach (var file in remove)
@@ -2175,7 +2179,7 @@ namespace Core2D
                         RecentProjects = builder.ToImmutable();
 
                         if (recent.CurrentRecentProject != null
-                            && System.IO.File.Exists(recent.CurrentRecentProject.Path))
+                            && (_fileIO?.Exists(recent.CurrentRecentProject.Path) ?? false))
                         {
                             CurrentRecentProject = recent.CurrentRecentProject;
                         }
