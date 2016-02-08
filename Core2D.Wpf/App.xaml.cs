@@ -230,7 +230,7 @@ namespace Core2D.Wpf
                     () => true);
 
             Commands.ImportDataCommand =
-                Command<Project>.Create(
+                Command<XProject>.Create(
                     (project) => OnImportData(),
                     (project) => editor.IsEditMode());
 
@@ -255,12 +255,12 @@ namespace Core2D.Wpf
                     (item) => editor.IsEditMode());
 
             Commands.ImportStyleLibraryCommand =
-                Command<Project>.Create(
+                Command<XProject>.Create(
                     (item) => OnImportObject(item, CoreType.StyleLibrary),
                     (item) => editor.IsEditMode());
 
             Commands.ImportStyleLibrariesCommand =
-                Command<Project>.Create(
+                Command<XProject>.Create(
                     (item) => OnImportObject(item, CoreType.StyleLibraries),
                     (item) => editor.IsEditMode());
 
@@ -275,22 +275,22 @@ namespace Core2D.Wpf
                     (item) => editor.IsEditMode());
 
             Commands.ImportGroupLibraryCommand =
-                Command<Project>.Create(
+                Command<XProject>.Create(
                     (item) => OnImportObject(item, CoreType.GroupLibrary),
                     (item) => editor.IsEditMode());
 
             Commands.ImportGroupLibrariesCommand =
-                Command<Project>.Create(
+                Command<XProject>.Create(
                     (item) => OnImportObject(item, CoreType.GroupLibraries),
                     (item) => editor.IsEditMode());
 
             Commands.ImportTemplateCommand =
-                Command<Project>.Create(
+                Command<XProject>.Create(
                     (item) => OnImportObject(item, CoreType.Template),
                     (item) => editor.IsEditMode());
 
             Commands.ImportTemplatesCommand =
-                Command<Project>.Create(
+                Command<XProject>.Create(
                     (item) => OnImportObject(item, CoreType.Templates),
                     (item) => editor.IsEditMode());
 

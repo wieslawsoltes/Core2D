@@ -259,7 +259,7 @@ namespace Core2D.Perspex
                     () => true);
 
             Commands.ImportDataCommand =
-                Command<Project>.Create(
+                Command<XProject>.Create(
                     async (project) => await OnImportData(),
                     (project) => editor.IsEditMode());
 
@@ -284,12 +284,12 @@ namespace Core2D.Perspex
                     (item) => editor.IsEditMode());
 
             Commands.ImportStyleLibraryCommand =
-                Command<Project>.Create(
+                Command<XProject>.Create(
                     async (item) => await OnImportObject(item, CoreType.StyleLibrary),
                     (item) => editor.IsEditMode());
 
             Commands.ImportStyleLibrariesCommand =
-                Command<Project>.Create(
+                Command<XProject>.Create(
                     async (item) => await OnImportObject(item, CoreType.StyleLibraries),
                     (item) => editor.IsEditMode());
 
@@ -304,22 +304,22 @@ namespace Core2D.Perspex
                     (item) => editor.IsEditMode());
 
             Commands.ImportGroupLibraryCommand =
-                Command<Project>.Create(
+                Command<XProject>.Create(
                     async (item) => await OnImportObject(item, CoreType.GroupLibrary),
                     (item) => editor.IsEditMode());
 
             Commands.ImportGroupLibrariesCommand =
-                Command<Project>.Create(
+                Command<XProject>.Create(
                     async (item) => await OnImportObject(item, CoreType.GroupLibraries),
                     (item) => editor.IsEditMode());
 
             Commands.ImportTemplateCommand =
-                Command<Project>.Create(
+                Command<XProject>.Create(
                     async (item) => await OnImportObject(item, CoreType.Template),
                     (item) => editor.IsEditMode());
 
             Commands.ImportTemplatesCommand =
-                Command<Project>.Create(
+                Command<XProject>.Create(
                     async (item) => await OnImportObject(item, CoreType.Templates),
                     (item) => editor.IsEditMode());
 
