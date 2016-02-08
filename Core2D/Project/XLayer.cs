@@ -1,10 +1,11 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Shape;
+using Portable.Xaml.Markup;
 using System;
 using System.Collections.Immutable;
-using Portable.Xaml.Markup;
 
-namespace Core2D
+namespace Core2D.Project
 {
     /// <summary>
     /// Invalidate layer event arguments.
@@ -23,7 +24,7 @@ namespace Core2D
     /// </summary>
     [ContentProperty(nameof(Shapes))]
     [RuntimeNameProperty(nameof(Name))]
-    public sealed class Layer : Selectable
+    public sealed class XLayer : XSelectable
     {
         /// <summary>
         /// Invalidate layer event.
@@ -31,7 +32,7 @@ namespace Core2D
         public event InvalidateLayerEventHandler InvalidateLayer;
 
         private string _name;
-        private Container _owner;
+        private XContainer _owner;
         private bool _isVisible = true;
         private ImmutableArray<BaseShape> _shapes;
 
@@ -47,7 +48,7 @@ namespace Core2D
         /// <summary>
         /// Gets or sets layer owner.
         /// </summary>
-        public Container Owner
+        public XContainer Owner
         {
             get { return _owner; }
             set { Update(ref _owner, value); }
@@ -72,9 +73,9 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Layer"/> class.
+        /// Initializes a new instance of the <see cref="XLayer"/> class.
         /// </summary>
-        public Layer()
+        public XLayer()
             : base()
         {
             _shapes = ImmutableArray.Create<BaseShape>();
@@ -93,15 +94,15 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Creates a new <see cref="Layer"/> instance.
+        /// Creates a new <see cref="XLayer"/> instance.
         /// </summary>
         /// <param name="name">The layer name.</param>
         /// <param name="owner">The layer owner.</param>
         /// <param name="isVisible">The flag indicating whether layer is visible.</param>
-        /// <returns>The new instance of the <see cref="Layer"/>.</returns>
-        public static Layer Create(string name = "Layer", Container owner = null, bool isVisible = true)
+        /// <returns>The new instance of the <see cref="XLayer"/>.</returns>
+        public static XLayer Create(string name = "Layer", XContainer owner = null, bool isVisible = true)
         {
-            return new Layer()
+            return new XLayer()
             {
                 Name = name,
                 Owner = owner,

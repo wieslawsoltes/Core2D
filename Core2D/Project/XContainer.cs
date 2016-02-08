@@ -1,28 +1,29 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using System.Collections.Immutable;
-using System.Linq;
+using Core2D.Shape;
+using Core2D.Style;
 using Portable.Xaml.Markup;
+using System.Collections.Immutable;
 
-namespace Core2D
+namespace Core2D.Project
 {
     /// <summary>
     /// Container base class.
     /// </summary>
     [ContentProperty(nameof(Layers))]
     [RuntimeNameProperty(nameof(Name))]
-    public abstract class Container : Selectable
+    public abstract class XContainer : XSelectable
     {
         private string _name;
         private double _width;
         private double _height;
         private ArgbColor _background;
-        private ImmutableArray<Layer> _layers;
-        private Layer _currentLayer;
-        private Layer _workingLayer;
-        private Layer _helperLayer;
+        private ImmutableArray<XLayer> _layers;
+        private XLayer _currentLayer;
+        private XLayer _workingLayer;
+        private XLayer _helperLayer;
         private BaseShape _currentShape;
-        private Container _template;
+        private XContainer _template;
 
         /// <summary>
         /// Gets or sets container name.
@@ -63,7 +64,7 @@ namespace Core2D
         /// <summary>
         /// Gets or sets container layers.
         /// </summary>
-        public ImmutableArray<Layer> Layers
+        public ImmutableArray<XLayer> Layers
         {
             get { return _layers; }
             set { Update(ref _layers, value); }
@@ -72,7 +73,7 @@ namespace Core2D
         /// <summary>
         /// Gets or sets current container layer.
         /// </summary>
-        public Layer CurrentLayer
+        public XLayer CurrentLayer
         {
             get { return _currentLayer; }
             set { Update(ref _currentLayer, value); }
@@ -81,7 +82,7 @@ namespace Core2D
         /// <summary>
         /// Gets or sets working container layer.
         /// </summary>
-        public Layer WorkingLayer
+        public XLayer WorkingLayer
         {
             get { return _workingLayer; }
             set { Update(ref _workingLayer, value); }
@@ -90,7 +91,7 @@ namespace Core2D
         /// <summary>
         /// Gets or sets helper container layer.
         /// </summary>
-        public Layer HelperLayer
+        public XLayer HelperLayer
         {
             get { return _helperLayer; }
             set { Update(ref _helperLayer, value); }
@@ -108,26 +109,26 @@ namespace Core2D
         /// <summary>
         /// Gets or sets container template.
         /// </summary>
-        public Container Template
+        public XContainer Template
         {
             get { return _template; }
             set { Update(ref _template, value); }
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Container"/> class.
+        /// Initializes a new instance of the <see cref="XContainer"/> class.
         /// </summary>
-        public Container()
+        public XContainer()
             : base()
         {
-            _layers = ImmutableArray.Create<Layer>();
+            _layers = ImmutableArray.Create<XLayer>();
         }
 
         /// <summary>
         /// Set current layer.
         /// </summary>
         /// <param name="layer">The layer instance.</param>
-        public void SetCurrentLayer(Layer layer)
+        public void SetCurrentLayer(XLayer layer)
         {
             CurrentLayer = layer;
         }

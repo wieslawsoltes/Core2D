@@ -1,14 +1,15 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Renderer;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Core2D
+namespace Core2D.Project
 {
     /// <summary>
     /// Project <see cref="IImageCache"/> implementation.
     /// </summary>
-    public sealed partial class Project : Selectable, IImageCache
+    public sealed partial class XProject : XSelectable, IImageCache
     {
         private IDictionary<string, byte[]> _images = new Dictionary<string, byte[]>();
 

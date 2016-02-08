@@ -1,12 +1,12 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Core2D
+namespace Core2D.Project
 {
     /// <summary>
     /// Specifies move modes.
     /// </summary>
-    public enum MoveMode
+    public enum XMoveMode
     {
         /// <summary>
         /// Point move mode.

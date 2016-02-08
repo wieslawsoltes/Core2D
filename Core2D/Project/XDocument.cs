@@ -3,18 +3,18 @@
 using System.Collections.Immutable;
 using Portable.Xaml.Markup;
 
-namespace Core2D
+namespace Core2D.Project
 {
     /// <summary>
     /// Document model.
     /// </summary>
     [ContentProperty(nameof(Pages))]
     [RuntimeNameProperty(nameof(Name))]
-    public sealed class Document : Selectable
+    public sealed class XDocument : XSelectable
     {
         private string _name;
         private bool _isExpanded = true;
-        private ImmutableArray<Page> _pages;
+        private ImmutableArray<XPage> _pages;
 
         /// <summary>
         /// Gets or sets document name.
@@ -37,29 +37,29 @@ namespace Core2D
         /// <summary>
         /// Gets or sets document pages.
         /// </summary>
-        public ImmutableArray<Page> Pages
+        public ImmutableArray<XPage> Pages
         {
             get { return _pages; }
             set { Update(ref _pages, value); }
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Document"/> class.
+        /// Initializes a new instance of the <see cref="XDocument"/> class.
         /// </summary>
-        public Document()
+        public XDocument()
             : base()
         {
-            _pages = ImmutableArray.Create<Page>();
+            _pages = ImmutableArray.Create<XPage>();
         }
 
         /// <summary>
-        /// Creates a new <see cref="Document"/> instance.
+        /// Creates a new <see cref="XDocument"/> instance.
         /// </summary>
         /// <param name="name">The document name.</param>
-        /// <returns>The new instance of the <see cref="Document"/> class.</returns>
-        public static Document Create(string name = "Document")
+        /// <returns>The new instance of the <see cref="XDocument"/> class.</returns>
+        public static XDocument Create(string name = "Document")
         {
-            return new Document()
+            return new XDocument()
             {
                 Name = name
             };

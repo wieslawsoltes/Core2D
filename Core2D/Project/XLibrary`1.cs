@@ -5,14 +5,14 @@ using System.Collections.Immutable;
 using System.Linq;
 using Portable.Xaml.Markup;
 
-namespace Core2D
+namespace Core2D.Project
 {
     /// <summary>
     /// Named items library.
     /// </summary>
     [ContentProperty(nameof(Items))]
     [RuntimeNameProperty(nameof(Name))]
-    public sealed class Library<T> : ObservableObject
+    public sealed class XLibrary<T> : ObservableObject
     {
         private string _name;
         private ImmutableArray<T> _items;
@@ -46,9 +46,9 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Library{T}"/> class.
+        /// Initializes a new instance of the <see cref="XLibrary{T}"/> class.
         /// </summary>
-        public Library()
+        public XLibrary()
             : base()
         {
             _items = ImmutableArray.Create<T>();
@@ -65,27 +65,27 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Creates a new instance of the <see cref="Library{T}"/> class.
+        /// Creates a new instance of the <see cref="XLibrary{T}"/> class.
         /// </summary>
         /// <param name="name">The library name.</param>
-        /// <returns>The new instance of the <see cref="Library{T}"/> class.</returns>
-        public static Library<T> Create(string name)
+        /// <returns>The new instance of the <see cref="XLibrary{T}"/> class.</returns>
+        public static XLibrary<T> Create(string name)
         {
-            return new Library<T>()
+            return new XLibrary<T>()
             {
                 Name = name
             };
         }
 
         /// <summary>
-        /// Creates a new instance of the <see cref="Library{T}"/> class.
+        /// Creates a new instance of the <see cref="XLibrary{T}"/> class.
         /// </summary>
         /// <param name="name">The library name.</param>
         /// <param name="items">The items collection.</param>
-        /// <returns>The new instance of the <see cref="Library{T}"/> class.</returns>
-        public static Library<T> Create(string name, IEnumerable<T> items)
+        /// <returns>The new instance of the <see cref="XLibrary{T}"/> class.</returns>
+        public static XLibrary<T> Create(string name, IEnumerable<T> items)
         {
-            return new Library<T>()
+            return new XLibrary<T>()
             {
                 Name = name,
                 Items = ImmutableArray.CreateRange<T>(items),

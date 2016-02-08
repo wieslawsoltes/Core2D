@@ -1,32 +1,33 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Style;
 using System.Linq;
 
-namespace Core2D
+namespace Core2D.Project
 {
     /// <summary>
     /// Template container.
     /// </summary>
-    public sealed class Template : Container
+    public sealed class XTemplate : XContainer
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Template"/> class.
+        /// Initializes a new instance of the <see cref="XTemplate"/> class.
         /// </summary>
-        public Template()
+        public XTemplate()
             : base()
         {
         }
 
         /// <summary>
-        /// Creates a new <see cref="Template"/> instance.
+        /// Creates a new <see cref="XTemplate"/> instance.
         /// </summary>
         /// <param name="name">The template name.</param>
         /// <param name="width">The template width.</param>
         /// <param name="height">The template height.</param>
-        /// <returns>The new instance of the <see cref="Template"/>.</returns>
-        public static Template Create(string name = "Template", double width = 840, double height = 600)
+        /// <returns>The new instance of the <see cref="XTemplate"/>.</returns>
+        public static XTemplate Create(string name = "Template", double width = 840, double height = 600)
         {
-            var template = new Template()
+            var template = new XTemplate()
             {
                 Name = name
             };
@@ -36,14 +37,14 @@ namespace Core2D
             template.Height = height;
 
             var builder = template.Layers.ToBuilder();
-            builder.Add(Layer.Create("TemplateLayer1", template));
-            builder.Add(Layer.Create("TemplateLayer2", template));
-            builder.Add(Layer.Create("TemplateLayer3", template));
+            builder.Add(XLayer.Create("TemplateLayer1", template));
+            builder.Add(XLayer.Create("TemplateLayer2", template));
+            builder.Add(XLayer.Create("TemplateLayer3", template));
             template.Layers = builder.ToImmutable();
 
             template.CurrentLayer = template.Layers.FirstOrDefault();
-            template.WorkingLayer = Layer.Create("TemplateWorking", template);
-            template.HelperLayer = Layer.Create("TemplateHelper", template);
+            template.WorkingLayer = XLayer.Create("TemplateWorking", template);
+            template.HelperLayer = XLayer.Create("TemplateHelper", template);
 
             return template;
         }

@@ -1,18 +1,22 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Path;
+using Core2D.Shape;
+using Core2D.Shapes;
+using Core2D.Style;
 
-namespace Core2D
+namespace Core2D.Project
 {
     /// <summary>
     /// Project options.
     /// </summary>
-    public sealed class Options : ObservableObject
+    public sealed class XOptions : ObservableObject
     {
         private bool _snapToGrid = true;
         private double _snapX = 15.0;
         private double _snapY = 15.0;
         private double _hitThreshold = 7.0;
-        private MoveMode _moveMode = MoveMode.Point;
+        private XMoveMode _moveMode = XMoveMode.Point;
         private bool _defaultIsStroked = true;
         private bool _defaultIsFilled = false;
         private bool _defaultIsClosed = true;
@@ -63,7 +67,7 @@ namespace Core2D
         /// <summary>
         /// Gets or sets how selected shapes are moved.
         /// </summary>
-        public MoveMode MoveMode
+        public XMoveMode MoveMode
         {
             get { return _moveMode; }
             set { Update(ref _moveMode, value); }
@@ -160,18 +164,18 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Creates a new <see cref="Options"/> instance.
+        /// Creates a new <see cref="XOptions"/> instance.
         /// </summary>
-        /// <returns>The new instance of the <see cref="Options"/> class.</returns>
-        public static Options Create()
+        /// <returns>The new instance of the <see cref="XOptions"/> class.</returns>
+        public static XOptions Create()
         {
-            var options = new Options()
+            var options = new XOptions()
             {
                 SnapToGrid = true,
                 SnapX = 15.0,
                 SnapY = 15.0,
                 HitThreshold = 7.0,
-                MoveMode = MoveMode.Point,
+                MoveMode = XMoveMode.Point,
                 DefaultIsStroked = true,
                 DefaultIsFilled = false,
                 DefaultIsClosed = true,

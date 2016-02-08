@@ -1,33 +1,39 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Data.Database;
+using Core2D.History;
+using Core2D.Shape;
+using Core2D.Shapes;
+using Core2D.Style;
+using Portable.Xaml.Markup;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-using Portable.Xaml.Markup;
 
-namespace Core2D
+namespace Core2D.Project
 {
     /// <summary>
     /// Project model.
     /// </summary>
     [ContentProperty(nameof(Documents))]
     [RuntimeNameProperty(nameof(Name))]
-    public sealed partial class Project : Selectable
+    public sealed partial class XProject : XSelectable
     {
         private string _name;
-        private Options _options;
+        private XOptions _options;
         private IHistory _history;
-        private ImmutableArray<Library<ShapeStyle>> _styleLibraries;
-        private ImmutableArray<Library<XGroup>> _groupLibraries;
-        private ImmutableArray<Database> _databases;
-        private ImmutableArray<Template> _templates;
-        private ImmutableArray<Document> _documents;
-        private Library<ShapeStyle> _currentStyleLibrary;
-        private Library<XGroup> _currentGroupLibrary;
-        private Database _currentDatabase;
-        private Template _currentTemplate;
-        private Document _currentDocument;
-        private Container _currentContainer;
-        private Selectable _selected;
+        private ImmutableArray<XLibrary<ShapeStyle>> _styleLibraries;
+        private ImmutableArray<XLibrary<XGroup>> _groupLibraries;
+        private ImmutableArray<XDatabase> _databases;
+        private ImmutableArray<XTemplate> _templates;
+        private ImmutableArray<XDocument> _documents;
+        private XLibrary<ShapeStyle> _currentStyleLibrary;
+        private XLibrary<XGroup> _currentGroupLibrary;
+        private XDatabase _currentDatabase;
+        private XTemplate _currentTemplate;
+        private XDocument _currentDocument;
+        private XContainer _currentContainer;
+        private XSelectable _selected;
 
         /// <summary>
         /// Gets or sets project name.
@@ -41,7 +47,7 @@ namespace Core2D
         /// <summary>
         /// Gets or sets project options.
         /// </summary>
-        public Options Options
+        public XOptions Options
         {
             get { return _options; }
             set { Update(ref _options, value); }
@@ -59,7 +65,7 @@ namespace Core2D
         /// <summary>
         /// Gets or sets project style libraries.
         /// </summary>
-        public ImmutableArray<Library<ShapeStyle>> StyleLibraries
+        public ImmutableArray<XLibrary<ShapeStyle>> StyleLibraries
         {
             get { return _styleLibraries; }
             set { Update(ref _styleLibraries, value); }
@@ -68,7 +74,7 @@ namespace Core2D
         /// <summary>
         /// Gets or sets project group libraries.
         /// </summary>
-        public ImmutableArray<Library<XGroup>> GroupLibraries
+        public ImmutableArray<XLibrary<XGroup>> GroupLibraries
         {
             get { return _groupLibraries; }
             set { Update(ref _groupLibraries, value); }
@@ -77,7 +83,7 @@ namespace Core2D
         /// <summary>
         /// Gets or sets project databases.
         /// </summary>
-        public ImmutableArray<Database> Databases
+        public ImmutableArray<XDatabase> Databases
         {
             get { return _databases; }
             set { Update(ref _databases, value); }
@@ -86,7 +92,7 @@ namespace Core2D
         /// <summary>
         /// Gets or sets project templates.
         /// </summary>
-        public ImmutableArray<Template> Templates
+        public ImmutableArray<XTemplate> Templates
         {
             get { return _templates; }
             set { Update(ref _templates, value); }
@@ -95,7 +101,7 @@ namespace Core2D
         /// <summary>
         /// Gets or sets project documents.
         /// </summary>
-        public ImmutableArray<Document> Documents
+        public ImmutableArray<XDocument> Documents
         {
             get { return _documents; }
             set { Update(ref _documents, value); }
@@ -104,7 +110,7 @@ namespace Core2D
         /// <summary>
         /// Gets or sets project current style library.
         /// </summary>
-        public Library<ShapeStyle> CurrentStyleLibrary
+        public XLibrary<ShapeStyle> CurrentStyleLibrary
         {
             get { return _currentStyleLibrary; }
             set { Update(ref _currentStyleLibrary, value); }
@@ -113,7 +119,7 @@ namespace Core2D
         /// <summary>
         /// Gets or sets project current group library.
         /// </summary>
-        public Library<XGroup> CurrentGroupLibrary
+        public XLibrary<XGroup> CurrentGroupLibrary
         {
             get { return _currentGroupLibrary; }
             set { Update(ref _currentGroupLibrary, value); }
@@ -122,7 +128,7 @@ namespace Core2D
         /// <summary>
         /// Gets or sets project current database.
         /// </summary>
-        public Database CurrentDatabase
+        public XDatabase CurrentDatabase
         {
             get { return _currentDatabase; }
             set { Update(ref _currentDatabase, value); }
@@ -131,7 +137,7 @@ namespace Core2D
         /// <summary>
         /// Gets or sets project current template.
         /// </summary>
-        public Template CurrentTemplate
+        public XTemplate CurrentTemplate
         {
             get { return _currentTemplate; }
             set { Update(ref _currentTemplate, value); }
@@ -140,7 +146,7 @@ namespace Core2D
         /// <summary>
         /// Gets or sets project current document.
         /// </summary>
-        public Document CurrentDocument
+        public XDocument CurrentDocument
         {
             get { return _currentDocument; }
             set { Update(ref _currentDocument, value); }
@@ -149,7 +155,7 @@ namespace Core2D
         /// <summary>
         /// Gets or sets project current container.
         /// </summary>
-        public Container CurrentContainer
+        public XContainer CurrentContainer
         {
             get { return _currentContainer; }
             set { Update(ref _currentContainer, value); }
@@ -158,7 +164,7 @@ namespace Core2D
         /// <summary>
         /// Gets or sets currently selected object.
         /// </summary>
-        public Selectable Selected
+        public XSelectable Selected
         {
             get { return _selected; }
             set
@@ -169,24 +175,24 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Project"/> class.
+        /// Initializes a new instance of the <see cref="XProject"/> class.
         /// </summary>
-        public Project()
+        public XProject()
             : base()
         {
-            _options = Options.Create();
-            _styleLibraries = ImmutableArray.Create<Library<ShapeStyle>>();
-            _groupLibraries = ImmutableArray.Create<Library<XGroup>>();
-            _databases = ImmutableArray.Create<Database>();
-            _templates = ImmutableArray.Create<Template>();
-            _documents = ImmutableArray.Create<Document>();
+            _options = XOptions.Create();
+            _styleLibraries = ImmutableArray.Create<XLibrary<ShapeStyle>>();
+            _groupLibraries = ImmutableArray.Create<XLibrary<XGroup>>();
+            _databases = ImmutableArray.Create<XDatabase>();
+            _templates = ImmutableArray.Create<XTemplate>();
+            _documents = ImmutableArray.Create<XDocument>();
         }
 
         /// <summary>
         /// Set current document.
         /// </summary>
         /// <param name="document">The document instance.</param>
-        public void SetCurrentDocument(Document document)
+        public void SetCurrentDocument(XDocument document)
         {
             CurrentDocument = document;
         }
@@ -195,7 +201,7 @@ namespace Core2D
         /// Set current container.
         /// </summary>
         /// <param name="container">The container instance.</param>
-        public void SetCurrentContainer(Container container)
+        public void SetCurrentContainer(XContainer container)
         {
             CurrentContainer = container;
             Selected = container;
@@ -205,7 +211,7 @@ namespace Core2D
         /// Set current template.
         /// </summary>
         /// <param name="template">The template instance.</param>
-        public void SetCurrentTemplate(Template template)
+        public void SetCurrentTemplate(XTemplate template)
         {
             CurrentTemplate = template;
         }
@@ -214,7 +220,7 @@ namespace Core2D
         /// Set current database.
         /// </summary>
         /// <param name="db">The database instance.</param>
-        public void SetCurrentDatabase(Database db)
+        public void SetCurrentDatabase(XDatabase db)
         {
             CurrentDatabase = db;
         }
@@ -223,7 +229,7 @@ namespace Core2D
         /// Set current group library.
         /// </summary>
         /// <param name="library">The group library instance.</param>
-        public void SetCurrentGroupLibrary(Library<XGroup> library)
+        public void SetCurrentGroupLibrary(XLibrary<XGroup> library)
         {
             CurrentGroupLibrary = library;
         }
@@ -232,7 +238,7 @@ namespace Core2D
         /// Set current group.
         /// </summary>
         /// <param name="library">The style library instance.</param>
-        public void SetCurrentStyleLibrary(Library<ShapeStyle> library)
+        public void SetCurrentStyleLibrary(XLibrary<ShapeStyle> library)
         {
             CurrentStyleLibrary = library;
         }
@@ -241,43 +247,98 @@ namespace Core2D
         /// Set selected value.
         /// </summary>
         /// <param name="value">The value instance.</param>
-        public void SetSelected(Selectable value)
+        public void SetSelected(XSelectable value)
         {
             if (value != null)
             {
-                if (value is Layer)
+                if (value is XLayer)
                 {
-                    var layer = value as Layer;
+                    var layer = value as XLayer;
                     if (layer?.Owner != null)
                     {
-                        layer.Owner.CurrentLayer = value as Layer;
+                        layer.Owner.CurrentLayer = value as XLayer;
                     }
                 }
-                else if (value is Container && _documents != null)
+                else if (value is XContainer && _documents != null)
                 {
-                    var document = _documents.FirstOrDefault(d => d.Pages.Contains(value as Container));
+                    var document = _documents.FirstOrDefault(d => d.Pages.Contains(value as XContainer));
                     if (document != null)
                     {
                         CurrentDocument = document;
-                        CurrentContainer = value as Container;
+                        CurrentContainer = value as XContainer;
                         CurrentContainer.Invalidate();
                     }
                 }
-                else if (value is Document)
+                else if (value is XDocument)
                 {
-                    CurrentDocument = value as Document;
+                    CurrentDocument = value as XDocument;
                 }
             }
         }
 
         /// <summary>
-        /// Creates a new <see cref="Project"/> instance.
+        /// Get all shapes including grouped shapes.
+        /// </summary>
+        /// <param name="shapes">The shapes collection.</param>
+        /// <returns>All shapes including grouped shapes.</returns>
+        public static IEnumerable<BaseShape> GetAllShapes(IEnumerable<BaseShape> shapes)
+        {
+            if (shapes == null)
+                yield break;
+
+            foreach (var shape in shapes)
+            {
+                if (shape is XGroup)
+                {
+                    foreach (var s in GetAllShapes((shape as XGroup)?.Shapes))
+                    {
+                        yield return s;
+                    }
+
+                    yield return shape;
+                }
+                else
+                {
+                    yield return shape;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Get all shapes including grouped shapes of specified type.
+        /// </summary>
+        /// <typeparam name="T">The type of shape to include.</typeparam>
+        /// <param name="shapes">The shapes collection.</param>
+        /// <returns>All shapes including grouped shapes of specified type.</returns>
+        public static IEnumerable<T> GetAllShapes<T>(IEnumerable<BaseShape> shapes)
+        {
+            return GetAllShapes(shapes)?.Where(s => s is T).Cast<T>();
+        }
+
+        /// <summary>
+        /// Get all shapes including grouped shapes of specified type.
+        /// </summary>
+        /// <typeparam name="T">The type of shapes to include.</typeparam>
+        /// <param name="project">The project object.</param>
+        /// <returns>All shapes including grouped shapes of specified type.</returns>
+        public static IEnumerable<T> GetAllShapes<T>(XProject project)
+        {
+            var shapes = project?.Documents
+                .SelectMany(d => d.Pages)
+                .SelectMany(c => c.Layers)
+                .SelectMany(l => l.Shapes);
+
+            return GetAllShapes(shapes)?.Where(s => s is T).Cast<T>();
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="XProject"/> instance.
         /// </summary>
         /// <param name="name">The project name.</param>
-        /// <returns>The new instance of the <see cref="Project"/> class.</returns>
-        public static Project Create(string name = "Project")
+        /// <returns>The new instance of the <see cref="XProject"/> class.</returns>
+        public static XProject Create(string name = "Project")
         {
-            return new Project()
+            return new XProject()
             {
                 Name = name
             };

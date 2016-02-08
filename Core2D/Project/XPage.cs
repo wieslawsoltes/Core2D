@@ -1,21 +1,22 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Data;
 using System.Linq;
 
-namespace Core2D
+namespace Core2D.Project
 {
     /// <summary>
     /// Page container.
     /// </summary>
-    public sealed class Page : Container
+    public sealed class XPage : XContainer
     {
-        private Data _data;
+        private XContext _data;
         private bool _isExpanded = false;
 
         /// <summary>
         /// Gets or sets page data.
         /// </summary>
-        public Data Data
+        public XContext Data
         {
             get { return _data; }
             set { Update(ref _data, value); }
@@ -58,7 +59,7 @@ namespace Core2D
                     }
                     else
                     {
-                        var property = Property.Create(_data, name, value);
+                        var property = XProperty.Create(_data, name, value);
                         _data.Properties = _data.Properties.Add(property);
                     }
                 }
@@ -79,35 +80,35 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Page"/> class.
+        /// Initializes a new instance of the <see cref="XPage"/> class.
         /// </summary>
-        public Page()
+        public XPage()
             : base()
         {
-            Data = new Data();
+            Data = new XContext();
         }
 
         /// <summary>
-        /// Creates a new <see cref="Page"/> instance.
+        /// Creates a new <see cref="XPage"/> instance.
         /// </summary>
         /// <param name="name">The page name.</param>
-        /// <returns>The new instance of the <see cref="Page"/>.</returns>
-        public static Page Create(string name = "Page")
+        /// <returns>The new instance of the <see cref="XPage"/>.</returns>
+        public static XPage Create(string name = "Page")
         {
-            var page = new Page()
+            var page = new XPage()
             {
                 Name = name
             };
 
             var builder = page.Layers.ToBuilder();
-            builder.Add(Layer.Create("Layer1", page));
-            builder.Add(Layer.Create("Layer2", page));
-            builder.Add(Layer.Create("Layer3", page));
+            builder.Add(XLayer.Create("Layer1", page));
+            builder.Add(XLayer.Create("Layer2", page));
+            builder.Add(XLayer.Create("Layer3", page));
             page.Layers = builder.ToImmutable();
 
             page.CurrentLayer = page.Layers.FirstOrDefault();
-            page.WorkingLayer = Layer.Create("Working", page);
-            page.HelperLayer = Layer.Create("Helper", page);
+            page.WorkingLayer = XLayer.Create("Working", page);
+            page.HelperLayer = XLayer.Create("Helper", page);
 
             return page;
         }
