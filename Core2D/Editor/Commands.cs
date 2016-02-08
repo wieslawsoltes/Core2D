@@ -571,35 +571,5 @@ namespace Core2D
         /// Reset main window layout to default state.
         /// </summary>
         public static ICoreCommand ResetWindowLayoutCommand { get; set; }
-
-        /// <summary>
-        /// Registered core commands.
-        /// </summary>
-        public static IDictionary<string, ICoreCommand> Registered { get; set; }
-
-        /// <summary>
-        /// Register core commands.
-        /// </summary>
-        public static void Register()
-        {
-            Registered = typeof(Commands)
-                .GetProperties(BindingFlags.Public | BindingFlags.Static)
-                .Where(p => p.PropertyType == typeof(ICoreCommand))
-                .ToDictionary(p => p.Name, p => (ICoreCommand)p.GetValue(null));
-        }
-
-        /// <summary>
-        /// Raise <see cref="ICommand.CanExecuteChanged"/> event for registered commands.
-        /// </summary>
-        public static void NotifyCanExecuteChanged()
-        {
-            if (Registered != null)
-            {
-                foreach (var command in Registered)
-                {
-                    command.Value.NotifyCanExecuteChanged();
-                }
-            }
-        }
     }
 }
