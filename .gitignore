@@ -222,3 +222,7 @@ pip-log.txt
 
 #ProtoBuf generated serializers
 Dependencies/Serializer.ProtoBuf.Generate/Serializer/*.dll
+
+#docfx
+_site
+api
