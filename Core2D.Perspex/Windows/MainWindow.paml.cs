@@ -8,7 +8,7 @@ namespace Core2D.Perspex.Windows
     /// <summary>
     /// Interaction logic for <see cref="MainWindow"/> xaml.
     /// </summary>
-    public class MainWindow : Window, IView
+    public class MainWindow : Window
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="MainWindow"/> class.

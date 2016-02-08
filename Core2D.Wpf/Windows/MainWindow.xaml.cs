@@ -11,7 +11,7 @@ namespace Core2D.Wpf.Windows
     /// <summary>
     /// Interaction logic for <see cref="MainWindow"/> xaml.
     /// </summary>
-    public partial class MainWindow : Window, IView
+    public partial class MainWindow : Window
     {
         private string _resourceLayoutRoot = "Core2D.Wpf.Layouts.";
         private string _resourceLayoutFileName = "Core2D.Wpf.layout";
