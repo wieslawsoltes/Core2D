@@ -76,6 +76,7 @@
     <Compile Include="Editor\CommandsTests.cs" />
     <Compile Include="Editor\Designer\DesignerContextTests.cs" />
     <Compile Include="Editor\EditorTests.cs" />
+    <Compile Include="Editor\Input\CommandManagerTests.cs" />
     <Compile Include="Editor\Input\CommandTests.cs" />
     <Compile Include="Editor\Input\CommandOfTTests.cs" />
     <Compile Include="Editor\Factories\ProjectFactoryTests.cs" />
