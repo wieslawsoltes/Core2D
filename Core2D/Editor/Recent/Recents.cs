@@ -1,18 +1,18 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Core2D
+namespace Core2D.Editor.Recent
 {
     /// <summary>
-    /// Recent project.
+    /// Recent file.
     /// </summary>
-    public sealed class RecentProject : ObservableObject
+    public sealed class RecentFile : ObservableObject
     {
         private string _name;
         private string _path;
 
         /// <summary>
-        /// Gets or sets recent project name.
+        /// Gets or sets recent file name.
         /// </summary>
         public string Name
         {
@@ -21,7 +21,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Gets or sets recent project path.
+        /// Gets or sets recent file path.
         /// </summary>
         public string Path
         {
@@ -30,14 +30,14 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Creates a new <see cref="RecentProject"/> instance.
+        /// Creates a new <see cref="RecentFile"/> instance.
         /// </summary>
-        /// <param name="name">The recent project name.</param>
-        /// <param name="path">The recent project path.</param>
-        /// <returns>The new instance of the <see cref="RecentProject"/> class.</returns>
-        public static RecentProject Create(string name, string path)
+        /// <param name="name">The recent file name.</param>
+        /// <param name="path">The recent file path.</param>
+        /// <returns>The new instance of the <see cref="RecentFile"/> class.</returns>
+        public static RecentFile Create(string name, string path)
         {
-            return new RecentProject()
+            return new RecentFile()
             {
                 Name = name,
                 Path = path
