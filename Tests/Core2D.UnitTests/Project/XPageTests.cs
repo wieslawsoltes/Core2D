@@ -1,24 +1,26 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Data;
+using Core2D.Project;
 using Xunit;
 
 namespace Core2D.UnitTests
 {
-    public class PageTests
+    public class XPageTests
     {
         [Fact]
         [Trait("Core2D.Project", "Project")]
         public void Inherits_From_Container()
         {
-            var target = new Page();
-            Assert.True(target is Container);
+            var target = new XPage();
+            Assert.True(target is XContainer);
         }
 
         [Fact]
         [Trait("Core2D.Project", "Project")]
         public void Data_Not_Null()
         {
-            var target = new Page();
+            var target = new XPage();
             Assert.NotNull(target.Data);
         }
 
@@ -26,7 +28,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Project", "Project")]
         public void this_Operator_Returns_Null()
         {
-            var target = new Page();
+            var target = new XPage();
             Assert.Equal(null, target["Name1"]);
         }
 
@@ -34,8 +36,8 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Project", "Project")]
         public void this_Operator_Returns_Property_Value()
         {
-            var target = new Page();
-            target.Data.Properties = target.Data.Properties.Add(Property.Create(target.Data, "Name1", "Value1"));
+            var target = new XPage();
+            target.Data.Properties = target.Data.Properties.Add(XProperty.Create(target.Data, "Name1", "Value1"));
 
             Assert.Equal("Value1", target["Name1"]);
         }
@@ -44,8 +46,8 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Project", "Project")]
         public void this_Operator_Sets_Property_Value()
         {
-            var target = new Page();
-            target.Data.Properties = target.Data.Properties.Add(Property.Create(target.Data, "Name1", "Value1"));
+            var target = new XPage();
+            target.Data.Properties = target.Data.Properties.Add(XProperty.Create(target.Data, "Name1", "Value1"));
 
             target["Name1"] = "NewValue1";
             Assert.Equal("NewValue1", target["Name1"]);
@@ -55,7 +57,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Project", "Project")]
         public void this_Operator_Creates_Property()
         {
-            var target = new Page();
+            var target = new XPage();
             Assert.Equal(0, target.Data.Properties.Length);
 
             target["Name1"] = "Value1";
@@ -68,12 +70,12 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Project", "Project")]
         public void Invalidate_Should_Invalidate_Template()
         {
-            var target = new Page()
+            var target = new XPage()
             {
-                Template = new Template()
+                Template = new XTemplate()
             };
 
-            var layer = Layer.Create("Layer1", target);
+            var layer = XLayer.Create("Layer1", target);
             target.Template.Layers = target.Template.Layers.Add(layer);
 
             bool raised = false;

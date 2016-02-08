@@ -8,7 +8,7 @@ namespace Core2D.UnitTests
     public class ObservableResourceTests
     {
         [Fact]
-        [Trait("Core2D", "Core")]
+        [Trait("Core2D", "Base")]
         public void Inherits_From_ObservableObject()
         {
             var target = new Class1();
@@ -16,7 +16,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Core")]
+        [Trait("Core2D", "Base")]
         public void Resources_Not_Null()
         {
             var target = new Class1();
@@ -24,7 +24,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Core")]
+        [Trait("Core2D", "Base")]
         public void Resources_Is_ObservableCollection()
         {
             var target = new Class1();

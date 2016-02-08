@@ -1,38 +1,39 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Data.Database;
 using System.Collections.Immutable;
 using Xunit;
 
 namespace Core2D.UnitTests
 {
-    public class DatabaseTests
+    public class XDatabaseTests
     {
         [Fact]
-        [Trait("Core2D", "Data")]
+        [Trait("Core2D.Data", "Database")]
         public void Inherits_From_ObservableObject()
         {
-            var target = new Database();
+            var target = new XDatabase();
             Assert.True(target is ObservableObject);
         }
 
         [Fact]
-        [Trait("Core2D", "Data")]
+        [Trait("Core2D.Data", "Database")]
         public void Columns_Not_Null()
         {
-            var target = new Database();
+            var target = new XDatabase();
             Assert.NotNull(target.Columns);
         }
 
         [Fact]
-        [Trait("Core2D", "Data")]
+        [Trait("Core2D.Data", "Database")]
         public void Records_Not_Null()
         {
-            var target = new Database();
+            var target = new XDatabase();
             Assert.NotNull(target.Records);
         }
 
         [Fact]
-        [Trait("Core2D", "Data")]
+        [Trait("Core2D.Data", "Database")]
         public void FromFields_Existing_Record_Ids()
         {
             var fields = new string[][]
@@ -42,7 +43,7 @@ namespace Core2D.UnitTests
                 new string[] { "547fe8cf-b3ab-4abb-843b-acb3df0f7ad1", "Row1Value0", "Row1Value1", "Row1Value2" }
             };
 
-            var target = Database.FromFields("Test", fields, "Id");
+            var target = XDatabase.FromFields("Test", fields, "Id");
 
             Assert.Equal("Id", target.IdColumnName);
 
@@ -60,7 +61,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Data")]
+        [Trait("Core2D.Data", "Database")]
         public void FromFields_New_Record_Ids()
         {
             var fields = new string[][]
@@ -70,7 +71,7 @@ namespace Core2D.UnitTests
                 new string[] { "Row1Value0", "Row1Value1", "Row1Value2" }
             };
 
-            var target = Database.FromFields("Test", fields);
+            var target = XDatabase.FromFields("Test", fields);
 
             Assert.Equal(3, target.Columns.Length);
 
@@ -90,7 +91,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Data")]
+        [Trait("Core2D.Data", "Database")]
         public void Update_Destination()
         {
             var destinationFields = new string[][]
@@ -101,7 +102,7 @@ namespace Core2D.UnitTests
                 new string[] { "Row2Value0", "Row2Value1", "Row2Value2" }
             };
 
-            var destination = Database.FromFields("Destination", destinationFields, "Id");
+            var destination = XDatabase.FromFields("Destination", destinationFields, "Id");
 
             var sourceFields = new string[][]
             {
@@ -116,10 +117,10 @@ namespace Core2D.UnitTests
                 new string[] { "410b0378-8ea5-4a21-8260-9aa929b2a57b", "Row4Value0", "Row4Value1", "Row4Value2" }
             };
 
-            var source = Database.FromFields("Source", sourceFields, "Id");
+            var source = XDatabase.FromFields("Source", sourceFields, "Id");
 
-            ImmutableArray<Record>.Builder target;
-            bool isDirty = Database.Update(destination, source, out target);
+            ImmutableArray<XRecord>.Builder target;
+            bool isDirty = XDatabase.Update(destination, source, out target);
 
             Assert.True(isDirty);
             Assert.NotNull(target);

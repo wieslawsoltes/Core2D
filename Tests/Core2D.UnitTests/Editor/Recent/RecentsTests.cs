@@ -4,8 +4,8 @@ using Xunit;
 
 namespace Core2D.UnitTests
 {
-    public class RendererTests
+    public class RecentsTests
     {
-        // TODO: Write RendererTests tests.
+        // TODO: Write RecentsTests tests.
     }
 }

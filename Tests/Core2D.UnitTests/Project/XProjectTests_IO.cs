@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Core2D.UnitTests
 {
-    public class ProjectTests_IO
+    public class XProjectTests_IO
     {
         [Fact(Skip = "Need to write test.")]
         [Trait("Core2D.Project", "IO")]

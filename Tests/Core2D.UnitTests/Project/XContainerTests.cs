@@ -1,17 +1,19 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Project;
+using Core2D.Style;
 using Xunit;
 
 namespace Core2D.UnitTests
 {
-    public class ContainerTests
+    public class XContainerTests
     {
         [Fact]
         [Trait("Core2D.Project", "Project")]
         public void Inherits_From_Selectable()
         {
             var target = new Class1();
-            Assert.True(target is Selectable);
+            Assert.True(target is XSelectable);
         }
 
         [Fact]
@@ -28,7 +30,7 @@ namespace Core2D.UnitTests
         {
             var target = new Class1();
 
-            var layer = Layer.Create("Layer1", target);
+            var layer = XLayer.Create("Layer1", target);
             target.Layers = target.Layers.Add(layer);
 
             target.SetCurrentLayer(layer);
@@ -42,13 +44,13 @@ namespace Core2D.UnitTests
         {
             var target = new Class1();
 
-            var layer1 = Layer.Create("Layer1", target);
-            var layer2 = Layer.Create("Layer2", target);
+            var layer1 = XLayer.Create("Layer1", target);
+            var layer2 = XLayer.Create("Layer2", target);
             target.Layers = target.Layers.Add(layer1);
             target.Layers = target.Layers.Add(layer2);
 
-            var workingLayer = Layer.Create("WorkingLayer", target);
-            var helperLayer = Layer.Create("HelperLayer", target);
+            var workingLayer = XLayer.Create("WorkingLayer", target);
+            var helperLayer = XLayer.Create("HelperLayer", target);
             target.WorkingLayer = workingLayer;
             target.HelperLayer = helperLayer;
 
@@ -112,7 +114,7 @@ namespace Core2D.UnitTests
             Assert.Equal(target.Template.Background, target.Background);
         }
 
-        public class Class1 : Container
+        public class Class1 : XContainer
         {
         }
     }

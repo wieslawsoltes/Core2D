@@ -4,8 +4,8 @@ using Xunit;
 
 namespace Core2D.UnitTests
 {
-    public class HistoryTests
+    public class StackHistoryTests
     {
-        // TODO: Write HistoryTests tests.
+        // TODO: Write StackHistoryTests tests.
     }
 }

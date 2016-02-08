@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Style;
 using Xunit;
 
 namespace Core2D.UnitTests
@@ -7,7 +8,7 @@ namespace Core2D.UnitTests
     public class BaseStyleTests
     {
         [Fact]
-        [Trait("Core2D", "Style")]
+        [Trait("Core2D.Style", "Style")]
         public void Inherits_From_ObservableResource()
         {
             var target = new Class1();
@@ -15,7 +16,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Style")]
+        [Trait("Core2D.Style", "Style")]
         public void ConvertDoubleArrayToDashes_Should_Return_Dashes_String()
         {
             var dashes = new double[] { 2.0, 2.0, 0.0, 2.0, 0.0, 2.0 };
@@ -27,7 +28,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Style")]
+        [Trait("Core2D.Style", "Style")]
         public void ConvertFloatArrayToDashes_Should_Return_Dashes_String()
         {
             var dashes = new float[] { 2.0f, 2.0f, 0.0f, 2.0f, 0.0f, 2.0f };
@@ -39,7 +40,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Style")]
+        [Trait("Core2D.Style", "Style")]
         public void ConvertDashesToDoubleArray_Should_Return_Dashes_Double_Array()
         {
             var dashes = "2 2 0 2 0 2";
@@ -51,7 +52,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Style")]
+        [Trait("Core2D.Style", "Style")]
         public void ConvertDashesToFloatArray_Should_Return_Dashes_Float_Array()
         {
             var dashes = "2 2 0 2 0 2";
@@ -63,7 +64,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Style")]
+        [Trait("Core2D.Style", "Style")]
         public void ConvertDoubleArrayToDashes_Should_Not_Throw()
         {
             var target = BaseStyle.ConvertDoubleArrayToDashes(null);
@@ -71,7 +72,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Style")]
+        [Trait("Core2D.Style", "Style")]
         public void ConvertFloatArrayToDashes_Should_Not_Throw()
         {
             var target = BaseStyle.ConvertFloatArrayToDashes(null);
@@ -79,7 +80,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Style")]
+        [Trait("Core2D.Style", "Style")]
         public void ConvertDashesToDoubleArray_Should_Not_Throw()
         {
             var dashes = "0 A";
@@ -88,7 +89,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Style")]
+        [Trait("Core2D.Style", "Style")]
         public void ConvertDashesToFloatArray_Should_Not_Throw()
         {
             var dashes = "0 A";

@@ -1,24 +1,25 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Project;
 using Xunit;
 
 namespace Core2D.UnitTests
 {
-    public class LayerTests
+    public class XLayerTests
     {
         [Fact]
         [Trait("Core2D.Project", "Project")]
         public void Inherits_From_Selectable()
         {
-            var target = new Layer();
-            Assert.True(target is Selectable);
+            var target = new XLayer();
+            Assert.True(target is XSelectable);
         }
 
         [Fact]
         [Trait("Core2D.Project", "Project")]
         public void Shapes_Not_Null()
         {
-            var target = new Layer();
+            var target = new XLayer();
             Assert.NotNull(target.Shapes);
         }
 
@@ -26,7 +27,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Project", "Project")]
         public void Setting_IsVisible_Should_Invalidate_Layer()
         {
-            var target = Layer.Create("Layer1");
+            var target = XLayer.Create("Layer1");
 
             bool raised = false;
 
@@ -44,7 +45,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Project", "Project")]
         public void Invalidate_Raises_InvalidateLayer_Event()
         {
-            var target = Layer.Create("Layer1");
+            var target = XLayer.Create("Layer1");
 
             bool raised = false;
 
@@ -62,7 +63,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Project", "Project")]
         public void Invalidate_Sets_EventArgs()
         {
-            var target = Layer.Create("Layer1");
+            var target = XLayer.Create("Layer1");
 
             InvalidateLayerEventArgs args = null;
 
