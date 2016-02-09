@@ -1,5 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Editor;
+using Core2D.Shapes;
 using System.Collections.Immutable;
 using System.Windows.Controls;
 
@@ -8,12 +10,12 @@ namespace Core2D.Wpf.Controls.Custom.Lists
     /// <summary>
     /// The <see cref="ListBox"/> control for <see cref="XGroup.Connectors"/> items with drag and drop support.
     /// </summary>
-    public sealed class GroupConnectorsDragAndDropListBox : DragAndDropListBox<XPoint>
+    public sealed class XGroupConnectorsDragAndDropListBox : DragAndDropListBox<XPoint>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="GroupConnectorsDragAndDropListBox"/> class.
+        /// Initializes a new instance of the <see cref="XGroupConnectorsDragAndDropListBox"/> class.
         /// </summary>
-        public GroupConnectorsDragAndDropListBox()
+        public XGroupConnectorsDragAndDropListBox()
             : base()
         {
             this.Initialized += (s, e) => base.Initialize();
@@ -25,7 +27,7 @@ namespace Core2D.Wpf.Controls.Custom.Lists
         /// <param name="array">The updated immutable array.</param>
         protected override void UpdateDataContext(ImmutableArray<XPoint> array)
         {
-            var editor = (Core2D.Editor)this.Tag;
+            var editor = (ShapeEditor)this.Tag;
             var group = this.DataContext as XGroup;
             if (group == null)
                 return;

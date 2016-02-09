@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using static System.Math;
 
 namespace Core2D.Wpf.Controls.Custom
 {
@@ -51,11 +52,11 @@ namespace Core2D.Wpf.Controls.Custom
         /// <param name="cheight">The container height.</param>
         public void FitTo(double pwidth, double pheight, double cwidth, double cheight)
         {
-            double zoom = Math.Min(pwidth / cwidth, pheight / cheight) - 0.001;
+            double zoom = Min(pwidth / cwidth, pheight / cheight) - 0.001;
             double px = (pwidth - (cwidth * zoom)) / 2.0;
             double py = (pheight - (cheight * zoom)) / 2.0;
-            double x = px - Math.Max(0, (pwidth - cwidth) / 2.0);
-            double y = py - Math.Max(0, (pheight - cheight) / 2.0);
+            double x = px - Max(0, (pwidth - cwidth) / 2.0);
+            double y = py - Max(0, (pheight - cheight) / 2.0);
 
             if (this.ZoomAndPanChild != null)
             {

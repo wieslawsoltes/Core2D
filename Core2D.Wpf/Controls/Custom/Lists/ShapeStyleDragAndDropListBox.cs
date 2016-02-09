@@ -1,5 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Editor;
+using Core2D.Style;
 using System.Collections.Immutable;
 using System.Windows.Controls;
 
@@ -25,7 +27,7 @@ namespace Core2D.Wpf.Controls.Custom.Lists
         /// <param name="array">The updated immutable array.</param>
         protected override void UpdateDataContext(ImmutableArray<ShapeStyle> array)
         {
-            var editor = (Core2D.Editor)this.Tag;
+            var editor = (ShapeEditor)this.Tag;
 
             var sg = editor.Project.CurrentStyleLibrary;
 

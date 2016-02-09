@@ -1,5 +1,8 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Project;
+using Core2D.Shape;
+using Core2D.Style;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -33,7 +36,7 @@ namespace Core2D.Wpf.Controls.Project
             pointShape.DragEnter +=
                 (s, e) =>
                 {
-                    if (!e.Data.GetDataPresent(typeof(Core2D.BaseShape)))
+                    if (!e.Data.GetDataPresent(typeof(BaseShape)))
                     {
                         e.Effects = DragDropEffects.None;
                         e.Handled = true;
@@ -43,16 +46,16 @@ namespace Core2D.Wpf.Controls.Project
             pointShape.Drop +=
                 (s, e) =>
                 {
-                    if (e.Data.GetDataPresent(typeof(Core2D.BaseShape)))
+                    if (e.Data.GetDataPresent(typeof(BaseShape)))
                     {
                         try
                         {
-                            var shape = e.Data.GetData(typeof(Core2D.BaseShape)) as Core2D.BaseShape;
+                            var shape = e.Data.GetData(typeof(BaseShape)) as BaseShape;
                             if (shape != null)
                             {
                                 if (pointShape.DataContext != null)
                                 {
-                                    var options = pointShape.DataContext as Core2D.Options;
+                                    var options = pointShape.DataContext as XOptions;
                                     if (options != null)
                                     {
                                         options.PointShape = shape;
@@ -76,7 +79,7 @@ namespace Core2D.Wpf.Controls.Project
             pointStyle.DragEnter +=
                 (s, e) =>
                 {
-                    if (!e.Data.GetDataPresent(typeof(Core2D.ShapeStyle)))
+                    if (!e.Data.GetDataPresent(typeof(ShapeStyle)))
                     {
                         e.Effects = DragDropEffects.None;
                         e.Handled = true;
@@ -86,16 +89,16 @@ namespace Core2D.Wpf.Controls.Project
             pointStyle.Drop +=
                 (s, e) =>
                 {
-                    if (e.Data.GetDataPresent(typeof(Core2D.ShapeStyle)))
+                    if (e.Data.GetDataPresent(typeof(ShapeStyle)))
                     {
                         try
                         {
-                            var style = e.Data.GetData(typeof(Core2D.ShapeStyle)) as Core2D.ShapeStyle;
+                            var style = e.Data.GetData(typeof(ShapeStyle)) as ShapeStyle;
                             if (style != null)
                             {
                                 if (pointStyle.DataContext != null)
                                 {
-                                    var options = pointStyle.DataContext as Core2D.Options;
+                                    var options = pointStyle.DataContext as XOptions;
                                     if (options != null)
                                     {
                                         options.PointStyle = style;
@@ -119,7 +122,7 @@ namespace Core2D.Wpf.Controls.Project
             selectionStyle.DragEnter +=
                 (s, e) =>
                 {
-                    if (!e.Data.GetDataPresent(typeof(Core2D.ShapeStyle)))
+                    if (!e.Data.GetDataPresent(typeof(ShapeStyle)))
                     {
                         e.Effects = DragDropEffects.None;
                         e.Handled = true;
@@ -129,16 +132,16 @@ namespace Core2D.Wpf.Controls.Project
             selectionStyle.Drop +=
                 (s, e) =>
                 {
-                    if (e.Data.GetDataPresent(typeof(Core2D.ShapeStyle)))
+                    if (e.Data.GetDataPresent(typeof(ShapeStyle)))
                     {
                         try
                         {
-                            var style = e.Data.GetData(typeof(Core2D.ShapeStyle)) as Core2D.ShapeStyle;
+                            var style = e.Data.GetData(typeof(ShapeStyle)) as ShapeStyle;
                             if (style != null)
                             {
                                 if (selectionStyle.DataContext != null)
                                 {
-                                    var options = selectionStyle.DataContext as Core2D.Options;
+                                    var options = selectionStyle.DataContext as XOptions;
                                     if (options != null)
                                     {
                                         options.SelectionStyle = style;
@@ -162,7 +165,7 @@ namespace Core2D.Wpf.Controls.Project
             helperStyle.DragEnter +=
                 (s, e) =>
                 {
-                    if (!e.Data.GetDataPresent(typeof(Core2D.ShapeStyle)))
+                    if (!e.Data.GetDataPresent(typeof(ShapeStyle)))
                     {
                         e.Effects = DragDropEffects.None;
                         e.Handled = true;
@@ -172,16 +175,16 @@ namespace Core2D.Wpf.Controls.Project
             helperStyle.Drop +=
                 (s, e) =>
                 {
-                    if (e.Data.GetDataPresent(typeof(Core2D.ShapeStyle)))
+                    if (e.Data.GetDataPresent(typeof(ShapeStyle)))
                     {
                         try
                         {
-                            var style = e.Data.GetData(typeof(Core2D.ShapeStyle)) as Core2D.ShapeStyle;
+                            var style = e.Data.GetData(typeof(ShapeStyle)) as ShapeStyle;
                             if (style != null)
                             {
                                 if (helperStyle.DataContext != null)
                                 {
-                                    var options = helperStyle.DataContext as Core2D.Options;
+                                    var options = helperStyle.DataContext as XOptions;
                                     if (options != null)
                                     {
                                         options.HelperStyle = style;

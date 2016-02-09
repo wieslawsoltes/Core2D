@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Project;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -30,7 +31,7 @@ namespace Core2D.Wpf.Controls.Project
             this.DragEnter +=
                 (s, e) =>
                 {
-                    if (!e.Data.GetDataPresent(typeof(Core2D.Template)))
+                    if (!e.Data.GetDataPresent(typeof(XTemplate)))
                     {
                         e.Effects = DragDropEffects.None;
                         e.Handled = true;
@@ -40,16 +41,16 @@ namespace Core2D.Wpf.Controls.Project
             this.Drop +=
                 (s, e) =>
                 {
-                    if (e.Data.GetDataPresent(typeof(Core2D.Template)))
+                    if (e.Data.GetDataPresent(typeof(XTemplate)))
                     {
                         try
                         {
-                            var template = e.Data.GetData(typeof(Core2D.Template)) as Core2D.Template;
+                            var template = e.Data.GetData(typeof(XTemplate)) as XTemplate;
                             if (template != null)
                             {
                                 if (this.DataContext != null)
                                 {
-                                    var page = this.DataContext as Core2D.Page;
+                                    var page = this.DataContext as XPage;
                                     if (page != null)
                                     {
                                         page.Template = template;

@@ -1,17 +1,18 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using System;
+using Core2D.Data.Database;
 using System.Collections.Immutable;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using static System.Math;
 
 namespace Core2D.Wpf.Controls.Custom
 {
     /// <summary>
-    /// The <see cref="Database.Records"/> view control.
+    /// The <see cref="XDatabase.Records"/> view control.
     /// </summary>
     public sealed class RecordsListView : ListView
     {
@@ -51,7 +52,7 @@ namespace Core2D.Wpf.Controls.Custom
             DataContextChanged +=
                 (sender, e) =>
                 {
-                    var old = e.OldValue as Database;
+                    var old = e.OldValue as XDatabase;
                     if (old != null)
                     {
                         StopObservingColumns(old);
@@ -69,7 +70,7 @@ namespace Core2D.Wpf.Controls.Custom
         /// </summary>
         public void InitializeColumnsView()
         {
-            var database = DataContext as Database;
+            var database = DataContext as XDatabase;
             if (database != null)
             {
                 this.View = CreateColumnsView(database.Columns);
@@ -82,7 +83,7 @@ namespace Core2D.Wpf.Controls.Custom
             }
         }
 
-        private GridView CreateColumnsView(ImmutableArray<Column> columns)
+        private GridView CreateColumnsView(ImmutableArray<XColumn> columns)
         {
             var gv = new GridView();
 
@@ -117,13 +118,13 @@ namespace Core2D.Wpf.Controls.Custom
 
         private void DatabaseObserver(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(Database.Columns))
+            if (e.PropertyName == nameof(XDatabase.Columns))
             {
                 InitializeColumnsView();
             }
         }
 
-        private void StartObservingColumns(Database database)
+        private void StartObservingColumns(XDatabase database)
         {
             if (database == null || database.Columns == null)
                 return;
@@ -136,7 +137,7 @@ namespace Core2D.Wpf.Controls.Custom
             database.PropertyChanged += DatabaseObserver;
         }
 
-        private void StopObservingColumns(Database database)
+        private void StopObservingColumns(XDatabase database)
         {
             if (database == null || database.Columns == null)
                 return;
@@ -159,17 +160,17 @@ namespace Core2D.Wpf.Controls.Custom
             Point point = e.GetPosition(null);
             Vector diff = dragStartPoint - point;
             if (e.LeftButton == MouseButtonState.Pressed &&
-                (Math.Abs(diff.X) > SystemParameters.MinimumHorizontalDragDistance ||
-                 Math.Abs(diff.Y) > SystemParameters.MinimumVerticalDragDistance))
+                (Abs(diff.X) > SystemParameters.MinimumHorizontalDragDistance ||
+                 Abs(diff.Y) > SystemParameters.MinimumVerticalDragDistance))
             {
                 var listView = sender as ListView;
                 var listViewItem = FindVisualParent<ListViewItem>((DependencyObject)e.OriginalSource);
                 if (listViewItem != null)
                 {
-                    var record = (Record)listView
+                    var record = (XRecord)listView
                         .ItemContainerGenerator
                         .ItemFromContainer(listViewItem);
-                    DataObject dragData = new DataObject(typeof(Record), record);
+                    DataObject dragData = new DataObject(typeof(XRecord), record);
                     DragDrop.DoDragDrop(
                         listViewItem,
                         dragData,

@@ -7,7 +7,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Core2D.Wpf" 
              xmlns:converters="clr-namespace:Core2D.Wpf.Converters" 
-             xmlns:core="clr-namespace:Core2D;assembly=Core2D" 
+             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
              xmlns:custom="clr-namespace:Core2D.Wpf.Controls.Custom"
              xmlns:p="clr-namespace:Core2D.Wpf.Properties"
              mc:Ignorable="d" 
@@ -38,7 +38,7 @@
                     <TextBlock Text="{x:Static p:Resources.OptionsHitThreshold}" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="3" Grid.Column="0"/>
                     <TextBox Text="{Binding HitThreshold, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="3" Grid.Column="1"/>
                     <TextBlock Text="{x:Static p:Resources.OptionsMoveMode}" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="4" Grid.Column="0"/>
-                    <ComboBox ItemsSource="{x:Static core:Enums.MoveModeValues}" SelectedItem="{Binding MoveMode}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="4" Grid.Column="1"/>
+                    <ComboBox ItemsSource="{x:Static Editor:Enums.MoveModeValues}" SelectedItem="{Binding MoveMode}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="4" Grid.Column="1"/>
                     <TextBlock Text="{x:Static p:Resources.OptionsTryToConnect}" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="5" Grid.Column="0"/>
                     <CheckBox Content="" IsChecked="{Binding TryToConnect}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="5" Grid.Column="1"/>
                 </Grid>
@@ -67,7 +67,7 @@
                     <TextBlock Text="{x:Static p:Resources.OptionsDefaultIsSmoothJoin}" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="3" Grid.Column="0"/>
                     <CheckBox Content="" IsChecked="{Binding DefaultIsSmoothJoin}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="3" Grid.Column="1"/>
                     <TextBlock Text="{x:Static p:Resources.OptionsDefaultFillRule}" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="4" Grid.Column="0"/>
-                    <ComboBox ItemsSource="{x:Static core:Enums.XFillRuleValues}" SelectedItem="{Binding DefaultFillRule}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="4" Grid.Column="1"/>
+                    <ComboBox ItemsSource="{x:Static Editor:Enums.XFillRuleValues}" SelectedItem="{Binding DefaultFillRule}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="4" Grid.Column="1"/>
                 </Grid>
             </ScrollViewer>
         </TabItem>

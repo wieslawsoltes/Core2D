@@ -7,7 +7,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Core2D.Wpf" 
              xmlns:converters="clr-namespace:Core2D.Wpf.Converters" 
-             xmlns:core="clr-namespace:Core2D;assembly=Core2D" 
+             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D" 
              xmlns:custom="clr-namespace:Core2D.Wpf.Controls.Custom"
              mc:Ignorable="d" 
              d:DataContext="{x:Static local:DesignerHelper.Project}"
@@ -16,8 +16,8 @@
         <Grid.Resources>
             <ControlTemplate x:Key="DatabasesMenu">
                 <Menu Background="Transparent" HorizontalAlignment="Right">
-                    <MenuItem Command="{x:Static core:Commands.AddDatabaseCommand}" Header="+"/>
-                    <MenuItem Command="{x:Static core:Commands.RemoveDatabaseCommand}" CommandParameter="{Binding CurrentDatabase}" Header="-"/>
+                    <MenuItem Command="{x:Static Editor:Commands.AddDatabaseCommand}" Header="+"/>
+                    <MenuItem Command="{x:Static Editor:Commands.RemoveDatabaseCommand}" CommandParameter="{Binding CurrentDatabase}" Header="-"/>
                 </Menu>
             </ControlTemplate>
         </Grid.Resources>

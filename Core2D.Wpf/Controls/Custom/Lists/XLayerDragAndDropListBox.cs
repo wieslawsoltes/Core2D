@@ -1,19 +1,21 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Editor;
+using Core2D.Project;
 using System.Collections.Immutable;
 using System.Windows.Controls;
 
 namespace Core2D.Wpf.Controls.Custom.Lists
 {
     /// <summary>
-    /// The <see cref="ListBox"/> control for <see cref="Layer"/> items with drag and drop support.
+    /// The <see cref="ListBox"/> control for <see cref="XLayer"/> items with drag and drop support.
     /// </summary>
-    public sealed class LayerDragAndDropListBox : DragAndDropListBox<Layer>
+    public sealed class XLayerDragAndDropListBox : DragAndDropListBox<XLayer>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="LayerDragAndDropListBox"/> class.
+        /// Initializes a new instance of the <see cref="XLayerDragAndDropListBox"/> class.
         /// </summary>
-        public LayerDragAndDropListBox()
+        public XLayerDragAndDropListBox()
             : base()
         {
             this.Initialized += (s, e) => base.Initialize();
@@ -23,9 +25,9 @@ namespace Core2D.Wpf.Controls.Custom.Lists
         /// Updates DataContext binding to ImmutableArray collection property.
         /// </summary>
         /// <param name="array">The updated immutable array.</param>
-        protected override void UpdateDataContext(ImmutableArray<Layer> array)
+        protected override void UpdateDataContext(ImmutableArray<XLayer> array)
         {
-            var editor = (Core2D.Editor)this.Tag;
+            var editor = (ShapeEditor)this.Tag;
 
             var container = editor.Project.CurrentContainer;
 

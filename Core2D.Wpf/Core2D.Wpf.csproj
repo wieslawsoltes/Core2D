@@ -130,8 +130,8 @@
     <Compile Include="Controls\Data\DataControl.xaml.cs">
       <DependentUpon>DataControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Custom\Lists\GroupConnectorsDragAndDropListBox.cs" />
-    <Compile Include="Controls\Custom\Lists\GroupShapesDragAndDropListBox.cs" />
+    <Compile Include="Controls\Custom\Lists\XGroupConnectorsDragAndDropListBox.cs" />
+    <Compile Include="Controls\Custom\Lists\XGroupShapesDragAndDropListBox.cs" />
     <Compile Include="Controls\Editor\PageControl.xaml.cs">
       <DependentUpon>PageControl.xaml</DependentUpon>
     </Compile>
@@ -193,8 +193,8 @@
       <DependentUpon>DatabasesControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Custom\Lists\BaseShapeDragAndDropListBox.cs" />
-    <Compile Include="Controls\Custom\Lists\TemplateDragAndDropListBox.cs" />
-    <Compile Include="Controls\Custom\Lists\LayerDragAndDropListBox.cs" />
+    <Compile Include="Controls\Custom\Lists\XTemplateDragAndDropListBox.cs" />
+    <Compile Include="Controls\Custom\Lists\XLayerDragAndDropListBox.cs" />
     <Compile Include="Controls\Custom\Lists\ShapeStyleDragAndDropListBox.cs" />
     <Compile Include="Controls\Custom\Lists\XGroupDragAndDropListBox.cs" />
     <Compile Include="Controls\Project\GroupsControl.xaml.cs">

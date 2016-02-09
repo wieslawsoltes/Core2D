@@ -1,22 +1,32 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Data.Database;
+using Core2D.Editor;
+using Core2D.Editor.Factories;
+using Core2D.Editor.Input;
+using Core2D.Interfaces;
+using Core2D.Project;
+using Core2D.Renderer;
+using Core2D.Shape;
+using Core2D.Shapes;
+using Core2D.Style;
+using Dependencies;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
-using Microsoft.Win32;
-using Dependencies;
 
 namespace Core2D.Wpf
 {
     /// <summary>
-    /// Encapsulates a WPF application.
+    /// Encapsulates a Core2D WPF application.
     /// </summary>
     public partial class App : Application
     {
-        private Editor _editor;
+        private ShapeEditor _editor;
         private Windows.MainWindow _mainWindow;
         private bool _isLoaded = false;
         private string _recentFileName = "Core2D.recent";
@@ -158,11 +168,11 @@ namespace Core2D.Wpf
         /// <param name="log">The log instance.</param>
         private void InitializeEditor(ILog log)
         {
-            _editor = new Editor()
+            _editor = new ShapeEditor()
             {
                 CurrentTool = Tool.Selection,
                 CurrentPathTool = PathTool.Line,
-                Renderers = new Renderer[] { new WpfRenderer() },
+                Renderers = new ShapeRenderer[] { new WpfRenderer() },
                 ProjectFactory = new ProjectFactory(),
                 TextClipboard = new TextClipboard(),
                 ProtoBufSerializer = new ProtoBufStreamSerializer(),
@@ -197,7 +207,7 @@ namespace Core2D.Wpf
         /// Initialize platform specific commands used by <see cref="Editor"/>.
         /// </summary>
         /// <param name="editor">The editor instance.</param>
-        private void InitializeCommands(Editor editor)
+        private void InitializeCommands(ShapeEditor editor)
         {
             Commands.OpenCommand =
                 Command<string>.Create(
@@ -235,22 +245,22 @@ namespace Core2D.Wpf
                     (project) => editor.IsEditMode());
 
             Commands.ExportDataCommand =
-                Command<Database>.Create(
+                Command<XDatabase>.Create(
                     (db) => OnExportData(),
                     (db) => editor.IsEditMode());
 
             Commands.UpdateDataCommand =
-                Command<Database>.Create(
+                Command<XDatabase>.Create(
                     (db) => OnUpdateData(),
                     (db) => editor.IsEditMode());
 
             Commands.ImportStyleCommand =
-                Command<Library<ShapeStyle>>.Create(
+                Command<XLibrary<ShapeStyle>>.Create(
                     (item) => OnImportObject(item, CoreType.Style),
                     (item) => editor.IsEditMode());
 
             Commands.ImportStylesCommand =
-                Command<Library<ShapeStyle>>.Create(
+                Command<XLibrary<ShapeStyle>>.Create(
                     (item) => OnImportObject(item, CoreType.Styles),
                     (item) => editor.IsEditMode());
 
@@ -265,12 +275,12 @@ namespace Core2D.Wpf
                     (item) => editor.IsEditMode());
 
             Commands.ImportGroupCommand =
-                Command<Library<XGroup>>.Create(
+                Command<XLibrary<XGroup>>.Create(
                     (item) => OnImportObject(item, CoreType.Group),
                     (item) => editor.IsEditMode());
 
             Commands.ImportGroupsCommand =
-                Command<Library<XGroup>>.Create(
+                Command<XLibrary<XGroup>>.Create(
                     (item) => OnImportObject(item, CoreType.Groups),
                     (item) => editor.IsEditMode());
 
@@ -300,17 +310,17 @@ namespace Core2D.Wpf
                     (item) => editor.IsEditMode());
 
             Commands.ExportStylesCommand =
-                Command<Library<ShapeStyle>>.Create(
+                Command<XLibrary<ShapeStyle>>.Create(
                     (item) => OnExportObject(item, CoreType.Styles),
                     (item) => editor.IsEditMode());
 
             Commands.ExportStyleLibraryCommand =
-                Command<Library<ShapeStyle>>.Create(
+                Command<XLibrary<ShapeStyle>>.Create(
                     (item) => OnExportObject(item, CoreType.StyleLibrary),
                     (item) => editor.IsEditMode());
 
             Commands.ExportStyleLibrariesCommand =
-                Command<IEnumerable<Library<ShapeStyle>>>.Create(
+                Command<IEnumerable<XLibrary<ShapeStyle>>>.Create(
                     (item) => OnExportObject(item, CoreType.StyleLibraries),
                     (item) => editor.IsEditMode());
 
@@ -320,27 +330,27 @@ namespace Core2D.Wpf
                     (item) => editor.IsEditMode());
 
             Commands.ExportGroupsCommand =
-                Command<Library<XGroup>>.Create(
+                Command<XLibrary<XGroup>>.Create(
                     (item) => OnExportObject(item, CoreType.Groups),
                     (item) => editor.IsEditMode());
 
             Commands.ExportGroupLibraryCommand =
-                Command<Library<XGroup>>.Create(
+                Command<XLibrary<XGroup>>.Create(
                     (item) => OnExportObject(item, CoreType.GroupLibrary),
                     (item) => editor.IsEditMode());
 
             Commands.ExportGroupLibrariesCommand =
-                Command<IEnumerable<Library<XGroup>>>.Create(
+                Command<IEnumerable<XLibrary<XGroup>>>.Create(
                     (item) => OnExportObject(item, CoreType.GroupLibraries),
                     (item) => editor.IsEditMode());
 
             Commands.ExportTemplateCommand =
-                Command<Template>.Create(
+                Command<XTemplate>.Create(
                     (item) => OnExportObject(item, CoreType.Template),
                     (item) => editor.IsEditMode());
 
             Commands.ExportTemplatesCommand =
-                Command<IEnumerable<Template>>.Create(
+                Command<IEnumerable<XTemplate>>.Create(
                     (item) => OnExportObject(item, CoreType.Templates),
                     (item) => editor.IsEditMode());
 
@@ -510,21 +520,21 @@ namespace Core2D.Wpf
         {
             string name = string.Empty;
 
-            if (item is Container)
+            if (item is XContainer)
             {
-                name = (item as Container).Name;
+                name = (item as XContainer).Name;
             }
-            else if (item is Document)
+            else if (item is XDocument)
             {
-                name = (item as Document).Name;
+                name = (item as XDocument).Name;
             }
-            else if (item is Project)
+            else if (item is XProject)
             {
-                name = (item as Project).Name;
+                name = (item as XProject).Name;
             }
-            else if (item is Editor)
+            else if (item is ShapeEditor)
             {
-                var editor = (item as Editor);
+                var editor = (item as ShapeEditor);
                 if (editor?.Project == null)
                     return;
 
@@ -721,11 +731,11 @@ namespace Core2D.Wpf
                     break;
                 case CoreType.Styles:
                     filter = "Styles (*.styles)|*.styles|Styles (*.xaml)|*.xaml|All (*.*)|*.*";
-                    name = (item as Library<ShapeStyle>).Name;
+                    name = (item as XLibrary<ShapeStyle>).Name;
                     break;
                 case CoreType.StyleLibrary:
                     filter = "StyleLibrary (*.stylelibrary)|*.stylelibrary|StyleLibrary (*.xaml)|*.xaml|All (*.*)|*.*";
-                    name = (item as Library<ShapeStyle>).Name;
+                    name = (item as XLibrary<ShapeStyle>).Name;
                     break;
                 case CoreType.StyleLibraries:
                     filter = "StyleLibraries (*.stylelibraries)|*.stylelibraries|StyleLibraries (*.xaml)|*.xaml|All (*.*)|*.*";
@@ -737,11 +747,11 @@ namespace Core2D.Wpf
                     break;
                 case CoreType.Groups:
                     filter = "Groups (*.groups)|*.groups|Groups (*.xaml)|*.xaml|All (*.*)|*.*";
-                    name = (item as Library<XGroup>).Name;
+                    name = (item as XLibrary<XGroup>).Name;
                     break;
                 case CoreType.GroupLibrary:
                     filter = "GroupLibrary (*.grouplibrary)|*.grouplibrary|GroupLibrary (*.xaml)|*.xaml|All (*.*)|*.*";
-                    name = (item as Library<XGroup>).Name;
+                    name = (item as XLibrary<XGroup>).Name;
                     break;
                 case CoreType.GroupLibraries:
                     filter = "GroupLibraries (*.grouplibraries)|*.grouplibraries|GroupLibraries (*.xaml)|*.xaml|All (*.*)|*.*";
@@ -749,7 +759,7 @@ namespace Core2D.Wpf
                     break;
                 case CoreType.Template:
                     filter = "Template (*.template)|*.template|Template (*.xaml)|*.xaml|All (*.*)|*.*";
-                    name = (item as Template).Name;
+                    name = (item as XTemplate).Name;
                     break;
                 case CoreType.Templates:
                     filter = "Templates (*.templates)|*.templates|Templates (*.xaml)|*.xaml|All (*.*)|*.*";
@@ -787,7 +797,7 @@ namespace Core2D.Wpf
         /// </summary>
         private void OnCopyAsEmf()
         {
-            var page = _editor?.Project?.CurrentContainer as Page;
+            var page = _editor?.Project?.CurrentContainer as XPage;
             if (page != null)
             {
                 var writer = new EmfWriter();

@@ -6,7 +6,15 @@
              xmlns:sys="clr-namespace:System;assembly=mscorlib" 
              xmlns:local="clr-namespace:Core2D.Wpf" 
              xmlns:converters="clr-namespace:Core2D.Wpf.Converters" 
-             xmlns:core="clr-namespace:Core2D;assembly=Core2D" 
+             xmlns:Data="clr-namespace:Core2D.Data;assembly=Core2D"
+             xmlns:Database="clr-namespace:Core2D.Data.Database;assembly=Core2D"
+             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
+             xmlns:Path="clr-namespace:Core2D.Path;assembly=Core2D"
+             xmlns:Segments="clr-namespace:Core2D.Path.Segments;assembly=Core2D"
+             xmlns:Project="clr-namespace:Core2D.Project;assembly=Core2D"
+             xmlns:Shape="clr-namespace:Core2D.Shape;assembly=Core2D" 
+             xmlns:Shapes="clr-namespace:Core2D.Shapes;assembly=Core2D" 
+             xmlns:Style="clr-namespace:Core2D.Style;assembly=Core2D" 
              xmlns:custom="clr-namespace:Core2D.Wpf.Controls.Custom"
              xmlns:lists="clr-namespace:Core2D.Wpf.Controls.Custom.Lists"
              xmlns:data="clr-namespace:Core2D.Wpf.Controls.Data"
@@ -104,126 +112,126 @@
             <Setter Property="Margin" Value="5,2,5,2"/>
         </Style>
         <!-- Style -->
-        <DataTemplate DataType="{x:Type core:ArgbColor}">
+        <DataTemplate DataType="{x:Type Style:ArgbColor}">
             <style:ArgbColorControl/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type core:ArrowStyle}">
+        <DataTemplate DataType="{x:Type Style:ArrowStyle}">
             <style:ArrowStyleControl/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type core:FontStyle}">
+        <DataTemplate DataType="{x:Type Style:FontStyle}">
             <style:FontStyleControl/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type core:TextStyle}">
+        <DataTemplate DataType="{x:Type Style:TextStyle}">
             <style:TextStyleControl/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type core:LineFixedLength}">
+        <DataTemplate DataType="{x:Type Style:LineFixedLength}">
             <style:LineFixedLengthControl/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type core:LineStyle}">
+        <DataTemplate DataType="{x:Type Style:LineStyle}">
             <style:LineStyleControl/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type core:ShapeStyle}">
+        <DataTemplate DataType="{x:Type Style:ShapeStyle}">
             <style:ShapeStyleControl/>
         </DataTemplate>
         <!-- Data -->
-        <DataTemplate DataType="{x:Type core:Record}">
+        <DataTemplate DataType="{x:Type Database:XRecord}">
             <data:RecordControl/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type core:Database}">
+        <DataTemplate DataType="{x:Type Database:XDatabase}">
             <data:DatabaseControl/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type core:Data}">
+        <DataTemplate DataType="{x:Type Data:XContext}">
             <data:DataControl/>
         </DataTemplate>
         <!-- State -->
-        <DataTemplate DataType="{x:Type core:ShapeState}">
+        <DataTemplate DataType="{x:Type Shape:ShapeState}">
             <state:ShapeStateControl/>
         </DataTemplate>
         <!-- Shapes -->
-        <DataTemplate DataType="{x:Type core:XPoint}">
+        <DataTemplate DataType="{x:Type Shapes:XPoint}">
             <shapes:PointControl/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type core:XLine}">
+        <DataTemplate DataType="{x:Type Shapes:XLine}">
             <shapes:LineControl/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type core:XText}">
+        <DataTemplate DataType="{x:Type Shapes:XText}">
             <shapes:TextControl/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type core:XRectangle}">
+        <DataTemplate DataType="{x:Type Shapes:XRectangle}">
             <shapes:RectangleControl/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type core:XEllipse}">
+        <DataTemplate DataType="{x:Type Shapes:XEllipse}">
             <shapes:EllipseControl/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type core:XImage}">
+        <DataTemplate DataType="{x:Type Shapes:XImage}">
             <shapes:ImageControl/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type core:XArc}">
+        <DataTemplate DataType="{x:Type Shapes:XArc}">
             <shapes:ArcControl/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type core:XCubicBezier}">
+        <DataTemplate DataType="{x:Type Shapes:XCubicBezier}">
             <shapes:CubicBezierControl/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type core:XQuadraticBezier}">
+        <DataTemplate DataType="{x:Type Shapes:XQuadraticBezier}">
             <shapes:QuadraticBezierControl/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type core:XGroup}">
+        <DataTemplate DataType="{x:Type Shapes:XGroup}">
             <shapes:GroupControl/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type core:XPath}">
+        <DataTemplate DataType="{x:Type Shapes:XPath}">
             <shapes:PathControl/>
         </DataTemplate>
         <!-- Path -->
-        <DataTemplate DataType="{x:Type core:XPathSize}">
+        <DataTemplate DataType="{x:Type Path:XPathSize}">
             <path:PathSizeControl/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type core:XArcSegment}">
+        <DataTemplate DataType="{x:Type Segments:XArcSegment}">
             <path:ArcSegmentControl/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type core:XCubicBezierSegment}">
+        <DataTemplate DataType="{x:Type Segments:XCubicBezierSegment}">
             <path:CubicBezierSegmentControl/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type core:XLineSegment}">
+        <DataTemplate DataType="{x:Type Segments:XLineSegment}">
             <path:LineSegmentControl/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type core:XPolyCubicBezierSegment}">
+        <DataTemplate DataType="{x:Type Segments:XPolyCubicBezierSegment}">
             <path:PolyCubicBezierSegmentControl/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type core:XPolyLineSegment}">
+        <DataTemplate DataType="{x:Type Segments:XPolyLineSegment}">
             <path:PolyLineSegmentControl/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type core:XPolyQuadraticBezierSegment}">
+        <DataTemplate DataType="{x:Type Segments:XPolyQuadraticBezierSegment}">
             <path:PolyQuadraticBezierSegmentControl/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type core:XQuadraticBezierSegment}">
+        <DataTemplate DataType="{x:Type Segments:XQuadraticBezierSegment}">
             <path:QuadraticBezierSegmentControl/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type core:XPathFigure}">
+        <DataTemplate DataType="{x:Type Path:XPathFigure}">
             <path:PathFigureControl/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type core:XPathGeometry}">
+        <DataTemplate DataType="{x:Type Path:XPathGeometry}">
             <path:PathGeometryControl/>
         </DataTemplate>
         <!-- Project -->
-        <DataTemplate DataType="{x:Type core:Options}">
+        <DataTemplate DataType="{x:Type Project:XOptions}">
             <project:OptionsControl/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type core:Project}">
+        <DataTemplate DataType="{x:Type Project:XProject}">
             <project:ProjectControl/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type core:Document}">
+        <DataTemplate DataType="{x:Type Project:XDocument}">
             <project:DocumentControl/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type core:Container}">
+        <DataTemplate DataType="{x:Type Project:XContainer}">
             <project:ContainerControl/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type core:Template}">
+        <DataTemplate DataType="{x:Type Project:XTemplate}">
             <project:TemplateControl/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type core:Page}">
+        <DataTemplate DataType="{x:Type Project:XPage}">
             <project:PageControl/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type core:Layer}">
+        <DataTemplate DataType="{x:Type Project:XLayer}">
             <project:LayerControl/>
         </DataTemplate>
     </Application.Resources>
