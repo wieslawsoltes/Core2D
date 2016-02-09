@@ -56,7 +56,6 @@
     <Compile Include="Converters\ArgbColorJsonConverter.cs" />
     <Compile Include="Converters\FontStyleConverter.cs" />
     <Compile Include="Converters\ShapeStateConverter.cs" />
-    <Compile Include="JsonSerializationBinder.cs" />
     <Compile Include="NewtonsoftTextSerializer.cs" />
     <Compile Include="ProjectContractResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

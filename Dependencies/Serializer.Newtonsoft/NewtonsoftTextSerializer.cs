@@ -12,16 +12,6 @@ namespace Dependencies
     public class NewtonsoftTextSerializer : ITextSerializer
     {
         /// <summary>
-        /// The class library assembly name.
-        /// </summary>
-        public static string AssemblyName = "Core2D";
-
-        /// <summary>
-        /// The class library namespace prefix.
-        /// </summary>
-        public static string NamespacePrefix = "Core2D";
-
-        /// <summary>
         /// Specifies the settings on a <see cref="JsonSerializer"/> object.
         /// </summary>
         public static JsonSerializerSettings Settings;
@@ -39,7 +29,6 @@ namespace Dependencies
                 ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
                 ContractResolver = new ProjectContractResolver(),
                 NullValueHandling = NullValueHandling.Ignore,
-                Binder = new JsonSerializationBinder(AssemblyName, NamespacePrefix),
                 Converters =
                 {
                     new KeyValuePairConverter(),
