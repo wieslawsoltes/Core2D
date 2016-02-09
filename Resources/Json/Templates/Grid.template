@@ -15,7 +15,7 @@
       "Shapes": [
         {
           "$id": "3",
-          "$type": "XRectangle",
+          "$type": "Core2D.Shapes.XRectangle, Core2D",
           "IsGrid": true,
           "OffsetX": 30.0,
           "OffsetY": 30.0,
@@ -23,9 +23,11 @@
           "CellHeight": 30.0,
           "TopLeft": {
             "$id": "4",
+            "X": 0.0,
+            "Y": 0.0,
             "Shape": {
               "$id": "5",
-              "$type": "XRectangle",
+              "$type": "Core2D.Shapes.XRectangle, Core2D",
               "IsGrid": false,
               "OffsetX": 30.0,
               "OffsetY": 30.0,
@@ -42,7 +44,8 @@
                 "Data": {
                   "$id": "7",
                   "Properties": []
-                }
+                },
+                "Resources": []
               },
               "BottomRight": {
                 "$id": "8",
@@ -55,7 +58,8 @@
                 "Data": {
                   "$id": "9",
                   "Properties": []
-                }
+                },
+                "Resources": []
               },
               "Name": "",
               "State": "Visible, Printable, Standalone",
@@ -90,7 +94,8 @@
                   "Fill": "#FF000000",
                   "Thickness": 1.0,
                   "LineCap": 2,
-                  "DashOffset": 0.0
+                  "DashOffset": 0.0,
+                  "Resources": []
                 },
                 "EndArrowStyle": {
                   "$id": "14",
@@ -104,7 +109,8 @@
                   "Fill": "#FF000000",
                   "Thickness": 1.0,
                   "LineCap": 2,
-                  "DashOffset": 0.0
+                  "DashOffset": 0.0,
+                  "Resources": []
                 },
                 "TextStyle": {
                   "$id": "15",
@@ -121,17 +127,17 @@
                 "Fill": "#FF000000",
                 "Thickness": 1.0,
                 "LineCap": 2,
-                "DashOffset": 0.0
+                "DashOffset": 0.0,
+                "Resources": []
               },
               "IsStroked": true,
               "IsFilled": false,
               "Data": {
                 "$id": "16",
                 "Properties": []
-              }
+              },
+              "Resources": []
             },
-            "X": 0.0,
-            "Y": 0.0,
             "Name": "",
             "State": "Visible, Printable, Standalone",
             "IsStroked": false,
@@ -139,15 +145,16 @@
             "Data": {
               "$id": "17",
               "Properties": []
-            }
+            },
+            "Resources": []
           },
           "BottomRight": {
             "$id": "18",
+            "X": 840.0,
+            "Y": 600.0,
             "Shape": {
               "$ref": "5"
             },
-            "X": 840.0,
-            "Y": 600.0,
             "Name": "",
             "State": "Visible, Printable, Standalone",
             "IsStroked": false,
@@ -155,7 +162,8 @@
             "Data": {
               "$id": "19",
               "Properties": []
-            }
+            },
+            "Resources": []
           },
           "Name": "",
           "State": "Visible, Standalone",
@@ -190,7 +198,8 @@
               "Fill": "#FFDEDEDE",
               "Thickness": 1.0,
               "LineCap": 2,
-              "DashOffset": 0.0
+              "DashOffset": 0.0,
+              "Resources": []
             },
             "EndArrowStyle": {
               "$id": "24",
@@ -204,7 +213,8 @@
               "Fill": "#FFDEDEDE",
               "Thickness": 1.0,
               "LineCap": 2,
-              "DashOffset": 0.0
+              "DashOffset": 0.0,
+              "Resources": []
             },
             "TextStyle": {
               "$id": "25",
@@ -221,16 +231,19 @@
             "Fill": "#FFDEDEDE",
             "Thickness": 1.0,
             "LineCap": 2,
-            "DashOffset": 0.0
+            "DashOffset": 0.0,
+            "Resources": []
           },
           "IsStroked": false,
           "IsFilled": false,
           "Data": {
             "$id": "26",
             "Properties": []
-          }
+          },
+          "Resources": []
         }
-      ]
+      ],
+      "Resources": []
     },
     {
       "$id": "27",
@@ -239,7 +252,8 @@
         "$ref": "1"
       },
       "IsVisible": true,
-      "Shapes": []
+      "Shapes": [],
+      "Resources": []
     },
     {
       "$id": "28",
@@ -248,7 +262,8 @@
         "$ref": "1"
       },
       "IsVisible": true,
-      "Shapes": []
+      "Shapes": [],
+      "Resources": []
     }
   ],
   "CurrentLayer": {
@@ -256,20 +271,23 @@
   },
   "WorkingLayer": {
     "$id": "29",
-    "Name": "Working",
+    "Name": "TemplateWorking",
     "Owner": {
       "$ref": "1"
     },
     "IsVisible": true,
-    "Shapes": []
+    "Shapes": [],
+    "Resources": []
   },
   "HelperLayer": {
     "$id": "30",
-    "Name": "Helper",
+    "Name": "TemplateHelper",
     "Owner": {
       "$ref": "1"
     },
     "IsVisible": true,
-    "Shapes": []
-  }
+    "Shapes": [],
+    "Resources": []
+  },
+  "Resources": []
 }
