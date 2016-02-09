@@ -43,7 +43,7 @@ namespace Core2D.Perspex.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             int digits = _digits;
-            if (parameter != null && value.GetType() == typeof(string))
+            if (parameter != null && parameter.GetType() == typeof(string))
             {
                 int.TryParse(parameter as string, out digits);
             }
@@ -67,7 +67,7 @@ namespace Core2D.Perspex.Converters
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             int digits = _digits;
-            if (parameter != null && value.GetType() == typeof(string))
+            if (parameter != null && parameter.GetType() == typeof(string))
             {
                 int.TryParse(parameter as string, out digits);
             }
