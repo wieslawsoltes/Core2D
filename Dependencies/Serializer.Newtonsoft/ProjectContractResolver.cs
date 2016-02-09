@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 
-namespace Dependencies
+namespace Serializer.Newtonsoft
 {
     /// <inheritdoc/>
     internal class ProjectContractResolver : DefaultContractResolver

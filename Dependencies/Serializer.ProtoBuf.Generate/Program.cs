@@ -5,7 +5,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 
-namespace Dependencies
+namespace Serializer.ProtoBuf
 {
     class Program
     {

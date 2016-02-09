@@ -7,7 +7,7 @@ using Perspex;
 using Perspex.Media;
 using System;
 
-namespace Dependencies
+namespace Renderer.Perspex
 {
     /// <summary>
     /// 

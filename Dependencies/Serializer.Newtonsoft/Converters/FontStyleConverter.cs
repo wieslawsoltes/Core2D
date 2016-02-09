@@ -4,7 +4,7 @@ using Core2D.Style;
 using Newtonsoft.Json;
 using System;
 
-namespace Dependencies
+namespace Serializer.Newtonsoft
 {
     /// <inheritdoc/>
     internal class FontStyleConverter : JsonConverter

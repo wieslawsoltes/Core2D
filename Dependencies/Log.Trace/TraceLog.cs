@@ -3,9 +3,9 @@
 using Core2D;
 using Core2D.Interfaces;
 using System;
-using System.Diagnostics;
+using SD = System.Diagnostics;
 
-namespace Dependencies
+namespace Log.Trace
 {
     /// <summary>
     /// Trace message logger.
@@ -30,12 +30,12 @@ namespace Dependencies
         {
             try
             {
-                Trace.Listeners.Add(new TextWriterTraceListener(path, "listener"));
+                SD.Trace.Listeners.Add(new SD.TextWriterTraceListener(path, "listener"));
             }
             catch (Exception ex)
             {
-                Debug.Print(ex.Message);
-                Debug.Print(ex.StackTrace);
+                SD.Debug.Print(ex.Message);
+                SD.Debug.Print(ex.StackTrace);
             }
         }
 
@@ -44,54 +44,54 @@ namespace Dependencies
         {
             try
             {
-                Trace.Flush();
+                SD.Trace.Flush();
             }
             catch (Exception ex)
             {
-                Debug.Print(ex.Message);
-                Debug.Print(ex.StackTrace);
+                SD.Debug.Print(ex.Message);
+                SD.Debug.Print(ex.StackTrace);
             }
         }
 
         /// <inheritdoc/>
         public void LogInformation(string message)
         {
-            Trace.TraceInformation(message);
+            SD.Trace.TraceInformation(message);
             LastMessage = InformationPrefix + message;
         }
 
         /// <inheritdoc/>
         public void LogInformation(string format, params object[] args)
         {
-            Trace.TraceInformation(format, args);
+            SD.Trace.TraceInformation(format, args);
             LastMessage = InformationPrefix + string.Format(format, args);
         }
 
         /// <inheritdoc/>
         public void LogWarning(string message)
         {
-            Trace.TraceWarning(message);
+            SD.Trace.TraceWarning(message);
             LastMessage = WarningPrefix + message;
         }
 
         /// <inheritdoc/>
         public void LogWarning(string format, params object[] args)
         {
-            Trace.TraceWarning(format, args);
+            SD.Trace.TraceWarning(format, args);
             LastMessage = WarningPrefix + string.Format(format, args);
         }
 
         /// <inheritdoc/>
         public void LogError(string message)
         {
-            Trace.TraceError(message);
+            SD.Trace.TraceError(message);
             LastMessage = ErrorPrefix + message;
         }
 
         /// <inheritdoc/>
         public void LogError(string format, params object[] args)
         {
-            Trace.TraceError(format, args);
+            SD.Trace.TraceError(format, args);
             LastMessage = ErrorPrefix + string.Format(format, args);
         }
 

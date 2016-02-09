@@ -7,15 +7,15 @@ using Core2D.Math.Arc;
 using Core2D.Renderer;
 using Core2D.Shapes;
 using Core2D.Style;
-using Perspex;
-using Perspex.Media;
-using Perspex.Media.Imaging;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
+using P = Perspex;
+using PM = Perspex.Media;
+using PMI = Perspex.Media.Imaging;
 
-namespace Dependencies
+namespace Renderer.Perspex
 {
     /// <summary>
     /// Native Perspex shape renderer.
@@ -23,7 +23,7 @@ namespace Dependencies
     public class PerspexRenderer : ShapeRenderer
     {
         private bool _enableImageCache = true;
-        private IDictionary<string, Bitmap> _biCache;
+        private IDictionary<string, PMI.Bitmap> _biCache;
 
         /// <summary>
         /// 
@@ -63,7 +63,7 @@ namespace Dependencies
         /// <param name="rect"></param>
         /// <param name="size"></param>
         /// <returns></returns>
-        private Point GetTextOrigin(ShapeStyle style, ref Rect2 rect, ref Size size)
+        private P.Point GetTextOrigin(ShapeStyle style, ref Rect2 rect, ref P.Size size)
         {
             double ox, oy;
 
@@ -95,7 +95,7 @@ namespace Dependencies
                     break;
             }
 
-            return new Point(ox, oy);
+            return new P.Point(ox, oy);
         }
 
         /// <summary>
@@ -103,9 +103,9 @@ namespace Dependencies
         /// </summary>
         /// <param name="color"></param>
         /// <returns></returns>
-        private Color ToColor(ArgbColor color)
+        private PM.Color ToColor(ArgbColor color)
         {
-            return Color.FromArgb(
+            return PM.Color.FromArgb(
                 color.A,
                 color.R,
                 color.G,
@@ -118,32 +118,32 @@ namespace Dependencies
         /// <param name="style"></param>
         /// <param name="scale"></param>
         /// <returns></returns>
-        private Pen ToPen(BaseStyle style, Func<double, float> scale)
+        private PM.Pen ToPen(BaseStyle style, Func<double, float> scale)
         {
-            var lineCap = default(PenLineCap);
-            var dashStyle = default(DashStyle);
+            var lineCap = default(PM.PenLineCap);
+            var dashStyle = default(PM.DashStyle);
 
             switch (style.LineCap)
             {
                 case LineCap.Flat:
-                    lineCap = PenLineCap.Flat;
+                    lineCap = PM.PenLineCap.Flat;
                     break;
                 case LineCap.Square:
-                    lineCap = PenLineCap.Square;
+                    lineCap = PM.PenLineCap.Square;
                     break;
                 case LineCap.Round:
-                    lineCap = PenLineCap.Round;
+                    lineCap = PM.PenLineCap.Round;
                     break;
             }
 
             if (style.Dashes != null)
             {
-                dashStyle = new DashStyle(
+                dashStyle = new PM.DashStyle(
                     ShapeStyle.ConvertDashesToDoubleArray(style.Dashes),
                     style.DashOffset);
             }
 
-            var pen = new Pen(
+            var pen = new PM.Pen(
                 ToSolidBrush(style.Stroke),
                 scale(style.Thickness / State.Zoom),
                 dashStyle, lineCap,
@@ -157,9 +157,9 @@ namespace Dependencies
         /// </summary>
         /// <param name="color"></param>
         /// <returns></returns>
-        private SolidColorBrush ToSolidBrush(ArgbColor color)
+        private PM.SolidColorBrush ToSolidBrush(ArgbColor color)
         {
-            return new SolidColorBrush(ToColor(color));
+            return new PM.SolidColorBrush(ToColor(color));
         }
 
         /// <summary>
@@ -184,11 +184,11 @@ namespace Dependencies
         /// <param name="p0"></param>
         /// <param name="p1"></param>
         private static void DrawLineInternal(
-            DrawingContext dc,
-            Pen pen,
+            PM.DrawingContext dc,
+            PM.Pen pen,
             bool isStroked,
-            ref Point p0,
-            ref Point p1)
+            ref P.Point p0,
+            ref P.Point p1)
         {
             if (isStroked)
             {
@@ -206,18 +206,18 @@ namespace Dependencies
         /// <param name="pt1"></param>
         /// <param name="pt2"></param>
         private void DrawLineArrowsInternal(
-            DrawingContext dc,
+            PM.DrawingContext dc,
             XLine line,
             double dx,
             double dy,
-            out Point pt1,
-            out Point pt2)
+            out P.Point pt1,
+            out P.Point pt2)
         {
-            Brush fillStartArrow = ToSolidBrush(line.Style.StartArrowStyle.Fill);
-            Pen strokeStartArrow = ToPen(line.Style.StartArrowStyle, _scaleToPage);
+            PM.Brush fillStartArrow = ToSolidBrush(line.Style.StartArrowStyle.Fill);
+            PM.Pen strokeStartArrow = ToPen(line.Style.StartArrowStyle, _scaleToPage);
 
-            Brush fillEndArrow = ToSolidBrush(line.Style.EndArrowStyle.Fill);
-            Pen strokeEndArrow = ToPen(line.Style.EndArrowStyle, _scaleToPage);
+            PM.Brush fillEndArrow = ToSolidBrush(line.Style.EndArrowStyle.Fill);
+            PM.Pen strokeEndArrow = ToPen(line.Style.EndArrowStyle, _scaleToPage);
 
             double _x1 = line.Start.X + dx;
             double _y1 = line.Start.Y + dy;
@@ -236,11 +236,11 @@ namespace Dependencies
             double a1 = Math.Atan2(y1 - y2, x1 - x2);
             double a2 = Math.Atan2(y2 - y1, x2 - x1);
 
-            var t1 = MatrixHelper.Rotation(a1, new Vector(x1, y1));
-            var t2 = MatrixHelper.Rotation(a2, new Vector(x2, y2));
+            var t1 = MatrixHelper.Rotation(a1, new P.Vector(x1, y1));
+            var t2 = MatrixHelper.Rotation(a2, new P.Vector(x2, y2));
 
-            pt1 = default(Point);
-            pt2 = default(Point);
+            pt1 = default(P.Point);
+            pt2 = default(P.Point);
             double radiusX1 = sas.RadiusX;
             double radiusY1 = sas.RadiusY;
             double sizeX1 = 2.0 * radiusX1;
@@ -251,12 +251,12 @@ namespace Dependencies
                 default:
                 case ArrowType.None:
                     {
-                        pt1 = new Point(x1, y1);
+                        pt1 = new P.Point(x1, y1);
                     }
                     break;
                 case ArrowType.Rectangle:
                     {
-                        pt1 = MatrixHelper.TransformPoint(t1, new Point(x1 - (float)sizeX1, y1));
+                        pt1 = MatrixHelper.TransformPoint(t1, new P.Point(x1 - (float)sizeX1, y1));
                         var rect = new Rect2(x1 - sizeX1, y1 - radiusY1, sizeX1, sizeY1);
                         var d = dc.PushPreTransform(t1);
                         DrawRectangleInternal(dc, fillStartArrow, strokeStartArrow, sas.IsStroked, sas.IsFilled, ref rect);
@@ -265,7 +265,7 @@ namespace Dependencies
                     break;
                 case ArrowType.Ellipse:
                     {
-                        pt1 = MatrixHelper.TransformPoint(t1, new Point(x1 - (float)sizeX1, y1));
+                        pt1 = MatrixHelper.TransformPoint(t1, new P.Point(x1 - (float)sizeX1, y1));
                         var d = dc.PushPreTransform(t1);
                         var rect = new Rect2(x1 - sizeX1, y1 - radiusY1, sizeX1, sizeY1);
                         DrawEllipseInternal(dc, fillStartArrow, strokeStartArrow, sas.IsStroked, sas.IsFilled, ref rect);
@@ -274,13 +274,13 @@ namespace Dependencies
                     break;
                 case ArrowType.Arrow:
                     {
-                        var pts = new Point[]
+                        var pts = new P.Point[]
                         {
-                            new Point(x1, y1),
-                            new Point(x1 - (float)sizeX1, y1 + (float)sizeY1),
-                            new Point(x1, y1),
-                            new Point(x1 - (float)sizeX1, y1 - (float)sizeY1),
-                            new Point(x1, y1)
+                            new P.Point(x1, y1),
+                            new P.Point(x1 - (float)sizeX1, y1 + (float)sizeY1),
+                            new P.Point(x1, y1),
+                            new P.Point(x1 - (float)sizeX1, y1 - (float)sizeY1),
+                            new P.Point(x1, y1)
                         };
                         pt1 = MatrixHelper.TransformPoint(t1, pts[0]);
                         var p11 = MatrixHelper.TransformPoint(t1, pts[1]);
@@ -303,12 +303,12 @@ namespace Dependencies
                 default:
                 case ArrowType.None:
                     {
-                        pt2 = new Point(x2, y2);
+                        pt2 = new P.Point(x2, y2);
                     }
                     break;
                 case ArrowType.Rectangle:
                     {
-                        pt2 = MatrixHelper.TransformPoint(t2, new Point(x2 - (float)sizeX2, y2));
+                        pt2 = MatrixHelper.TransformPoint(t2, new P.Point(x2 - (float)sizeX2, y2));
                         var rect = new Rect2(x2 - sizeX2, y2 - radiusY2, sizeX2, sizeY2);
                         var d = dc.PushPreTransform(t2);
                         DrawRectangleInternal(dc, fillEndArrow, strokeEndArrow, eas.IsStroked, eas.IsFilled, ref rect);
@@ -317,7 +317,7 @@ namespace Dependencies
                     break;
                 case ArrowType.Ellipse:
                     {
-                        pt2 = MatrixHelper.TransformPoint(t2, new Point(x2 - (float)sizeX2, y2));
+                        pt2 = MatrixHelper.TransformPoint(t2, new P.Point(x2 - (float)sizeX2, y2));
                         var d = dc.PushPreTransform(t2);
                         var rect = new Rect2(x2 - sizeX2, y2 - radiusY2, sizeX2, sizeY2);
                         DrawEllipseInternal(dc, fillEndArrow, strokeEndArrow, eas.IsStroked, eas.IsFilled, ref rect);
@@ -326,13 +326,13 @@ namespace Dependencies
                     break;
                 case ArrowType.Arrow:
                     {
-                        var pts = new Point[]
+                        var pts = new P.Point[]
                         {
-                            new Point(x2, y2),
-                            new Point(x2 - (float)sizeX2, y2 + (float)sizeY2),
-                            new Point(x2, y2),
-                            new Point(x2 - (float)sizeX2, y2 - (float)sizeY2),
-                            new Point(x2, y2)
+                            new P.Point(x2, y2),
+                            new P.Point(x2 - (float)sizeX2, y2 + (float)sizeY2),
+                            new P.Point(x2, y2),
+                            new P.Point(x2 - (float)sizeX2, y2 - (float)sizeY2),
+                            new P.Point(x2, y2)
                         };
                         pt2 = MatrixHelper.TransformPoint(t2, pts[0]);
                         var p11 = MatrixHelper.TransformPoint(t2, pts[1]);
@@ -356,9 +356,9 @@ namespace Dependencies
         /// <param name="isFilled"></param>
         /// <param name="rect"></param>
         private static void DrawRectangleInternal(
-            DrawingContext dc,
-            Brush brush,
-            Pen pen,
+            PM.DrawingContext dc,
+            PM.Brush brush,
+            PM.Pen pen,
             bool isStroked,
             bool isFilled,
             ref Rect2 rect)
@@ -366,7 +366,7 @@ namespace Dependencies
             if (!isStroked && !isFilled)
                 return;
 
-            var r = new Rect(rect.X, rect.Y, rect.Width, rect.Height);
+            var r = new P.Rect(rect.X, rect.Y, rect.Width, rect.Height);
 
             if (isFilled)
             {
@@ -389,9 +389,9 @@ namespace Dependencies
         /// <param name="isFilled"></param>
         /// <param name="rect"></param>
         private static void DrawEllipseInternal(
-            DrawingContext dc,
-            Brush brush,
-            Pen pen,
+            PM.DrawingContext dc,
+            PM.Brush brush,
+            PM.Pen pen,
             bool isStroked,
             bool isFilled,
             ref Rect2 rect)
@@ -399,8 +399,8 @@ namespace Dependencies
             if (!isFilled && !isStroked)
                 return;
 
-            var r = new Rect(rect.X, rect.Y, rect.Width, rect.Height);
-            var g = new EllipseGeometry(r);
+            var r = new P.Rect(rect.X, rect.Y, rect.Width, rect.Height);
+            var g = new PM.EllipseGeometry(r);
 
             dc.DrawGeometry(
                 isFilled ? brush : null,
@@ -420,8 +420,8 @@ namespace Dependencies
         /// <param name="cellHeight"></param>
         /// <param name="isStroked"></param>
         private void DrawGridInternal(
-            DrawingContext dc,
-            Pen stroke,
+            PM.DrawingContext dc,
+            PM.Pen stroke,
             ref Rect2 rect,
             double offsetX, double offsetY,
             double cellWidth, double cellHeight,
@@ -436,10 +436,10 @@ namespace Dependencies
 
             for (double x = sx; x < ex; x += cellWidth)
             {
-                var p0 = new Point(
+                var p0 = new P.Point(
                     _scaleToPage(x),
                     _scaleToPage(oy));
-                var p1 = new Point(
+                var p1 = new P.Point(
                     _scaleToPage(x),
                     _scaleToPage(ey));
                 DrawLineInternal(dc, stroke, isStroked, ref p0, ref p1);
@@ -447,10 +447,10 @@ namespace Dependencies
 
             for (double y = sy; y < ey; y += cellHeight)
             {
-                var p0 = new Point(
+                var p0 = new P.Point(
                     _scaleToPage(ox),
                     _scaleToPage(y));
-                var p1 = new Point(
+                var p1 = new P.Point(
                     _scaleToPage(ex),
                     _scaleToPage(y));
                 DrawLineInternal(dc, stroke, isStroked, ref p0, ref p1);
@@ -466,17 +466,17 @@ namespace Dependencies
                 {
                     _biCache.Clear();
                 }
-                _biCache = new Dictionary<string, Bitmap>();
+                _biCache = new Dictionary<string, PMI.Bitmap>();
             }
         }
 
         /// <inheritdoc/>
         public override void Draw(object dc, XLine line, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
         {
-            var _dc = dc as DrawingContext;
+            var _dc = dc as PM.DrawingContext;
 
-            Pen strokeLine = ToPen(line.Style, _scaleToPage);
-            Point pt1, pt2;
+            PM.Pen strokeLine = ToPen(line.Style, _scaleToPage);
+            P.Point pt1, pt2;
 
             DrawLineArrowsInternal(_dc, line, dx, dy, out pt1, out pt2);
             DrawLineInternal(_dc, strokeLine, line.IsStroked, ref pt1, ref pt2);
@@ -485,10 +485,10 @@ namespace Dependencies
         /// <inheritdoc/>
         public override void Draw(object dc, XRectangle rectangle, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
         {
-            var _dc = dc as DrawingContext;
+            var _dc = dc as PM.DrawingContext;
 
-            Brush brush = ToSolidBrush(rectangle.Style.Fill);
-            Pen pen = ToPen(rectangle.Style, _scaleToPage);
+            PM.Brush brush = ToSolidBrush(rectangle.Style.Fill);
+            PM.Pen pen = ToPen(rectangle.Style, _scaleToPage);
 
             var rect = CreateRect(
                 rectangle.TopLeft,
@@ -518,10 +518,10 @@ namespace Dependencies
         /// <inheritdoc/>
         public override void Draw(object dc, XEllipse ellipse, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
         {
-            var _dc = dc as DrawingContext;
+            var _dc = dc as PM.DrawingContext;
 
-            Brush brush = ToSolidBrush(ellipse.Style.Fill);
-            Pen pen = ToPen(ellipse.Style, _scaleToPage);
+            PM.Brush brush = ToSolidBrush(ellipse.Style.Fill);
+            PM.Pen pen = ToPen(ellipse.Style, _scaleToPage);
 
             var rect = CreateRect(
                 ellipse.TopLeft,
@@ -543,26 +543,26 @@ namespace Dependencies
             if (!arc.IsFilled && !arc.IsStroked)
                 return;
 
-            var _dc = dc as DrawingContext;
+            var _dc = dc as PM.DrawingContext;
 
-            Brush brush = ToSolidBrush(arc.Style.Fill);
-            Pen pen = ToPen(arc.Style, _scaleToPage);
+            PM.Brush brush = ToSolidBrush(arc.Style.Fill);
+            PM.Pen pen = ToPen(arc.Style, _scaleToPage);
 
-            var sg = new StreamGeometry();
+            var sg = new PM.StreamGeometry();
             using (var sgc = sg.Open())
             {
                 var a = WpfArc.FromXArc(arc, dx, dy);
 
                 sgc.BeginFigure(
-                    new Point(a.Start.X, a.Start.Y),
+                    new P.Point(a.Start.X, a.Start.Y),
                     arc.IsFilled);
 
                 sgc.ArcTo(
-                    new Point(a.End.X, a.End.Y),
-                    new Size(a.Radius.Width, a.Radius.Height),
+                    new P.Point(a.End.X, a.End.Y),
+                    new P.Size(a.Radius.Width, a.Radius.Height),
                     0.0,
                     a.IsLargeArc,
-                    SweepDirection.Clockwise);
+                    PM.SweepDirection.Clockwise);
 
                 sgc.EndFigure(false);
             }
@@ -579,22 +579,22 @@ namespace Dependencies
             if (!cubicBezier.IsFilled && !cubicBezier.IsStroked)
                 return;
 
-            var _dc = dc as DrawingContext;
+            var _dc = dc as PM.DrawingContext;
 
-            Brush brush = ToSolidBrush(cubicBezier.Style.Fill);
-            Pen pen = ToPen(cubicBezier.Style, _scaleToPage);
+            PM.Brush brush = ToSolidBrush(cubicBezier.Style.Fill);
+            PM.Pen pen = ToPen(cubicBezier.Style, _scaleToPage);
 
-            var sg = new StreamGeometry();
+            var sg = new PM.StreamGeometry();
             using (var sgc = sg.Open())
             {
                 sgc.BeginFigure(
-                    new Point(cubicBezier.Point1.X, cubicBezier.Point1.Y),
+                    new P.Point(cubicBezier.Point1.X, cubicBezier.Point1.Y),
                     cubicBezier.IsFilled);
 
                 sgc.CubicBezierTo(
-                    new Point(cubicBezier.Point2.X, cubicBezier.Point2.Y),
-                    new Point(cubicBezier.Point3.X, cubicBezier.Point3.Y),
-                    new Point(cubicBezier.Point4.X, cubicBezier.Point4.Y));
+                    new P.Point(cubicBezier.Point2.X, cubicBezier.Point2.Y),
+                    new P.Point(cubicBezier.Point3.X, cubicBezier.Point3.Y),
+                    new P.Point(cubicBezier.Point4.X, cubicBezier.Point4.Y));
 
                 sgc.EndFigure(false);
             }
@@ -611,21 +611,21 @@ namespace Dependencies
             if (!quadraticBezier.IsFilled && !quadraticBezier.IsStroked)
                 return;
 
-            var _dc = dc as DrawingContext;
+            var _dc = dc as PM.DrawingContext;
 
-            Brush brush = ToSolidBrush(quadraticBezier.Style.Fill);
-            Pen pen = ToPen(quadraticBezier.Style, _scaleToPage);
+            PM.Brush brush = ToSolidBrush(quadraticBezier.Style.Fill);
+            PM.Pen pen = ToPen(quadraticBezier.Style, _scaleToPage);
 
-            var sg = new StreamGeometry();
+            var sg = new PM.StreamGeometry();
             using (var sgc = sg.Open())
             {
                 sgc.BeginFigure(
-                    new Point(quadraticBezier.Point1.X, quadraticBezier.Point1.Y),
+                    new P.Point(quadraticBezier.Point1.X, quadraticBezier.Point1.Y),
                     quadraticBezier.IsFilled);
 
                 sgc.QuadraticBezierTo(
-                    new Point(quadraticBezier.Point2.X, quadraticBezier.Point2.Y),
-                    new Point(quadraticBezier.Point3.X, quadraticBezier.Point3.Y));
+                    new P.Point(quadraticBezier.Point2.X, quadraticBezier.Point2.Y),
+                    new P.Point(quadraticBezier.Point3.X, quadraticBezier.Point3.Y));
 
                 sgc.EndFigure(false);
             }
@@ -639,50 +639,50 @@ namespace Dependencies
         /// <inheritdoc/>
         public override void Draw(object dc, XText text, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
         {
-            var _gfx = dc as DrawingContext;
+            var _gfx = dc as PM.DrawingContext;
 
             var tbind = text.BindText(db, r);
             if (string.IsNullOrEmpty(tbind))
                 return;
 
-            Brush brush = ToSolidBrush(text.Style.Stroke);
+            PM.Brush brush = ToSolidBrush(text.Style.Stroke);
 
-            var fontStyle = Perspex.Media.FontStyle.Normal;
-            var fontWeight = Perspex.Media.FontWeight.Normal;
-            //var fontDecoration = Perspex.Media.FontDecoration.None;
+            var fontStyle = PM.FontStyle.Normal;
+            var fontWeight = PM.FontWeight.Normal;
+            //var fontDecoration = PM.FontDecoration.None;
 
             if (text.Style.TextStyle.FontStyle != null)
             {
                 if (text.Style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Italic))
                 {
-                    fontStyle |= Perspex.Media.FontStyle.Italic;
+                    fontStyle |= PM.FontStyle.Italic;
                 }
 
                 if (text.Style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Bold))
                 {
-                    fontWeight |= Perspex.Media.FontWeight.Bold;
+                    fontWeight |= PM.FontWeight.Bold;
                 }
 
                 // TODO: Implement font decoration after Perspex adds support.
                 /*
                 if (text.Style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Underline))
                 {
-                    fontDecoration |= Perspex.Media.FontDecoration.Underline;
+                    fontDecoration |= PM.FontDecoration.Underline;
                 }
 
                 if (text.Style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Strikeout))
                 {
-                    fontDecoration |= Perspex.Media.FontDecoration.Strikethrough;
+                    fontDecoration |= PM.FontDecoration.Strikethrough;
                 }
                 */
             }
 
-            var ft = new FormattedText(
+            var ft = new PM.FormattedText(
                 tbind,
                 text.Style.TextStyle.FontName,
                 text.Style.TextStyle.FontSize * _textScaleFactor,
                 fontStyle,
-                TextAlignment.Left,
+                PM.TextAlignment.Left,
                 fontWeight);
 
             var rect = CreateRect(
@@ -701,7 +701,7 @@ namespace Dependencies
         /// <inheritdoc/>
         public override void Draw(object dc, XImage image, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
         {
-            var _dc = dc as DrawingContext;
+            var _dc = dc as PM.DrawingContext;
 
             var rect = CreateRect(
                 image.TopLeft,
@@ -710,8 +710,8 @@ namespace Dependencies
 
             if (image.IsStroked || image.IsFilled)
             {
-                Brush brush = ToSolidBrush(image.Style.Fill);
-                Pen pen = ToPen(image.Style, _scaleToPage);
+                PM.Brush brush = ToSolidBrush(image.Style.Fill);
+                PM.Pen pen = ToPen(image.Style, _scaleToPage);
 
                 DrawRectangleInternal(
                     _dc,
@@ -731,8 +731,8 @@ namespace Dependencies
                     _dc.DrawImage(
                         bi,
                         1.0,
-                        new Rect(0, 0, bi.PixelWidth, bi.PixelHeight),
-                        new Rect(rect.X, rect.Y, rect.Width, rect.Height));
+                        new P.Rect(0, 0, bi.PixelWidth, bi.PixelHeight),
+                        new P.Rect(rect.X, rect.Y, rect.Width, rect.Height));
                 }
                 catch (Exception ex)
                 {
@@ -752,7 +752,7 @@ namespace Dependencies
                     {
                         using (var ms = new System.IO.MemoryStream(bytes))
                         {
-                            var bi = new Bitmap(ms);
+                            var bi = new PMI.Bitmap(ms);
 
                             if (_enableImageCache)
                                 _biCache[image.Key] = bi;
@@ -760,8 +760,8 @@ namespace Dependencies
                             _dc.DrawImage(
                                 bi,
                                 1.0,
-                                new Rect(0, 0, bi.PixelWidth, bi.PixelHeight),
-                                new Rect(rect.X, rect.Y, rect.Width, rect.Height));
+                                new P.Rect(0, 0, bi.PixelWidth, bi.PixelHeight),
+                                new P.Rect(rect.X, rect.Y, rect.Width, rect.Height));
                         }
                     }
                 }
@@ -779,7 +779,7 @@ namespace Dependencies
             if (!path.IsFilled && !path.IsStroked)
                 return;
 
-            var _dc = dc as DrawingContext;
+            var _dc = dc as PM.DrawingContext;
 
             var g = path.Geometry.ToGeometry();
 

@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 
-namespace Dependencies
+namespace Renderer.Dxf
 {
     /// <summary>
     /// Native netDxf shape renderer.

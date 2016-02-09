@@ -10,7 +10,11 @@ using System.Collections.Immutable;
 using System.Windows.Media.Imaging;
 #endif
 
-namespace Dependencies
+#if WPF
+namespace Renderer.PdfSharp_wpf
+#elif CORE
+namespace Renderer.PdfSharp_core
+#endif
 {
     /// <summary>
     /// Native PdfSharp shape renderer.

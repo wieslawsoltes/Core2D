@@ -5,8 +5,9 @@ using Core2D.Interfaces;
 using System;
 using System.Diagnostics;
 using System.Globalization;
+using CSV = CsvHelper;
 
-namespace Dependencies
+namespace TextFieldWriter.CsvHelper
 {
     /// <summary>
     /// Defines <see cref="XDatabase"/> to the text fields writer.
@@ -24,11 +25,11 @@ namespace Dependencies
             {
                 using (var writer = new System.IO.StringWriter())
                 {
-                    var configuration = new CsvHelper.Configuration.CsvConfiguration();
+                    var configuration = new CSV.Configuration.CsvConfiguration();
                     configuration.Delimiter = CultureInfo.CurrentCulture.TextInfo.ListSeparator;
                     configuration.CultureInfo = CultureInfo.CurrentCulture;
 
-                    using (var csv = new CsvHelper.CsvWriter(writer, configuration))
+                    using (var csv = new CSV.CsvWriter(writer, configuration))
                     {
                         // columns
                         csv.WriteField(database.IdColumnName);

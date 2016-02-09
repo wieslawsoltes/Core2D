@@ -17,7 +17,7 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace Dependencies
+namespace Renderer.Wpf
 {
     /// <summary>
     /// Native Windows Presentation Foundation shape renderer.

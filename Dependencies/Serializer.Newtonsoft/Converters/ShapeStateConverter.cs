@@ -4,7 +4,7 @@ using Core2D.Shape;
 using Newtonsoft.Json;
 using System;
 
-namespace Dependencies
+namespace Serializer.Newtonsoft
 {
     /// <inheritdoc/>
     internal class ShapeStateConverter : JsonConverter

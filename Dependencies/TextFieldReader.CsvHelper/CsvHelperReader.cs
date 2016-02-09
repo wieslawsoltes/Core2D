@@ -4,8 +4,9 @@ using Core2D.Data.Database;
 using Core2D.Interfaces;
 using System.Collections.Generic;
 using System.Globalization;
+using CSV = CsvHelper;
 
-namespace Dependencies
+namespace TextFieldReader.CsvHelper
 {
     /// <summary>
     /// Defines the text fields to <see cref="XDatabase"/> reader.
@@ -16,12 +17,12 @@ namespace Dependencies
         {
             using (var reader = new System.IO.StreamReader(path))
             {
-                var configuration = new CsvHelper.Configuration.CsvConfiguration();
+                var configuration = new CSV.Configuration.CsvConfiguration();
                 configuration.Delimiter = CultureInfo.CurrentCulture.TextInfo.ListSeparator;
                 configuration.CultureInfo = CultureInfo.CurrentCulture;
                 configuration.AllowComments = true;
                 configuration.Comment = '#';
-                using (var parser = new CsvHelper.CsvParser(reader, configuration))
+                using (var parser = new CSV.CsvParser(reader, configuration))
                 {
                     while (true)
                     {

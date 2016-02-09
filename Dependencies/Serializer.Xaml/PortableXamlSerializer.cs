@@ -3,7 +3,7 @@
 using Core2D.Interfaces;
 using Core2D.Xaml.Serializer;
 
-namespace Dependencies
+namespace Serializer.Xaml
 {
     /// <summary>
     /// Portable Xaml serializer.

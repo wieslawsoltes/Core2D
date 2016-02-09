@@ -6,6 +6,7 @@ using Core2D.Interfaces;
 using Core2D.Project;
 using Core2D.Renderer;
 using Core2D.Shape;
+using Renderer.WinForms;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -17,7 +18,7 @@ using System.Drawing.Text;
 using System.IO;
 using WPF = System.Windows;
 
-namespace Dependencies
+namespace FileWriter.Emf
 {
     /// <summary>
     /// WinForms file writer.

@@ -12,7 +12,7 @@ using Core2D.Shapes;
 using Core2D.Style;
 using ProtoBuf.Meta;
 
-namespace Dependencies
+namespace Serializer.ProtoBuf
 {
     public static class ProtoBufModel
     {

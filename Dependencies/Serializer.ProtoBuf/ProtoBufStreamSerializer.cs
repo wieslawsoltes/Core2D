@@ -3,7 +3,7 @@
 using Core2D.Interfaces;
 using System.IO;
 
-namespace Dependencies
+namespace Serializer.ProtoBuf
 {
     /// <summary>
     /// ProtoBuf serializer.

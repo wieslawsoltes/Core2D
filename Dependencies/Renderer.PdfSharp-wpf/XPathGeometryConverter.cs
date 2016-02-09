@@ -7,7 +7,11 @@ using System.Linq;
 using System.Windows.Media;
 #endif
 
-namespace Dependencies
+#if WPF
+namespace Renderer.PdfSharp_wpf
+#elif CORE
+namespace Renderer.PdfSharp_core
+#endif
 {
     /// <summary>
     /// 

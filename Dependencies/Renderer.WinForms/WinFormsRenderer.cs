@@ -13,7 +13,7 @@ using System.Collections.Immutable;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
-namespace Dependencies
+namespace Renderer.WinForms
 {
     /// <summary>
     /// Native Windows Forms shape renderer.
