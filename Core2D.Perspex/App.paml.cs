@@ -48,7 +48,7 @@ namespace Core2D.Perspex
     /// </summary>
     public class App : Application
     {
-        private ShapeEditor _editor;
+        private ProjectEditor _editor;
         private Windows.MainWindow _mainWindow;
         private string _recentFileName = "Core2D.recent";
         private string _logFileName = "Core2D.log";
@@ -206,7 +206,7 @@ namespace Core2D.Perspex
         /// <param name="log">The log instance.</param>
         public void InitializeEditor(ILog log)
         {
-            _editor = new ShapeEditor()
+            _editor = new ProjectEditor()
             {
                 CurrentTool = Tool.Selection,
                 CurrentPathTool = PathTool.Line,
@@ -242,10 +242,10 @@ namespace Core2D.Perspex
         }
 
         /// <summary>
-        /// Initialize platform specific commands used by <see cref="ShapeEditor"/>.
+        /// Initialize platform specific commands used by <see cref="ProjectEditor"/>.
         /// </summary>
         /// <param name="editor">The editor instance.</param>
-        private void InitializeCommands(ShapeEditor editor)
+        private void InitializeCommands(ProjectEditor editor)
         {
             Commands.OpenCommand =
                 Command<string>.Create(
@@ -595,9 +595,9 @@ namespace Core2D.Perspex
                 {
                     name = (item as XProject).Name;
                 }
-                else if (item is ShapeEditor)
+                else if (item is ProjectEditor)
                 {
-                    var editor = (item as ShapeEditor);
+                    var editor = (item as ProjectEditor);
                     if (editor?.Project == null)
                         return;
 

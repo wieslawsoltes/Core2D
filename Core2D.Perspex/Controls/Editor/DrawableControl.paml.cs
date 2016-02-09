@@ -43,7 +43,7 @@ namespace Core2D.Perspex.Controls.Editor
         /// </summary>
         private void InitializeState()
         {
-            var editor = this.DataContext as ShapeEditor;
+            var editor = this.DataContext as ProjectEditor;
             if (editor == null)
                 return;
 
@@ -162,7 +162,7 @@ namespace Core2D.Perspex.Controls.Editor
         /// <returns>The actual size used.</returns>
         protected override Size ArrangeOverride(Size finalSize)
         {
-            var editor = this.DataContext as ShapeEditor;
+            var editor = this.DataContext as ProjectEditor;
             if (editor != null && editor.Project != null)
             {
                 if (editor.Renderers != null && editor.Renderers[0].State.EnableAutofit)
@@ -188,7 +188,7 @@ namespace Core2D.Perspex.Controls.Editor
             if (_state == null)
                 return;
 
-            var editor = this.DataContext as ShapeEditor;
+            var editor = this.DataContext as ProjectEditor;
             if (editor == null || editor.Project == null)
                 return;
 
@@ -229,7 +229,7 @@ namespace Core2D.Perspex.Controls.Editor
             if (_state == null)
                 return;
 
-            var editor = this.DataContext as ShapeEditor;
+            var editor = this.DataContext as ProjectEditor;
             if (editor == null || editor.Project == null)
                 return;
 
@@ -265,7 +265,7 @@ namespace Core2D.Perspex.Controls.Editor
         /// </summary>
         public void OnZoomReset()
         {
-            var editor = this.DataContext as ShapeEditor;
+            var editor = this.DataContext as ProjectEditor;
             if (editor == null)
                 return;
 
@@ -278,7 +278,7 @@ namespace Core2D.Perspex.Controls.Editor
         /// </summary>
         public void OnZoomExtent()
         {
-            var editor = this.DataContext as Core2D.Editor.ShapeEditor;
+            var editor = this.DataContext as Core2D.Editor.ProjectEditor;
             if (editor == null)
                 return;
 
@@ -307,7 +307,7 @@ namespace Core2D.Perspex.Controls.Editor
         /// <param name="dc">The drawing context.</param>
         private void Draw(DrawingContext dc)
         {
-            var editor = this.DataContext as Core2D.Editor.ShapeEditor;
+            var editor = this.DataContext as Core2D.Editor.ProjectEditor;
             if (editor == null || editor.Project == null)
                 return;
 

@@ -8,13 +8,13 @@ namespace Core2D.Editor.Tools
     /// </summary>
     public sealed class ToolNone : ToolBase
     {
-        private ShapeEditor _editor;
+        private ProjectEditor _editor;
 
         /// <summary>
         /// Initialize new instance of <see cref="ToolNone"/> class.
         /// </summary>
         /// <param name="editor">The current <see cref="ToolNone"/> object.</param>
-        public ToolNone(ShapeEditor editor)
+        public ToolNone(ProjectEditor editor)
             : base()
         {
             _editor = editor;

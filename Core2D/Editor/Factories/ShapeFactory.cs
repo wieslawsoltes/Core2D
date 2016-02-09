@@ -11,13 +11,13 @@ namespace Core2D.Editor.Factories
     /// </summary>
     public sealed class ShapeFactory : IShapeFactory
     {
-        private ShapeEditor _editor;
+        private ProjectEditor _editor;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ShapeFactory"/> class.
         /// </summary>
-        /// <param name="editor">The current <see cref="ShapeEditor"/> instance.</param>
-        public ShapeFactory(ShapeEditor editor)
+        /// <param name="editor">The current <see cref="ProjectEditor"/> instance.</param>
+        public ShapeFactory(ProjectEditor editor)
         {
             _editor = editor;
         }

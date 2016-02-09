@@ -75,13 +75,13 @@
     <Compile Include="Editor\Bounds\ShapeBoundsTests.cs" />
     <Compile Include="Editor\CommandsTests.cs" />
     <Compile Include="Editor\Designer\DesignerContextTests.cs" />
-    <Compile Include="Editor\ShapeEditorTests.cs" />
+    <Compile Include="Editor\ProjectEditorTests.cs" />
     <Compile Include="Editor\Input\CommandManagerTests.cs" />
     <Compile Include="Editor\Input\CommandTests.cs" />
     <Compile Include="Editor\Input\CommandOfTTests.cs" />
     <Compile Include="Editor\Factories\ProjectFactoryTests.cs" />
     <Compile Include="Editor\Factories\ShapeFactoryTests.cs" />
-    <Compile Include="Editor\ObserverTests.cs" />
+    <Compile Include="Editor\ProjectObserverTests.cs" />
     <Compile Include="Editor\ProjectExtensionsTests.cs" />
     <Compile Include="Editor\Recent\RecentFileTests.cs" />
     <Compile Include="Editor\Recent\RecentsTests.cs" />

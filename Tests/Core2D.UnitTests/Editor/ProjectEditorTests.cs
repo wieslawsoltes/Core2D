@@ -4,8 +4,8 @@ using Xunit;
 
 namespace Core2D.UnitTests
 {
-    public class ShapeEditorTests
+    public class ProjectEditorTests
     {
-        // TODO: Write ShapeEditorTests tests.
+        // TODO: Write ProjectEditorTests tests.
     }
 }
