@@ -5,18 +5,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Core2D.Perspex;assembly=Core2D.Perspex"
              xmlns:converters="clr-namespace:Core2D.Perspex.Converters;assembly=Core2D.Perspex"
-             xmlns:core="clr-namespace:Core2D;assembly=Core2D"
-             Design.DataContext="{Static core:DesignerContext.Editor}"
+             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
+             xmlns:Recent="clr-namespace:Core2D.Editor.Recent;assembly=Core2D"
+             xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D"
+             Design.DataContext="{Static Designer:DesignerContext.Editor}"
              Design.Width="1000" Design.Height="800">
     <Grid MaxWidth="800" MaxHeight="600" RowDefinitions="0.2*,50,30,1*,30,1*,30,1*,20,0.2*" ColumnDefinitions="5*,50*,30,40*,5*">
         <TextBlock Text="Core2D" Classes="title" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="1"/>
-        <Button Content="New Project" Classes="project" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="1" Grid.RowSpan="1" Command="{Static core:Commands.NewCommand}"/>
-        <Button Content="Open Project" Classes="project" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="1" Grid.RowSpan="1" Command="{Static core:Commands.OpenCommand}"/>
-        <Button Content="Open Recent" Classes="project" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="1" Grid.RowSpan="1" CommandParameter="{Binding Path=CurrentRecentProject.Path}" Command="{Static core:Commands.OpenCommand}"/>
+        <Button Content="New Project" Classes="project" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="1" Grid.RowSpan="1" Command="{Static Editor:Commands.NewCommand}"/>
+        <Button Content="Open Project" Classes="project" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="1" Grid.RowSpan="1" Command="{Static Editor:Commands.OpenCommand}"/>
+        <Button Content="Open Recent" Classes="project" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="1" Grid.RowSpan="1" CommandParameter="{Binding Path=CurrentRecentProject.Path}" Command="{Static Editor:Commands.OpenCommand}"/>
         <TextBlock Text="recent" Classes="recent" Grid.Column="3" Grid.ColumnSpan="1" Grid.Row="2" Grid.RowSpan="1"/>
         <ListBox Items="{Binding Path=RecentProjects}" SelectedItem="{Binding Path=CurrentRecentProject, Mode=TwoWay}" Classes="recents" Grid.Column="3" Grid.Row="3" Grid.ColumnSpan="1" Grid.RowSpan="5">
             <ListBox.DataTemplates>
-                <DataTemplate DataType="core:RecentProject">
+                <DataTemplate DataType="Recent:RecentFile">
                     <TextBlock Text="{Binding Path=Name}" Classes="recents" ToolTip.Tip="{Binding Path=Path}"/>
                 </DataTemplate>
             </ListBox.DataTemplates>
