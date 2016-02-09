@@ -12,7 +12,8 @@
         "$ref": "1"
       },
       "IsVisible": true,
-      "Shapes": []
+      "Shapes": [],
+      "Resources": []
     },
     {
       "$id": "3",
@@ -21,7 +22,8 @@
         "$ref": "1"
       },
       "IsVisible": true,
-      "Shapes": []
+      "Shapes": [],
+      "Resources": []
     },
     {
       "$id": "4",
@@ -30,7 +32,8 @@
         "$ref": "1"
       },
       "IsVisible": true,
-      "Shapes": []
+      "Shapes": [],
+      "Resources": []
     }
   ],
   "CurrentLayer": {
@@ -38,20 +41,23 @@
   },
   "WorkingLayer": {
     "$id": "5",
-    "Name": "Working",
+    "Name": "TemplateWorking",
     "Owner": {
       "$ref": "1"
     },
     "IsVisible": true,
-    "Shapes": []
+    "Shapes": [],
+    "Resources": []
   },
   "HelperLayer": {
     "$id": "6",
-    "Name": "Helper",
+    "Name": "TemplateHelper",
     "Owner": {
       "$ref": "1"
     },
     "IsVisible": true,
-    "Shapes": []
-  }
+    "Shapes": [],
+    "Resources": []
+  },
+  "Resources": []
 }

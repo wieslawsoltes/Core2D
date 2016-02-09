@@ -29,7 +29,8 @@
     "Fill": "#50000000",
     "Thickness": 2.0,
     "LineCap": 2,
-    "DashOffset": 0.0
+    "DashOffset": 0.0,
+    "Resources": []
   },
   "EndArrowStyle": {
     "$id": "5",
@@ -43,7 +44,8 @@
     "Fill": "#50000000",
     "Thickness": 2.0,
     "LineCap": 2,
-    "DashOffset": 0.0
+    "DashOffset": 0.0,
+    "Resources": []
   },
   "TextStyle": {
     "$id": "6",
@@ -61,5 +63,6 @@
   "Thickness": 2.0,
   "LineCap": 2,
   "Dashes": "0 2",
-  "DashOffset": 0.0
+  "DashOffset": 0.0,
+  "Resources": []
 }

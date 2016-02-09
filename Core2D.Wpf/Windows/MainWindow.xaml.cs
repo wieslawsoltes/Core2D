@@ -1,9 +1,15 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Data.Database;
+using Core2D.Editor;
+using Core2D.Project;
+using Core2D.Shape;
+using Core2D.Shapes;
+using Core2D.Style;
+using Microsoft.Win32;
 using System;
 using System.Windows;
 using System.Windows.Input;
-using Microsoft.Win32;
 using Xceed.Wpf.AvalonDock.Layout.Serialization;
 
 namespace Core2D.Wpf.Windows
@@ -11,7 +17,7 @@ namespace Core2D.Wpf.Windows
     /// <summary>
     /// Interaction logic for <see cref="MainWindow"/> xaml.
     /// </summary>
-    public partial class MainWindow : Window, IView
+    public partial class MainWindow : Window
     {
         private string _resourceLayoutRoot = "Core2D.Wpf.Layouts.";
         private string _resourceLayoutFileName = "Core2D.Wpf.layout";
@@ -29,7 +35,7 @@ namespace Core2D.Wpf.Windows
         /// Initializes the mouse events.
         /// </summary>
         /// <param name="editor">The editor instance.</param>
-        public void InitializeMouse(Editor editor)
+        public void InitializeMouse(ShapeEditor editor)
         {
             panAndZoomGrid.PreviewMouseLeftButtonDown +=
                 (sender, e) =>
@@ -91,7 +97,7 @@ namespace Core2D.Wpf.Windows
         /// Initializes the zoom border control.
         /// </summary>
         /// <param name="editor">The editor instance.</param>
-        public void InitializeZoom(Editor editor)
+        public void InitializeZoom(ShapeEditor editor)
         {
             border.InvalidateChild =
                 (z, x, y) =>
@@ -116,9 +122,9 @@ namespace Core2D.Wpf.Windows
                     {
                         var container = editor.Project.CurrentContainer;
 
-                        if (container is Template)
+                        if (container is XTemplate)
                         {
-                            var template = container as Template;
+                            var template = container as XTemplate;
                             border.FitTo(
                                 width,
                                 height,
@@ -126,9 +132,9 @@ namespace Core2D.Wpf.Windows
                                 template.Height);
                         }
 
-                        if (container is Page)
+                        if (container is XPage)
                         {
-                            var page = container as Page;
+                            var page = container as XPage;
                             border.FitTo(
                                 width,
                                 height,
@@ -157,7 +163,7 @@ namespace Core2D.Wpf.Windows
         /// Initializes canvas control drag and drop handler.
         /// </summary>
         /// <param name="editor">The editor instance.</param>
-        public void InitializeDrop(Editor editor)
+        public void InitializeDrop(ShapeEditor editor)
         {
             panAndZoomGrid.AllowDrop = true;
 
@@ -167,7 +173,7 @@ namespace Core2D.Wpf.Windows
                     if (!e.Data.GetDataPresent(DataFormats.FileDrop)
                         && !e.Data.GetDataPresent(typeof(BaseShape))
                         && !e.Data.GetDataPresent(typeof(XGroup))
-                        && !e.Data.GetDataPresent(typeof(Record))
+                        && !e.Data.GetDataPresent(typeof(XRecord))
                         && !e.Data.GetDataPresent(typeof(ShapeStyle)))
                     {
                         e.Effects = DragDropEffects.None;
@@ -234,11 +240,11 @@ namespace Core2D.Wpf.Windows
                     }
 
                     // Records.
-                    if (e.Data.GetDataPresent(typeof(Record)))
+                    if (e.Data.GetDataPresent(typeof(XRecord)))
                     {
                         try
                         {
-                            var record = e.Data.GetData(typeof(Record)) as Record;
+                            var record = e.Data.GetData(typeof(XRecord)) as XRecord;
                             if (record != null)
                             {
                                 var p = e.GetPosition(drawableControl);
@@ -272,11 +278,11 @@ namespace Core2D.Wpf.Windows
                     }
 
                     // Templates.
-                    if (e.Data.GetDataPresent(typeof(Template)))
+                    if (e.Data.GetDataPresent(typeof(XTemplate)))
                     {
                         try
                         {
-                            var template = e.Data.GetData(typeof(Template)) as Template;
+                            var template = e.Data.GetData(typeof(XTemplate)) as XTemplate;
                             if (template != null)
                             {
                                 editor.OnApplyTemplate(template);
@@ -365,7 +371,7 @@ namespace Core2D.Wpf.Windows
         /// Auto load docking manager layout.
         /// </summary>
         /// <param name="editor">The editor instance.</param>
-        public void AutoLoadLayout(Editor editor)
+        public void AutoLoadLayout(ShapeEditor editor)
         {
             try
             {
@@ -381,7 +387,7 @@ namespace Core2D.Wpf.Windows
         /// Auto save docking manager layout.
         /// </summary>
         /// <param name="editor">The editor instance.</param>
-        public void AutoSaveLayout(Editor editor)
+        public void AutoSaveLayout(ShapeEditor editor)
         {
             try
             {
@@ -398,7 +404,7 @@ namespace Core2D.Wpf.Windows
         /// </summary>
         public void OnLoadLayout()
         {
-            var editor = DataContext as Editor;
+            var editor = DataContext as ShapeEditor;
             if (editor == null)
                 return;
 
@@ -427,7 +433,7 @@ namespace Core2D.Wpf.Windows
         /// </summary>
         public void OnSaveLayout()
         {
-            var editor = DataContext as Editor;
+            var editor = DataContext as ShapeEditor;
             if (editor == null)
                 return;
 
@@ -456,7 +462,7 @@ namespace Core2D.Wpf.Windows
         /// </summary>
         public void OnResetLayout()
         {
-            var editor = DataContext as Editor;
+            var editor = DataContext as ShapeEditor;
             if (editor == null)
                 return;
 

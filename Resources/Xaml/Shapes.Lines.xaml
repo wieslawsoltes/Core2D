@@ -1,5 +1,5 @@
-<Shapes xmlns="https://github.com/Core2D" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="Lines">
-    <Shapes.Resources>
+<XShapes xmlns="https://github.com/Core2D" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="Lines">
+    <XShapes.Resources>
         <XRectangle x:Name="PointShape" IsStroked="True" IsFilled="False">
             <XRectangle.TopLeft>
                 <XPoint X="-4" Y="-4" State="Visible,Printable,Standalone"/>
@@ -29,7 +29,7 @@
                 <TextStyle FontName="Calibri" FontSize="12" FontStyle="Regular" TextHAlignment="Center" TextVAlignment="Center"/>
             </ShapeStyle.TextStyle>
         </ShapeStyle>
-    </Shapes.Resources>
+    </XShapes.Resources>
     <XLine x:Name="Line1" State="Visible,Printable,Standalone" IsStroked="True" Style="{x:Reference Black}">
         <XLine.Start>
             <XPoint x:Name="Start1" X="30" Y="30" State="Visible,Printable,Standalone" Shape="{x:Reference PointShape}"/>
@@ -47,5 +47,5 @@
             <XPoint x:Name="End3" X="90" Y="60" State="Visible,Printable,Standalone" Shape="{x:Reference PointShape}"/>
         </XLine.End>
     </XLine>
-</Shapes>
+</XShapes>
     

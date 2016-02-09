@@ -1,5 +1,10 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Data;
+using Core2D.Data.Database;
+using Core2D.Renderer;
+using Core2D.Shape;
+using Core2D.Shapes;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -11,7 +16,7 @@ namespace Core2D.UnitTests
     public class XGroupTests
     {
         [Fact]
-        [Trait("Core2D", "Shapes")]
+        [Trait("Core2D.Shapes", "Shapes")]
         public void Inherits_From_BaseShape()
         {
             var target = new XGroup();
@@ -19,7 +24,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Shapes")]
+        [Trait("Core2D.Shapes", "Shapes")]
         public void Shapes_Not_Null()
         {
             var target = new XGroup();
@@ -27,7 +32,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Shapes")]
+        [Trait("Core2D.Shapes", "Shapes")]
         public void Connectors_Not_Null()
         {
             var target = new XGroup();
@@ -35,79 +40,79 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Shapes")]
+        [Trait("Core2D.Shapes", "Shapes")]
         public void ShapesProperties_Gets_Shapes_And_Connectors_Properties()
         {
             var target = new XGroup();
 
             var shape = new Class1();
-            shape.Data.Properties = shape.Data.Properties.Add(new Property());
+            shape.Data.Properties = shape.Data.Properties.Add(new XProperty());
             target.Shapes = target.Shapes.Add(shape);
 
             var point = new XPoint();
-            point.Data.Properties = point.Data.Properties.Add(new Property());
+            point.Data.Properties = point.Data.Properties.Add(new XProperty());
             target.Connectors = target.Connectors.Add(point);
 
             Assert.Equal(2, target.ShapesProperties.Length);
         }
 
         [Fact]
-        [Trait("Core2D", "Shapes")]
+        [Trait("Core2D.Shapes", "Shapes")]
         public void ShapesProperties_Cache_Should_Reset_After_Shapes_Updated()
         {
             var target = new XGroup();
 
             var shape1 = new Class1();
-            shape1.Data.Properties = shape1.Data.Properties.Add(new Property());
+            shape1.Data.Properties = shape1.Data.Properties.Add(new XProperty());
             target.Shapes = target.Shapes.Add(shape1);
 
             Assert.Equal(1, target.ShapesProperties.Length);
 
             var shape2 = new Class1();
-            shape2.Data.Properties = shape2.Data.Properties.Add(new Property());
+            shape2.Data.Properties = shape2.Data.Properties.Add(new XProperty());
             target.Shapes = target.Shapes.Add(shape2);
 
             Assert.Equal(2, target.ShapesProperties.Length);
         }
 
         [Fact]
-        [Trait("Core2D", "Shapes")]
+        [Trait("Core2D.Shapes", "Shapes")]
         public void ShapesProperties_Cache_Should_Reset_After_Connectors_Updated()
         {
             var target = new XGroup();
 
             var point1 = new XPoint();
-            point1.Data.Properties = point1.Data.Properties.Add(new Property());
+            point1.Data.Properties = point1.Data.Properties.Add(new XProperty());
             target.Connectors = target.Connectors.Add(point1);
 
             Assert.Equal(1, target.ShapesProperties.Length);
 
             var point2 = new XPoint();
-            point2.Data.Properties = point2.Data.Properties.Add(new Property());
+            point2.Data.Properties = point2.Data.Properties.Add(new XProperty());
             target.Connectors = target.Connectors.Add(point2);
 
             Assert.Equal(2, target.ShapesProperties.Length);
         }
 
         [Fact]
-        [Trait("Core2D", "Shapes")]
+        [Trait("Core2D.Shapes", "Shapes")]
         public void GetPoints_Returns_Shapes_And_Connector_Points()
         {
             var target = new XGroup();
 
             var text = new XText();
-            text.Data.Properties = text.Data.Properties.Add(new Property());
+            text.Data.Properties = text.Data.Properties.Add(new XProperty());
             target.Shapes = target.Shapes.Add(text);
 
             var point = new XPoint();
-            point.Data.Properties = point.Data.Properties.Add(new Property());
+            point.Data.Properties = point.Data.Properties.Add(new XProperty());
             target.Connectors = target.Connectors.Add(point);
 
             Assert.Equal(3, target.GetPoints().Count());
         }
 
         [Fact]
-        [Trait("Core2D", "Shapes")]
+        [Trait("Core2D.Shapes", "Shapes")]
         public void AddShape_Add_Shape_To_Shapes()
         {
             var target = new XGroup();
@@ -122,7 +127,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Shapes")]
+        [Trait("Core2D.Shapes", "Shapes")]
         public void AddConnectorAsNone_Add_Point_To_Connectors_As_None()
         {
             var target = new XGroup();
@@ -138,7 +143,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Shapes")]
+        [Trait("Core2D.Shapes", "Shapes")]
         public void AddConnectorAsInput_Add_Point_To_Connectors_As_Input()
         {
             var target = new XGroup();
@@ -154,7 +159,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Shapes")]
+        [Trait("Core2D.Shapes", "Shapes")]
         public void AddConnectorAsOutput_Add_Point_To_Connectors_As_Output()
         {
             var target = new XGroup();
@@ -170,7 +175,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Shapes")]
+        [Trait("Core2D.Shapes", "Shapes")]
         public void Group_Shapes_Remove_And_Add_To_Source()
         {
             var shape1 = new Class1();
@@ -198,7 +203,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Shapes")]
+        [Trait("Core2D.Shapes", "Shapes")]
         public void Group_Shapes_Do_Not_Update_Source()
         {
             var shape1 = new Class1();
@@ -219,7 +224,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Shapes")]
+        [Trait("Core2D.Shapes", "Shapes")]
         public void Ungroup_Shape_Remove_And_Add_To_Source()
         {
             var shape = new Class1();
@@ -256,7 +261,7 @@ namespace Core2D.UnitTests
 
         public class Class1 : BaseShape
         {
-            public override void Draw(object dc, Renderer renderer, double dx, double dy, ImmutableArray<Property> db, Record r)
+            public override void Draw(object dc, ShapeRenderer renderer, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
             {
                 throw new NotImplementedException();
             }

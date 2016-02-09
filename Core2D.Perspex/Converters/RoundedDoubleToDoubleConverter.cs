@@ -1,9 +1,10 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using System;
-using System.Globalization;
 using Perspex;
 using Perspex.Markup;
+using System;
+using System.Globalization;
+using static System.Math;
 
 namespace Core2D.Perspex.Converters
 {
@@ -42,14 +43,14 @@ namespace Core2D.Perspex.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             int digits = _digits;
-            if (parameter != null && value.GetType() == typeof(string))
+            if (parameter != null && parameter.GetType() == typeof(string))
             {
                 int.TryParse(parameter as string, out digits);
             }
 
             if (value != null && value.GetType() == typeof(double))
             {
-                return Math.Round((double)value, digits);
+                return Round((double)value, digits);
             }
 
             return PerspexProperty.UnsetValue;
@@ -66,14 +67,14 @@ namespace Core2D.Perspex.Converters
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             int digits = _digits;
-            if (parameter != null && value.GetType() == typeof(string))
+            if (parameter != null && parameter.GetType() == typeof(string))
             {
                 int.TryParse(parameter as string, out digits);
             }
 
             if (value != null && value.GetType() == typeof(double))
             {
-                return Math.Round((double)value, digits);
+                return Round((double)value, digits);
             }
 
             return PerspexProperty.UnsetValue;

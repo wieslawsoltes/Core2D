@@ -1,9 +1,10 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using System;
+using Core2D.Shapes;
 using System.Linq;
+using static System.Math;
 
-namespace Core2D
+namespace Core2D.Math.Arc
 {
     /// <summary>
     /// Convert <see cref="XArc"/> coordinates to WPF arc coordinates.
@@ -83,7 +84,7 @@ namespace Core2D
             double offsetX = center.X - rect.X;
             double offsetY = center.Y - rect.Y;
 
-            double minLenght = Math.Max(offsetX, offsetY);
+            double minLenght = Max(offsetX, offsetY);
 
             double length1 = center.Distance(p3);
             double p3x = p3.X + (p3.X - center.X) / length1 * minLenght;

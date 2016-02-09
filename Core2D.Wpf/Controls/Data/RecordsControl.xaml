@@ -7,7 +7,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Core2D.Wpf" 
              xmlns:converters="clr-namespace:Core2D.Wpf.Converters" 
-             xmlns:core="clr-namespace:Core2D;assembly=Core2D" 
+             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D" 
              xmlns:custom="clr-namespace:Core2D.Wpf.Controls.Custom"
              mc:Ignorable="d" 
              d:DataContext="{x:Static local:DesignerHelper.Database}"
@@ -16,15 +16,15 @@
         <Grid.Resources>
             <ControlTemplate x:Key="RecordsMenu">
                 <Menu Background="Transparent" HorizontalAlignment="Right">
-                    <MenuItem Header="apply" Command="{x:Static core:Commands.ApplyRecordCommand}" CommandParameter="{Binding CurrentRecord}"/>
-                    <MenuItem Command="{x:Static core:Commands.AddRecordCommand}" CommandParameter="{Binding}" Header="+"/>
-                    <MenuItem Command="{x:Static core:Commands.RemoveRecordCommand}" CommandParameter="{Binding CurrentRecord}" Header="-"/>
+                    <MenuItem Header="apply" Command="{x:Static Editor:Commands.ApplyRecordCommand}" CommandParameter="{Binding CurrentRecord}"/>
+                    <MenuItem Command="{x:Static Editor:Commands.AddRecordCommand}" CommandParameter="{Binding}" Header="+"/>
+                    <MenuItem Command="{x:Static Editor:Commands.RemoveRecordCommand}" CommandParameter="{Binding CurrentRecord}" Header="-"/>
                 </Menu>
             </ControlTemplate>
             <ControlTemplate x:Key="ColumnsMenuControlTemplateKey">
                 <Menu Background="Transparent" HorizontalAlignment="Right">
-                    <MenuItem Command="{x:Static core:Commands.RemoveColumnCommand}" CommandParameter="{Binding ElementName=columns, Path=SelectedItem}" Header="-"/>
-                    <MenuItem Command="{x:Static core:Commands.AddColumnCommand}" CommandParameter="{Binding}" Header="+"/>
+                    <MenuItem Command="{x:Static Editor:Commands.RemoveColumnCommand}" CommandParameter="{Binding ElementName=columns, Path=SelectedItem}" Header="-"/>
+                    <MenuItem Command="{x:Static Editor:Commands.AddColumnCommand}" CommandParameter="{Binding}" Header="+"/>
                 </Menu>
             </ControlTemplate>
             <Style TargetType="DataGrid">

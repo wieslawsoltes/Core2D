@@ -1,10 +1,22 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using System.Linq;
+using Core2D.Data;
+using Core2D.Data.Database;
+using Core2D.Editor.Factories;
+using Core2D.Editor.Input;
+using Core2D.Interfaces;
+using Core2D.Path;
+using Core2D.Path.Segments;
+using Core2D.Project;
+using Core2D.Renderer;
+using Core2D.Shape;
+using Core2D.Shapes;
+using Core2D.Style;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 
-namespace Core2D
+namespace Core2D.Editor.Designer
 {
     /// <summary>
     /// Design time DataContext base class.
@@ -12,197 +24,197 @@ namespace Core2D
     public class DesignerContext
     {
         /// <summary>
-        /// The design time <see cref="Core2D.Editor"/>.
+        /// The design time <see cref="Core2D.Editor.ShapeEditor"/>.
         /// </summary>
-        public static Editor Editor { get; set; }
+        public static ShapeEditor Editor { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Template"/>.
+        /// The design time <see cref="Core2D.Project.XTemplate"/>.
         /// </summary>
-        public static Template Template { get; set; }
+        public static XTemplate Template { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Page"/>.
+        /// The design time <see cref="Core2D.Project.XPage"/>.
         /// </summary>
-        public static Page Page { get; set; }
+        public static XPage Page { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Document"/>.
+        /// The design time <see cref="Core2D.Project.XDocument"/>.
         /// </summary>
-        public static Document Document { get; set; }
+        public static XDocument Document { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Layer"/>.
+        /// The design time <see cref="Core2D.Project.XLayer"/>.
         /// </summary>
-        public static Layer Layer { get; set; }
+        public static XLayer Layer { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Options"/>.
+        /// The design time <see cref="Core2D.Project.XOptions"/>.
         /// </summary>
-        public static Options Options { get; set; }
+        public static XOptions Options { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Project"/>.
+        /// The design time <see cref="Core2D.Project.XProject"/>.
         /// </summary>
-        public static Project Project { get; set; }
+        public static XProject Project { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.ShapeState"/>.
+        /// The design time <see cref="Core2D.Shape.ShapeState"/>.
         /// </summary>
         public static ShapeState State { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Database"/>.
+        /// The design time <see cref="Core2D.Data.Database.XDatabase"/>.
         /// </summary>
-        public static Database Database { get; set; }
+        public static XDatabase Database { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Data"/>.
+        /// The design time <see cref="Core2D.Data.XContext"/>.
         /// </summary>
-        public static Data Data { get; set; }
+        public static XContext Data { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Record"/>.
+        /// The design time <see cref="Core2D.Data.Database.XRecord"/>.
         /// </summary>
-        public static Record Record { get; set; }
+        public static XRecord Record { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.ArgbColor"/>.
+        /// The design time <see cref="Core2D.Style.ArgbColor"/>.
         /// </summary>
         public static ArgbColor ArgbColor { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.ArrowStyle"/>.
+        /// The design time <see cref="Core2D.Style.ArrowStyle"/>.
         /// </summary>
         public static ArrowStyle ArrowStyle { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.FontStyle"/>.
+        /// The design time <see cref="Core2D.Style.FontStyle"/>.
         /// </summary>
         public static FontStyle FontStyle { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.LineFixedLength"/>.
+        /// The design time <see cref="Core2D.Style.LineFixedLength"/>.
         /// </summary>
         public static LineFixedLength LineFixedLength { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.LineStyle"/>.
+        /// The design time <see cref="Core2D.Style.LineStyle"/>.
         /// </summary>
         public static LineStyle LineStyle { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.ShapeStyle"/>.
+        /// The design time <see cref="Core2D.Style.ShapeStyle"/>.
         /// </summary>
         public static ShapeStyle Style { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.TextStyle"/>.
+        /// The design time <see cref="Core2D.Style.TextStyle"/>.
         /// </summary>
         public static TextStyle TextStyle { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.XArc"/>.
+        /// The design time <see cref="Core2D.Shapes.XArc"/>.
         /// </summary>
         public static XArc Arc { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.XCubicBezier"/>.
+        /// The design time <see cref="Core2D.Shapes.XCubicBezier"/>.
         /// </summary>
         public static XCubicBezier CubicBezier { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.XEllipse"/>.
+        /// The design time <see cref="Core2D.Shapes.XEllipse"/>.
         /// </summary>
         public static XEllipse Ellipse { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.XGroup"/>.
+        /// The design time <see cref="Core2D.Shapes.XGroup"/>.
         /// </summary>
         public static XGroup Group { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.XImage"/>.
+        /// The design time <see cref="Core2D.Shapes.XImage"/>.
         /// </summary>
         public static XImage Image { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.XLine"/>.
+        /// The design time <see cref="Core2D.Shapes.XLine"/>.
         /// </summary>
         public static XLine Line { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.XPath"/>.
+        /// The design time <see cref="Core2D.Shapes.XPath"/>.
         /// </summary>
         public static XPath Path { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.XPoint"/>.
+        /// The design time <see cref="Core2D.Shapes.XPoint"/>.
         /// </summary>
         public static XPoint Point { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.XQuadraticBezier"/>.
+        /// The design time <see cref="Core2D.Shapes.XQuadraticBezier"/>.
         /// </summary>
         public static XQuadraticBezier QuadraticBezier { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.XRectangle"/>.
+        /// The design time <see cref="Core2D.Shapes.XRectangle"/>.
         /// </summary>
         public static XRectangle Rectangle { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.XText"/>.
+        /// The design time <see cref="Core2D.Shapes.XText"/>.
         /// </summary>
         public static XText Text { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.XArcSegment"/>.
+        /// The design time <see cref="Core2D.Path.Segments.XArcSegment"/>.
         /// </summary>
         public static XArcSegment ArcSegment { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.XCubicBezierSegment"/>.
+        /// The design time <see cref="Core2D.Path.Segments.XCubicBezierSegment"/>.
         /// </summary>
         public static XCubicBezierSegment CubicBezierSegment { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.XLineSegment"/>.
+        /// The design time <see cref="Core2D.Path.Segments.XLineSegment"/>.
         /// </summary>
         public static XLineSegment LineSegment { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.XPathFigure"/>.
+        /// The design time <see cref="Core2D.Path.XPathFigure"/>.
         /// </summary>
         public static XPathFigure PathFigure { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.XPathGeometry"/>.
+        /// The design time <see cref="Core2D.Path.XPathGeometry"/>.
         /// </summary>
         public static XPathGeometry PathGeometry { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.XPathSize"/>.
+        /// The design time <see cref="Core2D.Path.XPathSize"/>.
         /// </summary>
         public static XPathSize PathSize { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.XPolyCubicBezierSegment"/>.
+        /// The design time <see cref="Core2D.Path.Segments.XPolyCubicBezierSegment"/>.
         /// </summary>
         public static XPolyCubicBezierSegment PolyCubicBezierSegment { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.XPolyLineSegment"/>.
+        /// The design time <see cref="Core2D.Path.Segments.XPolyLineSegment"/>.
         /// </summary>
         public static XPolyLineSegment PolyLineSegment { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.XPolyQuadraticBezierSegment"/>.
+        /// The design time <see cref="Core2D.Path.Segments.XPolyQuadraticBezierSegment"/>.
         /// </summary>
         public static XPolyQuadraticBezierSegment PolyQuadraticBezierSegment { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.XQuadraticBezierSegment"/>.
+        /// The design time <see cref="Core2D.Path.Segments.XQuadraticBezierSegment"/>.
         /// </summary>
         public static XQuadraticBezierSegment QuadraticBezierSegment { get; set; }
 
@@ -210,7 +222,7 @@ namespace Core2D
         /// Initialize platform specific commands used by <see cref="Editor"/>.
         /// </summary>
         /// <param name="editor">The editor instance.</param>
-        public static void InitializeCommands(Editor editor)
+        public static void InitializeCommands(ShapeEditor editor)
         {
             Commands.OpenCommand =
                 Command<string>.Create(
@@ -238,67 +250,67 @@ namespace Core2D
                     (item) => editor.IsEditMode());
 
             Commands.ImportDataCommand =
-                Command<Project>.Create(
+                Command<XProject>.Create(
                     (project) => { },
                     (project) => editor.IsEditMode());
 
             Commands.ExportDataCommand =
-                Command<Database>.Create(
+                Command<XDatabase>.Create(
                     (db) => { },
                     (db) => editor.IsEditMode());
 
             Commands.UpdateDataCommand =
-                Command<Database>.Create(
+                Command<XDatabase>.Create(
                     (db) => { },
                     (db) => editor.IsEditMode());
 
             Commands.ImportStyleCommand =
-                Command<Library<ShapeStyle>>.Create(
+                Command<XLibrary<ShapeStyle>>.Create(
                     (item) => { },
                     (item) => editor.IsEditMode());
 
             Commands.ImportStylesCommand =
-                Command<Library<ShapeStyle>>.Create(
+                Command<XLibrary<ShapeStyle>>.Create(
                     (item) => { },
                     (item) => editor.IsEditMode());
 
             Commands.ImportStyleLibraryCommand =
-                Command<Project>.Create(
+                Command<XProject>.Create(
                     (item) => { },
                     (item) => editor.IsEditMode());
 
             Commands.ImportStyleLibrariesCommand =
-                Command<Project>.Create(
+                Command<XProject>.Create(
                     (item) => { },
                     (item) => editor.IsEditMode());
 
             Commands.ImportGroupCommand =
-                Command<Library<XGroup>>.Create(
+                Command<XLibrary<XGroup>>.Create(
                     (item) => { },
                     (item) => editor.IsEditMode());
 
             Commands.ImportGroupsCommand =
-                Command<Library<XGroup>>.Create(
+                Command<XLibrary<XGroup>>.Create(
                     (item) => { },
                     (item) => editor.IsEditMode());
 
             Commands.ImportGroupLibraryCommand =
-                Command<Project>.Create(
+                Command<XProject>.Create(
                     (item) => { },
                     (item) => editor.IsEditMode());
 
             Commands.ImportGroupLibrariesCommand =
-                Command<Project>.Create(
+                Command<XProject>.Create(
                     (item) => { },
                     (item) => editor.IsEditMode());
 
             Commands.ImportTemplateCommand =
-                Command<Project>.Create(
+                Command<XProject>.Create(
                     (item) => { },
                     (item) => editor.IsEditMode());
 
             Commands.ImportTemplatesCommand =
-                Command<Project>.Create(
+                Command<XProject>.Create(
                     (item) => { },
                     (item) => editor.IsEditMode());
 
@@ -308,17 +320,17 @@ namespace Core2D
                     (item) => editor.IsEditMode());
 
             Commands.ExportStylesCommand =
-                Command<Library<ShapeStyle>>.Create(
+                Command<XLibrary<ShapeStyle>>.Create(
                     (item) => { },
                     (item) => editor.IsEditMode());
 
             Commands.ExportStyleLibraryCommand =
-                Command<Library<ShapeStyle>>.Create(
+                Command<XLibrary<ShapeStyle>>.Create(
                     (item) => { },
                     (item) => editor.IsEditMode());
 
             Commands.ExportStyleLibrariesCommand =
-                Command<IEnumerable<Library<ShapeStyle>>>.Create(
+                Command<IEnumerable<XLibrary<ShapeStyle>>>.Create(
                     (item) => { },
                     (item) => editor.IsEditMode());
 
@@ -328,27 +340,27 @@ namespace Core2D
                     (item) => editor.IsEditMode());
 
             Commands.ExportGroupsCommand =
-                Command<Library<XGroup>>.Create(
+                Command<XLibrary<XGroup>>.Create(
                     (item) => { },
                     (item) => editor.IsEditMode());
 
             Commands.ExportGroupLibraryCommand =
-                Command<Library<XGroup>>.Create(
+                Command<XLibrary<XGroup>>.Create(
                     (item) => { },
                     (item) => editor.IsEditMode());
 
             Commands.ExportGroupLibrariesCommand =
-                Command<IEnumerable<Library<XGroup>>>.Create(
+                Command<IEnumerable<XLibrary<XGroup>>>.Create(
                     (item) => { },
                     (item) => editor.IsEditMode());
 
             Commands.ExportTemplateCommand =
-                Command<Template>.Create(
+                Command<XTemplate>.Create(
                     (item) => { },
                     (item) => editor.IsEditMode());
 
             Commands.ExportTemplatesCommand =
-                Command<IEnumerable<Template>>.Create(
+                Command<IEnumerable<XTemplate>>.Create(
                     (item) => { },
                     (item) => editor.IsEditMode());
 
@@ -387,15 +399,15 @@ namespace Core2D
         /// <param name="jsonSerializer">The design time Json serializer instance.</param>
         /// <param name="xamlSerializer">The design time Xaml serializer instance.</param>
         /// <returns>The new instance of the <see cref="DesignerContext"/> class.</returns>
-        public static void InitializeContext(Renderer renderer, ITextClipboard clipboard, IStreamSerializer protoBufSerializer, ITextSerializer jsonSerializer, ITextSerializer xamlSerializer)
+        public static void InitializeContext(ShapeRenderer renderer, ITextClipboard clipboard, IStreamSerializer protoBufSerializer, ITextSerializer jsonSerializer, ITextSerializer xamlSerializer)
         {
             // Editor
 
-            Editor = new Editor()
+            Editor = new ShapeEditor()
             {
                 CurrentTool = Tool.Selection,
                 CurrentPathTool = PathTool.Line,
-                Renderers = new Renderer[] { renderer },
+                Renderers = new ShapeRenderer[] { renderer },
                 ProjectFactory = new ProjectFactory(),
                 TextClipboard = clipboard,
                 ProtoBufSerializer = protoBufSerializer,
@@ -416,12 +428,12 @@ namespace Core2D
 
             // Data
 
-            var db = Database.Create("Db");
+            var db = XDatabase.Create("Db");
             var fields = new string[] { "Column0", "Column1" };
-            var columns = ImmutableArray.CreateRange(fields.Select(c => Column.Create(db, c)));
+            var columns = ImmutableArray.CreateRange(fields.Select(c => XColumn.Create(db, c)));
             db.Columns = columns;
-            var values = Enumerable.Repeat("<empty>", db.Columns.Length).Select(c => Value.Create(c));
-            var record = Record.Create(
+            var values = Enumerable.Repeat("<empty>", db.Columns.Length).Select(c => XValue.Create(c));
+            var record = XRecord.Create(
                 db,
                 db.Columns,
                 ImmutableArray.CreateRange(values));
@@ -429,22 +441,22 @@ namespace Core2D
             db.CurrentRecord = record;
 
             Database = db;
-            Data = Data.Create(record);
+            Data = XContext.Create(record);
             Record = record;
 
             // Project
 
-            Template = Template.Create();
-            Page = Page.Create();
+            Template = XTemplate.Create();
+            Page = XPage.Create();
             var layer = Page.Layers.FirstOrDefault();
             layer.Shapes = layer.Shapes.Add(XLine.Create(0, 0, null, null));
             Page.CurrentLayer = layer;
             Page.CurrentShape = layer.Shapes.FirstOrDefault();
             Page.Template = Template;
 
-            Document = Document.Create();
-            Layer = Layer.Create();
-            Options = Options.Create();
+            Document = XDocument.Create();
+            Layer = XLayer.Create();
+            Options = XOptions.Create();
             Project = (new ProjectFactory()).GetProject();
 
             // State

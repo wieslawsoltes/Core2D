@@ -1,10 +1,15 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Data;
+using Core2D.Data.Database;
+using Core2D.Renderer;
+using Core2D.Shapes;
+using Core2D.Style;
+using Portable.Xaml.Markup;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using Portable.Xaml.Markup;
 
-namespace Core2D
+namespace Core2D.Shape
 {
     /// <summary>
     /// Base class for shapes.
@@ -18,7 +23,7 @@ namespace Core2D
         private ShapeStyle _style;
         private bool _isStroked;
         private bool _isFilled;
-        private Data _data;
+        private XContext _data;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BaseShape"/> class.
@@ -27,7 +32,7 @@ namespace Core2D
             : base()
         {
             State = ShapeState.Create(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone);
-            Data = Data.Create();
+            Data = XContext.Create();
         }
 
         /// <summary>
@@ -87,7 +92,7 @@ namespace Core2D
         /// <summary>
         /// Gets or sets shape <see cref="Core2D.Data"/>.
         /// </summary>
-        public virtual Data Data
+        public virtual XContext Data
         {
             get { return _data; }
             set { Update(ref _data, value); }
@@ -102,7 +107,7 @@ namespace Core2D
         /// <param name="dy">The Y axis draw position offset.</param>
         /// <param name="db">The properties database used for binding.</param>
         /// <param name="r">The external data record used for binding.</param>
-        public abstract void Draw(object dc, Renderer renderer, double dx, double dy, ImmutableArray<Property> db, Record r);
+        public abstract void Draw(object dc, ShapeRenderer renderer, double dx, double dy, ImmutableArray<XProperty> db, XRecord r);
 
         /// <summary>
         /// Moves shape to new position using X and Y axis offset.

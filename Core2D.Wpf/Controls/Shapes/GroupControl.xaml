@@ -89,13 +89,13 @@
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-                            <lists:GroupShapesDragAndDropListBox x:Name="shapesListBox" Tag="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" ItemsSource="{Binding Shapes}" BorderBrush="{x:Null}" Grid.Row="0">
-                                <lists:GroupShapesDragAndDropListBox.ItemTemplate>
+                            <lists:XGroupShapesDragAndDropListBox x:Name="shapesListBox" Tag="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" ItemsSource="{Binding Shapes}" BorderBrush="{x:Null}" Grid.Row="0">
+                                <lists:XGroupShapesDragAndDropListBox.ItemTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding}" Margin="0,5,0,5"/>
                                     </DataTemplate>
-                                </lists:GroupShapesDragAndDropListBox.ItemTemplate>
-                            </lists:GroupShapesDragAndDropListBox>
+                                </lists:XGroupShapesDragAndDropListBox.ItemTemplate>
+                            </lists:XGroupShapesDragAndDropListBox>
                             <ContentControl Content="{Binding ElementName=shapesListBox, Path=SelectedItem}" Grid.Row="1" Margin="5,2,5,2"/>
                         </Grid>
                     </TabItem>
@@ -105,13 +105,13 @@
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-                            <lists:GroupConnectorsDragAndDropListBox x:Name="connectorsListBox" Tag="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" ItemsSource="{Binding Connectors}" BorderBrush="{x:Null}" Grid.Row="0">
-                                <lists:GroupConnectorsDragAndDropListBox.ItemTemplate>
+                            <lists:XGroupConnectorsDragAndDropListBox x:Name="connectorsListBox" Tag="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" ItemsSource="{Binding Connectors}" BorderBrush="{x:Null}" Grid.Row="0">
+                                <lists:XGroupConnectorsDragAndDropListBox.ItemTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding}" Margin="0,5,0,5"/>
                                     </DataTemplate>
-                                </lists:GroupConnectorsDragAndDropListBox.ItemTemplate>
-                            </lists:GroupConnectorsDragAndDropListBox>
+                                </lists:XGroupConnectorsDragAndDropListBox.ItemTemplate>
+                            </lists:XGroupConnectorsDragAndDropListBox>
                             <ContentControl Content="{Binding ElementName=connectorsListBox, Path=SelectedItem}" Grid.Row="1" Margin="5,2,5,2"/>
                         </Grid>
                     </TabItem>

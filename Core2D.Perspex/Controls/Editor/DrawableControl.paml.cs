@@ -1,11 +1,17 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using System.Collections.Immutable;
+using Core2D.Data;
+using Core2D.Data.Database;
+using Core2D.Editor;
+using Core2D.Project;
+using Core2D.Renderer;
+using Core2D.Style;
 using Perspex;
 using Perspex.Controls;
 using Perspex.Input;
-using Perspex.Media;
 using Perspex.Markup.Xaml;
+using Perspex.Media;
+using System.Collections.Immutable;
 
 namespace Core2D.Perspex.Controls.Editor
 {
@@ -37,7 +43,7 @@ namespace Core2D.Perspex.Controls.Editor
         /// </summary>
         private void InitializeState()
         {
-            var editor = this.DataContext as Core2D.Editor;
+            var editor = this.DataContext as ShapeEditor;
             if (editor == null)
                 return;
 
@@ -121,9 +127,9 @@ namespace Core2D.Perspex.Controls.Editor
 
                     var p = e.GetPosition(this);
 
-                    if (container is Template)
+                    if (container is XTemplate)
                     {
-                        var template = container as Template;
+                        var template = container as XTemplate;
                         _state.Wheel(
                             p.X,
                             p.Y,
@@ -134,9 +140,9 @@ namespace Core2D.Perspex.Controls.Editor
                             template.Height);
                     }
 
-                    if (container is Page)
+                    if (container is XPage)
                     {
-                        var page = container as Page;
+                        var page = container as XPage;
                         _state.Wheel(
                             p.X,
                             p.Y,
@@ -156,7 +162,7 @@ namespace Core2D.Perspex.Controls.Editor
         /// <returns>The actual size used.</returns>
         protected override Size ArrangeOverride(Size finalSize)
         {
-            var editor = this.DataContext as Core2D.Editor;
+            var editor = this.DataContext as ShapeEditor;
             if (editor != null && editor.Project != null)
             {
                 if (editor.Renderers != null && editor.Renderers[0].State.EnableAutofit)
@@ -182,7 +188,7 @@ namespace Core2D.Perspex.Controls.Editor
             if (_state == null)
                 return;
 
-            var editor = this.DataContext as Core2D.Editor;
+            var editor = this.DataContext as ShapeEditor;
             if (editor == null || editor.Project == null)
                 return;
 
@@ -190,9 +196,9 @@ namespace Core2D.Perspex.Controls.Editor
             if (container == null)
                 return;
 
-            if (container is Template)
+            if (container is XTemplate)
             {
-                var template = container as Template;
+                var template = container as XTemplate;
                 _state.CenterTo(
                     width,
                     height,
@@ -200,9 +206,9 @@ namespace Core2D.Perspex.Controls.Editor
                     template.Height);
             }
 
-            if (container is Page)
+            if (container is XPage)
             {
-                var page = container as Page;
+                var page = container as XPage;
                 _state.CenterTo(
                     width,
                     height,
@@ -223,7 +229,7 @@ namespace Core2D.Perspex.Controls.Editor
             if (_state == null)
                 return;
 
-            var editor = this.DataContext as Core2D.Editor;
+            var editor = this.DataContext as ShapeEditor;
             if (editor == null || editor.Project == null)
                 return;
 
@@ -231,9 +237,9 @@ namespace Core2D.Perspex.Controls.Editor
             if (container == null)
                 return;
 
-            if (container is Template)
+            if (container is XTemplate)
             {
-                var template = container as Template;
+                var template = container as XTemplate;
                 _state.FitTo(
                     width,
                     height,
@@ -241,9 +247,9 @@ namespace Core2D.Perspex.Controls.Editor
                     template.Height);
             }
             
-            if (container is Page)
+            if (container is XPage)
             {
-                var page = container as Page;
+                var page = container as XPage;
                 _state.FitTo(
                     width,
                     height,
@@ -259,7 +265,7 @@ namespace Core2D.Perspex.Controls.Editor
         /// </summary>
         public void OnZoomReset()
         {
-            var editor = this.DataContext as Core2D.Editor;
+            var editor = this.DataContext as ShapeEditor;
             if (editor == null)
                 return;
 
@@ -272,7 +278,7 @@ namespace Core2D.Perspex.Controls.Editor
         /// </summary>
         public void OnZoomExtent()
         {
-            var editor = this.DataContext as Core2D.Editor;
+            var editor = this.DataContext as Core2D.Editor.ShapeEditor;
             if (editor == null)
                 return;
 
@@ -301,7 +307,7 @@ namespace Core2D.Perspex.Controls.Editor
         /// <param name="dc">The drawing context.</param>
         private void Draw(DrawingContext dc)
         {
-            var editor = this.DataContext as Core2D.Editor;
+            var editor = this.DataContext as Core2D.Editor.ShapeEditor;
             if (editor == null || editor.Project == null)
                 return;
 
@@ -313,9 +319,9 @@ namespace Core2D.Perspex.Controls.Editor
             var translate = dc.PushPreTransform(Matrix.CreateTranslation(_state.PanX, _state.PanY));
             var scale = dc.PushPreTransform(Matrix.CreateScale(_state.Zoom, _state.Zoom));
 
-            if (container is Template)
+            if (container is XTemplate)
             {
-                var template = container as Template;
+                var template = container as XTemplate;
 
                 DrawBackground(
                     dc,
@@ -326,16 +332,16 @@ namespace Core2D.Perspex.Controls.Editor
                 renderer.Draw(
                     dc,
                     template,
-                    default(ImmutableArray<Property>),
-                    default(Record));
+                    default(ImmutableArray<XProperty>),
+                    default(XRecord));
 
                 if (template.WorkingLayer != null)
                 {
                     renderer.Draw(
                         dc,
                         template.WorkingLayer,
-                        default(ImmutableArray<Property>),
-                        default(Record));
+                        default(ImmutableArray<XProperty>),
+                        default(XRecord));
                 }
 
                 if (template.HelperLayer != null)
@@ -343,14 +349,14 @@ namespace Core2D.Perspex.Controls.Editor
                     renderer.Draw(
                         dc,
                         template.HelperLayer,
-                        default(ImmutableArray<Property>),
-                        default(Record));
+                        default(ImmutableArray<XProperty>),
+                        default(XRecord));
                 }
             }
 
-            if (container is Page)
+            if (container is XPage)
             {
-                var page = container as Page;
+                var page = container as XPage;
 
                 DrawBackground(
                     dc,

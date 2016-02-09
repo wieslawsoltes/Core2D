@@ -1,5 +1,9 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Data;
+using Core2D.Data.Database;
+using Core2D.Project;
+using Core2D.Renderer;
 using System.Collections.Immutable;
 using System.Windows;
 using System.Windows.Media;
@@ -12,32 +16,32 @@ namespace Core2D.Wpf.Controls.Custom
     public sealed class LayerElement : FrameworkElement
     {
         /// <summary>
-        /// Gets the <see cref="Core2D.Data"/> from <see cref="DependencyProperty"/> object.
+        /// Gets the <see cref="XContext"/> from <see cref="DependencyProperty"/> object.
         /// </summary>
         /// <param name="obj">The <see cref="DependencyProperty"/> object.</param>
-        /// <returns>The <see cref="Data"/> value.</returns>
-        public static Core2D.Data GetData(DependencyObject obj)
+        /// <returns>The <see cref="XContext"/> value.</returns>
+        public static XContext GetData(DependencyObject obj)
         {
-            return (Core2D.Data)obj.GetValue(DataProperty);
+            return (XContext)obj.GetValue(DataProperty);
         }
 
         /// <summary>
-        /// Sets the <see cref="DependencyProperty"/> object value as <see cref="Renderer"/>.
+        /// Sets the <see cref="DependencyProperty"/> object value as <see cref="XContext"/>.
         /// </summary>
         /// <param name="obj">The <see cref="DependencyProperty"/> object.</param>
-        /// <param name="value">The <see cref="Core2D.Data"/> value.</param>
-        public static void SetData(DependencyObject obj, Core2D.Data value)
+        /// <param name="value">The <see cref="XContext"/> value.</param>
+        public static void SetData(DependencyObject obj, XContext value)
         {
             obj.SetValue(DataProperty, value);
         }
 
         /// <summary>
-        /// The attached <see cref="DependencyProperty"/> for <see cref="Core2D.Data"/> type.
+        /// The attached <see cref="DependencyProperty"/> for <see cref="XContext"/> type.
         /// </summary>
         public static readonly DependencyProperty DataProperty =
             DependencyProperty.RegisterAttached(
                 "Data",
-                typeof(Core2D.Data),
+                typeof(XContext),
                 typeof(LayerElement),
                 new FrameworkPropertyMetadata(
                     null,
@@ -51,29 +55,29 @@ namespace Core2D.Wpf.Controls.Custom
         /// Gets the <see cref="Core2D.Renderer"/> from <see cref="DependencyProperty"/> object.
         /// </summary>
         /// <param name="obj">The <see cref="DependencyProperty"/> object.</param>
-        /// <returns>The <see cref="Core2D.Renderer"/> value.</returns>
-        public static Core2D.Renderer GetRenderer(DependencyObject obj)
+        /// <returns>The <see cref="ShapeRenderer"/> value.</returns>
+        public static ShapeRenderer GetRenderer(DependencyObject obj)
         {
-            return (Core2D.Renderer)obj.GetValue(RendererProperty);
+            return (ShapeRenderer)obj.GetValue(RendererProperty);
         }
 
         /// <summary>
-        /// Sets the <see cref="DependencyProperty"/> object value as <see cref="Core2D.Renderer"/>.
+        /// Sets the <see cref="DependencyProperty"/> object value as <see cref="ShapeRenderer"/>.
         /// </summary>
         /// <param name="obj">The <see cref="DependencyProperty"/> object.</param>
-        /// <param name="value">The <see cref="Core2D.Renderer"/> value.</param>
-        public static void SetRenderer(DependencyObject obj, Core2D.Renderer value)
+        /// <param name="value">The <see cref="ShapeRenderer"/> value.</param>
+        public static void SetRenderer(DependencyObject obj, ShapeRenderer value)
         {
             obj.SetValue(RendererProperty, value);
         }
 
         /// <summary>
-        /// The attached <see cref="DependencyProperty"/> for <see cref="Core2D.Renderer"/> type.
+        /// The attached <see cref="DependencyProperty"/> for <see cref="ShapeRenderer"/> type.
         /// </summary>
         public static readonly DependencyProperty RendererProperty =
             DependencyProperty.RegisterAttached(
                 "Renderer",
-                typeof(Core2D.Renderer),
+                typeof(ShapeRenderer),
                 typeof(LayerElement),
                 new FrameworkPropertyMetadata(
                     null,
@@ -84,7 +88,7 @@ namespace Core2D.Wpf.Controls.Custom
                     FrameworkPropertyMetadataOptions.SubPropertiesDoNotAffectRender));
 
         private bool _isLoaded = false;
-        private Layer _layer = default(Layer);
+        private XLayer _layer = default(XLayer);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="LayerElement"/> class.
@@ -121,7 +125,7 @@ namespace Core2D.Wpf.Controls.Custom
 
                     if (_layer != null)
                     {
-                        var layer = DataContext as Layer;
+                        var layer = DataContext as XLayer;
                         if (layer == _layer)
                             return;
                     }
@@ -150,7 +154,7 @@ namespace Core2D.Wpf.Controls.Custom
                 DeInitialize();
             }
 
-            var layer = DataContext as Layer;
+            var layer = DataContext as XLayer;
             if (layer != null)
             {
                 _layer = layer;
@@ -163,7 +167,7 @@ namespace Core2D.Wpf.Controls.Custom
             if (_layer != null)
             {
                 _layer.InvalidateLayer -= Invalidate;
-                _layer = default(Layer);
+                _layer = default(XLayer);
             }
         }
 
@@ -177,15 +181,15 @@ namespace Core2D.Wpf.Controls.Custom
 
         private void Render(DrawingContext drawingContext)
         {
-            var layer = DataContext as Layer;
+            var layer = DataContext as XLayer;
             if (layer != null && layer.IsVisible)
             {
                 var renderer = LayerElement.GetRenderer(this);
                 if (renderer != null)
                 {
                     var data = LayerElement.GetData(this);
-                    var properties = data != null ? data.Properties : default(ImmutableArray<Property>);
-                    var record = data != null ? data.Record : default(Record);
+                    var properties = data != null ? data.Properties : default(ImmutableArray<XProperty>);
+                    var record = data != null ? data.Record : default(XRecord);
 
                     renderer.Draw(
                         drawingContext,

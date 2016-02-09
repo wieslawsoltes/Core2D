@@ -1,11 +1,15 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using System;
+using Core2D.Math;
+using Core2D.Project;
+using Core2D.Shape;
+using Core2D.Shapes;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using static System.Math;
 
-namespace Core2D
+namespace Core2D.Editor.Bounds
 {
     /// <summary>
     /// Calculate shape bounds and provide shape hit testing capabilities.
@@ -71,7 +75,7 @@ namespace Core2D
             double x0 = (x1 + x2) / 2.0;
             double y0 = (y1 + y2) / 2.0;
 
-            double r = Math.Sqrt((x1 - x0) * (x1 - x0) + (y1 - y0) * (y1 - y0));
+            double r = Sqrt((x1 - x0) * (x1 - x0) + (y1 - y0) * (y1 - y0));
             double x = x0 - r;
             double y = y0 - r;
             double width = 2.0 * r;
@@ -451,13 +455,13 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Hit test point in <see cref="Container"/> shapes bounds.
+        /// Hit test point in <see cref="XContainer"/> shapes bounds.
         /// </summary>
         /// <param name="container"></param>
         /// <param name="p"></param>
         /// <param name="threshold"></param>
         /// <returns></returns>
-        public static BaseShape HitTest(Container container, Vector2 p, double threshold)
+        public static BaseShape HitTest(XContainer container, Vector2 p, double threshold)
         {
             var result = HitTest(container.CurrentLayer.Shapes.Reverse(), p, threshold, 0, 0);
             if (result != null)
@@ -469,7 +473,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Hit test rectangle in <see cref="Container"/> shapes bounds.
+        /// Hit test rectangle in <see cref="XContainer"/> shapes bounds.
         /// </summary>
         /// <param name="shape"></param>
         /// <param name="rect"></param>
@@ -748,13 +752,13 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Hit test rectangle if intersects with any <see cref="Container"/> shape bounds.
+        /// Hit test rectangle if intersects with any <see cref="XContainer"/> shape bounds.
         /// </summary>
         /// <param name="container"></param>
         /// <param name="rect"></param>
         /// <param name="threshold"></param>
         /// <returns></returns>
-        public static ImmutableHashSet<BaseShape> HitTest(Container container, Rect2 rect, double threshold)
+        public static ImmutableHashSet<BaseShape> HitTest(XContainer container, Rect2 rect, double threshold)
         {
             var builder = ImmutableHashSet.CreateBuilder<BaseShape>();
 

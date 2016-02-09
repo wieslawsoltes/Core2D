@@ -1,16 +1,21 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Editor.Bounds;
+using Core2D.Math;
+using Core2D.Project;
+using Core2D.Shape;
+using Core2D.Shapes;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Core2D
+namespace Core2D.Editor.Tools
 {
     /// <summary>
     /// Helper class for <see cref="Tool.Selection"/> editor.
     /// </summary>
     public sealed class ToolSelection : ToolBase
     {
-        private Editor _editor;
+        private ShapeEditor _editor;
         private ToolState _currentState = ToolState.None;
         private BaseShape _shape;
         private double _startX;
@@ -23,8 +28,8 @@ namespace Core2D
         /// <summary>
         /// Initialize new instance of <see cref="ToolSelection"/> class.
         /// </summary>
-        /// <param name="editor">The current <see cref="Editor"/> object.</param>
-        public ToolSelection(Editor editor)
+        /// <param name="editor">The current <see cref="ShapeEditor"/> object.</param>
+        public ToolSelection(ShapeEditor editor)
             : base()
         {
             _editor = editor;
@@ -41,7 +46,7 @@ namespace Core2D
 
                 switch (_editor.Project.Options.MoveMode)
                 {
-                    case MoveMode.Point:
+                    case XMoveMode.Point:
                         {
                             if (!state.Flags.HasFlag(ShapeStateFlags.Locked))
                             {
@@ -51,7 +56,7 @@ namespace Core2D
                             }
                         }
                         break;
-                    case MoveMode.Shape:
+                    case XMoveMode.Shape:
                         {
                             if (!state.Flags.HasFlag(ShapeStateFlags.Locked) && !state.Flags.HasFlag(ShapeStateFlags.Connector))
                             {
@@ -70,12 +75,12 @@ namespace Core2D
 
                 switch (_editor.Project.Options.MoveMode)
                 {
-                    case MoveMode.Point:
+                    case XMoveMode.Point:
                         {
                             _pointsCache = shapes.SelectMany(s => s.GetPoints()).Distinct().ToList();
                         }
                         break;
-                    case MoveMode.Shape:
+                    case XMoveMode.Shape:
                         {
                             _shapesCache = shapes.ToList();
                         }
@@ -100,8 +105,8 @@ namespace Core2D
         /// <param name="y">The Y coordinate of point.</param>
         private void MoveSelectionCacheTo(double x, double y)
         {
-            double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
-            double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
+            double sx = _editor.Project.Options.SnapToGrid ? ShapeEditor.Snap(x, _editor.Project.Options.SnapX) : x;
+            double sy = _editor.Project.Options.SnapToGrid ? ShapeEditor.Snap(y, _editor.Project.Options.SnapY) : y;
 
             double dx = sx - _startX;
             double dy = sy - _startY;
@@ -111,12 +116,12 @@ namespace Core2D
 
             if (_pointsCache != null)
             {
-                Editor.MoveShapesBy(_pointsCache, dx, dy);
+                ShapeEditor.MoveShapesBy(_pointsCache, dx, dy);
             }
 
             if (_shapesCache != null)
             {
-                Editor.MoveShapesBy(_shapesCache, dx, dy);
+                ShapeEditor.MoveShapesBy(_shapesCache, dx, dy);
             }
         }
 
@@ -136,8 +141,8 @@ namespace Core2D
                             var result = ShapeBounds.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitThreshold);
                             if (result != null)
                             {
-                                _startX = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
-                                _startY = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
+                                _startX = _editor.Project.Options.SnapToGrid ? ShapeEditor.Snap(x, _editor.Project.Options.SnapX) : x;
+                                _startY = _editor.Project.Options.SnapToGrid ? ShapeEditor.Snap(y, _editor.Project.Options.SnapY) : y;
                                 _historyX = _startX;
                                 _historyY = _startY;
                                 GenerateMoveSelectionCache();
@@ -149,8 +154,8 @@ namespace Core2D
 
                         if (_editor.TryToSelectShape(_editor.Project.CurrentContainer, x, y))
                         {
-                            _startX = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
-                            _startY = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
+                            _startX = _editor.Project.Options.SnapToGrid ? ShapeEditor.Snap(x, _editor.Project.Options.SnapX) : x;
+                            _startY = _editor.Project.Options.SnapToGrid ? ShapeEditor.Snap(y, _editor.Project.Options.SnapY) : y;
                             _historyX = _startX;
                             _historyY = _startY;
                             GenerateMoveSelectionCache();
@@ -200,8 +205,8 @@ namespace Core2D
                     {
                         if (_editor.IsSelectionAvailable())
                         {
-                            double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
-                            double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
+                            double sx = _editor.Project.Options.SnapToGrid ? ShapeEditor.Snap(x, _editor.Project.Options.SnapX) : x;
+                            double sy = _editor.Project.Options.SnapToGrid ? ShapeEditor.Snap(y, _editor.Project.Options.SnapY) : y;
                             if (_historyX != sx || _historyY != sy)
                             {
                                 double dx = sx - _historyX;
@@ -226,12 +231,12 @@ namespace Core2D
                                     {
                                         if (state.Points != null)
                                         {
-                                            Editor.MoveShapesBy(state.Points, state.DeltaX, state.DeltaY);
+                                            ShapeEditor.MoveShapesBy(state.Points, state.DeltaX, state.DeltaY);
                                         }
 
                                         if (state.Shapes != null)
                                         {
-                                            Editor.MoveShapesBy(state.Shapes, state.DeltaX, state.DeltaY);
+                                            ShapeEditor.MoveShapesBy(state.Shapes, state.DeltaX, state.DeltaY);
                                         }
                                     });
                             }

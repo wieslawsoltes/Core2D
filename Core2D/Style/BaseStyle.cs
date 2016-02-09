@@ -6,7 +6,7 @@ using System.Linq;
 using System.Globalization;
 using Portable.Xaml.Markup;
 
-namespace Core2D
+namespace Core2D.Style
 {
     /// <summary>
     /// Base style.

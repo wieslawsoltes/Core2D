@@ -1,10 +1,16 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using System;
+using Core2D.Data;
+using Core2D.Data.Database;
+using Core2D.Math;
+using Core2D.Renderer;
+using Core2D.Shape;
+using Core2D.Style;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using static System.Math;
 
-namespace Core2D
+namespace Core2D.Shapes
 {
     /// <summary>
     /// Point shape.
@@ -43,7 +49,7 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Renderer renderer, double dx, double dy, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, ShapeRenderer renderer, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
         {
             var record = this.Data.Record ?? r;
 
@@ -78,7 +84,7 @@ namespace Core2D
         {
             double dx = this.X - point.X;
             double dy = this.Y - point.Y;
-            return Math.Sqrt(dx * dx + dy * dy);
+            return Sqrt(dx * dx + dy * dy);
         }
 
         /// <summary>
@@ -124,7 +130,7 @@ namespace Core2D
         /// <returns>The new instance of the <see cref="XPoint"/> class.</returns>
         public XPoint Clone()
         {
-            var data = Data.Create(this.Data.Record);
+            var data = XContext.Create(this.Data.Record);
 
             // TODO: The property Value is of type object and is not cloned.
             if (this.Data.Properties.Length > 0)
@@ -133,7 +139,7 @@ namespace Core2D
                 foreach (var property in this.Data.Properties)
                 {
                     builder.Add(
-                        Property.Create(
+                        XProperty.Create(
                             data,
                             property.Name,
                             property.Value));

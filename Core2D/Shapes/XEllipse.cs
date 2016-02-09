@@ -1,8 +1,13 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Data;
+using Core2D.Data.Database;
+using Core2D.Renderer;
+using Core2D.Shape;
+using Core2D.Style;
 using System.Collections.Immutable;
 
-namespace Core2D
+namespace Core2D.Shapes
 {
     /// <summary>
     /// Ellipse shape.
@@ -10,7 +15,7 @@ namespace Core2D
     public class XEllipse : XText
     {
         /// <inheritdoc/>
-        public override void Draw(object dc, Renderer renderer, double dx, double dy, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, ShapeRenderer renderer, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
         {
             var record = this.Data.Record ?? r;
 

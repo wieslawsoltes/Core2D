@@ -6,8 +6,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Core2D.Wpf" 
-             xmlns:converters="clr-namespace:Core2D.Wpf.Converters" 
-             xmlns:core="clr-namespace:Core2D;assembly=Core2D" 
+             xmlns:converters="clr-namespace:Core2D.Wpf.Converters"
+             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
+             xmlns:Path="clr-namespace:Core2D.Path;assembly=Core2D"
+             xmlns:Segments="clr-namespace:Core2D.Path.Segments;assembly=Core2D"
              xmlns:custom="clr-namespace:Core2D.Wpf.Controls.Custom"
              mc:Ignorable="d" 
              d:DataContext="{x:Static local:DesignerHelper.PathGeometry}"
@@ -23,34 +25,34 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="FillRule" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
-                <ComboBox ItemsSource="{x:Static core:Enums.XFillRuleValues}" SelectedItem="{Binding FillRule}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="0" Grid.Column="1"/>
+                <ComboBox ItemsSource="{x:Static Editor:Enums.XFillRuleValues}" SelectedItem="{Binding FillRule}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="0" Grid.Column="1"/>
             </Grid>
         </TabItem>
         <TabItem Header="Figures">
             <TreeView x:Name="tree" ItemsSource="{Binding Figures}" BorderBrush="{x:Null}" BorderThickness="0" HorizontalContentAlignment="Stretch" VerticalAlignment="Stretch">
                 <TreeView.Resources>
-                    <DataTemplate DataType="{x:Type core:XPathFigure}">
+                    <DataTemplate DataType="{x:Type Path:XPathFigure}">
                         <TextBlock Text="Figure"/>
                     </DataTemplate>
-                    <DataTemplate DataType="{x:Type core:XLineSegment}">
+                    <DataTemplate DataType="{x:Type Segments:XLineSegment}">
                         <TextBlock Text="LineSegment"/>
                     </DataTemplate>
-                    <DataTemplate DataType="{x:Type core:XCubicBezierSegment}">
+                    <DataTemplate DataType="{x:Type Segments:XCubicBezierSegment}">
                         <TextBlock Text="CubicBezierSegment"/>
                     </DataTemplate>
-                    <DataTemplate DataType="{x:Type core:XQuadraticBezierSegment}">
+                    <DataTemplate DataType="{x:Type Segments:XQuadraticBezierSegment}">
                         <TextBlock Text="QuadraticBezierSegment"/>
                     </DataTemplate>
-                    <DataTemplate DataType="{x:Type core:XArcSegment}">
+                    <DataTemplate DataType="{x:Type Segments:XArcSegment}">
                         <TextBlock Text="ArcSegment"/>
                     </DataTemplate>
-                    <DataTemplate DataType="{x:Type core:XPolyLineSegment}">
+                    <DataTemplate DataType="{x:Type Segments:XPolyLineSegment}">
                         <TextBlock Text="PolyLineSegment"/>
                     </DataTemplate>
-                    <DataTemplate DataType="{x:Type core:XPolyCubicBezierSegment}">
+                    <DataTemplate DataType="{x:Type Segments:XPolyCubicBezierSegment}">
                         <TextBlock Text="PolyCubicBezierSegment"/>
                     </DataTemplate>
-                    <DataTemplate DataType="{x:Type core:XPolyQuadraticBezierSegment}">
+                    <DataTemplate DataType="{x:Type Segments:XPolyQuadraticBezierSegment}">
                         <TextBlock Text="PolyQuadraticBezierSegment"/>
                     </DataTemplate>
                 </TreeView.Resources>

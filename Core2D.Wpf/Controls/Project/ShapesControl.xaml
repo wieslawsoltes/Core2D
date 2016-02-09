@@ -7,7 +7,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Core2D.Wpf" 
              xmlns:converters="clr-namespace:Core2D.Wpf.Converters" 
-             xmlns:core="clr-namespace:Core2D;assembly=Core2D" 
+             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
              xmlns:custom="clr-namespace:Core2D.Wpf.Controls.Custom"
              xmlns:lists="clr-namespace:Core2D.Wpf.Controls.Custom.Lists"
              mc:Ignorable="d" 
@@ -17,7 +17,7 @@
         <Grid.Resources>
             <ControlTemplate x:Key="ShapesMenu">
                 <Menu Background="Transparent" HorizontalAlignment="Right">
-                    <MenuItem Command="{x:Static core:Commands.RemoveShapeCommand}" CommandParameter="{Binding CurrentShape}" Header="-"/>
+                    <MenuItem Command="{x:Static Editor:Commands.RemoveShapeCommand}" CommandParameter="{Binding CurrentShape}" Header="-"/>
                 </Menu>
             </ControlTemplate>
         </Grid.Resources>
@@ -30,11 +30,11 @@
         <lists:BaseShapeDragAndDropListBox DataContext="{Binding CurrentLayer.Shapes}" Tag="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" ItemsSource="{Binding}" SelectedItem="{Binding DataContext.CurrentShape, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" BorderBrush="{x:Null}" HorizontalContentAlignment="Stretch" Grid.Row="1">
             <lists:BaseShapeDragAndDropListBox.Resources>
                 <ContextMenu x:Key="ShapeContextMenu" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
-                    <MenuItem Header="_Delete" InputGestureText="Del" Command="{x:Static core:Commands.RemoveShapeCommand}" CommandParameter="{Binding}"/>
+                    <MenuItem Header="_Delete" InputGestureText="Del" Command="{x:Static Editor:Commands.RemoveShapeCommand}" CommandParameter="{Binding}"/>
                 </ContextMenu>
             </lists:BaseShapeDragAndDropListBox.Resources>
             <lists:BaseShapeDragAndDropListBox.InputBindings>
-                <KeyBinding Command="{x:Static core:Commands.RemoveShapeCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type lists:BaseShapeDragAndDropListBox}}}" Gesture="Del"/>
+                <KeyBinding Command="{x:Static Editor:Commands.RemoveShapeCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type lists:BaseShapeDragAndDropListBox}}}" Gesture="Del"/>
             </lists:BaseShapeDragAndDropListBox.InputBindings>
             <lists:BaseShapeDragAndDropListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">

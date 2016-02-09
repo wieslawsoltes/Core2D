@@ -1,10 +1,11 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using System;
-using Portable.Xaml.Markup;
+using Core2D.Xaml.Converters;
 using Portable.Xaml.ComponentModel;
+using Portable.Xaml.Markup;
+using System;
 
-namespace Core2D
+namespace Core2D.Shape
 {
     /// <summary>
     /// Shape state.

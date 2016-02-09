@@ -1,12 +1,13 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Xaml.Converters;
+using Portable.Xaml.ComponentModel;
 using System;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
-using Portable.Xaml.ComponentModel;
 
-namespace Core2D
+namespace Core2D.Style
 {
     /// <summary>
     /// Color definition using alpha, red, green and blue channels.

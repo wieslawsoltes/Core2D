@@ -1,18 +1,24 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Data;
+using Core2D.Data.Database;
+using Core2D.Math;
+using Core2D.Math.Arc;
+using Core2D.Renderer;
+using Core2D.Shapes;
+using Core2D.Style;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using Core2D;
 
-namespace Dependencies
+namespace Renderer.WinForms
 {
     /// <summary>
     /// Native Windows Forms shape renderer.
     /// </summary>
-    public class WinFormsRenderer : Renderer
+    public class WinFormsRenderer : ShapeRenderer
     {
         private bool _enableImageCache = true;
         private IDictionary<string, Image> _biCache;
@@ -43,7 +49,7 @@ namespace Dependencies
         /// Creates a new <see cref="WinFormsRenderer"/> instance.
         /// </summary>
         /// <returns>The new instance of the <see cref="WinFormsRenderer"/> class.</returns>
-        public static Renderer Create()
+        public static ShapeRenderer Create()
         {
             return new WinFormsRenderer();
         }
@@ -73,17 +79,17 @@ namespace Dependencies
             var pen = new Pen(ToColor(style.Stroke), (float)(style.Thickness / State.Zoom));
             switch (style.LineCap)
             {
-                case Core2D.LineCap.Flat:
+                case Core2D.Style.LineCap.Flat:
                     pen.StartCap = System.Drawing.Drawing2D.LineCap.Flat;
                     pen.EndCap = System.Drawing.Drawing2D.LineCap.Flat;
                     pen.DashCap = System.Drawing.Drawing2D.DashCap.Flat;
                     break;
-                case Core2D.LineCap.Square:
+                case Core2D.Style.LineCap.Square:
                     pen.StartCap = System.Drawing.Drawing2D.LineCap.Square;
                     pen.EndCap = System.Drawing.Drawing2D.LineCap.Square;
                     pen.DashCap = System.Drawing.Drawing2D.DashCap.Flat;
                     break;
-                case Core2D.LineCap.Round:
+                case Core2D.Style.LineCap.Round:
                     pen.StartCap = System.Drawing.Drawing2D.LineCap.Round;
                     pen.EndCap = System.Drawing.Drawing2D.LineCap.Round;
                     pen.DashCap = System.Drawing.Drawing2D.DashCap.Round;
@@ -285,7 +291,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XLine line, double dx, double dy, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, XLine line, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
         {
             var _gfx = dc as Graphics;
 
@@ -457,7 +463,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XRectangle rectangle, double dx, double dy, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, XRectangle rectangle, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
         {
             var _gfx = dc as Graphics;
 
@@ -505,7 +511,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XEllipse ellipse, double dx, double dy, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, XEllipse ellipse, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
         {
             var _gfx = dc as Graphics;
 
@@ -542,7 +548,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XArc arc, double dx, double dy, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, XArc arc, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
         {
             var a = GdiArc.FromXArc(arc, dx, dy);
             if (a.Width <= 0.0 || a.Height <= 0.0)
@@ -583,7 +589,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XCubicBezier cubicBezier, double dx, double dy, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, XCubicBezier cubicBezier, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
         {
             var _gfx = dc as Graphics;
 
@@ -624,7 +630,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XQuadraticBezier quadraticBezier, double dx, double dy, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, XQuadraticBezier quadraticBezier, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
         {
             var _gfx = dc as Graphics;
 
@@ -674,7 +680,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XText text, double dx, double dy, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, XText text, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
         {
             var _gfx = dc as Graphics;
 
@@ -687,22 +693,22 @@ namespace Dependencies
             var fontStyle = System.Drawing.FontStyle.Regular;
             if (text.Style.TextStyle.FontStyle != null)
             {
-                if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Bold))
+                if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Core2D.Style.FontStyleFlags.Bold))
                 {
                     fontStyle |= System.Drawing.FontStyle.Bold;
                 }
 
-                if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Italic))
+                if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Core2D.Style.FontStyleFlags.Italic))
                 {
                     fontStyle |= System.Drawing.FontStyle.Italic;
                 }
 
-                if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Underline))
+                if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Core2D.Style.FontStyleFlags.Underline))
                 {
                     fontStyle |= System.Drawing.FontStyle.Underline;
                 }
 
-                if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Strikeout))
+                if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Core2D.Style.FontStyleFlags.Strikeout))
                 {
                     fontStyle |= System.Drawing.FontStyle.Strikeout;
                 }
@@ -766,7 +772,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XImage image, double dx, double dy, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, XImage image, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
         {
             var _gfx = dc as Graphics;
 
@@ -831,7 +837,7 @@ namespace Dependencies
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XPath path, double dx, double dy, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, XPath path, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
         {
             var _gfx = dc as Graphics;
 

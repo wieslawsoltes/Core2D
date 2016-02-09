@@ -1,24 +1,28 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Data;
+using Core2D.Data.Database;
+using Core2D.Renderer;
+using Core2D.Shape;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 
-namespace Core2D
+namespace Core2D.Shapes
 {
     /// <summary>
     /// Group shape.
     /// </summary>
     public class XGroup : BaseShape
     {
-        private ImmutableArray<Property> _shapesProperties;
+        private ImmutableArray<XProperty> _shapesProperties;
         private ImmutableArray<BaseShape> _shapes;
         private ImmutableArray<XPoint> _connectors;
 
         /// <summary>
         /// Gets all properties from <see cref="Shapes"/> collection.
         /// </summary>
-        public ImmutableArray<Property> ShapesProperties
+        public ImmutableArray<XProperty> ShapesProperties
         {
             get
             {
@@ -26,7 +30,7 @@ namespace Core2D
                 {
                     if (_shapes != null)
                     {
-                        var builder = ImmutableArray.CreateBuilder<Property>();
+                        var builder = ImmutableArray.CreateBuilder<XProperty>();
 
                         foreach (var shape in _shapes)
                         {
@@ -61,7 +65,7 @@ namespace Core2D
             {
                 if(Update(ref _shapes, value))
                 {
-                    _shapesProperties = default(ImmutableArray<Property>);
+                    _shapesProperties = default(ImmutableArray<XProperty>);
                 }
             }
         }
@@ -76,7 +80,7 @@ namespace Core2D
             {
                 if (Update(ref _connectors, value))
                 {
-                    _shapesProperties = default(ImmutableArray<Property>);
+                    _shapesProperties = default(ImmutableArray<XProperty>);
                 }
             }
         }
@@ -92,7 +96,7 @@ namespace Core2D
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Renderer renderer, double dx, double dy, ImmutableArray<Property> db, Record r)
+        public override void Draw(object dc, ShapeRenderer renderer, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
         {
             var record = this.Data.Record ?? r;
 

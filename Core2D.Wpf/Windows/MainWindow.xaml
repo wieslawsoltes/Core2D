@@ -7,7 +7,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
         xmlns:local="clr-namespace:Core2D.Wpf" 
         xmlns:converters="clr-namespace:Core2D.Wpf.Converters" 
-        xmlns:core="clr-namespace:Core2D;assembly=Core2D" 
+        xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D" 
+        xmlns:Project="clr-namespace:Core2D.Project;assembly=Core2D" 
         xmlns:custom="clr-namespace:Core2D.Wpf.Controls.Custom"
         xmlns:lists="clr-namespace:Core2D.Wpf.Controls.Custom.Lists"
         xmlns:data="clr-namespace:Core2D.Wpf.Controls.Data"
@@ -34,23 +35,23 @@
         </MultiBinding>
     </Window.Title>
     <Window.InputBindings>
-        <KeyBinding Command="{x:Static core:Commands.NewCommand}" Gesture="Ctrl+N"/>
-        <KeyBinding Command="{x:Static core:Commands.OpenCommand}" Gesture="Ctrl+O"/>
-        <KeyBinding Command="{x:Static core:Commands.CloseCommand}" Gesture="Ctrl+F4"/>
-        <KeyBinding Command="{x:Static core:Commands.SaveCommand}" Gesture="Ctrl+S"/>
-        <KeyBinding Command="{x:Static core:Commands.SaveAsCommand}" Gesture="Ctrl+Shift+S"/>
-        <KeyBinding Command="{x:Static core:Commands.ImportXamlCommand}" Gesture="Ctrl+I"/>
-        <KeyBinding Command="{x:Static core:Commands.ExportCommand}" Gesture="Ctrl+E"/>
-        <KeyBinding Command="{x:Static core:Commands.ExitCommand}" Gesture="Alt+F4"/>
-        <KeyBinding Command="{x:Static core:Commands.UndoCommand}" Gesture="Ctrl+Z"/>
-        <KeyBinding Command="{x:Static core:Commands.RedoCommand}" Gesture="Ctrl+Y"/>
-        <KeyBinding Command="{x:Static core:Commands.CopyAsEmfCommand}" Gesture="Ctrl+Shift+C"/>
-        <KeyBinding Command="{x:Static core:Commands.CutCommand}" Gesture="Ctrl+X"/>
-        <KeyBinding Command="{x:Static core:Commands.CopyCommand}" Gesture="Ctrl+C"/>
-        <KeyBinding Command="{x:Static core:Commands.PasteCommand}" Gesture="Ctrl+V"/>
-        <KeyBinding Command="{x:Static core:Commands.SelectAllCommand}" Gesture="Ctrl+A"/>
-        <KeyBinding Command="{x:Static core:Commands.GroupCommand}" Gesture="Ctrl+G"/>
-        <KeyBinding Command="{x:Static core:Commands.UngroupCommand}" Gesture="Ctrl+U"/>
+        <KeyBinding Command="{x:Static Editor:Commands.NewCommand}" Gesture="Ctrl+N"/>
+        <KeyBinding Command="{x:Static Editor:Commands.OpenCommand}" Gesture="Ctrl+O"/>
+        <KeyBinding Command="{x:Static Editor:Commands.CloseCommand}" Gesture="Ctrl+F4"/>
+        <KeyBinding Command="{x:Static Editor:Commands.SaveCommand}" Gesture="Ctrl+S"/>
+        <KeyBinding Command="{x:Static Editor:Commands.SaveAsCommand}" Gesture="Ctrl+Shift+S"/>
+        <KeyBinding Command="{x:Static Editor:Commands.ImportXamlCommand}" Gesture="Ctrl+I"/>
+        <KeyBinding Command="{x:Static Editor:Commands.ExportCommand}" Gesture="Ctrl+E"/>
+        <KeyBinding Command="{x:Static Editor:Commands.ExitCommand}" Gesture="Alt+F4"/>
+        <KeyBinding Command="{x:Static Editor:Commands.UndoCommand}" Gesture="Ctrl+Z"/>
+        <KeyBinding Command="{x:Static Editor:Commands.RedoCommand}" Gesture="Ctrl+Y"/>
+        <KeyBinding Command="{x:Static Editor:Commands.CopyAsEmfCommand}" Gesture="Ctrl+Shift+C"/>
+        <KeyBinding Command="{x:Static Editor:Commands.CutCommand}" Gesture="Ctrl+X"/>
+        <KeyBinding Command="{x:Static Editor:Commands.CopyCommand}" Gesture="Ctrl+C"/>
+        <KeyBinding Command="{x:Static Editor:Commands.PasteCommand}" Gesture="Ctrl+V"/>
+        <KeyBinding Command="{x:Static Editor:Commands.SelectAllCommand}" Gesture="Ctrl+A"/>
+        <KeyBinding Command="{x:Static Editor:Commands.GroupCommand}" Gesture="Ctrl+G"/>
+        <KeyBinding Command="{x:Static Editor:Commands.UngroupCommand}" Gesture="Ctrl+U"/>
     </Window.InputBindings>
     <Window.Resources>
         <Style x:Key="DashboardVisibilityStyle" TargetType="{x:Type editor:DashboardControl}">
@@ -168,11 +169,11 @@
                                         <Border.Style>
                                             <Style TargetType="Border">
                                                 <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding Project.CurrentContainer, Converter={StaticResource ObjectToTypeConverter}}" Value="{x:Type core:Template}">
+                                                    <DataTrigger Binding="{Binding Project.CurrentContainer, Converter={StaticResource ObjectToTypeConverter}}" Value="{x:Type Project:XTemplate}">
                                                         <Setter Property="BorderBrush" Value="Red"/>
                                                         <Setter Property="BorderThickness" Value="2"/>
                                                     </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Project.CurrentContainer, Converter={StaticResource ObjectToTypeConverter}}" Value="{x:Type core:Page}">
+                                                    <DataTrigger Binding="{Binding Project.CurrentContainer, Converter={StaticResource ObjectToTypeConverter}}" Value="{x:Type Project:XPage}">
                                                         <Setter Property="BorderBrush" Value="Transparent"/>
                                                         <Setter Property="BorderThickness" Value="0"/>
                                                     </DataTrigger>
@@ -181,41 +182,41 @@
                                         </Border.Style>
                                         <custom:PanAndZoomGrid x:Name="panAndZoomGrid" ClipToBounds="False" Background="Transparent" FocusVisualStyle="{x:Null}" Focusable="True" EnableAutoFit="{Binding Renderers[0].State.EnableAutofit}">
                                             <custom:PanAndZoomGrid.InputBindings>
-                                                <KeyBinding Command="{x:Static core:Commands.DeleteCommand}" CommandParameter="{Binding}" Key="Delete" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static core:Commands.SendToBackCommand}" Key="OemMinus" Modifiers="Shift"/>
-                                                <KeyBinding Command="{x:Static core:Commands.SendBackwardCommand}" Key="OemMinus" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static core:Commands.BringForwardCommand}" Key="OemPlus" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static core:Commands.BringToFrontCommand}" Key="OemPlus" Modifiers="Shift"/>
-                                                <KeyBinding Command="{x:Static core:Commands.SendToBackCommand}" Key="Subtract" Modifiers="Shift"/>
-                                                <KeyBinding Command="{x:Static core:Commands.SendBackwardCommand}" Key="Subtract" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static core:Commands.BringForwardCommand}" Key="Add" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static core:Commands.BringToFrontCommand}" Key="Add" Modifiers="Shift"/>
-                                                <KeyBinding Command="{x:Static core:Commands.MoveUpCommand}" Key="Up" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static core:Commands.MoveDownCommand}" Key="Down" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static core:Commands.MoveLeftCommand}" Key="Left" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static core:Commands.MoveRightCommand}" Key="Right" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static core:Commands.ToolNoneCommand}" Key="N" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static core:Commands.ToolSelectionCommand}" Key="S" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static core:Commands.ToolPointCommand}" Key="P" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static core:Commands.ToolLineCommand}" Key="L" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static core:Commands.ToolRectangleCommand}" Key="R" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static core:Commands.ToolEllipseCommand}" Key="E" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static core:Commands.ToolArcCommand}" Key="A" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static core:Commands.ToolCubicBezierCommand}" Key="B" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static core:Commands.ToolQuadraticBezierCommand}" Key="Q" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static core:Commands.ToolTextCommand}" Key="T" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static core:Commands.ToolImageCommand}" Key="I" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static core:Commands.ToolPathCommand}" Key="H" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static core:Commands.ToolMoveCommand}" Key="M" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static core:Commands.DefaultIsStrokedCommand}" Key="K" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static core:Commands.DefaultIsFilledCommand}" Key="F" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static core:Commands.DefaultIsClosedCommand}" Key="D" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static core:Commands.DefaultIsSmoothJoinCommand}" Key="J" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static core:Commands.SnapToGridCommand}" Key="G" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static core:Commands.TryToConnectCommand}" Key="C" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static core:Commands.ZoomResetCommand}" Key="Z" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static core:Commands.ZoomExtentCommand}" Key="X" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static core:Commands.DeselectAllCommand}" Key="Esc" Modifiers=""/>
+                                                <KeyBinding Command="{x:Static Editor:Commands.DeleteCommand}" CommandParameter="{Binding}" Key="Delete" Modifiers=""/>
+                                                <KeyBinding Command="{x:Static Editor:Commands.SendToBackCommand}" Key="OemMinus" Modifiers="Shift"/>
+                                                <KeyBinding Command="{x:Static Editor:Commands.SendBackwardCommand}" Key="OemMinus" Modifiers=""/>
+                                                <KeyBinding Command="{x:Static Editor:Commands.BringForwardCommand}" Key="OemPlus" Modifiers=""/>
+                                                <KeyBinding Command="{x:Static Editor:Commands.BringToFrontCommand}" Key="OemPlus" Modifiers="Shift"/>
+                                                <KeyBinding Command="{x:Static Editor:Commands.SendToBackCommand}" Key="Subtract" Modifiers="Shift"/>
+                                                <KeyBinding Command="{x:Static Editor:Commands.SendBackwardCommand}" Key="Subtract" Modifiers=""/>
+                                                <KeyBinding Command="{x:Static Editor:Commands.BringForwardCommand}" Key="Add" Modifiers=""/>
+                                                <KeyBinding Command="{x:Static Editor:Commands.BringToFrontCommand}" Key="Add" Modifiers="Shift"/>
+                                                <KeyBinding Command="{x:Static Editor:Commands.MoveUpCommand}" Key="Up" Modifiers=""/>
+                                                <KeyBinding Command="{x:Static Editor:Commands.MoveDownCommand}" Key="Down" Modifiers=""/>
+                                                <KeyBinding Command="{x:Static Editor:Commands.MoveLeftCommand}" Key="Left" Modifiers=""/>
+                                                <KeyBinding Command="{x:Static Editor:Commands.MoveRightCommand}" Key="Right" Modifiers=""/>
+                                                <KeyBinding Command="{x:Static Editor:Commands.ToolNoneCommand}" Key="N" Modifiers=""/>
+                                                <KeyBinding Command="{x:Static Editor:Commands.ToolSelectionCommand}" Key="S" Modifiers=""/>
+                                                <KeyBinding Command="{x:Static Editor:Commands.ToolPointCommand}" Key="P" Modifiers=""/>
+                                                <KeyBinding Command="{x:Static Editor:Commands.ToolLineCommand}" Key="L" Modifiers=""/>
+                                                <KeyBinding Command="{x:Static Editor:Commands.ToolRectangleCommand}" Key="R" Modifiers=""/>
+                                                <KeyBinding Command="{x:Static Editor:Commands.ToolEllipseCommand}" Key="E" Modifiers=""/>
+                                                <KeyBinding Command="{x:Static Editor:Commands.ToolArcCommand}" Key="A" Modifiers=""/>
+                                                <KeyBinding Command="{x:Static Editor:Commands.ToolCubicBezierCommand}" Key="B" Modifiers=""/>
+                                                <KeyBinding Command="{x:Static Editor:Commands.ToolQuadraticBezierCommand}" Key="Q" Modifiers=""/>
+                                                <KeyBinding Command="{x:Static Editor:Commands.ToolTextCommand}" Key="T" Modifiers=""/>
+                                                <KeyBinding Command="{x:Static Editor:Commands.ToolImageCommand}" Key="I" Modifiers=""/>
+                                                <KeyBinding Command="{x:Static Editor:Commands.ToolPathCommand}" Key="H" Modifiers=""/>
+                                                <KeyBinding Command="{x:Static Editor:Commands.ToolMoveCommand}" Key="M" Modifiers=""/>
+                                                <KeyBinding Command="{x:Static Editor:Commands.DefaultIsStrokedCommand}" Key="K" Modifiers=""/>
+                                                <KeyBinding Command="{x:Static Editor:Commands.DefaultIsFilledCommand}" Key="F" Modifiers=""/>
+                                                <KeyBinding Command="{x:Static Editor:Commands.DefaultIsClosedCommand}" Key="D" Modifiers=""/>
+                                                <KeyBinding Command="{x:Static Editor:Commands.DefaultIsSmoothJoinCommand}" Key="J" Modifiers=""/>
+                                                <KeyBinding Command="{x:Static Editor:Commands.SnapToGridCommand}" Key="G" Modifiers=""/>
+                                                <KeyBinding Command="{x:Static Editor:Commands.TryToConnectCommand}" Key="C" Modifiers=""/>
+                                                <KeyBinding Command="{x:Static Editor:Commands.ZoomResetCommand}" Key="Z" Modifiers=""/>
+                                                <KeyBinding Command="{x:Static Editor:Commands.ZoomExtentCommand}" Key="X" Modifiers=""/>
+                                                <KeyBinding Command="{x:Static Editor:Commands.DeselectAllCommand}" Key="Esc" Modifiers=""/>
                                             </custom:PanAndZoomGrid.InputBindings>
                                             <custom:PanAndZoomBorder x:Name="border" ClipToBounds="False" Background="Transparent" BorderBrush="{x:Null}" BorderThickness="0" FocusVisualStyle="{x:Null}" Focusable="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Tag="{Binding CancelAvailable}">
                                                 <custom:PanAndZoomBorder.Style>
@@ -226,10 +227,10 @@
                                                 </custom:PanAndZoomBorder.Style>
                                                 <ContentControl x:Name="drawableControl" Content="{Binding Project.CurrentContainer}" custom:LayerElement.Renderer="{Binding Renderers[0]}">
                                                     <ContentControl.Resources>
-                                                        <DataTemplate DataType="{x:Type core:Template}">
+                                                        <DataTemplate DataType="{x:Type Project:XTemplate}">
                                                             <editor:TemplateControl/>
                                                         </DataTemplate>
-                                                        <DataTemplate DataType="{x:Type core:Page}">
+                                                        <DataTemplate DataType="{x:Type Project:XPage}">
                                                             <editor:PageControl/>
                                                         </DataTemplate>
                                                     </ContentControl.Resources>

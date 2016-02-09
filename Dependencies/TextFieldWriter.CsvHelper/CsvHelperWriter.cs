@@ -1,33 +1,35 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Data.Database;
+using Core2D.Interfaces;
 using System;
 using System.Diagnostics;
 using System.Globalization;
-using Core2D;
+using CSV = CsvHelper;
 
-namespace Dependencies
+namespace TextFieldWriter.CsvHelper
 {
     /// <summary>
-    /// Defines <see cref="Database"/> to the text fields writer.
+    /// Defines <see cref="XDatabase"/> to the text fields writer.
     /// </summary>
-    public class CsvHelperWriter : ITextFieldWriter<Database>
+    public class CsvHelperWriter : ITextFieldWriter<XDatabase>
     {
         /// <summary>
         /// Write database records to text based file format.
         /// </summary>
         /// <param name="path">The fields file path.</param>
         /// <param name="database">The source records database.</param>
-        public void Write(string path, Database database)
+        public void Write(string path, XDatabase database)
         {
             try
             {
                 using (var writer = new System.IO.StringWriter())
                 {
-                    var configuration = new CsvHelper.Configuration.CsvConfiguration();
+                    var configuration = new CSV.Configuration.CsvConfiguration();
                     configuration.Delimiter = CultureInfo.CurrentCulture.TextInfo.ListSeparator;
                     configuration.CultureInfo = CultureInfo.CurrentCulture;
 
-                    using (var csv = new CsvHelper.CsvWriter(writer, configuration))
+                    using (var csv = new CSV.CsvWriter(writer, configuration))
                     {
                         // columns
                         csv.WriteField(database.IdColumnName);

@@ -1,11 +1,11 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using System;
 using System.Collections.Immutable;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using static System.Math;
 
 namespace Core2D.Wpf.Controls.Custom
 {
@@ -83,8 +83,8 @@ namespace Core2D.Wpf.Controls.Custom
             Point point = e.GetPosition(null);
             Vector diff = _dragStartPoint - point;
             if (e.LeftButton == MouseButtonState.Pressed &&
-                (Math.Abs(diff.X) > SystemParameters.MinimumHorizontalDragDistance ||
-                 Math.Abs(diff.Y) > SystemParameters.MinimumVerticalDragDistance))
+                (Abs(diff.X) > SystemParameters.MinimumHorizontalDragDistance ||
+                 Abs(diff.Y) > SystemParameters.MinimumVerticalDragDistance))
             {
                 var listBox = sender as ListBox;
                 var listBoxItem = FindVisualParent<ListBoxItem>(((DependencyObject)e.OriginalSource));

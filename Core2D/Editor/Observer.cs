@@ -1,16 +1,22 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Data;
+using Core2D.Data.Database;
+using Core2D.Project;
+using Core2D.Shape;
+using Core2D.Shapes;
+using Core2D.Style;
 using System;
 using System.Collections.Generic;
 
-namespace Core2D
+namespace Core2D.Editor
 {
     /// <summary>
     /// Project property changes observer.
     /// </summary>
     public sealed class Observer : IDisposable
     {
-        private readonly Editor _editor;
+        private readonly ShapeEditor _editor;
         private readonly Action _invalidateContainer;
         private readonly Action _invalidateStyles;
         private readonly Action _invalidateLayers;
@@ -19,8 +25,8 @@ namespace Core2D
         /// <summary>
         /// Initializes a new instance of the <see cref="Observer"/> class.
         /// </summary>
-        /// <param name="editor">The current <see cref="Editor"/> object.</param>
-        public Observer(Editor editor)
+        /// <param name="editor">The current <see cref="ShapeEditor"/> object.</param>
+        public Observer(ShapeEditor editor)
         {
             if (editor?.Project != null)
             {
@@ -65,16 +71,16 @@ namespace Core2D
 
         private void DatabaseObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(Database.Columns))
+            if (e.PropertyName == nameof(XDatabase.Columns))
             {
-                var database = sender as Database;
+                var database = sender as XDatabase;
                 Remove(database.Columns);
                 Add(database.Columns);
             }
 
-            if (e.PropertyName == nameof(Database.Records))
+            if (e.PropertyName == nameof(XDatabase.Records))
             {
-                var database = sender as Database;
+                var database = sender as XDatabase;
                 Remove(database.Records);
                 Add(database.Records);
             }
@@ -91,16 +97,16 @@ namespace Core2D
 
         private void RecordObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(Record.Columns))
+            if (e.PropertyName == nameof(XRecord.Columns))
             {
-                var record = sender as Record;
+                var record = sender as XRecord;
                 Remove(record.Columns);
                 Add(record.Columns);
             }
 
-            if (e.PropertyName == nameof(Record.Values))
+            if (e.PropertyName == nameof(XRecord.Values))
             {
-                var record = sender as Record;
+                var record = sender as XRecord;
                 Remove(record.Values);
                 Add(record.Values);
             }
@@ -117,37 +123,37 @@ namespace Core2D
 
         private void ProjectObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(Project.Databases))
+            if (e.PropertyName == nameof(XProject.Databases))
             {
-                var project = sender as Project;
+                var project = sender as XProject;
                 Remove(project.Databases);
                 Add(project.Databases);
             }
 
-            if (e.PropertyName == nameof(Project.StyleLibraries))
+            if (e.PropertyName == nameof(XProject.StyleLibraries))
             {
-                var project = sender as Project;
+                var project = sender as XProject;
                 Remove(project.StyleLibraries);
                 Add(project.StyleLibraries);
             }
 
-            if (e.PropertyName == nameof(Project.GroupLibraries))
+            if (e.PropertyName == nameof(XProject.GroupLibraries))
             {
-                var project = sender as Project;
+                var project = sender as XProject;
                 Remove(project.GroupLibraries);
                 Add(project.GroupLibraries);
             }
 
-            if (e.PropertyName == nameof(Project.Templates))
+            if (e.PropertyName == nameof(XProject.Templates))
             {
-                var project = sender as Project;
+                var project = sender as XProject;
                 Remove(project.Templates);
                 Add(project.Templates);
             }
 
-            if (e.PropertyName == nameof(Project.Documents))
+            if (e.PropertyName == nameof(XProject.Documents))
             {
-                var project = sender as Project;
+                var project = sender as XProject;
                 Remove(project.Documents);
                 Add(project.Documents);
             }
@@ -163,9 +169,9 @@ namespace Core2D
 
         private void DocumentObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(Document.Pages))
+            if (e.PropertyName == nameof(XDocument.Pages))
             {
-                var document = sender as Document;
+                var document = sender as XDocument;
                 Remove(document.Pages);
                 Add(document.Pages);
             }
@@ -176,16 +182,16 @@ namespace Core2D
 
         private void PageObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(Data.Properties))
+            if (e.PropertyName == nameof(XContext.Properties))
             {
-                var container = sender as Page;
+                var container = sender as XPage;
                 Remove(container.Data.Properties);
                 Add(container.Data.Properties);
             }
 
-            if (e.PropertyName == nameof(Container.Layers))
+            if (e.PropertyName == nameof(XContainer.Layers))
             {
-                var container = sender as Container;
+                var container = sender as XContainer;
                 Remove(container.Layers);
                 Add(container.Layers);
             }
@@ -194,8 +200,8 @@ namespace Core2D
 
             // NOTE: Do not mark project as dirty when current shape changes.
             // NOTE: Do not mark project as dirty when current layer changes.
-            if (e.PropertyName != nameof(Container.CurrentShape)
-                && e.PropertyName != nameof(Container.CurrentLayer))
+            if (e.PropertyName != nameof(XContainer.CurrentShape)
+                && e.PropertyName != nameof(XContainer.CurrentLayer))
             {
                 MarkAsDirty();
             }
@@ -203,11 +209,11 @@ namespace Core2D
 
         private void TemplateBackgroudObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            _editor.Project.CurrentContainer.Notify(nameof(Template.Background));
-            var page = _editor.Project.CurrentContainer as Page;
+            _editor.Project.CurrentContainer.Notify(nameof(XTemplate.Background));
+            var page = _editor.Project.CurrentContainer as XPage;
             if (page != null)
             {
-                page.Template.Notify(nameof(Template.Background));
+                page.Template.Notify(nameof(XTemplate.Background));
             }
             _invalidateLayers();
             MarkAsDirty();
@@ -220,9 +226,9 @@ namespace Core2D
 
         private void LayerObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(Layer.Shapes))
+            if (e.PropertyName == nameof(XLayer.Shapes))
             {
-                var layer = sender as Layer;
+                var layer = sender as XLayer;
                 Remove(layer.Shapes);
                 Add(layer.Shapes);
             }
@@ -239,9 +245,9 @@ namespace Core2D
 
         private void StyleLibraryObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(Library<ShapeStyle>.Items))
+            if (e.PropertyName == nameof(XLibrary<ShapeStyle>.Items))
             {
-                var sg = sender as Library<ShapeStyle>;
+                var sg = sender as XLibrary<ShapeStyle>;
                 Remove(sg.Items);
                 Add(sg.Items);
             }
@@ -249,7 +255,7 @@ namespace Core2D
             _invalidateStyles();
 
             // NOTE: Do not mark project as dirty when current style changes.
-            if (e.PropertyName != nameof(Library<ShapeStyle>.Selected))
+            if (e.PropertyName != nameof(XLibrary<ShapeStyle>.Selected))
             {
                 MarkAsDirty();
             }
@@ -257,15 +263,15 @@ namespace Core2D
 
         private void GroupLibraryObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(Library<XGroup>.Items))
+            if (e.PropertyName == nameof(XLibrary<XGroup>.Items))
             {
-                var sg = sender as Library<XGroup>;
+                var sg = sender as XLibrary<XGroup>;
                 Remove(sg.Items);
                 Add(sg.Items);
             }
 
             // NOTE: Do not mark project as dirty when current group changes.
-            if (e.PropertyName != nameof(Library<XGroup>.Selected))
+            if (e.PropertyName != nameof(XLibrary<XGroup>.Selected))
             {
                 MarkAsDirty();
             }
@@ -285,9 +291,9 @@ namespace Core2D
 
         private void DataObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(Data.Properties))
+            if (e.PropertyName == nameof(XContext.Properties))
             {
-                var data = sender as Data;
+                var data = sender as XContext;
                 Remove(data.Properties);
                 Add(data.Properties);
             }
@@ -302,7 +308,7 @@ namespace Core2D
             MarkAsDirty();
         }
 
-        private void Add(Database database)
+        private void Add(XDatabase database)
         {
             if (database == null)
                 return;
@@ -320,7 +326,7 @@ namespace Core2D
             }
         }
 
-        private void Remove(Database database)
+        private void Remove(XDatabase database)
         {
             if (database == null)
                 return;
@@ -338,7 +344,7 @@ namespace Core2D
             }
         }
 
-        private void Add(Column column)
+        private void Add(XColumn column)
         {
             if (column == null)
                 return;
@@ -346,7 +352,7 @@ namespace Core2D
             column.PropertyChanged += ColumnObserver;
         }
 
-        private void Remove(Column column)
+        private void Remove(XColumn column)
         {
             if (column == null)
                 return;
@@ -354,7 +360,7 @@ namespace Core2D
             column.PropertyChanged -= ColumnObserver;
         }
 
-        private void Add(Record record)
+        private void Add(XRecord record)
         {
             if (record == null)
                 return;
@@ -367,7 +373,7 @@ namespace Core2D
             }
         }
 
-        private void Remove(Record record)
+        private void Remove(XRecord record)
         {
             if (record == null)
                 return;
@@ -380,7 +386,7 @@ namespace Core2D
             }
         }
 
-        private void Add(Value value)
+        private void Add(XValue value)
         {
             if (value == null)
                 return;
@@ -388,7 +394,7 @@ namespace Core2D
             value.PropertyChanged += ValueObserver;
         }
 
-        private void Remove(Value value)
+        private void Remove(XValue value)
         {
             if (value == null)
                 return;
@@ -396,7 +402,7 @@ namespace Core2D
             value.PropertyChanged -= ValueObserver;
         }
 
-        private void Add(Options options)
+        private void Add(XOptions options)
         {
             if (options == null)
                 return;
@@ -422,7 +428,7 @@ namespace Core2D
             }
         }
 
-        private void Remove(Options options)
+        private void Remove(XOptions options)
         {
             if (options == null)
                 return;
@@ -448,7 +454,7 @@ namespace Core2D
             }
         }
 
-        private void Add(Project project)
+        private void Add(XProject project)
         {
             if (project == null)
                 return;
@@ -490,7 +496,7 @@ namespace Core2D
             }
         }
 
-        private void Remove(Project project)
+        private void Remove(XProject project)
         {
             if (project == null)
                 return;
@@ -532,7 +538,7 @@ namespace Core2D
             }
         }
 
-        private void Add(Document document)
+        private void Add(XDocument document)
         {
             if (document == null)
                 return;
@@ -548,7 +554,7 @@ namespace Core2D
             }
         }
 
-        private void Remove(Document document)
+        private void Remove(XDocument document)
         {
             if (document == null)
                 return;
@@ -564,7 +570,7 @@ namespace Core2D
             }
         }
 
-        private void Add(Page page)
+        private void Add(XPage page)
         {
             if (page == null)
                 return;
@@ -592,7 +598,7 @@ namespace Core2D
             }
         }
 
-        private void Remove(Page page)
+        private void Remove(XPage page)
         {
             if (page == null)
                 return;
@@ -620,7 +626,7 @@ namespace Core2D
             }
         }
 
-        private void Add(Template template)
+        private void Add(XTemplate template)
         {
             if (template == null)
                 return;
@@ -648,7 +654,7 @@ namespace Core2D
             }
         }
 
-        private void Remove(Template template)
+        private void Remove(XTemplate template)
         {
             if (template == null)
                 return;
@@ -676,7 +682,7 @@ namespace Core2D
             }
         }
 
-        private void Add(Layer layer)
+        private void Add(XLayer layer)
         {
             if (layer == null)
                 return;
@@ -691,7 +697,7 @@ namespace Core2D
             layer.InvalidateLayer += InvalidateLayerObserver;
         }
 
-        private void Remove(Layer layer)
+        private void Remove(XLayer layer)
         {
             if (layer == null)
                 return;
@@ -1076,7 +1082,7 @@ namespace Core2D
             }
         }
 
-        private void Add(Data data)
+        private void Add(XContext data)
         {
             if (data == null)
                 return;
@@ -1089,7 +1095,7 @@ namespace Core2D
             data.PropertyChanged += DataObserver;
         }
 
-        private void Remove(Data data)
+        private void Remove(XContext data)
         {
             if (data == null)
                 return;
@@ -1102,7 +1108,7 @@ namespace Core2D
             data.PropertyChanged -= DataObserver;
         }
 
-        private void Add(Library<ShapeStyle> sg)
+        private void Add(XLibrary<ShapeStyle> sg)
         {
             if (sg == null)
                 return;
@@ -1115,7 +1121,7 @@ namespace Core2D
             sg.PropertyChanged += StyleLibraryObserver;
         }
 
-        private void Remove(Library<ShapeStyle> sg)
+        private void Remove(XLibrary<ShapeStyle> sg)
         {
             if (sg == null)
                 return;
@@ -1128,7 +1134,7 @@ namespace Core2D
             sg.PropertyChanged -= StyleLibraryObserver;
         }
 
-        private void Add(Library<XGroup> gl)
+        private void Add(XLibrary<XGroup> gl)
         {
             if (gl == null)
                 return;
@@ -1141,7 +1147,7 @@ namespace Core2D
             gl.PropertyChanged += GroupLibraryObserver;
         }
 
-        private void Remove(Library<XGroup> gl)
+        private void Remove(XLibrary<XGroup> gl)
         {
             if (gl == null)
                 return;
@@ -1290,7 +1296,7 @@ namespace Core2D
             }
         }
 
-        private void Add(Property property)
+        private void Add(XProperty property)
         {
             if (property == null)
                 return;
@@ -1298,7 +1304,7 @@ namespace Core2D
             property.PropertyChanged += PropertyObserver;
         }
 
-        private void Remove(Property property)
+        private void Remove(XProperty property)
         {
             if (property == null)
                 return;
@@ -1306,7 +1312,7 @@ namespace Core2D
             property.PropertyChanged += PropertyObserver;
         }
 
-        private void Add(IEnumerable<Database> databases)
+        private void Add(IEnumerable<XDatabase> databases)
         {
             if (databases == null)
                 return;
@@ -1317,7 +1323,7 @@ namespace Core2D
             }
         }
 
-        private void Remove(IEnumerable<Database> databases)
+        private void Remove(IEnumerable<XDatabase> databases)
         {
             if (databases == null)
                 return;
@@ -1328,7 +1334,7 @@ namespace Core2D
             }
         }
 
-        private void Add(IEnumerable<Column> columns)
+        private void Add(IEnumerable<XColumn> columns)
         {
             if (columns == null)
                 return;
@@ -1339,7 +1345,7 @@ namespace Core2D
             }
         }
 
-        private void Remove(IEnumerable<Column> columns)
+        private void Remove(IEnumerable<XColumn> columns)
         {
             if (columns == null)
                 return;
@@ -1350,7 +1356,7 @@ namespace Core2D
             }
         }
 
-        private void Add(IEnumerable<Record> records)
+        private void Add(IEnumerable<XRecord> records)
         {
             if (records == null)
                 return;
@@ -1361,7 +1367,7 @@ namespace Core2D
             }
         }
 
-        private void Remove(IEnumerable<Record> records)
+        private void Remove(IEnumerable<XRecord> records)
         {
             if (records == null)
                 return;
@@ -1372,7 +1378,7 @@ namespace Core2D
             }
         }
 
-        private void Add(IEnumerable<Value> values)
+        private void Add(IEnumerable<XValue> values)
         {
             if (values == null)
                 return;
@@ -1383,7 +1389,7 @@ namespace Core2D
             }
         }
 
-        private void Remove(IEnumerable<Value> values)
+        private void Remove(IEnumerable<XValue> values)
         {
             if (values == null)
                 return;
@@ -1394,7 +1400,7 @@ namespace Core2D
             }
         }
 
-        private void Add(IEnumerable<Document> documents)
+        private void Add(IEnumerable<XDocument> documents)
         {
             if (documents == null)
                 return;
@@ -1405,7 +1411,7 @@ namespace Core2D
             }
         }
 
-        private void Remove(IEnumerable<Document> documents)
+        private void Remove(IEnumerable<XDocument> documents)
         {
             if (documents == null)
                 return;
@@ -1416,7 +1422,7 @@ namespace Core2D
             }
         }
 
-        private void Add(IEnumerable<Page> pages)
+        private void Add(IEnumerable<XPage> pages)
         {
             if (pages == null)
                 return;
@@ -1427,7 +1433,7 @@ namespace Core2D
             }
         }
 
-        private void Remove(IEnumerable<Page> pages)
+        private void Remove(IEnumerable<XPage> pages)
         {
             if (pages == null)
                 return;
@@ -1438,7 +1444,7 @@ namespace Core2D
             }
         }
 
-        private void Add(IEnumerable<Template> templates)
+        private void Add(IEnumerable<XTemplate> templates)
         {
             if (templates == null)
                 return;
@@ -1449,7 +1455,7 @@ namespace Core2D
             }
         }
 
-        private void Remove(IEnumerable<Template> templates)
+        private void Remove(IEnumerable<XTemplate> templates)
         {
             if (templates == null)
                 return;
@@ -1460,7 +1466,7 @@ namespace Core2D
             }
         }
 
-        private void Add(IEnumerable<Layer> layers)
+        private void Add(IEnumerable<XLayer> layers)
         {
             if (layers == null)
                 return;
@@ -1471,7 +1477,7 @@ namespace Core2D
             }
         }
 
-        private void Remove(IEnumerable<Layer> layers)
+        private void Remove(IEnumerable<XLayer> layers)
         {
             if (layers == null)
                 return;
@@ -1526,7 +1532,7 @@ namespace Core2D
             }
         }
 
-        private void Add(IEnumerable<Library<ShapeStyle>> sgs)
+        private void Add(IEnumerable<XLibrary<ShapeStyle>> sgs)
         {
             if (sgs == null)
                 return;
@@ -1537,7 +1543,7 @@ namespace Core2D
             }
         }
 
-        private void Remove(IEnumerable<Library<ShapeStyle>> sgs)
+        private void Remove(IEnumerable<XLibrary<ShapeStyle>> sgs)
         {
             if (sgs == null)
                 return;
@@ -1548,7 +1554,7 @@ namespace Core2D
             }
         }
 
-        private void Add(IEnumerable<Library<XGroup>> gl)
+        private void Add(IEnumerable<XLibrary<XGroup>> gl)
         {
             if (gl == null)
                 return;
@@ -1559,7 +1565,7 @@ namespace Core2D
             }
         }
 
-        private void Remove(IEnumerable<Library<XGroup>> gl)
+        private void Remove(IEnumerable<XLibrary<XGroup>> gl)
         {
             if (gl == null)
                 return;
@@ -1570,7 +1576,7 @@ namespace Core2D
             }
         }
 
-        private void Add(IEnumerable<Property> properties)
+        private void Add(IEnumerable<XProperty> properties)
         {
             if (properties == null)
                 return;
@@ -1581,7 +1587,7 @@ namespace Core2D
             }
         }
 
-        private void Remove(IEnumerable<Property> properties)
+        private void Remove(IEnumerable<XProperty> properties)
         {
             if (properties == null)
                 return;

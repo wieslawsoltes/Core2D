@@ -1,9 +1,18 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using ProtoBuf.Meta;
 using Core2D;
+using Core2D.Data;
+using Core2D.Data.Database;
+using Core2D.History;
+using Core2D.Path;
+using Core2D.Path.Segments;
+using Core2D.Project;
+using Core2D.Shape;
+using Core2D.Shapes;
+using Core2D.Style;
+using ProtoBuf.Meta;
 
-namespace Dependencies
+namespace Serializer.ProtoBuf
 {
     public static class ProtoBufModel
     {
@@ -21,43 +30,43 @@ namespace Dependencies
 
         public static RuntimeTypeModel AddData(this RuntimeTypeModel model)
         {
-            var property = model.Add(typeof(Property), false);
+            var property = model.Add(typeof(XProperty), false);
             property.AsReferenceDefault = true;
-            property.AddField(1, nameof(Property.Name));
-            property.AddField(2, nameof(Property.Value)).AsReference = true;
-            property.AddField(3, nameof(Property.Owner)).AsReference = true;
+            property.AddField(1, nameof(XProperty.Name));
+            property.AddField(2, nameof(XProperty.Value)).AsReference = true;
+            property.AddField(3, nameof(XProperty.Owner)).AsReference = true;
 
-            var column = model.Add(typeof(Column), false);
+            var column = model.Add(typeof(XColumn), false);
             column.AsReferenceDefault = true;
-            column.AddField(1, nameof(Column.Id));
-            column.AddField(2, nameof(Column.Name));
-            column.AddField(3, nameof(Column.Width));
-            column.AddField(4, nameof(Column.IsVisible));
-            column.AddField(5, nameof(Column.Owner)).AsReference = true;
+            column.AddField(1, nameof(XColumn.Id));
+            column.AddField(2, nameof(XColumn.Name));
+            column.AddField(3, nameof(XColumn.Width));
+            column.AddField(4, nameof(XColumn.IsVisible));
+            column.AddField(5, nameof(XColumn.Owner)).AsReference = true;
 
-            var value = model.Add(typeof(Value), false);
+            var value = model.Add(typeof(XValue), false);
             value.AsReferenceDefault = true;
-            value.AddField(1, nameof(Value.Content));
+            value.AddField(1, nameof(XValue.Content));
 
-            var record = model.Add(typeof(Record), false);
+            var record = model.Add(typeof(XRecord), false);
             record.AsReferenceDefault = true;
-            record.AddField(1, nameof(Record.Id));
-            record.AddField(2, nameof(Record.Columns)).AsReference = true;
-            record.AddField(3, nameof(Record.Values)).AsReference = true;
-            record.AddField(4, nameof(Record.Owner)).AsReference = true;
+            record.AddField(1, nameof(XRecord.Id));
+            record.AddField(2, nameof(XRecord.Columns)).AsReference = true;
+            record.AddField(3, nameof(XRecord.Values)).AsReference = true;
+            record.AddField(4, nameof(XRecord.Owner)).AsReference = true;
 
-            var data = model.Add(typeof(Data), false);
+            var data = model.Add(typeof(XContext), false);
             data.AsReferenceDefault = true;
-            data.AddField(1, nameof(Data.Properties)).AsReference = true;
-            data.AddField(2, nameof(Data.Record)).AsReference = true;
+            data.AddField(1, nameof(XContext.Properties)).AsReference = true;
+            data.AddField(2, nameof(XContext.Record)).AsReference = true;
 
-            var database = model.Add(typeof(Database), false);
+            var database = model.Add(typeof(XDatabase), false);
             database.AsReferenceDefault = true;
-            database.AddField(1, nameof(Database.Name));
-            database.AddField(2, nameof(Database.IdColumnName));
-            database.AddField(3, nameof(Database.Columns)).AsReference = true;
-            database.AddField(4, nameof(Database.Records)).AsReference = true;
-            database.AddField(5, nameof(Database.CurrentRecord)).AsReference = true;
+            database.AddField(1, nameof(XDatabase.Name));
+            database.AddField(2, nameof(XDatabase.IdColumnName));
+            database.AddField(3, nameof(XDatabase.Columns)).AsReference = true;
+            database.AddField(4, nameof(XDatabase.Records)).AsReference = true;
+            database.AddField(5, nameof(XDatabase.CurrentRecord)).AsReference = true;
 
             return model;
         }
@@ -269,97 +278,97 @@ namespace Dependencies
         {
             var history = model.Add(typeof(IHistory), false);
             history.AsReferenceDefault = true;
-            history.AddSubType(101, typeof(History));
+            history.AddSubType(101, typeof(StackHistory));
 
             return model;
         }
 
         public static RuntimeTypeModel AddProject(this RuntimeTypeModel model)
         {
-            var options = model.Add(typeof(Options), false);
+            var options = model.Add(typeof(XOptions), false);
             options.AsReferenceDefault = true;
-            options.AddField(1, nameof(Options.SnapToGrid));
-            options.AddField(2, nameof(Options.SnapX));
-            options.AddField(3, nameof(Options.SnapY));
-            options.AddField(4, nameof(Options.HitThreshold));
-            options.AddField(5, nameof(Options.MoveMode));
-            options.AddField(6, nameof(Options.DefaultIsStroked));
-            options.AddField(7, nameof(Options.DefaultIsFilled));
-            options.AddField(8, nameof(Options.DefaultIsClosed));
-            options.AddField(9, nameof(Options.DefaultIsSmoothJoin));
-            options.AddField(10, nameof(Options.DefaultFillRule));
-            options.AddField(11, nameof(Options.TryToConnect));
-            options.AddField(12, nameof(Options.PointShape)).AsReference = true;
-            options.AddField(13, nameof(Options.PointStyle)).AsReference = true;
-            options.AddField(14, nameof(Options.SelectionStyle)).AsReference = true;
-            options.AddField(15, nameof(Options.HelperStyle)).AsReference = true;
+            options.AddField(1, nameof(XOptions.SnapToGrid));
+            options.AddField(2, nameof(XOptions.SnapX));
+            options.AddField(3, nameof(XOptions.SnapY));
+            options.AddField(4, nameof(XOptions.HitThreshold));
+            options.AddField(5, nameof(XOptions.MoveMode));
+            options.AddField(6, nameof(XOptions.DefaultIsStroked));
+            options.AddField(7, nameof(XOptions.DefaultIsFilled));
+            options.AddField(8, nameof(XOptions.DefaultIsClosed));
+            options.AddField(9, nameof(XOptions.DefaultIsSmoothJoin));
+            options.AddField(10, nameof(XOptions.DefaultFillRule));
+            options.AddField(11, nameof(XOptions.TryToConnect));
+            options.AddField(12, nameof(XOptions.PointShape)).AsReference = true;
+            options.AddField(13, nameof(XOptions.PointStyle)).AsReference = true;
+            options.AddField(14, nameof(XOptions.SelectionStyle)).AsReference = true;
+            options.AddField(15, nameof(XOptions.HelperStyle)).AsReference = true;
 
-            var shapeStyleLibrary = model.Add(typeof(Library<ShapeStyle>), false);
+            var shapeStyleLibrary = model.Add(typeof(XLibrary<ShapeStyle>), false);
             shapeStyleLibrary.AsReferenceDefault = true;
-            shapeStyleLibrary.AddField(1, nameof(Library<ShapeStyle>.Name));
-            shapeStyleLibrary.AddField(2, nameof(Library<ShapeStyle>.Items)).AsReference = true;
-            shapeStyleLibrary.AddField(3, nameof(Library<ShapeStyle>.Selected)).AsReference = true;
+            shapeStyleLibrary.AddField(1, nameof(XLibrary<ShapeStyle>.Name));
+            shapeStyleLibrary.AddField(2, nameof(XLibrary<ShapeStyle>.Items)).AsReference = true;
+            shapeStyleLibrary.AddField(3, nameof(XLibrary<ShapeStyle>.Selected)).AsReference = true;
 
-            var groupLibrary = model.Add(typeof(Library<XGroup>), false);
+            var groupLibrary = model.Add(typeof(XLibrary<XGroup>), false);
             groupLibrary.AsReferenceDefault = true;
-            groupLibrary.AddField(1, nameof(Library<XGroup>.Name));
-            groupLibrary.AddField(2, nameof(Library<XGroup>.Items)).AsReference = true;
-            groupLibrary.AddField(3, nameof(Library<XGroup>.Selected)).AsReference = true;
+            groupLibrary.AddField(1, nameof(XLibrary<XGroup>.Name));
+            groupLibrary.AddField(2, nameof(XLibrary<XGroup>.Items)).AsReference = true;
+            groupLibrary.AddField(3, nameof(XLibrary<XGroup>.Selected)).AsReference = true;
 
-            var selectable = model.Add(typeof(Selectable), false);
+            var selectable = model.Add(typeof(XSelectable), false);
             selectable.AsReferenceDefault = true;
-            selectable.AddSubType(101, typeof(Layer));
-            selectable.AddSubType(102, typeof(Container));
-            selectable.AddSubType(103, typeof(Document));
-            selectable.AddSubType(104, typeof(Project));
+            selectable.AddSubType(101, typeof(XLayer));
+            selectable.AddSubType(102, typeof(XContainer));
+            selectable.AddSubType(103, typeof(XDocument));
+            selectable.AddSubType(104, typeof(XProject));
 
             // Layer : Selectable
-            model[typeof(Layer)].AddField(1, nameof(Layer.Name));
-            model[typeof(Layer)].AddField(2, nameof(Layer.Owner)).AsReference = true;
-            model[typeof(Layer)].AddField(3, nameof(Layer.IsVisible));
-            model[typeof(Layer)].AddField(4, nameof(Layer.Shapes)).AsReference = true;
+            model[typeof(XLayer)].AddField(1, nameof(XLayer.Name));
+            model[typeof(XLayer)].AddField(2, nameof(XLayer.Owner)).AsReference = true;
+            model[typeof(XLayer)].AddField(3, nameof(XLayer.IsVisible));
+            model[typeof(XLayer)].AddField(4, nameof(XLayer.Shapes)).AsReference = true;
 
             // Container : Selectable
-            model[typeof(Container)].AddField(1, nameof(Container.Name));
-            model[typeof(Container)].AddField(2, nameof(Container.Width));
-            model[typeof(Container)].AddField(3, nameof(Container.Height));
-            model[typeof(Container)].AddField(4, nameof(Container.Background)).AsReference = true;
-            model[typeof(Container)].AddField(5, nameof(Container.Layers)).AsReference = true;
-            model[typeof(Container)].AddField(6, nameof(Container.CurrentLayer)).AsReference = true;
-            model[typeof(Container)].AddField(7, nameof(Container.WorkingLayer)).AsReference = true;
-            model[typeof(Container)].AddField(8, nameof(Container.HelperLayer)).AsReference = true;
-            model[typeof(Container)].AddField(9, nameof(Container.CurrentShape)).AsReference = true;
-            model[typeof(Container)].AddField(10, nameof(Container.Template)).AsReference = true;
-            model[typeof(Container)].AddSubType(101, typeof(Template));
-            model[typeof(Container)].AddSubType(102, typeof(Page));
+            model[typeof(XContainer)].AddField(1, nameof(XContainer.Name));
+            model[typeof(XContainer)].AddField(2, nameof(XContainer.Width));
+            model[typeof(XContainer)].AddField(3, nameof(XContainer.Height));
+            model[typeof(XContainer)].AddField(4, nameof(XContainer.Background)).AsReference = true;
+            model[typeof(XContainer)].AddField(5, nameof(XContainer.Layers)).AsReference = true;
+            model[typeof(XContainer)].AddField(6, nameof(XContainer.CurrentLayer)).AsReference = true;
+            model[typeof(XContainer)].AddField(7, nameof(XContainer.WorkingLayer)).AsReference = true;
+            model[typeof(XContainer)].AddField(8, nameof(XContainer.HelperLayer)).AsReference = true;
+            model[typeof(XContainer)].AddField(9, nameof(XContainer.CurrentShape)).AsReference = true;
+            model[typeof(XContainer)].AddField(10, nameof(XContainer.Template)).AsReference = true;
+            model[typeof(XContainer)].AddSubType(101, typeof(XTemplate));
+            model[typeof(XContainer)].AddSubType(102, typeof(XPage));
 
             // Template : Container
 
             // Page : Container
-            model[typeof(Page)].AddField(1, nameof(Page.Data)).AsReference = true;
-            model[typeof(Page)].AddField(2, nameof(Page.IsExpanded));
+            model[typeof(XPage)].AddField(1, nameof(XPage.Data)).AsReference = true;
+            model[typeof(XPage)].AddField(2, nameof(XPage.IsExpanded));
 
             // Document : Selectable
-            model[typeof(Document)].AddField(1, nameof(Document.Name));
-            model[typeof(Document)].AddField(2, nameof(Document.IsExpanded));
-            model[typeof(Document)].AddField(3, nameof(Document.Pages)).AsReference = true;
+            model[typeof(XDocument)].AddField(1, nameof(XDocument.Name));
+            model[typeof(XDocument)].AddField(2, nameof(XDocument.IsExpanded));
+            model[typeof(XDocument)].AddField(3, nameof(XDocument.Pages)).AsReference = true;
 
             // Project : Selectable
-            model[typeof(Project)].AddField(1, nameof(Project.Name));
-            model[typeof(Project)].AddField(2, nameof(Project.Options)).AsReference = true;
-            model[typeof(Project)].AddField(3, nameof(Project.History)).AsReference = true;
-            model[typeof(Project)].AddField(4, nameof(Project.StyleLibraries)).AsReference = true;
-            model[typeof(Project)].AddField(5, nameof(Project.GroupLibraries)).AsReference = true;
-            model[typeof(Project)].AddField(6, nameof(Project.Databases)).AsReference = true;
-            model[typeof(Project)].AddField(7, nameof(Project.Templates)).AsReference = true;
-            model[typeof(Project)].AddField(8, nameof(Project.Documents)).AsReference = true;
-            model[typeof(Project)].AddField(9, nameof(Project.CurrentStyleLibrary)).AsReference = true;
-            model[typeof(Project)].AddField(10, nameof(Project.CurrentGroupLibrary)).AsReference = true;
-            model[typeof(Project)].AddField(11, nameof(Project.CurrentDatabase)).AsReference = true;
-            model[typeof(Project)].AddField(12, nameof(Project.CurrentTemplate)).AsReference = true;
-            model[typeof(Project)].AddField(13, nameof(Project.CurrentDocument)).AsReference = true;
-            model[typeof(Project)].AddField(14, nameof(Project.CurrentContainer)).AsReference = true;
-            model[typeof(Project)].AddField(15, nameof(Project.Selected)).AsReference = true;
+            model[typeof(XProject)].AddField(1, nameof(XProject.Name));
+            model[typeof(XProject)].AddField(2, nameof(XProject.Options)).AsReference = true;
+            model[typeof(XProject)].AddField(3, nameof(XProject.History)).AsReference = true;
+            model[typeof(XProject)].AddField(4, nameof(XProject.StyleLibraries)).AsReference = true;
+            model[typeof(XProject)].AddField(5, nameof(XProject.GroupLibraries)).AsReference = true;
+            model[typeof(XProject)].AddField(6, nameof(XProject.Databases)).AsReference = true;
+            model[typeof(XProject)].AddField(7, nameof(XProject.Templates)).AsReference = true;
+            model[typeof(XProject)].AddField(8, nameof(XProject.Documents)).AsReference = true;
+            model[typeof(XProject)].AddField(9, nameof(XProject.CurrentStyleLibrary)).AsReference = true;
+            model[typeof(XProject)].AddField(10, nameof(XProject.CurrentGroupLibrary)).AsReference = true;
+            model[typeof(XProject)].AddField(11, nameof(XProject.CurrentDatabase)).AsReference = true;
+            model[typeof(XProject)].AddField(12, nameof(XProject.CurrentTemplate)).AsReference = true;
+            model[typeof(XProject)].AddField(13, nameof(XProject.CurrentDocument)).AsReference = true;
+            model[typeof(XProject)].AddField(14, nameof(XProject.CurrentContainer)).AsReference = true;
+            model[typeof(XProject)].AddField(15, nameof(XProject.Selected)).AsReference = true;
 
             return model;
         }

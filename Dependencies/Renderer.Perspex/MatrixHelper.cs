@@ -2,7 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Perspex;
 
-namespace Dependencies
+namespace Renderer.Perspex
 {
     /// <summary>
     /// Perspex Matrix helper methods.

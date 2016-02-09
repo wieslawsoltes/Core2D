@@ -1,16 +1,16 @@
-<Options xmlns="https://github.com/Core2D">
-    <Options.SnapToGrid>True</Options.SnapToGrid>
-    <Options.SnapX>15</Options.SnapX>
-    <Options.SnapY>15</Options.SnapY>
-    <Options.HitThreshold>7</Options.HitThreshold>
-    <Options.MoveMode>Point</Options.MoveMode>
-    <Options.DefaultIsStroked>True</Options.DefaultIsStroked>
-    <Options.DefaultIsFilled>False</Options.DefaultIsFilled>
-    <Options.DefaultIsClosed>True</Options.DefaultIsClosed>
-    <Options.DefaultIsSmoothJoin>True</Options.DefaultIsSmoothJoin>
-    <Options.DefaultFillRule>EvenOdd</Options.DefaultFillRule>
-    <Options.TryToConnect>False</Options.TryToConnect>
-    <Options.PointShape>
+<XOptions xmlns="https://github.com/Core2D">
+    <XOptions.SnapToGrid>True</XOptions.SnapToGrid>
+    <XOptions.SnapX>15</XOptions.SnapX>
+    <XOptions.SnapY>15</XOptions.SnapY>
+    <XOptions.HitThreshold>7</XOptions.HitThreshold>
+    <XOptions.MoveMode>Point</XOptions.MoveMode>
+    <XOptions.DefaultIsStroked>True</XOptions.DefaultIsStroked>
+    <XOptions.DefaultIsFilled>False</XOptions.DefaultIsFilled>
+    <XOptions.DefaultIsClosed>True</XOptions.DefaultIsClosed>
+    <XOptions.DefaultIsSmoothJoin>True</XOptions.DefaultIsSmoothJoin>
+    <XOptions.DefaultFillRule>EvenOdd</XOptions.DefaultFillRule>
+    <XOptions.TryToConnect>False</XOptions.TryToConnect>
+    <XOptions.PointShape>
         <XRectangle IsStroked="True" IsFilled="False">
             <XRectangle.TopLeft>
                 <XPoint X="-4" Y="-4" State="Visible,Printable,Standalone"/>
@@ -22,14 +22,14 @@
                 <ShapeStyle Stroke="#FF000000" Fill="#FF000000" Thickness="1" LineCap="Round"/>
             </XRectangle.Style>
         </XRectangle>
-    </Options.PointShape>
-    <Options.PointStyle>
+    </XOptions.PointShape>
+    <XOptions.PointStyle>
         <ShapeStyle Name="Point" Stroke="#FF000000" Fill="#FF000000" Thickness="1" LineCap="Round"/>
-    </Options.PointStyle>
-    <Options.SelectionStyle>
+    </XOptions.PointStyle>
+    <XOptions.SelectionStyle>
         <ShapeStyle Name="Selection" Stroke="#7F3333FF" Fill="#4F3333FF" Thickness="1" LineCap="Round"/>
-    </Options.SelectionStyle>
-    <Options.HelperStyle>
+    </XOptions.SelectionStyle>
+    <XOptions.HelperStyle>
         <ShapeStyle Name="Helper" Stroke="#FF000000" Fill="#FF000000" Thickness="1" LineCap="Round"/>
-    </Options.HelperStyle>
-</Options>
+    </XOptions.HelperStyle>
+</XOptions>

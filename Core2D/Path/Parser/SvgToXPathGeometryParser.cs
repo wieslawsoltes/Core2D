@@ -1,9 +1,12 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Math;
+using Core2D.Shapes;
 using System;
 using System.Globalization;
+using static System.Math;
 
-namespace Core2D
+namespace Core2D.Path.Parser
 {
     /// <summary>
     /// Parser for SVG path geometry http://www.w3.org/TR/SVG11/paths.html.
@@ -144,12 +147,12 @@ namespace Core2D
 
             if (HaveMore() && (_pathString[_curIndex] == 'I'))
             {
-                _curIndex = Math.Min(_curIndex + 8, _pathLength);
+                _curIndex = Min(_curIndex + 8, _pathLength);
                 simple = false;
             }
             else if (HaveMore() && (_pathString[_curIndex] == 'N'))
             {
-                _curIndex = Math.Min(_curIndex + 3, _pathLength);
+                _curIndex = Min(_curIndex + 3, _pathLength);
                 simple = false;
             }
             else

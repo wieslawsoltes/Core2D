@@ -1,5 +1,12 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Data;
+using Core2D.Data.Database;
+using Core2D.Interfaces;
+using Core2D.Project;
+using Core2D.Renderer;
+using Core2D.Shape;
+using Renderer.WinForms;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -10,9 +17,8 @@ using System.Drawing.Imaging;
 using System.Drawing.Text;
 using System.IO;
 using WPF = System.Windows;
-using Core2D;
 
-namespace Dependencies
+namespace FileWriter.Emf
 {
     /// <summary>
     /// WinForms file writer.
@@ -28,12 +34,7 @@ namespace Dependencies
         /// <param name="record"></param>
         /// <param name="ic"></param>
         /// <returns></returns>
-        public MemoryStream MakeMetafileStream(
-            Bitmap bitmap,
-            IEnumerable<BaseShape> shapes,
-            ImmutableArray<Property> properties,
-            Record record,
-            IImageCache ic)
+        public MemoryStream MakeMetafileStream(Bitmap bitmap, IEnumerable<BaseShape> shapes, ImmutableArray<XProperty> properties, XRecord record, IImageCache ic)
         {
             var g = default(Graphics);
             var mf = default(Metafile);
@@ -94,10 +95,7 @@ namespace Dependencies
         /// <param name="page"></param>
         /// <param name="ic"></param>
         /// <returns></returns>
-        public MemoryStream MakeMetafileStream(
-            Bitmap bitmap,
-            Page page,
-            IImageCache ic)
+        public MemoryStream MakeMetafileStream(Bitmap bitmap, XPage page, IImageCache ic)
         {
             var g = default(Graphics);
             var mf = default(Metafile);
@@ -155,13 +153,7 @@ namespace Dependencies
         /// <param name="properties"></param>
         /// <param name="record"></param>
         /// <param name="ic"></param>
-        public void SetClipboard(
-            IEnumerable<BaseShape> shapes,
-            double width,
-            double height,
-            ImmutableArray<Property> properties,
-            Record record,
-            IImageCache ic)
+        public void SetClipboard(IEnumerable<BaseShape> shapes, double width, double height, ImmutableArray<XProperty> properties, XRecord record, IImageCache ic)
         {
             try
             {
@@ -187,7 +179,7 @@ namespace Dependencies
         /// </summary>
         /// <param name="page"></param>
         /// <param name="ic"></param>
-        public void SetClipboard(Page page, IImageCache ic)
+        public void SetClipboard(XPage page, IImageCache ic)
         {
             try
             {
@@ -217,7 +209,7 @@ namespace Dependencies
         /// <param name="path"></param>
         /// <param name="page"></param>
         /// <param name="ic"></param>
-        public void Save(string path, Page page, IImageCache ic)
+        public void Save(string path, XPage page, IImageCache ic)
         {
             if (page == null || page.Template == null)
                 return;
@@ -244,9 +236,9 @@ namespace Dependencies
             if (options == null)
                 return;
 
-            if (item is Container)
+            if (item is XContainer)
             {
-                this.Save(path, item as Container, ic);
+                this.Save(path, item as XContainer, ic);
             }
         }
     }

@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Style;
 using Xunit;
 
 namespace Core2D.UnitTests
@@ -7,7 +8,7 @@ namespace Core2D.UnitTests
     public class FontStyleTests
     {
         [Fact]
-        [Trait("Core2D", "Style")]
+        [Trait("Core2D.Style", "Style")]
         public void Inherits_From_ObservableObject()
         {
             var target = new FontStyle();
@@ -15,7 +16,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Style")]
+        [Trait("Core2D.Style", "Style")]
         public void Flags_On_Set_Notify_Events_Are_Raised()
         {
             var style = new FontStyle();
@@ -49,7 +50,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Style")]
+        [Trait("Core2D.Style", "Style")]
         public void Regular_Property()
         {
             var target = new FontStyle();
@@ -62,7 +63,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Style")]
+        [Trait("Core2D.Style", "Style")]
         public void Bold_Property()
         {
             var target = new FontStyle();
@@ -75,7 +76,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Style")]
+        [Trait("Core2D.Style", "Style")]
         public void Italic_Property()
         {
             var target = new FontStyle();
@@ -88,7 +89,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Style")]
+        [Trait("Core2D.Style", "Style")]
         public void Underline_Property()
         {
             var target = new FontStyle();
@@ -101,7 +102,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Style")]
+        [Trait("Core2D.Style", "Style")]
         public void Strikeout_Property()
         {
             var target = new FontStyle();
@@ -114,7 +115,7 @@ namespace Core2D.UnitTests
         }
         
         [Fact]
-        [Trait("Core2D", "Style")]
+        [Trait("Core2D.Style", "Style")]
         public void Parse_FontStyleFlags_String()
         {
             var target = FontStyle.Parse("Bold, Italic, Strikeout");
@@ -126,7 +127,7 @@ namespace Core2D.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D", "Style")]
+        [Trait("Core2D.Style", "Style")]
         public void ToString_Should_Return_Flags_String()
         {
             var target = FontStyle.Create(

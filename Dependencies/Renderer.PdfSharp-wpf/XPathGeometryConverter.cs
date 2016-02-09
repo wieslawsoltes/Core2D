@@ -7,7 +7,11 @@ using System.Linq;
 using System.Windows.Media;
 #endif
 
-namespace Dependencies
+#if WPF
+namespace Renderer.PdfSharp_wpf
+#elif CORE
+namespace Renderer.PdfSharp_core
+#endif
 {
     /// <summary>
     /// 
@@ -22,10 +26,10 @@ namespace Dependencies
         /// <param name="dy"></param>
         /// <param name="scale"></param>
         /// <returns></returns>
-        public static XGraphicsPath ToXGraphicsPath(this Core2D.XPathGeometry pg, double dx, double dy, Func<double, double> scale)
+        public static XGraphicsPath ToXGraphicsPath(this Core2D.Path.XPathGeometry pg, double dx, double dy, Func<double, double> scale)
         {
             var gp = new XGraphicsPath();
-            gp.FillMode = pg.FillRule == Core2D.XFillRule.EvenOdd ? XFillMode.Alternate : XFillMode.Winding;
+            gp.FillMode = pg.FillRule == Core2D.Path.XFillRule.EvenOdd ? XFillMode.Alternate : XFillMode.Winding;
 
             foreach (var pf in pg.Figures)
             {
@@ -33,7 +37,7 @@ namespace Dependencies
 
                 foreach (var segment in pf.Segments)
                 {
-                    if (segment is Core2D.XArcSegment)
+                    if (segment is Core2D.Path.Segments.XArcSegment)
                     {
 #if CORE
                         //var arcSegment = segment as Core2D.XArcSegment;
@@ -41,7 +45,7 @@ namespace Dependencies
                         //startPoint = arcSegment.Point;
 #endif
 #if WPF
-                        var arcSegment = segment as Core2D.XArcSegment;
+                        var arcSegment = segment as Core2D.Path.Segments.XArcSegment;
                         var point1 = new XPoint(
                             scale(startPoint.X),
                             scale(startPoint.Y));
@@ -55,13 +59,13 @@ namespace Dependencies
                             point1,
                             point2,
                             size, arcSegment.RotationAngle, arcSegment.IsLargeArc,
-                            arcSegment.SweepDirection == Core2D.XSweepDirection.Clockwise ? XSweepDirection.Clockwise : XSweepDirection.Counterclockwise);
+                            arcSegment.SweepDirection == Core2D.Path.XSweepDirection.Clockwise ? XSweepDirection.Clockwise : XSweepDirection.Counterclockwise);
                         startPoint = arcSegment.Point;
 #endif
                     }
-                    else if (segment is Core2D.XCubicBezierSegment)
+                    else if (segment is Core2D.Path.Segments.XCubicBezierSegment)
                     {
-                        var cubicBezierSegment = segment as Core2D.XCubicBezierSegment;
+                        var cubicBezierSegment = segment as Core2D.Path.Segments.XCubicBezierSegment;
                         gp.AddBezier(
                             scale(startPoint.X),
                             scale(startPoint.Y),
@@ -73,9 +77,9 @@ namespace Dependencies
                             scale(cubicBezierSegment.Point3.Y));
                         startPoint = cubicBezierSegment.Point3;
                     }
-                    else if (segment is Core2D.XLineSegment)
+                    else if (segment is Core2D.Path.Segments.XLineSegment)
                     {
-                        var lineSegment = segment as Core2D.XLineSegment;
+                        var lineSegment = segment as Core2D.Path.Segments.XLineSegment;
                         gp.AddLine(
                             scale(startPoint.X),
                             scale(startPoint.Y),
@@ -83,9 +87,9 @@ namespace Dependencies
                             scale(lineSegment.Point.Y));
                         startPoint = lineSegment.Point;
                     }
-                    else if (segment is Core2D.XPolyCubicBezierSegment)
+                    else if (segment is Core2D.Path.Segments.XPolyCubicBezierSegment)
                     {
-                        var polyCubicBezierSegment = segment as Core2D.XPolyCubicBezierSegment;
+                        var polyCubicBezierSegment = segment as Core2D.Path.Segments.XPolyCubicBezierSegment;
                         if (polyCubicBezierSegment.Points.Count >= 3)
                         {
                             gp.AddBezier(
@@ -118,9 +122,9 @@ namespace Dependencies
 
                         startPoint = polyCubicBezierSegment.Points.Last();
                     }
-                    else if (segment is Core2D.XPolyLineSegment)
+                    else if (segment is Core2D.Path.Segments.XPolyLineSegment)
                     {
-                        var polyLineSegment = segment as Core2D.XPolyLineSegment;
+                        var polyLineSegment = segment as Core2D.Path.Segments.XPolyLineSegment;
                         if (polyLineSegment.Points.Count >= 1)
                         {
                             gp.AddLine(
@@ -144,9 +148,9 @@ namespace Dependencies
 
                         startPoint = polyLineSegment.Points.Last();
                     }
-                    else if (segment is Core2D.XPolyQuadraticBezierSegment)
+                    else if (segment is Core2D.Path.Segments.XPolyQuadraticBezierSegment)
                     {
-                        var polyQuadraticSegment = segment as Core2D.XPolyQuadraticBezierSegment;
+                        var polyQuadraticSegment = segment as Core2D.Path.Segments.XPolyQuadraticBezierSegment;
                         if (polyQuadraticSegment.Points.Count >= 2)
                         {
                             var p1 = startPoint;
@@ -201,9 +205,9 @@ namespace Dependencies
 
                         startPoint = polyQuadraticSegment.Points.Last();
                     }
-                    else if (segment is Core2D.XQuadraticBezierSegment)
+                    else if (segment is Core2D.Path.Segments.XQuadraticBezierSegment)
                     {
-                        var quadraticBezierSegment = segment as Core2D.XQuadraticBezierSegment;
+                        var quadraticBezierSegment = segment as Core2D.Path.Segments.XQuadraticBezierSegment;
                         var p1 = startPoint;
                         var p2 = quadraticBezierSegment.Point1;
                         var p3 = quadraticBezierSegment.Point2;

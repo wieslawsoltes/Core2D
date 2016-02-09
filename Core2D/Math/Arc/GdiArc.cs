@@ -1,8 +1,9 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using System;
+using Core2D.Shapes;
+using static System.Math;
 
-namespace Core2D
+namespace Core2D.Math.Arc
 {
     /// <summary>
     /// Convert <see cref="XArc"/> coordinates to GDI arc coordinates.
@@ -91,15 +92,15 @@ namespace Core2D
             double cy = rect.Y + rect.Height / 2.0;
             double radiusX = cx - rect.X;
             double radiusY = cy - rect.Y;
-            double startAngle = Math.Atan2(y3 - cy, x3 - cx);
-            double endAngle = Math.Atan2(y4 - cy, x4 - cx);
-            double sweepAngle = (endAngle - startAngle) * 180.0 / Math.PI;
+            double startAngle = Atan2(y3 - cy, x3 - cx);
+            double endAngle = Atan2(y4 - cy, x4 - cx);
+            double sweepAngle = (endAngle - startAngle) * 180.0 / PI;
 
             if (sweepAngle < 0)
                 sweepAngle += 360;
 
-            startAngle *= 180.0 / Math.PI;
-            endAngle *= 180.0 / Math.PI;
+            startAngle *= 180.0 / PI;
+            endAngle *= 180.0 / PI;
 
             return new GdiArc
             {

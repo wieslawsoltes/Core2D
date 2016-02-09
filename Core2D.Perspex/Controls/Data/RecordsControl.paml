@@ -5,22 +5,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Core2D.Perspex;assembly=Core2D.Perspex"
              xmlns:converters="clr-namespace:Core2D.Perspex.Converters;assembly=Core2D.Perspex"
-             xmlns:core="clr-namespace:Core2D;assembly=Core2D"
-             Design.DataContext="{Static core:DesignerContext.Database}"
+             xmlns:Database="clr-namespace:Core2D.Data.Database;assembly=Core2D"
+             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
+             xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D"
+             Design.DataContext="{Static Designer:DesignerContext.Database}"
              Design.Width="250" Design.Height="400">
     <Grid RowDefinitions="Auto,Auto,*">
         <Menu Grid.Row="1" HorizontalAlignment="Right">
-            <MenuItem Header="apply" Command="{Static core:Commands.ApplyRecordCommand}" CommandParameter="{Binding Path=CurrentRecord}"/>
-            <MenuItem Header="+" Command="{Static core:Commands.AddRecordCommand}" CommandParameter="{Binding}"/>
-            <MenuItem Header="-" Command="{Static core:Commands.RemoveRecordCommand}" CommandParameter="{Binding Path=CurrentRecord}"/>
+            <MenuItem Header="apply" Command="{Static Editor:Commands.ApplyRecordCommand}" CommandParameter="{Binding Path=CurrentRecord}"/>
+            <MenuItem Header="+" Command="{Static Editor:Commands.AddRecordCommand}" CommandParameter="{Binding}"/>
+            <MenuItem Header="-" Command="{Static Editor:Commands.RemoveRecordCommand}" CommandParameter="{Binding Path=CurrentRecord}"/>
         </Menu>
-        <ListBox
-            Items="{Binding Path=Records}"
-            SelectedItem="{Binding Path=CurrentRecord, Mode=TwoWay}"
-            Grid.Row="2"
-            Classes="default">
+        <ListBox Items="{Binding Path=Records}" SelectedItem="{Binding Path=CurrentRecord, Mode=TwoWay}" Grid.Row="2" Classes="default">
             <ListBox.DataTemplates>
-                <DataTemplate DataType="core:Record">
+                <DataTemplate DataType="Database:XRecord">
                     <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="default"/>
                 </DataTemplate>
             </ListBox.DataTemplates>
