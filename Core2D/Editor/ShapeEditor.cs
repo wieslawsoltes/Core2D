@@ -570,12 +570,12 @@ namespace Core2D.Editor
             {
                 if (item is ShapeStyle)
                 {
-                    _project.AddStyle(_project?.CurrentStyleLibrary, item as ShapeStyle);
+                    _project?.AddStyle(_project?.CurrentStyleLibrary, item as ShapeStyle);
                 }
                 else if (item is BaseShape)
                 {
                     var shapes = Enumerable.Repeat(item as BaseShape, 1);
-                    _project?.AddShape(_project.CurrentContainer.CurrentLayer, item as BaseShape);
+                    _project?.AddShape(_project?.CurrentContainer?.CurrentLayer, item as BaseShape);
                 }
                 else if (item is XStyles)
                 {
@@ -588,7 +588,7 @@ namespace Core2D.Editor
                     var shapes = (item as XShapes).Children;
                     if (shapes.Count > 0)
                     {
-                        _project?.AddShapes(_project.CurrentContainer.CurrentLayer, shapes);
+                        _project?.AddShapes(_project?.CurrentContainer?.CurrentLayer, shapes);
                     }
                 }
                 else if (item is XGroups)
@@ -620,7 +620,7 @@ namespace Core2D.Editor
                 }
                 else if (item is XLayer)
                 {
-                    _project?.AddLayer(_project.CurrentContainer, item as XLayer);
+                    _project?.AddLayer(_project?.CurrentContainer, item as XLayer);
                 }
                 else if (item is XTemplate)
                 {
@@ -628,7 +628,7 @@ namespace Core2D.Editor
                 }
                 else if (item is XPage)
                 {
-                    _project?.AddPage(_project.CurrentDocument, item as XPage);
+                    _project?.AddPage(_project?.CurrentDocument, item as XPage);
                 }
                 else if (item is XDocument)
                 {
@@ -636,7 +636,10 @@ namespace Core2D.Editor
                 }
                 else if (item is XOptions)
                 {
-                    _project.Options = item as XOptions;
+                    if (_project != null)
+                    {
+                        _project.Options = item as XOptions; 
+                    }
                 }
                 else if (item is XProject)
                 {
