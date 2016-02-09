@@ -69,7 +69,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void DatabaseObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void ObserveDatabase(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(XDatabase.Columns))
             {
@@ -89,13 +89,13 @@ namespace Core2D.Editor
             MarkAsDirty();
         }
 
-        private void ColumnObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void ObserveColumn(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             _invalidateShapes();
             MarkAsDirty();
         }
 
-        private void RecordObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void ObserveRecord(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(XRecord.Columns))
             {
@@ -115,7 +115,7 @@ namespace Core2D.Editor
             MarkAsDirty();
         }
 
-        private void ValueObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void ObserveValue(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             _invalidateShapes();
             MarkAsDirty();
@@ -167,7 +167,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void DocumentObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void ObserveDocument(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(XDocument.Pages))
             {
@@ -180,7 +180,7 @@ namespace Core2D.Editor
             MarkAsDirty();
         }
 
-        private void PageObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void ObservePage(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(XContext.Properties))
             {
@@ -207,7 +207,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void TemplateBackgroudObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void ObserveTemplateBackgroud(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             _editor.Project.CurrentContainer.Notify(nameof(XTemplate.Background));
             var page = _editor.Project.CurrentContainer as XPage;
@@ -219,12 +219,12 @@ namespace Core2D.Editor
             MarkAsDirty();
         }
 
-        private void InvalidateLayerObserver(object sender, InvalidateLayerEventArgs e)
+        private void ObserveInvalidateLayer(object sender, InvalidateLayerEventArgs e)
         {
             _editor?.Invalidate?.Invoke();
         }
 
-        private void LayerObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void ObserveLayer(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(XLayer.Shapes))
             {
@@ -237,13 +237,13 @@ namespace Core2D.Editor
             MarkAsDirty();
         }
 
-        private void ShapeObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void ObserveShape(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             _invalidateShapes();
             MarkAsDirty();
         }
 
-        private void StyleLibraryObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void ObserveStyleLibrary(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(XLibrary<ShapeStyle>.Items))
             {
@@ -261,7 +261,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void GroupLibraryObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void ObserveGroupLibrary(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(XLibrary<XGroup>.Items))
             {
@@ -277,19 +277,19 @@ namespace Core2D.Editor
             }
         }
 
-        private void StyleObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void ObserveStyle(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             _invalidateStyles();
             MarkAsDirty();
         }
 
-        private void PropertyObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void ObserveProperty(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             _invalidateShapes();
             MarkAsDirty();
         }
 
-        private void DataObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void ObserveData(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(XContext.Properties))
             {
@@ -302,7 +302,7 @@ namespace Core2D.Editor
             MarkAsDirty();
         }
 
-        private void StateObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void ObserveState(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             _invalidateShapes();
             MarkAsDirty();
@@ -313,7 +313,7 @@ namespace Core2D.Editor
             if (database == null)
                 return;
 
-            database.PropertyChanged += DatabaseObserver;
+            database.PropertyChanged += ObserveDatabase;
 
             if (database.Columns != null)
             {
@@ -331,7 +331,7 @@ namespace Core2D.Editor
             if (database == null)
                 return;
 
-            database.PropertyChanged -= DatabaseObserver;
+            database.PropertyChanged -= ObserveDatabase;
 
             if (database.Columns != null)
             {
@@ -349,7 +349,7 @@ namespace Core2D.Editor
             if (column == null)
                 return;
 
-            column.PropertyChanged += ColumnObserver;
+            column.PropertyChanged += ObserveColumn;
         }
 
         private void Remove(XColumn column)
@@ -357,7 +357,7 @@ namespace Core2D.Editor
             if (column == null)
                 return;
 
-            column.PropertyChanged -= ColumnObserver;
+            column.PropertyChanged -= ObserveColumn;
         }
 
         private void Add(XRecord record)
@@ -365,7 +365,7 @@ namespace Core2D.Editor
             if (record == null)
                 return;
 
-            record.PropertyChanged += RecordObserver;
+            record.PropertyChanged += ObserveRecord;
 
             if (record.Values != null)
             {
@@ -378,7 +378,7 @@ namespace Core2D.Editor
             if (record == null)
                 return;
 
-            record.PropertyChanged -= RecordObserver;
+            record.PropertyChanged -= ObserveRecord;
 
             if (record.Values != null)
             {
@@ -391,7 +391,7 @@ namespace Core2D.Editor
             if (value == null)
                 return;
 
-            value.PropertyChanged += ValueObserver;
+            value.PropertyChanged += ObserveValue;
         }
 
         private void Remove(XValue value)
@@ -399,7 +399,7 @@ namespace Core2D.Editor
             if (value == null)
                 return;
 
-            value.PropertyChanged -= ValueObserver;
+            value.PropertyChanged -= ObserveValue;
         }
 
         private void Add(XOptions options)
@@ -543,7 +543,7 @@ namespace Core2D.Editor
             if (document == null)
                 return;
 
-            document.PropertyChanged += DocumentObserver;
+            document.PropertyChanged += ObserveDocument;
 
             if (document.Pages != null)
             {
@@ -559,7 +559,7 @@ namespace Core2D.Editor
             if (document == null)
                 return;
 
-            document.PropertyChanged -= DocumentObserver;
+            document.PropertyChanged -= ObserveDocument;
 
             if (document.Pages != null)
             {
@@ -575,7 +575,7 @@ namespace Core2D.Editor
             if (page == null)
                 return;
 
-            page.PropertyChanged += PageObserver;
+            page.PropertyChanged += ObservePage;
 
             if (page.Layers != null)
             {
@@ -589,12 +589,12 @@ namespace Core2D.Editor
 
             if (page.WorkingLayer != null)
             {
-                page.WorkingLayer.InvalidateLayer += InvalidateLayerObserver;
+                page.WorkingLayer.InvalidateLayer += ObserveInvalidateLayer;
             }
 
             if (page.HelperLayer != null)
             {
-                page.HelperLayer.InvalidateLayer += InvalidateLayerObserver;
+                page.HelperLayer.InvalidateLayer += ObserveInvalidateLayer;
             }
         }
 
@@ -603,7 +603,7 @@ namespace Core2D.Editor
             if (page == null)
                 return;
 
-            page.PropertyChanged -= PageObserver;
+            page.PropertyChanged -= ObservePage;
 
             if (page.Layers != null)
             {
@@ -617,12 +617,12 @@ namespace Core2D.Editor
 
             if (page.WorkingLayer != null)
             {
-                page.WorkingLayer.InvalidateLayer -= InvalidateLayerObserver;
+                page.WorkingLayer.InvalidateLayer -= ObserveInvalidateLayer;
             }
 
             if (page.HelperLayer != null)
             {
-                page.HelperLayer.InvalidateLayer -= InvalidateLayerObserver;
+                page.HelperLayer.InvalidateLayer -= ObserveInvalidateLayer;
             }
         }
 
@@ -631,11 +631,11 @@ namespace Core2D.Editor
             if (template == null)
                 return;
 
-            template.PropertyChanged += PageObserver;
+            template.PropertyChanged += ObservePage;
 
             if (template.Background != null)
             {
-                template.Background.PropertyChanged += TemplateBackgroudObserver;
+                template.Background.PropertyChanged += ObserveTemplateBackgroud;
             }
 
             if (template.Layers != null)
@@ -645,12 +645,12 @@ namespace Core2D.Editor
 
             if (template.WorkingLayer != null)
             {
-                template.WorkingLayer.InvalidateLayer += InvalidateLayerObserver;
+                template.WorkingLayer.InvalidateLayer += ObserveInvalidateLayer;
             }
 
             if (template.HelperLayer != null)
             {
-                template.HelperLayer.InvalidateLayer += InvalidateLayerObserver;
+                template.HelperLayer.InvalidateLayer += ObserveInvalidateLayer;
             }
         }
 
@@ -659,11 +659,11 @@ namespace Core2D.Editor
             if (template == null)
                 return;
 
-            template.PropertyChanged -= PageObserver;
+            template.PropertyChanged -= ObservePage;
 
             if (template.Background != null)
             {
-                template.Background.PropertyChanged -= TemplateBackgroudObserver;
+                template.Background.PropertyChanged -= ObserveTemplateBackgroud;
             }
 
             if (template.Layers != null)
@@ -673,12 +673,12 @@ namespace Core2D.Editor
 
             if (template.WorkingLayer != null)
             {
-                template.WorkingLayer.InvalidateLayer -= InvalidateLayerObserver;
+                template.WorkingLayer.InvalidateLayer -= ObserveInvalidateLayer;
             }
 
             if (template.HelperLayer != null)
             {
-                template.HelperLayer.InvalidateLayer -= InvalidateLayerObserver;
+                template.HelperLayer.InvalidateLayer -= ObserveInvalidateLayer;
             }
         }
 
@@ -687,14 +687,14 @@ namespace Core2D.Editor
             if (layer == null)
                 return;
 
-            layer.PropertyChanged += LayerObserver;
+            layer.PropertyChanged += ObserveLayer;
 
             if (layer.Shapes != null)
             {
                 Add(layer.Shapes);
             }
 
-            layer.InvalidateLayer += InvalidateLayerObserver;
+            layer.InvalidateLayer += ObserveInvalidateLayer;
         }
 
         private void Remove(XLayer layer)
@@ -702,14 +702,14 @@ namespace Core2D.Editor
             if (layer == null)
                 return;
 
-            layer.PropertyChanged -= LayerObserver;
+            layer.PropertyChanged -= ObserveLayer;
 
             if (layer.Shapes != null)
             {
                 Remove(layer.Shapes);
             }
 
-            layer.InvalidateLayer -= InvalidateLayerObserver;
+            layer.InvalidateLayer -= ObserveInvalidateLayer;
         }
 
         private void Add(BaseShape shape)
@@ -717,7 +717,7 @@ namespace Core2D.Editor
             if (shape == null)
                 return;
 
-            shape.PropertyChanged += ShapeObserver;
+            shape.PropertyChanged += ObserveShape;
 
             if (shape.Data != null)
             {
@@ -726,7 +726,7 @@ namespace Core2D.Editor
 
             if (shape.State != null)
             {
-                shape.State.PropertyChanged += StateObserver;
+                shape.State.PropertyChanged += ObserveState;
             }
 
             if (shape is XPoint)
@@ -734,7 +734,7 @@ namespace Core2D.Editor
                 var point = shape as XPoint;
                 if (point.Shape != null)
                 {
-                    point.Shape.PropertyChanged += ShapeObserver;
+                    point.Shape.PropertyChanged += ObserveShape;
                 }
             }
             else if (shape is XLine)
@@ -743,12 +743,12 @@ namespace Core2D.Editor
 
                 if (line.Start != null)
                 {
-                    line.Start.PropertyChanged += ShapeObserver;
+                    line.Start.PropertyChanged += ObserveShape;
                 }
 
                 if (line.End != null)
                 {
-                    line.End.PropertyChanged += ShapeObserver;
+                    line.End.PropertyChanged += ObserveShape;
                 }
             }
             else if (shape is XRectangle)
@@ -757,12 +757,12 @@ namespace Core2D.Editor
 
                 if (rectangle.TopLeft != null)
                 {
-                    rectangle.TopLeft.PropertyChanged += ShapeObserver;
+                    rectangle.TopLeft.PropertyChanged += ObserveShape;
                 }
 
                 if (rectangle.BottomRight != null)
                 {
-                    rectangle.BottomRight.PropertyChanged += ShapeObserver;
+                    rectangle.BottomRight.PropertyChanged += ObserveShape;
                 }
             }
             else if (shape is XEllipse)
@@ -771,12 +771,12 @@ namespace Core2D.Editor
 
                 if (ellipse.TopLeft != null)
                 {
-                    ellipse.TopLeft.PropertyChanged += ShapeObserver;
+                    ellipse.TopLeft.PropertyChanged += ObserveShape;
                 }
 
                 if (ellipse.BottomRight != null)
                 {
-                    ellipse.BottomRight.PropertyChanged += ShapeObserver;
+                    ellipse.BottomRight.PropertyChanged += ObserveShape;
                 }
             }
             else if (shape is XArc)
@@ -785,22 +785,22 @@ namespace Core2D.Editor
 
                 if (arc.Point1 != null)
                 {
-                    arc.Point1.PropertyChanged += ShapeObserver;
+                    arc.Point1.PropertyChanged += ObserveShape;
                 }
 
                 if (arc.Point2 != null)
                 {
-                    arc.Point2.PropertyChanged += ShapeObserver;
+                    arc.Point2.PropertyChanged += ObserveShape;
                 }
 
                 if (arc.Point3 != null)
                 {
-                    arc.Point3.PropertyChanged += ShapeObserver;
+                    arc.Point3.PropertyChanged += ObserveShape;
                 }
 
                 if (arc.Point4 != null)
                 {
-                    arc.Point4.PropertyChanged += ShapeObserver;
+                    arc.Point4.PropertyChanged += ObserveShape;
                 }
             }
             else if (shape is XCubicBezier)
@@ -809,22 +809,22 @@ namespace Core2D.Editor
 
                 if (cubicBezier.Point1 != null)
                 {
-                    cubicBezier.Point1.PropertyChanged += ShapeObserver;
+                    cubicBezier.Point1.PropertyChanged += ObserveShape;
                 }
 
                 if (cubicBezier.Point2 != null)
                 {
-                    cubicBezier.Point2.PropertyChanged += ShapeObserver;
+                    cubicBezier.Point2.PropertyChanged += ObserveShape;
                 }
 
                 if (cubicBezier.Point3 != null)
                 {
-                    cubicBezier.Point3.PropertyChanged += ShapeObserver;
+                    cubicBezier.Point3.PropertyChanged += ObserveShape;
                 }
 
                 if (cubicBezier.Point4 != null)
                 {
-                    cubicBezier.Point4.PropertyChanged += ShapeObserver;
+                    cubicBezier.Point4.PropertyChanged += ObserveShape;
                 }
             }
             else if (shape is XQuadraticBezier)
@@ -833,17 +833,17 @@ namespace Core2D.Editor
 
                 if (quadraticBezier.Point1 != null)
                 {
-                    quadraticBezier.Point1.PropertyChanged += ShapeObserver;
+                    quadraticBezier.Point1.PropertyChanged += ObserveShape;
                 }
 
                 if (quadraticBezier.Point2 != null)
                 {
-                    quadraticBezier.Point2.PropertyChanged += ShapeObserver;
+                    quadraticBezier.Point2.PropertyChanged += ObserveShape;
                 }
 
                 if (quadraticBezier.Point3 != null)
                 {
-                    quadraticBezier.Point3.PropertyChanged += ShapeObserver;
+                    quadraticBezier.Point3.PropertyChanged += ObserveShape;
                 }
             }
             else if (shape is XText)
@@ -852,12 +852,12 @@ namespace Core2D.Editor
 
                 if (text.TopLeft != null)
                 {
-                    text.TopLeft.PropertyChanged += ShapeObserver;
+                    text.TopLeft.PropertyChanged += ObserveShape;
                 }
 
                 if (text.BottomRight != null)
                 {
-                    text.BottomRight.PropertyChanged += ShapeObserver;
+                    text.BottomRight.PropertyChanged += ObserveShape;
                 }
             }
             else if (shape is XImage)
@@ -866,12 +866,12 @@ namespace Core2D.Editor
 
                 if (image.TopLeft != null)
                 {
-                    image.TopLeft.PropertyChanged += ShapeObserver;
+                    image.TopLeft.PropertyChanged += ObserveShape;
                 }
 
                 if (image.BottomRight != null)
                 {
-                    image.BottomRight.PropertyChanged += ShapeObserver;
+                    image.BottomRight.PropertyChanged += ObserveShape;
                 }
             }
             else if (shape is XPath)
@@ -902,7 +902,7 @@ namespace Core2D.Editor
             if (shape == null)
                 return;
 
-            shape.PropertyChanged -= ShapeObserver;
+            shape.PropertyChanged -= ObserveShape;
 
             if (shape.Data != null)
             {
@@ -911,7 +911,7 @@ namespace Core2D.Editor
 
             if (shape.State != null)
             {
-                shape.State.PropertyChanged -= StateObserver;
+                shape.State.PropertyChanged -= ObserveState;
             }
 
             if (shape is XPoint)
@@ -919,7 +919,7 @@ namespace Core2D.Editor
                 var point = shape as XPoint;
                 if (point.Shape != null)
                 {
-                    point.Shape.PropertyChanged -= ShapeObserver;
+                    point.Shape.PropertyChanged -= ObserveShape;
                 }
             }
             else if (shape is XLine)
@@ -928,12 +928,12 @@ namespace Core2D.Editor
 
                 if (line.Start != null)
                 {
-                    line.Start.PropertyChanged -= ShapeObserver;
+                    line.Start.PropertyChanged -= ObserveShape;
                 }
 
                 if (line.End != null)
                 {
-                    line.End.PropertyChanged -= ShapeObserver;
+                    line.End.PropertyChanged -= ObserveShape;
                 }
             }
             else if (shape is XRectangle)
@@ -942,12 +942,12 @@ namespace Core2D.Editor
 
                 if (rectangle.TopLeft != null)
                 {
-                    rectangle.TopLeft.PropertyChanged -= ShapeObserver;
+                    rectangle.TopLeft.PropertyChanged -= ObserveShape;
                 }
 
                 if (rectangle.BottomRight != null)
                 {
-                    rectangle.BottomRight.PropertyChanged -= ShapeObserver;
+                    rectangle.BottomRight.PropertyChanged -= ObserveShape;
                 }
             }
             else if (shape is XEllipse)
@@ -956,12 +956,12 @@ namespace Core2D.Editor
 
                 if (ellipse.TopLeft != null)
                 {
-                    ellipse.TopLeft.PropertyChanged -= ShapeObserver;
+                    ellipse.TopLeft.PropertyChanged -= ObserveShape;
                 }
 
                 if (ellipse.BottomRight != null)
                 {
-                    ellipse.BottomRight.PropertyChanged -= ShapeObserver;
+                    ellipse.BottomRight.PropertyChanged -= ObserveShape;
                 }
             }
             else if (shape is XArc)
@@ -970,22 +970,22 @@ namespace Core2D.Editor
 
                 if (arc.Point1 != null)
                 {
-                    arc.Point1.PropertyChanged -= ShapeObserver;
+                    arc.Point1.PropertyChanged -= ObserveShape;
                 }
 
                 if (arc.Point2 != null)
                 {
-                    arc.Point2.PropertyChanged -= ShapeObserver;
+                    arc.Point2.PropertyChanged -= ObserveShape;
                 }
 
                 if (arc.Point3 != null)
                 {
-                    arc.Point3.PropertyChanged -= ShapeObserver;
+                    arc.Point3.PropertyChanged -= ObserveShape;
                 }
 
                 if (arc.Point4 != null)
                 {
-                    arc.Point4.PropertyChanged -= ShapeObserver;
+                    arc.Point4.PropertyChanged -= ObserveShape;
                 }
             }
             else if (shape is XCubicBezier)
@@ -994,22 +994,22 @@ namespace Core2D.Editor
 
                 if (cubicBezier.Point1 != null)
                 {
-                    cubicBezier.Point1.PropertyChanged -= ShapeObserver;
+                    cubicBezier.Point1.PropertyChanged -= ObserveShape;
                 }
 
                 if (cubicBezier.Point2 != null)
                 {
-                    cubicBezier.Point2.PropertyChanged -= ShapeObserver;
+                    cubicBezier.Point2.PropertyChanged -= ObserveShape;
                 }
 
                 if (cubicBezier.Point3 != null)
                 {
-                    cubicBezier.Point3.PropertyChanged -= ShapeObserver;
+                    cubicBezier.Point3.PropertyChanged -= ObserveShape;
                 }
 
                 if (cubicBezier.Point4 != null)
                 {
-                    cubicBezier.Point4.PropertyChanged -= ShapeObserver;
+                    cubicBezier.Point4.PropertyChanged -= ObserveShape;
                 }
             }
             else if (shape is XQuadraticBezier)
@@ -1018,17 +1018,17 @@ namespace Core2D.Editor
 
                 if (quadraticBezier.Point1 != null)
                 {
-                    quadraticBezier.Point1.PropertyChanged -= ShapeObserver;
+                    quadraticBezier.Point1.PropertyChanged -= ObserveShape;
                 }
 
                 if (quadraticBezier.Point2 != null)
                 {
-                    quadraticBezier.Point2.PropertyChanged -= ShapeObserver;
+                    quadraticBezier.Point2.PropertyChanged -= ObserveShape;
                 }
 
                 if (quadraticBezier.Point3 != null)
                 {
-                    quadraticBezier.Point3.PropertyChanged -= ShapeObserver;
+                    quadraticBezier.Point3.PropertyChanged -= ObserveShape;
                 }
             }
             else if (shape is XText)
@@ -1037,12 +1037,12 @@ namespace Core2D.Editor
 
                 if (text.TopLeft != null)
                 {
-                    text.TopLeft.PropertyChanged -= ShapeObserver;
+                    text.TopLeft.PropertyChanged -= ObserveShape;
                 }
 
                 if (text.BottomRight != null)
                 {
-                    text.BottomRight.PropertyChanged -= ShapeObserver;
+                    text.BottomRight.PropertyChanged -= ObserveShape;
                 }
             }
             else if (shape is XImage)
@@ -1051,12 +1051,12 @@ namespace Core2D.Editor
 
                 if (image.TopLeft != null)
                 {
-                    image.TopLeft.PropertyChanged -= ShapeObserver;
+                    image.TopLeft.PropertyChanged -= ObserveShape;
                 }
 
                 if (image.BottomRight != null)
                 {
-                    image.BottomRight.PropertyChanged -= ShapeObserver;
+                    image.BottomRight.PropertyChanged -= ObserveShape;
                 }
             }
             else if (shape is XPath)
@@ -1092,7 +1092,7 @@ namespace Core2D.Editor
                 Add(data.Properties);
             }
 
-            data.PropertyChanged += DataObserver;
+            data.PropertyChanged += ObserveData;
         }
 
         private void Remove(XContext data)
@@ -1105,7 +1105,7 @@ namespace Core2D.Editor
                 Remove(data.Properties);
             }
 
-            data.PropertyChanged -= DataObserver;
+            data.PropertyChanged -= ObserveData;
         }
 
         private void Add(XLibrary<ShapeStyle> sg)
@@ -1118,7 +1118,7 @@ namespace Core2D.Editor
                 Add(sg.Items);
             }
 
-            sg.PropertyChanged += StyleLibraryObserver;
+            sg.PropertyChanged += ObserveStyleLibrary;
         }
 
         private void Remove(XLibrary<ShapeStyle> sg)
@@ -1131,7 +1131,7 @@ namespace Core2D.Editor
                 Remove(sg.Items);
             }
 
-            sg.PropertyChanged -= StyleLibraryObserver;
+            sg.PropertyChanged -= ObserveStyleLibrary;
         }
 
         private void Add(XLibrary<XGroup> gl)
@@ -1144,7 +1144,7 @@ namespace Core2D.Editor
                 Add(gl.Items);
             }
 
-            gl.PropertyChanged += GroupLibraryObserver;
+            gl.PropertyChanged += ObserveGroupLibrary;
         }
 
         private void Remove(XLibrary<XGroup> gl)
@@ -1157,7 +1157,7 @@ namespace Core2D.Editor
                 Remove(gl.Items);
             }
 
-            gl.PropertyChanged -= GroupLibraryObserver;
+            gl.PropertyChanged -= ObserveGroupLibrary;
         }
 
         private void Add(ShapeStyle style)
@@ -1165,65 +1165,65 @@ namespace Core2D.Editor
             if (style == null)
                 return;
 
-            style.PropertyChanged += StyleObserver;
+            style.PropertyChanged += ObserveStyle;
 
             if (style.Stroke != null)
             {
-                style.Stroke.PropertyChanged += StyleObserver;
+                style.Stroke.PropertyChanged += ObserveStyle;
             }
 
             if (style.Fill != null)
             {
-                style.Fill.PropertyChanged += StyleObserver;
+                style.Fill.PropertyChanged += ObserveStyle;
             }
 
             if (style.LineStyle != null)
             {
-                style.LineStyle.PropertyChanged += StyleObserver;
+                style.LineStyle.PropertyChanged += ObserveStyle;
 
                 if (style.LineStyle.FixedLength != null)
                 {
-                    style.LineStyle.FixedLength.PropertyChanged += StyleObserver;
+                    style.LineStyle.FixedLength.PropertyChanged += ObserveStyle;
                 }
             }
 
             if (style.StartArrowStyle != null)
             {
-                style.StartArrowStyle.PropertyChanged += StyleObserver;
+                style.StartArrowStyle.PropertyChanged += ObserveStyle;
 
                 if (style.StartArrowStyle.Stroke != null)
                 {
-                    style.StartArrowStyle.Stroke.PropertyChanged += StyleObserver;
+                    style.StartArrowStyle.Stroke.PropertyChanged += ObserveStyle;
                 }
 
                 if (style.StartArrowStyle.Fill != null)
                 {
-                    style.StartArrowStyle.Fill.PropertyChanged += StyleObserver;
+                    style.StartArrowStyle.Fill.PropertyChanged += ObserveStyle;
                 }
             }
 
             if (style.EndArrowStyle != null)
             {
-                style.EndArrowStyle.PropertyChanged += StyleObserver;
+                style.EndArrowStyle.PropertyChanged += ObserveStyle;
 
                 if (style.EndArrowStyle.Stroke != null)
                 {
-                    style.EndArrowStyle.Stroke.PropertyChanged += StyleObserver;
+                    style.EndArrowStyle.Stroke.PropertyChanged += ObserveStyle;
                 }
 
                 if (style.EndArrowStyle.Fill != null)
                 {
-                    style.EndArrowStyle.Fill.PropertyChanged += StyleObserver;
+                    style.EndArrowStyle.Fill.PropertyChanged += ObserveStyle;
                 }
             }
 
             if (style.TextStyle != null)
             {
-                style.TextStyle.PropertyChanged += StyleObserver;
+                style.TextStyle.PropertyChanged += ObserveStyle;
 
                 if (style.TextStyle.FontStyle != null)
                 {
-                    style.TextStyle.FontStyle.PropertyChanged += StyleObserver;
+                    style.TextStyle.FontStyle.PropertyChanged += ObserveStyle;
                 }
             }
         }
@@ -1233,65 +1233,65 @@ namespace Core2D.Editor
             if (style == null)
                 return;
 
-            style.PropertyChanged -= StyleObserver;
+            style.PropertyChanged -= ObserveStyle;
 
             if (style.Stroke != null)
             {
-                style.Stroke.PropertyChanged -= StyleObserver;
+                style.Stroke.PropertyChanged -= ObserveStyle;
             }
 
             if (style.Fill != null)
             {
-                style.Fill.PropertyChanged -= StyleObserver;
+                style.Fill.PropertyChanged -= ObserveStyle;
             }
 
             if (style.LineStyle != null)
             {
-                style.LineStyle.PropertyChanged -= StyleObserver;
+                style.LineStyle.PropertyChanged -= ObserveStyle;
 
                 if (style.LineStyle.FixedLength != null)
                 {
-                    style.LineStyle.FixedLength.PropertyChanged -= StyleObserver;
+                    style.LineStyle.FixedLength.PropertyChanged -= ObserveStyle;
                 }
             }
 
             if (style.StartArrowStyle != null)
             {
-                style.StartArrowStyle.PropertyChanged -= StyleObserver;
+                style.StartArrowStyle.PropertyChanged -= ObserveStyle;
 
                 if (style.StartArrowStyle.Stroke != null)
                 {
-                    style.StartArrowStyle.Stroke.PropertyChanged -= StyleObserver;
+                    style.StartArrowStyle.Stroke.PropertyChanged -= ObserveStyle;
                 }
 
                 if (style.StartArrowStyle.Fill != null)
                 {
-                    style.StartArrowStyle.Fill.PropertyChanged -= StyleObserver;
+                    style.StartArrowStyle.Fill.PropertyChanged -= ObserveStyle;
                 }
             }
 
             if (style.EndArrowStyle != null)
             {
-                style.EndArrowStyle.PropertyChanged -= StyleObserver;
+                style.EndArrowStyle.PropertyChanged -= ObserveStyle;
 
                 if (style.EndArrowStyle.Stroke != null)
                 {
-                    style.EndArrowStyle.Stroke.PropertyChanged -= StyleObserver;
+                    style.EndArrowStyle.Stroke.PropertyChanged -= ObserveStyle;
                 }
 
                 if (style.EndArrowStyle.Fill != null)
                 {
-                    style.EndArrowStyle.Fill.PropertyChanged -= StyleObserver;
+                    style.EndArrowStyle.Fill.PropertyChanged -= ObserveStyle;
                 }
             }
 
             if (style.TextStyle != null)
             {
-                style.TextStyle.PropertyChanged -= StyleObserver;
+                style.TextStyle.PropertyChanged -= ObserveStyle;
 
                 if (style.TextStyle.FontStyle != null)
                 {
-                    style.TextStyle.FontStyle.PropertyChanged -= StyleObserver;
+                    style.TextStyle.FontStyle.PropertyChanged -= ObserveStyle;
                 }
             }
         }
@@ -1301,7 +1301,7 @@ namespace Core2D.Editor
             if (property == null)
                 return;
 
-            property.PropertyChanged += PropertyObserver;
+            property.PropertyChanged += ObserveProperty;
         }
 
         private void Remove(XProperty property)
@@ -1309,7 +1309,7 @@ namespace Core2D.Editor
             if (property == null)
                 return;
 
-            property.PropertyChanged += PropertyObserver;
+            property.PropertyChanged += ObserveProperty;
         }
 
         private void Add(IEnumerable<XDatabase> databases)
