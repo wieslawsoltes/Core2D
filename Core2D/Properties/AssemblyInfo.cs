@@ -10,6 +10,18 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyProduct("Core2D")]
 [assembly: AssemblyCulture("")]
+
 [assembly: NeutralResourcesLanguage("en")]
-[assembly: XmlnsDefinition("https://github.com/Core2D", "Core2D")]
+
 [assembly: InternalsVisibleTo("Core2D.UnitTests")]
+
+[assembly: XmlnsDefinition("https://github.com/Core2D", "Core2D")]
+[assembly: XmlnsDefinition("https://github.com/Core2D", "Core2D.Data")]
+[assembly: XmlnsDefinition("https://github.com/Core2D", "Core2D.Data.Database")]
+[assembly: XmlnsDefinition("https://github.com/Core2D", "Core2D.Path")]
+[assembly: XmlnsDefinition("https://github.com/Core2D", "Core2D.Path.Segments")]
+[assembly: XmlnsDefinition("https://github.com/Core2D", "Core2D.Project")]
+[assembly: XmlnsDefinition("https://github.com/Core2D", "Core2D.Shape")]
+[assembly: XmlnsDefinition("https://github.com/Core2D", "Core2D.Shapes")]
+[assembly: XmlnsDefinition("https://github.com/Core2D", "Core2D.Style")]
+[assembly: XmlnsDefinition("https://github.com/Core2D", "Core2D.Xaml.Collections")]
