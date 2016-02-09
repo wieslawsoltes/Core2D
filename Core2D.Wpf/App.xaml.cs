@@ -35,7 +35,7 @@ namespace Core2D.Wpf
     /// </summary>
     public partial class App : Application
     {
-        private ShapeEditor _editor;
+        private ProjectEditor _editor;
         private Windows.MainWindow _mainWindow;
         private bool _isLoaded = false;
         private string _recentFileName = "Core2D.recent";
@@ -177,7 +177,7 @@ namespace Core2D.Wpf
         /// <param name="log">The log instance.</param>
         private void InitializeEditor(ILog log)
         {
-            _editor = new ShapeEditor()
+            _editor = new ProjectEditor()
             {
                 CurrentTool = Tool.Selection,
                 CurrentPathTool = PathTool.Line,
@@ -216,7 +216,7 @@ namespace Core2D.Wpf
         /// Initialize platform specific commands used by <see cref="Editor"/>.
         /// </summary>
         /// <param name="editor">The editor instance.</param>
-        private void InitializeCommands(ShapeEditor editor)
+        private void InitializeCommands(ProjectEditor editor)
         {
             Commands.OpenCommand =
                 Command<string>.Create(
@@ -541,9 +541,9 @@ namespace Core2D.Wpf
             {
                 name = (item as XProject).Name;
             }
-            else if (item is ShapeEditor)
+            else if (item is ProjectEditor)
             {
-                var editor = (item as ShapeEditor);
+                var editor = (item as ProjectEditor);
                 if (editor?.Project == null)
                     return;
 

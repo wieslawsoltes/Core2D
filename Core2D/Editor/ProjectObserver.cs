@@ -14,19 +14,19 @@ namespace Core2D.Editor
     /// <summary>
     /// Project property changes observer.
     /// </summary>
-    public sealed class Observer : IDisposable
+    public sealed class ProjectObserver : IDisposable
     {
-        private readonly ShapeEditor _editor;
+        private readonly ProjectEditor _editor;
         private readonly Action _invalidateContainer;
         private readonly Action _invalidateStyles;
         private readonly Action _invalidateLayers;
         private readonly Action _invalidateShapes;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Observer"/> class.
+        /// Initializes a new instance of the <see cref="ProjectObserver"/> class.
         /// </summary>
-        /// <param name="editor">The current <see cref="ShapeEditor"/> object.</param>
-        public Observer(ShapeEditor editor)
+        /// <param name="editor">The current <see cref="ProjectEditor"/> object.</param>
+        public ProjectObserver(ProjectEditor editor)
         {
             if (editor?.Project != null)
             {
@@ -121,7 +121,7 @@ namespace Core2D.Editor
             MarkAsDirty();
         }
 
-        private void ProjectObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void ObserveProject(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(XProject.Databases))
             {
@@ -459,7 +459,7 @@ namespace Core2D.Editor
             if (project == null)
                 return;
 
-            project.PropertyChanged += ProjectObserver;
+            project.PropertyChanged += ObserveProject;
 
             Add(project.Options);
 
@@ -501,7 +501,7 @@ namespace Core2D.Editor
             if (project == null)
                 return;
 
-            project.PropertyChanged -= ProjectObserver;
+            project.PropertyChanged -= ObserveProject;
 
             Remove(project.Options);
 
@@ -1610,7 +1610,7 @@ namespace Core2D.Editor
         /// <summary>
         /// Dispose unmanaged resources.
         /// </summary>
-        ~Observer()
+        ~ProjectObserver()
         {
             Dispose(false);
         }

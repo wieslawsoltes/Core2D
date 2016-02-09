@@ -50,7 +50,7 @@
     <Compile Include="Editor\Constants.cs" />
     <Compile Include="Editor\CoreType.cs" />
     <Compile Include="Editor\Designer\DesignerContext.cs" />
-    <Compile Include="Editor\ShapeEditor.cs" />
+    <Compile Include="Editor\ProjectEditor.cs" />
     <Compile Include="Editor\Enums.cs" />
     <Compile Include="Editor\Factories\IProjectFactory.cs" />
     <Compile Include="Editor\Factories\IShapeFactory.cs" />
@@ -62,7 +62,7 @@
     <Compile Include="Editor\Input\ICommandManager.cs" />
     <Compile Include="Editor\Input\ICoreCommand.cs" />
     <Compile Include="Editor\Input\ICoreCommand`1.cs" />
-    <Compile Include="Editor\Observer.cs" />
+    <Compile Include="Editor\ProjectObserver.cs" />
     <Compile Include="Editor\PathTool.cs" />
     <Compile Include="Editor\ProjectExtensions.cs" />
     <Compile Include="Editor\Recent\RecentFile.cs" />

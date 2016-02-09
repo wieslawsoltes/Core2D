@@ -13,7 +13,7 @@ namespace Core2D.Editor.Tools
     /// </summary>
     public sealed class ToolQuadraticBezier : ToolBase
     {
-        private ShapeEditor _editor;
+        private ProjectEditor _editor;
         private ToolState _currentState = ToolState.None;
         private XQuadraticBezier _shape;
         private ShapeStyle _style;
@@ -26,8 +26,8 @@ namespace Core2D.Editor.Tools
         /// <summary>
         /// Initialize new instance of <see cref="ToolQuadraticBezier"/> class.
         /// </summary>
-        /// <param name="editor">The current <see cref="ShapeEditor"/> object.</param>
-        public ToolQuadraticBezier(ShapeEditor editor)
+        /// <param name="editor">The current <see cref="ProjectEditor"/> object.</param>
+        public ToolQuadraticBezier(ProjectEditor editor)
             : base()
         {
             _editor = editor;
@@ -86,8 +86,8 @@ namespace Core2D.Editor.Tools
         {
             base.LeftDown(x, y);
 
-            double sx = _editor.Project.Options.SnapToGrid ? ShapeEditor.Snap(x, _editor.Project.Options.SnapX) : x;
-            double sy = _editor.Project.Options.SnapToGrid ? ShapeEditor.Snap(y, _editor.Project.Options.SnapY) : y;
+            double sx = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, _editor.Project.Options.SnapX) : x;
+            double sy = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, _editor.Project.Options.SnapY) : y;
             switch (_currentState)
             {
                 case ToolState.None:
@@ -183,8 +183,8 @@ namespace Core2D.Editor.Tools
         {
             base.Move(x, y);
 
-            double sx = _editor.Project.Options.SnapToGrid ? ShapeEditor.Snap(x, _editor.Project.Options.SnapX) : x;
-            double sy = _editor.Project.Options.SnapToGrid ? ShapeEditor.Snap(y, _editor.Project.Options.SnapY) : y;
+            double sx = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, _editor.Project.Options.SnapX) : x;
+            double sy = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, _editor.Project.Options.SnapY) : y;
             switch (_currentState)
             {
                 case ToolState.None:

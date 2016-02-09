@@ -24,9 +24,9 @@ namespace Core2D.Editor.Designer
     public class DesignerContext
     {
         /// <summary>
-        /// The design time <see cref="Core2D.Editor.ShapeEditor"/>.
+        /// The design time <see cref="Core2D.Editor.ProjectEditor"/>.
         /// </summary>
-        public static ShapeEditor Editor { get; set; }
+        public static ProjectEditor Editor { get; set; }
 
         /// <summary>
         /// The design time <see cref="Core2D.Project.XTemplate"/>.
@@ -222,7 +222,7 @@ namespace Core2D.Editor.Designer
         /// Initialize platform specific commands used by <see cref="Editor"/>.
         /// </summary>
         /// <param name="editor">The editor instance.</param>
-        public static void InitializeCommands(ShapeEditor editor)
+        public static void InitializeCommands(ProjectEditor editor)
         {
             Commands.OpenCommand =
                 Command<string>.Create(
@@ -403,7 +403,7 @@ namespace Core2D.Editor.Designer
         {
             // Editor
 
-            Editor = new ShapeEditor()
+            Editor = new ProjectEditor()
             {
                 CurrentTool = Tool.Selection,
                 CurrentPathTool = PathTool.Line,

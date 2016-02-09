@@ -17,7 +17,7 @@ namespace Core2D.Editor.Tools
     /// </summary>
     public sealed class ToolPath : ToolBase
     {
-        private ShapeEditor _editor;
+        private ProjectEditor _editor;
         private ToolState _currentState = ToolState.None;
         // Path Tool
         private XPath _path;
@@ -61,8 +61,8 @@ namespace Core2D.Editor.Tools
         /// <summary>
         /// Initialize new instance of <see cref="ToolPath"/> class.
         /// </summary>
-        /// <param name="editor">The current <see cref="ShapeEditor"/> object.</param>
-        public ToolPath(ShapeEditor editor)
+        /// <param name="editor">The current <see cref="ProjectEditor"/> object.</param>
+        public ToolPath(ProjectEditor editor)
             : base()
         {
             _editor = editor;
@@ -274,8 +274,8 @@ namespace Core2D.Editor.Tools
 
         private void LineLeftDown(double x, double y)
         {
-            double sx = _editor.Project.Options.SnapToGrid ? ShapeEditor.Snap(x, _editor.Project.Options.SnapX) : x;
-            double sy = _editor.Project.Options.SnapToGrid ? ShapeEditor.Snap(y, _editor.Project.Options.SnapY) : y;
+            double sx = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, _editor.Project.Options.SnapX) : x;
+            double sy = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, _editor.Project.Options.SnapY) : y;
             switch (_currentState)
             {
                 case ToolState.None:
@@ -339,8 +339,8 @@ namespace Core2D.Editor.Tools
 
         private void CubicBezierLeftDown(double x, double y)
         {
-            double sx = _editor.Project.Options.SnapToGrid ? ShapeEditor.Snap(x, _editor.Project.Options.SnapX) : x;
-            double sy = _editor.Project.Options.SnapToGrid ? ShapeEditor.Snap(y, _editor.Project.Options.SnapY) : y;
+            double sx = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, _editor.Project.Options.SnapX) : x;
+            double sy = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, _editor.Project.Options.SnapY) : y;
             switch (_currentState)
             {
                 case ToolState.None:
@@ -455,8 +455,8 @@ namespace Core2D.Editor.Tools
 
         private void QuadraticBezierLeftDown(double x, double y)
         {
-            double sx = _editor.Project.Options.SnapToGrid ? ShapeEditor.Snap(x, _editor.Project.Options.SnapX) : x;
-            double sy = _editor.Project.Options.SnapToGrid ? ShapeEditor.Snap(y, _editor.Project.Options.SnapY) : y;
+            double sx = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, _editor.Project.Options.SnapX) : x;
+            double sy = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, _editor.Project.Options.SnapY) : y;
             switch (_currentState)
             {
                 case ToolState.None:
@@ -643,8 +643,8 @@ namespace Core2D.Editor.Tools
 
         private void LineMove(double x, double y)
         {
-            double sx = _editor.Project.Options.SnapToGrid ? ShapeEditor.Snap(x, _editor.Project.Options.SnapX) : x;
-            double sy = _editor.Project.Options.SnapToGrid ? ShapeEditor.Snap(y, _editor.Project.Options.SnapY) : y;
+            double sx = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, _editor.Project.Options.SnapX) : x;
+            double sy = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, _editor.Project.Options.SnapY) : y;
             switch (_currentState)
             {
                 case ToolState.None:
@@ -678,8 +678,8 @@ namespace Core2D.Editor.Tools
 
         private void CubicBezierMove(double x, double y)
         {
-            double sx = _editor.Project.Options.SnapToGrid ? ShapeEditor.Snap(x, _editor.Project.Options.SnapX) : x;
-            double sy = _editor.Project.Options.SnapToGrid ? ShapeEditor.Snap(y, _editor.Project.Options.SnapY) : y;
+            double sx = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, _editor.Project.Options.SnapX) : x;
+            double sy = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, _editor.Project.Options.SnapY) : y;
             switch (_currentState)
             {
                 case ToolState.None:
@@ -738,8 +738,8 @@ namespace Core2D.Editor.Tools
 
         private void QuadraticBezierMove(double x, double y)
         {
-            double sx = _editor.Project.Options.SnapToGrid ? ShapeEditor.Snap(x, _editor.Project.Options.SnapX) : x;
-            double sy = _editor.Project.Options.SnapToGrid ? ShapeEditor.Snap(y, _editor.Project.Options.SnapY) : y;
+            double sx = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, _editor.Project.Options.SnapX) : x;
+            double sy = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, _editor.Project.Options.SnapY) : y;
             switch (_currentState)
             {
                 case ToolState.None:
@@ -1137,8 +1137,8 @@ namespace Core2D.Editor.Tools
 
         private void StartFigureLeftDown(double x, double y)
         {
-            double sx = _editor.Project.Options.SnapToGrid ? ShapeEditor.Snap(x, _editor.Project.Options.SnapX) : x;
-            double sy = _editor.Project.Options.SnapToGrid ? ShapeEditor.Snap(y, _editor.Project.Options.SnapY) : y;
+            double sx = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, _editor.Project.Options.SnapX) : x;
+            double sy = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, _editor.Project.Options.SnapY) : y;
 
             // start new figure
             var start = TryToGetConnectionPoint(sx, sy) ?? XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
@@ -1154,8 +1154,8 @@ namespace Core2D.Editor.Tools
 
         private void StartFigureMove(double x, double y)
         {
-            double sx = _editor.Project.Options.SnapToGrid ? ShapeEditor.Snap(x, _editor.Project.Options.SnapX) : x;
-            double sy = _editor.Project.Options.SnapToGrid ? ShapeEditor.Snap(y, _editor.Project.Options.SnapY) : y;
+            double sx = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, _editor.Project.Options.SnapX) : x;
+            double sy = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, _editor.Project.Options.SnapY) : y;
             switch (_currentState)
             {
                 case ToolState.None:

@@ -29,7 +29,7 @@ namespace Core2D.Editor
     /// <summary>
     /// Project editor.
     /// </summary>
-    public sealed class ShapeEditor : ObservableObject
+    public sealed class ProjectEditor : ObservableObject
     {
         private ILog _log;
         private ICommandManager _commandManager;
@@ -40,7 +40,7 @@ namespace Core2D.Editor
         private ShapeRenderer[] _renderers;
         private Tool _currentTool;
         private PathTool _currentPathTool;
-        private Observer _observer;
+        private ProjectObserver _observer;
         private Action _invalidate;
         private Action _resetZoom;
         private Action _extentZoom;
@@ -144,7 +144,7 @@ namespace Core2D.Editor
         /// <summary>
         /// Gets or sets current project collections and objects observer.
         /// </summary>
-        public Observer Observer
+        public ProjectObserver Observer
         {
             get { return _observer; }
             set { Update(ref _observer, value); }
@@ -313,7 +313,7 @@ namespace Core2D.Editor
             {
                 OnNewDocument();
             }
-            else if (item is ShapeEditor)
+            else if (item is ProjectEditor)
             {
                 OnNewProject();
             }
@@ -1022,7 +1022,7 @@ namespace Core2D.Editor
                 _project?.SetCurrentDocument(selected);
                 _project?.SetCurrentContainer(selected?.Pages.FirstOrDefault());
             }
-            else if (item is ShapeEditor || item == null)
+            else if (item is ProjectEditor || item == null)
             {
                 OnCut();
             }
@@ -1046,7 +1046,7 @@ namespace Core2D.Editor
                 _pageToCopy = default(XPage);
                 _documentToCopy = document;
             }
-            else if (item is ShapeEditor || item == null)
+            else if (item is ProjectEditor || item == null)
             {
                 OnCopy();
             }
@@ -1092,7 +1092,7 @@ namespace Core2D.Editor
                     _project.SetCurrentContainer(clone?.Pages.FirstOrDefault());
                 }
             }
-            else if (item is ShapeEditor || item == null)
+            else if (item is ProjectEditor || item == null)
             {
                 OnPaste();
             }
@@ -1127,7 +1127,7 @@ namespace Core2D.Editor
                 _project?.SetCurrentDocument(selected);
                 _project?.SetCurrentContainer(selected?.Pages.FirstOrDefault());
             }
-            else if (item is ShapeEditor || item == null)
+            else if (item is ProjectEditor || item == null)
             {
                 DeleteSelected();
             }
@@ -1944,7 +1944,7 @@ namespace Core2D.Editor
         }
 
         /// <summary>
-        /// Initialize default <see cref="ShapeEditor"/> tools.
+        /// Initialize default <see cref="ProjectEditor"/> tools.
         /// </summary>
         public void DefaultTools()
         {
@@ -1996,7 +1996,7 @@ namespace Core2D.Editor
                 Project.History = new StackHistory();
                 ProjectPath = path;
                 IsProjectDirty = false;
-                Observer = new Observer(this);
+                Observer = new ProjectObserver(this);
             }
         }
 

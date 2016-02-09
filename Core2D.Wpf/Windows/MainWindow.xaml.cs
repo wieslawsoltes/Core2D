@@ -35,7 +35,7 @@ namespace Core2D.Wpf.Windows
         /// Initializes the mouse events.
         /// </summary>
         /// <param name="editor">The editor instance.</param>
-        public void InitializeMouse(ShapeEditor editor)
+        public void InitializeMouse(ProjectEditor editor)
         {
             panAndZoomGrid.PreviewMouseLeftButtonDown +=
                 (sender, e) =>
@@ -97,7 +97,7 @@ namespace Core2D.Wpf.Windows
         /// Initializes the zoom border control.
         /// </summary>
         /// <param name="editor">The editor instance.</param>
-        public void InitializeZoom(ShapeEditor editor)
+        public void InitializeZoom(ProjectEditor editor)
         {
             border.InvalidateChild =
                 (z, x, y) =>
@@ -163,7 +163,7 @@ namespace Core2D.Wpf.Windows
         /// Initializes canvas control drag and drop handler.
         /// </summary>
         /// <param name="editor">The editor instance.</param>
-        public void InitializeDrop(ShapeEditor editor)
+        public void InitializeDrop(ProjectEditor editor)
         {
             panAndZoomGrid.AllowDrop = true;
 
@@ -371,7 +371,7 @@ namespace Core2D.Wpf.Windows
         /// Auto load docking manager layout.
         /// </summary>
         /// <param name="editor">The editor instance.</param>
-        public void AutoLoadLayout(ShapeEditor editor)
+        public void AutoLoadLayout(ProjectEditor editor)
         {
             try
             {
@@ -387,7 +387,7 @@ namespace Core2D.Wpf.Windows
         /// Auto save docking manager layout.
         /// </summary>
         /// <param name="editor">The editor instance.</param>
-        public void AutoSaveLayout(ShapeEditor editor)
+        public void AutoSaveLayout(ProjectEditor editor)
         {
             try
             {
@@ -404,7 +404,7 @@ namespace Core2D.Wpf.Windows
         /// </summary>
         public void OnLoadLayout()
         {
-            var editor = DataContext as ShapeEditor;
+            var editor = DataContext as ProjectEditor;
             if (editor == null)
                 return;
 
@@ -433,7 +433,7 @@ namespace Core2D.Wpf.Windows
         /// </summary>
         public void OnSaveLayout()
         {
-            var editor = DataContext as ShapeEditor;
+            var editor = DataContext as ProjectEditor;
             if (editor == null)
                 return;
 
@@ -462,7 +462,7 @@ namespace Core2D.Wpf.Windows
         /// </summary>
         public void OnResetLayout()
         {
-            var editor = DataContext as ShapeEditor;
+            var editor = DataContext as ProjectEditor;
             if (editor == null)
                 return;
 

@@ -27,7 +27,7 @@ namespace Core2D.Wpf.Controls.Custom.Lists
         /// <param name="array">The updated immutable array.</param>
         protected override void UpdateDataContext(ImmutableArray<XTemplate> array)
         {
-            var editor = (ShapeEditor)this.Tag;
+            var editor = (ProjectEditor)this.Tag;
 
             var project = editor.Project;
 

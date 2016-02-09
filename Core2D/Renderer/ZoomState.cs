@@ -10,7 +10,7 @@ namespace Core2D.Renderer
     /// </summary>
     public sealed class ZoomState
     {
-        private ShapeEditor _editor;
+        private ProjectEditor _editor;
 
         /// <summary>
         /// The minimum zoom value that can be set.
@@ -70,8 +70,8 @@ namespace Core2D.Renderer
         /// <summary>
         /// Initialize new instance of <see cref="ZoomState"/> class.
         /// </summary>
-        /// <param name="editor">The current <see cref="ShapeEditor"/> object.</param>
-        public ZoomState(ShapeEditor editor)
+        /// <param name="editor">The current <see cref="ProjectEditor"/> object.</param>
+        public ZoomState(ProjectEditor editor)
         {
             _editor = editor;
         }
