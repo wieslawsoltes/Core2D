@@ -4,8 +4,8 @@ using Xunit;
 
 namespace Core2D.UnitTests
 {
-    public class ObserverTests
+    public class ProjectObserverTests
     {
-        // TODO: Write ObserverTests tests.
+        // TODO: Write ProjectObserverTests tests.
     }
 }
