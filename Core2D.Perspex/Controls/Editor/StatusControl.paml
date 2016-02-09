@@ -25,14 +25,8 @@
             </TextBlock>
         </StackPanel>
         <WrapPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Margin="2">
-            <DropDown Classes="tool" 
-                      Width="110" 
-                      Items="{Static Editor:Enums.ToolValues}" 
-                      SelectedItem="{Binding Path=CurrentTool, Mode=TwoWay}"/>
-            <DropDown Classes="tool"
-                      Width="110"
-                      Items="{Static Editor:Enums.PathToolValues}"
-                      SelectedItem="{Binding Path=CurrentPathTool, Mode=TwoWay}">
+            <DropDown Classes="tool" Width="110" Items="{Static Editor:Enums.ToolValues}" SelectedItem="{Binding Path=CurrentTool, Mode=TwoWay}"/>
+            <DropDown Classes="tool" Width="110" Items="{Static Editor:Enums.PathToolValues}" SelectedItem="{Binding Path=CurrentPathTool, Mode=TwoWay}">
                 <DropDown.IsVisible>
                     <MultiBinding Mode="OneWay" Converter="{Static converters:ObjectEqualityMultiConverter.Instance}">
                         <Binding Path="CurrentTool"/>
