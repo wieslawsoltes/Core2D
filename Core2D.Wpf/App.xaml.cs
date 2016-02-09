@@ -10,14 +10,23 @@ using Core2D.Renderer;
 using Core2D.Shape;
 using Core2D.Shapes;
 using Core2D.Style;
-using Dependencies;
+using FileWriter.Dxf;
+using FileWriter.Emf;
+using FileWriter.Pdf_wpf;
+using Log.Trace;
 using Microsoft.Win32;
+using Renderer.Wpf;
+using Serializer.Newtonsoft;
+using Serializer.ProtoBuf;
+using Serializer.Xaml;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
+using TextFieldReader.CsvHelper;
+using TextFieldWriter.CsvHelper;
 
 namespace Core2D.Wpf
 {

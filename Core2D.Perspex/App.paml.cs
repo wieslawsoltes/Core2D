@@ -13,7 +13,9 @@ using Core2D.Renderer;
 using Core2D.Shape;
 using Core2D.Shapes;
 using Core2D.Style;
-using Dependencies;
+using FileWriter.Dxf;
+using FileWriter.Pdf_core;
+using Log.Trace;
 using Perspex;
 using Perspex.Controls;
 using Perspex.Diagnostics;
@@ -27,11 +29,17 @@ using Perspex.Skia;
 using Perspex.Gtk;
 using Perspex.Skia;
 #endif
+using Renderer.Perspex;
+using Serializer.Newtonsoft;
+using Serializer.ProtoBuf;
+using Serializer.Xaml;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using TextFieldReader.CsvHelper;
+using TextFieldWriter.CsvHelper;
 
 namespace Core2D.Perspex
 {
