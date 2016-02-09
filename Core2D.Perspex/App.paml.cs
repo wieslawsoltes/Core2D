@@ -2,11 +2,18 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 //#define SKIA_WIN
 //#define SKIA_GTK
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
+using Core2D.Data.Database;
+using Core2D.Editor;
+using Core2D.Editor.Designer;
+using Core2D.Editor.Factories;
+using Core2D.Editor.Input;
+using Core2D.Interfaces;
+using Core2D.Project;
+using Core2D.Renderer;
+using Core2D.Shape;
+using Core2D.Shapes;
+using Core2D.Style;
+using Dependencies;
 using Perspex;
 using Perspex.Controls;
 using Perspex.Diagnostics;
@@ -20,7 +27,11 @@ using Perspex.Skia;
 using Perspex.Gtk;
 using Perspex.Skia;
 #endif
-using Dependencies;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Threading.Tasks;
 
 namespace Core2D.Perspex
 {
@@ -29,7 +40,7 @@ namespace Core2D.Perspex
     /// </summary>
     public class App : Application
     {
-        private Editor _editor;
+        private ShapeEditor _editor;
         private Windows.MainWindow _mainWindow;
         private string _recentFileName = "Core2D.recent";
         private string _logFileName = "Core2D.log";
@@ -187,11 +198,11 @@ namespace Core2D.Perspex
         /// <param name="log">The log instance.</param>
         public void InitializeEditor(ILog log)
         {
-            _editor = new Editor()
+            _editor = new ShapeEditor()
             {
                 CurrentTool = Tool.Selection,
                 CurrentPathTool = PathTool.Line,
-                Renderers = new Renderer[] { new PerspexRenderer() },
+                Renderers = new ShapeRenderer[] { new PerspexRenderer() },
                 ProjectFactory = new ProjectFactory(),
                 TextClipboard = new TextClipboard(),
                 ProtoBufSerializer = new ProtoBufStreamSerializer(),
@@ -223,10 +234,10 @@ namespace Core2D.Perspex
         }
 
         /// <summary>
-        /// Initialize platform specific commands used by <see cref="Editor"/>.
+        /// Initialize platform specific commands used by <see cref="ShapeEditor"/>.
         /// </summary>
         /// <param name="editor">The editor instance.</param>
-        private void InitializeCommands(Editor editor)
+        private void InitializeCommands(ShapeEditor editor)
         {
             Commands.OpenCommand =
                 Command<string>.Create(
@@ -264,22 +275,22 @@ namespace Core2D.Perspex
                     (project) => editor.IsEditMode());
 
             Commands.ExportDataCommand =
-                Command<Database>.Create(
+                Command<XDatabase>.Create(
                     async (db) => await OnExportData(),
                     (db) => editor.IsEditMode());
 
             Commands.UpdateDataCommand =
-                Command<Database>.Create(
+                Command<XDatabase>.Create(
                     async (db) => await OnUpdateData(),
                     (db) => editor.IsEditMode());
 
             Commands.ImportStyleCommand =
-                Command<Library<ShapeStyle>>.Create(
+                Command<XLibrary<ShapeStyle>>.Create(
                     async (item) => await OnImportObject(item, CoreType.Style),
                     (item) => editor.IsEditMode());
 
             Commands.ImportStylesCommand =
-                Command<Library<ShapeStyle>>.Create(
+                Command<XLibrary<ShapeStyle>>.Create(
                     async (item) => await OnImportObject(item, CoreType.Styles),
                     (item) => editor.IsEditMode());
 
@@ -294,12 +305,12 @@ namespace Core2D.Perspex
                     (item) => editor.IsEditMode());
 
             Commands.ImportGroupCommand =
-                Command<Library<XGroup>>.Create(
+                Command<XLibrary<XGroup>>.Create(
                     async (item) => await OnImportObject(item, CoreType.Group),
                     (item) => editor.IsEditMode());
 
             Commands.ImportGroupsCommand =
-                Command<Library<XGroup>>.Create(
+                Command<XLibrary<XGroup>>.Create(
                     async (item) => await OnImportObject(item, CoreType.Groups),
                     (item) => editor.IsEditMode());
 
@@ -329,17 +340,17 @@ namespace Core2D.Perspex
                     (item) => editor.IsEditMode());
 
             Commands.ExportStylesCommand =
-                Command<Library<ShapeStyle>>.Create(
+                Command<XLibrary<ShapeStyle>>.Create(
                     async (item) => await OnExportObject(item, CoreType.Styles),
                     (item) => editor.IsEditMode());
 
             Commands.ExportStyleLibraryCommand =
-                Command<Library<ShapeStyle>>.Create(
+                Command<XLibrary<ShapeStyle>>.Create(
                     async (item) => await OnExportObject(item, CoreType.StyleLibrary),
                     (item) => editor.IsEditMode());
 
             Commands.ExportStyleLibrariesCommand =
-                Command<IEnumerable<Library<ShapeStyle>>>.Create(
+                Command<IEnumerable<XLibrary<ShapeStyle>>>.Create(
                     async (item) => await OnExportObject(item, CoreType.StyleLibraries),
                     (item) => editor.IsEditMode());
 
@@ -349,27 +360,27 @@ namespace Core2D.Perspex
                     (item) => editor.IsEditMode());
 
             Commands.ExportGroupsCommand =
-                Command<Library<XGroup>>.Create(
+                Command<XLibrary<XGroup>>.Create(
                     async (item) => await OnExportObject(item, CoreType.Groups),
                     (item) => editor.IsEditMode());
 
             Commands.ExportGroupLibraryCommand =
-                Command<Library<XGroup>>.Create(
+                Command<XLibrary<XGroup>>.Create(
                     async (item) => await OnExportObject(item, CoreType.GroupLibrary),
                     (item) => editor.IsEditMode());
 
             Commands.ExportGroupLibrariesCommand =
-                Command<IEnumerable<Library<XGroup>>>.Create(
+                Command<IEnumerable<XLibrary<XGroup>>>.Create(
                     async (item) => await OnExportObject(item, CoreType.GroupLibraries),
                     (item) => editor.IsEditMode());
 
             Commands.ExportTemplateCommand =
-                Command<Template>.Create(
+                Command<XTemplate>.Create(
                     async (item) => await OnExportObject(item, CoreType.Template),
                     (item) => editor.IsEditMode());
 
             Commands.ExportTemplatesCommand =
-                Command<IEnumerable<Template>>.Create(
+                Command<IEnumerable<XTemplate>>.Create(
                     async (item) => await OnExportObject(item, CoreType.Templates),
                     (item) => editor.IsEditMode());
 
@@ -564,21 +575,21 @@ namespace Core2D.Perspex
             {
                 string name = string.Empty;
 
-                if (item is Container)
+                if (item is XContainer)
                 {
-                    name = (item as Container).Name;
+                    name = (item as XContainer).Name;
                 }
-                else if (item is Document)
+                else if (item is XDocument)
                 {
-                    name = (item as Document).Name;
+                    name = (item as XDocument).Name;
                 }
-                else if (item is Project)
+                else if (item is XProject)
                 {
-                    name = (item as Project).Name;
+                    name = (item as XProject).Name;
                 }
-                else if (item is Editor)
+                else if (item is ShapeEditor)
                 {
-                    var editor = (item as Editor);
+                    var editor = (item as ShapeEditor);
                     if (editor?.Project == null)
                         return;
 
@@ -817,12 +828,12 @@ namespace Core2D.Perspex
                         case CoreType.Styles:
                             name = "Styles";
                             extension = "styles";
-                            initial = (item as Library<ShapeStyle>).Name;
+                            initial = (item as XLibrary<ShapeStyle>).Name;
                             break;
                         case CoreType.StyleLibrary:
                             name = "StyleLibrary";
                             extension = "stylelibrary";
-                            initial = (item as Library<ShapeStyle>).Name;
+                            initial = (item as XLibrary<ShapeStyle>).Name;
                             break;
                         case CoreType.StyleLibraries:
                             name = "StyleLibraries";
@@ -837,12 +848,12 @@ namespace Core2D.Perspex
                         case CoreType.Groups:
                             name = "Groups";
                             extension = "groups";
-                            initial = (item as Library<XGroup>).Name;
+                            initial = (item as XLibrary<XGroup>).Name;
                             break;
                         case CoreType.GroupLibrary:
                             name = "GroupLibrary";
                             extension = "grouplibrary";
-                            initial = (item as Library<XGroup>).Name;
+                            initial = (item as XLibrary<XGroup>).Name;
                             break;
                         case CoreType.GroupLibraries:
                             name = "GroupLibraries";
@@ -852,7 +863,7 @@ namespace Core2D.Perspex
                         case CoreType.Template:
                             name = "Template";
                             extension = "template";
-                            initial = (item as Template).Name;
+                            initial = (item as XTemplate).Name;
                             break;
                         case CoreType.Templates:
                             name = "Templates";
