@@ -612,7 +612,7 @@ namespace Core2D.Wpf
         }
 
         /// <summary>
-        ///  Export records to external file.
+        /// Export records to external file.
         /// </summary>
         private void OnExportData()
         {

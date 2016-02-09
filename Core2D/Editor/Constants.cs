@@ -79,7 +79,7 @@ namespace Core2D.Editor
         public const string ImportedStyleLibraryName = "Imported";
 
         /// <summary>
-        ///  Default imported <see cref="XDatabase"/> name.
+        /// Default imported <see cref="XDatabase"/> name.
         /// </summary>
         public const string ImportedDatabaseName = "Imported";
 

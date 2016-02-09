@@ -40,7 +40,7 @@ namespace Core2D.Editor.Factories
         XLine Line(XPoint start, XPoint end, bool isStroked);
 
         /// <summary>
-        ///  Creates a new instance of the <see cref="XArc"/> class.
+        /// Creates a new instance of the <see cref="XArc"/> class.
         /// </summary>
         /// <param name="x1">The X coordinate of <see cref="XArc.Point1"/> point.</param>
         /// <param name="y1">The Y coordinate of <see cref="XArc.Point1"/> point.</param>

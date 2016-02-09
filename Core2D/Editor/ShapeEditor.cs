@@ -1375,7 +1375,7 @@ namespace Core2D.Editor
         }
 
         /// <summary>
-        ///  Set current tool to <see cref="Tool.Line"/> or current path tool to <see cref="PathTool.Line"/>.
+        /// Set current tool to <see cref="Tool.Line"/> or current path tool to <see cref="PathTool.Line"/>.
         /// </summary>
         public void OnToolLine()
         {
@@ -3371,7 +3371,7 @@ namespace Core2D.Editor
         }
 
         /// <summary>
-        ///  Try to connect lines to connectors.
+        /// Try to connect lines to connectors.
         /// </summary>
         /// <param name="lines">The lines to connect.</param>
         /// <param name="connectors">The connectors array.</param>

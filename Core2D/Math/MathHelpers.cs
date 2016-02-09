@@ -148,7 +148,7 @@ namespace Core2D.Math
         }
 
         /// <summary>
-        ///  Calculate coordinates of nearest point on line to the specified point.
+        /// Calculate coordinates of nearest point on line to the specified point.
         /// </summary>
         /// <param name="a">The line segment start point.</param>
         /// <param name="b">The line segment start end.</param>

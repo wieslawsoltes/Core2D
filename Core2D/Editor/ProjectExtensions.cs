@@ -381,7 +381,7 @@ namespace Core2D.Editor
         /// <param name="project">The project instance.</param>
         /// <param name="layer">The layer instance.</param>
         /// <param name="shape">The shape instance.</param>
-        /// /// <param name="index">The shape index.</param>
+        /// <param name="index">The shape index.</param>
         public static void ReplaceShape(this XProject project, XLayer layer, BaseShape shape, int index)
         {
             if (layer != null && shape != null && index >= 0)
