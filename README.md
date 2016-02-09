@@ -87,7 +87,7 @@ For building Core2D mirror repository is used for [.net dxf Reader-Writer](https
 ## Resources
 
 * [Project website and API Reference.](http://core2d.github.io/)
-* [GitHub sourcer code respository.](https://github.com/Core2D/Core2D)
+* [GitHub source code repository.](https://github.com/Core2D/Core2D)
 
 ## License
 
