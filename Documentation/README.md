@@ -18,4 +18,4 @@ build.cmd
 serve.cmd
 ```
 
-And you can view the generated website on http://localhost:8080.
+And you can view the generated website in your browser `http://localhost:8080`.
