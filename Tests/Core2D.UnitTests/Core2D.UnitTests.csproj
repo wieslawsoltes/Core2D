@@ -63,6 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Editor\Bounds\RectangleBoundsTests.cs" />
     <Compile Include="ObservableObjectTests.cs" />
     <Compile Include="ObservableResourceTests.cs" />
     <Compile Include="Data\Database\XColumnTests.cs" />

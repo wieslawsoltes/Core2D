@@ -36,6 +36,7 @@
     <DocumentationFile>bin\Release\Core2D.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Editor\Bounds\RectangleBounds.cs" />
     <Compile Include="ObservableObject.cs" />
     <Compile Include="ObservableResource.cs" />
     <Compile Include="Data\Database\XColumn.cs" />

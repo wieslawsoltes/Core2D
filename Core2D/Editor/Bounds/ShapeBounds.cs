@@ -7,7 +7,6 @@ using Core2D.Shapes;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-using static System.Math;
 
 namespace Core2D.Editor.Bounds
 {
@@ -16,98 +15,6 @@ namespace Core2D.Editor.Bounds
     /// </summary>
     public static class ShapeBounds
     {
-        /// <summary>
-        /// Get the bounding rectangle for <see cref="XPoint"/> shape.
-        /// </summary>
-        /// <param name="point"></param>
-        /// <param name="threshold"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <returns></returns>
-        public static Rect2 GetPointBounds(XPoint point, double threshold, double dx, double dy)
-        {
-            double radius = threshold / 2.0;
-            return new Rect2(
-                point.X - radius + dx,
-                point.Y - radius + dy,
-                threshold,
-                threshold);
-        }
-
-        /// <summary>
-        /// Get the bounding rectangle for <see cref="XRectangle"/> shape.
-        /// </summary>
-        /// <param name="rectangle"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <returns></returns>
-        public static Rect2 GetRectangleBounds(XRectangle rectangle, double dx, double dy)
-        {
-            return Rect2.Create(rectangle.TopLeft, rectangle.BottomRight, dx, dy);
-        }
-
-        /// <summary>
-        /// Get the bounding rectangle for <see cref="XEllipse"/> shape.
-        /// </summary>
-        /// <param name="ellipse"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <returns></returns>
-        public static Rect2 GetEllipseBounds(XEllipse ellipse, double dx, double dy)
-        {
-            return Rect2.Create(ellipse.TopLeft, ellipse.BottomRight, dx, dy);
-        }
-
-        /// <summary>
-        /// Get the bounding rectangle for <see cref="XArc"/> shape.
-        /// </summary>
-        /// <param name="arc"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <returns></returns>
-        public static Rect2 GetArcBounds(XArc arc, double dx, double dy)
-        {
-            double x1 = arc.Point1.X + dx;
-            double y1 = arc.Point1.Y + dy;
-            double x2 = arc.Point2.X + dx;
-            double y2 = arc.Point2.Y + dy;
-
-            double x0 = (x1 + x2) / 2.0;
-            double y0 = (y1 + y2) / 2.0;
-
-            double r = Sqrt((x1 - x0) * (x1 - x0) + (y1 - y0) * (y1 - y0));
-            double x = x0 - r;
-            double y = y0 - r;
-            double width = 2.0 * r;
-            double height = 2.0 * r;
-
-            return new Rect2(x, y, width, height);
-        }
-
-        /// <summary>
-        /// Get the bounding rectangle for <see cref="XText"/> shape.
-        /// </summary>
-        /// <param name="text"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <returns></returns>
-        public static Rect2 GetTextBounds(XText text, double dx, double dy)
-        {
-            return Rect2.Create(text.TopLeft, text.BottomRight, dx, dy);
-        }
-
-        /// <summary>
-        /// Get the bounding rectangle for <see cref="XImage"/> shape.
-        /// </summary>
-        /// <param name="image"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <returns></returns>
-        public static Rect2 GetImageBounds(XImage image, double dx, double dy)
-        {
-            return Rect2.Create(image.TopLeft, image.BottomRight, dx, dy);
-        }
-
         /// <summary>
         /// Hit test point in <see cref="XLine"/> shape bounds.
         /// </summary>
@@ -187,7 +94,7 @@ namespace Core2D.Editor.Bounds
 
         private static BaseShape HitTestPoint(BaseShape shape, Vector2 p, double threshold, double dx, double dy)
         {
-            if (GetPointBounds(shape as XPoint, threshold, dx, dy).Contains(p))
+            if (RectangleBounds.GetPointBounds(shape as XPoint, threshold, dx, dy).Contains(p))
             {
                 return shape;
             }
@@ -198,12 +105,12 @@ namespace Core2D.Editor.Bounds
         {
             var line = shape as XLine;
 
-            if (GetPointBounds(line.Start, threshold, dx, dy).Contains(p))
+            if (RectangleBounds.GetPointBounds(line.Start, threshold, dx, dy).Contains(p))
             {
                 return line.Start;
             }
 
-            if (GetPointBounds(line.End, threshold, dx, dy).Contains(p))
+            if (RectangleBounds.GetPointBounds(line.End, threshold, dx, dy).Contains(p))
             {
                 return line.End;
             }
@@ -220,17 +127,17 @@ namespace Core2D.Editor.Bounds
         {
             var rectangle = shape as XRectangle;
 
-            if (GetPointBounds(rectangle.TopLeft, threshold, dx, dy).Contains(p))
+            if (RectangleBounds.GetPointBounds(rectangle.TopLeft, threshold, dx, dy).Contains(p))
             {
                 return rectangle.TopLeft;
             }
 
-            if (GetPointBounds(rectangle.BottomRight, threshold, dx, dy).Contains(p))
+            if (RectangleBounds.GetPointBounds(rectangle.BottomRight, threshold, dx, dy).Contains(p))
             {
                 return rectangle.BottomRight;
             }
 
-            if (GetRectangleBounds(rectangle, dx, dy).Contains(p))
+            if (RectangleBounds.GetRectangleBounds(rectangle, dx, dy).Contains(p))
             {
                 return rectangle;
             }
@@ -241,17 +148,17 @@ namespace Core2D.Editor.Bounds
         {
             var ellipse = shape as XEllipse;
 
-            if (GetPointBounds(ellipse.TopLeft, threshold, dx, dy).Contains(p))
+            if (RectangleBounds.GetPointBounds(ellipse.TopLeft, threshold, dx, dy).Contains(p))
             {
                 return ellipse.TopLeft;
             }
 
-            if (GetPointBounds(ellipse.BottomRight, threshold, dx, dy).Contains(p))
+            if (RectangleBounds.GetPointBounds(ellipse.BottomRight, threshold, dx, dy).Contains(p))
             {
                 return ellipse.BottomRight;
             }
 
-            if (GetEllipseBounds(ellipse, dx, dy).Contains(p))
+            if (RectangleBounds.GetEllipseBounds(ellipse, dx, dy).Contains(p))
             {
                 return ellipse;
             }
@@ -262,27 +169,27 @@ namespace Core2D.Editor.Bounds
         {
             var arc = shape as XArc;
 
-            if (GetPointBounds(arc.Point1, threshold, dx, dy).Contains(p))
+            if (RectangleBounds.GetPointBounds(arc.Point1, threshold, dx, dy).Contains(p))
             {
                 return arc.Point1;
             }
 
-            if (GetPointBounds(arc.Point2, threshold, dx, dy).Contains(p))
+            if (RectangleBounds.GetPointBounds(arc.Point2, threshold, dx, dy).Contains(p))
             {
                 return arc.Point2;
             }
 
-            if (GetPointBounds(arc.Point3, threshold, dx, dy).Contains(p))
+            if (RectangleBounds.GetPointBounds(arc.Point3, threshold, dx, dy).Contains(p))
             {
                 return arc.Point3;
             }
 
-            if (GetPointBounds(arc.Point4, threshold, dx, dy).Contains(p))
+            if (RectangleBounds.GetPointBounds(arc.Point4, threshold, dx, dy).Contains(p))
             {
                 return arc.Point4;
             }
 
-            if (GetArcBounds(arc, dx, dy).Contains(p))
+            if (RectangleBounds.GetArcBounds(arc, dx, dy).Contains(p))
             {
                 return arc;
             }
@@ -293,22 +200,22 @@ namespace Core2D.Editor.Bounds
         {
             var cubicBezier = shape as XCubicBezier;
 
-            if (GetPointBounds(cubicBezier.Point1, threshold, dx, dy).Contains(p))
+            if (RectangleBounds.GetPointBounds(cubicBezier.Point1, threshold, dx, dy).Contains(p))
             {
                 return cubicBezier.Point1;
             }
 
-            if (GetPointBounds(cubicBezier.Point2, threshold, dx, dy).Contains(p))
+            if (RectangleBounds.GetPointBounds(cubicBezier.Point2, threshold, dx, dy).Contains(p))
             {
                 return cubicBezier.Point2;
             }
 
-            if (GetPointBounds(cubicBezier.Point3, threshold, dx, dy).Contains(p))
+            if (RectangleBounds.GetPointBounds(cubicBezier.Point3, threshold, dx, dy).Contains(p))
             {
                 return cubicBezier.Point3;
             }
 
-            if (GetPointBounds(cubicBezier.Point4, threshold, dx, dy).Contains(p))
+            if (RectangleBounds.GetPointBounds(cubicBezier.Point4, threshold, dx, dy).Contains(p))
             {
                 return cubicBezier.Point4;
             }
@@ -324,17 +231,17 @@ namespace Core2D.Editor.Bounds
         {
             var quadraticBezier = shape as XQuadraticBezier;
 
-            if (GetPointBounds(quadraticBezier.Point1, threshold, dx, dy).Contains(p))
+            if (RectangleBounds.GetPointBounds(quadraticBezier.Point1, threshold, dx, dy).Contains(p))
             {
                 return quadraticBezier.Point1;
             }
 
-            if (GetPointBounds(quadraticBezier.Point2, threshold, dx, dy).Contains(p))
+            if (RectangleBounds.GetPointBounds(quadraticBezier.Point2, threshold, dx, dy).Contains(p))
             {
                 return quadraticBezier.Point2;
             }
 
-            if (GetPointBounds(quadraticBezier.Point3, threshold, dx, dy).Contains(p))
+            if (RectangleBounds.GetPointBounds(quadraticBezier.Point3, threshold, dx, dy).Contains(p))
             {
                 return quadraticBezier.Point3;
             }
@@ -350,17 +257,17 @@ namespace Core2D.Editor.Bounds
         {
             var text = shape as XText;
 
-            if (GetPointBounds(text.TopLeft, threshold, dx, dy).Contains(p))
+            if (RectangleBounds.GetPointBounds(text.TopLeft, threshold, dx, dy).Contains(p))
             {
                 return text.TopLeft;
             }
 
-            if (GetPointBounds(text.BottomRight, threshold, dx, dy).Contains(p))
+            if (RectangleBounds.GetPointBounds(text.BottomRight, threshold, dx, dy).Contains(p))
             {
                 return text.BottomRight;
             }
 
-            if (GetTextBounds(text, dx, dy).Contains(p))
+            if (RectangleBounds.GetTextBounds(text, dx, dy).Contains(p))
             {
                 return text;
             }
@@ -371,17 +278,17 @@ namespace Core2D.Editor.Bounds
         {
             var image = shape as XImage;
 
-            if (GetPointBounds(image.TopLeft, threshold, dx, dy).Contains(p))
+            if (RectangleBounds.GetPointBounds(image.TopLeft, threshold, dx, dy).Contains(p))
             {
                 return image.TopLeft;
             }
 
-            if (GetPointBounds(image.BottomRight, threshold, dx, dy).Contains(p))
+            if (RectangleBounds.GetPointBounds(image.BottomRight, threshold, dx, dy).Contains(p))
             {
                 return image.BottomRight;
             }
 
-            if (GetImageBounds(image, dx, dy).Contains(p))
+            if (RectangleBounds.GetImageBounds(image, dx, dy).Contains(p))
             {
                 return image;
             }
@@ -397,7 +304,7 @@ namespace Core2D.Editor.Bounds
                 var points = path.GetPoints().ToImmutableArray();
                 foreach (var point in points)
                 {
-                    if (GetPointBounds(point, threshold, dx, dy).Contains(p))
+                    if (RectangleBounds.GetPointBounds(point, threshold, dx, dy).Contains(p))
                     {
                         return point;
                     }
@@ -417,7 +324,7 @@ namespace Core2D.Editor.Bounds
 
             foreach (var connector in group.Connectors.Reverse())
             {
-                if (GetPointBounds(connector, threshold, dx, dy).Contains(p))
+                if (RectangleBounds.GetPointBounds(connector, threshold, dx, dy).Contains(p))
                 {
                     return connector;
                 }
@@ -535,7 +442,7 @@ namespace Core2D.Editor.Bounds
 
         private static bool HitTestPoint(BaseShape shape, Rect2 rect, ISet<BaseShape> selected, double threshold, double dx, double dy)
         {
-            if (GetPointBounds(shape as XPoint, threshold, dx, dy).IntersectsWith(rect))
+            if (RectangleBounds.GetPointBounds(shape as XPoint, threshold, dx, dy).IntersectsWith(rect))
             {
                 if (selected != null)
                 {
@@ -552,8 +459,8 @@ namespace Core2D.Editor.Bounds
         private static bool HitTestLine(BaseShape shape, Rect2 rect, ISet<BaseShape> selected, double threshold, double dx, double dy)
         {
             var line = shape as XLine;
-            if (GetPointBounds(line.Start, threshold, dx, dy).IntersectsWith(rect)
-                || GetPointBounds(line.End, threshold, dx, dy).IntersectsWith(rect)
+            if (RectangleBounds.GetPointBounds(line.Start, threshold, dx, dy).IntersectsWith(rect)
+                || RectangleBounds.GetPointBounds(line.End, threshold, dx, dy).IntersectsWith(rect)
                 || MathHelpers.LineIntersectsWithRect(rect, new Point2(line.Start.X, line.Start.Y), new Point2(line.End.X, line.End.Y)))
             {
                 if (selected != null)
@@ -571,7 +478,7 @@ namespace Core2D.Editor.Bounds
 
         private static bool HitTestEllipse(BaseShape shape, Rect2 rect, ISet<BaseShape> selected, double dx, double dy)
         {
-            if (GetEllipseBounds(shape as XEllipse, dx, dy).IntersectsWith(rect))
+            if (RectangleBounds.GetEllipseBounds(shape as XEllipse, dx, dy).IntersectsWith(rect))
             {
                 if (selected != null)
                 {
@@ -588,7 +495,7 @@ namespace Core2D.Editor.Bounds
 
         private static bool HitTestRectangle(BaseShape shape, Rect2 rect, ISet<BaseShape> selected, double dx, double dy)
         {
-            if (GetRectangleBounds(shape as XRectangle, dx, dy).IntersectsWith(rect))
+            if (RectangleBounds.GetRectangleBounds(shape as XRectangle, dx, dy).IntersectsWith(rect))
             {
                 if (selected != null)
                 {
@@ -605,7 +512,7 @@ namespace Core2D.Editor.Bounds
 
         private static bool HitTestArc(BaseShape shape, Rect2 rect, ISet<BaseShape> selected, double dx, double dy)
         {
-            if (GetArcBounds(shape as XArc, dx, dy).IntersectsWith(rect))
+            if (RectangleBounds.GetArcBounds(shape as XArc, dx, dy).IntersectsWith(rect))
             {
                 if (selected != null)
                 {
@@ -658,7 +565,7 @@ namespace Core2D.Editor.Bounds
 
         private static bool HitTestText(BaseShape shape, Rect2 rect, ISet<BaseShape> selected, double dx, double dy)
         {
-            if (GetTextBounds(shape as XText, dx, dy).IntersectsWith(rect))
+            if (RectangleBounds.GetTextBounds(shape as XText, dx, dy).IntersectsWith(rect))
             {
                 if (selected != null)
                 {
@@ -675,7 +582,7 @@ namespace Core2D.Editor.Bounds
 
         private static bool HitTestImage(BaseShape shape, Rect2 rect, ISet<BaseShape> selected, double dx, double dy)
         {
-            if (GetImageBounds(shape as XImage, dx, dy).IntersectsWith(rect))
+            if (RectangleBounds.GetImageBounds(shape as XImage, dx, dy).IntersectsWith(rect))
             {
                 if (selected != null)
                 {

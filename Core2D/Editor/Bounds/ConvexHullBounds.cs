@@ -10,7 +10,7 @@ using System.Linq;
 namespace Core2D.Editor.Bounds
 {
     /// <summary>
-    /// 
+    /// Calculate shape bounds using convex hulls.
     /// </summary>
     public static class ConvexHullBounds
     {
