@@ -351,7 +351,7 @@ namespace Core2D.Editor.Bounds
         }
 
         /// <summary>
-        /// Hit test point in <see cref="BaseShape"/> shape bounds.
+        /// Hit test point in shape bounds.
         /// </summary>
         /// <param name="shape"></param>
         /// <param name="v"></param>
@@ -410,7 +410,7 @@ namespace Core2D.Editor.Bounds
         }
 
         /// <summary>
-        /// Hit test point in <see cref="BaseShape"/> shapes bounds.
+        /// Hit test point in shapes bounds.
         /// </summary>
         /// <param name="shapes"></param>
         /// <param name="v"></param>
@@ -433,15 +433,15 @@ namespace Core2D.Editor.Bounds
         }
 
         /// <summary>
-        /// Hit test point in <see cref="XLayer"/> shapes bounds.
+        /// Hit test point in shapes bounds.
         /// </summary>
-        /// <param name="layer"></param>
+        /// <param name="shapes"></param>
         /// <param name="v"></param>
         /// <param name="threshold"></param>
         /// <returns></returns>
-        public static BaseShape HitTest(XLayer layer, Vector2 v, double threshold)
+        public static BaseShape HitTest(IEnumerable<BaseShape> shapes, Vector2 v, double threshold)
         {
-            var result = HitTest(layer.Shapes.Reverse(), v, threshold, 0, 0);
+            var result = HitTest(shapes.Reverse(), v, threshold, 0, 0);
             if (result != null)
             {
                 return result;
@@ -759,7 +759,7 @@ namespace Core2D.Editor.Bounds
         }
 
         /// <summary>
-        /// Hit test rectangle in <see cref="XLayer"/> shapes bounds.
+        /// Hit test rectangle if intersects with any of the shape bounds.
         /// </summary>
         /// <param name="shape"></param>
         /// <param name="rect"></param>
@@ -820,7 +820,7 @@ namespace Core2D.Editor.Bounds
         }
 
         /// <summary>
-        /// Hit test rectangle if intersects with any <see cref="BaseShape"/> shapes bounds.
+        /// Hit test rectangle if intersects with any of the shape bounds.
         /// </summary>
         /// <param name="shapes"></param>
         /// <param name="rect"></param>
@@ -845,13 +845,13 @@ namespace Core2D.Editor.Bounds
         }
 
         /// <summary>
-        /// Hit test rectangle if intersects with any <see cref="XLayer"/> shapes bounds.
+        /// Hit test rectangle if intersects with any of the shape bounds.
         /// </summary>
-        /// <param name="layer"></param>
+        /// <param name="shapes"></param>
         /// <param name="rect"></param>
         /// <param name="threshold"></param>
         /// <returns></returns>
-        public static ImmutableHashSet<BaseShape> HitTest(XLayer layer, Rect2 rect, double threshold)
+        public static ImmutableHashSet<BaseShape> HitTest(IEnumerable<BaseShape> shapes, Rect2 rect, double threshold)
         {
             var selected = ImmutableHashSet.CreateBuilder<BaseShape>();
 
@@ -863,7 +863,7 @@ namespace Core2D.Editor.Bounds
                 new Vector2(rect.X, rect.Y + rect.Height)
             };
 
-            HitTest(layer.Shapes.Reverse(), rect, selection, selected, threshold, 0, 0);
+            HitTest(shapes.Reverse(), rect, selection, selected, threshold, 0, 0);
 
             return selected.ToImmutableHashSet();
         }
