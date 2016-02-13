@@ -138,7 +138,7 @@ namespace Core2D.Editor.Tools
                         if (_editor.Renderers[0].State.SelectedShape == null
                             && _editor.Renderers[0].State.SelectedShapes != null)
                         {
-                            var result = ShapeHitTest.HitTest(_editor.Project.CurrentContainer.CurrentLayer.Shapes, new Vector2(x, y), _editor.Project.Options.HitThreshold);
+                            var result = ShapeHitTestPoint.HitTest(_editor.Project.CurrentContainer.CurrentLayer.Shapes, new Vector2(x, y), _editor.Project.Options.HitThreshold);
                             if (result != null)
                             {
                                 _startX = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, _editor.Project.Options.SnapX) : x;

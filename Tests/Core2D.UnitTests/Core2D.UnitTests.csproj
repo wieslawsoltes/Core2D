@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="Editor\Bounds\LineBoundsTests.cs" />
     <Compile Include="Editor\Bounds\RectangleBoundsTests.cs" />
+    <Compile Include="Editor\Bounds\ShapeHitTestSelectionTests.cs" />
     <Compile Include="ObservableObjectTests.cs" />
     <Compile Include="ObservableResourceTests.cs" />
     <Compile Include="Data\Database\XColumnTests.cs" />
@@ -74,7 +75,7 @@
     <Compile Include="Data\Database\XRecordTests.cs" />
     <Compile Include="Data\Database\XValueTests.cs" />
     <Compile Include="Editor\Bounds\ConvexHullBoundsTests.cs" />
-    <Compile Include="Editor\Bounds\ShapeBoundsTests.cs" />
+    <Compile Include="Editor\Bounds\ShapeHitTestPointTests.cs" />
     <Compile Include="Editor\CommandsTests.cs" />
     <Compile Include="Editor\Designer\DesignerContextTests.cs" />
     <Compile Include="Editor\ProjectEditorTests.cs" />
