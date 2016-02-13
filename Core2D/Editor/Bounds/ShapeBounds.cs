@@ -313,7 +313,7 @@ namespace Core2D.Editor.Bounds
                 return cubicBezier.Point4;
             }
 
-            if (ConvexHullBounds.Contains(cubicBezier, p, dx, dy))
+            if (ConvexHullBounds.Contains(cubicBezier.GetPoints().ToImmutableArray(), p, dx, dy))
             {
                 return cubicBezier;
             }
@@ -339,7 +339,7 @@ namespace Core2D.Editor.Bounds
                 return quadraticBezier.Point3;
             }
 
-            if (ConvexHullBounds.Contains(quadraticBezier, p, dx, dy))
+            if (ConvexHullBounds.Contains(quadraticBezier.GetPoints().ToImmutableArray(), p, dx, dy))
             {
                 return quadraticBezier;
             }
@@ -622,7 +622,8 @@ namespace Core2D.Editor.Bounds
 
         private static bool HitTestCubicBezier(BaseShape shape, Vector2[] selection, ISet<BaseShape> selected, double dx, double dy)
         {
-            if (ConvexHullBounds.Overlap(selection, ConvexHullBounds.GetVertices(shape as XCubicBezier, dx, dy)))
+            var points = shape.GetPoints().ToImmutableArray();
+            if (ConvexHullBounds.Overlap(selection, points, dx, dy))
             {
                 if (selected != null)
                 {
@@ -639,7 +640,8 @@ namespace Core2D.Editor.Bounds
 
         private static bool HitTestQadraticBezier(BaseShape shape, Vector2[] selection, ISet<BaseShape> selected, double dx, double dy)
         {
-            if (ConvexHullBounds.Overlap(selection, ConvexHullBounds.GetVertices(shape as XQuadraticBezier, dx, dy)))
+            var points = shape.GetPoints().ToImmutableArray();
+            if (ConvexHullBounds.Overlap(selection, points, dx, dy))
             {
                 if (selected != null)
                 {
@@ -693,7 +695,7 @@ namespace Core2D.Editor.Bounds
             if ((shape as XPath).Geometry != null)
             {
                 var points = shape.GetPoints().ToImmutableArray();
-                if (ConvexHullBounds.Overlap(selection, ConvexHullBounds.GetVertices(points, dx, dy)))
+                if (ConvexHullBounds.Overlap(selection, points, dx, dy))
                 {
                     if (selected != null)
                     {
