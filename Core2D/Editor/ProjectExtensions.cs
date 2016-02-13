@@ -13,7 +13,7 @@ using System.Linq;
 namespace Core2D.Editor
 {
     /// <summary>
-    /// <see cref="Project"/> extension methods.
+    /// Project extension methods.
     /// </summary>
     public static class ProjectExtensions
     {
