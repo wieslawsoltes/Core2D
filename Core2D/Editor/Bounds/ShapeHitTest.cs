@@ -16,24 +16,6 @@ namespace Core2D.Editor.Bounds
     public static class ShapeHitTest
     {
         /// <summary>
-        /// Hit test point in <see cref="XLine"/> shape bounds.
-        /// </summary>
-        /// <param name="line"></param>
-        /// <param name="p"></param>
-        /// <param name="threshold"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <returns></returns>
-        public static bool HitTestLine(XLine line, Vector2 p, double threshold, double dx, double dy)
-        {
-            var a = new Vector2(line.Start.X + dx, line.Start.Y + dy);
-            var b = new Vector2(line.End.X + dx, line.End.Y + dy);
-            var nearest = MathHelpers.NearestPointOnLine(a, b, p);
-            double distance = MathHelpers.Distance(p.X, p.Y, nearest.X, nearest.Y);
-            return distance < threshold;
-        }
-
-        /// <summary>
         /// Hit test point in <see cref="BaseShape"/> shape bounds.
         /// </summary>
         /// <param name="shape"></param>
@@ -92,7 +74,16 @@ namespace Core2D.Editor.Bounds
             return null;
         }
 
-        private static BaseShape HitTestPoint(BaseShape shape, Vector2 p, double threshold, double dx, double dy)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shape"></param>
+        /// <param name="p"></param>
+        /// <param name="threshold"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
+        /// <returns></returns>
+        public static BaseShape HitTestPoint(BaseShape shape, Vector2 p, double threshold, double dx, double dy)
         {
             if (RectangleBounds.GetPointBounds(shape as XPoint, threshold, dx, dy).Contains(p))
             {
@@ -102,7 +93,34 @@ namespace Core2D.Editor.Bounds
             return null;
         }
 
-        private static BaseShape HitTestLine(BaseShape shape, Vector2 p, double threshold, double dx, double dy)
+        /// <summary>
+        /// Hit test point in <see cref="XLine"/> shape bounds.
+        /// </summary>
+        /// <param name="line"></param>
+        /// <param name="p"></param>
+        /// <param name="threshold"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
+        /// <returns></returns>
+        public static bool HitTestLine(XLine line, Vector2 p, double threshold, double dx, double dy)
+        {
+            var a = new Vector2(line.Start.X + dx, line.Start.Y + dy);
+            var b = new Vector2(line.End.X + dx, line.End.Y + dy);
+            var nearest = MathHelpers.NearestPointOnLine(a, b, p);
+            double distance = MathHelpers.Distance(p.X, p.Y, nearest.X, nearest.Y);
+            return distance < threshold;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shape"></param>
+        /// <param name="p"></param>
+        /// <param name="threshold"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
+        /// <returns></returns>
+        public static BaseShape HitTestLine(BaseShape shape, Vector2 p, double threshold, double dx, double dy)
         {
             var line = shape as XLine;
 
@@ -124,7 +142,16 @@ namespace Core2D.Editor.Bounds
             return null;
         }
 
-        private static BaseShape HitTestRectangle(BaseShape shape, Vector2 p, double threshold, double dx, double dy)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shape"></param>
+        /// <param name="p"></param>
+        /// <param name="threshold"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
+        /// <returns></returns>
+        public static BaseShape HitTestRectangle(BaseShape shape, Vector2 p, double threshold, double dx, double dy)
         {
             var rectangle = shape as XRectangle;
 
@@ -146,7 +173,16 @@ namespace Core2D.Editor.Bounds
             return null;
         }
 
-        private static BaseShape HitTestEllipse(BaseShape shape, Vector2 p, double threshold, double dx, double dy)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shape"></param>
+        /// <param name="p"></param>
+        /// <param name="threshold"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
+        /// <returns></returns>
+        public static BaseShape HitTestEllipse(BaseShape shape, Vector2 p, double threshold, double dx, double dy)
         {
             var ellipse = shape as XEllipse;
 
@@ -168,7 +204,16 @@ namespace Core2D.Editor.Bounds
             return null;
         }
 
-        private static BaseShape HitTestArc(BaseShape shape, Vector2 p, double threshold, double dx, double dy)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shape"></param>
+        /// <param name="p"></param>
+        /// <param name="threshold"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
+        /// <returns></returns>
+        public static BaseShape HitTestArc(BaseShape shape, Vector2 p, double threshold, double dx, double dy)
         {
             var arc = shape as XArc;
 
@@ -200,7 +245,16 @@ namespace Core2D.Editor.Bounds
             return null;
         }
 
-        private static BaseShape HitTestCubicBezier(BaseShape shape, Vector2 p, double threshold, double dx, double dy)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shape"></param>
+        /// <param name="p"></param>
+        /// <param name="threshold"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
+        /// <returns></returns>
+        public static BaseShape HitTestCubicBezier(BaseShape shape, Vector2 p, double threshold, double dx, double dy)
         {
             var cubicBezier = shape as XCubicBezier;
 
@@ -232,7 +286,16 @@ namespace Core2D.Editor.Bounds
             return null;
         }
 
-        private static BaseShape HitTestQuadraticBezier(BaseShape shape, Vector2 p, double threshold, double dx, double dy)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shape"></param>
+        /// <param name="p"></param>
+        /// <param name="threshold"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
+        /// <returns></returns>
+        public static BaseShape HitTestQuadraticBezier(BaseShape shape, Vector2 p, double threshold, double dx, double dy)
         {
             var quadraticBezier = shape as XQuadraticBezier;
 
@@ -259,7 +322,16 @@ namespace Core2D.Editor.Bounds
             return null;
         }
 
-        private static BaseShape HitTestText(BaseShape shape, Vector2 p, double threshold, double dx, double dy)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shape"></param>
+        /// <param name="p"></param>
+        /// <param name="threshold"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
+        /// <returns></returns>
+        public static BaseShape HitTestText(BaseShape shape, Vector2 p, double threshold, double dx, double dy)
         {
             var text = shape as XText;
 
@@ -281,7 +353,16 @@ namespace Core2D.Editor.Bounds
             return null;
         }
 
-        private static BaseShape HitTestImage(BaseShape shape, Vector2 p, double threshold, double dx, double dy)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shape"></param>
+        /// <param name="p"></param>
+        /// <param name="threshold"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
+        /// <returns></returns>
+        public static BaseShape HitTestImage(BaseShape shape, Vector2 p, double threshold, double dx, double dy)
         {
             var image = shape as XImage;
 
@@ -303,7 +384,16 @@ namespace Core2D.Editor.Bounds
             return null;
         }
 
-        private static BaseShape HitTestPath(BaseShape shape, Vector2 p, double threshold, double dx, double dy)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shape"></param>
+        /// <param name="p"></param>
+        /// <param name="threshold"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
+        /// <returns></returns>
+        public static BaseShape HitTestPath(BaseShape shape, Vector2 p, double threshold, double dx, double dy)
         {
             var path = shape as XPath;
 
@@ -327,7 +417,16 @@ namespace Core2D.Editor.Bounds
             return null;
         }
 
-        private static BaseShape HitTestGroup(BaseShape shape, Vector2 p, double threshold, double dx, double dy)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shape"></param>
+        /// <param name="p"></param>
+        /// <param name="threshold"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
+        /// <returns></returns>
+        public static BaseShape HitTestGroup(BaseShape shape, Vector2 p, double threshold, double dx, double dy)
         {
             var group = shape as XGroup;
 
@@ -400,7 +499,7 @@ namespace Core2D.Editor.Bounds
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <returns></returns>
-        private static bool HitTest(BaseShape shape, Rect2 rect, Vector2[] selection, ISet<BaseShape> selected, double threshold, double dx, double dy)
+        public static bool HitTest(BaseShape shape, Rect2 rect, Vector2[] selection, ISet<BaseShape> selected, double threshold, double dx, double dy)
         {
             if (shape is XPoint)
             {
@@ -450,7 +549,17 @@ namespace Core2D.Editor.Bounds
             return false;
         }
 
-        private static bool HitTestPoint(BaseShape shape, Rect2 rect, ISet<BaseShape> selected, double threshold, double dx, double dy)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shape"></param>
+        /// <param name="rect"></param>
+        /// <param name="selected"></param>
+        /// <param name="threshold"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
+        /// <returns></returns>
+        public static bool HitTestPoint(BaseShape shape, Rect2 rect, ISet<BaseShape> selected, double threshold, double dx, double dy)
         {
             if (RectangleBounds.GetPointBounds(shape as XPoint, threshold, dx, dy).IntersectsWith(rect))
             {
@@ -467,7 +576,17 @@ namespace Core2D.Editor.Bounds
             return false;
         }
 
-        private static bool HitTestLine(BaseShape shape, Rect2 rect, ISet<BaseShape> selected, double threshold, double dx, double dy)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shape"></param>
+        /// <param name="rect"></param>
+        /// <param name="selected"></param>
+        /// <param name="threshold"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
+        /// <returns></returns>
+        public static bool HitTestLine(BaseShape shape, Rect2 rect, ISet<BaseShape> selected, double threshold, double dx, double dy)
         {
             var line = shape as XLine;
             if (RectangleBounds.GetPointBounds(line.Start, threshold, dx, dy).IntersectsWith(rect)
@@ -488,7 +607,16 @@ namespace Core2D.Editor.Bounds
             return false;
         }
 
-        private static bool HitTestEllipse(BaseShape shape, Rect2 rect, ISet<BaseShape> selected, double dx, double dy)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shape"></param>
+        /// <param name="rect"></param>
+        /// <param name="selected"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
+        /// <returns></returns>
+        public static bool HitTestEllipse(BaseShape shape, Rect2 rect, ISet<BaseShape> selected, double dx, double dy)
         {
             if (RectangleBounds.GetEllipseBounds(shape as XEllipse, dx, dy).IntersectsWith(rect))
             {
@@ -506,7 +634,16 @@ namespace Core2D.Editor.Bounds
             return false;
         }
 
-        private static bool HitTestRectangle(BaseShape shape, Rect2 rect, ISet<BaseShape> selected, double dx, double dy)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shape"></param>
+        /// <param name="rect"></param>
+        /// <param name="selected"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
+        /// <returns></returns>
+        public static bool HitTestRectangle(BaseShape shape, Rect2 rect, ISet<BaseShape> selected, double dx, double dy)
         {
             if (RectangleBounds.GetRectangleBounds(shape as XRectangle, dx, dy).IntersectsWith(rect))
             {
@@ -524,7 +661,16 @@ namespace Core2D.Editor.Bounds
             return false;
         }
 
-        private static bool HitTestArc(BaseShape shape, Rect2 rect, ISet<BaseShape> selected, double dx, double dy)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shape"></param>
+        /// <param name="rect"></param>
+        /// <param name="selected"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
+        /// <returns></returns>
+        public static bool HitTestArc(BaseShape shape, Rect2 rect, ISet<BaseShape> selected, double dx, double dy)
         {
             if (RectangleBounds.GetArcBounds(shape as XArc, dx, dy).IntersectsWith(rect))
             {
@@ -542,7 +688,16 @@ namespace Core2D.Editor.Bounds
             return false;
         }
 
-        private static bool HitTestCubicBezier(BaseShape shape, Vector2[] selection, ISet<BaseShape> selected, double dx, double dy)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shape"></param>
+        /// <param name="selection"></param>
+        /// <param name="selected"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
+        /// <returns></returns>
+        public static bool HitTestCubicBezier(BaseShape shape, Vector2[] selection, ISet<BaseShape> selected, double dx, double dy)
         {
             var points = shape.GetPoints().ToImmutableArray();
             if (ConvexHullBounds.Overlap(selection, points, dx, dy))
@@ -561,7 +716,16 @@ namespace Core2D.Editor.Bounds
             return false;
         }
 
-        private static bool HitTestQadraticBezier(BaseShape shape, Vector2[] selection, ISet<BaseShape> selected, double dx, double dy)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shape"></param>
+        /// <param name="selection"></param>
+        /// <param name="selected"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
+        /// <returns></returns>
+        public static bool HitTestQadraticBezier(BaseShape shape, Vector2[] selection, ISet<BaseShape> selected, double dx, double dy)
         {
             var points = shape.GetPoints().ToImmutableArray();
             if (ConvexHullBounds.Overlap(selection, points, dx, dy))
@@ -580,7 +744,16 @@ namespace Core2D.Editor.Bounds
             return false;
         }
 
-        private static bool HitTestText(BaseShape shape, Rect2 rect, ISet<BaseShape> selected, double dx, double dy)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shape"></param>
+        /// <param name="rect"></param>
+        /// <param name="selected"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
+        /// <returns></returns>
+        public static bool HitTestText(BaseShape shape, Rect2 rect, ISet<BaseShape> selected, double dx, double dy)
         {
             if (RectangleBounds.GetTextBounds(shape as XText, dx, dy).IntersectsWith(rect))
             {
@@ -598,7 +771,16 @@ namespace Core2D.Editor.Bounds
             return false;
         }
 
-        private static bool HitTestImage(BaseShape shape, Rect2 rect, ISet<BaseShape> selected, double dx, double dy)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shape"></param>
+        /// <param name="rect"></param>
+        /// <param name="selected"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
+        /// <returns></returns>
+        public static bool HitTestImage(BaseShape shape, Rect2 rect, ISet<BaseShape> selected, double dx, double dy)
         {
             if (RectangleBounds.GetImageBounds(shape as XImage, dx, dy).IntersectsWith(rect))
             {
@@ -616,7 +798,16 @@ namespace Core2D.Editor.Bounds
             return false;
         }
 
-        private static bool HitTestPath(BaseShape shape, Vector2[] selection, ISet<BaseShape> selected, double dx, double dy)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shape"></param>
+        /// <param name="selection"></param>
+        /// <param name="selected"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
+        /// <returns></returns>
+        public static bool HitTestPath(BaseShape shape, Vector2[] selection, ISet<BaseShape> selected, double dx, double dy)
         {
             if ((shape as XPath).Geometry != null)
             {
@@ -638,7 +829,18 @@ namespace Core2D.Editor.Bounds
             return false;
         }
 
-        private static bool HitTestGroup(BaseShape shape, Rect2 rect, Vector2[] selection, ISet<BaseShape> selected, double threshold, double dx, double dy)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shape"></param>
+        /// <param name="rect"></param>
+        /// <param name="selection"></param>
+        /// <param name="selected"></param>
+        /// <param name="threshold"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
+        /// <returns></returns>
+        public static bool HitTestGroup(BaseShape shape, Rect2 rect, Vector2[] selection, ISet<BaseShape> selected, double threshold, double dx, double dy)
         {
             if (HitTest((shape as XGroup).Shapes.Reverse(), rect, selection, null, threshold, dx, dy) == true)
             {
@@ -667,7 +869,7 @@ namespace Core2D.Editor.Bounds
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <returns></returns>
-        private static bool HitTest(IEnumerable<BaseShape> shapes, Rect2 rect, Vector2[] selection, ISet<BaseShape> selected, double threshold, double dx, double dy)
+        public static bool HitTest(IEnumerable<BaseShape> shapes, Rect2 rect, Vector2[] selection, ISet<BaseShape> selected, double threshold, double dx, double dy)
         {
             foreach (var shape in shapes)
             {
