@@ -2746,7 +2746,7 @@ namespace Core2D.Editor
                     var container = _project?.CurrentContainer;
                     if (container != null)
                     {
-                        var target = ShapeBounds.HitTest(container, new Vector2(x, y), _project.Options.HitThreshold);
+                        var target = ShapeHitTest.HitTest(container, new Vector2(x, y), _project.Options.HitThreshold);
                         if (target != null)
                         {
                             if (target is XPoint)
@@ -2833,7 +2833,7 @@ namespace Core2D.Editor
                     var container = _project?.CurrentContainer;
                     if (container != null)
                     {
-                        var result = ShapeBounds.HitTest(container, new Vector2(x, y), _project.Options.HitThreshold);
+                        var result = ShapeHitTest.HitTest(container, new Vector2(x, y), _project.Options.HitThreshold);
                         if (result != null)
                         {
                             _project?.ApplyRecord(result.Data, record);
@@ -2931,7 +2931,7 @@ namespace Core2D.Editor
                     var container = _project.CurrentContainer;
                     if (container != null)
                     {
-                        var result = ShapeBounds.HitTest(container, new Vector2(x, y), _project.Options.HitThreshold);
+                        var result = ShapeHitTest.HitTest(container, new Vector2(x, y), _project.Options.HitThreshold);
                         if (result != null)
                         {
                             _project.ApplyStyle(result, style);
@@ -3127,7 +3127,7 @@ namespace Core2D.Editor
         {
             if (container != null)
             {
-                var result = ShapeBounds.HitTest(container, new Vector2(x, y), _project.Options.HitThreshold);
+                var result = ShapeHitTest.HitTest(container, new Vector2(x, y), _project.Options.HitThreshold);
                 if (result != null)
                 {
                     Select(container, result);
@@ -3151,7 +3151,7 @@ namespace Core2D.Editor
             if (container != null)
             {
                 var rect = Rect2.Create(rectangle.TopLeft, rectangle.BottomRight);
-                var result = ShapeBounds.HitTest(container, rect, _project.Options.HitThreshold);
+                var result = ShapeHitTest.HitTest(container, rect, _project.Options.HitThreshold);
                 if (result != null)
                 {
                     if (result.Count > 0)
@@ -3215,7 +3215,7 @@ namespace Core2D.Editor
             if (_renderers?[0]?.State?.SelectedShapes == null
                 && !(_renderers?[0]?.State?.SelectedShape != null && _hover != _renderers?[0]?.State?.SelectedShape))
             {
-                var result = ShapeBounds.HitTest(_project.CurrentContainer, new Vector2(x, y), _project.Options.HitThreshold);
+                var result = ShapeHitTest.HitTest(_project.CurrentContainer, new Vector2(x, y), _project.Options.HitThreshold);
                 if (result != null)
                 {
                     Hover(_project.CurrentContainer, result);
@@ -3268,7 +3268,7 @@ namespace Core2D.Editor
             if (_project?.CurrentContainer == null || _project?.Options == null)
                 return false;
 
-            var result = ShapeBounds.HitTest(
+            var result = ShapeHitTest.HitTest(
                 _project.CurrentContainer,
                 new Vector2(x, y),
                 _project.Options.HitThreshold);
@@ -3389,7 +3389,7 @@ namespace Core2D.Editor
                     XLine result = null;
                     foreach (var line in lines)
                     {
-                        if (ShapeBounds.HitTestLine(line, new Vector2(connector.X, connector.Y), threshold, 0, 0))
+                        if (ShapeHitTest.HitTestLine(line, new Vector2(connector.X, connector.Y), threshold, 0, 0))
                         {
                             result = line;
                             break;

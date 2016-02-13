@@ -11,9 +11,9 @@ using System.Linq;
 namespace Core2D.Editor.Bounds
 {
     /// <summary>
-    /// Calculate shape bounds and provide shape hit testing capabilities.
+    /// Hit test shapes using bounds.
     /// </summary>
-    public static class ShapeBounds
+    public static class ShapeHitTest
     {
         /// <summary>
         /// Hit test point in <see cref="XLine"/> shape bounds.
@@ -98,6 +98,7 @@ namespace Core2D.Editor.Bounds
             {
                 return shape;
             }
+
             return null;
         }
 
@@ -141,6 +142,7 @@ namespace Core2D.Editor.Bounds
             {
                 return rectangle;
             }
+
             return null;
         }
 
@@ -162,6 +164,7 @@ namespace Core2D.Editor.Bounds
             {
                 return ellipse;
             }
+
             return null;
         }
 
@@ -193,6 +196,7 @@ namespace Core2D.Editor.Bounds
             {
                 return arc;
             }
+
             return null;
         }
 
@@ -224,6 +228,7 @@ namespace Core2D.Editor.Bounds
             {
                 return cubicBezier;
             }
+
             return null;
         }
 
@@ -250,6 +255,7 @@ namespace Core2D.Editor.Bounds
             {
                 return quadraticBezier;
             }
+
             return null;
         }
 
@@ -271,6 +277,7 @@ namespace Core2D.Editor.Bounds
             {
                 return text;
             }
+
             return null;
         }
 
@@ -292,6 +299,7 @@ namespace Core2D.Editor.Bounds
             {
                 return image;
             }
+
             return null;
         }
 
@@ -315,6 +323,7 @@ namespace Core2D.Editor.Bounds
                     return path;
                 }
             }
+
             return null;
         }
 
@@ -335,6 +344,7 @@ namespace Core2D.Editor.Bounds
             {
                 return shape;
             }
+
             return null;
         }
 
@@ -453,6 +463,7 @@ namespace Core2D.Editor.Bounds
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -473,6 +484,7 @@ namespace Core2D.Editor.Bounds
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -490,6 +502,7 @@ namespace Core2D.Editor.Bounds
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -507,6 +520,7 @@ namespace Core2D.Editor.Bounds
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -524,6 +538,7 @@ namespace Core2D.Editor.Bounds
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -542,6 +557,7 @@ namespace Core2D.Editor.Bounds
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -560,6 +576,7 @@ namespace Core2D.Editor.Bounds
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -577,6 +594,7 @@ namespace Core2D.Editor.Bounds
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -594,6 +612,7 @@ namespace Core2D.Editor.Bounds
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -615,6 +634,7 @@ namespace Core2D.Editor.Bounds
                     }
                 }
             }
+
             return false;
         }
 
@@ -632,6 +652,7 @@ namespace Core2D.Editor.Bounds
                     return true;
                 }
             }
+
             return false;
         }
 

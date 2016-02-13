@@ -78,7 +78,7 @@ namespace Core2D.Editor.Tools
         {
             if (_editor.Project.Options.TryToConnect)
             {
-                var result = ShapeBounds.HitTest(
+                var result = ShapeHitTest.HitTest(
                     _editor.Project.CurrentContainer,
                     new Vector2(x, y),
                     _editor.Project.Options.HitThreshold);
