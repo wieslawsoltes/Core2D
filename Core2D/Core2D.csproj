@@ -46,7 +46,7 @@
     <Compile Include="Data\Database\XRecord.cs" />
     <Compile Include="Data\Database\XValue.cs" />
     <Compile Include="Editor\Bounds\ConvexHullBounds.cs" />
-    <Compile Include="Editor\Bounds\ShapeBounds.cs" />
+    <Compile Include="Editor\Bounds\ShapeHitTest.cs" />
     <Compile Include="Editor\Commands.cs" />
     <Compile Include="Editor\Constants.cs" />
     <Compile Include="Editor\CoreType.cs" />
