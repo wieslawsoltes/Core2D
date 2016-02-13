@@ -44,7 +44,7 @@ namespace Core2D.Editor.Tools
         /// <returns>True if connected.</returns>
         public void TryToConnectPoint1(XCubicBezier cubicBezier, double x, double y)
         {
-            var result = ShapeHitTest.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitThreshold);
+            var result = ShapeHitTest.HitTest(_editor.Project.CurrentContainer.CurrentLayer, new Vector2(x, y), _editor.Project.Options.HitThreshold);
             if (result != null && result is XPoint)
             {
                 cubicBezier.Point1 = result as XPoint;
@@ -60,7 +60,7 @@ namespace Core2D.Editor.Tools
         /// <returns>True if connected.</returns>
         public void TryToConnectPoint2(XCubicBezier cubicBezier, double x, double y)
         {
-            var result = ShapeHitTest.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitThreshold);
+            var result = ShapeHitTest.HitTest(_editor.Project.CurrentContainer.CurrentLayer, new Vector2(x, y), _editor.Project.Options.HitThreshold);
             if (result != null && result is XPoint)
             {
                 cubicBezier.Point2 = result as XPoint;
@@ -76,7 +76,7 @@ namespace Core2D.Editor.Tools
         /// <returns>True if connected.</returns>
         public void TryToConnectPoint3(XCubicBezier cubicBezier, double x, double y)
         {
-            var result = ShapeHitTest.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitThreshold);
+            var result = ShapeHitTest.HitTest(_editor.Project.CurrentContainer.CurrentLayer, new Vector2(x, y), _editor.Project.Options.HitThreshold);
             if (result != null && result is XPoint)
             {
                 cubicBezier.Point3 = result as XPoint;
@@ -92,7 +92,7 @@ namespace Core2D.Editor.Tools
         /// <returns>True if connected.</returns>
         public void TryToConnectPoint4(XCubicBezier cubicBezier, double x, double y)
         {
-            var result = ShapeHitTest.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitThreshold);
+            var result = ShapeHitTest.HitTest(_editor.Project.CurrentContainer.CurrentLayer, new Vector2(x, y), _editor.Project.Options.HitThreshold);
             if (result != null && result is XPoint)
             {
                 cubicBezier.Point4 = result as XPoint;

@@ -36,7 +36,7 @@ namespace Core2D.Editor.Tools
         /// <param name="y">The Y coordinate of point.</param>
         public void TryToConnectTopLeft(XRectangle rectangle, double x, double y)
         {
-            var result = ShapeHitTest.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitThreshold);
+            var result = ShapeHitTest.HitTest(_editor.Project.CurrentContainer.CurrentLayer, new Vector2(x, y), _editor.Project.Options.HitThreshold);
             if (result != null && result is XPoint)
             {
                 rectangle.TopLeft = result as XPoint;
@@ -51,7 +51,7 @@ namespace Core2D.Editor.Tools
         /// <param name="y">The Y coordinate of point.</param>
         public void TryToConnectBottomRight(XRectangle rectangle, double x, double y)
         {
-            var result = ShapeHitTest.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitThreshold);
+            var result = ShapeHitTest.HitTest(_editor.Project.CurrentContainer.CurrentLayer, new Vector2(x, y), _editor.Project.Options.HitThreshold);
             if (result != null && result is XPoint)
             {
                 rectangle.BottomRight = result as XPoint;

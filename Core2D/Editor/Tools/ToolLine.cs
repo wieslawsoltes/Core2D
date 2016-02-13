@@ -37,7 +37,7 @@ namespace Core2D.Editor.Tools
         /// <returns>True if connected.</returns>
         public bool TryToConnectStart(XLine line, double x, double y)
         {
-            var result = ShapeHitTest.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitThreshold);
+            var result = ShapeHitTest.HitTest(_editor.Project.CurrentContainer.CurrentLayer, new Vector2(x, y), _editor.Project.Options.HitThreshold);
             if (result != null && result is XPoint)
             {
                 line.Start = result as XPoint;
@@ -55,7 +55,7 @@ namespace Core2D.Editor.Tools
         /// <returns>True if connected.</returns>
         public bool TryToConnectEnd(XLine line, double x, double y)
         {
-            var result = ShapeHitTest.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitThreshold);
+            var result = ShapeHitTest.HitTest(_editor.Project.CurrentContainer.CurrentLayer, new Vector2(x, y), _editor.Project.Options.HitThreshold);
             if (result != null && result is XPoint)
             {
                 line.End = result as XPoint;

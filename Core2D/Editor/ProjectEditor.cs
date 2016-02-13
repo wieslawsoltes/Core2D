@@ -1140,9 +1140,9 @@ namespace Core2D.Editor
         {
             try
             {
-                Deselect(_project?.CurrentContainer);
+                Deselect(_project?.CurrentContainer?.CurrentLayer);
                 Select(
-                    _project?.CurrentContainer,
+                    _project?.CurrentContainer?.CurrentLayer,
                     ImmutableHashSet.CreateRange<BaseShape>(_project?.CurrentContainer?.CurrentLayer?.Shapes));
             }
             catch (Exception ex)
@@ -1158,7 +1158,7 @@ namespace Core2D.Editor
         {
             try
             {
-                Deselect(_project?.CurrentContainer);
+                Deselect(_project?.CurrentContainer?.CurrentLayer);
             }
             catch (Exception ex)
             {
@@ -1201,7 +1201,7 @@ namespace Core2D.Editor
             var group = Group(_renderers?[0]?.State?.SelectedShapes, Constants.DefaulGroupName);
             if (group != null)
             {
-                Select(_project?.CurrentContainer, group);
+                Select(_project?.CurrentContainer?.CurrentLayer, group);
             }
         }
 
@@ -2448,7 +2448,7 @@ namespace Core2D.Editor
         {
             try
             {
-                Deselect(_project?.CurrentContainer);
+                Deselect(_project?.CurrentContainer?.CurrentLayer);
 
                 TryToRestoreStyles(shapes);
                 TryToRestoreRecords(shapes);
@@ -2471,11 +2471,11 @@ namespace Core2D.Editor
         {
             if (shapes?.Count() == 1)
             {
-                Select(_project?.CurrentContainer, shapes.FirstOrDefault());
+                Select(_project?.CurrentContainer?.CurrentLayer, shapes.FirstOrDefault());
             }
             else
             {
-                Select(_project?.CurrentContainer, ImmutableHashSet.CreateRange<BaseShape>(shapes));
+                Select(_project?.CurrentContainer?.CurrentLayer, ImmutableHashSet.CreateRange<BaseShape>(shapes));
             }
         }
 
@@ -2743,10 +2743,10 @@ namespace Core2D.Editor
                 }
                 else
                 {
-                    var container = _project?.CurrentContainer;
-                    if (container != null)
+                    var layer = _project?.CurrentContainer?.CurrentLayer;
+                    if (layer != null)
                     {
-                        var target = ShapeHitTest.HitTest(container, new Vector2(x, y), _project.Options.HitThreshold);
+                        var target = ShapeHitTest.HitTest(layer, new Vector2(x, y), _project.Options.HitThreshold);
                         if (target != null)
                         {
                             if (target is XPoint)
@@ -2788,12 +2788,12 @@ namespace Core2D.Editor
                 var clone = CloneShape(shape);
                 if (clone != null)
                 {
-                    Deselect(_project.CurrentContainer);
+                    Deselect(_project?.CurrentContainer?.CurrentLayer);
                     clone.Move(sx, sy);
 
-                    _project.AddShape(_project.CurrentContainer.CurrentLayer, clone);
+                    _project.AddShape(_project?.CurrentContainer?.CurrentLayer, clone);
 
-                    Select(_project.CurrentContainer, clone);
+                    Select(_project?.CurrentContainer?.CurrentLayer, clone);
 
                     if (_project.Options.TryToConnect)
                     {
@@ -2830,10 +2830,10 @@ namespace Core2D.Editor
                 }
                 else
                 {
-                    var container = _project?.CurrentContainer;
-                    if (container != null)
+                    var layer = _project?.CurrentContainer?.CurrentLayer;
+                    if (layer != null)
                     {
-                        var result = ShapeHitTest.HitTest(container, new Vector2(x, y), _project.Options.HitThreshold);
+                        var result = ShapeHitTest.HitTest(layer, new Vector2(x, y), _project.Options.HitThreshold);
                         if (result != null)
                         {
                             _project?.ApplyRecord(result.Data, record);
@@ -2928,10 +2928,10 @@ namespace Core2D.Editor
                 }
                 else
                 {
-                    var container = _project.CurrentContainer;
-                    if (container != null)
+                    var layer = _project.CurrentContainer?.CurrentLayer;
+                    if (layer != null)
                     {
-                        var result = ShapeHitTest.HitTest(container, new Vector2(x, y), _project.Options.HitThreshold);
+                        var result = ShapeHitTest.HitTest(layer, new Vector2(x, y), _project.Options.HitThreshold);
                         if (result != null)
                         {
                             _project.ApplyStyle(result, style);
@@ -3039,79 +3039,73 @@ namespace Core2D.Editor
         /// <summary>
         /// Select shape.
         /// </summary>
-        /// <param name="container">The owner container.</param>
+        /// <param name="layer">The owner layer.</param>
         /// <param name="shape">The shape to select.</param>
-        public void Select(XContainer container, BaseShape shape)
+        public void Select(XLayer layer, BaseShape shape)
         {
-            if (container != null)
+            Select(shape);
+
+            if (layer?.Owner != null)
             {
-                Select(shape);
+                layer.Owner.CurrentShape = shape;
+            }
 
-                container.CurrentShape = shape;
-
-                if (container.CurrentLayer != null)
-                {
-                    container.CurrentLayer.Invalidate();
-                }
-                else
-                {
-                    Invalidate?.Invoke();
-                }
+            if (layer != null)
+            {
+                layer.Invalidate();
+            }
+            else
+            {
+                Invalidate?.Invoke();
             }
         }
 
         /// <summary>
         /// Select shapes.
         /// </summary>
-        /// <param name="container">The owner container.</param>
+        /// <param name="layer">The owner layer.</param>
         /// <param name="shapes">The shapes to select.</param>
-        public void Select(XContainer container, ImmutableHashSet<BaseShape> shapes)
+        public void Select(XLayer layer, ImmutableHashSet<BaseShape> shapes)
         {
-            if (container != null)
+            Select(shapes);
+
+            if (layer?.Owner?.CurrentShape != null)
             {
-                Select(shapes);
+                layer.Owner.CurrentShape = default(BaseShape);
+            }
 
-                if (container.CurrentShape != null)
-                {
-                    container.CurrentShape = default(BaseShape);
-                }
-
-                if (container.CurrentLayer != null)
-                {
-                    container.CurrentLayer.Invalidate();
-                }
-                else
-                {
-                    Invalidate?.Invoke();
-                }
+            if (layer != null)
+            {
+                layer.Invalidate();
+            }
+            else
+            {
+                Invalidate?.Invoke();
             }
         }
 
         /// <summary>
         /// De-select shape(s).
         /// </summary>
-        /// <param name="container">The container object.</param>
-        public void Deselect(XContainer container)
+        /// <param name="layer">The layer object.</param>
+        public void Deselect(XLayer layer)
         {
-            if (container != null)
+            Deselect();
+
+            if (layer?.Owner?.CurrentShape != null)
             {
-                Deselect();
+                layer.Owner.CurrentShape = default(BaseShape);
+            }
 
-                if (container.CurrentShape != null)
+            if (layer != null)
+            {
+                layer.Invalidate();
+            }
+            else
+            {
+                if (Invalidate != null)
                 {
-                    container.CurrentShape = default(BaseShape);
-                }
-
-                if (container.CurrentLayer != null)
-                {
-                    container.CurrentLayer.Invalidate();
-                }
-                else
-                {
-                    if (Invalidate != null)
-                    {
-                        Invalidate();
-                    }
+                    Invalidate();
                 }
             }
         }
@@ -3119,22 +3113,22 @@ namespace Core2D.Editor
         /// <summary>
         /// Try to select shape at specified coordinates.
         /// </summary>
-        /// <param name="container">The container object.</param>
-        /// <param name="x">The X coordinate in container.</param>
-        /// <param name="y">The Y coordinate in container.</param>
+        /// <param name="layer">The layer object.</param>
+        /// <param name="x">The X coordinate in layer.</param>
+        /// <param name="y">The Y coordinate in layer.</param>
         /// <returns>True if selecting shape was successful.</returns>
-        public bool TryToSelectShape(XContainer container, double x, double y)
+        public bool TryToSelectShape(XLayer layer, double x, double y)
         {
-            if (container != null)
+            if (layer != null)
             {
-                var result = ShapeHitTest.HitTest(container, new Vector2(x, y), _project.Options.HitThreshold);
+                var result = ShapeHitTest.HitTest(layer, new Vector2(x, y), _project.Options.HitThreshold);
                 if (result != null)
                 {
-                    Select(container, result);
+                    Select(layer, result);
                     return true;
                 }
 
-                Deselect(container);
+                Deselect(layer);
             }
 
             return false;
@@ -3143,32 +3137,32 @@ namespace Core2D.Editor
         /// <summary>
         /// Try to select shapes inside rectangle.
         /// </summary>
-        /// <param name="container">The container object.</param>
+        /// <param name="layer">The layer object.</param>
         /// <param name="rectangle">The selection rectangle.</param>
         /// <returns>True if selecting shapes was successful.</returns>
-        public bool TryToSelectShapes(XContainer container, XRectangle rectangle)
+        public bool TryToSelectShapes(XLayer layer, XRectangle rectangle)
         {
-            if (container != null)
+            if (layer != null)
             {
                 var rect = Rect2.Create(rectangle.TopLeft, rectangle.BottomRight);
-                var result = ShapeHitTest.HitTest(container, rect, _project.Options.HitThreshold);
+                var result = ShapeHitTest.HitTest(layer, rect, _project.Options.HitThreshold);
                 if (result != null)
                 {
                     if (result.Count > 0)
                     {
                         if (result.Count == 1)
                         {
-                            Select(container, result.FirstOrDefault());
+                            Select(layer, result.FirstOrDefault());
                         }
                         else
                         {
-                            Select(container, result);
+                            Select(layer, result);
                         }
                         return true;
                     }
                 }
 
-                Deselect(container);
+                Deselect(layer);
             }
 
             return false;
@@ -3177,13 +3171,13 @@ namespace Core2D.Editor
         /// <summary>
         /// Hover shape.
         /// </summary>
-        /// <param name="container">The container object.</param>
+        /// <param name="layer">The layer object.</param>
         /// <param name="shape">The shape to hover.</param>
-        public void Hover(XContainer container, BaseShape shape)
+        public void Hover(XLayer layer, BaseShape shape)
         {
-            if (container != null)
+            if (layer != null)
             {
-                Select(container, shape);
+                Select(layer, shape);
                 _hover = shape;
             }
         }
@@ -3191,13 +3185,13 @@ namespace Core2D.Editor
         /// <summary>
         /// De-hover shape.
         /// </summary>
-        /// <param name="container">The container object.</param>
-        public void Dehover(XContainer container)
+        /// <param name="layer">The layer object.</param>
+        public void Dehover(XLayer layer)
         {
-            if (container != null && _hover != null)
+            if (layer != null && _hover != null)
             {
                 _hover = default(BaseShape);
-                Deselect(container);
+                Deselect(layer);
             }
         }
 
@@ -3209,23 +3203,23 @@ namespace Core2D.Editor
         /// <returns>True if hovering shape was successful.</returns>
         public bool TryToHoverShape(double x, double y)
         {
-            if (_project?.CurrentContainer == null)
+            if (_project?.CurrentContainer?.CurrentLayer == null)
                 return false;
 
             if (_renderers?[0]?.State?.SelectedShapes == null
                 && !(_renderers?[0]?.State?.SelectedShape != null && _hover != _renderers?[0]?.State?.SelectedShape))
             {
-                var result = ShapeHitTest.HitTest(_project.CurrentContainer, new Vector2(x, y), _project.Options.HitThreshold);
+                var result = ShapeHitTest.HitTest(_project.CurrentContainer?.CurrentLayer, new Vector2(x, y), _project.Options.HitThreshold);
                 if (result != null)
                 {
-                    Hover(_project.CurrentContainer, result);
+                    Hover(_project.CurrentContainer?.CurrentLayer, result);
                     return true;
                 }
                 else
                 {
                     if (_renderers[0].State.SelectedShape != null && _renderers[0].State.SelectedShape == _hover)
                     {
-                        Dehover(_project.CurrentContainer);
+                        Dehover(_project.CurrentContainer?.CurrentLayer);
                     }
                 }
             }
@@ -3269,7 +3263,7 @@ namespace Core2D.Editor
                 return false;
 
             var result = ShapeHitTest.HitTest(
-                _project.CurrentContainer,
+                _project.CurrentContainer.CurrentLayer,
                 new Vector2(x, y),
                 _project.Options.HitThreshold);
 
@@ -3312,7 +3306,7 @@ namespace Core2D.Editor
 
                 if (select)
                 {
-                    Select(_project.CurrentContainer, point);
+                    Select(_project.CurrentContainer.CurrentLayer, point);
                 }
 
                 return true;
@@ -3389,7 +3383,7 @@ namespace Core2D.Editor
                     XLine result = null;
                     foreach (var line in lines)
                     {
-                        if (ShapeHitTest.HitTestLine(line, new Vector2(connector.X, connector.Y), threshold, 0, 0))
+                        if (LineBounds.Contains(line, new Vector2(connector.X, connector.Y), threshold, 0, 0))
                         {
                             result = line;
                             break;

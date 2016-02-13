@@ -42,7 +42,7 @@ namespace Core2D.Editor.Tools
         /// <returns>True if connected.</returns>
         public void TryToConnectPoint1(XQuadraticBezier quadraticBezier, double x, double y)
         {
-            var result = ShapeHitTest.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitThreshold);
+            var result = ShapeHitTest.HitTest(_editor.Project.CurrentContainer.CurrentLayer, new Vector2(x, y), _editor.Project.Options.HitThreshold);
             if (result != null && result is XPoint)
             {
                 quadraticBezier.Point1 = result as XPoint;
@@ -58,7 +58,7 @@ namespace Core2D.Editor.Tools
         /// <returns>True if connected.</returns>
         public void TryToConnectPoint2(XQuadraticBezier quadraticBezier, double x, double y)
         {
-            var result = ShapeHitTest.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitThreshold);
+            var result = ShapeHitTest.HitTest(_editor.Project.CurrentContainer.CurrentLayer, new Vector2(x, y), _editor.Project.Options.HitThreshold);
             if (result != null && result is XPoint)
             {
                 quadraticBezier.Point2 = result as XPoint;
@@ -74,7 +74,7 @@ namespace Core2D.Editor.Tools
         /// <returns>True if connected.</returns>
         public void TryToConnectPoint3(XQuadraticBezier quadraticBezier, double x, double y)
         {
-            var result = ShapeHitTest.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitThreshold);
+            var result = ShapeHitTest.HitTest(_editor.Project.CurrentContainer.CurrentLayer, new Vector2(x, y), _editor.Project.Options.HitThreshold);
             if (result != null && result is XPoint)
             {
                 quadraticBezier.Point3 = result as XPoint;

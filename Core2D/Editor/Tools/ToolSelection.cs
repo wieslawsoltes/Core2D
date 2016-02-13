@@ -134,11 +134,11 @@ namespace Core2D.Editor.Tools
             {
                 case ToolState.None:
                     {
-                        _editor.Dehover(_editor.Project.CurrentContainer);
+                        _editor.Dehover(_editor.Project.CurrentContainer.CurrentLayer);
                         if (_editor.Renderers[0].State.SelectedShape == null
                             && _editor.Renderers[0].State.SelectedShapes != null)
                         {
-                            var result = ShapeHitTest.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitThreshold);
+                            var result = ShapeHitTest.HitTest(_editor.Project.CurrentContainer.CurrentLayer, new Vector2(x, y), _editor.Project.Options.HitThreshold);
                             if (result != null)
                             {
                                 _startX = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, _editor.Project.Options.SnapX) : x;
@@ -152,7 +152,7 @@ namespace Core2D.Editor.Tools
                             }
                         }
 
-                        if (_editor.TryToSelectShape(_editor.Project.CurrentContainer, x, y))
+                        if (_editor.TryToSelectShape(_editor.Project.CurrentContainer.CurrentLayer, x, y))
                         {
                             _startX = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, _editor.Project.Options.SnapX) : x;
                             _startY = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, _editor.Project.Options.SnapY) : y;
@@ -255,7 +255,7 @@ namespace Core2D.Editor.Tools
                             _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_shape);
                             _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                             _currentState = ToolState.None;
-                            _editor.TryToSelectShapes(_editor.Project.CurrentContainer, rectangle);
+                            _editor.TryToSelectShapes(_editor.Project.CurrentContainer.CurrentLayer, rectangle);
                             _editor.CancelAvailable = false;
                         }
                     }
@@ -272,7 +272,7 @@ namespace Core2D.Editor.Tools
             {
                 case ToolState.None:
                     {
-                        _editor.Dehover(_editor.Project.CurrentContainer);
+                        _editor.Dehover(_editor.Project.CurrentContainer.CurrentLayer);
                     }
                     break;
                 case ToolState.One:

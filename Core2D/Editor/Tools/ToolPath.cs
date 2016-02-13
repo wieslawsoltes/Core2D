@@ -79,7 +79,7 @@ namespace Core2D.Editor.Tools
             if (_editor.Project.Options.TryToConnect)
             {
                 var result = ShapeHitTest.HitTest(
-                    _editor.Project.CurrentContainer,
+                    _editor.Project.CurrentContainer.CurrentLayer,
                     new Vector2(x, y),
                     _editor.Project.Options.HitThreshold);
                 if (result != null && result is XPoint)
