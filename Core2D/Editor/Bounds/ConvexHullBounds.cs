@@ -63,16 +63,16 @@ namespace Core2D.Editor.Bounds
         /// 
         /// </summary>
         /// <param name="points"></param>
-        /// <param name="point"></param>
+        /// <param name="v"></param>
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <returns></returns>
-        public static bool Contains(IList<XPoint> points, Vector2 point, double dx, double dy)
+        public static bool Contains(IList<XPoint> points, Vector2 v, double dx, double dy)
         {
             int k;
             Vector2[] convexHull;
             ToConvexHull(points, dx, dy, out k, out convexHull);
-            return Contains(point.X, point.Y, convexHull, k);
+            return Contains(v.X, v.Y, convexHull, k);
         }
 
         /// <summary>
