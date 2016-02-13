@@ -478,68 +478,68 @@ namespace Core2D.Editor.Bounds
         /// <param name="shape"></param>
         /// <param name="rect"></param>
         /// <param name="selection"></param>
-        /// <param name="builder"></param>
+        /// <param name="selected"></param>
         /// <param name="threshold"></param>
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <returns></returns>
-        private static bool HitTest(BaseShape shape, Rect2 rect, Vector2[] selection, ImmutableHashSet<BaseShape>.Builder builder, double threshold, double dx, double dy)
+        private static bool HitTest(BaseShape shape, Rect2 rect, Vector2[] selection, ISet<BaseShape> selected, double threshold, double dx, double dy)
         {
             if (shape is XPoint)
             {
-                return HitTestPoint(shape, rect, builder, threshold, dx, dy);
+                return HitTestPoint(shape, rect, selected, threshold, dx, dy);
             }
             else if (shape is XLine)
             {
-                return HitTestLine(shape, rect, builder, threshold, dx, dy);
+                return HitTestLine(shape, rect, selected, threshold, dx, dy);
             }
             else if (shape is XEllipse)
             {
-                return HitTestEllipse(shape, rect, builder, dx, dy);
+                return HitTestEllipse(shape, rect, selected, dx, dy);
             }
             else if (shape is XRectangle)
             {
-                return HitTestRectangle(shape, rect, builder, dx, dy);
+                return HitTestRectangle(shape, rect, selected, dx, dy);
             }
             else if (shape is XArc)
             {
-                return HitTestArc(shape, rect, builder, dx, dy);
+                return HitTestArc(shape, rect, selected, dx, dy);
             }
             else if (shape is XCubicBezier)
             {
-                return HitTestCubicBezier(shape, selection, builder, dx, dy);
+                return HitTestCubicBezier(shape, selection, selected, dx, dy);
             }
             else if (shape is XQuadraticBezier)
             {
-                return HitTestQadraticBezier(shape, selection, builder, dx, dy);
+                return HitTestQadraticBezier(shape, selection, selected, dx, dy);
             }
             else if (shape is XText)
             {
-                return HitTestText(shape, rect, builder, dx, dy);
+                return HitTestText(shape, rect, selected, dx, dy);
             }
             else if (shape is XImage)
             {
-                return HitTestImage(shape, rect, builder, dx, dy);
+                return HitTestImage(shape, rect, selected, dx, dy);
             }
             else if (shape is XPath)
             {
-                return HitTestPath(shape, selection, builder, dx, dy);
+                return HitTestPath(shape, selection, selected, dx, dy);
             }
             else if (shape is XGroup)
             {
-                return HitTestGroup(shape, rect, selection, builder, threshold, dx, dy);
+                return HitTestGroup(shape, rect, selection, selected, threshold, dx, dy);
             }
 
             return false;
         }
 
-        private static bool HitTestPoint(BaseShape shape, Rect2 rect, ImmutableHashSet<BaseShape>.Builder builder, double threshold, double dx, double dy)
+        private static bool HitTestPoint(BaseShape shape, Rect2 rect, ISet<BaseShape> selected, double threshold, double dx, double dy)
         {
             if (GetPointBounds(shape as XPoint, threshold, dx, dy).IntersectsWith(rect))
             {
-                if (builder != null)
+                if (selected != null)
                 {
-                    builder.Add(shape);
+                    selected.Add(shape);
                 }
                 else
                 {
@@ -549,16 +549,16 @@ namespace Core2D.Editor.Bounds
             return false;
         }
 
-        private static bool HitTestLine(BaseShape shape, Rect2 rect, ImmutableHashSet<BaseShape>.Builder builder, double threshold, double dx, double dy)
+        private static bool HitTestLine(BaseShape shape, Rect2 rect, ISet<BaseShape> selected, double threshold, double dx, double dy)
         {
             var line = shape as XLine;
             if (GetPointBounds(line.Start, threshold, dx, dy).IntersectsWith(rect)
                 || GetPointBounds(line.End, threshold, dx, dy).IntersectsWith(rect)
                 || MathHelpers.LineIntersectsWithRect(rect, new Point2(line.Start.X, line.Start.Y), new Point2(line.End.X, line.End.Y)))
             {
-                if (builder != null)
+                if (selected != null)
                 {
-                    builder.Add(line);
+                    selected.Add(line);
                     return false;
                 }
                 else
@@ -569,13 +569,13 @@ namespace Core2D.Editor.Bounds
             return false;
         }
 
-        private static bool HitTestEllipse(BaseShape shape, Rect2 rect, ImmutableHashSet<BaseShape>.Builder builder, double dx, double dy)
+        private static bool HitTestEllipse(BaseShape shape, Rect2 rect, ISet<BaseShape> selected, double dx, double dy)
         {
             if (GetEllipseBounds(shape as XEllipse, dx, dy).IntersectsWith(rect))
             {
-                if (builder != null)
+                if (selected != null)
                 {
-                    builder.Add(shape);
+                    selected.Add(shape);
                     return false;
                 }
                 else
@@ -586,13 +586,13 @@ namespace Core2D.Editor.Bounds
             return false;
         }
 
-        private static bool HitTestRectangle(BaseShape shape, Rect2 rect, ImmutableHashSet<BaseShape>.Builder builder, double dx, double dy)
+        private static bool HitTestRectangle(BaseShape shape, Rect2 rect, ISet<BaseShape> selected, double dx, double dy)
         {
             if (GetRectangleBounds(shape as XRectangle, dx, dy).IntersectsWith(rect))
             {
-                if (builder != null)
+                if (selected != null)
                 {
-                    builder.Add(shape);
+                    selected.Add(shape);
                     return false;
                 }
                 else
@@ -603,13 +603,13 @@ namespace Core2D.Editor.Bounds
             return false;
         }
 
-        private static bool HitTestArc(BaseShape shape, Rect2 rect, ImmutableHashSet<BaseShape>.Builder builder, double dx, double dy)
+        private static bool HitTestArc(BaseShape shape, Rect2 rect, ISet<BaseShape> selected, double dx, double dy)
         {
             if (GetArcBounds(shape as XArc, dx, dy).IntersectsWith(rect))
             {
-                if (builder != null)
+                if (selected != null)
                 {
-                    builder.Add(shape);
+                    selected.Add(shape);
                     return false;
                 }
                 else
@@ -620,13 +620,13 @@ namespace Core2D.Editor.Bounds
             return false;
         }
 
-        private static bool HitTestCubicBezier(BaseShape shape, Vector2[] selection, ImmutableHashSet<BaseShape>.Builder builder, double dx, double dy)
+        private static bool HitTestCubicBezier(BaseShape shape, Vector2[] selection, ISet<BaseShape> selected, double dx, double dy)
         {
             if (ConvexHullBounds.Overlap(selection, ConvexHullBounds.GetVertices(shape as XCubicBezier, dx, dy)))
             {
-                if (builder != null)
+                if (selected != null)
                 {
-                    builder.Add(shape);
+                    selected.Add(shape);
                     return false;
                 }
                 else
@@ -637,13 +637,13 @@ namespace Core2D.Editor.Bounds
             return false;
         }
 
-        private static bool HitTestQadraticBezier(BaseShape shape, Vector2[] selection, ImmutableHashSet<BaseShape>.Builder builder, double dx, double dy)
+        private static bool HitTestQadraticBezier(BaseShape shape, Vector2[] selection, ISet<BaseShape> selected, double dx, double dy)
         {
             if (ConvexHullBounds.Overlap(selection, ConvexHullBounds.GetVertices(shape as XQuadraticBezier, dx, dy)))
             {
-                if (builder != null)
+                if (selected != null)
                 {
-                    builder.Add(shape);
+                    selected.Add(shape);
                     return false;
                 }
                 else
@@ -654,13 +654,13 @@ namespace Core2D.Editor.Bounds
             return false;
         }
 
-        private static bool HitTestText(BaseShape shape, Rect2 rect, ImmutableHashSet<BaseShape>.Builder builder, double dx, double dy)
+        private static bool HitTestText(BaseShape shape, Rect2 rect, ISet<BaseShape> selected, double dx, double dy)
         {
             if (GetTextBounds(shape as XText, dx, dy).IntersectsWith(rect))
             {
-                if (builder != null)
+                if (selected != null)
                 {
-                    builder.Add(shape);
+                    selected.Add(shape);
                     return false;
                 }
                 else
@@ -671,13 +671,13 @@ namespace Core2D.Editor.Bounds
             return false;
         }
 
-        private static bool HitTestImage(BaseShape shape, Rect2 rect, ImmutableHashSet<BaseShape>.Builder builder, double dx, double dy)
+        private static bool HitTestImage(BaseShape shape, Rect2 rect, ISet<BaseShape> selected, double dx, double dy)
         {
             if (GetImageBounds(shape as XImage, dx, dy).IntersectsWith(rect))
             {
-                if (builder != null)
+                if (selected != null)
                 {
-                    builder.Add(shape);
+                    selected.Add(shape);
                     return false;
                 }
                 else
@@ -688,16 +688,16 @@ namespace Core2D.Editor.Bounds
             return false;
         }
 
-        private static bool HitTestPath(BaseShape shape, Vector2[] selection, ImmutableHashSet<BaseShape>.Builder builder, double dx, double dy)
+        private static bool HitTestPath(BaseShape shape, Vector2[] selection, ISet<BaseShape> selected, double dx, double dy)
         {
             if ((shape as XPath).Geometry != null)
             {
                 var points = shape.GetPoints().ToImmutableArray();
                 if (ConvexHullBounds.Overlap(selection, ConvexHullBounds.GetVertices(points, dx, dy)))
                 {
-                    if (builder != null)
+                    if (selected != null)
                     {
-                        builder.Add(shape);
+                        selected.Add(shape);
                         return false;
                     }
                     else
@@ -709,13 +709,13 @@ namespace Core2D.Editor.Bounds
             return false;
         }
 
-        private static bool HitTestGroup(BaseShape shape, Rect2 rect, Vector2[] selection, ImmutableHashSet<BaseShape>.Builder builder, double threshold, double dx, double dy)
+        private static bool HitTestGroup(BaseShape shape, Rect2 rect, Vector2[] selection, ISet<BaseShape> selected, double threshold, double dx, double dy)
         {
             if (HitTest((shape as XGroup).Shapes.Reverse(), rect, selection, null, threshold, dx, dy) == true)
             {
-                if (builder != null)
+                if (selected != null)
                 {
-                    builder.Add(shape);
+                    selected.Add(shape);
                     return false;
                 }
                 else
@@ -732,16 +732,16 @@ namespace Core2D.Editor.Bounds
         /// <param name="shapes"></param>
         /// <param name="rect"></param>
         /// <param name="selection"></param>
-        /// <param name="builder"></param>
+        /// <param name="selected"></param>
         /// <param name="threshold"></param>
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <returns></returns>
-        private static bool HitTest(IEnumerable<BaseShape> shapes, Rect2 rect, Vector2[] selection, ImmutableHashSet<BaseShape>.Builder builder, double threshold, double dx, double dy)
+        private static bool HitTest(IEnumerable<BaseShape> shapes, Rect2 rect, Vector2[] selection, ISet<BaseShape> selected, double threshold, double dx, double dy)
         {
             foreach (var shape in shapes)
             {
-                var result = HitTest(shape, rect, selection, builder, threshold, dx, dy);
+                var result = HitTest(shape, rect, selection, selected, threshold, dx, dy);
                 if (result == true)
                 {
                     return true;
@@ -760,7 +760,7 @@ namespace Core2D.Editor.Bounds
         /// <returns></returns>
         public static ImmutableHashSet<BaseShape> HitTest(XContainer container, Rect2 rect, double threshold)
         {
-            var builder = ImmutableHashSet.CreateBuilder<BaseShape>();
+            var selected = ImmutableHashSet.CreateBuilder<BaseShape>();
 
             var selection = new Vector2[]
             {
@@ -770,9 +770,9 @@ namespace Core2D.Editor.Bounds
                 new Vector2(rect.X, rect.Y + rect.Height)
             };
 
-            HitTest(container.CurrentLayer.Shapes.Reverse(), rect, selection, builder, threshold, 0, 0);
+            HitTest(container.CurrentLayer.Shapes.Reverse(), rect, selection, selected, threshold, 0, 0);
 
-            return builder.ToImmutableHashSet();
+            return selected.ToImmutableHashSet();
         }
     }
 }
