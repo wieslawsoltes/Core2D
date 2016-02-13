@@ -12,7 +12,7 @@ namespace Core2D.Editor.Bounds
     /// <summary>
     /// 
     /// </summary>
-    internal static class ConvexHullBounds
+    public static class ConvexHullBounds
     {
         private static MonotoneChain mc = new MonotoneChain();
         private static SeparatingAxisTheorem sat = new SeparatingAxisTheorem();
