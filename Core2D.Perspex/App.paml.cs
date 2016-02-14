@@ -2,11 +2,10 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 //#define SKIA_WIN
 //#define SKIA_GTK
-using Core2D.Data.Database;
 using Core2D.Editor;
 using Core2D.Editor.Designer;
 using Core2D.Editor.Factories;
-using Core2D.Editor.Input;
+using Core2D.Editor.Interfaces;
 using Core2D.Interfaces;
 using Core2D.Project;
 using Core2D.Renderer;
@@ -34,7 +33,6 @@ using Serializer.Newtonsoft;
 using Serializer.ProtoBuf;
 using Serializer.Xaml;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -46,7 +44,7 @@ namespace Core2D.Perspex
     /// <summary>
     /// Encapsulates a Core2D Prespex application.
     /// </summary>
-    public class App : Application
+    public class App : Application, IEditorApplication
     {
         private ProjectEditor _editor;
         private Windows.MainWindow _mainWindow;
@@ -208,6 +206,7 @@ namespace Core2D.Perspex
             {
                 CurrentTool = Tool.Selection,
                 CurrentPathTool = PathTool.Line,
+                Application = this,
                 Log = log,
                 FileIO = new PerspexFileSystem(),
                 CommandManager = new PerspexCommandManager(),
@@ -221,202 +220,19 @@ namespace Core2D.Perspex
                 DxfWriter = new DxfWriter(),
                 CsvReader = new CsvHelperReader(),
                 CsvWriter = new CsvHelperWriter(),
-                GetImageKey = async () => await OnGetImageKey()
+                GetImageKey = async () => await OnGetImageKeyAsync()
             };
 
             _editor.Renderers[0].State.EnableAutofit = true;
             _editor.Renderers[0].State.DrawShapeState.Flags = ShapeStateFlags.Visible;
 
             _editor.DefaultTools();
-
             _editor.InitializeCommands();
-            InitializeCommands(_editor);
-
             _editor.CommandManager.RegisterCommands();
         }
 
-        /// <summary>
-        /// Initialize platform specific commands used by <see cref="ProjectEditor"/>.
-        /// </summary>
-        /// <param name="editor">The editor instance.</param>
-        private void InitializeCommands(ProjectEditor editor)
-        {
-            Commands.OpenCommand =
-                Command<string>.Create(
-                    async (path) => await OnOpen(path),
-                    (path) => editor.IsEditMode());
-
-            Commands.SaveCommand =
-                Command.Create(
-                    async () => await OnSave(),
-                    () => editor.IsEditMode());
-
-            Commands.SaveAsCommand =
-                Command.Create(
-                    async () => await OnSaveAs(),
-                    () => editor.IsEditMode());
-
-            Commands.ImportXamlCommand =
-                Command<string>.Create(
-                    async (path) => await OnImportXaml(path),
-                    (path) => editor.IsEditMode());
-
-            Commands.ExportCommand =
-                Command<object>.Create(
-                    async (item) => await OnExport(item),
-                    (item) => editor.IsEditMode());
-
-            Commands.ExitCommand =
-                Command.Create(
-                    () => OnExit(),
-                    () => true);
-
-            Commands.ImportDataCommand =
-                Command<XProject>.Create(
-                    async (project) => await OnImportData(),
-                    (project) => editor.IsEditMode());
-
-            Commands.ExportDataCommand =
-                Command<XDatabase>.Create(
-                    async (db) => await OnExportData(),
-                    (db) => editor.IsEditMode());
-
-            Commands.UpdateDataCommand =
-                Command<XDatabase>.Create(
-                    async (db) => await OnUpdateData(),
-                    (db) => editor.IsEditMode());
-
-            Commands.ImportStyleCommand =
-                Command<XLibrary<ShapeStyle>>.Create(
-                    async (item) => await OnImportObject(item, CoreType.Style),
-                    (item) => editor.IsEditMode());
-
-            Commands.ImportStylesCommand =
-                Command<XLibrary<ShapeStyle>>.Create(
-                    async (item) => await OnImportObject(item, CoreType.Styles),
-                    (item) => editor.IsEditMode());
-
-            Commands.ImportStyleLibraryCommand =
-                Command<XProject>.Create(
-                    async (item) => await OnImportObject(item, CoreType.StyleLibrary),
-                    (item) => editor.IsEditMode());
-
-            Commands.ImportStyleLibrariesCommand =
-                Command<XProject>.Create(
-                    async (item) => await OnImportObject(item, CoreType.StyleLibraries),
-                    (item) => editor.IsEditMode());
-
-            Commands.ImportGroupCommand =
-                Command<XLibrary<XGroup>>.Create(
-                    async (item) => await OnImportObject(item, CoreType.Group),
-                    (item) => editor.IsEditMode());
-
-            Commands.ImportGroupsCommand =
-                Command<XLibrary<XGroup>>.Create(
-                    async (item) => await OnImportObject(item, CoreType.Groups),
-                    (item) => editor.IsEditMode());
-
-            Commands.ImportGroupLibraryCommand =
-                Command<XProject>.Create(
-                    async (item) => await OnImportObject(item, CoreType.GroupLibrary),
-                    (item) => editor.IsEditMode());
-
-            Commands.ImportGroupLibrariesCommand =
-                Command<XProject>.Create(
-                    async (item) => await OnImportObject(item, CoreType.GroupLibraries),
-                    (item) => editor.IsEditMode());
-
-            Commands.ImportTemplateCommand =
-                Command<XProject>.Create(
-                    async (item) => await OnImportObject(item, CoreType.Template),
-                    (item) => editor.IsEditMode());
-
-            Commands.ImportTemplatesCommand =
-                Command<XProject>.Create(
-                    async (item) => await OnImportObject(item, CoreType.Templates),
-                    (item) => editor.IsEditMode());
-
-            Commands.ExportStyleCommand =
-                Command<ShapeStyle>.Create(
-                    async (item) => await OnExportObject(item, CoreType.Style),
-                    (item) => editor.IsEditMode());
-
-            Commands.ExportStylesCommand =
-                Command<XLibrary<ShapeStyle>>.Create(
-                    async (item) => await OnExportObject(item, CoreType.Styles),
-                    (item) => editor.IsEditMode());
-
-            Commands.ExportStyleLibraryCommand =
-                Command<XLibrary<ShapeStyle>>.Create(
-                    async (item) => await OnExportObject(item, CoreType.StyleLibrary),
-                    (item) => editor.IsEditMode());
-
-            Commands.ExportStyleLibrariesCommand =
-                Command<IEnumerable<XLibrary<ShapeStyle>>>.Create(
-                    async (item) => await OnExportObject(item, CoreType.StyleLibraries),
-                    (item) => editor.IsEditMode());
-
-            Commands.ExportGroupCommand =
-                Command<XGroup>.Create(
-                    async (item) => await OnExportObject(item, CoreType.Group),
-                    (item) => editor.IsEditMode());
-
-            Commands.ExportGroupsCommand =
-                Command<XLibrary<XGroup>>.Create(
-                    async (item) => await OnExportObject(item, CoreType.Groups),
-                    (item) => editor.IsEditMode());
-
-            Commands.ExportGroupLibraryCommand =
-                Command<XLibrary<XGroup>>.Create(
-                    async (item) => await OnExportObject(item, CoreType.GroupLibrary),
-                    (item) => editor.IsEditMode());
-
-            Commands.ExportGroupLibrariesCommand =
-                Command<IEnumerable<XLibrary<XGroup>>>.Create(
-                    async (item) => await OnExportObject(item, CoreType.GroupLibraries),
-                    (item) => editor.IsEditMode());
-
-            Commands.ExportTemplateCommand =
-                Command<XTemplate>.Create(
-                    async (item) => await OnExportObject(item, CoreType.Template),
-                    (item) => editor.IsEditMode());
-
-            Commands.ExportTemplatesCommand =
-                Command<IEnumerable<XTemplate>>.Create(
-                    async (item) => await OnExportObject(item, CoreType.Templates),
-                    (item) => editor.IsEditMode());
-
-            Commands.ZoomResetCommand =
-                Command.Create(
-                    () => editor.ResetZoom(),
-                    () => true);
-
-            Commands.ZoomExtentCommand =
-                Command.Create(
-                    () => editor.ExtentZoom(),
-                    () => true);
-
-            Commands.LoadWindowLayoutCommand =
-                Command.Create(
-                    () => { },
-                    () => true);
-
-            Commands.SaveWindowLayoutCommand =
-                Command.Create(
-                    () => { },
-                    () => true);
-
-            Commands.ResetWindowLayoutCommand =
-                Command.Create(
-                    () => { },
-                    () => true);
-        }
-
-        /// <summary>
-        /// Get the <see cref="XImage"/> key from file path.
-        /// </summary>
-        /// <returns>The image key.</returns>
-        private async Task<string> OnGetImageKey()
+        /// <inheritdoc/>
+        public async Task<string> OnGetImageKeyAsync()
         {
             try
             {
@@ -439,16 +255,12 @@ namespace Core2D.Perspex
             }
         }
 
-        /// <summary>
-        /// Open <see cref="Project"/> from file.
-        /// </summary>
-        /// <param name="parameter"></param>
-        /// <returns>The await <see cref="Task"/>.</returns>
-        private async Task OnOpen(object parameter)
+        /// <inheritdoc/>
+        public async Task OnOpenAsync(string path)
         {
             try
             {
-                if (parameter == null)
+                if (path == null)
                 {
                     var dlg = new OpenFileDialog();
                     dlg.Filters.Add(new FileDialogFilter() { Name = "Project", Extensions = { "project" } });
@@ -456,15 +268,13 @@ namespace Core2D.Perspex
                     var result = await dlg.ShowAsync(_mainWindow);
                     if (result != null)
                     {
-                        var path = result.FirstOrDefault();
-                        _editor?.Open(path);
+                        _editor?.Open(result.FirstOrDefault());
                         _editor?.Invalidate?.Invoke();
                     }
                 }
                 else
                 {
-                    string path = parameter as string;
-                    if (path != null && System.IO.File.Exists(path))
+                    if (System.IO.File.Exists(path))
                     {
                         _editor.Open(path);
                     }
@@ -476,11 +286,8 @@ namespace Core2D.Perspex
             }
         }
 
-        /// <summary>
-        /// Save current <see cref="Project"/> to external file.
-        /// </summary>
-        /// <returns>The await <see cref="Task"/>.</returns>
-        private async Task OnSave()
+        /// <inheritdoc/>
+        public async Task OnSaveAsync()
         {
             try
             {
@@ -490,7 +297,7 @@ namespace Core2D.Perspex
                 }
                 else
                 {
-                    await OnSaveAs();
+                    await OnSaveAsAsync();
                 }
             }
             catch (Exception ex)
@@ -499,11 +306,8 @@ namespace Core2D.Perspex
             }
         }
 
-        /// <summary>
-        /// Save current <see cref="Project"/> to external file.
-        /// </summary>
-        /// <returns>The await <see cref="Task"/>.</returns>
-        private async Task OnSaveAs()
+        /// <inheritdoc/>
+        public async Task OnSaveAsAsync()
         {
             try
             {
@@ -526,16 +330,12 @@ namespace Core2D.Perspex
             }
         }
 
-        /// <summary>
-        /// Import Xaml from file.
-        /// </summary>
-        /// <param name="parameter">The Xaml file path.</param>
-        /// <returns>The await <see cref="Task"/>.</returns>
-        private async Task OnImportXaml(string parameter)
+        /// <inheritdoc/>
+        public async Task OnImportXamlAsync(string path)
         {
             try
             {
-                if (parameter == null)
+                if (path == null)
                 {
                     var dlg = new OpenFileDialog();
                     dlg.AllowMultiple = true;
@@ -545,16 +345,15 @@ namespace Core2D.Perspex
                     var results = await dlg.ShowAsync(_mainWindow);
                     if (results != null)
                     {
-                        foreach (var path in results)
+                        foreach (var result in results)
                         {
-                            _editor?.OnImportXaml(path);
+                            _editor?.OnImportXaml(result);
                         }
                     }
                 }
                 else
                 {
-                    string path = parameter;
-                    if (path != null && System.IO.File.Exists(path))
+                    if (System.IO.File.Exists(path))
                     {
                         _editor?.OnImportXaml(path);
                     }
@@ -566,12 +365,8 @@ namespace Core2D.Perspex
             }
         }
 
-        /// <summary>
-        /// Export item object to external file.
-        /// </summary>
-        /// <param name="item">The item object to export.</param>
-        /// <returns>The await <see cref="Task"/>.</returns>
-        private async Task OnExport(object item)
+        /// <inheritdoc/>
+        public async Task OnExportAsync(object item)
         {
             try
             {
@@ -634,19 +429,8 @@ namespace Core2D.Perspex
             }
         }
 
-        /// <summary>
-        /// Close application view.
-        /// </summary>
-        public void OnExit()
-        {
-            _mainWindow?.Close();
-        }
-
-        /// <summary>
-        /// Import records into new database.
-        /// </summary>
-        /// <returns>The await <see cref="Task"/>.</returns>
-        private async Task OnImportData()
+        /// <inheritdoc/>
+        public async Task OnImportDataAsync()
         {
             try
             {
@@ -669,11 +453,8 @@ namespace Core2D.Perspex
             }
         }
 
-        /// <summary>
-        /// Export records to external file.
-        /// </summary>
-        /// <returns>The await <see cref="Task"/>.</returns>
-        private async Task OnExportData()
+        /// <inheritdoc/>
+        public async Task OnExportDataAsync()
         {
             try
             {
@@ -697,11 +478,8 @@ namespace Core2D.Perspex
             }
         }
 
-        /// <summary>
-        /// Update records in current database.
-        /// </summary>
-        /// <returns>The await <see cref="Task"/>.</returns>
-        private async Task OnUpdateData()
+        /// <inheritdoc/>
+        public async Task OnUpdateDataAsync()
         {
             try
             {
@@ -725,13 +503,8 @@ namespace Core2D.Perspex
             }
         }
 
-        /// <summary>
-        /// Import item object from external file.
-        /// </summary>
-        /// <param name="item">The item object to import.</param>
-        /// <param name="type">The type of item object.</param>
-        /// <returns>The await <see cref="Task"/>.</returns>
-        private async Task OnImportObject(object item, CoreType type)
+        /// <inheritdoc/>
+        public async Task OnImportObjectAsync(object item, CoreType type)
         {
             try
             {
@@ -804,13 +577,8 @@ namespace Core2D.Perspex
             }
         }
 
-        /// <summary>
-        /// Export item object to external file.
-        /// </summary>
-        /// <param name="item">The item object to export.</param>
-        /// <param name="type">The type of item object.</param>
-        /// <returns>The await <see cref="Task"/>.</returns>
-        private async Task OnExportObject(object item, CoreType type)
+        /// <inheritdoc/>
+        public async Task OnExportObjectAsync(object item, CoreType type)
         {
             try
             {
@@ -898,6 +666,54 @@ namespace Core2D.Perspex
             {
                 _editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
+        }
+
+        /// <inheritdoc/>
+        public async Task OnCopyAsEmfAsync()
+        {
+            await Task.Delay(0);
+        }
+
+        /// <inheritdoc/>
+        public async Task OnExportAsEmfAsync(string path)
+        {
+            await Task.Delay(0);
+        }
+
+        /// <inheritdoc/>
+        public async Task OnZoomResetAsync()
+        {
+            await Task.Delay(0);
+        }
+
+        /// <inheritdoc/>
+        public async Task OnZoomExtentAsync()
+        {
+            await Task.Delay(0);
+        }
+
+        /// <inheritdoc/>
+        public async Task OnLoadWindowLayout()
+        {
+            await Task.Delay(0);
+        }
+
+        /// <inheritdoc/>
+        public async Task OnSaveWindowLayoutAsync()
+        {
+            await Task.Delay(0);
+        }
+
+        /// <inheritdoc/>
+        public async Task OnResetWindowLayoutAsync()
+        {
+            await Task.Delay(0);
+        }
+
+        /// <inheritdoc/>
+        public void OnExit()
+        {
+            _mainWindow?.Close();
         }
     }
 }

@@ -5,6 +5,7 @@ using Core2D.Data.Database;
 using Core2D.Editor.Bounds;
 using Core2D.Editor.Factories;
 using Core2D.Editor.Input;
+using Core2D.Editor.Interfaces;
 using Core2D.Editor.Recent;
 using Core2D.Editor.Tools;
 using Core2D.History;
@@ -31,6 +32,7 @@ namespace Core2D.Editor
     /// </summary>
     public sealed class ProjectEditor : ObservableObject
     {
+        private IEditorApplication _application;
         private ILog _log;
         private CommandManager _commandManager;
         private IFileSystem _fileIO;
@@ -59,6 +61,15 @@ namespace Core2D.Editor
         private RecentFile _currentRecentProject = default(RecentFile);
         private XPage _pageToCopy = default(XPage);
         private XDocument _documentToCopy = default(XDocument);
+
+        /// <summary>
+        /// Gets or sets current editor application.
+        /// </summary>
+        public IEditorApplication Application
+        {
+            get { return _application; }
+            set { Update(ref _application, value); }
+        }
 
         /// <summary>
         /// Gets or sets current log.
@@ -638,7 +649,7 @@ namespace Core2D.Editor
                 {
                     if (_project != null)
                     {
-                        _project.Options = item as XOptions; 
+                        _project.Options = item as XOptions;
                     }
                 }
                 else if (item is XProject)
@@ -4260,6 +4271,181 @@ namespace Core2D.Editor
                 Command<object>.Create(
                     (item) => OnInsertDocumentAfter(item),
                     (item) => IsEditMode());
+
+            Commands.OpenCommand =
+                 Command<string>.Create(
+                     async (path) => await Application?.OnOpenAsync(path),
+                     (path) => IsEditMode());
+
+            Commands.SaveCommand =
+                Command.Create(
+                    async () => await Application?.OnSaveAsync(),
+                    () => IsEditMode());
+
+            Commands.SaveAsCommand =
+                Command.Create(
+                    async () => await Application?.OnSaveAsAsync(),
+                    () => IsEditMode());
+
+            Commands.ImportXamlCommand =
+                Command<string>.Create(
+                    async (path) => await Application?.OnImportXamlAsync(path),
+                    (path) => IsEditMode());
+
+            Commands.ExportCommand =
+                Command<object>.Create(
+                    async (item) => await Application?.OnExportAsync(item),
+                    (item) => IsEditMode());
+
+            Commands.ExitCommand =
+                Command.Create(
+                    () => Application?.OnExit(),
+                    () => true);
+
+            Commands.ImportDataCommand =
+                Command<XProject>.Create(
+                    async (project) => await Application?.OnImportDataAsync(),
+                    (project) => IsEditMode());
+
+            Commands.ExportDataCommand =
+                Command<XDatabase>.Create(
+                    async (db) => await Application?.OnExportDataAsync(),
+                    (db) => IsEditMode());
+
+            Commands.UpdateDataCommand =
+                Command<XDatabase>.Create(
+                    async (db) => await Application?.OnUpdateDataAsync(),
+                    (db) => IsEditMode());
+
+            Commands.ImportStyleCommand =
+                Command<XLibrary<ShapeStyle>>.Create(
+                    async (item) => await Application?.OnImportObjectAsync(item, CoreType.Style),
+                    (item) => IsEditMode());
+
+            Commands.ImportStylesCommand =
+                Command<XLibrary<ShapeStyle>>.Create(
+                    async (item) => await Application?.OnImportObjectAsync(item, CoreType.Styles),
+                    (item) => IsEditMode());
+
+            Commands.ImportStyleLibraryCommand =
+                Command<XProject>.Create(
+                    async (item) => await Application?.OnImportObjectAsync(item, CoreType.StyleLibrary),
+                    (item) => IsEditMode());
+
+            Commands.ImportStyleLibrariesCommand =
+                Command<XProject>.Create(
+                    async (item) => await Application?.OnImportObjectAsync(item, CoreType.StyleLibraries),
+                    (item) => IsEditMode());
+
+            Commands.ImportGroupCommand =
+                Command<XLibrary<XGroup>>.Create(
+                    async (item) => await Application?.OnImportObjectAsync(item, CoreType.Group),
+                    (item) => IsEditMode());
+
+            Commands.ImportGroupsCommand =
+                Command<XLibrary<XGroup>>.Create(
+                    async (item) => await Application?.OnImportObjectAsync(item, CoreType.Groups),
+                    (item) => IsEditMode());
+
+            Commands.ImportGroupLibraryCommand =
+                Command<XProject>.Create(
+                    async (item) => await Application?.OnImportObjectAsync(item, CoreType.GroupLibrary),
+                    (item) => IsEditMode());
+
+            Commands.ImportGroupLibrariesCommand =
+                Command<XProject>.Create(
+                    async (item) => await Application?.OnImportObjectAsync(item, CoreType.GroupLibraries),
+                    (item) => IsEditMode());
+
+            Commands.ImportTemplateCommand =
+                Command<XProject>.Create(
+                    async (item) => await Application?.OnImportObjectAsync(item, CoreType.Template),
+                    (item) => IsEditMode());
+
+            Commands.ImportTemplatesCommand =
+                Command<XProject>.Create(
+                    async (item) => await Application?.OnImportObjectAsync(item, CoreType.Templates),
+                    (item) => IsEditMode());
+
+            Commands.ExportStyleCommand =
+                Command<ShapeStyle>.Create(
+                    async (item) => await Application?.OnExportObjectAsync(item, CoreType.Style),
+                    (item) => IsEditMode());
+
+            Commands.ExportStylesCommand =
+                Command<XLibrary<ShapeStyle>>.Create(
+                    async (item) => await Application?.OnExportObjectAsync(item, CoreType.Styles),
+                    (item) => IsEditMode());
+
+            Commands.ExportStyleLibraryCommand =
+                Command<XLibrary<ShapeStyle>>.Create(
+                    async (item) => await Application?.OnExportObjectAsync(item, CoreType.StyleLibrary),
+                    (item) => IsEditMode());
+
+            Commands.ExportStyleLibrariesCommand =
+                Command<IEnumerable<XLibrary<ShapeStyle>>>.Create(
+                    async (item) => await Application?.OnExportObjectAsync(item, CoreType.StyleLibraries),
+                    (item) => IsEditMode());
+
+            Commands.ExportGroupCommand =
+                Command<XGroup>.Create(
+                    async (item) => await Application?.OnExportObjectAsync(item, CoreType.Group),
+                    (item) => IsEditMode());
+
+            Commands.ExportGroupsCommand =
+                Command<XLibrary<XGroup>>.Create(
+                    async (item) => await Application?.OnExportObjectAsync(item, CoreType.Groups),
+                    (item) => IsEditMode());
+
+            Commands.ExportGroupLibraryCommand =
+                Command<XLibrary<XGroup>>.Create(
+                    async (item) => await Application?.OnExportObjectAsync(item, CoreType.GroupLibrary),
+                    (item) => IsEditMode());
+
+            Commands.ExportGroupLibrariesCommand =
+                Command<IEnumerable<XLibrary<XGroup>>>.Create(
+                    async (item) => await Application?.OnExportObjectAsync(item, CoreType.GroupLibraries),
+                    (item) => IsEditMode());
+
+            Commands.ExportTemplateCommand =
+                Command<XTemplate>.Create(
+                    async (item) => await Application?.OnExportObjectAsync(item, CoreType.Template),
+                    (item) => IsEditMode());
+
+            Commands.ExportTemplatesCommand =
+                Command<IEnumerable<XTemplate>>.Create(
+                    async (item) => await Application?.OnExportObjectAsync(item, CoreType.Templates),
+                    (item) => IsEditMode());
+
+            Commands.CopyAsEmfCommand =
+                Command.Create(
+                    async () => await Application?.OnCopyAsEmfAsync(),
+                    () => IsEditMode());
+
+            Commands.ZoomResetCommand =
+                Command.Create(
+                    async () => await Application?.OnZoomResetAsync(),
+                    () => true);
+
+            Commands.ZoomExtentCommand =
+                Command.Create(
+                    async () => await Application?.OnZoomExtentAsync(),
+                    () => true);
+
+            Commands.LoadWindowLayoutCommand =
+                Command.Create(
+                    async () => await Application?.OnLoadWindowLayout(),
+                    () => true);
+
+            Commands.SaveWindowLayoutCommand =
+                Command.Create(
+                    async () => await Application?.OnSaveWindowLayoutAsync(),
+                    () => true);
+
+            Commands.ResetWindowLayoutCommand =
+                Command.Create(
+                    async () => await Application?.OnResetWindowLayoutAsync(),
+                    () => true);
         }
     }
 }

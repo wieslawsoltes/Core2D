@@ -36,6 +36,7 @@
     <DocumentationFile>bin\Release\Core2D.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Editor\Interfaces\IEditorApplication.cs" />
     <Compile Include="Editor\Bounds\LineBounds.cs" />
     <Compile Include="Editor\Bounds\RectangleBounds.cs" />
     <Compile Include="Editor\Bounds\ShapeHitTestPoint.cs" />

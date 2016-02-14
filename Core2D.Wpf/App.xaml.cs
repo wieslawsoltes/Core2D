@@ -1,9 +1,8 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Core2D.Data.Database;
 using Core2D.Editor;
 using Core2D.Editor.Factories;
-using Core2D.Editor.Input;
+using Core2D.Editor.Interfaces;
 using Core2D.Interfaces;
 using Core2D.Project;
 using Core2D.Renderer;
@@ -20,7 +19,6 @@ using Serializer.Newtonsoft;
 using Serializer.ProtoBuf;
 using Serializer.Xaml;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -33,7 +31,7 @@ namespace Core2D.Wpf
     /// <summary>
     /// Encapsulates a Core2D WPF application.
     /// </summary>
-    public partial class App : Application
+    public partial class App : Application, IEditorApplication
     {
         private ProjectEditor _editor;
         private Windows.MainWindow _mainWindow;
@@ -72,7 +70,6 @@ namespace Core2D.Wpf
                     _mainWindow.InitializeZoom(_editor);
                     _mainWindow.InitializeDrop(_editor);
                     _mainWindow.Loaded += (sender, e) => OnLoaded();
-                    _mainWindow.Unloaded += (sender, e) => { };
                     _mainWindow.Closed += (sender, e) => OnClosed();
                     _mainWindow.DataContext = _editor;
                     _mainWindow.ShowDialog();
@@ -185,6 +182,7 @@ namespace Core2D.Wpf
             {
                 CurrentTool = Tool.Selection,
                 CurrentPathTool = PathTool.Line,
+                Application = this,
                 Log = log,
                 FileIO = new WpfFileSystem(),
                 CommandManager = new WpfCommandManager(),
@@ -198,207 +196,19 @@ namespace Core2D.Wpf
                 DxfWriter = new DxfWriter(),
                 CsvReader = new CsvHelperReader(),
                 CsvWriter = new CsvHelperWriter(),
-                GetImageKey = async () => await OnGetImageKey()
+                GetImageKey = async () => await OnGetImageKeyAsync()
             };
 
             _editor.Renderers[0].State.EnableAutofit = true;
             _editor.Renderers[0].State.DrawShapeState.Flags = ShapeStateFlags.Visible;
 
             _editor.DefaultTools();
-
             _editor.InitializeCommands();
-            InitializeCommands(_editor);
-
             _editor.CommandManager.RegisterCommands();
         }
 
-        /// <summary>
-        /// Initialize platform specific commands used by <see cref="Editor"/>.
-        /// </summary>
-        /// <param name="editor">The editor instance.</param>
-        private void InitializeCommands(ProjectEditor editor)
-        {
-            Commands.OpenCommand =
-                Command<string>.Create(
-                    (path) => OnOpen(path),
-                    (path) => editor.IsEditMode());
-
-            Commands.SaveCommand =
-                Command.Create(
-                    () => OnSave(),
-                    () => editor.IsEditMode());
-
-            Commands.SaveAsCommand =
-                Command.Create(
-                    () => OnSaveAs(),
-                    () => editor.IsEditMode());
-
-            Commands.ImportXamlCommand =
-                Command<string>.Create(
-                    (path) => OnImportXaml(path),
-                    (path) => editor.IsEditMode());
-
-            Commands.ExportCommand =
-                Command<object>.Create(
-                    (item) => OnExport(item),
-                    (item) => editor.IsEditMode());
-
-            Commands.ExitCommand =
-                Command.Create(
-                    () => OnExit(),
-                    () => true);
-
-            Commands.ImportDataCommand =
-                Command<XProject>.Create(
-                    (project) => OnImportData(),
-                    (project) => editor.IsEditMode());
-
-            Commands.ExportDataCommand =
-                Command<XDatabase>.Create(
-                    (db) => OnExportData(),
-                    (db) => editor.IsEditMode());
-
-            Commands.UpdateDataCommand =
-                Command<XDatabase>.Create(
-                    (db) => OnUpdateData(),
-                    (db) => editor.IsEditMode());
-
-            Commands.ImportStyleCommand =
-                Command<XLibrary<ShapeStyle>>.Create(
-                    (item) => OnImportObject(item, CoreType.Style),
-                    (item) => editor.IsEditMode());
-
-            Commands.ImportStylesCommand =
-                Command<XLibrary<ShapeStyle>>.Create(
-                    (item) => OnImportObject(item, CoreType.Styles),
-                    (item) => editor.IsEditMode());
-
-            Commands.ImportStyleLibraryCommand =
-                Command<XProject>.Create(
-                    (item) => OnImportObject(item, CoreType.StyleLibrary),
-                    (item) => editor.IsEditMode());
-
-            Commands.ImportStyleLibrariesCommand =
-                Command<XProject>.Create(
-                    (item) => OnImportObject(item, CoreType.StyleLibraries),
-                    (item) => editor.IsEditMode());
-
-            Commands.ImportGroupCommand =
-                Command<XLibrary<XGroup>>.Create(
-                    (item) => OnImportObject(item, CoreType.Group),
-                    (item) => editor.IsEditMode());
-
-            Commands.ImportGroupsCommand =
-                Command<XLibrary<XGroup>>.Create(
-                    (item) => OnImportObject(item, CoreType.Groups),
-                    (item) => editor.IsEditMode());
-
-            Commands.ImportGroupLibraryCommand =
-                Command<XProject>.Create(
-                    (item) => OnImportObject(item, CoreType.GroupLibrary),
-                    (item) => editor.IsEditMode());
-
-            Commands.ImportGroupLibrariesCommand =
-                Command<XProject>.Create(
-                    (item) => OnImportObject(item, CoreType.GroupLibraries),
-                    (item) => editor.IsEditMode());
-
-            Commands.ImportTemplateCommand =
-                Command<XProject>.Create(
-                    (item) => OnImportObject(item, CoreType.Template),
-                    (item) => editor.IsEditMode());
-
-            Commands.ImportTemplatesCommand =
-                Command<XProject>.Create(
-                    (item) => OnImportObject(item, CoreType.Templates),
-                    (item) => editor.IsEditMode());
-
-            Commands.ExportStyleCommand =
-                Command<ShapeStyle>.Create(
-                    (item) => OnExportObject(item, CoreType.Style),
-                    (item) => editor.IsEditMode());
-
-            Commands.ExportStylesCommand =
-                Command<XLibrary<ShapeStyle>>.Create(
-                    (item) => OnExportObject(item, CoreType.Styles),
-                    (item) => editor.IsEditMode());
-
-            Commands.ExportStyleLibraryCommand =
-                Command<XLibrary<ShapeStyle>>.Create(
-                    (item) => OnExportObject(item, CoreType.StyleLibrary),
-                    (item) => editor.IsEditMode());
-
-            Commands.ExportStyleLibrariesCommand =
-                Command<IEnumerable<XLibrary<ShapeStyle>>>.Create(
-                    (item) => OnExportObject(item, CoreType.StyleLibraries),
-                    (item) => editor.IsEditMode());
-
-            Commands.ExportGroupCommand =
-                Command<XGroup>.Create(
-                    (item) => OnExportObject(item, CoreType.Group),
-                    (item) => editor.IsEditMode());
-
-            Commands.ExportGroupsCommand =
-                Command<XLibrary<XGroup>>.Create(
-                    (item) => OnExportObject(item, CoreType.Groups),
-                    (item) => editor.IsEditMode());
-
-            Commands.ExportGroupLibraryCommand =
-                Command<XLibrary<XGroup>>.Create(
-                    (item) => OnExportObject(item, CoreType.GroupLibrary),
-                    (item) => editor.IsEditMode());
-
-            Commands.ExportGroupLibrariesCommand =
-                Command<IEnumerable<XLibrary<XGroup>>>.Create(
-                    (item) => OnExportObject(item, CoreType.GroupLibraries),
-                    (item) => editor.IsEditMode());
-
-            Commands.ExportTemplateCommand =
-                Command<XTemplate>.Create(
-                    (item) => OnExportObject(item, CoreType.Template),
-                    (item) => editor.IsEditMode());
-
-            Commands.ExportTemplatesCommand =
-                Command<IEnumerable<XTemplate>>.Create(
-                    (item) => OnExportObject(item, CoreType.Templates),
-                    (item) => editor.IsEditMode());
-
-            Commands.CopyAsEmfCommand =
-                Command.Create(
-                    () => OnCopyAsEmf(),
-                    () => editor.IsEditMode());
-
-            Commands.ZoomResetCommand =
-                Command.Create(
-                    () => _mainWindow.OnZoomReset(),
-                    () => true);
-
-            Commands.ZoomExtentCommand =
-                Command.Create(
-                    () => _mainWindow.OnZoomExtent(),
-                    () => true);
-
-            Commands.LoadWindowLayoutCommand =
-                Command.Create(
-                    () => _mainWindow.OnLoadLayout(),
-                    () => true);
-
-            Commands.SaveWindowLayoutCommand =
-                Command.Create(
-                    () => _mainWindow.OnSaveLayout(),
-                    () => true);
-
-            Commands.ResetWindowLayoutCommand =
-                Command.Create(
-                    () => _mainWindow.OnResetLayout(),
-                    () => true);
-        }
-
-        /// <summary>
-        /// Get the <see cref="XImage"/> key from file path.
-        /// </summary>
-        /// <returns>The image key.</returns>
-        private async Task<string> OnGetImageKey()
+        /// <inheritdoc/>
+        public async Task<string> OnGetImageKeyAsync()
         {
             var dlg = new OpenFileDialog()
             {
@@ -424,11 +234,8 @@ namespace Core2D.Wpf
             return null;
         }
 
-        /// <summary>
-        /// Open <see cref="Project"/> from file.
-        /// </summary>
-        /// <param name="path"></param>
-        private void OnOpen(string path)
+        /// <inheritdoc/>
+        public async Task OnOpenAsync(string path)
         {
             if (path == null)
             {
@@ -446,17 +253,17 @@ namespace Core2D.Wpf
             }
             else
             {
-                if (path != null && System.IO.File.Exists(path))
+                if (System.IO.File.Exists(path))
                 {
                     _editor?.Open(path);
                 }
             }
+
+            await Task.Delay(0);
         }
 
-        /// <summary>
-        /// Save current <see cref="Project"/> to external file.
-        /// </summary>
-        private void OnSave()
+        /// <inheritdoc/>
+        public async Task OnSaveAsync()
         {
             if (!string.IsNullOrEmpty(_editor?.ProjectPath))
             {
@@ -464,14 +271,12 @@ namespace Core2D.Wpf
             }
             else
             {
-                OnSaveAs();
+                await OnSaveAsAsync();
             }
         }
 
-        /// <summary>
-        /// Save current <see cref="Project"/> to external file.
-        /// </summary>
-        private void OnSaveAs()
+        /// <inheritdoc/>
+        public async Task OnSaveAsAsync()
         {
             var dlg = new SaveFileDialog()
             {
@@ -484,15 +289,14 @@ namespace Core2D.Wpf
             {
                 _editor?.Save(dlg.FileName);
             }
+
+            await Task.Delay(0);
         }
 
-        /// <summary>
-        /// Import Xaml from file.
-        /// </summary>
-        /// <param name="parameter">The Xaml file path.</param>
-        private void OnImportXaml(string parameter)
+        /// <inheritdoc/>
+        public async Task OnImportXamlAsync(string path)
         {
-            if (parameter == null)
+            if (path == null)
             {
                 var dlg = new OpenFileDialog()
                 {
@@ -504,28 +308,27 @@ namespace Core2D.Wpf
 
                 if (dlg.ShowDialog(_mainWindow) == true)
                 {
-                    var paths = dlg.FileNames;
+                    var results = dlg.FileNames;
 
-                    foreach (var path in paths)
+                    foreach (var result in results)
                     {
-                        _editor?.OnImportXaml(path);
+                        _editor?.OnImportXaml(result);
                     }
                 }
             }
             else
             {
-                if (parameter != null && System.IO.File.Exists(parameter))
+                if (System.IO.File.Exists(path))
                 {
-                    _editor?.OnImportXaml(parameter);
+                    _editor?.OnImportXaml(path);
                 }
             }
+
+            await Task.Delay(0);
         }
 
-        /// <summary>
-        /// Export item object to external file.
-        /// </summary>
-        /// <param name="item">The item object to export.</param>
-        private void OnExport(object item)
+        /// <inheritdoc/>
+        public async Task OnExportAsync(object item)
         {
             string name = string.Empty;
 
@@ -574,7 +377,7 @@ namespace Core2D.Wpf
                         _editor?.ExportAsPdf(dlg.FileName, item);
                         break;
                     case 2:
-                        OnExportAsEmf(dlg.FileName);
+                        await OnExportAsEmfAsync(dlg.FileName);
                         break;
                     case 3:
                         _editor?.ExportAsDxf(dlg.FileName, item);
@@ -585,18 +388,8 @@ namespace Core2D.Wpf
             }
         }
 
-        /// <summary>
-        /// Close application view.
-        /// </summary>
-        public void OnExit()
-        {
-            _mainWindow?.Close();
-        }
-
-        /// <summary>
-        /// Import records into new database.
-        /// </summary>
-        private void OnImportData()
+        /// <inheritdoc/>
+        public async Task OnImportDataAsync()
         {
             var dlg = new OpenFileDialog()
             {
@@ -609,12 +402,12 @@ namespace Core2D.Wpf
             {
                 _editor?.OnImportData(dlg.FileName);
             }
+
+            await Task.Delay(0);
         }
 
-        /// <summary>
-        /// Export records to external file.
-        /// </summary>
-        private void OnExportData()
+        /// <inheritdoc/>
+        public async Task OnExportDataAsync()
         {
             var database = _editor?.Project?.CurrentDatabase;
             if (database != null)
@@ -631,12 +424,12 @@ namespace Core2D.Wpf
                     _editor?.OnExportData(dlg.FileName, database);
                 }
             }
+
+            await Task.Delay(0);
         }
 
-        /// <summary>
-        /// Update records in current database.
-        /// </summary>
-        private void OnUpdateData()
+        /// <inheritdoc/>
+        public async Task OnUpdateDataAsync()
         {
             var database = _editor?.Project?.CurrentDatabase;
             if (database != null)
@@ -653,14 +446,12 @@ namespace Core2D.Wpf
                     _editor?.OnUpdateData(dlg.FileName, database);
                 }
             }
+
+            await Task.Delay(0);
         }
 
-        /// <summary>
-        /// Import item object from external file.
-        /// </summary>
-        /// <param name="item">The item object to import.</param>
-        /// <param name="type">The type of item object.</param>
-        private void OnImportObject(object item, CoreType type)
+        /// <inheritdoc/>
+        public async Task OnImportObjectAsync(object item, CoreType type)
         {
             if (item == null)
                 return;
@@ -717,14 +508,12 @@ namespace Core2D.Wpf
                     _editor?.OnImportObject(path, item, type);
                 }
             }
+
+            await Task.Delay(0);
         }
 
-        /// <summary>
-        /// Export item object to external file.
-        /// </summary>
-        /// <param name="item">The item object to export.</param>
-        /// <param name="type">The type of item object.</param>
-        private void OnExportObject(object item, CoreType type)
+        /// <inheritdoc/>
+        public async Task OnExportObjectAsync(object item, CoreType type)
         {
             if (item == null)
                 return;
@@ -799,12 +588,12 @@ namespace Core2D.Wpf
                         break;
                 }
             }
+
+            await Task.Delay(0);
         }
 
-        /// <summary>
-        /// Copy currently selected shapes to clipboard as enhanced metafile.
-        /// </summary>
-        private void OnCopyAsEmf()
+        /// <inheritdoc/>
+        public async Task OnCopyAsEmfAsync()
         {
             var page = _editor?.Project?.CurrentContainer as XPage;
             if (page != null)
@@ -838,13 +627,12 @@ namespace Core2D.Wpf
                     writer.SetClipboard(page, _editor.Project);
                 }
             }
+
+            await Task.Delay(0);
         }
 
-        /// <summary>
-        /// Save currently selected shapes as enhanced metafile.
-        /// </summary>
-        /// <param name="path">The file path.</param>
-        private void OnExportAsEmf(string path)
+        /// <inheritdoc/>
+        public async Task OnExportAsEmfAsync(string path)
         {
             try
             {
@@ -861,6 +649,51 @@ namespace Core2D.Wpf
             {
                 _editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
+
+            await Task.Delay(0);
+        }
+
+        /// <inheritdoc/>
+        public async Task OnZoomResetAsync()
+        {
+            _mainWindow.OnZoomReset();
+            await Task.Delay(0);
+        }
+
+        /// <inheritdoc/>
+        public async Task OnZoomExtentAsync()
+        {
+            _mainWindow.OnZoomExtent();
+            await Task.Delay(0);
+        }
+
+        /// <inheritdoc/>
+        public async Task OnLoadWindowLayout()
+        {
+            _mainWindow.OnLoadLayout();
+            await Task.Delay(0);
+        }
+
+        /// <inheritdoc/>
+        public async Task OnSaveWindowLayoutAsync()
+        {
+            _mainWindow.OnSaveLayout();
+            await Task.Delay(0);
+        }
+
+        /// <inheritdoc/>
+        public async Task OnResetWindowLayoutAsync()
+        {
+            _mainWindow.OnResetLayout();
+            await Task.Delay(0);
+        }
+
+        /// <summary>
+        /// Close application view.
+        /// </summary>
+        public void OnExit()
+        {
+            _mainWindow?.Close();
         }
     }
 }
