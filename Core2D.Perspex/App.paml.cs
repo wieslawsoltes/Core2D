@@ -61,7 +61,7 @@ namespace Core2D.Perspex
         {
             DesignerContext.InitializeContext(
                 new PerspexRenderer(),
-                new TextClipboard(),
+                new PerspexTextClipboard(),
                 new ProtoBufStreamSerializer(),
                 new NewtonsoftTextSerializer(),
                 new PortableXamlSerializer());
@@ -129,9 +129,7 @@ namespace Core2D.Perspex
                     LoadRecent();
 
                     _mainWindow = new Windows.MainWindow();
-
                     _mainWindow.Closed += (sender, e) => SaveRecent();
-
                     _mainWindow.DataContext = _editor;
                     _mainWindow.Show();
                     Run(_mainWindow);
@@ -210,35 +208,31 @@ namespace Core2D.Perspex
             {
                 CurrentTool = Tool.Selection,
                 CurrentPathTool = PathTool.Line,
+                Log = log,
+                FileIO = new PerspexFileSystem(),
+                CommandManager = new PerspexCommandManager(),
                 Renderers = new ShapeRenderer[] { new PerspexRenderer() },
                 ProjectFactory = new ProjectFactory(),
-                TextClipboard = new TextClipboard(),
+                TextClipboard = new PerspexTextClipboard(),
                 ProtoBufSerializer = new ProtoBufStreamSerializer(),
                 JsonSerializer = new NewtonsoftTextSerializer(),
                 XamlSerializer = new PortableXamlSerializer(),
                 PdfWriter = new PdfWriter(),
                 DxfWriter = new DxfWriter(),
                 CsvReader = new CsvHelperReader(),
-                CsvWriter = new CsvHelperWriter()
+                CsvWriter = new CsvHelperWriter(),
+                GetImageKey = async () => await OnGetImageKey()
             };
-
-            _editor.Log = log;
-
-            _editor.FileIO = new FileSystem();
 
             _editor.Renderers[0].State.EnableAutofit = true;
             _editor.Renderers[0].State.DrawShapeState.Flags = ShapeStateFlags.Visible;
-
-            _editor.GetImageKey = async () => await OnGetImageKey();
 
             _editor.DefaultTools();
 
             _editor.InitializeCommands();
             InitializeCommands(_editor);
 
-            var manager = new EditorCommandManager();
-            manager.RegisterCommands();
-            _editor.CommandManager = manager;
+            _editor.CommandManager.RegisterCommands();
         }
 
         /// <summary>

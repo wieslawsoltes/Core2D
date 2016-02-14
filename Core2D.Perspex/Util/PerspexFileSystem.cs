@@ -4,12 +4,12 @@ using Core2D.Interfaces;
 using System.IO;
 using System.Text;
 
-namespace Core2D.Wpf
+namespace Core2D.Perspex
 {
     /// <summary>
     /// File system implementation using System.IO.
     /// </summary>
-    public sealed class FileSystem : IFileSystem
+    public sealed class PerspexFileSystem : IFileSystem
     {
         /// <inheritdoc/>
         public bool Exists(string path)

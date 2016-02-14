@@ -407,6 +407,7 @@ namespace Core2D.Editor.Designer
             {
                 CurrentTool = Tool.Selection,
                 CurrentPathTool = PathTool.Line,
+                CommandManager = new DesignerCommandManager(),
                 Renderers = new ShapeRenderer[] { renderer },
                 ProjectFactory = new ProjectFactory(),
                 TextClipboard = clipboard,
@@ -420,9 +421,10 @@ namespace Core2D.Editor.Designer
 
             Editor.DefaultTools();
 
-            Editor.CommandManager = new CommandManager();
             Editor.InitializeCommands();
             InitializeCommands(Editor);
+
+            Editor.CommandManager.RegisterCommands();
 
             Editor.OnNew(null);
 

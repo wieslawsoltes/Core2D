@@ -394,12 +394,12 @@
     <Compile Include="Converters\ObjectToObjectConverter.cs" />
     <Compile Include="Converters\ObjectToTypeStringConverter.cs" />
     <Compile Include="Converters\RoundedDoubleToDoubleConverter.cs" />
-    <Compile Include="Util\EditorCommandManager.cs" />
-    <Compile Include="Util\FileSystem.cs" />
+    <Compile Include="Util\PerspexCommandManager.cs" />
+    <Compile Include="Util\PerspexFileSystem.cs" />
     <Compile Include="Windows\MainWindow.paml.cs">
       <DependentUpon>MainWindow.paml</DependentUpon>
     </Compile>
-    <Compile Include="Util\TextClipboard.cs" />
+    <Compile Include="Util\PerspexTextClipboard.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -10,12 +10,10 @@ namespace Core2D.Wpf
     /// <summary>
     /// Editor commands manager.
     /// </summary>
-    public class EditorCommandManager : CommandManager
+    public sealed class WpfCommandManager : CommandManager
     {
-        /// <summary>
-        /// Register editor commands.
-        /// </summary>
-        public void RegisterCommands()
+        /// <inheritdoc/>
+        public override void RegisterCommands()
         {
             Registered = typeof(Commands)
                 .GetProperties(BindingFlags.Public | BindingFlags.Static)

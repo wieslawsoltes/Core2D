@@ -68,42 +68,12 @@ namespace Core2D.Wpf
                     LoadRecent();
 
                     _mainWindow = new Windows.MainWindow();
-
                     _mainWindow.InitializeMouse(_editor);
                     _mainWindow.InitializeZoom(_editor);
                     _mainWindow.InitializeDrop(_editor);
-
-                    _mainWindow.Loaded +=
-                        (sender, e) =>
-                        {
-                            if (_isLoaded)
-                                return;
-                            else
-                                _isLoaded = true;
-
-                            if (_restoreLayout)
-                            {
-                                _mainWindow.AutoLoadLayout(_editor);
-                            }
-                        };
-
+                    _mainWindow.Loaded += (sender, e) => OnLoaded();
                     _mainWindow.Unloaded += (sender, e) => { };
-
-                    _mainWindow.Closed += (sender, e) =>
-                    {
-                        if (!_isLoaded)
-                            return;
-                        else
-                            _isLoaded = false;
-
-                        SaveRecent();
-
-                        if (_restoreLayout)
-                        {
-                            _mainWindow.AutoSaveLayout(_editor);
-                        }
-                    };
-
+                    _mainWindow.Closed += (sender, e) => OnClosed();
                     _mainWindow.DataContext = _editor;
                     _mainWindow.ShowDialog();
                 }
@@ -115,6 +85,40 @@ namespace Core2D.Wpf
                         log?.LogError($"{ex.InnerException.Message}{Environment.NewLine}{ex.InnerException.StackTrace}");
                     }
                 }
+            }
+        }
+
+        /// <summary>
+        /// Initialize main window after loaded.
+        /// </summary>
+        private void OnLoaded()
+        {
+            if (_isLoaded)
+                return;
+            else
+                _isLoaded = true;
+
+            if (_restoreLayout)
+            {
+                _mainWindow.AutoLoadLayout(_editor);
+            }
+        }
+
+        /// <summary>
+        /// De-initialize main window after closed.
+        /// </summary>
+        private void OnClosed()
+        {
+            if (!_isLoaded)
+                return;
+            else
+                _isLoaded = false;
+
+            SaveRecent();
+
+            if (_restoreLayout)
+            {
+                _mainWindow.AutoSaveLayout(_editor);
             }
         }
 
@@ -181,35 +185,31 @@ namespace Core2D.Wpf
             {
                 CurrentTool = Tool.Selection,
                 CurrentPathTool = PathTool.Line,
+                Log = log,
+                FileIO = new WpfFileSystem(),
+                CommandManager = new WpfCommandManager(),
                 Renderers = new ShapeRenderer[] { new WpfRenderer() },
                 ProjectFactory = new ProjectFactory(),
-                TextClipboard = new TextClipboard(),
+                TextClipboard = new WpfTextClipboard(),
                 ProtoBufSerializer = new ProtoBufStreamSerializer(),
                 JsonSerializer = new NewtonsoftTextSerializer(),
                 XamlSerializer = new PortableXamlSerializer(),
                 PdfWriter = new PdfWriter(),
                 DxfWriter = new DxfWriter(),
                 CsvReader = new CsvHelperReader(),
-                CsvWriter = new CsvHelperWriter()
+                CsvWriter = new CsvHelperWriter(),
+                GetImageKey = async () => await OnGetImageKey()
             };
-
-            _editor.Log = log;
-
-            _editor.FileIO = new FileSystem();
 
             _editor.Renderers[0].State.EnableAutofit = true;
             _editor.Renderers[0].State.DrawShapeState.Flags = ShapeStateFlags.Visible;
-
-            _editor.GetImageKey = async () => await OnGetImageKey();
 
             _editor.DefaultTools();
 
             _editor.InitializeCommands();
             InitializeCommands(_editor);
 
-            var manager = new EditorCommandManager();
-            manager.RegisterCommands();
-            _editor.CommandManager = manager;
+            _editor.CommandManager.RegisterCommands();
         }
 
         /// <summary>
@@ -651,7 +651,7 @@ namespace Core2D.Wpf
                 if (dlg.ShowDialog(_mainWindow) == true)
                 {
                     _editor?.OnUpdateData(dlg.FileName, database);
-                } 
+                }
             }
         }
 

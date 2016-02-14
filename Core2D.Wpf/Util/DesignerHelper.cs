@@ -20,7 +20,7 @@ namespace Core2D.Wpf
         {
             InitializeContext(
                 new WpfRenderer(),
-                new TextClipboard(),
+                new WpfTextClipboard(),
                 new ProtoBufStreamSerializer(),
                 new NewtonsoftTextSerializer(),
                 new PortableXamlSerializer());

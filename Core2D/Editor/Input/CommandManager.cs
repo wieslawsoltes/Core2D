@@ -1,15 +1,18 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System.Collections.Generic;
+using System.Windows.Input;
 
 namespace Core2D.Editor.Input
 {
     /// <summary>
-    /// Base commands manager.
+    /// Base class for core command manager.
     /// </summary>
-    public class CommandManager : ICommandManager
+    public abstract class CommandManager
     {
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets or sets registered core commands.
+        /// </summary>
         public IDictionary<string, ICoreCommand> Registered { get; set; }
 
         /// <summary>
@@ -20,8 +23,12 @@ namespace Core2D.Editor.Input
             Registered = new Dictionary<string, ICoreCommand>();
         }
 
-        /// <inheritdoc/>
-        public void Register(string name, ICoreCommand command)
+        /// <summary>
+        /// Register core command.
+        /// </summary>
+        /// <param name="name">The command name.</param>
+        /// <param name="command">The command instance.</param>
+        public virtual void Register(string name, ICoreCommand command)
         {
             if (!Registered.ContainsKey(name))
             {
@@ -29,8 +36,10 @@ namespace Core2D.Editor.Input
             }
         }
 
-        /// <inheritdoc/>
-        public void NotifyCanExecuteChanged()
+        /// <summary>
+        /// Raises <see cref="ICommand.CanExecuteChanged"/> event for registered commands.
+        /// </summary>
+        public virtual void NotifyCanExecuteChanged()
         {
             if (Registered != null)
             {
@@ -40,5 +49,10 @@ namespace Core2D.Editor.Input
                 }
             }
         }
+
+        /// <summary>
+        /// Register editor commands.
+        /// </summary>
+        public abstract void RegisterCommands();
     }
 }

@@ -298,9 +298,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Util\DesignerHelper.cs" />
-    <Compile Include="Util\EditorCommandManager.cs" />
-    <Compile Include="Util\FileSystem.cs" />
-    <Compile Include="Util\TextClipboard.cs" />
+    <Compile Include="Util\WpfCommandManager.cs" />
+    <Compile Include="Util\WpfFileSystem.cs" />
+    <Compile Include="Util\WpfTextClipboard.cs" />
     <Page Include="Controls\Data\ColumnsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
