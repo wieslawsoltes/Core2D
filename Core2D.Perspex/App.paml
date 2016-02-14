@@ -149,16 +149,19 @@
         <Style Selector="ListBox.default">
             <Setter Property="Margin" Value="0"/>
             <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="AutoScrollToSelectedItem" Value="True"/>
         </Style>
         <Style Selector="ListBox.recents">
             <Setter Property="Margin" Value="0"/>
             <Setter Property="BorderBrush" Value="#FFACACAC"/>
             <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="AutoScrollToSelectedItem" Value="True"/>
         </Style>
         <!-- TreeView -->
         <Style Selector="TreeView.default">
             <Setter Property="Margin" Value="0"/>
             <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="AutoScrollToSelectedItem" Value="True"/>
         </Style>
         <!-- TabControl -->
         <Style Selector="TabControl.default">

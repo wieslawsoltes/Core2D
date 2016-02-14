@@ -19,7 +19,7 @@
                     <MenuItem Header="-" Command="{Static Editor:Commands.DeleteCommand}" CommandParameter="{Binding Path=Selected}"/>
                 </Menu>
                 <TextBox Text="{Binding Path=Name, Mode=TwoWay}" Classes="left" Grid.Row="1"/>
-                <TreeView Name="documents" Items="{Binding Path=Documents, Mode=TwoWay}" SelectedItem="{Binding Path=Selected, Mode=TwoWay}" AutoScrollToSelectedItem="True" Grid.Row="2" Classes="default">
+                <TreeView Name="documents" Items="{Binding Path=Documents, Mode=TwoWay}" SelectedItem="{Binding Path=Selected, Mode=TwoWay}" Grid.Row="2" Classes="default">
                     <TreeView.ContextMenu>
                         <ContextMenu>
                             <MenuItem Header="_Add Document" Command="{Static Editor:Commands.AddDocumentCommand}" CommandParameter="{Binding Mode=OneWay}"/>
