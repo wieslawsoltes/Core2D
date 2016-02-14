@@ -8,7 +8,7 @@ using Xunit;
 
 namespace Core2D.Perspex.UnitTests
 {
-    public class FileSystemTests
+    public class PerspexFileSystemTests
     {
         [Fact]
         [Trait("Core2D.Perspex", "Util")]

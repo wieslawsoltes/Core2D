@@ -8,7 +8,7 @@ using Xunit;
 
 namespace Core2D.Wpf.UnitTests
 {
-    public class FileSystemTests
+    public class WpfFileSystemTests
     {
         [Fact]
         [Trait("Core2D.Wpf", "Util")]
