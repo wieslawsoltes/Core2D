@@ -239,8 +239,8 @@
         </Style>
         <Style Selector="TabStripItem">
             <Setter Property="Margin" Value="3"/>
-            <Setter Property="FontSize" Value="22"/>
-            <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="FontSize" Value="12"/>
+            <!--<Setter Property="FontWeight" Value="Normal"/>-->
         </Style>
         <!-- Border -->
         <Style Selector="Border.leftTop">
