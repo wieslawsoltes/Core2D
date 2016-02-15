@@ -10,19 +10,30 @@ namespace Serializer.ProtoBuf
     class Program
     {
         const string Name = "ProtoBufSerializer";
-        const string SerializerDllPath = @"..\..\Serializer\";
-        const string ProtoSchemaPath = @"..\..\Schema\";
 
         static void Main(string[] args)
         {
-            var sw = Stopwatch.StartNew();
-            var rtm = ProtoBufModel.ForProject();
-            var schema = rtm.GetSchema(typeof(XProject));
-            File.WriteAllText(ProtoSchemaPath + Name + ".proto", schema);
-            rtm.Compile(Name, Name + ".dll");
-            File.Copy(Name + ".dll", SerializerDllPath + Name + ".dll", true);
-            sw.Stop();
-            Console.WriteLine("Generate: " + sw.Elapsed.TotalMilliseconds + "ms");
+            if (args?.Length == 1)
+            {
+                var sw = Stopwatch.StartNew();
+
+                var rtm = ProtoBufModel.ForProject();
+                var schema = rtm.GetSchema(typeof(XProject));
+
+                var path = args[0];
+
+                var schemaPath = Path.Combine(path, "Schema", Name + ".proto");
+                Console.WriteLine("Writing schema: {0}", schemaPath);
+                File.WriteAllText(schemaPath, schema);
+
+                var serializerPath = Path.Combine(path, "Serializer", Name + ".dll");
+                Console.WriteLine("Writing serializer: {0}", serializerPath);
+                rtm.Compile(Name, Name + ".dll");
+                File.Copy(Name + ".dll", serializerPath, true);
+
+                sw.Stop();
+                Console.WriteLine("Generate: " + sw.Elapsed.TotalMilliseconds + "ms");
+            }
         }
     }
 }
