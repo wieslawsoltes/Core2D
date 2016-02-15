@@ -683,12 +683,14 @@ namespace Core2D.Perspex
         /// <inheritdoc/>
         public async Task OnZoomResetAsync()
         {
+            _editor.ResetZoom();
             await Task.Delay(0);
         }
 
         /// <inheritdoc/>
         public async Task OnZoomExtentAsync()
         {
+            _editor.ExtentZoom();
             await Task.Delay(0);
         }
 
