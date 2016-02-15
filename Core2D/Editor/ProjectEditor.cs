@@ -22,6 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using static System.Math;
 
@@ -988,7 +989,7 @@ namespace Core2D.Editor
             {
                 if (await CanPaste())
                 {
-                    var text = await _textClipboard?.GetText();
+                    var text = await (_textClipboard?.GetText() ?? Task.FromResult(string.Empty));
                     if (!string.IsNullOrEmpty(text))
                     {
                         Paste(text);
@@ -1777,7 +1778,7 @@ namespace Core2D.Editor
             {
                 if (path == null || string.IsNullOrEmpty(path))
                 {
-                    var key = await GetImageKey();
+                    var key = await (GetImageKey() ?? Task.FromResult(string.Empty));
                     if (key == null || string.IsNullOrEmpty(key))
                         return null;
 
@@ -2222,7 +2223,7 @@ namespace Core2D.Editor
         {
             try
             {
-                return await _textClipboard?.ContainsText();
+                return await (_textClipboard?.ContainsText() ?? Task.FromResult(false));
             }
             catch (Exception ex)
             {
@@ -4222,7 +4223,7 @@ namespace Core2D.Editor
 
             Commands.AddImageKeyCommand =
                 Command.Create(
-                    async () => await OnAddImageKey(null),
+                    async () => await (OnAddImageKey(null) ?? Task.FromResult(string.Empty)),
                     () => IsEditMode());
 
             Commands.RemoveImageKeyCommand =
@@ -4267,27 +4268,27 @@ namespace Core2D.Editor
 
             Commands.OpenCommand =
                  Command<string>.Create(
-                     async (path) => await Application?.OnOpenAsync(path),
+                     async (path) => await (Application?.OnOpenAsync(path) ?? Task.FromResult<object>(null)),
                      (path) => IsEditMode());
 
             Commands.SaveCommand =
                 Command.Create(
-                    async () => await Application?.OnSaveAsync(),
+                    async () => await (Application?.OnSaveAsync() ?? Task.FromResult<object>(null)),
                     () => IsEditMode());
 
             Commands.SaveAsCommand =
                 Command.Create(
-                    async () => await Application?.OnSaveAsAsync(),
+                    async () => await (Application?.OnSaveAsAsync() ?? Task.FromResult<object>(null)),
                     () => IsEditMode());
 
             Commands.ImportXamlCommand =
                 Command<string>.Create(
-                    async (path) => await Application?.OnImportXamlAsync(path),
+                    async (path) => await (Application?.OnImportXamlAsync(path) ?? Task.FromResult<object>(null)),
                     (path) => IsEditMode());
 
             Commands.ExportCommand =
                 Command<object>.Create(
-                    async (item) => await Application?.OnExportAsync(item),
+                    async (item) => await (Application?.OnExportAsync(item) ?? Task.FromResult<object>(null)),
                     (item) => IsEditMode());
 
             Commands.ExitCommand =
@@ -4297,147 +4298,147 @@ namespace Core2D.Editor
 
             Commands.ImportDataCommand =
                 Command<XProject>.Create(
-                    async (project) => await Application?.OnImportDataAsync(),
+                    async (project) => await (Application?.OnImportDataAsync() ?? Task.FromResult<object>(null)),
                     (project) => IsEditMode());
 
             Commands.ExportDataCommand =
                 Command<XDatabase>.Create(
-                    async (db) => await Application?.OnExportDataAsync(),
+                    async (db) => await (Application?.OnExportDataAsync() ?? Task.FromResult<object>(null)),
                     (db) => IsEditMode());
 
             Commands.UpdateDataCommand =
                 Command<XDatabase>.Create(
-                    async (db) => await Application?.OnUpdateDataAsync(),
+                    async (db) => await (Application?.OnUpdateDataAsync() ?? Task.FromResult<object>(null)),
                     (db) => IsEditMode());
 
             Commands.ImportStyleCommand =
                 Command<XLibrary<ShapeStyle>>.Create(
-                    async (item) => await Application?.OnImportObjectAsync(item, CoreType.Style),
+                    async (item) => await (Application?.OnImportObjectAsync(item, CoreType.Style) ?? Task.FromResult<object>(null)),
                     (item) => IsEditMode());
 
             Commands.ImportStylesCommand =
                 Command<XLibrary<ShapeStyle>>.Create(
-                    async (item) => await Application?.OnImportObjectAsync(item, CoreType.Styles),
+                    async (item) => await (Application?.OnImportObjectAsync(item, CoreType.Styles) ?? Task.FromResult<object>(null)),
                     (item) => IsEditMode());
 
             Commands.ImportStyleLibraryCommand =
                 Command<XProject>.Create(
-                    async (item) => await Application?.OnImportObjectAsync(item, CoreType.StyleLibrary),
+                    async (item) => await (Application?.OnImportObjectAsync(item, CoreType.StyleLibrary) ?? Task.FromResult<object>(null)),
                     (item) => IsEditMode());
 
             Commands.ImportStyleLibrariesCommand =
                 Command<XProject>.Create(
-                    async (item) => await Application?.OnImportObjectAsync(item, CoreType.StyleLibraries),
+                    async (item) => await (Application?.OnImportObjectAsync(item, CoreType.StyleLibraries) ?? Task.FromResult<object>(null)),
                     (item) => IsEditMode());
 
             Commands.ImportGroupCommand =
                 Command<XLibrary<XGroup>>.Create(
-                    async (item) => await Application?.OnImportObjectAsync(item, CoreType.Group),
+                    async (item) => await (Application?.OnImportObjectAsync(item, CoreType.Group) ?? Task.FromResult<object>(null)),
                     (item) => IsEditMode());
 
             Commands.ImportGroupsCommand =
                 Command<XLibrary<XGroup>>.Create(
-                    async (item) => await Application?.OnImportObjectAsync(item, CoreType.Groups),
+                    async (item) => await (Application?.OnImportObjectAsync(item, CoreType.Groups) ?? Task.FromResult<object>(null)),
                     (item) => IsEditMode());
 
             Commands.ImportGroupLibraryCommand =
                 Command<XProject>.Create(
-                    async (item) => await Application?.OnImportObjectAsync(item, CoreType.GroupLibrary),
+                    async (item) => await (Application?.OnImportObjectAsync(item, CoreType.GroupLibrary) ?? Task.FromResult<object>(null)),
                     (item) => IsEditMode());
 
             Commands.ImportGroupLibrariesCommand =
                 Command<XProject>.Create(
-                    async (item) => await Application?.OnImportObjectAsync(item, CoreType.GroupLibraries),
+                    async (item) => await (Application?.OnImportObjectAsync(item, CoreType.GroupLibraries) ?? Task.FromResult<object>(null)),
                     (item) => IsEditMode());
 
             Commands.ImportTemplateCommand =
                 Command<XProject>.Create(
-                    async (item) => await Application?.OnImportObjectAsync(item, CoreType.Template),
+                    async (item) => await (Application?.OnImportObjectAsync(item, CoreType.Template) ?? Task.FromResult<object>(null)),
                     (item) => IsEditMode());
 
             Commands.ImportTemplatesCommand =
                 Command<XProject>.Create(
-                    async (item) => await Application?.OnImportObjectAsync(item, CoreType.Templates),
+                    async (item) => await (Application?.OnImportObjectAsync(item, CoreType.Templates) ?? Task.FromResult<object>(null)),
                     (item) => IsEditMode());
 
             Commands.ExportStyleCommand =
                 Command<ShapeStyle>.Create(
-                    async (item) => await Application?.OnExportObjectAsync(item, CoreType.Style),
+                    async (item) => await (Application?.OnExportObjectAsync(item, CoreType.Style) ?? Task.FromResult<object>(null)),
                     (item) => IsEditMode());
 
             Commands.ExportStylesCommand =
                 Command<XLibrary<ShapeStyle>>.Create(
-                    async (item) => await Application?.OnExportObjectAsync(item, CoreType.Styles),
+                    async (item) => await (Application?.OnExportObjectAsync(item, CoreType.Styles) ?? Task.FromResult<object>(null)),
                     (item) => IsEditMode());
 
             Commands.ExportStyleLibraryCommand =
                 Command<XLibrary<ShapeStyle>>.Create(
-                    async (item) => await Application?.OnExportObjectAsync(item, CoreType.StyleLibrary),
+                    async (item) => await (Application?.OnExportObjectAsync(item, CoreType.StyleLibrary) ?? Task.FromResult<object>(null)),
                     (item) => IsEditMode());
 
             Commands.ExportStyleLibrariesCommand =
                 Command<IEnumerable<XLibrary<ShapeStyle>>>.Create(
-                    async (item) => await Application?.OnExportObjectAsync(item, CoreType.StyleLibraries),
+                    async (item) => await (Application?.OnExportObjectAsync(item, CoreType.StyleLibraries) ?? Task.FromResult<object>(null)),
                     (item) => IsEditMode());
 
             Commands.ExportGroupCommand =
                 Command<XGroup>.Create(
-                    async (item) => await Application?.OnExportObjectAsync(item, CoreType.Group),
+                    async (item) => await (Application?.OnExportObjectAsync(item, CoreType.Group) ?? Task.FromResult<object>(null)),
                     (item) => IsEditMode());
 
             Commands.ExportGroupsCommand =
                 Command<XLibrary<XGroup>>.Create(
-                    async (item) => await Application?.OnExportObjectAsync(item, CoreType.Groups),
+                    async (item) => await (Application?.OnExportObjectAsync(item, CoreType.Groups) ?? Task.FromResult<object>(null)),
                     (item) => IsEditMode());
 
             Commands.ExportGroupLibraryCommand =
                 Command<XLibrary<XGroup>>.Create(
-                    async (item) => await Application?.OnExportObjectAsync(item, CoreType.GroupLibrary),
+                    async (item) => await (Application?.OnExportObjectAsync(item, CoreType.GroupLibrary) ?? Task.FromResult<object>(null)),
                     (item) => IsEditMode());
 
             Commands.ExportGroupLibrariesCommand =
                 Command<IEnumerable<XLibrary<XGroup>>>.Create(
-                    async (item) => await Application?.OnExportObjectAsync(item, CoreType.GroupLibraries),
+                    async (item) => await (Application?.OnExportObjectAsync(item, CoreType.GroupLibraries) ?? Task.FromResult<object>(null)),
                     (item) => IsEditMode());
 
             Commands.ExportTemplateCommand =
                 Command<XTemplate>.Create(
-                    async (item) => await Application?.OnExportObjectAsync(item, CoreType.Template),
+                    async (item) => await (Application?.OnExportObjectAsync(item, CoreType.Template) ?? Task.FromResult<object>(null)),
                     (item) => IsEditMode());
 
             Commands.ExportTemplatesCommand =
                 Command<IEnumerable<XTemplate>>.Create(
-                    async (item) => await Application?.OnExportObjectAsync(item, CoreType.Templates),
+                    async (item) => await (Application?.OnExportObjectAsync(item, CoreType.Templates) ?? Task.FromResult<object>(null)),
                     (item) => IsEditMode());
 
             Commands.CopyAsEmfCommand =
                 Command.Create(
-                    async () => await Application?.OnCopyAsEmfAsync(),
+                    async () => await (Application?.OnCopyAsEmfAsync() ?? Task.FromResult<object>(null)),
                     () => IsEditMode());
 
             Commands.ZoomResetCommand =
                 Command.Create(
-                    async () => await Application?.OnZoomResetAsync(),
+                    async () => await (Application?.OnZoomResetAsync() ?? Task.FromResult<object>(null)),
                     () => true);
 
             Commands.ZoomExtentCommand =
                 Command.Create(
-                    async () => await Application?.OnZoomExtentAsync(),
+                    async () => await (Application?.OnZoomExtentAsync() ?? Task.FromResult<object>(null)),
                     () => true);
 
             Commands.LoadWindowLayoutCommand =
                 Command.Create(
-                    async () => await Application?.OnLoadWindowLayout(),
+                    async () => await (Application?.OnLoadWindowLayout() ?? Task.FromResult<object>(null)),
                     () => true);
 
             Commands.SaveWindowLayoutCommand =
                 Command.Create(
-                    async () => await Application?.OnSaveWindowLayoutAsync(),
+                    async () => await (Application?.OnSaveWindowLayoutAsync() ?? Task.FromResult<object>(null)),
                     () => true);
 
             Commands.ResetWindowLayoutCommand =
                 Command.Create(
-                    async () => await Application?.OnResetWindowLayoutAsync(),
+                    async () => await (Application?.OnResetWindowLayoutAsync() ?? Task.FromResult<object>(null)),
                     () => true);
         }
     }
