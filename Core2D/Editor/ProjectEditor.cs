@@ -585,7 +585,6 @@ namespace Core2D.Editor
                 }
                 else if (item is BaseShape)
                 {
-                    var shapes = Enumerable.Repeat(item as BaseShape, 1);
                     _project?.AddShape(_project?.CurrentContainer?.CurrentLayer, item as BaseShape);
                 }
                 else if (item is XStyles)
@@ -720,7 +719,6 @@ namespace Core2D.Editor
                         break;
                     case CoreType.StyleLibrary:
                         {
-                            var project = item as XProject;
                             var json = _fileIO.ReadUtf8Text(path);
                             var import = _jsonSerializer.Deserialize<XLibrary<ShapeStyle>>(json);
 
@@ -729,7 +727,6 @@ namespace Core2D.Editor
                         break;
                     case CoreType.StyleLibraries:
                         {
-                            var project = item as XProject;
                             var json = _fileIO.ReadUtf8Text(path);
                             var import = _jsonSerializer.Deserialize<IList<XLibrary<ShapeStyle>>>(json);
 
@@ -763,7 +760,6 @@ namespace Core2D.Editor
                         break;
                     case CoreType.GroupLibrary:
                         {
-                            var project = item as XProject;
                             var json = _fileIO.ReadUtf8Text(path);
                             var import = _jsonSerializer.Deserialize<XLibrary<XGroup>>(json);
 
@@ -775,7 +771,6 @@ namespace Core2D.Editor
                         break;
                     case CoreType.GroupLibraries:
                         {
-                            var project = item as XProject;
                             var json = _fileIO.ReadUtf8Text(path);
                             var import = _jsonSerializer.Deserialize<IList<XLibrary<XGroup>>>(json);
 
@@ -788,7 +783,6 @@ namespace Core2D.Editor
                         break;
                     case CoreType.Template:
                         {
-                            var project = item as XProject;
                             var json = _fileIO.ReadUtf8Text(path);
                             var import = _jsonSerializer.Deserialize<XTemplate>(json);
 
@@ -801,7 +795,6 @@ namespace Core2D.Editor
                         break;
                     case CoreType.Templates:
                         {
-                            var project = item as XProject;
                             var json = _fileIO.ReadUtf8Text(path);
                             var import = _jsonSerializer.Deserialize<IList<XTemplate>>(json);
 
