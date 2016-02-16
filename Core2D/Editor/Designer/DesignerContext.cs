@@ -24,7 +24,7 @@ namespace Core2D.Editor.Designer
     public class DesignerContext
     {
         /// <summary>
-        /// The design time <see cref="Core2D.Editor.ProjectEditor"/>.
+        /// The design time <see cref="ProjectEditor"/>.
         /// </summary>
         public static ProjectEditor Editor { get; set; }
 

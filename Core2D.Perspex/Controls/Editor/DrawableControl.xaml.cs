@@ -278,7 +278,7 @@ namespace Core2D.Perspex.Controls.Editor
         /// </summary>
         public void OnZoomExtent()
         {
-            var editor = this.DataContext as Core2D.Editor.ProjectEditor;
+            var editor = this.DataContext as ProjectEditor;
             if (editor == null)
                 return;
 
@@ -307,7 +307,7 @@ namespace Core2D.Perspex.Controls.Editor
         /// <param name="dc">The drawing context.</param>
         private void Draw(DrawingContext dc)
         {
-            var editor = this.DataContext as Core2D.Editor.ProjectEditor;
+            var editor = this.DataContext as ProjectEditor;
             if (editor == null || editor.Project == null)
                 return;
 
