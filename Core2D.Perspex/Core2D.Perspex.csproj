@@ -214,173 +214,173 @@
     <Compile Include="..\Core2D\Properties\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="App.paml.cs">
-      <DependentUpon>App.paml</DependentUpon>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Data\ColumnsControl.paml.cs">
-      <DependentUpon>ColumnsControl.paml</DependentUpon>
+    <Compile Include="Controls\Data\ColumnsControl.xaml.cs">
+      <DependentUpon>ColumnsControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Data\DatabaseControl.paml.cs">
-      <DependentUpon>DatabaseControl.paml</DependentUpon>
+    <Compile Include="Controls\Data\DatabaseControl.xaml.cs">
+      <DependentUpon>DatabaseControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Data\DataControl.paml.cs">
-      <DependentUpon>DataControl.paml</DependentUpon>
+    <Compile Include="Controls\Data\DataControl.xaml.cs">
+      <DependentUpon>DataControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Data\RecordControl.paml.cs">
-      <DependentUpon>RecordControl.paml</DependentUpon>
+    <Compile Include="Controls\Data\RecordControl.xaml.cs">
+      <DependentUpon>RecordControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Editor\EditorControl.paml.cs">
-      <DependentUpon>EditorControl.paml</DependentUpon>
+    <Compile Include="Controls\Editor\EditorControl.xaml.cs">
+      <DependentUpon>EditorControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Editor\DashboardControl.paml.cs">
-      <DependentUpon>DashboardControl.paml</DependentUpon>
+    <Compile Include="Controls\Editor\DashboardControl.xaml.cs">
+      <DependentUpon>DashboardControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Editor\DrawableControl.paml.cs">
-      <DependentUpon>DrawableControl.paml</DependentUpon>
+    <Compile Include="Controls\Editor\DrawableControl.xaml.cs">
+      <DependentUpon>DrawableControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Editor\MenuControl.paml.cs">
-      <DependentUpon>MenuControl.paml</DependentUpon>
+    <Compile Include="Controls\Editor\MenuControl.xaml.cs">
+      <DependentUpon>MenuControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Data\PropertiesControl.paml.cs">
-      <DependentUpon>PropertiesControl.paml</DependentUpon>
+    <Compile Include="Controls\Data\PropertiesControl.xaml.cs">
+      <DependentUpon>PropertiesControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Path\ArcSegmentControl.paml.cs">
-      <DependentUpon>ArcSegmentControl.paml</DependentUpon>
+    <Compile Include="Controls\Path\ArcSegmentControl.xaml.cs">
+      <DependentUpon>ArcSegmentControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Path\CubicBezierSegmentControl.paml.cs">
-      <DependentUpon>CubicBezierSegmentControl.paml</DependentUpon>
+    <Compile Include="Controls\Path\CubicBezierSegmentControl.xaml.cs">
+      <DependentUpon>CubicBezierSegmentControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Path\LineSegmentControl.paml.cs">
-      <DependentUpon>LineSegmentControl.paml</DependentUpon>
+    <Compile Include="Controls\Path\LineSegmentControl.xaml.cs">
+      <DependentUpon>LineSegmentControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Path\PathFigureControl.paml.cs">
-      <DependentUpon>PathFigureControl.paml</DependentUpon>
+    <Compile Include="Controls\Path\PathFigureControl.xaml.cs">
+      <DependentUpon>PathFigureControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Path\PathGeometryControl.paml.cs">
-      <DependentUpon>PathGeometryControl.paml</DependentUpon>
+    <Compile Include="Controls\Path\PathGeometryControl.xaml.cs">
+      <DependentUpon>PathGeometryControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Path\PathSizeControl.paml.cs">
-      <DependentUpon>PathSizeControl.paml</DependentUpon>
+    <Compile Include="Controls\Path\PathSizeControl.xaml.cs">
+      <DependentUpon>PathSizeControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Path\PolyCubicBezierSegmentControl.paml.cs">
-      <DependentUpon>PolyCubicBezierSegmentControl.paml</DependentUpon>
+    <Compile Include="Controls\Path\PolyCubicBezierSegmentControl.xaml.cs">
+      <DependentUpon>PolyCubicBezierSegmentControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Path\PolyLineSegmentControl.paml.cs">
-      <DependentUpon>PolyLineSegmentControl.paml</DependentUpon>
+    <Compile Include="Controls\Path\PolyLineSegmentControl.xaml.cs">
+      <DependentUpon>PolyLineSegmentControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Path\PolyQuadraticBezierSegmentControl.paml.cs">
-      <DependentUpon>PolyQuadraticBezierSegmentControl.paml</DependentUpon>
+    <Compile Include="Controls\Path\PolyQuadraticBezierSegmentControl.xaml.cs">
+      <DependentUpon>PolyQuadraticBezierSegmentControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Path\QuadraticBezierSegmentControl.paml.cs">
-      <DependentUpon>QuadraticBezierSegmentControl.paml</DependentUpon>
+    <Compile Include="Controls\Path\QuadraticBezierSegmentControl.xaml.cs">
+      <DependentUpon>QuadraticBezierSegmentControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Project\ContainerControl.paml.cs">
-      <DependentUpon>ContainerControl.paml</DependentUpon>
+    <Compile Include="Controls\Project\ContainerControl.xaml.cs">
+      <DependentUpon>ContainerControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Project\DocumentControl.paml.cs">
-      <DependentUpon>DocumentControl.paml</DependentUpon>
+    <Compile Include="Controls\Project\DocumentControl.xaml.cs">
+      <DependentUpon>DocumentControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Project\ImagesControl.paml.cs">
-      <DependentUpon>ImagesControl.paml</DependentUpon>
+    <Compile Include="Controls\Project\ImagesControl.xaml.cs">
+      <DependentUpon>ImagesControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Project\LayerControl.paml.cs">
-      <DependentUpon>LayerControl.paml</DependentUpon>
+    <Compile Include="Controls\Project\LayerControl.xaml.cs">
+      <DependentUpon>LayerControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Project\LayersControl.paml.cs">
-      <DependentUpon>LayersControl.paml</DependentUpon>
+    <Compile Include="Controls\Project\LayersControl.xaml.cs">
+      <DependentUpon>LayersControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Project\OptionsControl.paml.cs">
-      <DependentUpon>OptionsControl.paml</DependentUpon>
+    <Compile Include="Controls\Project\OptionsControl.xaml.cs">
+      <DependentUpon>OptionsControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Project\PageControl.paml.cs">
-      <DependentUpon>PageControl.paml</DependentUpon>
+    <Compile Include="Controls\Project\PageControl.xaml.cs">
+      <DependentUpon>PageControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Project\ProjectControl.paml.cs">
-      <DependentUpon>ProjectControl.paml</DependentUpon>
+    <Compile Include="Controls\Project\ProjectControl.xaml.cs">
+      <DependentUpon>ProjectControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Project\ShapesControl.paml.cs">
-      <DependentUpon>ShapesControl.paml</DependentUpon>
+    <Compile Include="Controls\Project\ShapesControl.xaml.cs">
+      <DependentUpon>ShapesControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Project\TemplateControl.paml.cs">
-      <DependentUpon>TemplateControl.paml</DependentUpon>
+    <Compile Include="Controls\Project\TemplateControl.xaml.cs">
+      <DependentUpon>TemplateControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Shapes\ArcControl.paml.cs">
-      <DependentUpon>ArcControl.paml</DependentUpon>
+    <Compile Include="Controls\Shapes\ArcControl.xaml.cs">
+      <DependentUpon>ArcControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Shapes\CubicBezierControl.paml.cs">
-      <DependentUpon>CubicBezierControl.paml</DependentUpon>
+    <Compile Include="Controls\Shapes\CubicBezierControl.xaml.cs">
+      <DependentUpon>CubicBezierControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Shapes\EllipseControl.paml.cs">
-      <DependentUpon>EllipseControl.paml</DependentUpon>
+    <Compile Include="Controls\Shapes\EllipseControl.xaml.cs">
+      <DependentUpon>EllipseControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Shapes\GroupControl.paml.cs">
-      <DependentUpon>GroupControl.paml</DependentUpon>
+    <Compile Include="Controls\Shapes\GroupControl.xaml.cs">
+      <DependentUpon>GroupControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Shapes\ImageControl.paml.cs">
-      <DependentUpon>ImageControl.paml</DependentUpon>
+    <Compile Include="Controls\Shapes\ImageControl.xaml.cs">
+      <DependentUpon>ImageControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Shapes\LineControl.paml.cs">
-      <DependentUpon>LineControl.paml</DependentUpon>
+    <Compile Include="Controls\Shapes\LineControl.xaml.cs">
+      <DependentUpon>LineControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Shapes\PathControl.paml.cs">
-      <DependentUpon>PathControl.paml</DependentUpon>
+    <Compile Include="Controls\Shapes\PathControl.xaml.cs">
+      <DependentUpon>PathControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Shapes\PointControl.paml.cs">
-      <DependentUpon>PointControl.paml</DependentUpon>
+    <Compile Include="Controls\Shapes\PointControl.xaml.cs">
+      <DependentUpon>PointControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Shapes\QuadraticBezierControl.paml.cs">
-      <DependentUpon>QuadraticBezierControl.paml</DependentUpon>
+    <Compile Include="Controls\Shapes\QuadraticBezierControl.xaml.cs">
+      <DependentUpon>QuadraticBezierControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Shapes\RectangleControl.paml.cs">
-      <DependentUpon>RectangleControl.paml</DependentUpon>
+    <Compile Include="Controls\Shapes\RectangleControl.xaml.cs">
+      <DependentUpon>RectangleControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Shapes\TextControl.paml.cs">
-      <DependentUpon>TextControl.paml</DependentUpon>
+    <Compile Include="Controls\Shapes\TextControl.xaml.cs">
+      <DependentUpon>TextControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\State\ShapeStateControl.paml.cs">
-      <DependentUpon>ShapeStateControl.paml</DependentUpon>
+    <Compile Include="Controls\State\ShapeStateControl.xaml.cs">
+      <DependentUpon>ShapeStateControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Editor\StatusControl.paml.cs">
-      <DependentUpon>StatusControl.paml</DependentUpon>
+    <Compile Include="Controls\Editor\StatusControl.xaml.cs">
+      <DependentUpon>StatusControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Project\DatabasesControl.paml.cs">
-      <DependentUpon>DatabasesControl.paml</DependentUpon>
+    <Compile Include="Controls\Project\DatabasesControl.xaml.cs">
+      <DependentUpon>DatabasesControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Project\GroupsControl.paml.cs">
-      <DependentUpon>GroupsControl.paml</DependentUpon>
+    <Compile Include="Controls\Project\GroupsControl.xaml.cs">
+      <DependentUpon>GroupsControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Data\RecordsControl.paml.cs">
-      <DependentUpon>RecordsControl.paml</DependentUpon>
+    <Compile Include="Controls\Data\RecordsControl.xaml.cs">
+      <DependentUpon>RecordsControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Project\StylesControl.paml.cs">
-      <DependentUpon>StylesControl.paml</DependentUpon>
+    <Compile Include="Controls\Project\StylesControl.xaml.cs">
+      <DependentUpon>StylesControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Style\ArgbColorControl.paml.cs">
-      <DependentUpon>ArgbColorControl.paml</DependentUpon>
+    <Compile Include="Controls\Style\ArgbColorControl.xaml.cs">
+      <DependentUpon>ArgbColorControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Style\ArrowStyleControl.paml.cs">
-      <DependentUpon>ArrowStyleControl.paml</DependentUpon>
+    <Compile Include="Controls\Style\ArrowStyleControl.xaml.cs">
+      <DependentUpon>ArrowStyleControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Style\FontStyleControl.paml.cs">
-      <DependentUpon>FontStyleControl.paml</DependentUpon>
+    <Compile Include="Controls\Style\FontStyleControl.xaml.cs">
+      <DependentUpon>FontStyleControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Style\LineFixedLengthControl.paml.cs">
-      <DependentUpon>LineFixedLengthControl.paml</DependentUpon>
+    <Compile Include="Controls\Style\LineFixedLengthControl.xaml.cs">
+      <DependentUpon>LineFixedLengthControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Style\LineStyleControl.paml.cs">
-      <DependentUpon>LineStyleControl.paml</DependentUpon>
+    <Compile Include="Controls\Style\LineStyleControl.xaml.cs">
+      <DependentUpon>LineStyleControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Style\ShapeStyleControl.paml.cs">
-      <DependentUpon>ShapeStyleControl.paml</DependentUpon>
+    <Compile Include="Controls\Style\ShapeStyleControl.xaml.cs">
+      <DependentUpon>ShapeStyleControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Style\StyleControl.paml.cs">
-      <DependentUpon>StyleControl.paml</DependentUpon>
+    <Compile Include="Controls\Style\StyleControl.xaml.cs">
+      <DependentUpon>StyleControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Style\TextStyleControl.paml.cs">
-      <DependentUpon>TextStyleControl.paml</DependentUpon>
+    <Compile Include="Controls\Style\TextStyleControl.xaml.cs">
+      <DependentUpon>TextStyleControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Project\TemplatesControl.paml.cs">
-      <DependentUpon>TemplatesControl.paml</DependentUpon>
+    <Compile Include="Controls\Project\TemplatesControl.xaml.cs">
+      <DependentUpon>TemplatesControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\ArgbColorToBrushMultiConverter.cs" />
     <Compile Include="Converters\ByteToDoubleConverter.cs" />
@@ -396,69 +396,69 @@
     <Compile Include="Converters\RoundedDoubleToDoubleConverter.cs" />
     <Compile Include="Util\PerspexCommandManager.cs" />
     <Compile Include="Util\PerspexFileSystem.cs" />
-    <Compile Include="Windows\MainWindow.paml.cs">
-      <DependentUpon>MainWindow.paml</DependentUpon>
+    <Compile Include="Windows\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Util\PerspexTextClipboard.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <EmbeddedResource Include="Controls\Data\PropertiesControl.paml" />
-    <EmbeddedResource Include="Controls\Style\ArgbColorControl.paml" />
-    <EmbeddedResource Include="Controls\Style\ArrowStyleControl.paml">
+    <EmbeddedResource Include="Controls\Data\PropertiesControl.xaml" />
+    <EmbeddedResource Include="Controls\Style\ArgbColorControl.xaml" />
+    <EmbeddedResource Include="Controls\Style\ArrowStyleControl.xaml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Style\FontStyleControl.paml" />
-    <EmbeddedResource Include="Controls\Style\TextStyleControl.paml" />
-    <EmbeddedResource Include="Controls\Style\LineFixedLengthControl.paml" />
-    <EmbeddedResource Include="Controls\Style\LineStyleControl.paml" />
-    <EmbeddedResource Include="Controls\Style\ShapeStyleControl.paml">
+    <EmbeddedResource Include="Controls\Style\FontStyleControl.xaml" />
+    <EmbeddedResource Include="Controls\Style\TextStyleControl.xaml" />
+    <EmbeddedResource Include="Controls\Style\LineFixedLengthControl.xaml" />
+    <EmbeddedResource Include="Controls\Style\LineStyleControl.xaml" />
+    <EmbeddedResource Include="Controls\Style\ShapeStyleControl.xaml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Data\RecordControl.paml" />
-    <EmbeddedResource Include="Controls\Data\DatabaseControl.paml" />
-    <EmbeddedResource Include="Controls\Data\DataControl.paml" />
-    <EmbeddedResource Include="Controls\State\ShapeStateControl.paml" />
-    <EmbeddedResource Include="Controls\Shapes\PointControl.paml" />
-    <EmbeddedResource Include="Controls\Shapes\LineControl.paml" />
-    <EmbeddedResource Include="Controls\Shapes\TextControl.paml" />
-    <EmbeddedResource Include="Controls\Shapes\RectangleControl.paml" />
-    <EmbeddedResource Include="Controls\Shapes\EllipseControl.paml" />
-    <EmbeddedResource Include="Controls\Shapes\ImageControl.paml" />
-    <EmbeddedResource Include="Controls\Shapes\ArcControl.paml" />
-    <EmbeddedResource Include="Controls\Shapes\CubicBezierControl.paml" />
-    <EmbeddedResource Include="Controls\Shapes\QuadraticBezierControl.paml" />
-    <EmbeddedResource Include="Controls\Shapes\GroupControl.paml" />
-    <EmbeddedResource Include="Controls\Shapes\PathControl.paml" />
-    <EmbeddedResource Include="Controls\Path\PathSizeControl.paml" />
-    <EmbeddedResource Include="Controls\Path\ArcSegmentControl.paml" />
-    <EmbeddedResource Include="Controls\Path\CubicBezierSegmentControl.paml" />
-    <EmbeddedResource Include="Controls\Path\LineSegmentControl.paml" />
-    <EmbeddedResource Include="Controls\Path\PolyCubicBezierSegmentControl.paml" />
-    <EmbeddedResource Include="Controls\Path\PolyLineSegmentControl.paml" />
-    <EmbeddedResource Include="Controls\Path\PolyQuadraticBezierSegmentControl.paml" />
-    <EmbeddedResource Include="Controls\Path\QuadraticBezierSegmentControl.paml" />
-    <EmbeddedResource Include="Controls\Path\PathFigureControl.paml" />
-    <EmbeddedResource Include="Controls\Path\PathGeometryControl.paml" />
-    <EmbeddedResource Include="Controls\Project\OptionsControl.paml" />
-    <EmbeddedResource Include="Controls\Project\ProjectControl.paml" />
-    <EmbeddedResource Include="Controls\Project\DocumentControl.paml" />
-    <EmbeddedResource Include="Controls\Project\ContainerControl.paml">
+    <EmbeddedResource Include="Controls\Data\RecordControl.xaml" />
+    <EmbeddedResource Include="Controls\Data\DatabaseControl.xaml" />
+    <EmbeddedResource Include="Controls\Data\DataControl.xaml" />
+    <EmbeddedResource Include="Controls\State\ShapeStateControl.xaml" />
+    <EmbeddedResource Include="Controls\Shapes\PointControl.xaml" />
+    <EmbeddedResource Include="Controls\Shapes\LineControl.xaml" />
+    <EmbeddedResource Include="Controls\Shapes\TextControl.xaml" />
+    <EmbeddedResource Include="Controls\Shapes\RectangleControl.xaml" />
+    <EmbeddedResource Include="Controls\Shapes\EllipseControl.xaml" />
+    <EmbeddedResource Include="Controls\Shapes\ImageControl.xaml" />
+    <EmbeddedResource Include="Controls\Shapes\ArcControl.xaml" />
+    <EmbeddedResource Include="Controls\Shapes\CubicBezierControl.xaml" />
+    <EmbeddedResource Include="Controls\Shapes\QuadraticBezierControl.xaml" />
+    <EmbeddedResource Include="Controls\Shapes\GroupControl.xaml" />
+    <EmbeddedResource Include="Controls\Shapes\PathControl.xaml" />
+    <EmbeddedResource Include="Controls\Path\PathSizeControl.xaml" />
+    <EmbeddedResource Include="Controls\Path\ArcSegmentControl.xaml" />
+    <EmbeddedResource Include="Controls\Path\CubicBezierSegmentControl.xaml" />
+    <EmbeddedResource Include="Controls\Path\LineSegmentControl.xaml" />
+    <EmbeddedResource Include="Controls\Path\PolyCubicBezierSegmentControl.xaml" />
+    <EmbeddedResource Include="Controls\Path\PolyLineSegmentControl.xaml" />
+    <EmbeddedResource Include="Controls\Path\PolyQuadraticBezierSegmentControl.xaml" />
+    <EmbeddedResource Include="Controls\Path\QuadraticBezierSegmentControl.xaml" />
+    <EmbeddedResource Include="Controls\Path\PathFigureControl.xaml" />
+    <EmbeddedResource Include="Controls\Path\PathGeometryControl.xaml" />
+    <EmbeddedResource Include="Controls\Project\OptionsControl.xaml" />
+    <EmbeddedResource Include="Controls\Project\ProjectControl.xaml" />
+    <EmbeddedResource Include="Controls\Project\DocumentControl.xaml" />
+    <EmbeddedResource Include="Controls\Project\ContainerControl.xaml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Project\LayerControl.paml" />
-    <EmbeddedResource Include="Controls\Project\ImagesControl.paml" />
-    <EmbeddedResource Include="Controls\Data\ColumnsControl.paml" />
-    <EmbeddedResource Include="Controls\Project\LayersControl.paml" />
-    <EmbeddedResource Include="Controls\Project\ShapesControl.paml" />
-    <EmbeddedResource Include="Controls\Style\StyleControl.paml">
+    <EmbeddedResource Include="Controls\Project\LayerControl.xaml" />
+    <EmbeddedResource Include="Controls\Project\ImagesControl.xaml" />
+    <EmbeddedResource Include="Controls\Data\ColumnsControl.xaml" />
+    <EmbeddedResource Include="Controls\Project\LayersControl.xaml" />
+    <EmbeddedResource Include="Controls\Project\ShapesControl.xaml" />
+    <EmbeddedResource Include="Controls\Style\StyleControl.xaml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Project\PageControl.paml">
+    <EmbeddedResource Include="Controls\Project\PageControl.xaml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Project\TemplateControl.paml">
+    <EmbeddedResource Include="Controls\Project\TemplateControl.xaml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="packages.config">
@@ -512,40 +512,40 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="App.paml">
+    <EmbeddedResource Include="App.xaml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Editor\EditorControl.paml">
+    <EmbeddedResource Include="Controls\Editor\EditorControl.xaml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Editor\DashboardControl.paml">
+    <EmbeddedResource Include="Controls\Editor\DashboardControl.xaml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Editor\DrawableControl.paml">
+    <EmbeddedResource Include="Controls\Editor\DrawableControl.xaml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Editor\MenuControl.paml">
+    <EmbeddedResource Include="Controls\Editor\MenuControl.xaml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Editor\StatusControl.paml">
+    <EmbeddedResource Include="Controls\Editor\StatusControl.xaml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Project\DatabasesControl.paml">
+    <EmbeddedResource Include="Controls\Project\DatabasesControl.xaml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Project\GroupsControl.paml">
+    <EmbeddedResource Include="Controls\Project\GroupsControl.xaml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Data\RecordsControl.paml">
+    <EmbeddedResource Include="Controls\Data\RecordsControl.xaml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Project\StylesControl.paml">
+    <EmbeddedResource Include="Controls\Project\StylesControl.xaml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Project\TemplatesControl.paml">
+    <EmbeddedResource Include="Controls\Project\TemplatesControl.xaml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Windows\MainWindow.paml">
+    <EmbeddedResource Include="Windows\MainWindow.xaml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
