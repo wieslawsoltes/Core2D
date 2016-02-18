@@ -90,12 +90,14 @@
         </Style>
         <!-- TextBox -->
         <Style Selector="TextBox.default">
+            <Setter Property="Padding" Value="2,0,2,0"/>
             <Setter Property="Margin" Value="3,1,3,1"/>
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="Background" Value="#FFDEDEDE"/>
             <Setter Property="BorderThickness" Value="0"/>
         </Style>
         <Style Selector="TextBox.left">
+            <Setter Property="Padding" Value="2,0,2,0"/>
             <Setter Property="Margin" Value="3,1,3,1"/>
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="Background" Value="#FFDEDEDE"/>
@@ -104,6 +106,7 @@
             <Setter Property="BorderThickness" Value="0"/>
         </Style>
         <Style Selector="TextBox.center">
+            <Setter Property="Padding" Value="2,0,2,0"/>
             <Setter Property="Margin" Value="3,1,3,1"/>
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="Background" Value="#FFDEDEDE"/>
@@ -116,10 +119,12 @@
         <Style Selector="CheckBox.default">
             <Setter Property="Margin" Value="3,1,3,1"/>
             <Setter Property="FontSize" Value="12"/>
+            <Setter Property="BorderThickness" Value="1"/>
         </Style>
         <Style Selector="CheckBox.left">
             <Setter Property="Margin" Value="3,1,3,1"/>
             <Setter Property="FontSize" Value="12"/>
+            <Setter Property="BorderThickness" Value="1"/>
         </Style>
         <Style Selector="CheckBox.options">
             <Setter Property="Margin" Value="2"/>
@@ -130,11 +135,13 @@
         </Style>
         <!-- DropDown -->
         <Style Selector="DropDown.default">
+            <Setter Property="Padding" Value="4,0,4,0"/>
             <Setter Property="Margin" Value="3,1,3,1"/>
             <Setter Property="Background" Value="#FFDEDEDE"/>
             <Setter Property="BorderThickness" Value="0"/>
         </Style>
         <Style Selector="DropDown.tool">
+            <Setter Property="Padding" Value="4,0,4,0"/>
             <Setter Property="Margin" Value="2"/>
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="BorderBrush" Value="#FFACACAC"/>
