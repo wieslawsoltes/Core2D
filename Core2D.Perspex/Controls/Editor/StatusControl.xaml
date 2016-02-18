@@ -24,9 +24,9 @@
                 </TextBlock.Text>
             </TextBlock>
         </StackPanel>
-        <WrapPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Margin="2">
-            <DropDown Classes="tool" Width="110" Items="{Static Editor:Enums.ToolValues}" SelectedItem="{Binding Path=CurrentTool, Mode=TwoWay}"/>
-            <DropDown Classes="tool" Width="110" Items="{Static Editor:Enums.PathToolValues}" SelectedItem="{Binding Path=CurrentPathTool, Mode=TwoWay}">
+        <WrapPanel Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Horizontal" Margin="2">
+            <DropDown Classes="tool" Items="{Static Editor:Enums.ToolValues}" SelectedItem="{Binding Path=CurrentTool, Mode=TwoWay}"/>
+            <DropDown Classes="tool" Items="{Static Editor:Enums.PathToolValues}" SelectedItem="{Binding Path=CurrentPathTool, Mode=TwoWay}">
                 <DropDown.IsVisible>
                     <MultiBinding Mode="OneWay" Converter="{Static converters:ObjectEqualityMultiConverter.Instance}">
                         <Binding Path="CurrentTool"/>
@@ -34,8 +34,6 @@
                     </MultiBinding>
                 </DropDown.IsVisible>
             </DropDown>
-        </WrapPanel>
-        <StackPanel Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Horizontal" Margin="2">
             <CheckBox Classes="options" Content="Stroked" IsChecked="{Binding Project.Options.DefaultIsStroked, Mode=TwoWay}"/>
             <CheckBox Classes="options" Content="Filled" IsChecked="{Binding Project.Options.DefaultIsFilled, Mode=TwoWay}"/>
             <CheckBox Classes="options" Content="Closed" IsChecked="{Binding Project.Options.DefaultIsClosed, Mode=TwoWay}"/>
@@ -43,6 +41,6 @@
             <CheckBox Classes="options" Content="Snap" IsChecked="{Binding Project.Options.SnapToGrid, Mode=TwoWay}"/>
             <CheckBox Classes="options" Content="Connect" IsChecked="{Binding Project.Options.TryToConnect, Mode=TwoWay}"/>
             <CheckBox Classes="options" Content="Auto-fit" IsChecked="{Binding Renderers[0].State.EnableAutofit, Mode=TwoWay}"/>
-        </StackPanel>
+        </WrapPanel>
     </Grid>
 </UserControl>
