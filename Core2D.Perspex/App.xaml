@@ -21,6 +21,86 @@
              xmlns:state="clr-namespace:Core2D.Perspex.Controls.State;assembly=Core2D.Perspex"
              xmlns:style="clr-namespace:Core2D.Perspex.Controls.Style;assembly=Core2D.Perspex">
     <Application.Styles>
+        <!-- Border -->
+        <Style Selector="Border.leftTop">
+            <Setter Property="Margin" Value="4,6,0,4"/>
+            <Setter Property="Padding" Value="3,3,3,3"/>
+            <Setter Property="BorderBrush" Value="#FFACACAC"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+        <Style Selector="Border.leftBottom">
+            <Setter Property="Margin" Value="4,4,0,2"/>
+            <Setter Property="Padding" Value="3,3,3,3"/>
+            <Setter Property="BorderBrush" Value="#FFACACAC"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+        <Style Selector="Border.rightTop">
+            <Setter Property="Margin" Value="0,6,4,4"/>
+            <Setter Property="Padding" Value="3,3,3,3"/>
+            <Setter Property="BorderBrush" Value="#FFACACAC"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+        <Style Selector="Border.rightBottom">
+            <Setter Property="Margin" Value="0,4,4,2"/>
+            <Setter Property="Padding" Value="3,3,3,3"/>
+            <Setter Property="BorderBrush" Value="#FFACACAC"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+        <Style Selector="Border.drawable">
+            <Setter Property="Margin" Value="0,6,0,2"/>
+            <Setter Property="Padding" Value="3,3,3,3"/>
+            <Setter Property="BorderBrush" Value="#FFACACAC"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+        <Style Selector="Border.color">
+            <Setter Property="Margin" Value="3,1,3,1"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+        <!-- Button -->
+        <Style Selector="Button.default">
+            <Setter Property="Margin" Value="3,0,3,0"/>
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
+        <Style Selector="Button.project">
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="BorderBrush" Value="#FFACACAC"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Background" Value="#FFFFFFFF"/>
+        </Style>
+        <!-- CheckBox -->
+        <Style Selector="CheckBox.default">
+            <Setter Property="Margin" Value="3,1,3,1"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+        <Style Selector="CheckBox.left">
+            <Setter Property="Margin" Value="3,1,3,1"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+        <Style Selector="CheckBox.options">
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="BorderBrush" Value="#FFACACAC"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <!-- DropDown -->
+        <Style Selector="DropDown.default">
+            <Setter Property="Padding" Value="4,0,4,0"/>
+            <Setter Property="Margin" Value="3,1,3,1"/>
+            <Setter Property="Background" Value="#FFDEDEDE"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+        <Style Selector="DropDown.tool">
+            <Setter Property="Padding" Value="4,0,4,0"/>
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="BorderBrush" Value="#FFACACAC"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
         <!-- GridSplitter -->
         <Style Selector="GridSplitter:vertical">
             <Setter Property="Width" Value="6"/>
@@ -45,6 +125,27 @@
         </Style>
         <Style Selector="GridSplitter.horizontal">
             <Setter Property="Orientation" Value="Horizontal"/>
+        </Style>
+        <!-- ListBox -->
+        <Style Selector="ListBox.default">
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="AutoScrollToSelectedItem" Value="True"/>
+        </Style>
+        <Style Selector="ListBox.recents">
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="BorderBrush" Value="#FFACACAC"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="AutoScrollToSelectedItem" Value="True"/>
+        </Style>
+        <!-- ScrollBar -->
+        <Style Selector="ScrollBar.slider">
+            <Setter Property="Visibility" Value="Visible"/>
+            <Setter Property="Orientation" Value="Horizontal"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="Margin" Value="3,1,3,1"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
         </Style>
         <!-- TextBlock -->
         <Style Selector="TextBlock.default">
@@ -115,77 +216,6 @@
             <Setter Property="BorderBrush" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="0"/>
         </Style>
-        <!-- CheckBox -->
-        <Style Selector="CheckBox.default">
-            <Setter Property="Margin" Value="3,1,3,1"/>
-            <Setter Property="FontSize" Value="12"/>
-            <Setter Property="BorderThickness" Value="1"/>
-        </Style>
-        <Style Selector="CheckBox.left">
-            <Setter Property="Margin" Value="3,1,3,1"/>
-            <Setter Property="FontSize" Value="12"/>
-            <Setter Property="BorderThickness" Value="1"/>
-        </Style>
-        <Style Selector="CheckBox.options">
-            <Setter Property="Margin" Value="2"/>
-            <Setter Property="FontSize" Value="12"/>
-            <Setter Property="BorderBrush" Value="#FFACACAC"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-        </Style>
-        <!-- DropDown -->
-        <Style Selector="DropDown.default">
-            <Setter Property="Padding" Value="4,0,4,0"/>
-            <Setter Property="Margin" Value="3,1,3,1"/>
-            <Setter Property="Background" Value="#FFDEDEDE"/>
-            <Setter Property="BorderThickness" Value="0"/>
-        </Style>
-        <Style Selector="DropDown.tool">
-            <Setter Property="Padding" Value="4,0,4,0"/>
-            <Setter Property="Margin" Value="2"/>
-            <Setter Property="FontSize" Value="12"/>
-            <Setter Property="BorderBrush" Value="#FFACACAC"/>
-            <Setter Property="BorderThickness" Value="1"/>
-        </Style>
-        <!-- Button -->
-        <Style Selector="Button.default">
-            <Setter Property="Margin" Value="3,0,3,0"/>
-            <Setter Property="FontSize" Value="12"/>
-        </Style>
-        <Style Selector="Button.project">
-            <Setter Property="Margin" Value="0"/>
-            <Setter Property="FontSize" Value="18"/>
-            <Setter Property="BorderBrush" Value="#FFACACAC"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Background" Value="#FFFFFFFF"/>
-        </Style>
-        <!-- ScrollBar -->
-        <Style Selector="ScrollBar.slider">
-            <Setter Property="Visibility" Value="Visible"/>
-            <Setter Property="Orientation" Value="Horizontal"/>
-            <Setter Property="Height" Value="20"/>
-            <Setter Property="Margin" Value="3,1,3,1"/>
-            <Setter Property="HorizontalAlignment" Value="Stretch"/>
-            <Setter Property="VerticalAlignment" Value="Stretch"/>
-        </Style>
-        <!-- ListBox -->
-        <Style Selector="ListBox.default">
-            <Setter Property="Margin" Value="0"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="AutoScrollToSelectedItem" Value="True"/>
-        </Style>
-        <Style Selector="ListBox.recents">
-            <Setter Property="Margin" Value="0"/>
-            <Setter Property="BorderBrush" Value="#FFACACAC"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="AutoScrollToSelectedItem" Value="True"/>
-        </Style>
-        <!-- TreeView -->
-        <Style Selector="TreeView.default">
-            <Setter Property="Margin" Value="0"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="AutoScrollToSelectedItem" Value="True"/>
-        </Style>
         <!-- TabControl -->
         <Style Selector="TabControl.default">
             <Setter Property="Margin" Value="0"/>
@@ -217,41 +247,11 @@
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="FontWeight" Value="Normal"/>
         </Style>
-        <!-- Border -->
-        <Style Selector="Border.leftTop">
-            <Setter Property="Margin" Value="4,6,0,4"/>
-            <Setter Property="Padding" Value="3,3,3,3"/>
-            <Setter Property="BorderBrush" Value="#FFACACAC"/>
-            <Setter Property="BorderThickness" Value="1"/>
-        </Style>
-        <Style Selector="Border.leftBottom">
-            <Setter Property="Margin" Value="4,4,0,2"/>
-            <Setter Property="Padding" Value="3,3,3,3"/>
-            <Setter Property="BorderBrush" Value="#FFACACAC"/>
-            <Setter Property="BorderThickness" Value="1"/>
-        </Style>
-        <Style Selector="Border.rightTop">
-            <Setter Property="Margin" Value="0,6,4,4"/>
-            <Setter Property="Padding" Value="3,3,3,3"/>
-            <Setter Property="BorderBrush" Value="#FFACACAC"/>
-            <Setter Property="BorderThickness" Value="1"/>
-        </Style>
-        <Style Selector="Border.rightBottom">
-            <Setter Property="Margin" Value="0,4,4,2"/>
-            <Setter Property="Padding" Value="3,3,3,3"/>
-            <Setter Property="BorderBrush" Value="#FFACACAC"/>
-            <Setter Property="BorderThickness" Value="1"/>
-        </Style>
-        <Style Selector="Border.drawable">
-            <Setter Property="Margin" Value="0,6,0,2"/>
-            <Setter Property="Padding" Value="3,3,3,3"/>
-            <Setter Property="BorderBrush" Value="#FFACACAC"/>
-            <Setter Property="BorderThickness" Value="1"/>
-        </Style>
-        <Style Selector="Border.color">
-            <Setter Property="Margin" Value="3,1,3,1"/>
-            <Setter Property="BorderBrush" Value="Transparent"/>
+        <!-- TreeView -->
+        <Style Selector="TreeView.default">
+            <Setter Property="Margin" Value="0"/>
             <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="AutoScrollToSelectedItem" Value="True"/>
         </Style>
     </Application.Styles>
     <Application.DataTemplates>
