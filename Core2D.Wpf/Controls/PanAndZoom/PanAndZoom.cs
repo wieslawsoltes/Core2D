@@ -183,12 +183,10 @@ namespace Core2D.Wpf.Controls.PanAndZoom
                 double zx = pw / ew;
                 double zy = ph / eh;
                 double zoom = Min(zx, zy);
-                double dx = (pw - (ew * zoom)) / 2.0;
-                double dy = (ph - (eh * zoom)) / 2.0;
-                double ox = dx - Max(0, (pw - ew) / 2.0);
-                double oy = dy - Max(0, (ph - eh) / 2.0);
+                double cx = ew / 2.0;
+                double cy = eh / 2.0;
 
-                _matrix = MatrixHelper.Scale(zoom, zoom) * MatrixHelper.Translate(ox, oy);
+                _matrix = MatrixHelper.ScaleAt(zoom, zoom, cx, cy);
 
                 Invalidate();
             }
@@ -205,7 +203,7 @@ namespace Core2D.Wpf.Controls.PanAndZoom
                 double zx = pw / ew;
                 double zy = ph / eh;
 
-                _matrix = MatrixHelper.ScaleAt(zx, zy, ew > pw ? 0.0 : ew / 2.0, eh > ph ? 0.0 : eh / 2.0);
+                _matrix = MatrixHelper.ScaleAt(zx, zy, ew / 2.0, eh / 2.0);
 
                 Invalidate();
             }
