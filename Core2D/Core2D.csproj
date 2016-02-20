@@ -145,7 +145,6 @@
     <Compile Include="Renderer\ImageKey.cs" />
     <Compile Include="Renderer\ShapeRenderer.cs" />
     <Compile Include="Renderer\ShapeRendererState.cs" />
-    <Compile Include="Renderer\ZoomState.cs" />
     <Compile Include="Shapes\XArc.cs" />
     <Compile Include="Shapes\XCubicBezier.cs" />
     <Compile Include="Shapes\XEllipse.cs" />
