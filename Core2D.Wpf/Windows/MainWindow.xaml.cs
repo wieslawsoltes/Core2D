@@ -9,7 +9,6 @@ using Core2D.Style;
 using Microsoft.Win32;
 using System;
 using System.Windows;
-using System.Windows.Input;
 using Xceed.Wpf.AvalonDock.Layout.Serialization;
 
 namespace Core2D.Wpf.Windows
@@ -32,15 +31,15 @@ namespace Core2D.Wpf.Windows
         }
 
         /// <summary>
-        /// Initializes the mouse events.
+        /// Initializes main window.
         /// </summary>
         /// <param name="editor">The editor instance.</param>
-        public void InitializeMouse(ProjectEditor editor)
+        public void Initialize(ProjectEditor editor)
         {
-            panAndZoomGrid.PreviewMouseLeftButtonDown +=
+            panAndZoom.PreviewMouseLeftButtonDown +=
                 (sender, e) =>
                 {
-                    panAndZoomGrid.Focus();
+                    panAndZoom.Focus();
                     if (editor.IsLeftDownAvailable())
                     {
                         var p = e.GetPosition(drawableControl);
@@ -48,10 +47,10 @@ namespace Core2D.Wpf.Windows
                     }
                 };
 
-            panAndZoomGrid.PreviewMouseLeftButtonUp +=
+            panAndZoom.PreviewMouseLeftButtonUp +=
                 (sender, e) =>
                 {
-                    panAndZoomGrid.Focus();
+                    panAndZoom.Focus();
                     if (editor.IsLeftUpAvailable())
                     {
                         var p = e.GetPosition(drawableControl);
@@ -59,10 +58,10 @@ namespace Core2D.Wpf.Windows
                     }
                 };
 
-            panAndZoomGrid.PreviewMouseRightButtonDown +=
+            panAndZoom.PreviewMouseRightButtonDown +=
                 (sender, e) =>
                 {
-                    panAndZoomGrid.Focus();
+                    panAndZoom.Focus();
                     if (editor.IsRightDownAvailable())
                     {
                         var p = e.GetPosition(drawableControl);
@@ -70,10 +69,10 @@ namespace Core2D.Wpf.Windows
                     }
                 };
 
-            panAndZoomGrid.PreviewMouseRightButtonUp +=
+            panAndZoom.PreviewMouseRightButtonUp +=
                 (sender, e) =>
                 {
-                    panAndZoomGrid.Focus();
+                    panAndZoom.Focus();
                     if (editor.IsRightUpAvailable())
                     {
                         var p = e.GetPosition(drawableControl);
@@ -81,93 +80,20 @@ namespace Core2D.Wpf.Windows
                     }
                 };
 
-            panAndZoomGrid.PreviewMouseMove +=
+            panAndZoom.PreviewMouseMove +=
                 (sender, e) =>
                 {
-                    panAndZoomGrid.Focus();
+                    panAndZoom.Focus();
                     if (editor.IsMoveAvailable())
                     {
                         var p = e.GetPosition(drawableControl);
                         editor.Move(p.X, p.Y);
                     }
                 };
-        }
 
-        /// <summary>
-        /// Initializes the zoom border control.
-        /// </summary>
-        /// <param name="editor">The editor instance.</param>
-        public void InitializeZoom(ProjectEditor editor)
-        {
-            border.InvalidateChild =
-                (z, x, y) =>
-                {
-                    bool invalidate = editor.Renderers[0].State.Zoom != z;
-                    editor.Renderers[0].State.Zoom = z;
-                    editor.Renderers[0].State.PanX = x;
-                    editor.Renderers[0].State.PanY = y;
-                    if (invalidate)
-                    {
-                        editor.InvalidateCache(isZooming: true);
-                    }
-                };
+            panAndZoom.AllowDrop = true;
 
-            border.AutoFitChild =
-                (width, height) =>
-                {
-                    if (border != null
-                        && editor != null
-                        && editor.Project != null
-                        && editor.Project.CurrentContainer != null)
-                    {
-                        var container = editor.Project.CurrentContainer;
-
-                        if (container is XTemplate)
-                        {
-                            var template = container as XTemplate;
-                            border.FitTo(
-                                width,
-                                height,
-                                template.Width,
-                                template.Height);
-                        }
-
-                        if (container is XPage)
-                        {
-                            var page = container as XPage;
-                            border.FitTo(
-                                width,
-                                height,
-                                page.Template.Width,
-                                page.Template.Height);
-                        }
-                    }
-                };
-
-            border.MouseDown +=
-                (s, e) =>
-                {
-                    if (e.ChangedButton == MouseButton.Middle && e.ClickCount == 2)
-                    {
-                        panAndZoomGrid.AutoFit();
-                    }
-
-                    if (e.ChangedButton == MouseButton.Middle && e.ClickCount == 3)
-                    {
-                        panAndZoomGrid.ResetZoomAndPan();
-                    }
-                };
-        }
-
-        /// <summary>
-        /// Initializes canvas control drag and drop handler.
-        /// </summary>
-        /// <param name="editor">The editor instance.</param>
-        public void InitializeDrop(ProjectEditor editor)
-        {
-            panAndZoomGrid.AllowDrop = true;
-
-            panAndZoomGrid.DragEnter +=
+            panAndZoom.DragEnter +=
                 (s, e) =>
                 {
                     if (!e.Data.GetDataPresent(DataFormats.FileDrop)
@@ -181,7 +107,7 @@ namespace Core2D.Wpf.Windows
                     }
                 };
 
-            panAndZoomGrid.Drop +=
+            panAndZoom.Drop +=
                 (s, e) =>
                 {
                     // Files.
@@ -300,8 +226,8 @@ namespace Core2D.Wpf.Windows
         /// <summary>
         /// Load docking manager layout from resource.
         /// </summary>
-        /// <param name="path"></param>
-        /// <param name="context"></param>
+        /// <param name="path">The layout resource path.</param>
+        /// <param name="context">The data context.</param>
         private void LoadLayoutFromResource(string path, object context)
         {
             var serializer = new XmlLayoutSerializer(dockingManager);
@@ -329,8 +255,8 @@ namespace Core2D.Wpf.Windows
         /// <summary>
         /// Load docking manager layout.
         /// </summary>
-        /// <param name="path"></param>
-        /// <param name="context"></param>
+        /// <param name="path">The layout resource path.</param>
+        /// <param name="context">The data context.</param>
         private void LoadLayout(string path, object context)
         {
             if (!System.IO.File.Exists(path))
@@ -357,7 +283,7 @@ namespace Core2D.Wpf.Windows
         /// <summary>
         /// Save docking manager layout.
         /// </summary>
-        /// <param name="path"></param>
+        /// <param name="path">The layout resource path.</param>
         private void SaveLayout(string path)
         {
             var serializer = new XmlLayoutSerializer(dockingManager);
@@ -481,7 +407,7 @@ namespace Core2D.Wpf.Windows
         /// </summary>
         public void OnZoomReset()
         {
-            panAndZoomGrid.ResetZoomAndPan();
+            panAndZoom.Reset();
         }
 
         /// <summary>
@@ -489,7 +415,7 @@ namespace Core2D.Wpf.Windows
         /// </summary>
         public void OnZoomExtent()
         {
-            panAndZoomGrid.AutoFit();
+            panAndZoom.AutoFit();
         }
     }
 }
