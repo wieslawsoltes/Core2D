@@ -183,7 +183,7 @@ namespace Core2D.Editor
         /// <summary>
         /// Gets or sets extent zoom action.
         /// </summary>
-        public Action ExtentZoom
+        public Action AutoFitZoom
         {
             get { return _extentZoom; }
             set { Update(ref _extentZoom, value); }
@@ -4421,9 +4421,9 @@ namespace Core2D.Editor
                     async () => await (Application?.OnZoomResetAsync() ?? Task.FromResult<object>(null)),
                     () => true);
 
-            Commands.ZoomExtentCommand =
+            Commands.ZoomAutoFitCommand =
                 Command.Create(
-                    async () => await (Application?.OnZoomExtentAsync() ?? Task.FromResult<object>(null)),
+                    async () => await (Application?.OnZoomAutoFitAsync() ?? Task.FromResult<object>(null)),
                     () => true);
 
             Commands.LoadWindowLayoutCommand =

@@ -659,9 +659,9 @@ namespace Core2D.Wpf
         }
 
         /// <inheritdoc/>
-        public async Task OnZoomExtentAsync()
+        public async Task OnZoomAutoFitAsync()
         {
-            _mainWindow.OnZoomExtent();
+            _mainWindow.OnZoomAutoFit();
             await Task.Delay(0);
         }
 

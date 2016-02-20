@@ -199,7 +199,7 @@
                                         <KeyBinding Command="{x:Static Editor:Commands.SnapToGridCommand}" Key="G" Modifiers=""/>
                                         <KeyBinding Command="{x:Static Editor:Commands.TryToConnectCommand}" Key="C" Modifiers=""/>
                                         <KeyBinding Command="{x:Static Editor:Commands.ZoomResetCommand}" Key="Z" Modifiers=""/>
-                                        <KeyBinding Command="{x:Static Editor:Commands.ZoomExtentCommand}" Key="X" Modifiers=""/>
+                                        <KeyBinding Command="{x:Static Editor:Commands.ZoomAutoFitCommand}" Key="X" Modifiers=""/>
                                         <KeyBinding Command="{x:Static Editor:Commands.DeselectAllCommand}" Key="Esc" Modifiers=""/>
                                     </paz:PanAndZoom.InputBindings>
                                     <ContentControl x:Name="drawableControl" Content="{Binding Project.CurrentContainer}" ClipToBounds="False" custom:LayerElement.Renderer="{Binding Renderers[0]}">

@@ -403,7 +403,7 @@ namespace Core2D.Wpf.Windows
         }
 
         /// <summary>
-        /// Reset pan and zoom to default state.
+        /// Reset view size to defaults.
         /// </summary>
         public void OnZoomReset()
         {
@@ -411,9 +411,9 @@ namespace Core2D.Wpf.Windows
         }
 
         /// <summary>
-        /// Stretch view to the available extents.
+        /// Auto-fit view to the available extents.
         /// </summary>
-        public void OnZoomExtent()
+        public void OnZoomAutoFit()
         {
             panAndZoom.AutoFit();
         }

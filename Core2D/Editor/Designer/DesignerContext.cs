@@ -369,9 +369,9 @@ namespace Core2D.Editor.Designer
                     () => editor.ResetZoom(),
                     () => true);
 
-            Commands.ZoomExtentCommand =
+            Commands.ZoomAutoFitCommand =
                 Command.Create(
-                    () => editor.ExtentZoom(),
+                    () => editor.AutoFitZoom(),
                     () => true);
 
             Commands.LoadWindowLayoutCommand =
