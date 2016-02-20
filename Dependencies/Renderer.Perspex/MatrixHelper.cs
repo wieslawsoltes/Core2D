@@ -1,17 +1,117 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Perspex;
+using static System.Math;
 
 namespace Renderer.Perspex
 {
     /// <summary>
     /// Perspex Matrix helper methods.
     /// </summary>
-    /// <remarks>
-    /// Based on code from https://github.com/sharpdx/SharpDX/blob/master/Source/SharpDX.Mathematics/Matrix3x2.cs
-    /// </remarks>
-    internal static class MatrixHelper
+    public static class MatrixHelper
     {
+        /// <summary>
+        /// Gets the identity matrix.
+        /// </summary>
+        /// <value>The identity matrix.</value>
+        public static readonly Matrix Identity = new Matrix(1.0, 0.0, 0.0, 1.0, 0.0, 0.0);
+
+        /// <summary>
+        /// Creates a translation matrix using the specified offsets.
+        /// </summary>
+        /// <param name="offsetX">X-coordinate offset.</param>
+        /// <param name="offsetY">Y-coordinate offset.</param>
+        /// <returns>The created translation matrix.</returns>
+        public static Matrix Translate(double offsetX, double offsetY)
+        {
+            return new Matrix(1.0, 0.0, 0.0, 1.0, offsetX, offsetY);
+        }
+
+        /// <summary>
+        /// Prepends a translation around the center of provided matrix.
+        /// </summary>
+        /// <param name="matrix">The matrix to prepend translation.</param>
+        /// <param name="offsetX">X-coordinate offset.</param>
+        /// <param name="offsetY">Y-coordinate offset.</param>
+        /// <returns>The created translation matrix.</returns>
+        public static Matrix TranslatePrepend(Matrix matrix, double offsetX, double offsetY)
+        {
+            return Translate(offsetX, offsetY) * matrix;
+        }
+
+        /// <summary>
+        /// Creates a matrix that scales along the x-axis and y-axis.
+        /// </summary>
+        /// <param name="scaleX">Scaling factor that is applied along the x-axis.</param>
+        /// <param name="scaleY">Scaling factor that is applied along the y-axis.</param>
+        /// <returns>The created scaling matrix.</returns>
+        public static Matrix Scale(double scaleX, double scaleY)
+        {
+            return new Matrix(scaleX, 0, 0, scaleY, 0.0, 0.0);
+        }
+
+        /// <summary>
+        /// Creates a matrix that is scaling from a specified center.
+        /// </summary>
+        /// <param name="scaleX">Scaling factor that is applied along the x-axis.</param>
+        /// <param name="scaleY">Scaling factor that is applied along the y-axis.</param>
+        /// <param name="centerX">The center X-coordinate of the scaling.</param>
+        /// <param name="centerY">The center Y-coordinate of the scaling.</param>
+        /// <returns>The created scaling matrix.</returns>
+        public static Matrix ScaleAt(double scaleX, double scaleY, double centerX, double centerY)
+        {
+            return new Matrix(scaleX, 0, 0, scaleY, centerX - scaleX * centerX, centerY - scaleY * centerY);
+        }
+
+        /// <summary>
+        /// Prepends a scale around the center of provided matrix.
+        /// </summary>
+        /// <param name="matrix">The matrix to prepend scale.</param>
+        /// <param name="scaleX">Scaling factor that is applied along the x-axis.</param>
+        /// <param name="scaleY">Scaling factor that is applied along the y-axis.</param>
+        /// <param name="centerX">The center X-coordinate of the scaling.</param>
+        /// <param name="centerY">The center Y-coordinate of the scaling.</param>
+        /// <returns>The created scaling matrix.</returns>
+        public static Matrix ScaleAtPrepend(Matrix matrix, double scaleX, double scaleY, double centerX, double centerY)
+        {
+            return ScaleAt(scaleX, scaleY, centerX, centerY) * matrix;
+        }
+
+        /// <summary>
+        /// Creates a skew matrix.
+        /// </summary>
+        /// <param name="angleX">Angle of skew along the X-axis in radians.</param>
+        /// <param name="angleY">Angle of skew along the Y-axis in radians.</param>
+        /// <returns>When the method completes, contains the created skew matrix.</returns>
+        public static Matrix Skew(float angleX, float angleY)
+        {
+            return new Matrix(1.0, Tan(angleX), Tan(angleY), 1.0, 0.0, 0.0);
+        }
+
+        /// <summary>
+        /// Creates a matrix that rotates.
+        /// </summary>
+        /// <param name="radians">Angle of rotation in radians. Angles are measured clockwise when looking along the rotation axis.</param>
+        /// <returns>The created rotation matrix.</returns>
+        public static Matrix Rotation(double radians)
+        {
+            double cos = Cos(radians);
+            double sin = Sin(radians);
+            return new Matrix(cos, sin, -sin, cos, 0, 0);
+        }
+
+        /// <summary>
+        /// Creates a matrix that rotates about a specified center.
+        /// </summary>
+        /// <param name="angle">Angle of rotation in radians.</param>
+        /// <param name="centerX">The center X-coordinate of the rotation.</param>
+        /// <param name="centerY">The center Y-coordinate of the rotation.</param>
+        /// <returns>The created rotation matrix.</returns>
+        public static Matrix Rotation(double angle, double centerX, double centerY)
+        {
+            return Translate(-centerX, -centerY) * Rotation(angle) * Translate(centerX, centerY);
+        }
+
         /// <summary>
         /// Creates a matrix that rotates about a specified center.
         /// </summary>
@@ -20,10 +120,7 @@ namespace Renderer.Perspex
         /// <returns>The created rotation matrix.</returns>
         public static Matrix Rotation(double angle, Vector center)
         {
-            return
-                Matrix.CreateTranslation(-center)
-                * Matrix.CreateRotation(angle)
-                * Matrix.CreateTranslation(center);
+            return Translate(-center.X, -center.Y) * Rotation(angle) * Translate(center.X, center.Y);
         }
 
         /// <summary>
