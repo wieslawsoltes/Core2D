@@ -127,7 +127,7 @@ namespace Core2D.Wpf.Controls.PanAndZoom
         {
             if (_element != null && _element.IsMeasureValid)
             {
-                AutoFit(finalSize, _element.RenderSize);
+                AutoFit(this.DesiredSize, _element.RenderSize);
             }
 
             return base.ArrangeOverride(finalSize);
@@ -257,19 +257,19 @@ namespace Core2D.Wpf.Controls.PanAndZoom
 
         public void Extent()
         {
-            Extent(this.RenderSize, _element.RenderSize);
+            Extent(this.DesiredSize, _element.RenderSize);
         }
 
         public void Fill()
         {
-            Fill(this.RenderSize, _element.RenderSize);
+            Fill(this.DesiredSize, _element.RenderSize);
         }
 
         public void AutoFit()
         {
             if (_element != null)
             {
-                AutoFit(this.RenderSize, _element.RenderSize);
+                AutoFit(this.DesiredSize, _element.RenderSize);
             }
         }
     }
