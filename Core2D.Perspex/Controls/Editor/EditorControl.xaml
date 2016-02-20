@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:Core2D.Perspex;assembly=Core2D.Perspex"
              xmlns:converters="clr-namespace:Core2D.Perspex.Converters;assembly=Core2D.Perspex"
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D"
+             xmlns:paz="clr-namespace:Core2D.Perspex.Controls.PanAndZoom;assembly=Core2D.Perspex"
              xmlns:data="clr-namespace:Core2D.Perspex.Controls.Data;assembly=Core2D.Perspex"
              xmlns:path="clr-namespace:Core2D.Perspex.Controls.Path;assembly=Core2D.Perspex"
              xmlns:project="clr-namespace:Core2D.Perspex.Controls.Project;assembly=Core2D.Perspex"
@@ -39,7 +40,9 @@
         <GridSplitter Classes="vertical" Grid.Column="1" Width="10"/>
         <Grid Grid.Row="0" Grid.RowSpan="3" Grid.Column="2">
             <Border Classes="drawable">
-                <editor:DrawableControl Name="drawable" ClipToBounds="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <paz:PanAndZoom Name="panAndZoom" AutoFitMode="Extent" ZoomSpeed="1.2" Background="Transparent" ClipToBounds="True" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <editor:DrawableControl Name="drawableControl" ClipToBounds="False"/>
+                </paz:PanAndZoom>
             </Border>
         </Grid>
         <GridSplitter Classes="vertical" Grid.Row="0" Grid.Column="3" Width="10"/>
