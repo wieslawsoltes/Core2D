@@ -21,6 +21,8 @@ namespace Core2D.Perspex.Controls.PanAndZoom
 
         public AutoFitMode AutoFitMode { get; set; }
 
+        public Action<double, double, double> InvalidatedChild { get; set; }
+
         public PanAndZoom()
             : base()
         {
@@ -152,6 +154,7 @@ namespace Core2D.Perspex.Controls.PanAndZoom
         {
             if (_element != null)
             {
+                this.InvalidatedChild?.Invoke(_matrix.M11, _matrix.M31, _matrix.M32);
                 _element.TransformOrigin = new RelativePoint(new Point(0, 0), RelativeUnit.Relative);
                 _element.RenderTransform = new MatrixTransform(_matrix);
                 _element.InvalidateVisual();

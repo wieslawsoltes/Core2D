@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Renderer.Wpf;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -19,6 +20,8 @@ namespace Core2D.Wpf.Controls.PanAndZoom
         public double ZoomSpeed { get; set; }
 
         public AutoFitMode AutoFitMode { get; set; }
+
+        public Action<double, double, double> InvalidatedChild { get; set; }
 
         public PanAndZoom()
             : base()
@@ -137,6 +140,7 @@ namespace Core2D.Wpf.Controls.PanAndZoom
         {
             if (_element != null)
             {
+                this.InvalidatedChild?.Invoke(_matrix.M11, _matrix.OffsetX, _matrix.OffsetY);
                 _element.RenderTransformOrigin = new Point(0, 0);
                 _element.RenderTransform = new MatrixTransform(_matrix);
                 _element.InvalidateVisual();
