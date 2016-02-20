@@ -66,9 +66,7 @@ namespace Core2D.Wpf
                     LoadRecent();
 
                     _mainWindow = new Windows.MainWindow();
-                    _mainWindow.InitializeMouse(_editor);
-                    _mainWindow.InitializeZoom(_editor);
-                    _mainWindow.InitializeDrop(_editor);
+                    _mainWindow.Initialize(_editor);
                     _mainWindow.Loaded += (sender, e) => OnLoaded();
                     _mainWindow.Closed += (sender, e) => OnClosed();
                     _mainWindow.DataContext = _editor;
@@ -198,9 +196,6 @@ namespace Core2D.Wpf
                 CsvWriter = new CsvHelperWriter(),
                 GetImageKey = async () => await OnGetImageKeyAsync()
             };
-
-            _editor.Renderers[0].State.EnableAutofit = true;
-            _editor.Renderers[0].State.DrawShapeState.Flags = ShapeStateFlags.Visible;
 
             _editor.DefaultTools();
             _editor.InitializeCommands();
@@ -661,9 +656,9 @@ namespace Core2D.Wpf
         }
 
         /// <inheritdoc/>
-        public async Task OnZoomExtentAsync()
+        public async Task OnZoomAutoFitAsync()
         {
-            _mainWindow.OnZoomExtent();
+            _mainWindow.OnZoomAutoFit();
             await Task.Delay(0);
         }
 

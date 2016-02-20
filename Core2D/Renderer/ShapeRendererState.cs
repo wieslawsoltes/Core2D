@@ -13,7 +13,6 @@ namespace Core2D.Renderer
         private double _panX;
         private double _panY;
         private double _zoom;
-        private bool _enableAutofit;
         private ShapeState _drawShapeState;
         private BaseShape _selectedShape;
         private ImmutableHashSet<BaseShape> _selectedShapes;
@@ -44,15 +43,6 @@ namespace Core2D.Renderer
         {
             get { return _zoom; }
             set { Update(ref _zoom, value); }
-        }
-
-        /// <summary>
-        /// Flag indicating whether auto-fit is enabled.
-        /// </summary>
-        public bool EnableAutofit
-        {
-            get { return _enableAutofit; }
-            set { Update(ref _enableAutofit, value); }
         }
 
         /// <summary>
@@ -99,8 +89,7 @@ namespace Core2D.Renderer
             _panX = 0.0;
             _panY = 0.0;
             _zoom = 1.0;
-            _enableAutofit = true;
-            _drawShapeState = ShapeState.Create(ShapeStateFlags.Visible | ShapeStateFlags.Printable);
+            _drawShapeState = ShapeState.Create(ShapeStateFlags.Visible);
             _selectedShape = default(BaseShape);
             _selectedShapes = default(ImmutableHashSet<BaseShape>);
         }

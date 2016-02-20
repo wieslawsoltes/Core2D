@@ -94,14 +94,14 @@ namespace Core2D.Editor.Interfaces
         Task OnCopyAsEmfAsync();
 
         /// <summary>
-        /// Reset pan and zoom to default state.
+        /// Reset view size to defaults.
         /// </summary>
         Task OnZoomResetAsync();
 
         /// <summary>
-        /// Stretch view to the available extents.
+        /// Auto-fit view to the available extents.
         /// </summary>
-        Task OnZoomExtentAsync();
+        Task OnZoomAutoFitAsync();
 
         /// <summary>
         /// Load docking manager layout.

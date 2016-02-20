@@ -4,7 +4,6 @@ using Core2D.Data;
 using Core2D.Data.Database;
 using Core2D.Editor;
 using Core2D.Project;
-using Core2D.Renderer;
 using Core2D.Style;
 using Perspex;
 using Perspex.Controls;
@@ -12,6 +11,7 @@ using Perspex.Input;
 using Perspex.Markup.Xaml;
 using Perspex.Media;
 using System.Collections.Immutable;
+using PAZ = Core2D.Perspex.Controls.PanAndZoom;
 
 namespace Core2D.Perspex.Controls.Editor
 {
@@ -20,7 +20,8 @@ namespace Core2D.Perspex.Controls.Editor
     /// </summary>
     public class DrawableControl : UserControl
     {
-        private ZoomState _state;
+        private ProjectEditor _editor;
+        private PAZ.PanAndZoom _panAndZoom;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DrawableControl"/> class.
@@ -28,6 +29,11 @@ namespace Core2D.Perspex.Controls.Editor
         public DrawableControl()
         {
             this.InitializeComponent();
+
+            this.AttachedToLogicalTree += (sender, e) =>
+            {
+                _panAndZoom = this.Parent as PAZ.PanAndZoom;
+            };
         }
 
         /// <summary>
@@ -39,251 +45,110 @@ namespace Core2D.Perspex.Controls.Editor
         }
 
         /// <summary>
-        /// Initialize <see cref="ZoomState"/> object
+        /// Initialize drawable control.
         /// </summary>
-        private void InitializeState()
+        private void Initialize()
         {
-            var editor = this.DataContext as ProjectEditor;
-            if (editor == null)
+            _editor = this.DataContext as ProjectEditor;
+            if (_editor == null)
                 return;
 
-            editor.Invalidate = () => this.InvalidateVisual();
-            editor.ResetZoom = () => this.OnZoomReset();
-            editor.ExtentZoom = () => this.OnZoomExtent();
+            _editor.Invalidate = () => this.InvalidateVisual();
+            _editor.ResetZoom = () => this.OnZoomReset();
+            _editor.AutoFitZoom = () => this.OnZoomAutoFit();
 
-            _state = new ZoomState(editor);
+            _panAndZoom.InvalidatedChild =
+                (zoom, offsetX, offsetY) =>
+                {
+                    bool invalidate = _editor.Renderers[0].State.Zoom != zoom;
+                    _editor.Renderers[0].State.Zoom = zoom;
+                    _editor.Renderers[0].State.PanX = offsetX;
+                    _editor.Renderers[0].State.PanY = offsetY;
+                    if (invalidate)
+                    {
+                        _editor.InvalidateCache(isZooming: true);
+                    }
+                };
 
-            if (editor.Renderers != null && editor.Renderers[0].State.EnableAutofit)
-            {
-                AutoFit(this.Bounds.Width, this.Bounds.Height);
-            }
-
-            this.PointerPressed +=
+            _panAndZoom.PointerPressed +=
                 (sender, e) =>
                 {
-                    if (_state == null)
-                        return;
-
                     var p = e.GetPosition(this);
+                    p = _panAndZoom.FixInvalidPointPosition(p);
 
                     if (e.MouseButton == MouseButton.Left)
                     {
                         this.Focus();
-                        _state.LeftDown(p.X, p.Y);
+                        if (_editor.IsLeftDownAvailable())
+                        {
+                            _editor.LeftDown(p.X, p.Y);
+                        }
                     }
 
                     if (e.MouseButton == MouseButton.Right)
                     {
                         this.Cursor = new Cursor(StandardCursorType.Hand);
                         this.Focus();
-                        _state.RightDown(p.X, p.Y);
+                        if (_editor.IsRightDownAvailable())
+                        {
+                            _editor.RightDown(p.X, p.Y);
+                        }
                     }
                 };
 
-            this.PointerReleased +=
+            _panAndZoom.PointerReleased +=
                 (sender, e) =>
                 {
-                    if (_state == null)
-                        return;
-
                     var p = e.GetPosition(this);
+                    p = _panAndZoom.FixInvalidPointPosition(p);
 
                     if (e.MouseButton == MouseButton.Left)
                     {
                         this.Focus();
-                        _state.LeftUp(p.X, p.Y);
+                        if (_editor.IsLeftUpAvailable())
+                        {
+                            _editor.LeftUp(p.X, p.Y);
+                        }
                     }
 
                     if (e.MouseButton == MouseButton.Right)
                     {
                         this.Cursor = new Cursor(StandardCursorType.Arrow);
                         this.Focus();
-                        _state.RightUp(p.X, p.Y);
+                        if (_editor.IsRightUpAvailable())
+                        {
+                            _editor.RightUp(p.X, p.Y);
+                        }
                     }
                 };
 
-            this.PointerMoved +=
+            _panAndZoom.PointerMoved +=
                 (sender, e) =>
                 {
-                    if (_state == null)
-                        return;
-
                     var p = e.GetPosition(this);
-                    _state.Move(p.X, p.Y);
-                };
+                    p = _panAndZoom.FixInvalidPointPosition(p);
 
-            this.PointerWheelChanged +=
-                (sender, e) =>
-                {
-                    if (_state == null)
-                        return;
-
-                    if (editor == null || editor.Project == null)
-                        return;
-
-                    var container = editor.Project.CurrentContainer;
-                    if (container == null)
-                        return;
-
-                    var p = e.GetPosition(this);
-
-                    if (container is XTemplate)
+                    if (_editor.IsMoveAvailable())
                     {
-                        var template = container as XTemplate;
-                        _state.Wheel(
-                            p.X,
-                            p.Y,
-                            e.Delta.Y,
-                            this.Bounds.Width,
-                            this.Bounds.Height,
-                            template.Width,
-                            template.Height);
-                    }
-
-                    if (container is XPage)
-                    {
-                        var page = container as XPage;
-                        _state.Wheel(
-                            p.X,
-                            p.Y,
-                            e.Delta.Y,
-                            this.Bounds.Width,
-                            this.Bounds.Height,
-                            page.Template.Width,
-                            page.Template.Height);
+                        _editor.Move(p.X, p.Y);
                     }
                 };
         }
 
         /// <summary>
-        /// Positions child elements as part of a layout pass.
-        /// </summary>
-        /// <param name="finalSize">The size available to the control.</param>
-        /// <returns>The actual size used.</returns>
-        protected override Size ArrangeOverride(Size finalSize)
-        {
-            var editor = this.DataContext as ProjectEditor;
-            if (editor != null && editor.Project != null)
-            {
-                if (editor.Renderers != null && editor.Renderers[0].State.EnableAutofit)
-                {
-                    AutoFit(finalSize.Width, finalSize.Height);
-                }
-                else
-                {
-                    ResetZoom(finalSize.Width, finalSize.Height);
-                }
-            }
-
-            return base.ArrangeOverride(finalSize);
-        }
-
-        /// <summary>
-        /// Resets control zoom and pan properties.
-        /// </summary>
-        /// <param name="width">The control width.</param>
-        /// <param name="height">The control height.</param>
-        public void ResetZoom(double width, double height)
-        {
-            if (_state == null)
-                return;
-
-            var editor = this.DataContext as ProjectEditor;
-            if (editor == null || editor.Project == null)
-                return;
-
-            var container = editor.Project.CurrentContainer;
-            if (container == null)
-                return;
-
-            if (container is XTemplate)
-            {
-                var template = container as XTemplate;
-                _state.CenterTo(
-                    width,
-                    height,
-                    template.Width,
-                    template.Height);
-            }
-
-            if (container is XPage)
-            {
-                var page = container as XPage;
-                _state.CenterTo(
-                    width,
-                    height,
-                    page.Template.Width,
-                    page.Template.Height);
-            }
-
-            editor.Invalidate();
-        }
-
-        /// <summary>
-        /// Auto-fits control using zoom and pan properties.
-        /// </summary>
-        /// <param name="width">The control width.</param>
-        /// <param name="height">The control height.</param>
-        public void AutoFit(double width, double height)
-        {
-            if (_state == null)
-                return;
-
-            var editor = this.DataContext as ProjectEditor;
-            if (editor == null || editor.Project == null)
-                return;
-
-            var container = editor.Project.CurrentContainer;
-            if (container == null)
-                return;
-
-            if (container is XTemplate)
-            {
-                var template = container as XTemplate;
-                _state.FitTo(
-                    width,
-                    height,
-                    template.Width,
-                    template.Height);
-            }
-            
-            if (container is XPage)
-            {
-                var page = container as XPage;
-                _state.FitTo(
-                    width,
-                    height,
-                    page.Template.Width,
-                    page.Template.Height);
-            }
-
-            editor.Invalidate();
-        }
-
-        /// <summary>
-        /// Reset pan and zoom to default state.
+        /// Reset view size to defaults.
         /// </summary>
         public void OnZoomReset()
         {
-            var editor = this.DataContext as ProjectEditor;
-            if (editor == null)
-                return;
-
-            ResetZoom(this.Bounds.Width, this.Bounds.Height);
-            editor.Invalidate();
+            _panAndZoom.Reset();
         }
 
         /// <summary>
-        /// Stretch view to the available extents.
+        /// Auto-fit view to the available extents.
         /// </summary>
-        public void OnZoomExtent()
+        public void OnZoomAutoFit()
         {
-            var editor = this.DataContext as ProjectEditor;
-            if (editor == null)
-                return;
-
-            AutoFit(this.Bounds.Width, this.Bounds.Height);
-            editor.Invalidate();
+            _panAndZoom.AutoFit();
         }
 
         /// <summary>
@@ -316,8 +181,8 @@ namespace Core2D.Perspex.Controls.Editor
             if (container == null)
                 return;
 
-            var translate = dc.PushPreTransform(Matrix.CreateTranslation(_state.PanX, _state.PanY));
-            var scale = dc.PushPreTransform(Matrix.CreateScale(_state.Zoom, _state.Zoom));
+            var translate = dc.PushPreTransform(Matrix.CreateTranslation(0, 0));
+            var scale = dc.PushPreTransform(Matrix.CreateScale(1, 1));
 
             if (container is XTemplate)
             {
@@ -401,9 +266,9 @@ namespace Core2D.Perspex.Controls.Editor
         {
             base.Render(context);
 
-            if (_state == null)
+            if (_editor == null)
             {
-                InitializeState();
+                Initialize();
             }
 
             Draw(context);

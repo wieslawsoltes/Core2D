@@ -1033,20 +1033,11 @@ namespace Core2D.Wpf.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enable _Autofit.
+        ///   Looks up a localized string similar to _AutoFit Zoom.
         /// </summary>
-        public static string MenuViewZoomAutofit {
+        public static string MenuViewZoomAutoFit {
             get {
-                return ResourceManager.GetString("MenuViewZoomAutofit", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Zoom to _Extent.
-        /// </summary>
-        public static string MenuViewZoomExtent {
-            get {
-                return ResourceManager.GetString("MenuViewZoomExtent", resourceCulture);
+                return ResourceManager.GetString("MenuViewZoomAutoFit", resourceCulture);
             }
         }
         

@@ -369,9 +369,9 @@ namespace Core2D.Editor.Designer
                     () => editor.ResetZoom(),
                     () => true);
 
-            Commands.ZoomExtentCommand =
+            Commands.ZoomAutoFitCommand =
                 Command.Create(
-                    () => editor.ExtentZoom(),
+                    () => editor.AutoFitZoom(),
                     () => true);
 
             Commands.LoadWindowLayoutCommand =
@@ -415,9 +415,6 @@ namespace Core2D.Editor.Designer
                 JsonSerializer = jsonSerializer,
                 XamlSerializer = xamlSerializer
             };
-
-            Editor.Renderers[0].State.EnableAutofit = true;
-            Editor.Renderers[0].State.DrawShapeState.Flags = ShapeStateFlags.Visible;
 
             Editor.DefaultTools();
 

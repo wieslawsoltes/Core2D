@@ -10,6 +10,7 @@
         xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D" 
         xmlns:Project="clr-namespace:Core2D.Project;assembly=Core2D" 
         xmlns:custom="clr-namespace:Core2D.Wpf.Controls.Custom"
+        xmlns:paz="clr-namespace:Core2D.Wpf.Controls.PanAndZoom"
         xmlns:lists="clr-namespace:Core2D.Wpf.Controls.Custom.Lists"
         xmlns:data="clr-namespace:Core2D.Wpf.Controls.Data"
         xmlns:editor="clr-namespace:Core2D.Wpf.Controls.Editor"
@@ -22,7 +23,6 @@
         xmlns:p="clr-namespace:Core2D.Wpf.Properties" 
         mc:Ignorable="d" 
         d:DataContext="{x:Static local:DesignerHelper.Editor}"
-        d:DesignWidth="1340" d:DesignHeight="740" 
         Width="1324" Height="724"
         Background="{StaticResource BackgroundColor}" 
         WindowStartupLocation="CenterScreen" WindowState="Maximized" 
@@ -164,91 +164,69 @@
                     <ad:LayoutDocumentPaneGroup Orientation="Horizontal">
                         <ad:LayoutDocumentPane>
                             <ad:LayoutDocument x:Name="canvasWindow" CanClose="False" ContentId="canvas" Title="{x:Static p:Resources.WindowTitleCanvas}">
-                                <Border x:Name="clipToBoundsBorder" ClipToBounds="True" Background="Transparent" BorderBrush="{x:Null}" BorderThickness="0" FocusVisualStyle="{x:Null}" Focusable="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                                    <Border x:Name="marginBorder" ClipToBounds="False" Background="Transparent" FocusVisualStyle="{x:Null}" Focusable="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="5">
-                                        <Border.Style>
-                                            <Style TargetType="Border">
-                                                <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding Project.CurrentContainer, Converter={StaticResource ObjectToTypeConverter}}" Value="{x:Type Project:XTemplate}">
-                                                        <Setter Property="BorderBrush" Value="Red"/>
-                                                        <Setter Property="BorderThickness" Value="2"/>
-                                                    </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Project.CurrentContainer, Converter={StaticResource ObjectToTypeConverter}}" Value="{x:Type Project:XPage}">
-                                                        <Setter Property="BorderBrush" Value="Transparent"/>
-                                                        <Setter Property="BorderThickness" Value="0"/>
-                                                    </DataTrigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </Border.Style>
-                                        <custom:PanAndZoomGrid x:Name="panAndZoomGrid" ClipToBounds="False" Background="Transparent" FocusVisualStyle="{x:Null}" Focusable="True" EnableAutoFit="{Binding Renderers[0].State.EnableAutofit}">
-                                            <custom:PanAndZoomGrid.InputBindings>
-                                                <KeyBinding Command="{x:Static Editor:Commands.DeleteCommand}" CommandParameter="{Binding}" Key="Delete" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static Editor:Commands.SendToBackCommand}" Key="OemMinus" Modifiers="Shift"/>
-                                                <KeyBinding Command="{x:Static Editor:Commands.SendBackwardCommand}" Key="OemMinus" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static Editor:Commands.BringForwardCommand}" Key="OemPlus" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static Editor:Commands.BringToFrontCommand}" Key="OemPlus" Modifiers="Shift"/>
-                                                <KeyBinding Command="{x:Static Editor:Commands.SendToBackCommand}" Key="Subtract" Modifiers="Shift"/>
-                                                <KeyBinding Command="{x:Static Editor:Commands.SendBackwardCommand}" Key="Subtract" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static Editor:Commands.BringForwardCommand}" Key="Add" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static Editor:Commands.BringToFrontCommand}" Key="Add" Modifiers="Shift"/>
-                                                <KeyBinding Command="{x:Static Editor:Commands.MoveUpCommand}" Key="Up" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static Editor:Commands.MoveDownCommand}" Key="Down" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static Editor:Commands.MoveLeftCommand}" Key="Left" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static Editor:Commands.MoveRightCommand}" Key="Right" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static Editor:Commands.ToolNoneCommand}" Key="N" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static Editor:Commands.ToolSelectionCommand}" Key="S" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static Editor:Commands.ToolPointCommand}" Key="P" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static Editor:Commands.ToolLineCommand}" Key="L" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static Editor:Commands.ToolRectangleCommand}" Key="R" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static Editor:Commands.ToolEllipseCommand}" Key="E" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static Editor:Commands.ToolArcCommand}" Key="A" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static Editor:Commands.ToolCubicBezierCommand}" Key="B" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static Editor:Commands.ToolQuadraticBezierCommand}" Key="Q" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static Editor:Commands.ToolTextCommand}" Key="T" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static Editor:Commands.ToolImageCommand}" Key="I" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static Editor:Commands.ToolPathCommand}" Key="H" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static Editor:Commands.ToolMoveCommand}" Key="M" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static Editor:Commands.DefaultIsStrokedCommand}" Key="K" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static Editor:Commands.DefaultIsFilledCommand}" Key="F" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static Editor:Commands.DefaultIsClosedCommand}" Key="D" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static Editor:Commands.DefaultIsSmoothJoinCommand}" Key="J" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static Editor:Commands.SnapToGridCommand}" Key="G" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static Editor:Commands.TryToConnectCommand}" Key="C" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static Editor:Commands.ZoomResetCommand}" Key="Z" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static Editor:Commands.ZoomExtentCommand}" Key="X" Modifiers=""/>
-                                                <KeyBinding Command="{x:Static Editor:Commands.DeselectAllCommand}" Key="Esc" Modifiers=""/>
-                                            </custom:PanAndZoomGrid.InputBindings>
-                                            <custom:PanAndZoomBorder x:Name="border" ClipToBounds="False" Background="Transparent" BorderBrush="{x:Null}" BorderThickness="0" FocusVisualStyle="{x:Null}" Focusable="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Tag="{Binding CancelAvailable}">
-                                                <custom:PanAndZoomBorder.Style>
-                                                    <Style TargetType="{x:Type custom:PanAndZoomBorder}">
-                                                        <Setter Property="Width" Value="{Binding Project.CurrentContainer.Width}"/>
-                                                        <Setter Property="Height" Value="{Binding Project.CurrentContainer.Height}"/>
-                                                    </Style>
-                                                </custom:PanAndZoomBorder.Style>
-                                                <ContentControl x:Name="drawableControl" Content="{Binding Project.CurrentContainer}" custom:LayerElement.Renderer="{Binding Renderers[0]}">
-                                                    <ContentControl.Resources>
-                                                        <DataTemplate DataType="{x:Type Project:XTemplate}">
-                                                            <editor:TemplateControl/>
-                                                        </DataTemplate>
-                                                        <DataTemplate DataType="{x:Type Project:XPage}">
-                                                            <editor:PageControl/>
-                                                        </DataTemplate>
-                                                    </ContentControl.Resources>
-                                                    <ContentControl.Style>
-                                                        <Style TargetType="ContentControl">
-                                                            <Setter Property="Visibility" Value="Visible"/>
-                                                            <Style.Triggers>
-                                                                <DataTrigger Binding="{Binding Project.CurrentContainer}" Value="{x:Null}">
-                                                                    <Setter Property="Visibility" Value="Hidden"/>
-                                                                </DataTrigger>
-                                                            </Style.Triggers>
-                                                        </Style>
-                                                    </ContentControl.Style>
-                                                </ContentControl>
-                                            </custom:PanAndZoomBorder>
-                                        </custom:PanAndZoomGrid>
+                                <paz:PanAndZoom x:Name="panAndZoom" Width="10000" Height="10000" AutoFitMode="Extent" ZoomSpeed="1.2" Background="Transparent" ClipToBounds="False" BorderBrush="{x:Null}" BorderThickness="0" FocusVisualStyle="{x:Null}" Focusable="True" VerticalAlignment="Center" HorizontalAlignment="Center" Tag="{Binding CancelAvailable}">
+                                    <paz:PanAndZoom.InputBindings>
+                                        <KeyBinding Command="{x:Static Editor:Commands.DeleteCommand}" CommandParameter="{Binding}" Key="Delete" Modifiers=""/>
+                                        <KeyBinding Command="{x:Static Editor:Commands.SendToBackCommand}" Key="OemMinus" Modifiers="Shift"/>
+                                        <KeyBinding Command="{x:Static Editor:Commands.SendBackwardCommand}" Key="OemMinus" Modifiers=""/>
+                                        <KeyBinding Command="{x:Static Editor:Commands.BringForwardCommand}" Key="OemPlus" Modifiers=""/>
+                                        <KeyBinding Command="{x:Static Editor:Commands.BringToFrontCommand}" Key="OemPlus" Modifiers="Shift"/>
+                                        <KeyBinding Command="{x:Static Editor:Commands.SendToBackCommand}" Key="Subtract" Modifiers="Shift"/>
+                                        <KeyBinding Command="{x:Static Editor:Commands.SendBackwardCommand}" Key="Subtract" Modifiers=""/>
+                                        <KeyBinding Command="{x:Static Editor:Commands.BringForwardCommand}" Key="Add" Modifiers=""/>
+                                        <KeyBinding Command="{x:Static Editor:Commands.BringToFrontCommand}" Key="Add" Modifiers="Shift"/>
+                                        <KeyBinding Command="{x:Static Editor:Commands.MoveUpCommand}" Key="Up" Modifiers=""/>
+                                        <KeyBinding Command="{x:Static Editor:Commands.MoveDownCommand}" Key="Down" Modifiers=""/>
+                                        <KeyBinding Command="{x:Static Editor:Commands.MoveLeftCommand}" Key="Left" Modifiers=""/>
+                                        <KeyBinding Command="{x:Static Editor:Commands.MoveRightCommand}" Key="Right" Modifiers=""/>
+                                        <KeyBinding Command="{x:Static Editor:Commands.ToolNoneCommand}" Key="N" Modifiers=""/>
+                                        <KeyBinding Command="{x:Static Editor:Commands.ToolSelectionCommand}" Key="S" Modifiers=""/>
+                                        <KeyBinding Command="{x:Static Editor:Commands.ToolPointCommand}" Key="P" Modifiers=""/>
+                                        <KeyBinding Command="{x:Static Editor:Commands.ToolLineCommand}" Key="L" Modifiers=""/>
+                                        <KeyBinding Command="{x:Static Editor:Commands.ToolRectangleCommand}" Key="R" Modifiers=""/>
+                                        <KeyBinding Command="{x:Static Editor:Commands.ToolEllipseCommand}" Key="E" Modifiers=""/>
+                                        <KeyBinding Command="{x:Static Editor:Commands.ToolArcCommand}" Key="A" Modifiers=""/>
+                                        <KeyBinding Command="{x:Static Editor:Commands.ToolCubicBezierCommand}" Key="B" Modifiers=""/>
+                                        <KeyBinding Command="{x:Static Editor:Commands.ToolQuadraticBezierCommand}" Key="Q" Modifiers=""/>
+                                        <KeyBinding Command="{x:Static Editor:Commands.ToolTextCommand}" Key="T" Modifiers=""/>
+                                        <KeyBinding Command="{x:Static Editor:Commands.ToolImageCommand}" Key="I" Modifiers=""/>
+                                        <KeyBinding Command="{x:Static Editor:Commands.ToolPathCommand}" Key="H" Modifiers=""/>
+                                        <KeyBinding Command="{x:Static Editor:Commands.ToolMoveCommand}" Key="M" Modifiers=""/>
+                                        <KeyBinding Command="{x:Static Editor:Commands.DefaultIsStrokedCommand}" Key="K" Modifiers=""/>
+                                        <KeyBinding Command="{x:Static Editor:Commands.DefaultIsFilledCommand}" Key="F" Modifiers=""/>
+                                        <KeyBinding Command="{x:Static Editor:Commands.DefaultIsClosedCommand}" Key="D" Modifiers=""/>
+                                        <KeyBinding Command="{x:Static Editor:Commands.DefaultIsSmoothJoinCommand}" Key="J" Modifiers=""/>
+                                        <KeyBinding Command="{x:Static Editor:Commands.SnapToGridCommand}" Key="G" Modifiers=""/>
+                                        <KeyBinding Command="{x:Static Editor:Commands.TryToConnectCommand}" Key="C" Modifiers=""/>
+                                        <KeyBinding Command="{x:Static Editor:Commands.ZoomResetCommand}" Key="Z" Modifiers=""/>
+                                        <KeyBinding Command="{x:Static Editor:Commands.ZoomAutoFitCommand}" Key="X" Modifiers=""/>
+                                        <KeyBinding Command="{x:Static Editor:Commands.DeselectAllCommand}" Key="Esc" Modifiers=""/>
+                                    </paz:PanAndZoom.InputBindings>
+                                    <Border Padding="5" VerticalAlignment="Center" HorizontalAlignment="Center" ClipToBounds="False" BorderBrush="{x:Null}" BorderThickness="0" FocusVisualStyle="{x:Null}" Focusable="False">
+                                        <ContentControl x:Name="drawableControl" Content="{Binding Project.CurrentContainer}" ClipToBounds="False" custom:LayerElement.Renderer="{Binding Renderers[0]}">
+                                            <ContentControl.Resources>
+                                                <DataTemplate DataType="{x:Type Project:XTemplate}">
+                                                    <editor:TemplateControl/>
+                                                </DataTemplate>
+                                                <DataTemplate DataType="{x:Type Project:XPage}">
+                                                    <editor:PageControl/>
+                                                </DataTemplate>
+                                            </ContentControl.Resources>
+                                            <ContentControl.Style>
+                                                <Style TargetType="ContentControl">
+                                                    <Setter Property="Width" Value="{Binding Project.CurrentContainer.Width}"/>
+                                                    <Setter Property="Height" Value="{Binding Project.CurrentContainer.Height}"/>
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Project.CurrentContainer}" Value="{x:Null}">
+                                                            <Setter Property="Visibility" Value="Hidden"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </ContentControl.Style>
+                                        </ContentControl>
                                     </Border>
-                                </Border>
+                                </paz:PanAndZoom>
                             </ad:LayoutDocument>
                         </ad:LayoutDocumentPane>
                     </ad:LayoutDocumentPaneGroup>

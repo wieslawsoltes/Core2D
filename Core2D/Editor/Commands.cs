@@ -552,14 +552,14 @@ namespace Core2D.Editor
         public static ICoreCommand<object> InsertDocumentAfterCommand { get; set; }
 
         /// <summary>
-        /// Reset zoom to defaults.
+        /// Reset view size to defaults.
         /// </summary>
         public static ICoreCommand ZoomResetCommand { get; set; }
 
         /// <summary>
-        /// Zoom to available extents.
+        /// Auto-fit view to the available extents.
         /// </summary>
-        public static ICoreCommand ZoomExtentCommand { get; set; }
+        public static ICoreCommand ZoomAutoFitCommand { get; set; }
 
         /// <summary>
         /// Load main window layout.

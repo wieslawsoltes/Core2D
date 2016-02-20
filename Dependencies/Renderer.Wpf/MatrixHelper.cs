@@ -1,12 +1,13 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Perspex;
+using System.Windows;
+using System.Windows.Media;
 using static System.Math;
 
-namespace Renderer.Perspex
+namespace Renderer.Wpf
 {
     /// <summary>
-    /// Perspex Matrix helper methods.
+    /// WPF Matrix helper methods.
     /// </summary>
     public static class MatrixHelper
     {
@@ -132,8 +133,8 @@ namespace Renderer.Perspex
         public static Point TransformPoint(Matrix matrix, Point point)
         {
             return new Point(
-                (point.X * matrix.M11) + (point.Y * matrix.M21) + matrix.M31,
-                (point.X * matrix.M12) + (point.Y * matrix.M22) + matrix.M32);
+                (point.X * matrix.M11) + (point.Y * matrix.M21) + matrix.OffsetX,
+                (point.X * matrix.M12) + (point.Y * matrix.M22) + matrix.OffsetY);
         }
     }
 }

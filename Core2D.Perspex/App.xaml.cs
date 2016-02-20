@@ -7,6 +7,7 @@ using Core2D.Editor.Designer;
 using Core2D.Editor.Factories;
 using Core2D.Editor.Interfaces;
 using Core2D.Interfaces;
+using Core2D.Perspex.Controls.Editor;
 using Core2D.Project;
 using Core2D.Renderer;
 using Core2D.Shape;
@@ -222,9 +223,6 @@ namespace Core2D.Perspex
                 CsvWriter = new CsvHelperWriter(),
                 GetImageKey = async () => await OnGetImageKeyAsync()
             };
-
-            _editor.Renderers[0].State.EnableAutofit = true;
-            _editor.Renderers[0].State.DrawShapeState.Flags = ShapeStateFlags.Visible;
 
             _editor.DefaultTools();
             _editor.InitializeCommands();
@@ -688,9 +686,9 @@ namespace Core2D.Perspex
         }
 
         /// <inheritdoc/>
-        public async Task OnZoomExtentAsync()
+        public async Task OnZoomAutoFitAsync()
         {
-            _editor.ExtentZoom();
+            _editor.AutoFitZoom();
             await Task.Delay(0);
         }
 
