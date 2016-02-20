@@ -52,6 +52,7 @@
     <Compile Include="..\..\Core2D\Properties\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="MatrixHelper.cs" />
     <Compile Include="PathGeometryConverter.cs" />
     <Compile Include="XPathGeometryConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
