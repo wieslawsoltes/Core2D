@@ -130,7 +130,7 @@ namespace Core2D.Wpf.Controls.PanAndZoom
         {
             if (_element != null && _element.IsMeasureValid)
             {
-                AutoFit(this.DesiredSize, _element.RenderSize);
+                AutoFit(this.DesiredSize, _element.DesiredSize);
             }
 
             return base.ArrangeOverride(finalSize);
