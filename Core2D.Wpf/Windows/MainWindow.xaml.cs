@@ -36,6 +36,19 @@ namespace Core2D.Wpf.Windows
         /// <param name="editor">The editor instance.</param>
         public void Initialize(ProjectEditor editor)
         {
+            panAndZoom.InvalidatedChild =
+                (zoom, offsetX, offsetY) =>
+                {
+                    bool invalidate = editor.Renderers[0].State.Zoom != zoom;
+                    editor.Renderers[0].State.Zoom = zoom;
+                    editor.Renderers[0].State.PanX = offsetX;
+                    editor.Renderers[0].State.PanY = offsetY;
+                    if (invalidate)
+                    {
+                        editor.InvalidateCache(isZooming: true);
+                    }
+                };
+
             panAndZoom.PreviewMouseLeftButtonDown +=
                 (sender, e) =>
                 {
