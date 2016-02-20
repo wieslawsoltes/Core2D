@@ -287,7 +287,6 @@
     <Compile Include="Converters\BooleanToValueConverter.cs" />
     <Compile Include="Converters\EnumToBooleanConverter.cs" />
     <Compile Include="Converters\ObjectEqualityConverter.cs" />
-    <Compile Include="Controls\Custom\PanAndZoomGrid.cs" />
     <Compile Include="Converters\ObjectToTypeConverter.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
