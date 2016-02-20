@@ -137,6 +137,7 @@
       <DependentUpon>TemplateControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\PanAndZoom\AutoFitMode.cs" />
+    <Compile Include="Controls\PanAndZoom\PanAndZoom.cs" />
     <Compile Include="Controls\Path\ArcSegmentControl.xaml.cs">
       <DependentUpon>ArcSegmentControl.xaml</DependentUpon>
     </Compile>
