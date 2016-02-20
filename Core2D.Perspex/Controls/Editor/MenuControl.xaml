@@ -80,7 +80,7 @@
         <MenuItem Header="_View" IsVisible="{Binding Path=Project, Converter={Static converters:IsNotNullConverter.Instance}}">
             <MenuItem Header="_Reset Zoom" HotKey="Z" Command="{Static Editor:Commands.ZoomResetCommand}"/>
             <Separator/>
-            <MenuItem Header="Zoom to _Extent" HotKey="X" Command="{Static Editor:Commands.ZoomAutoFitCommand}"/>
+            <MenuItem Header="_AutoFit Zoom" HotKey="X" Command="{Static Editor:Commands.ZoomAutoFitCommand}"/>
         </MenuItem>
         <MenuItem Header="_Project" IsVisible="{Binding Path=Project, Converter={Static converters:IsNotNullConverter.Instance}}">
             <MenuItem Header="_Add Document" Command="{Static Editor:Commands.AddDocumentCommand}" CommandParameter="{Binding Path=Project}"/>

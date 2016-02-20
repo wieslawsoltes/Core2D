@@ -416,9 +416,6 @@ namespace Core2D.Editor.Designer
                 XamlSerializer = xamlSerializer
             };
 
-            Editor.Renderers[0].State.EnableAutofit = true;
-            Editor.Renderers[0].State.DrawShapeState.Flags = ShapeStateFlags.Visible;
-
             Editor.DefaultTools();
 
             Editor.InitializeCommands();

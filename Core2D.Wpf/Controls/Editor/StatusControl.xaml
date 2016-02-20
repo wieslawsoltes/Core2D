@@ -35,8 +35,6 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                 </Grid>
             </ItemsPanelTemplate>
@@ -338,26 +336,6 @@
                                 <Style TargetType="TextBlock">
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding Project.Options.TryToConnect, Mode=OneWay}" Value="False">
-                                            <Setter Property="Foreground" Value="DarkGray"/>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </TextBlock.Style>
-                        </TextBlock>
-                    </ControlTemplate>
-                </CheckBox.Template>
-            </CheckBox>
-        </StatusBarItem>
-        <Separator Grid.Column="17"/>
-        <StatusBarItem Grid.Column="18">
-            <CheckBox IsChecked="{Binding Renderers[0].State.EnableAutofit}">
-                <CheckBox.Template>
-                    <ControlTemplate>
-                        <TextBlock Text="{x:Static p:Resources.StatusOptionsAutofit}" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <TextBlock.Style>
-                                <Style TargetType="TextBlock">
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Renderers[0].State.EnableAutofit, Mode=OneWay}" Value="False">
                                             <Setter Property="Foreground" Value="DarkGray"/>
                                         </DataTrigger>
                                     </Style.Triggers>

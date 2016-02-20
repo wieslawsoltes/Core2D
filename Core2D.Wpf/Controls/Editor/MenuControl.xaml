@@ -104,9 +104,7 @@
         <MenuItem Header="{x:Static p:Resources.MenuView}" Style="{StaticResource MenuItemVisibilityStyle}">
             <MenuItem Header="{x:Static p:Resources.MenuViewZoomReset}" Command="{x:Static Editor:Commands.ZoomResetCommand}" InputGestureText="Z"/>
             <Separator/>
-            <MenuItem Header="{x:Static p:Resources.MenuViewZoomExtent}" Command="{x:Static Editor:Commands.ZoomAutoFitCommand}" InputGestureText="X"/>
-            <Separator/>
-            <MenuItem Header="{x:Static p:Resources.MenuViewZoomAutofit}" IsCheckable="True" IsChecked="{Binding Renderers[0].State.EnableAutofit, Mode=TwoWay}" InputGestureText=""/>
+            <MenuItem Header="{x:Static p:Resources.MenuViewZoomAutoFit}" Command="{x:Static Editor:Commands.ZoomAutoFitCommand}" InputGestureText="X"/>
         </MenuItem>
         <MenuItem Header="{x:Static p:Resources.MenuProject}" Style="{StaticResource MenuItemVisibilityStyle}">
             <MenuItem Header="{x:Static p:Resources.MenuProjectSubMenuImport}">

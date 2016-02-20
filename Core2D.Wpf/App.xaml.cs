@@ -197,9 +197,6 @@ namespace Core2D.Wpf
                 GetImageKey = async () => await OnGetImageKeyAsync()
             };
 
-            _editor.Renderers[0].State.EnableAutofit = true;
-            _editor.Renderers[0].State.DrawShapeState.Flags = ShapeStateFlags.Visible;
-
             _editor.DefaultTools();
             _editor.InitializeCommands();
             _editor.CommandManager.RegisterCommands();

@@ -144,7 +144,7 @@ namespace Core2D.Perspex.Controls.PanAndZoom
         {
             if (_element != null && _element.IsMeasureValid)
             {
-                AutoFit(new Rect(0.0, 0.0, this.Bounds.Width, this.Bounds.Height), _element.Bounds);
+                AutoFit(new Rect(0.0, 0.0, finalSize.Width, finalSize.Height), _element.Bounds);
             }
 
             return base.ArrangeOverride(finalSize);

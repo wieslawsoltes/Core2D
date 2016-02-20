@@ -202,28 +202,30 @@
                                         <KeyBinding Command="{x:Static Editor:Commands.ZoomAutoFitCommand}" Key="X" Modifiers=""/>
                                         <KeyBinding Command="{x:Static Editor:Commands.DeselectAllCommand}" Key="Esc" Modifiers=""/>
                                     </paz:PanAndZoom.InputBindings>
-                                    <ContentControl x:Name="drawableControl" Content="{Binding Project.CurrentContainer}" ClipToBounds="False" custom:LayerElement.Renderer="{Binding Renderers[0]}">
-                                        <ContentControl.Resources>
-                                            <DataTemplate DataType="{x:Type Project:XTemplate}">
-                                                <editor:TemplateControl/>
-                                            </DataTemplate>
-                                            <DataTemplate DataType="{x:Type Project:XPage}">
-                                                <editor:PageControl/>
-                                            </DataTemplate>
-                                        </ContentControl.Resources>
-                                        <ContentControl.Style>
-                                            <Style TargetType="ContentControl">
-                                                <Setter Property="Width" Value="{Binding Project.CurrentContainer.Width}"/>
-                                                <Setter Property="Height" Value="{Binding Project.CurrentContainer.Height}"/>
-                                                <Setter Property="Visibility" Value="Visible"/>
-                                                <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding Project.CurrentContainer}" Value="{x:Null}">
-                                                        <Setter Property="Visibility" Value="Hidden"/>
-                                                    </DataTrigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </ContentControl.Style>
-                                    </ContentControl>
+                                    <Border Padding="5" VerticalAlignment="Center" HorizontalAlignment="Center" ClipToBounds="False" BorderBrush="{x:Null}" BorderThickness="0" FocusVisualStyle="{x:Null}" Focusable="False">
+                                        <ContentControl x:Name="drawableControl" Content="{Binding Project.CurrentContainer}" ClipToBounds="False" custom:LayerElement.Renderer="{Binding Renderers[0]}">
+                                            <ContentControl.Resources>
+                                                <DataTemplate DataType="{x:Type Project:XTemplate}">
+                                                    <editor:TemplateControl/>
+                                                </DataTemplate>
+                                                <DataTemplate DataType="{x:Type Project:XPage}">
+                                                    <editor:PageControl/>
+                                                </DataTemplate>
+                                            </ContentControl.Resources>
+                                            <ContentControl.Style>
+                                                <Style TargetType="ContentControl">
+                                                    <Setter Property="Width" Value="{Binding Project.CurrentContainer.Width}"/>
+                                                    <Setter Property="Height" Value="{Binding Project.CurrentContainer.Height}"/>
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Project.CurrentContainer}" Value="{x:Null}">
+                                                            <Setter Property="Visibility" Value="Hidden"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </ContentControl.Style>
+                                        </ContentControl>
+                                    </Border>
                                 </paz:PanAndZoom>
                             </ad:LayoutDocument>
                         </ad:LayoutDocumentPane>

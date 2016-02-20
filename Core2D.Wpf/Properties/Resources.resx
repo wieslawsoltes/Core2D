@@ -282,8 +282,8 @@
   <data name="MenuViewZoomReset" xml:space="preserve">
     <value>_Reset Zoom</value>
   </data>
-  <data name="MenuViewZoomExtent" xml:space="preserve">
-    <value>Zoom to _Extent</value>
+  <data name="MenuViewZoomAutoFit" xml:space="preserve">
+    <value>_AutoFit Zoom</value>
   </data>
   <data name="MenuViewProjectWindow" xml:space="preserve">
     <value>Project E_xplorer</value>
@@ -548,9 +548,6 @@
   </data>
   <data name="MenuPathToolQuadraticBezier" xml:space="preserve">
     <value>_Quadratic Bezier</value>
-  </data>
-  <data name="MenuViewZoomAutofit" xml:space="preserve">
-    <value>Enable _Autofit</value>
   </data>
   <data name="StatusPages" xml:space="preserve">
     <value>Pages</value>
