@@ -219,6 +219,3 @@ pip-log.txt
 
 # MonoDevelop
 *.userprefs
-
-#ProtoBuf generated serializers
-src/Dependencies/Serializer.ProtoBuf.Generate/Serializer/*.dll
