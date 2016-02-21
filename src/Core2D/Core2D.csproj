@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4EE581B0-45F3-4D7E-BEAE-277ABF5F3FDD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Core2D</RootNamespace>
+    <AssemblyName>Core2D</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFrameworkProfile>Profile7</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\Core2D.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\Core2D.XML</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Editor\Interfaces\IEditorApplication.cs" />
+    <Compile Include="Editor\Bounds\LineBounds.cs" />
+    <Compile Include="Editor\Bounds\RectangleBounds.cs" />
+    <Compile Include="Editor\Bounds\ShapeHitTestPoint.cs" />
+    <Compile Include="Editor\Designer\DesignerCommandManager.cs" />
+    <Compile Include="ObservableObject.cs" />
+    <Compile Include="ObservableResource.cs" />
+    <Compile Include="Data\Database\XColumn.cs" />
+    <Compile Include="Data\XContext.cs" />
+    <Compile Include="Data\Database\XDatabase.cs" />
+    <Compile Include="Data\XProperty.cs" />
+    <Compile Include="Data\Database\XRecord.cs" />
+    <Compile Include="Data\Database\XValue.cs" />
+    <Compile Include="Editor\Bounds\ConvexHullBounds.cs" />
+    <Compile Include="Editor\Bounds\ShapeHitTestSelection.cs" />
+    <Compile Include="Editor\Commands.cs" />
+    <Compile Include="Editor\Constants.cs" />
+    <Compile Include="Editor\CoreType.cs" />
+    <Compile Include="Editor\Designer\DesignerContext.cs" />
+    <Compile Include="Editor\ProjectEditor.cs" />
+    <Compile Include="Editor\Enums.cs" />
+    <Compile Include="Editor\Factories\IProjectFactory.cs" />
+    <Compile Include="Editor\Factories\IShapeFactory.cs" />
+    <Compile Include="Editor\Factories\ProjectFactory.cs" />
+    <Compile Include="Editor\Factories\ShapeFactory.cs" />
+    <Compile Include="Editor\Input\Command.cs" />
+    <Compile Include="Editor\Input\CommandManager.cs" />
+    <Compile Include="Editor\Input\Command`1.cs" />
+    <Compile Include="Editor\Input\ICoreCommand.cs" />
+    <Compile Include="Editor\Input\ICoreCommand`1.cs" />
+    <Compile Include="Editor\ProjectObserver.cs" />
+    <Compile Include="Editor\PathTool.cs" />
+    <Compile Include="Editor\ProjectExtensions.cs" />
+    <Compile Include="Editor\Recent\RecentFile.cs" />
+    <Compile Include="Editor\Recent\Recents.cs" />
+    <Compile Include="Editor\Tool.cs" />
+    <Compile Include="Editor\ToolBase.cs" />
+    <Compile Include="Editor\ToolState.cs" />
+    <Compile Include="Editor\Tools\ToolArc.cs" />
+    <Compile Include="Editor\Tools\ToolCubicBezier.cs" />
+    <Compile Include="Editor\Tools\ToolEllipse.cs" />
+    <Compile Include="Editor\Tools\ToolImage.cs" />
+    <Compile Include="Editor\Tools\ToolLine.cs" />
+    <Compile Include="Editor\Tools\ToolNone.cs" />
+    <Compile Include="Editor\Tools\ToolPath.cs" />
+    <Compile Include="Editor\Tools\ToolPoint.cs" />
+    <Compile Include="Editor\Tools\ToolQuadraticBezier.cs" />
+    <Compile Include="Editor\Tools\ToolRectangle.cs" />
+    <Compile Include="Editor\Tools\ToolSelection.cs" />
+    <Compile Include="Editor\Tools\ToolText.cs" />
+    <Compile Include="History\StackHistory.cs" />
+    <Compile Include="History\IHistory.cs" />
+    <Compile Include="History\UndoRedo.cs" />
+    <Compile Include="Interfaces\IFileWriter.cs" />
+    <Compile Include="Interfaces\ILog.cs" />
+    <Compile Include="Interfaces\IStreamSerializer.cs" />
+    <Compile Include="Interfaces\ITextClipboard.cs" />
+    <Compile Include="Interfaces\ITextFieldReader.cs" />
+    <Compile Include="Interfaces\ITextFieldWriter.cs" />
+    <Compile Include="Interfaces\ITextSerializer.cs" />
+    <Compile Include="Interfaces\IFileSystem.cs" />
+    <Compile Include="Math\Arc\GdiArc.cs" />
+    <Compile Include="Math\Arc\WpfArc.cs" />
+    <Compile Include="Math\ConvexHull\MonotoneChain.cs" />
+    <Compile Include="Math\Point2.cs" />
+    <Compile Include="Math\Polygon2.cs" />
+    <Compile Include="Math\Rect2.cs" />
+    <Compile Include="Math\Size2.cs" />
+    <Compile Include="Math\Vector2.cs" />
+    <Compile Include="Math\MathHelpers.cs" />
+    <Compile Include="Math\Sat\MinimumTranslationVector.cs" />
+    <Compile Include="Math\Sat\Projection.cs" />
+    <Compile Include="Math\Sat\SeparatingAxisTheorem.cs" />
+    <Compile Include="Path\Parser\SvgToXPathGeometryParser.cs" />
+    <Compile Include="Path\Parser\XPathGeometryParser.cs" />
+    <Compile Include="Path\Segments\XArcSegment.cs" />
+    <Compile Include="Path\Segments\XCubicBezierSegment.cs" />
+    <Compile Include="Path\Segments\XLineSegment.cs" />
+    <Compile Include="Path\Segments\XPolyCubicBezierSegment.cs" />
+    <Compile Include="Path\Segments\XPolyLineSegment.cs" />
+    <Compile Include="Path\Segments\XPolyQuadraticBezierSegment.cs" />
+    <Compile Include="Path\Segments\XQuadraticBezierSegment.cs" />
+    <Compile Include="Path\XFillRule.cs" />
+    <Compile Include="Path\XGeometryContext.cs" />
+    <Compile Include="Path\XPathFigure.cs" />
+    <Compile Include="Path\XPathGeometry.cs" />
+    <Compile Include="Path\XPathGeometryContext.cs" />
+    <Compile Include="Path\XPathSegment.cs" />
+    <Compile Include="Path\XPathSize.cs" />
+    <Compile Include="Path\XSweepDirection.cs" />
+    <Compile Include="Project\XContainer.cs" />
+    <Compile Include="Project\XDocument.cs" />
+    <Compile Include="Project\XLayer.cs" />
+    <Compile Include="Project\XLibrary`1.cs" />
+    <Compile Include="Project\XMoveMode.cs" />
+    <Compile Include="Project\XOptions.cs" />
+    <Compile Include="Project\XPage.cs" />
+    <Compile Include="Project\XProject.cs" />
+    <Compile Include="Project\XProject.IImageCache.cs" />
+    <Compile Include="Project\XProject.IO.cs" />
+    <Compile Include="Project\XSelectable.cs" />
+    <Compile Include="Project\XTemplate.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\SharedAssemblyInfo.cs" />
+    <Compile Include="Renderer\Cache.cs" />
+    <Compile Include="Renderer\IImageCache.cs" />
+    <Compile Include="Renderer\ImageKey.cs" />
+    <Compile Include="Renderer\ShapeRenderer.cs" />
+    <Compile Include="Renderer\ShapeRendererState.cs" />
+    <Compile Include="Shapes\XArc.cs" />
+    <Compile Include="Shapes\XCubicBezier.cs" />
+    <Compile Include="Shapes\XEllipse.cs" />
+    <Compile Include="Shapes\XGroup.cs" />
+    <Compile Include="Shapes\XImage.cs" />
+    <Compile Include="Shapes\XLine.cs" />
+    <Compile Include="Shapes\XPath.cs" />
+    <Compile Include="Shapes\XPoint.cs" />
+    <Compile Include="Shapes\XQuadraticBezier.cs" />
+    <Compile Include="Shapes\XRectangle.cs" />
+    <Compile Include="Shapes\XText.cs" />
+    <Compile Include="Shape\BaseShape.cs" />
+    <Compile Include="Shape\ShapeState.cs" />
+    <Compile Include="Shape\ShapeStateFlags.cs" />
+    <Compile Include="Style\ArgbColor.cs" />
+    <Compile Include="Style\ArrowStyle.cs" />
+    <Compile Include="Style\ArrowType.cs" />
+    <Compile Include="Style\BaseStyle.cs" />
+    <Compile Include="Style\Colors.cs" />
+    <Compile Include="Style\FontStyle.cs" />
+    <Compile Include="Style\FontStyleFlags.cs" />
+    <Compile Include="Style\LineCap.cs" />
+    <Compile Include="Style\LineFixedLength.cs" />
+    <Compile Include="Style\LineFixedLengthFlags.cs" />
+    <Compile Include="Style\LineStyle.cs" />
+    <Compile Include="Style\ShapeStyle.cs" />
+    <Compile Include="Style\ShapeStyleByNameComparer.cs" />
+    <Compile Include="Style\TextHAlignment.cs" />
+    <Compile Include="Style\TextStyle.cs" />
+    <Compile Include="Style\TextVAlignment.cs" />
+    <Compile Include="Xaml\Collections\XGroups.cs" />
+    <Compile Include="Xaml\Collections\XShapes.cs" />
+    <Compile Include="Xaml\Collections\XStyles.cs" />
+    <Compile Include="Xaml\Converters\ArgbColorTypeConverter.cs" />
+    <Compile Include="Xaml\Converters\FontStyleTypeConverter.cs" />
+    <Compile Include="Xaml\Converters\ShapeStateTypeConverter.cs" />
+    <Compile Include="Xaml\Converters\XPathGeometryTypeConverter.cs" />
+    <Compile Include="Xaml\Serializer\CoreXamlReader.cs" />
+    <Compile Include="Xaml\Serializer\CoreXamlSchemaContext.cs" />
+    <Compile Include="Xaml\Serializer\CoreXamlSerializer.cs" />
+    <Compile Include="Xaml\Serializer\CoreXamlType.cs" />
+    <Compile Include="Xaml\Serializer\CoreXamlTypeInvoker.cs" />
+    <Compile Include="Xaml\Serializer\CoreXamlWriter.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Portable.Xaml, Version=0.11.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Portable.Xaml.0.11.0\lib\portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10\Portable.Xaml.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Collections.Immutable, Version=1.1.36.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Collections.Immutable.1.1.36\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

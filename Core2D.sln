@@ -3,60 +3,60 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.Wpf", "Core2D.Wpf\Core2D.Wpf.csproj", "{12889680-3769-4914-BE60-5D09E83DF5B2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.Wpf", "src\Core2D.Wpf\Core2D.Wpf.csproj", "{12889680-3769-4914-BE60-5D09E83DF5B2}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dependencies", "Dependencies", "{2D76C6F5-844B-4D2D-96D8-B39D49C70706}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dependencies", "src\Dependencies", "{2D76C6F5-844B-4D2D-96D8-B39D49C70706}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serializer.Newtonsoft", "Dependencies\Serializer.Newtonsoft\Serializer.Newtonsoft.csproj", "{08E4E8BF-E513-4A8D-835C-1EED6ECB4A21}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serializer.Newtonsoft", "src\Dependencies\Serializer.Newtonsoft\Serializer.Newtonsoft.csproj", "{08E4E8BF-E513-4A8D-835C-1EED6ECB4A21}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Renderer.PdfSharp-wpf", "Dependencies\Renderer.PdfSharp-wpf\Renderer.PdfSharp-wpf.csproj", "{8D8845D7-998D-4FC2-B4A0-51E2EFB34B45}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Renderer.PdfSharp-wpf", "src\Dependencies\Renderer.PdfSharp-wpf\Renderer.PdfSharp-wpf.csproj", "{8D8845D7-998D-4FC2-B4A0-51E2EFB34B45}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Renderer.Wpf", "Dependencies\Renderer.Wpf\Renderer.Wpf.csproj", "{3BFBD239-8979-480D-B1CB-B763F7C915C8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Renderer.Wpf", "src\Dependencies\Renderer.Wpf\Renderer.Wpf.csproj", "{3BFBD239-8979-480D-B1CB-B763F7C915C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Renderer.WinForms", "Dependencies\Renderer.WinForms\Renderer.WinForms.csproj", "{3DC476E6-5032-4888-9337-221B88653C40}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Renderer.WinForms", "src\Dependencies\Renderer.WinForms\Renderer.WinForms.csproj", "{3DC476E6-5032-4888-9337-221B88653C40}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Renderer.Dxf", "Dependencies\Renderer.Dxf\Renderer.Dxf.csproj", "{ACC2C898-B49B-4ED9-B18C-389F50801B39}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Renderer.Dxf", "src\Dependencies\Renderer.Dxf\Renderer.Dxf.csproj", "{ACC2C898-B49B-4ED9-B18C-389F50801B39}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileWriter.Pdf-wpf", "Dependencies\FileWriter.Pdf-wpf\FileWriter.Pdf-wpf.csproj", "{5C5A31B5-8F76-42E7-AEA8-55B32CA641FA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileWriter.Pdf-wpf", "src\Dependencies\FileWriter.Pdf-wpf\FileWriter.Pdf-wpf.csproj", "{5C5A31B5-8F76-42E7-AEA8-55B32CA641FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileWriter.Emf", "Dependencies\FileWriter.Emf\FileWriter.Emf.csproj", "{3660FCE5-3D0F-412E-93A7-D0D992B4DA65}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileWriter.Emf", "src\Dependencies\FileWriter.Emf\FileWriter.Emf.csproj", "{3660FCE5-3D0F-412E-93A7-D0D992B4DA65}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileWriter.Dxf", "Dependencies\FileWriter.Dxf\FileWriter.Dxf.csproj", "{D40B3BCD-0A26-40BB-960B-9464D248C934}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileWriter.Dxf", "src\Dependencies\FileWriter.Dxf\FileWriter.Dxf.csproj", "{D40B3BCD-0A26-40BB-960B-9464D248C934}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextFieldReader.CsvHelper", "Dependencies\TextFieldReader.CsvHelper\TextFieldReader.CsvHelper.csproj", "{64BAE9E8-93B5-4EDC-8AD6-5A3DCBA8C051}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextFieldReader.CsvHelper", "src\Dependencies\TextFieldReader.CsvHelper\TextFieldReader.CsvHelper.csproj", "{64BAE9E8-93B5-4EDC-8AD6-5A3DCBA8C051}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextFieldWriter.CsvHelper", "Dependencies\TextFieldWriter.CsvHelper\TextFieldWriter.CsvHelper.csproj", "{87302D12-1184-402D-BF23-A5699F3D0BB4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextFieldWriter.CsvHelper", "src\Dependencies\TextFieldWriter.CsvHelper\TextFieldWriter.CsvHelper.csproj", "{87302D12-1184-402D-BF23-A5699F3D0BB4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileWriter.Pdf-core", "Dependencies\FileWriter.Pdf-core\FileWriter.Pdf-core.csproj", "{EC0EFA51-83F0-4439-BE9F-FAEBD3418C94}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileWriter.Pdf-core", "src\Dependencies\FileWriter.Pdf-core\FileWriter.Pdf-core.csproj", "{EC0EFA51-83F0-4439-BE9F-FAEBD3418C94}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Renderer.PdfSharp-core", "Dependencies\Renderer.PdfSharp-core\Renderer.PdfSharp-core.csproj", "{34C8EE31-A1FE-4A74-BE36-C1F38BC06FEC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Renderer.PdfSharp-core", "src\Dependencies\Renderer.PdfSharp-core\Renderer.PdfSharp-core.csproj", "{34C8EE31-A1FE-4A74-BE36-C1F38BC06FEC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Log.Trace", "Dependencies\Log.Trace\Log.Trace.csproj", "{68A36926-DF55-4F05-9F89-B9AB1463227E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Log.Trace", "src\Dependencies\Log.Trace\Log.Trace.csproj", "{68A36926-DF55-4F05-9F89-B9AB1463227E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "netDxf", "Dependencies\netDxf\netDxf\netDxf.csproj", "{785380E0-CEB9-4C34-82E5-60D0E33E848E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "netDxf", "src\Dependencies\netDxf\netDxf\netDxf.csproj", "{785380E0-CEB9-4C34-82E5-60D0E33E848E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Renderer.Perspex", "Dependencies\Renderer.Perspex\Renderer.Perspex.csproj", "{DEE86BE6-43B1-45FB-8A56-7977C1D0964E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Renderer.Perspex", "src\Dependencies\Renderer.Perspex\Renderer.Perspex.csproj", "{DEE86BE6-43B1-45FB-8A56-7977C1D0964E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.Perspex", "Core2D.Perspex\Core2D.Perspex.csproj", "{4868069E-3AD4-497E-9B8E-148D1EEACFD7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.Perspex", "src\Core2D.Perspex\Core2D.Perspex.csproj", "{4868069E-3AD4-497E-9B8E-148D1EEACFD7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serializer.Xaml", "Dependencies\Serializer.Xaml\Serializer.Xaml.csproj", "{5B85143E-A53C-4126-8666-031A3172EFDF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serializer.Xaml", "src\Dependencies\Serializer.Xaml\Serializer.Xaml.csproj", "{5B85143E-A53C-4126-8666-031A3172EFDF}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D5DF7EE8-7191-4B8D-B18B-4F3785F91E21}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "tests", "{D5DF7EE8-7191-4B8D-B18B-4F3785F91E21}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.UnitTests", "Tests\Core2D.UnitTests\Core2D.UnitTests.csproj", "{AB31E0E2-9090-4461-84BE-5C5AAA19758F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.UnitTests", "tests\Core2D.UnitTests\Core2D.UnitTests.csproj", "{AB31E0E2-9090-4461-84BE-5C5AAA19758F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serializer.ProtoBuf", "Dependencies\Serializer.ProtoBuf\Serializer.ProtoBuf.csproj", "{83191601-FCAC-48A7-ABF9-2179FEC1B2CE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serializer.ProtoBuf", "src\Dependencies\Serializer.ProtoBuf\Serializer.ProtoBuf.csproj", "{83191601-FCAC-48A7-ABF9-2179FEC1B2CE}"
 	ProjectSection(ProjectDependencies) = postProject
 		{50A4E393-386B-4354-8FB7-A20044986094} = {50A4E393-386B-4354-8FB7-A20044986094}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serializer.ProtoBuf.Generate", "Dependencies\Serializer.ProtoBuf.Generate\Serializer.ProtoBuf.Generate.csproj", "{50A4E393-386B-4354-8FB7-A20044986094}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serializer.ProtoBuf.Generate", "src\Dependencies\Serializer.ProtoBuf.Generate\Serializer.ProtoBuf.Generate.csproj", "{50A4E393-386B-4354-8FB7-A20044986094}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.Wpf.UnitTests", "Tests\Core2D.Wpf.UnitTests\Core2D.Wpf.UnitTests.csproj", "{E9C30F6F-00DD-494A-8E7C-253A5C76E999}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.Wpf.UnitTests", "tests\Core2D.Wpf.UnitTests\Core2D.Wpf.UnitTests.csproj", "{E9C30F6F-00DD-494A-8E7C-253A5C76E999}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.Perspex.UnitTests", "Tests\Core2D.Perspex.UnitTests\Core2D.Perspex.UnitTests.csproj", "{AD91E9DC-52E7-4883-B03C-7BA87A2B44A5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.Perspex.UnitTests", "tests\Core2D.Perspex.UnitTests\Core2D.Perspex.UnitTests.csproj", "{AD91E9DC-52E7-4883-B03C-7BA87A2B44A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D", "Core2D\Core2D.csproj", "{4EE581B0-45F3-4D7E-BEAE-277ABF5F3FDD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D", "src\Core2D\Core2D.csproj", "{4EE581B0-45F3-4D7E-BEAE-277ABF5F3FDD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
