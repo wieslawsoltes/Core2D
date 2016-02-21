@@ -221,4 +221,4 @@ pip-log.txt
 *.userprefs
 
 #ProtoBuf generated serializers
-Dependencies/Serializer.ProtoBuf.Generate/Serializer/*.dll
+src/Dependencies/Serializer.ProtoBuf.Generate/Serializer/*.dll
