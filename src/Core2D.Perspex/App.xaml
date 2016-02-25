@@ -138,15 +138,6 @@
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="AutoScrollToSelectedItem" Value="True"/>
         </Style>
-        <!-- ScrollBar -->
-        <Style Selector="ScrollBar.slider">
-            <Setter Property="Visibility" Value="Visible"/>
-            <Setter Property="Orientation" Value="Horizontal"/>
-            <Setter Property="Height" Value="20"/>
-            <Setter Property="Margin" Value="3,1,3,1"/>
-            <Setter Property="HorizontalAlignment" Value="Stretch"/>
-            <Setter Property="VerticalAlignment" Value="Stretch"/>
-        </Style>
         <!-- Slider -->
         <Style Selector="Slider[Orientation=Horizontal]">
             <Setter Property="MinWidth" Value="40"/>
