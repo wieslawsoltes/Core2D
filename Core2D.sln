@@ -58,6 +58,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.Perspex.UnitTests", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D", "src\Core2D\Core2D.csproj", "{4EE581B0-45F3-4D7E-BEAE-277ABF5F3FDD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.SkiaSharpDemo", "src\Core2D.SkiaSharpDemo\Core2D.SkiaSharpDemo.csproj", "{9311C318-31EC-467D-A285-65FA2F0F92B4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -160,6 +162,10 @@ Global
 		{4EE581B0-45F3-4D7E-BEAE-277ABF5F3FDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4EE581B0-45F3-4D7E-BEAE-277ABF5F3FDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4EE581B0-45F3-4D7E-BEAE-277ABF5F3FDD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9311C318-31EC-467D-A285-65FA2F0F92B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9311C318-31EC-467D-A285-65FA2F0F92B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9311C318-31EC-467D-A285-65FA2F0F92B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9311C318-31EC-467D-A285-65FA2F0F92B4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
