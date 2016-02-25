@@ -21,18 +21,10 @@
                 <CheckBox IsChecked="{Binding Path=IsFilled, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"/>
                 <TextBlock Text="RadiusX" Classes="left" Grid.Row="3" Grid.Column="0"/>
                 <TextBox Text="{Binding Path=RadiusX, Mode=TwoWay}" Classes="left" Grid.Row="3" Grid.Column="1"/>
-                <ScrollBar Classes="slider" Minimum="0" Maximum="30" ViewportSize="2" Grid.Row="3" Grid.Column="2">
-                    <ScrollBar.Value>
-                        <Binding Path="RadiusX" Mode="TwoWay" Converter="{Static converters:RoundedDoubleToDoubleConverter.Instance}"/>
-                    </ScrollBar.Value>
-                </ScrollBar>
+                <Slider Classes="slider" Value="{Binding RadiusX, Mode=TwoWay}" Minimum="0" Maximum="30" Grid.Row="3" Grid.Column="2"/>
                 <TextBlock Text="RadiusY" Classes="left" Grid.Row="4" Grid.Column="0"/>
                 <TextBox Text="{Binding Path=RadiusY, Mode=TwoWay}" Classes="left" Grid.Row="4" Grid.Column="1"/>
-                <ScrollBar Classes="slider" Minimum="0" Maximum="30" ViewportSize="2" Grid.Row="4" Grid.Column="2">
-                    <ScrollBar.Value>
-                        <Binding Path="RadiusY" Mode="TwoWay" Converter="{Static converters:RoundedDoubleToDoubleConverter.Instance}"/>
-                    </ScrollBar.Value>
-                </ScrollBar>
+                <Slider Classes="slider" Value="{Binding RadiusY, Mode=TwoWay}" Minimum="0" Maximum="30" Grid.Row="4" Grid.Column="2"/>
             </Grid>
         </TabItem>
         <TabItem Header="Style" Classes="property">

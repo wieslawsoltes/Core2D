@@ -14,21 +14,13 @@
         <TextBox Text="{Binding Path=Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"/>
         <TextBlock Text="Thickness" Classes="left" Grid.Row="1" Grid.Column="0"/>
         <TextBox Text="{Binding Path=Thickness, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
-        <ScrollBar Classes="slider" Minimum="0" Maximum="30" ViewportSize="2" Grid.Row="1" Grid.Column="2">
-            <ScrollBar.Value>
-                <Binding Path="Thickness" Mode="TwoWay" Converter="{Static converters:RoundedDoubleToDoubleConverter.Instance}"/>
-            </ScrollBar.Value>
-        </ScrollBar>
+        <Slider Classes="slider" Value="{Binding Thickness, Mode=TwoWay}" Minimum="0" Maximum="30" Grid.Row="1" Grid.Column="2"/>
         <TextBlock Text="Line Cap" Classes="left" Grid.Row="2" Grid.Column="0"/>
         <DropDown Items="{Static Editor:Enums.LineCapValues}" SelectedItem="{Binding Path=LineCap, Mode=TwoWay}" Classes="default" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"/>
         <TextBlock Text="Dashes" Classes="left" Grid.Row="3" Grid.Column="0"/>
         <TextBox Text="{Binding Path=Dashes, Mode=TwoWay}" Classes="left" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"/>
         <TextBlock Text="Dash Offset" Classes="left" Grid.Row="4" Grid.Column="0"/>
         <TextBox Text="{Binding Path=DashOffset, Mode=TwoWay}" Classes="left" Grid.Row="4" Grid.Column="1"/>
-        <ScrollBar Classes="slider" Minimum="0" Maximum="20" ViewportSize="1.3" Grid.Row="4" Grid.Column="2">
-            <ScrollBar.Value>
-                <Binding Path="DashOffset" Mode="TwoWay" Converter="{Static converters:RoundedDoubleToDoubleConverter.Instance}"/>
-            </ScrollBar.Value>
-        </ScrollBar>
+        <Slider Classes="slider" Value="{Binding DashOffset, Mode=TwoWay}" Minimum="0" Maximum="20" Grid.Row="4" Grid.Column="2"/>
     </Grid>
 </UserControl>

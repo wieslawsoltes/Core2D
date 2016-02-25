@@ -13,11 +13,7 @@
             <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,50,*">
                 <TextBlock Text="Length" Classes="left" Grid.Row="0" Grid.Column="0"/>
                 <TextBox Text="{Binding Path=Length, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
-                <ScrollBar Classes="slider" Minimum="0" Maximum="30" ViewportSize="2" Grid.Row="0" Grid.Column="2">
-                    <ScrollBar.Value>
-                        <Binding Path="Length" Mode="TwoWay" Converter="{Static converters:RoundedDoubleToDoubleConverter.Instance}"/>
-                    </ScrollBar.Value>
-                </ScrollBar>
+                <Slider Classes="slider" Value="{Binding Length, Mode=TwoWay}" Minimum="0" Maximum="30" Grid.Row="0" Grid.Column="2"/>
                 <TextBlock Text="Flags" Classes="left" Grid.Row="1" Grid.Column="0"/>
                 <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
                     <CheckBox Content="Disabled" IsChecked="{Binding Path=Disabled, Mode=TwoWay}" Classes="default"/>
