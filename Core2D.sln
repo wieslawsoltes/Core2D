@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.Wpf", "src\Core2D.Wpf\Core2D.Wpf.csproj", "{12889680-3769-4914-BE60-5D09E83DF5B2}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dependencies", "src\Dependencies", "{2D76C6F5-844B-4D2D-96D8-B39D49C70706}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dependencies", "Dependencies", "{2D76C6F5-844B-4D2D-96D8-B39D49C70706}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serializer.Newtonsoft", "src\Dependencies\Serializer.Newtonsoft\Serializer.Newtonsoft.csproj", "{08E4E8BF-E513-4A8D-835C-1EED6ECB4A21}"
 EndProject
@@ -41,7 +41,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.Perspex", "src\Core2
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serializer.Xaml", "src\Dependencies\Serializer.Xaml\Serializer.Xaml.csproj", "{5B85143E-A53C-4126-8666-031A3172EFDF}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "tests", "{D5DF7EE8-7191-4B8D-B18B-4F3785F91E21}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D5DF7EE8-7191-4B8D-B18B-4F3785F91E21}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.UnitTests", "tests\Core2D.UnitTests\Core2D.UnitTests.csproj", "{AB31E0E2-9090-4461-84BE-5C5AAA19758F}"
 EndProject
