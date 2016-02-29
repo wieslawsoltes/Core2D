@@ -77,6 +77,14 @@
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Background" Value="#FFFFFFFF"/>
         </Style>
+        <Style Selector="Button.project:pointerover /template/ Border#border">
+            <Setter Property="Background" Value="#FFACACAC"/>
+            <Setter Property="BorderBrush" Value="#FFACACAC"/>
+        </Style>
+        <Style Selector="Button.project:pressed /template/ Border#border">
+            <Setter Property="Background" Value="#FFACACAC"/>
+            <Setter Property="BorderBrush" Value="#FFACACAC"/>
+        </Style>
         <Style Selector="Button.recent">
             <Setter Property="Margin" Value="2"/>
             <Setter Property="FontSize" Value="12"/>
