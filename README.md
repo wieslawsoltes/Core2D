@@ -10,7 +10,7 @@ Data driven 2D diagram editor.
 
 ## About
 
-`Core2D` is an application for making data driven 2D diagrams.
+Core2D is an application for making data driven 2D diagrams.
 
 ## Data Formats
 
@@ -91,4 +91,4 @@ For building `Core2D` mirror repository is used for [.net dxf Reader-Writer](htt
 
 ## License
 
-`Core2D` is licensed under the [MIT license](LICENSE.TXT).
+Core2D is licensed under the [MIT license](LICENSE.TXT).
