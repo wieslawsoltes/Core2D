@@ -4,6 +4,7 @@ using Core2D.Data;
 using Core2D.Data.Database;
 using Core2D.Editor.Factories;
 using Core2D.Editor.Input;
+using Core2D.Editor.Recent;
 using Core2D.Interfaces;
 using Core2D.Path;
 using Core2D.Path.Segments;
@@ -416,12 +417,20 @@ namespace Core2D.Editor.Designer
                 XamlSerializer = xamlSerializer
             };
 
+            // Recent Projects
+            Editor.RecentProjects = Editor.RecentProjects.Add(RecentFile.Create("Test1", "Test1.project"));
+            Editor.RecentProjects = Editor.RecentProjects.Add(RecentFile.Create("Test2", "Test2.project"));
+            
+            // Tools
             Editor.DefaultTools();
+
+            // Commands
 
             Editor.InitializeCommands();
             InitializeCommands(Editor);
-
             Editor.CommandManager.RegisterCommands();
+
+            // New Project
 
             Editor.OnNew(null);
 
