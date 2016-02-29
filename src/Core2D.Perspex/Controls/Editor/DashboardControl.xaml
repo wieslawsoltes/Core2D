@@ -19,7 +19,10 @@
         <ListBox Items="{Binding Path=RecentProjects}" SelectedItem="{Binding Path=CurrentRecentProject, Mode=TwoWay}" Classes="recents" Grid.Column="3" Grid.Row="3" Grid.ColumnSpan="1" Grid.RowSpan="5">
             <ListBox.DataTemplates>
                 <DataTemplate DataType="Recent:RecentFile">
-                    <TextBlock Text="{Binding Path=Name}" Classes="recents" ToolTip.Tip="{Binding Path=Path}"/>
+                    <Grid ColumnDefinitions="80*,20*">
+                        <TextBlock Text="{Binding Path=Name}" Classes="recents" Grid.Column="0" ToolTip.Tip="{Binding Path=Path}"/>
+                        <Button Content="open" Classes="recent" Grid.Column="1" CommandParameter="{Binding Path=Path}" Command="{Static Editor:Commands.OpenCommand}"/>
+                    </Grid>
                 </DataTemplate>
             </ListBox.DataTemplates>
         </ListBox>
