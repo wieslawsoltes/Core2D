@@ -20,7 +20,7 @@
                 <DataTemplate DataType="Database:XColumn">
                     <Grid VerticalAlignment="Top" ColumnDefinitions="*,30">
                         <TextBox VerticalAlignment="Center" Text="{Binding Path=Name, Mode=TwoWay}" Classes="default" Grid.Column="0"/>
-                        <Button VerticalAlignment="Center" Content="-" Classes="default" Grid.Column="1" Command="{Static Editor:Commands.RemoveColumnCommand}" CommandParameter="{Binding}"/>
+                        <Button VerticalAlignment="Center" Content="-" Classes="properties" Grid.Column="1" Command="{Static Editor:Commands.RemoveColumnCommand}" CommandParameter="{Binding}"/>
                     </Grid>
                 </DataTemplate>
             </ItemsControl.DataTemplates>
