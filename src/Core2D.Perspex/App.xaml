@@ -99,6 +99,12 @@
         <Style Selector="Button.recent:pressed">
             <Setter Property="Foreground" Value="Black"/>
         </Style>
+        <Style Selector="Button.recent:pointerover /template/ Border#border">
+            <Setter Property="Background" Value="#00FFFFFF"/>
+        </Style>
+        <Style Selector="Button.recent:pressed /template/ Border#border">
+            <Setter Property="Background" Value="#00FFFFFF"/>
+        </Style>
         <!-- CheckBox -->
         <Style Selector="CheckBox.default">
             <Setter Property="Margin" Value="3,1,3,1"/>
