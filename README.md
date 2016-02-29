@@ -10,7 +10,7 @@ Data driven 2D diagram editor.
 
 ## About
 
-Core2D is an application for making data driven 2D diagrams.
+`Core2D` is an application for making data driven 2D diagrams.
 
 ## Data Formats
 
@@ -44,7 +44,7 @@ The core library and editor are portable and should work on all platforms where 
   * System.Reflection.Emit
   * Newtonsoft.Json
   * CsvHelper
-  * netdxf (Currently using git submodule as NuGet version is outdated.)
+  * netdxf (Currently using `git submodule` as `NuGet` version is outdated.)
 * WPF
   * PDFsharp-wpf (`PDFsharp` core does not implement `XGraphicsPath.AddArc` method.)
   * Xceed.Wpf.AvalonDock
@@ -78,11 +78,11 @@ The core library and editor are portable and should work on all platforms where 
 
 * [Protocol Buffers library for idiomatic .NET.](https://github.com/mgravell/protobuf-net) Needed for ProtoBuf support.
 * [Portable .NET library for reading/writing xaml files.](https://github.com/cwensley/Portable.Xaml) Needed for Xaml support.
-* [.net dxf Reader-Writer](http://netdxf.codeplex.com/) Run `git submodule update --init --recursive` in project directory.
+* [.net dxf Reader-Writer](http://netdxf.codeplex.com/)  Needed for `DXF` support. Run `git submodule update --init --recursive` in project directory.
 * [xUnit.net unit testing tool for the .NET Framework.](https://github.com/xunit/xunit) Needed to run tests.
 * [GTK# for .NET](http://www.mono-project.com/download/#download-win) Needed for Gtk on Windows.
 
-For building Core2D mirror repository is used for [.net dxf Reader-Writer](https://github.com/Core2D/netdxf)
+For building `Core2D` mirror repository is used for [.net dxf Reader-Writer](https://github.com/Core2D/netdxf)
 
 ## Resources
 
@@ -91,4 +91,4 @@ For building Core2D mirror repository is used for [.net dxf Reader-Writer](https
 
 ## License
 
-Core2D is licensed under the [MIT license](LICENSE.TXT).
+`Core2D` is licensed under the [MIT license](LICENSE.TXT).
