@@ -217,7 +217,7 @@
         </Style>
         <Style Selector="TextBlock.recent">
             <Setter Property="Margin" Value="0"/>
-            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontSize" Value="18"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="HorizontalAlignment" Value="Right"/>
         </Style>
