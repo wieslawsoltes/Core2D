@@ -69,6 +69,22 @@
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Background" Value="#FFFFFFFF"/>
         </Style>
+        <Style Selector="Button.recent">
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="BorderBrush" Value="#FFFFFFFF"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Background" Value="#00FFFFFF"/>
+            <Setter Property="Foreground" Value="Gray"/>
+        </Style>
+        <Style Selector="Button.recent:pointerover">
+            <Setter Property="Background" Value="#00FFFFFF"/>
+            <Setter Property="Foreground" Value="Black"/>
+        </Style>
+        <Style Selector="Button.recent:pressed">
+            <Setter Property="Background" Value="#00FFFFFF"/>
+            <Setter Property="Foreground" Value="Black"/>
+        </Style>
         <!-- CheckBox -->
         <Style Selector="CheckBox.default">
             <Setter Property="Margin" Value="3,1,3,1"/>
