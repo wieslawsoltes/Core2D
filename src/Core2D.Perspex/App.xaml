@@ -94,11 +94,9 @@
             <Setter Property="Foreground" Value="Gray"/>
         </Style>
         <Style Selector="Button.recent:pointerover">
-            <Setter Property="Background" Value="#00FFFFFF"/>
             <Setter Property="Foreground" Value="Black"/>
         </Style>
         <Style Selector="Button.recent:pressed">
-            <Setter Property="Background" Value="#00FFFFFF"/>
             <Setter Property="Foreground" Value="Black"/>
         </Style>
         <!-- CheckBox -->
