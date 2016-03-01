@@ -23,6 +23,12 @@
                     <TabItem Header="Project" Classes="property">
                         <project:ProjectControl DataContext="{Binding Path=Project, Mode=TwoWay}"/>
                     </TabItem>
+                    <TabItem Header="Options" Classes="property">
+                        <ContentControl Content="{Binding Path=Project.Options, Mode=TwoWay}"/>
+                    </TabItem>
+                    <TabItem Header="Images" Classes="property">
+                        <project:ImagesControl DataContext="{Binding Path=Project, Mode=TwoWay}"/>
+                    </TabItem>
                 </TabControl>
             </Border>
             <GridSplitter Classes="horizontal" Grid.Row="1" Height="6"/>

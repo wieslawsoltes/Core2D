@@ -11,100 +11,90 @@
              xmlns:project="clr-namespace:Core2D.Perspex.Controls.Project;assembly=Core2D.Perspex"
              Design.DataContext="{Static Designer:DesignerContext.Project}"
              Design.Width="250" Design.Height="400">
-    <TabControl Classes="default">
-        <TabItem Header="Project" Classes="property">
-            <Grid RowDefinitions="Auto,Auto,*,Auto" ColumnDefinitions="*">
-                <Menu Grid.Row="0" HorizontalAlignment="Right">
-                    <MenuItem Header="+" Command="{Static Editor:Commands.NewCommand}" CommandParameter="{Binding Path=Selected}"/>
-                    <MenuItem Header="-" Command="{Static Editor:Commands.DeleteCommand}" CommandParameter="{Binding Path=Selected}"/>
-                </Menu>
-                <TextBox Text="{Binding Path=Name, Mode=TwoWay}" Classes="left" Grid.Row="1"/>
-                <TreeView Name="documents" Items="{Binding Path=Documents, Mode=TwoWay}" SelectedItem="{Binding Path=Selected, Mode=TwoWay}" Grid.Row="2" Classes="default">
-                    <TreeView.ContextMenu>
-                        <ContextMenu>
-                            <MenuItem Header="_Add Document" Command="{Static Editor:Commands.AddDocumentCommand}" CommandParameter="{Binding Mode=OneWay}"/>
-                            <Separator/>
-                            <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportCommand}" CommandParameter="{Binding Mode=OneWay}"/>
-                        </ContextMenu>
-                    </TreeView.ContextMenu>
-                    <TreeView.Styles>
-                        <Style Selector="TreeViewItem">
-                            <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}"/>
-                        </Style>
-                    </TreeView.Styles>
-                    <TreeView.DataTemplates>
-                        <TreeDataTemplate DataType="Project:XDocument" ItemsSource="{Binding Path=Pages, Mode=TwoWay}">
-                            <TextBlock Text="{Binding Path=Name, Mode=TwoWay}" Classes="default">
-                                <TextBlock.ContextMenu>
-                                    <ContextMenu>
-                                        <MenuItem Header="_Add Page" Command="{Static Editor:Commands.AddPageCommand}" CommandParameter="{Binding Mode=OneWay}"/>
-                                        <Separator/>
-                                        <MenuItem Header="Insert Document Bef_ore" Command="{Static Editor:Commands.InsertDocumentBeforeCommand}" CommandParameter="{Binding Mode=OneWay}"/>
-                                        <MenuItem Header="Insert Document Aft_er" Command="{Static Editor:Commands.InsertDocumentAfterCommand}" CommandParameter="{Binding Mode=OneWay}"/>
-                                        <Separator/>
-                                        <MenuItem Header="Cu_t" Command="{Static Editor:Commands.CutCommand}" CommandParameter="{Binding Mode=OneWay}"/>
-                                        <MenuItem Header="_Copy" Command="{Static Editor:Commands.CopyCommand}" CommandParameter="{Binding Mode=OneWay}"/>
-                                        <MenuItem Header="_Paste" Command="{Static Editor:Commands.PasteCommand}" CommandParameter="{Binding Mode=OneWay}"/>
-                                        <Separator/>
-                                        <MenuItem Header="_Delete" Command="{Static Editor:Commands.DeleteCommand}" CommandParameter="{Binding Mode=OneWay}"/>
-                                        <Separator/>
-                                        <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportCommand}" CommandParameter="{Binding Mode=OneWay}"/>
-                                    </ContextMenu>
-                                </TextBlock.ContextMenu>
-                            </TextBlock>
-                        </TreeDataTemplate>
-                        <TreeDataTemplate DataType="Project:XPage" ItemsSource="{Binding Path=Layers, Mode=TwoWay}">
-                            <TextBlock Text="{Binding Path=Name, Mode=TwoWay}" Classes="default">
-                                <TextBlock.ContextMenu>
-                                    <ContextMenu>
-                                        <MenuItem Header="Te_mplate" Items="{Binding Path=DataContext.Templates, ElementName=documents, Mode=OneWay}">
-                                            <MenuItem.DataTemplates>
-                                                <DataTemplate DataType="Project:XContainer">
-                                                    <MenuItem Header="{Binding Path=Name}" Command="{Static Editor:Commands.ApplyTemplateCommand}" CommandParameter="{Binding Mode=OneWay}"/>
-                                                </DataTemplate>
-                                            </MenuItem.DataTemplates>
-                                        </MenuItem>
-                                        <Separator/>
-                                        <MenuItem Header="Insert Page Bef_ore" Command="{Static Editor:Commands.InsertPageBeforeCommand}" CommandParameter="{Binding Mode=OneWay}"/>
-                                        <MenuItem Header="Insert Page Aft_er" Command="{Static Editor:Commands.InsertPageAfterCommand}" CommandParameter="{Binding Mode=OneWay}"/>
-                                        <Separator/>
-                                        <MenuItem Header="Cu_t" Command="{Static Editor:Commands.CutCommand}" CommandParameter="{Binding Mode=OneWay}"/>
-                                        <MenuItem Header="_Copy" Command="{Static Editor:Commands.CopyCommand}" CommandParameter="{Binding Mode=OneWay}"/>
-                                        <MenuItem Header="_Paste" Command="{Static Editor:Commands.PasteCommand}" CommandParameter="{Binding Mode=OneWay}"/>
-                                        <Separator/>
-                                        <MenuItem Header="_Delete" Command="{Static Editor:Commands.DeleteCommand}" CommandParameter="{Binding Mode=OneWay}"/>
-                                        <Separator/>
-                                        <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportCommand}" CommandParameter="{Binding Mode=OneWay}"/>
-                                    </ContextMenu>
-                                </TextBlock.ContextMenu>
-                            </TextBlock>
-                        </TreeDataTemplate>
-                        <DataTemplate DataType="Project:XLayer">
-                            <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch">
-                                <StackPanel.ContextMenu>
-                                    <ContextMenu>
-                                        <MenuItem Header="_Add Layer" Command="{Static Editor:Commands.AddLayerCommand}" CommandParameter="{Binding Path=Owner, Mode=OneWay}"/>
-                                        <Separator/>
-                                        <MenuItem Header="_Delete" Command="{Static Editor:Commands.RemoveLayerCommand}" CommandParameter="{Binding Mode=OneWay}"/>
-                                    </ContextMenu>
-                                </StackPanel.ContextMenu>
-                                <CheckBox IsChecked="{Binding IsVisible, Mode=TwoWay}" Classes="default"/>
-                                <TextBlock Text="{Binding Name, Mode=TwoWay}" Classes="default"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </TreeView.DataTemplates>
-                </TreeView>
-                <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="3">
-                    <TextBlock Text="Selected" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                    <TextBox Text="{Binding Path=Selected.Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
-                </Grid>
-            </Grid>
-        </TabItem>
-        <TabItem Header="Options" Classes="property">
-            <ContentControl Content="{Binding Path=Options, Mode=TwoWay}"/>
-        </TabItem>
-        <TabItem Header="Images" Classes="property">
-            <project:ImagesControl/>
-        </TabItem>
-    </TabControl>
+    <Grid RowDefinitions="Auto,Auto,*,Auto" ColumnDefinitions="*">
+        <Menu Grid.Row="0" HorizontalAlignment="Right">
+            <MenuItem Header="+" Command="{Static Editor:Commands.NewCommand}" CommandParameter="{Binding Path=Selected}"/>
+            <MenuItem Header="-" Command="{Static Editor:Commands.DeleteCommand}" CommandParameter="{Binding Path=Selected}"/>
+        </Menu>
+        <TextBox Text="{Binding Path=Name, Mode=TwoWay}" Classes="left" Grid.Row="1"/>
+        <TreeView Name="documents" Items="{Binding Path=Documents, Mode=TwoWay}" SelectedItem="{Binding Path=Selected, Mode=TwoWay}" Grid.Row="2" Classes="default">
+            <TreeView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="_Add Document" Command="{Static Editor:Commands.AddDocumentCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                    <Separator/>
+                    <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                </ContextMenu>
+            </TreeView.ContextMenu>
+            <TreeView.Styles>
+                <Style Selector="TreeViewItem">
+                    <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}"/>
+                </Style>
+            </TreeView.Styles>
+            <TreeView.DataTemplates>
+                <TreeDataTemplate DataType="Project:XDocument" ItemsSource="{Binding Path=Pages, Mode=TwoWay}">
+                    <TextBlock Text="{Binding Path=Name, Mode=TwoWay}" Classes="default">
+                        <TextBlock.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="_Add Page" Command="{Static Editor:Commands.AddPageCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                <Separator/>
+                                <MenuItem Header="Insert Document Bef_ore" Command="{Static Editor:Commands.InsertDocumentBeforeCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                <MenuItem Header="Insert Document Aft_er" Command="{Static Editor:Commands.InsertDocumentAfterCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                <Separator/>
+                                <MenuItem Header="Cu_t" Command="{Static Editor:Commands.CutCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                <MenuItem Header="_Copy" Command="{Static Editor:Commands.CopyCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                <MenuItem Header="_Paste" Command="{Static Editor:Commands.PasteCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                <Separator/>
+                                <MenuItem Header="_Delete" Command="{Static Editor:Commands.DeleteCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                <Separator/>
+                                <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                            </ContextMenu>
+                        </TextBlock.ContextMenu>
+                    </TextBlock>
+                </TreeDataTemplate>
+                <TreeDataTemplate DataType="Project:XPage" ItemsSource="{Binding Path=Layers, Mode=TwoWay}">
+                    <TextBlock Text="{Binding Path=Name, Mode=TwoWay}" Classes="default">
+                        <TextBlock.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Te_mplate" Items="{Binding Path=DataContext.Templates, ElementName=documents, Mode=OneWay}">
+                                    <MenuItem.DataTemplates>
+                                        <DataTemplate DataType="Project:XContainer">
+                                            <MenuItem Header="{Binding Path=Name}" Command="{Static Editor:Commands.ApplyTemplateCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                        </DataTemplate>
+                                    </MenuItem.DataTemplates>
+                                </MenuItem>
+                                <Separator/>
+                                <MenuItem Header="Insert Page Bef_ore" Command="{Static Editor:Commands.InsertPageBeforeCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                <MenuItem Header="Insert Page Aft_er" Command="{Static Editor:Commands.InsertPageAfterCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                <Separator/>
+                                <MenuItem Header="Cu_t" Command="{Static Editor:Commands.CutCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                <MenuItem Header="_Copy" Command="{Static Editor:Commands.CopyCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                <MenuItem Header="_Paste" Command="{Static Editor:Commands.PasteCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                <Separator/>
+                                <MenuItem Header="_Delete" Command="{Static Editor:Commands.DeleteCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                <Separator/>
+                                <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                            </ContextMenu>
+                        </TextBlock.ContextMenu>
+                    </TextBlock>
+                </TreeDataTemplate>
+                <DataTemplate DataType="Project:XLayer">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch">
+                        <StackPanel.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="_Add Layer" Command="{Static Editor:Commands.AddLayerCommand}" CommandParameter="{Binding Path=Owner, Mode=OneWay}"/>
+                                <Separator/>
+                                <MenuItem Header="_Delete" Command="{Static Editor:Commands.RemoveLayerCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                            </ContextMenu>
+                        </StackPanel.ContextMenu>
+                        <CheckBox IsChecked="{Binding IsVisible, Mode=TwoWay}" Classes="default"/>
+                        <TextBlock Text="{Binding Name, Mode=TwoWay}" Classes="default"/>
+                    </StackPanel>
+                </DataTemplate>
+            </TreeView.DataTemplates>
+        </TreeView>
+        <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="3">
+            <TextBlock Text="Selected" Classes="left" Grid.Row="0" Grid.Column="0"/>
+            <TextBox Text="{Binding Path=Selected.Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+        </Grid>
+    </Grid>
 </UserControl>

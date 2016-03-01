@@ -20,8 +20,8 @@
                 <ItemsControl.DataTemplates>
                     <DataTemplate DataType="Renderer:ImageKey">
                         <Grid VerticalAlignment="Top" ColumnDefinitions="*,30">
-                            <TextBox VerticalAlignment="Center" Text="{Binding Path=Key, Mode=OneWay}" Classes="default" Grid.Column="0"/>
-                            <Button VerticalAlignment="Center" Content="-" Classes="properties" Grid.Column="1" Command="{Static Editor:Commands.RemoveImageKeyCommand}" CommandParameter="{Binding Path=Key}"/>
+                            <TextBox VerticalAlignment="Center" Text="{Binding Path=Key, Mode=OneWay}" Classes="property" Grid.Column="0"/>
+                            <Button VerticalAlignment="Center" Content="-" Classes="property" Grid.Column="1" Command="{Static Editor:Commands.RemoveImageKeyCommand}" CommandParameter="{Binding Path=Key}"/>
                         </Grid>
                     </DataTemplate>
                 </ItemsControl.DataTemplates>
