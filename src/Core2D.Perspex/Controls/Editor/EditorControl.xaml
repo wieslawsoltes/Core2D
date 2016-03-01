@@ -31,7 +31,7 @@
                     </TabItem>
                 </TabControl>
             </Border>
-            <GridSplitter Classes="horizontal" Grid.Row="1" Height="6"/>
+            <GridSplitter Classes="horizontal" Grid.Row="1" Height="10"/>
             <Border Classes="leftBottom" Grid.Row="2">
                 <TabControl Classes="bottom">
                     <TabItem Header="Groups" Classes="property">
@@ -63,7 +63,7 @@
                     </TabItem>
                 </TabControl>
             </Border>
-            <GridSplitter Classes="horizontal" Grid.Row="1" Height="6"/>
+            <GridSplitter Classes="horizontal" Grid.Row="1" Height="10"/>
             <Border Classes="rightBottom" Grid.Row="2">
                 <TabControl Classes="bottom">
                     <TabItem Header="Shape" Classes="property">

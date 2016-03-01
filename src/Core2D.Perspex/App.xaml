@@ -23,31 +23,31 @@
     <Application.Styles>
         <!-- Border -->
         <Style Selector="Border.leftTop">
-            <Setter Property="Margin" Value="4,6,0,4"/>
+            <Setter Property="Margin" Value="0"/>
             <Setter Property="Padding" Value="3,3,3,3"/>
             <Setter Property="BorderBrush" Value="#FFACACAC"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
         <Style Selector="Border.leftBottom">
-            <Setter Property="Margin" Value="4,4,0,2"/>
+            <Setter Property="Margin" Value="0"/>
             <Setter Property="Padding" Value="3,3,3,3"/>
             <Setter Property="BorderBrush" Value="#FFACACAC"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
         <Style Selector="Border.rightTop">
-            <Setter Property="Margin" Value="0,6,4,4"/>
+            <Setter Property="Margin" Value="0"/>
             <Setter Property="Padding" Value="3,3,3,3"/>
             <Setter Property="BorderBrush" Value="#FFACACAC"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
         <Style Selector="Border.rightBottom">
-            <Setter Property="Margin" Value="0,4,4,2"/>
+            <Setter Property="Margin" Value="0"/>
             <Setter Property="Padding" Value="3,3,3,3"/>
             <Setter Property="BorderBrush" Value="#FFACACAC"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
         <Style Selector="Border.drawable">
-            <Setter Property="Margin" Value="0,6,0,2"/>
+            <Setter Property="Margin" Value="0"/>
             <Setter Property="Padding" Value="3,3,3,3"/>
             <Setter Property="BorderBrush" Value="#FFACACAC"/>
             <Setter Property="BorderThickness" Value="1"/>
