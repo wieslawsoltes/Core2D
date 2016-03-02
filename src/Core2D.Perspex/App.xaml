@@ -24,35 +24,42 @@
         <!-- Theme -->
         <StyleInclude Source="resm:Perspex.Themes.Default.DefaultTheme.paml?assembly=Perspex.Themes.Default"/>
         <StyleInclude Source="resm:Perspex.Themes.Default.Accents.BaseLight.paml?assembly=Perspex.Themes.Default"/>
+        <!-- Resources -->
+        <Style>
+            <Style.Resources>
+                <SolidColorBrush x:Key="BackgroundBrush">#FFFFFFFF</SolidColorBrush>
+                <SolidColorBrush x:Key="BorderBrush">#FFACACAC</SolidColorBrush>
+            </Style.Resources>
+        </Style>
         <!-- Border -->
         <Style Selector="Border.leftTop">
             <Setter Property="Margin" Value="0"/>
             <Setter Property="Padding" Value="3,3,3,3"/>
-            <Setter Property="BorderBrush" Value="#FFACACAC"/>
+            <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
         <Style Selector="Border.leftBottom">
             <Setter Property="Margin" Value="0"/>
             <Setter Property="Padding" Value="3,3,3,3"/>
-            <Setter Property="BorderBrush" Value="#FFACACAC"/>
+            <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
         <Style Selector="Border.rightTop">
             <Setter Property="Margin" Value="0"/>
             <Setter Property="Padding" Value="3,3,3,3"/>
-            <Setter Property="BorderBrush" Value="#FFACACAC"/>
+            <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
         <Style Selector="Border.rightBottom">
             <Setter Property="Margin" Value="0"/>
             <Setter Property="Padding" Value="3,3,3,3"/>
-            <Setter Property="BorderBrush" Value="#FFACACAC"/>
+            <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
         <Style Selector="Border.drawable">
             <Setter Property="Margin" Value="0"/>
             <Setter Property="Padding" Value="3,3,3,3"/>
-            <Setter Property="BorderBrush" Value="#FFACACAC"/>
+            <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
         <Style Selector="Border.color">
@@ -67,34 +74,39 @@
         </Style>
         <!-- Button.property -->
         <Style Selector="Button.property">
-            <Setter Property="Margin" Value="3,0,3,0"/>
+            <Setter Property="Margin" Value="3,1,3,1"/>
+            <Setter Property="Padding" Value="0"/>
             <Setter Property="FontSize" Value="10"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
         <Style Selector="Button.property /template/ Border#border">
             <Setter Property="Padding" Value="0"/>
         </Style>
+        <!-- Button.project -->
         <Style Selector="Button.project">
             <Setter Property="Margin" Value="0"/>
+            <Setter Property="Padding" Value="0"/>
             <Setter Property="FontSize" Value="18"/>
-            <Setter Property="BorderBrush" Value="#FFACACAC"/>
+            <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Background" Value="#FFFFFFFF"/>
+            <Setter Property="Background" Value="{StyleResource BackgroundBrush}"/>
         </Style>
         <Style Selector="Button.project:pointerover /template/ Border#border">
-            <Setter Property="Background" Value="#FFACACAC"/>
-            <Setter Property="BorderBrush" Value="#FFACACAC"/>
+            <Setter Property="Background" Value="{StyleResource BorderBrush}"/>
+            <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
         </Style>
         <Style Selector="Button.project:pressed /template/ Border#border">
-            <Setter Property="Background" Value="#FFACACAC"/>
-            <Setter Property="BorderBrush" Value="#FFACACAC"/>
+            <Setter Property="Background" Value="{StyleResource BorderBrush}"/>
+            <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
         </Style>
+        <!-- Button.recent -->
         <Style Selector="Button.recent">
             <Setter Property="Margin" Value="2"/>
+            <Setter Property="Padding" Value="0"/>
             <Setter Property="FontSize" Value="12"/>
-            <Setter Property="BorderBrush" Value="#FFFFFFFF"/>
+            <Setter Property="BorderBrush" Value="{StyleResource BackgroundBrush}"/>
             <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Background" Value="#00FFFFFF"/>
+            <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Foreground" Value="Gray"/>
         </Style>
         <Style Selector="Button.recent:pointerover">
@@ -104,55 +116,55 @@
             <Setter Property="Foreground" Value="Black"/>
         </Style>
         <Style Selector="Button.recent:pointerover /template/ Border#border">
-            <Setter Property="Background" Value="#00FFFFFF"/>
+            <Setter Property="Background" Value="Transparent"/>
         </Style>
         <Style Selector="Button.recent:pressed /template/ Border#border">
-            <Setter Property="Background" Value="#00FFFFFF"/>
+            <Setter Property="Background" Value="Transparent"/>
         </Style>
         <!-- CheckBox.default -->
         <Style Selector="CheckBox.default">
             <Setter Property="Margin" Value="3,1,3,1"/>
             <Setter Property="FontSize" Value="12"/>
-            <Setter Property="BorderBrush" Value="#FFACACAC"/>
+            <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
         <Style Selector="CheckBox.default:pointerover /template/ Border#border">
-            <Setter Property="BorderBrush" Value="#FFACACAC"/>
+            <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
         <Style Selector="CheckBox.default:focus /template/ Border#border">
-            <Setter Property="BorderBrush" Value="#FFACACAC"/>
+            <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
         <!-- CheckBox.left -->
         <Style Selector="CheckBox.left">
             <Setter Property="Margin" Value="3,1,3,1"/>
             <Setter Property="FontSize" Value="12"/>
-            <Setter Property="BorderBrush" Value="#FFACACAC"/>
+            <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
         <Style Selector="CheckBox.left:pointerover /template/ Border#border">
-            <Setter Property="BorderBrush" Value="#FFACACAC"/>
+            <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
         <Style Selector="CheckBox.left:focus /template/ Border#border">
-            <Setter Property="BorderBrush" Value="#FFACACAC"/>
+            <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
         <!-- CheckBox.options -->
         <Style Selector="CheckBox.options">
             <Setter Property="Margin" Value="2"/>
             <Setter Property="FontSize" Value="12"/>
-            <Setter Property="BorderBrush" Value="#FFACACAC"/>
+            <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
         <Style Selector="CheckBox.options:pointerover /template/ Border#border">
-            <Setter Property="BorderBrush" Value="#FFACACAC"/>
+            <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
         <Style Selector="CheckBox.options:focus /template/ Border#border">
-            <Setter Property="BorderBrush" Value="#FFACACAC"/>
+            <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
         <!-- DropDown.default -->
@@ -160,16 +172,16 @@
             <Setter Property="Padding" Value="4,0,4,0"/>
             <Setter Property="Margin" Value="3,1,3,1"/>
             <Setter Property="FontSize" Value="12"/>
-            <Setter Property="Background" Value="#FFFFFFFF"/>
-            <Setter Property="BorderBrush" Value="#FFACACAC"/>
+            <Setter Property="Background" Value="{StyleResource BackgroundBrush}"/>
+            <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
         <Style Selector="DropDown.default:pointerover /template/ Border#border">
-            <Setter Property="BorderBrush" Value="#FFACACAC"/>
+            <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
         <Style Selector="DropDown.default:focus /template/ Border#border">
-            <Setter Property="BorderBrush" Value="#FFACACAC"/>
+            <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
         <!-- DropDown.tool -->
@@ -177,16 +189,16 @@
             <Setter Property="Padding" Value="4,0,4,0"/>
             <Setter Property="Margin" Value="2"/>
             <Setter Property="FontSize" Value="12"/>
-            <Setter Property="Background" Value="#FFFFFFFF"/>
-            <Setter Property="BorderBrush" Value="#FFACACAC"/>
+            <Setter Property="Background" Value="{StyleResource BackgroundBrush}"/>
+            <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
         <Style Selector="DropDown.tool:pointerover /template/ Border#border">
-            <Setter Property="BorderBrush" Value="#FFACACAC"/>
+            <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
         <Style Selector="DropDown.tool:focus /template/ Border#border">
-            <Setter Property="BorderBrush" Value="#FFACACAC"/>
+            <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
         <!-- GridSplitter.vertical -->
@@ -218,12 +230,14 @@
         <!-- ListBox -->
         <Style Selector="ListBox.default">
             <Setter Property="Margin" Value="0"/>
+            <Setter Property="Padding" Value="0"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="AutoScrollToSelectedItem" Value="True"/>
         </Style>
         <Style Selector="ListBox.recents">
             <Setter Property="Margin" Value="0"/>
-            <Setter Property="BorderBrush" Value="#FFACACAC"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="AutoScrollToSelectedItem" Value="True"/>
         </Style>
@@ -280,76 +294,76 @@
         </Style>
         <!-- TextBox.default -->
         <Style Selector="TextBox.default">
-            <Setter Property="Padding" Value="0,0,0,0"/>
+            <Setter Property="Padding" Value="0"/>
             <Setter Property="Margin" Value="3,0,3,0"/>
             <Setter Property="FontSize" Value="12"/>
-            <Setter Property="Background" Value="#FFFFFFFF"/>
-            <Setter Property="BorderBrush" Value="#00ACACAC"/>
+            <Setter Property="Background" Value="{StyleResource BackgroundBrush}"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
         <Style Selector="TextBox.default:pointerover /template/ Border#border">
-            <Setter Property="BorderBrush" Value="#FFACACAC"/>
+            <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
         <Style Selector="TextBox.default:focus /template/ Border#border">
-            <Setter Property="BorderBrush" Value="#FFACACAC"/>
+            <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
         <!-- TextBox.left -->
         <Style Selector="TextBox.left">
-            <Setter Property="Padding" Value="0,0,0,0"/>
+            <Setter Property="Padding" Value="0"/>
             <Setter Property="Margin" Value="3,0,3,0"/>
             <Setter Property="FontSize" Value="12"/>
-            <Setter Property="Background" Value="#FFFFFFFF"/>
+            <Setter Property="Background" Value="{StyleResource BackgroundBrush}"/>
             <Setter Property="TextAlignment" Value="Left"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="BorderBrush" Value="#00ACACAC"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
         <Style Selector="TextBox.left:pointerover /template/ Border#border">
-            <Setter Property="BorderBrush" Value="#FFACACAC"/>
+            <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
         <Style Selector="TextBox.left:focus /template/ Border#border">
-            <Setter Property="BorderBrush" Value="#FFACACAC"/>
+            <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
         <!-- TextBox.center -->
         <Style Selector="TextBox.center">
-            <Setter Property="Padding" Value="0,0,0,0"/>
+            <Setter Property="Padding" Value="0"/>
             <Setter Property="Margin" Value="3,0,3,0"/>
             <Setter Property="FontSize" Value="12"/>
-            <Setter Property="Background" Value="#FFFFFFFF"/>
+            <Setter Property="Background" Value="{StyleResource BackgroundBrush}"/>
             <Setter Property="TextAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="BorderBrush" Value="#00ACACAC"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
         <Style Selector="TextBox.center:pointerover /template/ Border#border">
-            <Setter Property="BorderBrush" Value="#FFACACAC"/>
+            <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
         <Style Selector="TextBox.center:focus /template/ Border#border">
-            <Setter Property="BorderBrush" Value="#FFACACAC"/>
+            <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
         <!-- TextBox.property -->
         <Style Selector="TextBox.property">
-            <Setter Property="Padding" Value="0,0,0,0"/>
-            <Setter Property="Margin" Value="3,0,3,0"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Margin" Value="3,1,3,1"/>
             <Setter Property="FontSize" Value="12"/>
-            <Setter Property="Background" Value="#FFFFFFFF"/>
+            <Setter Property="Background" Value="{StyleResource BackgroundBrush}"/>
             <Setter Property="TextAlignment" Value="Left"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="BorderBrush" Value="#FFACACAC"/>
+            <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
         <Style Selector="TextBox.property:pointerover /template/ Border#border">
-            <Setter Property="BorderBrush" Value="#FFACACAC"/>
+            <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
         <Style Selector="TextBox.property:focus /template/ Border#border">
-            <Setter Property="BorderBrush" Value="#FFACACAC"/>
+            <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
         <!-- TabControl -->
@@ -386,6 +400,7 @@
         <!-- TreeView -->
         <Style Selector="TreeView.default">
             <Setter Property="Margin" Value="0"/>
+            <Setter Property="Padding" Value="0"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="AutoScrollToSelectedItem" Value="True"/>
         </Style>
