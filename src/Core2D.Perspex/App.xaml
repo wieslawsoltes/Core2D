@@ -397,6 +397,12 @@
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="FontWeight" Value="Normal"/>
         </Style>
+        <!-- ToolTip -->
+        <Style Selector="ToolTip">
+            <Setter Property="Background" Value="{StyleResource BackgroundBrush}"/>
+            <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
         <!-- TreeView -->
         <Style Selector="TreeView.default">
             <Setter Property="Margin" Value="0"/>
