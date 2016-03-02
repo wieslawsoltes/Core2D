@@ -21,6 +21,9 @@
              xmlns:state="clr-namespace:Core2D.Perspex.Controls.State;assembly=Core2D.Perspex"
              xmlns:style="clr-namespace:Core2D.Perspex.Controls.Style;assembly=Core2D.Perspex">
     <Application.Styles>
+        <!-- Theme -->
+        <StyleInclude Source="resm:Perspex.Themes.Default.DefaultTheme.paml?assembly=Perspex.Themes.Default"/>
+        <StyleInclude Source="resm:Perspex.Themes.Default.Accents.BaseLight.paml?assembly=Perspex.Themes.Default"/>
         <!-- Border -->
         <Style Selector="Border.leftTop">
             <Setter Property="Margin" Value="0"/>
@@ -235,7 +238,7 @@
         <!-- TextBox.default -->
         <Style Selector="TextBox.default">
             <Setter Property="Padding" Value="0,0,0,0"/>
-            <Setter Property="Margin" Value="3,1,3,1"/>
+            <Setter Property="Margin" Value="3,0,3,0"/>
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="Background" Value="#FFFFFFFF"/>
             <Setter Property="BorderBrush" Value="#00ACACAC"/>
@@ -252,7 +255,7 @@
         <!-- TextBox.left -->
         <Style Selector="TextBox.left">
             <Setter Property="Padding" Value="0,0,0,0"/>
-            <Setter Property="Margin" Value="3,1,3,1"/>
+            <Setter Property="Margin" Value="3,0,3,0"/>
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="Background" Value="#FFFFFFFF"/>
             <Setter Property="TextAlignment" Value="Left"/>
@@ -271,7 +274,7 @@
         <!-- TextBox.center -->
         <Style Selector="TextBox.center">
             <Setter Property="Padding" Value="0,0,0,0"/>
-            <Setter Property="Margin" Value="3,1,3,1"/>
+            <Setter Property="Margin" Value="3,0,3,0"/>
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="Background" Value="#FFFFFFFF"/>
             <Setter Property="TextAlignment" Value="Center"/>
@@ -290,7 +293,7 @@
         <!-- TextBox.property -->
         <Style Selector="TextBox.property">
             <Setter Property="Padding" Value="0,0,0,0"/>
-            <Setter Property="Margin" Value="3,1,3,1"/>
+            <Setter Property="Margin" Value="3,0,3,0"/>
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="Background" Value="#FFFFFFFF"/>
             <Setter Property="TextAlignment" Value="Left"/>

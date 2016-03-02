@@ -79,7 +79,6 @@ namespace Core2D.Perspex
 #else
             InitializeSubsystems((int)Environment.OSVersion.Platform);
 #endif
-            Styles = new DefaultTheme();
             InitializeComponent();
         }
 
