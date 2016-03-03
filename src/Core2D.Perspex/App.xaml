@@ -99,8 +99,8 @@
             <Setter Property="Background" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
         </Style>
-        <!-- Button.recent -->
-        <Style Selector="Button.recent">
+        <!-- Button.link -->
+        <Style Selector="Button.link">
             <Setter Property="Margin" Value="2"/>
             <Setter Property="Padding" Value="0"/>
             <Setter Property="FontSize" Value="12"/>
@@ -109,16 +109,16 @@
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Foreground" Value="Gray"/>
         </Style>
-        <Style Selector="Button.recent:pointerover">
+        <Style Selector="Button.link:pointerover">
             <Setter Property="Foreground" Value="Black"/>
         </Style>
-        <Style Selector="Button.recent:pressed">
+        <Style Selector="Button.link:pressed">
             <Setter Property="Foreground" Value="Black"/>
         </Style>
-        <Style Selector="Button.recent:pointerover /template/ Border#border">
+        <Style Selector="Button.link:pointerover /template/ Border#border">
             <Setter Property="Background" Value="Transparent"/>
         </Style>
-        <Style Selector="Button.recent:pressed /template/ Border#border">
+        <Style Selector="Button.link:pressed /template/ Border#border">
             <Setter Property="Background" Value="Transparent"/>
         </Style>
         <!-- CheckBox.default -->
