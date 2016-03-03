@@ -21,14 +21,12 @@
         <ListBox Items="{Binding Path=RecentProjects}" SelectedItem="{Binding Path=CurrentRecentProject, Mode=TwoWay}" Classes="recents" Grid.Column="3" Grid.Row="3" Grid.ColumnSpan="1" Grid.RowSpan="5">
             <ListBox.DataTemplates>
                 <DataTemplate DataType="Recent:RecentFile">
-                    <Grid ColumnDefinitions="*,Auto">
-                        <!--
+                    <Grid Name="grid" ColumnDefinitions="*,Auto">
                         <i:Interaction.Behaviors>
                             <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #grid}">
                                 <ia:InvokeCommandAction Command="{Static Editor:Commands.OpenCommand}" CommandParameter="{Binding Path=Path}"/>
                             </ia:EventTriggerBehavior>
                         </i:Interaction.Behaviors>
-                        -->
                         <TextBlock Text="{Binding Path=Name}" Classes="recents" Grid.Column="0" ToolTip.Tip="{Binding Path=Path}"/>
                         <Button Content="open" Classes="recent" Grid.Column="1" Command="{Static Editor:Commands.OpenCommand}" CommandParameter="{Binding Path=Path}"/>
                     </Grid>
