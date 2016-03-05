@@ -63,7 +63,6 @@ namespace Core2D.Perspex.Controls.PanAndZoom
             if (element != null)
             {
                 _element = element;
-                this.Focus();
                 this.PointerWheelChanged += Border_PointerWheelChanged;
                 this.PointerPressed += Border_PointerPressed;
                 this.PointerReleased += Border_PointerReleased;

@@ -78,7 +78,6 @@ namespace Core2D.Perspex.Controls.Editor
 
                     if (e.MouseButton == MouseButton.Left)
                     {
-                        this.Focus();
                         if (_editor.IsLeftDownAvailable())
                         {
                             _editor.LeftDown(p.X, p.Y);
@@ -88,7 +87,6 @@ namespace Core2D.Perspex.Controls.Editor
                     if (e.MouseButton == MouseButton.Right)
                     {
                         this.Cursor = new Cursor(StandardCursorType.Hand);
-                        this.Focus();
                         if (_editor.IsRightDownAvailable())
                         {
                             _editor.RightDown(p.X, p.Y);
@@ -104,7 +102,6 @@ namespace Core2D.Perspex.Controls.Editor
 
                     if (e.MouseButton == MouseButton.Left)
                     {
-                        this.Focus();
                         if (_editor.IsLeftUpAvailable())
                         {
                             _editor.LeftUp(p.X, p.Y);
@@ -114,7 +111,6 @@ namespace Core2D.Perspex.Controls.Editor
                     if (e.MouseButton == MouseButton.Right)
                     {
                         this.Cursor = new Cursor(StandardCursorType.Arrow);
-                        this.Focus();
                         if (_editor.IsRightUpAvailable())
                         {
                             _editor.RightUp(p.X, p.Y);
