@@ -27,17 +27,13 @@ namespace Core2D.Editor.Input
         /// <inheritdoc/>
         public override bool CanExecute(object parameter)
         {
-            if (_canExecute == null)
-                return true;
-            return _canExecute(parameter as T);
+            return _canExecute?.Invoke(parameter as T) ?? true;
         }
 
         /// <inheritdoc/>
         public override void Execute(object parameter)
         {
-            if (_execute == null)
-                return;
-            _execute(parameter as T);
+            _execute?.Invoke(parameter as T);
         }
 
         /// <summary>

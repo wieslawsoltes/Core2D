@@ -36,11 +36,7 @@ namespace Core2D.Editor.Input
         /// </summary>
         public virtual void NotifyCanExecuteChanged()
         {
-            var handler = CanExecuteChanged;
-            if (handler != null)
-            {
-                handler(this, EventArgs.Empty);
-            }
+            CanExecuteChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 }
