@@ -685,7 +685,7 @@ namespace Core2D.Wpf
         /// <summary>
         /// Close application view.
         /// </summary>
-        public void OnExit()
+        public void OnCloseView()
         {
             _mainWindow?.Close();
         }

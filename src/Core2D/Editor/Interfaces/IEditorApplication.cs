@@ -121,6 +121,6 @@ namespace Core2D.Editor.Interfaces
         /// <summary>
         /// Close application view.
         /// </summary>
-        void OnExit();
+        void OnCloseView();
     }
 }

@@ -4293,7 +4293,7 @@ namespace Core2D.Editor
 
             Commands.ExitCommand =
                 Command.Create(
-                    () => Application?.OnExit(),
+                    () => Application?.OnCloseView(),
                     () => true);
 
             Commands.ImportDataCommand =

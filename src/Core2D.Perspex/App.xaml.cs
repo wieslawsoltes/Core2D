@@ -707,7 +707,7 @@ namespace Core2D.Perspex
         }
 
         /// <inheritdoc/>
-        public void OnExit()
+        public void OnCloseView()
         {
             _mainWindow?.Close();
         }
