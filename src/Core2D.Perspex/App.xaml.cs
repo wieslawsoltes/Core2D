@@ -18,7 +18,6 @@ using Perspex;
 using Perspex.Controls;
 using Perspex.Diagnostics;
 using Perspex.Markup.Xaml;
-using Perspex.Themes.Default;
 #if SKIA_WIN
 using Perspex.Win32;
 using Perspex.Skia;
