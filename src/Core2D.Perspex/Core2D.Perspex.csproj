@@ -399,6 +399,7 @@
     <Compile Include="Interactions\Behaviors\FocusOnPointerMovedBehavior.cs" />
     <Compile Include="Interactions\Behaviors\FocusOnPointerPressedBehavior.cs" />
     <Compile Include="Interactions\Behaviors\SelectListBoxItemOnPointerMovedBehavior.cs" />
+    <Compile Include="Interactions\Behaviors\ToggleIsExpandedOnDoubleTappedBehavior.cs" />
     <Compile Include="Util\PerspexCommandManager.cs" />
     <Compile Include="Util\PerspexFileSystem.cs" />
     <Compile Include="Windows\MainWindow.xaml.cs">
