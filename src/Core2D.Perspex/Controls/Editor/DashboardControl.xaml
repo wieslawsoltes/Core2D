@@ -37,6 +37,7 @@
                 <DataTemplate DataType="Recent:RecentFile">
                     <Grid Name="grid">
                         <i:Interaction.Behaviors>
+                            <behaviors:SelectListBoxItemOnPointerMovedBehavior/>
                             <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #grid}">
                                 <ia:InvokeCommandAction Command="{Static Editor:Commands.OpenCommand}" CommandParameter="{Binding Path}"/>
                             </ia:EventTriggerBehavior>
