@@ -394,6 +394,7 @@
     <Compile Include="Converters\ObjectEqualsConverter.cs" />
     <Compile Include="Converters\ObjectToObjectConverter.cs" />
     <Compile Include="Converters\ObjectToTypeStringConverter.cs" />
+    <Compile Include="Interactions\Actions\FocusControlAction.cs" />
     <Compile Include="Util\PerspexCommandManager.cs" />
     <Compile Include="Util\PerspexFileSystem.cs" />
     <Compile Include="Windows\MainWindow.xaml.cs">
