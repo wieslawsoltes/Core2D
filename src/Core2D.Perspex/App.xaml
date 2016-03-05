@@ -250,6 +250,37 @@
             <Setter Property="IsSnapToTickEnabled" Value="True"/>
             <Setter Property="TickFrequency" Value="0.1"/>
         </Style>
+        <!-- TabControl -->
+        <Style Selector="TabControl.default">
+            <Setter Property="Margin" Value="0"/>
+        </Style>
+        <Style Selector="TabControl.top">
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="TabStripPlacement" Value="Top"/>
+        </Style>
+        <Style Selector="TabControl.bottom">
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="TabStripPlacement" Value="Bottom"/>
+        </Style>
+        <Style Selector="TabControl.left">
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="TabStripPlacement" Value="Left"/>
+        </Style>
+        <Style Selector="TabControl.right">
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="TabStripPlacement" Value="Right"/>
+        </Style>
+        <!-- TabItem -->
+        <Style Selector="TabItem.property">
+            <Setter Property="Margin" Value="3"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+        </Style>
+        <Style Selector="TabStripItem">
+            <Setter Property="Margin" Value="3"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+        </Style>
         <!-- TextBlock -->
         <Style Selector="TextBlock.default">
             <Setter Property="Margin" Value="1"/>
@@ -365,37 +396,6 @@
         <Style Selector="TextBox.property:focus /template/ Border#border">
             <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
-        </Style>
-        <!-- TabControl -->
-        <Style Selector="TabControl.default">
-            <Setter Property="Margin" Value="0"/>
-        </Style>
-        <Style Selector="TabControl.top">
-            <Setter Property="Margin" Value="0"/>
-            <Setter Property="TabStripPlacement" Value="Top"/>
-        </Style>
-        <Style Selector="TabControl.bottom">
-            <Setter Property="Margin" Value="0"/>
-            <Setter Property="TabStripPlacement" Value="Bottom"/>
-        </Style>
-        <Style Selector="TabControl.left">
-            <Setter Property="Margin" Value="0"/>
-            <Setter Property="TabStripPlacement" Value="Left"/>
-        </Style>
-        <Style Selector="TabControl.right">
-            <Setter Property="Margin" Value="0"/>
-            <Setter Property="TabStripPlacement" Value="Right"/>
-        </Style>
-        <!-- TabItem -->
-        <Style Selector="TabItem.property">
-            <Setter Property="Margin" Value="3"/>
-            <Setter Property="FontSize" Value="12"/>
-            <Setter Property="FontWeight" Value="Normal"/>
-        </Style>
-        <Style Selector="TabStripItem">
-            <Setter Property="Margin" Value="3"/>
-            <Setter Property="FontSize" Value="12"/>
-            <Setter Property="FontWeight" Value="Normal"/>
         </Style>
         <!-- ToolTip -->
         <Style Selector="ToolTip">
