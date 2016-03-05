@@ -395,6 +395,10 @@
     <Compile Include="Converters\ObjectToObjectConverter.cs" />
     <Compile Include="Converters\ObjectToTypeStringConverter.cs" />
     <Compile Include="Interactions\Actions\FocusControlAction.cs" />
+    <Compile Include="Interactions\Behaviors\FocusOnAttachedToVisualTreeBehavior.cs" />
+    <Compile Include="Interactions\Behaviors\FocusOnPointerMovedBehavior.cs" />
+    <Compile Include="Interactions\Behaviors\FocusOnPointerPressedBehavior.cs" />
+    <Compile Include="Interactions\Behaviors\SelectListBoxItemOnPointerMovedBehavior.cs" />
     <Compile Include="Util\PerspexCommandManager.cs" />
     <Compile Include="Util\PerspexFileSystem.cs" />
     <Compile Include="Windows\MainWindow.xaml.cs">
