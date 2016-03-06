@@ -22,8 +22,8 @@
              xmlns:style="clr-namespace:Core2D.Perspex.Controls.Style;assembly=Core2D.Perspex">
     <Application.Styles>
         <!-- Theme -->
-        <StyleInclude Source="resm:Perspex.Themes.Default.DefaultTheme.paml?assembly=Perspex.Themes.Default"/>
-        <StyleInclude Source="resm:Perspex.Themes.Default.Accents.BaseLight.paml?assembly=Perspex.Themes.Default"/>
+        <StyleInclude Source="resm:Perspex.Themes.Default.DefaultTheme.xaml?assembly=Perspex.Themes.Default"/>
+        <StyleInclude Source="resm:Perspex.Themes.Default.Accents.BaseLight.xaml?assembly=Perspex.Themes.Default"/>
         <!-- Resources -->
         <Style>
             <Style.Resources>
