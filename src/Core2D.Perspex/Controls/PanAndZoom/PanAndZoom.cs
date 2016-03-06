@@ -17,19 +17,30 @@ namespace Core2D.Perspex.Controls.PanAndZoom
         private Point _previous;
         private Matrix _matrix;
 
-        public double ZoomSpeed { get; set; }
-
-        public AutoFitMode AutoFitMode { get; set; }
-
         public Action<double, double, double> InvalidatedChild { get; set; }
+
+        public static PerspexProperty<double> ZoomSpeedProperty =
+            PerspexProperty.Register<PanAndZoom, double>("ZoomSpeed", 1.2);
+
+        public double ZoomSpeed
+        {
+            get { return GetValue(ZoomSpeedProperty); }
+            set { SetValue(ZoomSpeedProperty, value); }
+        }
+
+        public static PerspexProperty<AutoFitMode> AutoFitModeProperty =
+            PerspexProperty.Register<PanAndZoom, AutoFitMode>("AutoFitMode", AutoFitMode.None);
+
+        public AutoFitMode AutoFitMode
+        {
+            get { return GetValue(AutoFitModeProperty); }
+            set { SetValue(AutoFitModeProperty, value); }
+        }
 
         public PanAndZoom()
             : base()
         {
             _matrix = MatrixHelper.Identity;
-
-            ZoomSpeed = 1.2;
-            AutoFitMode = AutoFitMode.None;
 
             Focusable = true;
             Background = Brushes.Transparent;
