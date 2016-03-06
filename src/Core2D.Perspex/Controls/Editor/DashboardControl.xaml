@@ -35,7 +35,7 @@
         <ListBox Items="{Binding RecentProjects}" SelectedItem="{Binding CurrentRecentProject, Mode=TwoWay}" Classes="recents" Grid.Column="3" Grid.Row="3" Grid.ColumnSpan="1" Grid.RowSpan="5">
             <ListBox.DataTemplates>
                 <DataTemplate DataType="Recent:RecentFile">
-                    <Grid Name="grid">
+                    <Grid Name="grid" Cursor="Hand">
                         <i:Interaction.Behaviors>
                             <behaviors:SelectListBoxItemOnPointerMovedBehavior/>
                             <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #grid}">
