@@ -16,15 +16,15 @@
         <TabItem Header="Size" Classes="property">
             <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,50,*">
                 <TextBlock Text="Width" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                <TextBox Text="{Binding Path=Width, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                <TextBox Text="{Binding Width, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
                 <Slider Classes="slider" Value="{Binding Width, Mode=TwoWay}" Minimum="0" Maximum="10000"  Grid.Row="0" Grid.Column="2"/>
                 <TextBlock Text="Height" Classes="left" Grid.Row="1" Grid.Column="0"/>
-                <TextBox Text="{Binding Path=Height, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
+                <TextBox Text="{Binding Height, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
                 <Slider Classes="slider" Value="{Binding Height, Mode=TwoWay}" Minimum="0" Maximum="10000" Grid.Row="1" Grid.Column="2"/>
             </Grid>
         </TabItem>
         <TabItem Header="Background" Classes="property">
-            <ContentControl Content="{Binding Path=Background, Mode=TwoWay}"/>
+            <ContentControl Content="{Binding Background, Mode=TwoWay}"/>
         </TabItem>
     </TabControl>
 </UserControl>

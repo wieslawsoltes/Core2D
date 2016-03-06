@@ -11,7 +11,7 @@
              Design.Width="250" Design.Height="400">
     <Grid RowDefinitions="Auto,*" ColumnDefinitions="Auto,*">
         <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
-        <TextBox Text="{Binding Path=Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+        <TextBox Text="{Binding Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
         <TabControl IsVisible="{Binding IsTemplate}" Classes="default" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
             <TabItem Header="Layers" Classes="property">
                 <project:LayersControl/>

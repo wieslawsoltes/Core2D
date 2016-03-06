@@ -12,24 +12,24 @@
         <TabItem Header="Path" Classes="property">
             <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto,*">
                 <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                <TextBox Text="{Binding Path=Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                <TextBox Text="{Binding Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
                 <TextBlock Text="IsStroked" Classes="left" Grid.Row="1" Grid.Column="0"/>
-                <CheckBox IsChecked="{Binding Path=IsStroked, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
+                <CheckBox IsChecked="{Binding IsStroked, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
                 <TextBlock Text="IsFilled" Classes="left" Grid.Row="2" Grid.Column="0"/>
-                <CheckBox IsChecked="{Binding Path=IsFilled, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
+                <CheckBox IsChecked="{Binding IsFilled, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
             </Grid>
         </TabItem>
         <TabItem Header="Geometry" Classes="property">
-            <ContentControl Content="{Binding Path=Geometry, Mode=TwoWay}"/>
+            <ContentControl Content="{Binding Geometry, Mode=TwoWay}"/>
         </TabItem>
         <TabItem Header="State" Classes="property">
-            <ContentControl Content="{Binding Path=State, Mode=TwoWay}"/>
+            <ContentControl Content="{Binding State, Mode=TwoWay}"/>
         </TabItem>
         <TabItem Header="Data" Classes="property">
-            <ContentControl Content="{Binding Path=Data, Mode=TwoWay}"/>
+            <ContentControl Content="{Binding Data, Mode=TwoWay}"/>
         </TabItem>
         <TabItem Header="Style" Classes="property">
-            <ContentControl Content="{Binding Path=Style, Mode=TwoWay}"/>
+            <ContentControl Content="{Binding Style, Mode=TwoWay}"/>
         </TabItem>
     </TabControl>
 </UserControl>

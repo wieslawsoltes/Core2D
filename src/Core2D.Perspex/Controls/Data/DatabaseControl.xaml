@@ -13,7 +13,7 @@
         <TabItem Header="Database" Classes="property">
             <Grid RowDefinitions="Auto,*" ColumnDefinitions="Auto,*">
                 <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                <TextBox Text="{Binding Path=Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                <TextBox Text="{Binding Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
                 <data:RecordsControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"/>
             </Grid>
         </TabItem>
@@ -21,7 +21,7 @@
             <data:ColumnsControl/>
         </TabItem>
         <TabItem Header="Record" Classes="property">
-            <ContentControl Content="{Binding Path=CurrentRecord, Mode=TwoWay}"/>
+            <ContentControl Content="{Binding CurrentRecord, Mode=TwoWay}"/>
         </TabItem>
     </TabControl>
 </UserControl>

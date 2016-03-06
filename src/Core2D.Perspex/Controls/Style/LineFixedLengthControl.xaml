@@ -12,24 +12,24 @@
         <TabItem Header="FixedLength" Classes="property">
             <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,50,*">
                 <TextBlock Text="Length" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                <TextBox Text="{Binding Path=Length, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                <TextBox Text="{Binding Length, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
                 <Slider Classes="slider" Value="{Binding Length, Mode=TwoWay}" Minimum="0" Maximum="30" Grid.Row="0" Grid.Column="2"/>
                 <TextBlock Text="Flags" Classes="left" Grid.Row="1" Grid.Column="0"/>
                 <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
-                    <CheckBox Content="Disabled" IsChecked="{Binding Path=Disabled, Mode=TwoWay}" Classes="default"/>
-                    <CheckBox Content="Start" IsChecked="{Binding Path=Start, Mode=TwoWay}" Classes="default"/>
-                    <CheckBox Content="End" IsChecked="{Binding Path=End, Mode=TwoWay}" Classes="default"/>
-                    <CheckBox Content="Vertical" IsChecked="{Binding Path=Vertical, Mode=TwoWay}" Classes="default"/>
-                    <CheckBox Content="Horizontal" IsChecked="{Binding Path=Horizontal, Mode=TwoWay}" Classes="default"/>
-                    <CheckBox Content="All" IsChecked="{Binding Path=All, Mode=TwoWay}" Classes="default"/>
+                    <CheckBox Content="Disabled" IsChecked="{Binding Disabled, Mode=TwoWay}" Classes="default"/>
+                    <CheckBox Content="Start" IsChecked="{Binding Start, Mode=TwoWay}" Classes="default"/>
+                    <CheckBox Content="End" IsChecked="{Binding End, Mode=TwoWay}" Classes="default"/>
+                    <CheckBox Content="Vertical" IsChecked="{Binding Vertical, Mode=TwoWay}" Classes="default"/>
+                    <CheckBox Content="Horizontal" IsChecked="{Binding Horizontal, Mode=TwoWay}" Classes="default"/>
+                    <CheckBox Content="All" IsChecked="{Binding All, Mode=TwoWay}" Classes="default"/>
                 </StackPanel>
             </Grid>
         </TabItem>
         <TabItem Header="StartTrigger" Classes="property">
-            <ContentControl Content="{Binding Path=StartTrigger, Mode=TwoWay}"/>
+            <ContentControl Content="{Binding StartTrigger, Mode=TwoWay}"/>
         </TabItem>
         <TabItem Header="EndTrigger" Classes="property">
-            <ContentControl Content="{Binding Path=EndTrigger, Mode=TwoWay}"/>
+            <ContentControl Content="{Binding EndTrigger, Mode=TwoWay}"/>
         </TabItem>
     </TabControl>
 </UserControl>

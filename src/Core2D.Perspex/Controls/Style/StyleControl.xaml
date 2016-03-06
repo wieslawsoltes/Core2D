@@ -11,16 +11,16 @@
              Design.Width="250" Design.Height="400">
     <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,50,*">
         <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
-        <TextBox Text="{Binding Path=Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"/>
+        <TextBox Text="{Binding Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"/>
         <TextBlock Text="Thickness" Classes="left" Grid.Row="1" Grid.Column="0"/>
-        <TextBox Text="{Binding Path=Thickness, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
+        <TextBox Text="{Binding Thickness, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
         <Slider Classes="slider" Value="{Binding Thickness, Mode=TwoWay}" Minimum="0" Maximum="30" Grid.Row="1" Grid.Column="2"/>
         <TextBlock Text="Line Cap" Classes="left" Grid.Row="2" Grid.Column="0"/>
-        <DropDown Items="{Static Editor:Enums.LineCapValues}" SelectedItem="{Binding Path=LineCap, Mode=TwoWay}" Classes="default" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"/>
+        <DropDown Items="{Static Editor:Enums.LineCapValues}" SelectedItem="{Binding LineCap, Mode=TwoWay}" Classes="default" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"/>
         <TextBlock Text="Dashes" Classes="left" Grid.Row="3" Grid.Column="0"/>
-        <TextBox Text="{Binding Path=Dashes, Mode=TwoWay}" Classes="left" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"/>
+        <TextBox Text="{Binding Dashes, Mode=TwoWay}" Classes="left" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"/>
         <TextBlock Text="Dash Offset" Classes="left" Grid.Row="4" Grid.Column="0"/>
-        <TextBox Text="{Binding Path=DashOffset, Mode=TwoWay}" Classes="left" Grid.Row="4" Grid.Column="1"/>
+        <TextBox Text="{Binding DashOffset, Mode=TwoWay}" Classes="left" Grid.Row="4" Grid.Column="1"/>
         <Slider Classes="slider" Value="{Binding DashOffset, Mode=TwoWay}" Minimum="0" Maximum="20" Grid.Row="4" Grid.Column="2"/>
     </Grid>
 </UserControl>

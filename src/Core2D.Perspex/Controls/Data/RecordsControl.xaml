@@ -12,11 +12,11 @@
              Design.Width="250" Design.Height="400">
     <Grid RowDefinitions="Auto,Auto,*">
         <Menu Grid.Row="1" HorizontalAlignment="Right">
-            <MenuItem Header="apply" Command="{Static Editor:Commands.ApplyRecordCommand}" CommandParameter="{Binding Path=CurrentRecord}"/>
+            <MenuItem Header="apply" Command="{Static Editor:Commands.ApplyRecordCommand}" CommandParameter="{Binding CurrentRecord}"/>
             <MenuItem Header="+" Command="{Static Editor:Commands.AddRecordCommand}" CommandParameter="{Binding}"/>
-            <MenuItem Header="-" Command="{Static Editor:Commands.RemoveRecordCommand}" CommandParameter="{Binding Path=CurrentRecord}"/>
+            <MenuItem Header="-" Command="{Static Editor:Commands.RemoveRecordCommand}" CommandParameter="{Binding CurrentRecord}"/>
         </Menu>
-        <ListBox Items="{Binding Path=Records}" SelectedItem="{Binding Path=CurrentRecord, Mode=TwoWay}" Grid.Row="2" Classes="default">
+        <ListBox Items="{Binding Records}" SelectedItem="{Binding CurrentRecord, Mode=TwoWay}" Grid.Row="2" Classes="default">
             <ListBox.DataTemplates>
                 <DataTemplate DataType="Database:XRecord">
                     <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="default"/>

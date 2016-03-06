@@ -15,11 +15,11 @@
             <MenuItem Header="+" Command="{Static Editor:Commands.AddColumnCommand}" CommandParameter="{Binding}"/>
         </Menu>
         <TextBlock Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" Text="Name" Classes="default"/>
-        <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="2" Items="{Binding Path=Columns}">
+        <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="2" Items="{Binding Columns}">
             <ItemsControl.DataTemplates>
                 <DataTemplate DataType="Database:XColumn">
                     <Grid VerticalAlignment="Top" ColumnDefinitions="*,30">
-                        <TextBox VerticalAlignment="Center" Text="{Binding Path=Name, Mode=TwoWay}" Classes="property" Grid.Column="0"/>
+                        <TextBox VerticalAlignment="Center" Text="{Binding Name, Mode=TwoWay}" Classes="property" Grid.Column="0"/>
                         <Button VerticalAlignment="Center" Content="-" Classes="property" Grid.Column="1" Command="{Static Editor:Commands.RemoveColumnCommand}" CommandParameter="{Binding}"/>
                     </Grid>
                 </DataTemplate>

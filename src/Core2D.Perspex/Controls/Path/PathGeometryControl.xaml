@@ -14,18 +14,18 @@
         <TabItem Header="PathGeometry" Classes="property">
             <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*">
                 <TextBlock Text="FillRule" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                <DropDown Items="{Static Editor:Enums.XFillRuleValues}" SelectedItem="{Binding Path=FillRule, Mode=TwoWay}" Classes="default" Grid.Row="0" Grid.Column="1"/>
+                <DropDown Items="{Static Editor:Enums.XFillRuleValues}" SelectedItem="{Binding FillRule, Mode=TwoWay}" Classes="default" Grid.Row="0" Grid.Column="1"/>
             </Grid>
         </TabItem>
         <TabItem Header="Figures" Classes="property">
-            <TreeView Name="tree" Items="{Binding Path=Figures}" Classes="default">
+            <TreeView Name="tree" Items="{Binding Figures}" Classes="default">
                 <TreeView.Styles>
                     <Style Selector="TreeViewItem">
                         <Setter Property="IsExpanded" Value="True"/>
                     </Style>
                 </TreeView.Styles>
                 <TreeView.DataTemplates>
-                    <TreeDataTemplate DataType="Path:XPathFigure" ItemsSource="{Binding Path=Segments}">
+                    <TreeDataTemplate DataType="Path:XPathFigure" ItemsSource="{Binding Segments}">
                         <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="default"/>
                     </TreeDataTemplate>
                     <DataTemplate DataType="Path:XPathSegment">
@@ -35,7 +35,7 @@
             </TreeView>
         </TabItem>
         <TabItem Header="Selected" Classes="property">
-            <ContentControl Content="{Binding Path=#tree.SelectedItem, Mode=TwoWay}"/>
+            <ContentControl Content="{Binding #tree.SelectedItem, Mode=TwoWay}"/>
         </TabItem>
     </TabControl>
 </UserControl>

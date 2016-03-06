@@ -11,19 +11,19 @@
              Design.Width="250" Design.Height="400">
     <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,50,*">
         <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
-        <TextBox Text="{Binding Path=Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"/>
+        <TextBox Text="{Binding Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"/>
         <TextBlock Text="FontName" Classes="left" Grid.Row="1" Grid.Column="0"/>
-        <TextBox Text="{Binding Path=FontName, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"/>
+        <TextBox Text="{Binding FontName, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"/>
         <TextBlock Text="FontFile" Classes="left" Grid.Row="2" Grid.Column="0"/>
-        <TextBox Text="{Binding Path=FontFile, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"/>
+        <TextBox Text="{Binding FontFile, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"/>
         <TextBlock Text="FontSize" Classes="left" Grid.Row="3" Grid.Column="0"/>
-        <TextBox Text="{Binding Path=FontSize, Mode=TwoWay}" Classes="left" Grid.Row="3" Grid.Column="1"/>
+        <TextBox Text="{Binding FontSize, Mode=TwoWay}" Classes="left" Grid.Row="3" Grid.Column="1"/>
         <Slider Classes="slider" Value="{Binding FontSize, Mode=TwoWay}" Minimum="0" Maximum="72" Grid.Row="3" Grid.Column="2"/>
         <TextBlock Text="FontStyle" Classes="left" Grid.Row="4" Grid.Column="0"/>
-        <ContentControl Content="{Binding Path=FontStyle, Mode=TwoWay}" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2"/>
+        <ContentControl Content="{Binding FontStyle, Mode=TwoWay}" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2"/>
         <TextBlock Text="HAlignment" Classes="left" Grid.Row="5" Grid.Column="0"/>
-        <DropDown Items="{Static Editor:Enums.TextHAlignmentValues}" SelectedItem="{Binding Path=TextHAlignment, Mode=TwoWay}" Classes="default" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2"/>
+        <DropDown Items="{Static Editor:Enums.TextHAlignmentValues}" SelectedItem="{Binding TextHAlignment, Mode=TwoWay}" Classes="default" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2"/>
         <TextBlock Text="VAlignment" Classes="left" Grid.Row="6" Grid.Column="0"/>
-        <DropDown Items="{Static Editor:Enums.TextVAlignmentValues}" SelectedItem="{Binding Path=TextVAlignment, Mode=TwoWay}" Classes="default" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2"/>
+        <DropDown Items="{Static Editor:Enums.TextVAlignmentValues}" SelectedItem="{Binding TextVAlignment, Mode=TwoWay}" Classes="default" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2"/>
     </Grid>
 </UserControl>

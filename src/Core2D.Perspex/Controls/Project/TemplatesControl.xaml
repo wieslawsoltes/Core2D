@@ -12,19 +12,19 @@
              Design.Width="250" Design.Height="400">
     <Grid RowDefinitions="Auto,Auto,*">
         <Menu Grid.Row="0" HorizontalAlignment="Right">
-            <MenuItem Header="apply" Command="{Static Editor:Commands.ApplyTemplateCommand}" CommandParameter="{Binding Path=CurrentTemplate}"/>
-            <MenuItem Header="edit" Command="{Static Editor:Commands.EditTemplateCommand}" CommandParameter="{Binding Path=CurrentTemplate}"/>
+            <MenuItem Header="apply" Command="{Static Editor:Commands.ApplyTemplateCommand}" CommandParameter="{Binding CurrentTemplate}"/>
+            <MenuItem Header="edit" Command="{Static Editor:Commands.EditTemplateCommand}" CommandParameter="{Binding CurrentTemplate}"/>
             <MenuItem Header="+" Command="{Static Editor:Commands.AddTemplateCommand}"/>
-            <MenuItem Header="-" Command="{Static Editor:Commands.RemoveTemplateCommand}" CommandParameter="{Binding Path=CurrentTemplate}"/>
+            <MenuItem Header="-" Command="{Static Editor:Commands.RemoveTemplateCommand}" CommandParameter="{Binding CurrentTemplate}"/>
         </Menu>
         <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="1">
             <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
-            <TextBox Text="{Binding Path=CurrentTemplate.Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+            <TextBox Text="{Binding CurrentTemplate.Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
         </Grid>
-        <ListBox Name="templates" Items="{Binding Path=Templates}" SelectedItem="{Binding Path=CurrentTemplate, Mode=TwoWay}" Grid.Row="2" Classes="default">
+        <ListBox Name="templates" Items="{Binding Templates}" SelectedItem="{Binding CurrentTemplate, Mode=TwoWay}" Grid.Row="2" Classes="default">
             <ListBox.DataTemplates>
                 <DataTemplate DataType="Project:XContainer">
-                    <TextBlock Text="{Binding Path=Name, Mode=TwoWay}" Classes="default">
+                    <TextBlock Text="{Binding Name, Mode=TwoWay}" Classes="default">
                         <TextBlock.ContextMenu>
                             <ContextMenu>
                                 <MenuItem Header="_Edit Template" Command="{Static Editor:Commands.EditTemplateCommand}" CommandParameter="{Binding Mode=OneWay}"/>

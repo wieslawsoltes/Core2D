@@ -12,16 +12,16 @@
         <TabItem Header="PolyLineSegment" Classes="property">
             <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*">
                 <TextBlock Text="IsStroked" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                <CheckBox IsChecked="{Binding Path=IsStroked, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                <CheckBox IsChecked="{Binding IsStroked, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
                 <TextBlock Text="IsSmoothJoin" Classes="left" Grid.Row="1" Grid.Column="0"/>
-                <CheckBox IsChecked="{Binding Path=IsSmoothJoin, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
+                <CheckBox IsChecked="{Binding IsSmoothJoin, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
             </Grid>
         </TabItem>
         <TabItem Header="Points" Classes="property">
-            <ListBox Name="points" Items="{Binding Path=Points}" Classes="default"/>
+            <ListBox Name="points" Items="{Binding Points}" Classes="default"/>
         </TabItem>
         <TabItem Header="Selected" Classes="property">
-            <ContentControl Content="{Binding Path=#points.SelectedItem, Mode=TwoWay}"/>
+            <ContentControl Content="{Binding #points.SelectedItem, Mode=TwoWay}"/>
         </TabItem>
     </TabControl>
 </UserControl>

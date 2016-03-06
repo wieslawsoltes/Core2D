@@ -12,21 +12,21 @@
         <TabItem Header="Point" Classes="property">
             <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto,*">
                 <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                <TextBox Text="{Binding Path=Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                <TextBox Text="{Binding Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
                 <TextBlock Text="X" Classes="left" Grid.Row="1" Grid.Column="0"/>
-                <TextBox Text="{Binding Path=X, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
+                <TextBox Text="{Binding X, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
                 <TextBlock Text="Y" Classes="left" Grid.Row="2" Grid.Column="0"/>
-                <TextBox Text="{Binding Path=Y, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
+                <TextBox Text="{Binding Y, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
             </Grid>
         </TabItem>
         <TabItem Header="State" Classes="property">
-            <ContentControl Content="{Binding Path=State, Mode=TwoWay}"/>
+            <ContentControl Content="{Binding State, Mode=TwoWay}"/>
         </TabItem>
         <TabItem Header="Data" Classes="property">
-            <ContentControl Content="{Binding Path=Data, Mode=TwoWay}"/>
+            <ContentControl Content="{Binding Data, Mode=TwoWay}"/>
         </TabItem>
         <TabItem Header="Shape" Classes="property">
-            <ContentControl Content="{Binding Path=Shape, Mode=TwoWay}"/>
+            <ContentControl Content="{Binding Shape, Mode=TwoWay}"/>
         </TabItem>
     </TabControl>
 </UserControl>

@@ -14,20 +14,20 @@
             <ScrollViewer>
                 <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,50,*">
                     <TextBlock Text="SnapToGrid" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                    <CheckBox IsChecked="{Binding Path=SnapToGrid, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"/>
+                    <CheckBox IsChecked="{Binding SnapToGrid, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"/>
                     <TextBlock Text="SnapX" Classes="left" Grid.Row="1" Grid.Column="0"/>
-                    <TextBox Text="{Binding Path=SnapX, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
+                    <TextBox Text="{Binding SnapX, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
                     <Slider Classes="slider" Value="{Binding SnapX, Mode=TwoWay}" Minimum="0" Maximum="30" Grid.Row="1" Grid.Column="2"/>
                     <TextBlock Text="SnapY" Classes="left" Grid.Row="2" Grid.Column="0"/>
-                    <TextBox Text="{Binding Path=SnapY, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
+                    <TextBox Text="{Binding SnapY, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
                     <Slider Classes="slider" Value="{Binding SnapY, Mode=TwoWay}" Minimum="0" Maximum="30" Grid.Row="2" Grid.Column="2"/>
                     <TextBlock Text="HitThreshold" Classes="left" Grid.Row="3" Grid.Column="0"/>
-                    <TextBox Text="{Binding Path=HitThreshold, Mode=TwoWay}" Classes="left" Grid.Row="3" Grid.Column="1"/>
+                    <TextBox Text="{Binding HitThreshold, Mode=TwoWay}" Classes="left" Grid.Row="3" Grid.Column="1"/>
                     <Slider Classes="slider" Value="{Binding HitThreshold, Mode=TwoWay}" Minimum="0" Maximum="30" Grid.Row="3" Grid.Column="2"/>
                     <TextBlock Text="MoveMode" Classes="left" Grid.Row="4" Grid.Column="0"/>
-                    <DropDown Items="{Static Editor:Enums.MoveModeValues}" SelectedItem="{Binding Path=MoveMode, Mode=TwoWay}" Classes="default" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2"/>
+                    <DropDown Items="{Static Editor:Enums.MoveModeValues}" SelectedItem="{Binding MoveMode, Mode=TwoWay}" Classes="default" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2"/>
                     <TextBlock Text="TryToConnect" Classes="left" Grid.Row="5" Grid.Column="0"/>
-                    <CheckBox IsChecked="{Binding Path=TryToConnect, Mode=TwoWay}" Classes="left" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2"/>
+                    <CheckBox IsChecked="{Binding TryToConnect, Mode=TwoWay}" Classes="left" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2"/>
                 </Grid>
             </ScrollViewer>
         </TabItem>
@@ -35,31 +35,31 @@
             <ScrollViewer>
                 <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
                     <TextBlock Text="IsStroked" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                    <CheckBox IsChecked="{Binding Path=DefaultIsStroked, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                    <CheckBox IsChecked="{Binding DefaultIsStroked, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
                     <TextBlock Text="IsFilled" Classes="left" Grid.Row="1" Grid.Column="0"/>
-                    <CheckBox IsChecked="{Binding Path=DefaultIsFilled, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
+                    <CheckBox IsChecked="{Binding DefaultIsFilled, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
                     <TextBlock Text="IsClosed" Classes="left" Grid.Row="2" Grid.Column="0"/>
-                    <CheckBox IsChecked="{Binding Path=DefaultIsClosed, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
+                    <CheckBox IsChecked="{Binding DefaultIsClosed, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
                     <TextBlock Text="IsSmoothJoin" Classes="left" Grid.Row="3" Grid.Column="0"/>
-                    <CheckBox IsChecked="{Binding Path=DefaultIsSmoothJoin, Mode=TwoWay}" Classes="left" Grid.Row="3" Grid.Column="1"/>
+                    <CheckBox IsChecked="{Binding DefaultIsSmoothJoin, Mode=TwoWay}" Classes="left" Grid.Row="3" Grid.Column="1"/>
                     <TextBlock Text="FillRule" Classes="left" Grid.Row="4" Grid.Column="0"/>
-                    <DropDown Items="{Static Editor:Enums.XFillRuleValues}" SelectedItem="{Binding Path=DefaultFillRule, Mode=TwoWay}" Classes="default" Grid.Row="4" Grid.Column="1"/>
+                    <DropDown Items="{Static Editor:Enums.XFillRuleValues}" SelectedItem="{Binding DefaultFillRule, Mode=TwoWay}" Classes="default" Grid.Row="4" Grid.Column="1"/>
                 </Grid>
             </ScrollViewer>
         </TabItem>
         <TabItem Header="Advanced" Classes="property">
             <TabControl Classes="default">
                 <TabItem Header="PointShape" Classes="property">
-                    <ScrollViewer Content="{Binding Path=PointShape, Mode=TwoWay}"/>
+                    <ScrollViewer Content="{Binding PointShape, Mode=TwoWay}"/>
                 </TabItem>
                 <TabItem Header="PointStyle" Classes="property">
-                    <ScrollViewer Content="{Binding Path=PointStyle, Mode=TwoWay}"/>
+                    <ScrollViewer Content="{Binding PointStyle, Mode=TwoWay}"/>
                 </TabItem>
                 <TabItem Header="SelectionStyle" Classes="property">
-                    <ScrollViewer Content="{Binding Path=SelectionStyle, Mode=TwoWay}"/>
+                    <ScrollViewer Content="{Binding SelectionStyle, Mode=TwoWay}"/>
                 </TabItem>
                 <TabItem Header="HelperStyle" Classes="property">
-                    <ScrollViewer Content="{Binding Path=HelperStyle, Mode=TwoWay}"/>
+                    <ScrollViewer Content="{Binding HelperStyle, Mode=TwoWay}"/>
                 </TabItem>
             </TabControl>
         </TabItem>

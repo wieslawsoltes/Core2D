@@ -13,18 +13,18 @@
         <TabItem Header="Layer" Classes="property">
             <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*">
                 <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                <TextBox Text="{Binding Path=Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                <TextBox Text="{Binding Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
                 <TextBlock Text="IsVisible" Classes="left" Grid.Row="1" Grid.Column="0"/>
-                <CheckBox IsChecked="{Binding Path=IsVisible, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
+                <CheckBox IsChecked="{Binding IsVisible, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
             </Grid>
         </TabItem>
         <TabItem Header="Owner" Classes="property">
-            <ContentControl Content="{Binding Path=Owner, Mode=TwoWay}"/>
+            <ContentControl Content="{Binding Owner, Mode=TwoWay}"/>
         </TabItem>
         <TabItem Header="Shapes" Classes="property">
             <TabControl Classes="default">
                 <TabItem Header="Shapes" Classes="property">
-                    <ListBox Name="shapes" Items="{Binding Path=Shapes}" Classes="default">
+                    <ListBox Name="shapes" Items="{Binding Shapes}" Classes="default">
                         <ListBox.DataTemplates>
                             <DataTemplate DataType="Shape:BaseShape">
                                 <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="default"/>
@@ -33,7 +33,7 @@
                     </ListBox>
                 </TabItem>
                 <TabItem Header="Selected" Classes="property">
-                    <ContentControl Content="{Binding Path=#shapes.SelectedItem, Mode=TwoWay}"/>
+                    <ContentControl Content="{Binding #shapes.SelectedItem, Mode=TwoWay}"/>
                 </TabItem>
             </TabControl>
         </TabItem>

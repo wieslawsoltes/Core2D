@@ -9,14 +9,14 @@
              Design.DataContext="{Static Designer:DesignerContext.State}"
              Design.Width="250" Design.Height="400">
     <StackPanel>
-        <CheckBox Content="Default" IsChecked="{Binding Path=Default, Mode=TwoWay}" Classes="default"/>
-        <CheckBox Content="Visible" IsChecked="{Binding Path=Visible, Mode=TwoWay}" Classes="default"/>
-        <CheckBox Content="Printable" IsChecked="{Binding Path=Printable, Mode=TwoWay}" Classes="default"/>
-        <CheckBox Content="Locked" IsChecked="{Binding Path=Locked, Mode=TwoWay}" Classes="default"/>
-        <CheckBox Content="Connector" IsChecked="{Binding Path=Connector, Mode=TwoWay}" Classes="default"/>
-        <CheckBox Content="None" IsChecked="{Binding Path=None, Mode=TwoWay}" Classes="default"/>
-        <CheckBox Content="Standalone" IsChecked="{Binding Path=Standalone, Mode=TwoWay}" Classes="default"/>
-        <CheckBox Content="Input" IsChecked="{Binding Path=Input, Mode=TwoWay}" Classes="default"/>
-        <CheckBox Content="Output" IsChecked="{Binding Path=Output, Mode=TwoWay}" Classes="default"/>
+        <CheckBox Content="Default" IsChecked="{Binding Default, Mode=TwoWay}" Classes="default"/>
+        <CheckBox Content="Visible" IsChecked="{Binding Visible, Mode=TwoWay}" Classes="default"/>
+        <CheckBox Content="Printable" IsChecked="{Binding Printable, Mode=TwoWay}" Classes="default"/>
+        <CheckBox Content="Locked" IsChecked="{Binding Locked, Mode=TwoWay}" Classes="default"/>
+        <CheckBox Content="Connector" IsChecked="{Binding Connector, Mode=TwoWay}" Classes="default"/>
+        <CheckBox Content="None" IsChecked="{Binding None, Mode=TwoWay}" Classes="default"/>
+        <CheckBox Content="Standalone" IsChecked="{Binding Standalone, Mode=TwoWay}" Classes="default"/>
+        <CheckBox Content="Input" IsChecked="{Binding Input, Mode=TwoWay}" Classes="default"/>
+        <CheckBox Content="Output" IsChecked="{Binding Output, Mode=TwoWay}" Classes="default"/>
     </StackPanel>
 </UserControl>

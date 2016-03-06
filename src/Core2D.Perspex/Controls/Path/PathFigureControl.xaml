@@ -12,16 +12,16 @@
         <TabItem Header="PathFigure" Classes="property">
             <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*">
                 <TextBlock Text="IsFilled" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                <CheckBox IsChecked="{Binding Path=IsFilled, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                <CheckBox IsChecked="{Binding IsFilled, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
                 <TextBlock Text="IsClosed" Classes="left" Grid.Row="1" Grid.Column="0"/>
-                <CheckBox IsChecked="{Binding Path=IsClosed, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
+                <CheckBox IsChecked="{Binding IsClosed, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
             </Grid>
         </TabItem>
         <TabItem Header="StartPoint" Classes="property">
-            <ContentControl Content="{Binding Path=StartPoint, Mode=TwoWay}"/>
+            <ContentControl Content="{Binding StartPoint, Mode=TwoWay}"/>
         </TabItem>
         <TabItem Header="Segments" Classes="property">
-            <ListBox Items="{Binding Path=Segments}" Classes="default"/>
+            <ListBox Items="{Binding Segments}" Classes="default"/>
         </TabItem>
     </TabControl>
 </UserControl>

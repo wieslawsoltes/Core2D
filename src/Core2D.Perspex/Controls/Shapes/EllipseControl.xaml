@@ -12,31 +12,31 @@
         <TabItem Header="Ellipse" Classes="property">
             <Grid RowDefinitions="Auto,Auto,Auto,Auto,*" ColumnDefinitions="Auto,*">
                 <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                <TextBox Text="{Binding Path=Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                <TextBox Text="{Binding Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
                 <TextBlock Text="IsStroked" Classes="left" Grid.Row="1" Grid.Column="0"/>
-                <CheckBox IsChecked="{Binding Path=IsStroked, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
+                <CheckBox IsChecked="{Binding IsStroked, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
                 <TextBlock Text="IsFilled" Classes="left" Grid.Row="2" Grid.Column="0"/>
-                <CheckBox IsChecked="{Binding Path=IsFilled, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
+                <CheckBox IsChecked="{Binding IsFilled, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
                 <TextBlock Text="Text" Classes="left" Grid.Row="3" Grid.Column="0"/>
-                <TextBox Text="{Binding Path=Text, Mode=TwoWay}" Classes="left" Grid.Row="3" Grid.Column="1"/>
+                <TextBox Text="{Binding Text, Mode=TwoWay}" Classes="left" Grid.Row="3" Grid.Column="1"/>
                 <TabControl Classes="default" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2">
                     <TabItem Header="TopLeft" Classes="property">
-                        <ContentControl Content="{Binding Path=TopLeft, Mode=TwoWay}"/>
+                        <ContentControl Content="{Binding TopLeft, Mode=TwoWay}"/>
                     </TabItem>
                     <TabItem Header="BottomRight" Classes="property">
-                        <ContentControl Content="{Binding Path=BottomRight, Mode=TwoWay}"/>
+                        <ContentControl Content="{Binding BottomRight, Mode=TwoWay}"/>
                     </TabItem>
                 </TabControl>
             </Grid>
         </TabItem>
         <TabItem Header="State" Classes="property">
-            <ContentControl Content="{Binding Path=State, Mode=TwoWay}"/>
+            <ContentControl Content="{Binding State, Mode=TwoWay}"/>
         </TabItem>
         <TabItem Header="Data" Classes="property">
-            <ContentControl Content="{Binding Path=Data, Mode=TwoWay}"/>
+            <ContentControl Content="{Binding Data, Mode=TwoWay}"/>
         </TabItem>
         <TabItem Header="Style" Classes="property">
-            <ContentControl Content="{Binding Path=Style, Mode=TwoWay}"/>
+            <ContentControl Content="{Binding Style, Mode=TwoWay}"/>
         </TabItem>
     </TabControl>
 </UserControl>

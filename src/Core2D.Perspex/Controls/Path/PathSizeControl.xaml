@@ -10,8 +10,8 @@
              Design.Width="250" Design.Height="400">
     <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*">
         <TextBlock Text="Width" Classes="left" Grid.Row="0" Grid.Column="0"/>
-        <TextBox Text="{Binding Path=Width, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+        <TextBox Text="{Binding Width, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
         <TextBlock Text="Height" Classes="left" Grid.Row="1" Grid.Column="0"/>
-        <TextBox Text="{Binding Path=Height, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
+        <TextBox Text="{Binding Height, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
     </Grid>
 </UserControl>

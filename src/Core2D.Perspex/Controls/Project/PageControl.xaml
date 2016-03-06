@@ -14,10 +14,10 @@
             <project:ContainerControl/>
         </TabItem>
         <TabItem Header="Data" Classes="property">
-            <ContentControl Content="{Binding Path=Data, Mode=TwoWay}"/>
+            <ContentControl Content="{Binding Data, Mode=TwoWay}"/>
         </TabItem>
         <TabItem Header="Template" Classes="property">
-            <project:TemplateControl DataContext="{Binding Path=Template}"/>
+            <project:TemplateControl DataContext="{Binding Template}"/>
         </TabItem>
     </TabControl>
 </UserControl>

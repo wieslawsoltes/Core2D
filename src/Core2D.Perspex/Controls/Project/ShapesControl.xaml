@@ -13,7 +13,7 @@
     <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
         <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="0">
             <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
-            <TextBox Text="{Binding Path=CurrentShape.Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+            <TextBox Text="{Binding CurrentShape.Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
         </Grid>
         <TabControl Classes="default" Grid.Row="1">
             <TabItem Header="Shapes" Classes="property">
@@ -21,7 +21,7 @@
                     <Menu Grid.Row="0" HorizontalAlignment="Right">
                         <MenuItem Header="-" Command="{Static Editor:Commands.RemoveShapeCommand}"/>
                     </Menu>
-                    <ListBox Name="shapes" Items="{Binding Path=CurrentLayer.Shapes}" SelectedItem="{Binding Path=CurrentShape, Mode=TwoWay}" Classes="default" Grid.Row="1">
+                    <ListBox Name="shapes" Items="{Binding CurrentLayer.Shapes}" SelectedItem="{Binding CurrentShape, Mode=TwoWay}" Classes="default" Grid.Row="1">
                         <ListBox.DataTemplates>
                             <DataTemplate DataType="Shape:BaseShape">
                                 <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="default">
@@ -37,7 +37,7 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Selected" Classes="property">
-                <ContentControl Content="{Binding Path=CurrentShape, Mode=TwoWay}"/>
+                <ContentControl Content="{Binding CurrentShape, Mode=TwoWay}"/>
             </TabItem>
         </TabControl>
     </Grid>

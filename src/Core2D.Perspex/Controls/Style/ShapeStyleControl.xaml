@@ -14,24 +14,24 @@
             <style:StyleControl/>
         </TabItem>
         <TabItem Header="Stroke" Classes="property">
-            <ContentControl Content="{Binding Path=Stroke, Mode=TwoWay}"/>
+            <ContentControl Content="{Binding Stroke, Mode=TwoWay}"/>
         </TabItem>
         <TabItem Header="Fill" Classes="property">
-            <ContentControl Content="{Binding Path=Fill, Mode=TwoWay}"/>
+            <ContentControl Content="{Binding Fill, Mode=TwoWay}"/>
         </TabItem>
         <TabItem Header="Text" Classes="property">
-            <ContentControl Content="{Binding Path=TextStyle, Mode=TwoWay}"/>
+            <ContentControl Content="{Binding TextStyle, Mode=TwoWay}"/>
         </TabItem>
         <TabItem Header="Line" Classes="property">
             <TabControl Classes="default">
                 <TabItem Header="StartArrow" Classes="property">
-                    <ContentControl Content="{Binding Path=StartArrowStyle, Mode=TwoWay}"/>
+                    <ContentControl Content="{Binding StartArrowStyle, Mode=TwoWay}"/>
                 </TabItem>
                 <TabItem Header="EndArrow" Classes="property">
-                    <ContentControl Content="{Binding Path=EndArrowStyle, Mode=TwoWay}"/>
+                    <ContentControl Content="{Binding EndArrowStyle, Mode=TwoWay}"/>
                 </TabItem>
                 <TabItem Header="LineStyle" Classes="property">
-                    <ContentControl Content="{Binding Path=LineStyle, Mode=TwoWay}"/>
+                    <ContentControl Content="{Binding LineStyle, Mode=TwoWay}"/>
                 </TabItem>
             </TabControl>
         </TabItem>

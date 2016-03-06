@@ -21,13 +21,13 @@
             <Border Classes="leftTop" Grid.Row="0">
                 <TabControl Classes="bottom">
                     <TabItem Header="Project" Classes="property">
-                        <project:ProjectControl DataContext="{Binding Path=Project, Mode=TwoWay}"/>
+                        <project:ProjectControl DataContext="{Binding Project, Mode=TwoWay}"/>
                     </TabItem>
                     <TabItem Header="Options" Classes="property">
-                        <ContentControl Content="{Binding Path=Project.Options, Mode=TwoWay}"/>
+                        <ContentControl Content="{Binding Project.Options, Mode=TwoWay}"/>
                     </TabItem>
                     <TabItem Header="Images" Classes="property">
-                        <project:ImagesControl DataContext="{Binding Path=Project, Mode=TwoWay}"/>
+                        <project:ImagesControl DataContext="{Binding Project, Mode=TwoWay}"/>
                     </TabItem>
                 </TabControl>
             </Border>
@@ -35,10 +35,10 @@
             <Border Classes="leftBottom" Grid.Row="2">
                 <TabControl Classes="bottom">
                     <TabItem Header="Groups" Classes="property">
-                        <project:GroupsControl DataContext="{Binding Path=Project, Mode=TwoWay}"/>
+                        <project:GroupsControl DataContext="{Binding Project, Mode=TwoWay}"/>
                     </TabItem>
                     <TabItem Header="Databases" Classes="property">
-                        <project:DatabasesControl DataContext="{Binding Path=Project, Mode=TwoWay}"/>
+                        <project:DatabasesControl DataContext="{Binding Project, Mode=TwoWay}"/>
                     </TabItem>
                 </TabControl>
             </Border>
@@ -56,10 +56,10 @@
             <Border Classes="rightTop" Grid.Row="0">
                 <TabControl Classes="bottom">
                     <TabItem Header="Styles" Classes="property">
-                        <project:StylesControl DataContext="{Binding Path=Project, Mode=TwoWay}"/>
+                        <project:StylesControl DataContext="{Binding Project, Mode=TwoWay}"/>
                     </TabItem>
                     <TabItem Header="Templates" Classes="property">
-                        <project:TemplatesControl DataContext="{Binding Path=Project, Mode=TwoWay}"/>
+                        <project:TemplatesControl DataContext="{Binding Project, Mode=TwoWay}"/>
                     </TabItem>
                 </TabControl>
             </Border>
@@ -67,24 +67,24 @@
             <Border Classes="rightBottom" Grid.Row="2">
                 <TabControl Classes="bottom">
                     <TabItem Header="Shape" Classes="property">
-                        <ScrollViewer Content="{Binding Path=Project.CurrentContainer.CurrentShape}"/>
+                        <ScrollViewer Content="{Binding Project.CurrentContainer.CurrentShape}"/>
                     </TabItem>
                     <TabItem Header="Data" Classes="property">
                         <ScrollViewer>
-                            <data:DataControl DataContext="{Binding Path=Renderers[0].State.SelectedShape.Data, Mode=TwoWay}"/>
+                            <data:DataControl DataContext="{Binding Renderers[0].State.SelectedShape.Data, Mode=TwoWay}"/>
                         </ScrollViewer>
                     </TabItem>
                     <TabItem Header="Style" Classes="property">
                         <ScrollViewer>
-                            <style:ShapeStyleControl DataContext="{Binding Path=Project.CurrentStyleLibrary.Selected, Mode=TwoWay}"/>
+                            <style:ShapeStyleControl DataContext="{Binding Project.CurrentStyleLibrary.Selected, Mode=TwoWay}"/>
                         </ScrollViewer>
                     </TabItem>
                     <TabItem Header="Container" Classes="property">
-                        <ScrollViewer Content="{Binding Path=Project.CurrentContainer, Mode=TwoWay}"/>
+                        <ScrollViewer Content="{Binding Project.CurrentContainer, Mode=TwoWay}"/>
                     </TabItem>
                     <TabItem Header="Template" Classes="property">
                         <ScrollViewer>
-                            <project:TemplateControl DataContext="{Binding Path=Project.CurrentTemplate, Mode=TwoWay}"/>
+                            <project:TemplateControl DataContext="{Binding Project.CurrentTemplate, Mode=TwoWay}"/>
                         </ScrollViewer>
                     </TabItem>
                 </TabControl>

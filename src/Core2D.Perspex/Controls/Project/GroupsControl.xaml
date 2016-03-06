@@ -13,13 +13,13 @@
     <Grid RowDefinitions="Auto,Auto,Auto,Auto,*">
         <Menu Grid.Row="0" HorizontalAlignment="Right">
             <MenuItem Header="+" Command="{Static Editor:Commands.AddGroupLibraryCommand}"/>
-            <MenuItem Header="-" Command="{Static Editor:Commands.RemoveGroupLibraryCommand}" CommandParameter="{Binding Path=CurrentGroupLibrary}"/>
+            <MenuItem Header="-" Command="{Static Editor:Commands.RemoveGroupLibraryCommand}" CommandParameter="{Binding CurrentGroupLibrary}"/>
         </Menu>
         <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="1">
             <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
-            <TextBox Text="{Binding Path=CurrentGroupLibrary.Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+            <TextBox Text="{Binding CurrentGroupLibrary.Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
         </Grid>
-        <DropDown Items="{Binding Path=GroupLibraries}" SelectedItem="{Binding Path=CurrentGroupLibrary, Mode=TwoWay}" Classes="default" Grid.Row="2">
+        <DropDown Items="{Binding GroupLibraries}" SelectedItem="{Binding CurrentGroupLibrary, Mode=TwoWay}" Classes="default" Grid.Row="2">
             <DropDown.DataTemplates>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}" Classes="default"/>
@@ -27,17 +27,17 @@
             </DropDown.DataTemplates>
         </DropDown>
         <Menu Grid.Row="3" HorizontalAlignment="Right">
-            <MenuItem Header="insert" Command="{Static Editor:Commands.InsertGroupCommand}" CommandParameter="{Binding Path=CurrentGroupLibrary.Selected}"/>
-            <MenuItem Header="+" Command="{Static Editor:Commands.AddGroupCommand}" CommandParameter="{Binding Path=CurrentGroupLibrary}"/>
-            <MenuItem Header="-" Command="{Static Editor:Commands.RemoveGroupCommand}" CommandParameter="{Binding Path=CurrentGroupLibrary.Selected}"/>
+            <MenuItem Header="insert" Command="{Static Editor:Commands.InsertGroupCommand}" CommandParameter="{Binding CurrentGroupLibrary.Selected}"/>
+            <MenuItem Header="+" Command="{Static Editor:Commands.AddGroupCommand}" CommandParameter="{Binding CurrentGroupLibrary}"/>
+            <MenuItem Header="-" Command="{Static Editor:Commands.RemoveGroupCommand}" CommandParameter="{Binding CurrentGroupLibrary.Selected}"/>
         </Menu>
-        <ListBox Name="groups" Items="{Binding Path=CurrentGroupLibrary.Items}" SelectedItem="{Binding Path=CurrentGroupLibrary.Selected, Mode=TwoWay}" Grid.Row="4" Classes="default">
+        <ListBox Name="groups" Items="{Binding CurrentGroupLibrary.Items}" SelectedItem="{Binding CurrentGroupLibrary.Selected, Mode=TwoWay}" Grid.Row="4" Classes="default">
             <ListBox.DataTemplates>
                 <DataTemplate DataType="Shapes:XGroup">
-                    <TextBlock Text="{Binding Path=Name}" Classes="default">
+                    <TextBlock Text="{Binding Name}" Classes="default">
                         <TextBlock.ContextMenu>
                             <ContextMenu>
-                                <MenuItem Header="_Add Group" Command="{Static Editor:Commands.AddGroupCommand}" CommandParameter="{Binding Path=DataContext.CurrentGroupLibrary, ElementName=groups, Mode=OneWay}"/>
+                                <MenuItem Header="_Add Group" Command="{Static Editor:Commands.AddGroupCommand}" CommandParameter="{Binding #groups.DataContext.CurrentGroupLibrary, Mode=OneWay}"/>
                                 <Separator/>
                                 <MenuItem Header="_Delete" Command="{Static Editor:Commands.RemoveGroupCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                                 <Separator/>

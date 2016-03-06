@@ -17,20 +17,20 @@
         <GridSplitter Classes="vertical" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Width="6"/>
         <TextBlock Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" Text="Name" Classes="default"/>
         <TextBlock Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" Text="Value" Classes="default"/>
-        <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="2" Items="{Binding Path=Properties}">
+        <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="2" Items="{Binding Properties}">
             <ItemsControl.DataTemplates>
                 <DataTemplate DataType="Data:XProperty">
                     <Grid VerticalAlignment="Top">
-                        <TextBox VerticalAlignment="Center" Text="{Binding Path=Name, Mode=TwoWay}" Classes="property"/>
+                        <TextBox VerticalAlignment="Center" Text="{Binding Name, Mode=TwoWay}" Classes="property"/>
                     </Grid>
                 </DataTemplate>
             </ItemsControl.DataTemplates>
         </ItemsControl>
-        <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="2" Items="{Binding Path=Properties}">
+        <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="2" Items="{Binding Properties}">
             <ItemsControl.DataTemplates>
                 <DataTemplate DataType="Data:XProperty">
                     <Grid VerticalAlignment="Top" ColumnDefinitions="*,30">
-                        <TextBox VerticalAlignment="Center" Text="{Binding Path=Value, Mode=TwoWay}" Classes="property" Grid.Column="0"/>
+                        <TextBox VerticalAlignment="Center" Text="{Binding Value, Mode=TwoWay}" Classes="property" Grid.Column="0"/>
                         <Button VerticalAlignment="Center" Content="-" Classes="property" Grid.Column="1" Command="{Static Editor:Commands.RemovePropertyCommand}" CommandParameter="{Binding}"/>
                     </Grid>
                 </DataTemplate>
