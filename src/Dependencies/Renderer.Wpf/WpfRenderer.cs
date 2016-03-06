@@ -457,7 +457,7 @@ namespace Renderer.Wpf
             if (style == null)
                 return;
 
-            double zoom = _state.Zoom;
+            double zoom = _state.ZoomX;
             double thicknessLine = style.Thickness / zoom;
             double halfLine = thicknessLine / 2.0;
             double thicknessStartArrow = style.StartArrowStyle.Thickness / zoom;
@@ -654,7 +654,7 @@ namespace Renderer.Wpf
             if (style == null)
                 return;
 
-            double thickness = style.Thickness / _state.Zoom;
+            double thickness = style.Thickness / _state.ZoomX;
             double half = thickness / 2.0;
 
             Tuple<Brush, Pen> styleCached = _styleCache.Get(style);
@@ -706,7 +706,7 @@ namespace Renderer.Wpf
             if (style == null)
                 return;
 
-            double thickness = style.Thickness / _state.Zoom;
+            double thickness = style.Thickness / _state.ZoomX;
             double half = thickness / 2.0;
 
             Tuple<Brush, Pen> styleCached = _styleCache.Get(style);
@@ -750,7 +750,7 @@ namespace Renderer.Wpf
             if (style == null)
                 return;
 
-            double thickness = style.Thickness / _state.Zoom;
+            double thickness = style.Thickness / _state.ZoomX;
             double half = thickness / 2.0;
 
             Tuple<Brush, Pen> styleCached = _styleCache.Get(style);
@@ -819,7 +819,7 @@ namespace Renderer.Wpf
             if (style == null)
                 return;
 
-            double thickness = style.Thickness / _state.Zoom;
+            double thickness = style.Thickness / _state.ZoomX;
             double half = thickness / 2.0;
 
             Tuple<Brush, Pen> styleCached = _styleCache.Get(style);
@@ -883,7 +883,7 @@ namespace Renderer.Wpf
             if (style == null)
                 return;
 
-            double thickness = style.Thickness / _state.Zoom;
+            double thickness = style.Thickness / _state.ZoomX;
             double half = thickness / 2.0;
 
             Tuple<Brush, Pen> styleCached = _styleCache.Get(style);
@@ -950,7 +950,7 @@ namespace Renderer.Wpf
             if (string.IsNullOrEmpty(tbind))
                 return;
 
-            double thickness = style.Thickness / _state.Zoom;
+            double thickness = style.Thickness / _state.ZoomX;
             double half = thickness / 2.0;
 
             Tuple<Brush, Pen> styleCached = _styleCache.Get(style);
@@ -1062,7 +1062,7 @@ namespace Renderer.Wpf
             if (style == null)
                 return;
 
-            double thickness = style.Thickness / _state.Zoom;
+            double thickness = style.Thickness / _state.ZoomX;
             double half = thickness / 2.0;
 
             Tuple<Brush, Pen> styleCached = _styleCache.Get(style);
@@ -1142,7 +1142,7 @@ namespace Renderer.Wpf
             if (style == null)
                 return;
 
-            double thickness = style.Thickness / _state.Zoom;
+            double thickness = style.Thickness / _state.ZoomX;
             double half = thickness / 2.0;
 
             Tuple<Brush, Pen> styleCached = _styleCache.Get(style);

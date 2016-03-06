@@ -145,7 +145,7 @@ namespace Renderer.Perspex
 
             var pen = new PM.Pen(
                 ToSolidBrush(style.Stroke),
-                scale(style.Thickness / State.Zoom),
+                scale(style.Thickness / State.ZoomX),
                 dashStyle, lineCap,
                 lineCap, lineCap);
 

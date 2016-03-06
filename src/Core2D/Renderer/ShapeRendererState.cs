@@ -12,7 +12,8 @@ namespace Core2D.Renderer
     {
         private double _panX;
         private double _panY;
-        private double _zoom;
+        private double _zoomX;
+        private double _zoomY;
         private ShapeState _drawShapeState;
         private BaseShape _selectedShape;
         private ImmutableHashSet<BaseShape> _selectedShapes;
@@ -37,12 +38,21 @@ namespace Core2D.Renderer
         }
 
         /// <summary>
-        /// The current zoom value.
+        /// The X component of current zoom value.
         /// </summary>
-        public double Zoom
+        public double ZoomX
         {
-            get { return _zoom; }
-            set { Update(ref _zoom, value); }
+            get { return _zoomX; }
+            set { Update(ref _zoomX, value); }
+        }
+
+        /// <summary>
+        /// The Y component of current zoom value.
+        /// </summary>
+        public double ZoomY
+        {
+            get { return _zoomY; }
+            set { Update(ref _zoomY, value); }
         }
 
         /// <summary>
@@ -88,7 +98,8 @@ namespace Core2D.Renderer
         {
             _panX = 0.0;
             _panY = 0.0;
-            _zoom = 1.0;
+            _zoomX = 1.0;
+            _zoomY = 1.0;
             _drawShapeState = ShapeState.Create(ShapeStateFlags.Visible);
             _selectedShape = default(BaseShape);
             _selectedShapes = default(ImmutableHashSet<BaseShape>);

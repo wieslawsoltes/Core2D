@@ -65,7 +65,7 @@ namespace Core2D.Wpf
                     LoadRecent();
 
                     _mainWindow = new Windows.MainWindow();
-                    _mainWindow.Initialize(_editor);
+                    _mainWindow.InitializeEditor(_editor);
                     _mainWindow.Loaded += (sender, e) => OnLoaded();
                     _mainWindow.Closed += (sender, e) => OnClosed();
                     _mainWindow.DataContext = _editor;

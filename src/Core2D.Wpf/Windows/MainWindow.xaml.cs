@@ -31,18 +31,20 @@ namespace Core2D.Wpf.Windows
         }
 
         /// <summary>
-        /// Initializes main window.
+        /// Initialize project editor.
         /// </summary>
         /// <param name="editor">The editor instance.</param>
-        public void Initialize(ProjectEditor editor)
+        public void InitializeEditor(ProjectEditor editor)
         {
             panAndZoom.InvalidatedChild =
-                (zoom, offsetX, offsetY) =>
+                (zoomX, zoomY, offsetX, offsetY) =>
                 {
-                    bool invalidate = editor.Renderers[0].State.Zoom != zoom;
-                    editor.Renderers[0].State.Zoom = zoom;
-                    editor.Renderers[0].State.PanX = offsetX;
-                    editor.Renderers[0].State.PanY = offsetY;
+                    var state = editor.Renderers[0].State;
+                    bool invalidate = state.ZoomX != zoomX || state.ZoomY != zoomY;
+                    state.ZoomX = zoomX;
+                    state.ZoomY = zoomY;
+                    state.PanX = offsetX;
+                    state.PanY = offsetY;
                     if (invalidate)
                     {
                         editor.InvalidateCache(isZooming: true);

@@ -21,7 +21,7 @@ namespace Core2D.Wpf.Controls.PanAndZoom
 
         public AutoFitMode AutoFitMode { get; set; }
 
-        public Action<double, double, double> InvalidatedChild { get; set; }
+        public Action<double, double, double, double> InvalidatedChild { get; set; }
 
         public PanAndZoom()
             : base()
@@ -140,7 +140,7 @@ namespace Core2D.Wpf.Controls.PanAndZoom
         {
             if (_element != null)
             {
-                this.InvalidatedChild?.Invoke(_matrix.M11, _matrix.OffsetX, _matrix.OffsetY);
+                this.InvalidatedChild?.Invoke(_matrix.M11, _matrix.M12, _matrix.OffsetX, _matrix.OffsetY);
                 _element.RenderTransformOrigin = new Point(0, 0);
                 _element.RenderTransform = new MatrixTransform(_matrix);
                 _element.InvalidateVisual();

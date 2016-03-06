@@ -4,6 +4,7 @@ using Core2D.Data;
 using Core2D.Data.Database;
 using Core2D.Editor;
 using Core2D.Project;
+using Core2D.Renderer;
 using Core2D.Style;
 using Perspex;
 using Perspex.Controls;
@@ -45,90 +46,92 @@ namespace Core2D.Perspex.Controls.Editor
         }
 
         /// <summary>
-        /// Initialize drawable control.
+        /// Initialize project editor.
         /// </summary>
-        private void Initialize()
+        private void InitializeEditor()
         {
             _editor = this.DataContext as ProjectEditor;
-            if (_editor == null)
-                return;
+            if (_editor != null)
+            {
+                _editor.Invalidate = () => this.InvalidateVisual();
+                _editor.ResetZoom = () => this.OnZoomReset();
+                _editor.AutoFitZoom = () => this.OnZoomAutoFit();
 
-            _editor.Invalidate = () => this.InvalidateVisual();
-            _editor.ResetZoom = () => this.OnZoomReset();
-            _editor.AutoFitZoom = () => this.OnZoomAutoFit();
-
-            _panAndZoom.InvalidatedChild =
-                (zoom, offsetX, offsetY) =>
-                {
-                    bool invalidate = _editor.Renderers[0].State.Zoom != zoom;
-                    _editor.Renderers[0].State.Zoom = zoom;
-                    _editor.Renderers[0].State.PanX = offsetX;
-                    _editor.Renderers[0].State.PanY = offsetY;
-                    if (invalidate)
+                _panAndZoom.InvalidatedChild =
+                    (zoomX, zoomY, offsetX, offsetY) =>
                     {
-                        _editor.InvalidateCache(isZooming: true);
-                    }
-                };
-
-            _panAndZoom.PointerPressed +=
-                (sender, e) =>
-                {
-                    var p = e.GetPosition(this);
-                    p = _panAndZoom.FixInvalidPointPosition(p);
-
-                    if (e.MouseButton == MouseButton.Left)
-                    {
-                        if (_editor.IsLeftDownAvailable())
+                        var state = _editor.Renderers[0].State;
+                        bool invalidate = state.ZoomX != zoomX || state.ZoomY != zoomY;
+                        state.ZoomX = zoomX;
+                        state.ZoomY = zoomY;
+                        state.PanX = offsetX;
+                        state.PanY = offsetY;
+                        if (invalidate)
                         {
-                            _editor.LeftDown(p.X, p.Y);
+                            _editor.InvalidateCache(isZooming: true);
                         }
-                    }
+                    };
 
-                    if (e.MouseButton == MouseButton.Right)
+                _panAndZoom.PointerPressed +=
+                    (sender, e) =>
                     {
-                        this.Cursor = new Cursor(StandardCursorType.Hand);
-                        if (_editor.IsRightDownAvailable())
+                        var p = e.GetPosition(this);
+                        p = _panAndZoom.FixInvalidPointPosition(p);
+
+                        if (e.MouseButton == MouseButton.Left)
                         {
-                            _editor.RightDown(p.X, p.Y);
+                            if (_editor.IsLeftDownAvailable())
+                            {
+                                _editor.LeftDown(p.X, p.Y);
+                            }
                         }
-                    }
-                };
 
-            _panAndZoom.PointerReleased +=
-                (sender, e) =>
-                {
-                    var p = e.GetPosition(this);
-                    p = _panAndZoom.FixInvalidPointPosition(p);
-
-                    if (e.MouseButton == MouseButton.Left)
-                    {
-                        if (_editor.IsLeftUpAvailable())
+                        if (e.MouseButton == MouseButton.Right)
                         {
-                            _editor.LeftUp(p.X, p.Y);
+                            this.Cursor = new Cursor(StandardCursorType.Hand);
+                            if (_editor.IsRightDownAvailable())
+                            {
+                                _editor.RightDown(p.X, p.Y);
+                            }
                         }
-                    }
+                    };
 
-                    if (e.MouseButton == MouseButton.Right)
+                _panAndZoom.PointerReleased +=
+                    (sender, e) =>
                     {
-                        this.Cursor = new Cursor(StandardCursorType.Arrow);
-                        if (_editor.IsRightUpAvailable())
+                        var p = e.GetPosition(this);
+                        p = _panAndZoom.FixInvalidPointPosition(p);
+
+                        if (e.MouseButton == MouseButton.Left)
                         {
-                            _editor.RightUp(p.X, p.Y);
+                            if (_editor.IsLeftUpAvailable())
+                            {
+                                _editor.LeftUp(p.X, p.Y);
+                            }
                         }
-                    }
-                };
 
-            _panAndZoom.PointerMoved +=
-                (sender, e) =>
-                {
-                    var p = e.GetPosition(this);
-                    p = _panAndZoom.FixInvalidPointPosition(p);
+                        if (e.MouseButton == MouseButton.Right)
+                        {
+                            this.Cursor = new Cursor(StandardCursorType.Arrow);
+                            if (_editor.IsRightUpAvailable())
+                            {
+                                _editor.RightUp(p.X, p.Y);
+                            }
+                        }
+                    };
 
-                    if (_editor.IsMoveAvailable())
+                _panAndZoom.PointerMoved +=
+                    (sender, e) =>
                     {
-                        _editor.Move(p.X, p.Y);
-                    }
-                };
+                        var p = e.GetPosition(this);
+                        p = _panAndZoom.FixInvalidPointPosition(p);
+
+                        if (_editor.IsMoveAvailable())
+                        {
+                            _editor.Move(p.X, p.Y);
+                        }
+                    };
+            }
         }
 
         /// <summary>
@@ -163,95 +166,68 @@ namespace Core2D.Perspex.Controls.Editor
         }
 
         /// <summary>
-        /// Draws the current container.
+        /// Draw template container.
         /// </summary>
         /// <param name="dc">The drawing context.</param>
-        private void Draw(DrawingContext dc)
+        /// <param name="renderer">The shape renderer.</param>
+        /// <param name="template">The template to draw.</param>
+        private void DrawTemplate(DrawingContext dc, ShapeRenderer renderer, XTemplate template)
         {
-            var editor = this.DataContext as ProjectEditor;
-            if (editor == null || editor.Project == null)
-                return;
+            DrawBackground(dc, template.Background, template.Width, template.Height);
 
-            var renderer = editor.Renderers[0];
-            var container = editor.Project.CurrentContainer;
-            if (container == null)
-                return;
+            renderer.Draw(dc, template, default(ImmutableArray<XProperty>), default(XRecord));
 
-            var translate = dc.PushPreTransform(Matrix.CreateTranslation(0, 0));
-            var scale = dc.PushPreTransform(Matrix.CreateScale(1, 1));
+            if (template.WorkingLayer != null)
+            {
+                renderer.Draw(dc, template.WorkingLayer, default(ImmutableArray<XProperty>), default(XRecord));
+            }
 
+            if (template.HelperLayer != null)
+            {
+                renderer.Draw(dc, template.HelperLayer, default(ImmutableArray<XProperty>), default(XRecord));
+            }
+        }
+
+        /// <summary>
+        /// Draw page container.
+        /// </summary>
+        /// <param name="dc">The drawing context.</param>
+        /// <param name="renderer">The shape renderer.</param>
+        /// <param name="page">The page to draw.</param>
+        private void DrawPage(DrawingContext dc, ShapeRenderer renderer, XPage page)
+        {
+            DrawBackground(dc, page.Template.Background, page.Template.Width, page.Template.Height);
+
+            renderer.Draw(dc, page, page.Data.Properties, page.Data.Record);
+
+            if (page.WorkingLayer != null)
+            {
+                renderer.Draw(dc, page.WorkingLayer, page.Data.Properties, page.Data.Record);
+            }
+
+            if (page.HelperLayer != null)
+            {
+                renderer.Draw(dc, page.HelperLayer, page.Data.Properties, page.Data.Record);
+            }
+        }
+
+        /// <summary>
+        /// Draw container.
+        /// </summary>
+        /// <param name="dc">The drawing context.</param>
+        /// <param name="renderer">The shape renderer.</param>
+        /// <param name="container">The container to draw.</param>
+        private void Draw(DrawingContext dc, ShapeRenderer renderer, XContainer container)
+        {
             if (container is XTemplate)
             {
-                var template = container as XTemplate;
-
-                DrawBackground(
-                    dc,
-                    template.Background,
-                    template.Width,
-                    template.Height);
-
-                renderer.Draw(
-                    dc,
-                    template,
-                    default(ImmutableArray<XProperty>),
-                    default(XRecord));
-
-                if (template.WorkingLayer != null)
-                {
-                    renderer.Draw(
-                        dc,
-                        template.WorkingLayer,
-                        default(ImmutableArray<XProperty>),
-                        default(XRecord));
-                }
-
-                if (template.HelperLayer != null)
-                {
-                    renderer.Draw(
-                        dc,
-                        template.HelperLayer,
-                        default(ImmutableArray<XProperty>),
-                        default(XRecord));
-                }
+                DrawTemplate(dc, renderer, container as XTemplate);
             }
 
             if (container is XPage)
             {
-                var page = container as XPage;
-
-                DrawBackground(
-                    dc,
-                    page.Template.Background,
-                    page.Template.Width,
-                    page.Template.Height);
-
-                renderer.Draw(
-                    dc,
-                    page,
-                    page.Data.Properties,
-                    page.Data.Record);
-
-                if (page.WorkingLayer != null)
-                {
-                    renderer.Draw(
-                        dc,
-                        page.WorkingLayer,
-                        page.Data.Properties,
-                        page.Data.Record);
-                }
-
-                if (page.HelperLayer != null)
-                {
-                    renderer.Draw(
-                        dc,
-                        page.HelperLayer,
-                        page.Data.Properties,
-                        page.Data.Record);
-                }
+                DrawPage(dc, renderer, container as XPage);
             }
-
-            scale.Dispose();
-            translate.Dispose();
         }
 
         /// <summary>
@@ -264,10 +240,13 @@ namespace Core2D.Perspex.Controls.Editor
 
             if (_editor == null)
             {
-                Initialize();
+                InitializeEditor();
             }
 
-            Draw(context);
+            if (_editor?.Project?.CurrentContainer != null)
+            {
+                Draw(context, _editor.Renderers[0], _editor.Project.CurrentContainer);
+            }
         }
     }
 }

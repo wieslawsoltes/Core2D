@@ -24,7 +24,7 @@ namespace Core2D.Perspex.Controls.PanAndZoom
         private Point _previous;
         private Matrix _matrix;
 
-        public Action<double, double, double> InvalidatedChild { get; set; }
+        public Action<double, double, double, double> InvalidatedChild { get; set; }
 
         public static PerspexProperty<double> ZoomSpeedProperty =
             PerspexProperty.Register<PanAndZoom, double>("ZoomSpeed", 1.2);
@@ -171,7 +171,7 @@ namespace Core2D.Perspex.Controls.PanAndZoom
         {
             if (_element != null)
             {
-                this.InvalidatedChild?.Invoke(_matrix.M11, _matrix.M31, _matrix.M32);
+                this.InvalidatedChild?.Invoke(_matrix.M11, _matrix.M12, _matrix.M31, _matrix.M32);
                 _element.TransformOrigin = new RelativePoint(new Point(0, 0), RelativeUnit.Relative);
                 _element.RenderTransform = new MatrixTransform(_matrix);
                 _element.InvalidateVisual();
