@@ -12,6 +12,13 @@ namespace Core2D.Perspex.Controls.PanAndZoom
 {
     public class PanAndZoom : Border
     {
+        private static AutoFitMode[] _autoFitModes = (AutoFitMode[])Enum.GetValues(typeof(AutoFitMode));
+
+        public static AutoFitMode[] AutoFitModes
+        {
+            get { return _autoFitModes; }
+        }
+
         private Control _element;
         private Point _pan;
         private Point _previous;
