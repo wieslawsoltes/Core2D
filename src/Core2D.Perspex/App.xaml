@@ -79,7 +79,7 @@
             <Setter Property="FontSize" Value="10"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
-        <Style Selector="Button.property /template/ Border#border">
+        <Style Selector="Button.property /template/ ContentPresenter">
             <Setter Property="Padding" Value="0"/>
         </Style>
         <!-- Button.project -->
@@ -91,11 +91,11 @@
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Background" Value="{StyleResource BackgroundBrush}"/>
         </Style>
-        <Style Selector="Button.project:pointerover /template/ Border#border">
+        <Style Selector="Button.project:pointerover /template/ ContentPresenter">
             <Setter Property="Background" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
         </Style>
-        <Style Selector="Button.project:pressed /template/ Border#border">
+        <Style Selector="Button.project:pressed /template/ ContentPresenter">
             <Setter Property="Background" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
         </Style>
@@ -115,10 +115,10 @@
         <Style Selector="Button.link:pressed">
             <Setter Property="Foreground" Value="Black"/>
         </Style>
-        <Style Selector="Button.link:pointerover /template/ Border#border">
+        <Style Selector="Button.link:pointerover /template/ ContentPresenter">
             <Setter Property="Background" Value="Transparent"/>
         </Style>
-        <Style Selector="Button.link:pressed /template/ Border#border">
+        <Style Selector="Button.link:pressed /template/ ContentPresenter">
             <Setter Property="Background" Value="Transparent"/>
         </Style>
         <!-- Button.autofit -->
@@ -131,12 +131,12 @@
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
-        <Style Selector="Button.autofit:pointerover /template/ Border#border">
+        <Style Selector="Button.autofit:pointerover /template/ ContentPresenter">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
-        <Style Selector="Button.autofit:pressed /template/ Border#border">
+        <Style Selector="Button.autofit:pressed /template/ ContentPresenter">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>

@@ -20,7 +20,7 @@ namespace Core2D.Perspex.Controls.PanAndZoom
             get { return _autoFitModes; }
         }
 
-        private Control _element;
+        private IControl _element;
         private Point _pan;
         private Point _previous;
         private Matrix _matrix;
@@ -82,7 +82,7 @@ namespace Core2D.Perspex.Controls.PanAndZoom
             }
         }
 
-        private void Initialize(Control element)
+        private void Initialize(IControl element)
         {
             if (element != null)
             {
