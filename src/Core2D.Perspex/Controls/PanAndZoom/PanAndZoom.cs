@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Perspex;
 using Perspex.Controls;
+using Perspex.Data;
 using Perspex.Input;
 using Perspex.Media;
 using Renderer.Perspex;
@@ -27,7 +28,7 @@ namespace Core2D.Perspex.Controls.PanAndZoom
         public Action<double, double, double, double> InvalidatedChild { get; set; }
 
         public static PerspexProperty<double> ZoomSpeedProperty =
-            PerspexProperty.Register<PanAndZoom, double>("ZoomSpeed", 1.2);
+            PerspexProperty.Register<PanAndZoom, double>("ZoomSpeed", 1.2, false, BindingMode.TwoWay);
 
         public double ZoomSpeed
         {
@@ -36,12 +37,17 @@ namespace Core2D.Perspex.Controls.PanAndZoom
         }
 
         public static PerspexProperty<AutoFitMode> AutoFitModeProperty =
-            PerspexProperty.Register<PanAndZoom, AutoFitMode>("AutoFitMode", AutoFitMode.None);
+            PerspexProperty.Register<PanAndZoom, AutoFitMode>("AutoFitMode", AutoFitMode.Extent, false, BindingMode.TwoWay);
 
         public AutoFitMode AutoFitMode
         {
             get { return GetValue(AutoFitModeProperty); }
             set { SetValue(AutoFitModeProperty, value); }
+        }
+
+        static PanAndZoom()
+        {
+            AffectsArrange(ZoomSpeedProperty, AutoFitModeProperty);
         }
 
         public PanAndZoom()
@@ -159,12 +165,14 @@ namespace Core2D.Perspex.Controls.PanAndZoom
 
         protected override Size ArrangeOverride(Size finalSize)
         {
+            var size = base.ArrangeOverride(finalSize);
+
             if (_element != null && _element.IsMeasureValid)
             {
                 AutoFit(new Rect(0.0, 0.0, finalSize.Width, finalSize.Height), _element.Bounds);
             }
 
-            return base.ArrangeOverride(finalSize);
+            return size;
         }
 
         public void Invalidate()

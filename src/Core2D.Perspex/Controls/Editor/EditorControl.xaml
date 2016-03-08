@@ -16,8 +16,8 @@
              xmlns:editor="clr-namespace:Core2D.Perspex.Controls.Editor;assembly=Core2D.Perspex"
              Design.DataContext="{Static Designer:DesignerContext.Editor}"
              Design.Width="1200" Design.Height="540">
-    <Grid ColumnDefinitions="200,Auto,*,Auto,250">
-        <Grid RowDefinitions="50*,Auto,50*" Grid.Column="0">
+    <Grid ColumnDefinitions="200,Auto,*,Auto,250" RowDefinitions="*,Auto">
+        <Grid RowDefinitions="50*,Auto,50*" Grid.Column="0" Grid.Row="0">
             <Border Classes="leftTop" Grid.Row="0">
                 <TabControl Classes="bottom">
                     <TabItem Header="Project" Classes="property">
@@ -43,23 +43,16 @@
                 </TabControl>
             </Border>
         </Grid>
-        <GridSplitter Classes="vertical" Grid.Column="1" Width="6"/>
-        <Grid Grid.Row="0" Grid.RowSpan="3" Grid.Column="2">
+        <GridSplitter Classes="vertical" Grid.Column="1" Grid.Row="0" Width="6"/>
+        <Grid Grid.Row="0" Grid.Column="2">
             <Border Classes="drawable">
-                <Grid RowDefinitions="*,7,Auto">
-                    <paz:PanAndZoom Name="panAndZoom" AutoFitMode="Extent" ZoomSpeed="1.2" Grid.Row="0" Background="Transparent" ClipToBounds="True" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                        <editor:DrawableControl Name="drawableControl" ClipToBounds="False"/>
-                    </paz:PanAndZoom>
-                    <Grid Grid.Row="2" ColumnDefinitions="*,60,60,60,*">
-                        <DropDown Classes="autofit" Grid.Column="1" Items="{Static paz:PanAndZoom.AutoFitModes}" SelectedItem="{Binding #panAndZoom.AutoFitMode, Mode=TwoWay}"/>
-                        <Button Content="Reset" Classes="autofit" Grid.Column="2" Cursor="Hand" Command="{Static Editor:Commands.ZoomResetCommand}"/>
-                        <Button Content="AutoFit" Classes="autofit" Grid.Column="3" Cursor="Hand" Command="{Static Editor:Commands.ZoomAutoFitCommand}"/>
-                    </Grid>
-                </Grid>
+                <paz:PanAndZoom Name="panAndZoom" AutoFitMode="Extent" ZoomSpeed="1.2" Grid.Row="0" Background="Transparent" ClipToBounds="True" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <editor:DrawableControl Name="drawableControl" ClipToBounds="False"/>
+                </paz:PanAndZoom>
             </Border>
         </Grid>
-        <GridSplitter Classes="vertical" Grid.Row="0" Grid.Column="3" Width="6"/>
-        <Grid RowDefinitions="50*,Auto,50*" Grid.Column="4">
+        <GridSplitter Classes="vertical" Grid.Column="3" Grid.Row="0" Width="6"/>
+        <Grid RowDefinitions="50*,Auto,50*" Grid.Column="4" Grid.Row="0">
             <Border Classes="rightTop" Grid.Row="0">
                 <TabControl Classes="bottom">
                     <TabItem Header="Styles" Classes="property">
@@ -96,6 +89,49 @@
                     </TabItem>
                 </TabControl>
             </Border>
+        </Grid>
+        <Grid ColumnDefinitions="Auto,*" Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="1" Margin="0,2,0,0">
+            <StackPanel Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal" Margin="0">
+                <TextBlock Classes="stats">
+                    <TextBlock.Text>
+                        <MultiBinding Mode="OneWay" Converter="{Static converters:EditorToStatsMultiConverter.Instance}">
+                            <Binding Path="Project.Documents.Length"/>
+                            <Binding Path="Project.CurrentDocument.Pages.Length"/>
+                            <Binding Path="Project.CurrentContainer.Layers.Length"/>
+                            <Binding Path="Project.CurrentContainer.CurrentLayer.Shapes.Length"/>
+                            <Binding Path="Renderers[0].State.SelectedShape" Converter="{Static converters:ObjectToObjectConverter.Instance}"/>
+                            <Binding Path="Renderers[0].State.SelectedShapes" Converter="{Static converters:ObjectToObjectConverter.Instance}"/>
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+            </StackPanel>
+            <WrapPanel Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Horizontal">
+                <WrapPanel Grid.Column="2">
+                    <DropDown Classes="tool" Items="{Static Editor:Enums.ToolValues}" SelectedItem="{Binding CurrentTool, Mode=TwoWay}"/>
+                    <DropDown Classes="tool" Items="{Static Editor:Enums.PathToolValues}" SelectedItem="{Binding CurrentPathTool, Mode=TwoWay}">
+                        <DropDown.IsVisible>
+                            <MultiBinding Mode="OneWay" Converter="{Static converters:ObjectEqualityMultiConverter.Instance}">
+                                <Binding Path="CurrentTool"/>
+                                <Binding Source="{Static Editor:Tool.Path}"/>
+                            </MultiBinding>
+                        </DropDown.IsVisible>
+                    </DropDown>
+                </WrapPanel>
+                <WrapPanel Grid.Column="3">
+                    <Button Content="Reset" Classes="autofit" Command="{Static Editor:Commands.ZoomResetCommand}"/>
+                    <Button Content="AutoFit" Classes="autofit" Command="{Static Editor:Commands.ZoomAutoFitCommand}"/>
+                    <DropDown Classes="autofit" Items="{Static paz:PanAndZoom.AutoFitModes}" SelectedItem="{Binding #panAndZoom.AutoFitMode, Mode=TwoWay}"/>
+                    <TextBox Classes="autofit" Text="{Binding #panAndZoom.ZoomSpeed, Mode=TwoWay}" Width="50"/>
+                </WrapPanel>
+                <WrapPanel Grid.Column="4">
+                    <CheckBox Classes="options" Content="Stroked" IsChecked="{Binding Project.Options.DefaultIsStroked, Mode=TwoWay}"/>
+                    <CheckBox Classes="options" Content="Filled" IsChecked="{Binding Project.Options.DefaultIsFilled, Mode=TwoWay}"/>
+                    <CheckBox Classes="options" Content="Closed" IsChecked="{Binding Project.Options.DefaultIsClosed, Mode=TwoWay}"/>
+                    <CheckBox Classes="options" Content="SmoothJoin" IsChecked="{Binding Project.Options.DefaultIsSmoothJoin, Mode=TwoWay}"/>
+                    <CheckBox Classes="options" Content="Snap" IsChecked="{Binding Project.Options.SnapToGrid, Mode=TwoWay}"/>
+                    <CheckBox Classes="options" Content="Connect" IsChecked="{Binding Project.Options.TryToConnect, Mode=TwoWay}"/>
+                </WrapPanel>
+            </WrapPanel>
         </Grid>
     </Grid>
 </UserControl>

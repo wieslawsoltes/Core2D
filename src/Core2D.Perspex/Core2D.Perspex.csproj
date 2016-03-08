@@ -341,9 +341,6 @@
     <Compile Include="Controls\State\ShapeStateControl.xaml.cs">
       <DependentUpon>ShapeStateControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Editor\StatusControl.xaml.cs">
-      <DependentUpon>StatusControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\Project\DatabasesControl.xaml.cs">
       <DependentUpon>DatabasesControl.xaml</DependentUpon>
     </Compile>
@@ -529,9 +526,6 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Editor\MenuControl.xaml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Editor\StatusControl.xaml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Project\DatabasesControl.xaml">
