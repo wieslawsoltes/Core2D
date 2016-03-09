@@ -159,12 +159,7 @@ namespace Core2D.Editor
             }
 
             _invalidateShapes();
-
-            // NOTE: Do not mark project as dirty when 'Current*' property changes.
-            if (!e.PropertyName.StartsWith("Current"))
-            {
-                MarkAsDirty();
-            }
+            MarkAsDirty();
         }
 
         private void ObserveDocument(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -197,14 +192,7 @@ namespace Core2D.Editor
             }
 
             _invalidateContainer();
-
-            // NOTE: Do not mark project as dirty when current shape changes.
-            // NOTE: Do not mark project as dirty when current layer changes.
-            if (e.PropertyName != nameof(XContainer.CurrentShape)
-                && e.PropertyName != nameof(XContainer.CurrentLayer))
-            {
-                MarkAsDirty();
-            }
+            MarkAsDirty();
         }
 
         private void ObserveTemplateBackgroud(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -269,12 +257,7 @@ namespace Core2D.Editor
                 Remove(sg.Items);
                 Add(sg.Items);
             }
-
-            // NOTE: Do not mark project as dirty when current group changes.
-            if (e.PropertyName != nameof(XLibrary<XGroup>.Selected))
-            {
-                MarkAsDirty();
-            }
+            MarkAsDirty();
         }
 
         private void ObserveStyle(object sender, System.ComponentModel.PropertyChangedEventArgs e)
