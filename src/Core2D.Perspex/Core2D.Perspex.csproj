@@ -381,6 +381,8 @@
       <DependentUpon>TemplatesControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\ArgbColorToBrushMultiConverter.cs" />
+    <Compile Include="Converters\BoundsToHeightConverter.cs" />
+    <Compile Include="Converters\BoundsToWidthConverter.cs" />
     <Compile Include="Converters\ByteToDoubleConverter.cs" />
     <Compile Include="Converters\ByteToStringConverter.cs" />
     <Compile Include="Converters\EditorToStatsMultiConverter.cs" />
