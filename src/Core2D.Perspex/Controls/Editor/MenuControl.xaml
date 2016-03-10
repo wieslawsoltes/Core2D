@@ -13,6 +13,11 @@
              Design.DataContext="{Static Designer:DesignerContext.Editor}"
              Design.Width="800" Design.Height="20">
     <Menu>
+        <Menu.ItemsPanel>
+            <ItemsPanelTemplate>
+                <WrapPanel/>
+            </ItemsPanelTemplate>
+        </Menu.ItemsPanel>
         <MenuItem Header="_File" IsVisible="{Binding Project, Converter={Static converters:IsNullConverter.Instance}}">
             <MenuItem Header="_New" HotKey="Ctrl+N" Command="{Static Editor:Commands.NewCommand}" CommandParameter="{Binding}"/>
             <Separator/>
