@@ -31,7 +31,7 @@ namespace Core2D.Perspex.Interactions.Actions
         /// Identifies the <seealso cref="TargetObject"/> dependency property.
         /// </summary>
         public static readonly PerspexProperty TargetObjectProperty =
-            PerspexProperty.Register<ChangeAttachedPropertyAction, PerspexObject>("TargetObject");
+            PerspexProperty.Register<ChangeAttachedPropertyAction, object>("TargetObject");
 
         /// <summary>
         /// Identifies the <seealso cref="Value"/> dependency property.
@@ -70,9 +70,9 @@ namespace Core2D.Perspex.Interactions.Actions
         /// Gets or sets the object whose property will be changed.
         /// If <seealso cref="TargetObject"/> is not set or cannot be resolved, the sender of <seealso cref="Execute"/> will be used. This is a dependency property.
         /// </summary>
-        public PerspexObject TargetObject
+        public object TargetObject
         {
-            get { return (PerspexObject)this.GetValue(ChangeAttachedPropertyAction.TargetObjectProperty); }
+            get { return (object)this.GetValue(ChangeAttachedPropertyAction.TargetObjectProperty); }
             set { this.SetValue(ChangeAttachedPropertyAction.TargetObjectProperty, value); }
         }
 
@@ -84,7 +84,7 @@ namespace Core2D.Perspex.Interactions.Actions
         /// <returns>True if updating the property value succeeds; else false.</returns>
         public object Execute(object sender, object parameter)
         {
-            PerspexObject targetObject;
+            object targetObject;
             if (this.GetValue(ChangeAttachedPropertyAction.TargetObjectProperty) != PerspexProperty.UnsetValue)
             {
                 targetObject = this.TargetObject;
@@ -103,7 +103,7 @@ namespace Core2D.Perspex.Interactions.Actions
             return true;
         }
 
-        private void UpdatePerspexPropertyValue(PerspexObject targetObject)
+        private void UpdatePerspexPropertyValue(object targetObject)
         {
             var property = PerspexPropertyRegistry.Instance.GetAttached(PropertyOwnerType).Where((p) => p.Name == this.PropertyName).FirstOrDefault();
             this.ValidatePerspexProperty(property);
@@ -131,7 +131,11 @@ namespace Core2D.Perspex.Interactions.Actions
                         TypeConverterHelper.Convert(valueAsString, propertyType.FullName);
                 }
 
-                targetObject.SetValue(property, result);
+                var pespexObject = targetObject as PerspexObject;
+                if (pespexObject != null)
+                {
+                    pespexObject.SetValue(property, result);
+                }
             }
             catch (FormatException e)
             {
