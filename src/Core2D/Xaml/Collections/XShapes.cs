@@ -2,8 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Core2D.Shape;
 using Portable.Xaml.Markup;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.Collections.Immutable;
 
 namespace Core2D.Xaml.Collections
 {
@@ -22,14 +21,14 @@ namespace Core2D.Xaml.Collections
         /// <summary>
         /// Gets or sets children collection.
         /// </summary>
-        public ICollection<BaseShape> Children { get; set; }
+        public ImmutableArray<BaseShape> Children { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="XShapes"/> class.
         /// </summary>
         public XShapes()
         {
-            Children = new Collection<BaseShape>();
+            Children = ImmutableArray.Create<BaseShape>();
         }
     }
 }

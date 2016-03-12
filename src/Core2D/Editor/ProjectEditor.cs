@@ -596,7 +596,7 @@ namespace Core2D.Editor
                 else if (item is XShapes)
                 {
                     var shapes = (item as XShapes).Children;
-                    if (shapes.Count > 0)
+                    if (shapes.Length > 0)
                     {
                         _project?.AddShapes(_project?.CurrentContainer?.CurrentLayer, shapes);
                     }
