@@ -190,8 +190,8 @@
     <Compile Include="Xaml\Serializer\CoreXamlWriter.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Portable.Xaml, Version=0.12.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Portable.Xaml.0.12.0\lib\portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10\Portable.Xaml.dll</HintPath>
+    <Reference Include="Portable.Xaml, Version=0.12.5914.9005, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Portable.Xaml.0.13.0-alpha\lib\portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10\Portable.Xaml.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Collections.Immutable, Version=1.1.36.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
