@@ -11,7 +11,9 @@
                         </XTemplate>
                     </XPage.Template>
                     <XPage.Layers>
-                        <XLayer Name="Layer"/>
+                        <XLayer Name="Layer1"/>
+                        <XLayer Name="Layer2"/>
+                        <XLayer Name="Layer3"/>
                     </XPage.Layers>
                 </XPage>
             </XDocument.Pages>
