@@ -6,12 +6,12 @@ namespace Core2D.Xaml.Serializer
 {
     internal class CoreXamlTypeInvoker : XamlTypeInvoker
     {
-        public CoreXamlType Type { get; private set; }
+        public CoreXamlType XamlType { get; private set; }
 
-        public CoreXamlTypeInvoker(CoreXamlType type)
-            : base(type)
+        public CoreXamlTypeInvoker(CoreXamlType xamlType)
+            : base(xamlType)
         {
-            Type = type;
+            XamlType = xamlType;
         }
     }
 }
