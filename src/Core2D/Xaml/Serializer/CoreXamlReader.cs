@@ -8,7 +8,7 @@ namespace Core2D.Xaml.Serializer
 {
     internal static class CoreXamlReader
     {
-        internal static readonly CoreXamlSchemaContext context = new CoreXamlSchemaContext();
+        internal static readonly XamlSchemaContext context = new XamlSchemaContext();
 
         private static object Load(XamlXmlReader reader)
         {
