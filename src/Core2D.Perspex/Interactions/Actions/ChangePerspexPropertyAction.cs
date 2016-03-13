@@ -5,75 +5,59 @@ using Perspex.Xaml.Interactions.Core;
 using Perspex.Xaml.Interactivity;
 using System;
 using System.Globalization;
-using System.Linq;
 using System.Reflection;
 
 namespace Core2D.Perspex.Interactions.Actions
 {
     /// <summary>
-    /// An action that will change a specified attached property to a specified value when invoked.
+    /// An action that will change a specified perspex property to a specified value when invoked.
     /// </summary>
-    public sealed class ChangeAttachedPropertyAction : PerspexObject, IAction
+    public sealed class ChangePerspexPropertyAction : PerspexObject, IAction
     {
         /// <summary>
-        /// Identifies the <seealso cref="PropertyOwnerType"/> dependency property.
-        /// </summary>
-        public static readonly PerspexProperty PropertyOwnerTypeProperty =
-            PerspexProperty.Register<ChangeAttachedPropertyAction, Type>("PropertyOwnerType");
-
-        /// <summary>
-        /// Identifies the <seealso cref="PropertyName"/> dependency property.
+        /// Identifies the <seealso cref="PropertyName"/> perspex property.
         /// </summary>
         public static readonly PerspexProperty PropertyNameProperty =
-            PerspexProperty.Register<ChangeAttachedPropertyAction, string>("PropertyName");
+            PerspexProperty.Register<ChangePerspexPropertyAction, PerspexProperty>("PropertyName");
 
         /// <summary>
-        /// Identifies the <seealso cref="TargetObject"/> dependency property.
+        /// Identifies the <seealso cref="TargetObject"/> perspex property.
         /// </summary>
         public static readonly PerspexProperty TargetObjectProperty =
-            PerspexProperty.Register<ChangeAttachedPropertyAction, object>("TargetObject");
+            PerspexProperty.Register<ChangePerspexPropertyAction, object>("TargetObject");
 
         /// <summary>
-        /// Identifies the <seealso cref="Value"/> dependency property.
+        /// Identifies the <seealso cref="Value"/> perspex property.
         /// </summary>
         public static readonly PerspexProperty ValueProperty =
-            PerspexProperty.Register<ChangeAttachedPropertyAction, object>("Value");
+            PerspexProperty.Register<ChangePerspexPropertyAction, object>("Value");
 
         /// <summary>
-        /// Gets or sets the owner type of the property to change. This is a dependency property.
+        /// Gets or sets the name of the property to change. This is a perspex property.
         /// </summary>
-        public Type PropertyOwnerType
+        public PerspexProperty PropertyName
         {
-            get { return (Type)this.GetValue(ChangeAttachedPropertyAction.PropertyOwnerTypeProperty); }
-            set { this.SetValue(ChangeAttachedPropertyAction.PropertyOwnerTypeProperty, value); }
+            get { return (PerspexProperty)this.GetValue(ChangePerspexPropertyAction.PropertyNameProperty); }
+            set { this.SetValue(ChangePerspexPropertyAction.PropertyNameProperty, value); }
         }
 
         /// <summary>
-        /// Gets or sets the name of the property to change. This is a dependency property.
-        /// </summary>
-        public string PropertyName
-        {
-            get { return (string)this.GetValue(ChangeAttachedPropertyAction.PropertyNameProperty); }
-            set { this.SetValue(ChangeAttachedPropertyAction.PropertyNameProperty, value); }
-        }
-
-        /// <summary>
-        /// Gets or sets the value to set. This is a dependency property.
+        /// Gets or sets the value to set. This is a perspex property.
         /// </summary>
         public object Value
         {
-            get { return this.GetValue(ChangeAttachedPropertyAction.ValueProperty); }
-            set { this.SetValue(ChangeAttachedPropertyAction.ValueProperty, value); }
+            get { return this.GetValue(ChangePerspexPropertyAction.ValueProperty); }
+            set { this.SetValue(ChangePerspexPropertyAction.ValueProperty, value); }
         }
 
         /// <summary>
         /// Gets or sets the object whose property will be changed.
-        /// If <seealso cref="TargetObject"/> is not set or cannot be resolved, the sender of <seealso cref="Execute"/> will be used. This is a dependency property.
+        /// If <seealso cref="TargetObject"/> is not set or cannot be resolved, the sender of <seealso cref="Execute"/> will be used. This is a perspex property.
         /// </summary>
         public object TargetObject
         {
-            get { return (object)this.GetValue(ChangeAttachedPropertyAction.TargetObjectProperty); }
-            set { this.SetValue(ChangeAttachedPropertyAction.TargetObjectProperty, value); }
+            get { return (object)this.GetValue(ChangePerspexPropertyAction.TargetObjectProperty); }
+            set { this.SetValue(ChangePerspexPropertyAction.TargetObjectProperty, value); }
         }
 
         /// <summary>
@@ -85,7 +69,7 @@ namespace Core2D.Perspex.Interactions.Actions
         public object Execute(object sender, object parameter)
         {
             object targetObject;
-            if (this.GetValue(ChangeAttachedPropertyAction.TargetObjectProperty) != PerspexProperty.UnsetValue)
+            if (this.GetValue(ChangePerspexPropertyAction.TargetObjectProperty) != PerspexProperty.UnsetValue)
             {
                 targetObject = this.TargetObject;
             }
@@ -105,15 +89,14 @@ namespace Core2D.Perspex.Interactions.Actions
 
         private void UpdatePerspexPropertyValue(object targetObject)
         {
-            var property = PerspexPropertyRegistry.Instance.GetAttached(PropertyOwnerType).Where((p) => p.Name == this.PropertyName).FirstOrDefault();
-            this.ValidatePerspexProperty(property);
+            this.ValidatePerspexProperty(this.PropertyName);
 
             Exception innerException = null;
             try
             {
                 object result = null;
                 string valueAsString = null;
-                Type propertyType = property.PropertyType;
+                Type propertyType = this.PropertyName.PropertyType;
                 TypeInfo propertyTypeInfo = propertyType.GetTypeInfo();
                 if (this.Value == null)
                 {
@@ -134,7 +117,7 @@ namespace Core2D.Perspex.Interactions.Actions
                 var pespexObject = targetObject as PerspexObject;
                 if (pespexObject != null)
                 {
-                    pespexObject.SetValue(property, result);
+                    pespexObject.SetValue(this.PropertyName, result);
                 }
             }
             catch (FormatException e)
@@ -151,9 +134,9 @@ namespace Core2D.Perspex.Interactions.Actions
                 throw new ArgumentException(string.Format(
                     CultureInfo.CurrentCulture,
                     "Cannot assign value of type {0} to property {1} of type {2}. The {1} property can be assigned only values of type {2}.",
-                    this.Value != null ? this.Value.GetType().Name : "null",
+                    this.Value?.GetType().Name ?? "null",
                     this.PropertyName,
-                    property.PropertyType.Name),
+                    targetObject?.GetType().Name ?? "null"),
                     innerException);
             }
         }
@@ -167,17 +150,15 @@ namespace Core2D.Perspex.Interactions.Actions
             {
                 throw new ArgumentException(string.Format(
                     CultureInfo.CurrentCulture,
-                    "Cannot find a property named {0} on type {1}.",
-                    this.PropertyName,
-                    this.PropertyOwnerType));
+                    "Cannot find a property named {0}.",
+                    this.PropertyName));
             }
             else if (property.IsReadOnly)
             {
                 throw new ArgumentException(string.Format(
                     CultureInfo.CurrentCulture,
-                    "Cannot find a property named {0} on type {1}.",
-                    this.PropertyName,
-                    this.PropertyOwnerType));
+                    "Cannot find a property named {0}.",
+                    this.PropertyName));
             }
         }
     }
