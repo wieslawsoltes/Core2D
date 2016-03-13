@@ -1,8 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using Portable.Xaml.Markup;
+using System.Collections.Immutable;
 
 namespace Core2D
 {
@@ -12,7 +11,7 @@ namespace Core2D
     [ContentProperty(nameof(Resources))]
     public abstract class ObservableResource : ObservableObject
     {
-        private IList<ObservableObject> _resources;
+        private ImmutableArray<ObservableObject> _resources;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ObservableResource"/> class.
@@ -20,13 +19,13 @@ namespace Core2D
         public ObservableResource()
             : base()
         {
-            Resources = new ObservableCollection<ObservableObject>();
+            Resources = ImmutableArray.Create<ObservableObject>();
         }
 
         /// <summary>
         /// Gets or sets shape resources.
         /// </summary>
-        public IList<ObservableObject> Resources
+        public ImmutableArray<ObservableObject> Resources
         {
             get { return _resources; }
             set { Update(ref _resources, value); }

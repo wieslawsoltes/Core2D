@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using System.Collections.ObjectModel;
+using System.Collections.Immutable;
 using Xunit;
 
 namespace Core2D.UnitTests
@@ -25,10 +25,10 @@ namespace Core2D.UnitTests
 
         [Fact]
         [Trait("Core2D", "Base")]
-        public void Resources_Is_ObservableCollection()
+        public void Resources_Is_ImmutableArray()
         {
             var target = new Class1();
-            Assert.IsType<ObservableCollection<ObservableObject>>(target.Resources);
+            Assert.IsType<ImmutableArray<ObservableObject>>(target.Resources);
         }
 
         private class Class1 : ObservableResource
