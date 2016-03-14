@@ -8,7 +8,7 @@ namespace Core2D.Xaml.Serializer
 {
     internal static class CoreXamlWriter
     {
-        internal static readonly CoreXamlSchemaContext context = new CoreXamlSchemaContext();
+        internal static readonly XamlSchemaContext context = new XamlSchemaContext();
 
         private static void Save(XamlXmlWriter writer, object instance)
         {

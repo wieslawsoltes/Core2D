@@ -183,10 +183,7 @@
     <Compile Include="Xaml\Converters\ShapeStateTypeConverter.cs" />
     <Compile Include="Xaml\Converters\XPathGeometryTypeConverter.cs" />
     <Compile Include="Xaml\Serializer\CoreXamlReader.cs" />
-    <Compile Include="Xaml\Serializer\CoreXamlSchemaContext.cs" />
     <Compile Include="Xaml\Serializer\CoreXamlSerializer.cs" />
-    <Compile Include="Xaml\Serializer\CoreXamlType.cs" />
-    <Compile Include="Xaml\Serializer\CoreXamlTypeInvoker.cs" />
     <Compile Include="Xaml\Serializer\CoreXamlWriter.cs" />
   </ItemGroup>
   <ItemGroup>
