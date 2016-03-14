@@ -23,26 +23,14 @@
              Design.Width="1200" Design.Height="540">
     <Grid Name="rootPanel" ColumnDefinitions="Auto,Auto,*,Auto,Auto" RowDefinitions="*,Auto">
         <i:Interaction.Behaviors>
-            <ia:DataTriggerBehavior Binding="{Binding #rootPanel.Bounds.Height}" ComparisonCondition="GreaterThan" Value="180">
-                <ia:ChangePropertyAction TargetObject="{Binding #leftPanelTop}" PropertyName="IsVisible" Value="True"/>
-                <ia:ChangePropertyAction TargetObject="{Binding #rightPanelTop}" PropertyName="IsVisible" Value="True"/>
-            </ia:DataTriggerBehavior>
-            <ia:DataTriggerBehavior Binding="{Binding #rootPanel.Bounds.Height}" ComparisonCondition="LessThanOrEqual" Value="180">
-                <ia:ChangePropertyAction TargetObject="{Binding #leftPanelTop}" PropertyName="IsVisible" Value="False"/>
-                <ia:ChangePropertyAction TargetObject="{Binding #rightPanelTop}" PropertyName="IsVisible" Value="False"/>
-            </ia:DataTriggerBehavior>
             <ia:DataTriggerBehavior Binding="{Binding #rootPanel.Bounds.Height}" ComparisonCondition="GreaterThan" Value="420">
-                <ia:ChangePropertyAction TargetObject="{Binding #leftPanelHSplitter}" PropertyName="IsVisible" Value="True"/>
                 <ia:ChangePropertyAction TargetObject="{Binding #leftPanelBottom}" PropertyName="IsVisible" Value="True"/>
-                <ia:ChangePropertyAction TargetObject="{Binding #rightPanelHSplitter}" PropertyName="IsVisible" Value="True"/>
                 <ia:ChangePropertyAction TargetObject="{Binding #rightPanelBottom}" PropertyName="IsVisible" Value="True"/>
                 <actions:ChangePerspexPropertyAction TargetObject="{Binding #leftPanelTop}" PropertyName="Grid.RowSpan" Value="1"/>
                 <actions:ChangePerspexPropertyAction TargetObject="{Binding #rightPanelTop}" PropertyName="Grid.RowSpan" Value="1"/>
             </ia:DataTriggerBehavior>
             <ia:DataTriggerBehavior Binding="{Binding #rootPanel.Bounds.Height}" ComparisonCondition="LessThanOrEqual" Value="420">
-                <ia:ChangePropertyAction TargetObject="{Binding #leftPanelHSplitter}" PropertyName="IsVisible" Value="False"/>
                 <ia:ChangePropertyAction TargetObject="{Binding #leftPanelBottom}" PropertyName="IsVisible" Value="False"/>
-                <ia:ChangePropertyAction TargetObject="{Binding #rightPanelHSplitter}" PropertyName="IsVisible" Value="False"/>
                 <ia:ChangePropertyAction TargetObject="{Binding #rightPanelBottom}" PropertyName="IsVisible" Value="False"/>
                 <actions:ChangePerspexPropertyAction TargetObject="{Binding #leftPanelTop}" PropertyName="Grid.RowSpan" Value="3"/>
                 <actions:ChangePerspexPropertyAction TargetObject="{Binding #rightPanelTop}" PropertyName="Grid.RowSpan" Value="3"/>
