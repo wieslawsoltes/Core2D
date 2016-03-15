@@ -10,6 +10,7 @@
              xmlns:behaviors="clr-namespace:Core2D.Perspex.Interactions.Behaviors;assembly=Core2D.Perspex"
              xmlns:converters="clr-namespace:Core2D.Perspex.Converters;assembly=Core2D.Perspex"
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D"
+             Focusable="True"
              Width="{Binding Project.CurrentContainer.Width}"
              Height="{Binding Project.CurrentContainer.Height}">
     <i:Interaction.Behaviors>
