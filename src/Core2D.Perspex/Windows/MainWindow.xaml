@@ -18,6 +18,27 @@
             <Binding Path="IsProjectDirty"/>
         </MultiBinding>
     </Window.Title>
+    <Window.KeyBindings>
+        <!-- File -->
+        <KeyBinding Command="{Static Editor:Commands.NewCommand}" CommandParameter="{Binding}" Gesture="Ctrl+N"/>
+        <KeyBinding Command="{Static Editor:Commands.OpenCommand}" Gesture="Ctrl+O"/>
+        <KeyBinding Command="{Static Editor:Commands.CloseCommand}" Gesture="Ctrl+F4"/>
+        <KeyBinding Command="{Static Editor:Commands.SaveCommand}" Gesture="Ctrl+S"/>
+        <KeyBinding Command="{Static Editor:Commands.SaveAsCommand}" Gesture="Ctrl+Shift+S"/>
+        <KeyBinding Command="{Static Editor:Commands.ImportXamlCommand}" Gesture="Ctrl+I"/>
+        <KeyBinding Command="{Static Editor:Commands.ExportCommand}" Gesture="Ctrl+E"/>
+        <KeyBinding Command="{Static Editor:Commands.ExitCommand}" Gesture="Alt+F4"/>
+        <!-- Edit -->
+        <KeyBinding Command="{Static Editor:Commands.UndoCommand}" Gesture="Ctrl+Z"/>
+        <KeyBinding Command="{Static Editor:Commands.RedoCommand}" Gesture="Ctrl+Y"/>
+        <KeyBinding Command="{Static Editor:Commands.CopyAsEmfCommand}" Gesture="Ctrl+Shift+C"/>
+        <KeyBinding Command="{Static Editor:Commands.CutCommand}" Gesture="Ctrl+X"/>
+        <KeyBinding Command="{Static Editor:Commands.CopyCommand}" Gesture="Ctrl+C"/>
+        <KeyBinding Command="{Static Editor:Commands.PasteCommand}" Gesture="Ctrl+V"/>
+        <KeyBinding Command="{Static Editor:Commands.SelectAllCommand}" Gesture="Ctrl+A"/>
+        <KeyBinding Command="{Static Editor:Commands.GroupCommand}" Gesture="Ctrl+G"/>
+        <KeyBinding Command="{Static Editor:Commands.UngroupCommand}" Gesture="Ctrl+U"/>
+    </Window.KeyBindings>
     <Grid RowDefinitions="Auto,*">
         <editor:MenuControl Grid.Row="0"/>
         <editor:EditorControl Margin="4,6,4,2" Grid.Row="1" IsVisible="{Binding Project, Converter={Static converters:IsNotNullConverter.Instance}}"/>
