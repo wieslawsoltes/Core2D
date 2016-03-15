@@ -84,9 +84,11 @@
         <GridSplitter Name="leftPanelVSplitter" Classes="vertical" Grid.Column="1" Grid.Row="0" Width="6"/>
         <Grid Name="drawablePanel" Grid.Row="0" Grid.Column="2">
             <Border Classes="drawable">
-                <paz:PanAndZoom Name="panAndZoom" AutoFitMode="Extent" ZoomSpeed="1.2" Grid.Row="0" Background="Transparent" ClipToBounds="True" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                    <editor:DrawableControl Name="drawableControl" ClipToBounds="False"/>
-                </paz:PanAndZoom>
+                <Border Classes="transparent" ClipToBounds="True">
+                    <paz:PanAndZoom Name="panAndZoom" AutoFitMode="Extent" ZoomSpeed="1.2" Background="Transparent" ClipToBounds="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                        <editor:DrawableControl Name="drawableControl" ClipToBounds="False"/>
+                    </paz:PanAndZoom>
+                </Border>
             </Border>
         </Grid>
         <Grid Name="leftPanel" RowDefinitions="50*,Auto,50*" Grid.Column="0" Grid.Row="0">
