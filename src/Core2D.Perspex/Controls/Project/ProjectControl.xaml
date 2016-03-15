@@ -22,6 +22,14 @@
         </Menu>
         <TextBox Text="{Binding Name, Mode=TwoWay}" Classes="left" Grid.Row="1"/>
         <TreeView Name="documents" Items="{Binding Documents, Mode=TwoWay}" SelectedItem="{Binding Selected, Mode=TwoWay}" Grid.Row="2" Classes="default">
+            <TreeView.KeyBindings>
+                <KeyBinding Command="{Static Editor:Commands.NewCommand}" CommandParameter="{Binding #documents.SelectedItem}" Gesture="Ctrl+N"/>
+                <KeyBinding Command="{Static Editor:Commands.CutCommand}" CommandParameter="{Binding #documents.SelectedItem}" Gesture="Ctrl+X"/>
+                <KeyBinding Command="{Static Editor:Commands.CopyCommand}" CommandParameter="{Binding #documents.SelectedItem}" Gesture="Ctrl+C"/>
+                <KeyBinding Command="{Static Editor:Commands.PasteCommand}" CommandParameter="{Binding #documents.SelectedItem}" Gesture="Ctrl+V"/>
+                <KeyBinding Command="{Static Editor:Commands.DeleteCommand}" CommandParameter="{Binding #documents.SelectedItem}" Gesture="Delete"/>
+                <KeyBinding Command="{Static Editor:Commands.ExportCommand}" CommandParameter="{Binding #documents.SelectedItem}" Gesture="Ctrl+E"/>
+            </TreeView.KeyBindings>
             <TreeView.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="_Add Document" Command="{Static Editor:Commands.AddDocumentCommand}" CommandParameter="{Binding Mode=OneWay}"/>

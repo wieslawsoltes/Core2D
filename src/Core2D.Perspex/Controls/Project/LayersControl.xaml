@@ -23,6 +23,10 @@
                         <MenuItem Header="-" Command="{Static Editor:Commands.RemoveLayerCommand}" CommandParameter="{Binding CurrentLayer}"/>
                     </Menu>
                     <ListBox Name="layers" Items="{Binding Layers}" SelectedItem="{Binding CurrentLayer, Mode=TwoWay}" Classes="default" Grid.Row="1">
+                        <ListBox.KeyBindings>
+                            <KeyBinding Command="{Static Editor:Commands.AddLayerCommand}" CommandParameter="{Binding #layers.DataContext, Mode=OneWay}" Gesture="Ctrl+N"/>
+                            <KeyBinding Command="{Static Editor:Commands.RemoveLayerCommand}" CommandParameter="{Binding #layers.SelectedItem}" Gesture="Delete"/>
+                        </ListBox.KeyBindings>
                         <ListBox.DataTemplates>
                             <DataTemplate DataType="Project:XLayer">
                                 <Grid ColumnDefinitions="Auto,*">

@@ -22,6 +22,11 @@
             <TextBox Text="{Binding CurrentTemplate.Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
         </Grid>
         <ListBox Name="templates" Items="{Binding Templates}" SelectedItem="{Binding CurrentTemplate, Mode=TwoWay}" Grid.Row="2" Classes="default">
+            <ListBox.KeyBindings>
+                <KeyBinding Command="{Static Editor:Commands.AddTemplateCommand}" Gesture="Ctrl+N"/>
+                <KeyBinding Command="{Static Editor:Commands.RemoveTemplateCommand}" CommandParameter="{Binding #templates.SelectedItem}" Gesture="Delete"/>
+                <KeyBinding Command="{Static Editor:Commands.ExportTemplateCommand}" CommandParameter="{Binding #templates.SelectedItem}" Gesture="Ctrl+E"/>
+            </ListBox.KeyBindings>
             <ListBox.DataTemplates>
                 <DataTemplate DataType="Project:XContainer">
                     <TextBlock Text="{Binding Name, Mode=TwoWay}" Classes="default">

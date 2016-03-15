@@ -22,6 +22,9 @@
                         <MenuItem Header="-" Command="{Static Editor:Commands.RemoveShapeCommand}"/>
                     </Menu>
                     <ListBox Name="shapes" Items="{Binding CurrentLayer.Shapes}" SelectedItem="{Binding CurrentShape, Mode=TwoWay}" Classes="default" Grid.Row="1">
+                        <ListBox.KeyBindings>
+                            <KeyBinding Command="{Static Editor:Commands.RemoveShapeCommand}" CommandParameter="{Binding #shapes.SelectedItem}" Gesture="Delete"/>
+                        </ListBox.KeyBindings>
                         <ListBox.DataTemplates>
                             <DataTemplate DataType="Shape:BaseShape">
                                 <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="default">
