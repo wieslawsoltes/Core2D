@@ -19,9 +19,9 @@
             </ItemsPanelTemplate>
         </Menu.ItemsPanel>
         <MenuItem Header="_File" IsVisible="{Binding Project, Converter={Static converters:IsNullConverter.Instance}}">
-            <MenuItem Header="_New" HotKey="Ctrl+N" Command="{Static Editor:Commands.NewCommand}" CommandParameter="{Binding}"/>
+            <MenuItem Header="_New" Command="{Static Editor:Commands.NewCommand}" CommandParameter="{Binding}"/>
             <Separator/>
-            <MenuItem Header="_Open..." HotKey="Ctrl+O" Command="{Static Editor:Commands.OpenCommand}"/>
+            <MenuItem Header="_Open..." Command="{Static Editor:Commands.OpenCommand}"/>
             <Separator/>
             <MenuItem Header="_Recent" Items="{Binding RecentProjects}">
                 <MenuItem.DataTemplates>
@@ -31,21 +31,21 @@
                 </MenuItem.DataTemplates>
             </MenuItem>
             <Separator/>
-            <MenuItem Header="E_xit" HotKey="Alt+F4" Command="{Static Editor:Commands.ExitCommand}"/>
+            <MenuItem Header="E_xit" Command="{Static Editor:Commands.ExitCommand}"/>
         </MenuItem>
         <MenuItem Header="_File" IsVisible="{Binding Project, Converter={Static converters:IsNotNullConverter.Instance}}">
-            <MenuItem Header="_New"  HotKey="Ctrl+N" Command="{Static Editor:Commands.NewCommand}" CommandParameter="{Binding}"/>
+            <MenuItem Header="_New" Command="{Static Editor:Commands.NewCommand}" CommandParameter="{Binding}"/>
             <Separator/>
-            <MenuItem Header="_Open..." HotKey="Ctrl+O" Command="{Static Editor:Commands.OpenCommand}"/>
+            <MenuItem Header="_Open..." Command="{Static Editor:Commands.OpenCommand}"/>
             <Separator/>
-            <MenuItem Header="_Close" HotKey="Ctrl+F4" Command="{Static Editor:Commands.CloseCommand}"/>
+            <MenuItem Header="_Close" Command="{Static Editor:Commands.CloseCommand}"/>
             <Separator/>
-            <MenuItem Header="_Save" HotKey="Ctrl+S" Command="{Static Editor:Commands.SaveCommand}"/>
-            <MenuItem Header="Save _As..." HotKey="Ctrl+Shift+S" Command="{Static Editor:Commands.SaveAsCommand}"/>
+            <MenuItem Header="_Save" Command="{Static Editor:Commands.SaveCommand}"/>
+            <MenuItem Header="Save _As..." Command="{Static Editor:Commands.SaveAsCommand}"/>
             <Separator/>
-            <MenuItem Header="_Import Xaml..." HotKey="Ctrl+I" Command="{Static Editor:Commands.ImportXamlCommand}"/>
+            <MenuItem Header="_Import Xaml..." Command="{Static Editor:Commands.ImportXamlCommand}"/>
             <Separator/>
-            <MenuItem Header="_Export..." HotKey="Ctrl+E" Command="{Static Editor:Commands.ExportCommand}"/>
+            <MenuItem Header="_Export..." Command="{Static Editor:Commands.ExportCommand}"/>
             <Separator/>
             <MenuItem Header="_Recent" Items="{Binding RecentProjects}">
                 <MenuItem.DataTemplates>
@@ -55,37 +55,37 @@
                 </MenuItem.DataTemplates>
             </MenuItem>
             <Separator/>
-            <MenuItem Header="E_xit" HotKey="Alt+F4" Command="{Static Editor:Commands.ExitCommand}"/>
+            <MenuItem Header="E_xit" Command="{Static Editor:Commands.ExitCommand}"/>
         </MenuItem>
         <MenuItem Header="_Edit" IsVisible="{Binding Project, Converter={Static converters:IsNotNullConverter.Instance}}">
-            <MenuItem Header="_Undo" HotKey="Ctrl+Z" Command="{Static Editor:Commands.UndoCommand}"/>
-            <MenuItem Header="_Redo" HotKey="Ctrl+Y" Command="{Static Editor:Commands.RedoCommand}"/>
+            <MenuItem Header="_Undo" Command="{Static Editor:Commands.UndoCommand}"/>
+            <MenuItem Header="_Redo" Command="{Static Editor:Commands.RedoCommand}"/>
             <Separator/>
-            <MenuItem Header="Cu_t" HotKey="Ctrl+X" Command="{Static Editor:Commands.CutCommand}"/>
-            <MenuItem Header="_Copy" HotKey="Ctrl+C" Command="{Static Editor:Commands.CopyCommand}"/>
-            <MenuItem Header="_Paste" HotKey="Ctrl+V" Command="{Static Editor:Commands.PasteCommand}"/>
-            <MenuItem Header="_Delete" HotKey="Delete" Command="{Static Editor:Commands.DeleteCommand}"/>
+            <MenuItem Header="Cu_t" Command="{Static Editor:Commands.CutCommand}"/>
+            <MenuItem Header="_Copy" Command="{Static Editor:Commands.CopyCommand}"/>
+            <MenuItem Header="_Paste" Command="{Static Editor:Commands.PasteCommand}"/>
+            <MenuItem Header="_Delete" Command="{Static Editor:Commands.DeleteCommand}"/>
             <Separator/>
-            <MenuItem Header="Select _All" HotKey="Ctrl+A" Command="{Static Editor:Commands.SelectAllCommand}"/>
-            <MenuItem Header="De_select All" HotKey="Escape" Command="{Static Editor:Commands.DeselectAllCommand}"/>
+            <MenuItem Header="Select _All" Command="{Static Editor:Commands.SelectAllCommand}"/>
+            <MenuItem Header="De_select All" Command="{Static Editor:Commands.DeselectAllCommand}"/>
             <Separator/>
             <MenuItem Header="Cl_ear All" Command="{Static Editor:Commands.ClearAllCommand}"/>
             <Separator/>
-            <MenuItem Header="_Group" HotKey="Ctrl+G" Command="{Static Editor:Commands.GroupCommand}"/>
-            <MenuItem Header="U_ngroup" HotKey="Ctrl+U" Command="{Static Editor:Commands.UngroupCommand}"/>
+            <MenuItem Header="_Group" Command="{Static Editor:Commands.GroupCommand}"/>
+            <MenuItem Header="U_ngroup" Command="{Static Editor:Commands.UngroupCommand}"/>
             <Separator/>
             <MenuItem Header="_Order">
-                <MenuItem Header="Send to _Back" HotKey="Shift+-" Command="{Static Editor:Commands.SendToBackCommand}"/>
-                <MenuItem Header="Send Ba_ckward" HotKey="-" Command="{Static Editor:Commands.SendBackwardCommand}"/>
+                <MenuItem Header="Send to _Back" Command="{Static Editor:Commands.SendToBackCommand}"/>
+                <MenuItem Header="Send Ba_ckward" Command="{Static Editor:Commands.SendBackwardCommand}"/>
                 <Separator/>
-                <MenuItem Header="Bring Fo_rward" HotKey="+" Command="{Static Editor:Commands.BringForwardCommand}"/>
-                <MenuItem Header="Bring to _Front" HotKey="Shift++" Command="{Static Editor:Commands.BringToFrontCommand}"/>
+                <MenuItem Header="Bring Fo_rward" Command="{Static Editor:Commands.BringForwardCommand}"/>
+                <MenuItem Header="Bring to _Front" Command="{Static Editor:Commands.BringToFrontCommand}"/>
             </MenuItem>
         </MenuItem>
         <MenuItem Header="_View" IsVisible="{Binding Project, Converter={Static converters:IsNotNullConverter.Instance}}">
-            <MenuItem Header="_Reset Zoom" HotKey="Z" Command="{Static Editor:Commands.ZoomResetCommand}"/>
+            <MenuItem Header="_Reset Zoom" Command="{Static Editor:Commands.ZoomResetCommand}"/>
             <Separator/>
-            <MenuItem Header="_AutoFit Zoom" HotKey="X" Command="{Static Editor:Commands.ZoomAutoFitCommand}"/>
+            <MenuItem Header="_AutoFit Zoom" Command="{Static Editor:Commands.ZoomAutoFitCommand}"/>
         </MenuItem>
         <MenuItem Header="_Project" IsVisible="{Binding Project, Converter={Static converters:IsNotNullConverter.Instance}}">
             <MenuItem Header="_Add Document" Command="{Static Editor:Commands.AddDocumentCommand}" CommandParameter="{Binding Project}"/>
@@ -151,33 +151,33 @@
             </MenuItem>
         </MenuItem>
         <MenuItem Header="_Tool" IsVisible="{Binding Project, Converter={Static converters:IsNotNullConverter.Instance}}">
-            <MenuItem Header="_None" HotKey="N" Command="{Static Editor:Commands.ToolNoneCommand}"/>
+            <MenuItem Header="_None" Command="{Static Editor:Commands.ToolNoneCommand}"/>
             <Separator/>
-            <MenuItem Header="_Selection" HotKey="S" Command="{Static Editor:Commands.ToolSelectionCommand}"/>
+            <MenuItem Header="_Selection" Command="{Static Editor:Commands.ToolSelectionCommand}"/>
             <Separator/>
-            <MenuItem Header="_Point" HotKey="P" Command="{Static Editor:Commands.ToolPointCommand}"/>
+            <MenuItem Header="_Point" Command="{Static Editor:Commands.ToolPointCommand}"/>
             <Separator/>
-            <MenuItem Header="_Line" HotKey="L" Command="{Static Editor:Commands.ToolLineCommand}"/>
-            <MenuItem Header="_Arc" HotKey="A" Command="{Static Editor:Commands.ToolArcCommand}"/>
-            <MenuItem Header="Cubic _Bezier" HotKey="B" Command="{Static Editor:Commands.ToolCubicBezierCommand}"/>
-            <MenuItem Header="_Quadratic Bezier" HotKey="Q" Command="{Static Editor:Commands.ToolQuadraticBezierCommand}"/>
+            <MenuItem Header="_Line" Command="{Static Editor:Commands.ToolLineCommand}"/>
+            <MenuItem Header="_Arc" Command="{Static Editor:Commands.ToolArcCommand}"/>
+            <MenuItem Header="Cubic _Bezier" Command="{Static Editor:Commands.ToolCubicBezierCommand}"/>
+            <MenuItem Header="_Quadratic Bezier" Command="{Static Editor:Commands.ToolQuadraticBezierCommand}"/>
             <Separator/>
-            <MenuItem Header="Pat_h" HotKey="H" Command="{Static Editor:Commands.ToolPathCommand}"/>
+            <MenuItem Header="Pat_h" Command="{Static Editor:Commands.ToolPathCommand}"/>
             <MenuItem Header="Path T_ool">
                 <MenuItem Header="_Line" Command="{Static Editor:Commands.ToolLineCommand}"/>
                 <MenuItem Header="_Arc" Command="{Static Editor:Commands.ToolArcCommand}"/>
                 <MenuItem Header="Cubic _Bezier" Command="{Static Editor:Commands.ToolCubicBezierCommand}"/>
                 <MenuItem Header="_Quadratic Bezier" Command="{Static Editor:Commands.ToolQuadraticBezierCommand}"/>
                 <Separator/>
-                <MenuItem Header="_Move" HotKey="M" Command="{Static Editor:Commands.ToolMoveCommand}"/>
+                <MenuItem Header="_Move" Command="{Static Editor:Commands.ToolMoveCommand}"/>
             </MenuItem>
             <Separator/>
-            <MenuItem Header="_Rectangle" HotKey="R" Command="{Static Editor:Commands.ToolRectangleCommand}"/>
-            <MenuItem Header="_Ellipse" HotKey="E" Command="{Static Editor:Commands.ToolEllipseCommand}"/>
+            <MenuItem Header="_Rectangle" Command="{Static Editor:Commands.ToolRectangleCommand}"/>
+            <MenuItem Header="_Ellipse" Command="{Static Editor:Commands.ToolEllipseCommand}"/>
             <Separator/>
-            <MenuItem Header="_Text" HotKey="T" Command="{Static Editor:Commands.ToolTextCommand}"/>
+            <MenuItem Header="_Text" Command="{Static Editor:Commands.ToolTextCommand}"/>
             <Separator/>
-            <MenuItem Header="_Image" HotKey="I" Command="{Static Editor:Commands.ToolImageCommand}"/>
+            <MenuItem Header="_Image" Command="{Static Editor:Commands.ToolImageCommand}"/>
         </MenuItem>
         <MenuItem Header="_Data" IsVisible="{Binding Project, Converter={Static converters:IsNotNullConverter.Instance}}">
             <MenuItem Header="_Import..." Command="{Static Editor:Commands.ImportDataCommand}"/>
@@ -194,15 +194,15 @@
             </MenuItem.DataTemplates>
         </MenuItem>
         <MenuItem Header="_Options" IsVisible="{Binding Project, Converter={Static converters:IsNotNullConverter.Instance}}">
-            <MenuItem Header="Default is Stro_ked" HotKey="K" Command="{Static Editor:Commands.DefaultIsStrokedCommand}"/>
-            <MenuItem Header="Default is _Filled" HotKey="F" Command="{Static Editor:Commands.DefaultIsFilledCommand}"/>
+            <MenuItem Header="Default is Stro_ked" Command="{Static Editor:Commands.DefaultIsStrokedCommand}"/>
+            <MenuItem Header="Default is _Filled" Command="{Static Editor:Commands.DefaultIsFilledCommand}"/>
             <Separator/>
-            <MenuItem Header="Default is Close_d" HotKey="D" Command="{Static Editor:Commands.DefaultIsClosedCommand}"/>
-            <MenuItem Header="Default is Smooth _Join" HotKey="J" Command="{Static Editor:Commands.DefaultIsSmoothJoinCommand}"/>
+            <MenuItem Header="Default is Close_d" Command="{Static Editor:Commands.DefaultIsClosedCommand}"/>
+            <MenuItem Header="Default is Smooth _Join" Command="{Static Editor:Commands.DefaultIsSmoothJoinCommand}"/>
             <Separator/>
-            <MenuItem Header="Snap to _Grid" HotKey="G" Command="{Static Editor:Commands.SnapToGridCommand}"/>
+            <MenuItem Header="Snap to _Grid" Command="{Static Editor:Commands.SnapToGridCommand}"/>
             <Separator/>
-            <MenuItem Header="Try To _Connect" HotKey="C" Command="{Static Editor:Commands.TryToConnectCommand}"/>
+            <MenuItem Header="Try To _Connect" Command="{Static Editor:Commands.TryToConnectCommand}"/>
         </MenuItem>
     </Menu>
 </UserControl>
