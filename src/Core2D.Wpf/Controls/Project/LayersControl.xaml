@@ -33,7 +33,7 @@
                 <ContextMenu x:Key="LayerContextMenu" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
                     <MenuItem Header="_Add Layer" InputGestureText="Ctrl+N" Command="{x:Static Editor:Commands.AddLayerCommand}" CommandParameter="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"/>
                     <Separator/>
-                    <MenuItem Header="_Delete" InputGestureText="Del" Command="{x:Static Editor:Commands.RemoveLayerCommand}"  CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type lists:XLayerDragAndDropListBox}}}"/>
+                    <MenuItem Header="_Delete" InputGestureText="Del" Command="{x:Static Editor:Commands.RemoveLayerCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type lists:XLayerDragAndDropListBox}}}"/>
                 </ContextMenu>
             </lists:XLayerDragAndDropListBox.Resources>
             <lists:XLayerDragAndDropListBox.InputBindings>
