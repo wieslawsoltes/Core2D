@@ -73,6 +73,7 @@ message LineFixedLength {
    optional LineFixedLengthFlags Flags = 1;
    optional bcl.NetObjectProxy StartTrigger = 2; // reference-tracked ShapeState
    optional bcl.NetObjectProxy EndTrigger = 3; // reference-tracked ShapeState
+   optional double Length = 4;
 }
 enum LineFixedLengthFlags {
    // this is a composite/flags enumeration
