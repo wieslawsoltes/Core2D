@@ -13,9 +13,9 @@ namespace Core2D.Style
     public sealed class LineFixedLength : ObservableObject
     {
         private LineFixedLengthFlags _flags;
-        private double _length;
         private ShapeState _startTrigger;
         private ShapeState _endTrigger;
+        private double _length;
 
         /// <summary>
         /// Get or sets line fixed length flags.
@@ -126,15 +126,6 @@ namespace Core2D.Style
         }
 
         /// <summary>
-        /// Gets or sets line fixed length.
-        /// </summary>
-        public double Length
-        {
-            get { return _length; }
-            set { Update(ref _length, value); }
-        }
-
-        /// <summary>
         /// Gets or sets line start point state trigger.
         /// </summary>
         public ShapeState StartTrigger
@@ -153,21 +144,30 @@ namespace Core2D.Style
         }
 
         /// <summary>
+        /// Gets or sets line fixed length.
+        /// </summary>
+        public double Length
+        {
+            get { return _length; }
+            set { Update(ref _length, value); }
+        }
+
+        /// <summary>
         /// Creates a new <see cref="LineFixedLength"/> instance.
         /// </summary>
         /// <param name="flags">The line fixed length flags.</param>
-        /// <param name="length">The line fixed length.</param>
         /// <param name="startTrigger">The line start point state trigger.</param>
         /// <param name="endTrigger">The line end point state trigger.</param>
+        /// <param name="length">The line fixed length.</param>
         /// <returns>he new instance of the <see cref="LineFixedLength"/> class.</returns>
-        public static LineFixedLength Create(LineFixedLengthFlags flags = LineFixedLengthFlags.Disabled, double length = 15.0, ShapeState startTrigger = null, ShapeState endTrigger = null)
+        public static LineFixedLength Create(LineFixedLengthFlags flags = LineFixedLengthFlags.Disabled, ShapeState startTrigger = null, ShapeState endTrigger = null, double length = 15.0)
         {
             return new LineFixedLength()
             {
                 Flags = flags,
-                Length = length,
                 StartTrigger = startTrigger ?? ShapeState.Create(ShapeStateFlags.Connector | ShapeStateFlags.Output),
-                EndTrigger = endTrigger ?? ShapeState.Create(ShapeStateFlags.Connector | ShapeStateFlags.Input)
+                EndTrigger = endTrigger ?? ShapeState.Create(ShapeStateFlags.Connector | ShapeStateFlags.Input),
+                Length = length
             };
         }
 
