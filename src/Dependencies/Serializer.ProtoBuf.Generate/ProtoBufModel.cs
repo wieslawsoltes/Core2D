@@ -110,6 +110,7 @@ namespace Serializer.ProtoBuf
             lineFixedLength.AddField(1, nameof(LineFixedLength.Flags));
             lineFixedLength.AddField(2, nameof(LineFixedLength.StartTrigger)).AsReference = true;
             lineFixedLength.AddField(3, nameof(LineFixedLength.EndTrigger)).AsReference = true;
+            lineFixedLength.AddField(4, nameof(LineFixedLength.Length));
 
             var lineStyle = model.Add(typeof(LineStyle), false);
             lineStyle.AsReferenceDefault = true;
