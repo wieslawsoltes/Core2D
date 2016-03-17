@@ -35,6 +35,11 @@
                                 <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                             </ContextMenu>
                         </TreeView.ContextMenu>
+                        <TreeView.Styles>
+                            <Style Selector="TreeViewItem">
+                                <Setter Property="IsExpanded" Value="True"/>
+                            </Style>
+                        </TreeView.Styles>
                         <TreeView.DataTemplates>
                             <TreeDataTemplate ItemsSource="{Binding Items, Mode=TwoWay}">
                                 <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="default">
@@ -71,6 +76,11 @@
                                 <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                             </ContextMenu>
                         </TreeView.ContextMenu>
+                        <TreeView.Styles>
+                            <Style Selector="TreeViewItem">
+                                <Setter Property="IsExpanded" Value="True"/>
+                            </Style>
+                        </TreeView.Styles>
                         <TreeView.DataTemplates>
                             <TreeDataTemplate ItemsSource="{Binding Items, Mode=TwoWay}">
                                 <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="default">
@@ -170,6 +180,11 @@
                                 <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                             </ContextMenu>
                         </TreeView.ContextMenu>
+                        <TreeView.Styles>
+                            <Style Selector="TreeViewItem">
+                                <Setter Property="IsExpanded" Value="True"/>
+                            </Style>
+                        </TreeView.Styles>
                         <TreeView.DataTemplates>
                             <TreeDataTemplate DataType="Project:XDocument" ItemsSource="{Binding Pages, Mode=TwoWay}">
                                 <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="default">
