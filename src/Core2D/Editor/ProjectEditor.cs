@@ -4285,6 +4285,11 @@ namespace Core2D.Editor
                     async (path) => await (Application?.OnImportXamlAsync(path) ?? Task.FromResult<object>(null)),
                     (path) => IsEditMode());
 
+            Commands.ExportXamlCommand =
+                Command<object>.Create(
+                    async (item) => await (Application?.OnExportXamlAsync(item) ?? Task.FromResult<object>(null)),
+                    (path) => IsEditMode());
+
             Commands.ExportCommand =
                 Command<object>.Create(
                     async (item) => await (Application?.OnExportAsync(item) ?? Task.FromResult<object>(null)),
