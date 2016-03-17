@@ -37,7 +37,7 @@
                         </TreeView.ContextMenu>
                         <TreeView.Styles>
                             <Style Selector="TreeViewItem">
-                                <Setter Property="IsExpanded" Value="True"/>
+                                <Setter Property="IsExpanded" Value="False"/>
                             </Style>
                         </TreeView.Styles>
                         <TreeView.DataTemplates>
@@ -87,7 +87,7 @@
                         </TreeView.ContextMenu>
                         <TreeView.Styles>
                             <Style Selector="TreeViewItem">
-                                <Setter Property="IsExpanded" Value="True"/>
+                                <Setter Property="IsExpanded" Value="False"/>
                             </Style>
                         </TreeView.Styles>
                         <TreeView.DataTemplates>
@@ -218,7 +218,7 @@
                         </TreeView.ContextMenu>
                         <TreeView.Styles>
                             <Style Selector="TreeViewItem">
-                                <Setter Property="IsExpanded" Value="True"/>
+                                <Setter Property="IsExpanded" Value="False"/>
                             </Style>
                         </TreeView.Styles>
                         <TreeView.DataTemplates>
