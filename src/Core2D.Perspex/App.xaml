@@ -478,6 +478,13 @@
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="AutoScrollToSelectedItem" Value="True"/>
         </Style>
+        <!-- TreeView.xaml -->
+        <Style Selector="TreeView.xaml">
+            <Setter Property="Padding" Value="4"/>
+            <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="AutoScrollToSelectedItem" Value="True"/>
+        </Style>
     </Application.Styles>
     <Application.DataTemplates>
         <!-- Style -->
