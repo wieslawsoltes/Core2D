@@ -42,6 +42,13 @@ namespace Core2D.Editor.Interfaces
         Task OnImportXamlAsync(string path);
 
         /// <summary>
+        /// Export xaml to external file.
+        /// </summary>
+        /// <param name="item">The item object to export.</param>
+        /// <returns>The await <see cref="Task"/>.</returns>
+        Task OnExportXamlAsync(object item);
+
+        /// <summary>
         /// Export item object to external file.
         /// </summary>
         /// <param name="item">The item object to export.</param>
