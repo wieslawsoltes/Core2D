@@ -61,8 +61,48 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Groups" Classes="property">
-                <Grid>
-                    <!-- TODO -->
+                <Grid ColumnDefinitions="250,Auto,*" RowDefinitions="*">
+                    <TreeView Name="groups" Items="{Binding Project.GroupLibraries, Mode=TwoWay}" Classes="xaml" Grid.Column="0" Grid.Row="0" Margin="3,3,0,3">
+                        <TreeView.KeyBindings>
+                            <KeyBinding Command="{Static Editor:Commands.ExportCommand}" CommandParameter="{Binding #groups.SelectedItem}" Gesture="Ctrl+E"/>
+                        </TreeView.KeyBindings>
+                        <TreeView.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                            </ContextMenu>
+                        </TreeView.ContextMenu>
+                        <TreeView.DataTemplates>
+                            <TreeDataTemplate ItemsSource="{Binding Items, Mode=TwoWay}">
+                                <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="default">
+                                    <TextBlock.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportXamlCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                        </ContextMenu>
+                                    </TextBlock.ContextMenu>
+                                </TextBlock>
+                            </TreeDataTemplate>
+                            <TreeDataTemplate DataType="Shapes:XGroup" ItemsSource="{Binding Resources, Mode=TwoWay}">
+                                <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="default">
+                                    <TextBlock.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportXamlCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                        </ContextMenu>
+                                    </TextBlock.ContextMenu>
+                                </TextBlock>
+                            </TreeDataTemplate>
+                            <DataTemplate DataType="Core:ObservableObject">
+                                <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="default">
+                                    <TextBlock.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportXamlCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                        </ContextMenu>
+                                    </TextBlock.ContextMenu>
+                                </TextBlock>
+                            </DataTemplate>
+                        </TreeView.DataTemplates>
+                    </TreeView>
+                    <GridSplitter Classes="vertical" Grid.Column="1" Grid.Row="0" Width="6"/>
+                    <TextBox Text="{Binding #groups.SelectedItem, Mode=OneWay, Converter={Static converters:ObjectToXamlStringConverter.Instance}}" Classes="xaml" Grid.Column="2" Grid.Row="0" Margin="0,3,3,3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Databases" Classes="property">
