@@ -471,7 +471,7 @@
             <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
-        <!-- TreeView -->
+        <!-- TreeView.default -->
         <Style Selector="TreeView.default">
             <Setter Property="Margin" Value="0"/>
             <Setter Property="Padding" Value="0"/>
