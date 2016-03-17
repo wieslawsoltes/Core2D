@@ -30,9 +30,8 @@ namespace Core2D.Perspex.Converters
         {
             if (value != null && value != PerspexProperty.UnsetValue)
             {
-                return value.GetType().ToString().Split('.').Last();
+                return value.GetType().Name;
             }
-
             return PerspexProperty.UnsetValue;
         }
 
