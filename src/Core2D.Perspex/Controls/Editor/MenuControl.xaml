@@ -44,6 +44,7 @@
             <MenuItem Header="Save _As..." Command="{Static Editor:Commands.SaveAsCommand}"/>
             <Separator/>
             <MenuItem Header="_Import Xaml..." Command="{Static Editor:Commands.ImportXamlCommand}"/>
+            <MenuItem Header="Export Xa_ml..." Command="{Static Editor:Commands.ExportXamlCommand}"/>
             <Separator/>
             <MenuItem Header="_Export..." Command="{Static Editor:Commands.ExportCommand}"/>
             <Separator/>

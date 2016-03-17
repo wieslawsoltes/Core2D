@@ -360,6 +360,36 @@ namespace Core2D.Perspex
         }
 
         /// <inheritdoc/>
+        public async Task OnExportXamlAsync(object item)
+        {
+            try
+            {
+                if (item != null)
+                {
+                    var dlg = new SaveFileDialog();
+                    dlg.Filters.Add(new FileDialogFilter() { Name = "Xaml", Extensions = { "xaml" } });
+                    dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
+
+                    var result = await dlg.ShowAsync(_mainWindow);
+                    if (result != null)
+                    {
+                        _editor?.OnExportXaml(result, item);
+                    }
+                }
+                else
+                {
+                    var exporter = new Windows.ExporterWindow();
+                    exporter.DataContext = _editor;
+                    exporter.Show();
+                }
+            }
+            catch (Exception ex)
+            {
+                _editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+            }
+        }
+
+        /// <inheritdoc/>
         public async Task OnExportAsync(object item)
         {
             try

@@ -270,16 +270,24 @@
         <Style Selector="GridSplitter.horizontal">
             <Setter Property="Orientation" Value="Horizontal"/>
         </Style>
-        <!-- ListBox -->
+        <!-- ListBox.default -->
         <Style Selector="ListBox.default">
             <Setter Property="Margin" Value="0"/>
             <Setter Property="Padding" Value="0"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="AutoScrollToSelectedItem" Value="True"/>
         </Style>
+        <!-- ListBox.recents -->
         <Style Selector="ListBox.recents">
             <Setter Property="Margin" Value="0"/>
             <Setter Property="Padding" Value="0"/>
+            <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="AutoScrollToSelectedItem" Value="True"/>
+        </Style>
+        <!-- ListBox.xaml -->
+        <Style Selector="ListBox.xaml">
+            <Setter Property="Padding" Value="4"/>
             <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="AutoScrollToSelectedItem" Value="True"/>
@@ -465,17 +473,45 @@
             <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
+        <!-- TextBox.xaml -->
+        <Style Selector="TextBox.xaml">
+            <Setter Property="Padding" Value="4"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Background" Value="{StyleResource BackgroundBrush}"/>
+            <Setter Property="TextAlignment" Value="Left"/>
+            <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="AcceptsReturn" Value="False"/>
+            <Setter Property="TextWrapping" Value="NoWrap"/>
+            <Setter Property="HorizontalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+        </Style>
+        <Style Selector="TextBox.xaml:pointerover /template/ Border#border">
+            <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+        <Style Selector="TextBox.xaml:focus /template/ Border#border">
+            <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
         <!-- ToolTip -->
         <Style Selector="ToolTip">
             <Setter Property="Background" Value="{StyleResource BackgroundBrush}"/>
             <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
-        <!-- TreeView -->
+        <!-- TreeView.default -->
         <Style Selector="TreeView.default">
             <Setter Property="Margin" Value="0"/>
             <Setter Property="Padding" Value="0"/>
             <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="AutoScrollToSelectedItem" Value="True"/>
+        </Style>
+        <!-- TreeView.xaml -->
+        <Style Selector="TreeView.xaml">
+            <Setter Property="Padding" Value="4"/>
+            <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="AutoScrollToSelectedItem" Value="True"/>
         </Style>
     </Application.Styles>
