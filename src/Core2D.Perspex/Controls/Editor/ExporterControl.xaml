@@ -28,11 +28,11 @@
                 <Grid ColumnDefinitions="250,Auto,*" RowDefinitions="*">
                     <TreeView Name="styles" Items="{Binding Project.StyleLibraries, Mode=TwoWay}" Classes="xaml" Grid.Column="0" Grid.Row="0" Margin="3,3,0,3">
                         <TreeView.KeyBindings>
-                            <KeyBinding Command="{Static Editor:Commands.ExportCommand}" CommandParameter="{Binding #styles.SelectedItem}" Gesture="Ctrl+E"/>
+                            <KeyBinding Command="{Static Editor:Commands.ExportXamlCommand}" CommandParameter="{Binding #styles.SelectedItem}" Gesture="Ctrl+E"/>
                         </TreeView.KeyBindings>
                         <TreeView.ContextMenu>
                             <ContextMenu>
-                                <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportXamlCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                             </ContextMenu>
                         </TreeView.ContextMenu>
                         <TreeView.Styles>
@@ -64,7 +64,7 @@
                     <GridSplitter Classes="vertical" Grid.Column="1" Grid.Row="0" Width="6"/>
                     <TextBox Text="{Binding #styles.SelectedItem, Mode=OneWay, Converter={Static converters:ObjectToXamlStringConverter.Instance}}" Classes="xaml" Grid.Column="2" Grid.Row="0" Margin="0,3,3,3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <TextBox.KeyBindings>
-                            <KeyBinding Command="{Static Editor:Commands.ExportCommand}" CommandParameter="{Binding #styles.SelectedItem, Mode=OneWay}" Gesture="Ctrl+E"/>
+                            <KeyBinding Command="{Static Editor:Commands.ExportXamlCommand}" CommandParameter="{Binding #styles.SelectedItem, Mode=OneWay}" Gesture="Ctrl+E"/>
                         </TextBox.KeyBindings>
                         <TextBox.ContextMenu>
                             <ContextMenu>
@@ -78,11 +78,11 @@
                 <Grid ColumnDefinitions="250,Auto,*" RowDefinitions="*">
                     <TreeView Name="groups" Items="{Binding Project.GroupLibraries, Mode=TwoWay}" Classes="xaml" Grid.Column="0" Grid.Row="0" Margin="3,3,0,3">
                         <TreeView.KeyBindings>
-                            <KeyBinding Command="{Static Editor:Commands.ExportCommand}" CommandParameter="{Binding #groups.SelectedItem}" Gesture="Ctrl+E"/>
+                            <KeyBinding Command="{Static Editor:Commands.ExportXamlCommand}" CommandParameter="{Binding #groups.SelectedItem}" Gesture="Ctrl+E"/>
                         </TreeView.KeyBindings>
                         <TreeView.ContextMenu>
                             <ContextMenu>
-                                <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportXamlCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                             </ContextMenu>
                         </TreeView.ContextMenu>
                         <TreeView.Styles>
@@ -123,7 +123,7 @@
                     <GridSplitter Classes="vertical" Grid.Column="1" Grid.Row="0" Width="6"/>
                     <TextBox Text="{Binding #groups.SelectedItem, Mode=OneWay, Converter={Static converters:ObjectToXamlStringConverter.Instance}}" Classes="xaml" Grid.Column="2" Grid.Row="0" Margin="0,3,3,3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <TextBox.KeyBindings>
-                            <KeyBinding Command="{Static Editor:Commands.ExportCommand}" CommandParameter="{Binding #groups.SelectedItem, Mode=OneWay}" Gesture="Ctrl+E"/>
+                            <KeyBinding Command="{Static Editor:Commands.ExportXamlCommand}" CommandParameter="{Binding #groups.SelectedItem, Mode=OneWay}" Gesture="Ctrl+E"/>
                         </TextBox.KeyBindings>
                         <TextBox.ContextMenu>
                             <ContextMenu>
@@ -137,11 +137,11 @@
                 <Grid ColumnDefinitions="250,Auto,*" RowDefinitions="*">
                     <ListBox Name="databases" Items="{Binding Project.Databases, Mode=TwoWay}" Classes="xaml" Grid.Column="0" Grid.Row="0" Margin="3,3,0,3">
                         <ListBox.KeyBindings>
-                            <KeyBinding Command="{Static Editor:Commands.ExportCommand}" CommandParameter="{Binding #databases.SelectedItem}" Gesture="Ctrl+E"/>
+                            <KeyBinding Command="{Static Editor:Commands.ExportXamlCommand}" CommandParameter="{Binding #databases.SelectedItem}" Gesture="Ctrl+E"/>
                         </ListBox.KeyBindings>
                         <ListBox.ContextMenu>
                             <ContextMenu>
-                                <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportXamlCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                             </ContextMenu>
                         </ListBox.ContextMenu>
                         <ListBox.DataTemplates>
@@ -159,7 +159,7 @@
                     <GridSplitter Classes="vertical" Grid.Column="1" Grid.Row="0" Width="6"/>
                     <TextBox Text="{Binding #databases.SelectedItem, Mode=OneWay, Converter={Static converters:ObjectToXamlStringConverter.Instance}}" Classes="xaml" Grid.Column="2" Grid.Row="0" Margin="0,3,3,3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <TextBox.KeyBindings>
-                            <KeyBinding Command="{Static Editor:Commands.ExportCommand}" CommandParameter="{Binding #databases.SelectedItem, Mode=OneWay}" Gesture="Ctrl+E"/>
+                            <KeyBinding Command="{Static Editor:Commands.ExportXamlCommand}" CommandParameter="{Binding #databases.SelectedItem, Mode=OneWay}" Gesture="Ctrl+E"/>
                         </TextBox.KeyBindings>
                         <TextBox.ContextMenu>
                             <ContextMenu>
@@ -173,11 +173,11 @@
                 <Grid ColumnDefinitions="250,Auto,*" RowDefinitions="*">
                     <ListBox Name="templates" Items="{Binding Project.Templates, Mode=TwoWay}" Classes="xaml" Grid.Column="0" Grid.Row="0" Margin="3,3,0,3">
                         <ListBox.KeyBindings>
-                            <KeyBinding Command="{Static Editor:Commands.ExportCommand}" CommandParameter="{Binding #templates.SelectedItem}" Gesture="Ctrl+E"/>
+                            <KeyBinding Command="{Static Editor:Commands.ExportXamlCommand}" CommandParameter="{Binding #templates.SelectedItem}" Gesture="Ctrl+E"/>
                         </ListBox.KeyBindings>
                         <ListBox.ContextMenu>
                             <ContextMenu>
-                                <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportXamlCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                             </ContextMenu>
                         </ListBox.ContextMenu>
                         <ListBox.DataTemplates>
@@ -195,7 +195,7 @@
                     <GridSplitter Classes="vertical" Grid.Column="1" Grid.Row="0" Width="6"/>
                     <TextBox Text="{Binding #templates.SelectedItem, Mode=OneWay, Converter={Static converters:ObjectToXamlStringConverter.Instance}}" Classes="xaml" Grid.Column="2" Grid.Row="0" Margin="0,3,3,3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <TextBox.KeyBindings>
-                            <KeyBinding Command="{Static Editor:Commands.ExportCommand}" CommandParameter="{Binding #templates.SelectedItem, Mode=OneWay}" Gesture="Ctrl+E"/>
+                            <KeyBinding Command="{Static Editor:Commands.ExportXamlCommand}" CommandParameter="{Binding #templates.SelectedItem, Mode=OneWay}" Gesture="Ctrl+E"/>
                         </TextBox.KeyBindings>
                         <TextBox.ContextMenu>
                             <ContextMenu>
@@ -209,11 +209,11 @@
                 <Grid ColumnDefinitions="250,Auto,*" RowDefinitions="*">
                     <TreeView Name="documents" Items="{Binding Project.Documents, Mode=TwoWay}" Classes="xaml" Grid.Column="0" Grid.Row="0" Margin="3,3,0,3">
                         <TreeView.KeyBindings>
-                            <KeyBinding Command="{Static Editor:Commands.ExportCommand}" CommandParameter="{Binding #documents.SelectedItem}" Gesture="Ctrl+E"/>
+                            <KeyBinding Command="{Static Editor:Commands.ExportXamlCommand}" CommandParameter="{Binding #documents.SelectedItem}" Gesture="Ctrl+E"/>
                         </TreeView.KeyBindings>
                         <TreeView.ContextMenu>
                             <ContextMenu>
-                                <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportXamlCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                             </ContextMenu>
                         </TreeView.ContextMenu>
                         <TreeView.Styles>
@@ -272,7 +272,7 @@
                     <GridSplitter Classes="vertical" Grid.Column="1" Grid.Row="0" Width="6"/>
                     <TextBox Text="{Binding #documents.SelectedItem, Mode=OneWay, Converter={Static converters:ObjectToXamlStringConverter.Instance}}" Classes="xaml" Grid.Column="2" Grid.Row="0" Margin="0,3,3,3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <TextBox.KeyBindings>
-                            <KeyBinding Command="{Static Editor:Commands.ExportCommand}" CommandParameter="{Binding #documents.SelectedItem, Mode=OneWay}" Gesture="Ctrl+E"/>
+                            <KeyBinding Command="{Static Editor:Commands.ExportXamlCommand}" CommandParameter="{Binding #documents.SelectedItem, Mode=OneWay}" Gesture="Ctrl+E"/>
                         </TextBox.KeyBindings>
                         <TextBox.ContextMenu>
                             <ContextMenu>
@@ -286,7 +286,7 @@
                 <Grid>
                     <TextBox Text="{Binding Project.Options, Mode=OneWay, Converter={Static converters:ObjectToXamlStringConverter.Instance}}" Classes="xaml" Grid.Column="2" Grid.Row="0" Margin="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <TextBox.KeyBindings>
-                            <KeyBinding Command="{Static Editor:Commands.ExportCommand}" CommandParameter="{Binding}" Gesture="Ctrl+E"/>
+                            <KeyBinding Command="{Static Editor:Commands.ExportXamlCommand}" CommandParameter="{Binding}" Gesture="Ctrl+E"/>
                         </TextBox.KeyBindings>
                         <TextBox.ContextMenu>
                             <ContextMenu>
