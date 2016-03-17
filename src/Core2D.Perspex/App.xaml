@@ -465,6 +465,23 @@
             <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
+        <!-- TextBox.xaml -->
+        <Style Selector="TextBox.xaml">
+            <Setter Property="Padding" Value="4"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Background" Value="{StyleResource BackgroundBrush}"/>
+            <Setter Property="TextAlignment" Value="Left"/>
+            <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+        <Style Selector="TextBox.xaml:pointerover /template/ Border#border">
+            <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+        <Style Selector="TextBox.xaml:focus /template/ Border#border">
+            <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
         <!-- ToolTip -->
         <Style Selector="ToolTip">
             <Setter Property="Background" Value="{StyleResource BackgroundBrush}"/>
