@@ -286,11 +286,81 @@
                 <Grid>
                     <TextBox Text="{Binding Project.Options, Mode=OneWay, Converter={Static converters:ObjectToXamlStringConverter.Instance}}" Classes="xaml" Grid.Column="2" Grid.Row="0" Margin="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <TextBox.KeyBindings>
-                            <KeyBinding Command="{Static Editor:Commands.ExportXamlCommand}" CommandParameter="{Binding}" Gesture="Ctrl+E"/>
+                            <KeyBinding Command="{Static Editor:Commands.ExportXamlCommand}" CommandParameter="{Binding Project.Options, Mode=OneWay}" Gesture="Ctrl+E"/>
                         </TextBox.KeyBindings>
                         <TextBox.ContextMenu>
                             <ContextMenu>
-                                <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportXamlCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportXamlCommand}" CommandParameter="{Binding Project.Options, Mode=OneWay}"/>
+                            </ContextMenu>
+                        </TextBox.ContextMenu>
+                    </TextBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Shape" Classes="property">
+                <Grid>
+                    <TextBox Text="{Binding Project.CurrentContainer.CurrentShape, Mode=OneWay, Converter={Static converters:ObjectToXamlStringConverter.Instance}}" Classes="xaml" Grid.Column="2" Grid.Row="0" Margin="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <TextBox.KeyBindings>
+                            <KeyBinding Command="{Static Editor:Commands.ExportXamlCommand}" CommandParameter="{Binding Project.CurrentContainer.CurrentShape, Mode=OneWay}" Gesture="Ctrl+E"/>
+                        </TextBox.KeyBindings>
+                        <TextBox.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportXamlCommand}" CommandParameter="{Binding Project.CurrentContainer.CurrentShape, Mode=OneWay}"/>
+                            </ContextMenu>
+                        </TextBox.ContextMenu>
+                    </TextBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Data" Classes="property">
+                <Grid>
+                    <TextBox Text="{Binding Renderers[0].State.SelectedShape.Data, Mode=OneWay, Converter={Static converters:ObjectToXamlStringConverter.Instance}}" Classes="xaml" Grid.Column="2" Grid.Row="0" Margin="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <TextBox.KeyBindings>
+                            <KeyBinding Command="{Static Editor:Commands.ExportXamlCommand}" CommandParameter="{Binding Renderers[0].State.SelectedShape.Data, Mode=OneWay}" Gesture="Ctrl+E"/>
+                        </TextBox.KeyBindings>
+                        <TextBox.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportXamlCommand}" CommandParameter="{Binding Renderers[0].State.SelectedShape.Data, Mode=OneWay}"/>
+                            </ContextMenu>
+                        </TextBox.ContextMenu>
+                    </TextBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Style" Classes="property">
+                <Grid>
+                    <TextBox Text="{Binding Project.CurrentStyleLibrary.Selected, Mode=OneWay, Converter={Static converters:ObjectToXamlStringConverter.Instance}}" Classes="xaml" Grid.Column="2" Grid.Row="0" Margin="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <TextBox.KeyBindings>
+                            <KeyBinding Command="{Static Editor:Commands.ExportXamlCommand}" CommandParameter="{Binding Project.CurrentStyleLibrary.Selected, Mode=OneWay}" Gesture="Ctrl+E"/>
+                        </TextBox.KeyBindings>
+                        <TextBox.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportXamlCommand}" CommandParameter="{Binding Project.CurrentStyleLibrary.Selected, Mode=OneWay}"/>
+                            </ContextMenu>
+                        </TextBox.ContextMenu>
+                    </TextBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Container" Classes="property">
+                <Grid>
+                    <TextBox Text="{Binding Project.CurrentContainer, Mode=OneWay, Converter={Static converters:ObjectToXamlStringConverter.Instance}}" Classes="xaml" Grid.Column="2" Grid.Row="0" Margin="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <TextBox.KeyBindings>
+                            <KeyBinding Command="{Static Editor:Commands.ExportXamlCommand}" CommandParameter="{Binding Project.CurrentContainer, Mode=OneWay}" Gesture="Ctrl+E"/>
+                        </TextBox.KeyBindings>
+                        <TextBox.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportXamlCommand}" CommandParameter="{Binding Project.CurrentContainer, Mode=OneWay}"/>
+                            </ContextMenu>
+                        </TextBox.ContextMenu>
+                    </TextBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Template" Classes="property">
+                <Grid>
+                    <TextBox Text="{Binding Project.CurrentTemplate, Mode=OneWay, Converter={Static converters:ObjectToXamlStringConverter.Instance}}" Classes="xaml" Grid.Column="2" Grid.Row="0" Margin="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <TextBox.KeyBindings>
+                            <KeyBinding Command="{Static Editor:Commands.ExportXamlCommand}" CommandParameter="{Binding Project.CurrentTemplate, Mode=OneWay}" Gesture="Ctrl+E"/>
+                        </TextBox.KeyBindings>
+                        <TextBox.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportXamlCommand}" CommandParameter="{Binding Project.CurrentTemplate, Mode=OneWay}"/>
                             </ContextMenu>
                         </TextBox.ContextMenu>
                     </TextBox>
