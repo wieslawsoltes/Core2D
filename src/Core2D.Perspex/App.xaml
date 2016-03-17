@@ -285,6 +285,13 @@
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="AutoScrollToSelectedItem" Value="True"/>
         </Style>
+        <!-- ListBox.xaml -->
+        <Style Selector="ListBox.xaml">
+            <Setter Property="Padding" Value="4"/>
+            <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="AutoScrollToSelectedItem" Value="True"/>
+        </Style>
         <!-- Slider -->
         <Style Selector="Slider.slider">
             <Setter Property="Orientation" Value="Horizontal"/>
