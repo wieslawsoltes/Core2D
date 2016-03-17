@@ -322,6 +322,23 @@ namespace Core2D.Wpf
         }
 
         /// <inheritdoc/>
+        public async Task OnExportXamlAsync(object item)
+        {
+            var dlg = new SaveFileDialog()
+            {
+                Filter = "Xaml (*.xaml)|*.xaml|All (*.*)|*.*",
+                FilterIndex = 0,
+            };
+
+            if (dlg.ShowDialog(_mainWindow) == true)
+            {
+                _editor?.OnExportXaml(dlg.FileName, item);
+            }
+
+            await Task.Delay(0);
+        }
+
+        /// <inheritdoc/>
         public async Task OnExportAsync(object item)
         {
             string name = string.Empty;
