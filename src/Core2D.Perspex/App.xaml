@@ -270,13 +270,14 @@
         <Style Selector="GridSplitter.horizontal">
             <Setter Property="Orientation" Value="Horizontal"/>
         </Style>
-        <!-- ListBox -->
+        <!-- ListBox.default -->
         <Style Selector="ListBox.default">
             <Setter Property="Margin" Value="0"/>
             <Setter Property="Padding" Value="0"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="AutoScrollToSelectedItem" Value="True"/>
         </Style>
+        <!-- ListBox.recents -->
         <Style Selector="ListBox.recents">
             <Setter Property="Margin" Value="0"/>
             <Setter Property="Padding" Value="0"/>
