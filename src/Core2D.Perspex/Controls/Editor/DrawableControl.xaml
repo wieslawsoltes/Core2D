@@ -15,6 +15,7 @@
              Height="{Binding Project.CurrentContainer.Height}">
     <i:Interaction.Behaviors>
         <behaviors:FocusOnAttachedToVisualTreeBehavior/>
+        <behaviors:FocusOnPointerMovedBehavior/>
     </i:Interaction.Behaviors>
     <UserControl.KeyBindings>
         <!-- Edit -->
