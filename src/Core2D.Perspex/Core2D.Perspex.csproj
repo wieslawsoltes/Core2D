@@ -237,7 +237,7 @@
     <Compile Include="Controls\Editor\DrawableControl.xaml.cs">
       <DependentUpon>DrawableControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Editor\ExporterControl.xaml.cs">
+    <Compile Include="Controls\Exporter\ExporterControl.xaml.cs">
       <DependentUpon>ExporterControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Editor\MenuControl.xaml.cs">
@@ -556,7 +556,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Controls\Editor\ExporterControl.xaml" />
+    <EmbeddedResource Include="Controls\Exporter\ExporterControl.xaml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Windows\ExporterWindow.xaml">

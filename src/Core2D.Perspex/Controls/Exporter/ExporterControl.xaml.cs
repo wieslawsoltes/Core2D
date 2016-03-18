@@ -3,7 +3,7 @@
 using Perspex.Controls;
 using Perspex.Markup.Xaml;
 
-namespace Core2D.Perspex.Controls.Editor
+namespace Core2D.Perspex.Controls.Exporter
 {
     /// <summary>
     /// Interaction logic for <see cref="ExporterControl"/> xaml.
