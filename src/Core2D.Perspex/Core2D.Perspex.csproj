@@ -237,6 +237,18 @@
     <Compile Include="Controls\Editor\DrawableControl.xaml.cs">
       <DependentUpon>DrawableControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Exporter\ContainerControl.xaml.cs">
+      <DependentUpon>ContainerControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Exporter\DatabasesControl.xaml.cs">
+      <DependentUpon>DatabasesControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Exporter\DataControl.xaml.cs">
+      <DependentUpon>DataControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Exporter\DocumentsControl.xaml.cs">
+      <DependentUpon>DocumentsControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Exporter\ExporterControl.xaml.cs">
       <DependentUpon>ExporterControl.xaml</DependentUpon>
     </Compile>
@@ -245,6 +257,27 @@
     </Compile>
     <Compile Include="Controls\Data\PropertiesControl.xaml.cs">
       <DependentUpon>PropertiesControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Exporter\GroupsControl.xaml.cs">
+      <DependentUpon>GroupsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Exporter\OptionsControl.xaml.cs">
+      <DependentUpon>OptionsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Exporter\ShapeControl.xaml.cs">
+      <DependentUpon>ShapeControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Exporter\StyleControl.xaml.cs">
+      <DependentUpon>StyleControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Exporter\StylesControl.xaml.cs">
+      <DependentUpon>StylesControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Exporter\TemplateControl.xaml.cs">
+      <DependentUpon>TemplateControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Exporter\TemplatesControl.xaml.cs">
+      <DependentUpon>TemplatesControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\PanAndZoom\AutoFitMode.cs" />
     <Compile Include="Controls\PanAndZoom\PanAndZoom.cs" />
@@ -562,6 +595,39 @@
     <EmbeddedResource Include="Windows\ExporterWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Exporter\StylesControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Exporter\GroupsControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Exporter\DatabasesControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Exporter\TemplatesControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Exporter\DocumentsControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Exporter\OptionsControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Exporter\ShapeControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Exporter\DataControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Exporter\StyleControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Exporter\ContainerControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Exporter\TemplateControl.xaml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Perspex.Skia.Desktop.9999.0.1186-nightly\build\net45\Perspex.Skia.Desktop.targets" Condition="Exists('..\packages\Perspex.Skia.Desktop.9999.0.1186-nightly\build\net45\Perspex.Skia.Desktop.targets')" />
