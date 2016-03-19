@@ -561,9 +561,11 @@ namespace Core2D.Editor
         /// Supported Xaml types:
         /// - The shape style <see cref="ShapeStyle"/>.
         /// - The shape object based on <see cref="BaseShape"/> class.
-        /// - The styles library using <see cref="XStyles"/> container.
-        /// - The shapes library using <see cref="XShapes"/> container.
-        /// - The groups library using <see cref="XGroups"/> container.
+        /// - The styles library using <see cref="XStyles"/> resources.
+        /// - The shapes library using <see cref="XShapes"/> resources.
+        /// - The groups library using <see cref="XGroups"/> resources.
+        /// - The databases collection using <see cref="XDatabases"/> resources.
+        /// - The templates collection using <see cref="XTemplates"/> resources.
         /// - The <see cref="XContext"/> class.
         /// - The <see cref="XDatabase"/> class.
         /// - The <see cref="XLayer"/> class.
@@ -606,6 +608,28 @@ namespace Core2D.Editor
                     var groups = item as XGroups;
                     var library = XLibrary<XGroup>.Create(groups.Name, groups.Children);
                     _project?.AddGroupLibrary(library);
+                }
+                else if (item is XDatabases)
+                {
+                    var databases = (item as XDatabases).Children;
+                    if (databases.Length > 0)
+                    {
+                        foreach (var database in databases)
+                        {
+                            _project?.AddDatabase(database);
+                        }
+                    }
+                }
+                else if (item is XTemplates)
+                {
+                    var templates = (item as XTemplates).Children;
+                    if (templates.Length > 0)
+                    {
+                        foreach (var template in templates)
+                        {
+                            _project?.AddTemplate(template);
+                        }
+                    }
                 }
                 else if (item is XContext)
                 {
