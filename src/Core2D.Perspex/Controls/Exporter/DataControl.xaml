@@ -10,7 +10,7 @@
              Design.DataContext="{Static Designer:DesignerContext.Editor}"
              Design.Width="1000" Design.Height="600">
     <Grid>
-        <TextBox Text="{Binding Renderers[0].State.SelectedShape.Data, Mode=OneWay, Converter={Static converters:ObjectToXamlStringConverter.Instance}}" Classes="xaml" Grid.Column="2" Grid.Row="0" Margin="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <TextBox Text="{Binding Renderers[0].State.SelectedShape.Data, Mode=OneWay, Converter={Static converters:ObjectToXamlStringConverter.Instance}}" Classes="xaml" Margin="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <TextBox.KeyBindings>
                 <KeyBinding Command="{Static Editor:Commands.ExportXamlCommand}" CommandParameter="{Binding Renderers[0].State.SelectedShape.Data, Mode=OneWay}" Gesture="Ctrl+E"/>
             </TextBox.KeyBindings>
