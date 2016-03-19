@@ -580,5 +580,10 @@ namespace Core2D.Editor
         /// Reset main window layout to default state.
         /// </summary>
         public static ICoreCommand ResetWindowLayoutCommand { get; set; }
+
+        /// <summary>
+        /// Show object browser.
+        /// </summary>
+        public static ICoreCommand ObjectBrowserCommand { get; set; }
     }
 }

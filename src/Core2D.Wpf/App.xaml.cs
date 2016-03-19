@@ -699,6 +699,12 @@ namespace Core2D.Wpf
             await Task.Delay(0);
         }
 
+        /// <inheritdoc/>
+        public async Task OnShowObjectBrowserAsync()
+        {
+            await Task.Delay(0);
+        }
+
         /// <summary>
         /// Close application view.
         /// </summary>

@@ -4468,6 +4468,11 @@ namespace Core2D.Editor
                 Command.Create(
                     async () => await (Application?.OnResetWindowLayoutAsync() ?? Task.FromResult<object>(null)),
                     () => true);
+
+            Commands.ObjectBrowserCommand =
+                Command.Create(
+                    async () => await (Application?.OnShowObjectBrowserAsync() ?? Task.FromResult<object>(null)),
+                    () => IsEditMode());
         }
     }
 }

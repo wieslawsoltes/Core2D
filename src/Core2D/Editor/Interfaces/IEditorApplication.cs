@@ -126,6 +126,11 @@ namespace Core2D.Editor.Interfaces
         Task OnResetWindowLayoutAsync();
 
         /// <summary>
+        /// Show object browser.
+        /// </summary>
+        Task OnShowObjectBrowserAsync();
+
+        /// <summary>
         /// Close application view.
         /// </summary>
         void OnCloseView();

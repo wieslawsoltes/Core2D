@@ -38,6 +38,8 @@
         <KeyBinding Command="{Static Editor:Commands.SelectAllCommand}" Gesture="Ctrl+A"/>
         <KeyBinding Command="{Static Editor:Commands.GroupCommand}" Gesture="Ctrl+G"/>
         <KeyBinding Command="{Static Editor:Commands.UngroupCommand}" Gesture="Ctrl+U"/>
+        <!-- Project -->
+        <KeyBinding Command="{Static Editor:Commands.ObjectBrowserCommand}" Gesture="Ctrl+J"/>
     </Window.KeyBindings>
     <Grid RowDefinitions="Auto,*">
         <editor:MenuControl Grid.Row="0"/>

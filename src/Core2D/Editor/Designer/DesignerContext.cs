@@ -394,6 +394,11 @@ namespace Core2D.Editor.Designer
                 Command.Create(
                     () => { },
                     () => true);
+
+            Commands.ObjectBrowserCommand =
+                Command.Create(
+                    () => { },
+                    () => true);
         }
 
         /// <summary>
