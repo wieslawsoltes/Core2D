@@ -667,6 +667,9 @@
       <Name>Renderer.Perspex</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Brushes.xaml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Perspex.Skia.Desktop.9999.0.1186-nightly\build\net45\Perspex.Skia.Desktop.targets" Condition="Exists('..\packages\Perspex.Skia.Desktop.9999.0.1186-nightly\build\net45\Perspex.Skia.Desktop.targets')" />
   <Import Project="..\..\packages\Perspex.Skia.Desktop.9999.0.1284-nightly\build\net45\Perspex.Skia.Desktop.targets" Condition="Exists('..\..\packages\Perspex.Skia.Desktop.9999.0.1284-nightly\build\net45\Perspex.Skia.Desktop.targets')" />
