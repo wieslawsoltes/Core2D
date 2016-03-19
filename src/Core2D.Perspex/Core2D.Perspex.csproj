@@ -213,9 +213,16 @@
     <Compile Include="..\Core2D\Properties\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controls\PanAndZoom\AutoFitMode.cs" />
+    <Compile Include="Controls\PanAndZoom\PanAndZoom.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Controls\Data\ColumnsControl.xaml.cs">
       <DependentUpon>ColumnsControl.xaml</DependentUpon>
     </Compile>
@@ -228,6 +235,14 @@
     <Compile Include="Controls\Data\RecordControl.xaml.cs">
       <DependentUpon>RecordControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Data\RecordsControl.xaml.cs">
+      <DependentUpon>RecordsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Data\PropertiesControl.xaml.cs">
+      <DependentUpon>PropertiesControl.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Controls\Editor\EditorControl.xaml.cs">
       <DependentUpon>EditorControl.xaml</DependentUpon>
     </Compile>
@@ -237,50 +252,11 @@
     <Compile Include="Controls\Editor\DrawableControl.xaml.cs">
       <DependentUpon>DrawableControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Exporter\ContainerControl.xaml.cs">
-      <DependentUpon>ContainerControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Exporter\DatabasesControl.xaml.cs">
-      <DependentUpon>DatabasesControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Exporter\DataControl.xaml.cs">
-      <DependentUpon>DataControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Exporter\DocumentsControl.xaml.cs">
-      <DependentUpon>DocumentsControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Exporter\ExporterControl.xaml.cs">
-      <DependentUpon>ExporterControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\Editor\MenuControl.xaml.cs">
       <DependentUpon>MenuControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Data\PropertiesControl.xaml.cs">
-      <DependentUpon>PropertiesControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Exporter\GroupsControl.xaml.cs">
-      <DependentUpon>GroupsControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Exporter\OptionsControl.xaml.cs">
-      <DependentUpon>OptionsControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Exporter\ShapeControl.xaml.cs">
-      <DependentUpon>ShapeControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Exporter\StyleControl.xaml.cs">
-      <DependentUpon>StyleControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Exporter\StylesControl.xaml.cs">
-      <DependentUpon>StylesControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Exporter\TemplateControl.xaml.cs">
-      <DependentUpon>TemplateControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Exporter\TemplatesControl.xaml.cs">
-      <DependentUpon>TemplatesControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\PanAndZoom\AutoFitMode.cs" />
-    <Compile Include="Controls\PanAndZoom\PanAndZoom.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Controls\Path\ArcSegmentControl.xaml.cs">
       <DependentUpon>ArcSegmentControl.xaml</DependentUpon>
     </Compile>
@@ -311,6 +287,8 @@
     <Compile Include="Controls\Path\QuadraticBezierSegmentControl.xaml.cs">
       <DependentUpon>QuadraticBezierSegmentControl.xaml</DependentUpon>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Controls\Project\ContainerControl.xaml.cs">
       <DependentUpon>ContainerControl.xaml</DependentUpon>
     </Compile>
@@ -341,6 +319,96 @@
     <Compile Include="Controls\Project\TemplateControl.xaml.cs">
       <DependentUpon>TemplateControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Project\DatabasesControl.xaml.cs">
+      <DependentUpon>DatabasesControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Project\GroupsControl.xaml.cs">
+      <DependentUpon>GroupsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Project\StylesControl.xaml.cs">
+      <DependentUpon>StylesControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Project\TemplatesControl.xaml.cs">
+      <DependentUpon>TemplatesControl.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controls\Exporter\ContainerControl.xaml.cs">
+      <DependentUpon>ContainerControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Exporter\DatabasesControl.xaml.cs">
+      <DependentUpon>DatabasesControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Exporter\DataControl.xaml.cs">
+      <DependentUpon>DataControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Exporter\DocumentsControl.xaml.cs">
+      <DependentUpon>DocumentsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Exporter\ExporterControl.xaml.cs">
+      <DependentUpon>ExporterControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Exporter\GroupsControl.xaml.cs">
+      <DependentUpon>GroupsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Exporter\OptionsControl.xaml.cs">
+      <DependentUpon>OptionsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Exporter\ShapeControl.xaml.cs">
+      <DependentUpon>ShapeControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Exporter\StyleControl.xaml.cs">
+      <DependentUpon>StyleControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Exporter\StylesControl.xaml.cs">
+      <DependentUpon>StylesControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Exporter\TemplateControl.xaml.cs">
+      <DependentUpon>TemplateControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Exporter\TemplatesControl.xaml.cs">
+      <DependentUpon>TemplatesControl.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controls\Browser\ContainerControl.xaml.cs">
+      <DependentUpon>ContainerControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Browser\DatabasesControl.xaml.cs">
+      <DependentUpon>DatabasesControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Browser\DataControl.xaml.cs">
+      <DependentUpon>DataControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Browser\DocumentsControl.xaml.cs">
+      <DependentUpon>DocumentsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Browser\BrowserControl.xaml.cs">
+      <DependentUpon>BrowserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Browser\GroupsControl.xaml.cs">
+      <DependentUpon>GroupsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Browser\OptionsControl.xaml.cs">
+      <DependentUpon>OptionsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Browser\ShapeControl.xaml.cs">
+      <DependentUpon>ShapeControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Browser\StyleControl.xaml.cs">
+      <DependentUpon>StyleControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Browser\StylesControl.xaml.cs">
+      <DependentUpon>StylesControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Browser\TemplateControl.xaml.cs">
+      <DependentUpon>TemplateControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Browser\TemplatesControl.xaml.cs">
+      <DependentUpon>TemplatesControl.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Controls\Shapes\ArcControl.xaml.cs">
       <DependentUpon>ArcControl.xaml</DependentUpon>
     </Compile>
@@ -374,21 +442,13 @@
     <Compile Include="Controls\Shapes\TextControl.xaml.cs">
       <DependentUpon>TextControl.xaml</DependentUpon>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Controls\State\ShapeStateControl.xaml.cs">
       <DependentUpon>ShapeStateControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Project\DatabasesControl.xaml.cs">
-      <DependentUpon>DatabasesControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Project\GroupsControl.xaml.cs">
-      <DependentUpon>GroupsControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Data\RecordsControl.xaml.cs">
-      <DependentUpon>RecordsControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Project\StylesControl.xaml.cs">
-      <DependentUpon>StylesControl.xaml</DependentUpon>
-    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Controls\Style\ArgbColorControl.xaml.cs">
       <DependentUpon>ArgbColorControl.xaml</DependentUpon>
     </Compile>
@@ -413,9 +473,19 @@
     <Compile Include="Controls\Style\TextStyleControl.xaml.cs">
       <DependentUpon>TextStyleControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Project\TemplatesControl.xaml.cs">
-      <DependentUpon>TemplatesControl.xaml</DependentUpon>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Windows\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\ExporterWindow.xaml.cs">
+      <DependentUpon>ExporterWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\BrowserWindow.xaml.cs">
+      <DependentUpon>BrowserWindow.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Converters\ArgbColorToBrushMultiConverter.cs" />
     <Compile Include="Converters\ByteToDoubleConverter.cs" />
     <Compile Include="Converters\ByteToStringConverter.cs" />
@@ -428,6 +498,8 @@
     <Compile Include="Converters\ObjectToObjectConverter.cs" />
     <Compile Include="Converters\ObjectToTypeStringConverter.cs" />
     <Compile Include="Converters\ObjectToXamlStringConverter.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Interactions\Actions\FocusControlAction.cs" />
     <Compile Include="Interactions\Actions\ChangePerspexPropertyAction.cs" />
     <Compile Include="Interactions\Behaviors\FocusOnAttachedToVisualTreeBehavior.cs" />
@@ -435,35 +507,34 @@
     <Compile Include="Interactions\Behaviors\FocusOnPointerPressedBehavior.cs" />
     <Compile Include="Interactions\Behaviors\SelectListBoxItemOnPointerMovedBehavior.cs" />
     <Compile Include="Interactions\Behaviors\ToggleIsExpandedOnDoubleTappedBehavior.cs" />
-    <Compile Include="Util\PerspexCommandManager.cs" />
-    <Compile Include="Util\PerspexFileSystem.cs" />
-    <Compile Include="Windows\ExporterWindow.xaml.cs">
-      <DependentUpon>ExporterWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Util\PerspexTextClipboard.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <Compile Include="Util\PerspexCommandManager.cs" />
+    <Compile Include="Util\PerspexFileSystem.cs" />
+    <Compile Include="Util\PerspexTextClipboard.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <EmbeddedResource Include="Controls\Data\PropertiesControl.xaml" />
+    <EmbeddedResource Include="Controls\Data\RecordControl.xaml" />
+    <EmbeddedResource Include="Controls\Data\DatabaseControl.xaml" />
+    <EmbeddedResource Include="Controls\Data\DataControl.xaml" />
+    <EmbeddedResource Include="Controls\Data\ColumnsControl.xaml" />
+    <EmbeddedResource Include="Controls\Data\RecordsControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
     <EmbeddedResource Include="Controls\Style\ArgbColorControl.xaml" />
-    <EmbeddedResource Include="Controls\Style\ArrowStyleControl.xaml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Style\ArrowStyleControl.xaml" />
     <EmbeddedResource Include="Controls\Style\FontStyleControl.xaml" />
     <EmbeddedResource Include="Controls\Style\TextStyleControl.xaml" />
     <EmbeddedResource Include="Controls\Style\LineFixedLengthControl.xaml" />
     <EmbeddedResource Include="Controls\Style\LineStyleControl.xaml" />
-    <EmbeddedResource Include="Controls\Style\ShapeStyleControl.xaml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Data\RecordControl.xaml" />
-    <EmbeddedResource Include="Controls\Data\DatabaseControl.xaml" />
-    <EmbeddedResource Include="Controls\Data\DataControl.xaml" />
+    <EmbeddedResource Include="Controls\Style\ShapeStyleControl.xaml" />
+    <EmbeddedResource Include="Controls\Style\StyleControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
     <EmbeddedResource Include="Controls\State\ShapeStateControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
     <EmbeddedResource Include="Controls\Shapes\PointControl.xaml" />
     <EmbeddedResource Include="Controls\Shapes\LineControl.xaml" />
     <EmbeddedResource Include="Controls\Shapes\TextControl.xaml" />
@@ -475,6 +546,8 @@
     <EmbeddedResource Include="Controls\Shapes\QuadraticBezierControl.xaml" />
     <EmbeddedResource Include="Controls\Shapes\GroupControl.xaml" />
     <EmbeddedResource Include="Controls\Shapes\PathControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
     <EmbeddedResource Include="Controls\Path\PathSizeControl.xaml" />
     <EmbeddedResource Include="Controls\Path\ArcSegmentControl.xaml" />
     <EmbeddedResource Include="Controls\Path\CubicBezierSegmentControl.xaml" />
@@ -485,26 +558,67 @@
     <EmbeddedResource Include="Controls\Path\QuadraticBezierSegmentControl.xaml" />
     <EmbeddedResource Include="Controls\Path\PathFigureControl.xaml" />
     <EmbeddedResource Include="Controls\Path\PathGeometryControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
     <EmbeddedResource Include="Controls\Project\OptionsControl.xaml" />
     <EmbeddedResource Include="Controls\Project\ProjectControl.xaml" />
     <EmbeddedResource Include="Controls\Project\DocumentControl.xaml" />
-    <EmbeddedResource Include="Controls\Project\ContainerControl.xaml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Project\ContainerControl.xaml" />
     <EmbeddedResource Include="Controls\Project\LayerControl.xaml" />
     <EmbeddedResource Include="Controls\Project\ImagesControl.xaml" />
-    <EmbeddedResource Include="Controls\Data\ColumnsControl.xaml" />
     <EmbeddedResource Include="Controls\Project\LayersControl.xaml" />
     <EmbeddedResource Include="Controls\Project\ShapesControl.xaml" />
-    <EmbeddedResource Include="Controls\Style\StyleControl.xaml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Project\PageControl.xaml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Project\TemplateControl.xaml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Project\PageControl.xaml" />
+    <EmbeddedResource Include="Controls\Project\TemplateControl.xaml" />
+    <EmbeddedResource Include="Controls\Project\DatabasesControl.xaml" />
+    <EmbeddedResource Include="Controls\Project\GroupsControl.xaml" />
+    <EmbeddedResource Include="Controls\Project\StylesControl.xaml" />
+    <EmbeddedResource Include="Controls\Project\TemplatesControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Editor\EditorControl.xaml" />
+    <EmbeddedResource Include="Controls\Editor\DashboardControl.xaml" />
+    <EmbeddedResource Include="Controls\Editor\DrawableControl.xaml" />
+    <EmbeddedResource Include="Controls\Editor\MenuControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Exporter\ExporterControl.xaml" />
+    <EmbeddedResource Include="Controls\Exporter\StylesControl.xaml" />
+    <EmbeddedResource Include="Controls\Exporter\GroupsControl.xaml" />
+    <EmbeddedResource Include="Controls\Exporter\DatabasesControl.xaml" />
+    <EmbeddedResource Include="Controls\Exporter\TemplatesControl.xaml" />
+    <EmbeddedResource Include="Controls\Exporter\DocumentsControl.xaml" />
+    <EmbeddedResource Include="Controls\Exporter\OptionsControl.xaml" />
+    <EmbeddedResource Include="Controls\Exporter\ShapeControl.xaml" />
+    <EmbeddedResource Include="Controls\Exporter\DataControl.xaml" />
+    <EmbeddedResource Include="Controls\Exporter\StyleControl.xaml" />
+    <EmbeddedResource Include="Controls\Exporter\ContainerControl.xaml" />
+    <EmbeddedResource Include="Controls\Exporter\TemplateControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Browser\BrowserControl.xaml" />
+    <EmbeddedResource Include="Controls\Browser\StylesControl.xaml" />
+    <EmbeddedResource Include="Controls\Browser\GroupsControl.xaml" />
+    <EmbeddedResource Include="Controls\Browser\DatabasesControl.xaml" />
+    <EmbeddedResource Include="Controls\Browser\TemplatesControl.xaml" />
+    <EmbeddedResource Include="Controls\Browser\DocumentsControl.xaml" />
+    <EmbeddedResource Include="Controls\Browser\OptionsControl.xaml" />
+    <EmbeddedResource Include="Controls\Browser\ShapeControl.xaml" />
+    <EmbeddedResource Include="Controls\Browser\DataControl.xaml" />
+    <EmbeddedResource Include="Controls\Browser\StyleControl.xaml" />
+    <EmbeddedResource Include="Controls\Browser\ContainerControl.xaml" />
+    <EmbeddedResource Include="Controls\Browser\TemplateControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="App.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Windows\MainWindow.xaml" />
+    <EmbeddedResource Include="Windows\ExporterWindow.xaml" />
+    <EmbeddedResource Include="Windows\BrowserWindow.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -552,82 +666,6 @@
       <Project>{dee86be6-43b1-45fb-8a56-7977c1d0964e}</Project>
       <Name>Renderer.Perspex</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="App.xaml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Editor\EditorControl.xaml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Editor\DashboardControl.xaml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Editor\DrawableControl.xaml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Editor\MenuControl.xaml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Project\DatabasesControl.xaml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Project\GroupsControl.xaml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Data\RecordsControl.xaml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Project\StylesControl.xaml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Project\TemplatesControl.xaml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Windows\MainWindow.xaml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Controls\Exporter\ExporterControl.xaml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Windows\ExporterWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Controls\Exporter\StylesControl.xaml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Controls\Exporter\GroupsControl.xaml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Controls\Exporter\DatabasesControl.xaml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Controls\Exporter\TemplatesControl.xaml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Controls\Exporter\DocumentsControl.xaml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Controls\Exporter\OptionsControl.xaml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Controls\Exporter\ShapeControl.xaml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Controls\Exporter\DataControl.xaml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Controls\Exporter\StyleControl.xaml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Controls\Exporter\ContainerControl.xaml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Controls\Exporter\TemplateControl.xaml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Perspex.Skia.Desktop.9999.0.1186-nightly\build\net45\Perspex.Skia.Desktop.targets" Condition="Exists('..\packages\Perspex.Skia.Desktop.9999.0.1186-nightly\build\net45\Perspex.Skia.Desktop.targets')" />

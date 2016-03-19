@@ -737,6 +737,16 @@ namespace Core2D.Perspex
         }
 
         /// <inheritdoc/>
+        public async Task OnShowObjectBrowserAsync()
+        {
+            var browser = new Windows.BrowserWindow();
+            browser.DataContext = _editor;
+            browser.Show();
+
+            await Task.Delay(0);
+        }
+
+        /// <inheritdoc/>
         public void OnCloseView()
         {
             _mainWindow?.Close();

@@ -89,6 +89,8 @@
             <MenuItem Header="_AutoFit Zoom" Command="{Static Editor:Commands.ZoomAutoFitCommand}"/>
         </MenuItem>
         <MenuItem Header="_Project" IsVisible="{Binding Project, Converter={Static converters:IsNotNullConverter.Instance}}">
+            <MenuItem Header="Object _Browser..." Command="{Static Editor:Commands.ObjectBrowserCommand}"/>
+            <Separator/>
             <MenuItem Header="_Add Document" Command="{Static Editor:Commands.AddDocumentCommand}" CommandParameter="{Binding Project}"/>
             <MenuItem Header="_Add Page" Command="{Static Editor:Commands.AddPageCommand}" CommandParameter="{Binding Project.CurrentDocument}"/>
             <Separator/>
