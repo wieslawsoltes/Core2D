@@ -14,7 +14,7 @@ namespace Core2D.Xaml.Collections
     public sealed class XShapes : ObservableResource
     {
         /// <summary>
-        /// Gets or sets container name.
+        /// Gets or sets resource name.
         /// </summary>
         public string Name { get; set; }
 
