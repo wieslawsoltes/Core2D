@@ -84,7 +84,7 @@
         <Grid Name="drawablePanel" Grid.Row="0" Grid.Column="2">
             <Border Classes="drawable">
                 <Border Classes="transparent" ClipToBounds="True">
-                    <paz:PanAndZoom Name="panAndZoom" AutoFitMode="Extent" ZoomSpeed="1.2" Background="Transparent" ClipToBounds="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <paz:PanAndZoom Name="panAndZoom" AutoFitMode="Extent" ZoomSpeed="1.2" Background="{StyleResource TransparentBrush}" ClipToBounds="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                         <editor:DrawableControl Name="drawableControl" ClipToBounds="False"/>
                     </paz:PanAndZoom>
                 </Border>

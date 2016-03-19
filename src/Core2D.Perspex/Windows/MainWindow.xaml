@@ -8,7 +8,7 @@
         xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D"
         xmlns:editor="clr-namespace:Core2D.Perspex.Controls.Editor;assembly=Core2D.Perspex"
         Width="1324" Height="670"
-        Background="#FFFFFFFF"
+        Background="{StyleResource BackgroundBrush}"
         UseLayoutRounding="True"
         Design.DataContext="{Static Designer:DesignerContext.Editor}"
         Design.Width="1200" Design.Height="580">

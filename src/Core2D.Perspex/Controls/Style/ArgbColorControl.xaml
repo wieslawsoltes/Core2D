@@ -9,24 +9,7 @@
              Design.DataContext="{Static Designer:DesignerContext.ArgbColor}"
              Design.Width="250" Design.Height="400">
     <Grid RowDefinitions="22,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,50,*">
-        <Border Classes="color" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
-            <Border.Background>
-                <VisualBrush TileMode="Tile" Stretch="None" AlignmentX="Left" AlignmentY="Top" SourceRect="0,0,20,20" DestinationRect="0,0,20,20">
-                    <VisualBrush.Visual>
-                        <StackPanel Orientation="Horizontal">
-                            <StackPanel Orientation="Vertical">
-                                <Rectangle Width="10" Height="10" Fill="DarkGray"/>
-                                <Rectangle Width="10" Height="10" Fill="LightGray"/>
-                            </StackPanel>
-                            <StackPanel Orientation="Vertical">
-                                <Rectangle Width="10" Height="10" Fill="LightGray"/>
-                                <Rectangle Width="10" Height="10" Fill="DarkGray"/>
-                            </StackPanel>
-                        </StackPanel>
-                    </VisualBrush.Visual>
-                </VisualBrush>
-            </Border.Background>
-        </Border>
+        <Border Classes="color" Background="{StyleResource ColorCheckerBoard}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"/>
         <Border Classes="color" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
             <Border.Background>
                 <MultiBinding Mode="OneWay" Converter="{Static converters:ArgbColorToBrushMultiConverter.Instance}">
