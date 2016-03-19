@@ -24,42 +24,8 @@
         <!-- Theme -->
         <StyleInclude Source="resm:Perspex.Themes.Default.DefaultTheme.xaml?assembly=Perspex.Themes.Default"/>
         <StyleInclude Source="resm:Perspex.Themes.Default.Accents.BaseLight.xaml?assembly=Perspex.Themes.Default"/>
-        <!-- Resources -->
-        <Style>
-            <Style.Resources>
-                <SolidColorBrush x:Key="BackgroundBrush">#FFFFFFFF</SolidColorBrush>
-                <SolidColorBrush x:Key="BorderBrush">#FFACACAC</SolidColorBrush>
-                <SolidColorBrush x:Key="TransparentBrush">#00FFFFFF</SolidColorBrush>
-                <VisualBrush x:Key="ColorCheckerBoard" TileMode="Tile" Stretch="None" AlignmentX="Left" AlignmentY="Top" SourceRect="0,0,20,20" DestinationRect="0,0,20,20">
-                    <VisualBrush.Visual>
-                        <StackPanel Orientation="Horizontal">
-                            <StackPanel Orientation="Vertical">
-                                <Rectangle Width="10" Height="10" Fill="DarkGray"/>
-                                <Rectangle Width="10" Height="10" Fill="LightGray"/>
-                            </StackPanel>
-                            <StackPanel Orientation="Vertical">
-                                <Rectangle Width="10" Height="10" Fill="LightGray"/>
-                                <Rectangle Width="10" Height="10" Fill="DarkGray"/>
-                            </StackPanel>
-                        </StackPanel>
-                    </VisualBrush.Visual>
-                </VisualBrush>
-                <VisualBrush x:Key="TemplateCheckerBoard" TileMode="Tile" Stretch="None" AlignmentX="Left" AlignmentY="Top" SourceRect="0,0,20,20" DestinationRect="0,0,20,20">
-                    <VisualBrush.Visual>
-                        <StackPanel Orientation="Horizontal">
-                            <StackPanel Orientation="Vertical">
-                                <Rectangle Width="10" Height="10" Fill="#FFF0F0F0"/>
-                                <Rectangle Width="10" Height="10" Fill="#FFF5F5F5"/>
-                            </StackPanel>
-                            <StackPanel Orientation="Vertical">
-                                <Rectangle Width="10" Height="10" Fill="#FFF5F5F5"/>
-                                <Rectangle Width="10" Height="10" Fill="#FFF0F0F0"/>
-                            </StackPanel>
-                        </StackPanel>
-                    </VisualBrush.Visual>
-                </VisualBrush>
-            </Style.Resources>
-        </Style>
+        <!-- Brushes -->
+        <StyleInclude Source="resm:Core2D.Perspex.Resources.Brushes.xaml?assembly=Core2D.Perspex"/>
         <!-- Border -->
         <Style Selector="Border.leftTop">
             <Setter Property="Margin" Value="0"/>
@@ -106,6 +72,7 @@
         <Style Selector="Button.default">
             <Setter Property="Margin" Value="3,0,3,0"/>
             <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
         </Style>
         <!-- Button.property -->
         <Style Selector="Button.property">
@@ -113,6 +80,7 @@
             <Setter Property="Padding" Value="0"/>
             <Setter Property="FontSize" Value="10"/>
             <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
         </Style>
         <Style Selector="Button.property /template/ ContentPresenter">
             <Setter Property="Padding" Value="0"/>
@@ -125,6 +93,7 @@
             <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Background" Value="{StyleResource BackgroundBrush}"/>
+            <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
         </Style>
         <Style Selector="Button.project:pointerover /template/ ContentPresenter">
             <Setter Property="Background" Value="{StyleResource BorderBrush}"/>
@@ -133,28 +102,6 @@
         <Style Selector="Button.project:pressed /template/ ContentPresenter">
             <Setter Property="Background" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
-        </Style>
-        <!-- Button.link -->
-        <Style Selector="Button.link">
-            <Setter Property="Margin" Value="2"/>
-            <Setter Property="Padding" Value="0"/>
-            <Setter Property="FontSize" Value="12"/>
-            <Setter Property="BorderBrush" Value="{StyleResource BackgroundBrush}"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Background" Value="{StyleResource TransparentBrush}"/>
-            <Setter Property="Foreground" Value="Gray"/>
-        </Style>
-        <Style Selector="Button.link:pointerover">
-            <Setter Property="Foreground" Value="Black"/>
-        </Style>
-        <Style Selector="Button.link:pressed">
-            <Setter Property="Foreground" Value="Black"/>
-        </Style>
-        <Style Selector="Button.link:pointerover /template/ ContentPresenter">
-            <Setter Property="Background" Value="{StyleResource TransparentBrush}"/>
-        </Style>
-        <Style Selector="Button.link:pressed /template/ ContentPresenter">
-            <Setter Property="Background" Value="{StyleResource TransparentBrush}"/>
         </Style>
         <!-- Button.autofit -->
         <Style Selector="Button.autofit">
@@ -165,6 +112,7 @@
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Background" Value="{StyleResource TransparentBrush}"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
         </Style>
         <Style Selector="Button.autofit:pointerover /template/ ContentPresenter">
             <Setter Property="Background" Value="{StyleResource TransparentBrush}"/>
@@ -188,6 +136,7 @@
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
         </Style>
         <Style Selector="CheckBox.default:pointerover /template/ Border#border">
             <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
@@ -203,6 +152,7 @@
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
         </Style>
         <Style Selector="CheckBox.left:pointerover /template/ Border#border">
             <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
@@ -219,6 +169,7 @@
             <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
         </Style>
         <Style Selector="CheckBox.options:pointerover /template/ Border#border">
             <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
@@ -236,6 +187,7 @@
             <Setter Property="Background" Value="{StyleResource BackgroundBrush}"/>
             <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
         </Style>
         <Style Selector="DropDown.default:pointerover /template/ Border#border">
             <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
@@ -253,6 +205,7 @@
             <Setter Property="Background" Value="{StyleResource BackgroundBrush}"/>
             <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
         </Style>
         <Style Selector="DropDown.tool:pointerover /template/ Border#border">
             <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
@@ -270,6 +223,7 @@
             <Setter Property="Background" Value="{StyleResource BackgroundBrush}"/>
             <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
         </Style>
         <Style Selector="DropDown.autofit:pointerover /template/ Border#border">
             <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
@@ -311,6 +265,7 @@
             <Setter Property="Padding" Value="0"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="AutoScrollToSelectedItem" Value="True"/>
+            <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
         </Style>
         <!-- ListBox.recents -->
         <Style Selector="ListBox.recents">
@@ -319,6 +274,7 @@
             <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="AutoScrollToSelectedItem" Value="True"/>
+            <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
         </Style>
         <!-- ListBox.xaml -->
         <Style Selector="ListBox.xaml">
@@ -326,6 +282,7 @@
             <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="AutoScrollToSelectedItem" Value="True"/>
+            <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
         </Style>
         <!-- ListBox.browser -->
         <Style Selector="ListBox.browser">
@@ -333,6 +290,7 @@
             <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="AutoScrollToSelectedItem" Value="True"/>
+            <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
         </Style>
         <!-- Slider -->
         <Style Selector="Slider.slider">
@@ -346,81 +304,104 @@
         <!-- TabControl -->
         <Style Selector="TabControl.default">
             <Setter Property="Margin" Value="0"/>
+            <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
         </Style>
         <Style Selector="TabControl.top">
             <Setter Property="Margin" Value="0"/>
             <Setter Property="TabStripPlacement" Value="Top"/>
+            <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
         </Style>
         <Style Selector="TabControl.bottom">
             <Setter Property="Margin" Value="0"/>
             <Setter Property="TabStripPlacement" Value="Bottom"/>
+            <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
         </Style>
         <Style Selector="TabControl.left">
             <Setter Property="Margin" Value="0"/>
             <Setter Property="TabStripPlacement" Value="Left"/>
+            <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
         </Style>
         <Style Selector="TabControl.right">
             <Setter Property="Margin" Value="0"/>
             <Setter Property="TabStripPlacement" Value="Right"/>
+            <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
         </Style>
         <!-- TabItem -->
         <Style Selector="TabItem.property">
             <Setter Property="Margin" Value="3"/>
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
         </Style>
+        <!-- TabStripItem -->
         <Style Selector="TabStripItem">
             <Setter Property="Margin" Value="3"/>
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="Foreground" Value="{StyleResource LightBrush}"/>
+        </Style>
+        <Style Selector="TabStripItem:selected">
+            <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
+        </Style>
+        <Style Selector="TabStripItem:pointerover">
+            <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
         </Style>
         <!-- TextBlock -->
         <Style Selector="TextBlock.default">
             <Setter Property="Margin" Value="1"/>
             <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
         </Style>
         <Style Selector="TextBlock.left">
             <Setter Property="Margin" Value="3,4,3,4"/>
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="TextAlignment" Value="Left"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
         </Style>
         <Style Selector="TextBlock.center">
             <Setter Property="Margin" Value="3,4,3,4"/>
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="TextAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
         </Style>
         <Style Selector="TextBlock.header">
             <Setter Property="Margin" Value="3,4,3,4"/>
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
         </Style>
         <Style Selector="TextBlock.stats">
             <Setter Property="Margin" Value="0"/>
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
         </Style>
         <Style Selector="TextBlock.title">
             <Setter Property="Margin" Value="0"/>
             <Setter Property="FontSize" Value="28"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
         </Style>
         <Style Selector="TextBlock.recent">
             <Setter Property="Margin" Value="0"/>
             <Setter Property="FontSize" Value="18"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
         </Style>
         <Style Selector="TextBlock.recents">
             <Setter Property="Margin" Value="9,6,9,6"/>
             <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
         </Style>
         <Style Selector="TextBlock.autofit">
             <Setter Property="Margin" Value="3,0,3,0"/>
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="TextAlignment" Value="Left"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
         </Style>
         <!-- TextBox.default -->
         <Style Selector="TextBox.default">
@@ -430,6 +411,7 @@
             <Setter Property="Background" Value="{StyleResource BackgroundBrush}"/>
             <Setter Property="BorderBrush" Value="{StyleResource TransparentBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
         </Style>
         <Style Selector="TextBox.default:pointerover /template/ Border#border">
             <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
@@ -449,6 +431,7 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="BorderBrush" Value="{StyleResource TransparentBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
         </Style>
         <Style Selector="TextBox.left:pointerover /template/ Border#border">
             <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
@@ -468,6 +451,7 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="BorderBrush" Value="{StyleResource TransparentBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
         </Style>
         <Style Selector="TextBox.center:pointerover /template/ Border#border">
             <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
@@ -487,6 +471,7 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
         </Style>
         <Style Selector="TextBox.property:pointerover /template/ Border#border">
             <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
@@ -506,6 +491,7 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
         </Style>
         <Style Selector="TextBox.autofit:pointerover /template/ Border#border">
             <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
@@ -527,6 +513,7 @@
             <Setter Property="TextWrapping" Value="NoWrap"/>
             <Setter Property="HorizontalScrollBarVisibility" Value="Auto"/>
             <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
         </Style>
         <Style Selector="TextBox.xaml:pointerover /template/ Border#border">
             <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
@@ -548,6 +535,7 @@
             <Setter Property="TextWrapping" Value="NoWrap"/>
             <Setter Property="HorizontalScrollBarVisibility" Value="Auto"/>
             <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
         </Style>
         <Style Selector="TextBox.browser:pointerover /template/ Border#border">
             <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
@@ -562,6 +550,7 @@
             <Setter Property="Background" Value="{StyleResource BackgroundBrush}"/>
             <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
         </Style>
         <!-- TreeView.default -->
         <Style Selector="TreeView.default">
@@ -569,6 +558,7 @@
             <Setter Property="Padding" Value="0"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="AutoScrollToSelectedItem" Value="True"/>
+            <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
         </Style>
         <!-- TreeView.xaml -->
         <Style Selector="TreeView.xaml">
@@ -576,6 +566,7 @@
             <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="AutoScrollToSelectedItem" Value="True"/>
+            <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
         </Style>
         <!-- TreeView.browser -->
         <Style Selector="TreeView.browser">
@@ -583,6 +574,7 @@
             <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="AutoScrollToSelectedItem" Value="True"/>
+            <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
         </Style>
     </Application.Styles>
     <Application.DataTemplates>
