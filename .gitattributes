@@ -25,9 +25,6 @@
 *.png	 binary
 *.jpg	 binary
 
-# New lines
-* eol=crlf
-
 # Git files
 .gitattributes export-ignore
 .gitignore export-ignore
