@@ -168,9 +168,11 @@
     <Compile Include="Style\ShapeStyleTests.cs" />
     <Compile Include="Style\TextStyleTests.cs" />
     <Compile Include="Utilities\PropertyChangedObserver.cs" />
+    <Compile Include="Xaml\Collections\XDatabasesTests.cs" />
     <Compile Include="Xaml\Collections\XGroupsTests.cs" />
     <Compile Include="Xaml\Collections\XShapesTests.cs" />
     <Compile Include="Xaml\Collections\XStylesTests.cs" />
+    <Compile Include="Xaml\Collections\XTemplatesTests.cs" />
     <Compile Include="Xaml\Converters\ArgbColorTypeConverterTests.cs" />
     <Compile Include="Xaml\Converters\FontStyleTypeConverterTests.cs" />
     <Compile Include="Xaml\Converters\ShapeStateTypeConverterTests.cs" />
