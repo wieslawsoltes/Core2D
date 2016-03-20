@@ -22,7 +22,7 @@ namespace Core2D.Editor.Tools
         /// Initialize new instance of <see cref="ToolRectangle"/> class.
         /// </summary>
         /// <param name="editor">The current <see cref="ProjectEditor"/> object.</param>
-        public ToolRectangle(ProjectEditor editor) 
+        public ToolRectangle(ProjectEditor editor)
             : base()
         {
             _editor = editor;

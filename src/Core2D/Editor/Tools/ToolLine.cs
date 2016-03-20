@@ -22,7 +22,7 @@ namespace Core2D.Editor.Tools
         /// Initialize new instance of <see cref="ToolLine"/> class.
         /// </summary>
         /// <param name="editor">The current <see cref="ProjectEditor"/> object.</param>
-        public ToolLine(ProjectEditor editor) 
+        public ToolLine(ProjectEditor editor)
             : base()
         {
             _editor = editor;

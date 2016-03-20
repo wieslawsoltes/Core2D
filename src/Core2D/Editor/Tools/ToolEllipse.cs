@@ -181,7 +181,7 @@ namespace Core2D.Editor.Tools
             _bottomRightHelperPoint = XPoint.Create(0, 0, _editor.Project.Options.PointShape);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_bottomRightHelperPoint);
         }
-        
+
         /// <inheritdoc/>
         public override void Move(BaseShape shape)
         {
