@@ -3,17 +3,17 @@
 using Perspex.Controls;
 using Perspex.Markup.Xaml;
 
-namespace Core2D.Perspex.Controls.Exporter
+namespace Core2D.Perspex.Views
 {
     /// <summary>
-    /// Interaction logic for <see cref="ExporterControl"/> xaml.
+    /// Interaction logic for <see cref="MenuControl"/> xaml.
     /// </summary>
-    public class ExporterControl : UserControl
+    public class MenuControl : UserControl
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ExporterControl"/> class.
+        /// Initializes a new instance of the <see cref="MenuControl"/> class.
         /// </summary>
-        public ExporterControl()
+        public MenuControl()
         {
             this.InitializeComponent();
         }

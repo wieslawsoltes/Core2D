@@ -2,7 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System.Windows.Controls;
 
-namespace Core2D.Wpf.Controls.Editor
+namespace Core2D.Wpf.Views
 {
     /// <summary>
     /// Interaction logic for <see cref="DashboardControl"/> xaml.

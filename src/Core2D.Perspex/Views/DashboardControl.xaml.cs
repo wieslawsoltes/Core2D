@@ -3,17 +3,17 @@
 using Perspex.Controls;
 using Perspex.Markup.Xaml;
 
-namespace Core2D.Perspex.Controls.Editor
+namespace Core2D.Perspex.Views
 {
     /// <summary>
-    /// Interaction logic for <see cref="EditorControl"/> xaml.
+    /// Interaction logic for <see cref="DashboardControl"/> xaml.
     /// </summary>
-    public class EditorControl : UserControl
+    public class DashboardControl : UserControl
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="EditorControl"/> class.
+        /// Initializes a new instance of the <see cref="DashboardControl"/> class.
         /// </summary>
-        public EditorControl()
+        public DashboardControl()
         {
             this.InitializeComponent();
         }

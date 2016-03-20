@@ -121,7 +121,7 @@
     <Compile Include="Controls\Custom\LayerElement.cs" />
     <Compile Include="Controls\Custom\ListBoxDropMode.cs" />
     <Compile Include="Controls\Custom\RecordsListView.cs" />
-    <Compile Include="Controls\Editor\DashboardControl.xaml.cs">
+    <Compile Include="Views\DashboardControl.xaml.cs">
       <DependentUpon>DashboardControl.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -210,7 +210,7 @@
     <Compile Include="Controls\Project\PageControl.xaml.cs">
       <DependentUpon>PageControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Editor\StatusControl.xaml.cs">
+    <Compile Include="Views\StatusControl.xaml.cs">
       <DependentUpon>StatusControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Project\ShapesControl.xaml.cs">
@@ -315,7 +315,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\Editor\DashboardControl.xaml" />
+    <Page Include="Views\DashboardControl.xaml" />
     <Page Include="Controls\Data\DataControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -412,7 +412,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\Editor\StatusControl.xaml">
+    <Page Include="Views\StatusControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -425,7 +425,7 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Project\TemplatesControl.xaml" />
-    <Page Include="Controls\Editor\MenuControl.xaml">
+    <Page Include="Views\MenuControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -522,7 +522,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Controls\Editor\MenuControl.xaml.cs">
+    <Compile Include="Views\MenuControl.xaml.cs">
       <DependentUpon>MenuControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Project\StylesControl.xaml.cs">

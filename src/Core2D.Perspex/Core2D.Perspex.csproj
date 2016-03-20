@@ -243,16 +243,16 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\Editor\EditorControl.xaml.cs">
+    <Compile Include="Views\EditorControl.xaml.cs">
       <DependentUpon>EditorControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Editor\DashboardControl.xaml.cs">
+    <Compile Include="Views\DashboardControl.xaml.cs">
       <DependentUpon>DashboardControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Editor\DrawableControl.xaml.cs">
       <DependentUpon>DrawableControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Editor\MenuControl.xaml.cs">
+    <Compile Include="Views\MenuControl.xaml.cs">
       <DependentUpon>MenuControl.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -345,7 +345,7 @@
     <Compile Include="Controls\Exporter\DocumentsControl.xaml.cs">
       <DependentUpon>DocumentsControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Exporter\ExporterControl.xaml.cs">
+    <Compile Include="Views\ExporterControl.xaml.cs">
       <DependentUpon>ExporterControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Exporter\GroupsControl.xaml.cs">
@@ -383,7 +383,7 @@
     <Compile Include="Controls\Browser\DocumentsControl.xaml.cs">
       <DependentUpon>DocumentsControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Browser\BrowserControl.xaml.cs">
+    <Compile Include="Views\BrowserControl.xaml.cs">
       <DependentUpon>BrowserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Browser\GroupsControl.xaml.cs">
@@ -576,13 +576,13 @@
     <EmbeddedResource Include="Controls\Project\TemplatesControl.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Controls\Editor\EditorControl.xaml" />
-    <EmbeddedResource Include="Controls\Editor\DashboardControl.xaml" />
+    <EmbeddedResource Include="Views\EditorControl.xaml" />
+    <EmbeddedResource Include="Views\DashboardControl.xaml" />
     <EmbeddedResource Include="Controls\Editor\DrawableControl.xaml" />
-    <EmbeddedResource Include="Controls\Editor\MenuControl.xaml" />
+    <EmbeddedResource Include="Views\MenuControl.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Controls\Exporter\ExporterControl.xaml" />
+    <EmbeddedResource Include="Views\ExporterControl.xaml" />
     <EmbeddedResource Include="Controls\Exporter\StylesControl.xaml" />
     <EmbeddedResource Include="Controls\Exporter\GroupsControl.xaml" />
     <EmbeddedResource Include="Controls\Exporter\DatabasesControl.xaml" />
@@ -596,7 +596,7 @@
     <EmbeddedResource Include="Controls\Exporter\TemplateControl.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Controls\Browser\BrowserControl.xaml" />
+    <EmbeddedResource Include="Views\BrowserControl.xaml" />
     <EmbeddedResource Include="Controls\Browser\StylesControl.xaml" />
     <EmbeddedResource Include="Controls\Browser\GroupsControl.xaml" />
     <EmbeddedResource Include="Controls\Browser\DatabasesControl.xaml" />

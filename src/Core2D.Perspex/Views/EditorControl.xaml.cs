@@ -3,17 +3,17 @@
 using Perspex.Controls;
 using Perspex.Markup.Xaml;
 
-namespace Core2D.Perspex.Controls.Browser
+namespace Core2D.Perspex.Views
 {
     /// <summary>
-    /// Interaction logic for <see cref="BrowserControl"/> xaml.
+    /// Interaction logic for <see cref="EditorControl"/> xaml.
     /// </summary>
-    public class BrowserControl : UserControl
+    public class EditorControl : UserControl
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="BrowserControl"/> class.
+        /// Initializes a new instance of the <see cref="EditorControl"/> class.
         /// </summary>
-        public BrowserControl()
+        public EditorControl()
         {
             this.InitializeComponent();
         }

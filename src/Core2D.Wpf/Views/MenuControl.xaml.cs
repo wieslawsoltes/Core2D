@@ -1,29 +1,20 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Perspex.Controls;
-using Perspex.Markup.Xaml;
+using System.Windows.Controls;
 
-namespace Core2D.Perspex.Controls.Editor
+namespace Core2D.Wpf.Views
 {
     /// <summary>
     /// Interaction logic for <see cref="MenuControl"/> xaml.
     /// </summary>
-    public class MenuControl : UserControl
+    public partial class MenuControl : UserControl
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="MenuControl"/> class.
         /// </summary>
         public MenuControl()
         {
-            this.InitializeComponent();
-        }
-
-        /// <summary>
-        /// Initialize the Xaml components.
-        /// </summary>
-        private void InitializeComponent()
-        {
-            PerspexXamlLoader.Load(this);
+            InitializeComponent();
         }
     }
 }

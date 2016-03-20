@@ -19,6 +19,7 @@
         xmlns:shapes="clr-namespace:Core2D.Wpf.Controls.Shapes"
         xmlns:state="clr-namespace:Core2D.Wpf.Controls.State"
         xmlns:style="clr-namespace:Core2D.Wpf.Controls.Style"
+        xmlns:views="clr-namespace:Core2D.Wpf.Views"
         xmlns:ad="http://schemas.xceed.com/wpf/xaml/avalondock" 
         xmlns:p="clr-namespace:Core2D.Wpf.Properties" 
         mc:Ignorable="d" 
@@ -54,7 +55,7 @@
         <KeyBinding Command="{x:Static Editor:Commands.UngroupCommand}" Gesture="Ctrl+U"/>
     </Window.InputBindings>
     <Window.Resources>
-        <Style x:Key="DashboardVisibilityStyle" TargetType="{x:Type editor:DashboardControl}">
+        <Style x:Key="DashboardVisibilityStyle" TargetType="{x:Type views:DashboardControl}">
             <Setter Property="Visibility" Value="Collapsed"/>
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Project}" Value="{x:Null}">
@@ -70,7 +71,7 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
-        <Style x:Key="StatusVisibilityStyle" TargetType="{x:Type editor:StatusControl}">
+        <Style x:Key="StatusVisibilityStyle" TargetType="{x:Type views:StatusControl}">
             <Setter Property="Visibility" Value="Visible"/>
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Project}" Value="{x:Null}">
@@ -133,8 +134,8 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="3"/>
         </Grid.RowDefinitions>
-        <editor:MenuControl Grid.Row="0"/>
-        <editor:DashboardControl Style="{StaticResource DashboardVisibilityStyle}" Grid.Row="2" Margin="0,5,0,0"/>
+        <views:MenuControl Grid.Row="0"/>
+        <views:DashboardControl Style="{StaticResource DashboardVisibilityStyle}" Grid.Row="2" Margin="0,5,0,0"/>
         <ad:DockingManager x:Name="dockingManager" Style="{StaticResource DockingManagerVisibilityStyle}" Grid.Row="2" Margin="0,5,0,0">
             <ad:LayoutRoot>
                 <ad:LayoutPanel Orientation="Horizontal">
@@ -280,6 +281,6 @@
                 </ad:LayoutPanel>
             </ad:LayoutRoot>
         </ad:DockingManager>
-        <editor:StatusControl Style="{StaticResource StatusVisibilityStyle}" Grid.Row="4" Margin="5,0,5,0"/>
+        <views:StatusControl Style="{StaticResource StatusVisibilityStyle}" Grid.Row="4" Margin="5,0,5,0"/>
     </Grid>
 </Window>
