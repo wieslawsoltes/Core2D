@@ -25,6 +25,11 @@ namespace Core2D.Editor.Designer
     public class DesignerContext
     {
         /// <summary>
+        /// The design time <see cref="ShapeRenderer"/>.
+        /// </summary>
+        public static ShapeRenderer Renderer { get; set; }
+
+        /// <summary>
         /// The design time <see cref="ProjectEditor"/>.
         /// </summary>
         public static ProjectEditor Editor { get; set; }
@@ -412,6 +417,10 @@ namespace Core2D.Editor.Designer
         /// <returns>The new instance of the <see cref="DesignerContext"/> class.</returns>
         public static void InitializeContext(ShapeRenderer renderer, ITextClipboard clipboard, IStreamSerializer protoBufSerializer, ITextSerializer jsonSerializer, ITextSerializer xamlSerializer)
         {
+            // Renderer
+
+            Renderer = renderer;
+
             // Editor
 
             Editor = new ProjectEditor()
