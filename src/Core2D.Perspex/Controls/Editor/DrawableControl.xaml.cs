@@ -24,10 +24,28 @@ namespace Core2D.Perspex.Controls.Editor
         public static PerspexProperty<ProjectEditor> EditorProperty =
             PerspexProperty.Register<DrawableControl, ProjectEditor>("Editor");
 
+        public static PerspexProperty<XContainer> ContainerProperty =
+            PerspexProperty.Register<DrawableControl, XContainer>("Container");
+
+        public static PerspexProperty<ShapeRenderer> RendererProperty =
+            PerspexProperty.Register<DrawableControl, ShapeRenderer>("Renderer");
+
         public ProjectEditor Editor
         {
             get { return GetValue(EditorProperty); }
             set { SetValue(EditorProperty, value); }
+        }
+
+        public XContainer Container
+        {
+            get { return GetValue(ContainerProperty); }
+            set { SetValue(ContainerProperty, value); }
+        }
+
+        public ShapeRenderer Renderer
+        {
+            get { return GetValue(RendererProperty); }
+            set { SetValue(RendererProperty, value); }
         }
 
         /// <summary>
@@ -54,7 +72,7 @@ namespace Core2D.Perspex.Controls.Editor
         public void Initialize()
         {
             var panAndZoom = this.Parent as PAZ.PanAndZoom;
-            if (Editor != null && panAndZoom != null)
+            if (Editor != null && Renderer != null && panAndZoom != null)
             {
                 Editor.Invalidate = () => this.InvalidateVisual();
                 Editor.ResetZoom = () => panAndZoom.Reset();
@@ -63,7 +81,7 @@ namespace Core2D.Perspex.Controls.Editor
                 panAndZoom.InvalidatedChild =
                     (zoomX, zoomY, offsetX, offsetY) =>
                     {
-                        var state = Editor.Renderers[0].State;
+                        var state = Renderer.State;
                         bool invalidate = state.ZoomX != zoomX || state.ZoomY != zoomY;
                         state.ZoomX = zoomX;
                         state.ZoomY = zoomY;
@@ -225,9 +243,9 @@ namespace Core2D.Perspex.Controls.Editor
         {
             base.Render(context);
 
-            if (Editor?.Project?.CurrentContainer != null)
+            if (Renderer != null && Container != null)
             {
-                Draw(context, Editor.Renderers[0], Editor.Project.CurrentContainer);
+                Draw(context, Renderer, Container);
             }
         }
     }
