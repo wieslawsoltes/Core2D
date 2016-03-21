@@ -42,8 +42,6 @@
                     <TextBlock Text="{Binding Name}" Classes="default">
                         <TextBlock.ContextMenu>
                             <ContextMenu>
-                                <MenuItem Header="_Add Style" Command="{Static Editor:Commands.AddStyleCommand}" CommandParameter="{Binding #styles.DataContext.CurrentStyleLibrary, Mode=OneWay}"/>
-                                <Separator/>
                                 <MenuItem Header="_Delete" Command="{Static Editor:Commands.RemoveStyleCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                                 <Separator/>
                                 <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportStyleCommand}" CommandParameter="{Binding Mode=OneWay}"/>

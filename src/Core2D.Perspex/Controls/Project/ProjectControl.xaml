@@ -76,14 +76,6 @@
                         <TextBlock Text="{Binding Name, Mode=TwoWay}" Classes="default">
                             <TextBlock.ContextMenu>
                                 <ContextMenu>
-                                    <MenuItem Header="Te_mplate" Items="{Binding #documents.DataContext.Templates, Mode=OneWay}">
-                                        <MenuItem.DataTemplates>
-                                            <DataTemplate DataType="Project:XContainer">
-                                                <MenuItem Header="{Binding Name}" Command="{Static Editor:Commands.ApplyTemplateCommand}" CommandParameter="{Binding Mode=OneWay}"/>
-                                            </DataTemplate>
-                                        </MenuItem.DataTemplates>
-                                    </MenuItem>
-                                    <Separator/>
                                     <MenuItem Header="Insert Page Bef_ore" Command="{Static Editor:Commands.InsertPageBeforeCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                                     <MenuItem Header="Insert Page Aft_er" Command="{Static Editor:Commands.InsertPageAfterCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                                     <Separator/>

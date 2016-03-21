@@ -32,8 +32,6 @@
                                 <Grid ColumnDefinitions="Auto,*">
                                     <Grid.ContextMenu>
                                         <ContextMenu>
-                                            <MenuItem Header="_Add Layer" Command="{Static Editor:Commands.AddLayerCommand}" CommandParameter="{Binding #layers.DataContext, Mode=OneWay}"/>
-                                            <Separator/>
                                             <MenuItem Header="_Delete" Command="{Static Editor:Commands.RemoveLayerCommand}"  CommandParameter="{Binding Mode=OneWay}"/>
                                         </ContextMenu>
                                     </Grid.ContextMenu>
