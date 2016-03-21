@@ -21,8 +21,14 @@ namespace Core2D.Perspex.Controls.Editor
     /// </summary>
     public class DrawableControl : UserControl
     {
-        private ProjectEditor _editor;
-        private PAZ.PanAndZoom _panAndZoom;
+        public static PerspexProperty<ProjectEditor> EditorProperty =
+            PerspexProperty.Register<DrawableControl, ProjectEditor>("Editor");
+
+        public ProjectEditor Editor
+        {
+            get { return GetValue(EditorProperty); }
+            set { SetValue(EditorProperty, value); }
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DrawableControl"/> class.
@@ -31,10 +37,7 @@ namespace Core2D.Perspex.Controls.Editor
         {
             this.InitializeComponent();
 
-            this.AttachedToLogicalTree += (sender, e) =>
-            {
-                _panAndZoom = this.Parent as PAZ.PanAndZoom;
-            };
+            this.AttachedToVisualTree += (sender, e) => Initialize();
         }
 
         /// <summary>
@@ -46,21 +49,21 @@ namespace Core2D.Perspex.Controls.Editor
         }
 
         /// <summary>
-        /// Initialize project editor.
+        /// Initialize drawable control.
         /// </summary>
-        private void InitializeEditor()
+        public void Initialize()
         {
-            _editor = this.DataContext as ProjectEditor;
-            if (_editor != null)
+            var panAndZoom = this.Parent as PAZ.PanAndZoom;
+            if (Editor != null && panAndZoom != null)
             {
-                _editor.Invalidate = () => this.InvalidateVisual();
-                _editor.ResetZoom = () => this.OnZoomReset();
-                _editor.AutoFitZoom = () => this.OnZoomAutoFit();
+                Editor.Invalidate = () => this.InvalidateVisual();
+                Editor.ResetZoom = () => panAndZoom.Reset();
+                Editor.AutoFitZoom = () => panAndZoom.AutoFit();
 
-                _panAndZoom.InvalidatedChild =
+                panAndZoom.InvalidatedChild =
                     (zoomX, zoomY, offsetX, offsetY) =>
                     {
-                        var state = _editor.Renderers[0].State;
+                        var state = Editor.Renderers[0].State;
                         bool invalidate = state.ZoomX != zoomX || state.ZoomY != zoomY;
                         state.ZoomX = zoomX;
                         state.ZoomY = zoomY;
@@ -68,86 +71,70 @@ namespace Core2D.Perspex.Controls.Editor
                         state.PanY = offsetY;
                         if (invalidate)
                         {
-                            _editor.InvalidateCache(isZooming: true);
+                            Editor.InvalidateCache(isZooming: true);
                         }
                     };
 
-                _panAndZoom.PointerPressed +=
+                panAndZoom.PointerPressed +=
                     (sender, e) =>
                     {
                         var p = e.GetPosition(this);
-                        p = _panAndZoom.FixInvalidPointPosition(p);
+                        p = panAndZoom.FixInvalidPointPosition(p);
 
                         if (e.MouseButton == MouseButton.Left)
                         {
-                            if (_editor.IsLeftDownAvailable())
+                            if (Editor.IsLeftDownAvailable())
                             {
-                                _editor.LeftDown(p.X, p.Y);
+                                Editor.LeftDown(p.X, p.Y);
                             }
                         }
 
                         if (e.MouseButton == MouseButton.Right)
                         {
                             this.Cursor = new Cursor(StandardCursorType.Hand);
-                            if (_editor.IsRightDownAvailable())
+                            if (Editor.IsRightDownAvailable())
                             {
-                                _editor.RightDown(p.X, p.Y);
+                                Editor.RightDown(p.X, p.Y);
                             }
                         }
                     };
 
-                _panAndZoom.PointerReleased +=
+                panAndZoom.PointerReleased +=
                     (sender, e) =>
                     {
                         var p = e.GetPosition(this);
-                        p = _panAndZoom.FixInvalidPointPosition(p);
+                        p = panAndZoom.FixInvalidPointPosition(p);
 
                         if (e.MouseButton == MouseButton.Left)
                         {
-                            if (_editor.IsLeftUpAvailable())
+                            if (Editor.IsLeftUpAvailable())
                             {
-                                _editor.LeftUp(p.X, p.Y);
+                                Editor.LeftUp(p.X, p.Y);
                             }
                         }
 
                         if (e.MouseButton == MouseButton.Right)
                         {
                             this.Cursor = new Cursor(StandardCursorType.Arrow);
-                            if (_editor.IsRightUpAvailable())
+                            if (Editor.IsRightUpAvailable())
                             {
-                                _editor.RightUp(p.X, p.Y);
+                                Editor.RightUp(p.X, p.Y);
                             }
                         }
                     };
 
-                _panAndZoom.PointerMoved +=
+                panAndZoom.PointerMoved +=
                     (sender, e) =>
                     {
                         var p = e.GetPosition(this);
-                        p = _panAndZoom.FixInvalidPointPosition(p);
+                        p = panAndZoom.FixInvalidPointPosition(p);
 
-                        if (_editor.IsMoveAvailable())
+                        if (Editor.IsMoveAvailable())
                         {
-                            _editor.Move(p.X, p.Y);
+                            Editor.Move(p.X, p.Y);
                         }
                     };
             }
-        }
-
-        /// <summary>
-        /// Reset view size to defaults.
-        /// </summary>
-        public void OnZoomReset()
-        {
-            _panAndZoom.Reset();
-        }
-
-        /// <summary>
-        /// Auto-fit view to the available extents.
-        /// </summary>
-        public void OnZoomAutoFit()
-        {
-            _panAndZoom.AutoFit();
         }
 
         /// <summary>
@@ -238,14 +225,9 @@ namespace Core2D.Perspex.Controls.Editor
         {
             base.Render(context);
 
-            if (_editor == null)
+            if (Editor?.Project?.CurrentContainer != null)
             {
-                InitializeEditor();
-            }
-
-            if (_editor?.Project?.CurrentContainer != null)
-            {
-                Draw(context, _editor.Renderers[0], _editor.Project.CurrentContainer);
+                Draw(context, Editor.Renderers[0], Editor.Project.CurrentContainer);
             }
         }
     }

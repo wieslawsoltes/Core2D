@@ -85,7 +85,7 @@
             <Border Classes="drawable">
                 <Border Classes="transparent" ClipToBounds="True">
                     <paz:PanAndZoom Name="panAndZoom" AutoFitMode="Extent" ZoomSpeed="1.2" Background="{StyleResource TransparentBrush}" ClipToBounds="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                        <editor:DrawableControl Name="drawableControl" ClipToBounds="False"/>
+                        <editor:DrawableControl Name="drawableControl" Editor="{Binding}" ClipToBounds="False"/>
                     </paz:PanAndZoom>
                 </Border>
             </Border>
