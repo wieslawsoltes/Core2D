@@ -28,16 +28,16 @@ namespace Core2D.Perspex.Controls.PanAndZoom
         public Action<double, double, double, double> InvalidatedChild { get; set; }
 
         public static PerspexProperty<double> ZoomSpeedProperty =
-            PerspexProperty.Register<PanAndZoom, double>("ZoomSpeed", 1.2, false, BindingMode.TwoWay);
+            PerspexProperty.Register<PanAndZoom, double>(nameof(ZoomSpeed), 1.2, false, BindingMode.TwoWay);
+
+        public static PerspexProperty<AutoFitMode> AutoFitModeProperty =
+            PerspexProperty.Register<PanAndZoom, AutoFitMode>(nameof(AutoFitMode), AutoFitMode.Extent, false, BindingMode.TwoWay);
 
         public double ZoomSpeed
         {
             get { return GetValue(ZoomSpeedProperty); }
             set { SetValue(ZoomSpeedProperty, value); }
         }
-
-        public static PerspexProperty<AutoFitMode> AutoFitModeProperty =
-            PerspexProperty.Register<PanAndZoom, AutoFitMode>("AutoFitMode", AutoFitMode.Extent, false, BindingMode.TwoWay);
 
         public AutoFitMode AutoFitMode
         {

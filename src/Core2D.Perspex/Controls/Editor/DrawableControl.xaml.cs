@@ -22,13 +22,13 @@ namespace Core2D.Perspex.Controls.Editor
     public class DrawableControl : UserControl
     {
         public static PerspexProperty<ProjectEditor> EditorProperty =
-            PerspexProperty.Register<DrawableControl, ProjectEditor>("Editor");
+            PerspexProperty.Register<DrawableControl, ProjectEditor>(nameof(Editor));
 
         public static PerspexProperty<XContainer> ContainerProperty =
-            PerspexProperty.Register<DrawableControl, XContainer>("Container");
+            PerspexProperty.Register<DrawableControl, XContainer>(nameof(Container));
 
         public static PerspexProperty<ShapeRenderer> RendererProperty =
-            PerspexProperty.Register<DrawableControl, ShapeRenderer>("Renderer");
+            PerspexProperty.Register<DrawableControl, ShapeRenderer>(nameof(Renderer));
 
         public ProjectEditor Editor
         {
