@@ -207,7 +207,7 @@ namespace Core2D.Perspex
                 Log = log,
                 FileIO = new PerspexFileSystem(),
                 CommandManager = new PerspexCommandManager(),
-                Renderers = new ShapeRenderer[] { new PerspexRenderer() },
+                Renderers = new ShapeRenderer[] { new PerspexRenderer(), new PerspexRenderer() },
                 ProjectFactory = new ProjectFactory(),
                 TextClipboard = new PerspexTextClipboard(),
                 ProtoBufSerializer = new ProtoBufStreamSerializer(),
