@@ -14,7 +14,7 @@ using Perspex.Media;
 using System.Collections.Immutable;
 using PAZ = Core2D.Perspex.Controls.PanAndZoom;
 
-namespace Core2D.Perspex.Controls.Editor
+namespace Core2D.Perspex.Views
 {
     /// <summary>
     /// Interaction logic for <see cref="DrawableControl"/> xaml.

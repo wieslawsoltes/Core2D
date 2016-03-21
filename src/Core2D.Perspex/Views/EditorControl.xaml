@@ -18,6 +18,7 @@
              xmlns:state="clr-namespace:Core2D.Perspex.Controls.State;assembly=Core2D.Perspex"
              xmlns:style="clr-namespace:Core2D.Perspex.Controls.Style;assembly=Core2D.Perspex"
              xmlns:editor="clr-namespace:Core2D.Perspex.Controls.Editor;assembly=Core2D.Perspex"
+             xmlns:views="clr-namespace:Core2D.Perspex.Views;assembly=Core2D.Perspex"
              Design.DataContext="{Static Designer:DesignerContext.Editor}"
              Design.Width="1200" Design.Height="540">
     <Grid Name="rootPanel" ColumnDefinitions="Auto,Auto,*,Auto,Auto" RowDefinitions="*,Auto">
@@ -85,7 +86,7 @@
             <Border Classes="drawable">
                 <Border Classes="transparent" ClipToBounds="True">
                     <paz:PanAndZoom Name="panAndZoom" AutoFitMode="Extent" ZoomSpeed="1.2" Background="{StyleResource TransparentBrush}" ClipToBounds="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                        <editor:DrawableControl Name="drawableControl" Editor="{Binding}" Renderer="{Binding Renderers[0]}" Container="{Binding Project.CurrentContainer}" ClipToBounds="False"/>
+                        <views:DrawableControl Name="drawableControl" Editor="{Binding}" Renderer="{Binding Renderers[0]}" Container="{Binding Project.CurrentContainer}" ClipToBounds="False"/>
                     </paz:PanAndZoom>
                 </Border>
             </Border>

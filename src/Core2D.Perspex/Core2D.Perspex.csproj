@@ -213,7 +213,7 @@
     <Compile Include="..\Core2D\Properties\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Controls\Editor\DocumentControl.xaml.cs">
+    <Compile Include="Views\DocumentControl.xaml.cs">
       <DependentUpon>DocumentControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -252,7 +252,7 @@
     <Compile Include="Views\DashboardControl.xaml.cs">
       <DependentUpon>DashboardControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Editor\DrawableControl.xaml.cs">
+    <Compile Include="Views\DrawableControl.xaml.cs">
       <DependentUpon>DrawableControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MenuControl.xaml.cs">
@@ -581,7 +581,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Views\EditorControl.xaml" />
     <EmbeddedResource Include="Views\DashboardControl.xaml" />
-    <EmbeddedResource Include="Controls\Editor\DrawableControl.xaml" />
+    <EmbeddedResource Include="Views\DrawableControl.xaml" />
     <EmbeddedResource Include="Views\MenuControl.xaml" />
   </ItemGroup>
   <ItemGroup>
@@ -674,7 +674,7 @@
     <EmbeddedResource Include="Resources\Brushes.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Controls\Editor\DocumentControl.xaml" />
+    <EmbeddedResource Include="Views\DocumentControl.xaml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Perspex.Skia.Desktop.9999.0.1186-nightly\build\net45\Perspex.Skia.Desktop.targets" Condition="Exists('..\packages\Perspex.Skia.Desktop.9999.0.1186-nightly\build\net45\Perspex.Skia.Desktop.targets')" />

@@ -3,7 +3,7 @@
 using Perspex.Controls;
 using Perspex.Markup.Xaml;
 
-namespace Core2D.Perspex.Controls.Editor
+namespace Core2D.Perspex.Views
 {
     /// <summary>
     /// Interaction logic for <see cref="DocumentControl"/> xaml.
