@@ -12,10 +12,10 @@
              Design.Width="1200" Design.Height="540">
     <Grid>
         <ScrollViewer>
-            <ItemsControl Name="pages" VerticalAlignment="Stretch" Items="{Binding Project.CurrentDocument.Pages}">
+            <ItemsControl VerticalAlignment="Stretch" Items="{Binding Project.CurrentDocument.Pages}">
                 <ItemsControl.DataTemplates>
                     <DataTemplate DataType="Project:XPage">
-                        <editor:DrawableControl Editor="{Binding #pages.DataContext, Mode=TwoWay}" Renderer="{Binding #pages.DataContext.Renderers[1], Mode=TwoWay}" Container="{Binding}" ClipToBounds="False" Margin="2"/>
+                        <editor:DrawableControl Renderer="{Static Designer:DesignerContext.Renderer}" Container="{Binding}" ClipToBounds="False"/>
                     </DataTemplate>
                 </ItemsControl.DataTemplates>
             </ItemsControl>
