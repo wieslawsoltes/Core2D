@@ -7,7 +7,9 @@
              xmlns:converters="clr-namespace:Core2D.Perspex.Converters;assembly=Core2D.Perspex"
              xmlns:Project="clr-namespace:Core2D.Project;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D"
-             xmlns:editor="clr-namespace:Core2D.Perspex.Controls.Editor;assembly=Core2D.Perspex">
+             xmlns:editor="clr-namespace:Core2D.Perspex.Controls.Editor;assembly=Core2D.Perspex"
+             Design.DataContext="{Static Designer:DesignerContext.Editor}"
+             Design.Width="1200" Design.Height="540">
     <Grid>
         <ScrollViewer>
             <ItemsControl Name="pages" VerticalAlignment="Stretch" Items="{Binding Project.CurrentDocument.Pages}">
