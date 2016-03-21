@@ -50,19 +50,19 @@
             <ia:DataTriggerBehavior Binding="{Binding #rootPanel.Bounds.Width}" ComparisonCondition="GreaterThan" Value="480">
                 <ia:ChangePropertyAction TargetObject="{Binding #leftPanelVSplitter}" PropertyName="IsVisible" Value="True"/>
                 <ia:ChangePropertyAction TargetObject="{Binding #leftPanel}" PropertyName="IsVisible" Value="True"/>
-                <actions:ChangePerspexPropertyAction TargetObject="{Binding #drawablePanel}" PropertyName="Grid.Column" Value="2"/>
-                <actions:ChangePerspexPropertyAction TargetObject="{Binding #drawablePanel}" PropertyName="Grid.ColumnSpan" Value="3"/>
+                <actions:ChangePerspexPropertyAction TargetObject="{Binding #containerPanel}" PropertyName="Grid.Column" Value="2"/>
+                <actions:ChangePerspexPropertyAction TargetObject="{Binding #containerPanel}" PropertyName="Grid.ColumnSpan" Value="3"/>
             </ia:DataTriggerBehavior>
             <ia:DataTriggerBehavior Binding="{Binding #rootPanel.Bounds.Width}" ComparisonCondition="LessThanOrEqual" Value="480">
                 <ia:ChangePropertyAction TargetObject="{Binding #leftPanelVSplitter}" PropertyName="IsVisible" Value="False"/>
                 <ia:ChangePropertyAction TargetObject="{Binding #leftPanel}" PropertyName="IsVisible" Value="False"/>
-                <actions:ChangePerspexPropertyAction TargetObject="{Binding #drawablePanel}" PropertyName="Grid.Column" Value="0"/>
-                <actions:ChangePerspexPropertyAction TargetObject="{Binding #drawablePanel}" PropertyName="Grid.ColumnSpan" Value="5"/>
+                <actions:ChangePerspexPropertyAction TargetObject="{Binding #containerPanel}" PropertyName="Grid.Column" Value="0"/>
+                <actions:ChangePerspexPropertyAction TargetObject="{Binding #containerPanel}" PropertyName="Grid.ColumnSpan" Value="5"/>
             </ia:DataTriggerBehavior>
             <ia:DataTriggerBehavior Binding="{Binding #rootPanel.Bounds.Width}" ComparisonCondition="GreaterThan" Value="720">
                 <ia:ChangePropertyAction TargetObject="{Binding #rightPanelVSplitter}" PropertyName="IsVisible" Value="True"/>
                 <ia:ChangePropertyAction TargetObject="{Binding #rightPanel}" PropertyName="IsVisible" Value="True"/>
-                <actions:ChangePerspexPropertyAction TargetObject="{Binding #drawablePanel}" PropertyName="Grid.ColumnSpan" Value="1"/>
+                <actions:ChangePerspexPropertyAction TargetObject="{Binding #containerPanel}" PropertyName="Grid.ColumnSpan" Value="1"/>
             </ia:DataTriggerBehavior>
             <ia:DataTriggerBehavior Binding="{Binding #rootPanel.Bounds.Width}" ComparisonCondition="LessThanOrEqual" Value="720">
                 <ia:ChangePropertyAction TargetObject="{Binding #rightPanelVSplitter}" PropertyName="IsVisible" Value="False"/>
@@ -82,11 +82,11 @@
             </ia:DataTriggerBehavior>
         </i:Interaction.Behaviors>
         <GridSplitter Name="leftPanelVSplitter" Classes="vertical" Grid.Column="1" Grid.Row="0" Width="6"/>
-        <Grid Name="drawablePanel" Grid.Row="0" Grid.Column="2">
-            <Border Classes="drawable">
+        <Grid Name="containerPanel" Grid.Row="0" Grid.Column="2">
+            <Border Classes="container">
                 <Border Classes="transparent" ClipToBounds="True">
                     <paz:PanAndZoom Name="panAndZoom" AutoFitMode="Extent" ZoomSpeed="1.2" Background="{StyleResource TransparentBrush}" ClipToBounds="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                        <views:DrawableControl Name="drawableControl" Editor="{Binding}" Renderer="{Binding Renderers[0]}" Container="{Binding Project.CurrentContainer}" ClipToBounds="False"/>
+                        <views:ContainerControl Name="containerControl" Editor="{Binding}" Renderer="{Binding Renderers[0]}" Container="{Binding Project.CurrentContainer}" ClipToBounds="False"/>
                     </paz:PanAndZoom>
                 </Border>
             </Border>

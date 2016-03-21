@@ -252,8 +252,8 @@
     <Compile Include="Views\DashboardControl.xaml.cs">
       <DependentUpon>DashboardControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\DrawableControl.xaml.cs">
-      <DependentUpon>DrawableControl.xaml</DependentUpon>
+    <Compile Include="Views\ContainerControl.xaml.cs">
+      <DependentUpon>ContainerControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MenuControl.xaml.cs">
       <DependentUpon>MenuControl.xaml</DependentUpon>
@@ -581,7 +581,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Views\EditorControl.xaml" />
     <EmbeddedResource Include="Views\DashboardControl.xaml" />
-    <EmbeddedResource Include="Views\DrawableControl.xaml" />
+    <EmbeddedResource Include="Views\ContainerControl.xaml" />
     <EmbeddedResource Include="Views\MenuControl.xaml" />
   </ItemGroup>
   <ItemGroup>

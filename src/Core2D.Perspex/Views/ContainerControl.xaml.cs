@@ -17,18 +17,18 @@ using PAZ = Core2D.Perspex.Controls.PanAndZoom;
 namespace Core2D.Perspex.Views
 {
     /// <summary>
-    /// Interaction logic for <see cref="DrawableControl"/> xaml.
+    /// Interaction logic for <see cref="ContainerControl"/> xaml.
     /// </summary>
-    public class DrawableControl : UserControl
+    public class ContainerControl : UserControl
     {
         public static PerspexProperty<ProjectEditor> EditorProperty =
-            PerspexProperty.Register<DrawableControl, ProjectEditor>(nameof(Editor));
+            PerspexProperty.Register<ContainerControl, ProjectEditor>(nameof(Editor));
 
         public static PerspexProperty<XContainer> ContainerProperty =
-            PerspexProperty.Register<DrawableControl, XContainer>(nameof(Container));
+            PerspexProperty.Register<ContainerControl, XContainer>(nameof(Container));
 
         public static PerspexProperty<ShapeRenderer> RendererProperty =
-            PerspexProperty.Register<DrawableControl, ShapeRenderer>(nameof(Renderer));
+            PerspexProperty.Register<ContainerControl, ShapeRenderer>(nameof(Renderer));
 
         public ProjectEditor Editor
         {
@@ -49,9 +49,9 @@ namespace Core2D.Perspex.Views
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DrawableControl"/> class.
+        /// Initializes a new instance of the <see cref="ContainerControl"/> class.
         /// </summary>
-        public DrawableControl()
+        public ContainerControl()
         {
             this.InitializeComponent();
 
@@ -67,7 +67,7 @@ namespace Core2D.Perspex.Views
         }
 
         /// <summary>
-        /// Initialize drawable control.
+        /// Initialize container control.
         /// </summary>
         public void Initialize()
         {
@@ -236,7 +236,7 @@ namespace Core2D.Perspex.Views
         }
 
         /// <summary>
-        /// Renders drawable control contents.
+        /// Renders container control contents.
         /// </summary>
         /// <param name="context">The drawing context.</param>
         public override void Render(DrawingContext context)

@@ -51,7 +51,7 @@
             <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
-        <Style Selector="Border.drawable">
+        <Style Selector="Border.container">
             <Setter Property="Margin" Value="0"/>
             <Setter Property="Padding" Value="3,3,3,3"/>
             <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>

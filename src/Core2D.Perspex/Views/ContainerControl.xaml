@@ -1,6 +1,6 @@
 ﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
 <!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
-<UserControl x:Class="Core2D.Perspex.Views.DrawableControl"
+<UserControl x:Class="Core2D.Perspex.Views.ContainerControl"
              xmlns="https://github.com/perspex"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:i="clr-namespace:Perspex.Xaml.Interactivity;assembly=Perspex.Xaml.Interactivity"
@@ -10,9 +10,9 @@
              xmlns:behaviors="clr-namespace:Core2D.Perspex.Interactions.Behaviors;assembly=Core2D.Perspex"
              xmlns:converters="clr-namespace:Core2D.Perspex.Converters;assembly=Core2D.Perspex"
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D"
-             Name="drawable" Focusable="True"
-             Width="{Binding #drawable.Container.Width}"
-             Height="{Binding #drawable.Container.Height}">
+             Name="container" Focusable="True"
+             Width="{Binding #container.Container.Width}"
+             Height="{Binding #container.Container.Height}">
     <i:Interaction.Behaviors>
         <behaviors:FocusOnAttachedToVisualTreeBehavior/>
         <behaviors:FocusOnPointerMovedBehavior/>
