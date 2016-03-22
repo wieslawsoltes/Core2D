@@ -9,6 +9,7 @@ using Perspex;
 using Perspex.Controls;
 using Perspex.Markup.Xaml;
 using Perspex.Media;
+using Renderer.Perspex;
 using System.Collections.Immutable;
 
 namespace Core2D.Perspex.Views
@@ -18,10 +19,10 @@ namespace Core2D.Perspex.Views
     /// </summary>
     public class ContainerControl : UserControl
     {
-        public static PerspexProperty<XContainer> ContainerProperty =
+        public static readonly PerspexProperty<XContainer> ContainerProperty =
             PerspexProperty.Register<ContainerControl, XContainer>(nameof(Container));
 
-        public static PerspexProperty<ShapeRenderer> RendererProperty =
+        public static readonly PerspexProperty<ShapeRenderer> RendererProperty =
             PerspexProperty.Register<ContainerControl, ShapeRenderer>(nameof(Renderer));
 
         public XContainer Container
@@ -140,9 +141,20 @@ namespace Core2D.Perspex.Views
         {
             base.Render(context);
 
-            if (Renderer != null && Container != null)
+            if (Container != null)
             {
-                Draw(context, Renderer, Container);
+                if (Renderer != null)
+                {
+                    Draw(context, Renderer, Container);
+                }
+                else
+                {
+                    var renderer = GetValue(RendererOptions.RendererProperty);
+                    if (renderer != null)
+                    {
+                        Draw(context, renderer, Container);
+                    }
+                }
             }
         }
     }
