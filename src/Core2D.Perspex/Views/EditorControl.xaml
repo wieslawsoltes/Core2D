@@ -10,7 +10,7 @@
              xmlns:behaviors="clr-namespace:Core2D.Perspex.Interactions.Behaviors;assembly=Core2D.Perspex"
              xmlns:converters="clr-namespace:Core2D.Perspex.Converters;assembly=Core2D.Perspex"
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D"
-             xmlns:paz="clr-namespace:Core2D.Perspex.Controls.PanAndZoom;assembly=Core2D.Perspex"
+             xmlns:zoom="clr-namespace:Core2D.Perspex.Controls.Zoom;assembly=Core2D.Perspex"
              xmlns:data="clr-namespace:Core2D.Perspex.Controls.Data;assembly=Core2D.Perspex"
              xmlns:path="clr-namespace:Core2D.Perspex.Controls.Path;assembly=Core2D.Perspex"
              xmlns:project="clr-namespace:Core2D.Perspex.Controls.Project;assembly=Core2D.Perspex"
@@ -85,9 +85,9 @@
         <Grid Name="containerPanel" Grid.Row="0" Grid.Column="2">
             <Border Classes="container">
                 <Border Classes="transparent" ClipToBounds="True">
-                    <paz:PanAndZoom Name="panAndZoom" AutoFitMode="Extent" ZoomSpeed="1.2" Background="{StyleResource TransparentBrush}" ClipToBounds="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                        <views:ContainerControl Name="containerControl" Editor="{Binding}" Renderer="{Binding Renderers[0]}" Container="{Binding Project.CurrentContainer}" ClipToBounds="False"/>
-                    </paz:PanAndZoom>
+                    <zoom:PanAndZoom Name="panAndZoom" AutoFitMode="Extent" ZoomSpeed="1.2" Background="{StyleResource TransparentBrush}" ClipToBounds="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                        <views:ContainerControl Name="containerControl" Renderer="{Binding Renderers[0]}" Container="{Binding Project.CurrentContainer}" ClipToBounds="False"/>
+                    </zoom:PanAndZoom>
                 </Border>
             </Border>
         </Grid>
@@ -184,7 +184,7 @@
                 <WrapPanel Name="zoomPanel">
                     <Button Content="Reset" Classes="autofit" Command="{Static Editor:Commands.ZoomResetCommand}"/>
                     <Button Content="AutoFit" Classes="autofit" Command="{Static Editor:Commands.ZoomAutoFitCommand}"/>
-                    <DropDown Classes="autofit" Items="{Static paz:PanAndZoom.AutoFitModes}" SelectedItem="{Binding #panAndZoom.AutoFitMode, Mode=TwoWay}"/>
+                    <DropDown Classes="autofit" Items="{Static zoom:PanAndZoom.AutoFitModes}" SelectedItem="{Binding #panAndZoom.AutoFitMode, Mode=TwoWay}"/>
                     <TextBox Classes="autofit" Text="{Binding #panAndZoom.ZoomSpeed, Mode=TwoWay}" Width="50"/>
                 </WrapPanel>
                 <WrapPanel Name="optionsPanel">
