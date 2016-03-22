@@ -147,6 +147,7 @@
     <Compile Include="MatrixHelper.cs" />
     <Compile Include="PerspexRenderer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RendererOptions.cs" />
     <Compile Include="XPathGeometryConverter.cs" />
   </ItemGroup>
   <ItemGroup>
