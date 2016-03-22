@@ -66,6 +66,97 @@ namespace Core2D.Perspex.Views
             PerspexXamlLoader.Load(this);
         }
 
+        private void InvalidateChild(double zoomX, double zoomY, double offsetX, double offsetY)
+        {
+            var state = Renderer?.State;
+            if (state != null)
+            {
+                bool invalidateCache = state.ZoomX != zoomX || state.ZoomY != zoomY;
+
+                state.ZoomX = zoomX;
+                state.ZoomY = zoomY;
+                state.PanX = offsetX;
+                state.PanY = offsetY;
+
+                if (invalidateCache)
+                {
+                    Editor?.InvalidateCache(isZooming: true);
+                }
+            }
+        }
+
+        private void PanAndZoom_PointerPressed(object sender, PointerPressedEventArgs e)
+        {
+            var p = e.GetPosition(this);
+
+            var panAndZoom = sender as PAZ.PanAndZoom;
+            if (panAndZoom != null)
+            {
+                p = panAndZoom.FixInvalidPointPosition(p);
+            }
+
+            if (e.MouseButton == MouseButton.Left)
+            {
+                if (Editor.IsLeftDownAvailable())
+                {
+                    Editor.LeftDown(p.X, p.Y);
+                }
+            }
+
+            if (e.MouseButton == MouseButton.Right)
+            {
+                this.Cursor = new Cursor(StandardCursorType.Hand);
+                if (Editor?.IsRightDownAvailable() == true)
+                {
+                    Editor.RightDown(p.X, p.Y);
+                }
+            }
+        }
+
+        private void PanAndZoom_PointerReleased(object sender, PointerReleasedEventArgs e)
+        {
+            var p = e.GetPosition(this);
+
+            var panAndZoom = sender as PAZ.PanAndZoom;
+            if (panAndZoom != null)
+            {
+                p = panAndZoom.FixInvalidPointPosition(p);
+            }
+
+            if (e.MouseButton == MouseButton.Left)
+            {
+                if (Editor.IsLeftUpAvailable())
+                {
+                    Editor.LeftUp(p.X, p.Y);
+                }
+            }
+
+            if (e.MouseButton == MouseButton.Right)
+            {
+                this.Cursor = new Cursor(StandardCursorType.Arrow);
+                if (Editor?.IsRightUpAvailable() == true)
+                {
+                    Editor.RightUp(p.X, p.Y);
+                }
+            }
+        }
+
+        private void PanAndZoom_PointerMoved(object sender, PointerEventArgs e)
+        {
+            var p = e.GetPosition(this);
+
+            var panAndZoom = sender as PAZ.PanAndZoom;
+            if (panAndZoom != null)
+            {
+                p = panAndZoom.FixInvalidPointPosition(p);
+            }
+
+            if (Editor?.IsMoveAvailable() == true)
+            {
+                Editor.Move(p.X, p.Y);
+            }
+        }
+
         /// <summary>
         /// Initialize container control.
         /// </summary>
@@ -78,80 +169,10 @@ namespace Core2D.Perspex.Views
                 Editor.ResetZoom = () => panAndZoom.Reset();
                 Editor.AutoFitZoom = () => panAndZoom.AutoFit();
 
-                panAndZoom.InvalidatedChild =
-                    (zoomX, zoomY, offsetX, offsetY) =>
-                    {
-                        var state = Renderer.State;
-                        bool invalidate = state.ZoomX != zoomX || state.ZoomY != zoomY;
-                        state.ZoomX = zoomX;
-                        state.ZoomY = zoomY;
-                        state.PanX = offsetX;
-                        state.PanY = offsetY;
-                        if (invalidate)
-                        {
-                            Editor.InvalidateCache(isZooming: true);
-                        }
-                    };
-
-                panAndZoom.PointerPressed +=
-                    (sender, e) =>
-                    {
-                        var p = e.GetPosition(this);
-                        p = panAndZoom.FixInvalidPointPosition(p);
-
-                        if (e.MouseButton == MouseButton.Left)
-                        {
-                            if (Editor.IsLeftDownAvailable())
-                            {
-                                Editor.LeftDown(p.X, p.Y);
-                            }
-                        }
-
-                        if (e.MouseButton == MouseButton.Right)
-                        {
-                            this.Cursor = new Cursor(StandardCursorType.Hand);
-                            if (Editor.IsRightDownAvailable())
-                            {
-                                Editor.RightDown(p.X, p.Y);
-                            }
-                        }
-                    };
-
-                panAndZoom.PointerReleased +=
-                    (sender, e) =>
-                    {
-                        var p = e.GetPosition(this);
-                        p = panAndZoom.FixInvalidPointPosition(p);
-
-                        if (e.MouseButton == MouseButton.Left)
-                        {
-                            if (Editor.IsLeftUpAvailable())
-                            {
-                                Editor.LeftUp(p.X, p.Y);
-                            }
-                        }
-
-                        if (e.MouseButton == MouseButton.Right)
-                        {
-                            this.Cursor = new Cursor(StandardCursorType.Arrow);
-                            if (Editor.IsRightUpAvailable())
-                            {
-                                Editor.RightUp(p.X, p.Y);
-                            }
-                        }
-                    };
-
-                panAndZoom.PointerMoved +=
-                    (sender, e) =>
-                    {
-                        var p = e.GetPosition(this);
-                        p = panAndZoom.FixInvalidPointPosition(p);
-
-                        if (Editor.IsMoveAvailable())
-                        {
-                            Editor.Move(p.X, p.Y);
-                        }
-                    };
+                panAndZoom.InvalidatedChild = InvalidateChild;
+                panAndZoom.PointerPressed += PanAndZoom_PointerPressed;
+                panAndZoom.PointerReleased += PanAndZoom_PointerReleased;
+                panAndZoom.PointerMoved += PanAndZoom_PointerMoved;
             }
         }
 
