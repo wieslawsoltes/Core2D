@@ -9,7 +9,7 @@ using Renderer.Perspex;
 using System;
 using static System.Math;
 
-namespace Core2D.Perspex.Controls.PanAndZoom
+namespace Core2D.Perspex.Controls.Zoom
 {
     public class PanAndZoom : Border
     {
