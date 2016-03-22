@@ -222,8 +222,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\PanAndZoom\AutoFitMode.cs" />
-    <Compile Include="Controls\PanAndZoom\PanAndZoom.cs" />
+    <Compile Include="Controls\Zoom\AutoFitMode.cs" />
+    <Compile Include="Controls\Zoom\PanAndZoom.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\Data\ColumnsControl.xaml.cs">
