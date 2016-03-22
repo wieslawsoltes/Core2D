@@ -33,6 +33,7 @@ using Serializer.Xaml;
 using System;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using TextFieldReader.CsvHelper;
 using TextFieldWriter.CsvHelper;
@@ -55,6 +56,10 @@ namespace Core2D.Perspex
         /// </summary>
         static App()
         {
+            // Initialize perspex attached properties.
+            RuntimeHelpers.RunClassConstructor(typeof(RendererOptions).TypeHandle);
+
+            // Initialize perspex designer context.
             DesignerContext.InitializeContext(
                 new PerspexRenderer(),
                 new PerspexTextClipboard(),
