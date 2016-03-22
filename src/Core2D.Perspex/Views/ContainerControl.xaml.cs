@@ -2,17 +2,14 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Core2D.Data;
 using Core2D.Data.Database;
-using Core2D.Editor;
 using Core2D.Project;
 using Core2D.Renderer;
 using Core2D.Style;
 using Perspex;
 using Perspex.Controls;
-using Perspex.Input;
 using Perspex.Markup.Xaml;
 using Perspex.Media;
 using System.Collections.Immutable;
-using PAZ = Core2D.Perspex.Controls.PanAndZoom;
 
 namespace Core2D.Perspex.Views
 {
@@ -21,20 +18,11 @@ namespace Core2D.Perspex.Views
     /// </summary>
     public class ContainerControl : UserControl
     {
-        public static PerspexProperty<ProjectEditor> EditorProperty =
-            PerspexProperty.Register<ContainerControl, ProjectEditor>(nameof(Editor));
-
         public static PerspexProperty<XContainer> ContainerProperty =
             PerspexProperty.Register<ContainerControl, XContainer>(nameof(Container));
 
         public static PerspexProperty<ShapeRenderer> RendererProperty =
             PerspexProperty.Register<ContainerControl, ShapeRenderer>(nameof(Renderer));
-
-        public ProjectEditor Editor
-        {
-            get { return GetValue(EditorProperty); }
-            set { SetValue(EditorProperty, value); }
-        }
 
         public XContainer Container
         {
@@ -54,8 +42,6 @@ namespace Core2D.Perspex.Views
         public ContainerControl()
         {
             this.InitializeComponent();
-
-            this.AttachedToVisualTree += (sender, e) => Initialize();
         }
 
         /// <summary>
@@ -64,116 +50,6 @@ namespace Core2D.Perspex.Views
         private void InitializeComponent()
         {
             PerspexXamlLoader.Load(this);
-        }
-
-        private void InvalidateChild(double zoomX, double zoomY, double offsetX, double offsetY)
-        {
-            var state = Renderer?.State;
-            if (state != null)
-            {
-                bool invalidateCache = state.ZoomX != zoomX || state.ZoomY != zoomY;
-
-                state.ZoomX = zoomX;
-                state.ZoomY = zoomY;
-                state.PanX = offsetX;
-                state.PanY = offsetY;
-
-                if (invalidateCache)
-                {
-                    Editor?.InvalidateCache(isZooming: true);
-                }
-            }
-        }
-
-        private void PanAndZoom_PointerPressed(object sender, PointerPressedEventArgs e)
-        {
-            var p = e.GetPosition(this);
-
-            var panAndZoom = sender as PAZ.PanAndZoom;
-            if (panAndZoom != null)
-            {
-                p = panAndZoom.FixInvalidPointPosition(p);
-            }
-
-            if (e.MouseButton == MouseButton.Left)
-            {
-                if (Editor.IsLeftDownAvailable())
-                {
-                    Editor.LeftDown(p.X, p.Y);
-                }
-            }
-
-            if (e.MouseButton == MouseButton.Right)
-            {
-                this.Cursor = new Cursor(StandardCursorType.Hand);
-                if (Editor?.IsRightDownAvailable() == true)
-                {
-                    Editor.RightDown(p.X, p.Y);
-                }
-            }
-        }
-
-        private void PanAndZoom_PointerReleased(object sender, PointerReleasedEventArgs e)
-        {
-            var p = e.GetPosition(this);
-
-            var panAndZoom = sender as PAZ.PanAndZoom;
-            if (panAndZoom != null)
-            {
-                p = panAndZoom.FixInvalidPointPosition(p);
-            }
-
-            if (e.MouseButton == MouseButton.Left)
-            {
-                if (Editor.IsLeftUpAvailable())
-                {
-                    Editor.LeftUp(p.X, p.Y);
-                }
-            }
-
-            if (e.MouseButton == MouseButton.Right)
-            {
-                this.Cursor = new Cursor(StandardCursorType.Arrow);
-                if (Editor?.IsRightUpAvailable() == true)
-                {
-                    Editor.RightUp(p.X, p.Y);
-                }
-            }
-        }
-
-        private void PanAndZoom_PointerMoved(object sender, PointerEventArgs e)
-        {
-            var p = e.GetPosition(this);
-
-            var panAndZoom = sender as PAZ.PanAndZoom;
-            if (panAndZoom != null)
-            {
-                p = panAndZoom.FixInvalidPointPosition(p);
-            }
-
-            if (Editor?.IsMoveAvailable() == true)
-            {
-                Editor.Move(p.X, p.Y);
-            }
-        }
-
-        /// <summary>
-        /// Initialize container control.
-        /// </summary>
-        public void Initialize()
-        {
-            var panAndZoom = this.Parent as PAZ.PanAndZoom;
-            if (Editor != null && Renderer != null && panAndZoom != null)
-            {
-                Editor.Invalidate = () => this.InvalidateVisual();
-                Editor.ResetZoom = () => panAndZoom.Reset();
-                Editor.AutoFitZoom = () => panAndZoom.AutoFit();
-
-                panAndZoom.InvalidatedChild = InvalidateChild;
-                panAndZoom.PointerPressed += PanAndZoom_PointerPressed;
-                panAndZoom.PointerReleased += PanAndZoom_PointerReleased;
-                panAndZoom.PointerMoved += PanAndZoom_PointerMoved;
-            }
         }
 
         /// <summary>
