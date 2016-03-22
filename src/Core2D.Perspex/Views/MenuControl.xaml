@@ -75,6 +75,13 @@
             <MenuItem Header="_Group" Command="{Static Editor:Commands.GroupCommand}"/>
             <MenuItem Header="U_ngroup" Command="{Static Editor:Commands.UngroupCommand}"/>
             <Separator/>
+            <MenuItem Header="_Move">
+                <MenuItem Header="_Up" Command="{Static Editor:Commands.MoveUpCommand}"/>
+                <MenuItem Header="_Down" Command="{Static Editor:Commands.MoveDownCommand}"/>
+                <MenuItem Header="_Left" Command="{Static Editor:Commands.MoveLeftCommand}"/>
+                <MenuItem Header="_Right" Command="{Static Editor:Commands.MoveRightCommand}"/>
+            </MenuItem>
+            <Separator/>
             <MenuItem Header="_Order">
                 <MenuItem Header="Send to _Back" Command="{Static Editor:Commands.SendToBackCommand}"/>
                 <MenuItem Header="Send Ba_ckward" Command="{Static Editor:Commands.SendBackwardCommand}"/>
