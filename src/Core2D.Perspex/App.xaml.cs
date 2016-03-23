@@ -56,10 +56,6 @@ namespace Core2D.Perspex
         /// </summary>
         static App()
         {
-            // Initialize perspex attached properties.
-            RuntimeHelpers.RunClassConstructor(typeof(RendererOptions).TypeHandle);
-
-            // Initialize perspex designer context.
             DesignerContext.InitializeContext(
                 new PerspexRenderer(),
                 new PerspexTextClipboard(),
