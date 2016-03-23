@@ -33,7 +33,6 @@ using Serializer.Xaml;
 using System;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using TextFieldReader.CsvHelper;
 using TextFieldWriter.CsvHelper;

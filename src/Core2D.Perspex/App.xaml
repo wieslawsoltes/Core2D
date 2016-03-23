@@ -509,7 +509,7 @@
             <Setter Property="TextAlignment" Value="Left"/>
             <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="AcceptsReturn" Value="False"/>
+            <Setter Property="AcceptsReturn" Value="True"/>
             <Setter Property="TextWrapping" Value="NoWrap"/>
             <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
             <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
@@ -531,7 +531,7 @@
             <Setter Property="TextAlignment" Value="Left"/>
             <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="AcceptsReturn" Value="False"/>
+            <Setter Property="AcceptsReturn" Value="True"/>
             <Setter Property="TextWrapping" Value="NoWrap"/>
             <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
             <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
