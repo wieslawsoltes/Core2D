@@ -511,8 +511,8 @@
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="AcceptsReturn" Value="False"/>
             <Setter Property="TextWrapping" Value="NoWrap"/>
-            <Setter Property="HorizontalScrollBarVisibility" Value="Auto"/>
-            <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
             <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
         </Style>
         <Style Selector="TextBox.xaml:pointerover /template/ Border#border">
@@ -533,8 +533,8 @@
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="AcceptsReturn" Value="False"/>
             <Setter Property="TextWrapping" Value="NoWrap"/>
-            <Setter Property="HorizontalScrollBarVisibility" Value="Auto"/>
-            <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
             <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
         </Style>
         <Style Selector="TextBox.browser:pointerover /template/ Border#border">
