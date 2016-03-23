@@ -109,15 +109,15 @@ namespace Renderer.Dxf
                 {
                     PlotSettings = new PlotSettings()
                     {
-                        PaperSizeName = $"{page.Template.Name}_({page.Template.Height}_x_{page.Template.Width}_MM)",
+                        PaperSizeName = $"{page.Template.Name}_({page.Template.Width}_x_{page.Template.Height}_MM)",
                         LeftMargin = 0.0,
                         BottomMargin = 0.0,
                         RightMargin = 0.0,
                         TopMargin = 0.0,
-                        PaperSize = new Vector2(page.Template.Height, page.Template.Width),
-                        Origin =  new Vector2(page.Template.Width, 0.0),
+                        PaperSize = new Vector2(page.Template.Width, page.Template.Height),
+                        Origin =  new Vector2(0.0, 0.0),
                         PaperUnits = PlotPaperUnits.Milimeters,
-                        PaperRotation = PlotRotation.Degrees90
+                        PaperRotation = PlotRotation.NoRotation
                     }
                 };
                 dxf.Layouts.Add(layout);
