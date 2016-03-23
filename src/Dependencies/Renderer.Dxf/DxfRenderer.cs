@@ -105,7 +105,21 @@ namespace Renderer.Dxf
         {
             foreach (var page in document.Pages)
             {
-                var layout = new Layout(page.Name);
+                var layout = new Layout(page.Name)
+                {
+                    PlotSettings = new PlotSettings()
+                    {
+                        PaperSizeName = $"{page.Template.Name}_({page.Template.Height}_x_{page.Template.Width}_MM)",
+                        LeftMargin = 0.0,
+                        BottomMargin = 0.0,
+                        RightMargin = 0.0,
+                        TopMargin = 0.0,
+                        PaperSize = new Vector2(page.Template.Height, page.Template.Width),
+                        Origin =  new Vector2(page.Template.Width, 0.0),
+                        PaperUnits = PlotPaperUnits.Milimeters,
+                        PaperRotation = PlotRotation.Degrees90
+                    }
+                };
                 dxf.Layouts.Add(layout);
                 dxf.ActiveLayout = layout.Name;
 
