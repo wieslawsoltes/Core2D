@@ -12,7 +12,7 @@
              Design.DataContext="{Static Designer:DesignerContext.Editor}"
              Design.Width="1200" Design.Height="540"
              Name="control">
-    <Grid renderer:RendererOptions.Renderer="{Binding Renderers[0]}">
+    <Grid renderer:RendererOptions.Renderer="{Binding Renderers[1]}">
         <ScrollViewer>
             <ItemsControl VerticalAlignment="Stretch" Items="{Binding Project.CurrentDocument.Pages}" Margin="0,12,0,12">
                 <ItemsControl.DataTemplates>
