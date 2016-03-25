@@ -7,6 +7,7 @@
              xmlns:converters="clr-namespace:Core2D.Perspex.Converters;assembly=Core2D.Perspex"
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D"
+             xmlns:Project="clr-namespace:Core2D.Project;assembly=Core2D"
              xmlns:Style="clr-namespace:Core2D.Style;assembly=Core2D"
              Design.DataContext="{Static Designer:DesignerContext.Editor}"
              Design.Width="1000" Design.Height="600">
@@ -26,7 +27,7 @@
                 </Style>
             </TreeView.Styles>
             <TreeView.DataTemplates>
-                <TreeDataTemplate ItemsSource="{Binding Items, Mode=TwoWay}">
+                <TreeDataTemplate DataType="Project:ILibrary" ItemsSource="{Binding Items, Mode=TwoWay}">
                     <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="default">
                         <TextBlock.ContextMenu>
                             <ContextMenu>
