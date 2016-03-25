@@ -14,10 +14,10 @@
              Name="control">
     <Grid renderer:RendererOptions.Renderer="{Binding Renderers[0]}">
         <ScrollViewer>
-            <ItemsControl VerticalAlignment="Stretch" Items="{Binding Project.CurrentDocument.Pages}">
+            <ItemsControl VerticalAlignment="Stretch" Items="{Binding Project.CurrentDocument.Pages}" Margin="0,12,0,12">
                 <ItemsControl.DataTemplates>
                     <DataTemplate DataType="Project:XPage">
-                        <views:ContainerControl Container="{Binding}" ClipToBounds="False"/>
+                        <views:ContainerControl Container="{Binding}" ClipToBounds="False" Margin="0,6,0,6"/>
                     </DataTemplate>
                 </ItemsControl.DataTemplates>
             </ItemsControl>
