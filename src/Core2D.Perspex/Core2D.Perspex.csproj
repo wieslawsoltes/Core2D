@@ -217,6 +217,9 @@
     <Compile Include="..\Core2D\Properties\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Controls\Project\LibraryControl.xaml.cs">
+      <DependentUpon>LibraryControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\DocumentControl.xaml.cs">
       <DependentUpon>DocumentControl.xaml</DependentUpon>
     </Compile>
@@ -685,6 +688,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Windows\DocumentWindow.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Project\LibraryControl.xaml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Perspex.Skia.Desktop.9999.0.1186-nightly\build\net45\Perspex.Skia.Desktop.targets" Condition="Exists('..\packages\Perspex.Skia.Desktop.9999.0.1186-nightly\build\net45\Perspex.Skia.Desktop.targets')" />

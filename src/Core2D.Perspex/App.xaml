@@ -694,6 +694,9 @@
             <path:PathGeometryControl/>
         </DataTemplate>
         <!-- Project -->
+        <DataTemplate DataType="Project:ILibrary">
+            <project:LibraryControl/>
+        </DataTemplate>
         <DataTemplate DataType="Project:XOptions">
             <project:OptionsControl/>
         </DataTemplate>
