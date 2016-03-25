@@ -38,8 +38,10 @@
         <KeyBinding Command="{Static Editor:Commands.SelectAllCommand}" Gesture="Ctrl+A"/>
         <KeyBinding Command="{Static Editor:Commands.GroupCommand}" Gesture="Ctrl+G"/>
         <KeyBinding Command="{Static Editor:Commands.UngroupCommand}" Gesture="Ctrl+U"/>
-        <!-- Project -->
+        <!-- View -->
         <KeyBinding Command="{Static Editor:Commands.ObjectBrowserCommand}" Gesture="Ctrl+J"/>
+        <KeyBinding Command="{Static Editor:Commands.ExportXamlCommand}" Gesture="Ctrl+M"/>
+        <KeyBinding Command="{Static Editor:Commands.DocumentViewerCommand}" Gesture="Ctrl+D"/>
     </Window.KeyBindings>
     <Grid RowDefinitions="Auto,*">
         <views:MenuControl Grid.Row="0"/>
