@@ -68,6 +68,12 @@
             <Setter Property="BorderBrush" Value="{StyleResource TransparentBrush}"/>
             <Setter Property="BorderThickness" Value="0"/>
         </Style>
+        <!-- Border.document -->
+        <Style Selector="Border.document">
+            <Setter Property="Padding" Value="4"/>
+            <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
         <!-- Button -->
         <Style Selector="Button.default">
             <Setter Property="Margin" Value="3,0,3,0"/>
@@ -286,6 +292,14 @@
         </Style>
         <!-- ListBox.browser -->
         <Style Selector="ListBox.browser">
+            <Setter Property="Padding" Value="4"/>
+            <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="AutoScrollToSelectedItem" Value="True"/>
+            <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
+        </Style>
+        <!-- ListBox.document -->
+        <Style Selector="ListBox.document">
             <Setter Property="Padding" Value="4"/>
             <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>

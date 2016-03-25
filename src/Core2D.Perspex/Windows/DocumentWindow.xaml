@@ -13,7 +13,5 @@
         Design.DataContext="{Static Designer:DesignerContext.Editor}"
         Design.Width="1200" Design.Height="670"
         Title="Document Viewer">
-    <Grid>
-        <views:DocumentControl VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
-    </Grid>
+    <views:DocumentControl VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
 </Window>

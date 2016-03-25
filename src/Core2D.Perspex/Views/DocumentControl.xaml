@@ -12,15 +12,25 @@
              Design.DataContext="{Static Designer:DesignerContext.Editor}"
              Design.Width="1200" Design.Height="540"
              Name="control">
-    <Grid renderer:RendererOptions.Renderer="{Binding Renderers[1]}">
-        <ScrollViewer>
-            <ItemsControl VerticalAlignment="Stretch" Items="{Binding Project.CurrentDocument.Pages}" Margin="0,12,0,12">
-                <ItemsControl.DataTemplates>
-                    <DataTemplate DataType="Project:XPage">
-                        <views:ContainerControl Container="{Binding}" ClipToBounds="False" Margin="0,6,0,6"/>
-                    </DataTemplate>
-                </ItemsControl.DataTemplates>
-            </ItemsControl>
-        </ScrollViewer>
+    <Grid ColumnDefinitions="250,Auto,*" RowDefinitions="*" renderer:RendererOptions.Renderer="{Binding Renderers[1]}">
+        <ListBox Name="document" Items="{Binding Project.Documents, Mode=TwoWay}" SelectedItem="{Binding Project.CurrentDocument, Mode=OneTime}" Classes="document" SelectedIndex="0" Grid.Column="0" Grid.Row="0" Margin="3,3,0,3">
+            <ListBox.DataTemplates>
+                <DataTemplate DataType="Project:XDocument">
+                    <TextBlock Text="{Binding Name, Mode=TwoWay}" Classes="default"/>
+                </DataTemplate>
+            </ListBox.DataTemplates>
+        </ListBox>
+        <GridSplitter Classes="vertical" Grid.Column="1" Grid.Row="0" Width="6"/>
+        <Border Classes="document" Grid.Column="2" Grid.Row="0" Margin="0,3,3,3">
+            <ScrollViewer>
+                <ItemsControl VerticalAlignment="Stretch" Items="{Binding #document.SelectedItem.Pages}" Margin="0,9,0,9">
+                    <ItemsControl.DataTemplates>
+                        <DataTemplate DataType="Project:XPage">
+                            <views:ContainerControl Container="{Binding}" ClipToBounds="False" Margin="0,6,0,6"/>
+                        </DataTemplate>
+                    </ItemsControl.DataTemplates>
+                </ItemsControl>
+            </ScrollViewer>
+        </Border>
     </Grid>
 </UserControl>
