@@ -514,7 +514,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interactions\Actions\FocusControlAction.cs" />
-    <Compile Include="Interactions\Actions\ChangePerspexPropertyAction.cs" />
+    <Compile Include="Interactions\Actions\ChangePropertyAction.cs" />
     <Compile Include="Interactions\Behaviors\FocusOnAttachedToVisualTreeBehavior.cs" />
     <Compile Include="Interactions\Behaviors\FocusOnPointerMovedBehavior.cs" />
     <Compile Include="Interactions\Behaviors\FocusOnPointerPressedBehavior.cs" />
