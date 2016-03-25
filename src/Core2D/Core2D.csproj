@@ -126,6 +126,7 @@
     <Compile Include="Path\XPathSegment.cs" />
     <Compile Include="Path\XPathSize.cs" />
     <Compile Include="Path\XSweepDirection.cs" />
+    <Compile Include="Project\ILibrary.cs" />
     <Compile Include="Project\XContainer.cs" />
     <Compile Include="Project\XDocument.cs" />
     <Compile Include="Project\XLayer.cs" />

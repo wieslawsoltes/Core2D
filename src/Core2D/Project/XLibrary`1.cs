@@ -1,9 +1,9 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Portable.Xaml.Markup;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-using Portable.Xaml.Markup;
 
 namespace Core2D.Project
 {
@@ -12,7 +12,7 @@ namespace Core2D.Project
     /// </summary>
     [ContentProperty(nameof(Items))]
     [RuntimeNameProperty(nameof(Name))]
-    public sealed class XLibrary<T> : ObservableObject
+    public sealed class XLibrary<T> : ObservableObject, ILibrary
     {
         private string _name;
         private ImmutableArray<T> _items;
