@@ -17,6 +17,7 @@ using Log.Trace;
 using Perspex;
 using Perspex.Controls;
 using Perspex.Diagnostics;
+using Perspex.Logging.Serilog;
 using Perspex.Markup.Xaml;
 #if SKIA_WIN
 using Perspex.Win32;
@@ -30,6 +31,7 @@ using Renderer.Perspex;
 using Serializer.Newtonsoft;
 using Serializer.ProtoBuf;
 using Serializer.Xaml;
+using Serilog;
 using System;
 using System.Linq;
 using System.Reflection;
@@ -79,6 +81,8 @@ namespace Core2D.Perspex
             InitializeSubsystems((int)Environment.OSVersion.Platform);
 #endif
             InitializeComponent();
+            InitializeLogging();
+
         }
 
         /// <summary>
@@ -87,6 +91,19 @@ namespace Core2D.Perspex
         private void InitializeComponent()
         {
             PerspexXamlLoader.Load(this);
+        }
+
+        /// <summary>
+        /// Initialize the Serilog logger.
+        /// </summary>
+        private void InitializeLogging()
+        {
+#if DEBUG
+            SerilogLogger.Initialize(new LoggerConfiguration()
+                .MinimumLevel.Warning()
+                .WriteTo.Trace(outputTemplate: "{Area}: {Message}")
+                .CreateLogger());
+#endif
         }
 
         /// <summary>
