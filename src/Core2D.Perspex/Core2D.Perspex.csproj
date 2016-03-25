@@ -144,11 +144,11 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Perspex.Xaml.Interactions, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Perspex.Xaml.Behaviors.9999.0.124-nightly\lib\portable-windows8+net45\Perspex.Xaml.Interactions.dll</HintPath>
+      <HintPath>..\..\packages\Perspex.Xaml.Behaviors.9999.0.125-nightly\lib\portable-windows8+net45\Perspex.Xaml.Interactions.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Perspex.Xaml.Interactivity, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Perspex.Xaml.Behaviors.9999.0.124-nightly\lib\portable-windows8+net45\Perspex.Xaml.Interactivity.dll</HintPath>
+      <HintPath>..\..\packages\Perspex.Xaml.Behaviors.9999.0.125-nightly\lib\portable-windows8+net45\Perspex.Xaml.Interactivity.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Portable.Xaml, Version=0.12.5919.7448, Culture=neutral, processorArchitecture=MSIL">
@@ -514,7 +514,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interactions\Actions\FocusControlAction.cs" />
-    <Compile Include="Interactions\Actions\ChangePropertyAction.cs" />
     <Compile Include="Interactions\Behaviors\FocusOnAttachedToVisualTreeBehavior.cs" />
     <Compile Include="Interactions\Behaviors\FocusOnPointerMovedBehavior.cs" />
     <Compile Include="Interactions\Behaviors\FocusOnPointerPressedBehavior.cs" />
