@@ -747,6 +747,16 @@ namespace Core2D.Perspex
         }
 
         /// <inheritdoc/>
+        public async Task OnShowDocumentViewerAsync()
+        {
+            var document = new Windows.DocumentWindow();
+            document.DataContext = _editor;
+            document.Show();
+
+            await Task.Delay(0);
+        }
+
+        /// <inheritdoc/>
         public void OnCloseView()
         {
             _mainWindow?.Close();

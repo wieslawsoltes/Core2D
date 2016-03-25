@@ -585,5 +585,10 @@ namespace Core2D.Editor
         /// Show object browser.
         /// </summary>
         public static ICoreCommand ObjectBrowserCommand { get; set; }
+
+        /// <summary>
+        /// Show document viewer.
+        /// </summary>
+        public static ICoreCommand DocumentViewerCommand { get; set; }
     }
 }

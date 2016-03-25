@@ -399,6 +399,11 @@ namespace Core2D.Editor.Designer
                 Command.Create(
                     () => { },
                     () => true);
+
+            Commands.DocumentViewerCommand =
+                Command.Create(
+                    () => { },
+                    () => true);
         }
 
         /// <summary>

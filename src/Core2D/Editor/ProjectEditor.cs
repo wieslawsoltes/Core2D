@@ -4473,6 +4473,11 @@ namespace Core2D.Editor
                 Command.Create(
                     async () => await (Application?.OnShowObjectBrowserAsync() ?? Task.FromResult<object>(null)),
                     () => IsEditMode());
+
+            Commands.DocumentViewerCommand =
+                Command.Create(
+                    async () => await (Application?.OnShowDocumentViewerAsync() ?? Task.FromResult<object>(null)),
+                    () => IsEditMode());
         }
     }
 }

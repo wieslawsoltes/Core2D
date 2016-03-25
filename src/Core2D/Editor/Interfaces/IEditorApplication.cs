@@ -131,6 +131,11 @@ namespace Core2D.Editor.Interfaces
         Task OnShowObjectBrowserAsync();
 
         /// <summary>
+        /// Show document viewer.
+        /// </summary>
+        Task OnShowDocumentViewerAsync();
+
+        /// <summary>
         /// Close application view.
         /// </summary>
         void OnCloseView();
