@@ -2,7 +2,6 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Core2D.Data;
 using Core2D.Data.Database;
-using Core2D.Editor;
 using Core2D.Path;
 using Core2D.Path.Segments;
 using Core2D.Perspex.Controls.Data;
@@ -20,9 +19,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
 
 namespace Core2D.Perspex.Controls.Presenters
 {
