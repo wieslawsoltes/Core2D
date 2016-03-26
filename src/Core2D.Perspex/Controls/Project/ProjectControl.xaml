@@ -15,13 +15,15 @@
              xmlns:project="clr-namespace:Core2D.Perspex.Controls.Project;assembly=Core2D.Perspex"
              Design.DataContext="{Static Designer:DesignerContext.Project}"
              Design.Width="250" Design.Height="400">
-    <Grid RowDefinitions="Auto,Auto,*,Auto" ColumnDefinitions="*">
-        <Menu Grid.Row="0" HorizontalAlignment="Right">
-            <MenuItem Header="+" Command="{Static Editor:Commands.NewCommand}" CommandParameter="{Binding Selected}"/>
-            <MenuItem Header="-" Command="{Static Editor:Commands.DeleteCommand}" CommandParameter="{Binding Selected}"/>
-        </Menu>
-        <TextBox Text="{Binding Name, Mode=TwoWay}" Classes="left" Grid.Row="1"/>
-        <TreeView Name="documents" Items="{Binding Documents, Mode=TwoWay}" SelectedItem="{Binding Selected, Mode=TwoWay}" Grid.Row="2" Classes="default">
+    <Grid RowDefinitions="Auto,*,Auto" ColumnDefinitions="*">
+        <Grid Grid.Row="0" RowDefinitions="*" ColumnDefinitions="*,Auto">
+            <TextBox Text="{Binding Name, Mode=TwoWay}" Classes="left" Grid.Column="0"/>
+            <Menu Grid.Column="1" HorizontalAlignment="Right">
+                <MenuItem Header="+" Command="{Static Editor:Commands.NewCommand}" CommandParameter="{Binding Selected}"/>
+                <MenuItem Header="-" Command="{Static Editor:Commands.DeleteCommand}" CommandParameter="{Binding Selected}"/>
+            </Menu>
+        </Grid>
+        <TreeView Name="documents" Items="{Binding Documents, Mode=TwoWay}" SelectedItem="{Binding Selected, Mode=TwoWay}" Grid.Row="1" Classes="default">
             <TreeView.KeyBindings>
                 <KeyBinding Command="{Static Editor:Commands.NewCommand}" CommandParameter="{Binding #documents.SelectedItem}" Gesture="Ctrl+N"/>
                 <KeyBinding Command="{Static Editor:Commands.CutCommand}" CommandParameter="{Binding #documents.SelectedItem}" Gesture="Ctrl+X"/>
@@ -110,7 +112,7 @@
                 </DataTemplate>
             </TreeView.DataTemplates>
         </TreeView>
-        <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="3">
+        <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="2">
             <TextBlock Text="Selected" Classes="left" Grid.Row="0" Grid.Column="0"/>
             <TextBox Text="{Binding Selected.Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
         </Grid>
