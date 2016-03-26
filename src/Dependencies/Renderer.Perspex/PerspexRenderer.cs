@@ -490,10 +490,7 @@ namespace Renderer.Perspex
             PM.Brush brush = ToSolidBrush(rectangle.Style.Fill);
             PM.Pen pen = ToPen(rectangle.Style, _scaleToPage);
 
-            var rect = CreateRect(
-                rectangle.TopLeft,
-                rectangle.BottomRight,
-                dx, dy);
+            var rect = CreateRect(rectangle.TopLeft, rectangle.BottomRight, dx, dy);
 
             DrawRectangleInternal(
                 _dc,
@@ -523,10 +520,7 @@ namespace Renderer.Perspex
             PM.Brush brush = ToSolidBrush(ellipse.Style.Fill);
             PM.Pen pen = ToPen(ellipse.Style, _scaleToPage);
 
-            var rect = CreateRect(
-                ellipse.TopLeft,
-                ellipse.BottomRight,
-                dx, dy);
+            var rect = CreateRect(ellipse.TopLeft, ellipse.BottomRight, dx, dy);
 
             DrawEllipseInternal(
                 _dc,
@@ -677,25 +671,24 @@ namespace Renderer.Perspex
                 */
             }
 
-            var ft = new PM.FormattedText(
-                tbind,
-                text.Style.TextStyle.FontName,
-                text.Style.TextStyle.FontSize * _textScaleFactor,
-                fontStyle,
-                PM.TextAlignment.Left,
-                fontWeight);
+            if (text.Style.TextStyle.FontSize >= 0.0)
+            {
+                var ft = new PM.FormattedText(
+                    tbind,
+                    text.Style.TextStyle.FontName,
+                    text.Style.TextStyle.FontSize * _textScaleFactor,
+                    fontStyle,
+                    PM.TextAlignment.Left,
+                    fontWeight);
 
-            var rect = CreateRect(
-                text.TopLeft,
-                text.BottomRight,
-                dx, dy);
+                var rect = CreateRect(text.TopLeft, text.BottomRight, dx, dy);
+                var size = ft.Measure();
+                var origin = GetTextOrigin(text.Style, ref rect, ref size);
 
-            var size = ft.Measure();
-            var origin = GetTextOrigin(text.Style, ref rect, ref size);
+                _gfx.DrawText(brush, origin, ft);
 
-            _gfx.DrawText(brush, origin, ft);
-
-            ft.Dispose();
+                ft.Dispose();
+            }
         }
 
         /// <inheritdoc/>
@@ -703,10 +696,7 @@ namespace Renderer.Perspex
         {
             var _dc = dc as PM.DrawingContext;
 
-            var rect = CreateRect(
-                image.TopLeft,
-                image.BottomRight,
-                dx, dy);
+            var rect = CreateRect(image.TopLeft, image.BottomRight, dx, dy);
 
             if (image.IsStroked || image.IsFilled)
             {
