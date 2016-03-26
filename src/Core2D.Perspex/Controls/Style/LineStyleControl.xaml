@@ -17,6 +17,12 @@
                 <TextBox Text="{Binding Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
             </Grid>
         </TabItem>
+        <TabItem Header="StartArrow" Classes="property">
+            <style:ArrowStyleControl DataContext="{Binding StartArrowStyle}"/>
+        </TabItem>
+        <TabItem Header="EndArrow" Classes="property">
+            <style:ArrowStyleControl DataContext="{Binding EndArrowStyle}"/>
+        </TabItem>
         <TabItem Header="FixedLength" Classes="property">
             <style:LineFixedLengthControl DataContext="{Binding FixedLength}"/>
         </TabItem>

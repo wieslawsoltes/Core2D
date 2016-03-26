@@ -24,17 +24,7 @@
             <style:TextStyleControl DataContext="{Binding TextStyle}"/>
         </TabItem>
         <TabItem Header="Line" Classes="property">
-            <TabControl Classes="default">
-                <TabItem Header="StartArrow" Classes="property">
-                    <style:ArrowStyleControl DataContext="{Binding StartArrowStyle}"/>
-                </TabItem>
-                <TabItem Header="EndArrow" Classes="property">
-                    <style:ArrowStyleControl DataContext="{Binding EndArrowStyle}"/>
-                </TabItem>
-                <TabItem Header="LineStyle" Classes="property">
-                    <style:FontStyleControl DataContext="{Binding LineStyle}"/>
-                </TabItem>
-            </TabControl>
+            <style:LineStyleControl DataContext="{Binding LineStyle}"/>
         </TabItem>
     </TabControl>
 </UserControl>

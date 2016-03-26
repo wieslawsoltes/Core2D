@@ -41,11 +41,13 @@
         <TabItem Header="State" Classes="property">
             <state:ShapeStateControl DataContext="{Binding State}"/>
         </TabItem>
+        <!--
         <TabItem Header="Data" Classes="property">
             <data:DataControl DataContext="{Binding Data}"/>
         </TabItem>
         <TabItem Header="Style" Classes="property">
             <style:ShapeStyleControl DataContext="{Binding Style}"/>
         </TabItem>
+        -->
     </TabControl>
 </UserControl>
