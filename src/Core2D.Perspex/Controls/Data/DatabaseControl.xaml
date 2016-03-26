@@ -22,7 +22,7 @@
             <data:ColumnsControl/>
         </TabItem>
         <TabItem Header="Current" Classes="property">
-            <presenters:CachedContentPresenter DataContext="{Binding CurrentRecord}"/>
+            <data:RecordControl DataContext="{Binding CurrentRecord}"/>
         </TabItem>
     </TabControl>
 </UserControl>

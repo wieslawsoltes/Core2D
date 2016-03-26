@@ -6,6 +6,10 @@
              xmlns:local="clr-namespace:Core2D.Perspex;assembly=Core2D.Perspex"
              xmlns:presenters="clr-namespace:Core2D.Perspex.Controls.Presenters;assembly=Core2D.Perspex"
              xmlns:converters="clr-namespace:Core2D.Perspex.Converters;assembly=Core2D.Perspex"
+             xmlns:data="clr-namespace:Core2D.Perspex.Controls.Data;assembly=Core2D.Perspex"
+             xmlns:shapes="clr-namespace:Core2D.Perspex.Controls.Shapes;assembly=Core2D.Perspex"
+             xmlns:state="clr-namespace:Core2D.Perspex.Controls.State;assembly=Core2D.Perspex"
+             xmlns:style="clr-namespace:Core2D.Perspex.Controls.Style;assembly=Core2D.Perspex"
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D"
              Design.DataContext="{Static Designer:DesignerContext.QuadraticBezier}"
              Design.Width="250" Design.Height="400">
@@ -20,25 +24,25 @@
                 <CheckBox IsChecked="{Binding IsFilled, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
                 <TabControl Classes="default" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
                     <TabItem Header="Point1" Classes="property">
-                        <presenters:CachedContentPresenter DataContext="{Binding Point1}"/>
+                        <shapes:PointControl DataContext="{Binding Point1}"/>
                     </TabItem>
                     <TabItem Header="Point2" Classes="property">
-                        <presenters:CachedContentPresenter DataContext="{Binding Point2}"/>
+                        <shapes:PointControl DataContext="{Binding Point2}"/>
                     </TabItem>
                     <TabItem Header="Point3" Classes="property">
-                        <presenters:CachedContentPresenter DataContext="{Binding Point3}"/>
+                        <shapes:PointControl DataContext="{Binding Point3}"/>
                     </TabItem>
                 </TabControl>
             </Grid>
         </TabItem>
         <TabItem Header="State" Classes="property">
-            <presenters:CachedContentPresenter DataContext="{Binding State}"/>
+            <state:ShapeStateControl DataContext="{Binding State}"/>
         </TabItem>
         <TabItem Header="Data" Classes="property">
-            <presenters:CachedContentPresenter DataContext="{Binding Data}"/>
+            <data:DataControl DataContext="{Binding Data}"/>
         </TabItem>
         <TabItem Header="Style" Classes="property">
-            <presenters:CachedContentPresenter DataContext="{Binding Style}"/>
+            <style:ShapeStyleControl DataContext="{Binding Style}"/>
         </TabItem>
     </TabControl>
 </UserControl>

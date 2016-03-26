@@ -32,10 +32,10 @@
             <style:StyleControl/>
         </TabItem>
         <TabItem Header="Stroke" Classes="property">
-            <presenters:CachedContentPresenter DataContext="{Binding Stroke}"/>
+            <style:ArgbColorControl DataContext="{Binding Stroke}"/>
         </TabItem>
         <TabItem Header="Fill" Classes="property">
-            <presenters:CachedContentPresenter DataContext="{Binding Fill}"/>
+            <style:ArgbColorControl DataContext="{Binding Fill}"/>
         </TabItem>
     </TabControl>
 </UserControl>

@@ -21,18 +21,18 @@
             <style:ArgbColorControl DataContext="{Binding Fill}"/>
         </TabItem>
         <TabItem Header="Text" Classes="property">
-            <presenters:CachedContentPresenter DataContext="{Binding TextStyle}"/>
+            <style:TextStyleControl DataContext="{Binding TextStyle}"/>
         </TabItem>
         <TabItem Header="Line" Classes="property">
             <TabControl Classes="default">
                 <TabItem Header="StartArrow" Classes="property">
-                    <presenters:CachedContentPresenter DataContext="{Binding StartArrowStyle}"/>
+                    <style:ArrowStyleControl DataContext="{Binding StartArrowStyle}"/>
                 </TabItem>
                 <TabItem Header="EndArrow" Classes="property">
-                    <presenters:CachedContentPresenter DataContext="{Binding EndArrowStyle}"/>
+                    <style:ArrowStyleControl DataContext="{Binding EndArrowStyle}"/>
                 </TabItem>
                 <TabItem Header="LineStyle" Classes="property">
-                    <presenters:CachedContentPresenter DataContext="{Binding LineStyle}"/>
+                    <style:FontStyleControl DataContext="{Binding LineStyle}"/>
                 </TabItem>
             </TabControl>
         </TabItem>
