@@ -82,7 +82,6 @@ namespace Core2D.Perspex
 #endif
             InitializeComponent();
             InitializeLogging();
-
         }
 
         /// <summary>
