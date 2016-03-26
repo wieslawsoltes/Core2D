@@ -249,17 +249,31 @@ namespace Renderer.Dxf
                 }, 3);
         }
 
+        private void DrawLineInternal(DxfDocument dxf, Layer layer, Core2D.Style.BaseStyle style, bool isStroked, double x1, double y1, double x2, double y2)
+        {
+            if (isStroked)
+            {
+                var stroke = ToColor(style.Stroke);
+                var strokeTansparency = ToTransparency(style.Stroke);
+                var lineweight = ToLineweight(style.Thickness);
+
+                var dxfLine = CreateLine(x1, y1, x2, y2);
+
+                dxfLine.Layer = layer;
+                dxfLine.Color = stroke;
+                dxfLine.Transparency.Value = strokeTansparency;
+                dxfLine.Lineweight.Value = lineweight;
+
+                dxf.AddEntity(dxfLine);
+            }
+        }
+
         private void DrawRectangleInternal(DxfDocument dxf, Layer layer, bool isFilled, bool isStroked, Core2D.Style.BaseStyle style, ref Core2D.Math.Rect2 rect)
         {
             double x = rect.X;
             double y = rect.Y;
             double w = rect.Width;
             double h = rect.Height;
-
-            var dxfLine1 = CreateLine(x, y, x + w, y);
-            var dxfLine2 = CreateLine(x + w, y, x + w, y + h);
-            var dxfLine3 = CreateLine(x + w, y + h, x, y + h);
-            var dxfLine4 = CreateLine(x, y + h, x, y);
 
             if (isFilled)
             {
@@ -272,10 +286,10 @@ namespace Renderer.Dxf
                         new HatchBoundaryPath(
                             new List<EntityObject>
                             {
-                                (Line)dxfLine1.Clone(),
-                                (Line)dxfLine2.Clone(),
-                                (Line)dxfLine3.Clone(),
-                                (Line)dxfLine4.Clone()
+                                CreateLine(x, y, x + w, y),
+                                CreateLine(x + w, y, x + w, y + h),
+                                CreateLine(x + w, y + h, x, y + h),
+                                CreateLine(x, y + h, x, y)
                             })
                     };
 
@@ -289,34 +303,10 @@ namespace Renderer.Dxf
 
             if (isStroked)
             {
-                var stroke = ToColor(style.Stroke);
-                var strokeTansparency = ToTransparency(style.Stroke);
-                var lineweight = ToLineweight(style.Thickness);
-
-                dxfLine1.Layer = layer;
-                dxfLine1.Color = stroke;
-                dxfLine1.Transparency.Value = strokeTansparency;
-                dxfLine1.Lineweight.Value = lineweight;
-
-                dxfLine2.Layer = layer;
-                dxfLine2.Color = stroke;
-                dxfLine2.Transparency.Value = strokeTansparency;
-                dxfLine2.Lineweight.Value = lineweight;
-
-                dxfLine3.Layer = layer;
-                dxfLine3.Color = stroke;
-                dxfLine3.Transparency.Value = strokeTansparency;
-                dxfLine3.Lineweight.Value = lineweight;
-
-                dxfLine4.Layer = layer;
-                dxfLine4.Color = stroke;
-                dxfLine4.Transparency.Value = strokeTansparency;
-                dxfLine4.Lineweight.Value = lineweight;
-
-                dxf.AddEntity(dxfLine1);
-                dxf.AddEntity(dxfLine2);
-                dxf.AddEntity(dxfLine3);
-                dxf.AddEntity(dxfLine4);
+                DrawLineInternal(dxf, layer, style, true, x, y, x + w, y);
+                DrawLineInternal(dxf, layer, style, true, x + w, y, x + w, y + h);
+                DrawLineInternal(dxf, layer, style, true, x + w, y + h, x, y + h);
+                DrawLineInternal(dxf, layer, style, true, x, y + h, x, y);
             }
         }
 
@@ -365,10 +355,6 @@ namespace Renderer.Dxf
 
         private void DrawGridInternal(DxfDocument dxf, Layer layer, Core2D.Style.ShapeStyle style, double offsetX, double offsetY, double cellWidth, double cellHeight, ref Core2D.Math.Rect2 rect)
         {
-            var stroke = ToColor(style.Stroke);
-            var strokeTansparency = ToTransparency(style.Stroke);
-            var lineweight = ToLineweight(style.Thickness);
-
             double ox = rect.X;
             double oy = rect.Y;
             double sx = ox + offsetX;
@@ -378,22 +364,12 @@ namespace Renderer.Dxf
 
             for (double gx = sx; gx < ex; gx += cellWidth)
             {
-                var dxfLine = CreateLine(gx, oy, gx, ey);
-                dxfLine.Layer = layer;
-                dxfLine.Color = stroke;
-                dxfLine.Transparency.Value = strokeTansparency;
-                dxfLine.Lineweight.Value = lineweight;
-                dxf.AddEntity(dxfLine);
+                DrawLineInternal(dxf, layer, style, true, gx, oy, gx, ey);
             }
 
             for (double gy = sy; gy < ey; gy += cellHeight)
             {
-                var dxfLine = CreateLine(ox, gy, ex, gy);
-                dxfLine.Layer = layer;
-                dxfLine.Color = stroke;
-                dxfLine.Transparency.Value = strokeTansparency;
-                dxfLine.Lineweight.Value = lineweight;
-                dxf.AddEntity(dxfLine);
+                DrawLineInternal(dxf, layer, style, true, ox, gy, ex, gy);
             }
         }
 
@@ -589,7 +565,7 @@ namespace Renderer.Dxf
         /// <inheritdoc/>
         public override void Draw(object dc, Core2D.Project.XContainer container, ImmutableArray<Core2D.Data.XProperty> db, Core2D.Data.Database.XRecord r)
         {
-            var _dxf = dc as DxfDocument;
+            var dxf = dc as DxfDocument;
 
             foreach (var layer in container.Layers)
             {
@@ -598,7 +574,7 @@ namespace Renderer.Dxf
                     IsVisible = layer.IsVisible
                 };
 
-                _dxf.Layers.Add(dxfLayer);
+                dxf.Layers.Add(dxfLayer);
 
                 _currentLayer = dxfLayer;
 
@@ -609,13 +585,13 @@ namespace Renderer.Dxf
         /// <inheritdoc/>
         public override void Draw(object dc, Core2D.Project.XLayer layer, ImmutableArray<Core2D.Data.XProperty> db, Core2D.Data.Database.XRecord r)
         {
-            var _dxf = dc as DxfDocument;
+            var dxf = dc as DxfDocument;
 
             foreach (var shape in layer.Shapes)
             {
                 if (shape.State.Flags.HasFlag(State.DrawShapeState.Flags))
                 {
-                    shape.Draw(_dxf, this, 0, 0, db, r);
+                    shape.Draw(dxf, this, 0, 0, db, r);
                 }
             }
         }
@@ -626,12 +602,7 @@ namespace Renderer.Dxf
             if (!line.IsStroked)
                 return;
 
-            var _dxf = dc as DxfDocument;
-
-            var style = line.Style;
-            var stroke = ToColor(style.Stroke);
-            var strokeTansparency = ToTransparency(style.Stroke);
-            var lineweight = ToLineweight(style.Thickness);
+            var dxf = dc as DxfDocument;
 
             double _x1 = line.Start.X + dx;
             double _y1 = line.Start.Y + dy;
@@ -640,18 +611,11 @@ namespace Renderer.Dxf
 
             Core2D.Shapes.XLine.SetMaxLength(line, ref _x1, ref _y1, ref _x2, ref _y2);
 
-            var dxfLine = CreateLine(_x1, _y1, _x2, _y2);
-
             // TODO: Draw line start arrow.
 
             // TODO: Draw line end arrow.
 
-            dxfLine.Layer = _currentLayer;
-            dxfLine.Color = stroke;
-            dxfLine.Transparency.Value = strokeTansparency;
-            dxfLine.Lineweight.Value = lineweight;
-
-            _dxf.AddEntity(dxfLine);
+            DrawLineInternal(dxf, _currentLayer, line.Style, line.IsStroked, _x1, _y1, _x2, _y2);
         }
 
         /// <inheritdoc/>
@@ -660,16 +624,16 @@ namespace Renderer.Dxf
             if (!rectangle.IsStroked && !rectangle.IsFilled && !rectangle.IsGrid)
                 return;
 
-            var _dxf = dc as DxfDocument;
+            var dxf = dc as DxfDocument;
             var style = rectangle.Style;
             var rect = Core2D.Math.Rect2.Create(rectangle.TopLeft, rectangle.BottomRight, dx, dy);
 
-            DrawRectangleInternal(_dxf, _currentLayer, rectangle.IsFilled, rectangle.IsStroked, style, ref rect);
+            DrawRectangleInternal(dxf, _currentLayer, rectangle.IsFilled, rectangle.IsStroked, style, ref rect);
 
             if (rectangle.IsGrid)
             {
                 DrawGridInternal(
-                    _dxf,
+                    dxf,
                     _currentLayer,
                     style,
                     rectangle.OffsetX, rectangle.OffsetY,
@@ -694,7 +658,7 @@ namespace Renderer.Dxf
         /// <inheritdoc/>
         public override void Draw(object dc, Core2D.Shapes.XArc arc, double dx, double dy, ImmutableArray<Core2D.Data.XProperty> db, Core2D.Data.Database.XRecord r)
         {
-            var _dxf = dc as DxfDocument;
+            var dxf = dc as DxfDocument;
             var style = arc.Style;
 
             var dxfEllipse = CreateEllipticalArc(arc, dx, dy);
@@ -720,7 +684,7 @@ namespace Renderer.Dxf
                 hatch.Color = fill;
                 hatch.Transparency.Value = fillTransparency;
 
-                _dxf.AddEntity(hatch);
+                dxf.AddEntity(hatch);
             }
 
             if (arc.IsStroked)
@@ -734,7 +698,7 @@ namespace Renderer.Dxf
                 dxfEllipse.Transparency.Value = strokeTansparency;
                 dxfEllipse.Lineweight.Value = lineweight;
 
-                _dxf.AddEntity(dxfEllipse);
+                dxf.AddEntity(dxfEllipse);
             }
         }
 
@@ -744,7 +708,7 @@ namespace Renderer.Dxf
             if (!cubicBezier.IsStroked && !cubicBezier.IsFilled)
                 return;
 
-            var _dxf = dc as DxfDocument;
+            var dxf = dc as DxfDocument;
             var style = cubicBezier.Style;
 
             var dxfSpline = CreateCubicSpline(
@@ -777,7 +741,7 @@ namespace Renderer.Dxf
                 hatch.Color = fill;
                 hatch.Transparency.Value = fillTransparency;
 
-                _dxf.AddEntity(hatch);
+                dxf.AddEntity(hatch);
             }
 
             if (cubicBezier.IsStroked)
@@ -791,7 +755,7 @@ namespace Renderer.Dxf
                 dxfSpline.Transparency.Value = strokeTansparency;
                 dxfSpline.Lineweight.Value = lineweight;
 
-                _dxf.AddEntity(dxfSpline);
+                dxf.AddEntity(dxfSpline);
             }
         }
 
@@ -801,7 +765,7 @@ namespace Renderer.Dxf
             if (!quadraticBezier.IsStroked && !quadraticBezier.IsFilled)
                 return;
 
-            var _dxf = dc as DxfDocument;
+            var dxf = dc as DxfDocument;
             var style = quadraticBezier.Style;
 
             var dxfSpline = CreateQuadraticSpline(
@@ -832,7 +796,7 @@ namespace Renderer.Dxf
                 hatch.Color = fill;
                 hatch.Transparency.Value = fillTransparency;
 
-                _dxf.AddEntity(hatch);
+                dxf.AddEntity(hatch);
             }
 
             if (quadraticBezier.IsStroked)
@@ -846,14 +810,14 @@ namespace Renderer.Dxf
                 dxfSpline.Transparency.Value = strokeTansparency;
                 dxfSpline.Lineweight.Value = lineweight;
 
-                _dxf.AddEntity(dxfSpline);
+                dxf.AddEntity(dxfSpline);
             }
         }
 
         /// <inheritdoc/>
         public override void Draw(object dc, Core2D.Shapes.XText text, double dx, double dy, ImmutableArray<Core2D.Data.XProperty> db, Core2D.Data.Database.XRecord r)
         {
-            var _dxf = dc as DxfDocument;
+            var dxf = dc as DxfDocument;
 
             var tbind = text.BindText(db, r);
             if (string.IsNullOrEmpty(tbind))
@@ -971,13 +935,13 @@ namespace Renderer.Dxf
             dxfMText.Transparency.Value = strokeTansparency;
             dxfMText.Color = stroke;
 
-            _dxf.AddEntity(dxfMText);
+            dxf.AddEntity(dxfMText);
         }
 
         /// <inheritdoc/>
         public override void Draw(object dc, Core2D.Shapes.XImage image, double dx, double dy, ImmutableArray<Core2D.Data.XProperty> db, Core2D.Data.Database.XRecord r)
         {
-            var _dxf = dc as DxfDocument;
+            var dxf = dc as DxfDocument;
 
             var bytes = State.ImageCache.GetImage(image.Key);
             if (bytes != null)
@@ -992,7 +956,7 @@ namespace Renderer.Dxf
                         new Vector3(ToDxfX(rect.X), ToDxfY(rect.Y + rect.Height), 0),
                         rect.Width,
                         rect.Height);
-                    _dxf.AddEntity(dxfImage);
+                    dxf.AddEntity(dxfImage);
                 }
                 else
                 {
@@ -1010,7 +974,7 @@ namespace Renderer.Dxf
                         new Vector3(ToDxfX(rect.X), ToDxfY(rect.Y + rect.Height), 0),
                         rect.Width,
                         rect.Height);
-                    _dxf.AddEntity(dxfImage);
+                    dxf.AddEntity(dxfImage);
                 }
             }
         }
@@ -1021,7 +985,7 @@ namespace Renderer.Dxf
             if (!path.IsStroked && !path.IsFilled)
                 return;
 
-            var _dxf = dc as DxfDocument;
+            var dxf = dc as DxfDocument;
             var style = path.Style;
 
             IList<HatchBoundaryPath> bounds;
@@ -1040,7 +1004,7 @@ namespace Renderer.Dxf
                 hatch.Color = fill;
                 hatch.Transparency.Value = fillTransparency;
 
-                _dxf.AddEntity(hatch);
+                dxf.AddEntity(hatch);
             }
 
             if (path.IsStroked)
@@ -1057,7 +1021,7 @@ namespace Renderer.Dxf
                     entity.Color = stroke;
                     entity.Transparency.Value = strokeTansparency;
                     entity.Lineweight.Value = lineweight;
-                    _dxf.AddEntity(entity);
+                    dxf.AddEntity(entity);
                 }
             }
         }
