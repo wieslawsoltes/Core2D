@@ -11,6 +11,11 @@ namespace Core2D.Perspex.Controls.Shapes
     public class RectangleControl : UserControl
     {
         /// <summary>
+        /// Gets an instance of a <see cref="RectangleControl"/>.
+        /// </summary>
+        public static RectangleControl Instance = new RectangleControl();
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="RectangleControl"/> class.
         /// </summary>
         public RectangleControl()
