@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Perspex;
+using Core2D.Shapes;
 using Perspex.Markup;
 using System;
 using System.Globalization;
@@ -8,14 +8,14 @@ using System.Globalization;
 namespace Core2D.Perspex.Converters
 {
     /// <summary>
-    /// Converts a binding value object from <see cref="object"/> to <see cref="bool"/> True if value is equal to null or <see cref="PerspexProperty.UnsetValue"/> otherwise return False.
+    /// Converts a binding value object from <see cref="object"/> to <see cref="bool"/> True if value is not equal to null and is of type <see cref="XGroup"/> otherwise return False.
     /// </summary>
-    public sealed class IsNullConverter : IValueConverter
+    public sealed class IsGroupConverter : IValueConverter
     {
         /// <summary>
-        /// Gets an instance of a <see cref="IsNullConverter"/>.
+        /// Gets an instance of a <see cref="IsGroupConverter"/>.
         /// </summary>
-        public static readonly IsNullConverter Instance = new IsNullConverter();
+        public static readonly IsGroupConverter Instance = new IsGroupConverter();
 
         /// <summary>
         /// Converts a value.
@@ -27,7 +27,7 @@ namespace Core2D.Perspex.Converters
         /// <returns>The converted value.</returns>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value == PerspexProperty.UnsetValue || value == null;
+            return value != null && value.GetType() == typeof(XGroup);
         }
 
         /// <summary>

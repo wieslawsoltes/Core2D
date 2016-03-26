@@ -12,18 +12,8 @@
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D"
              Design.DataContext="{Static Designer:DesignerContext.Project}"
              Design.Width="250" Design.Height="400">
-    <Grid RowDefinitions="Auto,Auto,*">
-        <Menu Grid.Row="0" HorizontalAlignment="Right">
-            <MenuItem Header="apply" Command="{Static Editor:Commands.ApplyTemplateCommand}" CommandParameter="{Binding CurrentTemplate}"/>
-            <MenuItem Header="edit" Command="{Static Editor:Commands.EditTemplateCommand}" CommandParameter="{Binding CurrentTemplate}"/>
-            <MenuItem Header="+" Command="{Static Editor:Commands.AddTemplateCommand}"/>
-            <MenuItem Header="-" Command="{Static Editor:Commands.RemoveTemplateCommand}" CommandParameter="{Binding CurrentTemplate}"/>
-        </Menu>
-        <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="1">
-            <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
-            <TextBox Text="{Binding CurrentTemplate.Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
-        </Grid>
-        <ListBox Name="templates" Items="{Binding Templates}" SelectedItem="{Binding CurrentTemplate, Mode=TwoWay}" Grid.Row="2" Classes="default">
+    <Grid RowDefinitions="Auto,*,Auto">
+        <ListBox Name="templates" Items="{Binding Templates}" SelectedItem="{Binding CurrentTemplate, Mode=TwoWay}" Grid.Row="1" Classes="default">
             <ListBox.KeyBindings>
                 <KeyBinding Command="{Static Editor:Commands.AddTemplateCommand}" Gesture="Ctrl+N"/>
                 <KeyBinding Command="{Static Editor:Commands.RemoveTemplateCommand}" CommandParameter="{Binding #templates.SelectedItem}" Gesture="Delete"/>
@@ -52,5 +42,15 @@
                 </DataTemplate>
             </ListBox.DataTemplates>
         </ListBox>
+        <Menu Grid.Row="0" HorizontalAlignment="Right">
+            <MenuItem Header="apply" Command="{Static Editor:Commands.ApplyTemplateCommand}" CommandParameter="{Binding CurrentTemplate}" IsVisible="{Binding #templates.SelectedItem, Converter={Static converters:IsNotNullConverter.Instance}}"/>
+            <MenuItem Header="edit" Command="{Static Editor:Commands.EditTemplateCommand}" CommandParameter="{Binding CurrentTemplate}" IsVisible="{Binding #templates.SelectedItem, Converter={Static converters:IsNotNullConverter.Instance}}"/>
+            <MenuItem Header="+" Command="{Static Editor:Commands.AddTemplateCommand}"/>
+            <MenuItem Header="-" Command="{Static Editor:Commands.RemoveTemplateCommand}" CommandParameter="{Binding CurrentTemplate}" IsVisible="{Binding #templates.SelectedItem, Converter={Static converters:IsNotNullConverter.Instance}}"/>
+        </Menu>
+        <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="2" IsVisible="{Binding #templates.SelectedItem, Converter={Static converters:IsNotNullConverter.Instance}}">
+            <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
+            <TextBox Text="{Binding #templates.SelectedItem.Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+        </Grid>
     </Grid>
 </UserControl>

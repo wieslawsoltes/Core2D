@@ -4140,7 +4140,12 @@ namespace Core2D.Editor
 
             Commands.AddGroupLibraryCommand =
                 Command.Create(
-                    () => Project.AddGroupLibrary(XLibrary<XGroup>.Create(Constants.DefaulGroupLibraryName)),
+                    () =>
+                    {
+                        var gl = XLibrary<XGroup>.Create(Constants.DefaulGroupLibraryName);
+                        Project.AddGroupLibrary(gl);
+                        Project.SetCurrentGroupLibrary(gl);
+                    },
                     () => IsEditMode());
 
             Commands.RemoveGroupLibraryCommand =
@@ -4183,7 +4188,12 @@ namespace Core2D.Editor
 
             Commands.AddStyleLibraryCommand =
                 Command.Create(
-                    () => Project.AddStyleLibrary(XLibrary<ShapeStyle>.Create(Constants.DefaulStyleLibraryName)),
+                    () =>
+                    {
+                        var sl = XLibrary<ShapeStyle>.Create(Constants.DefaulStyleLibraryName);
+                        Project.AddStyleLibrary(sl);
+                        Project.SetCurrentStyleLibrary(sl);
+                    },
                     () => IsEditMode());
 
             Commands.RemoveStyleLibraryCommand =

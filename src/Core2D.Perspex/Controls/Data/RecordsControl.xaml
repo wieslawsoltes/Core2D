@@ -14,9 +14,9 @@
              Design.Width="250" Design.Height="400">
     <Grid RowDefinitions="Auto,Auto,*">
         <Menu Grid.Row="1" HorizontalAlignment="Right">
-            <MenuItem Header="apply" Command="{Static Editor:Commands.ApplyRecordCommand}" CommandParameter="{Binding CurrentRecord}"/>
+            <MenuItem Header="apply" Command="{Static Editor:Commands.ApplyRecordCommand}" CommandParameter="{Binding CurrentRecord}" IsVisible="{Binding CurrentRecord, Converter={Static converters:IsNotNullConverter.Instance}}"/>
             <MenuItem Header="+" Command="{Static Editor:Commands.AddRecordCommand}" CommandParameter="{Binding}"/>
-            <MenuItem Header="-" Command="{Static Editor:Commands.RemoveRecordCommand}" CommandParameter="{Binding CurrentRecord}"/>
+            <MenuItem Header="-" Command="{Static Editor:Commands.RemoveRecordCommand}" CommandParameter="{Binding CurrentRecord}" IsVisible="{Binding CurrentRecord, Converter={Static converters:IsNotNullConverter.Instance}}"/>
         </Menu>
         <ListBox Name="records" Items="{Binding Records}" SelectedItem="{Binding CurrentRecord, Mode=TwoWay}" Grid.Row="2" Classes="default">
             <ListBox.KeyBindings>

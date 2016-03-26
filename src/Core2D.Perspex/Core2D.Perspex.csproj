@@ -220,6 +220,7 @@
     <Compile Include="Controls\Project\LibraryControl.xaml.cs">
       <DependentUpon>LibraryControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\IsGroupConverter.cs" />
     <Compile Include="Views\DocumentControl.xaml.cs">
       <DependentUpon>DocumentControl.xaml</DependentUpon>
     </Compile>

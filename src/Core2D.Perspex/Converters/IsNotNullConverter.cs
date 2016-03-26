@@ -1,13 +1,14 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Perspex;
+using Perspex.Markup;
 using System;
 using System.Globalization;
-using Perspex.Markup;
 
 namespace Core2D.Perspex.Converters
 {
     /// <summary>
-    /// Converts a binding value object from <see cref="object"/> to <see cref="bool"/> False if value is not equal to null otherwise return True.
+    /// Converts a binding value object from <see cref="object"/> to <see cref="bool"/> True if value is not equal to null and <see cref="PerspexProperty.UnsetValue"/> otherwise return False.
     /// </summary>
     public sealed class IsNotNullConverter : IValueConverter
     {
@@ -26,7 +27,7 @@ namespace Core2D.Perspex.Converters
         /// <returns>The converted value.</returns>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value != null;
+            return value != PerspexProperty.UnsetValue && value != null;
         }
 
         /// <summary>

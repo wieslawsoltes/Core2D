@@ -20,7 +20,7 @@
         <TabItem Header="Columns" Classes="property">
             <data:ColumnsControl/>
         </TabItem>
-        <TabItem Header="Record" Classes="property">
+        <TabItem Header="Current" Classes="property">
             <ContentControl Content="{Binding CurrentRecord, Mode=TwoWay}"/>
         </TabItem>
     </TabControl>
