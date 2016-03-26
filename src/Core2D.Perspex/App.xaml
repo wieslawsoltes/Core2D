@@ -74,7 +74,7 @@
             <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
-        <!-- Button -->
+        <!-- Button.default -->
         <Style Selector="Button.default">
             <Setter Property="Margin" Value="3,0,3,0"/>
             <Setter Property="FontSize" Value="12"/>
@@ -114,7 +114,7 @@
             <Setter Property="Margin" Value="2"/>
             <Setter Property="Padding" Value="4,0,4,0"/>
             <Setter Property="FontSize" Value="12"/>
-            <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
+            <Setter Property="BorderBrush" Value="{StyleResource TransparentBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Background" Value="{StyleResource TransparentBrush}"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
@@ -209,7 +209,7 @@
             <Setter Property="Margin" Value="2"/>
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="Background" Value="{StyleResource BackgroundBrush}"/>
-            <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
+            <Setter Property="BorderBrush" Value="{StyleResource TransparentBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
         </Style>
@@ -227,7 +227,7 @@
             <Setter Property="Margin" Value="2"/>
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="Background" Value="{StyleResource BackgroundBrush}"/>
-            <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
+            <Setter Property="BorderBrush" Value="{StyleResource TransparentBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
         </Style>
@@ -503,7 +503,7 @@
             <Setter Property="Background" Value="{StyleResource BackgroundBrush}"/>
             <Setter Property="TextAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
+            <Setter Property="BorderBrush" Value="{StyleResource TransparentBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
         </Style>
