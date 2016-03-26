@@ -691,6 +691,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Controls\Project\LibraryControl.xaml" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Styles.xaml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Perspex.Skia.Desktop.9999.0.1186-nightly\build\net45\Perspex.Skia.Desktop.targets" Condition="Exists('..\packages\Perspex.Skia.Desktop.9999.0.1186-nightly\build\net45\Perspex.Skia.Desktop.targets')" />
   <Import Project="..\..\packages\Perspex.Skia.Desktop.9999.0.1323-nightly\build\net45\Perspex.Skia.Desktop.targets" Condition="Exists('..\..\packages\Perspex.Skia.Desktop.9999.0.1323-nightly\build\net45\Perspex.Skia.Desktop.targets')" />
