@@ -4,7 +4,9 @@
              xmlns="https://github.com/perspex"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Core2D.Perspex;assembly=Core2D.Perspex"
+             xmlns:presenters="clr-namespace:Core2D.Perspex.Controls.Presenters;assembly=Core2D.Perspex"
              xmlns:converters="clr-namespace:Core2D.Perspex.Converters;assembly=Core2D.Perspex"
+             xmlns:style="clr-namespace:Core2D.Perspex.Controls.Style;assembly=Core2D.Perspex"
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D"
              Design.DataContext="{Static Designer:DesignerContext.LineStyle}"
              Design.Width="250" Design.Height="400">
@@ -15,8 +17,14 @@
                 <TextBox Text="{Binding Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
             </Grid>
         </TabItem>
+        <TabItem Header="StartArrow" Classes="property">
+            <style:ArrowStyleControl DataContext="{Binding StartArrowStyle}"/>
+        </TabItem>
+        <TabItem Header="EndArrow" Classes="property">
+            <style:ArrowStyleControl DataContext="{Binding EndArrowStyle}"/>
+        </TabItem>
         <TabItem Header="FixedLength" Classes="property">
-            <ContentControl Content="{Binding FixedLength, Mode=TwoWay}"/>
+            <style:LineFixedLengthControl DataContext="{Binding FixedLength}"/>
         </TabItem>
     </TabControl>
 </UserControl>

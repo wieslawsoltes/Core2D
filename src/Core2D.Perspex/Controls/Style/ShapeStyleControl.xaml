@@ -4,6 +4,7 @@
              xmlns="https://github.com/perspex"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Core2D.Perspex;assembly=Core2D.Perspex"
+             xmlns:presenters="clr-namespace:Core2D.Perspex.Controls.Presenters;assembly=Core2D.Perspex"
              xmlns:converters="clr-namespace:Core2D.Perspex.Converters;assembly=Core2D.Perspex"
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D"
              xmlns:style="clr-namespace:Core2D.Perspex.Controls.Style;assembly=Core2D.Perspex"
@@ -14,26 +15,16 @@
             <style:StyleControl/>
         </TabItem>
         <TabItem Header="Stroke" Classes="property">
-            <ContentControl Content="{Binding Stroke, Mode=TwoWay}"/>
+            <style:ArgbColorControl DataContext="{Binding Stroke}"/>
         </TabItem>
         <TabItem Header="Fill" Classes="property">
-            <ContentControl Content="{Binding Fill, Mode=TwoWay}"/>
+            <style:ArgbColorControl DataContext="{Binding Fill}"/>
         </TabItem>
         <TabItem Header="Text" Classes="property">
-            <ContentControl Content="{Binding TextStyle, Mode=TwoWay}"/>
+            <style:TextStyleControl DataContext="{Binding TextStyle}"/>
         </TabItem>
         <TabItem Header="Line" Classes="property">
-            <TabControl Classes="default">
-                <TabItem Header="StartArrow" Classes="property">
-                    <ContentControl Content="{Binding StartArrowStyle, Mode=TwoWay}"/>
-                </TabItem>
-                <TabItem Header="EndArrow" Classes="property">
-                    <ContentControl Content="{Binding EndArrowStyle, Mode=TwoWay}"/>
-                </TabItem>
-                <TabItem Header="LineStyle" Classes="property">
-                    <ContentControl Content="{Binding LineStyle, Mode=TwoWay}"/>
-                </TabItem>
-            </TabControl>
+            <style:LineStyleControl DataContext="{Binding LineStyle}"/>
         </TabItem>
     </TabControl>
 </UserControl>
