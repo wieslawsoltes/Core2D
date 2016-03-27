@@ -24,66 +24,67 @@ namespace Core2D.Perspex.Controls.Presenters
 {
     public class CachedContentPresenter : ContentPresenter
     {
-        private static IDictionary<Type, Func<Control>> ControlFactory;
-
-        private static IDictionary<Type, Control> ControlCache = new Dictionary<Type, Control>();
+        private static IDictionary<Type, Func<Control>> Factory;
+        private IDictionary<Type, Control> Cache;
 
         static CachedContentPresenter()
         {
-            ControlFactory = new Dictionary<Type, Func<Control>>();
+            Factory = new Dictionary<Type, Func<Control>>();
 
             // Data
-            ControlFactory.Add(typeof(ImmutableArray<XColumn>), () => new ColumnsControl());
-            ControlFactory.Add(typeof(XDatabase), () => new DatabaseControl());
-            ControlFactory.Add(typeof(XContext), () => new DataControl());
-            ControlFactory.Add(typeof(ImmutableArray<XProperty>), () => new PropertiesControl());
-            ControlFactory.Add(typeof(XRecord), () => new RecordControl());
-            ControlFactory.Add(typeof(ImmutableArray<XRecord>), () => new RecordsControl());
+            Factory.Add(typeof(ImmutableArray<XColumn>), () => new ColumnsControl());
+            Factory.Add(typeof(XDatabase), () => new DatabaseControl());
+            Factory.Add(typeof(XContext), () => new DataControl());
+            Factory.Add(typeof(ImmutableArray<XProperty>), () => new PropertiesControl());
+            Factory.Add(typeof(XRecord), () => new RecordControl());
+            Factory.Add(typeof(ImmutableArray<XRecord>), () => new RecordsControl());
 
             // Path
-            ControlFactory.Add(typeof(XArcSegment), () => new ArcSegmentControl());
-            ControlFactory.Add(typeof(XCubicBezierSegment), () => new CubicBezierSegmentControl());
-            ControlFactory.Add(typeof(XLineSegment), () => new LineSegmentControl());
-            ControlFactory.Add(typeof(XPathFigure), () => new PathFigureControl());
-            ControlFactory.Add(typeof(XPathGeometry), () => new PathGeometryControl());
-            ControlFactory.Add(typeof(XPathSize), () => new PathSizeControl());
-            ControlFactory.Add(typeof(XPolyCubicBezierSegment), () => new PolyCubicBezierSegmentControl());
-            ControlFactory.Add(typeof(XPolyLineSegment), () => new PolyLineSegmentControl());
-            ControlFactory.Add(typeof(XPolyQuadraticBezierSegment), () => new PolyQuadraticBezierSegmentControl());
-            ControlFactory.Add(typeof(XQuadraticBezierSegment), () => new QuadraticBezierSegmentControl());
+            Factory.Add(typeof(XArcSegment), () => new ArcSegmentControl());
+            Factory.Add(typeof(XCubicBezierSegment), () => new CubicBezierSegmentControl());
+            Factory.Add(typeof(XLineSegment), () => new LineSegmentControl());
+            Factory.Add(typeof(XPathFigure), () => new PathFigureControl());
+            Factory.Add(typeof(XPathGeometry), () => new PathGeometryControl());
+            Factory.Add(typeof(XPathSize), () => new PathSizeControl());
+            Factory.Add(typeof(XPolyCubicBezierSegment), () => new PolyCubicBezierSegmentControl());
+            Factory.Add(typeof(XPolyLineSegment), () => new PolyLineSegmentControl());
+            Factory.Add(typeof(XPolyQuadraticBezierSegment), () => new PolyQuadraticBezierSegmentControl());
+            Factory.Add(typeof(XQuadraticBezierSegment), () => new QuadraticBezierSegmentControl());
 
             // Shapes
-            ControlFactory.Add(typeof(XArc), () => new ArcControl());
-            ControlFactory.Add(typeof(XCubicBezier), () => new CubicBezierControl());
-            ControlFactory.Add(typeof(XEllipse), () => new EllipseControl());
-            ControlFactory.Add(typeof(XGroup), () => new GroupControl());
-            ControlFactory.Add(typeof(XImage), () => new ImageControl());
-            ControlFactory.Add(typeof(XLine), () => new LineControl());
-            ControlFactory.Add(typeof(XPath), () => new PathControl());
-            ControlFactory.Add(typeof(XPoint), () => new PointControl());
-            ControlFactory.Add(typeof(XQuadraticBezier), () => new QuadraticBezierControl());
-            ControlFactory.Add(typeof(XRectangle), () => new RectangleControl());
-            ControlFactory.Add(typeof(XText), () => new TextControl());
+            Factory.Add(typeof(XArc), () => new ArcControl());
+            Factory.Add(typeof(XCubicBezier), () => new CubicBezierControl());
+            Factory.Add(typeof(XEllipse), () => new EllipseControl());
+            Factory.Add(typeof(XGroup), () => new GroupControl());
+            Factory.Add(typeof(XImage), () => new ImageControl());
+            Factory.Add(typeof(XLine), () => new LineControl());
+            Factory.Add(typeof(XPath), () => new PathControl());
+            Factory.Add(typeof(XPoint), () => new PointControl());
+            Factory.Add(typeof(XQuadraticBezier), () => new QuadraticBezierControl());
+            Factory.Add(typeof(XRectangle), () => new RectangleControl());
+            Factory.Add(typeof(XText), () => new TextControl());
 
             // State
-            ControlFactory.Add(typeof(ShapeState), () => new ShapeStateControl());
+            Factory.Add(typeof(ShapeState), () => new ShapeStateControl());
 
             // Style
-            ControlFactory.Add(typeof(ArgbColor), () => new ArgbColorControl());
-            ControlFactory.Add(typeof(ArrowStyle), () => new ArrowStyleControl());
-            ControlFactory.Add(typeof(FontStyle), () => new FontStyleControl());
-            ControlFactory.Add(typeof(LineFixedLength), () => new LineFixedLengthControl());
-            ControlFactory.Add(typeof(LineStyle), () => new LineStyleControl());
-            ControlFactory.Add(typeof(ShapeStyle), () => new ShapeStyleControl());
-            ControlFactory.Add(typeof(BaseStyle), () => new StyleControl());
-            ControlFactory.Add(typeof(TextStyle), () => new TextStyleControl());
+            Factory.Add(typeof(ArgbColor), () => new ArgbColorControl());
+            Factory.Add(typeof(ArrowStyle), () => new ArrowStyleControl());
+            Factory.Add(typeof(FontStyle), () => new FontStyleControl());
+            Factory.Add(typeof(LineFixedLength), () => new LineFixedLengthControl());
+            Factory.Add(typeof(LineStyle), () => new LineStyleControl());
+            Factory.Add(typeof(ShapeStyle), () => new ShapeStyleControl());
+            Factory.Add(typeof(BaseStyle), () => new StyleControl());
+            Factory.Add(typeof(TextStyle), () => new TextStyleControl());
         }
 
         public CachedContentPresenter()
         {
+            Cache = new Dictionary<Type, Control>();
+
             this.GetObservable(DataContextProperty).Subscribe((value) =>
             {
-                Debug.Print($"DataContext Changed: {value} for {GetHashCode()}");
+                Debug.Print($"DataContext Changed: {value}");
                 SetContent(value);
             });
         }
@@ -102,7 +103,7 @@ namespace Core2D.Perspex.Controls.Presenters
         private Control CreateControl(Type type)
         {
             Func<Control> createInstance;
-            ControlFactory.TryGetValue(type, out createInstance);
+            Factory.TryGetValue(type, out createInstance);
             if (createInstance != null)
             {
                 var sw = Stopwatch.StartNew();
@@ -111,30 +112,27 @@ namespace Core2D.Perspex.Controls.Presenters
                 Debug.Print($"CreateInstance: {type} in {sw.Elapsed.TotalMilliseconds}ms.");
                 return instance;
             }
-            else
-            {
-                Debug.Print($"Not Registered: {type}");
-            }
+            Debug.Print($"Not Registered: {type}");
             return null;
         }
 
         private Control GetControl(Type type)
         {
             Control control;
-            ControlCache.TryGetValue(type, out control);
+            Cache.TryGetValue(type, out control);
             if (control == null)
             {
                 control = CreateControl(type);
                 if (control != null)
                 {
                     Debug.Print($"New: {type} -> {control}");
-                    ControlCache.Add(type, control);
+                    Cache.Add(type, control);
+                    return control;
                 }
+                Debug.Print($"Failed to create control for type: {type}");
+                return null;
             }
-            else
-            {
-                Debug.Print($"Cached: {type} -> {control}");
-            }
+            Debug.Print($"Cached: {type} -> {control}");
             return control;
         }
     }
