@@ -35,10 +35,8 @@
                 </TreeView.DataTemplates>
             </TreeView>
         </TabItem>
-        <!--
         <TabItem Header="Selected" Classes="property">
             <presenters:CachedContentPresenter DataContext="{Binding #tree.SelectedItem}"/>
         </TabItem>
-        -->
     </TabControl>
 </UserControl>

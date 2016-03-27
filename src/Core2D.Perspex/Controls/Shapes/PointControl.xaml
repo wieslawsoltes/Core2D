@@ -25,13 +25,11 @@
         <TabItem Header="State" Classes="property">
             <state:ShapeStateControl DataContext="{Binding State}"/>
         </TabItem>
-        <!--
         <TabItem Header="Data" Classes="property">
             <data:DataControl DataContext="{Binding Data}"/>
         </TabItem>
         <TabItem Header="Shape" Classes="property">
             <presenters:CachedContentPresenter DataContext="{Binding Shape}"/>
         </TabItem>
-        -->
     </TabControl>
 </UserControl>

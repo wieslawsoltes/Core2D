@@ -47,11 +47,6 @@
             <TreeView.DataTemplates>
                 <TreeDataTemplate DataType="Project:XDocument" ItemsSource="{Binding Pages, Mode=TwoWay}">
                     <Grid>
-                        <!--
-                        <i:Interaction.Behaviors>
-                            <behaviors:ToggleIsExpandedOnDoubleTappedBehavior/>
-                        </i:Interaction.Behaviors>
-                        -->
                         <TextBlock Text="{Binding Name, Mode=TwoWay}" Classes="default">
                             <TextBlock.ContextMenu>
                                 <ContextMenu>
@@ -74,11 +69,6 @@
                 </TreeDataTemplate>
                 <TreeDataTemplate DataType="Project:XPage" ItemsSource="{Binding Layers, Mode=TwoWay}">
                     <Grid>
-                        <!--
-                        <i:Interaction.Behaviors>
-                            <behaviors:ToggleIsExpandedOnDoubleTappedBehavior/>
-                        </i:Interaction.Behaviors>
-                        -->
                         <TextBlock Text="{Binding Name, Mode=TwoWay}" Classes="default">
                             <TextBlock.ContextMenu>
                                 <ContextMenu>

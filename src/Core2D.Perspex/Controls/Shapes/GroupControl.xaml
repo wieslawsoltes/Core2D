@@ -58,11 +58,9 @@
                                     </ListBox.DataTemplates>
                                 </ListBox>
                             </TabItem>
-                            <!--
                             <TabItem Header="Selected" Classes="property">
                                 <presenters:CachedContentPresenter DataContext="{Binding #shapes.SelectedItem}"/>
                             </TabItem>
-                            -->
                         </TabControl>
                     </TabItem>
                     <TabItem Header="Connectors" Classes="property">
@@ -87,10 +85,8 @@
         <TabItem Header="State" Classes="property">
             <state:ShapeStateControl DataContext="{Binding State}"/>
         </TabItem>
-        <!--
         <TabItem Header="Data" Classes="property">
             <data:DataControl DataContext="{Binding Data}"/>
         </TabItem>
-        -->
     </TabControl>
 </UserControl>

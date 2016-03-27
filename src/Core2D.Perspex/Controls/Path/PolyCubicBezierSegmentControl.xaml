@@ -18,13 +18,11 @@
                 <CheckBox IsChecked="{Binding IsSmoothJoin, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
             </Grid>
         </TabItem>
-        <!--
         <TabItem Header="Points" Classes="property">
             <ListBox Name="points" Items="{Binding Points}" Classes="default"/>
         </TabItem>
         <TabItem Header="Selected" Classes="property">
             <presenters:CachedContentPresenter DataContext="{Binding #points.SelectedItem}"/>
         </TabItem>
-        -->
     </TabControl>
 </UserControl>

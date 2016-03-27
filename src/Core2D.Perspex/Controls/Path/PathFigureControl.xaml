@@ -22,10 +22,8 @@
         <TabItem Header="StartPoint" Classes="property">
             <shapes:PointControl DataContext="{Binding StartPoint}"/>
         </TabItem>
-        <!--
         <TabItem Header="Segments" Classes="property">
             <ListBox Items="{Binding Segments}" Classes="default"/>
         </TabItem>
-        -->
     </TabControl>
 </UserControl>
