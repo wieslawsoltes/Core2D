@@ -221,6 +221,7 @@
       <DependentUpon>LibraryControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\IsGroupConverter.cs" />
+    <Compile Include="Interactions\Behaviors\BindTagToVisualRootDataContextBehavior.cs" />
     <Compile Include="Views\DocumentControl.xaml.cs">
       <DependentUpon>DocumentControl.xaml</DependentUpon>
     </Compile>
