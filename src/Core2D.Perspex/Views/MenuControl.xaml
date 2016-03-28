@@ -3,6 +3,9 @@
 <UserControl x:Class="Core2D.Perspex.Views.MenuControl"
              xmlns="https://github.com/perspex"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:i="clr-namespace:Perspex.Xaml.Interactivity;assembly=Perspex.Xaml.Interactivity"
+             xmlns:ia="clr-namespace:Perspex.Xaml.Interactions.Core;assembly=Perspex.Xaml.Interactions"
+             xmlns:behaviors="clr-namespace:Core2D.Perspex.Interactions.Behaviors;assembly=Core2D.Perspex"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:local="clr-namespace:Core2D.Perspex;assembly=Core2D.Perspex"
              xmlns:converters="clr-namespace:Core2D.Perspex.Converters;assembly=Core2D.Perspex"
@@ -203,7 +206,21 @@
         <MenuItem Header="Te_mplate" Items="{Binding Project.Templates}" IsVisible="{Binding Project, Converter={Static converters:IsNotNullConverter.Instance}}">
             <MenuItem.DataTemplates>
                 <DataTemplate DataType="Project:XContainer">
-                    <MenuItem Header="{Binding Name}" Command="{Static Editor:Commands.ApplyTemplateCommand}" CommandParameter="{Binding}"/>
+                    <MenuItem Header="{Binding Name}" Command="{Static Editor:Commands.ApplyTemplateCommand}" CommandParameter="{Binding}">
+                        <MenuItem.Icon>
+                            <CheckBox Name="icon" Classes="menu">
+                                <i:Interaction.Behaviors>
+                                    <behaviors:BindTagToVisualRootDataContextBehavior/>
+                                </i:Interaction.Behaviors>
+                                <CheckBox.IsChecked>
+                                    <MultiBinding Mode="OneWay" Converter="{Static converters:ObjectEqualityMultiConverter.Instance}">
+                                        <Binding ElementName="icon" Path="DataContext" Converter="{Static converters:ObjectToObjectConverter.Instance}"/>
+                                        <Binding ElementName="icon" Path="Tag.Project.CurrentContainer.Template" Converter="{Static converters:ObjectToObjectConverter.Instance}"/>
+                                    </MultiBinding>
+                                </CheckBox.IsChecked>
+                            </CheckBox>
+                        </MenuItem.Icon>
+                    </MenuItem>
                 </DataTemplate>
             </MenuItem.DataTemplates>
         </MenuItem>
