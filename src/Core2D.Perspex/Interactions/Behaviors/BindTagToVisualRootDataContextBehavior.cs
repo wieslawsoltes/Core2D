@@ -10,6 +10,8 @@ namespace Core2D.Perspex.Interactions.Behaviors
 {
     public class BindTagToVisualRootDataContextBehavior : Behavior<Control>
     {
+        private IDisposable _disposable;
+
         protected override void OnAttached()
         {
             base.OnAttached();
@@ -20,14 +22,15 @@ namespace Core2D.Perspex.Interactions.Behaviors
         {
             base.OnDetaching();
             AssociatedObject.AttachedToVisualTree -= AttachedToVisualTree;
+            _disposable?.Dispose();
         }
 
         private void AttachedToVisualTree(object sender, VisualTreeAttachmentEventArgs e)
         {
-            BindDataContextToTag((IControl)AssociatedObject.GetVisualRoot(), AssociatedObject);
+            _disposable = BindDataContextToTag((IControl)AssociatedObject.GetVisualRoot(), AssociatedObject);
         }
 
-        private static void BindDataContextToTag(IControl source, IControl target)
+        private static IDisposable BindDataContextToTag(IControl source, IControl target)
         {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
@@ -38,8 +41,9 @@ namespace Core2D.Perspex.Interactions.Behaviors
             var data = source.GetObservable(Control.DataContextProperty);
             if (data != null)
             {
-                target.Bind(Control.TagProperty, data);
+                return target.Bind(Control.TagProperty, data);
             }
+            return null;
         }
     }
 }
