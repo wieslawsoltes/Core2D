@@ -160,6 +160,11 @@
         <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
     </Style>
+    <!-- CheckBox.menu -->
+    <Style Selector="CheckBox.menu">
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="IsHitTestVisible" Value="False"/>
+    </Style>
     <!-- DropDown.default -->
     <Style Selector="DropDown.default">
         <Setter Property="Padding" Value="4,0,4,0"/>

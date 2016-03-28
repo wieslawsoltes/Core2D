@@ -208,15 +208,39 @@
             </MenuItem.DataTemplates>
         </MenuItem>
         <MenuItem Header="_Options" IsVisible="{Binding Project, Converter={Static converters:IsNotNullConverter.Instance}}">
-            <MenuItem Header="Default is Stro_ked" Command="{Static Editor:Commands.DefaultIsStrokedCommand}"/>
-            <MenuItem Header="Default is _Filled" Command="{Static Editor:Commands.DefaultIsFilledCommand}"/>
+            <MenuItem Header="Default is Stro_ked" Command="{Static Editor:Commands.DefaultIsStrokedCommand}">
+                <MenuItem.Icon>
+                    <CheckBox IsChecked="{Binding Project.Options.DefaultIsStroked}" Classes="menu"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Default is _Filled" Command="{Static Editor:Commands.DefaultIsFilledCommand}">
+                <MenuItem.Icon>
+                    <CheckBox IsChecked="{Binding Project.Options.DefaultIsFilled}" Classes="menu"/>
+                </MenuItem.Icon>
+            </MenuItem>
             <Separator/>
-            <MenuItem Header="Default is Close_d" Command="{Static Editor:Commands.DefaultIsClosedCommand}"/>
-            <MenuItem Header="Default is Smooth _Join" Command="{Static Editor:Commands.DefaultIsSmoothJoinCommand}"/>
+            <MenuItem Header="Default is Close_d" Command="{Static Editor:Commands.DefaultIsClosedCommand}">
+                <MenuItem.Icon>
+                    <CheckBox IsChecked="{Binding Project.Options.DefaultIsClosed}" Classes="menu"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Default is Smooth _Join" Command="{Static Editor:Commands.DefaultIsSmoothJoinCommand}">
+                <MenuItem.Icon>
+                    <CheckBox IsChecked="{Binding Project.Options.DefaultIsSmoothJoin}" Classes="menu"/>
+                </MenuItem.Icon>
+            </MenuItem>
             <Separator/>
-            <MenuItem Header="Snap to _Grid" Command="{Static Editor:Commands.SnapToGridCommand}"/>
+            <MenuItem Header="Snap to _Grid" Command="{Static Editor:Commands.SnapToGridCommand}">
+                <MenuItem.Icon>
+                    <CheckBox IsChecked="{Binding Project.Options.SnapToGrid}" Classes="menu"/>
+                </MenuItem.Icon>
+            </MenuItem>
             <Separator/>
-            <MenuItem Header="Try To _Connect" Command="{Static Editor:Commands.TryToConnectCommand}"/>
+            <MenuItem Header="Try To _Connect" Command="{Static Editor:Commands.TryToConnectCommand}">
+                <MenuItem.Icon>
+                    <CheckBox IsChecked="{Binding Project.Options.TryToConnect}" Classes="menu"/>
+                </MenuItem.Icon>
+            </MenuItem>
         </MenuItem>
     </Menu>
 </UserControl>
