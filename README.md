@@ -14,14 +14,13 @@ Core2D is an application for making data driven 2D diagrams.
 
 ## Data Formats
 
-* Project files are stored as `zip` archives.
-* The project data is stored as `ProtoBuf` in `zip` archives.
-* The image data is stored  as files in `zip` archives.
-* Project resources can be defined in `ProtoBuf`, `Json` or `Xaml` format.
+* The project model is stored as `ProtoBuf` in `zip` archives.
+* The project images are stored  as files in `zip` archives.
+* Resources can be defined in `ProtoBuf`, `Json` or `Xaml` format.
 * `ProtoBuf` format is supported for imported and exported resources. 
 * `Json` format is supported for imported and exported resources. 
 * `Xaml` format is supported for imported and exported resources. 
-* Database's records can be imported, exported and updated from `csv` file format.
+* Database records can be imported, exported and updated from `csv` file format.
 * The clipboard data is stored as `Json` text.
 
 ## Supported Platforms
