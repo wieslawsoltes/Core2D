@@ -8,7 +8,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using static System.Math;
 
-namespace Core2D.Wpf.Controls.PanAndZoom
+namespace Core2D.Wpf.Controls.Zoom
 {
     public class PanAndZoom : Border
     {

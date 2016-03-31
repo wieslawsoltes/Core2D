@@ -6,7 +6,7 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Core2D.Wpf.Controls.Editor
+namespace Core2D.Wpf.Views
 {
     /// <summary>
     /// Interaction logic for <see cref="ShapeControl"/> xaml.

@@ -18,7 +18,6 @@
              xmlns:custom="clr-namespace:Core2D.Wpf.Controls.Custom"
              xmlns:lists="clr-namespace:Core2D.Wpf.Controls.Custom.Lists"
              xmlns:data="clr-namespace:Core2D.Wpf.Controls.Data"
-             xmlns:editor="clr-namespace:Core2D.Wpf.Controls.Editor"
              xmlns:path="clr-namespace:Core2D.Wpf.Controls.Path"
              xmlns:project="clr-namespace:Core2D.Wpf.Controls.Project"
              xmlns:shapes="clr-namespace:Core2D.Wpf.Controls.Shapes"

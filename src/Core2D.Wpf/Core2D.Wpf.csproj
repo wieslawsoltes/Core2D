@@ -130,14 +130,14 @@
     </Compile>
     <Compile Include="Controls\Custom\Lists\XGroupConnectorsDragAndDropListBox.cs" />
     <Compile Include="Controls\Custom\Lists\XGroupShapesDragAndDropListBox.cs" />
-    <Compile Include="Controls\Editor\PageControl.xaml.cs">
+    <Compile Include="Views\PageControl.xaml.cs">
       <DependentUpon>PageControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Editor\TemplateControl.xaml.cs">
+    <Compile Include="Views\TemplateControl.xaml.cs">
       <DependentUpon>TemplateControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\PanAndZoom\AutoFitMode.cs" />
-    <Compile Include="Controls\PanAndZoom\PanAndZoom.cs" />
+    <Compile Include="Controls\Zoom\AutoFitMode.cs" />
+    <Compile Include="Controls\Zoom\PanAndZoom.cs" />
     <Compile Include="Controls\Path\ArcSegmentControl.xaml.cs">
       <DependentUpon>ArcSegmentControl.xaml</DependentUpon>
     </Compile>
@@ -203,7 +203,7 @@
     <Compile Include="Controls\Project\ProjectControl.xaml.cs">
       <DependentUpon>ProjectControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Editor\ShapeControl.xaml.cs">
+    <Compile Include="Views\ShapeControl.xaml.cs">
       <DependentUpon>ShapeControl.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -320,11 +320,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\Editor\PageControl.xaml">
+    <Page Include="Views\PageControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\Editor\TemplateControl.xaml">
+    <Page Include="Views\TemplateControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -429,7 +429,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\Editor\ShapeControl.xaml" />
+    <Page Include="Views\ShapeControl.xaml" />
     <Page Include="Controls\Shapes\ArcControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
