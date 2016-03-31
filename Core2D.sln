@@ -46,6 +46,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serializer.Newtonsoft", "dependencies\Serializer.Newtonsoft\Serializer.Newtonsoft.csproj", "{08E4E8BF-E513-4A8D-835C-1EED6ECB4A21}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serializer.ProtoBuf", "dependencies\Serializer.ProtoBuf\Serializer.ProtoBuf.csproj", "{83191601-FCAC-48A7-ABF9-2179FEC1B2CE}"
+	ProjectSection(ProjectDependencies) = postProject
+		{50A4E393-386B-4354-8FB7-A20044986094} = {50A4E393-386B-4354-8FB7-A20044986094}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serializer.ProtoBuf.Generate", "dependencies\Serializer.ProtoBuf.Generate\Serializer.ProtoBuf.Generate.csproj", "{50A4E393-386B-4354-8FB7-A20044986094}"
 EndProject
