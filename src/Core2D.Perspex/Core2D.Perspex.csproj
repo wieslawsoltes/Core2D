@@ -636,49 +636,45 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Core2D\Core2D.csproj">
-      <Project>{4ee581b0-45f3-4d7e-beae-277abf5f3fdd}</Project>
-      <Name>Core2D</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Dependencies\FileWriter.Dxf\FileWriter.Dxf.csproj">
-      <Project>{D40B3BCD-0A26-40BB-960B-9464D248C934}</Project>
+    <ProjectReference Include="..\..\dependencies\FileWriter.Dxf\FileWriter.Dxf.csproj">
+      <Project>{d40b3bcd-0a26-40bb-960b-9464d248c934}</Project>
       <Name>FileWriter.Dxf</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Dependencies\FileWriter.Pdf-core\FileWriter.Pdf-core.csproj">
-      <Project>{EC0EFA51-83F0-4439-BE9F-FAEBD3418C94}</Project>
+    <ProjectReference Include="..\..\dependencies\FileWriter.Pdf-core\FileWriter.Pdf-core.csproj">
+      <Project>{ec0efa51-83f0-4439-be9f-faebd3418c94}</Project>
       <Name>FileWriter.Pdf-core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Dependencies\Log.Trace\Log.Trace.csproj">
-      <Project>{68A36926-DF55-4F05-9F89-B9AB1463227E}</Project>
+    <ProjectReference Include="..\..\dependencies\Log.Trace\Log.Trace.csproj">
+      <Project>{68a36926-df55-4f05-9f89-b9ab1463227e}</Project>
       <Name>Log.Trace</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Dependencies\Renderer.Dxf\Renderer.Dxf.csproj">
-      <Project>{ACC2C898-B49B-4ED9-B18C-389F50801B39}</Project>
-      <Name>Renderer.Dxf</Name>
+    <ProjectReference Include="..\..\dependencies\Renderer.Perspex\Renderer.Perspex.csproj">
+      <Project>{dee86be6-43b1-45fb-8a56-7977c1d0964e}</Project>
+      <Name>Renderer.Perspex</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Dependencies\Serializer.Newtonsoft\Serializer.Newtonsoft.csproj">
-      <Project>{08E4E8BF-E513-4A8D-835C-1EED6ECB4A21}</Project>
+    <ProjectReference Include="..\..\dependencies\Serializer.Newtonsoft\Serializer.Newtonsoft.csproj">
+      <Project>{08e4e8bf-e513-4a8d-835c-1eed6ecb4a21}</Project>
       <Name>Serializer.Newtonsoft</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Dependencies\Serializer.ProtoBuf\Serializer.ProtoBuf.csproj">
+    <ProjectReference Include="..\..\dependencies\Serializer.ProtoBuf\Serializer.ProtoBuf.csproj">
       <Project>{83191601-fcac-48a7-abf9-2179fec1b2ce}</Project>
       <Name>Serializer.ProtoBuf</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Dependencies\Serializer.Xaml\Serializer.Xaml.csproj">
+    <ProjectReference Include="..\..\dependencies\Serializer.Xaml\Serializer.Xaml.csproj">
       <Project>{5b85143e-a53c-4126-8666-031a3172efdf}</Project>
       <Name>Serializer.Xaml</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Dependencies\TextFieldReader.CsvHelper\TextFieldReader.CsvHelper.csproj">
-      <Project>{64BAE9E8-93B5-4EDC-8AD6-5A3DCBA8C051}</Project>
+    <ProjectReference Include="..\..\dependencies\TextFieldReader.CsvHelper\TextFieldReader.CsvHelper.csproj">
+      <Project>{64bae9e8-93b5-4edc-8ad6-5a3dcba8c051}</Project>
       <Name>TextFieldReader.CsvHelper</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Dependencies\TextFieldWriter.CsvHelper\TextFieldWriter.CsvHelper.csproj">
-      <Project>{87302D12-1184-402D-BF23-A5699F3D0BB4}</Project>
+    <ProjectReference Include="..\..\dependencies\TextFieldWriter.CsvHelper\TextFieldWriter.CsvHelper.csproj">
+      <Project>{87302d12-1184-402d-bf23-a5699f3d0bb4}</Project>
       <Name>TextFieldWriter.CsvHelper</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Dependencies\Renderer.Perspex\Renderer.Perspex.csproj">
-      <Project>{dee86be6-43b1-45fb-8a56-7977c1d0964e}</Project>
-      <Name>Renderer.Perspex</Name>
+    <ProjectReference Include="..\Core2D\Core2D.csproj">
+      <Project>{4ee581b0-45f3-4d7e-beae-277abf5f3fdd}</Project>
+      <Name>Core2D</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
