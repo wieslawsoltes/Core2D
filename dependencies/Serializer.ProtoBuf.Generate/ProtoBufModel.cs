@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Core2D;
+using Core2D.Collections;
 using Core2D.Data;
 using Core2D.Data.Database;
 using Core2D.History;
@@ -24,6 +25,36 @@ namespace Serializer.ProtoBuf
             var observableResource = model.Add(typeof(ObservableResource), false);
             observableResource.AsReferenceDefault = true;
             observableResource.AddField(1, nameof(ObservableResource.Resources)).AsReference = true;
+
+            return model;
+        }
+
+        public static RuntimeTypeModel AddCollections(this RuntimeTypeModel model)
+        {
+            var databases = model.Add(typeof(XDatabases), false);
+            databases.AsReferenceDefault = true;
+            databases.AddField(1, nameof(XDatabases.Name));
+            databases.AddField(2, nameof(XDatabases.Children)).AsReference = true;
+
+            var groups = model.Add(typeof(XGroups), false);
+            groups.AsReferenceDefault = true;
+            groups.AddField(1, nameof(XGroups.Name));
+            groups.AddField(2, nameof(XGroups.Children)).AsReference = true;
+
+            var shapes = model.Add(typeof(XShapes), false);
+            shapes.AsReferenceDefault = true;
+            shapes.AddField(1, nameof(XShapes.Name));
+            shapes.AddField(2, nameof(XShapes.Children)).AsReference = true;
+
+            var styles = model.Add(typeof(XStyles), false);
+            styles.AsReferenceDefault = true;
+            styles.AddField(1, nameof(XStyles.Name));
+            styles.AddField(2, nameof(XStyles.Children)).AsReference = true;
+
+            var templates = model.Add(typeof(XTemplates), false);
+            templates.AsReferenceDefault = true;
+            templates.AddField(1, nameof(XTemplates.Name));
+            templates.AddField(2, nameof(XTemplates.Children)).AsReference = true;
 
             return model;
         }
@@ -383,6 +414,7 @@ namespace Serializer.ProtoBuf
         {
             return Empty()
                 .AddCore()
+                .AddCollections()
                 .AddData()
                 .AddStyle()
                 .AddShapes()
