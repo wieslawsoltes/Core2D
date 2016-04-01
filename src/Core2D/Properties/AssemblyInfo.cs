@@ -16,6 +16,7 @@ using System.Runtime.CompilerServices;
 [assembly: InternalsVisibleTo("Core2D.UnitTests")]
 
 [assembly: XmlnsDefinition("https://github.com/Core2D", "Core2D")]
+[assembly: XmlnsDefinition("https://github.com/Core2D", "Core2D.Collections")]
 [assembly: XmlnsDefinition("https://github.com/Core2D", "Core2D.Data")]
 [assembly: XmlnsDefinition("https://github.com/Core2D", "Core2D.Data.Database")]
 [assembly: XmlnsDefinition("https://github.com/Core2D", "Core2D.Path")]
@@ -24,4 +25,3 @@ using System.Runtime.CompilerServices;
 [assembly: XmlnsDefinition("https://github.com/Core2D", "Core2D.Shape")]
 [assembly: XmlnsDefinition("https://github.com/Core2D", "Core2D.Shapes")]
 [assembly: XmlnsDefinition("https://github.com/Core2D", "Core2D.Style")]
-[assembly: XmlnsDefinition("https://github.com/Core2D", "Core2D.Xaml.Collections")]

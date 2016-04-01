@@ -4,7 +4,7 @@ using Core2D.Shapes;
 using Portable.Xaml.Markup;
 using System.Collections.Immutable;
 
-namespace Core2D.Xaml.Collections
+namespace Core2D.Collections
 {
     /// <summary>
     /// Observable <see cref="XGroup"/> collection.

@@ -1,17 +1,17 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Core2D.Shape;
+using Core2D.Data.Database;
 using Portable.Xaml.Markup;
 using System.Collections.Immutable;
 
-namespace Core2D.Xaml.Collections
+namespace Core2D.Collections
 {
     /// <summary>
-    /// Observable <see cref="BaseShape"/> collection.
+    /// Observable <see cref="XDatabase"/> collection.
     /// </summary>
     [ContentProperty(nameof(Children))]
     [RuntimeNameProperty(nameof(Name))]
-    public sealed class XShapes : ObservableResource
+    public sealed class XDatabases : ObservableResource
     {
         /// <summary>
         /// Gets or sets resource name.
@@ -21,14 +21,14 @@ namespace Core2D.Xaml.Collections
         /// <summary>
         /// Gets or sets children collection.
         /// </summary>
-        public ImmutableArray<BaseShape> Children { get; set; }
+        public ImmutableArray<XDatabase> Children { get; set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="XShapes"/> class.
+        /// Initializes a new instance of the <see cref="XDatabase"/> class.
         /// </summary>
-        public XShapes()
+        public XDatabases()
         {
-            Children = ImmutableArray.Create<BaseShape>();
+            Children = ImmutableArray.Create<XDatabase>();
         }
     }
 }
