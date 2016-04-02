@@ -144,7 +144,7 @@ namespace Renderer.Perspex
             }
 
             var pen = new PM.Pen(
-                ToSolidBrush(style.Stroke),
+                ToBrush(style.Stroke),
                 scale(style.Thickness / State.ZoomX),
                 dashStyle, lineCap,
                 lineCap, lineCap);
@@ -157,7 +157,7 @@ namespace Renderer.Perspex
         /// </summary>
         /// <param name="color"></param>
         /// <returns></returns>
-        private PM.SolidColorBrush ToSolidBrush(ArgbColor color)
+        private PM.IBrush ToBrush(ArgbColor color)
         {
             return new PM.SolidColorBrush(ToColor(color));
         }
@@ -213,10 +213,10 @@ namespace Renderer.Perspex
             out P.Point pt1,
             out P.Point pt2)
         {
-            PM.Brush fillStartArrow = ToSolidBrush(line.Style.StartArrowStyle.Fill);
+            PM.IBrush fillStartArrow = ToBrush(line.Style.StartArrowStyle.Fill);
             PM.Pen strokeStartArrow = ToPen(line.Style.StartArrowStyle, _scaleToPage);
 
-            PM.Brush fillEndArrow = ToSolidBrush(line.Style.EndArrowStyle.Fill);
+            PM.IBrush fillEndArrow = ToBrush(line.Style.EndArrowStyle.Fill);
             PM.Pen strokeEndArrow = ToPen(line.Style.EndArrowStyle, _scaleToPage);
 
             double _x1 = line.Start.X + dx;
@@ -357,7 +357,7 @@ namespace Renderer.Perspex
         /// <param name="rect"></param>
         private static void DrawRectangleInternal(
             PM.DrawingContext dc,
-            PM.Brush brush,
+            PM.IBrush brush,
             PM.Pen pen,
             bool isStroked,
             bool isFilled,
@@ -390,7 +390,7 @@ namespace Renderer.Perspex
         /// <param name="rect"></param>
         private static void DrawEllipseInternal(
             PM.DrawingContext dc,
-            PM.Brush brush,
+            PM.IBrush brush,
             PM.Pen pen,
             bool isStroked,
             bool isFilled,
@@ -487,7 +487,7 @@ namespace Renderer.Perspex
         {
             var _dc = dc as PM.DrawingContext;
 
-            PM.Brush brush = ToSolidBrush(rectangle.Style.Fill);
+            PM.IBrush brush = ToBrush(rectangle.Style.Fill);
             PM.Pen pen = ToPen(rectangle.Style, _scaleToPage);
 
             var rect = CreateRect(rectangle.TopLeft, rectangle.BottomRight, dx, dy);
@@ -517,7 +517,7 @@ namespace Renderer.Perspex
         {
             var _dc = dc as PM.DrawingContext;
 
-            PM.Brush brush = ToSolidBrush(ellipse.Style.Fill);
+            PM.IBrush brush = ToBrush(ellipse.Style.Fill);
             PM.Pen pen = ToPen(ellipse.Style, _scaleToPage);
 
             var rect = CreateRect(ellipse.TopLeft, ellipse.BottomRight, dx, dy);
@@ -539,7 +539,7 @@ namespace Renderer.Perspex
 
             var _dc = dc as PM.DrawingContext;
 
-            PM.Brush brush = ToSolidBrush(arc.Style.Fill);
+            PM.IBrush brush = ToBrush(arc.Style.Fill);
             PM.Pen pen = ToPen(arc.Style, _scaleToPage);
 
             var sg = new PM.StreamGeometry();
@@ -575,7 +575,7 @@ namespace Renderer.Perspex
 
             var _dc = dc as PM.DrawingContext;
 
-            PM.Brush brush = ToSolidBrush(cubicBezier.Style.Fill);
+            PM.IBrush brush = ToBrush(cubicBezier.Style.Fill);
             PM.Pen pen = ToPen(cubicBezier.Style, _scaleToPage);
 
             var sg = new PM.StreamGeometry();
@@ -607,7 +607,7 @@ namespace Renderer.Perspex
 
             var _dc = dc as PM.DrawingContext;
 
-            PM.Brush brush = ToSolidBrush(quadraticBezier.Style.Fill);
+            PM.IBrush brush = ToBrush(quadraticBezier.Style.Fill);
             PM.Pen pen = ToPen(quadraticBezier.Style, _scaleToPage);
 
             var sg = new PM.StreamGeometry();
@@ -639,7 +639,7 @@ namespace Renderer.Perspex
             if (string.IsNullOrEmpty(tbind))
                 return;
 
-            PM.Brush brush = ToSolidBrush(text.Style.Stroke);
+            PM.IBrush brush = ToBrush(text.Style.Stroke);
 
             var fontStyle = PM.FontStyle.Normal;
             var fontWeight = PM.FontWeight.Normal;
@@ -700,7 +700,7 @@ namespace Renderer.Perspex
 
             if (image.IsStroked || image.IsFilled)
             {
-                PM.Brush brush = ToSolidBrush(image.Style.Fill);
+                PM.IBrush brush = ToBrush(image.Style.Fill);
                 PM.Pen pen = ToPen(image.Style, _scaleToPage);
 
                 DrawRectangleInternal(
@@ -773,7 +773,7 @@ namespace Renderer.Perspex
 
             var g = path.Geometry.ToGeometry();
 
-            var brush = ToSolidBrush(path.Style.Fill);
+            var brush = ToBrush(path.Style.Fill);
             var pen = ToPen(path.Style, _scaleToPage);
             _dc.DrawGeometry(
                 path.IsFilled ? brush : null,
