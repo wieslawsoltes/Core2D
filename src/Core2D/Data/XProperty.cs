@@ -1,13 +1,12 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Portable.Xaml.Markup;
+using Core2D.Attributes;
 
 namespace Core2D.Data
 {
     /// <summary>
     /// Data property.
     /// </summary>
-    [ContentProperty(nameof(Value))]
     public sealed class XProperty : ObservableObject
     {
         private string _name;
@@ -26,6 +25,7 @@ namespace Core2D.Data
         /// <summary>
         /// Gets or sets property value.
         /// </summary>
+        [Content]
         public string Value
         {
             get { return _value; }

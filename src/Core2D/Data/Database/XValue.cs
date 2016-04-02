@@ -1,13 +1,12 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Portable.Xaml.Markup;
+using Core2D.Attributes;
 
 namespace Core2D.Data.Database
 {
     /// <summary>
     /// Record value.
     /// </summary>
-    [ContentProperty(nameof(Content))]
     public sealed class XValue : ObservableObject
     {
         private string _content;
@@ -15,6 +14,7 @@ namespace Core2D.Data.Database
         /// <summary>
         /// Gets or sets value content.
         /// </summary>
+        [Content]
         public string Content
         {
             get { return _content; }

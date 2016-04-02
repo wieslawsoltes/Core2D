@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Attributes;
 using Core2D.Data.Database;
-using Portable.Xaml.Markup;
 using System.Collections.Immutable;
 using System.Linq;
 
@@ -10,7 +10,6 @@ namespace Core2D.Data
     /// <summary>
     /// Data context.
     /// </summary>
-    [ContentProperty(nameof(Properties))]
     public sealed class XContext : ObservableObject
     {
         private ImmutableArray<XProperty> _properties;
@@ -28,6 +27,7 @@ namespace Core2D.Data
         /// <summary>
         /// Gets or sets a collection <see cref="XProperty"/> that will be used during drawing.
         /// </summary>
+        [Content]
         public ImmutableArray<XProperty> Properties
         {
             get { return _properties; }

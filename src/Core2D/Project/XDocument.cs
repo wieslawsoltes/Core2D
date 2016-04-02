@@ -1,15 +1,13 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System.Collections.Immutable;
-using Portable.Xaml.Markup;
+using Core2D.Attributes;
 
 namespace Core2D.Project
 {
     /// <summary>
     /// Document model.
     /// </summary>
-    [ContentProperty(nameof(Pages))]
-    [RuntimeNameProperty(nameof(Name))]
     public sealed class XDocument : XSelectable
     {
         private string _name;
@@ -19,6 +17,7 @@ namespace Core2D.Project
         /// <summary>
         /// Gets or sets document name.
         /// </summary>
+        [Name]
         public string Name
         {
             get { return _name; }
@@ -37,6 +36,7 @@ namespace Core2D.Project
         /// <summary>
         /// Gets or sets document pages.
         /// </summary>
+        [Content]
         public ImmutableArray<XPage> Pages
         {
             get { return _pages; }

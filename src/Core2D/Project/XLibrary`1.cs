@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Portable.Xaml.Markup;
+using Core2D.Attributes;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -10,8 +10,6 @@ namespace Core2D.Project
     /// <summary>
     /// Named items library.
     /// </summary>
-    [ContentProperty(nameof(Items))]
-    [RuntimeNameProperty(nameof(Name))]
     public sealed class XLibrary<T> : ObservableObject, ILibrary
     {
         private string _name;
@@ -21,6 +19,7 @@ namespace Core2D.Project
         /// <summary>
         /// Gets or sets library name.
         /// </summary>
+        [Name]
         public string Name
         {
             get { return _name; }
@@ -30,6 +29,7 @@ namespace Core2D.Project
         /// <summary>
         /// Gets or sets a items collection.
         /// </summary>
+        [Content]
         public ImmutableArray<T> Items
         {
             get { return _items; }

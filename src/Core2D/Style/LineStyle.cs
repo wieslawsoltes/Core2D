@@ -1,13 +1,12 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Portable.Xaml.Markup;
+using Core2D.Attributes;
 
 namespace Core2D.Style
 {
     /// <summary>
     /// Line style.
     /// </summary>
-    [RuntimeNameProperty(nameof(Name))]
     public sealed class LineStyle : ObservableObject
     {
         private string _name;
@@ -16,6 +15,7 @@ namespace Core2D.Style
         /// <summary>
         /// Gets or sets line style name.
         /// </summary>
+        [Name]
         public string Name
         {
             get { return _name; }

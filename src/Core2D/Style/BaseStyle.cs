@@ -1,17 +1,16 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Attributes;
 using System;
 using System.Diagnostics;
-using System.Linq;
 using System.Globalization;
-using Portable.Xaml.Markup;
+using System.Linq;
 
 namespace Core2D.Style
 {
     /// <summary>
     /// Base style.
     /// </summary>
-    [RuntimeNameProperty(nameof(Name))]
     public abstract class BaseStyle : ObservableResource
     {
         private string _name;
@@ -25,6 +24,7 @@ namespace Core2D.Style
         /// <summary>
         /// Gets or sets style name.
         /// </summary>
+        [Name]
         public string Name
         {
             get { return _name; }

@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Portable.Xaml.Markup;
+using Core2D.Attributes;
 using System.Collections.Immutable;
 
 namespace Core2D
@@ -8,7 +8,6 @@ namespace Core2D
     /// <summary>
     /// Observable resources base class.
     /// </summary>
-    [ContentProperty(nameof(Resources))]
     public abstract class ObservableResource : ObservableObject
     {
         private ImmutableArray<ObservableObject> _resources;
@@ -25,6 +24,7 @@ namespace Core2D
         /// <summary>
         /// Gets or sets shape resources.
         /// </summary>
+        [Content]
         public ImmutableArray<ObservableObject> Resources
         {
             get { return _resources; }

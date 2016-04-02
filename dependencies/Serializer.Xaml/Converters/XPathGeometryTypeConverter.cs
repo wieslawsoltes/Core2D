@@ -1,16 +1,17 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Core2D.Shape;
+using Core2D.Path;
+using Core2D.Path.Parser;
 using Portable.Xaml.ComponentModel;
 using System;
 using System.Globalization;
 
-namespace Core2D.Xaml.Converters
+namespace Serializer.Xaml.Converters
 {
     /// <summary>
-    /// Defines <see cref="ShapeState"/> type converter.
+    /// Defines <see cref="XPathGeometry"/> type converter.
     /// </summary>
-    public sealed class ShapeStateTypeConverter : TypeConverter
+    internal class XPathGeometryTypeConverter : TypeConverter
     {
         /// <inheritdoc/>
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
@@ -27,16 +28,16 @@ namespace Core2D.Xaml.Converters
         /// <inheritdoc/>
         public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
         {
-            return ShapeState.Parse((string)value);
+            return XPathGeometryParser.Parse((string)value);
         }
 
         /// <inheritdoc/>
         public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
         {
-            var state = value as ShapeState;
-            if (state != null)
+            var geometry = value as XPathGeometry;
+            if (geometry != null)
             {
-                return state.ToString();
+                return geometry.ToString();
             }
             throw new NotSupportedException();
         }

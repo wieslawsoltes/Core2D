@@ -1,11 +1,11 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Attributes;
 using Core2D.Data;
 using Core2D.Data.Database;
 using Core2D.Renderer;
 using Core2D.Shapes;
 using Core2D.Style;
-using Portable.Xaml.Markup;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 
@@ -14,7 +14,6 @@ namespace Core2D.Shape
     /// <summary>
     /// Base class for shapes.
     /// </summary>
-    [RuntimeNameProperty(nameof(Name))]
     public abstract class BaseShape : ObservableResource
     {
         private string _name;
@@ -38,6 +37,7 @@ namespace Core2D.Shape
         /// <summary>
         /// Gets or sets shape name.
         /// </summary>
+        [Name]
         public virtual string Name
         {
             get { return _name; }

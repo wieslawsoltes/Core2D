@@ -1,14 +1,14 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Portable.Xaml;
 using System.IO;
 using System.Xml;
-using Portable.Xaml;
 
-namespace Core2D.Xaml.Serializer
+namespace Serializer.Xaml
 {
     internal static class CoreXamlReader
     {
-        internal static readonly XamlSchemaContext context = new XamlSchemaContext();
+        internal static readonly XamlSchemaContext context = new CoreXamlSchemaContext();
 
         private static object Load(XamlXmlReader reader)
         {

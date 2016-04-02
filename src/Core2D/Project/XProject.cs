@@ -1,11 +1,11 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Attributes;
 using Core2D.Data.Database;
 using Core2D.History;
 using Core2D.Shape;
 using Core2D.Shapes;
 using Core2D.Style;
-using Portable.Xaml.Markup;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -15,8 +15,6 @@ namespace Core2D.Project
     /// <summary>
     /// Project model.
     /// </summary>
-    [ContentProperty(nameof(Documents))]
-    [RuntimeNameProperty(nameof(Name))]
     public sealed partial class XProject : XSelectable
     {
         private string _name;
@@ -38,6 +36,7 @@ namespace Core2D.Project
         /// <summary>
         /// Gets or sets project name.
         /// </summary>
+        [Name]
         public string Name
         {
             get { return _name; }
@@ -101,6 +100,7 @@ namespace Core2D.Project
         /// <summary>
         /// Gets or sets project documents.
         /// </summary>
+        [Content]
         public ImmutableArray<XDocument> Documents
         {
             get { return _documents; }

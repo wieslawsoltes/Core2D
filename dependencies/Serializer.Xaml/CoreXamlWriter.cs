@@ -4,11 +4,11 @@ using System.IO;
 using System.Xml;
 using Portable.Xaml;
 
-namespace Core2D.Xaml.Serializer
+namespace Serializer.Xaml
 {
     internal static class CoreXamlWriter
     {
-        internal static readonly XamlSchemaContext context = new XamlSchemaContext();
+        internal static readonly XamlSchemaContext context = new CoreXamlSchemaContext();
 
         private static void Save(XamlXmlWriter writer, object instance)
         {

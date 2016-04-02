@@ -36,6 +36,8 @@
     <DocumentationFile>bin\Release\Core2D.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Attributes\ContentAttribute.cs" />
+    <Compile Include="Attributes\NameAttribute.cs" />
     <Compile Include="Editor\Interfaces\IEditorApplication.cs" />
     <Compile Include="Editor\Bounds\LineBounds.cs" />
     <Compile Include="Editor\Bounds\RectangleBounds.cs" />
@@ -181,19 +183,8 @@
     <Compile Include="Collections\XShapes.cs" />
     <Compile Include="Collections\XStyles.cs" />
     <Compile Include="Collections\XTemplates.cs" />
-    <Compile Include="Xaml\Converters\ArgbColorTypeConverter.cs" />
-    <Compile Include="Xaml\Converters\FontStyleTypeConverter.cs" />
-    <Compile Include="Xaml\Converters\ShapeStateTypeConverter.cs" />
-    <Compile Include="Xaml\Converters\XPathGeometryTypeConverter.cs" />
-    <Compile Include="Xaml\Serializer\CoreXamlReader.cs" />
-    <Compile Include="Xaml\Serializer\CoreXamlSerializer.cs" />
-    <Compile Include="Xaml\Serializer\CoreXamlWriter.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Portable.Xaml, Version=0.13.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Portable.Xaml.0.13.0\lib\portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10\Portable.Xaml.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System.Collections.Immutable, Version=1.1.37.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\..\packages\System.Collections.Immutable.1.1.37\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
       <Private>True</Private>

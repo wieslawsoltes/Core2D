@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Portable.Xaml.Markup;
+using Core2D.Attributes;
 using System;
 
 namespace Core2D.Data.Database
@@ -8,7 +8,6 @@ namespace Core2D.Data.Database
     /// <summary>
     /// Database column.
     /// </summary>
-    [ContentProperty(nameof(Name))]
     public sealed class XColumn : ObservableObject
     {
         private Guid _id;
@@ -29,6 +28,7 @@ namespace Core2D.Data.Database
         /// <summary>
         /// Gets or sets column name.
         /// </summary>
+        [Content]
         public string Name
         {
             get { return _name; }

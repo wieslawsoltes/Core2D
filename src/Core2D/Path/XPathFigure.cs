@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Attributes;
 using Core2D.Shapes;
-using Portable.Xaml.Markup;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +11,6 @@ namespace Core2D.Path
     /// <summary>
     /// Path figure.
     /// </summary>
-    [ContentProperty(nameof(Segments))]
     public sealed class XPathFigure
     {
         /// <summary>
@@ -22,6 +21,7 @@ namespace Core2D.Path
         /// <summary>
         /// Gets or sets segments collection.
         /// </summary>
+        [Content]
         public IList<XPathSegment> Segments { get; set; }
 
         /// <summary>
