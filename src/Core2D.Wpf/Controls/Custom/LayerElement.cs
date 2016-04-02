@@ -13,7 +13,7 @@ namespace Core2D.Wpf.Controls.Custom
     /// <summary>
     /// The custom layer control.
     /// </summary>
-    public sealed class LayerElement : FrameworkElement
+    public class LayerElement : FrameworkElement
     {
         /// <summary>
         /// Gets the <see cref="XContext"/> from <see cref="DependencyProperty"/> object.

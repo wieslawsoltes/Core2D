@@ -8,7 +8,7 @@ namespace Core2D.Shape
     /// <summary>
     /// Shape state.
     /// </summary>
-    public sealed class ShapeState : ObservableObject
+    public class ShapeState : ObservableObject
     {
         private ShapeStateFlags _flags;
 

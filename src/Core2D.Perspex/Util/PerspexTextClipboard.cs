@@ -8,7 +8,7 @@ namespace Core2D.Perspex
     /// <summary>
     /// Wrapper class for App.Current.Clipboard clipboard class.
     /// </summary>
-    public sealed class PerspexTextClipboard : ITextClipboard
+    public class PerspexTextClipboard : ITextClipboard
     {
         /// <summary>
         /// Set clipboard text.

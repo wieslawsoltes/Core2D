@@ -6,7 +6,7 @@ namespace Core2D.Style
     /// <summary>
     /// Defines a set of predefined colors.
     /// </summary>
-    public sealed class Colors
+    public class Colors
     {
         /// <summary>
         /// Gets a color with an ARGB value of #fff0f8ff.

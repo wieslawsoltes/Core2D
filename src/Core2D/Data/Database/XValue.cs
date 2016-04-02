@@ -7,7 +7,7 @@ namespace Core2D.Data.Database
     /// <summary>
     /// Record value.
     /// </summary>
-    public sealed class XValue : ObservableObject
+    public class XValue : ObservableObject
     {
         private string _content;
 

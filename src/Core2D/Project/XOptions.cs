@@ -10,7 +10,7 @@ namespace Core2D.Project
     /// <summary>
     /// Project options.
     /// </summary>
-    public sealed class XOptions : ObservableObject
+    public class XOptions : ObservableObject
     {
         private bool _snapToGrid = true;
         private double _snapX = 15.0;

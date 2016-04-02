@@ -8,7 +8,7 @@ namespace Core2D.Renderer
     /// <summary>
     /// Shape renderer state.
     /// </summary>
-    public sealed class ShapeRendererState : ObservableObject
+    public class ShapeRendererState : ObservableObject
     {
         private double _panX;
         private double _panY;

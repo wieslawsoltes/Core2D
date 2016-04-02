@@ -8,7 +8,7 @@ namespace Core2D.Project
     /// <summary>
     /// Page container.
     /// </summary>
-    public sealed class XPage : XContainer
+    public class XPage : XContainer
     {
         private XContext _data;
         private bool _isExpanded = false;

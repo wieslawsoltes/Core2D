@@ -14,7 +14,7 @@ namespace Core2D.Editor
     /// <summary>
     /// Project property changes observer.
     /// </summary>
-    public sealed class ProjectObserver : IDisposable
+    public class ProjectObserver : IDisposable
     {
         private readonly ProjectEditor _editor;
         private readonly Action _invalidateContainer;

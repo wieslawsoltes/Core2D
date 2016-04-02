@@ -12,7 +12,7 @@ namespace Core2D.Editor.Factories
     /// <summary>
     /// Factory used to create new projects, documents and containers.
     /// </summary>
-    public sealed class ProjectFactory : IProjectFactory
+    public class ProjectFactory : IProjectFactory
     {
         /// <summary>
         /// Creates a new instance of the <see cref="XLibrary{ShapeStyle}"/> class.

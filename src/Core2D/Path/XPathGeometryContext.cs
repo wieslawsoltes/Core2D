@@ -10,7 +10,7 @@ namespace Core2D.Path
     /// <summary>
     /// Path geometry context.
     /// </summary>
-    public sealed class XPathGeometryContext : XGeometryContext
+    public class XPathGeometryContext : XGeometryContext
     {
         private XPathGeometry _geometry;
         private XPathFigure _currentFigure;

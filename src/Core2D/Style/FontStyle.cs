@@ -8,7 +8,7 @@ namespace Core2D.Style
     /// <summary>
     /// Specifies style flags proxy information applied to text.
     /// </summary>
-    public sealed class FontStyle : ObservableObject
+    public class FontStyle : ObservableObject
     {
         private FontStyleFlags _flags;
 

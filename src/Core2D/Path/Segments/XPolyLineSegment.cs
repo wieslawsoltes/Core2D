@@ -9,7 +9,7 @@ namespace Core2D.Path.Segments
     /// <summary>
     /// Poly line path segment.
     /// </summary>
-    public sealed class XPolyLineSegment : XPathSegment
+    public class XPolyLineSegment : XPathSegment
     {
         /// <summary>
         /// Gets or sets points array.

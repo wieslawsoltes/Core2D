@@ -11,7 +11,7 @@ namespace Core2D.Math.Sat
     /// <remarks>
     /// Based on pseudo code from http://www.codezealot.org/archives/55.
     /// </remarks>
-    public sealed class SeparatingAxisTheorem
+    public class SeparatingAxisTheorem
     {
         /// <summary>
         /// 

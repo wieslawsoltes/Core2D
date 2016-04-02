@@ -10,7 +10,7 @@ namespace Core2D.Perspex.Converters
     /// <summary>
     /// Converts a binding value object from <see cref="byte"/> to <see cref="string"/> and back from <see cref="string"/> to <see cref="byte"/>.
     /// </summary>
-    public sealed class ByteToStringConverter : IValueConverter
+    public class ByteToStringConverter : IValueConverter
     {
         /// <summary>
         /// Gets an instance of a <see cref="ByteToStringConverter"/>.

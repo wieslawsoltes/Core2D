@@ -8,7 +8,7 @@ namespace Core2D.Project
     /// <summary>
     /// Document model.
     /// </summary>
-    public sealed class XDocument : XSelectable
+    public class XDocument : XSelectable
     {
         private string _name;
         private bool _isExpanded = true;

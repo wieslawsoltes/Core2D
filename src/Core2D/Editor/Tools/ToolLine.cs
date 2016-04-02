@@ -10,7 +10,7 @@ namespace Core2D.Editor.Tools
     /// <summary>
     /// Helper class for <see cref="Tool.Line"/> editor.
     /// </summary>
-    public sealed class ToolLine : ToolBase
+    public class ToolLine : ToolBase
     {
         private ProjectEditor _editor;
         private ToolState _currentState = ToolState.None;

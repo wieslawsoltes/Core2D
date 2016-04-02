@@ -7,7 +7,7 @@ namespace Core2D.Data
     /// <summary>
     /// Data property.
     /// </summary>
-    public sealed class XProperty : ObservableObject
+    public class XProperty : ObservableObject
     {
         private string _name;
         private string _value;

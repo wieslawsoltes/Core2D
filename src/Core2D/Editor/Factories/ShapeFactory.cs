@@ -9,7 +9,7 @@ namespace Core2D.Editor.Factories
     /// <summary>
     /// Factory used to create shapes.
     /// </summary>
-    public sealed class ShapeFactory : IShapeFactory
+    public class ShapeFactory : IShapeFactory
     {
         private ProjectEditor _editor;
 

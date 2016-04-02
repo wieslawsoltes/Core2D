@@ -13,7 +13,7 @@ namespace Core2D.Project
     /// <summary>
     /// Project input/output.
     /// </summary>
-    public sealed partial class XProject
+    public partial class XProject
     {
         /// <summary>
         /// Project ProtoBuf data entry name.

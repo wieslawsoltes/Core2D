@@ -10,7 +10,7 @@ namespace Core2D.Perspex.Converters
     /// <summary>
     /// Converts a binding value object from <see cref="object"/> to <see cref="bool"/> True if value is not equal to null and <see cref="PerspexProperty.UnsetValue"/> otherwise return False.
     /// </summary>
-    public sealed class IsNotNullConverter : IValueConverter
+    public class IsNotNullConverter : IValueConverter
     {
         /// <summary>
         /// Gets an instance of a <see cref="IsNotNullConverter"/>.

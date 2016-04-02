@@ -10,7 +10,7 @@ namespace Core2D.Project
     /// <summary>
     /// Invalidate layer event arguments.
     /// </summary>
-    public sealed class InvalidateLayerEventArgs : EventArgs { }
+    public class InvalidateLayerEventArgs : EventArgs { }
 
     /// <summary>
     /// Invalidate layer event handler.
@@ -22,7 +22,7 @@ namespace Core2D.Project
     /// <summary>
     /// Container layer.
     /// </summary>
-    public sealed class XLayer : XSelectable
+    public class XLayer : XSelectable
     {
         /// <summary>
         /// Invalidate layer event.

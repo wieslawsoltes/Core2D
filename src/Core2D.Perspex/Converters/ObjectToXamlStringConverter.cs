@@ -12,7 +12,7 @@ namespace Core2D.Perspex.Converters
     /// <summary>
     /// Converts a binding value <see cref="object"/> <see cref="Type"/> to a xaml <see cref="string"/>.
     /// </summary>
-    public sealed class ObjectToXamlStringConverter : IValueConverter
+    public class ObjectToXamlStringConverter : IValueConverter
     {
         private static ITextSerializer XamlSerializer = new PortableXamlSerializer();
 

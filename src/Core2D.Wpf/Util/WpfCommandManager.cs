@@ -10,7 +10,7 @@ namespace Core2D.Wpf
     /// <summary>
     /// Editor commands manager.
     /// </summary>
-    public sealed class WpfCommandManager : CommandManager
+    public class WpfCommandManager : CommandManager
     {
         /// <inheritdoc/>
         public override void RegisterCommands()

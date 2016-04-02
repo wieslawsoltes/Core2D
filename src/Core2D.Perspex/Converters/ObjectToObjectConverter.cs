@@ -9,7 +9,7 @@ namespace Core2D.Perspex.Converters
     /// <summary>
     /// Pass-through a binding value <see cref="object"/> as <see cref="object"/> to avoid <see cref="PerspexProperty.UnsetValue"/>.
     /// </summary>
-    public sealed class ObjectToObjectConverter : IValueConverter
+    public class ObjectToObjectConverter : IValueConverter
     {
         /// <summary>
         /// Gets an instance of a <see cref="ObjectToObjectConverter"/>.

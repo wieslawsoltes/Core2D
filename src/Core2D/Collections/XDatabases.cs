@@ -9,7 +9,7 @@ namespace Core2D.Collections
     /// <summary>
     /// Observable <see cref="XDatabase"/> collection.
     /// </summary>
-    public sealed class XDatabases : ObservableResource
+    public class XDatabases : ObservableResource
     {
         /// <summary>
         /// Gets or sets resource name.

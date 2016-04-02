@@ -11,7 +11,7 @@ namespace Core2D.Perspex.Converters
     /// <summary>
     /// Converts multi-binding inputs to a final value.
     /// </summary>
-    public sealed class ObjectEqualityMultiConverter : IMultiValueConverter
+    public class ObjectEqualityMultiConverter : IMultiValueConverter
     {
         /// <summary>
         /// Gets an instance of a <see cref="ObjectEqualityMultiConverter"/>.

@@ -7,7 +7,7 @@ namespace Core2D.Editor.Recent
     /// <summary>
     /// Recent files.
     /// </summary>
-    public sealed class Recents : ObservableObject
+    public class Recents : ObservableObject
     {
         private ImmutableArray<RecentFile> _files = ImmutableArray.Create<RecentFile>();
         private RecentFile _current = default(RecentFile);

@@ -8,7 +8,7 @@ namespace Core2D.Path.Segments
     /// <summary>
     /// Line path segment.
     /// </summary>
-    public sealed class XLineSegment : XPathSegment
+    public class XLineSegment : XPathSegment
     {
         /// <summary>
         /// Gets or sets end point.

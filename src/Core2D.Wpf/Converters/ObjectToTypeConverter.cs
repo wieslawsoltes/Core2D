@@ -10,7 +10,7 @@ namespace Core2D.Wpf.Converters
     /// <summary>
     /// Object to Type value converter.
     /// </summary>
-    public sealed class ObjectToTypeConverter : IValueConverter
+    public class ObjectToTypeConverter : IValueConverter
     {
         /// <summary>
         /// Converts a value.

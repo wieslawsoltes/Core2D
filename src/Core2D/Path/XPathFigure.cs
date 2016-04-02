@@ -11,7 +11,7 @@ namespace Core2D.Path
     /// <summary>
     /// Path figure.
     /// </summary>
-    public sealed class XPathFigure
+    public class XPathFigure
     {
         /// <summary>
         /// Gets or sets start point.

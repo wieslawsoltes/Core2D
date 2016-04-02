@@ -15,7 +15,7 @@ namespace Core2D.Editor.Tools
     /// <summary>
     /// Helper class for <see cref="Tool.Path"/> editor.
     /// </summary>
-    public sealed class ToolPath : ToolBase
+    public class ToolPath : ToolBase
     {
         private ProjectEditor _editor;
         private ToolState _currentState = ToolState.None;

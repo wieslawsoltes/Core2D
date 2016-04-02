@@ -10,7 +10,7 @@ namespace Core2D.Data.Database
     /// <summary>
     /// Records database.
     /// </summary>
-    public sealed class XDatabase : ObservableObject
+    public class XDatabase : ObservableObject
     {
         private string _name;
         private string _idColumnName;

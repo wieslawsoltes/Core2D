@@ -7,7 +7,7 @@ namespace Core2D.Editor.Input
     /// <summary>
     /// Input command.
     /// </summary>
-    public sealed class Command : ICoreCommand
+    public class Command : ICoreCommand
     {
         private Action _execute;
         private Func<bool> _canExecute;

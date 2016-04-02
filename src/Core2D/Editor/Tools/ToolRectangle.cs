@@ -10,7 +10,7 @@ namespace Core2D.Editor.Tools
     /// <summary>
     /// Helper class for <see cref="Tool.Rectangle"/> editor.
     /// </summary>
-    public sealed class ToolRectangle : ToolBase
+    public class ToolRectangle : ToolBase
     {
         private ProjectEditor _editor;
         private ToolState _currentState = ToolState.None;

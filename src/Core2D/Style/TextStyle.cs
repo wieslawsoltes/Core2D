@@ -7,7 +7,7 @@ namespace Core2D.Style
     /// <summary>
     /// Text style.
     /// </summary>
-    public sealed class TextStyle : ObservableObject
+    public class TextStyle : ObservableObject
     {
         private string _name;
         private string _fontName;
