@@ -1,8 +1,8 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Attributes;
 using Core2D.Shape;
 using Core2D.Style;
-using Portable.Xaml.Markup;
 using System.Collections.Immutable;
 
 namespace Core2D.Project
@@ -10,8 +10,6 @@ namespace Core2D.Project
     /// <summary>
     /// Container base class.
     /// </summary>
-    [ContentProperty(nameof(Layers))]
-    [RuntimeNameProperty(nameof(Name))]
     public abstract class XContainer : XSelectable
     {
         private string _name;
@@ -28,6 +26,7 @@ namespace Core2D.Project
         /// <summary>
         /// Gets or sets container name.
         /// </summary>
+        [Name]
         public string Name
         {
             get { return _name; }
@@ -64,6 +63,7 @@ namespace Core2D.Project
         /// <summary>
         /// Gets or sets container layers.
         /// </summary>
+        [Content]
         public ImmutableArray<XLayer> Layers
         {
             get { return _layers; }

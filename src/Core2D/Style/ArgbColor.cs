@@ -1,7 +1,5 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Core2D.Xaml.Converters;
-using Portable.Xaml.ComponentModel;
 using System;
 using System.Globalization;
 using System.Linq;
@@ -12,7 +10,6 @@ namespace Core2D.Style
     /// <summary>
     /// Color definition using alpha, red, green and blue channels.
     /// </summary>
-    [TypeConverter(typeof(ArgbColorTypeConverter))]
     public sealed class ArgbColor : ObservableObject
     {
         private byte _a;

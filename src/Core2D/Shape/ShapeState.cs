@@ -1,8 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Core2D.Xaml.Converters;
-using Portable.Xaml.ComponentModel;
-using Portable.Xaml.Markup;
+using Core2D.Attributes;
 using System;
 
 namespace Core2D.Shape
@@ -10,8 +8,6 @@ namespace Core2D.Shape
     /// <summary>
     /// Shape state.
     /// </summary>
-    [ContentProperty(nameof(Flags))]
-    [TypeConverter(typeof(ShapeStateTypeConverter))]
     public sealed class ShapeState : ObservableObject
     {
         private ShapeStateFlags _flags;
@@ -19,6 +15,7 @@ namespace Core2D.Shape
         /// <summary>
         /// Gets or sets shape state flags.
         /// </summary>
+        [Content]
         public ShapeStateFlags Flags
         {
             get { return _flags; }

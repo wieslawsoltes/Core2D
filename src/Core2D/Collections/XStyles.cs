@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Attributes;
 using Core2D.Style;
-using Portable.Xaml.Markup;
 using System.Collections.Immutable;
 
 namespace Core2D.Collections
@@ -9,18 +9,18 @@ namespace Core2D.Collections
     /// <summary>
     /// Observable <see cref="ShapeStyle"/> collection.
     /// </summary>
-    [ContentProperty(nameof(Children))]
-    [RuntimeNameProperty(nameof(Name))]
     public sealed class XStyles : ObservableResource
     {
         /// <summary>
         /// Gets or sets resource name.
         /// </summary>
+        [Name]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or sets children collection.
         /// </summary>
+        [Content]
         public ImmutableArray<ShapeStyle> Children { get; set; }
 
         /// <summary>

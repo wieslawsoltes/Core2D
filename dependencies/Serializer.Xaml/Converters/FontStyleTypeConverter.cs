@@ -5,12 +5,12 @@ using Portable.Xaml.ComponentModel;
 using System;
 using System.Globalization;
 
-namespace Core2D.Xaml.Converters
+namespace Serializer.Xaml.Converters
 {
     /// <summary>
     /// Defines <see cref="FontStyle"/> type converter.
     /// </summary>
-    public sealed class FontStyleTypeConverter : TypeConverter
+    internal class FontStyleTypeConverter : TypeConverter
     {
         /// <inheritdoc/>
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)

@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Attributes;
 using Core2D.Shape;
-using Portable.Xaml.Markup;
 using System;
 using System.Collections.Immutable;
 
@@ -22,8 +22,6 @@ namespace Core2D.Project
     /// <summary>
     /// Container layer.
     /// </summary>
-    [ContentProperty(nameof(Shapes))]
-    [RuntimeNameProperty(nameof(Name))]
     public sealed class XLayer : XSelectable
     {
         /// <summary>
@@ -39,6 +37,7 @@ namespace Core2D.Project
         /// <summary>
         /// Gets or sets layer name.
         /// </summary>
+        [Name]
         public string Name
         {
             get { return _name; }
@@ -66,6 +65,7 @@ namespace Core2D.Project
         /// <summary>
         /// Gets or sets layer shapes.
         /// </summary>
+        [Content]
         public ImmutableArray<BaseShape> Shapes
         {
             get { return _shapes; }

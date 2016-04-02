@@ -1,17 +1,16 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Core2D.Path;
-using Core2D.Path.Parser;
+using Core2D.Style;
 using Portable.Xaml.ComponentModel;
 using System;
 using System.Globalization;
 
-namespace Core2D.Xaml.Converters
+namespace Serializer.Xaml.Converters
 {
     /// <summary>
-    /// Defines <see cref="XPathGeometry"/> type converter.
+    /// Defines <see cref="ArgbColor"/> type converter.
     /// </summary>
-    public sealed class XPathGeometryTypeConverter : TypeConverter
+    internal class ArgbColorTypeConverter : TypeConverter
     {
         /// <inheritdoc/>
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
@@ -28,16 +27,16 @@ namespace Core2D.Xaml.Converters
         /// <inheritdoc/>
         public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
         {
-            return XPathGeometryParser.Parse((string)value);
+            return ArgbColor.Parse((string)value);
         }
 
         /// <inheritdoc/>
         public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
         {
-            var geometry = value as XPathGeometry;
-            if (geometry != null)
+            var color = value as ArgbColor;
+            if (color != null)
             {
-                return geometry.ToString();
+                return ArgbColor.ToHtml(color);
             }
             throw new NotSupportedException();
         }

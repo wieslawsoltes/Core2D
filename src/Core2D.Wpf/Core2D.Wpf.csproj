@@ -592,7 +592,7 @@
       <Name>Serializer.ProtoBuf</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\dependencies\Serializer.Xaml\Serializer.Xaml.csproj">
-      <Project>{5b85143e-a53c-4126-8666-031a3172efdf}</Project>
+      <Project>{5B85143E-A53C-4126-8666-031A3172EFDF}</Project>
       <Name>Serializer.Xaml</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\dependencies\TextFieldReader.CsvHelper\TextFieldReader.CsvHelper.csproj">

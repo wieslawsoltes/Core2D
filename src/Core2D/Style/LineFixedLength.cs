@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Attributes;
 using Core2D.Shape;
-using Portable.Xaml.Markup;
 using System;
 
 namespace Core2D.Style
@@ -9,7 +9,6 @@ namespace Core2D.Style
     /// <summary>
     /// Line fixed length.
     /// </summary>
-    [ContentProperty(nameof(Flags))]
     public sealed class LineFixedLength : ObservableObject
     {
         private LineFixedLengthFlags _flags;
@@ -20,6 +19,7 @@ namespace Core2D.Style
         /// <summary>
         /// Get or sets line fixed length flags.
         /// </summary>
+        [Content]
         public LineFixedLengthFlags Flags
         {
             get { return _flags; }

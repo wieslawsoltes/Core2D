@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Portable.Xaml.Markup;
+using Core2D.Attributes;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -10,7 +10,6 @@ namespace Core2D.Data.Database
     /// <summary>
     /// Records database.
     /// </summary>
-    [ContentProperty(nameof(Records))]
     public sealed class XDatabase : ObservableObject
     {
         private string _name;
@@ -64,6 +63,7 @@ namespace Core2D.Data.Database
         /// <summary>
         /// Gets or sets database records.
         /// </summary>
+        [Content]
         public ImmutableArray<XRecord> Records
         {
             get { return _records; }

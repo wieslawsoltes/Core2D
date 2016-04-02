@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Attributes;
 using Core2D.Shapes;
-using Portable.Xaml.Markup;
 using System.Collections.Generic;
 
 namespace Core2D.Path.Segments
@@ -9,12 +9,12 @@ namespace Core2D.Path.Segments
     /// <summary>
     /// Poly cubic bezier path segment.
     /// </summary>
-    [ContentProperty(nameof(Points))]
     public sealed class XPolyCubicBezierSegment : XPathSegment
     {
         /// <summary>
         /// Gets or sets points array.
         /// </summary>
+        [Content]
         public IList<XPoint> Points { get; set; }
 
         /// <summary>

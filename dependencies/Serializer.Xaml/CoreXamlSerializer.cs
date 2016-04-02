@@ -5,12 +5,12 @@ using System.IO;
 using System.Text;
 using System.Xml;
 
-namespace Core2D.Xaml.Serializer
+namespace Serializer.Xaml
 {
     /// <summary>
     /// Xaml serializer.
     /// </summary>
-    public static class CoreXamlSerializer
+    internal static class CoreXamlSerializer
     {
         internal static readonly XmlWriterSettings settings = new XmlWriterSettings()
         {
