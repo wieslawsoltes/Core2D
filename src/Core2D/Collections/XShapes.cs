@@ -9,7 +9,7 @@ namespace Core2D.Collections
     /// <summary>
     /// Observable <see cref="BaseShape"/> collection.
     /// </summary>
-    public sealed class XShapes : ObservableResource
+    public class XShapes : ObservableResource
     {
         /// <summary>
         /// Gets or sets resource name.

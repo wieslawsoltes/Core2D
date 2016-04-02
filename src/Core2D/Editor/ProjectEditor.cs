@@ -30,7 +30,7 @@ namespace Core2D.Editor
     /// <summary>
     /// Project editor.
     /// </summary>
-    public sealed class ProjectEditor : ObservableObject
+    public class ProjectEditor : ObservableObject
     {
         private IEditorApplication _application;
         private ILog _log;

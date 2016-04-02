@@ -10,7 +10,7 @@ namespace Core2D.Editor.Tools
     /// <summary>
     /// Helper class for <see cref="Tool.Ellipse"/> editor.
     /// </summary>
-    public sealed class ToolEllipse : ToolBase
+    public class ToolEllipse : ToolBase
     {
         private ProjectEditor _editor;
         private ToolState _currentState = ToolState.None;

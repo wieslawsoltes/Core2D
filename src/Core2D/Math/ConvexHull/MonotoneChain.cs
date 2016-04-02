@@ -11,7 +11,7 @@ namespace Core2D.Math.ConvexHull
     /// http://en.wikibooks.org/wiki/Algorithm_Implementation/Geometry/Convex_hull/Monotone_chain
     /// Asymptotic complexity O(n log n).
     /// </remarks>
-    public sealed class MonotoneChain
+    public class MonotoneChain
     {
         /// <summary>
         /// 2D cross product of OA and OB vectors, i.e. z-component of their 3D cross product.

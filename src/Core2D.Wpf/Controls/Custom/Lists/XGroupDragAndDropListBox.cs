@@ -9,7 +9,7 @@ namespace Core2D.Wpf.Controls.Custom.Lists
     /// <summary>
     /// The <see cref="ListBox"/> control for <see cref="XGroup"/> items with drag and drop support.
     /// </summary>
-    public sealed class XGroupDragAndDropListBox : DragAndDropListBox<XGroup>
+    public class XGroupDragAndDropListBox : DragAndDropListBox<XGroup>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="XGroupDragAndDropListBox"/> class.

@@ -10,7 +10,7 @@ namespace Core2D.Style
     /// <summary>
     /// Color definition using alpha, red, green and blue channels.
     /// </summary>
-    public sealed class ArgbColor : ObservableObject
+    public class ArgbColor : ObservableObject
     {
         private byte _a;
         private byte _r;

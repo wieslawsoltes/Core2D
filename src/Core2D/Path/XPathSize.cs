@@ -6,7 +6,7 @@ namespace Core2D.Path
     /// <summary>
     /// Path size.
     /// </summary>
-    public sealed class XPathSize
+    public class XPathSize
     {
         /// <summary>
         /// Gets or sets width value.

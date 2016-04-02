@@ -8,7 +8,7 @@ namespace Core2D.Path.Segments
     /// <summary>
     /// Cubic bezier path segment.
     /// </summary>
-    public sealed class XCubicBezierSegment : XPathSegment
+    public class XCubicBezierSegment : XPathSegment
     {
         /// <summary>
         /// Gets or sets first control point.

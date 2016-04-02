@@ -9,7 +9,7 @@ namespace Core2D.Collections
     /// <summary>
     /// Observable <see cref="XTemplate"/> collection.
     /// </summary>
-    public sealed class XTemplates : ObservableResource
+    public class XTemplates : ObservableResource
     {
         /// <summary>
         /// Gets or sets resource name.

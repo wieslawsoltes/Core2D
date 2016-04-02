@@ -11,7 +11,7 @@ namespace Core2D.Path.Parser
     /// <summary>
     /// Parser for SVG path geometry http://www.w3.org/TR/SVG11/paths.html.
     /// </summary>
-    public sealed class SvgToXPathGeometryParser
+    public class SvgToXPathGeometryParser
     {
         private const bool _allowSign = true;
         private const bool _allowComma = true;

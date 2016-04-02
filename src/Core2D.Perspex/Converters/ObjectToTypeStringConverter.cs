@@ -11,7 +11,7 @@ namespace Core2D.Perspex.Converters
     /// <summary>
     /// Converts a binding value <see cref="object"/> <see cref="Type"/> to a <see cref="string"/>.
     /// </summary>
-    public sealed class ObjectToTypeStringConverter : IValueConverter
+    public class ObjectToTypeStringConverter : IValueConverter
     {
         /// <summary>
         /// Gets an instance of a <see cref="ObjectToTypeStringConverter"/>.

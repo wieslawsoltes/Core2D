@@ -8,7 +8,7 @@ namespace Core2D.Data.Database
     /// <summary>
     /// Database column.
     /// </summary>
-    public sealed class XColumn : ObservableObject
+    public class XColumn : ObservableObject
     {
         private Guid _id;
         private string _name;

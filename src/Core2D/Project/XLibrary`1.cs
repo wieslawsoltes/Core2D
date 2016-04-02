@@ -10,7 +10,7 @@ namespace Core2D.Project
     /// <summary>
     /// Named items library.
     /// </summary>
-    public sealed class XLibrary<T> : ObservableObject, ILibrary
+    public class XLibrary<T> : ObservableObject, ILibrary
     {
         private string _name;
         private ImmutableArray<T> _items;

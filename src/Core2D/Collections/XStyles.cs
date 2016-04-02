@@ -9,7 +9,7 @@ namespace Core2D.Collections
     /// <summary>
     /// Observable <see cref="ShapeStyle"/> collection.
     /// </summary>
-    public sealed class XStyles : ObservableResource
+    public class XStyles : ObservableResource
     {
         /// <summary>
         /// Gets or sets resource name.

@@ -9,7 +9,7 @@ namespace Core2D.Wpf.Controls.Custom.Lists
     /// <summary>
     /// The <see cref="ListBox"/> control for <see cref="ShapeStyle"/> items with drag and drop support.
     /// </summary>
-    public sealed class ShapeStyleDragAndDropListBox : DragAndDropListBox<ShapeStyle>
+    public class ShapeStyleDragAndDropListBox : DragAndDropListBox<ShapeStyle>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ShapeStyleDragAndDropListBox"/> class.

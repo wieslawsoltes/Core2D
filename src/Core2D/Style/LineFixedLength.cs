@@ -9,7 +9,7 @@ namespace Core2D.Style
     /// <summary>
     /// Line fixed length.
     /// </summary>
-    public sealed class LineFixedLength : ObservableObject
+    public class LineFixedLength : ObservableObject
     {
         private LineFixedLengthFlags _flags;
         private ShapeState _startTrigger;

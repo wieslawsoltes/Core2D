@@ -9,7 +9,7 @@ namespace Core2D.Path.Segments
     /// <summary>
     /// Poly cubic bezier path segment.
     /// </summary>
-    public sealed class XPolyCubicBezierSegment : XPathSegment
+    public class XPolyCubicBezierSegment : XPathSegment
     {
         /// <summary>
         /// Gets or sets points array.

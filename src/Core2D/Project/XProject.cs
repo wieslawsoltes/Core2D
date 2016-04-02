@@ -15,7 +15,7 @@ namespace Core2D.Project
     /// <summary>
     /// Project model.
     /// </summary>
-    public sealed partial class XProject : XSelectable
+    public partial class XProject : XSelectable
     {
         private string _name;
         private XOptions _options;

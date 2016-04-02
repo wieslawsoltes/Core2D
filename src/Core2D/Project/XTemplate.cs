@@ -8,7 +8,7 @@ namespace Core2D.Project
     /// <summary>
     /// Template container.
     /// </summary>
-    public sealed class XTemplate : XContainer
+    public class XTemplate : XContainer
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="XTemplate"/> class.

@@ -9,7 +9,7 @@ namespace Core2D.Path
     /// <summary>
     /// Path geometry.
     /// </summary>
-    public sealed class XPathGeometry
+    public class XPathGeometry
     {
         /// <summary>
         /// Gets or sets figures collection.

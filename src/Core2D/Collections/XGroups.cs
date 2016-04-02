@@ -9,7 +9,7 @@ namespace Core2D.Collections
     /// <summary>
     /// Observable <see cref="XGroup"/> collection.
     /// </summary>
-    public sealed class XGroups : ObservableResource
+    public class XGroups : ObservableResource
     {
         /// <summary>
         /// Gets or sets resource name.

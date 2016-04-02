@@ -13,7 +13,7 @@ namespace Core2D.Editor.Tools
     /// <summary>
     /// Helper class for <see cref="Tool.Selection"/> editor.
     /// </summary>
-    public sealed class ToolSelection : ToolBase
+    public class ToolSelection : ToolBase
     {
         private ProjectEditor _editor;
         private ToolState _currentState = ToolState.None;

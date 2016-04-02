@@ -10,7 +10,7 @@ namespace Core2D.Renderer
     /// </summary>
     /// <typeparam name="TKey">The input type.</typeparam>
     /// <typeparam name="TValue">The output type.</typeparam>
-    public sealed class Cache<TKey, TValue>
+    public class Cache<TKey, TValue>
         where TKey : class
         where TValue : class
     {

@@ -6,7 +6,7 @@ namespace Core2D.Editor.Recent
     /// <summary>
     /// Recent file.
     /// </summary>
-    public sealed class RecentFile : ObservableObject
+    public class RecentFile : ObservableObject
     {
         private string _name;
         private string _path;

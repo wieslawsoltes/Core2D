@@ -10,7 +10,7 @@ namespace Core2D.Data.Database
     /// <summary>
     /// Database record.
     /// </summary>
-    public sealed class XRecord : ObservableObject
+    public class XRecord : ObservableObject
     {
         private Guid _id;
         private ImmutableArray<XColumn> _columns;

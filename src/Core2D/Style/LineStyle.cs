@@ -7,7 +7,7 @@ namespace Core2D.Style
     /// <summary>
     /// Line style.
     /// </summary>
-    public sealed class LineStyle : ObservableObject
+    public class LineStyle : ObservableObject
     {
         private string _name;
         private LineFixedLength _fixedLength;

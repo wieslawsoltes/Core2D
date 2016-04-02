@@ -9,7 +9,7 @@ namespace Core2D.Perspex
     /// <summary>
     /// File system implementation using System.IO.
     /// </summary>
-    public sealed class PerspexFileSystem : IFileSystem
+    public class PerspexFileSystem : IFileSystem
     {
         /// <inheritdoc/>
         public bool Exists(string path)

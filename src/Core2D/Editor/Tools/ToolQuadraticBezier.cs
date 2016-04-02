@@ -11,7 +11,7 @@ namespace Core2D.Editor.Tools
     /// <summary>
     /// Helper class for <see cref="Tool.QuadraticBezier"/> editor.
     /// </summary>
-    public sealed class ToolQuadraticBezier : ToolBase
+    public class ToolQuadraticBezier : ToolBase
     {
         private ProjectEditor _editor;
         private ToolState _currentState = ToolState.None;

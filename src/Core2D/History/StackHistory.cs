@@ -8,7 +8,7 @@ namespace Core2D.History
     /// <summary>
     /// Undo/redo stack based action history.
     /// </summary>
-    public sealed class StackHistory : IHistory
+    public class StackHistory : IHistory
     {
         private Stack<UndoRedo> _undos = new Stack<UndoRedo>();
         private Stack<UndoRedo> _redos = new Stack<UndoRedo>();

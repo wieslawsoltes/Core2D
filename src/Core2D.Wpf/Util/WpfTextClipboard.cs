@@ -9,7 +9,7 @@ namespace Core2D.Wpf
     /// <summary>
     /// Wrapper class for <see cref="System.Windows.Clipboard"/> clipboard class.
     /// </summary>
-    public sealed class WpfTextClipboard : ITextClipboard
+    public class WpfTextClipboard : ITextClipboard
     {
         /// <summary>
         /// Set clipboard text.
