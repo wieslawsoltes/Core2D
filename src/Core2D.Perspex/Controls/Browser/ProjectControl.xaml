@@ -16,89 +16,116 @@
              Design.Width="600" Design.Height="600">
     <Grid ColumnDefinitions="250,Auto,*" RowDefinitions="*">
         <TreeView Name="project" Classes="browser" Grid.Column="0" Grid.Row="0" Margin="3,3,0,3">
-            <TreeView.Styles>
-                <Style Selector="TreeViewItem">
-                    <Setter Property="IsExpanded" Value="False"/>
-                </Style>
-            </TreeView.Styles>
-            <!-- Styles -->
-            <TreeViewItem Header="Styles" Items="{Binding Project.StyleLibraries, Mode=TwoWay}">
-                <TreeViewItem.DataTemplates>
-                    <TreeDataTemplate DataType="Project:ILibrary" ItemsSource="{Binding Items, Mode=TwoWay}">
-                        <TextBlock Text="{Binding Name, Mode=OneWay}" Classes="default"/>
-                    </TreeDataTemplate>
-                    <DataTemplate DataType="Style:ShapeStyle">
-                        <TextBlock Text="{Binding Name, Mode=OneWay}" Classes="default"/>
-                    </DataTemplate>
-                </TreeViewItem.DataTemplates>
-            </TreeViewItem>
-            <!-- Groups -->
-            <TreeViewItem Header="Groups" Items="{Binding Project.GroupLibraries, Mode=TwoWay}">
-                <TreeViewItem.DataTemplates>
-                    <TreeDataTemplate DataType="Project:ILibrary" ItemsSource="{Binding Items, Mode=TwoWay}">
-                        <TextBlock Text="{Binding Name, Mode=OneWay}" Classes="default"/>
-                    </TreeDataTemplate>
-                    <TreeDataTemplate DataType="Shapes:XGroup" ItemsSource="{Binding Resources, Mode=TwoWay}">
-                        <TextBlock Text="{Binding Name, Mode=OneWay}" Classes="default"/>
-                    </TreeDataTemplate>
-                    <DataTemplate DataType="Core:ObservableObject">
-                        <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="default"/>
-                    </DataTemplate>
-                </TreeViewItem.DataTemplates>
-            </TreeViewItem>
-            <!-- Databases -->
-            <TreeViewItem Header="Databases" Items="{Binding Project.Databases, Mode=TwoWay}">
-                <TreeViewItem.DataTemplates>
-                    <DataTemplate DataType="Database:XDatabase">
-                        <TextBlock Text="{Binding Name, Mode=OneWay}" Classes="default"/>
-                    </DataTemplate>
-                </TreeViewItem.DataTemplates>
-            </TreeViewItem>
-            <!-- Templates -->
-            <TreeViewItem Header="Templates" Items="{Binding Project.Templates, Mode=TwoWay}">
-                <TreeViewItem.DataTemplates>
-                    <TreeDataTemplate DataType="Project:XTemplate" ItemsSource="{Binding Layers, Mode=TwoWay}">
-                        <TextBlock Text="{Binding Name, Mode=OneWay}" Classes="default"/>
-                    </TreeDataTemplate>
-                    <TreeDataTemplate DataType="Project:XLayer" ItemsSource="{Binding Shapes, Mode=TwoWay}">
-                        <TextBlock Text="{Binding Name, Mode=OneWay}" Classes="default"/>
-                    </TreeDataTemplate>
-                    <TreeDataTemplate DataType="Shape:BaseShape" ItemsSource="{Binding Resources, Mode=TwoWay}">
-                        <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="default"/>
-                    </TreeDataTemplate>
-                    <DataTemplate DataType="Core:ObservableObject">
-                        <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="default"/>
-                    </DataTemplate>
-                </TreeViewItem.DataTemplates>
-            </TreeViewItem>
-            <!-- Documents -->
-            <TreeViewItem Header="Documents" Items="{Binding Project.Documents, Mode=TwoWay}">
-                <TreeViewItem.DataTemplates>
-                    <TreeDataTemplate DataType="Project:XDocument" ItemsSource="{Binding Pages, Mode=TwoWay}">
-                        <TextBlock Text="{Binding Name, Mode=OneWay}" Classes="default"/>
-                    </TreeDataTemplate>
-                    <TreeDataTemplate DataType="Project:XPage" ItemsSource="{Binding Layers, Mode=TwoWay}">
-                        <TextBlock Text="{Binding Name, Mode=OneWay}" Classes="default"/>
-                    </TreeDataTemplate>
-                    <TreeDataTemplate DataType="Project:XLayer" ItemsSource="{Binding Shapes, Mode=TwoWay}">
-                        <TextBlock Text="{Binding Name, Mode=OneWay}" Classes="default"/>
-                    </TreeDataTemplate>
-                    <TreeDataTemplate DataType="Shape:BaseShape" ItemsSource="{Binding Resources, Mode=TwoWay}">
-                        <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="default"/>
-                    </TreeDataTemplate>
-                    <DataTemplate DataType="Core:ObservableObject">
-                        <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="default"/>
-                    </DataTemplate>
-                </TreeViewItem.DataTemplates>
-            </TreeViewItem>
-            <!-- Current -->
-            <TreeViewItem Header="Current">
-                <TreeViewItem Header="Options" DataContext="{Binding Project.Options, Mode=TwoWay}"/>
-                <TreeViewItem Header="Shape" DataContext="{Binding Project.CurrentContainer.CurrentShape, Mode=TwoWay}"/>
-                <TreeViewItem Header="Data" DataContext="{Binding Renderers[0].State.SelectedShape.Data, Mode=TwoWay}"/>
-                <TreeViewItem Header="Style" DataContext="{Binding Project.CurrentStyleLibrary.Selected, Mode=TwoWay}"/>
-                <TreeViewItem Header="Container" DataContext="{Binding Project.CurrentContainer, Mode=TwoWay}"/>
-                <TreeViewItem Header="Template" DataContext="{Binding Project.CurrentTemplate, Mode=TwoWay}"/>
+            <TreeViewItem Header="Project" IsExpanded="True">
+                <!-- Styles -->
+                <TreeViewItem Header="Styles" Items="{Binding Project.StyleLibraries, Mode=TwoWay}">
+                    <TreeViewItem.Styles>
+                        <Style Selector="TreeViewItem">
+                            <Setter Property="IsExpanded" Value="False"/>
+                        </Style>
+                    </TreeViewItem.Styles>
+                    <TreeViewItem.DataTemplates>
+                        <TreeDataTemplate DataType="Project:ILibrary" ItemsSource="{Binding Items, Mode=TwoWay}">
+                            <TextBlock Text="{Binding Name, Mode=OneWay}" Classes="default"/>
+                        </TreeDataTemplate>
+                        <DataTemplate DataType="Style:ShapeStyle">
+                            <TextBlock Text="{Binding Name, Mode=OneWay}" Classes="default"/>
+                        </DataTemplate>
+                    </TreeViewItem.DataTemplates>
+                </TreeViewItem>
+                <!-- Groups -->
+                <TreeViewItem Header="Groups" Items="{Binding Project.GroupLibraries, Mode=TwoWay}">
+                    <TreeViewItem.Styles>
+                        <Style Selector="TreeViewItem">
+                            <Setter Property="IsExpanded" Value="False"/>
+                        </Style>
+                    </TreeViewItem.Styles>
+                    <TreeViewItem.DataTemplates>
+                        <TreeDataTemplate DataType="Project:ILibrary" ItemsSource="{Binding Items, Mode=TwoWay}">
+                            <TextBlock Text="{Binding Name, Mode=OneWay}" Classes="default"/>
+                        </TreeDataTemplate>
+                        <TreeDataTemplate DataType="Shapes:XGroup" ItemsSource="{Binding Resources, Mode=TwoWay}">
+                            <TextBlock Text="{Binding Name, Mode=OneWay}" Classes="default"/>
+                        </TreeDataTemplate>
+                        <DataTemplate DataType="Core:ObservableObject">
+                            <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="default"/>
+                        </DataTemplate>
+                    </TreeViewItem.DataTemplates>
+                </TreeViewItem>
+                <!-- Databases -->
+                <TreeViewItem Header="Databases" Items="{Binding Project.Databases, Mode=TwoWay}">
+                    <TreeViewItem.Styles>
+                        <Style Selector="TreeViewItem">
+                            <Setter Property="IsExpanded" Value="False"/>
+                        </Style>
+                    </TreeViewItem.Styles>
+                    <TreeViewItem.DataTemplates>
+                        <DataTemplate DataType="Database:XDatabase">
+                            <TextBlock Text="{Binding Name, Mode=OneWay}" Classes="default"/>
+                        </DataTemplate>
+                    </TreeViewItem.DataTemplates>
+                </TreeViewItem>
+                <!-- Templates -->
+                <TreeViewItem Header="Templates" Items="{Binding Project.Templates, Mode=TwoWay}">
+                    <TreeViewItem.Styles>
+                        <Style Selector="TreeViewItem">
+                            <Setter Property="IsExpanded" Value="False"/>
+                        </Style>
+                    </TreeViewItem.Styles>
+                    <TreeViewItem.DataTemplates>
+                        <TreeDataTemplate DataType="Project:XTemplate" ItemsSource="{Binding Layers, Mode=TwoWay}">
+                            <TextBlock Text="{Binding Name, Mode=OneWay}" Classes="default"/>
+                        </TreeDataTemplate>
+                        <TreeDataTemplate DataType="Project:XLayer" ItemsSource="{Binding Shapes, Mode=TwoWay}">
+                            <TextBlock Text="{Binding Name, Mode=OneWay}" Classes="default"/>
+                        </TreeDataTemplate>
+                        <TreeDataTemplate DataType="Shape:BaseShape" ItemsSource="{Binding Resources, Mode=TwoWay}">
+                            <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="default"/>
+                        </TreeDataTemplate>
+                        <DataTemplate DataType="Core:ObservableObject">
+                            <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="default"/>
+                        </DataTemplate>
+                    </TreeViewItem.DataTemplates>
+                </TreeViewItem>
+                <!-- Documents -->
+                <TreeViewItem Header="Documents" Items="{Binding Project.Documents, Mode=TwoWay}">
+                    <TreeViewItem.Styles>
+                        <Style Selector="TreeViewItem">
+                            <Setter Property="IsExpanded" Value="False"/>
+                        </Style>
+                    </TreeViewItem.Styles>
+                    <TreeViewItem.DataTemplates>
+                        <TreeDataTemplate DataType="Project:XDocument" ItemsSource="{Binding Pages, Mode=TwoWay}">
+                            <TextBlock Text="{Binding Name, Mode=OneWay}" Classes="default"/>
+                        </TreeDataTemplate>
+                        <TreeDataTemplate DataType="Project:XPage" ItemsSource="{Binding Layers, Mode=TwoWay}">
+                            <TextBlock Text="{Binding Name, Mode=OneWay}" Classes="default"/>
+                        </TreeDataTemplate>
+                        <TreeDataTemplate DataType="Project:XLayer" ItemsSource="{Binding Shapes, Mode=TwoWay}">
+                            <TextBlock Text="{Binding Name, Mode=OneWay}" Classes="default"/>
+                        </TreeDataTemplate>
+                        <TreeDataTemplate DataType="Shape:BaseShape" ItemsSource="{Binding Resources, Mode=TwoWay}">
+                            <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="default"/>
+                        </TreeDataTemplate>
+                        <DataTemplate DataType="Core:ObservableObject">
+                            <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="default"/>
+                        </DataTemplate>
+                    </TreeViewItem.DataTemplates>
+                </TreeViewItem>
+                <!-- Current -->
+                <TreeViewItem Header="Current" IsExpanded="True">
+                    <TreeViewItem.Styles>
+                        <Style Selector="TreeViewItem">
+                            <Setter Property="IsExpanded" Value="False"/>
+                        </Style>
+                    </TreeViewItem.Styles>
+                    <TreeViewItem Header="Options" DataContext="{Binding Project.Options, Mode=TwoWay}"/>
+                    <TreeViewItem Header="Shape" DataContext="{Binding Project.CurrentContainer.CurrentShape, Mode=TwoWay}"/>
+                    <TreeViewItem Header="Data" DataContext="{Binding Renderers[0].State.SelectedShape.Data, Mode=TwoWay}"/>
+                    <TreeViewItem Header="Style" DataContext="{Binding Project.CurrentStyleLibrary.Selected, Mode=TwoWay}"/>
+                    <TreeViewItem Header="Container" DataContext="{Binding Project.CurrentContainer, Mode=TwoWay}"/>
+                    <TreeViewItem Header="Template" DataContext="{Binding Project.CurrentTemplate, Mode=TwoWay}"/>
+                </TreeViewItem>
             </TreeViewItem>
         </TreeView>
         <GridSplitter Classes="vertical" Grid.Column="1" Grid.Row="0" Width="6"/>
