@@ -10,17 +10,49 @@
              Design.DataContext="{Static Designer:DesignerContext.Editor}"
              Design.Width="1000" Design.Height="600">
     <Grid ColumnDefinitions="250,Auto,*" RowDefinitions="*">
-        <ListBox Name="templates" Items="{Binding Project.Templates, Mode=TwoWay}" Classes="xaml" Grid.Column="0" Grid.Row="0" Margin="3,3,0,3">
-            <ListBox.KeyBindings>
+        <TreeView Name="templates" Items="{Binding Project.Templates, Mode=TwoWay}" Classes="xaml" Grid.Column="0" Grid.Row="0" Margin="3,3,0,3">
+            <TreeView.KeyBindings>
                 <KeyBinding Command="{Static Editor:Commands.ExportXamlCommand}" CommandParameter="{Binding #templates.SelectedItem}" Gesture="Ctrl+E"/>
-            </ListBox.KeyBindings>
-            <ListBox.ContextMenu>
+            </TreeView.KeyBindings>
+            <TreeView.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportXamlCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                 </ContextMenu>
-            </ListBox.ContextMenu>
-            <ListBox.DataTemplates>
-                <DataTemplate>
+            </TreeView.ContextMenu>
+            <TreeView.Styles>
+                <Style Selector="TreeViewItem">
+                    <Setter Property="IsExpanded" Value="False"/>
+                </Style>
+            </TreeView.Styles>
+            <TreeView.DataTemplates>
+                <TreeDataTemplate DataType="Project:XTemplate" ItemsSource="{Binding Layers, Mode=TwoWay}">
+                    <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="default">
+                        <TextBlock.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportXamlCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                            </ContextMenu>
+                        </TextBlock.ContextMenu>
+                    </TextBlock>
+                </TreeDataTemplate>
+                <TreeDataTemplate DataType="Project:XLayer" ItemsSource="{Binding Shapes, Mode=TwoWay}">
+                    <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="default">
+                        <TextBlock.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportXamlCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                            </ContextMenu>
+                        </TextBlock.ContextMenu>
+                    </TextBlock>
+                </TreeDataTemplate>
+                <TreeDataTemplate DataType="Shape:BaseShape" ItemsSource="{Binding Resources, Mode=TwoWay}">
+                    <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="default">
+                        <TextBlock.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportXamlCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                            </ContextMenu>
+                        </TextBlock.ContextMenu>
+                    </TextBlock>
+                </TreeDataTemplate>
+                <DataTemplate DataType="Core:ObservableObject">
                     <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="default">
                         <TextBlock.ContextMenu>
                             <ContextMenu>
@@ -29,8 +61,8 @@
                         </TextBlock.ContextMenu>
                     </TextBlock>
                 </DataTemplate>
-            </ListBox.DataTemplates>
-        </ListBox>
+            </TreeView.DataTemplates>
+        </TreeView>
         <GridSplitter Classes="vertical" Grid.Column="1" Grid.Row="0" Width="6"/>
         <TextBox Text="{Binding #templates.SelectedItem, Mode=OneWay, Converter={Static converters:ObjectToXamlStringConverter.Instance}}" Classes="xaml" Grid.Column="2" Grid.Row="0" Margin="0,3,3,3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <TextBox.KeyBindings>
