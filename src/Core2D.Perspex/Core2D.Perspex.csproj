@@ -217,6 +217,9 @@
     <Compile Include="..\Core2D\Properties\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Controls\Browser\ProjectControl.xaml.cs">
+      <DependentUpon>ProjectControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Exporter\ProjectControl.xaml.cs">
       <DependentUpon>ProjectControl.xaml</DependentUpon>
     </Compile>
@@ -224,6 +227,7 @@
       <DependentUpon>LibraryControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\IsGroupConverter.cs" />
+    <Compile Include="Converters\TreeViewSelectedItemToObjectConverter.cs" />
     <Compile Include="Interactions\Behaviors\BindTagToVisualRootDataContextBehavior.cs" />
     <Compile Include="Views\DocumentControl.xaml.cs">
       <DependentUpon>DocumentControl.xaml</DependentUpon>
@@ -697,6 +701,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Controls\Exporter\ProjectControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Browser\ProjectControl.xaml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Perspex.Skia.Desktop.9999.0.1186-nightly\build\net45\Perspex.Skia.Desktop.targets" Condition="Exists('..\packages\Perspex.Skia.Desktop.9999.0.1186-nightly\build\net45\Perspex.Skia.Desktop.targets')" />

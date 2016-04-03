@@ -43,5 +43,8 @@
         <TabItem Header="Template" Classes="property">
             <browser:TemplateControl/>
         </TabItem>
+        <TabItem Header="Project" Classes="property">
+            <browser:ProjectControl/>
+        </TabItem>
     </TabControl>
 </UserControl>

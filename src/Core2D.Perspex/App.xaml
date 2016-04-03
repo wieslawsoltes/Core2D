@@ -30,6 +30,10 @@
         <StyleInclude Source="resm:Core2D.Perspex.Resources.Styles.xaml?assembly=Core2D.Perspex"/>
     </Application.Styles>
     <Application.DataTemplates>
+        <!-- Editor -->
+        <DataTemplate DataType="Editor:ProjectEditor">
+            <Grid/>
+        </DataTemplate>
         <!-- Style -->
         <DataTemplate DataType="Style:ArgbColor">
             <style:ArgbColorControl/>
