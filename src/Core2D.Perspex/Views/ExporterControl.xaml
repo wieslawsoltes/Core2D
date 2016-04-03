@@ -43,5 +43,8 @@
         <TabItem Header="Template" Classes="property">
             <exporter:TemplateControl/>
         </TabItem>
+        <TabItem Header="Project" Classes="property">
+            <exporter:ProjectControl/>
+        </TabItem>
     </TabControl>
 </UserControl>
