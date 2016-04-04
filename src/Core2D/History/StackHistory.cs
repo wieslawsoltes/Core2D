@@ -8,13 +8,13 @@ namespace Core2D.History
     /// <summary>
     /// Undo/redo stack based action history.
     /// </summary>
-    public class StackHistory : IHistory
+    public sealed class StackHistory : IHistory
     {
-        private Stack<UndoRedo> _undos = new Stack<UndoRedo>();
-        private Stack<UndoRedo> _redos = new Stack<UndoRedo>();
+        private readonly Stack<UndoRedo> _undos = new Stack<UndoRedo>();
+        private readonly Stack<UndoRedo> _redos = new Stack<UndoRedo>();
 
         /// <inheritdoc/>
-        public void Snapshot<T>(T previous, T next, Action<T> update)
+        void IHistory.Snapshot<T>(T previous, T next, Action<T> update)
         {
             var undo = UndoRedo.Create(() => update(previous), () => update(next));
             if (_redos.Count > 0)
@@ -23,19 +23,19 @@ namespace Core2D.History
         }
 
         /// <inheritdoc/>
-        public bool CanUndo()
+        bool IHistory.CanUndo()
         {
             return _undos.Count > 0;
         }
 
         /// <inheritdoc/>
-        public bool CanRedo()
+        bool IHistory.CanRedo()
         {
             return _redos.Count > 0;
         }
 
         /// <inheritdoc/>
-        public bool Undo()
+        bool IHistory.Undo()
         {
             if (_undos.Count <= 0)
                 return false;
@@ -55,7 +55,7 @@ namespace Core2D.History
         }
 
         /// <inheritdoc/>
-        public bool Redo()
+        bool IHistory.Redo()
         {
             if (_redos.Count <= 0)
                 return false;
@@ -75,7 +75,7 @@ namespace Core2D.History
         }
 
         /// <inheritdoc/>
-        public void Reset()
+        void IHistory.Reset()
         {
             if (_undos != null && _undos.Count > 0)
             {
