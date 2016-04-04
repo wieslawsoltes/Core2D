@@ -8,7 +8,7 @@
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D"
              xmlns:browser="clr-namespace:Core2D.Perspex.Controls.Browser;assembly=Core2D.Perspex"
              Design.DataContext="{Static Designer:DesignerContext.Editor}"
-             Design.Width="600" Design.Height="600">
+             Design.Width="1000" Design.Height="600">
     <TabControl Classes="top">
         <TabItem Header="Styles" Classes="property">
             <browser:StylesControl/>
