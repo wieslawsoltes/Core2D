@@ -227,6 +227,7 @@
       <DependentUpon>LibraryControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\IsGroupConverter.cs" />
+    <Compile Include="Converters\ObjectToJsonStringConverter.cs" />
     <Compile Include="Converters\TreeViewSelectedItemToObjectConverter.cs" />
     <Compile Include="Interactions\Behaviors\BindTagToVisualRootDataContextBehavior.cs" />
     <Compile Include="Views\DocumentControl.xaml.cs">
