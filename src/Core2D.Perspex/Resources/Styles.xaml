@@ -43,6 +43,12 @@
         <Setter Property="BorderBrush" Value="{StyleResource TransparentBrush}"/>
         <Setter Property="BorderThickness" Value="0"/>
     </Style>
+    <!-- Border.project -->
+    <Style Selector="Border.project">
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+    </Style>
     <!-- Border.document -->
     <Style Selector="Border.document">
         <Setter Property="Padding" Value="4"/>
@@ -110,6 +116,12 @@
         <Setter Property="Padding" Value="4"/>
         <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
+    </Style>
+    <!-- ContentControl.project -->
+    <Style Selector="ContentControl.project">
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="BorderBrush" Value="{StyleResource TransparentBrush}"/>
+        <Setter Property="BorderThickness" Value="0"/>
     </Style>
     <!-- CheckBox.default -->
     <Style Selector="CheckBox.default">
@@ -397,6 +409,11 @@
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
     </Style>
+    <Style Selector="TextBlock.project">
+        <Setter Property="Margin" Value="1"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
+    </Style>
     <!-- TextBox.default -->
     <Style Selector="TextBox.default">
         <Setter Property="Padding" Value="0"/>
@@ -539,6 +556,28 @@
         <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
     </Style>
+    <!-- TextBox.project -->
+    <Style Selector="TextBox.project">
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Background" Value="{StyleResource BackgroundBrush}"/>
+        <Setter Property="TextAlignment" Value="Left"/>
+        <Setter Property="BorderBrush" Value="{StyleResource TransparentBrush}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="AcceptsReturn" Value="True"/>
+        <Setter Property="TextWrapping" Value="NoWrap"/>
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
+    </Style>
+    <Style Selector="TextBox.project:pointerover /template/ Border#border">
+        <Setter Property="BorderBrush" Value="{StyleResource TransparentBrush}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+    </Style>
+    <Style Selector="TextBox.project:focus /template/ Border#border">
+        <Setter Property="BorderBrush" Value="{StyleResource TransparentBrush}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+    </Style>
     <!-- ToolTip -->
     <Style Selector="ToolTip">
         <Setter Property="Background" Value="{StyleResource BackgroundBrush}"/>
@@ -564,6 +603,14 @@
     </Style>
     <!-- TreeView.browser -->
     <Style Selector="TreeView.browser">
+        <Setter Property="Padding" Value="4"/>
+        <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="AutoScrollToSelectedItem" Value="True"/>
+        <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
+    </Style>
+    <!-- TreeView.project -->
+    <Style Selector="TreeView.project">
         <Setter Property="Padding" Value="4"/>
         <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
