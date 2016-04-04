@@ -130,7 +130,7 @@ namespace Core2D.Perspex
         /// </summary>
         public void Start()
         {
-            using (var log = new TraceLog())
+            using (ILog log = new TraceLog())
             {
                 log.Initialize(System.IO.Path.Combine(GetAssemblyPath(), _logFileName));
 
@@ -233,7 +233,7 @@ namespace Core2D.Perspex
                 DxfWriter = new DxfWriter(),
                 CsvReader = new CsvHelperReader(),
                 CsvWriter = new CsvHelperWriter(),
-                GetImageKey = async () => await OnGetImageKeyAsync()
+                GetImageKey = async () => await (this as IEditorApplication).OnGetImageKeyAsync()
             };
 
             _editor.DefaultTools();
@@ -242,7 +242,7 @@ namespace Core2D.Perspex
         }
 
         /// <inheritdoc/>
-        public async Task<string> OnGetImageKeyAsync()
+        async Task<string> IEditorApplication.OnGetImageKeyAsync()
         {
             try
             {
@@ -266,7 +266,7 @@ namespace Core2D.Perspex
         }
 
         /// <inheritdoc/>
-        public async Task OnOpenAsync(string path)
+        async Task IEditorApplication.OnOpenAsync(string path)
         {
             try
             {
@@ -297,7 +297,7 @@ namespace Core2D.Perspex
         }
 
         /// <inheritdoc/>
-        public async Task OnSaveAsync()
+        async Task IEditorApplication.OnSaveAsync()
         {
             try
             {
@@ -307,7 +307,7 @@ namespace Core2D.Perspex
                 }
                 else
                 {
-                    await OnSaveAsAsync();
+                    await (this as IEditorApplication).OnSaveAsAsync();
                 }
             }
             catch (Exception ex)
@@ -317,7 +317,7 @@ namespace Core2D.Perspex
         }
 
         /// <inheritdoc/>
-        public async Task OnSaveAsAsync()
+        async Task IEditorApplication.OnSaveAsAsync()
         {
             try
             {
@@ -341,7 +341,7 @@ namespace Core2D.Perspex
         }
 
         /// <inheritdoc/>
-        public async Task OnImportXamlAsync(string path)
+        async Task IEditorApplication.OnImportXamlAsync(string path)
         {
             try
             {
@@ -376,7 +376,7 @@ namespace Core2D.Perspex
         }
 
         /// <inheritdoc/>
-        public async Task OnExportXamlAsync(object item)
+        async Task IEditorApplication.OnExportXamlAsync(object item)
         {
             try
             {
@@ -406,7 +406,7 @@ namespace Core2D.Perspex
         }
 
         /// <inheritdoc/>
-        public async Task OnExportAsync(object item)
+        async Task IEditorApplication.OnExportAsync(object item)
         {
             try
             {
@@ -470,7 +470,7 @@ namespace Core2D.Perspex
         }
 
         /// <inheritdoc/>
-        public async Task OnImportDataAsync()
+        async Task IEditorApplication.OnImportDataAsync()
         {
             try
             {
@@ -494,7 +494,7 @@ namespace Core2D.Perspex
         }
 
         /// <inheritdoc/>
-        public async Task OnExportDataAsync()
+        async Task IEditorApplication.OnExportDataAsync()
         {
             try
             {
@@ -519,7 +519,7 @@ namespace Core2D.Perspex
         }
 
         /// <inheritdoc/>
-        public async Task OnUpdateDataAsync()
+        async Task IEditorApplication.OnUpdateDataAsync()
         {
             try
             {
@@ -544,7 +544,7 @@ namespace Core2D.Perspex
         }
 
         /// <inheritdoc/>
-        public async Task OnImportObjectAsync(object item, CoreType type)
+        async Task IEditorApplication.OnImportObjectAsync(object item, CoreType type)
         {
             try
             {
@@ -618,7 +618,7 @@ namespace Core2D.Perspex
         }
 
         /// <inheritdoc/>
-        public async Task OnExportObjectAsync(object item, CoreType type)
+        async Task IEditorApplication.OnExportObjectAsync(object item, CoreType type)
         {
             try
             {
@@ -709,51 +709,51 @@ namespace Core2D.Perspex
         }
 
         /// <inheritdoc/>
-        public async Task OnCopyAsEmfAsync()
+        async Task IEditorApplication.OnCopyAsEmfAsync()
         {
             await Task.Delay(0);
         }
 
         /// <inheritdoc/>
-        public async Task OnExportAsEmfAsync(string path)
+        async Task IEditorApplication.OnExportAsEmfAsync(string path)
         {
             await Task.Delay(0);
         }
 
         /// <inheritdoc/>
-        public async Task OnZoomResetAsync()
+        async Task IEditorApplication.OnZoomResetAsync()
         {
             _editor.ResetZoom();
             await Task.Delay(0);
         }
 
         /// <inheritdoc/>
-        public async Task OnZoomAutoFitAsync()
+        async Task IEditorApplication.OnZoomAutoFitAsync()
         {
             _editor.AutoFitZoom();
             await Task.Delay(0);
         }
 
         /// <inheritdoc/>
-        public async Task OnLoadWindowLayout()
+        async Task IEditorApplication.OnLoadWindowLayout()
         {
             await Task.Delay(0);
         }
 
         /// <inheritdoc/>
-        public async Task OnSaveWindowLayoutAsync()
+        async Task IEditorApplication.OnSaveWindowLayoutAsync()
         {
             await Task.Delay(0);
         }
 
         /// <inheritdoc/>
-        public async Task OnResetWindowLayoutAsync()
+        async Task IEditorApplication.OnResetWindowLayoutAsync()
         {
             await Task.Delay(0);
         }
 
         /// <inheritdoc/>
-        public async Task OnShowObjectBrowserAsync()
+        async Task IEditorApplication.OnShowObjectBrowserAsync()
         {
             var browser = new Windows.BrowserWindow();
             browser.DataContext = _editor;
@@ -763,7 +763,7 @@ namespace Core2D.Perspex
         }
 
         /// <inheritdoc/>
-        public async Task OnShowDocumentViewerAsync()
+        async Task IEditorApplication.OnShowDocumentViewerAsync()
         {
             var document = new Windows.DocumentWindow();
             document.DataContext = _editor;
@@ -773,7 +773,7 @@ namespace Core2D.Perspex
         }
 
         /// <inheritdoc/>
-        public void OnCloseView()
+        void IEditorApplication.OnCloseView()
         {
             _mainWindow?.Close();
         }

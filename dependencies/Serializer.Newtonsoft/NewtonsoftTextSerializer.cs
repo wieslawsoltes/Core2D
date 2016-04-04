@@ -9,12 +9,12 @@ namespace Serializer.Newtonsoft
     /// <summary>
     /// Json serializer.
     /// </summary>
-    public class NewtonsoftTextSerializer : ITextSerializer
+    public sealed class NewtonsoftTextSerializer : ITextSerializer
     {
         /// <summary>
         /// Specifies the settings on a <see cref="JsonSerializer"/> object.
         /// </summary>
-        public static JsonSerializerSettings Settings;
+        private static readonly JsonSerializerSettings Settings;
 
         /// <summary>
         /// Initializes static data.
@@ -40,13 +40,13 @@ namespace Serializer.Newtonsoft
         }
 
         /// <inheritdoc/>
-        public string Serialize<T>(T value)
+        string ITextSerializer.Serialize<T>(T value)
         {
             return JsonConvert.SerializeObject(value, Settings);
         }
 
         /// <inheritdoc/>
-        public T Deserialize<T>(string text)
+        T ITextSerializer.Deserialize<T>(string text)
         {
             return JsonConvert.DeserializeObject<T>(text, Settings);
         }

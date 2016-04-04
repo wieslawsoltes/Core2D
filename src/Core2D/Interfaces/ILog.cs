@@ -12,7 +12,7 @@ namespace Core2D.Interfaces
         /// <summary>
         /// Gets or sets last log message.
         /// </summary>
-        string LastMessage { get; set; }
+        string LastMessage { get; }
 
         /// <summary>
         /// Initialize logger.

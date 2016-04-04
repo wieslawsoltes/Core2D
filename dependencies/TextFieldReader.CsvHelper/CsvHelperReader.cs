@@ -11,9 +11,9 @@ namespace TextFieldReader.CsvHelper
     /// <summary>
     /// Defines the text fields to <see cref="XDatabase"/> reader.
     /// </summary>
-    public class CsvHelperReader : ITextFieldReader<XDatabase>
+    public sealed class CsvHelperReader : ITextFieldReader<XDatabase>
     {
-        private IEnumerable<string[]> ReadInternal(string path)
+        private static IEnumerable<string[]> ReadInternal(string path)
         {
             using (var reader = new System.IO.StreamReader(path))
             {
@@ -41,7 +41,7 @@ namespace TextFieldReader.CsvHelper
         /// </summary>
         /// <param name="path">The fields file path.</param>
         /// <returns>The new instance of the <see cref="XDatabase"/> class</returns>
-        public XDatabase Read(string path)
+        XDatabase ITextFieldReader<XDatabase>.Read(string path)
         {
             var fields = ReadInternal(path);
             var name = System.IO.Path.GetFileNameWithoutExtension(path);

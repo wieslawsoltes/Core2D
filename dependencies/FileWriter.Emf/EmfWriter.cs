@@ -23,7 +23,7 @@ namespace FileWriter.Emf
     /// <summary>
     /// WinForms file writer.
     /// </summary>
-    public class EmfWriter : IFileWriter
+    public sealed class EmfWriter : IFileWriter
     {
         /// <summary>
         /// 
@@ -34,7 +34,7 @@ namespace FileWriter.Emf
         /// <param name="record"></param>
         /// <param name="ic"></param>
         /// <returns></returns>
-        public MemoryStream MakeMetafileStream(Bitmap bitmap, IEnumerable<BaseShape> shapes, ImmutableArray<XProperty> properties, XRecord record, IImageCache ic)
+        public static MemoryStream MakeMetafileStream(Bitmap bitmap, IEnumerable<BaseShape> shapes, ImmutableArray<XProperty> properties, XRecord record, IImageCache ic)
         {
             var g = default(Graphics);
             var mf = default(Metafile);
@@ -95,7 +95,7 @@ namespace FileWriter.Emf
         /// <param name="page"></param>
         /// <param name="ic"></param>
         /// <returns></returns>
-        public MemoryStream MakeMetafileStream(Bitmap bitmap, XPage page, IImageCache ic)
+        public static MemoryStream MakeMetafileStream(Bitmap bitmap, XPage page, IImageCache ic)
         {
             var g = default(Graphics);
             var mf = default(Metafile);
@@ -153,7 +153,7 @@ namespace FileWriter.Emf
         /// <param name="properties"></param>
         /// <param name="record"></param>
         /// <param name="ic"></param>
-        public void SetClipboard(IEnumerable<BaseShape> shapes, double width, double height, ImmutableArray<XProperty> properties, XRecord record, IImageCache ic)
+        public static void SetClipboard(IEnumerable<BaseShape> shapes, double width, double height, ImmutableArray<XProperty> properties, XRecord record, IImageCache ic)
         {
             try
             {
@@ -179,7 +179,7 @@ namespace FileWriter.Emf
         /// </summary>
         /// <param name="page"></param>
         /// <param name="ic"></param>
-        public void SetClipboard(XPage page, IImageCache ic)
+        public static void SetClipboard(XPage page, IImageCache ic)
         {
             try
             {
@@ -209,7 +209,7 @@ namespace FileWriter.Emf
         /// <param name="path"></param>
         /// <param name="page"></param>
         /// <param name="ic"></param>
-        public void Save(string path, XPage page, IImageCache ic)
+        public static void Save(string path, XPage page, IImageCache ic)
         {
             if (page == null || page.Template == null)
                 return;
@@ -227,7 +227,7 @@ namespace FileWriter.Emf
         }
 
         /// <inheritdoc/>
-        public void Save(string path, object item, object options)
+        void IFileWriter.Save(string path, object item, object options)
         {
             if (string.IsNullOrEmpty(path) || item == null)
                 return;
@@ -236,9 +236,9 @@ namespace FileWriter.Emf
             if (options == null)
                 return;
 
-            if (item is XContainer)
+            if (item is XPage)
             {
-                this.Save(path, item as XContainer, ic);
+                Save(path, item as XPage, ic);
             }
         }
     }

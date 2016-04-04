@@ -22,7 +22,7 @@ namespace Core2D.Perspex.UnitTests
         [Trait("Core2D.Perspex", "Util")]
         public void Open_Path_Throws_FileNotFoundException()
         {
-            var target = new PerspexFileSystem();
+            IFileSystem target = new PerspexFileSystem();
             Assert.Throws<FileNotFoundException>(
                 () =>
                 {
@@ -34,7 +34,7 @@ namespace Core2D.Perspex.UnitTests
         [Trait("Core2D.Perspex", "Util")]
         public void Create_Path_Creates_New_File()
         {
-            var target = new PerspexFileSystem();
+            IFileSystem target = new PerspexFileSystem();
 
             using (var stream = target.Create("new1.txt")) { }
             Assert.True(File.Exists("new1.txt"));
@@ -47,7 +47,7 @@ namespace Core2D.Perspex.UnitTests
         [Trait("Core2D.Perspex", "Util")]
         public void ReadBinary_Read_All_Bytes_From_Stream()
         {
-            var target = new PerspexFileSystem();
+            IFileSystem target = new PerspexFileSystem();
             var expceted = new byte[] { 0x12, 0x34, 0x56, 0x67 };
             byte[] actual;
 
@@ -63,7 +63,7 @@ namespace Core2D.Perspex.UnitTests
         [Trait("Core2D.Perspex", "Util")]
         public void WriteBinary_Write_All_Bytes_To_Stream()
         {
-            var target = new PerspexFileSystem();
+            IFileSystem target = new PerspexFileSystem();
             var expceted = new byte[] { 0x12, 0x34, 0x56, 0x67 };
             byte[] actual;
 
@@ -80,7 +80,7 @@ namespace Core2D.Perspex.UnitTests
         [Trait("Core2D.Perspex", "Util")]
         public void ReadUtf8Text_Read_String_From_Stream()
         {
-            var target = new PerspexFileSystem();
+            IFileSystem target = new PerspexFileSystem();
             var expceted = "κόσμε";
             string actual;
             
@@ -96,7 +96,7 @@ namespace Core2D.Perspex.UnitTests
         [Trait("Core2D.Perspex", "Util")]
         public void WriteUtf8Text_Write_String_To_Stream()
         {
-            var target = new PerspexFileSystem();
+            IFileSystem target = new PerspexFileSystem();
             var expceted = "κόσμε";
 
             byte[] actual;
@@ -115,7 +115,7 @@ namespace Core2D.Perspex.UnitTests
         [Trait("Core2D.Perspex", "Util")]
         public void ReadUtf8Text_Read_String_From_Path()
         {
-            var target = new PerspexFileSystem();
+            IFileSystem target = new PerspexFileSystem();
             Assert.Throws<FileNotFoundException>(
                 () =>
                 {
@@ -127,7 +127,7 @@ namespace Core2D.Perspex.UnitTests
         [Trait("Core2D.Perspex", "Util")]
         public void WriteUtf8Text_Write_String_To_Path()
         {
-            var target = new PerspexFileSystem();
+            IFileSystem target = new PerspexFileSystem();
             var expceted = "κόσμε";
 
             target.WriteUtf8Text("new2.txt", expceted);

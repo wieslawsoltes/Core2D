@@ -469,7 +469,12 @@ namespace Core2D.Editor.Designer
 
             // Project
 
+            IProjectFactory factory = new ProjectFactory();
+
+            Project = factory.GetProject();
+
             Template = XTemplate.Create();
+
             Page = XPage.Create();
             var layer = Page.Layers.FirstOrDefault();
             layer.Shapes = layer.Shapes.Add(XLine.Create(0, 0, null, null));
@@ -480,7 +485,6 @@ namespace Core2D.Editor.Designer
             Document = XDocument.Create();
             Layer = XLayer.Create();
             Options = XOptions.Create();
-            Project = (new ProjectFactory()).GetProject();
 
             // State
 

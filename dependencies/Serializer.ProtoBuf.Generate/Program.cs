@@ -15,25 +15,28 @@ namespace Serializer.ProtoBuf
         {
             if (args?.Length == 1)
             {
-                var sw = Stopwatch.StartNew();
-
-                var rtm = ProtoBufModel.ForProject();
-                var schema = rtm.GetSchema(typeof(XProject));
-
-                var path = args[0];
-
-                var schemaPath = Path.Combine(path, "Schema", Name + ".proto");
-                Console.WriteLine("Writing schema: {0}", schemaPath);
-                File.WriteAllText(schemaPath, schema);
-
-                var serializerPath = Path.Combine(path, "Serializer", Name + ".dll");
-                Console.WriteLine("Writing serializer: {0}", serializerPath);
-                rtm.Compile(Name, Name + ".dll");
-                File.Copy(Name + ".dll", serializerPath, true);
-
-                sw.Stop();
-                Console.WriteLine("Generate: " + sw.Elapsed.TotalMilliseconds + "ms");
+                Generate(args[0]);
             }
+        }
+
+        static void Generate(string path)
+        {
+            var sw = Stopwatch.StartNew();
+
+            var rtm = ProtoBufModel.ForProject();
+            var schema = rtm.GetSchema(typeof(XProject));
+
+            var schemaPath = Path.Combine(path, "Schema", Name + ".proto");
+            Console.WriteLine("Writing schema: {0}", schemaPath);
+            File.WriteAllText(schemaPath, schema);
+
+            var serializerPath = Path.Combine(path, "Serializer", Name + ".dll");
+            Console.WriteLine("Writing serializer: {0}", serializerPath);
+            rtm.Compile(Name, Name + ".dll");
+            File.Copy(Name + ".dll", serializerPath, true);
+
+            sw.Stop();
+            Console.WriteLine("Generate: " + sw.Elapsed.TotalMilliseconds + "ms");
         }
     }
 }

@@ -7,16 +7,16 @@ namespace Serializer.Xaml
     /// <summary>
     /// Portable Xaml serializer.
     /// </summary>
-    public class PortableXamlSerializer : ITextSerializer
+    public sealed class PortableXamlSerializer : ITextSerializer
     {
         /// <inheritdoc/>
-        public string Serialize<T>(T value)
+        string ITextSerializer.Serialize<T>(T value)
         {
             return CoreXamlSerializer.Serialize(value);
         }
 
         /// <inheritdoc/>
-        public T Deserialize<T>(string text)
+        T ITextSerializer.Deserialize<T>(string text)
         {
             return CoreXamlSerializer.Deserialize<T>(text);
         }

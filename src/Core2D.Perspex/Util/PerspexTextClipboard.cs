@@ -8,13 +8,13 @@ namespace Core2D.Perspex
     /// <summary>
     /// Wrapper class for App.Current.Clipboard clipboard class.
     /// </summary>
-    public class PerspexTextClipboard : ITextClipboard
+    public sealed class PerspexTextClipboard : ITextClipboard
     {
         /// <summary>
         /// Set clipboard text.
         /// </summary>
         /// <param name="text">The text string.</param>
-        public Task SetText(string text)
+        Task ITextClipboard.SetText(string text)
         {
             return App.Current.Clipboard.SetTextAsync(text);
         }
@@ -32,7 +32,7 @@ namespace Core2D.Perspex
         /// Get text from clipboard.
         /// </summary>
         /// <returns>The text string.</returns>
-        public Task<string> GetText()
+        Task<string> ITextClipboard.GetText()
         {
             return GetTextAsync();
         }
@@ -50,7 +50,7 @@ namespace Core2D.Perspex
         /// Return true if clipboard contains text string.
         /// </summary>
         /// <returns>True if clipboard contains text string.</returns>
-        public async Task<bool> ContainsText()
+        async Task<bool> ITextClipboard.ContainsText()
         {
             return await ContainsTextAsync();
         }

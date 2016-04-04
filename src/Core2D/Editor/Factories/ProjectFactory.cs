@@ -12,7 +12,7 @@ namespace Core2D.Editor.Factories
     /// <summary>
     /// Factory used to create new projects, documents and containers.
     /// </summary>
-    public class ProjectFactory : IProjectFactory
+    public sealed class ProjectFactory : IProjectFactory
     {
         /// <summary>
         /// Creates a new instance of the <see cref="XLibrary{ShapeStyle}"/> class.
@@ -99,12 +99,13 @@ namespace Core2D.Editor.Factories
         /// <summary>
         /// Creates a new instance of the <see cref="XTemplate"/> class.
         /// </summary>
+        /// <param name="factory">The project factory.</param>
         /// <param name="project">The new container owner project.</param>
         /// <param name="name">The new container name.</param>
         /// <returns>The new instance of the <see cref="XTemplate"/>.</returns>
-        private XTemplate CreateGridTemplate(XProject project, string name)
+        private XTemplate CreateGridTemplate(IProjectFactory factory, XProject project, string name)
         {
-            var template = GetTemplate(project, name);
+            var template = factory.GetTemplate(project, name);
 
             var style = project
                 .StyleLibraries.FirstOrDefault(g => g.Name == "Template")
@@ -131,7 +132,7 @@ namespace Core2D.Editor.Factories
         }
 
         /// <inheritdoc/>
-        public XTemplate GetTemplate(XProject project, string name)
+        XTemplate IProjectFactory.GetTemplate(XProject project, string name)
         {
             var template = XTemplate.Create(name);
             template.Background = ArgbColor.Create(0xFF, 0xFF, 0xFF, 0xFF);
@@ -139,23 +140,24 @@ namespace Core2D.Editor.Factories
         }
 
         /// <inheritdoc/>
-        public XPage GetPage(XProject project, string name)
+        XPage IProjectFactory.GetPage(XProject project, string name)
         {
             var container = XPage.Create(name);
-            container.Template = project.CurrentTemplate ?? GetTemplate(project, "Empty");
+            container.Template = project.CurrentTemplate ?? (this as IProjectFactory).GetTemplate(project, "Empty");
             return container;
         }
 
         /// <inheritdoc/>
-        public XDocument GetDocument(XProject project, string name)
+        XDocument IProjectFactory.GetDocument(XProject project, string name)
         {
             var document = XDocument.Create(name);
             return document;
         }
 
         /// <inheritdoc/>
-        public XProject GetProject()
+        XProject IProjectFactory.GetProject()
         {
+            var factory = this as IProjectFactory;
             var project = XProject.Create();
 
             // Group Libraries
@@ -176,15 +178,15 @@ namespace Core2D.Editor.Factories
 
             // Templates
             var templateBuilder = project.Templates.ToBuilder();
-            templateBuilder.Add(GetTemplate(project, "Empty"));
-            templateBuilder.Add(CreateGridTemplate(project, "Grid"));
+            templateBuilder.Add(factory.GetTemplate(project, "Empty"));
+            templateBuilder.Add(CreateGridTemplate(this, project, "Grid"));
             project.Templates = templateBuilder.ToImmutable();
 
             project.SetCurrentTemplate(project.Templates.FirstOrDefault(t => t.Name == "Grid"));
 
             // Documents and Pages
-            var document = GetDocument(project, "Document");
-            var page = GetPage(project, "Page");
+            var document = factory.GetDocument(project, "Document");
+            var page = factory.GetPage(project, "Page");
 
             var pageBuilder = document.Pages.ToBuilder();
             pageBuilder.Add(page);

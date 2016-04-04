@@ -9,13 +9,13 @@ namespace Core2D.Wpf
     /// <summary>
     /// Wrapper class for <see cref="System.Windows.Clipboard"/> clipboard class.
     /// </summary>
-    public class WpfTextClipboard : ITextClipboard
+    public sealed class WpfTextClipboard : ITextClipboard
     {
         /// <summary>
         /// Set clipboard text.
         /// </summary>
         /// <param name="text">The text string.</param>
-        public Task SetText(string text)
+        Task ITextClipboard.SetText(string text)
         {
             return Task.Run(() =>
             {
@@ -30,7 +30,7 @@ namespace Core2D.Wpf
         /// Get text from clipboard.
         /// </summary>
         /// <returns>The text string.</returns>
-        public Task<string> GetText()
+        Task<string> ITextClipboard.GetText()
         {
             return Task.Run(() =>
             {
@@ -45,7 +45,7 @@ namespace Core2D.Wpf
         /// Return true if clipboard contains text string.
         /// </summary>
         /// <returns>True if clipboard contains text string.</returns>
-        public Task<bool> ContainsText()
+        Task<bool> ITextClipboard.ContainsText()
         {
             return Task.Run(() =>
             {

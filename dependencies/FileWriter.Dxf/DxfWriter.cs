@@ -11,10 +11,10 @@ namespace FileWriter.Dxf
     /// <summary>
     /// netDxf file writer.
     /// </summary>
-    public class DxfWriter : IFileWriter
+    public sealed class DxfWriter : IFileWriter
     {
         /// <inheritdoc/>
-        public void Save(string path, object item, object options)
+        void IFileWriter.Save(string path, object item, object options)
         {
             if (string.IsNullOrEmpty(path) || item == null)
                 return;

@@ -9,9 +9,9 @@ namespace Core2D.Editor.Factories
     /// <summary>
     /// Factory used to create shapes.
     /// </summary>
-    public class ShapeFactory : IShapeFactory
+    public sealed class ShapeFactory : IShapeFactory
     {
-        private ProjectEditor _editor;
+        private readonly ProjectEditor _editor;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ShapeFactory"/> class.
@@ -23,7 +23,7 @@ namespace Core2D.Editor.Factories
         }
 
         /// <inheritdoc/>
-        public XPoint Point(double x = 30, double y = 30, bool isStandalone = false)
+        XPoint IShapeFactory.Point(double x, double y, bool isStandalone)
         {
             var point = XPoint.Create(
                 x, y,
@@ -36,7 +36,7 @@ namespace Core2D.Editor.Factories
         }
 
         /// <inheritdoc/>
-        public XLine Line(double x1 = 30, double y1 = 30, double x2 = 60, double y2 = 30, bool isStroked = true)
+        XLine IShapeFactory.Line(double x1, double y1, double x2, double y2, bool isStroked)
         {
             var line = XLine.Create(
                 x1, y1,
@@ -49,7 +49,7 @@ namespace Core2D.Editor.Factories
         }
 
         /// <inheritdoc/>
-        public XLine Line(XPoint start, XPoint end, bool isStroked = true)
+        XLine IShapeFactory.Line(XPoint start, XPoint end, bool isStroked)
         {
             var line = XLine.Create(
                 start,
@@ -62,7 +62,7 @@ namespace Core2D.Editor.Factories
         }
 
         /// <inheritdoc/>
-        public XArc Arc(double x1 = 30, double y1 = 30, double x2 = 60, double y2 = 60, double x3 = 30, double y3 = 45, double x4 = 60, double y4 = 45, bool isStroked = true, bool isFilled = false)
+        XArc IShapeFactory.Arc(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, bool isStroked, bool isFilled)
         {
             var arc = XArc.Create(
                 x1, y1,
@@ -78,7 +78,7 @@ namespace Core2D.Editor.Factories
         }
 
         /// <inheritdoc/>
-        public XArc Arc(XPoint point1, XPoint point2, XPoint point3, XPoint point4, bool isStroked = true, bool isFilled = false)
+        XArc IShapeFactory.Arc(XPoint point1, XPoint point2, XPoint point3, XPoint point4, bool isStroked, bool isFilled)
         {
             var arc = XArc.Create(
                 point1,
@@ -94,7 +94,7 @@ namespace Core2D.Editor.Factories
         }
 
         /// <inheritdoc/>
-        public XCubicBezier CubicBezier(double x1 = 30, double y1 = 30, double x2 = 30, double y2 = 60, double x3 = 60, double y3 = 60, double x4 = 60, double y4 = 30, bool isStroked = true, bool isFilled = false)
+        XCubicBezier IShapeFactory.CubicBezier(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, bool isStroked, bool isFilled)
         {
             var cubicBezier = XCubicBezier.Create(
                 x1, y1,
@@ -110,7 +110,7 @@ namespace Core2D.Editor.Factories
         }
 
         /// <inheritdoc/>
-        public XCubicBezier CubicBezier(XPoint point1, XPoint point2, XPoint point3, XPoint point4, bool isStroked = true, bool isFilled = false)
+        XCubicBezier IShapeFactory.CubicBezier(XPoint point1, XPoint point2, XPoint point3, XPoint point4, bool isStroked, bool isFilled)
         {
             var cubicBezier = XCubicBezier.Create(
                 point1,
@@ -126,7 +126,7 @@ namespace Core2D.Editor.Factories
         }
 
         /// <inheritdoc/>
-        public XQuadraticBezier QuadraticBezier(double x1 = 30, double y1 = 30, double x2 = 45, double y2 = 60, double x3 = 60, double y3 = 30, bool isStroked = true, bool isFilled = false)
+        XQuadraticBezier IShapeFactory.QuadraticBezier(double x1, double y1, double x2, double y2, double x3, double y3, bool isStroked, bool isFilled)
         {
             var quadraticBezier = XQuadraticBezier.Create(
                 x1, y1,
@@ -141,7 +141,7 @@ namespace Core2D.Editor.Factories
         }
 
         /// <inheritdoc/>
-        public XQuadraticBezier QuadraticBezier(XPoint point1, XPoint point2, XPoint point3, bool isStroked = true, bool isFilled = false)
+        XQuadraticBezier IShapeFactory.QuadraticBezier(XPoint point1, XPoint point2, XPoint point3, bool isStroked, bool isFilled)
         {
             var quadraticBezier = XQuadraticBezier.Create(
                 point1,
@@ -156,7 +156,7 @@ namespace Core2D.Editor.Factories
         }
 
         /// <inheritdoc/>
-        public XPathGeometry Geometry(XFillRule fillRule = XFillRule.EvenOdd)
+        XPathGeometry IShapeFactory.Geometry(XFillRule fillRule)
         {
             return XPathGeometry.Create(
                 new List<XPathFigure>(),
@@ -164,7 +164,7 @@ namespace Core2D.Editor.Factories
         }
 
         /// <inheritdoc/>
-        public XPath Path(XPathGeometry geometry, bool isStroked = true, bool isFilled = false)
+        XPath IShapeFactory.Path(XPathGeometry geometry, bool isStroked, bool isFilled)
         {
             var path = XPath.Create(
                 "",
@@ -177,7 +177,7 @@ namespace Core2D.Editor.Factories
         }
 
         /// <inheritdoc/>
-        public XRectangle Rectangle(double x1 = 30, double y1 = 30, double x2 = 60, double y2 = 60, bool isStroked = true, bool isFilled = false, string text = null)
+        XRectangle IShapeFactory.Rectangle(double x1, double y1, double x2, double y2, bool isStroked, bool isFilled, string text)
         {
             var rectangle = XRectangle.Create(
                 x1, y1,
@@ -192,7 +192,7 @@ namespace Core2D.Editor.Factories
         }
 
         /// <inheritdoc/>
-        public XRectangle Rectangle(XPoint topLeft, XPoint bottomRight, bool isStroked = true, bool isFilled = false, string text = null)
+        XRectangle IShapeFactory.Rectangle(XPoint topLeft, XPoint bottomRight, bool isStroked, bool isFilled, string text)
         {
             var rectangle = XRectangle.Create(
                 topLeft,
@@ -207,7 +207,7 @@ namespace Core2D.Editor.Factories
         }
 
         /// <inheritdoc/>
-        public XEllipse Ellipse(double x1 = 30, double y1 = 30, double x2 = 60, double y2 = 60, bool isStroked = true, bool isFilled = false, string text = null)
+        XEllipse IShapeFactory.Ellipse(double x1, double y1, double x2, double y2, bool isStroked, bool isFilled, string text)
         {
             var ellipse = XEllipse.Create(
                 x1, y1,
@@ -222,7 +222,7 @@ namespace Core2D.Editor.Factories
         }
 
         /// <inheritdoc/>
-        public XEllipse Ellipse(XPoint topLeft, XPoint bottomRight, bool isStroked = true, bool isFilled = false, string text = null)
+        XEllipse IShapeFactory.Ellipse(XPoint topLeft, XPoint bottomRight, bool isStroked, bool isFilled, string text)
         {
             var ellipse = XEllipse.Create(
                 topLeft,
@@ -237,7 +237,7 @@ namespace Core2D.Editor.Factories
         }
 
         /// <inheritdoc/>
-        public XText Text(double x1 = 30, double y1 = 30, double x2 = 60, double y2 = 60, string text = "Text", bool isStroked = true)
+        XText IShapeFactory.Text(double x1, double y1, double x2, double y2, string text, bool isStroked)
         {
             var txt = XText.Create(
                 x1, y1,
@@ -251,7 +251,7 @@ namespace Core2D.Editor.Factories
         }
 
         /// <inheritdoc/>
-        public XText Text(XPoint topLeft, XPoint bottomRight, string text = "Text", bool isStroked = true)
+        XText IShapeFactory.Text(XPoint topLeft, XPoint bottomRight, string text, bool isStroked)
         {
             var txt = XText.Create(
                 topLeft,
@@ -265,7 +265,7 @@ namespace Core2D.Editor.Factories
         }
 
         /// <inheritdoc/>
-        public XImage Image(string path, double x1 = 30, double y1 = 30, double x2 = 120, double y2 = 120, bool isStroked = false, bool isFilled = false, string text = null)
+        XImage IShapeFactory.Image(string path, double x1, double y1, double x2, double y2, bool isStroked, bool isFilled, string text)
         {
             var image = XImage.Create(
                 x1, y1,
@@ -281,7 +281,7 @@ namespace Core2D.Editor.Factories
         }
 
         /// <inheritdoc/>
-        public XImage Image(string path, XPoint topLeft, XPoint bottomRight, bool isStroked = false, bool isFilled = false, string text = null)
+        XImage IShapeFactory.Image(string path, XPoint topLeft, XPoint bottomRight, bool isStroked, bool isFilled, string text)
         {
             byte[] bytes;
             using (var stream = _editor.FileIO?.Open(path))

@@ -55,7 +55,7 @@ namespace Core2D.Wpf
         /// </summary>
         public void Start()
         {
-            using (var log = new TraceLog())
+            using (ILog log = new TraceLog())
             {
                 log.Initialize(System.IO.Path.Combine(GetAssemblyPath(), _logFileName));
 
@@ -193,7 +193,7 @@ namespace Core2D.Wpf
                 DxfWriter = new DxfWriter(),
                 CsvReader = new CsvHelperReader(),
                 CsvWriter = new CsvHelperWriter(),
-                GetImageKey = async () => await OnGetImageKeyAsync()
+                GetImageKey = async () => await (this as IEditorApplication).OnGetImageKeyAsync()
             };
 
             _editor.DefaultTools();
@@ -202,7 +202,7 @@ namespace Core2D.Wpf
         }
 
         /// <inheritdoc/>
-        public async Task<string> OnGetImageKeyAsync()
+        async Task<string> IEditorApplication.OnGetImageKeyAsync()
         {
             var dlg = new OpenFileDialog()
             {
@@ -229,7 +229,7 @@ namespace Core2D.Wpf
         }
 
         /// <inheritdoc/>
-        public async Task OnOpenAsync(string path)
+        async Task IEditorApplication.OnOpenAsync(string path)
         {
             if (path == null)
             {
@@ -257,7 +257,7 @@ namespace Core2D.Wpf
         }
 
         /// <inheritdoc/>
-        public async Task OnSaveAsync()
+        async Task IEditorApplication.OnSaveAsync()
         {
             if (!string.IsNullOrEmpty(_editor?.ProjectPath))
             {
@@ -265,12 +265,12 @@ namespace Core2D.Wpf
             }
             else
             {
-                await OnSaveAsAsync();
+                await (this as IEditorApplication).OnSaveAsAsync();
             }
         }
 
         /// <inheritdoc/>
-        public async Task OnSaveAsAsync()
+        async Task IEditorApplication.OnSaveAsAsync()
         {
             var dlg = new SaveFileDialog()
             {
@@ -288,7 +288,7 @@ namespace Core2D.Wpf
         }
 
         /// <inheritdoc/>
-        public async Task OnImportXamlAsync(string path)
+        async Task IEditorApplication.OnImportXamlAsync(string path)
         {
             if (path == null)
             {
@@ -322,7 +322,7 @@ namespace Core2D.Wpf
         }
 
         /// <inheritdoc/>
-        public async Task OnExportXamlAsync(object item)
+        async Task IEditorApplication.OnExportXamlAsync(object item)
         {
             var dlg = new SaveFileDialog()
             {
@@ -339,7 +339,7 @@ namespace Core2D.Wpf
         }
 
         /// <inheritdoc/>
-        public async Task OnExportAsync(object item)
+        async Task IEditorApplication.OnExportAsync(object item)
         {
             string name = string.Empty;
 
@@ -388,7 +388,7 @@ namespace Core2D.Wpf
                         _editor?.ExportAsPdf(dlg.FileName, item);
                         break;
                     case 2:
-                        await OnExportAsEmfAsync(dlg.FileName);
+                        await (this as IEditorApplication).OnExportAsEmfAsync(dlg.FileName);
                         break;
                     case 3:
                         _editor?.ExportAsDxf(dlg.FileName, item);
@@ -400,7 +400,7 @@ namespace Core2D.Wpf
         }
 
         /// <inheritdoc/>
-        public async Task OnImportDataAsync()
+        async Task IEditorApplication.OnImportDataAsync()
         {
             var dlg = new OpenFileDialog()
             {
@@ -418,7 +418,7 @@ namespace Core2D.Wpf
         }
 
         /// <inheritdoc/>
-        public async Task OnExportDataAsync()
+        async Task IEditorApplication.OnExportDataAsync()
         {
             var database = _editor?.Project?.CurrentDatabase;
             if (database != null)
@@ -440,7 +440,7 @@ namespace Core2D.Wpf
         }
 
         /// <inheritdoc/>
-        public async Task OnUpdateDataAsync()
+        async Task IEditorApplication.OnUpdateDataAsync()
         {
             var database = _editor?.Project?.CurrentDatabase;
             if (database != null)
@@ -462,7 +462,7 @@ namespace Core2D.Wpf
         }
 
         /// <inheritdoc/>
-        public async Task OnImportObjectAsync(object item, CoreType type)
+        async Task IEditorApplication.OnImportObjectAsync(object item, CoreType type)
         {
             if (item == null)
                 return;
@@ -524,7 +524,7 @@ namespace Core2D.Wpf
         }
 
         /// <inheritdoc/>
-        public async Task OnExportObjectAsync(object item, CoreType type)
+        async Task IEditorApplication.OnExportObjectAsync(object item, CoreType type)
         {
             if (item == null)
                 return;
@@ -604,17 +604,15 @@ namespace Core2D.Wpf
         }
 
         /// <inheritdoc/>
-        public async Task OnCopyAsEmfAsync()
+        async Task IEditorApplication.OnCopyAsEmfAsync()
         {
             var page = _editor?.Project?.CurrentContainer as XPage;
             if (page != null)
             {
-                var writer = new EmfWriter();
-
                 if (_editor?.Renderers[0]?.State?.SelectedShape != null)
                 {
                     var shapes = Enumerable.Repeat(_editor.Renderers[0].State.SelectedShape, 1).ToList();
-                    writer.SetClipboard(
+                    EmfWriter.SetClipboard(
                         shapes,
                         page.Template.Width,
                         page.Template.Height,
@@ -625,7 +623,7 @@ namespace Core2D.Wpf
                 else if (_editor?.Renderers?[0]?.State?.SelectedShapes != null)
                 {
                     var shapes = _editor.Renderers[0].State.SelectedShapes.ToList();
-                    writer.SetClipboard(
+                    EmfWriter.SetClipboard(
                         shapes,
                         page.Template.Width,
                         page.Template.Height,
@@ -635,7 +633,7 @@ namespace Core2D.Wpf
                 }
                 else
                 {
-                    writer.SetClipboard(page, _editor.Project);
+                    EmfWriter.SetClipboard(page, _editor.Project);
                 }
             }
 
@@ -643,17 +641,14 @@ namespace Core2D.Wpf
         }
 
         /// <inheritdoc/>
-        public async Task OnExportAsEmfAsync(string path)
+        async Task IEditorApplication.OnExportAsEmfAsync(string path)
         {
             try
             {
-                if (_editor?.Project?.CurrentContainer != null)
+                var page = _editor?.Project?.CurrentContainer as XPage;
+                if (page != null)
                 {
-                    var writer = new EmfWriter();
-                    writer.Save(
-                        path,
-                        _editor.Project.CurrentContainer,
-                        _editor.Project);
+                    EmfWriter.Save(path, page, _editor.Project as IImageCache);
                 }
             }
             catch (Exception ex)
@@ -665,48 +660,48 @@ namespace Core2D.Wpf
         }
 
         /// <inheritdoc/>
-        public async Task OnZoomResetAsync()
+        async Task IEditorApplication.OnZoomResetAsync()
         {
             _mainWindow.OnZoomReset();
             await Task.Delay(0);
         }
 
         /// <inheritdoc/>
-        public async Task OnZoomAutoFitAsync()
+        async Task IEditorApplication.OnZoomAutoFitAsync()
         {
             _mainWindow.OnZoomAutoFit();
             await Task.Delay(0);
         }
 
         /// <inheritdoc/>
-        public async Task OnLoadWindowLayout()
+        async Task IEditorApplication.OnLoadWindowLayout()
         {
             _mainWindow.OnLoadLayout();
             await Task.Delay(0);
         }
 
         /// <inheritdoc/>
-        public async Task OnSaveWindowLayoutAsync()
+        async Task IEditorApplication.OnSaveWindowLayoutAsync()
         {
             _mainWindow.OnSaveLayout();
             await Task.Delay(0);
         }
 
         /// <inheritdoc/>
-        public async Task OnResetWindowLayoutAsync()
+        async Task IEditorApplication.OnResetWindowLayoutAsync()
         {
             _mainWindow.OnResetLayout();
             await Task.Delay(0);
         }
 
         /// <inheritdoc/>
-        public async Task OnShowObjectBrowserAsync()
+        async Task IEditorApplication.OnShowObjectBrowserAsync()
         {
             await Task.Delay(0);
         }
 
         /// <inheritdoc/>
-        public async Task OnShowDocumentViewerAsync()
+        async Task IEditorApplication.OnShowDocumentViewerAsync()
         {
             await Task.Delay(0);
         }
@@ -714,7 +709,7 @@ namespace Core2D.Wpf
         /// <summary>
         /// Close application view.
         /// </summary>
-        public void OnCloseView()
+        void IEditorApplication.OnCloseView()
         {
             _mainWindow?.Close();
         }

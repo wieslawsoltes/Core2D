@@ -10,7 +10,7 @@ namespace Log.Trace
     /// <summary>
     /// Trace message logger.
     /// </summary>
-    public class TraceLog : ObservableObject, ILog
+    public sealed class TraceLog : ObservableObject, ILog
     {
         private const string InformationPrefix = "Information: ";
         private const string WarningPrefix = "Warning: ";
@@ -19,14 +19,19 @@ namespace Log.Trace
         private string _lastMessage;
 
         /// <inheritdoc/>
-        public string LastMessage
+        string ILog.LastMessage
         {
             get { return _lastMessage; }
-            set { Update(ref _lastMessage, value); }
+        }
+
+        void SetLastMessage(string message)
+        {
+            _lastMessage = message;
+            Notify("LastMessage");
         }
 
         /// <inheritdoc/>
-        public void Initialize(string path)
+        void ILog.Initialize(string path)
         {
             try
             {
@@ -40,7 +45,7 @@ namespace Log.Trace
         }
 
         /// <inheritdoc/>
-        public void Close()
+        void ILog.Close()
         {
             try
             {
@@ -54,45 +59,45 @@ namespace Log.Trace
         }
 
         /// <inheritdoc/>
-        public void LogInformation(string message)
+        void ILog.LogInformation(string message)
         {
             SD.Trace.TraceInformation(message);
-            LastMessage = InformationPrefix + message;
+            SetLastMessage(InformationPrefix + message);
         }
 
         /// <inheritdoc/>
-        public void LogInformation(string format, params object[] args)
+        void ILog.LogInformation(string format, params object[] args)
         {
             SD.Trace.TraceInformation(format, args);
-            LastMessage = InformationPrefix + string.Format(format, args);
+            SetLastMessage(InformationPrefix + string.Format(format, args));
         }
 
         /// <inheritdoc/>
-        public void LogWarning(string message)
+        void ILog.LogWarning(string message)
         {
             SD.Trace.TraceWarning(message);
-            LastMessage = WarningPrefix + message;
+            SetLastMessage(WarningPrefix + message);
         }
 
         /// <inheritdoc/>
-        public void LogWarning(string format, params object[] args)
+        void ILog.LogWarning(string format, params object[] args)
         {
             SD.Trace.TraceWarning(format, args);
-            LastMessage = WarningPrefix + string.Format(format, args);
+            SetLastMessage(WarningPrefix + string.Format(format, args));
         }
 
         /// <inheritdoc/>
-        public void LogError(string message)
+        void ILog.LogError(string message)
         {
             SD.Trace.TraceError(message);
-            LastMessage = ErrorPrefix + message;
+            SetLastMessage(ErrorPrefix + message);
         }
 
         /// <inheritdoc/>
-        public void LogError(string format, params object[] args)
+        void ILog.LogError(string format, params object[] args)
         {
             SD.Trace.TraceError(format, args);
-            LastMessage = ErrorPrefix + string.Format(format, args);
+            SetLastMessage(ErrorPrefix + string.Format(format, args));
         }
 
         /// <summary>
@@ -120,7 +125,7 @@ namespace Log.Trace
         {
             if (disposing)
             {
-                Close();
+                (this as ILog).Close();
             }
         }
     }

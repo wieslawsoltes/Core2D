@@ -12,14 +12,14 @@ namespace TextFieldWriter.CsvHelper
     /// <summary>
     /// Defines <see cref="XDatabase"/> to the text fields writer.
     /// </summary>
-    public class CsvHelperWriter : ITextFieldWriter<XDatabase>
+    public sealed class CsvHelperWriter : ITextFieldWriter<XDatabase>
     {
         /// <summary>
         /// Write database records to text based file format.
         /// </summary>
         /// <param name="path">The fields file path.</param>
         /// <param name="database">The source records database.</param>
-        public void Write(string path, XDatabase database)
+        void ITextFieldWriter<XDatabase>.Write(string path, XDatabase database)
         {
             try
             {

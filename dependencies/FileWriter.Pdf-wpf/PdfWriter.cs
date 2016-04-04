@@ -19,10 +19,10 @@ namespace FileWriter.Pdf_core
     /// <summary>
     /// PdfSharp file writer.
     /// </summary>
-    public class PdfWriter : IFileWriter
+    public sealed class PdfWriter : IFileWriter
     {
         /// <inheritdoc/>
-        public void Save(string path, object item, object options)
+        void IFileWriter.Save(string path, object item, object options)
         {
             if (string.IsNullOrEmpty(path) || item == null)
                 return;

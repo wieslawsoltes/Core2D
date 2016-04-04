@@ -9,28 +9,28 @@ namespace Core2D.Perspex
     /// <summary>
     /// File system implementation using System.IO.
     /// </summary>
-    public class PerspexFileSystem : IFileSystem
+    public sealed class PerspexFileSystem : IFileSystem
     {
         /// <inheritdoc/>
-        public bool Exists(string path)
+        bool IFileSystem.Exists(string path)
         {
             return File.Exists(path);
         }
 
         /// <inheritdoc/>
-        public Stream Open(string path)
+        Stream IFileSystem.Open(string path)
         {
             return new FileStream(path, FileMode.Open);
         }
 
         /// <inheritdoc/>
-        public Stream Create(string path)
+        Stream IFileSystem.Create(string path)
         {
             return new FileStream(path, FileMode.Create);
         }
 
         /// <inheritdoc/>
-        public byte[] ReadBinary(Stream stream)
+        byte[] IFileSystem.ReadBinary(Stream stream)
         {
             byte[] buffer = new byte[16 * 1024];
             using (MemoryStream ms = new MemoryStream())
@@ -45,7 +45,7 @@ namespace Core2D.Perspex
         }
 
         /// <inheritdoc/>
-        public void WriteBinary(Stream stream, byte[] bytes)
+        void IFileSystem.WriteBinary(Stream stream, byte[] bytes)
         {
             using (var bw = new BinaryWriter(stream))
             {
@@ -54,7 +54,7 @@ namespace Core2D.Perspex
         }
 
         /// <inheritdoc/>
-        public string ReadUtf8Text(Stream stream)
+        string IFileSystem.ReadUtf8Text(Stream stream)
         {
             using (var sr = new StreamReader(stream, Encoding.UTF8))
             {
@@ -63,7 +63,7 @@ namespace Core2D.Perspex
         }
 
         /// <inheritdoc/>
-        public void WriteUtf8Text(Stream stream, string text)
+        void IFileSystem.WriteUtf8Text(Stream stream, string text)
         {
             using (var sw = new StreamWriter(stream, Encoding.UTF8))
             {
@@ -72,20 +72,20 @@ namespace Core2D.Perspex
         }
 
         /// <inheritdoc/>
-        public string ReadUtf8Text(string path)
+        string IFileSystem.ReadUtf8Text(string path)
         {
             using (var fs = File.OpenRead(path))
             {
-                return ReadUtf8Text(fs);
+                return (this as IFileSystem).ReadUtf8Text(fs);
             }
         }
 
         /// <inheritdoc/>
-        public void WriteUtf8Text(string path, string text)
+        void IFileSystem.WriteUtf8Text(string path, string text)
         {
             using (var fs = File.Create(path))
             {
-                WriteUtf8Text(fs, text);
+                (this as IFileSystem).WriteUtf8Text(fs, text);
             }
         }
     }
