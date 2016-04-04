@@ -13,14 +13,10 @@ namespace Core2D.Project
     {
         private IDictionary<string, byte[]> _images = new Dictionary<string, byte[]>();
 
+        private IEnumerable<ImageKey> GetKeys() => _images.Select(i => new ImageKey() { Key = i.Key }).ToList();
+
         /// <inheritdoc/>
-        public IEnumerable<ImageKey> Keys
-        {
-            get
-            {
-                return _images.Select(i => new ImageKey() { Key = i.Key }).ToList();
-            }
-        }
+        public IEnumerable<ImageKey> Keys => GetKeys();
 
         /// <inheritdoc/>
         public string AddImageFromFile(string path, byte[] bytes)
