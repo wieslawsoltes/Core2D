@@ -52,6 +52,16 @@ namespace Core2D.Editor
         public static ICoreCommand<object> ExportXamlCommand { get; set; }
 
         /// <summary>
+        /// Import json.
+        /// </summary>
+        public static ICoreCommand<string> ImportJsonCommand { get; set; }
+
+        /// <summary>
+        /// Export json.
+        /// </summary>
+        public static ICoreCommand<object> ExportJsonCommand { get; set; }
+
+        /// <summary>
         /// Export project, document or page.
         /// </summary>
         public static ICoreCommand<object> ExportCommand { get; set; }
