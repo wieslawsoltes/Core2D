@@ -16,6 +16,9 @@
              Design.Width="600" Design.Height="600">
     <Grid ColumnDefinitions="250,Auto,*" RowDefinitions="*">
         <TreeView Name="project" Classes="project" Grid.Column="0" Grid.Row="0" Margin="3,3,0,3">
+            <TreeView.KeyBindings>
+                <KeyBinding Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding #project.SelectedItem}" Gesture="Ctrl+E"/>
+            </TreeView.KeyBindings>
             <TreeView.Styles>
                 <Style Selector="TreeViewItem">
                     <Setter Property="ContextMenu">
