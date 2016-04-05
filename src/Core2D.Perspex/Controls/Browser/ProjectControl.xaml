@@ -16,6 +16,17 @@
              Design.Width="600" Design.Height="600">
     <Grid ColumnDefinitions="250,Auto,*" RowDefinitions="*">
         <TreeView Name="project" Classes="project" Grid.Column="0" Grid.Row="0" Margin="3,3,0,3">
+            <TreeView.Styles>
+                <Style Selector="TreeViewItem">
+                    <Setter Property="ContextMenu">
+                        <Setter.Value>
+                            <ContextMenu>
+                                <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                            </ContextMenu>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TreeView.Styles>
             <!-- Project -->
             <TreeViewItem Header="Project" DataContext="{Binding Project, Mode=TwoWay}" IsExpanded="True">
                 <!-- Styles -->
