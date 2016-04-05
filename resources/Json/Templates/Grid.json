@@ -1,5 +1,6 @@
 ﻿{
   "$id": "1",
+  "$type": "Core2D.Project.XTemplate, Core2D",
   "Name": "Grid",
   "Width": 840.0,
   "Height": 600.0,
@@ -7,6 +8,7 @@
   "Layers": [
     {
       "$id": "2",
+      "$type": "Core2D.Project.XLayer, Core2D",
       "Name": "TemplateLayer1",
       "Owner": {
         "$ref": "1"
@@ -23,6 +25,7 @@
           "CellHeight": 30.0,
           "TopLeft": {
             "$id": "4",
+            "$type": "Core2D.Shapes.XPoint, Core2D",
             "X": 0.0,
             "Y": 0.0,
             "Shape": {
@@ -35,6 +38,7 @@
               "CellHeight": 30.0,
               "TopLeft": {
                 "$id": "6",
+                "$type": "Core2D.Shapes.XPoint, Core2D",
                 "X": -4.0,
                 "Y": -4.0,
                 "Name": "",
@@ -43,12 +47,14 @@
                 "IsFilled": false,
                 "Data": {
                   "$id": "7",
+                  "$type": "Core2D.Data.XContext, Core2D",
                   "Properties": []
                 },
                 "Resources": []
               },
               "BottomRight": {
                 "$id": "8",
+                "$type": "Core2D.Shapes.XPoint, Core2D",
                 "X": 4.0,
                 "Y": 4.0,
                 "Name": "",
@@ -57,6 +63,7 @@
                 "IsFilled": false,
                 "Data": {
                   "$id": "9",
+                  "$type": "Core2D.Data.XContext, Core2D",
                   "Properties": []
                 },
                 "Resources": []
@@ -65,11 +72,14 @@
               "State": "Visible, Printable, Standalone",
               "Style": {
                 "$id": "10",
+                "$type": "Core2D.Style.ShapeStyle, Core2D",
                 "LineStyle": {
                   "$id": "11",
+                  "$type": "Core2D.Style.LineStyle, Core2D",
                   "Name": "Line",
                   "FixedLength": {
                     "$id": "12",
+                    "$type": "Core2D.Style.LineFixedLength, Core2D",
                     "Flags": 0,
                     "Disabled": true,
                     "Start": false,
@@ -77,13 +87,14 @@
                     "Vertical": false,
                     "Horizontal": false,
                     "All": false,
-                    "Length": 15.0,
                     "StartTrigger": "Connector, Output",
-                    "EndTrigger": "Connector, Input"
+                    "EndTrigger": "Connector, Input",
+                    "Length": 15.0
                   }
                 },
                 "StartArrowStyle": {
                   "$id": "13",
+                  "$type": "Core2D.Style.ArrowStyle, Core2D",
                   "ArrowType": 0,
                   "IsStroked": true,
                   "IsFilled": false,
@@ -99,6 +110,7 @@
                 },
                 "EndArrowStyle": {
                   "$id": "14",
+                  "$type": "Core2D.Style.ArrowStyle, Core2D",
                   "ArrowType": 0,
                   "IsStroked": true,
                   "IsFilled": false,
@@ -114,6 +126,7 @@
                 },
                 "TextStyle": {
                   "$id": "15",
+                  "$type": "Core2D.Style.TextStyle, Core2D",
                   "Name": "Text",
                   "FontName": "Calibri",
                   "FontFile": "C:\\Windows\\Fonts\\calibri.ttf",
@@ -134,6 +147,7 @@
               "IsFilled": false,
               "Data": {
                 "$id": "16",
+                "$type": "Core2D.Data.XContext, Core2D",
                 "Properties": []
               },
               "Resources": []
@@ -144,12 +158,14 @@
             "IsFilled": false,
             "Data": {
               "$id": "17",
+              "$type": "Core2D.Data.XContext, Core2D",
               "Properties": []
             },
             "Resources": []
           },
           "BottomRight": {
             "$id": "18",
+            "$type": "Core2D.Shapes.XPoint, Core2D",
             "X": 840.0,
             "Y": 600.0,
             "Shape": {
@@ -161,6 +177,7 @@
             "IsFilled": false,
             "Data": {
               "$id": "19",
+              "$type": "Core2D.Data.XContext, Core2D",
               "Properties": []
             },
             "Resources": []
@@ -169,11 +186,14 @@
           "State": "Visible, Standalone",
           "Style": {
             "$id": "20",
+            "$type": "Core2D.Style.ShapeStyle, Core2D",
             "LineStyle": {
               "$id": "21",
+              "$type": "Core2D.Style.LineStyle, Core2D",
               "Name": "Line",
               "FixedLength": {
                 "$id": "22",
+                "$type": "Core2D.Style.LineFixedLength, Core2D",
                 "Flags": 0,
                 "Disabled": true,
                 "Start": false,
@@ -181,13 +201,14 @@
                 "Vertical": false,
                 "Horizontal": false,
                 "All": false,
-                "Length": 15.0,
                 "StartTrigger": "Connector, Output",
-                "EndTrigger": "Connector, Input"
+                "EndTrigger": "Connector, Input",
+                "Length": 15.0
               }
             },
             "StartArrowStyle": {
               "$id": "23",
+              "$type": "Core2D.Style.ArrowStyle, Core2D",
               "ArrowType": 0,
               "IsStroked": true,
               "IsFilled": false,
@@ -203,6 +224,7 @@
             },
             "EndArrowStyle": {
               "$id": "24",
+              "$type": "Core2D.Style.ArrowStyle, Core2D",
               "ArrowType": 0,
               "IsStroked": true,
               "IsFilled": false,
@@ -218,6 +240,7 @@
             },
             "TextStyle": {
               "$id": "25",
+              "$type": "Core2D.Style.TextStyle, Core2D",
               "Name": "Text",
               "FontName": "Calibri",
               "FontFile": "C:\\Windows\\Fonts\\calibri.ttf",
@@ -238,6 +261,7 @@
           "IsFilled": false,
           "Data": {
             "$id": "26",
+            "$type": "Core2D.Data.XContext, Core2D",
             "Properties": []
           },
           "Resources": []
@@ -247,6 +271,7 @@
     },
     {
       "$id": "27",
+      "$type": "Core2D.Project.XLayer, Core2D",
       "Name": "TemplateLayer2",
       "Owner": {
         "$ref": "1"
@@ -257,6 +282,7 @@
     },
     {
       "$id": "28",
+      "$type": "Core2D.Project.XLayer, Core2D",
       "Name": "TemplateLayer3",
       "Owner": {
         "$ref": "1"
@@ -271,6 +297,7 @@
   },
   "WorkingLayer": {
     "$id": "29",
+    "$type": "Core2D.Project.XLayer, Core2D",
     "Name": "TemplateWorking",
     "Owner": {
       "$ref": "1"
@@ -281,6 +308,7 @@
   },
   "HelperLayer": {
     "$id": "30",
+    "$type": "Core2D.Project.XLayer, Core2D",
     "Name": "TemplateHelper",
     "Owner": {
       "$ref": "1"

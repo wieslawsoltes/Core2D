@@ -1,5 +1,6 @@
 ﻿{
   "$id": "1",
+  "$type": "Core2D.Project.XTemplate, Core2D",
   "Name": "Empty",
   "Width": 840.0,
   "Height": 600.0,
@@ -7,6 +8,7 @@
   "Layers": [
     {
       "$id": "2",
+      "$type": "Core2D.Project.XLayer, Core2D",
       "Name": "TemplateLayer1",
       "Owner": {
         "$ref": "1"
@@ -17,6 +19,7 @@
     },
     {
       "$id": "3",
+      "$type": "Core2D.Project.XLayer, Core2D",
       "Name": "TemplateLayer2",
       "Owner": {
         "$ref": "1"
@@ -27,6 +30,7 @@
     },
     {
       "$id": "4",
+      "$type": "Core2D.Project.XLayer, Core2D",
       "Name": "TemplateLayer3",
       "Owner": {
         "$ref": "1"
@@ -41,6 +45,7 @@
   },
   "WorkingLayer": {
     "$id": "5",
+    "$type": "Core2D.Project.XLayer, Core2D",
     "Name": "TemplateWorking",
     "Owner": {
       "$ref": "1"
@@ -51,6 +56,7 @@
   },
   "HelperLayer": {
     "$id": "6",
+    "$type": "Core2D.Project.XLayer, Core2D",
     "Name": "TemplateHelper",
     "Owner": {
       "$ref": "1"

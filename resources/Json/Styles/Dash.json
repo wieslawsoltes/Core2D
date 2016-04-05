@@ -1,10 +1,13 @@
 ﻿{
   "$id": "1",
+  "$type": "Core2D.Style.ShapeStyle, Core2D",
   "LineStyle": {
     "$id": "2",
+    "$type": "Core2D.Style.LineStyle, Core2D",
     "Name": "Line",
     "FixedLength": {
       "$id": "3",
+      "$type": "Core2D.Style.LineFixedLength, Core2D",
       "Flags": 0,
       "Disabled": true,
       "Start": false,
@@ -12,21 +15,22 @@
       "Vertical": false,
       "Horizontal": false,
       "All": false,
-      "Length": 15.0,
       "StartTrigger": "Connector, Output",
-      "EndTrigger": "Connector, Input"
+      "EndTrigger": "Connector, Input",
+      "Length": 15.0
     }
   },
   "StartArrowStyle": {
     "$id": "4",
+    "$type": "Core2D.Style.ArrowStyle, Core2D",
     "ArrowType": 0,
     "IsStroked": true,
     "IsFilled": false,
     "RadiusX": 5.0,
     "RadiusY": 5.0,
     "Name": "Start",
-    "Stroke": "#FFFF00FF",
-    "Fill": "#50FF00FF",
+    "Stroke": "#FF000000",
+    "Fill": "#50000000",
     "Thickness": 2.0,
     "LineCap": 2,
     "DashOffset": 0.0,
@@ -34,14 +38,15 @@
   },
   "EndArrowStyle": {
     "$id": "5",
+    "$type": "Core2D.Style.ArrowStyle, Core2D",
     "ArrowType": 0,
     "IsStroked": true,
     "IsFilled": false,
     "RadiusX": 5.0,
     "RadiusY": 5.0,
     "Name": "End",
-    "Stroke": "#FFFF00FF",
-    "Fill": "#50FF00FF",
+    "Stroke": "#FF000000",
+    "Fill": "#50000000",
     "Thickness": 2.0,
     "LineCap": 2,
     "DashOffset": 0.0,
@@ -49,6 +54,7 @@
   },
   "TextStyle": {
     "$id": "6",
+    "$type": "Core2D.Style.TextStyle, Core2D",
     "Name": "Text",
     "FontName": "Calibri",
     "FontFile": "C:\\Windows\\Fonts\\calibri.ttf",
@@ -57,11 +63,12 @@
     "TextHAlignment": 1,
     "TextVAlignment": 1
   },
-  "Name": "Magenta",
-  "Stroke": "#FFFF00FF",
-  "Fill": "#50FF00FF",
+  "Name": "Dash",
+  "Stroke": "#FF000000",
+  "Fill": "#50000000",
   "Thickness": 2.0,
   "LineCap": 2,
-  "DashOffset": 0.0,
+  "Dashes": "2 2",
+  "DashOffset": 1.0,
   "Resources": []
 }
