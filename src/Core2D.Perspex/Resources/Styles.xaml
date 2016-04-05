@@ -274,22 +274,6 @@
         <Setter Property="AutoScrollToSelectedItem" Value="True"/>
         <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
     </Style>
-    <!-- ListBox.xaml -->
-    <Style Selector="ListBox.xaml">
-        <Setter Property="Padding" Value="4"/>
-        <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="AutoScrollToSelectedItem" Value="True"/>
-        <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
-    </Style>
-    <!-- ListBox.browser -->
-    <Style Selector="ListBox.browser">
-        <Setter Property="Padding" Value="4"/>
-        <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="AutoScrollToSelectedItem" Value="True"/>
-        <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
-    </Style>
     <!-- ListBox.document -->
     <Style Selector="ListBox.document">
         <Setter Property="Padding" Value="4"/>
@@ -512,28 +496,6 @@
         <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
     </Style>
-    <!-- TextBox.xaml -->
-    <Style Selector="TextBox.xaml">
-        <Setter Property="Padding" Value="4"/>
-        <Setter Property="FontSize" Value="12"/>
-        <Setter Property="Background" Value="{StyleResource BackgroundBrush}"/>
-        <Setter Property="TextAlignment" Value="Left"/>
-        <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="AcceptsReturn" Value="True"/>
-        <Setter Property="TextWrapping" Value="NoWrap"/>
-        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
-        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
-        <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
-    </Style>
-    <Style Selector="TextBox.xaml:pointerover /template/ Border#border">
-        <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
-        <Setter Property="BorderThickness" Value="1"/>
-    </Style>
-    <Style Selector="TextBox.xaml:focus /template/ Border#border">
-        <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
-        <Setter Property="BorderThickness" Value="1"/>
-    </Style>
     <!-- TextBox.browser -->
     <Style Selector="TextBox.browser">
         <Setter Property="Padding" Value="4"/>
@@ -590,14 +552,6 @@
         <Setter Property="Margin" Value="0"/>
         <Setter Property="Padding" Value="0"/>
         <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="AutoScrollToSelectedItem" Value="True"/>
-        <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
-    </Style>
-    <!-- TreeView.xaml -->
-    <Style Selector="TreeView.xaml">
-        <Setter Property="Padding" Value="4"/>
-        <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
-        <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="AutoScrollToSelectedItem" Value="True"/>
         <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
     </Style>
