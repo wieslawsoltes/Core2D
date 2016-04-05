@@ -19,21 +19,20 @@
             <TreeView.KeyBindings>
                 <KeyBinding Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding #project.SelectedItem}" Gesture="Ctrl+E"/>
             </TreeView.KeyBindings>
-            <TreeView.Styles>
-                <Style Selector="TreeViewItem">
-                    <Setter Property="ContextMenu">
-                        <Setter.Value>
-                            <ContextMenu>
-                                <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding Mode=OneWay}"/>
-                            </ContextMenu>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </TreeView.Styles>
             <!-- Project -->
             <TreeViewItem Header="Project" DataContext="{Binding Project, Mode=TwoWay}" IsExpanded="True">
+                <TreeViewItem.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                    </ContextMenu>
+                </TreeViewItem.ContextMenu>
                 <!-- Styles -->
                 <TreeViewItem Header="Styles" DataContext="{Binding StyleLibraries, Mode=TwoWay}" Items="{Binding Mode=TwoWay}">
+                    <TreeViewItem.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                        </ContextMenu>
+                    </TreeViewItem.ContextMenu>
                     <TreeViewItem.Styles>
                         <Style Selector="TreeViewItem">
                             <Setter Property="IsExpanded" Value="False"/>
@@ -41,15 +40,32 @@
                     </TreeViewItem.Styles>
                     <TreeViewItem.DataTemplates>
                         <TreeDataTemplate DataType="Project:ILibrary" ItemsSource="{Binding Items, Mode=TwoWay}">
-                            <TextBlock Text="{Binding Name, Mode=OneWay}" Classes="default"/>
+                            <TextBlock Text="{Binding Name, Mode=OneWay}" Classes="default">
+                                <TextBlock.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                    </ContextMenu>
+                                </TextBlock.ContextMenu>
+                            </TextBlock>
                         </TreeDataTemplate>
                         <DataTemplate DataType="Style:ShapeStyle">
-                            <TextBlock Text="{Binding Name, Mode=OneWay}" Classes="default"/>
+                            <TextBlock Text="{Binding Name, Mode=OneWay}" Classes="default">
+                                <TextBlock.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                    </ContextMenu>
+                                </TextBlock.ContextMenu>
+                            </TextBlock>
                         </DataTemplate>
                     </TreeViewItem.DataTemplates>
                 </TreeViewItem>
                 <!-- Groups -->
                 <TreeViewItem Header="Groups" DataContext="{Binding GroupLibraries, Mode=TwoWay}" Items="{Binding Mode=TwoWay}">
+                    <TreeViewItem.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                        </ContextMenu>
+                    </TreeViewItem.ContextMenu>
                     <TreeViewItem.Styles>
                         <Style Selector="TreeViewItem">
                             <Setter Property="IsExpanded" Value="False"/>
@@ -57,18 +73,41 @@
                     </TreeViewItem.Styles>
                     <TreeViewItem.DataTemplates>
                         <TreeDataTemplate DataType="Project:ILibrary" ItemsSource="{Binding Items, Mode=TwoWay}">
-                            <TextBlock Text="{Binding Name, Mode=OneWay}" Classes="default"/>
+                            <TextBlock Text="{Binding Name, Mode=OneWay}" Classes="default">
+                                <TextBlock.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                    </ContextMenu>
+                                </TextBlock.ContextMenu>
+                            </TextBlock>
                         </TreeDataTemplate>
                         <TreeDataTemplate DataType="Shapes:XGroup" ItemsSource="{Binding Resources, Mode=TwoWay}">
-                            <TextBlock Text="{Binding Name, Mode=OneWay}" Classes="default"/>
+                            <TextBlock Text="{Binding Name, Mode=OneWay}" Classes="default">
+                                <TextBlock.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                    </ContextMenu>
+                                </TextBlock.ContextMenu>
+                            </TextBlock>
                         </TreeDataTemplate>
                         <DataTemplate DataType="Core:ObservableObject">
-                            <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="default"/>
+                            <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="default">
+                                <TextBlock.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                    </ContextMenu>
+                                </TextBlock.ContextMenu>
+                            </TextBlock>
                         </DataTemplate>
                     </TreeViewItem.DataTemplates>
                 </TreeViewItem>
                 <!-- Databases -->
                 <TreeViewItem Header="Databases" DataContext="{Binding Databases, Mode=TwoWay}" Items="{Binding Mode=TwoWay}">
+                    <TreeViewItem.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                        </ContextMenu>
+                    </TreeViewItem.ContextMenu>
                     <TreeViewItem.Styles>
                         <Style Selector="TreeViewItem">
                             <Setter Property="IsExpanded" Value="False"/>
@@ -76,12 +115,23 @@
                     </TreeViewItem.Styles>
                     <TreeViewItem.DataTemplates>
                         <DataTemplate DataType="Database:XDatabase">
-                            <TextBlock Text="{Binding Name, Mode=OneWay}" Classes="default"/>
+                            <TextBlock Text="{Binding Name, Mode=OneWay}" Classes="default">
+                                <TextBlock.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                    </ContextMenu>
+                                </TextBlock.ContextMenu>
+                            </TextBlock>
                         </DataTemplate>
                     </TreeViewItem.DataTemplates>
                 </TreeViewItem>
                 <!-- Templates -->
                 <TreeViewItem Header="Templates" DataContext="{Binding Templates, Mode=TwoWay}" Items="{Binding Mode=TwoWay}">
+                    <TreeViewItem.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                        </ContextMenu>
+                    </TreeViewItem.ContextMenu>
                     <TreeViewItem.Styles>
                         <Style Selector="TreeViewItem">
                             <Setter Property="IsExpanded" Value="False"/>
@@ -89,21 +139,50 @@
                     </TreeViewItem.Styles>
                     <TreeViewItem.DataTemplates>
                         <TreeDataTemplate DataType="Project:XTemplate" ItemsSource="{Binding Layers, Mode=TwoWay}">
-                            <TextBlock Text="{Binding Name, Mode=OneWay}" Classes="default"/>
+                            <TextBlock Text="{Binding Name, Mode=OneWay}" Classes="default">
+                                <TextBlock.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                    </ContextMenu>
+                                </TextBlock.ContextMenu>
+                            </TextBlock>
                         </TreeDataTemplate>
                         <TreeDataTemplate DataType="Project:XLayer" ItemsSource="{Binding Shapes, Mode=TwoWay}">
-                            <TextBlock Text="{Binding Name, Mode=OneWay}" Classes="default"/>
+                            <TextBlock Text="{Binding Name, Mode=OneWay}" Classes="default">
+                                <TextBlock.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                    </ContextMenu>
+                                </TextBlock.ContextMenu>
+                            </TextBlock>
                         </TreeDataTemplate>
                         <TreeDataTemplate DataType="Shape:BaseShape" ItemsSource="{Binding Resources, Mode=TwoWay}">
-                            <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="default"/>
+                            <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="default">
+                                <TextBlock.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                    </ContextMenu>
+                                </TextBlock.ContextMenu>
+                            </TextBlock>
                         </TreeDataTemplate>
                         <DataTemplate DataType="Core:ObservableObject">
-                            <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="default"/>
+                            <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="default">
+                                <TextBlock.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                    </ContextMenu>
+                                </TextBlock.ContextMenu>
+                            </TextBlock>
                         </DataTemplate>
                     </TreeViewItem.DataTemplates>
                 </TreeViewItem>
                 <!-- Documents -->
                 <TreeViewItem Header="Documents" DataContext="{Binding Documents, Mode=TwoWay}" Items="{Binding Mode=TwoWay}">
+                    <TreeViewItem.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                        </ContextMenu>
+                    </TreeViewItem.ContextMenu>
                     <TreeViewItem.Styles>
                         <Style Selector="TreeViewItem">
                             <Setter Property="IsExpanded" Value="False"/>
@@ -111,31 +190,97 @@
                     </TreeViewItem.Styles>
                     <TreeViewItem.DataTemplates>
                         <TreeDataTemplate DataType="Project:XDocument" ItemsSource="{Binding Pages, Mode=TwoWay}">
-                            <TextBlock Text="{Binding Name, Mode=OneWay}" Classes="default"/>
+                            <TextBlock Text="{Binding Name, Mode=OneWay}" Classes="default">
+                                <TextBlock.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                    </ContextMenu>
+                                </TextBlock.ContextMenu>
+                            </TextBlock>
                         </TreeDataTemplate>
                         <TreeDataTemplate DataType="Project:XPage" ItemsSource="{Binding Layers, Mode=TwoWay}">
-                            <TextBlock Text="{Binding Name, Mode=OneWay}" Classes="default"/>
+                            <TextBlock Text="{Binding Name, Mode=OneWay}" Classes="default">
+                                <TextBlock.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                    </ContextMenu>
+                                </TextBlock.ContextMenu>
+                            </TextBlock>
                         </TreeDataTemplate>
                         <TreeDataTemplate DataType="Project:XLayer" ItemsSource="{Binding Shapes, Mode=TwoWay}">
-                            <TextBlock Text="{Binding Name, Mode=OneWay}" Classes="default"/>
+                            <TextBlock Text="{Binding Name, Mode=OneWay}" Classes="default">
+                                <TextBlock.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                    </ContextMenu>
+                                </TextBlock.ContextMenu>
+                            </TextBlock>
                         </TreeDataTemplate>
                         <TreeDataTemplate DataType="Shape:BaseShape" ItemsSource="{Binding Resources, Mode=TwoWay}">
-                            <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="default"/>
+                            <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="default">
+                                <TextBlock.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                    </ContextMenu>
+                                </TextBlock.ContextMenu>
+                            </TextBlock>
                         </TreeDataTemplate>
                         <DataTemplate DataType="Core:ObservableObject">
-                            <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="default"/>
+                            <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="default">
+                                <TextBlock.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                    </ContextMenu>
+                                </TextBlock.ContextMenu>
+                            </TextBlock>
                         </DataTemplate>
                     </TreeViewItem.DataTemplates>
                 </TreeViewItem>
             </TreeViewItem>
             <!-- Current -->
             <TreeViewItem Header="Current" IsExpanded="True">
-                <TreeViewItem Header="Options" DataContext="{Binding Project.Options, Mode=TwoWay}"/>
-                <TreeViewItem Header="Shape" DataContext="{Binding Project.CurrentContainer.CurrentShape, Mode=TwoWay}"/>
-                <TreeViewItem Header="Data" DataContext="{Binding Project.CurrentContainer.CurrentShape.Data, Mode=TwoWay}"/>
-                <TreeViewItem Header="Style" DataContext="{Binding Project.CurrentStyleLibrary.Selected, Mode=TwoWay}"/>
-                <TreeViewItem Header="Container" DataContext="{Binding Project.CurrentContainer, Mode=TwoWay}"/>
-                <TreeViewItem Header="Template" DataContext="{Binding Project.CurrentTemplate, Mode=TwoWay}"/>
+                <TreeViewItem Header="Options" DataContext="{Binding Project.Options, Mode=TwoWay}">
+                    <TreeViewItem.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                        </ContextMenu>
+                    </TreeViewItem.ContextMenu>
+                </TreeViewItem>
+                <TreeViewItem Header="Shape" DataContext="{Binding Project.CurrentContainer.CurrentShape, Mode=TwoWay}">
+                    <TreeViewItem.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                        </ContextMenu>
+                    </TreeViewItem.ContextMenu>
+                </TreeViewItem>
+                <TreeViewItem Header="Data" DataContext="{Binding Project.CurrentContainer.CurrentShape.Data, Mode=TwoWay}">
+                    <TreeViewItem.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                        </ContextMenu>
+                    </TreeViewItem.ContextMenu>
+                </TreeViewItem>
+                <TreeViewItem Header="Style" DataContext="{Binding Project.CurrentStyleLibrary.Selected, Mode=TwoWay}">
+                    <TreeViewItem.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                        </ContextMenu>
+                    </TreeViewItem.ContextMenu>
+                </TreeViewItem>
+                <TreeViewItem Header="Container" DataContext="{Binding Project.CurrentContainer, Mode=TwoWay}">
+                    <TreeViewItem.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                        </ContextMenu>
+                    </TreeViewItem.ContextMenu>
+                </TreeViewItem>
+                <TreeViewItem Header="Template" DataContext="{Binding Project.CurrentTemplate, Mode=TwoWay}">
+                    <TreeViewItem.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                        </ContextMenu>
+                    </TreeViewItem.ContextMenu>
+                </TreeViewItem>
             </TreeViewItem>
         </TreeView>
         <GridSplitter Classes="vertical" Grid.Column="1" Grid.Row="0" Width="6"/>
