@@ -10,6 +10,9 @@
              Design.DataContext="{Static Designer:DesignerContext.Editor}"
              Design.Width="1000" Design.Height="600">
     <TabControl Classes="top">
+        <TabItem Header="Project" Classes="property">
+            <browser:ProjectControl/>
+        </TabItem>
         <TabItem Header="Styles" Classes="property">
             <browser:StylesControl/>
         </TabItem>
@@ -42,9 +45,6 @@
         </TabItem>
         <TabItem Header="Template" Classes="property">
             <browser:TemplateControl/>
-        </TabItem>
-        <TabItem Header="Project" Classes="property">
-            <browser:ProjectControl/>
         </TabItem>
     </TabControl>
 </UserControl>
