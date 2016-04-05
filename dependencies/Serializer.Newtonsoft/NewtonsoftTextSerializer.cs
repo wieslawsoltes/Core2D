@@ -24,7 +24,7 @@ namespace Serializer.Newtonsoft
             Settings = new JsonSerializerSettings()
             {
                 Formatting = Formatting.Indented,
-                TypeNameHandling = TypeNameHandling.Auto,
+                TypeNameHandling = TypeNameHandling.Objects,
                 PreserveReferencesHandling = PreserveReferencesHandling.Objects,
                 ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
                 ContractResolver = new ProjectContractResolver(),
