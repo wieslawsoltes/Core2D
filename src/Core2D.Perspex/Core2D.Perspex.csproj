@@ -365,9 +365,6 @@
     <Compile Include="Controls\Exporter\DocumentsControl.xaml.cs">
       <DependentUpon>DocumentsControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ExporterControl.xaml.cs">
-      <DependentUpon>ExporterControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\Exporter\GroupsControl.xaml.cs">
       <DependentUpon>GroupsControl.xaml</DependentUpon>
     </Compile>
@@ -601,7 +598,6 @@
     <EmbeddedResource Include="Views\MenuControl.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\ExporterControl.xaml" />
     <EmbeddedResource Include="Controls\Exporter\StylesControl.xaml" />
     <EmbeddedResource Include="Controls\Exporter\GroupsControl.xaml" />
     <EmbeddedResource Include="Controls\Exporter\DatabasesControl.xaml" />
