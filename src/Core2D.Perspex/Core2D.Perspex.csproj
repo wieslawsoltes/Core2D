@@ -220,9 +220,6 @@
     <Compile Include="Controls\Browser\ProjectControl.xaml.cs">
       <DependentUpon>ProjectControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Exporter\ProjectControl.xaml.cs">
-      <DependentUpon>ProjectControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\Project\LibraryControl.xaml.cs">
       <DependentUpon>LibraryControl.xaml</DependentUpon>
     </Compile>
@@ -349,41 +346,6 @@
       <DependentUpon>StylesControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Project\TemplatesControl.xaml.cs">
-      <DependentUpon>TemplatesControl.xaml</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Controls\Exporter\ContainerControl.xaml.cs">
-      <DependentUpon>ContainerControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Exporter\DatabasesControl.xaml.cs">
-      <DependentUpon>DatabasesControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Exporter\DataControl.xaml.cs">
-      <DependentUpon>DataControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Exporter\DocumentsControl.xaml.cs">
-      <DependentUpon>DocumentsControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Exporter\GroupsControl.xaml.cs">
-      <DependentUpon>GroupsControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Exporter\OptionsControl.xaml.cs">
-      <DependentUpon>OptionsControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Exporter\ShapeControl.xaml.cs">
-      <DependentUpon>ShapeControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Exporter\StyleControl.xaml.cs">
-      <DependentUpon>StyleControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Exporter\StylesControl.xaml.cs">
-      <DependentUpon>StylesControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Exporter\TemplateControl.xaml.cs">
-      <DependentUpon>TemplateControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Exporter\TemplatesControl.xaml.cs">
       <DependentUpon>TemplatesControl.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -598,19 +560,6 @@
     <EmbeddedResource Include="Views\MenuControl.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Controls\Exporter\StylesControl.xaml" />
-    <EmbeddedResource Include="Controls\Exporter\GroupsControl.xaml" />
-    <EmbeddedResource Include="Controls\Exporter\DatabasesControl.xaml" />
-    <EmbeddedResource Include="Controls\Exporter\TemplatesControl.xaml" />
-    <EmbeddedResource Include="Controls\Exporter\DocumentsControl.xaml" />
-    <EmbeddedResource Include="Controls\Exporter\OptionsControl.xaml" />
-    <EmbeddedResource Include="Controls\Exporter\ShapeControl.xaml" />
-    <EmbeddedResource Include="Controls\Exporter\DataControl.xaml" />
-    <EmbeddedResource Include="Controls\Exporter\StyleControl.xaml" />
-    <EmbeddedResource Include="Controls\Exporter\ContainerControl.xaml" />
-    <EmbeddedResource Include="Controls\Exporter\TemplateControl.xaml" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Views\BrowserControl.xaml" />
     <EmbeddedResource Include="Controls\Browser\StylesControl.xaml" />
     <EmbeddedResource Include="Controls\Browser\GroupsControl.xaml" />
@@ -691,9 +640,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Styles.xaml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Controls\Exporter\ProjectControl.xaml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Controls\Browser\ProjectControl.xaml" />
