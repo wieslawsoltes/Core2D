@@ -328,11 +328,64 @@ namespace Core2D.Wpf
             {
                 Filter = "Xaml (*.xaml)|*.xaml|All (*.*)|*.*",
                 FilterIndex = 0,
+                FileName = _editor?.GetName(item)
             };
 
             if (dlg.ShowDialog(_mainWindow) == true)
             {
                 _editor?.OnExportXaml(dlg.FileName, item);
+            }
+
+            await Task.Delay(0);
+        }
+
+        /// <inheritdoc/>
+        async Task IEditorApplication.OnImportJsonAsync(string path)
+        {
+            if (path == null)
+            {
+                var dlg = new OpenFileDialog()
+                {
+                    Filter = "Json (*.json)|*.json|All (*.*)|*.*",
+                    FilterIndex = 0,
+                    Multiselect = true,
+                    FileName = ""
+                };
+
+                if (dlg.ShowDialog(_mainWindow) == true)
+                {
+                    var results = dlg.FileNames;
+
+                    foreach (var result in results)
+                    {
+                        _editor?.OnImportJson(result);
+                    }
+                }
+            }
+            else
+            {
+                if (System.IO.File.Exists(path))
+                {
+                    _editor?.OnImportJson(path);
+                }
+            }
+
+            await Task.Delay(0);
+        }
+
+        /// <inheritdoc/>
+        async Task IEditorApplication.OnExportJsonAsync(object item)
+        {
+            var dlg = new SaveFileDialog()
+            {
+                Filter = "Xaml (*.xaml)|*.xaml|All (*.*)|*.*",
+                FilterIndex = 0,
+                FileName = _editor?.GetName(item)
+            };
+
+            if (dlg.ShowDialog(_mainWindow) == true)
+            {
+                _editor?.OnExportJson(dlg.FileName, item);
             }
 
             await Task.Delay(0);
@@ -462,61 +515,51 @@ namespace Core2D.Wpf
         }
 
         /// <inheritdoc/>
-        async Task IEditorApplication.OnImportObjectAsync(object item, CoreType type)
+        async Task IEditorApplication.OnImportObjectAsync(string path)
         {
-            if (item == null)
-                return;
-
-            string filter = string.Empty;
-
-            switch (type)
+            if (path == null)
             {
-                case CoreType.Style:
-                    filter = "Style (*.style)|*.style|All (*.*)|*.*";
-                    break;
-                case CoreType.Styles:
-                    filter = "Styles (*.styles)|*.styles|All (*.*)|*.*";
-                    break;
-                case CoreType.StyleLibrary:
-                    filter = "StyleLibrary (*.stylelibrary)|*.stylelibrary|All (*.*)|*.*";
-                    break;
-                case CoreType.StyleLibraries:
-                    filter = "StyleLibraries (*.styleLibraries)|*.stylelibraries|All (*.*)|*.*";
-                    break;
-                case CoreType.Group:
-                    filter = "Group (*.group)|*.group|All (*.*)|*.*";
-                    break;
-                case CoreType.Groups:
-                    filter = "Groups (*.groups)|*.groups|All (*.*)|*.*";
-                    break;
-                case CoreType.GroupLibrary:
-                    filter = "GroupLibrary (*.grouplibrary)|*.grouplibrary|All (*.*)|*.*";
-                    break;
-                case CoreType.GroupLibraries:
-                    filter = "GroupLibraries (*.grouplibraries)|*.grouplibraries|All (*.*)|*.*";
-                    break;
-                case CoreType.Template:
-                    filter = "Template (*.template)|*.template|All (*.*)|*.*";
-                    break;
-                case CoreType.Templates:
-                    filter = "Templates (*.templates)|*.templates|All (*.*)|*.*";
-                    break;
-            }
-
-            var dlg = new OpenFileDialog()
-            {
-                Filter = filter,
-                Multiselect = true,
-                FilterIndex = 0
-            };
-
-            if (dlg.ShowDialog(_mainWindow) == true)
-            {
-                var paths = dlg.FileNames;
-
-                foreach (var path in paths)
+                var dlg = new OpenFileDialog()
                 {
-                    _editor?.OnImportObject(path, item, type);
+                    Filter = "Json (*.json)|*.json|Xaml (*.xaml)|*.xaml",
+                    Multiselect = true,
+                    FilterIndex = 0
+                };
+
+                if (dlg.ShowDialog(_mainWindow) == true)
+                {
+                    var results = dlg.FileNames;
+                    var index = dlg.FilterIndex;
+
+                    foreach (var result in results)
+                    {
+                        switch (index)
+                        {
+                            case 1:
+                                _editor?.OnImportJson(result);
+                                break;
+                            case 2:
+                                _editor?.OnImportXaml(result);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (System.IO.File.Exists(path))
+                {
+                    string resultExtension = System.IO.Path.GetExtension(path);
+                    if (string.Compare(resultExtension, ".json", true) == 0)
+                    {
+                        _editor?.OnImportJson(path);
+                    }
+                    else if (string.Compare(resultExtension, ".xaml", true) == 0)
+                    {
+                        _editor?.OnImportJson(path);
+                    }
                 }
             }
 
@@ -524,82 +567,32 @@ namespace Core2D.Wpf
         }
 
         /// <inheritdoc/>
-        async Task IEditorApplication.OnExportObjectAsync(object item, CoreType type)
+        async Task IEditorApplication.OnExportObjectAsync(object item)
         {
-            if (item == null)
-                return;
-
-            string name = string.Empty;
-            string filter = string.Empty;
-
-            switch (type)
+            if (item != null)
             {
-                case CoreType.Style:
-                    filter = "Style (*.style)|*.style|Style (*.xaml)|*.xaml|All (*.*)|*.*";
-                    name = (item as ShapeStyle).Name;
-                    break;
-                case CoreType.Styles:
-                    filter = "Styles (*.styles)|*.styles|Styles (*.xaml)|*.xaml|All (*.*)|*.*";
-                    name = (item as XLibrary<ShapeStyle>).Name;
-                    break;
-                case CoreType.StyleLibrary:
-                    filter = "StyleLibrary (*.stylelibrary)|*.stylelibrary|StyleLibrary (*.xaml)|*.xaml|All (*.*)|*.*";
-                    name = (item as XLibrary<ShapeStyle>).Name;
-                    break;
-                case CoreType.StyleLibraries:
-                    filter = "StyleLibraries (*.stylelibraries)|*.stylelibraries|StyleLibraries (*.xaml)|*.xaml|All (*.*)|*.*";
-                    name = "StyleLibraries";
-                    break;
-                case CoreType.Group:
-                    filter = "Group (*.group)|*.group|Group (*.xaml)|*.xaml|All (*.*)|*.*";
-                    name = (item as XGroup).Name;
-                    break;
-                case CoreType.Groups:
-                    filter = "Groups (*.groups)|*.groups|Groups (*.xaml)|*.xaml|All (*.*)|*.*";
-                    name = (item as XLibrary<XGroup>).Name;
-                    break;
-                case CoreType.GroupLibrary:
-                    filter = "GroupLibrary (*.grouplibrary)|*.grouplibrary|GroupLibrary (*.xaml)|*.xaml|All (*.*)|*.*";
-                    name = (item as XLibrary<XGroup>).Name;
-                    break;
-                case CoreType.GroupLibraries:
-                    filter = "GroupLibraries (*.grouplibraries)|*.grouplibraries|GroupLibraries (*.xaml)|*.xaml|All (*.*)|*.*";
-                    name = "GroupLibraries";
-                    break;
-                case CoreType.Template:
-                    filter = "Template (*.template)|*.template|Template (*.xaml)|*.xaml|All (*.*)|*.*";
-                    name = (item as XTemplate).Name;
-                    break;
-                case CoreType.Templates:
-                    filter = "Templates (*.templates)|*.templates|Templates (*.xaml)|*.xaml|All (*.*)|*.*";
-                    name = "Templates";
-                    break;
-            }
-
-            var dlg = new SaveFileDialog()
-            {
-                Filter = filter,
-                FilterIndex = 0,
-                FileName = name
-            };
-
-            if (dlg.ShowDialog(_mainWindow) == true)
-            {
-                switch (dlg.FilterIndex)
+                var dlg = new SaveFileDialog()
                 {
-                    case 1:
-                        _editor?.OnExportObject(dlg.FileName, item, type);
-                        break;
-                    case 2:
-                        _editor?.OnExportXaml(dlg.FileName, item);
-                        break;
-                    case 3:
-                        throw new NotSupportedException();
-                    default:
-                        break;
+                    Filter = "Json (*.json)|*.json|Xaml (*.xaml)|*.xaml",
+                    FilterIndex = 0,
+                    FileName = _editor?.GetName(item)
+                };
+
+                if (dlg.ShowDialog(_mainWindow) == true)
+                {
+                    switch (dlg.FilterIndex)
+                    {
+                        case 1:
+                            _editor?.OnExportJson(dlg.FileName, item);
+                            break;
+                        case 2:
+                            _editor?.OnExportXaml(dlg.FileName, item);
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
-
             await Task.Delay(0);
         }
 

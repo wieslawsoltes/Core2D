@@ -55,7 +55,6 @@
     <Compile Include="Editor\Bounds\ShapeHitTestSelection.cs" />
     <Compile Include="Editor\Commands.cs" />
     <Compile Include="Editor\Constants.cs" />
-    <Compile Include="Editor\CoreType.cs" />
     <Compile Include="Editor\Designer\DesignerContext.cs" />
     <Compile Include="Editor\ProjectEditor.cs" />
     <Compile Include="Editor\Enums.cs" />

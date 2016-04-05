@@ -207,72 +207,6 @@
   <data name="MenuFileExport" xml:space="preserve">
     <value>_Export...</value>
   </data>
-  <data name="MenuProjectSubMenuImport" xml:space="preserve">
-    <value>I_mport</value>
-  </data>
-  <data name="MenuProjectImportStyle" xml:space="preserve">
-    <value>_Style...</value>
-  </data>
-  <data name="MenuProjectImportStyles" xml:space="preserve">
-    <value>S_tyles...</value>
-  </data>
-  <data name="MenuProjectImportStyleLibrary" xml:space="preserve">
-    <value>St_yle Library...</value>
-  </data>
-  <data name="MenuProjectImportStyleLibraries" xml:space="preserve">
-    <value>Sty_le Libraries...</value>
-  </data>
-  <data name="MenuProjectImportGroup" xml:space="preserve">
-    <value>_Group...</value>
-  </data>
-  <data name="MenuProjectImportGroups" xml:space="preserve">
-    <value>G_roups...</value>
-  </data>
-  <data name="MenuProjectImportGroupLibrary" xml:space="preserve">
-    <value>Gr_oup Library...</value>
-  </data>
-  <data name="MenuProjectImportGroupLibraries" xml:space="preserve">
-    <value>Gro_up Libraries...</value>
-  </data>
-  <data name="MenuProjectImportTemplate" xml:space="preserve">
-    <value>_Template...</value>
-  </data>
-  <data name="MenuProjectImportTemplates" xml:space="preserve">
-    <value>T_emplates...</value>
-  </data>
-  <data name="MenuProjectSubMenuExport" xml:space="preserve">
-    <value>Expor_t</value>
-  </data>
-  <data name="MenuProjectExportStyle" xml:space="preserve">
-    <value>_Style...</value>
-  </data>
-  <data name="MenuProjectExportStyles" xml:space="preserve">
-    <value>S_tyles...</value>
-  </data>
-  <data name="MenuProjectExportStyleLibrary" xml:space="preserve">
-    <value>St_yle Library...</value>
-  </data>
-  <data name="MenuProjectExportStyleLibraries" xml:space="preserve">
-    <value>Sty_le Libraries...</value>
-  </data>
-  <data name="MenuProjectExportGroup" xml:space="preserve">
-    <value>_Group...</value>
-  </data>
-  <data name="MenuProjectExportGroups" xml:space="preserve">
-    <value>G_roups...</value>
-  </data>
-  <data name="MenuProjectExportGroupLibrary" xml:space="preserve">
-    <value>Gr_oup Library...</value>
-  </data>
-  <data name="MenuProjectExportGroupLibraries" xml:space="preserve">
-    <value>Gro_up Libraries...</value>
-  </data>
-  <data name="MenuProjectExportTemplate" xml:space="preserve">
-    <value>_Template...</value>
-  </data>
-  <data name="MenuProjectExportTemplates" xml:space="preserve">
-    <value>T_emplates...</value>
-  </data>
   <data name="MenuFileRecent" xml:space="preserve">
     <value>_Recent</value>
   </data>
@@ -657,9 +591,6 @@
   <data name="WindowTitleCanvas" xml:space="preserve">
     <value>Canvas</value>
   </data>
-  <data name="MenuProject" xml:space="preserve">
-    <value>_Project</value>
-  </data>
   <data name="ContainerTemplate" xml:space="preserve">
     <value>Template</value>
   </data>
@@ -673,6 +604,9 @@
     <value>_Update...</value>
   </data>
   <data name="MenuFileImportXaml" xml:space="preserve">
-    <value>_Import Xaml...</value>
+    <value>Import Xa_ml...</value>
+  </data>
+  <data name="MenuFileImportJson" xml:space="preserve">
+    <value>Import _Json...</value>
   </data>
 </root>

@@ -49,6 +49,20 @@ namespace Core2D.Editor.Interfaces
         Task OnExportXamlAsync(object item);
 
         /// <summary>
+        /// Import json from file.
+        /// </summary>
+        /// <param name="path">The json file path.</param>
+        /// <returns>The await <see cref="Task"/>.</returns>
+        Task OnImportJsonAsync(string path);
+
+        /// <summary>
+        /// Export json to external file.
+        /// </summary>
+        /// <param name="item">The item object to export.</param>
+        /// <returns>The await <see cref="Task"/>.</returns>
+        Task OnExportJsonAsync(object item);
+
+        /// <summary>
         /// Export item object to external file.
         /// </summary>
         /// <param name="item">The item object to export.</param>
@@ -76,18 +90,16 @@ namespace Core2D.Editor.Interfaces
         /// <summary>
         /// Import item object from external file.
         /// </summary>
-        /// <param name="item">The item object to import.</param>
-        /// <param name="type">The type of item object.</param>
+        /// <param name="path">The object file path.</param>
         /// <returns>The await <see cref="Task"/>.</returns>
-        Task OnImportObjectAsync(object item, CoreType type);
+        Task OnImportObjectAsync(string path);
 
         /// <summary>
         /// Export item object to external file.
         /// </summary>
         /// <param name="item">The item object to export.</param>
-        /// <param name="type">The type of item object.</param>
         /// <returns>The await <see cref="Task"/>.</returns>
-        Task OnExportObjectAsync(object item, CoreType type);
+        Task OnExportObjectAsync(object item);
 
         /// <summary>
         /// Save currently selected shapes as enhanced metafile.

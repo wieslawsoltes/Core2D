@@ -367,7 +367,16 @@ namespace Core2D.Wpf.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to _Import Xaml....
+        ///   Looks up a localized string similar to Import _Json....
+        /// </summary>
+        public static string MenuFileImportJson {
+            get {
+                return ResourceManager.GetString("MenuFileImportJson", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import Xa_ml....
         /// </summary>
         public static string MenuFileImportXaml {
             get {
@@ -534,213 +543,6 @@ namespace Core2D.Wpf.Properties {
         public static string MenuPathToolQuadraticBezier {
             get {
                 return ResourceManager.GetString("MenuPathToolQuadraticBezier", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to _Project.
-        /// </summary>
-        public static string MenuProject {
-            get {
-                return ResourceManager.GetString("MenuProject", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to _Group....
-        /// </summary>
-        public static string MenuProjectExportGroup {
-            get {
-                return ResourceManager.GetString("MenuProjectExportGroup", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Gro_up Libraries....
-        /// </summary>
-        public static string MenuProjectExportGroupLibraries {
-            get {
-                return ResourceManager.GetString("MenuProjectExportGroupLibraries", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Gr_oup Library....
-        /// </summary>
-        public static string MenuProjectExportGroupLibrary {
-            get {
-                return ResourceManager.GetString("MenuProjectExportGroupLibrary", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to G_roups....
-        /// </summary>
-        public static string MenuProjectExportGroups {
-            get {
-                return ResourceManager.GetString("MenuProjectExportGroups", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to _Style....
-        /// </summary>
-        public static string MenuProjectExportStyle {
-            get {
-                return ResourceManager.GetString("MenuProjectExportStyle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Sty_le Libraries....
-        /// </summary>
-        public static string MenuProjectExportStyleLibraries {
-            get {
-                return ResourceManager.GetString("MenuProjectExportStyleLibraries", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to St_yle Library....
-        /// </summary>
-        public static string MenuProjectExportStyleLibrary {
-            get {
-                return ResourceManager.GetString("MenuProjectExportStyleLibrary", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to S_tyles....
-        /// </summary>
-        public static string MenuProjectExportStyles {
-            get {
-                return ResourceManager.GetString("MenuProjectExportStyles", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to _Template....
-        /// </summary>
-        public static string MenuProjectExportTemplate {
-            get {
-                return ResourceManager.GetString("MenuProjectExportTemplate", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to T_emplates....
-        /// </summary>
-        public static string MenuProjectExportTemplates {
-            get {
-                return ResourceManager.GetString("MenuProjectExportTemplates", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to _Group....
-        /// </summary>
-        public static string MenuProjectImportGroup {
-            get {
-                return ResourceManager.GetString("MenuProjectImportGroup", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Gro_up Libraries....
-        /// </summary>
-        public static string MenuProjectImportGroupLibraries {
-            get {
-                return ResourceManager.GetString("MenuProjectImportGroupLibraries", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Gr_oup Library....
-        /// </summary>
-        public static string MenuProjectImportGroupLibrary {
-            get {
-                return ResourceManager.GetString("MenuProjectImportGroupLibrary", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to G_roups....
-        /// </summary>
-        public static string MenuProjectImportGroups {
-            get {
-                return ResourceManager.GetString("MenuProjectImportGroups", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to _Style....
-        /// </summary>
-        public static string MenuProjectImportStyle {
-            get {
-                return ResourceManager.GetString("MenuProjectImportStyle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Sty_le Libraries....
-        /// </summary>
-        public static string MenuProjectImportStyleLibraries {
-            get {
-                return ResourceManager.GetString("MenuProjectImportStyleLibraries", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to St_yle Library....
-        /// </summary>
-        public static string MenuProjectImportStyleLibrary {
-            get {
-                return ResourceManager.GetString("MenuProjectImportStyleLibrary", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to S_tyles....
-        /// </summary>
-        public static string MenuProjectImportStyles {
-            get {
-                return ResourceManager.GetString("MenuProjectImportStyles", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to _Template....
-        /// </summary>
-        public static string MenuProjectImportTemplate {
-            get {
-                return ResourceManager.GetString("MenuProjectImportTemplate", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to T_emplates....
-        /// </summary>
-        public static string MenuProjectImportTemplates {
-            get {
-                return ResourceManager.GetString("MenuProjectImportTemplates", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Expor_t.
-        /// </summary>
-        public static string MenuProjectSubMenuExport {
-            get {
-                return ResourceManager.GetString("MenuProjectSubMenuExport", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to I_mport.
-        /// </summary>
-        public static string MenuProjectSubMenuImport {
-            get {
-                return ResourceManager.GetString("MenuProjectSubMenuImport", resourceCulture);
             }
         }
         

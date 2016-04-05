@@ -94,58 +94,13 @@ namespace Core2D.Editor
         public const string CsvExtension = ".csv";
 
         /// <summary>
-        /// Style file extension.
-        /// </summary>
-        public const string StyleExtension = ".style";
-
-        /// <summary>
-        /// Styles file extension.
-        /// </summary>
-        public const string StylesExtension = ".styles";
-
-        /// <summary>
-        /// Style library file extension.
-        /// </summary>
-        public const string StyleLibraryExtension = ".stylelibrary";
-
-        /// <summary>
-        /// Style libraries file extension.
-        /// </summary>
-        public const string StyleLibrariesExtension = ".stylelibraries";
-
-        /// <summary>
-        /// Group file extension.
-        /// </summary>
-        public const string GroupExtension = ".group";
-
-        /// <summary>
-        /// Groups file extension.
-        /// </summary>
-        public const string GroupsExtension = ".groups";
-
-        /// <summary>
-        /// Group library file extension.
-        /// </summary>
-        public const string GroupLibraryExtension = ".grouplibrary";
-
-        /// <summary>
-        /// Group libraries file extension.
-        /// </summary>
-        public const string GroupLibrariesExtension = ".grouplibraries";
-
-        /// <summary>
-        /// Template file extension.
-        /// </summary>
-        public const string TemplateExtension = ".template";
-
-        /// <summary>
-        /// Templates file extension.
-        /// </summary>
-        public const string TemplatesExtension = ".templates";
-
-        /// <summary>
-        /// XAML file extension.
+        /// Xaml file extension.
         /// </summary>
         public const string XamlExtension = ".xaml";
+
+        /// <summary>
+        /// Json file extension.
+        /// </summary>
+        public const string JsonExtension = ".json";
     }
 }

@@ -380,23 +380,72 @@ namespace Core2D.Perspex
         {
             try
             {
-                if (item != null)
+                var dlg = new SaveFileDialog();
+                dlg.Filters.Add(new FileDialogFilter() { Name = "Xaml", Extensions = { "xaml" } });
+                dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
+                dlg.InitialFileName = _editor?.GetName(item);
+
+                var result = await dlg.ShowAsync(_mainWindow);
+                if (result != null)
                 {
-                    var dlg = new SaveFileDialog();
-                    dlg.Filters.Add(new FileDialogFilter() { Name = "Xaml", Extensions = { "xaml" } });
+                    _editor?.OnExportXaml(result, item);
+                }
+            }
+            catch (Exception ex)
+            {
+                _editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+            }
+        }
+
+        /// <inheritdoc/>
+        async Task IEditorApplication.OnImportJsonAsync(string path)
+        {
+            try
+            {
+                if (path == null)
+                {
+                    var dlg = new OpenFileDialog();
+                    dlg.AllowMultiple = true;
+                    dlg.Filters.Add(new FileDialogFilter() { Name = "Json", Extensions = { "json" } });
                     dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
 
-                    var result = await dlg.ShowAsync(_mainWindow);
-                    if (result != null)
+                    var results = await dlg.ShowAsync(_mainWindow);
+                    if (results != null)
                     {
-                        _editor?.OnExportXaml(result, item);
+                        foreach (var result in results)
+                        {
+                            _editor?.OnImportJson(result);
+                        }
                     }
                 }
                 else
                 {
-                    var exporter = new Windows.ExporterWindow();
-                    exporter.DataContext = _editor;
-                    exporter.Show();
+                    if (System.IO.File.Exists(path))
+                    {
+                        _editor?.OnImportJson(path);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+            }
+        }
+
+        /// <inheritdoc/>
+        async Task IEditorApplication.OnExportJsonAsync(object item)
+        {
+            try
+            {
+                var dlg = new SaveFileDialog();
+                dlg.Filters.Add(new FileDialogFilter() { Name = "Json", Extensions = { "json" } });
+                dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
+                dlg.InitialFileName = _editor?.GetName(item);
+
+                var result = await dlg.ShowAsync(_mainWindow);
+                if (result != null)
+                {
+                    _editor?.OnExportJson(result, item);
                 }
             }
             catch (Exception ex)
@@ -544,69 +593,45 @@ namespace Core2D.Perspex
         }
 
         /// <inheritdoc/>
-        async Task IEditorApplication.OnImportObjectAsync(object item, CoreType type)
+        async Task IEditorApplication.OnImportObjectAsync(string path)
         {
             try
             {
-                if (item != null)
+                if (path == null)
                 {
-                    string name = string.Empty;
-                    string ext = string.Empty;
-
-                    switch (type)
-                    {
-                        case CoreType.Style:
-                            name = "Style";
-                            ext = "style";
-                            break;
-                        case CoreType.Styles:
-                            name = "Styles";
-                            ext = "styles";
-                            break;
-                        case CoreType.StyleLibrary:
-                            name = "StyleLibrary";
-                            ext = "stylelibrary";
-                            break;
-                        case CoreType.StyleLibraries:
-                            name = "StyleLibraries";
-                            ext = "stylelibraries";
-                            break;
-                        case CoreType.Group:
-                            name = "Group";
-                            ext = "group";
-                            break;
-                        case CoreType.Groups:
-                            name = "Groups";
-                            ext = "groups";
-                            break;
-                        case CoreType.GroupLibrary:
-                            name = "GroupLibrary";
-                            ext = "grouplibrary";
-                            break;
-                        case CoreType.GroupLibraries:
-                            name = "GroupLibraries";
-                            ext = "grouplibraries";
-                            break;
-                        case CoreType.Template:
-                            name = "Template";
-                            ext = "template";
-                            break;
-                        case CoreType.Templates:
-                            name = "Templates";
-                            ext = "templates";
-                            break;
-                    }
-
                     var dlg = new OpenFileDialog();
                     dlg.AllowMultiple = true;
-                    dlg.Filters.Add(new FileDialogFilter() { Name = name, Extensions = { ext } });
-                    dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
+                    dlg.Filters.Add(new FileDialogFilter() { Name = "Json", Extensions = { "json" } });
+                    dlg.Filters.Add(new FileDialogFilter() { Name = "Xaml", Extensions = { "xaml" } });
                     var results = await dlg.ShowAsync(_mainWindow);
                     if (results != null)
                     {
-                        foreach (var path in results)
+                        foreach (var result in results)
                         {
-                            _editor?.OnImportObject(path, item, type);
+                            string resultExtension = System.IO.Path.GetExtension(result);
+                            if (string.Compare(resultExtension, ".json", true) == 0)
+                            {
+                                _editor?.OnImportJson(result);
+                            }
+                            else if (string.Compare(resultExtension, ".xaml", true) == 0)
+                            {
+                                _editor?.OnImportJson(result);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    if (System.IO.File.Exists(path))
+                    {
+                        string resultExtension = System.IO.Path.GetExtension(path);
+                        if (string.Compare(resultExtension, ".json", true) == 0)
+                        {
+                            _editor?.OnImportJson(path);
+                        }
+                        else if (string.Compare(resultExtension, ".xaml", true) == 0)
+                        {
+                            _editor?.OnImportJson(path);
                         }
                     }
                 }
@@ -618,86 +643,28 @@ namespace Core2D.Perspex
         }
 
         /// <inheritdoc/>
-        async Task IEditorApplication.OnExportObjectAsync(object item, CoreType type)
+        async Task IEditorApplication.OnExportObjectAsync(object item)
         {
             try
             {
                 if (item != null)
                 {
-                    string initial = string.Empty;
-                    string name = string.Empty;
-                    string extension = string.Empty;
-
-                    switch (type)
-                    {
-                        case CoreType.Style:
-                            name = "Style";
-                            extension = "style";
-                            initial = (item as ShapeStyle).Name;
-                            break;
-                        case CoreType.Styles:
-                            name = "Styles";
-                            extension = "styles";
-                            initial = (item as XLibrary<ShapeStyle>).Name;
-                            break;
-                        case CoreType.StyleLibrary:
-                            name = "StyleLibrary";
-                            extension = "stylelibrary";
-                            initial = (item as XLibrary<ShapeStyle>).Name;
-                            break;
-                        case CoreType.StyleLibraries:
-                            name = "StyleLibraries";
-                            extension = "stylelibraries";
-                            initial = "StyleLibraries";
-                            break;
-                        case CoreType.Group:
-                            name = "Group";
-                            extension = "group";
-                            initial = (item as XGroup).Name;
-                            break;
-                        case CoreType.Groups:
-                            name = "Groups";
-                            extension = "groups";
-                            initial = (item as XLibrary<XGroup>).Name;
-                            break;
-                        case CoreType.GroupLibrary:
-                            name = "GroupLibrary";
-                            extension = "grouplibrary";
-                            initial = (item as XLibrary<XGroup>).Name;
-                            break;
-                        case CoreType.GroupLibraries:
-                            name = "GroupLibraries";
-                            extension = "grouplibraries";
-                            initial = "GroupLibraries";
-                            break;
-                        case CoreType.Template:
-                            name = "Template";
-                            extension = "template";
-                            initial = (item as XTemplate).Name;
-                            break;
-                        case CoreType.Templates:
-                            name = "Templates";
-                            extension = "templates";
-                            initial = "Templates";
-                            break;
-                    }
-
                     var dlg = new SaveFileDialog();
-                    dlg.Filters.Add(new FileDialogFilter() { Name = name, Extensions = { extension } });
-                    dlg.Filters.Add(new FileDialogFilter() { Name = name, Extensions = { "xaml" } });
-                    dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
-                    dlg.InitialFileName = initial;
-                    var result = await dlg.ShowAsync(_mainWindow);
-                    if (result != null)
+                    dlg.Filters.Add(new FileDialogFilter() { Name = "Json", Extensions = { "json" } });
+                    dlg.Filters.Add(new FileDialogFilter() { Name = "Xaml", Extensions = { "xaml" } });
+                    dlg.InitialFileName = _editor?.GetName(item);
+
+                    var path = await dlg.ShowAsync(_mainWindow);
+                    if (path != null)
                     {
-                        string resultExtension = System.IO.Path.GetExtension(result);
-                        if (string.Compare(resultExtension, ".xaml", true) == 0)
+                        string resultExtension = System.IO.Path.GetExtension(path);
+                        if (string.Compare(resultExtension, ".json", true) == 0)
                         {
-                            _editor?.OnExportXaml(result, item);
+                            _editor?.OnExportJson(path, item);
                         }
-                        else
+                        else if (string.Compare(resultExtension, ".xaml", true) == 0)
                         {
-                            _editor?.OnExportObject(result, item, type);
+                            _editor?.OnExportXaml(path, item);
                         }
                     }
                 }

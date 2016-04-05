@@ -39,13 +39,13 @@
                     <Separator/>
                     <MenuItem Header="_Delete" InputGestureText="Del" Command="{x:Static Editor:Commands.RemoveTemplateCommand}" CommandParameter="{Binding}"/>
                     <Separator/>
-                    <MenuItem Header="E_xport" InputGestureText="Ctrl+E" Command="{x:Static Editor:Commands.ExportTemplateCommand}" CommandParameter="{Binding}"/>
+                    <MenuItem Header="E_xport" InputGestureText="Ctrl+E" Command="{x:Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding}"/>
                 </ContextMenu>
             </lists:XTemplateDragAndDropListBox.Resources>
             <lists:XTemplateDragAndDropListBox.InputBindings>
                 <KeyBinding Command="{x:Static Editor:Commands.AddTemplateCommand}" Gesture="Ctrl+N"/>
                 <KeyBinding Command="{x:Static Editor:Commands.RemoveTemplateCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type lists:XTemplateDragAndDropListBox}}}" Gesture="Del"/>
-                <KeyBinding Command="{x:Static Editor:Commands.ExportTemplateCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type lists:XTemplateDragAndDropListBox}}}" Gesture="Ctrl+E"/>
+                <KeyBinding Command="{x:Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type lists:XTemplateDragAndDropListBox}}}" Gesture="Ctrl+E"/>
             </lists:XTemplateDragAndDropListBox.InputBindings>
             <lists:XTemplateDragAndDropListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">

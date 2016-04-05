@@ -40,7 +40,8 @@
         <KeyBinding Command="{x:Static Editor:Commands.CloseCommand}" Gesture="Ctrl+F4"/>
         <KeyBinding Command="{x:Static Editor:Commands.SaveCommand}" Gesture="Ctrl+S"/>
         <KeyBinding Command="{x:Static Editor:Commands.SaveAsCommand}" Gesture="Ctrl+Shift+S"/>
-        <KeyBinding Command="{x:Static Editor:Commands.ImportXamlCommand}" Gesture="Ctrl+I"/>
+        <KeyBinding Command="{x:Static Editor:Commands.ImportXamlCommand}" Gesture="Ctrl+Shift+X"/>
+        <KeyBinding Command="{x:Static Editor:Commands.ImportJsonCommand}" Gesture="Ctrl+Shift+J"/>
         <KeyBinding Command="{x:Static Editor:Commands.ExportCommand}" Gesture="Ctrl+E"/>
         <KeyBinding Command="{x:Static Editor:Commands.ExitCommand}" Gesture="Alt+F4"/>
         <KeyBinding Command="{x:Static Editor:Commands.UndoCommand}" Gesture="Ctrl+Z"/>

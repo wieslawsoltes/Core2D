@@ -42,6 +42,16 @@ namespace Core2D.Editor
         public static ICoreCommand SaveAsCommand { get; set; }
 
         /// <summary>
+        /// Import object.
+        /// </summary>
+        public static ICoreCommand<string> ImportObjectCommand { get; set; }
+
+        /// <summary>
+        /// Export object.
+        /// </summary>
+        public static ICoreCommand<object> ExportObjectCommand { get; set; }
+
+        /// <summary>
         /// Import xaml.
         /// </summary>
         public static ICoreCommand<string> ImportXamlCommand { get; set; }
@@ -85,106 +95,6 @@ namespace Core2D.Editor
         /// Update database.
         /// </summary>
         public static ICoreCommand<XDatabase> UpdateDataCommand { get; set; }
-
-        /// <summary>
-        /// Import style.
-        /// </summary>
-        public static ICoreCommand<XLibrary<ShapeStyle>> ImportStyleCommand { get; set; }
-
-        /// <summary>
-        /// Import styles.
-        /// </summary>
-        public static ICoreCommand<XLibrary<ShapeStyle>> ImportStylesCommand { get; set; }
-
-        /// <summary>
-        /// Import style library.
-        /// </summary>
-        public static ICoreCommand<XProject> ImportStyleLibraryCommand { get; set; }
-
-        /// <summary>
-        /// Import style libraries.
-        /// </summary>
-        public static ICoreCommand<XProject> ImportStyleLibrariesCommand { get; set; }
-
-        /// <summary>
-        /// Import group.
-        /// </summary>
-        public static ICoreCommand<XLibrary<XGroup>> ImportGroupCommand { get; set; }
-
-        /// <summary>
-        /// Import groups.
-        /// </summary>
-        public static ICoreCommand<XLibrary<XGroup>> ImportGroupsCommand { get; set; }
-
-        /// <summary>
-        /// Import group library.
-        /// </summary>
-        public static ICoreCommand<XProject> ImportGroupLibraryCommand { get; set; }
-
-        /// <summary>
-        /// Import group libraries.
-        /// </summary>
-        public static ICoreCommand<XProject> ImportGroupLibrariesCommand { get; set; }
-
-        /// <summary>
-        /// Import template.
-        /// </summary>
-        public static ICoreCommand<XProject> ImportTemplateCommand { get; set; }
-
-        /// <summary>
-        /// Import templates.
-        /// </summary>
-        public static ICoreCommand<XProject> ImportTemplatesCommand { get; set; }
-
-        /// <summary>
-        /// Export style.
-        /// </summary>
-        public static ICoreCommand<ShapeStyle> ExportStyleCommand { get; set; }
-
-        /// <summary>
-        /// Export styles.
-        /// </summary>
-        public static ICoreCommand<XLibrary<ShapeStyle>> ExportStylesCommand { get; set; }
-
-        /// <summary>
-        /// Export style library.
-        /// </summary>
-        public static ICoreCommand<XLibrary<ShapeStyle>> ExportStyleLibraryCommand { get; set; }
-
-        /// <summary>
-        /// Export style libraries.
-        /// </summary>
-        public static ICoreCommand<IEnumerable<XLibrary<ShapeStyle>>> ExportStyleLibrariesCommand { get; set; }
-
-        /// <summary>
-        /// Export group.
-        /// </summary>
-        public static ICoreCommand<XGroup> ExportGroupCommand { get; set; }
-
-        /// <summary>
-        /// Export groups.
-        /// </summary>
-        public static ICoreCommand<XLibrary<XGroup>> ExportGroupsCommand { get; set; }
-
-        /// <summary>
-        /// Export group library.
-        /// </summary>
-        public static ICoreCommand<XLibrary<XGroup>> ExportGroupLibraryCommand { get; set; }
-
-        /// <summary>
-        /// Export group libraries.
-        /// </summary>
-        public static ICoreCommand<IEnumerable<XLibrary<XGroup>>> ExportGroupLibrariesCommand { get; set; }
-
-        /// <summary>
-        /// Export template.
-        /// </summary>
-        public static ICoreCommand<XTemplate> ExportTemplateCommand { get; set; }
-
-        /// <summary>
-        /// Export templates.
-        /// </summary>
-        public static ICoreCommand<IEnumerable<XTemplate>> ExportTemplatesCommand { get; set; }
 
         /// <summary>
         /// Undo last action.

@@ -240,12 +240,32 @@ namespace Core2D.Editor.Designer
                     () => { },
                     () => editor.IsEditMode());
 
+            Commands.ImportObjectCommand =
+                Command<string>.Create(
+                    (path) => { },
+                    (path) => editor.IsEditMode());
+
+            Commands.ExportObjectCommand =
+                Command<object>.Create(
+                    (item) => { },
+                    (item) => editor.IsEditMode());
+
             Commands.ImportXamlCommand =
                 Command<string>.Create(
                     (path) => { },
                     (path) => editor.IsEditMode());
 
             Commands.ExportXamlCommand =
+                Command<object>.Create(
+                    (item) => { },
+                    (item) => editor.IsEditMode());
+
+            Commands.ImportJsonCommand =
+                Command<string>.Create(
+                    (path) => { },
+                    (path) => editor.IsEditMode());
+
+            Commands.ExportJsonCommand =
                 Command<object>.Create(
                     (item) => { },
                     (item) => editor.IsEditMode());
@@ -269,106 +289,6 @@ namespace Core2D.Editor.Designer
                 Command<XDatabase>.Create(
                     (db) => { },
                     (db) => editor.IsEditMode());
-
-            Commands.ImportStyleCommand =
-                Command<XLibrary<ShapeStyle>>.Create(
-                    (item) => { },
-                    (item) => editor.IsEditMode());
-
-            Commands.ImportStylesCommand =
-                Command<XLibrary<ShapeStyle>>.Create(
-                    (item) => { },
-                    (item) => editor.IsEditMode());
-
-            Commands.ImportStyleLibraryCommand =
-                Command<XProject>.Create(
-                    (item) => { },
-                    (item) => editor.IsEditMode());
-
-            Commands.ImportStyleLibrariesCommand =
-                Command<XProject>.Create(
-                    (item) => { },
-                    (item) => editor.IsEditMode());
-
-            Commands.ImportGroupCommand =
-                Command<XLibrary<XGroup>>.Create(
-                    (item) => { },
-                    (item) => editor.IsEditMode());
-
-            Commands.ImportGroupsCommand =
-                Command<XLibrary<XGroup>>.Create(
-                    (item) => { },
-                    (item) => editor.IsEditMode());
-
-            Commands.ImportGroupLibraryCommand =
-                Command<XProject>.Create(
-                    (item) => { },
-                    (item) => editor.IsEditMode());
-
-            Commands.ImportGroupLibrariesCommand =
-                Command<XProject>.Create(
-                    (item) => { },
-                    (item) => editor.IsEditMode());
-
-            Commands.ImportTemplateCommand =
-                Command<XProject>.Create(
-                    (item) => { },
-                    (item) => editor.IsEditMode());
-
-            Commands.ImportTemplatesCommand =
-                Command<XProject>.Create(
-                    (item) => { },
-                    (item) => editor.IsEditMode());
-
-            Commands.ExportStyleCommand =
-                Command<ShapeStyle>.Create(
-                    (item) => { },
-                    (item) => editor.IsEditMode());
-
-            Commands.ExportStylesCommand =
-                Command<XLibrary<ShapeStyle>>.Create(
-                    (item) => { },
-                    (item) => editor.IsEditMode());
-
-            Commands.ExportStyleLibraryCommand =
-                Command<XLibrary<ShapeStyle>>.Create(
-                    (item) => { },
-                    (item) => editor.IsEditMode());
-
-            Commands.ExportStyleLibrariesCommand =
-                Command<IEnumerable<XLibrary<ShapeStyle>>>.Create(
-                    (item) => { },
-                    (item) => editor.IsEditMode());
-
-            Commands.ExportGroupCommand =
-                Command<XGroup>.Create(
-                    (item) => { },
-                    (item) => editor.IsEditMode());
-
-            Commands.ExportGroupsCommand =
-                Command<XLibrary<XGroup>>.Create(
-                    (item) => { },
-                    (item) => editor.IsEditMode());
-
-            Commands.ExportGroupLibraryCommand =
-                Command<XLibrary<XGroup>>.Create(
-                    (item) => { },
-                    (item) => editor.IsEditMode());
-
-            Commands.ExportGroupLibrariesCommand =
-                Command<IEnumerable<XLibrary<XGroup>>>.Create(
-                    (item) => { },
-                    (item) => editor.IsEditMode());
-
-            Commands.ExportTemplateCommand =
-                Command<XTemplate>.Create(
-                    (item) => { },
-                    (item) => editor.IsEditMode());
-
-            Commands.ExportTemplatesCommand =
-                Command<IEnumerable<XTemplate>>.Create(
-                    (item) => { },
-                    (item) => editor.IsEditMode());
 
             Commands.ZoomResetCommand =
                 Command.Create(

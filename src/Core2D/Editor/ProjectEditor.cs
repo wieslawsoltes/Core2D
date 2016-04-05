@@ -307,6 +307,36 @@ namespace Core2D.Editor
         }
 
         /// <summary>
+        /// Get object item name.
+        /// </summary>
+        /// <param name="item">The object item.</param>
+        public string GetName(object item)
+        {
+            if (item != null)
+            {
+                if (item is BaseStyle)
+                    return (item as BaseStyle).Name;
+                else if (item is BaseShape)
+                    return (item as BaseShape).Name;
+                else if (item is XLibrary<ShapeStyle>)
+                    return (item as XLibrary<ShapeStyle>).Name;
+                else if (item is XLibrary<XGroup>)
+                    return (item as XLibrary<XGroup>).Name;
+                if (item is XContainer)
+                    return (item as XContainer).Name;
+                if (item is XLayer)
+                    return (item as XLayer).Name;
+                if (item is XDocument)
+                    return (item as XDocument).Name;
+                if (item is XProject)
+                    return (item as XProject).Name;
+                if (item is XDatabase)
+                    return (item as XDatabase).Name;
+            }
+            return string.Empty;
+        }
+
+        /// <summary>
         /// Create new project, document or page.
         /// </summary>
         /// <param name="item">The parent item.</param>
@@ -535,6 +565,211 @@ namespace Core2D.Editor
         }
 
         /// <summary>
+        /// Import object.
+        /// </summary>
+        /// <param name="item">The object to import.</param>
+        /// <param name="restore">Try to restore objects by name.</param>
+        public void OnImportObject(object item, bool restore)
+        {
+            if (item is ShapeStyle)
+            {
+                _project?.AddStyle(_project?.CurrentStyleLibrary, item as ShapeStyle);
+            }
+            else if (item is IList<ShapeStyle>)
+            {
+                _project.AddItems(_project?.CurrentStyleLibrary, item as IList<ShapeStyle>);
+            }
+            else if (item is BaseShape)
+            {
+                if (item is XGroup)
+                {
+                    var group = item as XGroup;
+                    if (restore)
+                    {
+                        var shapes = Enumerable.Repeat(group, 1);
+                        TryToRestoreStyles(shapes);
+                        TryToRestoreRecords(shapes);
+                    }
+                    _project.AddGroup(_project?.CurrentGroupLibrary, group);
+                }
+                else
+                {
+                    _project?.AddShape(_project?.CurrentContainer?.CurrentLayer, item as BaseShape);
+                }
+            }
+            else if (item is IList<XGroup>)
+            {
+                var groups = item as IList<XGroup>;
+                if (restore)
+                {
+                    TryToRestoreStyles(groups);
+                    TryToRestoreRecords(groups);
+                }
+                _project.AddItems(_project?.CurrentGroupLibrary, groups);
+            }
+            else if (item is XLibrary<ShapeStyle>)
+            {
+                _project.AddStyleLibrary(item as XLibrary<ShapeStyle>);
+            }
+            else if (item is IList<XLibrary<ShapeStyle>>)
+            {
+                _project.AddStyleLibraries(item as IList<XLibrary<ShapeStyle>>);
+            }
+            else if (item is XLibrary<XGroup>)
+            {
+                var gl = item as XLibrary<XGroup>;
+                TryToRestoreStyles(gl.Items);
+                TryToRestoreRecords(gl.Items);
+                _project.AddGroupLibrary(gl);
+            }
+            else if (item is IList<XLibrary<XGroup>>)
+            {
+                var gll = item as IList<XLibrary<XGroup>>;
+                var shapes = gll.SelectMany(x => x.Items);
+                TryToRestoreStyles(shapes);
+                TryToRestoreRecords(shapes);
+                _project.AddGroupLibraries(gll);
+            }
+            else if (item is XStyles)
+            {
+                var styles = item as XStyles;
+                var library = XLibrary<ShapeStyle>.Create(styles.Name, styles.Children);
+                _project?.AddStyleLibrary(library);
+            }
+            else if (item is XShapes)
+            {
+                var shapes = (item as XShapes).Children;
+                if (shapes.Length > 0)
+                {
+                    _project?.AddShapes(_project?.CurrentContainer?.CurrentLayer, shapes);
+                }
+            }
+            else if (item is XGroups)
+            {
+                var groups = item as XGroups;
+                var library = XLibrary<XGroup>.Create(groups.Name, groups.Children);
+                _project?.AddGroupLibrary(library);
+            }
+            else if (item is XDatabases)
+            {
+                var databases = (item as XDatabases).Children;
+                if (databases.Length > 0)
+                {
+                    foreach (var database in databases)
+                    {
+                        _project?.AddDatabase(database);
+                    }
+                }
+            }
+            else if (item is XTemplates)
+            {
+                var templates = (item as XTemplates).Children;
+                if (templates.Length > 0)
+                {
+                    foreach (var template in templates)
+                    {
+                        _project?.AddTemplate(template);
+                    }
+                }
+            }
+            else if (item is XContext)
+            {
+                if (_renderers?[0]?.State?.SelectedShape != null || (_renderers?[0]?.State?.SelectedShapes?.Count > 0))
+                {
+                    OnApplyData(item as XContext);
+                }
+                else
+                {
+                    var page = _project?.CurrentContainer as XPage;
+                    if (page != null)
+                    {
+                        page.Data = item as XContext;
+                    }
+                }
+            }
+            else if (item is XDatabase)
+            {
+                var db = item as XDatabase;
+                _project?.AddDatabase(db);
+                _project?.SetCurrentDatabase(db);
+            }
+            else if (item is XLayer)
+            {
+                var layer = item as XLayer;
+                if (restore)
+                {
+                    TryToRestoreStyles(layer.Shapes);
+                    TryToRestoreRecords(layer.Shapes);
+                }
+                _project?.AddLayer(_project?.CurrentContainer, layer);
+            }
+            else if (item is XTemplate)
+            {
+                var template = item as XTemplate;
+                if (restore)
+                {
+                    var shapes = template.Layers.SelectMany(x => x.Shapes);
+                    TryToRestoreStyles(shapes);
+                    TryToRestoreRecords(shapes);
+                }
+                _project?.AddTemplate(template);
+            }
+            else if (item is IList<XTemplate>)
+            {
+                var templates = item as IList<XTemplate>;
+                if (restore)
+                {
+                    var shapes = templates.SelectMany(x => x.Layers).SelectMany(x => x.Shapes);
+                    TryToRestoreStyles(shapes);
+                    TryToRestoreRecords(shapes);
+                }
+                _project.AddTemplates(templates);
+            }
+            else if (item is XPage)
+            {
+                var page = item as XPage;
+                if (restore)
+                {
+                    var shapes = Enumerable.Concat(
+                        page.Layers.SelectMany(x => x.Shapes),
+                        page.Template.Layers.SelectMany(x => x.Shapes));
+                    TryToRestoreStyles(shapes);
+                    TryToRestoreRecords(shapes);
+                }
+                _project?.AddPage(_project?.CurrentDocument, page);
+            }
+            else if (item is XDocument)
+            {
+                var document = item as XDocument;
+                if (restore)
+                {
+                    var shapes = Enumerable.Concat(
+                        document.Pages.SelectMany(x => x.Layers).SelectMany(x => x.Shapes),
+                        document.Pages.SelectMany(x => x.Template.Layers).SelectMany(x => x.Shapes));
+                    TryToRestoreStyles(shapes);
+                    TryToRestoreRecords(shapes);
+                }
+                _project?.AddDocument(document);
+            }
+            else if (item is XOptions)
+            {
+                if (_project != null)
+                {
+                    _project.Options = item as XOptions;
+                }
+            }
+            else if (item is XProject)
+            {
+                Unload();
+                Load(item as XProject, string.Empty);
+            }
+            else
+            {
+                throw new NotSupportedException("Not supported import object.");
+            }
+        }
+
+        /// <summary>
         /// Import Xaml from a file.
         /// </summary>
         /// <param name="path">The xaml file path.</param>
@@ -542,7 +777,7 @@ namespace Core2D.Editor
         {
             try
             {
-                var xaml = _fileIO.ReadUtf8Text(path);
+                var xaml = _fileIO?.ReadUtf8Text(path);
                 if (!string.IsNullOrWhiteSpace(xaml))
                 {
                     OnImportXamlString(xaml);
@@ -557,133 +792,13 @@ namespace Core2D.Editor
         /// <summary>
         /// Import Xaml string.
         /// </summary>
-        /// <remarks>
-        /// Supported Xaml types:
-        /// - The shape style <see cref="ShapeStyle"/>.
-        /// - The shape object based on <see cref="BaseShape"/> class.
-        /// - The styles library using <see cref="XStyles"/> resources.
-        /// - The shapes library using <see cref="XShapes"/> resources.
-        /// - The groups library using <see cref="XGroups"/> resources.
-        /// - The databases collection using <see cref="XDatabases"/> resources.
-        /// - The templates collection using <see cref="XTemplates"/> resources.
-        /// - The <see cref="XContext"/> class.
-        /// - The <see cref="XDatabase"/> class.
-        /// - The <see cref="XLayer"/> class.
-        /// - The <see cref="XTemplate"/> class.
-        /// - The <see cref="XPage"/> class.
-        /// - The <see cref="XDocument"/> class.
-        /// - The <see cref="XOptions"/> class.
-        /// - The <see cref="XProject"/> class.
-        /// </remarks>
         /// <param name="xaml">The xaml string.</param>
         public void OnImportXamlString(string xaml)
         {
             var item = _xamlSerializer?.Deserialize<object>(xaml);
             if (item != null)
             {
-                if (item is ShapeStyle)
-                {
-                    _project?.AddStyle(_project?.CurrentStyleLibrary, item as ShapeStyle);
-                }
-                else if (item is BaseShape)
-                {
-                    _project?.AddShape(_project?.CurrentContainer?.CurrentLayer, item as BaseShape);
-                }
-                else if (item is XStyles)
-                {
-                    var styles = item as XStyles;
-                    var library = XLibrary<ShapeStyle>.Create(styles.Name, styles.Children);
-                    _project?.AddStyleLibrary(library);
-                }
-                else if (item is XShapes)
-                {
-                    var shapes = (item as XShapes).Children;
-                    if (shapes.Length > 0)
-                    {
-                        _project?.AddShapes(_project?.CurrentContainer?.CurrentLayer, shapes);
-                    }
-                }
-                else if (item is XGroups)
-                {
-                    var groups = item as XGroups;
-                    var library = XLibrary<XGroup>.Create(groups.Name, groups.Children);
-                    _project?.AddGroupLibrary(library);
-                }
-                else if (item is XDatabases)
-                {
-                    var databases = (item as XDatabases).Children;
-                    if (databases.Length > 0)
-                    {
-                        foreach (var database in databases)
-                        {
-                            _project?.AddDatabase(database);
-                        }
-                    }
-                }
-                else if (item is XTemplates)
-                {
-                    var templates = (item as XTemplates).Children;
-                    if (templates.Length > 0)
-                    {
-                        foreach (var template in templates)
-                        {
-                            _project?.AddTemplate(template);
-                        }
-                    }
-                }
-                else if (item is XContext)
-                {
-                    if (_renderers?[0]?.State?.SelectedShape != null || (_renderers?[0]?.State?.SelectedShapes?.Count > 0))
-                    {
-                        OnApplyData(item as XContext);
-                    }
-                    else
-                    {
-                        var page = _project?.CurrentContainer as XPage;
-                        if (page != null)
-                        {
-                            page.Data = item as XContext;
-                        }
-                    }
-                }
-                else if (item is XDatabase)
-                {
-                    var db = item as XDatabase;
-                    _project?.AddDatabase(db);
-                    _project?.SetCurrentDatabase(db);
-                }
-                else if (item is XLayer)
-                {
-                    _project?.AddLayer(_project?.CurrentContainer, item as XLayer);
-                }
-                else if (item is XTemplate)
-                {
-                    _project?.AddTemplate(item as XTemplate);
-                }
-                else if (item is XPage)
-                {
-                    _project?.AddPage(_project?.CurrentDocument, item as XPage);
-                }
-                else if (item is XDocument)
-                {
-                    _project?.AddDocument(item as XDocument);
-                }
-                else if (item is XOptions)
-                {
-                    if (_project != null)
-                    {
-                        _project.Options = item as XOptions;
-                    }
-                }
-                else if (item is XProject)
-                {
-                    Unload();
-                    Load(item as XProject, string.Empty);
-                }
-                else
-                {
-                    throw new NotSupportedException("Not supported Xaml object.");
-                }
+                OnImportObject(item, false);
             }
         }
 
@@ -699,7 +814,7 @@ namespace Core2D.Editor
                 var xaml = _xamlSerializer?.Serialize(item);
                 if (!string.IsNullOrWhiteSpace(xaml))
                 {
-                    _fileIO.WriteUtf8Text(path, xaml);
+                    _fileIO?.WriteUtf8Text(path, xaml);
                 }
             }
             catch (Exception ex)
@@ -709,126 +824,17 @@ namespace Core2D.Editor
         }
 
         /// <summary>
-        /// Import object from a file.
+        /// Import Json from a file.
         /// </summary>
-        /// <param name="path">The object file path.</param>
-        /// <param name="item">The parent object.</param>
-        /// <param name="type">The object type.</param>
-        public void OnImportObject(string path, object item, CoreType type)
+        /// <param name="path">The json file path.</param>
+        public void OnImportJson(string path)
         {
-            if (_project == null || _jsonSerializer == null)
-                return;
-
             try
             {
-                switch (type)
+                var json = _fileIO?.ReadUtf8Text(path);
+                if (!string.IsNullOrWhiteSpace(json))
                 {
-                    case CoreType.Style:
-                        {
-                            var sl = item as XLibrary<ShapeStyle>;
-                            var json = _fileIO.ReadUtf8Text(path);
-                            var import = _jsonSerializer.Deserialize<ShapeStyle>(json);
-
-                            _project.AddStyle(sl, import);
-                        }
-                        break;
-                    case CoreType.Styles:
-                        {
-                            var sl = item as XLibrary<ShapeStyle>;
-                            var json = _fileIO.ReadUtf8Text(path);
-                            var import = _jsonSerializer.Deserialize<IList<ShapeStyle>>(json);
-
-                            _project.AddItems(sl, import);
-                        }
-                        break;
-                    case CoreType.StyleLibrary:
-                        {
-                            var json = _fileIO.ReadUtf8Text(path);
-                            var import = _jsonSerializer.Deserialize<XLibrary<ShapeStyle>>(json);
-
-                            _project.AddStyleLibrary(import);
-                        }
-                        break;
-                    case CoreType.StyleLibraries:
-                        {
-                            var json = _fileIO.ReadUtf8Text(path);
-                            var import = _jsonSerializer.Deserialize<IList<XLibrary<ShapeStyle>>>(json);
-
-                            _project.AddStyleLibraries(import);
-                        }
-                        break;
-                    case CoreType.Group:
-                        {
-                            var gl = item as XLibrary<XGroup>;
-                            var json = _fileIO.ReadUtf8Text(path);
-                            var import = _jsonSerializer.Deserialize<XGroup>(json);
-
-                            var shapes = Enumerable.Repeat(import as XGroup, 1);
-                            TryToRestoreStyles(shapes);
-                            TryToRestoreRecords(shapes);
-
-                            _project.AddGroup(gl, import);
-                        }
-                        break;
-                    case CoreType.Groups:
-                        {
-                            var gl = item as XLibrary<XGroup>;
-                            var json = _fileIO.ReadUtf8Text(path);
-                            var import = _jsonSerializer.Deserialize<IList<XGroup>>(json);
-
-                            TryToRestoreStyles(import);
-                            TryToRestoreRecords(import);
-
-                            _project.AddItems(gl, import);
-                        }
-                        break;
-                    case CoreType.GroupLibrary:
-                        {
-                            var json = _fileIO.ReadUtf8Text(path);
-                            var import = _jsonSerializer.Deserialize<XLibrary<XGroup>>(json);
-
-                            TryToRestoreStyles(import.Items);
-                            TryToRestoreRecords(import.Items);
-
-                            _project.AddGroupLibrary(import);
-                        }
-                        break;
-                    case CoreType.GroupLibraries:
-                        {
-                            var json = _fileIO.ReadUtf8Text(path);
-                            var import = _jsonSerializer.Deserialize<IList<XLibrary<XGroup>>>(json);
-
-                            var shapes = import.SelectMany(x => x.Items);
-                            TryToRestoreStyles(shapes);
-                            TryToRestoreRecords(shapes);
-
-                            _project.AddGroupLibraries(import);
-                        }
-                        break;
-                    case CoreType.Template:
-                        {
-                            var json = _fileIO.ReadUtf8Text(path);
-                            var import = _jsonSerializer.Deserialize<XTemplate>(json);
-
-                            var shapes = import.Layers.SelectMany(x => x.Shapes);
-                            TryToRestoreStyles(shapes);
-                            TryToRestoreRecords(shapes);
-
-                            _project.AddTemplate(import);
-                        }
-                        break;
-                    case CoreType.Templates:
-                        {
-                            var json = _fileIO.ReadUtf8Text(path);
-                            var import = _jsonSerializer.Deserialize<IList<XTemplate>>(json);
-
-                            var shapes = import.SelectMany(x => x.Layers).SelectMany(x => x.Shapes);
-                            TryToRestoreStyles(shapes);
-                            TryToRestoreRecords(shapes);
-
-                            _project.AddTemplates(import);
-                        }
-                        break;
+                    OnImportJsonString(json);
                 }
             }
             catch (Exception ex)
@@ -838,80 +844,31 @@ namespace Core2D.Editor
         }
 
         /// <summary>
-        /// Export object to a file.
+        /// Import Json string.
         /// </summary>
-        /// <param name="path">The object file path.</param>
+        /// <param name="json">The json string.</param>
+        private void OnImportJsonString(string json)
+        {
+            var item = _jsonSerializer.Deserialize<object>(json);
+            if (item != null)
+            {
+                OnImportObject(item, true);
+            }
+        }
+
+        /// <summary>
+        /// Export Json to a file.
+        /// </summary>
+        /// <param name="path">The json file path.</param>
         /// <param name="item">The object item.</param>
-        /// <param name="type">The object type.</param>
-        public void OnExportObject(string path, object item, CoreType type)
+        public void OnExportJson(string path, object item)
         {
-            if (_jsonSerializer == null)
-                return;
-
             try
             {
-                switch (type)
+                var json = _jsonSerializer?.Serialize(item);
+                if (!string.IsNullOrWhiteSpace(json))
                 {
-                    case CoreType.Style:
-                        {
-                            var json = _jsonSerializer.Serialize(item as ShapeStyle);
-                            _fileIO.WriteUtf8Text(path, json);
-                        }
-                        break;
-                    case CoreType.Styles:
-                        {
-                            var json = _jsonSerializer.Serialize((item as XLibrary<ShapeStyle>).Items);
-                            _fileIO.WriteUtf8Text(path, json);
-                        }
-                        break;
-                    case CoreType.StyleLibrary:
-                        {
-                            var json = _jsonSerializer.Serialize((item as XLibrary<ShapeStyle>));
-                            _fileIO.WriteUtf8Text(path, json);
-                        }
-                        break;
-                    case CoreType.StyleLibraries:
-                        {
-                            var json = _jsonSerializer.Serialize(item as IEnumerable<XLibrary<ShapeStyle>>);
-                            _fileIO.WriteUtf8Text(path, json);
-                        }
-                        break;
-                    case CoreType.Group:
-                        {
-                            var json = _jsonSerializer.Serialize(item as XGroup);
-                            _fileIO.WriteUtf8Text(path, json);
-                        }
-                        break;
-                    case CoreType.Groups:
-                        {
-                            var json = _jsonSerializer.Serialize((item as XLibrary<XGroup>).Items);
-                            _fileIO.WriteUtf8Text(path, json);
-                        }
-                        break;
-                    case CoreType.GroupLibrary:
-                        {
-                            var json = _jsonSerializer.Serialize(item as XLibrary<XGroup>);
-                            _fileIO.WriteUtf8Text(path, json);
-                        }
-                        break;
-                    case CoreType.GroupLibraries:
-                        {
-                            var json = _jsonSerializer.Serialize(item as IEnumerable<XLibrary<XGroup>>);
-                            _fileIO.WriteUtf8Text(path, json);
-                        }
-                        break;
-                    case CoreType.Template:
-                        {
-                            var json = _jsonSerializer.Serialize(item as XTemplate);
-                            _fileIO.WriteUtf8Text(path, json);
-                        }
-                        break;
-                    case CoreType.Templates:
-                        {
-                            var json = _jsonSerializer.Serialize(item as IEnumerable<XTemplate>);
-                            _fileIO.WriteUtf8Text(path, json);
-                        }
-                        break;
+                    _fileIO?.WriteUtf8Text(path, json);
                 }
             }
             catch (Exception ex)
@@ -2665,54 +2622,9 @@ namespace Core2D.Editor
                             OnImportData(path);
                             result = true;
                         }
-                        else if (string.Compare(ext, Constants.StyleExtension, StringComparison.OrdinalIgnoreCase) == 0)
+                        else if (string.Compare(ext, Constants.JsonExtension, StringComparison.OrdinalIgnoreCase) == 0)
                         {
-                            OnImportObject(path, _project.CurrentStyleLibrary, CoreType.Style);
-                            result = true;
-                        }
-                        else if (string.Compare(ext, Constants.StylesExtension, StringComparison.OrdinalIgnoreCase) == 0)
-                        {
-                            OnImportObject(path, _project.CurrentStyleLibrary, CoreType.Styles);
-                            result = true;
-                        }
-                        else if (string.Compare(ext, Constants.StyleLibraryExtension, StringComparison.OrdinalIgnoreCase) == 0)
-                        {
-                            OnImportObject(path, _project, CoreType.StyleLibrary);
-                            result = true;
-                        }
-                        else if (string.Compare(ext, Constants.StyleLibrariesExtension, StringComparison.OrdinalIgnoreCase) == 0)
-                        {
-                            OnImportObject(path, _project, CoreType.StyleLibraries);
-                            result = true;
-                        }
-                        else if (string.Compare(ext, Constants.GroupExtension, StringComparison.OrdinalIgnoreCase) == 0)
-                        {
-                            OnImportObject(path, _project.CurrentGroupLibrary, CoreType.Group);
-                            result = true;
-                        }
-                        else if (string.Compare(ext, Constants.GroupsExtension, StringComparison.OrdinalIgnoreCase) == 0)
-                        {
-                            OnImportObject(path, _project.CurrentGroupLibrary, CoreType.Groups);
-                            result = true;
-                        }
-                        else if (string.Compare(ext, Constants.GroupLibraryExtension, StringComparison.OrdinalIgnoreCase) == 0)
-                        {
-                            OnImportObject(path, _project, CoreType.GroupLibrary);
-                            result = true;
-                        }
-                        else if (string.Compare(ext, Constants.GroupLibrariesExtension, StringComparison.OrdinalIgnoreCase) == 0)
-                        {
-                            OnImportObject(path, _project, CoreType.GroupLibraries);
-                            result = true;
-                        }
-                        else if (string.Compare(ext, Constants.TemplateExtension, StringComparison.OrdinalIgnoreCase) == 0)
-                        {
-                            OnImportObject(path, _project, CoreType.Template);
-                            result = true;
-                        }
-                        else if (string.Compare(ext, Constants.TemplatesExtension, StringComparison.OrdinalIgnoreCase) == 0)
-                        {
-                            OnImportObject(path, _project, CoreType.Templates);
+                            OnImportJson(path);
                             result = true;
                         }
                         else if (string.Compare(ext, Constants.XamlExtension, StringComparison.OrdinalIgnoreCase) == 0)
@@ -4314,6 +4226,16 @@ namespace Core2D.Editor
                     async () => await (Application?.OnSaveAsAsync() ?? Task.FromResult<object>(null)),
                     () => IsEditMode());
 
+            Commands.ImportObjectCommand =
+                Command<string>.Create(
+                    async (path) => await (Application?.OnImportObjectAsync(path) ?? Task.FromResult<object>(null)),
+                    (path) => IsEditMode());
+
+            Commands.ExportObjectCommand =
+                Command<object>.Create(
+                    async (item) => await (Application?.OnExportObjectAsync(item) ?? Task.FromResult<object>(null)),
+                    (path) => IsEditMode());
+
             Commands.ImportXamlCommand =
                 Command<string>.Create(
                     async (path) => await (Application?.OnImportXamlAsync(path) ?? Task.FromResult<object>(null)),
@@ -4322,6 +4244,16 @@ namespace Core2D.Editor
             Commands.ExportXamlCommand =
                 Command<object>.Create(
                     async (item) => await (Application?.OnExportXamlAsync(item) ?? Task.FromResult<object>(null)),
+                    (path) => IsEditMode());
+
+            Commands.ImportJsonCommand =
+                Command<string>.Create(
+                    async (path) => await (Application?.OnImportJsonAsync(path) ?? Task.FromResult<object>(null)),
+                    (path) => IsEditMode());
+
+            Commands.ExportJsonCommand =
+                Command<object>.Create(
+                    async (item) => await (Application?.OnExportJsonAsync(item) ?? Task.FromResult<object>(null)),
                     (path) => IsEditMode());
 
             Commands.ExportCommand =
@@ -4348,106 +4280,6 @@ namespace Core2D.Editor
                 Command<XDatabase>.Create(
                     async (db) => await (Application?.OnUpdateDataAsync() ?? Task.FromResult<object>(null)),
                     (db) => IsEditMode());
-
-            Commands.ImportStyleCommand =
-                Command<XLibrary<ShapeStyle>>.Create(
-                    async (item) => await (Application?.OnImportObjectAsync(item, CoreType.Style) ?? Task.FromResult<object>(null)),
-                    (item) => IsEditMode());
-
-            Commands.ImportStylesCommand =
-                Command<XLibrary<ShapeStyle>>.Create(
-                    async (item) => await (Application?.OnImportObjectAsync(item, CoreType.Styles) ?? Task.FromResult<object>(null)),
-                    (item) => IsEditMode());
-
-            Commands.ImportStyleLibraryCommand =
-                Command<XProject>.Create(
-                    async (item) => await (Application?.OnImportObjectAsync(item, CoreType.StyleLibrary) ?? Task.FromResult<object>(null)),
-                    (item) => IsEditMode());
-
-            Commands.ImportStyleLibrariesCommand =
-                Command<XProject>.Create(
-                    async (item) => await (Application?.OnImportObjectAsync(item, CoreType.StyleLibraries) ?? Task.FromResult<object>(null)),
-                    (item) => IsEditMode());
-
-            Commands.ImportGroupCommand =
-                Command<XLibrary<XGroup>>.Create(
-                    async (item) => await (Application?.OnImportObjectAsync(item, CoreType.Group) ?? Task.FromResult<object>(null)),
-                    (item) => IsEditMode());
-
-            Commands.ImportGroupsCommand =
-                Command<XLibrary<XGroup>>.Create(
-                    async (item) => await (Application?.OnImportObjectAsync(item, CoreType.Groups) ?? Task.FromResult<object>(null)),
-                    (item) => IsEditMode());
-
-            Commands.ImportGroupLibraryCommand =
-                Command<XProject>.Create(
-                    async (item) => await (Application?.OnImportObjectAsync(item, CoreType.GroupLibrary) ?? Task.FromResult<object>(null)),
-                    (item) => IsEditMode());
-
-            Commands.ImportGroupLibrariesCommand =
-                Command<XProject>.Create(
-                    async (item) => await (Application?.OnImportObjectAsync(item, CoreType.GroupLibraries) ?? Task.FromResult<object>(null)),
-                    (item) => IsEditMode());
-
-            Commands.ImportTemplateCommand =
-                Command<XProject>.Create(
-                    async (item) => await (Application?.OnImportObjectAsync(item, CoreType.Template) ?? Task.FromResult<object>(null)),
-                    (item) => IsEditMode());
-
-            Commands.ImportTemplatesCommand =
-                Command<XProject>.Create(
-                    async (item) => await (Application?.OnImportObjectAsync(item, CoreType.Templates) ?? Task.FromResult<object>(null)),
-                    (item) => IsEditMode());
-
-            Commands.ExportStyleCommand =
-                Command<ShapeStyle>.Create(
-                    async (item) => await (Application?.OnExportObjectAsync(item, CoreType.Style) ?? Task.FromResult<object>(null)),
-                    (item) => IsEditMode());
-
-            Commands.ExportStylesCommand =
-                Command<XLibrary<ShapeStyle>>.Create(
-                    async (item) => await (Application?.OnExportObjectAsync(item, CoreType.Styles) ?? Task.FromResult<object>(null)),
-                    (item) => IsEditMode());
-
-            Commands.ExportStyleLibraryCommand =
-                Command<XLibrary<ShapeStyle>>.Create(
-                    async (item) => await (Application?.OnExportObjectAsync(item, CoreType.StyleLibrary) ?? Task.FromResult<object>(null)),
-                    (item) => IsEditMode());
-
-            Commands.ExportStyleLibrariesCommand =
-                Command<IEnumerable<XLibrary<ShapeStyle>>>.Create(
-                    async (item) => await (Application?.OnExportObjectAsync(item, CoreType.StyleLibraries) ?? Task.FromResult<object>(null)),
-                    (item) => IsEditMode());
-
-            Commands.ExportGroupCommand =
-                Command<XGroup>.Create(
-                    async (item) => await (Application?.OnExportObjectAsync(item, CoreType.Group) ?? Task.FromResult<object>(null)),
-                    (item) => IsEditMode());
-
-            Commands.ExportGroupsCommand =
-                Command<XLibrary<XGroup>>.Create(
-                    async (item) => await (Application?.OnExportObjectAsync(item, CoreType.Groups) ?? Task.FromResult<object>(null)),
-                    (item) => IsEditMode());
-
-            Commands.ExportGroupLibraryCommand =
-                Command<XLibrary<XGroup>>.Create(
-                    async (item) => await (Application?.OnExportObjectAsync(item, CoreType.GroupLibrary) ?? Task.FromResult<object>(null)),
-                    (item) => IsEditMode());
-
-            Commands.ExportGroupLibrariesCommand =
-                Command<IEnumerable<XLibrary<XGroup>>>.Create(
-                    async (item) => await (Application?.OnExportObjectAsync(item, CoreType.GroupLibraries) ?? Task.FromResult<object>(null)),
-                    (item) => IsEditMode());
-
-            Commands.ExportTemplateCommand =
-                Command<XTemplate>.Create(
-                    async (item) => await (Application?.OnExportObjectAsync(item, CoreType.Template) ?? Task.FromResult<object>(null)),
-                    (item) => IsEditMode());
-
-            Commands.ExportTemplatesCommand =
-                Command<IEnumerable<XTemplate>>.Create(
-                    async (item) => await (Application?.OnExportObjectAsync(item, CoreType.Templates) ?? Task.FromResult<object>(null)),
-                    (item) => IsEditMode());
 
             Commands.CopyAsEmfCommand =
                 Command.Create(

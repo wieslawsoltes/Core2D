@@ -46,7 +46,8 @@
             <MenuItem Header="_Save" Command="{Static Editor:Commands.SaveCommand}"/>
             <MenuItem Header="Save _As..." Command="{Static Editor:Commands.SaveAsCommand}"/>
             <Separator/>
-            <MenuItem Header="_Import Xaml..." Command="{Static Editor:Commands.ImportXamlCommand}"/>
+            <MenuItem Header="Import Xa_ml..." Command="{Static Editor:Commands.ImportXamlCommand}"/>
+            <MenuItem Header="Import _Json..." Command="{Static Editor:Commands.ImportJsonCommand}"/>
             <Separator/>
             <MenuItem Header="_Export..." Command="{Static Editor:Commands.ExportCommand}"/>
             <Separator/>
@@ -95,76 +96,11 @@
         <MenuItem Header="_View" IsVisible="{Binding Project, Converter={Static converters:IsNotNullConverter.Instance}}">
             <MenuItem Header="_Object Browser..." Command="{Static Editor:Commands.ObjectBrowserCommand}"/>
             <Separator/>
-            <MenuItem Header="_XAML Exporter..." Command="{Static Editor:Commands.ExportXamlCommand}"/>
-            <Separator/>
             <MenuItem Header="_Document Viewer..." Command="{Static Editor:Commands.DocumentViewerCommand}"/>
             <Separator/>
             <MenuItem Header="_Reset Zoom" Command="{Static Editor:Commands.ZoomResetCommand}"/>
             <Separator/>
             <MenuItem Header="_AutoFit Zoom" Command="{Static Editor:Commands.ZoomAutoFitCommand}"/>
-        </MenuItem>
-        <MenuItem Header="_Project" IsVisible="{Binding Project, Converter={Static converters:IsNotNullConverter.Instance}}">
-            <MenuItem Header="_Add Document" Command="{Static Editor:Commands.AddDocumentCommand}" CommandParameter="{Binding Project}"/>
-            <MenuItem Header="_Add Page" Command="{Static Editor:Commands.AddPageCommand}" CommandParameter="{Binding Project.CurrentDocument}"/>
-            <Separator/>
-            <MenuItem Header="_Document">
-                <MenuItem Header="Insert Document Bef_ore" Command="{Static Editor:Commands.InsertDocumentBeforeCommand}" CommandParameter="{Binding Project.CurrentDocument}"/>
-                <MenuItem Header="Insert Document Aft_er" Command="{Static Editor:Commands.InsertDocumentAfterCommand}" CommandParameter="{Binding Project.CurrentDocument}"/>
-                <Separator/>
-                <MenuItem Header="Cu_t Document" Command="{Static Editor:Commands.CutCommand}" CommandParameter="{Binding Project.CurrentDocument}"/>
-                <MenuItem Header="_Copy Document" Command="{Static Editor:Commands.CopyCommand}" CommandParameter="{Binding Project.CurrentDocument}"/>
-                <MenuItem Header="_Paste Document" Command="{Static Editor:Commands.PasteCommand}" CommandParameter="{Binding Project.CurrentDocument}"/>
-                <Separator/>
-                <MenuItem Header="_Delete Document" Command="{Static Editor:Commands.DeleteCommand}" CommandParameter="{Binding Project.CurrentDocument}"/>
-                <Separator/>
-                <MenuItem Header="E_xport Document" Command="{Static Editor:Commands.ExportCommand}" CommandParameter="{Binding Project.CurrentDocument}"/>
-            </MenuItem>
-            <MenuItem Header="_Page">
-                <MenuItem Header="Insert Page Bef_ore" Command="{Static Editor:Commands.InsertPageBeforeCommand}" CommandParameter="{Binding Project.CurrentContainer}"/>
-                <MenuItem Header="Insert Page Aft_er" Command="{Static Editor:Commands.InsertPageAfterCommand}" CommandParameter="{Binding Project.CurrentContainer}"/>
-                <Separator/>
-                <MenuItem Header="Cu_t Page" Command="{Static Editor:Commands.CutCommand}" CommandParameter="{Binding Project.CurrentContainer}"/>
-                <MenuItem Header="_Copy Page" Command="{Static Editor:Commands.CopyCommand}" CommandParameter="{Binding Project.CurrentContainer}"/>
-                <MenuItem Header="_Paste Page" Command="{Static Editor:Commands.PasteCommand}" CommandParameter="{Binding Project.CurrentContainer}"/>
-                <Separator/>
-                <MenuItem Header="_Delete Page" Command="{Static Editor:Commands.DeleteCommand}" CommandParameter="{Binding Project.CurrentContainer}"/>
-                <Separator/>
-                <MenuItem Header="E_xport Page" Command="{Static Editor:Commands.ExportCommand}" CommandParameter="{Binding Project.CurrentContainer}"/>
-            </MenuItem>
-            <Separator/>
-            <MenuItem Header="I_mport">
-                <MenuItem Header="_Style..." Command="{Static Editor:Commands.ImportStyleCommand}" CommandParameter="{Binding Project.CurrentStyleLibrary}"/>
-                <MenuItem Header="S_tyles..." Command="{Static Editor:Commands.ImportStylesCommand}" CommandParameter="{Binding Project.CurrentStyleLibrary}"/>
-                <Separator/>
-                <MenuItem Header="St_yle Library..." Command="{Static Editor:Commands.ImportStyleLibraryCommand}" CommandParameter="{Binding Project}"/>
-                <MenuItem Header="Sty_le Libraries..." Command="{Static Editor:Commands.ImportStyleLibrariesCommand}" CommandParameter="{Binding Project}"/>
-                <Separator/>
-                <MenuItem Header="_Group..." Command="{Static Editor:Commands.ImportGroupCommand}" CommandParameter="{Binding Project.CurrentGroupLibrary}"/>
-                <MenuItem Header="G_roups..." Command="{Static Editor:Commands.ImportGroupsCommand}" CommandParameter="{Binding Project.CurrentGroupLibrary}"/>
-                <Separator/>
-                <MenuItem Header="Gr_oup Library..." Command="{Static Editor:Commands.ImportGroupLibraryCommand}" CommandParameter="{Binding Project}"/>
-                <MenuItem Header="Gro_up Libraries..." Command="{Static Editor:Commands.ImportGroupLibrariesCommand}" CommandParameter="{Binding Project}"/>
-                <Separator/>
-                <MenuItem Header="_Template..." Command="{Static Editor:Commands.ImportTemplateCommand}" CommandParameter="{Binding Project}"/>
-                <MenuItem Header="T_emplates..." Command="{Static Editor:Commands.ImportTemplatesCommand}" CommandParameter="{Binding Project}"/>
-            </MenuItem>
-            <Separator/>
-            <MenuItem Header="Expor_t">
-                <MenuItem Header="_Style..." Command="{Static Editor:Commands.ExportStyleCommand}" CommandParameter="{Binding Project.CurrentStyleLibrary.Selected}"/>
-                <MenuItem Header="S_tyles..." Command="{Static Editor:Commands.ExportStylesCommand}" CommandParameter="{Binding Project.CurrentStyleLibrary}"/>
-                <Separator/>
-                <MenuItem Header="St_yle Library..." Command="{Static Editor:Commands.ExportStyleLibraryCommand}" CommandParameter="{Binding Project.CurrentStyleLibrary}"/>
-                <MenuItem Header="Sty_le Libraries..." Command="{Static Editor:Commands.ExportStyleLibrariesCommand}" CommandParameter="{Binding Project.StyleLibraries}"/>
-                <Separator/>
-                <MenuItem Header="_Group..." Command="{Static Editor:Commands.ExportGroupCommand}" CommandParameter="{Binding Project.CurrentGroupLibrary.Selected}"/>
-                <MenuItem Header="G_roups..." Command="{Static Editor:Commands.ExportGroupsCommand}" CommandParameter="{Binding Project.CurrentGroupLibrary}"/>
-                <Separator/>
-                <MenuItem Header="Gr_oup Library..." Command="{Static Editor:Commands.ExportGroupLibraryCommand}" CommandParameter="{Binding Project.CurrentGroupLibrary}"/>
-                <MenuItem Header="Gro_up Libraries..." Command="{Static Editor:Commands.ExportGroupLibrariesCommand}" CommandParameter="{Binding Project.GroupLibraries}"/>
-                <Separator/>
-                <MenuItem Header="_Template..." Command="{Static Editor:Commands.ExportTemplateCommand}" CommandParameter="{Binding Project.CurrentTemplate}"/>
-                <MenuItem Header="T_emplates..." Command="{Static Editor:Commands.ExportTemplatesCommand}" CommandParameter="{Binding Project.Templates}"/>
-            </MenuItem>
         </MenuItem>
         <MenuItem Header="_Tool" IsVisible="{Binding Project, Converter={Static converters:IsNotNullConverter.Instance}}">
             <MenuItem Header="_None" Command="{Static Editor:Commands.ToolNoneCommand}"/>

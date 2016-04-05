@@ -501,9 +501,6 @@
     <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\ExporterWindow.xaml.cs">
-      <DependentUpon>ExporterWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Windows\BrowserWindow.xaml.cs">
       <DependentUpon>BrowserWindow.xaml</DependentUpon>
     </Compile>
@@ -636,7 +633,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Windows\MainWindow.xaml" />
-    <EmbeddedResource Include="Windows\ExporterWindow.xaml" />
     <EmbeddedResource Include="Windows\BrowserWindow.xaml" />
   </ItemGroup>
   <ItemGroup>
