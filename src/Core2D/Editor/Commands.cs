@@ -292,6 +292,11 @@ namespace Core2D.Editor
         public static ICoreCommand TryToConnectCommand { get; set; }
 
         /// <summary>
+        /// Toggle <see cref="XOptions.CloneStyle"/> option.
+        /// </summary>
+        public static ICoreCommand CloneStyleCommand { get; set; }
+
+        /// <summary>
         /// Add database.
         /// </summary>
         public static ICoreCommand AddDatabaseCommand { get; set; }

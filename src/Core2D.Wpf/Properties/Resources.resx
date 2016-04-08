@@ -609,4 +609,13 @@
   <data name="MenuFileImportJson" xml:space="preserve">
     <value>Import _Json...</value>
   </data>
+  <data name="MenuOptionsCloneStyle" xml:space="preserve">
+    <value>Clone St_yle</value>
+  </data>
+  <data name="OptionsCloneStyle" xml:space="preserve">
+    <value>CloneStyle</value>
+  </data>
+  <data name="StatusOptionsCloneStyle" xml:space="preserve">
+    <value>CloneStyle</value>
+  </data>
 </root>

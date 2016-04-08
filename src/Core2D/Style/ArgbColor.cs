@@ -92,7 +92,7 @@ namespace Core2D.Style
         /// Parses a color string.
         /// </summary>
         /// <param name="s">The color string.</param>
-        /// <returns>The <see cref="ArgbColor"/>.</returns>
+        /// <returns>The new instance of the <see cref="ArgbColor"/> class.</returns>
         public static ArgbColor Parse(string s)
         {
             if (s[0] == '#')
@@ -133,6 +133,21 @@ namespace Core2D.Style
         public static string ToHtml(ArgbColor c)
         {
             return string.Concat('#', c.A.ToString("X2"), c.R.ToString("X2"), c.G.ToString("X2"), c.B.ToString("X2"));
+        }
+
+        /// <summary>
+        /// Clones color.
+        /// </summary>
+        /// <returns>The new instance of the <see cref="ArgbColor"/> class.</returns>
+        public ArgbColor Clone()
+        {
+            return new ArgbColor()
+            {
+                A = _a,
+                R = _r,
+                G = _g,
+                B = _b
+            };
         }
     }
 }

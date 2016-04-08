@@ -175,6 +175,8 @@
             <MenuItem Header="{x:Static p:Resources.MenuOptionsSnapToGrid}" IsCheckable="True" IsChecked="{Binding Project.Options.SnapToGrid, Mode=OneWay}" Command="{x:Static Editor:Commands.SnapToGridCommand}" InputGestureText="G"/>
             <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuOptionsTryToConnect}" IsCheckable="True" IsChecked="{Binding Project.Options.TryToConnect, Mode=OneWay}" Command="{x:Static Editor:Commands.TryToConnectCommand}" InputGestureText="C"/>
+            <Separator/>
+            <MenuItem Header="{x:Static p:Resources.MenuOptionsCloneStyle}" IsCheckable="True" IsChecked="{Binding Project.Options.CloneStyle, Mode=OneWay}" Command="{x:Static Editor:Commands.CloneStyleCommand}" InputGestureText="Y"/>
         </MenuItem>
         <MenuItem Header="{x:Static p:Resources.MenuWindow}" Style="{StaticResource MenuItemVisibilityStyle}">
             <MenuItem Header="{x:Static p:Resources.MenuWindowLoadLayout}" Command="{x:Static Editor:Commands.LoadWindowLayoutCommand}" InputGestureText=""/>

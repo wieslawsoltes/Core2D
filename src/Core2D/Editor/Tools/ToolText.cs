@@ -69,9 +69,10 @@ namespace Core2D.Editor.Tools
             {
                 case ToolState.None:
                     {
+                        var style = _editor.Project.CurrentStyleLibrary.Selected;
                         _shape = XText.Create(
                             sx, sy,
-                            _editor.Project.CurrentStyleLibrary.Selected,
+                            _editor.Project.Options.CloneStyle ? style.Clone() : style,
                             _editor.Project.Options.PointShape,
                             "Text",
                             _editor.Project.Options.DefaultIsStroked);

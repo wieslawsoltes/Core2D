@@ -199,5 +199,17 @@ namespace Core2D.Shape
         {
             return _flags.ToString();
         }
+
+        /// <summary>
+        /// Clones shape state.
+        /// </summary>
+        /// <returns>The new instance of the <see cref="ShapeState"/> class.</returns>
+        public ShapeState Clone()
+        {
+            return new ShapeState()
+            {
+                Flags = _flags
+            };
+        }
     }
 }

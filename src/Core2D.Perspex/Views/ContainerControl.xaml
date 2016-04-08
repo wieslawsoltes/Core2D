@@ -57,5 +57,6 @@
         <KeyBinding Command="{Static Editor:Commands.DefaultIsSmoothJoinCommand}" Gesture="J"/>
         <KeyBinding Command="{Static Editor:Commands.SnapToGridCommand}" Gesture="G"/>
         <KeyBinding Command="{Static Editor:Commands.TryToConnectCommand}" Gesture="C"/>
+        <KeyBinding Command="{Static Editor:Commands.CloneStyleCommand}" Gesture="Y"/>
     </UserControl.KeyBindings>
 </UserControl>

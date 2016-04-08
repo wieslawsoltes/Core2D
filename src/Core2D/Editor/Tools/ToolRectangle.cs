@@ -69,9 +69,10 @@ namespace Core2D.Editor.Tools
             {
                 case ToolState.None:
                     {
+                        var style = _editor.Project.CurrentStyleLibrary.Selected;
                         _shape = XRectangle.Create(
                             sx, sy,
-                            _editor.Project.CurrentStyleLibrary.Selected,
+                            _editor.Project.Options.CloneStyle ? style.Clone() : style,
                             _editor.Project.Options.PointShape,
                             _editor.Project.Options.DefaultIsStroked,
                             _editor.Project.Options.DefaultIsFilled);

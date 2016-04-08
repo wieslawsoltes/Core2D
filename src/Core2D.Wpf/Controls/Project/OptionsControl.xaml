@@ -24,6 +24,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -41,6 +42,8 @@
                     <ComboBox ItemsSource="{x:Static Editor:Enums.MoveModeValues}" SelectedItem="{Binding MoveMode}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="4" Grid.Column="1"/>
                     <TextBlock Text="{x:Static p:Resources.OptionsTryToConnect}" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="5" Grid.Column="0"/>
                     <CheckBox Content="" IsChecked="{Binding TryToConnect}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="5" Grid.Column="1"/>
+                    <TextBlock Text="{x:Static p:Resources.OptionsCloneStyle}" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="6" Grid.Column="0"/>
+                    <CheckBox Content="" IsChecked="{Binding CloneStyle}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="6" Grid.Column="1"/>
                 </Grid>
             </ScrollViewer>
         </TabItem>

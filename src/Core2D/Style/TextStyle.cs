@@ -105,5 +105,23 @@ namespace Core2D.Style
                 TextVAlignment = textVAlignment
             };
         }
+
+        /// <summary>
+        /// Clones text style.
+        /// </summary>
+        /// <returns>The new instance of the <see cref="TextStyle"/> class.</returns>
+        public TextStyle Clone()
+        {
+            return new TextStyle()
+            {
+                Name = _name,
+                FontName = _fontName,
+                FontFile = _fontFile,
+                FontSize = _fontSize,
+                FontStyle = _fontStyle.Clone(),
+                TextHAlignment = _textHAlignment,
+                TextVAlignment = _textVAlignment
+            };
+        }
     }
 }

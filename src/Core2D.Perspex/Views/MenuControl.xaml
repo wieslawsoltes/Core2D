@@ -193,6 +193,12 @@
                     <CheckBox IsChecked="{Binding Project.Options.TryToConnect}" Classes="menu"/>
                 </MenuItem.Icon>
             </MenuItem>
+            <Separator/>
+            <MenuItem Header="Clone St_yle" Command="{Static Editor:Commands.CloneStyleCommand}">
+                <MenuItem.Icon>
+                    <CheckBox IsChecked="{Binding Project.Options.CloneStyle}" Classes="menu"/>
+                </MenuItem.Icon>
+            </MenuItem>
         </MenuItem>
     </Menu>
 </UserControl>

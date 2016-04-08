@@ -4,6 +4,7 @@ using Core2D.Editor.Bounds;
 using Core2D.Math;
 using Core2D.Shape;
 using Core2D.Shapes;
+using Core2D.Style;
 
 namespace Core2D.Editor.Tools
 {
@@ -75,9 +76,10 @@ namespace Core2D.Editor.Tools
             {
                 case ToolState.None:
                     {
+                        var style = _editor.Project.CurrentStyleLibrary.Selected;
                         _shape = XLine.Create(
                             sx, sy,
-                            _editor.Project.CurrentStyleLibrary.Selected,
+                            _editor.Project.Options.CloneStyle ? style.Clone() : style,
                             _editor.Project.Options.PointShape,
                             _editor.Project.Options.DefaultIsStroked);
                         if (_editor.Project.Options.TryToConnect)

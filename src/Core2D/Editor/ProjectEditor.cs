@@ -1537,6 +1537,17 @@ namespace Core2D.Editor
         }
 
         /// <summary>
+        /// Toggle <see cref="XOptions.CloneStyle"/> option.
+        /// </summary>
+        public void OnToggleCloneStyle()
+        {
+            if (_project?.Options != null)
+            {
+                _project.Options.CloneStyle = !_project.Options.CloneStyle;
+            }
+        }
+
+        /// <summary>
         /// Set current record as selected shape(s) or current page data record.
         /// </summary>
         /// <param name="record">The data record item.</param>
@@ -2246,15 +2257,19 @@ namespace Core2D.Editor
                 try
                 {
                     var geometry = XPathGeometryParser.Parse(text);
-                    var path = XPath.Create(
-                        "Path",
-                        _project?.CurrentStyleLibrary?.Selected,
-                        geometry,
-                        _project.Options.DefaultIsStroked,
-                        _project.Options.DefaultIsFilled);
+                    var style = _project?.CurrentStyleLibrary?.Selected;
+                    if (style != null)
+                    {
+                        var path = XPath.Create(
+                            "Path",
+                            _project.Options.CloneStyle ? style.Clone() : style,
+                            geometry,
+                            _project.Options.DefaultIsStroked,
+                            _project.Options.DefaultIsFilled);
 
-                    Paste(Enumerable.Repeat(path, 1));
-                    return;
+                        Paste(Enumerable.Repeat(path, 1));
+                        return;
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -2799,12 +2814,16 @@ namespace Core2D.Editor
         /// <param name="y">The Y coordinate in container.</param>
         public void DropAsGroup(XRecord record, double x, double y)
         {
+            var selected = _project.CurrentStyleLibrary.Selected;
+            var style = _project.Options.CloneStyle ? selected.Clone() : selected;
+            var point = _project?.Options?.PointShape;
+            var layer = _project?.CurrentContainer?.CurrentLayer;
+            double sx = _project.Options.SnapToGrid ? Snap(x, _project.Options.SnapX) : x;
+            double sy = _project.Options.SnapToGrid ? Snap(y, _project.Options.SnapY) : y;
+
             var g = XGroup.Create(Constants.DefaulGroupName);
 
             g.Data.Record = record;
-
-            double sx = _project.Options.SnapToGrid ? Snap(x, _project.Options.SnapX) : x;
-            double sy = _project.Options.SnapToGrid ? Snap(y, _project.Options.SnapY) : y;
 
             var length = record.Values.Length;
             double px = sx;
@@ -2818,37 +2837,26 @@ namespace Core2D.Editor
                 if (column.IsVisible)
                 {
                     var binding = "{" + record.Columns[i].Name + "}";
-                    var text = XText.Create(
-                        px, py,
-                        px + width,
-                        py + height,
-                        _project?.CurrentStyleLibrary?.Selected,
-                        _project?.Options?.PointShape,
-                        binding);
-
+                    var text = XText.Create(px, py, px + width, py + height, style, point, binding);
                     g.AddShape(text);
                     py += height;
                 }
             }
 
-            var rectangle = XRectangle.Create(
-                sx, sy,
-                sx + width, sy + (double)length * height,
-                _project?.CurrentStyleLibrary?.Selected,
-                _project?.Options?.PointShape);
+            var rectangle = XRectangle.Create(sx, sy, sx + width, sy + length * height, style, point);
             g.AddShape(rectangle);
 
-            var pt = XPoint.Create(sx + width / 2, sy, _project?.Options?.PointShape);
-            var pb = XPoint.Create(sx + width / 2, sy + (double)length * height, _project?.Options?.PointShape);
-            var pl = XPoint.Create(sx, sy + ((double)length * height) / 2, _project?.Options?.PointShape);
-            var pr = XPoint.Create(sx + width, sy + ((double)length * height) / 2, _project?.Options?.PointShape);
+            var pt = XPoint.Create(sx + width / 2, sy, point);
+            var pb = XPoint.Create(sx + width / 2, sy + length * height, point);
+            var pl = XPoint.Create(sx, sy + (length * height) / 2, point);
+            var pr = XPoint.Create(sx + width, sy + (length * height) / 2, point);
 
             g.AddConnectorAsNone(pt);
             g.AddConnectorAsNone(pb);
             g.AddConnectorAsNone(pl);
             g.AddConnectorAsNone(pr);
 
-            _project.AddShape(_project?.CurrentContainer?.CurrentLayer, g);
+            _project.AddShape(layer, g);
         }
 
         /// <summary>
@@ -3989,6 +3997,11 @@ namespace Core2D.Editor
             Commands.TryToConnectCommand =
                 Command.Create(
                     () => OnToggleTryToConnect(),
+                    () => IsEditMode());
+
+            Commands.CloneStyleCommand =
+                Command.Create(
+                    () => OnToggleCloneStyle(),
                     () => IsEditMode());
 
             Commands.AddDatabaseCommand =

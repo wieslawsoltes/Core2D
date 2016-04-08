@@ -120,5 +120,27 @@ namespace Core2D.Style
                 EndArrowStyle = endArrowStyle
             };
         }
+
+        /// <summary>
+        /// Clones shape style.
+        /// </summary>
+        /// <returns>The new instance of the <see cref="ShapeStyle"/> class.</returns>
+        public ShapeStyle Clone()
+        {
+            return new ShapeStyle()
+            {
+                Name = Name,
+                Stroke = Stroke.Clone(),
+                Fill = Fill.Clone(),
+                Thickness = Thickness,
+                LineCap = LineCap,
+                Dashes = Dashes,
+                DashOffset = 0.0,
+                LineStyle = _lineStyle.Clone(),
+                TextStyle = _textStyle.Clone(),
+                StartArrowStyle = _startArrowStyle.Clone(),
+                EndArrowStyle = _endArrowStyle.Clone()
+            };
+        }
     }
 }

@@ -194,6 +194,7 @@
                     <CheckBox Classes="options" Content="SmoothJoin" IsChecked="{Binding Project.Options.DefaultIsSmoothJoin, Mode=TwoWay}"/>
                     <CheckBox Classes="options" Content="Snap" IsChecked="{Binding Project.Options.SnapToGrid, Mode=TwoWay}"/>
                     <CheckBox Classes="options" Content="Connect" IsChecked="{Binding Project.Options.TryToConnect, Mode=TwoWay}"/>
+                    <CheckBox Classes="options" Content="CloneStyle" IsChecked="{Binding Project.Options.CloneStyle, Mode=TwoWay}"/>
                 </WrapPanel>
             </WrapPanel>
         </Grid> 

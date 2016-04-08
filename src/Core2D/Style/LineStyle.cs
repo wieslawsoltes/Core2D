@@ -45,5 +45,18 @@ namespace Core2D.Style
                 FixedLength = fixedLength ?? LineFixedLength.Create()
             };
         }
+
+        /// <summary>
+        /// Clones line style.
+        /// </summary>
+        /// <returns>The new instance of the <see cref="LineStyle"/> class.</returns>
+        public LineStyle Clone()
+        {
+            return new LineStyle()
+            {
+                Name = _name,
+                FixedLength = _fixedLength.Clone()
+            };
+        }
     }
 }

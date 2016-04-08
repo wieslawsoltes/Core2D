@@ -439,6 +439,15 @@ namespace Core2D.Wpf.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Clone St_yle.
+        /// </summary>
+        public static string MenuOptionsCloneStyle {
+            get {
+                return ResourceManager.GetString("MenuOptionsCloneStyle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Default is Close_d.
         /// </summary>
         public static string MenuOptionsDefaultIsClosed {
@@ -889,6 +898,15 @@ namespace Core2D.Wpf.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CloneStyle.
+        /// </summary>
+        public static string OptionsCloneStyle {
+            get {
+                return ResourceManager.GetString("OptionsCloneStyle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to FillRule.
         /// </summary>
         public static string OptionsDefaultFillRule {
@@ -1137,6 +1155,15 @@ namespace Core2D.Wpf.Properties {
         public static string StatusOptionsAutofit {
             get {
                 return ResourceManager.GetString("StatusOptionsAutofit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CloneStyle.
+        /// </summary>
+        public static string StatusOptionsCloneStyle {
+            get {
+                return ResourceManager.GetString("StatusOptionsCloneStyle", resourceCulture);
             }
         }
         

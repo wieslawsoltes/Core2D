@@ -103,9 +103,10 @@ namespace Core2D.Editor.Tools
                 _editor.Project.Options.DefaultIsFilled,
                 _editor.Project.Options.DefaultIsClosed);
 
+            var style = _editor.Project.CurrentStyleLibrary.Selected;
             _path = XPath.Create(
                 "Path",
-                _editor.Project.CurrentStyleLibrary.Selected,
+                _editor.Project.Options.CloneStyle ? style.Clone() : style,
                 _geometry,
                 _editor.Project.Options.DefaultIsStroked,
                 _editor.Project.Options.DefaultIsFilled);

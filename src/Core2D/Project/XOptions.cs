@@ -27,6 +27,7 @@ namespace Core2D.Project
         private ShapeStyle _pointStyle;
         private ShapeStyle _selectionStyle;
         private ShapeStyle _helperStyle;
+        private bool _cloneStyle = false;
 
         /// <summary>
         /// Gets or sets how grid snapping is handled. 
@@ -164,6 +165,15 @@ namespace Core2D.Project
         }
 
         /// <summary>
+        /// Gets or sets value indicating whether style is cloned during creation.
+        /// </summary>
+        public bool CloneStyle
+        {
+            get { return _cloneStyle; }
+            set { Update(ref _cloneStyle, value); }
+        }
+
+        /// <summary>
         /// Creates a new <see cref="XOptions"/> instance.
         /// </summary>
         /// <returns>The new instance of the <see cref="XOptions"/> class.</returns>
@@ -181,7 +191,8 @@ namespace Core2D.Project
                 DefaultIsClosed = true,
                 DefaultIsSmoothJoin = true,
                 DefaultFillRule = XFillRule.EvenOdd,
-                TryToConnect = false
+                TryToConnect = false,
+                CloneStyle = false
             };
 
             options.SelectionStyle =

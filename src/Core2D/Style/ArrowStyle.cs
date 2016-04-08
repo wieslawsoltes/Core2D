@@ -131,5 +131,28 @@ namespace Core2D.Style
                 RadiusY = radiusY
             };
         }
+
+        /// <summary>
+        /// Clones arrow style.
+        /// </summary>
+        /// <returns>The new instance of the <see cref="ArrowStyle"/> class.</returns>
+        public ArrowStyle Clone()
+        {
+            return new ArrowStyle()
+            {
+                Name = Name,
+                Stroke = Stroke.Clone(),
+                Fill = Fill.Clone(),
+                Thickness = Thickness,
+                LineCap = LineCap,
+                Dashes = Dashes,
+                DashOffset = DashOffset,
+                ArrowType = _arrowType,
+                IsStroked = _isStroked,
+                IsFilled = _isFilled,
+                RadiusX = _radiusX,
+                RadiusY = _radiusY
+            };
+        }
     }
 }

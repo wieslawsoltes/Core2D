@@ -188,5 +188,19 @@ namespace Core2D.Style
         {
             return _flags.ToString();
         }
+
+        /// <summary>
+        /// Clones line fixed length.
+        /// </summary>
+        /// <returns>The new instance of the <see cref="LineFixedLength"/> class.</returns>
+        public LineFixedLength Clone()
+        {
+            return new LineFixedLength()
+            {
+                Flags = _flags,
+                StartTrigger = _startTrigger.Clone(),
+                EndTrigger = _endTrigger.Clone()
+            };
+        }
     }
 }

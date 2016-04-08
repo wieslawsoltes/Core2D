@@ -76,9 +76,10 @@ namespace Core2D.Editor.Tools
                         if (key == null || string.IsNullOrEmpty(key))
                             return;
 
+                        var style = _editor.Project.CurrentStyleLibrary.Selected;
                         _shape = XImage.Create(
                             sx, sy,
-                            _editor.Project.CurrentStyleLibrary.Selected,
+                            _editor.Project.Options.CloneStyle ? style.Clone() : style,
                             _editor.Project.Options.PointShape,
                             key);
                         if (_editor.Project.Options.TryToConnect)

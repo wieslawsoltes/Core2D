@@ -248,6 +248,7 @@ message XOptions {
    optional bcl.NetObjectProxy PointStyle = 13; // reference-tracked BaseStyle
    optional bcl.NetObjectProxy SelectionStyle = 14; // reference-tracked BaseStyle
    optional bcl.NetObjectProxy HelperStyle = 15; // reference-tracked BaseStyle
+   optional bool CloneStyle = 16;
 }
 message XPage {
    optional bcl.NetObjectProxy Data = 1; // reference-tracked XContext

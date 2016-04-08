@@ -134,5 +134,17 @@ namespace Core2D.Style
         {
             return _flags.ToString();
         }
+
+        /// <summary>
+        /// Clones font style.
+        /// </summary>
+        /// <returns>The new instance of the <see cref="FontStyle"/> class.</returns>
+        public FontStyle Clone()
+        {
+            return new FontStyle()
+            {
+                Flags = _flags
+            };
+        }
     }
 }

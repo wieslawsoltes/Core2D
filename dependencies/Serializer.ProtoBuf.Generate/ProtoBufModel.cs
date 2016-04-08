@@ -334,6 +334,7 @@ namespace Serializer.ProtoBuf
             options.AddField(13, nameof(XOptions.PointStyle)).AsReference = true;
             options.AddField(14, nameof(XOptions.SelectionStyle)).AsReference = true;
             options.AddField(15, nameof(XOptions.HelperStyle)).AsReference = true;
+            options.AddField(16, nameof(XOptions.CloneStyle));
 
             var shapeStyleLibrary = model.Add(typeof(XLibrary<ShapeStyle>), false);
             shapeStyleLibrary.AsReferenceDefault = true;
