@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Core2D.Perspex;assembly=Core2D.Perspex"
         xmlns:converters="clr-namespace:Core2D.Perspex.Converters;assembly=Core2D.Perspex"
         xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D"
+        xmlns:Views="clr-namespace:Core2D.Editor.Views;assembly=Core2D"
         xmlns:views="clr-namespace:Core2D.Perspex.Views;assembly=Core2D.Perspex"
         Width="1324" Height="670"
         Background="{StyleResource BackgroundBrush}"
@@ -43,9 +44,19 @@
         <KeyBinding Command="{Static Editor:Commands.ObjectBrowserCommand}" Gesture="Ctrl+J"/>
         <KeyBinding Command="{Static Editor:Commands.DocumentViewerCommand}" Gesture="Ctrl+D"/>
     </Window.KeyBindings>
-    <Grid RowDefinitions="Auto,*">
-        <views:MenuControl Grid.Row="0"/>
-        <views:EditorControl Margin="4,6,4,2" Grid.Row="1" IsVisible="{Binding Project, Converter={Static converters:IsNotNullConverter.Instance}}"/>
-        <views:DashboardControl Grid.Row="1" IsVisible="{Binding Project, Converter={Static converters:IsNullConverter.Instance}}"/>
-    </Grid>
+    <Window.DataTemplates>
+        <DataTemplate DataType="Views:DashboardView">
+            <Grid Name="layout" RowDefinitions="Auto,*" DataContext="{Binding #layout.DataContext.DataContext}">
+                <views:DashboardMenuControl Grid.Row="0"/>
+                <views:DashboardControl Grid.Row="1"/>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate DataType="Views:EditorView">
+            <Grid Name="layout" RowDefinitions="Auto,*" DataContext="{Binding #layout.DataContext.DataContext}">
+                <views:EditorMenuControl Grid.Row="0"/>
+                <views:EditorControl Grid.Row="1" Margin="4,6,4,2"/>
+            </Grid>
+        </DataTemplate>
+    </Window.DataTemplates>
+    <ContentControl Content="{Binding CurrentView}"/>
 </Window>
