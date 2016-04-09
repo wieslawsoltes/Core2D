@@ -40,9 +40,9 @@ namespace Core2D.Perspex.Converters
             if (values != null && values.Count() == 6 && values.All(x => x != PerspexProperty.UnsetValue))
             {
                 int documentsLength = values[0] != null && values[0].GetType() == typeof(int) ? (int)values[0] : 0;
-                int pagesLength = values[1] != null && values[1].GetType() == typeof(int) ? (int)values[0] : 0;
-                int layersLength = values[2] != null && values[2].GetType() == typeof(int) ? (int)values[0] : 0;
-                int shapesLength = values[3] != null && values[3].GetType() == typeof(int) ? (int)values[0] : 0;
+                int pagesLength = values[1] != null && values[1].GetType() == typeof(int) ? (int)values[1] : 0;
+                int layersLength = values[2] != null && values[2].GetType() == typeof(int) ? (int)values[2] : 0;
+                int shapesLength = values[3] != null && values[3].GetType() == typeof(int) ? (int)values[3] : 0;
                 BaseShape selectedShape = values[4] != null && values[4].GetType() == typeof(BaseShape) ? (BaseShape)values[4] : null;
                 ImmutableHashSet<BaseShape> selectedShapes = values[5] != null && values[5].GetType() == typeof(ImmutableHashSet<BaseShape>) ? (ImmutableHashSet<BaseShape>)values[5] : null;
                 return string.Format(
