@@ -26,7 +26,7 @@
                 <behaviors:FocusOnPointerMovedBehavior/>
             </i:Interaction.Behaviors>
         </Button>
-        <Button Content="Open Recent" Classes="project" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="1" Grid.RowSpan="1" CommandParameter="{Binding CurrentRecentProject.Path}" Command="{Static Editor:Commands.OpenCommand}">
+        <Button Content="Open Recent" Classes="project" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="1" Grid.RowSpan="1" Command="{Static Editor:Commands.OpenCommand}" CommandParameter="{Binding CurrentRecentProject.Path}">
             <i:Interaction.Behaviors>
                 <behaviors:FocusOnPointerMovedBehavior/>
             </i:Interaction.Behaviors>
