@@ -508,7 +508,7 @@ namespace Core2D.Editor
         {
             Unload();
             Load(_projectFactory?.GetProject() ?? XProject.Create(), string.Empty);
-            CurrentView = _editorView;
+            OnChangeCurrentView(_editorView);
             Invalidate?.Invoke();
         }
 
@@ -530,7 +530,7 @@ namespace Core2D.Editor
                             Unload();
                             Load(project, path);
                             AddRecent(path, project.Name);
-                            CurrentView = _editorView;
+                            OnChangeCurrentView(_editorView);
                         }
                     }
                 }
@@ -546,7 +546,7 @@ namespace Core2D.Editor
         /// </summary>
         public void OnClose()
         {
-            CurrentView = _dashboardView;
+            OnChangeCurrentView(_dashboardView);
             _project?.History?.Reset();
             Unload();
         }
@@ -3846,6 +3846,15 @@ namespace Core2D.Editor
         public void Move(double x, double y)
         {
             Tools?[CurrentTool]?.Move(x, y);
+        }
+
+        /// <summary>
+        /// Change current view.
+        /// </summary>
+        /// <param name="view">The view instance.</param>
+        public void OnChangeCurrentView(ViewBase view)
+        {
+            CurrentView = view;
         }
 
         /// <summary>
