@@ -515,5 +515,10 @@ namespace Core2D.Editor
         /// Show document viewer.
         /// </summary>
         public static ICoreCommand DocumentViewerCommand { get; set; }
+
+        /// <summary>
+        /// Change current view.
+        /// </summary>
+        public static ICoreCommand<ViewBase> ChangeCurrentViewCommand { get; set; }
     }
 }
