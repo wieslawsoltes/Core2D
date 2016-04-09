@@ -483,9 +483,7 @@ namespace Core2D.Editor
         {
             Unload();
             Load(_projectFactory?.GetProject() ?? XProject.Create(), string.Empty);
-
             CurrentView = _editorView;
-
             Invalidate?.Invoke();
         }
 
@@ -524,9 +522,8 @@ namespace Core2D.Editor
         public void OnClose()
         {
             CurrentView = _dashboardView;
-
             _project?.History?.Reset();
-            Unload(); 
+            Unload();
         }
 
         /// <summary>
