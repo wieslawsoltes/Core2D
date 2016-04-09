@@ -37,7 +37,7 @@ namespace Core2D.Perspex.Converters
         /// <returns>The converted value.</returns>
         public object Convert(IList<object> values, Type targetType, object parameter, CultureInfo culture)
         {
-            if (values != null && values.Count() == 6 && values.All(x => x != PerspexProperty.UnsetValue && x.GetType() != typeof(BindingError)))
+            if (values != null && values.Count() == 6 && values.All(x => x != null && x != PerspexProperty.UnsetValue && x.GetType() != typeof(BindingError)))
             {
                 var documentsLength = (int)values[0];
                 var pagesLength = (int)values[1];
