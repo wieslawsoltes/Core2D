@@ -8,10 +8,20 @@ namespace Core2D.Editor
     /// </summary>
     public abstract class ViewBase : ObservableObject
     {
+        private string _name;
         private object _dataContext;
 
         /// <summary>
-        /// Gets or sets data context.
+        /// Gets or sets view name.
+        /// </summary>
+        public string Name
+        {
+            get { return _name; }
+            set { Update(ref _name, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets view data context.
         /// </summary>
         public object DataContext
         {
