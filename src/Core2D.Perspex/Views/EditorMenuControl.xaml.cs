@@ -6,14 +6,14 @@ using Perspex.Markup.Xaml;
 namespace Core2D.Perspex.Views
 {
     /// <summary>
-    /// Interaction logic for <see cref="MenuControl"/> xaml.
+    /// Interaction logic for <see cref="EditorMenuControl"/> xaml.
     /// </summary>
-    public class MenuControl : UserControl
+    public class EditorMenuControl : UserControl
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="MenuControl"/> class.
+        /// Initializes a new instance of the <see cref="EditorMenuControl"/> class.
         /// </summary>
-        public MenuControl()
+        public EditorMenuControl()
         {
             this.InitializeComponent();
         }
