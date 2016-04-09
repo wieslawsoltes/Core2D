@@ -103,33 +103,101 @@
             <MenuItem Header="_AutoFit Zoom" Command="{Static Editor:Commands.ZoomAutoFitCommand}"/>
         </MenuItem>
         <MenuItem Header="_Tool" IsVisible="{Binding Project, Converter={Static converters:IsNotNullConverter.Instance}}">
-            <MenuItem Header="_None" Command="{Static Editor:Commands.ToolNoneCommand}"/>
-            <Separator/>
-            <MenuItem Header="_Selection" Command="{Static Editor:Commands.ToolSelectionCommand}"/>
-            <Separator/>
-            <MenuItem Header="_Point" Command="{Static Editor:Commands.ToolPointCommand}"/>
-            <Separator/>
-            <MenuItem Header="_Line" Command="{Static Editor:Commands.ToolLineCommand}"/>
-            <MenuItem Header="_Arc" Command="{Static Editor:Commands.ToolArcCommand}"/>
-            <MenuItem Header="Cubic _Bezier" Command="{Static Editor:Commands.ToolCubicBezierCommand}"/>
-            <MenuItem Header="_Quadratic Bezier" Command="{Static Editor:Commands.ToolQuadraticBezierCommand}"/>
-            <Separator/>
-            <MenuItem Header="Pat_h" Command="{Static Editor:Commands.ToolPathCommand}"/>
-            <MenuItem Header="Path T_ool">
-                <MenuItem Header="_Line" Command="{Static Editor:Commands.ToolLineCommand}"/>
-                <MenuItem Header="_Arc" Command="{Static Editor:Commands.ToolArcCommand}"/>
-                <MenuItem Header="Cubic _Bezier" Command="{Static Editor:Commands.ToolCubicBezierCommand}"/>
-                <MenuItem Header="_Quadratic Bezier" Command="{Static Editor:Commands.ToolQuadraticBezierCommand}"/>
-                <Separator/>
-                <MenuItem Header="_Move" Command="{Static Editor:Commands.ToolMoveCommand}"/>
+            <MenuItem Header="_None" Command="{Static Editor:Commands.ToolNoneCommand}">
+                <MenuItem.Icon>
+                    <CheckBox IsChecked="{Binding CurrentTool, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter={Static Editor:Tool.None}, Mode=OneWay}" Classes="menu"/>
+                </MenuItem.Icon>
             </MenuItem>
             <Separator/>
-            <MenuItem Header="_Rectangle" Command="{Static Editor:Commands.ToolRectangleCommand}"/>
-            <MenuItem Header="_Ellipse" Command="{Static Editor:Commands.ToolEllipseCommand}"/>
+            <MenuItem Header="_Selection" Command="{Static Editor:Commands.ToolSelectionCommand}">
+                <MenuItem.Icon>
+                    <CheckBox IsChecked="{Binding CurrentTool, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter={Static Editor:Tool.Selection}, Mode=OneWay}" Classes="menu"/>
+                </MenuItem.Icon>
+            </MenuItem>
             <Separator/>
-            <MenuItem Header="_Text" Command="{Static Editor:Commands.ToolTextCommand}"/>
+            <MenuItem Header="_Point" Command="{Static Editor:Commands.ToolPointCommand}">
+                <MenuItem.Icon>
+                    <CheckBox IsChecked="{Binding CurrentTool, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter={Static Editor:Tool.Point}, Mode=OneWay}" Classes="menu"/>
+                </MenuItem.Icon>
+            </MenuItem>
             <Separator/>
-            <MenuItem Header="_Image" Command="{Static Editor:Commands.ToolImageCommand}"/>
+            <MenuItem Header="_Line" Command="{Static Editor:Commands.ToolLineCommand}">
+                <MenuItem.Icon>
+                    <CheckBox IsChecked="{Binding CurrentTool, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter={Static Editor:Tool.Line}, Mode=OneWay}" Classes="menu"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="_Arc" Command="{Static Editor:Commands.ToolArcCommand}">
+                <MenuItem.Icon>
+                    <CheckBox IsChecked="{Binding CurrentTool, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter={Static Editor:Tool.Arc}, Mode=OneWay}" Classes="menu"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Cubic _Bezier" Command="{Static Editor:Commands.ToolCubicBezierCommand}">
+                <MenuItem.Icon>
+                    <CheckBox IsChecked="{Binding CurrentTool, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter={Static Editor:Tool.CubicBezier}, Mode=OneWay}" Classes="menu"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="_Quadratic Bezier" Command="{Static Editor:Commands.ToolQuadraticBezierCommand}">
+                <MenuItem.Icon>
+                    <CheckBox IsChecked="{Binding CurrentTool, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter={Static Editor:Tool.QuadraticBezier}, Mode=OneWay}" Classes="menu"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator/>
+            <MenuItem Header="Pat_h" Command="{Static Editor:Commands.ToolPathCommand}">
+                <MenuItem.Icon>
+                    <CheckBox IsChecked="{Binding CurrentTool, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter={Static Editor:Tool.Path}, Mode=OneWay}" Classes="menu"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Path T_ool">
+                <MenuItem Header="_Line" Command="{Static Editor:Commands.ToolLineCommand}">
+                    <MenuItem.Icon>
+                        <CheckBox IsChecked="{Binding CurrentPathTool, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter={Static Editor:PathTool.Line}, Mode=OneWay}" Classes="menu"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="_Arc" Command="{Static Editor:Commands.ToolArcCommand}">
+                    <MenuItem.Icon>
+                        <CheckBox IsChecked="{Binding CurrentPathTool, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter={Static Editor:PathTool.Arc}, Mode=OneWay}" Classes="menu"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Cubic _Bezier" Command="{Static Editor:Commands.ToolCubicBezierCommand}">
+                    <MenuItem.Icon>
+                        <CheckBox IsChecked="{Binding CurrentPathTool, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter={Static Editor:PathTool.CubicBezier}, Mode=OneWay}" Classes="menu"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="_Quadratic Bezier" Command="{Static Editor:Commands.ToolQuadraticBezierCommand}">
+                    <MenuItem.Icon>
+                        <CheckBox IsChecked="{Binding CurrentPathTool, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter={Static Editor:PathTool.QuadraticBezier}, Mode=OneWay}" Classes="menu"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator/>
+                <MenuItem Header="_Move" Command="{Static Editor:Commands.ToolMoveCommand}">
+                    <MenuItem.Icon>
+                        <CheckBox IsChecked="{Binding CurrentPathTool, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter={Static Editor:PathTool.Move}, Mode=OneWay}" Classes="menu"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            <Separator/>
+            <MenuItem Header="_Rectangle" Command="{Static Editor:Commands.ToolRectangleCommand}">
+                <MenuItem.Icon>
+                    <CheckBox IsChecked="{Binding CurrentTool, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter={Static Editor:Tool.Rectangle}, Mode=OneWay}" Classes="menu"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="_Ellipse" Command="{Static Editor:Commands.ToolEllipseCommand}">
+                <MenuItem.Icon>
+                    <CheckBox IsChecked="{Binding CurrentTool, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter={Static Editor:Tool.Ellipse}, Mode=OneWay}" Classes="menu"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator/>
+            <MenuItem Header="_Text" Command="{Static Editor:Commands.ToolTextCommand}">
+                <MenuItem.Icon>
+                    <CheckBox IsChecked="{Binding CurrentTool, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter={Static Editor:Tool.Text}, Mode=OneWay}" Classes="menu"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator/>
+            <MenuItem Header="_Image" Command="{Static Editor:Commands.ToolImageCommand}">
+                <MenuItem.Icon>
+                    <CheckBox IsChecked="{Binding CurrentTool, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter={Static Editor:Tool.Image}, Mode=OneWay}" Classes="menu"/>
+                </MenuItem.Icon>
+            </MenuItem>
         </MenuItem>
         <MenuItem Header="_Data" IsVisible="{Binding Project, Converter={Static converters:IsNotNullConverter.Instance}}">
             <MenuItem Header="_Import..." Command="{Static Editor:Commands.ImportDataCommand}"/>
