@@ -481,15 +481,12 @@ namespace Core2D.Editor
         /// </summary>
         private void OnNewProject()
         {
-            var project =
-                _projectFactory?.GetProject()
-                ?? XProject.Create();
-
             Unload();
-            Load(project, string.Empty);
-            Invalidate?.Invoke();
+            Load(_projectFactory?.GetProject() ?? XProject.Create(), string.Empty);
 
             CurrentView = _editorView;
+
+            Invalidate?.Invoke();
         }
 
         /// <summary>
