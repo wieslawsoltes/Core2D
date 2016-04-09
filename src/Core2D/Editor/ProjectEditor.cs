@@ -4396,6 +4396,11 @@ namespace Core2D.Editor
                 Command.Create(
                     async () => await (Application?.OnShowDocumentViewerAsync() ?? Task.FromResult<object>(null)),
                     () => IsEditMode());
+
+            Commands.ChangeCurrentViewCommand =
+                Command<ViewBase>.Create(
+                    (view) => OnChangeCurrentView(view),
+                    (view) => true);
         }
     }
 }
