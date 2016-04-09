@@ -86,6 +86,28 @@
             <MenuItem Header="_Reset Zoom" Command="{Static Editor:Commands.ZoomResetCommand}"/>
             <Separator/>
             <MenuItem Header="_AutoFit Zoom" Command="{Static Editor:Commands.ZoomAutoFitCommand}"/>
+            <Separator/>
+            <MenuItem Header="_Views" Items="{Binding Views}">
+                <MenuItem.DataTemplates>
+                    <DataTemplate DataType="Editor:ViewBase">
+                        <MenuItem Header="{Binding Name}" Command="{Static Editor:Commands.ChangeCurrentViewCommand}" CommandParameter="{Binding}">
+                            <MenuItem.Icon>
+                                <CheckBox Name="icon" Classes="menu">
+                                    <i:Interaction.Behaviors>
+                                        <behaviors:BindTagToVisualRootDataContextBehavior/>
+                                    </i:Interaction.Behaviors>
+                                    <CheckBox.IsChecked>
+                                        <MultiBinding Mode="OneWay" Converter="{Static converters:ObjectEqualityMultiConverter.Instance}">
+                                            <Binding ElementName="icon" Path="DataContext" Converter="{Static converters:ObjectToObjectConverter.Instance}"/>
+                                            <Binding ElementName="icon" Path="Tag.CurrentView" Converter="{Static converters:ObjectToObjectConverter.Instance}"/>
+                                        </MultiBinding>
+                                    </CheckBox.IsChecked>
+                                </CheckBox>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </DataTemplate>
+                </MenuItem.DataTemplates>
+            </MenuItem>
         </MenuItem>
         <MenuItem Header="_Tool">
             <MenuItem Header="_None" Command="{Static Editor:Commands.ToolNoneCommand}">
