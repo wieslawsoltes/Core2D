@@ -9,6 +9,7 @@ using Core2D.Editor.Input;
 using Core2D.Editor.Interfaces;
 using Core2D.Editor.Recent;
 using Core2D.Editor.Tools;
+using Core2D.Editor.Views;
 using Core2D.History;
 using Core2D.Interfaces;
 using Core2D.Math;
@@ -48,6 +49,9 @@ namespace Core2D.Editor
         private BaseShape _hover;
         private ImmutableArray<RecentFile> _recentProjects;
         private RecentFile _currentRecentProject;
+        private ViewBase _currentView;
+        private DashboardView _dashboardView;
+        private EditorView _editorView;
         private IEditorApplication _application;
         private ILog _log;
         private CommandManager _commandManager;
@@ -183,6 +187,15 @@ namespace Core2D.Editor
         {
             get { return _currentRecentProject; }
             set { Update(ref _currentRecentProject, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets current view.
+        /// </summary>
+        public ViewBase CurrentView
+        {
+            get { return _currentView; }
+            set { Update(ref _currentView, value); }
         }
 
         /// <summary>
@@ -338,6 +351,11 @@ namespace Core2D.Editor
 
             _recentProjects = ImmutableArray.Create<RecentFile>();
             _currentRecentProject = default(RecentFile);
+
+            _dashboardView = new DashboardView { DataContext = this };
+            _editorView = new EditorView { DataContext = this };
+
+            _currentView = _dashboardView;
         }
 
         /// <summary>
@@ -470,6 +488,8 @@ namespace Core2D.Editor
             Unload();
             Load(project, string.Empty);
             Invalidate?.Invoke();
+
+            CurrentView = _editorView;
         }
 
         /// <summary>
@@ -490,6 +510,7 @@ namespace Core2D.Editor
                             Unload();
                             Load(project, path);
                             AddRecent(path, project.Name);
+                            CurrentView = _editorView;
                         }
                     }
                 }
@@ -505,8 +526,10 @@ namespace Core2D.Editor
         /// </summary>
         public void OnClose()
         {
+            CurrentView = _dashboardView;
+
             _project?.History?.Reset();
-            Unload();
+            Unload(); 
         }
 
         /// <summary>
