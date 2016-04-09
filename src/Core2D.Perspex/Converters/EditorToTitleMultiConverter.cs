@@ -35,14 +35,14 @@ namespace Core2D.Perspex.Converters
         /// <returns>The converted value.</returns>
         public object Convert(IList<object> values, Type targetType, object parameter, CultureInfo culture)
         {
-            if (values != null && values.Count() == 2 && values.All(x => x != null && x != PerspexProperty.UnsetValue && x.GetType() != typeof(BindingError)))
+            if (values != null && values.Count() == 2 && values.All(x => x != PerspexProperty.UnsetValue))
             {
-                if (values[0].GetType() != typeof(string))
+                if (values[0] == null || values[0].GetType() != typeof(string))
                 {
                     return DefaultTitle;
                 }
 
-                if (values[1].GetType() != typeof(bool))
+                if (values[1] == null || values[1].GetType() != typeof(bool))
                 {
                     return DefaultTitle;
                 }
