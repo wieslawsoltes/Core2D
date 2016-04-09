@@ -57,10 +57,10 @@ namespace Core2D.Editor
         private IFileWriter _dxfWriter;
         private ITextFieldReader<XDatabase> _csvReader;
         private ITextFieldWriter<XDatabase> _csvWriter;
-        private ImmutableArray<RecentFile> _recentProjects = ImmutableArray.Create<RecentFile>();
-        private RecentFile _currentRecentProject = default(RecentFile);
-        private XPage _pageToCopy = default(XPage);
-        private XDocument _documentToCopy = default(XDocument);
+        private ImmutableArray<RecentFile> _recentProjects;
+        private RecentFile _currentRecentProject;
+        private XPage _pageToCopy;
+        private XDocument _documentToCopy;
 
         /// <summary>
         /// Gets or sets current editor application.
@@ -304,6 +304,17 @@ namespace Core2D.Editor
         {
             get { return _currentRecentProject; }
             set { Update(ref _currentRecentProject, value); }
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ProjectEditor"/> class.
+        /// </summary>
+        public ProjectEditor()
+        {
+            _recentProjects = ImmutableArray.Create<RecentFile>();
+            _currentRecentProject = default(RecentFile);
+            _pageToCopy = default(XPage);
+            _documentToCopy = default(XDocument);
         }
 
         /// <summary>
