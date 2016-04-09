@@ -18,7 +18,7 @@ namespace Core2D.Perspex.Converters
         public static readonly ObjectEqualsConverter Instance = new ObjectEqualsConverter();
 
         /// <summary>
-        /// Converts a value.
+        /// Convert value to boolean, true if matches parameter.
         /// </summary>
         /// <param name="value">The value to convert.</param>
         /// <param name="targetType">The type of the target.</param>
@@ -27,11 +27,15 @@ namespace Core2D.Perspex.Converters
         /// <returns>The converted value.</returns>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value.Equals(parameter);
+            if (value != null)
+            {
+                return value.Equals(parameter);
+            }
+            return PerspexProperty.UnsetValue;
         }
 
         /// <summary>
-        /// Converts a value.
+        /// Convert boolean to parameter value, returning parameter if true.
         /// </summary>
         /// <param name="value">The value to convert.</param>
         /// <param name="targetType">The type of the target.</param>
@@ -40,7 +44,11 @@ namespace Core2D.Perspex.Converters
         /// <returns>The converted value.</returns>
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (bool)value ? parameter : PerspexProperty.UnsetValue;
+            if (value != null)
+            {
+                return (bool)value ? parameter : PerspexProperty.UnsetValue;
+            }
+            return PerspexProperty.UnsetValue;
         }
     }
 }
