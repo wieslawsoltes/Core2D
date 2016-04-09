@@ -115,7 +115,7 @@ namespace Core2D.Perspex.Views
         /// </summary>
         public void AttachEditor()
         {
-            _projectEditor = this.DataContext as ProjectEditor;
+            _projectEditor = (this.DataContext as ViewBase).DataContext as ProjectEditor;
             _containerControl = this.Find<ContainerControl>("containerControl");
             _panAndZoom = this.Find<PanAndZoom>("panAndZoom");
 
