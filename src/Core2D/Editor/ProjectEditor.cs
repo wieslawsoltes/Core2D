@@ -49,6 +49,7 @@ namespace Core2D.Editor
         private BaseShape _hover;
         private ImmutableArray<RecentFile> _recentProjects;
         private RecentFile _currentRecentProject;
+        private ImmutableArray<ViewBase> _views;
         private ViewBase _currentView;
         private DashboardView _dashboardView;
         private EditorView _editorView;
@@ -187,6 +188,15 @@ namespace Core2D.Editor
         {
             get { return _currentRecentProject; }
             set { Update(ref _currentRecentProject, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets registered views.
+        /// </summary>
+        public ImmutableArray<ViewBase> Views
+        {
+            get { return _views; }
+            set { Update(ref _views, value); }
         }
 
         /// <summary>
@@ -352,8 +362,23 @@ namespace Core2D.Editor
             _recentProjects = ImmutableArray.Create<RecentFile>();
             _currentRecentProject = default(RecentFile);
 
-            _dashboardView = new DashboardView { DataContext = this };
-            _editorView = new EditorView { DataContext = this };
+            _dashboardView = new DashboardView
+            {
+                Name = "Dashboard",
+                DataContext = this
+            };
+
+            _editorView = new EditorView
+            {
+                Name = "Editor",
+                DataContext = this
+            };
+
+            _views = new List<ViewBase>
+            {
+                _dashboardView,
+                _editorView
+            }.ToImmutableArray();
 
             _currentView = _dashboardView;
         }
