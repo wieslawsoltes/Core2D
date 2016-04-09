@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Perspex.Markup;
+using Perspex;
+using Perspex.Data;
 
 namespace Core2D.Perspex.Converters
 {
@@ -33,7 +35,7 @@ namespace Core2D.Perspex.Converters
         /// <returns>The converted value.</returns>
         public object Convert(IList<object> values, Type targetType, object parameter, CultureInfo culture)
         {
-            if (values != null && values.Count() == 2)
+            if (values != null && values.Count() == 2 && values.All(x => x != null && x != PerspexProperty.UnsetValue && x.GetType() != typeof(BindingError)))
             {
                 if (values[0].GetType() != typeof(string))
                 {
