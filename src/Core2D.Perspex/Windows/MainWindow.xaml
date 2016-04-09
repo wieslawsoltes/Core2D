@@ -46,13 +46,13 @@
     </Window.KeyBindings>
     <Window.DataTemplates>
         <DataTemplate DataType="Views:DashboardView">
-            <Grid Name="layout" RowDefinitions="Auto,*" DataContext="{Binding #layout.DataContext.DataContext}">
+            <Grid RowDefinitions="Auto,*" DataContext="{Binding DataContext}">
                 <views:DashboardMenuControl Grid.Row="0"/>
                 <views:DashboardControl Grid.Row="1"/>
             </Grid>
         </DataTemplate>
         <DataTemplate DataType="Views:EditorView">
-            <Grid Name="layout" RowDefinitions="Auto,*" DataContext="{Binding #layout.DataContext.DataContext}">
+            <Grid RowDefinitions="Auto,*" DataContext="{Binding DataContext}">
                 <views:EditorMenuControl Grid.Row="0"/>
                 <views:EditorControl Grid.Row="1" Margin="4,6,4,2"/>
             </Grid>
