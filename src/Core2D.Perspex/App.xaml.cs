@@ -236,7 +236,6 @@ namespace Core2D.Perspex
                 GetImageKey = async () => await (this as IEditorApplication).OnGetImageKeyAsync()
             };
 
-            _editor.DefaultTools();
             _editor.InitializeCommands();
             _editor.CommandManager.RegisterCommands();
         }

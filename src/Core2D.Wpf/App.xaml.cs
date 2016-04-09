@@ -196,7 +196,6 @@ namespace Core2D.Wpf
                 GetImageKey = async () => await (this as IEditorApplication).OnGetImageKeyAsync()
             };
 
-            _editor.DefaultTools();
             _editor.InitializeCommands();
             _editor.CommandManager.RegisterCommands();
         }

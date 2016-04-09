@@ -32,22 +32,27 @@ namespace Core2D.Editor
     /// </summary>
     public class ProjectEditor : ObservableObject
     {
-        private IEditorApplication _application;
-        private ILog _log;
-        private CommandManager _commandManager;
-        private IFileSystem _fileIO;
         private XProject _project;
         private string _projectPath;
         private bool _isProjectDirty;
-        private ShapeRenderer[] _renderers;
+        private ProjectObserver _observer;
+        private ImmutableDictionary<Tool, ToolBase> _tools;
         private Tool _currentTool;
         private PathTool _currentPathTool;
-        private ProjectObserver _observer;
         private Action _invalidate;
         private Action _resetZoom;
         private Action _extentZoom;
         private bool _cancelAvailable;
+        private XPage _pageToCopy;
+        private XDocument _documentToCopy;
         private BaseShape _hover;
+        private ImmutableArray<RecentFile> _recentProjects;
+        private RecentFile _currentRecentProject;
+        private IEditorApplication _application;
+        private ILog _log;
+        private CommandManager _commandManager;
+        private ShapeRenderer[] _renderers;
+        private IFileSystem _fileIO;
         private IProjectFactory _projectFactory;
         private ITextClipboard _textClipboard;
         private IStreamSerializer _protoBufSerializer;
@@ -57,46 +62,6 @@ namespace Core2D.Editor
         private IFileWriter _dxfWriter;
         private ITextFieldReader<XDatabase> _csvReader;
         private ITextFieldWriter<XDatabase> _csvWriter;
-        private ImmutableArray<RecentFile> _recentProjects;
-        private RecentFile _currentRecentProject;
-        private XPage _pageToCopy;
-        private XDocument _documentToCopy;
-
-        /// <summary>
-        /// Gets or sets current editor application.
-        /// </summary>
-        public IEditorApplication Application
-        {
-            get { return _application; }
-            set { Update(ref _application, value); }
-        }
-
-        /// <summary>
-        /// Gets or sets current log.
-        /// </summary>
-        public ILog Log
-        {
-            get { return _log; }
-            set { Update(ref _log, value); }
-        }
-
-        /// <summary>
-        /// Gets or sets current command manager.
-        /// </summary>
-        public CommandManager CommandManager
-        {
-            get { return _commandManager; }
-            set { Update(ref _commandManager, value); }
-        }
-
-        /// <summary>
-        /// Gets or sets current file system.
-        /// </summary>
-        public IFileSystem FileIO
-        {
-            get { return _fileIO; }
-            set { Update(ref _fileIO, value); }
-        }
 
         /// <summary>
         /// Gets or sets current project.
@@ -126,12 +91,21 @@ namespace Core2D.Editor
         }
 
         /// <summary>
-        /// Gets or sets current renderer's.
+        /// Gets or sets current project collections and objects observer.
         /// </summary>
-        public ShapeRenderer[] Renderers
+        public ProjectObserver Observer
         {
-            get { return _renderers; }
-            set { Update(ref _renderers, value); }
+            get { return _observer; }
+            set { Update(ref _observer, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets editor tools dictionary.
+        /// </summary>
+        public ImmutableDictionary<Tool, ToolBase> Tools
+        {
+            get { return _tools; }
+            set { Update(ref _tools, value); }
         }
 
         /// <summary>
@@ -150,15 +124,6 @@ namespace Core2D.Editor
         {
             get { return _currentPathTool; }
             set { Update(ref _currentPathTool, value); }
-        }
-
-        /// <summary>
-        /// Gets or sets current project collections and objects observer.
-        /// </summary>
-        public ProjectObserver Observer
-        {
-            get { return _observer; }
-            set { Update(ref _observer, value); }
         }
 
         /// <summary>
@@ -203,9 +168,67 @@ namespace Core2D.Editor
         public Func<Task<string>> GetImageKey { get; set; }
 
         /// <summary>
-        /// Gets or sets editor tools dictionary.
+        /// Gets or sets recent projects collection.
         /// </summary>
-        public ImmutableDictionary<Tool, ToolBase> Tools { get; set; }
+        public ImmutableArray<RecentFile> RecentProjects
+        {
+            get { return _recentProjects; }
+            set { Update(ref _recentProjects, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets current recent project.
+        /// </summary>
+        public RecentFile CurrentRecentProject
+        {
+            get { return _currentRecentProject; }
+            set { Update(ref _currentRecentProject, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets current editor application.
+        /// </summary>
+        public IEditorApplication Application
+        {
+            get { return _application; }
+            set { Update(ref _application, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets current log.
+        /// </summary>
+        public ILog Log
+        {
+            get { return _log; }
+            set { Update(ref _log, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets current command manager.
+        /// </summary>
+        public CommandManager CommandManager
+        {
+            get { return _commandManager; }
+            set { Update(ref _commandManager, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets current renderer's.
+        /// </summary>
+        public ShapeRenderer[] Renderers
+        {
+            get { return _renderers; }
+            set { Update(ref _renderers, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets current file system.
+        /// </summary>
+        public IFileSystem FileIO
+        {
+            get { return _fileIO; }
+            set { Update(ref _fileIO, value); }
+        }
 
         /// <summary>
         /// Gets or sets project factory.
@@ -289,32 +312,32 @@ namespace Core2D.Editor
         }
 
         /// <summary>
-        /// Gets or sets recent projects collection.
-        /// </summary>
-        public ImmutableArray<RecentFile> RecentProjects
-        {
-            get { return _recentProjects; }
-            set { Update(ref _recentProjects, value); }
-        }
-
-        /// <summary>
-        /// Gets or sets current recent project.
-        /// </summary>
-        public RecentFile CurrentRecentProject
-        {
-            get { return _currentRecentProject; }
-            set { Update(ref _currentRecentProject, value); }
-        }
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="ProjectEditor"/> class.
         /// </summary>
         public ProjectEditor()
         {
-            _recentProjects = ImmutableArray.Create<RecentFile>();
-            _currentRecentProject = default(RecentFile);
+            _tools = new Dictionary<Tool, ToolBase>
+            {
+                [Tool.None] = new ToolNone(this),
+                [Tool.Selection] = new ToolSelection(this),
+                [Tool.Point] = new ToolPoint(this),
+                [Tool.Line] = new ToolLine(this),
+                [Tool.Arc] = new ToolArc(this),
+                [Tool.CubicBezier] = new ToolCubicBezier(this),
+                [Tool.QuadraticBezier] = new ToolQuadraticBezier(this),
+                [Tool.Path] = new ToolPath(this),
+                [Tool.Rectangle] = new ToolRectangle(this),
+                [Tool.Ellipse] = new ToolEllipse(this),
+                [Tool.Text] = new ToolText(this),
+                [Tool.Image] = new ToolImage(this)
+            }.ToImmutableDictionary();
+
             _pageToCopy = default(XPage);
             _documentToCopy = default(XDocument);
+            _hover = default(BaseShape);
+
+            _recentProjects = ImmutableArray.Create<RecentFile>();
+            _currentRecentProject = default(RecentFile);
         }
 
         /// <summary>
@@ -1948,28 +1971,6 @@ namespace Core2D.Editor
                     _project.SetCurrentContainer(document?.Pages.FirstOrDefault());
                 }
             }
-        }
-
-        /// <summary>
-        /// Initialize default <see cref="ProjectEditor"/> tools.
-        /// </summary>
-        public void DefaultTools()
-        {
-            Tools = new Dictionary<Tool, ToolBase>
-            {
-                [Tool.None] = new ToolNone(this),
-                [Tool.Selection] = new ToolSelection(this),
-                [Tool.Point] = new ToolPoint(this),
-                [Tool.Line] = new ToolLine(this),
-                [Tool.Arc] = new ToolArc(this),
-                [Tool.CubicBezier] = new ToolCubicBezier(this),
-                [Tool.QuadraticBezier] = new ToolQuadraticBezier(this),
-                [Tool.Path] = new ToolPath(this),
-                [Tool.Rectangle] = new ToolRectangle(this),
-                [Tool.Ellipse] = new ToolEllipse(this),
-                [Tool.Text] = new ToolText(this),
-                [Tool.Image] = new ToolImage(this)
-            }.ToImmutableDictionary();
         }
 
         /// <summary>
