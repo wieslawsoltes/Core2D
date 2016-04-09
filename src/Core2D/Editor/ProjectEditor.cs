@@ -21,6 +21,7 @@ using Core2D.Style;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using static System.Math;
@@ -2029,6 +2030,20 @@ namespace Core2D.Editor
             Project = null;
             ProjectPath = string.Empty;
             IsProjectDirty = false;
+
+            Collect();
+        }
+
+        /// <summary>
+        /// Force memory collection.
+        /// </summary>
+        public void Collect()
+        {
+            Debug.WriteLine($"Memory used before collection: {GC.GetTotalMemory(false)}");
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            GC.Collect();
+            Debug.WriteLine($"Memory used after collection: {GC.GetTotalMemory(true)}");
         }
 
         /// <summary>
