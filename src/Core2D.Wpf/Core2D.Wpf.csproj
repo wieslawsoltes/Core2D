@@ -287,7 +287,7 @@
     <Compile Include="Converters\ArgbColorToBrushMultiConverter.cs" />
     <Compile Include="Converters\BooleanToStringConverter.cs" />
     <Compile Include="Converters\BooleanToValueConverter.cs" />
-    <Compile Include="Converters\EnumToBooleanConverter.cs" />
+    <Compile Include="Converters\ObjectEqualsConverter.cs" />
     <Compile Include="Converters\ObjectEqualityConverter.cs" />
     <Compile Include="Converters\ObjectToTypeConverter.cs" />
     <Compile Include="Properties\Resources.Designer.cs">

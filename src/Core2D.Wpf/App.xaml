@@ -29,7 +29,7 @@
         <converters:ArgbColorToBrushConverter x:Key="ArgbColorToBrushConverter"/>
         <converters:ArgbColorToBrushMultiConverter x:Key="ArgbColorToBrushMultiConverter"/>
         <converters:BooleanToStringConverter x:Key="BooleanToStarConverter" FalseValue="" TrueValue="*"/>
-        <converters:EnumToBooleanConverter x:Key="EnumToBooleanConverter"/>
+        <converters:ObjectEqualsConverter x:Key="ObjectEqualsConverter"/>
         <converters:ObjectEqualityConverter x:Key="ObjectEqualityConverter"/>
         <converters:ObjectToTypeConverter x:Key="ObjectToTypeConverter"/>
         <!-- Brushes -->
