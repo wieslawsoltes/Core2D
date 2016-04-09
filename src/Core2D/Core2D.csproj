@@ -43,6 +43,7 @@
     <Compile Include="Editor\Bounds\RectangleBounds.cs" />
     <Compile Include="Editor\Bounds\ShapeHitTestPoint.cs" />
     <Compile Include="Editor\Designer\DesignerCommandManager.cs" />
+    <Compile Include="Editor\ViewBase.cs" />
     <Compile Include="ObservableObject.cs" />
     <Compile Include="ObservableResource.cs" />
     <Compile Include="Data\Database\XColumn.cs" />
