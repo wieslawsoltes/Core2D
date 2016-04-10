@@ -365,13 +365,13 @@ namespace Core2D.Editor
             _dashboardView = new DashboardView
             {
                 Name = "Dashboard",
-                DataContext = this
+                Context = this
             };
 
             _editorView = new EditorView
             {
                 Name = "Editor",
-                DataContext = this
+                Context = this
             };
 
             _views = new List<ViewBase>
