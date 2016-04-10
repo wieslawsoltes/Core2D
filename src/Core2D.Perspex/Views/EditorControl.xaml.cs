@@ -132,6 +132,9 @@ namespace Core2D.Perspex.Views
                 _projectEditor.Invalidate = () => _containerControl.InvalidateVisual();
                 _projectEditor.ResetZoom = () => _panAndZoom.Reset();
                 _projectEditor.AutoFitZoom = () => _panAndZoom.AutoFit();
+                _projectEditor.LoadLayout = () => { };
+                _projectEditor.SaveLayout = () => { };
+                _projectEditor.ResetLayout = () => { };
 
                 _panAndZoom.InvalidatedChild = InvalidateChild;
                 _panAndZoom.PointerPressed += PanAndZoom_PointerPressed;
@@ -150,6 +153,9 @@ namespace Core2D.Perspex.Views
                 _projectEditor.Invalidate = null;
                 _projectEditor.ResetZoom = null;
                 _projectEditor.AutoFitZoom = null;
+                _projectEditor.LoadLayout = null;
+                _projectEditor.SaveLayout = null;
+                _projectEditor.ResetLayout = null;
 
                 _panAndZoom.InvalidatedChild = null;
                 _panAndZoom.PointerPressed -= PanAndZoom_PointerPressed;

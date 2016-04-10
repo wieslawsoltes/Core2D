@@ -130,6 +130,15 @@
     </Compile>
     <Compile Include="Controls\Custom\Lists\XGroupConnectorsDragAndDropListBox.cs" />
     <Compile Include="Controls\Custom\Lists\XGroupShapesDragAndDropListBox.cs" />
+    <Compile Include="Views\DashboardMenuControl.xaml.cs">
+      <DependentUpon>DashboardMenuControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditorControl.xaml.cs">
+      <DependentUpon>EditorControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditorMenuControl.xaml.cs">
+      <DependentUpon>EditorMenuControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PageControl.xaml.cs">
       <DependentUpon>PageControl.xaml</DependentUpon>
     </Compile>
@@ -320,6 +329,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\DashboardMenuControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EditorControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EditorMenuControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\PageControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -425,10 +446,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Project\TemplatesControl.xaml" />
-    <Page Include="Views\MenuControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Views\ShapeControl.xaml" />
     <Page Include="Controls\Shapes\ArcControl.xaml">
       <SubType>Designer</SubType>
@@ -521,9 +538,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Views\MenuControl.xaml.cs">
-      <DependentUpon>MenuControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Project\StylesControl.xaml.cs">
       <DependentUpon>StylesControl.xaml</DependentUpon>

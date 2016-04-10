@@ -43,6 +43,9 @@ namespace Core2D.Editor
         private Action _invalidate;
         private Action _resetZoom;
         private Action _extentZoom;
+        private Action _loadLayout;
+        private Action _saveLayout;
+        private Action _resetLayout;
         private bool _cancelAvailable;
         private XPage _pageToCopy;
         private XDocument _documentToCopy;
@@ -134,6 +137,7 @@ namespace Core2D.Editor
         /// <summary>
         /// Gets or sets invalidate action.
         /// </summary>
+        /// <remarks>Invalidate current container control.</remarks>
         public Action Invalidate
         {
             get { return _invalidate; }
@@ -143,6 +147,7 @@ namespace Core2D.Editor
         /// <summary>
         /// Gets or sets reset zoom action.
         /// </summary>
+        /// <remarks>Reset view size to defaults.</remarks>
         public Action ResetZoom
         {
             get { return _resetZoom; }
@@ -152,10 +157,41 @@ namespace Core2D.Editor
         /// <summary>
         /// Gets or sets extent zoom action.
         /// </summary>
+        /// <remarks>Auto-fit view to the available extents.</remarks>
         public Action AutoFitZoom
         {
             get { return _extentZoom; }
             set { Update(ref _extentZoom, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets load layout action.
+        /// </summary>
+        /// <remarks>Auto-fit view to the available extents.</remarks>
+        public Action LoadLayout
+        {
+            get { return _loadLayout; }
+            set { Update(ref _loadLayout, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets save layout action.
+        /// </summary>
+        /// <remarks>Auto-fit view to the available extents.</remarks>
+        public Action SaveLayout
+        {
+            get { return _saveLayout; }
+            set { Update(ref _saveLayout, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets reset layout action.
+        /// </summary>
+        /// <remarks>Reset editor layout.</remarks>
+        public Action ResetLayout
+        {
+            get { return _resetLayout; }
+            set { Update(ref _resetLayout, value); }
         }
 
         /// <summary>

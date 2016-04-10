@@ -689,32 +689,35 @@ namespace Core2D.Perspex
         /// <inheritdoc/>
         async Task IEditorApplication.OnZoomResetAsync()
         {
-            _editor.ResetZoom();
+            _editor.ResetZoom?.Invoke();
             await Task.Delay(0);
         }
 
         /// <inheritdoc/>
         async Task IEditorApplication.OnZoomAutoFitAsync()
         {
-            _editor.AutoFitZoom();
+            _editor.AutoFitZoom?.Invoke();
             await Task.Delay(0);
         }
 
         /// <inheritdoc/>
         async Task IEditorApplication.OnLoadWindowLayout()
         {
+            _editor.LoadLayout?.Invoke();
             await Task.Delay(0);
         }
 
         /// <inheritdoc/>
         async Task IEditorApplication.OnSaveWindowLayoutAsync()
         {
+            _editor.SaveLayout?.Invoke();
             await Task.Delay(0);
         }
 
         /// <inheritdoc/>
         async Task IEditorApplication.OnResetWindowLayoutAsync()
         {
+            _editor.ResetLayout?.Invoke();
             await Task.Delay(0);
         }
 

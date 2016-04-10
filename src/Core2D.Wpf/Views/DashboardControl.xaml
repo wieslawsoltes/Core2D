@@ -35,7 +35,7 @@
             <Setter Property="FontSize" Value="18"/>
         </Style>
     </UserControl.Resources>
-    <Grid Grid.Row="1" MaxWidth="800" MaxHeight="600">
+    <Grid Grid.Row="1" MaxWidth="800" MaxHeight="600" Margin="0,5,0,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="0.2*"/>
             <RowDefinition Height="50"/>

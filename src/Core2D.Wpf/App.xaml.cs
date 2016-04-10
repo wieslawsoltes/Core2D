@@ -38,7 +38,6 @@ namespace Core2D.Wpf
         private string _recentFileName = "Core2D.recent";
         private string _logFileName = "Core2D.log";
         private bool _enableRecent = true;
-        private bool _restoreLayout = true;
 
         /// <summary>
         /// Raises the <see cref="Application.Startup"/> event.
@@ -63,9 +62,7 @@ namespace Core2D.Wpf
                 {
                     InitializeEditor(log);
                     LoadRecent();
-
                     _mainWindow = new Windows.MainWindow();
-                    _mainWindow.InitializeEditor(_editor);
                     _mainWindow.Loaded += (sender, e) => OnLoaded();
                     _mainWindow.Closed += (sender, e) => OnClosed();
                     _mainWindow.DataContext = _editor;
@@ -91,11 +88,6 @@ namespace Core2D.Wpf
                 return;
             else
                 _isLoaded = true;
-
-            if (_restoreLayout)
-            {
-                _mainWindow.AutoLoadLayout(_editor);
-            }
         }
 
         /// <summary>
@@ -109,11 +101,6 @@ namespace Core2D.Wpf
                 _isLoaded = false;
 
             SaveRecent();
-
-            if (_restoreLayout)
-            {
-                _mainWindow.AutoSaveLayout(_editor);
-            }
         }
 
         /// <summary>
@@ -654,35 +641,35 @@ namespace Core2D.Wpf
         /// <inheritdoc/>
         async Task IEditorApplication.OnZoomResetAsync()
         {
-            _mainWindow.OnZoomReset();
+            _editor.ResetZoom?.Invoke();
             await Task.Delay(0);
         }
 
         /// <inheritdoc/>
         async Task IEditorApplication.OnZoomAutoFitAsync()
         {
-            _mainWindow.OnZoomAutoFit();
+            _editor.AutoFitZoom?.Invoke();
             await Task.Delay(0);
         }
 
         /// <inheritdoc/>
         async Task IEditorApplication.OnLoadWindowLayout()
         {
-            _mainWindow.OnLoadLayout();
+            _editor.LoadLayout?.Invoke();
             await Task.Delay(0);
         }
 
         /// <inheritdoc/>
         async Task IEditorApplication.OnSaveWindowLayoutAsync()
         {
-            _mainWindow.OnSaveLayout();
+            _editor.SaveLayout?.Invoke();
             await Task.Delay(0);
         }
 
         /// <inheritdoc/>
         async Task IEditorApplication.OnResetWindowLayoutAsync()
         {
-            _mainWindow.OnResetLayout();
+            _editor.ResetLayout?.Invoke();
             await Task.Delay(0);
         }
 
