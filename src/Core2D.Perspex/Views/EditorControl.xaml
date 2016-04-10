@@ -22,6 +22,7 @@
              Design.DataContext="{Static Designer:DesignerContext.Editor}"
              Design.Width="1200" Design.Height="540">
     <Grid Name="rootPanel" ColumnDefinitions="180,Auto,*,Auto,230" RowDefinitions="*,Auto" Margin="4,6,4,2">
+        <!--
         <i:Interaction.Behaviors>
             <ia:DataTriggerBehavior Binding="{Binding #rootPanel.Bounds.Height}" ComparisonCondition="GreaterThan" Value="420">
                 <ia:ChangePropertyAction TargetObject="{Binding #leftPanelBottom}" PropertyName="IsVisible" Value="True"/>
@@ -81,6 +82,7 @@
                 <ia:ChangePropertyAction TargetObject="{Binding #statsPanel}" PropertyName="IsVisible" Value="False"/>
             </ia:DataTriggerBehavior>
         </i:Interaction.Behaviors>
+        -->
         <GridSplitter Name="leftPanelVSplitter" Classes="vertical" Grid.Column="1" Grid.Row="0" Width="6"/>
         <Grid Name="containerPanel" Grid.Row="0" Grid.Column="2">
             <Border Classes="container">
