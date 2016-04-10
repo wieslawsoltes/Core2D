@@ -160,7 +160,7 @@ namespace Core2D.Perspex
         /// Gets the location of the assembly as specified originally.
         /// </summary>
         /// <returns>The location of the assembly as specified originally.</returns>
-        private string GetAssemblyPath()
+        public static string GetAssemblyPath()
         {
             string codeBase = Assembly.GetExecutingAssembly().CodeBase;
             var uri = new UriBuilder(codeBase);
