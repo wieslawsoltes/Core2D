@@ -24,11 +24,6 @@ namespace Core2D.Perspex.Views
         {
             this.InitializeComponent();
 
-            this.AttachedToLogicalTree += (sender, e) =>
-            {
-                this.DataContext = (this.DataContext as ViewBase).DataContext;
-            };
-
             this.AttachedToVisualTree += (sender, e) => AttachEditor();
             this.DetachedFromVisualTree += (sender, e) => DetachEditor();
         }

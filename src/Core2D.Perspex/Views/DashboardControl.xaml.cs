@@ -17,11 +17,6 @@ namespace Core2D.Perspex.Views
         public DashboardControl()
         {
             this.InitializeComponent();
-
-            this.AttachedToLogicalTree += (sender, e) =>
-            {
-                this.DataContext = (this.DataContext as ViewBase).DataContext;
-            };
         }
 
         /// <summary>
