@@ -24,6 +24,11 @@ namespace Core2D.Perspex.Views
         {
             this.InitializeComponent();
 
+            this.AttachedToLogicalTree += (sender, e) =>
+            {
+                this.DataContext = (this.DataContext as ViewBase).DataContext;
+            };
+
             this.AttachedToVisualTree += (sender, e) => AttachEditor();
             this.DetachedFromVisualTree += (sender, e) => DetachEditor();
         }
@@ -115,7 +120,7 @@ namespace Core2D.Perspex.Views
         /// </summary>
         public void AttachEditor()
         {
-            _projectEditor = (this.DataContext as ViewBase).DataContext as ProjectEditor;
+            _projectEditor = this.DataContext as ProjectEditor;
             _containerControl = this.Find<ContainerControl>("containerControl");
             _panAndZoom = this.Find<PanAndZoom>("panAndZoom");
 

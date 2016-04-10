@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Editor;
 using Perspex.Controls;
 using Perspex.Markup.Xaml;
 
@@ -16,6 +17,11 @@ namespace Core2D.Perspex.Views
         public DashboardControl()
         {
             this.InitializeComponent();
+
+            this.AttachedToLogicalTree += (sender, e) =>
+            {
+                this.DataContext = (this.DataContext as ViewBase).DataContext;
+            };
         }
 
         /// <summary>
