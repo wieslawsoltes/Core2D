@@ -47,13 +47,13 @@
     <ContentControl Content="{Binding CurrentView, Mode=TwoWay}">
         <ContentControl.DataTemplates>
             <DataTemplate DataType="Views:DashboardView">
-                <Grid RowDefinitions="Auto,*">
+                <Grid RowDefinitions="Auto,*" DataContext="{Binding Context, Mode=TwoWay}">
                     <views:DashboardMenuControl Grid.Row="0"/>
                     <views:DashboardControl Grid.Row="1"/>
                 </Grid>
             </DataTemplate>
             <DataTemplate DataType="Views:EditorView">
-                <Grid RowDefinitions="Auto,*">
+                <Grid RowDefinitions="Auto,*" DataContext="{Binding Context, Mode=TwoWay}">
                     <views:EditorMenuControl Grid.Row="0"/>
                     <views:EditorControl Grid.Row="1"/>
                 </Grid>
