@@ -227,6 +227,9 @@
     <Compile Include="Views\DashboardMenuControl.xaml.cs">
       <DependentUpon>DashboardMenuControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\DashboardViewControl.xaml.cs">
+      <DependentUpon>DashboardViewControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\DocumentControl.xaml.cs">
       <DependentUpon>DocumentControl.xaml</DependentUpon>
     </Compile>
@@ -421,6 +424,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Views\EditorViewControl.xaml.cs">
+      <DependentUpon>EditorViewControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\DocumentWindow.xaml.cs">
       <DependentUpon>DocumentWindow.xaml</DependentUpon>
     </Compile>
@@ -602,6 +608,13 @@
   <ItemGroup>
     <EmbeddedResource Include="Views\EditorMenuControl.xaml" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\DashboardViewControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\EditorViewControl.xaml" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Perspex.Skia.Desktop.9999.0.1186-nightly\build\net45\Perspex.Skia.Desktop.targets" Condition="Exists('..\packages\Perspex.Skia.Desktop.9999.0.1186-nightly\build\net45\Perspex.Skia.Desktop.targets')" />
   <Import Project="..\..\packages\Perspex.Skia.Desktop.9999.0.1368-nightly\build\net45\Perspex.Skia.Desktop.targets" Condition="Exists('..\..\packages\Perspex.Skia.Desktop.9999.0.1368-nightly\build\net45\Perspex.Skia.Desktop.targets')" />
