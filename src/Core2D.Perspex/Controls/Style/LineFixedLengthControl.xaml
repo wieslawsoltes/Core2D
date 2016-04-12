@@ -26,10 +26,10 @@
             </Grid>
         </TabItem>
         <TabItem Header="StartTrigger" Classes="property">
-            <ContentControl Content="{Binding StartTrigger, Mode=TwoWay}"/>
+            <ContentControl Content="{Binding StartTrigger}"/>
         </TabItem>
         <TabItem Header="EndTrigger" Classes="property">
-            <ContentControl Content="{Binding EndTrigger, Mode=TwoWay}"/>
+            <ContentControl Content="{Binding EndTrigger}"/>
         </TabItem>
     </TabControl>
 </UserControl>

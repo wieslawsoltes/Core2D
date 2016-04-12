@@ -18,7 +18,7 @@
             </Grid>
         </TabItem>
         <TabItem Header="StartPoint" Classes="property">
-            <ContentControl Content="{Binding StartPoint, Mode=TwoWay}"/>
+            <ContentControl Content="{Binding StartPoint}"/>
         </TabItem>
         <TabItem Header="Segments" Classes="property">
             <ListBox Items="{Binding Segments}" Classes="default"/>

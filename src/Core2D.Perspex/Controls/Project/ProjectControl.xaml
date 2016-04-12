@@ -23,7 +23,7 @@
                 <MenuItem Header="-" Command="{Static Editor:Commands.DeleteCommand}" CommandParameter="{Binding Selected}" IsVisible="{Binding Selected, Converter={Static converters:IsNotNullConverter.Instance}}"/>
             </Menu>
         </Grid>
-        <TreeView Name="documents" Items="{Binding Documents, Mode=TwoWay}" SelectedItem="{Binding Selected, Mode=TwoWay}" Grid.Row="1" Classes="default">
+        <TreeView Name="documents" Items="{Binding Documents}" SelectedItem="{Binding Selected, Mode=TwoWay}" Grid.Row="1" Classes="default">
             <TreeView.KeyBindings>
                 <KeyBinding Command="{Static Editor:Commands.NewCommand}" CommandParameter="{Binding #documents.SelectedItem}" Gesture="Ctrl+N"/>
                 <KeyBinding Command="{Static Editor:Commands.CutCommand}" CommandParameter="{Binding #documents.SelectedItem}" Gesture="Ctrl+X"/>
@@ -45,14 +45,14 @@
                 </Style>
             </TreeView.Styles>
             <TreeView.DataTemplates>
-                <TreeDataTemplate DataType="Project:XDocument" ItemsSource="{Binding Pages, Mode=TwoWay}">
+                <TreeDataTemplate DataType="Project:XDocument" ItemsSource="{Binding Pages}">
                     <Grid>
                         <!--
                         <i:Interaction.Behaviors>
                             <behaviors:ToggleIsExpandedOnDoubleTappedBehavior/>
                         </i:Interaction.Behaviors>
                         -->
-                        <TextBlock Text="{Binding Name, Mode=TwoWay}" Classes="default">
+                        <TextBlock Text="{Binding Name}" Classes="default">
                             <TextBlock.ContextMenu>
                                 <ContextMenu>
                                     <MenuItem Header="_Add Page" Command="{Static Editor:Commands.AddPageCommand}" CommandParameter="{Binding Mode=OneWay}"/>
@@ -72,13 +72,13 @@
                         </TextBlock>                        
                     </Grid>
                 </TreeDataTemplate>
-                <TreeDataTemplate DataType="Project:XPage" ItemsSource="{Binding Layers, Mode=TwoWay}">
+                <TreeDataTemplate DataType="Project:XPage" ItemsSource="{Binding Layers}">
                     <Grid Name="root">
                         <i:Interaction.Behaviors>
                             <behaviors:BindTagToVisualRootDataContextBehavior/>
                             <!--<behaviors:ToggleIsExpandedOnDoubleTappedBehavior/>-->
                         </i:Interaction.Behaviors>
-                        <TextBlock Text="{Binding Name, Mode=TwoWay}" Classes="default">
+                        <TextBlock Text="{Binding Name}" Classes="default">
                             <TextBlock.ContextMenu>
                                 <ContextMenu>
                                     <MenuItem Header="Te_mplate" Items="{Binding #root.Tag.Project.Templates}">
@@ -128,7 +128,7 @@
                             </ContextMenu>
                         </StackPanel.ContextMenu>
                         <CheckBox IsChecked="{Binding IsVisible, Mode=TwoWay}" Classes="default"/>
-                        <TextBlock Text="{Binding Name, Mode=TwoWay}" Classes="default"/>
+                        <TextBlock Text="{Binding Name}" Classes="default"/>
                     </StackPanel>
                 </DataTemplate>
             </TreeView.DataTemplates>

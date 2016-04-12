@@ -20,13 +20,13 @@
             </Grid>
         </TabItem>
         <TabItem Header="State" Classes="property">
-            <ContentControl Content="{Binding State, Mode=TwoWay}"/>
+            <ContentControl Content="{Binding State}"/>
         </TabItem>
         <TabItem Header="Data" Classes="property">
-            <ContentControl Content="{Binding Data, Mode=TwoWay}"/>
+            <ContentControl Content="{Binding Data}"/>
         </TabItem>
         <TabItem Header="Shape" Classes="property">
-            <ContentControl Content="{Binding Shape, Mode=TwoWay}"/>
+            <ContentControl Content="{Binding Shape}"/>
         </TabItem>
     </TabControl>
 </UserControl>

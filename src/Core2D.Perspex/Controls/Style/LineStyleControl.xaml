@@ -16,7 +16,7 @@
             </Grid>
         </TabItem>
         <TabItem Header="FixedLength" Classes="property">
-            <ContentControl Content="{Binding FixedLength, Mode=TwoWay}"/>
+            <ContentControl Content="{Binding FixedLength}"/>
         </TabItem>
     </TabControl>
 </UserControl>

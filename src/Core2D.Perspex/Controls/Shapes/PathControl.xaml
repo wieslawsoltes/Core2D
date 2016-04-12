@@ -20,16 +20,16 @@
             </Grid>
         </TabItem>
         <TabItem Header="Geometry" Classes="property">
-            <ContentControl Content="{Binding Geometry, Mode=TwoWay}"/>
+            <ContentControl Content="{Binding Geometry}"/>
         </TabItem>
         <TabItem Header="State" Classes="property">
-            <ContentControl Content="{Binding State, Mode=TwoWay}"/>
+            <ContentControl Content="{Binding State}"/>
         </TabItem>
         <TabItem Header="Data" Classes="property">
-            <ContentControl Content="{Binding Data, Mode=TwoWay}"/>
+            <ContentControl Content="{Binding Data}"/>
         </TabItem>
         <TabItem Header="Style" Classes="property">
-            <ContentControl Content="{Binding Style, Mode=TwoWay}"/>
+            <ContentControl Content="{Binding Style}"/>
         </TabItem>
     </TabControl>
 </UserControl>

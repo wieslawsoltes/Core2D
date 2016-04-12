@@ -19,7 +19,7 @@
             </Grid>
         </TabItem>
         <TabItem Header="Owner" Classes="property">
-            <ContentControl Content="{Binding Owner, Mode=TwoWay}"/>
+            <ContentControl Content="{Binding Owner}"/>
         </TabItem>
         <TabItem Header="Shapes" Classes="property">
             <TabControl Classes="default">
@@ -33,7 +33,7 @@
                     </ListBox>
                 </TabItem>
                 <TabItem Header="Selected" Classes="property">
-                    <ContentControl Content="{Binding #shapes.SelectedItem, Mode=TwoWay}"/>
+                    <ContentControl Content="{Binding #shapes.SelectedItem}"/>
                 </TabItem>
             </TabControl>
         </TabItem>

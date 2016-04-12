@@ -52,16 +52,16 @@
         <TabItem Header="Advanced" Classes="property">
             <TabControl Classes="default">
                 <TabItem Header="PointShape" Classes="property">
-                    <ScrollViewer Content="{Binding PointShape, Mode=TwoWay}"/>
+                    <ScrollViewer Content="{Binding PointShape}"/>
                 </TabItem>
                 <TabItem Header="PointStyle" Classes="property">
-                    <ScrollViewer Content="{Binding PointStyle, Mode=TwoWay}"/>
+                    <ScrollViewer Content="{Binding PointStyle}"/>
                 </TabItem>
                 <TabItem Header="SelectionStyle" Classes="property">
-                    <ScrollViewer Content="{Binding SelectionStyle, Mode=TwoWay}"/>
+                    <ScrollViewer Content="{Binding SelectionStyle}"/>
                 </TabItem>
                 <TabItem Header="HelperStyle" Classes="property">
-                    <ScrollViewer Content="{Binding HelperStyle, Mode=TwoWay}"/>
+                    <ScrollViewer Content="{Binding HelperStyle}"/>
                 </TabItem>
             </TabControl>
         </TabItem>

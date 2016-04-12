@@ -35,7 +35,7 @@
             </TreeView>
         </TabItem>
         <TabItem Header="Selected" Classes="property">
-            <ContentControl Content="{Binding #tree.SelectedItem, Mode=TwoWay}"/>
+            <ContentControl Content="{Binding #tree.SelectedItem}"/>
         </TabItem>
     </TabControl>
 </UserControl>

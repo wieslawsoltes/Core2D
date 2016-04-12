@@ -24,7 +24,7 @@
             </Grid>
         </TabItem>
         <TabItem Header="Background" Classes="property">
-            <ContentControl Content="{Binding Background, Mode=TwoWay}"/>
+            <ContentControl Content="{Binding Background}"/>
         </TabItem>
     </TabControl>
 </UserControl>

@@ -13,10 +13,10 @@
              Design.Width="1200" Design.Height="540"
              Name="control">
     <Grid ColumnDefinitions="150,Auto,*" RowDefinitions="*" renderer:RendererOptions.Renderer="{Binding Renderers[1]}">
-        <ListBox Name="document" Items="{Binding Project.Documents, Mode=TwoWay}" SelectedItem="{Binding Project.CurrentDocument, Mode=OneTime}" Classes="document" SelectedIndex="0" Grid.Column="0" Grid.Row="0" Margin="3,3,0,3">
+        <ListBox Name="document" Items="{Binding Project.Documents}" SelectedItem="{Binding Project.CurrentDocument, Mode=OneTime}" Classes="document" SelectedIndex="0" Grid.Column="0" Grid.Row="0" Margin="3,3,0,3">
             <ListBox.DataTemplates>
                 <DataTemplate DataType="Project:XDocument">
-                    <TextBlock Text="{Binding Name, Mode=TwoWay}" Classes="default"/>
+                    <TextBlock Text="{Binding Name}" Classes="default"/>
                 </DataTemplate>
             </ListBox.DataTemplates>
         </ListBox>

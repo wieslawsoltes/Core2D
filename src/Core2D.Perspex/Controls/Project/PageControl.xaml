@@ -14,7 +14,7 @@
             <project:ContainerControl/>
         </TabItem>
         <TabItem Header="Data" Classes="property">
-            <ContentControl Content="{Binding Data, Mode=TwoWay}"/>
+            <ContentControl Content="{Binding Data}"/>
         </TabItem>
         <TabItem Header="Template" Classes="property">
             <project:TemplateControl DataContext="{Binding Template}"/>

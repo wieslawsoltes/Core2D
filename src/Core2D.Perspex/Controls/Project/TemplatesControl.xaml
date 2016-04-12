@@ -21,7 +21,7 @@
             </ListBox.KeyBindings>
             <ListBox.DataTemplates>
                 <DataTemplate DataType="Project:XContainer">
-                    <TextBlock Name="template" Text="{Binding Name, Mode=TwoWay}" Classes="default">
+                    <TextBlock Name="template" Text="{Binding Name}" Classes="default">
                         <i:Interaction.Behaviors>
                             <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #template}">
                                 <ia:InvokeCommandAction Command="{Static Editor:Commands.ApplyTemplateCommand}" CommandParameter="{Binding Mode=OneWay}"/>

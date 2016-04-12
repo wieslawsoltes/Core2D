@@ -54,7 +54,7 @@
                                 </ListBox>
                             </TabItem>
                             <TabItem Header="Selected" Classes="property">
-                                <ContentControl Content="{Binding #shapes.SelectedItem, Mode=TwoWay}"/>
+                                <ContentControl Content="{Binding #shapes.SelectedItem}"/>
                             </TabItem>
                         </TabControl>
                     </TabItem>
@@ -70,7 +70,7 @@
                                 </ListBox>
                             </TabItem>
                             <TabItem Header="Selected" Classes="property">
-                                <ContentControl Content="{Binding #connectors.SelectedItem, Mode=TwoWay}"/>
+                                <ContentControl Content="{Binding #connectors.SelectedItem}"/>
                             </TabItem>
                         </TabControl>
                     </TabItem>
@@ -78,10 +78,10 @@
             </Grid>
         </TabItem>
         <TabItem Header="State" Classes="property">
-            <ContentControl Content="{Binding State, Mode=TwoWay}"/>
+            <ContentControl Content="{Binding State}"/>
         </TabItem>
         <TabItem Header="Data" Classes="property">
-            <ContentControl Content="{Binding Data, Mode=TwoWay}"/>
+            <ContentControl Content="{Binding Data}"/>
         </TabItem>
     </TabControl>
 </UserControl>

@@ -21,7 +21,7 @@
             <ListBox Name="points" Items="{Binding Points}" Classes="default"/>
         </TabItem>
         <TabItem Header="Selected" Classes="property">
-            <ContentControl Content="{Binding #points.SelectedItem, Mode=TwoWay}"/>
+            <ContentControl Content="{Binding #points.SelectedItem}"/>
         </TabItem>
     </TabControl>
 </UserControl>

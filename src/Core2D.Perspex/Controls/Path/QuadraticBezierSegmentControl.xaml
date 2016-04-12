@@ -18,10 +18,10 @@
             </Grid>
         </TabItem>
         <TabItem Header="Point1" Classes="property">
-            <ContentControl Content="{Binding Point1, Mode=TwoWay}"/>
+            <ContentControl Content="{Binding Point1}"/>
         </TabItem>
         <TabItem Header="Point2" Classes="property">
-            <ContentControl Content="{Binding Point2, Mode=TwoWay}"/>
+            <ContentControl Content="{Binding Point2}"/>
         </TabItem>
     </TabControl>
 </UserControl>

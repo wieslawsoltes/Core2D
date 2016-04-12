@@ -44,13 +44,13 @@
         <KeyBinding Command="{Static Editor:Commands.ObjectBrowserCommand}" Gesture="Ctrl+J"/>
         <KeyBinding Command="{Static Editor:Commands.DocumentViewerCommand}" Gesture="Ctrl+D"/>
     </Window.KeyBindings>
-    <ContentControl Content="{Binding CurrentView, Mode=TwoWay}">
+    <ContentControl Content="{Binding CurrentView}">
         <ContentControl.DataTemplates>
             <DataTemplate DataType="Views:DashboardView">
-                <views:DashboardViewControl DataContext="{Binding Context, Mode=TwoWay}"/>
+                <views:DashboardViewControl DataContext="{Binding Context}"/>
             </DataTemplate>
             <DataTemplate DataType="Views:EditorView">
-                <views:EditorViewControl DataContext="{Binding Context, Mode=TwoWay}"/>
+                <views:EditorViewControl DataContext="{Binding Context}"/>
             </DataTemplate>
         </ContentControl.DataTemplates>
     </ContentControl>

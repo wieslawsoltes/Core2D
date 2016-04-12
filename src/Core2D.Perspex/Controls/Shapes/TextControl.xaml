@@ -17,22 +17,22 @@
                 <TextBox Text="{Binding Text, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
                 <TabControl Classes="default" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
                     <TabItem Header="TopLeft" Classes="property">
-                        <ContentControl Content="{Binding TopLeft, Mode=TwoWay}"/>
+                        <ContentControl Content="{Binding TopLeft}"/>
                     </TabItem>
                     <TabItem Header="BottomRight" Classes="property">
-                        <ContentControl Content="{Binding BottomRight, Mode=TwoWay}"/>
+                        <ContentControl Content="{Binding BottomRight}"/>
                     </TabItem>
                 </TabControl>
             </Grid>
         </TabItem>
         <TabItem Header="State" Classes="property">
-            <ContentControl Content="{Binding State, Mode=TwoWay}"/>
+            <ContentControl Content="{Binding State}"/>
         </TabItem>
         <TabItem Header="Data" Classes="property">
-            <ContentControl Content="{Binding Data, Mode=TwoWay}"/>
+            <ContentControl Content="{Binding Data}"/>
         </TabItem>
         <TabItem Header="Style" Classes="property">
-            <ContentControl Content="{Binding Style, Mode=TwoWay}"/>
+            <ContentControl Content="{Binding Style}"/>
         </TabItem>
     </TabControl>
 </UserControl>

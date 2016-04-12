@@ -22,6 +22,6 @@
                 </DataTemplate>
             </DropDown.DataTemplates>
         </DropDown>
-        <ContentControl Content="{Binding CurrentDatabase, Mode=TwoWay}" Grid.Row="2"/>
+        <ContentControl Content="{Binding CurrentDatabase}" Grid.Row="2"/>
     </Grid>
 </UserControl>

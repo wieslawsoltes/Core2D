@@ -98,13 +98,13 @@
             <Border Name="leftPanelTop" Classes="leftTop" Grid.Row="0">
                 <TabControl Classes="bottom">
                     <TabItem Header="Project" Classes="property">
-                        <project:ProjectControl DataContext="{Binding Project, Mode=TwoWay}"/>
+                        <project:ProjectControl DataContext="{Binding Project}"/>
                     </TabItem>
                     <TabItem Header="Options" Classes="property">
-                        <ContentControl Content="{Binding Project.Options, Mode=TwoWay}"/>
+                        <ContentControl Content="{Binding Project.Options}"/>
                     </TabItem>
                     <TabItem Header="Images" Classes="property">
-                        <project:ImagesControl DataContext="{Binding Project, Mode=TwoWay}"/>
+                        <project:ImagesControl DataContext="{Binding Project}"/>
                     </TabItem>
                 </TabControl>
             </Border>
@@ -112,10 +112,10 @@
             <Border Name="leftPanelBottom" Classes="leftBottom" Grid.Row="2">
                 <TabControl Classes="bottom">
                     <TabItem Header="Groups" Classes="property">
-                        <project:GroupsControl DataContext="{Binding Project, Mode=TwoWay}"/>
+                        <project:GroupsControl DataContext="{Binding Project}"/>
                     </TabItem>
                     <TabItem Header="Databases" Classes="property">
-                        <project:DatabasesControl DataContext="{Binding Project, Mode=TwoWay}"/>
+                        <project:DatabasesControl DataContext="{Binding Project}"/>
                     </TabItem>
                 </TabControl>
             </Border>
@@ -125,10 +125,10 @@
             <Border Name="rightPanelTop" Classes="rightTop" Grid.Row="0">
                 <TabControl Classes="bottom">
                     <TabItem Header="Styles" Classes="property">
-                        <project:StylesControl DataContext="{Binding Project, Mode=TwoWay}"/>
+                        <project:StylesControl DataContext="{Binding Project}"/>
                     </TabItem>
                     <TabItem Header="Templates" Classes="property">
-                        <project:TemplatesControl DataContext="{Binding Project, Mode=TwoWay}"/>
+                        <project:TemplatesControl DataContext="{Binding Project}"/>
                     </TabItem>
                 </TabControl>
             </Border>
@@ -140,20 +140,20 @@
                     </TabItem>
                     <TabItem Header="Data" Classes="property">
                         <ScrollViewer>
-                            <data:DataControl DataContext="{Binding Renderers[0].State.SelectedShape.Data, Mode=TwoWay}"/>
+                            <data:DataControl DataContext="{Binding Renderers[0].State.SelectedShape.Data}"/>
                         </ScrollViewer>
                     </TabItem>
                     <TabItem Header="Style" Classes="property">
                         <ScrollViewer>
-                            <style:ShapeStyleControl DataContext="{Binding Project.CurrentStyleLibrary.Selected, Mode=TwoWay}"/>
+                            <style:ShapeStyleControl DataContext="{Binding Project.CurrentStyleLibrary.Selected}"/>
                         </ScrollViewer>
                     </TabItem>
                     <TabItem Header="Container" Classes="property">
-                        <ScrollViewer Content="{Binding Project.CurrentContainer, Mode=TwoWay}"/>
+                        <ScrollViewer Content="{Binding Project.CurrentContainer}"/>
                     </TabItem>
                     <TabItem Header="Template" Classes="property">
                         <ScrollViewer>
-                            <project:TemplateControl DataContext="{Binding Project.CurrentTemplate, Mode=TwoWay}"/>
+                            <project:TemplateControl DataContext="{Binding Project.CurrentTemplate}"/>
                         </ScrollViewer>
                     </TabItem>
                 </TabControl>

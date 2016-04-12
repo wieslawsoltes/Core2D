@@ -21,7 +21,7 @@
             <data:ColumnsControl/>
         </TabItem>
         <TabItem Header="Current" Classes="property">
-            <ContentControl Content="{Binding CurrentRecord, Mode=TwoWay}"/>
+            <ContentControl Content="{Binding CurrentRecord}"/>
         </TabItem>
     </TabControl>
 </UserControl>

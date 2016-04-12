@@ -43,7 +43,7 @@
             </Grid>
         </TabItem>
         <TabItem Header="Selected" Classes="property">
-            <ContentControl Content="{Binding CurrentLayer, Mode=TwoWay}"/>
+            <ContentControl Content="{Binding CurrentLayer}"/>
         </TabItem>
     </TabControl>
 </UserControl>

@@ -31,10 +31,10 @@
             <style:StyleControl/>
         </TabItem>
         <TabItem Header="Stroke" Classes="property">
-            <ContentControl Content="{Binding Stroke, Mode=TwoWay}"/>
+            <ContentControl Content="{Binding Stroke}"/>
         </TabItem>
         <TabItem Header="Fill" Classes="property">
-            <ContentControl Content="{Binding Fill, Mode=TwoWay}"/>
+            <ContentControl Content="{Binding Fill}"/>
         </TabItem>
     </TabControl>
 </UserControl>
