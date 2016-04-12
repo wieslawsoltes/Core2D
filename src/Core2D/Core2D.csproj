@@ -43,6 +43,9 @@
     <Compile Include="Editor\Bounds\RectangleBounds.cs" />
     <Compile Include="Editor\Bounds\ShapeHitTestPoint.cs" />
     <Compile Include="Editor\Designer\DesignerCommandManager.cs" />
+    <Compile Include="Editor\ViewBase.cs" />
+    <Compile Include="Editor\Views\DashboardView.cs" />
+    <Compile Include="Editor\Views\EditorView.cs" />
     <Compile Include="ObservableObject.cs" />
     <Compile Include="ObservableResource.cs" />
     <Compile Include="Data\Database\XColumn.cs" />
@@ -192,6 +195,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

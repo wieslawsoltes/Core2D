@@ -618,4 +618,7 @@
   <data name="StatusOptionsCloneStyle" xml:space="preserve">
     <value>CloneStyle</value>
   </data>
+  <data name="MenuViewViews" xml:space="preserve">
+    <value>_Views</value>
+  </data>
 </root>

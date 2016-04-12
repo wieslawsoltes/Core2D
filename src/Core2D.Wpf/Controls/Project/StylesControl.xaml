@@ -83,7 +83,7 @@
             </lists:ShapeStyleDragAndDropListBox.ItemContainerStyle>
             <lists:ShapeStyleDragAndDropListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Name}" Margin="0,5,0,5"/>
+                    <TextBlock Text="{Binding Name}" Margin="0,2,0,2"/>
                 </DataTemplate>
             </lists:ShapeStyleDragAndDropListBox.ItemTemplate>
         </lists:ShapeStyleDragAndDropListBox>

@@ -1,6 +1,6 @@
 ﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
 <!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
-<UserControl x:Class="Core2D.Perspex.Views.MenuControl"
+<UserControl x:Class="Core2D.Perspex.Views.EditorMenuControl"
              xmlns="https://github.com/perspex"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:i="clr-namespace:Perspex.Xaml.Interactivity;assembly=Perspex.Xaml.Interactivity"
@@ -21,22 +21,7 @@
                 <WrapPanel/>
             </ItemsPanelTemplate>
         </Menu.ItemsPanel>
-        <MenuItem Header="_File" IsVisible="{Binding Project, Converter={Static converters:IsNullConverter.Instance}}">
-            <MenuItem Header="_New" Command="{Static Editor:Commands.NewCommand}" CommandParameter="{Binding}"/>
-            <Separator/>
-            <MenuItem Header="_Open..." Command="{Static Editor:Commands.OpenCommand}"/>
-            <Separator/>
-            <MenuItem Header="_Recent" Items="{Binding RecentProjects}">
-                <MenuItem.DataTemplates>
-                    <DataTemplate DataType="Recent:RecentFile">
-                        <MenuItem Header="{Binding Name}" Command="{Static Editor:Commands.OpenCommand}" CommandParameter="{Binding Path}"/>
-                    </DataTemplate>
-                </MenuItem.DataTemplates>
-            </MenuItem>
-            <Separator/>
-            <MenuItem Header="E_xit" Command="{Static Editor:Commands.ExitCommand}"/>
-        </MenuItem>
-        <MenuItem Header="_File" IsVisible="{Binding Project, Converter={Static converters:IsNotNullConverter.Instance}}">
+        <MenuItem Header="_File">
             <MenuItem Header="_New" Command="{Static Editor:Commands.NewCommand}" CommandParameter="{Binding}"/>
             <Separator/>
             <MenuItem Header="_Open..." Command="{Static Editor:Commands.OpenCommand}"/>
@@ -61,7 +46,7 @@
             <Separator/>
             <MenuItem Header="E_xit" Command="{Static Editor:Commands.ExitCommand}"/>
         </MenuItem>
-        <MenuItem Header="_Edit" IsVisible="{Binding Project, Converter={Static converters:IsNotNullConverter.Instance}}">
+        <MenuItem Header="_Edit">
             <MenuItem Header="_Undo" Command="{Static Editor:Commands.UndoCommand}"/>
             <MenuItem Header="_Redo" Command="{Static Editor:Commands.RedoCommand}"/>
             <Separator/>
@@ -93,7 +78,7 @@
                 <MenuItem Header="Bring to _Front" Command="{Static Editor:Commands.BringToFrontCommand}"/>
             </MenuItem>
         </MenuItem>
-        <MenuItem Header="_View" IsVisible="{Binding Project, Converter={Static converters:IsNotNullConverter.Instance}}">
+        <MenuItem Header="_View">
             <MenuItem Header="_Object Browser..." Command="{Static Editor:Commands.ObjectBrowserCommand}"/>
             <Separator/>
             <MenuItem Header="_Document Viewer..." Command="{Static Editor:Commands.DocumentViewerCommand}"/>
@@ -101,8 +86,30 @@
             <MenuItem Header="_Reset Zoom" Command="{Static Editor:Commands.ZoomResetCommand}"/>
             <Separator/>
             <MenuItem Header="_AutoFit Zoom" Command="{Static Editor:Commands.ZoomAutoFitCommand}"/>
+            <Separator/>
+            <MenuItem Header="_Views" Items="{Binding Views}">
+                <MenuItem.DataTemplates>
+                    <DataTemplate DataType="Editor:ViewBase">
+                        <MenuItem Header="{Binding Name}" Command="{Static Editor:Commands.ChangeCurrentViewCommand}" CommandParameter="{Binding}">
+                            <MenuItem.Icon>
+                                <CheckBox Name="icon" Classes="menu">
+                                    <i:Interaction.Behaviors>
+                                        <behaviors:BindTagToVisualRootDataContextBehavior/>
+                                    </i:Interaction.Behaviors>
+                                    <CheckBox.IsChecked>
+                                        <MultiBinding Mode="OneWay" Converter="{Static converters:ObjectEqualityMultiConverter.Instance}">
+                                            <Binding ElementName="icon" Path="DataContext" Converter="{Static converters:ObjectToObjectConverter.Instance}"/>
+                                            <Binding ElementName="icon" Path="Tag.CurrentView" Converter="{Static converters:ObjectToObjectConverter.Instance}"/>
+                                        </MultiBinding>
+                                    </CheckBox.IsChecked>
+                                </CheckBox>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </DataTemplate>
+                </MenuItem.DataTemplates>
+            </MenuItem>
         </MenuItem>
-        <MenuItem Header="_Tool" IsVisible="{Binding Project, Converter={Static converters:IsNotNullConverter.Instance}}">
+        <MenuItem Header="_Tool">
             <MenuItem Header="_None" Command="{Static Editor:Commands.ToolNoneCommand}">
                 <MenuItem.Icon>
                     <CheckBox IsChecked="{Binding CurrentTool, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter={Static Editor:Tool.None}, Mode=OneWay}" Classes="menu"/>
@@ -199,14 +206,14 @@
                 </MenuItem.Icon>
             </MenuItem>
         </MenuItem>
-        <MenuItem Header="_Data" IsVisible="{Binding Project, Converter={Static converters:IsNotNullConverter.Instance}}">
+        <MenuItem Header="_Data">
             <MenuItem Header="_Import..." Command="{Static Editor:Commands.ImportDataCommand}"/>
             <Separator/>
             <MenuItem Header="_Export..." Command="{Static Editor:Commands.ExportDataCommand}"/>
             <Separator/>
             <MenuItem Header="_Update..." Command="{Static Editor:Commands.UpdateDataCommand}"/>
         </MenuItem>
-        <MenuItem Header="Te_mplate" Items="{Binding Project.Templates}" IsVisible="{Binding Project, Converter={Static converters:IsNotNullConverter.Instance}}">
+        <MenuItem Header="Te_mplate" Items="{Binding Project.Templates}">
             <MenuItem.DataTemplates>
                 <DataTemplate DataType="Project:XContainer">
                     <MenuItem Header="{Binding Name}" Command="{Static Editor:Commands.ApplyTemplateCommand}" CommandParameter="{Binding}">
@@ -227,7 +234,7 @@
                 </DataTemplate>
             </MenuItem.DataTemplates>
         </MenuItem>
-        <MenuItem Header="_Options" IsVisible="{Binding Project, Converter={Static converters:IsNotNullConverter.Instance}}">
+        <MenuItem Header="_Options">
             <MenuItem Header="Default is Stro_ked" Command="{Static Editor:Commands.DefaultIsStrokedCommand}">
                 <MenuItem.Icon>
                     <CheckBox IsChecked="{Binding Project.Options.DefaultIsStroked}" Classes="menu"/>

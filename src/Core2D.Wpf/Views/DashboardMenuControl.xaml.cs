@@ -5,14 +5,14 @@ using System.Windows.Controls;
 namespace Core2D.Wpf.Views
 {
     /// <summary>
-    /// Interaction logic for <see cref="MenuControl"/> xaml.
+    /// Interaction logic for <see cref="DashboardMenuControl"/> xaml.
     /// </summary>
-    public partial class MenuControl : UserControl
+    public partial class DashboardMenuControl : UserControl
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="MenuControl"/> class.
+        /// Initializes a new instance of the <see cref="DashboardMenuControl"/> class.
         /// </summary>
-        public MenuControl()
+        public DashboardMenuControl()
         {
             InitializeComponent();
         }

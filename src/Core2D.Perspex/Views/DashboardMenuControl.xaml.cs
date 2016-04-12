@@ -7,14 +7,14 @@ using Perspex.Markup.Xaml;
 namespace Core2D.Perspex.Views
 {
     /// <summary>
-    /// Interaction logic for <see cref="DashboardControl"/> xaml.
+    /// Interaction logic for <see cref="DashboardMenuControl"/> xaml.
     /// </summary>
-    public class DashboardControl : UserControl
+    public class DashboardMenuControl : UserControl
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="DashboardControl"/> class.
+        /// Initializes a new instance of the <see cref="DashboardMenuControl"/> class.
         /// </summary>
-        public DashboardControl()
+        public DashboardMenuControl()
         {
             this.InitializeComponent();
         }

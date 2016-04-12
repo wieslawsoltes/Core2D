@@ -9,6 +9,7 @@ using Core2D.Editor.Input;
 using Core2D.Editor.Interfaces;
 using Core2D.Editor.Recent;
 using Core2D.Editor.Tools;
+using Core2D.Editor.Views;
 using Core2D.History;
 using Core2D.Interfaces;
 using Core2D.Math;
@@ -42,12 +43,19 @@ namespace Core2D.Editor
         private Action _invalidate;
         private Action _resetZoom;
         private Action _extentZoom;
+        private Action _loadLayout;
+        private Action _saveLayout;
+        private Action _resetLayout;
         private bool _cancelAvailable;
         private XPage _pageToCopy;
         private XDocument _documentToCopy;
         private BaseShape _hover;
         private ImmutableArray<RecentFile> _recentProjects;
         private RecentFile _currentRecentProject;
+        private ImmutableArray<ViewBase> _views;
+        private ViewBase _currentView;
+        private DashboardView _dashboardView;
+        private EditorView _editorView;
         private IEditorApplication _application;
         private ILog _log;
         private CommandManager _commandManager;
@@ -129,6 +137,7 @@ namespace Core2D.Editor
         /// <summary>
         /// Gets or sets invalidate action.
         /// </summary>
+        /// <remarks>Invalidate current container control.</remarks>
         public Action Invalidate
         {
             get { return _invalidate; }
@@ -138,6 +147,7 @@ namespace Core2D.Editor
         /// <summary>
         /// Gets or sets reset zoom action.
         /// </summary>
+        /// <remarks>Reset view size to defaults.</remarks>
         public Action ResetZoom
         {
             get { return _resetZoom; }
@@ -147,10 +157,41 @@ namespace Core2D.Editor
         /// <summary>
         /// Gets or sets extent zoom action.
         /// </summary>
+        /// <remarks>Auto-fit view to the available extents.</remarks>
         public Action AutoFitZoom
         {
             get { return _extentZoom; }
             set { Update(ref _extentZoom, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets load layout action.
+        /// </summary>
+        /// <remarks>Auto-fit view to the available extents.</remarks>
+        public Action LoadLayout
+        {
+            get { return _loadLayout; }
+            set { Update(ref _loadLayout, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets save layout action.
+        /// </summary>
+        /// <remarks>Auto-fit view to the available extents.</remarks>
+        public Action SaveLayout
+        {
+            get { return _saveLayout; }
+            set { Update(ref _saveLayout, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets reset layout action.
+        /// </summary>
+        /// <remarks>Reset editor layout.</remarks>
+        public Action ResetLayout
+        {
+            get { return _resetLayout; }
+            set { Update(ref _resetLayout, value); }
         }
 
         /// <summary>
@@ -183,6 +224,24 @@ namespace Core2D.Editor
         {
             get { return _currentRecentProject; }
             set { Update(ref _currentRecentProject, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets registered views.
+        /// </summary>
+        public ImmutableArray<ViewBase> Views
+        {
+            get { return _views; }
+            set { Update(ref _views, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets current view.
+        /// </summary>
+        public ViewBase CurrentView
+        {
+            get { return _currentView; }
+            set { Update(ref _currentView, value); }
         }
 
         /// <summary>
@@ -338,6 +397,26 @@ namespace Core2D.Editor
 
             _recentProjects = ImmutableArray.Create<RecentFile>();
             _currentRecentProject = default(RecentFile);
+
+            _dashboardView = new DashboardView
+            {
+                Name = "Dashboard",
+                Context = this
+            };
+
+            _editorView = new EditorView
+            {
+                Name = "Editor",
+                Context = this
+            };
+
+            _views = new List<ViewBase>
+            {
+                _dashboardView,
+                _editorView
+            }.ToImmutableArray();
+
+            _currentView = _dashboardView;
         }
 
         /// <summary>
@@ -463,12 +542,9 @@ namespace Core2D.Editor
         /// </summary>
         private void OnNewProject()
         {
-            var project =
-                _projectFactory?.GetProject()
-                ?? XProject.Create();
-
             Unload();
-            Load(project, string.Empty);
+            Load(_projectFactory?.GetProject() ?? XProject.Create(), string.Empty);
+            OnChangeCurrentView(_editorView);
             Invalidate?.Invoke();
         }
 
@@ -490,6 +566,7 @@ namespace Core2D.Editor
                             Unload();
                             Load(project, path);
                             AddRecent(path, project.Name);
+                            OnChangeCurrentView(_editorView);
                         }
                     }
                 }
@@ -505,6 +582,7 @@ namespace Core2D.Editor
         /// </summary>
         public void OnClose()
         {
+            OnChangeCurrentView(_dashboardView);
             _project?.History?.Reset();
             Unload();
         }
@@ -3807,6 +3885,18 @@ namespace Core2D.Editor
         }
 
         /// <summary>
+        /// Change current view.
+        /// </summary>
+        /// <param name="view">The view instance.</param>
+        public void OnChangeCurrentView(ViewBase view)
+        {
+            if (_currentView != view)
+            {
+                CurrentView = view;
+            }
+        }
+
+        /// <summary>
         /// Initialize non-platform specific editor commands.
         /// </summary>
         public void InitializeCommands()
@@ -4345,6 +4435,11 @@ namespace Core2D.Editor
                 Command.Create(
                     async () => await (Application?.OnShowDocumentViewerAsync() ?? Task.FromResult<object>(null)),
                     () => IsEditMode());
+
+            Commands.ChangeCurrentViewCommand =
+                Command<ViewBase>.Create(
+                    (view) => OnChangeCurrentView(view),
+                    (view) => true);
         }
     }
 }

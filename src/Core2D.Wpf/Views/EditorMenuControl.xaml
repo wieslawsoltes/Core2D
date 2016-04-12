@@ -1,6 +1,6 @@
-<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
+﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
 <!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
-<UserControl x:Class="Core2D.Wpf.Views.MenuControl" 
+<UserControl x:Class="Core2D.Wpf.Views.EditorMenuControl" 
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -15,14 +15,6 @@
              d:DataContext="{x:Static local:DesignerHelper.Editor}"
              d:DesignWidth="1324" d:DesignHeight="20">
     <UserControl.Resources>
-        <Style x:Key="MenuItemVisibilityStyle" TargetType="MenuItem">
-            <Setter Property="Visibility" Value="Visible"/>
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding Project}" Value="{x:Null}">
-                    <Setter Property="Visibility" Value="Collapsed"/>
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
         <Style x:Key="TemplateMenuItemVisibilityStyle" TargetType="MenuItem">
             <Setter Property="Visibility" Value="Visible"/>
             <Style.Triggers>
@@ -34,14 +26,6 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
-        <Style x:Key="SeparatorVisibilityStyle" TargetType="Separator">
-            <Setter Property="Visibility" Value="Visible"/>
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding Project}" Value="{x:Null}">
-                    <Setter Property="Visibility" Value="Collapsed"/>
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
     </UserControl.Resources>
     <Menu Background="Transparent">
         <MenuItem Header="{x:Static p:Resources.MenuFile}">
@@ -49,16 +33,16 @@
             <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuFileOpen}" Command="{x:Static Editor:Commands.OpenCommand}" InputGestureText="Ctrl+O"/>
             <Separator/>
-            <MenuItem Header="{x:Static p:Resources.MenuFileClose}" Command="{x:Static Editor:Commands.CloseCommand}" InputGestureText="Ctrl+F4" Style="{StaticResource MenuItemVisibilityStyle}"/>
-            <Separator Style="{StaticResource SeparatorVisibilityStyle}"/>
-            <MenuItem Header="{x:Static p:Resources.MenuFileSave}" Command="{x:Static Editor:Commands.SaveCommand}" InputGestureText="Ctrl+S" Style="{StaticResource MenuItemVisibilityStyle}"/>
-            <MenuItem Header="{x:Static p:Resources.MenuFileSaveAs}" Command="{x:Static Editor:Commands.SaveAsCommand}" InputGestureText="Ctrl+Shift+S" Style="{StaticResource MenuItemVisibilityStyle}"/>
-            <Separator Style="{StaticResource SeparatorVisibilityStyle}"/>
-            <MenuItem Header="{x:Static p:Resources.MenuFileImportXaml}" Command="{x:Static Editor:Commands.ImportXamlCommand}" InputGestureText="Ctrl+Shift+X" Style="{StaticResource MenuItemVisibilityStyle}"/>
-            <MenuItem Header="{x:Static p:Resources.MenuFileImportJson}" Command="{x:Static Editor:Commands.ImportJsonCommand}" InputGestureText="Ctrl+Shift+J" Style="{StaticResource MenuItemVisibilityStyle}"/>
-            <Separator Style="{StaticResource SeparatorVisibilityStyle}"/>
-            <MenuItem Header="{x:Static p:Resources.MenuFileExport}" Command="{x:Static Editor:Commands.ExportCommand}" CommandParameter="{Binding Project}" InputGestureText="Ctrl+E" Style="{StaticResource MenuItemVisibilityStyle}"/>
-            <Separator Style="{StaticResource SeparatorVisibilityStyle}"/>
+            <MenuItem Header="{x:Static p:Resources.MenuFileClose}" Command="{x:Static Editor:Commands.CloseCommand}" InputGestureText="Ctrl+F4"/>
+            <Separator/>
+            <MenuItem Header="{x:Static p:Resources.MenuFileSave}" Command="{x:Static Editor:Commands.SaveCommand}" InputGestureText="Ctrl+S"/>
+            <MenuItem Header="{x:Static p:Resources.MenuFileSaveAs}" Command="{x:Static Editor:Commands.SaveAsCommand}" InputGestureText="Ctrl+Shift+S"/>
+            <Separator/>
+            <MenuItem Header="{x:Static p:Resources.MenuFileImportXaml}" Command="{x:Static Editor:Commands.ImportXamlCommand}" InputGestureText="Ctrl+Shift+X"/>
+            <MenuItem Header="{x:Static p:Resources.MenuFileImportJson}" Command="{x:Static Editor:Commands.ImportJsonCommand}" InputGestureText="Ctrl+Shift+J"/>
+            <Separator/>
+            <MenuItem Header="{x:Static p:Resources.MenuFileExport}" Command="{x:Static Editor:Commands.ExportCommand}" CommandParameter="{Binding Project}" InputGestureText="Ctrl+E"/>
+            <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuFileRecent}" ItemsSource="{Binding RecentProjects}">
                 <MenuItem.ItemTemplate>
                     <DataTemplate>
@@ -75,7 +59,7 @@
             <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuFileExit}" Command="{x:Static Editor:Commands.ExitCommand}" InputGestureText="Alt+F4"/>
         </MenuItem>
-        <MenuItem Header="{x:Static p:Resources.MenuEdit}" Style="{StaticResource MenuItemVisibilityStyle}">
+        <MenuItem Header="{x:Static p:Resources.MenuEdit}">
             <MenuItem Header="{x:Static p:Resources.MenuEditUndo}" Command="{x:Static Editor:Commands.UndoCommand}" InputGestureText="Ctrl+Z"/>
             <MenuItem Header="{x:Static p:Resources.MenuEditRedo}" Command="{x:Static Editor:Commands.RedoCommand}" InputGestureText="Ctrl+Y"/>
             <Separator/>
@@ -102,12 +86,35 @@
                 <MenuItem Header="{x:Static p:Resources.MenuEditOrderBringToFront}" Command="{x:Static Editor:Commands.BringToFrontCommand}" InputGestureText="Shift++"/>
             </MenuItem>
         </MenuItem>
-        <MenuItem Header="{x:Static p:Resources.MenuView}" Style="{StaticResource MenuItemVisibilityStyle}">
+        <MenuItem Header="{x:Static p:Resources.MenuView}">
             <MenuItem Header="{x:Static p:Resources.MenuViewZoomReset}" Command="{x:Static Editor:Commands.ZoomResetCommand}" InputGestureText="Z"/>
             <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuViewZoomAutoFit}" Command="{x:Static Editor:Commands.ZoomAutoFitCommand}" InputGestureText="X"/>
+            <Separator/>
+            <MenuItem Header="{x:Static p:Resources.MenuViewViews}" Tag="{Binding}" ItemsSource="{Binding Views}">
+                <MenuItem.ItemContainerStyle>
+                    <Style TargetType="MenuItem">
+                        <Setter Property="Header" Value="{Binding Name}"/>
+                        <Setter Property="Command" Value="{x:Static Editor:Commands.ChangeCurrentViewCommand}"/>
+                        <Setter Property="CommandParameter" Value="{Binding}"/>
+                        <Setter Property="IsCheckable" Value="True"/>
+                        <Setter Property="IsChecked" Value="False"/>
+                        <Style.Triggers>
+                            <DataTrigger Value="True">
+                                <DataTrigger.Binding>
+                                    <MultiBinding Converter="{StaticResource ObjectEqualityConverter}">
+                                        <Binding Path="Tag.CurrentView" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type MenuItem}}"/>
+                                        <Binding Path="DataContext" RelativeSource="{RelativeSource Self}"/>
+                                    </MultiBinding>
+                                </DataTrigger.Binding>
+                                <Setter Property="IsChecked" Value="True"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </MenuItem.ItemContainerStyle>
+            </MenuItem>
         </MenuItem>
-        <MenuItem Header="{x:Static p:Resources.MenuTool}" Style="{StaticResource MenuItemVisibilityStyle}">
+        <MenuItem Header="{x:Static p:Resources.MenuTool}">
             <MenuItem Header="{x:Static p:Resources.MenuToolNone}" Command="{x:Static Editor:Commands.ToolNoneCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter={x:Static Editor:Tool.None}}" InputGestureText="N"/>
             <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuToolSelection}" Command="{x:Static Editor:Commands.ToolSelectionCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter={x:Static Editor:Tool.Selection}}" InputGestureText="S"/>
@@ -136,7 +143,7 @@
             <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuToolImage}" Command="{x:Static Editor:Commands.ToolImageCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter={x:Static Editor:Tool.Image}}" InputGestureText="I"/>
         </MenuItem>
-        <MenuItem Header="{x:Static p:Resources.MenuData}" Style="{StaticResource MenuItemVisibilityStyle}">
+        <MenuItem Header="{x:Static p:Resources.MenuData}">
             <MenuItem Header="{x:Static p:Resources.MenuDataImport}" Command="{x:Static Editor:Commands.ImportDataCommand}" InputGestureText=""/>
             <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuDataExport}" Command="{x:Static Editor:Commands.ExportDataCommand}" InputGestureText=""/>
@@ -165,7 +172,7 @@
                 </Style>
             </MenuItem.ItemContainerStyle>
         </MenuItem>
-        <MenuItem Header="{x:Static p:Resources.MenuOptions}" Style="{StaticResource MenuItemVisibilityStyle}">
+        <MenuItem Header="{x:Static p:Resources.MenuOptions}">
             <MenuItem Header="{x:Static p:Resources.MenuOptionsDefaultIsStroked}" IsCheckable="True" IsChecked="{Binding Project.Options.DefaultIsStroked, Mode=OneWay}" Command="{x:Static Editor:Commands.DefaultIsStrokedCommand}" InputGestureText="K"/>
             <MenuItem Header="{x:Static p:Resources.MenuOptionsDefaultIsFilled}" IsCheckable="True" IsChecked="{Binding Project.Options.DefaultIsFilled, Mode=OneWay}" Command="{x:Static Editor:Commands.DefaultIsFilledCommand}" InputGestureText="F"/>
             <Separator/>
@@ -178,7 +185,7 @@
             <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuOptionsCloneStyle}" IsCheckable="True" IsChecked="{Binding Project.Options.CloneStyle, Mode=OneWay}" Command="{x:Static Editor:Commands.CloneStyleCommand}" InputGestureText="Y"/>
         </MenuItem>
-        <MenuItem Header="{x:Static p:Resources.MenuWindow}" Style="{StaticResource MenuItemVisibilityStyle}">
+        <MenuItem Header="{x:Static p:Resources.MenuWindow}">
             <MenuItem Header="{x:Static p:Resources.MenuWindowLoadLayout}" Command="{x:Static Editor:Commands.LoadWindowLayoutCommand}" InputGestureText=""/>
             <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuWindowSaveLayout}" Command="{x:Static Editor:Commands.SaveWindowLayoutCommand}" InputGestureText=""/>

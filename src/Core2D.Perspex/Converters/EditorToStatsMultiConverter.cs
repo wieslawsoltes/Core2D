@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Core2D.Shape;
 using Perspex;
+using Perspex.Data;
 using Perspex.Markup;
 using System;
 using System.Collections.Generic;
@@ -38,12 +39,12 @@ namespace Core2D.Perspex.Converters
         {
             if (values != null && values.Count() == 6 && values.All(x => x != PerspexProperty.UnsetValue))
             {
-                var documentsLength = (int)values[0];
-                var pagesLength = (int)values[1];
-                var layersLength = (int)values[2];
-                var shapesLength = (int)values[3];
-                var selectedShape = (BaseShape)values[4];
-                var selectedShapes = (ImmutableHashSet<BaseShape>)values[5];
+                int documentsLength = values[0] != null && values[0].GetType() == typeof(int) ? (int)values[0] : 0;
+                int pagesLength = values[1] != null && values[1].GetType() == typeof(int) ? (int)values[1] : 0;
+                int layersLength = values[2] != null && values[2].GetType() == typeof(int) ? (int)values[2] : 0;
+                int shapesLength = values[3] != null && values[3].GetType() == typeof(int) ? (int)values[3] : 0;
+                BaseShape selectedShape = values[4] != null && values[4].GetType() == typeof(BaseShape) ? (BaseShape)values[4] : null;
+                ImmutableHashSet<BaseShape> selectedShapes = values[5] != null && values[5].GetType() == typeof(ImmutableHashSet<BaseShape>) ? (ImmutableHashSet<BaseShape>)values[5] : null;
                 return string.Format(
                     "Documents: {0} - Pages: {1} - Layers: {2} - Shapes: {3} - Selected: {4}",
                     documentsLength,

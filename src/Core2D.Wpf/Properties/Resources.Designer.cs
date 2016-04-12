@@ -835,6 +835,15 @@ namespace Core2D.Wpf.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to _Views.
+        /// </summary>
+        public static string MenuViewViews {
+            get {
+                return ResourceManager.GetString("MenuViewViews", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to _Zoom.
         /// </summary>
         public static string MenuViewZoom {
