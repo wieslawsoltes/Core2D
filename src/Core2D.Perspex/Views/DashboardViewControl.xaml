@@ -7,7 +7,7 @@
              xmlns:converters="clr-namespace:Core2D.Perspex.Converters;assembly=Core2D.Perspex"
              xmlns:views="clr-namespace:Core2D.Perspex.Views;assembly=Core2D.Perspex">
     <Grid RowDefinitions="Auto,*">
-        <views:DashboardMenuControl Grid.Row="0"/>
-        <views:DashboardControl Grid.Row="1"/>
+        <views:DashboardMenuControl Grid.Row="0" DataContext="{Binding Context}"/>
+        <views:DashboardControl Grid.Row="1" DataContext="{Binding Context}"/>
     </Grid>
 </UserControl>

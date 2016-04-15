@@ -101,7 +101,8 @@
                         <project:ProjectControl DataContext="{Binding Project}"/>
                     </TabItem>
                     <TabItem Header="Options" Classes="property">
-                        <ContentControl Content="{Binding Project.Options}"/>
+                        <!--<ContentControl Content="{Binding Project.Options}"/>-->
+                        <presenters:CachedContentPresenter DataContext="{Binding Project.Options}"/>
                     </TabItem>
                     <TabItem Header="Images" Classes="property">
                         <project:ImagesControl DataContext="{Binding Project}"/>
@@ -136,7 +137,10 @@
             <Border Name="rightPanelBottom" Classes="rightBottom" Grid.Row="2">
                 <TabControl Classes="bottom">
                     <TabItem Header="Shape" Classes="property">
-                        <ScrollViewer Content="{Binding Project.CurrentContainer.CurrentShape}"/>
+                        <!--<ScrollViewer Content="{Binding Project.CurrentContainer.CurrentShape}"/>-->
+                        <ScrollViewer>
+                            <presenters:CachedContentPresenter DataContext="{Binding Project.CurrentContainer.CurrentShape}"/>
+                        </ScrollViewer>
                     </TabItem>
                     <TabItem Header="Data" Classes="property">
                         <ScrollViewer>
@@ -149,7 +153,10 @@
                         </ScrollViewer>
                     </TabItem>
                     <TabItem Header="Container" Classes="property">
-                        <ScrollViewer Content="{Binding Project.CurrentContainer}"/>
+                        <!--<ScrollViewer Content="{Binding Project.CurrentContainer}"/>-->
+                        <ScrollViewer>
+                            <presenters:CachedContentPresenter DataContext="{Binding Project.CurrentContainer}"/>
+                        </ScrollViewer>
                     </TabItem>
                     <TabItem Header="Template" Classes="property">
                         <ScrollViewer>
