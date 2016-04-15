@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Perspex;
 using Perspex.Controls;
-using Perspex.Markup.Xaml;
 
 namespace Core2D.Perspex.Windows
 {
@@ -16,7 +16,7 @@ namespace Core2D.Perspex.Windows
         public MainWindow()
         {
             this.InitializeComponent();
-            App.AttachDevTools(this);
+            this.AttachDevTools();
         }
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace Core2D.Perspex.Windows
         /// </summary>
         private void InitializeComponent()
         {
-            PerspexXamlLoader.Load(this);
+            this.LoadFromXaml();
         }
     }
 }

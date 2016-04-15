@@ -1,7 +1,5 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-//#define SKIA_WIN
-//#define SKIA_GTK
 using Core2D.Editor;
 using Core2D.Editor.Designer;
 using Core2D.Editor.Factories;
@@ -9,29 +7,15 @@ using Core2D.Editor.Interfaces;
 using Core2D.Interfaces;
 using Core2D.Project;
 using Core2D.Renderer;
-using Core2D.Shapes;
-using Core2D.Style;
 using FileWriter.Dxf;
 using FileWriter.Pdf_core;
 using Log.Trace;
 using Perspex;
 using Perspex.Controls;
-using Perspex.Diagnostics;
-using Perspex.Logging.Serilog;
-using Perspex.Markup.Xaml;
-#if SKIA_WIN
-using Perspex.Win32;
-using Perspex.Skia;
-#endif
-#if SKIA_GTK
-using Perspex.Gtk;
-using Perspex.Skia;
-#endif
 using Renderer.Perspex;
 using Serializer.Newtonsoft;
 using Serializer.ProtoBuf;
 using Serializer.Xaml;
-using Serilog;
 using System;
 using System.Linq;
 using System.Reflection;
@@ -71,58 +55,6 @@ namespace Core2D.Perspex
         public App()
         {
             RegisterServices();
-#if SKIA_WIN
-            Win32Platform.Initialize();
-            SkiaPlatform.Initialize();
-#elif SKIA_GTK
-            GtkPlatform.Initialize();
-            SkiaPlatform.Initialize();
-#else
-            InitializeSubsystems((int)Environment.OSVersion.Platform);
-#endif
-            InitializeComponent();
-            InitializeLogging();
-        }
-
-        /// <summary>
-        /// Initialize the Xaml components.
-        /// </summary>
-        private void InitializeComponent()
-        {
-            PerspexXamlLoader.Load(this);
-        }
-
-        /// <summary>
-        /// Initialize the Serilog logger.
-        /// </summary>
-        private void InitializeLogging()
-        {
-#if DEBUG
-            SerilogLogger.Initialize(new LoggerConfiguration()
-                .MinimumLevel.Warning()
-                .WriteTo.Trace(outputTemplate: "{Area}: {Message}")
-                .CreateLogger());
-#endif
-        }
-
-        /// <summary>
-        /// Attach development tool in debug mode.
-        /// </summary>
-        /// <param name="window"></param>
-        public static void AttachDevTools(Window window)
-        {
-#if DEBUG
-            DevTools.Attach(window);
-#endif
-        }
-
-        /// <summary>
-        /// Program entry point.
-        /// </summary>
-        /// <param name="args">The program arguments.</param>
-        private static void Main(string[] args)
-        {
-            new App().Start();
         }
 
         /// <summary>
