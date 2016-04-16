@@ -57,5 +57,15 @@
         </ContentControl.DataTemplates>
     </ContentControl>
     -->
-    <presenters:CachedContentPresenter DataContext="{Binding CurrentView}"/>
+    <!--<presenters:CachedContentPresenter DataContext="{Binding CurrentView}"/>-->
+    <Carousel Items="{Binding Views}" SelectedItem="{Binding CurrentView, Mode=TwoWay}" IsVirtualized="False">
+        <Carousel.DataTemplates>
+            <DataTemplate DataType="Views:DashboardView">
+                <views:DashboardViewControl/>
+            </DataTemplate>
+            <DataTemplate DataType="Views:EditorView">
+                <views:EditorViewControl/>
+            </DataTemplate>
+        </Carousel.DataTemplates>
+    </Carousel>
 </Window>
