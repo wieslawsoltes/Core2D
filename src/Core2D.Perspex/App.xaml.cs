@@ -70,7 +70,6 @@ namespace Core2D.Perspex
                 {
                     InitializeEditor(log);
                     LoadRecent();
-
                     _mainWindow = new Windows.MainWindow();
                     _mainWindow.Closed += (sender, e) => SaveRecent();
                     _mainWindow.DataContext = _editor;
