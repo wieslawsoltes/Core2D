@@ -2107,6 +2107,8 @@ namespace Core2D.Editor
             Project = null;
             ProjectPath = string.Empty;
             IsProjectDirty = false;
+
+            GC.Collect();
         }
 
         /// <summary>
