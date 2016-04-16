@@ -34,7 +34,6 @@ namespace Core2D.Perspex
         private Windows.MainWindow _mainWindow;
         private string _recentFileName = "Core2D.recent";
         private string _logFileName = "Core2D.log";
-        private bool _enableRecent = true;
 
         /// <summary>
         /// Initializes static data.
@@ -104,20 +103,17 @@ namespace Core2D.Perspex
         /// </summary>
         private void LoadRecent()
         {
-            if (_enableRecent)
+            try
             {
-                try
+                var path = System.IO.Path.Combine(GetAssemblyPath(), _recentFileName);
+                if (System.IO.File.Exists(path))
                 {
-                    var path = System.IO.Path.Combine(GetAssemblyPath(), _recentFileName);
-                    if (System.IO.File.Exists(path))
-                    {
-                        _editor.LoadRecent(path);
-                    }
+                    _editor.LoadRecent(path);
                 }
-                catch (Exception ex)
-                {
-                    _editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
-                }
+            }
+            catch (Exception ex)
+            {
+                _editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
@@ -126,17 +122,14 @@ namespace Core2D.Perspex
         /// </summary>
         private void SaveRecent()
         {
-            if (_enableRecent)
+            try
             {
-                try
-                {
-                    var path = System.IO.Path.Combine(GetAssemblyPath(), _recentFileName);
-                    _editor.SaveRecent(path);
-                }
-                catch (Exception ex)
-                {
-                    _editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
-                }
+                var path = System.IO.Path.Combine(GetAssemblyPath(), _recentFileName);
+                _editor.SaveRecent(path);
+            }
+            catch (Exception ex)
+            {
+                _editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
