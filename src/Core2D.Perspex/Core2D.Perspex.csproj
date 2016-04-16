@@ -224,6 +224,7 @@
     <Compile Include="Converters\ObjectToJsonStringConverter.cs" />
     <Compile Include="Converters\TreeViewSelectedItemToObjectConverter.cs" />
     <Compile Include="Interactions\Behaviors\BindTagToVisualRootDataContextBehavior.cs" />
+    <Compile Include="Presenters\CachedContentPresenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Views\DashboardMenuControl.xaml.cs">
       <DependentUpon>DashboardMenuControl.xaml</DependentUpon>

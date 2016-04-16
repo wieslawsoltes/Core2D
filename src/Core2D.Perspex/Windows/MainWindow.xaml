@@ -5,6 +5,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:Core2D.Perspex;assembly=Core2D.Perspex"
         xmlns:converters="clr-namespace:Core2D.Perspex.Converters;assembly=Core2D.Perspex"
+        xmlns:presenters="clr-namespace:Core2D.Perspex.Presenters;assembly=Core2D.Perspex"
         xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D"
         xmlns:Views="clr-namespace:Core2D.Editor.Views;assembly=Core2D"
         xmlns:views="clr-namespace:Core2D.Perspex.Views;assembly=Core2D.Perspex"
@@ -44,14 +45,17 @@
         <KeyBinding Command="{Static Editor:Commands.ObjectBrowserCommand}" Gesture="Ctrl+J"/>
         <KeyBinding Command="{Static Editor:Commands.DocumentViewerCommand}" Gesture="Ctrl+D"/>
     </Window.KeyBindings>
+    <!--
     <ContentControl Content="{Binding CurrentView}">
         <ContentControl.DataTemplates>
             <DataTemplate DataType="Views:DashboardView">
-                <views:DashboardViewControl DataContext="{Binding Context}"/>
+                <views:DashboardViewControl/>
             </DataTemplate>
             <DataTemplate DataType="Views:EditorView">
-                <views:EditorViewControl DataContext="{Binding Context}"/>
+                <views:EditorViewControl/>
             </DataTemplate>
         </ContentControl.DataTemplates>
     </ContentControl>
+    -->
+    <presenters:CachedContentPresenter DataContext="{Binding CurrentView}"/>
 </Window>
