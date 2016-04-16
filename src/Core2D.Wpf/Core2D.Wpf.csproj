@@ -304,7 +304,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Util\DesignerHelper.cs" />
     <Compile Include="Util\WpfCommandManager.cs" />
     <Compile Include="Util\WpfFileSystem.cs" />
     <Compile Include="Util\WpfTextClipboard.cs" />

@@ -7,11 +7,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Core2D.Wpf" 
              xmlns:converters="clr-namespace:Core2D.Wpf.Converters" 
+             xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D"
              xmlns:core="clr-namespace:Core2D;assembly=Core2D" 
              xmlns:custom="clr-namespace:Core2D.Wpf.Controls.Custom"
              xmlns:lists="clr-namespace:Core2D.Wpf.Controls.Custom.Lists"
              mc:Ignorable="d" 
-             d:DataContext="{x:Static local:DesignerHelper.Group}"
+             d:DataContext="{x:Static Designer:DesignerContext.Group}"
              d:DesignWidth="250" d:DesignHeight="400">
     <TabControl>
         <TabItem Header="Group">

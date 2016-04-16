@@ -7,10 +7,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Core2D.Wpf" 
              xmlns:converters="clr-namespace:Core2D.Wpf.Converters" 
+             xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D"
              xmlns:Shape="clr-namespace:Core2D.Shape;assembly=Core2D" 
              xmlns:custom="clr-namespace:Core2D.Wpf.Controls.Custom"
              mc:Ignorable="d" 
-             d:DataContext="{x:Static local:DesignerHelper.Layer}"
+             d:DataContext="{x:Static Designer:DesignerContext.Layer}"
              d:DesignWidth="250" d:DesignHeight="400">
     <TabControl>
         <TabItem Header="Layer">

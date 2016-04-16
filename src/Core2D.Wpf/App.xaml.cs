@@ -1,13 +1,12 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Core2D.Editor;
+using Core2D.Editor.Designer;
 using Core2D.Editor.Factories;
 using Core2D.Editor.Interfaces;
 using Core2D.Interfaces;
 using Core2D.Project;
 using Core2D.Renderer;
-using Core2D.Shapes;
-using Core2D.Style;
 using FileWriter.Dxf;
 using FileWriter.Emf;
 using FileWriter.Pdf_wpf;
@@ -38,6 +37,19 @@ namespace Core2D.Wpf
         private string _recentFileName = "Core2D.recent";
         private string _logFileName = "Core2D.log";
         private bool _enableRecent = true;
+
+        /// <summary>
+        /// Initializes static data.
+        /// </summary>
+        static App()
+        {
+            DesignerContext.InitializeContext(
+                new WpfRenderer(),
+                new WpfTextClipboard(),
+                new ProtoBufStreamSerializer(),
+                new NewtonsoftTextSerializer(),
+                new PortableXamlSerializer());
+        }
 
         /// <summary>
         /// Raises the <see cref="Application.Startup"/> event.

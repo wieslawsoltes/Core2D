@@ -7,11 +7,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Core2D.Wpf" 
              xmlns:converters="clr-namespace:Core2D.Wpf.Converters" 
+             xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D"
              xmlns:core="clr-namespace:Core2D;assembly=Core2D" 
              xmlns:custom="clr-namespace:Core2D.Wpf.Controls.Custom"
              xmlns:p="clr-namespace:Core2D.Wpf.Properties"
              mc:Ignorable="d" 
-             d:DataContext="{x:Static local:DesignerHelper.Document}"
+             d:DataContext="{x:Static Designer:DesignerContext.Document}"
              d:DesignWidth="250" d:DesignHeight="400">
     <StackPanel>
         <Grid>
