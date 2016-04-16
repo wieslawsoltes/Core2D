@@ -101,7 +101,6 @@
                         <project:ProjectControl DataContext="{Binding Project}"/>
                     </TabItem>
                     <TabItem Header="Options" Classes="property">
-                        <!--<ContentControl Content="{Binding Project.Options}"/>-->
                         <presenters:CachedContentPresenter DataContext="{Binding Project.Options}"/>
                     </TabItem>
                     <TabItem Header="Images" Classes="property">
@@ -137,7 +136,6 @@
             <Border Name="rightPanelBottom" Classes="rightBottom" Grid.Row="2">
                 <TabControl Classes="bottom">
                     <TabItem Header="Shape" Classes="property">
-                        <!--<ScrollViewer Content="{Binding Project.CurrentContainer.CurrentShape}"/>-->
                         <ScrollViewer>
                             <presenters:CachedContentPresenter DataContext="{Binding Project.CurrentContainer.CurrentShape}"/>
                         </ScrollViewer>
@@ -153,7 +151,6 @@
                         </ScrollViewer>
                     </TabItem>
                     <TabItem Header="Container" Classes="property">
-                        <!--<ScrollViewer Content="{Binding Project.CurrentContainer}"/>-->
                         <ScrollViewer>
                             <presenters:CachedContentPresenter DataContext="{Binding Project.CurrentContainer}"/>
                         </ScrollViewer>
