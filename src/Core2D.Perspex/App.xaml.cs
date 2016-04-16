@@ -1,12 +1,28 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Data;
+using Core2D.Data.Database;
 using Core2D.Editor;
 using Core2D.Editor.Designer;
 using Core2D.Editor.Factories;
 using Core2D.Editor.Interfaces;
+using Core2D.Editor.Views;
 using Core2D.Interfaces;
+using Core2D.Path;
+using Core2D.Path.Segments;
+using Core2D.Perspex.Controls.Data;
+using Core2D.Perspex.Controls.Path;
+using Core2D.Perspex.Controls.Project;
+using Core2D.Perspex.Controls.Shapes;
+using Core2D.Perspex.Controls.State;
+using Core2D.Perspex.Controls.Style;
+using Core2D.Perspex.Presenters;
+using Core2D.Perspex.Views;
 using Core2D.Project;
 using Core2D.Renderer;
+using Core2D.Shape;
+using Core2D.Shapes;
+using Core2D.Style;
 using FileWriter.Dxf;
 using FileWriter.Pdf_core;
 using Log.Trace;
@@ -17,6 +33,7 @@ using Serializer.Newtonsoft;
 using Serializer.ProtoBuf;
 using Serializer.Xaml;
 using System;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -46,6 +63,61 @@ namespace Core2D.Perspex
                 new ProtoBufStreamSerializer(),
                 new NewtonsoftTextSerializer(),
                 new PortableXamlSerializer());
+
+            // Views
+            CachedContentPresenter.Register(typeof(DashboardView), () => new DashboardViewControl());
+            CachedContentPresenter.Register(typeof(EditorView), () => new EditorViewControl());
+
+            // Project
+            CachedContentPresenter.Register(typeof(XOptions), () => new OptionsControl());
+            CachedContentPresenter.Register(typeof(XTemplate), () => new TemplateControl());
+            CachedContentPresenter.Register(typeof(XPage), () => new PageControl());
+
+            // Data
+            CachedContentPresenter.Register(typeof(ImmutableArray<XColumn>), () => new ColumnsControl());
+            CachedContentPresenter.Register(typeof(XDatabase), () => new DatabaseControl());
+            CachedContentPresenter.Register(typeof(XContext), () => new DataControl());
+            CachedContentPresenter.Register(typeof(ImmutableArray<XProperty>), () => new PropertiesControl());
+            CachedContentPresenter.Register(typeof(XRecord), () => new RecordControl());
+            CachedContentPresenter.Register(typeof(ImmutableArray<XRecord>), () => new RecordsControl());
+
+            // Path
+            CachedContentPresenter.Register(typeof(XArcSegment), () => new ArcSegmentControl());
+            CachedContentPresenter.Register(typeof(XCubicBezierSegment), () => new CubicBezierSegmentControl());
+            CachedContentPresenter.Register(typeof(XLineSegment), () => new LineSegmentControl());
+            CachedContentPresenter.Register(typeof(XPathFigure), () => new PathFigureControl());
+            CachedContentPresenter.Register(typeof(XPathGeometry), () => new PathGeometryControl());
+            CachedContentPresenter.Register(typeof(XPathSize), () => new PathSizeControl());
+            CachedContentPresenter.Register(typeof(XPolyCubicBezierSegment), () => new PolyCubicBezierSegmentControl());
+            CachedContentPresenter.Register(typeof(XPolyLineSegment), () => new PolyLineSegmentControl());
+            CachedContentPresenter.Register(typeof(XPolyQuadraticBezierSegment), () => new PolyQuadraticBezierSegmentControl());
+            CachedContentPresenter.Register(typeof(XQuadraticBezierSegment), () => new QuadraticBezierSegmentControl());
+
+            // Shapes
+            CachedContentPresenter.Register(typeof(XArc), () => new ArcControl());
+            CachedContentPresenter.Register(typeof(XCubicBezier), () => new CubicBezierControl());
+            CachedContentPresenter.Register(typeof(XEllipse), () => new EllipseControl());
+            CachedContentPresenter.Register(typeof(XGroup), () => new GroupControl());
+            CachedContentPresenter.Register(typeof(XImage), () => new ImageControl());
+            CachedContentPresenter.Register(typeof(XLine), () => new LineControl());
+            CachedContentPresenter.Register(typeof(XPath), () => new PathControl());
+            CachedContentPresenter.Register(typeof(XPoint), () => new PointControl());
+            CachedContentPresenter.Register(typeof(XQuadraticBezier), () => new QuadraticBezierControl());
+            CachedContentPresenter.Register(typeof(XRectangle), () => new RectangleControl());
+            CachedContentPresenter.Register(typeof(XText), () => new TextControl());
+
+            // State
+            CachedContentPresenter.Register(typeof(ShapeState), () => new ShapeStateControl());
+
+            // Style
+            CachedContentPresenter.Register(typeof(ArgbColor), () => new ArgbColorControl());
+            CachedContentPresenter.Register(typeof(ArrowStyle), () => new ArrowStyleControl());
+            CachedContentPresenter.Register(typeof(FontStyle), () => new FontStyleControl());
+            CachedContentPresenter.Register(typeof(LineFixedLength), () => new LineFixedLengthControl());
+            CachedContentPresenter.Register(typeof(LineStyle), () => new LineStyleControl());
+            CachedContentPresenter.Register(typeof(ShapeStyle), () => new ShapeStyleControl());
+            CachedContentPresenter.Register(typeof(BaseStyle), () => new StyleControl());
+            CachedContentPresenter.Register(typeof(TextStyle), () => new TextStyleControl());
         }
 
         /// <summary>
