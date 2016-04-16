@@ -141,6 +141,11 @@
                         <ScrollViewer>
                             <presenters:CachedContentPresenter DataContext="{Binding Project.CurrentContainer.CurrentShape}"/>
                         </ScrollViewer>
+                        <!--
+                        <ScrollViewer>
+                            <Carousel Items="{Binding Project.CurrentContainer.CurrentLayer.Shapes}" SelectedItem="{Binding Project.CurrentContainer.CurrentShape, Mode=TwoWay}" IsVirtualized="False"/>
+                        </ScrollViewer>
+                        -->
                     </TabItem>
                     <TabItem Header="Data" Classes="property">
                         <ScrollViewer>
