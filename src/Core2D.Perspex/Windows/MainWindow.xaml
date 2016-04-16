@@ -45,19 +45,6 @@
         <KeyBinding Command="{Static Editor:Commands.ObjectBrowserCommand}" Gesture="Ctrl+J"/>
         <KeyBinding Command="{Static Editor:Commands.DocumentViewerCommand}" Gesture="Ctrl+D"/>
     </Window.KeyBindings>
-    <!--
-    <ContentControl Content="{Binding CurrentView}">
-        <ContentControl.DataTemplates>
-            <DataTemplate DataType="Views:DashboardView">
-                <views:DashboardViewControl/>
-            </DataTemplate>
-            <DataTemplate DataType="Views:EditorView">
-                <views:EditorViewControl/>
-            </DataTemplate>
-        </ContentControl.DataTemplates>
-    </ContentControl>
-    -->
-    <!--<presenters:CachedContentPresenter DataContext="{Binding CurrentView}"/>-->
     <Carousel Items="{Binding Views}" SelectedItem="{Binding CurrentView, Mode=TwoWay}" IsVirtualized="False">
         <Carousel.DataTemplates>
             <DataTemplate DataType="Views:DashboardView">
