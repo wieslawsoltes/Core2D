@@ -69,6 +69,9 @@ rmdir /Q /S tests\Core2D.Wpf.UnitTests\obj
 rmdir /Q /S src\Core2D\bin
 rmdir /Q /S src\Core2D\obj
 
+rmdir /Q /S src\Core2D.Perspex.Shared\bin
+rmdir /Q /S src\Core2D.Perspex.Shared\obj
+
 rmdir /Q /S src\Core2D.Perspex\bin
 rmdir /Q /S src\Core2D.Perspex\obj
 
