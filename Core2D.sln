@@ -5,8 +5,6 @@ VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dependencies", "dependencies", "{9DA997E2-E367-481C-B48A-278274034A26}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{8756F874-0C1B-4AB8-83E0-0BEDA782D212}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileWriter.Dxf", "dependencies\FileWriter.Dxf\FileWriter.Dxf.csproj", "{D40B3BCD-0A26-40BB-960B-9464D248C934}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileWriter.Emf", "dependencies\FileWriter.Emf\FileWriter.Emf.csproj", "{3660FCE5-3D0F-412E-93A7-D0D992B4DA65}"
@@ -27,20 +25,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Renderer.WinForms", "depend
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Renderer.Wpf", "dependencies\Renderer.Wpf\Renderer.Wpf.csproj", "{3BFBD239-8979-480D-B1CB-B763F7C915C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.UnitTests", "tests\Core2D.UnitTests\Core2D.UnitTests.csproj", "{AB31E0E2-9090-4461-84BE-5C5AAA19758F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileSystem.DotNetFx.UnitTests", "tests\FileSystem.DotNetFx.UnitTests\FileSystem.DotNetFx.UnitTests.csproj", "{E9C30F6F-00DD-494A-8E7C-253A5C76E999}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D", "src\Core2D\Core2D.csproj", "{4EE581B0-45F3-4D7E-BEAE-277ABF5F3FDD}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BC6BAFE6-1735-4549-A7CC-819274780B38}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.Wpf", "src\Core2D.Wpf\Core2D.Wpf.csproj", "{12889680-3769-4914-BE60-5D09E83DF5B2}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.Perspex", "src\Core2D.Perspex\Core2D.Perspex.csproj", "{7ACB3221-EE78-43A9-AD7D-35DB687EC44C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.Perspex.Direct2D", "src\Core2D.Perspex.Direct2D\Core2D.Perspex.Direct2D.csproj", "{4868069E-3AD4-497E-9B8E-148D1EEACFD7}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Renderer.Perspex", "dependencies\Renderer.Perspex\Renderer.Perspex.csproj", "{E05F3F7E-2176-43DC-90BB-F5C66CFDB12F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serializer.Newtonsoft", "dependencies\Serializer.Newtonsoft\Serializer.Newtonsoft.csproj", "{11E61A53-13D5-4447-8D66-3F328BBFC30A}"
@@ -55,7 +39,23 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextFieldWriter.CsvHelper",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileSystem.DotNetFx", "dependencies\FileSystem.DotNetFx\FileSystem.DotNetFx.csproj", "{D1F867F7-9029-480D-B1E1-B0BE4658B182}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BC6BAFE6-1735-4549-A7CC-819274780B38}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D", "src\Core2D\Core2D.csproj", "{4EE581B0-45F3-4D7E-BEAE-277ABF5F3FDD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.Perspex", "src\Core2D.Perspex\Core2D.Perspex.csproj", "{7ACB3221-EE78-43A9-AD7D-35DB687EC44C}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.Perspex.Cairo", "src\Core2D.Perspex.Cairo\Core2D.Perspex.Cairo.csproj", "{5ED631EC-651F-44D6-A99D-D1202F212656}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.Perspex.Direct2D", "src\Core2D.Perspex.Direct2D\Core2D.Perspex.Direct2D.csproj", "{4868069E-3AD4-497E-9B8E-148D1EEACFD7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.Wpf", "src\Core2D.Wpf\Core2D.Wpf.csproj", "{12889680-3769-4914-BE60-5D09E83DF5B2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{8756F874-0C1B-4AB8-83E0-0BEDA782D212}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.UnitTests", "tests\Core2D.UnitTests\Core2D.UnitTests.csproj", "{AB31E0E2-9090-4461-84BE-5C5AAA19758F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileSystem.DotNetFx.UnitTests", "tests\FileSystem.DotNetFx.UnitTests\FileSystem.DotNetFx.UnitTests.csproj", "{E9C30F6F-00DD-494A-8E7C-253A5C76E999}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
