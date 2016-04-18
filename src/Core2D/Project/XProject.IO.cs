@@ -16,11 +16,6 @@ namespace Core2D.Project
     public partial class XProject
     {
         /// <summary>
-        /// Project ProtoBuf data entry name.
-        /// </summary>
-        public const string ProjectProtoBufEntryName = "Project.bin";
-
-        /// <summary>
         /// Project Json data entry name.
         /// </summary>
         public const string ProjectJsonEntryName = "Project.json";
@@ -29,72 +24,6 @@ namespace Core2D.Project
         /// Image Key prefix entry name.
         /// </summary>
         public const string ImageEntryNamePrefix = "Images\\";
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="path"></param>
-        /// <param name="fileIO"></param>
-        /// <param name="serializer"></param>
-        /// <returns></returns>
-        public static XProject Open(string path, IFileSystem fileIO, IStreamSerializer serializer)
-        {
-            using (var stream = fileIO.Open(path))
-            {
-                return Open(stream, fileIO, serializer);
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="project"></param>
-        /// <param name="path"></param>
-        /// <param name="fileIO"></param>
-        /// <param name="serializer"></param>
-        public static void Save(XProject project, string path, IFileSystem fileIO, IStreamSerializer serializer)
-        {
-            using (var stream = fileIO.Create(path))
-            {
-                Save(project, stream, fileIO, serializer);
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="stream"></param>
-        /// <param name="fileIO"></param>
-        /// <param name="serializer"></param>
-        /// <returns></returns>
-        public static XProject Open(Stream stream, IFileSystem fileIO, IStreamSerializer serializer)
-        {
-            using (var archive = new ZipArchive(stream, ZipArchiveMode.Read))
-            {
-                var projectEntry = archive.Entries.FirstOrDefault(e => e.FullName == ProjectProtoBufEntryName);
-                var project = ReadProject(projectEntry, serializer);
-                ReadImages(project, archive, fileIO);
-                return project;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="project"></param>
-        /// <param name="stream"></param>
-        /// <param name="fileIO"></param>
-        /// <param name="serializer"></param>
-        public static void Save(XProject project, Stream stream, IFileSystem fileIO, IStreamSerializer serializer)
-        {
-            using (var archive = new ZipArchive(stream, ZipArchiveMode.Create))
-            {
-                var projectEntry = archive.CreateEntry(ProjectProtoBufEntryName);
-                WriteProject(project, projectEntry, serializer);
-                var keys = GetUsedKeys(project);
-                WriteImages(project, keys, archive, fileIO);
-            }
-        }
 
         /// <summary>
         /// 
@@ -165,22 +94,6 @@ namespace Core2D.Project
         private static IEnumerable<string> GetUsedKeys(XProject project)
         {
             return XProject.GetAllShapes<XImage>(project).Select(i => i.Key).Distinct();
-        }
-
-        private static XProject ReadProject(ZipArchiveEntry projectEntry, IStreamSerializer serializer)
-        {
-            using (var entryStream = projectEntry.Open())
-            {
-                return serializer.Deserialize<XProject>(entryStream, null);
-            }
-        }
-
-        private static void WriteProject(XProject project, ZipArchiveEntry projectEntry, IStreamSerializer serializer)
-        {
-            using (var entryStream = projectEntry.Open())
-            {
-                serializer.Serialize(entryStream, project);
-            }
         }
 
         private static XProject ReadProject(ZipArchiveEntry projectEntry, IFileSystem fileIO, ITextSerializer serializer)
