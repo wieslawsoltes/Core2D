@@ -401,7 +401,7 @@ namespace Core2D.Wpf.Views
         {
             try
             {
-                LoadLayout(System.IO.Path.Combine(App.GetAssemblyPath(), _defaultLayoutFileName));
+                LoadLayout(System.IO.Path.Combine(_projectEditor?.FileIO?.AssemblyPath, _defaultLayoutFileName));
             }
             catch (Exception ex)
             {
@@ -416,7 +416,7 @@ namespace Core2D.Wpf.Views
         {
             try
             {
-                SaveLayout(System.IO.Path.Combine(App.GetAssemblyPath(), _defaultLayoutFileName));
+                SaveLayout(System.IO.Path.Combine(_projectEditor?.FileIO?.AssemblyPath, _defaultLayoutFileName));
             }
             catch (Exception ex)
             {
