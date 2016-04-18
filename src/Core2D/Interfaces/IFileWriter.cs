@@ -9,6 +9,16 @@ namespace Core2D.Interfaces
     public interface IFileWriter
     {
         /// <summary>
+        /// Gets file writer name.
+        /// </summary>
+        string Name { get; }
+
+        /// <summary>
+        /// Gets file writer extension.
+        /// </summary>
+        string Extension { get; }
+
+        /// <summary>
         /// Save object item to a file.
         /// </summary>
         /// <param name="path">The file path.</param>

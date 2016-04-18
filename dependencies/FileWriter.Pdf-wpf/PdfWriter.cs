@@ -22,6 +22,12 @@ namespace FileWriter.Pdf_core
     public sealed class PdfWriter : IFileWriter
     {
         /// <inheritdoc/>
+        string IFileWriter.Name { get; } = "Pdf";
+
+        /// <inheritdoc/>
+        string IFileWriter.Extension { get; } = "pdf";
+
+        /// <inheritdoc/>
         void IFileWriter.Save(string path, object item, object options)
         {
             if (string.IsNullOrEmpty(path) || item == null)

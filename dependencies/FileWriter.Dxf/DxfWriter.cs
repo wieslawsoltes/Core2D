@@ -14,6 +14,12 @@ namespace FileWriter.Dxf
     public sealed class DxfWriter : IFileWriter
     {
         /// <inheritdoc/>
+        string IFileWriter.Name { get; } = "Dxf";
+
+        /// <inheritdoc/>
+        string IFileWriter.Extension { get; } = "dxf";
+
+        /// <inheritdoc/>
         void IFileWriter.Save(string path, object item, object options)
         {
             if (string.IsNullOrEmpty(path) || item == null)

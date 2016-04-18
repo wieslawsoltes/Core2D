@@ -25,6 +25,12 @@ namespace FileWriter.Emf
     /// </summary>
     public sealed class EmfWriter : IFileWriter
     {
+        /// <inheritdoc/>
+        string IFileWriter.Name { get; } = "Emf";
+
+        /// <inheritdoc/>
+        string IFileWriter.Extension { get; } = "emf";
+
         /// <summary>
         /// 
         /// </summary>
