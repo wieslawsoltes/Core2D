@@ -580,6 +580,10 @@
       <Project>{87302d12-1184-402d-bf23-a5699f3d0bb4}</Project>
       <Name>TextFieldWriter.CsvHelper</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Core2D.Perspex.Shared\Core2D.Perspex.Shared.csproj">
+      <Project>{7acb3221-ee78-43a9-ad7d-35db687ec44c}</Project>
+      <Name>Core2D.Perspex.Shared</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Core2D\Core2D.csproj">
       <Project>{4ee581b0-45f3-4d7e-beae-277abf5f3fdd}</Project>
       <Name>Core2D</Name>
