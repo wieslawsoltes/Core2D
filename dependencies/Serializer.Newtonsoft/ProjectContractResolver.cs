@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using System.Reflection;
 
 namespace Serializer.Newtonsoft
 {
@@ -15,7 +16,7 @@ namespace Serializer.Newtonsoft
         /// <inheritdoc/>
         public override JsonContract ResolveContract(Type type)
         {
-            if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(IList<>))
+            if (type.GetTypeInfo().IsGenericType && type.GetGenericTypeDefinition() == typeof(IList<>))
             {
                 return base
                     .ResolveContract(typeof(ImmutableArray<>)
