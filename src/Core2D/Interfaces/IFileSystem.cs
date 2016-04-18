@@ -10,24 +10,29 @@ namespace Core2D.Interfaces
     public interface IFileSystem
     {
         /// <summary>
-        /// 
+        /// Gets the location of the assembly as specified originally.
         /// </summary>
-        /// <param name="path"></param>
-        /// <returns></returns>
+        string AssemblyPath { get; }
+
+        /// <summary>
+        /// Determines whether the specified file exists.
+        /// </summary>
+        /// <param name="path">The file to check.</param>
+        /// <returns>True if path contains the name of an existing file; otherwise, false.</returns>
         bool Exists(string path);
 
         /// <summary>
-        /// 
+        /// Opens an existing file for reading.
         /// </summary>
-        /// <param name="path"></param>
-        /// <returns></returns>
+        /// <param name="path">The file to be opened for reading.</param>
+        /// <returns>A read-only stream on the specified path.</returns>
         Stream Open(string path);
 
         /// <summary>
-        /// 
+        /// Creates or overwrites a file in the specified path.
         /// </summary>
-        /// <param name="path"></param>
-        /// <returns></returns>
+        /// <param name="path">The path and name of the file to create.</param>
+        /// <returns> A stream that provides read/write access to the file specified in path.</returns>
         Stream Create(string path);
 
         /// <summary>
