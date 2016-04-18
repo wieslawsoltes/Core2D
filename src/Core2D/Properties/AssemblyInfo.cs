@@ -9,7 +9,5 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyProduct("Core2D")]
 [assembly: AssemblyCulture("")]
-
 [assembly: NeutralResourcesLanguage("en")]
-
 [assembly: InternalsVisibleTo("Core2D.UnitTests")]
