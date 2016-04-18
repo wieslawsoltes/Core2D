@@ -14,7 +14,7 @@ Core2D is an application for making data driven 2D diagrams.
 
 ## Data Formats
 
-* The project model is stored as `ProtoBuf` in `zip` archives.
+* The project model is stored as `Json` in `zip` archives.
 * The project images are stored  as files in `zip` archives.
 * Resources can be defined in `Json` or `Xaml` format.
 * The `Json` format is supported for imported and exported resources. 
@@ -24,8 +24,8 @@ Core2D is an application for making data driven 2D diagrams.
 
 ## Supported Platforms
 
-* Windows 7/8/8.1/10 for `Core2D.Wpf` and `Core2D.Perspex` builds.
-* XUbuntu 15.10 for `Core2D.Perspex` build.
+* Windows 7/8/8.1/10 for `Core2D.Wpf` and `Core2D.Perspex.Direct2D` builds.
+* XUbuntu 15.10 for `Core2D.Perspex.Cairo` build.
 
 The core library and editor are portable and should work on all platforms where C# is supported.
 
@@ -39,8 +39,6 @@ The core library and editor are portable and should work on all platforms where 
 * Common
   * System.Collections.Immutable
   * Portable.Xaml
-  * protobuf-net
-  * System.Reflection.Emit
   * Newtonsoft.Json
   * CsvHelper
   * netdxf (Currently using `git submodule` as `NuGet` version is outdated.)
@@ -75,7 +73,6 @@ The core library and editor are portable and should work on all platforms where 
 
 ### Other Dependencies
 
-* [Protocol Buffers library for idiomatic .NET.](https://github.com/mgravell/protobuf-net) Needed for ProtoBuf support.
 * [Portable .NET library for reading/writing xaml files.](https://github.com/cwensley/Portable.Xaml) Needed for Xaml support.
 * [.net dxf Reader-Writer](http://netdxf.codeplex.com/)  Needed for `DXF` support. Run `git submodule update --init --recursive` in project directory.
 * [xUnit.net unit testing tool for the .NET Framework.](https://github.com/xunit/xunit) Needed to run tests.
