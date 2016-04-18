@@ -317,6 +317,7 @@ namespace Core2D.Perspex
                     dlg.Filters.Add(new FileDialogFilter() { Name = "Project", Extensions = { "project" } });
                     dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
                     dlg.InitialFileName = _editor.Project.Name;
+                    dlg.DefaultExtension = "project";
                     var result = await dlg.ShowAsync(_mainWindow);
                     if (result != null)
                     {
@@ -374,7 +375,7 @@ namespace Core2D.Perspex
                 dlg.Filters.Add(new FileDialogFilter() { Name = "Xaml", Extensions = { "xaml" } });
                 dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
                 dlg.InitialFileName = _editor?.GetName(item);
-
+                dlg.DefaultExtension = "xaml";
                 var result = await dlg.ShowAsync(_mainWindow);
                 if (result != null)
                 {
@@ -431,7 +432,7 @@ namespace Core2D.Perspex
                 dlg.Filters.Add(new FileDialogFilter() { Name = "Json", Extensions = { "json" } });
                 dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
                 dlg.InitialFileName = _editor?.GetName(item);
-
+                dlg.DefaultExtension = "json";
                 var result = await dlg.ShowAsync(_mainWindow);
                 if (result != null)
                 {
@@ -488,6 +489,7 @@ namespace Core2D.Perspex
                 }
                 dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
                 dlg.InitialFileName = name;
+                dlg.DefaultExtension = _editor?.FileWriters.FirstOrDefault()?.Extension;
                 var result = await dlg.ShowAsync(_mainWindow);
                 if (result != null)
                 {
@@ -541,6 +543,7 @@ namespace Core2D.Perspex
                     dlg.Filters.Add(new FileDialogFilter() { Name = "Csv", Extensions = { "csv" } });
                     dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
                     dlg.InitialFileName = database.Name;
+                    dlg.DefaultExtension = "csv";
                     var result = await dlg.ShowAsync(_mainWindow);
                     if (result != null)
                     {
@@ -640,7 +643,7 @@ namespace Core2D.Perspex
                     dlg.Filters.Add(new FileDialogFilter() { Name = "Json", Extensions = { "json" } });
                     dlg.Filters.Add(new FileDialogFilter() { Name = "Xaml", Extensions = { "xaml" } });
                     dlg.InitialFileName = _editor?.GetName(item);
-
+                    dlg.DefaultExtension = "json";
                     var path = await dlg.ShowAsync(_mainWindow);
                     if (path != null)
                     {
