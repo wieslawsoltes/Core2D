@@ -5,6 +5,7 @@ using Core2D.Data.Database;
 using Core2D.Editor;
 using Core2D.Editor.Designer;
 using Core2D.Editor.Factories;
+using Core2D.Editor.Input;
 using Core2D.Editor.Interfaces;
 using Core2D.Editor.Views;
 using Core2D.Interfaces;
@@ -23,19 +24,16 @@ using Core2D.Renderer;
 using Core2D.Shape;
 using Core2D.Shapes;
 using Core2D.Style;
-using FileWriter.Dxf;
-using FileWriter.Pdf_core;
-using Log.Trace;
+// HACK: using FileWriter.Dxf;
+// HACK: using FileWriter.Pdf_core;
 using Perspex;
 using Perspex.Controls;
 using Renderer.Perspex;
 using Serializer.Newtonsoft;
-using Serializer.ProtoBuf;
 using Serializer.Xaml;
 using System;
 using System.Collections.Immutable;
 using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
 using TextFieldReader.CsvHelper;
 using TextFieldWriter.CsvHelper;
@@ -47,6 +45,8 @@ namespace Core2D.Perspex
     /// </summary>
     public class App : Application, IEditorApplication
     {
+        private IFileSystem _fileIO;
+        private ILog _log;
         private ProjectEditor _editor;
         private Windows.MainWindow _mainWindow;
         private string _recentFileName = "Core2D.recent";
@@ -60,7 +60,6 @@ namespace Core2D.Perspex
             DesignerContext.InitializeContext(
                 new PerspexRenderer(),
                 new PerspexTextClipboard(),
-                new ProtoBufStreamSerializer(),
                 new NewtonsoftTextSerializer(),
                 new PortableXamlSerializer());
 
@@ -131,43 +130,33 @@ namespace Core2D.Perspex
         /// <summary>
         /// Initialize application context and displays main window.
         /// </summary>
-        public void Start()
+        /// <param name="fileIO">The file system instance.</param>
+        /// <param name="log">The log instance.</param>
+        public void Start(IFileSystem fileIO, ILog log)
         {
-            using (ILog log = new TraceLog())
-            {
-                log.Initialize(System.IO.Path.Combine(GetAssemblyPath(), _logFileName));
+            _fileIO = fileIO;
+            _log = log;
 
-                try
+            _log.Initialize(System.IO.Path.Combine(_fileIO.AssemblyPath, _logFileName));
+
+            try
+            {
+                InitializeEditor(_fileIO, _log);
+                LoadRecent();
+                _mainWindow = new Windows.MainWindow();
+                _mainWindow.Closed += (sender, e) => SaveRecent();
+                _mainWindow.DataContext = _editor;
+                _mainWindow.Show();
+                Run(_mainWindow);
+            }
+            catch (Exception ex)
+            {
+                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                if (ex.InnerException != null)
                 {
-                    InitializeEditor(log);
-                    LoadRecent();
-                    _mainWindow = new Windows.MainWindow();
-                    _mainWindow.Closed += (sender, e) => SaveRecent();
-                    _mainWindow.DataContext = _editor;
-                    _mainWindow.Show();
-                    Run(_mainWindow);
-                }
-                catch (Exception ex)
-                {
-                    log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
-                    if (ex.InnerException != null)
-                    {
-                        log?.LogError($"{ex.InnerException.Message}{Environment.NewLine}{ex.InnerException.StackTrace}");
-                    }
+                    _log?.LogError($"{ex.InnerException.Message}{Environment.NewLine}{ex.InnerException.StackTrace}");
                 }
             }
-        }
-
-        /// <summary>
-        /// Gets the location of the assembly as specified originally.
-        /// </summary>
-        /// <returns>The location of the assembly as specified originally.</returns>
-        public static string GetAssemblyPath()
-        {
-            string codeBase = Assembly.GetExecutingAssembly().CodeBase;
-            var uri = new UriBuilder(codeBase);
-            string path = Uri.UnescapeDataString(uri.Path);
-            return System.IO.Path.GetDirectoryName(path);
         }
 
         /// <summary>
@@ -177,15 +166,15 @@ namespace Core2D.Perspex
         {
             try
             {
-                var path = System.IO.Path.Combine(GetAssemblyPath(), _recentFileName);
-                if (System.IO.File.Exists(path))
+                var path = System.IO.Path.Combine(_fileIO.AssemblyPath, _recentFileName);
+                if (_fileIO.Exists(path))
                 {
                     _editor.LoadRecent(path);
                 }
             }
             catch (Exception ex)
             {
-                _editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
@@ -196,20 +185,21 @@ namespace Core2D.Perspex
         {
             try
             {
-                var path = System.IO.Path.Combine(GetAssemblyPath(), _recentFileName);
+                var path = System.IO.Path.Combine(_fileIO.AssemblyPath, _recentFileName);
                 _editor.SaveRecent(path);
             }
             catch (Exception ex)
             {
-                _editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
         /// <summary>
         /// Initialize <see cref="Editor"/> object.
         /// </summary>
+        /// <param name="fileIO">The file system instance.</param>
         /// <param name="log">The log instance.</param>
-        public void InitializeEditor(ILog log)
+        public void InitializeEditor(IFileSystem fileIO, ILog log)
         {
             _editor = new ProjectEditor()
             {
@@ -217,16 +207,15 @@ namespace Core2D.Perspex
                 CurrentPathTool = PathTool.Line,
                 Application = this,
                 Log = log,
-                FileIO = new PerspexFileSystem(),
-                CommandManager = new PerspexCommandManager(),
+                FileIO = fileIO,
+                CommandManager = new CommandManager(),
                 Renderers = new ShapeRenderer[] { new PerspexRenderer(), new PerspexRenderer() },
                 ProjectFactory = new ProjectFactory(),
                 TextClipboard = new PerspexTextClipboard(),
-                ProtoBufSerializer = new ProtoBufStreamSerializer(),
                 JsonSerializer = new NewtonsoftTextSerializer(),
                 XamlSerializer = new PortableXamlSerializer(),
-                PdfWriter = new PdfWriter(),
-                DxfWriter = new DxfWriter(),
+                // HACK: PdfWriter = new PdfWriter(),
+                // HACK: DxfWriter = new DxfWriter(),
                 CsvReader = new CsvHelperReader(),
                 CsvWriter = new CsvHelperWriter(),
                 GetImageKey = async () => await (this as IEditorApplication).OnGetImageKeyAsync()
@@ -247,15 +236,18 @@ namespace Core2D.Perspex
                 if (result != null)
                 {
                     var path = result.FirstOrDefault();
-                    var bytes = System.IO.File.ReadAllBytes(path);
-                    var key = _editor?.Project?.AddImageFromFile(path, bytes);
-                    return key;
+                    using (var stream = _fileIO.Open(path))
+                    {
+                        var bytes = _fileIO.ReadBinary(stream);
+                        var key = _editor?.Project?.AddImageFromFile(path, bytes);
+                        return key;
+                    }
                 }
                 return null;
             }
             catch (Exception ex)
             {
-                _editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
                 return null;
             }
         }
@@ -279,7 +271,7 @@ namespace Core2D.Perspex
                 }
                 else
                 {
-                    if (System.IO.File.Exists(path))
+                    if (_fileIO.Exists(path))
                     {
                         _editor.Open(path);
                     }
@@ -287,7 +279,7 @@ namespace Core2D.Perspex
             }
             catch (Exception ex)
             {
-                _editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
@@ -307,7 +299,7 @@ namespace Core2D.Perspex
             }
             catch (Exception ex)
             {
-                _editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
@@ -331,7 +323,7 @@ namespace Core2D.Perspex
             }
             catch (Exception ex)
             {
-                _editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
@@ -358,7 +350,7 @@ namespace Core2D.Perspex
                 }
                 else
                 {
-                    if (System.IO.File.Exists(path))
+                    if (_fileIO.Exists(path))
                     {
                         _editor?.OnImportXaml(path);
                     }
@@ -366,7 +358,7 @@ namespace Core2D.Perspex
             }
             catch (Exception ex)
             {
-                _editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
@@ -388,7 +380,7 @@ namespace Core2D.Perspex
             }
             catch (Exception ex)
             {
-                _editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
@@ -415,7 +407,7 @@ namespace Core2D.Perspex
                 }
                 else
                 {
-                    if (System.IO.File.Exists(path))
+                    if (_fileIO.Exists(path))
                     {
                         _editor?.OnImportJson(path);
                     }
@@ -423,7 +415,7 @@ namespace Core2D.Perspex
             }
             catch (Exception ex)
             {
-                _editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
@@ -445,7 +437,7 @@ namespace Core2D.Perspex
             }
             catch (Exception ex)
             {
-                _editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
@@ -509,7 +501,7 @@ namespace Core2D.Perspex
             }
             catch (Exception ex)
             {
-                _editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
@@ -533,7 +525,7 @@ namespace Core2D.Perspex
             }
             catch (Exception ex)
             {
-                _editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
@@ -558,7 +550,7 @@ namespace Core2D.Perspex
             }
             catch (Exception ex)
             {
-                _editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
@@ -583,7 +575,7 @@ namespace Core2D.Perspex
             }
             catch (Exception ex)
             {
-                _editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
@@ -604,11 +596,11 @@ namespace Core2D.Perspex
                         foreach (var result in results)
                         {
                             string resultExtension = System.IO.Path.GetExtension(result);
-                            if (string.Compare(resultExtension, ".json", true) == 0)
+                            if (string.Compare(resultExtension, ".json", StringComparison.OrdinalIgnoreCase) == 0)
                             {
                                 _editor?.OnImportJson(result);
                             }
-                            else if (string.Compare(resultExtension, ".xaml", true) == 0)
+                            else if (string.Compare(resultExtension, ".xaml", StringComparison.OrdinalIgnoreCase) == 0)
                             {
                                 _editor?.OnImportJson(result);
                             }
@@ -617,14 +609,14 @@ namespace Core2D.Perspex
                 }
                 else
                 {
-                    if (System.IO.File.Exists(path))
+                    if (_fileIO.Exists(path))
                     {
                         string resultExtension = System.IO.Path.GetExtension(path);
-                        if (string.Compare(resultExtension, ".json", true) == 0)
+                        if (string.Compare(resultExtension, ".json", StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             _editor?.OnImportJson(path);
                         }
-                        else if (string.Compare(resultExtension, ".xaml", true) == 0)
+                        else if (string.Compare(resultExtension, ".xaml", StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             _editor?.OnImportJson(path);
                         }
@@ -633,7 +625,7 @@ namespace Core2D.Perspex
             }
             catch (Exception ex)
             {
-                _editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
@@ -653,11 +645,11 @@ namespace Core2D.Perspex
                     if (path != null)
                     {
                         string resultExtension = System.IO.Path.GetExtension(path);
-                        if (string.Compare(resultExtension, ".json", true) == 0)
+                        if (string.Compare(resultExtension, ".json", StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             _editor?.OnExportJson(path, item);
                         }
-                        else if (string.Compare(resultExtension, ".xaml", true) == 0)
+                        else if (string.Compare(resultExtension, ".xaml", StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             _editor?.OnExportXaml(path, item);
                         }
@@ -666,7 +658,7 @@ namespace Core2D.Perspex
             }
             catch (Exception ex)
             {
-                _editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
