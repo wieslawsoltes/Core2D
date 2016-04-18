@@ -1,6 +1,8 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using System.Windows.Input;
 
 namespace Core2D.Editor.Input
@@ -8,7 +10,7 @@ namespace Core2D.Editor.Input
     /// <summary>
     /// Base class for core command manager.
     /// </summary>
-    public abstract class CommandManager
+    public class CommandManager
     {
         /// <summary>
         /// Gets or sets registered core commands.
@@ -53,6 +55,21 @@ namespace Core2D.Editor.Input
         /// <summary>
         /// Register editor commands.
         /// </summary>
-        public abstract void RegisterCommands();
+        public virtual void RegisterCommands()
+        {
+            Registered = typeof(Commands)
+                .GetRuntimeProperties()
+                .Where(p =>
+                {
+                    return (p.PropertyType == typeof(ICoreCommand)
+                        && p.GetMethod != null
+                        && p.SetMethod != null
+                        && p.SetMethod.IsStatic
+                        && p.GetMethod.IsStatic
+                        && p.GetMethod.IsPublic
+                        && p.SetMethod.IsPublic);
+                })
+                .ToDictionary(p => p.Name, p => (ICoreCommand)p.GetValue(null));
+        }
     }
 }
