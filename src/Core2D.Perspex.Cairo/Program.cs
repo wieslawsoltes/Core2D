@@ -2,10 +2,13 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Core2D.Interfaces;
 using FileSystem.DotNetFx;
+using FileWriter.Dxf;
+using FileWriter.Pdf_core;
 using Log.Trace;
 using Perspex;
 using Perspex.Logging.Serilog;
 using Serilog;
+using System.Collections.Immutable;
 
 namespace Core2D.Perspex.Cairo
 {
@@ -25,7 +28,14 @@ namespace Core2D.Perspex.Cairo
             using (ILog log = new TraceLog())
             {
                 IFileSystem fileIO = new DotNetFxFileSystem();
-                new App().UseGtk().UseCairo().LoadFromXaml().Start(fileIO, log);
+                ImmutableArray<IFileWriter> writers = 
+                    new IFileWriter[] 
+                    {
+                        new PdfWriter(),
+                        new DxfWriter()
+                    }.ToImmutableArray();
+
+                new App().UseGtk().UseCairo().LoadFromXaml().Start(fileIO, log, writers);
             }
         }
 

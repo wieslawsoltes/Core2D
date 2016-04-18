@@ -47,6 +47,7 @@ namespace Core2D.Perspex
     {
         private IFileSystem _fileIO;
         private ILog _log;
+        private ImmutableArray<IFileWriter> _writers;
         private ProjectEditor _editor;
         private Windows.MainWindow _mainWindow;
         private string _recentFileName = "Core2D.recent";
@@ -132,16 +133,18 @@ namespace Core2D.Perspex
         /// </summary>
         /// <param name="fileIO">The file system instance.</param>
         /// <param name="log">The log instance.</param>
-        public void Start(IFileSystem fileIO, ILog log)
+        /// <param name="writers">The file writers.</param>
+        public void Start(IFileSystem fileIO, ILog log, ImmutableArray<IFileWriter> writers)
         {
             _fileIO = fileIO;
             _log = log;
+            _writers = writers;
 
             _log.Initialize(System.IO.Path.Combine(_fileIO.AssemblyPath, _logFileName));
 
             try
             {
-                InitializeEditor(_fileIO, _log);
+                InitializeEditor(_fileIO, _log, _writers);
                 LoadRecent();
                 _mainWindow = new Windows.MainWindow();
                 _mainWindow.Closed += (sender, e) => SaveRecent();
@@ -199,7 +202,8 @@ namespace Core2D.Perspex
         /// </summary>
         /// <param name="fileIO">The file system instance.</param>
         /// <param name="log">The log instance.</param>
-        public void InitializeEditor(IFileSystem fileIO, ILog log)
+        /// <param name="writers">The file writers.</param>
+        public void InitializeEditor(IFileSystem fileIO, ILog log, ImmutableArray<IFileWriter> writers)
         {
             _editor = new ProjectEditor()
             {
@@ -214,8 +218,7 @@ namespace Core2D.Perspex
                 TextClipboard = new PerspexTextClipboard(),
                 JsonSerializer = new NewtonsoftTextSerializer(),
                 XamlSerializer = new PortableXamlSerializer(),
-                // HACK: PdfWriter = new PdfWriter(),
-                // HACK: DxfWriter = new DxfWriter(),
+                FileWriters = writers,
                 CsvReader = new CsvHelperReader(),
                 CsvWriter = new CsvHelperWriter(),
                 GetImageKey = async () => await (this as IEditorApplication).OnGetImageKeyAsync()
@@ -479,23 +482,20 @@ namespace Core2D.Perspex
                 }
 
                 var dlg = new SaveFileDialog();
-                dlg.Filters.Add(new FileDialogFilter() { Name = "Pdf", Extensions = { "pdf" } });
-                dlg.Filters.Add(new FileDialogFilter() { Name = "Dxf", Extensions = { "dxf" } });
+                foreach(var writer in _editor?.FileWriters)
+                {
+                    dlg.Filters.Add(new FileDialogFilter() { Name = writer.Name, Extensions = { writer.Extension } });
+                }
                 dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
                 dlg.InitialFileName = name;
                 var result = await dlg.ShowAsync(_mainWindow);
                 if (result != null)
                 {
-                    var ext = System.IO.Path.GetExtension(result).ToLower();
-
-                    if (ext == ".pdf")
+                    string ext = System.IO.Path.GetExtension(result).ToLower().TrimStart('.');
+                    IFileWriter writer = _editor?.FileWriters.Where(w => string.Compare(w.Extension, ext, StringComparison.OrdinalIgnoreCase) == 0).FirstOrDefault();
+                    if (writer != null)
                     {
-                        _editor?.ExportAsPdf(result, item);
-                    }
-
-                    if (ext == ".dxf")
-                    {
-                        _editor?.ExportAsDxf(result, item);
+                        _editor?.Export(result, item, writer);
                     }
                 }
             }

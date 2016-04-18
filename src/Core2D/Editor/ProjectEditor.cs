@@ -65,8 +65,7 @@ namespace Core2D.Editor
         private ITextClipboard _textClipboard;
         private ITextSerializer _jsonSerializer;
         private ITextSerializer _xamlSerializer;
-        private IFileWriter _pdfWriter;
-        private IFileWriter _dxfWriter;
+        private ImmutableArray<IFileWriter> _fileWriters;
         private ITextFieldReader<XDatabase> _csvReader;
         private ITextFieldWriter<XDatabase> _csvWriter;
 
@@ -325,21 +324,12 @@ namespace Core2D.Editor
         }
 
         /// <summary>
-        /// Gets or sets Pdf file writer.
+        /// Gets or sets available file writers.
         /// </summary>
-        public IFileWriter PdfWriter
+        public ImmutableArray<IFileWriter> FileWriters
         {
-            get { return _pdfWriter; }
-            set { Update(ref _pdfWriter, value); }
-        }
-
-        /// <summary>
-        /// Gets or sets Dxf file writer.
-        /// </summary>
-        public IFileWriter DxfWriter
-        {
-            get { return _dxfWriter; }
-            set { Update(ref _dxfWriter, value); }
+            get { return _fileWriters; }
+            set { Update(ref _fileWriters, value); }
         }
 
         /// <summary>
@@ -2138,32 +2128,16 @@ namespace Core2D.Editor
         }
 
         /// <summary>
-        /// Export item as Pdf.
+        /// Export item.
         /// </summary>
-        /// <param name="path">The Pdf file path.</param>
+        /// <param name="path">The file path.</param>
         /// <param name="item">The item to export.</param>
-        public void ExportAsPdf(string path, object item)
+        /// <param name="writer">The file writer.</param>
+        public void Export(string path, object item, IFileWriter writer)
         {
             try
             {
-                _pdfWriter?.Save(path, item, _project);
-            }
-            catch (Exception ex)
-            {
-                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
-            }
-        }
-
-        /// <summary>
-        /// Export item as Dxf.
-        /// </summary>
-        /// <param name="path">The Dxf file path.</param>
-        /// <param name="item">The item to export.</param>
-        public void ExportAsDxf(string path, object item)
-        {
-            try
-            {
-                _dxfWriter?.Save(path, item, _project);
+                writer?.Save(path, item, _project);
             }
             catch (Exception ex)
             {

@@ -17,7 +17,9 @@ using Renderer.Wpf;
 using Serializer.Newtonsoft;
 using Serializer.Xaml;
 using System;
+using System.Collections.Immutable;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using TextFieldReader.CsvHelper;
@@ -32,6 +34,7 @@ namespace Core2D.Wpf
     {
         private IFileSystem _fileIO;
         private ILog _log;
+        private ImmutableArray<IFileWriter> _writers;
         private ProjectEditor _editor;
         private Windows.MainWindow _mainWindow;
         private bool _isLoaded = false;
@@ -61,7 +64,15 @@ namespace Core2D.Wpf
             using (ILog log = new TraceLog())
             {
                 IFileSystem fileIO = new DotNetFxFileSystem();
-                Start(fileIO, log);
+                ImmutableArray<IFileWriter> writers = 
+                    new IFileWriter[] 
+                    {
+                        new PdfWriter(),
+                        new DxfWriter(),
+                        new EmfWriter()
+                    }.ToImmutableArray();
+
+                Start(fileIO, log, writers);
             }
         }
 
@@ -70,16 +81,18 @@ namespace Core2D.Wpf
         /// </summary>
         /// <param name="fileIO">The file system instance.</param>
         /// <param name="log">The log instance.</param>
-        public void Start(IFileSystem fileIO, ILog log)
+        /// <param name="writers">The file writers.</param>
+        public void Start(IFileSystem fileIO, ILog log, ImmutableArray<IFileWriter> writers)
         {
             _fileIO = fileIO;
             _log = log;
+            _writers = writers;
 
             _log.Initialize(System.IO.Path.Combine(_fileIO.AssemblyPath, _logFileName));
 
             try
             {
-                InitializeEditor(_fileIO, _log);
+                InitializeEditor(_fileIO, _log, _writers);
                 LoadRecent();
                 _mainWindow = new Windows.MainWindow();
                 _mainWindow.Loaded += (sender, e) => OnLoaded();
@@ -161,7 +174,8 @@ namespace Core2D.Wpf
         /// </summary>
         /// <param name="fileIO">The file system instance.</param>
         /// <param name="log">The log instance.</param>
-        private void InitializeEditor(IFileSystem fileIO, ILog log)
+        /// <param name="writers">The file writers.</param>
+        private void InitializeEditor(IFileSystem fileIO, ILog log, ImmutableArray<IFileWriter> writers)
         {
             _editor = new ProjectEditor()
             {
@@ -176,8 +190,7 @@ namespace Core2D.Wpf
                 TextClipboard = new WpfTextClipboard(),
                 JsonSerializer = new NewtonsoftTextSerializer(),
                 XamlSerializer = new PortableXamlSerializer(),
-                PdfWriter = new PdfWriter(),
-                DxfWriter = new DxfWriter(),
+                FileWriters = writers,
                 CsvReader = new CsvHelperReader(),
                 CsvWriter = new CsvHelperWriter(),
                 GetImageKey = async () => await (this as IEditorApplication).OnGetImageKeyAsync()
@@ -412,30 +425,32 @@ namespace Core2D.Wpf
                 item = _editor?.Project;
             }
 
+            var sb = new StringBuilder();
+            foreach (var writer in _editor?.FileWriters)
+            {
+                sb.Append($"{writer.Name} (*.{writer.Extension})|*.{writer.Extension}|");
+            }
+            sb.Append("All (*.*)|*.*");
+
             var dlg = new SaveFileDialog()
             {
-                Filter = "Pdf (*.pdf)|*.pdf|Emf (*.emf)|*.emf|Dxf (*.dxf)|*.dxf|All (*.*)|*.*",
+                Filter = sb.ToString(),
                 FilterIndex = 0,
                 FileName = name
             };
 
             if (dlg.ShowDialog(_mainWindow) == true)
             {
-                switch (dlg.FilterIndex)
+                string result = dlg.FileName;
+                string ext = System.IO.Path.GetExtension(result).ToLower().TrimStart('.');
+                IFileWriter writer = _editor?.FileWriters.Where(w => string.Compare(w.Extension, ext, StringComparison.OrdinalIgnoreCase) == 0).FirstOrDefault();
+                if (writer != null)
                 {
-                    case 1:
-                        _editor?.ExportAsPdf(dlg.FileName, item);
-                        break;
-                    case 2:
-                        await (this as IEditorApplication).OnExportAsEmfAsync(dlg.FileName);
-                        break;
-                    case 3:
-                        _editor?.ExportAsDxf(dlg.FileName, item);
-                        break;
-                    default:
-                        break;
+                    _editor?.Export(result, item, writer);
                 }
             }
+
+            await Task.Delay(0);
         }
 
         /// <inheritdoc/>
