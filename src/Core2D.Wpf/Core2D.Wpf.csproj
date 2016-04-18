@@ -305,7 +305,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Util\WpfCommandManager.cs" />
-    <Compile Include="Util\WpfFileSystem.cs" />
     <Compile Include="Util\WpfTextClipboard.cs" />
     <Page Include="Controls\Data\ColumnsControl.xaml">
       <SubType>Designer</SubType>
@@ -572,6 +571,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\dependencies\FileSystem.DotNetFx\FileSystem.DotNetFx.csproj">
+      <Project>{d1f867f7-9029-480d-b1e1-b0be4658b182}</Project>
+      <Name>FileSystem.DotNetFx</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\dependencies\FileWriter.Dxf\FileWriter.Dxf.csproj">
       <Project>{d40b3bcd-0a26-40bb-960b-9464d248c934}</Project>
       <Name>FileWriter.Dxf</Name>
@@ -597,23 +600,19 @@
       <Name>Renderer.Wpf</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\dependencies\Serializer.Newtonsoft\Serializer.Newtonsoft.csproj">
-      <Project>{08e4e8bf-e513-4a8d-835c-1eed6ecb4a21}</Project>
+      <Project>{11e61a53-13d5-4447-8d66-3f328bbfc30a}</Project>
       <Name>Serializer.Newtonsoft</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\dependencies\Serializer.ProtoBuf\Serializer.ProtoBuf.csproj">
-      <Project>{83191601-fcac-48a7-abf9-2179fec1b2ce}</Project>
-      <Name>Serializer.ProtoBuf</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\dependencies\Serializer.Xaml\Serializer.Xaml.csproj">
-      <Project>{5B85143E-A53C-4126-8666-031A3172EFDF}</Project>
+      <Project>{1dca99ea-f8fe-4ddd-ab81-bf0380c1b33d}</Project>
       <Name>Serializer.Xaml</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\dependencies\TextFieldReader.CsvHelper\TextFieldReader.CsvHelper.csproj">
-      <Project>{64bae9e8-93b5-4edc-8ad6-5a3dcba8c051}</Project>
+      <Project>{f215adf5-74c1-4e26-9045-b6bbda736092}</Project>
       <Name>TextFieldReader.CsvHelper</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\dependencies\TextFieldWriter.CsvHelper\TextFieldWriter.CsvHelper.csproj">
-      <Project>{87302d12-1184-402d-bf23-a5699f3d0bb4}</Project>
+      <Project>{ae7ff1b5-abe3-45bf-87cc-44ac580a666a}</Project>
       <Name>TextFieldWriter.CsvHelper</Name>
     </ProjectReference>
     <ProjectReference Include="..\Core2D\Core2D.csproj">

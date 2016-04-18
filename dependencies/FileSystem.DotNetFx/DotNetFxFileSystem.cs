@@ -1,16 +1,30 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Core2D.Interfaces;
+using System;
 using System.IO;
+using System.Reflection;
 using System.Text;
 
-namespace Core2D.Perspex
+namespace FileSystem.DotNetFx
 {
     /// <summary>
     /// File system implementation using System.IO.
     /// </summary>
-    public sealed class PerspexFileSystem : IFileSystem
+    public sealed class DotNetFxFileSystem : IFileSystem
     {
+        /// <inheritdoc/>
+        string IFileSystem.AssemblyPath
+        {
+            get
+            {
+                string codeBase = Assembly.GetExecutingAssembly().CodeBase;
+                var uri = new UriBuilder(codeBase);
+                string path = Uri.UnescapeDataString(uri.Path);
+                return Path.GetDirectoryName(path);
+            }
+        }
+
         /// <inheritdoc/>
         bool IFileSystem.Exists(string path)
         {

@@ -13,7 +13,8 @@ namespace Core2D.Interfaces
         /// Write database records to text based file format.
         /// </summary>
         /// <param name="path">The fields file path.</param>
+        /// <param name="fs">The file system.</param>
         /// <param name="database">The source records database.</param>
-        void Write(string path, T database);
+        void Write(string path, IFileSystem fs, T database);
     }
 }

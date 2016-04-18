@@ -3,11 +3,11 @@
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("Core2D.Wpf.UnitTests")]
+[assembly: AssemblyTitle("FileSystem.DotNetFx.UnitTests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Wiesław Šoltés")]
-[assembly: AssemblyProduct("Core2D.Wpf.UnitTests")]
+[assembly: AssemblyProduct("FileSystem.DotNetFx.UnitTests")]
 [assembly: AssemblyCopyright("Copyright © Wiesław Šoltés 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

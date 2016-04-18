@@ -95,7 +95,6 @@
     <Compile Include="History\UndoRedo.cs" />
     <Compile Include="Interfaces\IFileWriter.cs" />
     <Compile Include="Interfaces\ILog.cs" />
-    <Compile Include="Interfaces\IStreamSerializer.cs" />
     <Compile Include="Interfaces\ITextClipboard.cs" />
     <Compile Include="Interfaces\ITextFieldReader.cs" />
     <Compile Include="Interfaces\ITextFieldWriter.cs" />

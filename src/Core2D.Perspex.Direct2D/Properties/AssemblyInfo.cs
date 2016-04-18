@@ -3,10 +3,10 @@
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("Serializer.ProtoBuf")]
+[assembly: AssemblyTitle("Core2D.Perspex.Direct2D")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyProduct("Serializer.ProtoBuf")]
+[assembly: AssemblyProduct("Core2D.Perspex.Direct2D")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
-[assembly: Guid("83191601-fcac-48a7-abf9-2179fec1b2ce")]
+[assembly: Guid("4868069e-3ad4-497e-9b8e-148d1eeacfd7")]

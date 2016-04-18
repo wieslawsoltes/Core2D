@@ -3,10 +3,10 @@
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("Serializer.ProtoBuf.Generate")]
+[assembly: AssemblyTitle("Core2D.Perspex.Cairo")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyProduct("Serializer.ProtoBuf.Generate")]
+[assembly: AssemblyProduct("Core2D.Perspex.Cairo")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
-[assembly: Guid("50a4e393-386b-4354-8fb7-a20044986094")]
+[assembly: Guid("5ed631ec-651f-44d6-a99d-d1202f212656")]

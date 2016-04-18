@@ -6,6 +6,9 @@ rmdir /Q /S dependencies\netDxf\netDxf\obj
 rmdir /Q /S dependencies\netDxf\TestDxfDocument\bin
 rmdir /Q /S dependencies\netDxf\TestDxfDocument\obj
 
+rmdir /Q /S dependencies\FileSystem.DotNetFx\bin
+rmdir /Q /S dependencies\FileSystem.DotNetFx\obj
+
 rmdir /Q /S dependencies\FileWriter.Dxf\bin
 rmdir /Q /S dependencies\FileWriter.Dxf\obj
 
@@ -42,12 +45,6 @@ rmdir /Q /S dependencies\Renderer.Wpf\obj
 rmdir /Q /S dependencies\Serializer.Newtonsoft\bin
 rmdir /Q /S dependencies\Serializer.Newtonsoft\obj
 
-rmdir /Q /S dependencies\Serializer.ProtoBuf\bin
-rmdir /Q /S dependencies\Serializer.ProtoBuf\obj
-
-rmdir /Q /S dependencies\Serializer.ProtoBuf.Generate\bin
-rmdir /Q /S dependencies\Serializer.ProtoBuf.Generate\obj
-
 rmdir /Q /S dependencies\Serializer.Xaml\bin
 rmdir /Q /S dependencies\Serializer.Xaml\obj
 
@@ -60,11 +57,8 @@ rmdir /Q /S dependencies\TextFieldWriter.CsvHelper\obj
 rmdir /Q /S tests\Core2D.UnitTests\bin
 rmdir /Q /S tests\Core2D.UnitTests\obj
 
-rmdir /Q /S tests\Core2D.Perspex.UnitTests\bin
-rmdir /Q /S tests\Core2D.Perspex.UnitTests\obj
-
-rmdir /Q /S tests\Core2D.Wpf.UnitTests\bin
-rmdir /Q /S tests\Core2D.Wpf.UnitTests\obj
+rmdir /Q /S tests\FileSystem.DotNetFx.UnitTests\bin
+rmdir /Q /S tests\FileSystem.DotNetFx.UnitTests\obj
 
 rmdir /Q /S src\Core2D\bin
 rmdir /Q /S src\Core2D\obj
@@ -72,9 +66,13 @@ rmdir /Q /S src\Core2D\obj
 rmdir /Q /S src\Core2D.Perspex\bin
 rmdir /Q /S src\Core2D.Perspex\obj
 
+rmdir /Q /S src\Core2D.Perspex.Cairo\bin
+rmdir /Q /S src\Core2D.Perspex.Cairo\obj
+
+rmdir /Q /S src\Core2D.Perspex.Direct2D\bin
+rmdir /Q /S src\Core2D.Perspex.Direct2D\obj
+
 rmdir /Q /S src\Core2D.Wpf\bin
 rmdir /Q /S src\Core2D.Wpf\obj
 
 rmdir /Q /S packages
-
-del /Q dependencies\Serializer.ProtoBuf.Generate\Serializer\*.dll

@@ -6,23 +6,23 @@ using System.Linq;
 using System.Text;
 using Xunit;
 
-namespace Core2D.Wpf.UnitTests
+namespace FileSystem.DotNetFx.UnitTests
 {
-    public class WpfFileSystemTests
+    public class DotNetFxFileSystemTests
     {
         [Fact]
-        [Trait("Core2D.Wpf", "Util")]
+        [Trait("FileSystem.DotNetFx", "Util")]
         public void Implements_IFileSystem_Interface()
         {
-            var target = new WpfFileSystem();
+            var target = new DotNetFxFileSystem();
             Assert.True(target is IFileSystem);
         }
 
         [Fact]
-        [Trait("Core2D.Wpf", "Util")]
+        [Trait("FileSystem.DotNetFx", "Util")]
         public void Open_Path_Throws_FileNotFoundException()
         {
-            IFileSystem target = new WpfFileSystem();
+            IFileSystem target = new DotNetFxFileSystem();
             Assert.Throws<FileNotFoundException>(
                 () =>
                 {
@@ -31,10 +31,10 @@ namespace Core2D.Wpf.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D.Wpf", "Util")]
+        [Trait("FileSystem.DotNetFx", "Util")]
         public void Create_Path_Creates_New_File()
         {
-            IFileSystem target = new WpfFileSystem();
+            IFileSystem target = new DotNetFxFileSystem();
 
             using (var stream = target.Create("new1.txt")) { }
             Assert.True(File.Exists("new1.txt"));
@@ -44,10 +44,10 @@ namespace Core2D.Wpf.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D.Wpf", "Util")]
+        [Trait("FileSystem.DotNetFx", "Util")]
         public void ReadBinary_Read_All_Bytes_From_Stream()
         {
-            IFileSystem target = new WpfFileSystem();
+            IFileSystem target = new DotNetFxFileSystem();
             var expceted = new byte[] { 0x12, 0x34, 0x56, 0x67 };
             byte[] actual;
 
@@ -60,10 +60,10 @@ namespace Core2D.Wpf.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D.Wpf", "Util")]
+        [Trait("FileSystem.DotNetFx", "Util")]
         public void WriteBinary_Write_All_Bytes_To_Stream()
         {
-            IFileSystem target = new WpfFileSystem();
+            IFileSystem target = new DotNetFxFileSystem();
             var expceted = new byte[] { 0x12, 0x34, 0x56, 0x67 };
             byte[] actual;
 
@@ -77,10 +77,10 @@ namespace Core2D.Wpf.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D.Wpf", "Util")]
+        [Trait("FileSystem.DotNetFx", "Util")]
         public void ReadUtf8Text_Read_String_From_Stream()
         {
-            IFileSystem target = new WpfFileSystem();
+            IFileSystem target = new DotNetFxFileSystem();
             var expceted = "κόσμε";
             string actual;
             
@@ -93,10 +93,10 @@ namespace Core2D.Wpf.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D.Wpf", "Util")]
+        [Trait("FileSystem.DotNetFx", "Util")]
         public void WriteUtf8Text_Write_String_To_Stream()
         {
-            IFileSystem target = new WpfFileSystem();
+            IFileSystem target = new DotNetFxFileSystem();
             var expceted = "κόσμε";
 
             byte[] actual;
@@ -112,10 +112,10 @@ namespace Core2D.Wpf.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D.Wpf", "Util")]
+        [Trait("FileSystem.DotNetFx", "Util")]
         public void ReadUtf8Text_Read_String_From_Path()
         {
-            IFileSystem target = new WpfFileSystem();
+            IFileSystem target = new DotNetFxFileSystem();
             Assert.Throws<FileNotFoundException>(
                 () =>
                 {
@@ -124,10 +124,10 @@ namespace Core2D.Wpf.UnitTests
         }
 
         [Fact]
-        [Trait("Core2D.Wpf", "Util")]
+        [Trait("FileSystem.DotNetFx", "Util")]
         public void WriteUtf8Text_Write_String_To_Path()
         {
-            IFileSystem target = new WpfFileSystem();
+            IFileSystem target = new DotNetFxFileSystem();
             var expceted = "κόσμε";
 
             target.WriteUtf8Text("new2.txt", expceted);

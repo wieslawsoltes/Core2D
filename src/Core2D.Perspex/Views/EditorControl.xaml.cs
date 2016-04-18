@@ -7,7 +7,6 @@ using Perspex.Controls;
 using Perspex.Input;
 using Perspex.Markup.Xaml;
 using System;
-using System.Diagnostics;
 
 namespace Core2D.Perspex.Views
 {
@@ -29,21 +28,18 @@ namespace Core2D.Perspex.Views
 
             this.GetObservable(DataContextProperty).Subscribe((value) =>
             {
-                Debug.Print($"EditorControl DataContext Changed: {value}");
                 DetachEditor();
                 AttachEditor();
             });
 
             this.AttachedToVisualTree += (sender, e) =>
             {
-                Debug.Print($"EditorControl AttachedToVisualTree");
                 DetachEditor();
                 AttachEditor();
             };
 
             this.DetachedFromVisualTree += (sender, e) =>
             {
-                Debug.Print($"EditorControl DetachedFromVisualTree");
                 DetachEditor();
             };
         }

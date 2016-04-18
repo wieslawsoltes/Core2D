@@ -331,11 +331,10 @@ namespace Core2D.Editor.Designer
         /// </summary>
         /// <param name="renderer">The design time renderer instance.</param>
         /// <param name="clipboard">The design time clipboard instance.</param>
-        /// <param name="protoBufSerializer">The design time ProtoBuf serializer instance.</param>
         /// <param name="jsonSerializer">The design time Json serializer instance.</param>
         /// <param name="xamlSerializer">The design time Xaml serializer instance.</param>
         /// <returns>The new instance of the <see cref="DesignerContext"/> class.</returns>
-        public static void InitializeContext(ShapeRenderer renderer, ITextClipboard clipboard, IStreamSerializer protoBufSerializer, ITextSerializer jsonSerializer, ITextSerializer xamlSerializer)
+        public static void InitializeContext(ShapeRenderer renderer, ITextClipboard clipboard, ITextSerializer jsonSerializer, ITextSerializer xamlSerializer)
         {
             // Editor
 
@@ -347,7 +346,6 @@ namespace Core2D.Editor.Designer
                 Renderers = new ShapeRenderer[] { renderer },
                 ProjectFactory = new ProjectFactory(),
                 TextClipboard = clipboard,
-                ProtoBufSerializer = protoBufSerializer,
                 JsonSerializer = jsonSerializer,
                 XamlSerializer = xamlSerializer
             };

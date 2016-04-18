@@ -1,11 +1,13 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Interfaces;
+using FileSystem.DotNetFx;
+using Log.Trace;
 using Perspex;
 using Perspex.Logging.Serilog;
 using Serilog;
-using System;
 
-namespace Core2D.Perspex
+namespace Core2D.Perspex.Cairo
 {
     /// <summary>
     /// Encapsulates a Core2D Prespex program.
@@ -20,29 +22,10 @@ namespace Core2D.Perspex
         {
             InitializeLogging();
 
-            switch (Environment.OSVersion.Platform)
+            using (ILog log = new TraceLog())
             {
-                case PlatformID.MacOSX:
-                case PlatformID.Unix:
-                    {
-                        new App()
-                            .UseGtk()
-                            .UseCairo()
-                            .LoadFromXaml()
-                            .Start();
-                    }
-                    break;
-                case PlatformID.Win32NT:
-                case PlatformID.Win32S:
-                case PlatformID.Win32Windows:
-                    {
-                        new App()
-                            .UseWin32()
-                            .UseDirect2D()
-                            .LoadFromXaml()
-                            .Start();
-                    }
-                    break;
+                IFileSystem fileIO = new DotNetFxFileSystem();
+                new App().UseGtk().UseCairo().LoadFromXaml().Start(fileIO, log);
             }
         }
 

@@ -13,7 +13,8 @@ namespace Core2D.Interfaces
         /// Read fields from text database file format.
         /// </summary>
         /// <param name="path">The fields file path.</param>
+        /// <param name="fs">The file system.</param>
         /// <returns>The new instance of the database.</returns>
-        T Read(string path);
+        T Read(string path, IFileSystem fs);
     }
 }

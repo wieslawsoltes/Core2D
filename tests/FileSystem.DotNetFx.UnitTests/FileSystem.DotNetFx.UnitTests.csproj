@@ -8,8 +8,8 @@
     <ProjectGuid>{E9C30F6F-00DD-494A-8E7C-253A5C76E999}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Core2D.Wpf.UnitTests</RootNamespace>
-    <AssemblyName>Core2D.Wpf.UnitTests</AssemblyName>
+    <RootNamespace>FileSystem.DotNetFx.UnitTests</RootNamespace>
+    <AssemblyName>FileSystem.DotNetFx.UnitTests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -34,15 +34,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Portable.Xaml, Version=0.13.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Portable.Xaml.0.13.0\lib\dotnet\Portable.Xaml.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Collections.Immutable, Version=1.1.37.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\System.Collections.Immutable.1.1.37\lib\dotnet\System.Collections.Immutable.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -68,15 +60,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Util\WpfFileSystemTests.cs" />
+    <Compile Include="Util\DotNetFxFileSystemTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Core2D.Wpf\Core2D.Wpf.csproj">
-      <Project>{12889680-3769-4914-be60-5d09e83df5b2}</Project>
-      <Name>Core2D.Wpf</Name>
+    <ProjectReference Include="..\..\dependencies\FileSystem.DotNetFx\FileSystem.DotNetFx.csproj">
+      <Project>{D1F867F7-9029-480D-B1E1-B0BE4658B182}</Project>
+      <Name>FileSystem.DotNetFx</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\src\Core2D\Core2D.csproj">
       <Project>{4ee581b0-45f3-4d7e-beae-277abf5f3fdd}</Project>
