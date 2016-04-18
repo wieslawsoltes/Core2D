@@ -63,7 +63,6 @@ namespace Core2D.Editor
         private IFileSystem _fileIO;
         private IProjectFactory _projectFactory;
         private ITextClipboard _textClipboard;
-        private IStreamSerializer _protoBufSerializer;
         private ITextSerializer _jsonSerializer;
         private ITextSerializer _xamlSerializer;
         private IFileWriter _pdfWriter;
@@ -308,15 +307,6 @@ namespace Core2D.Editor
         }
 
         /// <summary>
-        /// Gets or sets ProtoBuf serializer.
-        /// </summary>
-        public IStreamSerializer ProtoBufSerializer
-        {
-            get { return _protoBufSerializer; }
-            set { Update(ref _protoBufSerializer, value); }
-        }
-
-        /// <summary>
         /// Gets or sets Json serializer.
         /// </summary>
         public ITextSerializer JsonSerializer
@@ -556,11 +546,11 @@ namespace Core2D.Editor
         {
             try
             {
-                if (_fileIO != null && _protoBufSerializer != null)
+                if (_fileIO != null && _jsonSerializer != null)
                 {
                     if (!string.IsNullOrEmpty(path) && _fileIO.Exists(path))
                     {
-                        var project = XProject.Open(path, _fileIO, _protoBufSerializer);
+                        var project = XProject.Open(path, _fileIO, _jsonSerializer);
                         if (project != null)
                         {
                             Unload();
@@ -595,9 +585,9 @@ namespace Core2D.Editor
         {
             try
             {
-                if (_project != null && _fileIO != null && _protoBufSerializer != null)
+                if (_project != null && _fileIO != null && _jsonSerializer != null)
                 {
-                    XProject.Save(_project, path, _fileIO, _protoBufSerializer);
+                    XProject.Save(_project, path, _fileIO, _jsonSerializer);
                     AddRecent(path, _project.Name);
 
                     if (string.IsNullOrEmpty(_projectPath))
@@ -624,7 +614,7 @@ namespace Core2D.Editor
             {
                 if (_project != null)
                 {
-                    var db = _csvReader?.Read(path);
+                    var db = _csvReader?.Read(path, _fileIO);
                     if (db != null)
                     {
                         _project.AddDatabase(db);
@@ -647,7 +637,7 @@ namespace Core2D.Editor
         {
             try
             {
-                _csvWriter?.Write(path, database);
+                _csvWriter?.Write(path, _fileIO, database);
             }
             catch (Exception ex)
             {
@@ -664,7 +654,7 @@ namespace Core2D.Editor
         {
             try
             {
-                var db = _csvReader?.Read(path);
+                var db = _csvReader?.Read(path, _fileIO);
                 if (db != null)
                 {
                     _project?.UpdateDatabase(database, db);
