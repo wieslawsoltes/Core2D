@@ -18,49 +18,39 @@ namespace TextFieldWriter.CsvHelper
         /// Write database records to text based file format.
         /// </summary>
         /// <param name="path">The fields file path.</param>
+        /// <param name="fs">The file system.</param>
         /// <param name="database">The source records database.</param>
-        void ITextFieldWriter<XDatabase>.Write(string path, XDatabase database)
+        void ITextFieldWriter<XDatabase>.Write(string path, IFileSystem fs, XDatabase database)
         {
-            try
+            using (var writer = new System.IO.StringWriter())
             {
-                using (var writer = new System.IO.StringWriter())
-                {
-                    var configuration = new CSV.Configuration.CsvConfiguration();
-                    configuration.Delimiter = CultureInfo.CurrentCulture.TextInfo.ListSeparator;
-                    configuration.CultureInfo = CultureInfo.CurrentCulture;
+                var configuration = new CSV.Configuration.CsvConfiguration();
+                configuration.Delimiter = CultureInfo.CurrentCulture.TextInfo.ListSeparator;
+                configuration.CultureInfo = CultureInfo.CurrentCulture;
 
-                    using (var csv = new CSV.CsvWriter(writer, configuration))
+                using (var csv = new CSV.CsvWriter(writer, configuration))
+                {
+                    // columns
+                    csv.WriteField(database.IdColumnName);
+                    foreach (var column in database.Columns)
                     {
-                        // columns
-                        csv.WriteField(database.IdColumnName);
-                        foreach (var column in database.Columns)
+                        csv.WriteField(column.Name);
+                    }
+                    csv.NextRecord();
+
+                    // records
+                    foreach (var record in database.Records)
+                    {
+                        csv.WriteField(record.Id.ToString());
+                        foreach (var value in record.Values)
                         {
-                            csv.WriteField(column.Name);
+                            csv.WriteField(value.Content);
                         }
                         csv.NextRecord();
-
-                        // records
-                        foreach (var record in database.Records)
-                        {
-                            csv.WriteField(record.Id.ToString());
-                            foreach (var value in record.Values)
-                            {
-                                csv.WriteField(value.Content);
-                            }
-                            csv.NextRecord();
-                        }
-                    }
-
-                    using (var file = System.IO.File.CreateText(path))
-                    {
-                        file.Write(writer.ToString());
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                Debug.Print(ex.Message);
-                Debug.Print(ex.StackTrace);
+
+                fs.WriteUtf8Text(path, writer.ToString());
             }
         }
     }
