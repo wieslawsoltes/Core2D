@@ -7,6 +7,7 @@ using Core2D.Editor.Interfaces;
 using Core2D.Interfaces;
 using Core2D.Project;
 using Core2D.Renderer;
+using FileSystem.DotNetFx;
 using FileWriter.Dxf;
 using FileWriter.Emf;
 using FileWriter.Pdf_wpf;
@@ -14,11 +15,9 @@ using Log.Trace;
 using Microsoft.Win32;
 using Renderer.Wpf;
 using Serializer.Newtonsoft;
-using Serializer.ProtoBuf;
 using Serializer.Xaml;
 using System;
 using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
 using TextFieldReader.CsvHelper;
@@ -31,6 +30,8 @@ namespace Core2D.Wpf
     /// </summary>
     public partial class App : Application, IEditorApplication
     {
+        private IFileSystem _fileIO;
+        private ILog _log;
         private ProjectEditor _editor;
         private Windows.MainWindow _mainWindow;
         private bool _isLoaded = false;
@@ -45,7 +46,6 @@ namespace Core2D.Wpf
             DesignerContext.InitializeContext(
                 new WpfRenderer(),
                 new WpfTextClipboard(),
-                new ProtoBufStreamSerializer(),
                 new NewtonsoftTextSerializer(),
                 new PortableXamlSerializer());
         }
@@ -57,35 +57,42 @@ namespace Core2D.Wpf
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            Start();
+
+            using (ILog log = new TraceLog())
+            {
+                IFileSystem fileIO = new DotNetFxFileSystem();
+                Start(fileIO, log);
+            }
         }
 
         /// <summary>
         /// Initialize application context and displays main window.
         /// </summary>
-        public void Start()
+        /// <param name="fileIO">The file system instance.</param>
+        /// <param name="log">The log instance.</param>
+        public void Start(IFileSystem fileIO, ILog log)
         {
-            using (ILog log = new TraceLog())
-            {
-                log.Initialize(System.IO.Path.Combine(GetAssemblyPath(), _logFileName));
+            _fileIO = fileIO;
+            _log = log;
 
-                try
+            _log.Initialize(System.IO.Path.Combine(_fileIO.AssemblyPath, _logFileName));
+
+            try
+            {
+                InitializeEditor(_fileIO, _log);
+                LoadRecent();
+                _mainWindow = new Windows.MainWindow();
+                _mainWindow.Loaded += (sender, e) => OnLoaded();
+                _mainWindow.Closed += (sender, e) => OnClosed();
+                _mainWindow.DataContext = _editor;
+                _mainWindow.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                if (ex.InnerException != null)
                 {
-                    InitializeEditor(log);
-                    LoadRecent();
-                    _mainWindow = new Windows.MainWindow();
-                    _mainWindow.Loaded += (sender, e) => OnLoaded();
-                    _mainWindow.Closed += (sender, e) => OnClosed();
-                    _mainWindow.DataContext = _editor;
-                    _mainWindow.ShowDialog();
-                }
-                catch (Exception ex)
-                {
-                    log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
-                    if (ex.InnerException != null)
-                    {
-                        log?.LogError($"{ex.InnerException.Message}{Environment.NewLine}{ex.InnerException.StackTrace}");
-                    }
+                    _log?.LogError($"{ex.InnerException.Message}{Environment.NewLine}{ex.InnerException.StackTrace}");
                 }
             }
         }
@@ -115,25 +122,13 @@ namespace Core2D.Wpf
         }
 
         /// <summary>
-        /// Gets the location of the assembly as specified originally.
-        /// </summary>
-        /// <returns>The location of the assembly as specified originally.</returns>
-        public static string GetAssemblyPath()
-        {
-            string codeBase = Assembly.GetExecutingAssembly().CodeBase;
-            var uri = new UriBuilder(codeBase);
-            string path = Uri.UnescapeDataString(uri.Path);
-            return System.IO.Path.GetDirectoryName(path);
-        }
-
-        /// <summary>
         /// Load recent project files list.
         /// </summary>
         private void LoadRecent()
         {
             try
             {
-                var path = System.IO.Path.Combine(GetAssemblyPath(), _recentFileName);
+                var path = System.IO.Path.Combine(_fileIO.AssemblyPath, _recentFileName);
                 if (System.IO.File.Exists(path))
                 {
                     _editor?.LoadRecent(path);
@@ -141,7 +136,7 @@ namespace Core2D.Wpf
             }
             catch (Exception ex)
             {
-                _editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
@@ -152,20 +147,21 @@ namespace Core2D.Wpf
         {
             try
             {
-                var path = System.IO.Path.Combine(GetAssemblyPath(), _recentFileName);
+                var path = System.IO.Path.Combine(_fileIO.AssemblyPath, _recentFileName);
                 _editor?.SaveRecent(path);
             }
             catch (Exception ex)
             {
-                _editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
         /// <summary>
         /// Initialize <see cref="Editor"/> object.
         /// </summary>
+        /// <param name="fileIO">The file system instance.</param>
         /// <param name="log">The log instance.</param>
-        private void InitializeEditor(ILog log)
+        private void InitializeEditor(IFileSystem fileIO, ILog log)
         {
             _editor = new ProjectEditor()
             {
@@ -173,12 +169,11 @@ namespace Core2D.Wpf
                 CurrentPathTool = PathTool.Line,
                 Application = this,
                 Log = log,
-                FileIO = new WpfFileSystem(),
+                FileIO = fileIO,
                 CommandManager = new WpfCommandManager(),
                 Renderers = new ShapeRenderer[] { new WpfRenderer() },
                 ProjectFactory = new ProjectFactory(),
                 TextClipboard = new WpfTextClipboard(),
-                ProtoBufSerializer = new ProtoBufStreamSerializer(),
                 JsonSerializer = new NewtonsoftTextSerializer(),
                 XamlSerializer = new PortableXamlSerializer(),
                 PdfWriter = new PdfWriter(),
@@ -213,7 +208,7 @@ namespace Core2D.Wpf
                 }
                 catch (Exception ex)
                 {
-                    _editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                    _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
                 }
             }
             return null;
@@ -637,7 +632,7 @@ namespace Core2D.Wpf
             }
             catch (Exception ex)
             {
-                _editor?.Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
 
             await Task.Delay(0);
