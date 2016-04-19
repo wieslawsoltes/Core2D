@@ -12,6 +12,7 @@ namespace Core2D.Style
         private string _name;
         private bool _isCurved;
         private double _curvature;
+        private CurveOrientation _curveOrientation;
         private LineFixedLength _fixedLength;
 
         /// <summary>
@@ -43,6 +44,15 @@ namespace Core2D.Style
         }
 
         /// <summary>
+        /// Gets or sets curve orientation.
+        /// </summary>
+        public CurveOrientation CurveOrientation
+        {
+            get { return _curveOrientation; }
+            set { Update(ref _curveOrientation, value); }
+        }
+
+        /// <summary>
         /// Gets or sets line fixed length.
         /// </summary>
         public LineFixedLength FixedLength
@@ -57,15 +67,22 @@ namespace Core2D.Style
         /// <param name="name">The line style name.</param>
         /// <param name="isCurved">The flag indicating whether line is curved.</param>
         /// <param name="curvature">The line curvature.</param>
+        /// <param name="curveOrientation">The curve orientation.</param>
         /// <param name="fixedLength">The line style fixed length.</param>
         /// <returns>The new instance of the <see cref="LineStyle"/> class.</returns>
-        public static LineStyle Create(string name = "", bool isCurved = false, double curvature = 60.0, LineFixedLength fixedLength = null)
+        public static LineStyle Create(
+            string name = "", 
+            bool isCurved = false, 
+            double curvature = 60.0, 
+            CurveOrientation curveOrientation = CurveOrientation.Horizontal, 
+            LineFixedLength fixedLength = null)
         {
             return new LineStyle()
             {
                 Name = name,
                 IsCurved = isCurved,
                 Curvature = curvature,
+                CurveOrientation = curveOrientation,
                 FixedLength = fixedLength ?? LineFixedLength.Create()
             };
         }
@@ -81,6 +98,7 @@ namespace Core2D.Style
                 Name = _name,
                 IsCurved = _isCurved,
                 Curvature = _curvature,
+                CurveOrientation = _curveOrientation,
                 FixedLength = _fixedLength.Clone()
             };
         }

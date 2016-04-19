@@ -200,7 +200,6 @@ namespace Renderer.Perspex
         /// 
         /// </summary>
         /// <param name="_dc"></param>
-        /// <param name="line"></param>
         /// <param name="pen"></param>
         /// <param name="isStroked"></param>
         /// <param name="pt1"></param>
@@ -208,12 +207,12 @@ namespace Renderer.Perspex
         /// <param name="offset"></param>
         private static void DrawLineCurve(
             PM.DrawingContext _dc,
-            XLine line,
             PM.Pen pen,
             bool isStroked,
             ref P.Point pt1,
             ref P.Point pt2,
-            double offset)
+            double offset,
+            CurveOrientation orientation)
         {
             if (isStroked)
             {
@@ -221,13 +220,27 @@ namespace Renderer.Perspex
                 using (var sgc = sg.Open())
                 {
                     sgc.BeginFigure(new P.Point(pt1.X, pt1.Y), false);
-                    sgc.CubicBezierTo(
-                        new P.Point(pt1.X + offset, pt1.Y),
-                        new P.Point(pt2.X - offset, pt2.Y),
-                        new P.Point(pt2.X, pt2.Y));
+                    if (orientation == CurveOrientation.Horizontal)
+                    {
+                        sgc.CubicBezierTo(
+                            new P.Point(pt1.X + offset, pt1.Y),
+                            new P.Point(pt2.X - offset, pt2.Y),
+                            new P.Point(pt2.X, pt2.Y));
+                    }
+                    else if(orientation == CurveOrientation.Vertical)
+                    {
+                        sgc.CubicBezierTo(
+                            new P.Point(pt1.X, pt1.Y + offset),
+                            new P.Point(pt2.X, pt2.Y - offset),
+                            new P.Point(pt2.X, pt2.Y));
+                    }
+                    else
+                    {
+                        throw new NotSupportedException($"Not supported curve orientation: {orientation}");
+                    }
                     sgc.EndFigure(false);
                 }
-                _dc.DrawGeometry(null, line.IsStroked ? pen : null, sg);
+                _dc.DrawGeometry(null, pen, sg);
             }
         }
 
@@ -517,7 +530,7 @@ namespace Renderer.Perspex
 
             if (line.Style.LineStyle.IsCurved)
             {
-                DrawLineCurve(_dc, line, strokeLine, line.IsStroked, ref pt1, ref pt2, line.Style.LineStyle.Curvature);
+                DrawLineCurve(_dc, strokeLine, line.IsStroked, ref pt1, ref pt2, line.Style.LineStyle.Curvature, line.Style.LineStyle.CurveOrientation);
             }
             else
             {

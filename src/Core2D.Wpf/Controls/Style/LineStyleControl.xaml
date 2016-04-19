@@ -8,6 +8,7 @@
              xmlns:local="clr-namespace:Core2D.Wpf" 
              xmlns:converters="clr-namespace:Core2D.Wpf.Converters" 
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D"
+             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
              xmlns:core="clr-namespace:Core2D;assembly=Core2D" 
              xmlns:custom="clr-namespace:Core2D.Wpf.Controls.Custom"
              mc:Ignorable="d" 
@@ -17,6 +18,7 @@
         <TabItem Header="LineStyle">
             <Grid>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -33,6 +35,8 @@
                 <TextBlock Text="Curvature" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="2" Grid.Column="0"/>
                 <TextBox Text="{Binding Curvature, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxCenterStyleKey}" Grid.Row="2" Grid.Column="1"/>
                 <Slider Value="{Binding Curvature}" Style="{StaticResource SliderStyleKey}" Minimum="0" Maximum="100" TickFrequency="0.1" SmallChange="0.1" LargeChange="1" IsSnapToTickEnabled="True" Grid.Row="2" Grid.Column="2"/>
+                <TextBlock Text="CurveOrientation" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="3" Grid.Column="0"/>
+                <ComboBox ItemsSource="{x:Static Editor:Enums.CurveOrientationValues}" SelectedItem="{Binding CurveOrientation}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"/>
             </Grid>
         </TabItem>
         <TabItem Header="FixedLength">

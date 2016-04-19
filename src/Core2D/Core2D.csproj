@@ -208,6 +208,7 @@
     <Compile Include="Style\ArrowType.cs" />
     <Compile Include="Style\BaseStyle.cs" />
     <Compile Include="Style\Colors.cs" />
+    <Compile Include="Style\CurveOrientation.cs" />
     <Compile Include="Style\FontStyle.cs" />
     <Compile Include="Style\FontStyleFlags.cs" />
     <Compile Include="Style\LineCap.cs" />

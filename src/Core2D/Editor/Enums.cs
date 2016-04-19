@@ -15,6 +15,7 @@ namespace Core2D.Editor
         private static Tool[] _toolValues = (Tool[])Enum.GetValues(typeof(Tool));
         private static PathTool[] _pathToolValues = (PathTool[])Enum.GetValues(typeof(PathTool));
         private static LineCap[] _lineCapValues = (LineCap[])Enum.GetValues(typeof(LineCap));
+        private static CurveOrientation[] _curveOrientationValues = (CurveOrientation[])Enum.GetValues(typeof(CurveOrientation));
         private static ArrowType[] _arrowTypeValues = (ArrowType[])Enum.GetValues(typeof(ArrowType));
         private static TextHAlignment[] _textHAlignmentValues = (TextHAlignment[])Enum.GetValues(typeof(TextHAlignment));
         private static TextVAlignment[] _textVAlignmentValues = (TextVAlignment[])Enum.GetValues(typeof(TextVAlignment));
@@ -44,6 +45,14 @@ namespace Core2D.Editor
         public static LineCap[] LineCapValues
         {
             get { return _lineCapValues; }
+        }
+
+        /// <summary>
+        /// The <see cref="CurveOrientation"/> enum values.
+        /// </summary>
+        public static CurveOrientation[] CurveOrientationValues
+        {
+            get { return _curveOrientationValues; }
         }
 
         /// <summary>
