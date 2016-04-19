@@ -9,12 +9,17 @@ namespace Core2D.Style
     public enum CurveOrientation
     {
         /// <summary>
-        /// Horizontal curve.
+        /// Curve auto orientation.
+        /// </summary>
+        Auto,
+
+        /// <summary>
+        /// Curve horizontal orientation.
         /// </summary>
         Horizontal,
 
         /// <summary>
-        /// Vertical curve.
+        /// Curve vertical orientation.
         /// </summary>
         Vertical
     }
