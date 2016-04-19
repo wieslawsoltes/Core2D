@@ -73,7 +73,7 @@ namespace Core2D.Style
         public static LineStyle Create(
             string name = "", 
             bool isCurved = false, 
-            double curvature = 60.0, 
+            double curvature = 50.0, 
             CurveOrientation curveOrientation = CurveOrientation.Auto, 
             LineFixedLength fixedLength = null)
         {
