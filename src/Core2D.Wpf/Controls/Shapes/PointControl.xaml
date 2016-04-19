@@ -8,6 +8,7 @@
              xmlns:local="clr-namespace:Core2D.Wpf" 
              xmlns:converters="clr-namespace:Core2D.Wpf.Converters" 
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D"
+             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
              xmlns:core="clr-namespace:Core2D;assembly=Core2D" 
              xmlns:custom="clr-namespace:Core2D.Wpf.Controls.Custom"
              mc:Ignorable="d" 
@@ -17,6 +18,7 @@
         <TabItem Header="Point">
             <Grid>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -31,6 +33,8 @@
                 <TextBox Text="{Binding X, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="1" Grid.Column="1"/>
                 <TextBlock Text="Y" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="2" Grid.Column="0"/>
                 <TextBox Text="{Binding Y, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="2" Grid.Column="1"/>
+                <TextBlock Text="Alignment" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="3" Grid.Column="0"/>
+                <ComboBox ItemsSource="{x:Static Editor:Enums.PointAlignmentValues}" SelectedItem="{Binding Alignment}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="3" Grid.Column="1"/>
             </Grid>
         </TabItem>
         <TabItem Header="State">
