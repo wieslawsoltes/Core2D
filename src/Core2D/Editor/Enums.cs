@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Core2D.Path;
 using Core2D.Project;
+using Core2D.Shape;
 using Core2D.Style;
 using System;
 
@@ -22,6 +23,7 @@ namespace Core2D.Editor
         private static XMoveMode[] _moveModeValues = (XMoveMode[])Enum.GetValues(typeof(XMoveMode));
         private static XFillRule[] _xFillRuleValues = (XFillRule[])Enum.GetValues(typeof(XFillRule));
         private static XSweepDirection[] _xSweepDirectionValues = (XSweepDirection[])Enum.GetValues(typeof(XSweepDirection));
+        private static PointAlignment[] _pointAlignmentValues = (PointAlignment[])Enum.GetValues(typeof(PointAlignment));
 
         /// <summary>
         /// The <see cref="Tool"/> enum values.
@@ -101,6 +103,14 @@ namespace Core2D.Editor
         public static XSweepDirection[] XSweepDirectionValues
         {
             get { return _xSweepDirectionValues; }
+        }
+
+        /// <summary>
+        /// The <see cref="PointAlignment"/> enum values.
+        /// </summary>
+        public static PointAlignment[] PointAlignmentValues
+        {
+            get { return _pointAlignmentValues; }
         }
     }
 }
