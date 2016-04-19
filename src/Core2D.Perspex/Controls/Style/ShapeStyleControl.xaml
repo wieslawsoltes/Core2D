@@ -24,14 +24,14 @@
         </TabItem>
         <TabItem Header="Line" Classes="property">
             <TabControl Classes="default">
+                <TabItem Header="LineStyle" Classes="property">
+                    <ContentControl Content="{Binding LineStyle}"/>
+                </TabItem>
                 <TabItem Header="StartArrow" Classes="property">
                     <ContentControl Content="{Binding StartArrowStyle}"/>
                 </TabItem>
                 <TabItem Header="EndArrow" Classes="property">
                     <ContentControl Content="{Binding EndArrowStyle}"/>
-                </TabItem>
-                <TabItem Header="LineStyle" Classes="property">
-                    <ContentControl Content="{Binding LineStyle}"/>
                 </TabItem>
             </TabControl>
         </TabItem>
