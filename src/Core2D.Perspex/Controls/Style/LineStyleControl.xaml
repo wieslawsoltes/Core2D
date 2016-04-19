@@ -10,9 +10,14 @@
              Design.Width="250" Design.Height="400">
     <TabControl Classes="default">
         <TabItem Header="LineStyle" Classes="property">
-            <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*">
+            <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto,50,*">
                 <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                <TextBox Text="{Binding Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                <TextBox Text="{Binding Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"/>
+                <TextBlock Text="IsCurved" Classes="left" Grid.Row="1" Grid.Column="0"/>
+                <CheckBox IsChecked="{Binding IsCurved, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"/>
+                <TextBlock Text="Curvature" Classes="left" Grid.Row="2" Grid.Column="0"/>
+                <TextBox Text="{Binding Curvature, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
+                <Slider Classes="slider" Value="{Binding Curvature, Mode=TwoWay}" Minimum="0" Maximum="100" Grid.Row="2" Grid.Column="2"/>
             </Grid>
         </TabItem>
         <TabItem Header="FixedLength" Classes="property">
