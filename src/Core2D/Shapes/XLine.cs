@@ -345,19 +345,22 @@ namespace Core2D.Shapes
                             switch (p2a)
                             {
                                 case PointAlignment.None:
-                                    // TODO: 
                                     break;
                                 case PointAlignment.Left:
-                                    // TODO: 
+                                    p2x -= offset;
+                                    p1x += offset;
                                     break;
                                 case PointAlignment.Right:
-                                    // TODO: 
+                                    p2x += offset;
+                                    p1x -= offset;
                                     break;
                                 case PointAlignment.Top:
-                                    // TODO: 
+                                    p2y -= offset;
+                                    p1y += offset;
                                     break;
                                 case PointAlignment.Bottom:
-                                    // TODO: 
+                                    p2y += offset;
+                                    p1y -= offset;
                                     break;
                             }
                         }
@@ -367,20 +370,22 @@ namespace Core2D.Shapes
                             switch (p2a)
                             {
                                 case PointAlignment.None:
-                                    // TODO: 
+                                    p1x -= offset;
+                                    p2x += offset;
                                     break;
                                 case PointAlignment.Left:
-                                    // TODO: 
+                                    p1x -= offset;
+                                    p2x -= offset;
                                     break;
                                 case PointAlignment.Right:
                                     p1x -= offset;
                                     p2x += offset;
                                     break;
                                 case PointAlignment.Top:
-                                    // TODO: 
+                                    p1x -= offset;
                                     break;
                                 case PointAlignment.Bottom:
-                                    // TODO: 
+                                    p2y += offset;
                                     break;
                             }
                         }
@@ -390,20 +395,22 @@ namespace Core2D.Shapes
                             switch (p2a)
                             {
                                 case PointAlignment.None:
-                                    // TODO: 
+                                    p1x += offset;
+                                    p2x -= offset;
                                     break;
                                 case PointAlignment.Left:
                                     p1x += offset;
                                     p2x -= offset;
                                     break;
                                 case PointAlignment.Right:
-                                    // TODO: 
+                                    p1x += offset;
+                                    p2x += offset;
                                     break;
                                 case PointAlignment.Top:
-                                    // TODO: 
+                                    p1x += offset;
                                     break;
                                 case PointAlignment.Bottom:
-                                    // TODO: 
+                                    p2y += offset;
                                     break;
                             }
                         }
@@ -413,16 +420,18 @@ namespace Core2D.Shapes
                             switch (p2a)
                             {
                                 case PointAlignment.None:
-                                    // TODO: 
+                                    p1y -= offset;
+                                    p2y += offset;
                                     break;
                                 case PointAlignment.Left:
-                                    // TODO: 
+                                    p2x -= offset;
                                     break;
                                 case PointAlignment.Right:
-                                    // TODO: 
+                                    p2x += offset;
                                     break;
                                 case PointAlignment.Top:
-                                    // TODO: 
+                                    p1y -= offset;
+                                    p2y -= offset;
                                     break;
                                 case PointAlignment.Bottom:
                                     p1y -= offset;
@@ -436,20 +445,22 @@ namespace Core2D.Shapes
                             switch (p2a)
                             {
                                 case PointAlignment.None:
-                                    // TODO: 
+                                    p1y += offset;
+                                    p2y -= offset;
                                     break;
                                 case PointAlignment.Left:
-                                    // TODO: 
+                                    p1y += offset;
                                     break;
                                 case PointAlignment.Right:
-                                    // TODO: 
+                                    p1y += offset;
                                     break;
                                 case PointAlignment.Top:
                                     p1y += offset;
                                     p2y -= offset;
                                     break;
                                 case PointAlignment.Bottom:
-                                    // TODO: 
+                                    p1y += offset;
+                                    p2y += offset;
                                     break;
                             }
                         }
