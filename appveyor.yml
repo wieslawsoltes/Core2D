@@ -24,6 +24,8 @@ after_build:
 
     7z a Core2D.Perspex.Direct2D-%CONFIGURATION%-%APPVEYOR_BUILD_VERSION%.zip %APPVEYOR_BUILD_FOLDER%\src\Core2D.Perspex.Direct2D\bin\%CONFIGURATION%\*
 
+    7z a Core2D.Perspex.Skia-%CONFIGURATION%-%APPVEYOR_BUILD_VERSION%.zip %APPVEYOR_BUILD_FOLDER%\src\Core2D.Perspex.Direct2D\bin\%CONFIGURATION%\*
+
     7z a Core2D.Wpf-%CONFIGURATION%-%APPVEYOR_BUILD_VERSION%.zip %APPVEYOR_BUILD_FOLDER%\src\Core2D.Wpf\bin\%CONFIGURATION%\*
 
     appveyor PushArtifact Core2D-%CONFIGURATION%-%APPVEYOR_BUILD_VERSION%.zip
@@ -33,6 +35,8 @@ after_build:
     appveyor PushArtifact Core2D.Perspex.Cairo-%CONFIGURATION%-%APPVEYOR_BUILD_VERSION%.zip
 
     appveyor PushArtifact Core2D.Perspex.Direct2D-%CONFIGURATION%-%APPVEYOR_BUILD_VERSION%.zip
+
+    appveyor PushArtifact Core2D.Perspex.Skia-%CONFIGURATION%-%APPVEYOR_BUILD_VERSION%.zip
 
     appveyor PushArtifact Core2D.Wpf-%CONFIGURATION%-%APPVEYOR_BUILD_VERSION%.zip
 deploy:

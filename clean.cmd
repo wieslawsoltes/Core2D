@@ -72,6 +72,9 @@ rmdir /Q /S src\Core2D.Perspex.Cairo\obj
 rmdir /Q /S src\Core2D.Perspex.Direct2D\bin
 rmdir /Q /S src\Core2D.Perspex.Direct2D\obj
 
+rmdir /Q /S src\Core2D.Perspex.Skia\bin
+rmdir /Q /S src\Core2D.Perspex.Skia\obj
+
 rmdir /Q /S src\Core2D.Wpf\bin
 rmdir /Q /S src\Core2D.Wpf\obj
 
