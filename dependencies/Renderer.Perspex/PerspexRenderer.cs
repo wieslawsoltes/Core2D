@@ -199,6 +199,41 @@ namespace Renderer.Perspex
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="_dc"></param>
+        /// <param name="line"></param>
+        /// <param name="pen"></param>
+        /// <param name="isStroked"></param>
+        /// <param name="pt1"></param>
+        /// <param name="pt2"></param>
+        /// <param name="offset"></param>
+        private static void DrawLineCurve(
+            PM.DrawingContext _dc,
+            XLine line,
+            PM.Pen pen,
+            bool isStroked,
+            ref P.Point pt1,
+            ref P.Point pt2,
+            double offset)
+        {
+            if (isStroked)
+            {
+                var sg = new PM.StreamGeometry();
+                using (var sgc = sg.Open())
+                {
+                    sgc.BeginFigure(new P.Point(pt1.X, pt1.Y), false);
+                    sgc.CubicBezierTo(
+                        new P.Point(pt1.X + offset, pt1.Y),
+                        new P.Point(pt2.X - offset, pt2.Y),
+                        new P.Point(pt2.X, pt2.Y));
+                    sgc.EndFigure(false);
+                }
+                _dc.DrawGeometry(null, line.IsStroked ? pen : null, sg);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="dc"></param>
         /// <param name="line"></param>
         /// <param name="dx"></param>
@@ -479,7 +514,15 @@ namespace Renderer.Perspex
             P.Point pt1, pt2;
 
             DrawLineArrowsInternal(_dc, line, dx, dy, out pt1, out pt2);
-            DrawLineInternal(_dc, strokeLine, line.IsStroked, ref pt1, ref pt2);
+
+            if (line.Style.LineStyle.IsCurved)
+            {
+                DrawLineCurve(_dc, line, strokeLine, line.IsStroked, ref pt1, ref pt2, line.Style.LineStyle.Curvature);
+            }
+            else
+            {
+                DrawLineInternal(_dc, strokeLine, line.IsStroked, ref pt1, ref pt2);
+            }
         }
 
         /// <inheritdoc/>
