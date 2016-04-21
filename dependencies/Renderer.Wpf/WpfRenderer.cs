@@ -6,7 +6,6 @@ using Core2D.Math.Arc;
 using Core2D.Path;
 using Core2D.Project;
 using Core2D.Renderer;
-using Core2D.Shape;
 using Core2D.Shapes;
 using Core2D.Style;
 using System;
@@ -25,33 +24,15 @@ namespace Renderer.Wpf
     /// </summary>
     public class WpfRenderer : ShapeRenderer
     {
-        private Cache<ShapeStyle, Tuple<Brush, Pen>> _styleCache =
-            Cache<ShapeStyle, Tuple<Brush, Pen>>.Create();
-
-        private Cache<ArrowStyle, Tuple<Brush, Pen>> _arrowStyleCache =
-            Cache<ArrowStyle, Tuple<Brush, Pen>>.Create();
-
-        private Cache<XLine, PathGeometry> _curvedLineCache =
-            Cache<XLine, PathGeometry>.Create();
-
-        private Cache<XArc, PathGeometry> _arcCache =
-            Cache<XArc, PathGeometry>.Create();
-
-        private Cache<XCubicBezier, PathGeometry> _cubicBezierCache =
-            Cache<XCubicBezier, PathGeometry>.Create();
-
-        private Cache<XQuadraticBezier, PathGeometry> _quadraticBezierCache =
-            Cache<XQuadraticBezier, PathGeometry>.Create();
-
-        private Cache<XText, Tuple<string, FormattedText, ShapeStyle>> _textCache =
-            Cache<XText, Tuple<string, FormattedText, ShapeStyle>>.Create();
-
-        private Cache<string, BitmapImage> _biCache =
-            Cache<string, BitmapImage>.Create(bi => bi.StreamSource.Dispose());
-
-        private Cache<XPath, Tuple<XPathGeometry, StreamGeometry, ShapeStyle>> _pathCache =
-            Cache<XPath, Tuple<XPathGeometry, StreamGeometry, ShapeStyle>>.Create();
-
+        private Cache<ShapeStyle, Tuple<Brush, Pen>> _styleCache = Cache<ShapeStyle, Tuple<Brush, Pen>>.Create();
+        private Cache<ArrowStyle, Tuple<Brush, Pen>> _arrowStyleCache = Cache<ArrowStyle, Tuple<Brush, Pen>>.Create();
+        private Cache<XLine, PathGeometry> _curvedLineCache = Cache<XLine, PathGeometry>.Create();
+        private Cache<XArc, PathGeometry> _arcCache = Cache<XArc, PathGeometry>.Create();
+        private Cache<XCubicBezier, PathGeometry> _cubicBezierCache = Cache<XCubicBezier, PathGeometry>.Create();
+        private Cache<XQuadraticBezier, PathGeometry> _quadraticBezierCache = Cache<XQuadraticBezier, PathGeometry>.Create();
+        private Cache<XText, Tuple<string, FormattedText, ShapeStyle>> _textCache = Cache<XText, Tuple<string, FormattedText, ShapeStyle>>.Create();
+        private Cache<string, BitmapImage> _biCache = Cache<string, BitmapImage>.Create(bi => bi.StreamSource.Dispose());
+        private Cache<XPath, Tuple<XPathGeometry, StreamGeometry, ShapeStyle>> _pathCache = Cache<XPath, Tuple<XPathGeometry, StreamGeometry, ShapeStyle>>.Create();
         private ShapeRendererState _state = new ShapeRendererState();
 
         /// <inheritdoc/>
@@ -78,13 +59,6 @@ namespace Renderer.Wpf
             return new WpfRenderer();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="style"></param>
-        /// <param name="rect"></param>
-        /// <param name="ft"></param>
-        /// <returns></returns>
         private static Point GetTextOrigin(ShapeStyle style, ref Rect rect, FormattedText ft)
         {
             double ox, oy;
@@ -120,29 +94,13 @@ namespace Renderer.Wpf
             return new Point(ox, oy);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="color"></param>
-        /// <returns></returns>
         private static Brush CreateBrush(ArgbColor color)
         {
-            var brush = new SolidColorBrush(
-                Color.FromArgb(
-                    color.A,
-                    color.R,
-                    color.G,
-                    color.B));
+            var brush = new SolidColorBrush(Color.FromArgb(color.A, color.R, color.G, color.B));
             brush.Freeze();
             return brush;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="style"></param>
-        /// <param name="thickness"></param>
-        /// <returns></returns>
         private static Pen CreatePen(BaseStyle style, double thickness)
         {
             var brush = CreateBrush(style.Stroke);
@@ -173,14 +131,6 @@ namespace Renderer.Wpf
             return pen;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="tl"></param>
-        /// <param name="br"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <returns></returns>
         private static Rect CreateRect(XPoint tl, XPoint br, double dx, double dy)
         {
             double tlx = Math.Min(tl.X, br.X);
@@ -192,22 +142,7 @@ namespace Renderer.Wpf
                 new Point(brx + dx, bry + dy));
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dc"></param>
-        /// <param name="half"></param>
-        /// <param name="pen"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="p0"></param>
-        /// <param name="p1"></param>
-        private static void DrawLineInternal(
-            DrawingContext dc,
-            double half,
-            Pen pen,
-            bool isStroked,
-            ref Point p0,
-            ref Point p1)
+        private static void DrawLineInternal(DrawingContext dc, double half, Pen pen, bool isStroked, ref Point p0, ref Point p1)
         {
             if (!isStroked)
                 return;
@@ -216,32 +151,11 @@ namespace Renderer.Wpf
                 new double[] { p0.X + half, p1.X + half },
                 new double[] { p0.Y + half, p1.Y + half });
             dc.PushGuidelineSet(gs);
-
             dc.DrawLine(isStroked ? pen : null, p0, p1);
-
             dc.Pop();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dc"></param>
-        /// <param name="half"></param>
-        /// <param name="pen"></param>
-        /// <param name="line"></param>
-        /// <param name="pt1"></param>
-        /// <param name="pt2"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        private void DrawLineCurveInternal(
-            DrawingContext dc,
-            double half,
-            Pen pen,
-            XLine line,
-            ref Point pt1,
-            ref Point pt2,
-            double dx,
-            double dy)
+        private void DrawLineCurveInternal(DrawingContext dc, double half, Pen pen, XLine line, ref Point pt1, ref Point pt2, double dx, double dy)
         {
             double p1x = pt1.X;
             double p1y = pt1.Y;
@@ -292,32 +206,7 @@ namespace Renderer.Wpf
             DrawPathGeometryInternal(dc, half, null, pen, line.IsStroked, false, pg);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dc"></param>
-        /// <param name="line"></param>
-        /// <param name="style"></param>
-        /// <param name="halfStart"></param>
-        /// <param name="halfEnd"></param>
-        /// <param name="thicknessStart"></param>
-        /// <param name="thicknessEnd"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <param name="pt1"></param>
-        /// <param name="pt2"></param>
-        private void DrawLineArrowsInternal(
-            DrawingContext dc,
-            XLine line,
-            ShapeStyle style,
-            double halfStart,
-            double halfEnd,
-            double thicknessStart,
-            double thicknessEnd,
-            double dx,
-            double dy,
-            out Point pt1,
-            out Point pt2)
+        private void DrawLineArrowsInternal(DrawingContext dc, XLine line, ShapeStyle style, double halfStart, double halfEnd, double thicknessStart, double thicknessEnd, double dx, double dy, out Point pt1, out Point pt2)
         {
             // Start arrow style.
             Tuple<Brush, Pen> startArrowCache = _arrowStyleCache.Get(style.StartArrowStyle);
@@ -388,35 +277,7 @@ namespace Renderer.Wpf
                 a2, eas.ArrowType, eas.RadiusX, eas.RadiusY);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dc"></param>
-        /// <param name="half"></param>
-        /// <param name="pen"></param>
-        /// <param name="brush"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="isFilled"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <param name="angle"></param>
-        /// <param name="type"></param>
-        /// <param name="rx"></param>
-        /// <param name="ry"></param>
-        /// <returns></returns>
-        private static Point DrawLineArrowInternal(
-            DrawingContext dc,
-            double half,
-            Pen pen,
-            Brush brush,
-            bool isStroked,
-            bool isFilled,
-            double x,
-            double y,
-            double angle,
-            ArrowType type,
-            double rx,
-            double ry)
+        private static Point DrawLineArrowInternal(DrawingContext dc, double half, Pen pen, Brush brush, bool isStroked, bool isFilled, double x, double y, double angle, ArrowType type, double rx, double ry)
         {
             Point pt;
             bool doRectTransform = angle % 90.0 != 0.0;
@@ -474,24 +335,7 @@ namespace Renderer.Wpf
             return pt;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dc"></param>
-        /// <param name="half"></param>
-        /// <param name="brush"></param>
-        /// <param name="pen"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="isFilled"></param>
-        /// <param name="rect"></param>
-        private static void DrawRectangleInternal(
-            DrawingContext dc,
-            double half,
-            Brush brush,
-            Pen pen,
-            bool isStroked,
-            bool isFilled,
-            ref Rect rect)
+        private static void DrawRectangleInternal(DrawingContext dc, double half, Brush brush, Pen pen, bool isStroked, bool isFilled, ref Rect rect)
         {
             if (!isStroked && !isFilled)
                 return;
@@ -508,35 +352,11 @@ namespace Renderer.Wpf
                         rect.BottomRight.Y + half
                     });
             dc.PushGuidelineSet(gs);
-
-            dc.DrawRectangle(
-                isFilled ? brush : null,
-                isStroked ? pen : null,
-                rect);
+            dc.DrawRectangle(isFilled ? brush : null, isStroked ? pen : null, rect);
             dc.Pop();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dc"></param>
-        /// <param name="half"></param>
-        /// <param name="brush"></param>
-        /// <param name="pen"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="isFilled"></param>
-        /// <param name="center"></param>
-        /// <param name="rx"></param>
-        /// <param name="ry"></param>
-        private static void DrawEllipseInternal(
-            DrawingContext dc,
-            double half,
-            Brush brush,
-            Pen pen,
-            bool isStroked,
-            bool isFilled,
-            ref Point center,
-            double rx, double ry)
+        private static void DrawEllipseInternal(DrawingContext dc, double half, Brush brush, Pen pen, bool isStroked, bool isFilled, ref Point center, double rx, double ry)
         {
             if (!isStroked && !isFilled)
                 return;
@@ -553,34 +373,11 @@ namespace Renderer.Wpf
                         center.Y + ry + half
                     });
             dc.PushGuidelineSet(gs);
-
-            dc.DrawEllipse(
-                isFilled ? brush : null,
-                isStroked ? pen : null,
-                center,
-                rx, ry);
-
+            dc.DrawEllipse(isFilled ? brush : null, isStroked ? pen : null, center, rx, ry);
             dc.Pop();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dc"></param>
-        /// <param name="half"></param>
-        /// <param name="brush"></param>
-        /// <param name="pen"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="isFilled"></param>
-        /// <param name="pg"></param>
-        private static void DrawPathGeometryInternal(
-            DrawingContext dc,
-            double half,
-            Brush brush,
-            Pen pen,
-            bool isStroked,
-            bool isFilled,
-            PathGeometry pg)
+        private static void DrawPathGeometryInternal(DrawingContext dc, double half, Brush brush, Pen pen, bool isStroked, bool isFilled, PathGeometry pg)
         {
             if (!isStroked && !isFilled)
                 return;
@@ -597,32 +394,11 @@ namespace Renderer.Wpf
                         pg.Bounds.BottomRight.Y + half
                     });
             dc.PushGuidelineSet(gs);
-
             dc.DrawGeometry(isFilled ? brush : null, isStroked ? pen : null, pg);
-
             dc.Pop();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dc"></param>
-        /// <param name="half"></param>
-        /// <param name="stroke"></param>
-        /// <param name="rect"></param>
-        /// <param name="offsetX"></param>
-        /// <param name="offsetY"></param>
-        /// <param name="cellWidth"></param>
-        /// <param name="cellHeight"></param>
-        /// <param name="isStroked"></param>
-        private static void DrawGridInternal(
-            DrawingContext dc,
-            double half,
-            Pen stroke,
-            ref Rect rect,
-            double offsetX, double offsetY,
-            double cellWidth, double cellHeight,
-            bool isStroked)
+        private static void DrawGridInternal(DrawingContext dc, double half, Pen stroke, ref Rect rect, double offsetX, double offsetY, double cellWidth, double cellHeight, bool isStroked)
         {
             double ox = rect.X;
             double oy = rect.Y;
@@ -646,23 +422,11 @@ namespace Renderer.Wpf
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dc"></param>
-        /// <param name="template"></param>
         private static void DrawTemplateBackground(DrawingContext dc, XContainer template)
         {
             var brush = CreateBrush(template.Background);
             var rect = new Rect(0, 0, template.Width, template.Height);
-            DrawRectangleInternal(
-                dc,
-                0.5,
-                brush,
-                null,
-                false,
-                true,
-                ref rect);
+            DrawRectangleInternal(dc, 0.5, brush, null, false, true, ref rect);
         }
 
         /// <inheritdoc/>
@@ -778,28 +542,13 @@ namespace Renderer.Wpf
                 _styleCache.Set(style, Tuple.Create(fill, stroke));
             }
 
-            var rect = CreateRect(
-                rectangle.TopLeft,
-                rectangle.BottomRight,
-                dx, dy);
+            var rect = CreateRect(rectangle.TopLeft, rectangle.BottomRight, dx, dy);
 
-            DrawRectangleInternal(
-                _dc,
-                half,
-                fill, stroke,
-                rectangle.IsStroked, rectangle.IsFilled,
-                ref rect);
+            DrawRectangleInternal(_dc, half, fill, stroke, rectangle.IsStroked, rectangle.IsFilled, ref rect);
 
             if (rectangle.IsGrid)
             {
-                DrawGridInternal(
-                    _dc,
-                    half,
-                    stroke,
-                    ref rect,
-                    rectangle.OffsetX, rectangle.OffsetY,
-                    rectangle.CellWidth, rectangle.CellHeight,
-                    true);
+                DrawGridInternal(_dc, half, stroke, ref rect, rectangle.OffsetX, rectangle.OffsetY, rectangle.CellWidth, rectangle.CellHeight, true);
             }
         }
 
@@ -830,21 +579,12 @@ namespace Renderer.Wpf
                 _styleCache.Set(style, Tuple.Create(fill, stroke));
             }
 
-            var rect = CreateRect(
-                ellipse.TopLeft,
-                ellipse.BottomRight,
-                dx, dy);
+            var rect = CreateRect(ellipse.TopLeft, ellipse.BottomRight, dx, dy);
             double rx = rect.Width / 2.0;
             double ry = rect.Height / 2.0;
             var center = new Point(rect.X + rx, rect.Y + ry);
 
-            DrawEllipseInternal(
-                _dc,
-                half,
-                fill, stroke,
-                ellipse.IsStroked, ellipse.IsFilled,
-                ref center,
-                rx, ry);
+            DrawEllipseInternal(_dc, half, fill, stroke, ellipse.IsStroked, ellipse.IsFilled, ref center, rx, ry);
         }
 
         /// <inheritdoc/>
@@ -1074,10 +814,7 @@ namespace Renderer.Wpf
                 _styleCache.Set(style, Tuple.Create(fill, stroke));
             }
 
-            var rect = CreateRect(
-                text.TopLeft,
-                text.BottomRight,
-                dx, dy);
+            var rect = CreateRect(text.TopLeft, text.BottomRight, dx, dy);
 
             Tuple<string, FormattedText, ShapeStyle> tcache = _textCache.Get(text);
             FormattedText ft;
@@ -1086,10 +823,7 @@ namespace Renderer.Wpf
             {
                 ct = tcache.Item1;
                 ft = tcache.Item2;
-
-                _dc.DrawText(
-                    ft,
-                    GetTextOrigin(style, ref rect, ft));
+                _dc.DrawText(ft, GetTextOrigin(style, ref rect, ft));
             }
             else
             {
@@ -1111,11 +845,7 @@ namespace Renderer.Wpf
                     }
                 }
 
-                var tf = new Typeface(
-                    new FontFamily(style.TextStyle.FontName),
-                    fontStyle,
-                    fontWeight,
-                    FontStretches.Normal);
+                var tf = new Typeface(new FontFamily(style.TextStyle.FontName), fontStyle, fontWeight, FontStretches.Normal);
 
                 ft = new FormattedText(
                     tbind,
@@ -1150,9 +880,7 @@ namespace Renderer.Wpf
 
                 _textCache.Set(text, Tuple.Create(tbind, ft, style));
 
-                _dc.DrawText(
-                    ft,
-                    GetTextOrigin(style, ref rect, ft));
+                _dc.DrawText(ft, GetTextOrigin(style, ref rect, ft));
             }
         }
 
@@ -1186,10 +914,7 @@ namespace Renderer.Wpf
                 _styleCache.Set(style, Tuple.Create(fill, stroke));
             }
 
-            var rect = CreateRect(
-                image.TopLeft,
-                image.BottomRight,
-                dx, dy);
+            var rect = CreateRect(image.TopLeft, image.BottomRight, dx, dy);
 
             DrawRectangleInternal(_dc, half, fill, stroke, image.IsStroked, image.IsFilled, ref rect);
 
