@@ -25,15 +25,7 @@ namespace Renderer.Perspex
     {
         private bool _enableImageCache = true;
         private IDictionary<string, PMI.Bitmap> _biCache;
-
-        /// <summary>
-        /// 
-        /// </summary>
         private Func<double, float> _scaleToPage;
-
-        /// <summary>
-        /// 
-        /// </summary>
         private double _textScaleFactor;
 
         /// <summary>
@@ -57,13 +49,6 @@ namespace Renderer.Perspex
             return new PerspexRenderer();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="style"></param>
-        /// <param name="rect"></param>
-        /// <param name="size"></param>
-        /// <returns></returns>
         private P.Point GetTextOrigin(ShapeStyle style, ref Rect2 rect, ref P.Size size)
         {
             double ox, oy;
@@ -99,11 +84,6 @@ namespace Renderer.Perspex
             return new P.Point(ox, oy);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="color"></param>
-        /// <returns></returns>
         private PM.Color ToColor(ArgbColor color)
         {
             return PM.Color.FromArgb(
@@ -113,12 +93,6 @@ namespace Renderer.Perspex
                 color.B);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="style"></param>
-        /// <param name="scale"></param>
-        /// <returns></returns>
         private PM.Pen ToPen(BaseStyle style, Func<double, float> scale)
         {
             var lineCap = default(PM.PenLineCap);
@@ -153,43 +127,17 @@ namespace Renderer.Perspex
             return pen;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="color"></param>
-        /// <returns></returns>
         private PM.IBrush ToBrush(ArgbColor color)
         {
             return new PM.SolidColorBrush(ToColor(color));
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="tl"></param>
-        /// <param name="br"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <returns></returns>
         private static Rect2 CreateRect(XPoint tl, XPoint br, double dx, double dy)
         {
             return Rect2.Create(tl, br, dx, dy);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dc"></param>
-        /// <param name="pen"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="p0"></param>
-        /// <param name="p1"></param>
-        private static void DrawLineInternal(
-            PM.DrawingContext dc,
-            PM.Pen pen,
-            bool isStroked,
-            ref P.Point p0,
-            ref P.Point p1)
+        private static void DrawLineInternal(PM.DrawingContext dc, PM.Pen pen, bool isStroked, ref P.Point p0, ref P.Point p1)
         {
             if (isStroked)
             {
@@ -197,28 +145,7 @@ namespace Renderer.Perspex
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="_dc"></param>
-        /// <param name="pen"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="pt1"></param>
-        /// <param name="pt2"></param>
-        /// <param name="curvature"></param>
-        /// <param name="orientation"></param>
-        /// <param name="pt1a"></param>
-        /// <param name="pt2a"></param>
-        private static void DrawLineCurveInternal(
-            PM.DrawingContext _dc,
-            PM.Pen pen,
-            bool isStroked,
-            ref P.Point pt1,
-            ref P.Point pt2,
-            double curvature,
-            CurveOrientation orientation,
-            PointAlignment pt1a,
-            PointAlignment pt2a)
+        private static void DrawLineCurveInternal(PM.DrawingContext _dc, PM.Pen pen, bool isStroked, ref P.Point pt1, ref P.Point pt2, double curvature, CurveOrientation orientation, PointAlignment pt1a, PointAlignment pt2a)
         {
             if (isStroked)
             {
@@ -241,22 +168,7 @@ namespace Renderer.Perspex
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dc"></param>
-        /// <param name="line"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <param name="pt1"></param>
-        /// <param name="pt2"></param>
-        private void DrawLineArrowsInternal(
-            PM.DrawingContext dc,
-            XLine line,
-            double dx,
-            double dy,
-            out P.Point pt1,
-            out P.Point pt2)
+        private void DrawLineArrowsInternal(PM.DrawingContext dc, XLine line, double dx, double dy, out P.Point pt1, out P.Point pt2)
         {
             PM.IBrush fillStartArrow = ToBrush(line.Style.StartArrowStyle.Fill);
             PM.Pen strokeStartArrow = ToPen(line.Style.StartArrowStyle, _scaleToPage);
@@ -391,22 +303,7 @@ namespace Renderer.Perspex
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dc"></param>
-        /// <param name="brush"></param>
-        /// <param name="pen"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="isFilled"></param>
-        /// <param name="rect"></param>
-        private static void DrawRectangleInternal(
-            PM.DrawingContext dc,
-            PM.IBrush brush,
-            PM.Pen pen,
-            bool isStroked,
-            bool isFilled,
-            ref Rect2 rect)
+        private static void DrawRectangleInternal(PM.DrawingContext dc, PM.IBrush brush, PM.Pen pen, bool isStroked, bool isFilled, ref Rect2 rect)
         {
             if (!isStroked && !isFilled)
                 return;
@@ -424,22 +321,7 @@ namespace Renderer.Perspex
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dc"></param>
-        /// <param name="brush"></param>
-        /// <param name="pen"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="isFilled"></param>
-        /// <param name="rect"></param>
-        private static void DrawEllipseInternal(
-            PM.DrawingContext dc,
-            PM.IBrush brush,
-            PM.Pen pen,
-            bool isStroked,
-            bool isFilled,
-            ref Rect2 rect)
+        private static void DrawEllipseInternal(PM.DrawingContext dc, PM.IBrush brush, PM.Pen pen, bool isStroked, bool isFilled, ref Rect2 rect)
         {
             if (!isFilled && !isStroked)
                 return;
@@ -453,24 +335,7 @@ namespace Renderer.Perspex
                 g);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dc"></param>
-        /// <param name="stroke"></param>
-        /// <param name="rect"></param>
-        /// <param name="offsetX"></param>
-        /// <param name="offsetY"></param>
-        /// <param name="cellWidth"></param>
-        /// <param name="cellHeight"></param>
-        /// <param name="isStroked"></param>
-        private void DrawGridInternal(
-            PM.DrawingContext dc,
-            PM.Pen stroke,
-            ref Rect2 rect,
-            double offsetX, double offsetY,
-            double cellWidth, double cellHeight,
-            bool isStroked)
+        private void DrawGridInternal(PM.DrawingContext dc, PM.Pen stroke, ref Rect2 rect, double offsetX, double offsetY, double cellWidth, double cellHeight, bool isStroked)
         {
             double ox = rect.X;
             double oy = rect.Y;
