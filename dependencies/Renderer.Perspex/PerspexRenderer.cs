@@ -205,17 +205,17 @@ namespace Renderer.Perspex
         /// <param name="isStroked"></param>
         /// <param name="pt1"></param>
         /// <param name="pt2"></param>
-        /// <param name="offset"></param>
+        /// <param name="curvature"></param>
         /// <param name="orientation"></param>
         /// <param name="pt1a"></param>
         /// <param name="pt2a"></param>
-        private static void DrawLineCurve(
+        private static void DrawLineCurveInternal(
             PM.DrawingContext _dc,
             PM.Pen pen,
             bool isStroked,
             ref P.Point pt1,
             ref P.Point pt2,
-            double offset,
+            double curvature,
             CurveOrientation orientation,
             PointAlignment pt1a,
             PointAlignment pt2a)
@@ -230,7 +230,7 @@ namespace Renderer.Perspex
                     double p1y = pt1.Y;
                     double p2x = pt2.X;
                     double p2y = pt2.Y;
-                    XLine.AdjustLineCurve(orientation, offset, pt1a, pt2a, ref p1x, ref p1y, ref p2x, ref p2y);
+                    XLine.AdjustLineCurve(orientation, curvature, pt1a, pt2a, ref p1x, ref p1y, ref p2x, ref p2y);
                     sgc.CubicBezierTo(
                         new P.Point(p1x, p1y),
                         new P.Point(p2x, p2y),
@@ -527,7 +527,7 @@ namespace Renderer.Perspex
 
             if (line.Style.LineStyle.IsCurved)
             {
-                DrawLineCurve(
+                DrawLineCurveInternal(
                     _dc, 
                     strokeLine, line.IsStroked, 
                     ref pt1, ref pt2, 
