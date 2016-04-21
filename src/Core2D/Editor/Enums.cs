@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Core2D.Path;
 using Core2D.Project;
+using Core2D.Shape;
 using Core2D.Style;
 using System;
 
@@ -15,12 +16,14 @@ namespace Core2D.Editor
         private static Tool[] _toolValues = (Tool[])Enum.GetValues(typeof(Tool));
         private static PathTool[] _pathToolValues = (PathTool[])Enum.GetValues(typeof(PathTool));
         private static LineCap[] _lineCapValues = (LineCap[])Enum.GetValues(typeof(LineCap));
+        private static CurveOrientation[] _curveOrientationValues = (CurveOrientation[])Enum.GetValues(typeof(CurveOrientation));
         private static ArrowType[] _arrowTypeValues = (ArrowType[])Enum.GetValues(typeof(ArrowType));
         private static TextHAlignment[] _textHAlignmentValues = (TextHAlignment[])Enum.GetValues(typeof(TextHAlignment));
         private static TextVAlignment[] _textVAlignmentValues = (TextVAlignment[])Enum.GetValues(typeof(TextVAlignment));
         private static XMoveMode[] _moveModeValues = (XMoveMode[])Enum.GetValues(typeof(XMoveMode));
         private static XFillRule[] _xFillRuleValues = (XFillRule[])Enum.GetValues(typeof(XFillRule));
         private static XSweepDirection[] _xSweepDirectionValues = (XSweepDirection[])Enum.GetValues(typeof(XSweepDirection));
+        private static PointAlignment[] _pointAlignmentValues = (PointAlignment[])Enum.GetValues(typeof(PointAlignment));
 
         /// <summary>
         /// The <see cref="Tool"/> enum values.
@@ -44,6 +47,14 @@ namespace Core2D.Editor
         public static LineCap[] LineCapValues
         {
             get { return _lineCapValues; }
+        }
+
+        /// <summary>
+        /// The <see cref="CurveOrientation"/> enum values.
+        /// </summary>
+        public static CurveOrientation[] CurveOrientationValues
+        {
+            get { return _curveOrientationValues; }
         }
 
         /// <summary>
@@ -92,6 +103,14 @@ namespace Core2D.Editor
         public static XSweepDirection[] XSweepDirectionValues
         {
             get { return _xSweepDirectionValues; }
+        }
+
+        /// <summary>
+        /// The <see cref="PointAlignment"/> enum values.
+        /// </summary>
+        public static PointAlignment[] PointAlignmentValues
+        {
+            get { return _pointAlignmentValues; }
         }
     }
 }

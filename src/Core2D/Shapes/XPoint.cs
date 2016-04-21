@@ -19,6 +19,7 @@ namespace Core2D.Shapes
     {
         private double _x;
         private double _y;
+        private PointAlignment _alignment;
         private BaseShape _shape;
 
         /// <summary>
@@ -37,6 +38,15 @@ namespace Core2D.Shapes
         {
             get { return _y; }
             set { Update(ref _y, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets point alignment.
+        /// </summary>
+        public PointAlignment Alignment
+        {
+            get { return _alignment; }
+            set { Update(ref _alignment, value); }
         }
 
         /// <summary>
@@ -93,9 +103,10 @@ namespace Core2D.Shapes
         /// <param name="x">The X coordinate of point.</param>
         /// <param name="y">The Y coordinate of point.</param>
         /// <param name="shape">The point template.</param>
+        /// <param name="alignment">The point alignment.</param>
         /// <param name="name">The shape name.</param>
         /// <returns>The new instance of the <see cref="XPoint"/> class.</returns>
-        public static XPoint Create(double x = 0.0, double y = 0.0, BaseShape shape = null, string name = "")
+        public static XPoint Create(double x = 0.0, double y = 0.0, BaseShape shape = null, PointAlignment alignment = PointAlignment.None, string name = "")
         {
             return new XPoint()
             {
@@ -103,6 +114,7 @@ namespace Core2D.Shapes
                 Style = default(ShapeStyle),
                 X = x,
                 Y = y,
+                Alignment = alignment,
                 Shape = shape
             };
         }
@@ -120,6 +132,7 @@ namespace Core2D.Shapes
                 Style = default(ShapeStyle),
                 X = point.X,
                 Y = point.Y,
+                Alignment = PointAlignment.None,
                 Shape = null
             };
         }
@@ -154,6 +167,7 @@ namespace Core2D.Shapes
                 Data = data,
                 X = this.X,
                 Y = this.Y,
+                Alignment = this.Alignment,
                 Shape = this.Shape
             };
         }

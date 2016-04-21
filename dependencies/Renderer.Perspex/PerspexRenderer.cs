@@ -5,6 +5,7 @@ using Core2D.Data.Database;
 using Core2D.Math;
 using Core2D.Math.Arc;
 using Core2D.Renderer;
+using Core2D.Shape;
 using Core2D.Shapes;
 using Core2D.Style;
 using System;
@@ -193,6 +194,50 @@ namespace Renderer.Perspex
             if (isStroked)
             {
                 dc.DrawLine(pen, p0, p1);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="_dc"></param>
+        /// <param name="pen"></param>
+        /// <param name="isStroked"></param>
+        /// <param name="pt1"></param>
+        /// <param name="pt2"></param>
+        /// <param name="offset"></param>
+        /// <param name="orientation"></param>
+        /// <param name="pt1a"></param>
+        /// <param name="pt2a"></param>
+        private static void DrawLineCurve(
+            PM.DrawingContext _dc,
+            PM.Pen pen,
+            bool isStroked,
+            ref P.Point pt1,
+            ref P.Point pt2,
+            double offset,
+            CurveOrientation orientation,
+            PointAlignment pt1a,
+            PointAlignment pt2a)
+        {
+            if (isStroked)
+            {
+                var sg = new PM.StreamGeometry();
+                using (var sgc = sg.Open())
+                {
+                    sgc.BeginFigure(new P.Point(pt1.X, pt1.Y), false);
+                    double p1x = pt1.X;
+                    double p1y = pt1.Y;
+                    double p2x = pt2.X;
+                    double p2y = pt2.Y;
+                    XLine.AdjustLineCurve(orientation, offset, pt1a, pt2a, ref p1x, ref p1y, ref p2x, ref p2y);
+                    sgc.CubicBezierTo(
+                        new P.Point(p1x, p1y),
+                        new P.Point(p2x, p2y),
+                        new P.Point(pt2.X, pt2.Y));
+                    sgc.EndFigure(false);
+                }
+                _dc.DrawGeometry(null, pen, sg);
             }
         }
 
@@ -479,7 +524,22 @@ namespace Renderer.Perspex
             P.Point pt1, pt2;
 
             DrawLineArrowsInternal(_dc, line, dx, dy, out pt1, out pt2);
-            DrawLineInternal(_dc, strokeLine, line.IsStroked, ref pt1, ref pt2);
+
+            if (line.Style.LineStyle.IsCurved)
+            {
+                DrawLineCurve(
+                    _dc, 
+                    strokeLine, line.IsStroked, 
+                    ref pt1, ref pt2, 
+                    line.Style.LineStyle.Curvature, 
+                    line.Style.LineStyle.CurveOrientation,
+                    line.Start.Alignment, 
+                    line.End.Alignment);
+            }
+            else
+            {
+                DrawLineInternal(_dc, strokeLine, line.IsStroked, ref pt1, ref pt2);
+            }
         }
 
         /// <inheritdoc/>

@@ -322,5 +322,161 @@ namespace Core2D.Shapes
                 // TODO: Implement shorten start and end case.
             }
         }
+
+        /// <summary>
+        /// Adjust curved line position.
+        /// </summary>
+        /// <param name="orientation">The curved line orientation.</param>
+        /// <param name="offset">The curved line offset.</param>
+        /// <param name="p1a">The line start point alignment.</param>
+        /// <param name="p2a">The line end point alignment.</param>
+        /// <param name="p1x">The adjusted X coordinate for curve start control point.</param>
+        /// <param name="p1y">The adjusted Y coordinate for curve start control point.</param>
+        /// <param name="p2x">The adjusted X coordinate for curve end control point.</param>
+        /// <param name="p2y">The adjusted Y coordinate for curve end control point.</param>
+        public static void AdjustLineCurve(CurveOrientation orientation, double offset, PointAlignment p1a, PointAlignment p2a, ref double p1x, ref double p1y, ref double p2x, ref double p2y)
+        {
+            if (orientation == CurveOrientation.Auto)
+            {
+                switch (p1a)
+                {
+                    case PointAlignment.None:
+                        {
+                            switch (p2a)
+                            {
+                                case PointAlignment.None:
+                                    break;
+                                case PointAlignment.Left:
+                                    p2x -= offset;
+                                    p1x += offset;
+                                    break;
+                                case PointAlignment.Right:
+                                    p2x += offset;
+                                    p1x -= offset;
+                                    break;
+                                case PointAlignment.Top:
+                                    p2y -= offset;
+                                    p1y += offset;
+                                    break;
+                                case PointAlignment.Bottom:
+                                    p2y += offset;
+                                    p1y -= offset;
+                                    break;
+                            }
+                        }
+                        break;
+                    case PointAlignment.Left:
+                        {
+                            switch (p2a)
+                            {
+                                case PointAlignment.None:
+                                    p1x -= offset;
+                                    p2x += offset;
+                                    break;
+                                case PointAlignment.Left:
+                                    p1x -= offset;
+                                    p2x -= offset;
+                                    break;
+                                case PointAlignment.Right:
+                                    p1x -= offset;
+                                    p2x += offset;
+                                    break;
+                                case PointAlignment.Top:
+                                    p1x -= offset;
+                                    break;
+                                case PointAlignment.Bottom:
+                                    p2y += offset;
+                                    break;
+                            }
+                        }
+                        break;
+                    case PointAlignment.Right:
+                        {
+                            switch (p2a)
+                            {
+                                case PointAlignment.None:
+                                    p1x += offset;
+                                    p2x -= offset;
+                                    break;
+                                case PointAlignment.Left:
+                                    p1x += offset;
+                                    p2x -= offset;
+                                    break;
+                                case PointAlignment.Right:
+                                    p1x += offset;
+                                    p2x += offset;
+                                    break;
+                                case PointAlignment.Top:
+                                    p1x += offset;
+                                    break;
+                                case PointAlignment.Bottom:
+                                    p2y += offset;
+                                    break;
+                            }
+                        }
+                        break;
+                    case PointAlignment.Top:
+                        {
+                            switch (p2a)
+                            {
+                                case PointAlignment.None:
+                                    p1y -= offset;
+                                    p2y += offset;
+                                    break;
+                                case PointAlignment.Left:
+                                    p2x -= offset;
+                                    break;
+                                case PointAlignment.Right:
+                                    p2x += offset;
+                                    break;
+                                case PointAlignment.Top:
+                                    p1y -= offset;
+                                    p2y -= offset;
+                                    break;
+                                case PointAlignment.Bottom:
+                                    p1y -= offset;
+                                    p2y += offset;
+                                    break;
+                            }
+                        }
+                        break;
+                    case PointAlignment.Bottom:
+                        {
+                            switch (p2a)
+                            {
+                                case PointAlignment.None:
+                                    p1y += offset;
+                                    p2y -= offset;
+                                    break;
+                                case PointAlignment.Left:
+                                    p1y += offset;
+                                    break;
+                                case PointAlignment.Right:
+                                    p1y += offset;
+                                    break;
+                                case PointAlignment.Top:
+                                    p1y += offset;
+                                    p2y -= offset;
+                                    break;
+                                case PointAlignment.Bottom:
+                                    p1y += offset;
+                                    p2y += offset;
+                                    break;
+                            }
+                        }
+                        break;
+                }
+            }
+            else if (orientation == CurveOrientation.Horizontal)
+            {
+                p1x += offset;
+                p2x -= offset;
+            }
+            else if (orientation == CurveOrientation.Vertical)
+            {
+                p1y += offset;
+                p2y -= offset;
+            }
+        }
     }
 }
