@@ -6,6 +6,7 @@ using Core2D.Math.Arc;
 using Core2D.Path;
 using Core2D.Project;
 using Core2D.Renderer;
+using Core2D.Shape;
 using Core2D.Shapes;
 using Core2D.Style;
 using System;
@@ -24,25 +25,28 @@ namespace Renderer.Wpf
     /// </summary>
     public class WpfRenderer : ShapeRenderer
     {
-        private Cache<ShapeStyle, Tuple<Brush, Pen>> _styleCache = 
+        private Cache<ShapeStyle, Tuple<Brush, Pen>> _styleCache =
             Cache<ShapeStyle, Tuple<Brush, Pen>>.Create();
 
-        private Cache<ArrowStyle, Tuple<Brush, Pen>> _arrowStyleCache = 
+        private Cache<ArrowStyle, Tuple<Brush, Pen>> _arrowStyleCache =
             Cache<ArrowStyle, Tuple<Brush, Pen>>.Create();
 
-        private Cache<XArc, PathGeometry> _arcCache = 
+        private Cache<XLine, PathGeometry> _curvedLineCache =
+            Cache<XLine, PathGeometry>.Create();
+
+        private Cache<XArc, PathGeometry> _arcCache =
             Cache<XArc, PathGeometry>.Create();
 
-        private Cache<XCubicBezier, PathGeometry> _cubicBezierCache = 
+        private Cache<XCubicBezier, PathGeometry> _cubicBezierCache =
             Cache<XCubicBezier, PathGeometry>.Create();
 
-        private Cache<XQuadraticBezier, PathGeometry> _quadraticBezierCache = 
+        private Cache<XQuadraticBezier, PathGeometry> _quadraticBezierCache =
             Cache<XQuadraticBezier, PathGeometry>.Create();
 
-        private Cache<XText, Tuple<string, FormattedText, ShapeStyle>> _textCache = 
+        private Cache<XText, Tuple<string, FormattedText, ShapeStyle>> _textCache =
             Cache<XText, Tuple<string, FormattedText, ShapeStyle>>.Create();
 
-        private Cache<string, BitmapImage> _biCache = 
+        private Cache<string, BitmapImage> _biCache =
             Cache<string, BitmapImage>.Create(bi => bi.StreamSource.Dispose());
 
         private Cache<XPath, Tuple<XPathGeometry, StreamGeometry, ShapeStyle>> _pathCache =
@@ -216,6 +220,258 @@ namespace Renderer.Wpf
             dc.DrawLine(isStroked ? pen : null, p0, p1);
 
             dc.Pop();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dc"></param>
+        /// <param name="half"></param>
+        /// <param name="pen"></param>
+        /// <param name="line"></param>
+        /// <param name="pt1"></param>
+        /// <param name="pt2"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
+        private void DrawLineCurveInternal(
+            DrawingContext dc,
+            double half,
+            Pen pen,
+            XLine line,
+            ref Point pt1,
+            ref Point pt2,
+            double dx,
+            double dy)
+        {
+            double p1x = pt1.X;
+            double p1y = pt1.Y;
+            double p2x = pt2.X;
+            double p2y = pt2.Y;
+            XLine.AdjustLineCurve(
+                line.Style.LineStyle.CurveOrientation,
+                line.Style.LineStyle.Curvature,
+                line.Start.Alignment,
+                line.End.Alignment,
+                ref p1x, ref p1y,
+                ref p2x, ref p2y);
+
+            PathGeometry pg = _curvedLineCache.Get(line);
+            if (pg != null)
+            {
+                var pf = pg.Figures[0];
+                pf.StartPoint = new Point(pt1.X + dx, pt1.Y + dy);
+                pf.IsFilled = false;
+                var bs = pf.Segments[0] as BezierSegment;
+                bs.Point1 = new Point(p1x + dx, p1y + dy);
+                bs.Point2 = new Point(p2x + dx, p2y + dy);
+                bs.Point3 = new Point(pt1.X + dx, pt1.Y + dy);
+                bs.IsStroked = line.IsStroked;
+            }
+            else
+            {
+                var pf = new PathFigure()
+                {
+                    StartPoint = new Point(pt1.X + dx, pt1.Y + dy),
+                    IsFilled = false
+                };
+                var bs = new BezierSegment(
+                        new Point(p1x + dx, p1y + dy),
+                        new Point(p2x + dx, p2y + dy),
+                        new Point(pt1.X + dx, pt1.Y + dy),
+                        line.IsStroked);
+                //bs.Freeze();
+                pf.Segments.Add(bs);
+                //pf.Freeze();
+                pg = new PathGeometry();
+                pg.Figures.Add(pf);
+                //pg.Freeze();
+
+                _curvedLineCache.Set(line, pg);
+            }
+
+            DrawPathGeometryInternal(dc, half, null, pen, line.IsStroked, false, pg);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dc"></param>
+        /// <param name="line"></param>
+        /// <param name="style"></param>
+        /// <param name="halfStart"></param>
+        /// <param name="halfEnd"></param>
+        /// <param name="thicknessStart"></param>
+        /// <param name="thicknessEnd"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
+        /// <param name="pt1"></param>
+        /// <param name="pt2"></param>
+        private void DrawLineArrowsInternal(
+            DrawingContext dc,
+            XLine line,
+            ShapeStyle style,
+            double halfStart,
+            double halfEnd,
+            double thicknessStart,
+            double thicknessEnd,
+            double dx,
+            double dy,
+            out Point pt1,
+            out Point pt2)
+        {
+            // Start arrow style.
+            Tuple<Brush, Pen> startArrowCache = _arrowStyleCache.Get(style.StartArrowStyle);
+            Brush fillStartArrow;
+            Pen strokeStartArrow;
+            if (startArrowCache != null)
+            {
+                fillStartArrow = startArrowCache.Item1;
+                strokeStartArrow = startArrowCache.Item2;
+            }
+            else
+            {
+                fillStartArrow = CreateBrush(style.StartArrowStyle.Fill);
+                strokeStartArrow = CreatePen(style.StartArrowStyle, thicknessStart);
+                _arrowStyleCache.Set(style.StartArrowStyle, Tuple.Create(fillStartArrow, strokeStartArrow));
+            }
+
+            // End arrow style.
+            Tuple<Brush, Pen> endArrowCache = _arrowStyleCache.Get(style.EndArrowStyle);
+            Brush fillEndArrow;
+            Pen strokeEndArrow;
+            if (endArrowCache != null)
+            {
+                fillEndArrow = endArrowCache.Item1;
+                strokeEndArrow = endArrowCache.Item2;
+            }
+            else
+            {
+                fillEndArrow = CreateBrush(style.EndArrowStyle.Fill);
+                strokeEndArrow = CreatePen(style.EndArrowStyle, thicknessEnd);
+                _arrowStyleCache.Set(style.EndArrowStyle, Tuple.Create(fillEndArrow, strokeEndArrow));
+            }
+
+            // Line max length.
+            double x1 = line.Start.X + dx;
+            double y1 = line.Start.Y + dy;
+            double x2 = line.End.X + dx;
+            double y2 = line.End.Y + dy;
+
+            XLine.SetMaxLength(line, ref x1, ref y1, ref x2, ref y2);
+
+            // Arrow transforms.
+            var sas = style.StartArrowStyle;
+            var eas = style.EndArrowStyle;
+            double a1 = Math.Atan2(y1 - y2, x1 - x2) * 180.0 / Math.PI;
+            double a2 = Math.Atan2(y2 - y1, x2 - x1) * 180.0 / Math.PI;
+
+            // Draw start arrow.
+            pt1 = DrawLineArrowInternal(
+                dc,
+                halfStart,
+                strokeStartArrow,
+                fillStartArrow,
+                sas.IsStroked,
+                sas.IsFilled,
+                x1, y1,
+                a1, sas.ArrowType, sas.RadiusX, sas.RadiusY);
+
+            // Draw end arrow.
+            pt2 = DrawLineArrowInternal(
+                dc,
+                halfEnd,
+                strokeEndArrow,
+                fillEndArrow,
+                eas.IsStroked,
+                eas.IsFilled,
+                x2, y2,
+                a2, eas.ArrowType, eas.RadiusX, eas.RadiusY);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dc"></param>
+        /// <param name="half"></param>
+        /// <param name="pen"></param>
+        /// <param name="brush"></param>
+        /// <param name="isStroked"></param>
+        /// <param name="isFilled"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="angle"></param>
+        /// <param name="type"></param>
+        /// <param name="rx"></param>
+        /// <param name="ry"></param>
+        /// <returns></returns>
+        private static Point DrawLineArrowInternal(
+            DrawingContext dc,
+            double half,
+            Pen pen,
+            Brush brush,
+            bool isStroked,
+            bool isFilled,
+            double x,
+            double y,
+            double angle,
+            ArrowType type,
+            double rx,
+            double ry)
+        {
+            Point pt;
+            bool doRectTransform = angle % 90.0 != 0.0;
+            var rt = new RotateTransform(angle, x, y);
+            double sx = 2.0 * rx;
+            double sy = 2.0 * ry;
+
+            switch (type)
+            {
+                default:
+                case ArrowType.None:
+                    {
+                        pt = new Point(x, y);
+                    }
+                    break;
+                case ArrowType.Rectangle:
+                    {
+                        pt = rt.Transform(new Point(x - sx, y));
+                        var rect = new Rect(x - sx, y - ry, sx, sy);
+                        if (doRectTransform)
+                        {
+                            dc.PushTransform(rt);
+                            DrawRectangleInternal(dc, half, brush, pen, isStroked, isFilled, ref rect);
+                            dc.Pop();
+                        }
+                        else
+                        {
+                            var bounds = rt.TransformBounds(rect);
+                            DrawRectangleInternal(dc, half, brush, pen, isStroked, isFilled, ref bounds);
+                        }
+                    }
+                    break;
+                case ArrowType.Ellipse:
+                    {
+                        pt = rt.Transform(new Point(x - sx, y));
+                        dc.PushTransform(rt);
+                        var c = new Point(x - rx, y);
+                        DrawEllipseInternal(dc, half, brush, pen, isStroked, isFilled, ref c, rx, ry);
+                        dc.Pop();
+                    }
+                    break;
+                case ArrowType.Arrow:
+                    {
+                        pt = rt.Transform(new Point(x, y));
+                        var p11 = rt.Transform(new Point(x - sx, y + sy));
+                        var p21 = rt.Transform(new Point(x, y));
+                        var p12 = rt.Transform(new Point(x - sx, y - sy));
+                        var p22 = rt.Transform(new Point(x, y));
+                        DrawLineInternal(dc, half, pen, isStroked, ref p11, ref p21);
+                        DrawLineInternal(dc, half, pen, isStroked, ref p12, ref p22);
+                    }
+                    break;
+            }
+
+            return pt;
         }
 
         /// <summary>
@@ -417,6 +673,7 @@ namespace Renderer.Wpf
 
             if (!isZooming)
             {
+                _curvedLineCache.Reset();
                 _arcCache.Reset();
                 _cubicBezierCache.Reset();
                 _quadraticBezierCache.Reset();
@@ -481,168 +738,17 @@ namespace Renderer.Wpf
                 _styleCache.Set(style, Tuple.Create(fillLine, strokeLine));
             }
 
-            // Start arrow style.
-            Tuple<Brush, Pen> startArrowCache = _arrowStyleCache.Get(style.StartArrowStyle);
-            Brush fillStartArrow;
-            Pen strokeStartArrow;
-            if (startArrowCache != null)
+            Point pt1, pt2;
+            DrawLineArrowsInternal(_dc, line, style, halfStartArrow, halfEndArrow, thicknessStartArrow, thicknessEndArrow, dx, dy, out pt1, out pt2);
+
+            if (line.Style.LineStyle.IsCurved)
             {
-                fillStartArrow = startArrowCache.Item1;
-                strokeStartArrow = startArrowCache.Item2;
+                DrawLineCurveInternal(_dc, halfLine, strokeLine, line, ref pt1, ref pt2, dx, dy);
             }
             else
             {
-                fillStartArrow = CreateBrush(style.StartArrowStyle.Fill);
-                strokeStartArrow = CreatePen(style.StartArrowStyle, thicknessStartArrow);
-                _arrowStyleCache.Set(style.StartArrowStyle, Tuple.Create(fillStartArrow, strokeStartArrow));
+                DrawLineInternal(_dc, halfLine, strokeLine, line.IsStroked, ref pt1, ref pt2);
             }
-
-            // End arrow style.
-            Tuple<Brush, Pen> endArrowCache = _arrowStyleCache.Get(style.EndArrowStyle);
-            Brush fillEndArrow;
-            Pen strokeEndArrow;
-            if (endArrowCache != null)
-            {
-                fillEndArrow = endArrowCache.Item1;
-                strokeEndArrow = endArrowCache.Item2;
-            }
-            else
-            {
-                fillEndArrow = CreateBrush(style.EndArrowStyle.Fill);
-                strokeEndArrow = CreatePen(style.EndArrowStyle, thicknessEndArrow);
-                _arrowStyleCache.Set(style.EndArrowStyle, Tuple.Create(fillEndArrow, strokeEndArrow));
-            }
-
-            // Line max length.
-            double x1 = line.Start.X + dx;
-            double y1 = line.Start.Y + dy;
-            double x2 = line.End.X + dx;
-            double y2 = line.End.Y + dy;
-
-            XLine.SetMaxLength(line, ref x1, ref y1, ref x2, ref y2);
-
-            // Arrow transforms.
-            var sas = style.StartArrowStyle;
-            var eas = style.EndArrowStyle;
-            double a1 = Math.Atan2(y1 - y2, x1 - x2) * 180.0 / Math.PI;
-            double a2 = Math.Atan2(y2 - y1, x2 - x1) * 180.0 / Math.PI;
-            bool doRectTransform1 = a1 % 90.0 != 0.0;
-            bool doRectTransform2 = a2 % 90.0 != 0.0;
-
-            var t1 = new RotateTransform(a1, x1, y1);
-            var t2 = new RotateTransform(a2, x2, y2);
-
-            Point pt1;
-            Point pt2;
-
-            // Draw start arrow.
-            double radiusX1 = sas.RadiusX;
-            double radiusY1 = sas.RadiusY;
-            double sizeX1 = 2.0 * radiusX1;
-            double sizeY1 = 2.0 * radiusY1;
-
-            switch (sas.ArrowType)
-            {
-                default:
-                case ArrowType.None:
-                    {
-                        pt1 = new Point(x1, y1);
-                    }
-                    break;
-                case ArrowType.Rectangle:
-                    {
-                        pt1 = t1.Transform(new Point(x1 - sizeX1, y1));
-                        var rect = new Rect(x1 - sizeX1, y1 - radiusY1, sizeX1, sizeY1);
-                        if (doRectTransform1)
-                        {
-                            _dc.PushTransform(t1);
-                            DrawRectangleInternal(_dc, halfStartArrow, fillStartArrow, strokeStartArrow, sas.IsStroked, sas.IsFilled, ref rect);
-                            _dc.Pop();
-                        }
-                        else
-                        {
-                            var bounds = t1.TransformBounds(rect);
-                            DrawRectangleInternal(_dc, halfStartArrow, fillStartArrow, strokeStartArrow, sas.IsStroked, sas.IsFilled, ref bounds);
-                        }
-                    }
-                    break;
-                case ArrowType.Ellipse:
-                    {
-                        pt1 = t1.Transform(new Point(x1 - sizeX1, y1));
-                        _dc.PushTransform(t1);
-                        var c = new Point(x1 - radiusX1, y1);
-                        DrawEllipseInternal(_dc, halfStartArrow, fillStartArrow, strokeStartArrow, sas.IsStroked, sas.IsFilled, ref c, radiusX1, radiusY1);
-                        _dc.Pop();
-                    }
-                    break;
-                case ArrowType.Arrow:
-                    {
-                        pt1 = t1.Transform(new Point(x1, y1));
-                        var p11 = t1.Transform(new Point(x1 - sizeX1, y1 + sizeY1));
-                        var p21 = t1.Transform(new Point(x1, y1));
-                        var p12 = t1.Transform(new Point(x1 - sizeX1, y1 - sizeY1));
-                        var p22 = t1.Transform(new Point(x1, y1));
-                        DrawLineInternal(_dc, halfStartArrow, strokeStartArrow, sas.IsStroked, ref p11, ref p21);
-                        DrawLineInternal(_dc, halfStartArrow, strokeStartArrow, sas.IsStroked, ref p12, ref p22);
-                    }
-                    break;
-            }
-
-            // Draw end arrow.
-            double radiusX2 = eas.RadiusX;
-            double radiusY2 = eas.RadiusY;
-            double sizeX2 = 2.0 * radiusX2;
-            double sizeY2 = 2.0 * radiusY2;
-
-            switch (eas.ArrowType)
-            {
-                default:
-                case ArrowType.None:
-                    {
-                        pt2 = new Point(x2, y2);
-                    }
-                    break;
-                case ArrowType.Rectangle:
-                    {
-                        pt2 = t2.Transform(new Point(x2 - sizeX2, y2));
-                        var rect = new Rect(x2 - sizeX2, y2 - radiusY2, sizeX2, sizeY2);
-                        if (doRectTransform2)
-                        {
-                            _dc.PushTransform(t2);
-                            DrawRectangleInternal(_dc, halfEndArrow, fillEndArrow, strokeEndArrow, eas.IsStroked, eas.IsFilled, ref rect);
-                            _dc.Pop();
-                        }
-                        else
-                        {
-                            var bounds = t2.TransformBounds(rect);
-                            DrawRectangleInternal(_dc, halfEndArrow, fillEndArrow, strokeEndArrow, eas.IsStroked, eas.IsFilled, ref bounds);
-                        }
-                    }
-                    break;
-                case ArrowType.Ellipse:
-                    {
-                        pt2 = t2.Transform(new Point(x2 - sizeX2, y2));
-                        _dc.PushTransform(t2);
-                        var c = new Point(x2 - radiusX2, y2);
-                        DrawEllipseInternal(_dc, halfEndArrow, fillEndArrow, strokeEndArrow, eas.IsStroked, eas.IsFilled, ref c, radiusX2, radiusY2);
-                        _dc.Pop();
-                    }
-                    break;
-                case ArrowType.Arrow:
-                    {
-                        pt2 = t2.Transform(new Point(x2, y2));
-                        var p11 = t2.Transform(new Point(x2 - sizeX2, y2 + sizeY2));
-                        var p21 = t2.Transform(new Point(x2, y2));
-                        var p12 = t2.Transform(new Point(x2 - sizeX2, y2 - sizeY2));
-                        var p22 = t2.Transform(new Point(x2, y2));
-                        DrawLineInternal(_dc, halfEndArrow, strokeEndArrow, eas.IsStroked, ref p11, ref p21);
-                        DrawLineInternal(_dc, halfEndArrow, strokeEndArrow, eas.IsStroked, ref p12, ref p22);
-                    }
-                    break;
-            }
-
-            // Draw line using points from arrow transforms.
-            DrawLineInternal(_dc, halfLine, strokeLine, line.IsStroked, ref pt1, ref pt2);
         }
 
         /// <inheritdoc/>
