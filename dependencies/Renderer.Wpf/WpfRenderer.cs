@@ -161,7 +161,7 @@ namespace Renderer.Wpf
             double p1y = pt1.Y;
             double p2x = pt2.X;
             double p2y = pt2.Y;
-            XLine.AdjustLineCurve(
+            XLineExtensions.GetCurvedLineBezierControlPoints(
                 line.Style.LineStyle.CurveOrientation,
                 line.Style.LineStyle.Curvature,
                 line.Start.Alignment,
@@ -246,7 +246,7 @@ namespace Renderer.Wpf
             double x2 = line.End.X + dx;
             double y2 = line.End.Y + dy;
 
-            XLine.SetMaxLength(line, ref x1, ref y1, ref x2, ref y2);
+            line.GetMaxLength(ref x1, ref y1, ref x2, ref y2);
 
             // Arrow transforms.
             var sas = style.StartArrowStyle;

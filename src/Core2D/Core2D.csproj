@@ -195,6 +195,7 @@
     <Compile Include="Shapes\XGroup.cs" />
     <Compile Include="Shapes\XImage.cs" />
     <Compile Include="Shapes\XLine.cs" />
+    <Compile Include="Shapes\XLineExtensions.cs" />
     <Compile Include="Shapes\XPath.cs" />
     <Compile Include="Shapes\XPoint.cs" />
     <Compile Include="Shapes\XQuadraticBezier.cs" />

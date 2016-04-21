@@ -309,7 +309,7 @@ namespace Renderer.WinForms
             double _x2 = line.End.X + dx;
             double _y2 = line.End.Y + dy;
 
-            XLine.SetMaxLength(line, ref _x1, ref _y1, ref _x2, ref _y2);
+            line.GetMaxLength(ref _x1, ref _y1, ref _x2, ref _y2);
 
             float x1 = _scaleToPage(_x1);
             float y1 = _scaleToPage(_y1);

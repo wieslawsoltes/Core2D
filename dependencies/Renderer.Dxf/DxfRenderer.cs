@@ -609,7 +609,7 @@ namespace Renderer.Dxf
             double _x2 = line.End.X + dx;
             double _y2 = line.End.Y + dy;
 
-            Core2D.Shapes.XLine.SetMaxLength(line, ref _x1, ref _y1, ref _x2, ref _y2);
+            Core2D.Shapes.XLineExtensions.GetMaxLength(line, ref _x1, ref _y1, ref _x2, ref _y2);
 
             // TODO: Draw line start arrow.
 

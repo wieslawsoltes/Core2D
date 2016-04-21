@@ -157,7 +157,7 @@ namespace Renderer.Perspex
                     double p1y = pt1.Y;
                     double p2x = pt2.X;
                     double p2y = pt2.Y;
-                    XLine.AdjustLineCurve(orientation, curvature, pt1a, pt2a, ref p1x, ref p1y, ref p2x, ref p2y);
+                    XLineExtensions.GetCurvedLineBezierControlPoints(orientation, curvature, pt1a, pt2a, ref p1x, ref p1y, ref p2x, ref p2y);
                     sgc.CubicBezierTo(
                         new P.Point(p1x, p1y),
                         new P.Point(p2x, p2y),
@@ -181,7 +181,7 @@ namespace Renderer.Perspex
             double _x2 = line.End.X + dx;
             double _y2 = line.End.Y + dy;
 
-            XLine.SetMaxLength(line, ref _x1, ref _y1, ref _x2, ref _y2);
+            line.GetMaxLength(ref _x1, ref _y1, ref _x2, ref _y2);
 
             float x1 = _scaleToPage(_x1);
             float y1 = _scaleToPage(_y1);
