@@ -264,7 +264,7 @@ namespace Renderer.Wpf
                 var bs = pf.Segments[0] as BezierSegment;
                 bs.Point1 = new Point(p1x + dx, p1y + dy);
                 bs.Point2 = new Point(p2x + dx, p2y + dy);
-                bs.Point3 = new Point(pt1.X + dx, pt1.Y + dy);
+                bs.Point3 = new Point(pt2.X + dx, pt2.Y + dy);
                 bs.IsStroked = line.IsStroked;
             }
             else
@@ -277,7 +277,7 @@ namespace Renderer.Wpf
                 var bs = new BezierSegment(
                         new Point(p1x + dx, p1y + dy),
                         new Point(p2x + dx, p2y + dy),
-                        new Point(pt1.X + dx, pt1.Y + dy),
+                        new Point(pt2.X + dx, pt2.Y + dy),
                         line.IsStroked);
                 //bs.Freeze();
                 pf.Segments.Add(bs);
