@@ -927,8 +927,8 @@ namespace Renderer.Wpf
                 }
                 catch (Exception ex)
                 {
-                    Debug.Print(ex.Message);
-                    Debug.Print(ex.StackTrace);
+                    Debug.WriteLine(ex.Message);
+                    Debug.WriteLine(ex.StackTrace);
                 }
             }
             else
@@ -955,8 +955,8 @@ namespace Renderer.Wpf
                 }
                 catch (Exception ex)
                 {
-                    Debug.Print(ex.Message);
-                    Debug.Print(ex.StackTrace);
+                    Debug.WriteLine(ex.Message);
+                    Debug.WriteLine(ex.StackTrace);
                 }
             }
         }

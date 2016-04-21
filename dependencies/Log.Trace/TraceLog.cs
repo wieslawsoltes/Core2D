@@ -39,8 +39,8 @@ namespace Log.Trace
             }
             catch (Exception ex)
             {
-                SD.Debug.Print(ex.Message);
-                SD.Debug.Print(ex.StackTrace);
+                SD.Debug.WriteLine(ex.Message);
+                SD.Debug.WriteLine(ex.StackTrace);
             }
         }
 
@@ -53,8 +53,8 @@ namespace Log.Trace
             }
             catch (Exception ex)
             {
-                SD.Debug.Print(ex.Message);
-                SD.Debug.Print(ex.StackTrace);
+                SD.Debug.WriteLine(ex.Message);
+                SD.Debug.WriteLine(ex.StackTrace);
             }
         }
 
