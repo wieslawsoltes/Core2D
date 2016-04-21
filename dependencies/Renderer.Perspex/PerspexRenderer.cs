@@ -393,12 +393,12 @@ namespace Renderer.Perspex
             if (line.Style.LineStyle.IsCurved)
             {
                 DrawLineCurveInternal(
-                    _dc, 
-                    strokeLine, line.IsStroked, 
-                    ref pt1, ref pt2, 
-                    line.Style.LineStyle.Curvature, 
+                    _dc,
+                    strokeLine, line.IsStroked,
+                    ref pt1, ref pt2,
+                    line.Style.LineStyle.Curvature,
                     line.Style.LineStyle.CurveOrientation,
-                    line.Start.Alignment, 
+                    line.Start.Alignment,
                     line.End.Alignment);
             }
             else
