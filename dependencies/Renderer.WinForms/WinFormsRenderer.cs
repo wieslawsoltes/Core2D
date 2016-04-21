@@ -22,15 +22,7 @@ namespace Renderer.WinForms
     {
         private bool _enableImageCache = true;
         private IDictionary<string, Image> _biCache;
-
-        /// <summary>
-        /// 
-        /// </summary>
         private Func<double, float> _scaleToPage;
-
-        /// <summary>
-        /// 
-        /// </summary>
         private double _textScaleFactor;
 
         /// <summary>
@@ -54,26 +46,8 @@ namespace Renderer.WinForms
             return new WinFormsRenderer();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="color"></param>
-        /// <returns></returns>
-        private Color ToColor(ArgbColor color)
-        {
-            return Color.FromArgb(
-                color.A,
-                color.R,
-                color.G,
-                color.B);
-        }
+        private Color ToColor(ArgbColor color) => Color.FromArgb(color.A, color.R, color.G, color.B);
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="style"></param>
-        /// <param name="scale"></param>
-        /// <returns></returns>
         private Pen ToPen(BaseStyle style, Func<double, float> scale)
         {
             var pen = new Pen(ToColor(style.Stroke), (float)(style.Thickness / State.ZoomX));
@@ -104,43 +78,11 @@ namespace Renderer.WinForms
             return pen;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="color"></param>
-        /// <returns></returns>
-        private SolidBrush ToSolidBrush(ArgbColor color)
-        {
-            return new SolidBrush(ToColor(color));
-        }
+        private SolidBrush ToSolidBrush(ArgbColor color) => new SolidBrush(ToColor(color));
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="tl"></param>
-        /// <param name="br"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <returns></returns>
-        private static Rect2 CreateRect(XPoint tl, XPoint br, double dx, double dy)
-        {
-            return Rect2.Create(tl, br, dx, dy);
-        }
+        private static Rect2 CreateRect(XPoint tl, XPoint br, double dx, double dy) => Rect2.Create(tl, br, dx, dy);
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="gfx"></param>
-        /// <param name="pen"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="p0"></param>
-        /// <param name="p1"></param>
-        private static void DrawLineInternal(
-            Graphics gfx,
-            Pen pen,
-            bool isStroked,
-            ref PointF p0,
-            ref PointF p1)
+        private static void DrawLineInternal(Graphics gfx, Pen pen, bool isStroked, ref PointF p0, ref PointF p1)
         {
             if (isStroked)
             {
@@ -148,22 +90,7 @@ namespace Renderer.WinForms
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="gfx"></param>
-        /// <param name="brush"></param>
-        /// <param name="pen"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="isFilled"></param>
-        /// <param name="rect"></param>
-        private static void DrawRectangleInternal(
-            Graphics gfx,
-            Brush brush,
-            Pen pen,
-            bool isStroked,
-            bool isFilled,
-            ref Rect2 rect)
+        private static void DrawRectangleInternal(Graphics gfx, Brush brush, Pen pen, bool isStroked, bool isFilled, ref Rect2 rect)
         {
             if (isFilled)
             {
@@ -186,22 +113,7 @@ namespace Renderer.WinForms
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="gfx"></param>
-        /// <param name="brush"></param>
-        /// <param name="pen"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="isFilled"></param>
-        /// <param name="rect"></param>
-        private static void DrawEllipseInternal(
-            Graphics gfx,
-            Brush brush,
-            Pen pen,
-            bool isStroked,
-            bool isFilled,
-            ref Rect2 rect)
+        private static void DrawEllipseInternal(Graphics gfx, Brush brush, Pen pen, bool isStroked, bool isFilled, ref Rect2 rect)
         {
             if (isFilled)
             {
@@ -224,24 +136,7 @@ namespace Renderer.WinForms
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="gfx"></param>
-        /// <param name="stroke"></param>
-        /// <param name="rect"></param>
-        /// <param name="offsetX"></param>
-        /// <param name="offsetY"></param>
-        /// <param name="cellWidth"></param>
-        /// <param name="cellHeight"></param>
-        /// <param name="isStroked"></param>
-        private void DrawGridInternal(
-            Graphics gfx,
-            Pen stroke,
-            ref Rect2 rect,
-            double offsetX, double offsetY,
-            double cellWidth, double cellHeight,
-            bool isStroked)
+        private void DrawGridInternal(Graphics gfx, Pen stroke, ref Rect2 rect, double offsetX, double offsetY, double cellWidth, double cellHeight, bool isStroked)
         {
             double ox = rect.X;
             double oy = rect.Y;

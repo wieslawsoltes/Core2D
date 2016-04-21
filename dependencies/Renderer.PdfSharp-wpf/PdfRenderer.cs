@@ -149,12 +149,6 @@ namespace Renderer.PdfSharp_core
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="pdf"></param>
-        /// <param name="page"></param>
-        /// <returns></returns>
         private PdfPage Add(PdfDocument pdf, Core2D.Project.XPage page)
         {
             // Create A3 page size with Landscape orientation.
@@ -191,11 +185,6 @@ namespace Renderer.PdfSharp_core
             return pdfPage;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="color"></param>
-        /// <returns></returns>
         private static XColor ToXColor(Core2D.Style.ArgbColor color)
         {
             return XColor.FromArgb(
@@ -205,12 +194,6 @@ namespace Renderer.PdfSharp_core
                 color.B);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="style"></param>
-        /// <param name="scale"></param>
-        /// <returns></returns>
         private static XPen ToXPen(Core2D.Style.BaseStyle style, Func<double, double> scale)
         {
             var pen = new XPen(ToXColor(style.Stroke), XUnit.FromPresentation(style.Thickness));
@@ -235,30 +218,12 @@ namespace Renderer.PdfSharp_core
             return pen;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="color"></param>
-        /// <returns></returns>
         private static XSolidBrush ToXSolidBrush(Core2D.Style.ArgbColor color)
         {
             return new XSolidBrush(ToXColor(color));
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="gfx"></param>
-        /// <param name="pen"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="p0"></param>
-        /// <param name="p1"></param>
-        private static void DrawLineInternal(
-            XGraphics gfx,
-            XPen pen,
-            bool isStroked,
-            ref XPoint p0,
-            ref XPoint p1)
+        private static void DrawLineInternal(XGraphics gfx, XPen pen, bool isStroked, ref XPoint p0, ref XPoint p1)
         {
             if (isStroked)
             {
@@ -266,22 +231,7 @@ namespace Renderer.PdfSharp_core
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="gfx"></param>
-        /// <param name="brush"></param>
-        /// <param name="pen"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="isFilled"></param>
-        /// <param name="rect"></param>
-        private static void DrawRectangleInternal(
-            XGraphics gfx,
-            XSolidBrush brush,
-            XPen pen,
-            bool isStroked,
-            bool isFilled,
-            ref XRect rect)
+        private static void DrawRectangleInternal(XGraphics gfx, XSolidBrush brush, XPen pen, bool isStroked, bool isFilled, ref XRect rect)
         {
             if (isStroked && isFilled)
             {
@@ -297,22 +247,7 @@ namespace Renderer.PdfSharp_core
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="gfx"></param>
-        /// <param name="brush"></param>
-        /// <param name="pen"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="isFilled"></param>
-        /// <param name="rect"></param>
-        private static void DrawEllipseInternal(
-            XGraphics gfx,
-            XSolidBrush brush,
-            XPen pen,
-            bool isStroked,
-            bool isFilled,
-            ref XRect rect)
+        private static void DrawEllipseInternal(XGraphics gfx, XSolidBrush brush, XPen pen, bool isStroked, bool isFilled, ref XRect rect)
         {
             if (isStroked && isFilled)
             {
@@ -328,24 +263,7 @@ namespace Renderer.PdfSharp_core
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="gfx"></param>
-        /// <param name="stroke"></param>
-        /// <param name="rect"></param>
-        /// <param name="offsetX"></param>
-        /// <param name="offsetY"></param>
-        /// <param name="cellWidth"></param>
-        /// <param name="cellHeight"></param>
-        /// <param name="isStroked"></param>
-        private void DrawGridInternal(
-            XGraphics gfx,
-            XPen stroke,
-            ref Core2D.Math.Rect2 rect,
-            double offsetX, double offsetY,
-            double cellWidth, double cellHeight,
-            bool isStroked)
+        private void DrawGridInternal(XGraphics gfx, XPen stroke, ref Core2D.Math.Rect2 rect, double offsetX, double offsetY, double cellWidth, double cellHeight, bool isStroked)
         {
             double ox = rect.X;
             double oy = rect.Y;
@@ -377,12 +295,6 @@ namespace Renderer.PdfSharp_core
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="gfx"></param>
-        /// <param name="color"></param>
-        /// <param name="rect"></param>
         private void DrawBackgroundInternal(XGraphics gfx, Core2D.Style.ArgbColor color, Core2D.Math.Rect2 rect)
         {
             gfx.DrawRectangle(
@@ -642,7 +554,7 @@ namespace Renderer.PdfSharp_core
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.Shapes.XArc arc, double dx, double dy, ImmutableArray<Core2D.Data.XProperty> db, Core2D.Data.Database.XRecord r)  
+        public override void Draw(object dc, Core2D.Shapes.XArc arc, double dx, double dy, ImmutableArray<Core2D.Data.XProperty> db, Core2D.Data.Database.XRecord r)
         {
             var _gfx = dc as XGraphics;
 

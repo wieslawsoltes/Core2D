@@ -115,7 +115,7 @@ namespace Renderer.Dxf
                         RightMargin = 0.0,
                         TopMargin = 0.0,
                         PaperSize = new Vector2(page.Template.Width, page.Template.Height),
-                        Origin =  new Vector2(0.0, 0.0),
+                        Origin = new Vector2(0.0, 0.0),
                         PaperUnits = PlotPaperUnits.Milimeters,
                         PaperRotation = PlotRotation.NoRotation
                     }
