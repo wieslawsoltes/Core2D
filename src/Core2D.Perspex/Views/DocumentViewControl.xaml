@@ -10,27 +10,57 @@
              xmlns:renderer="clr-namespace:Renderer.Perspex;assembly=Renderer.Perspex"
              xmlns:views="clr-namespace:Core2D.Perspex.Views;assembly=Core2D.Perspex"
              Design.DataContext="{Static Designer:DesignerContext.Editor}"
-             Design.Width="1200" Design.Height="540"
-             Name="control">
-    <Grid ColumnDefinitions="150,Auto,*" RowDefinitions="*" renderer:RendererOptions.Renderer="{Binding Renderers[1]}">
-        <ListBox Name="document" Items="{Binding Project.Documents}" SelectedItem="{Binding Project.CurrentDocument, Mode=OneTime}" Classes="document" SelectedIndex="0" Grid.Column="0" Grid.Row="0" Margin="3,3,0,3">
-            <ListBox.DataTemplates>
-                <DataTemplate DataType="Project:XDocument">
-                    <TextBlock Text="{Binding Name}" Classes="default"/>
-                </DataTemplate>
-            </ListBox.DataTemplates>
-        </ListBox>
-        <GridSplitter Classes="vertical" Grid.Column="1" Grid.Row="0" Width="6"/>
-        <Border Classes="document" Grid.Column="2" Grid.Row="0" Margin="0,3,3,3">
-            <ScrollViewer>
-                <ItemsControl VerticalAlignment="Stretch" Items="{Binding #document.SelectedItem.Pages}">
-                    <ItemsControl.DataTemplates>
-                        <DataTemplate DataType="Project:XPage">
-                            <views:ContainerControl Container="{Binding}" ClipToBounds="False" Margin="0,4,0,4"/>
-                        </DataTemplate>
-                    </ItemsControl.DataTemplates>
-                </ItemsControl>
-            </ScrollViewer>
-        </Border>
-    </Grid>
+             Design.Width="1200" Design.Height="540">
+    <DockPanel renderer:RendererOptions.Renderer="{Binding Renderers[1]}">
+        <StackPanel DockPanel.Dock="Top">
+            <TabStrip Name="documents" Items="{Binding Project.Documents}" SelectedItem="{Binding Project.CurrentDocument, Mode=OneTime}" SelectedIndex="0" Focusable="false">
+                <TabStrip.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </TabStrip.ItemsPanel>
+                <TabStrip.Styles>
+                    <Style Selector="TabStripItem">
+                        <Setter Property="Height" Value="20"/>
+                        <Setter Property="Background" Value="{StyleResource BackgroundBrush}"/>
+                        <Setter Property="BorderBrush" Value="{StyleResource BackgroundBrush}"/>
+                        <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="Margin" Value="0 0 0 -1"/>
+                        <Setter Property="Padding" Value="4 0 4 0"/>
+                        <Setter Property="FontSize" Value="12"/>
+                    </Style>
+                    <Style Selector="TabStripItem:pointerover">
+                        <Setter Property="Background" Value="{StyleResource BorderBrush}"/>
+                        <Setter Property="Foreground" Value="{StyleResource BackgroundBrush}"/>
+                    </Style>
+                    <Style Selector="TabStripItem:selected">
+                        <Setter Property="Background" Value="{StyleResource BorderBrush}"/>
+                        <Setter Property="Foreground" Value="{StyleResource BackgroundBrush}"/>
+                    </Style>
+                </TabStrip.Styles>
+                <TabStrip.DataTemplates>
+                    <DataTemplate DataType="Project:XDocument">
+                        <TextBlock Text="{Binding Name}" Margin="2"/>
+                    </DataTemplate>
+                </TabStrip.DataTemplates>
+            </TabStrip>
+            <Grid Background="{StyleResource BorderBrush}" Height="2"/>
+        </StackPanel>
+        <ScrollViewer>
+            <Carousel Items="{Binding Project.Documents}" SelectedIndex="{Binding #documents.SelectedIndex}" IsVirtualized="False" Margin="2">
+                <Carousel.DataTemplates>
+                    <DataTemplate DataType="Project:XDocument">
+                        <ItemsControl VerticalAlignment="Stretch" Items="{Binding Pages}">
+                            <ItemsControl.DataTemplates>
+                                <DataTemplate DataType="Project:XPage">
+                                    <views:ContainerControl Container="{Binding}" ClipToBounds="False" Margin="0,4,0,4"/>
+                                </DataTemplate>
+                            </ItemsControl.DataTemplates>
+                        </ItemsControl>
+                    </DataTemplate>
+                </Carousel.DataTemplates>
+            </Carousel>
+        </ScrollViewer>
+    </DockPanel>
 </UserControl>
