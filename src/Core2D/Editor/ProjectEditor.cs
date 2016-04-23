@@ -378,24 +378,9 @@ namespace Core2D.Editor
             _recentProjects = ImmutableArray.Create<RecentFile>();
             _currentRecentProject = default(RecentFile);
 
-            _dashboardView = new DashboardView
-            {
-                Name = "Dashboard",
-                Context = this
-            };
-
-            _editorView = new EditorView
-            {
-                Name = "Editor",
-                Context = this
-            };
-
-            _views = new List<ViewBase>
-            {
-                _dashboardView,
-                _editorView
-            }.ToImmutableArray();
-
+            _dashboardView = new DashboardView { Name = "Dashboard", Context = this };
+            _editorView = new EditorView { Name = "Editor", Context = this };
+            _views = new List<ViewBase> { _dashboardView, _editorView }.ToImmutableArray();
             _currentView = _dashboardView;
         }
 
