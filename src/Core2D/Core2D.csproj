@@ -84,7 +84,9 @@
     <Compile Include="Editor\Bounds\ShapeHitTestPoint.cs" />
     <Compile Include="Editor\Designer\DesignerCommandManager.cs" />
     <Compile Include="Editor\ViewBase.cs" />
+    <Compile Include="Editor\Views\BrowserView.cs" />
     <Compile Include="Editor\Views\DashboardView.cs" />
+    <Compile Include="Editor\Views\DocumentView.cs" />
     <Compile Include="Editor\Views\EditorView.cs" />
     <Compile Include="ObservableObject.cs" />
     <Compile Include="ObservableResource.cs" />
