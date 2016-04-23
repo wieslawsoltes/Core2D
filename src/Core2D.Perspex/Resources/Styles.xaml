@@ -90,6 +90,12 @@
         <Setter Property="Background" Value="{StyleResource BorderBrush}"/>
         <Setter Property="BorderBrush" Value="{StyleResource BorderBrush}"/>
     </Style>
+    <Style Selector="Button.project:pointerover">
+        <Setter Property="Foreground" Value="{StyleResource BackgroundBrush}"/>
+    </Style>
+    <Style Selector="Button.project:pressed">
+        <Setter Property="Foreground" Value="{StyleResource BackgroundBrush}"/>
+    </Style>
     <!-- Button.autofit -->
     <Style Selector="Button.autofit">
         <Setter Property="Margin" Value="2"/>
