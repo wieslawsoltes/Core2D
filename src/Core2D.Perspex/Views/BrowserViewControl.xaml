@@ -4,6 +4,7 @@
              xmlns="https://github.com/perspex"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Core2D.Perspex;assembly=Core2D.Perspex"
+             xmlns:presenters="clr-namespace:Core2D.Perspex.Presenters;assembly=Core2D.Perspex"
              xmlns:converters="clr-namespace:Core2D.Perspex.Converters;assembly=Core2D.Perspex"
              xmlns:Core="clr-namespace:Core2D;assembly=Core2D"
              xmlns:Database="clr-namespace:Core2D.Data.Database;assembly=Core2D"
@@ -287,7 +288,7 @@
         <Border Classes="project" Grid.Column="2" Grid.Row="0" Margin="0,3,3,3">
             <TabControl Classes="top">
                 <TabItem Header="Properties" Classes="property">
-                    <ContentControl Content="{Binding #project.SelectedItem, Converter={Static converters:TreeViewSelectedItemToObjectConverter.Instance}}" Classes="project" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                    <presenters:CachedContentPresenter DataContext="{Binding #project.SelectedItem, Converter={Static converters:TreeViewSelectedItemToObjectConverter.Instance}}" Classes="project" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                 </TabItem>
                 <TabItem Header="Xaml" Classes="property">
                     <TextBox DataContext="{Binding #project.SelectedItem, Converter={Static converters:TreeViewSelectedItemToObjectConverter.Instance}}" Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToXamlStringConverter.Instance}}" Classes="project" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">

@@ -6,14 +6,14 @@ using Perspex.Markup.Xaml;
 namespace Core2D.Perspex.Views
 {
     /// <summary>
-    /// Interaction logic for <see cref="DocumentControl"/> xaml.
+    /// Interaction logic for <see cref="BrowserViewControl"/> xaml.
     /// </summary>
-    public class DocumentControl : UserControl
+    public class BrowserViewControl : UserControl
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="DocumentControl"/> class.
+        /// Initializes a new instance of the <see cref="BrowserViewControl"/> class.
         /// </summary>
-        public DocumentControl()
+        public BrowserViewControl()
         {
             this.InitializeComponent();
         }
