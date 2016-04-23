@@ -58,20 +58,52 @@ namespace Core2D.Perspex
         /// </summary>
         static App()
         {
-            DesignerContext.InitializeContext(
-                new PerspexRenderer(),
-                new PerspexTextClipboard(),
-                new NewtonsoftTextSerializer(),
-                new PortableXamlSerializer());
+            InitializeDesigner();
+            InitializePresenters();
+        }
+
+        /// <summary>
+        /// Initializes designer.
+        /// </summary>
+        static void InitializeDesigner()
+        {
+            if (Design.IsDesignMode)
+            {
+                DesignerContext.InitializeContext(
+                    new PerspexRenderer(),
+                    new PerspexTextClipboard(),
+                    new NewtonsoftTextSerializer(),
+                    new PortableXamlSerializer());
+            }
+        }
+
+        /// <summary>
+        /// Initializes presenters.
+        /// </summary>
+        static void InitializePresenters()
+        {
+            CachedContentPresenter.Register(typeof(ProjectEditor), () => new Grid());
+            CachedContentPresenter.Register(typeof(XLibrary<ShapeStyle>), () => new Grid());
+            CachedContentPresenter.Register(typeof(XLibrary<XGroup>), () => new Grid());
+            CachedContentPresenter.Register(typeof(ImmutableArray<XLibrary<ShapeStyle>>), () => new Grid());
+            CachedContentPresenter.Register(typeof(ImmutableArray<XLibrary<XGroup>>), () => new Grid());
+            CachedContentPresenter.Register(typeof(ImmutableArray<XDatabase>), () => new Grid());
+            CachedContentPresenter.Register(typeof(ImmutableArray<XTemplate>), () => new Grid());
+            CachedContentPresenter.Register(typeof(ImmutableArray<XDocument>), () => new Grid());
 
             // Views
+            CachedContentPresenter.Register(typeof(BrowserView), () => new BrowserViewControl());
             CachedContentPresenter.Register(typeof(DashboardView), () => new DashboardViewControl());
+            CachedContentPresenter.Register(typeof(DocumentView), () => new DocumentViewControl());
             CachedContentPresenter.Register(typeof(EditorView), () => new EditorViewControl());
 
             // Project
+            CachedContentPresenter.Register(typeof(XProject), () => new ProjectControl());
             CachedContentPresenter.Register(typeof(XOptions), () => new OptionsControl());
+            CachedContentPresenter.Register(typeof(XDocument), () => new DocumentControl());
             CachedContentPresenter.Register(typeof(XTemplate), () => new TemplateControl());
             CachedContentPresenter.Register(typeof(XPage), () => new PageControl());
+            CachedContentPresenter.Register(typeof(XLayer), () => new LayerControl());
 
             // Data
             CachedContentPresenter.Register(typeof(ImmutableArray<XColumn>), () => new ColumnsControl());
@@ -483,7 +515,7 @@ namespace Core2D.Perspex
                 }
 
                 var dlg = new SaveFileDialog();
-                foreach(var writer in _editor?.FileWriters)
+                foreach (var writer in _editor?.FileWriters)
                 {
                     dlg.Filters.Add(new FileDialogFilter() { Name = writer.Name, Extensions = { writer.Extension } });
                 }
