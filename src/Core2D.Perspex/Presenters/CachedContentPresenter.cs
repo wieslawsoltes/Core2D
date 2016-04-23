@@ -34,6 +34,10 @@ namespace Core2D.Perspex.Presenters
                 {
                     _cache[type] = control;
                 }
+                else
+                {
+                    throw new Exception($"Can not find factory method for type: {type}");
+                }
             }
             return control;
         }
