@@ -272,6 +272,10 @@ namespace Core2D.Project
                 else if (value is XDocument)
                 {
                     CurrentDocument = value as XDocument;
+                    if (!CurrentDocument?.Pages.Contains(CurrentContainer) ?? false)
+                    {
+                        CurrentContainer = CurrentDocument.Pages.FirstOrDefault();
+                    }
                 }
             }
         }
