@@ -7,7 +7,7 @@
         <SolidColorBrush x:Key="BackgroundBrush">#FFFFFFFF</SolidColorBrush>
         <SolidColorBrush x:Key="ForegroundBrush">#FF000000</SolidColorBrush>
         <SolidColorBrush x:Key="LightBrush">#FF808080</SolidColorBrush>
-        <SolidColorBrush x:Key="BorderBrush">#FFACACAC</SolidColorBrush>
+        <SolidColorBrush x:Key="BorderBrush">#FF888888</SolidColorBrush>
         <SolidColorBrush x:Key="TransparentBrush">#00FFFFFF</SolidColorBrush>
         <VisualBrush x:Key="ColorCheckerBoard" TileMode="Tile" Stretch="None" AlignmentX="Left" AlignmentY="Top" SourceRect="0,0,20,20" DestinationRect="0,0,20,20">
             <VisualBrush.Visual>
