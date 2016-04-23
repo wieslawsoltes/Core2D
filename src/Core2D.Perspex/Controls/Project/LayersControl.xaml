@@ -32,7 +32,7 @@
                                     </ContextMenu>
                                 </Grid.ContextMenu>
                                 <CheckBox Content="" IsChecked="{Binding IsVisible, Mode=TwoWay}" Classes="default" Grid.Column="0"/>
-                                <TextBlock Text="{Binding Name}" Classes="default" Grid.Column="1"/>
+                                <TextBlock Text="{Binding Name}" Classes="list" Grid.Column="1"/>
                             </Grid>
                         </DataTemplate>
                     </ListBox.DataTemplates>

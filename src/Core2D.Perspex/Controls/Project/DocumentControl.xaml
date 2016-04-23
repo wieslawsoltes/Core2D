@@ -20,7 +20,7 @@
             <ListBox Items="{Binding Pages}" Classes="default">
                 <ListBox.DataTemplates>
                     <DataTemplate DataType="Project:XPage">
-                        <TextBlock Text="{Binding Name}" Classes="default"/>
+                        <TextBlock Text="{Binding Name}" Classes="list"/>
                     </DataTemplate>
                 </ListBox.DataTemplates>
             </ListBox>

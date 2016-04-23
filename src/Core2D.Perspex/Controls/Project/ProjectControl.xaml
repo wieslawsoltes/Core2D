@@ -52,7 +52,7 @@
                             <behaviors:ToggleIsExpandedOnDoubleTappedBehavior/>
                         </i:Interaction.Behaviors>
                         -->
-                        <TextBlock Text="{Binding Name}" Classes="default">
+                        <TextBlock Text="{Binding Name}" Classes="tree">
                             <TextBlock.ContextMenu>
                                 <ContextMenu>
                                     <MenuItem Header="_Add Page" Command="{Static Editor:Commands.AddPageCommand}" CommandParameter="{Binding Mode=OneWay}"/>
@@ -78,7 +78,7 @@
                             <behaviors:BindTagToVisualRootDataContextBehavior/>
                             <!--<behaviors:ToggleIsExpandedOnDoubleTappedBehavior/>-->
                         </i:Interaction.Behaviors>
-                        <TextBlock Text="{Binding Name}" Classes="default">
+                        <TextBlock Text="{Binding Name}" Classes="tree">
                             <TextBlock.ContextMenu>
                                 <ContextMenu>
                                     <MenuItem Header="Te_mplate" Items="{Binding #root.Tag.Project.Templates}">
@@ -128,7 +128,7 @@
                             </ContextMenu>
                         </StackPanel.ContextMenu>
                         <CheckBox IsChecked="{Binding IsVisible, Mode=TwoWay}" Classes="default"/>
-                        <TextBlock Text="{Binding Name}" Classes="default"/>
+                        <TextBlock Text="{Binding Name}" Classes="tree"/>
                     </StackPanel>
                 </DataTemplate>
             </TreeView.DataTemplates>

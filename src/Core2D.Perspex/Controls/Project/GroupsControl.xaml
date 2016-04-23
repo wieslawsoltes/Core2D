@@ -40,7 +40,7 @@
             </ListBox.KeyBindings>
             <ListBox.DataTemplates>
                 <DataTemplate DataType="Shapes:XGroup">
-                    <TextBlock Name="group" Text="{Binding Name}" Classes="default">
+                    <TextBlock Name="group" Text="{Binding Name}" Classes="list">
                         <i:Interaction.Behaviors>
                             <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #group}">
                                 <ia:InvokeCommandAction Command="{Static Editor:Commands.InsertGroupCommand}" CommandParameter="{Binding Mode=OneWay}"/>

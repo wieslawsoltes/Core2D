@@ -41,7 +41,7 @@
                     </TreeViewItem.Styles>
                     <TreeViewItem.DataTemplates>
                         <TreeDataTemplate DataType="Project:ILibrary" ItemsSource="{Binding Items}">
-                            <TextBlock Text="{Binding Name}" Classes="default">
+                            <TextBlock Text="{Binding Name}" Classes="tree">
                                 <TextBlock.ContextMenu>
                                     <ContextMenu>
                                         <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding}"/>
@@ -50,7 +50,7 @@
                             </TextBlock>
                         </TreeDataTemplate>
                         <DataTemplate DataType="Style:ShapeStyle">
-                            <TextBlock Text="{Binding Name}" Classes="default">
+                            <TextBlock Text="{Binding Name}" Classes="tree">
                                 <TextBlock.ContextMenu>
                                     <ContextMenu>
                                         <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding}"/>
@@ -74,7 +74,7 @@
                     </TreeViewItem.Styles>
                     <TreeViewItem.DataTemplates>
                         <TreeDataTemplate DataType="Project:ILibrary" ItemsSource="{Binding Items}">
-                            <TextBlock Text="{Binding Name}" Classes="default">
+                            <TextBlock Text="{Binding Name}" Classes="tree">
                                 <TextBlock.ContextMenu>
                                     <ContextMenu>
                                         <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding}"/>
@@ -83,7 +83,7 @@
                             </TextBlock>
                         </TreeDataTemplate>
                         <TreeDataTemplate DataType="Shapes:XGroup" ItemsSource="{Binding Resources}">
-                            <TextBlock Text="{Binding Name}" Classes="default">
+                            <TextBlock Text="{Binding Name}" Classes="tree">
                                 <TextBlock.ContextMenu>
                                     <ContextMenu>
                                         <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding}"/>
@@ -92,7 +92,7 @@
                             </TextBlock>
                         </TreeDataTemplate>
                         <DataTemplate DataType="Core:ObservableObject">
-                            <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="default">
+                            <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="tree">
                                 <TextBlock.ContextMenu>
                                     <ContextMenu>
                                         <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding}"/>
@@ -116,7 +116,7 @@
                     </TreeViewItem.Styles>
                     <TreeViewItem.DataTemplates>
                         <DataTemplate DataType="Database:XDatabase">
-                            <TextBlock Text="{Binding Name}" Classes="default">
+                            <TextBlock Text="{Binding Name}" Classes="tree">
                                 <TextBlock.ContextMenu>
                                     <ContextMenu>
                                         <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding}"/>
@@ -140,7 +140,7 @@
                     </TreeViewItem.Styles>
                     <TreeViewItem.DataTemplates>
                         <TreeDataTemplate DataType="Project:XTemplate" ItemsSource="{Binding Layers}">
-                            <TextBlock Text="{Binding Name}" Classes="default">
+                            <TextBlock Text="{Binding Name}" Classes="tree">
                                 <TextBlock.ContextMenu>
                                     <ContextMenu>
                                         <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding}"/>
@@ -149,7 +149,7 @@
                             </TextBlock>
                         </TreeDataTemplate>
                         <TreeDataTemplate DataType="Project:XLayer" ItemsSource="{Binding Shapes}">
-                            <TextBlock Text="{Binding Name}" Classes="default">
+                            <TextBlock Text="{Binding Name}" Classes="tree">
                                 <TextBlock.ContextMenu>
                                     <ContextMenu>
                                         <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding}"/>
@@ -158,7 +158,7 @@
                             </TextBlock>
                         </TreeDataTemplate>
                         <TreeDataTemplate DataType="Shape:BaseShape" ItemsSource="{Binding Resources}">
-                            <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="default">
+                            <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="tree">
                                 <TextBlock.ContextMenu>
                                     <ContextMenu>
                                         <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding}"/>
@@ -167,7 +167,7 @@
                             </TextBlock>
                         </TreeDataTemplate>
                         <DataTemplate DataType="Core:ObservableObject">
-                            <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="default">
+                            <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="tree">
                                 <TextBlock.ContextMenu>
                                     <ContextMenu>
                                         <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding}"/>
@@ -191,7 +191,7 @@
                     </TreeViewItem.Styles>
                     <TreeViewItem.DataTemplates>
                         <TreeDataTemplate DataType="Project:XDocument" ItemsSource="{Binding Pages}">
-                            <TextBlock Text="{Binding Name}" Classes="default">
+                            <TextBlock Text="{Binding Name}" Classes="tree">
                                 <TextBlock.ContextMenu>
                                     <ContextMenu>
                                         <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding}"/>
@@ -200,7 +200,7 @@
                             </TextBlock>
                         </TreeDataTemplate>
                         <TreeDataTemplate DataType="Project:XPage" ItemsSource="{Binding Layers}">
-                            <TextBlock Text="{Binding Name}" Classes="default">
+                            <TextBlock Text="{Binding Name}" Classes="tree">
                                 <TextBlock.ContextMenu>
                                     <ContextMenu>
                                         <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding}"/>
@@ -209,7 +209,7 @@
                             </TextBlock>
                         </TreeDataTemplate>
                         <TreeDataTemplate DataType="Project:XLayer" ItemsSource="{Binding Shapes}">
-                            <TextBlock Text="{Binding Name}" Classes="default">
+                            <TextBlock Text="{Binding Name}" Classes="tree">
                                 <TextBlock.ContextMenu>
                                     <ContextMenu>
                                         <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding}"/>
@@ -218,7 +218,7 @@
                             </TextBlock>
                         </TreeDataTemplate>
                         <TreeDataTemplate DataType="Shape:BaseShape" ItemsSource="{Binding Resources}">
-                            <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="default">
+                            <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="tree">
                                 <TextBlock.ContextMenu>
                                     <ContextMenu>
                                         <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding}"/>
@@ -227,7 +227,7 @@
                             </TextBlock>
                         </TreeDataTemplate>
                         <DataTemplate DataType="Core:ObservableObject">
-                            <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="default">
+                            <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="tree">
                                 <TextBlock.ContextMenu>
                                     <ContextMenu>
                                         <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding}"/>

@@ -28,7 +28,7 @@
                     <ListBox Name="shapes" Items="{Binding Shapes}" Classes="default">
                         <ListBox.DataTemplates>
                             <DataTemplate DataType="Shape:BaseShape">
-                                <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="default"/>
+                                <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="list"/>
                             </DataTemplate>
                         </ListBox.DataTemplates>
                     </ListBox>

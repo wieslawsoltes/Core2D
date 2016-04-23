@@ -40,7 +40,7 @@
             </ListBox.KeyBindings>
             <ListBox.DataTemplates>
                 <DataTemplate DataType="Style:ShapeStyle">
-                    <TextBlock Name="style" Text="{Binding Name}" Classes="default">
+                    <TextBlock Name="style" Text="{Binding Name}" Classes="list">
                         <i:Interaction.Behaviors>
                             <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #style}">
                                 <ia:InvokeCommandAction Command="{Static Editor:Commands.ApplyStyleCommand}" CommandParameter="{Binding Mode=OneWay}"/>

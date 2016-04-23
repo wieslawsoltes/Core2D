@@ -25,7 +25,7 @@
             </ListBox.KeyBindings>
             <ListBox.DataTemplates>
                 <DataTemplate DataType="Database:XRecord">
-                    <TextBlock Name="record" Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="default">
+                    <TextBlock Name="record" Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="list">
                         <i:Interaction.Behaviors>
                             <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #record}">
                                 <ia:InvokeCommandAction Command="{Static Editor:Commands.ApplyRecordCommand}" CommandParameter="{Binding Mode=OneWay}"/>
