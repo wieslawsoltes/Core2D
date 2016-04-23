@@ -295,6 +295,11 @@
     <Style Selector="ListBoxItem:selected:focus">
         <Setter Property="Foreground" Value="{StyleResource BackgroundBrush}"/>
     </Style>
+    <!-- MenuItem -->
+    <Style Selector="MenuItem">
+        <Setter Property="Background" Value="{StyleResource BackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
+    </Style>
     <!-- Slider -->
     <Style Selector="Slider.slider">
         <Setter Property="Orientation" Value="Horizontal"/>

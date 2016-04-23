@@ -147,11 +147,6 @@
                                     </i:Interaction.Behaviors>
                                     <TextBlock.ContextMenu>
                                         <ContextMenu>
-                                            <ContextMenu.Styles>
-                                                <Style Selector="MenuItem">
-                                                    <Setter Property="Foreground" Value="{StyleResource ThemeForegroundBrush}"/>
-                                                </Style>
-                                            </ContextMenu.Styles>
                                             <MenuItem Header="Te_mplate" Items="{Binding #root.Tag.Project.Templates}" Foreground="{StyleResource ThemeForegroundBrush}">
                                                 <MenuItem.DataTemplates>
                                                     <DataTemplate DataType="Project:XContainer">
