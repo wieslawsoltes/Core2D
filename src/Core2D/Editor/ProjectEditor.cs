@@ -1833,6 +1833,7 @@ namespace Core2D.Editor
             if (page != null && template != null)
             {
                 _project.ApplyTemplate(page, template);
+                _project.CurrentContainer.Invalidate();
             }
         }
 
