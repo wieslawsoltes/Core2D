@@ -256,8 +256,8 @@
     <Compile Include="Presenters\CachedContentPresenter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\PerspexTextClipboard.cs" />
-    <Compile Include="Views\BrowserControl.xaml.cs">
-      <DependentUpon>BrowserControl.xaml</DependentUpon>
+    <Compile Include="Views\BrowserViewControl.xaml.cs">
+      <DependentUpon>BrowserViewControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ContainerControl.xaml.cs">
       <DependentUpon>ContainerControl.xaml</DependentUpon>
@@ -271,8 +271,8 @@
     <Compile Include="Views\DashboardViewControl.xaml.cs">
       <DependentUpon>DashboardViewControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\DocumentControl.xaml.cs">
-      <DependentUpon>DocumentControl.xaml</DependentUpon>
+    <Compile Include="Views\DocumentViewControl.xaml.cs">
+      <DependentUpon>DocumentViewControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\EditorControl.xaml.cs">
       <DependentUpon>EditorControl.xaml</DependentUpon>
@@ -612,7 +612,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\BrowserControl.xaml">
+    <EmbeddedResource Include="Views\BrowserViewControl.xaml">
       <SubType>
       </SubType>
     </EmbeddedResource>
@@ -642,7 +642,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\DocumentControl.xaml">
+    <EmbeddedResource Include="Views\DocumentViewControl.xaml">
       <SubType>
       </SubType>
     </EmbeddedResource>
