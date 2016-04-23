@@ -48,7 +48,7 @@
             <Grid Background="{StyleResource BorderBrush}" Height="2"/>
         </StackPanel>
         <ScrollViewer>
-            <Carousel Items="{Binding Project.Documents}" SelectedIndex="{Binding #documents.SelectedIndex}" IsVirtualized="False" Margin="2">
+            <Carousel Items="{Binding Project.Documents}" SelectedIndex="{Binding #documents.SelectedIndex}" IsVirtualized="False" VerticalAlignment="Center" Margin="2">
                 <Carousel.DataTemplates>
                     <DataTemplate DataType="Project:XDocument">
                         <ItemsControl VerticalAlignment="Stretch" Items="{Binding Pages}">
