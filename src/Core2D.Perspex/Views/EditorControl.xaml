@@ -88,109 +88,107 @@
         <GridSplitter Name="leftPanelVSplitter" Classes="vertical" Grid.Column="1" Grid.Row="0" Width="6"/>
         <Grid Name="containerPanel" Grid.Row="0" Grid.Column="2">
             <DockPanel>
-                <StackPanel DockPanel.Dock="Top">
-                    <TabStrip Name="pages" Items="{Binding Project.CurrentDocument.Pages}" SelectedItem="{Binding Project.CurrentContainer, Mode=TwoWay}" Focusable="false">
-                        <TabStrip.KeyBindings>
-                            <KeyBinding Command="{Static Editor:Commands.NewCommand}" CommandParameter="{Binding #pages.SelectedItem}" Gesture="Ctrl+N"/>
-                            <KeyBinding Command="{Static Editor:Commands.CutCommand}" CommandParameter="{Binding #pages.SelectedItem}" Gesture="Ctrl+X"/>
-                            <KeyBinding Command="{Static Editor:Commands.CopyCommand}" CommandParameter="{Binding #pages.SelectedItem}" Gesture="Ctrl+C"/>
-                            <KeyBinding Command="{Static Editor:Commands.PasteCommand}" CommandParameter="{Binding #pages.SelectedItem}" Gesture="Ctrl+V"/>
-                            <KeyBinding Command="{Static Editor:Commands.DeleteCommand}" CommandParameter="{Binding #pages.SelectedItem}" Gesture="Delete"/>
-                            <KeyBinding Command="{Static Editor:Commands.ExportCommand}" CommandParameter="{Binding #pages.SelectedItem}" Gesture="Ctrl+E"/>
-                        </TabStrip.KeyBindings>
-                        <TabStrip.ContextMenu>
-                            <ContextMenu DataContext="{Binding Project.CurrentDocument}">
-                                <MenuItem Header="_Add Page" Command="{Static Editor:Commands.AddPageCommand}" CommandParameter="{Binding Mode=OneWay}"/>
-                                <Separator/>
-                                <MenuItem Header="Insert Document Bef_ore" Command="{Static Editor:Commands.InsertDocumentBeforeCommand}" CommandParameter="{Binding Mode=OneWay}"/>
-                                <MenuItem Header="Insert Document Aft_er" Command="{Static Editor:Commands.InsertDocumentAfterCommand}" CommandParameter="{Binding Mode=OneWay}"/>
-                                <Separator/>
-                                <MenuItem Header="Cu_t" Command="{Static Editor:Commands.CutCommand}" CommandParameter="{Binding Mode=OneWay}"/>
-                                <MenuItem Header="_Copy" Command="{Static Editor:Commands.CopyCommand}" CommandParameter="{Binding Mode=OneWay}"/>
-                                <MenuItem Header="_Paste" Command="{Static Editor:Commands.PasteCommand}" CommandParameter="{Binding Mode=OneWay}"/>
-                                <Separator/>
-                                <MenuItem Header="_Delete" Command="{Static Editor:Commands.DeleteCommand}" CommandParameter="{Binding Mode=OneWay}"/>
-                                <Separator/>
-                                <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportCommand}" CommandParameter="{Binding Mode=OneWay}"/>
-                            </ContextMenu>
-                        </TabStrip.ContextMenu>
-                        <TabStrip.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel/>
-                            </ItemsPanelTemplate>
-                        </TabStrip.ItemsPanel>
-                        <TabStrip.Styles>
-                            <Style Selector="TabStripItem">
-                                <Setter Property="Height" Value="20"/>
-                                <Setter Property="Background" Value="{StyleResource BackgroundBrush}"/>
-                                <Setter Property="BorderBrush" Value="{StyleResource BackgroundBrush}"/>
-                                <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
-                                <Setter Property="BorderThickness" Value="0"/>
-                                <Setter Property="Margin" Value="0 0 0 -1"/>
-                                <Setter Property="Padding" Value="4 0 4 0"/>
-                                <Setter Property="FontSize" Value="12"/>
-                            </Style>
-                            <Style Selector="TabStripItem:pointerover">
-                                <Setter Property="Background" Value="{StyleResource BorderBrush}"/>
-                                <Setter Property="Foreground" Value="{StyleResource BackgroundBrush}"/>
-                            </Style>
-                            <Style Selector="TabStripItem:selected">
-                                <Setter Property="Background" Value="{StyleResource BorderBrush}"/>
-                                <Setter Property="Foreground" Value="{StyleResource BackgroundBrush}"/>
-                            </Style>
-                        </TabStrip.Styles>
-                        <TabStrip.DataTemplates>
-                            <DataTemplate DataType="Project:XPage">
-                                <TextBlock Name="root" Text="{Binding Name}" Margin="2">
-                                    <i:Interaction.Behaviors>
-                                        <behaviors:BindTagToVisualRootDataContextBehavior/>
-                                    </i:Interaction.Behaviors>
-                                    <TextBlock.ContextMenu>
-                                        <ContextMenu>
-                                            <ContextMenu.Styles>
-                                                <Style Selector="MenuItem">
-                                                    <Setter Property="Foreground" Value="{StyleResource ThemeForegroundBrush}"/>
-                                                </Style>
-                                            </ContextMenu.Styles>
-                                            <MenuItem Header="Te_mplate" Items="{Binding #root.Tag.Project.Templates}" Foreground="{StyleResource ThemeForegroundBrush}">
-                                                <MenuItem.DataTemplates>
-                                                    <DataTemplate DataType="Project:XContainer">
-                                                        <MenuItem Header="{Binding Name}" Command="{Static Editor:Commands.ApplyTemplateCommand}" CommandParameter="{Binding}" Foreground="{StyleResource ThemeForegroundBrush}">
-                                                            <MenuItem.Icon>
-                                                                <CheckBox Name="icon" Classes="menu">
-                                                                    <i:Interaction.Behaviors>
-                                                                        <behaviors:BindTagToVisualRootDataContextBehavior/>
-                                                                    </i:Interaction.Behaviors>
-                                                                    <CheckBox.IsChecked>
-                                                                        <MultiBinding Mode="OneWay" Converter="{Static converters:ObjectEqualityMultiConverter.Instance}">
-                                                                            <Binding ElementName="icon" Path="DataContext" Converter="{Static converters:ObjectToObjectConverter.Instance}"/>
-                                                                            <Binding ElementName="icon" Path="Tag.Template" Converter="{Static converters:ObjectToObjectConverter.Instance}"/>
-                                                                        </MultiBinding>
-                                                                    </CheckBox.IsChecked>
-                                                                </CheckBox>
-                                                            </MenuItem.Icon>
-                                                        </MenuItem>
-                                                    </DataTemplate>
-                                                </MenuItem.DataTemplates>
-                                            </MenuItem>
-                                            <Separator/>
-                                            <MenuItem Header="Insert Page Bef_ore" Command="{Static Editor:Commands.InsertPageBeforeCommand}" CommandParameter="{Binding Mode=OneWay}"/>
-                                            <MenuItem Header="Insert Page Aft_er" Command="{Static Editor:Commands.InsertPageAfterCommand}" CommandParameter="{Binding Mode=OneWay}"/>
-                                            <Separator/>
-                                            <MenuItem Header="Cu_t" Command="{Static Editor:Commands.CutCommand}" CommandParameter="{Binding Mode=OneWay}"/>
-                                            <MenuItem Header="_Copy" Command="{Static Editor:Commands.CopyCommand}" CommandParameter="{Binding Mode=OneWay}"/>
-                                            <MenuItem Header="_Paste" Command="{Static Editor:Commands.PasteCommand}" CommandParameter="{Binding Mode=OneWay}"/>
-                                            <Separator/>
-                                            <MenuItem Header="_Delete" Command="{Static Editor:Commands.DeleteCommand}" CommandParameter="{Binding Mode=OneWay}"/>
-                                            <Separator/>
-                                            <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportCommand}" CommandParameter="{Binding Mode=OneWay}"/>
-                                        </ContextMenu>
-                                    </TextBlock.ContextMenu>
-                                </TextBlock>
-                            </DataTemplate>
-                        </TabStrip.DataTemplates>
-                    </TabStrip>
-                </StackPanel>
+                <TabStrip Name="pages" Items="{Binding Project.CurrentDocument.Pages}" SelectedItem="{Binding Project.CurrentContainer, Mode=TwoWay}" Focusable="false" DockPanel.Dock="Top">
+                    <TabStrip.KeyBindings>
+                        <KeyBinding Command="{Static Editor:Commands.NewCommand}" CommandParameter="{Binding #pages.SelectedItem}" Gesture="Ctrl+N"/>
+                        <KeyBinding Command="{Static Editor:Commands.CutCommand}" CommandParameter="{Binding #pages.SelectedItem}" Gesture="Ctrl+X"/>
+                        <KeyBinding Command="{Static Editor:Commands.CopyCommand}" CommandParameter="{Binding #pages.SelectedItem}" Gesture="Ctrl+C"/>
+                        <KeyBinding Command="{Static Editor:Commands.PasteCommand}" CommandParameter="{Binding #pages.SelectedItem}" Gesture="Ctrl+V"/>
+                        <KeyBinding Command="{Static Editor:Commands.DeleteCommand}" CommandParameter="{Binding #pages.SelectedItem}" Gesture="Delete"/>
+                        <KeyBinding Command="{Static Editor:Commands.ExportCommand}" CommandParameter="{Binding #pages.SelectedItem}" Gesture="Ctrl+E"/>
+                    </TabStrip.KeyBindings>
+                    <TabStrip.ContextMenu>
+                        <ContextMenu DataContext="{Binding Project.CurrentDocument}">
+                            <MenuItem Header="_Add Page" Command="{Static Editor:Commands.AddPageCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                            <Separator/>
+                            <MenuItem Header="Insert Document Bef_ore" Command="{Static Editor:Commands.InsertDocumentBeforeCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                            <MenuItem Header="Insert Document Aft_er" Command="{Static Editor:Commands.InsertDocumentAfterCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                            <Separator/>
+                            <MenuItem Header="Cu_t" Command="{Static Editor:Commands.CutCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                            <MenuItem Header="_Copy" Command="{Static Editor:Commands.CopyCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                            <MenuItem Header="_Paste" Command="{Static Editor:Commands.PasteCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                            <Separator/>
+                            <MenuItem Header="_Delete" Command="{Static Editor:Commands.DeleteCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                            <Separator/>
+                            <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                        </ContextMenu>
+                    </TabStrip.ContextMenu>
+                    <TabStrip.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel/>
+                        </ItemsPanelTemplate>
+                    </TabStrip.ItemsPanel>
+                    <TabStrip.Styles>
+                        <Style Selector="TabStripItem">
+                            <Setter Property="Height" Value="20"/>
+                            <Setter Property="Background" Value="{StyleResource BackgroundBrush}"/>
+                            <Setter Property="BorderBrush" Value="{StyleResource BackgroundBrush}"/>
+                            <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="Margin" Value="0 0 0 -1"/>
+                            <Setter Property="Padding" Value="4 0 4 0"/>
+                            <Setter Property="FontSize" Value="12"/>
+                        </Style>
+                        <Style Selector="TabStripItem:pointerover">
+                            <Setter Property="Background" Value="{StyleResource BorderBrush}"/>
+                            <Setter Property="Foreground" Value="{StyleResource BackgroundBrush}"/>
+                        </Style>
+                        <Style Selector="TabStripItem:selected">
+                            <Setter Property="Background" Value="{StyleResource BorderBrush}"/>
+                            <Setter Property="Foreground" Value="{StyleResource BackgroundBrush}"/>
+                        </Style>
+                    </TabStrip.Styles>
+                    <TabStrip.DataTemplates>
+                        <DataTemplate DataType="Project:XPage">
+                            <TextBlock Name="root" Text="{Binding Name}" Margin="2">
+                                <i:Interaction.Behaviors>
+                                    <behaviors:BindTagToVisualRootDataContextBehavior/>
+                                </i:Interaction.Behaviors>
+                                <TextBlock.ContextMenu>
+                                    <ContextMenu>
+                                        <ContextMenu.Styles>
+                                            <Style Selector="MenuItem">
+                                                <Setter Property="Foreground" Value="{StyleResource ThemeForegroundBrush}"/>
+                                            </Style>
+                                        </ContextMenu.Styles>
+                                        <MenuItem Header="Te_mplate" Items="{Binding #root.Tag.Project.Templates}" Foreground="{StyleResource ThemeForegroundBrush}">
+                                            <MenuItem.DataTemplates>
+                                                <DataTemplate DataType="Project:XContainer">
+                                                    <MenuItem Header="{Binding Name}" Command="{Static Editor:Commands.ApplyTemplateCommand}" CommandParameter="{Binding}" Foreground="{StyleResource ThemeForegroundBrush}">
+                                                        <MenuItem.Icon>
+                                                            <CheckBox Name="icon" Classes="menu">
+                                                                <i:Interaction.Behaviors>
+                                                                    <behaviors:BindTagToVisualRootDataContextBehavior/>
+                                                                </i:Interaction.Behaviors>
+                                                                <CheckBox.IsChecked>
+                                                                    <MultiBinding Mode="OneWay" Converter="{Static converters:ObjectEqualityMultiConverter.Instance}">
+                                                                        <Binding ElementName="icon" Path="DataContext" Converter="{Static converters:ObjectToObjectConverter.Instance}"/>
+                                                                        <Binding ElementName="icon" Path="Tag.Template" Converter="{Static converters:ObjectToObjectConverter.Instance}"/>
+                                                                    </MultiBinding>
+                                                                </CheckBox.IsChecked>
+                                                            </CheckBox>
+                                                        </MenuItem.Icon>
+                                                    </MenuItem>
+                                                </DataTemplate>
+                                            </MenuItem.DataTemplates>
+                                        </MenuItem>
+                                        <Separator/>
+                                        <MenuItem Header="Insert Page Bef_ore" Command="{Static Editor:Commands.InsertPageBeforeCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                        <MenuItem Header="Insert Page Aft_er" Command="{Static Editor:Commands.InsertPageAfterCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                        <Separator/>
+                                        <MenuItem Header="Cu_t" Command="{Static Editor:Commands.CutCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                        <MenuItem Header="_Copy" Command="{Static Editor:Commands.CopyCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                        <MenuItem Header="_Paste" Command="{Static Editor:Commands.PasteCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                        <Separator/>
+                                        <MenuItem Header="_Delete" Command="{Static Editor:Commands.DeleteCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                        <Separator/>
+                                        <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                    </ContextMenu>
+                                </TextBlock.ContextMenu>
+                            </TextBlock>
+                        </DataTemplate>
+                    </TabStrip.DataTemplates>
+                </TabStrip>
                 <Border Classes="container">
                     <Border Classes="transparent" ClipToBounds="True">
                         <zoom:PanAndZoom Name="panAndZoom" AutoFitMode="None" ZoomSpeed="1.2" Background="{StyleResource TransparentBrush}" ClipToBounds="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
