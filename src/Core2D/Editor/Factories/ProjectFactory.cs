@@ -117,7 +117,7 @@ namespace Core2D.Editor.Factories
                 template.Width, template.Height,
                 style,
                 project.Options.PointShape);
-            grid.IsStroked = false;
+            grid.IsStroked = true;
             grid.IsFilled = false;
             grid.IsGrid = true;
             grid.OffsetX = 30.0;
