@@ -52,6 +52,12 @@
             <DataTemplate DataType="Views:EditorView">
                 <views:EditorViewControl/>
             </DataTemplate>
+            <DataTemplate DataType="Views:BrowserView">
+                <views:BrowserViewControl/>
+            </DataTemplate>
+            <DataTemplate DataType="Views:DocumentView">
+                <views:DocumentViewControl/>
+            </DataTemplate>
         </Carousel.DataTemplates>
     </Carousel>
 </Window>
