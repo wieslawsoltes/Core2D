@@ -5,8 +5,12 @@
         {
           "files": [
             "/src/Core2D/Core2D.csproj",
-            "/src/Core2D.Wpf/Core2D.Wpf.csproj",
             "/src/Core2D.Perspex/Core2D.Perspex.csproj",
+            "/src/Core2D.Perspex.Cairo/Core2D.Perspex.Cairo.csproj",
+            "/src/Core2D.Perspex.Direct2D/Core2D.Perspex.Direct2D.csproj",
+            "/src/Core2D.Perspex.Skia/Core2D.Perspex.Skia.csproj",
+            "/src/Core2D.Wpf/Core2D.Wpf.csproj",
+            "/dependencies/FileSystem.DotNetFx/FileSystem.DotNetFx.csproj",
             "/dependencies/FileWriter.Dxf/FileWriter.Dxf.csproj",
             "/dependencies/FileWriter.Emf/FileWriter.Emf.csproj",
             "/dependencies/FileWriter.Pdf-core/FileWriter.Pdf-core.csproj",
@@ -19,8 +23,6 @@
             "/dependencies/Renderer.WinForms/Renderer.WinForms.csproj",
             "/dependencies/Renderer.Wpf/Renderer.Wpf.csproj",
             "/dependencies/Serializer.Newtonsoft/Serializer.Newtonsoft.csproj",
-            "/dependencies/Serializer.ProtoBuf/Serializer.ProtoBuf.csproj",
-            "/dependencies/Serializer.ProtoBuf.Generate/Serializer.ProtoBuf.Generate.csproj",
             "/dependencies/Serializer.Xaml/Serializer.Xaml.csproj",
             "/dependencies/TextFieldReader.CsvHelper/TextFieldReader.CsvHelper.csproj",
             "/dependencies/TextFieldWriter.CsvHelper/TextFieldWriter.CsvHelper.csproj"
