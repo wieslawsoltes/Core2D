@@ -13,7 +13,6 @@ using Core2D.Renderer;
 using Core2D.Shape;
 using Core2D.Shapes;
 using Core2D.Style;
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 
@@ -22,7 +21,7 @@ namespace Core2D.Editor.Designer
     /// <summary>
     /// Design time DataContext base class.
     /// </summary>
-    public class DesignerContext
+    public static class DesignerContext
     {
         /// <summary>
         /// The design time <see cref="ProjectEditor"/>.
@@ -327,7 +326,7 @@ namespace Core2D.Editor.Designer
         }
 
         /// <summary>
-        /// Creates a new <see cref="DesignerContext"/> instance.
+        /// Initializes static designer context.
         /// </summary>
         /// <param name="renderer">The design time renderer instance.</param>
         /// <param name="clipboard">The design time clipboard instance.</param>
