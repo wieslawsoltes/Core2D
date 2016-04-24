@@ -33,9 +33,9 @@ namespace FileWriter.Dxf
             r.State.DrawShapeState.Flags = ShapeStateFlags.Printable;
             r.State.ImageCache = ic;
 
-            if (item is XPage)
+            if (item is XContainer)
             {
-                r.Save(path, item as XPage);
+                r.Save(path, item as XContainer);
             }
             else if (item is XDocument)
             {

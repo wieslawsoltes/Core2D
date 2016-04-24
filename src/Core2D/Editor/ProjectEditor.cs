@@ -47,7 +47,7 @@ namespace Core2D.Editor
         private Action _saveLayout;
         private Action _resetLayout;
         private bool _cancelAvailable;
-        private XPage _pageToCopy;
+        private XContainer _pageToCopy;
         private XDocument _documentToCopy;
         private BaseShape _hover;
         private ImmutableArray<RecentFile> _recentProjects;
@@ -371,7 +371,7 @@ namespace Core2D.Editor
                 [Tool.Image] = new ToolImage(this)
             }.ToImmutableDictionary();
 
-            _pageToCopy = default(XPage);
+            _pageToCopy = default(XContainer);
             _documentToCopy = default(XDocument);
             _hover = default(BaseShape);
 
@@ -420,9 +420,9 @@ namespace Core2D.Editor
         /// <param name="item">The parent item.</param>
         public void OnNew(object item)
         {
-            if (item is XPage)
+            if (item is XContainer)
             {
-                OnNewPage(item as XPage);
+                OnNewPage(item as XContainer);
             }
             else if (item is XDocument)
             {
@@ -460,7 +460,7 @@ namespace Core2D.Editor
         /// Create new page.
         /// </summary>
         /// <param name="selected">The selected page.</param>
-        private void OnNewPage(XPage selected)
+        private void OnNewPage(XContainer selected)
         {
             var document = _project?.Documents.FirstOrDefault(d => d.Pages.Contains(selected));
             if (document != null)
@@ -757,10 +757,10 @@ namespace Core2D.Editor
                 }
                 else
                 {
-                    var page = _project?.CurrentContainer as XPage;
-                    if (page != null)
+                    var container = _project?.CurrentContainer;
+                    if (container != null)
                     {
-                        page.Data = item as XContext;
+                        container.Data = item as XContext;
                     }
                 }
             }
@@ -780,40 +780,46 @@ namespace Core2D.Editor
                 }
                 _project?.AddLayer(_project?.CurrentContainer, layer);
             }
-            else if (item is XTemplate)
+            else if (item is XContainer)
             {
-                var template = item as XTemplate;
-                if (restore)
+                var container = item as XContainer;
+                if (container.Template == null)
                 {
-                    var shapes = template.Layers.SelectMany(x => x.Shapes);
-                    TryToRestoreStyles(shapes);
-                    TryToRestoreRecords(shapes);
+                    // Import as template.
+                    if (restore)
+                    {
+                        var shapes = container.Layers.SelectMany(x => x.Shapes);
+                        TryToRestoreStyles(shapes);
+                        TryToRestoreRecords(shapes);
+                    }
+                    _project?.AddTemplate(container);
                 }
-                _project?.AddTemplate(template);
+                else
+                {
+                    // Import as page.
+                    if (restore)
+                    {
+                        var shapes = Enumerable.Concat(
+                            container.Layers.SelectMany(x => x.Shapes),
+                            container.Template?.Layers.SelectMany(x => x.Shapes));
+                        TryToRestoreStyles(shapes);
+                        TryToRestoreRecords(shapes);
+                    }
+                    _project?.AddPage(_project?.CurrentDocument, container);
+                }
             }
-            else if (item is IList<XTemplate>)
+            else if (item is IList<XContainer>)
             {
-                var templates = item as IList<XTemplate>;
+                var templates = item as IList<XContainer>;
                 if (restore)
                 {
                     var shapes = templates.SelectMany(x => x.Layers).SelectMany(x => x.Shapes);
                     TryToRestoreStyles(shapes);
                     TryToRestoreRecords(shapes);
                 }
+
+                // Import as templates.
                 _project.AddTemplates(templates);
-            }
-            else if (item is XPage)
-            {
-                var page = item as XPage;
-                if (restore)
-                {
-                    var shapes = Enumerable.Concat(
-                        page.Layers.SelectMany(x => x.Shapes),
-                        page.Template.Layers.SelectMany(x => x.Shapes));
-                    TryToRestoreStyles(shapes);
-                    TryToRestoreRecords(shapes);
-                }
-                _project?.AddPage(_project?.CurrentDocument, page);
             }
             else if (item is XDocument)
             {
@@ -1065,9 +1071,9 @@ namespace Core2D.Editor
         /// <param name="item">The item to cut.</param>
         public void OnCut(object item)
         {
-            if (item is XPage)
+            if (item is XContainer)
             {
-                var page = item as XPage;
+                var page = item as XContainer;
                 _pageToCopy = page;
                 _documentToCopy = default(XDocument);
                 _project?.RemovePage(page);
@@ -1076,7 +1082,7 @@ namespace Core2D.Editor
             else if (item is XDocument)
             {
                 var document = item as XDocument;
-                _pageToCopy = default(XPage);
+                _pageToCopy = default(XContainer);
                 _documentToCopy = document;
                 _project?.RemoveDocument(document);
 
@@ -1096,16 +1102,16 @@ namespace Core2D.Editor
         /// <param name="item">The item to copy.</param>
         public void OnCopy(object item)
         {
-            if (item is XPage)
+            if (item is XContainer)
             {
-                var page = item as XPage;
+                var page = item as XContainer;
                 _pageToCopy = page;
                 _documentToCopy = default(XDocument);
             }
             else if (item is XDocument)
             {
                 var document = item as XDocument;
-                _pageToCopy = default(XPage);
+                _pageToCopy = default(XContainer);
                 _documentToCopy = document;
             }
             else if (item is ProjectEditor || item == null)
@@ -1120,11 +1126,11 @@ namespace Core2D.Editor
         /// <param name="item">The item to paste.</param>
         public void OnPaste(object item)
         {
-            if (_project != null && item is XPage)
+            if (_project != null && item is XContainer)
             {
                 if (_pageToCopy != null)
                 {
-                    var page = item as XPage;
+                    var page = item as XContainer;
                     var document = _project?.Documents.FirstOrDefault(d => d.Pages.Contains(page));
                     if (document != null)
                     {
@@ -1174,9 +1180,9 @@ namespace Core2D.Editor
                 var selected = _project?.CurrentContainer?.Layers.FirstOrDefault();
                 layer?.Owner?.SetCurrentLayer(selected);
             }
-            if (item is XPage)
+            if (item is XContainer)
             {
-                _project?.RemovePage(item as XPage);
+                _project?.RemovePage(item as XContainer);
 
                 var selected = _project?.CurrentDocument?.Pages.FirstOrDefault();
                 _project?.SetCurrentContainer(selected);
@@ -1650,10 +1656,10 @@ namespace Core2D.Editor
                 // Current page.
                 if (_renderers[0].State.SelectedShape == null && _renderers[0].State.SelectedShapes == null)
                 {
-                    var page = _project?.CurrentContainer as XPage;
-                    if (page != null)
+                    var container = _project?.CurrentContainer;
+                    if (container != null)
                     {
-                        _project?.ApplyRecord(page.Data, record);
+                        _project?.ApplyRecord(container.Data, record);
                     }
                 }
             }
@@ -1802,7 +1808,7 @@ namespace Core2D.Editor
         /// Remove template.
         /// </summary>
         /// <param name="template">The template object.</param>
-        public void OnRemoveTemplate(XTemplate template)
+        public void OnRemoveTemplate(XContainer template)
         {
             if (template != null)
             {
@@ -1814,12 +1820,12 @@ namespace Core2D.Editor
         /// <summary>
         /// Edit template.
         /// </summary>
-        public void OnEditTemplate(XTemplate template)
+        public void OnEditTemplate(XContainer template)
         {
             if (_project != null && template != null)
             {
                 _project.SetCurrentContainer(template);
-                _project.CurrentContainer.Invalidate();
+                _project.CurrentContainer?.Invalidate();
             }
         }
 
@@ -1827,9 +1833,9 @@ namespace Core2D.Editor
         /// Set page template.
         /// </summary>
         /// <param name="template">The template object.</param>
-        public void OnApplyTemplate(XTemplate template)
+        public void OnApplyTemplate(XContainer template)
         {
-            var page = _project?.CurrentContainer as XPage;
+            var page = _project?.CurrentContainer;
             if (page != null && template != null)
             {
                 _project.ApplyTemplate(page, template);
@@ -1917,9 +1923,9 @@ namespace Core2D.Editor
         {
             if (_project?.CurrentDocument != null)
             {
-                if (item is XPage)
+                if (item is XContainer)
                 {
-                    var selected = item as XPage;
+                    var selected = item as XContainer;
                     int index = _project.CurrentDocument.Pages.IndexOf(selected);
                     var page =
                         _projectFactory?.GetPage(_project, Constants.DefaultPageName)
@@ -1939,9 +1945,9 @@ namespace Core2D.Editor
         {
             if (_project?.CurrentDocument != null)
             {
-                if (item is XPage)
+                if (item is XContainer)
                 {
-                    var selected = item as XPage;
+                    var selected = item as XContainer;
                     int index = _project.CurrentDocument.Pages.IndexOf(selected);
                     var page =
                         _projectFactory?.GetPage(_project, Constants.DefaultPageName)
@@ -2551,51 +2557,21 @@ namespace Core2D.Editor
 
             return default(T);
         }
-
+        
         /// <summary>
-        /// Clone the <see cref="XTemplate"/> object.
+        /// Clone the <see cref="XContainer"/> object.
         /// </summary>
-        /// <param name="template">The <see cref="XTemplate"/> object.</param>
-        /// <returns>The cloned <see cref="XTemplate"/> object.</returns>
-        public XContainer Clone(XTemplate template)
+        /// <param name="container">The <see cref="XContainer"/> object.</param>
+        /// <returns>The cloned <see cref="XContainer"/> object.</returns>
+        public XContainer Clone(XContainer container)
         {
             try
             {
-                var json = _jsonSerializer?.Serialize(template);
+                var template = container?.Template;
+                var json = _jsonSerializer?.Serialize(container);
                 if (!string.IsNullOrEmpty(json))
                 {
-                    var clone = _jsonSerializer?.Deserialize<XPage>(json);
-                    if (clone != null)
-                    {
-                        var shapes = clone.Layers.SelectMany(l => l.Shapes);
-                        TryToRestoreStyles(shapes);
-                        TryToRestoreRecords(shapes);
-                        return clone;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
-            }
-
-            return default(XTemplate);
-        }
-
-        /// <summary>
-        /// Clone the <see cref="XPage"/> object.
-        /// </summary>
-        /// <param name="page">The <see cref="XPage"/> object.</param>
-        /// <returns>The cloned <see cref="XPage"/> object.</returns>
-        public XPage Clone(XPage page)
-        {
-            try
-            {
-                var template = page?.Template;
-                var json = _jsonSerializer?.Serialize(page);
-                if (!string.IsNullOrEmpty(json))
-                {
-                    var clone = _jsonSerializer?.Deserialize<XPage>(json);
+                    var clone = _jsonSerializer?.Deserialize<XContainer>(json);
                     if (clone != null)
                     {
                         var shapes = clone.Layers.SelectMany(l => l.Shapes);
@@ -2611,7 +2587,7 @@ namespace Core2D.Editor
                 _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
 
-            return default(XPage);
+            return default(XContainer);
         }
 
         /// <summary>
@@ -4219,17 +4195,17 @@ namespace Core2D.Editor
                     () => IsEditMode());
 
             Commands.RemoveTemplateCommand =
-                Command<XTemplate>.Create(
+                Command<XContainer>.Create(
                     (template) => OnRemoveTemplate(template),
                     (template) => IsEditMode());
 
             Commands.EditTemplateCommand =
-                Command<XTemplate>.Create(
+                Command<XContainer>.Create(
                     (template) => OnEditTemplate(template),
                     (template) => IsEditMode());
 
             Commands.ApplyTemplateCommand =
-                Command<XTemplate>.Create(
+                Command<XContainer>.Create(
                     (template) => OnApplyTemplate(template),
                     (template) => true);
 

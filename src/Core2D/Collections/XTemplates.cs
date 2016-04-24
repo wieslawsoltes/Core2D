@@ -7,7 +7,7 @@ using System.Collections.Immutable;
 namespace Core2D.Collections
 {
     /// <summary>
-    /// Observable <see cref="XTemplate"/> collection.
+    /// Observable <see cref="XContainer"/> collection.
     /// </summary>
     public class XTemplates : ObservableResource
     {
@@ -21,14 +21,14 @@ namespace Core2D.Collections
         /// Gets or sets children collection.
         /// </summary>
         [Content]
-        public ImmutableArray<XTemplate> Children { get; set; }
+        public ImmutableArray<XContainer> Children { get; set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="XTemplate"/> class.
+        /// Initializes a new instance of the <see cref="XContainer"/> class.
         /// </summary>
         public XTemplates()
         {
-            Children = ImmutableArray.Create<XTemplate>();
+            Children = ImmutableArray.Create<XContainer>();
         }
     }
 }

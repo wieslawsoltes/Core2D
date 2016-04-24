@@ -98,10 +98,10 @@ namespace FileWriter.Emf
         /// 
         /// </summary>
         /// <param name="bitmap"></param>
-        /// <param name="page"></param>
+        /// <param name="container"></param>
         /// <param name="ic"></param>
         /// <returns></returns>
-        public static MemoryStream MakeMetafileStream(Bitmap bitmap, XPage page, IImageCache ic)
+        public static MemoryStream MakeMetafileStream(Bitmap bitmap, XContainer container, IImageCache ic)
         {
             var g = default(Graphics);
             var mf = default(Metafile);
@@ -129,8 +129,8 @@ namespace FileWriter.Emf
 
                     g.PageUnit = GraphicsUnit.Display;
 
-                    r.Draw(g, page.Template, page.Data.Properties, page.Data.Record);
-                    r.Draw(g, page, page.Data.Properties, page.Data.Record);
+                    r.Draw(g, container.Template, container.Data.Properties, container.Data.Record);
+                    r.Draw(g, container, container.Data.Properties, container.Data.Record);
 
                     r.ClearCache(isZooming: false);
                 }
@@ -183,18 +183,18 @@ namespace FileWriter.Emf
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="page"></param>
+        /// <param name="container"></param>
         /// <param name="ic"></param>
-        public static void SetClipboard(XPage page, IImageCache ic)
+        public static void SetClipboard(XContainer container, IImageCache ic)
         {
             try
             {
-                if (page == null || page.Template == null)
+                if (container == null || container.Template == null)
                     return;
                 
-                using (var bitmap = new Bitmap((int)page.Template.Width, (int)page.Template.Height))
+                using (var bitmap = new Bitmap((int)container.Template.Width, (int)container.Template.Height))
                 {
-                    using (var ms = MakeMetafileStream(bitmap, page, ic))
+                    using (var ms = MakeMetafileStream(bitmap, container, ic))
                     {
                         var data = new WPF.DataObject();
                         data.SetData(WPF.DataFormats.EnhancedMetafile, ms);
@@ -213,16 +213,16 @@ namespace FileWriter.Emf
         /// 
         /// </summary>
         /// <param name="path"></param>
-        /// <param name="page"></param>
+        /// <param name="container"></param>
         /// <param name="ic"></param>
-        public static void Save(string path, XPage page, IImageCache ic)
+        public static void Save(string path, XContainer container, IImageCache ic)
         {
-            if (page == null || page.Template == null)
+            if (container == null || container.Template == null)
                 return;
             
-            using (var bitmap = new Bitmap((int)page.Template.Width, (int)page.Template.Height))
+            using (var bitmap = new Bitmap((int)container.Template.Width, (int)container.Template.Height))
             {
-                using (var ms = MakeMetafileStream(bitmap, page, ic))
+                using (var ms = MakeMetafileStream(bitmap, container, ic))
                 {
                     using (var fs = File.Create(path))
                     {
@@ -242,9 +242,9 @@ namespace FileWriter.Emf
             if (options == null)
                 return;
 
-            if (item is XPage)
+            if (item is XContainer)
             {
-                Save(path, item as XPage, ic);
+                Save(path, item as XContainer, ic);
             }
         }
     }

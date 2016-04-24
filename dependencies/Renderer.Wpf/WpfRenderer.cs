@@ -448,11 +448,11 @@ namespace Renderer.Wpf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XPage page, ImmutableArray<XProperty> db, XRecord r)
+        public override void Draw(object dc, XContainer container, ImmutableArray<XProperty> db, XRecord r)
         {
-            DrawTemplateBackground(dc as DrawingContext, page.Template);
+            DrawTemplateBackground(dc as DrawingContext, container.Template);
 
-            base.Draw(dc, page, db, r);
+            base.Draw(dc, container, db, r);
         }
 
         /// <inheritdoc/>

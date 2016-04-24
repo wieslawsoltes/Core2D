@@ -30,14 +30,14 @@ namespace Core2D.Editor.Designer
         public static ProjectEditor Editor { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Project.XTemplate"/>.
+        /// The design time <see cref="Core2D.Project.XContainer"/> template.
         /// </summary>
-        public static XTemplate Template { get; set; }
+        public static XContainer Template { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Project.XPage"/>.
+        /// The design time <see cref="Core2D.Project.XContainer"/> page.
         /// </summary>
-        public static XPage Page { get; set; }
+        public static XContainer Page { get; set; }
 
         /// <summary>
         /// The design time <see cref="Core2D.Project.XDocument"/>.

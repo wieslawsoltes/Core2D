@@ -151,9 +151,6 @@
     <Compile Include="Controls\Project\OptionsControl.xaml.cs">
       <DependentUpon>OptionsControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Project\PageControl.xaml.cs">
-      <DependentUpon>PageControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\Project\ProjectControl.xaml.cs">
       <DependentUpon>ProjectControl.xaml</DependentUpon>
     </Compile>
@@ -162,9 +159,6 @@
     </Compile>
     <Compile Include="Controls\Project\StylesControl.xaml.cs">
       <DependentUpon>StylesControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Project\TemplateControl.xaml.cs">
-      <DependentUpon>TemplateControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Project\TemplatesControl.xaml.cs">
       <DependentUpon>TemplatesControl.xaml</DependentUpon>
@@ -259,8 +253,8 @@
     <Compile Include="Views\BrowserViewControl.xaml.cs">
       <DependentUpon>BrowserViewControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ContainerControl.xaml.cs">
-      <DependentUpon>ContainerControl.xaml</DependentUpon>
+    <Compile Include="Views\ContainerViewControl.xaml.cs">
+      <DependentUpon>ContainerViewControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\DashboardControl.xaml.cs">
       <DependentUpon>DashboardControl.xaml</DependentUpon>
@@ -444,12 +438,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Controls\Project\PageControl.xaml">
-      <SubType>
-      </SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Controls\Project\ProjectControl.xaml">
       <SubType>
       </SubType>
@@ -463,12 +451,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Controls\Project\StylesControl.xaml">
-      <SubType>
-      </SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Controls\Project\TemplateControl.xaml">
       <SubType>
       </SubType>
     </EmbeddedResource>
@@ -618,7 +600,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\ContainerControl.xaml">
+    <EmbeddedResource Include="Views\ContainerViewControl.xaml">
       <SubType>
       </SubType>
     </EmbeddedResource>

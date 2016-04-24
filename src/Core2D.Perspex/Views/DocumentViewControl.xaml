@@ -53,8 +53,8 @@
                     <DataTemplate DataType="Project:XDocument">
                         <ItemsControl VerticalAlignment="Stretch" Items="{Binding Pages}">
                             <ItemsControl.DataTemplates>
-                                <DataTemplate DataType="Project:XPage">
-                                    <views:ContainerControl Container="{Binding}" ClipToBounds="False" Margin="0,4,0,4"/>
+                                <DataTemplate DataType="Project:XContainer">
+                                    <views:ContainerViewControl Container="{Binding}" ClipToBounds="False" Margin="0,4,0,4"/>
                                 </DataTemplate>
                             </ItemsControl.DataTemplates>
                         </ItemsControl>

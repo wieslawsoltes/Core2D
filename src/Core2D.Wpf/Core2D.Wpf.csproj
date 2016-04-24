@@ -260,17 +260,11 @@
       <DependentUpon>ShapeControl.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Controls\Project\PageControl.xaml.cs">
-      <DependentUpon>PageControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\StatusControl.xaml.cs">
       <DependentUpon>StatusControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Project\ShapesControl.xaml.cs">
       <DependentUpon>ShapesControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Project\TemplateControl.xaml.cs">
-      <DependentUpon>TemplateControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Shapes\ArcControl.xaml.cs">
       <DependentUpon>ArcControl.xaml</DependentUpon>
@@ -471,19 +465,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\Project\PageControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\StatusControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Project\ShapesControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\Project\TemplateControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

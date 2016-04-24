@@ -16,7 +16,7 @@ namespace Core2D.Perspex.Views
     public class EditorControl : UserControl
     {
         private ProjectEditor _projectEditor;
-        private ContainerControl _containerControl;
+        private ContainerViewControl _containerControl;
         private PanAndZoom _panAndZoom;
 
         /// <summary>
@@ -132,7 +132,7 @@ namespace Core2D.Perspex.Views
         public void AttachEditor()
         {
             _projectEditor = this.DataContext as ProjectEditor;
-            _containerControl = this.Find<ContainerControl>("containerControl");
+            _containerControl = this.Find<ContainerViewControl>("containerControl");
             _panAndZoom = this.Find<PanAndZoom>("panAndZoom");
 
             if (_projectEditor != null && _containerControl != null && _panAndZoom != null)

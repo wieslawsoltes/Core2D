@@ -179,7 +179,7 @@ namespace Core2D.Editor
         {
             if (e.PropertyName == nameof(XContext.Properties))
             {
-                var container = sender as XPage;
+                var container = sender as XContainer;
                 Remove(container.Data.Properties);
                 Add(container.Data.Properties);
             }
@@ -197,11 +197,11 @@ namespace Core2D.Editor
 
         private void ObserveTemplateBackgroud(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            _editor.Project.CurrentContainer.Notify(nameof(XTemplate.Background));
-            var page = _editor.Project.CurrentContainer as XPage;
+            _editor.Project.CurrentContainer.Notify(nameof(XContainer.Background));
+            var page = _editor.Project.CurrentContainer;
             if (page != null)
             {
-                page.Template.Notify(nameof(XTemplate.Background));
+                page.Template.Notify(nameof(XContainer.Background));
             }
             _invalidateLayers();
             MarkAsDirty();
@@ -553,115 +553,69 @@ namespace Core2D.Editor
             }
         }
 
-        private void Add(XPage page)
+        private void Add(XContainer container)
         {
-            if (page == null)
+            if (container == null)
                 return;
 
-            page.PropertyChanged += ObservePage;
+            container.PropertyChanged += ObservePage;
 
-            if (page.Layers != null)
+            if (container.Background != null)
             {
-                Add(page.Layers);
+                container.Background.PropertyChanged += ObserveTemplateBackgroud;
             }
 
-            if (page.Data != null)
+            if (container.Layers != null)
             {
-                Add(page.Data);
+                Add(container.Layers);
             }
 
-            if (page.WorkingLayer != null)
+            if (container.Data != null)
             {
-                page.WorkingLayer.InvalidateLayer += ObserveInvalidateLayer;
+                Add(container.Data);
             }
 
-            if (page.HelperLayer != null)
+            if (container.WorkingLayer != null)
             {
-                page.HelperLayer.InvalidateLayer += ObserveInvalidateLayer;
+                container.WorkingLayer.InvalidateLayer += ObserveInvalidateLayer;
+            }
+
+            if (container.HelperLayer != null)
+            {
+                container.HelperLayer.InvalidateLayer += ObserveInvalidateLayer;
             }
         }
 
-        private void Remove(XPage page)
+        private void Remove(XContainer container)
         {
-            if (page == null)
+            if (container == null)
                 return;
 
-            page.PropertyChanged -= ObservePage;
+            container.PropertyChanged -= ObservePage;
 
-            if (page.Layers != null)
+            if (container.Background != null)
             {
-                Remove(page.Layers);
+                container.Background.PropertyChanged -= ObserveTemplateBackgroud;
             }
 
-            if (page.Data != null)
+            if (container.Layers != null)
             {
-                Remove(page.Data);
+                Remove(container.Layers);
             }
 
-            if (page.WorkingLayer != null)
+            if (container.Data != null)
             {
-                page.WorkingLayer.InvalidateLayer -= ObserveInvalidateLayer;
+                Remove(container.Data);
             }
 
-            if (page.HelperLayer != null)
+            if (container.WorkingLayer != null)
             {
-                page.HelperLayer.InvalidateLayer -= ObserveInvalidateLayer;
-            }
-        }
-
-        private void Add(XTemplate template)
-        {
-            if (template == null)
-                return;
-
-            template.PropertyChanged += ObservePage;
-
-            if (template.Background != null)
-            {
-                template.Background.PropertyChanged += ObserveTemplateBackgroud;
+                container.WorkingLayer.InvalidateLayer -= ObserveInvalidateLayer;
             }
 
-            if (template.Layers != null)
+            if (container.HelperLayer != null)
             {
-                Add(template.Layers);
-            }
-
-            if (template.WorkingLayer != null)
-            {
-                template.WorkingLayer.InvalidateLayer += ObserveInvalidateLayer;
-            }
-
-            if (template.HelperLayer != null)
-            {
-                template.HelperLayer.InvalidateLayer += ObserveInvalidateLayer;
-            }
-        }
-
-        private void Remove(XTemplate template)
-        {
-            if (template == null)
-                return;
-
-            template.PropertyChanged -= ObservePage;
-
-            if (template.Background != null)
-            {
-                template.Background.PropertyChanged -= ObserveTemplateBackgroud;
-            }
-
-            if (template.Layers != null)
-            {
-                Remove(template.Layers);
-            }
-
-            if (template.WorkingLayer != null)
-            {
-                template.WorkingLayer.InvalidateLayer -= ObserveInvalidateLayer;
-            }
-
-            if (template.HelperLayer != null)
-            {
-                template.HelperLayer.InvalidateLayer -= ObserveInvalidateLayer;
+                container.HelperLayer.InvalidateLayer -= ObserveInvalidateLayer;
             }
         }
 
@@ -1405,50 +1359,28 @@ namespace Core2D.Editor
             }
         }
 
-        private void Add(IEnumerable<XPage> pages)
+        private void Add(IEnumerable<XContainer> containers)
         {
-            if (pages == null)
+            if (containers == null)
                 return;
 
-            foreach (var page in pages)
+            foreach (var page in containers)
             {
                 Add(page);
             }
         }
 
-        private void Remove(IEnumerable<XPage> pages)
+        private void Remove(IEnumerable<XContainer> containers)
         {
-            if (pages == null)
+            if (containers == null)
                 return;
 
-            foreach (var page in pages)
+            foreach (var page in containers)
             {
                 Remove(page);
             }
         }
-
-        private void Add(IEnumerable<XTemplate> templates)
-        {
-            if (templates == null)
-                return;
-
-            foreach (var template in templates)
-            {
-                Add(template);
-            }
-        }
-
-        private void Remove(IEnumerable<XTemplate> templates)
-        {
-            if (templates == null)
-                return;
-
-            foreach (var template in templates)
-            {
-                Remove(template);
-            }
-        }
-
+        
         private void Add(IEnumerable<XLayer> layers)
         {
             if (layers == null)

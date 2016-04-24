@@ -153,12 +153,10 @@
     <Compile Include="Project\XLayerTests.cs" />
     <Compile Include="Project\XLibraryTests.cs" />
     <Compile Include="Project\XOptionsTests.cs" />
-    <Compile Include="Project\XPageTests.cs" />
     <Compile Include="Project\XProjectTests_IImageCache.cs" />
     <Compile Include="Project\XProjectTests_IO.cs" />
     <Compile Include="Project\XProjectTests.cs" />
     <Compile Include="Project\XSelectableTests.cs" />
-    <Compile Include="Project\XTemplateTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Path\Parser\SvgToXPathGeometryParserTests.cs" />
     <Compile Include="Path\Parser\XPathGeometryParserTests.cs" />

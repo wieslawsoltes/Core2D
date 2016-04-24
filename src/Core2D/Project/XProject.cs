@@ -23,12 +23,12 @@ namespace Core2D.Project
         private ImmutableArray<XLibrary<ShapeStyle>> _styleLibraries;
         private ImmutableArray<XLibrary<XGroup>> _groupLibraries;
         private ImmutableArray<XDatabase> _databases;
-        private ImmutableArray<XTemplate> _templates;
+        private ImmutableArray<XContainer> _templates;
         private ImmutableArray<XDocument> _documents;
         private XLibrary<ShapeStyle> _currentStyleLibrary;
         private XLibrary<XGroup> _currentGroupLibrary;
         private XDatabase _currentDatabase;
-        private XTemplate _currentTemplate;
+        private XContainer _currentTemplate;
         private XDocument _currentDocument;
         private XContainer _currentContainer;
         private XSelectable _selected;
@@ -91,7 +91,7 @@ namespace Core2D.Project
         /// <summary>
         /// Gets or sets project templates.
         /// </summary>
-        public ImmutableArray<XTemplate> Templates
+        public ImmutableArray<XContainer> Templates
         {
             get { return _templates; }
             set { Update(ref _templates, value); }
@@ -137,7 +137,7 @@ namespace Core2D.Project
         /// <summary>
         /// Gets or sets project current template.
         /// </summary>
-        public XTemplate CurrentTemplate
+        public XContainer CurrentTemplate
         {
             get { return _currentTemplate; }
             set { Update(ref _currentTemplate, value); }
@@ -198,7 +198,7 @@ namespace Core2D.Project
             _styleLibraries = ImmutableArray.Create<XLibrary<ShapeStyle>>();
             _groupLibraries = ImmutableArray.Create<XLibrary<XGroup>>();
             _databases = ImmutableArray.Create<XDatabase>();
-            _templates = ImmutableArray.Create<XTemplate>();
+            _templates = ImmutableArray.Create<XContainer>();
             _documents = ImmutableArray.Create<XDocument>();
         }
 
@@ -224,7 +224,7 @@ namespace Core2D.Project
         /// Set current template.
         /// </summary>
         /// <param name="template">The template instance.</param>
-        public void SetCurrentTemplate(XTemplate template)
+        public void SetCurrentTemplate(XContainer template)
         {
             CurrentTemplate = template;
         }

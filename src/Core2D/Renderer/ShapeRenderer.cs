@@ -31,31 +31,6 @@ namespace Core2D.Renderer
         public virtual void ClearCache(bool isZooming) { }
 
         /// <summary>
-        /// Draws a <see cref="XPage"/> using drawing context.
-        /// </summary>
-        /// <param name="dc">The native drawing context.</param>
-        /// <param name="page">The <see cref="XPage"/> object.</param>
-        /// <param name="db">The properties database.</param>
-        /// <param name="r">The data record.</param>
-        public virtual void Draw(object dc, XPage page, ImmutableArray<XProperty> db, XRecord r)
-        {
-            Draw(dc, page.Template as XContainer, db, r);
-            Draw(dc, page as XContainer, db, r);
-        }
-
-        /// <summary>
-        /// Draws a <see cref="XTemplate"/> using drawing context.
-        /// </summary>
-        /// <param name="dc">The native drawing context.</param>
-        /// <param name="template">The <see cref="XTemplate"/> object.</param>
-        /// <param name="db">The properties database.</param>
-        /// <param name="r">The data record.</param>
-        public virtual void Draw(object dc, XTemplate template, ImmutableArray<XProperty> db, XRecord r)
-        {
-            Draw(dc, template as XContainer, db, r);
-        }
-
-        /// <summary>
         /// Draws a <see cref="XContainer"/> using drawing context.
         /// </summary>
         /// <param name="dc">The native drawing context.</param>
@@ -64,6 +39,17 @@ namespace Core2D.Renderer
         /// <param name="r">The data record.</param>
         public virtual void Draw(object dc, XContainer container, ImmutableArray<XProperty> db, XRecord r)
         {
+            if (container.Template != null)
+            {
+                foreach (var layer in container.Template.Layers)
+                {
+                    if (layer.IsVisible)
+                    {
+                        Draw(dc, layer, db, r);
+                    }
+                }
+            }
+
             foreach (var layer in container.Layers)
             {
                 if (layer.IsVisible)

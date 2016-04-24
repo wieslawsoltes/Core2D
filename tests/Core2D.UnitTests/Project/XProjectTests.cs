@@ -160,7 +160,7 @@ namespace Core2D.UnitTests
         {
             var target = new XProject();
 
-            var page = new XPage();
+            var page = new XContainer();
             var layer = XLayer.Create("Layer1", page);
 
             target.SetSelected(layer);

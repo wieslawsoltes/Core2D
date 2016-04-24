@@ -250,11 +250,11 @@ namespace Core2D.Wpf.Views
             }
 
             // Templates.
-            if (e.Data.GetDataPresent(typeof(XTemplate)))
+            if (e.Data.GetDataPresent(typeof(XContainer)))
             {
                 try
                 {
-                    var template = e.Data.GetData(typeof(XTemplate)) as XTemplate;
+                    var template = e.Data.GetData(typeof(XContainer)) as XContainer;
                     if (template != null)
                     {
                         _projectEditor.OnApplyTemplate(template);
