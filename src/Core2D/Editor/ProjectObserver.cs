@@ -590,7 +590,7 @@ namespace Core2D.Editor
 
             if (page.Layers != null)
             {
-                Add(page.Layers);
+                Remove(page.Layers);
             }
 
             if (page.Data != null)
@@ -651,7 +651,7 @@ namespace Core2D.Editor
 
             if (template.Layers != null)
             {
-                Add(template.Layers);
+                Remove(template.Layers);
             }
 
             if (template.WorkingLayer != null)
@@ -1292,7 +1292,7 @@ namespace Core2D.Editor
             if (property == null)
                 return;
 
-            property.PropertyChanged += ObserveProperty;
+            property.PropertyChanged -= ObserveProperty;
         }
 
         private void Add(IEnumerable<XDatabase> databases)
