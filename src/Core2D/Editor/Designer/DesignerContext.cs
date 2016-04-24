@@ -388,9 +388,9 @@ namespace Core2D.Editor.Designer
 
             Project = factory.GetProject();
 
-            Template = XTemplate.Create();
+            Template = XContainer.CreateTemplate();
 
-            Page = XPage.Create();
+            Page = XContainer.CreatePage();
             var layer = Page.Layers.FirstOrDefault();
             layer.Shapes = layer.Shapes.Add(XLine.Create(0, 0, null, null));
             Page.CurrentLayer = layer;

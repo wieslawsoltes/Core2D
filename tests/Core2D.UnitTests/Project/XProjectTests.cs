@@ -89,7 +89,7 @@ namespace Core2D.UnitTests
             var document = XDocument.Create();
             target.Documents = target.Documents.Add(document);
 
-            var page = XPage.Create();
+            var page = XContainer.CreatePage();
             document.Pages = document.Pages.Add(page);
 
             target.SetCurrentContainer(page);
@@ -104,7 +104,7 @@ namespace Core2D.UnitTests
         {
             var target = new XProject();
 
-            var template = XTemplate.Create();
+            var template = XContainer.CreateTemplate();
             target.Templates = target.Templates.Add(template);
 
             target.SetCurrentTemplate(template);
@@ -177,7 +177,7 @@ namespace Core2D.UnitTests
             var document = XDocument.Create();
             target.Documents = target.Documents.Add(document);
 
-            var page = XPage.Create();
+            var page = XContainer.CreatePage();
             document.Pages = document.Pages.Add(page);
 
             var layer = XLayer.Create("Layer1", page);

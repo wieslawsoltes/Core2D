@@ -467,7 +467,7 @@ namespace Core2D.Editor
             {
                 var page =
                     _projectFactory?.GetPage(_project, Constants.DefaultPageName)
-                    ?? XPage.Create(Constants.DefaultPageName);
+                    ?? XContainer.CreatePage(Constants.DefaultPageName);
 
                 _project?.AddPage(document, page);
                 _project?.SetCurrentContainer(page);
@@ -482,7 +482,7 @@ namespace Core2D.Editor
         {
             var page =
                 _projectFactory?.GetPage(_project, Constants.DefaultPageName)
-                ?? XPage.Create(Constants.DefaultPageName);
+                ?? XContainer.CreatePage(Constants.DefaultPageName);
 
             _project?.AddPage(selected, page);
             _project?.SetCurrentContainer(page);
@@ -1791,7 +1791,7 @@ namespace Core2D.Editor
                 var template = _projectFactory.GetTemplate(_project, "Empty");
                 if (template == null)
                 {
-                    template = XTemplate.Create(Constants.DefaultTemplateName);
+                    template = XContainer.CreateTemplate(Constants.DefaultTemplateName);
                 }
 
                 _project.AddTemplate(template);
@@ -1902,7 +1902,7 @@ namespace Core2D.Editor
             {
                 var page =
                     _projectFactory?.GetPage(_project, Constants.DefaultPageName)
-                    ?? XPage.Create(Constants.DefaultPageName);
+                    ?? XContainer.CreatePage(Constants.DefaultPageName);
 
                 _project.AddPage(_project.CurrentDocument, page);
                 _project.SetCurrentContainer(page);
@@ -1923,7 +1923,7 @@ namespace Core2D.Editor
                     int index = _project.CurrentDocument.Pages.IndexOf(selected);
                     var page =
                         _projectFactory?.GetPage(_project, Constants.DefaultPageName)
-                        ?? XPage.Create(Constants.DefaultPageName);
+                        ?? XContainer.CreatePage(Constants.DefaultPageName);
 
                     _project.AddPageAt(_project.CurrentDocument, page, index);
                     _project.SetCurrentContainer(page);
@@ -1945,7 +1945,7 @@ namespace Core2D.Editor
                     int index = _project.CurrentDocument.Pages.IndexOf(selected);
                     var page =
                         _projectFactory?.GetPage(_project, Constants.DefaultPageName)
-                        ?? XPage.Create(Constants.DefaultPageName);
+                        ?? XContainer.CreatePage(Constants.DefaultPageName);
 
                     _project.AddPageAt(_project.CurrentDocument, page, index + 1);
                     _project.SetCurrentContainer(page);

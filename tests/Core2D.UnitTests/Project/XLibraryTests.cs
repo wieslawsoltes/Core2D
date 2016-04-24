@@ -37,7 +37,7 @@ namespace Core2D.UnitTests
         {
             var target = new XLibrary<XTemplate>();
 
-            var item = XTemplate.Create();
+            var item = XContainer.CreateTemplate();
             target.Items = target.Items.Add(item);
 
             target.SetSelected(item);

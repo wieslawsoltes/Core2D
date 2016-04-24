@@ -134,7 +134,7 @@ namespace Core2D.Editor.Factories
         /// <inheritdoc/>
         XTemplate IProjectFactory.GetTemplate(XProject project, string name)
         {
-            var template = XTemplate.Create(name);
+            var template = XContainer.CreateTemplate(name);
             template.Background = ArgbColor.Create(0xFF, 0xFF, 0xFF, 0xFF);
             return template;
         }
@@ -142,7 +142,7 @@ namespace Core2D.Editor.Factories
         /// <inheritdoc/>
         XPage IProjectFactory.GetPage(XProject project, string name)
         {
-            var container = XPage.Create(name);
+            var container = XContainer.CreatePage(name);
             container.Template = project.CurrentTemplate ?? (this as IProjectFactory).GetTemplate(project, "Empty");
             return container;
         }
