@@ -149,7 +149,14 @@ namespace Core2D.Project
         public XDocument CurrentDocument
         {
             get { return _currentDocument; }
-            set { Update(ref _currentDocument, value); }
+            set
+            {
+                Update(ref _currentDocument, value);
+                if (value != _selected)
+                {
+                    Selected = value;
+                }
+            }
         }
 
         /// <summary>
@@ -158,7 +165,14 @@ namespace Core2D.Project
         public XContainer CurrentContainer
         {
             get { return _currentContainer; }
-            set { Update(ref _currentContainer, value); }
+            set
+            {
+                Update(ref _currentContainer, value);
+                if (value != _selected)
+                {
+                    Selected = value;
+                }
+            }
         }
 
         /// <summary>
@@ -204,7 +218,6 @@ namespace Core2D.Project
         public void SetCurrentContainer(XContainer container)
         {
             CurrentContainer = container;
-            Selected = container;
         }
 
         /// <summary>
@@ -254,27 +267,47 @@ namespace Core2D.Project
                 if (value is XLayer)
                 {
                     var layer = value as XLayer;
-                    if (layer?.Owner != null)
+                    var owner = layer?.Owner;
+                    if (owner != null)
                     {
-                        layer.Owner.CurrentLayer = value as XLayer;
+                        if (owner.CurrentLayer != layer)
+                        {
+                            owner.CurrentLayer = layer;
+                        }
                     }
                 }
                 else if (value is XContainer && _documents != null)
                 {
-                    var document = _documents.FirstOrDefault(d => d.Pages.Contains(value as XContainer));
+                    var container = value as XContainer;
+                    var document = _documents.FirstOrDefault(d => d.Pages.Contains(container));
                     if (document != null)
                     {
-                        CurrentDocument = document;
-                        CurrentContainer = value as XContainer;
-                        CurrentContainer.Invalidate();
+                        if (CurrentDocument != document)
+                        {
+                            CurrentDocument = document;
+                        }
+
+                        if (CurrentContainer != container)
+                        {
+                            CurrentContainer = container;
+                            CurrentContainer.Invalidate();
+                        }
                     }
                 }
                 else if (value is XDocument)
                 {
-                    CurrentDocument = value as XDocument;
-                    if (!CurrentDocument?.Pages.Contains(CurrentContainer) ?? false)
+                    var document = value as XDocument;
+                    if (CurrentDocument != document)
                     {
-                        CurrentContainer = CurrentDocument.Pages.FirstOrDefault();
+                        CurrentDocument = document;
+                        if (!CurrentDocument?.Pages.Contains(CurrentContainer) ?? false)
+                        {
+                            var container = CurrentDocument.Pages.FirstOrDefault();
+                            if (CurrentContainer != container)
+                            {
+                                CurrentContainer = container;
+                            }
+                        }
                     }
                 }
             }
