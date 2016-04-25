@@ -1,6 +1,6 @@
 ﻿{
   "$id": "1",
-  "$type": "Core2D.Project.XTemplate, Core2D",
+  "$type": "Core2D.Project.XContainer, Core2D",
   "Name": "Grid",
   "Width": 840.0,
   "Height": 600.0,
@@ -28,6 +28,7 @@
             "$type": "Core2D.Shapes.XPoint, Core2D",
             "X": 0.0,
             "Y": 0.0,
+            "Alignment": 0,
             "Shape": {
               "$id": "5",
               "$type": "Core2D.Shapes.XRectangle, Core2D",
@@ -41,6 +42,7 @@
                 "$type": "Core2D.Shapes.XPoint, Core2D",
                 "X": -4.0,
                 "Y": -4.0,
+                "Alignment": 0,
                 "Name": "",
                 "State": "Visible, Printable, Standalone",
                 "IsStroked": false,
@@ -57,6 +59,7 @@
                 "$type": "Core2D.Shapes.XPoint, Core2D",
                 "X": 4.0,
                 "Y": 4.0,
+                "Alignment": 0,
                 "Name": "",
                 "State": "Visible, Printable, Standalone",
                 "IsStroked": false,
@@ -77,6 +80,9 @@
                   "$id": "11",
                   "$type": "Core2D.Style.LineStyle, Core2D",
                   "Name": "Line",
+                  "IsCurved": false,
+                  "Curvature": 50.0,
+                  "CurveOrientation": 0,
                   "FixedLength": {
                     "$id": "12",
                     "$type": "Core2D.Style.LineFixedLength, Core2D",
@@ -168,6 +174,7 @@
             "$type": "Core2D.Shapes.XPoint, Core2D",
             "X": 840.0,
             "Y": 600.0,
+            "Alignment": 0,
             "Shape": {
               "$ref": "5"
             },
@@ -191,6 +198,9 @@
               "$id": "21",
               "$type": "Core2D.Style.LineStyle, Core2D",
               "Name": "Line",
+              "IsCurved": false,
+              "Curvature": 50.0,
+              "CurveOrientation": 0,
               "FixedLength": {
                 "$id": "22",
                 "$type": "Core2D.Style.LineFixedLength, Core2D",
@@ -257,7 +267,7 @@
             "DashOffset": 0.0,
             "Resources": []
           },
-          "IsStroked": false,
+          "IsStroked": true,
           "IsFilled": false,
           "Data": {
             "$id": "26",
@@ -317,5 +327,11 @@
     "Shapes": [],
     "Resources": []
   },
+  "Data": {
+    "$id": "31",
+    "$type": "Core2D.Data.XContext, Core2D",
+    "Properties": []
+  },
+  "IsExpanded": false,
   "Resources": []
 }

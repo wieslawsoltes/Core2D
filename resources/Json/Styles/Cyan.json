@@ -5,6 +5,9 @@
     "$id": "2",
     "$type": "Core2D.Style.LineStyle, Core2D",
     "Name": "Line",
+    "IsCurved": false,
+    "Curvature": 50.0,
+    "CurveOrientation": 0,
     "FixedLength": {
       "$id": "3",
       "$type": "Core2D.Style.LineFixedLength, Core2D",
