@@ -15,15 +15,15 @@ using System.Collections.Immutable;
 namespace Core2D.Perspex.Views
 {
     /// <summary>
-    /// Interaction logic for <see cref="ContainerControl"/> xaml.
+    /// Interaction logic for <see cref="ContainerViewControl"/> xaml.
     /// </summary>
-    public class ContainerControl : UserControl
+    public class ContainerViewControl : UserControl
     {
         public static readonly PerspexProperty<XContainer> ContainerProperty =
-            PerspexProperty.Register<ContainerControl, XContainer>(nameof(Container));
+            PerspexProperty.Register<ContainerViewControl, XContainer>(nameof(Container));
 
         public static readonly PerspexProperty<ShapeRenderer> RendererProperty =
-            PerspexProperty.Register<ContainerControl, ShapeRenderer>(nameof(Renderer));
+            PerspexProperty.Register<ContainerViewControl, ShapeRenderer>(nameof(Renderer));
 
         public XContainer Container
         {
@@ -38,9 +38,9 @@ namespace Core2D.Perspex.Views
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ContainerControl"/> class.
+        /// Initializes a new instance of the <see cref="ContainerViewControl"/> class.
         /// </summary>
-        public ContainerControl()
+        public ContainerViewControl()
         {
             this.InitializeComponent();
         }
@@ -69,67 +69,42 @@ namespace Core2D.Perspex.Views
         }
 
         /// <summary>
-        /// Draw template container.
-        /// </summary>
-        /// <param name="dc">The drawing context.</param>
-        /// <param name="renderer">The shape renderer.</param>
-        /// <param name="template">The template to draw.</param>
-        private void DrawTemplate(DrawingContext dc, ShapeRenderer renderer, XTemplate template)
-        {
-            DrawBackground(dc, template.Background, template.Width, template.Height);
-
-            renderer.Draw(dc, template, default(ImmutableArray<XProperty>), default(XRecord));
-
-            if (template.WorkingLayer != null)
-            {
-                renderer.Draw(dc, template.WorkingLayer, default(ImmutableArray<XProperty>), default(XRecord));
-            }
-
-            if (template.HelperLayer != null)
-            {
-                renderer.Draw(dc, template.HelperLayer, default(ImmutableArray<XProperty>), default(XRecord));
-            }
-        }
-
-        /// <summary>
-        /// Draw page container.
-        /// </summary>
-        /// <param name="dc">The drawing context.</param>
-        /// <param name="renderer">The shape renderer.</param>
-        /// <param name="page">The page to draw.</param>
-        private void DrawPage(DrawingContext dc, ShapeRenderer renderer, XPage page)
-        {
-            DrawBackground(dc, page.Template.Background, page.Template.Width, page.Template.Height);
-
-            renderer.Draw(dc, page, page.Data.Properties, page.Data.Record);
-
-            if (page.WorkingLayer != null)
-            {
-                renderer.Draw(dc, page.WorkingLayer, page.Data.Properties, page.Data.Record);
-            }
-
-            if (page.HelperLayer != null)
-            {
-                renderer.Draw(dc, page.HelperLayer, page.Data.Properties, page.Data.Record);
-            }
-        }
-
-        /// <summary>
         /// Draw container.
         /// </summary>
         /// <param name="dc">The drawing context.</param>
         /// <param name="renderer">The shape renderer.</param>
-        /// <param name="container">The container to draw.</param>
+        /// <param name="container">The page to draw.</param>
         private void Draw(DrawingContext dc, ShapeRenderer renderer, XContainer container)
         {
-            if (container is XTemplate)
-            {
-                DrawTemplate(dc, renderer, container as XTemplate);
-            }
+            DrawBackground(dc, container.Background, container.Width, container.Height);
 
-            if (container is XPage)
+            if (container.Data == null)
             {
-                DrawPage(dc, renderer, container as XPage);
+                renderer.Draw(dc, container, default(ImmutableArray<XProperty>), default(XRecord));
+
+                if (container.WorkingLayer != null)
+                {
+                    renderer.Draw(dc, container.WorkingLayer, default(ImmutableArray<XProperty>), default(XRecord));
+                }
+
+                if (container.HelperLayer != null)
+                {
+                    renderer.Draw(dc, container.HelperLayer, default(ImmutableArray<XProperty>), default(XRecord));
+                }
+            }
+            else
+            {
+                renderer.Draw(dc, container, container.Data.Properties, container.Data.Record);
+
+                if (container.WorkingLayer != null)
+                {
+                    renderer.Draw(dc, container.WorkingLayer, container.Data.Properties, container.Data.Record);
+                }
+
+                if (container.HelperLayer != null)
+                {
+                    renderer.Draw(dc, container.HelperLayer, container.Data.Properties, container.Data.Record);
+                }
             }
         }
 

@@ -139,7 +139,7 @@
                         </Style>
                     </TreeViewItem.Styles>
                     <TreeViewItem.DataTemplates>
-                        <TreeDataTemplate DataType="Project:XTemplate" ItemsSource="{Binding Layers}">
+                        <TreeDataTemplate DataType="Project:XContainer" ItemsSource="{Binding Layers}">
                             <TextBlock Text="{Binding Name}" Classes="tree">
                                 <TextBlock.ContextMenu>
                                     <ContextMenu>
@@ -199,7 +199,7 @@
                                 </TextBlock.ContextMenu>
                             </TextBlock>
                         </TreeDataTemplate>
-                        <TreeDataTemplate DataType="Project:XPage" ItemsSource="{Binding Layers}">
+                        <TreeDataTemplate DataType="Project:XContainer" ItemsSource="{Binding Layers}">
                             <TextBlock Text="{Binding Name}" Classes="tree">
                                 <TextBlock.ContextMenu>
                                     <ContextMenu>

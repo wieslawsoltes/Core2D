@@ -12,7 +12,7 @@ namespace Core2D.Project
     {
         private string _name;
         private bool _isExpanded = true;
-        private ImmutableArray<XPage> _pages;
+        private ImmutableArray<XContainer> _pages;
 
         /// <summary>
         /// Gets or sets document name.
@@ -37,7 +37,7 @@ namespace Core2D.Project
         /// Gets or sets document pages.
         /// </summary>
         [Content]
-        public ImmutableArray<XPage> Pages
+        public ImmutableArray<XContainer> Pages
         {
             get { return _pages; }
             set { Update(ref _pages, value); }
@@ -49,7 +49,7 @@ namespace Core2D.Project
         public XDocument()
             : base()
         {
-            _pages = ImmutableArray.Create<XPage>();
+            _pages = ImmutableArray.Create<XContainer>();
         }
 
         /// <summary>

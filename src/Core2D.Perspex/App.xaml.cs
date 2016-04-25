@@ -88,7 +88,7 @@ namespace Core2D.Perspex
             CachedContentPresenter.Register(typeof(ImmutableArray<XLibrary<ShapeStyle>>), () => new Grid());
             CachedContentPresenter.Register(typeof(ImmutableArray<XLibrary<XGroup>>), () => new Grid());
             CachedContentPresenter.Register(typeof(ImmutableArray<XDatabase>), () => new Grid());
-            CachedContentPresenter.Register(typeof(ImmutableArray<XTemplate>), () => new Grid());
+            CachedContentPresenter.Register(typeof(ImmutableArray<XContainer>), () => new Grid());
             CachedContentPresenter.Register(typeof(ImmutableArray<XDocument>), () => new Grid());
 
             // Views
@@ -101,8 +101,7 @@ namespace Core2D.Perspex
             CachedContentPresenter.Register(typeof(XProject), () => new ProjectControl());
             CachedContentPresenter.Register(typeof(XOptions), () => new OptionsControl());
             CachedContentPresenter.Register(typeof(XDocument), () => new DocumentControl());
-            CachedContentPresenter.Register(typeof(XTemplate), () => new TemplateControl());
-            CachedContentPresenter.Register(typeof(XPage), () => new PageControl());
+            CachedContentPresenter.Register(typeof(XContainer), () => new ContainerControl());
             CachedContentPresenter.Register(typeof(XLayer), () => new LayerControl());
 
             // Data

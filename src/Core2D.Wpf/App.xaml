@@ -224,12 +224,6 @@
         <DataTemplate DataType="{x:Type Project:XContainer}">
             <project:ContainerControl/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type Project:XTemplate}">
-            <project:TemplateControl/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type Project:XPage}">
-            <project:PageControl/>
-        </DataTemplate>
         <DataTemplate DataType="{x:Type Project:XLayer}">
             <project:LayerControl/>
         </DataTemplate>

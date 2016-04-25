@@ -178,12 +178,10 @@
     <Compile Include="Project\XLibrary`1.cs" />
     <Compile Include="Project\XMoveMode.cs" />
     <Compile Include="Project\XOptions.cs" />
-    <Compile Include="Project\XPage.cs" />
     <Compile Include="Project\XProject.cs" />
     <Compile Include="Project\XProject.IImageCache.cs" />
     <Compile Include="Project\XProject.IO.cs" />
     <Compile Include="Project\XSelectable.cs" />
-    <Compile Include="Project\XTemplate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\SharedAssemblyInfo.cs" />
     <Compile Include="Renderer\Cache.cs" />

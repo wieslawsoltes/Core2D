@@ -92,7 +92,7 @@ namespace Core2D.Editor
         /// <param name="project">The project instance.</param>
         /// <param name="document">The document instance.</param>
         /// <param name="page">The page instance.</param>
-        public static void AddPage(this XProject project, XDocument document, XPage page)
+        public static void AddPage(this XProject project, XDocument document, XContainer page)
         {
             if (document != null && page != null)
             {
@@ -110,7 +110,7 @@ namespace Core2D.Editor
         /// <param name="document">The document instance.</param>
         /// <param name="page">The page instance.</param>
         /// <param name="index">The page index.</param>
-        public static void AddPageAt(this XProject project, XDocument document, XPage page, int index)
+        public static void AddPageAt(this XProject project, XDocument document, XContainer page, int index)
         {
             if (document != null && page != null && index >= 0)
             {
@@ -127,7 +127,7 @@ namespace Core2D.Editor
         /// <param name="project">The project instance.</param>
         /// <param name="page">The page object to remove from document <see cref="XDocument.Pages"/> collection.</param>
         /// <returns>The owner document.</returns>
-        public static XDocument RemovePage(this XProject project, XPage page)
+        public static XDocument RemovePage(this XProject project, XContainer page)
         {
             if (project?.Documents != null && page != null)
             {
@@ -151,7 +151,7 @@ namespace Core2D.Editor
         /// <param name="document">The document instance.</param>
         /// <param name="page">The page instance.</param>
         /// <param name="index">The page index.</param>
-        public static void ReplacePage(this XProject project, XDocument document, XPage page, int index)
+        public static void ReplacePage(this XProject project, XDocument document, XContainer page, int index)
         {
             if (document != null && page != null && index >= 0)
             {
@@ -170,7 +170,7 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="project">The project instance.</param>
         /// <param name="template">The template instance.</param>
-        public static void AddTemplate(this XProject project, XTemplate template)
+        public static void AddTemplate(this XProject project, XContainer template)
         {
             if (project?.Templates != null && template != null)
             {
@@ -186,7 +186,7 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="project">The project instance.</param>
         /// <param name="templates">The templates collection.</param>
-        public static void AddTemplates(this XProject project, IEnumerable<XTemplate> templates)
+        public static void AddTemplates(this XProject project, IEnumerable<XContainer> templates)
         {
             if (project?.Templates != null && templates != null)
             {
@@ -205,7 +205,7 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="project">The project instance.</param>
         /// <param name="template">The template instance</param>
-        public static void RemoveTemplate(this XProject project, XTemplate template)
+        public static void RemoveTemplate(this XProject project, XContainer template)
         {
             if (project?.Templates != null && template != null)
             {
@@ -222,7 +222,7 @@ namespace Core2D.Editor
         /// <param name="project">The project instance.</param>
         /// <param name="page">The page instance.</param>
         /// <param name="template">The template instance.</param>
-        public static void ApplyTemplate(this XProject project, XPage page, XTemplate template)
+        public static void ApplyTemplate(this XProject project, XContainer page, XContainer template)
         {
             if (page != null && template != null)
             {

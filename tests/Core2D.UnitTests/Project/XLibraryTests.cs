@@ -11,7 +11,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Project", "Project")]
         public void Inherits_From_ObservableObject()
         {
-            var target = new XLibrary<XTemplate>();
+            var target = new XLibrary<XContainer>();
             Assert.True(target is ObservableObject);
         }
 
@@ -19,7 +19,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Project", "Project")]
         public void Items_Not_Null()
         {
-            var target = new XLibrary<XTemplate>();
+            var target = new XLibrary<XContainer>();
             Assert.NotNull(target.Items);
         }
 
@@ -27,7 +27,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Project", "Project")]
         public void Selected_Is_Null()
         {
-            var target = new XLibrary<XTemplate>();
+            var target = new XLibrary<XContainer>();
             Assert.Null(target.Selected);
         }
 
@@ -35,7 +35,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Project", "Project")]
         public void SetSelected_Sets_Selected()
         {
-            var target = new XLibrary<XTemplate>();
+            var target = new XLibrary<XContainer>();
 
             var item = XContainer.CreateTemplate();
             target.Items = target.Items.Add(item);

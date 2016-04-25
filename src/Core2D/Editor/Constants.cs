@@ -19,12 +19,12 @@ namespace Core2D.Editor
         public const string DefaultLayerName = "Layer";
 
         /// <summary>
-        /// Default <see cref="XTemplate"/> name.
+        /// Default <see cref="XContainer"/> template name.
         /// </summary>
         public const string DefaultTemplateName = "Template";
 
         /// <summary>
-        /// Default <see cref="XPage"/> name.
+        /// Default <see cref="XContainer"/> page name.
         /// </summary>
         public const string DefaultPageName = "Page";
 

@@ -72,7 +72,7 @@
                         </TextBlock>                        
                     </Grid>
                 </TreeDataTemplate>
-                <TreeDataTemplate DataType="Project:XPage" ItemsSource="{Binding Layers}">
+                <TreeDataTemplate DataType="Project:XContainer" ItemsSource="{Binding Layers}">
                     <Grid Name="root">
                         <i:Interaction.Behaviors>
                             <behaviors:BindTagToVisualRootDataContextBehavior/>

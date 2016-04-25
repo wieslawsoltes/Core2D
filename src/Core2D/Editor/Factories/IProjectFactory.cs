@@ -10,20 +10,20 @@ namespace Core2D.Editor.Factories
     public interface IProjectFactory
     {
         /// <summary>
-        /// Creates a new instance of the <see cref="XTemplate"/> class.
+        /// Creates a new instance of the <see cref="XContainer"/> class.
         /// </summary>
         /// <param name="project">The new template owner project.</param>
         /// <param name="name">The new template name.</param>
-        /// <returns>The new instance of the <see cref="XTemplate"/>.</returns>
-        XTemplate GetTemplate(XProject project, string name);
+        /// <returns>The new instance of the <see cref="XContainer"/>.</returns>
+        XContainer GetTemplate(XProject project, string name);
 
         /// <summary>
-        /// Creates a new instance of the <see cref="XPage"/> class.
+        /// Creates a new instance of the <see cref="XContainer"/> class.
         /// </summary>
         /// <param name="project">The new page owner project.</param>
         /// <param name="name">The new page name.</param>
-        /// <returns>The new instance of the <see cref="XPage"/>.</returns>
-        XPage GetPage(XProject project, string name);
+        /// <returns>The new instance of the <see cref="XContainer"/>.</returns>
+        XContainer GetPage(XProject project, string name);
 
         /// <summary>
         /// Creates a new instance of the <see cref="XDocument"/> class.

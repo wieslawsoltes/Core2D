@@ -48,12 +48,12 @@ namespace Renderer.PdfSharp_core
         /// 
         /// </summary>
         /// <param name="path"></param>
-        /// <param name="page"></param>
-        public void Save(string path, Core2D.Project.XPage page)
+        /// <param name="container"></param>
+        public void Save(string path, Core2D.Project.XContainer container)
         {
             using (var pdf = new PdfDocument())
             {
-                Add(pdf, page);
+                Add(pdf, container);
                 pdf.Save(path);
             }
         }
@@ -149,7 +149,7 @@ namespace Renderer.PdfSharp_core
             }
         }
 
-        private PdfPage Add(PdfDocument pdf, Core2D.Project.XPage page)
+        private PdfPage Add(PdfDocument pdf, Core2D.Project.XContainer container)
         {
             // Create A3 page size with Landscape orientation.
             PdfPage pdfPage = pdf.AddPage();
@@ -159,27 +159,27 @@ namespace Renderer.PdfSharp_core
             using (XGraphics gfx = XGraphics.FromPdfPage(pdfPage))
             {
                 // Calculate x and y page scale factors.
-                double scaleX = pdfPage.Width.Value / page.Template.Width;
-                double scaleY = pdfPage.Height.Value / page.Template.Height;
+                double scaleX = pdfPage.Width.Value / container.Template.Width;
+                double scaleY = pdfPage.Height.Value / container.Template.Height;
                 double scale = Math.Min(scaleX, scaleY);
 
                 // Set scaling function.
                 _scaleToPage = (value) => value * scale;
 
                 // Draw container template contents to pdf graphics.
-                if (page.Template.Background.A > 0)
+                if (container.Template.Background.A > 0)
                 {
                     DrawBackgroundInternal(
                         gfx,
-                        page.Template.Background,
+                        container.Template.Background,
                         Core2D.Math.Rect2.Create(0, 0, pdfPage.Width.Value / scale, pdfPage.Height.Value / scale));
                 }
 
                 // Draw template contents to pdf graphics.
-                Draw(gfx, page.Template, page.Data.Properties, page.Data.Record);
+                Draw(gfx, container.Template, container.Data.Properties, container.Data.Record);
 
                 // Draw page contents to pdf graphics.
-                Draw(gfx, page, page.Data.Properties, page.Data.Record);
+                Draw(gfx, container, container.Data.Properties, container.Data.Record);
             }
 
             return pdfPage;

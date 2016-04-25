@@ -221,13 +221,13 @@ namespace Core2D.Project
         }
 
         /// <summary>
-        /// Creates a new <see cref="XPage"/> page instance.
+        /// Creates a new <see cref="XContainer"/> page instance.
         /// </summary>
         /// <param name="name">The page name.</param>
         /// <returns>The new instance of the <see cref="XContainer"/>.</returns>
-        public static XPage CreatePage(string name = "Page")
+        public static XContainer CreatePage(string name = "Page")
         {
-            var page = new XPage()
+            var page = new XContainer()
             {
                 Name = name
             };
@@ -246,15 +246,15 @@ namespace Core2D.Project
         }
 
         /// <summary>
-        /// Creates a new <see cref="XTemplate"/> template instance.
+        /// Creates a new <see cref="XContainer"/> template instance.
         /// </summary>
         /// <param name="name">The template name.</param>
         /// <param name="width">The template width.</param>
         /// <param name="height">The template height.</param>
-        /// <returns>The new instance of the <see cref="XTemplate"/>.</returns>
-        public static XTemplate CreateTemplate(string name = "Template", double width = 840, double height = 600)
+        /// <returns>The new instance of the <see cref="XContainer"/>.</returns>
+        public static XContainer CreateTemplate(string name = "Template", double width = 840, double height = 600)
         {
-            var template = new XTemplate()
+            var template = new XContainer()
             {
                 Name = name
             };

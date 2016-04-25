@@ -1,22 +1,20 @@
-<XPage xmlns="https://github.com/Core2D" 
-       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
-       Name="Page" CurrentLayer="{x:Reference Layer1}">
-    <XPage.Template>
-        <XTemplate Name="Template" Width="800" Height="600" Background="#FF282828">
-            <XTemplate.Layers>
+<XContainer xmlns="https://github.com/Core2D" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="Page" CurrentLayer="{x:Reference Layer1}">
+    <XContainer.Template>
+        <XContainer Name="Template" Width="800" Height="600" Background="#FF282828">
+            <XContainer.Layers>
                 <XLayer Name="TemplateLayer"/>
-            </XTemplate.Layers>
-        </XTemplate>
-    </XPage.Template>
-    <XPage.Layers>
+            </XContainer.Layers>
+        </XContainer>
+    </XContainer.Template>
+    <XContainer.Layers>
         <XLayer Name="Layer1"/>
         <XLayer Name="Layer2"/>
         <XLayer Name="Layer3"/>
-    </XPage.Layers>
-    <XPage.WorkingLayer>
+    </XContainer.Layers>
+    <XContainer.WorkingLayer>
         <XLayer Name="Working"/>
-    </XPage.WorkingLayer>
-    <XPage.HelperLayer>
+    </XContainer.WorkingLayer>
+    <XContainer.HelperLayer>
         <XLayer Name="Helper"/>
-    </XPage.HelperLayer>
-</XPage>
+    </XContainer.HelperLayer>
+</XContainer>

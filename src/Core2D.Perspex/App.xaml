@@ -148,12 +148,6 @@
         <DataTemplate DataType="Project:XDocument">
             <project:DocumentControl/>
         </DataTemplate>
-        <DataTemplate DataType="Project:XTemplate">
-            <project:TemplateControl/>
-        </DataTemplate>
-        <DataTemplate DataType="Project:XPage">
-            <project:PageControl/>
-        </DataTemplate>
         <DataTemplate DataType="Project:XContainer">
             <project:ContainerControl/>
         </DataTemplate>

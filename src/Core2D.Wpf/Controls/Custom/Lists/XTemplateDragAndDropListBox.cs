@@ -7,9 +7,9 @@ using System.Collections.Immutable;
 namespace Core2D.Wpf.Controls.Custom.Lists
 {
     /// <summary>
-    /// The <see cref="ListBox"/> control for <see cref="XTemplate"/> items with drag and drop support.
+    /// The <see cref="ListBox"/> control for <see cref="XContainer"/> items with drag and drop support.
     /// </summary>
-    public class XTemplateDragAndDropListBox : DragAndDropListBox<XTemplate>
+    public class XTemplateDragAndDropListBox : DragAndDropListBox<XContainer>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="XTemplateDragAndDropListBox"/> class.
@@ -24,7 +24,7 @@ namespace Core2D.Wpf.Controls.Custom.Lists
         /// Updates DataContext collection ImmutableArray property.
         /// </summary>
         /// <param name="array">The updated immutable array.</param>
-        protected override void UpdateDataContext(ImmutableArray<XTemplate> array)
+        protected override void UpdateDataContext(ImmutableArray<XContainer> array)
         {
             var editor = (ProjectEditor)this.Tag;
 

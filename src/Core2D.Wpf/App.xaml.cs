@@ -600,7 +600,7 @@ namespace Core2D.Wpf
         /// <inheritdoc/>
         async Task IEditorApplication.OnCopyAsEmfAsync()
         {
-            var page = _editor?.Project?.CurrentContainer as XPage;
+            var page = _editor?.Project?.CurrentContainer;
             if (page != null)
             {
                 if (_editor?.Renderers[0]?.State?.SelectedShape != null)
@@ -639,7 +639,7 @@ namespace Core2D.Wpf
         {
             try
             {
-                var page = _editor?.Project?.CurrentContainer as XPage;
+                var page = _editor?.Project?.CurrentContainer;
                 if (page != null)
                 {
                     EmfWriter.Save(path, page, _editor.Project as IImageCache);

@@ -41,13 +41,13 @@ namespace Renderer.Dxf
         /// 
         /// </summary>
         /// <param name="path"></param>
-        /// <param name="page"></param>
-        public void Save(string path, Core2D.Project.XPage page)
+        /// <param name="container"></param>
+        public void Save(string path, Core2D.Project.XContainer container)
         {
             _outputPath = System.IO.Path.GetDirectoryName(path);
             var dxf = new DxfDocument(DxfVersion.AutoCad2010);
 
-            Add(dxf, page);
+            Add(dxf, container);
 
             dxf.Save(path);
             ClearCache(isZooming: false);
@@ -85,20 +85,20 @@ namespace Renderer.Dxf
             ClearCache(isZooming: false);
         }
 
-        private void Add(DxfDocument dxf, Core2D.Project.XPage page)
+        private void Add(DxfDocument dxf, Core2D.Project.XContainer container)
         {
-            if (page.Template != null)
+            if (container.Template != null)
             {
-                _pageWidth = page.Template.Width;
-                _pageHeight = page.Template.Height;
-                Draw(dxf, page.Template, page.Data.Properties, page.Data.Record);
+                _pageWidth = container.Template.Width;
+                _pageHeight = container.Template.Height;
+                Draw(dxf, container.Template, container.Data.Properties, container.Data.Record);
             }
             else
             {
                 throw new NullReferenceException("Container template must be set.");
             }
 
-            Draw(dxf, page, page.Data.Properties, page.Data.Record);
+            Draw(dxf, container, container.Data.Properties, container.Data.Record);
         }
 
         private void Add(DxfDocument dxf, Core2D.Project.XDocument document)

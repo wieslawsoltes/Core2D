@@ -22,7 +22,7 @@
                 <DataTrigger Binding="{Binding Project}" Value="{x:Null}">
                     <Setter Property="Visibility" Value="Collapsed"/>
                 </DataTrigger>
-                <DataTrigger Binding="{Binding Project.CurrentContainer, Converter={StaticResource ObjectToTypeConverter}}" Value="{x:Type Project:XTemplate}">
+                <DataTrigger Binding="{Binding Project.CurrentContainer.Template, FallbackValue={x:Null}}" Value="{x:Null}">
                     <Setter Property="Visibility" Value="Collapsed"/>
                 </DataTrigger>
             </Style.Triggers>

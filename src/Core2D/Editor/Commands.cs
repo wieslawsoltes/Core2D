@@ -424,17 +424,17 @@ namespace Core2D.Editor
         /// <summary>
         /// Remove template.
         /// </summary>
-        public static ICoreCommand<XTemplate> RemoveTemplateCommand { get; set; }
+        public static ICoreCommand<XContainer> RemoveTemplateCommand { get; set; }
 
         /// <summary>
         /// Edit template.
         /// </summary>
-        public static ICoreCommand<XTemplate> EditTemplateCommand { get; set; }
+        public static ICoreCommand<XContainer> EditTemplateCommand { get; set; }
 
         /// <summary>
         /// Set page template.
         /// </summary>
-        public static ICoreCommand<XTemplate> ApplyTemplateCommand { get; set; }
+        public static ICoreCommand<XContainer> ApplyTemplateCommand { get; set; }
 
         /// <summary>
         /// Add image key.

@@ -34,6 +34,33 @@
             <TabItem Header="{x:Static p:Resources.WindowTitleShapes}">
                 <project:ShapesControl/>
             </TabItem>
+            <TabItem Header="{x:Static p:Resources.ContainerSize}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="{x:Static p:Resources.ContainerWidth}" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                    <TextBlock Text="{x:Static p:Resources.ContainerHeight}" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="1" Grid.Column="0"/>
+                    <TextBox Text="{Binding Width, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="0" Grid.Column="1"/>
+                    <TextBox Text="{Binding Height, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="1" Grid.Column="1"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="{x:Static p:Resources.ContainerBackground}">
+                <ContentControl Content="{Binding Background}"/>
+            </TabItem>
+            <!--
+            <TabItem Header="{x:Static p:Resources.WindowTitleTemplate}">
+                <project:ContainerControl DataContext="{Binding Template}"/>
+            </TabItem>
+            -->
+            <TabItem Header="{x:Static p:Resources.ContainerData}">
+                <ContentControl Content="{Binding Data}"/>
+            </TabItem>
         </TabControl>
     </Grid>
 </UserControl>
