@@ -23,7 +23,7 @@
              xmlns:views="clr-namespace:Core2D.Perspex.Views;assembly=Core2D.Perspex"
              Design.DataContext="{Static Designer:DesignerContext.Editor}"
              Design.Width="1200" Design.Height="540">
-    <Grid Name="rootPanel" ColumnDefinitions="180,Auto,*,Auto,240" RowDefinitions="*,Auto" Margin="4,6,4,2">
+    <Grid Name="rootPanel" ColumnDefinitions="180,Auto,*,Auto,240" RowDefinitions="*,Auto" Margin="6,6,6,2">
         <!--
         <i:Interaction.Behaviors>
             <ia:DataTriggerBehavior Binding="{Binding #rootPanel.Bounds.Height}" ComparisonCondition="GreaterThan" Value="420">
@@ -122,21 +122,21 @@
                         <TabStrip.Styles>
                             <Style Selector="TabStripItem">
                                 <Setter Property="Height" Value="20"/>
-                                <Setter Property="Background" Value="{StyleResource BackgroundBrush}"/>
-                                <Setter Property="BorderBrush" Value="{StyleResource BackgroundBrush}"/>
-                                <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
+                                <Setter Property="Background" Value="{StyleResource ThemeBackgroundBrush}"/>
+                                <Setter Property="BorderBrush" Value="{StyleResource ThemeBackgroundBrush}"/>
+                                <Setter Property="Foreground" Value="{StyleResource ThemeForegroundBrush}"/>
                                 <Setter Property="BorderThickness" Value="0"/>
                                 <Setter Property="Margin" Value="0 0 0 -1"/>
                                 <Setter Property="Padding" Value="4 0 4 0"/>
                                 <Setter Property="FontSize" Value="12"/>
                             </Style>
                             <Style Selector="TabStripItem:pointerover">
-                                <Setter Property="Background" Value="{StyleResource BorderBrush}"/>
-                                <Setter Property="Foreground" Value="{StyleResource BackgroundBrush}"/>
+                                <Setter Property="Background" Value="{StyleResource ThemeBorderLightBrush}"/>
+                                <Setter Property="Foreground" Value="{StyleResource ThemeForegroundBrush}"/>
                             </Style>
                             <Style Selector="TabStripItem:selected">
-                                <Setter Property="Background" Value="{StyleResource BorderBrush}"/>
-                                <Setter Property="Foreground" Value="{StyleResource BackgroundBrush}"/>
+                                <Setter Property="Background" Value="{StyleResource ThemeBorderLightBrush}"/>
+                                <Setter Property="Foreground" Value="{StyleResource ThemeForegroundBrush}"/>
                             </Style>
                         </TabStrip.Styles>
                         <TabStrip.DataTemplates>
@@ -185,7 +185,7 @@
                             </DataTemplate>
                         </TabStrip.DataTemplates>
                     </TabStrip>
-                    <Grid Background="{StyleResource BorderBrush}" Height="1"/>
+                    <Grid Background="{StyleResource ThemeBorderLightBrush}" Height="1"/>
                 </StackPanel>
                 <Border Classes="container">
                     <Border Classes="transparent" ClipToBounds="True">

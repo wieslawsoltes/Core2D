@@ -25,18 +25,18 @@
                         <Setter Property="Padding" Value="4 0 4 0"/>
                         <Setter Property="FontSize" Value="12"/>
                         <Setter Property="Height" Value="20"/>
-                        <Setter Property="Background" Value="{StyleResource BackgroundBrush}"/>
-                        <Setter Property="Foreground" Value="{StyleResource ForegroundBrush}"/>
-                        <Setter Property="BorderBrush" Value="{StyleResource BackgroundBrush}"/>
+                        <Setter Property="Background" Value="{StyleResource ThemeBackgroundBrush}"/>
+                        <Setter Property="Foreground" Value="{StyleResource ThemeForegroundBrush}"/>
+                        <Setter Property="BorderBrush" Value="{StyleResource ThemeBackgroundBrush}"/>
                         <Setter Property="BorderThickness" Value="0"/>
                     </Style>
                     <Style Selector="TabStripItem:pointerover">
-                        <Setter Property="Background" Value="{StyleResource BorderBrush}"/>
-                        <Setter Property="Foreground" Value="{StyleResource BackgroundBrush}"/>
+                        <Setter Property="Background" Value="{StyleResource ThemeBorderMidBrush}"/>
+                        <Setter Property="Foreground" Value="{StyleResource ThemeBackgroundBrush}"/>
                     </Style>
                     <Style Selector="TabStripItem:selected">
-                        <Setter Property="Background" Value="{StyleResource BorderBrush}"/>
-                        <Setter Property="Foreground" Value="{StyleResource BackgroundBrush}"/>
+                        <Setter Property="Background" Value="{StyleResource ThemeBorderMidBrush}"/>
+                        <Setter Property="Foreground" Value="{StyleResource ThemeBackgroundBrush}"/>
                     </Style>
                 </TabStrip.Styles>
                 <TabStrip.DataTemplates>
@@ -45,7 +45,7 @@
                     </DataTemplate>
                 </TabStrip.DataTemplates>
             </TabStrip>
-            <Grid Background="{StyleResource BorderBrush}" Height="2"/>
+            <Grid Background="{StyleResource ThemeBorderMidBrush}" Height="2"/>
         </StackPanel>
         <ScrollViewer>
             <Carousel Items="{Binding Project.Documents}" SelectedIndex="{Binding #documents.SelectedIndex}" IsVirtualized="False" VerticalAlignment="Center" Margin="2">

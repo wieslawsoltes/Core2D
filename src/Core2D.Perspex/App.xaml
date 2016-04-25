@@ -23,7 +23,8 @@
     <Application.Styles>
         <!-- Theme -->
         <StyleInclude Source="resm:Perspex.Themes.Default.DefaultTheme.xaml?assembly=Perspex.Themes.Default"/>
-        <StyleInclude Source="resm:Perspex.Themes.Default.Accents.BaseLight.xaml?assembly=Perspex.Themes.Default"/>
+        <!--<StyleInclude Source="resm:Perspex.Themes.Default.Accents.BaseLight.xaml?assembly=Perspex.Themes.Default"/>-->
+        <StyleInclude Source="resm:Core2D.Perspex.Resources.Accent.xaml?assembly=Core2D.Perspex"/>
         <!-- Brushes -->
         <StyleInclude Source="resm:Core2D.Perspex.Resources.Brushes.xaml?assembly=Core2D.Perspex"/>
         <!-- Styles -->

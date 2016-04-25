@@ -28,7 +28,7 @@
                             </ia:EventTriggerBehavior>
                         </i:Interaction.Behaviors>
                         <TextBlock.ContextMenu>
-                            <ContextMenu>
+                            <ContextMenu Classes="default">
                                 <MenuItem Header="_Edit Template" Command="{Static Editor:Commands.EditTemplateCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                                 <Separator/>
                                 <MenuItem Header="_Add Template" Command="{Static Editor:Commands.AddTemplateCommand}"/>

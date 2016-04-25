@@ -33,7 +33,7 @@
                 <KeyBinding Command="{Static Editor:Commands.ExportCommand}" CommandParameter="{Binding #documents.SelectedItem}" Gesture="Ctrl+E"/>
             </TreeView.KeyBindings>
             <TreeView.ContextMenu>
-                <ContextMenu>
+                <ContextMenu Classes="default">
                     <MenuItem Header="_Add Document" Command="{Static Editor:Commands.AddDocumentCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                     <Separator/>
                     <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportCommand}" CommandParameter="{Binding Mode=OneWay}"/>
@@ -54,7 +54,7 @@
                         -->
                         <TextBlock Text="{Binding Name}" Classes="tree">
                             <TextBlock.ContextMenu>
-                                <ContextMenu>
+                                <ContextMenu Classes="default">
                                     <MenuItem Header="_Add Page" Command="{Static Editor:Commands.AddPageCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                                     <Separator/>
                                     <MenuItem Header="Insert Document Bef_ore" Command="{Static Editor:Commands.InsertDocumentBeforeCommand}" CommandParameter="{Binding Mode=OneWay}"/>
@@ -80,7 +80,7 @@
                         </i:Interaction.Behaviors>
                         <TextBlock Text="{Binding Name}" Classes="tree">
                             <TextBlock.ContextMenu>
-                                <ContextMenu>
+                                <ContextMenu Classes="default">
                                     <MenuItem Header="Te_mplate" Items="{Binding #root.Tag.Project.Templates}">
                                         <MenuItem.DataTemplates>
                                             <DataTemplate DataType="Project:XContainer">
@@ -121,7 +121,7 @@
                 <DataTemplate DataType="Project:XLayer">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch">
                         <StackPanel.ContextMenu>
-                            <ContextMenu>
+                            <ContextMenu Classes="default">
                                 <MenuItem Header="_Add Layer" Command="{Static Editor:Commands.AddLayerCommand}" CommandParameter="{Binding Owner, Mode=OneWay}"/>
                                 <Separator/>
                                 <MenuItem Header="_Delete" Command="{Static Editor:Commands.RemoveLayerCommand}" CommandParameter="{Binding Mode=OneWay}"/>

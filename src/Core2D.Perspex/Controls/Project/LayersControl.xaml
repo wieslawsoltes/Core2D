@@ -27,7 +27,7 @@
                         <DataTemplate DataType="Project:XLayer">
                             <Grid ColumnDefinitions="Auto,*">
                                 <Grid.ContextMenu>
-                                    <ContextMenu>
+                                    <ContextMenu Classes="default">
                                         <MenuItem Header="_Delete" Command="{Static Editor:Commands.RemoveLayerCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                                     </ContextMenu>
                                 </Grid.ContextMenu>

@@ -25,7 +25,7 @@
                         <DataTemplate DataType="Shape:BaseShape">
                             <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="list">
                                 <TextBlock.ContextMenu>
-                                    <ContextMenu>
+                                    <ContextMenu Classes="default">
                                         <MenuItem Header="_Delete" Command="{Static Editor:Commands.RemoveShapeCommand}" CommandParameter="{Binding}"/>
                                     </ContextMenu>
                                 </TextBlock.ContextMenu>

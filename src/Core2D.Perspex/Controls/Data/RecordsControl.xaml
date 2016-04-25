@@ -32,7 +32,7 @@
                             </ia:EventTriggerBehavior>
                         </i:Interaction.Behaviors>
                         <TextBlock.ContextMenu>
-                            <ContextMenu>
+                            <ContextMenu Classes="default">
                                 <MenuItem Header="_Delete" Command="{Static Editor:Commands.RemoveRecordCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                             </ContextMenu>
                         </TextBlock.ContextMenu>
