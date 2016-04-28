@@ -3,6 +3,7 @@
 <UserControl x:Class="Core2D.Perspex.Views.EditorControl"
              xmlns="https://github.com/perspex"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:i="clr-namespace:Perspex.Xaml.Interactivity;assembly=Perspex.Xaml.Interactivity"
              xmlns:ia="clr-namespace:Perspex.Xaml.Interactions.Core;assembly=Perspex.Xaml.Interactions"
              xmlns:local="clr-namespace:Core2D.Perspex;assembly=Core2D.Perspex"
@@ -24,67 +25,84 @@
              Design.DataContext="{Static Designer:DesignerContext.Editor}"
              Design.Width="1200" Design.Height="540">
     <Grid Name="rootPanel" ColumnDefinitions="180,Auto,*,Auto,240" RowDefinitions="*,Auto" Margin="6,6,6,2">
-        <!--
+        <Grid.Styles>
+            <Style>
+                <Style.Resources>
+                    <!-- Height -->
+                    <sys:Double x:Key="HeightLimit1">420</sys:Double>
+                    <!-- Width -->
+                    <sys:Double x:Key="WidthLimit1">240</sys:Double>
+                    <sys:Double x:Key="WidthLimit2">420</sys:Double>
+                    <sys:Double x:Key="WidthLimit3">480</sys:Double>
+                    <sys:Double x:Key="WidthLimit4">720</sys:Double>
+                    <sys:Double x:Key="WidthLimit5">800</sys:Double>
+                    <sys:Double x:Key="WidthLimit6">1100</sys:Double>
+                </Style.Resources>
+            </Style>
+        </Grid.Styles>
         <i:Interaction.Behaviors>
-            <ia:DataTriggerBehavior Binding="{Binding #rootPanel.Bounds.Height}" ComparisonCondition="GreaterThan" Value="420">
+            <!-- Height -->
+            <ia:DataTriggerBehavior Binding="{Binding #rootPanel.Bounds.Height}" ComparisonCondition="GreaterThan" Value="{StyleResource HeightLimit1}">
                 <ia:ChangePropertyAction TargetObject="{Binding #leftPanelBottom}" PropertyName="IsVisible" Value="True"/>
                 <ia:ChangePropertyAction TargetObject="{Binding #rightPanelBottom}" PropertyName="IsVisible" Value="True"/>
                 <ia:ChangePropertyAction TargetObject="{Binding #leftPanelTop}" PropertyName="Grid.RowSpan" Value="1"/>
                 <ia:ChangePropertyAction TargetObject="{Binding #rightPanelTop}" PropertyName="Grid.RowSpan" Value="1"/>
             </ia:DataTriggerBehavior>
-            <ia:DataTriggerBehavior Binding="{Binding #rootPanel.Bounds.Height}" ComparisonCondition="LessThanOrEqual" Value="420">
+            <ia:DataTriggerBehavior Binding="{Binding #rootPanel.Bounds.Height}" ComparisonCondition="LessThanOrEqual" Value="{StyleResource HeightLimit1}">
                 <ia:ChangePropertyAction TargetObject="{Binding #leftPanelBottom}" PropertyName="IsVisible" Value="False"/>
                 <ia:ChangePropertyAction TargetObject="{Binding #rightPanelBottom}" PropertyName="IsVisible" Value="False"/>
                 <ia:ChangePropertyAction TargetObject="{Binding #leftPanelTop}" PropertyName="Grid.RowSpan" Value="3"/>
                 <ia:ChangePropertyAction TargetObject="{Binding #rightPanelTop}" PropertyName="Grid.RowSpan" Value="3"/>
             </ia:DataTriggerBehavior>
-            <ia:DataTriggerBehavior Binding="{Binding #rootPanel.Bounds.Width}" ComparisonCondition="GreaterThan" Value="240">
+            <!-- Width -->
+            <ia:DataTriggerBehavior Binding="{Binding #rootPanel.Bounds.Width}" ComparisonCondition="GreaterThan" Value="{StyleResource WidthLimit1}">
                 <ia:ChangePropertyAction TargetObject="{Binding #zoomPanel}" PropertyName="IsVisible" Value="True"/>
             </ia:DataTriggerBehavior>
-            <ia:DataTriggerBehavior Binding="{Binding #rootPanel.Bounds.Width}" ComparisonCondition="LessThanOrEqual" Value="240">
+            <ia:DataTriggerBehavior Binding="{Binding #rootPanel.Bounds.Width}" ComparisonCondition="LessThanOrEqual" Value="{StyleResource WidthLimit1}">
                 <ia:ChangePropertyAction TargetObject="{Binding #zoomPanel}" PropertyName="IsVisible" Value="False"/>
             </ia:DataTriggerBehavior>
-            <ia:DataTriggerBehavior Binding="{Binding #rootPanel.Bounds.Width}" ComparisonCondition="GreaterThan" Value="420">
+            <ia:DataTriggerBehavior Binding="{Binding #rootPanel.Bounds.Width}" ComparisonCondition="GreaterThan" Value="{StyleResource WidthLimit2}">
                 <ia:ChangePropertyAction TargetObject="{Binding #toolPanel}" PropertyName="IsVisible" Value="True"/>
+                <ia:ChangePropertyAction TargetObject="{Binding #toolsPanel}" PropertyName="Grid.Column" Value="1"/>
             </ia:DataTriggerBehavior>
-            <ia:DataTriggerBehavior Binding="{Binding #rootPanel.Bounds.Width}" ComparisonCondition="LessThanOrEqual" Value="420">
+            <ia:DataTriggerBehavior Binding="{Binding #rootPanel.Bounds.Width}" ComparisonCondition="LessThanOrEqual" Value="{StyleResource WidthLimit2}">
                 <ia:ChangePropertyAction TargetObject="{Binding #toolPanel}" PropertyName="IsVisible" Value="False"/>
+                <ia:ChangePropertyAction TargetObject="{Binding #toolsPanel}" PropertyName="Grid.Column" Value="0"/>
             </ia:DataTriggerBehavior>
-            <ia:DataTriggerBehavior Binding="{Binding #rootPanel.Bounds.Width}" ComparisonCondition="GreaterThan" Value="480">
+            <ia:DataTriggerBehavior Binding="{Binding #rootPanel.Bounds.Width}" ComparisonCondition="GreaterThan" Value="{StyleResource WidthLimit3}">
                 <ia:ChangePropertyAction TargetObject="{Binding #leftPanelVSplitter}" PropertyName="IsVisible" Value="True"/>
                 <ia:ChangePropertyAction TargetObject="{Binding #leftPanel}" PropertyName="IsVisible" Value="True"/>
                 <ia:ChangePropertyAction TargetObject="{Binding #containerPanel}" PropertyName="Grid.Column" Value="2"/>
                 <ia:ChangePropertyAction TargetObject="{Binding #containerPanel}" PropertyName="Grid.ColumnSpan" Value="3"/>
             </ia:DataTriggerBehavior>
-            <ia:DataTriggerBehavior Binding="{Binding #rootPanel.Bounds.Width}" ComparisonCondition="LessThanOrEqual" Value="480">
+            <ia:DataTriggerBehavior Binding="{Binding #rootPanel.Bounds.Width}" ComparisonCondition="LessThanOrEqual" Value="{StyleResource WidthLimit3}">
                 <ia:ChangePropertyAction TargetObject="{Binding #leftPanelVSplitter}" PropertyName="IsVisible" Value="False"/>
                 <ia:ChangePropertyAction TargetObject="{Binding #leftPanel}" PropertyName="IsVisible" Value="False"/>
                 <ia:ChangePropertyAction TargetObject="{Binding #containerPanel}" PropertyName="Grid.Column" Value="0"/>
                 <ia:ChangePropertyAction TargetObject="{Binding #containerPanel}" PropertyName="Grid.ColumnSpan" Value="5"/>
             </ia:DataTriggerBehavior>
-            <ia:DataTriggerBehavior Binding="{Binding #rootPanel.Bounds.Width}" ComparisonCondition="GreaterThan" Value="720">
+            <ia:DataTriggerBehavior Binding="{Binding #rootPanel.Bounds.Width}" ComparisonCondition="GreaterThan" Value="{StyleResource WidthLimit4}">
                 <ia:ChangePropertyAction TargetObject="{Binding #rightPanelVSplitter}" PropertyName="IsVisible" Value="True"/>
                 <ia:ChangePropertyAction TargetObject="{Binding #rightPanel}" PropertyName="IsVisible" Value="True"/>
                 <ia:ChangePropertyAction TargetObject="{Binding #containerPanel}" PropertyName="Grid.ColumnSpan" Value="1"/>
             </ia:DataTriggerBehavior>
-            <ia:DataTriggerBehavior Binding="{Binding #rootPanel.Bounds.Width}" ComparisonCondition="LessThanOrEqual" Value="720">
+            <ia:DataTriggerBehavior Binding="{Binding #rootPanel.Bounds.Width}" ComparisonCondition="LessThanOrEqual" Value="{StyleResource WidthLimit4}">
                 <ia:ChangePropertyAction TargetObject="{Binding #rightPanelVSplitter}" PropertyName="IsVisible" Value="False"/>
                 <ia:ChangePropertyAction TargetObject="{Binding #rightPanel}" PropertyName="IsVisible" Value="False"/>
             </ia:DataTriggerBehavior>
-            <ia:DataTriggerBehavior Binding="{Binding #rootPanel.Bounds.Width}" ComparisonCondition="GreaterThan" Value="800">
+            <ia:DataTriggerBehavior Binding="{Binding #rootPanel.Bounds.Width}" ComparisonCondition="GreaterThan" Value="{StyleResource WidthLimit5}">
                 <ia:ChangePropertyAction TargetObject="{Binding #optionsPanel}" PropertyName="IsVisible" Value="True"/>
             </ia:DataTriggerBehavior>
-            <ia:DataTriggerBehavior Binding="{Binding #rootPanel.Bounds.Width}" ComparisonCondition="LessThanOrEqual" Value="800">
+            <ia:DataTriggerBehavior Binding="{Binding #rootPanel.Bounds.Width}" ComparisonCondition="LessThanOrEqual" Value="{StyleResource WidthLimit5}">
                 <ia:ChangePropertyAction TargetObject="{Binding #optionsPanel}" PropertyName="IsVisible" Value="False"/>
             </ia:DataTriggerBehavior>
-            <ia:DataTriggerBehavior Binding="{Binding #rootPanel.Bounds.Width}" ComparisonCondition="GreaterThan" Value="1100">
+            <ia:DataTriggerBehavior Binding="{Binding #rootPanel.Bounds.Width}" ComparisonCondition="GreaterThan" Value="{StyleResource WidthLimit6}">
                 <ia:ChangePropertyAction TargetObject="{Binding #statsPanel}" PropertyName="IsVisible" Value="True"/>
             </ia:DataTriggerBehavior>
-            <ia:DataTriggerBehavior Binding="{Binding #rootPanel.Bounds.Width}" ComparisonCondition="LessThanOrEqual" Value="1100">
+            <ia:DataTriggerBehavior Binding="{Binding #rootPanel.Bounds.Width}" ComparisonCondition="LessThanOrEqual" Value="{StyleResource WidthLimit6}">
                 <ia:ChangePropertyAction TargetObject="{Binding #statsPanel}" PropertyName="IsVisible" Value="False"/>
             </ia:DataTriggerBehavior>
         </i:Interaction.Behaviors>
-        -->
         <GridSplitter Name="leftPanelVSplitter" Classes="vertical" Grid.Column="1" Grid.Row="0" Width="6"/>
         <Grid Name="containerPanel" Grid.Row="0" Grid.Column="2">
             <DockPanel>
@@ -280,7 +298,7 @@
                     </MultiBinding>
                 </TextBlock.Text>
             </TextBlock>
-            <WrapPanel Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Horizontal">
+            <WrapPanel Name="toolsPanel" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center">
                 <WrapPanel Name="toolPanel">
                     <DropDown Classes="tool" Items="{Static Editor:Enums.ToolValues}" SelectedItem="{Binding CurrentTool, Mode=TwoWay}"/>
                     <DropDown Classes="tool" Items="{Static Editor:Enums.PathToolValues}" SelectedItem="{Binding CurrentPathTool, Mode=TwoWay}">
