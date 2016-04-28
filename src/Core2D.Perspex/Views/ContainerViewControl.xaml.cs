@@ -25,12 +25,18 @@ namespace Core2D.Perspex.Views
         public static readonly PerspexProperty<ShapeRenderer> RendererProperty =
             PerspexProperty.Register<ContainerViewControl, ShapeRenderer>(nameof(Renderer));
 
+        /// <summary>
+        /// Gets or set container property.
+        /// </summary>
         public XContainer Container
         {
             get { return GetValue(ContainerProperty); }
             set { SetValue(ContainerProperty, value); }
         }
 
+        /// <summary>
+        ///  Gets or set renderer property.
+        /// </summary>
         public ShapeRenderer Renderer
         {
             get { return GetValue(RendererProperty); }
