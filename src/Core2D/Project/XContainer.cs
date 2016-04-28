@@ -43,7 +43,17 @@ namespace Core2D.Project
         public double Width
         {
             get { return _template != null ? _template.Width : _width; }
-            set { Update(ref _width, value); }
+            set
+            {
+                if (_template != null)
+                {
+                    _template.Width = value;
+                }
+                else
+                {
+                    Update(ref _width, value);
+                }
+            }
         }
 
         /// <summary>
@@ -52,7 +62,17 @@ namespace Core2D.Project
         public double Height
         {
             get { return _template != null ? _template.Height : _height; }
-            set { Update(ref _height, value); }
+            set
+            {
+                if (_template != null)
+                {
+                    _template.Height = value;
+                }
+                else
+                {
+                    Update(ref _height, value);
+                }
+            }
         }
 
         /// <summary>
