@@ -38,11 +38,6 @@
                 </TabControl>
             </Grid>
         </TabItem>
-        <!--
-        <TabItem Header="Template" Classes="property">
-            <project:ContainerControl DataContext="{Binding Template}"/>
-        </TabItem>
-        -->
         <TabItem Header="Data" Classes="property">
             <presenters:CachedContentPresenter DataContext="{Binding Data}"/>
         </TabItem>
