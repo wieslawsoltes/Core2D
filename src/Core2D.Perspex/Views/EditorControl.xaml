@@ -275,13 +275,11 @@
                             <presenters:CachedContentPresenter DataContext="{Binding Project.CurrentContainer}"/>
                         </ScrollViewer>
                     </TabItem>
-                    <!--
                     <TabItem Header="Template" Classes="property">
                         <ScrollViewer>
-                            <project:ContainerControl DataContext="{Binding Project.CurrentTemplate}"/>
+                            <presenters:CachedContentPresenter DataContext="{Binding Project.CurrentTemplate}"/>
                         </ScrollViewer>
                     </TabItem>
-                    -->
                 </TabControl>
             </Border>
         </Grid>
