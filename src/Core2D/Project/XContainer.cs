@@ -51,6 +51,7 @@ namespace Core2D.Project
                 if (_template != null)
                 {
                     _template.Width = value;
+                    Notify();
                 }
                 else
                 {
@@ -73,6 +74,7 @@ namespace Core2D.Project
                 if (_template != null)
                 {
                     _template.Height = value;
+                    Notify();
                 }
                 else
                 {
@@ -95,6 +97,7 @@ namespace Core2D.Project
                 if (_template != null)
                 {
                     _template.Background = value;
+                    Notify();
                 }
                 else
                 {
