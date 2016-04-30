@@ -40,6 +40,9 @@ namespace Core2D.Project
         /// <summary>
         /// Gets or sets container width.
         /// </summary>
+        /// <remarks>
+        /// If template is not null Template.Width property is used.
+        /// </remarks>
         public double Width
         {
             get { return _template != null ? _template.Width : _width; }
@@ -59,6 +62,9 @@ namespace Core2D.Project
         /// <summary>
         /// Gets or sets container height.
         /// </summary>
+        /// <remarks>
+        /// If template is not null Template.Height property is used.
+        /// </remarks>
         public double Height
         {
             get { return _template != null ? _template.Height : _height; }
