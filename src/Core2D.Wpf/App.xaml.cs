@@ -144,7 +144,7 @@ namespace Core2D.Wpf
                 var path = System.IO.Path.Combine(_fileIO.AssemblyPath, _recentFileName);
                 if (System.IO.File.Exists(path))
                 {
-                    _editor?.LoadRecent(path);
+                    _editor?.OnLoadRecent(path);
                 }
             }
             catch (Exception ex)
@@ -161,7 +161,7 @@ namespace Core2D.Wpf
             try
             {
                 var path = System.IO.Path.Combine(_fileIO.AssemblyPath, _recentFileName);
-                _editor?.SaveRecent(path);
+                _editor?.OnSaveRecent(path);
             }
             catch (Exception ex)
             {
@@ -194,7 +194,7 @@ namespace Core2D.Wpf
                 CsvReader = new CsvHelperReader(),
                 CsvWriter = new CsvHelperWriter(),
                 GetImageKey = async () => await (this as IEditorApplication).OnGetImageKeyAsync()
-            };
+            }.Defaults();
 
             _editor.InitializeCommands();
             _editor.CommandManager.RegisterCommands();
@@ -241,14 +241,14 @@ namespace Core2D.Wpf
 
                 if (dlg.ShowDialog(_mainWindow) == true)
                 {
-                    _editor?.Open(dlg.FileName);
+                    _editor?.OnOpen(dlg.FileName);
                 }
             }
             else
             {
                 if (System.IO.File.Exists(path))
                 {
-                    _editor?.Open(path);
+                    _editor?.OnOpen(path);
                 }
             }
 
@@ -260,7 +260,7 @@ namespace Core2D.Wpf
         {
             if (!string.IsNullOrEmpty(_editor?.ProjectPath))
             {
-                _editor?.Save(_editor?.ProjectPath);
+                _editor?.OnSave(_editor?.ProjectPath);
             }
             else
             {
@@ -280,7 +280,7 @@ namespace Core2D.Wpf
 
             if (dlg.ShowDialog(_mainWindow) == true)
             {
-                _editor?.Save(dlg.FileName);
+                _editor?.OnSave(dlg.FileName);
             }
 
             await Task.Delay(0);
@@ -446,7 +446,7 @@ namespace Core2D.Wpf
                 IFileWriter writer = _editor?.FileWriters.Where(w => string.Compare(w.Extension, ext, StringComparison.OrdinalIgnoreCase) == 0).FirstOrDefault();
                 if (writer != null)
                 {
-                    _editor?.Export(result, item, writer);
+                    _editor?.OnExport(result, item, writer);
                 }
             }
 

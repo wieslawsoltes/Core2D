@@ -86,7 +86,7 @@ namespace Core2D.Wpf.Views
                 state.PanY = offsetY;
                 if (invalidate)
                 {
-                    _projectEditor.InvalidateCache(isZooming: true);
+                    _projectEditor.OnInvalidateCache(isZooming: true);
                 }
             }
         }
@@ -162,7 +162,7 @@ namespace Core2D.Wpf.Views
                 try
                 {
                     var files = (string[])e.Data.GetData(DataFormats.FileDrop);
-                    if (_projectEditor.Drop(files))
+                    if (_projectEditor.OnDropFiles(files))
                     {
                         e.Handled = true;
                     }
@@ -182,7 +182,7 @@ namespace Core2D.Wpf.Views
                     if (shape != null)
                     {
                         var p = e.GetPosition(drawableControl);
-                        _projectEditor.DropShape(shape, p.X, p.Y);
+                        _projectEditor.OnDropShape(shape, p.X, p.Y);
                         e.Handled = true;
                     }
                 }
@@ -201,7 +201,7 @@ namespace Core2D.Wpf.Views
                     if (group != null)
                     {
                         var p = e.GetPosition(drawableControl);
-                        _projectEditor.DropShapeAsClone(group, p.X, p.Y);
+                        _projectEditor.OnDropShapeAsClone(group, p.X, p.Y);
                         e.Handled = true;
                     }
                 }
@@ -220,7 +220,7 @@ namespace Core2D.Wpf.Views
                     if (record != null)
                     {
                         var p = e.GetPosition(drawableControl);
-                        _projectEditor.Drop(record, p.X, p.Y);
+                        _projectEditor.OnDropRecord(record, p.X, p.Y);
                         e.Handled = true;
                     }
                 }
@@ -239,7 +239,7 @@ namespace Core2D.Wpf.Views
                     if (style != null)
                     {
                         var p = e.GetPosition(drawableControl);
-                        _projectEditor.Drop(style, p.X, p.Y);
+                        _projectEditor.OnDropStyle(style, p.X, p.Y);
                         e.Handled = true;
                     }
                 }

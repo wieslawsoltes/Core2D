@@ -68,7 +68,7 @@ namespace Core2D.Perspex.Views
 
                     if (invalidateCache)
                     {
-                        _projectEditor.InvalidateCache(isZooming: true);
+                        _projectEditor.OnInvalidateCache(isZooming: true);
                     }
                 }
             }

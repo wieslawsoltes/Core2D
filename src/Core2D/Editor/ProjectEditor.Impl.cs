@@ -4,12 +4,7 @@ using Core2D.Collections;
 using Core2D.Data;
 using Core2D.Data.Database;
 using Core2D.Editor.Bounds;
-using Core2D.Editor.Factories;
-using Core2D.Editor.Input;
-using Core2D.Editor.Interfaces;
 using Core2D.Editor.Recent;
-using Core2D.Editor.Tools;
-using Core2D.Editor.Views;
 using Core2D.History;
 using Core2D.Interfaces;
 using Core2D.Math;
@@ -29,359 +24,20 @@ using static System.Math;
 namespace Core2D.Editor
 {
     /// <summary>
-    /// Project editor.
+    /// Project editor implementation.
     /// </summary>
-    public class ProjectEditor : ObservableObject
+    public partial class ProjectEditor
     {
-        private XProject _project;
-        private string _projectPath;
-        private bool _isProjectDirty;
-        private ProjectObserver _observer;
-        private ImmutableDictionary<Tool, ToolBase> _tools;
-        private Tool _currentTool;
-        private PathTool _currentPathTool;
-        private Action _invalidate;
-        private Action _resetZoom;
-        private Action _extentZoom;
-        private Action _loadLayout;
-        private Action _saveLayout;
-        private Action _resetLayout;
-        private bool _cancelAvailable;
-        private XContainer _pageToCopy;
-        private XDocument _documentToCopy;
-        private BaseShape _hover;
-        private ImmutableArray<RecentFile> _recentProjects;
-        private RecentFile _currentRecentProject;
-        private ImmutableArray<ViewBase> _views;
-        private ViewBase _currentView;
-        private DashboardView _dashboardView;
-        private EditorView _editorView;
-        private IEditorApplication _application;
-        private ILog _log;
-        private CommandManager _commandManager;
-        private ShapeRenderer[] _renderers;
-        private IFileSystem _fileIO;
-        private IProjectFactory _projectFactory;
-        private ITextClipboard _textClipboard;
-        private ITextSerializer _jsonSerializer;
-        private ITextSerializer _xamlSerializer;
-        private ImmutableArray<IFileWriter> _fileWriters;
-        private ITextFieldReader<XDatabase> _csvReader;
-        private ITextFieldWriter<XDatabase> _csvWriter;
-
         /// <summary>
-        /// Gets or sets current project.
+        /// Snap value by specified snap amount.
         /// </summary>
-        public XProject Project
+        /// <param name="value">The value to snap.</param>
+        /// <param name="snap">The snap amount.</param>
+        /// <returns>The snapped value.</returns>
+        public static double Snap(double value, double snap)
         {
-            get { return _project; }
-            set { Update(ref _project, value); }
-        }
-
-        /// <summary>
-        /// Gets or sets current project path.
-        /// </summary>
-        public string ProjectPath
-        {
-            get { return _projectPath; }
-            set { Update(ref _projectPath, value); }
-        }
-
-        /// <summary>
-        /// Gets or sets flag indicating that current project was modified.
-        /// </summary>
-        public bool IsProjectDirty
-        {
-            get { return _isProjectDirty; }
-            set { Update(ref _isProjectDirty, value); }
-        }
-
-        /// <summary>
-        /// Gets or sets current project collections and objects observer.
-        /// </summary>
-        public ProjectObserver Observer
-        {
-            get { return _observer; }
-            set { Update(ref _observer, value); }
-        }
-
-        /// <summary>
-        /// Gets or sets editor tools dictionary.
-        /// </summary>
-        public ImmutableDictionary<Tool, ToolBase> Tools
-        {
-            get { return _tools; }
-            set { Update(ref _tools, value); }
-        }
-
-        /// <summary>
-        /// Gets or sets current editor tool.
-        /// </summary>
-        public Tool CurrentTool
-        {
-            get { return _currentTool; }
-            set { Update(ref _currentTool, value); }
-        }
-
-        /// <summary>
-        /// Gets or sets current editor path tool.
-        /// </summary>
-        public PathTool CurrentPathTool
-        {
-            get { return _currentPathTool; }
-            set { Update(ref _currentPathTool, value); }
-        }
-
-        /// <summary>
-        /// Gets or sets invalidate action.
-        /// </summary>
-        /// <remarks>Invalidate current container control.</remarks>
-        public Action Invalidate
-        {
-            get { return _invalidate; }
-            set { Update(ref _invalidate, value); }
-        }
-
-        /// <summary>
-        /// Gets or sets reset zoom action.
-        /// </summary>
-        /// <remarks>Reset view size to defaults.</remarks>
-        public Action ResetZoom
-        {
-            get { return _resetZoom; }
-            set { Update(ref _resetZoom, value); }
-        }
-
-        /// <summary>
-        /// Gets or sets extent zoom action.
-        /// </summary>
-        /// <remarks>Auto-fit view to the available extents.</remarks>
-        public Action AutoFitZoom
-        {
-            get { return _extentZoom; }
-            set { Update(ref _extentZoom, value); }
-        }
-
-        /// <summary>
-        /// Gets or sets load layout action.
-        /// </summary>
-        /// <remarks>Auto-fit view to the available extents.</remarks>
-        public Action LoadLayout
-        {
-            get { return _loadLayout; }
-            set { Update(ref _loadLayout, value); }
-        }
-
-        /// <summary>
-        /// Gets or sets save layout action.
-        /// </summary>
-        /// <remarks>Auto-fit view to the available extents.</remarks>
-        public Action SaveLayout
-        {
-            get { return _saveLayout; }
-            set { Update(ref _saveLayout, value); }
-        }
-
-        /// <summary>
-        /// Gets or sets reset layout action.
-        /// </summary>
-        /// <remarks>Reset editor layout.</remarks>
-        public Action ResetLayout
-        {
-            get { return _resetLayout; }
-            set { Update(ref _resetLayout, value); }
-        }
-
-        /// <summary>
-        /// Gets or sets flag indicating that current operation can be canceled.
-        /// </summary>
-        public bool CancelAvailable
-        {
-            get { return _cancelAvailable; }
-            set { Update(ref _cancelAvailable, value); }
-        }
-
-        /// <summary>
-        /// Get image key using common system open file dialog.
-        /// </summary>
-        public Func<Task<string>> GetImageKey { get; set; }
-
-        /// <summary>
-        /// Gets or sets recent projects collection.
-        /// </summary>
-        public ImmutableArray<RecentFile> RecentProjects
-        {
-            get { return _recentProjects; }
-            set { Update(ref _recentProjects, value); }
-        }
-
-        /// <summary>
-        /// Gets or sets current recent project.
-        /// </summary>
-        public RecentFile CurrentRecentProject
-        {
-            get { return _currentRecentProject; }
-            set { Update(ref _currentRecentProject, value); }
-        }
-
-        /// <summary>
-        /// Gets or sets registered views.
-        /// </summary>
-        public ImmutableArray<ViewBase> Views
-        {
-            get { return _views; }
-            set { Update(ref _views, value); }
-        }
-
-        /// <summary>
-        /// Gets or sets current view.
-        /// </summary>
-        public ViewBase CurrentView
-        {
-            get { return _currentView; }
-            set { Update(ref _currentView, value); }
-        }
-
-        /// <summary>
-        /// Gets or sets current editor application.
-        /// </summary>
-        public IEditorApplication Application
-        {
-            get { return _application; }
-            set { Update(ref _application, value); }
-        }
-
-        /// <summary>
-        /// Gets or sets current log.
-        /// </summary>
-        public ILog Log
-        {
-            get { return _log; }
-            set { Update(ref _log, value); }
-        }
-
-        /// <summary>
-        /// Gets or sets current command manager.
-        /// </summary>
-        public CommandManager CommandManager
-        {
-            get { return _commandManager; }
-            set { Update(ref _commandManager, value); }
-        }
-
-        /// <summary>
-        /// Gets or sets current renderer's.
-        /// </summary>
-        public ShapeRenderer[] Renderers
-        {
-            get { return _renderers; }
-            set { Update(ref _renderers, value); }
-        }
-
-        /// <summary>
-        /// Gets or sets current file system.
-        /// </summary>
-        public IFileSystem FileIO
-        {
-            get { return _fileIO; }
-            set { Update(ref _fileIO, value); }
-        }
-
-        /// <summary>
-        /// Gets or sets project factory.
-        /// </summary>
-        public IProjectFactory ProjectFactory
-        {
-            get { return _projectFactory; }
-            set { Update(ref _projectFactory, value); }
-        }
-
-        /// <summary>
-        /// Gets or sets text clipboard.
-        /// </summary>
-        public ITextClipboard TextClipboard
-        {
-            get { return _textClipboard; }
-            set { Update(ref _textClipboard, value); }
-        }
-
-        /// <summary>
-        /// Gets or sets Json serializer.
-        /// </summary>
-        public ITextSerializer JsonSerializer
-        {
-            get { return _jsonSerializer; }
-            set { Update(ref _jsonSerializer, value); }
-        }
-
-        /// <summary>
-        /// Gets or sets Xaml serializer.
-        /// </summary>
-        public ITextSerializer XamlSerializer
-        {
-            get { return _xamlSerializer; }
-            set { Update(ref _xamlSerializer, value); }
-        }
-
-        /// <summary>
-        /// Gets or sets available file writers.
-        /// </summary>
-        public ImmutableArray<IFileWriter> FileWriters
-        {
-            get { return _fileWriters; }
-            set { Update(ref _fileWriters, value); }
-        }
-
-        /// <summary>
-        /// Gets or sets Csv file reader.
-        /// </summary>
-        public ITextFieldReader<XDatabase> CsvReader
-        {
-            get { return _csvReader; }
-            set { Update(ref _csvReader, value); }
-        }
-
-        /// <summary>
-        /// Gets or sets Csv file writer.
-        /// </summary>
-        public ITextFieldWriter<XDatabase> CsvWriter
-        {
-            get { return _csvWriter; }
-            set { Update(ref _csvWriter, value); }
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ProjectEditor"/> class.
-        /// </summary>
-        public ProjectEditor()
-        {
-            _tools = new Dictionary<Tool, ToolBase>
-            {
-                [Tool.None] = new ToolNone(this),
-                [Tool.Selection] = new ToolSelection(this),
-                [Tool.Point] = new ToolPoint(this),
-                [Tool.Line] = new ToolLine(this),
-                [Tool.Arc] = new ToolArc(this),
-                [Tool.CubicBezier] = new ToolCubicBezier(this),
-                [Tool.QuadraticBezier] = new ToolQuadraticBezier(this),
-                [Tool.Path] = new ToolPath(this),
-                [Tool.Rectangle] = new ToolRectangle(this),
-                [Tool.Ellipse] = new ToolEllipse(this),
-                [Tool.Text] = new ToolText(this),
-                [Tool.Image] = new ToolImage(this)
-            }.ToImmutableDictionary();
-
-            _pageToCopy = default(XContainer);
-            _documentToCopy = default(XDocument);
-            _hover = default(BaseShape);
-
-            _recentProjects = ImmutableArray.Create<RecentFile>();
-            _currentRecentProject = default(RecentFile);
-
-            _dashboardView = new DashboardView { Name = "Dashboard", Context = this };
-            _editorView = new EditorView { Name = "Editor", Context = this };
-            _views = new List<ViewBase> { _dashboardView, _editorView }.ToImmutableArray();
-            _currentView = _dashboardView;
+            double r = value % snap;
+            return r >= snap / 2.0 ? value + snap - r : value - r;
         }
 
         /// <summary>
@@ -507,8 +163,8 @@ namespace Core2D.Editor
         /// </summary>
         private void OnNewProject()
         {
-            Unload();
-            Load(_projectFactory?.GetProject() ?? XProject.Create(), string.Empty);
+            OnUnload();
+            OnLoad(_projectFactory?.GetProject() ?? XProject.Create(), string.Empty);
             OnChangeCurrentView(_editorView);
             Invalidate?.Invoke();
         }
@@ -517,7 +173,7 @@ namespace Core2D.Editor
         /// Open project.
         /// </summary>
         /// <param name="path">The project file path.</param>
-        public void Open(string path)
+        public void OnOpen(string path)
         {
             try
             {
@@ -528,9 +184,9 @@ namespace Core2D.Editor
                         var project = XProject.Open(path, _fileIO, _jsonSerializer);
                         if (project != null)
                         {
-                            Unload();
-                            Load(project, path);
-                            AddRecent(path, project.Name);
+                            OnUnload();
+                            OnLoad(project, path);
+                            OnAddRecent(path, project.Name);
                             OnChangeCurrentView(_editorView);
                         }
                     }
@@ -549,21 +205,21 @@ namespace Core2D.Editor
         {
             OnChangeCurrentView(_dashboardView);
             _project?.History?.Reset();
-            Unload();
+            OnUnload();
         }
 
         /// <summary>
         /// Save project.
         /// </summary>
         /// <param name="path">The project file path.</param>
-        public void Save(string path)
+        public void OnSave(string path)
         {
             try
             {
                 if (_project != null && _fileIO != null && _jsonSerializer != null)
                 {
                     XProject.Save(_project, path, _fileIO, _jsonSerializer);
-                    AddRecent(path, _project.Name);
+                    OnAddRecent(path, _project.Name);
 
                     if (string.IsNullOrEmpty(_projectPath))
                     {
@@ -843,8 +499,8 @@ namespace Core2D.Editor
             }
             else if (item is XProject)
             {
-                Unload();
-                Load(item as XProject, string.Empty);
+                OnUnload();
+                OnLoad(item as XProject, string.Empty);
             }
             else
             {
@@ -1008,7 +664,7 @@ namespace Core2D.Editor
                 if (CanCopy())
                 {
                     OnCopy();
-                    DeleteSelected();
+                    OnDeleteSelected();
                 }
             }
             catch (Exception ex)
@@ -1028,12 +684,12 @@ namespace Core2D.Editor
                 {
                     if (_renderers?[0]?.State?.SelectedShape != null)
                     {
-                        Copy(Enumerable.Repeat(_renderers[0].State.SelectedShape, 1).ToList());
+                        OnCopy(Enumerable.Repeat(_renderers[0].State.SelectedShape, 1).ToList());
                     }
 
                     if (_renderers?[0]?.State?.SelectedShapes != null)
                     {
-                        Copy(_renderers[0].State.SelectedShapes.ToList());
+                        OnCopy(_renderers[0].State.SelectedShapes.ToList());
                     }
                 }
             }
@@ -1055,7 +711,7 @@ namespace Core2D.Editor
                     var text = await (_textClipboard?.GetText() ?? Task.FromResult(string.Empty));
                     if (!string.IsNullOrEmpty(text))
                     {
-                        Paste(text);
+                        OnPaste(text);
                     }
                 }
             }
@@ -1197,7 +853,7 @@ namespace Core2D.Editor
             }
             else if (item is ProjectEditor || item == null)
             {
-                DeleteSelected();
+                OnDeleteSelected();
             }
         }
 
@@ -1631,9 +1287,74 @@ namespace Core2D.Editor
         }
 
         /// <summary>
+        /// Add database.
+        /// </summary>
+        public void OnAddDatabase()
+        {
+            var db = XDatabase.Create(Constants.DefaultDatabaseName);
+            Project.AddDatabase(db);
+            Project.SetCurrentDatabase(db);
+        }
+
+        /// <summary>
+        /// Remove database.
+        /// </summary>
+        /// <param name="db">The database to remove.</param>
+        public void OnRemoveDatabase(XDatabase db)
+        {
+            Project.RemoveDatabase(db);
+            Project.SetCurrentDatabase(Project.Databases.FirstOrDefault());
+        }
+
+        /// <summary>
+        /// Add column to database.
+        /// </summary>
+        /// <param name="db">The records database.</param>
+        public void OnAddColumn(XDatabase db)
+        {
+            Project.AddColumn(db, XColumn.Create(db, Constants.DefaulColumnName));
+        }
+
+        /// <summary>
+        /// Remove column from database.
+        /// </summary>
+        /// <param name="column">The column to remove.</param>
+        public void OnRemoveColumn(XColumn column)
+        {
+            Project.RemoveColumn(column);
+        }
+
+        /// <summary>
+        /// Add record to database.
+        /// </summary>
+        /// <param name="db">The records database.</param>
+        public void OnAddRecord(XDatabase db)
+        {
+            Project.AddRecord(db, XRecord.Create(db, Constants.DefaulValue));
+        }
+
+        /// <summary>
+        /// Remove record from database.
+        /// </summary>
+        /// <param name="record">The data record.</param>
+        public void OnRemoveRecord(XRecord record)
+        {
+            Project.RemoveRecord(record);
+        }
+
+        /// <summary>
+        /// Reset data context record.
+        /// </summary>
+        /// <param name="data">The data context.</param>
+        public void OnResetRecord(XContext data)
+        {
+            Project.ResetRecord(data);
+        }
+
+        /// <summary>
         /// Set current record as selected shape(s) or current page data record.
         /// </summary>
-        /// <param name="record">The data record item.</param>
+        /// <param name="record">The data record.</param>
         public void OnApplyRecord(XRecord record)
         {
             if (record != null)
@@ -1663,6 +1384,44 @@ namespace Core2D.Editor
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// Add property to data context.
+        /// </summary>
+        /// <param name="data">The data context.</param>
+        public void OnAddProperty(XContext data)
+        {
+            Project.AddProperty(data, XProperty.Create(data, Constants.DefaulPropertyName, Constants.DefaulValue));
+        }
+
+        /// <summary>
+        /// Remove property from data context.
+        /// </summary>
+        /// <param name="property">The property to remove.</param>
+        public void OnRemoveProperty(XProperty property)
+        {
+            Project.RemoveProperty(property);
+        }
+
+        /// <summary>
+        /// Add group library.
+        /// </summary>
+        public void OnAddGroupLibrary()
+        {
+            var gl = XLibrary<XGroup>.Create(Constants.DefaulGroupLibraryName);
+            Project.AddGroupLibrary(gl);
+            Project.SetCurrentGroupLibrary(gl);
+        }
+
+        /// <summary>
+        /// Remove group library.
+        /// </summary>
+        /// <param name="library">The group library to remove.</param>
+        public void OnRemoveGroupLibrary(XLibrary<XGroup> library)
+        {
+            Project.RemoveGroupLibrary(library);
+            Project.SetCurrentGroupLibrary(_project?.GroupLibraries.FirstOrDefault());
         }
 
         /// <summary>
@@ -1706,8 +1465,66 @@ namespace Core2D.Editor
         {
             if (_project?.CurrentContainer != null)
             {
-                DropShapeAsClone(group, 0.0, 0.0);
+                OnDropShapeAsClone(group, 0.0, 0.0);
             }
+        }
+
+        /// <summary>
+        /// Add layer to container.
+        /// </summary>
+        /// <param name="container">The container instance.</param>
+        public void OnAddLayer(XContainer container)
+        {
+            Project.AddLayer(container, XLayer.Create(Constants.DefaultLayerName, container));
+        }
+
+        /// <summary>
+        /// Remove layer.
+        /// </summary>
+        /// <param name="layer">The layer to remove.</param>
+        public void OnRemoveLayer(XLayer layer)
+        {
+            Project.RemoveLayer(layer);
+            layer.Owner.SetCurrentLayer(layer.Owner.Layers.FirstOrDefault());
+        }
+
+        /// <summary>
+        /// Add style library.
+        /// </summary>
+        public void OnAddStyleLibrary()
+        {
+            var sl = XLibrary<ShapeStyle>.Create(Constants.DefaulStyleLibraryName);
+            Project.AddStyleLibrary(sl);
+            Project.SetCurrentStyleLibrary(sl);
+        }
+
+        /// <summary>
+        /// Remove style library.
+        /// </summary>
+        /// <param name="library">The style library to remove.</param>
+        public void OnRemoveStyleLibrary(XLibrary<ShapeStyle> library)
+        {
+            Project.RemoveStyleLibrary(library);
+            Project.SetCurrentStyleLibrary(_project?.StyleLibraries.FirstOrDefault());
+        }
+
+        /// <summary>
+        /// Add style.
+        /// </summary>
+        /// <param name="library">The style library.</param>
+        public void OnAddStyle(XLibrary<ShapeStyle> library)
+        {
+            Project.AddStyle(library, ShapeStyle.Create(Constants.DefaulStyleName));
+        }
+
+        /// <summary>
+        /// Remove style.
+        /// </summary>
+        /// <param name="style">The style to remove.</param>
+        public void OnRemoveStyle(ShapeStyle style)
+        {
+            var library = Project.RemoveStyle(style);
+            library?.SetSelected(library?.Items.FirstOrDefault());
         }
 
         /// <summary>
@@ -2045,7 +1862,7 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="project">The project instance.</param>
         /// <param name="path">The project path.</param>
-        public void Load(XProject project, string path = null)
+        public void OnLoad(XProject project, string path = null)
         {
             if (project != null)
             {
@@ -2062,7 +1879,7 @@ namespace Core2D.Editor
         /// <summary>
         /// Unload project.
         /// </summary>
-        public void Unload()
+        public void OnUnload()
         {
             Observer?.Dispose();
             Observer = null;
@@ -2085,22 +1902,10 @@ namespace Core2D.Editor
         }
 
         /// <summary>
-        /// Snap value by specified snap amount.
-        /// </summary>
-        /// <param name="value">The value to snap.</param>
-        /// <param name="snap">The snap amount.</param>
-        /// <returns>The snapped value.</returns>
-        public static double Snap(double value, double snap)
-        {
-            double r = value % snap;
-            return r >= snap / 2.0 ? value + snap - r : value - r;
-        }
-
-        /// <summary>
         /// Invalidate renderer's cache.
         /// </summary>
         /// <param name="isZooming">The flag indicating whether is zooming.</param>
-        public void InvalidateCache(bool isZooming)
+        public void OnInvalidateCache(bool isZooming)
         {
             try
             {
@@ -2126,7 +1931,7 @@ namespace Core2D.Editor
         /// <param name="path">The file path.</param>
         /// <param name="item">The item to export.</param>
         /// <param name="writer">The file writer.</param>
-        public void Export(string path, object item, IFileWriter writer)
+        public void OnExport(string path, object item, IFileWriter writer)
         {
             try
             {
@@ -2143,7 +1948,7 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="path">The project path.</param>
         /// <param name="name">The project name.</param>
-        private void AddRecent(string path, string name)
+        public void OnAddRecent(string path, string name)
         {
             if (_recentProjects != null)
             {
@@ -2169,7 +1974,7 @@ namespace Core2D.Editor
         /// Load recent project files.
         /// </summary>
         /// <param name="path">The recent projects path.</param>
-        public void LoadRecent(string path)
+        public void OnLoadRecent(string path)
         {
             if (_jsonSerializer != null)
             {
@@ -2211,7 +2016,7 @@ namespace Core2D.Editor
         /// Save recent project files.
         /// </summary>
         /// <param name="path">The recent projects path.</param>
-        public void SaveRecent(string path)
+        public void OnSaveRecent(string path)
         {
             if (_jsonSerializer != null)
             {
@@ -2276,7 +2081,7 @@ namespace Core2D.Editor
         /// Copy selected shapes to clipboard.
         /// </summary>
         /// <param name="shapes"></param>
-        private void Copy(IList<BaseShape> shapes)
+        public void OnCopy(IList<BaseShape> shapes)
         {
             try
             {
@@ -2296,7 +2101,7 @@ namespace Core2D.Editor
         /// Paste text from clipboard as shapes.
         /// </summary>
         /// <param name="text">The text string.</param>
-        public void Paste(string text)
+        public void OnPaste(string text)
         {
             try
             {
@@ -2316,7 +2121,7 @@ namespace Core2D.Editor
                             _project.Options.DefaultIsStroked,
                             _project.Options.DefaultIsFilled);
 
-                        Paste(Enumerable.Repeat(path, 1));
+                        OnPaste(Enumerable.Repeat(path, 1));
                         return;
                     }
                 }
@@ -2342,7 +2147,7 @@ namespace Core2D.Editor
                     var shapes = _jsonSerializer?.Deserialize<IList<BaseShape>>(text);
                     if (shapes?.Count() > 0)
                     {
-                        Paste(shapes);
+                        OnPaste(shapes);
                         return;
                     }
                 }
@@ -2493,7 +2298,7 @@ namespace Core2D.Editor
         /// Paste shapes to current container.
         /// </summary>
         /// <param name="shapes">The shapes collection.</param>
-        public void Paste(IEnumerable<BaseShape> shapes)
+        public void OnPaste(IEnumerable<BaseShape> shapes)
         {
             try
             {
@@ -2504,7 +2309,7 @@ namespace Core2D.Editor
 
                 _project.AddShapes(_project?.CurrentContainer?.CurrentLayer, shapes);
 
-                Select(shapes);
+                OnSelect(shapes);
             }
             catch (Exception ex)
             {
@@ -2516,7 +2321,7 @@ namespace Core2D.Editor
         /// Select shapes.
         /// </summary>
         /// <param name="shapes">The shapes collection.</param>
-        private void Select(IEnumerable<BaseShape> shapes)
+        public void OnSelect(IEnumerable<BaseShape> shapes)
         {
             if (shapes?.Count() == 1)
             {
@@ -2558,7 +2363,7 @@ namespace Core2D.Editor
 
             return default(T);
         }
-        
+
         /// <summary>
         /// Clone the <see cref="XContainer"/> object.
         /// </summary>
@@ -2632,7 +2437,7 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="files">The files array.</param>
         /// <returns>Returns true if success.</returns>
-        public bool Drop(string[] files)
+        public bool OnDropFiles(string[] files)
         {
             try
             {
@@ -2648,7 +2453,7 @@ namespace Core2D.Editor
 
                         if (string.Compare(ext, Constants.ProjectExtension, StringComparison.OrdinalIgnoreCase) == 0)
                         {
-                            Open(path);
+                            OnOpen(path);
                             result = true;
                         }
                         else if (string.Compare(ext, Constants.CsvExtension, StringComparison.OrdinalIgnoreCase) == 0)
@@ -2685,7 +2490,7 @@ namespace Core2D.Editor
         /// <param name="shape">The <see cref="BaseShape"/> object.</param>
         /// <param name="x">The X coordinate in container.</param>
         /// <param name="y">The Y coordinate in container.</param>
-        public void DropShape(BaseShape shape, double x, double y)
+        public void OnDropShape(BaseShape shape, double x, double y)
         {
             try
             {
@@ -2734,7 +2539,7 @@ namespace Core2D.Editor
                         }
                         else
                         {
-                            DropShapeAsClone(shape, x, y);
+                            OnDropShapeAsClone(shape, x, y);
                         }
                     }
                 }
@@ -2752,7 +2557,7 @@ namespace Core2D.Editor
         /// <param name="shape">The <see cref="BaseShape"/> object.</param>
         /// <param name="x">The X coordinate in container.</param>
         /// <param name="y">The Y coordinate in container.</param>
-        public void DropShapeAsClone<T>(T shape, double x, double y) where T : BaseShape
+        public void OnDropShapeAsClone<T>(T shape, double x, double y) where T : BaseShape
         {
             double sx = _project.Options.SnapToGrid ? Snap(x, _project.Options.SnapX) : x;
             double sy = _project.Options.SnapToGrid ? Snap(y, _project.Options.SnapY) : y;
@@ -2793,7 +2598,7 @@ namespace Core2D.Editor
         /// <param name="record">The <see cref="XRecord"/> object.</param>
         /// <param name="x">The X coordinate in container.</param>
         /// <param name="y">The Y coordinate in container.</param>
-        public void Drop(XRecord record, double x, double y)
+        public void OnDropRecord(XRecord record, double x, double y)
         {
             try
             {
@@ -2814,7 +2619,7 @@ namespace Core2D.Editor
                         }
                         else
                         {
-                            DropAsGroup(record, x, y);
+                            OnDropRecordAsGroup(record, x, y);
                         }
                     }
                 }
@@ -2831,7 +2636,7 @@ namespace Core2D.Editor
         /// <param name="record">The <see cref="XRecord"/> object.</param>
         /// <param name="x">The X coordinate in container.</param>
         /// <param name="y">The Y coordinate in container.</param>
-        public void DropAsGroup(XRecord record, double x, double y)
+        public void OnDropRecordAsGroup(XRecord record, double x, double y)
         {
             var selected = _project.CurrentStyleLibrary.Selected;
             var style = _project.Options.CloneStyle ? selected.Clone() : selected;
@@ -2884,7 +2689,7 @@ namespace Core2D.Editor
         /// <param name="style">The <see cref="ShapeStyle"/> object.</param>
         /// <param name="x">The X coordinate in container.</param>
         /// <param name="y">The Y coordinate in container.</param>
-        public void Drop(ShapeStyle style, double x, double y)
+        public void OnDropStyle(ShapeStyle style, double x, double y)
         {
             try
             {
@@ -2915,7 +2720,7 @@ namespace Core2D.Editor
         /// <summary>
         /// Remove selected shapes.
         /// </summary>
-        public void DeleteSelected()
+        public void OnDeleteSelected()
         {
             if (_project?.CurrentContainer?.CurrentLayer == null || _renderers?[0]?.State == null)
                 return;
@@ -3418,7 +3223,7 @@ namespace Core2D.Editor
             return false;
         }
 
-        private XGroup GroupWithHistory(XLayer layer, ImmutableHashSet<BaseShape> shapes, string name)
+        private XGroup Group(XLayer layer, ImmutableHashSet<BaseShape> shapes, string name)
         {
             if (layer != null && shapes != null)
             {
@@ -3436,7 +3241,7 @@ namespace Core2D.Editor
             return null;
         }
 
-        private void UngroupWithHistory(XLayer layer, ImmutableHashSet<BaseShape> shapes)
+        private void Ungroup(XLayer layer, ImmutableHashSet<BaseShape> shapes)
         {
             if (layer != null && shapes != null)
             {
@@ -3451,7 +3256,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void UngroupWithHistory(XLayer layer, BaseShape shape)
+        private void Ungroup(XLayer layer, BaseShape shape)
         {
             if (layer != null && shape != null)
             {
@@ -3476,7 +3281,7 @@ namespace Core2D.Editor
             var layer = _project?.CurrentContainer?.CurrentLayer;
             if (layer != null)
             {
-                return GroupWithHistory(layer, shapes, name);
+                return Group(layer, shapes, name);
             }
 
             return null;
@@ -3494,13 +3299,13 @@ namespace Core2D.Editor
             {
                 if (shape != null && shape is XGroup)
                 {
-                    UngroupWithHistory(layer, shape);
+                    Ungroup(layer, shape);
                     return true;
                 }
 
                 if (shapes != null)
                 {
-                    UngroupWithHistory(layer, shapes);
+                    Ungroup(layer, shapes);
                     return true;
                 }
             }
@@ -3823,552 +3628,6 @@ namespace Core2D.Editor
             {
                 CurrentView = view;
             }
-        }
-
-        /// <summary>
-        /// Initialize non-platform specific editor commands.
-        /// </summary>
-        public void InitializeCommands()
-        {
-            Commands.NewCommand =
-                Command<object>.Create(
-                    (item) => OnNew(item),
-                    (item) => IsEditMode());
-
-            Commands.CloseCommand =
-                Command.Create(
-                    () => OnClose(),
-                    () => IsEditMode());
-
-            Commands.UndoCommand =
-                Command.Create(
-                    () => OnUndo(),
-                    () => IsEditMode() /* && CanUndo() */);
-
-            Commands.RedoCommand =
-                Command.Create(
-                    () => OnRedo(),
-                    () => IsEditMode() /* && CanRedo() */);
-
-            Commands.CutCommand =
-                Command<object>.Create(
-                    (item) => OnCut(item),
-                    (item) => IsEditMode() /* && CanCopy() */);
-
-            Commands.CopyCommand =
-                Command<object>.Create(
-                    (item) => OnCopy(item),
-                    (item) => IsEditMode() /* && CanCopy() */);
-
-            Commands.PasteCommand =
-                Command<object>.Create(
-                    (item) => OnPaste(item),
-                    (item) => IsEditMode() /* && CanPaste() */);
-
-            Commands.DeleteCommand =
-                Command<object>.Create(
-                    (item) => OnDelete(item),
-                    (item) => IsEditMode() /* && IsSelectionAvailable() */);
-
-            Commands.SelectAllCommand =
-                Command.Create(
-                    () => OnSelectAll(),
-                    () => IsEditMode());
-
-            Commands.DeselectAllCommand =
-                Command.Create(
-                    () => OnDeselectAll(),
-                    () => IsEditMode());
-
-            Commands.ClearAllCommand =
-                Command.Create(
-                    () => OnClearAll(),
-                    () => IsEditMode());
-
-            Commands.GroupCommand =
-                Command.Create(
-                    () => OnGroupSelected(),
-                    () => IsEditMode() /* && IsSelectionAvailable() */);
-
-            Commands.UngroupCommand =
-                Command.Create(
-                    () => OnUngroupSelected(),
-                    () => IsEditMode() /* && IsSelectionAvailable() */);
-
-            Commands.BringToFrontCommand =
-                Command.Create(
-                    () => OnBringToFrontSelected(),
-                    () => IsEditMode() /* && IsSelectionAvailable() */);
-
-            Commands.SendToBackCommand =
-                Command.Create(
-                    () => OnSendToBackSelected(),
-                    () => IsEditMode() /* && IsSelectionAvailable() */);
-
-            Commands.BringForwardCommand =
-                Command.Create(
-                    () => OnBringForwardSelected(),
-                    () => IsEditMode() /* && IsSelectionAvailable() */);
-
-            Commands.SendBackwardCommand =
-                Command.Create(
-                    () => OnSendBackwardSelected(),
-                    () => IsEditMode() /* && IsSelectionAvailable() */);
-
-            Commands.MoveUpCommand =
-                Command.Create(
-                    () => OnMoveUpSelected(),
-                    () => IsEditMode() /* && IsSelectionAvailable() */);
-
-            Commands.MoveDownCommand =
-                Command.Create(
-                    () => OnMoveDownSelected(),
-                    () => IsEditMode() /* && IsSelectionAvailable() */);
-
-            Commands.MoveLeftCommand =
-                Command.Create(
-                    () => OnMoveLeftSelected(),
-                    () => IsEditMode() /* && IsSelectionAvailable() */);
-
-            Commands.MoveRightCommand =
-                Command.Create(
-                    () => OnMoveRightSelected(),
-                    () => IsEditMode() /* && IsSelectionAvailable() */);
-
-            Commands.ToolNoneCommand =
-                Command.Create(
-                    () => OnToolNone(),
-                    () => IsEditMode());
-
-            Commands.ToolSelectionCommand =
-                Command.Create(
-                    () => OnToolSelection(),
-                    () => IsEditMode());
-
-            Commands.ToolPointCommand =
-                Command.Create(
-                    () => OnToolPoint(),
-                    () => IsEditMode());
-
-            Commands.ToolLineCommand =
-                Command.Create(
-                    () => OnToolLine(),
-                    () => IsEditMode());
-
-            Commands.ToolArcCommand =
-                Command.Create(
-                    () => OnToolArc(),
-                    () => IsEditMode());
-
-            Commands.ToolCubicBezierCommand =
-                Command.Create(
-                    () => OnToolCubicBezier(),
-                    () => IsEditMode());
-
-            Commands.ToolQuadraticBezierCommand =
-                Command.Create(
-                    () => OnToolQuadraticBezier(),
-                    () => IsEditMode());
-
-            Commands.ToolPathCommand =
-                Command.Create(
-                    () => OnToolPath(),
-                    () => IsEditMode());
-
-            Commands.ToolRectangleCommand =
-                Command.Create(
-                    () => OnToolRectangle(),
-                    () => IsEditMode());
-
-            Commands.ToolEllipseCommand =
-                Command.Create(
-                    () => OnToolEllipse(),
-                    () => IsEditMode());
-
-            Commands.ToolTextCommand =
-                Command.Create(
-                    () => OnToolText(),
-                    () => IsEditMode());
-
-            Commands.ToolImageCommand =
-                Command.Create(
-                    () => OnToolImage(),
-                    () => IsEditMode());
-
-            Commands.ToolMoveCommand =
-                Command.Create(
-                    () => OnToolMove(),
-                    () => IsEditMode());
-
-            Commands.DefaultIsStrokedCommand =
-                Command.Create(
-                    () => OnToggleDefaultIsStroked(),
-                    () => IsEditMode());
-
-            Commands.DefaultIsFilledCommand =
-                Command.Create(
-                    () => OnToggleDefaultIsFilled(),
-                    () => IsEditMode());
-
-            Commands.DefaultIsClosedCommand =
-                Command.Create(
-                    () => OnToggleDefaultIsClosed(),
-                    () => IsEditMode());
-
-            Commands.DefaultIsSmoothJoinCommand =
-                Command.Create(
-                    () => OnToggleDefaultIsSmoothJoin(),
-                    () => IsEditMode());
-
-            Commands.SnapToGridCommand =
-                Command.Create(
-                    () => OnToggleSnapToGrid(),
-                    () => IsEditMode());
-
-            Commands.TryToConnectCommand =
-                Command.Create(
-                    () => OnToggleTryToConnect(),
-                    () => IsEditMode());
-
-            Commands.CloneStyleCommand =
-                Command.Create(
-                    () => OnToggleCloneStyle(),
-                    () => IsEditMode());
-
-            Commands.AddDatabaseCommand =
-                Command.Create(
-                    () =>
-                    {
-                        var db = XDatabase.Create(Constants.DefaultDatabaseName);
-                        Project.AddDatabase(db);
-                        Project.SetCurrentDatabase(db);
-                    },
-                    () => IsEditMode());
-
-            Commands.RemoveDatabaseCommand =
-                Command<XDatabase>.Create(
-                    (db) =>
-                    {
-                        Project.RemoveDatabase(db);
-                        Project.SetCurrentDatabase(Project.Databases.FirstOrDefault());
-                    },
-                    (db) => IsEditMode());
-
-            Commands.AddColumnCommand =
-                Command<XDatabase>.Create(
-                    (db) => Project.AddColumn(db, XColumn.Create(db, Constants.DefaulColumnName)),
-                    (db) => IsEditMode());
-
-            Commands.RemoveColumnCommand =
-                Command<XColumn>.Create(
-                    (column) => Project.RemoveColumn(column),
-                    (column) => IsEditMode());
-
-            Commands.AddRecordCommand =
-                Command<XDatabase>.Create(
-                    (db) => Project.AddRecord(db, XRecord.Create(db, Constants.DefaulValue)),
-                    (db) => IsEditMode());
-
-            Commands.RemoveRecordCommand =
-                Command<XRecord>.Create(
-                    (record) => Project.RemoveRecord(record),
-                    (record) => IsEditMode());
-
-            Commands.ResetRecordCommand =
-                Command<XContext>.Create(
-                    (data) => Project.ResetRecord(data),
-                    (data) => IsEditMode());
-
-            Commands.ApplyRecordCommand =
-                Command<XRecord>.Create(
-                    (record) => OnApplyRecord(record),
-                    (record) => IsEditMode());
-
-            Commands.AddPropertyCommand =
-                Command<XContext>.Create(
-                    (data) => Project.AddProperty(data, XProperty.Create(data, Constants.DefaulPropertyName, Constants.DefaulValue)),
-                    (data) => IsEditMode());
-
-            Commands.RemovePropertyCommand =
-                Command<XProperty>.Create(
-                    (property) => Project.RemoveProperty(property),
-                    (property) => IsEditMode());
-
-            Commands.AddGroupLibraryCommand =
-                Command.Create(
-                    () =>
-                    {
-                        var gl = XLibrary<XGroup>.Create(Constants.DefaulGroupLibraryName);
-                        Project.AddGroupLibrary(gl);
-                        Project.SetCurrentGroupLibrary(gl);
-                    },
-                    () => IsEditMode());
-
-            Commands.RemoveGroupLibraryCommand =
-                Command<XLibrary<XGroup>>.Create(
-                    (library) =>
-                    {
-                        Project.RemoveGroupLibrary(library);
-                        Project.SetCurrentGroupLibrary(_project?.GroupLibraries.FirstOrDefault());
-                    },
-                    (library) => IsEditMode());
-
-            Commands.AddGroupCommand =
-                Command<XLibrary<XGroup>>.Create(
-                    (library) => OnAddGroup(library),
-                    (library) => IsEditMode());
-
-            Commands.RemoveGroupCommand =
-                Command<XGroup>.Create(
-                    (group) => OnRemoveGroup(group),
-                    (group) => IsEditMode());
-
-            Commands.InsertGroupCommand =
-                Command<XGroup>.Create(
-                    (group) => OnInsertGroup(group),
-                    (group) => IsEditMode());
-
-            Commands.AddLayerCommand =
-                Command<XContainer>.Create(
-                    (container) => Project.AddLayer(container, XLayer.Create(Constants.DefaultLayerName, container)),
-                    (container) => IsEditMode());
-
-            Commands.RemoveLayerCommand =
-                Command<XLayer>.Create(
-                    (layer) =>
-                    {
-                        Project.RemoveLayer(layer);
-                        layer.Owner.SetCurrentLayer(layer.Owner.Layers.FirstOrDefault());
-                    },
-                    (layer) => IsEditMode());
-
-            Commands.AddStyleLibraryCommand =
-                Command.Create(
-                    () =>
-                    {
-                        var sl = XLibrary<ShapeStyle>.Create(Constants.DefaulStyleLibraryName);
-                        Project.AddStyleLibrary(sl);
-                        Project.SetCurrentStyleLibrary(sl);
-                    },
-                    () => IsEditMode());
-
-            Commands.RemoveStyleLibraryCommand =
-                Command<XLibrary<ShapeStyle>>.Create(
-                    (library) =>
-                    {
-                        Project.RemoveStyleLibrary(library);
-                        Project.SetCurrentStyleLibrary(_project?.StyleLibraries.FirstOrDefault());
-                    },
-                    (library) => IsEditMode());
-
-            Commands.AddStyleCommand =
-                Command<XLibrary<ShapeStyle>>.Create(
-                    (library) => Project.AddStyle(library, ShapeStyle.Create(Constants.DefaulStyleName)),
-                    (library) => IsEditMode());
-
-            Commands.RemoveStyleCommand =
-                Command<ShapeStyle>.Create(
-                    (style) =>
-                    {
-                        var library = Project.RemoveStyle(style);
-                        library?.SetSelected(library?.Items.FirstOrDefault());
-                    },
-                    (style) => IsEditMode());
-
-            Commands.ApplyStyleCommand =
-                Command<ShapeStyle>.Create(
-                    (style) => OnApplyStyle(style),
-                    (style) => IsEditMode());
-
-            Commands.AddShapeCommand =
-                Command<BaseShape>.Create(
-                    (shape) => OnAddShape(shape),
-                    (shape) => IsEditMode());
-
-            Commands.RemoveShapeCommand =
-                Command<BaseShape>.Create(
-                    (shape) => OnRemoveShape(shape),
-                    (shape) => IsEditMode());
-
-            Commands.AddTemplateCommand =
-                Command.Create(
-                    () => OnAddTemplate(),
-                    () => IsEditMode());
-
-            Commands.RemoveTemplateCommand =
-                Command<XContainer>.Create(
-                    (template) => OnRemoveTemplate(template),
-                    (template) => IsEditMode());
-
-            Commands.EditTemplateCommand =
-                Command<XContainer>.Create(
-                    (template) => OnEditTemplate(template),
-                    (template) => IsEditMode());
-
-            Commands.ApplyTemplateCommand =
-                Command<XContainer>.Create(
-                    (template) => OnApplyTemplate(template),
-                    (template) => true);
-
-            Commands.AddImageKeyCommand =
-                Command.Create(
-                    async () => await (OnAddImageKey(null) ?? Task.FromResult(string.Empty)),
-                    () => IsEditMode());
-
-            Commands.RemoveImageKeyCommand =
-                Command<string>.Create(
-                    (key) => OnRemoveImageKey(key),
-                    (key) => IsEditMode());
-
-            Commands.SelectedItemChangedCommand =
-                Command<XSelectable>.Create(
-                    (item) => OnSelectedItemChanged(item),
-                    (item) => IsEditMode());
-
-            Commands.AddPageCommand =
-                Command<object>.Create(
-                    (item) => OnAddPage(item),
-                    (item) => IsEditMode());
-
-            Commands.InsertPageBeforeCommand =
-                Command<object>.Create(
-                    (item) => OnInsertPageBefore(item),
-                    (item) => IsEditMode());
-
-            Commands.InsertPageAfterCommand =
-                Command<object>.Create(
-                    (item) => OnInsertPageAfter(item),
-                    (item) => IsEditMode());
-
-            Commands.AddDocumentCommand =
-                Command<object>.Create(
-                    (item) => OnAddDocument(item),
-                    (item) => IsEditMode());
-
-            Commands.InsertDocumentBeforeCommand =
-                Command<object>.Create(
-                    (item) => OnInsertDocumentBefore(item),
-                    (item) => IsEditMode());
-
-            Commands.InsertDocumentAfterCommand =
-                Command<object>.Create(
-                    (item) => OnInsertDocumentAfter(item),
-                    (item) => IsEditMode());
-
-            Commands.OpenCommand =
-                 Command<string>.Create(
-                     async (path) => await (Application?.OnOpenAsync(path) ?? Task.FromResult<object>(null)),
-                     (path) => IsEditMode());
-
-            Commands.SaveCommand =
-                Command.Create(
-                    async () => await (Application?.OnSaveAsync() ?? Task.FromResult<object>(null)),
-                    () => IsEditMode());
-
-            Commands.SaveAsCommand =
-                Command.Create(
-                    async () => await (Application?.OnSaveAsAsync() ?? Task.FromResult<object>(null)),
-                    () => IsEditMode());
-
-            Commands.ImportObjectCommand =
-                Command<string>.Create(
-                    async (path) => await (Application?.OnImportObjectAsync(path) ?? Task.FromResult<object>(null)),
-                    (path) => IsEditMode());
-
-            Commands.ExportObjectCommand =
-                Command<object>.Create(
-                    async (item) => await (Application?.OnExportObjectAsync(item) ?? Task.FromResult<object>(null)),
-                    (path) => IsEditMode());
-
-            Commands.ImportXamlCommand =
-                Command<string>.Create(
-                    async (path) => await (Application?.OnImportXamlAsync(path) ?? Task.FromResult<object>(null)),
-                    (path) => IsEditMode());
-
-            Commands.ExportXamlCommand =
-                Command<object>.Create(
-                    async (item) => await (Application?.OnExportXamlAsync(item) ?? Task.FromResult<object>(null)),
-                    (path) => IsEditMode());
-
-            Commands.ImportJsonCommand =
-                Command<string>.Create(
-                    async (path) => await (Application?.OnImportJsonAsync(path) ?? Task.FromResult<object>(null)),
-                    (path) => IsEditMode());
-
-            Commands.ExportJsonCommand =
-                Command<object>.Create(
-                    async (item) => await (Application?.OnExportJsonAsync(item) ?? Task.FromResult<object>(null)),
-                    (path) => IsEditMode());
-
-            Commands.ExportCommand =
-                Command<object>.Create(
-                    async (item) => await (Application?.OnExportAsync(item) ?? Task.FromResult<object>(null)),
-                    (item) => IsEditMode());
-
-            Commands.ExitCommand =
-                Command.Create(
-                    () => Application?.OnCloseView(),
-                    () => true);
-
-            Commands.ImportDataCommand =
-                Command<XProject>.Create(
-                    async (project) => await (Application?.OnImportDataAsync() ?? Task.FromResult<object>(null)),
-                    (project) => IsEditMode());
-
-            Commands.ExportDataCommand =
-                Command<XDatabase>.Create(
-                    async (db) => await (Application?.OnExportDataAsync() ?? Task.FromResult<object>(null)),
-                    (db) => IsEditMode());
-
-            Commands.UpdateDataCommand =
-                Command<XDatabase>.Create(
-                    async (db) => await (Application?.OnUpdateDataAsync() ?? Task.FromResult<object>(null)),
-                    (db) => IsEditMode());
-
-            Commands.CopyAsEmfCommand =
-                Command.Create(
-                    async () => await (Application?.OnCopyAsEmfAsync() ?? Task.FromResult<object>(null)),
-                    () => IsEditMode());
-
-            Commands.ZoomResetCommand =
-                Command.Create(
-                    async () => await (Application?.OnZoomResetAsync() ?? Task.FromResult<object>(null)),
-                    () => true);
-
-            Commands.ZoomAutoFitCommand =
-                Command.Create(
-                    async () => await (Application?.OnZoomAutoFitAsync() ?? Task.FromResult<object>(null)),
-                    () => true);
-
-            Commands.LoadWindowLayoutCommand =
-                Command.Create(
-                    async () => await (Application?.OnLoadWindowLayout() ?? Task.FromResult<object>(null)),
-                    () => true);
-
-            Commands.SaveWindowLayoutCommand =
-                Command.Create(
-                    async () => await (Application?.OnSaveWindowLayoutAsync() ?? Task.FromResult<object>(null)),
-                    () => true);
-
-            Commands.ResetWindowLayoutCommand =
-                Command.Create(
-                    async () => await (Application?.OnResetWindowLayoutAsync() ?? Task.FromResult<object>(null)),
-                    () => true);
-
-            Commands.ObjectBrowserCommand =
-                Command.Create(
-                    async () => await (Application?.OnShowObjectBrowserAsync() ?? Task.FromResult<object>(null)),
-                    () => IsEditMode());
-
-            Commands.DocumentViewerCommand =
-                Command.Create(
-                    async () => await (Application?.OnShowDocumentViewerAsync() ?? Task.FromResult<object>(null)),
-                    () => IsEditMode());
-
-            Commands.ChangeCurrentViewCommand =
-                Command<ViewBase>.Create(
-                    (view) => OnChangeCurrentView(view),
-                    (view) => true);
         }
     }
 }

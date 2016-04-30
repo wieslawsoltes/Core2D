@@ -203,7 +203,7 @@ namespace Core2D.Perspex
                 var path = System.IO.Path.Combine(_fileIO.AssemblyPath, _recentFileName);
                 if (_fileIO.Exists(path))
                 {
-                    _editor.LoadRecent(path);
+                    _editor.OnLoadRecent(path);
                 }
             }
             catch (Exception ex)
@@ -220,7 +220,7 @@ namespace Core2D.Perspex
             try
             {
                 var path = System.IO.Path.Combine(_fileIO.AssemblyPath, _recentFileName);
-                _editor.SaveRecent(path);
+                _editor.OnSaveRecent(path);
             }
             catch (Exception ex)
             {
@@ -253,7 +253,7 @@ namespace Core2D.Perspex
                 CsvReader = new CsvHelperReader(),
                 CsvWriter = new CsvHelperWriter(),
                 GetImageKey = async () => await (this as IEditorApplication).OnGetImageKeyAsync()
-            };
+            }.Defaults();
 
             _editor.InitializeCommands();
             _editor.CommandManager.RegisterCommands();
@@ -299,7 +299,7 @@ namespace Core2D.Perspex
                     var result = await dlg.ShowAsync(_mainWindow);
                     if (result != null)
                     {
-                        _editor?.Open(result.FirstOrDefault());
+                        _editor?.OnOpen(result.FirstOrDefault());
                         _editor?.Invalidate?.Invoke();
                     }
                 }
@@ -307,7 +307,7 @@ namespace Core2D.Perspex
                 {
                     if (_fileIO.Exists(path))
                     {
-                        _editor.Open(path);
+                        _editor.OnOpen(path);
                     }
                 }
             }
@@ -324,7 +324,7 @@ namespace Core2D.Perspex
             {
                 if (!string.IsNullOrEmpty(_editor?.ProjectPath))
                 {
-                    _editor?.Save(_editor?.ProjectPath);
+                    _editor?.OnSave(_editor?.ProjectPath);
                 }
                 else
                 {
@@ -352,7 +352,7 @@ namespace Core2D.Perspex
                     var result = await dlg.ShowAsync(_mainWindow);
                     if (result != null)
                     {
-                        _editor?.Save(result);
+                        _editor?.OnSave(result);
                     }
                 }
             }
@@ -528,7 +528,7 @@ namespace Core2D.Perspex
                     IFileWriter writer = _editor?.FileWriters.Where(w => string.Compare(w.Extension, ext, StringComparison.OrdinalIgnoreCase) == 0).FirstOrDefault();
                     if (writer != null)
                     {
-                        _editor?.Export(result, item, writer);
+                        _editor?.OnExport(result, item, writer);
                     }
                 }
             }

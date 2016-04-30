@@ -347,7 +347,7 @@ namespace Core2D.Editor.Designer
                 TextClipboard = clipboard,
                 JsonSerializer = jsonSerializer,
                 XamlSerializer = xamlSerializer
-            };
+            }.Defaults();
 
             // Recent Projects
             Editor.RecentProjects = Editor.RecentProjects.Add(RecentFile.Create("Test1", "Test1.project"));

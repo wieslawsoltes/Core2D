@@ -83,6 +83,7 @@
     <Compile Include="Editor\Bounds\RectangleBounds.cs" />
     <Compile Include="Editor\Bounds\ShapeHitTestPoint.cs" />
     <Compile Include="Editor\Designer\DesignerCommandManager.cs" />
+    <Compile Include="Editor\ProjectEditor.Model.cs" />
     <Compile Include="Editor\ViewBase.cs" />
     <Compile Include="Editor\Views\BrowserView.cs" />
     <Compile Include="Editor\Views\DashboardView.cs" />
@@ -101,7 +102,7 @@
     <Compile Include="Editor\Commands.cs" />
     <Compile Include="Editor\Constants.cs" />
     <Compile Include="Editor\Designer\DesignerContext.cs" />
-    <Compile Include="Editor\ProjectEditor.cs" />
+    <Compile Include="Editor\ProjectEditor.Impl.cs" />
     <Compile Include="Editor\Enums.cs" />
     <Compile Include="Editor\Factories\IProjectFactory.cs" />
     <Compile Include="Editor\Factories\IShapeFactory.cs" />
@@ -235,6 +236,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Editor\ProjectEditor.Commands.cs" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
