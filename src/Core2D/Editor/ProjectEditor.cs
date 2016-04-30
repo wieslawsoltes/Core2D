@@ -1824,6 +1824,7 @@ namespace Core2D.Editor
         {
             if (_project != null && template != null)
             {
+                _project.SetCurrentDocument(null);
                 _project.SetCurrentContainer(template);
                 _project.CurrentContainer?.Invalidate();
             }
