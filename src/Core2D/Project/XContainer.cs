@@ -84,10 +84,23 @@ namespace Core2D.Project
         /// <summary>
         /// Gets or sets container background color.
         /// </summary>
+        /// <remarks>
+        /// If template is not null Template.Background property is used.
+        /// </remarks>
         public ArgbColor Background
         {
             get { return _template != null ? _template.Background : _background; }
-            set { Update(ref _background, value); }
+            set
+            {
+                if (_template != null)
+                {
+                    _template.Background = value;
+                }
+                else
+                {
+                    Update(ref _background, value);
+                }
+            }
         }
 
         /// <summary>
