@@ -105,7 +105,7 @@
                     <ad:LayoutDocumentPaneGroup Orientation="Horizontal">
                         <ad:LayoutDocumentPane>
                             <ad:LayoutDocument x:Name="canvasWindow" CanClose="False" ContentId="canvas" Title="{x:Static p:Resources.WindowTitleCanvas}">
-                                <zoom:PanAndZoom x:Name="panAndZoom" Width="10000" Height="10000" AutoFitMode="Extent" ZoomSpeed="1.2" Background="Transparent" ClipToBounds="False" BorderBrush="{x:Null}" BorderThickness="0" FocusVisualStyle="{x:Null}" Focusable="True" VerticalAlignment="Center" HorizontalAlignment="Center" Tag="{Binding CancelAvailable}">
+                                <zoom:PanAndZoom x:Name="panAndZoom" Width="10000" Height="10000" AutoFitMode="Extent" ZoomSpeed="1.2" Background="{StaticResource TemplateCheckerBoard}" ClipToBounds="False" BorderBrush="{x:Null}" BorderThickness="0" FocusVisualStyle="{x:Null}" Focusable="True" VerticalAlignment="Center" HorizontalAlignment="Center" Tag="{Binding CancelAvailable}">
                                     <zoom:PanAndZoom.InputBindings>
                                         <KeyBinding Command="{x:Static Editor:Commands.DeleteCommand}" CommandParameter="{Binding}" Key="Delete" Modifiers=""/>
                                         <KeyBinding Command="{x:Static Editor:Commands.DeselectAllCommand}" Key="Esc" Modifiers=""/>
