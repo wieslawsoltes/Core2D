@@ -1474,6 +1474,15 @@ namespace Core2D.Wpf.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Images.
+        /// </summary>
+        public static string WindowTitleImages {
+            get {
+                return ResourceManager.GetString("WindowTitleImages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Layers.
         /// </summary>
         public static string WindowTitleLayers {

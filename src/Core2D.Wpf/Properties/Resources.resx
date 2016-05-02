@@ -621,4 +621,7 @@
   <data name="MenuViewViews" xml:space="preserve">
     <value>_Views</value>
   </data>
+  <data name="WindowTitleImages" xml:space="preserve">
+    <value>Images</value>
+  </data>
 </root>
