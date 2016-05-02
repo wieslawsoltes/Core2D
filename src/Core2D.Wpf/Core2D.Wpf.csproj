@@ -183,8 +183,8 @@
     <Compile Include="Views\EditorMenuControl.xaml.cs">
       <DependentUpon>EditorMenuControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\PageControl.xaml.cs">
-      <DependentUpon>PageControl.xaml</DependentUpon>
+    <Compile Include="Views\ContainerControl.xaml.cs">
+      <DependentUpon>ContainerControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Zoom\AutoFitMode.cs" />
     <Compile Include="Controls\Zoom\PanAndZoom.cs" />
@@ -374,7 +374,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\PageControl.xaml">
+    <Page Include="Views\ContainerControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
