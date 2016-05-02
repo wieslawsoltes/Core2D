@@ -186,9 +186,6 @@
     <Compile Include="Views\PageControl.xaml.cs">
       <DependentUpon>PageControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\TemplateControl.xaml.cs">
-      <DependentUpon>TemplateControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\Zoom\AutoFitMode.cs" />
     <Compile Include="Controls\Zoom\PanAndZoom.cs" />
     <Compile Include="Controls\Path\ArcSegmentControl.xaml.cs">
@@ -378,10 +375,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\PageControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\TemplateControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
