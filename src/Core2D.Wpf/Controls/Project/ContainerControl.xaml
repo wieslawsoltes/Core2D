@@ -53,11 +53,6 @@
             <TabItem Header="{x:Static p:Resources.ContainerBackground}">
                 <ContentControl Content="{Binding Background}"/>
             </TabItem>
-            <!--
-            <TabItem Header="{x:Static p:Resources.WindowTitleTemplate}">
-                <project:ContainerControl DataContext="{Binding Template}"/>
-            </TabItem>
-            -->
             <TabItem Header="{x:Static p:Resources.ContainerData}">
                 <ContentControl Content="{Binding Data}"/>
             </TabItem>
