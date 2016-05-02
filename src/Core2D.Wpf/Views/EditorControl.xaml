@@ -191,6 +191,11 @@
                                     <project:TemplatesControl DataContext="{Binding Project}"/>
                                 </Border>
                             </ad:LayoutAnchorable>
+                            <ad:LayoutAnchorable x:Name="containerWindow" CanClose="False" ContentId="container" Title="{x:Static p:Resources.WindowTitleContainer}" AutoHideWidth="210">
+                                <ScrollViewer x:Name="containerScrollViewer" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Focusable="True">
+                                    <ContentControl Content="{Binding Project.CurrentContainer, FallbackValue={x:Null}}"/>
+                                </ScrollViewer>
+                            </ad:LayoutAnchorable>
                         </ad:LayoutAnchorablePane>
                         <ad:LayoutAnchorablePane>
                             <ad:LayoutAnchorable x:Name="shapeWindow" CanClose="False" ContentId="shape" Title="{x:Static p:Resources.WindowTitleShape}" AutoHideWidth="210">
@@ -219,9 +224,9 @@
                                     <style:ShapeStyleControl DataContext="{Binding Project.CurrentStyleLibrary.Selected}"/>
                                 </ScrollViewer>
                             </ad:LayoutAnchorable>
-                            <ad:LayoutAnchorable x:Name="containerWindow" CanClose="False" ContentId="container" Title="{x:Static p:Resources.WindowTitleContainer}" AutoHideWidth="210">
-                                <ScrollViewer x:Name="containerScrollViewer" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Focusable="True">
-                                    <ContentControl Content="{Binding Project.CurrentContainer, FallbackValue={x:Null}}"/>
+                            <ad:LayoutAnchorable x:Name="templateWindow" CanClose="False" ContentId="template" Title="{x:Static p:Resources.WindowTitleTemplate}" AutoHideWidth="210">
+                                <ScrollViewer x:Name="templateScrollViewer" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Focusable="True">
+                                    <ContentControl Content="{Binding Project.CurrentTemplate, FallbackValue={x:Null}}"/>
                                 </ScrollViewer>
                             </ad:LayoutAnchorable>
                         </ad:LayoutAnchorablePane>
