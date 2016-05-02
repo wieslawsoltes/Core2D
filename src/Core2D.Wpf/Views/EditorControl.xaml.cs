@@ -66,12 +66,12 @@ namespace Core2D.Wpf.Views
             else
                 _isLoaded = false;
 
-            DetachEditor();
-
             if (_restoreLayout)
             {
                 this.AutoSaveLayout();
             }
+
+            DetachEditor();
         }
 
         private void InvalidateChild(double zoomX, double zoomY, double offsetX, double offsetY)
