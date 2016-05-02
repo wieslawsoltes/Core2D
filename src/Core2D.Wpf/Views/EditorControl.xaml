@@ -86,6 +86,16 @@
                                     <project:ProjectControl DataContext="{Binding Project}"/>
                                 </Border>
                             </ad:LayoutAnchorable>
+                            <ad:LayoutAnchorable x:Name="optionsWindow" CanClose="False" ContentId="options" Title="{x:Static p:Resources.WindowTitleOptions}" AutoHideWidth="210">
+                                <Border x:Name="optionsControl" BorderBrush="{x:Null}" BorderThickness="0">
+                                    <ContentControl Content="{Binding Project.Options}"/>
+                                </Border>
+                            </ad:LayoutAnchorable>
+                            <ad:LayoutAnchorable x:Name="imagesWindow" CanClose="False" ContentId="images" Title="{x:Static p:Resources.WindowTitleImages}" AutoHideWidth="210">
+                                <Border x:Name="imagesControl" BorderBrush="{x:Null}" BorderThickness="0">
+                                    <project:ImagesControl DataContext="{Binding Project}"/>
+                                </Border>
+                            </ad:LayoutAnchorable>
                         </ad:LayoutAnchorablePane>
                         <ad:LayoutAnchorablePaneGroup Orientation="Horizontal" DockWidth="210">
                             <ad:LayoutAnchorablePane>
