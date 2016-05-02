@@ -16,16 +16,16 @@
              custom:LayerElement.Data="{Binding Data}">
     <UserControl.Style>
         <Style TargetType="UserControl">
-            <Setter Property="Width" Value="{Binding Template.Width}"/>
-            <Setter Property="Height" Value="{Binding Template.Height}"/>
+            <Setter Property="Width" Value="{Binding Width}"/>
+            <Setter Property="Height" Value="{Binding Height}"/>
         </Style>
     </UserControl.Style>
     <Border>
         <Border.Style>
             <Style TargetType="Border">
-                <Setter Property="Background" Value="{Binding Template.Background, Converter={StaticResource ArgbColorToBrushConverter}}"/>
-                <Setter Property="Width" Value="{Binding Template.Width}"/>
-                <Setter Property="Height" Value="{Binding Template.Height}"/>
+                <Setter Property="Background" Value="{Binding Background, Converter={StaticResource ArgbColorToBrushConverter}}"/>
+                <Setter Property="Width" Value="{Binding Width}"/>
+                <Setter Property="Height" Value="{Binding Height}"/>
                 <Setter Property="BorderBrush" Value="Transparent"/>
                 <Setter Property="BorderThickness" Value="0"/>
             </Style>
@@ -33,8 +33,8 @@
         <Grid Background="Transparent">
             <Grid.Style>
                 <Style TargetType="Grid">
-                    <Setter Property="Width" Value="{Binding Template.Width}"/>
-                    <Setter Property="Height" Value="{Binding Template.Height}"/>
+                    <Setter Property="Width" Value="{Binding Width}"/>
+                    <Setter Property="Height" Value="{Binding Height}"/>
                 </Style>
             </Grid.Style>
             <ItemsControl ItemsSource="{Binding Template.Layers}">
@@ -76,8 +76,8 @@
             <Canvas Background="Transparent" Focusable="False" FocusVisualStyle="{x:Null}">
                 <Canvas.Style>
                     <Style TargetType="{x:Type Canvas}">
-                        <Setter Property="Width" Value="{Binding Template.Width}"/>
-                        <Setter Property="Height" Value="{Binding Template.Height}"/>
+                        <Setter Property="Width" Value="{Binding Width}"/>
+                        <Setter Property="Height" Value="{Binding Height}"/>
                     </Style>
                 </Canvas.Style>
                 <custom:LayerElement DataContext="{Binding WorkingLayer}"/>
