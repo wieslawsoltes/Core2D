@@ -138,14 +138,7 @@ namespace Core2D.Wpf.Controls.Custom
                 BitmapScalingMode.HighQuality);
         }
 
-        private void Invalidate(object sender, InvalidateLayerEventArgs e)
-        {
-            Dispatcher.Invoke(
-                () =>
-                {
-                    this.InvalidateVisual();
-                });
-        }
+        private void Invalidate(object sender, InvalidateLayerEventArgs e) => Dispatcher.Invoke(() => InvalidateVisual());
 
         private void Initialize()
         {
@@ -175,7 +168,6 @@ namespace Core2D.Wpf.Controls.Custom
         protected override void OnRender(DrawingContext drawingContext)
         {
             base.OnRender(drawingContext);
-
             Render(drawingContext);
         }
 
@@ -190,12 +182,7 @@ namespace Core2D.Wpf.Controls.Custom
                     var data = LayerElement.GetData(this);
                     var properties = data != null ? data.Properties : default(ImmutableArray<XProperty>);
                     var record = data != null ? data.Record : default(XRecord);
-
-                    renderer.Draw(
-                        drawingContext,
-                        layer,
-                        properties,
-                        record);
+                    renderer.Draw(drawingContext, layer, properties, record);
                 }
             }
         }
