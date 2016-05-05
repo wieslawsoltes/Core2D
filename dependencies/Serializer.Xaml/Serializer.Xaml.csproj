@@ -70,9 +70,6 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\..\src\Core2D\Properties\SharedAssemblyInfo.cs">
-      <Link>Properties\SharedAssemblyInfo.cs</Link>
-    </Compile>
     <Compile Include="Converters\ArgbColorTypeConverter.cs" />
     <Compile Include="Converters\FontStyleTypeConverter.cs" />
     <Compile Include="Converters\ShapeStateTypeConverter.cs" />
@@ -102,6 +99,7 @@
       <Name>Core2D</Name>
     </ProjectReference>
   </ItemGroup>
+  <Import Project="..\..\src\Core2D.Shared\Core2D.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
