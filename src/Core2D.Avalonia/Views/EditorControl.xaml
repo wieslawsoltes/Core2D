@@ -1,0 +1,329 @@
+﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
+<!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
+<UserControl x:Class="Core2D.Avalonia.Views.EditorControl"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+             xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+             xmlns:local="clr-namespace:Core2D.Avalonia;assembly=Core2D.Avalonia"
+             xmlns:presenters="clr-namespace:Core2D.Avalonia.Presenters;assembly=Core2D.Avalonia"
+             xmlns:actions="clr-namespace:Core2D.Avalonia.Interactions.Actions;assembly=Core2D.Avalonia"
+             xmlns:behaviors="clr-namespace:Core2D.Avalonia.Interactions.Behaviors;assembly=Core2D.Avalonia"
+             xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"
+             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
+             xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D"
+             xmlns:zoom="clr-namespace:Core2D.Avalonia.Controls.Zoom;assembly=Core2D.Avalonia"
+             xmlns:data="clr-namespace:Core2D.Avalonia.Controls.Data;assembly=Core2D.Avalonia"
+             xmlns:path="clr-namespace:Core2D.Avalonia.Controls.Path;assembly=Core2D.Avalonia"
+             xmlns:project="clr-namespace:Core2D.Avalonia.Controls.Project;assembly=Core2D.Avalonia"
+             xmlns:shapes="clr-namespace:Core2D.Avalonia.Controls.Shapes;assembly=Core2D.Avalonia"
+             xmlns:state="clr-namespace:Core2D.Avalonia.Controls.State;assembly=Core2D.Avalonia"
+             xmlns:style="clr-namespace:Core2D.Avalonia.Controls.Style;assembly=Core2D.Avalonia"
+             xmlns:editor="clr-namespace:Core2D.Avalonia.Controls.Editor;assembly=Core2D.Avalonia"
+             xmlns:views="clr-namespace:Core2D.Avalonia.Views;assembly=Core2D.Avalonia"
+             Design.DataContext="{Static Designer:DesignerContext.Editor}"
+             Design.Width="1200" Design.Height="540">
+    <Grid Name="rootPanel" ColumnDefinitions="180,Auto,*,Auto,240" RowDefinitions="*,Auto" Margin="6,6,6,2">
+        <Grid.Styles>
+            <Style>
+                <Style.Resources>
+                    <!-- Height -->
+                    <sys:Double x:Key="HeightLimit1">420</sys:Double>
+                    <!-- Width -->
+                    <sys:Double x:Key="WidthLimit1">240</sys:Double>
+                    <sys:Double x:Key="WidthLimit2">420</sys:Double>
+                    <sys:Double x:Key="WidthLimit3">480</sys:Double>
+                    <sys:Double x:Key="WidthLimit4">720</sys:Double>
+                    <sys:Double x:Key="WidthLimit5">800</sys:Double>
+                    <sys:Double x:Key="WidthLimit6">1100</sys:Double>
+                </Style.Resources>
+            </Style>
+        </Grid.Styles>
+        <i:Interaction.Behaviors>
+            <!-- Height -->
+            <ia:DataTriggerBehavior Binding="{Binding #rootPanel.Bounds.Height}" ComparisonCondition="GreaterThan" Value="{StyleResource HeightLimit1}">
+                <ia:ChangePropertyAction TargetObject="{Binding #leftPanelBottom}" PropertyName="IsVisible" Value="True"/>
+                <ia:ChangePropertyAction TargetObject="{Binding #rightPanelBottom}" PropertyName="IsVisible" Value="True"/>
+                <ia:ChangePropertyAction TargetObject="{Binding #leftPanelTop}" PropertyName="Grid.RowSpan" Value="1"/>
+                <ia:ChangePropertyAction TargetObject="{Binding #rightPanelTop}" PropertyName="Grid.RowSpan" Value="1"/>
+            </ia:DataTriggerBehavior>
+            <ia:DataTriggerBehavior Binding="{Binding #rootPanel.Bounds.Height}" ComparisonCondition="LessThanOrEqual" Value="{StyleResource HeightLimit1}">
+                <ia:ChangePropertyAction TargetObject="{Binding #leftPanelBottom}" PropertyName="IsVisible" Value="False"/>
+                <ia:ChangePropertyAction TargetObject="{Binding #rightPanelBottom}" PropertyName="IsVisible" Value="False"/>
+                <ia:ChangePropertyAction TargetObject="{Binding #leftPanelTop}" PropertyName="Grid.RowSpan" Value="3"/>
+                <ia:ChangePropertyAction TargetObject="{Binding #rightPanelTop}" PropertyName="Grid.RowSpan" Value="3"/>
+            </ia:DataTriggerBehavior>
+            <!-- Width -->
+            <ia:DataTriggerBehavior Binding="{Binding #rootPanel.Bounds.Width}" ComparisonCondition="GreaterThan" Value="{StyleResource WidthLimit1}">
+                <ia:ChangePropertyAction TargetObject="{Binding #zoomPanel}" PropertyName="IsVisible" Value="True"/>
+            </ia:DataTriggerBehavior>
+            <ia:DataTriggerBehavior Binding="{Binding #rootPanel.Bounds.Width}" ComparisonCondition="LessThanOrEqual" Value="{StyleResource WidthLimit1}">
+                <ia:ChangePropertyAction TargetObject="{Binding #zoomPanel}" PropertyName="IsVisible" Value="False"/>
+            </ia:DataTriggerBehavior>
+            <ia:DataTriggerBehavior Binding="{Binding #rootPanel.Bounds.Width}" ComparisonCondition="GreaterThan" Value="{StyleResource WidthLimit2}">
+                <ia:ChangePropertyAction TargetObject="{Binding #toolPanel}" PropertyName="IsVisible" Value="True"/>
+                <ia:ChangePropertyAction TargetObject="{Binding #toolsPanel}" PropertyName="Grid.Column" Value="1"/>
+            </ia:DataTriggerBehavior>
+            <ia:DataTriggerBehavior Binding="{Binding #rootPanel.Bounds.Width}" ComparisonCondition="LessThanOrEqual" Value="{StyleResource WidthLimit2}">
+                <ia:ChangePropertyAction TargetObject="{Binding #toolPanel}" PropertyName="IsVisible" Value="False"/>
+                <ia:ChangePropertyAction TargetObject="{Binding #toolsPanel}" PropertyName="Grid.Column" Value="0"/>
+            </ia:DataTriggerBehavior>
+            <ia:DataTriggerBehavior Binding="{Binding #rootPanel.Bounds.Width}" ComparisonCondition="GreaterThan" Value="{StyleResource WidthLimit3}">
+                <ia:ChangePropertyAction TargetObject="{Binding #leftPanelVSplitter}" PropertyName="IsVisible" Value="True"/>
+                <ia:ChangePropertyAction TargetObject="{Binding #leftPanel}" PropertyName="IsVisible" Value="True"/>
+                <ia:ChangePropertyAction TargetObject="{Binding #containerPanel}" PropertyName="Grid.Column" Value="2"/>
+                <ia:ChangePropertyAction TargetObject="{Binding #containerPanel}" PropertyName="Grid.ColumnSpan" Value="3"/>
+            </ia:DataTriggerBehavior>
+            <ia:DataTriggerBehavior Binding="{Binding #rootPanel.Bounds.Width}" ComparisonCondition="LessThanOrEqual" Value="{StyleResource WidthLimit3}">
+                <ia:ChangePropertyAction TargetObject="{Binding #leftPanelVSplitter}" PropertyName="IsVisible" Value="False"/>
+                <ia:ChangePropertyAction TargetObject="{Binding #leftPanel}" PropertyName="IsVisible" Value="False"/>
+                <ia:ChangePropertyAction TargetObject="{Binding #containerPanel}" PropertyName="Grid.Column" Value="0"/>
+                <ia:ChangePropertyAction TargetObject="{Binding #containerPanel}" PropertyName="Grid.ColumnSpan" Value="5"/>
+            </ia:DataTriggerBehavior>
+            <ia:DataTriggerBehavior Binding="{Binding #rootPanel.Bounds.Width}" ComparisonCondition="GreaterThan" Value="{StyleResource WidthLimit4}">
+                <ia:ChangePropertyAction TargetObject="{Binding #rightPanelVSplitter}" PropertyName="IsVisible" Value="True"/>
+                <ia:ChangePropertyAction TargetObject="{Binding #rightPanel}" PropertyName="IsVisible" Value="True"/>
+                <ia:ChangePropertyAction TargetObject="{Binding #containerPanel}" PropertyName="Grid.ColumnSpan" Value="1"/>
+            </ia:DataTriggerBehavior>
+            <ia:DataTriggerBehavior Binding="{Binding #rootPanel.Bounds.Width}" ComparisonCondition="LessThanOrEqual" Value="{StyleResource WidthLimit4}">
+                <ia:ChangePropertyAction TargetObject="{Binding #rightPanelVSplitter}" PropertyName="IsVisible" Value="False"/>
+                <ia:ChangePropertyAction TargetObject="{Binding #rightPanel}" PropertyName="IsVisible" Value="False"/>
+            </ia:DataTriggerBehavior>
+            <ia:DataTriggerBehavior Binding="{Binding #rootPanel.Bounds.Width}" ComparisonCondition="GreaterThan" Value="{StyleResource WidthLimit5}">
+                <ia:ChangePropertyAction TargetObject="{Binding #optionsPanel}" PropertyName="IsVisible" Value="True"/>
+            </ia:DataTriggerBehavior>
+            <ia:DataTriggerBehavior Binding="{Binding #rootPanel.Bounds.Width}" ComparisonCondition="LessThanOrEqual" Value="{StyleResource WidthLimit5}">
+                <ia:ChangePropertyAction TargetObject="{Binding #optionsPanel}" PropertyName="IsVisible" Value="False"/>
+            </ia:DataTriggerBehavior>
+            <ia:DataTriggerBehavior Binding="{Binding #rootPanel.Bounds.Width}" ComparisonCondition="GreaterThan" Value="{StyleResource WidthLimit6}">
+                <ia:ChangePropertyAction TargetObject="{Binding #statsPanel}" PropertyName="IsVisible" Value="True"/>
+            </ia:DataTriggerBehavior>
+            <ia:DataTriggerBehavior Binding="{Binding #rootPanel.Bounds.Width}" ComparisonCondition="LessThanOrEqual" Value="{StyleResource WidthLimit6}">
+                <ia:ChangePropertyAction TargetObject="{Binding #statsPanel}" PropertyName="IsVisible" Value="False"/>
+            </ia:DataTriggerBehavior>
+        </i:Interaction.Behaviors>
+        <GridSplitter Name="leftPanelVSplitter" Classes="vertical" Grid.Column="1" Grid.Row="0" Width="6"/>
+        <Grid Name="containerPanel" Grid.Row="0" Grid.Column="2">
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Top">
+                    <TabStrip Name="pages" Items="{Binding Project.CurrentDocument.Pages}" SelectedItem="{Binding Project.CurrentContainer, Mode=TwoWay}" Focusable="false">
+                        <TabStrip.KeyBindings>
+                            <KeyBinding Command="{Static Editor:Commands.NewCommand}" CommandParameter="{Binding #pages.SelectedItem}" Gesture="Ctrl+N"/>
+                            <KeyBinding Command="{Static Editor:Commands.CutCommand}" CommandParameter="{Binding #pages.SelectedItem}" Gesture="Ctrl+X"/>
+                            <KeyBinding Command="{Static Editor:Commands.CopyCommand}" CommandParameter="{Binding #pages.SelectedItem}" Gesture="Ctrl+C"/>
+                            <KeyBinding Command="{Static Editor:Commands.PasteCommand}" CommandParameter="{Binding #pages.SelectedItem}" Gesture="Ctrl+V"/>
+                            <KeyBinding Command="{Static Editor:Commands.DeleteCommand}" CommandParameter="{Binding #pages.SelectedItem}" Gesture="Delete"/>
+                            <KeyBinding Command="{Static Editor:Commands.ExportCommand}" CommandParameter="{Binding #pages.SelectedItem}" Gesture="Ctrl+E"/>
+                        </TabStrip.KeyBindings>
+                        <TabStrip.ContextMenu>
+                            <ContextMenu DataContext="{Binding Project.CurrentDocument}">
+                                <MenuItem Header="_Add Page" Command="{Static Editor:Commands.AddPageCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                <Separator/>
+                                <MenuItem Header="Insert Document Bef_ore" Command="{Static Editor:Commands.InsertDocumentBeforeCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                <MenuItem Header="Insert Document Aft_er" Command="{Static Editor:Commands.InsertDocumentAfterCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                <Separator/>
+                                <MenuItem Header="Cu_t" Command="{Static Editor:Commands.CutCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                <MenuItem Header="_Copy" Command="{Static Editor:Commands.CopyCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                <MenuItem Header="_Paste" Command="{Static Editor:Commands.PasteCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                <Separator/>
+                                <MenuItem Header="_Delete" Command="{Static Editor:Commands.DeleteCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                <Separator/>
+                                <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                            </ContextMenu>
+                        </TabStrip.ContextMenu>
+                        <TabStrip.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel/>
+                            </ItemsPanelTemplate>
+                        </TabStrip.ItemsPanel>
+                        <TabStrip.Styles>
+                            <Style Selector="TabStripItem">
+                                <Setter Property="Height" Value="20"/>
+                                <Setter Property="Background" Value="{StyleResource ThemeBackgroundBrush}"/>
+                                <Setter Property="BorderBrush" Value="{StyleResource ThemeBackgroundBrush}"/>
+                                <Setter Property="Foreground" Value="{StyleResource ThemeForegroundBrush}"/>
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="Margin" Value="0 0 0 -1"/>
+                                <Setter Property="Padding" Value="4 0 4 0"/>
+                                <Setter Property="FontSize" Value="12"/>
+                            </Style>
+                            <Style Selector="TabStripItem:pointerover">
+                                <Setter Property="Background" Value="{StyleResource ThemeBorderLightBrush}"/>
+                                <Setter Property="Foreground" Value="{StyleResource ThemeForegroundBrush}"/>
+                            </Style>
+                            <Style Selector="TabStripItem:selected">
+                                <Setter Property="Background" Value="{StyleResource ThemeBorderLightBrush}"/>
+                                <Setter Property="Foreground" Value="{StyleResource ThemeForegroundBrush}"/>
+                            </Style>
+                        </TabStrip.Styles>
+                        <TabStrip.DataTemplates>
+                            <DataTemplate DataType="Project:XContainer">
+                                <TextBlock Name="root" Text="{Binding Name}" Margin="2">
+                                    <i:Interaction.Behaviors>
+                                        <behaviors:BindTagToVisualRootDataContextBehavior/>
+                                    </i:Interaction.Behaviors>
+                                    <TextBlock.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="Te_mplate" Items="{Binding #root.Tag.Project.Templates}" Foreground="{StyleResource ThemeForegroundBrush}">
+                                                <MenuItem.DataTemplates>
+                                                    <DataTemplate DataType="Project:XContainer">
+                                                        <MenuItem Header="{Binding Name}" Command="{Static Editor:Commands.ApplyTemplateCommand}" CommandParameter="{Binding}" Foreground="{StyleResource ThemeForegroundBrush}">
+                                                            <MenuItem.Icon>
+                                                                <CheckBox Name="icon" Classes="menu">
+                                                                    <i:Interaction.Behaviors>
+                                                                        <behaviors:BindTagToVisualRootDataContextBehavior/>
+                                                                    </i:Interaction.Behaviors>
+                                                                    <CheckBox.IsChecked>
+                                                                        <MultiBinding Mode="OneWay" Converter="{Static converters:ObjectEqualityMultiConverter.Instance}">
+                                                                            <Binding ElementName="icon" Path="DataContext" Converter="{Static converters:ObjectToObjectConverter.Instance}"/>
+                                                                            <Binding ElementName="icon" Path="Tag.Template" Converter="{Static converters:ObjectToObjectConverter.Instance}"/>
+                                                                        </MultiBinding>
+                                                                    </CheckBox.IsChecked>
+                                                                </CheckBox>
+                                                            </MenuItem.Icon>
+                                                        </MenuItem>
+                                                    </DataTemplate>
+                                                </MenuItem.DataTemplates>
+                                            </MenuItem>
+                                            <Separator/>
+                                            <MenuItem Header="Insert Page Bef_ore" Command="{Static Editor:Commands.InsertPageBeforeCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                            <MenuItem Header="Insert Page Aft_er" Command="{Static Editor:Commands.InsertPageAfterCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                            <Separator/>
+                                            <MenuItem Header="Cu_t" Command="{Static Editor:Commands.CutCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                            <MenuItem Header="_Copy" Command="{Static Editor:Commands.CopyCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                            <MenuItem Header="_Paste" Command="{Static Editor:Commands.PasteCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                            <Separator/>
+                                            <MenuItem Header="_Delete" Command="{Static Editor:Commands.DeleteCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                            <Separator/>
+                                            <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                        </ContextMenu>
+                                    </TextBlock.ContextMenu>
+                                </TextBlock>
+                            </DataTemplate>
+                        </TabStrip.DataTemplates>
+                    </TabStrip>
+                    <Grid Background="{StyleResource ThemeBorderLightBrush}" Height="1"/>
+                </StackPanel>
+                <Border Classes="container">
+                    <Border Classes="transparent" ClipToBounds="True">
+                        <zoom:PanAndZoom Name="panAndZoom" AutoFitMode="None" ZoomSpeed="1.2" Background="{StyleResource TransparentBrush}" ClipToBounds="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                            <views:ContainerViewControl Name="containerControl" Renderer="{Binding Renderers[0]}" Container="{Binding Project.CurrentContainer}" ClipToBounds="False"/>
+                        </zoom:PanAndZoom>
+                    </Border>
+                </Border>
+            </DockPanel>
+        </Grid>
+        <Grid Name="leftPanel" RowDefinitions="50*,Auto,50*" Grid.Column="0" Grid.Row="0">
+            <Border Name="leftPanelTop" Classes="leftTop" Grid.Row="0">
+                <TabControl Classes="bottom">
+                    <TabItem Header="Project" Classes="property">
+                        <project:ProjectControl DataContext="{Binding Project}"/>
+                    </TabItem>
+                    <TabItem Header="Options" Classes="property">
+                        <presenters:CachedContentPresenter DataContext="{Binding Project.Options}"/>
+                    </TabItem>
+                    <TabItem Header="Images" Classes="property">
+                        <project:ImagesControl DataContext="{Binding Project}"/>
+                    </TabItem>
+                </TabControl>
+            </Border>
+            <GridSplitter Name="leftPanelHSplitter" Classes="horizontal" Grid.Row="1" Height="7"/>
+            <Border Name="leftPanelBottom" Classes="leftBottom" Grid.Row="2">
+                <TabControl Classes="bottom">
+                    <TabItem Header="Groups" Classes="property">
+                        <project:GroupsControl DataContext="{Binding Project}"/>
+                    </TabItem>
+                    <TabItem Header="Databases" Classes="property">
+                        <project:DatabasesControl DataContext="{Binding Project}"/>
+                    </TabItem>
+                </TabControl>
+            </Border>
+        </Grid>
+        <GridSplitter Name="rightPanelVSplitter" Classes="vertical" Grid.Column="3" Grid.Row="0" Width="6"/>
+        <Grid Name="rightPanel" RowDefinitions="50*,Auto,50*" Grid.Column="4" Grid.Row="0">
+            <Border Name="rightPanelTop" Classes="rightTop" Grid.Row="0">
+                <TabControl Classes="bottom">
+                    <TabItem Header="Styles" Classes="property">
+                        <project:StylesControl DataContext="{Binding Project}"/>
+                    </TabItem>
+                    <TabItem Header="Templates" Classes="property">
+                        <project:TemplatesControl DataContext="{Binding Project}"/>
+                    </TabItem>
+                </TabControl>
+            </Border>
+            <GridSplitter Name="rightPanelHSplitter" Classes="horizontal" Grid.Row="1" Height="7"/>
+            <Border Name="rightPanelBottom" Classes="rightBottom" Grid.Row="2">
+                <TabControl Classes="bottom">
+                    <TabItem Header="Shape" Classes="property">
+                        <ScrollViewer>
+                            <presenters:CachedContentPresenter DataContext="{Binding Project.CurrentContainer.CurrentShape}"/>
+                        </ScrollViewer>
+                    </TabItem>
+                    <TabItem Header="Data" Classes="property">
+                        <ScrollViewer>
+                            <data:DataControl DataContext="{Binding Renderers[0].State.SelectedShape.Data}"/>
+                        </ScrollViewer>
+                    </TabItem>
+                    <TabItem Header="Style" Classes="property">
+                        <ScrollViewer>
+                            <style:ShapeStyleControl DataContext="{Binding Project.CurrentStyleLibrary.Selected}"/>
+                        </ScrollViewer>
+                    </TabItem>
+                    <TabItem Header="Container" Classes="property">
+                        <ScrollViewer>
+                            <presenters:CachedContentPresenter DataContext="{Binding Project.CurrentContainer}"/>
+                        </ScrollViewer>
+                    </TabItem>
+                    <TabItem Header="Template" Classes="property">
+                        <ScrollViewer>
+                            <presenters:CachedContentPresenter DataContext="{Binding Project.CurrentTemplate}"/>
+                        </ScrollViewer>
+                    </TabItem>
+                </TabControl>
+            </Border>
+        </Grid>
+        <Grid ColumnDefinitions="Auto,*" Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="1" Margin="0,2,0,0">
+            <TextBlock Name="statsPanel" Classes="stats" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <TextBlock.Text>
+                    <MultiBinding Mode="OneWay" Converter="{Static converters:EditorToStatsMultiConverter.Instance}">
+                        <Binding Path="Project.Documents.Length"/>
+                        <Binding Path="Project.CurrentDocument.Pages.Length"/>
+                        <Binding Path="Project.CurrentContainer.Layers.Length"/>
+                        <Binding Path="Project.CurrentContainer.CurrentLayer.Shapes.Length"/>
+                        <Binding Path="Renderers[0].State.SelectedShape" Converter="{Static converters:ObjectToObjectConverter.Instance}"/>
+                        <Binding Path="Renderers[0].State.SelectedShapes" Converter="{Static converters:ObjectToObjectConverter.Instance}"/>
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+            <WrapPanel Name="toolsPanel" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <WrapPanel Name="toolPanel">
+                    <DropDown Classes="tool" Items="{Static Editor:Enums.ToolValues}" SelectedItem="{Binding CurrentTool, Mode=TwoWay}"/>
+                    <DropDown Classes="tool" Items="{Static Editor:Enums.PathToolValues}" SelectedItem="{Binding CurrentPathTool, Mode=TwoWay}">
+                        <DropDown.IsVisible>
+                            <MultiBinding Mode="OneWay" Converter="{Static converters:ObjectEqualityMultiConverter.Instance}">
+                                <Binding Path="CurrentTool"/>
+                                <Binding Source="{Static Editor:Tool.Path}"/>
+                            </MultiBinding>
+                        </DropDown.IsVisible>
+                    </DropDown>
+                </WrapPanel>
+                <WrapPanel Name="zoomPanel">
+                    <Button Content="Reset" Classes="autofit" Command="{Static Editor:Commands.ZoomResetCommand}"/>
+                    <Button Content="AutoFit" Classes="autofit" Command="{Static Editor:Commands.ZoomAutoFitCommand}"/>
+                    <DropDown Classes="autofit" Items="{Static zoom:PanAndZoom.AutoFitModes}" SelectedItem="{Binding #panAndZoom.AutoFitMode, Mode=TwoWay}"/>
+                    <TextBox Classes="autofit" Text="{Binding #panAndZoom.ZoomSpeed, Mode=TwoWay}" Width="50"/>
+                </WrapPanel>
+                <WrapPanel Name="optionsPanel">
+                    <CheckBox Classes="options" Content="Stroked" IsChecked="{Binding Project.Options.DefaultIsStroked, Mode=TwoWay}"/>
+                    <CheckBox Classes="options" Content="Filled" IsChecked="{Binding Project.Options.DefaultIsFilled, Mode=TwoWay}"/>
+                    <CheckBox Classes="options" Content="Closed" IsChecked="{Binding Project.Options.DefaultIsClosed, Mode=TwoWay}"/>
+                    <CheckBox Classes="options" Content="SmoothJoin" IsChecked="{Binding Project.Options.DefaultIsSmoothJoin, Mode=TwoWay}"/>
+                    <CheckBox Classes="options" Content="Snap" IsChecked="{Binding Project.Options.SnapToGrid, Mode=TwoWay}"/>
+                    <CheckBox Classes="options" Content="Connect" IsChecked="{Binding Project.Options.TryToConnect, Mode=TwoWay}"/>
+                    <CheckBox Classes="options" Content="CloneStyle" IsChecked="{Binding Project.Options.CloneStyle, Mode=TwoWay}"/>
+                </WrapPanel>
+            </WrapPanel>
+        </Grid> 
+    </Grid>
+</UserControl>

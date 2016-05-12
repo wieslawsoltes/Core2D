@@ -23,8 +23,8 @@ Core2D is an application for making data driven 2D diagrams.
 
 ## Supported Platforms
 
-* Windows 7/8/8.1/10 for `Core2D.Wpf`, `Core2D.Perspex.Direct2D` and `Core2D.Perspex.Skia` builds.
-* XUbuntu 15.10 for `Core2D.Perspex.Skia` and `Core2D.Perspex.Cairo` build.
+* Windows 7/8/8.1/10 for `Core2D.Wpf`, `Core2D.Avalonia.Direct2D` and `Core2D.Avalonia.Skia` builds.
+* XUbuntu 15.10 for `Core2D.Avalonia.Skia` and `Core2D.Avalonia.Cairo` build.
 
 The core library and editor are portable and should work on all platforms where C# is supported.
 
@@ -46,11 +46,11 @@ The core library and editor are portable and should work on all platforms where 
   * Xceed.Wpf.AvalonDock
   * Xceed.Products.Wpf.Toolkit.AvalonDock
   * System.Windows.Interactivity.WPF
-* Perspex
-  * PDFsharp (`PDFsharp` core for `Perspex` non-windows builds.)
-  * Perspex
-  * Perspex.Desktop
-  * Perspex.Skia.Desktop
+* Avalonia
+  * PDFsharp (`PDFsharp` core for `Avalonia` non-windows builds.)
+  * Avalonia
+  * Avalonia.Desktop
+  * Avalonia.Skia.Desktop
   * SkiaSharp
   * Rx-Core
   * Rx-Interfaces
@@ -68,7 +68,7 @@ The core library and editor are portable and should work on all platforms where 
 
 * https://www.nuget.org/api/v2/
 * https://ci.appveyor.com/nuget/portable-xaml
-* https://www.myget.org/F/perspex-nightly/api/v2
+* https://www.myget.org/F/avalonia-ci/api/v2
 * https://www.myget.org/F/xamlbehaviors-nightly/api/v2
 
 ### Other Dependencies

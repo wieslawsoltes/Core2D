@@ -1,0 +1,63 @@
+﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
+<!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
+<Window x:Class="Core2D.Avalonia.Windows.MainWindow"
+        xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Core2D.Avalonia;assembly=Core2D.Avalonia"
+        xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"
+        xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D"
+        xmlns:Views="clr-namespace:Core2D.Editor.Views;assembly=Core2D"
+        xmlns:views="clr-namespace:Core2D.Avalonia.Views;assembly=Core2D.Avalonia"
+        Width="1324" Height="690"
+        Background="{StyleResource ThemeBackgroundBrush}"
+        UseLayoutRounding="True"
+        Design.DataContext="{Static Designer:DesignerContext.Editor}"
+        Design.Width="1200" Design.Height="580">
+    <Window.Title>
+        <MultiBinding Mode="OneWay" Converter="{Static converters:EditorToTitleMultiConverter.Instance}">
+            <Binding Path="Project.Name"/>
+            <Binding Path="IsProjectDirty"/>
+        </MultiBinding>
+    </Window.Title>
+    <Window.KeyBindings>
+        <!-- File -->
+        <KeyBinding Command="{Static Editor:Commands.NewCommand}" CommandParameter="{Binding}" Gesture="Ctrl+N"/>
+        <KeyBinding Command="{Static Editor:Commands.OpenCommand}" Gesture="Ctrl+O"/>
+        <KeyBinding Command="{Static Editor:Commands.CloseCommand}" Gesture="Ctrl+F4"/>
+        <KeyBinding Command="{Static Editor:Commands.SaveCommand}" Gesture="Ctrl+S"/>
+        <KeyBinding Command="{Static Editor:Commands.SaveAsCommand}" Gesture="Ctrl+Shift+S"/>
+        <KeyBinding Command="{Static Editor:Commands.ImportXamlCommand}" Gesture="Ctrl+Shift+X"/>
+        <KeyBinding Command="{Static Editor:Commands.ImportJsonCommand}" Gesture="Ctrl+Shift+J"/>
+        <KeyBinding Command="{Static Editor:Commands.ExportCommand}" Gesture="Ctrl+E"/>
+        <KeyBinding Command="{Static Editor:Commands.ExitCommand}" Gesture="Alt+F4"/>
+        <!-- Edit -->
+        <KeyBinding Command="{Static Editor:Commands.UndoCommand}" Gesture="Ctrl+Z"/>
+        <KeyBinding Command="{Static Editor:Commands.RedoCommand}" Gesture="Ctrl+Y"/>
+        <KeyBinding Command="{Static Editor:Commands.CopyAsEmfCommand}" Gesture="Ctrl+Shift+C"/>
+        <KeyBinding Command="{Static Editor:Commands.CutCommand}" Gesture="Ctrl+X"/>
+        <KeyBinding Command="{Static Editor:Commands.CopyCommand}" Gesture="Ctrl+C"/>
+        <KeyBinding Command="{Static Editor:Commands.PasteCommand}" Gesture="Ctrl+V"/>
+        <KeyBinding Command="{Static Editor:Commands.SelectAllCommand}" Gesture="Ctrl+A"/>
+        <KeyBinding Command="{Static Editor:Commands.GroupCommand}" Gesture="Ctrl+G"/>
+        <KeyBinding Command="{Static Editor:Commands.UngroupCommand}" Gesture="Ctrl+U"/>
+        <!-- View -->
+        <KeyBinding Command="{Static Editor:Commands.ObjectBrowserCommand}" Gesture="Ctrl+J"/>
+        <KeyBinding Command="{Static Editor:Commands.DocumentViewerCommand}" Gesture="Ctrl+D"/>
+    </Window.KeyBindings>
+    <Carousel Items="{Binding Views}" SelectedItem="{Binding CurrentView, Mode=TwoWay}" IsVirtualized="False">
+        <Carousel.DataTemplates>
+            <DataTemplate DataType="Views:DashboardView">
+                <views:DashboardViewControl/>
+            </DataTemplate>
+            <DataTemplate DataType="Views:EditorView">
+                <views:EditorViewControl/>
+            </DataTemplate>
+            <DataTemplate DataType="Views:BrowserView">
+                <views:BrowserViewControl/>
+            </DataTemplate>
+            <DataTemplate DataType="Views:DocumentView">
+                <views:DocumentViewControl/>
+            </DataTemplate>
+        </Carousel.DataTemplates>
+    </Carousel>
+</Window>

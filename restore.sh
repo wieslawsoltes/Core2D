@@ -1,2 +1,2 @@
 #!/bin/sh
-nuget restore Core2D.sln -source "https://ci.appveyor.com/nuget/portable-xaml;https://www.nuget.org/api/v2/;https://www.myget.org/F/perspex-nightly/api/v2;https://www.myget.org/F/xamlbehaviors-nightly/api/v2"
+nuget restore Core2D.sln -source "https://ci.appveyor.com/nuget/portable-xaml;https://www.nuget.org/api/v2/;https://www.myget.org/F/avalonia-ci/api/v2;https://www.myget.org/F/xamlbehaviors-nightly/api/v2"
