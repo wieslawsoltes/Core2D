@@ -1,5 +1,16 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Markup.Xaml;
+using Core2D.Avalonia.Controls.Data;
+using Core2D.Avalonia.Controls.Path;
+using Core2D.Avalonia.Controls.Project;
+using Core2D.Avalonia.Controls.Shapes;
+using Core2D.Avalonia.Controls.State;
+using Core2D.Avalonia.Controls.Style;
+using Core2D.Avalonia.Presenters;
+using Core2D.Avalonia.Views;
 using Core2D.Data;
 using Core2D.Data.Database;
 using Core2D.Editor;
@@ -11,23 +22,11 @@ using Core2D.Editor.Views;
 using Core2D.Interfaces;
 using Core2D.Path;
 using Core2D.Path.Segments;
-using Core2D.Avalonia.Controls.Data;
-using Core2D.Avalonia.Controls.Path;
-using Core2D.Avalonia.Controls.Project;
-using Core2D.Avalonia.Controls.Shapes;
-using Core2D.Avalonia.Controls.State;
-using Core2D.Avalonia.Controls.Style;
-using Core2D.Avalonia.Presenters;
-using Core2D.Avalonia.Views;
 using Core2D.Project;
 using Core2D.Renderer;
 using Core2D.Shape;
 using Core2D.Shapes;
 using Core2D.Style;
-// HACK: using FileWriter.Dxf;
-// HACK: using FileWriter.Pdf_core;
-using Avalonia;
-using Avalonia.Controls;
 using Renderer.Avalonia;
 using Serializer.Newtonsoft;
 using Serializer.Xaml;
@@ -41,7 +40,7 @@ using TextFieldWriter.CsvHelper;
 namespace Core2D.Avalonia
 {
     /// <summary>
-    /// Encapsulates a Core2D Prespex application.
+    /// Encapsulates a Core2D Avalonia application.
     /// </summary>
     public class App : Application, IEditorApplication
     {
@@ -151,12 +150,10 @@ namespace Core2D.Avalonia
             CachedContentPresenter.Register(typeof(TextStyle), () => new TextStyleControl());
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="App"/> class.
-        /// </summary>
-        public App()
+        /// <inheritdoc/>
+        public override void Initialize()
         {
-            RegisterServices();
+            AvaloniaXamlLoader.Load(this);
         }
 
         /// <summary>

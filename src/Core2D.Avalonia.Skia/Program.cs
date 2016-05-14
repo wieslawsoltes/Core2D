@@ -1,19 +1,20 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Logging.Serilog;
 using Core2D.Interfaces;
 using FileSystem.DotNetFx;
 using FileWriter.Dxf;
 using FileWriter.Pdf_core;
 using Log.Trace;
-using Avalonia;
-using Avalonia.Logging.Serilog;
 using Serilog;
 using System.Collections.Immutable;
 
 namespace Core2D.Avalonia.Skia
 {
     /// <summary>
-    /// Encapsulates a Core2D Prespex program.
+    /// Encapsulates a Core2D Avalonia program.
     /// </summary>
     internal class Program
     {
@@ -35,7 +36,12 @@ namespace Core2D.Avalonia.Skia
                         new DxfWriter()
                     }.ToImmutableArray();
 
-                new App().UseWin32().UseSkia().LoadFromXaml().Start(fileIO, log, writers);
+                var app = new App();
+                AppBuilder.Configure(app)
+                    .UseWin32()
+                    .UseSkia()
+                    .SetupWithoutStarting();
+                app.Start(fileIO, log, writers);
             }
         }
 
