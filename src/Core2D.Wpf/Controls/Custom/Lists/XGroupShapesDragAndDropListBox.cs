@@ -4,6 +4,7 @@ using Core2D.Editor;
 using Core2D.Shape;
 using Core2D.Shapes;
 using System.Collections.Immutable;
+using System.Windows.Controls;
 
 namespace Core2D.Wpf.Controls.Custom.Lists
 {
