@@ -39,6 +39,9 @@ rmdir /Q /S dependencies\Renderer.PdfSharp-wpf\obj
 rmdir /Q /S dependencies\Renderer.SkiaSharp\bin
 rmdir /Q /S dependencies\Renderer.SkiaSharp\obj
 
+rmdir /Q /S dependencies\Renderer.Win2D\bin
+rmdir /Q /S dependencies\Renderer.Win2D\obj
+
 rmdir /Q /S dependencies\Renderer.WinForms\bin
 rmdir /Q /S dependencies\Renderer.WinForms\obj
 
@@ -77,6 +80,9 @@ rmdir /Q /S src\Core2D.Avalonia.Direct2D\obj
 
 rmdir /Q /S src\Core2D.Avalonia.Skia\bin
 rmdir /Q /S src\Core2D.Avalonia.Skia\obj
+
+rmdir /Q /S src\Core2D.Uwp\bin
+rmdir /Q /S src\Core2D.Uwp\obj
 
 rmdir /Q /S src\Core2D.Wpf\bin
 rmdir /Q /S src\Core2D.Wpf\obj
