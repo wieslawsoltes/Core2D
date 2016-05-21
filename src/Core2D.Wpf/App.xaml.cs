@@ -170,7 +170,7 @@ namespace Core2D.Wpf
         }
 
         /// <summary>
-        /// Initialize <see cref="Editor"/> object.
+        /// Initialize <see cref="ProjectEditor"/> object.
         /// </summary>
         /// <param name="fileIO">The file system instance.</param>
         /// <param name="log">The log instance.</param>
@@ -700,9 +700,7 @@ namespace Core2D.Wpf
             await Task.Delay(0);
         }
 
-        /// <summary>
-        /// Close application view.
-        /// </summary>
+        /// <inheritdoc/>
         void IEditorApplication.OnCloseView()
         {
             _mainWindow?.Close();

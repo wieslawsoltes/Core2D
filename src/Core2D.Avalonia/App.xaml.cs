@@ -226,7 +226,7 @@ namespace Core2D.Avalonia
         }
 
         /// <summary>
-        /// Initialize <see cref="Editor"/> object.
+        /// Initialize <see cref="ProjectEditor"/> object.
         /// </summary>
         /// <param name="fileIO">The file system instance.</param>
         /// <param name="log">The log instance.</param>
