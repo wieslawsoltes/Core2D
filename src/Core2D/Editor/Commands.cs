@@ -7,7 +7,6 @@ using Core2D.Project;
 using Core2D.Shape;
 using Core2D.Shapes;
 using Core2D.Style;
-using System.Collections.Generic;
 
 namespace Core2D.Editor
 {
