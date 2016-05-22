@@ -88,7 +88,7 @@ namespace Core2D.Wpf
             _log = log;
             _writers = writers;
 
-            _log.Initialize(System.IO.Path.Combine(_fileIO.AssemblyPath, _logFileName));
+            _log.Initialize(System.IO.Path.Combine(_fileIO.GetAssemblyPath(null), _logFileName));
 
             try
             {
@@ -141,7 +141,7 @@ namespace Core2D.Wpf
         {
             try
             {
-                var path = System.IO.Path.Combine(_fileIO.AssemblyPath, _recentFileName);
+                var path = System.IO.Path.Combine(_fileIO.GetAssemblyPath(null), _recentFileName);
                 if (System.IO.File.Exists(path))
                 {
                     _editor?.OnLoadRecent(path);
@@ -160,7 +160,7 @@ namespace Core2D.Wpf
         {
             try
             {
-                var path = System.IO.Path.Combine(_fileIO.AssemblyPath, _recentFileName);
+                var path = System.IO.Path.Combine(_fileIO.GetAssemblyPath(null), _recentFileName);
                 _editor?.OnSaveRecent(path);
             }
             catch (Exception ex)

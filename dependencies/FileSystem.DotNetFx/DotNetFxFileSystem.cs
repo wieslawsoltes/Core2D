@@ -13,16 +13,14 @@ namespace FileSystem.DotNetFx
     /// </summary>
     public sealed class DotNetFxFileSystem : IFileSystem
     {
-        private static string GetAssemblyPath()
+        /// <inheritdoc/>
+        string IFileSystem.GetAssemblyPath(Type type)
         {
-            string codeBase = Assembly.GetExecutingAssembly().CodeBase;
+            string codeBase = type == null ? Assembly.GetExecutingAssembly().CodeBase : type.GetTypeInfo().Assembly.FullName;
             var uri = new UriBuilder(codeBase);
             string path = Uri.UnescapeDataString(uri.Path);
             return Path.GetDirectoryName(path);
         }
-
-        /// <inheritdoc/>
-        string IFileSystem.AssemblyPath { get; } = GetAssemblyPath();
 
         /// <inheritdoc/>
         bool IFileSystem.Exists(string path)
