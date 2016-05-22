@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
 using System.IO;
 
 namespace Core2D.Interfaces
@@ -12,7 +13,9 @@ namespace Core2D.Interfaces
         /// <summary>
         /// Gets the location of the assembly as specified originally.
         /// </summary>
-        string AssemblyPath { get; }
+        /// <param name="type">The type included in assembly.</param>
+        /// <returns>The location of the assembly as specified originally.</returns>
+        string GetAssemblyPath(Type type);
 
         /// <summary>
         /// Determines whether the specified file exists.
