@@ -134,6 +134,10 @@
     </SDKReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\dependencies\FileSystem.Uwp\FileSystem.Uwp.csproj">
+      <Project>{180963c2-9b40-4f63-b288-88328d798098}</Project>
+      <Name>FileSystem.Uwp</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\dependencies\Renderer.Win2D\Renderer.Win2D.csproj">
       <Project>{ea79fdcf-c78b-4170-bfbe-beb2303d911d}</Project>
       <Name>Renderer.Win2D</Name>
