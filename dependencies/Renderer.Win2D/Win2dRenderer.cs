@@ -26,7 +26,6 @@ namespace Renderer.Win2D
     /// </summary>
     public class Win2dRenderer : ShapeRenderer
     {
-        private bool _enableImageCache = true;
         private IDictionary<string, CanvasBitmap> _biCache;
         private ShapeRendererState _state = new ShapeRendererState();
 
@@ -179,8 +178,7 @@ namespace Renderer.Win2D
         /// <param name="bi"></param>
         public void CacheImage(string path, CanvasBitmap bi)
         {
-            if (_enableImageCache
-                && !_biCache.ContainsKey(path))
+            if (!_biCache.ContainsKey(path))
             {
                 _biCache[path] = bi;
             }
@@ -381,11 +379,7 @@ namespace Renderer.Win2D
             var brush = ToColor(rectangle.Style.Fill);
             var pen = ToColor(rectangle.Style.Stroke);
             var ss = CreateStrokeStyle(rectangle.Style);
-
-            var rect = CreateRect(
-                rectangle.TopLeft,
-                rectangle.BottomRight,
-                dx, dy);
+            var rect = CreateRect(rectangle.TopLeft, rectangle.BottomRight, dx, dy);
 
             DrawRectangleInternal(
                 _ds,
@@ -422,11 +416,7 @@ namespace Renderer.Win2D
             var brush = ToColor(ellipse.Style.Fill);
             var pen = ToColor(ellipse.Style.Stroke);
             var ss = CreateStrokeStyle(ellipse.Style);
-
-            var rect = CreateRect(
-                ellipse.TopLeft,
-                ellipse.BottomRight,
-                dx, dy);
+            var rect = CreateRect(ellipse.TopLeft, ellipse.BottomRight, dx, dy);
 
             DrawEllipseInternal(
                 _ds,
@@ -653,10 +643,7 @@ namespace Renderer.Win2D
         {
             var _ds = ds as CanvasDrawingSession;
 
-            var rect = CreateRect(
-                image.TopLeft,
-                image.BottomRight,
-                dx, dy);
+            var rect = CreateRect(image.TopLeft, image.BottomRight, dx, dy);
 
             if (image.IsFilled || image.IsStroked)
             {
@@ -672,36 +659,14 @@ namespace Renderer.Win2D
 
             var srect = new Rect(rect.X, rect.Y, rect.Width, rect.Height);
 
-            if (_enableImageCache
-                && _biCache.ContainsKey(image.Key))
+            if (_biCache.ContainsKey(image.Key))
             {
                 _ds.DrawImage(_biCache[image.Key], srect);
             }
             else
             {
                 // TODO: Image caching is done in MainPage because calls to GetResults() throw exception.
-                /*
-                if (_state.ImageCache == null || string.IsNullOrEmpty(image.Path))
-                    return;
-
-                var bytes = _state.ImageCache.GetImage(image.Path);
-                if (bytes != null)
-                {
-                    var ms = new MemoryStream(bytes);
-                    var ras = ms.AsRandomAccessStream();
-                    var bi = CanvasBitmap.LoadAsync(_ds, ras).GetResults();
-                    ras.Dispose();
-                    ms.Dispose();
-
-                    if (_enableImageCache)
-                        _biCache[image.Path] = bi;
-
-                    _ds.DrawImage(bi, srect);
-
-                    if (!_enableImageCache)
-                        bi.Dispose();
-                }
-                */
+                throw new Exception($"Bitmap cache does not contain key: {image.Key}");
             }
         }
 
