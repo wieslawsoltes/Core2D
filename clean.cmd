@@ -9,6 +9,9 @@ rmdir /Q /S dependencies\netDxf\TestDxfDocument\obj
 rmdir /Q /S dependencies\FileSystem.DotNetFx\bin
 rmdir /Q /S dependencies\FileSystem.DotNetFx\obj
 
+rmdir /Q /S dependencies\FileSystem.Uwp\bin
+rmdir /Q /S dependencies\FileSystem.Uwp\obj
+
 rmdir /Q /S dependencies\FileWriter.Dxf\bin
 rmdir /Q /S dependencies\FileWriter.Dxf\obj
 
