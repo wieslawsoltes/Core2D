@@ -25,9 +25,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextFieldWriter.CsvHelper",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Renderer.Win2D", "dependencies\Renderer.Win2D\Renderer.Win2D.csproj", "{EA79FDCF-C78B-4170-BFBE-BEB2303D911D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileSystem.Uwp", "dependencies\FileSystem.Uwp\FileSystem.Uwp.csproj", "{180963C2-9B40-4F63-B288-88328D798098}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		src\Core2D.Shared\Core2D.Shared.projitems*{ea79fdcf-c78b-4170-bfbe-beb2303d911d}*SharedItemsImports = 4
+		src\Core2D.Shared\Core2D.Shared.projitems*{180963c2-9b40-4f63-b288-88328d798098}*SharedItemsImports = 4
 		src\Core2D.Shared\Core2D.Shared.projitems*{4ee581b0-45f3-4d7e-beae-277abf5f3fdd}*SharedItemsImports = 4
 		src\Core2D.Shared\Core2D.Shared.projitems*{f215adf5-74c1-4e26-9045-b6bbda736092}*SharedItemsImports = 4
 		src\Core2D.Shared\Core2D.Shared.projitems*{9a474916-ea8c-48fb-8cf6-425d95b6b7fd}*SharedItemsImports = 4
@@ -167,6 +170,22 @@ Global
 		{EA79FDCF-C78B-4170-BFBE-BEB2303D911D}.Release|x64.Build.0 = Release|x64
 		{EA79FDCF-C78B-4170-BFBE-BEB2303D911D}.Release|x86.ActiveCfg = Release|x86
 		{EA79FDCF-C78B-4170-BFBE-BEB2303D911D}.Release|x86.Build.0 = Release|x86
+		{180963C2-9B40-4F63-B288-88328D798098}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{180963C2-9B40-4F63-B288-88328D798098}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{180963C2-9B40-4F63-B288-88328D798098}.Debug|ARM.ActiveCfg = Debug|ARM
+		{180963C2-9B40-4F63-B288-88328D798098}.Debug|ARM.Build.0 = Debug|ARM
+		{180963C2-9B40-4F63-B288-88328D798098}.Debug|x64.ActiveCfg = Debug|x64
+		{180963C2-9B40-4F63-B288-88328D798098}.Debug|x64.Build.0 = Debug|x64
+		{180963C2-9B40-4F63-B288-88328D798098}.Debug|x86.ActiveCfg = Debug|x86
+		{180963C2-9B40-4F63-B288-88328D798098}.Debug|x86.Build.0 = Debug|x86
+		{180963C2-9B40-4F63-B288-88328D798098}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{180963C2-9B40-4F63-B288-88328D798098}.Release|Any CPU.Build.0 = Release|Any CPU
+		{180963C2-9B40-4F63-B288-88328D798098}.Release|ARM.ActiveCfg = Release|ARM
+		{180963C2-9B40-4F63-B288-88328D798098}.Release|ARM.Build.0 = Release|ARM
+		{180963C2-9B40-4F63-B288-88328D798098}.Release|x64.ActiveCfg = Release|x64
+		{180963C2-9B40-4F63-B288-88328D798098}.Release|x64.Build.0 = Release|x64
+		{180963C2-9B40-4F63-B288-88328D798098}.Release|x86.ActiveCfg = Release|x86
+		{180963C2-9B40-4F63-B288-88328D798098}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -180,5 +199,6 @@ Global
 		{F215ADF5-74C1-4E26-9045-B6BBDA736092} = {BB33496B-83C4-4D9F-BA8D-4E8AC986014F}
 		{AE7FF1B5-ABE3-45BF-87CC-44AC580A666A} = {BB33496B-83C4-4D9F-BA8D-4E8AC986014F}
 		{EA79FDCF-C78B-4170-BFBE-BEB2303D911D} = {BB33496B-83C4-4D9F-BA8D-4E8AC986014F}
+		{180963C2-9B40-4F63-B288-88328D798098} = {BB33496B-83C4-4D9F-BA8D-4E8AC986014F}
 	EndGlobalSection
 EndGlobal
