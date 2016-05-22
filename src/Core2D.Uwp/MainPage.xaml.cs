@@ -9,6 +9,7 @@ using Core2D.Project;
 using Core2D.Renderer;
 using Core2D.Shapes;
 using Core2D.Style;
+using FileSystem.Uwp;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Text;
 using Microsoft.Graphics.Canvas.UI.Xaml;
@@ -40,6 +41,9 @@ namespace Core2D.Uwp
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        private IFileSystem _fileIO;
+        private ILog _log;
+        private ImmutableArray<IFileWriter> _writers;
         private ProjectEditor _editor;
         private Win2dRenderer _renderer;
         private PointerPressType _pressed;
@@ -51,7 +55,13 @@ namespace Core2D.Uwp
         public MainPage()
         {
             InitializeComponent();
-            InitializeEditor(null, null, ImmutableArray<IFileWriter>.Empty);
+
+            _log = default(ILog);
+            _fileIO = new UwpFileSystem();
+            _writers = new IFileWriter[] { }.ToImmutableArray();
+
+            InitializeEditor(_fileIO, _log, _writers);
+
             InitializeCanvas();
             InitializePage();
 
@@ -400,7 +410,7 @@ namespace Core2D.Uwp
         {
             Window.Current.CoreWindow.KeyDown += CoreWindow_KeyDown;
             Loaded += (sender, e) => canvas.Focus(FocusState.Programmatic);
-            Unloaded += (sender, e) => { };
+            Unloaded += (sender, e) => _log?.Dispose();
         }
 
         private async void CoreWindow_KeyDown(CoreWindow sender, KeyEventArgs args)
@@ -500,11 +510,11 @@ namespace Core2D.Uwp
                         Commands.TryToConnectCommand.Execute(null);
                         break;
                     case VirtualKey.Z:
-                        //ResetZoom();
+                        // Reset Zoom
                         //_editor.Invalidate();
                         break;
                     case VirtualKey.X:
-                        //AutoFit();
+                        // Auto Fit Zoom
                         //_editor.Invalidate();
                         break;
                     case VirtualKey.Delete:
@@ -522,7 +532,6 @@ namespace Core2D.Uwp
 
         private async Task OnOpen()
         {
-            /*
             var file = await GetOpenProjectPathAsync();
             if (file != null)
             {
@@ -531,23 +540,20 @@ namespace Core2D.Uwp
                 {
                     project = await Task.Run(() =>
                     {
-                        return XProject.Open(stream, _editor.JsonSerializer);
+                        return XProject.Open(stream, _fileIO, _editor.JsonSerializer);
                     });
                 }
 
-                _editor.OnOpen(project);
-
+                _editor.OnOpen(project, file.Path);
                 await CacheImages(project);
-
                 _editor.Invalidate();
             }
-            */
+
             await Task.Run(() => { });
         }
 
         private async Task OnSaveAs()
         {
-            /*
             var file = await GetSaveProjectPathAsync(_editor.Project.Name);
             if (file != null)
             {
@@ -557,13 +563,13 @@ namespace Core2D.Uwp
                 {
                     await Task.Run(() =>
                     {
-                        XProject.Save(_editor.Project, stream, _editor.JsonSerializer);
+                        XProject.Save(_editor.Project, stream, _fileIO, _editor.JsonSerializer);
                     });
                 }
 
                 await CachedFileManager.CompleteUpdatesAsync(file);
             }
-            */
+
             await Task.Run(() => { });
         }
 
@@ -584,10 +590,9 @@ namespace Core2D.Uwp
             }
         }
 
-        /*
         private async Task CacheImages(XProject project)
         {
-            var images = _editor.GetAllShapes<XImage>(project);
+            var images = XProject.GetAllShapes<XImage>(project);
             if (images != null)
             {
                 foreach (var image in images)
@@ -596,22 +601,18 @@ namespace Core2D.Uwp
                 }
             }
         }
-        */
 
         private async Task<string> GetImageKey(IStorageFile file)
         {
-            /*
             var key = default(string);
 
             using (var fileStream = await file.OpenStreamForReadAsync())
             {
-                var bytes = XProject.ReadBinary(fileStream);
+                var bytes = _fileIO.ReadBinary(fileStream);
                 key = _editor.Project.AddImageFromFile(file.Path, bytes);
             }
 
             return key;
-            */
-            return await Task.Run(() => string.Empty);
         }
 
         private async Task<IStorageFile> GetImageKeyAsync()
