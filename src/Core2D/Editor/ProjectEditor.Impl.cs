@@ -184,12 +184,32 @@ namespace Core2D.Editor
                         var project = XProject.Open(path, _fileIO, _jsonSerializer);
                         if (project != null)
                         {
-                            OnUnload();
-                            OnLoad(project, path);
-                            OnAddRecent(path, project.Name);
-                            OnChangeCurrentView(_editorView);
+                            OnOpen(project, path);
                         }
                     }
+                }
+            }
+            catch (Exception ex)
+            {
+                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+            }
+        }
+
+        /// <summary>
+        /// Open project.
+        /// </summary>
+        /// <param name="project">The project to open.</param>
+        /// <param name="path">The project file path.</param>
+        public void OnOpen(XProject project, string path)
+        {
+            try
+            {
+                if (project != null)
+                {
+                    OnUnload();
+                    OnLoad(project, path);
+                    OnAddRecent(path, project.Name);
+                    OnChangeCurrentView(_editorView);
                 }
             }
             catch (Exception ex)

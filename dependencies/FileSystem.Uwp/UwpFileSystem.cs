@@ -6,17 +6,17 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 
-namespace FileSystem.DotNetFx
+namespace FileSystem.Uwp
 {
     /// <summary>
     /// File system implementation using System.IO.
     /// </summary>
-    public sealed class DotNetFxFileSystem : IFileSystem
+    public sealed class UwpFileSystem : IFileSystem
     {
         /// <inheritdoc/>
         string IFileSystem.GetAssemblyPath(Type type)
         {
-            string codeBase = type == null ? Assembly.GetExecutingAssembly().CodeBase : type.GetTypeInfo().Assembly.FullName;
+            string codeBase = type.GetTypeInfo().Assembly.FullName;
             var uri = new UriBuilder(codeBase);
             string path = Uri.UnescapeDataString(uri.Path);
             return Path.GetDirectoryName(path);
