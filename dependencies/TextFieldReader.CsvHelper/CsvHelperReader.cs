@@ -5,6 +5,7 @@ using Core2D.Interfaces;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using CSV = CsvHelper;
 
 namespace TextFieldReader.CsvHelper
@@ -47,7 +48,7 @@ namespace TextFieldReader.CsvHelper
         {
             using (var stream = fs.Open(path))
             {
-                var fields = ReadInternal(stream);
+                var fields = ReadInternal(stream).ToList();
                 var name = Path.GetFileNameWithoutExtension(path);
                 return XDatabase.FromFields(name, fields);
             }
