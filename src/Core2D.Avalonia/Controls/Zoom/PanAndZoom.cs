@@ -180,7 +180,7 @@ namespace Core2D.Avalonia.Controls.Zoom
             if (_element != null)
             {
                 this.InvalidatedChild?.Invoke(_matrix.M11, _matrix.M12, _matrix.M31, _matrix.M32);
-                _element.TransformOrigin = new RelativePoint(new Point(0, 0), RelativeUnit.Relative);
+                _element.RenderTransformOrigin = new RelativePoint(new Point(0, 0), RelativeUnit.Relative);
                 _element.RenderTransform = new MatrixTransform(_matrix);
                 _element.InvalidateVisual();
             }
