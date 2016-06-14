@@ -9,7 +9,6 @@ using Core2D.Avalonia.Controls.Project;
 using Core2D.Avalonia.Controls.Shapes;
 using Core2D.Avalonia.Controls.State;
 using Core2D.Avalonia.Controls.Style;
-using Core2D.Avalonia.Presenters;
 using Core2D.Avalonia.Views;
 using Core2D.Data;
 using Core2D.Data.Database;
@@ -58,7 +57,6 @@ namespace Core2D.Avalonia
         static App()
         {
             InitializeDesigner();
-            InitializePresenters();
         }
 
         /// <summary>
@@ -74,80 +72,6 @@ namespace Core2D.Avalonia
                     new NewtonsoftTextSerializer(),
                     new PortableXamlSerializer());
             }
-        }
-
-        /// <summary>
-        /// Initializes presenters.
-        /// </summary>
-        static void InitializePresenters()
-        {
-            CachedContentPresenter.Register(typeof(ProjectEditor), () => new Grid());
-            CachedContentPresenter.Register(typeof(XLibrary<ShapeStyle>), () => new Grid());
-            CachedContentPresenter.Register(typeof(XLibrary<XGroup>), () => new Grid());
-            CachedContentPresenter.Register(typeof(ImmutableArray<XLibrary<ShapeStyle>>), () => new Grid());
-            CachedContentPresenter.Register(typeof(ImmutableArray<XLibrary<XGroup>>), () => new Grid());
-            CachedContentPresenter.Register(typeof(ImmutableArray<XDatabase>), () => new Grid());
-            CachedContentPresenter.Register(typeof(ImmutableArray<XContainer>), () => new Grid());
-            CachedContentPresenter.Register(typeof(ImmutableArray<XDocument>), () => new Grid());
-
-            // Views
-            CachedContentPresenter.Register(typeof(BrowserView), () => new BrowserViewControl());
-            CachedContentPresenter.Register(typeof(DashboardView), () => new DashboardViewControl());
-            CachedContentPresenter.Register(typeof(DocumentView), () => new DocumentViewControl());
-            CachedContentPresenter.Register(typeof(EditorView), () => new EditorViewControl());
-
-            // Project
-            CachedContentPresenter.Register(typeof(XProject), () => new ProjectControl());
-            CachedContentPresenter.Register(typeof(XOptions), () => new OptionsControl());
-            CachedContentPresenter.Register(typeof(XDocument), () => new DocumentControl());
-            CachedContentPresenter.Register(typeof(XContainer), () => new ContainerControl());
-            CachedContentPresenter.Register(typeof(XLayer), () => new LayerControl());
-
-            // Data
-            CachedContentPresenter.Register(typeof(ImmutableArray<XColumn>), () => new ColumnsControl());
-            CachedContentPresenter.Register(typeof(XDatabase), () => new DatabaseControl());
-            CachedContentPresenter.Register(typeof(XContext), () => new DataControl());
-            CachedContentPresenter.Register(typeof(ImmutableArray<XProperty>), () => new PropertiesControl());
-            CachedContentPresenter.Register(typeof(XRecord), () => new RecordControl());
-            CachedContentPresenter.Register(typeof(ImmutableArray<XRecord>), () => new RecordsControl());
-
-            // Path
-            CachedContentPresenter.Register(typeof(XArcSegment), () => new ArcSegmentControl());
-            CachedContentPresenter.Register(typeof(XCubicBezierSegment), () => new CubicBezierSegmentControl());
-            CachedContentPresenter.Register(typeof(XLineSegment), () => new LineSegmentControl());
-            CachedContentPresenter.Register(typeof(XPathFigure), () => new PathFigureControl());
-            CachedContentPresenter.Register(typeof(XPathGeometry), () => new PathGeometryControl());
-            CachedContentPresenter.Register(typeof(XPathSize), () => new PathSizeControl());
-            CachedContentPresenter.Register(typeof(XPolyCubicBezierSegment), () => new PolyCubicBezierSegmentControl());
-            CachedContentPresenter.Register(typeof(XPolyLineSegment), () => new PolyLineSegmentControl());
-            CachedContentPresenter.Register(typeof(XPolyQuadraticBezierSegment), () => new PolyQuadraticBezierSegmentControl());
-            CachedContentPresenter.Register(typeof(XQuadraticBezierSegment), () => new QuadraticBezierSegmentControl());
-
-            // Shapes
-            CachedContentPresenter.Register(typeof(XArc), () => new ArcControl());
-            CachedContentPresenter.Register(typeof(XCubicBezier), () => new CubicBezierControl());
-            CachedContentPresenter.Register(typeof(XEllipse), () => new EllipseControl());
-            CachedContentPresenter.Register(typeof(XGroup), () => new GroupControl());
-            CachedContentPresenter.Register(typeof(XImage), () => new ImageControl());
-            CachedContentPresenter.Register(typeof(XLine), () => new LineControl());
-            CachedContentPresenter.Register(typeof(XPath), () => new PathControl());
-            CachedContentPresenter.Register(typeof(XPoint), () => new PointControl());
-            CachedContentPresenter.Register(typeof(XQuadraticBezier), () => new QuadraticBezierControl());
-            CachedContentPresenter.Register(typeof(XRectangle), () => new RectangleControl());
-            CachedContentPresenter.Register(typeof(XText), () => new TextControl());
-
-            // State
-            CachedContentPresenter.Register(typeof(ShapeState), () => new ShapeStateControl());
-
-            // Style
-            CachedContentPresenter.Register(typeof(ArgbColor), () => new ArgbColorControl());
-            CachedContentPresenter.Register(typeof(ArrowStyle), () => new ArrowStyleControl());
-            CachedContentPresenter.Register(typeof(FontStyle), () => new FontStyleControl());
-            CachedContentPresenter.Register(typeof(LineFixedLength), () => new LineFixedLengthControl());
-            CachedContentPresenter.Register(typeof(LineStyle), () => new LineStyleControl());
-            CachedContentPresenter.Register(typeof(ShapeStyle), () => new ShapeStyleControl());
-            CachedContentPresenter.Register(typeof(BaseStyle), () => new StyleControl());
-            CachedContentPresenter.Register(typeof(TextStyle), () => new TextStyleControl());
         }
 
         /// <inheritdoc/>
