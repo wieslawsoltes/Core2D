@@ -17,7 +17,12 @@
                 <Menu Grid.Row="0" HorizontalAlignment="Right">
                     <MenuItem Header="-" Command="{Static Editor:Commands.RemoveShapeCommand}" CommandParameter="{Binding CurrentShape}" IsVisible="{Binding CurrentShape, Converter={Static converters:IsNotNullConverter.Instance}}"/>
                 </Menu>
-                <ListBox Name="shapes" Items="{Binding CurrentLayer.Shapes}" SelectedItem="{Binding CurrentShape, Mode=TwoWay}" Classes="default" Grid.Row="1">
+                <ListBox Name="shapes" Items="{Binding CurrentLayer.Shapes}" SelectedItem="{Binding CurrentShape, Mode=TwoWay}" VirtualizationMode="Simple" Classes="default" Grid.Row="1">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel Orientation="Vertical"/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
                     <ListBox.KeyBindings>
                         <KeyBinding Command="{Static Editor:Commands.RemoveShapeCommand}" CommandParameter="{Binding #shapes.SelectedItem}" Gesture="Delete"/>
                     </ListBox.KeyBindings>
