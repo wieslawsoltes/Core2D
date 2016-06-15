@@ -18,7 +18,12 @@
             <MenuItem Header="+" Command="{Static Editor:Commands.AddRecordCommand}" CommandParameter="{Binding}"/>
             <MenuItem Header="-" Command="{Static Editor:Commands.RemoveRecordCommand}" CommandParameter="{Binding CurrentRecord}" IsVisible="{Binding CurrentRecord, Converter={Static converters:IsNotNullConverter.Instance}}"/>
         </Menu>
-        <ListBox Name="records" Items="{Binding Records}" SelectedItem="{Binding CurrentRecord, Mode=TwoWay}" Grid.Row="2" Classes="default">
+        <ListBox Name="records" Items="{Binding Records}" SelectedItem="{Binding CurrentRecord, Mode=TwoWay}" VirtualizationMode="Simple" Grid.Row="2" Classes="default">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel Orientation="Vertical"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
             <ListBox.KeyBindings>
                 <KeyBinding Command="{Static Editor:Commands.AddRecordCommand}" CommandParameter="{Binding #records.DataContext, Mode=OneWay}" Gesture="Ctrl+N"/>
                 <KeyBinding Command="{Static Editor:Commands.RemoveRecordCommand}" CommandParameter="{Binding #records.SelectedItem}" Gesture="Delete"/>
