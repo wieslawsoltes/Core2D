@@ -27,21 +27,26 @@
             <MenuItem Header="_Open..." Command="{Static Editor:Commands.OpenCommand}"/>
             <Separator/>
             <MenuItem Header="_Recent" Items="{Binding RecentProjects}">
-                <MenuItem.DataTemplates>
-                    <DataTemplate DataType="Recent:RecentFile">
-                        <MenuItem Header="{Binding Name}" Command="{Static Editor:Commands.OpenCommand}" CommandParameter="{Binding Path}"/>
-                    </DataTemplate>
-                </MenuItem.DataTemplates>
+                <MenuItem.Styles>
+                    <Style Selector="MenuItem">
+                        <Setter Property="Header" Value="{Binding Name}"/>
+                        <Setter Property="Command" Value="{Static Editor:Commands.OpenCommand}"/>
+                        <Setter Property="CommandParameter" Value="{Binding Path}"/>
+                    </Style>
+                </MenuItem.Styles>
             </MenuItem>
             <Separator/>
             <MenuItem Header="E_xit" Command="{Static Editor:Commands.ExitCommand}"/>
         </MenuItem>
         <MenuItem Header="_View">
             <MenuItem Header="_Views" Items="{Binding Views}">
-                <MenuItem.DataTemplates>
-                    <DataTemplate DataType="Editor:ViewBase">
-                        <MenuItem Header="{Binding Name}" Command="{Static Editor:Commands.ChangeCurrentViewCommand}" CommandParameter="{Binding}">
-                            <MenuItem.Icon>
+                <MenuItem.Styles>
+                    <Style Selector="MenuItem">
+                        <Setter Property="Header" Value="{Binding Name}"/>
+                        <Setter Property="Command" Value="{Static Editor:Commands.ChangeCurrentViewCommand}"/>
+                        <Setter Property="CommandParameter" Value="{Binding}"/>
+                        <Setter Property="Icon">
+                            <Template>
                                 <CheckBox Name="icon" Classes="menu">
                                     <i:Interaction.Behaviors>
                                         <behaviors:BindTagToVisualRootDataContextBehavior/>
@@ -53,10 +58,10 @@
                                         </MultiBinding>
                                     </CheckBox.IsChecked>
                                 </CheckBox>
-                            </MenuItem.Icon>
-                        </MenuItem>
-                    </DataTemplate>
-                </MenuItem.DataTemplates>
+                            </Template>
+                        </Setter>
+                    </Style>
+                </MenuItem.Styles>
             </MenuItem>
         </MenuItem>
     </Menu>

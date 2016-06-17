@@ -166,10 +166,14 @@
                                     <TextBlock.ContextMenu>
                                         <ContextMenu>
                                             <MenuItem Header="Te_mplate" Items="{Binding #root.Tag.Project.Templates}" Foreground="{StyleResource ThemeForegroundBrush}">
-                                                <MenuItem.DataTemplates>
-                                                    <DataTemplate DataType="Project:XContainer">
-                                                        <MenuItem Header="{Binding Name}" Command="{Static Editor:Commands.ApplyTemplateCommand}" CommandParameter="{Binding}" Foreground="{StyleResource ThemeForegroundBrush}">
-                                                            <MenuItem.Icon>
+                                                <MenuItem.Styles>
+                                                    <Style Selector="MenuItem">
+                                                        <Setter Property="Header" Value="{Binding Name}"/>
+                                                        <Setter Property="Command" Value="{Static Editor:Commands.ApplyTemplateCommand}"/>
+                                                        <Setter Property="CommandParameter" Value="{Binding}"/>
+                                                        <Setter Property="Foreground" Value="{StyleResource ThemeForegroundBrush}"/>
+                                                        <Setter Property="Icon">
+                                                            <Template>
                                                                 <CheckBox Name="icon" Classes="menu">
                                                                     <i:Interaction.Behaviors>
                                                                         <behaviors:BindTagToVisualRootDataContextBehavior/>
@@ -181,10 +185,10 @@
                                                                         </MultiBinding>
                                                                     </CheckBox.IsChecked>
                                                                 </CheckBox>
-                                                            </MenuItem.Icon>
-                                                        </MenuItem>
-                                                    </DataTemplate>
-                                                </MenuItem.DataTemplates>
+                                                            </Template>
+                                                        </Setter>
+                                                    </Style>
+                                                </MenuItem.Styles>
                                             </MenuItem>
                                             <Separator/>
                                             <MenuItem Header="Insert Page Bef_ore" Command="{Static Editor:Commands.InsertPageBeforeCommand}" CommandParameter="{Binding Mode=OneWay}"/>
