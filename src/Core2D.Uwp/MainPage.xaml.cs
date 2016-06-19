@@ -33,6 +33,7 @@ using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media;
 
 namespace Core2D.Uwp
 {
@@ -56,6 +57,11 @@ namespace Core2D.Uwp
         {
             InitializeComponent();
 
+            PanAndZoom.PointerWheelChanged += PanAndZoom_PointerWheelChanged;
+            PanAndZoom.PointerPressed += PanAndZoom_PointerPressed;
+            PanAndZoom.PointerReleased += PanAndZoom_PointerReleased;
+            PanAndZoom.PointerMoved += PanAndZoom_PointerMoved;
+
             _log = default(ILog);
             _fileIO = new UwpFileSystem();
             _writers = new IFileWriter[] { }.ToImmutableArray();
@@ -66,7 +72,26 @@ namespace Core2D.Uwp
             InitializePage();
 
             OnNew();
-            //Commands.ToolLineCommand.Execute(null);
+        }
+
+        private void PanAndZoom_PointerWheelChanged(object sender, PointerRoutedEventArgs e)
+        {
+
+        }
+
+        private void PanAndZoom_PointerPressed(object sender, PointerRoutedEventArgs e)
+        {
+
+        }
+
+        private void PanAndZoom_PointerReleased(object sender, PointerRoutedEventArgs e)
+        {
+
+        }
+
+        private void PanAndZoom_PointerMoved(object sender, PointerRoutedEventArgs e)
+        {
+
         }
 
         /// <summary>
@@ -101,7 +126,7 @@ namespace Core2D.Uwp
             _editor.InitializeCommands();
 
             _editor.GetImageKey = async () => await Task.Run(() => _imagePath);
-            _editor.Invalidate = () => canvas.Invalidate();
+            _editor.Invalidate = () => RendererCanvas.Invalidate();
 
             Commands.OpenCommand =
                 Command<string>.Create(
@@ -120,12 +145,12 @@ namespace Core2D.Uwp
 
         private void InitializeCanvas()
         {
-            canvas.Draw += CanvasControl_Draw;
-            canvas.PointerPressed += CanvasControl_PointerPressed;
-            canvas.PointerReleased += CanvasControl_PointerReleased;
-            canvas.PointerMoved += CanvasControl_PointerMoved;
-            canvas.PointerWheelChanged += CanvasControl_PointerWheelChanged;
-            canvas.SizeChanged += Canvas_SizeChanged;
+            RendererCanvas.Draw += CanvasControl_Draw;
+            RendererCanvas.PointerPressed += CanvasControl_PointerPressed;
+            RendererCanvas.PointerReleased += CanvasControl_PointerReleased;
+            RendererCanvas.PointerMoved += CanvasControl_PointerMoved;
+            RendererCanvas.PointerWheelChanged += CanvasControl_PointerWheelChanged;
+            RendererCanvas.SizeChanged += Canvas_SizeChanged;
         }
 
         private void Canvas_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -331,17 +356,12 @@ namespace Core2D.Uwp
         {
             var color = Color.FromArgb(c.A, c.R, c.G, c.B);
             var rect = Rect2.Create(0, 0, width, height);
-            ds.FillRectangle(
-                (float)rect.X,
-                (float)rect.Y,
-                (float)rect.Width,
-                (float)rect.Height,
-                color);
+            ds.FillRectangle((float)rect.X, (float)rect.Y, (float)rect.Width, (float)rect.Height, color);
         }
 
         private void Draw(CanvasDrawingSession ds)
         {
-            ds.Antialiasing = CanvasAntialiasing.Aliased;
+            ds.Antialiasing = CanvasAntialiasing.Antialiased;
             ds.TextAntialiasing = CanvasTextAntialiasing.Auto;
             ds.Clear(Windows.UI.Colors.Transparent);
 
@@ -350,10 +370,10 @@ namespace Core2D.Uwp
             if (container == null)
                 return;
 
-            var t = Matrix3x2.CreateTranslation((float)_renderer.State.PanX, (float)_renderer.State.PanY);
-            var s = Matrix3x2.CreateScale((float)_renderer.State.ZoomX);
-            var old = ds.Transform;
-            ds.Transform = s * t;
+            //var t = Matrix3x2.CreateTranslation((float)_renderer.State.PanX, (float)_renderer.State.PanY);
+            //var s = Matrix3x2.CreateScale((float)_renderer.State.ZoomX);
+            //var old = ds.Transform;
+            //ds.Transform = s * t;
 
             var template = container.Template;
             if (template != null)
@@ -403,13 +423,13 @@ namespace Core2D.Uwp
                     null);
             }
 
-            ds.Transform = old;
+            //ds.Transform = old;
         }
 
         private void InitializePage()
         {
             Window.Current.CoreWindow.KeyDown += CoreWindow_KeyDown;
-            Loaded += (sender, e) => canvas.Focus(FocusState.Programmatic);
+            Loaded += (sender, e) => RendererCanvas.Focus(FocusState.Programmatic);
             Unloaded += (sender, e) => _log?.Dispose();
         }
 
@@ -582,7 +602,7 @@ namespace Core2D.Uwp
                 {
                     using (var ras = ms.AsRandomAccessStream())
                     {
-                        var bi = await CanvasBitmap.LoadAsync(canvas, ras);
+                        var bi = await CanvasBitmap.LoadAsync(RendererCanvas, ras);
                         _renderer.CacheImage(key, bi);
                         ras.Dispose();
                     }
