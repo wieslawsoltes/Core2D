@@ -86,7 +86,7 @@ namespace Core2D.Uwp
                 //Application = this,
                 Log = log,
                 FileIO = fileIO,
-                CommandManager = new UwpCommandManager(),
+                CommandManager = new CommandManager(),
                 Renderers = new ShapeRenderer[] { _renderer },
                 ProjectFactory = new ProjectFactory(),
                 TextClipboard = new UwpTextClipboard(),
