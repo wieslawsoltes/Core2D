@@ -76,7 +76,17 @@ namespace Core2D.Uwp
 
         private void PanAndZoom_PointerWheelChanged(object sender, PointerRoutedEventArgs e)
         {
+            //var t = Matrix3x2.CreateTranslation(200f, 200f);
+            //var s = Matrix3x2.CreateScale(2f);
+            //var m = s * t;
+            //var mt = new MatrixTransform();
+            //mt.Matrix = new Matrix(m.M11, m.M12, m.M21, m.M22, m.M31, m.M32);
 
+            //_renderer.State.PanX = 200;
+            //_renderer.State.PanY = 200;
+            //_renderer.State.ZoomX = 2;
+
+            //PanAndZoom.Child.RenderTransform = mt;
         }
 
         private void PanAndZoom_PointerPressed(object sender, PointerRoutedEventArgs e)
