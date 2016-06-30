@@ -46,7 +46,7 @@ namespace Core2D.UnitTests
                 actual = e.PropertyName;
             };
 
-            var key = target.AddImageFromFile(@"C:\Images\image.jpg", new byte[] { });
+            var key = target.AddImageFromFile(@"C:/Images/image.jpg", new byte[] { });
 
             Assert.Equal(XProject.ImageEntryNamePrefix + "image.jpg", key);
             Assert.Equal(1, target.Keys.Count());
@@ -65,8 +65,8 @@ namespace Core2D.UnitTests
                 count++;
             };
 
-            var key1 = target.AddImageFromFile(@"C:\Images\image.jpg", new byte[] { });
-            var key2 = target.AddImageFromFile(@"C:\Images\image.jpg", new byte[] { });
+            var key1 = target.AddImageFromFile(@"C:/Images/image.jpg", new byte[] { });
+            var key2 = target.AddImageFromFile(@"C:/Images/image.jpg", new byte[] { });
 
             Assert.Equal(XProject.ImageEntryNamePrefix + "image.jpg", key1);
             Assert.Equal(XProject.ImageEntryNamePrefix + "image.jpg", key2);
