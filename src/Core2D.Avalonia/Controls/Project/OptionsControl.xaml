@@ -4,7 +4,6 @@
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Core2D.Avalonia;assembly=Core2D.Avalonia"
-             xmlns:presenters="clr-namespace:Core2D.Avalonia.Presenters;assembly=Core2D.Avalonia"
              xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D"
@@ -54,22 +53,22 @@
             <TabControl Classes="default">
                 <TabItem Header="PointShape" Classes="property">
                     <ScrollViewer>
-                        <presenters:CachedContentPresenter DataContext="{Binding PointShape}"/>
+                        <ContentControl Content="{Binding PointShape}"/>
                     </ScrollViewer>
                 </TabItem>
                 <TabItem Header="PointStyle" Classes="property">
                     <ScrollViewer>
-                        <presenters:CachedContentPresenter DataContext="{Binding PointStyle}"/>
+                        <ContentControl Content="{Binding PointStyle}"/>
                     </ScrollViewer>
                 </TabItem>
                 <TabItem Header="SelectionStyle" Classes="property">
                     <ScrollViewer>
-                        <presenters:CachedContentPresenter DataContext="{Binding SelectionStyle}"/>
+                        <ContentControl Content="{Binding SelectionStyle}"/>
                     </ScrollViewer>
                 </TabItem>
                 <TabItem Header="HelperStyle" Classes="property">
                     <ScrollViewer>
-                        <presenters:CachedContentPresenter DataContext="{Binding HelperStyle}"/>
+                        <ContentControl Content="{Binding HelperStyle}"/>
                     </ScrollViewer>
                 </TabItem>
             </TabControl>
