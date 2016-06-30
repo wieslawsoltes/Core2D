@@ -1,6 +1,6 @@
 language: csharp
 mono:
-  - latest
+  - nightly
 solution: Core2D.travis-ci.sln
 before_install:
   - mkdir -p .nuget
