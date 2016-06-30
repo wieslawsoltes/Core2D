@@ -2,10 +2,14 @@ language: csharp
 mono:
   - alpha
 solution: Core2D.sln
+before_install:
+  - mkdir -p .nuget
+  - wget -O .nuget/nuget.exe https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
+  - mono .nuget/nuget.exe
 install:
   - sudo apt-get install -y gtk-sharp2
-  - nuget restore Core2D.sln -source "https://ci.appveyor.com/nuget/portable-xaml;https://www.nuget.org/api/v2/;https://www.myget.org/F/avalonia-ci/api/v2;https://www.myget.org/F/xamlbehaviors-nightly/api/v2"
-  - nuget install xunit.runners -Version 1.9.2 -OutputDirectory testrunner
+  - mono .nuget/nuget.exe restore Core2D.sln -source "https://ci.appveyor.com/nuget/portable-xaml;https://www.nuget.org/api/v2/;https://www.myget.org/F/avalonia-ci/api/v2;https://www.myget.org/F/xamlbehaviors-nightly/api/v2"
+  - mono .nuget/nuget.exe install xunit.runners -Version 1.9.2 -OutputDirectory testrunner
 script:
   - xbuild /p:Configuration=Release Core2D.sln
   - mono ./testrunner/xunit.runners.1.9.2/tools/xunit.console.clr4.exe ./tests/Core2D.UnitTests/bin/Release/Core2D.UnitTests.dll
