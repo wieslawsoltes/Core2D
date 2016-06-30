@@ -9,9 +9,8 @@ before_install:
 install:
   - sudo apt-get install -y gtk-sharp2
   - mono .nuget/nuget.exe restore Core2D.travis-ci.sln -source "https://ci.appveyor.com/nuget/portable-xaml;https://www.nuget.org/api/v2/;https://www.myget.org/F/avalonia-ci/api/v2;https://www.myget.org/F/xamlbehaviors-nightly/api/v2"
-  - mono .nuget/nuget.exe install xunit.runners -Version 2.1.0 -OutputDirectory testrunner
+  - mono .nuget/nuget.exe install xunit.runner.console -Version 2.1.0 -OutputDirectory testrunner
 script:
   - xbuild /p:Configuration=Release Core2D.travis-ci.sln
-  - mono ./testrunner/xunit.runners.2.1.0/tools/xunit.console.exe ./tests/Core2D.UnitTests/bin/Release/Core2D.UnitTests.dll
-  - mono ./testrunner/xunit.runners.2.1.0/tools/xunit.console.exe ./tests/FileSystem.DotNetFx.UnitTests/bin/Release/FileSystem.DotNetFx.UnitTests.dll
-  
+  - mono ./testrunner/xunit.runner.console.2.1.0/tools/xunit.console.exe ./tests/Core2D.UnitTests/bin/Release/Core2D.UnitTests.dll
+  - mono ./testrunner/xunit.runner.console.2.1.0/tools/xunit.console.exe ./tests/FileSystem.DotNetFx.UnitTests/bin/Release/FileSystem.DotNetFx.UnitTests.dll
