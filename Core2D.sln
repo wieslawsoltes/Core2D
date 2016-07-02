@@ -67,8 +67,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.Avalonia.Skia", "src
 		{D1F867F7-9029-480D-B1E1-B0BE4658B182} = {D1F867F7-9029-480D-B1E1-B0BE4658B182}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Renderer.SkiaSharp", "dependencies\Renderer.SkiaSharp\Renderer.SkiaSharp.csproj", "{B9547DA2-03F4-4707-8B91-A79461BB0319}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{C7162582-C1FD-45FB-99FD-6770D67B5A21}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Core2D.Shared", "src\Core2D.Shared\Core2D.Shared.shproj", "{702FFCAA-5B6C-41CC-AA78-6C534450F1B2}"
@@ -84,7 +82,6 @@ Global
 		src\Core2D.Shared\Core2D.Shared.projitems*{d1f867f7-9029-480d-b1e1-b0be4658b182}*SharedItemsImports = 4
 		src\Core2D.Shared\Core2D.Shared.projitems*{3bfbd239-8979-480d-b1cb-b763f7c915c8}*SharedItemsImports = 4
 		src\Core2D.Shared\Core2D.Shared.projitems*{68a36926-df55-4f05-9f89-b9ab1463227e}*SharedItemsImports = 4
-		src\Core2D.Shared\Core2D.Shared.projitems*{b9547da2-03f4-4707-8b91-a79461bb0319}*SharedItemsImports = 4
 		src\Core2D.Shared\Core2D.Shared.projitems*{acc2c898-b49b-4ed9-b18c-389f50801b39}*SharedItemsImports = 4
 		src\Core2D.Shared\Core2D.Shared.projitems*{4ee581b0-45f3-4d7e-beae-277abf5f3fdd}*SharedItemsImports = 4
 		src\Core2D.Shared\Core2D.Shared.projitems*{f215adf5-74c1-4e26-9045-b6bbda736092}*SharedItemsImports = 4
@@ -409,18 +406,6 @@ Global
 		{0EEC62CC-3CFF-4185-88D6-BA107F0D8FF4}.Release|x64.Build.0 = Release|x64
 		{0EEC62CC-3CFF-4185-88D6-BA107F0D8FF4}.Release|x86.ActiveCfg = Release|x86
 		{0EEC62CC-3CFF-4185-88D6-BA107F0D8FF4}.Release|x86.Build.0 = Release|x86
-		{B9547DA2-03F4-4707-8B91-A79461BB0319}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{B9547DA2-03F4-4707-8B91-A79461BB0319}.Debug|Any CPU.Build.0 = Debug|x86
-		{B9547DA2-03F4-4707-8B91-A79461BB0319}.Debug|x64.ActiveCfg = Debug|x64
-		{B9547DA2-03F4-4707-8B91-A79461BB0319}.Debug|x64.Build.0 = Debug|x64
-		{B9547DA2-03F4-4707-8B91-A79461BB0319}.Debug|x86.ActiveCfg = Debug|x86
-		{B9547DA2-03F4-4707-8B91-A79461BB0319}.Debug|x86.Build.0 = Debug|x86
-		{B9547DA2-03F4-4707-8B91-A79461BB0319}.Release|Any CPU.ActiveCfg = Release|x86
-		{B9547DA2-03F4-4707-8B91-A79461BB0319}.Release|Any CPU.Build.0 = Release|x86
-		{B9547DA2-03F4-4707-8B91-A79461BB0319}.Release|x64.ActiveCfg = Release|x64
-		{B9547DA2-03F4-4707-8B91-A79461BB0319}.Release|x64.Build.0 = Release|x64
-		{B9547DA2-03F4-4707-8B91-A79461BB0319}.Release|x86.ActiveCfg = Release|x86
-		{B9547DA2-03F4-4707-8B91-A79461BB0319}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -451,7 +436,6 @@ Global
 		{AB31E0E2-9090-4461-84BE-5C5AAA19758F} = {8756F874-0C1B-4AB8-83E0-0BEDA782D212}
 		{E9C30F6F-00DD-494A-8E7C-253A5C76E999} = {8756F874-0C1B-4AB8-83E0-0BEDA782D212}
 		{0EEC62CC-3CFF-4185-88D6-BA107F0D8FF4} = {BC6BAFE6-1735-4549-A7CC-819274780B38}
-		{B9547DA2-03F4-4707-8B91-A79461BB0319} = {9DA997E2-E367-481C-B48A-278274034A26}
 		{702FFCAA-5B6C-41CC-AA78-6C534450F1B2} = {C7162582-C1FD-45FB-99FD-6770D67B5A21}
 	EndGlobalSection
 EndGlobal
