@@ -5,7 +5,6 @@ using Avalonia.Controls;
 using Avalonia.Logging.Serilog;
 using Core2D.Interfaces;
 using FileSystem.DotNetFx;
-using FileWriter.Dxf;
 using FileWriter.Pdf_core;
 using Log.Trace;
 using Serilog;
@@ -32,8 +31,7 @@ namespace Core2D.Avalonia.Cairo
                 ImmutableArray<IFileWriter> writers = 
                     new IFileWriter[] 
                     {
-                        new PdfWriter(),
-                        new DxfWriter()
+                        new PdfWriter()
                     }.ToImmutableArray();
 
                 var app = new App();

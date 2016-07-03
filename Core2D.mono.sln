@@ -4,13 +4,7 @@ VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dependencies", "dependencies", "{9DA997E2-E367-481C-B48A-278274034A26}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileWriter.Dxf", "dependencies\FileWriter.Dxf\FileWriter.Dxf.csproj", "{D40B3BCD-0A26-40BB-960B-9464D248C934}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileWriter.Pdf-core", "dependencies\FileWriter.Pdf-core\FileWriter.Pdf-core.csproj", "{EC0EFA51-83F0-4439-BE9F-FAEBD3418C94}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "netDxf", "dependencies\netDxf\netDxf\netDxf.csproj", "{785380E0-CEB9-4C34-82E5-60D0E33E848E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Renderer.Dxf", "dependencies\Renderer.Dxf\Renderer.Dxf.csproj", "{ACC2C898-B49B-4ED9-B18C-389F50801B39}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Renderer.PdfSharp-core", "dependencies\Renderer.PdfSharp-core\Renderer.PdfSharp-core.csproj", "{34C8EE31-A1FE-4A74-BE36-C1F38BC06FEC}"
 EndProject
@@ -49,13 +43,11 @@ Global
 		src\Core2D.Shared\Core2D.Shared.projitems*{5ed631ec-651f-44d6-a99d-d1202f212656}*SharedItemsImports = 4
 		src\Core2D.Shared\Core2D.Shared.projitems*{d1f867f7-9029-480d-b1e1-b0be4658b182}*SharedItemsImports = 4
 		src\Core2D.Shared\Core2D.Shared.projitems*{68a36926-df55-4f05-9f89-b9ab1463227e}*SharedItemsImports = 4
-		src\Core2D.Shared\Core2D.Shared.projitems*{acc2c898-b49b-4ed9-b18c-389f50801b39}*SharedItemsImports = 4
 		src\Core2D.Shared\Core2D.Shared.projitems*{4ee581b0-45f3-4d7e-beae-277abf5f3fdd}*SharedItemsImports = 4
 		src\Core2D.Shared\Core2D.Shared.projitems*{f215adf5-74c1-4e26-9045-b6bbda736092}*SharedItemsImports = 4
 		src\Core2D.Shared\Core2D.Shared.projitems*{e05f3f7e-2176-43dc-90bb-f5c66cfdb12f}*SharedItemsImports = 4
 		src\Core2D.Shared\Core2D.Shared.projitems*{11e61a53-13d5-4447-8d66-3f328bbfc30a}*SharedItemsImports = 4
 		src\Core2D.Shared\Core2D.Shared.projitems*{ae7ff1b5-abe3-45bf-87cc-44ac580a666a}*SharedItemsImports = 4
-		src\Core2D.Shared\Core2D.Shared.projitems*{d40b3bcd-0a26-40bb-960b-9464d248c934}*SharedItemsImports = 4
 		src\Core2D.Shared\Core2D.Shared.projitems*{34c8ee31-a1fe-4a74-be36-c1f38bc06fec}*SharedItemsImports = 4
 		src\Core2D.Shared\Core2D.Shared.projitems*{1dca99ea-f8fe-4ddd-ab81-bf0380c1b33d}*SharedItemsImports = 4
 	EndGlobalSection
@@ -68,18 +60,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D40B3BCD-0A26-40BB-960B-9464D248C934}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D40B3BCD-0A26-40BB-960B-9464D248C934}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D40B3BCD-0A26-40BB-960B-9464D248C934}.Debug|x64.ActiveCfg = Debug|x64
-		{D40B3BCD-0A26-40BB-960B-9464D248C934}.Debug|x64.Build.0 = Debug|x64
-		{D40B3BCD-0A26-40BB-960B-9464D248C934}.Debug|x86.ActiveCfg = Debug|x86
-		{D40B3BCD-0A26-40BB-960B-9464D248C934}.Debug|x86.Build.0 = Debug|x86
-		{D40B3BCD-0A26-40BB-960B-9464D248C934}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D40B3BCD-0A26-40BB-960B-9464D248C934}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D40B3BCD-0A26-40BB-960B-9464D248C934}.Release|x64.ActiveCfg = Release|x64
-		{D40B3BCD-0A26-40BB-960B-9464D248C934}.Release|x64.Build.0 = Release|x64
-		{D40B3BCD-0A26-40BB-960B-9464D248C934}.Release|x86.ActiveCfg = Release|x86
-		{D40B3BCD-0A26-40BB-960B-9464D248C934}.Release|x86.Build.0 = Release|x86
 		{EC0EFA51-83F0-4439-BE9F-FAEBD3418C94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EC0EFA51-83F0-4439-BE9F-FAEBD3418C94}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC0EFA51-83F0-4439-BE9F-FAEBD3418C94}.Debug|x64.ActiveCfg = Debug|x64
@@ -92,30 +72,6 @@ Global
 		{EC0EFA51-83F0-4439-BE9F-FAEBD3418C94}.Release|x64.Build.0 = Release|x64
 		{EC0EFA51-83F0-4439-BE9F-FAEBD3418C94}.Release|x86.ActiveCfg = Release|x86
 		{EC0EFA51-83F0-4439-BE9F-FAEBD3418C94}.Release|x86.Build.0 = Release|x86
-		{785380E0-CEB9-4C34-82E5-60D0E33E848E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{785380E0-CEB9-4C34-82E5-60D0E33E848E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{785380E0-CEB9-4C34-82E5-60D0E33E848E}.Debug|x64.ActiveCfg = Debug|x64
-		{785380E0-CEB9-4C34-82E5-60D0E33E848E}.Debug|x64.Build.0 = Debug|x64
-		{785380E0-CEB9-4C34-82E5-60D0E33E848E}.Debug|x86.ActiveCfg = Debug|x86
-		{785380E0-CEB9-4C34-82E5-60D0E33E848E}.Debug|x86.Build.0 = Debug|x86
-		{785380E0-CEB9-4C34-82E5-60D0E33E848E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{785380E0-CEB9-4C34-82E5-60D0E33E848E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{785380E0-CEB9-4C34-82E5-60D0E33E848E}.Release|x64.ActiveCfg = Release|x64
-		{785380E0-CEB9-4C34-82E5-60D0E33E848E}.Release|x64.Build.0 = Release|x64
-		{785380E0-CEB9-4C34-82E5-60D0E33E848E}.Release|x86.ActiveCfg = Release|x86
-		{785380E0-CEB9-4C34-82E5-60D0E33E848E}.Release|x86.Build.0 = Release|x86
-		{ACC2C898-B49B-4ED9-B18C-389F50801B39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ACC2C898-B49B-4ED9-B18C-389F50801B39}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ACC2C898-B49B-4ED9-B18C-389F50801B39}.Debug|x64.ActiveCfg = Debug|x64
-		{ACC2C898-B49B-4ED9-B18C-389F50801B39}.Debug|x64.Build.0 = Debug|x64
-		{ACC2C898-B49B-4ED9-B18C-389F50801B39}.Debug|x86.ActiveCfg = Debug|x86
-		{ACC2C898-B49B-4ED9-B18C-389F50801B39}.Debug|x86.Build.0 = Debug|x86
-		{ACC2C898-B49B-4ED9-B18C-389F50801B39}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ACC2C898-B49B-4ED9-B18C-389F50801B39}.Release|Any CPU.Build.0 = Release|Any CPU
-		{ACC2C898-B49B-4ED9-B18C-389F50801B39}.Release|x64.ActiveCfg = Release|x64
-		{ACC2C898-B49B-4ED9-B18C-389F50801B39}.Release|x64.Build.0 = Release|x64
-		{ACC2C898-B49B-4ED9-B18C-389F50801B39}.Release|x86.ActiveCfg = Release|x86
-		{ACC2C898-B49B-4ED9-B18C-389F50801B39}.Release|x86.Build.0 = Release|x86
 		{34C8EE31-A1FE-4A74-BE36-C1F38BC06FEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{34C8EE31-A1FE-4A74-BE36-C1F38BC06FEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{34C8EE31-A1FE-4A74-BE36-C1F38BC06FEC}.Debug|x64.ActiveCfg = Debug|x64
@@ -277,10 +233,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{D40B3BCD-0A26-40BB-960B-9464D248C934} = {9DA997E2-E367-481C-B48A-278274034A26}
 		{EC0EFA51-83F0-4439-BE9F-FAEBD3418C94} = {9DA997E2-E367-481C-B48A-278274034A26}
-		{785380E0-CEB9-4C34-82E5-60D0E33E848E} = {9DA997E2-E367-481C-B48A-278274034A26}
-		{ACC2C898-B49B-4ED9-B18C-389F50801B39} = {9DA997E2-E367-481C-B48A-278274034A26}
 		{34C8EE31-A1FE-4A74-BE36-C1F38BC06FEC} = {9DA997E2-E367-481C-B48A-278274034A26}
 		{E05F3F7E-2176-43DC-90BB-F5C66CFDB12F} = {9DA997E2-E367-481C-B48A-278274034A26}
 		{11E61A53-13D5-4447-8D66-3F328BBFC30A} = {9DA997E2-E367-481C-B48A-278274034A26}
