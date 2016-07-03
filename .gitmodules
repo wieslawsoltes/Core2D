@@ -1,0 +1,3 @@
+[submodule "dependencies/netDxf"]
+	path = dependencies/netDxf
+	url = https://github.com/Core2D/netdxf.git
