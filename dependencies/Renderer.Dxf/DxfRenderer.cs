@@ -139,10 +139,10 @@ namespace Renderer.Dxf
 
         private static short[] Lineweights = { -3, -2, -1, 0, 5, 9, 13, 15, 18, 20, 25, 30, 35, 40, 50, 53, 60, 70, 80, 90, 100, 106, 120, 140, 158, 200, 211 };
 
-        private static short ToLineweight(double thickness)
+        private static Lineweight ToLineweight(double thickness)
         {
             short lineweight = (short)(thickness / LineweightFactor);
-            return Lineweights.OrderBy(x => Math.Abs((long)x - lineweight)).First();
+            return (Lineweight)Lineweights.OrderBy(x => Math.Abs((long)x - lineweight)).First();
         }
 
         private static AciColor ToColor(Core2D.Style.ArgbColor color) => new AciColor(color.R, color.G, color.B);
@@ -262,7 +262,7 @@ namespace Renderer.Dxf
                 dxfLine.Layer = layer;
                 dxfLine.Color = stroke;
                 dxfLine.Transparency.Value = strokeTansparency;
-                dxfLine.Lineweight.Value = lineweight;
+                dxfLine.Lineweight = lineweight;
 
                 dxf.AddEntity(dxfLine);
             }
@@ -347,7 +347,7 @@ namespace Renderer.Dxf
                 dxfEllipse.Layer = layer;
                 dxfEllipse.Color = stroke;
                 dxfEllipse.Transparency.Value = strokeTansparency;
-                dxfEllipse.Lineweight.Value = lineweight;
+                dxfEllipse.Lineweight = lineweight;
 
                 dxf.AddEntity(dxfEllipse);
             }
@@ -696,7 +696,7 @@ namespace Renderer.Dxf
                 dxfEllipse.Layer = _currentLayer;
                 dxfEllipse.Color = stroke;
                 dxfEllipse.Transparency.Value = strokeTansparency;
-                dxfEllipse.Lineweight.Value = lineweight;
+                dxfEllipse.Lineweight = lineweight;
 
                 dxf.AddEntity(dxfEllipse);
             }
@@ -753,7 +753,7 @@ namespace Renderer.Dxf
                 dxfSpline.Layer = _currentLayer;
                 dxfSpline.Color = stroke;
                 dxfSpline.Transparency.Value = strokeTansparency;
-                dxfSpline.Lineweight.Value = lineweight;
+                dxfSpline.Lineweight = lineweight;
 
                 dxf.AddEntity(dxfSpline);
             }
@@ -808,7 +808,7 @@ namespace Renderer.Dxf
                 dxfSpline.Layer = _currentLayer;
                 dxfSpline.Color = stroke;
                 dxfSpline.Transparency.Value = strokeTansparency;
-                dxfSpline.Lineweight.Value = lineweight;
+                dxfSpline.Lineweight = lineweight;
 
                 dxf.AddEntity(dxfSpline);
             }
@@ -1020,7 +1020,7 @@ namespace Renderer.Dxf
                     entity.Layer = _currentLayer;
                     entity.Color = stroke;
                     entity.Transparency.Value = strokeTansparency;
-                    entity.Lineweight.Value = lineweight;
+                    entity.Lineweight = lineweight;
                     dxf.AddEntity(entity);
                 }
             }
