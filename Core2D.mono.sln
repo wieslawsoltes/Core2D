@@ -36,6 +36,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.UnitTests", "tests\C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileSystem.DotNetFx.UnitTests", "tests\FileSystem.DotNetFx.UnitTests\FileSystem.DotNetFx.UnitTests.csproj", "{E9C30F6F-00DD-494A-8E7C-253A5C76E999}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PdfSharp", "dependencies\PDFsharp\src\PdfSharp\PdfSharp.csproj", "{5A6055BC-BF86-4FDD-9F62-0109DB7A303B}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		src\Core2D.Shared\Core2D.Shared.projitems*{ec0efa51-83f0-4439-be9f-faebd3418c94}*SharedItemsImports = 4
@@ -228,6 +230,18 @@ Global
 		{E9C30F6F-00DD-494A-8E7C-253A5C76E999}.Release|x64.Build.0 = Release|x64
 		{E9C30F6F-00DD-494A-8E7C-253A5C76E999}.Release|x86.ActiveCfg = Release|x86
 		{E9C30F6F-00DD-494A-8E7C-253A5C76E999}.Release|x86.Build.0 = Release|x86
+		{5A6055BC-BF86-4FDD-9F62-0109DB7A303B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A6055BC-BF86-4FDD-9F62-0109DB7A303B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A6055BC-BF86-4FDD-9F62-0109DB7A303B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{5A6055BC-BF86-4FDD-9F62-0109DB7A303B}.Debug|x64.Build.0 = Debug|Any CPU
+		{5A6055BC-BF86-4FDD-9F62-0109DB7A303B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5A6055BC-BF86-4FDD-9F62-0109DB7A303B}.Debug|x86.Build.0 = Debug|Any CPU
+		{5A6055BC-BF86-4FDD-9F62-0109DB7A303B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A6055BC-BF86-4FDD-9F62-0109DB7A303B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A6055BC-BF86-4FDD-9F62-0109DB7A303B}.Release|x64.ActiveCfg = Release|Any CPU
+		{5A6055BC-BF86-4FDD-9F62-0109DB7A303B}.Release|x64.Build.0 = Release|Any CPU
+		{5A6055BC-BF86-4FDD-9F62-0109DB7A303B}.Release|x86.ActiveCfg = Release|Any CPU
+		{5A6055BC-BF86-4FDD-9F62-0109DB7A303B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -247,5 +261,6 @@ Global
 		{5ED631EC-651F-44D6-A99D-D1202F212656} = {BC6BAFE6-1735-4549-A7CC-819274780B38}
 		{AB31E0E2-9090-4461-84BE-5C5AAA19758F} = {8756F874-0C1B-4AB8-83E0-0BEDA782D212}
 		{E9C30F6F-00DD-494A-8E7C-253A5C76E999} = {8756F874-0C1B-4AB8-83E0-0BEDA782D212}
+		{5A6055BC-BF86-4FDD-9F62-0109DB7A303B} = {9DA997E2-E367-481C-B48A-278274034A26}
 	EndGlobalSection
 EndGlobal

@@ -41,14 +41,11 @@ The core library and editor are portable and should work on all platforms where 
   * Portable.Xaml
   * Newtonsoft.Json
   * CsvHelper
-  * netdxf (Currently using `git submodule` as `NuGet` version is outdated.)
 * WPF
-  * PDFsharp-wpf (`PDFsharp` core does not implement `XGraphicsPath.AddArc` method.)
   * Xceed.Wpf.AvalonDock
   * Xceed.Products.Wpf.Toolkit.AvalonDock
   * System.Windows.Interactivity.WPF
 * Avalonia
-  * PDFsharp (`PDFsharp` core for `Avalonia` non-windows builds.)
   * Avalonia
   * Avalonia.Desktop
   * Avalonia.Skia.Desktop
@@ -75,11 +72,13 @@ The core library and editor are portable and should work on all platforms where 
 ### Other Dependencies
 
 * [Portable .NET library for reading/writing xaml files.](https://github.com/cwensley/Portable.Xaml) Needed for Xaml support.
-* [.net dxf Reader-Writer](http://netdxf.codeplex.com/)  Needed for `DXF` support. Run `git submodule update --init --recursive` in project directory.
 * [xUnit.net unit testing tool for the .NET Framework.](https://github.com/xunit/xunit) Needed to run tests.
 * [GTK# for .NET](http://www.mono-project.com/download/#download-win) Needed for Gtk on Windows.
-
-For building `Core2D` mirror repository is used for [.net dxf Reader-Writer](https://github.com/Core2D/netdxf)
+* [.net dxf Reader-Writer](http://netdxf.codeplex.com/) Needed for `DXF` support. Run `git submodule update --init --recursive` in project directory.
+* [PDFsharp A .NET library for processing PDF] Needed for `PDF` support. Run `git submodule update --init --recursive` in project directory.
+* For building `Core2D` mirror repository is used for [.net dxf Reader-Writer](https://github.com/Core2D/netdxf).
+* For building `Core2D` mirror repository is used for [PDFsharp](https://github.com/Core2D/PDFsharp). 
+* `PDFsharp` core is used for `Avalonia` and non-windows builds and `PDFsharp-wpf` is used for WPF version (`PDFsharp` core does not implement `XGraphicsPath.AddArc` method.).
 
 ## Resources
 
