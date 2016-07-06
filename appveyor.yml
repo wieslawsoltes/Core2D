@@ -7,9 +7,7 @@ configuration:
 before_build:
 - cmd: >-
     git submodule update --init
-
     appveyor DownloadFile https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
-
     restore.cmd
 build:
   project: Core2D.sln
@@ -17,27 +15,16 @@ build:
 after_build:
 - cmd: >-
     7z a Core2D-%CONFIGURATION%-%APPVEYOR_BUILD_VERSION%.zip %APPVEYOR_BUILD_FOLDER%\src\Core2D\bin\%CONFIGURATION%\*
-
     7z a Core2D.Avalonia-%CONFIGURATION%-%APPVEYOR_BUILD_VERSION%.zip %APPVEYOR_BUILD_FOLDER%\src\Core2D.Avalonia\bin\%CONFIGURATION%\*
-
     7z a Core2D.Avalonia.Cairo-%CONFIGURATION%-%APPVEYOR_BUILD_VERSION%.zip %APPVEYOR_BUILD_FOLDER%\src\Core2D.Avalonia.Cairo\bin\%CONFIGURATION%\*
-
     7z a Core2D.Avalonia.Direct2D-%CONFIGURATION%-%APPVEYOR_BUILD_VERSION%.zip %APPVEYOR_BUILD_FOLDER%\src\Core2D.Avalonia.Direct2D\bin\%CONFIGURATION%\*
-
-    7z a Core2D.Avalonia.Skia-%CONFIGURATION%-%APPVEYOR_BUILD_VERSION%.zip %APPVEYOR_BUILD_FOLDER%\src\Core2D.Avalonia.Direct2D\bin\%CONFIGURATION%\*
-
+    7z a Core2D.Avalonia.Skia-%CONFIGURATION%-%APPVEYOR_BUILD_VERSION%.zip %APPVEYOR_BUILD_FOLDER%\src\Core2D.Avalonia.Skia\bin\%CONFIGURATION%\*
     7z a Core2D.Wpf-%CONFIGURATION%-%APPVEYOR_BUILD_VERSION%.zip %APPVEYOR_BUILD_FOLDER%\src\Core2D.Wpf\bin\%CONFIGURATION%\*
-
     appveyor PushArtifact Core2D-%CONFIGURATION%-%APPVEYOR_BUILD_VERSION%.zip
-
     appveyor PushArtifact Core2D.Avalonia-%CONFIGURATION%-%APPVEYOR_BUILD_VERSION%.zip
-
     appveyor PushArtifact Core2D.Avalonia.Cairo-%CONFIGURATION%-%APPVEYOR_BUILD_VERSION%.zip
-
     appveyor PushArtifact Core2D.Avalonia.Direct2D-%CONFIGURATION%-%APPVEYOR_BUILD_VERSION%.zip
-
     appveyor PushArtifact Core2D.Avalonia.Skia-%CONFIGURATION%-%APPVEYOR_BUILD_VERSION%.zip
-
     appveyor PushArtifact Core2D.Wpf-%CONFIGURATION%-%APPVEYOR_BUILD_VERSION%.zip
 deploy:
 - provider: GitHub
