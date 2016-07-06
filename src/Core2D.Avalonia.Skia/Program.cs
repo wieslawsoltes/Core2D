@@ -24,7 +24,7 @@ namespace Core2D.Avalonia.Skia
         /// <param name="args">The program arguments.</param>
         private static void Main(string[] args)
         {
-            InitializeLogging();
+            //InitializeLogging();
 
             using (ILog log = new TraceLog())
             {
