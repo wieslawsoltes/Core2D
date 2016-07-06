@@ -24,7 +24,7 @@ after_build:
 
     7z a Core2D.Avalonia.Direct2D-%CONFIGURATION%-%APPVEYOR_BUILD_VERSION%.zip %APPVEYOR_BUILD_FOLDER%\src\Core2D.Avalonia.Direct2D\bin\%CONFIGURATION%\*
 
-    7z a Core2D.Avalonia.Skia-%CONFIGURATION%-%APPVEYOR_BUILD_VERSION%.zip %APPVEYOR_BUILD_FOLDER%\src\Core2D.Avalonia.Skia\bin\%CONFIGURATION%\*
+    7z a Core2D.Avalonia.Skia.x86-%CONFIGURATION%-%APPVEYOR_BUILD_VERSION%.zip %APPVEYOR_BUILD_FOLDER%\src\Core2D.Avalonia.Skia\bin\x86\%CONFIGURATION%\*
 
     7z a Core2D.Wpf-%CONFIGURATION%-%APPVEYOR_BUILD_VERSION%.zip %APPVEYOR_BUILD_FOLDER%\src\Core2D.Wpf\bin\%CONFIGURATION%\*
 
@@ -36,7 +36,7 @@ after_build:
 
     appveyor PushArtifact Core2D.Avalonia.Direct2D-%CONFIGURATION%-%APPVEYOR_BUILD_VERSION%.zip
 
-    appveyor PushArtifact Core2D.Avalonia.Skia-%CONFIGURATION%-%APPVEYOR_BUILD_VERSION%.zip
+    appveyor PushArtifact Core2D.Avalonia.Skia.x86-%CONFIGURATION%-%APPVEYOR_BUILD_VERSION%.zip
 
     appveyor PushArtifact Core2D.Wpf-%CONFIGURATION%-%APPVEYOR_BUILD_VERSION%.zip
 deploy:
