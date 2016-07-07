@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System.Collections.Immutable;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Logging.Serilog;
@@ -10,7 +11,6 @@ using FileWriter.Emf;
 using FileWriter.Pdf_core;
 using Log.Trace;
 using Serilog;
-using System.Collections.Immutable;
 
 namespace Core2D.Avalonia.Direct2D
 {
