@@ -1,5 +1,10 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
+using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 using Core2D.Data;
 using Core2D.Data.Database;
 using Core2D.Math;
@@ -7,11 +12,6 @@ using Core2D.Math.Arc;
 using Core2D.Renderer;
 using Core2D.Shapes;
 using Core2D.Style;
-using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Drawing;
-using System.Drawing.Drawing2D;
 
 namespace Renderer.WinForms
 {
@@ -190,7 +190,6 @@ namespace Renderer.WinForms
         {
             var _gfx = dc as Graphics;
 
-            Brush fillLine = ToSolidBrush(line.Style.Fill);
             Pen strokeLine = ToPen(line.Style, _scaleToPage);
 
             Brush fillStartArrow = ToSolidBrush(line.Style.StartArrowStyle.Fill);
@@ -347,7 +346,6 @@ namespace Renderer.WinForms
 
             _gfx.DrawLine(strokeLine, pt1, pt2);
 
-            fillLine.Dispose();
             strokeLine.Dispose();
 
             fillStartArrow.Dispose();
