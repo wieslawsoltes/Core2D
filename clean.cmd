@@ -21,6 +21,9 @@ rmdir /Q /S dependencies\FileWriter.Pdf-core\obj
 rmdir /Q /S dependencies\FileWriter.Pdf-wpf\bin
 rmdir /Q /S dependencies\FileWriter.Pdf-wpf\obj
 
+rmdir /Q /S dependencies\FileWriter.PdfSkiaSharp\bin
+rmdir /Q /S dependencies\FileWriter.PdfSkiaSharp\obj
+
 rmdir /Q /S dependencies\Log.Trace\bin
 rmdir /Q /S dependencies\Log.Trace\obj
 
@@ -35,6 +38,9 @@ rmdir /Q /S dependencies\Renderer.PdfSharp-core\obj
 
 rmdir /Q /S dependencies\Renderer.PdfSharp-wpf\bin
 rmdir /Q /S dependencies\Renderer.PdfSharp-wpf\obj
+
+rmdir /Q /S dependencies\Renderer.SkiaSharp\bin
+rmdir /Q /S dependencies\Renderer.SkiaSharp\obj
 
 rmdir /Q /S dependencies\Renderer.WinForms\bin
 rmdir /Q /S dependencies\Renderer.WinForms\obj
