@@ -3644,7 +3644,7 @@ namespace Core2D.Editor
         /// <param name="view">The view instance.</param>
         public void OnChangeCurrentView(ViewBase view)
         {
-            if (_currentView != view)
+            if (view != null && _currentView != view)
             {
                 CurrentView = view;
             }
