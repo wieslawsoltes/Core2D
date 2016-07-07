@@ -1,13 +1,5 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Core2D.Data;
-using Core2D.Data.Database;
-using Core2D.Math.Arc;
-using Core2D.Path;
-using Core2D.Project;
-using Core2D.Renderer;
-using Core2D.Shapes;
-using Core2D.Style;
 using System;
 using System.Collections.Immutable;
 using System.Diagnostics;
@@ -16,6 +8,14 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using Core2D.Data;
+using Core2D.Data.Database;
+using Core2D.Math.Arc;
+using Core2D.Path;
+using Core2D.Project;
+using Core2D.Renderer;
+using Core2D.Shapes;
+using Core2D.Style;
 
 namespace Renderer.Wpf
 {
