@@ -18,38 +18,34 @@ namespace Core2D.Avalonia.Presenters
 
         public CachedContentPresenter()
         {
-            this.GetObservable(DataContextProperty).Subscribe((value) => SetContent(value));
+            this.GetObservable(DataContextProperty).Subscribe((value) => Content = value);
         }
 
-        public Control GetControl(Type type)
+        protected override IControl CreateChild()
         {
-            Control control;
-            _cache.TryGetValue(type, out control);
-            if (control == null)
+            var content = Content;
+            if (content != null)
             {
-                Func<Control> createInstance;
-                _factory.TryGetValue(type, out createInstance);
-                control = createInstance?.Invoke();
-                if (control != null)
+                Type type = content.GetType();
+                Control control;
+                _cache.TryGetValue(type, out control);
+                if (control == null)
                 {
-                    _cache[type] = control;
+                    Func<Control> createInstance;
+                    _factory.TryGetValue(type, out createInstance);
+                    control = createInstance?.Invoke();
+                    if (control != null)
+                    {
+                        _cache[type] = control;
+                    }
+                    else
+                    {
+                        throw new Exception($"Can not find factory method for type: {type}");
+                    }
                 }
-                else
-                {
-                    throw new Exception($"Can not find factory method for type: {type}");
-                }
+                return control;
             }
-            return control;
-        }
-
-        public void SetContent(object value)
-        {
-            Control control = null;
-            if (value != null)
-            {
-                control = GetControl(value.GetType());
-            }
-            this.Content = control;
+            return base.CreateChild();
         }
     }
 }
