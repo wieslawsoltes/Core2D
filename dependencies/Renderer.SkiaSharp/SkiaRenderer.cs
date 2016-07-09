@@ -169,7 +169,7 @@ namespace Renderer.SkiaSharp
                     break;
             }
 
-            // TODO: Add dashes lines support: https://github.com/mono/SkiaSharp/issues/47
+            // TODO: Add dashed line support: https://github.com/mono/SkiaSharp/issues/47
             /*
             if (style.Dashes != null)
             {
