@@ -700,7 +700,7 @@ namespace Renderer.Avalonia
 
             var _dc = dc as PM.DrawingContext;
 
-            var g = path.Geometry.ToGeometry();
+            var g = path.Geometry.ToGeometry(dx, dy);
 
             var brush = ToBrush(path.Style.Fill);
             var pen = ToPen(path.Style, _scaleToPage);
