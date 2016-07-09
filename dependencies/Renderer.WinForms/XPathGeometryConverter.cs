@@ -41,24 +41,24 @@ namespace Renderer.WinForms
                     {
                         var cubicBezierSegment = segment as Core2D.Path.Segments.XCubicBezierSegment;
                         gp.AddBezier(
-                            scale(startPoint.X),
-                            scale(startPoint.Y),
-                            scale(cubicBezierSegment.Point1.X),
-                            scale(cubicBezierSegment.Point1.Y),
-                            scale(cubicBezierSegment.Point2.X),
-                            scale(cubicBezierSegment.Point2.Y),
-                            scale(cubicBezierSegment.Point3.X),
-                            scale(cubicBezierSegment.Point3.Y));
+                            scale(startPoint.X + dx),
+                            scale(startPoint.Y + dy),
+                            scale(cubicBezierSegment.Point1.X + dx),
+                            scale(cubicBezierSegment.Point1.Y + dy),
+                            scale(cubicBezierSegment.Point2.X + dx),
+                            scale(cubicBezierSegment.Point2.Y + dy),
+                            scale(cubicBezierSegment.Point3.X + dx),
+                            scale(cubicBezierSegment.Point3.Y + dy));
                         startPoint = cubicBezierSegment.Point3;
                     }
                     else if (segment is Core2D.Path.Segments.XLineSegment)
                     {
                         var lineSegment = segment as Core2D.Path.Segments.XLineSegment;
                         gp.AddLine(
-                            scale(startPoint.X),
-                            scale(startPoint.Y),
-                            scale(lineSegment.Point.X),
-                            scale(lineSegment.Point.Y));
+                            scale(startPoint.X + dx),
+                            scale(startPoint.Y + dy),
+                            scale(lineSegment.Point.X + dx),
+                            scale(lineSegment.Point.Y + dy));
                         startPoint = lineSegment.Point;
                     }
                     else if (segment is Core2D.Path.Segments.XPolyCubicBezierSegment)
@@ -67,14 +67,14 @@ namespace Renderer.WinForms
                         if (polyCubicBezierSegment.Points.Count >= 3)
                         {
                             gp.AddBezier(
-                                scale(startPoint.X),
-                                scale(startPoint.Y),
-                                scale(polyCubicBezierSegment.Points[0].X),
-                                scale(polyCubicBezierSegment.Points[0].Y),
-                                scale(polyCubicBezierSegment.Points[1].X),
-                                scale(polyCubicBezierSegment.Points[1].Y),
-                                scale(polyCubicBezierSegment.Points[2].X),
-                                scale(polyCubicBezierSegment.Points[2].Y));
+                                scale(startPoint.X + dx),
+                                scale(startPoint.Y + dy),
+                                scale(polyCubicBezierSegment.Points[0].X + dx),
+                                scale(polyCubicBezierSegment.Points[0].Y + dy),
+                                scale(polyCubicBezierSegment.Points[1].X + dx),
+                                scale(polyCubicBezierSegment.Points[1].Y + dy),
+                                scale(polyCubicBezierSegment.Points[2].X + dx),
+                                scale(polyCubicBezierSegment.Points[2].Y + dy));
                         }
 
                         if (polyCubicBezierSegment.Points.Count > 3
@@ -83,14 +83,14 @@ namespace Renderer.WinForms
                             for (int i = 3; i < polyCubicBezierSegment.Points.Count; i += 3)
                             {
                                 gp.AddBezier(
-                                    scale(polyCubicBezierSegment.Points[i - 1].X),
-                                    scale(polyCubicBezierSegment.Points[i - 1].Y),
-                                    scale(polyCubicBezierSegment.Points[i].X),
-                                    scale(polyCubicBezierSegment.Points[i].Y),
-                                    scale(polyCubicBezierSegment.Points[i + 1].X),
-                                    scale(polyCubicBezierSegment.Points[i + 1].Y),
-                                    scale(polyCubicBezierSegment.Points[i + 2].X),
-                                    scale(polyCubicBezierSegment.Points[i + 2].Y));
+                                    scale(polyCubicBezierSegment.Points[i - 1].X + dx),
+                                    scale(polyCubicBezierSegment.Points[i - 1].Y + dy),
+                                    scale(polyCubicBezierSegment.Points[i].X + dx),
+                                    scale(polyCubicBezierSegment.Points[i].Y + dy),
+                                    scale(polyCubicBezierSegment.Points[i + 1].X + dx),
+                                    scale(polyCubicBezierSegment.Points[i + 1].Y + dy),
+                                    scale(polyCubicBezierSegment.Points[i + 2].X + dx),
+                                    scale(polyCubicBezierSegment.Points[i + 2].Y + dy));
                             }
                         }
 
@@ -102,10 +102,10 @@ namespace Renderer.WinForms
                         if (polyLineSegment.Points.Count >= 1)
                         {
                             gp.AddLine(
-                                scale(startPoint.X),
-                                scale(startPoint.Y),
-                                scale(polyLineSegment.Points[0].X),
-                                scale(polyLineSegment.Points[0].Y));
+                                scale(startPoint.X + dx),
+                                scale(startPoint.Y + dy),
+                                scale(polyLineSegment.Points[0].X + dx),
+                                scale(polyLineSegment.Points[0].Y + dy));
                         }
 
                         if (polyLineSegment.Points.Count > 1)
@@ -113,10 +113,10 @@ namespace Renderer.WinForms
                             for (int i = 1; i < polyLineSegment.Points.Count; i++)
                             {
                                 gp.AddLine(
-                                    scale(polyLineSegment.Points[i - 1].X),
-                                    scale(polyLineSegment.Points[i - 1].Y),
-                                    scale(polyLineSegment.Points[i].X),
-                                    scale(polyLineSegment.Points[i].Y));
+                                    scale(polyLineSegment.Points[i - 1].X + dx),
+                                    scale(polyLineSegment.Points[i - 1].Y + dy),
+                                    scale(polyLineSegment.Points[i].X + dx),
+                                    scale(polyLineSegment.Points[i].Y + dy));
                             }
                         }
 
