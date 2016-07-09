@@ -648,90 +648,64 @@ namespace Renderer.SkiaSharp
         /// <inheritdoc/>
         public override void Draw(object dc, XText text, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
         {
-            /*
             var canvas = dc as SKCanvas;
 
             var tbind = text.BindText(db, r);
             if (string.IsNullOrEmpty(tbind))
                 return;
 
-            var options = new XPdfFontOptions(PdfFontEncoding.Unicode);
-
-            var fontStyle = XFontStyle.Regular;
+            SKTypefaceStyle style = SKTypefaceStyle.Normal;
             if (text.Style.TextStyle.FontStyle != null)
             {
                 if (text.Style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Bold))
                 {
-                    fontStyle |= XFontStyle.Bold;
+                    style |= SKTypefaceStyle.Bold;
                 }
 
                 if (text.Style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Italic))
                 {
-                    fontStyle |= XFontStyle.Italic;
+                    style |= SKTypefaceStyle.Italic;
                 }
 
                 if (text.Style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Underline))
                 {
-                    fontStyle |= XFontStyle.Underline;
+                    // TODO: Add support for FontStyleFlags.Underline
                 }
 
                 if (text.Style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Strikeout))
                 {
-                    fontStyle |= XFontStyle.Strikeout;
+                    // TODO: Add support for FontStyleFlags.Strikeout
                 }
             }
 
-            var font = new XFont(
-                text.Style.TextStyle.FontName,
-                _scaleToPage(text.Style.TextStyle.FontSize),
-                fontStyle,
-                options);
-
-            var rect = Rect2.Create(
-                text.TopLeft,
-                text.BottomRight,
-                dx, dy);
-
-            var srect = new XRect(
-                _scaleToPage(rect.X),
-                _scaleToPage(rect.Y),
-                _scaleToPage(rect.Width),
-                _scaleToPage(rect.Height));
-
-            var format = new XStringFormat();
-            switch (text.Style.TextStyle.TextHAlignment)
+            using (var pen = ToSKPaintBrush(text.Style.Stroke))
+            using (var tf = SKTypeface.FromFamilyName(text.Style.TextStyle.FontName, style))
             {
-                case TextHAlignment.Left:
-                    format.Alignment = XStringAlignment.Near;
-                    break;
-                case TextHAlignment.Center:
-                    format.Alignment = XStringAlignment.Center;
-                    break;
-                case TextHAlignment.Right:
-                    format.Alignment = XStringAlignment.Far;
-                    break;
-            }
+                pen.TextEncoding = SKTextEncoding.Utf16;
+                pen.TextSize = _scaleToPage(text.Style.TextStyle.FontSize * 72.0 / 96.0);
 
-            switch (text.Style.TextStyle.TextVAlignment)
-            {
-                case TextVAlignment.Top:
-                    format.LineAlignment = XLineAlignment.Near;
-                    break;
-                case TextVAlignment.Center:
-                    format.LineAlignment = XLineAlignment.Center;
-                    break;
-                case TextVAlignment.Bottom:
-                    format.LineAlignment = XLineAlignment.Far;
-                    break;
-            }
+                /*
+                switch (text.Style.TextStyle.TextHAlignment)
+                {
+                    case TextHAlignment.Left:
+                        pen.TextAlign = SKTextAlign.Left;
+                        break;
+                    case TextHAlignment.Center:
+                        pen.TextAlign = SKTextAlign.Center;
+                        break;
+                    case TextHAlignment.Right:
+                        pen.TextAlign = SKTextAlign.Right;
+                        break;
+                }
+                */
 
-            canvas.DrawString(
-                tbind,
-                font,
-                ToSKPaintBrush(text.Style.Stroke),
-                srect,
-                format);
-            */
+                var rect = CreateRect(text.TopLeft, text.BottomRight, dx, dy, _scaleToPage);
+                SKRect bounds = new SKRect();
+                float height = pen.MeasureText(tbind, ref bounds);
+                SKPoint origin = GetTextOrigin(text.Style, ref rect, ref bounds);
+
+                canvas.DrawText(tbind, origin.X, height / 3f + origin.Y, pen);
+            }
         }
 
         /// <inheritdoc/>
