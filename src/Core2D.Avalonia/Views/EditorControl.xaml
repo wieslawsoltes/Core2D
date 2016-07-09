@@ -139,13 +139,12 @@
                         </TabStrip.ItemsPanel>
                         <TabStrip.Styles>
                             <Style Selector="TabStripItem">
-                                <Setter Property="Height" Value="20"/>
                                 <Setter Property="Background" Value="{StyleResource ThemeBackgroundBrush}"/>
                                 <Setter Property="BorderBrush" Value="{StyleResource ThemeBackgroundBrush}"/>
                                 <Setter Property="Foreground" Value="{StyleResource ThemeForegroundBrush}"/>
                                 <Setter Property="BorderThickness" Value="0"/>
-                                <Setter Property="Margin" Value="0 0 0 -1"/>
-                                <Setter Property="Padding" Value="4 0 4 0"/>
+                                <Setter Property="Margin" Value="0 0 0 0"/>
+                                <Setter Property="Padding" Value="5 1 5 1"/>
                                 <Setter Property="FontSize" Value="12"/>
                             </Style>
                             <Style Selector="TabStripItem:pointerover">
@@ -159,7 +158,7 @@
                         </TabStrip.Styles>
                         <TabStrip.DataTemplates>
                             <DataTemplate DataType="Project:XContainer">
-                                <TextBlock Name="root" Text="{Binding Name}" Margin="2">
+                                <TextBlock Name="root" Text="{Binding Name}">
                                     <i:Interaction.Behaviors>
                                         <behaviors:BindTagToVisualRootDataContextBehavior/>
                                     </i:Interaction.Behaviors>
