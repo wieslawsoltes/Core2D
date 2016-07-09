@@ -215,18 +215,20 @@ namespace Renderer.Avalonia
                     {
                         pt1 = MatrixHelper.TransformPoint(t1, new P.Point(x1 - (float)sizeX1, y1));
                         var rect = new Rect2(x1 - sizeX1, y1 - radiusY1, sizeX1, sizeY1);
-                        var d = dc.PushPreTransform(t1);
-                        DrawRectangleInternal(dc, fillStartArrow, strokeStartArrow, sas.IsStroked, sas.IsFilled, ref rect);
-                        d.Dispose();
+                        using (var d = dc.PushPreTransform(t1))
+                        {
+                            DrawRectangleInternal(dc, fillStartArrow, strokeStartArrow, sas.IsStroked, sas.IsFilled, ref rect);
+                        }
                     }
                     break;
                 case ArrowType.Ellipse:
                     {
                         pt1 = MatrixHelper.TransformPoint(t1, new P.Point(x1 - (float)sizeX1, y1));
-                        var d = dc.PushPreTransform(t1);
-                        var rect = new Rect2(x1 - sizeX1, y1 - radiusY1, sizeX1, sizeY1);
-                        DrawEllipseInternal(dc, fillStartArrow, strokeStartArrow, sas.IsStroked, sas.IsFilled, ref rect);
-                        d.Dispose();
+                        using (var d = dc.PushPreTransform(t1))
+                        {
+                            var rect = new Rect2(x1 - sizeX1, y1 - radiusY1, sizeX1, sizeY1);
+                            DrawEllipseInternal(dc, fillStartArrow, strokeStartArrow, sas.IsStroked, sas.IsFilled, ref rect);
+                        }
                     }
                     break;
                 case ArrowType.Arrow:
@@ -267,18 +269,20 @@ namespace Renderer.Avalonia
                     {
                         pt2 = MatrixHelper.TransformPoint(t2, new P.Point(x2 - (float)sizeX2, y2));
                         var rect = new Rect2(x2 - sizeX2, y2 - radiusY2, sizeX2, sizeY2);
-                        var d = dc.PushPreTransform(t2);
-                        DrawRectangleInternal(dc, fillEndArrow, strokeEndArrow, eas.IsStroked, eas.IsFilled, ref rect);
-                        d.Dispose();
+                        using (var d = dc.PushPreTransform(t2))
+                        {
+                            DrawRectangleInternal(dc, fillEndArrow, strokeEndArrow, eas.IsStroked, eas.IsFilled, ref rect);
+                        }
                     }
                     break;
                 case ArrowType.Ellipse:
                     {
                         pt2 = MatrixHelper.TransformPoint(t2, new P.Point(x2 - (float)sizeX2, y2));
-                        var d = dc.PushPreTransform(t2);
-                        var rect = new Rect2(x2 - sizeX2, y2 - radiusY2, sizeX2, sizeY2);
-                        DrawEllipseInternal(dc, fillEndArrow, strokeEndArrow, eas.IsStroked, eas.IsFilled, ref rect);
-                        d.Dispose();
+                        using (var d = dc.PushPreTransform(t2))
+                        {
+                            var rect = new Rect2(x2 - sizeX2, y2 - radiusY2, sizeX2, sizeY2);
+                            DrawEllipseInternal(dc, fillEndArrow, strokeEndArrow, eas.IsStroked, eas.IsFilled, ref rect);
+                        }
                     }
                     break;
                 case ArrowType.Arrow:
