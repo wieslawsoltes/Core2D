@@ -153,7 +153,7 @@ namespace Renderer.SkiaSharp
             var paint = new SKPaint();
             paint.IsAntialias = true;
             paint.IsStroke = true;
-            paint.StrokeWidth = (float)style.Thickness; // TODO: Convert from presentation units.
+            paint.StrokeWidth = (float)(style.Thickness * 72.0 / 96.0);
             paint.Color = ToSKColor(style.Stroke);
 
             switch (style.LineCap)
