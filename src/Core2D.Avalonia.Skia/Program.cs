@@ -7,7 +7,7 @@ using Avalonia.Logging.Serilog;
 using Core2D.Interfaces;
 using FileSystem.DotNetFx;
 using FileWriter.Dxf;
-using FileWriter.Pdf_core;
+using FileWriter.PdfSkiaSharp;
 using Log.Trace;
 using Serilog;
 

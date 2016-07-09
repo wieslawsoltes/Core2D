@@ -245,9 +245,9 @@
       <Project>{D40B3BCD-0A26-40BB-960B-9464D248C934}</Project>
       <Name>FileWriter.Dxf</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\dependencies\FileWriter.Pdf-core\FileWriter.Pdf-core.csproj">
-      <Project>{EC0EFA51-83F0-4439-BE9F-FAEBD3418C94}</Project>
-      <Name>FileWriter.Pdf-core</Name>
+    <ProjectReference Include="..\..\dependencies\FileWriter.PdfSkiaSharp\FileWriter.PdfSkiaSharp.csproj">
+      <Project>{c934ba25-608b-42fa-b766-42efad7da6ff}</Project>
+      <Name>FileWriter.PdfSkiaSharp</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\dependencies\Log.Trace\Log.Trace.csproj">
       <Project>{68a36926-df55-4f05-9f89-b9ab1463227e}</Project>
