@@ -209,7 +209,7 @@ namespace Renderer.SkiaSharp
                 canvas.DrawLine(p0.X, p0.Y, p1.X, p1.Y, pen);
             }
         }
-        
+
         private static void DrawRectangleInternal(SKCanvas canvas, SKPaint brush, SKPaint pen, bool isStroked, bool isFilled, ref SKRect rect)
         {
             if (isFilled)
@@ -449,7 +449,7 @@ namespace Renderer.SkiaSharp
             var rect = CreateRect(
                 rectangle.TopLeft,
                 rectangle.BottomRight,
-                dx, dy, 
+                dx, dy,
                 _scaleToPage);
 
             DrawRectangleInternal(canvas, brush, pen, rectangle.IsStroked, rectangle.IsFilled, ref rect);
