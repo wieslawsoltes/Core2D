@@ -14,17 +14,12 @@ namespace Renderer.Wpf
     /// </summary>
     public static class PathGeometryConverter
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="points"></param>
-        /// <returns></returns>
-        public static IList<XPoint> ToXPoints(this IList<Point> points)
+        private static IList<XPoint> ToXPoints(this IList<Point> points, double dx, double dy)
         {
             var xpoints = new List<XPoint>();
             foreach (var point in points)
             {
-                xpoints.Add(XPoint.Create(point.X, point.Y));
+                xpoints.Add(XPoint.Create(point.X + dx, point.Y + dy));
             }
             return xpoints;
         }
@@ -33,8 +28,10 @@ namespace Renderer.Wpf
         /// 
         /// </summary>
         /// <param name="pg"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
         /// <returns></returns>
-        public static XPathGeometry ToXPathGeometry(this PathGeometry pg)
+        public static XPathGeometry ToXPathGeometry(this PathGeometry pg, double dx, double dy)
         {
             var geometry = XPathGeometry.Create(
                 new List<XPathFigure>(),
@@ -45,7 +42,7 @@ namespace Renderer.Wpf
             foreach (var pf in pg.Figures)
             {
                 context.BeginFigure(
-                    XPoint.Create(pf.StartPoint.X, pf.StartPoint.Y),
+                    XPoint.Create(pf.StartPoint.X + dx, pf.StartPoint.Y + dy),
                     pf.IsFilled,
                     pf.IsClosed);
 
@@ -55,7 +52,7 @@ namespace Renderer.Wpf
                     {
                         var arcSegment = segment as ArcSegment;
                         context.ArcTo(
-                            XPoint.Create(arcSegment.Point.X, arcSegment.Point.Y),
+                            XPoint.Create(arcSegment.Point.X + dx, arcSegment.Point.Y + dy),
                             XPathSize.Create(arcSegment.Size.Width, arcSegment.Size.Height),
                             arcSegment.RotationAngle,
                             arcSegment.IsLargeArc,
@@ -67,9 +64,9 @@ namespace Renderer.Wpf
                     {
                         var cubicBezierSegment = segment as BezierSegment;
                         context.CubicBezierTo(
-                            XPoint.Create(cubicBezierSegment.Point1.X, cubicBezierSegment.Point1.Y),
-                            XPoint.Create(cubicBezierSegment.Point2.X, cubicBezierSegment.Point2.Y),
-                            XPoint.Create(cubicBezierSegment.Point3.X, cubicBezierSegment.Point3.Y),
+                            XPoint.Create(cubicBezierSegment.Point1.X + dx, cubicBezierSegment.Point1.Y + dy),
+                            XPoint.Create(cubicBezierSegment.Point2.X + dx, cubicBezierSegment.Point2.Y + dy),
+                            XPoint.Create(cubicBezierSegment.Point3.X + dx, cubicBezierSegment.Point3.Y + dy),
                             cubicBezierSegment.IsStroked,
                             cubicBezierSegment.IsSmoothJoin);
                     }
@@ -77,7 +74,7 @@ namespace Renderer.Wpf
                     {
                         var lineSegment = segment as LineSegment;
                         context.LineTo(
-                            XPoint.Create(lineSegment.Point.X, lineSegment.Point.Y),
+                            XPoint.Create(lineSegment.Point.X + dx, lineSegment.Point.Y + dy),
                             lineSegment.IsStroked,
                             lineSegment.IsSmoothJoin);
                     }
@@ -85,7 +82,7 @@ namespace Renderer.Wpf
                     {
                         var polyCubicBezierSegment = segment as PolyBezierSegment;
                         context.PolyCubicBezierTo(
-                            ToXPoints(polyCubicBezierSegment.Points),
+                            ToXPoints(polyCubicBezierSegment.Points, dx, dy),
                             polyCubicBezierSegment.IsStroked,
                             polyCubicBezierSegment.IsSmoothJoin);
                     }
@@ -93,7 +90,7 @@ namespace Renderer.Wpf
                     {
                         var polyLineSegment = segment as PolyLineSegment;
                         context.PolyLineTo(
-                            ToXPoints(polyLineSegment.Points),
+                            ToXPoints(polyLineSegment.Points, dx, dy),
                             polyLineSegment.IsStroked,
                             polyLineSegment.IsSmoothJoin);
                     }
@@ -101,7 +98,7 @@ namespace Renderer.Wpf
                     {
                         var polyQuadraticSegment = segment as PolyQuadraticBezierSegment;
                         context.PolyQuadraticBezierTo(
-                            ToXPoints(polyQuadraticSegment.Points),
+                            ToXPoints(polyQuadraticSegment.Points, dx, dy),
                             polyQuadraticSegment.IsStroked,
                             polyQuadraticSegment.IsSmoothJoin);
                     }
@@ -109,8 +106,8 @@ namespace Renderer.Wpf
                     {
                         var quadraticBezierSegment = segment as QuadraticBezierSegment;
                         context.QuadraticBezierTo(
-                            XPoint.Create(quadraticBezierSegment.Point1.X, quadraticBezierSegment.Point1.Y),
-                            XPoint.Create(quadraticBezierSegment.Point2.X, quadraticBezierSegment.Point2.Y),
+                            XPoint.Create(quadraticBezierSegment.Point1.X + dx, quadraticBezierSegment.Point1.Y + dy),
+                            XPoint.Create(quadraticBezierSegment.Point2.X + dx, quadraticBezierSegment.Point2.Y + dy),
                             quadraticBezierSegment.IsStroked,
                             quadraticBezierSegment.IsSmoothJoin);
                     }
@@ -133,7 +130,7 @@ namespace Renderer.Wpf
         {
             var g = Geometry.Parse(source);
             var pg = PathGeometry.CreateFromGeometry(g);
-            return ToXPathGeometry(pg);
+            return ToXPathGeometry(pg, 0.0, 0.0);
         }
     }
 }
