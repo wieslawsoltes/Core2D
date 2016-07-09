@@ -231,6 +231,151 @@ namespace Renderer.PdfSharp_core
             }
         }
 
+        private static void DrawLineCurveInternal(XGraphics gfx, XPen pen, bool isStroked, ref XPoint pt1, ref XPoint pt2, double curvature, Core2D.Style.CurveOrientation orientation, Core2D.Shape.PointAlignment pt1a, Core2D.Shape.PointAlignment pt2a)
+        {
+            if (isStroked)
+            {
+                var path = new XGraphicsPath();
+                double p1x = pt1.X;
+                double p1y = pt1.Y;
+                double p2x = pt2.X;
+                double p2y = pt2.Y;
+                Core2D.Shapes.XLineExtensions.GetCurvedLineBezierControlPoints(orientation, curvature, pt1a, pt2a, ref p1x, ref p1y, ref p2x, ref p2y);
+                path.AddBezier(
+                    pt1.X, pt1.Y,
+                    p1x, p1y,
+                    p2x, p2y,
+                    pt2.X, pt2.Y);
+                gfx.DrawPath(pen, path);
+            }
+        }
+
+        private void DrawLineArrowsInternal(XGraphics _gfx, Core2D.Shapes.XLine line, double dx, double dy, out XPoint pt1, out XPoint pt2)
+        {
+            XSolidBrush fillStartArrow = ToXSolidBrush(line.Style.StartArrowStyle.Fill);
+            XPen strokeStartArrow = ToXPen(line.Style.StartArrowStyle, _scaleToPage);
+
+            XSolidBrush fillEndArrow = ToXSolidBrush(line.Style.EndArrowStyle.Fill);
+            XPen strokeEndArrow = ToXPen(line.Style.EndArrowStyle, _scaleToPage);
+
+            double _x1 = line.Start.X + dx;
+            double _y1 = line.Start.Y + dy;
+            double _x2 = line.End.X + dx;
+            double _y2 = line.End.Y + dy;
+
+            Core2D.Shapes.XLineExtensions.GetMaxLength(line, ref _x1, ref _y1, ref _x2, ref _y2);
+
+            double x1 = _scaleToPage(_x1);
+            double y1 = _scaleToPage(_y1);
+            double x2 = _scaleToPage(_x2);
+            double y2 = _scaleToPage(_y2);
+
+            var sas = line.Style.StartArrowStyle;
+            var eas = line.Style.EndArrowStyle;
+            double a1 = Math.Atan2(y1 - y2, x1 - x2) * 180.0 / Math.PI;
+            double a2 = Math.Atan2(y2 - y1, x2 - x1) * 180.0 / Math.PI;
+
+            var t1 = new XMatrix();
+            var c1 = new XPoint(x1, y1);
+            t1.RotateAtPrepend(a1, c1);
+
+            var t2 = new XMatrix();
+            var c2 = new XPoint(x2, y2);
+            t2.RotateAtPrepend(a2, c2);
+
+            double radiusX1 = sas.RadiusX;
+            double radiusY1 = sas.RadiusY;
+            double sizeX1 = 2.0 * radiusX1;
+            double sizeY1 = 2.0 * radiusY1;
+
+            switch (sas.ArrowType)
+            {
+                default:
+                case Core2D.Style.ArrowType.None:
+                    {
+                        pt1 = new XPoint(x1, y1);
+                    }
+                    break;
+                case Core2D.Style.ArrowType.Rectangle:
+                    {
+                        pt1 = t1.Transform(new XPoint(x1 - sizeX1, y1));
+                        var rect = new XRect(x1 - sizeX1, y1 - radiusY1, sizeX1, sizeY1);
+                        _gfx.Save();
+                        _gfx.RotateAtTransform(a1, c1);
+                        DrawRectangleInternal(_gfx, fillStartArrow, strokeStartArrow, sas.IsStroked, sas.IsFilled, ref rect);
+                        _gfx.Restore();
+                    }
+                    break;
+                case Core2D.Style.ArrowType.Ellipse:
+                    {
+                        pt1 = t1.Transform(new XPoint(x1 - sizeX1, y1));
+                        _gfx.Save();
+                        _gfx.RotateAtTransform(a1, c1);
+                        var rect = new XRect(x1 - sizeX1, y1 - radiusY1, sizeX1, sizeY1);
+                        DrawEllipseInternal(_gfx, fillStartArrow, strokeStartArrow, sas.IsStroked, sas.IsFilled, ref rect);
+                        _gfx.Restore();
+                    }
+                    break;
+                case Core2D.Style.ArrowType.Arrow:
+                    {
+                        pt1 = t1.Transform(new XPoint(x1, y1));
+                        var p11 = t1.Transform(new XPoint(x1 - sizeX1, y1 + sizeY1));
+                        var p21 = t1.Transform(new XPoint(x1, y1));
+                        var p12 = t1.Transform(new XPoint(x1 - sizeX1, y1 - sizeY1));
+                        var p22 = t1.Transform(new XPoint(x1, y1));
+                        DrawLineInternal(_gfx, strokeStartArrow, sas.IsStroked, ref p11, ref p21);
+                        DrawLineInternal(_gfx, strokeStartArrow, sas.IsStroked, ref p12, ref p22);
+                    }
+                    break;
+            }
+
+            double radiusX2 = eas.RadiusX;
+            double radiusY2 = eas.RadiusY;
+            double sizeX2 = 2.0 * radiusX2;
+            double sizeY2 = 2.0 * radiusY2;
+
+            switch (eas.ArrowType)
+            {
+                default:
+                case Core2D.Style.ArrowType.None:
+                    {
+                        pt2 = new XPoint(x2, y2);
+                    }
+                    break;
+                case Core2D.Style.ArrowType.Rectangle:
+                    {
+                        pt2 = t2.Transform(new XPoint(x2 - sizeX2, y2));
+                        var rect = new XRect(x2 - sizeX2, y2 - radiusY2, sizeX2, sizeY2);
+                        _gfx.Save();
+                        _gfx.RotateAtTransform(a2, c2);
+                        DrawRectangleInternal(_gfx, fillEndArrow, strokeEndArrow, eas.IsStroked, eas.IsFilled, ref rect);
+                        _gfx.Restore();
+                    }
+                    break;
+                case Core2D.Style.ArrowType.Ellipse:
+                    {
+                        pt2 = t2.Transform(new XPoint(x2 - sizeX2, y2));
+                        _gfx.Save();
+                        _gfx.RotateAtTransform(a2, c2);
+                        var rect = new XRect(x2 - sizeX2, y2 - radiusY2, sizeX2, sizeY2);
+                        DrawEllipseInternal(_gfx, fillEndArrow, strokeEndArrow, eas.IsStroked, eas.IsFilled, ref rect);
+                        _gfx.Restore();
+                    }
+                    break;
+                case Core2D.Style.ArrowType.Arrow:
+                    {
+                        pt2 = t2.Transform(new XPoint(x2, y2));
+                        var p11 = t2.Transform(new XPoint(x2 - sizeX2, y2 + sizeY2));
+                        var p21 = t2.Transform(new XPoint(x2, y2));
+                        var p12 = t2.Transform(new XPoint(x2 - sizeX2, y2 - sizeY2));
+                        var p22 = t2.Transform(new XPoint(x2, y2));
+                        DrawLineInternal(_gfx, strokeEndArrow, eas.IsStroked, ref p11, ref p21);
+                        DrawLineInternal(_gfx, strokeEndArrow, eas.IsStroked, ref p12, ref p22);
+                    }
+                    break;
+            }
+        }
+
         private static void DrawRectangleInternal(XGraphics gfx, XSolidBrush brush, XPen pen, bool isStroked, bool isFilled, ref XRect rect)
         {
             if (isStroked && isFilled)
@@ -332,134 +477,25 @@ namespace Renderer.PdfSharp_core
             var _gfx = dc as XGraphics;
 
             XPen strokeLine = ToXPen(line.Style, _scaleToPage);
+            XPoint pt1, pt2;
 
-            XSolidBrush fillStartArrow = ToXSolidBrush(line.Style.StartArrowStyle.Fill);
-            XPen strokeStartArrow = ToXPen(line.Style.StartArrowStyle, _scaleToPage);
+            DrawLineArrowsInternal(_gfx, line, dx, dy, out pt1, out pt2);
 
-            XSolidBrush fillEndArrow = ToXSolidBrush(line.Style.EndArrowStyle.Fill);
-            XPen strokeEndArrow = ToXPen(line.Style.EndArrowStyle, _scaleToPage);
-
-            double _x1 = line.Start.X + dx;
-            double _y1 = line.Start.Y + dy;
-            double _x2 = line.End.X + dx;
-            double _y2 = line.End.Y + dy;
-
-            Core2D.Shapes.XLineExtensions.GetMaxLength(line, ref _x1, ref _y1, ref _x2, ref _y2);
-
-            double x1 = _scaleToPage(_x1);
-            double y1 = _scaleToPage(_y1);
-            double x2 = _scaleToPage(_x2);
-            double y2 = _scaleToPage(_y2);
-
-            var sas = line.Style.StartArrowStyle;
-            var eas = line.Style.EndArrowStyle;
-            double a1 = Math.Atan2(y1 - y2, x1 - x2) * 180.0 / Math.PI;
-            double a2 = Math.Atan2(y2 - y1, x2 - x1) * 180.0 / Math.PI;
-
-            var t1 = new XMatrix();
-            var c1 = new XPoint(x1, y1);
-            t1.RotateAtPrepend(a1, c1);
-
-            var t2 = new XMatrix();
-            var c2 = new XPoint(x2, y2);
-            t2.RotateAtPrepend(a2, c2);
-
-            XPoint pt1;
-            XPoint pt2;
-
-            double radiusX1 = sas.RadiusX;
-            double radiusY1 = sas.RadiusY;
-            double sizeX1 = 2.0 * radiusX1;
-            double sizeY1 = 2.0 * radiusY1;
-
-            switch (sas.ArrowType)
+            if (line.Style.LineStyle.IsCurved)
             {
-                default:
-                case Core2D.Style.ArrowType.None:
-                    {
-                        pt1 = new XPoint(x1, y1);
-                    }
-                    break;
-                case Core2D.Style.ArrowType.Rectangle:
-                    {
-                        pt1 = t1.Transform(new XPoint(x1 - sizeX1, y1));
-                        var rect = new XRect(x1 - sizeX1, y1 - radiusY1, sizeX1, sizeY1);
-                        _gfx.Save();
-                        _gfx.RotateAtTransform(a1, c1);
-                        DrawRectangleInternal(_gfx, fillStartArrow, strokeStartArrow, sas.IsStroked, sas.IsFilled, ref rect);
-                        _gfx.Restore();
-                    }
-                    break;
-                case Core2D.Style.ArrowType.Ellipse:
-                    {
-                        pt1 = t1.Transform(new XPoint(x1 - sizeX1, y1));
-                        _gfx.Save();
-                        _gfx.RotateAtTransform(a1, c1);
-                        var rect = new XRect(x1 - sizeX1, y1 - radiusY1, sizeX1, sizeY1);
-                        DrawEllipseInternal(_gfx, fillStartArrow, strokeStartArrow, sas.IsStroked, sas.IsFilled, ref rect);
-                        _gfx.Restore();
-                    }
-                    break;
-                case Core2D.Style.ArrowType.Arrow:
-                    {
-                        pt1 = t1.Transform(new XPoint(x1, y1));
-                        var p11 = t1.Transform(new XPoint(x1 - sizeX1, y1 + sizeY1));
-                        var p21 = t1.Transform(new XPoint(x1, y1));
-                        var p12 = t1.Transform(new XPoint(x1 - sizeX1, y1 - sizeY1));
-                        var p22 = t1.Transform(new XPoint(x1, y1));
-                        DrawLineInternal(_gfx, strokeStartArrow, sas.IsStroked, ref p11, ref p21);
-                        DrawLineInternal(_gfx, strokeStartArrow, sas.IsStroked, ref p12, ref p22);
-                    }
-                    break;
+                DrawLineCurveInternal(
+                    _gfx,
+                    strokeLine, line.IsStroked,
+                    ref pt1, ref pt2,
+                    line.Style.LineStyle.Curvature,
+                    line.Style.LineStyle.CurveOrientation,
+                    line.Start.Alignment,
+                    line.End.Alignment);
             }
-
-            double radiusX2 = eas.RadiusX;
-            double radiusY2 = eas.RadiusY;
-            double sizeX2 = 2.0 * radiusX2;
-            double sizeY2 = 2.0 * radiusY2;
-
-            switch (eas.ArrowType)
+            else
             {
-                default:
-                case Core2D.Style.ArrowType.None:
-                    {
-                        pt2 = new XPoint(x2, y2);
-                    }
-                    break;
-                case Core2D.Style.ArrowType.Rectangle:
-                    {
-                        pt2 = t2.Transform(new XPoint(x2 - sizeX2, y2));
-                        var rect = new XRect(x2 - sizeX2, y2 - radiusY2, sizeX2, sizeY2);
-                        _gfx.Save();
-                        _gfx.RotateAtTransform(a2, c2);
-                        DrawRectangleInternal(_gfx, fillEndArrow, strokeEndArrow, eas.IsStroked, eas.IsFilled, ref rect);
-                        _gfx.Restore();
-                    }
-                    break;
-                case Core2D.Style.ArrowType.Ellipse:
-                    {
-                        pt2 = t2.Transform(new XPoint(x2 - sizeX2, y2));
-                        _gfx.Save();
-                        _gfx.RotateAtTransform(a2, c2);
-                        var rect = new XRect(x2 - sizeX2, y2 - radiusY2, sizeX2, sizeY2);
-                        DrawEllipseInternal(_gfx, fillEndArrow, strokeEndArrow, eas.IsStroked, eas.IsFilled, ref rect);
-                        _gfx.Restore();
-                    }
-                    break;
-                case Core2D.Style.ArrowType.Arrow:
-                    {
-                        pt2 = t2.Transform(new XPoint(x2, y2));
-                        var p11 = t2.Transform(new XPoint(x2 - sizeX2, y2 + sizeY2));
-                        var p21 = t2.Transform(new XPoint(x2, y2));
-                        var p12 = t2.Transform(new XPoint(x2 - sizeX2, y2 - sizeY2));
-                        var p22 = t2.Transform(new XPoint(x2, y2));
-                        DrawLineInternal(_gfx, strokeEndArrow, eas.IsStroked, ref p11, ref p21);
-                        DrawLineInternal(_gfx, strokeEndArrow, eas.IsStroked, ref p12, ref p22);
-                    }
-                    break;
+                DrawLineInternal(_gfx, strokeLine, line.IsStroked, ref pt1, ref pt2);
             }
-
-            _gfx.DrawLine(strokeLine, pt1, pt2);
         }
 
         /// <inheritdoc/>
