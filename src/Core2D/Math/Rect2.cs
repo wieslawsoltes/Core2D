@@ -38,7 +38,7 @@ namespace Core2D.Math
         /// <summary>
         /// 
         /// </summary>
-        public double Right => Width + X;
+        public double Right => X + Width;
 
         /// <summary>
         /// 
