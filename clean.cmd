@@ -6,6 +6,12 @@ rmdir /Q /S dependencies\netDxf\netDxf\obj
 rmdir /Q /S dependencies\netDxf\TestDxfDocument\bin
 rmdir /Q /S dependencies\netDxf\TestDxfDocument\obj
 
+rmdir /Q /S dependencies\PDFsharp\src\PdfSharp\bin
+rmdir /Q /S dependencies\PDFsharp\src\PdfSharp\obj
+
+rmdir /Q /S dependencies\PDFsharp\src\PdfSharp-wpf\bin
+rmdir /Q /S dependencies\PDFsharp\src\PdfSharp-wpf\obj
+
 rmdir /Q /S dependencies\FileSystem.DotNetFx\bin
 rmdir /Q /S dependencies\FileSystem.DotNetFx\obj
 
