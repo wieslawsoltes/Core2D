@@ -850,24 +850,15 @@ namespace Renderer.PdfSharp_core
                 _scaleToPage(rect.Width),
                 _scaleToPage(rect.Height));
 
-            if (image.IsStroked && image.IsFilled)
+            if (image.IsStroked || image.IsFilled)
             {
-                _gfx.DrawRectangle(
-                    ToXPen(image.Style, _scaleToPage),
+                DrawRectangleInternal(
+                    _gfx,
                     ToXSolidBrush(image.Style.Fill),
-                    srect);
-            }
-            else if (image.IsStroked && !image.IsFilled)
-            {
-                _gfx.DrawRectangle(
                     ToXPen(image.Style, _scaleToPage),
-                    srect);
-            }
-            else if (!image.IsStroked && image.IsFilled)
-            {
-                _gfx.DrawRectangle(
-                    ToXSolidBrush(image.Style.Fill),
-                    srect);
+                    image.IsStroked,
+                    image.IsFilled,
+                    ref srect);
             }
 
             if (_enableImageCache
