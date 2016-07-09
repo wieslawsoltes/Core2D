@@ -15,17 +15,12 @@ namespace Renderer.Wpf
     /// </summary>
     public static class XPathGeometryConverter
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="xpoints"></param>
-        /// <returns></returns>
-        private static IList<Point> ToPoints(this IList<XPoint> xpoints)
+        private static IList<Point> ToPoints(this IList<XPoint> xpoints, double dx, double dy)
         {
             var points = new List<Point>();
             foreach (var point in xpoints)
             {
-                points.Add(new Point(point.X, point.Y));
+                points.Add(new Point(point.X + dx, point.Y + dy));
             }
             return points;
         }
@@ -34,8 +29,10 @@ namespace Renderer.Wpf
         /// 
         /// </summary>
         /// <param name="xpg"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
         /// <returns></returns>
-        public static StreamGeometry ToStreamGeometry(this XPathGeometry xpg)
+        public static StreamGeometry ToStreamGeometry(this XPathGeometry xpg, double dx, double dy)
         {
             var sg = new StreamGeometry();
             var sgc = sg.Open();
@@ -53,7 +50,7 @@ namespace Renderer.Wpf
                     {
                         var arcSegment = segment as XArcSegment;
                         sgc.ArcTo(
-                            new Point(arcSegment.Point.X, arcSegment.Point.Y),
+                            new Point(arcSegment.Point.X + dx, arcSegment.Point.Y + dy),
                             new Size(arcSegment.Size.Width, arcSegment.Size.Height),
                             arcSegment.RotationAngle,
                             arcSegment.IsLargeArc,
@@ -65,9 +62,9 @@ namespace Renderer.Wpf
                     {
                         var cubicBezierSegment = segment as XCubicBezierSegment;
                         sgc.BezierTo(
-                            new Point(cubicBezierSegment.Point1.X, cubicBezierSegment.Point1.Y),
-                            new Point(cubicBezierSegment.Point2.X, cubicBezierSegment.Point2.Y),
-                            new Point(cubicBezierSegment.Point3.X, cubicBezierSegment.Point3.Y),
+                            new Point(cubicBezierSegment.Point1.X + dx, cubicBezierSegment.Point1.Y + dy),
+                            new Point(cubicBezierSegment.Point2.X + dx, cubicBezierSegment.Point2.Y + dy),
+                            new Point(cubicBezierSegment.Point3.X + dx, cubicBezierSegment.Point3.Y + dy),
                             cubicBezierSegment.IsStroked,
                             cubicBezierSegment.IsSmoothJoin);
                     }
@@ -75,7 +72,7 @@ namespace Renderer.Wpf
                     {
                         var lineSegment = segment as XLineSegment;
                         sgc.LineTo(
-                            new Point(lineSegment.Point.X, lineSegment.Point.Y),
+                            new Point(lineSegment.Point.X + dx, lineSegment.Point.Y + dy),
                             lineSegment.IsStroked,
                             lineSegment.IsSmoothJoin);
                     }
@@ -83,7 +80,7 @@ namespace Renderer.Wpf
                     {
                         var polyCubicBezierSegment = segment as XPolyCubicBezierSegment;
                         sgc.PolyBezierTo(
-                            ToPoints(polyCubicBezierSegment.Points),
+                            ToPoints(polyCubicBezierSegment.Points, dx, dy),
                             polyCubicBezierSegment.IsStroked,
                             polyCubicBezierSegment.IsSmoothJoin);
                     }
@@ -91,7 +88,7 @@ namespace Renderer.Wpf
                     {
                         var polyLineSegment = segment as XPolyLineSegment;
                         sgc.PolyLineTo(
-                            ToPoints(polyLineSegment.Points),
+                            ToPoints(polyLineSegment.Points, dx, dy),
                             polyLineSegment.IsStroked,
                             polyLineSegment.IsSmoothJoin);
                     }
@@ -99,7 +96,7 @@ namespace Renderer.Wpf
                     {
                         var polyQuadraticSegment = segment as XPolyQuadraticBezierSegment;
                         sgc.PolyQuadraticBezierTo(
-                            ToPoints(polyQuadraticSegment.Points),
+                            ToPoints(polyQuadraticSegment.Points, dx, dy),
                             polyQuadraticSegment.IsStroked,
                             polyQuadraticSegment.IsSmoothJoin);
                     }
@@ -107,8 +104,8 @@ namespace Renderer.Wpf
                     {
                         var quadraticBezierSegment = segment as XQuadraticBezierSegment;
                         sgc.QuadraticBezierTo(
-                            new Point(quadraticBezierSegment.Point1.X, quadraticBezierSegment.Point1.Y),
-                            new Point(quadraticBezierSegment.Point2.X, quadraticBezierSegment.Point2.Y),
+                            new Point(quadraticBezierSegment.Point1.X + dx, quadraticBezierSegment.Point1.Y + dy),
+                            new Point(quadraticBezierSegment.Point2.X + dx, quadraticBezierSegment.Point2.Y + dy),
                             quadraticBezierSegment.IsStroked,
                             quadraticBezierSegment.IsSmoothJoin);
                     }
@@ -120,7 +117,6 @@ namespace Renderer.Wpf
             }
 
             sgc.Close();
-
             sg.FillRule = xpg.FillRule == XFillRule.Nonzero ? FillRule.Nonzero : FillRule.EvenOdd;
             sg.Freeze();
 
@@ -131,10 +127,12 @@ namespace Renderer.Wpf
         /// 
         /// </summary>
         /// <param name="xpg"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
         /// <returns></returns>
-        public static PathGeometry ToPathGeometry(this XPathGeometry xpg)
+        public static PathGeometry ToPathGeometry(this XPathGeometry xpg, double dx, double dy)
         {
-            var sg = ToStreamGeometry(xpg);
+            var sg = ToStreamGeometry(xpg, dx, dy);
             return PathGeometry.CreateFromGeometry(sg);
         }
 
@@ -145,7 +143,7 @@ namespace Renderer.Wpf
         /// <returns></returns>
         public static string ToSource(this XPathGeometry xpg)
         {
-            var sg = ToStreamGeometry(xpg);
+            var sg = ToStreamGeometry(xpg, 0.0, 0.0);
             return sg.ToString(System.Globalization.CultureInfo.InvariantCulture);
         }
 

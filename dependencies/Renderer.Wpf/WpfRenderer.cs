@@ -1003,7 +1003,7 @@ namespace Renderer.Wpf
             }
             else
             {
-                sg = path.Geometry.ToStreamGeometry();
+                sg = path.Geometry.ToStreamGeometry(dx, dy);
 
                 // TODO: Enable XPath caching, cache is disabled to enable PathHelper to work.
                 //_pathCache.Set(path, Tuple.Create(path.Geometry, sg, style));
