@@ -110,7 +110,7 @@ namespace Renderer.SkiaSharp
         {
             float width = (float)container.Template.Width;
             float height = (float)container.Template.Height;
-            using (SKCanvas gfx = pdf.BeginPage(width, height))
+            using (SKCanvas canvas = pdf.BeginPage(width, height))
             {
                 // Calculate x and y page scale factors.
                 double scaleX = width / container.Template.Width;
@@ -124,16 +124,16 @@ namespace Renderer.SkiaSharp
                 if (container.Template.Background.A > 0)
                 {
                     DrawBackgroundInternal(
-                        gfx,
+                        canvas,
                         container.Template.Background,
                         Rect2.Create(0, 0, width / scale, height / scale));
                 }
 
                 // Draw template contents to pdf graphics.
-                Draw(gfx, container.Template, container.Data.Properties, container.Data.Record);
+                Draw(canvas, container.Template, container.Data.Properties, container.Data.Record);
 
                 // Draw page contents to pdf graphics.
-                Draw(gfx, container, container.Data.Properties, container.Data.Record);
+                Draw(canvas, container, container.Data.Properties, container.Data.Record);
             }
         }
 
