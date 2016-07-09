@@ -712,24 +712,15 @@ namespace Renderer.SkiaSharp
                 _scaleToPage(rect.Width),
                 _scaleToPage(rect.Height));
 
-            if (image.IsStroked && image.IsFilled)
+            if (image.IsStroked || image.IsFilled)
             {
-                canvas.DrawRectangle(
-                    ToSKPaintPen(image.Style, _scaleToPage),
-                    ToSKPaintBrush(image.Style.Fill),
-                    srect);
-            }
-            else if (image.IsStroked && !image.IsFilled)
-            {
-                canvas.DrawRectangle(
-                    ToSKPaintPen(image.Style, _scaleToPage),
-                    srect);
-            }
-            else if (!image.IsStroked && image.IsFilled)
-            {
-                canvas.DrawRectangle(
-                    ToSKPaintBrush(image.Style.Fill),
-                    srect);
+                DrawRectangleInternal(
+                    _gfx,
+                    ToXSolidBrush(image.Style.Fill),
+                    ToXPen(image.Style, _scaleToPage),
+                    image.IsStroked,
+                    image.IsFilled,
+                    ref srect);
             }
 
             if (_enableImageCache
