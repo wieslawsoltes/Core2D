@@ -687,21 +687,6 @@ namespace Renderer.SkiaSharp
                 var fm = pen.FontMetrics;
                 float offset = -(fm.Top + fm.Bottom);
 
-                /*
-                switch (text.Style.TextStyle.TextHAlignment)
-                {
-                    case TextHAlignment.Left:
-                        pen.TextAlign = SKTextAlign.Left;
-                        break;
-                    case TextHAlignment.Center:
-                        pen.TextAlign = SKTextAlign.Center;
-                        break;
-                    case TextHAlignment.Right:
-                        pen.TextAlign = SKTextAlign.Right;
-                        break;
-                }
-                */
-
                 var rect = CreateRect(text.TopLeft, text.BottomRight, dx, dy, _scaleToPage);
                 SKRect bounds = new SKRect();
                 pen.MeasureText(tbind, ref bounds);
