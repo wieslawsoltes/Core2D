@@ -21,8 +21,8 @@ namespace Renderer.SkiaSharp
     /// </summary>
     public class SkiaRenderer : ShapeRenderer
     {
-        //private bool _enableImageCache = true;
-        private IDictionary<string, SKImage> _biCache;
+        private bool _enableImageCache = true;
+        private IDictionary<string, SKBitmap> _biCache;
         private Func<double, float> _scaleToPage;
 
         /// <summary>
@@ -510,7 +510,7 @@ namespace Renderer.SkiaSharp
                     }
                     _biCache.Clear();
                 }
-                _biCache = new Dictionary<string, SKImage>();
+                _biCache = new Dictionary<string, SKBitmap>();
             }
         }
 
@@ -711,35 +711,23 @@ namespace Renderer.SkiaSharp
         /// <inheritdoc/>
         public override void Draw(object dc, XImage image, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
         {
-            /*
             var canvas = dc as SKCanvas;
 
-            var rect = Rect2.Create(
-                image.TopLeft,
-                image.BottomRight,
-                dx, dy);
-
-            var srect = new XRect(
-                _scaleToPage(rect.X),
-                _scaleToPage(rect.Y),
-                _scaleToPage(rect.Width),
-                _scaleToPage(rect.Height));
+            var rect = CreateRect(image.TopLeft, image.BottomRight, dx, dy, _scaleToPage);
 
             if (image.IsStroked || image.IsFilled)
             {
-                DrawRectangleInternal(
-                    _gfx,
-                    ToXSolidBrush(image.Style.Fill),
-                    ToXPen(image.Style, _scaleToPage),
-                    image.IsStroked,
-                    image.IsFilled,
-                    ref srect);
+                using (SKPaint brush = ToSKPaintBrush(image.Style.Fill))
+                using (SKPaint pen = ToSKPaintPen(image.Style, _scaleToPage))
+                {
+                    DrawRectangleInternal(canvas, brush, pen, image.IsStroked, image.IsFilled, ref rect);
+                }
             }
 
             if (_enableImageCache
                 && _biCache.ContainsKey(image.Key))
             {
-                canvas.DrawImage(_biCache[image.Key], srect);
+                canvas.DrawBitmap(_biCache[image.Key], rect);
             }
             else
             {
@@ -750,26 +738,23 @@ namespace Renderer.SkiaSharp
                 if (bytes != null)
                 {
                     var ms = new System.IO.MemoryStream(bytes);
-#if WPF
-                    var bs = new BitmapImage();
-                    bs.BeginInit();
-                    bs.StreamSource = ms;
-                    bs.EndInit();
-                    bs.Freeze();
-                    var bi = XImage.FromBitmapSource(bs);
-#else
-                    var bi = XImage.FromStream(ms);
-#endif
-                    if (_enableImageCache)
-                        _biCache[image.Key] = bi;
+                    using (var stream = new SKManagedStream(ms))
+                    using (var decoder = new SKImageDecoder(stream))
+                    {
+                        decoder.PreferQualityOverSpeed = true;
+                        var bi = new SKBitmap();
+                        decoder.Decode(stream, bi);
 
-                    canvas.DrawImage(bi, srect);
+                        if (_enableImageCache)
+                            _biCache[image.Key] = bi;
 
-                    if (!_enableImageCache)
-                        bi.Dispose();
+                        canvas.DrawBitmap(bi, rect);
+
+                        if (!_enableImageCache)
+                            bi.Dispose();
+                    }
                 }
             }
-            */
         }
 
         /// <inheritdoc/>
