@@ -139,6 +139,45 @@ namespace Renderer.SkiaSharp
             }
         }
 
+        private static SKPoint GetTextOrigin(ShapeStyle style, ref SKRect rect, ref SKRect size)
+        {
+            double rwidth = Math.Abs(rect.Right - rect.Left);
+            double rheight = Math.Abs(rect.Bottom - rect.Top);
+            double swidth = Math.Abs(size.Right - size.Left);
+            double sheight = Math.Abs(size.Bottom - size.Top);
+            double ox, oy;
+
+            switch (style.TextStyle.TextHAlignment)
+            {
+                case TextHAlignment.Left:
+                    ox = rect.Left;
+                    break;
+                case TextHAlignment.Right:
+                    ox = rect.Right - swidth;
+                    break;
+                case TextHAlignment.Center:
+                default:
+                    ox = (rect.Left + rwidth / 2f) - (swidth / 2f);
+                    break;
+            }
+
+            switch (style.TextStyle.TextVAlignment)
+            {
+                case TextVAlignment.Top:
+                    oy = rect.Top;
+                    break;
+                case TextVAlignment.Bottom:
+                    oy = rect.Bottom - sheight;
+                    break;
+                case TextVAlignment.Center:
+                default:
+                    oy = (rect.Bottom - rheight / 2f) - (sheight / 2f);
+                    break;
+            }
+
+            return new SKPoint((float)ox, (float)oy);
+        }
+
         private static SKColor ToSKColor(ArgbColor color)
         {
             return new SKColor(
