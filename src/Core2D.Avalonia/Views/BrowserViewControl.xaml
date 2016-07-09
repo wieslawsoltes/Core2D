@@ -238,8 +238,8 @@
                     </TreeViewItem.DataTemplates>
                 </TreeViewItem>
             </TreeViewItem>
-            <!-- Current -->
-            <TreeViewItem Header="Current" IsExpanded="True">
+            <!-- Selected -->
+            <TreeViewItem Header="Selected" IsExpanded="True">
                 <TreeViewItem Header="Options" DataContext="{Binding Project.Options}">
                     <TreeViewItem.ContextMenu>
                         <ContextMenu Classes="default">

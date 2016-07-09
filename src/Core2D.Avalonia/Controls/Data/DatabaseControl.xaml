@@ -21,7 +21,7 @@
         <TabItem Header="Columns" Classes="property">
             <data:ColumnsControl/>
         </TabItem>
-        <TabItem Header="Current" Classes="property">
+        <TabItem Header="Selected" Classes="property">
             <presenters:CachedContentPresenter DataContext="{Binding CurrentRecord}"/>
         </TabItem>
     </TabControl>
