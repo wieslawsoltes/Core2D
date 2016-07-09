@@ -684,6 +684,9 @@ namespace Renderer.SkiaSharp
                 pen.TextEncoding = SKTextEncoding.Utf16;
                 pen.TextSize = _scaleToPage(text.Style.TextStyle.FontSize * 72.0 / 96.0);
 
+                var fm = pen.FontMetrics;
+                float offset = -(fm.Top + fm.Bottom);
+
                 /*
                 switch (text.Style.TextStyle.TextHAlignment)
                 {
@@ -701,10 +704,10 @@ namespace Renderer.SkiaSharp
 
                 var rect = CreateRect(text.TopLeft, text.BottomRight, dx, dy, _scaleToPage);
                 SKRect bounds = new SKRect();
-                float height = pen.MeasureText(tbind, ref bounds);
+                pen.MeasureText(tbind, ref bounds);
                 SKPoint origin = GetTextOrigin(text.Style, ref rect, ref bounds);
 
-                canvas.DrawText(tbind, origin.X, height / 3f + origin.Y, pen);
+                canvas.DrawText(tbind, origin.X, origin.Y + offset, pen);
             }
         }
 
