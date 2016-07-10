@@ -7,7 +7,6 @@ using Core2D.Data;
 using Core2D.Data.Database;
 using Core2D.Math;
 using Core2D.Math.Arc;
-using Core2D.Project;
 using Core2D.Renderer;
 using Core2D.Shape;
 using Core2D.Shapes;
@@ -19,11 +18,13 @@ namespace Renderer.SkiaSharp
     /// <summary>
     /// Native SkiaSharp shape renderer.
     /// </summary>
-    public class SkiaRenderer : ShapeRenderer
+    public partial class SkiaRenderer : ShapeRenderer
     {
         private bool _enableImageCache = true;
         private IDictionary<string, SKBitmap> _biCache;
         private Func<double, float> _scaleToPage;
+        private double _sourceDpi = 96.0;
+        private double _targetDpi = 72.0;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SkiaRenderer"/> class.
@@ -42,101 +43,6 @@ namespace Renderer.SkiaSharp
         public static ShapeRenderer Create()
         {
             return new SkiaRenderer();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="path"></param>
-        /// <param name="container"></param>
-        public void Save(string path, XContainer container)
-        {
-            using (var stream = new SKFileWStream(path))
-            {
-                using (var pdf = SKDocument.CreatePdf(stream))
-                {
-                    Add(pdf, container);
-                    pdf.Close();
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="path"></param>
-        /// <param name="document"></param>
-        public void Save(string path, XDocument document)
-        {
-            using (var stream = new SKFileWStream(path))
-            {
-                using (var pdf = SKDocument.CreatePdf(stream))
-                {
-                    foreach (var container in document.Pages)
-                    {
-                        Add(pdf, container);
-                    }
-
-                    pdf.Close();
-                    ClearCache(isZooming: false);
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="path"></param>
-        /// <param name="project"></param>
-        public void Save(string path, XProject project)
-        {
-            using (var stream = new SKFileWStream(path))
-            {
-                using (var pdf = SKDocument.CreatePdf(stream))
-                {
-                    foreach (var document in project.Documents)
-                    {
-                        foreach (var container in document.Pages)
-                        {
-                            Add(pdf, container);
-                        }
-                    }
-
-                    pdf.Close();
-                    ClearCache(isZooming: false);
-                }
-            }
-        }
-
-        private void Add(SKDocument pdf, XContainer container)
-        {
-            float width = (float)container.Template.Width;
-            float height = (float)container.Template.Height;
-            using (SKCanvas canvas = pdf.BeginPage(width, height))
-            {
-                // Calculate x and y page scale factors.
-                double scaleX = width / container.Template.Width;
-                double scaleY = height / container.Template.Height;
-                double scale = Math.Min(scaleX, scaleY);
-
-                // Set scaling function.
-                _scaleToPage = (value) => (float)(value * scale);
-
-                // Draw container template contents to pdf graphics.
-                if (container.Template.Background.A > 0)
-                {
-                    DrawBackgroundInternal(
-                        canvas,
-                        container.Template.Background,
-                        Rect2.Create(0, 0, width / scale, height / scale));
-                }
-
-                // Draw template contents to pdf graphics.
-                Draw(canvas, container.Template, container.Data.Properties, container.Data.Record);
-
-                // Draw page contents to pdf graphics.
-                Draw(canvas, container, container.Data.Properties, container.Data.Record);
-            }
         }
 
         private static SKPoint GetTextOrigin(ShapeStyle style, ref SKRect rect, ref SKRect size)
@@ -187,12 +93,12 @@ namespace Renderer.SkiaSharp
                 color.A);
         }
 
-        private static SKPaint ToSKPaintPen(BaseStyle style, Func<double, float> scale)
+        private static SKPaint ToSKPaintPen(BaseStyle style, Func<double, float> scale, double sourceDpi, double targetDpi)
         {
             var paint = new SKPaint();
             paint.IsAntialias = true;
             paint.IsStroke = true;
-            paint.StrokeWidth = (float)(style.Thickness * 72.0 / 96.0);
+            paint.StrokeWidth = scale(style.Thickness * targetDpi / sourceDpi);
             paint.Color = ToSKColor(style.Stroke);
 
             switch (style.LineCap)
@@ -285,9 +191,9 @@ namespace Renderer.SkiaSharp
         private void DrawLineArrowsInternal(SKCanvas canvas, XLine line, double dx, double dy, out SKPoint pt1, out SKPoint pt2)
         {
             using (SKPaint fillStartArrow = ToSKPaintBrush(line.Style.StartArrowStyle.Fill))
-            using (SKPaint strokeStartArrow = ToSKPaintPen(line.Style.StartArrowStyle, _scaleToPage))
+            using (SKPaint strokeStartArrow = ToSKPaintPen(line.Style.StartArrowStyle, _scaleToPage, _sourceDpi, _targetDpi))
             using (SKPaint fillEndArrow = ToSKPaintBrush(line.Style.EndArrowStyle.Fill))
-            using (SKPaint strokeEndArrow = ToSKPaintPen(line.Style.EndArrowStyle, _scaleToPage))
+            using (SKPaint strokeEndArrow = ToSKPaintPen(line.Style.EndArrowStyle, _scaleToPage, _sourceDpi, _targetDpi))
             {
                 double _x1 = line.Start.X + dx;
                 double _y1 = line.Start.Y + dy;
@@ -473,7 +379,7 @@ namespace Renderer.SkiaSharp
         {
             var canvas = dc as SKCanvas;
 
-            using (SKPaint strokeLine = ToSKPaintPen(line.Style, _scaleToPage))
+            using (SKPaint strokeLine = ToSKPaintPen(line.Style, _scaleToPage, _sourceDpi, _targetDpi))
             {
                 SKPoint pt1, pt2;
 
@@ -503,7 +409,7 @@ namespace Renderer.SkiaSharp
             var canvas = dc as SKCanvas;
 
             using (SKPaint brush = ToSKPaintBrush(rectangle.Style.Fill))
-            using (SKPaint pen = ToSKPaintPen(rectangle.Style, _scaleToPage))
+            using (SKPaint pen = ToSKPaintPen(rectangle.Style, _scaleToPage, _sourceDpi, _targetDpi))
             {
                 var rect = CreateRect(rectangle.TopLeft, rectangle.BottomRight, dx, dy, _scaleToPage);
                 DrawRectangleInternal(canvas, brush, pen, rectangle.IsStroked, rectangle.IsFilled, ref rect);
@@ -528,7 +434,7 @@ namespace Renderer.SkiaSharp
             var canvas = dc as SKCanvas;
 
             using (SKPaint brush = ToSKPaintBrush(ellipse.Style.Fill))
-            using (SKPaint pen = ToSKPaintPen(ellipse.Style, _scaleToPage))
+            using (SKPaint pen = ToSKPaintPen(ellipse.Style, _scaleToPage, _sourceDpi, _targetDpi))
             {
                 var rect = CreateRect(ellipse.TopLeft, ellipse.BottomRight, dx, dy, _scaleToPage);
                 DrawEllipseInternal(canvas, brush, pen, ellipse.IsStroked, ellipse.IsFilled, ref rect);
@@ -541,7 +447,7 @@ namespace Renderer.SkiaSharp
             var canvas = dc as SKCanvas;
 
             using (SKPaint brush = ToSKPaintBrush(arc.Style.Fill))
-            using (SKPaint pen = ToSKPaintPen(arc.Style, _scaleToPage))
+            using (SKPaint pen = ToSKPaintPen(arc.Style, _scaleToPage, _sourceDpi, _targetDpi))
             using (var path = new SKPath())
             {
                 var a = GdiArc.FromXArc(arc, dx, dy);
@@ -561,7 +467,7 @@ namespace Renderer.SkiaSharp
             var canvas = dc as SKCanvas;
 
             using (SKPaint brush = ToSKPaintBrush(cubicBezier.Style.Fill))
-            using (SKPaint pen = ToSKPaintPen(cubicBezier.Style, _scaleToPage))
+            using (SKPaint pen = ToSKPaintPen(cubicBezier.Style, _scaleToPage, _sourceDpi, _targetDpi))
             using (var path = new SKPath())
             {
                 path.MoveTo(
@@ -584,7 +490,7 @@ namespace Renderer.SkiaSharp
             var canvas = dc as SKCanvas;
 
             using (SKPaint brush = ToSKPaintBrush(quadraticBezier.Style.Fill))
-            using (SKPaint pen = ToSKPaintPen(quadraticBezier.Style, _scaleToPage))
+            using (SKPaint pen = ToSKPaintPen(quadraticBezier.Style, _scaleToPage, _sourceDpi, _targetDpi))
             using (var path = new SKPath())
             {
                 path.MoveTo(
@@ -636,7 +542,7 @@ namespace Renderer.SkiaSharp
             using (var tf = SKTypeface.FromFamilyName(text.Style.TextStyle.FontName, style))
             {
                 pen.TextEncoding = SKTextEncoding.Utf16;
-                pen.TextSize = _scaleToPage(text.Style.TextStyle.FontSize * 72.0 / 96.0);
+                pen.TextSize = _scaleToPage(text.Style.TextStyle.FontSize * _targetDpi / _sourceDpi);
 
                 var fm = pen.FontMetrics;
                 float offset = -(fm.Top + fm.Bottom);
@@ -660,7 +566,7 @@ namespace Renderer.SkiaSharp
             if (image.IsStroked || image.IsFilled)
             {
                 using (SKPaint brush = ToSKPaintBrush(image.Style.Fill))
-                using (SKPaint pen = ToSKPaintPen(image.Style, _scaleToPage))
+                using (SKPaint pen = ToSKPaintPen(image.Style, _scaleToPage, _sourceDpi, _targetDpi))
                 {
                     DrawRectangleInternal(canvas, brush, pen, image.IsStroked, image.IsFilled, ref rect);
                 }
@@ -705,7 +611,7 @@ namespace Renderer.SkiaSharp
             var canvas = dc as SKCanvas;
 
             using (SKPaint brush = ToSKPaintBrush(path.Style.Fill))
-            using (SKPaint pen = ToSKPaintPen(path.Style, _scaleToPage))
+            using (SKPaint pen = ToSKPaintPen(path.Style, _scaleToPage, _sourceDpi, _targetDpi))
             using (var spath = path.Geometry.ToSKPath(dx, dy, _scaleToPage))
             {
                 DrawPathInternal(canvas, brush, pen, path.IsStroked, path.IsFilled, spath);
