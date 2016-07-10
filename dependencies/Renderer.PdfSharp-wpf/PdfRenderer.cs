@@ -3,7 +3,6 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using PdfSharp;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 #if WPF
@@ -19,11 +18,13 @@ namespace Renderer.PdfSharp_core
     /// <summary>
     /// Native PdfSharp shape renderer.
     /// </summary>
-    public class PdfRenderer : Core2D.Renderer.ShapeRenderer
+    public partial class PdfRenderer : Core2D.Renderer.ShapeRenderer
     {
         private bool _enableImageCache = true;
         private IDictionary<string, XImage> _biCache;
         private Func<double, double> _scaleToPage;
+        private double _sourceDpi = 96.0;
+        private double _targetDpi = 72.0;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PdfRenderer"/> class.
@@ -44,147 +45,6 @@ namespace Renderer.PdfSharp_core
             return new PdfRenderer();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="path"></param>
-        /// <param name="container"></param>
-        public void Save(string path, Core2D.Project.XContainer container)
-        {
-            using (var pdf = new PdfDocument())
-            {
-                Add(pdf, container);
-                pdf.Save(path);
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="path"></param>
-        /// <param name="document"></param>
-        public void Save(string path, Core2D.Project.XDocument document)
-        {
-            using (var pdf = new PdfDocument())
-            {
-                var documentOutline = default(PdfOutline);
-
-                foreach (var container in document.Pages)
-                {
-                    var page = Add(pdf, container);
-
-                    if (documentOutline == null)
-                    {
-                        documentOutline = pdf.Outlines.Add(
-                            document.Name,
-                            page,
-                            true,
-                            PdfOutlineStyle.Regular,
-                            XColors.Black);
-                    }
-
-                    documentOutline.Outlines.Add(
-                        container.Name,
-                        page,
-                        true,
-                        PdfOutlineStyle.Regular,
-                        XColors.Black);
-                }
-
-                pdf.Save(path);
-                ClearCache(isZooming: false);
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="path"></param>
-        /// <param name="project"></param>
-        public void Save(string path, Core2D.Project.XProject project)
-        {
-            using (var pdf = new PdfDocument())
-            {
-                var projectOutline = default(PdfOutline);
-
-                foreach (var document in project.Documents)
-                {
-                    var documentOutline = default(PdfOutline);
-
-                    foreach (var container in document.Pages)
-                    {
-                        var page = Add(pdf, container);
-
-                        if (projectOutline == null)
-                        {
-                            projectOutline = pdf.Outlines.Add(
-                                project.Name,
-                                page,
-                                true,
-                                PdfOutlineStyle.Regular,
-                                XColors.Black);
-                        }
-
-                        if (documentOutline == null)
-                        {
-                            documentOutline = projectOutline.Outlines.Add(
-                                document.Name,
-                                page,
-                                true,
-                                PdfOutlineStyle.Regular,
-                                XColors.Black);
-                        }
-
-                        documentOutline.Outlines.Add(
-                            container.Name,
-                            page,
-                            true,
-                            PdfOutlineStyle.Regular,
-                            XColors.Black);
-                    }
-                }
-
-                pdf.Save(path);
-                ClearCache(isZooming: false);
-            }
-        }
-
-        private PdfPage Add(PdfDocument pdf, Core2D.Project.XContainer container)
-        {
-            // Create A3 page size with Landscape orientation.
-            PdfPage pdfPage = pdf.AddPage();
-            pdfPage.Size = PageSize.A3;
-            pdfPage.Orientation = PageOrientation.Landscape;
-
-            using (XGraphics gfx = XGraphics.FromPdfPage(pdfPage))
-            {
-                // Calculate x and y page scale factors.
-                double scaleX = pdfPage.Width.Value / container.Template.Width;
-                double scaleY = pdfPage.Height.Value / container.Template.Height;
-                double scale = Math.Min(scaleX, scaleY);
-
-                // Set scaling function.
-                _scaleToPage = (value) => value * scale;
-
-                // Draw container template contents to pdf graphics.
-                if (container.Template.Background.A > 0)
-                {
-                    DrawBackgroundInternal(
-                        gfx,
-                        container.Template.Background,
-                        Core2D.Math.Rect2.Create(0, 0, pdfPage.Width.Value / scale, pdfPage.Height.Value / scale));
-                }
-
-                // Draw template contents to pdf graphics.
-                Draw(gfx, container.Template, container.Data.Properties, container.Data.Record);
-
-                // Draw page contents to pdf graphics.
-                Draw(gfx, container, container.Data.Properties, container.Data.Record);
-            }
-
-            return pdfPage;
-        }
-
         private static XColor ToXColor(Core2D.Style.ArgbColor color)
         {
             return XColor.FromArgb(
@@ -194,9 +54,9 @@ namespace Renderer.PdfSharp_core
                 color.B);
         }
 
-        private static XPen ToXPen(Core2D.Style.BaseStyle style, Func<double, double> scale)
+        private static XPen ToXPen(Core2D.Style.BaseStyle style, Func<double, double> scale, double sourceDpi, double targetDpi)
         {
-            var pen = new XPen(ToXColor(style.Stroke), XUnit.FromPresentation(style.Thickness));
+            var pen = new XPen(ToXColor(style.Stroke), scale(style.Thickness * targetDpi / sourceDpi));
             switch (style.LineCap)
             {
                 case Core2D.Style.LineCap.Flat:
@@ -253,10 +113,10 @@ namespace Renderer.PdfSharp_core
         private void DrawLineArrowsInternal(XGraphics gfx, Core2D.Shapes.XLine line, double dx, double dy, out XPoint pt1, out XPoint pt2)
         {
             XSolidBrush fillStartArrow = ToXSolidBrush(line.Style.StartArrowStyle.Fill);
-            XPen strokeStartArrow = ToXPen(line.Style.StartArrowStyle, _scaleToPage);
+            XPen strokeStartArrow = ToXPen(line.Style.StartArrowStyle, _scaleToPage, _sourceDpi, _targetDpi);
 
             XSolidBrush fillEndArrow = ToXSolidBrush(line.Style.EndArrowStyle.Fill);
-            XPen strokeEndArrow = ToXPen(line.Style.EndArrowStyle, _scaleToPage);
+            XPen strokeEndArrow = ToXPen(line.Style.EndArrowStyle, _scaleToPage, _sourceDpi, _targetDpi);
 
             double _x1 = line.Start.X + dx;
             double _y1 = line.Start.Y + dy;
@@ -437,7 +297,7 @@ namespace Renderer.PdfSharp_core
 
             var _gfx = dc as XGraphics;
 
-            XPen strokeLine = ToXPen(line.Style, _scaleToPage);
+            XPen strokeLine = ToXPen(line.Style, _scaleToPage, _sourceDpi, _targetDpi);
             XPoint pt1, pt2;
 
             DrawLineArrowsInternal(_gfx, line, dx, dy, out pt1, out pt2);
@@ -472,7 +332,7 @@ namespace Renderer.PdfSharp_core
             if (rectangle.IsStroked && rectangle.IsFilled)
             {
                 _gfx.DrawRectangle(
-                    ToXPen(rectangle.Style, _scaleToPage),
+                    ToXPen(rectangle.Style, _scaleToPage, _sourceDpi, _targetDpi),
                     ToXSolidBrush(rectangle.Style.Fill),
                     _scaleToPage(rect.X),
                     _scaleToPage(rect.Y),
@@ -482,7 +342,7 @@ namespace Renderer.PdfSharp_core
             else if (rectangle.IsStroked && !rectangle.IsFilled)
             {
                 _gfx.DrawRectangle(
-                    ToXPen(rectangle.Style, _scaleToPage),
+                    ToXPen(rectangle.Style, _scaleToPage, _sourceDpi, _targetDpi),
                     _scaleToPage(rect.X),
                     _scaleToPage(rect.Y),
                     _scaleToPage(rect.Width),
@@ -502,7 +362,7 @@ namespace Renderer.PdfSharp_core
             {
                 DrawGridInternal(
                     _gfx,
-                    ToXPen(rectangle.Style, _scaleToPage),
+                    ToXPen(rectangle.Style, _scaleToPage, _sourceDpi, _targetDpi),
                     ref rect,
                     rectangle.OffsetX, rectangle.OffsetY,
                     rectangle.CellWidth, rectangle.CellHeight,
@@ -523,7 +383,7 @@ namespace Renderer.PdfSharp_core
             if (ellipse.IsStroked && ellipse.IsFilled)
             {
                 _gfx.DrawEllipse(
-                    ToXPen(ellipse.Style, _scaleToPage),
+                    ToXPen(ellipse.Style, _scaleToPage, _sourceDpi, _targetDpi),
                     ToXSolidBrush(ellipse.Style.Fill),
                     _scaleToPage(rect.X),
                     _scaleToPage(rect.Y),
@@ -533,7 +393,7 @@ namespace Renderer.PdfSharp_core
             else if (ellipse.IsStroked && !ellipse.IsFilled)
             {
                 _gfx.DrawEllipse(
-                    ToXPen(ellipse.Style, _scaleToPage),
+                    ToXPen(ellipse.Style, _scaleToPage, _sourceDpi, _targetDpi),
                     _scaleToPage(rect.X),
                     _scaleToPage(rect.Y),
                     _scaleToPage(rect.Width),
@@ -572,7 +432,7 @@ namespace Renderer.PdfSharp_core
                 if (arc.IsStroked)
                 {
                     _gfx.DrawPath(
-                        ToXPen(arc.Style, _scaleToPage),
+                        ToXPen(arc.Style, _scaleToPage, _sourceDpi, _targetDpi),
                         ToXSolidBrush(arc.Style.Fill),
                         path);
                 }
@@ -588,7 +448,7 @@ namespace Renderer.PdfSharp_core
                 if (arc.IsStroked)
                 {
                     _gfx.DrawArc(
-                        ToXPen(arc.Style, _scaleToPage),
+                        ToXPen(arc.Style, _scaleToPage, _sourceDpi, _targetDpi),
                         _scaleToPage(a.X),
                         _scaleToPage(a.Y),
                         _scaleToPage(a.Width),
@@ -620,7 +480,7 @@ namespace Renderer.PdfSharp_core
                 if (cubicBezier.IsStroked)
                 {
                     _gfx.DrawPath(
-                        ToXPen(cubicBezier.Style, _scaleToPage),
+                        ToXPen(cubicBezier.Style, _scaleToPage, _sourceDpi, _targetDpi),
                         ToXSolidBrush(cubicBezier.Style.Fill),
                         path);
                 }
@@ -636,7 +496,7 @@ namespace Renderer.PdfSharp_core
                 if (cubicBezier.IsStroked)
                 {
                     _gfx.DrawBezier(
-                        ToXPen(cubicBezier.Style, _scaleToPage),
+                        ToXPen(cubicBezier.Style, _scaleToPage, _sourceDpi, _targetDpi),
                         _scaleToPage(cubicBezier.Point1.X + dx),
                         _scaleToPage(cubicBezier.Point1.Y + dy),
                         _scaleToPage(cubicBezier.Point2.X + dx),
@@ -679,7 +539,7 @@ namespace Renderer.PdfSharp_core
                 if (quadraticBezier.IsStroked)
                 {
                     _gfx.DrawPath(
-                        ToXPen(quadraticBezier.Style, _scaleToPage),
+                        ToXPen(quadraticBezier.Style, _scaleToPage, _sourceDpi, _targetDpi),
                         ToXSolidBrush(quadraticBezier.Style.Fill),
                         path);
                 }
@@ -695,7 +555,7 @@ namespace Renderer.PdfSharp_core
                 if (quadraticBezier.IsStroked)
                 {
                     _gfx.DrawBezier(
-                        ToXPen(quadraticBezier.Style, _scaleToPage),
+                        ToXPen(quadraticBezier.Style, _scaleToPage, _sourceDpi, _targetDpi),
                         _scaleToPage(x1 + dx),
                         _scaleToPage(y1 + dy),
                         _scaleToPage(x2 + dx),
@@ -816,7 +676,7 @@ namespace Renderer.PdfSharp_core
                 DrawRectangleInternal(
                     _gfx,
                     ToXSolidBrush(image.Style.Fill),
-                    ToXPen(image.Style, _scaleToPage),
+                    ToXPen(image.Style, _scaleToPage, _sourceDpi, _targetDpi),
                     image.IsStroked,
                     image.IsFilled,
                     ref srect);
@@ -867,7 +727,7 @@ namespace Renderer.PdfSharp_core
             if (path.IsFilled && path.IsStroked)
             {
                 _gfx.DrawPath(
-                    ToXPen(path.Style, _scaleToPage),
+                    ToXPen(path.Style, _scaleToPage, _sourceDpi, _targetDpi),
                     ToXSolidBrush(path.Style.Fill),
                     gp);
             }
@@ -880,7 +740,7 @@ namespace Renderer.PdfSharp_core
             else if (!path.IsFilled && path.IsStroked)
             {
                 _gfx.DrawPath(
-                    ToXPen(path.Style, _scaleToPage),
+                    ToXPen(path.Style, _scaleToPage, _sourceDpi, _targetDpi),
                     gp);
             }
         }

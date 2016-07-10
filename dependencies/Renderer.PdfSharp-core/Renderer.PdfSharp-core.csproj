@@ -85,6 +85,9 @@
     <Compile Include="..\Renderer.PdfSharp-wpf\PdfRenderer.cs">
       <Link>PdfRenderer.cs</Link>
     </Compile>
+    <Compile Include="..\Renderer.PdfSharp-wpf\PdfRenderer.IProjectExporter.cs">
+      <Link>PdfRenderer.IProjectExporter.cs</Link>
+    </Compile>
     <Compile Include="..\Renderer.PdfSharp-wpf\XPathGeometryConverter.cs">
       <Link>XPathGeometryConverter.cs</Link>
     </Compile>
