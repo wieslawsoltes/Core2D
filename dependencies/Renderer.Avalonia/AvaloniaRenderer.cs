@@ -193,41 +193,47 @@ namespace Renderer.Avalonia
             double a1 = Math.Atan2(y1 - y2, x1 - x2);
             double a2 = Math.Atan2(y2 - y1, x2 - x1);
 
-            var t1 = MatrixHelper.Rotation(a1, new P.Vector(x1, y1));
-            var t2 = MatrixHelper.Rotation(a2, new P.Vector(x2, y2));
+            // Draw start arrow.
+            pt1 = DrawLineArrowInternal(dc, strokeStartArrow, fillStartArrow, x1, y1, a1, sas);
 
-            pt1 = default(P.Point);
-            pt2 = default(P.Point);
-            double radiusX1 = sas.RadiusX;
-            double radiusY1 = sas.RadiusY;
-            double sizeX1 = 2.0 * radiusX1;
-            double sizeY1 = 2.0 * radiusY1;
+            // Draw end arrow.
+            pt2 = DrawLineArrowInternal(dc, strokeEndArrow, fillEndArrow, x2, y2, a2, eas);
+        }
 
-            switch (sas.ArrowType)
+        private static P.Point DrawLineArrowInternal(PM.DrawingContext dc, PM.Pen pen, PM.IBrush brush, float x, float y, double angle, ArrowStyle style)
+        {
+            P.Point pt = default(P.Point);
+            var rt = MatrixHelper.Rotation(angle, new P.Vector(x, y));
+            double rx = style.RadiusX;
+            double ry = style.RadiusY;
+            double sx = 2.0 * rx;
+            double sy = 2.0 * ry;
+
+            switch (style.ArrowType)
             {
                 default:
                 case ArrowType.None:
                     {
-                        pt1 = new P.Point(x1, y1);
+                        pt = new P.Point(x, y);
                     }
                     break;
                 case ArrowType.Rectangle:
                     {
-                        pt1 = MatrixHelper.TransformPoint(t1, new P.Point(x1 - (float)sizeX1, y1));
-                        var rect = new Rect2(x1 - sizeX1, y1 - radiusY1, sizeX1, sizeY1);
-                        using (var d = dc.PushPreTransform(t1))
+                        pt = MatrixHelper.TransformPoint(rt, new P.Point(x - (float)sx, y));
+                        var rect = new Rect2(x - sx, y - ry, sx, sy);
+                        using (var d = dc.PushPreTransform(rt))
                         {
-                            DrawRectangleInternal(dc, fillStartArrow, strokeStartArrow, sas.IsStroked, sas.IsFilled, ref rect);
+                            DrawRectangleInternal(dc, brush, pen, style.IsStroked, style.IsFilled, ref rect);
                         }
                     }
                     break;
                 case ArrowType.Ellipse:
                     {
-                        pt1 = MatrixHelper.TransformPoint(t1, new P.Point(x1 - (float)sizeX1, y1));
-                        using (var d = dc.PushPreTransform(t1))
+                        pt = MatrixHelper.TransformPoint(rt, new P.Point(x - (float)sx, y));
+                        using (var d = dc.PushPreTransform(rt))
                         {
-                            var rect = new Rect2(x1 - sizeX1, y1 - radiusY1, sizeX1, sizeY1);
-                            DrawEllipseInternal(dc, fillStartArrow, strokeStartArrow, sas.IsStroked, sas.IsFilled, ref rect);
+                            var rect = new Rect2(x - sx, y - ry, sx, sy);
+                            DrawEllipseInternal(dc, brush, pen, style.IsStroked, style.IsFilled, ref rect);
                         }
                     }
                     break;
@@ -235,76 +241,24 @@ namespace Renderer.Avalonia
                     {
                         var pts = new P.Point[]
                         {
-                            new P.Point(x1, y1),
-                            new P.Point(x1 - (float)sizeX1, y1 + (float)sizeY1),
-                            new P.Point(x1, y1),
-                            new P.Point(x1 - (float)sizeX1, y1 - (float)sizeY1),
-                            new P.Point(x1, y1)
+                            new P.Point(x, y),
+                            new P.Point(x - (float)sx, y + (float)sy),
+                            new P.Point(x, y),
+                            new P.Point(x - (float)sx, y - (float)sy),
+                            new P.Point(x, y)
                         };
-                        pt1 = MatrixHelper.TransformPoint(t1, pts[0]);
-                        var p11 = MatrixHelper.TransformPoint(t1, pts[1]);
-                        var p21 = MatrixHelper.TransformPoint(t1, pts[2]);
-                        var p12 = MatrixHelper.TransformPoint(t1, pts[3]);
-                        var p22 = MatrixHelper.TransformPoint(t1, pts[4]);
-                        DrawLineInternal(dc, strokeStartArrow, sas.IsStroked, ref p11, ref p21);
-                        DrawLineInternal(dc, strokeStartArrow, sas.IsStroked, ref p12, ref p22);
+                        pt = MatrixHelper.TransformPoint(rt, pts[0]);
+                        var p11 = MatrixHelper.TransformPoint(rt, pts[1]);
+                        var p21 = MatrixHelper.TransformPoint(rt, pts[2]);
+                        var p12 = MatrixHelper.TransformPoint(rt, pts[3]);
+                        var p22 = MatrixHelper.TransformPoint(rt, pts[4]);
+                        DrawLineInternal(dc, pen, style.IsStroked, ref p11, ref p21);
+                        DrawLineInternal(dc, pen, style.IsStroked, ref p12, ref p22);
                     }
                     break;
             }
 
-            double radiusX2 = eas.RadiusX;
-            double radiusY2 = eas.RadiusY;
-            double sizeX2 = 2.0 * radiusX2;
-            double sizeY2 = 2.0 * radiusY2;
-
-            switch (eas.ArrowType)
-            {
-                default:
-                case ArrowType.None:
-                    {
-                        pt2 = new P.Point(x2, y2);
-                    }
-                    break;
-                case ArrowType.Rectangle:
-                    {
-                        pt2 = MatrixHelper.TransformPoint(t2, new P.Point(x2 - (float)sizeX2, y2));
-                        var rect = new Rect2(x2 - sizeX2, y2 - radiusY2, sizeX2, sizeY2);
-                        using (var d = dc.PushPreTransform(t2))
-                        {
-                            DrawRectangleInternal(dc, fillEndArrow, strokeEndArrow, eas.IsStroked, eas.IsFilled, ref rect);
-                        }
-                    }
-                    break;
-                case ArrowType.Ellipse:
-                    {
-                        pt2 = MatrixHelper.TransformPoint(t2, new P.Point(x2 - (float)sizeX2, y2));
-                        using (var d = dc.PushPreTransform(t2))
-                        {
-                            var rect = new Rect2(x2 - sizeX2, y2 - radiusY2, sizeX2, sizeY2);
-                            DrawEllipseInternal(dc, fillEndArrow, strokeEndArrow, eas.IsStroked, eas.IsFilled, ref rect);
-                        }
-                    }
-                    break;
-                case ArrowType.Arrow:
-                    {
-                        var pts = new P.Point[]
-                        {
-                            new P.Point(x2, y2),
-                            new P.Point(x2 - (float)sizeX2, y2 + (float)sizeY2),
-                            new P.Point(x2, y2),
-                            new P.Point(x2 - (float)sizeX2, y2 - (float)sizeY2),
-                            new P.Point(x2, y2)
-                        };
-                        pt2 = MatrixHelper.TransformPoint(t2, pts[0]);
-                        var p11 = MatrixHelper.TransformPoint(t2, pts[1]);
-                        var p21 = MatrixHelper.TransformPoint(t2, pts[2]);
-                        var p12 = MatrixHelper.TransformPoint(t2, pts[3]);
-                        var p22 = MatrixHelper.TransformPoint(t2, pts[4]);
-                        DrawLineInternal(dc, strokeEndArrow, eas.IsStroked, ref p11, ref p21);
-                        DrawLineInternal(dc, strokeEndArrow, eas.IsStroked, ref p12, ref p22);
-                    }
-                    break;
-            }
+            return pt;
         }
 
         private static void DrawRectangleInternal(PM.DrawingContext dc, PM.IBrush brush, PM.Pen pen, bool isStroked, bool isFilled, ref Rect2 rect)
