@@ -46,7 +46,7 @@ namespace Renderer.WinForms
             return new WinFormsRenderer();
         }
 
-        private Color ToColor(ArgbColor color) => Color.FromArgb(color.A, color.R, color.G, color.B);
+        private static Color ToColor(ArgbColor color) => Color.FromArgb(color.A, color.R, color.G, color.B);
 
         private Pen ToPen(BaseStyle style, Func<double, float> scale)
         {
