@@ -12,9 +12,9 @@ using Core2D.Renderer;
 using Core2D.Shape;
 using Core2D.Shapes;
 using Core2D.Style;
-using P = Avalonia;
-using PM = Avalonia.Media;
-using PMI = Avalonia.Media.Imaging;
+using A = Avalonia;
+using AM = Avalonia.Media;
+using AMI = Avalonia.Media.Imaging;
 
 namespace Renderer.Avalonia
 {
@@ -24,7 +24,7 @@ namespace Renderer.Avalonia
     public class AvaloniaRenderer : ShapeRenderer
     {
         private bool _enableImageCache = true;
-        private IDictionary<string, PMI.Bitmap> _biCache;
+        private IDictionary<string, AMI.Bitmap> _biCache;
         private Func<double, float> _scaleToPage;
         private double _textScaleFactor;
 
@@ -49,7 +49,7 @@ namespace Renderer.Avalonia
             return new AvaloniaRenderer();
         }
 
-        private P.Point GetTextOrigin(ShapeStyle style, ref Rect2 rect, ref P.Size size)
+        private A.Point GetTextOrigin(ShapeStyle style, ref Rect2 rect, ref A.Size size)
         {
             double ox, oy;
 
@@ -81,44 +81,44 @@ namespace Renderer.Avalonia
                     break;
             }
 
-            return new P.Point(ox, oy);
+            return new A.Point(ox, oy);
         }
 
-        private PM.Color ToColor(ArgbColor color)
+        private AM.Color ToColor(ArgbColor color)
         {
-            return PM.Color.FromArgb(
+            return AM.Color.FromArgb(
                 color.A,
                 color.R,
                 color.G,
                 color.B);
         }
 
-        private PM.Pen ToPen(BaseStyle style, Func<double, float> scale)
+        private AM.Pen ToPen(BaseStyle style, Func<double, float> scale)
         {
-            var lineCap = default(PM.PenLineCap);
-            var dashStyle = default(PM.DashStyle);
+            var lineCap = default(AM.PenLineCap);
+            var dashStyle = default(AM.DashStyle);
 
             switch (style.LineCap)
             {
                 case LineCap.Flat:
-                    lineCap = PM.PenLineCap.Flat;
+                    lineCap = AM.PenLineCap.Flat;
                     break;
                 case LineCap.Square:
-                    lineCap = PM.PenLineCap.Square;
+                    lineCap = AM.PenLineCap.Square;
                     break;
                 case LineCap.Round:
-                    lineCap = PM.PenLineCap.Round;
+                    lineCap = AM.PenLineCap.Round;
                     break;
             }
 
             if (style.Dashes != null)
             {
-                dashStyle = new PM.DashStyle(
+                dashStyle = new AM.DashStyle(
                     ShapeStyle.ConvertDashesToDoubleArray(style.Dashes),
                     style.DashOffset);
             }
 
-            var pen = new PM.Pen(
+            var pen = new AM.Pen(
                 ToBrush(style.Stroke),
                 scale(style.Thickness / State.ZoomX),
                 dashStyle, lineCap,
@@ -127,9 +127,9 @@ namespace Renderer.Avalonia
             return pen;
         }
 
-        private PM.IBrush ToBrush(ArgbColor color)
+        private AM.IBrush ToBrush(ArgbColor color)
         {
-            return new PM.SolidColorBrush(ToColor(color));
+            return new AM.SolidColorBrush(ToColor(color));
         }
 
         private static Rect2 CreateRect(XPoint tl, XPoint br, double dx, double dy)
@@ -137,7 +137,7 @@ namespace Renderer.Avalonia
             return Rect2.Create(tl, br, dx, dy);
         }
 
-        private static void DrawLineInternal(PM.DrawingContext dc, PM.Pen pen, bool isStroked, ref P.Point p0, ref P.Point p1)
+        private static void DrawLineInternal(AM.DrawingContext dc, AM.Pen pen, bool isStroked, ref A.Point p0, ref A.Point p1)
         {
             if (isStroked)
             {
@@ -145,36 +145,36 @@ namespace Renderer.Avalonia
             }
         }
 
-        private static void DrawLineCurveInternal(PM.DrawingContext _dc, PM.Pen pen, bool isStroked, ref P.Point pt1, ref P.Point pt2, double curvature, CurveOrientation orientation, PointAlignment pt1a, PointAlignment pt2a)
+        private static void DrawLineCurveInternal(AM.DrawingContext _dc, AM.Pen pen, bool isStroked, ref A.Point pt1, ref A.Point pt2, double curvature, CurveOrientation orientation, PointAlignment pt1a, PointAlignment pt2a)
         {
             if (isStroked)
             {
-                var sg = new PM.StreamGeometry();
+                var sg = new AM.StreamGeometry();
                 using (var sgc = sg.Open())
                 {
-                    sgc.BeginFigure(new P.Point(pt1.X, pt1.Y), false);
+                    sgc.BeginFigure(new A.Point(pt1.X, pt1.Y), false);
                     double p1x = pt1.X;
                     double p1y = pt1.Y;
                     double p2x = pt2.X;
                     double p2y = pt2.Y;
                     XLineExtensions.GetCurvedLineBezierControlPoints(orientation, curvature, pt1a, pt2a, ref p1x, ref p1y, ref p2x, ref p2y);
                     sgc.CubicBezierTo(
-                        new P.Point(p1x, p1y),
-                        new P.Point(p2x, p2y),
-                        new P.Point(pt2.X, pt2.Y));
+                        new A.Point(p1x, p1y),
+                        new A.Point(p2x, p2y),
+                        new A.Point(pt2.X, pt2.Y));
                     sgc.EndFigure(false);
                 }
                 _dc.DrawGeometry(null, pen, sg);
             }
         }
 
-        private void DrawLineArrowsInternal(PM.DrawingContext dc, XLine line, double dx, double dy, out P.Point pt1, out P.Point pt2)
+        private void DrawLineArrowsInternal(AM.DrawingContext dc, XLine line, double dx, double dy, out A.Point pt1, out A.Point pt2)
         {
-            PM.IBrush fillStartArrow = ToBrush(line.Style.StartArrowStyle.Fill);
-            PM.Pen strokeStartArrow = ToPen(line.Style.StartArrowStyle, _scaleToPage);
+            AM.IBrush fillStartArrow = ToBrush(line.Style.StartArrowStyle.Fill);
+            AM.Pen strokeStartArrow = ToPen(line.Style.StartArrowStyle, _scaleToPage);
 
-            PM.IBrush fillEndArrow = ToBrush(line.Style.EndArrowStyle.Fill);
-            PM.Pen strokeEndArrow = ToPen(line.Style.EndArrowStyle, _scaleToPage);
+            AM.IBrush fillEndArrow = ToBrush(line.Style.EndArrowStyle.Fill);
+            AM.Pen strokeEndArrow = ToPen(line.Style.EndArrowStyle, _scaleToPage);
 
             double _x1 = line.Start.X + dx;
             double _y1 = line.Start.Y + dy;
@@ -200,10 +200,10 @@ namespace Renderer.Avalonia
             pt2 = DrawLineArrowInternal(dc, strokeEndArrow, fillEndArrow, x2, y2, a2, eas);
         }
 
-        private static P.Point DrawLineArrowInternal(PM.DrawingContext dc, PM.Pen pen, PM.IBrush brush, float x, float y, double angle, ArrowStyle style)
+        private static A.Point DrawLineArrowInternal(AM.DrawingContext dc, AM.Pen pen, AM.IBrush brush, float x, float y, double angle, ArrowStyle style)
         {
-            P.Point pt = default(P.Point);
-            var rt = MatrixHelper.Rotation(angle, new P.Vector(x, y));
+            A.Point pt = default(A.Point);
+            var rt = MatrixHelper.Rotation(angle, new A.Vector(x, y));
             double rx = style.RadiusX;
             double ry = style.RadiusY;
             double sx = 2.0 * rx;
@@ -214,12 +214,12 @@ namespace Renderer.Avalonia
                 default:
                 case ArrowType.None:
                     {
-                        pt = new P.Point(x, y);
+                        pt = new A.Point(x, y);
                     }
                     break;
                 case ArrowType.Rectangle:
                     {
-                        pt = MatrixHelper.TransformPoint(rt, new P.Point(x - (float)sx, y));
+                        pt = MatrixHelper.TransformPoint(rt, new A.Point(x - (float)sx, y));
                         var rect = new Rect2(x - sx, y - ry, sx, sy);
                         using (var d = dc.PushPreTransform(rt))
                         {
@@ -229,7 +229,7 @@ namespace Renderer.Avalonia
                     break;
                 case ArrowType.Ellipse:
                     {
-                        pt = MatrixHelper.TransformPoint(rt, new P.Point(x - (float)sx, y));
+                        pt = MatrixHelper.TransformPoint(rt, new A.Point(x - (float)sx, y));
                         using (var d = dc.PushPreTransform(rt))
                         {
                             var rect = new Rect2(x - sx, y - ry, sx, sy);
@@ -239,13 +239,13 @@ namespace Renderer.Avalonia
                     break;
                 case ArrowType.Arrow:
                     {
-                        var pts = new P.Point[]
+                        var pts = new A.Point[]
                         {
-                            new P.Point(x, y),
-                            new P.Point(x - (float)sx, y + (float)sy),
-                            new P.Point(x, y),
-                            new P.Point(x - (float)sx, y - (float)sy),
-                            new P.Point(x, y)
+                            new A.Point(x, y),
+                            new A.Point(x - (float)sx, y + (float)sy),
+                            new A.Point(x, y),
+                            new A.Point(x - (float)sx, y - (float)sy),
+                            new A.Point(x, y)
                         };
                         pt = MatrixHelper.TransformPoint(rt, pts[0]);
                         var p11 = MatrixHelper.TransformPoint(rt, pts[1]);
@@ -261,12 +261,12 @@ namespace Renderer.Avalonia
             return pt;
         }
 
-        private static void DrawRectangleInternal(PM.DrawingContext dc, PM.IBrush brush, PM.Pen pen, bool isStroked, bool isFilled, ref Rect2 rect)
+        private static void DrawRectangleInternal(AM.DrawingContext dc, AM.IBrush brush, AM.Pen pen, bool isStroked, bool isFilled, ref Rect2 rect)
         {
             if (!isStroked && !isFilled)
                 return;
 
-            var r = new P.Rect(rect.X, rect.Y, rect.Width, rect.Height);
+            var r = new A.Rect(rect.X, rect.Y, rect.Width, rect.Height);
 
             if (isFilled)
             {
@@ -279,13 +279,13 @@ namespace Renderer.Avalonia
             }
         }
 
-        private static void DrawEllipseInternal(PM.DrawingContext dc, PM.IBrush brush, PM.Pen pen, bool isStroked, bool isFilled, ref Rect2 rect)
+        private static void DrawEllipseInternal(AM.DrawingContext dc, AM.IBrush brush, AM.Pen pen, bool isStroked, bool isFilled, ref Rect2 rect)
         {
             if (!isFilled && !isStroked)
                 return;
 
-            var r = new P.Rect(rect.X, rect.Y, rect.Width, rect.Height);
-            var g = new PM.EllipseGeometry(r);
+            var r = new A.Rect(rect.X, rect.Y, rect.Width, rect.Height);
+            var g = new AM.EllipseGeometry(r);
 
             dc.DrawGeometry(
                 isFilled ? brush : null,
@@ -293,7 +293,7 @@ namespace Renderer.Avalonia
                 g);
         }
 
-        private void DrawGridInternal(PM.DrawingContext dc, PM.Pen stroke, ref Rect2 rect, double offsetX, double offsetY, double cellWidth, double cellHeight, bool isStroked)
+        private void DrawGridInternal(AM.DrawingContext dc, AM.Pen stroke, ref Rect2 rect, double offsetX, double offsetY, double cellWidth, double cellHeight, bool isStroked)
         {
             double ox = rect.X;
             double oy = rect.Y;
@@ -304,10 +304,10 @@ namespace Renderer.Avalonia
 
             for (double x = sx; x < ex; x += cellWidth)
             {
-                var p0 = new P.Point(
+                var p0 = new A.Point(
                     _scaleToPage(x),
                     _scaleToPage(oy));
-                var p1 = new P.Point(
+                var p1 = new A.Point(
                     _scaleToPage(x),
                     _scaleToPage(ey));
                 DrawLineInternal(dc, stroke, isStroked, ref p0, ref p1);
@@ -315,10 +315,10 @@ namespace Renderer.Avalonia
 
             for (double y = sy; y < ey; y += cellHeight)
             {
-                var p0 = new P.Point(
+                var p0 = new A.Point(
                     _scaleToPage(ox),
                     _scaleToPage(y));
-                var p1 = new P.Point(
+                var p1 = new A.Point(
                     _scaleToPage(ex),
                     _scaleToPage(y));
                 DrawLineInternal(dc, stroke, isStroked, ref p0, ref p1);
@@ -334,17 +334,17 @@ namespace Renderer.Avalonia
                 {
                     _biCache.Clear();
                 }
-                _biCache = new Dictionary<string, PMI.Bitmap>();
+                _biCache = new Dictionary<string, AMI.Bitmap>();
             }
         }
 
         /// <inheritdoc/>
         public override void Draw(object dc, XLine line, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
         {
-            var _dc = dc as PM.DrawingContext;
+            var _dc = dc as AM.DrawingContext;
 
-            PM.Pen strokeLine = ToPen(line.Style, _scaleToPage);
-            P.Point pt1, pt2;
+            AM.Pen strokeLine = ToPen(line.Style, _scaleToPage);
+            A.Point pt1, pt2;
 
             DrawLineArrowsInternal(_dc, line, dx, dy, out pt1, out pt2);
 
@@ -368,10 +368,10 @@ namespace Renderer.Avalonia
         /// <inheritdoc/>
         public override void Draw(object dc, XRectangle rectangle, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
         {
-            var _dc = dc as PM.DrawingContext;
+            var _dc = dc as AM.DrawingContext;
 
-            PM.IBrush brush = ToBrush(rectangle.Style.Fill);
-            PM.Pen pen = ToPen(rectangle.Style, _scaleToPage);
+            AM.IBrush brush = ToBrush(rectangle.Style.Fill);
+            AM.Pen pen = ToPen(rectangle.Style, _scaleToPage);
 
             var rect = CreateRect(rectangle.TopLeft, rectangle.BottomRight, dx, dy);
 
@@ -398,10 +398,10 @@ namespace Renderer.Avalonia
         /// <inheritdoc/>
         public override void Draw(object dc, XEllipse ellipse, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
         {
-            var _dc = dc as PM.DrawingContext;
+            var _dc = dc as AM.DrawingContext;
 
-            PM.IBrush brush = ToBrush(ellipse.Style.Fill);
-            PM.Pen pen = ToPen(ellipse.Style, _scaleToPage);
+            AM.IBrush brush = ToBrush(ellipse.Style.Fill);
+            AM.Pen pen = ToPen(ellipse.Style, _scaleToPage);
 
             var rect = CreateRect(ellipse.TopLeft, ellipse.BottomRight, dx, dy);
 
@@ -420,26 +420,26 @@ namespace Renderer.Avalonia
             if (!arc.IsFilled && !arc.IsStroked)
                 return;
 
-            var _dc = dc as PM.DrawingContext;
+            var _dc = dc as AM.DrawingContext;
 
-            PM.IBrush brush = ToBrush(arc.Style.Fill);
-            PM.Pen pen = ToPen(arc.Style, _scaleToPage);
+            AM.IBrush brush = ToBrush(arc.Style.Fill);
+            AM.Pen pen = ToPen(arc.Style, _scaleToPage);
 
-            var sg = new PM.StreamGeometry();
+            var sg = new AM.StreamGeometry();
             using (var sgc = sg.Open())
             {
                 var a = WpfArc.FromXArc(arc, dx, dy);
 
                 sgc.BeginFigure(
-                    new P.Point(a.Start.X, a.Start.Y),
+                    new A.Point(a.Start.X, a.Start.Y),
                     arc.IsFilled);
 
                 sgc.ArcTo(
-                    new P.Point(a.End.X, a.End.Y),
-                    new P.Size(a.Radius.Width, a.Radius.Height),
+                    new A.Point(a.End.X, a.End.Y),
+                    new A.Size(a.Radius.Width, a.Radius.Height),
                     0.0,
                     a.IsLargeArc,
-                    PM.SweepDirection.Clockwise);
+                    AM.SweepDirection.Clockwise);
 
                 sgc.EndFigure(false);
             }
@@ -456,22 +456,22 @@ namespace Renderer.Avalonia
             if (!cubicBezier.IsFilled && !cubicBezier.IsStroked)
                 return;
 
-            var _dc = dc as PM.DrawingContext;
+            var _dc = dc as AM.DrawingContext;
 
-            PM.IBrush brush = ToBrush(cubicBezier.Style.Fill);
-            PM.Pen pen = ToPen(cubicBezier.Style, _scaleToPage);
+            AM.IBrush brush = ToBrush(cubicBezier.Style.Fill);
+            AM.Pen pen = ToPen(cubicBezier.Style, _scaleToPage);
 
-            var sg = new PM.StreamGeometry();
+            var sg = new AM.StreamGeometry();
             using (var sgc = sg.Open())
             {
                 sgc.BeginFigure(
-                    new P.Point(cubicBezier.Point1.X, cubicBezier.Point1.Y),
+                    new A.Point(cubicBezier.Point1.X, cubicBezier.Point1.Y),
                     cubicBezier.IsFilled);
 
                 sgc.CubicBezierTo(
-                    new P.Point(cubicBezier.Point2.X, cubicBezier.Point2.Y),
-                    new P.Point(cubicBezier.Point3.X, cubicBezier.Point3.Y),
-                    new P.Point(cubicBezier.Point4.X, cubicBezier.Point4.Y));
+                    new A.Point(cubicBezier.Point2.X, cubicBezier.Point2.Y),
+                    new A.Point(cubicBezier.Point3.X, cubicBezier.Point3.Y),
+                    new A.Point(cubicBezier.Point4.X, cubicBezier.Point4.Y));
 
                 sgc.EndFigure(false);
             }
@@ -488,21 +488,21 @@ namespace Renderer.Avalonia
             if (!quadraticBezier.IsFilled && !quadraticBezier.IsStroked)
                 return;
 
-            var _dc = dc as PM.DrawingContext;
+            var _dc = dc as AM.DrawingContext;
 
-            PM.IBrush brush = ToBrush(quadraticBezier.Style.Fill);
-            PM.Pen pen = ToPen(quadraticBezier.Style, _scaleToPage);
+            AM.IBrush brush = ToBrush(quadraticBezier.Style.Fill);
+            AM.Pen pen = ToPen(quadraticBezier.Style, _scaleToPage);
 
-            var sg = new PM.StreamGeometry();
+            var sg = new AM.StreamGeometry();
             using (var sgc = sg.Open())
             {
                 sgc.BeginFigure(
-                    new P.Point(quadraticBezier.Point1.X, quadraticBezier.Point1.Y),
+                    new A.Point(quadraticBezier.Point1.X, quadraticBezier.Point1.Y),
                     quadraticBezier.IsFilled);
 
                 sgc.QuadraticBezierTo(
-                    new P.Point(quadraticBezier.Point2.X, quadraticBezier.Point2.Y),
-                    new P.Point(quadraticBezier.Point3.X, quadraticBezier.Point3.Y));
+                    new A.Point(quadraticBezier.Point2.X, quadraticBezier.Point2.Y),
+                    new A.Point(quadraticBezier.Point3.X, quadraticBezier.Point3.Y));
 
                 sgc.EndFigure(false);
             }
@@ -516,28 +516,28 @@ namespace Renderer.Avalonia
         /// <inheritdoc/>
         public override void Draw(object dc, XText text, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
         {
-            var _gfx = dc as PM.DrawingContext;
+            var _gfx = dc as AM.DrawingContext;
 
             var tbind = text.BindText(db, r);
             if (string.IsNullOrEmpty(tbind))
                 return;
 
-            PM.IBrush brush = ToBrush(text.Style.Stroke);
+            AM.IBrush brush = ToBrush(text.Style.Stroke);
 
-            var fontStyle = PM.FontStyle.Normal;
-            var fontWeight = PM.FontWeight.Normal;
+            var fontStyle = AM.FontStyle.Normal;
+            var fontWeight = AM.FontWeight.Normal;
             //var fontDecoration = PM.FontDecoration.None;
 
             if (text.Style.TextStyle.FontStyle != null)
             {
                 if (text.Style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Italic))
                 {
-                    fontStyle |= PM.FontStyle.Italic;
+                    fontStyle |= AM.FontStyle.Italic;
                 }
 
                 if (text.Style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Bold))
                 {
-                    fontWeight |= PM.FontWeight.Bold;
+                    fontWeight |= AM.FontWeight.Bold;
                 }
 
                 // TODO: Implement font decoration after Avalonia adds support.
@@ -556,12 +556,12 @@ namespace Renderer.Avalonia
 
             if (text.Style.TextStyle.FontSize >= 0.0)
             {
-                var ft = new PM.FormattedText(
+                var ft = new AM.FormattedText(
                     tbind,
                     text.Style.TextStyle.FontName,
                     text.Style.TextStyle.FontSize * _textScaleFactor,
                     fontStyle,
-                    PM.TextAlignment.Left,
+                    AM.TextAlignment.Left,
                     fontWeight);
 
                 var rect = CreateRect(text.TopLeft, text.BottomRight, dx, dy);
@@ -577,14 +577,14 @@ namespace Renderer.Avalonia
         /// <inheritdoc/>
         public override void Draw(object dc, XImage image, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
         {
-            var _dc = dc as PM.DrawingContext;
+            var _dc = dc as AM.DrawingContext;
 
             var rect = CreateRect(image.TopLeft, image.BottomRight, dx, dy);
 
             if (image.IsStroked || image.IsFilled)
             {
-                PM.IBrush brush = ToBrush(image.Style.Fill);
-                PM.Pen pen = ToPen(image.Style, _scaleToPage);
+                AM.IBrush brush = ToBrush(image.Style.Fill);
+                AM.Pen pen = ToPen(image.Style, _scaleToPage);
 
                 DrawRectangleInternal(
                     _dc,
@@ -604,8 +604,8 @@ namespace Renderer.Avalonia
                     _dc.DrawImage(
                         bi,
                         1.0,
-                        new P.Rect(0, 0, bi.PixelWidth, bi.PixelHeight),
-                        new P.Rect(rect.X, rect.Y, rect.Width, rect.Height));
+                        new A.Rect(0, 0, bi.PixelWidth, bi.PixelHeight),
+                        new A.Rect(rect.X, rect.Y, rect.Width, rect.Height));
                 }
                 catch (Exception ex)
                 {
@@ -625,7 +625,7 @@ namespace Renderer.Avalonia
                     {
                         using (var ms = new System.IO.MemoryStream(bytes))
                         {
-                            var bi = new PMI.Bitmap(ms);
+                            var bi = new AMI.Bitmap(ms);
 
                             if (_enableImageCache)
                                 _biCache[image.Key] = bi;
@@ -633,8 +633,8 @@ namespace Renderer.Avalonia
                             _dc.DrawImage(
                                 bi,
                                 1.0,
-                                new P.Rect(0, 0, bi.PixelWidth, bi.PixelHeight),
-                                new P.Rect(rect.X, rect.Y, rect.Width, rect.Height));
+                                new A.Rect(0, 0, bi.PixelWidth, bi.PixelHeight),
+                                new A.Rect(rect.X, rect.Y, rect.Width, rect.Height));
                         }
                     }
                 }
@@ -652,7 +652,7 @@ namespace Renderer.Avalonia
             if (!path.IsFilled && !path.IsStroked)
                 return;
 
-            var _dc = dc as PM.DrawingContext;
+            var _dc = dc as AM.DrawingContext;
 
             var g = path.Geometry.ToGeometry(dx, dy);
 
