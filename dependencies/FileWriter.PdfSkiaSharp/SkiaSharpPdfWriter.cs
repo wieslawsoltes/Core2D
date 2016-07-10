@@ -29,21 +29,23 @@ namespace FileWriter.PdfSkiaSharp
             if (options == null)
                 return;
 
-            var r = new SkiaRenderer();
-            r.State.DrawShapeState.Flags = ShapeStateFlags.Printable;
-            r.State.ImageCache = ic;
+            IProjectExporter exporter = new SkiaRenderer();
+
+            ShapeRenderer renderer = (ShapeRenderer)exporter;
+            renderer.State.DrawShapeState.Flags = ShapeStateFlags.Printable;
+            renderer.State.ImageCache = ic;
 
             if (item is XContainer)
             {
-                r.Save(path, item as XContainer);
+                exporter.Save(path, item as XContainer);
             }
             else if (item is XDocument)
             {
-                r.Save(path, item as XDocument);
+                exporter.Save(path, item as XDocument);
             }
             else if (item is XProject)
             {
-                r.Save(path, item as XProject);
+                exporter.Save(path, item as XProject);
             }
         }
     }
