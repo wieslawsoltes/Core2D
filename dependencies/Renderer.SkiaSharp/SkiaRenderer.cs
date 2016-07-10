@@ -272,9 +272,9 @@ namespace Renderer.SkiaSharp
                     double p2y = pt2.Y;
                     XLineExtensions.GetCurvedLineBezierControlPoints(orientation, curvature, pt1a, pt2a, ref p1x, ref p1y, ref p2x, ref p2y);
                     path.CubicTo(
-                        (float)p1x, 
+                        (float)p1x,
                         (float)p1y,
-                        (float)p2x, 
+                        (float)p2x,
                         (float)p2y,
                         pt2.X, pt2.Y);
                     canvas.DrawPath(path, pen);
@@ -306,119 +306,73 @@ namespace Renderer.SkiaSharp
                 double a1 = Math.Atan2(y1 - y2, x1 - x2);
                 double a2 = Math.Atan2(y2 - y1, x2 - x1);
 
-                var t1 = MatrixHelper.Rotation(a1, new SKPoint(x1, y1));
-                var t2 = MatrixHelper.Rotation(a2, new SKPoint(x2, y2));
+                // Draw start arrow.
+                pt1 = DrawLineArrowInternal(canvas, strokeStartArrow, fillStartArrow, x1, y1, a1, sas);
 
-                pt1 = default(SKPoint);
-                pt2 = default(SKPoint);
-                double radiusX1 = sas.RadiusX;
-                double radiusY1 = sas.RadiusY;
-                double sizeX1 = 2.0 * radiusX1;
-                double sizeY1 = 2.0 * radiusY1;
-
-                switch (sas.ArrowType)
-                {
-                    default:
-                    case ArrowType.None:
-                        {
-                            pt1 = new SKPoint(x1, y1);
-                        }
-                        break;
-                    case ArrowType.Rectangle:
-                        {
-                            pt1 = MatrixHelper.TransformPoint(t1, new SKPoint(x1 - (float)sizeX1, y1));
-                            var rect = ToSKRect(x1 - sizeX1, y1 - radiusY1, sizeX1, sizeY1);
-                            int count = canvas.Save();
-                            canvas.SetMatrix(t1);
-                            DrawRectangleInternal(canvas, fillStartArrow, strokeStartArrow, sas.IsStroked, sas.IsFilled, ref rect);
-                            canvas.RestoreToCount(count);
-                        }
-                        break;
-                    case ArrowType.Ellipse:
-                        {
-                            pt1 = MatrixHelper.TransformPoint(t1, new SKPoint(x1 - (float)sizeX1, y1));
-                            int count = canvas.Save();
-                            canvas.SetMatrix(t1);
-                            var rect = ToSKRect(x1 - sizeX1, y1 - radiusY1, sizeX1, sizeY1);
-                            DrawEllipseInternal(canvas, fillStartArrow, strokeStartArrow, sas.IsStroked, sas.IsFilled, ref rect);
-                            canvas.RestoreToCount(count);
-                        }
-                        break;
-                    case ArrowType.Arrow:
-                        {
-                            var pts = new SKPoint[]
-                            {
-                            new SKPoint(x1, y1),
-                            new SKPoint(x1 - (float)sizeX1, y1 + (float)sizeY1),
-                            new SKPoint(x1, y1),
-                            new SKPoint(x1 - (float)sizeX1, y1 - (float)sizeY1),
-                            new SKPoint(x1, y1)
-                            };
-                            pt1 = MatrixHelper.TransformPoint(t1, pts[0]);
-                            var p11 = MatrixHelper.TransformPoint(t1, pts[1]);
-                            var p21 = MatrixHelper.TransformPoint(t1, pts[2]);
-                            var p12 = MatrixHelper.TransformPoint(t1, pts[3]);
-                            var p22 = MatrixHelper.TransformPoint(t1, pts[4]);
-                            DrawLineInternal(canvas, strokeStartArrow, sas.IsStroked, ref p11, ref p21);
-                            DrawLineInternal(canvas, strokeStartArrow, sas.IsStroked, ref p12, ref p22);
-                        }
-                        break;
-                }
-
-                double radiusX2 = eas.RadiusX;
-                double radiusY2 = eas.RadiusY;
-                double sizeX2 = 2.0 * radiusX2;
-                double sizeY2 = 2.0 * radiusY2;
-
-                switch (eas.ArrowType)
-                {
-                    default:
-                    case ArrowType.None:
-                        {
-                            pt2 = new SKPoint(x2, y2);
-                        }
-                        break;
-                    case ArrowType.Rectangle:
-                        {
-                            pt2 = MatrixHelper.TransformPoint(t2, new SKPoint(x2 - (float)sizeX2, y2));
-                            var rect = ToSKRect(x2 - sizeX2, y2 - radiusY2, sizeX2, sizeY2);
-                            int count = canvas.Save();
-                            canvas.SetMatrix(t2);
-                            DrawRectangleInternal(canvas, fillEndArrow, strokeEndArrow, eas.IsStroked, eas.IsFilled, ref rect);
-                            canvas.RestoreToCount(count);
-                        }
-                        break;
-                    case ArrowType.Ellipse:
-                        {
-                            pt2 = MatrixHelper.TransformPoint(t2, new SKPoint(x2 - (float)sizeX2, y2));
-                            int count = canvas.Save();
-                            canvas.SetMatrix(t2);
-                            var rect = ToSKRect(x2 - sizeX2, y2 - radiusY2, sizeX2, sizeY2);
-                            DrawEllipseInternal(canvas, fillEndArrow, strokeEndArrow, eas.IsStroked, eas.IsFilled, ref rect);
-                            canvas.RestoreToCount(count);
-                        }
-                        break;
-                    case ArrowType.Arrow:
-                        {
-                            var pts = new SKPoint[]
-                            {
-                            new SKPoint(x2, y2),
-                            new SKPoint(x2 - (float)sizeX2, y2 + (float)sizeY2),
-                            new SKPoint(x2, y2),
-                            new SKPoint(x2 - (float)sizeX2, y2 - (float)sizeY2),
-                            new SKPoint(x2, y2)
-                            };
-                            pt2 = MatrixHelper.TransformPoint(t2, pts[0]);
-                            var p11 = MatrixHelper.TransformPoint(t2, pts[1]);
-                            var p21 = MatrixHelper.TransformPoint(t2, pts[2]);
-                            var p12 = MatrixHelper.TransformPoint(t2, pts[3]);
-                            var p22 = MatrixHelper.TransformPoint(t2, pts[4]);
-                            DrawLineInternal(canvas, strokeEndArrow, eas.IsStroked, ref p11, ref p21);
-                            DrawLineInternal(canvas, strokeEndArrow, eas.IsStroked, ref p12, ref p22);
-                        }
-                        break;
-                }
+                // Draw end arrow.
+                pt2 = DrawLineArrowInternal(canvas, strokeEndArrow, fillEndArrow, x2, y2, a2, eas);
             }
+        }
+
+        private static SKPoint DrawLineArrowInternal(SKCanvas canvas, SKPaint pen, SKPaint brush, float x, float y, double angle, ArrowStyle style)
+        {
+            SKPoint pt = default(SKPoint);
+            var rt = MatrixHelper.Rotation(angle, new SKPoint(x, y));
+            double rx = style.RadiusX;
+            double ry = style.RadiusY;
+            double sx = 2.0 * rx;
+            double sy = 2.0 * ry;
+
+            switch (style.ArrowType)
+            {
+                default:
+                case ArrowType.None:
+                    {
+                        pt = new SKPoint(x, y);
+                    }
+                    break;
+                case ArrowType.Rectangle:
+                    {
+                        pt = MatrixHelper.TransformPoint(rt, new SKPoint(x - (float)sx, y));
+                        var rect = ToSKRect(x - sx, y - ry, sx, sy);
+                        int count = canvas.Save();
+                        canvas.SetMatrix(rt);
+                        DrawRectangleInternal(canvas, brush, pen, style.IsStroked, style.IsFilled, ref rect);
+                        canvas.RestoreToCount(count);
+                    }
+                    break;
+                case ArrowType.Ellipse:
+                    {
+                        pt = MatrixHelper.TransformPoint(rt, new SKPoint(x - (float)sx, y));
+                        int count = canvas.Save();
+                        canvas.SetMatrix(rt);
+                        var rect = ToSKRect(x - sx, y - ry, sx, sy);
+                        DrawEllipseInternal(canvas, brush, pen, style.IsStroked, style.IsFilled, ref rect);
+                        canvas.RestoreToCount(count);
+                    }
+                    break;
+                case ArrowType.Arrow:
+                    {
+                        var pts = new SKPoint[]
+                        {
+                            new SKPoint(x, y),
+                            new SKPoint(x - (float)sx, y + (float)sy),
+                            new SKPoint(x, y),
+                            new SKPoint(x - (float)sx, y - (float)sy),
+                            new SKPoint(x, y)
+                        };
+                        pt = MatrixHelper.TransformPoint(rt, pts[0]);
+                        var p11 = MatrixHelper.TransformPoint(rt, pts[1]);
+                        var p21 = MatrixHelper.TransformPoint(rt, pts[2]);
+                        var p12 = MatrixHelper.TransformPoint(rt, pts[3]);
+                        var p22 = MatrixHelper.TransformPoint(rt, pts[4]);
+                        DrawLineInternal(canvas, pen, style.IsStroked, ref p11, ref p21);
+                        DrawLineInternal(canvas, pen, style.IsStroked, ref p12, ref p22);
+                    }
+                    break;
+            }
+
+            return pt;
         }
 
         private static void DrawRectangleInternal(SKCanvas canvas, SKPaint brush, SKPaint pen, bool isStroked, bool isFilled, ref SKRect rect)
