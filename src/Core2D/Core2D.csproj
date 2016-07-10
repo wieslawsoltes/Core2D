@@ -89,6 +89,7 @@
     <Compile Include="Editor\Views\DashboardView.cs" />
     <Compile Include="Editor\Views\DocumentView.cs" />
     <Compile Include="Editor\Views\EditorView.cs" />
+    <Compile Include="Interfaces\IProjectExporter.cs" />
     <Compile Include="ObservableObject.cs" />
     <Compile Include="ObservableResource.cs" />
     <Compile Include="Data\Database\XColumn.cs" />
