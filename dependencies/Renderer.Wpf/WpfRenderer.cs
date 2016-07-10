@@ -255,37 +255,23 @@ namespace Renderer.Wpf
             double a2 = Math.Atan2(y2 - y1, x2 - x1) * 180.0 / Math.PI;
 
             // Draw start arrow.
-            pt1 = DrawLineArrowInternal(
-                dc,
-                halfStart,
-                strokeStartArrow,
-                fillStartArrow,
-                sas.IsStroked,
-                sas.IsFilled,
-                x1, y1,
-                a1, sas.ArrowType, sas.RadiusX, sas.RadiusY);
+            pt1 = DrawLineArrowInternal(dc, halfStart, strokeStartArrow, fillStartArrow, x1, y1, a1, sas);
 
             // Draw end arrow.
-            pt2 = DrawLineArrowInternal(
-                dc,
-                halfEnd,
-                strokeEndArrow,
-                fillEndArrow,
-                eas.IsStroked,
-                eas.IsFilled,
-                x2, y2,
-                a2, eas.ArrowType, eas.RadiusX, eas.RadiusY);
+            pt2 = DrawLineArrowInternal(dc, halfEnd, strokeEndArrow, fillEndArrow, x2, y2, a2, eas);
         }
 
-        private static Point DrawLineArrowInternal(DrawingContext dc, double half, Pen pen, Brush brush, bool isStroked, bool isFilled, double x, double y, double angle, ArrowType type, double rx, double ry)
+        private static Point DrawLineArrowInternal(DrawingContext dc, double half, Pen pen, Brush brush, double x, double y, double angle, ArrowStyle style)
         {
             Point pt;
             bool doRectTransform = angle % 90.0 != 0.0;
             var rt = new RotateTransform(angle, x, y);
+            double rx = style.RadiusX;
+            double ry = style.RadiusY;
             double sx = 2.0 * rx;
             double sy = 2.0 * ry;
 
-            switch (type)
+            switch (style.ArrowType)
             {
                 default:
                 case ArrowType.None:
@@ -300,13 +286,13 @@ namespace Renderer.Wpf
                         if (doRectTransform)
                         {
                             dc.PushTransform(rt);
-                            DrawRectangleInternal(dc, half, brush, pen, isStroked, isFilled, ref rect);
+                            DrawRectangleInternal(dc, half, brush, pen, style.IsStroked, style.IsFilled, ref rect);
                             dc.Pop();
                         }
                         else
                         {
                             var bounds = rt.TransformBounds(rect);
-                            DrawRectangleInternal(dc, half, brush, pen, isStroked, isFilled, ref bounds);
+                            DrawRectangleInternal(dc, half, brush, pen, style.IsStroked, style.IsFilled, ref bounds);
                         }
                     }
                     break;
@@ -315,7 +301,7 @@ namespace Renderer.Wpf
                         pt = rt.Transform(new Point(x - sx, y));
                         dc.PushTransform(rt);
                         var c = new Point(x - rx, y);
-                        DrawEllipseInternal(dc, half, brush, pen, isStroked, isFilled, ref c, rx, ry);
+                        DrawEllipseInternal(dc, half, brush, pen, style.IsStroked, style.IsFilled, ref c, rx, ry);
                         dc.Pop();
                     }
                     break;
@@ -326,8 +312,8 @@ namespace Renderer.Wpf
                         var p21 = rt.Transform(new Point(x, y));
                         var p12 = rt.Transform(new Point(x - sx, y - sy));
                         var p22 = rt.Transform(new Point(x, y));
-                        DrawLineInternal(dc, half, pen, isStroked, ref p11, ref p21);
-                        DrawLineInternal(dc, half, pen, isStroked, ref p12, ref p22);
+                        DrawLineInternal(dc, half, pen, style.IsStroked, ref p11, ref p21);
+                        DrawLineInternal(dc, half, pen, style.IsStroked, ref p12, ref p22);
                     }
                     break;
             }
