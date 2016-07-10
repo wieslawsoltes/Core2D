@@ -615,6 +615,8 @@ namespace Renderer.Dxf
 
             // TODO: Draw line end arrow.
 
+            // TODO: Draw line curve.
+
             DrawLineInternal(dxf, _currentLayer, line.Style, line.IsStroked, _x1, _y1, _x2, _y2);
         }
 
