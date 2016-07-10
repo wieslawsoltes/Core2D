@@ -32,7 +32,6 @@ namespace Renderer.SkiaSharp
         public SkiaRenderer()
         {
             ClearCache(isZooming: false);
-
             _scaleToPage = (value) => (float)(value * 1.0);
         }
 
@@ -40,10 +39,7 @@ namespace Renderer.SkiaSharp
         /// Creates a new <see cref="SkiaRenderer"/> instance.
         /// </summary>
         /// <returns>The new instance of the <see cref="SkiaRenderer"/> class.</returns>
-        public static ShapeRenderer Create()
-        {
-            return new SkiaRenderer();
-        }
+        public static ShapeRenderer Create() => new SkiaRenderer();
 
         private static SKPoint GetTextOrigin(ShapeStyle style, ref SKRect rect, ref SKRect size)
         {
@@ -84,14 +80,7 @@ namespace Renderer.SkiaSharp
             return new SKPoint((float)ox, (float)oy);
         }
 
-        private static SKColor ToSKColor(ArgbColor color)
-        {
-            return new SKColor(
-                color.R,
-                color.G,
-                color.B,
-                color.A);
-        }
+        private static SKColor ToSKColor(ArgbColor color) => new SKColor(color.R, color.G, color.B, color.A);
 
         private static SKPaint ToSKPaintPen(BaseStyle style, Func<double, float> scale, double sourceDpi, double targetDpi)
         {

@@ -35,7 +35,6 @@ namespace Renderer.Avalonia
         public AvaloniaRenderer(double textScaleFactor = 1.0)
         {
             ClearCache(isZooming: false);
-
             _textScaleFactor = textScaleFactor;
             _scaleToPage = (value) => (float)(value);
         }
@@ -44,10 +43,7 @@ namespace Renderer.Avalonia
         /// Creates a new <see cref="AvaloniaRenderer"/> instance.
         /// </summary>
         /// <returns>The new instance of the <see cref="AvaloniaRenderer"/> class.</returns>
-        public static ShapeRenderer Create()
-        {
-            return new AvaloniaRenderer();
-        }
+        public static ShapeRenderer Create() => new AvaloniaRenderer();
 
         private A.Point GetTextOrigin(ShapeStyle style, ref Rect2 rect, ref A.Size size)
         {
@@ -84,14 +80,7 @@ namespace Renderer.Avalonia
             return new A.Point(ox, oy);
         }
 
-        private AM.Color ToColor(ArgbColor color)
-        {
-            return AM.Color.FromArgb(
-                color.A,
-                color.R,
-                color.G,
-                color.B);
-        }
+        private static AM.Color ToColor(ArgbColor color) => AM.Color.FromArgb(color.A, color.R, color.G, color.B);
 
         private AM.Pen ToPen(BaseStyle style, Func<double, float> scale)
         {

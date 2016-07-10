@@ -33,7 +33,6 @@ namespace Renderer.WinForms
         public WinFormsRenderer(double textScaleFactor = 1.0)
         {
             ClearCache(isZooming: false);
-
             _textScaleFactor = textScaleFactor;
             _scaleToPage = (value) => (float)(value);
         }
@@ -42,10 +41,7 @@ namespace Renderer.WinForms
         /// Creates a new <see cref="WinFormsRenderer"/> instance.
         /// </summary>
         /// <returns>The new instance of the <see cref="WinFormsRenderer"/> class.</returns>
-        public static ShapeRenderer Create()
-        {
-            return new WinFormsRenderer();
-        }
+        public static ShapeRenderer Create() => new WinFormsRenderer();
 
         private static Color ToColor(ArgbColor color) => Color.FromArgb(color.A, color.R, color.G, color.B);
 

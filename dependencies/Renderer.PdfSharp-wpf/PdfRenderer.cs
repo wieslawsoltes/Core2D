@@ -32,7 +32,6 @@ namespace Renderer.PdfSharp_core
         public PdfRenderer()
         {
             ClearCache(isZooming: false);
-
             _scaleToPage = (value) => (float)(value * 1.0);
         }
 
@@ -40,19 +39,9 @@ namespace Renderer.PdfSharp_core
         /// Creates a new <see cref="PdfRenderer"/> instance.
         /// </summary>
         /// <returns>The new instance of the <see cref="PdfRenderer"/> class.</returns>
-        public static Core2D.Renderer.ShapeRenderer Create()
-        {
-            return new PdfRenderer();
-        }
+        public static Core2D.Renderer.ShapeRenderer Create() => new PdfRenderer();
 
-        private static XColor ToXColor(Core2D.Style.ArgbColor color)
-        {
-            return XColor.FromArgb(
-                color.A,
-                color.R,
-                color.G,
-                color.B);
-        }
+        private static XColor ToXColor(Core2D.Style.ArgbColor color) => XColor.FromArgb(color.A, color.R, color.G, color.B);
 
         private static XPen ToXPen(Core2D.Style.BaseStyle style, Func<double, double> scale, double sourceDpi, double targetDpi)
         {

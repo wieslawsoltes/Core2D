@@ -54,10 +54,7 @@ namespace Renderer.Wpf
         /// Creates a new <see cref="WpfRenderer"/> instance.
         /// </summary>
         /// <returns>The new instance of the <see cref="WpfRenderer"/> class.</returns>
-        public static ShapeRenderer Create()
-        {
-            return new WpfRenderer();
-        }
+        public static ShapeRenderer Create() => new WpfRenderer();
 
         private static Point GetTextOrigin(ShapeStyle style, ref Rect rect, FormattedText ft)
         {
@@ -94,9 +91,11 @@ namespace Renderer.Wpf
             return new Point(ox, oy);
         }
 
+        private static Color ToColor(ArgbColor color) => Color.FromArgb(color.A, color.R, color.G, color.B);
+
         private static Brush CreateBrush(ArgbColor color)
         {
-            var brush = new SolidColorBrush(Color.FromArgb(color.A, color.R, color.G, color.B));
+            var brush = new SolidColorBrush(ToColor(color));
             brush.Freeze();
             return brush;
         }
