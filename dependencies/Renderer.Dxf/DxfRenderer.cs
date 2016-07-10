@@ -1,27 +1,28 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using netDxf;
-using netDxf.Entities;
-using netDxf.Header;
-using netDxf.Objects;
-using netDxf.Tables;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using netDxf;
+using netDxf.Entities;
+using netDxf.Objects;
+using netDxf.Tables;
 
 namespace Renderer.Dxf
 {
     /// <summary>
     /// Native netDxf shape renderer.
     /// </summary>
-    public class DxfRenderer : Core2D.Renderer.ShapeRenderer
+    public partial class DxfRenderer : Core2D.Renderer.ShapeRenderer
     {
         private Core2D.Renderer.Cache<string, ImageDefinition> _biCache = Core2D.Renderer.Cache<string, ImageDefinition>.Create();
         private double _pageWidth;
         private double _pageHeight;
         private string _outputPath;
         private Layer _currentLayer;
+        private double _sourceDpi = 96.0;
+        private double _targetDpi = 72.0;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DxfRenderer"/> class.
@@ -36,104 +37,6 @@ namespace Renderer.Dxf
         /// </summary>
         /// <returns>The new instance of the <see cref="DxfRenderer"/> class.</returns>
         public static Core2D.Renderer.ShapeRenderer Create() => new DxfRenderer();
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="path"></param>
-        /// <param name="container"></param>
-        public void Save(string path, Core2D.Project.XContainer container)
-        {
-            _outputPath = System.IO.Path.GetDirectoryName(path);
-            var dxf = new DxfDocument(DxfVersion.AutoCad2010);
-
-            Add(dxf, container);
-
-            dxf.Save(path);
-            ClearCache(isZooming: false);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="path"></param>
-        /// <param name="document"></param>
-        public void Save(string path, Core2D.Project.XDocument document)
-        {
-            _outputPath = System.IO.Path.GetDirectoryName(path);
-            var dxf = new DxfDocument(DxfVersion.AutoCad2010);
-
-            Add(dxf, document);
-
-            dxf.Save(path);
-            ClearCache(isZooming: false);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="path"></param>
-        /// <param name="project"></param>
-        public void Save(string path, Core2D.Project.XProject project)
-        {
-            _outputPath = System.IO.Path.GetDirectoryName(path);
-            var dxf = new DxfDocument(DxfVersion.AutoCad2010);
-
-            Add(dxf, project);
-
-            dxf.Save(path);
-            ClearCache(isZooming: false);
-        }
-
-        private void Add(DxfDocument dxf, Core2D.Project.XContainer container)
-        {
-            if (container.Template != null)
-            {
-                _pageWidth = container.Template.Width;
-                _pageHeight = container.Template.Height;
-                Draw(dxf, container.Template, container.Data.Properties, container.Data.Record);
-            }
-            else
-            {
-                throw new NullReferenceException("Container template must be set.");
-            }
-
-            Draw(dxf, container, container.Data.Properties, container.Data.Record);
-        }
-
-        private void Add(DxfDocument dxf, Core2D.Project.XDocument document)
-        {
-            foreach (var page in document.Pages)
-            {
-                var layout = new Layout(page.Name)
-                {
-                    PlotSettings = new PlotSettings()
-                    {
-                        PaperSizeName = $"{page.Template.Name}_({page.Template.Width}_x_{page.Template.Height}_MM)",
-                        LeftMargin = 0.0,
-                        BottomMargin = 0.0,
-                        RightMargin = 0.0,
-                        TopMargin = 0.0,
-                        PaperSize = new Vector2(page.Template.Width, page.Template.Height),
-                        Origin = new Vector2(0.0, 0.0),
-                        PaperUnits = PlotPaperUnits.Milimeters,
-                        PaperRotation = PlotRotation.NoRotation
-                    }
-                };
-                dxf.Layouts.Add(layout);
-                dxf.ActiveLayout = layout.Name;
-
-                Add(dxf, page);
-            }
-        }
-
-        private void Add(DxfDocument dxf, Core2D.Project.XProject project)
-        {
-            foreach (var document in project.Documents)
-            {
-                Add(dxf, document);
-            }
-        }
 
         private static double LineweightFactor = 96.0 / 2540.0;
 
@@ -914,7 +817,7 @@ namespace Renderer.Dxf
             var ts = new TextStyle(style.TextStyle.FontName, style.TextStyle.FontFile);
             var dxfMText = new MText(
                 new Vector3(ToDxfX(x), ToDxfY(y), 0),
-                text.Style.TextStyle.FontSize * 72.0 / 96.0,
+                text.Style.TextStyle.FontSize * _targetDpi / _sourceDpi,
                 rect.Width,
                 ts);
             dxfMText.AttachmentPoint = attachmentPoint;
