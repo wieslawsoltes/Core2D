@@ -52,11 +52,11 @@ The core library and editor are portable and should work on all platforms where 
   * Avalonia.Desktop
   * Avalonia.Skia.Desktop
   * SkiaSharp
-  * Rx-Core
-  * Rx-Interfaces
-  * Rx-Linq
-  * Rx-Main
-  * Rx-PlatformServices
+  * System.Reactive
+  * System.Reactive.Core
+  * System.Reactive.Interfaces
+  * System.Reactive.Linq
+  * System.Reactive.PlatformServices
   * Serilog
   * SharpDX
   * SharpDX.Direct2D1
