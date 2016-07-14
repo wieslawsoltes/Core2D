@@ -30,6 +30,9 @@ rmdir /Q /S dependencies\FileWriter.Pdf-wpf\obj
 rmdir /Q /S dependencies\FileWriter.PdfSkiaSharp\bin
 rmdir /Q /S dependencies\FileWriter.PdfSkiaSharp\obj
 
+rmdir /Q /S dependencies\FileWriter.Vdx\bin
+rmdir /Q /S dependencies\FileWriter.Vdx\obj
+
 rmdir /Q /S dependencies\Log.Trace\bin
 rmdir /Q /S dependencies\Log.Trace\obj
 
@@ -47,6 +50,9 @@ rmdir /Q /S dependencies\Renderer.PdfSharp-wpf\obj
 
 rmdir /Q /S dependencies\Renderer.SkiaSharp\bin
 rmdir /Q /S dependencies\Renderer.SkiaSharp\obj
+
+rmdir /Q /S dependencies\Renderer.Vdx\bin
+rmdir /Q /S dependencies\Renderer.Vdx\obj
 
 rmdir /Q /S dependencies\Renderer.WinForms\bin
 rmdir /Q /S dependencies\Renderer.WinForms\obj
