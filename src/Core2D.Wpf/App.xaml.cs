@@ -1,5 +1,11 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
+using System.Collections.Immutable;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
 using Core2D.Editor;
 using Core2D.Editor.Designer;
 using Core2D.Editor.Factories;
@@ -11,17 +17,12 @@ using FileSystem.DotNetFx;
 using FileWriter.Dxf;
 using FileWriter.Emf;
 using FileWriter.Pdf_wpf;
+using FileWriter.Vdx;
 using Log.Trace;
 using Microsoft.Win32;
 using Renderer.Wpf;
 using Serializer.Newtonsoft;
 using Serializer.Xaml;
-using System;
-using System.Collections.Immutable;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using TextFieldReader.CsvHelper;
 using TextFieldWriter.CsvHelper;
 
@@ -69,7 +70,8 @@ namespace Core2D.Wpf
                     {
                         new PdfWriter(),
                         new DxfWriter(),
-                        new EmfWriter()
+                        new EmfWriter(),
+                        new VdxWriter()
                     }.ToImmutableArray();
 
                 Start(fileIO, log, writers);
