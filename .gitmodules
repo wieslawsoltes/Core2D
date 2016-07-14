@@ -4,6 +4,3 @@
 [submodule "dependencies/PDFsharp"]
 	path = dependencies/PDFsharp
 	url = https://github.com/Core2D/PDFsharp.git
-[submodule "dependencies/VisioAutomation.VDX"]
-	path = dependencies/VisioAutomation.VDX
-	url = https://github.com/Core2D/VisioAutomation.VDX.git
