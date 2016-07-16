@@ -4,7 +4,6 @@ using Core2D.Editor.Bounds;
 using Core2D.Math;
 using Core2D.Shape;
 using Core2D.Shapes;
-using Core2D.Style;
 
 namespace Core2D.Editor.Tools
 {

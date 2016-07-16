@@ -1,13 +1,13 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
+using System.Collections.Generic;
 using Core2D.Data;
 using Core2D.Data.Database;
 using Core2D.Project;
 using Core2D.Shape;
 using Core2D.Shapes;
 using Core2D.Style;
-using System;
-using System.Collections.Generic;
 
 namespace Core2D.Editor
 {

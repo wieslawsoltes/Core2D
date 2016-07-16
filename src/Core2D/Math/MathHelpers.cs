@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using static System.Math;
 using System.Collections.Generic;
+using static System.Math;
 
 namespace Core2D.Math
 {

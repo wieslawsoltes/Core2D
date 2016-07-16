@@ -1,10 +1,10 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Core2D.Attributes;
 using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
+using Core2D.Attributes;
 
 namespace Core2D.Style
 {

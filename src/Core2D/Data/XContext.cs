@@ -1,9 +1,9 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Core2D.Attributes;
-using Core2D.Data.Database;
 using System.Collections.Immutable;
 using System.Linq;
+using Core2D.Attributes;
+using Core2D.Data.Database;
 
 namespace Core2D.Data
 {

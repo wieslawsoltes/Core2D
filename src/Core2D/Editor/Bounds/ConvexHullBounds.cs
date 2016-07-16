@@ -1,11 +1,11 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System.Collections.Generic;
+using System.Linq;
 using Core2D.Math;
 using Core2D.Math.ConvexHull;
 using Core2D.Math.Sat;
 using Core2D.Shapes;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Core2D.Editor.Bounds
 {

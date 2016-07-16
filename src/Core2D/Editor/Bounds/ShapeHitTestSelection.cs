@@ -1,11 +1,11 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Core2D.Math;
-using Core2D.Shape;
-using Core2D.Shapes;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using Core2D.Math;
+using Core2D.Shape;
+using Core2D.Shapes;
 
 namespace Core2D.Editor.Bounds
 {

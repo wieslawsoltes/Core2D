@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System.Threading.Tasks;
 using Core2D.Data;
 using Core2D.Data.Database;
 using Core2D.Editor.Input;
@@ -7,7 +8,6 @@ using Core2D.Project;
 using Core2D.Shape;
 using Core2D.Shapes;
 using Core2D.Style;
-using System.Threading.Tasks;
 
 namespace Core2D.Editor
 {
