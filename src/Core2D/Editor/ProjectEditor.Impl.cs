@@ -3019,6 +3019,28 @@ namespace Core2D.Editor
             return false;
         }
 
+        /// <summary>
+        /// Try to get connection point at specified location.
+        /// </summary>
+        /// <param name="x">The X coordinate of point.</param>
+        /// <param name="y">The Y coordinate of point.</param>
+        /// <returns>The connected point if success.</returns>
+        public XPoint TryToGetConnectionPoint(double x, double y)
+        {
+            if (_project.Options.TryToConnect)
+            {
+                var result = ShapeHitTestPoint.HitTest(
+                    _project.CurrentContainer.CurrentLayer.Shapes,
+                    new Vector2(x, y),
+                    _project.Options.HitThreshold);
+                if (result != null && result is XPoint)
+                {
+                    return result as XPoint;
+                }
+            }
+            return null;
+        }
+
         private void SwapLineStart(XLine line, XPoint point)
         {
             if (line?.Start != null && point != null)
