@@ -81,6 +81,14 @@ namespace Core2D.Editor.Tools.Path
         }
 
         /// <inheritdoc/>
+        public override void Finalize(BaseShape shape)
+        {
+            base.Finalize(shape);
+
+            // TODO: Add Arc path helper Finalize method implementation.
+        }
+
+        /// <inheritdoc/>
         public override void Remove()
         {
             base.Remove();
