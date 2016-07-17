@@ -48,7 +48,7 @@ namespace Core2D.Editor.Tools.Path
             {
                 case ToolState.None:
                     {
-                        _lineStart = _toolPath.TryToGetConnectionPoint(sx, sy) ?? XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
+                        _lineStart = _editor.TryToGetConnectionPoint(sx, sy) ?? XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
                         if (!_toolPath._isInitialized)
                         {
                             _toolPath.InitializeWorkingPath(_lineStart);
@@ -77,7 +77,7 @@ namespace Core2D.Editor.Tools.Path
                         _lineEnd.Y = sy;
                         if (_editor.Project.Options.TryToConnect)
                         {
-                            var end = _toolPath.TryToGetConnectionPoint(sx, sy);
+                            var end = _editor.TryToGetConnectionPoint(sx, sy);
                             if (end != null)
                             {
                                 var figure = _toolPath._geometry.Figures.LastOrDefault();

@@ -1,7 +1,5 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Core2D.Editor.Bounds;
-using Core2D.Math;
 using Core2D.Shape;
 using Core2D.Shapes;
 using Core2D.Style;
@@ -35,70 +33,6 @@ namespace Core2D.Editor.Tools
             _editor = editor;
         }
 
-        /// <summary>
-        /// Try to connect <see cref="XCubicBezier.Point1"/> point at specified location.
-        /// </summary>
-        /// <param name="cubicBezier">The cubic bezier object.</param>
-        /// <param name="x">The X coordinate of point.</param>
-        /// <param name="y">The Y coordinate of point.</param>
-        /// <returns>True if connected.</returns>
-        public void TryToConnectPoint1(XCubicBezier cubicBezier, double x, double y)
-        {
-            var result = ShapeHitTestPoint.HitTest(_editor.Project.CurrentContainer.CurrentLayer.Shapes, new Vector2(x, y), _editor.Project.Options.HitThreshold);
-            if (result != null && result is XPoint)
-            {
-                cubicBezier.Point1 = result as XPoint;
-            }
-        }
-
-        /// <summary>
-        /// Try to connect <see cref="XCubicBezier.Point2"/> point at specified location.
-        /// </summary>
-        /// <param name="cubicBezier">The cubic bezier object.</param>
-        /// <param name="x">The X coordinate of point.</param>
-        /// <param name="y">The Y coordinate of point.</param>
-        /// <returns>True if connected.</returns>
-        public void TryToConnectPoint2(XCubicBezier cubicBezier, double x, double y)
-        {
-            var result = ShapeHitTestPoint.HitTest(_editor.Project.CurrentContainer.CurrentLayer.Shapes, new Vector2(x, y), _editor.Project.Options.HitThreshold);
-            if (result != null && result is XPoint)
-            {
-                cubicBezier.Point2 = result as XPoint;
-            }
-        }
-
-        /// <summary>
-        /// Try to connect <see cref="XCubicBezier.Point3"/> point at specified location.
-        /// </summary>
-        /// <param name="cubicBezier">The cubic bezier object.</param>
-        /// <param name="x">The X coordinate of point.</param>
-        /// <param name="y">The Y coordinate of point.</param>
-        /// <returns>True if connected.</returns>
-        public void TryToConnectPoint3(XCubicBezier cubicBezier, double x, double y)
-        {
-            var result = ShapeHitTestPoint.HitTest(_editor.Project.CurrentContainer.CurrentLayer.Shapes, new Vector2(x, y), _editor.Project.Options.HitThreshold);
-            if (result != null && result is XPoint)
-            {
-                cubicBezier.Point3 = result as XPoint;
-            }
-        }
-
-        /// <summary>
-        /// Try to connect <see cref="XCubicBezier.Point4"/> point at specified location.
-        /// </summary>
-        /// <param name="cubicBezier">The cubic bezier object.</param>
-        /// <param name="x">The X coordinate of point.</param>
-        /// <param name="y">The Y coordinate of point.</param>
-        /// <returns>True if connected.</returns>
-        public void TryToConnectPoint4(XCubicBezier cubicBezier, double x, double y)
-        {
-            var result = ShapeHitTestPoint.HitTest(_editor.Project.CurrentContainer.CurrentLayer.Shapes, new Vector2(x, y), _editor.Project.Options.HitThreshold);
-            if (result != null && result is XPoint)
-            {
-                cubicBezier.Point4 = result as XPoint;
-            }
-        }
-
         /// <inheritdoc/>
         public override void LeftDown(double x, double y)
         {
@@ -117,10 +51,13 @@ namespace Core2D.Editor.Tools
                             _editor.Project.Options.PointShape,
                             _editor.Project.Options.DefaultIsStroked,
                             _editor.Project.Options.DefaultIsFilled);
-                        if (_editor.Project.Options.TryToConnect)
+
+                        var result = _editor.TryToGetConnectionPoint(sx, sy);
+                        if (result != null)
                         {
-                            TryToConnectPoint1(_shape as XCubicBezier, sx, sy);
+                            _shape.Point1 = result;
                         }
+
                         _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_shape);
                         _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         ToStateOne();
@@ -139,10 +76,13 @@ namespace Core2D.Editor.Tools
                             cubicBezier.Point3.Y = sy;
                             cubicBezier.Point4.X = sx;
                             cubicBezier.Point4.Y = sy;
-                            if (_editor.Project.Options.TryToConnect)
+
+                            var result = _editor.TryToGetConnectionPoint(sx, sy);
+                            if (result != null)
                             {
-                                TryToConnectPoint4(_shape as XCubicBezier, sx, sy);
+                                _shape.Point4 = result;
                             }
+
                             _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                             ToStateTwo();
                             Move(_shape as XCubicBezier);
@@ -158,10 +98,13 @@ namespace Core2D.Editor.Tools
                         {
                             cubicBezier.Point2.X = sx;
                             cubicBezier.Point2.Y = sy;
-                            if (_editor.Project.Options.TryToConnect)
+
+                            var result = _editor.TryToGetConnectionPoint(sx, sy);
+                            if (result != null)
                             {
-                                TryToConnectPoint2(_shape as XCubicBezier, sx, sy);
+                                _shape.Point2 = result;
                             }
+
                             _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                             ToStateThree();
                             Move(_shape as XCubicBezier);
@@ -177,10 +120,13 @@ namespace Core2D.Editor.Tools
                         {
                             cubicBezier.Point3.X = sx;
                             cubicBezier.Point3.Y = sy;
-                            if (_editor.Project.Options.TryToConnect)
+
+                            var result = _editor.TryToGetConnectionPoint(sx, sy);
+                            if (result != null)
                             {
-                                TryToConnectPoint3(_shape as XCubicBezier, sx, sy);
+                                _shape.Point3 = result;
                             }
+
                             _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_shape);
                             Remove();
                             Finalize(_shape as XCubicBezier);

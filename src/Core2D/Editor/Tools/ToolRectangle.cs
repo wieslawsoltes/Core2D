@@ -1,7 +1,5 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Core2D.Editor.Bounds;
-using Core2D.Math;
 using Core2D.Shape;
 using Core2D.Shapes;
 
@@ -28,36 +26,6 @@ namespace Core2D.Editor.Tools
             _editor = editor;
         }
 
-        /// <summary>
-        /// Try to connect <see cref="XText.TopLeft"/> point at specified location.
-        /// </summary>
-        /// <param name="rectangle">The rectangle object.</param>
-        /// <param name="x">The X coordinate of point.</param>
-        /// <param name="y">The Y coordinate of point.</param>
-        public void TryToConnectTopLeft(XRectangle rectangle, double x, double y)
-        {
-            var result = ShapeHitTestPoint.HitTest(_editor.Project.CurrentContainer.CurrentLayer.Shapes, new Vector2(x, y), _editor.Project.Options.HitThreshold);
-            if (result != null && result is XPoint)
-            {
-                rectangle.TopLeft = result as XPoint;
-            }
-        }
-
-        /// <summary>
-        /// Try to connect <see cref="XText.BottomRight"/> point at specified location.
-        /// </summary>
-        /// <param name="rectangle">The rectangle object.</param>
-        /// <param name="x">The X coordinate of point.</param>
-        /// <param name="y">The Y coordinate of point.</param>
-        public void TryToConnectBottomRight(XRectangle rectangle, double x, double y)
-        {
-            var result = ShapeHitTestPoint.HitTest(_editor.Project.CurrentContainer.CurrentLayer.Shapes, new Vector2(x, y), _editor.Project.Options.HitThreshold);
-            if (result != null && result is XPoint)
-            {
-                rectangle.BottomRight = result as XPoint;
-            }
-        }
-
         /// <inheritdoc/>
         public override void LeftDown(double x, double y)
         {
@@ -76,10 +44,13 @@ namespace Core2D.Editor.Tools
                             _editor.Project.Options.PointShape,
                             _editor.Project.Options.DefaultIsStroked,
                             _editor.Project.Options.DefaultIsFilled);
-                        if (_editor.Project.Options.TryToConnect)
+
+                        var result = _editor.TryToGetConnectionPoint(sx, sy);
+                        if (result != null)
                         {
-                            TryToConnectTopLeft(_shape as XRectangle, sx, sy);
+                            _shape.TopLeft = result;
                         }
+
                         _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_shape);
                         _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         ToStateOne();
@@ -96,10 +67,13 @@ namespace Core2D.Editor.Tools
                         {
                             rectangle.BottomRight.X = sx;
                             rectangle.BottomRight.Y = sy;
-                            if (_editor.Project.Options.TryToConnect)
+
+                            var result = _editor.TryToGetConnectionPoint(sx, sy);
+                            if (result != null)
                             {
-                                TryToConnectBottomRight(_shape as XRectangle, sx, sy);
+                                _shape.BottomRight = result;
                             }
+
                             _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_shape);
                             Remove();
                             Finalize(_shape);

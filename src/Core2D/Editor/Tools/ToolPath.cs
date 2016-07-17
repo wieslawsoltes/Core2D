@@ -3,9 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Core2D.Editor.Bounds;
 using Core2D.Editor.Tools.Path;
-using Core2D.Math;
 using Core2D.Path;
 using Core2D.Path.Segments;
 using Core2D.Shape;
@@ -45,25 +43,6 @@ namespace Core2D.Editor.Tools
             _toolPathArc = new ToolPathArc(_editor, this);
             _toolPathCubicBezier = new ToolPathCubicBezier(_editor, this);
             _toolPathQuadraticBezier = new ToolPathQuadraticBezier(_editor, this);
-        }
-
-        /// <summary>
-        /// Try to get connection point at specified location.
-        /// </summary>
-        /// <param name="x">The X coordinate of point.</param>
-        /// <param name="y">The Y coordinate of point.</param>
-        /// <returns>The connected point if success.</returns>
-        internal XPoint TryToGetConnectionPoint(double x, double y)
-        {
-            if (_editor.Project.Options.TryToConnect)
-            {
-                var result = ShapeHitTestPoint.HitTest(_editor.Project.CurrentContainer.CurrentLayer.Shapes, new Vector2(x, y), _editor.Project.Options.HitThreshold);
-                if (result != null && result is XPoint)
-                {
-                    return result as XPoint;
-                }
-            }
-            return null;
         }
 
         /// <summary>
@@ -266,7 +245,7 @@ namespace Core2D.Editor.Tools
                         double sy = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, _editor.Project.Options.SnapY) : y;
 
                         // Start new figure.
-                        var start = TryToGetConnectionPoint(sx, sy) ?? XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
+                        var start = _editor.TryToGetConnectionPoint(sx, sy) ?? XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
                         _context.BeginFigure(
                             start,
                             _editor.Project.Options.DefaultIsFilled,

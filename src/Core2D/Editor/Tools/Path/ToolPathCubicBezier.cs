@@ -55,7 +55,7 @@ namespace Core2D.Editor.Tools.Path
             {
                 case ToolState.None:
                     {
-                        _cubicBezierPoint1 = _toolPath.TryToGetConnectionPoint(sx, sy) ?? XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
+                        _cubicBezierPoint1 = _editor.TryToGetConnectionPoint(sx, sy) ?? XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
                         if (!_toolPath._isInitialized)
                         {
                             _toolPath.InitializeWorkingPath(_cubicBezierPoint1);
@@ -88,7 +88,7 @@ namespace Core2D.Editor.Tools.Path
                         _cubicBezierPoint4.Y = sy;
                         if (_editor.Project.Options.TryToConnect)
                         {
-                            var point3 = _toolPath.TryToGetConnectionPoint(sx, sy);
+                            var point3 = _editor.TryToGetConnectionPoint(sx, sy);
                             if (point3 != null)
                             {
                                 var figure = _toolPath._geometry.Figures.LastOrDefault();
@@ -110,7 +110,7 @@ namespace Core2D.Editor.Tools.Path
                         _cubicBezierPoint2.Y = sy;
                         if (_editor.Project.Options.TryToConnect)
                         {
-                            var point1 = _toolPath.TryToGetConnectionPoint(sx, sy);
+                            var point1 = _editor.TryToGetConnectionPoint(sx, sy);
                             if (point1 != null)
                             {
                                 var figure = _toolPath._geometry.Figures.LastOrDefault();
@@ -132,7 +132,7 @@ namespace Core2D.Editor.Tools.Path
                         _cubicBezierPoint3.Y = sy;
                         if (_editor.Project.Options.TryToConnect)
                         {
-                            var point2 = _toolPath.TryToGetConnectionPoint(sx, sy);
+                            var point2 = _editor.TryToGetConnectionPoint(sx, sy);
                             if (point2 != null)
                             {
                                 var figure = _toolPath._geometry.Figures.LastOrDefault();

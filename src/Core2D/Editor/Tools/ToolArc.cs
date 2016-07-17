@@ -1,7 +1,5 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Core2D.Editor.Bounds;
-using Core2D.Math;
 using Core2D.Math.Arc;
 using Core2D.Shape;
 using Core2D.Shapes;
@@ -39,78 +37,6 @@ namespace Core2D.Editor.Tools
             _editor = editor;
         }
 
-        /// <summary>
-        /// Try to connect <see cref="XArc.Point1"/> point at specified location.
-        /// </summary>
-        /// <param name="arc">The arc object.</param>
-        /// <param name="x">The X coordinate of point.</param>
-        /// <param name="y">The Y coordinate of point.</param>
-        /// <returns>True if connected.</returns>
-        public bool TryToConnectPoint1(XArc arc, double x, double y)
-        {
-            var result = ShapeHitTestPoint.HitTest(_editor.Project.CurrentContainer.CurrentLayer.Shapes, new Vector2(x, y), _editor.Project.Options.HitThreshold);
-            if (result != null && result is XPoint)
-            {
-                arc.Point1 = result as XPoint;
-                return true;
-            }
-            return false;
-        }
-
-        /// <summary>
-        /// Try to connect <see cref="XArc.Point2"/> point at specified location.
-        /// </summary>
-        /// <param name="arc">The arc object.</param>
-        /// <param name="x">The X coordinate of point.</param>
-        /// <param name="y">The Y coordinate of point.</param>
-        /// <returns>True if connected.</returns>
-        public bool TryToConnectPoint2(XArc arc, double x, double y)
-        {
-            var result = ShapeHitTestPoint.HitTest(_editor.Project.CurrentContainer.CurrentLayer.Shapes, new Vector2(x, y), _editor.Project.Options.HitThreshold);
-            if (result != null && result is XPoint)
-            {
-                arc.Point2 = result as XPoint;
-                return true;
-            }
-            return false;
-        }
-
-        /// <summary>
-        /// Try to connect <see cref="XArc.Point3"/> point at specified location.
-        /// </summary>
-        /// <param name="arc">The arc object.</param>
-        /// <param name="x">The X coordinate of point.</param>
-        /// <param name="y">The Y coordinate of point.</param>
-        /// <returns>True if connected.</returns>
-        public bool TryToConnectPoint3(XArc arc, double x, double y)
-        {
-            var result = ShapeHitTestPoint.HitTest(_editor.Project.CurrentContainer.CurrentLayer.Shapes, new Vector2(x, y), _editor.Project.Options.HitThreshold);
-            if (result != null && result is XPoint)
-            {
-                arc.Point3 = result as XPoint;
-                return true;
-            }
-            return false;
-        }
-
-        /// <summary>
-        /// Try to connect <see cref="XArc.Point4"/> point at specified location.
-        /// </summary>
-        /// <param name="arc">The arc object.</param>
-        /// <param name="x">The X coordinate of point.</param>
-        /// <param name="y">The Y coordinate of point.</param>
-        /// <returns>True if connected.</returns>
-        public bool TryToConnectPoint4(XArc arc, double x, double y)
-        {
-            var result = ShapeHitTestPoint.HitTest(_editor.Project.CurrentContainer.CurrentLayer.Shapes, new Vector2(x, y), _editor.Project.Options.HitThreshold);
-            if (result != null && result is XPoint)
-            {
-                arc.Point4 = result as XPoint;
-                return true;
-            }
-            return false;
-        }
-
         /// <inheritdoc/>
         public override void LeftDown(double x, double y)
         {
@@ -131,10 +57,13 @@ namespace Core2D.Editor.Tools
                             _editor.Project.Options.PointShape,
                             _editor.Project.Options.DefaultIsStroked,
                             _editor.Project.Options.DefaultIsFilled);
-                        if (_editor.Project.Options.TryToConnect)
+
+                        var result = _editor.TryToGetConnectionPoint(sx, sy);
+                        if (result != null)
                         {
-                            TryToConnectPoint1(_shape, sx, sy);
+                            _shape.Point1 = result;
                         }
+
                         _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         ToStateOne();
                         Move(_shape);
@@ -151,10 +80,13 @@ namespace Core2D.Editor.Tools
                             _shape.Point2.Y = sy;
                             _shape.Point3.X = sx;
                             _shape.Point3.Y = sy;
-                            if (_editor.Project.Options.TryToConnect)
+
+                            var result = _editor.TryToGetConnectionPoint(sx, sy);
+                            if (result != null)
                             {
-                                TryToConnectPoint2(_shape, sx, sy);
+                                _shape.Point2 = result;
                             }
+
                             _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                             ToStateTwo();
                             Move(_shape);
@@ -171,10 +103,18 @@ namespace Core2D.Editor.Tools
                             _shape.Point3.Y = sy;
                             _shape.Point4.X = sx;
                             _shape.Point4.Y = sy;
-                            if (_editor.Project.Options.TryToConnect)
+
+                            var result = _editor.TryToGetConnectionPoint(sx, sy);
+                            if (result != null)
                             {
-                                _connectedP3 = TryToConnectPoint3(_shape, sx, sy);
+                                _shape.Point3 = result;
+                                _connectedP3 = true;
                             }
+                            else
+                            {
+                                _connectedP3 = false;
+                            }
+
                             _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_shape);
                             _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                             ToStateThree();
@@ -190,10 +130,18 @@ namespace Core2D.Editor.Tools
                         {
                             _shape.Point4.X = sx;
                             _shape.Point4.Y = sy;
-                            if (_editor.Project.Options.TryToConnect)
+
+                            var result = _editor.TryToGetConnectionPoint(sx, sy);
+                            if (result != null)
                             {
-                                _connectedP4 = TryToConnectPoint4(_shape, sx, sy);
+                                _shape.Point4 = result;
+                                _connectedP4 = true;
                             }
+                            else
+                            {
+                                _connectedP4 = false;
+                            }
+
                             _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_shape);
                             Remove();
                             Finalize(_shape);

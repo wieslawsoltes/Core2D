@@ -52,7 +52,7 @@ namespace Core2D.Editor.Tools.Path
             {
                 case ToolState.None:
                     {
-                        _quadraticBezierPoint1 = _toolPath.TryToGetConnectionPoint(sx, sy) ?? XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
+                        _quadraticBezierPoint1 = _editor.TryToGetConnectionPoint(sx, sy) ?? XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
                         if (!_toolPath._isInitialized)
                         {
                             _toolPath.InitializeWorkingPath(_quadraticBezierPoint1);
@@ -83,7 +83,7 @@ namespace Core2D.Editor.Tools.Path
                         _quadraticBezierPoint3.Y = sy;
                         if (_editor.Project.Options.TryToConnect)
                         {
-                            var point2 = _toolPath.TryToGetConnectionPoint(sx, sy);
+                            var point2 = _editor.TryToGetConnectionPoint(sx, sy);
                             if (point2 != null)
                             {
                                 var figure = _toolPath._geometry.Figures.LastOrDefault();
@@ -105,7 +105,7 @@ namespace Core2D.Editor.Tools.Path
                         _quadraticBezierPoint2.Y = sy;
                         if (_editor.Project.Options.TryToConnect)
                         {
-                            var point1 = _toolPath.TryToGetConnectionPoint(sx, sy);
+                            var point1 = _editor.TryToGetConnectionPoint(sx, sy);
                             if (point1 != null)
                             {
                                 var figure = _toolPath._geometry.Figures.LastOrDefault();

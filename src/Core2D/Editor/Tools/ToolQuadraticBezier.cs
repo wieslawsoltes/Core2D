@@ -1,7 +1,5 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Core2D.Editor.Bounds;
-using Core2D.Math;
 using Core2D.Shape;
 using Core2D.Shapes;
 using Core2D.Style;
@@ -33,54 +31,6 @@ namespace Core2D.Editor.Tools
             _editor = editor;
         }
 
-        /// <summary>
-        /// Try to connect <see cref="XQuadraticBezier.Point1"/> point at specified location.
-        /// </summary>
-        /// <param name="quadraticBezier">The quadratic bezier object.</param>
-        /// <param name="x">The X coordinate of point.</param>
-        /// <param name="y">The Y coordinate of point.</param>
-        /// <returns>True if connected.</returns>
-        public void TryToConnectPoint1(XQuadraticBezier quadraticBezier, double x, double y)
-        {
-            var result = ShapeHitTestPoint.HitTest(_editor.Project.CurrentContainer.CurrentLayer.Shapes, new Vector2(x, y), _editor.Project.Options.HitThreshold);
-            if (result != null && result is XPoint)
-            {
-                quadraticBezier.Point1 = result as XPoint;
-            }
-        }
-
-        /// <summary>
-        /// Try to connect <see cref="XQuadraticBezier.Point2"/> point at specified location.
-        /// </summary>
-        /// <param name="quadraticBezier">The quadratic bezier object.</param>
-        /// <param name="x">The X coordinate of point.</param>
-        /// <param name="y">The Y coordinate of point.</param>
-        /// <returns>True if connected.</returns>
-        public void TryToConnectPoint2(XQuadraticBezier quadraticBezier, double x, double y)
-        {
-            var result = ShapeHitTestPoint.HitTest(_editor.Project.CurrentContainer.CurrentLayer.Shapes, new Vector2(x, y), _editor.Project.Options.HitThreshold);
-            if (result != null && result is XPoint)
-            {
-                quadraticBezier.Point2 = result as XPoint;
-            }
-        }
-
-        /// <summary>
-        /// Try to connect <see cref="XQuadraticBezier.Point3"/> point at specified location.
-        /// </summary>
-        /// <param name="quadraticBezier">The quadratic bezier object.</param>
-        /// <param name="x">The X coordinate of point.</param>
-        /// <param name="y">The Y coordinate of point.</param>
-        /// <returns>True if connected.</returns>
-        public void TryToConnectPoint3(XQuadraticBezier quadraticBezier, double x, double y)
-        {
-            var result = ShapeHitTestPoint.HitTest(_editor.Project.CurrentContainer.CurrentLayer.Shapes, new Vector2(x, y), _editor.Project.Options.HitThreshold);
-            if (result != null && result is XPoint)
-            {
-                quadraticBezier.Point3 = result as XPoint;
-            }
-        }
-
         /// <inheritdoc/>
         public override void LeftDown(double x, double y)
         {
@@ -99,10 +49,13 @@ namespace Core2D.Editor.Tools
                             _editor.Project.Options.PointShape,
                             _editor.Project.Options.DefaultIsStroked,
                             _editor.Project.Options.DefaultIsFilled);
-                        if (_editor.Project.Options.TryToConnect)
+
+                        var result = _editor.TryToGetConnectionPoint(sx, sy);
+                        if (result != null)
                         {
-                            TryToConnectPoint1(_shape as XQuadraticBezier, sx, sy);
+                            _shape.Point1 = result;
                         }
+
                         _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_shape);
                         _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         ToStateOne();
@@ -121,10 +74,13 @@ namespace Core2D.Editor.Tools
                             quadraticBezier.Point2.Y = sy;
                             quadraticBezier.Point3.X = sx;
                             quadraticBezier.Point3.Y = sy;
-                            if (_editor.Project.Options.TryToConnect)
+
+                            var result = _editor.TryToGetConnectionPoint(sx, sy);
+                            if (result != null)
                             {
-                                TryToConnectPoint3(_shape as XQuadraticBezier, sx, sy);
+                                _shape.Point3 = result;
                             }
+
                             _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                             ToStateTwo();
                             Move(_shape as XQuadraticBezier);
@@ -140,10 +96,13 @@ namespace Core2D.Editor.Tools
                         {
                             quadraticBezier.Point2.X = sx;
                             quadraticBezier.Point2.Y = sy;
-                            if (_editor.Project.Options.TryToConnect)
+
+                            var result = _editor.TryToGetConnectionPoint(sx, sy);
+                            if (result != null)
                             {
-                                TryToConnectPoint2(_shape as XQuadraticBezier, sx, sy);
+                                _shape.Point2 = result;
                             }
+
                             _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_shape);
                             Remove();
                             Finalize(_shape as XQuadraticBezier);

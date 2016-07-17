@@ -1,7 +1,5 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Core2D.Editor.Bounds;
-using Core2D.Math;
 using Core2D.Shape;
 using Core2D.Shapes;
 
@@ -28,42 +26,6 @@ namespace Core2D.Editor.Tools
             _editor = editor;
         }
 
-        /// <summary>
-        /// Try to connect <see cref="XLine.Start"/> point at specified location.
-        /// </summary>
-        /// <param name="line">The line object.</param>
-        /// <param name="x">The X coordinate of point.</param>
-        /// <param name="y">The Y coordinate of point.</param>
-        /// <returns>True if connected.</returns>
-        public bool TryToConnectStart(XLine line, double x, double y)
-        {
-            var result = ShapeHitTestPoint.HitTest(_editor.Project.CurrentContainer.CurrentLayer.Shapes, new Vector2(x, y), _editor.Project.Options.HitThreshold);
-            if (result != null && result is XPoint)
-            {
-                line.Start = result as XPoint;
-                return true;
-            }
-            return false;
-        }
-
-        /// <summary>
-        /// Try to connect <see cref="XLine.End"/> point at specified location.
-        /// </summary>
-        /// <param name="line">The line object.</param>
-        /// <param name="x">The X coordinate of point.</param>
-        /// <param name="y">The Y coordinate of point.</param>
-        /// <returns>True if connected.</returns>
-        public bool TryToConnectEnd(XLine line, double x, double y)
-        {
-            var result = ShapeHitTestPoint.HitTest(_editor.Project.CurrentContainer.CurrentLayer.Shapes, new Vector2(x, y), _editor.Project.Options.HitThreshold);
-            if (result != null && result is XPoint)
-            {
-                line.End = result as XPoint;
-                return true;
-            }
-            return false;
-        }
-
         /// <inheritdoc/>
         public override void LeftDown(double x, double y)
         {
@@ -83,8 +45,12 @@ namespace Core2D.Editor.Tools
                             _editor.Project.Options.DefaultIsStroked);
                         if (_editor.Project.Options.TryToConnect)
                         {
-                            var result = TryToConnectStart(_shape as XLine, sx, sy);
-                            if (!result)
+                            var result = _editor.TryToGetConnectionPoint(sx, sy);
+                            if (result != null)
+                            {
+                                _shape.Start = result;
+                            }
+                            else
                             {
                                 _editor.TryToSplitLine(x, y, _shape.Start);
                             }
@@ -107,8 +73,12 @@ namespace Core2D.Editor.Tools
                             line.End.Y = sy;
                             if (_editor.Project.Options.TryToConnect)
                             {
-                                var result = TryToConnectEnd(_shape as XLine, sx, sy);
-                                if (!result)
+                                var result = _editor.TryToGetConnectionPoint(sx, sy);
+                                if (result != null)
+                                {
+                                    _shape.End = result;
+                                }
+                                else
                                 {
                                     _editor.TryToSplitLine(x, y, _shape.End);
                                 }
