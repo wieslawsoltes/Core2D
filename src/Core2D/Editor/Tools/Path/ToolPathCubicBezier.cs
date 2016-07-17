@@ -44,8 +44,11 @@ namespace Core2D.Editor.Tools.Path
             _toolPath = toolPath;
         }
 
-        private void CubicBezierLeftDown(double x, double y)
+        /// <inheritdoc/>
+        public override void LeftDown(double x, double y)
         {
+            base.LeftDown(x, y);
+
             double sx = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, _editor.Project.Options.SnapX) : x;
             double sy = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, _editor.Project.Options.SnapY) : y;
             switch (_currentState)
@@ -160,8 +163,11 @@ namespace Core2D.Editor.Tools.Path
             }
         }
 
-        private void CubicBezierRightDown(double x, double y)
+        /// <inheritdoc/>
+        public override void RightDown(double x, double y)
         {
+            base.RightDown(x, y);
+
             switch (_currentState)
             {
                 case ToolState.None:
@@ -192,8 +198,11 @@ namespace Core2D.Editor.Tools.Path
             }
         }
 
-        private void CubicBezierMove(double x, double y)
+        /// <inheritdoc/>
+        public override void Move(double x, double y)
         {
+            base.Move(x, y);
+
             double sx = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, _editor.Project.Options.SnapX) : x;
             double sy = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, _editor.Project.Options.SnapY) : y;
             switch (_currentState)
@@ -252,8 +261,11 @@ namespace Core2D.Editor.Tools.Path
             }
         }
 
-        private void ToStateOneCubicBezier()
+        /// <inheritdoc/>
+        public override void ToStateOne()
         {
+            base.ToStateOne();
+
             _style = _editor.Project.Options.HelperStyle;
             _cubicBezierHelperPoint1 = XPoint.Create(0, 0, _editor.Project.Options.PointShape);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_cubicBezierHelperPoint1);
@@ -261,8 +273,11 @@ namespace Core2D.Editor.Tools.Path
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_cubicBezierHelperPoint4);
         }
 
-        private void ToStateTwoCubicBezier()
+        /// <inheritdoc/>
+        public override void ToStateTwo()
         {
+            base.ToStateTwo();
+
             _style = _editor.Project.Options.HelperStyle;
             _cubicBezierLine12 = XLine.Create(0, 0, _style, null);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_cubicBezierLine12);
@@ -270,8 +285,11 @@ namespace Core2D.Editor.Tools.Path
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_cubicBezierHelperPoint2);
         }
 
-        private void ToStateThreeCubicBezier()
+        /// <inheritdoc/>
+        public override void ToStateThree()
         {
+            base.ToStateThree();
+
             _cubicBezierLine43 = XLine.Create(0, 0, _style, null);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_cubicBezierLine43);
             _cubicBezierLine23 = XLine.Create(0, 0, _style, null);
@@ -280,8 +298,11 @@ namespace Core2D.Editor.Tools.Path
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_cubicBezierHelperPoint3);
         }
 
-        private void MoveCubicBezierHelpers()
+        /// <inheritdoc/>
+        public override void Move(BaseShape shape)
         {
+            base.Move(shape);
+
             if (_cubicBezierLine12 != null)
             {
                 _cubicBezierLine12.Start.X = _cubicBezierPoint1.X;
@@ -331,8 +352,13 @@ namespace Core2D.Editor.Tools.Path
             }
         }
 
-        private void RemoveCubicBezierHelpers()
+        /// <inheritdoc/>
+        public override void Remove()
         {
+            base.Remove();
+
+            _currentState = ToolState.None;
+
             if (_cubicBezierLine12 != null)
             {
                 _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_cubicBezierLine12);
@@ -376,63 +402,6 @@ namespace Core2D.Editor.Tools.Path
             }
 
             _style = null;
-        }
-
-        /// <inheritdoc/>
-        public override void LeftDown(double x, double y)
-        {
-            base.LeftDown(x, y);
-            CubicBezierLeftDown(x, y);
-        }
-
-        /// <inheritdoc/>
-        public override void RightDown(double x, double y)
-        {
-            base.RightDown(x, y);
-            CubicBezierRightDown(x, y);
-        }
-
-        /// <inheritdoc/>
-        public override void Move(double x, double y)
-        {
-            base.Move(x, y);
-            CubicBezierMove(x, y);
-        }
-
-        /// <inheritdoc/>
-        public override void ToStateOne()
-        {
-            base.ToStateOne();
-            ToStateOneCubicBezier();
-        }
-
-        /// <inheritdoc/>
-        public override void ToStateTwo()
-        {
-            base.ToStateTwo();
-            ToStateTwoCubicBezier();
-        }
-
-        /// <inheritdoc/>
-        public override void ToStateThree()
-        {
-            base.ToStateThree();
-            ToStateThreeCubicBezier();
-        }
-
-        /// <inheritdoc/>
-        public override void Move(BaseShape shape)
-        {
-            base.Move(shape);
-            MoveCubicBezierHelpers();
-        }
-
-        /// <inheritdoc/>
-        public override void Remove()
-        {
-            base.Remove();
-            _currentState = ToolState.None;
-            RemoveCubicBezierHelpers();
         }
     }
 }

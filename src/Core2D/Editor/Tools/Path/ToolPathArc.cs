@@ -24,100 +24,68 @@ namespace Core2D.Editor.Tools.Path
             _toolPath = toolPath;
         }
 
-        private void ArcLeftDown(double x, double y)
-        {
-            // TODO: Add Arc path helper LeftDown method implementation.
-        }
-
-        private void ArcRightDown(double x, double y)
-        {
-            // TODO: Add Arc path helper RightDown method implementation.
-        }
-
-        private void ArcMove(double x, double y)
-        {
-            // TODO: Add Arc path helper Move method implementation.
-        }
-
-        private void ToStateOneArc()
-        {
-            // TODO: Add Arc path helper ToStateOne method implementation.
-        }
-
-        private void ToStateTwoArc()
-        {
-            // TODO: Add Arc path helper ToStateTwo method implementation.
-        }
-
-        private void ToStateThreeArc()
-        {
-            // TODO: Add Arc path helper ToStateThree method implementation.
-        }
-
-        private void MoveArcHelpers()
-        {
-            // TODO: Add Arc path helper Move method implementation.
-        }
-
-        private void RemoveArcHelpers()
-        {
-            // TODO: Add Arc path helper Remove method implementation.
-        }
-
         /// <inheritdoc/>
         public override void LeftDown(double x, double y)
         {
             base.LeftDown(x, y);
-            ArcLeftDown(x, y);
+
+            // TODO: Add Arc path helper LeftDown method implementation.
         }
 
         /// <inheritdoc/>
         public override void RightDown(double x, double y)
         {
             base.RightDown(x, y);
-            ArcRightDown(x, y);
+
+            // TODO: Add Arc path helper RightDown method implementation.
         }
 
         /// <inheritdoc/>
         public override void Move(double x, double y)
         {
             base.Move(x, y);
-            ArcMove(x, y);
+
+            // TODO: Add Arc path helper Move method implementation.
         }
 
         /// <inheritdoc/>
         public override void ToStateOne()
         {
             base.ToStateOne();
-            ToStateOneArc();
+
+            // TODO: Add Arc path helper ToStateOne method implementation.
         }
 
         /// <inheritdoc/>
         public override void ToStateTwo()
         {
             base.ToStateTwo();
-            ToStateTwoArc();
+
+            // TODO: Add Arc path helper ToStateTwo method implementation.
         }
 
         /// <inheritdoc/>
         public override void ToStateThree()
         {
             base.ToStateThree();
-            ToStateThreeArc();
+
+            // TODO: Add Arc path helper ToStateThree method implementation.
         }
 
         /// <inheritdoc/>
         public override void Move(BaseShape shape)
         {
             base.Move(shape);
-            MoveArcHelpers();
+
+            // TODO: Add Arc path helper Move method implementation.
         }
 
         /// <inheritdoc/>
         public override void Remove()
         {
             base.Remove();
-            RemoveArcHelpers();
+
+            // TODO: Add Arc path helper Remove method implementation.
         }
     }
 }

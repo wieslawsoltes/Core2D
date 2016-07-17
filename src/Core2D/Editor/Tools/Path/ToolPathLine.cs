@@ -37,8 +37,11 @@ namespace Core2D.Editor.Tools.Path
             _toolPath = toolPath;
         }
 
-        private void LineLeftDown(double x, double y)
+        /// <inheritdoc/>
+        public override void LeftDown(double x, double y)
         {
+            base.LeftDown(x, y);
+
             double sx = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, _editor.Project.Options.SnapX) : x;
             double sy = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, _editor.Project.Options.SnapY) : y;
             switch (_currentState)
@@ -97,8 +100,11 @@ namespace Core2D.Editor.Tools.Path
             }
         }
 
-        private void LineRightDown(double x, double y)
+        /// <inheritdoc/>
+        public override void RightDown(double x, double y)
         {
+            base.RightDown(x, y);
+
             switch (_currentState)
             {
                 case ToolState.None:
@@ -127,8 +133,11 @@ namespace Core2D.Editor.Tools.Path
             }
         }
 
-        private void LineMove(double x, double y)
+        /// <inheritdoc/>
+        public override void Move(double x, double y)
         {
+            base.Move(x, y);
+
             double sx = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, _editor.Project.Options.SnapX) : x;
             double sy = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, _editor.Project.Options.SnapY) : y;
             switch (_currentState)
@@ -157,8 +166,11 @@ namespace Core2D.Editor.Tools.Path
             }
         }
 
-        private void ToStateOneLine()
+        /// <inheritdoc/>
+        public override void ToStateOne()
         {
+            base.ToStateOne();
+
             _style = _editor.Project.Options.HelperStyle;
             _lineStartHelperPoint = XPoint.Create(0, 0, _editor.Project.Options.PointShape);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_lineStartHelperPoint);
@@ -166,8 +178,11 @@ namespace Core2D.Editor.Tools.Path
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_lineEndHelperPoint);
         }
 
-        private void MoveLineHelpers()
+        /// <inheritdoc/>
+        public override void Move(BaseShape shape)
         {
+            base.Move(shape);
+
             if (_lineStartHelperPoint != null)
             {
                 _lineStartHelperPoint.X = _lineStart.X;
@@ -181,8 +196,13 @@ namespace Core2D.Editor.Tools.Path
             }
         }
 
-        private void RemoveLineHelpers()
+        /// <inheritdoc/>
+        public override void Remove()
         {
+            base.Remove();
+
+            _currentState = ToolState.None;
+
             if (_lineStartHelperPoint != null)
             {
                 _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_lineStartHelperPoint);
@@ -196,49 +216,6 @@ namespace Core2D.Editor.Tools.Path
             }
 
             _style = null;
-        }
-
-        /// <inheritdoc/>
-        public override void LeftDown(double x, double y)
-        {
-            base.LeftDown(x, y);
-            LineLeftDown(x, y);
-        }
-
-        /// <inheritdoc/>
-        public override void RightDown(double x, double y)
-        {
-            base.RightDown(x, y);
-            LineRightDown(x, y);
-        }
-
-        /// <inheritdoc/>
-        public override void Move(double x, double y)
-        {
-            base.Move(x, y);
-            LineMove(x, y);
-        }
-
-        /// <inheritdoc/>
-        public override void ToStateOne()
-        {
-            base.ToStateOne();
-            ToStateOneLine();
-        }
-
-        /// <inheritdoc/>
-        public override void Move(BaseShape shape)
-        {
-            base.Move(shape);
-            MoveLineHelpers();
-        }
-
-        /// <inheritdoc/>
-        public override void Remove()
-        {
-            base.Remove();
-            _currentState = ToolState.None;
-            RemoveLineHelpers();
         }
     }
 }

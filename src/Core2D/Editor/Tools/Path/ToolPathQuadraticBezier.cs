@@ -40,9 +40,12 @@ namespace Core2D.Editor.Tools.Path
             _editor = editor;
             _toolPath = toolPath;
         }
-        
-        private void QuadraticBezierLeftDown(double x, double y)
+
+        /// <inheritdoc/>
+        public override void LeftDown(double x, double y)
         {
+            base.LeftDown(x, y);
+
             double sx = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, _editor.Project.Options.SnapX) : x;
             double sy = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, _editor.Project.Options.SnapY) : y;
             switch (_currentState)
@@ -131,8 +134,11 @@ namespace Core2D.Editor.Tools.Path
             }
         }
 
-        private void QuadraticBezierRightDown(double x, double y)
+        /// <inheritdoc/>
+        public override void RightDown(double x, double y)
         {
+            base.RightDown(x, y);
+
             switch (_currentState)
             {
                 case ToolState.None:
@@ -162,8 +168,11 @@ namespace Core2D.Editor.Tools.Path
             }
         }
 
-        private void QuadraticBezierMove(double x, double y)
+        /// <inheritdoc/>
+        public override void Move(double x, double y)
         {
+            base.Move(x, y);
+
             double sx = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, _editor.Project.Options.SnapX) : x;
             double sy = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, _editor.Project.Options.SnapY) : y;
             switch (_currentState)
@@ -207,8 +216,11 @@ namespace Core2D.Editor.Tools.Path
             }
         }
 
-        private void ToStateOneQuadraticBezier()
+        /// <inheritdoc/>
+        public override void ToStateOne()
         {
+            base.ToStateOne();
+
             _style = _editor.Project.Options.HelperStyle;
             _quadraticBezierHelperPoint1 = XPoint.Create(0, 0, _editor.Project.Options.PointShape);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_quadraticBezierHelperPoint1);
@@ -216,8 +228,11 @@ namespace Core2D.Editor.Tools.Path
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_quadraticBezierHelperPoint3);
         }
 
-        private void ToStateTwoQuadraticBezier()
+        /// <inheritdoc/>
+        public override void ToStateTwo()
         {
+            base.ToStateTwo();
+
             _style = _editor.Project.Options.HelperStyle;
             _quadraticBezierLine12 = XLine.Create(0, 0, _style, null);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_quadraticBezierLine12);
@@ -227,8 +242,11 @@ namespace Core2D.Editor.Tools.Path
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_quadraticBezierHelperPoint2);
         }
 
-        private void MoveQuadraticBezierHelpers()
+        /// <inheritdoc/>
+        public override void Move(BaseShape shape)
         {
+            base.Move(shape);
+
             if (_quadraticBezierLine12 != null)
             {
                 _quadraticBezierLine12.Start.X = _quadraticBezierPoint1.X;
@@ -264,8 +282,13 @@ namespace Core2D.Editor.Tools.Path
             }
         }
 
-        private void RemoveQuadraticBezierHelpers()
+        /// <inheritdoc/>
+        public override void Remove()
         {
+            base.Remove();
+
+            _currentState = ToolState.None;
+
             if (_quadraticBezierLine12 != null)
             {
                 _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_quadraticBezierLine12);
@@ -297,56 +320,6 @@ namespace Core2D.Editor.Tools.Path
             }
 
             _style = null;
-        }
-
-        /// <inheritdoc/>
-        public override void LeftDown(double x, double y)
-        {
-            base.LeftDown(x, y);
-            QuadraticBezierLeftDown(x, y);
-        }
-
-        /// <inheritdoc/>
-        public override void RightDown(double x, double y)
-        {
-            base.RightDown(x, y);
-            QuadraticBezierRightDown(x, y);
-        }
-
-        /// <inheritdoc/>
-        public override void Move(double x, double y)
-        {
-            base.Move(x, y);
-            QuadraticBezierMove(x, y);
-        }
-
-        /// <inheritdoc/>
-        public override void ToStateOne()
-        {
-            base.ToStateOne();
-            ToStateOneQuadraticBezier();
-        }
-
-        /// <inheritdoc/>
-        public override void ToStateTwo()
-        {
-            base.ToStateTwo();
-            ToStateTwoQuadraticBezier();
-        }
-
-        /// <inheritdoc/>
-        public override void Move(BaseShape shape)
-        {
-            base.Move(shape);
-            MoveQuadraticBezierHelpers();
-        }
-
-        /// <inheritdoc/>
-        public override void Remove()
-        {
-            base.Remove();
-            _currentState = ToolState.None;
-            RemoveQuadraticBezierHelpers();
         }
     }
 }
