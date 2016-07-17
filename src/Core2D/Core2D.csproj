@@ -84,6 +84,10 @@
     <Compile Include="Editor\Bounds\ShapeHitTestPoint.cs" />
     <Compile Include="Editor\Designer\DesignerCommandManager.cs" />
     <Compile Include="Editor\ProjectEditor.Model.cs" />
+    <Compile Include="Editor\Tools\Path\ToolPathArc.cs" />
+    <Compile Include="Editor\Tools\Path\ToolPathCubicBezier.cs" />
+    <Compile Include="Editor\Tools\Path\ToolPathLine.cs" />
+    <Compile Include="Editor\Tools\Path\ToolPathQuadraticBezier.cs" />
     <Compile Include="Editor\ViewBase.cs" />
     <Compile Include="Editor\Views\BrowserView.cs" />
     <Compile Include="Editor\Views\DashboardView.cs" />
