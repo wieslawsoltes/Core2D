@@ -16,12 +16,9 @@ namespace Core2D.Editor.Tools.Path
         private ProjectEditor _editor;
         private ToolState _currentState = ToolState.None;
         private ToolPath _toolPath;
-        // Line Tool
         private XPoint _lineStart;
         private XPoint _lineEnd;
-        // Helpers Style
         private ShapeStyle _style;
-        // Line Helper
         private XPoint _lineStartHelperPoint;
         private XPoint _lineEndHelperPoint;
 

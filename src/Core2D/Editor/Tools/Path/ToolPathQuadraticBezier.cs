@@ -16,13 +16,10 @@ namespace Core2D.Editor.Tools.Path
         private ProjectEditor _editor;
         private ToolState _currentState = ToolState.None;
         private ToolPath _toolPath;
-        // QuadraticBezier Tool
         private XPoint _quadraticBezierPoint1;
         private XPoint _quadraticBezierPoint2;
         private XPoint _quadraticBezierPoint3;
-        // Helpers Style
         private ShapeStyle _style;
-        // QuadraticBezier Helper
         private XLine _quadraticBezierLine12;
         private XLine _quadraticBezierLine32;
         private XPoint _quadraticBezierHelperPoint1;

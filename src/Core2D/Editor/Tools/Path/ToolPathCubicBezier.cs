@@ -16,14 +16,11 @@ namespace Core2D.Editor.Tools.Path
         private ProjectEditor _editor;
         private ToolState _currentState = ToolState.None;
         private ToolPath _toolPath;
-        // CubicBezier Tool
         private XPoint _cubicBezierPoint1;
         private XPoint _cubicBezierPoint2;
         private XPoint _cubicBezierPoint3;
         private XPoint _cubicBezierPoint4;
-        // Helpers Style
         private ShapeStyle _style;
-        // CubicBezier Helper
         private XLine _cubicBezierLine12;
         private XLine _cubicBezierLine43;
         private XLine _cubicBezierLine23;
