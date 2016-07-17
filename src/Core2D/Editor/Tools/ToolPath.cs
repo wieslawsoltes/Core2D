@@ -446,6 +446,36 @@ namespace Core2D.Editor.Tools
         }
 
         /// <inheritdoc/>
+        public override void Finalize(BaseShape shape)
+        {
+            base.Finalize(shape);
+
+            switch (_editor.CurrentPathTool)
+            {
+                case PathTool.Line:
+                    {
+                        _toolPathLine.Finalize(shape);
+                    }
+                    break;
+                case PathTool.Arc:
+                    {
+                        _toolPathArc.Finalize(shape);
+                    }
+                    break;
+                case PathTool.CubicBezier:
+                    {
+                        _toolPathCubicBezier.Finalize(shape);
+                    }
+                    break;
+                case PathTool.QuadraticBezier:
+                    {
+                        _toolPathQuadraticBezier.Finalize(shape);
+                    }
+                    break;
+            }
+        }
+
+        /// <inheritdoc/>
         public override void Remove()
         {
             base.Remove();
