@@ -40,39 +40,7 @@ namespace Core2D.Editor.Tools.Path
             _editor = editor;
             _toolPath = toolPath;
         }
-
-        private void SetQuadraticBezieFirstPointFromLastSegment()
-        {
-            var figure = _toolPath._geometry.Figures.LastOrDefault();
-            if (figure != null)
-            {
-                var segment = figure.Segments.LastOrDefault();
-                if (segment != null)
-                {
-                    if (segment is XLineSegment)
-                    {
-                        _quadraticBezierPoint1 = (segment as XLineSegment).Point;
-                    }
-                    else if (segment is XArcSegment)
-                    {
-                        // TODO: Set quadratic bezier first point using last arc point.
-                    }
-                    else if (segment is XCubicBezierSegment)
-                    {
-                        _quadraticBezierPoint1 = (segment as XCubicBezierSegment).Point3;
-                    }
-                    else if (segment is XQuadraticBezierSegment)
-                    {
-                        _quadraticBezierPoint1 = (segment as XQuadraticBezierSegment).Point2;
-                    }
-                }
-                else
-                {
-                    _quadraticBezierPoint1 = figure.StartPoint;
-                }
-            }
-        }
-
+        
         private void QuadraticBezierLeftDown(double x, double y)
         {
             double sx = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, _editor.Project.Options.SnapX) : x;
@@ -88,7 +56,7 @@ namespace Core2D.Editor.Tools.Path
                         }
                         else
                         {
-                            SetQuadraticBezieFirstPointFromLastSegment();
+                            _quadraticBezierPoint1 = _toolPath.GetLastPathPoint();
                         }
 
                         _quadraticBezierPoint2 = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);

@@ -44,38 +44,6 @@ namespace Core2D.Editor.Tools.Path
             _toolPath = toolPath;
         }
 
-        private void SetCubicBezieFirstPointFromLastSegment()
-        {
-            var figure = _toolPath._geometry.Figures.LastOrDefault();
-            if (figure != null)
-            {
-                var segment = figure.Segments.LastOrDefault();
-                if (segment != null)
-                {
-                    if (segment is XLineSegment)
-                    {
-                        _cubicBezierPoint1 = (segment as XLineSegment).Point;
-                    }
-                    else if (segment is XArcSegment)
-                    {
-                        // TODO: Set cubic bezier first point using last arc point.
-                    }
-                    else if (segment is XCubicBezierSegment)
-                    {
-                        _cubicBezierPoint1 = (segment as XCubicBezierSegment).Point3;
-                    }
-                    else if (segment is XQuadraticBezierSegment)
-                    {
-                        _cubicBezierPoint1 = (segment as XQuadraticBezierSegment).Point2;
-                    }
-                }
-                else
-                {
-                    _cubicBezierPoint1 = figure.StartPoint;
-                }
-            }
-        }
-
         private void CubicBezierLeftDown(double x, double y)
         {
             double sx = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, _editor.Project.Options.SnapX) : x;
@@ -91,7 +59,7 @@ namespace Core2D.Editor.Tools.Path
                         }
                         else
                         {
-                            SetCubicBezieFirstPointFromLastSegment();
+                            _cubicBezierPoint1 = _toolPath.GetLastPathPoint();
                         }
 
                         _cubicBezierPoint2 = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);

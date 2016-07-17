@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Core2D.Editor.Bounds;
@@ -83,6 +84,45 @@ namespace Core2D.Editor.Tools
                     figure.Segments.Remove(segment);
                 }
             }
+        }
+
+        /// <summary>
+        /// Gets last point in the current path.
+        /// </summary>
+        /// <returns>The last path point.</returns>
+        internal XPoint GetLastPathPoint()
+        {
+            var figure = _geometry.Figures.LastOrDefault();
+            if (figure != null)
+            {
+                var segment = figure.Segments.LastOrDefault();
+                if (segment != null)
+                {
+                    if (segment is XLineSegment)
+                    {
+                        return (segment as XLineSegment).Point;
+                    }
+                    else if (segment is XArcSegment)
+                    {
+                        // TODO: Get point from last arc point.
+                        throw new NotSupportedException();
+                    }
+                    else if (segment is XCubicBezierSegment)
+                    {
+                        return (segment as XCubicBezierSegment).Point3;
+                    }
+                    else if (segment is XQuadraticBezierSegment)
+                    {
+                        return (segment as XQuadraticBezierSegment).Point2;
+                    }
+                }
+                else
+                {
+                    return figure.StartPoint;
+                }
+            }
+
+            throw new Exception("Can not find valid last point from path.");
         }
 
         internal void InitializeWorkingPath(XPoint start)

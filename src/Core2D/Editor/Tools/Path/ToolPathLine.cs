@@ -37,38 +37,6 @@ namespace Core2D.Editor.Tools.Path
             _toolPath = toolPath;
         }
 
-        private void SetLineStartPointFromLastSegment()
-        {
-            var figure = _toolPath._geometry.Figures.LastOrDefault();
-            if (figure != null)
-            {
-                var segment = figure.Segments.LastOrDefault();
-                if (segment != null)
-                {
-                    if (segment is XLineSegment)
-                    {
-                        _lineStart = (segment as XLineSegment).Point;
-                    }
-                    else if (segment is XArcSegment)
-                    {
-                        // TODO: Set line start point using last arc point.
-                    }
-                    else if (segment is XCubicBezierSegment)
-                    {
-                        _lineStart = (segment as XCubicBezierSegment).Point3;
-                    }
-                    else if (segment is XQuadraticBezierSegment)
-                    {
-                        _lineStart = (segment as XQuadraticBezierSegment).Point2;
-                    }
-                }
-                else
-                {
-                    _lineStart = figure.StartPoint;
-                }
-            }
-        }
-
         private void LineLeftDown(double x, double y)
         {
             double sx = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, _editor.Project.Options.SnapX) : x;
@@ -84,7 +52,7 @@ namespace Core2D.Editor.Tools.Path
                         }
                         else
                         {
-                            SetLineStartPointFromLastSegment();
+                            _lineStart = _toolPath.GetLastPathPoint();
                         }
 
                         _lineEnd = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
