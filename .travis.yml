@@ -3,7 +3,7 @@ os:
   - linux
   - osx
 mono:
-  - nightly
+  - latest
 solution: Core2D.mono.sln
 before_install:
   - mkdir -p .nuget
