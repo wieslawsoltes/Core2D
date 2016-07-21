@@ -6,12 +6,12 @@ mono:
   - latest
 env:
   matrix:
-    - CONFIGURATION=Debug PLATFORM='Any CPU'
-    - CONFIGURATION=Debug PLATFORM='x86'
-    - CONFIGURATION=Debug PLATFORM='x64'
-    - CONFIGURATION=Release PLATFORM='Any CPU'
-    - CONFIGURATION=Release PLATFORM='x86'
-    - CONFIGURATION=Release PLATFORM='x64'
+    - CONFIGURATION=Debug PLATFORM=AnyCPU
+    - CONFIGURATION=Debug PLATFORM=x86
+    - CONFIGURATION=Debug PLATFORM=x64
+    - CONFIGURATION=Release PLATFORM=AnyCPU
+    - CONFIGURATION=Release PLATFORM=x86
+    - CONFIGURATION=Release PLATFORM=x64
 matrix:
   fast_finish: true
 solution: Core2D.mono.sln
@@ -24,9 +24,5 @@ install:
   - mono .nuget/nuget.exe install xunit.runner.console -Version 2.1.0 -OutputDirectory testrunner
 script:
   - xbuild /p:Configuration="$CONFIGURATION" /p:Platform="$PLATFORM" Core2D.mono.sln
-  - if [[ "$PLATFORM" == "Any CPU" ]]; then mono ./testrunner/xunit.runner.console.2.1.0/tools/xunit.console.exe ./tests/Core2D.UnitTests/bin/"$CONFIGURATION"/Core2D.UnitTests.dll ; fi
-  - if [[ "$PLATFORM" == "x86" ]]; then mono ./testrunner/xunit.runner.console.2.1.0/tools/xunit.console.exe ./tests/Core2D.UnitTests/bin/x86/"$CONFIGURATION"/Core2D.UnitTests.dll ; fi
-  - if [[ "$PLATFORM" == "x64" ]]; then mono ./testrunner/xunit.runner.console.2.1.0/tools/xunit.console.exe ./tests/Core2D.UnitTests/bin/x64/"$CONFIGURATION"/Core2D.UnitTests.dll ; fi
-  - if [[ "$PLATFORM" == "Any CPU" ]]; then mono ./testrunner/xunit.runner.console.2.1.0/tools/xunit.console.exe ./tests/FileSystem.DotNetFx.UnitTests/bin/"$CONFIGURATION"/FileSystem.DotNetFx.UnitTests.dll ; fi
-  - if [[ "$PLATFORM" == "x86" ]]; then mono ./testrunner/xunit.runner.console.2.1.0/tools/xunit.console.exe ./tests/FileSystem.DotNetFx.UnitTests/bin/x86/"$CONFIGURATION"/FileSystem.DotNetFx.UnitTests.dll ; fi
-  - if [[ "$PLATFORM" == "x64" ]]; then mono ./testrunner/xunit.runner.console.2.1.0/tools/xunit.console.exe ./tests/FileSystem.DotNetFx.UnitTests/bin/x64/"$CONFIGURATION"/FileSystem.DotNetFx.UnitTests.dll ; fi
+  - mono ./testrunner/xunit.runner.console.2.1.0/tools/xunit.console.exe ./tests/Core2D.UnitTests/bin/"$PLATFORM"/"$CONFIGURATION"/Core2D.UnitTests.dll
+  - mono ./testrunner/xunit.runner.console.2.1.0/tools/xunit.console.exe ./tests/FileSystem.DotNetFx.UnitTests/bin/"$PLATFORM"/"$CONFIGURATION"/FileSystem.DotNetFx.UnitTests.dll
