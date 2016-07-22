@@ -10,30 +10,56 @@ namespace Core2D.Path.Segments
     /// </summary>
     public class XArcSegment : XPathSegment
     {
+        private XPoint _point;
+        private XPathSize _size;
+        private double _rotationAngle;
+        private bool _isLargeArc;
+        private XSweepDirection _sweepDirection;
+
         /// <summary>
         /// Gets or sets end point.
         /// </summary>
-        public XPoint Point { get; set; }
+        public XPoint Point
+        {
+            get { return _point; }
+            set { Update(ref _point, value); }
+        }
 
         /// <summary>
         /// Gets or sets arc size.
         /// </summary>
-        public XPathSize Size { get; set; }
+        public XPathSize Size
+        {
+            get { return _size; }
+            set { Update(ref _size, value); }
+        }
 
         /// <summary>
         /// Gets or sets arc rotation angle.
         /// </summary>
-        public double RotationAngle { get; set; }
+        public double RotationAngle
+        {
+            get { return _rotationAngle; }
+            set { Update(ref _rotationAngle, value); }
+        }
 
         /// <summary>
         /// Gets or sets flag indicating whether arc is large.
         /// </summary>
-        public bool IsLargeArc { get; set; }
+        public bool IsLargeArc
+        {
+            get { return _isLargeArc; }
+            set { Update(ref _isLargeArc, value); }
+        }
 
         /// <summary>
         /// Gets or sets sweep direction.
         /// </summary>
-        public XSweepDirection SweepDirection { get; set; }
+        public XSweepDirection SweepDirection
+        {
+            get { return _sweepDirection; }
+            set { Update(ref _sweepDirection, value); }
+        }
 
         /// <inheritdoc/>
         public override IEnumerable<XPoint> GetPoints()

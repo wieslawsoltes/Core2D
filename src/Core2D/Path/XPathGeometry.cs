@@ -9,18 +9,29 @@ namespace Core2D.Path
     /// <summary>
     /// Path geometry.
     /// </summary>
-    public class XPathGeometry
+    public class XPathGeometry : ObservableObject
     {
+        private IList<XPathFigure> _figures;
+        private XFillRule _fillRule;
+
         /// <summary>
         /// Gets or sets figures collection.
         /// </summary>
         [Content]
-        public IList<XPathFigure> Figures { get; set; }
+        public IList<XPathFigure> Figures
+        {
+            get { return _figures; }
+            set { Update(ref _figures, value); }
+        }
 
         /// <summary>
         /// Gets or sets fill rule.
         /// </summary>
-        public XFillRule FillRule { get; set; }
+        public XFillRule FillRule
+        {
+            get { return _fillRule; }
+            set { Update(ref _fillRule, value); }
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="XPathGeometry"/> class.

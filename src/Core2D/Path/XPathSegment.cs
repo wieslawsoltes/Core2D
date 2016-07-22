@@ -9,17 +9,28 @@ namespace Core2D.Path
     /// <summary>
     /// <see cref="XPathFigure"/> segment base class.
     /// </summary>
-    public abstract class XPathSegment
+    public abstract class XPathSegment : ObservableObject
     {
+        private bool _isStroked;
+        private bool _isSmoothJoin;
+
         /// <summary>
         /// Gets or sets flag indicating whether segment is stroked.
         /// </summary>
-        public bool IsStroked { get; set; }
+        public bool IsStroked
+        {
+            get { return _isStroked; }
+            set { Update(ref _isStroked, value); }
+        }
 
         /// <summary>
         /// Gets or sets flag indicating whether segment is smooth join.
         /// </summary>
-        public bool IsSmoothJoin { get; set; }
+        public bool IsSmoothJoin
+        {
+            get { return _isSmoothJoin; }
+            set { Update(ref _isSmoothJoin, value); }
+        }
 
         /// <summary>
         /// Get all points in the segment.

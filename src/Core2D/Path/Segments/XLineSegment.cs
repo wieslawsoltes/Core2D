@@ -10,10 +10,16 @@ namespace Core2D.Path.Segments
     /// </summary>
     public class XLineSegment : XPathSegment
     {
+        private XPoint _point;
+
         /// <summary>
         /// Gets or sets end point.
         /// </summary>
-        public XPoint Point { get; set; }
+        public XPoint Point
+        {
+            get { return _point; }
+            set { Update(ref _point, value); }
+        }
 
         /// <inheritdoc/>
         public override IEnumerable<XPoint> GetPoints()

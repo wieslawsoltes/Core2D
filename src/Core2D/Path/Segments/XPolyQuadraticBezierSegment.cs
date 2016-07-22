@@ -11,11 +11,17 @@ namespace Core2D.Path.Segments
     /// </summary>
     public class XPolyQuadraticBezierSegment : XPathSegment
     {
+        private IList<XPoint> _points;
+
         /// <summary>
         /// Gets or sets points array.
         /// </summary>
         [Content]
-        public IList<XPoint> Points { get; set; }
+        public IList<XPoint> Points
+        {
+            get { return _points; }
+            set { Update(ref _points, value); }
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="XPolyQuadraticBezierSegment"/> class.
