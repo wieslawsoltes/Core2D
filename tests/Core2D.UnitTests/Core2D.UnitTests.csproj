@@ -177,7 +177,7 @@
     <Compile Include="Path\XPathFigureTests.cs" />
     <Compile Include="Path\XPathGeometryContextTests.cs" />
     <Compile Include="Path\XPathGeometryTests.cs" />
-    <Compile Include="Path\XPathSegmentTests.cs" />
+    <Compile Include="Path\XPathPolySegmentTests.cs" />
     <Compile Include="Path\XPathSizeTests.cs" />
     <Compile Include="Renderer\CacheTests.cs" />
     <Compile Include="Renderer\ShapeRendererStateTests.cs" />

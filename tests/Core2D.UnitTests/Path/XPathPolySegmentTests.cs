@@ -2,13 +2,12 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Core2D.Path;
 using Core2D.Shapes;
-using System;
 using System.Collections.Generic;
 using Xunit;
 
 namespace Core2D.UnitTests
 {
-    public class XPathSegmentTests
+    public class XPathPolySegmentTests
     {
         [Fact]
         [Trait("Core2D.Path", "Geometry")]
@@ -38,12 +37,8 @@ namespace Core2D.UnitTests
             Assert.Equal("0,0 0,0 0,0", actual);
         }
 
-        public class Class1 : XPathSegment
+        public class Class1 : XPathPolySegment
         {
-            public override IEnumerable<XPoint> GetPoints()
-            {
-                throw new NotImplementedException();
-            }
         }
     }
 }

@@ -37,29 +37,5 @@ namespace Core2D.Path
         /// </summary>
         /// <returns>All points in the segment.</returns>
         public abstract IEnumerable<XPoint> GetPoints();
-
-        /// <summary>
-        /// Creates a string representation of points collection.
-        /// </summary>
-        /// <param name="points">The points collection.</param>
-        /// <returns>A string representation of points collection.</returns>
-        public string ToString(IList<XPoint> points)
-        {
-            if (points?.Count == 0)
-            {
-                return string.Empty;
-            }
-
-            var sb = new StringBuilder();
-            for (int i = 0; i < points.Count; i++)
-            {
-                sb.Append(points[i]);
-                if (i != points.Count - 1)
-                {
-                    sb.Append(" ");
-                }
-            }
-            return sb.ToString();
-        }
     }
 }

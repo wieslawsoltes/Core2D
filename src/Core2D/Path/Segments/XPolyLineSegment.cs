@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System.Collections.Generic;
-using Core2D.Attributes;
 using Core2D.Shapes;
 
 namespace Core2D.Path.Segments
@@ -9,35 +8,8 @@ namespace Core2D.Path.Segments
     /// <summary>
     /// Poly line path segment.
     /// </summary>
-    public class XPolyLineSegment : XPathSegment
+    public class XPolyLineSegment : XPathPolySegment
     {
-        private IList<XPoint> _points;
-
-        /// <summary>
-        /// Gets or sets points array.
-        /// </summary>
-        [Content]
-        public IList<XPoint> Points
-        {
-            get { return _points; }
-            set { Update(ref _points, value); }
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="XPolyLineSegment"/> class.
-        /// </summary>
-        public XPolyLineSegment()
-            : base()
-        {
-            Points = new List<XPoint>();
-        }
-
-        /// <inheritdoc/>
-        public override IEnumerable<XPoint> GetPoints()
-        {
-            return Points;
-        }
-
         /// <summary>
         /// Creates a new <see cref="XPolyLineSegment"/> instance.
         /// </summary>
