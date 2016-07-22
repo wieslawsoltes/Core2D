@@ -68,10 +68,9 @@ namespace Core2D.Avalonia.Views
         /// <param name="height">The height of background rectangle.</param>
         private void DrawBackground(DrawingContext dc, ArgbColor c, double width, double height)
         {
-            var color = Color.FromArgb(c.A, c.R, c.G, c.B);
-            var brush = new SolidColorBrush(color);
-            var rect = new Rect(0, 0, width, height);
-            dc.FillRectangle(brush, rect);
+            dc.FillRectangle(
+                new SolidColorBrush(Color.FromArgb(c.A, c.R, c.G, c.B)), 
+                new Rect(0, 0, width, height));
         }
 
         /// <summary>
@@ -84,33 +83,19 @@ namespace Core2D.Avalonia.Views
         {
             DrawBackground(dc, container.Background, container.Width, container.Height);
 
-            if (container.Data == null)
+            var db = container.Data == null ? default(ImmutableArray<XProperty>) : container.Data.Properties;
+            var r = container.Data == null ? default(XRecord) : container.Data.Record;
+
+            renderer.Draw(dc, container, db, r);
+
+            if (container.WorkingLayer != null)
             {
-                renderer.Draw(dc, container, default(ImmutableArray<XProperty>), default(XRecord));
-
-                if (container.WorkingLayer != null)
-                {
-                    renderer.Draw(dc, container.WorkingLayer, default(ImmutableArray<XProperty>), default(XRecord));
-                }
-
-                if (container.HelperLayer != null)
-                {
-                    renderer.Draw(dc, container.HelperLayer, default(ImmutableArray<XProperty>), default(XRecord));
-                }
+                renderer.Draw(dc, container.WorkingLayer, db, r);
             }
-            else
+
+            if (container.HelperLayer != null)
             {
-                renderer.Draw(dc, container, container.Data.Properties, container.Data.Record);
-
-                if (container.WorkingLayer != null)
-                {
-                    renderer.Draw(dc, container.WorkingLayer, container.Data.Properties, container.Data.Record);
-                }
-
-                if (container.HelperLayer != null)
-                {
-                    renderer.Draw(dc, container.HelperLayer, container.Data.Properties, container.Data.Record);
-                }
+                renderer.Draw(dc, container.HelperLayer, db, r);
             }
         }
 
