@@ -96,7 +96,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MatrixHelper.cs" />
     <Compile Include="PathGeometryConverter.cs" />
     <Compile Include="XPathGeometryConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

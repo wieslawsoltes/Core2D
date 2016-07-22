@@ -8,8 +8,8 @@
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D" 
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D" 
              xmlns:Project="clr-namespace:Core2D.Project;assembly=Core2D" 
+             xmlns:paz="clr-namespace:Wpf.Controls.PanAndZoom;assembly=Wpf.Controls.PanAndZoom"
              xmlns:custom="clr-namespace:Core2D.Wpf.Controls.Custom"
-             xmlns:zoom="clr-namespace:Core2D.Wpf.Controls.Zoom"
              xmlns:lists="clr-namespace:Core2D.Wpf.Controls.Custom.Lists"
              xmlns:data="clr-namespace:Core2D.Wpf.Controls.Data"
              xmlns:path="clr-namespace:Core2D.Wpf.Controls.Path"
@@ -115,8 +115,8 @@
                     <ad:LayoutDocumentPaneGroup Orientation="Horizontal">
                         <ad:LayoutDocumentPane ShowHeader="False">
                             <ad:LayoutDocument x:Name="canvasWindow" CanClose="False" ContentId="canvas" Title="{x:Static p:Resources.WindowTitleCanvas}">
-                                <zoom:PanAndZoom x:Name="panAndZoom" Width="10000" Height="10000" AutoFitMode="Extent" ZoomSpeed="1.2" Background="{StaticResource TemplateCheckerBoard}" ClipToBounds="False" BorderBrush="{x:Null}" BorderThickness="0" FocusVisualStyle="{x:Null}" Focusable="True" VerticalAlignment="Center" HorizontalAlignment="Center" Tag="{Binding CancelAvailable}">
-                                    <zoom:PanAndZoom.InputBindings>
+                                <paz:ZoomBorder x:Name="zoomBorder" Width="10000" Height="10000" AutoFitMode="Extent" ZoomSpeed="1.2" Background="{StaticResource TemplateCheckerBoard}" ClipToBounds="False" BorderBrush="{x:Null}" BorderThickness="0" FocusVisualStyle="{x:Null}" Focusable="True" VerticalAlignment="Center" HorizontalAlignment="Center" Tag="{Binding CancelAvailable}">
+                                    <paz:ZoomBorder.InputBindings>
                                         <KeyBinding Command="{x:Static Editor:Commands.DeleteCommand}" CommandParameter="{Binding}" Key="Delete" Modifiers=""/>
                                         <KeyBinding Command="{x:Static Editor:Commands.DeselectAllCommand}" Key="Esc" Modifiers=""/>
                                         <KeyBinding Command="{x:Static Editor:Commands.SendToBackCommand}" Key="OemMinus" Modifiers="Shift"/>
@@ -153,7 +153,7 @@
                                         <KeyBinding Command="{x:Static Editor:Commands.SnapToGridCommand}" Key="G" Modifiers=""/>
                                         <KeyBinding Command="{x:Static Editor:Commands.TryToConnectCommand}" Key="C" Modifiers=""/>
                                         <KeyBinding Command="{x:Static Editor:Commands.CloneStyleCommand}" Key="Y" Modifiers=""/>
-                                    </zoom:PanAndZoom.InputBindings>
+                                    </paz:ZoomBorder.InputBindings>
                                     <Border Padding="5" VerticalAlignment="Center" HorizontalAlignment="Center" ClipToBounds="False" BorderBrush="{x:Null}" BorderThickness="0" FocusVisualStyle="{x:Null}" Focusable="False">
                                         <ContentControl x:Name="drawableControl" Content="{Binding Project.CurrentContainer}" ClipToBounds="False" custom:LayerElement.Renderer="{Binding Renderers[0]}">
                                             <ContentControl.Resources>
@@ -175,7 +175,7 @@
                                             </ContentControl.Style>
                                         </ContentControl>
                                     </Border>
-                                </zoom:PanAndZoom>
+                                </paz:ZoomBorder>
                             </ad:LayoutDocument>
                         </ad:LayoutDocumentPane>
                     </ad:LayoutDocumentPaneGroup>

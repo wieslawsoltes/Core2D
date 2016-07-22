@@ -91,9 +91,9 @@ namespace Core2D.Wpf.Views
             }
         }
 
-        private void PanAndZoom_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void ZoomBorder_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            panAndZoom.Focus();
+            zoomBorder.Focus();
             if (_projectEditor.IsLeftDownAvailable())
             {
                 var p = e.GetPosition(drawableControl);
@@ -101,9 +101,9 @@ namespace Core2D.Wpf.Views
             }
         }
 
-        private void PanAndZoom_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private void ZoomBorder_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            panAndZoom.Focus();
+            zoomBorder.Focus();
             if (_projectEditor.IsLeftUpAvailable())
             {
                 var p = e.GetPosition(drawableControl);
@@ -111,9 +111,9 @@ namespace Core2D.Wpf.Views
             }
         }
 
-        private void PanAndZoom_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        private void ZoomBorder_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            panAndZoom.Focus();
+            zoomBorder.Focus();
             if (_projectEditor.IsRightDownAvailable())
             {
                 var p = e.GetPosition(drawableControl);
@@ -121,9 +121,9 @@ namespace Core2D.Wpf.Views
             }
         }
 
-        private void PanAndZoom_PreviewMouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        private void ZoomBorder_PreviewMouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
-            panAndZoom.Focus();
+            zoomBorder.Focus();
             if (_projectEditor.IsRightUpAvailable())
             {
                 var p = e.GetPosition(drawableControl);
@@ -131,9 +131,9 @@ namespace Core2D.Wpf.Views
             }
         }
 
-        private void PanAndZoom_PreviewMouseMove(object sender, MouseEventArgs e)
+        private void ZoomBorder_PreviewMouseMove(object sender, MouseEventArgs e)
         {
-            panAndZoom.Focus();
+            zoomBorder.Focus();
             if (_projectEditor.IsMoveAvailable())
             {
                 var p = e.GetPosition(drawableControl);
@@ -141,7 +141,7 @@ namespace Core2D.Wpf.Views
             }
         }
 
-        private void PanAndZoom_DragEnter(object sender, DragEventArgs e)
+        private void ZoomBorder_DragEnter(object sender, DragEventArgs e)
         {
             if (!e.Data.GetDataPresent(DataFormats.FileDrop)
                 && !e.Data.GetDataPresent(typeof(BaseShape))
@@ -154,7 +154,7 @@ namespace Core2D.Wpf.Views
             }
         }
 
-        private void PanAndZoom_Drop(object sender, DragEventArgs e)
+        private void ZoomBorder_Drop(object sender, DragEventArgs e)
         {
             // Files.
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
@@ -278,22 +278,22 @@ namespace Core2D.Wpf.Views
             if (_projectEditor != null)
             {
                 _projectEditor.Invalidate = () => { };
-                _projectEditor.ResetZoom = () => panAndZoom.Reset();
-                _projectEditor.AutoFitZoom = () => panAndZoom.AutoFit();
+                _projectEditor.ResetZoom = () => zoomBorder.Reset();
+                _projectEditor.AutoFitZoom = () => zoomBorder.AutoFit();
                 _projectEditor.LoadLayout = () => OnLoadLayout();
                 _projectEditor.SaveLayout = () => OnSaveLayout();
                 _projectEditor.ResetLayout = () => OnResetLayout();
 
-                panAndZoom.InvalidatedChild = InvalidateChild;
-                panAndZoom.PreviewMouseLeftButtonDown += PanAndZoom_PreviewMouseLeftButtonDown;
-                panAndZoom.PreviewMouseLeftButtonUp += PanAndZoom_PreviewMouseLeftButtonUp;
-                panAndZoom.PreviewMouseRightButtonDown += PanAndZoom_PreviewMouseRightButtonDown;
-                panAndZoom.PreviewMouseRightButtonUp += PanAndZoom_PreviewMouseRightButtonUp;
-                panAndZoom.PreviewMouseMove += PanAndZoom_PreviewMouseMove;
+                zoomBorder.InvalidatedChild = InvalidateChild;
+                zoomBorder.PreviewMouseLeftButtonDown += ZoomBorder_PreviewMouseLeftButtonDown;
+                zoomBorder.PreviewMouseLeftButtonUp += ZoomBorder_PreviewMouseLeftButtonUp;
+                zoomBorder.PreviewMouseRightButtonDown += ZoomBorder_PreviewMouseRightButtonDown;
+                zoomBorder.PreviewMouseRightButtonUp += ZoomBorder_PreviewMouseRightButtonUp;
+                zoomBorder.PreviewMouseMove += ZoomBorder_PreviewMouseMove;
 
-                panAndZoom.AllowDrop = true;
-                panAndZoom.DragEnter += PanAndZoom_DragEnter;
-                panAndZoom.Drop += PanAndZoom_Drop;
+                zoomBorder.AllowDrop = true;
+                zoomBorder.DragEnter += ZoomBorder_DragEnter;
+                zoomBorder.Drop += ZoomBorder_Drop;
             }
         }
 
@@ -311,16 +311,16 @@ namespace Core2D.Wpf.Views
                 _projectEditor.SaveLayout = null;
                 _projectEditor.ResetLayout = null;
 
-                panAndZoom.InvalidatedChild = null;
-                panAndZoom.PreviewMouseLeftButtonDown -= PanAndZoom_PreviewMouseLeftButtonDown;
-                panAndZoom.PreviewMouseLeftButtonUp -= PanAndZoom_PreviewMouseLeftButtonUp;
-                panAndZoom.PreviewMouseRightButtonDown -= PanAndZoom_PreviewMouseRightButtonDown;
-                panAndZoom.PreviewMouseRightButtonUp -= PanAndZoom_PreviewMouseRightButtonUp;
-                panAndZoom.PreviewMouseMove -= PanAndZoom_PreviewMouseMove;
+                zoomBorder.InvalidatedChild = null;
+                zoomBorder.PreviewMouseLeftButtonDown -= ZoomBorder_PreviewMouseLeftButtonDown;
+                zoomBorder.PreviewMouseLeftButtonUp -= ZoomBorder_PreviewMouseLeftButtonUp;
+                zoomBorder.PreviewMouseRightButtonDown -= ZoomBorder_PreviewMouseRightButtonDown;
+                zoomBorder.PreviewMouseRightButtonUp -= ZoomBorder_PreviewMouseRightButtonUp;
+                zoomBorder.PreviewMouseMove -= ZoomBorder_PreviewMouseMove;
 
-                panAndZoom.AllowDrop = false;
-                panAndZoom.DragEnter -= PanAndZoom_DragEnter;
-                panAndZoom.Drop -= PanAndZoom_Drop;
+                zoomBorder.AllowDrop = false;
+                zoomBorder.DragEnter -= ZoomBorder_DragEnter;
+                zoomBorder.Drop -= ZoomBorder_Drop;
             }
 
             _projectEditor = null;

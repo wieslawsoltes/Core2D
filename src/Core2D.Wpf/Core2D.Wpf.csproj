@@ -124,6 +124,10 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="Wpf.Controls.PanAndZoom, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Wpf.Controls.PanAndZoom.0.1.0.18-nightly\lib\net45\Wpf.Controls.PanAndZoom.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Xceed.Wpf.AvalonDock, Version=2.9.15603.14400, Culture=neutral, PublicKeyToken=ba83ff368b7563c6, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Xceed.Wpf.AvalonDock.2.9.15603.14400\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
       <Private>True</Private>
@@ -171,8 +175,6 @@
     <Compile Include="Views\ContainerControl.xaml.cs">
       <DependentUpon>ContainerControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Zoom\AutoFitMode.cs" />
-    <Compile Include="Controls\Zoom\PanAndZoom.cs" />
     <Compile Include="Controls\Path\ArcSegmentControl.xaml.cs">
       <DependentUpon>ArcSegmentControl.xaml</DependentUpon>
     </Compile>

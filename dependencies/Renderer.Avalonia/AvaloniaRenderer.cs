@@ -15,6 +15,7 @@ using Core2D.Style;
 using A = Avalonia;
 using AM = Avalonia.Media;
 using AMI = Avalonia.Media.Imaging;
+using APAZ = Avalonia.Controls.PanAndZoom;
 
 namespace Renderer.Avalonia
 {
@@ -192,7 +193,7 @@ namespace Renderer.Avalonia
         private static A.Point DrawLineArrowInternal(AM.DrawingContext dc, AM.Pen pen, AM.IBrush brush, float x, float y, double angle, ArrowStyle style)
         {
             A.Point pt = default(A.Point);
-            var rt = MatrixHelper.Rotation(angle, new A.Vector(x, y));
+            var rt = APAZ.MatrixHelper.Rotation(angle, new A.Vector(x, y));
             double rx = style.RadiusX;
             double ry = style.RadiusY;
             double sx = 2.0 * rx;
@@ -208,7 +209,7 @@ namespace Renderer.Avalonia
                     break;
                 case ArrowType.Rectangle:
                     {
-                        pt = MatrixHelper.TransformPoint(rt, new A.Point(x - (float)sx, y));
+                        pt = APAZ.MatrixHelper.TransformPoint(rt, new A.Point(x - (float)sx, y));
                         var rect = new Rect2(x - sx, y - ry, sx, sy);
                         using (var d = dc.PushPreTransform(rt))
                         {
@@ -218,7 +219,7 @@ namespace Renderer.Avalonia
                     break;
                 case ArrowType.Ellipse:
                     {
-                        pt = MatrixHelper.TransformPoint(rt, new A.Point(x - (float)sx, y));
+                        pt = APAZ.MatrixHelper.TransformPoint(rt, new A.Point(x - (float)sx, y));
                         using (var d = dc.PushPreTransform(rt))
                         {
                             var rect = new Rect2(x - sx, y - ry, sx, sy);
@@ -236,11 +237,11 @@ namespace Renderer.Avalonia
                             new A.Point(x - (float)sx, y - (float)sy),
                             new A.Point(x, y)
                         };
-                        pt = MatrixHelper.TransformPoint(rt, pts[0]);
-                        var p11 = MatrixHelper.TransformPoint(rt, pts[1]);
-                        var p21 = MatrixHelper.TransformPoint(rt, pts[2]);
-                        var p12 = MatrixHelper.TransformPoint(rt, pts[3]);
-                        var p22 = MatrixHelper.TransformPoint(rt, pts[4]);
+                        pt = APAZ.MatrixHelper.TransformPoint(rt, pts[0]);
+                        var p11 = APAZ.MatrixHelper.TransformPoint(rt, pts[1]);
+                        var p21 = APAZ.MatrixHelper.TransformPoint(rt, pts[2]);
+                        var p12 = APAZ.MatrixHelper.TransformPoint(rt, pts[3]);
+                        var p22 = APAZ.MatrixHelper.TransformPoint(rt, pts[4]);
                         DrawLineInternal(dc, pen, style.IsStroked, ref p11, ref p21);
                         DrawLineInternal(dc, pen, style.IsStroked, ref p12, ref p22);
                     }

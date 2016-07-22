@@ -1,9 +1,9 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Core2D.Editor;
-using Core2D.Avalonia.Controls.Zoom;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.PanAndZoom;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
 using System;
@@ -17,7 +17,7 @@ namespace Core2D.Avalonia.Views
     {
         private ProjectEditor _projectEditor;
         private ContainerViewControl _containerControl;
-        private PanAndZoom _panAndZoom;
+        private ZoomBorder _zoomBorder;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EditorControl"/> class.
@@ -74,9 +74,9 @@ namespace Core2D.Avalonia.Views
             }
         }
 
-        private void PanAndZoom_PointerPressed(object sender, PointerPressedEventArgs e)
+        private void ZoomBorder_PointerPressed(object sender, PointerPressedEventArgs e)
         {
-            var p = _panAndZoom.FixInvalidPointPosition(e.GetPosition(_containerControl));
+            var p = _zoomBorder.FixInvalidPointPosition(e.GetPosition(_containerControl));
 
             if (e.MouseButton == MouseButton.Left)
             {
@@ -95,9 +95,9 @@ namespace Core2D.Avalonia.Views
             }
         }
 
-        private void PanAndZoom_PointerReleased(object sender, PointerReleasedEventArgs e)
+        private void ZoomBorder_PointerReleased(object sender, PointerReleasedEventArgs e)
         {
-            var p = _panAndZoom.FixInvalidPointPosition(e.GetPosition(_containerControl));
+            var p = _zoomBorder.FixInvalidPointPosition(e.GetPosition(_containerControl));
 
             if (e.MouseButton == MouseButton.Left)
             {
@@ -116,9 +116,9 @@ namespace Core2D.Avalonia.Views
             }
         }
 
-        private void PanAndZoom_PointerMoved(object sender, PointerEventArgs e)
+        private void ZoomBorder_PointerMoved(object sender, PointerEventArgs e)
         {
-            var p = _panAndZoom.FixInvalidPointPosition(e.GetPosition(_containerControl));
+            var p = _zoomBorder.FixInvalidPointPosition(e.GetPosition(_containerControl));
 
             if (_projectEditor.IsMoveAvailable())
             {
@@ -133,21 +133,21 @@ namespace Core2D.Avalonia.Views
         {
             _projectEditor = this.DataContext as ProjectEditor;
             _containerControl = this.Find<ContainerViewControl>("containerControl");
-            _panAndZoom = this.Find<PanAndZoom>("panAndZoom");
+            _zoomBorder = this.Find<ZoomBorder>("zoomBorder");
 
-            if (_projectEditor != null && _containerControl != null && _panAndZoom != null)
+            if (_projectEditor != null && _containerControl != null && _zoomBorder != null)
             {
                 _projectEditor.Invalidate = () => _containerControl.InvalidateVisual();
-                _projectEditor.ResetZoom = () => _panAndZoom.Reset();
-                _projectEditor.AutoFitZoom = () => _panAndZoom.AutoFit();
+                _projectEditor.ResetZoom = () => _zoomBorder.Reset();
+                _projectEditor.AutoFitZoom = () => _zoomBorder.AutoFit();
                 _projectEditor.LoadLayout = () => { };
                 _projectEditor.SaveLayout = () => { };
                 _projectEditor.ResetLayout = () => { };
 
-                _panAndZoom.InvalidatedChild = InvalidateChild;
-                _panAndZoom.PointerPressed += PanAndZoom_PointerPressed;
-                _panAndZoom.PointerReleased += PanAndZoom_PointerReleased;
-                _panAndZoom.PointerMoved += PanAndZoom_PointerMoved;
+                _zoomBorder.InvalidatedChild = InvalidateChild;
+                _zoomBorder.PointerPressed += ZoomBorder_PointerPressed;
+                _zoomBorder.PointerReleased += ZoomBorder_PointerReleased;
+                _zoomBorder.PointerMoved += ZoomBorder_PointerMoved;
             }
         }
 
@@ -156,7 +156,7 @@ namespace Core2D.Avalonia.Views
         /// </summary>
         public void DetachEditor()
         {
-            if (_projectEditor != null && _containerControl != null && _panAndZoom != null)
+            if (_projectEditor != null && _containerControl != null && _zoomBorder != null)
             {
                 _projectEditor.Invalidate = null;
                 _projectEditor.ResetZoom = null;
@@ -165,15 +165,15 @@ namespace Core2D.Avalonia.Views
                 _projectEditor.SaveLayout = null;
                 _projectEditor.ResetLayout = null;
 
-                _panAndZoom.InvalidatedChild = null;
-                _panAndZoom.PointerPressed -= PanAndZoom_PointerPressed;
-                _panAndZoom.PointerReleased -= PanAndZoom_PointerReleased;
-                _panAndZoom.PointerMoved -= PanAndZoom_PointerMoved;
+                _zoomBorder.InvalidatedChild = null;
+                _zoomBorder.PointerPressed -= ZoomBorder_PointerPressed;
+                _zoomBorder.PointerReleased -= ZoomBorder_PointerReleased;
+                _zoomBorder.PointerMoved -= ZoomBorder_PointerMoved;
             }
 
             _projectEditor = null;
             _containerControl = null;
-            _panAndZoom = null;
+            _zoomBorder = null;
         }
     }
 }

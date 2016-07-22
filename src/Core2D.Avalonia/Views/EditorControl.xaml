@@ -13,7 +13,7 @@
              xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D"
-             xmlns:zoom="clr-namespace:Core2D.Avalonia.Controls.Zoom;assembly=Core2D.Avalonia"
+             xmlns:paz="clr-namespace:Avalonia.Controls.PanAndZoom;assembly=Avalonia.Controls.PanAndZoom"
              xmlns:data="clr-namespace:Core2D.Avalonia.Controls.Data;assembly=Core2D.Avalonia"
              xmlns:path="clr-namespace:Core2D.Avalonia.Controls.Path;assembly=Core2D.Avalonia"
              xmlns:project="clr-namespace:Core2D.Avalonia.Controls.Project;assembly=Core2D.Avalonia"
@@ -210,9 +210,9 @@
                 </StackPanel>
                 <Border Classes="container">
                     <Border Classes="transparent" ClipToBounds="True">
-                        <zoom:PanAndZoom Name="panAndZoom" AutoFitMode="None" ZoomSpeed="1.2" Background="{StyleResource TransparentBrush}" ClipToBounds="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                        <paz:ZoomBorder Name="zoomBorder" AutoFitMode="None" ZoomSpeed="1.2" Background="{StyleResource TransparentBrush}" ClipToBounds="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                             <views:ContainerViewControl Name="containerControl" Renderer="{Binding Renderers[0]}" Container="{Binding Project.CurrentContainer}" ClipToBounds="False"/>
-                        </zoom:PanAndZoom>
+                        </paz:ZoomBorder>
                     </Border>
                 </Border>
             </DockPanel>
@@ -314,7 +314,7 @@
                 <WrapPanel Name="zoomPanel">
                     <Button Content="Reset" Classes="autofit" Command="{Static Editor:Commands.ZoomResetCommand}"/>
                     <Button Content="AutoFit" Classes="autofit" Command="{Static Editor:Commands.ZoomAutoFitCommand}"/>
-                    <DropDown Classes="autofit" Items="{Static zoom:PanAndZoom.AutoFitModes}" SelectedItem="{Binding #panAndZoom.AutoFitMode, Mode=TwoWay}"/>
+                    <DropDown Classes="autofit" Items="{Static paz:PanAndZoom.AutoFitModes}" SelectedItem="{Binding #panAndZoom.AutoFitMode, Mode=TwoWay}"/>
                     <TextBox Classes="autofit" Text="{Binding #panAndZoom.ZoomSpeed, Mode=TwoWay}" Width="50"/>
                 </WrapPanel>
                 <WrapPanel Name="optionsPanel">

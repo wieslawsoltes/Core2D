@@ -47,6 +47,7 @@ The core library and editor are portable and should work on all platforms where 
   * Xceed.Wpf.AvalonDock
   * Xceed.Products.Wpf.Toolkit.AvalonDock
   * System.Windows.Interactivity.WPF
+  * Wpf.Controls.PanAndZoom
 * Avalonia
   * Avalonia
   * Avalonia.Desktop
@@ -63,6 +64,8 @@ The core library and editor are portable and should work on all platforms where 
   * SharpDX.DXGI
   * Splat
   * Sprache
+  * Avalonia.Xaml.Behaviors
+  * Avalonia.Controls.PanAndZoom
 
 ### NuGet Package Sources
 
@@ -70,9 +73,12 @@ The core library and editor are portable and should work on all platforms where 
 * https://ci.appveyor.com/nuget/portable-xaml
 * https://www.myget.org/F/avalonia-ci/api/v2
 * https://www.myget.org/F/xamlbehaviors-nightly/api/v2
+* https://www.myget.org/F/panandzoom-nightly/api/v2
 
 ### Other Dependencies
 
+* [Port of Windows UWP Xaml Behaviors for Avalonia Xaml.](https://github.com/XamlBehaviors/XamlBehaviors) Needed for Xaml Behaviors support.
+* [Pan and zoom control for WPF and Avalonia.](https://github.com/wieslawsoltes/MatrixPanAndZoomDemo) Needed for Pan and Zoom support.
 * [Portable .NET library for reading/writing xaml files.](https://github.com/cwensley/Portable.Xaml) Needed for Xaml support.
 * [xUnit.net unit testing tool for the .NET Framework.](https://github.com/xunit/xunit) Needed to run tests.
 * [GTK# for .NET](http://www.mono-project.com/download/#download-win) Needed for Gtk on Windows.
