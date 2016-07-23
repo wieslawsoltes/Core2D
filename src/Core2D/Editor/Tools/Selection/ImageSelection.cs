@@ -13,9 +13,11 @@ namespace Core2D.Editor.Tools.Selection
     public class ImageSelection
     {
         private XLayer _layer;
-        private XText _shape;
+        private XImage _shape;
         private ShapeStyle _style;
         private BaseShape _point;
+        private XPoint _topLeftHelperPoint;
+        private XPoint _bottomRightHelperPoint;
 
         /// <summary>
         /// Initialize new instance of <see cref="ImageSelection"/> class.
@@ -24,7 +26,7 @@ namespace Core2D.Editor.Tools.Selection
         /// <param name="shape">The selected shape.</param>
         /// <param name="style">The selection shapes style.</param>
         /// <param name="point">The selection point shape.</param>
-        public ImageSelection(XLayer layer, XText shape, ShapeStyle style, BaseShape point)
+        public ImageSelection(XLayer layer, XImage shape, ShapeStyle style, BaseShape point)
         {
             _layer = layer;
             _shape = shape;
@@ -32,6 +34,51 @@ namespace Core2D.Editor.Tools.Selection
             _point = point;
         }
 
-        // TODO: Implement selection class.
+        /// <summary>
+        /// Transfer selection state to <see cref="ToolState.One"/>.
+        /// </summary>
+        public void ToStateOne()
+        {
+            _topLeftHelperPoint = XPoint.Create(0, 0, _point);
+            _layer.Shapes = _layer.Shapes.Add(_topLeftHelperPoint);
+            _bottomRightHelperPoint = XPoint.Create(0, 0, _point);
+            _layer.Shapes = _layer.Shapes.Add(_bottomRightHelperPoint);
+        }
+
+        /// <summary>
+        /// Move selection.
+        /// </summary>
+        public void Move()
+        {
+            if (_topLeftHelperPoint != null)
+            {
+                _topLeftHelperPoint.X = _shape.TopLeft.X;
+                _topLeftHelperPoint.Y = _shape.TopLeft.Y;
+            }
+
+            if (_bottomRightHelperPoint != null)
+            {
+                _bottomRightHelperPoint.X = _shape.BottomRight.X;
+                _bottomRightHelperPoint.Y = _shape.BottomRight.Y;
+            }
+        }
+
+        /// <summary>
+        /// Remove selection.
+        /// </summary>
+        public void Remove()
+        {
+            if (_topLeftHelperPoint != null)
+            {
+                _layer.Shapes = _layer.Shapes.Remove(_topLeftHelperPoint);
+                _topLeftHelperPoint = null;
+            }
+
+            if (_bottomRightHelperPoint != null)
+            {
+                _layer.Shapes = _layer.Shapes.Remove(_bottomRightHelperPoint);
+                _bottomRightHelperPoint = null;
+            }
+        }
     }
 }

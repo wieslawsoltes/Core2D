@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Editor.Tools.Selection;
 using Core2D.Shape;
 using Core2D.Shapes;
 
@@ -13,8 +14,7 @@ namespace Core2D.Editor.Tools
         private ProjectEditor _editor;
         private ToolState _currentState = ToolState.None;
         private XEllipse _shape;
-        private XPoint _topLeftHelperPoint;
-        private XPoint _bottomRightHelperPoint;
+        private EllipseSelection _selection;
 
         /// <summary>
         /// Initialize new instance of <see cref="ToolEllipse"/> class.
@@ -151,10 +151,13 @@ namespace Core2D.Editor.Tools
         {
             base.ToStateOne();
 
-            _topLeftHelperPoint = XPoint.Create(0, 0, _editor.Project.Options.PointShape);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_topLeftHelperPoint);
-            _bottomRightHelperPoint = XPoint.Create(0, 0, _editor.Project.Options.PointShape);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_bottomRightHelperPoint);
+            _selection = new EllipseSelection(
+                _editor.Project.CurrentContainer.HelperLayer,
+                _shape,
+                _editor.Project.Options.HelperStyle,
+                _editor.Project.Options.PointShape);
+
+            _selection.ToStateOne();
         }
 
         /// <inheritdoc/>
@@ -162,33 +165,15 @@ namespace Core2D.Editor.Tools
         {
             base.Move(shape);
 
-            if (_topLeftHelperPoint != null)
-            {
-                _topLeftHelperPoint.X = _shape.TopLeft.X;
-                _topLeftHelperPoint.Y = _shape.TopLeft.Y;
-            }
-
-            if (_bottomRightHelperPoint != null)
-            {
-                _bottomRightHelperPoint.X = _shape.BottomRight.X;
-                _bottomRightHelperPoint.Y = _shape.BottomRight.Y;
-            }
+            _selection.Move();
         }
 
         /// <inheritdoc/>
         public override void Remove()
         {
-            if (_topLeftHelperPoint != null)
-            {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_topLeftHelperPoint);
-                _topLeftHelperPoint = null;
-            }
+            base.Remove();
 
-            if (_bottomRightHelperPoint != null)
-            {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_bottomRightHelperPoint);
-                _bottomRightHelperPoint = null;
-            }
+            _selection.Remove();
         }
     }
 }
