@@ -1,10 +1,10 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
+using System.Collections.Immutable;
 using Core2D.Path;
 using Core2D.Path.Segments;
 using Core2D.Shapes;
-using System;
-using System.Collections.Generic;
 using Xunit;
 
 namespace Core2D.UnitTests
@@ -32,10 +32,10 @@ namespace Core2D.UnitTests
         {
             var geometry = new XPathGeometry();
             var target = new XPathGeometryContext(geometry);
-            Assert.Equal(0, geometry.Figures.Count);
+            Assert.Equal(0, geometry.Figures.Length);
 
             target.BeginFigure(new XPoint());
-            Assert.Equal(1, geometry.Figures.Count);
+            Assert.Equal(1, geometry.Figures.Length);
             Assert.True(geometry.Figures[0].IsFilled);
             Assert.True(geometry.Figures[0].IsClosed);
 
@@ -50,10 +50,10 @@ namespace Core2D.UnitTests
             var geometry = new XPathGeometry();
             var target = new XPathGeometryContext(geometry);
             target.BeginFigure(new XPoint());
-            Assert.Equal(0, geometry.Figures[0].Segments.Count);
+            Assert.Equal(0, geometry.Figures[0].Segments.Length);
 
             target.LineTo(new XPoint());
-            Assert.Equal(1, geometry.Figures[0].Segments.Count);
+            Assert.Equal(1, geometry.Figures[0].Segments.Length);
 
             var segment = geometry.Figures[0].Segments[0];
             Assert.IsType<XLineSegment>(segment);
@@ -68,10 +68,10 @@ namespace Core2D.UnitTests
             var geometry = new XPathGeometry();
             var target = new XPathGeometryContext(geometry);
             target.BeginFigure(new XPoint());
-            Assert.Equal(0, geometry.Figures[0].Segments.Count);
+            Assert.Equal(0, geometry.Figures[0].Segments.Length);
 
             target.ArcTo(new XPoint(), new XPathSize());
-            Assert.Equal(1, geometry.Figures[0].Segments.Count);
+            Assert.Equal(1, geometry.Figures[0].Segments.Length);
 
             var segment = geometry.Figures[0].Segments[0];
             Assert.IsType<XArcSegment>(segment);
@@ -86,10 +86,10 @@ namespace Core2D.UnitTests
             var geometry = new XPathGeometry();
             var target = new XPathGeometryContext(geometry);
             target.BeginFigure(new XPoint());
-            Assert.Equal(0, geometry.Figures[0].Segments.Count);
+            Assert.Equal(0, geometry.Figures[0].Segments.Length);
 
             target.CubicBezierTo(new XPoint(), new XPoint(), new XPoint());
-            Assert.Equal(1, geometry.Figures[0].Segments.Count);
+            Assert.Equal(1, geometry.Figures[0].Segments.Length);
 
             var segment = geometry.Figures[0].Segments[0];
             Assert.IsType<XCubicBezierSegment>(segment);
@@ -104,10 +104,10 @@ namespace Core2D.UnitTests
             var geometry = new XPathGeometry();
             var target = new XPathGeometryContext(geometry);
             target.BeginFigure(new XPoint());
-            Assert.Equal(0, geometry.Figures[0].Segments.Count);
+            Assert.Equal(0, geometry.Figures[0].Segments.Length);
 
             target.QuadraticBezierTo(new XPoint(), new XPoint());
-            Assert.Equal(1, geometry.Figures[0].Segments.Count);
+            Assert.Equal(1, geometry.Figures[0].Segments.Length);
 
             var segment = geometry.Figures[0].Segments[0];
             Assert.IsType<XQuadraticBezierSegment>(segment);
@@ -122,10 +122,10 @@ namespace Core2D.UnitTests
             var geometry = new XPathGeometry();
             var target = new XPathGeometryContext(geometry);
             target.BeginFigure(new XPoint());
-            Assert.Equal(0, geometry.Figures[0].Segments.Count);
-
-            target.PolyLineTo(new List<XPoint>() { new XPoint(), new XPoint(), new XPoint() });
-            Assert.Equal(1, geometry.Figures[0].Segments.Count);
+            Assert.Equal(0, geometry.Figures[0].Segments.Length);
+            
+            target.PolyLineTo(ImmutableArray.Create<XPoint>(new XPoint(), new XPoint(), new XPoint()));
+            Assert.Equal(1, geometry.Figures[0].Segments.Length);
 
             var segment = geometry.Figures[0].Segments[0];
             Assert.IsType<XPolyLineSegment>(segment);
@@ -140,10 +140,10 @@ namespace Core2D.UnitTests
             var geometry = new XPathGeometry();
             var target = new XPathGeometryContext(geometry);
             target.BeginFigure(new XPoint());
-            Assert.Equal(0, geometry.Figures[0].Segments.Count);
+            Assert.Equal(0, geometry.Figures[0].Segments.Length);
 
-            target.PolyCubicBezierTo(new List<XPoint>() { new XPoint(), new XPoint(), new XPoint() });
-            Assert.Equal(1, geometry.Figures[0].Segments.Count);
+            target.PolyCubicBezierTo(ImmutableArray.Create<XPoint>(new XPoint(), new XPoint(), new XPoint()));
+            Assert.Equal(1, geometry.Figures[0].Segments.Length);
 
             var segment = geometry.Figures[0].Segments[0];
             Assert.IsType<XPolyCubicBezierSegment>(segment);
@@ -158,10 +158,10 @@ namespace Core2D.UnitTests
             var geometry = new XPathGeometry();
             var target = new XPathGeometryContext(geometry);
             target.BeginFigure(new XPoint());
-            Assert.Equal(0, geometry.Figures[0].Segments.Count);
+            Assert.Equal(0, geometry.Figures[0].Segments.Length);
 
-            target.PolyQuadraticBezierTo(new List<XPoint>() { new XPoint(), new XPoint(), new XPoint() });
-            Assert.Equal(1, geometry.Figures[0].Segments.Count);
+            target.PolyQuadraticBezierTo(ImmutableArray.Create<XPoint>(new XPoint(), new XPoint(), new XPoint()));
+            Assert.Equal(1, geometry.Figures[0].Segments.Length);
 
             var segment = geometry.Figures[0].Segments[0];
             Assert.IsType<XPolyQuadraticBezierSegment>(segment);

@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
 using Core2D.Attributes;
@@ -14,7 +15,7 @@ namespace Core2D.Path
     public class XPathFigure : ObservableObject
     {
         private XPoint _startPoint;
-        private IList<XPathSegment> _segments;
+        private ImmutableArray<XPathSegment> _segments;
         private bool _isFilled;
         private bool _isClosed;
 
@@ -31,7 +32,7 @@ namespace Core2D.Path
         /// Gets or sets segments collection.
         /// </summary>
         [Content]
-        public IList<XPathSegment> Segments
+        public ImmutableArray<XPathSegment> Segments
         {
             get { return _segments; }
             set { Update(ref _segments, value); }
@@ -61,7 +62,7 @@ namespace Core2D.Path
         public XPathFigure()
         {
             StartPoint = new XPoint();
-            Segments = new List<XPathSegment>();
+            Segments = ImmutableArray.Create<XPathSegment>();
         }
 
         /// <summary>
@@ -100,15 +101,15 @@ namespace Core2D.Path
         /// </summary>
         /// <param name="segments">The segments collection.</param>
         /// <returns>A string representation of segments collection.</returns>
-        public string ToString(IList<XPathSegment> segments)
+        public string ToString(ImmutableArray<XPathSegment> segments)
         {
-            if (segments?.Count == 0)
+            if (segments.Length == 0)
             {
                 return string.Empty;
             }
 
             var sb = new StringBuilder();
-            for (int i = 0; i < segments.Count; i++)
+            for (int i = 0; i < segments.Length; i++)
             {
                 sb.Append(segments[i].ToString());
             }

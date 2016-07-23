@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
-using System.Collections.Generic;
+using System.Collections.Immutable;
 using Core2D.Path.Segments;
 using Core2D.Shapes;
 
@@ -32,7 +32,7 @@ namespace Core2D.Path
         public override void BeginFigure(XPoint startPoint, bool isFilled = true, bool isClosed = true)
         {
             _currentFigure = XPathFigure.Create(startPoint, isFilled, isClosed);
-            _geometry.Figures.Add(_currentFigure);
+            _geometry.Figures = _geometry.Figures.Add(_currentFigure);
         }
 
         /// <inheritdoc/>
@@ -48,7 +48,7 @@ namespace Core2D.Path
                 point,
                 isStroked,
                 isSmoothJoin);
-            _currentFigure.Segments.Add(segment);
+            _currentFigure.Segments = _currentFigure.Segments.Add(segment);
         }
 
         /// <inheritdoc/>
@@ -62,7 +62,7 @@ namespace Core2D.Path
                 sweepDirection,
                 isStroked,
                 isSmoothJoin);
-            _currentFigure.Segments.Add(segment);
+            _currentFigure.Segments = _currentFigure.Segments.Add(segment);
         }
 
         /// <inheritdoc/>
@@ -74,7 +74,7 @@ namespace Core2D.Path
                 point3,
                 isStroked,
                 isSmoothJoin);
-            _currentFigure.Segments.Add(segment);
+            _currentFigure.Segments = _currentFigure.Segments.Add(segment);
         }
 
         /// <inheritdoc/>
@@ -85,37 +85,37 @@ namespace Core2D.Path
                 point2,
                 isStroked,
                 isSmoothJoin);
-            _currentFigure.Segments.Add(segment);
+            _currentFigure.Segments = _currentFigure.Segments.Add(segment);
         }
 
         /// <inheritdoc/>
-        public override void PolyLineTo(IList<XPoint> points, bool isStroked = true, bool isSmoothJoin = true)
+        public override void PolyLineTo(ImmutableArray<XPoint> points, bool isStroked = true, bool isSmoothJoin = true)
         {
             var segment = XPolyLineSegment.Create(
                 points,
                 isStroked,
                 isSmoothJoin);
-            _currentFigure.Segments.Add(segment);
+            _currentFigure.Segments = _currentFigure.Segments.Add(segment);
         }
 
         /// <inheritdoc/>
-        public override void PolyCubicBezierTo(IList<XPoint> points, bool isStroked = true, bool isSmoothJoin = true)
+        public override void PolyCubicBezierTo(ImmutableArray<XPoint> points, bool isStroked = true, bool isSmoothJoin = true)
         {
             var segment = XPolyCubicBezierSegment.Create(
                 points,
                 isStroked,
                 isSmoothJoin);
-            _currentFigure.Segments.Add(segment);
+            _currentFigure.Segments = _currentFigure.Segments.Add(segment);
         }
 
         /// <inheritdoc/>
-        public override void PolyQuadraticBezierTo(IList<XPoint> points, bool isStroked = true, bool isSmoothJoin = true)
+        public override void PolyQuadraticBezierTo(ImmutableArray<XPoint> points, bool isStroked = true, bool isSmoothJoin = true)
         {
             var segment = XPolyQuadraticBezierSegment.Create(
                 points,
                 isStroked,
                 isSmoothJoin);
-            _currentFigure.Segments.Add(segment);
+            _currentFigure.Segments = _currentFigure.Segments.Add(segment);
         }
     }
 }

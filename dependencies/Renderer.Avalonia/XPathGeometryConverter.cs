@@ -72,7 +72,7 @@ namespace Renderer.Avalonia
                         else if (segment is XPolyCubicBezierSegment)
                         {
                             var polyCubicBezierSegment = segment as XPolyCubicBezierSegment;
-                            if (polyCubicBezierSegment.Points.Count >= 3)
+                            if (polyCubicBezierSegment.Points.Length >= 3)
                             {
                                 sgc.CubicBezierTo(
                                     new Point(
@@ -88,10 +88,10 @@ namespace Renderer.Avalonia
                                 previous = polyCubicBezierSegment.Points[2];
                             }
 
-                            if (polyCubicBezierSegment.Points.Count > 3
-                                && polyCubicBezierSegment.Points.Count % 3 == 0)
+                            if (polyCubicBezierSegment.Points.Length > 3
+                                && polyCubicBezierSegment.Points.Length % 3 == 0)
                             {
-                                for (int i = 3; i < polyCubicBezierSegment.Points.Count; i += 3)
+                                for (int i = 3; i < polyCubicBezierSegment.Points.Length; i += 3)
                                 {
                                     sgc.CubicBezierTo(
                                         new Point(
@@ -111,7 +111,7 @@ namespace Renderer.Avalonia
                         else if (segment is XPolyLineSegment)
                         {
                             var polyLineSegment = segment as XPolyLineSegment;
-                            if (polyLineSegment.Points.Count >= 1)
+                            if (polyLineSegment.Points.Length >= 1)
                             {
                                 sgc.LineTo(
                                     new Point(
@@ -121,9 +121,9 @@ namespace Renderer.Avalonia
                                 previous = polyLineSegment.Points[0];
                             }
 
-                            if (polyLineSegment.Points.Count > 1)
+                            if (polyLineSegment.Points.Length > 1)
                             {
-                                for (int i = 1; i < polyLineSegment.Points.Count; i++)
+                                for (int i = 1; i < polyLineSegment.Points.Length; i++)
                                 {
                                     sgc.LineTo(
                                         new Point(
@@ -137,7 +137,7 @@ namespace Renderer.Avalonia
                         else if (segment is XPolyQuadraticBezierSegment)
                         {
                             var polyQuadraticSegment = segment as XPolyQuadraticBezierSegment;
-                            if (polyQuadraticSegment.Points.Count >= 2)
+                            if (polyQuadraticSegment.Points.Length >= 2)
                             {
                                 sgc.QuadraticBezierTo(
                                     new Point(
@@ -150,10 +150,10 @@ namespace Renderer.Avalonia
                                 previous = polyQuadraticSegment.Points[1];
                             }
 
-                            if (polyQuadraticSegment.Points.Count > 2
-                                && polyQuadraticSegment.Points.Count % 2 == 0)
+                            if (polyQuadraticSegment.Points.Length > 2
+                                && polyQuadraticSegment.Points.Length % 2 == 0)
                             {
-                                for (int i = 3; i < polyQuadraticSegment.Points.Count; i += 3)
+                                for (int i = 3; i < polyQuadraticSegment.Points.Length; i += 3)
                                 {
                                     sgc.QuadraticBezierTo(
                                         new Point(

@@ -328,7 +328,7 @@ namespace Renderer.Dxf
                     else if (segment is Core2D.Path.Segments.XPolyCubicBezierSegment)
                     {
                         var polyCubicBezierSegment = segment as Core2D.Path.Segments.XPolyCubicBezierSegment;
-                        if (polyCubicBezierSegment.Points.Count >= 3)
+                        if (polyCubicBezierSegment.Points.Length >= 3)
                         {
                             var dxfSpline = CreateCubicSpline(
                                 startPoint.X + dx,
@@ -343,10 +343,10 @@ namespace Renderer.Dxf
                             entities.Add((Spline)dxfSpline.Clone());
                         }
 
-                        if (polyCubicBezierSegment.Points.Count > 3
-                            && polyCubicBezierSegment.Points.Count % 3 == 0)
+                        if (polyCubicBezierSegment.Points.Length > 3
+                            && polyCubicBezierSegment.Points.Length % 3 == 0)
                         {
-                            for (int i = 3; i < polyCubicBezierSegment.Points.Count; i += 3)
+                            for (int i = 3; i < polyCubicBezierSegment.Points.Length; i += 3)
                             {
                                 var dxfSpline = CreateCubicSpline(
                                     polyCubicBezierSegment.Points[i - 1].X + dx,
@@ -367,7 +367,7 @@ namespace Renderer.Dxf
                     else if (segment is Core2D.Path.Segments.XPolyLineSegment)
                     {
                         var polyLineSegment = segment as Core2D.Path.Segments.XPolyLineSegment;
-                        if (polyLineSegment.Points.Count >= 1)
+                        if (polyLineSegment.Points.Length >= 1)
                         {
                             var dxfLine = CreateLine(
                                 startPoint.X + dx,
@@ -378,9 +378,9 @@ namespace Renderer.Dxf
                             entities.Add((Line)dxfLine.Clone());
                         }
 
-                        if (polyLineSegment.Points.Count > 1)
+                        if (polyLineSegment.Points.Length > 1)
                         {
-                            for (int i = 1; i < polyLineSegment.Points.Count; i++)
+                            for (int i = 1; i < polyLineSegment.Points.Length; i++)
                             {
                                 var dxfLine = CreateLine(
                                     polyLineSegment.Points[i - 1].X + dx,
@@ -397,7 +397,7 @@ namespace Renderer.Dxf
                     else if (segment is Core2D.Path.Segments.XPolyQuadraticBezierSegment)
                     {
                         var polyQuadraticSegment = segment as Core2D.Path.Segments.XPolyQuadraticBezierSegment;
-                        if (polyQuadraticSegment.Points.Count >= 2)
+                        if (polyQuadraticSegment.Points.Length >= 2)
                         {
                             var dxfSpline = CreateQuadraticSpline(
                                 startPoint.X + dx,
@@ -410,10 +410,10 @@ namespace Renderer.Dxf
                             entities.Add((Spline)dxfSpline.Clone());
                         }
 
-                        if (polyQuadraticSegment.Points.Count > 2
-                            && polyQuadraticSegment.Points.Count % 2 == 0)
+                        if (polyQuadraticSegment.Points.Length > 2
+                            && polyQuadraticSegment.Points.Length % 2 == 0)
                         {
-                            for (int i = 3; i < polyQuadraticSegment.Points.Count; i += 3)
+                            for (int i = 3; i < polyQuadraticSegment.Points.Length; i += 3)
                             {
                                 var dxfSpline = CreateQuadraticSpline(
                                     polyQuadraticSegment.Points[i - 1].X + dx,

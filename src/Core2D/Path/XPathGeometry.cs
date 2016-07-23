@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Text;
 using Core2D.Attributes;
 
@@ -11,14 +11,14 @@ namespace Core2D.Path
     /// </summary>
     public class XPathGeometry : ObservableObject
     {
-        private IList<XPathFigure> _figures;
+        private ImmutableArray<XPathFigure> _figures;
         private XFillRule _fillRule;
 
         /// <summary>
         /// Gets or sets figures collection.
         /// </summary>
         [Content]
-        public IList<XPathFigure> Figures
+        public ImmutableArray<XPathFigure> Figures
         {
             get { return _figures; }
             set { Update(ref _figures, value); }
@@ -38,7 +38,7 @@ namespace Core2D.Path
         /// </summary>
         public XPathGeometry()
         {
-            Figures = new List<XPathFigure>();
+            Figures = ImmutableArray.Create<XPathFigure>();
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace Core2D.Path
         /// <param name="figures">The figures collection.</param>
         /// <param name="fillRule">The fill rule.</param>
         /// <returns>The new instance of the <see cref="XPathGeometry"/> class.</returns>
-        public static XPathGeometry Create(IList<XPathFigure> figures, XFillRule fillRule)
+        public static XPathGeometry Create(ImmutableArray<XPathFigure> figures, XFillRule fillRule)
         {
             return new XPathGeometry()
             {
@@ -61,18 +61,18 @@ namespace Core2D.Path
         /// </summary>
         /// <param name="figures">The figures collection.</param>
         /// <returns>A string representation of figures collection.</returns>
-        public string ToString(IList<XPathFigure> figures)
+        public string ToString(ImmutableArray<XPathFigure> figures)
         {
-            if (figures?.Count == 0)
+            if (figures.Length == 0)
             {
                 return string.Empty;
             }
 
             var sb = new StringBuilder();
-            for (int i = 0; i < figures.Count; i++)
+            for (int i = 0; i < figures.Length; i++)
             {
                 sb.Append(figures[i]);
-                if (i != figures.Count - 1)
+                if (i != figures.Length - 1)
                 {
                     sb.Append(" ");
                 }
@@ -85,7 +85,7 @@ namespace Core2D.Path
         {
             string figuresString = string.Empty;
 
-            if (Figures?.Count > 0)
+            if (Figures.Length > 0)
             {
                 figuresString = ToString(Figures);
             }

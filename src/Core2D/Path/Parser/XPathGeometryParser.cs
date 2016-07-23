@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
-using System.Collections.Generic;
+using System.Collections.Immutable;
 
 namespace Core2D.Path.Parser
 {
@@ -21,7 +21,7 @@ namespace Core2D.Path.Parser
         public static XPathGeometry Parse(string source)
         {
             var fillRule = XFillRule.EvenOdd;
-            var geometry = XPathGeometry.Create(new List<XPathFigure>(), fillRule);
+            var geometry = XPathGeometry.Create(ImmutableArray.Create<XPathFigure>(), fillRule);
 
             if (source != null)
             {

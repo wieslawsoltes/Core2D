@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Text;
 using Core2D.Attributes;
 using Core2D.Shapes;
@@ -12,13 +13,13 @@ namespace Core2D.Path
     /// </summary>
     public abstract class XPathPolySegment : XPathSegment
     {
-        private IList<XPoint> _points;
+        private ImmutableArray<XPoint> _points;
 
         /// <summary>
         /// Gets or sets points array.
         /// </summary>
         [Content]
-        public IList<XPoint> Points
+        public ImmutableArray<XPoint> Points
         {
             get { return _points; }
             set { Update(ref _points, value); }
@@ -30,7 +31,7 @@ namespace Core2D.Path
         public XPathPolySegment()
             : base()
         {
-            Points = new List<XPoint>();
+            Points = ImmutableArray.Create<XPoint>();
         }
 
         /// <inheritdoc/>
@@ -44,18 +45,18 @@ namespace Core2D.Path
         /// </summary>
         /// <param name="points">The points collection.</param>
         /// <returns>A string representation of points collection.</returns>
-        public string ToString(IList<XPoint> points)
+        public string ToString(ImmutableArray<XPoint> points)
         {
-            if (points?.Count == 0)
+            if (points.Length == 0)
             {
                 return string.Empty;
             }
 
             var sb = new StringBuilder();
-            for (int i = 0; i < points.Count; i++)
+            for (int i = 0; i < points.Length; i++)
             {
                 sb.Append(points[i]);
-                if (i != points.Count - 1)
+                if (i != points.Length - 1)
                 {
                     sb.Append(" ");
                 }

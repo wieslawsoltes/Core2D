@@ -112,7 +112,7 @@ namespace Core2D.Editor.Tools.Path
 
                         _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_toolPath._path);
                         Remove();
-                        if (_toolPath._path.Geometry.Figures.LastOrDefault().Segments.Count > 0)
+                        if (_toolPath._path.Geometry.Figures.LastOrDefault().Segments.Length > 0)
                         {
                             Finalize(null);
                             _editor.Project.AddShape(_editor.Project.CurrentContainer.CurrentLayer, _toolPath._path);

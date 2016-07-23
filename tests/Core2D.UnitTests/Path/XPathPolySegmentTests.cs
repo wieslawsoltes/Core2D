@@ -1,8 +1,8 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System.Collections.Immutable;
 using Core2D.Path;
 using Core2D.Shapes;
-using System.Collections.Generic;
 using Xunit;
 
 namespace Core2D.UnitTests
@@ -15,7 +15,7 @@ namespace Core2D.UnitTests
         {
             var segment = new Class1();
 
-            var target = new List<XPoint>();
+            var target = ImmutableArray.Create<XPoint>();
             var actual = segment.ToString(target);
 
             Assert.Equal(string.Empty, actual);
@@ -27,10 +27,10 @@ namespace Core2D.UnitTests
         {
             var segment = new Class1();
 
-            var target = new List<XPoint>();
-            target.Add(new XPoint());
-            target.Add(new XPoint());
-            target.Add(new XPoint());
+            var target = ImmutableArray.Create<XPoint>();
+            target = target.Add(new XPoint());
+            target = target.Add(new XPoint());
+            target = target.Add(new XPoint());
 
             var actual = segment.ToString(target);
 
