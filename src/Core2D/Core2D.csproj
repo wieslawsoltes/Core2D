@@ -98,6 +98,7 @@
     <Compile Include="Editor\Tools\Selection\PathSelection.cs" />
     <Compile Include="Editor\Tools\Selection\PointSelection.cs" />
     <Compile Include="Editor\Tools\Selection\QuadraticBezierSelection.cs" />
+    <Compile Include="Editor\Tools\Selection\RectangleSelection.cs" />
     <Compile Include="Editor\Tools\Selection\TextSelection.cs" />
     <Compile Include="Editor\Tools\Path\ToolPathArc.cs" />
     <Compile Include="Editor\Tools\Path\ToolPathCubicBezier.cs" />
