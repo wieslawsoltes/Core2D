@@ -13,7 +13,7 @@ namespace Core2D.Editor.Tools.Selection
     public class CubicBezierSelection
     {
         private XLayer _layer;
-        private XText _shape;
+        private XCubicBezier _shape;
         private ShapeStyle _style;
         private BaseShape _point;
 
@@ -24,7 +24,7 @@ namespace Core2D.Editor.Tools.Selection
         /// <param name="shape">The selected shape.</param>
         /// <param name="style">The selection shapes style.</param>
         /// <param name="point">The selection point shape.</param>
-        public CubicBezierSelection(XLayer layer, XText shape, ShapeStyle style, BaseShape point)
+        public CubicBezierSelection(XLayer layer, XCubicBezier shape, ShapeStyle style, BaseShape point)
         {
             _layer = layer;
             _shape = shape;

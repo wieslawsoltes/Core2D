@@ -13,7 +13,7 @@ namespace Core2D.Editor.Tools.Selection
     public class PointSelection
     {
         private XLayer _layer;
-        private XText _shape;
+        private XPoint _shape;
         private ShapeStyle _style;
         private BaseShape _point;
 
@@ -24,7 +24,7 @@ namespace Core2D.Editor.Tools.Selection
         /// <param name="shape">The selected shape.</param>
         /// <param name="style">The selection shapes style.</param>
         /// <param name="point">The selection point shape.</param>
-        public PointSelection(XLayer layer, XText shape, ShapeStyle style, BaseShape point)
+        public PointSelection(XLayer layer, XPoint shape, ShapeStyle style, BaseShape point)
         {
             _layer = layer;
             _shape = shape;
