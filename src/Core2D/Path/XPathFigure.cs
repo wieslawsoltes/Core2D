@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
 using Core2D.Attributes;
@@ -11,28 +12,49 @@ namespace Core2D.Path
     /// <summary>
     /// Path figure.
     /// </summary>
-    public class XPathFigure
+    public class XPathFigure : ObservableObject
     {
+        private XPoint _startPoint;
+        private ImmutableArray<XPathSegment> _segments;
+        private bool _isFilled;
+        private bool _isClosed;
+
         /// <summary>
         /// Gets or sets start point.
         /// </summary>
-        public XPoint StartPoint { get; set; }
+        public XPoint StartPoint
+        {
+            get { return _startPoint; }
+            set { Update(ref _startPoint, value); }
+        }
 
         /// <summary>
         /// Gets or sets segments collection.
         /// </summary>
         [Content]
-        public IList<XPathSegment> Segments { get; set; }
+        public ImmutableArray<XPathSegment> Segments
+        {
+            get { return _segments; }
+            set { Update(ref _segments, value); }
+        }
 
         /// <summary>
         /// Gets or sets flag indicating whether path is filled.
         /// </summary>
-        public bool IsFilled { get; set; }
+        public bool IsFilled
+        {
+            get { return _isFilled; }
+            set { Update(ref _isFilled, value); }
+        }
 
         /// <summary>
         /// Gets or sets flag indicating whether path is closed.
         /// </summary>
-        public bool IsClosed { get; set; }
+        public bool IsClosed
+        {
+            get { return _isClosed; }
+            set { Update(ref _isClosed, value); }
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="XPathFigure"/> class.
@@ -40,7 +62,7 @@ namespace Core2D.Path
         public XPathFigure()
         {
             StartPoint = new XPoint();
-            Segments = new List<XPathSegment>();
+            Segments = ImmutableArray.Create<XPathSegment>();
         }
 
         /// <summary>
@@ -50,7 +72,7 @@ namespace Core2D.Path
         public IEnumerable<XPoint> GetPoints()
         {
             yield return StartPoint;
-            
+
             foreach (var point in Segments.SelectMany(s => s.GetPoints()))
             {
                 yield return point;
@@ -79,15 +101,15 @@ namespace Core2D.Path
         /// </summary>
         /// <param name="segments">The segments collection.</param>
         /// <returns>A string representation of segments collection.</returns>
-        public string ToString(IList<XPathSegment> segments)
+        public string ToString(ImmutableArray<XPathSegment> segments)
         {
-            if (segments?.Count == 0)
+            if (segments.Length == 0)
             {
                 return string.Empty;
             }
 
             var sb = new StringBuilder();
-            for (int i = 0; i < segments.Count; i++)
+            for (int i = 0; i < segments.Length; i++)
             {
                 sb.Append(segments[i].ToString());
             }
@@ -97,9 +119,9 @@ namespace Core2D.Path
         /// <inheritdoc/>
         public override string ToString()
         {
-            return 
-                (StartPoint != null ? "M" + StartPoint.ToString() : "") 
-                + (Segments != null ? ToString(Segments) : "") 
+            return
+                (StartPoint != null ? "M" + StartPoint.ToString() : "")
+                + (Segments != null ? ToString(Segments) : "")
                 + (IsClosed ? "z" : "");
         }
     }

@@ -145,7 +145,7 @@ namespace Core2D.Shapes
         {
             var data = XContext.Create(this.Data.Record);
 
-            // TODO: The property Value is of type object and is not cloned.
+            // The property Value is of type object and is not cloned.
             if (this.Data.Properties.Length > 0)
             {
                 var builder = data.Properties.ToBuilder();

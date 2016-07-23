@@ -22,11 +22,11 @@ namespace Core2D.UnitTests
         public void GetPoints_Should_Return_All_Segment_Points()
         {
             var segment = new XPolyLineSegment();
-            segment.Points.Add(new XPoint());
-            segment.Points.Add(new XPoint());
-            segment.Points.Add(new XPoint());
-            segment.Points.Add(new XPoint());
-            segment.Points.Add(new XPoint());
+            segment.Points = segment.Points.Add(new XPoint());
+            segment.Points = segment.Points.Add(new XPoint());
+            segment.Points = segment.Points.Add(new XPoint());
+            segment.Points = segment.Points.Add(new XPoint());
+            segment.Points = segment.Points.Add(new XPoint());
 
             var target = segment.GetPoints();
 
@@ -40,11 +40,11 @@ namespace Core2D.UnitTests
         public void ToString_Should_Return_Path_Markup()
         {
             var target = new XPolyLineSegment();
-            target.Points.Add(new XPoint());
-            target.Points.Add(new XPoint());
-            target.Points.Add(new XPoint());
-            target.Points.Add(new XPoint());
-            target.Points.Add(new XPoint());
+            target.Points = target.Points.Add(new XPoint());
+            target.Points = target.Points.Add(new XPoint());
+            target.Points = target.Points.Add(new XPoint());
+            target.Points = target.Points.Add(new XPoint());
+            target.Points = target.Points.Add(new XPoint());
 
             var actual = target.ToString();
 

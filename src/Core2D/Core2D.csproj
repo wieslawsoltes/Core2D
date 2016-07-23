@@ -180,6 +180,7 @@
     <Compile Include="Path\XPathFigure.cs" />
     <Compile Include="Path\XPathGeometry.cs" />
     <Compile Include="Path\XPathGeometryContext.cs" />
+    <Compile Include="Path\XPathPolySegment.cs" />
     <Compile Include="Path\XPathSegment.cs" />
     <Compile Include="Path\XPathSize.cs" />
     <Compile Include="Path\XSweepDirection.cs" />

@@ -71,7 +71,7 @@ namespace Renderer.SkiaSharp
                     else if (segment is XPolyCubicBezierSegment)
                     {
                         var polyCubicBezierSegment = segment as XPolyCubicBezierSegment;
-                        if (polyCubicBezierSegment.Points.Count >= 3)
+                        if (polyCubicBezierSegment.Points.Length >= 3)
                         {
                             path.CubicTo(
                                 scale(polyCubicBezierSegment.Points[0].X + dx),
@@ -84,10 +84,10 @@ namespace Renderer.SkiaSharp
                             previous = polyCubicBezierSegment.Points[2];
                         }
 
-                        if (polyCubicBezierSegment.Points.Count > 3
-                            && polyCubicBezierSegment.Points.Count % 3 == 0)
+                        if (polyCubicBezierSegment.Points.Length > 3
+                            && polyCubicBezierSegment.Points.Length % 3 == 0)
                         {
-                            for (int i = 3; i < polyCubicBezierSegment.Points.Count; i += 3)
+                            for (int i = 3; i < polyCubicBezierSegment.Points.Length; i += 3)
                             {
                                 path.CubicTo(
                                     scale(polyCubicBezierSegment.Points[i].X + dx),
@@ -104,7 +104,7 @@ namespace Renderer.SkiaSharp
                     else if (segment is XPolyLineSegment)
                     {
                         var polyLineSegment = segment as XPolyLineSegment;
-                        if (polyLineSegment.Points.Count >= 1)
+                        if (polyLineSegment.Points.Length >= 1)
                         {
                             path.LineTo(
                                 scale(polyLineSegment.Points[0].X + dx),
@@ -113,9 +113,9 @@ namespace Renderer.SkiaSharp
                             previous = polyLineSegment.Points[0];
                         }
 
-                        if (polyLineSegment.Points.Count > 1)
+                        if (polyLineSegment.Points.Length > 1)
                         {
-                            for (int i = 1; i < polyLineSegment.Points.Count; i++)
+                            for (int i = 1; i < polyLineSegment.Points.Length; i++)
                             {
                                 path.LineTo(
                                     scale(polyLineSegment.Points[i].X + dx),
@@ -128,7 +128,7 @@ namespace Renderer.SkiaSharp
                     else if (segment is XPolyQuadraticBezierSegment)
                     {
                         var polyQuadraticSegment = segment as XPolyQuadraticBezierSegment;
-                        if (polyQuadraticSegment.Points.Count >= 2)
+                        if (polyQuadraticSegment.Points.Length >= 2)
                         {
                             path.QuadTo(
                                 scale(polyQuadraticSegment.Points[0].X + dx),
@@ -139,10 +139,10 @@ namespace Renderer.SkiaSharp
                             previous = polyQuadraticSegment.Points[1];
                         }
 
-                        if (polyQuadraticSegment.Points.Count > 2
-                            && polyQuadraticSegment.Points.Count % 2 == 0)
+                        if (polyQuadraticSegment.Points.Length > 2
+                            && polyQuadraticSegment.Points.Length % 2 == 0)
                         {
-                            for (int i = 3; i < polyQuadraticSegment.Points.Count; i += 3)
+                            for (int i = 3; i < polyQuadraticSegment.Points.Length; i += 3)
                             {
                                 path.QuadTo(
                                     scale(polyQuadraticSegment.Points[i].X + dx),

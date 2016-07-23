@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using System.Collections.Generic;
+using System.Collections.Immutable;
 using Core2D.Shapes;
 
 namespace Core2D.Path
@@ -69,7 +69,7 @@ namespace Core2D.Path
         /// <param name="points">The points array.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
-        public abstract void PolyLineTo(IList<XPoint> points, bool isStroked = true, bool isSmoothJoin = true);
+        public abstract void PolyLineTo(ImmutableArray<XPoint> points, bool isStroked = true, bool isSmoothJoin = true);
 
         /// <summary>
         /// Adds poly cubic bezier segment.
@@ -77,7 +77,7 @@ namespace Core2D.Path
         /// <param name="points">The points array.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
-        public abstract void PolyCubicBezierTo(IList<XPoint> points, bool isStroked = true, bool isSmoothJoin = true);
+        public abstract void PolyCubicBezierTo(ImmutableArray<XPoint> points, bool isStroked = true, bool isSmoothJoin = true);
 
         /// <summary>
         /// Adds poly quadratic bezier segment.
@@ -85,6 +85,6 @@ namespace Core2D.Path
         /// <param name="points">The points array.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
-        public abstract void PolyQuadraticBezierTo(IList<XPoint> points, bool isStroked = true, bool isSmoothJoin = true);
+        public abstract void PolyQuadraticBezierTo(ImmutableArray<XPoint> points, bool isStroked = true, bool isSmoothJoin = true);
     }
 }

@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
-using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Core2D.Editor.Tools.Path;
 using Core2D.Path;
@@ -57,7 +57,7 @@ namespace Core2D.Editor.Tools
                 var segment = figure.Segments.LastOrDefault() as T;
                 if (segment != null)
                 {
-                    figure.Segments.Remove(segment);
+                    figure.Segments = figure.Segments.Remove(segment);
                 }
             }
         }
@@ -104,7 +104,7 @@ namespace Core2D.Editor.Tools
         internal void InitializeWorkingPath(XPoint start)
         {
             _geometry = XPathGeometry.Create(
-                new List<XPathFigure>(),
+                ImmutableArray.Create<XPathFigure>(),
                 _editor.Project.Options.DefaultFillRule);
 
             _context = new XPathGeometryContext(_geometry);

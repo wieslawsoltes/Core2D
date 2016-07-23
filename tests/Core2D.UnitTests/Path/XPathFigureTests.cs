@@ -1,9 +1,10 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Linq;
 using Core2D.Path;
 using Core2D.Shapes;
-using System.Collections.Generic;
-using System.Linq;
 using Xunit;
 
 namespace Core2D.UnitTests
@@ -49,10 +50,10 @@ namespace Core2D.UnitTests
             var figure = new XPathFigure();
 
             var segment1 = new Class1() { Point = new XPoint() };
-            figure.Segments.Add(segment1);
+            figure.Segments = figure.Segments.Add(segment1);
 
             var segment2 = new Class1() { Point = new XPoint() };
-            figure.Segments.Add(segment2);
+            figure.Segments = figure.Segments.Add(segment2);
 
             var target = figure.GetPoints();
 
@@ -69,7 +70,7 @@ namespace Core2D.UnitTests
         {
             var figure = new XPathFigure();
 
-            var target = new List<XPathSegment>();
+            var target = ImmutableArray.Create<XPathSegment>();
             var actual = figure.ToString(target);
 
             Assert.Equal(string.Empty, actual);

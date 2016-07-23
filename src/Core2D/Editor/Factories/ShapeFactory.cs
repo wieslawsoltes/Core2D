@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using System.Collections.Generic;
+using System.Collections.Immutable;
 using Core2D.Path;
 using Core2D.Shapes;
 
@@ -167,7 +167,7 @@ namespace Core2D.Editor.Factories
         XPathGeometry IShapeFactory.Geometry(XFillRule fillRule)
         {
             return XPathGeometry.Create(
-                new List<XPathFigure>(),
+                ImmutableArray.Create<XPathFigure>(),
                 fillRule);
         }
 

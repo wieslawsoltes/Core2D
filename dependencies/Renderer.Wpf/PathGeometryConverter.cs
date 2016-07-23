@@ -1,11 +1,12 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Core2D.Path;
-using Core2D.Shapes;
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Windows;
 using System.Windows.Media;
+using Core2D.Path;
+using Core2D.Shapes;
 
 namespace Renderer.Wpf
 {
@@ -14,14 +15,14 @@ namespace Renderer.Wpf
     /// </summary>
     public static class PathGeometryConverter
     {
-        private static IList<XPoint> ToXPoints(this IList<Point> points, double dx, double dy)
+        private static ImmutableArray<XPoint> ToXPoints(this IEnumerable<Point> points, double dx, double dy)
         {
-            var xpoints = new List<XPoint>();
+            var xpoints = ImmutableArray.CreateBuilder<XPoint>();
             foreach (var point in points)
             {
                 xpoints.Add(XPoint.Create(point.X + dx, point.Y + dy));
             }
-            return xpoints;
+            return xpoints.ToImmutable();
         }
 
         /// <summary>
@@ -34,7 +35,7 @@ namespace Renderer.Wpf
         public static XPathGeometry ToXPathGeometry(this PathGeometry pg, double dx, double dy)
         {
             var geometry = XPathGeometry.Create(
-                new List<XPathFigure>(),
+                ImmutableArray.Create<XPathFigure>(),
                 pg.FillRule == FillRule.EvenOdd ? XFillRule.EvenOdd : XFillRule.Nonzero);
 
             var context = new XPathGeometryContext(geometry);

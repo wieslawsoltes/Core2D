@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using System.Collections.Generic;
-using Core2D.Attributes;
+using System.Collections.Immutable;
 using Core2D.Shapes;
 
 namespace Core2D.Path.Segments
@@ -9,29 +8,8 @@ namespace Core2D.Path.Segments
     /// <summary>
     /// Poly line path segment.
     /// </summary>
-    public class XPolyLineSegment : XPathSegment
+    public class XPolyLineSegment : XPathPolySegment
     {
-        /// <summary>
-        /// Gets or sets points array.
-        /// </summary>
-        [Content]
-        public IList<XPoint> Points { get; set; }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="XPolyLineSegment"/> class.
-        /// </summary>
-        public XPolyLineSegment()
-            : base()
-        {
-            Points = new List<XPoint>();
-        }
-
-        /// <inheritdoc/>
-        public override IEnumerable<XPoint> GetPoints()
-        {
-            return Points;
-        }
-
         /// <summary>
         /// Creates a new <see cref="XPolyLineSegment"/> instance.
         /// </summary>
@@ -39,7 +17,7 @@ namespace Core2D.Path.Segments
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
         /// <returns>The new instance of the <see cref="XPolyLineSegment"/> class.</returns>
-        public static XPolyLineSegment Create(IList<XPoint> points, bool isStroked, bool isSmoothJoin)
+        public static XPolyLineSegment Create(ImmutableArray<XPoint> points, bool isStroked, bool isSmoothJoin)
         {
             return new XPolyLineSegment()
             {
@@ -52,7 +30,7 @@ namespace Core2D.Path.Segments
         /// <inheritdoc/>
         public override string ToString()
         {
-            return (Points != null) && (Points.Count >= 1) ? "L" + ToString(Points) : "";
+            return (Points != null) && (Points.Length >= 1) ? "L" + ToString(Points) : "";
         }
     }
 }

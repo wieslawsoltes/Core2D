@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using Core2D.Data;
 using Core2D.Data.Database;
+using Core2D.Path;
+using Core2D.Path.Segments;
 using Core2D.Project;
 using Core2D.Shape;
 using Core2D.Shapes;
@@ -813,7 +815,12 @@ namespace Core2D.Editor
             }
             else if (shape is XPath)
             {
-                // TODO: Observer path sub properties.
+                var path = shape as XPath;
+
+                if (path.Geometry != null)
+                {
+                    Add(path.Geometry);
+                }
             }
             else if (shape is XGroup)
             {
@@ -998,7 +1005,12 @@ namespace Core2D.Editor
             }
             else if (shape is XPath)
             {
-                // TODO: Stop observing path sub properties.
+                var path = shape as XPath;
+
+                if (path.Geometry != null)
+                {
+                    Remove(path.Geometry);
+                }
             }
             else if (shape is XGroup)
             {
@@ -1016,6 +1028,178 @@ namespace Core2D.Editor
                         Remove(group.Connectors);
                     }
                 }
+            }
+        }
+
+        private void Add(XPathGeometry geometry)
+        {
+            if (geometry == null)
+                return;
+
+            geometry.PropertyChanged += ObserveShape;
+
+            if (geometry.Figures != null)
+            {
+                Add(geometry.Figures);
+            }
+        }
+
+        private void Remove(XPathGeometry geometry)
+        {
+            if (geometry == null)
+                return;
+
+            geometry.PropertyChanged -= ObserveShape;
+
+            if (geometry.Figures != null)
+            {
+                Remove(geometry.Figures);
+            }
+        }
+
+        private void Add(XPathFigure figure)
+        {
+            if (figure == null)
+                return;
+
+            figure.PropertyChanged += ObserveShape;
+
+            if (figure.StartPoint != null)
+            {
+                figure.StartPoint.PropertyChanged += ObserveShape;
+            }
+
+            if (figure.Segments != null)
+            {
+                Add(figure.Segments);
+            }
+        }
+
+        private void Remove(XPathFigure figure)
+        {
+            if (figure == null)
+                return;
+
+            figure.PropertyChanged -= ObserveShape;
+
+            if (figure.StartPoint != null)
+            {
+                figure.StartPoint.PropertyChanged -= ObserveShape;
+            }
+
+            if (figure.Segments != null)
+            {
+                Remove(figure.Segments);
+            }
+        }
+
+        private void Add(XPathSegment segment)
+        {
+            if (segment == null)
+                return;
+
+            segment.PropertyChanged += ObserveShape;
+
+            if (segment is XLineSegment)
+            {
+                var lineSegment = segment as XLineSegment;
+
+                lineSegment.Point.PropertyChanged += ObserveShape;
+            }
+            else if (segment is XArcSegment)
+            {
+                var arcSegment = segment as XArcSegment;
+
+                arcSegment.Point.PropertyChanged += ObserveShape;
+                arcSegment.Size.PropertyChanged += ObserveShape;
+            }
+            else if (segment is XCubicBezierSegment)
+            {
+                var cubicBezierSegment = segment as XCubicBezierSegment;
+
+                cubicBezierSegment.Point1.PropertyChanged += ObserveShape;
+                cubicBezierSegment.Point2.PropertyChanged += ObserveShape;
+                cubicBezierSegment.Point3.PropertyChanged += ObserveShape;
+            }
+            else if (segment is XQuadraticBezierSegment)
+            {
+                var quadraticBezierSegment = segment as XQuadraticBezierSegment;
+
+                quadraticBezierSegment.Point1.PropertyChanged += ObserveShape;
+                quadraticBezierSegment.Point2.PropertyChanged += ObserveShape;
+            }
+            else if (segment is XPolyLineSegment)
+            {
+                var polyLineSegment = segment as XPolyLineSegment;
+
+                Add(polyLineSegment.Points);
+            }
+            else if (segment is XPolyCubicBezierSegment)
+            {
+                var polyCubicBezierSegment = segment as XPolyCubicBezierSegment;
+
+                Add(polyCubicBezierSegment.Points);
+            }
+            else if (segment is XPolyQuadraticBezierSegment)
+            {
+                var polyQuadraticBezierSegment = segment as XPolyQuadraticBezierSegment;
+
+                Add(polyQuadraticBezierSegment.Points);
+            }
+        }
+
+        private void Remove(XPathSegment segment)
+        {
+            if (segment == null)
+                return;
+
+            segment.PropertyChanged -= ObserveShape;
+
+            if (segment is XLineSegment)
+            {
+                var lineSegment = segment as XLineSegment;
+
+                lineSegment.Point.PropertyChanged -= ObserveShape;
+            }
+            else if (segment is XArcSegment)
+            {
+                var arcSegment = segment as XArcSegment;
+
+                arcSegment.Point.PropertyChanged -= ObserveShape;
+                arcSegment.Size.PropertyChanged -= ObserveShape;
+            }
+            else if (segment is XCubicBezierSegment)
+            {
+                var cubicBezierSegment = segment as XCubicBezierSegment;
+
+                cubicBezierSegment.Point1.PropertyChanged -= ObserveShape;
+                cubicBezierSegment.Point2.PropertyChanged -= ObserveShape;
+                cubicBezierSegment.Point3.PropertyChanged -= ObserveShape;
+            }
+            else if (segment is XQuadraticBezierSegment)
+            {
+                var quadraticBezierSegment = segment as XQuadraticBezierSegment;
+
+                quadraticBezierSegment.Point1.PropertyChanged -= ObserveShape;
+                quadraticBezierSegment.Point2.PropertyChanged -= ObserveShape;
+            }
+            else if (segment is XPolyLineSegment)
+            {
+                var polyLineSegment = segment as XPolyLineSegment;
+
+                Remove(polyLineSegment.Points);
+            }
+            else if (segment is XPolyCubicBezierSegment)
+            {
+                var polyCubicBezierSegment = segment as XPolyCubicBezierSegment;
+
+                Remove(polyCubicBezierSegment.Points);
+            }
+            else if (segment is XPolyQuadraticBezierSegment)
+            {
+                var polyQuadraticBezierSegment = segment as XPolyQuadraticBezierSegment;
+
+                Remove(polyQuadraticBezierSegment.Points);
             }
         }
 
@@ -1380,7 +1564,7 @@ namespace Core2D.Editor
                 Remove(page);
             }
         }
-        
+
         private void Add(IEnumerable<XLayer> layers)
         {
             if (layers == null)
@@ -1422,6 +1606,50 @@ namespace Core2D.Editor
             foreach (var shape in shapes)
             {
                 Remove(shape);
+            }
+        }
+
+        private void Add(IEnumerable<XPathFigure> figures)
+        {
+            if (figures == null)
+                return;
+
+            foreach (var figure in figures)
+            {
+                Add(figure);
+            }
+        }
+
+        private void Remove(IEnumerable<XPathFigure> figures)
+        {
+            if (figures == null)
+                return;
+
+            foreach (var figure in figures)
+            {
+                Remove(figure);
+            }
+        }
+
+        private void Add(IEnumerable<XPathSegment> segments)
+        {
+            if (segments == null)
+                return;
+
+            foreach (var segment in segments)
+            {
+                Add(segment);
+            }
+        }
+
+        private void Remove(IEnumerable<XPathSegment> segments)
+        {
+            if (segments == null)
+                return;
+
+            foreach (var segment in segments)
+            {
+                Remove(segment);
             }
         }
 

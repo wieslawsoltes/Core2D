@@ -9,46 +9,33 @@ namespace Core2D.Path
     /// <summary>
     /// <see cref="XPathFigure"/> segment base class.
     /// </summary>
-    public abstract class XPathSegment
+    public abstract class XPathSegment : ObservableObject
     {
+        private bool _isStroked;
+        private bool _isSmoothJoin;
+
         /// <summary>
         /// Gets or sets flag indicating whether segment is stroked.
         /// </summary>
-        public bool IsStroked { get; set; }
+        public bool IsStroked
+        {
+            get { return _isStroked; }
+            set { Update(ref _isStroked, value); }
+        }
 
         /// <summary>
         /// Gets or sets flag indicating whether segment is smooth join.
         /// </summary>
-        public bool IsSmoothJoin { get; set; }
+        public bool IsSmoothJoin
+        {
+            get { return _isSmoothJoin; }
+            set { Update(ref _isSmoothJoin, value); }
+        }
 
         /// <summary>
         /// Get all points in the segment.
         /// </summary>
         /// <returns>All points in the segment.</returns>
         public abstract IEnumerable<XPoint> GetPoints();
-
-        /// <summary>
-        /// Creates a string representation of points collection.
-        /// </summary>
-        /// <param name="points">The points collection.</param>
-        /// <returns>A string representation of points collection.</returns>
-        public string ToString(IList<XPoint> points)
-        {
-            if (points?.Count == 0)
-            {
-                return string.Empty;
-            }
-
-            var sb = new StringBuilder();
-            for (int i = 0; i < points.Count; i++)
-            {
-                sb.Append(points[i]);
-                if (i != points.Count - 1)
-                {
-                    sb.Append(" ");
-                }
-            }
-            return sb.ToString();
-        }
     }
 }

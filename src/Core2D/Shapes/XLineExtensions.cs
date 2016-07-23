@@ -89,11 +89,6 @@ namespace Core2D.Shapes
                 x2 = x1 - (x1 - x2) / distance * ls.FixedLength.Length;
                 y2 = y1 - (y1 - y2) / distance * ls.FixedLength.Length;
             }
-
-            if (shortenStart && shortenEnd)
-            {
-                // TODO: Implement shorten start and end case.
-            }
         }
 
         /// <summary>
@@ -129,11 +124,6 @@ namespace Core2D.Shapes
                 else
                     x2 = x1 - ls.FixedLength.Length;
             }
-
-            if (shortenStart && shortenEnd)
-            {
-                // TODO: Implement shorten start and end case.
-            }
         }
 
         /// <summary>
@@ -168,11 +158,6 @@ namespace Core2D.Shapes
                     y2 = y1 + ls.FixedLength.Length;
                 else
                     y2 = y1 - ls.FixedLength.Length;
-            }
-
-            if (shortenStart && shortenEnd)
-            {
-                // TODO: Implement shorten start and end case.
             }
         }
 

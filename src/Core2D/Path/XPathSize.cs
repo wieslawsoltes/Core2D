@@ -6,17 +6,28 @@ namespace Core2D.Path
     /// <summary>
     /// Path size.
     /// </summary>
-    public class XPathSize
+    public class XPathSize : ObservableObject
     {
+        private double _width;
+        private double _height;
+
         /// <summary>
         /// Gets or sets width value.
         /// </summary>
-        public double Width { get; set; }
+        public double Width
+        {
+            get { return _width; }
+            set { Update(ref _width, value); }
+        }
 
         /// <summary>
         /// Gets or sets height value.
         /// </summary>
-        public double Height { get; set; }
+        public double Height
+        {
+            get { return _height; }
+            set { Update(ref _height, value); }
+        }
 
         /// <summary>
         /// Creates a new <see cref="XPathSize"/> instance.

@@ -64,7 +64,7 @@ namespace Renderer.WinForms
                     else if (segment is Core2D.Path.Segments.XPolyCubicBezierSegment)
                     {
                         var polyCubicBezierSegment = segment as Core2D.Path.Segments.XPolyCubicBezierSegment;
-                        if (polyCubicBezierSegment.Points.Count >= 3)
+                        if (polyCubicBezierSegment.Points.Length >= 3)
                         {
                             gp.AddBezier(
                                 scale(startPoint.X + dx),
@@ -77,10 +77,10 @@ namespace Renderer.WinForms
                                 scale(polyCubicBezierSegment.Points[2].Y + dy));
                         }
 
-                        if (polyCubicBezierSegment.Points.Count > 3
-                            && polyCubicBezierSegment.Points.Count % 3 == 0)
+                        if (polyCubicBezierSegment.Points.Length > 3
+                            && polyCubicBezierSegment.Points.Length % 3 == 0)
                         {
-                            for (int i = 3; i < polyCubicBezierSegment.Points.Count; i += 3)
+                            for (int i = 3; i < polyCubicBezierSegment.Points.Length; i += 3)
                             {
                                 gp.AddBezier(
                                     scale(polyCubicBezierSegment.Points[i - 1].X + dx),
@@ -99,7 +99,7 @@ namespace Renderer.WinForms
                     else if (segment is Core2D.Path.Segments.XPolyLineSegment)
                     {
                         var polyLineSegment = segment as Core2D.Path.Segments.XPolyLineSegment;
-                        if (polyLineSegment.Points.Count >= 1)
+                        if (polyLineSegment.Points.Length >= 1)
                         {
                             gp.AddLine(
                                 scale(startPoint.X + dx),
@@ -108,9 +108,9 @@ namespace Renderer.WinForms
                                 scale(polyLineSegment.Points[0].Y + dy));
                         }
 
-                        if (polyLineSegment.Points.Count > 1)
+                        if (polyLineSegment.Points.Length > 1)
                         {
-                            for (int i = 1; i < polyLineSegment.Points.Count; i++)
+                            for (int i = 1; i < polyLineSegment.Points.Length; i++)
                             {
                                 gp.AddLine(
                                     scale(polyLineSegment.Points[i - 1].X + dx),
@@ -125,7 +125,7 @@ namespace Renderer.WinForms
                     else if (segment is Core2D.Path.Segments.XPolyQuadraticBezierSegment)
                     {
                         var polyQuadraticSegment = segment as Core2D.Path.Segments.XPolyQuadraticBezierSegment;
-                        if (polyQuadraticSegment.Points.Count >= 2)
+                        if (polyQuadraticSegment.Points.Length >= 2)
                         {
                             var p1 = startPoint;
                             var p2 = polyQuadraticSegment.Points[0];
@@ -149,10 +149,10 @@ namespace Renderer.WinForms
                                 scale(y4 + dy));
                         }
 
-                        if (polyQuadraticSegment.Points.Count > 2
-                            && polyQuadraticSegment.Points.Count % 2 == 0)
+                        if (polyQuadraticSegment.Points.Length > 2
+                            && polyQuadraticSegment.Points.Length % 2 == 0)
                         {
-                            for (int i = 3; i < polyQuadraticSegment.Points.Count; i += 3)
+                            for (int i = 3; i < polyQuadraticSegment.Points.Length; i += 3)
                             {
                                 var p1 = polyQuadraticSegment.Points[i - 1];
                                 var p2 = polyQuadraticSegment.Points[i];

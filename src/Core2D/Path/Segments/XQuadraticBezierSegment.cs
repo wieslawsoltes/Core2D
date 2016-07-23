@@ -10,15 +10,26 @@ namespace Core2D.Path.Segments
     /// </summary>
     public class XQuadraticBezierSegment : XPathSegment
     {
+        private XPoint _point1;
+        private XPoint _point2;
+
         /// <summary>
         /// Gets or sets control point.
         /// </summary>
-        public XPoint Point1 { get; set; }
+        public XPoint Point1
+        {
+            get { return _point1; }
+            set { Update(ref _point1, value); }
+        }
 
         /// <summary>
         /// Gets or sets end point.
         /// </summary>
-        public XPoint Point2 { get; set; }
+        public XPoint Point2
+        {
+            get { return _point2; }
+            set { Update(ref _point2, value); }
+        }
 
         /// <inheritdoc/>
         public override IEnumerable<XPoint> GetPoints()
