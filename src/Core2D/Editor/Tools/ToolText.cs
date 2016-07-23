@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Core2D.Shape;
 using Core2D.Shapes;
+using Core2D.Style;
 
 namespace Core2D.Editor.Tools
 {
@@ -13,8 +14,10 @@ namespace Core2D.Editor.Tools
         private ProjectEditor _editor;
         private ToolState _currentState = ToolState.None;
         private XText _shape;
+        private ShapeStyle _style;
         private XPoint _topLeftHelperPoint;
         private XPoint _bottomRightHelperPoint;
+        private XRectangle _helperRectangle;
 
         /// <summary>
         /// Initialize new instance of <see cref="ToolText"/> class.
@@ -148,6 +151,9 @@ namespace Core2D.Editor.Tools
         {
             base.ToStateOne();
 
+            _style = _editor.Project.Options.HelperStyle;
+            _helperRectangle = XRectangle.Create(0, 0, _style, null);
+            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_helperRectangle);
             _topLeftHelperPoint = XPoint.Create(0, 0, _editor.Project.Options.PointShape);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_topLeftHelperPoint);
             _bottomRightHelperPoint = XPoint.Create(0, 0, _editor.Project.Options.PointShape);
@@ -158,6 +164,14 @@ namespace Core2D.Editor.Tools
         public override void Move(BaseShape shape)
         {
             base.Move(shape);
+
+            if (_helperRectangle != null)
+            {
+                _helperRectangle.TopLeft.X = _shape.TopLeft.X;
+                _helperRectangle.TopLeft.Y = _shape.TopLeft.Y;
+                _helperRectangle.BottomRight.X = _shape.BottomRight.X;
+                _helperRectangle.BottomRight.Y = _shape.BottomRight.Y;
+            }
 
             if (_topLeftHelperPoint != null)
             {
@@ -176,6 +190,12 @@ namespace Core2D.Editor.Tools
         public override void Remove()
         {
             base.Remove();
+
+            if (_helperRectangle != null)
+            {
+                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_helperRectangle);
+                _helperRectangle = null;
+            }
 
             if (_topLeftHelperPoint != null)
             {
