@@ -171,6 +171,7 @@ namespace Core2D.Editor.Tools
             base.Remove();
 
             _selection.Remove();
+            _selection = null;
         }
     }
 }
