@@ -40,8 +40,9 @@ namespace Core2D.Editor.Tools.Selection
         public void ToStateOne()
         {
             _topLeftHelperPoint = XPoint.Create(0, 0, _point);
-            _layer.Shapes = _layer.Shapes.Add(_topLeftHelperPoint);
             _bottomRightHelperPoint = XPoint.Create(0, 0, _point);
+
+            _layer.Shapes = _layer.Shapes.Add(_topLeftHelperPoint);
             _layer.Shapes = _layer.Shapes.Add(_bottomRightHelperPoint);
         }
 
