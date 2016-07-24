@@ -90,6 +90,10 @@
     <Compile Include="Editor\Bounds\ShapeHitTestPoint.cs" />
     <Compile Include="Editor\Designer\DesignerCommandManager.cs" />
     <Compile Include="Editor\ProjectEditor.Model.cs" />
+    <Compile Include="Editor\Tools\Path\Shapes\XPathArc.cs" />
+    <Compile Include="Editor\Tools\Path\Shapes\XPathCubicBezier.cs" />
+    <Compile Include="Editor\Tools\Path\Shapes\XPathLine.cs" />
+    <Compile Include="Editor\Tools\Path\Shapes\XPathQuadraticBezier.cs" />
     <Compile Include="Editor\Tools\Selection\ArcSelection.cs" />
     <Compile Include="Editor\Tools\Selection\CubicBezierSelection.cs" />
     <Compile Include="Editor\Tools\Selection\EllipseSelection.cs" />
