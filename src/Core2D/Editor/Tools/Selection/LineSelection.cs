@@ -12,10 +12,10 @@ namespace Core2D.Editor.Tools.Selection
     /// </summary>
     public class LineSelection
     {
-        private XLayer _layer;
-        private XLine _shape;
-        private ShapeStyle _style;
-        private BaseShape _point;
+        private readonly XLayer _layer;
+        private readonly XLine _shape;
+        private readonly ShapeStyle _style;
+        private readonly BaseShape _point;
 
         /// <summary>
         /// Initialize new instance of <see cref="LineSelection"/> class.

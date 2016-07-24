@@ -12,10 +12,10 @@ namespace Core2D.Editor.Tools.Selection
     /// </summary>
     public class ImageSelection
     {
-        private XLayer _layer;
-        private XImage _shape;
-        private ShapeStyle _style;
-        private BaseShape _point;
+        private readonly XLayer _layer;
+        private readonly XImage _shape;
+        private readonly ShapeStyle _style;
+        private readonly BaseShape _point;
         private XPoint _topLeftHelperPoint;
         private XPoint _bottomRightHelperPoint;
 

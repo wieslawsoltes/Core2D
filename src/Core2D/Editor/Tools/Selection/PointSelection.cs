@@ -12,10 +12,10 @@ namespace Core2D.Editor.Tools.Selection
     /// </summary>
     public class PointSelection
     {
-        private XLayer _layer;
-        private XPoint _shape;
-        private ShapeStyle _style;
-        private BaseShape _point;
+        private readonly XLayer _layer;
+        private readonly XPoint _shape;
+        private readonly ShapeStyle _style;
+        private readonly BaseShape _point;
 
         /// <summary>
         /// Initialize new instance of <see cref="PointSelection"/> class.

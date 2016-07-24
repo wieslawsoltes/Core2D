@@ -12,10 +12,10 @@ namespace Core2D.Editor.Tools.Selection
     /// </summary>
     public class TextSelection
     {
-        private XLayer _layer;
-        private XText _shape;
-        private ShapeStyle _style;
-        private BaseShape _point;
+        private readonly XLayer _layer;
+        private readonly XText _shape;
+        private readonly ShapeStyle _style;
+        private readonly BaseShape _point;
         private XPoint _topLeftHelperPoint;
         private XPoint _bottomRightHelperPoint;
         private XRectangle _helperRectangle;

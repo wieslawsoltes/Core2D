@@ -12,10 +12,10 @@ namespace Core2D.Editor.Tools.Selection
     /// </summary>
     public class ArcSelection
     {
-        private XLayer _layer;
-        private XArc _shape;
-        private ShapeStyle _style;
-        private BaseShape _point;
+        private readonly XLayer _layer;
+        private readonly XArc _shape;
+        private readonly ShapeStyle _style;
+        private readonly BaseShape _point;
 
         /// <summary>
         /// Initialize new instance of <see cref="ArcSelection"/> class.

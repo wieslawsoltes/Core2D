@@ -12,10 +12,10 @@ namespace Core2D.Editor.Tools.Selection
     /// </summary>
     public class PathSelection
     {
-        private XLayer _layer;
-        private XPath _shape;
-        private ShapeStyle _style;
-        private BaseShape _point;
+        private readonly XLayer _layer;
+        private readonly XPath _shape;
+        private readonly ShapeStyle _style;
+        private readonly BaseShape _point;
 
         /// <summary>
         /// Initialize new instance of <see cref="PathSelection"/> class.
