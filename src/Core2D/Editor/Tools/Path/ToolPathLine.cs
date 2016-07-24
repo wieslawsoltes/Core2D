@@ -1,10 +1,11 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System.Linq;
+using Core2D.Editor.Tools.Path.Shapes;
+using Core2D.Editor.Tools.Selection;
 using Core2D.Path.Segments;
 using Core2D.Shape;
 using Core2D.Shapes;
-using Core2D.Style;
 
 namespace Core2D.Editor.Tools.Path
 {
@@ -16,11 +17,8 @@ namespace Core2D.Editor.Tools.Path
         private ProjectEditor _editor;
         private ToolState _currentState = ToolState.None;
         private ToolPath _toolPath;
-        private XPoint _lineStart;
-        private XPoint _lineEnd;
-        private ShapeStyle _style;
-        private XPoint _lineStartHelperPoint;
-        private XPoint _lineEndHelperPoint;
+        private XPathLine _line = new XPathLine();
+        private LineSelection _selection;
 
         /// <summary>
         /// Initialize new instance of <see cref="ToolPathLine"/> class.
@@ -45,19 +43,19 @@ namespace Core2D.Editor.Tools.Path
             {
                 case ToolState.None:
                     {
-                        _lineStart = _editor.TryToGetConnectionPoint(sx, sy) ?? XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
+                        _line.Start = _editor.TryToGetConnectionPoint(sx, sy) ?? XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
                         if (!_toolPath._isInitialized)
                         {
-                            _toolPath.InitializeWorkingPath(_lineStart);
+                            _toolPath.InitializeWorkingPath(_line.Start);
                         }
                         else
                         {
-                            _lineStart = _toolPath.GetLastPathPoint();
+                            _line.Start = _toolPath.GetLastPathPoint();
                         }
 
-                        _lineEnd = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
+                        _line.End = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
                         _toolPath._context.LineTo(
-                            _lineEnd,
+                            _line.End,
                             _editor.Project.Options.DefaultIsStroked,
                             _editor.Project.Options.DefaultIsSmoothJoin);
                         _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
@@ -69,8 +67,8 @@ namespace Core2D.Editor.Tools.Path
                     break;
                 case ToolState.One:
                     {
-                        _lineEnd.X = sx;
-                        _lineEnd.Y = sy;
+                        _line.End.X = sx;
+                        _line.End.Y = sy;
                         if (_editor.Project.Options.TryToConnect)
                         {
                             var end = _editor.TryToGetConnectionPoint(sx, sy);
@@ -82,9 +80,9 @@ namespace Core2D.Editor.Tools.Path
                             }
                         }
 
-                        _lineStart = _lineEnd;
-                        _lineEnd = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
-                        _toolPath._context.LineTo(_lineEnd,
+                        _line.Start = _line.End;
+                        _line.End = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
+                        _toolPath._context.LineTo(_line.End,
                             _editor.Project.Options.DefaultIsStroked,
                             _editor.Project.Options.DefaultIsSmoothJoin);
                         _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
@@ -150,8 +148,8 @@ namespace Core2D.Editor.Tools.Path
                         {
                             _editor.TryToHoverShape(sx, sy);
                         }
-                        _lineEnd.X = sx;
-                        _lineEnd.Y = sy;
+                        _line.End.X = sx;
+                        _line.End.Y = sy;
                         _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         Move(null);
                     }
@@ -164,11 +162,13 @@ namespace Core2D.Editor.Tools.Path
         {
             base.ToStateOne();
 
-            _style = _editor.Project.Options.HelperStyle;
-            _lineStartHelperPoint = XPoint.Create(0, 0, _editor.Project.Options.PointShape);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_lineStartHelperPoint);
-            _lineEndHelperPoint = XPoint.Create(0, 0, _editor.Project.Options.PointShape);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_lineEndHelperPoint);
+            _selection = new LineSelection(
+                _editor.Project.CurrentContainer.HelperLayer,
+                _line,
+                _editor.Project.Options.HelperStyle,
+                _editor.Project.Options.PointShape);
+
+            _selection.ToStateOne();
         }
 
         /// <inheritdoc/>
@@ -176,17 +176,7 @@ namespace Core2D.Editor.Tools.Path
         {
             base.Move(shape);
 
-            if (_lineStartHelperPoint != null)
-            {
-                _lineStartHelperPoint.X = _lineStart.X;
-                _lineStartHelperPoint.Y = _lineStart.Y;
-            }
-
-            if (_lineEndHelperPoint != null)
-            {
-                _lineEndHelperPoint.X = _lineEnd.X;
-                _lineEndHelperPoint.Y = _lineEnd.Y;
-            }
+            _selection.Move();
         }
 
         /// <inheritdoc/>
@@ -196,19 +186,8 @@ namespace Core2D.Editor.Tools.Path
 
             _currentState = ToolState.None;
 
-            if (_lineStartHelperPoint != null)
-            {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_lineStartHelperPoint);
-                _lineStartHelperPoint = null;
-            }
-
-            if (_lineEndHelperPoint != null)
-            {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_lineEndHelperPoint);
-                _lineEndHelperPoint = null;
-            }
-
-            _style = null;
+            _selection.Remove();
+            _selection = null;
         }
     }
 }
