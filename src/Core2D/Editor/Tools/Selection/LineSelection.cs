@@ -16,6 +16,8 @@ namespace Core2D.Editor.Tools.Selection
         private readonly XLine _shape;
         private readonly ShapeStyle _style;
         private readonly BaseShape _point;
+        private XPoint _startHelperPoint;
+        private XPoint _endHelperPoint;
 
         /// <summary>
         /// Initialize new instance of <see cref="LineSelection"/> class.
@@ -32,6 +34,52 @@ namespace Core2D.Editor.Tools.Selection
             _point = point;
         }
 
-        // TODO: Implement selection class.
+        /// <summary>
+        /// Transfer selection state to <see cref="ToolState.One"/>.
+        /// </summary>
+        public void ToStateOne()
+        {
+            _startHelperPoint = XPoint.Create(0, 0, _point);
+            _endHelperPoint = XPoint.Create(0, 0, _point);
+
+            _layer.Shapes = _layer.Shapes.Add(_startHelperPoint);
+            _layer.Shapes = _layer.Shapes.Add(_endHelperPoint);
+        }
+
+        /// <summary>
+        /// Move selection.
+        /// </summary>
+        public void Move()
+        {
+            if (_startHelperPoint != null)
+            {
+                _startHelperPoint.X = _shape.Start.X;
+                _startHelperPoint.Y = _shape.Start.Y;
+            }
+
+            if (_endHelperPoint != null)
+            {
+                _endHelperPoint.X = _shape.End.X;
+                _endHelperPoint.Y = _shape.End.Y;
+            }
+        }
+
+        /// <summary>
+        /// Remove selection.
+        /// </summary>
+        public void Remove()
+        {
+            if (_startHelperPoint != null)
+            {
+                _layer.Shapes = _layer.Shapes.Remove(_startHelperPoint);
+                _startHelperPoint = null;
+            }
+
+            if (_endHelperPoint != null)
+            {
+                _layer.Shapes = _layer.Shapes.Remove(_endHelperPoint);
+                _endHelperPoint = null;
+            }
+        }
     }
 }

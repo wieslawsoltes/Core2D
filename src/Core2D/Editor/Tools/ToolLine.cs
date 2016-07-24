@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Editor.Tools.Selection;
 using Core2D.Shape;
 using Core2D.Shapes;
 
@@ -13,8 +14,7 @@ namespace Core2D.Editor.Tools
         private ProjectEditor _editor;
         private ToolState _currentState = ToolState.None;
         private XLine _shape;
-        private XPoint _startHelperPoint;
-        private XPoint _endHelperPoint;
+        private LineSelection _selection;
 
         /// <summary>
         /// Initialize new instance of <see cref="ToolLine"/> class.
@@ -159,10 +159,13 @@ namespace Core2D.Editor.Tools
         {
             base.ToStateOne();
 
-            _startHelperPoint = XPoint.Create(0, 0, _editor.Project.Options.PointShape);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_startHelperPoint);
-            _endHelperPoint = XPoint.Create(0, 0, _editor.Project.Options.PointShape);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_endHelperPoint);
+            _selection = new LineSelection(
+                _editor.Project.CurrentContainer.HelperLayer,
+                _shape,
+                _editor.Project.Options.HelperStyle,
+                _editor.Project.Options.PointShape);
+
+            _selection.ToStateOne();
         }
 
         /// <inheritdoc/>
@@ -170,17 +173,7 @@ namespace Core2D.Editor.Tools
         {
             base.Move(shape);
 
-            if (_startHelperPoint != null)
-            {
-                _startHelperPoint.X = _shape.Start.X;
-                _startHelperPoint.Y = _shape.Start.Y;
-            }
-
-            if (_endHelperPoint != null)
-            {
-                _endHelperPoint.X = _shape.End.X;
-                _endHelperPoint.Y = _shape.End.Y;
-            }
+            _selection.Move();
         }
 
         /// <inheritdoc/>
@@ -188,17 +181,8 @@ namespace Core2D.Editor.Tools
         {
             base.Remove();
 
-            if (_startHelperPoint != null)
-            {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_startHelperPoint);
-                _startHelperPoint = null;
-            }
-
-            if (_endHelperPoint != null)
-            {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_endHelperPoint);
-                _endHelperPoint = null;
-            }
+            _selection.Remove();
+            _selection = null;
         }
     }
 }
