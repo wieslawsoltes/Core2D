@@ -31,7 +31,5 @@ namespace Core2D.Editor.Tools.Selection
             _style = style;
             _point = point;
         }
-
-        // TODO: Implement selection class.
     }
 }
