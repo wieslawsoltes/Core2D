@@ -1,9 +1,9 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Editor.Tools.Selection;
 using Core2D.Math.Arc;
 using Core2D.Shape;
 using Core2D.Shapes;
-using Core2D.Style;
 
 namespace Core2D.Editor.Tools
 {
@@ -15,17 +15,9 @@ namespace Core2D.Editor.Tools
         private ProjectEditor _editor;
         private ToolState _currentState = ToolState.None;
         private XArc _shape;
-        private ShapeStyle _style;
-        private XLine _startLine;
-        private XLine _endLine;
-        private XEllipse _ellipse;
-        private XPoint _p1HelperPoint;
-        private XPoint _p2HelperPoint;
-        private XPoint _centerHelperPoint;
-        private XPoint _startHelperPoint;
-        private XPoint _endHelperPoint;
-        private bool _connectedP3;
-        private bool _connectedP4;
+        private bool _connectedPoint3;
+        private bool _connectedPoint4;
+        private ArcSelection _selection;
 
         /// <summary>
         /// Initialize new instance of <see cref="ToolArc"/> class.
@@ -49,8 +41,8 @@ namespace Core2D.Editor.Tools
                 case ToolState.None:
                     {
                         var style = _editor.Project.CurrentStyleLibrary.Selected;
-                        _connectedP3 = false;
-                        _connectedP4 = false;
+                        _connectedPoint3 = false;
+                        _connectedPoint4 = false;
                         _shape = XArc.Create(
                             sx, sy,
                             _editor.Project.Options.CloneStyle ? style.Clone() : style,
@@ -108,11 +100,11 @@ namespace Core2D.Editor.Tools
                             if (result != null)
                             {
                                 _shape.Point3 = result;
-                                _connectedP3 = true;
+                                _connectedPoint3 = true;
                             }
                             else
                             {
-                                _connectedP3 = false;
+                                _connectedPoint3 = false;
                             }
 
                             _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_shape);
@@ -135,11 +127,11 @@ namespace Core2D.Editor.Tools
                             if (result != null)
                             {
                                 _shape.Point4 = result;
-                                _connectedP4 = true;
+                                _connectedPoint4 = true;
                             }
                             else
                             {
-                                _connectedP4 = false;
+                                _connectedPoint4 = false;
                             }
 
                             _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_shape);
@@ -251,15 +243,13 @@ namespace Core2D.Editor.Tools
         {
             base.ToStateOne();
 
-            _style = _editor.Project.Options.HelperStyle;
-            _ellipse = XEllipse.Create(0, 0, _style, null);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_ellipse);
-            _p1HelperPoint = XPoint.Create(0, 0, _editor.Project.Options.PointShape);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_p1HelperPoint);
-            _p2HelperPoint = XPoint.Create(0, 0, _editor.Project.Options.PointShape);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_p2HelperPoint);
-            _centerHelperPoint = XPoint.Create(0, 0, _editor.Project.Options.PointShape);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_centerHelperPoint);
+            _selection = new ArcSelection(
+                _editor.Project.CurrentContainer.HelperLayer,
+                _shape,
+                _editor.Project.Options.HelperStyle,
+                _editor.Project.Options.PointShape);
+
+            _selection.ToStateOne();
         }
 
         /// <inheritdoc/>
@@ -267,22 +257,7 @@ namespace Core2D.Editor.Tools
         {
             base.ToStateTwo();
 
-            if (_p1HelperPoint != null)
-            {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_p1HelperPoint);
-                _p1HelperPoint = null;
-            }
-
-            if (_p2HelperPoint != null)
-            {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_p2HelperPoint);
-                _p2HelperPoint = null;
-            }
-
-            _startLine = XLine.Create(0, 0, _style, null);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_startLine);
-            _startHelperPoint = XPoint.Create(0, 0, _editor.Project.Options.PointShape);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_startHelperPoint);
+            _selection.ToStateTwo();
         }
 
         /// <inheritdoc/>
@@ -290,16 +265,7 @@ namespace Core2D.Editor.Tools
         {
             base.ToStateThree();
 
-            if (_ellipse != null)
-            {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_ellipse);
-                _ellipse = null;
-            }
-
-            _endLine = XLine.Create(0, 0, _style, null);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_endLine);
-            _endHelperPoint = XPoint.Create(0, 0, _editor.Project.Options.PointShape);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_endHelperPoint);
+            _selection.ToStateThree();
         }
 
         /// <inheritdoc/>
@@ -307,62 +273,7 @@ namespace Core2D.Editor.Tools
         {
             base.Move(shape);
 
-            var arc = shape as XArc;
-            var a = WpfArc.FromXArc(arc, 0, 0);
-
-            if (_ellipse != null)
-            {
-                _ellipse.TopLeft.X = a.P1.X;
-                _ellipse.TopLeft.Y = a.P1.Y;
-                _ellipse.BottomRight.X = a.P2.X;
-                _ellipse.BottomRight.Y = a.P2.Y;
-            }
-
-            if (_startLine != null)
-            {
-                _startLine.Start.X = a.Center.X;
-                _startLine.Start.Y = a.Center.Y;
-                _startLine.End.X = a.Start.X;
-                _startLine.End.Y = a.Start.Y;
-            }
-
-            if (_endLine != null)
-            {
-                _endLine.Start.X = a.Center.X;
-                _endLine.Start.Y = a.Center.Y;
-                _endLine.End.X = a.End.X;
-                _endLine.End.Y = a.End.Y;
-            }
-
-            if (_p1HelperPoint != null)
-            {
-                _p1HelperPoint.X = a.P1.X;
-                _p1HelperPoint.Y = a.P1.Y;
-            }
-
-            if (_p2HelperPoint != null)
-            {
-                _p2HelperPoint.X = a.P2.X;
-                _p2HelperPoint.Y = a.P2.Y;
-            }
-
-            if (_centerHelperPoint != null)
-            {
-                _centerHelperPoint.X = a.Center.X;
-                _centerHelperPoint.Y = a.Center.Y;
-            }
-
-            if (_startHelperPoint != null)
-            {
-                _startHelperPoint.X = a.Start.X;
-                _startHelperPoint.Y = a.Start.Y;
-            }
-
-            if (_endHelperPoint != null)
-            {
-                _endHelperPoint.X = a.End.X;
-                _endHelperPoint.Y = a.End.Y;
-            }
+            _selection.Move();
         }
 
         /// <inheritdoc/>
@@ -373,13 +284,13 @@ namespace Core2D.Editor.Tools
             var arc = shape as XArc;
             var a = WpfArc.FromXArc(arc, 0, 0);
 
-            if (!_connectedP3)
+            if (!_connectedPoint3)
             {
                 arc.Point3.X = a.Start.X;
                 arc.Point3.Y = a.Start.Y;
             }
 
-            if (!_connectedP4)
+            if (!_connectedPoint4)
             {
                 arc.Point4.X = a.End.X;
                 arc.Point4.Y = a.End.Y;
@@ -391,55 +302,8 @@ namespace Core2D.Editor.Tools
         {
             base.Remove();
 
-            if (_ellipse != null)
-            {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_ellipse);
-                _ellipse = null;
-            }
-
-            if (_startLine != null)
-            {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_startLine);
-                _startLine = null;
-            }
-
-            if (_endLine != null)
-            {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_endLine);
-                _endLine = null;
-            }
-
-            if (_p1HelperPoint != null)
-            {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_p1HelperPoint);
-                _p1HelperPoint = null;
-            }
-
-            if (_p2HelperPoint != null)
-            {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_p2HelperPoint);
-                _p2HelperPoint = null;
-            }
-
-            if (_centerHelperPoint != null)
-            {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_centerHelperPoint);
-                _centerHelperPoint = null;
-            }
-
-            if (_startHelperPoint != null)
-            {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_startHelperPoint);
-                _startHelperPoint = null;
-            }
-
-            if (_endHelperPoint != null)
-            {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_endHelperPoint);
-                _endHelperPoint = null;
-            }
-
-            _style = null;
+            _selection.Remove();
+            _selection = null;
         }
     }
 }
