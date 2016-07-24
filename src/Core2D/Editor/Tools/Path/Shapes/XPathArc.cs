@@ -5,11 +5,9 @@ using Core2D.Shapes.Interfaces;
 
 namespace Core2D.Editor.Tools.Path.Shapes
 {
-    internal class XPathArc : IArc
+    internal class XPathArc : ILine
     {
-        public XPoint Point1 { get; set; }
-        public XPoint Point2 { get; set; }
-        public XPoint Point3 { get; set; }
-        public XPoint Point4 { get; set; }
+        public XPoint Start { get; set; }
+        public XPoint End { get; set; }
     }
 }
