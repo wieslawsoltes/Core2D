@@ -17,7 +17,7 @@ namespace Core2D.Editor.Tools
     {
         private ProjectEditor _editor;
         private ToolState _currentState = ToolState.None;
-        private BaseShape _shape;
+        private XRectangle _rectangle;
         private double _startX;
         private double _startY;
         private double _historyX;
@@ -164,12 +164,12 @@ namespace Core2D.Editor.Tools
                             break;
                         }
 
-                        _shape = XRectangle.Create(
+                        _rectangle = XRectangle.Create(
                             x, y,
                             _editor.Project.Options.SelectionStyle,
                             null,
                             true, true);
-                        _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_shape);
+                        _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_rectangle);
                         _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         _currentState = ToolState.One;
                         _editor.CancelAvailable = true;
@@ -177,12 +177,11 @@ namespace Core2D.Editor.Tools
                     break;
                 case ToolState.One:
                     {
-                        var rectangle = _shape as XRectangle;
-                        if (rectangle != null)
+                        if (_rectangle != null)
                         {
-                            rectangle.BottomRight.X = x;
-                            rectangle.BottomRight.Y = y;
-                            _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_shape);
+                            _rectangle.BottomRight.X = x;
+                            _rectangle.BottomRight.Y = y;
+                            _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_rectangle);
                             _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                             _currentState = ToolState.None;
                             _editor.CancelAvailable = false;
@@ -247,15 +246,14 @@ namespace Core2D.Editor.Tools
                             break;
                         }
 
-                        var rectangle = _shape as XRectangle;
-                        if (rectangle != null)
+                        if (_rectangle != null)
                         {
-                            rectangle.BottomRight.X = x;
-                            rectangle.BottomRight.Y = y;
-                            _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_shape);
+                            _rectangle.BottomRight.X = x;
+                            _rectangle.BottomRight.Y = y;
+                            _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_rectangle);
                             _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                             _currentState = ToolState.None;
-                            _editor.TryToSelectShapes(_editor.Project.CurrentContainer.CurrentLayer, rectangle);
+                            _editor.TryToSelectShapes(_editor.Project.CurrentContainer.CurrentLayer, _rectangle);
                             _editor.CancelAvailable = false;
                         }
                     }
@@ -305,11 +303,10 @@ namespace Core2D.Editor.Tools
                             break;
                         }
 
-                        var rectangle = _shape as XRectangle;
-                        if (rectangle != null)
+                        if (_rectangle != null)
                         {
-                            rectangle.BottomRight.X = x;
-                            rectangle.BottomRight.Y = y;
+                            _rectangle.BottomRight.X = x;
+                            _rectangle.BottomRight.Y = y;
                             _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         }
                     }

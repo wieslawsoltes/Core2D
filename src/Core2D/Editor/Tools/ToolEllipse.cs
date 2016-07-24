@@ -13,7 +13,7 @@ namespace Core2D.Editor.Tools
     {
         private ProjectEditor _editor;
         private ToolState _currentState = ToolState.None;
-        private XEllipse _shape;
+        private XEllipse _ellipse;
         private EllipseSelection _selection;
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace Core2D.Editor.Tools
                 case ToolState.None:
                     {
                         var style = _editor.Project.CurrentStyleLibrary.Selected;
-                        _shape = XEllipse.Create(
+                        _ellipse = XEllipse.Create(
                             sx, sy,
                             _editor.Project.Options.CloneStyle ? style.Clone() : style,
                             _editor.Project.Options.PointShape,
@@ -48,36 +48,34 @@ namespace Core2D.Editor.Tools
                         var result = _editor.TryToGetConnectionPoint(sx, sy);
                         if (result != null)
                         {
-                            _shape.TopLeft = result;
+                            _ellipse.TopLeft = result;
                         }
 
-                        _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_shape);
+                        _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_ellipse);
                         _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         ToStateOne();
-                        Move(_shape);
-                        _editor.Project.CurrentContainer.HelperLayer.Invalidate();
+                        Move(_ellipse);
                         _currentState = ToolState.One;
                         _editor.CancelAvailable = true;
                     }
                     break;
                 case ToolState.One:
                     {
-                        var ellipse = _shape as XEllipse;
-                        if (ellipse != null)
+                        if (_ellipse != null)
                         {
-                            ellipse.BottomRight.X = sx;
-                            ellipse.BottomRight.Y = sy;
+                            _ellipse.BottomRight.X = sx;
+                            _ellipse.BottomRight.Y = sy;
 
                             var result = _editor.TryToGetConnectionPoint(sx, sy);
                             if (result != null)
                             {
-                                _shape.BottomRight = result;
+                                _ellipse.BottomRight = result;
                             }
 
-                            _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_shape);
+                            _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_ellipse);
                             Remove();
-                            Finalize(_shape);
-                            _editor.Project.AddShape(_editor.Project.CurrentContainer.CurrentLayer, _shape);
+                            base.Finalize(_ellipse);
+                            _editor.Project.AddShape(_editor.Project.CurrentContainer.CurrentLayer, _ellipse);
                             _currentState = ToolState.None;
                             _editor.CancelAvailable = false;
                         }
@@ -98,10 +96,9 @@ namespace Core2D.Editor.Tools
                     break;
                 case ToolState.One:
                     {
-                        _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_shape);
+                        _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_ellipse);
                         _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         Remove();
-                        _editor.Project.CurrentContainer.HelperLayer.Invalidate();
                         _currentState = ToolState.None;
                         _editor.CancelAvailable = false;
                     }
@@ -128,18 +125,16 @@ namespace Core2D.Editor.Tools
                     break;
                 case ToolState.One:
                     {
-                        var ellipse = _shape as XEllipse;
-                        if (ellipse != null)
+                        if (_ellipse != null)
                         {
                             if (_editor.Project.Options.TryToConnect)
                             {
                                 _editor.TryToHoverShape(sx, sy);
                             }
-                            ellipse.BottomRight.X = sx;
-                            ellipse.BottomRight.Y = sy;
+                            _ellipse.BottomRight.X = sx;
+                            _ellipse.BottomRight.Y = sy;
                             _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
-                            Move(_shape);
-                            _editor.Project.CurrentContainer.HelperLayer.Invalidate();
+                            Move(_ellipse);
                         }
                     }
                     break;
@@ -153,7 +148,7 @@ namespace Core2D.Editor.Tools
 
             _selection = new EllipseSelection(
                 _editor.Project.CurrentContainer.HelperLayer,
-                _shape,
+                _ellipse,
                 _editor.Project.Options.HelperStyle,
                 _editor.Project.Options.PointShape);
 

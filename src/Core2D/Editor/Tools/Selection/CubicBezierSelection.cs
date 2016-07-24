@@ -13,7 +13,7 @@ namespace Core2D.Editor.Tools.Selection
     public class CubicBezierSelection
     {
         private readonly XLayer _layer;
-        private readonly XCubicBezier _shape;
+        private readonly XCubicBezier _cubicBezier;
         private readonly ShapeStyle _style;
         private readonly BaseShape _point;
         private XLine _line12;
@@ -34,7 +34,7 @@ namespace Core2D.Editor.Tools.Selection
         public CubicBezierSelection(XLayer layer, XCubicBezier shape, ShapeStyle style, BaseShape point)
         {
             _layer = layer;
-            _shape = shape;
+            _cubicBezier = shape;
             _style = style;
             _point = point;
         }
@@ -83,51 +83,53 @@ namespace Core2D.Editor.Tools.Selection
         {
             if (_line12 != null)
             {
-                _line12.Start.X = _shape.Point1.X;
-                _line12.Start.Y = _shape.Point1.Y;
-                _line12.End.X = _shape.Point2.X;
-                _line12.End.Y = _shape.Point2.Y;
+                _line12.Start.X = _cubicBezier.Point1.X;
+                _line12.Start.Y = _cubicBezier.Point1.Y;
+                _line12.End.X = _cubicBezier.Point2.X;
+                _line12.End.Y = _cubicBezier.Point2.Y;
             }
 
             if (_line43 != null)
             {
-                _line43.Start.X = _shape.Point4.X;
-                _line43.Start.Y = _shape.Point4.Y;
-                _line43.End.X = _shape.Point3.X;
-                _line43.End.Y = _shape.Point3.Y;
+                _line43.Start.X = _cubicBezier.Point4.X;
+                _line43.Start.Y = _cubicBezier.Point4.Y;
+                _line43.End.X = _cubicBezier.Point3.X;
+                _line43.End.Y = _cubicBezier.Point3.Y;
             }
 
             if (_line23 != null)
             {
-                _line23.Start.X = _shape.Point2.X;
-                _line23.Start.Y = _shape.Point2.Y;
-                _line23.End.X = _shape.Point3.X;
-                _line23.End.Y = _shape.Point3.Y;
+                _line23.Start.X = _cubicBezier.Point2.X;
+                _line23.Start.Y = _cubicBezier.Point2.Y;
+                _line23.End.X = _cubicBezier.Point3.X;
+                _line23.End.Y = _cubicBezier.Point3.Y;
             }
 
             if (_helperPoint1 != null)
             {
-                _helperPoint1.X = _shape.Point1.X;
-                _helperPoint1.Y = _shape.Point1.Y;
+                _helperPoint1.X = _cubicBezier.Point1.X;
+                _helperPoint1.Y = _cubicBezier.Point1.Y;
             }
 
             if (_helperPoint2 != null)
             {
-                _helperPoint2.X = _shape.Point2.X;
-                _helperPoint2.Y = _shape.Point2.Y;
+                _helperPoint2.X = _cubicBezier.Point2.X;
+                _helperPoint2.Y = _cubicBezier.Point2.Y;
             }
 
             if (_helperPoint3 != null)
             {
-                _helperPoint3.X = _shape.Point3.X;
-                _helperPoint3.Y = _shape.Point3.Y;
+                _helperPoint3.X = _cubicBezier.Point3.X;
+                _helperPoint3.Y = _cubicBezier.Point3.Y;
             }
 
             if (_helperPoint4 != null)
             {
-                _helperPoint4.X = _shape.Point4.X;
-                _helperPoint4.Y = _shape.Point4.Y;
+                _helperPoint4.X = _cubicBezier.Point4.X;
+                _helperPoint4.Y = _cubicBezier.Point4.Y;
             }
+
+            _layer.Invalidate();
         }
 
         /// <summary>
@@ -176,6 +178,8 @@ namespace Core2D.Editor.Tools.Selection
                 _layer.Shapes = _layer.Shapes.Remove(_helperPoint4);
                 _helperPoint4 = null;
             }
+
+            _layer.Invalidate();
         }
     }
 }

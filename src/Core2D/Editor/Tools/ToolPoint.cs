@@ -11,7 +11,7 @@ namespace Core2D.Editor.Tools
     {
         private ProjectEditor _editor;
         private ToolState _currentState = ToolState.None;
-        private XPoint _shape;
+        private XPoint _point;
 
         /// <summary>
         /// Initialize new instance of <see cref="ToolPoint"/> class.
@@ -34,18 +34,18 @@ namespace Core2D.Editor.Tools
             {
                 case ToolState.None:
                     {
-                        _shape = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
+                        _point = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
 
                         if (_editor.Project.Options.TryToConnect)
                         {
-                            if (!_editor.TryToSplitLine(x, y, _shape, true))
+                            if (!_editor.TryToSplitLine(x, y, _point, true))
                             {
-                                _editor.Project.AddShape(_editor.Project.CurrentContainer.CurrentLayer, _shape);
+                                _editor.Project.AddShape(_editor.Project.CurrentContainer.CurrentLayer, _point);
                             }
                         }
                         else
                         {
-                            _editor.Project.AddShape(_editor.Project.CurrentContainer.CurrentLayer, _shape);
+                            _editor.Project.AddShape(_editor.Project.CurrentContainer.CurrentLayer, _point);
                         }
                     }
                     break;

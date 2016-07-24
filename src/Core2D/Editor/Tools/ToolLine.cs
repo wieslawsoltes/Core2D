@@ -13,7 +13,7 @@ namespace Core2D.Editor.Tools
     {
         private ProjectEditor _editor;
         private ToolState _currentState = ToolState.None;
-        private XLine _shape;
+        private XLine _line;
         private LineSelection _selection;
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace Core2D.Editor.Tools
                 case ToolState.None:
                     {
                         var style = _editor.Project.CurrentStyleLibrary.Selected;
-                        _shape = XLine.Create(
+                        _line = XLine.Create(
                             sx, sy,
                             _editor.Project.Options.CloneStyle ? style.Clone() : style,
                             _editor.Project.Options.PointShape,
@@ -48,45 +48,43 @@ namespace Core2D.Editor.Tools
                             var result = _editor.TryToGetConnectionPoint(sx, sy);
                             if (result != null)
                             {
-                                _shape.Start = result;
+                                _line.Start = result;
                             }
                             else
                             {
-                                _editor.TryToSplitLine(x, y, _shape.Start);
+                                _editor.TryToSplitLine(x, y, _line.Start);
                             }
                         }
-                        _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_shape);
+                        _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_line);
                         _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         ToStateOne();
-                        Move(_shape);
-                        _editor.Project.CurrentContainer.HelperLayer.Invalidate();
+                        Move(_line);
                         _currentState = ToolState.One;
                         _editor.CancelAvailable = true;
                     }
                     break;
                 case ToolState.One:
                     {
-                        var line = _shape as XLine;
-                        if (line != null)
+                        if (_line != null)
                         {
-                            line.End.X = sx;
-                            line.End.Y = sy;
+                            _line.End.X = sx;
+                            _line.End.Y = sy;
                             if (_editor.Project.Options.TryToConnect)
                             {
                                 var result = _editor.TryToGetConnectionPoint(sx, sy);
                                 if (result != null)
                                 {
-                                    _shape.End = result;
+                                    _line.End = result;
                                 }
                                 else
                                 {
-                                    _editor.TryToSplitLine(x, y, _shape.End);
+                                    _editor.TryToSplitLine(x, y, _line.End);
                                 }
                             }
-                            _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_shape);
+                            _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_line);
                             Remove();
-                            Finalize(_shape);
-                            _editor.Project.AddShape(_editor.Project.CurrentContainer.CurrentLayer, _shape);
+                            base.Finalize(_line);
+                            _editor.Project.AddShape(_editor.Project.CurrentContainer.CurrentLayer, _line);
                             _currentState = ToolState.None;
                             _editor.CancelAvailable = false;
                         }
@@ -106,10 +104,9 @@ namespace Core2D.Editor.Tools
                     break;
                 case ToolState.One:
                     {
-                        _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_shape);
+                        _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_line);
                         _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         Remove();
-                        _editor.Project.CurrentContainer.HelperLayer.Invalidate();
                         _currentState = ToolState.None;
                         _editor.CancelAvailable = false;
                     }
@@ -136,18 +133,16 @@ namespace Core2D.Editor.Tools
                     break;
                 case ToolState.One:
                     {
-                        var line = _shape as XLine;
-                        if (line != null)
+                        if (_line != null)
                         {
                             if (_editor.Project.Options.TryToConnect)
                             {
                                 _editor.TryToHoverShape(sx, sy);
                             }
-                            line.End.X = sx;
-                            line.End.Y = sy;
+                            _line.End.X = sx;
+                            _line.End.Y = sy;
                             _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
-                            Move(_shape);
-                            _editor.Project.CurrentContainer.HelperLayer.Invalidate();
+                            Move(_line);
                         }
                     }
                     break;
@@ -161,7 +156,7 @@ namespace Core2D.Editor.Tools
 
             _selection = new LineSelection(
                 _editor.Project.CurrentContainer.HelperLayer,
-                _shape,
+                _line,
                 _editor.Project.Options.HelperStyle,
                 _editor.Project.Options.PointShape);
 

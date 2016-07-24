@@ -14,7 +14,7 @@ namespace Core2D.Editor.Tools.Selection
     public class ArcSelection
     {
         private readonly XLayer _layer;
-        private readonly XArc _shape;
+        private readonly XArc _arc;
         private readonly ShapeStyle _style;
         private readonly BaseShape _point;
         private XLine _startLine;
@@ -36,7 +36,7 @@ namespace Core2D.Editor.Tools.Selection
         public ArcSelection(XLayer layer, XArc shape, ShapeStyle style, BaseShape point)
         {
             _layer = layer;
-            _shape = shape;
+            _arc = shape;
             _style = style;
             _point = point;
         }
@@ -104,7 +104,7 @@ namespace Core2D.Editor.Tools.Selection
         /// </summary>
         public void Move()
         {
-            var a = WpfArc.FromXArc(_shape, 0, 0);
+            var a = WpfArc.FromXArc(_arc, 0, 0);
 
             if (_ellipse != null)
             {
@@ -159,6 +159,8 @@ namespace Core2D.Editor.Tools.Selection
                 _endHelperPoint.X = a.End.X;
                 _endHelperPoint.Y = a.End.Y;
             }
+
+            _layer.Invalidate();
         }
 
         /// <summary>
@@ -213,6 +215,8 @@ namespace Core2D.Editor.Tools.Selection
                 _layer.Shapes = _layer.Shapes.Remove(_endHelperPoint);
                 _endHelperPoint = null;
             }
+
+            _layer.Invalidate();
         }
     }
 }

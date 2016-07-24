@@ -17,14 +17,12 @@ namespace Core2D.Editor.Tools
     public class ToolPath : ToolBase
     {
         private ProjectEditor _editor;
-        // Path Tool
         internal XPath _path;
         internal XPathGeometry _geometry;
         internal XGeometryContext _context;
         internal bool _isInitialized;
         private PathTool _previousPathTool;
         private PathTool _movePathTool;
-        // Path Tools
         private ToolPathLine _toolPathLine;
         private ToolPathArc _toolPathArc;
         private ToolPathCubicBezier _toolPathCubicBezier;

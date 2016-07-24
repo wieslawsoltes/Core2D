@@ -13,7 +13,7 @@ namespace Core2D.Editor.Tools.Selection
     public class TextSelection
     {
         private readonly XLayer _layer;
-        private readonly XText _shape;
+        private readonly XText _text;
         private readonly ShapeStyle _style;
         private readonly BaseShape _point;
         private XPoint _topLeftHelperPoint;
@@ -30,7 +30,7 @@ namespace Core2D.Editor.Tools.Selection
         public TextSelection(XLayer layer, XText shape, ShapeStyle style, BaseShape point)
         {
             _layer = layer;
-            _shape = shape;
+            _text = shape;
             _style = style;
             _point = point;
         }
@@ -56,23 +56,25 @@ namespace Core2D.Editor.Tools.Selection
         {
             if (_helperRectangle != null)
             {
-                _helperRectangle.TopLeft.X = _shape.TopLeft.X;
-                _helperRectangle.TopLeft.Y = _shape.TopLeft.Y;
-                _helperRectangle.BottomRight.X = _shape.BottomRight.X;
-                _helperRectangle.BottomRight.Y = _shape.BottomRight.Y;
+                _helperRectangle.TopLeft.X = _text.TopLeft.X;
+                _helperRectangle.TopLeft.Y = _text.TopLeft.Y;
+                _helperRectangle.BottomRight.X = _text.BottomRight.X;
+                _helperRectangle.BottomRight.Y = _text.BottomRight.Y;
             }
 
             if (_topLeftHelperPoint != null)
             {
-                _topLeftHelperPoint.X = _shape.TopLeft.X;
-                _topLeftHelperPoint.Y = _shape.TopLeft.Y;
+                _topLeftHelperPoint.X = _text.TopLeft.X;
+                _topLeftHelperPoint.Y = _text.TopLeft.Y;
             }
 
             if (_bottomRightHelperPoint != null)
             {
-                _bottomRightHelperPoint.X = _shape.BottomRight.X;
-                _bottomRightHelperPoint.Y = _shape.BottomRight.Y;
+                _bottomRightHelperPoint.X = _text.BottomRight.X;
+                _bottomRightHelperPoint.Y = _text.BottomRight.Y;
             }
+
+            _layer.Invalidate();
         }
 
         /// <summary>
@@ -97,6 +99,8 @@ namespace Core2D.Editor.Tools.Selection
                 _layer.Shapes = _layer.Shapes.Remove(_bottomRightHelperPoint);
                 _bottomRightHelperPoint = null;
             }
+
+            _layer.Invalidate();
         }
     }
 }

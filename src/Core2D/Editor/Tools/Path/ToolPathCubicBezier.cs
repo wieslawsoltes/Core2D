@@ -74,7 +74,6 @@ namespace Core2D.Editor.Tools.Path
                         _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         ToStateOne();
                         Move(null);
-                        _editor.Project.CurrentContainer.HelperLayer.Invalidate();
                         _currentState = ToolState.One;
                         _editor.CancelAvailable = true;
                     }
@@ -97,7 +96,6 @@ namespace Core2D.Editor.Tools.Path
                         _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         ToStateTwo();
                         Move(null);
-                        _editor.Project.CurrentContainer.HelperLayer.Invalidate();
                         _currentState = ToolState.Two;
                     }
                     break;
@@ -119,7 +117,6 @@ namespace Core2D.Editor.Tools.Path
                         _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         ToStateThree();
                         Move(null);
-                        _editor.Project.CurrentContainer.HelperLayer.Invalidate();
                         _currentState = ToolState.Three;
                     }
                     break;
@@ -153,7 +150,6 @@ namespace Core2D.Editor.Tools.Path
                         Remove();
                         ToStateOne();
                         Move(null);
-                        _editor.Project.CurrentContainer.HelperLayer.Invalidate();
                         _currentState = ToolState.One;
                     }
                     break;
@@ -185,7 +181,6 @@ namespace Core2D.Editor.Tools.Path
                         else
                         {
                             _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
-                            _editor.Project.CurrentContainer.HelperLayer.Invalidate();
                         }
                         _toolPath.DeInitializeWorkingPath();
                         _currentState = ToolState.None;
@@ -226,7 +221,6 @@ namespace Core2D.Editor.Tools.Path
                         _cubicBezierPoint4.Y = sy;
                         _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         Move(null);
-                        _editor.Project.CurrentContainer.HelperLayer.Invalidate();
                     }
                     break;
                 case ToolState.Two:
@@ -239,7 +233,6 @@ namespace Core2D.Editor.Tools.Path
                         _cubicBezierPoint2.Y = sy;
                         _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         Move(null);
-                        _editor.Project.CurrentContainer.HelperLayer.Invalidate();
                     }
                     break;
                 case ToolState.Three:
@@ -252,7 +245,6 @@ namespace Core2D.Editor.Tools.Path
                         _cubicBezierPoint3.Y = sy;
                         _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         Move(null);
-                        _editor.Project.CurrentContainer.HelperLayer.Invalidate();
                     }
                     break;
             }

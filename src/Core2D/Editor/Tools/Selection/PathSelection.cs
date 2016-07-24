@@ -13,7 +13,7 @@ namespace Core2D.Editor.Tools.Selection
     public class PathSelection
     {
         private readonly XLayer _layer;
-        private readonly XPath _shape;
+        private readonly XPath _path;
         private readonly ShapeStyle _style;
         private readonly BaseShape _point;
 
@@ -27,7 +27,7 @@ namespace Core2D.Editor.Tools.Selection
         public PathSelection(XLayer layer, XPath shape, ShapeStyle style, BaseShape point)
         {
             _layer = layer;
-            _shape = shape;
+            _path = shape;
             _style = style;
             _point = point;
         }

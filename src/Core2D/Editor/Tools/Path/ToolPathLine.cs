@@ -63,7 +63,6 @@ namespace Core2D.Editor.Tools.Path
                         _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         ToStateOne();
                         Move(null);
-                        _editor.Project.CurrentContainer.HelperLayer.Invalidate();
                         _currentState = ToolState.One;
                         _editor.CancelAvailable = true;
                     }
@@ -90,7 +89,6 @@ namespace Core2D.Editor.Tools.Path
                             _editor.Project.Options.DefaultIsSmoothJoin);
                         _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         Move(null);
-                        _editor.Project.CurrentContainer.HelperLayer.Invalidate();
                         _currentState = ToolState.One;
                     }
                     break;
@@ -120,7 +118,6 @@ namespace Core2D.Editor.Tools.Path
                         else
                         {
                             _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
-                            _editor.Project.CurrentContainer.HelperLayer.Invalidate();
                         }
                         _toolPath.DeInitializeWorkingPath();
                         _currentState = ToolState.None;
@@ -157,7 +154,6 @@ namespace Core2D.Editor.Tools.Path
                         _lineEnd.Y = sy;
                         _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         Move(null);
-                        _editor.Project.CurrentContainer.HelperLayer.Invalidate();
                     }
                     break;
             }

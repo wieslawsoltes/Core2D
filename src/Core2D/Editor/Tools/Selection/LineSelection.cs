@@ -13,7 +13,7 @@ namespace Core2D.Editor.Tools.Selection
     public class LineSelection
     {
         private readonly XLayer _layer;
-        private readonly XLine _shape;
+        private readonly XLine _line;
         private readonly ShapeStyle _style;
         private readonly BaseShape _point;
         private XPoint _startHelperPoint;
@@ -29,7 +29,7 @@ namespace Core2D.Editor.Tools.Selection
         public LineSelection(XLayer layer, XLine shape, ShapeStyle style, BaseShape point)
         {
             _layer = layer;
-            _shape = shape;
+            _line = shape;
             _style = style;
             _point = point;
         }
@@ -53,15 +53,17 @@ namespace Core2D.Editor.Tools.Selection
         {
             if (_startHelperPoint != null)
             {
-                _startHelperPoint.X = _shape.Start.X;
-                _startHelperPoint.Y = _shape.Start.Y;
+                _startHelperPoint.X = _line.Start.X;
+                _startHelperPoint.Y = _line.Start.Y;
             }
 
             if (_endHelperPoint != null)
             {
-                _endHelperPoint.X = _shape.End.X;
-                _endHelperPoint.Y = _shape.End.Y;
+                _endHelperPoint.X = _line.End.X;
+                _endHelperPoint.Y = _line.End.Y;
             }
+
+            _layer.Invalidate();
         }
 
         /// <summary>
@@ -80,6 +82,8 @@ namespace Core2D.Editor.Tools.Selection
                 _layer.Shapes = _layer.Shapes.Remove(_endHelperPoint);
                 _endHelperPoint = null;
             }
+
+            _layer.Invalidate();
         }
     }
 }

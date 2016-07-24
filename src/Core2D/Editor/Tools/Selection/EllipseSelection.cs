@@ -13,7 +13,7 @@ namespace Core2D.Editor.Tools.Selection
     public class EllipseSelection
     {
         private readonly XLayer _layer;
-        private readonly XEllipse _shape;
+        private readonly XEllipse _ellipse;
         private readonly ShapeStyle _style;
         private readonly BaseShape _point;
         private XPoint _topLeftHelperPoint;
@@ -29,7 +29,7 @@ namespace Core2D.Editor.Tools.Selection
         public EllipseSelection(XLayer layer, XEllipse shape, ShapeStyle style, BaseShape point)
         {
             _layer = layer;
-            _shape = shape;
+            _ellipse = shape;
             _style = style;
             _point = point;
         }
@@ -53,15 +53,17 @@ namespace Core2D.Editor.Tools.Selection
         {
             if (_topLeftHelperPoint != null)
             {
-                _topLeftHelperPoint.X = _shape.TopLeft.X;
-                _topLeftHelperPoint.Y = _shape.TopLeft.Y;
+                _topLeftHelperPoint.X = _ellipse.TopLeft.X;
+                _topLeftHelperPoint.Y = _ellipse.TopLeft.Y;
             }
 
             if (_bottomRightHelperPoint != null)
             {
-                _bottomRightHelperPoint.X = _shape.BottomRight.X;
-                _bottomRightHelperPoint.Y = _shape.BottomRight.Y;
+                _bottomRightHelperPoint.X = _ellipse.BottomRight.X;
+                _bottomRightHelperPoint.Y = _ellipse.BottomRight.Y;
             }
+
+            _layer.Invalidate();
         }
 
         /// <summary>
@@ -80,6 +82,8 @@ namespace Core2D.Editor.Tools.Selection
                 _layer.Shapes = _layer.Shapes.Remove(_bottomRightHelperPoint);
                 _bottomRightHelperPoint = null;
             }
+
+            _layer.Invalidate();
         }
     }
 }
