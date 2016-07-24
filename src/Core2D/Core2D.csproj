@@ -211,6 +211,10 @@
     <Compile Include="Renderer\ImageKey.cs" />
     <Compile Include="Renderer\ShapeRenderer.cs" />
     <Compile Include="Renderer\ShapeRendererState.cs" />
+    <Compile Include="Shapes\Interfaces\IArc.cs" />
+    <Compile Include="Shapes\Interfaces\ICubicBezier.cs" />
+    <Compile Include="Shapes\Interfaces\ILine.cs" />
+    <Compile Include="Shapes\Interfaces\IQuadraticBezier.cs" />
     <Compile Include="Shapes\XArc.cs" />
     <Compile Include="Shapes\XCubicBezier.cs" />
     <Compile Include="Shapes\XEllipse.cs" />
