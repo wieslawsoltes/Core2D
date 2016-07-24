@@ -78,8 +78,7 @@ namespace Core2D.Editor.Tools
                     }
                     else if (segment is XArcSegment)
                     {
-                        // TODO: Get point from last arc point.
-                        throw new NotSupportedException();
+                        return (segment as XArcSegment).Point;
                     }
                     else if (segment is XCubicBezierSegment)
                     {
