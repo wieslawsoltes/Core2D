@@ -3,6 +3,7 @@
 using Core2D.Project;
 using Core2D.Shape;
 using Core2D.Shapes;
+using Core2D.Shapes.Interfaces;
 using Core2D.Style;
 
 namespace Core2D.Editor.Tools.Selection
@@ -13,7 +14,7 @@ namespace Core2D.Editor.Tools.Selection
     public class CubicBezierSelection
     {
         private readonly XLayer _layer;
-        private readonly XCubicBezier _cubicBezier;
+        private readonly ICubicBezier _cubicBezier;
         private readonly ShapeStyle _style;
         private readonly BaseShape _point;
         private XLine _line12;
@@ -31,7 +32,7 @@ namespace Core2D.Editor.Tools.Selection
         /// <param name="shape">The selected shape.</param>
         /// <param name="style">The selection shapes style.</param>
         /// <param name="point">The selection point shape.</param>
-        public CubicBezierSelection(XLayer layer, XCubicBezier shape, ShapeStyle style, BaseShape point)
+        public CubicBezierSelection(XLayer layer, ICubicBezier shape, ShapeStyle style, BaseShape point)
         {
             _layer = layer;
             _cubicBezier = shape;

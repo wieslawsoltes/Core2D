@@ -4,6 +4,7 @@ using Core2D.Math.Arc;
 using Core2D.Project;
 using Core2D.Shape;
 using Core2D.Shapes;
+using Core2D.Shapes.Interfaces;
 using Core2D.Style;
 
 namespace Core2D.Editor.Tools.Selection
@@ -14,7 +15,7 @@ namespace Core2D.Editor.Tools.Selection
     public class ArcSelection
     {
         private readonly XLayer _layer;
-        private readonly XArc _arc;
+        private readonly IArc _arc;
         private readonly ShapeStyle _style;
         private readonly BaseShape _point;
         private XLine _startLine;
@@ -33,7 +34,7 @@ namespace Core2D.Editor.Tools.Selection
         /// <param name="shape">The selected shape.</param>
         /// <param name="style">The selection shapes style.</param>
         /// <param name="point">The selection point shape.</param>
-        public ArcSelection(XLayer layer, XArc shape, ShapeStyle style, BaseShape point)
+        public ArcSelection(XLayer layer, IArc shape, ShapeStyle style, BaseShape point)
         {
             _layer = layer;
             _arc = shape;

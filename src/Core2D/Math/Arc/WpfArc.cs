@@ -1,13 +1,13 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System.Linq;
-using Core2D.Shapes;
+using Core2D.Shapes.Interfaces;
 using static System.Math;
 
 namespace Core2D.Math.Arc
 {
     /// <summary>
-    /// Convert <see cref="XArc"/> coordinates to WPF arc coordinates.
+    /// Convert <see cref="IArc"/> coordinates to WPF arc coordinates.
     /// </summary>
     public struct WpfArc
     {
@@ -73,7 +73,7 @@ namespace Core2D.Math.Arc
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <returns></returns>
-        public static WpfArc FromXArc(XArc arc, double dx, double dy)
+        public static WpfArc FromXArc(IArc arc, double dx, double dy)
         {
             var p1 = Point2.Create(arc.Point1.X + dx, arc.Point1.Y + dy);
             var p2 = Point2.Create(arc.Point2.X + dx, arc.Point2.Y + dy);

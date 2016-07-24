@@ -6,6 +6,7 @@ using Core2D.Data;
 using Core2D.Data.Database;
 using Core2D.Renderer;
 using Core2D.Shape;
+using Core2D.Shapes.Interfaces;
 using Core2D.Style;
 
 namespace Core2D.Shapes
@@ -13,7 +14,7 @@ namespace Core2D.Shapes
     /// <summary>
     /// Arc shape.
     /// </summary>
-    public class XArc : BaseShape
+    public class XArc : BaseShape, IArc
     {
         private XPoint _point1;
         private XPoint _point2;

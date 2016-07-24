@@ -3,6 +3,7 @@
 using Core2D.Project;
 using Core2D.Shape;
 using Core2D.Shapes;
+using Core2D.Shapes.Interfaces;
 using Core2D.Style;
 
 namespace Core2D.Editor.Tools.Selection
@@ -13,7 +14,7 @@ namespace Core2D.Editor.Tools.Selection
     public class LineSelection
     {
         private readonly XLayer _layer;
-        private readonly XLine _line;
+        private readonly ILine _line;
         private readonly ShapeStyle _style;
         private readonly BaseShape _point;
         private XPoint _startHelperPoint;
@@ -26,7 +27,7 @@ namespace Core2D.Editor.Tools.Selection
         /// <param name="shape">The selected shape.</param>
         /// <param name="style">The selection shapes style.</param>
         /// <param name="point">The selection point shape.</param>
-        public LineSelection(XLayer layer, XLine shape, ShapeStyle style, BaseShape point)
+        public LineSelection(XLayer layer, ILine shape, ShapeStyle style, BaseShape point)
         {
             _layer = layer;
             _line = shape;

@@ -1,12 +1,13 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Core2D.Shapes;
+using Core2D.Shapes.Interfaces;
 using static System.Math;
 
 namespace Core2D.Math.Arc
 {
     /// <summary>
-    /// Convert <see cref="XArc"/> coordinates to GDI arc coordinates.
+    /// Convert <see cref="IArc"/> coordinates to GDI arc coordinates.
     /// </summary>
     public struct GdiArc
     {
@@ -62,7 +63,7 @@ namespace Core2D.Math.Arc
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <returns></returns>
-        public static GdiArc FromXArc(XArc arc, double dx, double dy)
+        public static GdiArc FromXArc(IArc arc, double dx, double dy)
         {
             return FromXArc(arc.Point1, arc.Point2, arc.Point3, arc.Point4, dx, dy);
         }

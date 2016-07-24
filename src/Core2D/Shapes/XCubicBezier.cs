@@ -6,6 +6,7 @@ using Core2D.Data;
 using Core2D.Data.Database;
 using Core2D.Renderer;
 using Core2D.Shape;
+using Core2D.Shapes.Interfaces;
 using Core2D.Style;
 
 namespace Core2D.Shapes
@@ -13,7 +14,7 @@ namespace Core2D.Shapes
     /// <summary>
     /// Cubic bezier shape.
     /// </summary>
-    public class XCubicBezier : BaseShape
+    public class XCubicBezier : BaseShape, ICubicBezier
     {
         private XPoint _point1;
         private XPoint _point2;
