@@ -1,8 +1,8 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Core2D.Editor.Tools.Selection;
 using Core2D.Shape;
 using Core2D.Shapes;
-using Core2D.Style;
 
 namespace Core2D.Editor.Tools
 {
@@ -14,14 +14,7 @@ namespace Core2D.Editor.Tools
         private ProjectEditor _editor;
         private ToolState _currentState = ToolState.None;
         private XCubicBezier _shape;
-        private ShapeStyle _style;
-        private XLine _line12;
-        private XLine _line43;
-        private XLine _line23;
-        private XPoint _helperPoint1;
-        private XPoint _helperPoint2;
-        private XPoint _helperPoint3;
-        private XPoint _helperPoint4;
+        private CubicBezierSelection _selection;
 
         /// <summary>
         /// Initialize new instance of <see cref="ToolCubicBezier"/> class.
@@ -243,11 +236,13 @@ namespace Core2D.Editor.Tools
         {
             base.ToStateOne();
 
-            _style = _editor.Project.Options.HelperStyle;
-            _helperPoint1 = XPoint.Create(0, 0, _editor.Project.Options.PointShape);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_helperPoint1);
-            _helperPoint4 = XPoint.Create(0, 0, _editor.Project.Options.PointShape);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_helperPoint4);
+            _selection = new CubicBezierSelection(
+                _editor.Project.CurrentContainer.HelperLayer,
+                _shape,
+                _editor.Project.Options.HelperStyle,
+                _editor.Project.Options.PointShape);
+
+            _selection.ToStateOne();
         }
 
         /// <inheritdoc/>
@@ -255,11 +250,7 @@ namespace Core2D.Editor.Tools
         {
             base.ToStateTwo();
 
-            _style = _editor.Project.Options.HelperStyle;
-            _line12 = XLine.Create(0, 0, _style, null);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_line12);
-            _helperPoint2 = XPoint.Create(0, 0, _editor.Project.Options.PointShape);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_helperPoint2);
+            _selection.ToStateTwo();
         }
 
         /// <inheritdoc/>
@@ -267,12 +258,7 @@ namespace Core2D.Editor.Tools
         {
             base.ToStateThree();
 
-            _line43 = XLine.Create(0, 0, _style, null);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_line43);
-            _line23 = XLine.Create(0, 0, _style, null);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_line23);
-            _helperPoint3 = XPoint.Create(0, 0, _editor.Project.Options.PointShape);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_helperPoint3);
+            _selection.ToStateThree();
         }
 
         /// <inheritdoc/>
@@ -280,55 +266,7 @@ namespace Core2D.Editor.Tools
         {
             base.Move(shape);
 
-            var cubicBezier = shape as XCubicBezier;
-
-            if (_line12 != null)
-            {
-                _line12.Start.X = cubicBezier.Point1.X;
-                _line12.Start.Y = cubicBezier.Point1.Y;
-                _line12.End.X = cubicBezier.Point2.X;
-                _line12.End.Y = cubicBezier.Point2.Y;
-            }
-
-            if (_line43 != null)
-            {
-                _line43.Start.X = cubicBezier.Point4.X;
-                _line43.Start.Y = cubicBezier.Point4.Y;
-                _line43.End.X = cubicBezier.Point3.X;
-                _line43.End.Y = cubicBezier.Point3.Y;
-            }
-
-            if (_line23 != null)
-            {
-                _line23.Start.X = cubicBezier.Point2.X;
-                _line23.Start.Y = cubicBezier.Point2.Y;
-                _line23.End.X = cubicBezier.Point3.X;
-                _line23.End.Y = cubicBezier.Point3.Y;
-            }
-
-            if (_helperPoint1 != null)
-            {
-                _helperPoint1.X = cubicBezier.Point1.X;
-                _helperPoint1.Y = cubicBezier.Point1.Y;
-            }
-
-            if (_helperPoint2 != null)
-            {
-                _helperPoint2.X = cubicBezier.Point2.X;
-                _helperPoint2.Y = cubicBezier.Point2.Y;
-            }
-
-            if (_helperPoint3 != null)
-            {
-                _helperPoint3.X = cubicBezier.Point3.X;
-                _helperPoint3.Y = cubicBezier.Point3.Y;
-            }
-
-            if (_helperPoint4 != null)
-            {
-                _helperPoint4.X = cubicBezier.Point4.X;
-                _helperPoint4.Y = cubicBezier.Point4.Y;
-            }
+            _selection.Move();
         }
 
         /// <inheritdoc/>
@@ -336,49 +274,8 @@ namespace Core2D.Editor.Tools
         {
             base.Remove();
 
-            if (_line12 != null)
-            {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_line12);
-                _line12 = null;
-            }
-
-            if (_line43 != null)
-            {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_line43);
-                _line43 = null;
-            }
-
-            if (_line23 != null)
-            {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_line23);
-                _line23 = null;
-            }
-
-            if (_helperPoint1 != null)
-            {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_helperPoint1);
-                _helperPoint1 = null;
-            }
-
-            if (_helperPoint2 != null)
-            {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_helperPoint2);
-                _helperPoint2 = null;
-            }
-
-            if (_helperPoint3 != null)
-            {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_helperPoint3);
-                _helperPoint3 = null;
-            }
-
-            if (_helperPoint4 != null)
-            {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_helperPoint4);
-                _helperPoint4 = null;
-            }
-
-            _style = null;
+            _selection.Remove();
+            _selection = null;
         }
     }
 }
