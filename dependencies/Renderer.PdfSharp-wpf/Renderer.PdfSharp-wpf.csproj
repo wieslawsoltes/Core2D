@@ -15,6 +15,9 @@
     </NuGetPackageImportStamp>
   </PropertyGroup>
   <Import Project="..\..\Core2D.targets"/>
+  <PropertyGroup>
+    <DefineConstants>$(DefineConstants);WPF</DefineConstants>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
