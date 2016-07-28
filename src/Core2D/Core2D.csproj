@@ -2,7 +2,7 @@
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
-    <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
+    <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{4EE581B0-45F3-4D7E-BEAE-277ABF5F3FDD}</ProjectGuid>
@@ -13,10 +13,11 @@
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <TargetFrameworkProfile>Profile7</TargetFrameworkProfile>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
   </PropertyGroup>
-  <Import Project="..\..\Core2D.targets"/>
+  <Import Project="..\..\Core2D.targets" />
   <ItemGroup>
     <Compile Include="Attributes\ContentAttribute.cs" />
     <Compile Include="Attributes\NameAttribute.cs" />
@@ -196,13 +197,7 @@
     <Compile Include="Collections\XTemplates.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="System.Collections.Immutable, Version=1.2.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\System.Collections.Immutable.1.2.0\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
+    <None Include="project.json" />
   </ItemGroup>
   <Import Project="..\Core2D.Shared\Core2D.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
