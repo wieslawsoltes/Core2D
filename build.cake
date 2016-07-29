@@ -5,8 +5,8 @@ using System;
 using Polly;
 
 var target = Argument("target", "Default");
-var configuration = Argument("configuration", "Release");
 var platform = Argument("platform", "AnyCPU");
+var configuration = Argument("configuration", "Release");
 
 var msBuildSolution = "./Core2D.sln";
 var xBuildSolution = "./Core2D.mono.sln";
