@@ -19,4 +19,5 @@ notifications:
   on_build_failure: true
   on_build_status_changed: true
 cache:
+- packages -> src\**\packages.config, dependencies\**\packages.config, tests\**\packages.config
 - tools -> build.cake, tools\packages.config
