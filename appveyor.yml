@@ -7,8 +7,10 @@ platform:
 - x64
 configuration:
 - Release
+before_build:
+- cmd: git submodule update --init
 build_script:
-  - ps: .\build.ps1 -Target "AppVeyor" -Platform $env:platform -Configuration $env:configuration
+- ps: .\build.ps1 -Target "AppVeyor" -Platform $env:platform -Configuration $env:configuration
 test: off
 notifications:
 - provider: Webhook
