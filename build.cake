@@ -77,7 +77,7 @@ Task("Build")
     }
     else
     {
-      XBuild(xBuildSolution, settings => {
+	    XBuild(xBuildSolution, settings => {
 	        settings.SetConfiguration(configuration);
             settings.WithProperty("Platform", platform);
             settings.SetVerbosity(Verbosity.Minimal);
