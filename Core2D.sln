@@ -85,6 +85,17 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Renderer.Vdx", "dependencie
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileWriter.Vdx", "dependencies\FileWriter.Vdx\FileWriter.Vdx.csproj", "{C8C7B0EF-4FB1-4FEF-A6AA-1FF81589B716}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{4A8B5EE6-475A-4EC5-BD9E-DDACF1D332D0}"
+	ProjectSection(SolutionItems) = preProject
+		.travis.yml = .travis.yml
+		appveyor.yml = appveyor.yml
+		build.cake = build.cake
+		build.ps1 = build.ps1
+		build.sh = build.sh
+		Core2D.targets = Core2D.targets
+		NuGet.Config = NuGet.Config
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		src\Core2D.Shared\Core2D.Shared.projitems*{0eec62cc-3cff-4185-88d6-ba107f0d8ff4}*SharedItemsImports = 4
