@@ -71,16 +71,16 @@ Task("Build")
     {
 	    MSBuild(msBuildSolution, settings => {
 	        settings.SetConfiguration(configuration);
-            settings.WithProperty("Platform", platform);
-            settings.SetVerbosity(Verbosity.Minimal);
+	        settings.WithProperty("Platform", platform);
+	        settings.SetVerbosity(Verbosity.Minimal);
         });
     }
     else
     {
 	    XBuild(xBuildSolution, settings => {
 	        settings.SetConfiguration(configuration);
-            settings.WithProperty("Platform", platform);
-            settings.SetVerbosity(Verbosity.Minimal);
+	        settings.WithProperty("Platform", platform);
+	        settings.SetVerbosity(Verbosity.Minimal);
         });
     }
 });
