@@ -221,3 +221,6 @@ pip-log.txt
 
 # MonoDevelop
 *.userprefs
+
+# Cake
+tools/
