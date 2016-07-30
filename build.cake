@@ -1,5 +1,5 @@
 #addin "nuget:?package=Polly&version=4.2.0"
-#tool "nuget:?package=xunit.runner.console&version=2.2.0-beta2-build3300"
+#tool "nuget:?package=xunit.runner.console&version=2.1.0"
 
 using System;
 using Polly;
