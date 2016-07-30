@@ -89,7 +89,19 @@ Task("Run-Unit-Tests")
     .IsDependentOn("Build")
     .Does(() =>
 {
-    XUnit2("./tests/**/bin/" + platform + "/" + configuration + "/*.UnitTests.dll");
+    string pattern = "./tests/**/bin/" + platform + "/" + configuration + "/*.UnitTests.dll";
+    if (platform == "x86")
+    {
+        XUnit2(pattern, new XUnit2Settings { 
+            ToolPath = "./tools/xunit.runner.console/tools/xunit.console.x86.exe" 
+        });
+    }
+    else
+    {
+        XUnit2(pattern, new XUnit2Settings { 
+            ToolPath = "./tools/xunit.runner.console/tools/xunit.console.exe" 
+        });
+    }
 });
 
 Task("Default")
