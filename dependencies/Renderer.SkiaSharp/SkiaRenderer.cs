@@ -103,14 +103,12 @@ namespace Renderer.SkiaSharp
                     break;
             }
 
-            // TODO: Add dashed line support: https://github.com/mono/SkiaSharp/issues/47
-            /*
             if (style.Dashes != null)
             {
-                paint.DashPattern = ShapeStyle.ConvertDashesToDoubleArray(style.Dashes);
+                paint.PathEffect = SKPathEffect.CreateDash(
+                    BaseStyle.ConvertDashesToFloatArray(style.Dashes), 
+                    (float)style.DashOffset);
             }
-            paint.DashOffset = style.DashOffset;
-            */
 
             return paint;
         }
