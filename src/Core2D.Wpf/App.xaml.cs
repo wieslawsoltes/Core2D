@@ -444,8 +444,7 @@ namespace Core2D.Wpf
             if (dlg.ShowDialog(_mainWindow) == true)
             {
                 string result = dlg.FileName;
-                string ext = System.IO.Path.GetExtension(result).ToLower().TrimStart('.');
-                IFileWriter writer = _editor?.FileWriters.Where(w => string.Compare(w.Extension, ext, StringComparison.OrdinalIgnoreCase) == 0).FirstOrDefault();
+                IFileWriter writer = _editor?.FileWriters[dlg.FilterIndex - 1];
                 if (writer != null)
                 {
                     _editor?.OnExport(result, item, writer);
