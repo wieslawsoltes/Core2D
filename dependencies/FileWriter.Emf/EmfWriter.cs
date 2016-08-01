@@ -58,6 +58,7 @@ namespace FileWriter.Emf
                 using (g = Graphics.FromImage(mf))
                 {
                     var r = new WinFormsRenderer(72.0 / 96.0);
+                    r.State.DrawShapeState.Flags = ShapeStateFlags.Printable;
                     r.State.ImageCache = ic;
 
                     g.SmoothingMode = SmoothingMode.HighQuality;
@@ -119,6 +120,7 @@ namespace FileWriter.Emf
                 using (g = Graphics.FromImage(mf))
                 {
                     var r = new WinFormsRenderer(72.0 / 96.0);
+                    r.State.DrawShapeState.Flags = ShapeStateFlags.Printable;
                     r.State.ImageCache = ic;
 
                     g.SmoothingMode = SmoothingMode.HighQuality;
