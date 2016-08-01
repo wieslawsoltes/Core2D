@@ -530,6 +530,10 @@
       <Project>{5c5a31b5-8f76-42e7-aea8-55b32ca641fa}</Project>
       <Name>FileWriter.Pdf-wpf</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\dependencies\FileWriter.PdfSkiaSharp\FileWriter.PdfSkiaSharp.csproj">
+      <Project>{c934ba25-608b-42fa-b766-42efad7da6ff}</Project>
+      <Name>FileWriter.PdfSkiaSharp</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\dependencies\FileWriter.Vdx\FileWriter.Vdx.csproj">
       <Project>{c8c7b0ef-4fb1-4fef-a6aa-1ff81589b716}</Project>
       <Name>FileWriter.Vdx</Name>
@@ -545,6 +549,10 @@
     <ProjectReference Include="..\..\dependencies\Renderer.PdfSharp-wpf\Renderer.PdfSharp-wpf.csproj">
       <Project>{8d8845d7-998d-4fc2-b4a0-51e2efb34b45}</Project>
       <Name>Renderer.PdfSharp-wpf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\dependencies\Renderer.SkiaSharp\Renderer.SkiaSharp.csproj">
+      <Project>{9b8fa9bd-63be-4560-ba55-0d86aee1809e}</Project>
+      <Name>Renderer.SkiaSharp</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\dependencies\Renderer.WinForms\Renderer.WinForms.csproj">
       <Project>{3dc476e6-5032-4888-9337-221b88653c40}</Project>
