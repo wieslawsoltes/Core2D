@@ -572,22 +572,14 @@ namespace Renderer.SkiaSharp
                 var bytes = State.ImageCache.GetImage(image.Key);
                 if (bytes != null)
                 {
-                    var ms = new System.IO.MemoryStream(bytes);
-                    using (var stream = new SKManagedStream(ms))
-                    using (var decoder = new SKImageDecoder(stream))
-                    {
-                        decoder.PreferQualityOverSpeed = true;
-                        var bi = new SKBitmap();
-                        decoder.Decode(stream, bi);
+                    var bi = SKBitmap.Decode(bytes);
+                    if (_enableImageCache)
+                        _biCache[image.Key] = bi;
 
-                        if (_enableImageCache)
-                            _biCache[image.Key] = bi;
+                    canvas.DrawBitmap(bi, rect);
 
-                        canvas.DrawBitmap(bi, rect);
-
-                        if (!_enableImageCache)
-                            bi.Dispose();
-                    }
+                    if (!_enableImageCache)
+                        bi.Dispose();
                 }
             }
         }
