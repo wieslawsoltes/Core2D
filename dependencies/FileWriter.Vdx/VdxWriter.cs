@@ -14,7 +14,7 @@ namespace FileWriter.Vdx
     public sealed class VdxWriter : IFileWriter
     {
         /// <inheritdoc/>
-        string IFileWriter.Name { get; } = "Vdx";
+        string IFileWriter.Name { get; } = "Vdx (VisioAutomation)";
 
         /// <inheritdoc/>
         string IFileWriter.Extension { get; } = "vdx";

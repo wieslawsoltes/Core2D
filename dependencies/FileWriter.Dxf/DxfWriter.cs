@@ -14,7 +14,7 @@ namespace FileWriter.Dxf
     public sealed class DxfWriter : IFileWriter
     {
         /// <inheritdoc/>
-        string IFileWriter.Name { get; } = "Dxf";
+        string IFileWriter.Name { get; } = "Dxf (netDxf)";
 
         /// <inheritdoc/>
         string IFileWriter.Extension { get; } = "dxf";

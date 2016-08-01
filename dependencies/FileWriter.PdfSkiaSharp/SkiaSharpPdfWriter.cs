@@ -14,7 +14,7 @@ namespace FileWriter.PdfSkiaSharp
     public sealed class PdfWriter : IFileWriter
     {
         /// <inheritdoc/>
-        string IFileWriter.Name { get; } = "Pdf";
+        string IFileWriter.Name { get; } = "Pdf (SkiaSharp)";
 
         /// <inheritdoc/>
         string IFileWriter.Extension { get; } = "pdf";

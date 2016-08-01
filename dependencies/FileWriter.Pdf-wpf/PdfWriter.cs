@@ -22,7 +22,7 @@ namespace FileWriter.Pdf_core
     public sealed class PdfWriter : IFileWriter
     {
         /// <inheritdoc/>
-        string IFileWriter.Name { get; } = "Pdf";
+        string IFileWriter.Name { get; } = "Pdf (PdfSharp)";
 
         /// <inheritdoc/>
         string IFileWriter.Extension { get; } = "pdf";

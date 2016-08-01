@@ -26,7 +26,7 @@ namespace FileWriter.Emf
     public sealed class EmfWriter : IFileWriter
     {
         /// <inheritdoc/>
-        string IFileWriter.Name { get; } = "Emf";
+        string IFileWriter.Name { get; } = "Emf (WinForms)";
 
         /// <inheritdoc/>
         string IFileWriter.Extension { get; } = "emf";
