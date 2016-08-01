@@ -41,9 +41,17 @@ namespace Renderer.SkiaSharp
                 {
                     if (segment is XArcSegment)
                     {
-                        //var arcSegment = segment as XArcSegment;
-                        // TODO: Convert WPF/SVG elliptical arc segment format to GDI+ bezier curves.
-                        //startPoint = arcSegment.Point;
+                        var arcSegment = segment as XArcSegment;
+                        path.ArcTo(
+                            scale(arcSegment.Size.Width),
+                            scale(arcSegment.Size.Height), 
+                            (float)arcSegment.RotationAngle, 
+                            arcSegment.IsLargeArc ? SKPathArcSize.Large : SKPathArcSize.Small,
+                            arcSegment.SweepDirection == XSweepDirection.Clockwise ? SKPathDirection.Clockwise : SKPathDirection.CounterClockwise,
+                            scale(arcSegment.Point.X + dx),
+                            scale(arcSegment.Point.Y + dy));
+
+                        previous = arcSegment.Point;
                     }
                     else if (segment is XCubicBezierSegment)
                     {
