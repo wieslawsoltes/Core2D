@@ -26,7 +26,7 @@ fi
 SCRIPT="build.cake"
 TARGET="Default"
 CONFIGURATION="Release"
-PLATFORM="AnuCPU"
+PLATFORM="AnyCPU"
 VERBOSITY="verbose"
 DRYRUN=
 SHOW_VERSION=false
