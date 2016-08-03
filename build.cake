@@ -11,6 +11,9 @@ var configuration = Argument("configuration", "Release");
 var msBuildSolution = "./Core2D.sln";
 var xBuildSolution = "./Core2D.mono.sln";
 
+var artifactsDir = (DirectoryPath)Directory("./artifacts");
+var testResultsDir = artifactsDir.Combine("test-results");
+
 var binSourceDirs = GetDirectories("./src/**/bin/" + platform + "/" + configuration);
 var objSourceDirs = GetDirectories("./src/**/obj/" + platform + "/" + configuration);
 var binTestsDirs = GetDirectories("./tests/**/bin/" + platform + "/" + configuration);
@@ -21,6 +24,8 @@ var objDependenciesDirs = GetDirectories("./dependencies/**/obj/" + platform + "
 Task("Clean")
     .Does(() =>
 {
+    CleanDirectory(artifactsDir);
+    CleanDirectory(testResultsDir);
     CleanDirectories(binSourceDirs);
     CleanDirectories(objSourceDirs);
     CleanDirectories(binTestsDirs);
@@ -93,13 +98,19 @@ Task("Run-Unit-Tests")
     if (platform == "x86")
     {
         XUnit2(pattern, new XUnit2Settings { 
-            ToolPath = "./tools/xunit.runner.console/tools/xunit.console.x86.exe" 
+            ToolPath = "./tools/xunit.runner.console/tools/xunit.console.x86.exe",
+            OutputDirectory = testResultsDir,
+            XmlReportV1 = true,
+            NoAppDomain = true
         });
     }
     else
     {
         XUnit2(pattern, new XUnit2Settings { 
-            ToolPath = "./tools/xunit.runner.console/tools/xunit.console.exe" 
+            ToolPath = "./tools/xunit.runner.console/tools/xunit.console.exe",
+            OutputDirectory = testResultsDir,
+            XmlReportV1 = true,
+            NoAppDomain = true
         });
     }
 });
