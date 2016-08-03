@@ -16,6 +16,7 @@ using Core2D.Renderer;
 using FileSystem.DotNetFx;
 using FileWriter.Dxf;
 using FileWriter.Emf;
+using FileWriter.Pdf_wpf;
 using FileWriter.Vdx;
 using Log.Trace;
 using Microsoft.Win32;
@@ -67,8 +68,7 @@ namespace Core2D.Wpf
                 ImmutableArray<IFileWriter> writers = 
                     new IFileWriter[] 
                     {
-                        new FileWriter.Pdf_wpf.PdfWriter(),
-                        new FileWriter.PdfSkiaSharp.PdfWriter(),
+                        new PdfWriter(),
                         new DxfWriter(),
                         new EmfWriter(),
                         new VdxWriter()
