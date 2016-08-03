@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>Core2D</id>
+    <version>0.0.0</version>
+    <authors>XamlBehaviors</authors>
+    <owners>wieslaw.soltes</owners>
+    <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
+    <projectUrl>https://github.com/Core2D/Core2D/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A multi-platform data driven 2D diagram editor.</description>
+    <releaseNotes>Initial alpha release.</releaseNotes>
+    <copyright>Copyright 2016</copyright>
+    <tags>Diagram Editor 2D Graphics Drawing Data Managed C#</tags>
+    <dependencies>
+      <dependency id="System.Collections.Immutable" version="1.2.0" />
+    </dependencies>
+  </metadata>
+</package>
