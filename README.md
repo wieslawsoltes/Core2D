@@ -36,6 +36,18 @@ The core library and editor are portable and should work on all platforms where 
 * [Visual Studio Community 2015](https://www.visualstudio.com/en-us/products/visual-studio-community-vs.aspx) for `Windows` builds.
 * [MonoDevelop](http://www.monodevelop.com/) for `Linux` builds.
 
+## NuGet
+
+Core2D core library is delivered as a NuGet package.
+
+You can find the packages here [NuGet](https://www.nuget.org/packages/Core2D/) or by using nightly build feed:
+* Add `https://www.myget.org/F/core2d-nightly/api/v2` to your package sources
+* Update your package using `Core2D` feed
+
+You can install the package like this:
+
+`Install-Package Core2D -Pre`
+
 ### NuGet Packages
 
 * Common
