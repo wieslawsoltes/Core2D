@@ -16,7 +16,7 @@
     <TargetFrameworkProfile>Profile7</TargetFrameworkProfile>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
-  <Import Project="..\..\Core2D.targets"/>
+  <Import Project="..\..\Core2D.targets" />
   <ItemGroup>
     <Compile Include="Converters\ArgbColorTypeConverter.cs" />
     <Compile Include="Converters\FontStyleTypeConverter.cs" />
@@ -33,19 +33,19 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Portable.Xaml, Version=0.13.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Portable.Xaml.0.13.0\lib\portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10\Portable.Xaml.dll</HintPath>
+    <ProjectReference Include="..\..\src\Core2D\Core2D.csproj">
+      <Project>{4ee581b0-45f3-4d7e-beae-277abf5f3fdd}</Project>
+      <Name>Core2D</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Portable.Xaml, Version=0.14.0.0, Culture=neutral, PublicKeyToken=ba4456acace7dab7, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Portable.Xaml.0.14.0\lib\portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10\Portable.Xaml.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\Core2D\Core2D.csproj">
-      <Project>{4ee581b0-45f3-4d7e-beae-277abf5f3fdd}</Project>
-      <Name>Core2D</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="..\..\src\Core2D.Shared\Core2D.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
