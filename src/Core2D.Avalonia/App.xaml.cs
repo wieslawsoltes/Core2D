@@ -168,7 +168,7 @@ namespace Core2D.Avalonia
             _log = log;
             _writers = writers;
 
-            _log.Initialize(System.IO.Path.Combine(_fileIO.GetAssemblyPath(null), _logFileName));
+            _log?.Initialize(System.IO.Path.Combine(_fileIO?.GetAssemblyPath(null), _logFileName));
 
             try
             {
