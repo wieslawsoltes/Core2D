@@ -4,11 +4,11 @@ using System.Collections.Immutable;
 using Android.App;
 using Android.Content.PM;
 using Android.OS;
-using A = Avalonia;
-using Avalonia.Android.Platform.Specific;
 using Core2D.Interfaces;
-//using Log.Trace;
-//using FileSystem.DotNetFx;
+using FileSystem.DotNetFx;
+using Log.Trace;
+using A = Avalonia;
+using AAPS = Avalonia.Android.Platform.Specific;
 
 namespace Core2D.Avalonia.Droid
 {
@@ -18,7 +18,7 @@ namespace Core2D.Avalonia.Droid
         Icon = "@drawable/icon",
         LaunchMode = LaunchMode.SingleInstance,
         ScreenOrientation = ScreenOrientation.Landscape)]
-    public class MainActivity : AvaloniaActivity
+    public class MainActivity : AAPS.AvaloniaActivity
     {
         public MainActivity()
             : base(typeof(App))
@@ -29,23 +29,17 @@ namespace Core2D.Avalonia.Droid
         {
             base.OnCreate(savedInstanceState);
 
-            //using (ILog log = new TraceLog())
-            //{
-                //IFileSystem fileIO = new DotNetFxFileSystem();
+            using (ILog log = new TraceLog())
+            {
+                IFileSystem fileIO = new DotNetFxFileSystem();
                 ImmutableArray<IFileWriter> writers =
                     new IFileWriter[]
                     {
                     }.ToImmutableArray();
 
-                App app;
-                if (A.Application.Current != null)
-                    app = (App)A.Application.Current;
-                else
-                    app = new App();
-
-                //app.Start(fileIO, log, writers);
-                app.Start(null, null, writers);
-            //}
+                var app = A.Application.Current as App ?? new App();
+                app.Start(fileIO, log, writers);
+            }
         }
     }
 }
