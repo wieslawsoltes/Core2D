@@ -25,10 +25,10 @@ Core2D is a multi-platform application for making data driven 2D diagrams.
 
 ## Supported Platforms
 
-* Windows 7/8/8.1/10 for `Core2D.Wpf`, `Core2D.Avalonia.Direct2D` and `Core2D.Avalonia.Skia` builds.
-* XUbuntu 16.04 for `Core2D.Avalonia.Skia` and `Core2D.Avalonia.Cairo` builds.
-* The `Android` support is planned using `Avalonia.Android`.
-* The `iOS` support is planned using `Avalonia.iOS`.
+* `Windows` 7/8/8.1/10 using `Core2D.Wpf`, `Core2D.Avalonia.Direct2D` and `Core2D.Avalonia.Skia` builds.
+* `XUbuntu` 16.04 using `Core2D.Avalonia.Skia` and `Core2D.Avalonia.Cairo` builds.
+* `Android` using `Core2D.Avalonia.Droid` build.
+* `iOS` support is planned using `Avalonia.iOS`.
 
 The core library and editor are portable and should work on all platforms where C# is supported.
 
