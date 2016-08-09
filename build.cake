@@ -36,7 +36,7 @@ var isRunningOnWindows = IsRunningOnWindows();
 var isRunningOnAppVeyor = BuildSystem.AppVeyor.IsRunningOnAppVeyor;
 var isPullRequest = BuildSystem.AppVeyor.Environment.PullRequest.IsPullRequest;
 var isMainRepo = StringComparer.OrdinalIgnoreCase.Equals("Core2D/Core2D", BuildSystem.AppVeyor.Environment.Repository.Name);
-var isMainBranch = StringComparer.OrdinalIgnoreCase.Equals("main", BuildSystem.AppVeyor.Environment.Repository.Branch);
+var isMasterBranch = StringComparer.OrdinalIgnoreCase.Equals("master", BuildSystem.AppVeyor.Environment.Repository.Branch);
 var isTagged = BuildSystem.AppVeyor.Environment.Repository.Tag.IsTag 
                && !string.IsNullOrWhiteSpace(BuildSystem.AppVeyor.Environment.Repository.Tag.Name);
 var isRelease = StringComparer.OrdinalIgnoreCase.Equals("AnyCPU", platform) 
@@ -164,7 +164,7 @@ Information("IsRunningOnWindows: " + isRunningOnWindows);
 Information("IsRunningOnAppVeyor: " + isRunningOnAppVeyor);
 Information("IsPullRequest: " + isPullRequest);
 Information("IsMainRepo: " + isMainRepo);
-Information("IsMainBranch: " + isMainBranch);
+Information("isMasterBranch: " + isMasterBranch);
 Information("IsTagged: " + isTagged);
 Information("IsRelease: " + isRelease);
 
@@ -345,7 +345,7 @@ Task("Publish-MyGet")
     .WithCriteria(() => !isLocalBuild)
     .WithCriteria(() => !isPullRequest)
     .WithCriteria(() => isMainRepo)
-    .WithCriteria(() => isMainBranch)
+    .WithCriteria(() => isMasterBranch)
     .WithCriteria(() => !isTagged)
     .WithCriteria(() => isRelease)
     .Does(() =>
@@ -380,7 +380,7 @@ Task("Publish-NuGet")
     .WithCriteria(() => !isLocalBuild)
     .WithCriteria(() => !isPullRequest)
     .WithCriteria(() => isMainRepo)
-    .WithCriteria(() => isMainBranch)
+    .WithCriteria(() => isMasterBranch)
     .WithCriteria(() => isTagged)
     .WithCriteria(() => isRelease)
     .Does(() =>
