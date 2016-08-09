@@ -1,24 +1,34 @@
+///////////////////////////////////////////////////////////////////////////////
 // ADDINS
+///////////////////////////////////////////////////////////////////////////////
 
 #addin "nuget:?package=Polly&version=4.2.0"
 
+///////////////////////////////////////////////////////////////////////////////
 // TOOLS
+///////////////////////////////////////////////////////////////////////////////
 
 #tool "nuget:?package=xunit.runner.console&version=2.1.0"
 
+///////////////////////////////////////////////////////////////////////////////
 // USINGS
+///////////////////////////////////////////////////////////////////////////////
 
 using System;
 using System.Linq;
 using Polly;
 
+///////////////////////////////////////////////////////////////////////////////
 // ARGUMENTS
+///////////////////////////////////////////////////////////////////////////////
 
 var target = Argument("target", "Default");
 var platform = Argument("platform", "AnyCPU");
 var configuration = Argument("configuration", "Release");
 
+///////////////////////////////////////////////////////////////////////////////
 // PARAMETERS
+///////////////////////////////////////////////////////////////////////////////
 
 var isLocalBuild = BuildSystem.IsLocalBuild;
 var isRunningOnUnix = IsRunningOnUnix();
@@ -32,7 +42,9 @@ var isTagged = BuildSystem.AppVeyor.Environment.Repository.Tag.IsTag
 var isRelease = StringComparer.OrdinalIgnoreCase.Equals("AnyCPU", platform) 
                 && StringComparer.OrdinalIgnoreCase.Equals("Release", configuration);
 
+///////////////////////////////////////////////////////////////////////////////
 // VERSION
+///////////////////////////////////////////////////////////////////////////////
 
 var version = ParseAssemblyInfo("./src/Core2D.Shared/SharedAssemblyInfo.cs").AssemblyVersion;
 
@@ -50,12 +62,16 @@ if (isRunningOnAppVeyor)
     }
 }
 
+///////////////////////////////////////////////////////////////////////////////
 // SOLUTIONS
+///////////////////////////////////////////////////////////////////////////////
 
 var msBuildSolution = "./Core2D.sln";
 var xBuildSolution = "./Core2D.mono.sln";
 
+///////////////////////////////////////////////////////////////////////////////
 // DIRECTORIES
+///////////////////////////////////////////////////////////////////////////////
 
 var artifactsDir = (DirectoryPath)Directory("./artifacts");
 var testResultsDir = artifactsDir.Combine("test-results");
@@ -71,7 +87,9 @@ var objTestsDirs = GetDirectories("./testssrc/**/obj/" + dirSuffix);
 var binDependenciesDirs = GetDirectories("./dependencies/**/bin/" + dirSuffix);
 var objDependenciesDirs = GetDirectories("./dependencies/**/obj/" + dirSuffix);
 
+///////////////////////////////////////////////////////////////////////////////
 // ZIP
+///////////////////////////////////////////////////////////////////////////////
 
 var zipSuffix = platform + "-" + configuration + "-" + version + ".zip";
 
@@ -87,7 +105,9 @@ var zipTarget_Skia = zipRoot.CombineWithFilePath("Core2D.Avalonia.Skia-" + zipSu
 var zipSource_Wpf = (DirectoryPath)Directory("./src/Core2D.Wpf/bin/" + dirSuffix);
 var zipTarget_Wpf = zipRoot.CombineWithFilePath("Core2D.Wpf-" + zipSuffix);
 
+///////////////////////////////////////////////////////////////////////////////
 // NUSPECS
+///////////////////////////////////////////////////////////////////////////////
 
 var nuspecSettings_Core2D = new NuGetPackSettings()
 {
@@ -122,7 +142,35 @@ var nugetPackages = nuspecSettings.Select(nuspec => {
         return nugetRoot.CombineWithFilePath(string.Concat(nuspec.Id, ".", version, ".nupkg"));
     }).ToArray();
 
+
+///////////////////////////////////////////////////////////////////////////////
+// INFORMATION
+///////////////////////////////////////////////////////////////////////////////
+
+Information("Building version {0} of Core2D ({1}, {2}, {3}) using version {4} of Cake.", 
+    version,
+    platform,
+    configuration,
+    target,
+    typeof(ICakeContext).Assembly.GetName().Version.ToString());
+Information("Repository Name: " + BuildSystem.AppVeyor.Environment.Repository.Name);
+Information("Repository Branch: " + BuildSystem.AppVeyor.Environment.Repository.Branch);
+Information("Target: " + target);
+Information("Platform: " + platform);
+Information("Configuration: " + configuration);
+Information("IsLocalBuild: " + isLocalBuild);
+Information("IsRunningOnUnix: " + isRunningOnUnix);
+Information("IsRunningOnWindows: " + isRunningOnWindows);
+Information("IsRunningOnAppVeyor: " + isRunningOnAppVeyor);
+Information("IsPullRequest: " + isPullRequest);
+Information("IsMainRepo: " + isMainRepo);
+Information("IsMainBranch: " + isMainBranch);
+Information("IsTagged: " + isTagged);
+Information("IsRelease: " + isRelease);
+
+///////////////////////////////////////////////////////////////////////////////
 // TASKS
+///////////////////////////////////////////////////////////////////////////////
 
 Task("Clean")
     .Does(() =>
@@ -362,7 +410,9 @@ Task("Publish-NuGet")
     Information("Publish-NuGet Task failed, but continuing with next Task...");
 });
 
+///////////////////////////////////////////////////////////////////////////////
 // TARGETS
+///////////////////////////////////////////////////////////////////////////////
 
 Task("Package")
   .IsDependentOn("Zip-Files")
@@ -379,6 +429,8 @@ Task("AppVeyor")
 Task("Travis")
   .IsDependentOn("Run-Unit-Tests");
 
+///////////////////////////////////////////////////////////////////////////////
 // EXECUTE
+///////////////////////////////////////////////////////////////////////////////
 
 RunTarget(target);
