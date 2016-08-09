@@ -139,9 +139,8 @@ var nuspecSettings = new []
 };
 
 var nugetPackages = nuspecSettings.Select(nuspec => {
-        return nugetRoot.CombineWithFilePath(string.Concat(nuspec.Id, ".", version, ".nupkg"));
+        return nuspec.OutputDirectory.CombineWithFilePath(string.Concat(nuspec.Id, ".", version, ".nupkg"));
     }).ToArray();
-
 
 ///////////////////////////////////////////////////////////////////////////////
 // INFORMATION
