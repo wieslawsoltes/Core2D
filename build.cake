@@ -164,7 +164,7 @@ Information("IsRunningOnWindows: " + isRunningOnWindows);
 Information("IsRunningOnAppVeyor: " + isRunningOnAppVeyor);
 Information("IsPullRequest: " + isPullRequest);
 Information("IsMainRepo: " + isMainRepo);
-Information("isMasterBranch: " + isMasterBranch);
+Information("IsMasterBranch: " + isMasterBranch);
 Information("IsTagged: " + isTagged);
 Information("IsRelease: " + isRelease);
 
