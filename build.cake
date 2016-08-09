@@ -46,7 +46,7 @@ if (isRunningOnAppVeyor)
     else
     {
         // Use AssemblyVersion with AppVeyor Build as version
-        version += "-build" + EnvironmentVariable("APPVEYOR_BUILD_VERSION") + "-alpha";
+        version += "-build" + EnvironmentVariable("APPVEYOR_BUILD_NUMBER") + "-alpha";
     }
 }
 
