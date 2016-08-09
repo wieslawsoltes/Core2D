@@ -286,12 +286,9 @@ Task("Upload-AppVeyor-Artifacts")
         AppVeyor.UploadArtifact(package);
     }
 
-    if (isRelease)
+    foreach(var package in GetFiles(nugetRoot + "/*"))
     {
-        foreach(var package in GetFiles(nugetRoot + "/*"))
-        {
-            AppVeyor.UploadArtifact(package);
-        }
+        AppVeyor.UploadArtifact(package);
     }
 });
 
