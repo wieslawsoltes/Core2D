@@ -1,5 +1,3 @@
-version: 0.1.0.{build}
-skip_tags: true
 os: Visual Studio 2015
 platform:
 - AnyCPU
@@ -7,6 +5,13 @@ platform:
 - x64
 configuration:
 - Release
+environment:
+  NUGET_API_KEY:
+    secure: iSkm19DNdKOLxxCvHiaKikWXy25ZMwGBKpv+EgEprliGl0qX5HtKohLmwJsLnx5O
+  NUGET_API_URL: https://www.nuget.org/api/v2/package
+  MYGET_API_KEY:
+    secure: xhYvrWYPHdNI+mQD+f4Zu3baL7fqW+nO/hYXJdN070Lej8wpa6gfrLi1NGtnQlAs
+  MYGET_API_URL: https://www.myget.org/F/core2d-nightly/api/v2
 before_build:
 - cmd: git submodule update --init
 build_script:
