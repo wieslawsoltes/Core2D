@@ -245,18 +245,18 @@ Task("Build")
 {
     if(isRunningOnWindows)
     {
-	    MSBuild(msBuildSolution, settings => {
-	        settings.SetConfiguration(configuration);
-	        settings.WithProperty("Platform", platform);
-	        settings.SetVerbosity(Verbosity.Minimal);
+        MSBuild(msBuildSolution, settings => {
+        settings.SetConfiguration(configuration);
+            settings.WithProperty("Platform", platform);
+            settings.SetVerbosity(Verbosity.Minimal);
         });
     }
     else
     {
-	    XBuild(xBuildSolution, settings => {
-	        settings.SetConfiguration(configuration);
-	        settings.WithProperty("Platform", platform);
-	        settings.SetVerbosity(Verbosity.Minimal);
+        XBuild(xBuildSolution, settings => {
+            settings.SetConfiguration(configuration);
+            settings.WithProperty("Platform", platform);
+            settings.SetVerbosity(Verbosity.Minimal);
         });
     }
 });
