@@ -619,23 +619,18 @@ var nuspecSettingsDependenciesSkia = new []
     }
 };
 
-var nuspecs = new List<NuGetPackSettings>();
+var nuspecSettings = new List<NuGetPackSettings>();
 
-nuspecs.AddRange(nuspecSettingsCore);
-nuspecs.AddRange(nuspecSettingsDependencies);
-nuspecs.AddRange(nuspecSettingsDependenciesModules);
+nuspecSettings.AddRange(nuspecSettingsCore);
+nuspecSettings.AddRange(nuspecSettingsDependencies);
+nuspecSettings.AddRange(nuspecSettingsDependenciesModules);
 
 if (isSkiaSharpAvailable)
 {
-    nuspecs.AddRange(nuspecSettingsDependenciesSkia);
+    nuspecSettings.AddRange(nuspecSettingsDependenciesSkia);
 }
 
-var nuspecSettings = nuspecs.ToArray();
-
-foreach(var nuspec in nuspecSettings)
-{
-    SetNuspecCommonProperties(nuspec);
-}
+nuspecSettings.ForEach((nuspec) => SetNuspecCommonProperties(nuspec));
 
 var nugetPackages = nuspecSettings.Select(nuspec => {
         return nuspec.OutputDirectory.CombineWithFilePath(string.Concat(nuspec.Id, ".", version, ".nupkg"));
