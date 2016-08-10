@@ -83,8 +83,8 @@ var zipRoot = artifactsDir.Combine("zip");
 var dirSuffix = platform + "/" + configuration;
 var dirSuffixSkia = (isAnyCPU ? "x86" : platform) + "/" + configuration;
 
-Func<IFileSystemInfo, bool> excludeSkia = i => !i.Path.FullPath.Contains("Skia", StringComparison.OrdinalIgnoreCase);
-Func<IFileSystemInfo, bool> includeSkia = i => i.Path.FullPath.Contains("Skia", StringComparison.OrdinalIgnoreCase);
+Func<IFileSystemInfo, bool> excludeSkia = i => !(i.Path.FullPath.IndexOf("Skia", StringComparison.OrdinalIgnoreCase) >= 0);
+Func<IFileSystemInfo, bool> includeSkia = i => i.Path.FullPath.IndexOf("Skia", StringComparison.OrdinalIgnoreCase) >= 0;
 
 var binSourceDirs = GetDirectories("./src/**/bin/" + dirSuffix, excludeSkia) +
                     GetDirectories("./src/**/bin/" + dirSuffixSkia, includeSkia);
