@@ -619,16 +619,18 @@ var nuspecSettingsDependenciesSkia = new []
     }
 };
 
-var nuspecSettings = new List<NuGetPackSettings>();
+var nuspecs = new List<NuGetPackSettings>();
 
-nuspecSettings.AddRange(nuspecSettingsCore);
-nuspecSettings.AddRange(nuspecSettingsDependencies);
-nuspecSettings.AddRange(nuspecSettingsDependenciesModules);
+nuspecs.AddRange(nuspecSettingsCore);
+nuspecs.AddRange(nuspecSettingsDependencies);
+nuspecs.AddRange(nuspecSettingsDependenciesModules);
 
 if (isSkiaSharpAvailable)
 {
-    nuspecSettings.AddRange(nuspecSettingsDependenciesSkia);
+    nuspecs.AddRange(nuspecSettingsDependenciesSkia);
 }
+
+var nuspecSettings = nuspecs.ToArray();
 
 foreach(var nuspec in nuspecSettings)
 {
