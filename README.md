@@ -34,8 +34,32 @@ The core library and editor are portable and should work on all platforms where 
 
 ## Building Core2D
 
+First, clone the repository or download the latest zip.
+```
+git clone https://github.com/Core2D/Core2D.git
+git submodule update --init --recursive
+```
+
+### Build using IDE
+
 * [Visual Studio Community 2015](https://www.visualstudio.com/en-us/products/visual-studio-community-vs.aspx) for `Windows` builds.
 * [MonoDevelop](http://www.monodevelop.com/) for `Linux` builds.
+
+Open `Core2D.sln` in selected IDE and run `Build` command.
+
+### Build on Windows using script
+
+Open up a Powershell prompt and execute the bootstrapper script:
+```PowerShell
+PS> .\build.ps1 -Target "Default" -Platform "AnyCPU" -Configuration "Release"
+```
+
+### Build on Linux/OSX using script
+
+Open up a terminal prompt and execute the bootstrapper script:
+```Bash
+$ ./build.sh --target "Default" --platform "AnyCPU" --configuration "Release"
+```
 
 ## NuGet
 
