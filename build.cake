@@ -95,7 +95,7 @@ var binDependenciesDirs = GetDirectories("./dependencies/**/bin/" + dirSuffix, e
 var objDependenciesDirs = GetDirectories("./dependencies/**/obj/" + dirSuffix, excludeSkia) + 
                           GetDirectories("./dependencies/**/obj/" + dirSuffixSkia, includeSkia);
 var binTestsDirs = GetDirectories("./tests/**/bin/" + dirSuffix, excludeSkia) + 
-                   GetDirectories("./tests/**/bin/" + dirSuffixSkia, includeSkia)
+                   GetDirectories("./tests/**/bin/" + dirSuffixSkia, includeSkia);
 var objTestsDirs = GetDirectories("./testssrc/**/obj/" + dirSuffix, excludeSkia) + 
                    GetDirectories("./testssrc/**/obj/" + dirSuffixSkia, includeSkia);
 
