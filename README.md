@@ -1,9 +1,17 @@
 # Core2D
 
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Core2D/Core2D?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+
 [![Build status](https://ci.appveyor.com/api/projects/status/7k1e0voeit7od9bw/branch/master?svg=true)](https://ci.appveyor.com/project/wieslawsoltes/core2d/branch/master)
 [![Build Status](https://travis-ci.org/Core2D/Core2D.svg?branch=master)](https://travis-ci.org/Core2D/Core2D)
 [![Build Status](https://www.bitrise.io/app/0eddf30a82243ed8.svg?token=IEGVKM7S6KBI3HdecpD8Cg&branch=master)](https://www.bitrise.io/app/0eddf30a82243ed8)
+
+[![NuGet](https://img.shields.io/nuget/v/Core2D.svg)](https://www.nuget.org/packages/Core2D) [![MyGet](https://img.shields.io/myget/core2d-nightly/v/Core2D.svg?label=myget)](https://www.myget.org/gallery/core2d-nightly) 
+
+[![Chocolatey](https://img.shields.io/chocolatey/v/Core2D.Avalonia.Cairo.svg)](https://chocolatey.org/packages/Core2D.Avalonia.Cairo)
+[![Chocolatey](https://img.shields.io/chocolatey/v/Core2D.Avalonia.Direct2D.svg)](https://chocolatey.org/packages/Core2D.Avalonia.Direct2D)
+[![Chocolatey](https://img.shields.io/chocolatey/v/Core2D.Avalonia.Skia.svg)](https://chocolatey.org/packages/Core2D.Avalonia.Skia)
+[![Chocolatey](https://img.shields.io/chocolatey/v/Core2D.Wpf.svg)](https://chocolatey.org/packages/Core2D.Wpf)
 
 A multi-platform data driven 2D diagram editor.
 
