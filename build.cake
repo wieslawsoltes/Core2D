@@ -681,60 +681,57 @@ Func<DirectoryPath, ChocolateyNuSpecContent[]> GetChocolateyNuSpecContent = path
     return files.Select(file => new ChocolateyNuSpecContent { Source = file.FullPath, Target = "bin" }).ToArray();
 };
 
-var nuspecChocolateySettings = new Dictionary<ChocolateyPackSettings, DirectoryPath>()
-{
-    ///////////////////////////////////////////////////////////////////////////////
-    // src: Core2D.Avalonia.Cairo
-    ///////////////////////////////////////////////////////////////////////////////
-    {
-        new ChocolateyPackSettings
-        {
-            Id = "Core2D.Avalonia.Cairo",
-            Title = "Core2D (Avalonia/Cairo)",
-            OutputDirectory = chocolateyRoot.Combine("Core2D.Avalonia.Cairo")
-        },
-        zipSource_Cairo
-    },
-    ///////////////////////////////////////////////////////////////////////////////
-    // src: Core2D.Avalonia.Direct2D
-    ///////////////////////////////////////////////////////////////////////////////
-    {
-        new ChocolateyPackSettings
-        {
-            Id = "Core2D.Avalonia.Direct2D",
-            Title = "Core2D (Avalonia/Direct2D)",
-            OutputDirectory = chocolateyRoot.Combine("Core2D.Avalonia.Direct2D")
-        },
-        zipSource_Direct2D
-    },
-    ///////////////////////////////////////////////////////////////////////////////
-    // src: Core2D.Avalonia.Skia
-    ///////////////////////////////////////////////////////////////////////////////
-    {
-        new ChocolateyPackSettings
-        {
-            Id = "Core2D.Avalonia.Skia",
-            Title = "Core2D (Avalonia/Skia)",
-            OutputDirectory = chocolateyRoot.Combine("Core2D.Avalonia.Skia")
-        },
-        zipSource_Skia
-    },
-    ///////////////////////////////////////////////////////////////////////////////
-    // src: Core2D.Wpf
-    ///////////////////////////////////////////////////////////////////////////////
-    {
-        new ChocolateyPackSettings
-        {
-            Id = "Core2D.Wpf",
-            Title = "Core2D (WPF)",
-            OutputDirectory = chocolateyRoot.Combine("Core2D.Wpf")
-        },
-        zipSource_Wpf
-    }
-}
-.ToList();
+var nuspecChocolateySettings = new Dictionary<ChocolateyPackSettings, DirectoryPath>();
 
-nuspecChocolateySettings.ForEach((nuspec) => SetChocolateyNuspecCommonProperties(nuspec.Key));
+///////////////////////////////////////////////////////////////////////////////
+// src: Core2D.Avalonia.Cairo
+///////////////////////////////////////////////////////////////////////////////
+nuspecChocolateySettings.Add(
+    new ChocolateyPackSettings
+    {
+        Id = "Core2D.Avalonia.Cairo",
+        Title = "Core2D (Avalonia/Cairo)",
+        OutputDirectory = chocolateyRoot.Combine("Core2D.Avalonia.Cairo")
+    },
+    zipSource_Cairo);
+
+///////////////////////////////////////////////////////////////////////////////
+// src: Core2D.Avalonia.Direct2D
+///////////////////////////////////////////////////////////////////////////////
+nuspecChocolateySettings.Add(
+    new ChocolateyPackSettings
+    {
+        Id = "Core2D.Avalonia.Direct2D",
+        Title = "Core2D (Avalonia/Direct2D)",
+        OutputDirectory = chocolateyRoot.Combine("Core2D.Avalonia.Direct2D")
+    },
+    zipSource_Direct2D);
+
+///////////////////////////////////////////////////////////////////////////////
+// src: Core2D.Avalonia.Skia
+///////////////////////////////////////////////////////////////////////////////
+nuspecChocolateySettings.Add(
+    new ChocolateyPackSettings
+    {
+        Id = "Core2D.Avalonia.Skia",
+        Title = "Core2D (Avalonia/Skia)",
+        OutputDirectory = chocolateyRoot.Combine("Core2D.Avalonia.Skia")
+    },
+    zipSource_Skia);
+
+///////////////////////////////////////////////////////////////////////////////
+// src: Core2D.Wpf
+///////////////////////////////////////////////////////////////////////////////
+nuspecChocolateySettings.Add(
+    new ChocolateyPackSettings
+    {
+        Id = "Core2D.Wpf",
+        Title = "Core2D (WPF)",
+        OutputDirectory = chocolateyRoot.Combine("Core2D.Wpf")
+    },
+    zipSource_Wpf);
+
+nuspecChocolateySettings.ToList().ForEach((nuspec) => SetChocolateyNuspecCommonProperties(nuspec.Key));
 
 var chocolateyPackages = nuspecChocolateySettings.Select(nuspec => {
     return nuspec.Key.OutputDirectory.CombineWithFilePath(string.Concat(nuspec.Key.Id, ".", nuspec.Key.Version, ".nupkg"));
