@@ -41,7 +41,7 @@ var isTagged = BuildSystem.AppVeyor.Environment.Repository.Tag.IsTag
                && !string.IsNullOrWhiteSpace(BuildSystem.AppVeyor.Environment.Repository.Tag.Name);
 var isRelease = StringComparer.OrdinalIgnoreCase.Equals("AnyCPU", platform) 
                 && StringComparer.OrdinalIgnoreCase.Equals("Release", configuration);
-var isSkiaSharpAvailable = StringComparer.OrdinalIgnoreCase.Equals(platform, "AnyCPU");
+var isSkiaSharpAvailable = !StringComparer.OrdinalIgnoreCase.Equals(platform, "AnyCPU");
 
 ///////////////////////////////////////////////////////////////////////////////
 // VERSION
