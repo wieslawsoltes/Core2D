@@ -80,6 +80,7 @@ var xBuildSolution = "./Core2D.mono.sln";
 var artifactsDir = (DirectoryPath)Directory("./artifacts");
 var testResultsDir = artifactsDir.Combine("test-results");
 var nugetRoot = artifactsDir.Combine("nuget");
+var chocolateyRoot = artifactsDir.Combine("chocolatey");
 var zipRoot = artifactsDir.Combine("zip");
 
 var dirSuffix = platform + "/" + configuration;
@@ -89,7 +90,7 @@ Func<IFileSystemInfo, bool> ExcludeSkia = i => {
     return !(i.Path.FullPath.IndexOf("Skia", StringComparison.OrdinalIgnoreCase) >= 0);
 };
 
-Func<string,  DirectoryPathCollection> GetSkiaDirectories = pattern =>{
+Func<string, DirectoryPathCollection> GetSkiaDirectories = pattern => {
     return GetDirectories(pattern) - GetDirectories(pattern, ExcludeSkia);
 };
 
@@ -127,7 +128,7 @@ var zipSource_Wpf = (DirectoryPath)Directory("./src/Core2D.Wpf/bin/" + dirSuffix
 var zipTarget_Wpf = zipRoot.CombineWithFilePath("Core2D.Wpf-" + zipSuffix);
 
 ///////////////////////////////////////////////////////////////////////////////
-// NUSPECS
+// NUGET NUSPECS
 ///////////////////////////////////////////////////////////////////////////////
 
 var SystemCollectionsImmutableVersion = "1.2.0";
@@ -139,7 +140,7 @@ var AvaloniaXamlBehaviorsVersion = "0.4.1-build245-alpha";
 var AvaloniaControlsPanAndZoomVersion = "0.4.1-build33-alpha";
 var SkiaSharpVersion = "1.53.0";
 
-var SetNuspecCommonProperties = new Action<NuGetPackSettings> ((nuspec) => {
+var SetNuGetNuspecCommonProperties = new Action<NuGetPackSettings> ((nuspec) => {
     nuspec.Version = version;
     nuspec.Authors = new [] { "wieslaw.soltes" };
     nuspec.Owners = new [] { "wieslaw.soltes" };
@@ -150,10 +151,10 @@ var SetNuspecCommonProperties = new Action<NuGetPackSettings> ((nuspec) => {
     nuspec.NoPackageAnalysis = true;
     nuspec.Description = "A multi-platform data driven 2D diagram editor.";
     nuspec.Copyright = "Copyright 2016";
-    nuspec.Tags = new [] { "Diagram", "Editor", "2D", "Graphics", "Drawing", "Data", "Managed", "C#" };
+    nuspec.Tags = new [] { "Core2D", "Diagram", "Editor", "2D", "Graphics", "Drawing", "Data", "Managed", "C#" };
 });
 
-var nuspecSettingsCore = new []
+var nuspecNuGetSettingsCore = new []
 {
     ///////////////////////////////////////////////////////////////////////////////
     // src: Core2D
@@ -200,7 +201,7 @@ var nuspecSettingsCore = new []
     }
 };
 
-var nuspecSettingsDependencies = new []
+var nuspecNuGetSettingsDependencies = new []
 {
     ///////////////////////////////////////////////////////////////////////////////
     // dependencies: FileSystem.DotNetFx
@@ -542,7 +543,7 @@ var nuspecSettingsDependencies = new []
     }
 };
 
-var nuspecSettingsDependenciesModules = new []
+var nuspecNuGetSettingsDependenciesModules = new []
 {
     ///////////////////////////////////////////////////////////////////////////////
     // dependencies: PdfSharpCore
@@ -598,7 +599,7 @@ var nuspecSettingsDependenciesModules = new []
     }
 };
 
-var nuspecSettingsDependenciesSkia = new []
+var nuspecNuGetSettingsDependenciesSkia = new []
 {
     ///////////////////////////////////////////////////////////////////////////////
     // dependencies: FileWriter.PdfSkiaSharp
@@ -640,20 +641,106 @@ var nuspecSettingsDependenciesSkia = new []
     }
 };
 
-var nuspecSettings = new List<NuGetPackSettings>();
+var nuspecNuGetSettings = new List<NuGetPackSettings>();
 
-nuspecSettings.AddRange(nuspecSettingsCore);
-nuspecSettings.AddRange(nuspecSettingsDependencies);
-nuspecSettings.AddRange(nuspecSettingsDependenciesModules);
-nuspecSettings.AddRange(nuspecSettingsDependenciesSkia);
+nuspecNuGetSettings.AddRange(nuspecNuGetSettingsCore);
+nuspecNuGetSettings.AddRange(nuspecNuGetSettingsDependencies);
+nuspecNuGetSettings.AddRange(nuspecNuGetSettingsDependenciesModules);
+nuspecNuGetSettings.AddRange(nuspecNuGetSettingsDependenciesSkia);
 
-nuspecSettings.ForEach((nuspec) => SetNuspecCommonProperties(nuspec));
+nuspecNuGetSettings.ForEach((nuspec) => SetNuGetNuspecCommonProperties(nuspec));
 
-var nugetPackages = nuspecSettings.Select(nuspec => {
-        return nuspec.OutputDirectory.CombineWithFilePath(string.Concat(nuspec.Id, ".", version, ".nupkg"));
-    }).ToArray();
+var nugetPackages = nuspecNuGetSettings.Select(nuspec => {
+    return nuspec.OutputDirectory.CombineWithFilePath(string.Concat(nuspec.Id, ".", nuspec.Version, ".nupkg"));
+}).ToArray();
 
-var nupkgDirs = nuspecSettings.Select(nuspec => nuspec.OutputDirectory);
+var nupkgNuGetDirs = nuspecNuGetSettings.Select(nuspec => nuspec.OutputDirectory);
+
+///////////////////////////////////////////////////////////////////////////////
+// CHOCOLATEY NUSPECS
+///////////////////////////////////////////////////////////////////////////////
+
+var SetChocolateyNuspecCommonProperties = new Action<ChocolateyPackSettings> ((nuspec) => {
+    nuspec.Version = version;
+    nuspec.Authors = new [] { "wieslaw.soltes" };
+    nuspec.Owners = new [] { "wieslaw.soltes" };
+    nuspec.LicenseUrl = new Uri("http://opensource.org/licenses/MIT");
+    nuspec.ProjectUrl = new Uri("https://github.com/Core2D/Core2D/");
+    nuspec.PackageSourceUrl = new Uri("https://github.com/Core2D/Core2D/");
+    nuspec.ProjectSourceUrl = new Uri("https://github.com/Core2D/Core2D/");
+    nuspec.BugTrackerUrl = new Uri("https://github.com/Core2D/Core2D/issues/");
+    nuspec.DocsUrl = new Uri("http://core2d.github.io/");
+    nuspec.RequireLicenseAcceptance = false;
+    nuspec.Description = "A multi-platform data driven 2D diagram editor.";
+    nuspec.Copyright = "Copyright 2016";
+    nuspec.Tags = new [] { "Core2D", "Diagram", "Editor", "2D", "Graphics", "Drawing", "Data" };
+});
+
+Func<DirectoryPath, ChocolateyNuSpecContent[]> GetChocolateyNuSpecContent = path => {
+    var files = GetFiles(path.FullPath + "/*.dll") + GetFiles(path.FullPath + "/*.exe");
+    return files.Select(file => new ChocolateyNuSpecContent { Source = file.FullPath, Target = "bin" }).ToArray();
+};
+
+var nuspecChocolateySettings = new Dictionary<ChocolateyPackSettings, DirectoryPath>()
+{
+    ///////////////////////////////////////////////////////////////////////////////
+    // src: Core2D.Avalonia.Cairo
+    ///////////////////////////////////////////////////////////////////////////////
+    {
+        new ChocolateyPackSettings
+        {
+            Id = "Core2D.Avalonia.Cairo",
+            Title = "Core2D (Avalonia/Cairo)",
+            OutputDirectory = chocolateyRoot.Combine("Core2D.Avalonia.Cairo")
+        },
+        zipSource_Cairo
+    },
+    ///////////////////////////////////////////////////////////////////////////////
+    // src: Core2D.Avalonia.Direct2D
+    ///////////////////////////////////////////////////////////////////////////////
+    {
+        new ChocolateyPackSettings
+        {
+            Id = "Core2D.Avalonia.Direct2D",
+            Title = "Core2D (Avalonia/Direct2D)",
+            OutputDirectory = chocolateyRoot.Combine("Core2D.Avalonia.Direct2D")
+        },
+        zipSource_Direct2D
+    },
+    ///////////////////////////////////////////////////////////////////////////////
+    // src: Core2D.Avalonia.Skia
+    ///////////////////////////////////////////////////////////////////////////////
+    {
+        new ChocolateyPackSettings
+        {
+            Id = "Core2D.Avalonia.Skia",
+            Title = "Core2D (Avalonia/Skia)",
+            OutputDirectory = chocolateyRoot.Combine("Core2D.Avalonia.Skia")
+        },
+        zipSource_Skia
+    },
+    ///////////////////////////////////////////////////////////////////////////////
+    // src: Core2D.Wpf
+    ///////////////////////////////////////////////////////////////////////////////
+    {
+        new ChocolateyPackSettings
+        {
+            Id = "Core2D.Wpf",
+            Title = "Core2D (WPF)",
+            OutputDirectory = chocolateyRoot.Combine("Core2D.Wpf")
+        },
+        zipSource_Wpf
+    }
+}
+.ToList();
+
+nuspecChocolateySettings.ForEach((nuspec) => SetChocolateyNuspecCommonProperties(nuspec.Key));
+
+var chocolateyPackages = nuspecChocolateySettings.Select(nuspec => {
+    return nuspec.Key.OutputDirectory.CombineWithFilePath(string.Concat(nuspec.Key.Id, ".", nuspec.Key.Version, ".nupkg"));
+}).ToArray();
+
+var nupkgChocolateyDirs = nuspecChocolateySettings.Select(nuspec => nuspec.Key.OutputDirectory);
 
 ///////////////////////////////////////////////////////////////////////////////
 // INFORMATION
@@ -699,7 +786,9 @@ Task("Clean")
     CleanDirectory(testResultsDir);
     CleanDirectory(zipRoot);
     CleanDirectory(nugetRoot);
-    CleanDirectories(nupkgDirs);
+    CleanDirectories(nupkgNuGetDirs);
+    CleanDirectory(chocolateyRoot);
+    CleanDirectories(nupkgChocolateyDirs);
 });
 
 Task("Restore-NuGet-Packages")
@@ -815,15 +904,28 @@ Task("Create-NuGet-Packages")
     .IsDependentOn("Run-Unit-Tests")
     .Does(() =>
 {
-    foreach(var nuspec in nuspecSettings)
+    foreach(var nuspec in nuspecNuGetSettings)
     {
         NuGetPack(nuspec);
+    }
+});
+
+Task("Create-Chocolatey-Packages")
+    .IsDependentOn("Run-Unit-Tests")
+    .WithCriteria(() => isRunningOnWindows)
+    .Does(() =>
+{
+    foreach(var nuspec in nuspecChocolateySettings)
+    {
+        nuspec.Key.Files = GetChocolateyNuSpecContent(nuspec.Value);
+        ChocolateyPack(nuspec.Key);
     }
 });
 
 Task("Upload-AppVeyor-Artifacts")
     .IsDependentOn("Zip-Files")
     .IsDependentOn("Create-NuGet-Packages")
+    .IsDependentOn("Create-Chocolatey-Packages")
     .WithCriteria(() => isRunningOnAppVeyor)
     .Does(() =>
 {
@@ -833,6 +935,11 @@ Task("Upload-AppVeyor-Artifacts")
     }
 
     foreach(var nupkg in nugetPackages)
+    {
+        AppVeyor.UploadArtifact(nupkg.FullPath);
+    }
+
+    foreach(var nupkg in chocolateyPackages)
     {
         AppVeyor.UploadArtifact(nupkg.FullPath);
     }
@@ -906,13 +1013,48 @@ Task("Publish-NuGet")
     Information("Publish-NuGet Task failed, but continuing with next Task...");
 });
 
+Task("Publish-Chocolatey")
+    .IsDependentOn("Create-Chocolatey-Packages")
+    .WithCriteria(() => !isLocalBuild)
+    .WithCriteria(() => !isPullRequest)
+    .WithCriteria(() => isMainRepo)
+    .WithCriteria(() => isMasterBranch)
+    .WithCriteria(() => isNuGetRelease)
+    .Does(() =>
+{
+    var apiKey = EnvironmentVariable("CHOCOLATEY_API_KEY");
+    if(string.IsNullOrEmpty(apiKey)) 
+    {
+        throw new InvalidOperationException("Could not resolve Chocolatey API key.");
+    }
+
+    var apiUrl = EnvironmentVariable("CHOCOLATEY_API_URL");
+    if(string.IsNullOrEmpty(apiUrl)) 
+    {
+        throw new InvalidOperationException("Could not resolve Chocolatey API url.");
+    }
+
+    foreach(var nupkg in chocolateyPackages)
+    {
+        ChocolateyPush(nupkg, new ChocolateyPushSettings {
+            ApiKey = apiKey,
+            Source = apiUrl
+        });
+    }
+})
+.OnError(exception =>
+{
+    Information("Publish-Chocolatey Task failed, but continuing with next Task...");
+});
+
 ///////////////////////////////////////////////////////////////////////////////
 // TARGETS
 ///////////////////////////////////////////////////////////////////////////////
 
 Task("Package")
   .IsDependentOn("Zip-Files")
-  .IsDependentOn("Create-NuGet-Packages");
+  .IsDependentOn("Create-NuGet-Packages")
+  .IsDependentOn("Create-Chocolatey-Packages");
 
 Task("Default")
   .IsDependentOn("Package");
@@ -920,7 +1062,8 @@ Task("Default")
 Task("AppVeyor")
   .IsDependentOn("Upload-AppVeyor-Artifacts")
   .IsDependentOn("Publish-MyGet")
-  .IsDependentOn("Publish-NuGet");
+  .IsDependentOn("Publish-NuGet")
+  .IsDependentOn("Publish-Chocolatey");
 
 Task("Travis")
   .IsDependentOn("Run-Unit-Tests");
