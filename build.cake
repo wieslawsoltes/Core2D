@@ -41,6 +41,7 @@ var isTagged = BuildSystem.AppVeyor.Environment.Repository.Tag.IsTag
                && !string.IsNullOrWhiteSpace(BuildSystem.AppVeyor.Environment.Repository.Tag.Name);
 var isRelease = StringComparer.OrdinalIgnoreCase.Equals("AnyCPU", platform) 
                 && StringComparer.OrdinalIgnoreCase.Equals("Release", configuration);
+var isSkiaSharpAvailable = StringComparer.OrdinalIgnoreCase.Equals(platform, "AnyCPU");
 
 ///////////////////////////////////////////////////////////////////////////////
 // VERSION
@@ -130,7 +131,7 @@ var SetNuspecCommonProperties = new Action<NuGetPackSettings> ((nuspec) => {
     nuspec.Tags = new [] { "Diagram", "Editor", "2D", "Graphics", "Drawing", "Data", "Managed", "C#" };
 });
 
-var nuspecSettings = new []
+var nuspecSettingsCore = new []
 {
     ///////////////////////////////////////////////////////////////////////////////
     // src: Core2D
@@ -174,7 +175,11 @@ var nuspecSettings = new []
         },
         BasePath = Directory("./src/Core2D.Avalonia/bin/" + dirSuffix),
         OutputDirectory = nugetRoot.Combine("Core2D.Avalonia")
-    },
+    }
+};
+
+var nuspecSettingsDependencies = new []
+{
     ///////////////////////////////////////////////////////////////////////////////
     // dependencies: FileSystem.DotNetFx
     ///////////////////////////////////////////////////////////////////////////////
@@ -269,25 +274,6 @@ var nuspecSettings = new []
         OutputDirectory = nugetRoot.Combine("Core2D.FileWriter.PdfWpf")
     },
     ///////////////////////////////////////////////////////////////////////////////
-    // dependencies: FileWriter.PdfSkiaSharp
-    ///////////////////////////////////////////////////////////////////////////////
-    new NuGetPackSettings()
-    {
-        Id = "Core2D.FileWriter.PdfSkiaSharp",
-        Dependencies = new []
-        {
-            new NuSpecDependency() { Id = "System.Collections.Immutable", Version = SystemCollectionsImmutableVersion },
-            new NuSpecDependency() { Id = "Core2D", Version = version },
-            new NuSpecDependency() { Id = "Core2D.Renderer.SkiaSharp", Version = version }
-        },
-        Files = new []
-        {
-            new NuSpecContent { Source = "FileWriter.PdfSkiaSharp.dll", Target = "lib/net45" }
-        },
-        BasePath = Directory("./dependencies/FileWriter.PdfSkiaSharp/bin/" + dirSuffix),
-        OutputDirectory = nugetRoot.Combine("Core2D.FileWriter.PdfSkiaSharp")
-    },
-    ///////////////////////////////////////////////////////////////////////////////
     // dependencies: FileWriter.Vdx
     ///////////////////////////////////////////////////////////////////////////////
     new NuGetPackSettings()
@@ -323,32 +309,6 @@ var nuspecSettings = new []
         },
         BasePath = Directory("./dependencies/Log.Trace/bin/" + dirSuffix),
         OutputDirectory = nugetRoot.Combine("Core2D.Log.Trace")
-    },
-    ///////////////////////////////////////////////////////////////////////////////
-    // dependencies: PdfSharpCore
-    ///////////////////////////////////////////////////////////////////////////////
-    new NuGetPackSettings()
-    {
-        Id = "Core2D.PdfSharpCore",
-        Files = new []
-        {
-            new NuSpecContent { Source = "PdfSharp.dll", Target = "lib/net45" }
-        },
-        BasePath = Directory("./dependencies/PDFsharp/src/PdfSharp/bin/" + configuration),
-        OutputDirectory = nugetRoot.Combine("Core2D.PdfSharpCore")
-    },
-    ///////////////////////////////////////////////////////////////////////////////
-    // dependencies: PdfSharp-wpf
-    ///////////////////////////////////////////////////////////////////////////////
-    new NuGetPackSettings()
-    {
-        Id = "Core2D.PdfSharpWpf",
-        Files = new []
-        {
-            new NuSpecContent { Source = "PdfSharp-wpf.dll", Target = "lib/net45" }
-        },
-        BasePath = Directory("./dependencies/PDFsharp/src/PdfSharp-wpf/bin/" + configuration),
-        OutputDirectory = nugetRoot.Combine("Core2D.PdfSharpWpf")
     },
     ///////////////////////////////////////////////////////////////////////////////
     // dependencies: Renderer.Avalonia
@@ -426,25 +386,6 @@ var nuspecSettings = new []
         },
         BasePath = Directory("./dependencies/Renderer.PdfSharp-wpf/bin/" + dirSuffix),
         OutputDirectory = nugetRoot.Combine("Core2D.Renderer.PdfSharpWpf")
-    },
-    ///////////////////////////////////////////////////////////////////////////////
-    // dependencies: Renderer.SkiaSharp
-    ///////////////////////////////////////////////////////////////////////////////
-    new NuGetPackSettings()
-    {
-        Id = "Core2D.Renderer.SkiaSharp",
-        Dependencies = new []
-        {
-            new NuSpecDependency() { Id = "System.Collections.Immutable", Version = SystemCollectionsImmutableVersion },
-            new NuSpecDependency() { Id = "Core2D", Version = version },
-            new NuSpecDependency() { Id = "SkiaSharp", Version = SkiaSharpVersion }
-        },
-        Files = new []
-        {
-            new NuSpecContent { Source = "Renderer.SkiaSharp.dll", Target = "lib/net45" }
-        },
-        BasePath = Directory("./dependencies/Renderer.SkiaSharp/bin/" + dirSuffix),
-        OutputDirectory = nugetRoot.Combine("Core2D.Renderer.SkiaSharp")
     },
     ///////////////////////////////////////////////////////////////////////////////
     // dependencies: Renderer.Vdx
@@ -576,6 +517,36 @@ var nuspecSettings = new []
         },
         BasePath = Directory("./dependencies/TextFieldWriter.CsvHelper/bin/" + dirSuffix),
         OutputDirectory = nugetRoot.Combine("Core2D.TextFieldWriter.CsvHelper")
+    }
+};
+
+var nuspecSettingsDependenciesModules = new []
+{
+    ///////////////////////////////////////////////////////////////////////////////
+    // dependencies: PdfSharpCore
+    ///////////////////////////////////////////////////////////////////////////////
+    new NuGetPackSettings()
+    {
+        Id = "Core2D.PdfSharpCore",
+        Files = new []
+        {
+            new NuSpecContent { Source = "PdfSharp.dll", Target = "lib/net45" }
+        },
+        BasePath = Directory("./dependencies/PDFsharp/src/PdfSharp/bin/" + configuration),
+        OutputDirectory = nugetRoot.Combine("Core2D.PdfSharpCore")
+    },
+    ///////////////////////////////////////////////////////////////////////////////
+    // dependencies: PdfSharp-wpf
+    ///////////////////////////////////////////////////////////////////////////////
+    new NuGetPackSettings()
+    {
+        Id = "Core2D.PdfSharpWpf",
+        Files = new []
+        {
+            new NuSpecContent { Source = "PdfSharp-wpf.dll", Target = "lib/net45" }
+        },
+        BasePath = Directory("./dependencies/PDFsharp/src/PdfSharp-wpf/bin/" + configuration),
+        OutputDirectory = nugetRoot.Combine("Core2D.PdfSharpWpf")
     },
     ///////////////////////////////////////////////////////////////////////////////
     // dependencies: VisioAutomation.VDX
@@ -604,6 +575,59 @@ var nuspecSettings = new []
         OutputDirectory = nugetRoot.Combine("Core2D.NetDxf")
     }
 };
+
+var nuspecSettingsDependenciesSkia = new []
+{
+    ///////////////////////////////////////////////////////////////////////////////
+    // dependencies: FileWriter.PdfSkiaSharp
+    ///////////////////////////////////////////////////////////////////////////////
+    new NuGetPackSettings()
+    {
+        Id = "Core2D.FileWriter.PdfSkiaSharp",
+        Dependencies = new []
+        {
+            new NuSpecDependency() { Id = "System.Collections.Immutable", Version = SystemCollectionsImmutableVersion },
+            new NuSpecDependency() { Id = "Core2D", Version = version },
+            new NuSpecDependency() { Id = "Core2D.Renderer.SkiaSharp", Version = version }
+        },
+        Files = new []
+        {
+            new NuSpecContent { Source = "FileWriter.PdfSkiaSharp.dll", Target = "lib/net45" }
+        },
+        BasePath = Directory("./dependencies/FileWriter.PdfSkiaSharp/bin/" + dirSuffix),
+        OutputDirectory = nugetRoot.Combine("Core2D.FileWriter.PdfSkiaSharp")
+    },
+    ///////////////////////////////////////////////////////////////////////////////
+    // dependencies: Renderer.SkiaSharp
+    ///////////////////////////////////////////////////////////////////////////////
+    new NuGetPackSettings()
+    {
+        Id = "Core2D.Renderer.SkiaSharp",
+        Dependencies = new []
+        {
+            new NuSpecDependency() { Id = "System.Collections.Immutable", Version = SystemCollectionsImmutableVersion },
+            new NuSpecDependency() { Id = "Core2D", Version = version },
+            new NuSpecDependency() { Id = "SkiaSharp", Version = SkiaSharpVersion }
+        },
+        Files = new []
+        {
+            new NuSpecContent { Source = "Renderer.SkiaSharp.dll", Target = "lib/net45" }
+        },
+        BasePath = Directory("./dependencies/Renderer.SkiaSharp/bin/" + dirSuffix),
+        OutputDirectory = nugetRoot.Combine("Core2D.Renderer.SkiaSharp")
+    }
+};
+
+var nuspecSettings = new List<NuGetPackSettings>();
+
+nuspecSettings.AddRange(nuspecSettingsCore);
+nuspecSettings.AddRange(nuspecSettingsDependencies);
+nuspecSettings.AddRange(nuspecSettingsDependenciesModules);
+
+if (isSkiaSharpAvailable)
+{
+    nuspecSettings.AddRange(nuspecSettingsDependenciesSkia);
+}
 
 foreach(var nuspec in nuspecSettings)
 {
@@ -643,6 +667,7 @@ Information("IsMainRepo: " + isMainRepo);
 Information("IsMasterBranch: " + isMasterBranch);
 Information("IsTagged: " + isTagged);
 Information("IsRelease: " + isRelease);
+Information("IsSkiaSharpAvailable: " + isSkiaSharpAvailable);
 
 ///////////////////////////////////////////////////////////////////////////////
 // TASKS
@@ -774,7 +799,7 @@ Task("Zip-Files")
             GetFiles(zipSource_Direct2D.FullPath + "/*.dll") + 
             GetFiles(zipSource_Direct2D.FullPath + "/*.exe"));
 
-        if (!StringComparer.OrdinalIgnoreCase.Equals(platform, "AnyCPU"))
+        if (isSkiaSharpAvailable)
         {
             Zip(zipSource_Skia, 
                 zipTarget_Skia, 
