@@ -42,7 +42,7 @@ var isTagged = BuildSystem.AppVeyor.Environment.Repository.Tag.IsTag
                && !string.IsNullOrWhiteSpace(BuildSystem.AppVeyor.Environment.Repository.Tag.Name);
 var isRelease = StringComparer.OrdinalIgnoreCase.Equals("AnyCPU", platform) 
                 && StringComparer.OrdinalIgnoreCase.Equals("Release", configuration);
-var isSkiaSharpAvailable = !StringComparer.OrdinalIgnoreCase.Equals(platform, "AnyCPU");
+var isAnyCPU = StringComparer.OrdinalIgnoreCase.Equals(platform, "AnyCPU");
 
 ///////////////////////////////////////////////////////////////////////////////
 // VERSION
@@ -81,19 +81,30 @@ var nugetRoot = artifactsDir.Combine("nuget");
 var zipRoot = artifactsDir.Combine("zip");
 
 var dirSuffix = platform + "/" + configuration;
+var dirSuffixSkia = (isAnyCPU ? "x86" : platform) + "/" + configuration;
 
-var binSourceDirs = GetDirectories("./src/**/bin/" + dirSuffix);
-var objSourceDirs = GetDirectories("./src/**/obj/" + dirSuffix);
-var binTestsDirs = GetDirectories("./tests/**/bin/" + dirSuffix);
-var objTestsDirs = GetDirectories("./testssrc/**/obj/" + dirSuffix);
-var binDependenciesDirs = GetDirectories("./dependencies/**/bin/" + dirSuffix);
-var objDependenciesDirs = GetDirectories("./dependencies/**/obj/" + dirSuffix);
+Func<IFileSystemInfo, bool> excludeSkia = i => !i.Path.FullPath.Contains("Skia", StringComparison.OrdinalIgnoreCase);
+Func<IFileSystemInfo, bool> includeSkia = i => i.Path.FullPath.Contains("Skia", StringComparison.OrdinalIgnoreCase);
+
+var binSourceDirs = GetDirectories("./src/**/bin/" + dirSuffix, excludeSkia) +
+                    GetDirectories("./src/**/bin/" + dirSuffixSkia, includeSkia);
+var objSourceDirs = GetDirectories("./src/**/obj/" + dirSuffix, excludeSkia) + 
+                    GetDirectories("./src/**/obj/" + dirSuffixSkia, includeSkia);
+var binDependenciesDirs = GetDirectories("./dependencies/**/bin/" + dirSuffix, excludeSkia) + 
+                          GetDirectories("./dependencies/**/bin/" + dirSuffixSkia, includeSkia);
+var objDependenciesDirs = GetDirectories("./dependencies/**/obj/" + dirSuffix, excludeSkia) + 
+                          GetDirectories("./dependencies/**/obj/" + dirSuffixSkia, includeSkia);
+var binTestsDirs = GetDirectories("./tests/**/bin/" + dirSuffix, excludeSkia) + 
+                   GetDirectories("./tests/**/bin/" + dirSuffixSkia, includeSkia)
+var objTestsDirs = GetDirectories("./testssrc/**/obj/" + dirSuffix, excludeSkia) + 
+                   GetDirectories("./testssrc/**/obj/" + dirSuffixSkia, includeSkia);
 
 ///////////////////////////////////////////////////////////////////////////////
 // ZIP
 ///////////////////////////////////////////////////////////////////////////////
 
 var zipSuffix = platform + "-" + configuration + "-" + version + ".zip";
+var zipSuffixSkia = (isAnyCPU ? "x86" : platform) + "-" + configuration + "-" + version + ".zip";
 
 var zipSource_Cairo = (DirectoryPath)Directory("./src/Core2D.Avalonia.Cairo/bin/" + dirSuffix);
 var zipTarget_Cairo = zipRoot.CombineWithFilePath("Core2D.Avalonia.Cairo." + zipSuffix);
@@ -101,8 +112,8 @@ var zipTarget_Cairo = zipRoot.CombineWithFilePath("Core2D.Avalonia.Cairo." + zip
 var zipSource_Direct2D = (DirectoryPath)Directory("./src/Core2D.Avalonia.Direct2D/bin/" + dirSuffix);
 var zipTarget_Direct2D = zipRoot.CombineWithFilePath("Core2D.Avalonia.Direct2D-" + zipSuffix);
 
-var zipSource_Skia = (DirectoryPath)Directory("./src/Core2D.Avalonia.Skia/bin/" + dirSuffix);
-var zipTarget_Skia = zipRoot.CombineWithFilePath("Core2D.Avalonia.Skia-" + zipSuffix);
+var zipSource_Skia = (DirectoryPath)Directory("./src/Core2D.Avalonia.Skia/bin/" + dirSuffixSkia);
+var zipTarget_Skia = zipRoot.CombineWithFilePath("Core2D.Avalonia.Skia-" + zipSuffixSkia);
 
 var zipSource_Wpf = (DirectoryPath)Directory("./src/Core2D.Wpf/bin/" + dirSuffix);
 var zipTarget_Wpf = zipRoot.CombineWithFilePath("Core2D.Wpf-" + zipSuffix);
@@ -595,7 +606,7 @@ var nuspecSettingsDependenciesSkia = new []
         {
             new NuSpecContent { Source = "FileWriter.PdfSkiaSharp.dll", Target = "lib/net45" }
         },
-        BasePath = Directory("./dependencies/FileWriter.PdfSkiaSharp/bin/" + dirSuffix),
+        BasePath = Directory("./dependencies/FileWriter.PdfSkiaSharp/bin/" + dirSuffixSkia),
         OutputDirectory = nugetRoot.Combine("Core2D.FileWriter.PdfSkiaSharp")
     },
     ///////////////////////////////////////////////////////////////////////////////
@@ -614,7 +625,7 @@ var nuspecSettingsDependenciesSkia = new []
         {
             new NuSpecContent { Source = "Renderer.SkiaSharp.dll", Target = "lib/net45" }
         },
-        BasePath = Directory("./dependencies/Renderer.SkiaSharp/bin/" + dirSuffix),
+        BasePath = Directory("./dependencies/Renderer.SkiaSharp/bin/" + dirSuffixSkia),
         OutputDirectory = nugetRoot.Combine("Core2D.Renderer.SkiaSharp")
     }
 };
@@ -624,11 +635,7 @@ var nuspecSettings = new List<NuGetPackSettings>();
 nuspecSettings.AddRange(nuspecSettingsCore);
 nuspecSettings.AddRange(nuspecSettingsDependencies);
 nuspecSettings.AddRange(nuspecSettingsDependenciesModules);
-
-if (isSkiaSharpAvailable)
-{
-    nuspecSettings.AddRange(nuspecSettingsDependenciesSkia);
-}
+nuspecSettings.AddRange(nuspecSettingsDependenciesSkia);
 
 nuspecSettings.ForEach((nuspec) => SetNuspecCommonProperties(nuspec));
 
@@ -665,7 +672,7 @@ Information("IsMainRepo: " + isMainRepo);
 Information("IsMasterBranch: " + isMasterBranch);
 Information("IsTagged: " + isTagged);
 Information("IsRelease: " + isRelease);
-Information("IsSkiaSharpAvailable: " + isSkiaSharpAvailable);
+Information("IsAnyCPU: " + isAnyCPU);
 
 ///////////////////////////////////////////////////////////////////////////////
 // TASKS
@@ -797,13 +804,10 @@ Task("Zip-Files")
             GetFiles(zipSource_Direct2D.FullPath + "/*.dll") + 
             GetFiles(zipSource_Direct2D.FullPath + "/*.exe"));
 
-        if (isSkiaSharpAvailable)
-        {
-            Zip(zipSource_Skia, 
-                zipTarget_Skia, 
-                GetFiles(zipSource_Skia.FullPath + "/*.dll") + 
-                GetFiles(zipSource_Skia.FullPath + "/*.exe"));
-        }
+        Zip(zipSource_Skia, 
+            zipTarget_Skia, 
+            GetFiles(zipSource_Skia.FullPath + "/*.dll") + 
+            GetFiles(zipSource_Skia.FullPath + "/*.exe"));
 
         Zip(zipSource_Wpf, 
             zipTarget_Wpf, 
