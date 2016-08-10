@@ -152,8 +152,13 @@ Information("Building version {0} of Core2D ({1}, {2}, {3}) using version {4} of
     configuration,
     target,
     typeof(ICakeContext).Assembly.GetName().Version.ToString());
-Information("Repository Name: " + BuildSystem.AppVeyor.Environment.Repository.Name);
-Information("Repository Branch: " + BuildSystem.AppVeyor.Environment.Repository.Branch);
+
+if (isRunningOnAppVeyor)
+{
+    Information("Repository Name: " + BuildSystem.AppVeyor.Environment.Repository.Name);
+    Information("Repository Branch: " + BuildSystem.AppVeyor.Environment.Repository.Branch);
+}
+
 Information("Target: " + target);
 Information("Platform: " + platform);
 Information("Configuration: " + configuration);
