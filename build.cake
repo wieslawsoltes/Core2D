@@ -607,7 +607,7 @@ var nuspecSettings = new []
 
 foreach(var nuspec in nuspecSettings)
 {
-    SetNuspecCommonProperties(package);
+    SetNuspecCommonProperties(nuspec);
 }
 
 var nugetPackages = nuspecSettings.Select(nuspec => {
