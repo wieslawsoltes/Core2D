@@ -40,8 +40,10 @@ var isMainRepo = StringComparer.OrdinalIgnoreCase.Equals("Core2D/Core2D", BuildS
 var isMasterBranch = StringComparer.OrdinalIgnoreCase.Equals("master", BuildSystem.AppVeyor.Environment.Repository.Branch);
 var isTagged = BuildSystem.AppVeyor.Environment.Repository.Tag.IsTag 
                && !string.IsNullOrWhiteSpace(BuildSystem.AppVeyor.Environment.Repository.Tag.Name);
-var isRelease = StringComparer.OrdinalIgnoreCase.Equals("AnyCPU", platform) 
-                && StringComparer.OrdinalIgnoreCase.Equals("Release", configuration);
+var isReleasable = StringComparer.OrdinalIgnoreCase.Equals("AnyCPU", platform) 
+                   && StringComparer.OrdinalIgnoreCase.Equals("Release", configuration);
+var isMyGetRelease = !isTagged && isReleasable;
+var isNuGetRelease = isTagged && isReleasable;
 var isAnyCPU = StringComparer.OrdinalIgnoreCase.Equals(platform, "AnyCPU");
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -144,6 +146,8 @@ var SetNuspecCommonProperties = new Action<NuGetPackSettings> ((nuspec) => {
     nuspec.LicenseUrl = new Uri("http://opensource.org/licenses/MIT");
     nuspec.ProjectUrl = new Uri("https://github.com/Core2D/Core2D/");
     nuspec.RequireLicenseAcceptance = false;
+    nuspec.Symbols = false;
+    nuspec.NoPackageAnalysis = true;
     nuspec.Description = "A multi-platform data driven 2D diagram editor.";
     nuspec.Copyright = "Copyright 2016";
     nuspec.Tags = new [] { "Diagram", "Editor", "2D", "Graphics", "Drawing", "Data", "Managed", "C#" };
@@ -679,8 +683,9 @@ Information("IsPullRequest: " + isPullRequest);
 Information("IsMainRepo: " + isMainRepo);
 Information("IsMasterBranch: " + isMasterBranch);
 Information("IsTagged: " + isTagged);
-Information("IsRelease: " + isRelease);
-Information("IsAnyCPU: " + isAnyCPU);
+Information("IsReleasable: " + isReleasable);
+Information("IsMyGetRelease: " + isMyGetRelease);
+Information("IsNuGetRelease: " + isNuGetRelease);
 
 ///////////////////////////////////////////////////////////////////////////////
 // TASKS
@@ -839,8 +844,7 @@ Task("Publish-MyGet")
     .WithCriteria(() => !isPullRequest)
     .WithCriteria(() => isMainRepo)
     .WithCriteria(() => isMasterBranch)
-    .WithCriteria(() => !isTagged)
-    .WithCriteria(() => isRelease)
+    .WithCriteria(() => isMyGetRelease)
     .Does(() =>
 {
     var apiKey = EnvironmentVariable("MYGET_API_KEY");
@@ -874,8 +878,7 @@ Task("Publish-NuGet")
     .WithCriteria(() => !isPullRequest)
     .WithCriteria(() => isMainRepo)
     .WithCriteria(() => isMasterBranch)
-    .WithCriteria(() => isTagged)
-    .WithCriteria(() => isRelease)
+    .WithCriteria(() => isNuGetRelease)
     .Does(() =>
 {
     var apiKey = EnvironmentVariable("NUGET_API_KEY");
