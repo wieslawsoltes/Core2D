@@ -86,7 +86,7 @@ var dirSuffixSkia = (isAnyCPU ? "x86" : platform) + "/" + configuration;
 Func<IFileSystemInfo, bool> excludeSkia = i => !(i.Path.FullPath.IndexOf("Skia", StringComparison.OrdinalIgnoreCase) >= 0);
 Func<IFileSystemInfo, bool> includeSkia = i => i.Path.FullPath.IndexOf("Skia", StringComparison.OrdinalIgnoreCase) >= 0;
 
-var binSourceDirs = GetDirectories("./src/**/bin/" + dirSuffix, excludeSkia) +
+var binSourceDirs = GetDirectories("./src/**/bin/" + dirSuffix, excludeSkia) + 
                     GetDirectories("./src/**/bin/" + dirSuffixSkia, includeSkia);
 var objSourceDirs = GetDirectories("./src/**/obj/" + dirSuffix, excludeSkia) + 
                     GetDirectories("./src/**/obj/" + dirSuffixSkia, includeSkia);
@@ -837,9 +837,9 @@ Task("Upload-AppVeyor-Artifacts")
         AppVeyor.UploadArtifact(zip);
     }
 
-    foreach(var nupkg in GetFiles(nugetRoot + "/*"))
+    foreach(var nupkg in nugetPackages)
     {
-        AppVeyor.UploadArtifact(nupkg);
+        AppVeyor.UploadArtifact(nupkg.FullPath);
     }
 });
 
