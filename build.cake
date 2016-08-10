@@ -83,21 +83,27 @@ var zipRoot = artifactsDir.Combine("zip");
 var dirSuffix = platform + "/" + configuration;
 var dirSuffixSkia = (isAnyCPU ? "x86" : platform) + "/" + configuration;
 
-Func<IFileSystemInfo, bool> excludeSkia = i => !(i.Path.FullPath.IndexOf("Skia", StringComparison.OrdinalIgnoreCase) >= 0);
-Func<IFileSystemInfo, bool> includeSkia = i => i.Path.FullPath.IndexOf("Skia", StringComparison.OrdinalIgnoreCase) >= 0;
+Func<IFileSystemInfo, bool> ExcludeSkia = i => {
+    return !(i.Path.FullPath.IndexOf("Skia", StringComparison.OrdinalIgnoreCase) >= 0);
+};
 
-var binSourceDirs = GetDirectories("./src/**/bin/" + dirSuffix, excludeSkia) + 
-                    GetDirectories("./src/**/bin/" + dirSuffixSkia, includeSkia);
-var objSourceDirs = GetDirectories("./src/**/obj/" + dirSuffix, excludeSkia) + 
-                    GetDirectories("./src/**/obj/" + dirSuffixSkia, includeSkia);
-var binDependenciesDirs = GetDirectories("./dependencies/**/bin/" + dirSuffix, excludeSkia) + 
-                          GetDirectories("./dependencies/**/bin/" + dirSuffixSkia, includeSkia);
-var objDependenciesDirs = GetDirectories("./dependencies/**/obj/" + dirSuffix, excludeSkia) + 
-                          GetDirectories("./dependencies/**/obj/" + dirSuffixSkia, includeSkia);
-var binTestsDirs = GetDirectories("./tests/**/bin/" + dirSuffix, excludeSkia) + 
-                   GetDirectories("./tests/**/bin/" + dirSuffixSkia, includeSkia);
-var objTestsDirs = GetDirectories("./testssrc/**/obj/" + dirSuffix, excludeSkia) + 
-                   GetDirectories("./testssrc/**/obj/" + dirSuffixSkia, includeSkia);
+Func<string,  DirectoryPathCollection> GetSkiaDirectories = pattern =>{
+    return GetDirectories(pattern) - GetDirectories(pattern, ExcludeSkia);
+};
+
+var buildDirs = 
+    GetDirectories("./src/**/bin/" + dirSuffix, ExcludeSkia) + 
+    GetSkiaDirectories("./src/**/bin/" + dirSuffixSkia) +
+    GetDirectories("./src/**/obj/" + dirSuffix, ExcludeSkia) + 
+    GetSkiaDirectories("./src/**/obj/" + dirSuffixSkia) + 
+    GetDirectories("./dependencies/**/bin/" + dirSuffix, ExcludeSkia) + 
+    GetSkiaDirectories("./dependencies/**/bin/" + dirSuffixSkia) + 
+    GetDirectories("./dependencies/**/obj/" + dirSuffix, ExcludeSkia) + 
+    GetSkiaDirectories("./dependencies/**/obj/" + dirSuffixSkia) + 
+    GetDirectories("./tests/**/bin/" + dirSuffix, ExcludeSkia) + 
+    GetSkiaDirectories("./tests/**/bin/" + dirSuffixSkia) + 
+    GetDirectories("./testssrc/**/obj/" + dirSuffix, ExcludeSkia) + 
+    GetSkiaDirectories("./testssrc/**/obj/" + dirSuffixSkia);
 
 ///////////////////////////////////////////////////////////////////////////////
 // ZIP
@@ -643,6 +649,8 @@ var nugetPackages = nuspecSettings.Select(nuspec => {
         return nuspec.OutputDirectory.CombineWithFilePath(string.Concat(nuspec.Id, ".", version, ".nupkg"));
     }).ToArray();
 
+var nupkgDirs = nuspecSettings.Select(nuspec => nuspec.OutputDirectory);
+
 ///////////////////////////////////////////////////////////////////////////////
 // INFORMATION
 ///////////////////////////////////////////////////////////////////////////////
@@ -681,30 +689,12 @@ Information("IsAnyCPU: " + isAnyCPU);
 Task("Clean")
     .Does(() =>
 {
-    // Builds
-    CleanDirectories(binSourceDirs);
-    CleanDirectories(objSourceDirs);
-    CleanDirectories(binTestsDirs);
-    CleanDirectories(objTestsDirs);
-    CleanDirectories(binDependenciesDirs);
-    CleanDirectories(objDependenciesDirs);
-
-    // Artifacts
+    CleanDirectories(buildDirs);
     CleanDirectory(artifactsDir);
-
-    // Tests
     CleanDirectory(testResultsDir);
-
-    // Zips
     CleanDirectory(zipRoot);
-
-    // NuGets
     CleanDirectory(nugetRoot);
-
-    foreach (var package in nuspecSettings) 
-    {
-        CleanDirectory(package.OutputDirectory);
-    }
+    CleanDirectories(nupkgDirs);
 });
 
 Task("Restore-NuGet-Packages")
