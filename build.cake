@@ -829,7 +829,7 @@ Task("Build")
     if(isRunningOnWindows)
     {
         MSBuild(msBuildSolution, settings => {
-        settings.SetConfiguration(configuration);
+            settings.SetConfiguration(configuration);
             settings.WithProperty("Platform", platform);
             settings.SetVerbosity(Verbosity.Minimal);
         });
