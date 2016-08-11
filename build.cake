@@ -110,8 +110,8 @@ var buildDirs =
     GetSkiaDirectories("./dependencies/**/obj/" + dirSuffixSkia) + 
     GetDirectories("./tests/**/bin/" + dirSuffix, ExcludeSkia) + 
     GetSkiaDirectories("./tests/**/bin/" + dirSuffixSkia) + 
-    GetDirectories("./testssrc/**/obj/" + dirSuffix, ExcludeSkia) + 
-    GetSkiaDirectories("./testssrc/**/obj/" + dirSuffixSkia);
+    GetDirectories("./tests/**/obj/" + dirSuffix, ExcludeSkia) + 
+    GetSkiaDirectories("./tests/**/obj/" + dirSuffixSkia);
 
 var fileZipSuffix = platform + "-" + configuration + "-" + version + ".zip";
 var fileZipSuffixSkia = (isAnyCPU ? "x86" : platform) + "-" + configuration + "-" + version + ".zip";
