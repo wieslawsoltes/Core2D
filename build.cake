@@ -28,6 +28,18 @@ var platform = Argument("platform", "AnyCPU");
 var configuration = Argument("configuration", "Release");
 
 ///////////////////////////////////////////////////////////////////////////////
+// CONFIGURATION
+///////////////////////////////////////////////////////////////////////////////
+
+var MainRepo = "Core2D/Core2D";
+var MasterBranch = "master";
+var AssemblyInfoPath = File("./src/Core2D.Shared/SharedAssemblyInfo.cs");
+var ReleasePlatform = "AnyCPU";
+var ReleaseConfiguration = "Release";
+var MSBuildSolution = "./Core2D.sln";
+var XBuildSolution = "./Core2D.mono.sln";
+
+///////////////////////////////////////////////////////////////////////////////
 // PARAMETERS
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -36,12 +48,12 @@ var isRunningOnUnix = IsRunningOnUnix();
 var isRunningOnWindows = IsRunningOnWindows();
 var isRunningOnAppVeyor = BuildSystem.AppVeyor.IsRunningOnAppVeyor;
 var isPullRequest = BuildSystem.AppVeyor.Environment.PullRequest.IsPullRequest;
-var isMainRepo = StringComparer.OrdinalIgnoreCase.Equals("Core2D/Core2D", BuildSystem.AppVeyor.Environment.Repository.Name);
-var isMasterBranch = StringComparer.OrdinalIgnoreCase.Equals("master", BuildSystem.AppVeyor.Environment.Repository.Branch);
+var isMainRepo = StringComparer.OrdinalIgnoreCase.Equals(MainRepo, BuildSystem.AppVeyor.Environment.Repository.Name);
+var isMasterBranch = StringComparer.OrdinalIgnoreCase.Equals(MasterBranch, BuildSystem.AppVeyor.Environment.Repository.Branch);
 var isTagged = BuildSystem.AppVeyor.Environment.Repository.Tag.IsTag 
                && !string.IsNullOrWhiteSpace(BuildSystem.AppVeyor.Environment.Repository.Tag.Name);
-var isReleasable = StringComparer.OrdinalIgnoreCase.Equals("AnyCPU", platform) 
-                   && StringComparer.OrdinalIgnoreCase.Equals("Release", configuration);
+var isReleasable = StringComparer.OrdinalIgnoreCase.Equals(ReleasePlatform, platform) 
+                   && StringComparer.OrdinalIgnoreCase.Equals(ReleaseConfiguration, configuration);
 var isMyGetRelease = !isTagged && isReleasable;
 var isNuGetRelease = isTagged && isReleasable;
 var isAnyCPU = StringComparer.OrdinalIgnoreCase.Equals(platform, "AnyCPU");
@@ -50,7 +62,7 @@ var isAnyCPU = StringComparer.OrdinalIgnoreCase.Equals(platform, "AnyCPU");
 // VERSION
 ///////////////////////////////////////////////////////////////////////////////
 
-var version = ParseAssemblyInfo("./src/Core2D.Shared/SharedAssemblyInfo.cs").AssemblyVersion;
+var version = ParseAssemblyInfo(AssemblyInfoPath).AssemblyVersion;
 
 if (isRunningOnAppVeyor)
 {
@@ -61,17 +73,10 @@ if (isRunningOnAppVeyor)
     }
     else
     {
-        // Use AssemblyVersion with AppVeyor Build as version
+        // Use AssemblyVersion with Build as version
         version += "-build" + EnvironmentVariable("APPVEYOR_BUILD_NUMBER") + "-alpha";
     }
 }
-
-///////////////////////////////////////////////////////////////////////////////
-// SOLUTIONS
-///////////////////////////////////////////////////////////////////////////////
-
-var msBuildSolution = "./Core2D.sln";
-var xBuildSolution = "./Core2D.mono.sln";
 
 ///////////////////////////////////////////////////////////////////////////////
 // DIRECTORIES
@@ -108,24 +113,18 @@ var buildDirs =
     GetDirectories("./testssrc/**/obj/" + dirSuffix, ExcludeSkia) + 
     GetSkiaDirectories("./testssrc/**/obj/" + dirSuffixSkia);
 
-///////////////////////////////////////////////////////////////////////////////
-// ZIP
-///////////////////////////////////////////////////////////////////////////////
+var fileZipSuffix = platform + "-" + configuration + "-" + version + ".zip";
+var fileZipSuffixSkia = (isAnyCPU ? "x86" : platform) + "-" + configuration + "-" + version + ".zip";
 
-var zipSuffix = platform + "-" + configuration + "-" + version + ".zip";
-var zipSuffixSkia = (isAnyCPU ? "x86" : platform) + "-" + configuration + "-" + version + ".zip";
+var zipSourceCairoDirs = (DirectoryPath)Directory("./src/Core2D.Avalonia.Cairo/bin/" + dirSuffix);
+var zipSourceDirect2DDirs = (DirectoryPath)Directory("./src/Core2D.Avalonia.Direct2D/bin/" + dirSuffix);
+var zipSourceSkiaDirs = (DirectoryPath)Directory("./src/Core2D.Avalonia.Skia/bin/" + dirSuffixSkia);
+var zipSourceWpfDirs = (DirectoryPath)Directory("./src/Core2D.Wpf/bin/" + dirSuffix);
 
-var zipSource_Cairo = (DirectoryPath)Directory("./src/Core2D.Avalonia.Cairo/bin/" + dirSuffix);
-var zipTarget_Cairo = zipRoot.CombineWithFilePath("Core2D.Avalonia.Cairo." + zipSuffix);
-
-var zipSource_Direct2D = (DirectoryPath)Directory("./src/Core2D.Avalonia.Direct2D/bin/" + dirSuffix);
-var zipTarget_Direct2D = zipRoot.CombineWithFilePath("Core2D.Avalonia.Direct2D-" + zipSuffix);
-
-var zipSource_Skia = (DirectoryPath)Directory("./src/Core2D.Avalonia.Skia/bin/" + dirSuffixSkia);
-var zipTarget_Skia = zipRoot.CombineWithFilePath("Core2D.Avalonia.Skia-" + zipSuffixSkia);
-
-var zipSource_Wpf = (DirectoryPath)Directory("./src/Core2D.Wpf/bin/" + dirSuffix);
-var zipTarget_Wpf = zipRoot.CombineWithFilePath("Core2D.Wpf-" + zipSuffix);
+var zipTargetCairoDirs = zipRoot.CombineWithFilePath("Core2D.Avalonia.Cairo." + fileZipSuffix);
+var zipTargetDirect2DDirs = zipRoot.CombineWithFilePath("Core2D.Avalonia.Direct2D-" + fileZipSuffix);
+var zipTargetSkiaDirs = zipRoot.CombineWithFilePath("Core2D.Avalonia.Skia-" + fileZipSuffixSkia);
+var zipTargetWpfDirs = zipRoot.CombineWithFilePath("Core2D.Wpf-" + fileZipSuffix);
 
 ///////////////////////////////////////////////////////////////////////////////
 // NUGET NUSPECS
@@ -693,7 +692,7 @@ nuspecChocolateySettings.Add(
         Title = "Core2D (Avalonia/Cairo)",
         OutputDirectory = chocolateyRoot.Combine("Core2D.Avalonia.Cairo")
     },
-    zipSource_Cairo);
+    zipSourceCairoDirs);
 
 ///////////////////////////////////////////////////////////////////////////////
 // src: Core2D.Avalonia.Direct2D
@@ -705,7 +704,7 @@ nuspecChocolateySettings.Add(
         Title = "Core2D (Avalonia/Direct2D)",
         OutputDirectory = chocolateyRoot.Combine("Core2D.Avalonia.Direct2D")
     },
-    zipSource_Direct2D);
+    zipSourceDirect2DDirs);
 
 ///////////////////////////////////////////////////////////////////////////////
 // src: Core2D.Avalonia.Skia
@@ -717,7 +716,7 @@ nuspecChocolateySettings.Add(
         Title = "Core2D (Avalonia/Skia)",
         OutputDirectory = chocolateyRoot.Combine("Core2D.Avalonia.Skia")
     },
-    zipSource_Skia);
+    zipSourceSkiaDirs);
 
 ///////////////////////////////////////////////////////////////////////////////
 // src: Core2D.Wpf
@@ -729,7 +728,7 @@ nuspecChocolateySettings.Add(
         Title = "Core2D (WPF)",
         OutputDirectory = chocolateyRoot.Combine("Core2D.Wpf")
     },
-    zipSource_Wpf);
+    zipSourceWpfDirs);
 
 nuspecChocolateySettings.ToList().ForEach((nuspec) => SetChocolateyNuspecCommonProperties(nuspec.Key));
 
@@ -809,13 +808,13 @@ Task("Restore-NuGet-Packages")
         .Execute(()=> {
             if(isRunningOnWindows)
             {
-                NuGetRestore(msBuildSolution, new NuGetRestoreSettings {
+                NuGetRestore(MSBuildSolution, new NuGetRestoreSettings {
                     ToolTimeout = TimeSpan.FromMinutes(toolTimeout)
                 });
             }
             else
             {
-                NuGetRestore(xBuildSolution, new NuGetRestoreSettings {
+                NuGetRestore(XBuildSolution, new NuGetRestoreSettings {
                     ToolTimeout = TimeSpan.FromMinutes(toolTimeout)
                 });
             }
@@ -828,7 +827,7 @@ Task("Build")
 {
     if(isRunningOnWindows)
     {
-        MSBuild(msBuildSolution, settings => {
+        MSBuild(MSBuildSolution, settings => {
             settings.SetConfiguration(configuration);
             settings.WithProperty("Platform", platform);
             settings.SetVerbosity(Verbosity.Minimal);
@@ -836,7 +835,7 @@ Task("Build")
     }
     else
     {
-        XBuild(xBuildSolution, settings => {
+        XBuild(XBuildSolution, settings => {
             settings.SetConfiguration(configuration);
             settings.WithProperty("Platform", platform);
             settings.SetVerbosity(Verbosity.Minimal);
@@ -873,27 +872,27 @@ Task("Zip-Files")
     .IsDependentOn("Run-Unit-Tests")
     .Does(() =>
 {
-    Zip(zipSource_Cairo, 
-        zipTarget_Cairo, 
-        GetFiles(zipSource_Cairo.FullPath + "/*.dll") + 
-        GetFiles(zipSource_Cairo.FullPath + "/*.exe"));
+    Zip(zipSourceCairoDirs, 
+        zipTargetCairoDirs, 
+        GetFiles(zipSourceCairoDirs.FullPath + "/*.dll") + 
+        GetFiles(zipSourceCairoDirs.FullPath + "/*.exe"));
 
     if (isRunningOnWindows)
     {
-        Zip(zipSource_Direct2D, 
-            zipTarget_Direct2D, 
-            GetFiles(zipSource_Direct2D.FullPath + "/*.dll") + 
-            GetFiles(zipSource_Direct2D.FullPath + "/*.exe"));
+        Zip(zipSourceDirect2DDirs, 
+            zipTargetDirect2DDirs, 
+            GetFiles(zipSourceDirect2DDirs.FullPath + "/*.dll") + 
+            GetFiles(zipSourceDirect2DDirs.FullPath + "/*.exe"));
 
-        Zip(zipSource_Skia, 
-            zipTarget_Skia, 
-            GetFiles(zipSource_Skia.FullPath + "/*.dll") + 
-            GetFiles(zipSource_Skia.FullPath + "/*.exe"));
+        Zip(zipSourceSkiaDirs, 
+            zipTargetSkiaDirs, 
+            GetFiles(zipSourceSkiaDirs.FullPath + "/*.dll") + 
+            GetFiles(zipSourceSkiaDirs.FullPath + "/*.exe"));
 
-        Zip(zipSource_Wpf, 
-            zipTarget_Wpf, 
-            GetFiles(zipSource_Wpf.FullPath + "/*.dll") + 
-            GetFiles(zipSource_Wpf.FullPath + "/*.exe"));
+        Zip(zipSourceWpfDirs, 
+            zipTargetWpfDirs, 
+            GetFiles(zipSourceWpfDirs.FullPath + "/*.dll") + 
+            GetFiles(zipSourceWpfDirs.FullPath + "/*.exe"));
     }
 });
 
