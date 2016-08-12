@@ -89,9 +89,6 @@ namespace Renderer.SkiaSharp
                         Rect2.Create(0, 0, width / scale, height / scale));
                 }
 
-                // Draw template contents to pdf graphics.
-                Draw(canvas, container.Template, container.Data.Properties, container.Data.Record);
-
                 // Draw page contents to pdf graphics.
                 Draw(canvas, container, container.Data.Properties, container.Data.Record);
             }
