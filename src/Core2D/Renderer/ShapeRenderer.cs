@@ -47,15 +47,17 @@ namespace Core2D.Renderer
         /// </summary>
         /// <param name="dc">The native drawing context.</param>
         /// <param name="container">The <see cref="XContainer"/> object.</param>
+        /// <param name="dx">The X coordinate offset.</param>
+        /// <param name="dy">The Y coordinate offset.</param>
         /// <param name="db">The properties database.</param>
         /// <param name="r">The data record.</param>
-        public virtual void Draw(object dc, XContainer container, ImmutableArray<XProperty> db, XRecord r)
+        public virtual void Draw(object dc, XContainer container, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
         {
             foreach (var layer in container.Layers)
             {
                 if (layer.IsVisible)
                 {
-                    Draw(dc, layer, db, r);
+                    Draw(dc, layer, dx, dy, db, r);
                 }
             }
         }
@@ -65,15 +67,17 @@ namespace Core2D.Renderer
         /// </summary>
         /// <param name="dc">The native drawing context.</param>
         /// <param name="layer">The <see cref="XLayer"/> object.</param>
+        /// <param name="dx">The X coordinate offset.</param>
+        /// <param name="dy">The Y coordinate offset.</param>
         /// <param name="db">The properties database.</param>
         /// <param name="r">The data record.</param>
-        public virtual void Draw(object dc, XLayer layer, ImmutableArray<XProperty> db, XRecord r)
+        public virtual void Draw(object dc, XLayer layer, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
         {
             foreach (var shape in layer.Shapes)
             {
                 if (shape.State.Flags.HasFlag(State.DrawShapeState.Flags))
                 {
-                    shape.Draw(dc, this, 0, 0, db, r);
+                    shape.Draw(dc, this, dx, dy, db, r);
                 }
             }
         }
