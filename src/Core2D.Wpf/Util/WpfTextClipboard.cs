@@ -19,7 +19,7 @@ namespace Core2D.Wpf
         {
             return Task.Run(() =>
             {
-                App.Current.Dispatcher.Invoke(() =>
+                Application.Current.Dispatcher.Invoke(() =>
                 {
                     Clipboard.SetText(text, TextDataFormat.UnicodeText);
                 });
@@ -34,7 +34,7 @@ namespace Core2D.Wpf
         {
             return Task.Run(() =>
             {
-                return App.Current.Dispatcher.Invoke(() =>
+                return Application.Current.Dispatcher.Invoke(() =>
                 {
                     return Clipboard.GetText(TextDataFormat.UnicodeText);
                 });
@@ -49,7 +49,7 @@ namespace Core2D.Wpf
         {
             return Task.Run(() =>
             {
-                return App.Current.Dispatcher.Invoke(() =>
+                return Application.Current.Dispatcher.Invoke(() =>
                 {
                     return Clipboard.ContainsText(TextDataFormat.UnicodeText);
                 });
