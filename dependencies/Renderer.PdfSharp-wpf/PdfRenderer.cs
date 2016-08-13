@@ -250,17 +250,6 @@ namespace Renderer.PdfSharp_core
             }
         }
 
-        private void DrawBackgroundInternal(XGraphics gfx, Core2D.Style.ArgbColor color, Core2D.Math.Rect2 rect)
-        {
-            gfx.DrawRectangle(
-                null,
-                ToXSolidBrush(color),
-                _scaleToPage(rect.X),
-                _scaleToPage(rect.Y),
-                _scaleToPage(rect.Width),
-                _scaleToPage(rect.Height));
-        }
-
         /// <inheritdoc/>
         public override void ClearCache(bool isZooming)
         {
