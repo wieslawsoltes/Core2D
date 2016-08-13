@@ -99,9 +99,9 @@ namespace Core2D.Shape
         }
 
         /// <summary>
-        /// Draws shape using current <see cref="Renderer"/>.
+        /// Draws shape using current <see cref="ShapeRenderer"/>.
         /// </summary>
-        /// <param name="dc">The generic drawing context object</param>
+        /// <param name="dc">The generic drawing context object.</param>
         /// <param name="renderer">The generic renderer object used to draw shape.</param>
         /// <param name="dx">The X axis draw position offset.</param>
         /// <param name="dy">The Y axis draw position offset.</param>
