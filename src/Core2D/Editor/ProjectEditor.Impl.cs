@@ -2153,8 +2153,11 @@ namespace Core2D.Editor
                 // Try to deserialize Xaml.
                 try
                 {
-                    OnImportXamlString(text);
-                    return;
+                    if (_xamlSerializer != null)
+                    {
+                        OnImportXamlString(text);
+                        return;
+                    }
                 }
                 catch (Exception ex)
                 {
