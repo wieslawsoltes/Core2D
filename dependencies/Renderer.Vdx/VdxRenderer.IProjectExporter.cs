@@ -65,7 +65,10 @@ namespace Renderer.Vdx
             var page = new Page(width, height);
             drawing.Pages.Add(page);
 
-			// TODO: Draw container template background.
+            if (container.Template.Background.A > 0)
+            {
+                Fill(page, 0, 0, width, height, container.Template.Background);
+            }
 
             Draw(page, container.Template, container.Data.Properties, container.Data.Record);
             Draw(page, container, container.Data.Properties, container.Data.Record);

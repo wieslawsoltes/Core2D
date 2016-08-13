@@ -132,10 +132,7 @@ namespace Renderer.PdfSharp_core
                 // Draw container template contents to pdf graphics.
                 if (container.Template.Background.A > 0)
                 {
-                    DrawBackgroundInternal(
-                        gfx,
-                        container.Template.Background,
-                        Core2D.Math.Rect2.Create(0, 0, pdfPage.Width.Value / scale, pdfPage.Height.Value / scale));
+                    Fill(gfx, 0, 0, pdfPage.Width.Value / scale, pdfPage.Height.Value / scale, container.Template.Background);
                 }
 
                 // Draw template contents to pdf graphics.
