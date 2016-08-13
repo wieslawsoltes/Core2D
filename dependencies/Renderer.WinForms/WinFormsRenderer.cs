@@ -308,6 +308,20 @@ namespace Renderer.WinForms
         }
 
         /// <inheritdoc/>
+        public override void Fill(object dc, double x, double y, double width, double height, ArgbColor color)
+        {
+            var _gfx = dc as Graphics;
+            Brush brush = ToSolidBrush(color);
+            _gfx.FillRectangle(
+                brush,
+                (float)x,
+                (float)y,
+                (float)width,
+                (float)height);
+            brush.Dispose();
+        }
+
+        /// <inheritdoc/>
         public override void Draw(object dc, XLine line, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
         {
             var _gfx = dc as Graphics;

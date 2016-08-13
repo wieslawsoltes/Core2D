@@ -362,6 +362,17 @@ namespace Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
+        public override void Fill(object dc, double x, double y, double width, double height, ArgbColor color)
+        {
+            var canvas = dc as SKCanvas;
+            var rect = SKRect.Create((float)x, (float)y, (float)width, (float)height);
+            using (var paint = ToSKPaintBrush(color))
+            {
+                canvas.DrawRect(rect, paint);
+            }
+        }
+
+        /// <inheritdoc/>
         public override void Draw(object dc, XLine line, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
         {
             var canvas = dc as SKCanvas;

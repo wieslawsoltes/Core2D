@@ -1,10 +1,12 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
 using System.Collections.Immutable;
 using Core2D.Data;
 using Core2D.Data.Database;
 using Core2D.Renderer;
 using Core2D.Shapes;
+using Core2D.Style;
 
 namespace Renderer.Vdx
 {
@@ -26,6 +28,12 @@ namespace Renderer.Vdx
         /// </summary>
         /// <returns>The new instance of the <see cref="VdxRenderer"/> class.</returns>
         public static VdxRenderer Create() => new VdxRenderer();
+
+        /// <inheritdoc/>
+        public override void Fill(object dc, double x, double y, double width, double height, ArgbColor color)
+        {
+            // TODO: Implement Fill.
+        }
 
         /// <inheritdoc/>
         public override void Draw(object dc, XLine line, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)

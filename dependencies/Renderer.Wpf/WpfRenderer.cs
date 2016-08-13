@@ -407,13 +407,6 @@ namespace Renderer.Wpf
             }
         }
 
-        private static void DrawTemplateBackground(DrawingContext dc, XContainer template)
-        {
-            var brush = CreateBrush(template.Background);
-            var rect = new Rect(0, 0, template.Width, template.Height);
-            DrawRectangleInternal(dc, 0.5, brush, null, false, true, ref rect);
-        }
-
         /// <inheritdoc/>
         public override void ClearCache(bool isZooming)
         {
@@ -433,25 +426,12 @@ namespace Renderer.Wpf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XContainer container, ImmutableArray<XProperty> db, XRecord r)
-        {
-            DrawTemplateBackground(dc as DrawingContext, container.Template);
-
-            base.Draw(dc, container, db, r);
-        }
-
-        /// <inheritdoc/>
-        public override void Draw(object dc, XLayer layer, ImmutableArray<XProperty> db, XRecord r)
+        public override void Fill(object dc, double x, double y, double width, double height, ArgbColor color)
         {
             var _dc = dc as DrawingContext;
-
-            foreach (var shape in layer.Shapes)
-            {
-                if (shape.State.Flags.HasFlag(_state.DrawShapeState.Flags))
-                {
-                    shape.Draw(_dc, this, 0, 0, db, r);
-                }
-            }
+            var brush = CreateBrush(color);
+            var rect = new Rect(x, y, width, height);
+            DrawRectangleInternal(_dc, 0.5, brush, null, false, true, ref rect);
         }
 
         /// <inheritdoc/>

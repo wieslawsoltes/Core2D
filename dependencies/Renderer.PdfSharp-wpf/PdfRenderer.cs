@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using Core2D.Style;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 #if WPF
@@ -265,6 +266,18 @@ namespace Renderer.PdfSharp_core
                 }
                 _biCache = new Dictionary<string, XImage>();
             }
+        }
+
+        /// <inheritdoc/>
+        public override void Fill(object dc, double x, double y, double width, double height, ArgbColor color)
+        {
+            var _gfx = dc as XGraphics;
+            _gfx.DrawRectangle(
+                ToXSolidBrush(color), 
+                _scaleToPage(x),
+                _scaleToPage(y),
+                _scaleToPage(width),
+                _scaleToPage(height));
         }
 
         /// <inheritdoc/>

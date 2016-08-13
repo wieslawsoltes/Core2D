@@ -329,6 +329,16 @@ namespace Renderer.Avalonia
         }
 
         /// <inheritdoc/>
+        public override void Fill(object dc, double x, double y, double width, double height, ArgbColor color)
+        {
+            var _dc = dc as AM.DrawingContext;
+            var brush = ToBrush(color);
+            var rect = new Rect2(x, y, width, height);
+            var r = new A.Rect(x, y, width, height);
+            _dc.FillRectangle(brush, r);
+        }
+
+        /// <inheritdoc/>
         public override void Draw(object dc, XLine line, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
         {
             var _dc = dc as AM.DrawingContext;

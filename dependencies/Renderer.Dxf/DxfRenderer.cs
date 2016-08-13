@@ -481,6 +481,14 @@ namespace Renderer.Dxf
         }
 
         /// <inheritdoc/>
+        public override void Fill(object dc, double x, double y, double width, double height, Core2D.Style.ArgbColor color)
+        {
+            var dxf = dc as DxfDocument;
+            var rect = Core2D.Math.Rect2.Create(x, y, x + width, y + height);
+            FillRectangle(dxf, _currentLayer, x, y, width, height, color);
+        }
+
+        /// <inheritdoc/>
         public override void Draw(object dc, Core2D.Project.XContainer container, ImmutableArray<Core2D.Data.XProperty> db, Core2D.Data.Database.XRecord r)
         {
             var dxf = dc as DxfDocument;
