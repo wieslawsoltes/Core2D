@@ -173,44 +173,49 @@ namespace Renderer.Dxf
 
         private void DrawRectangleInternal(DxfDocument dxf, Layer layer, bool isFilled, bool isStroked, Core2D.Style.BaseStyle style, ref Core2D.Math.Rect2 rect)
         {
-            double x = rect.X;
-            double y = rect.Y;
-            double w = rect.Width;
-            double h = rect.Height;
-
             if (isFilled)
             {
-                var fill = ToColor(style.Fill);
-                var fillTransparency = ToTransparency(style.Fill);
-
-                var bounds =
-                    new List<HatchBoundaryPath>
-                    {
-                        new HatchBoundaryPath(
-                            new List<EntityObject>
-                            {
-                                CreateLine(x, y, x + w, y),
-                                CreateLine(x + w, y, x + w, y + h),
-                                CreateLine(x + w, y + h, x, y + h),
-                                CreateLine(x, y + h, x, y)
-                            })
-                    };
-
-                var hatch = new Hatch(HatchPattern.Solid, bounds, false);
-                hatch.Layer = layer;
-                hatch.Color = fill;
-                hatch.Transparency.Value = fillTransparency;
-
-                dxf.AddEntity(hatch);
+                FillRectangle(dxf, layer, rect.X, rect.Y, rect.Width, rect.Height, style.Fill);
             }
 
             if (isStroked)
             {
-                DrawLineInternal(dxf, layer, style, true, x, y, x + w, y);
-                DrawLineInternal(dxf, layer, style, true, x + w, y, x + w, y + h);
-                DrawLineInternal(dxf, layer, style, true, x + w, y + h, x, y + h);
-                DrawLineInternal(dxf, layer, style, true, x, y + h, x, y);
+                StrokeRectangle(dxf, layer, style, rect.X, rect.Y, rect.Width, rect.Height);
             }
+        }
+
+        private void FillRectangle(DxfDocument dxf, Layer layer, double x, double y, double width, double height, Core2D.Style.ArgbColor color)
+        {
+            var fill = ToColor(color);
+            var fillTransparency = ToTransparency(color);
+
+            var bounds =
+                new List<HatchBoundaryPath>
+                {
+                        new HatchBoundaryPath(
+                            new List<EntityObject>
+                            {
+                                CreateLine(x, y, x + width, y),
+                                CreateLine(x + width, y, x + width, y + height),
+                                CreateLine(x + width, y + height, x, y + height),
+                                CreateLine(x, y + height, x, y)
+                            })
+                };
+
+            var hatch = new Hatch(HatchPattern.Solid, bounds, false);
+            hatch.Layer = layer;
+            hatch.Color = fill;
+            hatch.Transparency.Value = fillTransparency;
+
+            dxf.AddEntity(hatch);
+        }
+
+        private void StrokeRectangle(DxfDocument dxf, Layer layer, Core2D.Style.BaseStyle style, double x, double y, double width, double height)
+        {
+            DrawLineInternal(dxf, layer, style, true, x, y, x + width, y);
+            DrawLineInternal(dxf, layer, style, true, x + width, y, x + width, y + height);
+            DrawLineInternal(dxf, layer, style, true, x + width, y + height, x, y + height);
+            DrawLineInternal(dxf, layer, style, true, x, y + height, x, y);
         }
 
         private void DrawEllipseInternal(DxfDocument dxf, Layer layer, bool isFilled, bool isStroked, Core2D.Style.BaseStyle style, ref Core2D.Math.Rect2 rect)
@@ -219,41 +224,51 @@ namespace Renderer.Dxf
 
             if (isFilled)
             {
-                var fill = ToColor(style.Fill);
-                var fillTransparency = ToTransparency(style.Fill);
+                FillEllipse(dxf, layer, dxfEllipse, style.Fill);
+            }
 
-                // TODO: The netDxf does not create hatch for Ellipse with end angle equal to 360.
-                var bounds =
-                    new List<HatchBoundaryPath>
-                    {
+            if (isStroked)
+            {
+                StrokeEllipse(dxf, layer, dxfEllipse, style.Stroke, style.Thickness);
+            }
+        }
+
+        private void StrokeEllipse(DxfDocument dxf, Layer layer, Ellipse dxfEllipse, Core2D.Style.ArgbColor color, double thickness)
+        {
+            var stroke = ToColor(color);
+            var strokeTansparency = ToTransparency(color);
+            var lineweight = ToLineweight(thickness);
+
+            dxfEllipse.Layer = layer;
+            dxfEllipse.Color = stroke;
+            dxfEllipse.Transparency.Value = strokeTansparency;
+            dxfEllipse.Lineweight = lineweight;
+
+            dxf.AddEntity(dxfEllipse);
+        }
+
+        private void FillEllipse(DxfDocument dxf, Layer layer, Ellipse dxfEllipse, Core2D.Style.ArgbColor color)
+        {
+            var fill = ToColor(color);
+            var fillTransparency = ToTransparency(color);
+
+            // TODO: The netDxf does not create hatch for Ellipse with end angle equal to 360.
+            var bounds =
+                new List<HatchBoundaryPath>
+                {
                         new HatchBoundaryPath(
                             new List<EntityObject>
                             {
                                 (Ellipse)dxfEllipse.Clone()
                             })
-                    };
+                };
 
-                var hatch = new Hatch(HatchPattern.Solid, bounds, false);
-                hatch.Layer = layer;
-                hatch.Color = fill;
-                hatch.Transparency.Value = fillTransparency;
+            var hatch = new Hatch(HatchPattern.Solid, bounds, false);
+            hatch.Layer = layer;
+            hatch.Color = fill;
+            hatch.Transparency.Value = fillTransparency;
 
-                dxf.AddEntity(hatch);
-            }
-
-            if (isStroked)
-            {
-                var stroke = ToColor(style.Stroke);
-                var strokeTansparency = ToTransparency(style.Stroke);
-                var lineweight = ToLineweight(style.Thickness);
-
-                dxfEllipse.Layer = layer;
-                dxfEllipse.Color = stroke;
-                dxfEllipse.Transparency.Value = strokeTansparency;
-                dxfEllipse.Lineweight = lineweight;
-
-                dxf.AddEntity(dxfEllipse);
-            }
+            dxf.AddEntity(hatch);
         }
 
         private void DrawGridInternal(DxfDocument dxf, Layer layer, Core2D.Style.ShapeStyle style, double offsetX, double offsetY, double cellWidth, double cellHeight, ref Core2D.Math.Rect2 rect)
