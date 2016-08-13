@@ -39,17 +39,6 @@ namespace Core2D.Renderer
         /// <param name="r">The data record.</param>
         public virtual void Draw(object dc, XContainer container, ImmutableArray<XProperty> db, XRecord r)
         {
-            if (container.Template != null)
-            {
-                foreach (var layer in container.Template.Layers)
-                {
-                    if (layer.IsVisible)
-                    {
-                        Draw(dc, layer, db, r);
-                    }
-                }
-            }
-
             foreach (var layer in container.Layers)
             {
                 if (layer.IsVisible)
