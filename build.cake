@@ -1065,7 +1065,7 @@ Task("Publish-Chocolatey")
 ///////////////////////////////////////////////////////////////////////////////
 
 Task("Package")
-  .IsDependentOn("Zip-Files");
+  .IsDependentOn("Zip-Files")
   .IsDependentOn("Create-NuGet-Packages")
   .IsDependentOn("Create-Chocolatey-Packages");
 
