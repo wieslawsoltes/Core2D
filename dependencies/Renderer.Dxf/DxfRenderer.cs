@@ -489,7 +489,7 @@ namespace Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.Project.XContainer container, ImmutableArray<Core2D.Data.XProperty> db, Core2D.Data.Database.XRecord r)
+        public override void Draw(object dc, Core2D.Project.XContainer container, double dx, double dy, ImmutableArray<Core2D.Data.XProperty> db, Core2D.Data.Database.XRecord r)
         {
             var dxf = dc as DxfDocument;
 
@@ -504,12 +504,12 @@ namespace Renderer.Dxf
 
                 _currentLayer = dxfLayer;
 
-                Draw(dc, layer, db, r);
+                Draw(dc, layer, dx, dy, db, r);
             }
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.Project.XLayer layer, ImmutableArray<Core2D.Data.XProperty> db, Core2D.Data.Database.XRecord r)
+        public override void Draw(object dc, Core2D.Project.XLayer layer, double dx, double dy, ImmutableArray<Core2D.Data.XProperty> db, Core2D.Data.Database.XRecord r)
         {
             var dxf = dc as DxfDocument;
 
@@ -517,7 +517,7 @@ namespace Renderer.Dxf
             {
                 if (shape.State.Flags.HasFlag(State.DrawShapeState.Flags))
                 {
-                    shape.Draw(dxf, this, 0, 0, db, r);
+                    shape.Draw(dxf, this, dx, dy, db, r);
                 }
             }
         }

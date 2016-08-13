@@ -136,10 +136,10 @@ namespace Renderer.PdfSharp_core
                 }
 
                 // Draw template contents to pdf graphics.
-                Draw(gfx, container.Template, container.Data.Properties, container.Data.Record);
+                Draw(gfx, container.Template, 0.0, 0.0, container.Data.Properties, container.Data.Record);
 
                 // Draw page contents to pdf graphics.
-                Draw(gfx, container, container.Data.Properties, container.Data.Record);
+                Draw(gfx, container, 0.0, 0.0, container.Data.Properties, container.Data.Record);
             }
 
             return pdfPage;

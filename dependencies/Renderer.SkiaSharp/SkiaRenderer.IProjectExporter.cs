@@ -87,10 +87,10 @@ namespace Renderer.SkiaSharp
                 }
 
                 // Draw template contents to pdf graphics.
-                Draw(canvas, container.Template, container.Data.Properties, container.Data.Record);
+                Draw(canvas, container.Template, 0.0, 0.0, container.Data.Properties, container.Data.Record);
 
                 // Draw page contents to pdf graphics.
-                Draw(canvas, container, container.Data.Properties, container.Data.Record);
+                Draw(canvas, container, 0.0, 0.0, container.Data.Properties, container.Data.Record);
             }
         }
     }

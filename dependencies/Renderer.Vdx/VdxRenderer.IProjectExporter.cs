@@ -70,8 +70,8 @@ namespace Renderer.Vdx
                 Fill(page, 0, 0, width, height, container.Template.Background);
             }
 
-            Draw(page, container.Template, container.Data.Properties, container.Data.Record);
-            Draw(page, container, container.Data.Properties, container.Data.Record);
+            Draw(page, container.Template, 0.0, 0.0, container.Data.Properties, container.Data.Record);
+            Draw(page, container, 0.0, 0.0, container.Data.Properties, container.Data.Record);
         }
     }
 }

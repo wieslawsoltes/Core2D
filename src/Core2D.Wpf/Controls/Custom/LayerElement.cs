@@ -182,7 +182,7 @@ namespace Core2D.Wpf.Controls.Custom
                     var data = LayerElement.GetData(this);
                     var properties = data != null ? data.Properties : default(ImmutableArray<XProperty>);
                     var record = data != null ? data.Record : default(XRecord);
-                    renderer.Draw(drawingContext, layer, properties, record);
+                    renderer.Draw(drawingContext, layer, 0.0, 0.0, properties, record);
                 }
             }
         }

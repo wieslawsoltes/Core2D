@@ -131,8 +131,8 @@ namespace FileWriter.Emf
 
                     g.PageUnit = GraphicsUnit.Display;
 
-                    r.Draw(g, container.Template, container.Data.Properties, container.Data.Record);
-                    r.Draw(g, container, container.Data.Properties, container.Data.Record);
+                    r.Draw(g, container.Template, 0.0, 0.0, container.Data.Properties, container.Data.Record);
+                    r.Draw(g, container, 0.0, 0.0, container.Data.Properties, container.Data.Record);
 
                     r.ClearCache(isZooming: false);
                 }

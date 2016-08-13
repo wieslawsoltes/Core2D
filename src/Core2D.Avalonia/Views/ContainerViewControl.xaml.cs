@@ -76,14 +76,14 @@ namespace Core2D.Avalonia.Views
             {
                 if (Renderer != null)
                 {
-                    _presenter.Render(context, Renderer, Container);
+                    _presenter.Render(context, Renderer, Container, 0.0, 0.0);
                 }
                 else
                 {
                     var renderer = GetValue(RendererOptions.RendererProperty);
                     if (renderer != null)
                     {
-                        _presenter.Render(context, renderer, Container);
+                        _presenter.Render(context, renderer, Container, 0.0, 0.0);
                     }
                 }
             }

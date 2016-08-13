@@ -54,14 +54,14 @@ namespace Renderer.Dxf
             {
                 _pageWidth = container.Template.Width;
                 _pageHeight = container.Template.Height;
-                Draw(dxf, container.Template, container.Data.Properties, container.Data.Record);
+                Draw(dxf, container.Template, 0.0, 0.0, container.Data.Properties, container.Data.Record);
             }
             else
             {
                 throw new NullReferenceException("Container template must be set.");
             }
 
-            Draw(dxf, container, container.Data.Properties, container.Data.Record);
+            Draw(dxf, container, 0.0, 0.0, container.Data.Properties, container.Data.Record);
         }
 
         private void Add(DxfDocument dxf, Core2D.Project.XDocument document)

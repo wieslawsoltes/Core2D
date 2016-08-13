@@ -18,24 +18,26 @@ namespace Core2D.Renderer.Presenters
         /// <param name="dc">The drawing context.</param>
         /// <param name="renderer">The shape renderer.</param>
         /// <param name="container">The container to render.</param>
-        public virtual void Render(object dc, ShapeRenderer renderer, XContainer container)
+        /// <param name="dx">The X coordinate offset.</param>
+        /// <param name="dy">The Y coordinate offset.</param>
+        public virtual void Render(object dc, ShapeRenderer renderer, XContainer container, double dx, double dy)
         {
             renderer.Fill(dc, 0, 0, container.Width, container.Height, container.Background);
 
             var db = container.Data == null ? default(ImmutableArray<XProperty>) : container.Data.Properties;
             var r = container.Data == null ? default(XRecord) : container.Data.Record;
 
-            renderer.Draw(dc, container.Template, db, r);
-            renderer.Draw(dc, container, db, r);
+            renderer.Draw(dc, container.Template, dx, dy, db, r);
+            renderer.Draw(dc, container, dx, dy, db, r);
 
             if (container.WorkingLayer != null)
             {
-                renderer.Draw(dc, container.WorkingLayer, db, r);
+                renderer.Draw(dc, container.WorkingLayer, dx, dy, db, r);
             }
 
             if (container.HelperLayer != null)
             {
-                renderer.Draw(dc, container.HelperLayer, db, r);
+                renderer.Draw(dc, container.HelperLayer, dx, dy, db, r);
             }
         }
     }
