@@ -43,6 +43,9 @@ var XBuildSolution = "./Core2D.mono.sln";
 // PARAMETERS
 ///////////////////////////////////////////////////////////////////////////////
 
+var isPlatformAnyCPU = StringComparer.OrdinalIgnoreCase.Equals(platform, "AnyCPU");
+var isPlatformX86 = StringComparer.OrdinalIgnoreCase.Equals(platform, "x86");
+var isPlatformX64 = StringComparer.OrdinalIgnoreCase.Equals(platform, "x64");
 var isLocalBuild = BuildSystem.IsLocalBuild;
 var isRunningOnUnix = IsRunningOnUnix();
 var isRunningOnWindows = IsRunningOnWindows();
@@ -54,9 +57,8 @@ var isTagged = BuildSystem.AppVeyor.Environment.Repository.Tag.IsTag
                && !string.IsNullOrWhiteSpace(BuildSystem.AppVeyor.Environment.Repository.Tag.Name);
 var isReleasable = StringComparer.OrdinalIgnoreCase.Equals(ReleasePlatform, platform) 
                    && StringComparer.OrdinalIgnoreCase.Equals(ReleaseConfiguration, configuration);
-var isMyGetRelease = !isTagged && isReleasable;
-var isNuGetRelease = isTagged && isReleasable;
-var isAnyCPU = StringComparer.OrdinalIgnoreCase.Equals(platform, "AnyCPU");
+var isMyGetRelease = !isTagged && isReleasable && isPlatformAnyCPU;
+var isNuGetRelease = isTagged && isReleasable && isPlatformAnyCPU;
 
 ///////////////////////////////////////////////////////////////////////////////
 // VERSION
@@ -89,7 +91,7 @@ var chocolateyRoot = artifactsDir.Combine("chocolatey");
 var zipRoot = artifactsDir.Combine("zip");
 
 var dirSuffix = platform + "/" + configuration;
-var dirSuffixSkia = (isAnyCPU ? "x86" : platform) + "/" + configuration;
+var dirSuffixSkia = (isPlatformAnyCPU ? "x86" : platform) + "/" + configuration;
 
 Func<IFileSystemInfo, bool> ExcludeSkia = i => {
     return !(i.Path.FullPath.IndexOf("Skia", StringComparison.OrdinalIgnoreCase) >= 0);
@@ -114,7 +116,7 @@ var buildDirs =
     GetSkiaDirectories("./tests/**/obj/" + dirSuffixSkia);
 
 var fileZipSuffix = platform + "-" + configuration + "-" + version + ".zip";
-var fileZipSuffixSkia = (isAnyCPU ? "x86" : platform) + "-" + configuration + "-" + version + ".zip";
+var fileZipSuffixSkia = (isPlatformAnyCPU ? "x86" : platform) + "-" + configuration + "-" + version + ".zip";
 
 var zipSourceCairoDirs = (DirectoryPath)Directory("./src/Core2D.Avalonia.Cairo/bin/" + dirSuffix);
 var zipSourceDirect2DDirs = (DirectoryPath)Directory("./src/Core2D.Avalonia.Direct2D/bin/" + dirSuffix);
@@ -848,7 +850,7 @@ Task("Run-Unit-Tests")
     .Does(() =>
 {
     string pattern = "./tests/**/bin/" + platform + "/" + configuration + "/*.UnitTests.dll";
-    if (platform == "x86")
+    if (isPlatformAnyCPU || isPlatformX86)
     {
         XUnit2(pattern, new XUnit2Settings { 
             ToolPath = "./tools/xunit.runner.console/tools/xunit.console.x86.exe",
