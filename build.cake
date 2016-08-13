@@ -89,6 +89,7 @@ var testResultsDir = artifactsDir.Combine("test-results");
 var nugetRoot = artifactsDir.Combine("nuget");
 var chocolateyRoot = artifactsDir.Combine("chocolatey");
 var zipRoot = artifactsDir.Combine("zip");
+var binRoot = artifactsDir.Combine("bin");
 
 var dirSuffix = platform + "/" + configuration;
 var dirSuffixSkia = (isPlatformAnyCPU ? "x86" : platform) + "/" + configuration;
@@ -118,12 +119,14 @@ var buildDirs =
 var fileZipSuffix = platform + "-" + configuration + "-" + version + ".zip";
 var fileZipSuffixSkia = (isPlatformAnyCPU ? "x86" : platform) + "-" + configuration + "-" + version + ".zip";
 
+var zipCoreArtifacts = zipRoot.CombineWithFilePath("Core2D-" + fileZipSuffix);
+
 var zipSourceCairoDirs = (DirectoryPath)Directory("./src/Core2D.Avalonia.Cairo/bin/" + dirSuffix);
 var zipSourceDirect2DDirs = (DirectoryPath)Directory("./src/Core2D.Avalonia.Direct2D/bin/" + dirSuffix);
 var zipSourceSkiaDirs = (DirectoryPath)Directory("./src/Core2D.Avalonia.Skia/bin/" + dirSuffixSkia);
 var zipSourceWpfDirs = (DirectoryPath)Directory("./src/Core2D.Wpf/bin/" + dirSuffix);
 
-var zipTargetCairoDirs = zipRoot.CombineWithFilePath("Core2D.Avalonia.Cairo." + fileZipSuffix);
+var zipTargetCairoDirs = zipRoot.CombineWithFilePath("Core2D.Avalonia.Cairo-" + fileZipSuffix);
 var zipTargetDirect2DDirs = zipRoot.CombineWithFilePath("Core2D.Avalonia.Direct2D-" + fileZipSuffix);
 var zipTargetSkiaDirs = zipRoot.CombineWithFilePath("Core2D.Avalonia.Skia-" + fileZipSuffixSkia);
 var zipTargetWpfDirs = zipRoot.CombineWithFilePath("Core2D.Wpf-" + fileZipSuffix);
@@ -172,7 +175,7 @@ var nuspecNuGetSettingsCore = new []
             new NuSpecContent { Source = "Core2D.dll", Target = "lib/portable-windows8+net45" }
         },
         BasePath = Directory("./src/Core2D/bin/" + dirSuffix),
-        OutputDirectory = nugetRoot.Combine("Core2D")
+        OutputDirectory = nugetRoot
     },
     ///////////////////////////////////////////////////////////////////////////////
     // src: Core2D.Avalonia
@@ -198,7 +201,7 @@ var nuspecNuGetSettingsCore = new []
             new NuSpecContent { Source = "Core2D.Avalonia.dll", Target = "lib/portable-windows8+net45" }
         },
         BasePath = Directory("./src/Core2D.Avalonia/bin/" + dirSuffix),
-        OutputDirectory = nugetRoot.Combine("Core2D.Avalonia")
+        OutputDirectory = nugetRoot
     }
 };
 
@@ -219,7 +222,7 @@ var nuspecNuGetSettingsDependencies = new []
             new NuSpecContent { Source = "FileSystem.DotNetFx.dll", Target = "lib/net45" }
         },
         BasePath = Directory("./dependencies/FileSystem.DotNetFx/bin/" + dirSuffix),
-        OutputDirectory = nugetRoot.Combine("Core2D.FileSystem.DotNetFx")
+        OutputDirectory = nugetRoot
     },
     ///////////////////////////////////////////////////////////////////////////////
     // dependencies: FileWriter.Dxf
@@ -238,7 +241,7 @@ var nuspecNuGetSettingsDependencies = new []
             new NuSpecContent { Source = "FileWriter.Dxf.dll", Target = "lib/net45" }
         },
         BasePath = Directory("./dependencies/FileWriter.Dxf/bin/" + dirSuffix),
-        OutputDirectory = nugetRoot.Combine("Core2D.FileWriter.Dxf")
+        OutputDirectory = nugetRoot
     },
     ///////////////////////////////////////////////////////////////////////////////
     // dependencies: FileWriter.Emf
@@ -257,7 +260,7 @@ var nuspecNuGetSettingsDependencies = new []
             new NuSpecContent { Source = "FileWriter.Emf.dll", Target = "lib/net45" }
         },
         BasePath = Directory("./dependencies/FileWriter.Emf/bin/" + dirSuffix),
-        OutputDirectory = nugetRoot.Combine("Core2D.FileWriter.Emf")
+        OutputDirectory = nugetRoot
     },
     ///////////////////////////////////////////////////////////////////////////////
     // dependencies: FileWriter.Pdf_core
@@ -276,7 +279,7 @@ var nuspecNuGetSettingsDependencies = new []
             new NuSpecContent { Source = "FileWriter.Pdf-core.dll", Target = "lib/net45" }
         },
         BasePath = Directory("./dependencies/FileWriter.Pdf-core/bin/" + dirSuffix),
-        OutputDirectory = nugetRoot.Combine("Core2D.FileWriter.PdfCore")
+        OutputDirectory = nugetRoot
     },
     ///////////////////////////////////////////////////////////////////////////////
     // dependencies: FileWriter.Pdf_wpf
@@ -295,7 +298,7 @@ var nuspecNuGetSettingsDependencies = new []
             new NuSpecContent { Source = "FileWriter.Pdf-wpf.dll", Target = "lib/net45" }
         },
         BasePath = Directory("./dependencies/FileWriter.Pdf-wpf./bin/" + dirSuffix),
-        OutputDirectory = nugetRoot.Combine("Core2D.FileWriter.PdfWpf")
+        OutputDirectory = nugetRoot
     },
     ///////////////////////////////////////////////////////////////////////////////
     // dependencies: FileWriter.Vdx
@@ -314,7 +317,7 @@ var nuspecNuGetSettingsDependencies = new []
             new NuSpecContent { Source = "FileWriter.Vdx.dll", Target = "lib/net45" }
         },
         BasePath = Directory("./dependencies/FileWriter.Vdx/bin/" + dirSuffix),
-        OutputDirectory = nugetRoot.Combine("Core2D.FileWriter.Vdx")
+        OutputDirectory = nugetRoot
     },
     ///////////////////////////////////////////////////////////////////////////////
     // dependencies: Log.Trace
@@ -332,7 +335,7 @@ var nuspecNuGetSettingsDependencies = new []
             new NuSpecContent { Source = "Log.Trace.dll", Target = "lib/net45" }
         },
         BasePath = Directory("./dependencies/Log.Trace/bin/" + dirSuffix),
-        OutputDirectory = nugetRoot.Combine("Core2D.Log.Trace")
+        OutputDirectory = nugetRoot
     },
     ///////////////////////////////////////////////////////////////////////////////
     // dependencies: Renderer.Avalonia
@@ -352,7 +355,7 @@ var nuspecNuGetSettingsDependencies = new []
             new NuSpecContent { Source = "Renderer.Avalonia.dll", Target = "portable-windows8+net45" }
         },
         BasePath = Directory("./dependencies/Renderer.Avalonia/bin/" + dirSuffix),
-        OutputDirectory = nugetRoot.Combine("Core2D.Renderer.Avalonia")
+        OutputDirectory = nugetRoot
     },
     ///////////////////////////////////////////////////////////////////////////////
     // dependencies: Renderer.Dxf
@@ -371,7 +374,7 @@ var nuspecNuGetSettingsDependencies = new []
             new NuSpecContent { Source = "Renderer.Dxf.dll", Target = "lib/net45" }
         },
         BasePath = Directory("./dependencies/Renderer.Dxf/bin/" + dirSuffix),
-        OutputDirectory = nugetRoot.Combine("Core2D.Renderer.Dxf")
+        OutputDirectory = nugetRoot
     },
     ///////////////////////////////////////////////////////////////////////////////
     // dependencies: Renderer.PdfSharp_core
@@ -390,7 +393,7 @@ var nuspecNuGetSettingsDependencies = new []
             new NuSpecContent { Source = "Renderer.PdfSharp-core.dll", Target = "lib/net45" }
         },
         BasePath = Directory("./dependencies/Renderer.PdfSharp-core/bin/" + dirSuffix),
-        OutputDirectory = nugetRoot.Combine("Core2D.Renderer.PdfSharpCore")
+        OutputDirectory = nugetRoot
     },
     ///////////////////////////////////////////////////////////////////////////////
     // dependencies: Renderer.PdfSharp-wpf
@@ -409,7 +412,7 @@ var nuspecNuGetSettingsDependencies = new []
             new NuSpecContent { Source = "Renderer.PdfSharp-wpf.dll", Target = "lib/net45" }
         },
         BasePath = Directory("./dependencies/Renderer.PdfSharp-wpf/bin/" + dirSuffix),
-        OutputDirectory = nugetRoot.Combine("Core2D.Renderer.PdfSharpWpf")
+        OutputDirectory = nugetRoot
     },
     ///////////////////////////////////////////////////////////////////////////////
     // dependencies: Renderer.Vdx
@@ -428,7 +431,7 @@ var nuspecNuGetSettingsDependencies = new []
             new NuSpecContent { Source = "Renderer.Vdx.dll", Target = "lib/net45" }
         },
         BasePath = Directory("./dependencies/Renderer.Vdx/bin/" + dirSuffix),
-        OutputDirectory = nugetRoot.Combine("Core2D.Renderer.Vdx")
+        OutputDirectory = nugetRoot
     },
     ///////////////////////////////////////////////////////////////////////////////
     // dependencies: Renderer.WinForms
@@ -446,7 +449,7 @@ var nuspecNuGetSettingsDependencies = new []
             new NuSpecContent { Source = "Renderer.WinForms.dll", Target = "lib/net45" }
         },
         BasePath = Directory("./dependencies/Renderer.WinForms/bin/" + dirSuffix),
-        OutputDirectory = nugetRoot.Combine("Core2D.Renderer.WinForms")
+        OutputDirectory = nugetRoot
     },
     ///////////////////////////////////////////////////////////////////////////////
     // dependencies: Renderer.Wpf
@@ -464,7 +467,7 @@ var nuspecNuGetSettingsDependencies = new []
             new NuSpecContent { Source = "Renderer.Wpf.dll", Target = "lib/net45" }
         },
         BasePath = Directory("./dependencies/Renderer.Wpf/bin/" + dirSuffix),
-        OutputDirectory = nugetRoot.Combine("Core2D.Renderer.Wpf")
+        OutputDirectory = nugetRoot
     },
     ///////////////////////////////////////////////////////////////////////////////
     // dependencies: Serializer.Newtonsoft
@@ -483,7 +486,7 @@ var nuspecNuGetSettingsDependencies = new []
             new NuSpecContent { Source = "Serializer.Newtonsoft.dll", Target = "lib/portable-windows8+net45" }
         },
         BasePath = Directory("./dependencies/Serializer.Newtonsoft/bin/" + dirSuffix),
-        OutputDirectory = nugetRoot.Combine("Core2D.Serializer.Newtonsoft")
+        OutputDirectory = nugetRoot
     },
     ///////////////////////////////////////////////////////////////////////////////
     // dependencies: Serializer.Xaml
@@ -502,7 +505,7 @@ var nuspecNuGetSettingsDependencies = new []
             new NuSpecContent { Source = "Serializer.Xaml.dll", Target = "lib/portable-windows8+net45" }
         },
         BasePath = Directory("./dependencies/Serializer.Xaml/bin/" + dirSuffix),
-        OutputDirectory = nugetRoot.Combine("Core2D.Serializer.Xaml")
+        OutputDirectory = nugetRoot
     },
     ///////////////////////////////////////////////////////////////////////////////
     // dependencies: TextFieldReader.CsvHelper
@@ -521,7 +524,7 @@ var nuspecNuGetSettingsDependencies = new []
             new NuSpecContent { Source = "TextFieldReader.CsvHelper.dll", Target = "lib/portable-windows8+net45" }
         },
         BasePath = Directory("./dependencies/TextFieldReader.CsvHelper/bin/" + dirSuffix),
-        OutputDirectory = nugetRoot.Combine("Core2D.TextFieldReader.CsvHelper")
+        OutputDirectory = nugetRoot
     },
     ///////////////////////////////////////////////////////////////////////////////
     // dependencies: TextFieldWriter.CsvHelper
@@ -540,7 +543,7 @@ var nuspecNuGetSettingsDependencies = new []
             new NuSpecContent { Source = "TextFieldWriter.CsvHelper.dll", Target = "lib/portable-windows8+net45" }
         },
         BasePath = Directory("./dependencies/TextFieldWriter.CsvHelper/bin/" + dirSuffix),
-        OutputDirectory = nugetRoot.Combine("Core2D.TextFieldWriter.CsvHelper")
+        OutputDirectory = nugetRoot
     }
 };
 
@@ -557,7 +560,7 @@ var nuspecNuGetSettingsDependenciesModules = new []
             new NuSpecContent { Source = "PdfSharp.dll", Target = "lib/net45" }
         },
         BasePath = Directory("./dependencies/PDFsharp/src/PdfSharp/bin/" + configuration),
-        OutputDirectory = nugetRoot.Combine("Core2D.PdfSharpCore")
+        OutputDirectory = nugetRoot
     },
     ///////////////////////////////////////////////////////////////////////////////
     // dependencies: PdfSharp-wpf
@@ -570,7 +573,7 @@ var nuspecNuGetSettingsDependenciesModules = new []
             new NuSpecContent { Source = "PdfSharp-wpf.dll", Target = "lib/net45" }
         },
         BasePath = Directory("./dependencies/PDFsharp/src/PdfSharp-wpf/bin/" + configuration),
-        OutputDirectory = nugetRoot.Combine("Core2D.PdfSharpWpf")
+        OutputDirectory = nugetRoot
     },
     ///////////////////////////////////////////////////////////////////////////////
     // dependencies: VisioAutomation.VDX
@@ -583,7 +586,7 @@ var nuspecNuGetSettingsDependenciesModules = new []
             new NuSpecContent { Source = "VisioAutomation.VDX.dll", Target = "lib/net45" }
         },
         BasePath = Directory("./dependencies/VisioAutomation.VDX/VisioAutomation.VDX/bin/" + configuration),
-        OutputDirectory = nugetRoot.Combine("Core2D.VisioAutomation.VDX")
+        OutputDirectory = nugetRoot
     },
     ///////////////////////////////////////////////////////////////////////////////
     // dependencies: netDxf
@@ -596,7 +599,7 @@ var nuspecNuGetSettingsDependenciesModules = new []
             new NuSpecContent { Source = "netDxf.dll", Target = "lib/net45" }
         },
         BasePath = Directory("./dependencies/netDxf/netDxf/bin/" + configuration),
-        OutputDirectory = nugetRoot.Combine("Core2D.NetDxf")
+        OutputDirectory = nugetRoot
     }
 };
 
@@ -619,7 +622,7 @@ var nuspecNuGetSettingsDependenciesSkia = new []
             new NuSpecContent { Source = "FileWriter.PdfSkiaSharp.dll", Target = "lib/net45" }
         },
         BasePath = Directory("./dependencies/FileWriter.PdfSkiaSharp/bin/" + dirSuffixSkia),
-        OutputDirectory = nugetRoot.Combine("Core2D.FileWriter.PdfSkiaSharp")
+        OutputDirectory = nugetRoot
     },
     ///////////////////////////////////////////////////////////////////////////////
     // dependencies: Renderer.SkiaSharp
@@ -638,7 +641,7 @@ var nuspecNuGetSettingsDependenciesSkia = new []
             new NuSpecContent { Source = "Renderer.SkiaSharp.dll", Target = "lib/net45" }
         },
         BasePath = Directory("./dependencies/Renderer.SkiaSharp/bin/" + dirSuffixSkia),
-        OutputDirectory = nugetRoot.Combine("Core2D.Renderer.SkiaSharp")
+        OutputDirectory = nugetRoot
     }
 };
 
@@ -655,7 +658,11 @@ var nugetPackages = nuspecNuGetSettings.Select(nuspec => {
     return nuspec.OutputDirectory.CombineWithFilePath(string.Concat(nuspec.Id, ".", nuspec.Version, ".nupkg"));
 }).ToArray();
 
-var nupkgNuGetDirs = nuspecNuGetSettings.Select(nuspec => nuspec.OutputDirectory);
+var binFiles = nuspecNuGetSettings.SelectMany(nuspec => {
+    return nuspec.Files.Select(file => {
+        return ((DirectoryPath)nuspec.BasePath).CombineWithFilePath(file.Source);
+    });
+}).GroupBy(f => f.FullPath).Select(g => g.First());
 
 ///////////////////////////////////////////////////////////////////////////////
 // CHOCOLATEY NUSPECS
@@ -692,7 +699,7 @@ nuspecChocolateySettings.Add(
     {
         Id = "Core2D.Avalonia.Cairo",
         Title = "Core2D (Avalonia/Cairo)",
-        OutputDirectory = chocolateyRoot.Combine("Core2D.Avalonia.Cairo")
+        OutputDirectory = chocolateyRoot
     },
     zipSourceCairoDirs);
 
@@ -704,7 +711,7 @@ nuspecChocolateySettings.Add(
     {
         Id = "Core2D.Avalonia.Direct2D",
         Title = "Core2D (Avalonia/Direct2D)",
-        OutputDirectory = chocolateyRoot.Combine("Core2D.Avalonia.Direct2D")
+        OutputDirectory = chocolateyRoot
     },
     zipSourceDirect2DDirs);
 
@@ -716,7 +723,7 @@ nuspecChocolateySettings.Add(
     {
         Id = "Core2D.Avalonia.Skia",
         Title = "Core2D (Avalonia/Skia)",
-        OutputDirectory = chocolateyRoot.Combine("Core2D.Avalonia.Skia")
+        OutputDirectory = chocolateyRoot
     },
     zipSourceSkiaDirs);
 
@@ -728,7 +735,7 @@ nuspecChocolateySettings.Add(
     {
         Id = "Core2D.Wpf",
         Title = "Core2D (WPF)",
-        OutputDirectory = chocolateyRoot.Combine("Core2D.Wpf")
+        OutputDirectory = chocolateyRoot
     },
     zipSourceWpfDirs);
 
@@ -737,8 +744,6 @@ nuspecChocolateySettings.ToList().ForEach((nuspec) => SetChocolateyNuspecCommonP
 var chocolateyPackages = nuspecChocolateySettings.Select(nuspec => {
     return nuspec.Key.OutputDirectory.CombineWithFilePath(string.Concat(nuspec.Key.Id, ".", nuspec.Key.Version, ".nupkg"));
 }).ToArray();
-
-var nupkgChocolateyDirs = nuspecChocolateySettings.Select(nuspec => nuspec.Key.OutputDirectory);
 
 ///////////////////////////////////////////////////////////////////////////////
 // INFORMATION
@@ -783,10 +788,9 @@ Task("Clean")
     CleanDirectory(artifactsDir);
     CleanDirectory(testResultsDir);
     CleanDirectory(zipRoot);
+    CleanDirectory(binRoot);
     CleanDirectory(nugetRoot);
-    CleanDirectories(nupkgNuGetDirs);
     CleanDirectory(chocolateyRoot);
-    CleanDirectories(nupkgChocolateyDirs);
 });
 
 Task("Restore-NuGet-Packages")
@@ -870,10 +874,19 @@ Task("Run-Unit-Tests")
     }
 });
 
-Task("Zip-Files")
+Task("Copy-Files")
     .IsDependentOn("Run-Unit-Tests")
     .Does(() =>
 {
+    CopyFiles(binFiles, binRoot);
+});
+
+Task("Zip-Files")
+    .IsDependentOn("Copy-Files")
+    .Does(() =>
+{
+    Zip(binRoot, zipCoreArtifacts);
+
     Zip(zipSourceCairoDirs, 
         zipTargetCairoDirs, 
         GetFiles(zipSourceCairoDirs.FullPath + "/*.dll") + 
@@ -927,6 +940,8 @@ Task("Upload-AppVeyor-Artifacts")
     .WithCriteria(() => isRunningOnAppVeyor)
     .Does(() =>
 {
+    AppVeyor.UploadArtifact(zipCoreArtifacts.FullPath);
+
     foreach(var zip in GetFiles(zipRoot + "/*"))
     {
         AppVeyor.UploadArtifact(zip);
@@ -1050,7 +1065,7 @@ Task("Publish-Chocolatey")
 ///////////////////////////////////////////////////////////////////////////////
 
 Task("Package")
-  .IsDependentOn("Zip-Files")
+  .IsDependentOn("Zip-Files");
   .IsDependentOn("Create-NuGet-Packages")
   .IsDependentOn("Create-Chocolatey-Packages");
 
