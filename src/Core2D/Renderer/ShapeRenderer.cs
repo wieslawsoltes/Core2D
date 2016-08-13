@@ -5,6 +5,7 @@ using Core2D.Data;
 using Core2D.Data.Database;
 using Core2D.Project;
 using Core2D.Shapes;
+using Core2D.Style;
 
 namespace Core2D.Renderer
 {
@@ -29,6 +30,17 @@ namespace Core2D.Renderer
         /// </summary>
         /// <param name="isZooming">The flag indicating zooming state.</param>
         public virtual void ClearCache(bool isZooming) { }
+
+        /// <summary>
+        /// Fills rectangle with specified color using drawing context.
+        /// </summary>
+        /// <param name="dc">The native drawing context.</param>
+        /// <param name="x">The X coordinate of rectangle origin point.</param>
+        /// <param name="y">The Y coordinate of rectangle origin point.</param>
+        /// <param name="width">The width of rectangle.</param>
+        /// <param name="height">The height of rectangle.</param>
+        /// <param name="color">The fill color.</param>
+        public abstract void Fill(object dc, double x, double y, double width, double height, ArgbColor color);
 
         /// <summary>
         /// Draws a <see cref="XContainer"/> using drawing context.
