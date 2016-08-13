@@ -16,7 +16,7 @@
     <TargetFrameworkProfile>Profile7</TargetFrameworkProfile>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
-  <Import Project="..\..\Core2D.targets"/>
+  <Import Project="..\..\Core2D.targets" />
   <ItemGroup>
     <Compile Include="Attributes\ContentAttribute.cs" />
     <Compile Include="Attributes\NameAttribute.cs" />
@@ -148,8 +148,11 @@
     <Compile Include="Project\XSelectable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Renderer\Cache.cs" />
+    <Compile Include="Renderer\Presenters\IContainerPresenter.cs" />
     <Compile Include="Renderer\IImageCache.cs" />
+    <Compile Include="Renderer\Presenters\ILayerPresenter.cs" />
     <Compile Include="Renderer\ImageKey.cs" />
+    <Compile Include="Renderer\Presenters\IShapePresenter.cs" />
     <Compile Include="Renderer\ShapeRenderer.cs" />
     <Compile Include="Renderer\ShapeRendererState.cs" />
     <Compile Include="Shapes\Interfaces\IArc.cs" />
