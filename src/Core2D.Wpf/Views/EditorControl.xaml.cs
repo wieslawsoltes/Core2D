@@ -1,16 +1,17 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
+using System.Windows;
+using System.Windows.Controls;
 using Core2D.Data.Database;
 using Core2D.Editor;
+using Core2D.Editor.Input;
 using Core2D.Project;
 using Core2D.Shape;
 using Core2D.Shapes;
 using Core2D.Style;
+using Core2D.Wpf.Util;
 using Microsoft.Win32;
-using System;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
 using Xceed.Wpf.AvalonDock.Layout.Serialization;
 
 namespace Core2D.Wpf.Views
@@ -21,6 +22,7 @@ namespace Core2D.Wpf.Views
     public partial class EditorControl : UserControl
     {
         private ProjectEditor _projectEditor;
+        private InputProcessor _inputProcessor;
         private bool _isLoaded = false;
         private bool _restoreLayout = true;
         private string _resourceLayoutRoot = "Core2D.Wpf.Layouts.";
@@ -88,56 +90,6 @@ namespace Core2D.Wpf.Views
                 {
                     _projectEditor.OnInvalidateCache(isZooming: true);
                 }
-            }
-        }
-
-        private void ZoomBorder_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            zoomBorder.Focus();
-            if (_projectEditor.IsLeftDownAvailable())
-            {
-                var p = e.GetPosition(drawableControl);
-                _projectEditor.LeftDown(p.X, p.Y);
-            }
-        }
-
-        private void ZoomBorder_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            zoomBorder.Focus();
-            if (_projectEditor.IsLeftUpAvailable())
-            {
-                var p = e.GetPosition(drawableControl);
-                _projectEditor.LeftUp(p.X, p.Y);
-            }
-        }
-
-        private void ZoomBorder_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            zoomBorder.Focus();
-            if (_projectEditor.IsRightDownAvailable())
-            {
-                var p = e.GetPosition(drawableControl);
-                _projectEditor.RightDown(p.X, p.Y);
-            }
-        }
-
-        private void ZoomBorder_PreviewMouseRightButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            zoomBorder.Focus();
-            if (_projectEditor.IsRightUpAvailable())
-            {
-                var p = e.GetPosition(drawableControl);
-                _projectEditor.RightUp(p.X, p.Y);
-            }
-        }
-
-        private void ZoomBorder_PreviewMouseMove(object sender, MouseEventArgs e)
-        {
-            zoomBorder.Focus();
-            if (_projectEditor.IsMoveAvailable())
-            {
-                var p = e.GetPosition(drawableControl);
-                _projectEditor.Move(p.X, p.Y);
             }
         }
 
@@ -285,11 +237,13 @@ namespace Core2D.Wpf.Views
                 _projectEditor.ResetLayout = () => OnResetLayout();
 
                 zoomBorder.InvalidatedChild = InvalidateChild;
-                zoomBorder.PreviewMouseLeftButtonDown += ZoomBorder_PreviewMouseLeftButtonDown;
-                zoomBorder.PreviewMouseLeftButtonUp += ZoomBorder_PreviewMouseLeftButtonUp;
-                zoomBorder.PreviewMouseRightButtonDown += ZoomBorder_PreviewMouseRightButtonDown;
-                zoomBorder.PreviewMouseRightButtonUp += ZoomBorder_PreviewMouseRightButtonUp;
-                zoomBorder.PreviewMouseMove += ZoomBorder_PreviewMouseMove;
+
+                _inputProcessor = new InputProcessor(
+                    new WpfInputSource(
+                        zoomBorder, 
+                        drawableControl, 
+                        (point) => point), 
+                    _projectEditor);
 
                 zoomBorder.AllowDrop = true;
                 zoomBorder.DragEnter += ZoomBorder_DragEnter;
@@ -312,11 +266,8 @@ namespace Core2D.Wpf.Views
                 _projectEditor.ResetLayout = null;
 
                 zoomBorder.InvalidatedChild = null;
-                zoomBorder.PreviewMouseLeftButtonDown -= ZoomBorder_PreviewMouseLeftButtonDown;
-                zoomBorder.PreviewMouseLeftButtonUp -= ZoomBorder_PreviewMouseLeftButtonUp;
-                zoomBorder.PreviewMouseRightButtonDown -= ZoomBorder_PreviewMouseRightButtonDown;
-                zoomBorder.PreviewMouseRightButtonUp -= ZoomBorder_PreviewMouseRightButtonUp;
-                zoomBorder.PreviewMouseMove -= ZoomBorder_PreviewMouseMove;
+
+                _inputProcessor.Dispose();
 
                 zoomBorder.AllowDrop = false;
                 zoomBorder.DragEnter -= ZoomBorder_DragEnter;
