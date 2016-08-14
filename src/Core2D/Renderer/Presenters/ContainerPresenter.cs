@@ -22,7 +22,7 @@ namespace Core2D.Renderer.Presenters
         /// <param name="dy">The Y coordinate offset.</param>
         public virtual void Render(object dc, ShapeRenderer renderer, XContainer container, double dx, double dy)
         {
-            renderer.Fill(dc, 0, 0, container.Width, container.Height, container.Background);
+            renderer.Fill(dc, dx, dy, container.Width, container.Height, container.Background);
 
             var db = container.Data == null ? default(ImmutableArray<XProperty>) : container.Data.Properties;
             var r = container.Data == null ? default(XRecord) : container.Data.Record;
