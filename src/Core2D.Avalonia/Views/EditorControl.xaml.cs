@@ -1,12 +1,13 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Core2D.Editor;
+using System;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.PanAndZoom;
-using Avalonia.Input;
 using Avalonia.Markup.Xaml;
-using System;
+using Core2D.Avalonia.Util;
+using Core2D.Editor;
+using Core2D.Editor.Input;
 
 namespace Core2D.Avalonia.Views
 {
@@ -16,6 +17,7 @@ namespace Core2D.Avalonia.Views
     public class EditorControl : UserControl
     {
         private ProjectEditor _projectEditor;
+        private InputProcessor _inputProcessor;
         private ContainerViewControl _containerControl;
         private ZoomBorder _zoomBorder;
 
@@ -74,58 +76,6 @@ namespace Core2D.Avalonia.Views
             }
         }
 
-        private void ZoomBorder_PointerPressed(object sender, PointerPressedEventArgs e)
-        {
-            var p = _zoomBorder.FixInvalidPointPosition(e.GetPosition(_containerControl));
-
-            if (e.MouseButton == MouseButton.Left)
-            {
-                if (_projectEditor.IsLeftDownAvailable())
-                {
-                    _projectEditor.LeftDown(p.X, p.Y);
-                }
-            }
-
-            if (e.MouseButton == MouseButton.Right)
-            {
-                if (_projectEditor.IsRightDownAvailable())
-                {
-                    _projectEditor.RightDown(p.X, p.Y);
-                }
-            }
-        }
-
-        private void ZoomBorder_PointerReleased(object sender, PointerReleasedEventArgs e)
-        {
-            var p = _zoomBorder.FixInvalidPointPosition(e.GetPosition(_containerControl));
-
-            if (e.MouseButton == MouseButton.Left)
-            {
-                if (_projectEditor.IsLeftUpAvailable())
-                {
-                    _projectEditor.LeftUp(p.X, p.Y);
-                }
-            }
-
-            if (e.MouseButton == MouseButton.Right)
-            {
-                if (_projectEditor.IsRightUpAvailable())
-                {
-                    _projectEditor.RightUp(p.X, p.Y);
-                }
-            }
-        }
-
-        private void ZoomBorder_PointerMoved(object sender, PointerEventArgs e)
-        {
-            var p = _zoomBorder.FixInvalidPointPosition(e.GetPosition(_containerControl));
-
-            if (_projectEditor.IsMoveAvailable())
-            {
-                _projectEditor.Move(p.X, p.Y);
-            }
-        }
-
         /// <summary>
         /// Attach project editor to container control.
         /// </summary>
@@ -145,9 +95,13 @@ namespace Core2D.Avalonia.Views
                 _projectEditor.ResetLayout = () => { };
 
                 _zoomBorder.InvalidatedChild = InvalidateChild;
-                _zoomBorder.PointerPressed += ZoomBorder_PointerPressed;
-                _zoomBorder.PointerReleased += ZoomBorder_PointerReleased;
-                _zoomBorder.PointerMoved += ZoomBorder_PointerMoved;
+
+                _inputProcessor = new InputProcessor(
+                    new AvaloniaInputSource(
+                        _zoomBorder,
+                        _containerControl,
+                        _zoomBorder.FixInvalidPointPosition), 
+                    _projectEditor);
             }
         }
 
@@ -166,9 +120,8 @@ namespace Core2D.Avalonia.Views
                 _projectEditor.ResetLayout = null;
 
                 _zoomBorder.InvalidatedChild = null;
-                _zoomBorder.PointerPressed -= ZoomBorder_PointerPressed;
-                _zoomBorder.PointerReleased -= ZoomBorder_PointerReleased;
-                _zoomBorder.PointerMoved -= ZoomBorder_PointerMoved;
+
+                _inputProcessor.Dispose();
             }
 
             _projectEditor = null;
