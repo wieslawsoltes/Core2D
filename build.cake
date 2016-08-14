@@ -553,7 +553,7 @@ var nuspecNuGetSettingsDependencies = new []
     ///////////////////////////////////////////////////////////////////////////////
     new NuGetPackSettings()
     {
-        Id = "Utilities.Avalonia",
+        Id = "Core2D.Utilities.Avalonia",
         Dependencies = new []
         {
             new NuSpecDependency() { Id = "Core2D", Version = version },
@@ -574,7 +574,7 @@ var nuspecNuGetSettingsDependencies = new []
     ///////////////////////////////////////////////////////////////////////////////
     new NuGetPackSettings()
     {
-        Id = "Utilities.Wpf",
+        Id = "Core2D.Utilities.Wpf",
         Dependencies = new []
         {
             new NuSpecDependency() { Id = "Core2D", Version = version },
