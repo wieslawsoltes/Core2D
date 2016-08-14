@@ -85,10 +85,10 @@ namespace Renderer.Dxf
 
         private Ellipse CreateEllipticalArc(Core2D.Shapes.XArc arc, double dx, double dy)
         {
-            var a = Core2D.Math.Arc.GdiArc.FromXArc(arc, dx, dy);
+            var a = Core2D.Math.Arc.GdiArc.FromXArc(arc);
 
-            double _cx = ToDxfX(a.X + a.Width / 2.0);
-            double _cy = ToDxfY(a.Y + a.Height / 2.0);
+            double _cx = ToDxfX(a.X + dx + a.Width / 2.0);
+            double _cy = ToDxfY(a.Y + dy + a.Height / 2.0);
             double minor = Math.Min(a.Height, a.Width);
             double major = Math.Max(a.Height, a.Width);
             double startAngle = -a.EndAngle;

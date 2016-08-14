@@ -438,7 +438,7 @@ namespace Renderer.WinForms
         /// <inheritdoc/>
         public override void Draw(object dc, XArc arc, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
         {
-            var a = GdiArc.FromXArc(arc, dx, dy);
+            var a = GdiArc.FromXArc(arc);
             if (a.Width <= 0.0 || a.Height <= 0.0)
                 return;
 
@@ -451,8 +451,8 @@ namespace Renderer.WinForms
             {
                 var path = new GraphicsPath();
                 path.AddArc(
-                    _scaleToPage(a.X),
-                    _scaleToPage(a.Y),
+                    _scaleToPage(a.X + dx),
+                    _scaleToPage(a.Y + dy),
                     _scaleToPage(a.Width),
                     _scaleToPage(a.Height),
                     (float)a.StartAngle,
@@ -464,8 +464,8 @@ namespace Renderer.WinForms
             {
                 _gfx.DrawArc(
                     pen,
-                    _scaleToPage(a.X),
-                    _scaleToPage(a.Y),
+                    _scaleToPage(a.X + dx),
+                    _scaleToPage(a.Y + dy),
                     _scaleToPage(a.Width),
                     _scaleToPage(a.Height),
                     (float)a.StartAngle,

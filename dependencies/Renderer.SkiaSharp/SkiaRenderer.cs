@@ -448,12 +448,12 @@ namespace Renderer.SkiaSharp
             using (SKPaint pen = ToSKPaintPen(arc.Style, _scaleToPage, _sourceDpi, _targetDpi))
             using (var path = new SKPath())
             {
-                var a = GdiArc.FromXArc(arc, dx, dy);
+                var a = GdiArc.FromXArc(arc);
                 var rect = new SKRect(
-                    _scaleToPage(a.X),
-                    _scaleToPage(a.Y),
-                    _scaleToPage(a.X + a.Width),
-                    _scaleToPage(a.Y + a.Height));
+                    _scaleToPage(a.X + dx),
+                    _scaleToPage(a.Y + dy),
+                    _scaleToPage(a.X + dx + a.Width),
+                    _scaleToPage(a.Y + dy + a.Height));
                 path.AddArc(rect, (float)a.StartAngle, (float)a.SweepAngle);
                 DrawPathInternal(canvas, brush, pen, arc.IsStroked, arc.IsFilled, path);
             }

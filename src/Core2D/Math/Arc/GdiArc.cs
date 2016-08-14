@@ -60,12 +60,10 @@ namespace Core2D.Math.Arc
         /// 
         /// </summary>
         /// <param name="arc"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
         /// <returns></returns>
-        public static GdiArc FromXArc(IArc arc, double dx, double dy)
+        public static GdiArc FromXArc(IArc arc)
         {
-            return FromXArc(arc.Point1, arc.Point2, arc.Point3, arc.Point4, dx, dy);
+            return FromXArc(arc.Point1, arc.Point2, arc.Point3, arc.Point4);
         }
 
         /// <summary>
@@ -75,20 +73,18 @@ namespace Core2D.Math.Arc
         /// <param name="p2"></param>
         /// <param name="p3"></param>
         /// <param name="p4"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
         /// <returns></returns>
-        public static GdiArc FromXArc(XPoint p1, XPoint p2, XPoint p3, XPoint p4, double dx, double dy)
+        public static GdiArc FromXArc(XPoint p1, XPoint p2, XPoint p3, XPoint p4)
         {
-            double x1 = p1.X + dx;
-            double y1 = p1.Y + dy;
-            double x2 = p2.X + dx;
-            double y2 = p2.Y + dy;
-            double x3 = p3.X + dx;
-            double y3 = p3.Y + dy;
-            double x4 = p4.X + dx;
-            double y4 = p4.Y + dy;
-            var rect = Rect2.Create(x1, y1, x2, y2, dx, dy);
+            double x1 = p1.X;
+            double y1 = p1.Y;
+            double x2 = p2.X;
+            double y2 = p2.Y;
+            double x3 = p3.X;
+            double y3 = p3.Y;
+            double x4 = p4.X;
+            double y4 = p4.Y;
+            var rect = Rect2.Create(x1, y1, x2, y2);
             double cx = rect.X + rect.Width / 2.0;
             double cy = rect.Y + rect.Height / 2.0;
             double radiusX = cx - rect.X;

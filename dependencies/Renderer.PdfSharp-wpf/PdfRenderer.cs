@@ -406,15 +406,15 @@ namespace Renderer.PdfSharp_core
         {
             var _gfx = dc as XGraphics;
 
-            var a = Core2D.Math.Arc.GdiArc.FromXArc(arc, dx, dy);
+            var a = Core2D.Math.Arc.GdiArc.FromXArc(arc);
 
             if (arc.IsFilled)
             {
                 var path = new XGraphicsPath();
                 // NOTE: Not implemented in PdfSharp Core version.
                 path.AddArc(
-                    _scaleToPage(a.X),
-                    _scaleToPage(a.Y),
+                    _scaleToPage(a.X + dx),
+                    _scaleToPage(a.Y + dy),
                     _scaleToPage(a.Width),
                     _scaleToPage(a.Height),
                     a.StartAngle,
@@ -440,8 +440,8 @@ namespace Renderer.PdfSharp_core
                 {
                     _gfx.DrawArc(
                         ToXPen(arc.Style, _scaleToPage, _sourceDpi, _targetDpi),
-                        _scaleToPage(a.X),
-                        _scaleToPage(a.Y),
+                        _scaleToPage(a.X + dx),
+                        _scaleToPage(a.Y + dy),
                         _scaleToPage(a.Width),
                         _scaleToPage(a.Height),
                         a.StartAngle,

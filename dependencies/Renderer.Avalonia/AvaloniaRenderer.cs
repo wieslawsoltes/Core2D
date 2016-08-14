@@ -428,14 +428,14 @@ namespace Renderer.Avalonia
             var sg = new AM.StreamGeometry();
             using (var sgc = sg.Open())
             {
-                var a = WpfArc.FromXArc(arc, dx, dy);
+                var a = WpfArc.FromXArc(arc);
 
                 sgc.BeginFigure(
-                    new A.Point(a.Start.X, a.Start.Y),
+                    new A.Point(a.Start.X + dx, a.Start.Y),
                     arc.IsFilled);
 
                 sgc.ArcTo(
-                    new A.Point(a.End.X, a.End.Y),
+                    new A.Point(a.End.X + dx, a.End.Y + dy),
                     new A.Size(a.Radius.Width, a.Radius.Height),
                     0.0,
                     a.IsLargeArc,

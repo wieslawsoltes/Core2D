@@ -70,15 +70,13 @@ namespace Core2D.Math.Arc
         /// 
         /// </summary>
         /// <param name="arc"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
         /// <returns></returns>
-        public static WpfArc FromXArc(IArc arc, double dx, double dy)
+        public static WpfArc FromXArc(IArc arc)
         {
-            var p1 = Point2.Create(arc.Point1.X + dx, arc.Point1.Y + dy);
-            var p2 = Point2.Create(arc.Point2.X + dx, arc.Point2.Y + dy);
-            var p3 = Point2.Create(arc.Point3.X + dx, arc.Point3.Y + dy);
-            var p4 = Point2.Create(arc.Point4.X + dx, arc.Point4.Y + dy);
+            var p1 = Point2.Create(arc.Point1.X, arc.Point1.Y);
+            var p2 = Point2.Create(arc.Point2.X, arc.Point2.Y);
+            var p3 = Point2.Create(arc.Point3.X, arc.Point3.Y);
+            var p4 = Point2.Create(arc.Point4.X, arc.Point4.Y);
             var rect = Rect2.Create(p1, p2);
             var center = Point2.Create(rect.X + rect.Width / 2.0, rect.Y + rect.Height / 2.0);
             double offsetX = center.X - rect.X;

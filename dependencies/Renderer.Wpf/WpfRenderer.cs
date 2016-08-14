@@ -579,16 +579,16 @@ namespace Renderer.Wpf
                 _styleCache.Set(style, Tuple.Create(fill, stroke));
             }
 
-            var a = WpfArc.FromXArc(arc, dx, dy);
+            var a = WpfArc.FromXArc(arc);
 
             PathGeometry pg = _arcCache.Get(arc);
             if (pg != null)
             {
                 var pf = pg.Figures[0];
-                pf.StartPoint = new Point(a.Start.X, a.Start.Y);
+                pf.StartPoint = new Point(a.Start.X + dx, a.Start.Y + dy);
                 pf.IsFilled = arc.IsFilled;
                 var segment = pf.Segments[0] as ArcSegment;
-                segment.Point = new Point(a.End.X, a.End.Y);
+                segment.Point = new Point(a.End.X + dx, a.End.Y + dy);
                 segment.Size = new Size(a.Radius.Width, a.Radius.Height);
                 segment.IsLargeArc = a.IsLargeArc;
                 segment.IsStroked = arc.IsStroked;

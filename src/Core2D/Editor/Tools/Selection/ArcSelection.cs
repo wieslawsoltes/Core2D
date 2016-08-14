@@ -105,7 +105,7 @@ namespace Core2D.Editor.Tools.Selection
         /// </summary>
         public void Move()
         {
-            var a = WpfArc.FromXArc(_arc, 0, 0);
+            var a = WpfArc.FromXArc(_arc);
 
             if (_ellipse != null)
             {

@@ -275,7 +275,7 @@ namespace Core2D.Editor.Tools
             base.Finalize(shape);
 
             var arc = shape as XArc;
-            var a = WpfArc.FromXArc(arc, 0, 0);
+            var a = WpfArc.FromXArc(arc);
 
             if (!_connectedPoint3)
             {
