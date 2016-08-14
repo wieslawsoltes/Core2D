@@ -116,7 +116,7 @@ namespace Core2D.Editor
         /// Create new page.
         /// </summary>
         /// <param name="selected">The selected page.</param>
-        private void OnNewPage(XContainer selected)
+        public void OnNewPage(XContainer selected)
         {
             var document = _project?.Documents.FirstOrDefault(d => d.Pages.Contains(selected));
             if (document != null)
@@ -134,7 +134,7 @@ namespace Core2D.Editor
         /// Create new page.
         /// </summary>
         /// <param name="selected">The selected document.</param>
-        private void OnNewPage(XDocument selected)
+        public void OnNewPage(XDocument selected)
         {
             var page =
                 _projectFactory?.GetPage(_project, Constants.DefaultPageName)
@@ -147,7 +147,7 @@ namespace Core2D.Editor
         /// <summary>
         /// Create new document.
         /// </summary>
-        private void OnNewDocument()
+        public void OnNewDocument()
         {
             var document =
                 _projectFactory?.GetDocument(_project, Constants.DefaultDocumentName)
@@ -161,7 +161,7 @@ namespace Core2D.Editor
         /// <summary>
         /// Create new project.
         /// </summary>
-        private void OnNewProject()
+        public void OnNewProject()
         {
             OnUnload();
             OnLoad(_projectFactory?.GetProject() ?? XProject.Create(), string.Empty);
