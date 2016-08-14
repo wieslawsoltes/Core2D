@@ -21,7 +21,7 @@ namespace Core2D.Editor.Designer
     /// <summary>
     /// Design time DataContext base class.
     /// </summary>
-    public static class DesignerContext
+    public class DesignerContext
     {
         /// <summary>
         /// The design time <see cref="ProjectEditor"/>.
@@ -409,7 +409,7 @@ namespace Core2D.Editor.Designer
 
             // Style
 
-            ArgbColor = ArgbColor.Create();
+            ArgbColor = ArgbColor.Create(128, 255, 0, 0);
             ArrowStyle = ArrowStyle.Create();
             FontStyle = FontStyle.Create();
             LineFixedLength = LineFixedLength.Create();
