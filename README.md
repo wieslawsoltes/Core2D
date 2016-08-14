@@ -181,19 +181,22 @@ You can install the package like this:
   * CsvHelper
   * SkiaSharp
 * WPF
+  * System.Reactive.Core
+  * System.Reactive.Interfaces
+  * System.Reactive.Linq
   * Xceed.Wpf.AvalonDock
   * Xceed.Products.Wpf.Toolkit.AvalonDock
   * System.Windows.Interactivity.WPF
   * Wpf.Controls.PanAndZoom
 * Avalonia
-  * Avalonia
-  * Avalonia.Desktop
-  * Avalonia.Skia.Desktop
   * System.Reactive
   * System.Reactive.Core
   * System.Reactive.Interfaces
   * System.Reactive.Linq
   * System.Reactive.PlatformServices
+  * Avalonia
+  * Avalonia.Desktop
+  * Avalonia.Skia.Desktop
   * Serilog
   * SharpDX
   * SharpDX.Direct2D1
