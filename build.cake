@@ -136,6 +136,7 @@ var zipTargetWpfDirs = zipRoot.CombineWithFilePath("Core2D.Wpf-" + fileZipSuffix
 ///////////////////////////////////////////////////////////////////////////////
 
 var SystemCollectionsImmutableVersion = "1.2.0";
+var SystemReactiveVersion = "3.0.0";
 var NewtonsoftJsonVersion = "9.0.1";
 var PortableXamlVersion = "0.14.0";
 var CsvHelperVersion = "2.16.0.0";
@@ -168,7 +169,9 @@ var nuspecNuGetSettingsCore = new []
         Id = "Core2D",
         Dependencies = new []
         {
-            new NuSpecDependency() { Id = "System.Collections.Immutable", Version = SystemCollectionsImmutableVersion }
+            new NuSpecDependency() { Id = "System.Collections.Immutable", Version = SystemCollectionsImmutableVersion },
+            new NuSpecDependency() { Id = "System.Reactive.Interfaces", Version = SystemReactiveVersion },
+            new NuSpecDependency() { Id = "System.Reactive.Core", Version = SystemReactiveVersion }
         },
         Files = new []
         {
