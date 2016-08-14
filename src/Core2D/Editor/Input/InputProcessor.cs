@@ -45,7 +45,7 @@ namespace Core2D.Editor.Input
                 {
                     if (target.IsRightDownAvailable())
                     {
-                        target.LeftDown(v.X, v.Y);
+                        target.RightDown(v.X, v.Y);
                     }
                 });
 
@@ -54,7 +54,7 @@ namespace Core2D.Editor.Input
                 {
                     if (target.IsRightUpAvailable())
                     {
-                        target.LeftDown(v.X, v.Y);
+                        target.RightUp(v.X, v.Y);
                     }
                 });
 
@@ -63,7 +63,7 @@ namespace Core2D.Editor.Input
                 {
                     if (target.IsMoveAvailable())
                     {
-                        target.LeftDown(v.X, v.Y);
+                        target.Move(v.X, v.Y);
                     }
                 });
         }
