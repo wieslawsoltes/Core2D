@@ -250,10 +250,9 @@ namespace Core2D.Avalonia
                 CsvReader = new CsvHelperReader(),
                 CsvWriter = new CsvHelperWriter(),
                 GetImageKey = async () => await (this as IEditorApplication).OnGetImageKeyAsync()
-            }.Defaults();
+            };
 
-            _editor.InitializeCommands();
-            _editor.CommandManager.RegisterCommands();
+            _editor.Defaults();
         }
 
         /// <inheritdoc/>

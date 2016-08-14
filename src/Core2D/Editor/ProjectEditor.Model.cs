@@ -341,10 +341,9 @@ namespace Core2D.Editor
         }
 
         /// <summary>
-        /// Initializes default <see cref="ProjectEditor"/>.
+        /// Initializes editor defaults.
         /// </summary>
-        /// <returns>The instance of the <see cref="ProjectEditor"/> class.</returns>
-        public ProjectEditor Defaults()
+        public void Defaults()
         {
             _tools = new Dictionary<Tool, ToolBase>
             {
@@ -360,7 +359,8 @@ namespace Core2D.Editor
                 [Tool.Ellipse] = new ToolEllipse(this),
                 [Tool.Text] = new ToolText(this),
                 [Tool.Image] = new ToolImage(this)
-            }.ToImmutableDictionary();
+            }
+            .ToImmutableDictionary();
 
             _pageToCopy = default(XContainer);
             _documentToCopy = default(XDocument);
@@ -375,7 +375,8 @@ namespace Core2D.Editor
             _views = new List<ViewBase> { _dashboardView, _editorView }.ToImmutableArray();
             _currentView = _dashboardView;
 
-            return this;
+            InitializeCommands();
+            CommandManager.RegisterCommands();
         }
     }
 }
