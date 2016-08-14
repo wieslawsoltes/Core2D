@@ -1,5 +1,9 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
+using System.Collections.Immutable;
+using System.Linq;
+using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
@@ -10,6 +14,7 @@ using Core2D.Avalonia.Controls.Shapes;
 using Core2D.Avalonia.Controls.State;
 using Core2D.Avalonia.Controls.Style;
 using Core2D.Avalonia.Presenters;
+using Core2D.Avalonia.Util;
 using Core2D.Avalonia.Views;
 using Core2D.Data;
 using Core2D.Data.Database;
@@ -30,10 +35,6 @@ using Core2D.Style;
 using Renderer.Avalonia;
 using Serializer.Newtonsoft;
 using Serializer.Xaml;
-using System;
-using System.Collections.Immutable;
-using System.Linq;
-using System.Threading.Tasks;
 using TextFieldReader.CsvHelper;
 using TextFieldWriter.CsvHelper;
 

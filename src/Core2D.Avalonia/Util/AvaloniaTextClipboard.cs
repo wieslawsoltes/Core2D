@@ -3,7 +3,7 @@
 using Core2D.Interfaces;
 using System.Threading.Tasks;
 
-namespace Core2D.Avalonia
+namespace Core2D.Avalonia.Util
 {
     /// <summary>
     /// Wrapper class for App.Current.Clipboard clipboard class.
