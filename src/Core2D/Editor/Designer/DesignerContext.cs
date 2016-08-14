@@ -349,18 +349,18 @@ namespace Core2D.Editor.Designer
                 XamlSerializer = xamlSerializer
             };
 
-            // Recent Projects
+            // Defaults
 
-            Editor.RecentProjects = Editor.RecentProjects.Add(RecentFile.Create("Test1", "Test1.project"));
-            Editor.RecentProjects = Editor.RecentProjects.Add(RecentFile.Create("Test2", "Test2.project"));
+            Editor.Defaults();
 
             // Commands
 
             InitializeCommands(Editor);
 
-            // Defaults
+            // Recent Projects
 
-            Editor.Defaults();
+            Editor.RecentProjects = Editor.RecentProjects.Add(RecentFile.Create("Test1", "Test1.project"));
+            Editor.RecentProjects = Editor.RecentProjects.Add(RecentFile.Create("Test2", "Test2.project"));
 
             // New Project
 
