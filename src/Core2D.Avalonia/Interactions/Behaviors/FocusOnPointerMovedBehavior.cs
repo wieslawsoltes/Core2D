@@ -6,14 +6,19 @@ using Avalonia.Xaml.Interactivity;
 
 namespace Core2D.Avalonia.Interactions.Behaviors
 {
+    /// <summary>
+    /// Focuses the AssociatedObject on PointerMoved event.
+    /// </summary>
     public class FocusOnPointerMovedBehavior : Behavior<Control>
     {
+        /// <inheritdoc/>
         protected override void OnAttached()
         {
             base.OnAttached();
             AssociatedObject.PointerMoved += PointerMoved;
         }
 
+        /// <inheritdoc/>
         protected override void OnDetaching()
         {
             base.OnDetaching();

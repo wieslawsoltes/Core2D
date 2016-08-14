@@ -8,16 +8,21 @@ using System;
 
 namespace Core2D.Avalonia.Interactions.Behaviors
 {
+    /// <summary>
+    /// Binds AssociatedObject object Tag property to root visual DataContext.
+    /// </summary>
     public class BindTagToVisualRootDataContextBehavior : Behavior<Control>
     {
         private IDisposable _disposable;
 
+        /// <inheritdoc/>
         protected override void OnAttached()
         {
             base.OnAttached();
             AssociatedObject.AttachedToVisualTree += AttachedToVisualTree;
         }
 
+        /// <inheritdoc/>
         protected override void OnDetaching()
         {
             base.OnDetaching();

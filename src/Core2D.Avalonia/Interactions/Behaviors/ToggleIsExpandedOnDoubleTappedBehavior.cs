@@ -6,14 +6,19 @@ using Avalonia.Xaml.Interactivity;
 
 namespace Core2D.Avalonia.Interactions.Behaviors
 {
+    /// <summary>
+    /// Toggles IsExpanded property of the associated TreeViewItem control on DoubleTapped event.
+    /// </summary>
     public class ToggleIsExpandedOnDoubleTappedBehavior : Behavior<Control>
     {
+        /// <inheritdoc/>
         protected override void OnAttached()
         {
             base.OnAttached();
             AssociatedObject.DoubleTapped += DoubleTapped;
         }
 
+        /// <inheritdoc/>
         protected override void OnDetaching()
         {
             base.OnDetaching();
