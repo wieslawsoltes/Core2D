@@ -2,6 +2,8 @@
 
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Core2D/Core2D?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
+A multi-platform data driven 2D diagram editor.
+
 | Build Server                | Platform     | Status                                                                                                                                                                     |
 |-----------------------------|--------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | AppVeyor                    | Windows      | [![Build status](https://ci.appveyor.com/api/projects/status/7k1e0voeit7od9bw/branch/master?svg=true)](https://ci.appveyor.com/project/wieslawsoltes/core2d/branch/master) |
@@ -17,13 +19,32 @@
 | Core2D.Avalonia.Skia        | [![Chocolatey](https://img.shields.io/chocolatey/v/Core2D.Avalonia.Skia.svg)](https://chocolatey.org/packages/Core2D.Avalonia.Skia)         |
 | Core2D.Wpf                  | [![Chocolatey](https://img.shields.io/chocolatey/v/Core2D.Wpf.svg)](https://chocolatey.org/packages/Core2D.Wpf)                             |
 
-A multi-platform data driven 2D diagram editor.
-
 <a href='https://www.youtube.com/watch?v=P7G0kmX7EcU' target='_blank'>![](https://i.ytimg.com/vi/P7G0kmX7EcU/hqdefault.jpg)<a/>
+
+## Table of Contents
+
+1. [About](https://github.com/Core2D/Core2D#about)
+2. [Documentation](https://github.com/Core2D/Core2D#documentation)
+3. [Data Formats](https://github.com/Core2D/Core2D#data-formats)
+4. [Supported Platforms](https://github.com/Core2D/Core2D#supported-platforms)
+5. [Building Core2D](https://github.com/Core2D/Core2D#building-core2d)
+   - [Build using IDE](https://github.com/Core2D/Core2D#build-using-ide)
+   - [Build on Windows using script](https://github.com/Core2D/Core2D#build-on-windows-using-script)
+   - [Build on Linux/OSX using script](https://github.com/Core2D/Core2D#build-on-linuxosx-using-script)
+6. [NuGet](https://github.com/Core2D/Core2D#nuget)
+   - [NuGet Package Dependencies](https://github.com/Core2D/Core2D#nuget-package-dependencies)
+   - [NuGet Package Sources](https://github.com/Core2D/Core2D#nuget-package-sources)
+   - [Other Dependencies](https://github.com/Core2D/Core2D#other-dependencies)
+7. [Resources](https://github.com/Core2D/Core2D#resources)
+8. [License](https://github.com/Core2D/Core2D#license)
 
 ## About
 
 Core2D is a multi-platform application for making data driven 2D diagrams.
+
+## Documentation
+
+You can read the latest documentation at [http://core2d.github.io/](http://core2d.github.io/).
 
 ## Data Formats
 
@@ -85,7 +106,7 @@ You can install the package like this:
 
 `Install-Package Core2D -Pre`
 
-### NuGet Packages
+### NuGet Package Dependencies
 
 * Common
   * System.Collections.Immutable
@@ -118,8 +139,7 @@ You can install the package like this:
 
 ### NuGet Package Sources
 
-* https://www.nuget.org/api/v2/
-* https://ci.appveyor.com/nuget/portable-xaml
+* https://api.nuget.org/v3/index.json
 * https://www.myget.org/F/avalonia-ci/api/v2
 * https://www.myget.org/F/xamlbehaviors-nightly/api/v2
 * https://www.myget.org/F/panandzoom-nightly/api/v2
