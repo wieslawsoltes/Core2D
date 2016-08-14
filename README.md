@@ -8,10 +8,12 @@
 
 [![NuGet](https://img.shields.io/nuget/v/Core2D.svg)](https://www.nuget.org/packages/Core2D) [![MyGet](https://img.shields.io/myget/core2d-nightly/vpre/Core2D.svg?label=myget)](https://www.myget.org/gallery/core2d-nightly) 
 
-[![Chocolatey](https://img.shields.io/chocolatey/v/Core2D.Avalonia.Cairo.svg)](https://chocolatey.org/packages/Core2D.Avalonia.Cairo)
-[![Chocolatey](https://img.shields.io/chocolatey/v/Core2D.Avalonia.Direct2D.svg)](https://chocolatey.org/packages/Core2D.Avalonia.Direct2D)
-[![Chocolatey](https://img.shields.io/chocolatey/v/Core2D.Avalonia.Skia.svg)](https://chocolatey.org/packages/Core2D.Avalonia.Skia)
-[![Chocolatey](https://img.shields.io/chocolatey/v/Core2D.Wpf.svg)](https://chocolatey.org/packages/Core2D.Wpf)
+| Chocolatey                  | Status                                                                                                                                      |
+|-----------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
+| Core2D.Avalonia.Cairo       | [![Chocolatey](https://img.shields.io/chocolatey/v/Core2D.Avalonia.Cairo.svg)](https://chocolatey.org/packages/Core2D.Avalonia.Cairo)       | 
+| Core2D.Avalonia.Direct2D    | [![Chocolatey](https://img.shields.io/chocolatey/v/Core2D.Avalonia.Direct2D.svg)](https://chocolatey.org/packages/Core2D.Avalonia.Direct2D) |
+| Core2D.Avalonia.Skia        | [![Chocolatey](https://img.shields.io/chocolatey/v/Core2D.Avalonia.Skia.svg)](https://chocolatey.org/packages/Core2D.Avalonia.Skia)         |
+| Core2D.Wpf                  | [![Chocolatey](https://img.shields.io/chocolatey/v/Core2D.Wpf.svg)](https://chocolatey.org/packages/Core2D.Wpf)                             |
 
 A multi-platform data driven 2D diagram editor.
 
