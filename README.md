@@ -174,6 +174,8 @@ You can install the package like this:
 
 * Common
   * System.Collections.Immutable
+  * System.Reactive.Core
+  * System.Reactive.Interfaces
   * Portable.Xaml
   * Newtonsoft.Json
   * CsvHelper

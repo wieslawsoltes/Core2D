@@ -20,6 +20,10 @@
   <ItemGroup>
     <Compile Include="Attributes\ContentAttribute.cs" />
     <Compile Include="Attributes\NameAttribute.cs" />
+    <Compile Include="Editor\Input\IInputSource.cs" />
+    <Compile Include="Editor\Input\IInputTarget.cs" />
+    <Compile Include="Editor\Input\InputProcessor.cs" />
+    <Compile Include="Editor\Input\InputSource.cs" />
     <Compile Include="Editor\Interfaces\IEditorApplication.cs" />
     <Compile Include="Editor\Bounds\LineBounds.cs" />
     <Compile Include="Editor\Bounds\RectangleBounds.cs" />
@@ -197,11 +201,20 @@
     <Compile Include="Collections\XTemplates.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Editor\ProjectEditor.IInputTarget.cs" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Collections.Immutable, Version=1.2.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\..\packages\System.Collections.Immutable.1.2.0\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Reactive.Core, Version=3.0.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Reactive.Core.3.0.0\lib\netstandard1.1\System.Reactive.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Reactive.Interfaces, Version=3.0.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Reactive.Interfaces.3.0.0\lib\netstandard1.0\System.Reactive.Interfaces.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
