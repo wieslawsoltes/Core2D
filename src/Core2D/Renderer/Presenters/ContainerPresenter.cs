@@ -27,7 +27,11 @@ namespace Core2D.Renderer.Presenters
             var db = container.Data == null ? default(ImmutableArray<XProperty>) : container.Data.Properties;
             var r = container.Data == null ? default(XRecord) : container.Data.Record;
 
-            renderer.Draw(dc, container.Template, dx, dy, db, r);
+            if (container.Template != null)
+            {
+                renderer.Draw(dc, container.Template, dx, dy, db, r); 
+            }
+
             renderer.Draw(dc, container, dx, dy, db, r);
 
             if (container.WorkingLayer != null)
