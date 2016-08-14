@@ -20,6 +20,7 @@ namespace Renderer.SkiaSharp
     /// </summary>
     public partial class SkiaRenderer : ShapeRenderer
     {
+        private bool _isAntialias = true;
         private bool _enableImageCache = true;
         private IDictionary<string, SKBitmap> _biCache;
         private Func<double, float> _scaleToPage;
@@ -29,9 +30,11 @@ namespace Renderer.SkiaSharp
         /// <summary>
         /// Initializes a new instance of the <see cref="SkiaRenderer"/> class.
         /// </summary>
-        public SkiaRenderer()
+        /// <param name="isAntialias">The flag indicating whether paint is antialiased.</param>
+        public SkiaRenderer(bool isAntialias = true)
         {
             ClearCache(isZooming: false);
+            _isAntialias = isAntialias;
             _scaleToPage = (value) => (float)(value * 1.0);
         }
 
@@ -41,7 +44,7 @@ namespace Renderer.SkiaSharp
         /// <returns>The new instance of the <see cref="SkiaRenderer"/> class.</returns>
         public static ShapeRenderer Create() => new SkiaRenderer();
 
-        private static SKPoint GetTextOrigin(ShapeStyle style, ref SKRect rect, ref SKRect size)
+        private SKPoint GetTextOrigin(ShapeStyle style, ref SKRect rect, ref SKRect size)
         {
             double rwidth = Math.Abs(rect.Right - rect.Left);
             double rheight = Math.Abs(rect.Bottom - rect.Top);
@@ -80,12 +83,12 @@ namespace Renderer.SkiaSharp
             return new SKPoint((float)ox, (float)oy);
         }
 
-        private static SKColor ToSKColor(ArgbColor color) => new SKColor(color.R, color.G, color.B, color.A);
+        private SKColor ToSKColor(ArgbColor color) => new SKColor(color.R, color.G, color.B, color.A);
 
-        private static SKPaint ToSKPaintPen(BaseStyle style, Func<double, float> scale, double sourceDpi, double targetDpi)
+        private SKPaint ToSKPaintPen(BaseStyle style, Func<double, float> scale, double sourceDpi, double targetDpi)
         {
             var paint = new SKPaint();
-            paint.IsAntialias = true;
+            paint.IsAntialias = _isAntialias;
             paint.IsStroke = true;
             paint.StrokeWidth = scale(style.Thickness * targetDpi / sourceDpi);
             paint.Color = ToSKColor(style.Stroke);
@@ -113,16 +116,16 @@ namespace Renderer.SkiaSharp
             return paint;
         }
 
-        private static SKPaint ToSKPaintBrush(ArgbColor color)
+        private SKPaint ToSKPaintBrush(ArgbColor color)
         {
             var paint = new SKPaint();
-            paint.IsAntialias = true;
+            paint.IsAntialias = _isAntialias;
             paint.IsStroke = false;
             paint.Color = ToSKColor(color);
             return paint;
         }
 
-        private static SKRect ToSKRect(double x, double y, double width, double height)
+        private SKRect ToSKRect(double x, double y, double width, double height)
         {
             float left = (float)x;
             float top = (float)y;
@@ -131,7 +134,7 @@ namespace Renderer.SkiaSharp
             return new SKRect(left, top, right, bottom);
         }
 
-        private static SKRect CreateRect(XPoint tl, XPoint br, double dx, double dy, Func<double, float> scale)
+        private SKRect CreateRect(XPoint tl, XPoint br, double dx, double dy, Func<double, float> scale)
         {
             double tlx = Math.Min(tl.X, br.X);
             double tly = Math.Min(tl.Y, br.Y);
@@ -144,7 +147,7 @@ namespace Renderer.SkiaSharp
                 scale(bry + dy));
         }
 
-        private static void DrawLineInternal(SKCanvas canvas, SKPaint pen, bool isStroked, ref SKPoint p0, ref SKPoint p1)
+        private void DrawLineInternal(SKCanvas canvas, SKPaint pen, bool isStroked, ref SKPoint p0, ref SKPoint p1)
         {
             if (isStroked)
             {
@@ -152,7 +155,7 @@ namespace Renderer.SkiaSharp
             }
         }
 
-        private static void DrawLineCurveInternal(SKCanvas canvas, SKPaint pen, bool isStroked, ref SKPoint pt1, ref SKPoint pt2, double curvature, CurveOrientation orientation, PointAlignment pt1a, PointAlignment pt2a)
+        private void DrawLineCurveInternal(SKCanvas canvas, SKPaint pen, bool isStroked, ref SKPoint pt1, ref SKPoint pt2, double curvature, CurveOrientation orientation, PointAlignment pt1a, PointAlignment pt2a)
         {
             if (isStroked)
             {
@@ -207,7 +210,7 @@ namespace Renderer.SkiaSharp
             }
         }
 
-        private static SKPoint DrawLineArrowInternal(SKCanvas canvas, SKPaint pen, SKPaint brush, float x, float y, double angle, ArrowStyle style)
+        private SKPoint DrawLineArrowInternal(SKCanvas canvas, SKPaint pen, SKPaint brush, float x, float y, double angle, ArrowStyle style)
         {
             SKPoint pt = default(SKPoint);
             var rt = MatrixHelper.Rotation(angle, new SKPoint(x, y));
@@ -268,7 +271,7 @@ namespace Renderer.SkiaSharp
             return pt;
         }
 
-        private static void DrawRectangleInternal(SKCanvas canvas, SKPaint brush, SKPaint pen, bool isStroked, bool isFilled, ref SKRect rect)
+        private void DrawRectangleInternal(SKCanvas canvas, SKPaint brush, SKPaint pen, bool isStroked, bool isFilled, ref SKRect rect)
         {
             if (isFilled)
             {
@@ -281,7 +284,7 @@ namespace Renderer.SkiaSharp
             }
         }
 
-        private static void DrawEllipseInternal(SKCanvas canvas, SKPaint brush, SKPaint pen, bool isStroked, bool isFilled, ref SKRect rect)
+        private void DrawEllipseInternal(SKCanvas canvas, SKPaint brush, SKPaint pen, bool isStroked, bool isFilled, ref SKRect rect)
         {
             if (isFilled)
             {
@@ -294,7 +297,7 @@ namespace Renderer.SkiaSharp
             }
         }
 
-        private static void DrawPathInternal(SKCanvas canvas, SKPaint brush, SKPaint pen, bool isStroked, bool isFilled, SKPath path)
+        private void DrawPathInternal(SKCanvas canvas, SKPaint brush, SKPaint pen, bool isStroked, bool isFilled, SKPath path)
         {
             if (isFilled)
             {
