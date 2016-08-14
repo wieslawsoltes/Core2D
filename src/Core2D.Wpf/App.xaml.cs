@@ -53,8 +53,8 @@ namespace Core2D.Wpf
             using (ILog log = new TraceLog())
             {
                 IFileSystem fileIO = new DotNetFxFileSystem();
-                ImmutableArray<IFileWriter> writers = 
-                    new IFileWriter[] 
+                ImmutableArray<IFileWriter> writers =
+                    new IFileWriter[]
                     {
                         new PdfWriter(),
                         new DxfWriter(),
@@ -82,8 +82,29 @@ namespace Core2D.Wpf
 
             try
             {
-                InitializeEditor(_fileIO, _log, _writers);
+                _editor = new ProjectEditor()
+                {
+                    CurrentTool = Tool.Selection,
+                    CurrentPathTool = PathTool.Line,
+                    Application = this,
+                    Log = log,
+                    FileIO = fileIO,
+                    CommandManager = new WpfCommandManager(),
+                    Renderers = new ShapeRenderer[] { new WpfRenderer() },
+                    ProjectFactory = new ProjectFactory(),
+                    TextClipboard = new WpfTextClipboard(),
+                    JsonSerializer = new NewtonsoftTextSerializer(),
+                    XamlSerializer = new PortableXamlSerializer(),
+                    FileWriters = writers,
+                    CsvReader = new CsvHelperReader(),
+                    CsvWriter = new CsvHelperWriter(),
+                    GetImageKey = async () => await (this as IEditorApplication).OnGetImageKeyAsync()
+                };
+
+                _editor.Defaults();
+
                 LoadRecent();
+
                 _mainWindow = new Windows.MainWindow();
                 _mainWindow.Loaded += (sender, e) => OnLoaded();
                 _mainWindow.Closed += (sender, e) => OnClosed();
@@ -157,36 +178,6 @@ namespace Core2D.Wpf
             {
                 _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
-        }
-
-        /// <summary>
-        /// Initialize <see cref="ProjectEditor"/> object.
-        /// </summary>
-        /// <param name="fileIO">The file system instance.</param>
-        /// <param name="log">The log instance.</param>
-        /// <param name="writers">The file writers.</param>
-        private void InitializeEditor(IFileSystem fileIO, ILog log, ImmutableArray<IFileWriter> writers)
-        {
-            _editor = new ProjectEditor()
-            {
-                CurrentTool = Tool.Selection,
-                CurrentPathTool = PathTool.Line,
-                Application = this,
-                Log = log,
-                FileIO = fileIO,
-                CommandManager = new WpfCommandManager(),
-                Renderers = new ShapeRenderer[] { new WpfRenderer() },
-                ProjectFactory = new ProjectFactory(),
-                TextClipboard = new WpfTextClipboard(),
-                JsonSerializer = new NewtonsoftTextSerializer(),
-                XamlSerializer = new PortableXamlSerializer(),
-                FileWriters = writers,
-                CsvReader = new CsvHelperReader(),
-                CsvWriter = new CsvHelperWriter(),
-                GetImageKey = async () => await (this as IEditorApplication).OnGetImageKeyAsync()
-            };
-
-            _editor.Defaults();
         }
 
         /// <inheritdoc/>

@@ -173,8 +173,29 @@ namespace Core2D.Avalonia
 
             try
             {
-                InitializeEditor(_fileIO, _log, _writers);
+                _editor = new ProjectEditor()
+                {
+                    CurrentTool = Tool.Selection,
+                    CurrentPathTool = PathTool.Line,
+                    Application = this,
+                    Log = log,
+                    FileIO = fileIO,
+                    CommandManager = new CommandManager(),
+                    Renderers = new ShapeRenderer[] { new AvaloniaRenderer(), new AvaloniaRenderer() },
+                    ProjectFactory = new ProjectFactory(),
+                    TextClipboard = new AvaloniaTextClipboard(),
+                    JsonSerializer = new NewtonsoftTextSerializer(),
+                    XamlSerializer = new PortableXamlSerializer(),
+                    FileWriters = writers,
+                    CsvReader = new CsvHelperReader(),
+                    CsvWriter = new CsvHelperWriter(),
+                    GetImageKey = async () => await (this as IEditorApplication).OnGetImageKeyAsync()
+                };
+
+                _editor.Defaults();
+
                 LoadRecent();
+
                 _mainWindow = new Windows.MainWindow();
                 _mainWindow.Closed += (sender, e) => SaveRecent();
                 _mainWindow.DataContext = _editor;
@@ -224,36 +245,6 @@ namespace Core2D.Avalonia
             {
                 _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
-        }
-
-        /// <summary>
-        /// Initialize <see cref="ProjectEditor"/> object.
-        /// </summary>
-        /// <param name="fileIO">The file system instance.</param>
-        /// <param name="log">The log instance.</param>
-        /// <param name="writers">The file writers.</param>
-        public void InitializeEditor(IFileSystem fileIO, ILog log, ImmutableArray<IFileWriter> writers)
-        {
-            _editor = new ProjectEditor()
-            {
-                CurrentTool = Tool.Selection,
-                CurrentPathTool = PathTool.Line,
-                Application = this,
-                Log = log,
-                FileIO = fileIO,
-                CommandManager = new CommandManager(),
-                Renderers = new ShapeRenderer[] { new AvaloniaRenderer(), new AvaloniaRenderer() },
-                ProjectFactory = new ProjectFactory(),
-                TextClipboard = new AvaloniaTextClipboard(),
-                JsonSerializer = new NewtonsoftTextSerializer(),
-                XamlSerializer = new PortableXamlSerializer(),
-                FileWriters = writers,
-                CsvReader = new CsvHelperReader(),
-                CsvWriter = new CsvHelperWriter(),
-                GetImageKey = async () => await (this as IEditorApplication).OnGetImageKeyAsync()
-            };
-
-            _editor.Defaults();
         }
 
         /// <inheritdoc/>
