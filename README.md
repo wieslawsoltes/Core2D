@@ -10,16 +10,14 @@ A multi-platform data driven 2D diagram editor.
 | Travis                      | Linux / OS X | [![Build Status](https://travis-ci.org/Core2D/Core2D.svg?branch=master)](https://travis-ci.org/Core2D/Core2D)                                                              |
 | Bitrise                     | Android      | [![Build Status](https://www.bitrise.io/app/0eddf30a82243ed8.svg?token=IEGVKM7S6KBI3HdecpD8Cg&branch=master)](https://www.bitrise.io/app/0eddf30a82243ed8)                 |
 
-[![NuGet](https://img.shields.io/nuget/v/Core2D.svg)](https://www.nuget.org/packages/Core2D) [![MyGet](https://img.shields.io/myget/core2d-nightly/vpre/Core2D.svg?label=myget)](https://www.myget.org/gallery/core2d-nightly) 
+## Install
 
-| Chocolatey                  | Status                                                                                                                                      |
+| Package                     | Status                                                                                                                                      |
 |-----------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
 | Core2D.Avalonia.Cairo       | [![Chocolatey](https://img.shields.io/chocolatey/v/Core2D.Avalonia.Cairo.svg)](https://chocolatey.org/packages/Core2D.Avalonia.Cairo)       | 
 | Core2D.Avalonia.Direct2D    | [![Chocolatey](https://img.shields.io/chocolatey/v/Core2D.Avalonia.Direct2D.svg)](https://chocolatey.org/packages/Core2D.Avalonia.Direct2D) |
 | Core2D.Avalonia.Skia        | [![Chocolatey](https://img.shields.io/chocolatey/v/Core2D.Avalonia.Skia.svg)](https://chocolatey.org/packages/Core2D.Avalonia.Skia)         |
 | Core2D.Wpf                  | [![Chocolatey](https://img.shields.io/chocolatey/v/Core2D.Wpf.svg)](https://chocolatey.org/packages/Core2D.Wpf)                             |
-
-<a href='https://www.youtube.com/watch?v=P7G0kmX7EcU' target='_blank'>![](https://i.ytimg.com/vi/P7G0kmX7EcU/hqdefault.jpg)<a/>
 
 ## Table of Contents
 
@@ -28,19 +26,23 @@ A multi-platform data driven 2D diagram editor.
 3. [Data Formats](https://github.com/Core2D/Core2D#data-formats)
 4. [Supported Platforms](https://github.com/Core2D/Core2D#supported-platforms)
 5. [Building Core2D](https://github.com/Core2D/Core2D#building-core2d)
-   - [Build using IDE](https://github.com/Core2D/Core2D#build-using-ide)
-   - [Build on Windows using script](https://github.com/Core2D/Core2D#build-on-windows-using-script)
-   - [Build on Linux/OSX using script](https://github.com/Core2D/Core2D#build-on-linuxosx-using-script)
+    - [Build using IDE](https://github.com/Core2D/Core2D#build-using-ide)
+    - [Build on Windows using script](https://github.com/Core2D/Core2D#build-on-windows-using-script)
+    - [Build on Linux/OSX using script](https://github.com/Core2D/Core2D#build-on-linuxosx-using-script)
 6. [NuGet](https://github.com/Core2D/Core2D#nuget)
-   - [NuGet Package Dependencies](https://github.com/Core2D/Core2D#nuget-package-dependencies)
-   - [NuGet Package Sources](https://github.com/Core2D/Core2D#nuget-package-sources)
-   - [Other Dependencies](https://github.com/Core2D/Core2D#other-dependencies)
+    - [NuGet Packages](https://github.com/Core2D/Core2D#nuget-packages)
+    - [MyGet Packages](https://github.com/Core2D/Core2D#myget-package)
+    - [Package Dependencies](https://github.com/Core2D/Core2D#package-dependencies)
+    - [Package Sources](https://github.com/Core2D/Core2D#package-sources)
+    - [Other Dependencies](https://github.com/Core2D/Core2D#other-dependencies)
 7. [Resources](https://github.com/Core2D/Core2D#resources)
 8. [License](https://github.com/Core2D/Core2D#license)
 
 ## About
 
 Core2D is a multi-platform application for making data driven 2D diagrams.
+
+<a href='https://www.youtube.com/watch?v=P7G0kmX7EcU' target='_blank'>![](https://i.ytimg.com/vi/P7G0kmX7EcU/hqdefault.jpg)<a/>
 
 ## Documentation
 
@@ -106,7 +108,19 @@ You can install the package like this:
 
 `Install-Package Core2D -Pre`
 
-### NuGet Package Dependencies
+### NuGet Packages
+
+| Package                     | Status                                                                                                                                      |
+|-----------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
+| Core2D                      | [![NuGet](https://img.shields.io/nuget/v/Core2D.svg)](https://www.nuget.org/packages/Core2D)                                                |
+
+### MyGet Packages
+
+| Package                     | Status                                                                                                                                                  |
+|-----------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Core2D                      | [![MyGet](https://img.shields.io/myget/core2d-nightly/vpre/Core2D.svg?label=myget)](https://www.myget.org/gallery/core2d-nightly)                       |
+
+### Package Dependencies
 
 * Common
   * System.Collections.Immutable
@@ -137,7 +151,7 @@ You can install the package like this:
   * Avalonia.Xaml.Behaviors
   * Avalonia.Controls.PanAndZoom
 
-### NuGet Package Sources
+### Package Sources
 
 * https://api.nuget.org/v3/index.json
 * https://www.myget.org/F/avalonia-ci/api/v2
