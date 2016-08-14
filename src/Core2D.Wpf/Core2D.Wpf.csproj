@@ -99,7 +99,6 @@
     <Compile Include="Controls\Custom\LayerElement.cs" />
     <Compile Include="Controls\Custom\ListBoxDropMode.cs" />
     <Compile Include="Controls\Custom\RecordsListView.cs" />
-    <Compile Include="Util\WpfInputSource.cs" />
     <Compile Include="Views\DashboardControl.xaml.cs">
       <DependentUpon>DashboardControl.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -272,8 +271,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Util\WpfCommandManager.cs" />
-    <Compile Include="Util\WpfTextClipboard.cs" />
     <Page Include="Controls\Data\ColumnsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -582,6 +579,10 @@
     <ProjectReference Include="..\..\dependencies\TextFieldWriter.CsvHelper\TextFieldWriter.CsvHelper.csproj">
       <Project>{ae7ff1b5-abe3-45bf-87cc-44ac580a666a}</Project>
       <Name>TextFieldWriter.CsvHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\dependencies\Utilities.Wpf\Utilities.Wpf.csproj">
+      <Project>{e8d9036d-7e08-4405-b767-fb1e654ef66a}</Project>
+      <Name>Utilities.Wpf</Name>
     </ProjectReference>
     <ProjectReference Include="..\Core2D\Core2D.csproj">
       <Project>{4ee581b0-45f3-4d7e-beae-277abf5f3fdd}</Project>

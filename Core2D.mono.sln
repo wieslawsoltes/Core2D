@@ -38,6 +38,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileSystem.DotNetFx.UnitTes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PdfSharp", "dependencies\PDFsharp\src\PdfSharp\PdfSharp.csproj", "{5A6055BC-BF86-4FDD-9F62-0109DB7A303B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilities.Avalonia", "dependencies\Utilities.Avalonia\Utilities.Avalonia.csproj", "{C6DBD1FD-C462-4005-B382-97BB4AEF26F2}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		src\Core2D.Shared\Core2D.Shared.projitems*{11e61a53-13d5-4447-8d66-3f328bbfc30a}*SharedItemsImports = 4
@@ -48,6 +50,7 @@ Global
 		src\Core2D.Shared\Core2D.Shared.projitems*{68a36926-df55-4f05-9f89-b9ab1463227e}*SharedItemsImports = 4
 		src\Core2D.Shared\Core2D.Shared.projitems*{7acb3221-ee78-43a9-ad7d-35db687ec44c}*SharedItemsImports = 4
 		src\Core2D.Shared\Core2D.Shared.projitems*{ae7ff1b5-abe3-45bf-87cc-44ac580a666a}*SharedItemsImports = 4
+		src\Core2D.Shared\Core2D.Shared.projitems*{c6dbd1fd-c462-4005-b382-97bb4aef26f2}*SharedItemsImports = 4
 		src\Core2D.Shared\Core2D.Shared.projitems*{d1f867f7-9029-480d-b1e1-b0be4658b182}*SharedItemsImports = 4
 		src\Core2D.Shared\Core2D.Shared.projitems*{e05f3f7e-2176-43dc-90bb-f5c66cfdb12f}*SharedItemsImports = 4
 		src\Core2D.Shared\Core2D.Shared.projitems*{ec0efa51-83f0-4439-be9f-faebd3418c94}*SharedItemsImports = 4
@@ -242,6 +245,18 @@ Global
 		{5A6055BC-BF86-4FDD-9F62-0109DB7A303B}.Release|x64.Build.0 = Release|Any CPU
 		{5A6055BC-BF86-4FDD-9F62-0109DB7A303B}.Release|x86.ActiveCfg = Release|Any CPU
 		{5A6055BC-BF86-4FDD-9F62-0109DB7A303B}.Release|x86.Build.0 = Release|Any CPU
+		{C6DBD1FD-C462-4005-B382-97BB4AEF26F2}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
+		{C6DBD1FD-C462-4005-B382-97BB4AEF26F2}.Debug|AnyCPU.Build.0 = Debug|Any CPU
+		{C6DBD1FD-C462-4005-B382-97BB4AEF26F2}.Debug|x64.ActiveCfg = Debug|x64
+		{C6DBD1FD-C462-4005-B382-97BB4AEF26F2}.Debug|x64.Build.0 = Debug|x64
+		{C6DBD1FD-C462-4005-B382-97BB4AEF26F2}.Debug|x86.ActiveCfg = Debug|x86
+		{C6DBD1FD-C462-4005-B382-97BB4AEF26F2}.Debug|x86.Build.0 = Debug|x86
+		{C6DBD1FD-C462-4005-B382-97BB4AEF26F2}.Release|AnyCPU.ActiveCfg = Release|Any CPU
+		{C6DBD1FD-C462-4005-B382-97BB4AEF26F2}.Release|AnyCPU.Build.0 = Release|Any CPU
+		{C6DBD1FD-C462-4005-B382-97BB4AEF26F2}.Release|x64.ActiveCfg = Release|x64
+		{C6DBD1FD-C462-4005-B382-97BB4AEF26F2}.Release|x64.Build.0 = Release|x64
+		{C6DBD1FD-C462-4005-B382-97BB4AEF26F2}.Release|x86.ActiveCfg = Release|x86
+		{C6DBD1FD-C462-4005-B382-97BB4AEF26F2}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -262,5 +277,6 @@ Global
 		{AB31E0E2-9090-4461-84BE-5C5AAA19758F} = {8756F874-0C1B-4AB8-83E0-0BEDA782D212}
 		{E9C30F6F-00DD-494A-8E7C-253A5C76E999} = {8756F874-0C1B-4AB8-83E0-0BEDA782D212}
 		{5A6055BC-BF86-4FDD-9F62-0109DB7A303B} = {9DA997E2-E367-481C-B48A-278274034A26}
+		{C6DBD1FD-C462-4005-B382-97BB4AEF26F2} = {9DA997E2-E367-481C-B48A-278274034A26}
 	EndGlobalSection
 EndGlobal

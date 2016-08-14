@@ -547,6 +547,47 @@ var nuspecNuGetSettingsDependencies = new []
         },
         BasePath = Directory("./dependencies/TextFieldWriter.CsvHelper/bin/" + dirSuffix),
         OutputDirectory = nugetRoot
+    },
+    ///////////////////////////////////////////////////////////////////////////////
+    // dependencies: Utilities.Avalonia
+    ///////////////////////////////////////////////////////////////////////////////
+    new NuGetPackSettings()
+    {
+        Id = "Utilities.Avalonia",
+        Dependencies = new []
+        {
+            new NuSpecDependency() { Id = "Core2D", Version = version },
+            new NuSpecDependency() { Id = "System.Reactive.Interfaces", Version = SystemReactiveVersion },
+            new NuSpecDependency() { Id = "System.Reactive.Core", Version = SystemReactiveVersion },
+            new NuSpecDependency() { Id = "System.Reactive.Linq", Version = SystemReactiveVersion },
+            new NuSpecDependency() { Id = "Avalonia", Version = AvaloniaVersion },
+        },
+        Files = new []
+        {
+            new NuSpecContent { Source = "Utilities.Avalonia.dll", Target = "lib/portable-windows8+net45" }
+        },
+        BasePath = Directory("./dependencies/Utilities.Avalonia/bin/" + dirSuffix),
+        OutputDirectory = nugetRoot
+    },
+    ///////////////////////////////////////////////////////////////////////////////
+    // dependencies: Utilities.Wpf
+    ///////////////////////////////////////////////////////////////////////////////
+    new NuGetPackSettings()
+    {
+        Id = "Utilities.Wpf",
+        Dependencies = new []
+        {
+            new NuSpecDependency() { Id = "Core2D", Version = version },
+            new NuSpecDependency() { Id = "System.Reactive.Interfaces", Version = SystemReactiveVersion },
+            new NuSpecDependency() { Id = "System.Reactive.Core", Version = SystemReactiveVersion },
+            new NuSpecDependency() { Id = "System.Reactive.Linq", Version = SystemReactiveVersion }
+        },
+        Files = new []
+        {
+            new NuSpecContent { Source = "Utilities.Wpf.dll", Target = "lib/net45" }
+        },
+        BasePath = Directory("./dependencies/Utilities.Wpf/bin/" + dirSuffix),
+        OutputDirectory = nugetRoot
     }
 };
 

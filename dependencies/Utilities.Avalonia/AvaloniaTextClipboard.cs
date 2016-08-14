@@ -2,8 +2,9 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Core2D.Interfaces;
 using System.Threading.Tasks;
+using Avalonia;
 
-namespace Core2D.Avalonia.Util
+namespace Utilities.Avalonia
 {
     /// <summary>
     /// Wrapper class for App.Current.Clipboard clipboard class.
@@ -16,7 +17,7 @@ namespace Core2D.Avalonia.Util
         /// <param name="text">The text string.</param>
         Task ITextClipboard.SetText(string text)
         {
-            return App.Current.Clipboard.SetTextAsync(text);
+            return Application.Current.Clipboard.SetTextAsync(text);
         }
 
         /// <summary>
@@ -25,7 +26,7 @@ namespace Core2D.Avalonia.Util
         /// <returns>The text string.</returns>
         private async Task<string> GetTextAsync()
         {
-            return await App.Current.Clipboard.GetTextAsync();
+            return await Application.Current.Clipboard.GetTextAsync();
         }
 
         /// <summary>

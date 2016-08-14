@@ -14,7 +14,6 @@ using Core2D.Avalonia.Controls.Shapes;
 using Core2D.Avalonia.Controls.State;
 using Core2D.Avalonia.Controls.Style;
 using Core2D.Avalonia.Presenters;
-using Core2D.Avalonia.Util;
 using Core2D.Avalonia.Views;
 using Core2D.Data;
 using Core2D.Data.Database;
@@ -37,6 +36,7 @@ using Serializer.Newtonsoft;
 using Serializer.Xaml;
 using TextFieldReader.CsvHelper;
 using TextFieldWriter.CsvHelper;
+using Utilities.Avalonia;
 
 namespace Core2D.Avalonia
 {

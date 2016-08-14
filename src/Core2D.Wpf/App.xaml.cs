@@ -13,7 +13,6 @@ using Core2D.Editor.Interfaces;
 using Core2D.Interfaces;
 using Core2D.Project;
 using Core2D.Renderer;
-using Core2D.Wpf.Util;
 using FileSystem.DotNetFx;
 using FileWriter.Dxf;
 using FileWriter.Emf;
@@ -26,6 +25,7 @@ using Serializer.Newtonsoft;
 using Serializer.Xaml;
 using TextFieldReader.CsvHelper;
 using TextFieldWriter.CsvHelper;
+using Utilities.Wpf;
 
 namespace Core2D.Wpf
 {

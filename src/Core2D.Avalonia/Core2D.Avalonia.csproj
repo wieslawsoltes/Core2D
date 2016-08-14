@@ -192,8 +192,6 @@
     <Compile Include="Interactions\Behaviors\ToggleIsExpandedOnDoubleTappedBehavior.cs" />
     <Compile Include="Presenters\CachedContentPresenter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Util\AvaloniaInputSource.cs" />
-    <Compile Include="Util\AvaloniaTextClipboard.cs" />
     <Compile Include="Views\BrowserViewControl.xaml.cs">
       <DependentUpon>BrowserViewControl.xaml</DependentUpon>
     </Compile>
@@ -748,6 +746,10 @@
     <ProjectReference Include="..\..\dependencies\TextFieldWriter.CsvHelper\TextFieldWriter.CsvHelper.csproj">
       <Project>{ae7ff1b5-abe3-45bf-87cc-44ac580a666a}</Project>
       <Name>TextFieldWriter.CsvHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\dependencies\Utilities.Avalonia\Utilities.Avalonia.csproj">
+      <Project>{c6dbd1fd-c462-4005-b382-97bb4aef26f2}</Project>
+      <Name>Utilities.Avalonia</Name>
     </ProjectReference>
     <ProjectReference Include="..\Core2D\Core2D.csproj">
       <Project>{4ee581b0-45f3-4d7e-beae-277abf5f3fdd}</Project>

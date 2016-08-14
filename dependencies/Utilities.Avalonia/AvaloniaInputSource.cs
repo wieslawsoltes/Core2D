@@ -9,7 +9,7 @@ using Avalonia.Input;
 using Core2D.Editor.Input;
 using Core2D.Math;
 
-namespace Core2D.Avalonia.Util
+namespace Utilities.Avalonia
 {
     /// <summary>
     /// Provides mouse input from <see cref="Control"/>.

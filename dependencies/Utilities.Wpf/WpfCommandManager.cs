@@ -5,7 +5,7 @@ using Core2D.Editor.Input;
 using System.Linq;
 using System.Reflection;
 
-namespace Core2D.Wpf.Util
+namespace Utilities.Wpf
 {
     /// <summary>
     /// Editor commands manager.
