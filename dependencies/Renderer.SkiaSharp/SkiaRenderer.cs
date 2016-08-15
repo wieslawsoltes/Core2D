@@ -31,11 +31,13 @@ namespace Renderer.SkiaSharp
         /// Initializes a new instance of the <see cref="SkiaRenderer"/> class.
         /// </summary>
         /// <param name="isAntialias">The flag indicating whether paint is antialiased.</param>
-        public SkiaRenderer(bool isAntialias = true)
+        /// <param name="targetDpi">The target renderer dpi.</param>
+        public SkiaRenderer(bool isAntialias = true, double targetDpi = 72.0)
         {
             ClearCache(isZooming: false);
             _isAntialias = isAntialias;
             _scaleToPage = (value) => (float)(value * 1.0);
+            _targetDpi = targetDpi;
         }
 
         /// <summary>
