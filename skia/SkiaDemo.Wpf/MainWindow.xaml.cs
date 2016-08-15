@@ -37,7 +37,7 @@ namespace SkiaDemo.Wpf
                 CurrentPathTool = PathTool.Line,
                 FileIO = new DotNetFxFileSystem(),
                 CommandManager = new WpfCommandManager(),
-                Renderers = new ShapeRenderer[] { new SkiaRenderer() },
+                Renderers = new ShapeRenderer[] { new SkiaRenderer(true, 96.0) },
                 ProjectFactory = new ProjectFactory(),
                 TextClipboard = new WpfTextClipboard(),
                 JsonSerializer = new NewtonsoftTextSerializer(),
