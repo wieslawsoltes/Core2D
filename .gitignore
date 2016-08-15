@@ -223,6 +223,6 @@ pip-log.txt
 *.userprefs
 
 # Cake
-tools/
+/tools/
 .nuget
-artifacts/
+/artifacts/
