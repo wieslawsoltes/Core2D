@@ -4,8 +4,8 @@ using Xunit;
 
 namespace Core2D.UnitTests
 {
-    public class ZoomStateTests
+    public class PointSelectionTests
     {
-        // TODO: Write ZoomStateTests tests.
+        // TODO: Write PointSelectionTests tests.
     }
 }

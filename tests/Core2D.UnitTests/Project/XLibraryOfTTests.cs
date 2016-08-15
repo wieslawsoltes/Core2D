@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Core2D.UnitTests
 {
-    public class XLibraryTests
+    public class XLibraryOfTTests
     {
         [Fact]
         [Trait("Core2D.Project", "Project")]

@@ -16,7 +16,7 @@
     </NuGetPackageImportStamp>
     <TargetFrameworkProfile />
   </PropertyGroup>
-  <Import Project="..\..\Core2D.targets"/>
+  <Import Project="..\..\Core2D.targets" />
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Collections.Immutable, Version=1.2.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -48,9 +48,28 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\ContentAttributeTests.cs" />
+    <Compile Include="Attributes\NameAttributeTests.cs" />
     <Compile Include="Editor\Bounds\LineBoundsTests.cs" />
     <Compile Include="Editor\Bounds\RectangleBoundsTests.cs" />
     <Compile Include="Editor\Bounds\ShapeHitTestSelectionTests.cs" />
+    <Compile Include="Editor\Input\InputProcessorTests.cs" />
+    <Compile Include="Editor\ProjectEditorTests_Impl.cs" />
+    <Compile Include="Editor\ProjectEditorTests_Model.cs" />
+    <Compile Include="Editor\Tools\Path\ToolPathArcTests.cs" />
+    <Compile Include="Editor\Tools\Path\ToolPathCubicBezierTests.cs" />
+    <Compile Include="Editor\Tools\Path\ToolPathLineTests.cs" />
+    <Compile Include="Editor\Tools\Path\ToolPathQuadraticBezierTests.cs" />
+    <Compile Include="Editor\Tools\Selection\ArcSelectionTests.cs" />
+    <Compile Include="Editor\Tools\Selection\CubicBezierSelectionTests.cs" />
+    <Compile Include="Editor\Tools\Selection\EllipseSelectionTests.cs" />
+    <Compile Include="Editor\Tools\Selection\ImageSelectionTests.cs" />
+    <Compile Include="Editor\Tools\Selection\LineSelectionTests.cs" />
+    <Compile Include="Editor\Tools\Selection\PathSelectionTests.cs" />
+    <Compile Include="Editor\Tools\Selection\PointSelectionTests.cs" />
+    <Compile Include="Editor\Tools\Selection\QuadraticBezierSelectionTests.cs" />
+    <Compile Include="Editor\Tools\Selection\RectangleSelectionTests.cs" />
+    <Compile Include="Editor\Tools\Selection\TextSelectionTests.cs" />
     <Compile Include="ObservableObjectTests.cs" />
     <Compile Include="ObservableResourceTests.cs" />
     <Compile Include="Data\Database\XColumnTests.cs" />
@@ -63,7 +82,7 @@
     <Compile Include="Editor\Bounds\ShapeHitTestPointTests.cs" />
     <Compile Include="Editor\CommandsTests.cs" />
     <Compile Include="Editor\Designer\DesignerContextTests.cs" />
-    <Compile Include="Editor\ProjectEditorTests.cs" />
+    <Compile Include="Editor\ProjectEditorTests_IInputTarget.cs" />
     <Compile Include="Editor\Input\CommandManagerTests.cs" />
     <Compile Include="Editor\Input\CommandTests.cs" />
     <Compile Include="Editor\Input\CommandOfTTests.cs" />
@@ -100,7 +119,7 @@
     <Compile Include="Project\XContainerTests.cs" />
     <Compile Include="Project\XDocumentTests.cs" />
     <Compile Include="Project\XLayerTests.cs" />
-    <Compile Include="Project\XLibraryTests.cs" />
+    <Compile Include="Project\XLibraryOfTTests.cs" />
     <Compile Include="Project\XOptionsTests.cs" />
     <Compile Include="Project\XProjectTests_IImageCache.cs" />
     <Compile Include="Project\XProjectTests_IO.cs" />
@@ -122,9 +141,9 @@
     <Compile Include="Path\XPathPolySegmentTests.cs" />
     <Compile Include="Path\XPathSizeTests.cs" />
     <Compile Include="Renderer\CacheTests.cs" />
+    <Compile Include="Renderer\Presenters\ContainerPresenterTests.cs" />
     <Compile Include="Renderer\ShapeRendererStateTests.cs" />
     <Compile Include="Renderer\ShapeRendererTests.cs" />
-    <Compile Include="Renderer\ZoomStateTests.cs" />
     <Compile Include="Shapes\XArcTests.cs" />
     <Compile Include="Shapes\XCubicBezierTests.cs" />
     <Compile Include="Shapes\XEllipseTests.cs" />
@@ -156,11 +175,6 @@
     <Compile Include="Collections\XShapesTests.cs" />
     <Compile Include="Collections\XStylesTests.cs" />
     <Compile Include="Collections\XTemplatesTests.cs" />
-    <Compile Include="Xaml\Converters\ArgbColorTypeConverterTests.cs" />
-    <Compile Include="Xaml\Converters\FontStyleTypeConverterTests.cs" />
-    <Compile Include="Xaml\Converters\ShapeStateTypeConverterTests.cs" />
-    <Compile Include="Xaml\Converters\XPathGeometryTypeConverterTests.cs" />
-    <Compile Include="Xaml\Serializer\CoreXamlSerializerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
@@ -174,6 +188,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

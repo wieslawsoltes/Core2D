@@ -4,8 +4,8 @@ using Xunit;
 
 namespace Core2D.UnitTests
 {
-    public class ArgbColorTypeConverterTests
+    public class ProjectEditorTests_IInputTarget
     {
-        // TODO: Write ArgbColorTypeConverterTests tests.
+        // TODO: Write ProjectEditorTests_IInputTarget tests.
     }
 }

@@ -102,6 +102,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilities.Wpf", "dependenci
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilities.Avalonia", "dependencies\Utilities.Avalonia\Utilities.Avalonia.csproj", "{C6DBD1FD-C462-4005-B382-97BB4AEF26F2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serializer.Xaml.UnitTests", "tests\Serializer.Xaml.UnitTests\Serializer.Xaml.UnitTests.csproj", "{6DFDDEC8-933F-4B94-BEC5-933ED73E7D70}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		src\Core2D.Shared\Core2D.Shared.projitems*{0eec62cc-3cff-4185-88d6-ba107f0d8ff4}*SharedItemsImports = 4
@@ -570,6 +572,18 @@ Global
 		{C6DBD1FD-C462-4005-B382-97BB4AEF26F2}.Release|x64.Build.0 = Release|x64
 		{C6DBD1FD-C462-4005-B382-97BB4AEF26F2}.Release|x86.ActiveCfg = Release|x86
 		{C6DBD1FD-C462-4005-B382-97BB4AEF26F2}.Release|x86.Build.0 = Release|x86
+		{6DFDDEC8-933F-4B94-BEC5-933ED73E7D70}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
+		{6DFDDEC8-933F-4B94-BEC5-933ED73E7D70}.Debug|AnyCPU.Build.0 = Debug|Any CPU
+		{6DFDDEC8-933F-4B94-BEC5-933ED73E7D70}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6DFDDEC8-933F-4B94-BEC5-933ED73E7D70}.Debug|x64.Build.0 = Debug|Any CPU
+		{6DFDDEC8-933F-4B94-BEC5-933ED73E7D70}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6DFDDEC8-933F-4B94-BEC5-933ED73E7D70}.Debug|x86.Build.0 = Debug|Any CPU
+		{6DFDDEC8-933F-4B94-BEC5-933ED73E7D70}.Release|AnyCPU.ActiveCfg = Release|Any CPU
+		{6DFDDEC8-933F-4B94-BEC5-933ED73E7D70}.Release|AnyCPU.Build.0 = Release|Any CPU
+		{6DFDDEC8-933F-4B94-BEC5-933ED73E7D70}.Release|x64.ActiveCfg = Release|Any CPU
+		{6DFDDEC8-933F-4B94-BEC5-933ED73E7D70}.Release|x64.Build.0 = Release|Any CPU
+		{6DFDDEC8-933F-4B94-BEC5-933ED73E7D70}.Release|x86.ActiveCfg = Release|Any CPU
+		{6DFDDEC8-933F-4B94-BEC5-933ED73E7D70}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -611,5 +625,6 @@ Global
 		{803B8163-1A27-43F5-983A-DF4E5EFA5F2F} = {BC6BAFE6-1735-4549-A7CC-819274780B38}
 		{E8D9036D-7E08-4405-B767-FB1E654EF66A} = {9DA997E2-E367-481C-B48A-278274034A26}
 		{C6DBD1FD-C462-4005-B382-97BB4AEF26F2} = {9DA997E2-E367-481C-B48A-278274034A26}
+		{6DFDDEC8-933F-4B94-BEC5-933ED73E7D70} = {8756F874-0C1B-4AB8-83E0-0BEDA782D212}
 	EndGlobalSection
 EndGlobal

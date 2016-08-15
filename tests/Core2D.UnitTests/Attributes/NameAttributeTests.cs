@@ -4,8 +4,8 @@ using Xunit;
 
 namespace Core2D.UnitTests
 {
-    public class ShapeStateTypeConverterTests
+    public class NameAttributeTests
     {
-        // TODO: Write ShapeStateTypeConverterTests tests.
+        // TODO: Write NameAttributeTests tests.
     }
 }

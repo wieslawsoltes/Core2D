@@ -4,8 +4,8 @@ using Xunit;
 
 namespace Core2D.UnitTests
 {
-    public class FontStyleTypeConverterTests
+    public class RectangleSelectionTests
     {
-        // TODO: Write FontStyleTypeConverterTests tests.
+        // TODO: Write RectangleSelectionTests tests.
     }
 }

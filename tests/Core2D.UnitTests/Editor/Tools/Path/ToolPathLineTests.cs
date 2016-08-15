@@ -4,8 +4,8 @@ using Xunit;
 
 namespace Core2D.UnitTests
 {
-    public class CoreXamlSerializerTests
+    public class ToolPathLineTests
     {
-        // TODO: Write CoreXamlSerializerTests tests.
+        // TODO: Write ToolPathLineTests tests.
     }
 }
