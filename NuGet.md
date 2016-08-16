@@ -1,4 +1,4 @@
-# Core2D NuGet Packages
+# Core2D NuGet Packages and other external dependencies
 
 ## Table of Contents
 
@@ -7,7 +7,8 @@
 3. [MyGet Packages](NuGet.md#myget-packages)
 4. [Package Dependencies](NuGet.md#package-dependencies)
 5. [Package Sources](NuGet.md#package-sources)
-6. [Other Dependencies](NuGet.md#other-dependencies)
+6. [SkiaSharp Dependencies](NuGet.md#skiasharp-dependencies)
+7. [Other Dependencies](NuGet.md#other-dependencies)
 
 ## NuGet
 
@@ -129,6 +130,36 @@ You can install the package like this:
 * https://www.myget.org/F/avalonia-ci/api/v2
 * https://www.myget.org/F/xamlbehaviors-nightly/api/v2
 * https://www.myget.org/F/panandzoom-nightly/api/v2
+
+## SkiaSharp Dependencies
+
+The `libSkiaSharp.dll` from SkiaSharp package requires [Microsoft Visual C++ 2015 Redistributable](https://www.microsoft.com/en-us/download/details.aspx?id=52982) installed or included as part of distribution. License terms for redistributable
+[MICROSOFT SOFTWARE LICENSE TERMS, MICROSOFT VISUAL STUDIO COMMUNITY 2015](https://www.visualstudio.com/en-us/support/legal/mt171547) and information about [Distributable Code for Microsoft Visual Studio 2015](https://www.visualstudio.com/en-us/downloads/2015-redistribution-vs.aspx).
+
+### Required Visual C++ Runtime Files
+
+#### x86 Platform
+
+```
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\redist\x86\Microsoft.VC140.CRT\msvcp140.dll
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\redist\x86\Microsoft.VC140.CRT\vcruntime140.dll
+```
+
+#### x64 Platform
+
+```
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\redist\x64\Microsoft.VC140.CRT\msvcp140.dll
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\redist\x64\Microsoft.VC140.CRT\vcruntime140.dll
+```
+
+### Post-build event command line
+
+Add the foolowing commands to post-build event in project `Build Events` tab.
+
+```
+copy /Y "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\redist\$(PlatformName)\Microsoft.VC140.CRT\msvcp140.dll" $(TargetDir)
+copy /Y "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\redist\$(PlatformName)\Microsoft.VC140.CRT\vcruntime140.dll" $(TargetDir)
+```
 
 ## Other Dependencies
 
