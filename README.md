@@ -93,7 +93,7 @@ $ ./build.sh --target "Default" --platform "AnyCPU" --configuration "Release"
 
 ## NuGet
 
-[Using Core2D as NuGet packages and other external dependencies.](http://core2d.github.io/)
+[Using Core2D as NuGet packages and other external dependencies.](https://github.com/Core2D/Core2D/blob/master/NuGet.md)
 
 ## Resources
 
