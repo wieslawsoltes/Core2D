@@ -157,6 +157,7 @@
     <Compile Include="Renderer\ImageKey.cs" />
     <Compile Include="Renderer\ShapeRenderer.cs" />
     <Compile Include="Renderer\ShapeRendererState.cs" />
+    <Compile Include="ServiceLocator.cs" />
     <Compile Include="Shapes\Interfaces\IArc.cs" />
     <Compile Include="Shapes\Interfaces\ICubicBezier.cs" />
     <Compile Include="Shapes\Interfaces\ILine.cs" />

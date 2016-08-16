@@ -162,6 +162,7 @@
     <Compile Include="Renderer\Presenters\ContainerPresenterTests.cs" />
     <Compile Include="Renderer\ShapeRendererStateTests.cs" />
     <Compile Include="Renderer\ShapeRendererTests.cs" />
+    <Compile Include="ServiceLocatorTests.cs" />
     <Compile Include="Shapes\XArcTests.cs" />
     <Compile Include="Shapes\XCubicBezierTests.cs" />
     <Compile Include="Shapes\XEllipseTests.cs" />
