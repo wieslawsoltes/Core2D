@@ -15,7 +15,6 @@ namespace Core2D.Editor.Tools
     /// </summary>
     public class ToolSelection : ToolBase
     {
-        private ProjectEditor _editor;
         private ToolState _currentState = ToolState.None;
         private XRectangle _rectangle;
         private double _startX;
@@ -26,31 +25,21 @@ namespace Core2D.Editor.Tools
         private IEnumerable<BaseShape> _shapesCache;
 
         /// <summary>
-        /// Initialize new instance of <see cref="ToolSelection"/> class.
-        /// </summary>
-        /// <param name="editor">The current <see cref="ProjectEditor"/> object.</param>
-        public ToolSelection(ProjectEditor editor)
-            : base()
-        {
-            _editor = editor;
-        }
-
-        /// <summary>
         /// Generate selected shapes cache.
         /// </summary>
         private void GenerateMoveSelectionCache()
         {
-            if (_editor.Renderers[0].State.SelectedShape != null)
+            if (Editor.Renderers[0].State.SelectedShape != null)
             {
-                var state = _editor.Renderers[0].State.SelectedShape.State;
+                var state = Editor.Renderers[0].State.SelectedShape.State;
 
-                switch (_editor.Project.Options.MoveMode)
+                switch (Editor.Project.Options.MoveMode)
                 {
                     case XMoveMode.Point:
                         {
                             if (!state.Flags.HasFlag(ShapeStateFlags.Locked))
                             {
-                                var shape = _editor.Renderers[0].State.SelectedShape;
+                                var shape = Editor.Renderers[0].State.SelectedShape;
                                 var shapes = Enumerable.Repeat(shape, 1);
                                 _pointsCache = shapes.SelectMany(s => s.GetPoints()).Distinct().ToList();
                             }
@@ -60,7 +49,7 @@ namespace Core2D.Editor.Tools
                         {
                             if (!state.Flags.HasFlag(ShapeStateFlags.Locked) && !state.Flags.HasFlag(ShapeStateFlags.Connector))
                             {
-                                var shape = _editor.Renderers[0].State.SelectedShape;
+                                var shape = Editor.Renderers[0].State.SelectedShape;
                                 var shapes = Enumerable.Repeat(shape, 1).ToList();
                                 _shapesCache = shapes;
                             }
@@ -69,11 +58,11 @@ namespace Core2D.Editor.Tools
                 }
             }
 
-            if (_editor.Renderers[0].State.SelectedShapes != null)
+            if (Editor.Renderers[0].State.SelectedShapes != null)
             {
-                var shapes = _editor.Renderers[0].State.SelectedShapes.Where(s => !s.State.Flags.HasFlag(ShapeStateFlags.Locked));
+                var shapes = Editor.Renderers[0].State.SelectedShapes.Where(s => !s.State.Flags.HasFlag(ShapeStateFlags.Locked));
 
-                switch (_editor.Project.Options.MoveMode)
+                switch (Editor.Project.Options.MoveMode)
                 {
                     case XMoveMode.Point:
                         {
@@ -105,8 +94,8 @@ namespace Core2D.Editor.Tools
         /// <param name="y">The Y coordinate of point.</param>
         private void MoveSelectionCacheTo(double x, double y)
         {
-            double sx = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, _editor.Project.Options.SnapX) : x;
-            double sy = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, _editor.Project.Options.SnapY) : y;
+            double sx = Editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, Editor.Project.Options.SnapX) : x;
+            double sy = Editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, Editor.Project.Options.SnapY) : y;
 
             double dx = sx - _startX;
             double dy = sy - _startY;
@@ -134,45 +123,45 @@ namespace Core2D.Editor.Tools
             {
                 case ToolState.None:
                     {
-                        _editor.Dehover(_editor.Project.CurrentContainer.CurrentLayer);
-                        if (_editor.Renderers[0].State.SelectedShape == null
-                            && _editor.Renderers[0].State.SelectedShapes != null)
+                        Editor.Dehover(Editor.Project.CurrentContainer.CurrentLayer);
+                        if (Editor.Renderers[0].State.SelectedShape == null
+                            && Editor.Renderers[0].State.SelectedShapes != null)
                         {
-                            var result = ShapeHitTestPoint.HitTest(_editor.Project.CurrentContainer.CurrentLayer.Shapes, new Vector2(x, y), _editor.Project.Options.HitThreshold);
+                            var result = ShapeHitTestPoint.HitTest(Editor.Project.CurrentContainer.CurrentLayer.Shapes, new Vector2(x, y), Editor.Project.Options.HitThreshold);
                             if (result != null)
                             {
-                                _startX = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, _editor.Project.Options.SnapX) : x;
-                                _startY = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, _editor.Project.Options.SnapY) : y;
+                                _startX = Editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, Editor.Project.Options.SnapX) : x;
+                                _startY = Editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, Editor.Project.Options.SnapY) : y;
                                 _historyX = _startX;
                                 _historyY = _startY;
                                 GenerateMoveSelectionCache();
                                 _currentState = ToolState.One;
-                                _editor.CancelAvailable = true;
+                                Editor.CancelAvailable = true;
                                 break;
                             }
                         }
 
-                        if (_editor.TryToSelectShape(_editor.Project.CurrentContainer.CurrentLayer, x, y))
+                        if (Editor.TryToSelectShape(Editor.Project.CurrentContainer.CurrentLayer, x, y))
                         {
-                            _startX = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, _editor.Project.Options.SnapX) : x;
-                            _startY = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, _editor.Project.Options.SnapY) : y;
+                            _startX = Editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, Editor.Project.Options.SnapX) : x;
+                            _startY = Editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, Editor.Project.Options.SnapY) : y;
                             _historyX = _startX;
                             _historyY = _startY;
                             GenerateMoveSelectionCache();
                             _currentState = ToolState.One;
-                            _editor.CancelAvailable = true;
+                            Editor.CancelAvailable = true;
                             break;
                         }
 
                         _rectangle = XRectangle.Create(
                             x, y,
-                            _editor.Project.Options.SelectionStyle,
+                            Editor.Project.Options.SelectionStyle,
                             null,
                             true, true);
-                        _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_rectangle);
-                        _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                        Editor.Project.CurrentContainer.WorkingLayer.Shapes = Editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_rectangle);
+                        Editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         _currentState = ToolState.One;
-                        _editor.CancelAvailable = true;
+                        Editor.CancelAvailable = true;
                     }
                     break;
                 case ToolState.One:
@@ -181,10 +170,10 @@ namespace Core2D.Editor.Tools
                         {
                             _rectangle.BottomRight.X = x;
                             _rectangle.BottomRight.Y = y;
-                            _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_rectangle);
-                            _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                            Editor.Project.CurrentContainer.WorkingLayer.Shapes = Editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_rectangle);
+                            Editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                             _currentState = ToolState.None;
-                            _editor.CancelAvailable = false;
+                            Editor.CancelAvailable = false;
                         }
                     }
                     break;
@@ -202,10 +191,10 @@ namespace Core2D.Editor.Tools
                     break;
                 case ToolState.One:
                     {
-                        if (_editor.IsSelectionAvailable())
+                        if (Editor.IsSelectionAvailable())
                         {
-                            double sx = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, _editor.Project.Options.SnapX) : x;
-                            double sy = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, _editor.Project.Options.SnapY) : y;
+                            double sx = Editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, Editor.Project.Options.SnapX) : x;
+                            double sy = Editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, Editor.Project.Options.SnapY) : y;
                             if (_historyX != sx || _historyY != sy)
                             {
                                 double dx = sx - _historyX;
@@ -225,7 +214,7 @@ namespace Core2D.Editor.Tools
                                     Points = _pointsCache,
                                     Shapes = _shapesCache
                                 };
-                                _editor.Project?.History?.Snapshot(previous, next,
+                                Editor.Project?.History?.Snapshot(previous, next,
                                     (state) =>
                                     {
                                         if (state.Points != null)
@@ -242,7 +231,7 @@ namespace Core2D.Editor.Tools
 
                             DisposeMoveSelectionCache();
                             _currentState = ToolState.None;
-                            _editor.CancelAvailable = false;
+                            Editor.CancelAvailable = false;
                             break;
                         }
 
@@ -250,11 +239,11 @@ namespace Core2D.Editor.Tools
                         {
                             _rectangle.BottomRight.X = x;
                             _rectangle.BottomRight.Y = y;
-                            _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_rectangle);
-                            _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                            Editor.Project.CurrentContainer.WorkingLayer.Shapes = Editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_rectangle);
+                            Editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                             _currentState = ToolState.None;
-                            _editor.TryToSelectShapes(_editor.Project.CurrentContainer.CurrentLayer, _rectangle);
-                            _editor.CancelAvailable = false;
+                            Editor.TryToSelectShapes(Editor.Project.CurrentContainer.CurrentLayer, _rectangle);
+                            Editor.CancelAvailable = false;
                         }
                     }
                     break;
@@ -270,13 +259,13 @@ namespace Core2D.Editor.Tools
             {
                 case ToolState.None:
                     {
-                        _editor.Dehover(_editor.Project.CurrentContainer.CurrentLayer);
+                        Editor.Dehover(Editor.Project.CurrentContainer.CurrentLayer);
                     }
                     break;
                 case ToolState.One:
                     {
                         DisposeMoveSelectionCache();
-                        _editor.CancelAvailable = false;
+                        Editor.CancelAvailable = false;
                     }
                     break;
             }
@@ -291,15 +280,15 @@ namespace Core2D.Editor.Tools
             {
                 case ToolState.None:
                     {
-                        _editor.TryToHoverShape(x, y);
+                        Editor.TryToHoverShape(x, y);
                     }
                     break;
                 case ToolState.One:
                     {
-                        if (_editor.IsSelectionAvailable())
+                        if (Editor.IsSelectionAvailable())
                         {
                             MoveSelectionCacheTo(x, y);
-                            _editor.Project.CurrentContainer.CurrentLayer.Invalidate();
+                            Editor.Project.CurrentContainer.CurrentLayer.Invalidate();
                             break;
                         }
 
@@ -307,7 +296,7 @@ namespace Core2D.Editor.Tools
                         {
                             _rectangle.BottomRight.X = x;
                             _rectangle.BottomRight.Y = y;
-                            _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                            Editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         }
                     }
                     break;

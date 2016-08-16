@@ -190,11 +190,7 @@ var nuspecNuGetSettingsCore = new []
         {
             new NuSpecDependency() { Id = "System.Collections.Immutable", Version = SystemCollectionsImmutableVersion },
             new NuSpecDependency() { Id = "Core2D", Version = version },
-            new NuSpecDependency() { Id = "Core2D.Renderer.Avalonia", Version = version },
-            new NuSpecDependency() { Id = "Core2D.Serializer.Newtonsoft", Version = version },
-            new NuSpecDependency() { Id = "Core2D.Serializer.Xaml", Version = version },
-            new NuSpecDependency() { Id = "Core2D.TextFieldReader.CsvHelper", Version = version },
-            new NuSpecDependency() { Id = "Core2D.TextFieldWriter.CsvHelper", Version = version },
+            new NuSpecDependency() { Id = "Utilities.Avalonia", Version = version },
             new NuSpecDependency() { Id = "Avalonia", Version = AvaloniaVersion },
             new NuSpecDependency() { Id = "Avalonia.Xaml.Behaviors", Version = AvaloniaXamlBehaviorsVersion },
             new NuSpecDependency() { Id = "Avalonia.Controls.PanAndZoom", Version = AvaloniaControlsPanAndZoomVersion }

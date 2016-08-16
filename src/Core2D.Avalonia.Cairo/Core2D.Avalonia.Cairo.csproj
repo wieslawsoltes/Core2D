@@ -210,6 +210,26 @@
       <Project>{34c8ee31-a1fe-4a74-be36-c1f38bc06fec}</Project>
       <Name>Renderer.PdfSharp-core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\dependencies\Serializer.Newtonsoft\Serializer.Newtonsoft.csproj">
+      <Project>{11E61A53-13D5-4447-8D66-3F328BBFC30A}</Project>
+      <Name>Serializer.Newtonsoft</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\dependencies\Serializer.Xaml\Serializer.Xaml.csproj">
+      <Project>{1DCA99EA-F8FE-4DDD-AB81-BF0380C1B33D}</Project>
+      <Name>Serializer.Xaml</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\dependencies\TextFieldReader.CsvHelper\TextFieldReader.CsvHelper.csproj">
+      <Project>{F215ADF5-74C1-4E26-9045-B6BBDA736092}</Project>
+      <Name>TextFieldReader.CsvHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\dependencies\TextFieldWriter.CsvHelper\TextFieldWriter.CsvHelper.csproj">
+      <Project>{AE7FF1B5-ABE3-45BF-87CC-44AC580A666A}</Project>
+      <Name>TextFieldWriter.CsvHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\dependencies\Utilities.Avalonia\Utilities.Avalonia.csproj">
+      <Project>{C6DBD1FD-C462-4005-B382-97BB4AEF26F2}</Project>
+      <Name>Utilities.Avalonia</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Core2D.Avalonia\Core2D.Avalonia.csproj">
       <Project>{7acb3221-ee78-43a9-ad7d-35db687ec44c}</Project>
       <Name>Core2D.Avalonia</Name>

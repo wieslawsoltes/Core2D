@@ -11,52 +11,41 @@ namespace Core2D.Editor.Tools
     /// </summary>
     public class ToolRectangle : ToolBase
     {
-        private ProjectEditor _editor;
         private ToolState _currentState = ToolState.None;
         private XRectangle _rectangle;
         private RectangleSelection _selection;
-
-        /// <summary>
-        /// Initialize new instance of <see cref="ToolRectangle"/> class.
-        /// </summary>
-        /// <param name="editor">The current <see cref="ProjectEditor"/> object.</param>
-        public ToolRectangle(ProjectEditor editor)
-            : base()
-        {
-            _editor = editor;
-        }
 
         /// <inheritdoc/>
         public override void LeftDown(double x, double y)
         {
             base.LeftDown(x, y);
 
-            double sx = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, _editor.Project.Options.SnapX) : x;
-            double sy = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, _editor.Project.Options.SnapY) : y;
+            double sx = Editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, Editor.Project.Options.SnapX) : x;
+            double sy = Editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, Editor.Project.Options.SnapY) : y;
             switch (_currentState)
             {
                 case ToolState.None:
                     {
-                        var style = _editor.Project.CurrentStyleLibrary.Selected;
+                        var style = Editor.Project.CurrentStyleLibrary.Selected;
                         _rectangle = XRectangle.Create(
                             sx, sy,
-                            _editor.Project.Options.CloneStyle ? style.Clone() : style,
-                            _editor.Project.Options.PointShape,
-                            _editor.Project.Options.DefaultIsStroked,
-                            _editor.Project.Options.DefaultIsFilled);
+                            Editor.Project.Options.CloneStyle ? style.Clone() : style,
+                            Editor.Project.Options.PointShape,
+                            Editor.Project.Options.DefaultIsStroked,
+                            Editor.Project.Options.DefaultIsFilled);
 
-                        var result = _editor.TryToGetConnectionPoint(sx, sy);
+                        var result = Editor.TryToGetConnectionPoint(sx, sy);
                         if (result != null)
                         {
                             _rectangle.TopLeft = result;
                         }
 
-                        _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_rectangle);
-                        _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                        Editor.Project.CurrentContainer.WorkingLayer.Shapes = Editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_rectangle);
+                        Editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         ToStateOne();
                         Move(_rectangle);
                         _currentState = ToolState.One;
-                        _editor.CancelAvailable = true;
+                        Editor.CancelAvailable = true;
                     }
                     break;
                 case ToolState.One:
@@ -66,18 +55,18 @@ namespace Core2D.Editor.Tools
                             _rectangle.BottomRight.X = sx;
                             _rectangle.BottomRight.Y = sy;
 
-                            var result = _editor.TryToGetConnectionPoint(sx, sy);
+                            var result = Editor.TryToGetConnectionPoint(sx, sy);
                             if (result != null)
                             {
                                 _rectangle.BottomRight = result;
                             }
 
-                            _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_rectangle);
+                            Editor.Project.CurrentContainer.WorkingLayer.Shapes = Editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_rectangle);
                             Remove();
                             Finalize(_rectangle);
-                            _editor.Project.AddShape(_editor.Project.CurrentContainer.CurrentLayer, _rectangle);
+                            Editor.Project.AddShape(Editor.Project.CurrentContainer.CurrentLayer, _rectangle);
                             _currentState = ToolState.None;
-                            _editor.CancelAvailable = false;
+                            Editor.CancelAvailable = false;
                         }
                     }
                     break;
@@ -95,11 +84,11 @@ namespace Core2D.Editor.Tools
                     break;
                 case ToolState.One:
                     {
-                        _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_rectangle);
-                        _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                        Editor.Project.CurrentContainer.WorkingLayer.Shapes = Editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_rectangle);
+                        Editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         Remove();
                         _currentState = ToolState.None;
-                        _editor.CancelAvailable = false;
+                        Editor.CancelAvailable = false;
                     }
                     break;
             }
@@ -110,15 +99,15 @@ namespace Core2D.Editor.Tools
         {
             base.Move(x, y);
 
-            double sx = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, _editor.Project.Options.SnapX) : x;
-            double sy = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, _editor.Project.Options.SnapY) : y;
+            double sx = Editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, Editor.Project.Options.SnapX) : x;
+            double sy = Editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, Editor.Project.Options.SnapY) : y;
             switch (_currentState)
             {
                 case ToolState.None:
                     {
-                        if (_editor.Project.Options.TryToConnect)
+                        if (Editor.Project.Options.TryToConnect)
                         {
-                            _editor.TryToHoverShape(sx, sy);
+                            Editor.TryToHoverShape(sx, sy);
                         }
                     }
                     break;
@@ -126,13 +115,13 @@ namespace Core2D.Editor.Tools
                     {
                         if (_rectangle != null)
                         {
-                            if (_editor.Project.Options.TryToConnect)
+                            if (Editor.Project.Options.TryToConnect)
                             {
-                                _editor.TryToHoverShape(sx, sy);
+                                Editor.TryToHoverShape(sx, sy);
                             }
                             _rectangle.BottomRight.X = sx;
                             _rectangle.BottomRight.Y = sy;
-                            _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                            Editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                             Move(_rectangle);
                         }
                     }
@@ -146,10 +135,10 @@ namespace Core2D.Editor.Tools
             base.ToStateOne();
 
             _selection = new RectangleSelection(
-                _editor.Project.CurrentContainer.HelperLayer,
+                Editor.Project.CurrentContainer.HelperLayer,
                 _rectangle,
-                _editor.Project.Options.HelperStyle,
-                _editor.Project.Options.PointShape);
+                Editor.Project.Options.HelperStyle,
+                Editor.Project.Options.PointShape);
 
             _selection.ToStateOne();
         }

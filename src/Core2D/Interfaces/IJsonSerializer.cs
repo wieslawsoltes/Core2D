@@ -4,12 +4,12 @@
 namespace Core2D.Interfaces
 {
     /// <summary>
-    /// Defines text string serializer contract.
+    /// Defines json string serializer contract.
     /// </summary>
-    public interface ITextSerializer
+    public interface IJsonSerializer
     {
         /// <summary>
-        /// Serialize the object value to text string.
+        /// Serialize the object value to json string.
         /// </summary>
         /// <typeparam name="T">The object type.</typeparam>
         /// <param name="value">The object instance.</param>
@@ -17,11 +17,11 @@ namespace Core2D.Interfaces
         string Serialize<T>(T value);
 
         /// <summary>
-        /// Deserialize the text string to object.
+        /// Deserialize the json string to object.
         /// </summary>
         /// <typeparam name="T">The object type.</typeparam>
-        /// <param name="text">The text string.</param>
+        /// <param name="json">The json string.</param>
         /// <returns>The new instance of object of type <typeparamref name="T"/>.</returns>
-        T Deserialize<T>(string text);
+        T Deserialize<T>(string json);
     }
 }

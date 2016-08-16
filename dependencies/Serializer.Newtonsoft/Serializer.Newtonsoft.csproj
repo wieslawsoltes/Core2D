@@ -16,7 +16,7 @@
     <TargetFrameworkProfile>Profile7</TargetFrameworkProfile>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
-  <Import Project="..\..\Core2D.targets"/>
+  <Import Project="..\..\Core2D.targets" />
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
     <ProjectReference Include="..\..\src\Core2D\Core2D.csproj">
@@ -28,7 +28,7 @@
     <Compile Include="Converters\ArgbColorJsonConverter.cs" />
     <Compile Include="Converters\FontStyleConverter.cs" />
     <Compile Include="Converters\ShapeStateConverter.cs" />
-    <Compile Include="NewtonsoftTextSerializer.cs" />
+    <Compile Include="NewtonsoftJsonSerializer.cs" />
     <Compile Include="ProjectContractResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

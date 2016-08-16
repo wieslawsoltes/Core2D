@@ -725,29 +725,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App.IEditorApplication.cs" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\dependencies\Renderer.Avalonia\Renderer.Avalonia.csproj">
-      <Project>{e05f3f7e-2176-43dc-90bb-f5c66cfdb12f}</Project>
-      <Name>Renderer.Avalonia</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\dependencies\Serializer.Newtonsoft\Serializer.Newtonsoft.csproj">
-      <Project>{11e61a53-13d5-4447-8d66-3f328bbfc30a}</Project>
-      <Name>Serializer.Newtonsoft</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\dependencies\Serializer.Xaml\Serializer.Xaml.csproj">
-      <Project>{1dca99ea-f8fe-4ddd-ab81-bf0380c1b33d}</Project>
-      <Name>Serializer.Xaml</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\dependencies\TextFieldReader.CsvHelper\TextFieldReader.CsvHelper.csproj">
-      <Project>{f215adf5-74c1-4e26-9045-b6bbda736092}</Project>
-      <Name>TextFieldReader.CsvHelper</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\dependencies\TextFieldWriter.CsvHelper\TextFieldWriter.CsvHelper.csproj">
-      <Project>{ae7ff1b5-abe3-45bf-87cc-44ac580a666a}</Project>
-      <Name>TextFieldWriter.CsvHelper</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\dependencies\Utilities.Avalonia\Utilities.Avalonia.csproj">
       <Project>{c6dbd1fd-c462-4005-b382-97bb4aef26f2}</Project>
       <Name>Utilities.Avalonia</Name>

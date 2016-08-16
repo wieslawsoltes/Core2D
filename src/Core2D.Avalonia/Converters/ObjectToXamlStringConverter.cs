@@ -3,7 +3,6 @@
 using Core2D.Interfaces;
 using Avalonia;
 using Avalonia.Markup;
-using Serializer.Xaml;
 using System;
 using System.Globalization;
 
@@ -14,8 +13,7 @@ namespace Core2D.Avalonia.Converters
     /// </summary>
     public class ObjectToXamlStringConverter : IValueConverter
     {
-        private static ITextSerializer XamlSerializer = new PortableXamlSerializer();
-
+        private static Lazy<IXamlSerializer> XamlSerializer = ServiceLocator.Instance.ResolveLazily<IXamlSerializer>();
         /// <summary>
         /// Gets an instance of a <see cref="ObjectToXamlStringConverter"/>.
         /// </summary>
@@ -35,7 +33,7 @@ namespace Core2D.Avalonia.Converters
             {
                 try
                 {
-                    return XamlSerializer?.Serialize(value);
+                    return XamlSerializer?.Value?.Serialize(value);
                 }
                 catch (Exception) { }
             }

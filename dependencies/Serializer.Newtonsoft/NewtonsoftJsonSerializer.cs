@@ -9,7 +9,7 @@ namespace Serializer.Newtonsoft
     /// <summary>
     /// Json serializer.
     /// </summary>
-    public sealed class NewtonsoftTextSerializer : ITextSerializer
+    public sealed class NewtonsoftJsonSerializer : IJsonSerializer
     {
         /// <summary>
         /// Specifies the settings on a <see cref="JsonSerializer"/> object.
@@ -19,7 +19,7 @@ namespace Serializer.Newtonsoft
         /// <summary>
         /// Initializes static data.
         /// </summary>
-        static NewtonsoftTextSerializer()
+        static NewtonsoftJsonSerializer()
         {
             Settings = new JsonSerializerSettings()
             {
@@ -40,15 +40,15 @@ namespace Serializer.Newtonsoft
         }
 
         /// <inheritdoc/>
-        string ITextSerializer.Serialize<T>(T value)
+        string IJsonSerializer.Serialize<T>(T value)
         {
             return JsonConvert.SerializeObject(value, Settings);
         }
 
         /// <inheritdoc/>
-        T ITextSerializer.Deserialize<T>(string text)
+        T IJsonSerializer.Deserialize<T>(string json)
         {
-            return JsonConvert.DeserializeObject<T>(text, Settings);
+            return JsonConvert.DeserializeObject<T>(json, Settings);
         }
     }
 }

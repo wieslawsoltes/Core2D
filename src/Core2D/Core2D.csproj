@@ -54,6 +54,7 @@
     <Compile Include="Editor\Views\DocumentView.cs" />
     <Compile Include="Editor\Views\EditorView.cs" />
     <Compile Include="Interfaces\IProjectExporter.cs" />
+    <Compile Include="Interfaces\IXamlSerializer.cs" />
     <Compile Include="ObservableObject.cs" />
     <Compile Include="ObservableResource.cs" />
     <Compile Include="Data\Database\XColumn.cs" />
@@ -107,7 +108,7 @@
     <Compile Include="Interfaces\ITextClipboard.cs" />
     <Compile Include="Interfaces\ITextFieldReader.cs" />
     <Compile Include="Interfaces\ITextFieldWriter.cs" />
-    <Compile Include="Interfaces\ITextSerializer.cs" />
+    <Compile Include="Interfaces\IJsonSerializer.cs" />
     <Compile Include="Interfaces\IFileSystem.cs" />
     <Compile Include="Math\Arc\GdiArc.cs" />
     <Compile Include="Math\Arc\WpfArc.cs" />

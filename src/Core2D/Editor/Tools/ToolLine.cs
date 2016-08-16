@@ -11,56 +11,45 @@ namespace Core2D.Editor.Tools
     /// </summary>
     public class ToolLine : ToolBase
     {
-        private ProjectEditor _editor;
         private ToolState _currentState = ToolState.None;
         private XLine _line;
         private LineSelection _selection;
-
-        /// <summary>
-        /// Initialize new instance of <see cref="ToolLine"/> class.
-        /// </summary>
-        /// <param name="editor">The current <see cref="ProjectEditor"/> object.</param>
-        public ToolLine(ProjectEditor editor)
-            : base()
-        {
-            _editor = editor;
-        }
 
         /// <inheritdoc/>
         public override void LeftDown(double x, double y)
         {
             base.LeftDown(x, y);
 
-            double sx = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, _editor.Project.Options.SnapX) : x;
-            double sy = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, _editor.Project.Options.SnapY) : y;
+            double sx = Editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, Editor.Project.Options.SnapX) : x;
+            double sy = Editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, Editor.Project.Options.SnapY) : y;
             switch (_currentState)
             {
                 case ToolState.None:
                     {
-                        var style = _editor.Project.CurrentStyleLibrary.Selected;
+                        var style = Editor.Project.CurrentStyleLibrary.Selected;
                         _line = XLine.Create(
                             sx, sy,
-                            _editor.Project.Options.CloneStyle ? style.Clone() : style,
-                            _editor.Project.Options.PointShape,
-                            _editor.Project.Options.DefaultIsStroked);
-                        if (_editor.Project.Options.TryToConnect)
+                            Editor.Project.Options.CloneStyle ? style.Clone() : style,
+                            Editor.Project.Options.PointShape,
+                            Editor.Project.Options.DefaultIsStroked);
+                        if (Editor.Project.Options.TryToConnect)
                         {
-                            var result = _editor.TryToGetConnectionPoint(sx, sy);
+                            var result = Editor.TryToGetConnectionPoint(sx, sy);
                             if (result != null)
                             {
                                 _line.Start = result;
                             }
                             else
                             {
-                                _editor.TryToSplitLine(x, y, _line.Start);
+                                Editor.TryToSplitLine(x, y, _line.Start);
                             }
                         }
-                        _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_line);
-                        _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                        Editor.Project.CurrentContainer.WorkingLayer.Shapes = Editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_line);
+                        Editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         ToStateOne();
                         Move(_line);
                         _currentState = ToolState.One;
-                        _editor.CancelAvailable = true;
+                        Editor.CancelAvailable = true;
                     }
                     break;
                 case ToolState.One:
@@ -69,24 +58,24 @@ namespace Core2D.Editor.Tools
                         {
                             _line.End.X = sx;
                             _line.End.Y = sy;
-                            if (_editor.Project.Options.TryToConnect)
+                            if (Editor.Project.Options.TryToConnect)
                             {
-                                var result = _editor.TryToGetConnectionPoint(sx, sy);
+                                var result = Editor.TryToGetConnectionPoint(sx, sy);
                                 if (result != null)
                                 {
                                     _line.End = result;
                                 }
                                 else
                                 {
-                                    _editor.TryToSplitLine(x, y, _line.End);
+                                    Editor.TryToSplitLine(x, y, _line.End);
                                 }
                             }
-                            _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_line);
+                            Editor.Project.CurrentContainer.WorkingLayer.Shapes = Editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_line);
                             Remove();
                             base.Finalize(_line);
-                            _editor.Project.AddShape(_editor.Project.CurrentContainer.CurrentLayer, _line);
+                            Editor.Project.AddShape(Editor.Project.CurrentContainer.CurrentLayer, _line);
                             _currentState = ToolState.None;
-                            _editor.CancelAvailable = false;
+                            Editor.CancelAvailable = false;
                         }
                     }
                     break;
@@ -104,11 +93,11 @@ namespace Core2D.Editor.Tools
                     break;
                 case ToolState.One:
                     {
-                        _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_line);
-                        _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                        Editor.Project.CurrentContainer.WorkingLayer.Shapes = Editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_line);
+                        Editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         Remove();
                         _currentState = ToolState.None;
-                        _editor.CancelAvailable = false;
+                        Editor.CancelAvailable = false;
                     }
                     break;
             }
@@ -119,15 +108,15 @@ namespace Core2D.Editor.Tools
         {
             base.Move(x, y);
 
-            double sx = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, _editor.Project.Options.SnapX) : x;
-            double sy = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, _editor.Project.Options.SnapY) : y;
+            double sx = Editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, Editor.Project.Options.SnapX) : x;
+            double sy = Editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, Editor.Project.Options.SnapY) : y;
             switch (_currentState)
             {
                 case ToolState.None:
                     {
-                        if (_editor.Project.Options.TryToConnect)
+                        if (Editor.Project.Options.TryToConnect)
                         {
-                            _editor.TryToHoverShape(sx, sy);
+                            Editor.TryToHoverShape(sx, sy);
                         }
                     }
                     break;
@@ -135,13 +124,13 @@ namespace Core2D.Editor.Tools
                     {
                         if (_line != null)
                         {
-                            if (_editor.Project.Options.TryToConnect)
+                            if (Editor.Project.Options.TryToConnect)
                             {
-                                _editor.TryToHoverShape(sx, sy);
+                                Editor.TryToHoverShape(sx, sy);
                             }
                             _line.End.X = sx;
                             _line.End.Y = sy;
-                            _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                            Editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                             Move(_line);
                         }
                     }
@@ -155,10 +144,10 @@ namespace Core2D.Editor.Tools
             base.ToStateOne();
 
             _selection = new LineSelection(
-                _editor.Project.CurrentContainer.HelperLayer,
+                Editor.Project.CurrentContainer.HelperLayer,
                 _line,
-                _editor.Project.Options.HelperStyle,
-                _editor.Project.Options.PointShape);
+                Editor.Project.Options.HelperStyle,
+                Editor.Project.Options.PointShape);
 
             _selection.ToStateOne();
         }

@@ -16,7 +16,6 @@ namespace Core2D.Editor.Tools
     /// </summary>
     public class ToolPath : ToolBase
     {
-        private ProjectEditor _editor;
         internal XPath _path;
         internal XPathGeometry _geometry;
         internal XGeometryContext _context;
@@ -31,16 +30,14 @@ namespace Core2D.Editor.Tools
         /// <summary>
         /// Initialize new instance of <see cref="ToolPath"/> class.
         /// </summary>
-        /// <param name="editor">The current <see cref="ProjectEditor"/> object.</param>
-        public ToolPath(ProjectEditor editor)
+        public ToolPath()
             : base()
         {
-            _editor = editor;
             _isInitialized = false;
-            _toolPathLine = new ToolPathLine(_editor, this);
-            _toolPathArc = new ToolPathArc(_editor, this);
-            _toolPathCubicBezier = new ToolPathCubicBezier(_editor, this);
-            _toolPathQuadraticBezier = new ToolPathQuadraticBezier(_editor, this);
+            _toolPathLine = new ToolPathLine(this);
+            _toolPathArc = new ToolPathArc(this);
+            _toolPathCubicBezier = new ToolPathCubicBezier(this);
+            _toolPathQuadraticBezier = new ToolPathQuadraticBezier(this);
         }
 
         /// <summary>
@@ -102,26 +99,26 @@ namespace Core2D.Editor.Tools
         {
             _geometry = XPathGeometry.Create(
                 ImmutableArray.Create<XPathFigure>(),
-                _editor.Project.Options.DefaultFillRule);
+                Editor.Project.Options.DefaultFillRule);
 
             _context = new XPathGeometryContext(_geometry);
 
             _context.BeginFigure(
                 start,
-                _editor.Project.Options.DefaultIsFilled,
-                _editor.Project.Options.DefaultIsClosed);
+                Editor.Project.Options.DefaultIsFilled,
+                Editor.Project.Options.DefaultIsClosed);
 
-            var style = _editor.Project.CurrentStyleLibrary.Selected;
+            var style = Editor.Project.CurrentStyleLibrary.Selected;
             _path = XPath.Create(
                 "Path",
-                _editor.Project.Options.CloneStyle ? style.Clone() : style,
+                Editor.Project.Options.CloneStyle ? style.Clone() : style,
                 _geometry,
-                _editor.Project.Options.DefaultIsStroked,
-                _editor.Project.Options.DefaultIsFilled);
+                Editor.Project.Options.DefaultIsStroked,
+                Editor.Project.Options.DefaultIsFilled);
 
-            _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_path);
+            Editor.Project.CurrentContainer.WorkingLayer.Shapes = Editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_path);
 
-            _previousPathTool = _editor.CurrentPathTool;
+            _previousPathTool = Editor.CurrentPathTool;
             _isInitialized = true;
         }
 
@@ -165,7 +162,7 @@ namespace Core2D.Editor.Tools
                     break;
             }
 
-            switch (_editor.CurrentPathTool)
+            switch (Editor.CurrentPathTool)
             {
                 case PathTool.Line:
                     {
@@ -189,18 +186,18 @@ namespace Core2D.Editor.Tools
                     break;
                 case PathTool.Move:
                     {
-                        _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
-                        _editor.Project.CurrentContainer.HelperLayer.Invalidate();
+                        Editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                        Editor.Project.CurrentContainer.HelperLayer.Invalidate();
                     }
                     break;
             }
 
-            if (_editor.CurrentPathTool == PathTool.Move)
+            if (Editor.CurrentPathTool == PathTool.Move)
             {
                 _movePathTool = _previousPathTool;
             }
 
-            _previousPathTool = _editor.CurrentPathTool;
+            _previousPathTool = Editor.CurrentPathTool;
         }
 
         /// <inheritdoc/>
@@ -208,13 +205,13 @@ namespace Core2D.Editor.Tools
         {
             base.LeftDown(x, y);
 
-            if (_isInitialized && _editor.CurrentPathTool != _previousPathTool)
+            if (_isInitialized && Editor.CurrentPathTool != _previousPathTool)
             {
                 SwitchPathTool(x, y);
                 return;
             }
 
-            switch (_editor.CurrentPathTool)
+            switch (Editor.CurrentPathTool)
             {
                 case PathTool.Line:
                     {
@@ -238,18 +235,18 @@ namespace Core2D.Editor.Tools
                     break;
                 case PathTool.Move:
                     {
-                        double sx = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, _editor.Project.Options.SnapX) : x;
-                        double sy = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, _editor.Project.Options.SnapY) : y;
+                        double sx = Editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, Editor.Project.Options.SnapX) : x;
+                        double sy = Editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, Editor.Project.Options.SnapY) : y;
 
                         // Start new figure.
-                        var start = _editor.TryToGetConnectionPoint(sx, sy) ?? XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
+                        var start = Editor.TryToGetConnectionPoint(sx, sy) ?? XPoint.Create(sx, sy, Editor.Project.Options.PointShape);
                         _context.BeginFigure(
                             start,
-                            _editor.Project.Options.DefaultIsFilled,
-                            _editor.Project.Options.DefaultIsClosed);
+                            Editor.Project.Options.DefaultIsFilled,
+                            Editor.Project.Options.DefaultIsClosed);
 
                         // Switch to path tool before Move tool.
-                        _editor.CurrentPathTool = _movePathTool;
+                        Editor.CurrentPathTool = _movePathTool;
                         SwitchPathTool(x, y);
                     }
                     break;
@@ -261,7 +258,7 @@ namespace Core2D.Editor.Tools
         {
             base.RightDown(x, y);
 
-            switch (_editor.CurrentPathTool)
+            switch (Editor.CurrentPathTool)
             {
                 case PathTool.Line:
                     {
@@ -291,12 +288,12 @@ namespace Core2D.Editor.Tools
         {
             base.Move(x, y);
 
-            if (_isInitialized && _editor.CurrentPathTool != _previousPathTool)
+            if (_isInitialized && Editor.CurrentPathTool != _previousPathTool)
             {
                 SwitchPathTool(x, y);
             }
 
-            switch (_editor.CurrentPathTool)
+            switch (Editor.CurrentPathTool)
             {
                 case PathTool.Line:
                     {
@@ -320,11 +317,11 @@ namespace Core2D.Editor.Tools
                     break;
                 case PathTool.Move:
                     {
-                        double sx = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, _editor.Project.Options.SnapX) : x;
-                        double sy = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, _editor.Project.Options.SnapY) : y;
-                        if (_editor.Project.Options.TryToConnect)
+                        double sx = Editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, Editor.Project.Options.SnapX) : x;
+                        double sy = Editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, Editor.Project.Options.SnapY) : y;
+                        if (Editor.Project.Options.TryToConnect)
                         {
-                            _editor.TryToHoverShape(sx, sy);
+                            Editor.TryToHoverShape(sx, sy);
                         }
                     }
                     break;
@@ -336,7 +333,7 @@ namespace Core2D.Editor.Tools
         {
             base.ToStateOne();
 
-            switch (_editor.CurrentPathTool)
+            switch (Editor.CurrentPathTool)
             {
                 case PathTool.Line:
                     {
@@ -366,7 +363,7 @@ namespace Core2D.Editor.Tools
         {
             base.ToStateTwo();
 
-            switch (_editor.CurrentPathTool)
+            switch (Editor.CurrentPathTool)
             {
                 case PathTool.Line:
                     break;
@@ -393,7 +390,7 @@ namespace Core2D.Editor.Tools
         {
             base.ToStateThree();
 
-            switch (_editor.CurrentPathTool)
+            switch (Editor.CurrentPathTool)
             {
                 case PathTool.Line:
                     break;
@@ -417,7 +414,7 @@ namespace Core2D.Editor.Tools
         {
             base.Move(shape);
 
-            switch (_editor.CurrentPathTool)
+            switch (Editor.CurrentPathTool)
             {
                 case PathTool.Line:
                     {
@@ -447,7 +444,7 @@ namespace Core2D.Editor.Tools
         {
             base.Finalize(shape);
 
-            switch (_editor.CurrentPathTool)
+            switch (Editor.CurrentPathTool)
             {
                 case PathTool.Line:
                     {
@@ -477,7 +474,7 @@ namespace Core2D.Editor.Tools
         {
             base.Remove();
 
-            switch (_editor.CurrentPathTool)
+            switch (Editor.CurrentPathTool)
             {
                 case PathTool.Line:
                     {

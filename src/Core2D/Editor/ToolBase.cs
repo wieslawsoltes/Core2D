@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
 using Core2D.Shape;
 
 namespace Core2D.Editor
@@ -9,6 +10,21 @@ namespace Core2D.Editor
     /// </summary>
     public abstract class ToolBase
     {
+        private readonly Lazy<ProjectEditor> _editor;
+
+        /// <summary>
+        /// Gets current project editor.
+        /// </summary>
+        public ProjectEditor Editor => _editor.Value;
+
+        /// <summary>
+        /// Initialize new instance of <see cref="ToolBase"/> class.
+        /// </summary>
+        public ToolBase()
+        {
+            _editor = ServiceLocator.Instance.ResolveLazily<ProjectEditor>();
+        }
+
         /// <summary>
         /// Handle mouse left button down events.
         /// </summary>

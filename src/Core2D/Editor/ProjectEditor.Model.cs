@@ -37,27 +37,24 @@ namespace Core2D.Editor
         private Action _saveLayout;
         private Action _resetLayout;
         private bool _cancelAvailable;
-        private XContainer _pageToCopy;
-        private XDocument _documentToCopy;
-        private BaseShape _hover;
         private ImmutableArray<RecentFile> _recentProjects;
         private RecentFile _currentRecentProject;
         private ImmutableArray<ViewBase> _views;
         private ViewBase _currentView;
         private DashboardView _dashboardView;
         private EditorView _editorView;
-        private IEditorApplication _application;
-        private ILog _log;
-        private CommandManager _commandManager;
-        private ShapeRenderer[] _renderers;
-        private IFileSystem _fileIO;
-        private IProjectFactory _projectFactory;
-        private ITextClipboard _textClipboard;
-        private ITextSerializer _jsonSerializer;
-        private ITextSerializer _xamlSerializer;
-        private ImmutableArray<IFileWriter> _fileWriters;
-        private ITextFieldReader<XDatabase> _csvReader;
-        private ITextFieldWriter<XDatabase> _csvWriter;
+        private readonly Lazy<IEditorApplication> _application;
+        private readonly Lazy<ILog> _log;
+        private readonly Lazy<CommandManager> _commandManager;
+        private readonly Lazy<ShapeRenderer[]> _renderers;
+        private readonly Lazy<IFileSystem> _fileIO;
+        private readonly Lazy<IProjectFactory> _projectFactory;
+        private readonly Lazy<ITextClipboard> _textClipboard;
+        private readonly Lazy<IJsonSerializer> _jsonSerializer;
+        private readonly Lazy<IXamlSerializer> _xamlSerializer;
+        private readonly Lazy<ImmutableArray<IFileWriter>> _fileWriters;
+        private readonly Lazy<ITextFieldReader<XDatabase>> _csvReader;
+        private readonly Lazy<ITextFieldWriter<XDatabase>> _csvWriter;
 
         /// <summary>
         /// Gets or sets current project.
@@ -194,7 +191,7 @@ namespace Core2D.Editor
         /// <summary>
         /// Get image key using common system open file dialog.
         /// </summary>
-        public Func<Task<string>> GetImageKey { get; set; }
+        public Func<Task<string>> GetImageKey => Application.OnGetImageKeyAsync;
 
         /// <summary>
         /// Gets or sets recent projects collection.
@@ -233,138 +230,89 @@ namespace Core2D.Editor
         }
 
         /// <summary>
-        /// Gets or sets current editor application.
+        /// Gets current editor application.
         /// </summary>
-        public IEditorApplication Application
-        {
-            get { return _application; }
-            set { Update(ref _application, value); }
-        }
+        public IEditorApplication Application => _application.Value;
 
         /// <summary>
-        /// Gets or sets current log.
+        /// Gets current log.
         /// </summary>
-        public ILog Log
-        {
-            get { return _log; }
-            set { Update(ref _log, value); }
-        }
+        public ILog Log => _log.Value;
 
         /// <summary>
-        /// Gets or sets current command manager.
+        /// Gets current command manager.
         /// </summary>
-        public CommandManager CommandManager
-        {
-            get { return _commandManager; }
-            set { Update(ref _commandManager, value); }
-        }
+        public CommandManager CommandManager => _commandManager.Value;
 
         /// <summary>
-        /// Gets or sets current renderer's.
+        /// Gets current renderer's.
         /// </summary>
-        public ShapeRenderer[] Renderers
-        {
-            get { return _renderers; }
-            set { Update(ref _renderers, value); }
-        }
+        public ShapeRenderer[] Renderers => _renderers.Value;
 
         /// <summary>
-        /// Gets or sets current file system.
+        /// Gets current file system.
         /// </summary>
-        public IFileSystem FileIO
-        {
-            get { return _fileIO; }
-            set { Update(ref _fileIO, value); }
-        }
+        public IFileSystem FileIO => _fileIO.Value;
 
         /// <summary>
-        /// Gets or sets project factory.
+        /// Gets project factory.
         /// </summary>
-        public IProjectFactory ProjectFactory
-        {
-            get { return _projectFactory; }
-            set { Update(ref _projectFactory, value); }
-        }
+        public IProjectFactory ProjectFactory => _projectFactory.Value;
 
         /// <summary>
-        /// Gets or sets text clipboard.
+        /// Gets text clipboard.
         /// </summary>
-        public ITextClipboard TextClipboard
-        {
-            get { return _textClipboard; }
-            set { Update(ref _textClipboard, value); }
-        }
+        public ITextClipboard TextClipboard => _textClipboard.Value;
 
         /// <summary>
-        /// Gets or sets Json serializer.
+        /// Gets Json serializer.
         /// </summary>
-        public ITextSerializer JsonSerializer
-        {
-            get { return _jsonSerializer; }
-            set { Update(ref _jsonSerializer, value); }
-        }
+        public IJsonSerializer JsonSerializer => _jsonSerializer.Value;
 
         /// <summary>
-        /// Gets or sets Xaml serializer.
+        /// Gets Xaml serializer.
         /// </summary>
-        public ITextSerializer XamlSerializer
-        {
-            get { return _xamlSerializer; }
-            set { Update(ref _xamlSerializer, value); }
-        }
+        public IXamlSerializer XamlSerializer => _xamlSerializer.Value;
 
         /// <summary>
-        /// Gets or sets available file writers.
+        /// Gets available file writers.
         /// </summary>
-        public ImmutableArray<IFileWriter> FileWriters
-        {
-            get { return _fileWriters; }
-            set { Update(ref _fileWriters, value); }
-        }
+        public ImmutableArray<IFileWriter> FileWriters => _fileWriters.Value;
 
         /// <summary>
-        /// Gets or sets Csv file reader.
+        /// Gets Csv file reader.
         /// </summary>
-        public ITextFieldReader<XDatabase> CsvReader
-        {
-            get { return _csvReader; }
-            set { Update(ref _csvReader, value); }
-        }
+        public ITextFieldReader<XDatabase> CsvReader => _csvReader.Value;
 
         /// <summary>
-        /// Gets or sets Csv file writer.
+        /// Gets Csv file writer.
         /// </summary>
-        public ITextFieldWriter<XDatabase> CsvWriter
-        {
-            get { return _csvWriter; }
-            set { Update(ref _csvWriter, value); }
-        }
+        public ITextFieldWriter<XDatabase> CsvWriter => _csvWriter.Value;
 
         /// <summary>
-        /// Initializes editor defaults.
+        /// Initialize new instance of <see cref="ProjectEditor"/> class.
         /// </summary>
-        public void Defaults()
+        public ProjectEditor()
         {
+            _currentTool = Tool.Selection;
+            _currentPathTool = PathTool.Line;
+
             _tools = new Dictionary<Tool, ToolBase>
             {
-                [Tool.None] = new ToolNone(this),
-                [Tool.Selection] = new ToolSelection(this),
-                [Tool.Point] = new ToolPoint(this),
-                [Tool.Line] = new ToolLine(this),
-                [Tool.Arc] = new ToolArc(this),
-                [Tool.CubicBezier] = new ToolCubicBezier(this),
-                [Tool.QuadraticBezier] = new ToolQuadraticBezier(this),
-                [Tool.Path] = new ToolPath(this),
-                [Tool.Rectangle] = new ToolRectangle(this),
-                [Tool.Ellipse] = new ToolEllipse(this),
-                [Tool.Text] = new ToolText(this),
-                [Tool.Image] = new ToolImage(this)
+                [Tool.None] = new ToolNone(),
+                [Tool.Selection] = new ToolSelection(),
+                [Tool.Point] = new ToolPoint(),
+                [Tool.Line] = new ToolLine(),
+                [Tool.Arc] = new ToolArc(),
+                [Tool.CubicBezier] = new ToolCubicBezier(),
+                [Tool.QuadraticBezier] = new ToolQuadraticBezier(),
+                [Tool.Path] = new ToolPath(),
+                [Tool.Rectangle] = new ToolRectangle(),
+                [Tool.Ellipse] = new ToolEllipse(),
+                [Tool.Text] = new ToolText(),
+                [Tool.Image] = new ToolImage()
             }
             .ToImmutableDictionary();
-
-            _pageToCopy = default(XContainer);
-            _documentToCopy = default(XDocument);
-            _hover = default(BaseShape);
 
             _recentProjects = ImmutableArray.Create<RecentFile>();
             _currentRecentProject = default(RecentFile);
@@ -374,6 +322,19 @@ namespace Core2D.Editor
 
             _views = new List<ViewBase> { _dashboardView, _editorView }.ToImmutableArray();
             _currentView = _dashboardView;
+
+            _application = ServiceLocator.Instance.ResolveLazily<IEditorApplication>();
+            _log = ServiceLocator.Instance.ResolveLazily<ILog>();
+            _commandManager = ServiceLocator.Instance.ResolveLazily<CommandManager>();
+            _renderers = ServiceLocator.Instance.ResolveLazily<ShapeRenderer[]>();
+            _fileIO = ServiceLocator.Instance.ResolveLazily<IFileSystem>();
+            _projectFactory = ServiceLocator.Instance.ResolveLazily<IProjectFactory>();
+            _textClipboard = ServiceLocator.Instance.ResolveLazily<ITextClipboard>();
+            _jsonSerializer = ServiceLocator.Instance.ResolveLazily<IJsonSerializer>();
+            _xamlSerializer = ServiceLocator.Instance.ResolveLazily<IXamlSerializer>();
+            _fileWriters = ServiceLocator.Instance.ResolveLazily<ImmutableArray<IFileWriter>>();
+            _csvReader = ServiceLocator.Instance.ResolveLazily<ITextFieldReader<XDatabase>>();
+            _csvWriter = ServiceLocator.Instance.ResolveLazily<ITextFieldWriter<XDatabase>>();
 
             InitializeCommands();
             CommandManager.RegisterCommands();

@@ -2,15 +2,13 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Collections.Immutable;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
+using Core2D.Data.Database;
 using Core2D.Editor;
 using Core2D.Editor.Factories;
+using Core2D.Editor.Input;
 using Core2D.Editor.Interfaces;
 using Core2D.Interfaces;
-using Core2D.Project;
 using Core2D.Renderer;
 using FileSystem.DotNetFx;
 using FileWriter.Dxf;
@@ -18,7 +16,6 @@ using FileWriter.Emf;
 using FileWriter.Pdf_wpf;
 using FileWriter.Vdx;
 using Log.Trace;
-using Microsoft.Win32;
 using Renderer.Wpf;
 using Serializer.Newtonsoft;
 using Serializer.Xaml;
@@ -29,18 +26,14 @@ using Utilities.Wpf;
 namespace Core2D.Wpf
 {
     /// <summary>
-    /// Encapsulates a Core2D WPF application.
+    /// Encapsulates an WPF application.
     /// </summary>
-    public partial class App : Application, IEditorApplication
+    public partial class App : Application
     {
-        private IFileSystem _fileIO;
-        private ILog _log;
-        private ImmutableArray<IFileWriter> _writers;
-        private ProjectEditor _editor;
-        private Windows.MainWindow _mainWindow;
+        private static string RecentFileName = "Core2D.recent";
+        private static string LogFileName = "Core2D.log";
+
         private bool _isLoaded = false;
-        private string _recentFileName = "Core2D.recent";
-        private string _logFileName = "Core2D.log";
 
         /// <summary>
         /// Raises the <see cref="Application.Startup"/> event.
@@ -50,73 +43,64 @@ namespace Core2D.Wpf
         {
             base.OnStartup(e);
 
-            using (ILog log = new TraceLog())
-            {
-                IFileSystem fileIO = new DotNetFxFileSystem();
-                ImmutableArray<IFileWriter> writers =
-                    new IFileWriter[]
+            ServiceLocator.Instance.RegisterSingleton<ProjectEditor>(() => new ProjectEditor());
+            ServiceLocator.Instance.RegisterSingleton<IEditorApplication>(() => this);
+            ServiceLocator.Instance.RegisterSingleton<ILog>(() => new TraceLog());
+            ServiceLocator.Instance.RegisterSingleton<CommandManager>(() => new WpfCommandManager());
+            ServiceLocator.Instance.RegisterSingleton<ShapeRenderer[]>(() => new [] { new WpfRenderer() });
+            ServiceLocator.Instance.RegisterSingleton<IFileSystem>(() => new DotNetFxFileSystem());
+            ServiceLocator.Instance.RegisterSingleton<IProjectFactory>(() => new ProjectFactory());
+            ServiceLocator.Instance.RegisterSingleton<ITextClipboard>(() => new WpfTextClipboard());
+            ServiceLocator.Instance.RegisterSingleton<IJsonSerializer>(() => new NewtonsoftJsonSerializer());
+            ServiceLocator.Instance.RegisterSingleton<IXamlSerializer>(() => new PortableXamlSerializer());
+            ServiceLocator.Instance.RegisterSingleton<ImmutableArray<IFileWriter>>(
+                () =>
+                {
+                    return new IFileWriter[]
                     {
                         new PdfWriter(),
                         new DxfWriter(),
                         new EmfWriter(),
                         new VdxWriter()
                     }.ToImmutableArray();
+                });
+            ServiceLocator.Instance.RegisterSingleton<ITextFieldReader<XDatabase>>(() => new CsvHelperReader());
+            ServiceLocator.Instance.RegisterSingleton<ITextFieldWriter<XDatabase>>(() => new CsvHelperWriter());
+            ServiceLocator.Instance.RegisterSingleton<Windows.MainWindow>(() => new Windows.MainWindow());
 
-                Start(fileIO, log, writers);
+            using (var log = ServiceLocator.Instance.Resolve<ILog>())
+            {
+                Start();
             }
         }
 
         /// <summary>
         /// Initialize application context and displays main window.
         /// </summary>
-        /// <param name="fileIO">The file system instance.</param>
-        /// <param name="log">The log instance.</param>
-        /// <param name="writers">The file writers.</param>
-        public void Start(IFileSystem fileIO, ILog log, ImmutableArray<IFileWriter> writers)
+        public void Start()
         {
-            _fileIO = fileIO;
-            _log = log;
-            _writers = writers;
+            var log = ServiceLocator.Instance.Resolve<ILog>();
+            var fileIO = ServiceLocator.Instance.Resolve<IFileSystem>();
+            var editor = ServiceLocator.Instance.Resolve<ProjectEditor>();
 
-            _log.Initialize(System.IO.Path.Combine(_fileIO.GetAssemblyPath(null), _logFileName));
+            log?.Initialize(System.IO.Path.Combine(fileIO.GetAssemblyPath(null), LogFileName));
 
             try
             {
-                _editor = new ProjectEditor()
-                {
-                    CurrentTool = Tool.Selection,
-                    CurrentPathTool = PathTool.Line,
-                    Application = this,
-                    Log = log,
-                    FileIO = fileIO,
-                    CommandManager = new WpfCommandManager(),
-                    Renderers = new ShapeRenderer[] { new WpfRenderer() },
-                    ProjectFactory = new ProjectFactory(),
-                    TextClipboard = new WpfTextClipboard(),
-                    JsonSerializer = new NewtonsoftTextSerializer(),
-                    XamlSerializer = new PortableXamlSerializer(),
-                    FileWriters = writers,
-                    CsvReader = new CsvHelperReader(),
-                    CsvWriter = new CsvHelperWriter(),
-                    GetImageKey = async () => await (this as IEditorApplication).OnGetImageKeyAsync()
-                };
-
-                _editor.Defaults();
-
                 LoadRecent();
 
-                _mainWindow = new Windows.MainWindow();
-                _mainWindow.Loaded += (sender, e) => OnLoaded();
-                _mainWindow.Closed += (sender, e) => OnClosed();
-                _mainWindow.DataContext = _editor;
-                _mainWindow.ShowDialog();
+                var window = ServiceLocator.Instance.Resolve<Windows.MainWindow>();
+                window.Loaded += (sender, e) => OnLoaded();
+                window.Closed += (sender, e) => OnClosed();
+                window.DataContext = editor;
+                window.ShowDialog();
             }
             catch (Exception ex)
             {
-                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
                 if (ex.InnerException != null)
                 {
-                    _log?.LogError($"{ex.InnerException.Message}{Environment.NewLine}{ex.InnerException.StackTrace}");
+                    log?.LogError($"{ex.InnerException.Message}{Environment.NewLine}{ex.InnerException.StackTrace}");
                 }
             }
         }
@@ -150,17 +134,21 @@ namespace Core2D.Wpf
         /// </summary>
         private void LoadRecent()
         {
+            var log = ServiceLocator.Instance.Resolve<ILog>();
+            var fileIO = ServiceLocator.Instance.Resolve<IFileSystem>();
+            var editor = ServiceLocator.Instance.Resolve<ProjectEditor>();
+
             try
             {
-                var path = System.IO.Path.Combine(_fileIO.GetAssemblyPath(null), _recentFileName);
+                var path = System.IO.Path.Combine(fileIO.GetAssemblyPath(null), RecentFileName);
                 if (System.IO.File.Exists(path))
                 {
-                    _editor?.OnLoadRecent(path);
+                    editor?.OnLoadRecent(path);
                 }
             }
             catch (Exception ex)
             {
-                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
@@ -169,520 +157,19 @@ namespace Core2D.Wpf
         /// </summary>
         private void SaveRecent()
         {
+            var log = ServiceLocator.Instance.Resolve<ILog>();
+            var fileIO = ServiceLocator.Instance.Resolve<IFileSystem>();
+            var editor = ServiceLocator.Instance.Resolve<ProjectEditor>();
+
             try
             {
-                var path = System.IO.Path.Combine(_fileIO.GetAssemblyPath(null), _recentFileName);
-                _editor?.OnSaveRecent(path);
+                var path = System.IO.Path.Combine(fileIO.GetAssemblyPath(null), RecentFileName);
+                editor?.OnSaveRecent(path);
             }
             catch (Exception ex)
             {
-                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
-        }
-
-        /// <inheritdoc/>
-        async Task<string> IEditorApplication.OnGetImageKeyAsync()
-        {
-            var dlg = new OpenFileDialog()
-            {
-                Filter = "All (*.*)|*.*",
-                FilterIndex = 0,
-                FileName = ""
-            };
-
-            if (dlg.ShowDialog(_mainWindow) == true)
-            {
-                try
-                {
-                    var path = dlg.FileName;
-                    var bytes = System.IO.File.ReadAllBytes(path);
-                    var key = _editor?.Project.AddImageFromFile(path, bytes);
-                    return await Task.Run(() => key);
-                }
-                catch (Exception ex)
-                {
-                    _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
-                }
-            }
-            return null;
-        }
-
-        /// <inheritdoc/>
-        async Task IEditorApplication.OnOpenAsync(string path)
-        {
-            if (path == null)
-            {
-                var dlg = new OpenFileDialog()
-                {
-                    Filter = "Project (*.project)|*.project|All (*.*)|*.*",
-                    FilterIndex = 0,
-                    FileName = ""
-                };
-
-                if (dlg.ShowDialog(_mainWindow) == true)
-                {
-                    _editor?.OnOpen(dlg.FileName);
-                }
-            }
-            else
-            {
-                if (System.IO.File.Exists(path))
-                {
-                    _editor?.OnOpen(path);
-                }
-            }
-
-            await Task.Delay(0);
-        }
-
-        /// <inheritdoc/>
-        async Task IEditorApplication.OnSaveAsync()
-        {
-            if (!string.IsNullOrEmpty(_editor?.ProjectPath))
-            {
-                _editor?.OnSave(_editor?.ProjectPath);
-            }
-            else
-            {
-                await (this as IEditorApplication).OnSaveAsAsync();
-            }
-        }
-
-        /// <inheritdoc/>
-        async Task IEditorApplication.OnSaveAsAsync()
-        {
-            var dlg = new SaveFileDialog()
-            {
-                Filter = "Project (*.project)|*.project|All (*.*)|*.*",
-                FilterIndex = 0,
-                FileName = _editor?.Project?.Name
-            };
-
-            if (dlg.ShowDialog(_mainWindow) == true)
-            {
-                _editor?.OnSave(dlg.FileName);
-            }
-
-            await Task.Delay(0);
-        }
-
-        /// <inheritdoc/>
-        async Task IEditorApplication.OnImportXamlAsync(string path)
-        {
-            if (path == null)
-            {
-                var dlg = new OpenFileDialog()
-                {
-                    Filter = "Xaml (*.xaml)|*.xaml|All (*.*)|*.*",
-                    FilterIndex = 0,
-                    Multiselect = true,
-                    FileName = ""
-                };
-
-                if (dlg.ShowDialog(_mainWindow) == true)
-                {
-                    var results = dlg.FileNames;
-
-                    foreach (var result in results)
-                    {
-                        _editor?.OnImportXaml(result);
-                    }
-                }
-            }
-            else
-            {
-                if (System.IO.File.Exists(path))
-                {
-                    _editor?.OnImportXaml(path);
-                }
-            }
-
-            await Task.Delay(0);
-        }
-
-        /// <inheritdoc/>
-        async Task IEditorApplication.OnExportXamlAsync(object item)
-        {
-            var dlg = new SaveFileDialog()
-            {
-                Filter = "Xaml (*.xaml)|*.xaml|All (*.*)|*.*",
-                FilterIndex = 0,
-                FileName = _editor?.GetName(item)
-            };
-
-            if (dlg.ShowDialog(_mainWindow) == true)
-            {
-                _editor?.OnExportXaml(dlg.FileName, item);
-            }
-
-            await Task.Delay(0);
-        }
-
-        /// <inheritdoc/>
-        async Task IEditorApplication.OnImportJsonAsync(string path)
-        {
-            if (path == null)
-            {
-                var dlg = new OpenFileDialog()
-                {
-                    Filter = "Json (*.json)|*.json|All (*.*)|*.*",
-                    FilterIndex = 0,
-                    Multiselect = true,
-                    FileName = ""
-                };
-
-                if (dlg.ShowDialog(_mainWindow) == true)
-                {
-                    var results = dlg.FileNames;
-
-                    foreach (var result in results)
-                    {
-                        _editor?.OnImportJson(result);
-                    }
-                }
-            }
-            else
-            {
-                if (System.IO.File.Exists(path))
-                {
-                    _editor?.OnImportJson(path);
-                }
-            }
-
-            await Task.Delay(0);
-        }
-
-        /// <inheritdoc/>
-        async Task IEditorApplication.OnExportJsonAsync(object item)
-        {
-            var dlg = new SaveFileDialog()
-            {
-                Filter = "Xaml (*.xaml)|*.xaml|All (*.*)|*.*",
-                FilterIndex = 0,
-                FileName = _editor?.GetName(item)
-            };
-
-            if (dlg.ShowDialog(_mainWindow) == true)
-            {
-                _editor?.OnExportJson(dlg.FileName, item);
-            }
-
-            await Task.Delay(0);
-        }
-
-        /// <inheritdoc/>
-        async Task IEditorApplication.OnExportAsync(object item)
-        {
-            string name = string.Empty;
-
-            if (item is XContainer)
-            {
-                name = (item as XContainer).Name;
-            }
-            else if (item is XDocument)
-            {
-                name = (item as XDocument).Name;
-            }
-            else if (item is XProject)
-            {
-                name = (item as XProject).Name;
-            }
-            else if (item is ProjectEditor)
-            {
-                var editor = (item as ProjectEditor);
-                if (editor?.Project == null)
-                    return;
-
-                name = editor?.Project?.Name;
-                item = editor?.Project;
-            }
-            else if (item == null)
-            {
-                if (_editor.Project == null)
-                    return;
-
-                name = _editor?.Project?.Name;
-                item = _editor?.Project;
-            }
-
-            var sb = new StringBuilder();
-            foreach (var writer in _editor?.FileWriters)
-            {
-                sb.Append($"{writer.Name} (*.{writer.Extension})|*.{writer.Extension}|");
-            }
-            sb.Append("All (*.*)|*.*");
-
-            var dlg = new SaveFileDialog()
-            {
-                Filter = sb.ToString(),
-                FilterIndex = 0,
-                FileName = name
-            };
-
-            if (dlg.ShowDialog(_mainWindow) == true)
-            {
-                string result = dlg.FileName;
-                IFileWriter writer = _editor?.FileWriters[dlg.FilterIndex - 1];
-                if (writer != null)
-                {
-                    _editor?.OnExport(result, item, writer);
-                }
-            }
-
-            await Task.Delay(0);
-        }
-
-        /// <inheritdoc/>
-        async Task IEditorApplication.OnImportDataAsync()
-        {
-            var dlg = new OpenFileDialog()
-            {
-                Filter = "Csv (*.csv)|*.csv|All (*.*)|*.*",
-                FilterIndex = 0,
-                FileName = ""
-            };
-
-            if (dlg.ShowDialog(_mainWindow) == true)
-            {
-                _editor?.OnImportData(dlg.FileName);
-            }
-
-            await Task.Delay(0);
-        }
-
-        /// <inheritdoc/>
-        async Task IEditorApplication.OnExportDataAsync()
-        {
-            var database = _editor?.Project?.CurrentDatabase;
-            if (database != null)
-            {
-                var dlg = new SaveFileDialog()
-                {
-                    Filter = "Csv (*.csv)|*.csv|All (*.*)|*.*",
-                    FilterIndex = 0,
-                    FileName = database.Name
-                };
-
-                if (dlg.ShowDialog(_mainWindow) == true)
-                {
-                    _editor?.OnExportData(dlg.FileName, database);
-                }
-            }
-
-            await Task.Delay(0);
-        }
-
-        /// <inheritdoc/>
-        async Task IEditorApplication.OnUpdateDataAsync()
-        {
-            var database = _editor?.Project?.CurrentDatabase;
-            if (database != null)
-            {
-                var dlg = new OpenFileDialog()
-                {
-                    Filter = "Csv (*.csv)|*.csv|All (*.*)|*.*",
-                    FilterIndex = 0,
-                    FileName = ""
-                };
-
-                if (dlg.ShowDialog(_mainWindow) == true)
-                {
-                    _editor?.OnUpdateData(dlg.FileName, database);
-                }
-            }
-
-            await Task.Delay(0);
-        }
-
-        /// <inheritdoc/>
-        async Task IEditorApplication.OnImportObjectAsync(string path)
-        {
-            if (path == null)
-            {
-                var dlg = new OpenFileDialog()
-                {
-                    Filter = "Json (*.json)|*.json|Xaml (*.xaml)|*.xaml",
-                    Multiselect = true,
-                    FilterIndex = 0
-                };
-
-                if (dlg.ShowDialog(_mainWindow) == true)
-                {
-                    var results = dlg.FileNames;
-                    var index = dlg.FilterIndex;
-
-                    foreach (var result in results)
-                    {
-                        switch (index)
-                        {
-                            case 1:
-                                _editor?.OnImportJson(result);
-                                break;
-                            case 2:
-                                _editor?.OnImportXaml(result);
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                }
-            }
-            else
-            {
-                if (System.IO.File.Exists(path))
-                {
-                    string resultExtension = System.IO.Path.GetExtension(path);
-                    if (string.Compare(resultExtension, ".json", true) == 0)
-                    {
-                        _editor?.OnImportJson(path);
-                    }
-                    else if (string.Compare(resultExtension, ".xaml", true) == 0)
-                    {
-                        _editor?.OnImportJson(path);
-                    }
-                }
-            }
-
-            await Task.Delay(0);
-        }
-
-        /// <inheritdoc/>
-        async Task IEditorApplication.OnExportObjectAsync(object item)
-        {
-            if (item != null)
-            {
-                var dlg = new SaveFileDialog()
-                {
-                    Filter = "Json (*.json)|*.json|Xaml (*.xaml)|*.xaml",
-                    FilterIndex = 0,
-                    FileName = _editor?.GetName(item)
-                };
-
-                if (dlg.ShowDialog(_mainWindow) == true)
-                {
-                    switch (dlg.FilterIndex)
-                    {
-                        case 1:
-                            _editor?.OnExportJson(dlg.FileName, item);
-                            break;
-                        case 2:
-                            _editor?.OnExportXaml(dlg.FileName, item);
-                            break;
-                        default:
-                            break;
-                    }
-                }
-            }
-            await Task.Delay(0);
-        }
-
-        /// <inheritdoc/>
-        async Task IEditorApplication.OnCopyAsEmfAsync()
-        {
-            var page = _editor?.Project?.CurrentContainer;
-            if (page != null)
-            {
-                if (_editor?.Renderers[0]?.State?.SelectedShape != null)
-                {
-                    var shapes = Enumerable.Repeat(_editor.Renderers[0].State.SelectedShape, 1).ToList();
-                    EmfWriter.SetClipboard(
-                        shapes,
-                        page.Template.Width,
-                        page.Template.Height,
-                        page.Data.Properties,
-                        page.Data.Record,
-                        _editor.Project);
-                }
-                else if (_editor?.Renderers?[0]?.State?.SelectedShapes != null)
-                {
-                    var shapes = _editor.Renderers[0].State.SelectedShapes.ToList();
-                    EmfWriter.SetClipboard(
-                        shapes,
-                        page.Template.Width,
-                        page.Template.Height,
-                        page.Data.Properties,
-                        page.Data.Record,
-                        _editor.Project);
-                }
-                else
-                {
-                    EmfWriter.SetClipboard(page, _editor.Project);
-                }
-            }
-
-            await Task.Delay(0);
-        }
-
-        /// <inheritdoc/>
-        async Task IEditorApplication.OnExportAsEmfAsync(string path)
-        {
-            try
-            {
-                var page = _editor?.Project?.CurrentContainer;
-                if (page != null)
-                {
-                    EmfWriter.Save(path, page, _editor.Project as IImageCache);
-                }
-            }
-            catch (Exception ex)
-            {
-                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
-            }
-
-            await Task.Delay(0);
-        }
-
-        /// <inheritdoc/>
-        async Task IEditorApplication.OnZoomResetAsync()
-        {
-            _editor.ResetZoom?.Invoke();
-            await Task.Delay(0);
-        }
-
-        /// <inheritdoc/>
-        async Task IEditorApplication.OnZoomAutoFitAsync()
-        {
-            _editor.AutoFitZoom?.Invoke();
-            await Task.Delay(0);
-        }
-
-        /// <inheritdoc/>
-        async Task IEditorApplication.OnLoadWindowLayout()
-        {
-            _editor.LoadLayout?.Invoke();
-            await Task.Delay(0);
-        }
-
-        /// <inheritdoc/>
-        async Task IEditorApplication.OnSaveWindowLayoutAsync()
-        {
-            _editor.SaveLayout?.Invoke();
-            await Task.Delay(0);
-        }
-
-        /// <inheritdoc/>
-        async Task IEditorApplication.OnResetWindowLayoutAsync()
-        {
-            _editor.ResetLayout?.Invoke();
-            await Task.Delay(0);
-        }
-
-        /// <inheritdoc/>
-        async Task IEditorApplication.OnShowObjectBrowserAsync()
-        {
-            await Task.Delay(0);
-        }
-
-        /// <inheritdoc/>
-        async Task IEditorApplication.OnShowDocumentViewerAsync()
-        {
-            await Task.Delay(0);
-        }
-
-        /// <inheritdoc/>
-        void IEditorApplication.OnCloseView()
-        {
-            _mainWindow?.Close();
         }
     }
 }

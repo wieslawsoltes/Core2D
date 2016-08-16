@@ -328,30 +328,11 @@ namespace Core2D.Editor.Designer
         /// <summary>
         /// Initializes static designer context.
         /// </summary>
-        /// <param name="renderer">The design time renderer instance.</param>
-        /// <param name="clipboard">The design time clipboard instance.</param>
-        /// <param name="jsonSerializer">The design time Json serializer instance.</param>
-        /// <param name="xamlSerializer">The design time Xaml serializer instance.</param>
-        /// <returns>The new instance of the <see cref="DesignerContext"/> class.</returns>
-        public static void InitializeContext(ShapeRenderer renderer, ITextClipboard clipboard, ITextSerializer jsonSerializer, ITextSerializer xamlSerializer)
+        public static void InitializeContext()
         {
             // Editor
 
-            Editor = new ProjectEditor()
-            {
-                CurrentTool = Tool.Selection,
-                CurrentPathTool = PathTool.Line,
-                CommandManager = new DesignerCommandManager(),
-                Renderers = new ShapeRenderer[] { renderer },
-                ProjectFactory = new ProjectFactory(),
-                TextClipboard = clipboard,
-                JsonSerializer = jsonSerializer,
-                XamlSerializer = xamlSerializer
-            };
-
-            // Defaults
-
-            Editor.Defaults();
+            Editor = ServiceLocator.Instance.Resolve<ProjectEditor>();
 
             // Commands
 

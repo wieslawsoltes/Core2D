@@ -9,43 +9,32 @@ namespace Core2D.Editor.Tools
     /// </summary>
     public class ToolPoint : ToolBase
     {
-        private ProjectEditor _editor;
         private ToolState _currentState = ToolState.None;
         private XPoint _point;
-
-        /// <summary>
-        /// Initialize new instance of <see cref="ToolPoint"/> class.
-        /// </summary>
-        /// <param name="editor">The current <see cref="ProjectEditor"/> object.</param>
-        public ToolPoint(ProjectEditor editor)
-            : base()
-        {
-            _editor = editor;
-        }
 
         /// <inheritdoc/>
         public override void LeftDown(double x, double y)
         {
             base.LeftDown(x, y);
 
-            double sx = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, _editor.Project.Options.SnapX) : x;
-            double sy = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, _editor.Project.Options.SnapY) : y;
+            double sx = Editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, Editor.Project.Options.SnapX) : x;
+            double sy = Editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, Editor.Project.Options.SnapY) : y;
             switch (_currentState)
             {
                 case ToolState.None:
                     {
-                        _point = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
+                        _point = XPoint.Create(sx, sy, Editor.Project.Options.PointShape);
 
-                        if (_editor.Project.Options.TryToConnect)
+                        if (Editor.Project.Options.TryToConnect)
                         {
-                            if (!_editor.TryToSplitLine(x, y, _point, true))
+                            if (!Editor.TryToSplitLine(x, y, _point, true))
                             {
-                                _editor.Project.AddShape(_editor.Project.CurrentContainer.CurrentLayer, _point);
+                                Editor.Project.AddShape(Editor.Project.CurrentContainer.CurrentLayer, _point);
                             }
                         }
                         else
                         {
-                            _editor.Project.AddShape(_editor.Project.CurrentContainer.CurrentLayer, _point);
+                            Editor.Project.AddShape(Editor.Project.CurrentContainer.CurrentLayer, _point);
                         }
                     }
                     break;
@@ -57,15 +46,15 @@ namespace Core2D.Editor.Tools
         {
             base.Move(x, y);
 
-            double sx = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, _editor.Project.Options.SnapX) : x;
-            double sy = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, _editor.Project.Options.SnapY) : y;
+            double sx = Editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, Editor.Project.Options.SnapX) : x;
+            double sy = Editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, Editor.Project.Options.SnapY) : y;
             switch (_currentState)
             {
                 case ToolState.None:
                     {
-                        if (_editor.Project.Options.TryToConnect)
+                        if (Editor.Project.Options.TryToConnect)
                         {
-                            _editor.TryToHoverShape(sx, sy);
+                            Editor.TryToHoverShape(sx, sy);
                         }
                     }
                     break;

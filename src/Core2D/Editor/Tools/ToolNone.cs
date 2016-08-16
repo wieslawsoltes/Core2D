@@ -8,16 +8,5 @@ namespace Core2D.Editor.Tools
     /// </summary>
     public class ToolNone : ToolBase
     {
-        private ProjectEditor _editor;
-
-        /// <summary>
-        /// Initialize new instance of <see cref="ToolNone"/> class.
-        /// </summary>
-        /// <param name="editor">The current <see cref="ToolNone"/> object.</param>
-        public ToolNone(ProjectEditor editor)
-            : base()
-        {
-            _editor = editor;
-        }
     }
 }

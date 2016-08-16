@@ -52,8 +52,8 @@ namespace Core2D.Editor
         /// <inheritdoc/>
         public bool IsSelectionAvailable()
         {
-            return _renderers?[0]?.State?.SelectedShape != null
-                || _renderers?[0]?.State?.SelectedShapes != null;
+            return Renderers?[0]?.State?.SelectedShape != null
+                || Renderers?[0]?.State?.SelectedShapes != null;
         }
 
         /// <inheritdoc/>

@@ -14,7 +14,6 @@ namespace Core2D.Editor.Tools.Path
     /// </summary>
     internal class ToolPathQuadraticBezier : ToolBase
     {
-        private ProjectEditor _editor;
         private ToolState _currentState = ToolState.None;
         private ToolPath _toolPath;
         private XPathQuadraticBezier _quadraticBezier = new XPathQuadraticBezier();
@@ -23,12 +22,10 @@ namespace Core2D.Editor.Tools.Path
         /// <summary>
         /// Initialize new instance of <see cref="ToolPathQuadraticBezier"/> class.
         /// </summary>
-        /// <param name="editor">The current <see cref="ProjectEditor"/> object.</param>
         /// <param name="toolPath">The current <see cref="ToolPath"/> object.</param>
-        public ToolPathQuadraticBezier(ProjectEditor editor, ToolPath toolPath)
+        public ToolPathQuadraticBezier(ToolPath toolPath)
             : base()
         {
-            _editor = editor;
             _toolPath = toolPath;
         }
 
@@ -37,13 +34,13 @@ namespace Core2D.Editor.Tools.Path
         {
             base.LeftDown(x, y);
 
-            double sx = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, _editor.Project.Options.SnapX) : x;
-            double sy = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, _editor.Project.Options.SnapY) : y;
+            double sx = Editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, Editor.Project.Options.SnapX) : x;
+            double sy = Editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, Editor.Project.Options.SnapY) : y;
             switch (_currentState)
             {
                 case ToolState.None:
                     {
-                        _quadraticBezier.Point1 = _editor.TryToGetConnectionPoint(sx, sy) ?? XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
+                        _quadraticBezier.Point1 = Editor.TryToGetConnectionPoint(sx, sy) ?? XPoint.Create(sx, sy, Editor.Project.Options.PointShape);
                         if (!_toolPath._isInitialized)
                         {
                             _toolPath.InitializeWorkingPath(_quadraticBezier.Point1);
@@ -53,27 +50,27 @@ namespace Core2D.Editor.Tools.Path
                             _quadraticBezier.Point1 = _toolPath.GetLastPathPoint();
                         }
 
-                        _quadraticBezier.Point2 = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
-                        _quadraticBezier.Point3 = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
+                        _quadraticBezier.Point2 = XPoint.Create(sx, sy, Editor.Project.Options.PointShape);
+                        _quadraticBezier.Point3 = XPoint.Create(sx, sy, Editor.Project.Options.PointShape);
                         _toolPath._context.QuadraticBezierTo(
                             _quadraticBezier.Point2,
                             _quadraticBezier.Point3,
-                            _editor.Project.Options.DefaultIsStroked,
-                            _editor.Project.Options.DefaultIsSmoothJoin);
-                        _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                            Editor.Project.Options.DefaultIsStroked,
+                            Editor.Project.Options.DefaultIsSmoothJoin);
+                        Editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         ToStateOne();
                         Move(null);
                         _currentState = ToolState.One;
-                        _editor.CancelAvailable = true;
+                        Editor.CancelAvailable = true;
                     }
                     break;
                 case ToolState.One:
                     {
                         _quadraticBezier.Point3.X = sx;
                         _quadraticBezier.Point3.Y = sy;
-                        if (_editor.Project.Options.TryToConnect)
+                        if (Editor.Project.Options.TryToConnect)
                         {
-                            var point2 = _editor.TryToGetConnectionPoint(sx, sy);
+                            var point2 = Editor.TryToGetConnectionPoint(sx, sy);
                             if (point2 != null)
                             {
                                 var figure = _toolPath._geometry.Figures.LastOrDefault();
@@ -82,7 +79,7 @@ namespace Core2D.Editor.Tools.Path
                                 _quadraticBezier.Point3 = point2;
                             }
                         }
-                        _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                        Editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         ToStateTwo();
                         Move(null);
                         _currentState = ToolState.Two;
@@ -92,9 +89,9 @@ namespace Core2D.Editor.Tools.Path
                     {
                         _quadraticBezier.Point2.X = sx;
                         _quadraticBezier.Point2.Y = sy;
-                        if (_editor.Project.Options.TryToConnect)
+                        if (Editor.Project.Options.TryToConnect)
                         {
-                            var point1 = _editor.TryToGetConnectionPoint(sx, sy);
+                            var point1 = Editor.TryToGetConnectionPoint(sx, sy);
                             if (point1 != null)
                             {
                                 var figure = _toolPath._geometry.Figures.LastOrDefault();
@@ -105,14 +102,14 @@ namespace Core2D.Editor.Tools.Path
                         }
 
                         _quadraticBezier.Point1 = _quadraticBezier.Point3;
-                        _quadraticBezier.Point2 = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
-                        _quadraticBezier.Point3 = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
+                        _quadraticBezier.Point2 = XPoint.Create(sx, sy, Editor.Project.Options.PointShape);
+                        _quadraticBezier.Point3 = XPoint.Create(sx, sy, Editor.Project.Options.PointShape);
                         _toolPath._context.QuadraticBezierTo(
                             _quadraticBezier.Point2,
                             _quadraticBezier.Point3,
-                            _editor.Project.Options.DefaultIsStroked,
-                            _editor.Project.Options.DefaultIsSmoothJoin);
-                        _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                            Editor.Project.Options.DefaultIsStroked,
+                            Editor.Project.Options.DefaultIsSmoothJoin);
+                        Editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         Remove();
                         ToStateOne();
                         Move(null);
@@ -136,20 +133,20 @@ namespace Core2D.Editor.Tools.Path
                     {
                         _toolPath.RemoveLastSegment<XQuadraticBezierSegment>();
 
-                        _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_toolPath._path);
+                        Editor.Project.CurrentContainer.WorkingLayer.Shapes = Editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_toolPath._path);
                         Remove();
                         if (_toolPath._path.Geometry.Figures.LastOrDefault().Segments.Length > 0)
                         {
                             Finalize(null);
-                            _editor.Project.AddShape(_editor.Project.CurrentContainer.CurrentLayer, _toolPath._path);
+                            Editor.Project.AddShape(Editor.Project.CurrentContainer.CurrentLayer, _toolPath._path);
                         }
                         else
                         {
-                            _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                            Editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         }
                         _toolPath.DeInitializeWorkingPath();
                         _currentState = ToolState.None;
-                        _editor.CancelAvailable = false;
+                        Editor.CancelAvailable = false;
                     }
                     break;
             }
@@ -160,41 +157,41 @@ namespace Core2D.Editor.Tools.Path
         {
             base.Move(x, y);
 
-            double sx = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, _editor.Project.Options.SnapX) : x;
-            double sy = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, _editor.Project.Options.SnapY) : y;
+            double sx = Editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, Editor.Project.Options.SnapX) : x;
+            double sy = Editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, Editor.Project.Options.SnapY) : y;
             switch (_currentState)
             {
                 case ToolState.None:
                     {
-                        if (_editor.Project.Options.TryToConnect)
+                        if (Editor.Project.Options.TryToConnect)
                         {
-                            _editor.TryToHoverShape(sx, sy);
+                            Editor.TryToHoverShape(sx, sy);
                         }
                     }
                     break;
                 case ToolState.One:
                     {
-                        if (_editor.Project.Options.TryToConnect)
+                        if (Editor.Project.Options.TryToConnect)
                         {
-                            _editor.TryToHoverShape(sx, sy);
+                            Editor.TryToHoverShape(sx, sy);
                         }
                         _quadraticBezier.Point2.X = sx;
                         _quadraticBezier.Point2.Y = sy;
                         _quadraticBezier.Point3.X = sx;
                         _quadraticBezier.Point3.Y = sy;
-                        _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                        Editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         Move(null);
                     }
                     break;
                 case ToolState.Two:
                     {
-                        if (_editor.Project.Options.TryToConnect)
+                        if (Editor.Project.Options.TryToConnect)
                         {
-                            _editor.TryToHoverShape(sx, sy);
+                            Editor.TryToHoverShape(sx, sy);
                         }
                         _quadraticBezier.Point2.X = sx;
                         _quadraticBezier.Point2.Y = sy;
-                        _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                        Editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         Move(null);
                     }
                     break;
@@ -207,10 +204,10 @@ namespace Core2D.Editor.Tools.Path
             base.ToStateOne();
 
             _selection = new QuadraticBezierSelection(
-                _editor.Project.CurrentContainer.HelperLayer,
+                Editor.Project.CurrentContainer.HelperLayer,
                 _quadraticBezier,
-                _editor.Project.Options.HelperStyle,
-                _editor.Project.Options.PointShape);
+                Editor.Project.Options.HelperStyle,
+                Editor.Project.Options.PointShape);
 
             _selection.ToStateOne();
         }

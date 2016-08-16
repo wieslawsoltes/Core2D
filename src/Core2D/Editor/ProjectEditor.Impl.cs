@@ -28,6 +28,10 @@ namespace Core2D.Editor
     /// </summary>
     public partial class ProjectEditor
     {
+        private XContainer _pageToCopy = default(XContainer);
+        private XDocument _documentToCopy = default(XDocument);
+        private BaseShape _hover = default(BaseShape);
+
         /// <summary>
         /// Snap value by specified snap amount.
         /// </summary>
@@ -94,19 +98,19 @@ namespace Core2D.Editor
             }
             else if (item == null)
             {
-                if (_project == null)
+                if (Project == null)
                 {
                     OnNewProject();
                 }
                 else
                 {
-                    if (_project.CurrentDocument == null)
+                    if (Project.CurrentDocument == null)
                     {
                         OnNewDocument();
                     }
                     else
                     {
-                        OnNewPage(_project.CurrentDocument);
+                        OnNewPage(Project.CurrentDocument);
                     }
                 }
             }
@@ -118,15 +122,15 @@ namespace Core2D.Editor
         /// <param name="selected">The selected page.</param>
         public void OnNewPage(XContainer selected)
         {
-            var document = _project?.Documents.FirstOrDefault(d => d.Pages.Contains(selected));
+            var document = Project?.Documents.FirstOrDefault(d => d.Pages.Contains(selected));
             if (document != null)
             {
                 var page =
-                    _projectFactory?.GetPage(_project, Constants.DefaultPageName)
+                    ProjectFactory?.GetPage(Project, Constants.DefaultPageName)
                     ?? XContainer.CreatePage(Constants.DefaultPageName);
 
-                _project?.AddPage(document, page);
-                _project?.SetCurrentContainer(page);
+                Project?.AddPage(document, page);
+                Project?.SetCurrentContainer(page);
             }
         }
 
@@ -137,11 +141,11 @@ namespace Core2D.Editor
         public void OnNewPage(XDocument selected)
         {
             var page =
-                _projectFactory?.GetPage(_project, Constants.DefaultPageName)
+                ProjectFactory?.GetPage(Project, Constants.DefaultPageName)
                 ?? XContainer.CreatePage(Constants.DefaultPageName);
 
-            _project?.AddPage(selected, page);
-            _project?.SetCurrentContainer(page);
+            Project?.AddPage(selected, page);
+            Project?.SetCurrentContainer(page);
         }
 
         /// <summary>
@@ -150,12 +154,12 @@ namespace Core2D.Editor
         public void OnNewDocument()
         {
             var document =
-                _projectFactory?.GetDocument(_project, Constants.DefaultDocumentName)
+                ProjectFactory?.GetDocument(Project, Constants.DefaultDocumentName)
                 ?? XDocument.Create(Constants.DefaultDocumentName);
 
-            _project?.AddDocument(document);
-            _project?.SetCurrentDocument(document);
-            _project?.SetCurrentContainer(document?.Pages.FirstOrDefault());
+            Project?.AddDocument(document);
+            Project?.SetCurrentDocument(document);
+            Project?.SetCurrentContainer(document?.Pages.FirstOrDefault());
         }
 
         /// <summary>
@@ -164,7 +168,7 @@ namespace Core2D.Editor
         public void OnNewProject()
         {
             OnUnload();
-            OnLoad(_projectFactory?.GetProject() ?? XProject.Create(), string.Empty);
+            OnLoad(ProjectFactory?.GetProject() ?? XProject.Create(), string.Empty);
             OnChangeCurrentView(_editorView);
             Invalidate?.Invoke();
         }
@@ -177,11 +181,11 @@ namespace Core2D.Editor
         {
             try
             {
-                if (_fileIO != null && _jsonSerializer != null)
+                if (FileIO != null && JsonSerializer != null)
                 {
-                    if (!string.IsNullOrEmpty(path) && _fileIO.Exists(path))
+                    if (!string.IsNullOrEmpty(path) && FileIO.Exists(path))
                     {
-                        var project = XProject.Open(path, _fileIO, _jsonSerializer);
+                        var project = XProject.Open(path, FileIO, JsonSerializer);
                         if (project != null)
                         {
                             OnOpen(project, path);
@@ -191,7 +195,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
@@ -214,7 +218,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
@@ -224,7 +228,7 @@ namespace Core2D.Editor
         public void OnClose()
         {
             OnChangeCurrentView(_dashboardView);
-            _project?.History?.Reset();
+            Project?.History?.Reset();
             OnUnload();
         }
 
@@ -236,14 +240,14 @@ namespace Core2D.Editor
         {
             try
             {
-                if (_project != null && _fileIO != null && _jsonSerializer != null)
+                if (Project != null && FileIO != null && JsonSerializer != null)
                 {
-                    XProject.Save(_project, path, _fileIO, _jsonSerializer);
-                    OnAddRecent(path, _project.Name);
+                    XProject.Save(Project, path, FileIO, JsonSerializer);
+                    OnAddRecent(path, Project.Name);
 
-                    if (string.IsNullOrEmpty(_projectPath))
+                    if (string.IsNullOrEmpty(ProjectPath))
                     {
-                        _projectPath = path;
+                        ProjectPath = path;
                     }
 
                     IsProjectDirty = false;
@@ -251,7 +255,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
@@ -263,19 +267,19 @@ namespace Core2D.Editor
         {
             try
             {
-                if (_project != null)
+                if (Project != null)
                 {
-                    var db = _csvReader?.Read(path, _fileIO);
+                    var db = CsvReader?.Read(path, FileIO);
                     if (db != null)
                     {
-                        _project.AddDatabase(db);
-                        _project.SetCurrentDatabase(db);
+                        Project.AddDatabase(db);
+                        Project.SetCurrentDatabase(db);
                     }
                 }
             }
             catch (Exception ex)
             {
-                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
@@ -288,11 +292,11 @@ namespace Core2D.Editor
         {
             try
             {
-                _csvWriter?.Write(path, _fileIO, database);
+                CsvWriter?.Write(path, FileIO, database);
             }
             catch (Exception ex)
             {
-                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
@@ -305,15 +309,15 @@ namespace Core2D.Editor
         {
             try
             {
-                var db = _csvReader?.Read(path, _fileIO);
+                var db = CsvReader?.Read(path, FileIO);
                 if (db != null)
                 {
-                    _project?.UpdateDatabase(database, db);
+                    Project?.UpdateDatabase(database, db);
                 }
             }
             catch (Exception ex)
             {
-                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
@@ -326,11 +330,11 @@ namespace Core2D.Editor
         {
             if (item is ShapeStyle)
             {
-                _project?.AddStyle(_project?.CurrentStyleLibrary, item as ShapeStyle);
+                Project?.AddStyle(Project?.CurrentStyleLibrary, item as ShapeStyle);
             }
             else if (item is IList<ShapeStyle>)
             {
-                _project.AddItems(_project?.CurrentStyleLibrary, item as IList<ShapeStyle>);
+                Project.AddItems(Project?.CurrentStyleLibrary, item as IList<ShapeStyle>);
             }
             else if (item is BaseShape)
             {
@@ -343,11 +347,11 @@ namespace Core2D.Editor
                         TryToRestoreStyles(shapes);
                         TryToRestoreRecords(shapes);
                     }
-                    _project.AddGroup(_project?.CurrentGroupLibrary, group);
+                    Project.AddGroup(Project?.CurrentGroupLibrary, group);
                 }
                 else
                 {
-                    _project?.AddShape(_project?.CurrentContainer?.CurrentLayer, item as BaseShape);
+                    Project?.AddShape(Project?.CurrentContainer?.CurrentLayer, item as BaseShape);
                 }
             }
             else if (item is IList<XGroup>)
@@ -358,22 +362,22 @@ namespace Core2D.Editor
                     TryToRestoreStyles(groups);
                     TryToRestoreRecords(groups);
                 }
-                _project.AddItems(_project?.CurrentGroupLibrary, groups);
+                Project.AddItems(Project?.CurrentGroupLibrary, groups);
             }
             else if (item is XLibrary<ShapeStyle>)
             {
-                _project.AddStyleLibrary(item as XLibrary<ShapeStyle>);
+                Project.AddStyleLibrary(item as XLibrary<ShapeStyle>);
             }
             else if (item is IList<XLibrary<ShapeStyle>>)
             {
-                _project.AddStyleLibraries(item as IList<XLibrary<ShapeStyle>>);
+                Project.AddStyleLibraries(item as IList<XLibrary<ShapeStyle>>);
             }
             else if (item is XLibrary<XGroup>)
             {
                 var gl = item as XLibrary<XGroup>;
                 TryToRestoreStyles(gl.Items);
                 TryToRestoreRecords(gl.Items);
-                _project.AddGroupLibrary(gl);
+                Project.AddGroupLibrary(gl);
             }
             else if (item is IList<XLibrary<XGroup>>)
             {
@@ -381,27 +385,27 @@ namespace Core2D.Editor
                 var shapes = gll.SelectMany(x => x.Items);
                 TryToRestoreStyles(shapes);
                 TryToRestoreRecords(shapes);
-                _project.AddGroupLibraries(gll);
+                Project.AddGroupLibraries(gll);
             }
             else if (item is XStyles)
             {
                 var styles = item as XStyles;
                 var library = XLibrary<ShapeStyle>.Create(styles.Name, styles.Children);
-                _project?.AddStyleLibrary(library);
+                Project?.AddStyleLibrary(library);
             }
             else if (item is XShapes)
             {
                 var shapes = (item as XShapes).Children;
                 if (shapes.Length > 0)
                 {
-                    _project?.AddShapes(_project?.CurrentContainer?.CurrentLayer, shapes);
+                    Project?.AddShapes(Project?.CurrentContainer?.CurrentLayer, shapes);
                 }
             }
             else if (item is XGroups)
             {
                 var groups = item as XGroups;
                 var library = XLibrary<XGroup>.Create(groups.Name, groups.Children);
-                _project?.AddGroupLibrary(library);
+                Project?.AddGroupLibrary(library);
             }
             else if (item is XDatabases)
             {
@@ -410,7 +414,7 @@ namespace Core2D.Editor
                 {
                     foreach (var database in databases)
                     {
-                        _project?.AddDatabase(database);
+                        Project?.AddDatabase(database);
                     }
                 }
             }
@@ -421,19 +425,19 @@ namespace Core2D.Editor
                 {
                     foreach (var template in templates)
                     {
-                        _project?.AddTemplate(template);
+                        Project?.AddTemplate(template);
                     }
                 }
             }
             else if (item is XContext)
             {
-                if (_renderers?[0]?.State?.SelectedShape != null || (_renderers?[0]?.State?.SelectedShapes?.Count > 0))
+                if (Renderers?[0]?.State?.SelectedShape != null || (Renderers?[0]?.State?.SelectedShapes?.Count > 0))
                 {
                     OnApplyData(item as XContext);
                 }
                 else
                 {
-                    var container = _project?.CurrentContainer;
+                    var container = Project?.CurrentContainer;
                     if (container != null)
                     {
                         container.Data = item as XContext;
@@ -443,8 +447,8 @@ namespace Core2D.Editor
             else if (item is XDatabase)
             {
                 var db = item as XDatabase;
-                _project?.AddDatabase(db);
-                _project?.SetCurrentDatabase(db);
+                Project?.AddDatabase(db);
+                Project?.SetCurrentDatabase(db);
             }
             else if (item is XLayer)
             {
@@ -454,7 +458,7 @@ namespace Core2D.Editor
                     TryToRestoreStyles(layer.Shapes);
                     TryToRestoreRecords(layer.Shapes);
                 }
-                _project?.AddLayer(_project?.CurrentContainer, layer);
+                Project?.AddLayer(Project?.CurrentContainer, layer);
             }
             else if (item is XContainer)
             {
@@ -468,7 +472,7 @@ namespace Core2D.Editor
                         TryToRestoreStyles(shapes);
                         TryToRestoreRecords(shapes);
                     }
-                    _project?.AddTemplate(container);
+                    Project?.AddTemplate(container);
                 }
                 else
                 {
@@ -481,7 +485,7 @@ namespace Core2D.Editor
                         TryToRestoreStyles(shapes);
                         TryToRestoreRecords(shapes);
                     }
-                    _project?.AddPage(_project?.CurrentDocument, container);
+                    Project?.AddPage(Project?.CurrentDocument, container);
                 }
             }
             else if (item is IList<XContainer>)
@@ -495,7 +499,7 @@ namespace Core2D.Editor
                 }
 
                 // Import as templates.
-                _project.AddTemplates(templates);
+                Project.AddTemplates(templates);
             }
             else if (item is XDocument)
             {
@@ -508,13 +512,13 @@ namespace Core2D.Editor
                     TryToRestoreStyles(shapes);
                     TryToRestoreRecords(shapes);
                 }
-                _project?.AddDocument(document);
+                Project?.AddDocument(document);
             }
             else if (item is XOptions)
             {
-                if (_project != null)
+                if (Project != null)
                 {
-                    _project.Options = item as XOptions;
+                    Project.Options = item as XOptions;
                 }
             }
             else if (item is XProject)
@@ -536,7 +540,7 @@ namespace Core2D.Editor
         {
             try
             {
-                var xaml = _fileIO?.ReadUtf8Text(path);
+                var xaml = FileIO?.ReadUtf8Text(path);
                 if (!string.IsNullOrWhiteSpace(xaml))
                 {
                     OnImportXamlString(xaml);
@@ -544,7 +548,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
@@ -554,7 +558,7 @@ namespace Core2D.Editor
         /// <param name="xaml">The xaml string.</param>
         public void OnImportXamlString(string xaml)
         {
-            var item = _xamlSerializer?.Deserialize<object>(xaml);
+            var item = XamlSerializer?.Deserialize<object>(xaml);
             if (item != null)
             {
                 OnImportObject(item, false);
@@ -570,15 +574,15 @@ namespace Core2D.Editor
         {
             try
             {
-                var xaml = _xamlSerializer?.Serialize(item);
+                var xaml = XamlSerializer?.Serialize(item);
                 if (!string.IsNullOrWhiteSpace(xaml))
                 {
-                    _fileIO?.WriteUtf8Text(path, xaml);
+                    FileIO?.WriteUtf8Text(path, xaml);
                 }
             }
             catch (Exception ex)
             {
-                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
@@ -590,7 +594,7 @@ namespace Core2D.Editor
         {
             try
             {
-                var json = _fileIO?.ReadUtf8Text(path);
+                var json = FileIO?.ReadUtf8Text(path);
                 if (!string.IsNullOrWhiteSpace(json))
                 {
                     OnImportJsonString(json);
@@ -598,7 +602,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
@@ -608,7 +612,7 @@ namespace Core2D.Editor
         /// <param name="json">The json string.</param>
         private void OnImportJsonString(string json)
         {
-            var item = _jsonSerializer.Deserialize<object>(json);
+            var item = JsonSerializer.Deserialize<object>(json);
             if (item != null)
             {
                 OnImportObject(item, true);
@@ -624,15 +628,15 @@ namespace Core2D.Editor
         {
             try
             {
-                var json = _jsonSerializer?.Serialize(item);
+                var json = JsonSerializer?.Serialize(item);
                 if (!string.IsNullOrWhiteSpace(json))
                 {
-                    _fileIO?.WriteUtf8Text(path, json);
+                    FileIO?.WriteUtf8Text(path, json);
                 }
             }
             catch (Exception ex)
             {
-                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
@@ -643,15 +647,15 @@ namespace Core2D.Editor
         {
             try
             {
-                if (_project?.History.CanUndo() ?? false)
+                if (Project?.History.CanUndo() ?? false)
                 {
                     Deselect();
-                    _project?.History.Undo();
+                    Project?.History.Undo();
                 }
             }
             catch (Exception ex)
             {
-                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
@@ -662,15 +666,15 @@ namespace Core2D.Editor
         {
             try
             {
-                if (_project?.History.CanRedo() ?? false)
+                if (Project?.History.CanRedo() ?? false)
                 {
                     Deselect();
-                    _project?.History.Redo();
+                    Project?.History.Redo();
                 }
             }
             catch (Exception ex)
             {
-                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
@@ -689,7 +693,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
@@ -702,20 +706,20 @@ namespace Core2D.Editor
             {
                 if (CanCopy())
                 {
-                    if (_renderers?[0]?.State?.SelectedShape != null)
+                    if (Renderers?[0]?.State?.SelectedShape != null)
                     {
-                        OnCopy(Enumerable.Repeat(_renderers[0].State.SelectedShape, 1).ToList());
+                        OnCopy(Enumerable.Repeat(Renderers[0].State.SelectedShape, 1).ToList());
                     }
 
-                    if (_renderers?[0]?.State?.SelectedShapes != null)
+                    if (Renderers?[0]?.State?.SelectedShapes != null)
                     {
-                        OnCopy(_renderers[0].State.SelectedShapes.ToList());
+                        OnCopy(Renderers[0].State.SelectedShapes.ToList());
                     }
                 }
             }
             catch (Exception ex)
             {
-                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
@@ -728,7 +732,7 @@ namespace Core2D.Editor
             {
                 if (await CanPaste())
                 {
-                    var text = await (_textClipboard?.GetText() ?? Task.FromResult(string.Empty));
+                    var text = await (TextClipboard?.GetText() ?? Task.FromResult(string.Empty));
                     if (!string.IsNullOrEmpty(text))
                     {
                         OnPaste(text);
@@ -737,7 +741,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
@@ -752,19 +756,19 @@ namespace Core2D.Editor
                 var page = item as XContainer;
                 _pageToCopy = page;
                 _documentToCopy = default(XDocument);
-                _project?.RemovePage(page);
-                _project?.SetCurrentContainer(_project?.CurrentDocument?.Pages.FirstOrDefault());
+                Project?.RemovePage(page);
+                Project?.SetCurrentContainer(Project?.CurrentDocument?.Pages.FirstOrDefault());
             }
             else if (item is XDocument)
             {
                 var document = item as XDocument;
                 _pageToCopy = default(XContainer);
                 _documentToCopy = document;
-                _project?.RemoveDocument(document);
+                Project?.RemoveDocument(document);
 
-                var selected = _project?.Documents.FirstOrDefault();
-                _project?.SetCurrentDocument(selected);
-                _project?.SetCurrentContainer(selected?.Pages.FirstOrDefault());
+                var selected = Project?.Documents.FirstOrDefault();
+                Project?.SetCurrentDocument(selected);
+                Project?.SetCurrentContainer(selected?.Pages.FirstOrDefault());
             }
             else if (item is ProjectEditor || item == null)
             {
@@ -802,38 +806,38 @@ namespace Core2D.Editor
         /// <param name="item">The item to paste.</param>
         public void OnPaste(object item)
         {
-            if (_project != null && item is XContainer)
+            if (Project != null && item is XContainer)
             {
                 if (_pageToCopy != null)
                 {
                     var page = item as XContainer;
-                    var document = _project?.Documents.FirstOrDefault(d => d.Pages.Contains(page));
+                    var document = Project?.Documents.FirstOrDefault(d => d.Pages.Contains(page));
                     if (document != null)
                     {
                         int index = document.Pages.IndexOf(page);
                         var clone = Clone(_pageToCopy);
-                        _project.ReplacePage(document, clone, index);
-                        _project.SetCurrentContainer(clone);
+                        Project.ReplacePage(document, clone, index);
+                        Project.SetCurrentContainer(clone);
                     }
                 }
             }
-            else if (_project != null && item is XDocument)
+            else if (Project != null && item is XDocument)
             {
                 if (_pageToCopy != null)
                 {
                     var document = item as XDocument;
                     var clone = Clone(_pageToCopy);
-                    _project?.AddPage(document, clone);
-                    _project.SetCurrentContainer(clone);
+                    Project?.AddPage(document, clone);
+                    Project.SetCurrentContainer(clone);
                 }
                 else if (_documentToCopy != null)
                 {
                     var document = item as XDocument;
-                    int index = _project.Documents.IndexOf(document);
+                    int index = Project.Documents.IndexOf(document);
                     var clone = Clone(_documentToCopy);
-                    _project.ReplaceDocument(clone, index);
-                    _project.SetCurrentDocument(clone);
-                    _project.SetCurrentContainer(clone?.Pages.FirstOrDefault());
+                    Project.ReplaceDocument(clone, index);
+                    Project.SetCurrentDocument(clone);
+                    Project.SetCurrentContainer(clone?.Pages.FirstOrDefault());
                 }
             }
             else if (item is ProjectEditor || item == null)
@@ -851,25 +855,25 @@ namespace Core2D.Editor
             if (item is XLayer)
             {
                 var layer = item as XLayer;
-                _project?.RemoveLayer(item as XLayer);
+                Project?.RemoveLayer(item as XLayer);
 
-                var selected = _project?.CurrentContainer?.Layers.FirstOrDefault();
+                var selected = Project?.CurrentContainer?.Layers.FirstOrDefault();
                 layer?.Owner?.SetCurrentLayer(selected);
             }
             if (item is XContainer)
             {
-                _project?.RemovePage(item as XContainer);
+                Project?.RemovePage(item as XContainer);
 
-                var selected = _project?.CurrentDocument?.Pages.FirstOrDefault();
-                _project?.SetCurrentContainer(selected);
+                var selected = Project?.CurrentDocument?.Pages.FirstOrDefault();
+                Project?.SetCurrentContainer(selected);
             }
             else if (item is XDocument)
             {
-                _project?.RemoveDocument(item as XDocument);
+                Project?.RemoveDocument(item as XDocument);
 
-                var selected = _project?.Documents.FirstOrDefault();
-                _project?.SetCurrentDocument(selected);
-                _project?.SetCurrentContainer(selected?.Pages.FirstOrDefault());
+                var selected = Project?.Documents.FirstOrDefault();
+                Project?.SetCurrentDocument(selected);
+                Project?.SetCurrentContainer(selected?.Pages.FirstOrDefault());
             }
             else if (item is ProjectEditor || item == null)
             {
@@ -884,14 +888,14 @@ namespace Core2D.Editor
         {
             try
             {
-                Deselect(_project?.CurrentContainer?.CurrentLayer);
+                Deselect(Project?.CurrentContainer?.CurrentLayer);
                 Select(
-                    _project?.CurrentContainer?.CurrentLayer,
-                    ImmutableHashSet.CreateRange<BaseShape>(_project?.CurrentContainer?.CurrentLayer?.Shapes));
+                    Project?.CurrentContainer?.CurrentLayer,
+                    ImmutableHashSet.CreateRange<BaseShape>(Project?.CurrentContainer?.CurrentLayer?.Shapes));
             }
             catch (Exception ex)
             {
-                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
@@ -902,11 +906,11 @@ namespace Core2D.Editor
         {
             try
             {
-                Deselect(_project?.CurrentContainer?.CurrentLayer);
+                Deselect(Project?.CurrentContainer?.CurrentLayer);
             }
             catch (Exception ex)
             {
-                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
@@ -917,23 +921,23 @@ namespace Core2D.Editor
         {
             try
             {
-                var container = _project?.CurrentContainer;
+                var container = Project?.CurrentContainer;
                 if (container != null)
                 {
                     foreach (var layer in container.Layers)
                     {
-                        _project?.ClearLayer(layer);
+                        Project?.ClearLayer(layer);
                     }
 
                     container.WorkingLayer.Shapes = ImmutableArray.Create<BaseShape>();
                     container.HelperLayer.Shapes = ImmutableArray.Create<BaseShape>();
 
-                    _project.CurrentContainer.Invalidate();
+                    Project.CurrentContainer.Invalidate();
                 }
             }
             catch (Exception ex)
             {
-                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
@@ -942,10 +946,10 @@ namespace Core2D.Editor
         /// </summary>
         public void OnGroupSelected()
         {
-            var group = Group(_renderers?[0]?.State?.SelectedShapes, Constants.DefaulGroupName);
+            var group = Group(Renderers?[0]?.State?.SelectedShapes, Constants.DefaulGroupName);
             if (group != null)
             {
-                Select(_project?.CurrentContainer?.CurrentLayer, group);
+                Select(Project?.CurrentContainer?.CurrentLayer, group);
             }
         }
 
@@ -954,11 +958,11 @@ namespace Core2D.Editor
         /// </summary>
         public void OnUngroupSelected()
         {
-            var result = Ungroup(_renderers?[0]?.State?.SelectedShape, _renderers?[0]?.State?.SelectedShapes);
-            if (result == true && _renderers?[0]?.State != null)
+            var result = Ungroup(Renderers?[0]?.State?.SelectedShape, Renderers?[0]?.State?.SelectedShapes);
+            if (result == true && Renderers?[0]?.State != null)
             {
-                _renderers[0].State.SelectedShape = null;
-                _renderers[0].State.SelectedShapes = null;
+                Renderers[0].State.SelectedShape = null;
+                Renderers[0].State.SelectedShapes = null;
             }
         }
 
@@ -967,13 +971,13 @@ namespace Core2D.Editor
         /// </summary>
         public void OnBringToFrontSelected()
         {
-            var source = _renderers?[0]?.State?.SelectedShape;
+            var source = Renderers?[0]?.State?.SelectedShape;
             if (source != null)
             {
                 BringToFront(source);
             }
 
-            var sources = _renderers?[0]?.State?.SelectedShapes;
+            var sources = Renderers?[0]?.State?.SelectedShapes;
             if (sources != null)
             {
                 foreach (var s in sources)
@@ -988,13 +992,13 @@ namespace Core2D.Editor
         /// </summary>
         public void OnBringForwardSelected()
         {
-            var source = _renderers?[0]?.State?.SelectedShape;
+            var source = Renderers?[0]?.State?.SelectedShape;
             if (source != null)
             {
                 BringForward(source);
             }
 
-            var sources = _renderers?[0]?.State?.SelectedShapes;
+            var sources = Renderers?[0]?.State?.SelectedShapes;
             if (sources != null)
             {
                 foreach (var s in sources)
@@ -1009,13 +1013,13 @@ namespace Core2D.Editor
         /// </summary>
         public void OnSendBackwardSelected()
         {
-            var source = _renderers?[0]?.State?.SelectedShape;
+            var source = Renderers?[0]?.State?.SelectedShape;
             if (source != null)
             {
                 SendBackward(source);
             }
 
-            var sources = _renderers?[0]?.State?.SelectedShapes;
+            var sources = Renderers?[0]?.State?.SelectedShapes;
             if (sources != null)
             {
                 foreach (var s in sources.Reverse())
@@ -1030,13 +1034,13 @@ namespace Core2D.Editor
         /// </summary>
         public void OnSendToBackSelected()
         {
-            var source = _renderers?[0]?.State?.SelectedShape;
+            var source = Renderers?[0]?.State?.SelectedShape;
             if (source != null)
             {
                 SendToBack(source);
             }
 
-            var sources = _renderers?[0]?.State?.SelectedShapes;
+            var sources = Renderers?[0]?.State?.SelectedShapes;
             if (sources != null)
             {
                 foreach (var s in sources.Reverse())
@@ -1052,10 +1056,10 @@ namespace Core2D.Editor
         public void OnMoveUpSelected()
         {
             MoveBy(
-                _renderers?[0]?.State?.SelectedShape,
-                _renderers?[0]?.State?.SelectedShapes,
+                Renderers?[0]?.State?.SelectedShape,
+                Renderers?[0]?.State?.SelectedShapes,
                 0.0,
-                _project.Options.SnapToGrid ? -_project.Options.SnapY : -1.0);
+                Project.Options.SnapToGrid ? -Project.Options.SnapY : -1.0);
         }
 
         /// <summary>
@@ -1064,10 +1068,10 @@ namespace Core2D.Editor
         public void OnMoveDownSelected()
         {
             MoveBy(
-                _renderers?[0]?.State?.SelectedShape,
-                _renderers?[0]?.State?.SelectedShapes,
+                Renderers?[0]?.State?.SelectedShape,
+                Renderers?[0]?.State?.SelectedShapes,
                 0.0,
-                _project.Options.SnapToGrid ? _project.Options.SnapY : 1.0);
+                Project.Options.SnapToGrid ? Project.Options.SnapY : 1.0);
         }
 
         /// <summary>
@@ -1076,9 +1080,9 @@ namespace Core2D.Editor
         public void OnMoveLeftSelected()
         {
             MoveBy(
-                _renderers?[0]?.State?.SelectedShape,
-                _renderers?[0]?.State?.SelectedShapes,
-                _project.Options.SnapToGrid ? -_project.Options.SnapX : -1.0,
+                Renderers?[0]?.State?.SelectedShape,
+                Renderers?[0]?.State?.SelectedShapes,
+                Project.Options.SnapToGrid ? -Project.Options.SnapX : -1.0,
                 0.0);
         }
 
@@ -1088,9 +1092,9 @@ namespace Core2D.Editor
         public void OnMoveRightSelected()
         {
             MoveBy(
-                _renderers?[0]?.State?.SelectedShape,
-                _renderers?[0]?.State?.SelectedShapes,
-                _project.Options.SnapToGrid ? _project.Options.SnapX : 1.0,
+                Renderers?[0]?.State?.SelectedShape,
+                Renderers?[0]?.State?.SelectedShapes,
+                Project.Options.SnapToGrid ? Project.Options.SnapX : 1.0,
                 0.0);
         }
 
@@ -1234,9 +1238,9 @@ namespace Core2D.Editor
         /// </summary>
         public void OnToggleDefaultIsStroked()
         {
-            if (_project?.Options != null)
+            if (Project?.Options != null)
             {
-                _project.Options.DefaultIsStroked = !_project.Options.DefaultIsStroked;
+                Project.Options.DefaultIsStroked = !Project.Options.DefaultIsStroked;
             }
         }
 
@@ -1245,9 +1249,9 @@ namespace Core2D.Editor
         /// </summary>
         public void OnToggleDefaultIsFilled()
         {
-            if (_project?.Options != null)
+            if (Project?.Options != null)
             {
-                _project.Options.DefaultIsFilled = !_project.Options.DefaultIsFilled;
+                Project.Options.DefaultIsFilled = !Project.Options.DefaultIsFilled;
             }
         }
 
@@ -1256,9 +1260,9 @@ namespace Core2D.Editor
         /// </summary>
         public void OnToggleDefaultIsClosed()
         {
-            if (_project?.Options != null)
+            if (Project?.Options != null)
             {
-                _project.Options.DefaultIsClosed = !_project.Options.DefaultIsClosed;
+                Project.Options.DefaultIsClosed = !Project.Options.DefaultIsClosed;
             }
         }
 
@@ -1267,9 +1271,9 @@ namespace Core2D.Editor
         /// </summary>
         public void OnToggleDefaultIsSmoothJoin()
         {
-            if (_project?.Options != null)
+            if (Project?.Options != null)
             {
-                _project.Options.DefaultIsSmoothJoin = !_project.Options.DefaultIsSmoothJoin;
+                Project.Options.DefaultIsSmoothJoin = !Project.Options.DefaultIsSmoothJoin;
             }
         }
 
@@ -1278,9 +1282,9 @@ namespace Core2D.Editor
         /// </summary>
         public void OnToggleSnapToGrid()
         {
-            if (_project?.Options != null)
+            if (Project?.Options != null)
             {
-                _project.Options.SnapToGrid = !_project.Options.SnapToGrid;
+                Project.Options.SnapToGrid = !Project.Options.SnapToGrid;
             }
         }
 
@@ -1289,9 +1293,9 @@ namespace Core2D.Editor
         /// </summary>
         public void OnToggleTryToConnect()
         {
-            if (_project?.Options != null)
+            if (Project?.Options != null)
             {
-                _project.Options.TryToConnect = !_project.Options.TryToConnect;
+                Project.Options.TryToConnect = !Project.Options.TryToConnect;
             }
         }
 
@@ -1300,9 +1304,9 @@ namespace Core2D.Editor
         /// </summary>
         public void OnToggleCloneStyle()
         {
-            if (_project?.Options != null)
+            if (Project?.Options != null)
             {
-                _project.Options.CloneStyle = !_project.Options.CloneStyle;
+                Project.Options.CloneStyle = !Project.Options.CloneStyle;
             }
         }
 
@@ -1380,27 +1384,27 @@ namespace Core2D.Editor
             if (record != null)
             {
                 // Selected shape.
-                if (_renderers?[0]?.State?.SelectedShape != null)
+                if (Renderers?[0]?.State?.SelectedShape != null)
                 {
-                    _project?.ApplyRecord(_renderers[0].State.SelectedShape?.Data, record);
+                    Project?.ApplyRecord(Renderers[0].State.SelectedShape?.Data, record);
                 }
 
                 // Selected shapes.
-                if (_renderers?[0]?.State?.SelectedShapes?.Count > 0)
+                if (Renderers?[0]?.State?.SelectedShapes?.Count > 0)
                 {
-                    foreach (var shape in _renderers[0].State.SelectedShapes)
+                    foreach (var shape in Renderers[0].State.SelectedShapes)
                     {
-                        _project.ApplyRecord(shape.Data, record);
+                        Project.ApplyRecord(shape.Data, record);
                     }
                 }
 
                 // Current page.
-                if (_renderers[0].State.SelectedShape == null && _renderers[0].State.SelectedShapes == null)
+                if (Renderers[0].State.SelectedShape == null && Renderers[0].State.SelectedShapes == null)
                 {
-                    var container = _project?.CurrentContainer;
+                    var container = Project?.CurrentContainer;
                     if (container != null)
                     {
-                        _project?.ApplyRecord(container.Data, record);
+                        Project?.ApplyRecord(container.Data, record);
                     }
                 }
             }
@@ -1441,7 +1445,7 @@ namespace Core2D.Editor
         public void OnRemoveGroupLibrary(XLibrary<XGroup> library)
         {
             Project.RemoveGroupLibrary(library);
-            Project.SetCurrentGroupLibrary(_project?.GroupLibraries.FirstOrDefault());
+            Project.SetCurrentGroupLibrary(Project?.GroupLibraries.FirstOrDefault());
         }
 
         /// <summary>
@@ -1450,15 +1454,15 @@ namespace Core2D.Editor
         /// <param name="library">The group library.</param>
         public void OnAddGroup(XLibrary<XGroup> library)
         {
-            if (_project != null && library != null)
+            if (Project != null && library != null)
             {
-                var group = _renderers?[0]?.State?.SelectedShape as XGroup;
+                var group = Renderers?[0]?.State?.SelectedShape as XGroup;
                 if (group != null)
                 {
                     var clone = CloneShape(group);
                     if (clone != null)
                     {
-                        _project?.AddGroup(library, clone);
+                        Project?.AddGroup(library, clone);
                     }
                 }
             }
@@ -1470,9 +1474,9 @@ namespace Core2D.Editor
         /// <param name="group">The group item.</param>
         public void OnRemoveGroup(XGroup group)
         {
-            if (_project != null && group != null)
+            if (Project != null && group != null)
             {
-                var library = _project.RemoveGroup(group);
+                var library = Project.RemoveGroup(group);
                 library?.SetSelected(library?.Items.FirstOrDefault());
             }
         }
@@ -1483,7 +1487,7 @@ namespace Core2D.Editor
         /// <param name="group">The group instance.</param>
         public void OnInsertGroup(XGroup group)
         {
-            if (_project?.CurrentContainer != null)
+            if (Project?.CurrentContainer != null)
             {
                 OnDropShapeAsClone(group, 0.0, 0.0);
             }
@@ -1525,7 +1529,7 @@ namespace Core2D.Editor
         public void OnRemoveStyleLibrary(XLibrary<ShapeStyle> library)
         {
             Project.RemoveStyleLibrary(library);
-            Project.SetCurrentStyleLibrary(_project?.StyleLibraries.FirstOrDefault());
+            Project.SetCurrentStyleLibrary(Project?.StyleLibraries.FirstOrDefault());
         }
 
         /// <summary>
@@ -1556,17 +1560,17 @@ namespace Core2D.Editor
             if (style != null)
             {
                 // Selected shape.
-                if (_renderers[0]?.State?.SelectedShape != null)
+                if (Renderers[0]?.State?.SelectedShape != null)
                 {
-                    _project?.ApplyStyle(_renderers[0].State.SelectedShape, style);
+                    Project?.ApplyStyle(Renderers[0].State.SelectedShape, style);
                 }
 
                 // Selected shapes.
-                if (_renderers?[0]?.State?.SelectedShapes?.Count > 0)
+                if (Renderers?[0]?.State?.SelectedShapes?.Count > 0)
                 {
-                    foreach (var shape in _renderers[0].State.SelectedShapes)
+                    foreach (var shape in Renderers[0].State.SelectedShapes)
                     {
-                        _project?.ApplyStyle(shape, style);
+                        Project?.ApplyStyle(shape, style);
                     }
                 }
             }
@@ -1581,17 +1585,17 @@ namespace Core2D.Editor
             if (data != null)
             {
                 // Selected shape.
-                if (_renderers?[0]?.State?.SelectedShape != null)
+                if (Renderers?[0]?.State?.SelectedShape != null)
                 {
-                    _project?.ApplyData(_renderers[0].State.SelectedShape, data);
+                    Project?.ApplyData(Renderers[0].State.SelectedShape, data);
                 }
 
                 // Selected shapes.
-                if (_renderers?[0]?.State?.SelectedShapes?.Count > 0)
+                if (Renderers?[0]?.State?.SelectedShapes?.Count > 0)
                 {
-                    foreach (var shape in _renderers[0].State.SelectedShapes)
+                    foreach (var shape in Renderers[0].State.SelectedShapes)
                     {
-                        _project?.ApplyData(shape, data);
+                        Project?.ApplyData(shape, data);
                     }
                 }
             }
@@ -1603,10 +1607,10 @@ namespace Core2D.Editor
         /// <param name="shape">The shape instance.</param>
         public void OnAddShape(BaseShape shape)
         {
-            var layer = _project?.CurrentContainer?.CurrentLayer;
+            var layer = Project?.CurrentContainer?.CurrentLayer;
             if (layer != null && shape != null)
             {
-                _project.AddShape(layer, shape);
+                Project.AddShape(layer, shape);
             }
         }
 
@@ -1616,11 +1620,11 @@ namespace Core2D.Editor
         /// <param name="shape">The shape instance.</param>
         public void OnRemoveShape(BaseShape shape)
         {
-            var layer = _project?.CurrentContainer?.CurrentLayer;
+            var layer = Project?.CurrentContainer?.CurrentLayer;
             if (layer != null && shape != null)
             {
-                _project.RemoveShape(layer, shape);
-                _project.CurrentContainer.CurrentShape = layer.Shapes.FirstOrDefault();
+                Project.RemoveShape(layer, shape);
+                Project.CurrentContainer.CurrentShape = layer.Shapes.FirstOrDefault();
             }
         }
 
@@ -1629,15 +1633,15 @@ namespace Core2D.Editor
         /// </summary>
         public void OnAddTemplate()
         {
-            if (_project != null)
+            if (Project != null)
             {
-                var template = _projectFactory.GetTemplate(_project, "Empty");
+                var template = ProjectFactory.GetTemplate(Project, "Empty");
                 if (template == null)
                 {
                     template = XContainer.CreateTemplate(Constants.DefaultTemplateName);
                 }
 
-                _project.AddTemplate(template);
+                Project.AddTemplate(template);
             }
         }
 
@@ -1649,8 +1653,8 @@ namespace Core2D.Editor
         {
             if (template != null)
             {
-                _project?.RemoveTemplate(template);
-                _project?.SetCurrentTemplate(_project?.Templates.FirstOrDefault());
+                Project?.RemoveTemplate(template);
+                Project?.SetCurrentTemplate(Project?.Templates.FirstOrDefault());
             }
         }
 
@@ -1659,11 +1663,11 @@ namespace Core2D.Editor
         /// </summary>
         public void OnEditTemplate(XContainer template)
         {
-            if (_project != null && template != null)
+            if (Project != null && template != null)
             {
-                _project.SetCurrentDocument(null);
-                _project.SetCurrentContainer(template);
-                _project.CurrentContainer?.Invalidate();
+                Project.SetCurrentDocument(null);
+                Project.SetCurrentContainer(template);
+                Project.CurrentContainer?.Invalidate();
             }
         }
 
@@ -1673,11 +1677,11 @@ namespace Core2D.Editor
         /// <param name="template">The template object.</param>
         public void OnApplyTemplate(XContainer template)
         {
-            var page = _project?.CurrentContainer;
+            var page = Project?.CurrentContainer;
             if (page != null && template != null)
             {
-                _project.ApplyTemplate(page, template);
-                _project.CurrentContainer.Invalidate();
+                Project.ApplyTemplate(page, template);
+                Project.CurrentContainer.Invalidate();
             }
         }
 
@@ -1687,7 +1691,7 @@ namespace Core2D.Editor
         /// <param name="path">The image path.</param>
         public async Task<string> OnAddImageKey(string path)
         {
-            if (_project != null)
+            if (Project != null)
             {
                 if (path == null || string.IsNullOrEmpty(path))
                 {
@@ -1700,11 +1704,11 @@ namespace Core2D.Editor
                 else
                 {
                     byte[] bytes;
-                    using (var stream = _fileIO?.Open(path))
+                    using (var stream = FileIO?.Open(path))
                     {
-                        bytes = _fileIO?.ReadBinary(stream);
+                        bytes = FileIO?.ReadBinary(stream);
                     }
-                    var key = _project.AddImageFromFile(path, bytes);
+                    var key = Project.AddImageFromFile(path, bytes);
                     return key;
                 }
             }
@@ -1720,7 +1724,7 @@ namespace Core2D.Editor
         {
             if (key != null)
             {
-                _project?.RemoveImage(key);
+                Project?.RemoveImage(key);
             }
         }
 
@@ -1730,9 +1734,9 @@ namespace Core2D.Editor
         /// <param name="item">The selected item.</param>
         public void OnSelectedItemChanged(XSelectable item)
         {
-            if (_project != null)
+            if (Project != null)
             {
-                _project.Selected = item;
+                Project.Selected = item;
             }
         }
 
@@ -1742,14 +1746,14 @@ namespace Core2D.Editor
         /// <param name="item">The parent item.</param>
         public void OnAddPage(object item)
         {
-            if (_project?.CurrentDocument != null)
+            if (Project?.CurrentDocument != null)
             {
                 var page =
-                    _projectFactory?.GetPage(_project, Constants.DefaultPageName)
+                    ProjectFactory?.GetPage(Project, Constants.DefaultPageName)
                     ?? XContainer.CreatePage(Constants.DefaultPageName);
 
-                _project.AddPage(_project.CurrentDocument, page);
-                _project.SetCurrentContainer(page);
+                Project.AddPage(Project.CurrentDocument, page);
+                Project.SetCurrentContainer(page);
             }
         }
 
@@ -1759,18 +1763,18 @@ namespace Core2D.Editor
         /// <param name="item">The parent item.</param>
         public void OnInsertPageBefore(object item)
         {
-            if (_project?.CurrentDocument != null)
+            if (Project?.CurrentDocument != null)
             {
                 if (item is XContainer)
                 {
                     var selected = item as XContainer;
-                    int index = _project.CurrentDocument.Pages.IndexOf(selected);
+                    int index = Project.CurrentDocument.Pages.IndexOf(selected);
                     var page =
-                        _projectFactory?.GetPage(_project, Constants.DefaultPageName)
+                        ProjectFactory?.GetPage(Project, Constants.DefaultPageName)
                         ?? XContainer.CreatePage(Constants.DefaultPageName);
 
-                    _project.AddPageAt(_project.CurrentDocument, page, index);
-                    _project.SetCurrentContainer(page);
+                    Project.AddPageAt(Project.CurrentDocument, page, index);
+                    Project.SetCurrentContainer(page);
                 }
             }
         }
@@ -1781,18 +1785,18 @@ namespace Core2D.Editor
         /// <param name="item">The parent item.</param>
         public void OnInsertPageAfter(object item)
         {
-            if (_project?.CurrentDocument != null)
+            if (Project?.CurrentDocument != null)
             {
                 if (item is XContainer)
                 {
                     var selected = item as XContainer;
-                    int index = _project.CurrentDocument.Pages.IndexOf(selected);
+                    int index = Project.CurrentDocument.Pages.IndexOf(selected);
                     var page =
-                        _projectFactory?.GetPage(_project, Constants.DefaultPageName)
+                        ProjectFactory?.GetPage(Project, Constants.DefaultPageName)
                         ?? XContainer.CreatePage(Constants.DefaultPageName);
 
-                    _project.AddPageAt(_project.CurrentDocument, page, index + 1);
-                    _project.SetCurrentContainer(page);
+                    Project.AddPageAt(Project.CurrentDocument, page, index + 1);
+                    Project.SetCurrentContainer(page);
                 }
             }
         }
@@ -1803,15 +1807,15 @@ namespace Core2D.Editor
         /// <param name="item">The parent item.</param>
         public void OnAddDocument(object item)
         {
-            if (_project != null)
+            if (Project != null)
             {
                 var document =
-                    _projectFactory?.GetDocument(_project, Constants.DefaultDocumentName)
+                    ProjectFactory?.GetDocument(Project, Constants.DefaultDocumentName)
                     ?? XDocument.Create(Constants.DefaultDocumentName);
 
-                _project.AddDocument(document);
-                _project.SetCurrentDocument(document);
-                _project.SetCurrentContainer(document?.Pages.FirstOrDefault());
+                Project.AddDocument(document);
+                Project.SetCurrentDocument(document);
+                Project.SetCurrentContainer(document?.Pages.FirstOrDefault());
             }
         }
 
@@ -1821,19 +1825,19 @@ namespace Core2D.Editor
         /// <param name="item">The parent item.</param>
         public void OnInsertDocumentBefore(object item)
         {
-            if (_project != null)
+            if (Project != null)
             {
                 if (item is XDocument)
                 {
                     var selected = item as XDocument;
-                    int index = _project.Documents.IndexOf(selected);
+                    int index = Project.Documents.IndexOf(selected);
                     var document =
-                        _projectFactory?.GetDocument(_project, Constants.DefaultDocumentName)
+                        ProjectFactory?.GetDocument(Project, Constants.DefaultDocumentName)
                         ?? XDocument.Create(Constants.DefaultDocumentName);
 
-                    _project.AddDocumentAt(document, index);
-                    _project.SetCurrentDocument(document);
-                    _project.SetCurrentContainer(document?.Pages.FirstOrDefault());
+                    Project.AddDocumentAt(document, index);
+                    Project.SetCurrentDocument(document);
+                    Project.SetCurrentContainer(document?.Pages.FirstOrDefault());
                 }
             }
         }
@@ -1844,19 +1848,19 @@ namespace Core2D.Editor
         /// <param name="item">The parent item.</param>
         public void OnInsertDocumentAfter(object item)
         {
-            if (_project != null)
+            if (Project != null)
             {
                 if (item is XDocument)
                 {
                     var selected = item as XDocument;
-                    int index = _project.Documents.IndexOf(selected);
+                    int index = Project.Documents.IndexOf(selected);
                     var document =
-                        _projectFactory?.GetDocument(_project, Constants.DefaultDocumentName)
+                        ProjectFactory?.GetDocument(Project, Constants.DefaultDocumentName)
                         ?? XDocument.Create(Constants.DefaultDocumentName);
 
-                    _project.AddDocumentAt(document, index + 1);
-                    _project.SetCurrentDocument(document);
-                    _project.SetCurrentContainer(document?.Pages.FirstOrDefault());
+                    Project.AddDocumentAt(document, index + 1);
+                    Project.SetCurrentDocument(document);
+                    Project.SetCurrentContainer(document?.Pages.FirstOrDefault());
                 }
             }
         }
@@ -1867,9 +1871,9 @@ namespace Core2D.Editor
         /// <param name="cache">The image cache instance.</param>
         private void SetRenderersImageCache(IImageCache cache)
         {
-            if (_renderers != null)
+            if (Renderers != null)
             {
-                foreach (var renderer in _renderers)
+                foreach (var renderer in Renderers)
                 {
                     renderer.ClearCache(isZooming: false);
                     renderer.State.ImageCache = cache;
@@ -1904,13 +1908,13 @@ namespace Core2D.Editor
             Observer?.Dispose();
             Observer = null;
 
-            if (_project?.History != null)
+            if (Project?.History != null)
             {
-                _project.History.Reset();
-                _project.History = null;
+                Project.History.Reset();
+                Project.History = null;
             }
 
-            _project?.PurgeUnusedImages(Enumerable.Empty<string>().ToImmutableHashSet());
+            Project?.PurgeUnusedImages(Enumerable.Empty<string>().ToImmutableHashSet());
 
             Deselect();
             SetRenderersImageCache(null);
@@ -1929,19 +1933,19 @@ namespace Core2D.Editor
         {
             try
             {
-                if (_renderers != null)
+                if (Renderers != null)
                 {
-                    foreach (var renderer in _renderers)
+                    foreach (var renderer in Renderers)
                     {
                         renderer.ClearCache(isZooming);
                     }
                 }
 
-                _project?.CurrentContainer?.Invalidate();
+                Project?.CurrentContainer?.Invalidate();
             }
             catch (Exception ex)
             {
-                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
@@ -1955,11 +1959,11 @@ namespace Core2D.Editor
         {
             try
             {
-                writer?.Save(path, item, _project);
+                writer?.Save(path, item, Project);
             }
             catch (Exception ex)
             {
-                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
@@ -1996,15 +2000,15 @@ namespace Core2D.Editor
         /// <param name="path">The recent projects path.</param>
         public void OnLoadRecent(string path)
         {
-            if (_jsonSerializer != null)
+            if (JsonSerializer != null)
             {
                 try
                 {
-                    var json = _fileIO.ReadUtf8Text(path);
-                    var recent = _jsonSerializer.Deserialize<Recents>(json);
+                    var json = FileIO.ReadUtf8Text(path);
+                    var recent = JsonSerializer.Deserialize<Recents>(json);
                     if (recent != null)
                     {
-                        var remove = recent.Files.Where(x => _fileIO?.Exists(x.Path) == false).ToList();
+                        var remove = recent.Files.Where(x => FileIO?.Exists(x.Path) == false).ToList();
                         var builder = recent.Files.ToBuilder();
 
                         foreach (var file in remove)
@@ -2015,7 +2019,7 @@ namespace Core2D.Editor
                         RecentProjects = builder.ToImmutable();
 
                         if (recent.Current != null
-                            && (_fileIO?.Exists(recent.Current.Path) ?? false))
+                            && (FileIO?.Exists(recent.Current.Path) ?? false))
                         {
                             CurrentRecentProject = recent.Current;
                         }
@@ -2027,7 +2031,7 @@ namespace Core2D.Editor
                 }
                 catch (Exception ex)
                 {
-                    _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                    Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
                 }
             }
         }
@@ -2038,17 +2042,17 @@ namespace Core2D.Editor
         /// <param name="path">The recent projects path.</param>
         public void OnSaveRecent(string path)
         {
-            if (_jsonSerializer != null)
+            if (JsonSerializer != null)
             {
                 try
                 {
                     var recent = Recents.Create(_recentProjects, _currentRecentProject);
-                    var json = _jsonSerializer.Serialize(recent);
-                    _fileIO.WriteUtf8Text(path, json);
+                    var json = JsonSerializer.Serialize(recent);
+                    FileIO.WriteUtf8Text(path, json);
                 }
                 catch (Exception ex)
                 {
-                    _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                    Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
                 }
             }
         }
@@ -2059,7 +2063,7 @@ namespace Core2D.Editor
         /// <returns>Returns true if undo action is available.</returns>
         public bool CanUndo()
         {
-            return _project?.History?.CanUndo() ?? false;
+            return Project?.History?.CanUndo() ?? false;
         }
 
         /// <summary>
@@ -2068,7 +2072,7 @@ namespace Core2D.Editor
         /// <returns>Returns true if redo action is available.</returns>
         public bool CanRedo()
         {
-            return _project?.History?.CanRedo() ?? false;
+            return Project?.History?.CanRedo() ?? false;
         }
 
         /// <summary>
@@ -2088,11 +2092,11 @@ namespace Core2D.Editor
         {
             try
             {
-                return await (_textClipboard?.ContainsText() ?? Task.FromResult(false));
+                return await (TextClipboard?.ContainsText() ?? Task.FromResult(false));
             }
             catch (Exception ex)
             {
-                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
             return false;
         }
@@ -2105,15 +2109,15 @@ namespace Core2D.Editor
         {
             try
             {
-                var json = _jsonSerializer?.Serialize(shapes);
+                var json = JsonSerializer?.Serialize(shapes);
                 if (!string.IsNullOrEmpty(json))
                 {
-                    _textClipboard?.SetText(json);
+                    TextClipboard?.SetText(json);
                 }
             }
             catch (Exception ex)
             {
-                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
@@ -2131,15 +2135,15 @@ namespace Core2D.Editor
                 try
                 {
                     var geometry = XPathGeometryParser.Parse(text);
-                    var style = _project?.CurrentStyleLibrary?.Selected;
+                    var style = Project?.CurrentStyleLibrary?.Selected;
                     if (style != null)
                     {
                         var path = XPath.Create(
                             "Path",
-                            _project.Options.CloneStyle ? style.Clone() : style,
+                            Project.Options.CloneStyle ? style.Clone() : style,
                             geometry,
-                            _project.Options.DefaultIsStroked,
-                            _project.Options.DefaultIsFilled);
+                            Project.Options.DefaultIsStroked,
+                            Project.Options.DefaultIsFilled);
 
                         OnPaste(Enumerable.Repeat(path, 1));
                         return;
@@ -2153,7 +2157,7 @@ namespace Core2D.Editor
                 // Try to deserialize Xaml.
                 try
                 {
-                    if (_xamlSerializer != null)
+                    if (XamlSerializer != null)
                     {
                         OnImportXamlString(text);
                         return;
@@ -2167,7 +2171,7 @@ namespace Core2D.Editor
                 // Try to deserialize Json.
                 try
                 {
-                    var shapes = _jsonSerializer?.Deserialize<IList<BaseShape>>(text);
+                    var shapes = JsonSerializer?.Deserialize<IList<BaseShape>>(text);
                     if (shapes?.Count() > 0)
                     {
                         OnPaste(shapes);
@@ -2183,7 +2187,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
@@ -2191,13 +2195,13 @@ namespace Core2D.Editor
         {
             foreach (var point in shapes?.SelectMany(s => s?.GetPoints()))
             {
-                point.Shape = _project?.Options?.PointShape;
+                point.Shape = Project?.Options?.PointShape;
             }
         }
 
         private IDictionary<string, ShapeStyle> GenerateStyleDictionaryByName()
         {
-            return _project?.StyleLibraries
+            return Project?.StyleLibraries
                 .Where(sl => sl?.Items != null && sl?.Items.Length > 0)
                 .SelectMany(sl => sl.Items)
                 .Distinct(new ShapeStyleByNameComparer())
@@ -2212,7 +2216,7 @@ namespace Core2D.Editor
         {
             try
             {
-                if (_project?.StyleLibraries == null)
+                if (Project?.StyleLibraries == null)
                     return;
 
                 var styles = GenerateStyleDictionaryByName();
@@ -2237,15 +2241,15 @@ namespace Core2D.Editor
                         else
                         {
                             // Create Imported style library.
-                            if (_project?.CurrentStyleLibrary == null)
+                            if (Project?.CurrentStyleLibrary == null)
                             {
                                 var sl = XLibrary<ShapeStyle>.Create(Constants.ImportedStyleLibraryName);
-                                _project.AddStyleLibrary(sl);
-                                _project.SetCurrentStyleLibrary(sl);
+                                Project.AddStyleLibrary(sl);
+                                Project.SetCurrentStyleLibrary(sl);
                             }
 
                             // Add missing style.
-                            _project?.AddStyle(_project?.CurrentStyleLibrary, shape.Style);
+                            Project?.AddStyle(Project?.CurrentStyleLibrary, shape.Style);
 
                             // Recreate styles dictionary.
                             styles = GenerateStyleDictionaryByName();
@@ -2255,13 +2259,13 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
         private IDictionary<Guid, XRecord> GenerateRecordDictionaryById()
         {
-            return _project?.Databases
+            return Project?.Databases
                 .Where(d => d?.Records != null && d?.Records.Length > 0)
                 .SelectMany(d => d.Records)
                 .ToDictionary(s => s.Id);
@@ -2275,7 +2279,7 @@ namespace Core2D.Editor
         {
             try
             {
-                if (_project?.Databases == null)
+                if (Project?.Databases == null)
                     return;
 
                 var records = GenerateRecordDictionaryById();
@@ -2295,16 +2299,16 @@ namespace Core2D.Editor
                     else
                     {
                         // Create Imported database.
-                        if (_project?.CurrentDatabase == null)
+                        if (Project?.CurrentDatabase == null)
                         {
                             var db = XDatabase.Create(Constants.ImportedDatabaseName, shape.Data.Record.Columns);
-                            _project.AddDatabase(db);
-                            _project.SetCurrentDatabase(db);
+                            Project.AddDatabase(db);
+                            Project.SetCurrentDatabase(db);
                         }
 
                         // Add missing data record.
-                        shape.Data.Record.Owner = _project.CurrentDatabase;
-                        _project?.AddRecord(_project?.CurrentDatabase, shape.Data.Record);
+                        shape.Data.Record.Owner = Project.CurrentDatabase;
+                        Project?.AddRecord(Project?.CurrentDatabase, shape.Data.Record);
 
                         // Recreate records dictionary.
                         records = GenerateRecordDictionaryById();
@@ -2313,7 +2317,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
@@ -2325,18 +2329,18 @@ namespace Core2D.Editor
         {
             try
             {
-                Deselect(_project?.CurrentContainer?.CurrentLayer);
+                Deselect(Project?.CurrentContainer?.CurrentLayer);
 
                 TryToRestoreStyles(shapes);
                 TryToRestoreRecords(shapes);
 
-                _project.AddShapes(_project?.CurrentContainer?.CurrentLayer, shapes);
+                Project.AddShapes(Project?.CurrentContainer?.CurrentLayer, shapes);
 
                 OnSelect(shapes);
             }
             catch (Exception ex)
             {
-                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
@@ -2348,11 +2352,11 @@ namespace Core2D.Editor
         {
             if (shapes?.Count() == 1)
             {
-                Select(_project?.CurrentContainer?.CurrentLayer, shapes.FirstOrDefault());
+                Select(Project?.CurrentContainer?.CurrentLayer, shapes.FirstOrDefault());
             }
             else
             {
-                Select(_project?.CurrentContainer?.CurrentLayer, ImmutableHashSet.CreateRange<BaseShape>(shapes));
+                Select(Project?.CurrentContainer?.CurrentLayer, ImmutableHashSet.CreateRange<BaseShape>(shapes));
             }
         }
 
@@ -2366,10 +2370,10 @@ namespace Core2D.Editor
         {
             try
             {
-                var json = _jsonSerializer?.Serialize(shape);
+                var json = JsonSerializer?.Serialize(shape);
                 if (!string.IsNullOrEmpty(json))
                 {
-                    var clone = _jsonSerializer?.Deserialize<T>(json);
+                    var clone = JsonSerializer?.Deserialize<T>(json);
                     if (clone != null)
                     {
                         var shapes = Enumerable.Repeat(clone, 1).ToList();
@@ -2381,7 +2385,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
 
             return default(T);
@@ -2397,10 +2401,10 @@ namespace Core2D.Editor
             try
             {
                 var template = container?.Template;
-                var json = _jsonSerializer?.Serialize(container);
+                var json = JsonSerializer?.Serialize(container);
                 if (!string.IsNullOrEmpty(json))
                 {
-                    var clone = _jsonSerializer?.Deserialize<XContainer>(json);
+                    var clone = JsonSerializer?.Deserialize<XContainer>(json);
                     if (clone != null)
                     {
                         var shapes = clone.Layers.SelectMany(l => l.Shapes);
@@ -2413,7 +2417,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
 
             return default(XContainer);
@@ -2429,10 +2433,10 @@ namespace Core2D.Editor
             try
             {
                 var templates = document?.Pages.Select(c => c?.Template)?.ToArray();
-                var json = _jsonSerializer?.Serialize(document);
+                var json = JsonSerializer?.Serialize(document);
                 if (!string.IsNullOrEmpty(json))
                 {
-                    var clone = _jsonSerializer?.Deserialize<XDocument>(json);
+                    var clone = JsonSerializer?.Deserialize<XDocument>(json);
                     if (clone != null)
                     {
                         for (int i = 0; i < clone.Pages.Length; i++)
@@ -2449,7 +2453,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
 
             return default(XDocument);
@@ -2501,7 +2505,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
 
             return false;
@@ -2517,9 +2521,9 @@ namespace Core2D.Editor
         {
             try
             {
-                if (_renderers?[0]?.State?.SelectedShape != null)
+                if (Renderers?[0]?.State?.SelectedShape != null)
                 {
-                    var target = _renderers[0].State.SelectedShape;
+                    var target = Renderers[0].State.SelectedShape;
                     if (target is XPoint)
                     {
                         var point = target as XPoint;
@@ -2529,9 +2533,9 @@ namespace Core2D.Editor
                         }
                     }
                 }
-                else if (_renderers?[0]?.State?.SelectedShapes != null && _renderers?[0]?.State?.SelectedShapes?.Count > 0)
+                else if (Renderers?[0]?.State?.SelectedShapes != null && Renderers?[0]?.State?.SelectedShapes?.Count > 0)
                 {
-                    foreach (var target in _renderers[0].State.SelectedShapes)
+                    foreach (var target in Renderers[0].State.SelectedShapes)
                     {
                         if (target is XPoint)
                         {
@@ -2545,10 +2549,10 @@ namespace Core2D.Editor
                 }
                 else
                 {
-                    var layer = _project?.CurrentContainer?.CurrentLayer;
+                    var layer = Project?.CurrentContainer?.CurrentLayer;
                     if (layer != null)
                     {
-                        var target = ShapeHitTestPoint.HitTest(layer.Shapes, new Vector2(x, y), _project.Options.HitThreshold);
+                        var target = ShapeHitTestPoint.HitTest(layer.Shapes, new Vector2(x, y), Project.Options.HitThreshold);
                         if (target != null)
                         {
                             if (target is XPoint)
@@ -2569,7 +2573,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
@@ -2582,36 +2586,36 @@ namespace Core2D.Editor
         /// <param name="y">The Y coordinate in container.</param>
         public void OnDropShapeAsClone<T>(T shape, double x, double y) where T : BaseShape
         {
-            double sx = _project.Options.SnapToGrid ? Snap(x, _project.Options.SnapX) : x;
-            double sy = _project.Options.SnapToGrid ? Snap(y, _project.Options.SnapY) : y;
+            double sx = Project.Options.SnapToGrid ? Snap(x, Project.Options.SnapX) : x;
+            double sy = Project.Options.SnapToGrid ? Snap(y, Project.Options.SnapY) : y;
 
             try
             {
                 var clone = CloneShape(shape);
                 if (clone != null)
                 {
-                    Deselect(_project?.CurrentContainer?.CurrentLayer);
+                    Deselect(Project?.CurrentContainer?.CurrentLayer);
                     clone.Move(sx, sy);
 
-                    _project.AddShape(_project?.CurrentContainer?.CurrentLayer, clone);
+                    Project.AddShape(Project?.CurrentContainer?.CurrentLayer, clone);
 
-                    Select(_project?.CurrentContainer?.CurrentLayer, clone);
+                    Select(Project?.CurrentContainer?.CurrentLayer, clone);
 
-                    if (_project.Options.TryToConnect)
+                    if (Project.Options.TryToConnect)
                     {
                         if (clone is XGroup)
                         {
                             TryToConnectLines(
-                                XProject.GetAllShapes<XLine>(_project?.CurrentContainer?.CurrentLayer?.Shapes),
+                                XProject.GetAllShapes<XLine>(Project?.CurrentContainer?.CurrentLayer?.Shapes),
                                 (clone as XGroup).Connectors,
-                                _project.Options.HitThreshold);
+                                Project.Options.HitThreshold);
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
@@ -2625,20 +2629,20 @@ namespace Core2D.Editor
         {
             try
             {
-                if (_renderers?[0]?.State?.SelectedShape != null
-                    || (_renderers?[0]?.State?.SelectedShapes != null && _renderers?[0]?.State?.SelectedShapes.Count > 0))
+                if (Renderers?[0]?.State?.SelectedShape != null
+                    || (Renderers?[0]?.State?.SelectedShapes != null && Renderers?[0]?.State?.SelectedShapes.Count > 0))
                 {
                     OnApplyRecord(record);
                 }
                 else
                 {
-                    var layer = _project?.CurrentContainer?.CurrentLayer;
+                    var layer = Project?.CurrentContainer?.CurrentLayer;
                     if (layer != null)
                     {
-                        var result = ShapeHitTestPoint.HitTest(layer.Shapes, new Vector2(x, y), _project.Options.HitThreshold);
+                        var result = ShapeHitTestPoint.HitTest(layer.Shapes, new Vector2(x, y), Project.Options.HitThreshold);
                         if (result != null)
                         {
-                            _project?.ApplyRecord(result.Data, record);
+                            Project?.ApplyRecord(result.Data, record);
                         }
                         else
                         {
@@ -2649,7 +2653,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
@@ -2661,12 +2665,12 @@ namespace Core2D.Editor
         /// <param name="y">The Y coordinate in container.</param>
         public void OnDropRecordAsGroup(XRecord record, double x, double y)
         {
-            var selected = _project.CurrentStyleLibrary.Selected;
-            var style = _project.Options.CloneStyle ? selected.Clone() : selected;
-            var point = _project?.Options?.PointShape;
-            var layer = _project?.CurrentContainer?.CurrentLayer;
-            double sx = _project.Options.SnapToGrid ? Snap(x, _project.Options.SnapX) : x;
-            double sy = _project.Options.SnapToGrid ? Snap(y, _project.Options.SnapY) : y;
+            var selected = Project.CurrentStyleLibrary.Selected;
+            var style = Project.Options.CloneStyle ? selected.Clone() : selected;
+            var point = Project?.Options?.PointShape;
+            var layer = Project?.CurrentContainer?.CurrentLayer;
+            double sx = Project.Options.SnapToGrid ? Snap(x, Project.Options.SnapX) : x;
+            double sy = Project.Options.SnapToGrid ? Snap(y, Project.Options.SnapY) : y;
 
             var g = XGroup.Create(Constants.DefaulGroupName);
 
@@ -2703,7 +2707,7 @@ namespace Core2D.Editor
             g.AddConnectorAsNone(pl);
             g.AddConnectorAsNone(pr);
 
-            _project.AddShape(layer, g);
+            Project.AddShape(layer, g);
         }
 
         /// <summary>
@@ -2716,27 +2720,27 @@ namespace Core2D.Editor
         {
             try
             {
-                if (_renderers?[0]?.State?.SelectedShape != null
-                    || (_renderers?[0]?.State?.SelectedShapes != null && _renderers?[0]?.State?.SelectedShapes.Count > 0))
+                if (Renderers?[0]?.State?.SelectedShape != null
+                    || (Renderers?[0]?.State?.SelectedShapes != null && Renderers?[0]?.State?.SelectedShapes.Count > 0))
                 {
                     OnApplyStyle(style);
                 }
                 else
                 {
-                    var layer = _project.CurrentContainer?.CurrentLayer;
+                    var layer = Project.CurrentContainer?.CurrentLayer;
                     if (layer != null)
                     {
-                        var result = ShapeHitTestPoint.HitTest(layer.Shapes, new Vector2(x, y), _project.Options.HitThreshold);
+                        var result = ShapeHitTestPoint.HitTest(layer.Shapes, new Vector2(x, y), Project.Options.HitThreshold);
                         if (result != null)
                         {
-                            _project.ApplyStyle(result, style);
+                            Project.ApplyStyle(result, style);
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                _log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
@@ -2745,38 +2749,38 @@ namespace Core2D.Editor
         /// </summary>
         public void OnDeleteSelected()
         {
-            if (_project?.CurrentContainer?.CurrentLayer == null || _renderers?[0]?.State == null)
+            if (Project?.CurrentContainer?.CurrentLayer == null || Renderers?[0]?.State == null)
                 return;
 
-            if (_renderers[0].State.SelectedShape != null)
+            if (Renderers[0].State.SelectedShape != null)
             {
-                var layer = _project.CurrentContainer.CurrentLayer;
+                var layer = Project.CurrentContainer.CurrentLayer;
 
                 var previous = layer.Shapes;
-                var next = layer.Shapes.Remove(_renderers[0].State.SelectedShape);
-                _project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+                var next = layer.Shapes.Remove(Renderers[0].State.SelectedShape);
+                Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
                 layer.Shapes = next;
 
-                _renderers[0].State.SelectedShape = default(BaseShape);
+                Renderers[0].State.SelectedShape = default(BaseShape);
                 layer.Invalidate();
             }
 
-            if (_renderers[0].State.SelectedShapes != null && _renderers[0].State.SelectedShapes.Count > 0)
+            if (Renderers[0].State.SelectedShapes != null && Renderers[0].State.SelectedShapes.Count > 0)
             {
-                var layer = _project.CurrentContainer.CurrentLayer;
+                var layer = Project.CurrentContainer.CurrentLayer;
 
                 var builder = layer.Shapes.ToBuilder();
-                foreach (var shape in _renderers[0].State.SelectedShapes)
+                foreach (var shape in Renderers[0].State.SelectedShapes)
                 {
                     builder.Remove(shape);
                 }
 
                 var previous = layer.Shapes;
                 var next = builder.ToImmutable();
-                _project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+                Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
                 layer.Shapes = next;
 
-                _renderers[0].State.SelectedShapes = default(ImmutableHashSet<BaseShape>);
+                Renderers[0].State.SelectedShapes = default(ImmutableHashSet<BaseShape>);
                 layer.Invalidate();
             }
         }
@@ -2787,13 +2791,13 @@ namespace Core2D.Editor
         /// <param name="shape">The shape to select.</param>
         public void Select(BaseShape shape)
         {
-            if (_renderers?[0]?.State != null)
+            if (Renderers?[0]?.State != null)
             {
-                _renderers[0].State.SelectedShape = shape;
+                Renderers[0].State.SelectedShape = shape;
 
-                if (_renderers[0].State.SelectedShapes != null)
+                if (Renderers[0].State.SelectedShapes != null)
                 {
-                    _renderers[0].State.SelectedShapes = default(ImmutableHashSet<BaseShape>);
+                    Renderers[0].State.SelectedShapes = default(ImmutableHashSet<BaseShape>);
                 }
             }
         }
@@ -2804,14 +2808,14 @@ namespace Core2D.Editor
         /// <param name="shapes">The shapes to select.</param>
         public void Select(ImmutableHashSet<BaseShape> shapes)
         {
-            if (_renderers?[0]?.State != null)
+            if (Renderers?[0]?.State != null)
             {
-                if (_renderers[0].State.SelectedShape != null)
+                if (Renderers[0].State.SelectedShape != null)
                 {
-                    _renderers[0].State.SelectedShape = default(BaseShape);
+                    Renderers[0].State.SelectedShape = default(BaseShape);
                 }
 
-                _renderers[0].State.SelectedShapes = shapes;
+                Renderers[0].State.SelectedShapes = shapes;
             }
         }
 
@@ -2820,14 +2824,14 @@ namespace Core2D.Editor
         /// </summary>
         public void Deselect()
         {
-            if (_renderers?[0].State?.SelectedShape != null)
+            if (Renderers?[0].State?.SelectedShape != null)
             {
-                _renderers[0].State.SelectedShape = default(BaseShape);
+                Renderers[0].State.SelectedShape = default(BaseShape);
             }
 
-            if (_renderers?[0].State?.SelectedShapes != null)
+            if (Renderers?[0].State?.SelectedShapes != null)
             {
-                _renderers[0].State.SelectedShapes = default(ImmutableHashSet<BaseShape>);
+                Renderers[0].State.SelectedShapes = default(ImmutableHashSet<BaseShape>);
             }
         }
 
@@ -2916,7 +2920,7 @@ namespace Core2D.Editor
         {
             if (layer != null)
             {
-                var result = ShapeHitTestPoint.HitTest(layer.Shapes, new Vector2(x, y), _project.Options.HitThreshold);
+                var result = ShapeHitTestPoint.HitTest(layer.Shapes, new Vector2(x, y), Project.Options.HitThreshold);
                 if (result != null)
                 {
                     Select(layer, result);
@@ -2940,7 +2944,7 @@ namespace Core2D.Editor
             if (layer != null)
             {
                 var rect = Rect2.Create(rectangle.TopLeft, rectangle.BottomRight);
-                var result = ShapeHitTestSelection.HitTest(layer.Shapes, rect, _project.Options.HitThreshold);
+                var result = ShapeHitTestSelection.HitTest(layer.Shapes, rect, Project.Options.HitThreshold);
                 if (result != null)
                 {
                     if (result.Count > 0)
@@ -2998,23 +3002,23 @@ namespace Core2D.Editor
         /// <returns>True if hovering shape was successful.</returns>
         public bool TryToHoverShape(double x, double y)
         {
-            if (_project?.CurrentContainer?.CurrentLayer == null)
+            if (Project?.CurrentContainer?.CurrentLayer == null)
                 return false;
 
-            if (_renderers?[0]?.State?.SelectedShapes == null
-                && !(_renderers?[0]?.State?.SelectedShape != null && _hover != _renderers?[0]?.State?.SelectedShape))
+            if (Renderers?[0]?.State?.SelectedShapes == null
+                && !(Renderers?[0]?.State?.SelectedShape != null && _hover != Renderers?[0]?.State?.SelectedShape))
             {
-                var result = ShapeHitTestPoint.HitTest(_project.CurrentContainer?.CurrentLayer?.Shapes, new Vector2(x, y), _project.Options.HitThreshold);
+                var result = ShapeHitTestPoint.HitTest(Project.CurrentContainer?.CurrentLayer?.Shapes, new Vector2(x, y), Project.Options.HitThreshold);
                 if (result != null)
                 {
-                    Hover(_project.CurrentContainer?.CurrentLayer, result);
+                    Hover(Project.CurrentContainer?.CurrentLayer, result);
                     return true;
                 }
                 else
                 {
-                    if (_renderers[0].State.SelectedShape != null && _renderers[0].State.SelectedShape == _hover)
+                    if (Renderers[0].State.SelectedShape != null && Renderers[0].State.SelectedShape == _hover)
                     {
-                        Dehover(_project.CurrentContainer?.CurrentLayer);
+                        Dehover(Project.CurrentContainer?.CurrentLayer);
                     }
                 }
             }
@@ -3030,12 +3034,12 @@ namespace Core2D.Editor
         /// <returns>The connected point if success.</returns>
         public XPoint TryToGetConnectionPoint(double x, double y)
         {
-            if (_project.Options.TryToConnect)
+            if (Project.Options.TryToConnect)
             {
                 var result = ShapeHitTestPoint.HitTest(
-                    _project.CurrentContainer.CurrentLayer.Shapes,
+                    Project.CurrentContainer.CurrentLayer.Shapes,
                     new Vector2(x, y),
-                    _project.Options.HitThreshold);
+                    Project.Options.HitThreshold);
                 if (result != null && result is XPoint)
                 {
                     return result as XPoint;
@@ -3050,7 +3054,7 @@ namespace Core2D.Editor
             {
                 var previous = line.Start;
                 var next = point;
-                _project?.History?.Snapshot(previous, next, (p) => line.Start = p);
+                Project?.History?.Snapshot(previous, next, (p) => line.Start = p);
                 line.Start = next;
             }
         }
@@ -3061,7 +3065,7 @@ namespace Core2D.Editor
             {
                 var previous = line.End;
                 var next = point;
-                _project?.History?.Snapshot(previous, next, (p) => line.End = p);
+                Project?.History?.Snapshot(previous, next, (p) => line.End = p);
                 line.End = next;
             }
         }
@@ -3076,19 +3080,19 @@ namespace Core2D.Editor
         /// <returns>True if line split was successful.</returns>
         public bool TryToSplitLine(double x, double y, XPoint point, bool select = false)
         {
-            if (_project?.CurrentContainer == null || _project?.Options == null)
+            if (Project?.CurrentContainer == null || Project?.Options == null)
                 return false;
 
             var result = ShapeHitTestPoint.HitTest(
-                _project.CurrentContainer.CurrentLayer.Shapes,
+                Project.CurrentContainer.CurrentLayer.Shapes,
                 new Vector2(x, y),
-                _project.Options.HitThreshold);
+                Project.Options.HitThreshold);
 
             if (result is XLine)
             {
                 var line = result as XLine;
 
-                if (!_project.Options.SnapToGrid)
+                if (!Project.Options.SnapToGrid)
                 {
                     var a = new Vector2(line.Start.X, line.Start.Y);
                     var b = new Vector2(line.End.X, line.End.Y);
@@ -3100,7 +3104,7 @@ namespace Core2D.Editor
                 var split = XLine.Create(
                     x, y,
                     line.Style,
-                    _project.Options.PointShape,
+                    Project.Options.PointShape,
                     line.IsStroked);
 
                 double ds = point.DistanceTo(line.Start);
@@ -3119,11 +3123,11 @@ namespace Core2D.Editor
                     SwapLineEnd(line, point);
                 }
 
-                _project.AddShape(_project.CurrentContainer.CurrentLayer, split);
+                Project.AddShape(Project.CurrentContainer.CurrentLayer, split);
 
                 if (select)
                 {
-                    Select(_project.CurrentContainer.CurrentLayer, point);
+                    Select(Project.CurrentContainer.CurrentLayer, point);
                 }
 
                 return true;
@@ -3141,7 +3145,7 @@ namespace Core2D.Editor
         /// <returns>True if line split was successful.</returns>
         public bool TryToSplitLine(XLine line, XPoint p0, XPoint p1)
         {
-            if (_project?.Options == null)
+            if (Project?.Options == null)
                 return false;
 
             // Points must be aligned horizontally or vertically.
@@ -3159,7 +3163,7 @@ namespace Core2D.Editor
                     p0,
                     line.End,
                     line.Style,
-                    _project.Options.PointShape,
+                    Project.Options.PointShape,
                     line.IsStroked);
 
                 SwapLineEnd(line, p1);
@@ -3170,13 +3174,13 @@ namespace Core2D.Editor
                     p1,
                     line.End,
                     line.Style,
-                    _project.Options.PointShape,
+                    Project.Options.PointShape,
                     line.IsStroked);
 
                 SwapLineEnd(line, p0);
             }
 
-            _project.AddShape(_project.CurrentContainer.CurrentLayer, split);
+            Project.AddShape(Project.CurrentContainer.CurrentLayer, split);
 
             return true;
         }
@@ -3277,7 +3281,7 @@ namespace Core2D.Editor
 
                 var previous = layer.Shapes;
                 var next = source.ToImmutable();
-                _project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+                Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
                 layer.Shapes = next;
 
                 return group;
@@ -3296,7 +3300,7 @@ namespace Core2D.Editor
 
                 var previous = layer.Shapes;
                 var next = source.ToImmutable();
-                _project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+                Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
                 layer.Shapes = next;
             }
         }
@@ -3311,7 +3315,7 @@ namespace Core2D.Editor
 
                 var previous = layer.Shapes;
                 var next = source.ToImmutable();
-                _project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+                Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
                 layer.Shapes = next;
             }
         }
@@ -3323,7 +3327,7 @@ namespace Core2D.Editor
         /// <param name="name">The group name.</param>
         public XGroup Group(ImmutableHashSet<BaseShape> shapes, string name)
         {
-            var layer = _project?.CurrentContainer?.CurrentLayer;
+            var layer = Project?.CurrentContainer?.CurrentLayer;
             if (layer != null)
             {
                 return Group(layer, shapes, name);
@@ -3339,7 +3343,7 @@ namespace Core2D.Editor
         /// <param name="shapes">The selected shapes.</param>
         public bool Ungroup(BaseShape shape, ImmutableHashSet<BaseShape> shapes)
         {
-            var layer = _project?.CurrentContainer?.CurrentLayer;
+            var layer = Project?.CurrentContainer?.CurrentLayer;
             if (layer != null)
             {
                 if (shape != null && shape is XGroup)
@@ -3366,18 +3370,18 @@ namespace Core2D.Editor
         /// <param name="targetIndex">The target shape index.</param>
         private void Swap(BaseShape shape, int sourceIndex, int targetIndex)
         {
-            var layer = _project?.CurrentContainer?.CurrentLayer;
+            var layer = Project?.CurrentContainer?.CurrentLayer;
             if (layer?.Shapes != null)
             {
                 if (sourceIndex < targetIndex)
                 {
-                    _project.SwapShape(layer, shape, targetIndex + 1, sourceIndex);
+                    Project.SwapShape(layer, shape, targetIndex + 1, sourceIndex);
                 }
                 else
                 {
                     if (layer.Shapes.Length + 1 > sourceIndex + 1)
                     {
-                        _project.SwapShape(layer, shape, targetIndex, sourceIndex + 1);
+                        Project.SwapShape(layer, shape, targetIndex, sourceIndex + 1);
                     }
                 }
             }
@@ -3389,7 +3393,7 @@ namespace Core2D.Editor
         /// <param name="source">The source shape.</param>
         public void BringToFront(BaseShape source)
         {
-            var layer = _project?.CurrentContainer?.CurrentLayer;
+            var layer = Project?.CurrentContainer?.CurrentLayer;
             if (layer != null)
             {
                 var items = layer.Shapes;
@@ -3408,7 +3412,7 @@ namespace Core2D.Editor
         /// <param name="source">The source shape.</param>
         public void BringForward(BaseShape source)
         {
-            var layer = _project?.CurrentContainer?.CurrentLayer;
+            var layer = Project?.CurrentContainer?.CurrentLayer;
             if (layer != null)
             {
                 var items = layer.Shapes;
@@ -3427,7 +3431,7 @@ namespace Core2D.Editor
         /// <param name="source">The source shape.</param>
         public void SendBackward(BaseShape source)
         {
-            var layer = _project?.CurrentContainer?.CurrentLayer;
+            var layer = Project?.CurrentContainer?.CurrentLayer;
             if (layer != null)
             {
                 var items = layer.Shapes;
@@ -3446,7 +3450,7 @@ namespace Core2D.Editor
         /// <param name="source">The source shape.</param>
         public void SendToBack(BaseShape source)
         {
-            var layer = _project?.CurrentContainer?.CurrentLayer;
+            var layer = Project?.CurrentContainer?.CurrentLayer;
             if (layer != null)
             {
                 var items = layer.Shapes;
@@ -3482,7 +3486,7 @@ namespace Core2D.Editor
 
             var previous = new { DeltaX = -dx, DeltaY = -dy, Shapes = shapes };
             var next = new { DeltaX = dx, DeltaY = dy, Shapes = shapes };
-            _project?.History?.Snapshot(previous, next, (s) => MoveShapesBy(s.Shapes, s.DeltaX, s.DeltaY));
+            Project?.History?.Snapshot(previous, next, (s) => MoveShapesBy(s.Shapes, s.DeltaX, s.DeltaY));
         }
 
         /// <summary>
@@ -3496,7 +3500,7 @@ namespace Core2D.Editor
         {
             if (shape != null)
             {
-                switch (_project?.Options?.MoveMode)
+                switch (Project?.Options?.MoveMode)
                 {
                     case XMoveMode.Point:
                         {
@@ -3521,7 +3525,7 @@ namespace Core2D.Editor
 
             if (shapes != null)
             {
-                switch (_project?.Options?.MoveMode)
+                switch (Project?.Options?.MoveMode)
                 {
                     case XMoveMode.Point:
                         {

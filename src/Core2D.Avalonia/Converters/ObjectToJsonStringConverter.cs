@@ -3,7 +3,6 @@
 using Core2D.Interfaces;
 using Avalonia;
 using Avalonia.Markup;
-using Serializer.Newtonsoft;
 using System;
 using System.Globalization;
 
@@ -14,7 +13,7 @@ namespace Core2D.Avalonia.Converters
     /// </summary>
     public class ObjectToJsonStringConverter : IValueConverter
     {
-        private static ITextSerializer JsonSerializer = new NewtonsoftTextSerializer();
+        private static Lazy<IJsonSerializer> JsonSerializer = ServiceLocator.Instance.ResolveLazily<IJsonSerializer>();
 
         /// <summary>
         /// Gets an instance of a <see cref="ObjectToJsonStringConverter"/>.
@@ -35,7 +34,7 @@ namespace Core2D.Avalonia.Converters
             {
                 try
                 {
-                    return JsonSerializer?.Serialize(value);
+                    return JsonSerializer?.Value?.Serialize(value);
                 }
                 catch (Exception) { }
             }

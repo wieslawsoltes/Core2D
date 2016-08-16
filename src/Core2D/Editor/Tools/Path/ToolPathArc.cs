@@ -16,7 +16,6 @@ namespace Core2D.Editor.Tools.Path
     /// </summary>
     internal class ToolPathArc : ToolBase
     {
-        private ProjectEditor _editor;
         private ToolState _currentState = ToolState.None;
         private ToolPath _toolPath;
         private XPathArc _arc = new XPathArc();
@@ -28,12 +27,10 @@ namespace Core2D.Editor.Tools.Path
         /// <summary>
         /// Initialize new instance of <see cref="ToolPathArc"/> class.
         /// </summary>
-        /// <param name="editor">The current <see cref="ProjectEditor"/> object.</param>
         /// <param name="toolPath">The current <see cref="ToolPath"/> object.</param>
-        public ToolPathArc(ProjectEditor editor, ToolPath toolPath)
+        public ToolPathArc(ToolPath toolPath)
             : base()
         {
-            _editor = editor;
             _toolPath = toolPath;
         }
 
@@ -42,13 +39,13 @@ namespace Core2D.Editor.Tools.Path
         {
             base.LeftDown(x, y);
 
-            double sx = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, _editor.Project.Options.SnapX) : x;
-            double sy = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, _editor.Project.Options.SnapY) : y;
+            double sx = Editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, Editor.Project.Options.SnapX) : x;
+            double sy = Editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, Editor.Project.Options.SnapY) : y;
             switch (_currentState)
             {
                 case ToolState.None:
                     {
-                        _arc.Start = _editor.TryToGetConnectionPoint(sx, sy) ?? XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
+                        _arc.Start = Editor.TryToGetConnectionPoint(sx, sy) ?? XPoint.Create(sx, sy, Editor.Project.Options.PointShape);
                         if (!_toolPath._isInitialized)
                         {
                             _toolPath.InitializeWorkingPath(_arc.Start);
@@ -58,7 +55,7 @@ namespace Core2D.Editor.Tools.Path
                             _arc.Start = _toolPath.GetLastPathPoint();
                         }
 
-                        _arc.End = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
+                        _arc.End = XPoint.Create(sx, sy, Editor.Project.Options.PointShape);
                         _toolPath._context.ArcTo(
                             _arc.End,
                             XPathSize.Create(
@@ -67,29 +64,29 @@ namespace Core2D.Editor.Tools.Path
                             _defaultRotationAngle,
                             _defaultIsLargeArc,
                             _defaultSweepDirection,
-                            _editor.Project.Options.DefaultIsStroked,
-                            _editor.Project.Options.DefaultIsSmoothJoin);
-                        _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                            Editor.Project.Options.DefaultIsStroked,
+                            Editor.Project.Options.DefaultIsSmoothJoin);
+                        Editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         ToStateOne();
                         Move(null);
                         _currentState = ToolState.One;
-                        _editor.CancelAvailable = true;
+                        Editor.CancelAvailable = true;
                     }
                     break;
                 case ToolState.One:
                     {
                         _arc.End.X = sx;
                         _arc.End.Y = sy;
-                        if (_editor.Project.Options.TryToConnect)
+                        if (Editor.Project.Options.TryToConnect)
                         {
-                            var end = _editor.TryToGetConnectionPoint(sx, sy);
+                            var end = Editor.TryToGetConnectionPoint(sx, sy);
                             if (end != null)
                             {
                                 _arc.End = end;
                             }
                         }
                         _arc.Start = _arc.End;
-                        _arc.End = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
+                        _arc.End = XPoint.Create(sx, sy, Editor.Project.Options.PointShape);
                         _toolPath._context.ArcTo(
                             _arc.End,
                             XPathSize.Create(
@@ -98,9 +95,9 @@ namespace Core2D.Editor.Tools.Path
                             _defaultRotationAngle,
                             _defaultIsLargeArc,
                             _defaultSweepDirection,
-                            _editor.Project.Options.DefaultIsStroked,
-                            _editor.Project.Options.DefaultIsSmoothJoin);
-                        _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                            Editor.Project.Options.DefaultIsStroked,
+                            Editor.Project.Options.DefaultIsSmoothJoin);
+                        Editor.Project.CurrentContainer.WorkingLayer.Invalidate();
 
                         Move(null);
                         _currentState = ToolState.One;
@@ -122,20 +119,20 @@ namespace Core2D.Editor.Tools.Path
                     {
                         _toolPath.RemoveLastSegment<XArcSegment>();
 
-                        _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_toolPath._path);
+                        Editor.Project.CurrentContainer.WorkingLayer.Shapes = Editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_toolPath._path);
                         Remove();
                         if (_toolPath._path.Geometry.Figures.LastOrDefault().Segments.Length > 0)
                         {
                             Finalize(null);
-                            _editor.Project.AddShape(_editor.Project.CurrentContainer.CurrentLayer, _toolPath._path);
+                            Editor.Project.AddShape(Editor.Project.CurrentContainer.CurrentLayer, _toolPath._path);
                         }
                         else
                         {
-                            _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                            Editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         }
                         _toolPath.DeInitializeWorkingPath();
                         _currentState = ToolState.None;
-                        _editor.CancelAvailable = false;
+                        Editor.CancelAvailable = false;
                     }
                     break;
             }
@@ -146,23 +143,23 @@ namespace Core2D.Editor.Tools.Path
         {
             base.Move(x, y);
 
-            double sx = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, _editor.Project.Options.SnapX) : x;
-            double sy = _editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, _editor.Project.Options.SnapY) : y;
+            double sx = Editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, Editor.Project.Options.SnapX) : x;
+            double sy = Editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, Editor.Project.Options.SnapY) : y;
             switch (_currentState)
             {
                 case ToolState.None:
                     {
-                        if (_editor.Project.Options.TryToConnect)
+                        if (Editor.Project.Options.TryToConnect)
                         {
-                            _editor.TryToHoverShape(sx, sy);
+                            Editor.TryToHoverShape(sx, sy);
                         }
                     }
                     break;
                 case ToolState.One:
                     {
-                        if (_editor.Project.Options.TryToConnect)
+                        if (Editor.Project.Options.TryToConnect)
                         {
-                            _editor.TryToHoverShape(sx, sy);
+                            Editor.TryToHoverShape(sx, sy);
                         }
                         _arc.End.X = sx;
                         _arc.End.Y = sy;
@@ -171,7 +168,7 @@ namespace Core2D.Editor.Tools.Path
                         arc.Point = _arc.End;
                         arc.Size.Width = Abs(_arc.Start.X - _arc.End.X);
                         arc.Size.Height = Abs(_arc.Start.Y - _arc.End.Y);
-                        _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                        Editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         Move(null);
                     }
                     break;
@@ -184,10 +181,10 @@ namespace Core2D.Editor.Tools.Path
             base.ToStateOne();
 
             _selection = new LineSelection(
-                _editor.Project.CurrentContainer.HelperLayer,
+                Editor.Project.CurrentContainer.HelperLayer,
                 _arc,
-                _editor.Project.Options.HelperStyle,
-                _editor.Project.Options.PointShape);
+                Editor.Project.Options.HelperStyle,
+                Editor.Project.Options.PointShape);
 
             _selection.ToStateOne();
         }
