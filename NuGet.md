@@ -2,12 +2,12 @@
 
 ## Table of Contents
 
-1. [NuGet](https://github.com/Core2D/Core2D/NuGet.md#nuget)
-2. [NuGet Packages](https://github.com/Core2D/Core2D/NuGet.md#nuget-packages)
-3. [MyGet Packages](https://github.com/Core2D/Core2/NuGet.mdD#myget-packages)
-4. [Package Dependencies](https://github.com/Core2D/Core2D/NuGet.md#package-dependencies)
-5. [Package Sources](https://github.com/Core2D/Core2D/NuGet.md#package-sources)
-6. [Other Dependencies](https://github.com/Core2D/Core2D/NuGet.md#other-dependencies)
+1. [NuGet](NuGet.md#nuget)
+2. [NuGet Packages](NuGet.md#nuget-packages)
+3. [MyGet Packages](NuGet.md#myget-packages)
+4. [Package Dependencies](NuGet.md#package-dependencies)
+5. [Package Sources](NuGet.md#package-sources)
+6. [Other Dependencies](NuGet.md#other-dependencies)
 
 ## NuGet
 
