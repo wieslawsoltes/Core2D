@@ -7,7 +7,7 @@
              xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"
              xmlns:Project="clr-namespace:Core2D.Project;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D"
-             xmlns:renderer="clr-namespace:Renderer.Avalonia;assembly=Renderer.Avalonia"
+             xmlns:renderer="clr-namespace:Core2D.Avalonia.Renderer;assembly=Core2D.Avalonia"
              xmlns:views="clr-namespace:Core2D.Avalonia.Views;assembly=Core2D.Avalonia"
              Design.DataContext="{Static Designer:DesignerContext.Editor}"
              Design.Width="1200" Design.Height="540">

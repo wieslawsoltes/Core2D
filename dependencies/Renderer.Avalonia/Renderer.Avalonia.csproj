@@ -20,7 +20,6 @@
   <ItemGroup>
     <Compile Include="AvaloniaRenderer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RendererOptions.cs" />
     <Compile Include="XPathGeometryConverter.cs" />
   </ItemGroup>
   <ItemGroup>

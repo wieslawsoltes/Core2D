@@ -4,34 +4,34 @@ using Avalonia;
 using Avalonia.Data;
 using Core2D.Renderer;
 
-namespace Renderer.Avalonia
+namespace Core2D.Avalonia.Renderer
 {
     /// <summary>
-    /// 
+    /// Shape renderer avalonia attached properties.
     /// </summary>
     public class RendererOptions
     {
         /// <summary>
-        /// 
+        /// Renderer options attached property.
         /// </summary>
         public static readonly AttachedProperty<ShapeRenderer> RendererProperty =
             AvaloniaProperty.RegisterAttached<RendererOptions, AvaloniaObject, ShapeRenderer>(nameof(Renderer), null, true, BindingMode.TwoWay);
 
         /// <summary>
-        /// 
+        /// Gets renderer options attached property.
         /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
+        /// <param name="obj">The avalonia object.</param>
+        /// <returns>The shape renderer property.</returns>
         public static ShapeRenderer GetRenderer(AvaloniaObject obj)
         {
             return obj.GetValue(RendererProperty);
         }
 
         /// <summary>
-        /// 
+        /// Sets renderer options attached property.
         /// </summary>
-        /// <param name="obj"></param>
-        /// <param name="value"></param>
+        /// <param name="obj">The avalonia object.</param>
+        /// <param name="value">The shape render value.</param>
         public static void SetRenderer(AvaloniaObject obj, ShapeRenderer value)
         {
             obj.SetValue(RendererProperty, value);

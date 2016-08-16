@@ -192,6 +192,7 @@
     <Compile Include="Interactions\Behaviors\ToggleIsExpandedOnDoubleTappedBehavior.cs" />
     <Compile Include="Presenters\CachedContentPresenter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Renderer\RendererOptions.cs" />
     <Compile Include="Views\BrowserViewControl.xaml.cs">
       <DependentUpon>BrowserViewControl.xaml</DependentUpon>
     </Compile>
