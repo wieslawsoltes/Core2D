@@ -41,6 +41,19 @@ namespace Core2D.Avalonia.Droid
         {
             base.OnCreate(savedInstanceState);
 
+            RegisterServices();
+
+            using (var log = ServiceLocator.Instance.Resolve<ILog>())
+            {
+                var app = A.Application.Current as App ?? new App();
+                ServiceLocator.Instance.RegisterSingleton<IEditorApplication>(() => app);
+
+                app.Start();
+            }
+        }
+
+        private static void RegisterServices()
+        {
             ServiceLocator.Instance.RegisterSingleton<ITextFieldReader<ProjectEditor>>(() => new ProjectEditor());
             ServiceLocator.Instance.RegisterSingleton<ILog>(() => new TraceLog());
             ServiceLocator.Instance.RegisterSingleton<CommandManager>(() => new CommandManager());
@@ -62,14 +75,6 @@ namespace Core2D.Avalonia.Droid
             ServiceLocator.Instance.RegisterSingleton<ITextFieldReader<XDatabase>>(() => new CsvHelperReader());
             ServiceLocator.Instance.RegisterSingleton<ITextFieldWriter<XDatabase>>(() => new CsvHelperWriter());
             ServiceLocator.Instance.RegisterSingleton<Windows.MainWindow>(() => new Windows.MainWindow());
-
-            using (var log = ServiceLocator.Instance.Resolve<ILog>())
-            {
-                var app = A.Application.Current as App ?? new App();
-                ServiceLocator.Instance.RegisterSingleton<IEditorApplication>(() => app);
-
-                app.Start();
-            }
         }
     }
 }

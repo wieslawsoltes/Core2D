@@ -54,11 +54,19 @@ namespace Core2D.Avalonia
         {
             if (Design.IsDesignMode)
             {
-                ServiceLocator.Instance.RegisterSingleton<ProjectEditor>(() => new ProjectEditor());
-                ServiceLocator.Instance.RegisterSingleton<CommandManager>(() => new CommandManager());
-                ServiceLocator.Instance.RegisterSingleton<IProjectFactory>(() => new ProjectFactory());
+                RegisterDesignerServices();
                 DesignerContext.InitializeContext();
             }
+        }
+
+        /// <summary>
+        /// Register designer services.
+        /// </summary>
+        static void RegisterDesignerServices()
+        {
+            ServiceLocator.Instance.RegisterSingleton<ProjectEditor>(() => new ProjectEditor());
+            ServiceLocator.Instance.RegisterSingleton<CommandManager>(() => new CommandManager());
+            ServiceLocator.Instance.RegisterSingleton<IProjectFactory>(() => new ProjectFactory());
         }
 
         /// <summary>

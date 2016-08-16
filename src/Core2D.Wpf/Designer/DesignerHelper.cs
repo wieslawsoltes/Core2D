@@ -27,15 +27,23 @@ namespace Core2D.Wpf.Designer
         {
             if (DesignerProperties.GetIsInDesignMode(new DependencyObject()))
             {
-                ServiceLocator.Instance.RegisterSingleton<ProjectEditor>(() => new ProjectEditor());
-                ServiceLocator.Instance.RegisterSingleton<CommandManager>(() => new DesignerCommandManager());
-                ServiceLocator.Instance.RegisterSingleton<ShapeRenderer[]>(() => new[] { new WpfRenderer() });
-                ServiceLocator.Instance.RegisterSingleton<IProjectFactory>(() => new ProjectFactory());
-                ServiceLocator.Instance.RegisterSingleton<ITextClipboard>(() => new WpfTextClipboard());
-                ServiceLocator.Instance.RegisterSingleton<IJsonSerializer>(() => new NewtonsoftJsonSerializer());
-                ServiceLocator.Instance.RegisterSingleton<IXamlSerializer>(() => new PortableXamlSerializer());
+                RegisterServices();
                 InitializeContext();
             }
+        }
+
+        /// <summary>
+        /// Register designer services.
+        /// </summary>
+        static void RegisterServices()
+        {
+            ServiceLocator.Instance.RegisterSingleton<ProjectEditor>(() => new ProjectEditor());
+            ServiceLocator.Instance.RegisterSingleton<CommandManager>(() => new DesignerCommandManager());
+            ServiceLocator.Instance.RegisterSingleton<ShapeRenderer[]>(() => new[] { new WpfRenderer() });
+            ServiceLocator.Instance.RegisterSingleton<IProjectFactory>(() => new ProjectFactory());
+            ServiceLocator.Instance.RegisterSingleton<ITextClipboard>(() => new WpfTextClipboard());
+            ServiceLocator.Instance.RegisterSingleton<IJsonSerializer>(() => new NewtonsoftJsonSerializer());
+            ServiceLocator.Instance.RegisterSingleton<IXamlSerializer>(() => new PortableXamlSerializer());
         }
     }
 }

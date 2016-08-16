@@ -43,11 +43,24 @@ namespace Core2D.Wpf
         {
             base.OnStartup(e);
 
+            RegisterServices();
+
+            using (var log = ServiceLocator.Instance.Resolve<ILog>())
+            {
+                Start();
+            }
+        }
+
+        /// <summary>
+        /// Register application services.
+        /// </summary>
+        private void RegisterServices()
+        {
             ServiceLocator.Instance.RegisterSingleton<ProjectEditor>(() => new ProjectEditor());
             ServiceLocator.Instance.RegisterSingleton<IEditorApplication>(() => this);
             ServiceLocator.Instance.RegisterSingleton<ILog>(() => new TraceLog());
             ServiceLocator.Instance.RegisterSingleton<CommandManager>(() => new WpfCommandManager());
-            ServiceLocator.Instance.RegisterSingleton<ShapeRenderer[]>(() => new [] { new WpfRenderer() });
+            ServiceLocator.Instance.RegisterSingleton<ShapeRenderer[]>(() => new[] { new WpfRenderer() });
             ServiceLocator.Instance.RegisterSingleton<IFileSystem>(() => new DotNetFxFileSystem());
             ServiceLocator.Instance.RegisterSingleton<IProjectFactory>(() => new ProjectFactory());
             ServiceLocator.Instance.RegisterSingleton<ITextClipboard>(() => new WpfTextClipboard());
@@ -67,11 +80,6 @@ namespace Core2D.Wpf
             ServiceLocator.Instance.RegisterSingleton<ITextFieldReader<XDatabase>>(() => new CsvHelperReader());
             ServiceLocator.Instance.RegisterSingleton<ITextFieldWriter<XDatabase>>(() => new CsvHelperWriter());
             ServiceLocator.Instance.RegisterSingleton<Windows.MainWindow>(() => new Windows.MainWindow());
-
-            using (var log = ServiceLocator.Instance.Resolve<ILog>())
-            {
-                Start();
-            }
         }
 
         /// <summary>

@@ -39,6 +39,26 @@ namespace Core2D.Avalonia.Direct2D
         {
             InitializeLogging();
 
+            RegisterServices();
+
+            using (var log = ServiceLocator.Instance.Resolve<ILog>())
+            {
+                var app = new App();
+                ServiceLocator.Instance.RegisterSingleton<IEditorApplication>(() => app);
+
+                AppBuilder.Configure(app)
+                    .UseWin32()
+                    .UseDirect2D1()
+                    .SetupWithoutStarting();
+                app.Start();
+            }
+        }
+
+        /// <summary>
+        /// Register application services.
+        /// </summary>
+        private static void RegisterServices()
+        {
             ServiceLocator.Instance.RegisterSingleton<ProjectEditor>(() => new ProjectEditor());
             ServiceLocator.Instance.RegisterSingleton<ILog>(() => new TraceLog());
             ServiceLocator.Instance.RegisterSingleton<CommandManager>(() => new CommandManager());
@@ -69,18 +89,6 @@ namespace Core2D.Avalonia.Direct2D
             ServiceLocator.Instance.RegisterSingleton<ITextFieldReader<XDatabase>>(() => new CsvHelperReader());
             ServiceLocator.Instance.RegisterSingleton<ITextFieldWriter<XDatabase>>(() => new CsvHelperWriter());
             ServiceLocator.Instance.RegisterSingleton<Windows.MainWindow>(() => new Windows.MainWindow());
-
-            using (var log = ServiceLocator.Instance.Resolve<ILog>())
-            {
-                var app = new App();
-                ServiceLocator.Instance.RegisterSingleton<IEditorApplication>(() => app);
-
-                AppBuilder.Configure(app)
-                    .UseWin32()
-                    .UseDirect2D1()
-                    .SetupWithoutStarting();
-                app.Start();
-            }
         }
 
         /// <summary>
