@@ -48,7 +48,7 @@
     <ContentControl Content="{Binding CurrentView, Mode=TwoWay}">
         <ContentControl.Resources>
             <DataTemplate DataType="{x:Type Views:DashboardView}">
-                <Grid FocusVisualStyle="{x:Null}" DataContext="{Binding Context, Mode=TwoWay}">
+                <Grid FocusVisualStyle="{x:Null}" DataContext="{Binding Context}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="3"/>
@@ -60,7 +60,7 @@
                 </Grid>
             </DataTemplate>
             <DataTemplate DataType="{x:Type Views:EditorView}">
-                <Grid FocusVisualStyle="{x:Null}" DataContext="{Binding Context, Mode=TwoWay}">
+                <Grid FocusVisualStyle="{x:Null}" DataContext="{Binding Context}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="3"/>
