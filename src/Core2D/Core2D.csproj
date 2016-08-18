@@ -78,9 +78,7 @@
     <Compile Include="Editor\Factories\IShapeFactory.cs" />
     <Compile Include="Editor\Factories\ProjectFactory.cs" />
     <Compile Include="Editor\Factories\ShapeFactory.cs" />
-    <Compile Include="Editor\Input\Command.cs" />
     <Compile Include="Editor\Input\Command`1.cs" />
-    <Compile Include="Editor\Input\CoreCommand`1.cs" />
     <Compile Include="Editor\ProjectObserver.cs" />
     <Compile Include="Editor\PathTool.cs" />
     <Compile Include="Editor\ProjectExtensions.cs" />
