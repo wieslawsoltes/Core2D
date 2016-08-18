@@ -21,6 +21,19 @@ namespace Core2D.Editor
         }
 
         /// <summary>
+        /// Resolve the instance of registered type <typeparamref name="R"/>.
+        /// </summary>
+        /// <typeparam name="T">The type of object that is being initialized.</typeparam>
+        /// <typeparam name="R">The type of object that is transformed after initialized.</typeparam>
+        /// <param name="serviceProvider">The service provider instance.</param>
+        /// <param name="transform">The method to transform input type to return type.</param>
+        /// <returns>The new instance of type <typeparamref name="R"/>.</returns>
+        public static R GetService<T, R>(this IServiceProvider serviceProvider, Func<T, R> transform)
+        {
+            return transform((T)serviceProvider.GetService(typeof(T)));
+        }
+
+        /// <summary>
         /// Creates <see cref="Lazy{T}"/> for provided type <typeparamref name="T"/> to resolve instance of registered type <typeparamref name="T"/> lazily.
         /// </summary>
         /// <typeparam name="T">The type of object that is being lazily initialized.</typeparam>
