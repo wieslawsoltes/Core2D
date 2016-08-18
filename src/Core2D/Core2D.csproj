@@ -31,6 +31,7 @@
     <Compile Include="Editor\Interfaces\IMainView.cs" />
     <Compile Include="Editor\ProjectEditor.Model.cs" />
     <Compile Include="Editor\ServiceProviderExtensions.cs" />
+    <Compile Include="Editor\Tools\Path\PathToolMove.cs" />
     <Compile Include="Editor\Tools\Path\Shapes\XPathArc.cs" />
     <Compile Include="Editor\Tools\Path\Shapes\XPathCubicBezier.cs" />
     <Compile Include="Editor\Tools\Path\Shapes\XPathLine.cs" />
