@@ -22,28 +22,28 @@
     </Window.Title>
     <Window.KeyBindings>
         <!-- File -->
-        <KeyBinding Command="{Static Editor:Commands.NewCommand}" CommandParameter="{Binding}" Gesture="Ctrl+N"/>
-        <KeyBinding Command="{Static Editor:Commands.OpenCommand}" Gesture="Ctrl+O"/>
-        <KeyBinding Command="{Static Editor:Commands.CloseCommand}" Gesture="Ctrl+F4"/>
-        <KeyBinding Command="{Static Editor:Commands.SaveCommand}" Gesture="Ctrl+S"/>
-        <KeyBinding Command="{Static Editor:Commands.SaveAsCommand}" Gesture="Ctrl+Shift+S"/>
-        <KeyBinding Command="{Static Editor:Commands.ImportXamlCommand}" Gesture="Ctrl+Shift+X"/>
-        <KeyBinding Command="{Static Editor:Commands.ImportJsonCommand}" Gesture="Ctrl+Shift+J"/>
-        <KeyBinding Command="{Static Editor:Commands.ExportCommand}" Gesture="Ctrl+E"/>
-        <KeyBinding Command="{Static Editor:Commands.ExitCommand}" Gesture="Alt+F4"/>
+        <KeyBinding Command="{Static Editor:ProjectEditorCommands.NewCommand}" CommandParameter="{Binding}" Gesture="Ctrl+N"/>
+        <KeyBinding Command="{Static Editor:ProjectEditorCommands.OpenCommand}" Gesture="Ctrl+O"/>
+        <KeyBinding Command="{Static Editor:ProjectEditorCommands.CloseCommand}" Gesture="Ctrl+F4"/>
+        <KeyBinding Command="{Static Editor:ProjectEditorCommands.SaveCommand}" Gesture="Ctrl+S"/>
+        <KeyBinding Command="{Static Editor:ProjectEditorCommands.SaveAsCommand}" Gesture="Ctrl+Shift+S"/>
+        <KeyBinding Command="{Static Editor:ProjectEditorCommands.ImportXamlCommand}" Gesture="Ctrl+Shift+X"/>
+        <KeyBinding Command="{Static Editor:ProjectEditorCommands.ImportJsonCommand}" Gesture="Ctrl+Shift+J"/>
+        <KeyBinding Command="{Static Editor:ProjectEditorCommands.ExportCommand}" Gesture="Ctrl+E"/>
+        <KeyBinding Command="{Static Editor:ProjectEditorCommands.ExitCommand}" Gesture="Alt+F4"/>
         <!-- Edit -->
-        <KeyBinding Command="{Static Editor:Commands.UndoCommand}" Gesture="Ctrl+Z"/>
-        <KeyBinding Command="{Static Editor:Commands.RedoCommand}" Gesture="Ctrl+Y"/>
-        <KeyBinding Command="{Static Editor:Commands.CopyAsEmfCommand}" Gesture="Ctrl+Shift+C"/>
-        <KeyBinding Command="{Static Editor:Commands.CutCommand}" Gesture="Ctrl+X"/>
-        <KeyBinding Command="{Static Editor:Commands.CopyCommand}" Gesture="Ctrl+C"/>
-        <KeyBinding Command="{Static Editor:Commands.PasteCommand}" Gesture="Ctrl+V"/>
-        <KeyBinding Command="{Static Editor:Commands.SelectAllCommand}" Gesture="Ctrl+A"/>
-        <KeyBinding Command="{Static Editor:Commands.GroupCommand}" Gesture="Ctrl+G"/>
-        <KeyBinding Command="{Static Editor:Commands.UngroupCommand}" Gesture="Ctrl+U"/>
+        <KeyBinding Command="{Static Editor:ProjectEditorCommands.UndoCommand}" Gesture="Ctrl+Z"/>
+        <KeyBinding Command="{Static Editor:ProjectEditorCommands.RedoCommand}" Gesture="Ctrl+Y"/>
+        <KeyBinding Command="{Static Editor:ProjectEditorCommands.CopyAsEmfCommand}" Gesture="Ctrl+Shift+C"/>
+        <KeyBinding Command="{Static Editor:ProjectEditorCommands.CutCommand}" Gesture="Ctrl+X"/>
+        <KeyBinding Command="{Static Editor:ProjectEditorCommands.CopyCommand}" Gesture="Ctrl+C"/>
+        <KeyBinding Command="{Static Editor:ProjectEditorCommands.PasteCommand}" Gesture="Ctrl+V"/>
+        <KeyBinding Command="{Static Editor:ProjectEditorCommands.SelectAllCommand}" Gesture="Ctrl+A"/>
+        <KeyBinding Command="{Static Editor:ProjectEditorCommands.GroupCommand}" Gesture="Ctrl+G"/>
+        <KeyBinding Command="{Static Editor:ProjectEditorCommands.UngroupCommand}" Gesture="Ctrl+U"/>
         <!-- View -->
-        <KeyBinding Command="{Static Editor:Commands.ObjectBrowserCommand}" Gesture="Ctrl+J"/>
-        <KeyBinding Command="{Static Editor:Commands.DocumentViewerCommand}" Gesture="Ctrl+D"/>
+        <KeyBinding Command="{Static Editor:ProjectEditorCommands.ObjectBrowserCommand}" Gesture="Ctrl+J"/>
+        <KeyBinding Command="{Static Editor:ProjectEditorCommands.DocumentViewerCommand}" Gesture="Ctrl+D"/>
     </Window.KeyBindings>
     <Carousel Items="{Binding Views}" SelectedItem="{Binding CurrentView, Mode=TwoWay}" IsVirtualized="False">
         <Carousel.DataTemplates>

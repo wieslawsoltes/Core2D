@@ -13,8 +13,8 @@
              Design.Width="250" Design.Height="400">
     <Grid RowDefinitions="Auto,Auto,*">
         <Menu Grid.Row="0" HorizontalAlignment="Right">
-            <MenuItem Header="+" Command="{Static Editor:Commands.AddDatabaseCommand}"/>
-            <MenuItem Header="-" Command="{Static Editor:Commands.RemoveDatabaseCommand}" CommandParameter="{Binding CurrentDatabase}" IsVisible="{Binding CurrentDatabase, Converter={Static converters:IsNotNullConverter.Instance}}"/>
+            <MenuItem Header="+" Command="{Static Editor:ProjectEditorCommands.AddDatabaseCommand}"/>
+            <MenuItem Header="-" Command="{Static Editor:ProjectEditorCommands.RemoveDatabaseCommand}" CommandParameter="{Binding CurrentDatabase}" IsVisible="{Binding CurrentDatabase, Converter={Static converters:IsNotNullConverter.Instance}}"/>
         </Menu>
         <DropDown Items="{Binding Databases}" SelectedItem="{Binding CurrentDatabase, Mode=TwoWay}" Grid.Row="1" Classes="default" IsVisible="{Binding CurrentDatabase, Converter={Static converters:IsNotNullConverter.Instance}}">
             <DropDown.DataTemplates>

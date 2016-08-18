@@ -15,7 +15,7 @@
         <TabItem Header="Shapes" Classes="property">
             <Grid RowDefinitions="Auto,*,Auto">
                 <Menu Grid.Row="0" HorizontalAlignment="Right">
-                    <MenuItem Header="-" Command="{Static Editor:Commands.RemoveShapeCommand}" CommandParameter="{Binding CurrentShape}" IsVisible="{Binding CurrentShape, Converter={Static converters:IsNotNullConverter.Instance}}"/>
+                    <MenuItem Header="-" Command="{Static Editor:ProjectEditorCommands.RemoveShapeCommand}" CommandParameter="{Binding CurrentShape}" IsVisible="{Binding CurrentShape, Converter={Static converters:IsNotNullConverter.Instance}}"/>
                 </Menu>
                 <ListBox Name="shapes" Items="{Binding CurrentLayer.Shapes}" SelectedItem="{Binding CurrentShape, Mode=TwoWay}" VirtualizationMode="Simple" Classes="default" Grid.Row="1">
                     <ListBox.ItemsPanel>
@@ -24,14 +24,14 @@
                         </ItemsPanelTemplate>
                     </ListBox.ItemsPanel>
                     <ListBox.KeyBindings>
-                        <KeyBinding Command="{Static Editor:Commands.RemoveShapeCommand}" CommandParameter="{Binding #shapes.SelectedItem}" Gesture="Delete"/>
+                        <KeyBinding Command="{Static Editor:ProjectEditorCommands.RemoveShapeCommand}" CommandParameter="{Binding #shapes.SelectedItem}" Gesture="Delete"/>
                     </ListBox.KeyBindings>
                     <ListBox.DataTemplates>
                         <DataTemplate DataType="Shape:BaseShape">
                             <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="list">
                                 <TextBlock.ContextMenu>
                                     <ContextMenu Classes="default">
-                                        <MenuItem Header="_Delete" Command="{Static Editor:Commands.RemoveShapeCommand}" CommandParameter="{Binding}"/>
+                                        <MenuItem Header="_Delete" Command="{Static Editor:ProjectEditorCommands.RemoveShapeCommand}" CommandParameter="{Binding}"/>
                                     </ContextMenu>
                                 </TextBlock.ContextMenu>
                             </TextBlock>

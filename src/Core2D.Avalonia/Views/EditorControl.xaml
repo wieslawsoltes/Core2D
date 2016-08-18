@@ -109,27 +109,27 @@
                 <StackPanel DockPanel.Dock="Top">
                     <TabStrip Name="pages" Items="{Binding Project.CurrentDocument.Pages}" SelectedItem="{Binding Project.CurrentContainer, Mode=TwoWay}" Focusable="false">
                         <TabStrip.KeyBindings>
-                            <KeyBinding Command="{Static Editor:Commands.NewCommand}" CommandParameter="{Binding #pages.SelectedItem}" Gesture="Ctrl+N"/>
-                            <KeyBinding Command="{Static Editor:Commands.CutCommand}" CommandParameter="{Binding #pages.SelectedItem}" Gesture="Ctrl+X"/>
-                            <KeyBinding Command="{Static Editor:Commands.CopyCommand}" CommandParameter="{Binding #pages.SelectedItem}" Gesture="Ctrl+C"/>
-                            <KeyBinding Command="{Static Editor:Commands.PasteCommand}" CommandParameter="{Binding #pages.SelectedItem}" Gesture="Ctrl+V"/>
-                            <KeyBinding Command="{Static Editor:Commands.DeleteCommand}" CommandParameter="{Binding #pages.SelectedItem}" Gesture="Delete"/>
-                            <KeyBinding Command="{Static Editor:Commands.ExportCommand}" CommandParameter="{Binding #pages.SelectedItem}" Gesture="Ctrl+E"/>
+                            <KeyBinding Command="{Static Editor:ProjectEditorCommands.NewCommand}" CommandParameter="{Binding #pages.SelectedItem}" Gesture="Ctrl+N"/>
+                            <KeyBinding Command="{Static Editor:ProjectEditorCommands.CutCommand}" CommandParameter="{Binding #pages.SelectedItem}" Gesture="Ctrl+X"/>
+                            <KeyBinding Command="{Static Editor:ProjectEditorCommands.CopyCommand}" CommandParameter="{Binding #pages.SelectedItem}" Gesture="Ctrl+C"/>
+                            <KeyBinding Command="{Static Editor:ProjectEditorCommands.PasteCommand}" CommandParameter="{Binding #pages.SelectedItem}" Gesture="Ctrl+V"/>
+                            <KeyBinding Command="{Static Editor:ProjectEditorCommands.DeleteCommand}" CommandParameter="{Binding #pages.SelectedItem}" Gesture="Delete"/>
+                            <KeyBinding Command="{Static Editor:ProjectEditorCommands.ExportCommand}" CommandParameter="{Binding #pages.SelectedItem}" Gesture="Ctrl+E"/>
                         </TabStrip.KeyBindings>
                         <TabStrip.ContextMenu>
                             <ContextMenu DataContext="{Binding Project.CurrentDocument}">
-                                <MenuItem Header="_Add Page" Command="{Static Editor:Commands.AddPageCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                <MenuItem Header="_Add Page" Command="{Static Editor:ProjectEditorCommands.AddPageCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                                 <Separator/>
-                                <MenuItem Header="Insert Document Bef_ore" Command="{Static Editor:Commands.InsertDocumentBeforeCommand}" CommandParameter="{Binding Mode=OneWay}"/>
-                                <MenuItem Header="Insert Document Aft_er" Command="{Static Editor:Commands.InsertDocumentAfterCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                <MenuItem Header="Insert Document Bef_ore" Command="{Static Editor:ProjectEditorCommands.InsertDocumentBeforeCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                <MenuItem Header="Insert Document Aft_er" Command="{Static Editor:ProjectEditorCommands.InsertDocumentAfterCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                                 <Separator/>
-                                <MenuItem Header="Cu_t" Command="{Static Editor:Commands.CutCommand}" CommandParameter="{Binding Mode=OneWay}"/>
-                                <MenuItem Header="_Copy" Command="{Static Editor:Commands.CopyCommand}" CommandParameter="{Binding Mode=OneWay}"/>
-                                <MenuItem Header="_Paste" Command="{Static Editor:Commands.PasteCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                <MenuItem Header="Cu_t" Command="{Static Editor:ProjectEditorCommands.CutCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                <MenuItem Header="_Copy" Command="{Static Editor:ProjectEditorCommands.CopyCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                <MenuItem Header="_Paste" Command="{Static Editor:ProjectEditorCommands.PasteCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                                 <Separator/>
-                                <MenuItem Header="_Delete" Command="{Static Editor:Commands.DeleteCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                <MenuItem Header="_Delete" Command="{Static Editor:ProjectEditorCommands.DeleteCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                                 <Separator/>
-                                <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                <MenuItem Header="E_xport" Command="{Static Editor:ProjectEditorCommands.ExportCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                             </ContextMenu>
                         </TabStrip.ContextMenu>
                         <TabStrip.ItemsPanel>
@@ -168,7 +168,7 @@
                                                 <MenuItem.Styles>
                                                     <Style Selector="MenuItem">
                                                         <Setter Property="Header" Value="{Binding Name}"/>
-                                                        <Setter Property="Command" Value="{Static Editor:Commands.ApplyTemplateCommand}"/>
+                                                        <Setter Property="Command" Value="{Static Editor:ProjectEditorCommands.ApplyTemplateCommand}"/>
                                                         <Setter Property="CommandParameter" Value="{Binding}"/>
                                                         <Setter Property="Foreground" Value="{StyleResource ThemeForegroundBrush}"/>
                                                         <Setter Property="Icon">
@@ -190,16 +190,16 @@
                                                 </MenuItem.Styles>
                                             </MenuItem>
                                             <Separator/>
-                                            <MenuItem Header="Insert Page Bef_ore" Command="{Static Editor:Commands.InsertPageBeforeCommand}" CommandParameter="{Binding Mode=OneWay}"/>
-                                            <MenuItem Header="Insert Page Aft_er" Command="{Static Editor:Commands.InsertPageAfterCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                            <MenuItem Header="Insert Page Bef_ore" Command="{Static Editor:ProjectEditorCommands.InsertPageBeforeCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                            <MenuItem Header="Insert Page Aft_er" Command="{Static Editor:ProjectEditorCommands.InsertPageAfterCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                                             <Separator/>
-                                            <MenuItem Header="Cu_t" Command="{Static Editor:Commands.CutCommand}" CommandParameter="{Binding Mode=OneWay}"/>
-                                            <MenuItem Header="_Copy" Command="{Static Editor:Commands.CopyCommand}" CommandParameter="{Binding Mode=OneWay}"/>
-                                            <MenuItem Header="_Paste" Command="{Static Editor:Commands.PasteCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                            <MenuItem Header="Cu_t" Command="{Static Editor:ProjectEditorCommands.CutCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                            <MenuItem Header="_Copy" Command="{Static Editor:ProjectEditorCommands.CopyCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                            <MenuItem Header="_Paste" Command="{Static Editor:ProjectEditorCommands.PasteCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                                             <Separator/>
-                                            <MenuItem Header="_Delete" Command="{Static Editor:Commands.DeleteCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                            <MenuItem Header="_Delete" Command="{Static Editor:ProjectEditorCommands.DeleteCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                                             <Separator/>
-                                            <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                            <MenuItem Header="E_xport" Command="{Static Editor:ProjectEditorCommands.ExportCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                                         </ContextMenu>
                                     </TextBlock.ContextMenu>
                                 </TextBlock>
@@ -312,8 +312,8 @@
                     </DropDown>
                 </WrapPanel>
                 <WrapPanel Name="zoomPanel">
-                    <Button Content="Reset" Classes="autofit" Command="{Static Editor:Commands.ZoomResetCommand}"/>
-                    <Button Content="AutoFit" Classes="autofit" Command="{Static Editor:Commands.ZoomAutoFitCommand}"/>
+                    <Button Content="Reset" Classes="autofit" Command="{Static Editor:ProjectEditorCommands.ZoomResetCommand}"/>
+                    <Button Content="AutoFit" Classes="autofit" Command="{Static Editor:ProjectEditorCommands.ZoomAutoFitCommand}"/>
                     <DropDown Classes="autofit" Items="{Static paz:ZoomBorder.AutoFitModes}" SelectedItem="{Binding #zoomBorder.AutoFitMode, Mode=TwoWay}"/>
                     <TextBox Classes="autofit" Text="{Binding #zoomBorder.ZoomSpeed, Mode=TwoWay}" Width="50"/>
                 </WrapPanel>
