@@ -68,7 +68,6 @@
     <Compile Include="Data\Database\XValue.cs" />
     <Compile Include="Editor\Bounds\ConvexHullBounds.cs" />
     <Compile Include="Editor\Bounds\ShapeHitTestSelection.cs" />
-    <Compile Include="Editor\Commands.cs" />
     <Compile Include="Editor\Constants.cs" />
     <Compile Include="Editor\Designer\DesignerContext.cs" />
     <Compile Include="Editor\ProjectEditor.Impl.cs" />
