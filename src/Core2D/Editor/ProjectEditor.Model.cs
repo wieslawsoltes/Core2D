@@ -5,7 +5,7 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Core2D.Data.Database;
 using Core2D.Editor.Factories;
-using Core2D.Editor.Interfaces;
+using Core2D.Editor.Views.Interfaces;
 using Core2D.Editor.Recent;
 using Core2D.Editor.Tools;
 using Core2D.Editor.Tools.Path;

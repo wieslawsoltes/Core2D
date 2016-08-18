@@ -9,7 +9,7 @@ using Core2D.Collections;
 using Core2D.Data;
 using Core2D.Data.Database;
 using Core2D.Editor.Bounds;
-using Core2D.Editor.Interfaces;
+using Core2D.Editor.Views.Interfaces;
 using Core2D.Editor.Recent;
 using Core2D.Editor.Tools;
 using Core2D.Editor.Tools.Path;

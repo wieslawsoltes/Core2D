@@ -27,7 +27,7 @@
     <Compile Include="Editor\Bounds\LineBounds.cs" />
     <Compile Include="Editor\Bounds\RectangleBounds.cs" />
     <Compile Include="Editor\Bounds\ShapeHitTestPoint.cs" />
-    <Compile Include="Editor\Interfaces\IMainView.cs" />
+    <Compile Include="Editor\Views\Interfaces\IMainView.cs" />
     <Compile Include="Editor\ProjectEditorCommands.cs" />
     <Compile Include="Editor\ProjectEditor.Model.cs" />
     <Compile Include="Editor\ServiceProviderExtensions.cs" />
@@ -57,7 +57,7 @@
     <Compile Include="Editor\Views\EditorView.cs" />
     <Compile Include="Interfaces\IProjectExporter.cs" />
     <Compile Include="Interfaces\IXamlSerializer.cs" />
-    <Compile Include="Editor\Interfaces\IView.cs" />
+    <Compile Include="Editor\Views\Interfaces\IView.cs" />
     <Compile Include="ObservableObject.cs" />
     <Compile Include="ObservableResource.cs" />
     <Compile Include="Data\Database\XColumn.cs" />
