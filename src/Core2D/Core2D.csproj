@@ -29,6 +29,7 @@
     <Compile Include="Editor\Bounds\RectangleBounds.cs" />
     <Compile Include="Editor\Bounds\ShapeHitTestPoint.cs" />
     <Compile Include="Editor\Interfaces\IMainView.cs" />
+    <Compile Include="Editor\ProjectEditorCommands.cs" />
     <Compile Include="Editor\ProjectEditor.Model.cs" />
     <Compile Include="Editor\ServiceProviderExtensions.cs" />
     <Compile Include="Editor\Tools\Path\PathToolMove.cs" />
