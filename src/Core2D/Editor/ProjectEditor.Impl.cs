@@ -9,7 +9,10 @@ using Core2D.Collections;
 using Core2D.Data;
 using Core2D.Data.Database;
 using Core2D.Editor.Bounds;
+using Core2D.Editor.Interfaces;
 using Core2D.Editor.Recent;
+using Core2D.Editor.Tools;
+using Core2D.Editor.Tools.Path;
 using Core2D.History;
 using Core2D.Interfaces;
 using Core2D.Math;
@@ -169,7 +172,7 @@ namespace Core2D.Editor
         {
             OnUnload();
             OnLoad(ProjectFactory?.GetProject() ?? XProject.Create(), string.Empty);
-            OnChangeCurrentView(_editorView);
+            OnChangeCurrentView(Views.FirstOrDefault(view => view.Name == "Editor"));
             Invalidate?.Invoke();
         }
 
@@ -213,7 +216,7 @@ namespace Core2D.Editor
                     OnUnload();
                     OnLoad(project, path);
                     OnAddRecent(path, project.Name);
-                    OnChangeCurrentView(_editorView);
+                    OnChangeCurrentView(Views.FirstOrDefault(view => view.Name == "Editor"));
                 }
             }
             catch (Exception ex)
@@ -227,7 +230,7 @@ namespace Core2D.Editor
         /// </summary>
         public void OnClose()
         {
-            OnChangeCurrentView(_dashboardView);
+            OnChangeCurrentView(Views.FirstOrDefault(view => view.Name == "Dashboard"));
             Project?.History?.Reset();
             OnUnload();
         }
@@ -1103,15 +1106,15 @@ namespace Core2D.Editor
         /// </summary>
         public void OnToolNone()
         {
-            CurrentTool = Tool.None;
+            CurrentTool = typeof(ToolNone);
         }
-
+        
         /// <summary>
         /// Set current tool to <see cref="Tool.Selection"/>.
         /// </summary>
         public void OnToolSelection()
         {
-            CurrentTool = Tool.Selection;
+            CurrentTool = typeof(ToolSelection);
         }
 
         /// <summary>
@@ -1119,7 +1122,7 @@ namespace Core2D.Editor
         /// </summary>
         public void OnToolPoint()
         {
-            CurrentTool = Tool.Point;
+            CurrentTool = typeof(ToolPoint);
         }
 
         /// <summary>
@@ -1127,13 +1130,13 @@ namespace Core2D.Editor
         /// </summary>
         public void OnToolLine()
         {
-            if (CurrentTool == Tool.Path && CurrentPathTool != PathTool.Line)
+            if (CurrentTool == typeof(ToolPath) && CurrentPathTool != typeof(PathToolLine))
             {
-                CurrentPathTool = PathTool.Line;
+                CurrentPathTool = typeof(PathToolLine);
             }
             else
             {
-                CurrentTool = Tool.Line;
+                CurrentTool = typeof(ToolLine);
             }
         }
 
@@ -1142,13 +1145,13 @@ namespace Core2D.Editor
         /// </summary>
         public void OnToolArc()
         {
-            if (CurrentTool == Tool.Path && CurrentPathTool != PathTool.Arc)
+            if (CurrentTool == typeof(ToolPath) && CurrentPathTool != typeof(PathToolArc))
             {
-                CurrentPathTool = PathTool.Arc;
+                CurrentPathTool = typeof(PathToolArc);
             }
             else
             {
-                CurrentTool = Tool.Arc;
+                CurrentTool = typeof(ToolArc);
             }
         }
 
@@ -1157,13 +1160,13 @@ namespace Core2D.Editor
         /// </summary>
         public void OnToolCubicBezier()
         {
-            if (CurrentTool == Tool.Path && CurrentPathTool != PathTool.CubicBezier)
+            if (CurrentTool == typeof(ToolPath) && CurrentPathTool != typeof(PathToolCubicBezier))
             {
-                CurrentPathTool = PathTool.CubicBezier;
+                CurrentPathTool = typeof(PathToolCubicBezier);
             }
             else
             {
-                CurrentTool = Tool.CubicBezier;
+                CurrentTool = typeof(ToolCubicBezier);
             }
         }
 
@@ -1172,13 +1175,13 @@ namespace Core2D.Editor
         /// </summary>
         public void OnToolQuadraticBezier()
         {
-            if (CurrentTool == Tool.Path && CurrentPathTool != PathTool.QuadraticBezier)
+            if (CurrentTool == typeof(ToolPath) && CurrentPathTool != typeof(PathToolQuadraticBezier))
             {
-                CurrentPathTool = PathTool.QuadraticBezier;
+                CurrentPathTool = typeof(PathToolQuadraticBezier);
             }
             else
             {
-                CurrentTool = Tool.QuadraticBezier;
+                CurrentTool = typeof(ToolQuadraticBezier);
             }
         }
 
@@ -1187,7 +1190,7 @@ namespace Core2D.Editor
         /// </summary>
         public void OnToolPath()
         {
-            CurrentTool = Tool.Path;
+            CurrentTool = typeof(ToolPath);
         }
 
         /// <summary>
@@ -1195,7 +1198,7 @@ namespace Core2D.Editor
         /// </summary>
         public void OnToolRectangle()
         {
-            CurrentTool = Tool.Rectangle;
+            CurrentTool = typeof(ToolRectangle);
         }
 
         /// <summary>
@@ -1203,7 +1206,7 @@ namespace Core2D.Editor
         /// </summary>
         public void OnToolEllipse()
         {
-            CurrentTool = Tool.Ellipse;
+            CurrentTool = typeof(ToolEllipse);
         }
 
         /// <summary>
@@ -1211,7 +1214,7 @@ namespace Core2D.Editor
         /// </summary>
         public void OnToolText()
         {
-            CurrentTool = Tool.Text;
+            CurrentTool = typeof(ToolText);
         }
 
         /// <summary>
@@ -1219,7 +1222,7 @@ namespace Core2D.Editor
         /// </summary>
         public void OnToolImage()
         {
-            CurrentTool = Tool.Image;
+            CurrentTool = typeof(ToolImage);
         }
 
         /// <summary>
@@ -1227,9 +1230,9 @@ namespace Core2D.Editor
         /// </summary>
         public void OnToolMove()
         {
-            if (CurrentTool == Tool.Path && CurrentPathTool != PathTool.Move)
+            if (CurrentTool == typeof(ToolPath) && CurrentPathTool != typeof(PathToolMove))
             {
-                CurrentPathTool = PathTool.Move;
+                CurrentPathTool = typeof(PathToolMove);
             }
         }
 
@@ -3556,7 +3559,7 @@ namespace Core2D.Editor
         /// Change current view.
         /// </summary>
         /// <param name="view">The view instance.</param>
-        public void OnChangeCurrentView(ViewBase view)
+        public void OnChangeCurrentView(IView view)
         {
             if (view != null && _currentView != view)
             {
