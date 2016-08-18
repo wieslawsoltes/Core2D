@@ -318,6 +318,31 @@
       <Private>True</Private>
     </Reference>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Editor\Commands\Implementation\Data\" />
+    <Folder Include="Editor\Commands\Implementation\Edit\Clipboard\" />
+    <Folder Include="Editor\Commands\Implementation\Edit\Group\" />
+    <Folder Include="Editor\Commands\Implementation\Edit\History\" />
+    <Folder Include="Editor\Commands\Implementation\Edit\Move\" />
+    <Folder Include="Editor\Commands\Implementation\Edit\Order\" />
+    <Folder Include="Editor\Commands\Implementation\Edit\Selection\" />
+    <Folder Include="Editor\Commands\Implementation\File\Export\" />
+    <Folder Include="Editor\Commands\Implementation\File\Import\" />
+    <Folder Include="Editor\Commands\Implementation\Options\" />
+    <Folder Include="Editor\Commands\Implementation\Project\Data\" />
+    <Folder Include="Editor\Commands\Implementation\Project\Documents\" />
+    <Folder Include="Editor\Commands\Implementation\Project\Groups\" />
+    <Folder Include="Editor\Commands\Implementation\Project\Images\" />
+    <Folder Include="Editor\Commands\Implementation\Project\Layers\" />
+    <Folder Include="Editor\Commands\Implementation\Project\Pages\" />
+    <Folder Include="Editor\Commands\Implementation\Project\Shapes\" />
+    <Folder Include="Editor\Commands\Implementation\Project\Styles\" />
+    <Folder Include="Editor\Commands\Implementation\Project\Templates\" />
+    <Folder Include="Editor\Commands\Implementation\Tool\" />
+    <Folder Include="Editor\Commands\Implementation\View\Views\" />
+    <Folder Include="Editor\Commands\Implementation\View\Zoom\" />
+    <Folder Include="Editor\Commands\Implementation\Window\" />
+  </ItemGroup>
   <Import Project="..\Core2D.Shared\Core2D.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
