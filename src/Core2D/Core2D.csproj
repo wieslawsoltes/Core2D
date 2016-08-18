@@ -46,10 +46,10 @@
     <Compile Include="Editor\Tools\Selection\QuadraticBezierSelection.cs" />
     <Compile Include="Editor\Tools\Selection\RectangleSelection.cs" />
     <Compile Include="Editor\Tools\Selection\TextSelection.cs" />
-    <Compile Include="Editor\Tools\Path\ToolPathArc.cs" />
-    <Compile Include="Editor\Tools\Path\ToolPathCubicBezier.cs" />
-    <Compile Include="Editor\Tools\Path\ToolPathLine.cs" />
-    <Compile Include="Editor\Tools\Path\ToolPathQuadraticBezier.cs" />
+    <Compile Include="Editor\Tools\Path\PathToolArc.cs" />
+    <Compile Include="Editor\Tools\Path\PathToolCubicBezier.cs" />
+    <Compile Include="Editor\Tools\Path\PathToolLine.cs" />
+    <Compile Include="Editor\Tools\Path\PathToolQuadraticBezier.cs" />
     <Compile Include="Editor\ViewBase.cs" />
     <Compile Include="Editor\Views\BrowserView.cs" />
     <Compile Include="Editor\Views\DashboardView.cs" />
