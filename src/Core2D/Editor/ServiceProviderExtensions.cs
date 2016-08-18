@@ -39,7 +39,7 @@ namespace Core2D.Editor
         /// <param name="serviceProvider">The service provider instance.</param>
         /// <param name="transform">The method to transform input type to return type.</param>
         /// <returns>The new instance of type <see cref="Lazy{R}"/>.</returns>
-        public static Lazy<R> GetServiceLazily<T,R>(this IServiceProvider serviceProvider, Func<T,R> transform)
+        public static Lazy<R> GetServiceLazily<T, R>(this IServiceProvider serviceProvider, Func<T, R> transform)
         {
             return new Lazy<R>(() => transform((T)serviceProvider.GetService(typeof(T))));
         }
