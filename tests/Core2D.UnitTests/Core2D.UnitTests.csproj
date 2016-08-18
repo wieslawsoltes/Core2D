@@ -74,6 +74,8 @@
     <Compile Include="Editor\Input\InputProcessorTests.cs" />
     <Compile Include="Editor\ProjectEditorTests_Impl.cs" />
     <Compile Include="Editor\ProjectEditorTests_Model.cs" />
+    <Compile Include="Editor\ServiceProviderExtensionsTests.cs" />
+    <Compile Include="Editor\Tools\Path\PathToolMoveTests.cs" />
     <Compile Include="Editor\Tools\Path\ToolPathArcTests.cs" />
     <Compile Include="Editor\Tools\Path\ToolPathCubicBezierTests.cs" />
     <Compile Include="Editor\Tools\Path\ToolPathLineTests.cs" />
