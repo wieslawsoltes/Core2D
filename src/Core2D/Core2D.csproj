@@ -28,7 +28,6 @@
     <Compile Include="Editor\Bounds\LineBounds.cs" />
     <Compile Include="Editor\Bounds\RectangleBounds.cs" />
     <Compile Include="Editor\Bounds\ShapeHitTestPoint.cs" />
-    <Compile Include="Editor\Designer\DesignerCommandManager.cs" />
     <Compile Include="Editor\Interfaces\IMainView.cs" />
     <Compile Include="Editor\ProjectEditor.Model.cs" />
     <Compile Include="Editor\ServiceProviderExtensions.cs" />
@@ -79,7 +78,6 @@
     <Compile Include="Editor\Factories\ProjectFactory.cs" />
     <Compile Include="Editor\Factories\ShapeFactory.cs" />
     <Compile Include="Editor\Input\Command.cs" />
-    <Compile Include="Editor\Input\CommandManager.cs" />
     <Compile Include="Editor\Input\Command`1.cs" />
     <Compile Include="Editor\Input\ICoreCommand.cs" />
     <Compile Include="Editor\Input\ICoreCommand`1.cs" />
