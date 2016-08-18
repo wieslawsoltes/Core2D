@@ -71,7 +71,6 @@
     <Compile Include="Editor\Constants.cs" />
     <Compile Include="Editor\Designer\DesignerContext.cs" />
     <Compile Include="Editor\ProjectEditor.Impl.cs" />
-    <Compile Include="Editor\ProjectEditor.Commands.cs" />
     <Compile Include="Editor\Enums.cs" />
     <Compile Include="Editor\Factories\IProjectFactory.cs" />
     <Compile Include="Editor\Factories\IShapeFactory.cs" />
