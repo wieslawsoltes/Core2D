@@ -7,7 +7,7 @@ namespace Core2D.Editor.Input
     /// <summary>
     /// Input command.
     /// </summary>
-    public class Command : ICoreCommand
+    public class Command : Command<object>
     {
         private Action _execute;
         private Func<bool> _canExecute;
@@ -24,13 +24,13 @@ namespace Core2D.Editor.Input
         }
 
         /// <inheritdoc/>
-        public override bool CanExecute(object parameter)
+        public override bool CanRun(object parameter)
         {
             return _canExecute?.Invoke() ?? true;
         }
 
         /// <inheritdoc/>
-        public override void Execute(object parameter)
+        public override void Run(object parameter)
         {
             _execute?.Invoke();
         }
@@ -41,7 +41,7 @@ namespace Core2D.Editor.Input
         /// <param name="execute">The execute action.</param>
         /// <param name="canExecute">The can execute function.</param>
         /// <returns>The new instance of the <see cref="Command"/> class.</returns>
-        public static ICoreCommand Create(Action execute, Func<bool> canExecute = null)
+        public static Command Create(Action execute, Func<bool> canExecute = null)
         {
             return new Command(execute, canExecute);
         }
