@@ -16,28 +16,33 @@ namespace Core2D.Editor.Tools
     /// </summary>
     public class ToolPath : ToolBase
     {
+        private readonly IServiceProvider _serviceProvider;
+        private readonly PathToolLine _toolPathLine;
+        private readonly PathToolArc _toolPathArc;
+        private readonly PathToolCubicBezier _toolPathCubicBezier;
+        private readonly PathToolQuadraticBezier _toolPathQuadraticBezier;
+        private Type _previousPathTool;
+        private Type _movePathTool;
+        internal bool _isInitialized;
         internal XPath _path;
         internal XPathGeometry _geometry;
         internal XGeometryContext _context;
-        internal bool _isInitialized;
-        private PathTool _previousPathTool;
-        private PathTool _movePathTool;
-        private ToolPathLine _toolPathLine;
-        private ToolPathArc _toolPathArc;
-        private ToolPathCubicBezier _toolPathCubicBezier;
-        private ToolPathQuadraticBezier _toolPathQuadraticBezier;
+
+        /// <inheritdoc/>
+        public override string Name => "Path";
 
         /// <summary>
         /// Initialize new instance of <see cref="ToolPath"/> class.
         /// </summary>
-        public ToolPath()
-            : base()
+        /// <param name="serviceProvider">The service provider.</param>
+        public ToolPath(IServiceProvider serviceProvider) : base()
         {
+            _serviceProvider = serviceProvider;
+            _toolPathLine = new PathToolLine(_serviceProvider, this);
+            _toolPathArc = new PathToolArc(_serviceProvider, this);
+            _toolPathCubicBezier = new PathToolCubicBezier(_serviceProvider, this);
+            _toolPathQuadraticBezier = new PathToolQuadraticBezier(_serviceProvider, this);
             _isInitialized = false;
-            _toolPathLine = new ToolPathLine(this);
-            _toolPathArc = new ToolPathArc(this);
-            _toolPathCubicBezier = new ToolPathCubicBezier(this);
-            _toolPathQuadraticBezier = new ToolPathQuadraticBezier(this);
         }
 
         /// <summary>
@@ -97,28 +102,30 @@ namespace Core2D.Editor.Tools
 
         internal void InitializeWorkingPath(XPoint start)
         {
+            var editor = _serviceProvider.GetService<ProjectEditor>();
+
             _geometry = XPathGeometry.Create(
                 ImmutableArray.Create<XPathFigure>(),
-                Editor.Project.Options.DefaultFillRule);
+                editor.Project.Options.DefaultFillRule);
 
             _context = new XPathGeometryContext(_geometry);
 
             _context.BeginFigure(
                 start,
-                Editor.Project.Options.DefaultIsFilled,
-                Editor.Project.Options.DefaultIsClosed);
+                editor.Project.Options.DefaultIsFilled,
+                editor.Project.Options.DefaultIsClosed);
 
-            var style = Editor.Project.CurrentStyleLibrary.Selected;
+            var style = editor.Project.CurrentStyleLibrary.Selected;
             _path = XPath.Create(
                 "Path",
-                Editor.Project.Options.CloneStyle ? style.Clone() : style,
+                editor.Project.Options.CloneStyle ? style.Clone() : style,
                 _geometry,
-                Editor.Project.Options.DefaultIsStroked,
-                Editor.Project.Options.DefaultIsFilled);
+                editor.Project.Options.DefaultIsStroked,
+                editor.Project.Options.DefaultIsFilled);
 
-            Editor.Project.CurrentContainer.WorkingLayer.Shapes = Editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_path);
+            editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_path);
 
-            _previousPathTool = Editor.CurrentPathTool;
+            _previousPathTool = editor.CurrentPathTool;
             _isInitialized = true;
         }
 
@@ -132,72 +139,57 @@ namespace Core2D.Editor.Tools
 
         private void SwitchPathTool(double x, double y)
         {
-            switch (_previousPathTool)
+            var editor = _serviceProvider.GetService<ProjectEditor>();
+
+            if (_previousPathTool == typeof(PathToolLine))
             {
-                case PathTool.Line:
-                    {
-                        RemoveLastSegment<XLineSegment>();
-                        _toolPathLine.Remove();
-                    }
-                    break;
-                case PathTool.Arc:
-                    {
-                        RemoveLastSegment<XArcSegment>();
-                        _toolPathArc.Remove();
-                    }
-                    break;
-                case PathTool.CubicBezier:
-                    {
-                        RemoveLastSegment<XCubicBezierSegment>();
-                        _toolPathCubicBezier.Remove();
-                    }
-                    break;
-                case PathTool.QuadraticBezier:
-                    {
-                        RemoveLastSegment<XQuadraticBezierSegment>();
-                        _toolPathQuadraticBezier.Remove();
-                    }
-                    break;
-                case PathTool.Move:
-                    break;
+                RemoveLastSegment<XLineSegment>();
+                _toolPathLine.Remove();
+            }
+            else if (_previousPathTool == typeof(PathToolArc))
+            {
+                RemoveLastSegment<XArcSegment>();
+                _toolPathArc.Remove();
+            }
+            else if (_previousPathTool == typeof(PathToolCubicBezier))
+            {
+                RemoveLastSegment<XCubicBezierSegment>();
+                _toolPathCubicBezier.Remove();
+            }
+            else if (_previousPathTool == typeof(PathToolQuadraticBezier))
+            {
+                RemoveLastSegment<XQuadraticBezierSegment>();
+                _toolPathQuadraticBezier.Remove();
             }
 
-            switch (Editor.CurrentPathTool)
+            if (editor.CurrentPathTool == typeof(PathToolLine))
             {
-                case PathTool.Line:
-                    {
-                        _toolPathLine.LeftDown(x, y);
-                    }
-                    break;
-                case PathTool.Arc:
-                    {
-                        _toolPathArc.LeftDown(x, y);
-                    }
-                    break;
-                case PathTool.CubicBezier:
-                    {
-                        _toolPathCubicBezier.LeftDown(x, y);
-                    }
-                    break;
-                case PathTool.QuadraticBezier:
-                    {
-                        _toolPathQuadraticBezier.LeftDown(x, y);
-                    }
-                    break;
-                case PathTool.Move:
-                    {
-                        Editor.Project.CurrentContainer.WorkingLayer.Invalidate();
-                        Editor.Project.CurrentContainer.HelperLayer.Invalidate();
-                    }
-                    break;
+                _toolPathLine.LeftDown(x, y);
+            }
+            else if (editor.CurrentPathTool == typeof(PathToolArc))
+            {
+                _toolPathArc.LeftDown(x, y);
+            }
+            else if (editor.CurrentPathTool == typeof(PathToolCubicBezier))
+            {
+                _toolPathCubicBezier.LeftDown(x, y);
+            }
+            else if (editor.CurrentPathTool == typeof(PathToolQuadraticBezier))
+            {
+                _toolPathQuadraticBezier.LeftDown(x, y);
+            }
+            else if (editor.CurrentPathTool == typeof(PathToolMove))
+            {
+                editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                editor.Project.CurrentContainer.HelperLayer.Invalidate();
             }
 
-            if (Editor.CurrentPathTool == PathTool.Move)
+            if (editor.CurrentPathTool == typeof(PathToolMove))
             {
                 _movePathTool = _previousPathTool;
             }
 
-            _previousPathTool = Editor.CurrentPathTool;
+            _previousPathTool = editor.CurrentPathTool;
         }
 
         /// <inheritdoc/>
@@ -205,51 +197,45 @@ namespace Core2D.Editor.Tools
         {
             base.LeftDown(x, y);
 
-            if (_isInitialized && Editor.CurrentPathTool != _previousPathTool)
+            var editor = _serviceProvider.GetService<ProjectEditor>();
+
+            if (_isInitialized && editor.CurrentPathTool != _previousPathTool)
             {
                 SwitchPathTool(x, y);
                 return;
             }
 
-            switch (Editor.CurrentPathTool)
+            if (editor.CurrentPathTool == typeof(PathToolLine))
             {
-                case PathTool.Line:
-                    {
-                        _toolPathLine.LeftDown(x, y);
-                    }
-                    break;
-                case PathTool.Arc:
-                    {
-                        _toolPathArc.LeftDown(x, y);
-                    }
-                    break;
-                case PathTool.CubicBezier:
-                    {
-                        _toolPathCubicBezier.LeftDown(x, y);
-                    }
-                    break;
-                case PathTool.QuadraticBezier:
-                    {
-                        _toolPathQuadraticBezier.LeftDown(x, y);
-                    }
-                    break;
-                case PathTool.Move:
-                    {
-                        double sx = Editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, Editor.Project.Options.SnapX) : x;
-                        double sy = Editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, Editor.Project.Options.SnapY) : y;
+                _toolPathLine.LeftDown(x, y);
+            }
+            else if (editor.CurrentPathTool == typeof(PathToolArc))
+            {
+                _toolPathArc.LeftDown(x, y);
+            }
+            else if (editor.CurrentPathTool == typeof(PathToolCubicBezier))
+            {
+                _toolPathCubicBezier.LeftDown(x, y);
+            }
+            else if (editor.CurrentPathTool == typeof(PathToolQuadraticBezier))
+            {
+                _toolPathQuadraticBezier.LeftDown(x, y);
+            }
+            else if (editor.CurrentPathTool == typeof(PathToolMove))
+            {
+                double sx = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, editor.Project.Options.SnapX) : x;
+                double sy = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, editor.Project.Options.SnapY) : y;
 
-                        // Start new figure.
-                        var start = Editor.TryToGetConnectionPoint(sx, sy) ?? XPoint.Create(sx, sy, Editor.Project.Options.PointShape);
-                        _context.BeginFigure(
-                            start,
-                            Editor.Project.Options.DefaultIsFilled,
-                            Editor.Project.Options.DefaultIsClosed);
+                // Start new figure.
+                var start = editor.TryToGetConnectionPoint(sx, sy) ?? XPoint.Create(sx, sy, editor.Project.Options.PointShape);
+                _context.BeginFigure(
+                    start,
+                    editor.Project.Options.DefaultIsFilled,
+                    editor.Project.Options.DefaultIsClosed);
 
-                        // Switch to path tool before Move tool.
-                        Editor.CurrentPathTool = _movePathTool;
-                        SwitchPathTool(x, y);
-                    }
-                    break;
+                // Switch to path tool before Move tool.
+                editor.CurrentPathTool = _movePathTool;
+                SwitchPathTool(x, y);
             }
         }
 
@@ -257,29 +243,23 @@ namespace Core2D.Editor.Tools
         public override void RightDown(double x, double y)
         {
             base.RightDown(x, y);
+            var editor = _serviceProvider.GetService<ProjectEditor>();
 
-            switch (Editor.CurrentPathTool)
+            if (editor.CurrentPathTool == typeof(PathToolLine))
             {
-                case PathTool.Line:
-                    {
-                        _toolPathLine.RightDown(x, y);
-                    }
-                    break;
-                case PathTool.Arc:
-                    {
-                        _toolPathArc.RightDown(x, y);
-                    }
-                    break;
-                case PathTool.CubicBezier:
-                    {
-                        _toolPathCubicBezier.RightDown(x, y);
-                    }
-                    break;
-                case PathTool.QuadraticBezier:
-                    {
-                        _toolPathQuadraticBezier.RightDown(x, y);
-                    }
-                    break;
+                _toolPathLine.RightDown(x, y);
+            }
+            else if (editor.CurrentPathTool == typeof(PathToolArc))
+            {
+                _toolPathArc.RightDown(x, y);
+            }
+            else if (editor.CurrentPathTool == typeof(PathToolCubicBezier))
+            {
+                _toolPathCubicBezier.RightDown(x, y);
+            }
+            else if (editor.CurrentPathTool == typeof(PathToolQuadraticBezier))
+            {
+                _toolPathQuadraticBezier.RightDown(x, y);
             }
         }
 
@@ -288,43 +268,37 @@ namespace Core2D.Editor.Tools
         {
             base.Move(x, y);
 
-            if (_isInitialized && Editor.CurrentPathTool != _previousPathTool)
+            var editor = _serviceProvider.GetService<ProjectEditor>();
+
+            if (_isInitialized && editor.CurrentPathTool != _previousPathTool)
             {
                 SwitchPathTool(x, y);
             }
 
-            switch (Editor.CurrentPathTool)
+            if (editor.CurrentPathTool == typeof(PathToolLine))
             {
-                case PathTool.Line:
-                    {
-                        _toolPathLine.Move(x, y);
-                    }
-                    break;
-                case PathTool.Arc:
-                    {
-                        _toolPathArc.Move(x, y);
-                    }
-                    break;
-                case PathTool.CubicBezier:
-                    {
-                        _toolPathCubicBezier.Move(x, y);
-                    }
-                    break;
-                case PathTool.QuadraticBezier:
-                    {
-                        _toolPathQuadraticBezier.Move(x, y);
-                    }
-                    break;
-                case PathTool.Move:
-                    {
-                        double sx = Editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, Editor.Project.Options.SnapX) : x;
-                        double sy = Editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, Editor.Project.Options.SnapY) : y;
-                        if (Editor.Project.Options.TryToConnect)
-                        {
-                            Editor.TryToHoverShape(sx, sy);
-                        }
-                    }
-                    break;
+                _toolPathLine.Move(x, y);
+            }
+            else if (editor.CurrentPathTool == typeof(PathToolArc))
+            {
+                _toolPathArc.Move(x, y);
+            }
+            else if (editor.CurrentPathTool == typeof(PathToolCubicBezier))
+            {
+                _toolPathCubicBezier.Move(x, y);
+            }
+            else if (editor.CurrentPathTool == typeof(PathToolQuadraticBezier))
+            {
+                _toolPathQuadraticBezier.Move(x, y);
+            }
+            else if (editor.CurrentPathTool == typeof(PathToolMove))
+            {
+                double sx = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, editor.Project.Options.SnapX) : x;
+                double sy = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, editor.Project.Options.SnapY) : y;
+                if (editor.Project.Options.TryToConnect)
+                {
+                    editor.TryToHoverShape(sx, sy);
+                }
             }
         }
 
@@ -333,28 +307,23 @@ namespace Core2D.Editor.Tools
         {
             base.ToStateOne();
 
-            switch (Editor.CurrentPathTool)
+            var editor = _serviceProvider.GetService<ProjectEditor>();
+
+            if (editor.CurrentPathTool == typeof(PathToolLine))
             {
-                case PathTool.Line:
-                    {
-                        _toolPathLine.ToStateOne();
-                    }
-                    break;
-                case PathTool.Arc:
-                    {
-                        _toolPathArc.ToStateOne();
-                    }
-                    break;
-                case PathTool.CubicBezier:
-                    {
-                        _toolPathCubicBezier.ToStateOne();
-                    }
-                    break;
-                case PathTool.QuadraticBezier:
-                    {
-                        _toolPathQuadraticBezier.ToStateOne();
-                    }
-                    break;
+                _toolPathLine.ToStateOne();
+            }
+            else if (editor.CurrentPathTool == typeof(PathToolArc))
+            {
+                _toolPathArc.ToStateOne();
+            }
+            else if (editor.CurrentPathTool == typeof(PathToolCubicBezier))
+            {
+                _toolPathCubicBezier.ToStateOne();
+            }
+            else if (editor.CurrentPathTool == typeof(PathToolQuadraticBezier))
+            {
+                _toolPathQuadraticBezier.ToStateOne();
             }
         }
 
@@ -363,25 +332,19 @@ namespace Core2D.Editor.Tools
         {
             base.ToStateTwo();
 
-            switch (Editor.CurrentPathTool)
+            var editor = _serviceProvider.GetService<ProjectEditor>();
+
+            if (editor.CurrentPathTool == typeof(PathToolArc))
             {
-                case PathTool.Line:
-                    break;
-                case PathTool.Arc:
-                    {
-                        _toolPathArc.ToStateTwo();
-                    }
-                    break;
-                case PathTool.CubicBezier:
-                    {
-                        _toolPathCubicBezier.ToStateTwo();
-                    }
-                    break;
-                case PathTool.QuadraticBezier:
-                    {
-                        _toolPathQuadraticBezier.ToStateTwo();
-                    }
-                    break;
+                _toolPathArc.ToStateTwo();
+            }
+            else if (editor.CurrentPathTool == typeof(PathToolCubicBezier))
+            {
+                _toolPathCubicBezier.ToStateTwo();
+            }
+            else if (editor.CurrentPathTool == typeof(PathToolQuadraticBezier))
+            {
+                _toolPathQuadraticBezier.ToStateTwo();
             }
         }
 
@@ -390,22 +353,15 @@ namespace Core2D.Editor.Tools
         {
             base.ToStateThree();
 
-            switch (Editor.CurrentPathTool)
+            var editor = _serviceProvider.GetService<ProjectEditor>();
+
+            if (editor.CurrentPathTool == typeof(PathToolArc))
             {
-                case PathTool.Line:
-                    break;
-                case PathTool.Arc:
-                    {
-                        _toolPathArc.ToStateThree();
-                    }
-                    break;
-                case PathTool.CubicBezier:
-                    {
-                        _toolPathQuadraticBezier.ToStateThree();
-                    }
-                    break;
-                case PathTool.QuadraticBezier:
-                    break;
+                _toolPathArc.ToStateThree();
+            }
+            else if (editor.CurrentPathTool == typeof(PathToolCubicBezier))
+            {
+                _toolPathQuadraticBezier.ToStateThree();
             }
         }
 
@@ -414,28 +370,23 @@ namespace Core2D.Editor.Tools
         {
             base.Move(shape);
 
-            switch (Editor.CurrentPathTool)
+            var editor = _serviceProvider.GetService<ProjectEditor>();
+
+            if (editor.CurrentPathTool == typeof(PathToolLine))
             {
-                case PathTool.Line:
-                    {
-                        _toolPathLine.Move(shape);
-                    }
-                    break;
-                case PathTool.Arc:
-                    {
-                        _toolPathArc.Move(shape);
-                    }
-                    break;
-                case PathTool.CubicBezier:
-                    {
-                        _toolPathCubicBezier.Move(shape);
-                    }
-                    break;
-                case PathTool.QuadraticBezier:
-                    {
-                        _toolPathQuadraticBezier.Move(shape);
-                    }
-                    break;
+                _toolPathLine.Move(shape);
+            }
+            else if (editor.CurrentPathTool == typeof(PathToolArc))
+            {
+                _toolPathArc.Move(shape);
+            }
+            else if (editor.CurrentPathTool == typeof(PathToolCubicBezier))
+            {
+                _toolPathCubicBezier.Move(shape);
+            }
+            else if (editor.CurrentPathTool == typeof(PathToolQuadraticBezier))
+            {
+                _toolPathQuadraticBezier.Move(shape);
             }
         }
 
@@ -444,28 +395,23 @@ namespace Core2D.Editor.Tools
         {
             base.Finalize(shape);
 
-            switch (Editor.CurrentPathTool)
+            var editor = _serviceProvider.GetService<ProjectEditor>();
+
+            if (editor.CurrentPathTool == typeof(PathToolLine))
             {
-                case PathTool.Line:
-                    {
-                        _toolPathLine.Finalize(shape);
-                    }
-                    break;
-                case PathTool.Arc:
-                    {
-                        _toolPathArc.Finalize(shape);
-                    }
-                    break;
-                case PathTool.CubicBezier:
-                    {
-                        _toolPathCubicBezier.Finalize(shape);
-                    }
-                    break;
-                case PathTool.QuadraticBezier:
-                    {
-                        _toolPathQuadraticBezier.Finalize(shape);
-                    }
-                    break;
+                _toolPathLine.Finalize(shape);
+            }
+            else if (editor.CurrentPathTool == typeof(PathToolArc))
+            {
+                _toolPathArc.Finalize(shape);
+            }
+            else if (editor.CurrentPathTool == typeof(PathToolCubicBezier))
+            {
+                _toolPathCubicBezier.Finalize(shape);
+            }
+            else if (editor.CurrentPathTool == typeof(PathToolQuadraticBezier))
+            {
+                _toolPathQuadraticBezier.Finalize(shape);
             }
         }
 
@@ -474,28 +420,23 @@ namespace Core2D.Editor.Tools
         {
             base.Remove();
 
-            switch (Editor.CurrentPathTool)
+            var editor = _serviceProvider.GetService<ProjectEditor>();
+
+            if (editor.CurrentPathTool == typeof(PathToolLine))
             {
-                case PathTool.Line:
-                    {
-                        _toolPathLine.Remove();
-                    }
-                    break;
-                case PathTool.Arc:
-                    {
-                        _toolPathArc.Remove();
-                    }
-                    break;
-                case PathTool.CubicBezier:
-                    {
-                        _toolPathCubicBezier.Remove();
-                    }
-                    break;
-                case PathTool.QuadraticBezier:
-                    {
-                        _toolPathQuadraticBezier.Remove();
-                    }
-                    break;
+                _toolPathLine.Remove();
+            }
+            else if (editor.CurrentPathTool == typeof(PathToolArc))
+            {
+                _toolPathArc.Remove();
+            }
+            else if (editor.CurrentPathTool == typeof(PathToolCubicBezier))
+            {
+                _toolPathCubicBezier.Remove();
+            }
+            else if (editor.CurrentPathTool == typeof(PathToolQuadraticBezier))
+            {
+                _toolPathQuadraticBezier.Remove();
             }
         }
     }

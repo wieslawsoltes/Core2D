@@ -8,5 +8,7 @@ namespace Core2D.Editor.Tools
     /// </summary>
     public class ToolNone : ToolBase
     {
+        /// <inheritdoc/>
+        public override string Name => "None";
     }
 }

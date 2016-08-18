@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
 using System.Linq;
 using Core2D.Editor.Tools.Path.Shapes;
 using Core2D.Editor.Tools.Selection;
@@ -12,20 +13,25 @@ namespace Core2D.Editor.Tools.Path
     /// <summary>
     /// Helper class for <see cref="PathTool.Line"/> editor.
     /// </summary>
-    internal class ToolPathLine : ToolBase
+    public class PathToolLine : ToolBase
     {
+        private readonly IServiceProvider _serviceProvider;
+        private readonly ToolPath _toolPath;
         private ToolState _currentState = ToolState.None;
-        private ToolPath _toolPath;
         private XPathLine _line = new XPathLine();
         private LineSelection _selection;
 
+        /// <inheritdoc/>
+        public override string Name => "Line";
+
         /// <summary>
-        /// Initialize new instance of <see cref="ToolPathLine"/> class.
+        /// Initialize new instance of <see cref="PathToolLine"/> class.
         /// </summary>
+        /// <param name="serviceProvider">The service provider.</param>
         /// <param name="toolPath">The current <see cref="ToolPath"/> object.</param>
-        public ToolPathLine(ToolPath toolPath)
-            : base()
+        public PathToolLine(IServiceProvider serviceProvider, ToolPath toolPath) : base()
         {
+            _serviceProvider = serviceProvider;
             _toolPath = toolPath;
         }
 
@@ -33,14 +39,14 @@ namespace Core2D.Editor.Tools.Path
         public override void LeftDown(double x, double y)
         {
             base.LeftDown(x, y);
-
-            double sx = Editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, Editor.Project.Options.SnapX) : x;
-            double sy = Editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, Editor.Project.Options.SnapY) : y;
+            var editor = _serviceProvider.GetService<ProjectEditor>();
+            double sx = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, editor.Project.Options.SnapX) : x;
+            double sy = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, editor.Project.Options.SnapY) : y;
             switch (_currentState)
             {
                 case ToolState.None:
                     {
-                        _line.Start = Editor.TryToGetConnectionPoint(sx, sy) ?? XPoint.Create(sx, sy, Editor.Project.Options.PointShape);
+                        _line.Start = editor.TryToGetConnectionPoint(sx, sy) ?? XPoint.Create(sx, sy, editor.Project.Options.PointShape);
                         if (!_toolPath._isInitialized)
                         {
                             _toolPath.InitializeWorkingPath(_line.Start);
@@ -50,25 +56,25 @@ namespace Core2D.Editor.Tools.Path
                             _line.Start = _toolPath.GetLastPathPoint();
                         }
 
-                        _line.End = XPoint.Create(sx, sy, Editor.Project.Options.PointShape);
+                        _line.End = XPoint.Create(sx, sy, editor.Project.Options.PointShape);
                         _toolPath._context.LineTo(
                             _line.End,
-                            Editor.Project.Options.DefaultIsStroked,
-                            Editor.Project.Options.DefaultIsSmoothJoin);
-                        Editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                            editor.Project.Options.DefaultIsStroked,
+                            editor.Project.Options.DefaultIsSmoothJoin);
+                        editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         ToStateOne();
                         Move(null);
                         _currentState = ToolState.One;
-                        Editor.CancelAvailable = true;
+                        editor.CancelAvailable = true;
                     }
                     break;
                 case ToolState.One:
                     {
                         _line.End.X = sx;
                         _line.End.Y = sy;
-                        if (Editor.Project.Options.TryToConnect)
+                        if (editor.Project.Options.TryToConnect)
                         {
-                            var end = Editor.TryToGetConnectionPoint(sx, sy);
+                            var end = editor.TryToGetConnectionPoint(sx, sy);
                             if (end != null)
                             {
                                 var figure = _toolPath._geometry.Figures.LastOrDefault();
@@ -78,11 +84,11 @@ namespace Core2D.Editor.Tools.Path
                         }
 
                         _line.Start = _line.End;
-                        _line.End = XPoint.Create(sx, sy, Editor.Project.Options.PointShape);
+                        _line.End = XPoint.Create(sx, sy, editor.Project.Options.PointShape);
                         _toolPath._context.LineTo(_line.End,
-                            Editor.Project.Options.DefaultIsStroked,
-                            Editor.Project.Options.DefaultIsSmoothJoin);
-                        Editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                            editor.Project.Options.DefaultIsStroked,
+                            editor.Project.Options.DefaultIsSmoothJoin);
+                        editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         Move(null);
                         _currentState = ToolState.One;
                     }
@@ -94,7 +100,7 @@ namespace Core2D.Editor.Tools.Path
         public override void RightDown(double x, double y)
         {
             base.RightDown(x, y);
-
+            var editor = _serviceProvider.GetService<ProjectEditor>();
             switch (_currentState)
             {
                 case ToolState.None:
@@ -103,20 +109,20 @@ namespace Core2D.Editor.Tools.Path
                     {
                         _toolPath.RemoveLastSegment<XLineSegment>();
 
-                        Editor.Project.CurrentContainer.WorkingLayer.Shapes = Editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_toolPath._path);
+                        editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_toolPath._path);
                         Remove();
                         if (_toolPath._path.Geometry.Figures.LastOrDefault().Segments.Length > 0)
                         {
                             Finalize(null);
-                            Editor.Project.AddShape(Editor.Project.CurrentContainer.CurrentLayer, _toolPath._path);
+                            editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, _toolPath._path);
                         }
                         else
                         {
-                            Editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                            editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         }
                         _toolPath.DeInitializeWorkingPath();
                         _currentState = ToolState.None;
-                        Editor.CancelAvailable = false;
+                        editor.CancelAvailable = false;
                     }
                     break;
             }
@@ -126,28 +132,28 @@ namespace Core2D.Editor.Tools.Path
         public override void Move(double x, double y)
         {
             base.Move(x, y);
-
-            double sx = Editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, Editor.Project.Options.SnapX) : x;
-            double sy = Editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, Editor.Project.Options.SnapY) : y;
+            var editor = _serviceProvider.GetService<ProjectEditor>();
+            double sx = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, editor.Project.Options.SnapX) : x;
+            double sy = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, editor.Project.Options.SnapY) : y;
             switch (_currentState)
             {
                 case ToolState.None:
                     {
-                        if (Editor.Project.Options.TryToConnect)
+                        if (editor.Project.Options.TryToConnect)
                         {
-                            Editor.TryToHoverShape(sx, sy);
+                            editor.TryToHoverShape(sx, sy);
                         }
                     }
                     break;
                 case ToolState.One:
                     {
-                        if (Editor.Project.Options.TryToConnect)
+                        if (editor.Project.Options.TryToConnect)
                         {
-                            Editor.TryToHoverShape(sx, sy);
+                            editor.TryToHoverShape(sx, sy);
                         }
                         _line.End.X = sx;
                         _line.End.Y = sy;
-                        Editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                        editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         Move(null);
                     }
                     break;
@@ -158,12 +164,12 @@ namespace Core2D.Editor.Tools.Path
         public override void ToStateOne()
         {
             base.ToStateOne();
-
+            var editor = _serviceProvider.GetService<ProjectEditor>();
             _selection = new LineSelection(
-                Editor.Project.CurrentContainer.HelperLayer,
+                editor.Project.CurrentContainer.HelperLayer,
                 _line,
-                Editor.Project.Options.HelperStyle,
-                Editor.Project.Options.PointShape);
+                editor.Project.Options.HelperStyle,
+                editor.Project.Options.PointShape);
 
             _selection.ToStateOne();
         }
