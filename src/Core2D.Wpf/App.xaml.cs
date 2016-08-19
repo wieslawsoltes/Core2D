@@ -1,27 +1,12 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
-using System.Collections.Immutable;
+using System.Linq;
 using System.Windows;
-using Core2D.Data.Database;
+using Autofac;
 using Core2D.Editor;
-using Core2D.Editor.Factories;
-using Core2D.Editor.Input;
-using Core2D.Editor.Interfaces;
 using Core2D.Interfaces;
-using Core2D.Renderer;
-using FileSystem.DotNetFx;
-using FileWriter.Dxf;
-using FileWriter.Emf;
-using FileWriter.Pdf_wpf;
-using FileWriter.Vdx;
-using Log.Trace;
-using Renderer.Wpf;
-using Serializer.Newtonsoft;
-using Serializer.Xaml;
-using TextFieldReader.CsvHelper;
-using TextFieldWriter.CsvHelper;
-using Utilities.Wpf;
+using Core2D.Wpf.Modules;
 
 namespace Core2D.Wpf
 {
@@ -30,7 +15,10 @@ namespace Core2D.Wpf
     /// </summary>
     public partial class App : Application
     {
+        private IServiceProvider _serviceProvider;
+
         private static string RecentFileName = "Core2D.recent";
+
         private static string LogFileName = "Core2D.log";
 
         private bool _isLoaded = false;
@@ -43,53 +31,31 @@ namespace Core2D.Wpf
         {
             base.OnStartup(e);
 
-            RegisterServices();
+            var builder = new ContainerBuilder();
 
-            using (var log = ServiceLocator.Instance.Resolve<ILog>())
+            builder.RegisterModule<LocatorModule>();
+            builder.RegisterModule<CoreModule>();
+            builder.RegisterModule<DependenciesModule>();
+            builder.RegisterModule<AppModule>();
+
+            using (IContainer container = builder.Build())
             {
-                Start();
-            }
-        }
-
-        /// <summary>
-        /// Register application services.
-        /// </summary>
-        private void RegisterServices()
-        {
-            ServiceLocator.Instance.RegisterSingleton<ProjectEditor>(() => new ProjectEditor());
-            ServiceLocator.Instance.RegisterSingleton<IEditorApplication>(() => this);
-            ServiceLocator.Instance.RegisterSingleton<ILog>(() => new TraceLog());
-            ServiceLocator.Instance.RegisterSingleton<CommandManager>(() => new WpfCommandManager());
-            ServiceLocator.Instance.RegisterSingleton<ShapeRenderer[]>(() => new[] { new WpfRenderer() });
-            ServiceLocator.Instance.RegisterSingleton<IFileSystem>(() => new DotNetFxFileSystem());
-            ServiceLocator.Instance.RegisterSingleton<IProjectFactory>(() => new ProjectFactory());
-            ServiceLocator.Instance.RegisterSingleton<ITextClipboard>(() => new WpfTextClipboard());
-            ServiceLocator.Instance.RegisterSingleton<IJsonSerializer>(() => new NewtonsoftJsonSerializer());
-            ServiceLocator.Instance.RegisterSingleton<IXamlSerializer>(() => new PortableXamlSerializer());
-            ServiceLocator.Instance.RegisterSingleton<ImmutableArray<IFileWriter>>(
-                () =>
+                using (var log = container.Resolve<ILog>())
                 {
-                    return new IFileWriter[]
-                    {
-                        new PdfWriter(),
-                        new DxfWriter(),
-                        new EmfWriter(),
-                        new VdxWriter()
-                    }.ToImmutableArray();
-                });
-            ServiceLocator.Instance.RegisterSingleton<ITextFieldReader<XDatabase>>(() => new CsvHelperReader());
-            ServiceLocator.Instance.RegisterSingleton<ITextFieldWriter<XDatabase>>(() => new CsvHelperWriter());
-            ServiceLocator.Instance.RegisterSingleton<Windows.MainWindow>(() => new Windows.MainWindow());
+                    _serviceProvider = container.Resolve<IServiceProvider>();
+                    Start();
+                }
+            }
         }
 
         /// <summary>
         /// Initialize application context and displays main window.
         /// </summary>
-        public void Start()
+        private void Start()
         {
-            var log = ServiceLocator.Instance.Resolve<ILog>();
-            var fileIO = ServiceLocator.Instance.Resolve<IFileSystem>();
-            var editor = ServiceLocator.Instance.Resolve<ProjectEditor>();
+            var log = _serviceProvider.GetService<ILog>();
+            var fileIO = _serviceProvider.GetService<IFileSystem>();
+            var editor = _serviceProvider.GetService<ProjectEditor>();
 
             log?.Initialize(System.IO.Path.Combine(fileIO.GetAssemblyPath(null), LogFileName));
 
@@ -97,7 +63,11 @@ namespace Core2D.Wpf
             {
                 LoadRecent();
 
-                var window = ServiceLocator.Instance.Resolve<Windows.MainWindow>();
+                editor.CurrentView = editor.Views.FirstOrDefault(view => view.Name == "Dashboard");
+                editor.CurrentTool = editor.Tools.FirstOrDefault(tool => tool.Name == "Selection");
+                editor.CurrentPathTool = editor.PathTools.FirstOrDefault(tool => tool.Name == "Line");
+
+                var window = _serviceProvider.GetService<Windows.MainWindow>();
                 window.Loaded += (sender, e) => OnLoaded();
                 window.Closed += (sender, e) => OnClosed();
                 window.DataContext = editor;
@@ -142,12 +112,10 @@ namespace Core2D.Wpf
         /// </summary>
         private void LoadRecent()
         {
-            var log = ServiceLocator.Instance.Resolve<ILog>();
-            var fileIO = ServiceLocator.Instance.Resolve<IFileSystem>();
-            var editor = ServiceLocator.Instance.Resolve<ProjectEditor>();
-
             try
             {
+                var fileIO = _serviceProvider.GetService<IFileSystem>();
+                var editor = _serviceProvider.GetService<ProjectEditor>();
                 var path = System.IO.Path.Combine(fileIO.GetAssemblyPath(null), RecentFileName);
                 if (System.IO.File.Exists(path))
                 {
@@ -156,7 +124,7 @@ namespace Core2D.Wpf
             }
             catch (Exception ex)
             {
-                log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                _serviceProvider.GetService<ILog>()?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
@@ -165,18 +133,16 @@ namespace Core2D.Wpf
         /// </summary>
         private void SaveRecent()
         {
-            var log = ServiceLocator.Instance.Resolve<ILog>();
-            var fileIO = ServiceLocator.Instance.Resolve<IFileSystem>();
-            var editor = ServiceLocator.Instance.Resolve<ProjectEditor>();
-
             try
             {
+                var fileIO = _serviceProvider.GetService<IFileSystem>();
+                var editor = _serviceProvider.GetService<ProjectEditor>();
                 var path = System.IO.Path.Combine(fileIO.GetAssemblyPath(null), RecentFileName);
                 editor?.OnSaveRecent(path);
             }
             catch (Exception ex)
             {
-                log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                _serviceProvider.GetService<ILog>()?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
     }

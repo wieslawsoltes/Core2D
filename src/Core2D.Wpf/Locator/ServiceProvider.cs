@@ -3,7 +3,7 @@
 using System;
 using Autofac;
 
-namespace Core2D.Wpf
+namespace Core2D.Wpf.Locator
 {
     /// <summary>
     /// Service provider based on lifetime scope.

@@ -111,7 +111,11 @@
     <Compile Include="Controls\Custom\ListBoxDropMode.cs" />
     <Compile Include="Controls\Custom\RecordsListView.cs" />
     <Compile Include="Designer\DesignerHelper.cs" />
-    <Compile Include="ServiceProvider.cs" />
+    <Compile Include="Modules\AppModule.cs" />
+    <Compile Include="Modules\CoreModule.cs" />
+    <Compile Include="Modules\DependenciesModule.cs" />
+    <Compile Include="Locator\ServiceProvider.cs" />
+    <Compile Include="Modules\LocatorModule.cs" />
     <Compile Include="Views\DashboardControl.xaml.cs">
       <DependentUpon>DashboardControl.xaml</DependentUpon>
       <SubType>Code</SubType>
