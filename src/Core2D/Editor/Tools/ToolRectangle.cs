@@ -8,7 +8,7 @@ using Core2D.Shapes;
 namespace Core2D.Editor.Tools
 {
     /// <summary>
-    /// Helper class for <see cref="Tool.Rectangle"/> editor.
+    /// Rectangle tool.
     /// </summary>
     public class ToolRectangle : ToolBase
     {

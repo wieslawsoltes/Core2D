@@ -9,7 +9,7 @@ using Core2D.Shapes;
 namespace Core2D.Editor.Tools
 {
     /// <summary>
-    /// Helper class for <see cref="Tool.Arc"/> editor.
+    /// Arc tool.
     /// </summary>
     public class ToolArc : ToolBase
     {

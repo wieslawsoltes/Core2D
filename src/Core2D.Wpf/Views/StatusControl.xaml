@@ -104,66 +104,66 @@
         <StatusBarItem Grid.Column="2">
             <StatusBarItem.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="{x:Static p:Resources.MenuToolNone}" Command="{x:Static Editor:ProjectEditorCommands.ToolNoneCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter={x:Static Editor:Tool.None}}" InputGestureText="N"/>
+                    <MenuItem Header="{x:Static p:Resources.MenuToolNone}" Command="{x:Static Editor:ProjectEditorCommands.ToolNoneCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool.Name, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=None}" InputGestureText="N"/>
                     <Separator/>
-                    <MenuItem Header="{x:Static p:Resources.MenuToolSelection}" Command="{x:Static Editor:ProjectEditorCommands.ToolSelectionCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter={x:Static Editor:Tool.Selection}}" InputGestureText="S"/>
+                    <MenuItem Header="{x:Static p:Resources.MenuToolSelection}" Command="{x:Static Editor:ProjectEditorCommands.ToolSelectionCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool.Name, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Selection}" InputGestureText="S"/>
                     <Separator/>
-                    <MenuItem Header="{x:Static p:Resources.MenuToolPoint}" Command="{x:Static Editor:ProjectEditorCommands.ToolPointCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter={x:Static Editor:Tool.Point}}" InputGestureText="P"/>
+                    <MenuItem Header="{x:Static p:Resources.MenuToolPoint}" Command="{x:Static Editor:ProjectEditorCommands.ToolPointCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool.Name, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Point}" InputGestureText="P"/>
                     <Separator/>
-                    <MenuItem Header="{x:Static p:Resources.MenuToolLine}" Command="{x:Static Editor:ProjectEditorCommands.ToolLineCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter={x:Static Editor:Tool.Line}}" InputGestureText="L"/>
-                    <MenuItem Header="{x:Static p:Resources.MenuToolArc}" Command="{x:Static Editor:ProjectEditorCommands.ToolArcCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter={x:Static Editor:Tool.Arc}}" InputGestureText="A"/>
-                    <MenuItem Header="{x:Static p:Resources.MenuToolCubicBezier}" Command="{x:Static Editor:ProjectEditorCommands.ToolCubicBezierCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter={x:Static Editor:Tool.CubicBezier}}" InputGestureText="B"/>
-                    <MenuItem Header="{x:Static p:Resources.MenuToolQuadraticBezier}" Command="{x:Static Editor:ProjectEditorCommands.ToolQuadraticBezierCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter={x:Static Editor:Tool.QuadraticBezier}}" InputGestureText="Q"/>
+                    <MenuItem Header="{x:Static p:Resources.MenuToolLine}" Command="{x:Static Editor:ProjectEditorCommands.ToolLineCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool.Name, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Line}" InputGestureText="L"/>
+                    <MenuItem Header="{x:Static p:Resources.MenuToolArc}" Command="{x:Static Editor:ProjectEditorCommands.ToolArcCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool.Name, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Arc}" InputGestureText="A"/>
+                    <MenuItem Header="{x:Static p:Resources.MenuToolCubicBezier}" Command="{x:Static Editor:ProjectEditorCommands.ToolCubicBezierCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool.Name, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=CubicBezier}" InputGestureText="B"/>
+                    <MenuItem Header="{x:Static p:Resources.MenuToolQuadraticBezier}" Command="{x:Static Editor:ProjectEditorCommands.ToolQuadraticBezierCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool.Name, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=QuadraticBezier}" InputGestureText="Q"/>
                     <Separator/>
-                    <MenuItem Header="{x:Static p:Resources.MenuToolPath}" Command="{x:Static Editor:ProjectEditorCommands.ToolPathCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter={x:Static Editor:Tool.Path}}" InputGestureText="H"/>
+                    <MenuItem Header="{x:Static p:Resources.MenuToolPath}" Command="{x:Static Editor:ProjectEditorCommands.ToolPathCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool.Name, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Path}" InputGestureText="H"/>
                     <Separator/>
-                    <MenuItem Header="{x:Static p:Resources.MenuToolRectangle}" Command="{x:Static Editor:ProjectEditorCommands.ToolRectangleCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter={x:Static Editor:Tool.Rectangle}}" InputGestureText="R"/>
-                    <MenuItem Header="{x:Static p:Resources.MenuToolEllipse}" Command="{x:Static Editor:ProjectEditorCommands.ToolEllipseCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter={x:Static Editor:Tool.Ellipse}}" InputGestureText="E"/>
+                    <MenuItem Header="{x:Static p:Resources.MenuToolRectangle}" Command="{x:Static Editor:ProjectEditorCommands.ToolRectangleCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool.Name, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Rectangle}" InputGestureText="R"/>
+                    <MenuItem Header="{x:Static p:Resources.MenuToolEllipse}" Command="{x:Static Editor:ProjectEditorCommands.ToolEllipseCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool.Name, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Ellipse}" InputGestureText="E"/>
                     <Separator/>
-                    <MenuItem Header="{x:Static p:Resources.MenuToolText}" Command="{x:Static Editor:ProjectEditorCommands.ToolTextCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter={x:Static Editor:Tool.Text}}" InputGestureText="T"/>
+                    <MenuItem Header="{x:Static p:Resources.MenuToolText}" Command="{x:Static Editor:ProjectEditorCommands.ToolTextCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool.Name, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Text}" InputGestureText="T"/>
                     <Separator/>
-                    <MenuItem Header="{x:Static p:Resources.MenuToolImage}" Command="{x:Static Editor:ProjectEditorCommands.ToolImageCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter={x:Static Editor:Tool.Image}}" InputGestureText="I"/>
+                    <MenuItem Header="{x:Static p:Resources.MenuToolImage}" Command="{x:Static Editor:ProjectEditorCommands.ToolImageCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool.Name, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Image}" InputGestureText="I"/>
                 </ContextMenu>
             </StatusBarItem.ContextMenu>
             <TextBlock VerticalAlignment="Center">
                 <TextBlock.Style>
                     <Style TargetType="TextBlock">
-                        <Setter Property="Text" Value="{Binding Path=CurrentTool}"/>
+                        <Setter Property="Text" Value="{Binding Path=CurrentTool.Name, Mode=OneWay}"/>
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding Path=CurrentTool}" Value="{x:Static Editor:Tool.None}">
+                            <DataTrigger Binding="{Binding Path=CurrentTool.Name, Mode=OneWay}" Value="None">
                                 <Setter Property="Text" Value="{x:Static p:Resources.StatusToolNone}"/>
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding Path=CurrentTool}" Value="{x:Static Editor:Tool.Selection}">
+                            <DataTrigger Binding="{Binding Path=CurrentTool.Name, Mode=OneWay}" Value="Selection">
                                 <Setter Property="Text" Value="{x:Static p:Resources.StatusToolSelection}"/>
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding Path=CurrentTool}" Value="{x:Static Editor:Tool.Point}">
+                            <DataTrigger Binding="{Binding Path=CurrentTool.Name, Mode=OneWay}" Value="Point}">
                                 <Setter Property="Text" Value="{x:Static p:Resources.StatusToolPoint}"/>
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding Path=CurrentTool}" Value="{x:Static Editor:Tool.Line}">
+                            <DataTrigger Binding="{Binding Path=CurrentTool.Name, Mode=OneWay}" Value="Line}">
                                 <Setter Property="Text" Value="{x:Static p:Resources.StatusToolLine}"/>
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding Path=CurrentTool}" Value="{x:Static Editor:Tool.Arc}">
+                            <DataTrigger Binding="{Binding Path=CurrentTool.Name, Mode=OneWay}" Value="Arc}">
                                 <Setter Property="Text" Value="{x:Static p:Resources.StatusToolArc}"/>
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding Path=CurrentTool}" Value="{x:Static Editor:Tool.CubicBezier}">
+                            <DataTrigger Binding="{Binding Path=CurrentTool.Name, Mode=OneWay}" Value="CubicBezier}">
                                 <Setter Property="Text" Value="{x:Static p:Resources.StatusToolCubicBezier}"/>
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding Path=CurrentTool}" Value="{x:Static Editor:Tool.QuadraticBezier}">
+                            <DataTrigger Binding="{Binding Path=CurrentTool.Name, Mode=OneWay}" Value="QuadraticBezier}">
                                 <Setter Property="Text" Value="{x:Static p:Resources.StatusToolQuadraticBezier}"/>
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding Path=CurrentTool}" Value="{x:Static Editor:Tool.Path}">
+                            <DataTrigger Binding="{Binding Path=CurrentTool.Name, Mode=OneWay}" Value="Path}">
                                 <Setter Property="Text" Value="{x:Static p:Resources.StatusToolPath}"/>
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding Path=CurrentTool}" Value="{x:Static Editor:Tool.Rectangle}">
+                            <DataTrigger Binding="{Binding Path=CurrentTool.Name, Mode=OneWay}" Value="Rectangle}">
                                 <Setter Property="Text" Value="{x:Static p:Resources.StatusToolRectangle}"/>
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding Path=CurrentTool}" Value="{x:Static Editor:Tool.Ellipse}">
+                            <DataTrigger Binding="{Binding Path=CurrentTool.Name, Mode=OneWay}" Value="Ellipse}">
                                 <Setter Property="Text" Value="{x:Static p:Resources.StatusToolEllipse}"/>
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding Path=CurrentTool}" Value="{x:Static Editor:Tool.Text}">
+                            <DataTrigger Binding="{Binding Path=CurrentTool.Name, Mode=OneWay}" Value="Text}">
                                 <Setter Property="Text" Value="{x:Static p:Resources.StatusToolText}"/>
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding Path=CurrentTool}" Value="{x:Static Editor:Tool.Image}">
+                            <DataTrigger Binding="{Binding Path=CurrentTool.Name, Mode=OneWay}" Value="Image}">
                                 <Setter Property="Text" Value="{x:Static p:Resources.StatusToolImage}"/>
                             </DataTrigger>
                         </Style.Triggers>
@@ -176,7 +176,7 @@
                 <Style TargetType="Separator">
                     <Setter Property="Visibility" Value="Collapsed"/>
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding Path=CurrentTool, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter={x:Static Editor:Tool.Path}}" Value="True">
+                        <DataTrigger Binding="{Binding Path=CurrentTool.Name, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Path}" Value="True">
                             <Setter Property="Visibility" Value="Visible"/>
                         </DataTrigger>
                     </Style.Triggers>
@@ -188,7 +188,7 @@
                 <Style TargetType="StatusBarItem">
                     <Setter Property="Visibility" Value="Collapsed"/>
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding Path=CurrentTool, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter={x:Static Editor:Tool.Path}}" Value="True">
+                        <DataTrigger Binding="{Binding Path=CurrentTool.Name, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Path}" Value="True">
                             <Setter Property="Visibility" Value="Visible"/>
                         </DataTrigger>
                     </Style.Triggers>
@@ -196,32 +196,32 @@
             </StatusBarItem.Style>
             <StatusBarItem.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="{x:Static p:Resources.MenuPathToolLine}" Command="{x:Static Editor:ProjectEditorCommands.ToolLineCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentPathTool, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter={x:Static Editor:PathTool.Line}}" InputGestureText="L"/>
-                    <MenuItem Header="{x:Static p:Resources.MenuPathToolArc}" Command="{x:Static Editor:ProjectEditorCommands.ToolArcCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentPathTool, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter={x:Static Editor:PathTool.Arc}}" InputGestureText="A"/>
-                    <MenuItem Header="{x:Static p:Resources.MenuPathToolCubicBezier}" Command="{x:Static Editor:ProjectEditorCommands.ToolCubicBezierCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentPathTool, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter={x:Static Editor:PathTool.CubicBezier}}" InputGestureText="B"/>
-                    <MenuItem Header="{x:Static p:Resources.MenuPathToolQuadraticBezier}" Command="{x:Static Editor:ProjectEditorCommands.ToolQuadraticBezierCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentPathTool, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter={x:Static Editor:PathTool.QuadraticBezier}}" InputGestureText="Q"/>
+                    <MenuItem Header="{x:Static p:Resources.MenuPathToolLine}" Command="{x:Static Editor:ProjectEditorCommands.ToolLineCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentPathTool.Name, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Line}" InputGestureText="L"/>
+                    <MenuItem Header="{x:Static p:Resources.MenuPathToolArc}" Command="{x:Static Editor:ProjectEditorCommands.ToolArcCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentPathTool.Name, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Arc}" InputGestureText="A"/>
+                    <MenuItem Header="{x:Static p:Resources.MenuPathToolCubicBezier}" Command="{x:Static Editor:ProjectEditorCommands.ToolCubicBezierCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentPathTool.Name, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=CubicBezier}" InputGestureText="B"/>
+                    <MenuItem Header="{x:Static p:Resources.MenuPathToolQuadraticBezier}" Command="{x:Static Editor:ProjectEditorCommands.ToolQuadraticBezierCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentPathTool.Name, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=QuadraticBezier}" InputGestureText="Q"/>
                     <Separator/>
-                    <MenuItem Header="{x:Static p:Resources.MenuPathToolMove}" Command="{x:Static Editor:ProjectEditorCommands.ToolMoveCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentPathTool, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter={x:Static Editor:PathTool.Move}}" InputGestureText="M"/>
+                    <MenuItem Header="{x:Static p:Resources.MenuPathToolMove}" Command="{x:Static Editor:ProjectEditorCommands.ToolMoveCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentPathTool.Name, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Move}" InputGestureText="M"/>
                 </ContextMenu>
             </StatusBarItem.ContextMenu>
             <TextBlock VerticalAlignment="Center">
                 <TextBlock.Style>
                     <Style TargetType="TextBlock">
-                        <Setter Property="Text" Value="{Binding Path=CurrentPathTool}"/>
+                        <Setter Property="Text" Value="{Binding Path=CurrentPathTool.Name, Mode=OneWay}"/>
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding Path=CurrentPathTool}" Value="{x:Static Editor:PathTool.Line}">
+                            <DataTrigger Binding="{Binding Path=CurrentPathTool.Name, Mode=OneWay}" Value="Line">
                                 <Setter Property="Text" Value="{x:Static p:Resources.StatusPathToolLine}"/>
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding Path=CurrentPathTool}" Value="{x:Static Editor:PathTool.Arc}">
+                            <DataTrigger Binding="{Binding Path=CurrentPathTool.Name, Mode=OneWay}" Value="Arc">
                                 <Setter Property="Text" Value="{x:Static p:Resources.StatusPathToolArc}"/>
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding Path=CurrentPathTool}" Value="{x:Static Editor:PathTool.CubicBezier}">
+                            <DataTrigger Binding="{Binding Path=CurrentPathTool.Name, Mode=OneWay}" Value="CubicBezier">
                                 <Setter Property="Text" Value="{x:Static p:Resources.StatusPathToolCubicBezier}"/>
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding Path=CurrentPathTool}" Value="{x:Static Editor:PathTool.QuadraticBezier}">
+                            <DataTrigger Binding="{Binding Path=CurrentPathTool.Name, Mode=OneWay}" Value="QuadraticBezier">
                                 <Setter Property="Text" Value="{x:Static p:Resources.StatusPathToolQuadraticBezier}"/>
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding Path=CurrentPathTool}" Value="{x:Static Editor:PathTool.Move}">
+                            <DataTrigger Binding="{Binding Path=CurrentPathTool.Name, Mode=OneWay}" Value="Move">
                                 <Setter Property="Text" Value="{x:Static p:Resources.StatusPathToolMove}"/>
                             </DataTrigger>
                         </Style.Triggers>

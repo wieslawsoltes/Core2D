@@ -4,7 +4,7 @@
 namespace Core2D.Editor.Tools
 {
     /// <summary>
-    /// Helper class for <see cref="Tool.None"/> editor.
+    /// None tool.
     /// </summary>
     public class ToolNone : ToolBase
     {

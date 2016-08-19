@@ -12,21 +12,41 @@ using Core2D.Shapes;
 namespace Core2D.Editor.Tools
 {
     /// <summary>
-    /// Helper class for <see cref="Tool.Path"/> editor.
+    /// Path tool.
     /// </summary>
     public class ToolPath : ToolBase
     {
         private readonly IServiceProvider _serviceProvider;
-        private readonly PathToolLine _toolPathLine;
-        private readonly PathToolArc _toolPathArc;
-        private readonly PathToolCubicBezier _toolPathCubicBezier;
-        private readonly PathToolQuadraticBezier _toolPathQuadraticBezier;
-        private Type _previousPathTool;
-        private Type _movePathTool;
-        internal bool _isInitialized;
-        internal XPath _path;
-        internal XPathGeometry _geometry;
-        internal XGeometryContext _context;
+        private readonly PathToolLine _pathToolLine;
+        private readonly PathToolArc _pathToolArc;
+        private readonly PathToolCubicBezier _pathToolCubicBezier;
+        private readonly PathToolQuadraticBezier _pathToolQuadraticBezier;
+        private readonly PathToolMove _pathToolMove;
+
+        /// <summary>
+        /// Gets or sets flag indicating whether path was initialized.
+        /// </summary>
+        internal bool IsInitialized { get; set; }
+
+        /// <summary>
+        /// Gets or sets current path.
+        /// </summary>
+        internal XPath Path { get; set; }
+
+        /// <summary>
+        /// Gets or sets current geometry.
+        /// </summary>
+        internal XPathGeometry Geometry { get; set; }
+
+        /// <summary>
+        /// Gets or sets current geometry context.
+        /// </summary>
+        internal XGeometryContext GeometryContext { get; set; }
+
+        /// <summary>
+        /// Gets or sets previous path tool.
+        /// </summary>
+        internal PathToolBase PreviousPathTool { get; set; }
 
         /// <inheritdoc/>
         public override string Name => "Path";
@@ -38,20 +58,21 @@ namespace Core2D.Editor.Tools
         public ToolPath(IServiceProvider serviceProvider) : base()
         {
             _serviceProvider = serviceProvider;
-            _toolPathLine = new PathToolLine(_serviceProvider, this);
-            _toolPathArc = new PathToolArc(_serviceProvider, this);
-            _toolPathCubicBezier = new PathToolCubicBezier(_serviceProvider, this);
-            _toolPathQuadraticBezier = new PathToolQuadraticBezier(_serviceProvider, this);
-            _isInitialized = false;
+            _pathToolLine = serviceProvider.GetService<PathToolLine>();
+            _pathToolArc = serviceProvider.GetService<PathToolArc>();
+            _pathToolCubicBezier = serviceProvider.GetService<PathToolCubicBezier>();
+            _pathToolQuadraticBezier = serviceProvider.GetService<PathToolQuadraticBezier>();
+            _pathToolMove = serviceProvider.GetService<PathToolMove>();
+            IsInitialized = false;
         }
 
         /// <summary>
-        /// Remove last <see cref="XPathSegment"/> segment from the last figure.
+        /// Remove last <see cref="XPathSegment"/> segment from the previous figure.
         /// </summary>
         /// <typeparam name="T">The type of the path segment to remove.</typeparam>
-        internal void RemoveLastSegment<T>() where T : XPathSegment
+        public void RemoveLastSegment<T>() where T : XPathSegment
         {
-            var figure = _geometry.Figures.LastOrDefault();
+            var figure = Geometry.Figures.LastOrDefault();
             if (figure != null)
             {
                 var segment = figure.Segments.LastOrDefault() as T;
@@ -63,12 +84,43 @@ namespace Core2D.Editor.Tools
         }
 
         /// <summary>
+        /// Remove last segment from the previous figure.
+        /// </summary>
+        public void RemoveLastSegment()
+        {
+            if (PreviousPathTool == _pathToolLine)
+            {
+                RemoveLastSegment<XLineSegment>();
+                _pathToolLine.Remove();
+            }
+            else if (PreviousPathTool == _pathToolArc)
+            {
+                RemoveLastSegment<XArcSegment>();
+                _pathToolArc.Remove();
+            }
+            else if (PreviousPathTool == _pathToolCubicBezier)
+            {
+                RemoveLastSegment<XCubicBezierSegment>();
+                _pathToolCubicBezier.Remove();
+            }
+            else if (PreviousPathTool == _pathToolQuadraticBezier)
+            {
+                RemoveLastSegment<XQuadraticBezierSegment>();
+                _pathToolQuadraticBezier.Remove();
+            }
+
+            var editor = _serviceProvider.GetService<ProjectEditor>();
+            editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+            editor.Project.CurrentContainer.HelperLayer.Invalidate();
+        }
+
+        /// <summary>
         /// Gets last point in the current path.
         /// </summary>
         /// <returns>The last path point.</returns>
-        internal XPoint GetLastPathPoint()
+        public XPoint GetLastPathPoint()
         {
-            var figure = _geometry.Figures.LastOrDefault();
+            var figure = Geometry.Figures.LastOrDefault();
             if (figure != null)
             {
                 var segment = figure.Segments.LastOrDefault();
@@ -100,206 +152,69 @@ namespace Core2D.Editor.Tools
             throw new Exception("Can not find valid last point from path.");
         }
 
-        internal void InitializeWorkingPath(XPoint start)
+        /// <summary>
+        /// Initializes working path.
+        /// </summary>
+        /// <param name="start">The path start point.</param>
+        public void InitializeWorkingPath(XPoint start)
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
 
-            _geometry = XPathGeometry.Create(
+            Geometry = XPathGeometry.Create(
                 ImmutableArray.Create<XPathFigure>(),
                 editor.Project.Options.DefaultFillRule);
 
-            _context = new XPathGeometryContext(_geometry);
+            GeometryContext = new XPathGeometryContext(Geometry);
 
-            _context.BeginFigure(
+            GeometryContext.BeginFigure(
                 start,
                 editor.Project.Options.DefaultIsFilled,
                 editor.Project.Options.DefaultIsClosed);
 
             var style = editor.Project.CurrentStyleLibrary.Selected;
-            _path = XPath.Create(
+            Path = XPath.Create(
                 "Path",
                 editor.Project.Options.CloneStyle ? style.Clone() : style,
-                _geometry,
+                Geometry,
                 editor.Project.Options.DefaultIsStroked,
                 editor.Project.Options.DefaultIsFilled);
 
-            editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_path);
+            editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(Path);
 
-            _previousPathTool = editor.CurrentPathTool;
-            _isInitialized = true;
+            PreviousPathTool = editor.CurrentPathTool;
+            IsInitialized = true;
         }
 
-        internal void DeInitializeWorkingPath()
+        /// <summary>
+        ///  De-initializes working path.
+        /// </summary>
+        public void DeInitializeWorkingPath()
         {
-            _isInitialized = false;
-            _geometry = null;
-            _context = null;
-            _path = null;
-        }
-
-        private void SwitchPathTool(double x, double y)
-        {
-            var editor = _serviceProvider.GetService<ProjectEditor>();
-
-            if (_previousPathTool == typeof(PathToolLine))
-            {
-                RemoveLastSegment<XLineSegment>();
-                _toolPathLine.Remove();
-            }
-            else if (_previousPathTool == typeof(PathToolArc))
-            {
-                RemoveLastSegment<XArcSegment>();
-                _toolPathArc.Remove();
-            }
-            else if (_previousPathTool == typeof(PathToolCubicBezier))
-            {
-                RemoveLastSegment<XCubicBezierSegment>();
-                _toolPathCubicBezier.Remove();
-            }
-            else if (_previousPathTool == typeof(PathToolQuadraticBezier))
-            {
-                RemoveLastSegment<XQuadraticBezierSegment>();
-                _toolPathQuadraticBezier.Remove();
-            }
-
-            if (editor.CurrentPathTool == typeof(PathToolLine))
-            {
-                _toolPathLine.LeftDown(x, y);
-            }
-            else if (editor.CurrentPathTool == typeof(PathToolArc))
-            {
-                _toolPathArc.LeftDown(x, y);
-            }
-            else if (editor.CurrentPathTool == typeof(PathToolCubicBezier))
-            {
-                _toolPathCubicBezier.LeftDown(x, y);
-            }
-            else if (editor.CurrentPathTool == typeof(PathToolQuadraticBezier))
-            {
-                _toolPathQuadraticBezier.LeftDown(x, y);
-            }
-            else if (editor.CurrentPathTool == typeof(PathToolMove))
-            {
-                editor.Project.CurrentContainer.WorkingLayer.Invalidate();
-                editor.Project.CurrentContainer.HelperLayer.Invalidate();
-            }
-
-            if (editor.CurrentPathTool == typeof(PathToolMove))
-            {
-                _movePathTool = _previousPathTool;
-            }
-
-            _previousPathTool = editor.CurrentPathTool;
+            IsInitialized = false;
+            Geometry = null;
+            GeometryContext = null;
+            Path = null;
         }
 
         /// <inheritdoc/>
         public override void LeftDown(double x, double y)
         {
             base.LeftDown(x, y);
-
-            var editor = _serviceProvider.GetService<ProjectEditor>();
-
-            if (_isInitialized && editor.CurrentPathTool != _previousPathTool)
-            {
-                SwitchPathTool(x, y);
-                return;
-            }
-
-            if (editor.CurrentPathTool == typeof(PathToolLine))
-            {
-                _toolPathLine.LeftDown(x, y);
-            }
-            else if (editor.CurrentPathTool == typeof(PathToolArc))
-            {
-                _toolPathArc.LeftDown(x, y);
-            }
-            else if (editor.CurrentPathTool == typeof(PathToolCubicBezier))
-            {
-                _toolPathCubicBezier.LeftDown(x, y);
-            }
-            else if (editor.CurrentPathTool == typeof(PathToolQuadraticBezier))
-            {
-                _toolPathQuadraticBezier.LeftDown(x, y);
-            }
-            else if (editor.CurrentPathTool == typeof(PathToolMove))
-            {
-                double sx = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, editor.Project.Options.SnapX) : x;
-                double sy = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, editor.Project.Options.SnapY) : y;
-
-                // Start new figure.
-                var start = editor.TryToGetConnectionPoint(sx, sy) ?? XPoint.Create(sx, sy, editor.Project.Options.PointShape);
-                _context.BeginFigure(
-                    start,
-                    editor.Project.Options.DefaultIsFilled,
-                    editor.Project.Options.DefaultIsClosed);
-
-                // Switch to path tool before Move tool.
-                editor.CurrentPathTool = _movePathTool;
-                SwitchPathTool(x, y);
-            }
+            _serviceProvider.GetService<ProjectEditor>().CurrentPathTool.LeftDown(x, y);
         }
 
         /// <inheritdoc/>
         public override void RightDown(double x, double y)
         {
             base.RightDown(x, y);
-            var editor = _serviceProvider.GetService<ProjectEditor>();
-
-            if (editor.CurrentPathTool == typeof(PathToolLine))
-            {
-                _toolPathLine.RightDown(x, y);
-            }
-            else if (editor.CurrentPathTool == typeof(PathToolArc))
-            {
-                _toolPathArc.RightDown(x, y);
-            }
-            else if (editor.CurrentPathTool == typeof(PathToolCubicBezier))
-            {
-                _toolPathCubicBezier.RightDown(x, y);
-            }
-            else if (editor.CurrentPathTool == typeof(PathToolQuadraticBezier))
-            {
-                _toolPathQuadraticBezier.RightDown(x, y);
-            }
+            _serviceProvider.GetService<ProjectEditor>().CurrentPathTool.RightDown(x, y);
         }
 
         /// <inheritdoc/>
         public override void Move(double x, double y)
         {
             base.Move(x, y);
-
-            var editor = _serviceProvider.GetService<ProjectEditor>();
-
-            if (_isInitialized && editor.CurrentPathTool != _previousPathTool)
-            {
-                SwitchPathTool(x, y);
-            }
-
-            if (editor.CurrentPathTool == typeof(PathToolLine))
-            {
-                _toolPathLine.Move(x, y);
-            }
-            else if (editor.CurrentPathTool == typeof(PathToolArc))
-            {
-                _toolPathArc.Move(x, y);
-            }
-            else if (editor.CurrentPathTool == typeof(PathToolCubicBezier))
-            {
-                _toolPathCubicBezier.Move(x, y);
-            }
-            else if (editor.CurrentPathTool == typeof(PathToolQuadraticBezier))
-            {
-                _toolPathQuadraticBezier.Move(x, y);
-            }
-            else if (editor.CurrentPathTool == typeof(PathToolMove))
-            {
-                double sx = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, editor.Project.Options.SnapX) : x;
-                double sy = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, editor.Project.Options.SnapY) : y;
-                if (editor.Project.Options.TryToConnect)
-                {
-                    editor.TryToHoverShape(sx, sy);
-                }
-            }
+            _serviceProvider.GetService<ProjectEditor>().CurrentPathTool.Move(x, y);
         }
 
         /// <inheritdoc/>
@@ -308,136 +223,42 @@ namespace Core2D.Editor.Tools
             base.ToStateOne();
 
             var editor = _serviceProvider.GetService<ProjectEditor>();
-
-            if (editor.CurrentPathTool == typeof(PathToolLine))
-            {
-                _toolPathLine.ToStateOne();
-            }
-            else if (editor.CurrentPathTool == typeof(PathToolArc))
-            {
-                _toolPathArc.ToStateOne();
-            }
-            else if (editor.CurrentPathTool == typeof(PathToolCubicBezier))
-            {
-                _toolPathCubicBezier.ToStateOne();
-            }
-            else if (editor.CurrentPathTool == typeof(PathToolQuadraticBezier))
-            {
-                _toolPathQuadraticBezier.ToStateOne();
-            }
+            editor.CurrentPathTool.ToStateOne();
         }
 
         /// <inheritdoc/>
         public override void ToStateTwo()
         {
             base.ToStateTwo();
-
-            var editor = _serviceProvider.GetService<ProjectEditor>();
-
-            if (editor.CurrentPathTool == typeof(PathToolArc))
-            {
-                _toolPathArc.ToStateTwo();
-            }
-            else if (editor.CurrentPathTool == typeof(PathToolCubicBezier))
-            {
-                _toolPathCubicBezier.ToStateTwo();
-            }
-            else if (editor.CurrentPathTool == typeof(PathToolQuadraticBezier))
-            {
-                _toolPathQuadraticBezier.ToStateTwo();
-            }
+            _serviceProvider.GetService<ProjectEditor>().CurrentPathTool.ToStateTwo();
         }
 
         /// <inheritdoc/>
         public override void ToStateThree()
         {
             base.ToStateThree();
-
-            var editor = _serviceProvider.GetService<ProjectEditor>();
-
-            if (editor.CurrentPathTool == typeof(PathToolArc))
-            {
-                _toolPathArc.ToStateThree();
-            }
-            else if (editor.CurrentPathTool == typeof(PathToolCubicBezier))
-            {
-                _toolPathQuadraticBezier.ToStateThree();
-            }
+            _serviceProvider.GetService<ProjectEditor>().CurrentPathTool.ToStateThree();
         }
 
         /// <inheritdoc/>
         public override void Move(BaseShape shape)
         {
             base.Move(shape);
-
-            var editor = _serviceProvider.GetService<ProjectEditor>();
-
-            if (editor.CurrentPathTool == typeof(PathToolLine))
-            {
-                _toolPathLine.Move(shape);
-            }
-            else if (editor.CurrentPathTool == typeof(PathToolArc))
-            {
-                _toolPathArc.Move(shape);
-            }
-            else if (editor.CurrentPathTool == typeof(PathToolCubicBezier))
-            {
-                _toolPathCubicBezier.Move(shape);
-            }
-            else if (editor.CurrentPathTool == typeof(PathToolQuadraticBezier))
-            {
-                _toolPathQuadraticBezier.Move(shape);
-            }
+            _serviceProvider.GetService<ProjectEditor>().CurrentPathTool.Move(shape);
         }
 
         /// <inheritdoc/>
         public override void Finalize(BaseShape shape)
         {
             base.Finalize(shape);
-
-            var editor = _serviceProvider.GetService<ProjectEditor>();
-
-            if (editor.CurrentPathTool == typeof(PathToolLine))
-            {
-                _toolPathLine.Finalize(shape);
-            }
-            else if (editor.CurrentPathTool == typeof(PathToolArc))
-            {
-                _toolPathArc.Finalize(shape);
-            }
-            else if (editor.CurrentPathTool == typeof(PathToolCubicBezier))
-            {
-                _toolPathCubicBezier.Finalize(shape);
-            }
-            else if (editor.CurrentPathTool == typeof(PathToolQuadraticBezier))
-            {
-                _toolPathQuadraticBezier.Finalize(shape);
-            }
+            _serviceProvider.GetService<ProjectEditor>().CurrentPathTool.Finalize(shape);
         }
 
         /// <inheritdoc/>
         public override void Remove()
         {
             base.Remove();
-
-            var editor = _serviceProvider.GetService<ProjectEditor>();
-
-            if (editor.CurrentPathTool == typeof(PathToolLine))
-            {
-                _toolPathLine.Remove();
-            }
-            else if (editor.CurrentPathTool == typeof(PathToolArc))
-            {
-                _toolPathArc.Remove();
-            }
-            else if (editor.CurrentPathTool == typeof(PathToolCubicBezier))
-            {
-                _toolPathCubicBezier.Remove();
-            }
-            else if (editor.CurrentPathTool == typeof(PathToolQuadraticBezier))
-            {
-                _toolPathQuadraticBezier.Remove();
-            }
+            _serviceProvider.GetService<ProjectEditor>().CurrentPathTool.Remove();
         }
     }
 }

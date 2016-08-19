@@ -1,6 +1,8 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Core2D.Editor.Commands;
+using Core2D.Editor.Tools;
+using Core2D.Editor.Tools.Path;
 using Core2D.Project;
 
 namespace Core2D.Editor
@@ -191,67 +193,67 @@ namespace Core2D.Editor
         public static IMoveRightCommand MoveRightCommand { get; set; }
 
         /// <summary>
-        /// Set current tool to <see cref="Tool.None"/>.
+        /// Set current tool to <see cref="ToolNone"/>.
         /// </summary>
         public static IToolNoneCommand ToolNoneCommand { get; set; }
 
         /// <summary>
-        /// Set current tool to <see cref="Tool.Selection"/>.
+        /// Set current tool to <see cref="ToolSelection"/>.
         /// </summary>
         public static IToolSelectionCommand ToolSelectionCommand { get; set; }
 
         /// <summary>
-        /// Set current tool to <see cref="Tool.Point"/>.
+        /// Set current tool to <see cref="ToolPoint"/>.
         /// </summary>
         public static IToolPointCommand ToolPointCommand { get; set; }
 
         /// <summary>
-        /// Set current tool to <see cref="Tool.Line"/> or current path tool to <see cref="PathTool.Line"/>.
+        /// Set current tool to <see cref="ToolLine"/> or current path tool to <see cref="PathToolLine"/>.
         /// </summary>
         public static IToolLineCommand ToolLineCommand { get; set; }
 
         /// <summary>
-        /// Set current tool to <see cref="Tool.Arc"/> or current path tool to <see cref="PathTool.Arc"/>.
+        /// Set current tool to <see cref="ToolArc"/> or current path tool to <see cref="PathToolArc"/>.
         /// </summary>
         public static IToolArcCommand ToolArcCommand { get; set; }
 
         /// <summary>
-        /// Set current tool to <see cref="Tool.CubicBezier"/> or current path tool to <see cref="PathTool.CubicBezier"/>.
+        /// Set current tool to <see cref="ToolCubicBezier"/> or current path tool to <see cref="PathToolCubicBezier"/>.
         /// </summary>
         public static IToolCubicBezierCommand ToolCubicBezierCommand { get; set; }
 
         /// <summary>
-        /// Set current tool to <see cref="Tool.QuadraticBezier"/> or current path tool to <see cref="PathTool.QuadraticBezier"/>.
+        /// Set current tool to <see cref="ToolQuadraticBezier"/> or current path tool to <see cref="PathToolQuadraticBezier"/>.
         /// </summary>
         public static IToolQuadraticBezierCommand ToolQuadraticBezierCommand { get; set; }
 
         /// <summary>
-        /// Set current tool to <see cref="Tool.Path"/>.
+        /// Set current tool to <see cref="ToolPath"/>.
         /// </summary>
         public static IToolPathCommand ToolPathCommand { get; set; }
 
         /// <summary>
-        /// Set current tool to <see cref="Tool.Rectangle"/>.
+        /// Set current tool to <see cref="ToolRectangle"/>.
         /// </summary>
         public static IToolRectangleCommand ToolRectangleCommand { get; set; }
 
         /// <summary>
-        /// Set current tool to <see cref="Tool.Ellipse"/>.
+        /// Set current tool to <see cref="ToolEllipse"/>.
         /// </summary>
         public static IToolEllipseCommand ToolEllipseCommand { get; set; }
 
         /// <summary>
-        /// Set current tool to <see cref="Tool.Text"/>.
+        /// Set current tool to <see cref="ToolText"/>.
         /// </summary>
         public static IToolTextCommand ToolTextCommand { get; set; }
 
         /// <summary>
-        /// Set current tool to <see cref="Tool.Image"/>.
+        /// Set current tool to <see cref="ToolImage"/>.
         /// </summary>
         public static IToolImageCommand ToolImageCommand { get; set; }
 
         /// <summary>
-        /// Set current path tool to <see cref="PathTool.Move"/>.
+        /// Set current path tool to <see cref="PathToolMove"/>.
         /// </summary>
         public static IToolMoveCommand ToolMoveCommand { get; set; }
 

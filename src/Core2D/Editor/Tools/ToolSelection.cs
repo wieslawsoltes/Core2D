@@ -12,7 +12,7 @@ using Core2D.Shapes;
 namespace Core2D.Editor.Tools
 {
     /// <summary>
-    /// Helper class for <see cref="Tool.Selection"/> editor.
+    /// Selection tool.
     /// </summary>
     public class ToolSelection : ToolBase
     {

@@ -8,7 +8,7 @@ using Core2D.Shapes;
 namespace Core2D.Editor.Tools
 {
     /// <summary>
-    /// Helper class for <see cref="Tool.Text"/> editor.
+    /// Text tool.
     /// </summary>
     public class ToolText : ToolBase
     {

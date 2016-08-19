@@ -11,12 +11,11 @@ using Core2D.Shapes;
 namespace Core2D.Editor.Tools.Path
 {
     /// <summary>
-    /// Helper class for <see cref="PathTool.QuadraticBezier"/> editor.
+    /// Quadratic bezier path tool.
     /// </summary>
-    public class PathToolQuadraticBezier : ToolBase
+    public class PathToolQuadraticBezier : PathToolBase
     {
         private readonly IServiceProvider _serviceProvider;
-        private readonly ToolPath _toolPath;
         private ToolState _currentState = ToolState.None;
         private XPathQuadraticBezier _quadraticBezier = new XPathQuadraticBezier();
         private QuadraticBezierSelection _selection;
@@ -28,11 +27,9 @@ namespace Core2D.Editor.Tools.Path
         /// Initialize new instance of <see cref="PathToolQuadraticBezier"/> class.
         /// </summary>
         /// <param name="serviceProvider">The service provider.</param>
-        /// <param name="toolPath">The current <see cref="ToolPath"/> object.</param>
-        public PathToolQuadraticBezier(IServiceProvider serviceProvider, ToolPath toolPath) : base()
+        public PathToolQuadraticBezier(IServiceProvider serviceProvider) : base()
         {
             _serviceProvider = serviceProvider;
-            _toolPath = toolPath;
         }
 
         /// <inheritdoc/>
@@ -40,6 +37,7 @@ namespace Core2D.Editor.Tools.Path
         {
             base.LeftDown(x, y);
             var editor = _serviceProvider.GetService<ProjectEditor>();
+            var pathTool = _serviceProvider.GetService<ToolPath>();
             double sx = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, editor.Project.Options.SnapX) : x;
             double sy = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, editor.Project.Options.SnapY) : y;
             switch (_currentState)
@@ -47,18 +45,18 @@ namespace Core2D.Editor.Tools.Path
                 case ToolState.None:
                     {
                         _quadraticBezier.Point1 = editor.TryToGetConnectionPoint(sx, sy) ?? XPoint.Create(sx, sy, editor.Project.Options.PointShape);
-                        if (!_toolPath._isInitialized)
+                        if (!pathTool.IsInitialized)
                         {
-                            _toolPath.InitializeWorkingPath(_quadraticBezier.Point1);
+                            pathTool.InitializeWorkingPath(_quadraticBezier.Point1);
                         }
                         else
                         {
-                            _quadraticBezier.Point1 = _toolPath.GetLastPathPoint();
+                            _quadraticBezier.Point1 = pathTool.GetLastPathPoint();
                         }
 
                         _quadraticBezier.Point2 = XPoint.Create(sx, sy, editor.Project.Options.PointShape);
                         _quadraticBezier.Point3 = XPoint.Create(sx, sy, editor.Project.Options.PointShape);
-                        _toolPath._context.QuadraticBezierTo(
+                        pathTool.GeometryContext.QuadraticBezierTo(
                             _quadraticBezier.Point2,
                             _quadraticBezier.Point3,
                             editor.Project.Options.DefaultIsStroked,
@@ -79,7 +77,7 @@ namespace Core2D.Editor.Tools.Path
                             var point2 = editor.TryToGetConnectionPoint(sx, sy);
                             if (point2 != null)
                             {
-                                var figure = _toolPath._geometry.Figures.LastOrDefault();
+                                var figure = pathTool.Geometry.Figures.LastOrDefault();
                                 var quadraticBezier = figure.Segments.LastOrDefault() as XQuadraticBezierSegment;
                                 quadraticBezier.Point2 = point2;
                                 _quadraticBezier.Point3 = point2;
@@ -100,7 +98,7 @@ namespace Core2D.Editor.Tools.Path
                             var point1 = editor.TryToGetConnectionPoint(sx, sy);
                             if (point1 != null)
                             {
-                                var figure = _toolPath._geometry.Figures.LastOrDefault();
+                                var figure = pathTool.Geometry.Figures.LastOrDefault();
                                 var quadraticBezier = figure.Segments.LastOrDefault() as XQuadraticBezierSegment;
                                 quadraticBezier.Point1 = point1;
                                 _quadraticBezier.Point2 = point1;
@@ -110,7 +108,7 @@ namespace Core2D.Editor.Tools.Path
                         _quadraticBezier.Point1 = _quadraticBezier.Point3;
                         _quadraticBezier.Point2 = XPoint.Create(sx, sy, editor.Project.Options.PointShape);
                         _quadraticBezier.Point3 = XPoint.Create(sx, sy, editor.Project.Options.PointShape);
-                        _toolPath._context.QuadraticBezierTo(
+                        pathTool.GeometryContext.QuadraticBezierTo(
                             _quadraticBezier.Point2,
                             _quadraticBezier.Point3,
                             editor.Project.Options.DefaultIsStroked,
@@ -130,6 +128,7 @@ namespace Core2D.Editor.Tools.Path
         {
             base.RightDown(x, y);
             var editor = _serviceProvider.GetService<ProjectEditor>();
+            var pathTool = _serviceProvider.GetService<ToolPath>();
             switch (_currentState)
             {
                 case ToolState.None:
@@ -137,20 +136,20 @@ namespace Core2D.Editor.Tools.Path
                 case ToolState.One:
                 case ToolState.Two:
                     {
-                        _toolPath.RemoveLastSegment<XQuadraticBezierSegment>();
+                        pathTool.RemoveLastSegment<XQuadraticBezierSegment>();
 
-                        editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_toolPath._path);
+                        editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(pathTool.Path);
                         Remove();
-                        if (_toolPath._path.Geometry.Figures.LastOrDefault().Segments.Length > 0)
+                        if (pathTool.Path.Geometry.Figures.LastOrDefault().Segments.Length > 0)
                         {
                             Finalize(null);
-                            editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, _toolPath._path);
+                            editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, pathTool.Path);
                         }
                         else
                         {
                             editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         }
-                        _toolPath.DeInitializeWorkingPath();
+                        pathTool.DeInitializeWorkingPath();
                         _currentState = ToolState.None;
                         editor.CancelAvailable = false;
                     }

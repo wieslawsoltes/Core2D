@@ -6,7 +6,7 @@ using Core2D.Shapes;
 namespace Core2D.Editor.Tools
 {
     /// <summary>
-    /// Helper class for <see cref="Tool.Point"/> editor.
+    /// Point tool.
     /// </summary>
     public class ToolPoint : ToolBase
     {

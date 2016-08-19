@@ -143,6 +143,7 @@
     <Compile Include="Editor\Bounds\LineBounds.cs" />
     <Compile Include="Editor\Bounds\RectangleBounds.cs" />
     <Compile Include="Editor\Bounds\ShapeHitTestPoint.cs" />
+    <Compile Include="Editor\PathToolBase.cs" />
     <Compile Include="Editor\Views\Interfaces\IMainView.cs" />
     <Compile Include="Editor\ProjectEditorCommands.cs" />
     <Compile Include="Editor\ProjectEditor.Model.cs" />
@@ -194,7 +195,6 @@
     <Compile Include="Editor\Factories\ShapeFactory.cs" />
     <Compile Include="Editor\Input\Command`1.cs" />
     <Compile Include="Editor\ProjectObserver.cs" />
-    <Compile Include="Editor\PathTool.cs" />
     <Compile Include="Editor\ProjectExtensions.cs" />
     <Compile Include="Editor\Recent\RecentFile.cs" />
     <Compile Include="Editor\Recent\Recents.cs" />

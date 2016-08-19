@@ -13,12 +13,11 @@ using static System.Math;
 namespace Core2D.Editor.Tools.Path
 {
     /// <summary>
-    /// Helper class for <see cref="PathTool.Arc"/> editor.
+    /// Arc path tool.
     /// </summary>
-    public class PathToolArc : ToolBase
+    public class PathToolArc : PathToolBase
     {
         private readonly IServiceProvider _serviceProvider;
-        private readonly ToolPath _toolPath;
         private ToolState _currentState = ToolState.None;
         private XPathArc _arc = new XPathArc();
         private LineSelection _selection;
@@ -33,11 +32,9 @@ namespace Core2D.Editor.Tools.Path
         /// Initialize new instance of <see cref="PathToolArc"/> class.
         /// </summary>
         /// <param name="serviceProvider">The service provider.</param>
-        /// <param name="toolPath">The current <see cref="ToolPath"/> object.</param>
-        public PathToolArc(IServiceProvider serviceProvider, ToolPath toolPath) : base()
+        public PathToolArc(IServiceProvider serviceProvider) : base()
         {
             _serviceProvider = serviceProvider;
-            _toolPath = toolPath;
         }
 
         /// <inheritdoc/>
@@ -45,6 +42,7 @@ namespace Core2D.Editor.Tools.Path
         {
             base.LeftDown(x, y);
             var editor = _serviceProvider.GetService<ProjectEditor>();
+            var pathTool = _serviceProvider.GetService<ToolPath>();
             double sx = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, editor.Project.Options.SnapX) : x;
             double sy = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, editor.Project.Options.SnapY) : y;
             switch (_currentState)
@@ -52,17 +50,17 @@ namespace Core2D.Editor.Tools.Path
                 case ToolState.None:
                     {
                         _arc.Start = editor.TryToGetConnectionPoint(sx, sy) ?? XPoint.Create(sx, sy, editor.Project.Options.PointShape);
-                        if (!_toolPath._isInitialized)
+                        if (!pathTool.IsInitialized)
                         {
-                            _toolPath.InitializeWorkingPath(_arc.Start);
+                            pathTool.InitializeWorkingPath(_arc.Start);
                         }
                         else
                         {
-                            _arc.Start = _toolPath.GetLastPathPoint();
+                            _arc.Start = pathTool.GetLastPathPoint();
                         }
 
                         _arc.End = XPoint.Create(sx, sy, editor.Project.Options.PointShape);
-                        _toolPath._context.ArcTo(
+                        pathTool.GeometryContext.ArcTo(
                             _arc.End,
                             XPathSize.Create(
                                 Abs(_arc.Start.X - _arc.End.X),
@@ -93,7 +91,7 @@ namespace Core2D.Editor.Tools.Path
                         }
                         _arc.Start = _arc.End;
                         _arc.End = XPoint.Create(sx, sy, editor.Project.Options.PointShape);
-                        _toolPath._context.ArcTo(
+                        pathTool.GeometryContext.ArcTo(
                             _arc.End,
                             XPathSize.Create(
                                 Abs(_arc.Start.X - _arc.End.X),
@@ -117,26 +115,27 @@ namespace Core2D.Editor.Tools.Path
         {
             base.RightDown(x, y);
             var editor = _serviceProvider.GetService<ProjectEditor>();
+            var pathTool = _serviceProvider.GetService<ToolPath>();
             switch (_currentState)
             {
                 case ToolState.None:
                     break;
                 case ToolState.One:
                     {
-                        _toolPath.RemoveLastSegment<XArcSegment>();
+                        pathTool.RemoveLastSegment<XArcSegment>();
 
-                        editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_toolPath._path);
+                        editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(pathTool.Path);
                         Remove();
-                        if (_toolPath._path.Geometry.Figures.LastOrDefault().Segments.Length > 0)
+                        if (pathTool.Path.Geometry.Figures.LastOrDefault().Segments.Length > 0)
                         {
                             Finalize(null);
-                            editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, _toolPath._path);
+                            editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, pathTool.Path);
                         }
                         else
                         {
                             editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         }
-                        _toolPath.DeInitializeWorkingPath();
+                        pathTool.DeInitializeWorkingPath();
                         _currentState = ToolState.None;
                         editor.CancelAvailable = false;
                     }
@@ -149,6 +148,7 @@ namespace Core2D.Editor.Tools.Path
         {
             base.Move(x, y);
             var editor = _serviceProvider.GetService<ProjectEditor>();
+            var pathTool = _serviceProvider.GetService<ToolPath>();
             double sx = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, editor.Project.Options.SnapX) : x;
             double sy = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, editor.Project.Options.SnapY) : y;
             switch (_currentState)
@@ -169,7 +169,7 @@ namespace Core2D.Editor.Tools.Path
                         }
                         _arc.End.X = sx;
                         _arc.End.Y = sy;
-                        var figure = _toolPath._geometry.Figures.LastOrDefault();
+                        var figure = pathTool.Geometry.Figures.LastOrDefault();
                         var arc = figure.Segments.LastOrDefault() as XArcSegment;
                         arc.Point = _arc.End;
                         arc.Size.Width = Abs(_arc.Start.X - _arc.End.X);

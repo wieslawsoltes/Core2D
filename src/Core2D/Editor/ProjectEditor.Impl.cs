@@ -1102,137 +1102,167 @@ namespace Core2D.Editor
         }
 
         /// <summary>
-        /// Set current tool to <see cref="Tool.None"/>.
+        /// Set current tool to <see cref="ToolNone"/>.
         /// </summary>
         public void OnToolNone()
         {
-            CurrentTool = typeof(ToolNone);
+            CurrentTool = Tools.FirstOrDefault(t => t.Name == "None");
         }
-        
+
         /// <summary>
-        /// Set current tool to <see cref="Tool.Selection"/>.
+        /// Set current tool to <see cref="ToolSelection"/>.
         /// </summary>
         public void OnToolSelection()
         {
-            CurrentTool = typeof(ToolSelection);
+            CurrentTool = Tools.FirstOrDefault(t => t.Name == "Selection");
         }
 
         /// <summary>
-        /// Set current tool to <see cref="Tool.Point"/>.
+        /// Set current tool to <see cref="ToolPoint"/>.
         /// </summary>
         public void OnToolPoint()
         {
-            CurrentTool = typeof(ToolPoint);
+            CurrentTool = Tools.FirstOrDefault(t => t.Name == "Point");
         }
 
         /// <summary>
-        /// Set current tool to <see cref="Tool.Line"/> or current path tool to <see cref="PathTool.Line"/>.
+        /// Set current tool to <see cref="ToolLine"/> or current path tool to <see cref="PathTool.Line"/>.
         /// </summary>
         public void OnToolLine()
         {
-            if (CurrentTool == typeof(ToolPath) && CurrentPathTool != typeof(PathToolLine))
+            if (CurrentTool.Name == "Path" && CurrentPathTool.Name != "Line")
             {
-                CurrentPathTool = typeof(PathToolLine);
+                var tool = Tools.FirstOrDefault(t => t.Name == "Path");
+                if (tool != null)
+                {
+                    var pathTool = tool as ToolPath;
+                    pathTool.RemoveLastSegment();
+                }
+                CurrentPathTool = PathTools.FirstOrDefault(t => t.Name == "Line");
             }
             else
             {
-                CurrentTool = typeof(ToolLine);
+                CurrentTool = Tools.FirstOrDefault(t => t.Name == "Line");
             }
         }
 
         /// <summary>
-        /// Set current tool to <see cref="Tool.Arc"/> or current path tool to <see cref="PathTool.Arc"/>.
+        /// Set current tool to <see cref="ToolArc"/> or current path tool to <see cref="PathTool.Arc"/>.
         /// </summary>
         public void OnToolArc()
         {
-            if (CurrentTool == typeof(ToolPath) && CurrentPathTool != typeof(PathToolArc))
+            if (CurrentTool.Name == "Path" && CurrentPathTool.Name != "Arc")
             {
-                CurrentPathTool = typeof(PathToolArc);
+                var tool = Tools.FirstOrDefault(t => t.Name == "Path");
+                if (tool != null)
+                {
+                    var pathTool = tool as ToolPath;
+                    pathTool.RemoveLastSegment();
+                }
+                CurrentPathTool = PathTools.FirstOrDefault(t => t.Name == "Arc");
             }
             else
             {
-                CurrentTool = typeof(ToolArc);
+                CurrentTool = Tools.FirstOrDefault(t => t.Name == "Arc");
             }
         }
 
         /// <summary>
-        /// Set current tool to <see cref="Tool.CubicBezier"/> or current path tool to <see cref="PathTool.CubicBezier"/>.
+        /// Set current tool to <see cref="ToolCubicBezier"/> or current path tool to <see cref="PathTool.CubicBezier"/>.
         /// </summary>
         public void OnToolCubicBezier()
         {
-            if (CurrentTool == typeof(ToolPath) && CurrentPathTool != typeof(PathToolCubicBezier))
+            if (CurrentTool.Name == "Path" && CurrentPathTool.Name != "CubicBezier")
             {
-                CurrentPathTool = typeof(PathToolCubicBezier);
+                var tool = Tools.FirstOrDefault(t => t.Name == "Path");
+                if (tool != null)
+                {
+                    var pathTool = tool as ToolPath;
+                    pathTool.RemoveLastSegment();
+                }
+                CurrentPathTool = PathTools.FirstOrDefault(t => t.Name == "CubicBezier");
             }
             else
             {
-                CurrentTool = typeof(ToolCubicBezier);
+                CurrentTool = Tools.FirstOrDefault(t => t.Name == "CubicBezier");
             }
         }
 
         /// <summary>
-        /// Set current tool to <see cref="Tool.QuadraticBezier"/> or current path tool to <see cref="PathTool.QuadraticBezier"/>.
+        /// Set current tool to <see cref="ToolQuadraticBezier"/> or current path tool to <see cref="PathTool.QuadraticBezier"/>.
         /// </summary>
         public void OnToolQuadraticBezier()
         {
-            if (CurrentTool == typeof(ToolPath) && CurrentPathTool != typeof(PathToolQuadraticBezier))
+            if (CurrentTool.Name == "Path" && CurrentPathTool.Name != "QuadraticBezier")
             {
-                CurrentPathTool = typeof(PathToolQuadraticBezier);
+                var tool = Tools.FirstOrDefault(t => t.Name == "Path");
+                if (tool != null)
+                {
+                    var pathTool = tool as ToolPath;
+                    pathTool.RemoveLastSegment();
+                }
+                CurrentPathTool = PathTools.FirstOrDefault(t => t.Name == "QuadraticBezier");
             }
             else
             {
-                CurrentTool = typeof(ToolQuadraticBezier);
+                CurrentTool = Tools.FirstOrDefault(t => t.Name == "QuadraticBezier");
             }
         }
 
         /// <summary>
-        /// Set current tool to <see cref="Tool.Path"/>.
+        /// Set current tool to <see cref="ToolPath"/>.
         /// </summary>
         public void OnToolPath()
         {
-            CurrentTool = typeof(ToolPath);
+            CurrentTool = Tools.FirstOrDefault(t => t.Name == "Path");
         }
 
         /// <summary>
-        /// Set current tool to <see cref="Tool.Rectangle"/>.
+        /// Set current tool to <see cref="ToolRectangle"/>.
         /// </summary>
         public void OnToolRectangle()
         {
-            CurrentTool = typeof(ToolRectangle);
+            CurrentTool = Tools.FirstOrDefault(t => t.Name == "Rectangle");
         }
 
         /// <summary>
-        /// Set current tool to <see cref="Tool.Ellipse"/>.
+        /// Set current tool to <see cref="ToolEllipse"/>.
         /// </summary>
         public void OnToolEllipse()
         {
-            CurrentTool = typeof(ToolEllipse);
+            CurrentTool = Tools.FirstOrDefault(t => t.Name == "Ellipse");
         }
 
         /// <summary>
-        /// Set current tool to <see cref="Tool.Text"/>.
+        /// Set current tool to <see cref="ToolText"/>.
         /// </summary>
         public void OnToolText()
         {
-            CurrentTool = typeof(ToolText);
+            CurrentTool = Tools.FirstOrDefault(t => t.Name == "Text");
         }
 
         /// <summary>
-        /// Set current tool to <see cref="Tool.Image"/>.
+        /// Set current tool to <see cref="ToolImage"/>.
         /// </summary>
         public void OnToolImage()
         {
-            CurrentTool = typeof(ToolImage);
+            CurrentTool = Tools.FirstOrDefault(t => t.Name == "Image");
         }
 
         /// <summary>
-        /// Set current path tool to <see cref="PathTool.Move"/>.
+        /// Set current path tool to <see cref="PathToolMove"/>.
         /// </summary>
         public void OnToolMove()
         {
-            if (CurrentTool == typeof(ToolPath) && CurrentPathTool != typeof(PathToolMove))
+            if (CurrentTool.Name == "Path" && CurrentPathTool.Name != "Move")
             {
-                CurrentPathTool = typeof(PathToolMove);
+                var tool = Tools.FirstOrDefault(t => t.Name == "Path");
+                if (tool != null)
+                {
+                    var pathTool = tool as ToolPath;
+                    pathTool.RemoveLastSegment();
+                }
+                CurrentPathTool = PathTools.FirstOrDefault(t => t.Name == "Move");
             }
         }
 

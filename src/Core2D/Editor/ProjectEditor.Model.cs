@@ -2,13 +2,12 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Collections.Immutable;
+using System.Linq;
 using System.Threading.Tasks;
 using Core2D.Data.Database;
 using Core2D.Editor.Factories;
-using Core2D.Editor.Views.Interfaces;
 using Core2D.Editor.Recent;
-using Core2D.Editor.Tools;
-using Core2D.Editor.Tools.Path;
+using Core2D.Editor.Views.Interfaces;
 using Core2D.Interfaces;
 using Core2D.Project;
 using Core2D.Renderer;
@@ -32,12 +31,13 @@ namespace Core2D.Editor
         private Action _saveLayout;
         private Action _resetLayout;
         private bool _cancelAvailable;
-        private Type _currentTool;
-        private Type _currentPathTool;
+        private ToolBase _currentTool;
+        private PathToolBase _currentPathTool;
         private ImmutableArray<RecentFile> _recentProjects;
         private RecentFile _currentRecentProject;
         private IView _currentView;
-        private readonly Lazy<ImmutableDictionary<Type, ToolBase>> _tools;
+        private readonly Lazy<ImmutableArray<ToolBase>> _tools;
+        private readonly Lazy<ImmutableArray<PathToolBase>> _pathTools;
         private readonly Lazy<ImmutableArray<IView>> _views;
         private readonly Lazy<ILog> _log;
         private readonly Lazy<ShapeRenderer[]> _renderers;
@@ -163,7 +163,7 @@ namespace Core2D.Editor
         /// <summary>
         /// Gets or sets current editor tool.
         /// </summary>
-        public Type CurrentTool
+        public ToolBase CurrentTool
         {
             get { return _currentTool; }
             set { Update(ref _currentTool, value); }
@@ -172,7 +172,7 @@ namespace Core2D.Editor
         /// <summary>
         /// Gets or sets current editor path tool.
         /// </summary>
-        public Type CurrentPathTool
+        public PathToolBase CurrentPathTool
         {
             get { return _currentPathTool; }
             set { Update(ref _currentPathTool, value); }
@@ -206,9 +206,14 @@ namespace Core2D.Editor
         }
 
         /// <summary>
-        /// Gets or sets editor tools dictionary.
+        /// Gets or sets editor tools.
         /// </summary>
-        public ImmutableDictionary<Type, ToolBase> Tools => _tools.Value;
+        public ImmutableArray<ToolBase> Tools => _tools.Value;
+
+        /// <summary>
+        /// Gets or sets editor path tools.
+        /// </summary>
+        public ImmutableArray<PathToolBase> PathTools => _pathTools.Value;
 
         /// <summary>
         /// Gets or sets registered views.
@@ -272,11 +277,10 @@ namespace Core2D.Editor
         public ProjectEditor(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
-            _currentTool = typeof(ToolSelection);
-            _currentPathTool = typeof(PathToolLine);
             _recentProjects = ImmutableArray.Create<RecentFile>();
             _currentRecentProject = default(RecentFile);
-            _tools = _serviceProvider.GetServiceLazily<ToolBase[], ImmutableDictionary<Type, ToolBase>>((tools) => tools.ToImmutableDictionary(key => key.GetType()));
+            _tools = _serviceProvider.GetServiceLazily<ToolBase[], ImmutableArray<ToolBase>>((tools) => tools.Where(tool => !tool.GetType().Name.StartsWith("PathTool")).ToImmutableArray());
+            _pathTools = _serviceProvider.GetServiceLazily<PathToolBase[], ImmutableArray<PathToolBase>>((tools) => tools.ToImmutableArray());
             _views = _serviceProvider.GetServiceLazily<IView[], ImmutableArray<IView>>((views) => views.ToImmutableArray());
             _log = _serviceProvider.GetServiceLazily<ILog>();
             _renderers = _serviceProvider.GetServiceLazily<ShapeRenderer[]>();

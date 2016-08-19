@@ -8,7 +8,7 @@ using Core2D.Shapes;
 namespace Core2D.Editor.Tools
 {
     /// <summary>
-    /// Helper class for <see cref="Tool.Ellipse"/> editor.
+    /// Ellipse tool.
     /// </summary>
     public class ToolEllipse : ToolBase
     {

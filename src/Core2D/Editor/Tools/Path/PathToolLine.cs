@@ -11,12 +11,11 @@ using Core2D.Shapes;
 namespace Core2D.Editor.Tools.Path
 {
     /// <summary>
-    /// Helper class for <see cref="PathTool.Line"/> editor.
+    /// Line path tool.
     /// </summary>
-    public class PathToolLine : ToolBase
+    public class PathToolLine : PathToolBase
     {
         private readonly IServiceProvider _serviceProvider;
-        private readonly ToolPath _toolPath;
         private ToolState _currentState = ToolState.None;
         private XPathLine _line = new XPathLine();
         private LineSelection _selection;
@@ -28,11 +27,9 @@ namespace Core2D.Editor.Tools.Path
         /// Initialize new instance of <see cref="PathToolLine"/> class.
         /// </summary>
         /// <param name="serviceProvider">The service provider.</param>
-        /// <param name="toolPath">The current <see cref="ToolPath"/> object.</param>
-        public PathToolLine(IServiceProvider serviceProvider, ToolPath toolPath) : base()
+        public PathToolLine(IServiceProvider serviceProvider) : base()
         {
             _serviceProvider = serviceProvider;
-            _toolPath = toolPath;
         }
 
         /// <inheritdoc/>
@@ -40,6 +37,7 @@ namespace Core2D.Editor.Tools.Path
         {
             base.LeftDown(x, y);
             var editor = _serviceProvider.GetService<ProjectEditor>();
+            var pathTool = _serviceProvider.GetService<ToolPath>();
             double sx = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, editor.Project.Options.SnapX) : x;
             double sy = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, editor.Project.Options.SnapY) : y;
             switch (_currentState)
@@ -47,17 +45,17 @@ namespace Core2D.Editor.Tools.Path
                 case ToolState.None:
                     {
                         _line.Start = editor.TryToGetConnectionPoint(sx, sy) ?? XPoint.Create(sx, sy, editor.Project.Options.PointShape);
-                        if (!_toolPath._isInitialized)
+                        if (!pathTool.IsInitialized)
                         {
-                            _toolPath.InitializeWorkingPath(_line.Start);
+                            pathTool.InitializeWorkingPath(_line.Start);
                         }
                         else
                         {
-                            _line.Start = _toolPath.GetLastPathPoint();
+                            _line.Start = pathTool.GetLastPathPoint();
                         }
 
                         _line.End = XPoint.Create(sx, sy, editor.Project.Options.PointShape);
-                        _toolPath._context.LineTo(
+                        pathTool.GeometryContext.LineTo(
                             _line.End,
                             editor.Project.Options.DefaultIsStroked,
                             editor.Project.Options.DefaultIsSmoothJoin);
@@ -77,7 +75,7 @@ namespace Core2D.Editor.Tools.Path
                             var end = editor.TryToGetConnectionPoint(sx, sy);
                             if (end != null)
                             {
-                                var figure = _toolPath._geometry.Figures.LastOrDefault();
+                                var figure = pathTool.Geometry.Figures.LastOrDefault();
                                 var line = figure.Segments.LastOrDefault() as XLineSegment;
                                 line.Point = end;
                             }
@@ -85,7 +83,7 @@ namespace Core2D.Editor.Tools.Path
 
                         _line.Start = _line.End;
                         _line.End = XPoint.Create(sx, sy, editor.Project.Options.PointShape);
-                        _toolPath._context.LineTo(_line.End,
+                        pathTool.GeometryContext.LineTo(_line.End,
                             editor.Project.Options.DefaultIsStroked,
                             editor.Project.Options.DefaultIsSmoothJoin);
                         editor.Project.CurrentContainer.WorkingLayer.Invalidate();
@@ -101,26 +99,27 @@ namespace Core2D.Editor.Tools.Path
         {
             base.RightDown(x, y);
             var editor = _serviceProvider.GetService<ProjectEditor>();
+            var pathTool = _serviceProvider.GetService<ToolPath>();
             switch (_currentState)
             {
                 case ToolState.None:
                     break;
                 case ToolState.One:
                     {
-                        _toolPath.RemoveLastSegment<XLineSegment>();
+                        pathTool.RemoveLastSegment<XLineSegment>();
 
-                        editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_toolPath._path);
+                        editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(pathTool.Path);
                         Remove();
-                        if (_toolPath._path.Geometry.Figures.LastOrDefault().Segments.Length > 0)
+                        if (pathTool.Path.Geometry.Figures.LastOrDefault().Segments.Length > 0)
                         {
                             Finalize(null);
-                            editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, _toolPath._path);
+                            editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, pathTool.Path);
                         }
                         else
                         {
                             editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         }
-                        _toolPath.DeInitializeWorkingPath();
+                        pathTool.DeInitializeWorkingPath();
                         _currentState = ToolState.None;
                         editor.CancelAvailable = false;
                     }
