@@ -122,6 +122,7 @@
     <Compile Include="Editor\Commands\Interfaces\Window\IResetWindowLayoutCommand.cs" />
     <Compile Include="Editor\Commands\Interfaces\Window\ISaveWindowLayoutCommand.cs" />
     <Compile Include="Editor\Commands\Implementation\File\NewCommand.cs" />
+    <Compile Include="Editor\Input\Command.cs" />
     <Compile Include="Editor\Input\IInputSource.cs" />
     <Compile Include="Editor\Input\IInputTarget.cs" />
     <Compile Include="Editor\Input\InputProcessor.cs" />
