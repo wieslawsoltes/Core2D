@@ -1,17 +1,15 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
 using System.Collections.Immutable;
 using System.Linq;
 using Core2D.Data;
 using Core2D.Data.Database;
 using Core2D.Editor.Factories;
-using Core2D.Editor.Input;
 using Core2D.Editor.Recent;
-using Core2D.Interfaces;
 using Core2D.Path;
 using Core2D.Path.Segments;
 using Core2D.Project;
-using Core2D.Renderer;
 using Core2D.Shape;
 using Core2D.Shapes;
 using Core2D.Style;
@@ -219,124 +217,14 @@ namespace Core2D.Editor.Designer
         public static XQuadraticBezierSegment QuadraticBezierSegment { get; set; }
 
         /// <summary>
-        /// Initialize platform specific commands used by <see cref="Editor"/>.
-        /// </summary>
-        /// <param name="editor">The editor instance.</param>
-        public static void InitializeCommands(ProjectEditor editor)
-        {
-            Commands.OpenCommand =
-                Command<string>.Create(
-                    (path) => { },
-                    (path) => editor.IsEditMode());
-
-            Commands.SaveCommand =
-                Command.Create(
-                    () => { },
-                    () => editor.IsEditMode());
-
-            Commands.SaveAsCommand =
-                Command.Create(
-                    () => { },
-                    () => editor.IsEditMode());
-
-            Commands.ImportObjectCommand =
-                Command<string>.Create(
-                    (path) => { },
-                    (path) => editor.IsEditMode());
-
-            Commands.ExportObjectCommand =
-                Command<object>.Create(
-                    (item) => { },
-                    (item) => editor.IsEditMode());
-
-            Commands.ImportXamlCommand =
-                Command<string>.Create(
-                    (path) => { },
-                    (path) => editor.IsEditMode());
-
-            Commands.ExportXamlCommand =
-                Command<object>.Create(
-                    (item) => { },
-                    (item) => editor.IsEditMode());
-
-            Commands.ImportJsonCommand =
-                Command<string>.Create(
-                    (path) => { },
-                    (path) => editor.IsEditMode());
-
-            Commands.ExportJsonCommand =
-                Command<object>.Create(
-                    (item) => { },
-                    (item) => editor.IsEditMode());
-
-            Commands.ExportCommand =
-                Command<object>.Create(
-                    (item) => { },
-                    (item) => editor.IsEditMode());
-
-            Commands.ImportDataCommand =
-                Command<XProject>.Create(
-                    (project) => { },
-                    (project) => editor.IsEditMode());
-
-            Commands.ExportDataCommand =
-                Command<XDatabase>.Create(
-                    (db) => { },
-                    (db) => editor.IsEditMode());
-
-            Commands.UpdateDataCommand =
-                Command<XDatabase>.Create(
-                    (db) => { },
-                    (db) => editor.IsEditMode());
-
-            Commands.ZoomResetCommand =
-                Command.Create(
-                    () => editor.ResetZoom(),
-                    () => true);
-
-            Commands.ZoomAutoFitCommand =
-                Command.Create(
-                    () => editor.AutoFitZoom(),
-                    () => true);
-
-            Commands.LoadWindowLayoutCommand =
-                Command.Create(
-                    () => { },
-                    () => true);
-
-            Commands.SaveWindowLayoutCommand =
-                Command.Create(
-                    () => { },
-                    () => true);
-
-            Commands.ResetWindowLayoutCommand =
-                Command.Create(
-                    () => { },
-                    () => true);
-
-            Commands.ObjectBrowserCommand =
-                Command.Create(
-                    () => { },
-                    () => true);
-
-            Commands.DocumentViewerCommand =
-                Command.Create(
-                    () => { },
-                    () => true);
-        }
-
-        /// <summary>
         /// Initializes static designer context.
         /// </summary>
-        public static void InitializeContext()
+        /// <param name="serviceProvider">The service provider.</param>
+        public static void InitializeContext(IServiceProvider serviceProvider)
         {
             // Editor
 
-            Editor = ServiceLocator.Instance.Resolve<ProjectEditor>();
-
-            // Commands
-
-            InitializeCommands(Editor);
+            Editor = serviceProvider.GetService<ProjectEditor>();
 
             // Recent Projects
 
@@ -345,7 +233,7 @@ namespace Core2D.Editor.Designer
 
             // New Project
 
-            Editor.OnNew(null);
+            Editor.OnNewProject();
 
             // Data
 
