@@ -20,6 +20,19 @@
   <ItemGroup>
     <Compile Include="Attributes\ContentAttribute.cs" />
     <Compile Include="Attributes\NameAttribute.cs" />
+    <Compile Include="Editor\Commands\Implementation\Tool\ToolArcCommand.cs" />
+    <Compile Include="Editor\Commands\Implementation\Tool\ToolCubicBezierCommand.cs" />
+    <Compile Include="Editor\Commands\Implementation\Tool\ToolEllipseCommand.cs" />
+    <Compile Include="Editor\Commands\Implementation\Tool\ToolImageCommand.cs" />
+    <Compile Include="Editor\Commands\Implementation\Tool\ToolLineCommand.cs" />
+    <Compile Include="Editor\Commands\Implementation\Tool\ToolMoveCommand.cs" />
+    <Compile Include="Editor\Commands\Implementation\Tool\ToolNoneCommand.cs" />
+    <Compile Include="Editor\Commands\Implementation\Tool\ToolPathCommand.cs" />
+    <Compile Include="Editor\Commands\Implementation\Tool\ToolPointCommand.cs" />
+    <Compile Include="Editor\Commands\Implementation\Tool\ToolQuadraticBezierCommand.cs" />
+    <Compile Include="Editor\Commands\Implementation\Tool\ToolRectangleCommand.cs" />
+    <Compile Include="Editor\Commands\Implementation\Tool\ToolSelectionCommand.cs" />
+    <Compile Include="Editor\Commands\Implementation\Tool\ToolTextCommand.cs" />
     <Compile Include="Editor\Commands\Interfaces\View\IChangeCurrentViewCommand.cs" />
     <Compile Include="Editor\Commands\Interfaces\View\Views\IDocumentViewerCommand.cs" />
     <Compile Include="Editor\Commands\Interfaces\View\Views\IObjectBrowserCommand.cs" />
@@ -339,7 +352,6 @@
     <Folder Include="Editor\Commands\Implementation\Project\Shapes\" />
     <Folder Include="Editor\Commands\Implementation\Project\Styles\" />
     <Folder Include="Editor\Commands\Implementation\Project\Templates\" />
-    <Folder Include="Editor\Commands\Implementation\Tool\" />
     <Folder Include="Editor\Commands\Implementation\View\Views\" />
     <Folder Include="Editor\Commands\Implementation\View\Zoom\" />
     <Folder Include="Editor\Commands\Implementation\Window\" />
