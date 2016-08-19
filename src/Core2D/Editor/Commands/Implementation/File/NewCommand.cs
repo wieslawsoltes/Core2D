@@ -8,11 +8,11 @@ namespace Core2D.Editor.Commands
     public class NewCommand : Command<object>, INewCommand
     {
         /// <inheritdoc/>
-        public override bool CanRun(object parameter) 
+        public override bool CanRun(object item) 
             => ServiceProvider.GetService<ProjectEditor>().IsEditMode();
 
         /// <inheritdoc/>
-        public override void Run(object parameter) 
-            => ServiceProvider.GetService<ProjectEditor>().OnNew(parameter);
+        public override void Run(object item) 
+            => ServiceProvider.GetService<ProjectEditor>().OnNew(item);
     }
 }
