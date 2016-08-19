@@ -13,6 +13,6 @@ namespace Core2D.Editor.Commands
 
         /// <inheritdoc/>
         public override void Run(object parameter) 
-            => ServiceProvider.GetService<ProjectEditor>()?.OnNew(parameter);
+            => ServiceProvider.GetService<ProjectEditor>().OnNew(parameter);
     }
 }
