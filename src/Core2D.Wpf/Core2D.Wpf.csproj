@@ -93,6 +93,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\OpenCommand.cs" />
     <Compile Include="Controls\Custom\ZoomBorder.cs" />
     <Compile Include="Controls\Data\ColumnsControl.xaml.cs">
       <DependentUpon>ColumnsControl.xaml</DependentUpon>
