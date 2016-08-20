@@ -1126,7 +1126,7 @@ namespace Core2D.Editor
         }
 
         /// <summary>
-        /// Set current tool to <see cref="ToolLine"/> or current path tool to <see cref="PathTool.Line"/>.
+        /// Set current tool to <see cref="ToolLine"/> or current path tool to <see cref="PathToolLine"/>.
         /// </summary>
         public void OnToolLine()
         {
@@ -1147,7 +1147,7 @@ namespace Core2D.Editor
         }
 
         /// <summary>
-        /// Set current tool to <see cref="ToolArc"/> or current path tool to <see cref="PathTool.Arc"/>.
+        /// Set current tool to <see cref="ToolArc"/> or current path tool to <see cref="PathToolArc"/>.
         /// </summary>
         public void OnToolArc()
         {
@@ -1168,7 +1168,7 @@ namespace Core2D.Editor
         }
 
         /// <summary>
-        /// Set current tool to <see cref="ToolCubicBezier"/> or current path tool to <see cref="PathTool.CubicBezier"/>.
+        /// Set current tool to <see cref="ToolCubicBezier"/> or current path tool to <see cref="PathToolCubicBezier"/>.
         /// </summary>
         public void OnToolCubicBezier()
         {
@@ -1189,7 +1189,7 @@ namespace Core2D.Editor
         }
 
         /// <summary>
-        /// Set current tool to <see cref="ToolQuadraticBezier"/> or current path tool to <see cref="PathTool.QuadraticBezier"/>.
+        /// Set current tool to <see cref="ToolQuadraticBezier"/> or current path tool to <see cref="PathToolQuadraticBezier"/>.
         /// </summary>
         public void OnToolQuadraticBezier()
         {
