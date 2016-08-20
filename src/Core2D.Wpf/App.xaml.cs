@@ -60,9 +60,9 @@ namespace Core2D.Wpf
                     editor.OnLoadRecent(path);
                 }
 
-                editor.CurrentView = editor.Views.FirstOrDefault(view => view.Name == "Dashboard");
-                editor.CurrentTool = editor.Tools.FirstOrDefault(tool => tool.Name == "Selection");
-                editor.CurrentPathTool = editor.PathTools.FirstOrDefault(tool => tool.Name == "Line");
+                editor.CurrentView = editor.Views.FirstOrDefault(v => v.Name == "Dashboard");
+                editor.CurrentTool = editor.Tools.FirstOrDefault(t => t.Name == "Selection");
+                editor.CurrentPathTool = editor.PathTools.FirstOrDefault(t => t.Name == "Line");
 
                 var window = serviceProvider.GetService<Windows.MainWindow>();
                 bool isLoaded = false;
