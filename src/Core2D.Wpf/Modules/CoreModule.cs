@@ -22,7 +22,7 @@ namespace Core2D.Wpf.Modules
             builder.RegisterAssemblyTypes(typeof(ToolBase).Assembly).As<ToolBase>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterAssemblyTypes(typeof(PathToolBase).Assembly).As<PathToolBase>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<ProjectEditorCommands>().AutoActivate().PropertiesAutowired().InstancePerLifetimeScope();
-            builder.RegisterAssemblyTypes(typeof(ProjectEditorCommands).Assembly).AssignableTo<ICommand>().AsImplementedInterfaces().PropertiesAutowired().InstancePerLifetimeScope();
+            builder.RegisterAssemblyTypes(typeof(ProjectEditorCommands).Assembly).AssignableTo<ICommand>().AsImplementedInterfaces().AsSelf().PropertiesAutowired().InstancePerLifetimeScope();
             builder.RegisterAssemblyTypes(typeof(IView).Assembly).As<IView>().InstancePerLifetimeScope();
         }
     }

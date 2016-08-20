@@ -15,7 +15,7 @@ namespace Core2D.Wpf.Modules
         /// <inheritdoc/>
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterAssemblyTypes(typeof(App).Assembly).AssignableTo<ICommand>().AsImplementedInterfaces().PropertiesAutowired().InstancePerLifetimeScope();
+            builder.RegisterAssemblyTypes(typeof(App).Assembly).AssignableTo<ICommand>().AsImplementedInterfaces().AsSelf().PropertiesAutowired().InstancePerLifetimeScope();
             builder.RegisterAssemblyTypes(typeof(App).Assembly).As<IView>().InstancePerLifetimeScope();
             builder.RegisterType<MainWindow>().As<MainWindow>().InstancePerLifetimeScope();
         }
