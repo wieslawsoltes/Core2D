@@ -1,10 +1,10 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Core2D.Interfaces;
-using Avalonia;
-using Avalonia.Markup;
 using System;
 using System.Globalization;
+using Avalonia;
+using Avalonia.Markup;
+using Core2D.Interfaces;
 
 namespace Core2D.Avalonia.Converters
 {
@@ -13,7 +13,10 @@ namespace Core2D.Avalonia.Converters
     /// </summary>
     public class ObjectToJsonStringConverter : IValueConverter
     {
-        private static Lazy<IJsonSerializer> JsonSerializer = ServiceLocator.Instance.ResolveLazily<IJsonSerializer>();
+        /// <summary>
+        /// Gets or sets json serializer.
+        /// </summary>
+        internal static Lazy<IJsonSerializer> JsonSerializer { get; set; }
 
         /// <summary>
         /// Gets an instance of a <see cref="ObjectToJsonStringConverter"/>.
