@@ -124,6 +124,7 @@ namespace Core2D.Avalonia
         {
             if (Design.IsDesignMode)
             {
+                // TODO: Fix Design.DataContext initialization.
                 /*
                 var builder = new ContainerBuilder();
 
