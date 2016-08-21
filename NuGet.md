@@ -99,6 +99,7 @@ You can install the package like this:
   * CsvHelper
   * SkiaSharp
 * WPF
+  * Autofac
   * System.Reactive.Core
   * System.Reactive.Interfaces
   * System.Reactive.Linq
@@ -107,6 +108,7 @@ You can install the package like this:
   * System.Windows.Interactivity.WPF
   * Wpf.Controls.PanAndZoom
 * Avalonia
+  * Autofac
   * System.Reactive
   * System.Reactive.Core
   * System.Reactive.Interfaces
