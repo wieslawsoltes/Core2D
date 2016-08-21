@@ -28,26 +28,26 @@ namespace Core2D.Wpf.Importers
         /// <inheritdoc/>
         public async Task<string> GetImageKeyAsync()
         {
-            var dlg = new OpenFileDialog()
+            try
             {
-                Filter = "All (*.*)|*.*",
-                FilterIndex = 0,
-                FileName = ""
-            };
+                var dlg = new OpenFileDialog()
+                {
+                    Filter = "All (*.*)|*.*",
+                    FilterIndex = 0,
+                    FileName = ""
+                };
 
-            if (dlg.ShowDialog(_serviceProvider.GetService<MainWindow>()) == true)
-            {
-                try
+                if (dlg.ShowDialog(_serviceProvider.GetService<MainWindow>()) == true)
                 {
                     var path = dlg.FileName;
                     var bytes = System.IO.File.ReadAllBytes(path);
                     var key = _serviceProvider.GetService<ProjectEditor>().Project.AddImageFromFile(path, bytes);
                     return await Task.Run(() => key);
                 }
-                catch (Exception ex)
-                {
-                    _serviceProvider.GetService<ILog>().LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
-                }
+            }
+            catch (Exception ex)
+            {
+                _serviceProvider.GetService<ILog>().LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
 
             return null;
