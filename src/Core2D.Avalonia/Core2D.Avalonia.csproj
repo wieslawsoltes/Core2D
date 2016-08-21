@@ -725,7 +725,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App.IEditorApplication.cs" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
