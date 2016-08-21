@@ -5,6 +5,7 @@ using Autofac;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Logging.Serilog;
+using Core2D.Avalonia.Modules;
 using Core2D.Avalonia.Skia.Modules;
 using Core2D.Interfaces;
 using Serilog;
@@ -30,6 +31,7 @@ namespace Core2D.Avalonia.Skia
             builder.RegisterModule<CoreModule>();
             builder.RegisterModule<DependenciesModule>();
             builder.RegisterModule<AppModule>();
+            builder.RegisterModule<SkiaModule>();
 
             using (IContainer container = builder.Build())
             {

@@ -6,6 +6,7 @@ using Android.Content.PM;
 using Android.OS;
 using Autofac;
 using Core2D.Avalonia.Droid.Modules;
+using Core2D.Avalonia.Modules;
 using Core2D.Interfaces;
 using A = Avalonia;
 using AAPS = Avalonia.Android.Platform.Specific;
@@ -36,6 +37,7 @@ namespace Core2D.Avalonia.Droid
             builder.RegisterModule<CoreModule>();
             builder.RegisterModule<DependenciesModule>();
             builder.RegisterModule<AppModule>();
+            builder.RegisterModule<DroidModule>();
 
             using (IContainer container = builder.Build())
             {

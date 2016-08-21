@@ -59,8 +59,8 @@
     <EnableProguard>False</EnableProguard>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autofac, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Autofac.4.0.0\lib\netstandard1.1\Autofac.dll</HintPath>
+    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Autofac.3.5.2\lib\portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\Autofac.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Avalonia.Android, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -187,12 +187,8 @@
     <Compile Include="..\..\dependencies\Log.Trace\TraceLog.cs">
       <Link>Dependencies\TraceLog.cs</Link>
     </Compile>
-    <Compile Include="Locator\ServiceProvider.cs" />
     <Compile Include="MainActivity.cs" />
-    <Compile Include="Modules\AppModule.cs" />
-    <Compile Include="Modules\CoreModule.cs" />
-    <Compile Include="Modules\DependenciesModule.cs" />
-    <Compile Include="Modules\LocatorModule.cs" />
+    <Compile Include="Modules\DroidModule.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

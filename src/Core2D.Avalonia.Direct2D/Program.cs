@@ -6,6 +6,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Logging.Serilog;
 using Core2D.Avalonia.Direct2D.Modules;
+using Core2D.Avalonia.Modules;
 using Core2D.Interfaces;
 using Serilog;
 
@@ -30,6 +31,7 @@ namespace Core2D.Avalonia.Direct2D
             builder.RegisterModule<CoreModule>();
             builder.RegisterModule<DependenciesModule>();
             builder.RegisterModule<AppModule>();
+            builder.RegisterModule<Direct2DModule>();
 
             using (IContainer container = builder.Build())
             {
