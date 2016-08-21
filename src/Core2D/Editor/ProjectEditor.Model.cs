@@ -3,7 +3,6 @@
 using System;
 using System.Collections.Immutable;
 using System.Linq;
-using System.Threading.Tasks;
 using Core2D.Data.Database;
 using Core2D.Editor.Factories;
 using Core2D.Editor.Recent;
