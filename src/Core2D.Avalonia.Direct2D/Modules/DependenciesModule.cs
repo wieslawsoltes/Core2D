@@ -35,7 +35,7 @@ namespace Core2D.Avalonia.Direct2D.Modules
             builder.RegisterType<EmfWriter>().As<IFileWriter>().InstancePerLifetimeScope();
             builder.RegisterType<CsvHelperReader>().As<ITextFieldReader<XDatabase>>().InstancePerLifetimeScope();
             builder.RegisterType<CsvHelperWriter>().As<ITextFieldWriter<XDatabase>>().InstancePerLifetimeScope();
-            builder.RegisterType<AvaloniaRenderer>().As<ShapeRenderer>().InstancePerLifetimeScope();
+            builder.RegisterType<AvaloniaRenderer>().As<ShapeRenderer>().InstancePerDependency();
             builder.RegisterType<AvaloniaTextClipboard>().As<ITextClipboard>().InstancePerLifetimeScope();
         }
     }

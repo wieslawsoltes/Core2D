@@ -37,7 +37,7 @@ namespace Core2D.Wpf.Modules
             builder.RegisterType<VdxWriter>().As<IFileWriter>().InstancePerLifetimeScope();
             builder.RegisterType<CsvHelperReader>().As<ITextFieldReader<XDatabase>>().InstancePerLifetimeScope();
             builder.RegisterType<CsvHelperWriter>().As<ITextFieldWriter<XDatabase>>().InstancePerLifetimeScope();
-            builder.RegisterType<WpfRenderer>().As<ShapeRenderer>().InstancePerLifetimeScope();
+            builder.RegisterType<WpfRenderer>().As<ShapeRenderer>().InstancePerDependency();
             builder.RegisterType<WpfTextClipboard>().As<ITextClipboard>().InstancePerLifetimeScope();
         }
     }

@@ -31,7 +31,7 @@ namespace Core2D.Avalonia.Cairo.Modules
             builder.RegisterType<PdfWriter>().As<IFileWriter>().InstancePerLifetimeScope();
             builder.RegisterType<CsvHelperReader>().As<ITextFieldReader<XDatabase>>().InstancePerLifetimeScope();
             builder.RegisterType<CsvHelperWriter>().As<ITextFieldWriter<XDatabase>>().InstancePerLifetimeScope();
-            builder.RegisterType<AvaloniaRenderer>().As<ShapeRenderer>().InstancePerLifetimeScope();
+            builder.RegisterType<AvaloniaRenderer>().As<ShapeRenderer>().InstancePerDependency();
             builder.RegisterType<AvaloniaTextClipboard>().As<ITextClipboard>().InstancePerLifetimeScope();
         }
     }

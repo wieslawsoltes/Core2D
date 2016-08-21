@@ -283,7 +283,7 @@ namespace Core2D.Editor
             _pathTools = _serviceProvider.GetServiceLazily<PathToolBase[], ImmutableArray<PathToolBase>>((tools) => tools.ToImmutableArray());
             _views = _serviceProvider.GetServiceLazily<IView[], ImmutableArray<IView>>((views) => views.ToImmutableArray());
             _log = _serviceProvider.GetServiceLazily<ILog>();
-            _renderers = _serviceProvider.GetServiceLazily<ShapeRenderer[]>();
+            _renderers = new Lazy<ShapeRenderer[]>(() => new[] { _serviceProvider.GetService<ShapeRenderer>(), _serviceProvider.GetService<ShapeRenderer>() });
             _fileIO = _serviceProvider.GetServiceLazily<IFileSystem>();
             _projectFactory = _serviceProvider.GetServiceLazily<IProjectFactory>();
             _textClipboard = _serviceProvider.GetServiceLazily<ITextClipboard>();
