@@ -145,11 +145,11 @@
             <MenuItem Header="{x:Static p:Resources.MenuToolImage}" Command="{x:Static Editor:ProjectEditorCommands.ToolImageCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool.Name, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Image}" InputGestureText="I"/>
         </MenuItem>
         <MenuItem Header="{x:Static p:Resources.MenuData}">
-            <MenuItem Header="{x:Static p:Resources.MenuDataImport}" Command="{x:Static Editor:ProjectEditorCommands.ImportDataCommand}" InputGestureText=""/>
+            <MenuItem Header="{x:Static p:Resources.MenuDataImport}" Command="{x:Static Editor:ProjectEditorCommands.ImportDataCommand}" CommandParameter="{Binding Project}" InputGestureText=""/>
             <Separator/>
-            <MenuItem Header="{x:Static p:Resources.MenuDataExport}" Command="{x:Static Editor:ProjectEditorCommands.ExportDataCommand}" InputGestureText=""/>
+            <MenuItem Header="{x:Static p:Resources.MenuDataExport}" Command="{x:Static Editor:ProjectEditorCommands.ExportDataCommand}" CommandParameter="{Binding Project.CurrentDatabase}" InputGestureText=""/>
             <Separator/>
-            <MenuItem Header="{x:Static p:Resources.MenuDataUpdate}" Command="{x:Static Editor:ProjectEditorCommands.UpdateDataCommand}" InputGestureText=""/>
+            <MenuItem Header="{x:Static p:Resources.MenuDataUpdate}" Command="{x:Static Editor:ProjectEditorCommands.UpdateDataCommand}" CommandParameter="{Binding Project.CurrentDatabase}" InputGestureText=""/>
         </MenuItem>
         <MenuItem Header="{x:Static p:Resources.MenuTemplate}" Tag="{Binding}" ItemsSource="{Binding Project.Templates}" Style="{StaticResource TemplateMenuItemVisibilityStyle}">
             <MenuItem.ItemContainerStyle>
