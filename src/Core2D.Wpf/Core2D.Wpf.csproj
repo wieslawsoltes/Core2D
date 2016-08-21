@@ -93,7 +93,28 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\Edit\Clipboard\CopyAsEmfCommand.cs" />
+    <Compile Include="Commands\Data\ExportDataCommand.cs" />
+    <Compile Include="Commands\Data\ImportDataCommand.cs" />
+    <Compile Include="Commands\Data\UpdateDataCommand.cs" />
+    <Compile Include="Commands\File\ExitCommand.cs" />
+    <Compile Include="Commands\File\ExportCommand.cs" />
+    <Compile Include="Commands\File\Export\ExportJsonCommand.cs" />
+    <Compile Include="Commands\File\Export\ExportObjectCommand.cs" />
+    <Compile Include="Commands\File\Export\ExportXamlCommand.cs" />
+    <Compile Include="Commands\File\Import\ImportJsonCommand.cs" />
+    <Compile Include="Commands\File\Import\ImportObjectCommand.cs" />
+    <Compile Include="Commands\File\Import\ImportXamlCommand.cs" />
+    <Compile Include="Commands\View\Views\DocumentViewerCommand.cs" />
+    <Compile Include="Commands\View\Views\ObjectBrowserCommand.cs" />
     <Compile Include="Commands\File\OpenCommand.cs" />
+    <Compile Include="Commands\File\SaveAsCommand.cs" />
+    <Compile Include="Commands\File\SaveCommand.cs" />
+    <Compile Include="Commands\Window\LoadWindowLayoutCommand.cs" />
+    <Compile Include="Commands\View\Zoom\ZoomAutoFitCommand.cs" />
+    <Compile Include="Commands\View\Zoom\ZoomResetCommand.cs" />
+    <Compile Include="Commands\Window\ResetWindowLayoutCommand.cs" />
+    <Compile Include="Commands\Window\SaveWindowLayoutCommand.cs" />
     <Compile Include="Controls\Custom\ZoomBorder.cs" />
     <Compile Include="Controls\Data\ColumnsControl.xaml.cs">
       <DependentUpon>ColumnsControl.xaml</DependentUpon>
