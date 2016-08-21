@@ -40,6 +40,7 @@ namespace Core2D.Avalonia
         static App()
         {
             InitializePresenters();
+            InitializeDesigner();
         }
 
         /// <summary>
@@ -114,6 +115,28 @@ namespace Core2D.Avalonia
             CachedContentPresenter.Register(typeof(ShapeStyle), () => new ShapeStyleControl());
             CachedContentPresenter.Register(typeof(BaseStyle), () => new StyleControl());
             CachedContentPresenter.Register(typeof(TextStyle), () => new TextStyleControl());
+        }
+
+        /// <summary>
+        /// Initializes designer.
+        /// </summary>
+        static void InitializeDesigner()
+        {
+            if (Design.IsDesignMode)
+            {
+                /*
+                var builder = new ContainerBuilder();
+
+                builder.RegisterModule<LocatorModule>();
+                builder.RegisterModule<CoreModule>();
+                builder.RegisterModule<DependenciesModule>();
+                builder.RegisterModule<AppModule>();
+
+                var container = builder.Build();
+
+                DesignerContext.InitializeContext(container.Resolve<IServiceProvider>());
+                */
+            }
         }
 
         /// <summary>
