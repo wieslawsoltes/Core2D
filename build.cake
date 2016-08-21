@@ -140,9 +140,9 @@ var SystemReactiveVersion = "3.0.0";
 var NewtonsoftJsonVersion = "9.0.1";
 var PortableXamlVersion = "0.14.0";
 var CsvHelperVersion = "2.16.0.0";
-var AvaloniaVersion = "0.4.1-build1860-alpha";
-var AvaloniaXamlBehaviorsVersion = "0.4.1-build245-alpha";
-var AvaloniaControlsPanAndZoomVersion = "0.4.1-build33-alpha";
+var AvaloniaVersion = "0.4.1-build1936-alpha";
+var AvaloniaXamlBehaviorsVersion = "0.4.1-build301-alpha";
+var AvaloniaControlsPanAndZoomVersion = "0.4.1-build35-alpha";
 var SkiaSharpVersion = "1.53.0";
 
 var SetNuGetNuspecCommonProperties = new Action<NuGetPackSettings> ((nuspec) => {

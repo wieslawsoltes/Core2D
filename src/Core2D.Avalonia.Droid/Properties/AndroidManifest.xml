@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="Core2D.Avalonia.Droid" android:versionCode="1" android:versionName="0.1.0" android:installLocation="auto">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="Core2D.Avalonia.Droid" android:versionCode="1" android:versionName="0.2.0" android:installLocation="auto">
 	<uses-sdk android:minSdkVersion="19" android:targetSdkVersion="23" />
 	<application android:label="Core2D" android:icon="@drawable/Icon"></application>
 </manifest>
