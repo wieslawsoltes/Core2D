@@ -213,11 +213,11 @@
             </MenuItem>
         </MenuItem>
         <MenuItem Header="_Data">
-            <MenuItem Header="_Import..." Command="{Static Editor:ProjectEditorCommands.ImportDataCommand}"/>
+            <MenuItem Header="_Import..." Command="{Static Editor:ProjectEditorCommands.ImportDataCommand}" CommandParameter="{Binding Project}"/>
             <Separator/>
-            <MenuItem Header="_Export..." Command="{Static Editor:ProjectEditorCommands.ExportDataCommand}"/>
+            <MenuItem Header="_Export..." Command="{Static Editor:ProjectEditorCommands.ExportDataCommand}" CommandParameter="{Binding Project.CurrentDatabase}"/>
             <Separator/>
-            <MenuItem Header="_Update..." Command="{Static Editor:ProjectEditorCommands.UpdateDataCommand}"/>
+            <MenuItem Header="_Update..." Command="{Static Editor:ProjectEditorCommands.UpdateDataCommand}" CommandParameter="{Binding Project.CurrentDatabase}"/>
         </MenuItem>
         <MenuItem Header="Te_mplate" Items="{Binding Project.Templates}">
             <MenuItem.Styles>
