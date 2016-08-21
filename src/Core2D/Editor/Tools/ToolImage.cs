@@ -40,10 +40,10 @@ namespace Core2D.Editor.Tools
             {
                 case ToolState.None:
                     {
-                        if (editor.GetImageKey == null)
+                        if (editor.ImageImporter == null)
                             return;
 
-                        var key = await editor.GetImageKey();
+                        var key = await editor.ImageImporter.GetImageKeyAsync();
                         if (key == null || string.IsNullOrEmpty(key))
                             return;
 

@@ -265,18 +265,19 @@ namespace Core2D.Editor
         /// <summary>
         /// Import database.
         /// </summary>
+        /// <param name="project">The target project.</param>
         /// <param name="path">The database file path.</param>
-        public void OnImportData(string path)
+        public void OnImportData(XProject project, string path)
         {
             try
             {
-                if (Project != null)
+                if (project != null)
                 {
                     var db = CsvReader?.Read(path, FileIO);
                     if (db != null)
                     {
-                        Project.AddDatabase(db);
-                        Project.SetCurrentDatabase(db);
+                        project.AddDatabase(db);
+                        project.SetCurrentDatabase(db);
                     }
                 }
             }
@@ -284,6 +285,15 @@ namespace Core2D.Editor
             {
                 Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
+        }
+
+        /// <summary>
+        /// Import database.
+        /// </summary>
+        /// <param name="path">The database file path.</param>
+        public void OnImportData(string path)
+        {
+            OnImportData(Project, path);
         }
 
         /// <summary>
@@ -1728,7 +1738,7 @@ namespace Core2D.Editor
             {
                 if (path == null || string.IsNullOrEmpty(path))
                 {
-                    var key = await (GetImageKey() ?? Task.FromResult(string.Empty));
+                    var key = await (ImageImporter.GetImageKeyAsync() ?? Task.FromResult(string.Empty));
                     if (key == null || string.IsNullOrEmpty(key))
                         return null;
 

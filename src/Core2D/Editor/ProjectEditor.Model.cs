@@ -49,6 +49,7 @@ namespace Core2D.Editor
         private readonly Lazy<ImmutableArray<IFileWriter>> _fileWriters;
         private readonly Lazy<ITextFieldReader<XDatabase>> _csvReader;
         private readonly Lazy<ITextFieldWriter<XDatabase>> _csvWriter;
+        private readonly Lazy<IImageImporter> _imageImporter;
 
         /// <summary>
         /// Gets or sets current project.
@@ -154,11 +155,6 @@ namespace Core2D.Editor
             get { return _cancelAvailable; }
             set { Update(ref _cancelAvailable, value); }
         }
-
-        /// <summary>
-        /// Get image key using common system open file dialog.
-        /// </summary>
-        public Func<Task<string>> GetImageKey => null;
 
         /// <summary>
         /// Gets or sets current editor tool.
@@ -271,6 +267,11 @@ namespace Core2D.Editor
         public ITextFieldWriter<XDatabase> CsvWriter => _csvWriter.Value;
 
         /// <summary>
+        /// Gets image key importer.
+        /// </summary>
+        public IImageImporter ImageImporter => _imageImporter.Value;
+
+        /// <summary>
         /// Initialize new instance of <see cref="ProjectEditor"/> class.
         /// </summary>
         /// <param name="serviceProvider">The service provider.</param>
@@ -292,6 +293,7 @@ namespace Core2D.Editor
             _fileWriters = _serviceProvider.GetServiceLazily<IFileWriter[], ImmutableArray<IFileWriter>>((writers) => writers.ToImmutableArray());
             _csvReader = _serviceProvider.GetServiceLazily<ITextFieldReader<XDatabase>>();
             _csvWriter = _serviceProvider.GetServiceLazily<ITextFieldWriter<XDatabase>>();
+            _imageImporter = _serviceProvider.GetServiceLazily<IImageImporter>();
         }
     }
 }
