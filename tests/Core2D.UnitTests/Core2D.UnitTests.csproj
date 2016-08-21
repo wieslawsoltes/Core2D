@@ -74,6 +74,8 @@
     <Compile Include="Editor\Input\InputProcessorTests.cs" />
     <Compile Include="Editor\ProjectEditorTests_Impl.cs" />
     <Compile Include="Editor\ProjectEditorTests_Model.cs" />
+    <Compile Include="Editor\ServiceProviderExtensionsTests.cs" />
+    <Compile Include="Editor\Tools\Path\PathToolMoveTests.cs" />
     <Compile Include="Editor\Tools\Path\ToolPathArcTests.cs" />
     <Compile Include="Editor\Tools\Path\ToolPathCubicBezierTests.cs" />
     <Compile Include="Editor\Tools\Path\ToolPathLineTests.cs" />
@@ -162,7 +164,6 @@
     <Compile Include="Renderer\Presenters\ContainerPresenterTests.cs" />
     <Compile Include="Renderer\ShapeRendererStateTests.cs" />
     <Compile Include="Renderer\ShapeRendererTests.cs" />
-    <Compile Include="ServiceLocatorTests.cs" />
     <Compile Include="Shapes\XArcTests.cs" />
     <Compile Include="Shapes\XCubicBezierTests.cs" />
     <Compile Include="Shapes\XEllipseTests.cs" />

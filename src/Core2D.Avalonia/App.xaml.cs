@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Collections.Immutable;
+using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
@@ -11,14 +12,12 @@ using Core2D.Avalonia.Controls.Project;
 using Core2D.Avalonia.Controls.Shapes;
 using Core2D.Avalonia.Controls.State;
 using Core2D.Avalonia.Controls.Style;
+using Core2D.Avalonia.Converters;
 using Core2D.Avalonia.Presenters;
 using Core2D.Avalonia.Views;
 using Core2D.Data;
 using Core2D.Data.Database;
 using Core2D.Editor;
-using Core2D.Editor.Designer;
-using Core2D.Editor.Factories;
-using Core2D.Editor.Input;
 using Core2D.Editor.Views;
 using Core2D.Interfaces;
 using Core2D.Path;
@@ -35,38 +34,13 @@ namespace Core2D.Avalonia
     /// </summary>
     public partial class App : Application
     {
-        private static string RecentFileName = "Core2D.recent";
-        private static string LogFileName = "Core2D.log";
-
         /// <summary>
         /// Initializes static data.
         /// </summary>
         static App()
         {
-            InitializeDesigner();
             InitializePresenters();
-        }
-
-        /// <summary>
-        /// Initializes designer.
-        /// </summary>
-        static void InitializeDesigner()
-        {
-            if (Design.IsDesignMode)
-            {
-                RegisterDesignerServices();
-                DesignerContext.InitializeContext();
-            }
-        }
-
-        /// <summary>
-        /// Register designer services.
-        /// </summary>
-        static void RegisterDesignerServices()
-        {
-            ServiceLocator.Instance.RegisterSingleton<ProjectEditor>(() => new ProjectEditor());
-            ServiceLocator.Instance.RegisterSingleton<CommandManager>(() => new CommandManager());
-            ServiceLocator.Instance.RegisterSingleton<IProjectFactory>(() => new ProjectFactory());
+            InitializeDesigner();
         }
 
         /// <summary>
@@ -143,6 +117,39 @@ namespace Core2D.Avalonia
             CachedContentPresenter.Register(typeof(TextStyle), () => new TextStyleControl());
         }
 
+        /// <summary>
+        /// Initializes designer.
+        /// </summary>
+        static void InitializeDesigner()
+        {
+            if (Design.IsDesignMode)
+            {
+                // TODO: Fix Design.DataContext initialization.
+                /*
+                var builder = new ContainerBuilder();
+
+                builder.RegisterModule<LocatorModule>();
+                builder.RegisterModule<CoreModule>();
+                builder.RegisterModule<DependenciesModule>();
+                builder.RegisterModule<AppModule>();
+
+                var container = builder.Build();
+
+                DesignerContext.InitializeContext(container.Resolve<IServiceProvider>());
+                */
+            }
+        }
+
+        /// <summary>
+        /// Initializes converters.
+        /// </summary>
+        /// <param name="serviceProvider">The service provider.</param>
+        static void InitializeConverters(IServiceProvider serviceProvider)
+        {
+            ObjectToXamlStringConverter.XamlSerializer = serviceProvider.GetServiceLazily<IXamlSerializer>();
+            ObjectToJsonStringConverter.JsonSerializer = serviceProvider.GetServiceLazily<IJsonSerializer>();
+        }
+
         /// <inheritdoc/>
         public override void Initialize()
         {
@@ -152,20 +159,38 @@ namespace Core2D.Avalonia
         /// <summary>
         /// Initialize application context and displays main window.
         /// </summary>
-        public void Start()
+        /// <param name="serviceProvider">The service provider.</param>
+        public void Start(IServiceProvider serviceProvider)
         {
-            var log = ServiceLocator.Instance.Resolve<ILog>();
-            var fileIO = ServiceLocator.Instance.Resolve<IFileSystem>();
-            var editor = ServiceLocator.Instance.Resolve<ProjectEditor>();
+            InitializeConverters(serviceProvider);
 
-            log?.Initialize(System.IO.Path.Combine(fileIO?.GetAssemblyPath(null), LogFileName));
+            var log = serviceProvider.GetService<ILog>();
+            var fileIO = serviceProvider.GetService<IFileSystem>();
+
+            log?.Initialize(System.IO.Path.Combine(fileIO?.GetAssemblyPath(null), "Core2D.log"));
 
             try
             {
-                LoadRecent();
+                var editor = serviceProvider.GetService<ProjectEditor>();
 
-                var window = ServiceLocator.Instance.Resolve<Windows.MainWindow>();
-                window.Closed += (sender, e) => SaveRecent();
+                var path = System.IO.Path.Combine(fileIO.GetAssemblyPath(null), "Core2D.recent");
+                if (fileIO.Exists(path))
+                {
+                    editor.OnLoadRecent(path);
+                }
+
+                editor.CurrentView = editor.Views.FirstOrDefault(v => v.Name == "Dashboard");
+                editor.CurrentTool = editor.Tools.FirstOrDefault(t => t.Name == "Selection");
+                editor.CurrentPathTool = editor.PathTools.FirstOrDefault(t => t.Name == "Line");
+
+                var window = serviceProvider.GetService<Windows.MainWindow>();
+
+                window.Closed +=
+                    (sender, e) =>
+                    {
+                        editor.OnSaveRecent(path);
+                    };
+
                 window.DataContext = editor;
                 window.Show();
                 Run(window);
@@ -177,49 +202,6 @@ namespace Core2D.Avalonia
                 {
                     log?.LogError($"{ex.InnerException.Message}{Environment.NewLine}{ex.InnerException.StackTrace}");
                 }
-            }
-        }
-
-        /// <summary>
-        /// Load recent project files list.
-        /// </summary>
-        private void LoadRecent()
-        {
-            var log = ServiceLocator.Instance.Resolve<ILog>();
-            var fileIO = ServiceLocator.Instance.Resolve<IFileSystem>();
-            var editor = ServiceLocator.Instance.Resolve<ProjectEditor>();
-
-            try
-            {
-                var path = System.IO.Path.Combine(fileIO.GetAssemblyPath(null), RecentFileName);
-                if (fileIO.Exists(path))
-                {
-                    editor.OnLoadRecent(path);
-                }
-            }
-            catch (Exception ex)
-            {
-                log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
-            }
-        }
-
-        /// <summary>
-        /// Save recent project files list.
-        /// </summary>
-        private void SaveRecent()
-        {
-            var log = ServiceLocator.Instance.Resolve<ILog>();
-            var fileIO = ServiceLocator.Instance.Resolve<IFileSystem>();
-            var editor = ServiceLocator.Instance.Resolve<ProjectEditor>();
-
-            try
-            {
-                var path = System.IO.Path.Combine(fileIO.GetAssemblyPath(null), RecentFileName);
-                editor.OnSaveRecent(path);
-            }
-            catch (Exception ex)
-            {
-                log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
     }

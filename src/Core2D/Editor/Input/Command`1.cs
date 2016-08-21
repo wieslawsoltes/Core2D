@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
+using System.Windows.Input;
 
 namespace Core2D.Editor.Input
 {
@@ -8,43 +9,59 @@ namespace Core2D.Editor.Input
     /// Generic input command.
     /// </summary>
     /// <typeparam name="T">The command parameter type.</typeparam>
-    public class Command<T> : ICoreCommand<T> where T : class
+    public abstract class Command<T> : ICommand where T : class
     {
-        private Action<T> _execute;
-        private Func<T, bool> _canExecute;
+        /// <summary>
+        /// Gets or sets service provider.
+        /// </summary>
+        public IServiceProvider ServiceProvider { get; set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Command{T}"/> class.
+        /// Gets or sets CanExecuteChanged event handler.
         /// </summary>
-        /// <param name="execute">The execute action.</param>
-        /// <param name="canExecute">The can execute function.</param>
-        public Command(Action<T> execute, Func<T, bool> canExecute = null)
-        {
-            _execute = execute;
-            _canExecute = canExecute;
-        }
+        public event EventHandler CanExecuteChanged;
 
-        /// <inheritdoc/>
-        public override bool CanExecute(object parameter)
+        /// <summary>
+        /// Raise <see cref="ICommand.CanExecuteChanged"/> event.
+        /// </summary>
+        /// <summary>
+        /// Raise <see cref="CanExecuteChanged"/> event.
+        /// </summary>
+        public virtual void NotifyCanExecuteChanged()
         {
-            return _canExecute?.Invoke(parameter as T) ?? true;
-        }
-
-        /// <inheritdoc/>
-        public override void Execute(object parameter)
-        {
-            _execute?.Invoke(parameter as T);
+            CanExecuteChanged?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
-        /// Creates a new <see cref="Command{T}"/> instance.
+        /// Check if can invoke execute action.
         /// </summary>
-        /// <param name="execute">The execute action.</param>
-        /// <param name="canExecute">The can execute function.</param>
-        /// <returns>The new instance of the <see cref="Command{T}"/> class.</returns>
-        public static ICoreCommand<T> Create(Action<T> execute, Func<T, bool> canExecute = null)
+        /// <param name="parameter">The can execute parameter.</param>
+        /// <returns>True if can invoke execute action.</returns>
+        public virtual bool CanExecute(object parameter)
         {
-            return new Command<T>(execute, canExecute);
+            return this.CanRun(parameter as T);
         }
+
+        /// <summary>
+        /// Invoke execute action.
+        /// </summary>
+        /// <param name="parameter">The execute parameter.</param>
+        public virtual void Execute(object parameter)
+        {
+            this.Run(parameter as T);
+        }
+
+        /// <summary>
+        /// Check if can invoke execute action.
+        /// </summary>
+        /// <param name="parameter">The can execute parameter.</param>
+        /// <returns>True if can invoke execute action.</returns>
+        public abstract bool CanRun(T parameter);
+
+        /// <summary>
+        /// Invoke execute action.
+        /// </summary>
+        /// <param name="parameter">The execute parameter.</param>
+        public abstract void Run(T parameter);
     }
 }

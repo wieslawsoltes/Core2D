@@ -59,31 +59,31 @@ namespace Core2D.Editor
         /// <inheritdoc/>
         public void LeftDown(double x, double y)
         {
-            Tools?[CurrentTool]?.LeftDown(x, y);
+            CurrentTool.LeftDown(x, y);
         }
 
         /// <inheritdoc/>
         public void LeftUp(double x, double y)
         {
-            Tools?[CurrentTool]?.LeftUp(x, y);
+            CurrentTool.LeftUp(x, y);
         }
 
         /// <inheritdoc/>
         public void RightDown(double x, double y)
         {
-            Tools?[CurrentTool]?.RightDown(x, y);
+            CurrentTool.RightDown(x, y);
         }
 
         /// <inheritdoc/>
         public void RightUp(double x, double y)
         {
-            Tools?[CurrentTool]?.RightUp(x, y);
+            CurrentTool.RightUp(x, y);
         }
 
         /// <inheritdoc/>
         public void Move(double x, double y)
         {
-            Tools?[CurrentTool]?.Move(x, y);
+            CurrentTool.Move(x, y);
         }
     }
 }

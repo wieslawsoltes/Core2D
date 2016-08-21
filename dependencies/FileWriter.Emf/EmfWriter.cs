@@ -248,6 +248,14 @@ namespace FileWriter.Emf
             {
                 Save(path, item as XContainer, ic);
             }
+            else if (item is XDocument)
+            {
+                throw new NotSupportedException("Saving documents as emf drawing is not supported.");
+            }
+            else if (item is XProject)
+            {
+                throw new NotSupportedException("Saving projects as emf drawing is not supported.");
+            }
         }
     }
 }

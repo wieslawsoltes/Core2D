@@ -9,7 +9,10 @@ using Core2D.Collections;
 using Core2D.Data;
 using Core2D.Data.Database;
 using Core2D.Editor.Bounds;
+using Core2D.Editor.Views.Interfaces;
 using Core2D.Editor.Recent;
+using Core2D.Editor.Tools;
+using Core2D.Editor.Tools.Path;
 using Core2D.History;
 using Core2D.Interfaces;
 using Core2D.Math;
@@ -169,7 +172,7 @@ namespace Core2D.Editor
         {
             OnUnload();
             OnLoad(ProjectFactory?.GetProject() ?? XProject.Create(), string.Empty);
-            OnChangeCurrentView(_editorView);
+            OnChangeCurrentView(Views.FirstOrDefault(view => view.Name == "Editor"));
             Invalidate?.Invoke();
         }
 
@@ -213,7 +216,7 @@ namespace Core2D.Editor
                     OnUnload();
                     OnLoad(project, path);
                     OnAddRecent(path, project.Name);
-                    OnChangeCurrentView(_editorView);
+                    OnChangeCurrentView(Views.FirstOrDefault(view => view.Name == "Editor"));
                 }
             }
             catch (Exception ex)
@@ -227,7 +230,7 @@ namespace Core2D.Editor
         /// </summary>
         public void OnClose()
         {
-            OnChangeCurrentView(_dashboardView);
+            OnChangeCurrentView(Views.FirstOrDefault(view => view.Name == "Dashboard"));
             Project?.History?.Reset();
             OnUnload();
         }
@@ -262,18 +265,19 @@ namespace Core2D.Editor
         /// <summary>
         /// Import database.
         /// </summary>
+        /// <param name="project">The target project.</param>
         /// <param name="path">The database file path.</param>
-        public void OnImportData(string path)
+        public void OnImportData(XProject project, string path)
         {
             try
             {
-                if (Project != null)
+                if (project != null)
                 {
                     var db = CsvReader?.Read(path, FileIO);
                     if (db != null)
                     {
-                        Project.AddDatabase(db);
-                        Project.SetCurrentDatabase(db);
+                        project.AddDatabase(db);
+                        project.SetCurrentDatabase(db);
                     }
                 }
             }
@@ -281,6 +285,15 @@ namespace Core2D.Editor
             {
                 Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
+        }
+
+        /// <summary>
+        /// Import database.
+        /// </summary>
+        /// <param name="path">The database file path.</param>
+        public void OnImportData(string path)
+        {
+            OnImportData(Project, path);
         }
 
         /// <summary>
@@ -1099,137 +1112,167 @@ namespace Core2D.Editor
         }
 
         /// <summary>
-        /// Set current tool to <see cref="Tool.None"/>.
+        /// Set current tool to <see cref="ToolNone"/>.
         /// </summary>
         public void OnToolNone()
         {
-            CurrentTool = Tool.None;
+            CurrentTool = Tools.FirstOrDefault(t => t.Name == "None");
         }
 
         /// <summary>
-        /// Set current tool to <see cref="Tool.Selection"/>.
+        /// Set current tool to <see cref="ToolSelection"/>.
         /// </summary>
         public void OnToolSelection()
         {
-            CurrentTool = Tool.Selection;
+            CurrentTool = Tools.FirstOrDefault(t => t.Name == "Selection");
         }
 
         /// <summary>
-        /// Set current tool to <see cref="Tool.Point"/>.
+        /// Set current tool to <see cref="ToolPoint"/>.
         /// </summary>
         public void OnToolPoint()
         {
-            CurrentTool = Tool.Point;
+            CurrentTool = Tools.FirstOrDefault(t => t.Name == "Point");
         }
 
         /// <summary>
-        /// Set current tool to <see cref="Tool.Line"/> or current path tool to <see cref="PathTool.Line"/>.
+        /// Set current tool to <see cref="ToolLine"/> or current path tool to <see cref="PathToolLine"/>.
         /// </summary>
         public void OnToolLine()
         {
-            if (CurrentTool == Tool.Path && CurrentPathTool != PathTool.Line)
+            if (CurrentTool.Name == "Path" && CurrentPathTool.Name != "Line")
             {
-                CurrentPathTool = PathTool.Line;
+                var tool = Tools.FirstOrDefault(t => t.Name == "Path");
+                if (tool != null)
+                {
+                    var pathTool = tool as ToolPath;
+                    pathTool.RemoveLastSegment();
+                }
+                CurrentPathTool = PathTools.FirstOrDefault(t => t.Name == "Line");
             }
             else
             {
-                CurrentTool = Tool.Line;
+                CurrentTool = Tools.FirstOrDefault(t => t.Name == "Line");
             }
         }
 
         /// <summary>
-        /// Set current tool to <see cref="Tool.Arc"/> or current path tool to <see cref="PathTool.Arc"/>.
+        /// Set current tool to <see cref="ToolArc"/> or current path tool to <see cref="PathToolArc"/>.
         /// </summary>
         public void OnToolArc()
         {
-            if (CurrentTool == Tool.Path && CurrentPathTool != PathTool.Arc)
+            if (CurrentTool.Name == "Path" && CurrentPathTool.Name != "Arc")
             {
-                CurrentPathTool = PathTool.Arc;
+                var tool = Tools.FirstOrDefault(t => t.Name == "Path");
+                if (tool != null)
+                {
+                    var pathTool = tool as ToolPath;
+                    pathTool.RemoveLastSegment();
+                }
+                CurrentPathTool = PathTools.FirstOrDefault(t => t.Name == "Arc");
             }
             else
             {
-                CurrentTool = Tool.Arc;
+                CurrentTool = Tools.FirstOrDefault(t => t.Name == "Arc");
             }
         }
 
         /// <summary>
-        /// Set current tool to <see cref="Tool.CubicBezier"/> or current path tool to <see cref="PathTool.CubicBezier"/>.
+        /// Set current tool to <see cref="ToolCubicBezier"/> or current path tool to <see cref="PathToolCubicBezier"/>.
         /// </summary>
         public void OnToolCubicBezier()
         {
-            if (CurrentTool == Tool.Path && CurrentPathTool != PathTool.CubicBezier)
+            if (CurrentTool.Name == "Path" && CurrentPathTool.Name != "CubicBezier")
             {
-                CurrentPathTool = PathTool.CubicBezier;
+                var tool = Tools.FirstOrDefault(t => t.Name == "Path");
+                if (tool != null)
+                {
+                    var pathTool = tool as ToolPath;
+                    pathTool.RemoveLastSegment();
+                }
+                CurrentPathTool = PathTools.FirstOrDefault(t => t.Name == "CubicBezier");
             }
             else
             {
-                CurrentTool = Tool.CubicBezier;
+                CurrentTool = Tools.FirstOrDefault(t => t.Name == "CubicBezier");
             }
         }
 
         /// <summary>
-        /// Set current tool to <see cref="Tool.QuadraticBezier"/> or current path tool to <see cref="PathTool.QuadraticBezier"/>.
+        /// Set current tool to <see cref="ToolQuadraticBezier"/> or current path tool to <see cref="PathToolQuadraticBezier"/>.
         /// </summary>
         public void OnToolQuadraticBezier()
         {
-            if (CurrentTool == Tool.Path && CurrentPathTool != PathTool.QuadraticBezier)
+            if (CurrentTool.Name == "Path" && CurrentPathTool.Name != "QuadraticBezier")
             {
-                CurrentPathTool = PathTool.QuadraticBezier;
+                var tool = Tools.FirstOrDefault(t => t.Name == "Path");
+                if (tool != null)
+                {
+                    var pathTool = tool as ToolPath;
+                    pathTool.RemoveLastSegment();
+                }
+                CurrentPathTool = PathTools.FirstOrDefault(t => t.Name == "QuadraticBezier");
             }
             else
             {
-                CurrentTool = Tool.QuadraticBezier;
+                CurrentTool = Tools.FirstOrDefault(t => t.Name == "QuadraticBezier");
             }
         }
 
         /// <summary>
-        /// Set current tool to <see cref="Tool.Path"/>.
+        /// Set current tool to <see cref="ToolPath"/>.
         /// </summary>
         public void OnToolPath()
         {
-            CurrentTool = Tool.Path;
+            CurrentTool = Tools.FirstOrDefault(t => t.Name == "Path");
         }
 
         /// <summary>
-        /// Set current tool to <see cref="Tool.Rectangle"/>.
+        /// Set current tool to <see cref="ToolRectangle"/>.
         /// </summary>
         public void OnToolRectangle()
         {
-            CurrentTool = Tool.Rectangle;
+            CurrentTool = Tools.FirstOrDefault(t => t.Name == "Rectangle");
         }
 
         /// <summary>
-        /// Set current tool to <see cref="Tool.Ellipse"/>.
+        /// Set current tool to <see cref="ToolEllipse"/>.
         /// </summary>
         public void OnToolEllipse()
         {
-            CurrentTool = Tool.Ellipse;
+            CurrentTool = Tools.FirstOrDefault(t => t.Name == "Ellipse");
         }
 
         /// <summary>
-        /// Set current tool to <see cref="Tool.Text"/>.
+        /// Set current tool to <see cref="ToolText"/>.
         /// </summary>
         public void OnToolText()
         {
-            CurrentTool = Tool.Text;
+            CurrentTool = Tools.FirstOrDefault(t => t.Name == "Text");
         }
 
         /// <summary>
-        /// Set current tool to <see cref="Tool.Image"/>.
+        /// Set current tool to <see cref="ToolImage"/>.
         /// </summary>
         public void OnToolImage()
         {
-            CurrentTool = Tool.Image;
+            CurrentTool = Tools.FirstOrDefault(t => t.Name == "Image");
         }
 
         /// <summary>
-        /// Set current path tool to <see cref="PathTool.Move"/>.
+        /// Set current path tool to <see cref="PathToolMove"/>.
         /// </summary>
         public void OnToolMove()
         {
-            if (CurrentTool == Tool.Path && CurrentPathTool != PathTool.Move)
+            if (CurrentTool.Name == "Path" && CurrentPathTool.Name != "Move")
             {
-                CurrentPathTool = PathTool.Move;
+                var tool = Tools.FirstOrDefault(t => t.Name == "Path");
+                if (tool != null)
+                {
+                    var pathTool = tool as ToolPath;
+                    pathTool.RemoveLastSegment();
+                }
+                CurrentPathTool = PathTools.FirstOrDefault(t => t.Name == "Move");
             }
         }
 
@@ -1695,7 +1738,7 @@ namespace Core2D.Editor
             {
                 if (path == null || string.IsNullOrEmpty(path))
                 {
-                    var key = await (GetImageKey() ?? Task.FromResult(string.Empty));
+                    var key = await (ImageImporter.GetImageKeyAsync() ?? Task.FromResult(string.Empty));
                     if (key == null || string.IsNullOrEmpty(key))
                         return null;
 
@@ -3556,7 +3599,7 @@ namespace Core2D.Editor
         /// Change current view.
         /// </summary>
         /// <param name="view">The view instance.</param>
-        public void OnChangeCurrentView(ViewBase view)
+        public void OnChangeCurrentView(IView view)
         {
             if (view != null && _currentView != view)
             {

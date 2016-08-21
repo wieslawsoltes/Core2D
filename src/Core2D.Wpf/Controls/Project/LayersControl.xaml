@@ -18,8 +18,8 @@
         <Grid.Resources>
             <ControlTemplate x:Key="LayersMenu">
                 <Menu Background="Transparent" HorizontalAlignment="Right">
-                    <MenuItem Command="{x:Static Editor:Commands.AddLayerCommand}" CommandParameter="{Binding}" Header="+"/>
-                    <MenuItem Command="{x:Static Editor:Commands.RemoveLayerCommand}" CommandParameter="{Binding CurrentLayer}" Header="-"/>
+                    <MenuItem Command="{x:Static Editor:ProjectEditorCommands.AddLayerCommand}" CommandParameter="{Binding}" Header="+"/>
+                    <MenuItem Command="{x:Static Editor:ProjectEditorCommands.RemoveLayerCommand}" CommandParameter="{Binding CurrentLayer}" Header="-"/>
                 </Menu>
             </ControlTemplate>
         </Grid.Resources>
@@ -32,14 +32,14 @@
         <lists:XLayerDragAndDropListBox DataContext="{Binding Layers}" Tag="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" ItemsSource="{Binding}" SelectedItem="{Binding DataContext.CurrentLayer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" HorizontalContentAlignment="Stretch" BorderBrush="{x:Null}" Grid.Row="1">
             <lists:XLayerDragAndDropListBox.Resources>
                 <ContextMenu x:Key="LayerContextMenu" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
-                    <MenuItem Header="_Add Layer" InputGestureText="Ctrl+N" Command="{x:Static Editor:Commands.AddLayerCommand}" CommandParameter="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"/>
+                    <MenuItem Header="_Add Layer" InputGestureText="Ctrl+N" Command="{x:Static Editor:ProjectEditorCommands.AddLayerCommand}" CommandParameter="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"/>
                     <Separator/>
-                    <MenuItem Header="_Delete" InputGestureText="Del" Command="{x:Static Editor:Commands.RemoveLayerCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type lists:XLayerDragAndDropListBox}}}"/>
+                    <MenuItem Header="_Delete" InputGestureText="Del" Command="{x:Static Editor:ProjectEditorCommands.RemoveLayerCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type lists:XLayerDragAndDropListBox}}}"/>
                 </ContextMenu>
             </lists:XLayerDragAndDropListBox.Resources>
             <lists:XLayerDragAndDropListBox.InputBindings>
-                <KeyBinding Command="{x:Static Editor:Commands.AddLayerCommand}" CommandParameter="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Gesture="Ctrl+N"/>
-                <KeyBinding Command="{x:Static Editor:Commands.RemoveLayerCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type lists:XLayerDragAndDropListBox}}}" Gesture="Del"/>
+                <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.AddLayerCommand}" CommandParameter="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Gesture="Ctrl+N"/>
+                <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.RemoveLayerCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type lists:XLayerDragAndDropListBox}}}" Gesture="Del"/>
             </lists:XLayerDragAndDropListBox.InputBindings>
             <lists:XLayerDragAndDropListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">

@@ -18,20 +18,20 @@
     <Grid ColumnDefinitions="250,Auto,*" RowDefinitions="*">
         <TreeView Name="project" Classes="browser" Grid.Column="0" Grid.Row="0" Margin="6,6,0,6">
             <TreeView.KeyBindings>
-                <KeyBinding Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding #project.SelectedItem}" Gesture="Ctrl+E"/>
+                <KeyBinding Command="{Static Editor:ProjectEditorCommands.ExportObjectCommand}" CommandParameter="{Binding #project.SelectedItem}" Gesture="Ctrl+E"/>
             </TreeView.KeyBindings>
             <!-- Project -->
             <TreeViewItem Header="Project" DataContext="{Binding Project}" IsExpanded="True">
                 <TreeViewItem.ContextMenu>
                     <ContextMenu Classes="default">
-                        <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding}"/>
+                        <MenuItem Header="E_xport" Command="{Static Editor:ProjectEditorCommands.ExportObjectCommand}" CommandParameter="{Binding}"/>
                     </ContextMenu>
                 </TreeViewItem.ContextMenu>
                 <!-- Styles -->
                 <TreeViewItem Header="Styles" DataContext="{Binding StyleLibraries}" Items="{Binding}">
                     <TreeViewItem.ContextMenu>
                         <ContextMenu Classes="default">
-                            <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding}"/>
+                            <MenuItem Header="E_xport" Command="{Static Editor:ProjectEditorCommands.ExportObjectCommand}" CommandParameter="{Binding}"/>
                         </ContextMenu>
                     </TreeViewItem.ContextMenu>
                     <TreeViewItem.Styles>
@@ -44,7 +44,7 @@
                             <TextBlock Text="{Binding Name}" Classes="tree">
                                 <TextBlock.ContextMenu>
                                     <ContextMenu Classes="default">
-                                        <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding}"/>
+                                        <MenuItem Header="E_xport" Command="{Static Editor:ProjectEditorCommands.ExportObjectCommand}" CommandParameter="{Binding}"/>
                                     </ContextMenu>
                                 </TextBlock.ContextMenu>
                             </TextBlock>
@@ -53,7 +53,7 @@
                             <TextBlock Text="{Binding Name}" Classes="tree">
                                 <TextBlock.ContextMenu>
                                     <ContextMenu Classes="default">
-                                        <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding}"/>
+                                        <MenuItem Header="E_xport" Command="{Static Editor:ProjectEditorCommands.ExportObjectCommand}" CommandParameter="{Binding}"/>
                                     </ContextMenu>
                                 </TextBlock.ContextMenu>
                             </TextBlock>
@@ -64,7 +64,7 @@
                 <TreeViewItem Header="Groups" DataContext="{Binding GroupLibraries}" Items="{Binding}">
                     <TreeViewItem.ContextMenu>
                         <ContextMenu Classes="default">
-                            <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding}"/>
+                            <MenuItem Header="E_xport" Command="{Static Editor:ProjectEditorCommands.ExportObjectCommand}" CommandParameter="{Binding}"/>
                         </ContextMenu>
                     </TreeViewItem.ContextMenu>
                     <TreeViewItem.Styles>
@@ -77,7 +77,7 @@
                             <TextBlock Text="{Binding Name}" Classes="tree">
                                 <TextBlock.ContextMenu>
                                     <ContextMenu Classes="default">
-                                        <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding}"/>
+                                        <MenuItem Header="E_xport" Command="{Static Editor:ProjectEditorCommands.ExportObjectCommand}" CommandParameter="{Binding}"/>
                                     </ContextMenu>
                                 </TextBlock.ContextMenu>
                             </TextBlock>
@@ -86,7 +86,7 @@
                             <TextBlock Text="{Binding Name}" Classes="tree">
                                 <TextBlock.ContextMenu>
                                     <ContextMenu Classes="default">
-                                        <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding}"/>
+                                        <MenuItem Header="E_xport" Command="{Static Editor:ProjectEditorCommands.ExportObjectCommand}" CommandParameter="{Binding}"/>
                                     </ContextMenu>
                                 </TextBlock.ContextMenu>
                             </TextBlock>
@@ -95,7 +95,7 @@
                             <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="tree">
                                 <TextBlock.ContextMenu>
                                     <ContextMenu Classes="default">
-                                        <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding}"/>
+                                        <MenuItem Header="E_xport" Command="{Static Editor:ProjectEditorCommands.ExportObjectCommand}" CommandParameter="{Binding}"/>
                                     </ContextMenu>
                                 </TextBlock.ContextMenu>
                             </TextBlock>
@@ -106,7 +106,7 @@
                 <TreeViewItem Header="Databases" DataContext="{Binding Databases}" Items="{Binding}">
                     <TreeViewItem.ContextMenu>
                         <ContextMenu Classes="default">
-                            <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding}"/>
+                            <MenuItem Header="E_xport" Command="{Static Editor:ProjectEditorCommands.ExportObjectCommand}" CommandParameter="{Binding}"/>
                         </ContextMenu>
                     </TreeViewItem.ContextMenu>
                     <TreeViewItem.Styles>
@@ -119,7 +119,7 @@
                             <TextBlock Text="{Binding Name}" Classes="tree">
                                 <TextBlock.ContextMenu>
                                     <ContextMenu Classes="default">
-                                        <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding}"/>
+                                        <MenuItem Header="E_xport" Command="{Static Editor:ProjectEditorCommands.ExportObjectCommand}" CommandParameter="{Binding}"/>
                                     </ContextMenu>
                                 </TextBlock.ContextMenu>
                             </TextBlock>
@@ -130,7 +130,7 @@
                 <TreeViewItem Header="Templates" DataContext="{Binding Templates}" Items="{Binding}">
                     <TreeViewItem.ContextMenu>
                         <ContextMenu Classes="default">
-                            <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding}"/>
+                            <MenuItem Header="E_xport" Command="{Static Editor:ProjectEditorCommands.ExportObjectCommand}" CommandParameter="{Binding}"/>
                         </ContextMenu>
                     </TreeViewItem.ContextMenu>
                     <TreeViewItem.Styles>
@@ -143,7 +143,7 @@
                             <TextBlock Text="{Binding Name}" Classes="tree">
                                 <TextBlock.ContextMenu>
                                     <ContextMenu Classes="default">
-                                        <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding}"/>
+                                        <MenuItem Header="E_xport" Command="{Static Editor:ProjectEditorCommands.ExportObjectCommand}" CommandParameter="{Binding}"/>
                                     </ContextMenu>
                                 </TextBlock.ContextMenu>
                             </TextBlock>
@@ -152,7 +152,7 @@
                             <TextBlock Text="{Binding Name}" Classes="tree">
                                 <TextBlock.ContextMenu>
                                     <ContextMenu Classes="default">
-                                        <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding}"/>
+                                        <MenuItem Header="E_xport" Command="{Static Editor:ProjectEditorCommands.ExportObjectCommand}" CommandParameter="{Binding}"/>
                                     </ContextMenu>
                                 </TextBlock.ContextMenu>
                             </TextBlock>
@@ -161,7 +161,7 @@
                             <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="tree">
                                 <TextBlock.ContextMenu>
                                     <ContextMenu Classes="default">
-                                        <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding}"/>
+                                        <MenuItem Header="E_xport" Command="{Static Editor:ProjectEditorCommands.ExportObjectCommand}" CommandParameter="{Binding}"/>
                                     </ContextMenu>
                                 </TextBlock.ContextMenu>
                             </TextBlock>
@@ -170,7 +170,7 @@
                             <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="tree">
                                 <TextBlock.ContextMenu>
                                     <ContextMenu Classes="default">
-                                        <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding}"/>
+                                        <MenuItem Header="E_xport" Command="{Static Editor:ProjectEditorCommands.ExportObjectCommand}" CommandParameter="{Binding}"/>
                                     </ContextMenu>
                                 </TextBlock.ContextMenu>
                             </TextBlock>
@@ -181,7 +181,7 @@
                 <TreeViewItem Header="Documents" DataContext="{Binding Documents}" Items="{Binding}">
                     <TreeViewItem.ContextMenu>
                         <ContextMenu Classes="default">
-                            <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding}"/>
+                            <MenuItem Header="E_xport" Command="{Static Editor:ProjectEditorCommands.ExportObjectCommand}" CommandParameter="{Binding}"/>
                         </ContextMenu>
                     </TreeViewItem.ContextMenu>
                     <TreeViewItem.Styles>
@@ -194,7 +194,7 @@
                             <TextBlock Text="{Binding Name}" Classes="tree">
                                 <TextBlock.ContextMenu>
                                     <ContextMenu Classes="default">
-                                        <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding}"/>
+                                        <MenuItem Header="E_xport" Command="{Static Editor:ProjectEditorCommands.ExportObjectCommand}" CommandParameter="{Binding}"/>
                                     </ContextMenu>
                                 </TextBlock.ContextMenu>
                             </TextBlock>
@@ -203,7 +203,7 @@
                             <TextBlock Text="{Binding Name}" Classes="tree">
                                 <TextBlock.ContextMenu>
                                     <ContextMenu Classes="default">
-                                        <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding}"/>
+                                        <MenuItem Header="E_xport" Command="{Static Editor:ProjectEditorCommands.ExportObjectCommand}" CommandParameter="{Binding}"/>
                                     </ContextMenu>
                                 </TextBlock.ContextMenu>
                             </TextBlock>
@@ -212,7 +212,7 @@
                             <TextBlock Text="{Binding Name}" Classes="tree">
                                 <TextBlock.ContextMenu>
                                     <ContextMenu Classes="default">
-                                        <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding}"/>
+                                        <MenuItem Header="E_xport" Command="{Static Editor:ProjectEditorCommands.ExportObjectCommand}" CommandParameter="{Binding}"/>
                                     </ContextMenu>
                                 </TextBlock.ContextMenu>
                             </TextBlock>
@@ -221,7 +221,7 @@
                             <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="tree">
                                 <TextBlock.ContextMenu>
                                     <ContextMenu Classes="default">
-                                        <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding}"/>
+                                        <MenuItem Header="E_xport" Command="{Static Editor:ProjectEditorCommands.ExportObjectCommand}" CommandParameter="{Binding}"/>
                                     </ContextMenu>
                                 </TextBlock.ContextMenu>
                             </TextBlock>
@@ -230,7 +230,7 @@
                             <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="tree">
                                 <TextBlock.ContextMenu>
                                     <ContextMenu Classes="default">
-                                        <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding}"/>
+                                        <MenuItem Header="E_xport" Command="{Static Editor:ProjectEditorCommands.ExportObjectCommand}" CommandParameter="{Binding}"/>
                                     </ContextMenu>
                                 </TextBlock.ContextMenu>
                             </TextBlock>
@@ -243,42 +243,42 @@
                 <TreeViewItem Header="Options" DataContext="{Binding Project.Options}">
                     <TreeViewItem.ContextMenu>
                         <ContextMenu Classes="default">
-                            <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding}"/>
+                            <MenuItem Header="E_xport" Command="{Static Editor:ProjectEditorCommands.ExportObjectCommand}" CommandParameter="{Binding}"/>
                         </ContextMenu>
                     </TreeViewItem.ContextMenu>
                 </TreeViewItem>
                 <TreeViewItem Header="Shape" DataContext="{Binding Project.CurrentContainer.CurrentShape}">
                     <TreeViewItem.ContextMenu>
                         <ContextMenu Classes="default">
-                            <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding}"/>
+                            <MenuItem Header="E_xport" Command="{Static Editor:ProjectEditorCommands.ExportObjectCommand}" CommandParameter="{Binding}"/>
                         </ContextMenu>
                     </TreeViewItem.ContextMenu>
                 </TreeViewItem>
                 <TreeViewItem Header="Data" DataContext="{Binding Project.CurrentContainer.CurrentShape.Data}">
                     <TreeViewItem.ContextMenu>
                         <ContextMenu Classes="default">
-                            <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding}"/>
+                            <MenuItem Header="E_xport" Command="{Static Editor:ProjectEditorCommands.ExportObjectCommand}" CommandParameter="{Binding}"/>
                         </ContextMenu>
                     </TreeViewItem.ContextMenu>
                 </TreeViewItem>
                 <TreeViewItem Header="Style" DataContext="{Binding Project.CurrentStyleLibrary.Selected}">
                     <TreeViewItem.ContextMenu>
                         <ContextMenu Classes="default">
-                            <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding}"/>
+                            <MenuItem Header="E_xport" Command="{Static Editor:ProjectEditorCommands.ExportObjectCommand}" CommandParameter="{Binding}"/>
                         </ContextMenu>
                     </TreeViewItem.ContextMenu>
                 </TreeViewItem>
                 <TreeViewItem Header="Container" DataContext="{Binding Project.CurrentContainer}">
                     <TreeViewItem.ContextMenu>
                         <ContextMenu Classes="default">
-                            <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding}"/>
+                            <MenuItem Header="E_xport" Command="{Static Editor:ProjectEditorCommands.ExportObjectCommand}" CommandParameter="{Binding}"/>
                         </ContextMenu>
                     </TreeViewItem.ContextMenu>
                 </TreeViewItem>
                 <TreeViewItem Header="Template" DataContext="{Binding Project.CurrentTemplate}">
                     <TreeViewItem.ContextMenu>
                         <ContextMenu Classes="default">
-                            <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding}"/>
+                            <MenuItem Header="E_xport" Command="{Static Editor:ProjectEditorCommands.ExportObjectCommand}" CommandParameter="{Binding}"/>
                         </ContextMenu>
                     </TreeViewItem.ContextMenu>
                 </TreeViewItem>
@@ -293,11 +293,11 @@
                 <TabItem Header="Xaml" Classes="property">
                     <TextBox DataContext="{Binding #project.SelectedItem, Converter={Static converters:TreeViewSelectedItemToObjectConverter.Instance}}" Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToXamlStringConverter.Instance}}" Classes="project" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <TextBox.KeyBindings>
-                            <KeyBinding Command="{Static Editor:Commands.ExportXamlCommand}" CommandParameter="{Binding}" Gesture="Ctrl+E"/>
+                            <KeyBinding Command="{Static Editor:ProjectEditorCommands.ExportXamlCommand}" CommandParameter="{Binding}" Gesture="Ctrl+E"/>
                         </TextBox.KeyBindings>
                         <TextBox.ContextMenu>
                             <ContextMenu Classes="default">
-                                <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportXamlCommand}" CommandParameter="{Binding}"/>
+                                <MenuItem Header="E_xport" Command="{Static Editor:ProjectEditorCommands.ExportXamlCommand}" CommandParameter="{Binding}"/>
                             </ContextMenu>
                         </TextBox.ContextMenu>
                     </TextBox>
@@ -305,11 +305,11 @@
                 <TabItem Header="Json" Classes="property">
                     <TextBox DataContext="{Binding #project.SelectedItem, Converter={Static converters:TreeViewSelectedItemToObjectConverter.Instance}}" Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToJsonStringConverter.Instance}}" Classes="project" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <TextBox.KeyBindings>
-                            <KeyBinding Command="{Static Editor:Commands.ExportJsonCommand}" CommandParameter="{Binding}" Gesture="Ctrl+E"/>
+                            <KeyBinding Command="{Static Editor:ProjectEditorCommands.ExportJsonCommand}" CommandParameter="{Binding}" Gesture="Ctrl+E"/>
                         </TextBox.KeyBindings>
                         <TextBox.ContextMenu>
                             <ContextMenu Classes="default">
-                                <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportJsonCommand}" CommandParameter="{Binding}"/>
+                                <MenuItem Header="E_xport" Command="{Static Editor:ProjectEditorCommands.ExportJsonCommand}" CommandParameter="{Binding}"/>
                             </ContextMenu>
                         </TextBox.ContextMenu>
                     </TextBox>

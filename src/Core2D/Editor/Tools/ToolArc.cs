@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
 using Core2D.Editor.Tools.Selection;
 using Core2D.Math.Arc;
 using Core2D.Shape;
@@ -8,10 +9,11 @@ using Core2D.Shapes;
 namespace Core2D.Editor.Tools
 {
     /// <summary>
-    /// Helper class for <see cref="Tool.Arc"/> editor.
+    /// Arc tool.
     /// </summary>
     public class ToolArc : ToolBase
     {
+        private readonly IServiceProvider _serviceProvider;
         private ToolState _currentState = ToolState.None;
         private XArc _arc;
         private bool _connectedPoint3;
@@ -19,37 +21,49 @@ namespace Core2D.Editor.Tools
         private ArcSelection _selection;
 
         /// <inheritdoc/>
+        public override string Name => "Arc";
+
+        /// <summary>
+        /// Initialize new instance of <see cref="ToolArc"/> class.
+        /// </summary>
+        /// <param name="serviceProvider">The service provider.</param>
+        public ToolArc(IServiceProvider serviceProvider) : base()
+        {
+            _serviceProvider = serviceProvider;
+        }
+
+        /// <inheritdoc/>
         public override void LeftDown(double x, double y)
         {
             base.LeftDown(x, y);
-
-            double sx = Editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, Editor.Project.Options.SnapX) : x;
-            double sy = Editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, Editor.Project.Options.SnapY) : y;
+            var editor = _serviceProvider.GetService<ProjectEditor>();
+            double sx = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, editor.Project.Options.SnapX) : x;
+            double sy = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, editor.Project.Options.SnapY) : y;
             switch (_currentState)
             {
                 case ToolState.None:
                     {
-                        var style = Editor.Project.CurrentStyleLibrary.Selected;
+                        var style = editor.Project.CurrentStyleLibrary.Selected;
                         _connectedPoint3 = false;
                         _connectedPoint4 = false;
                         _arc = XArc.Create(
                             sx, sy,
-                            Editor.Project.Options.CloneStyle ? style.Clone() : style,
-                            Editor.Project.Options.PointShape,
-                            Editor.Project.Options.DefaultIsStroked,
-                            Editor.Project.Options.DefaultIsFilled);
+                            editor.Project.Options.CloneStyle ? style.Clone() : style,
+                            editor.Project.Options.PointShape,
+                            editor.Project.Options.DefaultIsStroked,
+                            editor.Project.Options.DefaultIsFilled);
 
-                        var result = Editor.TryToGetConnectionPoint(sx, sy);
+                        var result = editor.TryToGetConnectionPoint(sx, sy);
                         if (result != null)
                         {
                             _arc.Point1 = result;
                         }
 
-                        Editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                        editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         ToStateOne();
                         Move(_arc);
                         _currentState = ToolState.One;
-                        Editor.CancelAvailable = true;
+                        editor.CancelAvailable = true;
                     }
                     break;
                 case ToolState.One:
@@ -61,13 +75,13 @@ namespace Core2D.Editor.Tools
                             _arc.Point3.X = sx;
                             _arc.Point3.Y = sy;
 
-                            var result = Editor.TryToGetConnectionPoint(sx, sy);
+                            var result = editor.TryToGetConnectionPoint(sx, sy);
                             if (result != null)
                             {
                                 _arc.Point2 = result;
                             }
 
-                            Editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                            editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                             ToStateTwo();
                             Move(_arc);
                             _currentState = ToolState.Two;
@@ -83,7 +97,7 @@ namespace Core2D.Editor.Tools
                             _arc.Point4.X = sx;
                             _arc.Point4.Y = sy;
 
-                            var result = Editor.TryToGetConnectionPoint(sx, sy);
+                            var result = editor.TryToGetConnectionPoint(sx, sy);
                             if (result != null)
                             {
                                 _arc.Point3 = result;
@@ -94,8 +108,8 @@ namespace Core2D.Editor.Tools
                                 _connectedPoint3 = false;
                             }
 
-                            Editor.Project.CurrentContainer.WorkingLayer.Shapes = Editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_arc);
-                            Editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                            editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_arc);
+                            editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                             ToStateThree();
                             Move(_arc);
                             _currentState = ToolState.Three;
@@ -109,7 +123,7 @@ namespace Core2D.Editor.Tools
                             _arc.Point4.X = sx;
                             _arc.Point4.Y = sy;
 
-                            var result = Editor.TryToGetConnectionPoint(sx, sy);
+                            var result = editor.TryToGetConnectionPoint(sx, sy);
                             if (result != null)
                             {
                                 _arc.Point4 = result;
@@ -120,12 +134,12 @@ namespace Core2D.Editor.Tools
                                 _connectedPoint4 = false;
                             }
 
-                            Editor.Project.CurrentContainer.WorkingLayer.Shapes = Editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_arc);
+                            editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_arc);
                             Remove();
                             Finalize(_arc);
-                            Editor.Project.AddShape(Editor.Project.CurrentContainer.CurrentLayer, _arc);
+                            editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, _arc);
                             _currentState = ToolState.None;
-                            Editor.CancelAvailable = false;
+                            editor.CancelAvailable = false;
                         }
                     }
                     break;
@@ -136,7 +150,7 @@ namespace Core2D.Editor.Tools
         public override void RightDown(double x, double y)
         {
             base.RightDown(x, y);
-
+            var editor = _serviceProvider.GetService<ProjectEditor>();
             switch (_currentState)
             {
                 case ToolState.None:
@@ -145,11 +159,11 @@ namespace Core2D.Editor.Tools
                 case ToolState.Two:
                 case ToolState.Three:
                     {
-                        Editor.Project.CurrentContainer.WorkingLayer.Shapes = Editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_arc);
-                        Editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                        editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_arc);
+                        editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         Remove();
                         _currentState = ToolState.None;
-                        Editor.CancelAvailable = false;
+                        editor.CancelAvailable = false;
                     }
                     break;
             }
@@ -159,16 +173,16 @@ namespace Core2D.Editor.Tools
         public override void Move(double x, double y)
         {
             base.Move(x, y);
-
-            double sx = Editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, Editor.Project.Options.SnapX) : x;
-            double sy = Editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, Editor.Project.Options.SnapY) : y;
+            var editor = _serviceProvider.GetService<ProjectEditor>();
+            double sx = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, editor.Project.Options.SnapX) : x;
+            double sy = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, editor.Project.Options.SnapY) : y;
             switch (_currentState)
             {
                 case ToolState.None:
                     {
-                        if (Editor.Project.Options.TryToConnect)
+                        if (editor.Project.Options.TryToConnect)
                         {
-                            Editor.TryToHoverShape(sx, sy);
+                            editor.TryToHoverShape(sx, sy);
                         }
                     }
                     break;
@@ -176,13 +190,13 @@ namespace Core2D.Editor.Tools
                     {
                         if (_arc != null)
                         {
-                            if (Editor.Project.Options.TryToConnect)
+                            if (editor.Project.Options.TryToConnect)
                             {
-                                Editor.TryToHoverShape(sx, sy);
+                                editor.TryToHoverShape(sx, sy);
                             }
                             _arc.Point2.X = sx;
                             _arc.Point2.Y = sy;
-                            Editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                            editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                             Move(_arc);
                         }
                     }
@@ -191,13 +205,13 @@ namespace Core2D.Editor.Tools
                     {
                         if (_arc != null)
                         {
-                            if (Editor.Project.Options.TryToConnect)
+                            if (editor.Project.Options.TryToConnect)
                             {
-                                Editor.TryToHoverShape(sx, sy);
+                                editor.TryToHoverShape(sx, sy);
                             }
                             _arc.Point3.X = sx;
                             _arc.Point3.Y = sy;
-                            Editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                            editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                             Move(_arc);
                         }
                     }
@@ -206,13 +220,13 @@ namespace Core2D.Editor.Tools
                     {
                         if (_arc != null)
                         {
-                            if (Editor.Project.Options.TryToConnect)
+                            if (editor.Project.Options.TryToConnect)
                             {
-                                Editor.TryToHoverShape(sx, sy);
+                                editor.TryToHoverShape(sx, sy);
                             }
                             _arc.Point4.X = sx;
                             _arc.Point4.Y = sy;
-                            Editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                            editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                             Move(_arc);
                         }
                     }
@@ -224,12 +238,12 @@ namespace Core2D.Editor.Tools
         public override void ToStateOne()
         {
             base.ToStateOne();
-
+            var editor = _serviceProvider.GetService<ProjectEditor>();
             _selection = new ArcSelection(
-                Editor.Project.CurrentContainer.HelperLayer,
+                editor.Project.CurrentContainer.HelperLayer,
                 _arc,
-                Editor.Project.Options.HelperStyle,
-                Editor.Project.Options.PointShape);
+                editor.Project.Options.HelperStyle,
+                editor.Project.Options.PointShape);
 
             _selection.ToStateOne();
         }

@@ -16,8 +16,8 @@
         <Grid RowDefinitions="*" ColumnDefinitions="*,Auto" Grid.Row="0">
             <TextBox Text="{Binding CurrentGroupLibrary.Name, Mode=TwoWay}" Classes="left" Grid.Column="0" IsVisible="{Binding CurrentGroupLibrary, Converter={Static converters:IsNotNullConverter.Instance}}"/>
             <Menu Grid.Column="1" HorizontalAlignment="Right">
-                <MenuItem Header="+" Command="{Static Editor:Commands.AddGroupLibraryCommand}"/>
-                <MenuItem Header="-" Command="{Static Editor:Commands.RemoveGroupLibraryCommand}" CommandParameter="{Binding CurrentGroupLibrary}" IsVisible="{Binding CurrentGroupLibrary, Converter={Static converters:IsNotNullConverter.Instance}}"/>
+                <MenuItem Header="+" Command="{Static Editor:ProjectEditorCommands.AddGroupLibraryCommand}"/>
+                <MenuItem Header="-" Command="{Static Editor:ProjectEditorCommands.RemoveGroupLibraryCommand}" CommandParameter="{Binding CurrentGroupLibrary}" IsVisible="{Binding CurrentGroupLibrary, Converter={Static converters:IsNotNullConverter.Instance}}"/>
             </Menu>
         </Grid>
         <DropDown Items="{Binding GroupLibraries}" SelectedItem="{Binding CurrentGroupLibrary, Mode=TwoWay}" Classes="default" Grid.Row="1" IsVisible="{Binding CurrentGroupLibrary, Converter={Static converters:IsNotNullConverter.Instance}}">
@@ -28,29 +28,29 @@
             </DropDown.DataTemplates>
         </DropDown>
         <Menu Grid.Row="2" HorizontalAlignment="Right" IsVisible="{Binding CurrentGroupLibrary, Converter={Static converters:IsNotNullConverter.Instance}}">
-            <MenuItem Header="insert" Command="{Static Editor:Commands.InsertGroupCommand}" CommandParameter="{Binding CurrentGroupLibrary.Selected}" IsVisible="{Binding CurrentGroupLibrary.Selected, Converter={Static converters:IsNotNullConverter.Instance}}"/>
-            <MenuItem Header="+" Command="{Static Editor:Commands.AddGroupCommand}" CommandParameter="{Binding CurrentGroupLibrary}" IsVisible="{Binding CurrentContainer.CurrentShape, Converter={Static converters:IsGroupConverter.Instance}}"/>
-            <MenuItem Header="-" Command="{Static Editor:Commands.RemoveGroupCommand}" CommandParameter="{Binding CurrentGroupLibrary.Selected}" IsVisible="{Binding CurrentGroupLibrary.Selected, Converter={Static converters:IsNotNullConverter.Instance}}"/>
+            <MenuItem Header="insert" Command="{Static Editor:ProjectEditorCommands.InsertGroupCommand}" CommandParameter="{Binding CurrentGroupLibrary.Selected}" IsVisible="{Binding CurrentGroupLibrary.Selected, Converter={Static converters:IsNotNullConverter.Instance}}"/>
+            <MenuItem Header="+" Command="{Static Editor:ProjectEditorCommands.AddGroupCommand}" CommandParameter="{Binding CurrentGroupLibrary}" IsVisible="{Binding CurrentContainer.CurrentShape, Converter={Static converters:IsGroupConverter.Instance}}"/>
+            <MenuItem Header="-" Command="{Static Editor:ProjectEditorCommands.RemoveGroupCommand}" CommandParameter="{Binding CurrentGroupLibrary.Selected}" IsVisible="{Binding CurrentGroupLibrary.Selected, Converter={Static converters:IsNotNullConverter.Instance}}"/>
         </Menu>
         <ListBox Name="groups" Items="{Binding CurrentGroupLibrary.Items}" SelectedItem="{Binding CurrentGroupLibrary.Selected, Mode=TwoWay}" Grid.Row="3" Classes="default">
             <ListBox.KeyBindings>
-                <KeyBinding Command="{Static Editor:Commands.AddGroupCommand}" CommandParameter="{Binding #groups.DataContext.CurrentGroupLibrary}" Gesture="Ctrl+N"/>
-                <KeyBinding Command="{Static Editor:Commands.RemoveGroupCommand}" CommandParameter="{Binding #groups.SelectedItem}" Gesture="Delete"/>
-                <KeyBinding Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding #groups.SelectedItem}" Gesture="Ctrl+E"/>
+                <KeyBinding Command="{Static Editor:ProjectEditorCommands.AddGroupCommand}" CommandParameter="{Binding #groups.DataContext.CurrentGroupLibrary}" Gesture="Ctrl+N"/>
+                <KeyBinding Command="{Static Editor:ProjectEditorCommands.RemoveGroupCommand}" CommandParameter="{Binding #groups.SelectedItem}" Gesture="Delete"/>
+                <KeyBinding Command="{Static Editor:ProjectEditorCommands.ExportObjectCommand}" CommandParameter="{Binding #groups.SelectedItem}" Gesture="Ctrl+E"/>
             </ListBox.KeyBindings>
             <ListBox.DataTemplates>
                 <DataTemplate DataType="Shapes:XGroup">
                     <TextBlock Name="group" Text="{Binding Name}" Classes="list">
                         <i:Interaction.Behaviors>
                             <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #group}">
-                                <ia:InvokeCommandAction Command="{Static Editor:Commands.InsertGroupCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                <ia:InvokeCommandAction Command="{Static Editor:ProjectEditorCommands.InsertGroupCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                             </ia:EventTriggerBehavior>
                         </i:Interaction.Behaviors>
                         <TextBlock.ContextMenu>
                             <ContextMenu Classes="default">
-                                <MenuItem Header="_Delete" Command="{Static Editor:Commands.RemoveGroupCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                <MenuItem Header="_Delete" Command="{Static Editor:ProjectEditorCommands.RemoveGroupCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                                 <Separator/>
-                                <MenuItem Header="E_xport" Command="{Static Editor:Commands.ExportObjectCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                <MenuItem Header="E_xport" Command="{Static Editor:ProjectEditorCommands.ExportObjectCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                             </ContextMenu>
                         </TextBlock.ContextMenu>
                     </TextBlock>

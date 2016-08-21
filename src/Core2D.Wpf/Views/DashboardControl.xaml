@@ -57,9 +57,9 @@
             <ColumnDefinition Width="5*"/>
         </Grid.ColumnDefinitions>
         <TextBlock Text="Core2D" Style="{StaticResource TitleTextBlockStyleKey}" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="1"/>
-        <Button Content="New Project" Style="{StaticResource ProjectButtonStyleKey}" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="1" Grid.RowSpan="1" Command="{x:Static Editor:Commands.NewCommand}"/>
-        <Button Content="Open Project" Style="{StaticResource ProjectButtonStyleKey}" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="1" Grid.RowSpan="1" Command="{x:Static Editor:Commands.OpenCommand}"/>
-        <Button Content="Open Recent" Style="{StaticResource ProjectButtonStyleKey}" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="1" Grid.RowSpan="1" CommandParameter="{Binding Path=CurrentRecentProject.Path}" Command="{x:Static Editor:Commands.OpenCommand}"/>
+        <Button Content="New Project" Style="{StaticResource ProjectButtonStyleKey}" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="1" Grid.RowSpan="1" Command="{x:Static Editor:ProjectEditorCommands.NewCommand}"/>
+        <Button Content="Open Project" Style="{StaticResource ProjectButtonStyleKey}" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="1" Grid.RowSpan="1" Command="{x:Static Editor:ProjectEditorCommands.OpenCommand}"/>
+        <Button Content="Open Recent" Style="{StaticResource ProjectButtonStyleKey}" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="1" Grid.RowSpan="1" CommandParameter="{Binding Path=CurrentRecentProject.Path}" Command="{x:Static Editor:ProjectEditorCommands.OpenCommand}"/>
         <TextBlock Text="recent" Style="{StaticResource RecentTextBlockStyleKey}" Grid.Column="3" Grid.ColumnSpan="1" Grid.Row="2" Grid.RowSpan="1"/>
         <ListBox x:Name="recentProjects" 
                  ItemsSource="{Binding Path=RecentProjects}" 

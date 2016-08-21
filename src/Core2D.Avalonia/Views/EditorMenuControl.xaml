@@ -22,78 +22,78 @@
             </ItemsPanelTemplate>
         </Menu.ItemsPanel>
         <MenuItem Header="_File">
-            <MenuItem Header="_New" Command="{Static Editor:Commands.NewCommand}" CommandParameter="{Binding}"/>
+            <MenuItem Header="_New" Command="{Static Editor:ProjectEditorCommands.NewCommand}" CommandParameter="{Binding}"/>
             <Separator/>
-            <MenuItem Header="_Open..." Command="{Static Editor:Commands.OpenCommand}"/>
+            <MenuItem Header="_Open..." Command="{Static Editor:ProjectEditorCommands.OpenCommand}"/>
             <Separator/>
-            <MenuItem Header="_Close" Command="{Static Editor:Commands.CloseCommand}"/>
+            <MenuItem Header="_Close" Command="{Static Editor:ProjectEditorCommands.CloseCommand}"/>
             <Separator/>
-            <MenuItem Header="_Save" Command="{Static Editor:Commands.SaveCommand}"/>
-            <MenuItem Header="Save _As..." Command="{Static Editor:Commands.SaveAsCommand}"/>
+            <MenuItem Header="_Save" Command="{Static Editor:ProjectEditorCommands.SaveCommand}"/>
+            <MenuItem Header="Save _As..." Command="{Static Editor:ProjectEditorCommands.SaveAsCommand}"/>
             <Separator/>
-            <MenuItem Header="Import Xa_ml..." Command="{Static Editor:Commands.ImportXamlCommand}"/>
-            <MenuItem Header="Import _Json..." Command="{Static Editor:Commands.ImportJsonCommand}"/>
+            <MenuItem Header="Import Xa_ml..." Command="{Static Editor:ProjectEditorCommands.ImportXamlCommand}"/>
+            <MenuItem Header="Import _Json..." Command="{Static Editor:ProjectEditorCommands.ImportJsonCommand}"/>
             <Separator/>
-            <MenuItem Header="_Export..." Command="{Static Editor:Commands.ExportCommand}"/>
+            <MenuItem Header="_Export..." Command="{Static Editor:ProjectEditorCommands.ExportCommand}"/>
             <Separator/>
             <MenuItem Header="_Recent" Items="{Binding RecentProjects}">
                 <MenuItem.Styles>
                     <Style Selector="MenuItem">
                         <Setter Property="Header" Value="{Binding Name}"/>
-                        <Setter Property="Command" Value="{Static Editor:Commands.OpenCommand}"/>
+                        <Setter Property="Command" Value="{Static Editor:ProjectEditorCommands.OpenCommand}"/>
                         <Setter Property="CommandParameter" Value="{Binding Path}"/>
                     </Style>
                 </MenuItem.Styles>
             </MenuItem>
             <Separator/>
-            <MenuItem Header="E_xit" Command="{Static Editor:Commands.ExitCommand}"/>
+            <MenuItem Header="E_xit" Command="{Static Editor:ProjectEditorCommands.ExitCommand}"/>
         </MenuItem>
         <MenuItem Header="_Edit">
-            <MenuItem Header="_Undo" Command="{Static Editor:Commands.UndoCommand}"/>
-            <MenuItem Header="_Redo" Command="{Static Editor:Commands.RedoCommand}"/>
+            <MenuItem Header="_Undo" Command="{Static Editor:ProjectEditorCommands.UndoCommand}"/>
+            <MenuItem Header="_Redo" Command="{Static Editor:ProjectEditorCommands.RedoCommand}"/>
             <Separator/>
-            <MenuItem Header="Cu_t" Command="{Static Editor:Commands.CutCommand}"/>
-            <MenuItem Header="_Copy" Command="{Static Editor:Commands.CopyCommand}"/>
-            <MenuItem Header="_Paste" Command="{Static Editor:Commands.PasteCommand}"/>
-            <MenuItem Header="_Delete" Command="{Static Editor:Commands.DeleteCommand}"/>
+            <MenuItem Header="Cu_t" Command="{Static Editor:ProjectEditorCommands.CutCommand}"/>
+            <MenuItem Header="_Copy" Command="{Static Editor:ProjectEditorCommands.CopyCommand}"/>
+            <MenuItem Header="_Paste" Command="{Static Editor:ProjectEditorCommands.PasteCommand}"/>
+            <MenuItem Header="_Delete" Command="{Static Editor:ProjectEditorCommands.DeleteCommand}"/>
             <Separator/>
-            <MenuItem Header="Select _All" Command="{Static Editor:Commands.SelectAllCommand}"/>
-            <MenuItem Header="De_select All" Command="{Static Editor:Commands.DeselectAllCommand}"/>
+            <MenuItem Header="Select _All" Command="{Static Editor:ProjectEditorCommands.SelectAllCommand}"/>
+            <MenuItem Header="De_select All" Command="{Static Editor:ProjectEditorCommands.DeselectAllCommand}"/>
             <Separator/>
-            <MenuItem Header="Cl_ear All" Command="{Static Editor:Commands.ClearAllCommand}"/>
+            <MenuItem Header="Cl_ear All" Command="{Static Editor:ProjectEditorCommands.ClearAllCommand}"/>
             <Separator/>
-            <MenuItem Header="_Group" Command="{Static Editor:Commands.GroupCommand}"/>
-            <MenuItem Header="U_ngroup" Command="{Static Editor:Commands.UngroupCommand}"/>
+            <MenuItem Header="_Group" Command="{Static Editor:ProjectEditorCommands.GroupCommand}"/>
+            <MenuItem Header="U_ngroup" Command="{Static Editor:ProjectEditorCommands.UngroupCommand}"/>
             <Separator/>
             <MenuItem Header="_Move">
-                <MenuItem Header="_Up" Command="{Static Editor:Commands.MoveUpCommand}"/>
-                <MenuItem Header="_Down" Command="{Static Editor:Commands.MoveDownCommand}"/>
-                <MenuItem Header="_Left" Command="{Static Editor:Commands.MoveLeftCommand}"/>
-                <MenuItem Header="_Right" Command="{Static Editor:Commands.MoveRightCommand}"/>
+                <MenuItem Header="_Up" Command="{Static Editor:ProjectEditorCommands.MoveUpCommand}"/>
+                <MenuItem Header="_Down" Command="{Static Editor:ProjectEditorCommands.MoveDownCommand}"/>
+                <MenuItem Header="_Left" Command="{Static Editor:ProjectEditorCommands.MoveLeftCommand}"/>
+                <MenuItem Header="_Right" Command="{Static Editor:ProjectEditorCommands.MoveRightCommand}"/>
             </MenuItem>
             <Separator/>
             <MenuItem Header="_Order">
-                <MenuItem Header="Send to _Back" Command="{Static Editor:Commands.SendToBackCommand}"/>
-                <MenuItem Header="Send Ba_ckward" Command="{Static Editor:Commands.SendBackwardCommand}"/>
+                <MenuItem Header="Send to _Back" Command="{Static Editor:ProjectEditorCommands.SendToBackCommand}"/>
+                <MenuItem Header="Send Ba_ckward" Command="{Static Editor:ProjectEditorCommands.SendBackwardCommand}"/>
                 <Separator/>
-                <MenuItem Header="Bring Fo_rward" Command="{Static Editor:Commands.BringForwardCommand}"/>
-                <MenuItem Header="Bring to _Front" Command="{Static Editor:Commands.BringToFrontCommand}"/>
+                <MenuItem Header="Bring Fo_rward" Command="{Static Editor:ProjectEditorCommands.BringForwardCommand}"/>
+                <MenuItem Header="Bring to _Front" Command="{Static Editor:ProjectEditorCommands.BringToFrontCommand}"/>
             </MenuItem>
         </MenuItem>
         <MenuItem Header="_View">
-            <MenuItem Header="_Object Browser..." Command="{Static Editor:Commands.ObjectBrowserCommand}"/>
+            <MenuItem Header="_Object Browser..." Command="{Static Editor:ProjectEditorCommands.ObjectBrowserCommand}"/>
             <Separator/>
-            <MenuItem Header="_Document Viewer..." Command="{Static Editor:Commands.DocumentViewerCommand}"/>
+            <MenuItem Header="_Document Viewer..." Command="{Static Editor:ProjectEditorCommands.DocumentViewerCommand}"/>
             <Separator/>
-            <MenuItem Header="_Reset Zoom" Command="{Static Editor:Commands.ZoomResetCommand}"/>
+            <MenuItem Header="_Reset Zoom" Command="{Static Editor:ProjectEditorCommands.ZoomResetCommand}"/>
             <Separator/>
-            <MenuItem Header="_AutoFit Zoom" Command="{Static Editor:Commands.ZoomAutoFitCommand}"/>
+            <MenuItem Header="_AutoFit Zoom" Command="{Static Editor:ProjectEditorCommands.ZoomAutoFitCommand}"/>
             <Separator/>
             <MenuItem Header="_Views" Items="{Binding Views}">
                 <MenuItem.Styles>
                     <Style Selector="MenuItem">
                         <Setter Property="Header" Value="{Binding Name}"/>
-                        <Setter Property="Command" Value="{Static Editor:Commands.ChangeCurrentViewCommand}"/>
+                        <Setter Property="Command" Value="{Static Editor:ProjectEditorCommands.ChangeCurrentViewCommand}"/>
                         <Setter Property="CommandParameter" Value="{Binding}"/>
                         <Setter Property="Icon">
                             <Template>
@@ -116,114 +116,114 @@
             </MenuItem>
         </MenuItem>
         <MenuItem Header="_Tool">
-            <MenuItem Header="_None" Command="{Static Editor:Commands.ToolNoneCommand}">
+            <MenuItem Header="_None" Command="{Static Editor:ProjectEditorCommands.ToolNoneCommand}">
                 <MenuItem.Icon>
-                    <CheckBox IsChecked="{Binding CurrentTool, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter={Static Editor:Tool.None}, Mode=OneWay}" Classes="menu"/>
+                    <CheckBox IsChecked="{Binding CurrentTool.Name, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter=None, Mode=OneWay}" Classes="menu"/>
                 </MenuItem.Icon>
             </MenuItem>
             <Separator/>
-            <MenuItem Header="_Selection" Command="{Static Editor:Commands.ToolSelectionCommand}">
+            <MenuItem Header="_Selection" Command="{Static Editor:ProjectEditorCommands.ToolSelectionCommand}">
                 <MenuItem.Icon>
-                    <CheckBox IsChecked="{Binding CurrentTool, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter={Static Editor:Tool.Selection}, Mode=OneWay}" Classes="menu"/>
+                    <CheckBox IsChecked="{Binding CurrentTool.Name, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter=Selection, Mode=OneWay}" Classes="menu"/>
                 </MenuItem.Icon>
             </MenuItem>
             <Separator/>
-            <MenuItem Header="_Point" Command="{Static Editor:Commands.ToolPointCommand}">
+            <MenuItem Header="_Point" Command="{Static Editor:ProjectEditorCommands.ToolPointCommand}">
                 <MenuItem.Icon>
-                    <CheckBox IsChecked="{Binding CurrentTool, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter={Static Editor:Tool.Point}, Mode=OneWay}" Classes="menu"/>
+                    <CheckBox IsChecked="{Binding CurrentTool.Name, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter=Point, Mode=OneWay}" Classes="menu"/>
                 </MenuItem.Icon>
             </MenuItem>
             <Separator/>
-            <MenuItem Header="_Line" Command="{Static Editor:Commands.ToolLineCommand}">
+            <MenuItem Header="_Line" Command="{Static Editor:ProjectEditorCommands.ToolLineCommand}">
                 <MenuItem.Icon>
-                    <CheckBox IsChecked="{Binding CurrentTool, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter={Static Editor:Tool.Line}, Mode=OneWay}" Classes="menu"/>
+                    <CheckBox IsChecked="{Binding CurrentTool.Name, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter=Line, Mode=OneWay}" Classes="menu"/>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="_Arc" Command="{Static Editor:Commands.ToolArcCommand}">
+            <MenuItem Header="_Arc" Command="{Static Editor:ProjectEditorCommands.ToolArcCommand}">
                 <MenuItem.Icon>
-                    <CheckBox IsChecked="{Binding CurrentTool, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter={Static Editor:Tool.Arc}, Mode=OneWay}" Classes="menu"/>
+                    <CheckBox IsChecked="{Binding CurrentTool.Name, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter=Arc, Mode=OneWay}" Classes="menu"/>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="Cubic _Bezier" Command="{Static Editor:Commands.ToolCubicBezierCommand}">
+            <MenuItem Header="Cubic _Bezier" Command="{Static Editor:ProjectEditorCommands.ToolCubicBezierCommand}">
                 <MenuItem.Icon>
-                    <CheckBox IsChecked="{Binding CurrentTool, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter={Static Editor:Tool.CubicBezier}, Mode=OneWay}" Classes="menu"/>
+                    <CheckBox IsChecked="{Binding CurrentTool.Name, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter=CubicBezier, Mode=OneWay}" Classes="menu"/>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="_Quadratic Bezier" Command="{Static Editor:Commands.ToolQuadraticBezierCommand}">
+            <MenuItem Header="_Quadratic Bezier" Command="{Static Editor:ProjectEditorCommands.ToolQuadraticBezierCommand}">
                 <MenuItem.Icon>
-                    <CheckBox IsChecked="{Binding CurrentTool, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter={Static Editor:Tool.QuadraticBezier}, Mode=OneWay}" Classes="menu"/>
+                    <CheckBox IsChecked="{Binding CurrentTool.Name, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter=QuadraticBezier, Mode=OneWay}" Classes="menu"/>
                 </MenuItem.Icon>
             </MenuItem>
             <Separator/>
-            <MenuItem Header="Pat_h" Command="{Static Editor:Commands.ToolPathCommand}">
+            <MenuItem Header="Pat_h" Command="{Static Editor:ProjectEditorCommands.ToolPathCommand}">
                 <MenuItem.Icon>
-                    <CheckBox IsChecked="{Binding CurrentTool, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter={Static Editor:Tool.Path}, Mode=OneWay}" Classes="menu"/>
+                    <CheckBox IsChecked="{Binding CurrentTool.Name, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter=Path, Mode=OneWay}" Classes="menu"/>
                 </MenuItem.Icon>
             </MenuItem>
             <MenuItem Header="Path T_ool">
-                <MenuItem Header="_Line" Command="{Static Editor:Commands.ToolLineCommand}">
+                <MenuItem Header="_Line" Command="{Static Editor:ProjectEditorCommands.ToolLineCommand}">
                     <MenuItem.Icon>
-                        <CheckBox IsChecked="{Binding CurrentPathTool, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter={Static Editor:PathTool.Line}, Mode=OneWay}" Classes="menu"/>
+                        <CheckBox IsChecked="{Binding CurrentPathTool.Name, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter=Line, Mode=OneWay}" Classes="menu"/>
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="_Arc" Command="{Static Editor:Commands.ToolArcCommand}">
+                <MenuItem Header="_Arc" Command="{Static Editor:ProjectEditorCommands.ToolArcCommand}">
                     <MenuItem.Icon>
-                        <CheckBox IsChecked="{Binding CurrentPathTool, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter={Static Editor:PathTool.Arc}, Mode=OneWay}" Classes="menu"/>
+                        <CheckBox IsChecked="{Binding CurrentPathTool.Name, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter=Arc, Mode=OneWay}" Classes="menu"/>
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="Cubic _Bezier" Command="{Static Editor:Commands.ToolCubicBezierCommand}">
+                <MenuItem Header="Cubic _Bezier" Command="{Static Editor:ProjectEditorCommands.ToolCubicBezierCommand}">
                     <MenuItem.Icon>
-                        <CheckBox IsChecked="{Binding CurrentPathTool, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter={Static Editor:PathTool.CubicBezier}, Mode=OneWay}" Classes="menu"/>
+                        <CheckBox IsChecked="{Binding CurrentPathTool.Name, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter=CubicBezier, Mode=OneWay}" Classes="menu"/>
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="_Quadratic Bezier" Command="{Static Editor:Commands.ToolQuadraticBezierCommand}">
+                <MenuItem Header="_Quadratic Bezier" Command="{Static Editor:ProjectEditorCommands.ToolQuadraticBezierCommand}">
                     <MenuItem.Icon>
-                        <CheckBox IsChecked="{Binding CurrentPathTool, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter={Static Editor:PathTool.QuadraticBezier}, Mode=OneWay}" Classes="menu"/>
+                        <CheckBox IsChecked="{Binding CurrentPathTool.Name, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter=QuadraticBezier, Mode=OneWay}" Classes="menu"/>
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator/>
-                <MenuItem Header="_Move" Command="{Static Editor:Commands.ToolMoveCommand}">
+                <MenuItem Header="_Move" Command="{Static Editor:ProjectEditorCommands.ToolMoveCommand}">
                     <MenuItem.Icon>
-                        <CheckBox IsChecked="{Binding CurrentPathTool, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter={Static Editor:PathTool.Move}, Mode=OneWay}" Classes="menu"/>
+                        <CheckBox IsChecked="{Binding CurrentPathTool.Name, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter=Move, Mode=OneWay}" Classes="menu"/>
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
             <Separator/>
-            <MenuItem Header="_Rectangle" Command="{Static Editor:Commands.ToolRectangleCommand}">
+            <MenuItem Header="_Rectangle" Command="{Static Editor:ProjectEditorCommands.ToolRectangleCommand}">
                 <MenuItem.Icon>
-                    <CheckBox IsChecked="{Binding CurrentTool, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter={Static Editor:Tool.Rectangle}, Mode=OneWay}" Classes="menu"/>
+                    <CheckBox IsChecked="{Binding CurrentTool.Name, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter=Rectangle, Mode=OneWay}" Classes="menu"/>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="_Ellipse" Command="{Static Editor:Commands.ToolEllipseCommand}">
+            <MenuItem Header="_Ellipse" Command="{Static Editor:ProjectEditorCommands.ToolEllipseCommand}">
                 <MenuItem.Icon>
-                    <CheckBox IsChecked="{Binding CurrentTool, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter={Static Editor:Tool.Ellipse}, Mode=OneWay}" Classes="menu"/>
-                </MenuItem.Icon>
-            </MenuItem>
-            <Separator/>
-            <MenuItem Header="_Text" Command="{Static Editor:Commands.ToolTextCommand}">
-                <MenuItem.Icon>
-                    <CheckBox IsChecked="{Binding CurrentTool, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter={Static Editor:Tool.Text}, Mode=OneWay}" Classes="menu"/>
+                    <CheckBox IsChecked="{Binding CurrentTool.Name, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter=Ellipse, Mode=OneWay}" Classes="menu"/>
                 </MenuItem.Icon>
             </MenuItem>
             <Separator/>
-            <MenuItem Header="_Image" Command="{Static Editor:Commands.ToolImageCommand}">
+            <MenuItem Header="_Text" Command="{Static Editor:ProjectEditorCommands.ToolTextCommand}">
                 <MenuItem.Icon>
-                    <CheckBox IsChecked="{Binding CurrentTool, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter={Static Editor:Tool.Image}, Mode=OneWay}" Classes="menu"/>
+                    <CheckBox IsChecked="{Binding CurrentTool.Name, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter=Text, Mode=OneWay}" Classes="menu"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator/>
+            <MenuItem Header="_Image" Command="{Static Editor:ProjectEditorCommands.ToolImageCommand}">
+                <MenuItem.Icon>
+                    <CheckBox IsChecked="{Binding CurrentTool.Name, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter=Image, Mode=OneWay}" Classes="menu"/>
                 </MenuItem.Icon>
             </MenuItem>
         </MenuItem>
         <MenuItem Header="_Data">
-            <MenuItem Header="_Import..." Command="{Static Editor:Commands.ImportDataCommand}"/>
+            <MenuItem Header="_Import..." Command="{Static Editor:ProjectEditorCommands.ImportDataCommand}" CommandParameter="{Binding Project}"/>
             <Separator/>
-            <MenuItem Header="_Export..." Command="{Static Editor:Commands.ExportDataCommand}"/>
+            <MenuItem Header="_Export..." Command="{Static Editor:ProjectEditorCommands.ExportDataCommand}" CommandParameter="{Binding Project.CurrentDatabase}"/>
             <Separator/>
-            <MenuItem Header="_Update..." Command="{Static Editor:Commands.UpdateDataCommand}"/>
+            <MenuItem Header="_Update..." Command="{Static Editor:ProjectEditorCommands.UpdateDataCommand}" CommandParameter="{Binding Project.CurrentDatabase}"/>
         </MenuItem>
         <MenuItem Header="Te_mplate" Items="{Binding Project.Templates}">
             <MenuItem.Styles>
                 <Style Selector="MenuItem">
                     <Setter Property="Header" Value="{Binding Name}"/>
-                    <Setter Property="Command" Value="{Static Editor:Commands.ApplyTemplateCommand}"/>
+                    <Setter Property="Command" Value="{Static Editor:ProjectEditorCommands.ApplyTemplateCommand}"/>
                     <Setter Property="CommandParameter" Value="{Binding}"/>
                     <Setter Property="Icon">
                         <Template>
@@ -244,41 +244,41 @@
             </MenuItem.Styles>
         </MenuItem>
         <MenuItem Header="_Options">
-            <MenuItem Header="Default is Stro_ked" Command="{Static Editor:Commands.DefaultIsStrokedCommand}">
+            <MenuItem Header="Default is Stro_ked" Command="{Static Editor:ProjectEditorCommands.DefaultIsStrokedCommand}">
                 <MenuItem.Icon>
                     <CheckBox IsChecked="{Binding Project.Options.DefaultIsStroked}" Classes="menu"/>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="Default is _Filled" Command="{Static Editor:Commands.DefaultIsFilledCommand}">
+            <MenuItem Header="Default is _Filled" Command="{Static Editor:ProjectEditorCommands.DefaultIsFilledCommand}">
                 <MenuItem.Icon>
                     <CheckBox IsChecked="{Binding Project.Options.DefaultIsFilled}" Classes="menu"/>
                 </MenuItem.Icon>
             </MenuItem>
             <Separator/>
-            <MenuItem Header="Default is Close_d" Command="{Static Editor:Commands.DefaultIsClosedCommand}">
+            <MenuItem Header="Default is Close_d" Command="{Static Editor:ProjectEditorCommands.DefaultIsClosedCommand}">
                 <MenuItem.Icon>
                     <CheckBox IsChecked="{Binding Project.Options.DefaultIsClosed}" Classes="menu"/>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="Default is Smooth _Join" Command="{Static Editor:Commands.DefaultIsSmoothJoinCommand}">
+            <MenuItem Header="Default is Smooth _Join" Command="{Static Editor:ProjectEditorCommands.DefaultIsSmoothJoinCommand}">
                 <MenuItem.Icon>
                     <CheckBox IsChecked="{Binding Project.Options.DefaultIsSmoothJoin}" Classes="menu"/>
                 </MenuItem.Icon>
             </MenuItem>
             <Separator/>
-            <MenuItem Header="Snap to _Grid" Command="{Static Editor:Commands.SnapToGridCommand}">
+            <MenuItem Header="Snap to _Grid" Command="{Static Editor:ProjectEditorCommands.SnapToGridCommand}">
                 <MenuItem.Icon>
                     <CheckBox IsChecked="{Binding Project.Options.SnapToGrid}" Classes="menu"/>
                 </MenuItem.Icon>
             </MenuItem>
             <Separator/>
-            <MenuItem Header="Try To _Connect" Command="{Static Editor:Commands.TryToConnectCommand}">
+            <MenuItem Header="Try To _Connect" Command="{Static Editor:ProjectEditorCommands.TryToConnectCommand}">
                 <MenuItem.Icon>
                     <CheckBox IsChecked="{Binding Project.Options.TryToConnect}" Classes="menu"/>
                 </MenuItem.Icon>
             </MenuItem>
             <Separator/>
-            <MenuItem Header="Clone St_yle" Command="{Static Editor:Commands.CloneStyleCommand}">
+            <MenuItem Header="Clone St_yle" Command="{Static Editor:ProjectEditorCommands.CloneStyleCommand}">
                 <MenuItem.Icon>
                     <CheckBox IsChecked="{Binding Project.Options.CloneStyle}" Classes="menu"/>
                 </MenuItem.Icon>

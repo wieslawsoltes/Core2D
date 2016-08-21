@@ -1,20 +1,16 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 using System.Threading.Tasks;
 using Core2D.Data.Database;
 using Core2D.Editor.Factories;
-using Core2D.Editor.Input;
-using Core2D.Editor.Interfaces;
 using Core2D.Editor.Recent;
-using Core2D.Editor.Tools;
-using Core2D.Editor.Views;
+using Core2D.Editor.Views.Interfaces;
 using Core2D.Interfaces;
 using Core2D.Project;
 using Core2D.Renderer;
-using Core2D.Shape;
 
 namespace Core2D.Editor
 {
@@ -23,13 +19,11 @@ namespace Core2D.Editor
     /// </summary>
     public partial class ProjectEditor : ObservableObject
     {
+        private readonly IServiceProvider _serviceProvider;
         private XProject _project;
         private string _projectPath;
         private bool _isProjectDirty;
         private ProjectObserver _observer;
-        private ImmutableDictionary<Tool, ToolBase> _tools;
-        private Tool _currentTool;
-        private PathTool _currentPathTool;
         private Action _invalidate;
         private Action _resetZoom;
         private Action _extentZoom;
@@ -37,15 +31,15 @@ namespace Core2D.Editor
         private Action _saveLayout;
         private Action _resetLayout;
         private bool _cancelAvailable;
+        private ToolBase _currentTool;
+        private PathToolBase _currentPathTool;
         private ImmutableArray<RecentFile> _recentProjects;
         private RecentFile _currentRecentProject;
-        private ImmutableArray<ViewBase> _views;
-        private ViewBase _currentView;
-        private DashboardView _dashboardView;
-        private EditorView _editorView;
-        private readonly Lazy<IEditorApplication> _application;
+        private IView _currentView;
+        private readonly Lazy<ImmutableArray<ToolBase>> _tools;
+        private readonly Lazy<ImmutableArray<PathToolBase>> _pathTools;
+        private readonly Lazy<ImmutableArray<IView>> _views;
         private readonly Lazy<ILog> _log;
-        private readonly Lazy<CommandManager> _commandManager;
         private readonly Lazy<ShapeRenderer[]> _renderers;
         private readonly Lazy<IFileSystem> _fileIO;
         private readonly Lazy<IProjectFactory> _projectFactory;
@@ -55,6 +49,7 @@ namespace Core2D.Editor
         private readonly Lazy<ImmutableArray<IFileWriter>> _fileWriters;
         private readonly Lazy<ITextFieldReader<XDatabase>> _csvReader;
         private readonly Lazy<ITextFieldWriter<XDatabase>> _csvWriter;
+        private readonly Lazy<IImageImporter> _imageImporter;
 
         /// <summary>
         /// Gets or sets current project.
@@ -90,33 +85,6 @@ namespace Core2D.Editor
         {
             get { return _observer; }
             set { Update(ref _observer, value); }
-        }
-
-        /// <summary>
-        /// Gets or sets editor tools dictionary.
-        /// </summary>
-        public ImmutableDictionary<Tool, ToolBase> Tools
-        {
-            get { return _tools; }
-            set { Update(ref _tools, value); }
-        }
-
-        /// <summary>
-        /// Gets or sets current editor tool.
-        /// </summary>
-        public Tool CurrentTool
-        {
-            get { return _currentTool; }
-            set { Update(ref _currentTool, value); }
-        }
-
-        /// <summary>
-        /// Gets or sets current editor path tool.
-        /// </summary>
-        public PathTool CurrentPathTool
-        {
-            get { return _currentPathTool; }
-            set { Update(ref _currentPathTool, value); }
         }
 
         /// <summary>
@@ -189,9 +157,22 @@ namespace Core2D.Editor
         }
 
         /// <summary>
-        /// Get image key using common system open file dialog.
+        /// Gets or sets current editor tool.
         /// </summary>
-        public Func<Task<string>> GetImageKey => Application.OnGetImageKeyAsync;
+        public ToolBase CurrentTool
+        {
+            get { return _currentTool; }
+            set { Update(ref _currentTool, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets current editor path tool.
+        /// </summary>
+        public PathToolBase CurrentPathTool
+        {
+            get { return _currentPathTool; }
+            set { Update(ref _currentPathTool, value); }
+        }
 
         /// <summary>
         /// Gets or sets recent projects collection.
@@ -212,37 +193,33 @@ namespace Core2D.Editor
         }
 
         /// <summary>
-        /// Gets or sets registered views.
-        /// </summary>
-        public ImmutableArray<ViewBase> Views
-        {
-            get { return _views; }
-            set { Update(ref _views, value); }
-        }
-
-        /// <summary>
         /// Gets or sets current view.
         /// </summary>
-        public ViewBase CurrentView
+        public IView CurrentView
         {
             get { return _currentView; }
             set { Update(ref _currentView, value); }
         }
 
         /// <summary>
-        /// Gets current editor application.
+        /// Gets or sets editor tools.
         /// </summary>
-        public IEditorApplication Application => _application.Value;
+        public ImmutableArray<ToolBase> Tools => _tools.Value;
+
+        /// <summary>
+        /// Gets or sets editor path tools.
+        /// </summary>
+        public ImmutableArray<PathToolBase> PathTools => _pathTools.Value;
+
+        /// <summary>
+        /// Gets or sets registered views.
+        /// </summary>
+        public ImmutableArray<IView> Views => _views.Value;
 
         /// <summary>
         /// Gets current log.
         /// </summary>
         public ILog Log => _log.Value;
-
-        /// <summary>
-        /// Gets current command manager.
-        /// </summary>
-        public CommandManager CommandManager => _commandManager.Value;
 
         /// <summary>
         /// Gets current renderer's.
@@ -290,54 +267,33 @@ namespace Core2D.Editor
         public ITextFieldWriter<XDatabase> CsvWriter => _csvWriter.Value;
 
         /// <summary>
+        /// Gets image key importer.
+        /// </summary>
+        public IImageImporter ImageImporter => _imageImporter.Value;
+
+        /// <summary>
         /// Initialize new instance of <see cref="ProjectEditor"/> class.
         /// </summary>
-        public ProjectEditor()
+        /// <param name="serviceProvider">The service provider.</param>
+        public ProjectEditor(IServiceProvider serviceProvider)
         {
-            _currentTool = Tool.Selection;
-            _currentPathTool = PathTool.Line;
-
-            _tools = new Dictionary<Tool, ToolBase>
-            {
-                [Tool.None] = new ToolNone(),
-                [Tool.Selection] = new ToolSelection(),
-                [Tool.Point] = new ToolPoint(),
-                [Tool.Line] = new ToolLine(),
-                [Tool.Arc] = new ToolArc(),
-                [Tool.CubicBezier] = new ToolCubicBezier(),
-                [Tool.QuadraticBezier] = new ToolQuadraticBezier(),
-                [Tool.Path] = new ToolPath(),
-                [Tool.Rectangle] = new ToolRectangle(),
-                [Tool.Ellipse] = new ToolEllipse(),
-                [Tool.Text] = new ToolText(),
-                [Tool.Image] = new ToolImage()
-            }
-            .ToImmutableDictionary();
-
+            _serviceProvider = serviceProvider;
             _recentProjects = ImmutableArray.Create<RecentFile>();
             _currentRecentProject = default(RecentFile);
-
-            _dashboardView = new DashboardView { Name = "Dashboard", Context = this };
-            _editorView = new EditorView { Name = "Editor", Context = this };
-
-            _views = new List<ViewBase> { _dashboardView, _editorView }.ToImmutableArray();
-            _currentView = _dashboardView;
-
-            _application = ServiceLocator.Instance.ResolveLazily<IEditorApplication>();
-            _log = ServiceLocator.Instance.ResolveLazily<ILog>();
-            _commandManager = ServiceLocator.Instance.ResolveLazily<CommandManager>();
-            _renderers = ServiceLocator.Instance.ResolveLazily<ShapeRenderer[]>();
-            _fileIO = ServiceLocator.Instance.ResolveLazily<IFileSystem>();
-            _projectFactory = ServiceLocator.Instance.ResolveLazily<IProjectFactory>();
-            _textClipboard = ServiceLocator.Instance.ResolveLazily<ITextClipboard>();
-            _jsonSerializer = ServiceLocator.Instance.ResolveLazily<IJsonSerializer>();
-            _xamlSerializer = ServiceLocator.Instance.ResolveLazily<IXamlSerializer>();
-            _fileWriters = ServiceLocator.Instance.ResolveLazily<ImmutableArray<IFileWriter>>();
-            _csvReader = ServiceLocator.Instance.ResolveLazily<ITextFieldReader<XDatabase>>();
-            _csvWriter = ServiceLocator.Instance.ResolveLazily<ITextFieldWriter<XDatabase>>();
-
-            InitializeCommands();
-            CommandManager.RegisterCommands();
+            _tools = _serviceProvider.GetServiceLazily<ToolBase[], ImmutableArray<ToolBase>>((tools) => tools.Where(tool => !tool.GetType().Name.StartsWith("PathTool")).ToImmutableArray());
+            _pathTools = _serviceProvider.GetServiceLazily<PathToolBase[], ImmutableArray<PathToolBase>>((tools) => tools.ToImmutableArray());
+            _views = _serviceProvider.GetServiceLazily<IView[], ImmutableArray<IView>>((views) => views.ToImmutableArray());
+            _log = _serviceProvider.GetServiceLazily<ILog>();
+            _renderers = _serviceProvider.GetServiceLazily<ShapeRenderer[]>();
+            _fileIO = _serviceProvider.GetServiceLazily<IFileSystem>();
+            _projectFactory = _serviceProvider.GetServiceLazily<IProjectFactory>();
+            _textClipboard = _serviceProvider.GetServiceLazily<ITextClipboard>();
+            _jsonSerializer = _serviceProvider.GetServiceLazily<IJsonSerializer>();
+            _xamlSerializer = _serviceProvider.GetServiceLazily<IXamlSerializer>();
+            _fileWriters = _serviceProvider.GetServiceLazily<IFileWriter[], ImmutableArray<IFileWriter>>((writers) => writers.ToImmutableArray());
+            _csvReader = _serviceProvider.GetServiceLazily<ITextFieldReader<XDatabase>>();
+            _csvWriter = _serviceProvider.GetServiceLazily<ITextFieldWriter<XDatabase>>();
+            _imageImporter = _serviceProvider.GetServiceLazily<IImageImporter>();
         }
     }
 }

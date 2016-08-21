@@ -1,8 +1,9 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Core2D.Interfaces;
+using System;
 using System.Threading.Tasks;
 using System.Windows;
+using Core2D.Interfaces;
 
 namespace Utilities.Wpf
 {
@@ -21,7 +22,7 @@ namespace Utilities.Wpf
             {
                 Application.Current.Dispatcher.Invoke(() =>
                 {
-                    Clipboard.SetText(text, TextDataFormat.UnicodeText);
+                    try { Clipboard.SetText(text, TextDataFormat.UnicodeText); } catch (Exception) { }
                 });
             });
         }

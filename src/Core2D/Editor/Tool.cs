@@ -1,71 +1,114 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
+using Core2D.Shape;
+
 namespace Core2D.Editor
 {
     /// <summary>
-    /// Specifies editor tools.
+    /// Defines tool contract.
     /// </summary>
-    public enum Tool
+    public abstract class Tool
     {
         /// <summary>
-        /// None tool.
+        /// Gets the tool name.
         /// </summary>
-        None,
+        public abstract string Name { get; }
 
         /// <summary>
-        /// Selection tool.
+        /// Handle mouse left button down events.
         /// </summary>
-        Selection,
+        /// <param name="x">The X coordinate of point.</param>
+        /// <param name="y">The Y coordinate of point.</param>
+        public virtual void LeftDown(double x, double y)
+        {
+        }
 
         /// <summary>
-        /// Point tool.
+        /// Handle mouse left button up events.
         /// </summary>
-        Point,
+        /// <param name="x">The X coordinate of point.</param>
+        /// <param name="y">The Y coordinate of point.</param>
+        public virtual void LeftUp(double x, double y)
+        {
+        }
 
         /// <summary>
-        /// Line tool.
+        /// Handle mouse right button down events.
         /// </summary>
-        Line,
+        /// <param name="x">The X coordinate of point.</param>
+        /// <param name="y">The Y coordinate of point.</param>
+        public virtual void RightDown(double x, double y)
+        {
+        }
 
         /// <summary>
-        /// Arc tool.
+        /// Handle mouse right button up events.
         /// </summary>
-        Arc,
+        /// <param name="x">The X coordinate of point.</param>
+        /// <param name="y">The Y coordinate of point.</param>
+        public virtual void RightUp(double x, double y)
+        {
+        }
 
         /// <summary>
-        /// Cubic bezier tool.
+        /// Handle mouse move events.
         /// </summary>
-        CubicBezier,
+        /// <param name="x">The X coordinate of point.</param>
+        /// <param name="y">The Y coordinate of point.</param>
+        public virtual void Move(double x, double y)
+        {
+        }
 
         /// <summary>
-        /// Quadratic bezier tool.
+        /// Transfer tool state to <see cref="ToolState.One"/>.
         /// </summary>
-        QuadraticBezier,
+        public virtual void ToStateOne()
+        {
+        }
 
         /// <summary>
-        /// Path tool.
+        /// Transfer tool state to <see cref="ToolState.Two"/>.
         /// </summary>
-        Path,
+        public virtual void ToStateTwo()
+        {
+        }
 
         /// <summary>
-        /// Rectangle tool.
+        /// Transfer tool state to <see cref="ToolState.Three"/>.
         /// </summary>
-        Rectangle,
+        public virtual void ToStateThree()
+        {
+        }
 
         /// <summary>
-        /// Ellipse tool.
+        /// Transfer tool state to <see cref="ToolState.Four"/>.
         /// </summary>
-        Ellipse,
+        public virtual void ToStateFour()
+        {
+        }
 
         /// <summary>
-        /// Text tool
+        /// Move edited shape.
         /// </summary>
-        Text,
+        /// <param name="shape">The shape object.</param>
+        public virtual void Move(BaseShape shape)
+        {
+        }
 
         /// <summary>
-        /// Image tool.
+        /// Finalize edited shape.
         /// </summary>
-        Image
+        /// <param name="shape">The shape object.</param>
+        public virtual void Finalize(BaseShape shape)
+        {
+        }
+
+        /// <summary>
+        /// Remove edited shape.
+        /// </summary>
+        public virtual void Remove()
+        {
+        }
     }
 }
