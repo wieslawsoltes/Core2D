@@ -55,7 +55,7 @@ namespace Core2D.Wpf
                 var editor = serviceProvider.GetService<ProjectEditor>();
 
                 var path = System.IO.Path.Combine(fileIO.GetAssemblyPath(null), "Core2D.recent");
-                if (System.IO.File.Exists(path))
+                if (fileIO.Exists(path))
                 {
                     editor.OnLoadRecent(path);
                 }
