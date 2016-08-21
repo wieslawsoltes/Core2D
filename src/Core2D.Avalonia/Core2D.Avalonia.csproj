@@ -183,6 +183,7 @@
     <Compile Include="Converters\ObjectToTypeStringConverter.cs" />
     <Compile Include="Converters\ObjectToXamlStringConverter.cs" />
     <Compile Include="Converters\TreeViewSelectedItemToObjectConverter.cs" />
+    <Compile Include="Importers\FileImageImporter.cs" />
     <Compile Include="Interactions\Actions\FocusControlAction.cs" />
     <Compile Include="Interactions\Behaviors\BindTagToVisualRootDataContextBehavior.cs" />
     <Compile Include="Interactions\Behaviors\FocusOnAttachedToVisualTreeBehavior.cs" />
