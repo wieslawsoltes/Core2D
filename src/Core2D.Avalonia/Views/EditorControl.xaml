@@ -301,12 +301,23 @@
             </TextBlock>
             <WrapPanel Name="toolsPanel" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center">
                 <WrapPanel Name="toolPanel">
-                    <DropDown Classes="tool" Items="{Static Editor:Enums.ToolValues}" SelectedItem="{Binding CurrentTool, Mode=TwoWay}"/>
-                    <DropDown Classes="tool" Items="{Static Editor:Enums.PathToolValues}" SelectedItem="{Binding CurrentPathTool, Mode=TwoWay}">
+                    <DropDown Classes="tool" Items="{Binding Tools}" SelectedItem="{Binding CurrentTool, Mode=TwoWay}">
+                        <DropDown.DataTemplates>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}"/>
+                            </DataTemplate>
+                        </DropDown.DataTemplates>
+                    </DropDown>
+                    <DropDown Classes="tool" Items="{Binding PathTools}" SelectedItem="{Binding CurrentPathTool, Mode=TwoWay}">
+                        <DropDown.DataTemplates>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}"/>
+                            </DataTemplate>
+                        </DropDown.DataTemplates>
                         <DropDown.IsVisible>
                             <MultiBinding Mode="OneWay" Converter="{Static converters:ObjectEqualityMultiConverter.Instance}">
-                                <Binding Path="CurrentTool"/>
-                                <Binding Source="{Static Editor:Tool.Path}"/>
+                                <Binding Path="CurrentTool.Name"/>
+                                <Binding Source="Path"/>
                             </MultiBinding>
                         </DropDown.IsVisible>
                     </DropDown>
