@@ -117,6 +117,7 @@
     <Compile Include="Modules\DependenciesModule.cs" />
     <Compile Include="Locator\ServiceProvider.cs" />
     <Compile Include="Modules\LocatorModule.cs" />
+    <Compile Include="Importers\FileImageImporter.cs" />
     <Compile Include="Views\DashboardControl.xaml.cs">
       <DependentUpon>DashboardControl.xaml</DependentUpon>
       <SubType>Code</SubType>
