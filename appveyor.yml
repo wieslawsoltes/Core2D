@@ -26,6 +26,11 @@ notifications:
   on_build_success: true
   on_build_failure: true
   on_build_status_changed: true
+artifacts:
+  - path: artifacts\test-results\*.xml
+  - path: artifacts\nuget\*.nupkg
+  - path: artifacts\chocolatey\*.nupkg
+  - path: artifacts\zip\*.zip
 cache:
 - packages -> src\**\packages.config, dependencies\**\packages.config, tests\**\packages.config
 - tools -> build.cake, tools\packages.config

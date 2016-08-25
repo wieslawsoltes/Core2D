@@ -973,31 +973,6 @@ Task("Create-Chocolatey-Packages")
     }
 });
 
-Task("Upload-AppVeyor-Artifacts")
-    .IsDependentOn("Zip-Files")
-    .IsDependentOn("Create-NuGet-Packages")
-    .IsDependentOn("Create-Chocolatey-Packages")
-    .WithCriteria(() => isRunningOnAppVeyor)
-    .Does(() =>
-{
-    AppVeyor.UploadArtifact(zipCoreArtifacts.FullPath);
-
-    foreach(var zip in GetFiles(zipRoot + "/*"))
-    {
-        AppVeyor.UploadArtifact(zip);
-    }
-
-    foreach(var nupkg in nugetPackages)
-    {
-        AppVeyor.UploadArtifact(nupkg.FullPath);
-    }
-
-    foreach(var nupkg in chocolateyPackages)
-    {
-        AppVeyor.UploadArtifact(nupkg.FullPath);
-    }
-});
-
 Task("Publish-MyGet")
     .IsDependentOn("Create-NuGet-Packages")
     .WithCriteria(() => !isLocalBuild)
@@ -1113,7 +1088,6 @@ Task("Default")
   .IsDependentOn("Package");
 
 Task("AppVeyor")
-  .IsDependentOn("Upload-AppVeyor-Artifacts")
   .IsDependentOn("Publish-MyGet")
   .IsDependentOn("Publish-NuGet")
   .IsDependentOn("Publish-Chocolatey");
