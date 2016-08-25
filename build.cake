@@ -1088,6 +1088,7 @@ Task("Default")
   .IsDependentOn("Package");
 
 Task("AppVeyor")
+  .IsDependentOn("Zip-Files")
   .IsDependentOn("Publish-MyGet")
   .IsDependentOn("Publish-NuGet")
   .IsDependentOn("Publish-Chocolatey");
