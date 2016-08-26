@@ -213,6 +213,11 @@
     <Compile Include="Interactions\Behaviors\FocusOnPointerPressedBehavior.cs" />
     <Compile Include="Interactions\Behaviors\SelectListBoxItemOnPointerMovedBehavior.cs" />
     <Compile Include="Interactions\Behaviors\ToggleIsExpandedOnDoubleTappedBehavior.cs" />
+    <Compile Include="Locator\ServiceProvider.cs" />
+    <Compile Include="Modules\AppModule.cs" />
+    <Compile Include="Modules\CoreModule.cs" />
+    <Compile Include="Modules\DependenciesModule.cs" />
+    <Compile Include="Modules\LocatorModule.cs" />
     <Compile Include="Presenters\CachedContentPresenter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Renderer\RendererOptions.cs" />
@@ -638,6 +643,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Autofac.3.5.2\lib\portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Avalonia.Animation, Version=0.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Avalonia.0.4.1-build1936-alpha\lib\portable-windows8+net45\Avalonia.Animation.dll</HintPath>
       <Private>True</Private>
@@ -751,6 +760,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\dependencies\Renderer.Avalonia\Renderer.Avalonia.csproj">
+      <Project>{e05f3f7e-2176-43dc-90bb-f5c66cfdb12f}</Project>
+      <Name>Renderer.Avalonia</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\dependencies\Utilities.Avalonia\Utilities.Avalonia.csproj">
       <Project>{c6dbd1fd-c462-4005-b382-97bb4aef26f2}</Project>
       <Name>Utilities.Avalonia</Name>

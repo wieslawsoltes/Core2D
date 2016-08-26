@@ -3,7 +3,7 @@
 using System;
 using Autofac;
 
-namespace Core2D.Avalonia.Droid.Locator
+namespace Core2D.Avalonia.Locator
 {
     /// <summary>
     /// Service provider based on lifetime scope.

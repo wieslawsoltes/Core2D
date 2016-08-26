@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Immutable;
 using System.Linq;
+using Autofac;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
@@ -13,11 +14,13 @@ using Core2D.Avalonia.Controls.Shapes;
 using Core2D.Avalonia.Controls.State;
 using Core2D.Avalonia.Controls.Style;
 using Core2D.Avalonia.Converters;
+using Core2D.Avalonia.Modules;
 using Core2D.Avalonia.Presenters;
 using Core2D.Avalonia.Views;
 using Core2D.Data;
 using Core2D.Data.Database;
 using Core2D.Editor;
+using Core2D.Editor.Designer;
 using Core2D.Editor.Views;
 using Core2D.Interfaces;
 using Core2D.Path;
@@ -124,8 +127,6 @@ namespace Core2D.Avalonia
         {
             if (Design.IsDesignMode)
             {
-                // TODO: Fix Design.DataContext initialization.
-                /*
                 var builder = new ContainerBuilder();
 
                 builder.RegisterModule<LocatorModule>();
@@ -136,7 +137,6 @@ namespace Core2D.Avalonia
                 var container = builder.Build();
 
                 DesignerContext.InitializeContext(container.Resolve<IServiceProvider>());
-                */
             }
         }
 
