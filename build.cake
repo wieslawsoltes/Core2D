@@ -3,6 +3,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #addin "nuget:?package=Polly&version=4.2.0"
+#addin "nuget:?package=NuGet.Core&version=2.12.0"
 
 ///////////////////////////////////////////////////////////////////////////////
 // TOOLS
@@ -15,9 +16,11 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Polly;
+using NuGet;
 
 ///////////////////////////////////////////////////////////////////////////////
 // ARGUMENTS
@@ -135,15 +138,87 @@ var zipTargetWpfDirs = zipRoot.CombineWithFilePath("Core2D.Wpf-" + fileZipSuffix
 // NUGET NUSPECS
 ///////////////////////////////////////////////////////////////////////////////
 
-var SystemCollectionsImmutableVersion = "1.2.0";
-var SystemReactiveVersion = "3.0.0";
-var NewtonsoftJsonVersion = "9.0.1";
-var PortableXamlVersion = "0.14.0";
-var CsvHelperVersion = "2.16.0.0";
-var AvaloniaVersion = "0.4.1-build1936-alpha";
-var AvaloniaXamlBehaviorsVersion = "0.4.1-build301-alpha";
-var AvaloniaControlsPanAndZoomVersion = "0.4.1-build35-alpha";
-var SkiaSharpVersion = "1.53.0";
+Information("Getting git modules:");
+
+IEnumerable<string> subModules;
+var gitSettings = new ProcessSettings { Arguments = "config --file .gitmodules --get-regexp path", RedirectStandardOutput = true };
+var exitCode = StartProcess("git", gitSettings, out subModules);
+if (exitCode != 0)
+{
+    throw new Exception("Failed to retrieve git submodule paths.");
+}
+
+var ignoredSubModulesPaths = subModules.Select(m => 
+{
+    var path = m.Split(' ')[1];
+    Information(path);
+    return ((DirectoryPath)Directory(path)).FullPath;
+}).ToList();
+
+var normalizePath = new Func<string, string>(
+    path => path.Replace(System.IO.Path.DirectorySeparatorChar, System.IO.Path.AltDirectorySeparatorChar).ToUpperInvariant());
+
+// Key: Package Id
+// Value is Tuple where Item1: Package Version, Item2: The packages.config file path.
+var packageVersions = new Dictionary<string, IList<Tuple<string,string>>>();
+
+System.IO.Directory.EnumerateFiles(((DirectoryPath)Directory("./src")).FullPath, "packages.config", SearchOption.AllDirectories).ToList().ForEach(fileName =>
+{
+    if (!ignoredSubModulesPaths.Any(i => normalizePath(fileName).Contains(normalizePath(i))))
+    {
+        var file = new PackageReferenceFile(fileName);
+        foreach (PackageReference packageReference in file.GetPackageReferences())
+        {
+            IList<Tuple<string, string>> versions;
+            packageVersions.TryGetValue(packageReference.Id, out versions);
+            if (versions == null)
+            {
+                versions = new List<Tuple<string, string>>();
+                packageVersions[packageReference.Id] = versions;
+            }
+            versions.Add(Tuple.Create(packageReference.Version.ToString(), fileName));
+        }
+    }
+});
+
+Information("Checking installed NuGet package dependencies versions:");
+
+packageVersions.ToList().ForEach(package =>
+{
+    var packageVersion = package.Value.First().Item1;
+    bool isValidVersion = package.Value.All(x => x.Item1 == packageVersion);
+    if (!isValidVersion)
+    {
+        Information("Error: package {0} has multiple versions installed:", package.Key);
+        foreach (var v in package.Value)
+        {
+            Information("{0}, file: {1}", v.Item1, v.Item2);
+        }
+        throw new Exception("Detected multiple NuGet package version installed for different projects.");
+    }
+});
+
+Information("Setting NuGet package dependencies versions:");
+
+var SystemCollectionsImmutableVersion = packageVersions["System.Collections.Immutable"].FirstOrDefault().Item1;
+var SystemReactiveVersion = packageVersions["System.Reactive"].FirstOrDefault().Item1;
+var NewtonsoftJsonVersion = packageVersions["Newtonsoft.Json"].FirstOrDefault().Item1;
+var PortableXamlVersion = packageVersions["Portable.Xaml"].FirstOrDefault().Item1;
+var CsvHelperVersion = packageVersions["CsvHelper"].FirstOrDefault().Item1;
+var AvaloniaVersion = packageVersions["Avalonia"].FirstOrDefault().Item1;
+var AvaloniaXamlBehaviorsVersion = packageVersions["Avalonia.Xaml.Behaviors"].FirstOrDefault().Item1;
+var AvaloniaControlsPanAndZoomVersion = packageVersions["Avalonia.Controls.PanAndZoom"].FirstOrDefault().Item1;
+var SkiaSharpVersion = packageVersions["SkiaSharp"].FirstOrDefault().Item1;
+
+Information("Package: System.Collections.Immutable, version: {0}", SerilogVersion);
+Information("Package: System.Reactive, version: {0}", SerilogVersion);
+Information("Package: Newtonsoft.Json, version: {0}", SerilogVersion);
+Information("Package: Portable.Xaml, version: {0}", SerilogVersion);
+Information("Package: CsvHelper, version: {0}", SerilogVersion);
+Information("Package: Avalonia, version: {0}", SerilogVersion);
+Information("Package: Avalonia.Xaml.Behaviors, version: {0}", SerilogVersion);
+Information("Package: Avalonia.Controls.PanAndZoom, version: {0}", SerilogVersion);
+Information("Package: SkiaSharp, version: {0}", SerilogVersion);
 
 var SetNuGetNuspecCommonProperties = new Action<NuGetPackSettings> ((nuspec) => {
     nuspec.Version = version;
@@ -169,9 +244,9 @@ var nuspecNuGetSettingsCore = new []
         Id = "Core2D",
         Dependencies = new []
         {
-            new NuSpecDependency() { Id = "System.Collections.Immutable", Version = SystemCollectionsImmutableVersion },
-            new NuSpecDependency() { Id = "System.Reactive.Interfaces", Version = SystemReactiveVersion },
-            new NuSpecDependency() { Id = "System.Reactive.Core", Version = SystemReactiveVersion }
+            new NuSpecDependency { Id = "System.Collections.Immutable", Version = SystemCollectionsImmutableVersion },
+            new NuSpecDependency { Id = "System.Reactive.Interfaces", Version = SystemReactiveVersion },
+            new NuSpecDependency { Id = "System.Reactive.Core", Version = SystemReactiveVersion }
         },
         Files = new []
         {
@@ -188,12 +263,12 @@ var nuspecNuGetSettingsCore = new []
         Id = "Core2D.Avalonia",
         Dependencies = new []
         {
-            new NuSpecDependency() { Id = "System.Collections.Immutable", Version = SystemCollectionsImmutableVersion },
-            new NuSpecDependency() { Id = "Core2D", Version = version },
-            new NuSpecDependency() { Id = "Utilities.Avalonia", Version = version },
-            new NuSpecDependency() { Id = "Avalonia", Version = AvaloniaVersion },
-            new NuSpecDependency() { Id = "Avalonia.Xaml.Behaviors", Version = AvaloniaXamlBehaviorsVersion },
-            new NuSpecDependency() { Id = "Avalonia.Controls.PanAndZoom", Version = AvaloniaControlsPanAndZoomVersion }
+            new NuSpecDependency { Id = "System.Collections.Immutable", Version = SystemCollectionsImmutableVersion },
+            new NuSpecDependency { Id = "Core2D", Version = version },
+            new NuSpecDependency { Id = "Utilities.Avalonia", Version = version },
+            new NuSpecDependency { Id = "Avalonia", Version = AvaloniaVersion },
+            new NuSpecDependency { Id = "Avalonia.Xaml.Behaviors", Version = AvaloniaXamlBehaviorsVersion },
+            new NuSpecDependency { Id = "Avalonia.Controls.PanAndZoom", Version = AvaloniaControlsPanAndZoomVersion }
         },
         Files = new []
         {
@@ -214,7 +289,7 @@ var nuspecNuGetSettingsDependencies = new []
         Id = "Core2D.FileSystem.DotNetFx",
         Dependencies = new []
         {
-            new NuSpecDependency() { Id = "Core2D", Version = version }
+            new NuSpecDependency { Id = "Core2D", Version = version }
         },
         Files = new []
         {
@@ -231,9 +306,9 @@ var nuspecNuGetSettingsDependencies = new []
         Id = "Core2D.FileWriter.Dxf",
         Dependencies = new []
         {
-            new NuSpecDependency() { Id = "System.Collections.Immutable", Version = SystemCollectionsImmutableVersion },
-            new NuSpecDependency() { Id = "Core2D", Version = version },
-            new NuSpecDependency() { Id = "Core2D.Renderer.Dxf", Version = version }
+            new NuSpecDependency { Id = "System.Collections.Immutable", Version = SystemCollectionsImmutableVersion },
+            new NuSpecDependency { Id = "Core2D", Version = version },
+            new NuSpecDependency { Id = "Core2D.Renderer.Dxf", Version = version }
         },
         Files = new []
         {
@@ -250,9 +325,9 @@ var nuspecNuGetSettingsDependencies = new []
         Id = "Core2D.FileWriter.Emf",
         Dependencies = new []
         {
-            new NuSpecDependency() { Id = "System.Collections.Immutable", Version = SystemCollectionsImmutableVersion },
-            new NuSpecDependency() { Id = "Core2D", Version = version },
-            new NuSpecDependency() { Id = "Core2D.Renderer.WinForms", Version = version }
+            new NuSpecDependency { Id = "System.Collections.Immutable", Version = SystemCollectionsImmutableVersion },
+            new NuSpecDependency { Id = "Core2D", Version = version },
+            new NuSpecDependency { Id = "Core2D.Renderer.WinForms", Version = version }
         },
         Files = new []
         {
@@ -269,9 +344,9 @@ var nuspecNuGetSettingsDependencies = new []
         Id = "Core2D.FileWriter.PdfCore",
         Dependencies = new []
         {
-            new NuSpecDependency() { Id = "System.Collections.Immutable", Version = SystemCollectionsImmutableVersion },
-            new NuSpecDependency() { Id = "Core2D", Version = version },
-            new NuSpecDependency() { Id = "Core2D.Renderer.PdfSharpCore", Version = version }
+            new NuSpecDependency { Id = "System.Collections.Immutable", Version = SystemCollectionsImmutableVersion },
+            new NuSpecDependency { Id = "Core2D", Version = version },
+            new NuSpecDependency { Id = "Core2D.Renderer.PdfSharpCore", Version = version }
         },
         Files = new []
         {
@@ -288,9 +363,9 @@ var nuspecNuGetSettingsDependencies = new []
         Id = "Core2D.FileWriter.PdfWpf",
         Dependencies = new []
         {
-            new NuSpecDependency() { Id = "System.Collections.Immutable", Version = SystemCollectionsImmutableVersion },
-            new NuSpecDependency() { Id = "Core2D", Version = version },
-            new NuSpecDependency() { Id = "Core2D.Renderer.PdfSharpWpf", Version = version }
+            new NuSpecDependency { Id = "System.Collections.Immutable", Version = SystemCollectionsImmutableVersion },
+            new NuSpecDependency { Id = "Core2D", Version = version },
+            new NuSpecDependency { Id = "Core2D.Renderer.PdfSharpWpf", Version = version }
         },
         Files = new []
         {
@@ -307,9 +382,9 @@ var nuspecNuGetSettingsDependencies = new []
         Id = "Core2D.FileWriter.Vdx",
         Dependencies = new []
         {
-            new NuSpecDependency() { Id = "System.Collections.Immutable", Version = SystemCollectionsImmutableVersion },
-            new NuSpecDependency() { Id = "Core2D", Version = version },
-            new NuSpecDependency() { Id = "Core2D.Renderer.Vdx", Version = version }
+            new NuSpecDependency { Id = "System.Collections.Immutable", Version = SystemCollectionsImmutableVersion },
+            new NuSpecDependency { Id = "Core2D", Version = version },
+            new NuSpecDependency { Id = "Core2D.Renderer.Vdx", Version = version }
         },
         Files = new []
         {
@@ -326,8 +401,8 @@ var nuspecNuGetSettingsDependencies = new []
         Id = "Core2D.Log.Trace",
         Dependencies = new []
         {
-            new NuSpecDependency() { Id = "System.Collections.Immutable", Version = SystemCollectionsImmutableVersion },
-            new NuSpecDependency() { Id = "Core2D", Version = version }
+            new NuSpecDependency { Id = "System.Collections.Immutable", Version = SystemCollectionsImmutableVersion },
+            new NuSpecDependency { Id = "Core2D", Version = version }
         },
         Files = new []
         {
@@ -344,10 +419,10 @@ var nuspecNuGetSettingsDependencies = new []
         Id = "Core2D.Renderer.Avalonia",
         Dependencies = new []
         {
-            new NuSpecDependency() { Id = "System.Collections.Immutable", Version = SystemCollectionsImmutableVersion },
-            new NuSpecDependency() { Id = "Core2D", Version = version },
-            new NuSpecDependency() { Id = "Avalonia", Version = AvaloniaVersion },
-            new NuSpecDependency() { Id = "Avalonia.Controls.PanAndZoom", Version = AvaloniaControlsPanAndZoomVersion }
+            new NuSpecDependency { Id = "System.Collections.Immutable", Version = SystemCollectionsImmutableVersion },
+            new NuSpecDependency { Id = "Core2D", Version = version },
+            new NuSpecDependency { Id = "Avalonia", Version = AvaloniaVersion },
+            new NuSpecDependency { Id = "Avalonia.Controls.PanAndZoom", Version = AvaloniaControlsPanAndZoomVersion }
         },
         Files = new []
         {
@@ -364,9 +439,9 @@ var nuspecNuGetSettingsDependencies = new []
         Id = "Core2D.Renderer.Dxf",
         Dependencies = new []
         {
-            new NuSpecDependency() { Id = "System.Collections.Immutable", Version = SystemCollectionsImmutableVersion },
-            new NuSpecDependency() { Id = "Core2D", Version = version },
-            new NuSpecDependency() { Id = "Core2D.NetDxf", Version = version }
+            new NuSpecDependency { Id = "System.Collections.Immutable", Version = SystemCollectionsImmutableVersion },
+            new NuSpecDependency { Id = "Core2D", Version = version },
+            new NuSpecDependency { Id = "Core2D.NetDxf", Version = version }
         },
         Files = new []
         {
@@ -383,9 +458,9 @@ var nuspecNuGetSettingsDependencies = new []
         Id = "Core2D.Renderer.PdfSharpCore",
         Dependencies = new []
         {
-            new NuSpecDependency() { Id = "System.Collections.Immutable", Version = SystemCollectionsImmutableVersion },
-            new NuSpecDependency() { Id = "Core2D", Version = version },
-            new NuSpecDependency() { Id = "Core2D.PdfSharpCore", Version = version }
+            new NuSpecDependency { Id = "System.Collections.Immutable", Version = SystemCollectionsImmutableVersion },
+            new NuSpecDependency { Id = "Core2D", Version = version },
+            new NuSpecDependency { Id = "Core2D.PdfSharpCore", Version = version }
         },
         Files = new []
         {
@@ -402,9 +477,9 @@ var nuspecNuGetSettingsDependencies = new []
         Id = "Core2D.Renderer.PdfSharpWpf",
         Dependencies = new []
         {
-            new NuSpecDependency() { Id = "System.Collections.Immutable", Version = SystemCollectionsImmutableVersion },
-            new NuSpecDependency() { Id = "Core2D", Version = version },
-            new NuSpecDependency() { Id = "Core2D.PdfSharpWpf", Version = version }
+            new NuSpecDependency { Id = "System.Collections.Immutable", Version = SystemCollectionsImmutableVersion },
+            new NuSpecDependency { Id = "Core2D", Version = version },
+            new NuSpecDependency { Id = "Core2D.PdfSharpWpf", Version = version }
         },
         Files = new []
         {
@@ -421,9 +496,9 @@ var nuspecNuGetSettingsDependencies = new []
         Id = "Core2D.Renderer.Vdx",
         Dependencies = new []
         {
-            new NuSpecDependency() { Id = "System.Collections.Immutable", Version = SystemCollectionsImmutableVersion },
-            new NuSpecDependency() { Id = "Core2D", Version = version },
-            new NuSpecDependency() { Id = "Core2D.VisioAutomation.VDX", Version = version }
+            new NuSpecDependency { Id = "System.Collections.Immutable", Version = SystemCollectionsImmutableVersion },
+            new NuSpecDependency { Id = "Core2D", Version = version },
+            new NuSpecDependency { Id = "Core2D.VisioAutomation.VDX", Version = version }
         },
         Files = new []
         {
@@ -440,8 +515,8 @@ var nuspecNuGetSettingsDependencies = new []
         Id = "Core2D.Renderer.WinForms",
         Dependencies = new []
         {
-            new NuSpecDependency() { Id = "System.Collections.Immutable", Version = SystemCollectionsImmutableVersion },
-            new NuSpecDependency() { Id = "Core2D", Version = version }
+            new NuSpecDependency { Id = "System.Collections.Immutable", Version = SystemCollectionsImmutableVersion },
+            new NuSpecDependency { Id = "Core2D", Version = version }
         },
         Files = new []
         {
@@ -458,8 +533,8 @@ var nuspecNuGetSettingsDependencies = new []
         Id = "Core2D.Renderer.Wpf",
         Dependencies = new []
         {
-            new NuSpecDependency() { Id = "System.Collections.Immutable", Version = SystemCollectionsImmutableVersion },
-            new NuSpecDependency() { Id = "Core2D", Version = version }
+            new NuSpecDependency { Id = "System.Collections.Immutable", Version = SystemCollectionsImmutableVersion },
+            new NuSpecDependency { Id = "Core2D", Version = version }
         },
         Files = new []
         {
@@ -476,9 +551,9 @@ var nuspecNuGetSettingsDependencies = new []
         Id = "Core2D.Serializer.Newtonsoft",
         Dependencies = new []
         {
-            new NuSpecDependency() { Id = "System.Collections.Immutable", Version = SystemCollectionsImmutableVersion },
-            new NuSpecDependency() { Id = "Core2D", Version = version },
-            new NuSpecDependency() { Id = "Newtonsoft.Json", Version = NewtonsoftJsonVersion }
+            new NuSpecDependency { Id = "System.Collections.Immutable", Version = SystemCollectionsImmutableVersion },
+            new NuSpecDependency { Id = "Core2D", Version = version },
+            new NuSpecDependency { Id = "Newtonsoft.Json", Version = NewtonsoftJsonVersion }
         },
         Files = new []
         {
@@ -495,9 +570,9 @@ var nuspecNuGetSettingsDependencies = new []
         Id = "Core2D.Serializer.Xaml",
         Dependencies = new []
         {
-            new NuSpecDependency() { Id = "System.Collections.Immutable", Version = SystemCollectionsImmutableVersion },
-            new NuSpecDependency() { Id = "Core2D", Version = version },
-            new NuSpecDependency() { Id = "Portable.Xaml", Version = PortableXamlVersion }
+            new NuSpecDependency { Id = "System.Collections.Immutable", Version = SystemCollectionsImmutableVersion },
+            new NuSpecDependency { Id = "Core2D", Version = version },
+            new NuSpecDependency { Id = "Portable.Xaml", Version = PortableXamlVersion }
         },
         Files = new []
         {
@@ -514,9 +589,9 @@ var nuspecNuGetSettingsDependencies = new []
         Id = "Core2D.TextFieldReader.CsvHelper",
         Dependencies = new []
         {
-            new NuSpecDependency() { Id = "System.Collections.Immutable", Version = SystemCollectionsImmutableVersion },
-            new NuSpecDependency() { Id = "Core2D", Version = version },
-            new NuSpecDependency() { Id = "CsvHelper", Version = CsvHelperVersion }
+            new NuSpecDependency { Id = "System.Collections.Immutable", Version = SystemCollectionsImmutableVersion },
+            new NuSpecDependency { Id = "Core2D", Version = version },
+            new NuSpecDependency { Id = "CsvHelper", Version = CsvHelperVersion }
         },
         Files = new []
         {
@@ -533,9 +608,9 @@ var nuspecNuGetSettingsDependencies = new []
         Id = "Core2D.TextFieldWriter.CsvHelper",
         Dependencies = new []
         {
-            new NuSpecDependency() { Id = "System.Collections.Immutable", Version = SystemCollectionsImmutableVersion },
-            new NuSpecDependency() { Id = "Core2D", Version = version },
-            new NuSpecDependency() { Id = "CsvHelper", Version = CsvHelperVersion }
+            new NuSpecDependency { Id = "System.Collections.Immutable", Version = SystemCollectionsImmutableVersion },
+            new NuSpecDependency { Id = "Core2D", Version = version },
+            new NuSpecDependency { Id = "CsvHelper", Version = CsvHelperVersion }
         },
         Files = new []
         {
@@ -552,11 +627,11 @@ var nuspecNuGetSettingsDependencies = new []
         Id = "Core2D.Utilities.Avalonia",
         Dependencies = new []
         {
-            new NuSpecDependency() { Id = "Core2D", Version = version },
-            new NuSpecDependency() { Id = "System.Reactive.Interfaces", Version = SystemReactiveVersion },
-            new NuSpecDependency() { Id = "System.Reactive.Core", Version = SystemReactiveVersion },
-            new NuSpecDependency() { Id = "System.Reactive.Linq", Version = SystemReactiveVersion },
-            new NuSpecDependency() { Id = "Avalonia", Version = AvaloniaVersion },
+            new NuSpecDependency { Id = "Core2D", Version = version },
+            new NuSpecDependency { Id = "System.Reactive.Interfaces", Version = SystemReactiveVersion },
+            new NuSpecDependency { Id = "System.Reactive.Core", Version = SystemReactiveVersion },
+            new NuSpecDependency { Id = "System.Reactive.Linq", Version = SystemReactiveVersion },
+            new NuSpecDependency { Id = "Avalonia", Version = AvaloniaVersion },
         },
         Files = new []
         {
@@ -573,10 +648,10 @@ var nuspecNuGetSettingsDependencies = new []
         Id = "Core2D.Utilities.Wpf",
         Dependencies = new []
         {
-            new NuSpecDependency() { Id = "Core2D", Version = version },
-            new NuSpecDependency() { Id = "System.Reactive.Interfaces", Version = SystemReactiveVersion },
-            new NuSpecDependency() { Id = "System.Reactive.Core", Version = SystemReactiveVersion },
-            new NuSpecDependency() { Id = "System.Reactive.Linq", Version = SystemReactiveVersion }
+            new NuSpecDependency { Id = "Core2D", Version = version },
+            new NuSpecDependency { Id = "System.Reactive.Interfaces", Version = SystemReactiveVersion },
+            new NuSpecDependency { Id = "System.Reactive.Core", Version = SystemReactiveVersion },
+            new NuSpecDependency { Id = "System.Reactive.Linq", Version = SystemReactiveVersion }
         },
         Files = new []
         {
@@ -653,9 +728,9 @@ var nuspecNuGetSettingsDependenciesSkia = new []
         Id = "Core2D.FileWriter.PdfSkiaSharp",
         Dependencies = new []
         {
-            new NuSpecDependency() { Id = "System.Collections.Immutable", Version = SystemCollectionsImmutableVersion },
-            new NuSpecDependency() { Id = "Core2D", Version = version },
-            new NuSpecDependency() { Id = "Core2D.Renderer.SkiaSharp", Version = version }
+            new NuSpecDependency { Id = "System.Collections.Immutable", Version = SystemCollectionsImmutableVersion },
+            new NuSpecDependency { Id = "Core2D", Version = version },
+            new NuSpecDependency { Id = "Core2D.Renderer.SkiaSharp", Version = version }
         },
         Files = new []
         {
@@ -672,9 +747,9 @@ var nuspecNuGetSettingsDependenciesSkia = new []
         Id = "Core2D.Renderer.SkiaSharp",
         Dependencies = new []
         {
-            new NuSpecDependency() { Id = "System.Collections.Immutable", Version = SystemCollectionsImmutableVersion },
-            new NuSpecDependency() { Id = "Core2D", Version = version },
-            new NuSpecDependency() { Id = "SkiaSharp", Version = SkiaSharpVersion }
+            new NuSpecDependency { Id = "System.Collections.Immutable", Version = SystemCollectionsImmutableVersion },
+            new NuSpecDependency { Id = "Core2D", Version = version },
+            new NuSpecDependency { Id = "SkiaSharp", Version = SkiaSharpVersion }
         },
         Files = new []
         {
