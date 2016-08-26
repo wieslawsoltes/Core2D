@@ -210,15 +210,15 @@ var AvaloniaXamlBehaviorsVersion = packageVersions["Avalonia.Xaml.Behaviors"].Fi
 var AvaloniaControlsPanAndZoomVersion = packageVersions["Avalonia.Controls.PanAndZoom"].FirstOrDefault().Item1;
 var SkiaSharpVersion = packageVersions["SkiaSharp"].FirstOrDefault().Item1;
 
-Information("Package: System.Collections.Immutable, version: {0}", SerilogVersion);
-Information("Package: System.Reactive, version: {0}", SerilogVersion);
-Information("Package: Newtonsoft.Json, version: {0}", SerilogVersion);
-Information("Package: Portable.Xaml, version: {0}", SerilogVersion);
-Information("Package: CsvHelper, version: {0}", SerilogVersion);
-Information("Package: Avalonia, version: {0}", SerilogVersion);
-Information("Package: Avalonia.Xaml.Behaviors, version: {0}", SerilogVersion);
-Information("Package: Avalonia.Controls.PanAndZoom, version: {0}", SerilogVersion);
-Information("Package: SkiaSharp, version: {0}", SerilogVersion);
+Information("Package: System.Collections.Immutable, version: {0}", SystemCollectionsImmutableVersion);
+Information("Package: System.Reactive, version: {0}", SystemReactiveVersion);
+Information("Package: Newtonsoft.Json, version: {0}", NewtonsoftJsonVersion);
+Information("Package: Portable.Xaml, version: {0}", PortableXamlVersion);
+Information("Package: CsvHelper, version: {0}", CsvHelperVersion);
+Information("Package: Avalonia, version: {0}", AvaloniaVersion);
+Information("Package: Avalonia.Xaml.Behaviors, version: {0}", AvaloniaXamlBehaviorsVersion);
+Information("Package: Avalonia.Controls.PanAndZoom, version: {0}", AvaloniaControlsPanAndZoomVersion);
+Information("Package: SkiaSharp, version: {0}", SkiaSharpVersion);
 
 var SetNuGetNuspecCommonProperties = new Action<NuGetPackSettings> ((nuspec) => {
     nuspec.Version = version;
