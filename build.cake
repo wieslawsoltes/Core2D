@@ -155,31 +155,37 @@ var ignoredSubModulesPaths = subModules.Select(m =>
     return ((DirectoryPath)Directory(path)).FullPath;
 }).ToList();
 
-var normalizePath = new Func<string, string>(
+var NormalizePath = new Func<string, string>(
     path => path.Replace(System.IO.Path.DirectorySeparatorChar, System.IO.Path.AltDirectorySeparatorChar).ToUpperInvariant());
 
 // Key: Package Id
 // Value is Tuple where Item1: Package Version, Item2: The packages.config file path.
 var packageVersions = new Dictionary<string, IList<Tuple<string,string>>>();
 
-System.IO.Directory.EnumerateFiles(((DirectoryPath)Directory("./src")).FullPath, "packages.config", SearchOption.AllDirectories).ToList().ForEach(fileName =>
+var GetPackageVersions = new Action<string>((path) =>
 {
-    if (!ignoredSubModulesPaths.Any(i => normalizePath(fileName).Contains(normalizePath(i))))
+    System.IO.Directory.EnumerateFiles(path, "packages.config", SearchOption.AllDirectories).ToList().ForEach(fileName =>
     {
-        var file = new PackageReferenceFile(fileName);
-        foreach (PackageReference packageReference in file.GetPackageReferences())
+        if (!ignoredSubModulesPaths.Any(i => NormalizePath(fileName).Contains(NormalizePath(i))))
         {
-            IList<Tuple<string, string>> versions;
-            packageVersions.TryGetValue(packageReference.Id, out versions);
-            if (versions == null)
+            var file = new PackageReferenceFile(fileName);
+            foreach (PackageReference packageReference in file.GetPackageReferences())
             {
-                versions = new List<Tuple<string, string>>();
-                packageVersions[packageReference.Id] = versions;
+                IList<Tuple<string, string>> versions;
+                packageVersions.TryGetValue(packageReference.Id, out versions);
+                if (versions == null)
+                {
+                    versions = new List<Tuple<string, string>>();
+                    packageVersions[packageReference.Id] = versions;
+                }
+                versions.Add(Tuple.Create(packageReference.Version.ToString(), fileName));
             }
-            versions.Add(Tuple.Create(packageReference.Version.ToString(), fileName));
         }
-    }
+    });
 });
+
+GetPackageVersions(((DirectoryPath)Directory("./src")).FullPath);
+GetPackageVersions(((DirectoryPath)Directory("./dependencies")).FullPath);
 
 Information("Checking installed NuGet package dependencies versions:");
 
