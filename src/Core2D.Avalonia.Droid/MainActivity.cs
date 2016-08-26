@@ -10,7 +10,6 @@ using Core2D.Avalonia.Modules;
 using Core2D.Interfaces;
 using A = Avalonia;
 using AAPS = Avalonia.Android.Platform.Specific;
-using AC = Avalonia.Controls;
 
 namespace Core2D.Avalonia.Droid
 {
@@ -44,9 +43,6 @@ namespace Core2D.Avalonia.Droid
                 using (var log = container.Resolve<ILog>())
                 {
                     var app = A.Application.Current as App ?? new App();
-                    AC.AppBuilder.Configure(app)
-                        .UsePlatformDetect()
-                        .SetupWithoutStarting();
                     app.Start(container.Resolve<IServiceProvider>());
                 }
             }
