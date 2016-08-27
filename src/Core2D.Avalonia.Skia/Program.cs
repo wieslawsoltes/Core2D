@@ -3,7 +3,6 @@
 using System;
 using Autofac;
 using Avalonia;
-using Avalonia.Controls;
 using Avalonia.Logging.Serilog;
 using Core2D.Avalonia.Modules;
 using Core2D.Avalonia.Skia.Modules;
