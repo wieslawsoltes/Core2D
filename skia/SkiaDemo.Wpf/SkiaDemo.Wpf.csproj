@@ -175,6 +175,7 @@
     <Compile Include="..\..\dependencies\Renderer.SkiaSharp\XPathGeometryConverter.cs">
       <Link>Renderer\XPathGeometryConverter.cs</Link>
     </Compile>
+    <Compile Include="FileWriter.SvgSkiaSharp\SvgWriter.IFileWriter.cs" />
     <Compile Include="SkiaView.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -207,6 +208,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Compile Include="FileWriter.SvgSkiaSharp\SvgWriter.IProjectExporter.cs" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

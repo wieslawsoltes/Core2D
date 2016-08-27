@@ -4,6 +4,7 @@ using System.Windows;
 using Autofac;
 using Core2D.Editor;
 using Core2D.Interfaces;
+using FileWriter.SvgSkiaSharp;
 using Microsoft.Win32;
 
 namespace SkiaDemo.Wpf
@@ -56,6 +57,8 @@ namespace SkiaDemo.Wpf
             var builder = new ContainerBuilder();
 
             builder.RegisterAssemblyModules(typeof(MainWindow).Assembly);
+
+            builder.RegisterType<SvgWriter>().As<IFileWriter>().InstancePerLifetimeScope();
 
             using (IContainer container = builder.Build())
             {
