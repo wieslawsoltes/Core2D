@@ -7,7 +7,7 @@ using Core2D.Renderer;
 namespace Core2D.Project
 {
     /// <summary>
-    /// Project <see cref="IImageCache"/> implementation.
+    /// Project image cache implementation.
     /// </summary>
     public partial class XProject : XSelectable, IImageCache
     {
