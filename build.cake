@@ -140,17 +140,9 @@ var zipTargetWpfDirs = zipRoot.CombineWithFilePath("Core2D.Wpf-" + fileZipSuffix
 
 Information("Getting git modules:");
 
-IEnumerable<string> subModules;
-var gitSettings = new ProcessSettings { Arguments = "config --file .gitmodules --get-regexp path", RedirectStandardOutput = true };
-var exitCode = StartProcess("git", gitSettings, out subModules);
-if (exitCode != 0)
+var ignoredSubModulesPaths = System.IO.File.ReadAllLines(".git/config").Where(m => m.StartsWith("[submodule ")).Select(m => 
 {
-    throw new Exception("Failed to retrieve git submodule paths.");
-}
-
-var ignoredSubModulesPaths = subModules.Select(m => 
-{
-    var path = m.Split(' ')[1];
+    var path = m.Split(' ')[1].Trim("\"[] \t".ToArray());
     Information(path);
     return ((DirectoryPath)Directory(path)).FullPath;
 }).ToList();
@@ -211,6 +203,7 @@ var SystemReactiveVersion = packageVersions["System.Reactive"].FirstOrDefault().
 var NewtonsoftJsonVersion = packageVersions["Newtonsoft.Json"].FirstOrDefault().Item1;
 var PortableXamlVersion = packageVersions["Portable.Xaml"].FirstOrDefault().Item1;
 var CsvHelperVersion = packageVersions["CsvHelper"].FirstOrDefault().Item1;
+var AutofacVersion = packageVersions["Autofac"].FirstOrDefault().Item1;
 var AvaloniaVersion = packageVersions["Avalonia"].FirstOrDefault().Item1;
 var AvaloniaXamlBehaviorsVersion = packageVersions["Avalonia.Xaml.Behaviors"].FirstOrDefault().Item1;
 var AvaloniaControlsPanAndZoomVersion = packageVersions["Avalonia.Controls.PanAndZoom"].FirstOrDefault().Item1;
@@ -221,6 +214,7 @@ Information("Package: System.Reactive, version: {0}", SystemReactiveVersion);
 Information("Package: Newtonsoft.Json, version: {0}", NewtonsoftJsonVersion);
 Information("Package: Portable.Xaml, version: {0}", PortableXamlVersion);
 Information("Package: CsvHelper, version: {0}", CsvHelperVersion);
+Information("Package: Autofac, version: {0}", AutofacVersion);
 Information("Package: Avalonia, version: {0}", AvaloniaVersion);
 Information("Package: Avalonia.Xaml.Behaviors, version: {0}", AvaloniaXamlBehaviorsVersion);
 Information("Package: Avalonia.Controls.PanAndZoom, version: {0}", AvaloniaControlsPanAndZoomVersion);
@@ -272,13 +266,14 @@ var nuspecNuGetSettingsCore = new []
             new NuSpecDependency { Id = "System.Collections.Immutable", Version = SystemCollectionsImmutableVersion },
             new NuSpecDependency { Id = "Core2D", Version = version },
             new NuSpecDependency { Id = "Utilities.Avalonia", Version = version },
+            new NuSpecDependency { Id = "Autofac", Version = AutofacVersion },
             new NuSpecDependency { Id = "Avalonia", Version = AvaloniaVersion },
             new NuSpecDependency { Id = "Avalonia.Xaml.Behaviors", Version = AvaloniaXamlBehaviorsVersion },
             new NuSpecDependency { Id = "Avalonia.Controls.PanAndZoom", Version = AvaloniaControlsPanAndZoomVersion }
         },
         Files = new []
         {
-            new NuSpecContent { Source = "Core2D.Avalonia.dll", Target = "lib/portable-windows8+net45" }
+            new NuSpecContent { Source = "Core2D.Avalonia.dll", Target = "lib/net45" }
         },
         BasePath = Directory("./src/Core2D.Avalonia/bin/" + dirSuffix),
         OutputDirectory = nugetRoot
@@ -984,7 +979,7 @@ Task("Run-Unit-Tests")
             NoAppDomain = true
         });
     }
-    else
+    else if (isPlatformX64)
     {
         XUnit2(pattern, new XUnit2Settings { 
             ToolPath = "./tools/xunit.runner.console/tools/xunit.console.exe",
@@ -992,6 +987,10 @@ Task("Run-Unit-Tests")
             XmlReportV1 = true,
             NoAppDomain = true
         });
+    }
+    else
+    {
+        throw new PlatformNotSupportedException("Not supported XUnit platform.");
     }
 });
 
