@@ -214,7 +214,7 @@ namespace Core2D.UnitTests
             var shapes = new BaseShape[] { shape1, shape2, point1, point2 };
             var source = shapes.ToList();
 
-            var target = XGroup.Group("g", shapes, null);
+            XGroup.Group("g", shapes, null);
 
             Assert.Contains(shape1, source);
             Assert.Contains(shape2, source);
