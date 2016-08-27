@@ -12,15 +12,15 @@ namespace Core2D.Wpf.Importers
     /// <summary>
     /// File image importer.
     /// </summary>
-    public class FileImageImporter : IImageImporter
+    public class Win32ImageImporter : IImageImporter
     {
         private readonly IServiceProvider _serviceProvider;
 
         /// <summary>
-        /// Initialize new instance of <see cref="FileImageImporter"/> class.
+        /// Initialize new instance of <see cref="Win32ImageImporter"/> class.
         /// </summary>
         /// <param name="serviceProvider">The service provider.</param>
-        public FileImageImporter(IServiceProvider serviceProvider)
+        public Win32ImageImporter(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }

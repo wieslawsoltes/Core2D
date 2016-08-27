@@ -133,6 +133,7 @@ namespace Core2D.Avalonia
                 builder.RegisterModule<CoreModule>();
                 builder.RegisterModule<DependenciesModule>();
                 builder.RegisterModule<AppModule>();
+                builder.RegisterModule<ViewModule>();
 
                 var container = builder.Build();
 

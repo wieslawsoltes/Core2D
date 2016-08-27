@@ -30,6 +30,7 @@ namespace Core2D.Avalonia.Skia
             builder.RegisterModule<CoreModule>();
             builder.RegisterModule<DependenciesModule>();
             builder.RegisterModule<AppModule>();
+            builder.RegisterModule<ViewModule>();
             builder.RegisterModule<SkiaModule>();
 
             using (IContainer container = builder.Build())

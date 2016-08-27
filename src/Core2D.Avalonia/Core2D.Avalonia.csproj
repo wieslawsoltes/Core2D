@@ -333,7 +333,7 @@
     <Compile Include="Converters\ObjectToTypeStringConverter.cs" />
     <Compile Include="Converters\ObjectToXamlStringConverter.cs" />
     <Compile Include="Converters\TreeViewSelectedItemToObjectConverter.cs" />
-    <Compile Include="Importers\FileImageImporter.cs" />
+    <Compile Include="Importers\AvaloniaImageImporter.cs" />
     <Compile Include="Interactions\Actions\FocusControlAction.cs" />
     <Compile Include="Interactions\Behaviors\BindTagToVisualRootDataContextBehavior.cs" />
     <Compile Include="Interactions\Behaviors\FocusOnAttachedToVisualTreeBehavior.cs" />
@@ -346,6 +346,7 @@
     <Compile Include="Modules\CoreModule.cs" />
     <Compile Include="Modules\DependenciesModule.cs" />
     <Compile Include="Modules\LocatorModule.cs" />
+    <Compile Include="Modules\ViewModule.cs" />
     <Compile Include="Presenters\CachedContentPresenter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Renderer\RendererOptions.cs" />

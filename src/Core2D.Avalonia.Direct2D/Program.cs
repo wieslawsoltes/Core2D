@@ -30,6 +30,7 @@ namespace Core2D.Avalonia.Direct2D
             builder.RegisterModule<CoreModule>();
             builder.RegisterModule<DependenciesModule>();
             builder.RegisterModule<AppModule>();
+            builder.RegisterModule<ViewModule>();
             builder.RegisterModule<Direct2DModule>();
 
             using (IContainer container = builder.Build())

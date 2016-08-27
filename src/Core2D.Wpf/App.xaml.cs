@@ -29,6 +29,7 @@ namespace Core2D.Wpf
             builder.RegisterModule<CoreModule>();
             builder.RegisterModule<DependenciesModule>();
             builder.RegisterModule<AppModule>();
+            builder.RegisterModule<ViewModule>();
 
             using (IContainer container = builder.Build())
             {
