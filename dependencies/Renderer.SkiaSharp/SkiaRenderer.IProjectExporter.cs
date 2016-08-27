@@ -15,20 +15,20 @@ namespace Renderer.SkiaSharp
     public partial class SkiaRenderer : ShapeRenderer, IProjectExporter
     {
         /// <inheritdoc/>
-        void IProjectExporter.Save(string path, XContainer container)
+        void IProjectExporter.Save(string path, XContainer container, ShapeRenderer renderer)
         {
             using (var stream = new SKFileWStream(path))
             {
                 using (var pdf = SKDocument.CreatePdf(stream, (float)_targetDpi))
                 {
-                    Add(pdf, container);
+                    Add(pdf, container, renderer);
                     pdf.Close();
                 }
             }
         }
 
         /// <inheritdoc/>
-        void IProjectExporter.Save(string path, XDocument document)
+        void IProjectExporter.Save(string path, XDocument document, ShapeRenderer renderer)
         {
             using (var stream = new SKFileWStream(path))
             {
@@ -36,7 +36,7 @@ namespace Renderer.SkiaSharp
                 {
                     foreach (var container in document.Pages)
                     {
-                        Add(pdf, container);
+                        Add(pdf, container, renderer);
                     }
 
                     pdf.Close();
@@ -46,7 +46,7 @@ namespace Renderer.SkiaSharp
         }
 
         /// <inheritdoc/>
-        void IProjectExporter.Save(string path, XProject project)
+        void IProjectExporter.Save(string path, XProject project, ShapeRenderer renderer)
         {
             using (var stream = new SKFileWStream(path))
             {
@@ -56,7 +56,7 @@ namespace Renderer.SkiaSharp
                     {
                         foreach (var container in document.Pages)
                         {
-                            Add(pdf, container);
+                            Add(pdf, container, renderer);
                         }
                     }
 
@@ -66,7 +66,7 @@ namespace Renderer.SkiaSharp
             }
         }
 
-        private void Add(SKDocument pdf, XContainer container)
+        private void Add(SKDocument pdf, XContainer container, ShapeRenderer renderer)
         {
             float width = (float)container.Template.Width;
             float height = (float)container.Template.Height;
@@ -83,14 +83,14 @@ namespace Renderer.SkiaSharp
                 // Draw container template contents to pdf graphics.
                 if (container.Template.Background.A > 0)
                 {
-                    Fill(canvas, 0, 0, width / scale, height / scale, container.Template.Background);
+                    renderer.Fill(canvas, 0, 0, width / scale, height / scale, container.Template.Background);
                 }
 
                 // Draw template contents to pdf graphics.
-                Draw(canvas, container.Template, 0.0, 0.0, container.Data.Properties, container.Data.Record);
+                renderer.Draw(canvas, container.Template, 0.0, 0.0, container.Data.Properties, container.Data.Record);
 
                 // Draw page contents to pdf graphics.
-                Draw(canvas, container, 0.0, 0.0, container.Data.Properties, container.Data.Record);
+                renderer.Draw(canvas, container, 0.0, 0.0, container.Data.Properties, container.Data.Record);
             }
         }
     }

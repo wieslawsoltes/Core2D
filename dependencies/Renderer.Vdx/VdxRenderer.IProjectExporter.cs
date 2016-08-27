@@ -14,25 +14,25 @@ namespace Renderer.Vdx
     public partial class VdxRenderer : ShapeRenderer, IProjectExporter
     {
         /// <inheritdoc/>
-        void IProjectExporter.Save(string path, XContainer container)
+        void IProjectExporter.Save(string path, XContainer container, ShapeRenderer renderer)
         {
             var template = new Template();
             var drawing = new Drawing(template);
 
-            Add(drawing, container);
+            Add(drawing, container, renderer);
 
             drawing.Save(path);
         }
 
         /// <inheritdoc/>
-        void IProjectExporter.Save(string path, XDocument document)
+        void IProjectExporter.Save(string path, XDocument document, ShapeRenderer renderer)
         {
             var template = new Template();
             var drawing = new Drawing(template);
 
             foreach (var container in document.Pages)
             {
-                Add(drawing, container);
+                Add(drawing, container, renderer);
             }
 
             drawing.Save(path);
@@ -40,7 +40,7 @@ namespace Renderer.Vdx
         }
 
         /// <inheritdoc/>
-        void IProjectExporter.Save(string path, XProject project)
+        void IProjectExporter.Save(string path, XProject project, ShapeRenderer renderer)
         {
             var template = new Template();
             var drawing = new Drawing(template);
@@ -49,7 +49,7 @@ namespace Renderer.Vdx
             {
                 foreach (var container in document.Pages)
                 {
-                    Add(drawing, container);
+                    Add(drawing, container, renderer);
                 }
             }
 
@@ -57,7 +57,7 @@ namespace Renderer.Vdx
             ClearCache(isZooming: false);
         }
 
-        private void Add(Drawing drawing, XContainer container)
+        private void Add(Drawing drawing, XContainer container, ShapeRenderer renderer)
         {
             var width = container.Template.Width;
             var height = container.Template.Height;
@@ -67,11 +67,11 @@ namespace Renderer.Vdx
 
             if (container.Template.Background.A > 0)
             {
-                Fill(page, 0, 0, width, height, container.Template.Background);
+                renderer.Fill(page, 0, 0, width, height, container.Template.Background);
             }
 
-            Draw(page, container.Template, 0.0, 0.0, container.Data.Properties, container.Data.Record);
-            Draw(page, container, 0.0, 0.0, container.Data.Properties, container.Data.Record);
+            renderer.Draw(page, container.Template, 0.0, 0.0, container.Data.Properties, container.Data.Record);
+            renderer.Draw(page, container, 0.0, 0.0, container.Data.Properties, container.Data.Record);
         }
     }
 }
