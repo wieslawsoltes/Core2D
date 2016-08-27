@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Linq;
+using System.Text;
 using System.Windows;
 using System.Windows.Input;
 using Core2D.Editor;
 using Core2D.Editor.Input;
+using Core2D.Interfaces;
+using Core2D.Project;
 using Core2D.Renderer.Presenters;
+using Microsoft.Win32;
 using Utilities.Wpf;
 
 namespace SkiaDemo.Wpf
@@ -54,6 +58,18 @@ namespace SkiaDemo.Wpf
                 {
                     switch (e.Key)
                     {
+                        case Key.N:
+                            NewProject();
+                            break;
+                        case Key.O:
+                            OpenProject();
+                            break;
+                        case Key.S:
+                            SaveProject();
+                            break;
+                        case Key.E:
+                            Export(_projectEditor.Project.CurrentContainer);
+                            break;
                         case Key.Z:
                             _projectEditor.OnUndo();
                             break;
@@ -153,6 +169,86 @@ namespace SkiaDemo.Wpf
                     }
                 }
             };
+        }
+
+        private void NewProject()
+        {
+            _projectEditor.OnNewProject();
+            skiaView.Container = _projectEditor.Project.CurrentContainer;
+        }
+
+        private void OpenProject()
+        {
+            var dlg = new OpenFileDialog()
+            {
+                Filter = "Project (*.project)|*.project|All (*.*)|*.*",
+                FilterIndex = 0,
+                FileName = ""
+            };
+
+            if (dlg.ShowDialog(this) == true)
+            {
+                _projectEditor.OnOpen(dlg.FileName);
+                skiaView.Container = _projectEditor.Project.CurrentContainer;
+                skiaView.InvalidateVisual();
+            }
+        }
+
+        private void SaveProject()
+        {
+            var dlg = new SaveFileDialog()
+            {
+                Filter = "Project (*.project)|*.project|All (*.*)|*.*",
+                FilterIndex = 0,
+                FileName = _projectEditor.Project.Name
+            };
+
+            if (dlg.ShowDialog(this) == true)
+            {
+                _projectEditor.OnSave(dlg.FileName);
+            }
+        }
+
+        private void Export(object item)
+        {
+            string name = string.Empty;
+
+            if (item is XProject)
+            {
+                name = (item as XProject).Name;
+            }
+            else if (item is XDocument)
+            {
+                name = (item as XDocument).Name;
+            }
+            else if (item is XContainer)
+            {
+                name = (item as XContainer).Name;
+            }
+
+            var sb = new StringBuilder();
+            foreach (var writer in _projectEditor.FileWriters)
+            {
+                sb.Append($"{writer.Name} (*.{writer.Extension})|*.{writer.Extension}|");
+            }
+            sb.Append("All (*.*)|*.*");
+
+            var dlg = new SaveFileDialog()
+            {
+                Filter = sb.ToString(),
+                FilterIndex = 0,
+                FileName = name
+            };
+
+            if (dlg.ShowDialog(this) == true)
+            {
+                string result = dlg.FileName;
+                IFileWriter writer = _projectEditor.FileWriters[dlg.FilterIndex - 1];
+                if (writer != null)
+                {
+                    _projectEditor.OnExport(result, item, writer);
+                }
+            }
         }
     }
 }
