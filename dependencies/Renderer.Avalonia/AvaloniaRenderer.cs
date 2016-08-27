@@ -333,9 +333,8 @@ namespace Renderer.Avalonia
         {
             var _dc = dc as AM.DrawingContext;
             var brush = ToBrush(color);
-            var rect = new Rect2(x, y, width, height);
-            var r = new A.Rect(x, y, width, height);
-            _dc.FillRectangle(brush, r);
+            var rect = new A.Rect(x, y, width, height);
+            _dc.FillRectangle(brush, rect);
         }
 
         /// <inheritdoc/>
