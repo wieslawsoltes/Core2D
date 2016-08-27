@@ -8,8 +8,8 @@
         Title="MainWindow" Height="740" Width="1000"
         WindowStartupLocation="CenterScreen"
         UseLayoutRounding="True" SnapsToDevicePixels="True" TextOptions.TextFormattingMode="Display">
-    <Grid>
-        <local:SkiaView x:Name="skiaView" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+    <Grid FocusVisualStyle="{x:Null}">
+        <local:SkiaView x:Name="skiaView" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FocusVisualStyle="{x:Null}"/>
     </Grid>
 </Window>
  
