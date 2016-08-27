@@ -8,7 +8,6 @@ A multi-platform data driven 2D diagram editor.
 |-----------------------------|--------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | AppVeyor                    | Windows      | [![Build status](https://ci.appveyor.com/api/projects/status/7k1e0voeit7od9bw/branch/master?svg=true)](https://ci.appveyor.com/project/wieslawsoltes/core2d/branch/master) |
 | Travis                      | Linux / OS X | [![Build Status](https://travis-ci.org/Core2D/Core2D.svg?branch=master)](https://travis-ci.org/Core2D/Core2D)                                                              |
-| Bitrise                     | Android      | [![Build Status](https://www.bitrise.io/app/0eddf30a82243ed8.svg?token=IEGVKM7S6KBI3HdecpD8Cg&branch=master)](https://www.bitrise.io/app/0eddf30a82243ed8)                 |
 
 ## Install
 
@@ -57,7 +56,7 @@ You can read the latest documentation at [http://core2d.github.io/](http://core2
 
 * `Windows` 7/8/8.1/10 using `Core2D.Wpf`, `Core2D.Avalonia.Direct2D` and `Core2D.Avalonia.Skia` builds.
 * `XUbuntu` 16.04 using `Core2D.Avalonia.Skia` and `Core2D.Avalonia.Cairo` builds.
-* `Android` using `Core2D.Avalonia.Droid` build.
+* `Android` support is planned using `Avalonia.Android`.
 * `iOS` support is planned using `Avalonia.iOS`.
 
 The core library and editor are portable and should work on all platforms where C# is supported.
