@@ -5,7 +5,13 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkiaDemo.Wpf", "SkiaDemo.Wpf\SkiaDemo.Wpf.csproj", "{BDE5F939-C291-44E3-9FE3-939D85341BB6}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SkiaDemo.Shared", "SkiaDemo.Shared\SkiaDemo.Shared.shproj", "{418EAF2D-F3D1-4A66-9D9C-1729CC0A22CC}"
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		SkiaDemo.Shared\SkiaDemo.Shared.projitems*{418eaf2d-f3d1-4a66-9d9c-1729cc0a22cc}*SharedItemsImports = 13
+		SkiaDemo.Shared\SkiaDemo.Shared.projitems*{bde5f939-c291-44e3-9fe3-939d85341bb6}*SharedItemsImports = 4
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|x64 = Debug|x64
