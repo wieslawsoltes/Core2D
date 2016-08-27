@@ -24,10 +24,8 @@ namespace SkiaDemo.Wpf
 
             Loaded += (seender, e) =>
             {
-
                 _projectEditor.CurrentTool = _projectEditor.Tools.FirstOrDefault(t => t.Name == "Selection");
                 _projectEditor.CurrentPathTool = _projectEditor.PathTools.FirstOrDefault(t => t.Name == "Line");
-
                 _projectEditor.OnNewProject();
                 _projectEditor.Invalidate = () => skiaView.InvalidateVisual();
 

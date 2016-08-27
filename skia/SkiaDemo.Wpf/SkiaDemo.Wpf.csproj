@@ -81,7 +81,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Core2D, Version=0.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Core2D.0.2.0-build1296-alpha\lib\portable-windows8+net45\Core2D.dll</HintPath>
+      <HintPath>..\packages\Core2D.0.2.0-build1298-alpha\lib\portable-windows8+net45\Core2D.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="CsvHelper, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
@@ -89,11 +89,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="FileSystem.DotNetFx, Version=0.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Core2D.FileSystem.DotNetFx.0.2.0-build1296-alpha\lib\net45\FileSystem.DotNetFx.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="FileWriter.PdfSkiaSharp, Version=0.2.0.0, Culture=neutral, processorArchitecture=x86">
-      <HintPath>..\packages\Core2D.FileWriter.PdfSkiaSharp.0.2.0-build1296-alpha\lib\net45\FileWriter.PdfSkiaSharp.dll</HintPath>
+      <HintPath>..\packages\Core2D.FileSystem.DotNetFx.0.2.0-build1298-alpha\lib\net45\FileSystem.DotNetFx.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -104,20 +100,16 @@
       <HintPath>..\packages\Portable.Xaml.0.14.0\lib\dotnet\Portable.Xaml.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Renderer.SkiaSharp, Version=0.2.0.0, Culture=neutral, processorArchitecture=x86">
-      <HintPath>..\packages\Core2D.Renderer.SkiaSharp.0.2.0-build1296-alpha\lib\net45\Renderer.SkiaSharp.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Serializer.Newtonsoft, Version=0.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Core2D.Serializer.Newtonsoft.0.2.0-build1296-alpha\lib\portable-windows8+net45\Serializer.Newtonsoft.dll</HintPath>
+      <HintPath>..\packages\Core2D.Serializer.Newtonsoft.0.2.0-build1298-alpha\lib\portable-windows8+net45\Serializer.Newtonsoft.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Serializer.Xaml, Version=0.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Core2D.Serializer.Xaml.0.2.0-build1296-alpha\lib\portable-windows8+net45\Serializer.Xaml.dll</HintPath>
+      <HintPath>..\packages\Core2D.Serializer.Xaml.0.2.0-build1298-alpha\lib\portable-windows8+net45\Serializer.Xaml.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SkiaSharp, Version=1.53.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SkiaSharp.1.53.0\lib\net45\SkiaSharp.dll</HintPath>
+    <Reference Include="SkiaSharp, Version=1.53.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\packages\SkiaSharp.1.53.2-svg1\lib\net45\SkiaSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -148,15 +140,15 @@
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
     <Reference Include="TextFieldReader.CsvHelper, Version=0.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Core2D.TextFieldReader.CsvHelper.0.2.0-build1296-alpha\lib\portable-windows8+net45\TextFieldReader.CsvHelper.dll</HintPath>
+      <HintPath>..\packages\Core2D.TextFieldReader.CsvHelper.0.2.0-build1298-alpha\lib\portable-windows8+net45\TextFieldReader.CsvHelper.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="TextFieldWriter.CsvHelper, Version=0.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Core2D.TextFieldWriter.CsvHelper.0.2.0-build1296-alpha\lib\portable-windows8+net45\TextFieldWriter.CsvHelper.dll</HintPath>
+      <HintPath>..\packages\Core2D.TextFieldWriter.CsvHelper.0.2.0-build1298-alpha\lib\portable-windows8+net45\TextFieldWriter.CsvHelper.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Utilities.Wpf, Version=0.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Core2D.Utilities.Wpf.0.2.0-build1296-alpha\lib\net45\Utilities.Wpf.dll</HintPath>
+      <HintPath>..\packages\Core2D.Utilities.Wpf.0.2.0-build1298-alpha\lib\net45\Utilities.Wpf.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="WindowsBase" />
@@ -168,6 +160,21 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="..\..\dependencies\FileWriter.PdfSkiaSharp\SkiaSharpPdfWriter.cs">
+      <Link>NewFolder1\SkiaSharpPdfWriter.cs</Link>
+    </Compile>
+    <Compile Include="..\..\dependencies\Renderer.SkiaSharp\MatrixHelper.cs">
+      <Link>Renderer\MatrixHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\dependencies\Renderer.SkiaSharp\SkiaRenderer.cs">
+      <Link>Renderer\SkiaRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\dependencies\Renderer.SkiaSharp\SkiaRenderer.IProjectExporter.cs">
+      <Link>Renderer\SkiaRenderer.IProjectExporter.cs</Link>
+    </Compile>
+    <Compile Include="..\..\dependencies\Renderer.SkiaSharp\XPathGeometryConverter.cs">
+      <Link>Renderer\XPathGeometryConverter.cs</Link>
+    </Compile>
     <Compile Include="SkiaView.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -213,12 +220,12 @@
   <ItemGroup />
   <Import Project="..\SkiaDemo.Shared\SkiaDemo.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\packages\SkiaSharp.1.53.0\build\net45\SkiaSharp.targets" Condition="Exists('..\packages\SkiaSharp.1.53.0\build\net45\SkiaSharp.targets')" />
+  <Import Project="..\packages\SkiaSharp.1.53.2-svg1\build\net45\SkiaSharp.targets" Condition="Exists('..\packages\SkiaSharp.1.53.2-svg1\build\net45\SkiaSharp.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\SkiaSharp.1.53.0\build\net45\SkiaSharp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SkiaSharp.1.53.0\build\net45\SkiaSharp.targets'))" />
+    <Error Condition="!Exists('..\packages\SkiaSharp.1.53.2-svg1\build\net45\SkiaSharp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SkiaSharp.1.53.2-svg1\build\net45\SkiaSharp.targets'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
