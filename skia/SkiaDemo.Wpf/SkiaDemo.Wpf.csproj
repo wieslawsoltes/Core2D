@@ -81,7 +81,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Core2D, Version=0.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Core2D.0.2.0-build1298-alpha\lib\portable-windows8+net45\Core2D.dll</HintPath>
+      <HintPath>..\packages\Core2D.0.2.0-build1299-alpha\lib\portable-windows8+net45\Core2D.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="CsvHelper, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
@@ -89,7 +89,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="FileSystem.DotNetFx, Version=0.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Core2D.FileSystem.DotNetFx.0.2.0-build1298-alpha\lib\net45\FileSystem.DotNetFx.dll</HintPath>
+      <HintPath>..\packages\Core2D.FileSystem.DotNetFx.0.2.0-build1299-alpha\lib\net45\FileSystem.DotNetFx.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -101,11 +101,11 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Serializer.Newtonsoft, Version=0.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Core2D.Serializer.Newtonsoft.0.2.0-build1298-alpha\lib\portable-windows8+net45\Serializer.Newtonsoft.dll</HintPath>
+      <HintPath>..\packages\Core2D.Serializer.Newtonsoft.0.2.0-build1299-alpha\lib\portable-windows8+net45\Serializer.Newtonsoft.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Serializer.Xaml, Version=0.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Core2D.Serializer.Xaml.0.2.0-build1298-alpha\lib\portable-windows8+net45\Serializer.Xaml.dll</HintPath>
+      <HintPath>..\packages\Core2D.Serializer.Xaml.0.2.0-build1299-alpha\lib\portable-windows8+net45\Serializer.Xaml.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="SkiaSharp, Version=1.53.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
@@ -140,15 +140,15 @@
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
     <Reference Include="TextFieldReader.CsvHelper, Version=0.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Core2D.TextFieldReader.CsvHelper.0.2.0-build1298-alpha\lib\portable-windows8+net45\TextFieldReader.CsvHelper.dll</HintPath>
+      <HintPath>..\packages\Core2D.TextFieldReader.CsvHelper.0.2.0-build1299-alpha\lib\portable-windows8+net45\TextFieldReader.CsvHelper.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="TextFieldWriter.CsvHelper, Version=0.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Core2D.TextFieldWriter.CsvHelper.0.2.0-build1298-alpha\lib\portable-windows8+net45\TextFieldWriter.CsvHelper.dll</HintPath>
+      <HintPath>..\packages\Core2D.TextFieldWriter.CsvHelper.0.2.0-build1299-alpha\lib\portable-windows8+net45\TextFieldWriter.CsvHelper.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Utilities.Wpf, Version=0.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Core2D.Utilities.Wpf.0.2.0-build1298-alpha\lib\net45\Utilities.Wpf.dll</HintPath>
+      <HintPath>..\packages\Core2D.Utilities.Wpf.0.2.0-build1299-alpha\lib\net45\Utilities.Wpf.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="WindowsBase" />
@@ -161,21 +161,20 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="..\..\dependencies\FileWriter.PdfSkiaSharp\SkiaSharpPdfWriter.cs">
-      <Link>NewFolder1\SkiaSharpPdfWriter.cs</Link>
+      <Link>FileWriter.PdfSkiaSharp\SkiaSharpPdfWriter.cs</Link>
     </Compile>
     <Compile Include="..\..\dependencies\Renderer.SkiaSharp\MatrixHelper.cs">
-      <Link>Renderer\MatrixHelper.cs</Link>
+      <Link>Renderer.SkiaSharp\MatrixHelper.cs</Link>
     </Compile>
     <Compile Include="..\..\dependencies\Renderer.SkiaSharp\SkiaRenderer.cs">
-      <Link>Renderer\SkiaRenderer.cs</Link>
+      <Link>Renderer.SkiaSharp\SkiaRenderer.cs</Link>
     </Compile>
     <Compile Include="..\..\dependencies\Renderer.SkiaSharp\SkiaRenderer.IProjectExporter.cs">
-      <Link>Renderer\SkiaRenderer.IProjectExporter.cs</Link>
+      <Link>Renderer.SkiaSharp\SkiaRenderer.IProjectExporter.cs</Link>
     </Compile>
     <Compile Include="..\..\dependencies\Renderer.SkiaSharp\XPathGeometryConverter.cs">
-      <Link>Renderer\XPathGeometryConverter.cs</Link>
+      <Link>Renderer.SkiaSharp\XPathGeometryConverter.cs</Link>
     </Compile>
-    <Compile Include="FileWriter.SvgSkiaSharp\SvgWriter.IFileWriter.cs" />
     <Compile Include="SkiaView.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -208,7 +207,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="FileWriter.SvgSkiaSharp\SvgWriter.IProjectExporter.cs" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -221,6 +219,7 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="..\SkiaDemo.Shared\SkiaDemo.Shared.projitems" Label="Shared" />
+  <Import Project="..\FileWriter.SvgSkiaSharp\FileWriter.SvgSkiaSharp.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\SkiaSharp.1.53.2-svg1\build\net45\SkiaSharp.targets" Condition="Exists('..\packages\SkiaSharp.1.53.2-svg1\build\net45\SkiaSharp.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

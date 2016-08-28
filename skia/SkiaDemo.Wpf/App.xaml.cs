@@ -58,8 +58,6 @@ namespace SkiaDemo.Wpf
 
             builder.RegisterAssemblyModules(typeof(MainWindow).Assembly);
 
-            builder.RegisterType<SvgWriter>().As<IFileWriter>().InstancePerLifetimeScope();
-
             using (IContainer container = builder.Build())
             {
                 container.Resolve<MainWindow>().ShowDialog();

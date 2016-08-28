@@ -31,12 +31,11 @@ namespace FileWriter.SvgSkiaSharp
 
         void Save(string path, XContainer container, ShapeRenderer renderer)
         {
-            var presenter = new ContainerPresenter();
-
             using (SKFileWStream stream = new SKFileWStream(path))
             using (var writer = new SKXmlStreamWriter(stream))
             using (var canvas = SKSvgCanvas.Create(SKRect.Create(0, 0, (int)container.Width, (int)container.Height), writer))
             {
+                var presenter = new ContainerPresenter();
                 presenter.Render(canvas, renderer, container, 0, 0);
             }
         }
