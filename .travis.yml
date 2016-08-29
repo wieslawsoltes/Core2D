@@ -13,7 +13,3 @@ matrix:
   fast_finish: true
 script:
   - ./build.sh --target "Travis" --platform "$PLATFORM" --configuration "$CONFIGURATION"
-cache:
-  directories:
-    - packages
-    - tools
