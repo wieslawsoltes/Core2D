@@ -9,7 +9,7 @@ using Renderer.SkiaSharp;
 namespace FileWriter.PdfSkiaSharp
 {
     /// <summary>
-    /// Pdf file writer.
+    /// SkiaSharp pdf <see cref="IFileWriter"/> implementation.
     /// </summary>
     public sealed class PdfWriter : IFileWriter
     {
