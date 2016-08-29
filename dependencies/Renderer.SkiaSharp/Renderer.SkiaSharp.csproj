@@ -49,7 +49,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <Compile Include="SkiaRenderer.IProjectExporter.cs" />
   </ItemGroup>
   <Import Project="..\..\src\Core2D.Shared\Core2D.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

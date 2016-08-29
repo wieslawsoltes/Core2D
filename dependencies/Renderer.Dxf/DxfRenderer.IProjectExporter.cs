@@ -13,7 +13,7 @@ namespace Renderer.Dxf
     public partial class DxfRenderer : Core2D.Renderer.ShapeRenderer, Core2D.Interfaces.IProjectExporter
     {
         /// <inheritdoc/>
-        void Core2D.Interfaces.IProjectExporter.Save(string path, Core2D.Project.XContainer container, Core2D.Renderer.ShapeRenderer renderer)
+        void Core2D.Interfaces.IProjectExporter.Save(string path, Core2D.Project.XContainer container)
         {
             _outputPath = System.IO.Path.GetDirectoryName(path);
             var dxf = new DxfDocument(DxfVersion.AutoCad2010);
@@ -25,7 +25,7 @@ namespace Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        void Core2D.Interfaces.IProjectExporter.Save(string path, Core2D.Project.XDocument document, Core2D.Renderer.ShapeRenderer renderer)
+        void Core2D.Interfaces.IProjectExporter.Save(string path, Core2D.Project.XDocument document)
         {
             _outputPath = System.IO.Path.GetDirectoryName(path);
             var dxf = new DxfDocument(DxfVersion.AutoCad2010);
@@ -37,7 +37,7 @@ namespace Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        void Core2D.Interfaces.IProjectExporter.Save(string path, Core2D.Project.XProject project, Core2D.Renderer.ShapeRenderer renderer)
+        void Core2D.Interfaces.IProjectExporter.Save(string path, Core2D.Project.XProject project)
         {
             _outputPath = System.IO.Path.GetDirectoryName(path);
             var dxf = new DxfDocument(DxfVersion.AutoCad2010);

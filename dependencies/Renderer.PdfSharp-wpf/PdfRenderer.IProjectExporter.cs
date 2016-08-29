@@ -20,17 +20,17 @@ namespace Renderer.PdfSharp_core
     public partial class PdfRenderer : Core2D.Renderer.ShapeRenderer, Core2D.Interfaces.IProjectExporter
     {
         /// <inheritdoc/>
-        void Core2D.Interfaces.IProjectExporter.Save(string path, Core2D.Project.XContainer container, Core2D.Renderer.ShapeRenderer renderer)
+        void Core2D.Interfaces.IProjectExporter.Save(string path, Core2D.Project.XContainer container)
         {
             using (var pdf = new PdfDocument())
             {
-                Add(pdf, container, renderer);
+                Add(pdf, container);
                 pdf.Save(path);
             }
         }
 
         /// <inheritdoc/>
-        void Core2D.Interfaces.IProjectExporter.Save(string path, Core2D.Project.XDocument document, Core2D.Renderer.ShapeRenderer renderer)
+        void Core2D.Interfaces.IProjectExporter.Save(string path, Core2D.Project.XDocument document)
         {
             using (var pdf = new PdfDocument())
             {
@@ -38,7 +38,7 @@ namespace Renderer.PdfSharp_core
 
                 foreach (var container in document.Pages)
                 {
-                    var page = Add(pdf, container, renderer);
+                    var page = Add(pdf, container);
 
                     if (documentOutline == null)
                     {
@@ -64,7 +64,7 @@ namespace Renderer.PdfSharp_core
         }
 
         /// <inheritdoc/>
-        void Core2D.Interfaces.IProjectExporter.Save(string path, Core2D.Project.XProject project, Core2D.Renderer.ShapeRenderer renderer)
+        void Core2D.Interfaces.IProjectExporter.Save(string path, Core2D.Project.XProject project)
         {
             using (var pdf = new PdfDocument())
             {
@@ -76,7 +76,7 @@ namespace Renderer.PdfSharp_core
 
                     foreach (var container in document.Pages)
                     {
-                        var page = Add(pdf, container, renderer);
+                        var page = Add(pdf, container);
 
                         if (projectOutline == null)
                         {
@@ -112,7 +112,7 @@ namespace Renderer.PdfSharp_core
             }
         }
 
-        private PdfPage Add(PdfDocument pdf, Core2D.Project.XContainer container, Core2D.Renderer.ShapeRenderer renderer)
+        private PdfPage Add(PdfDocument pdf, Core2D.Project.XContainer container)
         {
             // Create A3 page size with Landscape orientation.
             PdfPage pdfPage = pdf.AddPage();
@@ -132,14 +132,14 @@ namespace Renderer.PdfSharp_core
                 // Draw container template contents to pdf graphics.
                 if (container.Template.Background.A > 0)
                 {
-                    renderer.Fill(gfx, 0, 0, pdfPage.Width.Value / scale, pdfPage.Height.Value / scale, container.Template.Background);
+                    Fill(gfx, 0, 0, pdfPage.Width.Value / scale, pdfPage.Height.Value / scale, container.Template.Background);
                 }
 
                 // Draw template contents to pdf graphics.
-                renderer.Draw(gfx, container.Template, 0.0, 0.0, container.Data.Properties, container.Data.Record);
+                Draw(gfx, container.Template, 0.0, 0.0, container.Data.Properties, container.Data.Record);
 
                 // Draw page contents to pdf graphics.
-                renderer.Draw(gfx, container, 0.0, 0.0, container.Data.Properties, container.Data.Record);
+                Draw(gfx, container, 0.0, 0.0, container.Data.Properties, container.Data.Record);
             }
 
             return pdfPage;

@@ -3,6 +3,7 @@
 using Core2D.Interfaces;
 using Core2D.Project;
 using Core2D.Renderer;
+using Core2D.Renderer.Presenters;
 using Core2D.Shape;
 using Renderer.SkiaSharp;
 
@@ -29,23 +30,25 @@ namespace FileWriter.PdfSkiaSharp
             if (options == null)
                 return;
 
-            IProjectExporter exporter = new SkiaRenderer();
-
-            ShapeRenderer renderer = (ShapeRenderer)exporter;
+            ShapeRenderer renderer = new SkiaRenderer(true, 72.0);
             renderer.State.DrawShapeState.Flags = ShapeStateFlags.Printable;
             renderer.State.ImageCache = ic;
 
+            var presenter = new ContainerPresenter();
+
+            IProjectExporter exporter = new PdfExporter(renderer, presenter, 72.0f);
+
             if (item is XContainer)
             {
-                exporter.Save(path, item as XContainer, renderer);
+                exporter.Save(path, item as XContainer);
             }
             else if (item is XDocument)
             {
-                exporter.Save(path, item as XDocument, renderer);
+                exporter.Save(path, item as XDocument);
             }
             else if (item is XProject)
             {
-                exporter.Save(path, item as XProject, renderer);
+                exporter.Save(path, item as XProject);
             }
         }
     }

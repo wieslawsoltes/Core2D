@@ -18,7 +18,7 @@ namespace Renderer.SkiaSharp
     /// <summary>
     /// Native SkiaSharp shape renderer.
     /// </summary>
-    public partial class SkiaRenderer : ShapeRenderer
+    public class SkiaRenderer : ShapeRenderer
     {
         private bool _isAntialias = true;
         private bool _enableImageCache = true;

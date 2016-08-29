@@ -45,15 +45,15 @@ namespace FileWriter.Pdf_core
 
             if (item is XContainer)
             {
-                exporter.Save(path, item as XContainer, renderer);
+                exporter.Save(path, item as XContainer);
             }
             else if (item is XDocument)
             {
-                exporter.Save(path, item as XDocument, renderer);
+                exporter.Save(path, item as XDocument);
             }
             else if (item is XProject)
             {
-                exporter.Save(path, item as XProject, renderer);
+                exporter.Save(path, item as XProject);
             }
         }
     }

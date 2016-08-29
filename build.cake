@@ -731,7 +731,8 @@ var nuspecNuGetSettingsDependenciesSkia = new []
         {
             new NuSpecDependency { Id = "System.Collections.Immutable", Version = SystemCollectionsImmutableVersion },
             new NuSpecDependency { Id = "Core2D", Version = version },
-            new NuSpecDependency { Id = "Core2D.Renderer.SkiaSharp", Version = version }
+            new NuSpecDependency { Id = "Core2D.Renderer.SkiaSharp", Version = version },
+            new NuSpecDependency { Id = "SkiaSharp", Version = SkiaSharpVersion }
         },
         Files = new []
         {
