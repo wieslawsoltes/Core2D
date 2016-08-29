@@ -354,7 +354,9 @@
     <Compile Include="Project\XSelectable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Renderer\Cache.cs" />
-    <Compile Include="Renderer\Presenters\ContainerPresenter.cs" />
+    <Compile Include="Renderer\ContainerPresenter.cs" />
+    <Compile Include="Renderer\Presenters\ExportPresenter.cs" />
+    <Compile Include="Renderer\Presenters\EditorPresenter.cs" />
     <Compile Include="Renderer\IImageCache.cs" />
     <Compile Include="Renderer\ImageKey.cs" />
     <Compile Include="Renderer\ShapeRenderer.cs" />

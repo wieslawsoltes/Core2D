@@ -161,7 +161,8 @@
     <Compile Include="Path\XPathPolySegmentTests.cs" />
     <Compile Include="Path\XPathSizeTests.cs" />
     <Compile Include="Renderer\CacheTests.cs" />
-    <Compile Include="Renderer\Presenters\ContainerPresenterTests.cs" />
+    <Compile Include="Renderer\Presenters\PrintPresenterTests .cs" />
+    <Compile Include="Renderer\Presenters\EditorPresenterTests.cs" />
     <Compile Include="Renderer\ShapeRendererStateTests.cs" />
     <Compile Include="Renderer\ShapeRendererTests.cs" />
     <Compile Include="Shapes\XArcTests.cs" />

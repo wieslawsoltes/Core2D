@@ -34,7 +34,7 @@ namespace FileWriter.PdfSkiaSharp
             renderer.State.DrawShapeState.Flags = ShapeStateFlags.Printable;
             renderer.State.ImageCache = ic;
 
-            var presenter = new ContainerPresenter();
+            var presenter = new ExportPresenter();
 
             IProjectExporter exporter = new PdfExporter(renderer, presenter, 72.0f);
 

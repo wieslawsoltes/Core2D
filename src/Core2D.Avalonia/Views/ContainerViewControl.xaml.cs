@@ -16,7 +16,7 @@ namespace Core2D.Avalonia.Views
     /// </summary>
     public class ContainerViewControl : UserControl
     {
-        private static ContainerPresenter _presenter = new ContainerPresenter();
+        private static ContainerPresenter _presenter = new EditorPresenter();
 
         /// <summary>
         /// Gets or sets container property.
