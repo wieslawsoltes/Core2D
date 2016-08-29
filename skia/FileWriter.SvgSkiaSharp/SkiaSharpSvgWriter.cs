@@ -10,9 +10,9 @@ using Renderer.SkiaSharp;
 namespace FileWriter.SvgSkiaSharp
 {
     /// <summary>
-    /// Svg file writer.
+    /// SkiaSharp svg <see cref="IFileWriter"/> implementation.
     /// </summary>
-    public partial class SvgWriter : IFileWriter
+    public class SvgWriter : IFileWriter
     {
         /// <inheritdoc/>
         string IFileWriter.Name { get; } = "Svg (SkiaSharp)";
@@ -30,7 +30,7 @@ namespace FileWriter.SvgSkiaSharp
             if (options == null)
                 return;
 
-            IProjectExporter exporter = this;
+            IProjectExporter exporter = new SvgExporter();
 
             var renderer = new SkiaRenderer(true, 96.0);
             renderer.State.DrawShapeState.Flags = ShapeStateFlags.Printable;

@@ -11,7 +11,7 @@ namespace FileWriter.SvgSkiaSharp
     /// <summary>
     /// SkiaSharp svg <see cref="IProjectExporter"/> implementation.
     /// </summary>
-    public partial class SvgWriter : IProjectExporter
+    public class SvgExporter : IProjectExporter
     {
         /// <inheritdoc/>
         void IProjectExporter.Save(string path, XContainer container, ShapeRenderer renderer)
