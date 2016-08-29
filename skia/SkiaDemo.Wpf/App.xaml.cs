@@ -4,7 +4,6 @@ using System.Windows;
 using Autofac;
 using Core2D.Editor;
 using Core2D.Interfaces;
-using FileWriter.SvgSkiaSharp;
 using Microsoft.Win32;
 
 namespace SkiaDemo.Wpf

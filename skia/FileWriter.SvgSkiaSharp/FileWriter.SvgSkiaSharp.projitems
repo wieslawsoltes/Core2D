@@ -9,7 +9,7 @@
     <Import_RootNamespace>FileWriter.SvgSkiaSharp</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)SkiaSharpSvgWriter.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)SkiaSharpSvgExporter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SvgWriter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SvgExporter.cs" />
   </ItemGroup>
 </Project>

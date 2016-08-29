@@ -1,14 +1,20 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using Core2D.Editor;
 using Core2D.Editor.Input;
 using Core2D.Interfaces;
 using Core2D.Project;
+using Core2D.Renderer;
 using Core2D.Renderer.Presenters;
+using Core2D.Shape;
 using Microsoft.Win32;
+using Renderer.SkiaSharp;
+using SkiaSharp;
 using Utilities.Wpf;
 
 namespace SkiaDemo.Wpf
@@ -18,20 +24,46 @@ namespace SkiaDemo.Wpf
         private readonly IServiceProvider _serviceProvider;
         private ProjectEditor _projectEditor;
         private InputProcessor _inputProcessor;
+        private SvgWindow _previewWindow;
 
         public MainWindow(IServiceProvider serviceProvider)
         {
             InitializeComponent();
 
+            bool isClosing = false;
+
             _serviceProvider = serviceProvider;
             _projectEditor = _serviceProvider.GetService<ProjectEditor>();
+
+            _previewWindow = new SvgWindow();
+
+            _previewWindow.svgButton.Click += (sender, e) =>
+            {
+                UpdateSvg();
+            };
+
+            _previewWindow.Closing += (sender, e) =>
+            {
+                if (!isClosing)
+                {
+                    _previewWindow.Hide();
+                    e.Cancel = true;
+                }
+            };
 
             Loaded += (seender, e) =>
             {
                 _projectEditor.CurrentTool = _projectEditor.Tools.FirstOrDefault(t => t.Name == "Selection");
                 _projectEditor.CurrentPathTool = _projectEditor.PathTools.FirstOrDefault(t => t.Name == "Line");
                 _projectEditor.OnNewProject();
-                _projectEditor.Invalidate = () => skiaView.InvalidateVisual();
+                _projectEditor.Invalidate = () =>
+                {
+                    skiaView.InvalidateVisual();
+                    if (_previewWindow.svgLive.IsChecked == true)
+                    {
+                        UpdateSvg();
+                    }
+                };
 
                 skiaView.Renderer = _projectEditor.Renderers[0];
                 skiaView.Container = _projectEditor.Project.CurrentContainer;
@@ -48,7 +80,12 @@ namespace SkiaDemo.Wpf
                     _projectEditor);
             };
 
-            Closing += (sender, e) => _inputProcessor.Dispose();
+            Closing += (sender, e) =>
+            {
+                _inputProcessor.Dispose();
+                isClosing = true;
+                _previewWindow.Close();
+            };
 
             KeyDown += (sender, e) =>
             {
@@ -58,6 +95,9 @@ namespace SkiaDemo.Wpf
                 {
                     switch (e.Key)
                     {
+                        case Key.P:
+                            _previewWindow.Show();
+                            break;
                         case Key.N:
                             NewProject();
                             break;
@@ -169,6 +209,45 @@ namespace SkiaDemo.Wpf
                     }
                 }
             };
+        }
+
+        private void UpdateSvg()
+        {
+            Task.Factory.StartNew(() =>
+            {
+                try
+                {
+                    IImageCache ic = _projectEditor.Project;
+                    var container = _projectEditor.Project.CurrentContainer;
+
+                    var renderer = new SkiaRenderer(true, 96.0);
+                    renderer.State.DrawShapeState.Flags = ShapeStateFlags.Printable;
+                    renderer.State.ImageCache = _projectEditor.Project;
+
+                    var presenter = new ContainerPresenter();
+
+                    using (var ms = new MemoryStream())
+                    {
+                        using (var stream = new SKManagedWStream(ms))
+                        {
+                            using (var writer = new SKXmlStreamWriter(stream))
+                            using (var canvas = SKSvgCanvas.Create(SKRect.Create(0, 0, (int)container.Width, (int)container.Height), writer))
+                            {
+                                presenter.Render(canvas, renderer, container, 0, 0);
+                            }
+                            stream.Flush();
+                        }
+
+                        var svg = Encoding.ASCII.GetString(ms.GetBuffer(), 0, (int)ms.Length);
+
+                        Dispatcher.Invoke(() =>
+                        {
+                            _previewWindow.svgText.Text = svg;
+                        });
+                    }
+                }
+                catch (Exception) { }
+            });
         }
 
         private void NewProject()

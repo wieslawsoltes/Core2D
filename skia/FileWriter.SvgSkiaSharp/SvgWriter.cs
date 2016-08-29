@@ -4,6 +4,7 @@ using System;
 using Core2D.Interfaces;
 using Core2D.Project;
 using Core2D.Renderer;
+using Core2D.Renderer.Presenters;
 using Core2D.Shape;
 using Renderer.SkiaSharp;
 
@@ -12,7 +13,7 @@ namespace FileWriter.SvgSkiaSharp
     /// <summary>
     /// SkiaSharp svg <see cref="IFileWriter"/> implementation.
     /// </summary>
-    public class SvgWriter : IFileWriter
+    public sealed class SvgWriter : IFileWriter
     {
         /// <inheritdoc/>
         string IFileWriter.Name { get; } = "Svg (SkiaSharp)";
@@ -30,15 +31,17 @@ namespace FileWriter.SvgSkiaSharp
             if (options == null)
                 return;
 
-            IProjectExporter exporter = new SvgExporter();
-
             var renderer = new SkiaRenderer(true, 96.0);
             renderer.State.DrawShapeState.Flags = ShapeStateFlags.Printable;
             renderer.State.ImageCache = ic;
 
+            var presenter = new ContainerPresenter();
+
+            IProjectExporter exporter = new SvgExporter(renderer, presenter);
+
             if (item is XContainer)
             {
-                exporter.Save(path, item as XContainer, renderer);
+                exporter.Save(path, item as XContainer);
             }
             else if (item is XDocument)
             {
