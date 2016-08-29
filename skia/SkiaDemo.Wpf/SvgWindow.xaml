@@ -14,7 +14,11 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <CheckBox Grid.Column="0" Margin="4" x:Name="svgLive" Content="Live" IsChecked="False" VerticalAlignment="Top"/>
+        <StackPanel Grid.Column="0">
+            <CheckBox Margin="4" x:Name="svgLive" Content="Live" IsChecked="False" VerticalAlignment="Top"/>
+            <CheckBox Margin="4" x:Name="svgExport" Content="Export" IsChecked="False" VerticalAlignment="Top"/>
+            <CheckBox Margin="4" x:Name="svgPrintable" Content="Printable" IsChecked="False" VerticalAlignment="Top"/>
+        </StackPanel>
         <TextBox Grid.Column="1" Margin="4" x:Name="svgText" FontFamily="Consolas" FontSize="12" Background="Transparent" Text="" AcceptsReturn="True" AcceptsTab="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" BorderBrush="Transparent" BorderThickness="0" FocusVisualStyle="{x:Null}"/>
         <Button Grid.Column="2" Margin="4" Padding="4" x:Name="svgButton" Background="Transparent" Content="SVG" VerticalAlignment="Top" BorderBrush="Transparent" BorderThickness="0" FocusVisualStyle="{x:Null}"/>
     </Grid>

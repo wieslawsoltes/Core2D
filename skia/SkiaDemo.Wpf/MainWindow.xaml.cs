@@ -67,7 +67,7 @@ namespace SkiaDemo.Wpf
 
                 skiaView.Renderer = _projectEditor.Renderers[0];
                 skiaView.Container = _projectEditor.Project.CurrentContainer;
-                skiaView.Presenter = new ContainerPresenter();
+                skiaView.Presenter = new EditorPresenter();
                 skiaView.Focusable = true;
                 skiaView.Focus();
                 skiaView.InvalidateVisual();
@@ -213,6 +213,9 @@ namespace SkiaDemo.Wpf
 
         private void UpdateSvg()
         {
+            bool exportPresenter = _previewWindow.svgExport.IsChecked == true;
+            bool showPrintable = _previewWindow.svgPrintable.IsChecked == true;
+
             Task.Factory.StartNew(() =>
             {
                 try
@@ -221,10 +224,13 @@ namespace SkiaDemo.Wpf
                     var container = _projectEditor.Project.CurrentContainer;
 
                     var renderer = new SkiaRenderer(true, 96.0);
-                    renderer.State.DrawShapeState.Flags = ShapeStateFlags.Printable;
+                    if (!showPrintable)
+                    {
+                        renderer.State.DrawShapeState.Flags = ShapeStateFlags.Printable;
+                    }
                     renderer.State.ImageCache = _projectEditor.Project;
 
-                    var presenter = new ContainerPresenter();
+                    var presenter = exportPresenter ? (ContainerPresenter)new ExportPresenter() : (ContainerPresenter)new EditorPresenter();
 
                     using (var ms = new MemoryStream())
                     {
