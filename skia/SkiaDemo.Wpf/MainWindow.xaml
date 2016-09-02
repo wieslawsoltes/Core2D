@@ -9,7 +9,52 @@
         WindowStartupLocation="CenterScreen"
         UseLayoutRounding="True" SnapsToDevicePixels="True" TextOptions.TextFormattingMode="Display">
     <Grid FocusVisualStyle="{x:Null}">
-        <local:SkiaView x:Name="skiaView" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FocusVisualStyle="{x:Null}"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <local:SkiaView x:Name="skiaView" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FocusVisualStyle="{x:Null}"/>
+        <TextBlock x:Name="helpText" Grid.Column="1" Margin="4" FontFamily="Consolas" FontWeight="UltraLight" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Stretch">
+            <Run FontWeight="Bold">File</Run><LineBreak/>
+            <Run>Ctrl+N: New Project</Run><LineBreak/>
+            <Run>Ctrl+O: Open Project</Run><LineBreak/>
+            <Run>Ctrl+E: Export Project</Run><LineBreak/>
+            <Run FontWeight="Bold">Edit</Run><LineBreak/>
+            <Run>Ctrl+Z: Undo</Run><LineBreak/>
+            <Run>Ctrl+Y: Redo</Run><LineBreak/>
+            <Run>Ctrl+X: Cut</Run><LineBreak/>
+            <Run>Ctrl+C: Copy</Run><LineBreak/>
+            <Run>Ctrl+V: Paste</Run><LineBreak/>
+            <Run>Del: Delete</Run><LineBreak/>
+            <Run>Ctrl+A: Select All</Run><LineBreak/>
+            <Run>Esc: Deselect All</Run><LineBreak/>
+            <Run>Ctrl+G: Group Selected</Run><LineBreak/>
+            <Run>Ctrl+U: Ungroup Selected</Run><LineBreak/>
+            <Run FontWeight="Bold">Tool</Run><LineBreak/>
+            <Run>N: None</Run><LineBreak/>
+            <Run>S: Selection</Run><LineBreak/>
+            <Run>P: Point</Run><LineBreak/>
+            <Run>L: Line</Run><LineBreak/>
+            <Run>A: Arc</Run><LineBreak/>
+            <Run>B: CubicBezier</Run><LineBreak/>
+            <Run>Q: QuadraticBezier</Run><LineBreak/>
+            <Run>H: Path</Run><LineBreak/>
+            <Run>M: Move</Run><LineBreak/>
+            <Run>R: Rectangle</Run><LineBreak/>
+            <Run>E: Ellipse</Run><LineBreak/>
+            <Run>T: Text</Run><LineBreak/>
+            <Run>I: Image</Run><LineBreak/>
+            <Run FontWeight="Bold">Options</Run><LineBreak/>
+            <Run>K: DefaultIsStroked</Run><LineBreak/>
+            <Run>F: DefaultIsFilled</Run><LineBreak/>
+            <Run>D: DefaultIsClosed</Run><LineBreak/>
+            <Run>J: DefaultIsSmoothJoin</Run><LineBreak/>
+            <Run>G: SnapToGrid</Run><LineBreak/>
+            <Run>C: TryToConnect</Run><LineBreak/>
+            <Run>Y: CloneStyle</Run><LineBreak/>
+            <Run FontWeight="Bold">Window</Run><LineBreak/>
+            <Run>Ctrl+P: SVG Preview</Run><LineBreak/>
+        </TextBlock>
     </Grid>
 </Window>
  
