@@ -4,7 +4,6 @@
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Core2D.Avalonia;assembly=Core2D.Avalonia"
-             xmlns:presenters="clr-namespace:Core2D.Avalonia.Presenters;assembly=Core2D.Avalonia"
              xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"
              xmlns:Core="clr-namespace:Core2D;assembly=Core2D"
              xmlns:Database="clr-namespace:Core2D.Data.Database;assembly=Core2D"
@@ -288,7 +287,7 @@
         <Border Classes="project" Grid.Column="2" Grid.Row="0" Margin="0,6,6,6">
             <TabControl Classes="top">
                 <TabItem Header="Properties" Classes="property">
-                    <presenters:CachedContentPresenter DataContext="{Binding #project.SelectedItem, Converter={Static converters:TreeViewSelectedItemToObjectConverter.Instance}}" Classes="project" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                    <ContentControl Content="{Binding #project.SelectedItem, Converter={Static converters:TreeViewSelectedItemToObjectConverter.Instance}}" Classes="project" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                 </TabItem>
                 <TabItem Header="Xaml" Classes="property">
                     <TextBox DataContext="{Binding #project.SelectedItem, Converter={Static converters:TreeViewSelectedItemToObjectConverter.Instance}}" Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToXamlStringConverter.Instance}}" Classes="project" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">

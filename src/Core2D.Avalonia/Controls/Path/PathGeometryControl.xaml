@@ -4,7 +4,6 @@
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Core2D.Avalonia;assembly=Core2D.Avalonia"
-             xmlns:presenters="clr-namespace:Core2D.Avalonia.Presenters;assembly=Core2D.Avalonia"
              xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
              xmlns:Path="clr-namespace:Core2D.Path;assembly=Core2D"
@@ -36,7 +35,7 @@
             </TreeView>
         </TabItem>
         <TabItem Header="Selected" Classes="property">
-            <presenters:CachedContentPresenter DataContext="{Binding #tree.SelectedItem}"/>
+            <ContentControl Content="{Binding #tree.SelectedItem}"/>
         </TabItem>
     </TabControl>
 </UserControl>

@@ -4,7 +4,6 @@
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Core2D.Avalonia;assembly=Core2D.Avalonia"
-             xmlns:presenters="clr-namespace:Core2D.Avalonia.Presenters;assembly=Core2D.Avalonia"
              xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D"
              Design.DataContext="{Static Designer:DesignerContext.ArcSegment}"
@@ -22,7 +21,7 @@
             <ListBox Name="points" Items="{Binding Points}" Classes="default"/>
         </TabItem>
         <TabItem Header="Selected" Classes="property">
-            <presenters:CachedContentPresenter DataContext="{Binding #points.SelectedItem}"/>
+            <ContentControl Content="{Binding #points.SelectedItem}"/>
         </TabItem>
     </TabControl>
 </UserControl>

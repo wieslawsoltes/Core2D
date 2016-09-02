@@ -347,7 +347,6 @@
     <Compile Include="Modules\DependenciesModule.cs" />
     <Compile Include="Modules\LocatorModule.cs" />
     <Compile Include="Modules\ViewModule.cs" />
-    <Compile Include="Presenters\CachedContentPresenter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Renderer\RendererOptions.cs" />
     <Compile Include="Views\BrowserViewControl.xaml.cs">

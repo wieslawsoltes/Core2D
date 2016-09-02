@@ -7,7 +7,6 @@
              xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
              xmlns:local="clr-namespace:Core2D.Avalonia;assembly=Core2D.Avalonia"
-             xmlns:presenters="clr-namespace:Core2D.Avalonia.Presenters;assembly=Core2D.Avalonia"
              xmlns:actions="clr-namespace:Core2D.Avalonia.Interactions.Actions;assembly=Core2D.Avalonia"
              xmlns:behaviors="clr-namespace:Core2D.Avalonia.Interactions.Behaviors;assembly=Core2D.Avalonia"
              xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"
@@ -224,7 +223,7 @@
                         <project:ProjectControl DataContext="{Binding Project}"/>
                     </TabItem>
                     <TabItem Header="Options" Classes="property">
-                        <presenters:CachedContentPresenter DataContext="{Binding Project.Options}"/>
+                        <ContentControl Content="{Binding Project.Options}"/>
                     </TabItem>
                     <TabItem Header="Images" Classes="property">
                         <project:ImagesControl DataContext="{Binding Project}"/>
@@ -260,7 +259,7 @@
                 <TabControl Classes="bottom">
                     <TabItem Header="Shape" Classes="property">
                         <ScrollViewer>
-                            <presenters:CachedContentPresenter DataContext="{Binding Project.CurrentContainer.CurrentShape}"/>
+                            <ContentControl Content="{Binding Project.CurrentContainer.CurrentShape}"/>
                         </ScrollViewer>
                     </TabItem>
                     <TabItem Header="Data" Classes="property">
@@ -275,12 +274,12 @@
                     </TabItem>
                     <TabItem Header="Container" Classes="property">
                         <ScrollViewer>
-                            <presenters:CachedContentPresenter DataContext="{Binding Project.CurrentContainer}"/>
+                            <ContentControl Content="{Binding Project.CurrentContainer}"/>
                         </ScrollViewer>
                     </TabItem>
                     <TabItem Header="Template" Classes="property">
                         <ScrollViewer>
-                            <presenters:CachedContentPresenter DataContext="{Binding Project.CurrentTemplate}"/>
+                            <ContentControl Content="{Binding Project.CurrentTemplate}"/>
                         </ScrollViewer>
                     </TabItem>
                 </TabControl>
