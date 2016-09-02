@@ -4,12 +4,14 @@
 
 #addin "nuget:?package=Polly&version=4.2.0"
 #addin "nuget:?package=NuGet.Core&version=2.12.0"
+#addin "nuget:?package=Cake.DocFx&version=0.1.6"
 
 ///////////////////////////////////////////////////////////////////////////////
 // TOOLS
 ///////////////////////////////////////////////////////////////////////////////
 
 #tool "nuget:?package=xunit.runner.console&version=2.1.0"
+#tool "nuget:?package=docfx.msbuild&version=2.4.0"
 
 ///////////////////////////////////////////////////////////////////////////////
 // USINGS
@@ -41,6 +43,7 @@ var ReleasePlatform = "AnyCPU";
 var ReleaseConfiguration = "Release";
 var MSBuildSolution = "./Core2D.sln";
 var XBuildSolution = "./Core2D.mono.sln";
+var DocFxProject = "./docs/docfx.json";
 
 ///////////////////////////////////////////////////////////////////////////////
 // PARAMETERS
@@ -92,10 +95,14 @@ var testResultsDir = artifactsDir.Combine("test-results");
 var nugetRoot = artifactsDir.Combine("nuget");
 var chocolateyRoot = artifactsDir.Combine("chocolatey");
 var zipRoot = artifactsDir.Combine("zip");
+var docsRoot = artifactsDir.Combine("docs");
+var docsSiteRoot = docsRoot.Combine("_site");
 var binRoot = artifactsDir.Combine("bin");
 
 var dirSuffix = platform + "/" + configuration;
 var dirSuffixSkia = (isPlatformAnyCPU ? "x86" : platform) + "/" + configuration;
+
+var zipDocsSiteArtifacts = zipRoot.CombineWithFilePath("Core2D-Docs-" + version + ".zip");
 
 Func<IFileSystemInfo, bool> ExcludeSkia = i => {
     return !(i.Path.FullPath.IndexOf("Skia", StringComparison.OrdinalIgnoreCase) >= 0);
@@ -904,10 +911,12 @@ Task("Clean")
     CleanDirectories(buildDirs);
     CleanDirectory(artifactsDir);
     CleanDirectory(testResultsDir);
-    CleanDirectory(zipRoot);
-    CleanDirectory(binRoot);
     CleanDirectory(nugetRoot);
     CleanDirectory(chocolateyRoot);
+    CleanDirectory(zipRoot);
+    CleanDirectory(docsRoot);
+    CleanDirectory(docsSiteRoot);
+    CleanDirectory(binRoot);
 });
 
 Task("Restore-NuGet-Packages")
@@ -995,6 +1004,16 @@ Task("Run-Unit-Tests")
     }
 });
 
+Task("Create-Docs")
+    .IsDependentOn("Run-Unit-Tests")
+    .Does(() =>
+{
+    DocFxMetadata(DocFxProject);
+    DocFxBuild(DocFxProject, new DocFxBuildSettings() {
+        OutputPath = docsRoot
+    });
+});
+
 Task("Copy-Files")
     .IsDependentOn("Run-Unit-Tests")
     .Does(() =>
@@ -1003,9 +1022,12 @@ Task("Copy-Files")
 });
 
 Task("Zip-Files")
+    .IsDependentOn("Create-Docs")
     .IsDependentOn("Copy-Files")
     .Does(() =>
 {
+    Zip(docsSiteRoot, zipDocsSiteArtifacts);
+
     Zip(binRoot, zipCoreArtifacts);
 
     Zip(zipSourceCairoDirs, 
@@ -1052,6 +1074,17 @@ Task("Create-Chocolatey-Packages")
         nuspec.Key.Files = GetChocolateyNuSpecContent(nuspec.Value);
         ChocolateyPack(nuspec.Key);
     }
+});
+
+Task("Publish-Docs")
+    .IsDependentOn("Create-Docs")
+    .WithCriteria(() => !isLocalBuild)
+    .WithCriteria(() => !isPullRequest)
+    .WithCriteria(() => isMainRepo)
+    .WithCriteria(() => isMasterBranch)
+    .WithCriteria(() => isNuGetRelease)
+    .Does(() =>
+{
 });
 
 Task("Publish-MyGet")
@@ -1170,6 +1203,7 @@ Task("Default")
 
 Task("AppVeyor")
   .IsDependentOn("Zip-Files")
+  .IsDependentOn("Publish-Docs")
   .IsDependentOn("Publish-MyGet")
   .IsDependentOn("Publish-NuGet")
   .IsDependentOn("Publish-Chocolatey");
