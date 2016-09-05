@@ -1,7 +1,5 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using System.IO;
-using System.Linq;
 using Avalonia.Controls;
 using Core2D.Avalonia.Windows;
 using Core2D.Editor;
