@@ -41,7 +41,25 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilities.Avalonia", "depen
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.Avalonia", "src\Core2D.Avalonia\Core2D.Avalonia.csproj", "{27CD58AE-D6D4-42AD-A315-2F1CB63454AF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptRunner.Roslyn", "dependencies\ScriptRunner.Roslyn\ScriptRunner.Roslyn.csproj", "{352C23CD-8A6D-4C91-9FD2-FC35ECBC8AFE}"
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		src\Core2D.Shared\Core2D.Shared.projitems*{11e61a53-13d5-4447-8d66-3f328bbfc30a}*SharedItemsImports = 4
+		src\Core2D.Shared\Core2D.Shared.projitems*{1dca99ea-f8fe-4ddd-ab81-bf0380c1b33d}*SharedItemsImports = 4
+		src\Core2D.Shared\Core2D.Shared.projitems*{27cd58ae-d6d4-42ad-a315-2f1cb63454af}*SharedItemsImports = 4
+		src\Core2D.Shared\Core2D.Shared.projitems*{34c8ee31-a1fe-4a74-be36-c1f38bc06fec}*SharedItemsImports = 4
+		src\Core2D.Shared\Core2D.Shared.projitems*{352c23cd-8a6d-4c91-9fd2-fc35ecbc8afe}*SharedItemsImports = 4
+		src\Core2D.Shared\Core2D.Shared.projitems*{4ee581b0-45f3-4d7e-beae-277abf5f3fdd}*SharedItemsImports = 4
+		src\Core2D.Shared\Core2D.Shared.projitems*{5ed631ec-651f-44d6-a99d-d1202f212656}*SharedItemsImports = 4
+		src\Core2D.Shared\Core2D.Shared.projitems*{68a36926-df55-4f05-9f89-b9ab1463227e}*SharedItemsImports = 4
+		src\Core2D.Shared\Core2D.Shared.projitems*{ae7ff1b5-abe3-45bf-87cc-44ac580a666a}*SharedItemsImports = 4
+		src\Core2D.Shared\Core2D.Shared.projitems*{c6dbd1fd-c462-4005-b382-97bb4aef26f2}*SharedItemsImports = 4
+		src\Core2D.Shared\Core2D.Shared.projitems*{d1f867f7-9029-480d-b1e1-b0be4658b182}*SharedItemsImports = 4
+		src\Core2D.Shared\Core2D.Shared.projitems*{e05f3f7e-2176-43dc-90bb-f5c66cfdb12f}*SharedItemsImports = 4
+		src\Core2D.Shared\Core2D.Shared.projitems*{ec0efa51-83f0-4439-be9f-faebd3418c94}*SharedItemsImports = 4
+		src\Core2D.Shared\Core2D.Shared.projitems*{f215adf5-74c1-4e26-9045-b6bbda736092}*SharedItemsImports = 4
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|AnyCPU = Debug|AnyCPU
 		Debug|x64 = Debug|x64
@@ -243,6 +261,18 @@ Global
 		{27CD58AE-D6D4-42AD-A315-2F1CB63454AF}.Release|x64.Build.0 = Release|x64
 		{27CD58AE-D6D4-42AD-A315-2F1CB63454AF}.Release|x86.ActiveCfg = Release|x86
 		{27CD58AE-D6D4-42AD-A315-2F1CB63454AF}.Release|x86.Build.0 = Release|x86
+		{352C23CD-8A6D-4C91-9FD2-FC35ECBC8AFE}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
+		{352C23CD-8A6D-4C91-9FD2-FC35ECBC8AFE}.Debug|AnyCPU.Build.0 = Debug|Any CPU
+		{352C23CD-8A6D-4C91-9FD2-FC35ECBC8AFE}.Debug|x64.ActiveCfg = Debug|x64
+		{352C23CD-8A6D-4C91-9FD2-FC35ECBC8AFE}.Debug|x64.Build.0 = Debug|x64
+		{352C23CD-8A6D-4C91-9FD2-FC35ECBC8AFE}.Debug|x86.ActiveCfg = Debug|x86
+		{352C23CD-8A6D-4C91-9FD2-FC35ECBC8AFE}.Debug|x86.Build.0 = Debug|x86
+		{352C23CD-8A6D-4C91-9FD2-FC35ECBC8AFE}.Release|AnyCPU.ActiveCfg = Release|Any CPU
+		{352C23CD-8A6D-4C91-9FD2-FC35ECBC8AFE}.Release|AnyCPU.Build.0 = Release|Any CPU
+		{352C23CD-8A6D-4C91-9FD2-FC35ECBC8AFE}.Release|x64.ActiveCfg = Release|x64
+		{352C23CD-8A6D-4C91-9FD2-FC35ECBC8AFE}.Release|x64.Build.0 = Release|x64
+		{352C23CD-8A6D-4C91-9FD2-FC35ECBC8AFE}.Release|x86.ActiveCfg = Release|x86
+		{352C23CD-8A6D-4C91-9FD2-FC35ECBC8AFE}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -264,5 +294,6 @@ Global
 		{5A6055BC-BF86-4FDD-9F62-0109DB7A303B} = {9DA997E2-E367-481C-B48A-278274034A26}
 		{C6DBD1FD-C462-4005-B382-97BB4AEF26F2} = {9DA997E2-E367-481C-B48A-278274034A26}
 		{27CD58AE-D6D4-42AD-A315-2F1CB63454AF} = {BC6BAFE6-1735-4549-A7CC-819274780B38}
+		{352C23CD-8A6D-4C91-9FD2-FC35ECBC8AFE} = {9DA997E2-E367-481C-B48A-278274034A26}
 	EndGlobalSection
 EndGlobal

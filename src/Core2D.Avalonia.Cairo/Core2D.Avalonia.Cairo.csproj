@@ -225,7 +225,7 @@
       <Name>Renderer.PdfSharp-core</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\dependencies\ScriptRunner.Roslyn\ScriptRunner.Roslyn.csproj">
-      <Project>{352c23cd-8a6d-4c91-9fd2-fc35ecbc8afe}</Project>
+      <Project>{352C23CD-8A6D-4C91-9FD2-FC35ECBC8AFE}</Project>
       <Name>ScriptRunner.Roslyn</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\dependencies\Serializer.Newtonsoft\Serializer.Newtonsoft.csproj">
