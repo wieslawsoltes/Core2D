@@ -215,6 +215,8 @@ var AvaloniaVersion = packageVersions["Avalonia"].FirstOrDefault().Item1;
 var AvaloniaXamlBehaviorsVersion = packageVersions["Avalonia.Xaml.Behaviors"].FirstOrDefault().Item1;
 var AvaloniaControlsPanAndZoomVersion = packageVersions["Avalonia.Controls.PanAndZoom"].FirstOrDefault().Item1;
 var SkiaSharpVersion = packageVersions["SkiaSharp"].FirstOrDefault().Item1;
+var MicrosoftCodeAnalysisCSharpVersion = packageVersions["Microsoft.CodeAnalysis.CSharp"].FirstOrDefault().Item1;
+var MicrosoftCompositionVersion = packageVersions["Microsoft.Composition"].FirstOrDefault().Item1;
 
 Information("Package: System.Collections.Immutable, version: {0}", SystemCollectionsImmutableVersion);
 Information("Package: System.Reactive, version: {0}", SystemReactiveVersion);
@@ -226,6 +228,8 @@ Information("Package: Avalonia, version: {0}", AvaloniaVersion);
 Information("Package: Avalonia.Xaml.Behaviors, version: {0}", AvaloniaXamlBehaviorsVersion);
 Information("Package: Avalonia.Controls.PanAndZoom, version: {0}", AvaloniaControlsPanAndZoomVersion);
 Information("Package: SkiaSharp, version: {0}", SkiaSharpVersion);
+Information("Package: Microsoft.CodeAnalysis.CSharp, version: {0}", MicrosoftCodeAnalysisCSharpVersion);
+Information("Package: Microsoft.Composition, version: {0}", MicrosoftCompositionVersion);
 
 var SetNuGetNuspecCommonProperties = new Action<NuGetPackSettings> ((nuspec) => {
     nuspec.Version = version;
@@ -549,6 +553,26 @@ var nuspecNuGetSettingsDependencies = new []
             new NuSpecContent { Source = "Renderer.Wpf.dll", Target = "lib/net45" }
         },
         BasePath = Directory("./dependencies/Renderer.Wpf/bin/" + dirSuffix),
+        OutputDirectory = nugetRoot
+    },
+    ///////////////////////////////////////////////////////////////////////////////
+    // dependencies: ScriptRunner.Roslyn
+    ///////////////////////////////////////////////////////////////////////////////
+    new NuGetPackSettings()
+    {
+        Id = "Core2D.ScriptRunner.Roslyn",
+        Dependencies = new []
+        {
+            new NuSpecDependency { Id = "System.Collections.Immutable", Version = SystemCollectionsImmutableVersion },
+            new NuSpecDependency { Id = "Microsoft.CodeAnalysis.CSharp", Version = MicrosoftCodeAnalysisCSharpVersion },
+            new NuSpecDependency { Id = "Microsoft.Composition", Version = MicrosoftCompositionVersion },
+            new NuSpecDependency { Id = "Core2D", Version = version }
+        },
+        Files = new []
+        {
+            new NuSpecContent { Source = "ScriptRunner.Roslyn.dll", Target = "lib/net45" }
+        },
+        BasePath = Directory("./dependencies/ScriptRunner.Roslyn/bin/" + dirSuffix),
         OutputDirectory = nugetRoot
     },
     ///////////////////////////////////////////////////////////////////////////////

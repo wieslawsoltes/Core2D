@@ -19,6 +19,7 @@ namespace Core2D.Avalonia.Modules
         {
             builder.RegisterType<ProjectEditor>().As<ProjectEditor>().InstancePerLifetimeScope();
             builder.RegisterType<ProjectFactory>().As<IProjectFactory>().InstancePerLifetimeScope();
+            builder.RegisterType<ShapeFactory>().As<IShapeFactory>().InstancePerLifetimeScope();
             builder.RegisterAssemblyTypes(typeof(ToolBase).GetTypeInfo().Assembly).As<ToolBase>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterAssemblyTypes(typeof(PathToolBase).GetTypeInfo().Assembly).As<PathToolBase>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<ProjectEditorCommands>().AutoActivate().PropertiesAutowired().InstancePerLifetimeScope();

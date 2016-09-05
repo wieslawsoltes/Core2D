@@ -8,6 +8,7 @@ using FileWriter.Dxf;
 using FileWriter.Emf;
 using FileWriter.Pdf_core;
 using Log.Trace;
+using ScriptRunner.Roslyn;
 using Serializer.Newtonsoft;
 using Serializer.Xaml;
 using TextFieldReader.CsvHelper;
@@ -25,6 +26,7 @@ namespace Core2D.Avalonia.Direct2D.Modules
         {
             builder.RegisterType<TraceLog>().As<ILog>().SingleInstance();
             builder.RegisterType<DotNetFxFileSystem>().As<IFileSystem>().InstancePerLifetimeScope();
+            builder.RegisterType<RoslynScriptRunner>().As<IScriptRunner>().InstancePerLifetimeScope();
             builder.RegisterType<NewtonsoftJsonSerializer>().As<IJsonSerializer>().InstancePerLifetimeScope();
             builder.RegisterType<PortableXamlSerializer>().As<IXamlSerializer>().InstancePerLifetimeScope();
             builder.RegisterType<PdfWriter>().As<IFileWriter>().InstancePerLifetimeScope();

@@ -21,6 +21,8 @@
             <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuFileOpen}" Command="{x:Static Editor:ProjectEditorCommands.OpenCommand}" InputGestureText="Ctrl+O"/>
             <Separator/>
+            <MenuItem Header="{x:Static p:Resources.MenuFileExecuteScript}" Command="{x:Static Editor:ProjectEditorCommands.ExecuteScriptCommand}"/>
+            <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuFileRecent}" ItemsSource="{Binding RecentProjects}">
                 <MenuItem.ItemTemplate>
                     <DataTemplate>

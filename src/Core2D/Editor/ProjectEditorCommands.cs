@@ -38,6 +38,11 @@ namespace Core2D.Editor
         public static ISaveAsCommand SaveAsCommand { get; set; }
 
         /// <summary>
+        /// Execute script.
+        /// </summary>
+        public static IExecuteScriptCommand ExecuteScriptCommand { get; set; }
+
+        /// <summary>
         /// Import object.
         /// </summary>
         public static IImportObjectCommand ImportObjectCommand { get; set; }

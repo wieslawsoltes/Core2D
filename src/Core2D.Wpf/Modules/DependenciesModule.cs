@@ -11,6 +11,7 @@ using FileWriter.Pdf_wpf;
 using FileWriter.Vdx;
 using Log.Trace;
 using Renderer.Wpf;
+using ScriptRunner.Roslyn;
 using Serializer.Newtonsoft;
 using Serializer.Xaml;
 using TextFieldReader.CsvHelper;
@@ -29,6 +30,7 @@ namespace Core2D.Wpf.Modules
         {
             builder.RegisterType<TraceLog>().As<ILog>().SingleInstance();
             builder.RegisterType<DotNetFxFileSystem>().As<IFileSystem>().InstancePerLifetimeScope();
+            builder.RegisterType<RoslynScriptRunner>().As<IScriptRunner>().InstancePerLifetimeScope();
             builder.RegisterType<NewtonsoftJsonSerializer>().As<IJsonSerializer>().InstancePerLifetimeScope();
             builder.RegisterType<PortableXamlSerializer>().As<IXamlSerializer>().InstancePerLifetimeScope();
             builder.RegisterType<PdfWriter>().As<IFileWriter>().InstancePerLifetimeScope();

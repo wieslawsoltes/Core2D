@@ -31,6 +31,8 @@
             <MenuItem Header="_Save" Command="{Static Editor:ProjectEditorCommands.SaveCommand}"/>
             <MenuItem Header="Save _As..." Command="{Static Editor:ProjectEditorCommands.SaveAsCommand}"/>
             <Separator/>
+            <MenuItem Header="Execu_te Script..." Command="{Static Editor:ProjectEditorCommands.ExecuteScriptCommand}"/>
+            <Separator/>
             <MenuItem Header="Import Xa_ml..." Command="{Static Editor:ProjectEditorCommands.ImportXamlCommand}"/>
             <MenuItem Header="Import _Json..." Command="{Static Editor:ProjectEditorCommands.ImportJsonCommand}"/>
             <Separator/>

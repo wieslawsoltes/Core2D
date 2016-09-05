@@ -349,6 +349,15 @@ namespace Core2D.Wpf.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Execu_te Script....
+        /// </summary>
+        public static string MenuFileExecuteScript {
+            get {
+                return ResourceManager.GetString("MenuFileExecuteScript", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to E_xit.
         /// </summary>
         public static string MenuFileExit {

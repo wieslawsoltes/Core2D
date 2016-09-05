@@ -26,6 +26,8 @@
             <Separator/>
             <MenuItem Header="_Open..." Command="{Static Editor:ProjectEditorCommands.OpenCommand}"/>
             <Separator/>
+            <MenuItem Header="Execu_te Script..." Command="{Static Editor:ProjectEditorCommands.ExecuteScriptCommand}"/>
+            <Separator/>
             <MenuItem Header="_Recent" Items="{Binding RecentProjects}">
                 <MenuItem.Styles>
                     <Style Selector="MenuItem">

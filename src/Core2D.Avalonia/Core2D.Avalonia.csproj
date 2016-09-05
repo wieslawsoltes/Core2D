@@ -153,6 +153,7 @@
     <Compile Include="Commands\Data\ImportDataCommand.cs" />
     <Compile Include="Commands\Data\UpdateDataCommand.cs" />
     <Compile Include="Commands\Edit\Clipboard\CopyAsEmfCommand.cs" />
+    <Compile Include="Commands\File\ExecuteScriptCommand.cs" />
     <Compile Include="Commands\File\ExitCommand.cs" />
     <Compile Include="Commands\File\ExportCommand.cs" />
     <Compile Include="Commands\File\Export\ExportJsonCommand.cs" />

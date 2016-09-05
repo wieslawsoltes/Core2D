@@ -120,6 +120,7 @@
     <Compile Include="Editor\Commands\Implementation\Window\LoadWindowLayoutCommand.cs" />
     <Compile Include="Editor\Commands\Implementation\Window\ResetWindowLayoutCommand.cs" />
     <Compile Include="Editor\Commands\Implementation\Window\SaveWindowLayoutCommand.cs" />
+    <Compile Include="Editor\Commands\Interfaces\File\IExecuteScriptCommand.cs" />
     <Compile Include="Editor\Commands\Interfaces\View\IChangeCurrentViewCommand.cs" />
     <Compile Include="Editor\Commands\Interfaces\View\Views\IDocumentViewerCommand.cs" />
     <Compile Include="Editor\Commands\Interfaces\View\Views\IObjectBrowserCommand.cs" />
@@ -231,6 +232,7 @@
     <Compile Include="Editor\Bounds\RectangleBounds.cs" />
     <Compile Include="Editor\Bounds\ShapeHitTestPoint.cs" />
     <Compile Include="Editor\PathToolBase.cs" />
+    <Compile Include="Editor\ScriptBase.cs" />
     <Compile Include="Editor\Views\Interfaces\IMainView.cs" />
     <Compile Include="Editor\ProjectEditorCommands.cs" />
     <Compile Include="Editor\ProjectEditor.Model.cs" />
@@ -261,6 +263,7 @@
     <Compile Include="Editor\Views\EditorView.cs" />
     <Compile Include="Interfaces\IImageImporter.cs" />
     <Compile Include="Interfaces\IProjectExporter.cs" />
+    <Compile Include="Interfaces\IScriptRunner.cs" />
     <Compile Include="Interfaces\IXamlSerializer.cs" />
     <Compile Include="Editor\Views\Interfaces\IView.cs" />
     <Compile Include="ObservableObject.cs" />

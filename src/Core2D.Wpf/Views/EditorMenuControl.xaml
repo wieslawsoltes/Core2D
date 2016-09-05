@@ -39,6 +39,8 @@
             <MenuItem Header="{x:Static p:Resources.MenuFileSave}" Command="{x:Static Editor:ProjectEditorCommands.SaveCommand}" InputGestureText="Ctrl+S"/>
             <MenuItem Header="{x:Static p:Resources.MenuFileSaveAs}" Command="{x:Static Editor:ProjectEditorCommands.SaveAsCommand}" InputGestureText="Ctrl+Shift+S"/>
             <Separator/>
+            <MenuItem Header="{x:Static p:Resources.MenuFileExecuteScript}" Command="{x:Static Editor:ProjectEditorCommands.ExecuteScriptCommand}"/>
+            <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuFileImportXaml}" Command="{x:Static Editor:ProjectEditorCommands.ImportXamlCommand}" InputGestureText="Ctrl+Shift+X"/>
             <MenuItem Header="{x:Static p:Resources.MenuFileImportJson}" Command="{x:Static Editor:ProjectEditorCommands.ImportJsonCommand}" InputGestureText="Ctrl+Shift+J"/>
             <Separator/>

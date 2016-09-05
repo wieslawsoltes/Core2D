@@ -624,4 +624,7 @@
   <data name="WindowTitleImages" xml:space="preserve">
     <value>Images</value>
   </data>
+  <data name="MenuFileExecuteScript" xml:space="preserve">
+    <value>Execu_te Script...</value>
+  </data>
 </root>

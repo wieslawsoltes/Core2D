@@ -18,6 +18,7 @@ namespace Core2D.Wpf.Modules
         {
             builder.RegisterType<ProjectEditor>().As<ProjectEditor>().InstancePerLifetimeScope();
             builder.RegisterType<ProjectFactory>().As<IProjectFactory>().InstancePerLifetimeScope();
+            builder.RegisterType<ShapeFactory>().As<IShapeFactory>().InstancePerLifetimeScope();
             builder.RegisterAssemblyTypes(typeof(ToolBase).Assembly).As<ToolBase>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterAssemblyTypes(typeof(PathToolBase).Assembly).As<PathToolBase>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<ProjectEditorCommands>().AutoActivate().PropertiesAutowired().InstancePerLifetimeScope();
