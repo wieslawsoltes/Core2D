@@ -51,7 +51,7 @@ namespace Core2D.Math
         /// <summary>
         /// Calculate ellipse line segment intersection points.
         /// </summary>
-        /// <param name="rect"></param>
+        /// <param name="rect">The ellipse defining rectangle.</param>
         /// <param name="p1">The line segment start point.</param>
         /// <param name="p2">The line segment end point.</param>
         /// <param name="onlySegment">Include only line segment solutions.</param>
@@ -126,7 +126,7 @@ namespace Core2D.Math
         /// <param name="y1">The Y coordinate of first point.</param>
         /// <param name="x2">The X coordinate of second point.</param>
         /// <param name="y2">The Y coordinate of second point.</param>
-        /// <returns>The  distance between two points.</returns>
+        /// <returns>The distance between two points.</returns>
         public static double Distance(double x1, double y1, double x2, double y2)
         {
             double dx = x1 - x2;
