@@ -73,8 +73,8 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="Wpf.Controls.PanAndZoom, Version=0.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Wpf.Controls.PanAndZoom.0.4.1-build44-alpha\lib\net45\Wpf.Controls.PanAndZoom.dll</HintPath>
+    <Reference Include="Wpf.Controls.PanAndZoom, Version=0.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Wpf.Controls.PanAndZoom.0.4.1-build54-alpha\lib\net45\Wpf.Controls.PanAndZoom.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Xceed.Wpf.AvalonDock, Version=2.9.15603.14400, Culture=neutral, PublicKeyToken=ba83ff368b7563c6, processorArchitecture=MSIL">
