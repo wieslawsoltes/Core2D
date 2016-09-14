@@ -25,7 +25,7 @@ namespace Core2D.Editor.Bounds
         /// <returns></returns>
         public static BaseShape HitTestPoint(XPoint point, Vector2 v, double threshold, double dx, double dy)
         {
-            if (RectangleBounds.GetPointBounds(point, threshold, dx, dy).Contains(v))
+            if (ShapeBounds.GetPointBounds(point, threshold, dx, dy).Contains(v))
             {
                 return point;
             }
@@ -44,17 +44,17 @@ namespace Core2D.Editor.Bounds
         /// <returns></returns>
         public static BaseShape HitTestLine(XLine line, Vector2 v, double threshold, double dx, double dy)
         {
-            if (RectangleBounds.GetPointBounds(line.Start, threshold, dx, dy).Contains(v))
+            if (ShapeBounds.GetPointBounds(line.Start, threshold, dx, dy).Contains(v))
             {
                 return line.Start;
             }
 
-            if (RectangleBounds.GetPointBounds(line.End, threshold, dx, dy).Contains(v))
+            if (ShapeBounds.GetPointBounds(line.End, threshold, dx, dy).Contains(v))
             {
                 return line.End;
             }
 
-            if (LineBounds.Contains(line, v, threshold, dx, dy))
+            if (ShapeBounds.Contains(line, v, threshold, dx, dy))
             {
                 return line;
             }
@@ -73,17 +73,17 @@ namespace Core2D.Editor.Bounds
         /// <returns></returns>
         public static BaseShape HitTestRectangle(XRectangle rectangle, Vector2 v, double threshold, double dx, double dy)
         {
-            if (RectangleBounds.GetPointBounds(rectangle.TopLeft, threshold, dx, dy).Contains(v))
+            if (ShapeBounds.GetPointBounds(rectangle.TopLeft, threshold, dx, dy).Contains(v))
             {
                 return rectangle.TopLeft;
             }
 
-            if (RectangleBounds.GetPointBounds(rectangle.BottomRight, threshold, dx, dy).Contains(v))
+            if (ShapeBounds.GetPointBounds(rectangle.BottomRight, threshold, dx, dy).Contains(v))
             {
                 return rectangle.BottomRight;
             }
 
-            if (RectangleBounds.GetRectangleBounds(rectangle, dx, dy).Contains(v))
+            if (ShapeBounds.GetRectangleBounds(rectangle, dx, dy).Contains(v))
             {
                 return rectangle;
             }
@@ -102,17 +102,17 @@ namespace Core2D.Editor.Bounds
         /// <returns></returns>
         public static BaseShape HitTestEllipse(XEllipse ellipse, Vector2 v, double threshold, double dx, double dy)
         {
-            if (RectangleBounds.GetPointBounds(ellipse.TopLeft, threshold, dx, dy).Contains(v))
+            if (ShapeBounds.GetPointBounds(ellipse.TopLeft, threshold, dx, dy).Contains(v))
             {
                 return ellipse.TopLeft;
             }
 
-            if (RectangleBounds.GetPointBounds(ellipse.BottomRight, threshold, dx, dy).Contains(v))
+            if (ShapeBounds.GetPointBounds(ellipse.BottomRight, threshold, dx, dy).Contains(v))
             {
                 return ellipse.BottomRight;
             }
 
-            if (RectangleBounds.GetEllipseBounds(ellipse, dx, dy).Contains(v))
+            if (ShapeBounds.GetEllipseBounds(ellipse, dx, dy).Contains(v))
             {
                 return ellipse;
             }
@@ -131,27 +131,27 @@ namespace Core2D.Editor.Bounds
         /// <returns></returns>
         public static BaseShape HitTestArc(XArc arc, Vector2 v, double threshold, double dx, double dy)
         {
-            if (RectangleBounds.GetPointBounds(arc.Point1, threshold, dx, dy).Contains(v))
+            if (ShapeBounds.GetPointBounds(arc.Point1, threshold, dx, dy).Contains(v))
             {
                 return arc.Point1;
             }
 
-            if (RectangleBounds.GetPointBounds(arc.Point2, threshold, dx, dy).Contains(v))
+            if (ShapeBounds.GetPointBounds(arc.Point2, threshold, dx, dy).Contains(v))
             {
                 return arc.Point2;
             }
 
-            if (RectangleBounds.GetPointBounds(arc.Point3, threshold, dx, dy).Contains(v))
+            if (ShapeBounds.GetPointBounds(arc.Point3, threshold, dx, dy).Contains(v))
             {
                 return arc.Point3;
             }
 
-            if (RectangleBounds.GetPointBounds(arc.Point4, threshold, dx, dy).Contains(v))
+            if (ShapeBounds.GetPointBounds(arc.Point4, threshold, dx, dy).Contains(v))
             {
                 return arc.Point4;
             }
 
-            if (RectangleBounds.GetArcBounds(arc, dx, dy).Contains(v))
+            if (ShapeBounds.GetArcBounds(arc, dx, dy).Contains(v))
             {
                 return arc;
             }
@@ -170,27 +170,27 @@ namespace Core2D.Editor.Bounds
         /// <returns></returns>
         public static BaseShape HitTestCubicBezier(XCubicBezier cubicBezier, Vector2 v, double threshold, double dx, double dy)
         {
-            if (RectangleBounds.GetPointBounds(cubicBezier.Point1, threshold, dx, dy).Contains(v))
+            if (ShapeBounds.GetPointBounds(cubicBezier.Point1, threshold, dx, dy).Contains(v))
             {
                 return cubicBezier.Point1;
             }
 
-            if (RectangleBounds.GetPointBounds(cubicBezier.Point2, threshold, dx, dy).Contains(v))
+            if (ShapeBounds.GetPointBounds(cubicBezier.Point2, threshold, dx, dy).Contains(v))
             {
                 return cubicBezier.Point2;
             }
 
-            if (RectangleBounds.GetPointBounds(cubicBezier.Point3, threshold, dx, dy).Contains(v))
+            if (ShapeBounds.GetPointBounds(cubicBezier.Point3, threshold, dx, dy).Contains(v))
             {
                 return cubicBezier.Point3;
             }
 
-            if (RectangleBounds.GetPointBounds(cubicBezier.Point4, threshold, dx, dy).Contains(v))
+            if (ShapeBounds.GetPointBounds(cubicBezier.Point4, threshold, dx, dy).Contains(v))
             {
                 return cubicBezier.Point4;
             }
 
-            if (ConvexHullBounds.Contains(cubicBezier.GetPoints().ToImmutableArray(), v, dx, dy))
+            if (ShapeBounds.Contains(cubicBezier.GetPoints().ToImmutableArray(), v, dx, dy))
             {
                 return cubicBezier;
             }
@@ -209,22 +209,22 @@ namespace Core2D.Editor.Bounds
         /// <returns></returns>
         public static BaseShape HitTestQuadraticBezier(XQuadraticBezier quadraticBezier, Vector2 v, double threshold, double dx, double dy)
         {
-            if (RectangleBounds.GetPointBounds(quadraticBezier.Point1, threshold, dx, dy).Contains(v))
+            if (ShapeBounds.GetPointBounds(quadraticBezier.Point1, threshold, dx, dy).Contains(v))
             {
                 return quadraticBezier.Point1;
             }
 
-            if (RectangleBounds.GetPointBounds(quadraticBezier.Point2, threshold, dx, dy).Contains(v))
+            if (ShapeBounds.GetPointBounds(quadraticBezier.Point2, threshold, dx, dy).Contains(v))
             {
                 return quadraticBezier.Point2;
             }
 
-            if (RectangleBounds.GetPointBounds(quadraticBezier.Point3, threshold, dx, dy).Contains(v))
+            if (ShapeBounds.GetPointBounds(quadraticBezier.Point3, threshold, dx, dy).Contains(v))
             {
                 return quadraticBezier.Point3;
             }
 
-            if (ConvexHullBounds.Contains(quadraticBezier.GetPoints().ToImmutableArray(), v, dx, dy))
+            if (ShapeBounds.Contains(quadraticBezier.GetPoints().ToImmutableArray(), v, dx, dy))
             {
                 return quadraticBezier;
             }
@@ -243,17 +243,17 @@ namespace Core2D.Editor.Bounds
         /// <returns></returns>
         public static BaseShape HitTestText(XText text, Vector2 v, double threshold, double dx, double dy)
         {
-            if (RectangleBounds.GetPointBounds(text.TopLeft, threshold, dx, dy).Contains(v))
+            if (ShapeBounds.GetPointBounds(text.TopLeft, threshold, dx, dy).Contains(v))
             {
                 return text.TopLeft;
             }
 
-            if (RectangleBounds.GetPointBounds(text.BottomRight, threshold, dx, dy).Contains(v))
+            if (ShapeBounds.GetPointBounds(text.BottomRight, threshold, dx, dy).Contains(v))
             {
                 return text.BottomRight;
             }
 
-            if (RectangleBounds.GetTextBounds(text, dx, dy).Contains(v))
+            if (ShapeBounds.GetTextBounds(text, dx, dy).Contains(v))
             {
                 return text;
             }
@@ -272,17 +272,17 @@ namespace Core2D.Editor.Bounds
         /// <returns></returns>
         public static BaseShape HitTestImage(XImage image, Vector2 v, double threshold, double dx, double dy)
         {
-            if (RectangleBounds.GetPointBounds(image.TopLeft, threshold, dx, dy).Contains(v))
+            if (ShapeBounds.GetPointBounds(image.TopLeft, threshold, dx, dy).Contains(v))
             {
                 return image.TopLeft;
             }
 
-            if (RectangleBounds.GetPointBounds(image.BottomRight, threshold, dx, dy).Contains(v))
+            if (ShapeBounds.GetPointBounds(image.BottomRight, threshold, dx, dy).Contains(v))
             {
                 return image.BottomRight;
             }
 
-            if (RectangleBounds.GetImageBounds(image, dx, dy).Contains(v))
+            if (ShapeBounds.GetImageBounds(image, dx, dy).Contains(v))
             {
                 return image;
             }
@@ -306,13 +306,13 @@ namespace Core2D.Editor.Bounds
                 var points = path.GetPoints().ToImmutableArray();
                 foreach (var point in points)
                 {
-                    if (RectangleBounds.GetPointBounds(point, threshold, dx, dy).Contains(v))
+                    if (ShapeBounds.GetPointBounds(point, threshold, dx, dy).Contains(v))
                     {
                         return point;
                     }
                 }
 
-                if (ConvexHullBounds.Contains(points, v, dx, dy))
+                if (ShapeBounds.Contains(points, v, dx, dy))
                 {
                     return path;
                 }
@@ -334,7 +334,7 @@ namespace Core2D.Editor.Bounds
         {
             foreach (var connector in group.Connectors.Reverse())
             {
-                if (RectangleBounds.GetPointBounds(connector, threshold, dx, dy).Contains(v))
+                if (ShapeBounds.GetPointBounds(connector, threshold, dx, dy).Contains(v))
                 {
                     return connector;
                 }

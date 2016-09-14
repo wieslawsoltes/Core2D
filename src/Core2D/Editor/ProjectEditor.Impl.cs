@@ -3247,7 +3247,7 @@ namespace Core2D.Editor
                     XLine result = null;
                     foreach (var line in lines)
                     {
-                        if (LineBounds.Contains(line, new Vector2(connector.X, connector.Y), threshold, 0, 0))
+                        if (ShapeBounds.Contains(line, new Vector2(connector.X, connector.Y), threshold, 0, 0))
                         {
                             result = line;
                             break;

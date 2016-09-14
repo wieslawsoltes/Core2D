@@ -26,7 +26,7 @@ namespace Core2D.Editor.Bounds
         /// <returns></returns>
         public static bool HitTestPoint(XPoint point, Rect2 rect, ISet<BaseShape> selected, double threshold, double dx, double dy)
         {
-            if (RectangleBounds.GetPointBounds(point, threshold, dx, dy).IntersectsWith(rect))
+            if (ShapeBounds.GetPointBounds(point, threshold, dx, dy).IntersectsWith(rect))
             {
                 if (selected != null)
                 {
@@ -53,8 +53,8 @@ namespace Core2D.Editor.Bounds
         /// <returns></returns>
         public static bool HitTestLine(XLine line, Rect2 rect, ISet<BaseShape> selected, double threshold, double dx, double dy)
         {
-            if (RectangleBounds.GetPointBounds(line.Start, threshold, dx, dy).IntersectsWith(rect)
-                || RectangleBounds.GetPointBounds(line.End, threshold, dx, dy).IntersectsWith(rect)
+            if (ShapeBounds.GetPointBounds(line.Start, threshold, dx, dy).IntersectsWith(rect)
+                || ShapeBounds.GetPointBounds(line.End, threshold, dx, dy).IntersectsWith(rect)
                 || MathHelpers.LineIntersectsWithRect(rect, new Point2(line.Start.X, line.Start.Y), new Point2(line.End.X, line.End.Y)))
             {
                 if (selected != null)
@@ -82,7 +82,7 @@ namespace Core2D.Editor.Bounds
         /// <returns></returns>
         public static bool HitTestEllipse(XEllipse ellipse, Rect2 rect, ISet<BaseShape> selected, double dx, double dy)
         {
-            if (RectangleBounds.GetEllipseBounds(ellipse, dx, dy).IntersectsWith(rect))
+            if (ShapeBounds.GetEllipseBounds(ellipse, dx, dy).IntersectsWith(rect))
             {
                 if (selected != null)
                 {
@@ -109,7 +109,7 @@ namespace Core2D.Editor.Bounds
         /// <returns></returns>
         public static bool HitTestRectangle(XRectangle rectangle, Rect2 rect, ISet<BaseShape> selected, double dx, double dy)
         {
-            if (RectangleBounds.GetRectangleBounds(rectangle, dx, dy).IntersectsWith(rect))
+            if (ShapeBounds.GetRectangleBounds(rectangle, dx, dy).IntersectsWith(rect))
             {
                 if (selected != null)
                 {
@@ -136,7 +136,7 @@ namespace Core2D.Editor.Bounds
         /// <returns></returns>
         public static bool HitTestArc(XArc arc, Rect2 rect, ISet<BaseShape> selected, double dx, double dy)
         {
-            if (RectangleBounds.GetArcBounds(arc, dx, dy).IntersectsWith(rect))
+            if (ShapeBounds.GetArcBounds(arc, dx, dy).IntersectsWith(rect))
             {
                 if (selected != null)
                 {
@@ -164,7 +164,7 @@ namespace Core2D.Editor.Bounds
         public static bool HitTestCubicBezier(XCubicBezier cubicBezier, Vector2[] selection, ISet<BaseShape> selected, double dx, double dy)
         {
             var points = cubicBezier.GetPoints().ToImmutableArray();
-            if (ConvexHullBounds.Overlap(selection, points, dx, dy))
+            if (ShapeBounds.Overlap(selection, points, dx, dy))
             {
                 if (selected != null)
                 {
@@ -192,7 +192,7 @@ namespace Core2D.Editor.Bounds
         public static bool HitTestQadraticBezier(XQuadraticBezier quadraticBezier, Vector2[] selection, ISet<BaseShape> selected, double dx, double dy)
         {
             var points = quadraticBezier.GetPoints().ToImmutableArray();
-            if (ConvexHullBounds.Overlap(selection, points, dx, dy))
+            if (ShapeBounds.Overlap(selection, points, dx, dy))
             {
                 if (selected != null)
                 {
@@ -219,7 +219,7 @@ namespace Core2D.Editor.Bounds
         /// <returns></returns>
         public static bool HitTestText(XText text, Rect2 rect, ISet<BaseShape> selected, double dx, double dy)
         {
-            if (RectangleBounds.GetTextBounds(text, dx, dy).IntersectsWith(rect))
+            if (ShapeBounds.GetTextBounds(text, dx, dy).IntersectsWith(rect))
             {
                 if (selected != null)
                 {
@@ -246,7 +246,7 @@ namespace Core2D.Editor.Bounds
         /// <returns></returns>
         public static bool HitTestImage(XImage image, Rect2 rect, ISet<BaseShape> selected, double dx, double dy)
         {
-            if (RectangleBounds.GetImageBounds(image, dx, dy).IntersectsWith(rect))
+            if (ShapeBounds.GetImageBounds(image, dx, dy).IntersectsWith(rect))
             {
                 if (selected != null)
                 {
@@ -276,7 +276,7 @@ namespace Core2D.Editor.Bounds
             if (path.Geometry != null)
             {
                 var points = path.GetPoints().ToImmutableArray();
-                if (ConvexHullBounds.Overlap(selection, points, dx, dy))
+                if (ShapeBounds.Overlap(selection, points, dx, dy))
                 {
                     if (selected != null)
                     {

@@ -228,8 +228,7 @@
     <Compile Include="Editor\Input\IInputTarget.cs" />
     <Compile Include="Editor\Input\InputProcessor.cs" />
     <Compile Include="Editor\Input\InputSource.cs" />
-    <Compile Include="Editor\Bounds\LineBounds.cs" />
-    <Compile Include="Editor\Bounds\RectangleBounds.cs" />
+    <Compile Include="Editor\Bounds\ShapeBounds.cs" />
     <Compile Include="Editor\Bounds\ShapeHitTestPoint.cs" />
     <Compile Include="Editor\PathToolBase.cs" />
     <Compile Include="Editor\ScriptBase.cs" />
@@ -274,7 +273,6 @@
     <Compile Include="Data\XProperty.cs" />
     <Compile Include="Data\Database\XRecord.cs" />
     <Compile Include="Data\Database\XValue.cs" />
-    <Compile Include="Editor\Bounds\ConvexHullBounds.cs" />
     <Compile Include="Editor\Bounds\ShapeHitTestSelection.cs" />
     <Compile Include="Editor\Constants.cs" />
     <Compile Include="Editor\Designer\DesignerContext.cs" />

@@ -4,8 +4,8 @@ using Xunit;
 
 namespace Core2D.UnitTests
 {
-    public class ConvexHullBoundsTests
+    public class ShapeBoundsTests
     {
-        // TODO: Write ConvexHullBoundsTests tests.
+        // TODO: Write ShapeBoundsTests tests.
     }
 }
