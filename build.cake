@@ -845,7 +845,7 @@ var nuspecChocolateySettings = new Dictionary<ChocolateyPackSettings, DirectoryP
 nuspecChocolateySettings.Add(
     new ChocolateyPackSettings
     {
-        Id = "Core2D.Avalonia.Cairo",
+        Id = "Core2D-Avalonia-Cairo",
         Title = "Core2D (Avalonia/Cairo)",
         OutputDirectory = chocolateyRoot
     },
@@ -857,7 +857,7 @@ nuspecChocolateySettings.Add(
 nuspecChocolateySettings.Add(
     new ChocolateyPackSettings
     {
-        Id = "Core2D.Avalonia.Direct2D",
+        Id = "Core2D-Avalonia-Direct2D",
         Title = "Core2D (Avalonia/Direct2D)",
         OutputDirectory = chocolateyRoot
     },
@@ -869,7 +869,7 @@ nuspecChocolateySettings.Add(
 nuspecChocolateySettings.Add(
     new ChocolateyPackSettings
     {
-        Id = "Core2D.Avalonia.Skia",
+        Id = "Core2D-Avalonia-Skia",
         Title = "Core2D (Avalonia/Skia)",
         OutputDirectory = chocolateyRoot
     },
@@ -881,7 +881,7 @@ nuspecChocolateySettings.Add(
 nuspecChocolateySettings.Add(
     new ChocolateyPackSettings
     {
-        Id = "Core2D.Wpf",
+        Id = "Core2D-Wpf",
         Title = "Core2D (WPF)",
         OutputDirectory = chocolateyRoot
     },
