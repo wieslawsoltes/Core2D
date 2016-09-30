@@ -123,6 +123,8 @@ namespace Renderer.SkiaSharp
             var paint = new SKPaint();
             paint.IsAntialias = _isAntialias;
             paint.IsStroke = false;
+            paint.LcdRenderText = true;
+            paint.SubpixelText = true;
             paint.Color = ToSKColor(color);
             return paint;
         }
