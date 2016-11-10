@@ -44,13 +44,13 @@ You can read the latest documentation at [http://core2d.github.io/](http://core2
 
 ## Data Formats
 
-* The project model is stored as `Json` in `zip` archives.
-* The project images are stored  as files in `zip` archives.
-* Resources can be defined in `Json` or `Xaml` format.
+* The project models is stored as `Json` in `zip` archive.
+* The project images are stored  as files in `zip` archive.
+* Resources are defined as `Json` or `Xaml`.
 * The `Json` format is supported for imported and exported resources. 
 * The `Xaml` format is supported for imported and exported resources. 
-* Database records can be imported, exported and updated from `csv` file format.
-* The clipboard data is stored as `Json` text.
+* Database records are imported, exported and updated as `csv`.
+* The clipboard data is stored as `Json`.
 
 ## Supported Platforms
 
