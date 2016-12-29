@@ -26,16 +26,16 @@
   </PropertyGroup>
   <Import Project="..\..\Core2D.targets" />
   <ItemGroup>
-    <Reference Include="Autofac, Version=4.2.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Autofac.4.2.0\lib\net45\Autofac.dll</HintPath>
+    <Reference Include="Autofac, Version=4.2.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Autofac.4.2.1\lib\net45\Autofac.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Portable.Xaml, Version=0.14.0.0, Culture=neutral, PublicKeyToken=ba4456acace7dab7, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Portable.Xaml.0.14.0\lib\dotnet\Portable.Xaml.dll</HintPath>
+    <Reference Include="Portable.Xaml, Version=0.15.0.0, Culture=neutral, PublicKeyToken=ba4456acace7dab7, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Portable.Xaml.0.15.0\lib\portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10\Portable.Xaml.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -74,7 +74,7 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="Wpf.Controls.PanAndZoom, Version=0.4.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Wpf.Controls.PanAndZoom.0.4.1-build63-alpha\lib\net45\Wpf.Controls.PanAndZoom.dll</HintPath>
+      <HintPath>..\..\packages\Wpf.Controls.PanAndZoom.0.4.1-build64-alpha\lib\net45\Wpf.Controls.PanAndZoom.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Xceed.Wpf.AvalonDock, Version=2.9.15603.14400, Culture=neutral, PublicKeyToken=ba83ff368b7563c6, processorArchitecture=MSIL">

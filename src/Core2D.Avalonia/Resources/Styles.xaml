@@ -281,7 +281,6 @@
         </Setter>
     </Style>
     <Style Selector="GridSplitter.vertical">
-        <Setter Property="Orientation" Value="Vertical"/>
     </Style>
     <!-- GridSplitter.horizontal -->
     <Style Selector="GridSplitter:horizontal">
@@ -294,7 +293,6 @@
         </Setter>
     </Style>
     <Style Selector="GridSplitter.horizontal">
-        <Setter Property="Orientation" Value="Horizontal"/>
     </Style>
     <!-- ListBox.default -->
     <Style Selector="ListBox.default">
