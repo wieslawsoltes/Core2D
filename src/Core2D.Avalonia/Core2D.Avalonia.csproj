@@ -32,7 +32,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Avalonia.Controls.PanAndZoom, Version=0.4.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Avalonia.Controls.PanAndZoom.0.4.1-build66-alpha\lib\portable-windows8+net45\Avalonia.Controls.PanAndZoom.dll</HintPath>
+      <HintPath>..\..\packages\Avalonia.Controls.PanAndZoom.0.4.1-build67-alpha\lib\portable-windows8+net45\Avalonia.Controls.PanAndZoom.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Avalonia.DesignerSupport, Version=0.4.1.0, Culture=neutral, processorArchitecture=MSIL">
@@ -88,11 +88,11 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Avalonia.Xaml.Interactions, Version=0.4.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Avalonia.Xaml.Behaviors.0.4.1-build327-alpha\lib\portable-windows8+net45\Avalonia.Xaml.Interactions.dll</HintPath>
+      <HintPath>..\..\packages\Avalonia.Xaml.Behaviors.0.4.1-build328-alpha\lib\portable-windows8+net45\Avalonia.Xaml.Interactions.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Avalonia.Xaml.Interactivity, Version=0.4.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Avalonia.Xaml.Behaviors.0.4.1-build327-alpha\lib\portable-windows8+net45\Avalonia.Xaml.Interactivity.dll</HintPath>
+      <HintPath>..\..\packages\Avalonia.Xaml.Behaviors.0.4.1-build328-alpha\lib\portable-windows8+net45\Avalonia.Xaml.Interactivity.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Serilog, Version=1.5.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
