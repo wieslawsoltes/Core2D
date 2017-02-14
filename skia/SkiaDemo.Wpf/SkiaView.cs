@@ -3,7 +3,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Core2D.Project;
 using Core2D.Renderer;
-using Core2D.Renderer.Presenters;
 using SkiaSharp;
 
 namespace SkiaDemo.Wpf

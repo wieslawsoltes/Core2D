@@ -4,7 +4,6 @@ using System;
 using Core2D.Interfaces;
 using Core2D.Project;
 using Core2D.Renderer;
-using Core2D.Renderer.Presenters;
 using SkiaSharp;
 
 namespace FileWriter.SvgSkiaSharp
