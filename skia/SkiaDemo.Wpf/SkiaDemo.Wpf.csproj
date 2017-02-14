@@ -92,12 +92,20 @@
       <HintPath>..\packages\Core2D.FileSystem.DotNetFx.0.2.0-build1347-alpha\lib\net45\FileSystem.DotNetFx.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="FileWriter.PdfSkiaSharp, Version=0.2.0.0, Culture=neutral, processorArchitecture=x86">
+      <HintPath>..\packages\Core2D.FileWriter.PdfSkiaSharp.0.2.0-build1347-alpha\lib\net45\FileWriter.PdfSkiaSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.2-beta2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Portable.Xaml, Version=0.15.0.0, Culture=neutral, PublicKeyToken=ba4456acace7dab7, processorArchitecture=MSIL">
       <HintPath>..\packages\Portable.Xaml.0.15.0\lib\portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10\Portable.Xaml.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Renderer.SkiaSharp, Version=0.2.0.0, Culture=neutral, processorArchitecture=x86">
+      <HintPath>..\packages\Core2D.Renderer.SkiaSharp.0.2.0-build1347-alpha\lib\net45\Renderer.SkiaSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Serializer.Newtonsoft, Version=0.2.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -160,21 +168,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="..\..\dependencies\FileWriter.PdfSkiaSharp\PdfExporter.cs">
-      <Link>FileWriter.PdfSkiaSharp\PdfExporter.cs</Link>
-    </Compile>
-    <Compile Include="..\..\dependencies\FileWriter.PdfSkiaSharp\PdfWriter.cs">
-      <Link>FileWriter.PdfSkiaSharp\PdfWriter.cs</Link>
-    </Compile>
-    <Compile Include="..\..\dependencies\Renderer.SkiaSharp\MatrixHelper.cs">
-      <Link>Renderer.SkiaSharp\MatrixHelper.cs</Link>
-    </Compile>
-    <Compile Include="..\..\dependencies\Renderer.SkiaSharp\SkiaRenderer.cs">
-      <Link>Renderer.SkiaSharp\SkiaRenderer.cs</Link>
-    </Compile>
-    <Compile Include="..\..\dependencies\Renderer.SkiaSharp\XPathGeometryConverter.cs">
-      <Link>Renderer.SkiaSharp\XPathGeometryConverter.cs</Link>
-    </Compile>
     <Compile Include="SkiaView.cs" />
     <Compile Include="SvgWindow.xaml.cs">
       <DependentUpon>SvgWindow.xaml</DependentUpon>
