@@ -181,7 +181,44 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\dependencies\FileSystem.DotNetFx\FileSystem.DotNetFx.csproj">
+      <Project>{d1f867f7-9029-480d-b1e1-b0be4658b182}</Project>
+      <Name>FileSystem.DotNetFx</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\dependencies\FileWriter.PdfSkiaSharp\FileWriter.PdfSkiaSharp.csproj">
+      <Project>{c934ba25-608b-42fa-b766-42efad7da6ff}</Project>
+      <Name>FileWriter.PdfSkiaSharp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\dependencies\Renderer.SkiaSharp\Renderer.SkiaSharp.csproj">
+      <Project>{9b8fa9bd-63be-4560-ba55-0d86aee1809e}</Project>
+      <Name>Renderer.SkiaSharp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\dependencies\Serializer.Newtonsoft\Serializer.Newtonsoft.csproj">
+      <Project>{11e61a53-13d5-4447-8d66-3f328bbfc30a}</Project>
+      <Name>Serializer.Newtonsoft</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\dependencies\Serializer.Xaml\Serializer.Xaml.csproj">
+      <Project>{1dca99ea-f8fe-4ddd-ab81-bf0380c1b33d}</Project>
+      <Name>Serializer.Xaml</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\dependencies\TextFieldReader.CsvHelper\TextFieldReader.CsvHelper.csproj">
+      <Project>{f215adf5-74c1-4e26-9045-b6bbda736092}</Project>
+      <Name>TextFieldReader.CsvHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\dependencies\TextFieldWriter.CsvHelper\TextFieldWriter.CsvHelper.csproj">
+      <Project>{ae7ff1b5-abe3-45bf-87cc-44ac580a666a}</Project>
+      <Name>TextFieldWriter.CsvHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\dependencies\Utilities.Wpf\Utilities.Wpf.csproj">
+      <Project>{e8d9036d-7e08-4405-b767-fb1e654ef66a}</Project>
+      <Name>Utilities.Wpf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Core2D\Core2D.csproj">
+      <Project>{4ee581b0-45f3-4d7e-beae-277abf5f3fdd}</Project>
+      <Name>Core2D</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="..\SkiaDemo.Shared\SkiaDemo.Shared.projitems" Label="Shared" />
   <Import Project="..\FileWriter.SvgSkiaSharp\FileWriter.SvgSkiaSharp.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
