@@ -65,31 +65,18 @@ Open up a terminal prompt and execute the bootstrapper script:
 $ ./build.sh --target "Default" --platform "AnyCPU" --configuration "Release"
 ```
 
-## NuGet
+## Dependencies
 
-Core2D core libraries are delivered as a NuGet package.
-
-You can find the packages here [NuGet](https://www.nuget.org/packages/Core2D/) or by using nightly build feed:
-* Add `https://www.myget.org/F/core2d-nightly/api/v2` to your package sources
-* Update your package using `Core2D` feed
-
-You can install the package like this:
-
-`Install-Package Core2D -Pre`
-
-### NuGet Packages
-
-| Package                             | Latest release                                                                                                                                            | Pre-release                                                                                                                                                  |
-|-------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Core2D                              | [![NuGet](https://img.shields.io/nuget/v/Core2D.svg)](https://www.nuget.org/packages/Core2D)                                                              | [![NuGet](https://img.shields.io/nuget/vpre/Core2D.svg)](https://www.nuget.org/packages/Core2D)                                                              |
-
-### MyGet Packages
-
-| Package                            | Latest release                                                                                                                                                    | Pre-release                                                                                                                                                          |
-|------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Core2D                             | [![MyGet](https://img.shields.io/myget/core2d-nightly/v/Core2D.svg?label=myget)](https://www.myget.org/gallery/core2d-nightly)                                    | [![MyGet](https://img.shields.io/myget/core2d-nightly/vpre/Core2D.svg?label=myget)](https://www.myget.org/gallery/core2d-nightly)                                    |
-
-### Package Dependencies
+* [Port of Windows UWP Xaml Behaviors for Avalonia Xaml.](https://github.com/XamlBehaviors/XamlBehaviors) Needed for Xaml Behaviors support.
+* [Pan and zoom control for WPF and Avalonia.](https://github.com/wieslawsoltes/MatrixPanAndZoomDemo) Needed for Pan and Zoom support.
+* [Portable .NET library for reading/writing xaml files.](https://github.com/cwensley/Portable.Xaml) Needed for Xaml support.
+* [xUnit.net unit testing tool for the .NET Framework.](https://github.com/xunit/xunit) Needed to run tests.
+* [GTK# for .NET](http://www.mono-project.com/download/#download-win) Needed for Gtk on Windows.
+* [.net dxf Reader-Writer](http://netdxf.codeplex.com/) Needed for `DXF` support. Run `git submodule update --init --recursive` in project directory.
+* [PDFsharp A .NET library for processing PDF](https://github.com/empira/PDFsharp) Needed for `PDF` support. Run `git submodule update --init --recursive` in project directory.
+* For building `Core2D` mirror repository is used for [.net dxf Reader-Writer](https://github.com/Core2D/netdxf).
+* For building `Core2D` mirror repository is used for [PDFsharp](https://github.com/Core2D/PDFsharp). 
+* `PDFsharp` core is used for `Avalonia` and non-windows builds and `PDFsharp-wpf` is used for WPF version (`PDFsharp` core does not implement `XGraphicsPath.AddArc` method.).
 
 * Common
   * System.Collections.Immutable
@@ -129,25 +116,12 @@ You can install the package like this:
   * Avalonia.Xaml.Behaviors
   * Avalonia.Controls.PanAndZoom
 
-### Package Sources
+## Package Sources
 
 * https://api.nuget.org/v3/index.json
 * https://www.myget.org/F/avalonia-ci/api/v2
 * https://www.myget.org/F/xamlbehaviors-nightly/api/v2
 * https://www.myget.org/F/panandzoom-nightly/api/v2
-
-## Dependencies
-
-* [Port of Windows UWP Xaml Behaviors for Avalonia Xaml.](https://github.com/XamlBehaviors/XamlBehaviors) Needed for Xaml Behaviors support.
-* [Pan and zoom control for WPF and Avalonia.](https://github.com/wieslawsoltes/MatrixPanAndZoomDemo) Needed for Pan and Zoom support.
-* [Portable .NET library for reading/writing xaml files.](https://github.com/cwensley/Portable.Xaml) Needed for Xaml support.
-* [xUnit.net unit testing tool for the .NET Framework.](https://github.com/xunit/xunit) Needed to run tests.
-* [GTK# for .NET](http://www.mono-project.com/download/#download-win) Needed for Gtk on Windows.
-* [.net dxf Reader-Writer](http://netdxf.codeplex.com/) Needed for `DXF` support. Run `git submodule update --init --recursive` in project directory.
-* [PDFsharp A .NET library for processing PDF](https://github.com/empira/PDFsharp) Needed for `PDF` support. Run `git submodule update --init --recursive` in project directory.
-* For building `Core2D` mirror repository is used for [.net dxf Reader-Writer](https://github.com/Core2D/netdxf).
-* For building `Core2D` mirror repository is used for [PDFsharp](https://github.com/Core2D/PDFsharp). 
-* `PDFsharp` core is used for `Avalonia` and non-windows builds and `PDFsharp-wpf` is used for WPF version (`PDFsharp` core does not implement `XGraphicsPath.AddArc` method.).
 
 ## SkiaSharp
 
@@ -181,7 +155,6 @@ copy /Y "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\redist\$(Platfor
 
 ## Resources
 
-* [Project website and API Reference.](http://core2d.github.io/)
 * [GitHub source code repository.](https://github.com/Core2D/Core2D)
 
 ## License
