@@ -14,6 +14,8 @@ var MSBuildSolution = "./Core2D.sln";
 var XBuildSolution = "./Core2D.mono.sln";
 var dirSuffix = platform + "/" + configuration;
 var dirSuffixSkia = (isPlatformAnyCPU ? "x86" : platform) + "/" + configuration;
+Func<IFileSystemInfo, bool> ExcludeSkia = i => !(i.Path.FullPath.IndexOf("Skia", StringComparison.OrdinalIgnoreCase) >= 0);
+Func<string, DirectoryPathCollection> GetSkiaDirectories = pattern => GetDirectories(pattern) - GetDirectories(pattern, ExcludeSkia);
 var buildDirs = 
     GetDirectories("./src/**/bin/" + dirSuffix, ExcludeSkia) + 
     GetSkiaDirectories("./src/**/bin/" + dirSuffixSkia) +
