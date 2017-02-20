@@ -11,12 +11,6 @@ A multi-platform data driven 2D diagram editor.
 
 Core2D is a multi-platform application for making data driven 2D diagrams.
 
-<a href='https://www.youtube.com/watch?v=P7G0kmX7EcU' target='_blank'>![](https://i.ytimg.com/vi/P7G0kmX7EcU/hqdefault.jpg)<a/>
-
-## Documentation
-
-You can read the latest documentation at [http://core2d.github.io/](http://core2d.github.io/).
-
 ## Data Formats
 
 * The project models is stored as `Json` in `zip` archive.
