@@ -5,16 +5,6 @@ platform:
 - x64
 configuration:
 - Release
-environment:
-  NUGET_API_KEY:
-    secure: iSkm19DNdKOLxxCvHiaKikWXy25ZMwGBKpv+EgEprliGl0qX5HtKohLmwJsLnx5O
-  NUGET_API_URL: https://www.nuget.org/api/v2/package
-  MYGET_API_KEY:
-    secure: xhYvrWYPHdNI+mQD+f4Zu3baL7fqW+nO/hYXJdN070Lej8wpa6gfrLi1NGtnQlAs
-  MYGET_API_URL: https://www.myget.org/F/core2d-nightly/api/v2/package
-  CHOCOLATEY_API_KEY:
-    secure: q7wW+4CR9k2KFifRGNEGpMuCQ5TPZLtwuQ8XLmNC1qP3jgHFzDU1KD+Z+MnFgUsW
-  CHOCOLATEY_API_URL: https://chocolatey.org/
 before_build:
 - cmd: git submodule update --init
 build_script:
@@ -28,6 +18,3 @@ notifications:
   on_build_status_changed: true
 artifacts:
   - path: artifacts\test-results\*.xml
-  - path: artifacts\nuget\*.nupkg
-  - path: artifacts\chocolatey\*.nupkg
-  - path: artifacts\zip\*.zip
