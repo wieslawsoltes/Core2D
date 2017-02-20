@@ -80,20 +80,8 @@
       <HintPath>..\packages\Autofac.4.3.0\lib\net45\Autofac.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Core2D, Version=0.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Core2D.0.2.0-build1347-alpha\lib\portable-windows8+net45\Core2D.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="CsvHelper, Version=3.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
       <HintPath>..\packages\CsvHelper.3.0.0-beta7\lib\net45\CsvHelper.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="FileSystem.DotNetFx, Version=0.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Core2D.FileSystem.DotNetFx.0.2.0-build1347-alpha\lib\net45\FileSystem.DotNetFx.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="FileWriter.PdfSkiaSharp, Version=0.2.0.0, Culture=neutral, processorArchitecture=x86">
-      <HintPath>..\packages\Core2D.FileWriter.PdfSkiaSharp.0.2.0-build1347-alpha\lib\net45\FileWriter.PdfSkiaSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -102,18 +90,6 @@
     </Reference>
     <Reference Include="Portable.Xaml, Version=0.15.0.0, Culture=neutral, PublicKeyToken=ba4456acace7dab7, processorArchitecture=MSIL">
       <HintPath>..\packages\Portable.Xaml.0.15.0\lib\portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10\Portable.Xaml.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Renderer.SkiaSharp, Version=0.2.0.0, Culture=neutral, processorArchitecture=x86">
-      <HintPath>..\packages\Core2D.Renderer.SkiaSharp.0.2.0-build1347-alpha\lib\net45\Renderer.SkiaSharp.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Serializer.Newtonsoft, Version=0.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Core2D.Serializer.Newtonsoft.0.2.0-build1347-alpha\lib\portable-windows8+net45\Serializer.Newtonsoft.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Serializer.Xaml, Version=0.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Core2D.Serializer.Xaml.0.2.0-build1347-alpha\lib\portable-windows8+net45\Serializer.Xaml.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="SkiaSharp, Version=1.56.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
@@ -146,18 +122,6 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="TextFieldReader.CsvHelper, Version=0.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Core2D.TextFieldReader.CsvHelper.0.2.0-build1347-alpha\lib\portable-windows8+net45\TextFieldReader.CsvHelper.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="TextFieldWriter.CsvHelper, Version=0.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Core2D.TextFieldWriter.CsvHelper.0.2.0-build1347-alpha\lib\portable-windows8+net45\TextFieldWriter.CsvHelper.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Utilities.Wpf, Version=0.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Core2D.Utilities.Wpf.0.2.0-build1347-alpha\lib\net45\Utilities.Wpf.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
