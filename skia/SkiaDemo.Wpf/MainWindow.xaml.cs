@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Forms.Integration;
 using System.Windows.Input;
 using Core2D.Editor;
 using Core2D.Editor.Input;
@@ -15,6 +16,7 @@ using Core2D.Shape;
 using Microsoft.Win32;
 using Renderer.SkiaSharp;
 using SkiaSharp;
+using SkiaSharp.Views.Desktop;
 using Utilities.Wpf;
 
 namespace SkiaDemo.Wpf
@@ -22,6 +24,9 @@ namespace SkiaDemo.Wpf
     public partial class MainWindow : Window
     {
         private readonly IServiceProvider _serviceProvider;
+        public ShapeRenderer _renderer;
+        public XContainer _container;
+        public ContainerPresenter _presenter;
         private ProjectEditor _projectEditor;
         private InputProcessor _inputProcessor;
         private SvgWindow _previewWindow;
@@ -58,25 +63,26 @@ namespace SkiaDemo.Wpf
                 _projectEditor.OnNewProject();
                 _projectEditor.Invalidate = () =>
                 {
-                    skiaView.InvalidateVisual();
+                    OnRefreshRequested(null, null);
                     if (_previewWindow.svgLive.IsChecked == true)
                     {
                         UpdateSvg();
                     }
                 };
 
-                skiaView.Renderer = _projectEditor.Renderers[0];
-                skiaView.Container = _projectEditor.Project.CurrentContainer;
-                skiaView.Presenter = new EditorPresenter();
-                skiaView.Focusable = true;
-                skiaView.Focus();
-                skiaView.InvalidateVisual();
+                _renderer = _projectEditor.Renderers[0];
+                _container = _projectEditor.Project.CurrentContainer;
+                _presenter = new EditorPresenter();
+
+                canvas.Focusable = true;
+                canvas.Focus();
+                OnRefreshRequested(null, null);
 
                 _inputProcessor = new InputProcessor(
                     new WpfInputSource(
-                        skiaView,
-                        skiaView,
-                        skiaView.FixPointOffset),
+                        canvas,
+                        canvas,
+                        FixPointOffset),
                     _projectEditor);
             };
 
@@ -211,6 +217,49 @@ namespace SkiaDemo.Wpf
             };
         }
 
+        public Point FixPointOffset(Point point)
+        {
+            var matrix = PresentationSource.FromVisual(this).CompositionTarget.TransformToDevice;
+            double offsetX = (this.canvas.ActualWidth * matrix.M11 - _container.Width) / 2.0;
+            double offsetY = (this.canvas.ActualHeight * matrix.M22 - _container.Height) / 2.0;
+            return new Point(point.X - offsetX, point.Y - offsetY);
+        }
+
+        private void OnGLControlHost(object sender, EventArgs e)
+        {
+            var glControl = new SKGLControl();
+            glControl.PaintSurface += OnPaintGL;
+            glControl.Dock = System.Windows.Forms.DockStyle.Fill;
+
+            var host = (WindowsFormsHost)sender;
+            host.Child = glControl;
+        }
+
+        private void OnPaintGL(object sender, SKPaintGLSurfaceEventArgs e)
+        {
+            OnPaintSurface(e.Surface.Canvas, e.RenderTarget.Width, e.RenderTarget.Height);
+        }
+
+        private void OnPaintCanvas(object sender, SKPaintSurfaceEventArgs e)
+        {
+            OnPaintSurface(e.Surface.Canvas, e.Info.Width, e.Info.Height);
+        }
+
+        private void OnRefreshRequested(object sender, EventArgs e)
+        {
+            canvas.InvalidateVisual();
+            glhost.Child?.Invalidate();
+        }
+
+        private void OnPaintSurface(SKCanvas canvas, int width, int height)
+        {
+            var matrix = PresentationSource.FromVisual(this).CompositionTarget.TransformToDevice;
+            double offsetX = (this.canvas.ActualWidth * matrix.M11 - _container?.Width ?? 0) / 2.0;
+            double offsetY = (this.canvas.ActualHeight * matrix.M22 - _container?.Height ?? 0) / 2.0;
+            canvas.Clear();
+            _presenter?.Render(canvas, _renderer, _container, offsetX, offsetY);
+        }
+
         private void UpdateSvg()
         {
             bool exportPresenter = _previewWindow.svgExport.IsChecked == true;
@@ -259,7 +308,7 @@ namespace SkiaDemo.Wpf
         private void NewProject()
         {
             _projectEditor.OnNewProject();
-            skiaView.Container = _projectEditor.Project.CurrentContainer;
+            _container = _projectEditor.Project.CurrentContainer;
         }
 
         private void OpenProject()
@@ -274,8 +323,8 @@ namespace SkiaDemo.Wpf
             if (dlg.ShowDialog(this) == true)
             {
                 _projectEditor.OnOpen(dlg.FileName);
-                skiaView.Container = _projectEditor.Project.CurrentContainer;
-                skiaView.InvalidateVisual();
+                _container = _projectEditor.Project.CurrentContainer;
+                OnRefreshRequested(null, null);
             }
         }
 
