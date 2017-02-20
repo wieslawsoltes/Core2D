@@ -2,41 +2,10 @@
 
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Core2D/Core2D?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
+[![Build status](https://ci.appveyor.com/api/projects/status/7k1e0voeit7od9bw/branch/master?svg=true)](https://ci.appveyor.com/project/wieslawsoltes/core2d/branch/master)
+[![Build Status](https://travis-ci.org/Core2D/Core2D.svg?branch=master)](https://travis-ci.org/Core2D/Core2D)
+
 A multi-platform data driven 2D diagram editor.
-
-| Build Server                | Platform     | Status                                                                                                                                                                     |
-|-----------------------------|--------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| AppVeyor                    | Windows      | [![Build status](https://ci.appveyor.com/api/projects/status/7k1e0voeit7od9bw/branch/master?svg=true)](https://ci.appveyor.com/project/wieslawsoltes/core2d/branch/master) |
-| Travis                      | Linux / OS X | [![Build Status](https://travis-ci.org/Core2D/Core2D.svg?branch=master)](https://travis-ci.org/Core2D/Core2D)                                                              |
-
-## Install
-
-| Package                     | Latest release                                                                                                                              | Pre-release                                                                                                                                  |
-|-----------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
-| Core2D-Avalonia-Cairo       | [![Chocolatey](https://img.shields.io/chocolatey/v/Core2D-Avalonia-Cairo.svg)](https://chocolatey.org/packages/Core2D-Avalonia-Cairo)       | [![Chocolatey](https://img.shields.io/chocolatey/vpre/Core2D-Avalonia-Cairo.svg)](https://chocolatey.org/packages/Core2D-Avalonia-Cairo)    | 
-| Core2D-Avalonia-Direct2D    | [![Chocolatey](https://img.shields.io/chocolatey/v/Core2D-Avalonia-Direct2D.svg)](https://chocolatey.org/packages/Core2D-Avalonia-Direct2D) | [![Chocolatey](https://img.shields.io/chocolatey/vpre/Core2D-Avalonia-Direct2D.svg)](https://chocolatey.org/packages/Core2D-Avalonia-Direct2D) |
-| Core2D-Avalonia-Skia        | [![Chocolatey](https://img.shields.io/chocolatey/v/Core2D-Avalonia-Skia.svg)](https://chocolatey.org/packages/Core2D-Avalonia-Skia)         | [![Chocolatey](https://img.shields.io/chocolatey/vpre/Core2D-Avalonia-Skia.svg)](https://chocolatey.org/packages/Core2D-Avalonia-Skia)         |
-| Core2D-Wpf                  | [![Chocolatey](https://img.shields.io/chocolatey/v/Core2D-Wpf.svg)](https://chocolatey.org/packages/Core2D-Wpf)                             | [![Chocolatey](https://img.shields.io/chocolatey/vpre/Core2D-Wpf.svg)](https://chocolatey.org/packages/Core2D-Wpf)                             |
-
-## Table of Contents
-
-1. [About](https://github.com/Core2D/Core2D#about)
-2. [Documentation](https://github.com/Core2D/Core2D#documentation)
-3. [Data Formats](https://github.com/Core2D/Core2D#data-formats)
-4. [Supported Platforms](https://github.com/Core2D/Core2D#supported-platforms)
-5. [Building Core2D](https://github.com/Core2D/Core2D#building-core2d)
-    - [Build using IDE](https://github.com/Core2D/Core2D#build-using-ide)
-    - [Build on Windows using script](https://github.com/Core2D/Core2D#build-on-windows-using-script)
-    - [Build on Linux/OSX using script](https://github.com/Core2D/Core2D#build-on-linuxosx-using-script)
-6. [NuGet](https://github.com/Core2D/Core2D#nuget)
-    - [NuGet Packages](https://github.com/Core2D/Core2D#nuget-packages)
-    - [MyGet Packages](https://github.com/Core2D/Core2D#myget-packages)
-    - [Package Dependencies](https://github.com/Core2D/Core2D#package-dependencies)
-    - [Package Sources](https://github.com/Core2D/Core2D#package-sources)
-7. [Dependencies](https://github.com/Core2D/Core2D#dependencies)
-8. [SkiaSharp](https://github.com/Core2D/Core2D#skiasharp)
-9. [Resources](https://github.com/Core2D/Core2D#resources)
-10. [License](https://github.com/Core2D/Core2D#license)
 
 ## About
 
