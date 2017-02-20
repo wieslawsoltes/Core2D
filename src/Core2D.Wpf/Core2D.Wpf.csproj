@@ -576,10 +576,6 @@
       <Project>{5c5a31b5-8f76-42e7-aea8-55b32ca641fa}</Project>
       <Name>FileWriter.Pdf-wpf</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\dependencies\FileWriter.Vdx\FileWriter.Vdx.csproj">
-      <Project>{c8c7b0ef-4fb1-4fef-a6aa-1ff81589b716}</Project>
-      <Name>FileWriter.Vdx</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\dependencies\Log.Trace\Log.Trace.csproj">
       <Project>{68a36926-df55-4f05-9f89-b9ab1463227e}</Project>
       <Name>Log.Trace</Name>
