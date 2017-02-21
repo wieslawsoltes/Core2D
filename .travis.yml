@@ -13,3 +13,11 @@ matrix:
   fast_finish: true
 script:
   - ./build.sh --target "Travis" --platform "$PLATFORM" --configuration "$CONFIGURATION"
+notifications:
+  email: false
+  webhooks:
+    urls:
+      - https://webhooks.gitter.im/e/6608b67ed885b53fcc02
+    on_success: change
+    on_failure: always
+    on_start: never
