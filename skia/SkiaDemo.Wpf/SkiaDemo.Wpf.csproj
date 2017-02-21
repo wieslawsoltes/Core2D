@@ -150,8 +150,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="FileWriter\SvgSkiaSharp\SvgExporter.cs" />
-    <Compile Include="FileWriter\SvgSkiaSharp\SvgWriter.cs" />
     <Compile Include="Importers\Win32ImageImporter.cs" />
     <Compile Include="Locator\ServiceProvider.cs" />
     <Compile Include="Modules\AppModule.cs" />
@@ -215,6 +213,10 @@
     <ProjectReference Include="..\..\dependencies\FileWriter.PdfSkiaSharp\FileWriter.PdfSkiaSharp.csproj">
       <Project>{c934ba25-608b-42fa-b766-42efad7da6ff}</Project>
       <Name>FileWriter.PdfSkiaSharp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\dependencies\FileWriter.SvgSkiaSharp\FileWriter.SvgSkiaSharp.csproj">
+      <Project>{e2827255-924c-456e-8049-14e333c6fd18}</Project>
+      <Name>FileWriter.SvgSkiaSharp</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\dependencies\Renderer.SkiaSharp\Renderer.SkiaSharp.csproj">
       <Project>{9b8fa9bd-63be-4560-ba55-0d86aee1809e}</Project>
