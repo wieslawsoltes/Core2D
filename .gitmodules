@@ -1,6 +1,6 @@
 [submodule "dependencies/netDxf"]
 	path = dependencies/netDxf
-	url = https://github.com/Core2D/netdxf.git
+	url = https://github.com/wieslawsoltes/netdxf.git
 [submodule "dependencies/PDFsharp"]
 	path = dependencies/PDFsharp
-	url = https://github.com/Core2D/PDFsharp.git
+	url = https://github.com/wieslawsoltes/PDFsharp.git
