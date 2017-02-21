@@ -62,8 +62,8 @@ $ ./build.sh --target "Default" --platform "AnyCPU" --configuration "Release"
 
 ## Dependencies
 
-* [Port of Windows UWP Xaml Behaviors for Avalonia Xaml.](https://github.com/XamlBehaviors/XamlBehaviors) Needed for Xaml Behaviors support.
-* [Pan and zoom control for WPF and Avalonia.](https://github.com/wieslawsoltes/MatrixPanAndZoomDemo) Needed for Pan and Zoom support.
+* [Port of Windows UWP Xaml Behaviors for Avalonia Xaml.](https://github.com/wieslawsoltes/XamlBehaviors) Needed for Xaml Behaviors support.
+* [Pan and zoom control for WPF and Avalonia.](https://github.com/wieslawsoltes/PanAndZoom) Needed for Pan and Zoom support.
 * [Portable .NET library for reading/writing xaml files.](https://github.com/cwensley/Portable.Xaml) Needed for Xaml support.
 * [xUnit.net unit testing tool for the .NET Framework.](https://github.com/xunit/xunit) Needed to run tests.
 * [GTK# for .NET](http://www.mono-project.com/download/#download-win) Needed for Gtk on Windows.
