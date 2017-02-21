@@ -97,6 +97,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.Avalonia", "src\Core
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptRunner.Roslyn", "dependencies\ScriptRunner.Roslyn\ScriptRunner.Roslyn.csproj", "{352C23CD-8A6D-4C91-9FD2-FC35ECBC8AFE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileWriter.SvgSkiaSharp", "dependencies\FileWriter.SvgSkiaSharp\FileWriter.SvgSkiaSharp.csproj", "{E2827255-924C-456E-8049-14E333C6FD18}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		src\Core2D.Shared\Core2D.Shared.projitems*{0eec62cc-3cff-4185-88d6-ba107f0d8ff4}*SharedItemsImports = 4
@@ -124,6 +126,7 @@ Global
 		src\Core2D.Shared\Core2D.Shared.projitems*{d1f867f7-9029-480d-b1e1-b0be4658b182}*SharedItemsImports = 4
 		src\Core2D.Shared\Core2D.Shared.projitems*{d40b3bcd-0a26-40bb-960b-9464d248c934}*SharedItemsImports = 4
 		src\Core2D.Shared\Core2D.Shared.projitems*{e05f3f7e-2176-43dc-90bb-f5c66cfdb12f}*SharedItemsImports = 4
+		src\Core2D.Shared\Core2D.Shared.projitems*{e2827255-924c-456e-8049-14e333c6fd18}*SharedItemsImports = 4
 		src\Core2D.Shared\Core2D.Shared.projitems*{e8d9036d-7e08-4405-b767-fb1e654ef66a}*SharedItemsImports = 4
 		src\Core2D.Shared\Core2D.Shared.projitems*{ec0efa51-83f0-4439-be9f-faebd3418c94}*SharedItemsImports = 4
 		src\Core2D.Shared\Core2D.Shared.projitems*{f215adf5-74c1-4e26-9045-b6bbda736092}*SharedItemsImports = 4
@@ -533,6 +536,18 @@ Global
 		{352C23CD-8A6D-4C91-9FD2-FC35ECBC8AFE}.Release|x64.Build.0 = Release|x64
 		{352C23CD-8A6D-4C91-9FD2-FC35ECBC8AFE}.Release|x86.ActiveCfg = Release|x86
 		{352C23CD-8A6D-4C91-9FD2-FC35ECBC8AFE}.Release|x86.Build.0 = Release|x86
+		{E2827255-924C-456E-8049-14E333C6FD18}.Debug|AnyCPU.ActiveCfg = Debug|x86
+		{E2827255-924C-456E-8049-14E333C6FD18}.Debug|AnyCPU.Build.0 = Debug|x86
+		{E2827255-924C-456E-8049-14E333C6FD18}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E2827255-924C-456E-8049-14E333C6FD18}.Debug|x64.Build.0 = Debug|Any CPU
+		{E2827255-924C-456E-8049-14E333C6FD18}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E2827255-924C-456E-8049-14E333C6FD18}.Debug|x86.Build.0 = Debug|Any CPU
+		{E2827255-924C-456E-8049-14E333C6FD18}.Release|AnyCPU.ActiveCfg = Release|x86
+		{E2827255-924C-456E-8049-14E333C6FD18}.Release|AnyCPU.Build.0 = Release|x86
+		{E2827255-924C-456E-8049-14E333C6FD18}.Release|x64.ActiveCfg = Release|Any CPU
+		{E2827255-924C-456E-8049-14E333C6FD18}.Release|x64.Build.0 = Release|Any CPU
+		{E2827255-924C-456E-8049-14E333C6FD18}.Release|x86.ActiveCfg = Release|Any CPU
+		{E2827255-924C-456E-8049-14E333C6FD18}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -572,5 +587,6 @@ Global
 		{6DFDDEC8-933F-4B94-BEC5-933ED73E7D70} = {8756F874-0C1B-4AB8-83E0-0BEDA782D212}
 		{27CD58AE-D6D4-42AD-A315-2F1CB63454AF} = {BC6BAFE6-1735-4549-A7CC-819274780B38}
 		{352C23CD-8A6D-4C91-9FD2-FC35ECBC8AFE} = {9DA997E2-E367-481C-B48A-278274034A26}
+		{E2827255-924C-456E-8049-14E333C6FD18} = {9DA997E2-E367-481C-B48A-278274034A26}
 	EndGlobalSection
 EndGlobal
