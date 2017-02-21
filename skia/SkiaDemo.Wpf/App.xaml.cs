@@ -35,42 +35,6 @@ namespace SkiaDemo.Wpf
         }
     }
 
-    class LocatorModule : Module
-    {
-        protected override void Load(ContainerBuilder builder)
-        {
-            builder.RegisterType<ServiceProvider>().As<IServiceProvider>().InstancePerLifetimeScope();
-        }
-    }
-
-    class CoreModule : Module
-    {
-        protected override void Load(ContainerBuilder builder)
-        {
-            builder.RegisterType<ProjectEditor>().As<ProjectEditor>().InstancePerLifetimeScope();
-            builder.RegisterType<ProjectFactory>().As<IProjectFactory>().InstancePerLifetimeScope();
-            builder.RegisterType<ShapeFactory>().As<IShapeFactory>().InstancePerLifetimeScope();
-            builder.RegisterAssemblyTypes(typeof(ToolBase).Assembly).As<ToolBase>().AsSelf().InstancePerLifetimeScope();
-            builder.RegisterAssemblyTypes(typeof(PathToolBase).Assembly).As<PathToolBase>().AsSelf().InstancePerLifetimeScope();
-        }
-    }
-
-    class DependenciesModule : Module
-    {
-        protected override void Load(ContainerBuilder builder)
-        {
-            builder.RegisterType<DotNetFxFileSystem>().As<IFileSystem>().InstancePerLifetimeScope();
-            builder.RegisterType<NewtonsoftJsonSerializer>().As<IJsonSerializer>().InstancePerLifetimeScope();
-            builder.RegisterType<PortableXamlSerializer>().As<IXamlSerializer>().InstancePerLifetimeScope();
-            builder.RegisterType<PdfWriter>().As<IFileWriter>().InstancePerLifetimeScope();
-            builder.RegisterType<SvgWriter>().As<IFileWriter>().InstancePerLifetimeScope();
-            builder.RegisterType<CsvHelperReader>().As<ITextFieldReader<XDatabase>>().InstancePerLifetimeScope();
-            builder.RegisterType<CsvHelperWriter>().As<ITextFieldWriter<XDatabase>>().InstancePerLifetimeScope();
-            builder.Register<ShapeRenderer>((c) => new SkiaRenderer(true, 96.0)).InstancePerDependency();
-            builder.RegisterType<WpfTextClipboard>().As<ITextClipboard>().InstancePerLifetimeScope();
-        }
-    }
-
     class Win32ImageImporter : IImageImporter
     {
         private readonly IServiceProvider _serviceProvider;
@@ -94,18 +58,31 @@ namespace SkiaDemo.Wpf
         }
     }
 
-    class AppModule : Module
+    class WpfSkiaModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {
+            // Locator
+            builder.RegisterType<ServiceProvider>().As<IServiceProvider>().InstancePerLifetimeScope();
+            // Core
+            builder.RegisterType<ProjectEditor>().As<ProjectEditor>().InstancePerLifetimeScope();
+            builder.RegisterType<ProjectFactory>().As<IProjectFactory>().InstancePerLifetimeScope();
+            builder.RegisterType<ShapeFactory>().As<IShapeFactory>().InstancePerLifetimeScope();
+            builder.RegisterAssemblyTypes(typeof(ToolBase).Assembly).As<ToolBase>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterAssemblyTypes(typeof(PathToolBase).Assembly).As<PathToolBase>().AsSelf().InstancePerLifetimeScope();
+            // Dependencies
+            builder.RegisterType<DotNetFxFileSystem>().As<IFileSystem>().InstancePerLifetimeScope();
+            builder.RegisterType<NewtonsoftJsonSerializer>().As<IJsonSerializer>().InstancePerLifetimeScope();
+            builder.RegisterType<PortableXamlSerializer>().As<IXamlSerializer>().InstancePerLifetimeScope();
+            builder.RegisterType<PdfWriter>().As<IFileWriter>().InstancePerLifetimeScope();
+            builder.RegisterType<SvgWriter>().As<IFileWriter>().InstancePerLifetimeScope();
+            builder.RegisterType<CsvHelperReader>().As<ITextFieldReader<XDatabase>>().InstancePerLifetimeScope();
+            builder.RegisterType<CsvHelperWriter>().As<ITextFieldWriter<XDatabase>>().InstancePerLifetimeScope();
+            builder.Register<ShapeRenderer>((c) => new SkiaRenderer(true, 96.0)).InstancePerDependency();
+            builder.RegisterType<WpfTextClipboard>().As<ITextClipboard>().InstancePerLifetimeScope();
+            // App
             builder.RegisterType<Win32ImageImporter>().As<IImageImporter>().InstancePerLifetimeScope();
-        }
-    }
-
-    class ViewModule : Module
-    {
-        protected override void Load(ContainerBuilder builder)
-        {
+            // View
             builder.RegisterType<MainWindow>().As<MainWindow>().InstancePerLifetimeScope();
         }
     }
