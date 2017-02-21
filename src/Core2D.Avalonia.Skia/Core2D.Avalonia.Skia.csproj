@@ -190,6 +190,10 @@
       <Project>{c934ba25-608b-42fa-b766-42efad7da6ff}</Project>
       <Name>FileWriter.PdfSkiaSharp</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\dependencies\FileWriter.SvgSkiaSharp\FileWriter.SvgSkiaSharp.csproj">
+      <Project>{E2827255-924C-456E-8049-14E333C6FD18}</Project>
+      <Name>FileWriter.SvgSkiaSharp</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\dependencies\Log.Trace\Log.Trace.csproj">
       <Project>{68a36926-df55-4f05-9f89-b9ab1463227e}</Project>
       <Name>Log.Trace</Name>

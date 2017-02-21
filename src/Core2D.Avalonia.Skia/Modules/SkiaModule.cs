@@ -6,6 +6,7 @@ using Core2D.Interfaces;
 using FileSystem.DotNetFx;
 using FileWriter.Dxf;
 using FileWriter.PdfSkiaSharp;
+using FileWriter.SvgSkiaSharp;
 using Log.Trace;
 using ScriptRunner.Roslyn;
 using Serializer.Newtonsoft;
@@ -29,6 +30,7 @@ namespace Core2D.Avalonia.Skia.Modules
             builder.RegisterType<NewtonsoftJsonSerializer>().As<IJsonSerializer>().InstancePerLifetimeScope();
             builder.RegisterType<PortableXamlSerializer>().As<IXamlSerializer>().InstancePerLifetimeScope();
             builder.RegisterType<PdfWriter>().As<IFileWriter>().InstancePerLifetimeScope();
+            builder.RegisterType<SvgWriter>().As<IFileWriter>().InstancePerLifetimeScope();
             builder.RegisterType<DxfWriter>().As<IFileWriter>().InstancePerLifetimeScope();
             builder.RegisterType<CsvHelperReader>().As<ITextFieldReader<XDatabase>>().InstancePerLifetimeScope();
             builder.RegisterType<CsvHelperWriter>().As<ITextFieldWriter<XDatabase>>().InstancePerLifetimeScope();
