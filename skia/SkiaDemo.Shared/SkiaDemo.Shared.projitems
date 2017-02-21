@@ -8,10 +8,4 @@
   <PropertyGroup Label="Configuration">
     <Import_RootNamespace>SkiaDemo.Shared</Import_RootNamespace>
   </PropertyGroup>
-  <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)Locator\ServiceProvider.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Modules\CoreModule.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Modules\DependenciesModule.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Modules\LocatorModule.cs" />
-  </ItemGroup>
 </Project>

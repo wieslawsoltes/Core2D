@@ -5,10 +5,6 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkiaDemo.Wpf", "SkiaDemo.Wpf\SkiaDemo.Wpf.csproj", "{BDE5F939-C291-44E3-9FE3-939D85341BB6}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SkiaDemo.Shared", "SkiaDemo.Shared\SkiaDemo.Shared.shproj", "{418EAF2D-F3D1-4A66-9D9C-1729CC0A22CC}"
-EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "FileWriter.SvgSkiaSharp", "FileWriter.SvgSkiaSharp\FileWriter.SvgSkiaSharp.shproj", "{A80A1BD3-8FB4-4590-813A-FAD01DD2F977}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dependencies", "dependencies", "{E674EB24-2FD4-4165-8A28-981642572C94}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D", "..\src\Core2D\Core2D.csproj", "{4EE581B0-45F3-4D7E-BEAE-277ABF5F3FDD}"
@@ -33,13 +29,9 @@ Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		..\src\Core2D.Shared\Core2D.Shared.projitems*{11e61a53-13d5-4447-8d66-3f328bbfc30a}*SharedItemsImports = 4
 		..\src\Core2D.Shared\Core2D.Shared.projitems*{1dca99ea-f8fe-4ddd-ab81-bf0380c1b33d}*SharedItemsImports = 4
-		SkiaDemo.Shared\SkiaDemo.Shared.projitems*{418eaf2d-f3d1-4a66-9d9c-1729cc0a22cc}*SharedItemsImports = 13
 		..\src\Core2D.Shared\Core2D.Shared.projitems*{4ee581b0-45f3-4d7e-beae-277abf5f3fdd}*SharedItemsImports = 4
 		..\src\Core2D.Shared\Core2D.Shared.projitems*{9b8fa9bd-63be-4560-ba55-0d86aee1809e}*SharedItemsImports = 4
-		FileWriter.SvgSkiaSharp\FileWriter.SvgSkiaSharp.projitems*{a80a1bd3-8fb4-4590-813a-fad01dd2f977}*SharedItemsImports = 13
 		..\src\Core2D.Shared\Core2D.Shared.projitems*{ae7ff1b5-abe3-45bf-87cc-44ac580a666a}*SharedItemsImports = 4
-		FileWriter.SvgSkiaSharp\FileWriter.SvgSkiaSharp.projitems*{bde5f939-c291-44e3-9fe3-939d85341bb6}*SharedItemsImports = 4
-		SkiaDemo.Shared\SkiaDemo.Shared.projitems*{bde5f939-c291-44e3-9fe3-939d85341bb6}*SharedItemsImports = 4
 		..\src\Core2D.Shared\Core2D.Shared.projitems*{c934ba25-608b-42fa-b766-42efad7da6ff}*SharedItemsImports = 4
 		..\src\Core2D.Shared\Core2D.Shared.projitems*{d1f867f7-9029-480d-b1e1-b0be4658b182}*SharedItemsImports = 4
 		..\src\Core2D.Shared\Core2D.Shared.projitems*{e8d9036d-7e08-4405-b767-fb1e654ef66a}*SharedItemsImports = 4
