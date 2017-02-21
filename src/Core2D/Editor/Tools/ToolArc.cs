@@ -2,9 +2,10 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using Core2D.Editor.Tools.Selection;
-using Core2D.Math.Arc;
+using Core2D.Spatial.Arc;
 using Core2D.Shape;
 using Core2D.Shapes;
+using Core2D.Spatial;
 
 namespace Core2D.Editor.Tools
 {
@@ -278,7 +279,11 @@ namespace Core2D.Editor.Tools
             base.Finalize(shape);
 
             var arc = shape as XArc;
-            var a = WpfArc.FromXArc(arc);
+            var a = new WpfArc(
+                Point2.FromXY(arc.Point1.X, arc.Point1.Y),
+                Point2.FromXY(arc.Point2.X, arc.Point2.Y),
+                Point2.FromXY(arc.Point3.X, arc.Point3.Y),
+                Point2.FromXY(arc.Point4.X, arc.Point4.Y));
 
             if (!_connectedPoint3)
             {

@@ -10,12 +10,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Core2D.Data;
 using Core2D.Data.Database;
-using Core2D.Math.Arc;
+using Core2D.Spatial.Arc;
 using Core2D.Path;
-using Core2D.Project;
 using Core2D.Renderer;
 using Core2D.Shapes;
 using Core2D.Style;
+using Core2D.Spatial;
 
 namespace Renderer.Wpf
 {
@@ -579,7 +579,11 @@ namespace Renderer.Wpf
                 _styleCache.Set(style, Tuple.Create(fill, stroke));
             }
 
-            var a = WpfArc.FromXArc(arc);
+            var a = new WpfArc(
+                Point2.FromXY(arc.Point1.X, arc.Point1.Y),
+                Point2.FromXY(arc.Point2.X, arc.Point2.Y),
+                Point2.FromXY(arc.Point3.X, arc.Point3.Y),
+                Point2.FromXY(arc.Point4.X, arc.Point4.Y));
 
             PathGeometry pg = _arcCache.Get(arc);
             if (pg != null)

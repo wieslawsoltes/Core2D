@@ -5,8 +5,8 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using Core2D.Data;
 using Core2D.Data.Database;
-using Core2D.Math;
-using Core2D.Math.Arc;
+using Core2D.Spatial;
+using Core2D.Spatial.Arc;
 using Core2D.Renderer;
 using Core2D.Shape;
 using Core2D.Shapes;
@@ -455,7 +455,11 @@ namespace Renderer.SkiaSharp
             using (SKPaint pen = ToSKPaintPen(arc.Style, _scaleToPage, _sourceDpi, _targetDpi))
             using (var path = new SKPath())
             {
-                var a = GdiArc.FromXArc(arc);
+                var a = new GdiArc(
+                    Point2.FromXY(arc.Point1.X, arc.Point1.Y),
+                    Point2.FromXY(arc.Point2.X, arc.Point2.Y),
+                    Point2.FromXY(arc.Point3.X, arc.Point3.Y),
+                    Point2.FromXY(arc.Point4.X, arc.Point4.Y));
                 var rect = new SKRect(
                     _scaleToPage(a.X + dx),
                     _scaleToPage(a.Y + dy),

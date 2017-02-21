@@ -2,9 +2,9 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System.Collections.Generic;
 using System.Linq;
-using Core2D.Math;
-using Core2D.Math.ConvexHull;
-using Core2D.Math.Sat;
+using Core2D.Spatial;
+using Core2D.Spatial.ConvexHull;
+using Core2D.Spatial.Sat;
 using Core2D.Shapes;
 using static System.Math;
 
@@ -116,10 +116,11 @@ namespace Core2D.Editor.Bounds
         /// <returns></returns>
         public static bool Contains(XLine line, Vector2 v, double threshold, double dx, double dy)
         {
-            var a = new Vector2(line.Start.X + dx, line.Start.Y + dy);
-            var b = new Vector2(line.End.X + dx, line.End.Y + dy);
-            var nearest = MathHelpers.NearestPointOnLine(a, b, v);
-            double distance = MathHelpers.Distance(v.X, v.Y, nearest.X, nearest.Y);
+            var a = new Point2(line.Start.X + dx, line.Start.Y + dy);
+            var b = new Point2(line.End.X + dx, line.End.Y + dy);
+            var target = new Point2(v.X, v.Y);
+            var nearest = target.NearestOnLine(a, b);
+            double distance = target.DistanceTo(nearest);
             return distance < threshold;
         }
 
@@ -150,7 +151,12 @@ namespace Core2D.Editor.Bounds
         /// <returns></returns>
         public static Rect2 GetRectangleBounds(XRectangle rectangle, double dx, double dy)
         {
-            return Rect2.Create(rectangle.TopLeft, rectangle.BottomRight, dx, dy);
+            return Rect2.FromPoints(
+                rectangle.TopLeft.X,
+                rectangle.TopLeft.Y,
+                rectangle.BottomRight.X,
+                rectangle.BottomRight.Y,
+                dx, dy);
         }
 
         /// <summary>
@@ -162,7 +168,12 @@ namespace Core2D.Editor.Bounds
         /// <returns></returns>
         public static Rect2 GetEllipseBounds(XEllipse ellipse, double dx, double dy)
         {
-            return Rect2.Create(ellipse.TopLeft, ellipse.BottomRight, dx, dy);
+            return Rect2.FromPoints(
+                ellipse.TopLeft.X,
+                ellipse.TopLeft.Y,
+                ellipse.BottomRight.X,
+                ellipse.BottomRight.Y,
+                dx, dy);
         }
 
         /// <summary>
@@ -200,7 +211,12 @@ namespace Core2D.Editor.Bounds
         /// <returns></returns>
         public static Rect2 GetTextBounds(XText text, double dx, double dy)
         {
-            return Rect2.Create(text.TopLeft, text.BottomRight, dx, dy);
+            return Rect2.FromPoints(
+                text.TopLeft.X,
+                text.TopLeft.Y,
+                text.BottomRight.X,
+                text.BottomRight.Y,
+                dx, dy);
         }
 
         /// <summary>
@@ -212,7 +228,12 @@ namespace Core2D.Editor.Bounds
         /// <returns></returns>
         public static Rect2 GetImageBounds(XImage image, double dx, double dy)
         {
-            return Rect2.Create(image.TopLeft, image.BottomRight, dx, dy);
+            return Rect2.FromPoints(
+                image.TopLeft.X,
+                image.TopLeft.Y,
+                image.BottomRight.X,
+                image.BottomRight.Y,
+                dx, dy);
         }
     }
 }

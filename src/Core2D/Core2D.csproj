@@ -312,18 +312,6 @@
     <Compile Include="Interfaces\ITextFieldWriter.cs" />
     <Compile Include="Interfaces\IJsonSerializer.cs" />
     <Compile Include="Interfaces\IFileSystem.cs" />
-    <Compile Include="Math\Arc\GdiArc.cs" />
-    <Compile Include="Math\Arc\WpfArc.cs" />
-    <Compile Include="Math\ConvexHull\MonotoneChain.cs" />
-    <Compile Include="Math\Point2.cs" />
-    <Compile Include="Math\Polygon2.cs" />
-    <Compile Include="Math\Rect2.cs" />
-    <Compile Include="Math\Size2.cs" />
-    <Compile Include="Math\Vector2.cs" />
-    <Compile Include="Math\MathHelpers.cs" />
-    <Compile Include="Math\Sat\MinimumTranslationVector.cs" />
-    <Compile Include="Math\Sat\Projection.cs" />
-    <Compile Include="Math\Sat\SeparatingAxisTheorem.cs" />
     <Compile Include="Path\Parser\SvgToXPathGeometryParser.cs" />
     <Compile Include="Path\Parser\XPathGeometryParser.cs" />
     <Compile Include="Path\Segments\XArcSegment.cs" />
@@ -423,7 +411,12 @@
       <Private>True</Private>
     </Reference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Core2D.Spatial\Core2D.Spatial.csproj">
+      <Project>{bf27e596-01f5-45af-99fb-703c004d27a5}</Project>
+      <Name>Core2D.Spatial</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="..\Core2D.Shared\Core2D.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

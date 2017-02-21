@@ -6,8 +6,8 @@ using System.Collections.Immutable;
 using System.Diagnostics;
 using Core2D.Data;
 using Core2D.Data.Database;
-using Core2D.Math;
-using Core2D.Math.Arc;
+using Core2D.Spatial;
+using Core2D.Spatial.Arc;
 using Core2D.Renderer;
 using Core2D.Shape;
 using Core2D.Shapes;
@@ -124,7 +124,7 @@ namespace Renderer.Avalonia
 
         private static Rect2 CreateRect(XPoint tl, XPoint br, double dx, double dy)
         {
-            return Rect2.Create(tl, br, dx, dy);
+            return Rect2.FromPoints(tl.X, tl.Y, br.X, br.Y, dx, dy);
         }
 
         private static void DrawLineInternal(AM.DrawingContext dc, AM.Pen pen, bool isStroked, ref A.Point p0, ref A.Point p1)
@@ -427,7 +427,11 @@ namespace Renderer.Avalonia
             var sg = new AM.StreamGeometry();
             using (var sgc = sg.Open())
             {
-                var a = WpfArc.FromXArc(arc);
+                var a = new WpfArc(
+                    Point2.FromXY(arc.Point1.X, arc.Point1.Y),
+                    Point2.FromXY(arc.Point2.X, arc.Point2.Y),
+                    Point2.FromXY(arc.Point3.X, arc.Point3.Y),
+                    Point2.FromXY(arc.Point4.X, arc.Point4.Y));
 
                 sgc.BeginFigure(
                     new A.Point(a.Start.X + dx, a.Start.Y),

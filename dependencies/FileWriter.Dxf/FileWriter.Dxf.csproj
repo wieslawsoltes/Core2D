@@ -33,6 +33,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Core2D.Spatial\Core2D.Spatial.csproj">
+      <Project>{bf27e596-01f5-45af-99fb-703c004d27a5}</Project>
+      <Name>Core2D.Spatial</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\src\Core2D\Core2D.csproj">
       <Project>{4ee581b0-45f3-4d7e-beae-277abf5f3fdd}</Project>
       <Name>Core2D</Name>

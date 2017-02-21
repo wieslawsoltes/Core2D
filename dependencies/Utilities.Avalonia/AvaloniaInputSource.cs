@@ -7,7 +7,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Core2D.Editor.Input;
-using Core2D.Math;
+using Core2D.Spatial;
 
 namespace Utilities.Avalonia
 {

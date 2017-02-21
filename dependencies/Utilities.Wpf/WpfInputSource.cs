@@ -5,7 +5,7 @@ using System.Reactive.Linq;
 using System.Windows;
 using System.Windows.Input;
 using Core2D.Editor.Input;
-using Core2D.Math;
+using Core2D.Spatial;
 
 namespace Utilities.Wpf
 {

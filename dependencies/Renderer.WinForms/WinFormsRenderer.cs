@@ -7,8 +7,8 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using Core2D.Data;
 using Core2D.Data.Database;
-using Core2D.Math;
-using Core2D.Math.Arc;
+using Core2D.Spatial;
+using Core2D.Spatial.Arc;
 using Core2D.Renderer;
 using Core2D.Shape;
 using Core2D.Shapes;
@@ -77,7 +77,7 @@ namespace Renderer.WinForms
 
         private SolidBrush ToSolidBrush(ArgbColor color) => new SolidBrush(ToColor(color));
 
-        private static Rect2 CreateRect(XPoint tl, XPoint br, double dx, double dy) => Rect2.Create(tl, br, dx, dy);
+        private static Rect2 CreateRect(XPoint tl, XPoint br, double dx, double dy) => Rect2.FromPoints(tl.X, tl.Y, br.X, br.Y, dx, dy);
 
         private static void DrawLineInternal(Graphics gfx, Pen pen, bool isStroked, ref PointF p0, ref PointF p1)
         {
@@ -438,7 +438,11 @@ namespace Renderer.WinForms
         /// <inheritdoc/>
         public override void Draw(object dc, XArc arc, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
         {
-            var a = GdiArc.FromXArc(arc);
+            var a = new GdiArc(
+                Point2.FromXY(arc.Point1.X, arc.Point1.Y),
+                Point2.FromXY(arc.Point2.X, arc.Point2.Y),
+                Point2.FromXY(arc.Point3.X, arc.Point3.Y),
+                Point2.FromXY(arc.Point4.X, arc.Point4.Y));
             if (a.Width <= 0.0 || a.Height <= 0.0)
                 return;
 

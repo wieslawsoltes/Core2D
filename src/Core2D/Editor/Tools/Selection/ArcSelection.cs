@@ -1,11 +1,12 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Core2D.Math.Arc;
+using Core2D.Spatial.Arc;
 using Core2D.Project;
 using Core2D.Shape;
 using Core2D.Shapes;
 using Core2D.Shapes.Interfaces;
 using Core2D.Style;
+using Core2D.Spatial;
 
 namespace Core2D.Editor.Tools.Selection
 {
@@ -105,7 +106,11 @@ namespace Core2D.Editor.Tools.Selection
         /// </summary>
         public void Move()
         {
-            var a = WpfArc.FromXArc(_arc);
+            var a = new WpfArc(
+                Point2.FromXY(_arc.Point1.X, _arc.Point1.Y),
+                Point2.FromXY(_arc.Point2.X, _arc.Point2.Y),
+                Point2.FromXY(_arc.Point3.X, _arc.Point3.Y),
+                Point2.FromXY(_arc.Point4.X, _arc.Point4.Y));
 
             if (_ellipse != null)
             {

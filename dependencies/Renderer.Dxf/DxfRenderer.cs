@@ -85,7 +85,11 @@ namespace Renderer.Dxf
 
         private Ellipse CreateEllipticalArc(Core2D.Shapes.XArc arc, double dx, double dy)
         {
-            var a = Core2D.Math.Arc.GdiArc.FromXArc(arc);
+            var a = new Core2D.Spatial.Arc.GdiArc(
+                Core2D.Spatial.Point2.FromXY(arc.Point1.X, arc.Point1.Y),
+                Core2D.Spatial.Point2.FromXY(arc.Point2.X, arc.Point2.Y),
+                Core2D.Spatial.Point2.FromXY(arc.Point3.X, arc.Point3.Y),
+                Core2D.Spatial.Point2.FromXY(arc.Point4.X, arc.Point4.Y));
 
             double _cx = ToDxfX(a.X + dx + a.Width / 2.0);
             double _cy = ToDxfY(a.Y + dy + a.Height / 2.0);
@@ -171,7 +175,7 @@ namespace Renderer.Dxf
             }
         }
 
-        private void DrawRectangleInternal(DxfDocument dxf, Layer layer, bool isFilled, bool isStroked, Core2D.Style.BaseStyle style, ref Core2D.Math.Rect2 rect)
+        private void DrawRectangleInternal(DxfDocument dxf, Layer layer, bool isFilled, bool isStroked, Core2D.Style.BaseStyle style, ref Core2D.Spatial.Rect2 rect)
         {
             if (isFilled)
             {
@@ -218,7 +222,7 @@ namespace Renderer.Dxf
             DrawLineInternal(dxf, layer, style, true, x, y + height, x, y);
         }
 
-        private void DrawEllipseInternal(DxfDocument dxf, Layer layer, bool isFilled, bool isStroked, Core2D.Style.BaseStyle style, ref Core2D.Math.Rect2 rect)
+        private void DrawEllipseInternal(DxfDocument dxf, Layer layer, bool isFilled, bool isStroked, Core2D.Style.BaseStyle style, ref Core2D.Spatial.Rect2 rect)
         {
             var dxfEllipse = CreateEllipse(rect.X, rect.Y, rect.Width, rect.Height);
 
@@ -271,7 +275,7 @@ namespace Renderer.Dxf
             dxf.AddEntity(hatch);
         }
 
-        private void DrawGridInternal(DxfDocument dxf, Layer layer, Core2D.Style.ShapeStyle style, double offsetX, double offsetY, double cellWidth, double cellHeight, ref Core2D.Math.Rect2 rect)
+        private void DrawGridInternal(DxfDocument dxf, Layer layer, Core2D.Style.ShapeStyle style, double offsetX, double offsetY, double cellWidth, double cellHeight, ref Core2D.Spatial.Rect2 rect)
         {
             double ox = rect.X;
             double oy = rect.Y;
@@ -484,7 +488,7 @@ namespace Renderer.Dxf
         public override void Fill(object dc, double x, double y, double width, double height, Core2D.Style.ArgbColor color)
         {
             var dxf = dc as DxfDocument;
-            var rect = Core2D.Math.Rect2.Create(x, y, x + width, y + height);
+            var rect = Core2D.Spatial.Rect2.FromPoints(x, y, x + width, y + height);
             FillRectangle(dxf, _currentLayer, x, y, width, height, color);
         }
 
@@ -554,7 +558,12 @@ namespace Renderer.Dxf
 
             var dxf = dc as DxfDocument;
             var style = rectangle.Style;
-            var rect = Core2D.Math.Rect2.Create(rectangle.TopLeft, rectangle.BottomRight, dx, dy);
+            var rect = Core2D.Spatial.Rect2.FromPoints(
+                rectangle.TopLeft.X,
+                rectangle.TopLeft.Y,
+                rectangle.BottomRight.X,
+                rectangle.BottomRight.Y,
+                dx, dy);
 
             DrawRectangleInternal(dxf, _currentLayer, rectangle.IsFilled, rectangle.IsStroked, style, ref rect);
 
@@ -578,7 +587,12 @@ namespace Renderer.Dxf
 
             var dxf = dc as DxfDocument;
             var style = ellipse.Style;
-            var rect = Core2D.Math.Rect2.Create(ellipse.TopLeft, ellipse.BottomRight, dx, dy);
+            var rect = Core2D.Spatial.Rect2.FromPoints(
+                ellipse.TopLeft.X,
+                ellipse.TopLeft.Y,
+                ellipse.BottomRight.X,
+                ellipse.BottomRight.Y,
+                dx, dy);
 
             DrawEllipseInternal(dxf, _currentLayer, ellipse.IsFilled, ellipse.IsStroked, style, ref rect);
         }
@@ -757,7 +771,12 @@ namespace Renderer.Dxf
 
             var attachmentPoint = default(MTextAttachmentPoint);
             double x, y;
-            var rect = Core2D.Math.Rect2.Create(text.TopLeft, text.BottomRight, dx, dy);
+            var rect = Core2D.Spatial.Rect2.FromPoints(
+                text.TopLeft.X,
+                text.TopLeft.Y,
+                text.BottomRight.X,
+                text.BottomRight.Y,
+                dx, dy);
 
             switch (text.Style.TextStyle.TextHAlignment)
             {
@@ -874,7 +893,12 @@ namespace Renderer.Dxf
             var bytes = State.ImageCache.GetImage(image.Key);
             if (bytes != null)
             {
-                var rect = Core2D.Math.Rect2.Create(image.TopLeft, image.BottomRight, dx, dy);
+                var rect = Core2D.Spatial.Rect2.FromPoints(
+                    image.TopLeft.X,
+                    image.TopLeft.Y,
+                    image.BottomRight.X,
+                    image.BottomRight.Y,
+                    dx, dy);
 
                 var dxfImageDefinitionCached = _biCache.Get(image.Key);
                 if (dxfImageDefinitionCached != null)

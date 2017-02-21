@@ -3,7 +3,7 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-using Core2D.Math;
+using Core2D.Spatial;
 using Core2D.Shape;
 using Core2D.Shapes;
 
@@ -53,11 +53,11 @@ namespace Core2D.Editor.Bounds
         /// <returns></returns>
         public static bool HitTestLine(XLine line, Rect2 rect, ISet<BaseShape> selected, double threshold, double dx, double dy)
         {
+            double x0clip, y0clip, x1clip, y1clip;
             if (ShapeBounds.GetPointBounds(line.Start, threshold, dx, dy).IntersectsWith(rect)
                 || ShapeBounds.GetPointBounds(line.End, threshold, dx, dy).IntersectsWith(rect)
-                || MathHelpers.LineIntersectsWithRect(rect, new Point2(line.Start.X, line.Start.Y), new Point2(line.End.X, line.End.Y)))
-            {
-                if (selected != null)
+                || Line2.LineIntersectsWithRect(new Point2(line.Start.X, line.Start.Y), new Point2(line.End.X, line.End.Y), rect, out x0clip, out y0clip, out x1clip, out y1clip))
+            {                if (selected != null)
                 {
                     selected.Add(line);
                     return false;

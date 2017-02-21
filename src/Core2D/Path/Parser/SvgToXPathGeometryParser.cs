@@ -2,7 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Globalization;
-using Core2D.Math;
+using Core2D.Spatial;
 using Core2D.Shapes;
 using static System.Math;
 
@@ -246,12 +246,12 @@ namespace Core2D.Path.Parser
                 y += _lastPoint.Y;
             }
 
-            return Point2.Create(x, y);
+            return Point2.FromXY(x, y);
         }
 
         private Point2 Reflect()
         {
-            return Point2.Create(2 * _lastPoint.X - _secondLastPoint.X, 2 * _lastPoint.Y - _secondLastPoint.Y);
+            return Point2.FromXY(2 * _lastPoint.X - _secondLastPoint.X, 2 * _lastPoint.Y - _secondLastPoint.Y);
         }
 
         private void EnsureFigure()
@@ -275,9 +275,9 @@ namespace Core2D.Path.Parser
             _pathString = pathString;
             _pathLength = pathString.Length;
             _curIndex = startIndex;
-            _secondLastPoint = Point2.Create(0, 0);
-            _lastPoint = Point2.Create(0, 0);
-            _lastStart = Point2.Create(0, 0);
+            _secondLastPoint = Point2.FromXY(0, 0);
+            _lastPoint = Point2.FromXY(0, 0);
+            _lastStart = Point2.FromXY(0, 0);
             _figureStarted = false;
             bool first = true;
             char last_cmd = ' ';
@@ -334,16 +334,16 @@ namespace Core2D.Path.Parser
                                     _lastPoint = ReadPoint(cmd, !_allowComma);
                                     break;
                                 case 'h':
-                                    _lastPoint.X += ReadNumber(!_allowComma);
+                                    _lastPoint = Point2.FromXY(_lastPoint.X + ReadNumber(!_allowComma), _lastPoint.Y);
                                     break;
                                 case 'H':
-                                    _lastPoint.X = ReadNumber(!_allowComma);
+                                    _lastPoint = Point2.FromXY(_lastPoint.X + ReadNumber(!_allowComma), _lastPoint.Y);
                                     break;
                                 case 'v':
-                                    _lastPoint.Y += ReadNumber(!_allowComma);
+                                    _lastPoint = Point2.FromXY(_lastPoint.X, _lastPoint.Y + ReadNumber(!_allowComma));
                                     break;
                                 case 'V':
-                                    _lastPoint.Y = ReadNumber(!_allowComma);
+                                    _lastPoint = Point2.FromXY(_lastPoint.X, _lastPoint.Y + ReadNumber(!_allowComma));
                                     break;
                             }
 

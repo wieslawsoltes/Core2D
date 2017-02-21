@@ -15,7 +15,7 @@ using Core2D.Editor.Tools;
 using Core2D.Editor.Tools.Path;
 using Core2D.History;
 using Core2D.Interfaces;
-using Core2D.Math;
+using Core2D.Spatial;
 using Core2D.Path.Parser;
 using Core2D.Project;
 using Core2D.Renderer;
@@ -2986,7 +2986,11 @@ namespace Core2D.Editor
         {
             if (layer != null)
             {
-                var rect = Rect2.Create(rectangle.TopLeft, rectangle.BottomRight);
+                var rect = Rect2.FromPoints(
+                    rectangle.TopLeft.X,
+                    rectangle.TopLeft.Y,
+                    rectangle.BottomRight.X,
+                    rectangle.BottomRight.Y);
                 var result = ShapeHitTestSelection.HitTest(layer.Shapes, rect, Project.Options.HitThreshold);
                 if (result != null)
                 {
@@ -3137,9 +3141,10 @@ namespace Core2D.Editor
 
                 if (!Project.Options.SnapToGrid)
                 {
-                    var a = new Vector2(line.Start.X, line.Start.Y);
-                    var b = new Vector2(line.End.X, line.End.Y);
-                    var nearest = MathHelpers.NearestPointOnLine(a, b, new Vector2(x, y));
+                    var a = new Point2(line.Start.X, line.Start.Y);
+                    var b = new Point2(line.End.X, line.End.Y);
+                    var target = new Point2(x, y);
+                    var nearest = target.NearestOnLine(a, b);
                     point.X = nearest.X;
                     point.Y = nearest.Y;
                 }

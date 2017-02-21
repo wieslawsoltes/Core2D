@@ -99,6 +99,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptRunner.Roslyn", "depe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileWriter.SvgSkiaSharp", "dependencies\FileWriter.SvgSkiaSharp\FileWriter.SvgSkiaSharp.csproj", "{E2827255-924C-456E-8049-14E333C6FD18}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.Spatial", "src\Core2D.Spatial\Core2D.Spatial.csproj", "{BF27E596-01F5-45AF-99FB-703C004D27A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.Spatial.UnitTests", "tests\Core2D.Spatial.UnitTests\Core2D.Spatial.UnitTests.csproj", "{6F803C3D-0E71-48F9-A58B-40B7F3CDAC6F}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		src\Core2D.Shared\Core2D.Shared.projitems*{0eec62cc-3cff-4185-88d6-ba107f0d8ff4}*SharedItemsImports = 4
@@ -121,6 +125,7 @@ Global
 		src\Core2D.Shared\Core2D.Shared.projitems*{9b8fa9bd-63be-4560-ba55-0d86aee1809e}*SharedItemsImports = 4
 		src\Core2D.Shared\Core2D.Shared.projitems*{acc2c898-b49b-4ed9-b18c-389f50801b39}*SharedItemsImports = 4
 		src\Core2D.Shared\Core2D.Shared.projitems*{ae7ff1b5-abe3-45bf-87cc-44ac580a666a}*SharedItemsImports = 4
+		src\Core2D.Shared\Core2D.Shared.projitems*{bf27e596-01f5-45af-99fb-703c004d27a5}*SharedItemsImports = 4
 		src\Core2D.Shared\Core2D.Shared.projitems*{c6dbd1fd-c462-4005-b382-97bb4aef26f2}*SharedItemsImports = 4
 		src\Core2D.Shared\Core2D.Shared.projitems*{c934ba25-608b-42fa-b766-42efad7da6ff}*SharedItemsImports = 4
 		src\Core2D.Shared\Core2D.Shared.projitems*{d1f867f7-9029-480d-b1e1-b0be4658b182}*SharedItemsImports = 4
@@ -548,6 +553,30 @@ Global
 		{E2827255-924C-456E-8049-14E333C6FD18}.Release|x64.Build.0 = Release|x64
 		{E2827255-924C-456E-8049-14E333C6FD18}.Release|x86.ActiveCfg = Release|x86
 		{E2827255-924C-456E-8049-14E333C6FD18}.Release|x86.Build.0 = Release|x86
+		{BF27E596-01F5-45AF-99FB-703C004D27A5}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
+		{BF27E596-01F5-45AF-99FB-703C004D27A5}.Debug|AnyCPU.Build.0 = Debug|Any CPU
+		{BF27E596-01F5-45AF-99FB-703C004D27A5}.Debug|x64.ActiveCfg = Debug|x64
+		{BF27E596-01F5-45AF-99FB-703C004D27A5}.Debug|x64.Build.0 = Debug|x64
+		{BF27E596-01F5-45AF-99FB-703C004D27A5}.Debug|x86.ActiveCfg = Debug|x86
+		{BF27E596-01F5-45AF-99FB-703C004D27A5}.Debug|x86.Build.0 = Debug|x86
+		{BF27E596-01F5-45AF-99FB-703C004D27A5}.Release|AnyCPU.ActiveCfg = Release|Any CPU
+		{BF27E596-01F5-45AF-99FB-703C004D27A5}.Release|AnyCPU.Build.0 = Release|Any CPU
+		{BF27E596-01F5-45AF-99FB-703C004D27A5}.Release|x64.ActiveCfg = Release|x64
+		{BF27E596-01F5-45AF-99FB-703C004D27A5}.Release|x64.Build.0 = Release|x64
+		{BF27E596-01F5-45AF-99FB-703C004D27A5}.Release|x86.ActiveCfg = Release|x86
+		{BF27E596-01F5-45AF-99FB-703C004D27A5}.Release|x86.Build.0 = Release|x86
+		{6F803C3D-0E71-48F9-A58B-40B7F3CDAC6F}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
+		{6F803C3D-0E71-48F9-A58B-40B7F3CDAC6F}.Debug|AnyCPU.Build.0 = Debug|Any CPU
+		{6F803C3D-0E71-48F9-A58B-40B7F3CDAC6F}.Debug|x64.ActiveCfg = Debug|x64
+		{6F803C3D-0E71-48F9-A58B-40B7F3CDAC6F}.Debug|x64.Build.0 = Debug|x64
+		{6F803C3D-0E71-48F9-A58B-40B7F3CDAC6F}.Debug|x86.ActiveCfg = Debug|x86
+		{6F803C3D-0E71-48F9-A58B-40B7F3CDAC6F}.Debug|x86.Build.0 = Debug|x86
+		{6F803C3D-0E71-48F9-A58B-40B7F3CDAC6F}.Release|AnyCPU.ActiveCfg = Release|Any CPU
+		{6F803C3D-0E71-48F9-A58B-40B7F3CDAC6F}.Release|AnyCPU.Build.0 = Release|Any CPU
+		{6F803C3D-0E71-48F9-A58B-40B7F3CDAC6F}.Release|x64.ActiveCfg = Release|x64
+		{6F803C3D-0E71-48F9-A58B-40B7F3CDAC6F}.Release|x64.Build.0 = Release|x64
+		{6F803C3D-0E71-48F9-A58B-40B7F3CDAC6F}.Release|x86.ActiveCfg = Release|x86
+		{6F803C3D-0E71-48F9-A58B-40B7F3CDAC6F}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -588,5 +617,7 @@ Global
 		{27CD58AE-D6D4-42AD-A315-2F1CB63454AF} = {BC6BAFE6-1735-4549-A7CC-819274780B38}
 		{352C23CD-8A6D-4C91-9FD2-FC35ECBC8AFE} = {9DA997E2-E367-481C-B48A-278274034A26}
 		{E2827255-924C-456E-8049-14E333C6FD18} = {9DA997E2-E367-481C-B48A-278274034A26}
+		{BF27E596-01F5-45AF-99FB-703C004D27A5} = {BC6BAFE6-1735-4549-A7CC-819274780B38}
+		{6F803C3D-0E71-48F9-A58B-40B7F3CDAC6F} = {8756F874-0C1B-4AB8-83E0-0BEDA782D212}
 	EndGlobalSection
 EndGlobal

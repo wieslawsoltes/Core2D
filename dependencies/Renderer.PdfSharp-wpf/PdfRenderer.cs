@@ -219,7 +219,7 @@ namespace Renderer.PdfSharp_core
             }
         }
 
-        private void DrawGridInternal(XGraphics gfx, XPen stroke, ref Core2D.Math.Rect2 rect, double offsetX, double offsetY, double cellWidth, double cellHeight, bool isStroked)
+        private void DrawGridInternal(XGraphics gfx, XPen stroke, ref Core2D.Spatial.Rect2 rect, double offsetX, double offsetY, double cellWidth, double cellHeight, bool isStroked)
         {
             double ox = rect.X;
             double oy = rect.Y;
@@ -315,9 +315,11 @@ namespace Renderer.PdfSharp_core
         {
             var _gfx = dc as XGraphics;
 
-            var rect = Core2D.Math.Rect2.Create(
-                rectangle.TopLeft,
-                rectangle.BottomRight,
+            var rect = Core2D.Spatial.Rect2.FromPoints(
+                rectangle.TopLeft.X,
+                rectangle.TopLeft.Y,
+                rectangle.BottomRight.X,
+                rectangle.BottomRight.Y,
                 dx, dy);
 
             if (rectangle.IsStroked && rectangle.IsFilled)
@@ -366,9 +368,11 @@ namespace Renderer.PdfSharp_core
         {
             var _gfx = dc as XGraphics;
 
-            var rect = Core2D.Math.Rect2.Create(
-                ellipse.TopLeft,
-                ellipse.BottomRight,
+            var rect = Core2D.Spatial.Rect2.FromPoints(
+                ellipse.TopLeft.X,
+                ellipse.TopLeft.Y,
+                ellipse.BottomRight.X,
+                ellipse.BottomRight.Y,
                 dx, dy);
 
             if (ellipse.IsStroked && ellipse.IsFilled)
@@ -406,7 +410,11 @@ namespace Renderer.PdfSharp_core
         {
             var _gfx = dc as XGraphics;
 
-            var a = Core2D.Math.Arc.GdiArc.FromXArc(arc);
+            var a = new Core2D.Spatial.Arc.GdiArc(
+                Core2D.Spatial.Point2.FromXY(arc.Point1.X, arc.Point1.Y),
+                Core2D.Spatial.Point2.FromXY(arc.Point2.X, arc.Point2.Y),
+                Core2D.Spatial.Point2.FromXY(arc.Point3.X, arc.Point3.Y),
+                Core2D.Spatial.Point2.FromXY(arc.Point4.X, arc.Point4.Y));
 
             if (arc.IsFilled)
             {
@@ -600,9 +608,11 @@ namespace Renderer.PdfSharp_core
                 fontStyle,
                 options);
 
-            var rect = Core2D.Math.Rect2.Create(
-                text.TopLeft,
-                text.BottomRight,
+            var rect = Core2D.Spatial.Rect2.FromPoints(
+                text.TopLeft.X,
+                text.TopLeft.Y,
+                text.BottomRight.X,
+                text.BottomRight.Y,
                 dx, dy);
 
             var srect = new XRect(
@@ -651,9 +661,11 @@ namespace Renderer.PdfSharp_core
         {
             var _gfx = dc as XGraphics;
 
-            var rect = Core2D.Math.Rect2.Create(
-                image.TopLeft,
-                image.BottomRight,
+            var rect = Core2D.Spatial.Rect2.FromPoints(
+                image.TopLeft.X,
+                image.TopLeft.Y,
+                image.BottomRight.X,
+                image.BottomRight.Y,
                 dx, dy);
 
             var srect = new XRect(
