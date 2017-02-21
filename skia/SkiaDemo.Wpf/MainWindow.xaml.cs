@@ -256,7 +256,7 @@ namespace SkiaDemo.Wpf
             var matrix = PresentationSource.FromVisual(this).CompositionTarget.TransformToDevice;
             double offsetX = (this.canvas.ActualWidth * matrix.M11 - _container?.Width ?? 0) / 2.0;
             double offsetY = (this.canvas.ActualHeight * matrix.M22 - _container?.Height ?? 0) / 2.0;
-            canvas.Clear();
+            canvas.Clear(SKColors.White);
             _presenter?.Render(canvas, _renderer, _container, offsetX, offsetY);
         }
 
