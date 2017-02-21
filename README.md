@@ -1,9 +1,9 @@
 # Core2D
 
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Core2D/Core2D?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/wieslawsoltes/Core2D?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 [![Build status](https://ci.appveyor.com/api/projects/status/7k1e0voeit7od9bw/branch/master?svg=true)](https://ci.appveyor.com/project/wieslawsoltes/core2d/branch/master)
-[![Build Status](https://travis-ci.org/Core2D/Core2D.svg?branch=master)](https://travis-ci.org/Core2D/Core2D)
+[![Build Status](https://travis-ci.org/wieslawsoltes/Core2D.svg?branch=master)](https://travis-ci.org/wieslawsoltes/Core2D)
 ![Build Status](https://wiso.visualstudio.com/_apis/public/build/definitions/6eb4f619-6cfb-4f2c-8220-dbe2c8cfd282/2/badge)
 
 A multi-platform data driven 2D diagram editor.
@@ -35,7 +35,7 @@ The core library and editor are portable and should work on all platforms where 
 
 First, clone the repository or download the latest zip.
 ```
-git clone https://github.com/Core2D/Core2D.git
+git clone https://github.com/wieslawsoltes/Core2D.git
 git submodule update --init --recursive
 ```
 
@@ -69,8 +69,8 @@ $ ./build.sh --target "Default" --platform "AnyCPU" --configuration "Release"
 * [GTK# for .NET](http://www.mono-project.com/download/#download-win) Needed for Gtk on Windows.
 * [.net dxf Reader-Writer](http://netdxf.codeplex.com/) Needed for `DXF` support. Run `git submodule update --init --recursive` in project directory.
 * [PDFsharp A .NET library for processing PDF](https://github.com/empira/PDFsharp) Needed for `PDF` support. Run `git submodule update --init --recursive` in project directory.
-* For building `Core2D` mirror repository is used for [.net dxf Reader-Writer](https://github.com/Core2D/netdxf).
-* For building `Core2D` mirror repository is used for [PDFsharp](https://github.com/Core2D/PDFsharp). 
+* For building `Core2D` mirror repository is used for [.net dxf Reader-Writer](https://github.com/wieslawsoltes/netdxf).
+* For building `Core2D` mirror repository is used for [PDFsharp](https://github.com/wieslawsoltes/PDFsharp). 
 * `PDFsharp` core is used for `Avalonia` and non-windows builds and `PDFsharp-wpf` is used for WPF version (`PDFsharp` core does not implement `XGraphicsPath.AddArc` method.).
 
 * Common
@@ -150,7 +150,7 @@ copy /Y "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\redist\$(Platfor
 
 ## Resources
 
-* [GitHub source code repository.](https://github.com/Core2D/Core2D)
+* [GitHub source code repository.](https://github.com/wieslawsoltes/Core2D)
 
 ## License
 
