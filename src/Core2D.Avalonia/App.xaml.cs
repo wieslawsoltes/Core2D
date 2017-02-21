@@ -38,7 +38,7 @@ namespace Core2D.Avalonia
 
                 builder.RegisterModule<LocatorModule>();
                 builder.RegisterModule<CoreModule>();
-                builder.RegisterModule<DependenciesModule>();
+                builder.RegisterModule<DesignerModule>();
                 builder.RegisterModule<AppModule>();
                 builder.RegisterModule<ViewModule>();
 

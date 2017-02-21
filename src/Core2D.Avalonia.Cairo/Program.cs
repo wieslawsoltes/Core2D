@@ -31,7 +31,6 @@ namespace Core2D.Avalonia.Cairo
             builder.RegisterModule<DependenciesModule>();
             builder.RegisterModule<AppModule>();
             builder.RegisterModule<ViewModule>();
-            builder.RegisterModule<CairoModule>();
 
             using (IContainer container = builder.Build())
             {

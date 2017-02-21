@@ -345,7 +345,7 @@
     <Compile Include="Locator\ServiceProvider.cs" />
     <Compile Include="Modules\AppModule.cs" />
     <Compile Include="Modules\CoreModule.cs" />
-    <Compile Include="Modules\DependenciesModule.cs" />
+    <Compile Include="Modules\DesignerModule.cs" />
     <Compile Include="Modules\LocatorModule.cs" />
     <Compile Include="Modules\ViewModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

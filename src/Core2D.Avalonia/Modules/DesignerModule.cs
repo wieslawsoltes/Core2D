@@ -9,9 +9,9 @@ using Utilities.Avalonia;
 namespace Core2D.Avalonia.Modules
 {
     /// <summary>
-    /// Dependencies components module.
+    /// Designer dependencies components module.
     /// </summary>
-    public class DependenciesModule : Module
+    public class DesignerModule : Module
     {
         /// <inheritdoc/>
         protected override void Load(ContainerBuilder builder)

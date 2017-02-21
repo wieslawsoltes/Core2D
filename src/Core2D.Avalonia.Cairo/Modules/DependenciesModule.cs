@@ -3,25 +3,30 @@
 using Autofac;
 using Core2D.Data.Database;
 using Core2D.Interfaces;
+using Core2D.Renderer;
 using FileSystem.DotNetFx;
 using FileWriter.Pdf_core;
 using Log.Trace;
+using Renderer.Avalonia;
 using ScriptRunner.Roslyn;
 using Serializer.Newtonsoft;
 using Serializer.Xaml;
 using TextFieldReader.CsvHelper;
 using TextFieldWriter.CsvHelper;
+using Utilities.Avalonia;
 
 namespace Core2D.Avalonia.Cairo.Modules
 {
     /// <summary>
     /// Dependencies components module.
     /// </summary>
-    public class CairoModule : Module
+    public class DependenciesModule : Module
     {
         /// <inheritdoc/>
         protected override void Load(ContainerBuilder builder)
         {
+            builder.RegisterType<AvaloniaRenderer>().As<ShapeRenderer>().InstancePerDependency();
+            builder.RegisterType<AvaloniaTextClipboard>().As<ITextClipboard>().InstancePerLifetimeScope();
             builder.RegisterType<TraceLog>().As<ILog>().SingleInstance();
             builder.RegisterType<DotNetFxFileSystem>().As<IFileSystem>().InstancePerLifetimeScope();
             builder.RegisterType<RoslynScriptRunner>().As<IScriptRunner>().InstancePerLifetimeScope();
