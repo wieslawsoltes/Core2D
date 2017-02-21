@@ -152,10 +152,13 @@
     </ApplicationDefinition>
     <Compile Include="FileWriter\SvgSkiaSharp\SvgExporter.cs" />
     <Compile Include="FileWriter\SvgSkiaSharp\SvgWriter.cs" />
+    <Compile Include="Importers\Win32ImageImporter.cs" />
     <Compile Include="Locator\ServiceProvider.cs" />
+    <Compile Include="Modules\AppModule.cs" />
     <Compile Include="Modules\CoreModule.cs" />
     <Compile Include="Modules\DependenciesModule.cs" />
     <Compile Include="Modules\LocatorModule.cs" />
+    <Compile Include="Modules\ViewModule.cs" />
     <Compile Include="SvgWindow.xaml.cs">
       <DependentUpon>SvgWindow.xaml</DependentUpon>
     </Compile>
