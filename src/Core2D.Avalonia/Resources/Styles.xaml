@@ -5,31 +5,37 @@
     <Style Selector="Border.leftTop">
         <Setter Property="Margin" Value="0"/>
         <Setter Property="Padding" Value="3,3,3,3"/>
+        <Setter Property="BorderBrush" Value="{StyleResource ThemeBorderDarkBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
     </Style>
     <Style Selector="Border.leftBottom">
         <Setter Property="Margin" Value="0"/>
         <Setter Property="Padding" Value="3,3,3,3"/>
+        <Setter Property="BorderBrush" Value="{StyleResource ThemeBorderDarkBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
     </Style>
     <Style Selector="Border.rightTop">
         <Setter Property="Margin" Value="0"/>
         <Setter Property="Padding" Value="3,3,3,3"/>
+        <Setter Property="BorderBrush" Value="{StyleResource ThemeBorderDarkBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
     </Style>
     <Style Selector="Border.rightBottom">
         <Setter Property="Margin" Value="0"/>
         <Setter Property="Padding" Value="3,3,3,3"/>
+        <Setter Property="BorderBrush" Value="{StyleResource ThemeBorderDarkBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
     </Style>
     <Style Selector="Border.container">
         <Setter Property="Margin" Value="0"/>
         <Setter Property="Padding" Value="3,3,3,3"/>
+        <Setter Property="Background" Value="{StyleResource TemplateCheckerBoard}"/>
         <Setter Property="BorderThickness" Value="1"/>
     </Style>
     <Style Selector="Border.transparent">
         <Setter Property="Margin" Value="0"/>
         <Setter Property="Padding" Value="0"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="1"/>
     </Style>
     <Style Selector="Border.color">
@@ -39,11 +45,13 @@
     <!-- Border.project -->
     <Style Selector="Border.project">
         <Setter Property="Padding" Value="0"/>
+        <Setter Property="BorderBrush" Value="{StyleResource ThemeBorderDarkBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
     </Style>
     <!-- Border.document -->
     <Style Selector="Border.document">
         <Setter Property="Padding" Value="4"/>
+        <Setter Property="BorderBrush" Value="{StyleResource ThemeBorderDarkBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
     </Style>
     <!-- Button.default -->
