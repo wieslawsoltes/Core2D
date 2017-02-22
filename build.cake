@@ -29,13 +29,26 @@ var buildDirs =
     GetSkiaDirectories("./tests/**/bin/" + dirSuffixSkia) + 
     GetDirectories("./tests/**/obj/" + dirSuffix, ExcludeSkia) + 
     GetSkiaDirectories("./tests/**/obj/" + dirSuffixSkia);
-var testResultsDir = (DirectoryPath)Directory("./test-results");		
+var artifactsDir = (DirectoryPath)Directory("./artifacts");
+var testResultsDir = artifactsDir.Combine("test-results");	
+var zipRootDir = artifactsDir.Combine("zip");
+var fileZipSuffix = platform + "-" + configuration + "-" + version + ".zip";
+var fileZipSuffixSkia = (isPlatformAnyCPU ? "x86" : platform) + "-" + configuration + "-" + version + ".zip";
+var zipSourceCairoDirs = (DirectoryPath)Directory("./src/Core2D.Avalonia.Cairo/bin/" + dirSuffix);
+var zipSourceDirect2DDirs = (DirectoryPath)Directory("./src/Core2D.Avalonia.Direct2D/bin/" + dirSuffix);
+var zipSourceSkiaDirs = (DirectoryPath)Directory("./src/Core2D.Avalonia.Skia/bin/" + dirSuffixSkia);
+var zipSourceWpfDirs = (DirectoryPath)Directory("./src/Core2D.Wpf/bin/" + dirSuffix);
+var zipTargetCairoDirs = zipRootDir.CombineWithFilePath("Core2D.Avalonia.Cairo-" + fileZipSuffix);
+var zipTargetDirect2DDirs = zipRootDir.CombineWithFilePath("Core2D.Avalonia.Direct2D-" + fileZipSuffix);
+var zipTargetSkiaDirs = zipRootDir.CombineWithFilePath("Core2D.Avalonia.Skia-" + fileZipSuffixSkia);
+var zipTargetWpfDirs = zipRootDir.CombineWithFilePath("Core2D.Wpf-" + fileZipSuffix);
 
 Task("Clean")
     .Does(() =>
 {
     CleanDirectories(buildDirs);
     CleanDirectory(testResultsDir);
+    CleanDirectory(zipRootDir);
 });
 
 Task("Restore-NuGet-Packages")
@@ -123,13 +136,44 @@ Task("Run-Unit-Tests")
     }
 });
 
+Task("Zip-Files")
+    .IsDependentOn("Run-Unit-Tests")
+    .Does(() =>
+{
+    Zip(zipSourceCairoDirs, 
+        zipTargetCairoDirs, 
+        GetFiles(zipSourceCairoDirs.FullPath + "/*.dll") + 
+        GetFiles(zipSourceCairoDirs.FullPath + "/*.exe"));
+
+    if (IsRunningOnWindows())
+    {
+        Zip(zipSourceDirect2DDirs, 
+            zipTargetDirect2DDirs, 
+            GetFiles(zipSourceDirect2DDirs.FullPath + "/*.dll") + 
+            GetFiles(zipSourceDirect2DDirs.FullPath + "/*.exe"));
+
+        Zip(zipSourceSkiaDirs, 
+            zipTargetSkiaDirs, 
+            GetFiles(zipSourceSkiaDirs.FullPath + "/*.dll") + 
+            GetFiles(zipSourceSkiaDirs.FullPath + "/*.exe"));
+
+        Zip(zipSourceWpfDirs, 
+            zipTargetWpfDirs, 
+            GetFiles(zipSourceWpfDirs.FullPath + "/*.dll") + 
+            GetFiles(zipSourceWpfDirs.FullPath + "/*.exe"));
+    }
+});
+
 Task("Default")
+  .IsDependentOn("Zip-Files")
   .IsDependentOn("Run-Unit-Tests");
 
 Task("AppVeyor")
+  .IsDependentOn("Zip-Files")
   .IsDependentOn("Run-Unit-Tests");
 
 Task("Travis")
+  .IsDependentOn("Zip-Files")
   .IsDependentOn("Run-Unit-Tests");
 
 RunTarget(target);
