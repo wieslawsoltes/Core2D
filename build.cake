@@ -13,6 +13,13 @@ var isPlatformX64 = StringComparer.OrdinalIgnoreCase.Equals(platform, "x64");
 var MSBuildSolution = "./Core2D.sln";
 var XBuildSolution = "./Core2D.mono.sln";
 var version = ParseAssemblyInfo(File("./src/Core2D.Shared/SharedAssemblyInfo.cs")).AssemblyVersion;
+if (BuildSystem.AppVeyor.IsRunningOnAppVeyor)
+{
+    if (BuildSystem.AppVeyor.Environment.Repository.Tag.IsTag && !string.IsNullOrWhiteSpace(BuildSystem.AppVeyor.Environment.Repository.Tag.Name))
+        version = BuildSystem.AppVeyor.Environment.Repository.Tag.Name;
+    else
+        version += "-build" + EnvironmentVariable("APPVEYOR_BUILD_NUMBER");
+}
 var dirSuffix = platform + "/" + configuration;
 var dirSuffixSkia = (isPlatformAnyCPU ? "x86" : platform) + "/" + configuration;
 Func<IFileSystemInfo, bool> ExcludeSkia = i => !(i.Path.FullPath.IndexOf("Skia", StringComparison.OrdinalIgnoreCase) >= 0);
