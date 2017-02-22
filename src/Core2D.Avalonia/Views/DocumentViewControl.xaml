@@ -25,18 +25,7 @@
                         <Setter Property="Padding" Value="4 0 4 0"/>
                         <Setter Property="FontSize" Value="12"/>
                         <Setter Property="Height" Value="20"/>
-                        <Setter Property="Background" Value="{StyleResource ThemeBackgroundBrush}"/>
-                        <Setter Property="Foreground" Value="{StyleResource ThemeForegroundBrush}"/>
-                        <Setter Property="BorderBrush" Value="{StyleResource ThemeBackgroundBrush}"/>
                         <Setter Property="BorderThickness" Value="0"/>
-                    </Style>
-                    <Style Selector="TabStripItem:pointerover">
-                        <Setter Property="Background" Value="{StyleResource ThemeBorderMidBrush}"/>
-                        <Setter Property="Foreground" Value="{StyleResource ThemeBackgroundBrush}"/>
-                    </Style>
-                    <Style Selector="TabStripItem:selected">
-                        <Setter Property="Background" Value="{StyleResource ThemeBorderMidBrush}"/>
-                        <Setter Property="Foreground" Value="{StyleResource ThemeBackgroundBrush}"/>
                     </Style>
                 </TabStrip.Styles>
                 <TabStrip.DataTemplates>
