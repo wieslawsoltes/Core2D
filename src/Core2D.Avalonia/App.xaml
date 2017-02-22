@@ -21,13 +21,9 @@
              xmlns:state="clr-namespace:Core2D.Avalonia.Controls.State;assembly=Core2D.Avalonia"
              xmlns:style="clr-namespace:Core2D.Avalonia.Controls.Style;assembly=Core2D.Avalonia">
     <Application.Styles>
-        <!-- Theme -->
         <StyleInclude Source="resm:Avalonia.Themes.Default.DefaultTheme.xaml?assembly=Avalonia.Themes.Default"/>
-        <!--<StyleInclude Source="resm:Avalonia.Themes.Default.Accents.BaseLight.xaml?assembly=Avalonia.Themes.Default"/>-->
-        <StyleInclude Source="resm:Core2D.Avalonia.Resources.Accent.xaml?assembly=Core2D.Avalonia"/>
-        <!-- Brushes -->
+        <StyleInclude Source="resm:Avalonia.Themes.Default.Accents.BaseLight.xaml?assembly=Avalonia.Themes.Default"/>
         <StyleInclude Source="resm:Core2D.Avalonia.Resources.Brushes.xaml?assembly=Core2D.Avalonia"/>
-        <!-- Styles -->
         <StyleInclude Source="resm:Core2D.Avalonia.Resources.Styles.xaml?assembly=Core2D.Avalonia"/>
     </Application.Styles>
     <Application.DataTemplates>
