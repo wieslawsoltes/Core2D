@@ -12,6 +12,7 @@ var isPlatformX86 = StringComparer.OrdinalIgnoreCase.Equals(platform, "x86");
 var isPlatformX64 = StringComparer.OrdinalIgnoreCase.Equals(platform, "x64");
 var MSBuildSolution = "./Core2D.sln";
 var XBuildSolution = "./Core2D.mono.sln";
+var version = ParseAssemblyInfo(File("./src/Core2D.Shared/SharedAssemblyInfo.cs")).AssemblyVersion;
 var dirSuffix = platform + "/" + configuration;
 var dirSuffixSkia = (isPlatformAnyCPU ? "x86" : platform) + "/" + configuration;
 Func<IFileSystemInfo, bool> ExcludeSkia = i => !(i.Path.FullPath.IndexOf("Skia", StringComparison.OrdinalIgnoreCase) >= 0);
