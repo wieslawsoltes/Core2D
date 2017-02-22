@@ -10,7 +10,6 @@
         xmlns:Views="clr-namespace:Core2D.Editor.Views;assembly=Core2D"
         xmlns:views="clr-namespace:Core2D.Avalonia.Views;assembly=Core2D.Avalonia"
         Width="1324" Height="690"
-        Background="{StyleResource ThemeBackgroundBrush}"
         UseLayoutRounding="True"
         Design.DataContext="{Static Designer:DesignerContext.Editor}"
         Design.Width="1200" Design.Height="580">
