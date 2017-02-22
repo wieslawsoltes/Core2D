@@ -153,6 +153,11 @@ Task("Zip-Files")
             GetFiles(zipSourceDirect2DDirs.FullPath + "/*.dll") + 
             GetFiles(zipSourceDirect2DDirs.FullPath + "/*.exe"));
 
+        if (isPlatformAnyCPU || isPlatformX86)
+            CopyFiles("C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\VC\\redist\\x86\\Microsoft.VC140.CRT\\*.dll", zipSourceSkiaDirs);
+        else if (isPlatformX64)
+            CopyFiles("C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\VC\\redist\\x64\\Microsoft.VC140.CRT\\*.dll", zipSourceSkiaDirs);
+
         Zip(zipSourceSkiaDirs, 
             zipTargetSkiaDirs, 
             GetFiles(zipSourceSkiaDirs.FullPath + "/*.dll") + 
