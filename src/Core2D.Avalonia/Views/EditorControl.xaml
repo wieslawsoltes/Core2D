@@ -138,21 +138,10 @@
                         </TabStrip.ItemsPanel>
                         <TabStrip.Styles>
                             <Style Selector="TabStripItem">
-                                <Setter Property="Background" Value="{StyleResource ThemeBackgroundBrush}"/>
-                                <Setter Property="BorderBrush" Value="{StyleResource ThemeBackgroundBrush}"/>
-                                <Setter Property="Foreground" Value="{StyleResource ThemeForegroundBrush}"/>
                                 <Setter Property="BorderThickness" Value="0"/>
                                 <Setter Property="Margin" Value="0 0 0 0"/>
                                 <Setter Property="Padding" Value="5 1 5 1"/>
                                 <Setter Property="FontSize" Value="12"/>
-                            </Style>
-                            <Style Selector="TabStripItem:pointerover">
-                                <Setter Property="Background" Value="{StyleResource ThemeBorderLightBrush}"/>
-                                <Setter Property="Foreground" Value="{StyleResource ThemeForegroundBrush}"/>
-                            </Style>
-                            <Style Selector="TabStripItem:selected">
-                                <Setter Property="Background" Value="{StyleResource ThemeBorderLightBrush}"/>
-                                <Setter Property="Foreground" Value="{StyleResource ThemeForegroundBrush}"/>
                             </Style>
                         </TabStrip.Styles>
                         <TabStrip.DataTemplates>
@@ -163,13 +152,12 @@
                                     </i:Interaction.Behaviors>
                                     <TextBlock.ContextMenu>
                                         <ContextMenu>
-                                            <MenuItem Header="Te_mplate" Items="{Binding #root.Tag.Project.Templates}" Foreground="{StyleResource ThemeForegroundBrush}">
+                                            <MenuItem Header="Te_mplate" Items="{Binding #root.Tag.Project.Templates}">
                                                 <MenuItem.Styles>
                                                     <Style Selector="MenuItem">
                                                         <Setter Property="Header" Value="{Binding Name}"/>
                                                         <Setter Property="Command" Value="{Static Editor:ProjectEditorCommands.ApplyTemplateCommand}"/>
                                                         <Setter Property="CommandParameter" Value="{Binding}"/>
-                                                        <Setter Property="Foreground" Value="{StyleResource ThemeForegroundBrush}"/>
                                                         <Setter Property="Icon">
                                                             <Template>
                                                                 <CheckBox Name="icon" Classes="menu">
@@ -205,11 +193,11 @@
                             </DataTemplate>
                         </TabStrip.DataTemplates>
                     </TabStrip>
-                    <Grid Background="{StyleResource ThemeBorderLightBrush}" Height="1"/>
+                    <Grid Height="1"/>
                 </StackPanel>
                 <Border Classes="container">
                     <Border Classes="transparent" ClipToBounds="True">
-                        <paz:ZoomBorder Name="zoomBorder" AutoFitMode="None" ZoomSpeed="1.2" Background="{StyleResource TransparentBrush}" ClipToBounds="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                        <paz:ZoomBorder Name="zoomBorder" AutoFitMode="None" ZoomSpeed="1.2" Background="Transparent" ClipToBounds="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                             <views:ContainerViewControl Name="containerControl" Renderer="{Binding Renderers[0]}" Container="{Binding Project.CurrentContainer}" ClipToBounds="False"/>
                         </paz:ZoomBorder>
                     </Border>
