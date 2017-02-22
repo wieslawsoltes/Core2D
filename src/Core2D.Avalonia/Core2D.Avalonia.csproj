@@ -552,9 +552,6 @@
     <EmbeddedResource Include="Controls\Style\TextStyleControl.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Accent.xaml" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Resources\Brushes.xaml" />
   </ItemGroup>
   <ItemGroup>
