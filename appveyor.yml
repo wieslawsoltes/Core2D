@@ -17,4 +17,5 @@ notifications:
   on_build_failure: true
   on_build_status_changed: true
 artifacts:
-  - path: test-results\*.xml
+  - path: artifacts\test-results\*.xml
+  - path: artifacts\zip\*.zip
