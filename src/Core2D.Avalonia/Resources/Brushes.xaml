@@ -23,12 +23,12 @@
             <VisualBrush.Visual>
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Orientation="Vertical">
-                        <Rectangle Width="10" Height="10" Fill="#FF1A1A1A"/>
-                        <Rectangle Width="10" Height="10" Fill="#FF1C1C1C"/>
+                        <Rectangle Width="10" Height="10" Fill="#FFF0F0F0"/>
+                        <Rectangle Width="10" Height="10" Fill="#FFF5F5F5"/>
                     </StackPanel>
                     <StackPanel Orientation="Vertical">
-                        <Rectangle Width="10" Height="10" Fill="#FF1C1C1C"/>
-                        <Rectangle Width="10" Height="10" Fill="#FF1A1A1A"/>
+                        <Rectangle Width="10" Height="10" Fill="#FFF5F5F5"/>
+                        <Rectangle Width="10" Height="10" Fill="#FFF0F0F0"/>
                     </StackPanel>
                 </StackPanel>
             </VisualBrush.Visual>
