@@ -26,11 +26,11 @@ namespace Core2D.Avalonia
         {
             InitializeDesigner();
         }
-        
+
         /// <summary>
         /// Initializes designer.
         /// </summary>
-        static void InitializeDesigner()
+        public static void InitializeDesigner()
         {
             if (Design.IsDesignMode)
             {
@@ -52,7 +52,7 @@ namespace Core2D.Avalonia
         /// Initializes converters.
         /// </summary>
         /// <param name="serviceProvider">The service provider.</param>
-        static void InitializeConverters(IServiceProvider serviceProvider)
+        public static void InitializeConverters(IServiceProvider serviceProvider)
         {
             ObjectToXamlStringConverter.XamlSerializer = serviceProvider.GetServiceLazily<IXamlSerializer>();
             ObjectToJsonStringConverter.JsonSerializer = serviceProvider.GetServiceLazily<IJsonSerializer>();
