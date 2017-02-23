@@ -71,7 +71,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\Core2D.Spatial\Core2D.Spatial.csproj">
       <Project>{bf27e596-01f5-45af-99fb-703c004d27a5}</Project>
-      <Name>Draw2D.Spatial</Name>
+      <Name>Core2D.Spatial</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
