@@ -5,6 +5,7 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/7k1e0voeit7od9bw/branch/master?svg=true)](https://ci.appveyor.com/project/wieslawsoltes/core2d/branch/master)
 [![Build Status](https://travis-ci.org/wieslawsoltes/Core2D.svg?branch=master)](https://travis-ci.org/wieslawsoltes/Core2D)
 ![Build Status](https://wiso.visualstudio.com/_apis/public/build/definitions/6eb4f619-6cfb-4f2c-8220-dbe2c8cfd282/2/badge)
+[![Build Status](https://www.bitrise.io/app/4eef57c778c912c7.svg?token=BCX9s7DZh3QgVbECxVe4kA&branch=master)](https://www.bitrise.io/app/4eef57c778c912c7)
 
 A multi-platform data driven 2D diagram editor.
 
