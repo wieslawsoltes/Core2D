@@ -26,7 +26,7 @@ var buildDirs =
     GetDirectories("./dependencies/**/bin/" + dirSuffix) + 
     GetDirectories("./dependencies/**/obj/" + dirSuffix) + 
     GetDirectories("./tests/**/bin/" + dirSuffix) + 
-    GetDirectories("./tests/**/obj/" + dirSuffix) + 
+    GetDirectories("./tests/**/obj/" + dirSuffix);
 var artifactsDir = (DirectoryPath)Directory("./artifacts");
 var testResultsDir = artifactsDir.Combine("test-results");	
 var zipRootDir = artifactsDir.Combine("zip");
