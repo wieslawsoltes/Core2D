@@ -7,12 +7,30 @@
     <ProjectGuid>{EC0EFA51-83F0-4439-BE9F-FAEBD3418C94}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FileWriter.Pdf_core</RootNamespace>
-    <AssemblyName>FileWriter.Pdf-core</AssemblyName>
+    <RootNamespace>FileWriter.Pdf</RootNamespace>
+    <AssemblyName>FileWriter.Pdf</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <DefineConstants>TRACE</DefineConstants>
   </PropertyGroup>
   <Import Project="..\..\Core2D.targets" />
   <PropertyGroup>
@@ -41,9 +59,9 @@
       <Project>{4ee581b0-45f3-4d7e-beae-277abf5f3fdd}</Project>
       <Name>Core2D</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Renderer.PdfSharp-core\Renderer.PdfSharp-core.csproj">
+    <ProjectReference Include="..\Renderer.PdfSharp-core\Renderer.PdfSharp.csproj">
       <Project>{34c8ee31-a1fe-4a74-be36-c1f38bc06fec}</Project>
-      <Name>Renderer.PdfSharp-core</Name>
+      <Name>Renderer.PdfSharp</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

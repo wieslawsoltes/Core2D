@@ -7,8 +7,8 @@
     <ProjectGuid>{34C8EE31-A1FE-4A74-BE36-C1F38BC06FEC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Renderer.PdfSharp_core</RootNamespace>
-    <AssemblyName>Renderer.PdfSharp-core</AssemblyName>
+    <RootNamespace>Renderer.PdfSharp</RootNamespace>
+    <AssemblyName>Renderer.PdfSharp</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>

@@ -6,7 +6,7 @@ using Core2D.Interfaces;
 using Core2D.Renderer;
 using FileSystem.DotNetFx;
 using FileWriter.Emf;
-using FileWriter.Pdf_core;
+using FileWriter.Pdf;
 using Log.Trace;
 using Renderer.Wpf;
 using ScriptRunner.Roslyn;

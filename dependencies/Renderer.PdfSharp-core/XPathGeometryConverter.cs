@@ -3,15 +3,8 @@
 using PdfSharp.Drawing;
 using System;
 using System.Linq;
-#if WPF
-using System.Windows.Media;
-#endif
 
-#if WPF
-namespace Renderer.PdfSharp_wpf
-#elif CORE
-namespace Renderer.PdfSharp_core
-#endif
+namespace Renderer.PdfSharp
 {
     /// <summary>
     /// 

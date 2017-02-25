@@ -4,17 +4,9 @@ using Core2D.Interfaces;
 using Core2D.Project;
 using Core2D.Renderer;
 using Core2D.Shape;
-#if WPF
-using Renderer.PdfSharp_wpf;
-#elif CORE
-using Renderer.PdfSharp_core;
-#endif
+using Renderer.PdfSharp;
 
-#if WPF
-namespace FileWriter.Pdf_wpf
-#elif CORE
-namespace FileWriter.Pdf_core
-#endif
+namespace FileWriter.Pdf
 {
     /// <summary>
     /// PdfSharp file writer.

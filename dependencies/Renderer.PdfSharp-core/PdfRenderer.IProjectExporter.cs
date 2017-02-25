@@ -4,15 +4,8 @@ using System;
 using PdfSharp;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
-#if WPF
-using System.Windows.Media.Imaging;
-#endif
 
-#if WPF
-namespace Renderer.PdfSharp_wpf
-#elif CORE
-namespace Renderer.PdfSharp_core
-#endif
+namespace Renderer.PdfSharp
 {
     /// <summary>
     /// PdfSharp pdf <see cref="Core2D.Interfaces.IProjectExporter"/> implementation.
