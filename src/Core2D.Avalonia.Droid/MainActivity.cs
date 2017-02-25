@@ -77,9 +77,9 @@ namespace Core2D.Avalonia.Droid
             base.OnCreate(bundle);
         }
 
-        protected override void OnStop()
+        protected override void OnDestroy()
         {
-            base.OnStop();
+            base.OnDestroy();
 
             var path = System.IO.Path.Combine(fileIO.GetAssemblyPath(null), "Core2D.recent");
             editor.OnSaveRecent(path);
