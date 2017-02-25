@@ -34,16 +34,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Renderer.PdfSharp-wpf\PdfRenderer.cs">
-      <Link>PdfRenderer.cs</Link>
-    </Compile>
-    <Compile Include="..\Renderer.PdfSharp-wpf\PdfRenderer.IProjectExporter.cs">
-      <Link>PdfRenderer.IProjectExporter.cs</Link>
-    </Compile>
-    <Compile Include="..\Renderer.PdfSharp-wpf\XPathGeometryConverter.cs">
-      <Link>XPathGeometryConverter.cs</Link>
-    </Compile>
+    <Compile Include="PdfRenderer.cs" />
+    <Compile Include="PdfRenderer.IProjectExporter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="XPathGeometryConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
