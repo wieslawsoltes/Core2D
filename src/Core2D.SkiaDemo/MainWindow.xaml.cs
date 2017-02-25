@@ -19,7 +19,7 @@ using SkiaSharp;
 using SkiaSharp.Views.Desktop;
 using Utilities.Wpf;
 
-namespace SkiaDemo.Wpf
+namespace Core2D.SkiaDemo
 {
     public partial class MainWindow : Window
     {

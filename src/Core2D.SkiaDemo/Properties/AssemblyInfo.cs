@@ -2,11 +2,11 @@
 using System.Runtime.InteropServices;
 using System.Windows;
 
-[assembly: AssemblyTitle("SkiaDemo.Wpf")]
+[assembly: AssemblyTitle("Core2D.SkiaDemo")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("SkiaDemo.Wpf")]
+[assembly: AssemblyProduct("Core2D.SkiaDemo")]
 [assembly: AssemblyCopyright("Copyright © Wiesław Šoltés 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

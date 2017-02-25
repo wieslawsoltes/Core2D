@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
 
-namespace SkiaDemo.Wpf
+namespace Core2D.SkiaDemo
 {
     public partial class SvgWindow : Window
     {

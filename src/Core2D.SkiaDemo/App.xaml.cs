@@ -18,7 +18,7 @@ using TextFieldReader.CsvHelper;
 using TextFieldWriter.CsvHelper;
 using Utilities.Wpf;
 
-namespace SkiaDemo.Wpf
+namespace Core2D.SkiaDemo
 {
     class ServiceProvider : IServiceProvider
     {
