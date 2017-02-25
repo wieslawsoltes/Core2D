@@ -11,7 +11,6 @@ var isPlatformAnyCPU = StringComparer.OrdinalIgnoreCase.Equals(platform, "AnyCPU
 var isPlatformX86 = StringComparer.OrdinalIgnoreCase.Equals(platform, "x86");
 var isPlatformX64 = StringComparer.OrdinalIgnoreCase.Equals(platform, "x64");
 var MSBuildSolution = "./Core2D.sln";
-var XBuildSolution = "./Core2D.mono.sln";
 var version = ParseAssemblyInfo(File("./src/Core2D.Shared/SharedAssemblyInfo.cs")).AssemblyVersion;
 if (BuildSystem.AppVeyor.IsRunningOnAppVeyor)
 {
@@ -21,34 +20,18 @@ if (BuildSystem.AppVeyor.IsRunningOnAppVeyor)
         version += "-build" + EnvironmentVariable("APPVEYOR_BUILD_NUMBER");
 }
 var dirSuffix = platform + "/" + configuration;
-var dirSuffixSkia = (isPlatformAnyCPU ? "x86" : platform) + "/" + configuration;
-Func<IFileSystemInfo, bool> ExcludeSkia = i => !(i.Path.FullPath.IndexOf("Skia", StringComparison.OrdinalIgnoreCase) >= 0);
-Func<string, DirectoryPathCollection> GetSkiaDirectories = pattern => GetDirectories(pattern) - GetDirectories(pattern, ExcludeSkia);
 var buildDirs = 
-    GetDirectories("./src/**/bin/" + dirSuffix, ExcludeSkia) + 
-    GetSkiaDirectories("./src/**/bin/" + dirSuffixSkia) +
-    GetDirectories("./src/**/obj/" + dirSuffix, ExcludeSkia) + 
-    GetSkiaDirectories("./src/**/obj/" + dirSuffixSkia) + 
-    GetDirectories("./dependencies/**/bin/" + dirSuffix, ExcludeSkia) + 
-    GetSkiaDirectories("./dependencies/**/bin/" + dirSuffixSkia) + 
-    GetDirectories("./dependencies/**/obj/" + dirSuffix, ExcludeSkia) + 
-    GetSkiaDirectories("./dependencies/**/obj/" + dirSuffixSkia) + 
-    GetDirectories("./tests/**/bin/" + dirSuffix, ExcludeSkia) + 
-    GetSkiaDirectories("./tests/**/bin/" + dirSuffixSkia) + 
-    GetDirectories("./tests/**/obj/" + dirSuffix, ExcludeSkia) + 
-    GetSkiaDirectories("./tests/**/obj/" + dirSuffixSkia);
+    GetDirectories("./src/**/bin/" + dirSuffix) + 
+    GetDirectories("./src/**/obj/" + dirSuffix) + 
+    GetDirectories("./dependencies/**/bin/" + dirSuffix) + 
+    GetDirectories("./dependencies/**/obj/" + dirSuffix) + 
+    GetDirectories("./tests/**/bin/" + dirSuffix) + 
+    GetDirectories("./tests/**/obj/" + dirSuffix);
 var artifactsDir = (DirectoryPath)Directory("./artifacts");
 var testResultsDir = artifactsDir.Combine("test-results");	
 var zipRootDir = artifactsDir.Combine("zip");
 var fileZipSuffix = platform + "-" + configuration + "-" + version + ".zip";
-var fileZipSuffixSkia = (isPlatformAnyCPU ? "x86" : platform) + "-" + configuration + "-" + version + ".zip";
-var zipSourceCairoDirs = (DirectoryPath)Directory("./src/Core2D.Avalonia.Cairo/bin/" + dirSuffix);
-var zipSourceDirect2DDirs = (DirectoryPath)Directory("./src/Core2D.Avalonia.Direct2D/bin/" + dirSuffix);
-var zipSourceSkiaDirs = (DirectoryPath)Directory("./src/Core2D.Avalonia.Skia/bin/" + dirSuffixSkia);
 var zipSourceWpfDirs = (DirectoryPath)Directory("./src/Core2D.Wpf/bin/" + dirSuffix);
-var zipTargetCairoDirs = zipRootDir.CombineWithFilePath("Core2D.Avalonia.Cairo-" + fileZipSuffix);
-var zipTargetDirect2DDirs = zipRootDir.CombineWithFilePath("Core2D.Avalonia.Direct2D-" + fileZipSuffix);
-var zipTargetSkiaDirs = zipRootDir.CombineWithFilePath("Core2D.Avalonia.Skia-" + fileZipSuffixSkia);
 var zipTargetWpfDirs = zipRootDir.CombineWithFilePath("Core2D.Wpf-" + fileZipSuffix);
 
 Task("Clean")
@@ -86,7 +69,7 @@ Task("Restore-NuGet-Packages")
             }
             if(IsRunningOnUnix())
             {
-                NuGetRestore(XBuildSolution, new NuGetRestoreSettings {
+                NuGetRestore(MSBuildSolution, new NuGetRestoreSettings {
                     ToolTimeout = TimeSpan.FromMinutes(toolTimeout)
                 });
             }
@@ -107,7 +90,7 @@ Task("Build")
     }
     if(IsRunningOnUnix())
     {
-        XBuild(XBuildSolution, settings => {
+        XBuild(MSBuildSolution, settings => {
             settings.SetConfiguration(configuration);
             settings.WithProperty("Platform", platform);
             settings.SetVerbosity(Verbosity.Minimal);
@@ -148,28 +131,8 @@ Task("Zip-Files")
     .IsDependentOn("Run-Unit-Tests")
     .Does(() =>
 {
-    Zip(zipSourceCairoDirs, 
-        zipTargetCairoDirs, 
-        GetFiles(zipSourceCairoDirs.FullPath + "/*.dll") + 
-        GetFiles(zipSourceCairoDirs.FullPath + "/*.exe"));
-
     if (IsRunningOnWindows())
     {
-        Zip(zipSourceDirect2DDirs, 
-            zipTargetDirect2DDirs, 
-            GetFiles(zipSourceDirect2DDirs.FullPath + "/*.dll") + 
-            GetFiles(zipSourceDirect2DDirs.FullPath + "/*.exe"));
-
-        if (isPlatformAnyCPU || isPlatformX86)
-            CopyFiles("C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\VC\\redist\\x86\\Microsoft.VC140.CRT\\*.dll", zipSourceSkiaDirs);
-        else if (isPlatformX64)
-            CopyFiles("C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\VC\\redist\\x64\\Microsoft.VC140.CRT\\*.dll", zipSourceSkiaDirs);
-
-        Zip(zipSourceSkiaDirs, 
-            zipTargetSkiaDirs, 
-            GetFiles(zipSourceSkiaDirs.FullPath + "/*.dll") + 
-            GetFiles(zipSourceSkiaDirs.FullPath + "/*.exe"));
-
         Zip(zipSourceWpfDirs, 
             zipTargetWpfDirs, 
             GetFiles(zipSourceWpfDirs.FullPath + "/*.dll") + 
@@ -182,10 +145,6 @@ Task("Default")
   .IsDependentOn("Run-Unit-Tests");
 
 Task("AppVeyor")
-  .IsDependentOn("Zip-Files")
-  .IsDependentOn("Run-Unit-Tests");
-
-Task("Travis")
   .IsDependentOn("Zip-Files")
   .IsDependentOn("Run-Unit-Tests");
 

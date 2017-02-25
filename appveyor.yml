@@ -1,8 +1,6 @@
 os: Visual Studio 2015
 platform:
 - AnyCPU
-- x86
-- x64
 configuration:
 - Release
 before_build:

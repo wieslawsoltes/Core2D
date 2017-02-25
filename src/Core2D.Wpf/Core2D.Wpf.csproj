@@ -73,10 +73,6 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="Wpf.Controls.PanAndZoom, Version=0.4.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Wpf.Controls.PanAndZoom.0.4.1-build68-alpha\lib\net45\Wpf.Controls.PanAndZoom.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Xceed.Wpf.AvalonDock, Version=2.9.15603.14400, Culture=neutral, PublicKeyToken=ba83ff368b7563c6, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Xceed.Wpf.AvalonDock.2.9.15603.14400\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
       <Private>True</Private>
@@ -135,6 +131,9 @@
     <Compile Include="Modules\LocatorModule.cs" />
     <Compile Include="Importers\Win32ImageImporter.cs" />
     <Compile Include="Modules\ViewModule.cs" />
+    <Compile Include="Controls\PanAndZoom\AutoFitMode.cs" />
+    <Compile Include="Controls\PanAndZoom\MatrixHelper.cs" />
+    <Compile Include="Controls\PanAndZoom\ZoomBorder.cs" />
     <Compile Include="Views\DashboardControl.xaml.cs">
       <DependentUpon>DashboardControl.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -564,29 +563,21 @@
       <Project>{d1f867f7-9029-480d-b1e1-b0be4658b182}</Project>
       <Name>FileSystem.DotNetFx</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\dependencies\FileWriter.Dxf\FileWriter.Dxf.csproj">
-      <Project>{d40b3bcd-0a26-40bb-960b-9464d248c934}</Project>
-      <Name>FileWriter.Dxf</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\dependencies\FileWriter.Emf\FileWriter.Emf.csproj">
       <Project>{3660fce5-3d0f-412e-93a7-d0d992b4da65}</Project>
       <Name>FileWriter.Emf</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\dependencies\FileWriter.Pdf-wpf\FileWriter.Pdf-wpf.csproj">
-      <Project>{5c5a31b5-8f76-42e7-aea8-55b32ca641fa}</Project>
-      <Name>FileWriter.Pdf-wpf</Name>
+    <ProjectReference Include="..\..\dependencies\FileWriter.PdfSharp\FileWriter.PdfSharp.csproj">
+      <Project>{ec0efa51-83f0-4439-be9f-faebd3418c94}</Project>
+      <Name>FileWriter.PdfSharp</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\dependencies\Log.Trace\Log.Trace.csproj">
       <Project>{68a36926-df55-4f05-9f89-b9ab1463227e}</Project>
       <Name>Log.Trace</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\dependencies\Renderer.Dxf\Renderer.Dxf.csproj">
-      <Project>{acc2c898-b49b-4ed9-b18c-389f50801b39}</Project>
-      <Name>Renderer.Dxf</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\dependencies\Renderer.PdfSharp-wpf\Renderer.PdfSharp-wpf.csproj">
-      <Project>{8d8845d7-998d-4fc2-b4a0-51e2efb34b45}</Project>
-      <Name>Renderer.PdfSharp-wpf</Name>
+    <ProjectReference Include="..\..\dependencies\Renderer.PdfSharp\Renderer.PdfSharp.csproj">
+      <Project>{34c8ee31-a1fe-4a74-be36-c1f38bc06fec}</Project>
+      <Name>Renderer.PdfSharp</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\dependencies\Renderer.WinForms\Renderer.WinForms.csproj">
       <Project>{3dc476e6-5032-4888-9337-221b88653c40}</Project>
