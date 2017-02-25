@@ -567,7 +567,7 @@
       <Project>{3660fce5-3d0f-412e-93a7-d0d992b4da65}</Project>
       <Name>FileWriter.Emf</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\dependencies\FileWriter.Pdf-core\FileWriter.Pdf.csproj">
+    <ProjectReference Include="..\..\dependencies\FileWriter.Pdf\FileWriter.Pdf.csproj">
       <Project>{ec0efa51-83f0-4439-be9f-faebd3418c94}</Project>
       <Name>FileWriter.Pdf</Name>
     </ProjectReference>
@@ -575,7 +575,7 @@
       <Project>{68a36926-df55-4f05-9f89-b9ab1463227e}</Project>
       <Name>Log.Trace</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\dependencies\Renderer.PdfSharp-core\Renderer.PdfSharp.csproj">
+    <ProjectReference Include="..\..\dependencies\Renderer.PdfSharp\Renderer.PdfSharp.csproj">
       <Project>{34c8ee31-a1fe-4a74-be36-c1f38bc06fec}</Project>
       <Name>Renderer.PdfSharp</Name>
     </ProjectReference>

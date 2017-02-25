@@ -59,7 +59,7 @@
       <Project>{4ee581b0-45f3-4d7e-beae-277abf5f3fdd}</Project>
       <Name>Core2D</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Renderer.PdfSharp-core\Renderer.PdfSharp.csproj">
+    <ProjectReference Include="..\Renderer.PdfSharp\Renderer.PdfSharp.csproj">
       <Project>{34c8ee31-a1fe-4a74-be36-c1f38bc06fec}</Project>
       <Name>Renderer.PdfSharp</Name>
     </ProjectReference>
