@@ -69,7 +69,7 @@ Task("Restore-NuGet-Packages")
             }
             if(IsRunningOnUnix())
             {
-                NuGetRestore(XBuildSolution, new NuGetRestoreSettings {
+                NuGetRestore(MSBuildSolution, new NuGetRestoreSettings {
                     ToolTimeout = TimeSpan.FromMinutes(toolTimeout)
                 });
             }
