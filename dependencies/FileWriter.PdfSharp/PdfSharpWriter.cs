@@ -6,12 +6,12 @@ using Core2D.Renderer;
 using Core2D.Shape;
 using Renderer.PdfSharp;
 
-namespace FileWriter.Pdf
+namespace FileWriter.PdfSharp
 {
     /// <summary>
     /// PdfSharp file writer.
     /// </summary>
-    public sealed class PdfWriter : IFileWriter
+    public sealed class PdfSharpWriter : IFileWriter
     {
         /// <inheritdoc/>
         string IFileWriter.Name { get; } = "Pdf (PdfSharp)";
@@ -29,9 +29,9 @@ namespace FileWriter.Pdf
             if (options == null)
                 return;
 
-            IProjectExporter exporter = new PdfRenderer();
+            IProjectExporter exporter = new PdfSharpRenderer();
 
-            ShapeRenderer renderer = (PdfRenderer)exporter;
+            ShapeRenderer renderer = (PdfSharpRenderer)exporter;
             renderer.State.DrawShapeState.Flags = ShapeStateFlags.Printable;
             renderer.State.ImageCache = ic;
 

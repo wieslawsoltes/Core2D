@@ -203,6 +203,10 @@
       <Project>{d1f867f7-9029-480d-b1e1-b0be4658b182}</Project>
       <Name>FileSystem.DotNetFx</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\dependencies\FileWriter.PdfSharp\FileWriter.PdfSharp.csproj">
+      <Project>{ec0efa51-83f0-4439-be9f-faebd3418c94}</Project>
+      <Name>FileWriter.PdfSharp</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\dependencies\FileWriter.PdfSkiaSharp\FileWriter.PdfSkiaSharp.csproj">
       <Project>{c934ba25-608b-42fa-b766-42efad7da6ff}</Project>
       <Name>FileWriter.PdfSkiaSharp</Name>
@@ -210,6 +214,10 @@
     <ProjectReference Include="..\..\dependencies\FileWriter.SvgSkiaSharp\FileWriter.SvgSkiaSharp.csproj">
       <Project>{e2827255-924c-456e-8049-14e333c6fd18}</Project>
       <Name>FileWriter.SvgSkiaSharp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\dependencies\Renderer.PdfSharp\Renderer.PdfSharp.csproj">
+      <Project>{34c8ee31-a1fe-4a74-be36-c1f38bc06fec}</Project>
+      <Name>Renderer.PdfSharp</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\dependencies\Renderer.SkiaSharp\Renderer.SkiaSharp.csproj">
       <Project>{9b8fa9bd-63be-4560-ba55-0d86aee1809e}</Project>

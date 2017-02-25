@@ -19,8 +19,8 @@
   <Import Project="..\..\Core2D.targets" />
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SvgExporter.cs" />
-    <Compile Include="SvgWriter.cs" />
+    <Compile Include="SvgSkiaSharpExporter.cs" />
+    <Compile Include="SvgSkiaSharpWriter.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Core2D\Core2D.csproj">

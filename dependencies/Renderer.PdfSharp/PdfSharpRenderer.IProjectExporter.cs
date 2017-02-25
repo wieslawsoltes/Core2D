@@ -10,7 +10,7 @@ namespace Renderer.PdfSharp
     /// <summary>
     /// PdfSharp pdf <see cref="Core2D.Interfaces.IProjectExporter"/> implementation.
     /// </summary>
-    public partial class PdfRenderer : Core2D.Renderer.ShapeRenderer, Core2D.Interfaces.IProjectExporter
+    public partial class PdfSharpRenderer : Core2D.Renderer.ShapeRenderer, Core2D.Interfaces.IProjectExporter
     {
         /// <inheritdoc/>
         void Core2D.Interfaces.IProjectExporter.Save(string path, Core2D.Project.XContainer container)

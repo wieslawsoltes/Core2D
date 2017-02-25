@@ -272,7 +272,7 @@ namespace Core2D.SkiaDemo
                     IImageCache ic = _projectEditor.Project;
                     var container = _projectEditor.Project.CurrentContainer;
 
-                    var renderer = new SkiaRenderer(true, 96.0);
+                    var renderer = new SkiaSharpRenderer(true, 96.0);
                     if (!showPrintable)
                     {
                         renderer.State.DrawShapeState.Flags = ShapeStateFlags.Printable;

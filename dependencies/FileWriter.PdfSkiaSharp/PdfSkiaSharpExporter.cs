@@ -11,19 +11,19 @@ namespace FileWriter.PdfSkiaSharp
     /// <summary>
     /// SkiaSharp pdf <see cref="IProjectExporter"/> implementation.
     /// </summary>
-    public sealed class PdfExporter : IProjectExporter
+    public sealed class PdfSkiaSharpExporter : IProjectExporter
     {
         private readonly ShapeRenderer _renderer;
         private readonly ContainerPresenter _presenter;
         private readonly float _targetDpi;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfExporter"/> class.
+        /// Initializes a new instance of the <see cref="PdfSkiaSharpExporter"/> class.
         /// </summary>
         /// <param name="renderer">The shape renderer.</param>
         /// <param name="presenter">The container presenter.</param>
         /// <param name="targetDpi">The target renderer dpi.</param>
-        public PdfExporter(ShapeRenderer renderer, ContainerPresenter presenter, float targetDpi = 72.0f)
+        public PdfSkiaSharpExporter(ShapeRenderer renderer, ContainerPresenter presenter, float targetDpi = 72.0f)
         {
             _renderer = renderer;
             _presenter = presenter;

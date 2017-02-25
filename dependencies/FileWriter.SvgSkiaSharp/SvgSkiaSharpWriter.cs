@@ -13,7 +13,7 @@ namespace FileWriter.SvgSkiaSharp
     /// <summary>
     /// SkiaSharp svg <see cref="IFileWriter"/> implementation.
     /// </summary>
-    public sealed class SvgWriter : IFileWriter
+    public sealed class SvgSkiaSharpWriter : IFileWriter
     {
         /// <inheritdoc/>
         string IFileWriter.Name { get; } = "Svg (SkiaSharp)";
@@ -31,13 +31,13 @@ namespace FileWriter.SvgSkiaSharp
             if (options == null)
                 return;
 
-            var renderer = new SkiaRenderer(true, 96.0);
+            var renderer = new SkiaSharpRenderer(true, 96.0);
             renderer.State.DrawShapeState.Flags = ShapeStateFlags.Printable;
             renderer.State.ImageCache = ic;
 
             var presenter = new ExportPresenter();
 
-            IProjectExporter exporter = new SvgExporter(renderer, presenter);
+            IProjectExporter exporter = new SvgSkiaSharpExporter(renderer, presenter);
 
             if (item is XContainer)
             {

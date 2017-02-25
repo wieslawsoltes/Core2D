@@ -11,17 +11,17 @@ namespace FileWriter.SvgSkiaSharp
     /// <summary>
     /// SkiaSharp svg <see cref="IProjectExporter"/> implementation.
     /// </summary>
-    public sealed class SvgExporter : IProjectExporter
+    public sealed class SvgSkiaSharpExporter : IProjectExporter
     {
         private readonly ShapeRenderer _renderer;
         private readonly ContainerPresenter _presenter;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SvgExporter"/> class.
+        /// Initializes a new instance of the <see cref="SvgSkiaSharpExporter"/> class.
         /// </summary>
         /// <param name="renderer">The shape renderer.</param>
         /// <param name="presenter">The container presenter.</param>
-        public SvgExporter(ShapeRenderer renderer, ContainerPresenter presenter)
+        public SvgSkiaSharpExporter(ShapeRenderer renderer, ContainerPresenter presenter)
         {
             _renderer = renderer;
             _presenter = presenter;

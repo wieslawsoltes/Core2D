@@ -18,7 +18,7 @@ namespace Renderer.SkiaSharp
     /// <summary>
     /// Native SkiaSharp shape renderer.
     /// </summary>
-    public class SkiaRenderer : ShapeRenderer
+    public class SkiaSharpRenderer : ShapeRenderer
     {
         private bool _isAntialias = true;
         private bool _enableImageCache = true;
@@ -28,11 +28,11 @@ namespace Renderer.SkiaSharp
         private double _targetDpi = 72.0;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SkiaRenderer"/> class.
+        /// Initializes a new instance of the <see cref="SkiaSharpRenderer"/> class.
         /// </summary>
         /// <param name="isAntialias">The flag indicating whether paint is antialiased.</param>
         /// <param name="targetDpi">The target renderer dpi.</param>
-        public SkiaRenderer(bool isAntialias = true, double targetDpi = 72.0)
+        public SkiaSharpRenderer(bool isAntialias = true, double targetDpi = 72.0)
         {
             ClearCache(isZooming: false);
             _isAntialias = isAntialias;
@@ -41,10 +41,10 @@ namespace Renderer.SkiaSharp
         }
 
         /// <summary>
-        /// Creates a new <see cref="SkiaRenderer"/> instance.
+        /// Creates a new <see cref="SkiaSharpRenderer"/> instance.
         /// </summary>
-        /// <returns>The new instance of the <see cref="SkiaRenderer"/> class.</returns>
-        public static ShapeRenderer Create() => new SkiaRenderer();
+        /// <returns>The new instance of the <see cref="SkiaSharpRenderer"/> class.</returns>
+        public static ShapeRenderer Create() => new SkiaSharpRenderer();
 
         private SKPoint GetTextOrigin(ShapeStyle style, ref SKRect rect, ref SKRect size)
         {

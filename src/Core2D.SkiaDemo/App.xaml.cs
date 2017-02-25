@@ -8,6 +8,7 @@ using Core2D.Editor.Factories;
 using Core2D.Interfaces;
 using Core2D.Renderer;
 using FileSystem.DotNetFx;
+using FileWriter.PdfSharp;
 using FileWriter.PdfSkiaSharp;
 using FileWriter.SvgSkiaSharp;
 using Microsoft.Win32;
@@ -74,11 +75,12 @@ namespace Core2D.SkiaDemo
             builder.RegisterType<DotNetFxFileSystem>().As<IFileSystem>().InstancePerLifetimeScope();
             builder.RegisterType<NewtonsoftJsonSerializer>().As<IJsonSerializer>().InstancePerLifetimeScope();
             builder.RegisterType<PortableXamlSerializer>().As<IXamlSerializer>().InstancePerLifetimeScope();
-            builder.RegisterType<PdfWriter>().As<IFileWriter>().InstancePerLifetimeScope();
-            builder.RegisterType<SvgWriter>().As<IFileWriter>().InstancePerLifetimeScope();
+            builder.RegisterType<PdfSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
+            builder.RegisterType<PdfSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
+            builder.RegisterType<SvgSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
             builder.RegisterType<CsvHelperReader>().As<ITextFieldReader<XDatabase>>().InstancePerLifetimeScope();
             builder.RegisterType<CsvHelperWriter>().As<ITextFieldWriter<XDatabase>>().InstancePerLifetimeScope();
-            builder.Register<ShapeRenderer>((c) => new SkiaRenderer(true, 96.0)).InstancePerDependency();
+            builder.Register<ShapeRenderer>((c) => new SkiaSharpRenderer(true, 96.0)).InstancePerDependency();
             builder.RegisterType<WpfTextClipboard>().As<ITextClipboard>().InstancePerLifetimeScope();
             // App
             builder.RegisterType<Win32ImageImporter>().As<IImageImporter>().InstancePerLifetimeScope();

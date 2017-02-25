@@ -7,8 +7,8 @@
     <ProjectGuid>{EC0EFA51-83F0-4439-BE9F-FAEBD3418C94}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FileWriter.Pdf</RootNamespace>
-    <AssemblyName>FileWriter.Pdf</AssemblyName>
+    <RootNamespace>FileWriter.PdfSharp</RootNamespace>
+    <AssemblyName>FileWriter.PdfSharp</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
@@ -51,7 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PdfWriter.cs" />
+    <Compile Include="PdfSharpWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

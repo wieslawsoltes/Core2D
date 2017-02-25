@@ -7,7 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dependencies", "dependencie
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileWriter.Emf", "dependencies\FileWriter.Emf\FileWriter.Emf.csproj", "{3660FCE5-3D0F-412E-93A7-D0D992B4DA65}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileWriter.Pdf", "dependencies\FileWriter.Pdf\FileWriter.Pdf.csproj", "{EC0EFA51-83F0-4439-BE9F-FAEBD3418C94}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileWriter.PdfSharp", "dependencies\FileWriter.PdfSharp\FileWriter.PdfSharp.csproj", "{EC0EFA51-83F0-4439-BE9F-FAEBD3418C94}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Renderer.PdfSharp", "dependencies\Renderer.PdfSharp\Renderer.PdfSharp.csproj", "{34C8EE31-A1FE-4A74-BE36-C1F38BC06FEC}"
 EndProject

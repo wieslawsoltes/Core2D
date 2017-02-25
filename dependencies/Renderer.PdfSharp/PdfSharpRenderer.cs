@@ -12,7 +12,7 @@ namespace Renderer.PdfSharp
     /// <summary>
     /// Native PdfSharp shape renderer.
     /// </summary>
-    public partial class PdfRenderer : Core2D.Renderer.ShapeRenderer
+    public partial class PdfSharpRenderer : Core2D.Renderer.ShapeRenderer
     {
         private bool _enableImageCache = true;
         private IDictionary<string, XImage> _biCache;
@@ -21,19 +21,19 @@ namespace Renderer.PdfSharp
         private double _targetDpi = 72.0;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PdfRenderer"/> class.
+        /// Initializes a new instance of the <see cref="PdfSharpRenderer"/> class.
         /// </summary>
-        public PdfRenderer()
+        public PdfSharpRenderer()
         {
             ClearCache(isZooming: false);
             _scaleToPage = (value) => (float)(value * 1.0);
         }
 
         /// <summary>
-        /// Creates a new <see cref="PdfRenderer"/> instance.
+        /// Creates a new <see cref="PdfSharpRenderer"/> instance.
         /// </summary>
-        /// <returns>The new instance of the <see cref="PdfRenderer"/> class.</returns>
-        public static Core2D.Renderer.ShapeRenderer Create() => new PdfRenderer();
+        /// <returns>The new instance of the <see cref="PdfSharpRenderer"/> class.</returns>
+        public static Core2D.Renderer.ShapeRenderer Create() => new PdfSharpRenderer();
 
         private static XColor ToXColor(Core2D.Style.ArgbColor color) => XColor.FromArgb(color.A, color.R, color.G, color.B);
 

@@ -34,8 +34,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PdfRenderer.cs" />
-    <Compile Include="PdfRenderer.IProjectExporter.cs" />
+    <Compile Include="PdfSharpRenderer.cs" />
+    <Compile Include="PdfSharpRenderer.IProjectExporter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XPathGeometryConverter.cs" />
   </ItemGroup>

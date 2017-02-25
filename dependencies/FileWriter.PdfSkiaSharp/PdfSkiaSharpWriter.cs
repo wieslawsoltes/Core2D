@@ -12,7 +12,7 @@ namespace FileWriter.PdfSkiaSharp
     /// <summary>
     /// SkiaSharp pdf <see cref="IFileWriter"/> implementation.
     /// </summary>
-    public sealed class PdfWriter : IFileWriter
+    public sealed class PdfSkiaSharpWriter : IFileWriter
     {
         /// <inheritdoc/>
         string IFileWriter.Name { get; } = "Pdf (SkiaSharp)";
@@ -30,13 +30,13 @@ namespace FileWriter.PdfSkiaSharp
             if (options == null)
                 return;
 
-            ShapeRenderer renderer = new SkiaRenderer(true, 72.0);
+            ShapeRenderer renderer = new SkiaSharpRenderer(true, 72.0);
             renderer.State.DrawShapeState.Flags = ShapeStateFlags.Printable;
             renderer.State.ImageCache = ic;
 
             var presenter = new ExportPresenter();
 
-            IProjectExporter exporter = new PdfExporter(renderer, presenter, 72.0f);
+            IProjectExporter exporter = new PdfSkiaSharpExporter(renderer, presenter, 72.0f);
 
             if (item is XContainer)
             {
