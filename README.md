@@ -59,9 +59,7 @@ $ ./build.sh --target "Default" --platform "AnyCPU" --configuration "Release"
 
 * [Portable .NET library for reading/writing xaml files.](https://github.com/cwensley/Portable.Xaml) Needed for Xaml support.
 * [xUnit.net unit testing tool for the .NET Framework.](https://github.com/xunit/xunit) Needed to run tests.
-* [.net dxf Reader-Writer](http://netdxf.codeplex.com/) Needed for `DXF` support. Run `git submodule update --init --recursive` in project directory.
 * [PDFsharp A .NET library for processing PDF](https://github.com/empira/PDFsharp) Needed for `PDF` support. Run `git submodule update --init --recursive` in project directory.
-* For building `Core2D` mirror repository is used for [.net dxf Reader-Writer](https://github.com/wieslawsoltes/netdxf).
 * For building `Core2D` mirror repository is used for [PDFsharp](https://github.com/wieslawsoltes/PDFsharp). 
 * `PDFsharp` core is used for non-windows builds and `PDFsharp-wpf` is used for WPF version (`PDFsharp` core does not implement `XGraphicsPath.AddArc` method.).
 
