@@ -33,9 +33,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\FileWriter.Pdf-wpf\PdfWriter.cs">
-      <Link>PdfWriter.cs</Link>
-    </Compile>
+    <Compile Include="PdfWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

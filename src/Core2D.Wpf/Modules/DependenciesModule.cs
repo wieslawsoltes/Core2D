@@ -5,9 +5,8 @@ using Core2D.Data.Database;
 using Core2D.Interfaces;
 using Core2D.Renderer;
 using FileSystem.DotNetFx;
-using FileWriter.Dxf;
 using FileWriter.Emf;
-using FileWriter.Pdf_wpf;
+using FileWriter.Pdf_core;
 using Log.Trace;
 using Renderer.Wpf;
 using ScriptRunner.Roslyn;
@@ -33,7 +32,6 @@ namespace Core2D.Wpf.Modules
             builder.RegisterType<NewtonsoftJsonSerializer>().As<IJsonSerializer>().InstancePerLifetimeScope();
             builder.RegisterType<PortableXamlSerializer>().As<IXamlSerializer>().InstancePerLifetimeScope();
             builder.RegisterType<PdfWriter>().As<IFileWriter>().InstancePerLifetimeScope();
-            builder.RegisterType<DxfWriter>().As<IFileWriter>().InstancePerLifetimeScope();
             builder.RegisterType<EmfWriter>().As<IFileWriter>().InstancePerLifetimeScope();
             builder.RegisterType<CsvHelperReader>().As<ITextFieldReader<XDatabase>>().InstancePerLifetimeScope();
             builder.RegisterType<CsvHelperWriter>().As<ITextFieldWriter<XDatabase>>().InstancePerLifetimeScope();
