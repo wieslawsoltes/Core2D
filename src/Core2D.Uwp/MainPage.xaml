@@ -1,0 +1,132 @@
+﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
+<!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
+<Page
+    x:Class="Core2D.Uwp.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Core2D.Uwp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:canvas="using:Microsoft.Graphics.Canvas.UI.Xaml"
+    xmlns:Editor="using:Core2D.Editor"
+    xmlns:Project="using:Core2D.Project"
+    xmlns:Style="using:Core2D.Style"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    UseLayoutRounding="True">
+    <Page.TopAppBar>
+        <CommandBar Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" FlowDirection="RightToLeft">
+            <CommandBar.PrimaryCommands>
+                <AppBarButton Icon="SelectAll" Label="Paste" Command="{Binding Editor:Commands.SelectAllCommand}"/>
+                <AppBarSeparator/>
+                <AppBarButton Icon="Delete" Label="Delete" Command="{Binding Editor:Commands.DeleteCommand}"/>
+                <AppBarSeparator/>
+                <AppBarButton Icon="Paste" Label="Paste" Command="{Binding Editor:Commands.PasteCommand}"/>
+                <AppBarButton Icon="Copy" Label="Copy" Command="{Binding Editor:Commands.CopyCommand}"/>
+                <AppBarButton Icon="Cut" Label="Cut" Command="{Binding Editor:Commands.CutCommand}"/>
+                <AppBarSeparator/>
+                <AppBarButton Icon="Redo" Label="Redo" Command="{Binding Editor:Commands.RedoCommand}"/>
+                <AppBarButton Icon="Undo" Label="Undo" Command="{Binding Editor:Commands.UndoCommand}"/>
+                <AppBarSeparator/>
+                <AppBarButton Icon="SaveLocal" Label="Save As" Command="{Binding Editor:Commands.SaveAsCommand}"/>
+                <AppBarButton Icon="OpenFile" Label="Open" Command="{Binding Editor:Commands.OpenCommand}"/>
+                <AppBarSeparator/>
+                <AppBarButton Icon="Page2" Label="New" Command="{Binding Editor:Commands.NewCommand}"/>
+            </CommandBar.PrimaryCommands>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton Label="None" Command="{Binding Editor:Commands.ToolLineCommand}"/>
+                <AppBarButton Label="Selection" Command="{Binding Editor:Commands.ToolSelectionCommand}"/>
+                <AppBarButton Label="Point" Command="{Binding Editor:Commands.ToolPointCommand}"/>
+                <AppBarButton Label="Line" Command="{Binding Editor:Commands.ToolLineCommand}"/>
+                <AppBarButton Label="Arc" Command="{Binding Editor:Commands.ToolArcCommand}"/>
+                <AppBarButton Label="Bezier" Command="{Binding Editor:Commands.ToolBezierCommand}"/>
+                <AppBarButton Label="QBezier" Command="{Binding Editor:Commands.ToolQBezierCommand}"/>
+                <AppBarButton Label="Path" Command="{Binding Editor:Commands.ToolPathCommand}"/>
+                <AppBarButton Label="Rectangle" Command="{Binding Editor:Commands.ToolRectangleCommand}"/>
+                <AppBarButton Label="Ellipse" Command="{Binding Editor:Commands.ToolEllipseCommand}"/>
+                <AppBarButton Label="Text" Command="{Binding Editor:Commands.ToolTextCommand}"/>
+                <AppBarButton Label="Image" Command="{Binding Editor:Commands.ToolImageCommand}"/>
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
+    </Page.TopAppBar>
+    <Grid>
+        <SplitView PanePlacement="Left" IsPaneOpen="True" DisplayMode="Inline" OpenPaneLength="150">
+            <SplitView.Pane>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <ComboBox 
+                        x:Name="DocumentsComboBox"
+                        ItemsSource="{Binding Project.Documents, Mode=TwoWay}" 
+                        SelectedItem="{Binding Project.CurrentDocument, Mode=TwoWay}" 
+                        Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" 
+                        Grid.Row="0"
+                        HorizontalAlignment="Stretch">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate x:DataType="Project:XDocument">
+                                <TextBlock Text="{Binding Name}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <ListBox 
+                        x:Name="ContainersListBox"
+                        ItemsSource="{Binding Project.CurrentDocument.Pages, Mode=TwoWay}" 
+                        SelectedItem="{Binding Project.CurrentContainer, Mode=TwoWay}" 
+                        SelectionChanged="ContainersListBox_SelectionChanged"
+                        Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+                        Grid.Row="1">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate x:DataType="Project:XContainer">
+                                <TextBlock Text="{Binding Name}"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+            </SplitView.Pane>
+            <SplitView.Content>
+                <SplitView PanePlacement="Right" IsPaneOpen="True" DisplayMode="Inline" OpenPaneLength="150">
+                    <SplitView.Content>
+                        <Grid Margin="10">
+                            <canvas:CanvasControl x:Name="canvas" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                        </Grid>
+                    </SplitView.Content>
+                    <SplitView.Pane>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <ComboBox 
+                                x:Name="StyleLibrariesComboBox"
+                                ItemsSource="{Binding Project.StyleLibraries, Mode=TwoWay}" 
+                                SelectedItem="{Binding Project.CurrentStyleLibrary, Mode=TwoWay}" 
+                                Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" 
+                                Grid.Row="0"
+                                HorizontalAlignment="Stretch">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                            <ListBox 
+                                x:Name="StylesListBox"
+                                ItemsSource="{Binding Project.CurrentStyleLibrary.Items, Mode=TwoWay}" 
+                                SelectedItem="{Binding Project.CurrentStyleLibrary.Selected, Mode=TwoWay}" 
+                                Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+                                Grid.Row="1">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate x:DataType="Style:BaseStyle">
+                                        <TextBlock Text="{Binding Name}"/>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </Grid>
+                    </SplitView.Pane>
+                </SplitView>
+            </SplitView.Content>
+        </SplitView>
+    </Grid>
+</Page>
