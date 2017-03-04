@@ -579,10 +579,10 @@ namespace Renderer.Win2D
             };
 
             var rect = Rect2.FromPoints(
-                text.TopLeft.X, 
-                text.TopLeft.Y, 
-                text.BottomRight.X, 
-                text.BottomRight.Y, 
+                text.TopLeft.X,
+                text.TopLeft.Y,
+                text.BottomRight.X,
+                text.BottomRight.Y,
                 dx, dy);
 
             var layout = new CanvasTextLayout(_ds, tbind, format, (float)rect.Width, (float)rect.Height);
