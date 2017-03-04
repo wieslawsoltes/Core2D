@@ -50,6 +50,7 @@ namespace Core2D.Editor
         private readonly Lazy<ITextFieldReader<XDatabase>> _csvReader;
         private readonly Lazy<ITextFieldWriter<XDatabase>> _csvWriter;
         private readonly Lazy<IImageImporter> _imageImporter;
+        private readonly Lazy<ProjectEditorCommands> _editorCommands;
 
         /// <summary>
         /// Gets or sets current project.
@@ -277,6 +278,11 @@ namespace Core2D.Editor
         public IImageImporter ImageImporter => _imageImporter.Value;
 
         /// <summary>
+        /// Gets project editor commands.
+        /// </summary>
+        public ProjectEditorCommands EditorCommands => _editorCommands.Value;
+
+        /// <summary>
         /// Initialize new instance of <see cref="ProjectEditor"/> class.
         /// </summary>
         /// <param name="serviceProvider">The service provider.</param>
@@ -300,6 +306,7 @@ namespace Core2D.Editor
             _csvReader = _serviceProvider.GetServiceLazily<ITextFieldReader<XDatabase>>();
             _csvWriter = _serviceProvider.GetServiceLazily<ITextFieldWriter<XDatabase>>();
             _imageImporter = _serviceProvider.GetServiceLazily<IImageImporter>();
+            _editorCommands = _serviceProvider.GetServiceLazily<ProjectEditorCommands>();
         }
     }
 }
