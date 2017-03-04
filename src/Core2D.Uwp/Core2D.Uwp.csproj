@@ -110,6 +110,14 @@
       <Project>{180963c2-9b40-4f63-b288-88328d798098}</Project>
       <Name>FileSystem.Uwp</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FileWriter.PdfSkiaSharp\FileWriter.PdfSkiaSharp.csproj">
+      <Project>{C934BA25-608B-42FA-B766-42EFAD7DA6FF}</Project>
+      <Name>FileWriter.PdfSkiaSharp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FileWriter.SvgSkiaSharp\FileWriter.SvgSkiaSharp.csproj">
+      <Project>{E2827255-924C-456E-8049-14E333C6FD18}</Project>
+      <Name>FileWriter.SvgSkiaSharp</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Renderer.Win2D\Renderer.Win2D.csproj">
       <Project>{ea79fdcf-c78b-4170-bfbe-beb2303d911d}</Project>
       <Name>Renderer.Win2D</Name>
