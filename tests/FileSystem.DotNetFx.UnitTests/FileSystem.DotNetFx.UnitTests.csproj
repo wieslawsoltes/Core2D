@@ -68,7 +68,7 @@
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\dependencies\FileSystem.DotNetFx\FileSystem.DotNetFx.csproj">
+    <ProjectReference Include="..\..\src\FileSystem.DotNetFx\FileSystem.DotNetFx.csproj">
       <Project>{D1F867F7-9029-480D-B1E1-B0BE4658B182}</Project>
       <Name>FileSystem.DotNetFx</Name>
     </ProjectReference>
