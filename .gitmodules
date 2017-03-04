@@ -1,3 +1,0 @@
-[submodule "dependencies/PDFsharp"]
-	path = dependencies/PDFsharp
-	url = https://github.com/wieslawsoltes/PDFsharp.git

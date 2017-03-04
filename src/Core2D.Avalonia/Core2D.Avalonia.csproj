@@ -1,0 +1,616 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{27CD58AE-D6D4-42AD-A315-2F1CB63454AF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Core2D.Avalonia</RootNamespace>
+    <AssemblyName>Core2D.Avalonia</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <Import Project="..\..\Core2D.targets" />
+  <ItemGroup>
+    <Reference Include="Autofac, Version=4.4.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Autofac.4.4.0\lib\net45\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Avalonia.Animation, Version=0.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Avalonia.0.4.1-build2729-alpha\lib\net45\Avalonia.Animation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Avalonia.Base, Version=0.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Avalonia.0.4.1-build2729-alpha\lib\net45\Avalonia.Base.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Avalonia.Controls, Version=0.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Avalonia.0.4.1-build2729-alpha\lib\net45\Avalonia.Controls.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Avalonia.Controls.PanAndZoom, Version=0.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Avalonia.Controls.PanAndZoom.0.4.1-build80-alpha\lib\portable-windows8+net45\Avalonia.Controls.PanAndZoom.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Avalonia.DesignerSupport, Version=0.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Avalonia.0.4.1-build2729-alpha\lib\net45\Avalonia.DesignerSupport.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Avalonia.Diagnostics, Version=0.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Avalonia.0.4.1-build2729-alpha\lib\net45\Avalonia.Diagnostics.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Avalonia.DotNetFrameworkRuntime, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Avalonia.0.4.1-build2729-alpha\lib\net45\Avalonia.DotNetFrameworkRuntime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Avalonia.Input, Version=0.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Avalonia.0.4.1-build2729-alpha\lib\net45\Avalonia.Input.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Avalonia.Interactivity, Version=0.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Avalonia.0.4.1-build2729-alpha\lib\net45\Avalonia.Interactivity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Avalonia.Layout, Version=0.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Avalonia.0.4.1-build2729-alpha\lib\net45\Avalonia.Layout.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Avalonia.Logging.Serilog, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Avalonia.0.4.1-build2729-alpha\lib\net45\Avalonia.Logging.Serilog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Avalonia.Markup, Version=0.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Avalonia.0.4.1-build2729-alpha\lib\net45\Avalonia.Markup.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Avalonia.Markup.Xaml, Version=0.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Avalonia.0.4.1-build2729-alpha\lib\net45\Avalonia.Markup.Xaml.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Avalonia.ReactiveUI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Avalonia.0.4.1-build2729-alpha\lib\net45\Avalonia.ReactiveUI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Avalonia.Styling, Version=0.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Avalonia.0.4.1-build2729-alpha\lib\net45\Avalonia.Styling.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Avalonia.Themes.Default, Version=0.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Avalonia.0.4.1-build2729-alpha\lib\net45\Avalonia.Themes.Default.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Avalonia.Visuals, Version=0.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Avalonia.0.4.1-build2729-alpha\lib\net45\Avalonia.Visuals.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Avalonia.Xaml.Interactions, Version=0.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Avalonia.Xaml.Behaviors.0.4.1-build333-alpha\lib\net45\Avalonia.Xaml.Interactions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Avalonia.Xaml.Interactivity, Version=0.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Avalonia.Xaml.Behaviors.0.4.1-build333-alpha\lib\net45\Avalonia.Xaml.Interactivity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Serilog, Version=1.5.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Serilog.1.5.14\lib\net45\Serilog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Serilog.FullNetFx, Version=1.5.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Serilog.1.5.14\lib\net45\Serilog.FullNetFx.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Splat, Version=1.6.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Splat.1.6.2\lib\Net45\Splat.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Sprache, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Sprache.2.1.0\lib\net40\Sprache.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Collections.Immutable, Version=1.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Collections.Immutable.1.3.1\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Reactive.Core, Version=3.0.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Reactive.Core.3.0.0\lib\net45\System.Reactive.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Reactive.Interfaces, Version=3.0.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Reactive.Interfaces.3.0.0\lib\net45\System.Reactive.Interfaces.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Reactive.Linq, Version=3.0.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Reactive.Linq.3.0.0\lib\net45\System.Reactive.Linq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Reactive.PlatformServices, Version=3.0.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Reactive.PlatformServices.3.0.0\lib\net45\System.Reactive.PlatformServices.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Reactive.Windows.Threading, Version=3.0.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Reactive.Windows.Threading.3.0.0\lib\net45\System.Reactive.Windows.Threading.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Commands\Data\ExportDataCommand.cs" />
+    <Compile Include="Commands\Data\ImportDataCommand.cs" />
+    <Compile Include="Commands\Data\UpdateDataCommand.cs" />
+    <Compile Include="Commands\Edit\Clipboard\CopyAsEmfCommand.cs" />
+    <Compile Include="Commands\File\ExecuteScriptCommand.cs" />
+    <Compile Include="Commands\File\ExitCommand.cs" />
+    <Compile Include="Commands\File\ExportCommand.cs" />
+    <Compile Include="Commands\File\Export\ExportJsonCommand.cs" />
+    <Compile Include="Commands\File\Export\ExportObjectCommand.cs" />
+    <Compile Include="Commands\File\Export\ExportXamlCommand.cs" />
+    <Compile Include="Commands\File\Import\ImportJsonCommand.cs" />
+    <Compile Include="Commands\File\Import\ImportObjectCommand.cs" />
+    <Compile Include="Commands\File\Import\ImportXamlCommand.cs" />
+    <Compile Include="Commands\File\OpenCommand.cs" />
+    <Compile Include="Commands\File\SaveAsCommand.cs" />
+    <Compile Include="Commands\File\SaveCommand.cs" />
+    <Compile Include="Commands\View\Views\DocumentViewerCommand.cs" />
+    <Compile Include="Commands\View\Views\ObjectBrowserCommand.cs" />
+    <Compile Include="Commands\View\Zoom\ZoomAutoFitCommand.cs" />
+    <Compile Include="Commands\View\Zoom\ZoomResetCommand.cs" />
+    <Compile Include="Commands\Window\LoadWindowLayoutCommand.cs" />
+    <Compile Include="Commands\Window\ResetWindowLayoutCommand.cs" />
+    <Compile Include="Commands\Window\SaveWindowLayoutCommand.cs" />
+    <Compile Include="Controls\Data\ColumnsControl.xaml.cs">
+      <DependentUpon>ColumnsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Data\DatabaseControl.xaml.cs">
+      <DependentUpon>DatabaseControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Data\DataControl.xaml.cs">
+      <DependentUpon>DataControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Data\PropertiesControl.xaml.cs">
+      <DependentUpon>PropertiesControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Data\RecordControl.xaml.cs">
+      <DependentUpon>RecordControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Data\RecordsControl.xaml.cs">
+      <DependentUpon>RecordsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Path\ArcSegmentControl.xaml.cs">
+      <DependentUpon>ArcSegmentControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Path\CubicBezierSegmentControl.xaml.cs">
+      <DependentUpon>CubicBezierSegmentControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Path\LineSegmentControl.xaml.cs">
+      <DependentUpon>LineSegmentControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Path\PathFigureControl.xaml.cs">
+      <DependentUpon>PathFigureControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Path\PathGeometryControl.xaml.cs">
+      <DependentUpon>PathGeometryControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Path\PathSizeControl.xaml.cs">
+      <DependentUpon>PathSizeControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Path\PolyCubicBezierSegmentControl.xaml.cs">
+      <DependentUpon>PolyCubicBezierSegmentControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Path\PolyLineSegmentControl.xaml.cs">
+      <DependentUpon>PolyLineSegmentControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Path\PolyQuadraticBezierSegmentControl.xaml.cs">
+      <DependentUpon>PolyQuadraticBezierSegmentControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Path\QuadraticBezierSegmentControl.xaml.cs">
+      <DependentUpon>QuadraticBezierSegmentControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Project\ContainerControl.xaml.cs">
+      <DependentUpon>ContainerControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Project\DatabasesControl.xaml.cs">
+      <DependentUpon>DatabasesControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Project\DocumentControl.xaml.cs">
+      <DependentUpon>DocumentControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Project\GroupsControl.xaml.cs">
+      <DependentUpon>GroupsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Project\ImagesControl.xaml.cs">
+      <DependentUpon>ImagesControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Project\LayerControl.xaml.cs">
+      <DependentUpon>LayerControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Project\LayersControl.xaml.cs">
+      <DependentUpon>LayersControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Project\LibraryControl.xaml.cs">
+      <DependentUpon>LibraryControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Project\OptionsControl.xaml.cs">
+      <DependentUpon>OptionsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Project\ProjectControl.xaml.cs">
+      <DependentUpon>ProjectControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Project\ShapesControl.xaml.cs">
+      <DependentUpon>ShapesControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Project\StylesControl.xaml.cs">
+      <DependentUpon>StylesControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Project\TemplatesControl.xaml.cs">
+      <DependentUpon>TemplatesControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Shapes\ArcControl.xaml.cs">
+      <DependentUpon>ArcControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Shapes\CubicBezierControl.xaml.cs">
+      <DependentUpon>CubicBezierControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Shapes\EllipseControl.xaml.cs">
+      <DependentUpon>EllipseControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Shapes\GroupControl.xaml.cs">
+      <DependentUpon>GroupControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Shapes\ImageControl.xaml.cs">
+      <DependentUpon>ImageControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Shapes\LineControl.xaml.cs">
+      <DependentUpon>LineControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Shapes\PathControl.xaml.cs">
+      <DependentUpon>PathControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Shapes\PointControl.xaml.cs">
+      <DependentUpon>PointControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Shapes\QuadraticBezierControl.xaml.cs">
+      <DependentUpon>QuadraticBezierControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Shapes\RectangleControl.xaml.cs">
+      <DependentUpon>RectangleControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Shapes\TextControl.xaml.cs">
+      <DependentUpon>TextControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\State\ShapeStateControl.xaml.cs">
+      <DependentUpon>ShapeStateControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Style\ArgbColorControl.xaml.cs">
+      <DependentUpon>ArgbColorControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Style\ArrowStyleControl.xaml.cs">
+      <DependentUpon>ArrowStyleControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Style\FontStyleControl.xaml.cs">
+      <DependentUpon>FontStyleControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Style\LineFixedLengthControl.xaml.cs">
+      <DependentUpon>LineFixedLengthControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Style\LineStyleControl.xaml.cs">
+      <DependentUpon>LineStyleControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Style\ShapeStyleControl.xaml.cs">
+      <DependentUpon>ShapeStyleControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Style\StyleControl.xaml.cs">
+      <DependentUpon>StyleControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Style\TextStyleControl.xaml.cs">
+      <DependentUpon>TextStyleControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\ArgbColorToBrushMultiConverter.cs" />
+    <Compile Include="Converters\ByteToDoubleConverter.cs" />
+    <Compile Include="Converters\ByteToStringConverter.cs" />
+    <Compile Include="Converters\EditorToStatsMultiConverter.cs" />
+    <Compile Include="Converters\EditorToTitleMultiConverter.cs" />
+    <Compile Include="Converters\IsGroupConverter.cs" />
+    <Compile Include="Converters\IsNotNullConverter.cs" />
+    <Compile Include="Converters\IsNullConverter.cs" />
+    <Compile Include="Converters\ObjectEqualityMultiConverter.cs" />
+    <Compile Include="Converters\ObjectEqualsConverter.cs" />
+    <Compile Include="Converters\ObjectToJsonStringConverter.cs" />
+    <Compile Include="Converters\ObjectToObjectConverter.cs" />
+    <Compile Include="Converters\ObjectToTypeStringConverter.cs" />
+    <Compile Include="Converters\ObjectToXamlStringConverter.cs" />
+    <Compile Include="Converters\TreeViewSelectedItemToObjectConverter.cs" />
+    <Compile Include="Importers\AvaloniaImageImporter.cs" />
+    <Compile Include="Interactions\Actions\FocusControlAction.cs" />
+    <Compile Include="Interactions\Behaviors\BindTagToVisualRootDataContextBehavior.cs" />
+    <Compile Include="Interactions\Behaviors\FocusOnAttachedToVisualTreeBehavior.cs" />
+    <Compile Include="Interactions\Behaviors\FocusOnPointerMovedBehavior.cs" />
+    <Compile Include="Interactions\Behaviors\FocusOnPointerPressedBehavior.cs" />
+    <Compile Include="Interactions\Behaviors\SelectListBoxItemOnPointerMovedBehavior.cs" />
+    <Compile Include="Interactions\Behaviors\ToggleIsExpandedOnDoubleTappedBehavior.cs" />
+    <Compile Include="Locator\ServiceProvider.cs" />
+    <Compile Include="Modules\AppModule.cs" />
+    <Compile Include="Modules\CoreModule.cs" />
+    <Compile Include="Modules\DesignerModule.cs" />
+    <Compile Include="Modules\LocatorModule.cs" />
+    <Compile Include="Modules\ViewModule.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Renderer\RendererOptions.cs" />
+    <Compile Include="Views\BrowserViewControl.xaml.cs">
+      <DependentUpon>BrowserViewControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ContainerViewControl.xaml.cs">
+      <DependentUpon>ContainerViewControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DashboardControl.xaml.cs">
+      <DependentUpon>DashboardControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DashboardMenuControl.xaml.cs">
+      <DependentUpon>DashboardMenuControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DashboardViewControl.xaml.cs">
+      <DependentUpon>DashboardViewControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DocumentViewControl.xaml.cs">
+      <DependentUpon>DocumentViewControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditorControl.xaml.cs">
+      <DependentUpon>EditorControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditorMenuControl.xaml.cs">
+      <DependentUpon>EditorMenuControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditorViewControl.xaml.cs">
+      <DependentUpon>EditorViewControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainControl.xaml.cs">
+      <DependentUpon>MainControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\BrowserWindow.xaml.cs">
+      <DependentUpon>BrowserWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\DocumentWindow.xaml.cs">
+      <DependentUpon>DocumentWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Renderer.Avalonia\Renderer.Avalonia.csproj">
+      <Project>{e05f3f7e-2176-43dc-90bb-f5c66cfdb12f}</Project>
+      <Name>Renderer.Avalonia</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utilities.Avalonia\Utilities.Avalonia.csproj">
+      <Project>{c6dbd1fd-c462-4005-b382-97bb4aef26f2}</Project>
+      <Name>Utilities.Avalonia</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core2D\Core2D.csproj">
+      <Project>{4ee581b0-45f3-4d7e-beae-277abf5f3fdd}</Project>
+      <Name>Core2D</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Data\ColumnsControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Data\DatabaseControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Data\DataControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Data\PropertiesControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Data\RecordControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Data\RecordsControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Path\ArcSegmentControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Path\CubicBezierSegmentControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Path\LineSegmentControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Path\PathFigureControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Path\PathGeometryControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Path\PathSizeControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Path\PolyCubicBezierSegmentControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Path\PolyLineSegmentControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Path\PolyQuadraticBezierSegmentControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Path\QuadraticBezierSegmentControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Project\ContainerControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Project\DatabasesControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Project\DocumentControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Project\GroupsControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Project\ImagesControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Project\LayerControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Project\LayersControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Project\LibraryControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Project\OptionsControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Project\ProjectControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Project\ShapesControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Project\StylesControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Project\TemplatesControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Shapes\ArcControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Shapes\CubicBezierControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Shapes\EllipseControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Shapes\GroupControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Shapes\ImageControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Shapes\LineControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Shapes\PathControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Shapes\PointControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Shapes\QuadraticBezierControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Shapes\RectangleControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Shapes\TextControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\State\ShapeStateControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Style\ArgbColorControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Style\ArrowStyleControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Style\FontStyleControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Style\LineFixedLengthControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Style\LineStyleControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Style\ShapeStyleControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Style\StyleControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Style\TextStyleControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Brushes.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Styles.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\BrowserViewControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\ContainerViewControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\DashboardControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\DashboardMenuControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\DashboardViewControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\DocumentViewControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\EditorControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\EditorMenuControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\EditorViewControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Windows\BrowserWindow.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Windows\DocumentWindow.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Windows\MainWindow.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="App.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\MainControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="..\Core2D.Shared\Core2D.Shared.projitems" Label="Shared" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

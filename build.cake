@@ -1,8 +1,10 @@
 #addin "nuget:?package=Polly&version=4.2.0"
+#addin "nuget:?package=NuGet.Core&version=2.12.0"
 #tool "nuget:?package=xunit.runner.console&version=2.1.0"
 
 using System;
 using Polly;
+using NuGet;
 
 var target = Argument("target", "Default");
 var platform = Argument("platform", "AnyCPU");
@@ -40,6 +42,45 @@ Task("Clean")
     CleanDirectories(buildDirs);
     CleanDirectory(testResultsDir);
     CleanDirectory(zipRootDir);
+});
+
+Task("Validate-NuGet-Packages")
+    .Does(() =>
+{
+    var packageVersions = new Dictionary<string, IList<Tuple<string,string>>>();
+    var sourcesDir = (DirectoryPath)Directory("./src");
+
+    System.IO.Directory.EnumerateFiles(sourcesDir.FullPath, "packages.config", SearchOption.AllDirectories).ToList().ForEach(fileName =>
+    {
+        var file = new PackageReferenceFile(fileName);
+        foreach (PackageReference packageReference in file.GetPackageReferences())
+        {
+            IList<Tuple<string, string>> versions;
+            packageVersions.TryGetValue(packageReference.Id, out versions);
+            if (versions == null)
+            {
+                versions = new List<Tuple<string, string>>();
+                packageVersions[packageReference.Id] = versions;
+            }
+            versions.Add(Tuple.Create(packageReference.Version.ToString(), fileName));
+        }
+    });
+
+    Information("Checking installed NuGet package dependencies versions:");
+
+    packageVersions.ToList().ForEach(package =>
+    {
+        var packageVersion = package.Value.First().Item1;
+        bool isValidVersion = package.Value.All(x => x.Item1 == packageVersion);
+        if (!isValidVersion)
+        {
+            Information("Info: package {0} has multiple versions installed:", package.Key);
+            foreach (var v in package.Value)
+            {
+                Information("  {0}, file: {1}", v.Item1, v.Item2);
+            }
+        }
+    });
 });
 
 Task("Restore-NuGet-Packages")
@@ -141,11 +182,11 @@ Task("Zip-Files")
 });
 
 Task("Default")
-  .IsDependentOn("Zip-Files")
   .IsDependentOn("Run-Unit-Tests");
 
 Task("AppVeyor")
-  .IsDependentOn("Zip-Files")
-  .IsDependentOn("Run-Unit-Tests");
+  .IsDependentOn("Validate-NuGet-Packages")
+  .IsDependentOn("Run-Unit-Tests")
+  .IsDependentOn("Zip-Files");
 
 RunTarget(target);

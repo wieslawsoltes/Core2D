@@ -8,6 +8,8 @@ using Core2D.Editor.Factories;
 using Core2D.Interfaces;
 using Core2D.Renderer;
 using FileSystem.DotNetFx;
+using FileWriter.Dxf;
+using FileWriter.Emf;
 using FileWriter.PdfSharp;
 using FileWriter.PdfSkiaSharp;
 using FileWriter.SvgSkiaSharp;
@@ -78,6 +80,8 @@ namespace Core2D.SkiaDemo
             builder.RegisterType<PdfSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
             builder.RegisterType<PdfSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
             builder.RegisterType<SvgSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
+            builder.RegisterType<EmfWriter>().As<IFileWriter>().InstancePerLifetimeScope();
+            builder.RegisterType<DxfWriter>().As<IFileWriter>().InstancePerLifetimeScope();
             builder.RegisterType<CsvHelperReader>().As<ITextFieldReader<XDatabase>>().InstancePerLifetimeScope();
             builder.RegisterType<CsvHelperWriter>().As<ITextFieldWriter<XDatabase>>().InstancePerLifetimeScope();
             builder.Register<ShapeRenderer>((c) => new SkiaSharpRenderer(true, 96.0)).InstancePerDependency();

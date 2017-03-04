@@ -1,0 +1,56 @@
+﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
+<!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
+<UserControl x:Class="Core2D.Avalonia.Controls.Shapes.RectangleControl"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Core2D.Avalonia;assembly=Core2D.Avalonia"
+             xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"
+             xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D"
+             Design.DataContext="{Static Designer:DesignerContext.Rectangle}"
+             Design.Width="250" Design.Height="400">
+    <TabControl Classes="default">
+        <TabItem Header="Rectangle" Classes="property">
+            <Grid RowDefinitions="Auto,Auto,Auto,Auto,*" ColumnDefinitions="Auto,*">
+                <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
+                <TextBox Text="{Binding Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                <TextBlock Text="IsStroked" Classes="left" Grid.Row="1" Grid.Column="0"/>
+                <CheckBox IsChecked="{Binding IsStroked, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
+                <TextBlock Text="IsFilled" Classes="left" Grid.Row="2" Grid.Column="0"/>
+                <CheckBox IsChecked="{Binding IsFilled, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
+                <TextBlock Text="Text" Classes="left" Grid.Row="3" Grid.Column="0"/>
+                <TextBox Text="{Binding Text, Mode=TwoWay}" Classes="left" Grid.Row="3" Grid.Column="1"/>
+                <TabControl Classes="default" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2">
+                    <TabItem Header="TopLeft" Classes="property">
+                        <ContentControl Content="{Binding TopLeft}"/>
+                    </TabItem>
+                    <TabItem Header="BottomRight" Classes="property">
+                        <ContentControl Content="{Binding BottomRight}"/>
+                    </TabItem>
+                </TabControl>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Grid" Classes="property">
+            <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
+                <TextBlock Text="IsGrid" Classes="left" Grid.Row="0" Grid.Column="0"/>
+                <CheckBox IsChecked="{Binding IsGrid, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                <TextBlock Text="OffsetX" Classes="left" Grid.Row="1" Grid.Column="0"/>
+                <TextBox Text="{Binding OffsetX, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
+                <TextBlock Text="OffsetY" Classes="left" Grid.Row="2" Grid.Column="0"/>
+                <TextBox Text="{Binding OffsetY, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
+                <TextBlock Text="CellWidth" Classes="left" Grid.Row="3" Grid.Column="0"/>
+                <TextBox Text="{Binding CellWidth, Mode=TwoWay}" Classes="left" Grid.Row="3" Grid.Column="1"/>
+                <TextBlock Text="CellHeight" Classes="left" Grid.Row="4" Grid.Column="0"/>
+                <TextBox Text="{Binding CellHeight, Mode=TwoWay}" Classes="left" Grid.Row="4" Grid.Column="1"/>
+            </Grid>
+        </TabItem>
+        <TabItem Header="State" Classes="property">
+            <ContentControl Content="{Binding State}"/>
+        </TabItem>
+        <TabItem Header="Data" Classes="property">
+            <ContentControl Content="{Binding Data}"/>
+        </TabItem>
+        <TabItem Header="Style" Classes="property">
+            <ContentControl Content="{Binding Style}"/>
+        </TabItem>
+    </TabControl>
+</UserControl>

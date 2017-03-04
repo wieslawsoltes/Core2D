@@ -1,0 +1,34 @@
+﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
+<!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
+<UserControl x:Class="Core2D.Avalonia.Controls.Path.ArcSegmentControl"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Core2D.Avalonia;assembly=Core2D.Avalonia"
+             xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"
+             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
+             xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D"
+             Design.DataContext="{Static Designer:DesignerContext.ArcSegment}"
+             Design.Width="250" Design.Height="400">
+    <TabControl Classes="default">
+        <TabItem Header="ArcSegment" Classes="property">
+            <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
+                <TextBlock Text="IsStroked" Classes="left" Grid.Row="0" Grid.Column="0"/>
+                <CheckBox IsChecked="{Binding IsStroked, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                <TextBlock Text="IsSmoothJoin" Classes="left" Grid.Row="1" Grid.Column="0"/>
+                <CheckBox IsChecked="{Binding IsSmoothJoin, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
+                <TextBlock Text="RotationAngle" Classes="left" Grid.Row="2" Grid.Column="0"/>
+                <TextBox Text="{Binding RotationAngle, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
+                <TextBlock Text="IsLargeArc" Classes="left" Grid.Row="3" Grid.Column="0"/>
+                <CheckBox IsChecked="{Binding IsLargeArc, Mode=TwoWay}" Classes="left" Grid.Row="3" Grid.Column="1"/>
+                <TextBlock Text="SweepDirection" Classes="left" Grid.Row="4" Grid.Column="0"/>
+                <DropDown Items="{Static Editor:Enums.XSweepDirectionValues}" SelectedItem="{Binding SweepDirection, Mode=TwoWay}" Classes="default" Grid.Row="4" Grid.Column="1"/>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Point" Classes="property">
+            <ContentControl Content="{Binding Point}"/>
+        </TabItem>
+        <TabItem Header="Size" Classes="property">
+            <ContentControl Content="{Binding Size}"/>
+        </TabItem>
+    </TabControl>
+</UserControl>

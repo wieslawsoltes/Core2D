@@ -76,16 +76,16 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autofac, Version=4.3.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Autofac.4.3.0\lib\net45\Autofac.dll</HintPath>
+    <Reference Include="Autofac, Version=4.4.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Autofac.4.4.0\lib\net45\Autofac.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="CsvHelper, Version=3.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
       <HintPath>..\..\packages\CsvHelper.3.0.0-beta7\lib\net45\CsvHelper.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Newtonsoft.Json.9.0.2-beta2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.10.0.1-beta1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="OpenTK, Version=1.1.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
@@ -199,51 +199,67 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\dependencies\FileSystem.DotNetFx\FileSystem.DotNetFx.csproj">
+    <ProjectReference Include="..\FileSystem.DotNetFx\FileSystem.DotNetFx.csproj">
       <Project>{d1f867f7-9029-480d-b1e1-b0be4658b182}</Project>
       <Name>FileSystem.DotNetFx</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\dependencies\FileWriter.PdfSharp\FileWriter.PdfSharp.csproj">
+    <ProjectReference Include="..\FileWriter.Dxf\FileWriter.Dxf.csproj">
+      <Project>{D40B3BCD-0A26-40BB-960B-9464D248C934}</Project>
+      <Name>FileWriter.Dxf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FileWriter.Emf\FileWriter.Emf.csproj">
+      <Project>{3660FCE5-3D0F-412E-93A7-D0D992B4DA65}</Project>
+      <Name>FileWriter.Emf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FileWriter.PdfSharp\FileWriter.PdfSharp.csproj">
       <Project>{ec0efa51-83f0-4439-be9f-faebd3418c94}</Project>
       <Name>FileWriter.PdfSharp</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\dependencies\FileWriter.PdfSkiaSharp\FileWriter.PdfSkiaSharp.csproj">
+    <ProjectReference Include="..\FileWriter.PdfSkiaSharp\FileWriter.PdfSkiaSharp.csproj">
       <Project>{c934ba25-608b-42fa-b766-42efad7da6ff}</Project>
       <Name>FileWriter.PdfSkiaSharp</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\dependencies\FileWriter.SvgSkiaSharp\FileWriter.SvgSkiaSharp.csproj">
+    <ProjectReference Include="..\FileWriter.SvgSkiaSharp\FileWriter.SvgSkiaSharp.csproj">
       <Project>{e2827255-924c-456e-8049-14e333c6fd18}</Project>
       <Name>FileWriter.SvgSkiaSharp</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\dependencies\Renderer.PdfSharp\Renderer.PdfSharp.csproj">
+    <ProjectReference Include="..\Renderer.Dxf\Renderer.Dxf.csproj">
+      <Project>{acc2c898-b49b-4ed9-b18c-389f50801b39}</Project>
+      <Name>Renderer.Dxf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Renderer.PdfSharp\Renderer.PdfSharp.csproj">
       <Project>{34c8ee31-a1fe-4a74-be36-c1f38bc06fec}</Project>
       <Name>Renderer.PdfSharp</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\dependencies\Renderer.SkiaSharp\Renderer.SkiaSharp.csproj">
+    <ProjectReference Include="..\Renderer.SkiaSharp\Renderer.SkiaSharp.csproj">
       <Project>{9b8fa9bd-63be-4560-ba55-0d86aee1809e}</Project>
       <Name>Renderer.SkiaSharp</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\dependencies\Serializer.Newtonsoft\Serializer.Newtonsoft.csproj">
+    <ProjectReference Include="..\Renderer.WinForms\Renderer.WinForms.csproj">
+      <Project>{3dc476e6-5032-4888-9337-221b88653c40}</Project>
+      <Name>Renderer.WinForms</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Serializer.Newtonsoft\Serializer.Newtonsoft.csproj">
       <Project>{11e61a53-13d5-4447-8d66-3f328bbfc30a}</Project>
       <Name>Serializer.Newtonsoft</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\dependencies\Serializer.Xaml\Serializer.Xaml.csproj">
+    <ProjectReference Include="..\Serializer.Xaml\Serializer.Xaml.csproj">
       <Project>{1dca99ea-f8fe-4ddd-ab81-bf0380c1b33d}</Project>
       <Name>Serializer.Xaml</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\dependencies\TextFieldReader.CsvHelper\TextFieldReader.CsvHelper.csproj">
+    <ProjectReference Include="..\TextFieldReader.CsvHelper\TextFieldReader.CsvHelper.csproj">
       <Project>{f215adf5-74c1-4e26-9045-b6bbda736092}</Project>
       <Name>TextFieldReader.CsvHelper</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\dependencies\TextFieldWriter.CsvHelper\TextFieldWriter.CsvHelper.csproj">
+    <ProjectReference Include="..\TextFieldWriter.CsvHelper\TextFieldWriter.CsvHelper.csproj">
       <Project>{ae7ff1b5-abe3-45bf-87cc-44ac580a666a}</Project>
       <Name>TextFieldWriter.CsvHelper</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\dependencies\Utilities.Wpf\Utilities.Wpf.csproj">
+    <ProjectReference Include="..\Utilities.Wpf\Utilities.Wpf.csproj">
       <Project>{e8d9036d-7e08-4405-b767-fb1e654ef66a}</Project>
       <Name>Utilities.Wpf</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\src\Core2D\Core2D.csproj">
+    <ProjectReference Include="..\Core2D\Core2D.csproj">
       <Project>{4ee581b0-45f3-4d7e-beae-277abf5f3fdd}</Project>
       <Name>Core2D</Name>
     </ProjectReference>
