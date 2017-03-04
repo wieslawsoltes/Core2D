@@ -30,7 +30,7 @@
                 <AppBarButton Icon="SaveLocal" Label="Save As" Command="{Binding EditorCommands.SaveAsCommand}"/>
                 <AppBarButton Icon="OpenFile" Label="Open" Command="{Binding EditorCommands.OpenCommand}"/>
                 <AppBarSeparator/>
-                <AppBarButton Icon="Page2" Label="New" Command="{Binding EditorCommands.NewCommand}"/>
+                <AppBarButton Icon="Page2" Label="New" Command="{Binding EditorCommands.NewCommand}" CommandParameter="{Binding}"/>
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
                 <AppBarButton Label="None" Command="{Binding EditorCommands.ToolLineCommand}"/>
