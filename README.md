@@ -3,7 +3,6 @@
 [![Gitter](https://badges.gitter.im/wieslawsoltes/Core2D.svg)](https://gitter.im/wieslawsoltes/Core2D?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 [![Build status](https://ci.appveyor.com/api/projects/status/7k1e0voeit7od9bw/branch/master?svg=true)](https://ci.appveyor.com/project/wieslawsoltes/core2d/branch/master)
-![Build Status](https://wiso.visualstudio.com/_apis/public/build/definitions/6eb4f619-6cfb-4f2c-8220-dbe2c8cfd282/2/badge)
 
 A multi-platform data driven 2D diagram editor.
 
