@@ -66,6 +66,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Commands\File\OpenCommand.cs" />
+    <Compile Include="Commands\File\SaveAsCommand.cs" />
+    <Compile Include="Commands\File\SaveCommand.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
