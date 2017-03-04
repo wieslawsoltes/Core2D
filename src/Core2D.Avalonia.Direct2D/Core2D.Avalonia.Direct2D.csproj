@@ -202,7 +202,7 @@
     </ProjectReference>
     <ProjectReference Include="..\FileWriter.PdfSharp\FileWriter.PdfSharp.csproj">
       <Project>{EC0EFA51-83F0-4439-BE9F-FAEBD3418C94}</Project>
-      <Name>FileWriter.Pdf-core</Name>
+      <Name>FileWriter.PdfSharp</Name>
     </ProjectReference>
     <ProjectReference Include="..\Log.Trace\Log.Trace.csproj">
       <Project>{68a36926-df55-4f05-9f89-b9ab1463227e}</Project>
@@ -218,7 +218,7 @@
     </ProjectReference>
     <ProjectReference Include="..\Renderer.PdfSharp\Renderer.PdfSharp.csproj">
       <Project>{34c8ee31-a1fe-4a74-be36-c1f38bc06fec}</Project>
-      <Name>Renderer.PdfSharp-core</Name>
+      <Name>Renderer.PdfSharp</Name>
     </ProjectReference>
     <ProjectReference Include="..\Renderer.WinForms\Renderer.WinForms.csproj">
       <Project>{3dc476e6-5032-4888-9337-221b88653c40}</Project>
