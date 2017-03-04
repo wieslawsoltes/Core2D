@@ -38,6 +38,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileSystem.DotNetFx.UnitTests", "tests\FileSystem.DotNetFx.UnitTests\FileSystem.DotNetFx.UnitTests.csproj", "{E9C30F6F-00DD-494A-8E7C-253A5C76E999}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{C7162582-C1FD-45FB-99FD-6770D67B5A21}"
+	ProjectSection(SolutionItems) = preProject
+		Core2D.targets = Core2D.targets
+	EndProjectSection
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Core2D.Shared", "src\Core2D.Shared\Core2D.Shared.shproj", "{702FFCAA-5B6C-41CC-AA78-6C534450F1B2}"
 EndProject
@@ -89,8 +92,6 @@ Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		src\Core2D.Shared\Core2D.Shared.projitems*{0eec62cc-3cff-4185-88d6-ba107f0d8ff4}*SharedItemsImports = 4
 		src\Core2D.Shared\Core2D.Shared.projitems*{11e61a53-13d5-4447-8d66-3f328bbfc30a}*SharedItemsImports = 4
-		src\Core2D.Shared\Core2D.Shared.projitems*{12889680-3769-4914-be60-5d09e83df5b2}*SharedItemsImports = 4
-		src\Core2D.Shared\Core2D.Shared.projitems*{180963c2-9b40-4f63-b288-88328d798098}*SharedItemsImports = 4
 		src\Core2D.Shared\Core2D.Shared.projitems*{1dca99ea-f8fe-4ddd-ab81-bf0380c1b33d}*SharedItemsImports = 4
 		src\Core2D.Shared\Core2D.Shared.projitems*{27cd58ae-d6d4-42ad-a315-2f1cb63454af}*SharedItemsImports = 4
 		src\Core2D.Shared\Core2D.Shared.projitems*{34c8ee31-a1fe-4a74-be36-c1f38bc06fec}*SharedItemsImports = 4
@@ -103,8 +104,6 @@ Global
 		src\Core2D.Shared\Core2D.Shared.projitems*{5ed631ec-651f-44d6-a99d-d1202f212656}*SharedItemsImports = 4
 		src\Core2D.Shared\Core2D.Shared.projitems*{68a36926-df55-4f05-9f89-b9ab1463227e}*SharedItemsImports = 4
 		src\Core2D.Shared\Core2D.Shared.projitems*{702ffcaa-5b6c-41cc-aa78-6c534450f1b2}*SharedItemsImports = 13
-		src\Core2D.Shared\Core2D.Shared.projitems*{87632927-9d38-421f-ba51-f088be1e1d5a}*SharedItemsImports = 4
-		src\Core2D.Shared\Core2D.Shared.projitems*{9a474916-ea8c-48fb-8cf6-425d95b6b7fd}*SharedItemsImports = 4
 		src\Core2D.Shared\Core2D.Shared.projitems*{9b8fa9bd-63be-4560-ba55-0d86aee1809e}*SharedItemsImports = 4
 		src\Core2D.Shared\Core2D.Shared.projitems*{acc2c898-b49b-4ed9-b18c-389f50801b39}*SharedItemsImports = 4
 		src\Core2D.Shared\Core2D.Shared.projitems*{ae7ff1b5-abe3-45bf-87cc-44ac580a666a}*SharedItemsImports = 4
@@ -116,7 +115,6 @@ Global
 		src\Core2D.Shared\Core2D.Shared.projitems*{e05f3f7e-2176-43dc-90bb-f5c66cfdb12f}*SharedItemsImports = 4
 		src\Core2D.Shared\Core2D.Shared.projitems*{e2827255-924c-456e-8049-14e333c6fd18}*SharedItemsImports = 4
 		src\Core2D.Shared\Core2D.Shared.projitems*{e8d9036d-7e08-4405-b767-fb1e654ef66a}*SharedItemsImports = 4
-		src\Core2D.Shared\Core2D.Shared.projitems*{ea79fdcf-c78b-4170-bfbe-beb2303d911d}*SharedItemsImports = 4
 		src\Core2D.Shared\Core2D.Shared.projitems*{ec0efa51-83f0-4439-be9f-faebd3418c94}*SharedItemsImports = 4
 		src\Core2D.Shared\Core2D.Shared.projitems*{f215adf5-74c1-4e26-9045-b6bbda736092}*SharedItemsImports = 4
 	EndGlobalSection
