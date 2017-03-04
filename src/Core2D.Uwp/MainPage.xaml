@@ -14,7 +14,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     UseLayoutRounding="True">
     <Page.TopAppBar>
-        <CommandBar Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" FlowDirection="RightToLeft">
+        <CommandBar Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" FlowDirection="RightToLeft" IsOpen="False" IsSticky="True" ClosedDisplayMode="Compact">
             <CommandBar.PrimaryCommands>
                 <AppBarButton Icon="SelectAll" Label="Paste" Command="{Binding EditorCommands.SelectAllCommand}"/>
                 <AppBarSeparator/>
