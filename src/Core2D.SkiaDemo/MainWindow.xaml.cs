@@ -255,12 +255,15 @@ namespace Core2D.SkiaDemo
 
         private void OnPaintSurface(SKCanvas canvas, int width, int height)
         {
-            var container = _projectEditor.Project.CurrentContainer;
-            var matrix = PresentationSource.FromVisual(this).CompositionTarget.TransformToDevice;
-            double offsetX = (this.canvas.ActualWidth * matrix.M11 - container?.Width ?? 0) / 2.0;
-            double offsetY = (this.canvas.ActualHeight * matrix.M22 - container?.Height ?? 0) / 2.0;
-            canvas.Clear(SKColors.White);
-            _presenter?.Render(canvas, _projectEditor.Renderers[0], container, offsetX, offsetY);
+            var container = _projectEditor.Project?.CurrentContainer;
+            if (container != null)
+            {
+                var matrix = PresentationSource.FromVisual(this).CompositionTarget.TransformToDevice;
+                double offsetX = (this.canvas.ActualWidth * matrix.M11 - container?.Width ?? 0) / 2.0;
+                double offsetY = (this.canvas.ActualHeight * matrix.M22 - container?.Height ?? 0) / 2.0;
+                canvas.Clear(SKColors.White);
+                _presenter?.Render(canvas, _projectEditor.Renderers[0], container, offsetX, offsetY);
+            }
         }
 
         private void UpdateSvg()
