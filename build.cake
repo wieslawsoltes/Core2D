@@ -45,7 +45,6 @@ Task("Clean")
 });
 
 Task("Validate-NuGet-Packages")
-    .IsDependentOn("Clean")
     .Does(() =>
 {
     var packageVersions = new Dictionary<string, IList<Tuple<string,string>>>();
@@ -75,7 +74,7 @@ Task("Validate-NuGet-Packages")
         bool isValidVersion = package.Value.All(x => x.Item1 == packageVersion);
         if (!isValidVersion)
         {
-            Information("Info: package {0} has multiple ({1}) versions installed:", package.Key, package.Value.Count);
+            Information("Info: package {0} has multiple versions installed:", package.Key);
             foreach (var v in package.Value)
             {
                 Information("{0}, file: {1}", v.Item1, v.Item2);
@@ -186,8 +185,8 @@ Task("Default")
   .IsDependentOn("Run-Unit-Tests");
 
 Task("AppVeyor")
-  .IsDependentOn("Zip-Files")
+  .IsDependentOn("Validate-NuGet-Packages")
   .IsDependentOn("Run-Unit-Tests")
-  .IsDependentOn("Validate-NuGet-Packages");
+  .IsDependentOn("Zip-Files");
 
 RunTarget(target);
