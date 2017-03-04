@@ -582,7 +582,7 @@ namespace Core2D.Uwp
             _projectEditor.Invalidate();
         }
 
-        private async Task OpenProject()
+        public async Task OpenProject()
         {
             var file = await GetOpenProjectPathAsync();
             if (file != null)
@@ -604,7 +604,7 @@ namespace Core2D.Uwp
             await Task.Run(() => { });
         }
 
-        private async Task SaveProject()
+        public async Task SaveProject()
         {
             var file = await GetSaveProjectPathAsync(_projectEditor.Project.Name);
             if (file != null)
