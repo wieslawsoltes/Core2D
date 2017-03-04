@@ -94,6 +94,8 @@ namespace Core2D.SkiaDemo
             // App
             builder.RegisterType<Win32ImageImporter>().As<IImageImporter>().InstancePerLifetimeScope();
             // View
+            builder.RegisterAssemblyTypes(typeof(App).Assembly).AssignableTo<ICommand>().AsImplementedInterfaces().AsSelf().PropertiesAutowired().InstancePerLifetimeScope();
+            builder.RegisterAssemblyTypes(typeof(App).Assembly).As<IView>().InstancePerLifetimeScope();
             builder.RegisterType<MainWindow>().As<MainWindow>().InstancePerLifetimeScope();
         }
     }
