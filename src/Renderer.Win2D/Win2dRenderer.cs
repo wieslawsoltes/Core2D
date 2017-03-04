@@ -200,6 +200,7 @@ namespace Renderer.Win2D
             }
         }
 
+        /// <inheritdoc/>
         public override void Fill(object ds, double x, double y, double width, double height, ArgbColor color)
         {
             var _ds = ds as CanvasDrawingSession;
