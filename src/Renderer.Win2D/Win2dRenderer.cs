@@ -2,8 +2,6 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Core2D.Data;
 using Core2D.Data.Database;
-using Core2D.Math;
-using Core2D.Math.Arc;
 using Core2D.Project;
 using Core2D.Renderer;
 using Core2D.Shapes;
@@ -18,6 +16,8 @@ using Windows.Foundation;
 using Windows.UI;
 using Windows.UI.Text;
 using N = System.Numerics;
+using Core2D.Spatial;
+using Core2D.Spatial.Arc;
 
 namespace Renderer.Win2D
 {
@@ -52,7 +52,7 @@ namespace Renderer.Win2D
 
         private Color ToColor(ArgbColor c) => Color.FromArgb(c.A, c.R, c.G, c.B);
 
-        private static Rect2 CreateRect(XPoint tl, XPoint br, double dx, double dy) => Rect2.Create(tl, br, dx, dy);
+        private static Rect2 CreateRect(XPoint tl, XPoint br, double dx, double dy) => Rect2.FromPoints(tl.X, tl.Y, br.X, br.Y, dx, dy);
 
         private static CanvasStrokeStyle CreateStrokeStyle(BaseStyle style)
         {
@@ -201,28 +201,16 @@ namespace Renderer.Win2D
             }
         }
 
-        /// <inheritdoc/>
-        public override void Draw(object ds, XContainer container, ImmutableArray<XProperty> db, XRecord r)
+        public override void Fill(object ds, double x, double y, double width, double height, ArgbColor color)
         {
-            foreach (var layer in container.Layers)
-            {
-                if (layer.IsVisible)
-                {
-                    Draw(ds, layer, db, r);
-                }
-            }
-        }
-
-        /// <inheritdoc/>
-        public override void Draw(object ds, XLayer layer, ImmutableArray<XProperty> db, XRecord r)
-        {
-            foreach (var shape in layer.Shapes)
-            {
-                if (shape.State.Flags.HasFlag(_state.DrawShapeState.Flags))
-                {
-                    shape.Draw(ds, this, 0, 0, db, r);
-                }
-            }
+            var _ds = ds as CanvasDrawingSession;
+            var brush = ToColor(color);
+            _ds.FillRectangle(
+                (float)x,
+                (float)y,
+                (float)width,
+                (float)height,
+                brush);
         }
 
         /// <inheritdoc/>
@@ -434,7 +422,11 @@ namespace Renderer.Win2D
         /// <inheritdoc/>
         public override void Draw(object ds, XArc arc, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
         {
-            var a = WpfArc.FromXArc(arc, dx, dy);
+            var a = new WpfArc(
+                Point2.FromXY(arc.Point1.X, arc.Point1.Y),
+                Point2.FromXY(arc.Point2.X, arc.Point2.Y),
+                Point2.FromXY(arc.Point3.X, arc.Point3.Y),
+                Point2.FromXY(arc.Point4.X, arc.Point4.Y));
 
             var _ds = ds as CanvasDrawingSession;
 
@@ -587,7 +579,12 @@ namespace Renderer.Win2D
                 WordWrapping = CanvasWordWrapping.NoWrap
             };
 
-            var rect = Rect2.Create(text.TopLeft, text.BottomRight, dx, dy);
+            var rect = Rect2.FromPoints(
+                text.TopLeft.X, 
+                text.TopLeft.Y, 
+                text.BottomRight.X, 
+                text.BottomRight.Y, 
+                dx, dy);
 
             var layout = new CanvasTextLayout(_ds, tbind, format, (float)rect.Width, (float)rect.Height);
 

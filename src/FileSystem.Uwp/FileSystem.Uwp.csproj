@@ -11,7 +11,7 @@
     <AssemblyName>FileSystem.Uwp</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.10586.0</TargetPlatformVersion>
+    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
@@ -112,12 +112,16 @@
     <EmbeddedResource Include="Properties\FileSystem.Uwp.rd.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Core2D\Core2D.csproj">
+    <ProjectReference Include="..\Core2D.Spatial\Core2D.Spatial.csproj">
+      <Project>{bf27e596-01f5-45af-99fb-703c004d27a5}</Project>
+      <Name>Core2D.Spatial</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core2D\Core2D.csproj">
       <Project>{4ee581b0-45f3-4d7e-beae-277abf5f3fdd}</Project>
       <Name>Core2D</Name>
     </ProjectReference>
   </ItemGroup>
-  <Import Project="..\..\src\Core2D.Shared\Core2D.Shared.projitems" Label="Shared" />
+  <Import Project="..\Core2D.Shared\Core2D.Shared.projitems" Label="Shared" />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
