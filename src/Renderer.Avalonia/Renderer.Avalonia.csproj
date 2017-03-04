@@ -46,7 +46,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Avalonia.Controls.PanAndZoom, Version=0.4.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Avalonia.Controls.PanAndZoom.0.4.1-build68-alpha\lib\portable-windows8+net45\Avalonia.Controls.PanAndZoom.dll</HintPath>
+      <HintPath>..\..\packages\Avalonia.Controls.PanAndZoom.0.4.1-build78-alpha\lib\portable-windows8+net45\Avalonia.Controls.PanAndZoom.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Avalonia.DesignerSupport, Version=0.4.1.0, Culture=neutral, processorArchitecture=MSIL">
