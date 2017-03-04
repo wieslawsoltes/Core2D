@@ -133,6 +133,10 @@
     </SDKReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core2D.Spatial\Core2D.Spatial.csproj">
+      <Project>{bf27e596-01f5-45af-99fb-703c004d27a5}</Project>
+      <Name>Core2D.Spatial</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FileSystem.Uwp\FileSystem.Uwp.csproj">
       <Project>{180963c2-9b40-4f63-b288-88328d798098}</Project>
       <Name>FileSystem.Uwp</Name>
@@ -160,6 +164,10 @@
     <ProjectReference Include="..\Core2D\Core2D.csproj">
       <Project>{4ee581b0-45f3-4d7e-beae-277abf5f3fdd}</Project>
       <Name>Core2D</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utilities.Uwp\Utilities.Uwp.csproj">
+      <Project>{87632927-9d38-421f-ba51-f088be1e1d5a}</Project>
+      <Name>Utilities.Uwp</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
