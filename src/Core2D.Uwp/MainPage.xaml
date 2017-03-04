@@ -16,7 +16,7 @@
     <Page.TopAppBar>
         <CommandBar Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" FlowDirection="RightToLeft" IsOpen="False" IsSticky="True" ClosedDisplayMode="Compact">
             <CommandBar.PrimaryCommands>
-                <AppBarButton Icon="SelectAll" Label="Paste" Command="{Binding EditorCommands.SelectAllCommand}"/>
+                <AppBarButton Icon="SelectAll" Label="Select All" Command="{Binding EditorCommands.SelectAllCommand}"/>
                 <AppBarSeparator/>
                 <AppBarButton Icon="Delete" Label="Delete" Command="{Binding EditorCommands.DeleteCommand}"/>
                 <AppBarSeparator/>
