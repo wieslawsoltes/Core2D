@@ -33,6 +33,10 @@
   <PropertyGroup Condition="$(Platform.Contains('x86'))">
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
+  <!-- Platform: ARM -->
+  <PropertyGroup Condition="$(Platform.Contains('ARM'))">
+    <PlatformTarget>ARM</PlatformTarget>
+  </PropertyGroup>
   <!-- Configurations and Platforms -->
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <DocumentationFile>
@@ -55,6 +59,14 @@
     </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <DocumentationFile>
+    </DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
+    <DocumentationFile>
+    </DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
     <DocumentationFile>
     </DocumentationFile>
   </PropertyGroup>
