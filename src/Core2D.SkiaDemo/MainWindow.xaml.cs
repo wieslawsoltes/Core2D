@@ -38,8 +38,8 @@ namespace Core2D.SkiaDemo
             _projectEditor = _serviceProvider.GetService<ProjectEditor>();
 
             Loaded += MainWindow_Loaded;
-            KeyDown += MainWindow_KeyDown;
             Closing += MainWindow_Closing;
+            KeyDown += MainWindow_KeyDown;
 
             _previewWindow = new SvgWindow();
             _previewWindow.svgButton.Click += PreviewWindowSvgButton_Click;
@@ -73,6 +73,13 @@ namespace Core2D.SkiaDemo
                     canvas,
                     FixPointOffset),
                 _projectEditor);
+        }
+
+        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            _inputProcessor.Dispose();
+            isClosing = true;
+            _previewWindow.Close();
         }
 
         private void MainWindow_KeyDown(object sender, KeyEventArgs e)
@@ -195,13 +202,6 @@ namespace Core2D.SkiaDemo
                         break;
                 }
             }
-        }
-
-        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            _inputProcessor.Dispose();
-            isClosing = true;
-            _previewWindow.Close();
         }
 
         private void PreviewWindowSvgButton_Click(object sender, RoutedEventArgs e)
