@@ -101,8 +101,6 @@ namespace Core2D.Uwp
             builder.RegisterType<UwpTextClipboard>().As<ITextClipboard>().InstancePerLifetimeScope();
             // App
             builder.RegisterType<UwpImageImporter>().As<IImageImporter>().InstancePerLifetimeScope();
-            // View
-            builder.RegisterType<MainPage>().As<MainPage>().InstancePerLifetimeScope();
         }
     }
 
@@ -131,6 +129,12 @@ namespace Core2D.Uwp
 
             var builder = new ContainerBuilder();
             builder.RegisterAssemblyModules(typeof(MainPage).GetTypeInfo().Assembly);
+
+            // View
+            builder.RegisterAssemblyTypes(typeof(App).GetTypeInfo().Assembly).AssignableTo<ICommand>().AsImplementedInterfaces().AsSelf().PropertiesAutowired().InstancePerLifetimeScope();
+            builder.RegisterAssemblyTypes(typeof(App).GetTypeInfo().Assembly).As<IView>().InstancePerLifetimeScope();
+            builder.Register(c => this).As<MainPage>().InstancePerLifetimeScope();
+
             _componentContainer = builder.Build();
 
             _serviceProvider = _componentContainer.Resolve<IServiceProvider>();
