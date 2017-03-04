@@ -38,8 +38,8 @@
                 <AppBarButton Label="Point" Command="{Binding EditorCommands.ToolPointCommand}"/>
                 <AppBarButton Label="Line" Command="{Binding EditorCommands.ToolLineCommand}"/>
                 <AppBarButton Label="Arc" Command="{Binding EditorCommands.ToolArcCommand}"/>
-                <AppBarButton Label="Bezier" Command="{Binding EditorCommands.ToolBezierCommand}"/>
-                <AppBarButton Label="QBezier" Command="{Binding EditorCommands.ToolQBezierCommand}"/>
+                <AppBarButton Label="Bezier" Command="{Binding EditorCommands.ToolCubicBezierCommand}"/>
+                <AppBarButton Label="QBezier" Command="{Binding EditorCommands.ToolQuadraticBezierCommand}"/>
                 <AppBarButton Label="Path" Command="{Binding EditorCommands.ToolPathCommand}"/>
                 <AppBarButton Label="Rectangle" Command="{Binding EditorCommands.ToolRectangleCommand}"/>
                 <AppBarButton Label="Ellipse" Command="{Binding EditorCommands.ToolEllipseCommand}"/>
