@@ -69,7 +69,7 @@ namespace Core2D.Uwp
 
         public async Task<string> GetImageKeyAsync()
         {
-            return null;
+            return await Task.Run<string>(() => string.Empty);
         }
     }
 
