@@ -77,7 +77,7 @@ Task("Validate-NuGet-Packages")
             Information("Info: package {0} has multiple versions installed:", package.Key);
             foreach (var v in package.Value)
             {
-                Information("{0}, file: {1}", v.Item1, v.Item2);
+                Information("  {0}, file: {1}", v.Item1, v.Item2);
             }
         }
     });
