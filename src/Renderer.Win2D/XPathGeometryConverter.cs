@@ -78,7 +78,7 @@ namespace Renderer.Win2D
                         else if (segment is XPolyCubicBezierSegment)
                         {
                             var polyBezierSegment = segment as XPolyCubicBezierSegment;
-                            if (polyBezierSegment.Points.Count >= 3)
+                            if (polyBezierSegment.Points.Length >= 3)
                             {
                                 builder.AddCubicBezier(
                                     new N.Vector2(
@@ -92,10 +92,10 @@ namespace Renderer.Win2D
                                         (float)polyBezierSegment.Points[2].Y));
                             }
 
-                            if (polyBezierSegment.Points.Count > 3
-                                && polyBezierSegment.Points.Count % 3 == 0)
+                            if (polyBezierSegment.Points.Length > 3
+                                && polyBezierSegment.Points.Length % 3 == 0)
                             {
-                                for (int i = 3; i < polyBezierSegment.Points.Count; i += 3)
+                                for (int i = 3; i < polyBezierSegment.Points.Length; i += 3)
                                 {
                                     builder.AddCubicBezier(
                                         new N.Vector2(
@@ -114,7 +114,7 @@ namespace Renderer.Win2D
                         {
                             var polyLineSegment = segment as XPolyLineSegment;
 
-                            if (polyLineSegment.Points.Count >= 1)
+                            if (polyLineSegment.Points.Length >= 1)
                             {
                                 builder.AddLine(
                                     new N.Vector2(
@@ -122,9 +122,9 @@ namespace Renderer.Win2D
                                         (float)polyLineSegment.Points[0].Y));
                             }
 
-                            if (polyLineSegment.Points.Count > 1)
+                            if (polyLineSegment.Points.Length > 1)
                             {
-                                for (int i = 1; i < polyLineSegment.Points.Count; i++)
+                                for (int i = 1; i < polyLineSegment.Points.Length; i++)
                                 {
                                     builder.AddLine(
                                         new N.Vector2(
@@ -136,7 +136,7 @@ namespace Renderer.Win2D
                         else if (segment is XPolyQuadraticBezierSegment)
                         {
                             var polyQuadraticSegment = segment as XPolyQuadraticBezierSegment;
-                            if (polyQuadraticSegment.Points.Count >= 2)
+                            if (polyQuadraticSegment.Points.Length >= 2)
                             {
                                 builder.AddQuadraticBezier(
                                     new N.Vector2(
@@ -147,10 +147,10 @@ namespace Renderer.Win2D
                                         (float)polyQuadraticSegment.Points[1].Y));
                             }
 
-                            if (polyQuadraticSegment.Points.Count > 2
-                                && polyQuadraticSegment.Points.Count % 2 == 0)
+                            if (polyQuadraticSegment.Points.Length > 2
+                                && polyQuadraticSegment.Points.Length % 2 == 0)
                             {
-                                for (int i = 3; i < polyQuadraticSegment.Points.Count; i += 3)
+                                for (int i = 3; i < polyQuadraticSegment.Points.Length; i += 3)
                                 {
                                     builder.AddQuadraticBezier(
                                         new N.Vector2(

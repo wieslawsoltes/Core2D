@@ -1,6 +1,8 @@
 ﻿{
   "dependencies": {
+    "Autofac": "4.4.0",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2",
+    "Newtonsoft.Json": "10.0.1-beta1",
     "Win2D.uwp": "1.20.0"
   },
   "frameworks": {
