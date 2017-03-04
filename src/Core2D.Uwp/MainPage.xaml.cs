@@ -1,5 +1,11 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
+using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.IO;
+using System.Numerics;
+using System.Threading.Tasks;
 using Core2D.Editor;
 using Core2D.Editor.Factories;
 using Core2D.Editor.Input;
@@ -13,14 +19,7 @@ using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Text;
 using Microsoft.Graphics.Canvas.UI.Xaml;
 using Renderer.Win2D;
-using Serializer.Newtonsoft;
 using Serializer.Xaml;
-using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.IO;
-using System.Numerics;
-using System.Threading.Tasks;
 using TextFieldReader.CsvHelper;
 using TextFieldWriter.CsvHelper;
 using Windows.Devices.Input;
