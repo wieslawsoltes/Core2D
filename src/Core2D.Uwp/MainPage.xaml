@@ -8,7 +8,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:canvas="using:Microsoft.Graphics.Canvas.UI.Xaml"
-    xmlns:Editor="using:Core2D.Editor"
     xmlns:Project="using:Core2D.Project"
     xmlns:Style="using:Core2D.Style"
     mc:Ignorable="d"
@@ -17,35 +16,35 @@
     <Page.TopAppBar>
         <CommandBar Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" FlowDirection="RightToLeft">
             <CommandBar.PrimaryCommands>
-                <AppBarButton Icon="SelectAll" Label="Paste" Command="{Binding Editor:Commands.SelectAllCommand}"/>
+                <AppBarButton Icon="SelectAll" Label="Paste" Command="{Binding EditorCommands.SelectAllCommand}"/>
                 <AppBarSeparator/>
-                <AppBarButton Icon="Delete" Label="Delete" Command="{Binding Editor:Commands.DeleteCommand}"/>
+                <AppBarButton Icon="Delete" Label="Delete" Command="{Binding EditorCommands.DeleteCommand}"/>
                 <AppBarSeparator/>
-                <AppBarButton Icon="Paste" Label="Paste" Command="{Binding Editor:Commands.PasteCommand}"/>
-                <AppBarButton Icon="Copy" Label="Copy" Command="{Binding Editor:Commands.CopyCommand}"/>
-                <AppBarButton Icon="Cut" Label="Cut" Command="{Binding Editor:Commands.CutCommand}"/>
+                <AppBarButton Icon="Paste" Label="Paste" Command="{Binding EditorCommands.PasteCommand}"/>
+                <AppBarButton Icon="Copy" Label="Copy" Command="{Binding EditorCommands.CopyCommand}"/>
+                <AppBarButton Icon="Cut" Label="Cut" Command="{Binding EditorCommands.CutCommand}"/>
                 <AppBarSeparator/>
-                <AppBarButton Icon="Redo" Label="Redo" Command="{Binding Editor:Commands.RedoCommand}"/>
-                <AppBarButton Icon="Undo" Label="Undo" Command="{Binding Editor:Commands.UndoCommand}"/>
+                <AppBarButton Icon="Redo" Label="Redo" Command="{Binding EditorCommands.RedoCommand}"/>
+                <AppBarButton Icon="Undo" Label="Undo" Command="{Binding EditorCommands.UndoCommand}"/>
                 <AppBarSeparator/>
-                <AppBarButton Icon="SaveLocal" Label="Save As" Command="{Binding Editor:Commands.SaveAsCommand}"/>
-                <AppBarButton Icon="OpenFile" Label="Open" Command="{Binding Editor:Commands.OpenCommand}"/>
+                <AppBarButton Icon="SaveLocal" Label="Save As" Command="{Binding EditorCommands.SaveAsCommand}"/>
+                <AppBarButton Icon="OpenFile" Label="Open" Command="{Binding EditorCommands.OpenCommand}"/>
                 <AppBarSeparator/>
-                <AppBarButton Icon="Page2" Label="New" Command="{Binding Editor:Commands.NewCommand}"/>
+                <AppBarButton Icon="Page2" Label="New" Command="{Binding EditorCommands.NewCommand}"/>
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
-                <AppBarButton Label="None" Command="{Binding Editor:Commands.ToolLineCommand}"/>
-                <AppBarButton Label="Selection" Command="{Binding Editor:Commands.ToolSelectionCommand}"/>
-                <AppBarButton Label="Point" Command="{Binding Editor:Commands.ToolPointCommand}"/>
-                <AppBarButton Label="Line" Command="{Binding Editor:Commands.ToolLineCommand}"/>
-                <AppBarButton Label="Arc" Command="{Binding Editor:Commands.ToolArcCommand}"/>
-                <AppBarButton Label="Bezier" Command="{Binding Editor:Commands.ToolBezierCommand}"/>
-                <AppBarButton Label="QBezier" Command="{Binding Editor:Commands.ToolQBezierCommand}"/>
-                <AppBarButton Label="Path" Command="{Binding Editor:Commands.ToolPathCommand}"/>
-                <AppBarButton Label="Rectangle" Command="{Binding Editor:Commands.ToolRectangleCommand}"/>
-                <AppBarButton Label="Ellipse" Command="{Binding Editor:Commands.ToolEllipseCommand}"/>
-                <AppBarButton Label="Text" Command="{Binding Editor:Commands.ToolTextCommand}"/>
-                <AppBarButton Label="Image" Command="{Binding Editor:Commands.ToolImageCommand}"/>
+                <AppBarButton Label="None" Command="{Binding EditorCommands.ToolLineCommand}"/>
+                <AppBarButton Label="Selection" Command="{Binding EditorCommands.ToolSelectionCommand}"/>
+                <AppBarButton Label="Point" Command="{Binding EditorCommands.ToolPointCommand}"/>
+                <AppBarButton Label="Line" Command="{Binding EditorCommands.ToolLineCommand}"/>
+                <AppBarButton Label="Arc" Command="{Binding EditorCommands.ToolArcCommand}"/>
+                <AppBarButton Label="Bezier" Command="{Binding EditorCommands.ToolBezierCommand}"/>
+                <AppBarButton Label="QBezier" Command="{Binding EditorCommands.ToolQBezierCommand}"/>
+                <AppBarButton Label="Path" Command="{Binding EditorCommands.ToolPathCommand}"/>
+                <AppBarButton Label="Rectangle" Command="{Binding EditorCommands.ToolRectangleCommand}"/>
+                <AppBarButton Label="Ellipse" Command="{Binding EditorCommands.ToolEllipseCommand}"/>
+                <AppBarButton Label="Text" Command="{Binding EditorCommands.ToolTextCommand}"/>
+                <AppBarButton Label="Image" Command="{Binding EditorCommands.ToolImageCommand}"/>
             </CommandBar.SecondaryCommands>
         </CommandBar>
     </Page.TopAppBar>
