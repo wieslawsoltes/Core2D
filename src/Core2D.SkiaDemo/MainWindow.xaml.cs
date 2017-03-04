@@ -24,9 +24,7 @@ namespace Core2D.SkiaDemo
     public partial class MainWindow : Window
     {
         private readonly IServiceProvider _serviceProvider;
-        public ShapeRenderer _renderer;
-        public XContainer _container;
-        public ContainerPresenter _presenter;
+        private ContainerPresenter _presenter;
         private ProjectEditor _projectEditor;
         private InputProcessor _inputProcessor;
         private SvgWindow _previewWindow;
@@ -63,8 +61,6 @@ namespace Core2D.SkiaDemo
                 }
             };
 
-            _renderer = _projectEditor.Renderers[0];
-            _container = _projectEditor.Project.CurrentContainer;
             _presenter = new EditorPresenter();
 
             canvas.Focusable = true;
@@ -224,9 +220,10 @@ namespace Core2D.SkiaDemo
 
         public Point FixPointOffset(Point point)
         {
+            var container = _projectEditor.Project.CurrentContainer;
             var matrix = PresentationSource.FromVisual(this).CompositionTarget.TransformToDevice;
-            double offsetX = (this.canvas.ActualWidth * matrix.M11 - _container.Width) / 2.0;
-            double offsetY = (this.canvas.ActualHeight * matrix.M22 - _container.Height) / 2.0;
+            double offsetX = (this.canvas.ActualWidth * matrix.M11 - container.Width) / 2.0;
+            double offsetY = (this.canvas.ActualHeight * matrix.M22 - container.Height) / 2.0;
             return new Point(point.X - offsetX, point.Y - offsetY);
         }
 
@@ -258,11 +255,12 @@ namespace Core2D.SkiaDemo
 
         private void OnPaintSurface(SKCanvas canvas, int width, int height)
         {
+            var container = _projectEditor.Project.CurrentContainer;
             var matrix = PresentationSource.FromVisual(this).CompositionTarget.TransformToDevice;
-            double offsetX = (this.canvas.ActualWidth * matrix.M11 - _container?.Width ?? 0) / 2.0;
-            double offsetY = (this.canvas.ActualHeight * matrix.M22 - _container?.Height ?? 0) / 2.0;
+            double offsetX = (this.canvas.ActualWidth * matrix.M11 - container?.Width ?? 0) / 2.0;
+            double offsetY = (this.canvas.ActualHeight * matrix.M22 - container?.Height ?? 0) / 2.0;
             canvas.Clear(SKColors.White);
-            _presenter?.Render(canvas, _renderer, _container, offsetX, offsetY);
+            _presenter?.Render(canvas, _projectEditor.Renderers[0], container, offsetX, offsetY);
         }
 
         private void UpdateSvg()
@@ -313,7 +311,6 @@ namespace Core2D.SkiaDemo
         private void NewProject()
         {
             _projectEditor.OnNewProject();
-            _container = _projectEditor.Project.CurrentContainer;
         }
 
         private void OpenProject()
@@ -328,7 +325,6 @@ namespace Core2D.SkiaDemo
             if (dlg.ShowDialog(this) == true)
             {
                 _projectEditor.OnOpen(dlg.FileName);
-                _container = _projectEditor.Project.CurrentContainer;
                 OnRefreshRequested(null, null);
             }
         }
