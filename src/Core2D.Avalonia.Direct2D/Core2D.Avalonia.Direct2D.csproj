@@ -192,6 +192,10 @@
       <Project>{d1f867f7-9029-480d-b1e1-b0be4658b182}</Project>
       <Name>FileSystem.DotNetFx</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FileWriter.Dxf\FileWriter.Dxf.csproj">
+      <Project>{d40b3bcd-0a26-40bb-960b-9464d248c934}</Project>
+      <Name>FileWriter.Dxf</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FileWriter.Emf\FileWriter.Emf.csproj">
       <Project>{3660fce5-3d0f-412e-93a7-d0d992b4da65}</Project>
       <Name>FileWriter.Emf</Name>
@@ -208,9 +212,17 @@
       <Project>{e05f3f7e-2176-43dc-90bb-f5c66cfdb12f}</Project>
       <Name>Renderer.Avalonia</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Renderer.Dxf\Renderer.Dxf.csproj">
+      <Project>{acc2c898-b49b-4ed9-b18c-389f50801b39}</Project>
+      <Name>Renderer.Dxf</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Renderer.PdfSharp\Renderer.PdfSharp.csproj">
       <Project>{34c8ee31-a1fe-4a74-be36-c1f38bc06fec}</Project>
       <Name>Renderer.PdfSharp-core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Renderer.WinForms\Renderer.WinForms.csproj">
+      <Project>{3dc476e6-5032-4888-9337-221b88653c40}</Project>
+      <Name>Renderer.WinForms</Name>
     </ProjectReference>
     <ProjectReference Include="..\ScriptRunner.Roslyn\ScriptRunner.Roslyn.csproj">
       <Project>{352c23cd-8a6d-4c91-9fd2-fc35ecbc8afe}</Project>
