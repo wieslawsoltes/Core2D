@@ -248,7 +248,7 @@ namespace Core2D.Uwp
         private void CanvasControl_PointerReleased(object sender, PointerRoutedEventArgs e)
         {
             var p = e.GetCurrentPoint(sender as CanvasControl);
-            var pos = p.Position;
+            var pos = FixPointOffset(p.Position);
             var type = p.PointerDevice.PointerDeviceType;
             switch (type)
             {
