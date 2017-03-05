@@ -20,6 +20,7 @@ namespace Core2D.Shape
         private BaseShape _owner;
         private ShapeState _state;
         private ShapeStyle _style;
+        private MatrixObject _transform;
         private bool _isStroked;
         private bool _isFilled;
         private XContext _data;
@@ -69,6 +70,15 @@ namespace Core2D.Shape
         {
             get { return _style; }
             set { Update(ref _style, value); }
+        }
+
+        /// <summary>
+        /// Get or sets shape matrix transform.
+        /// </summary>
+        public MatrixObject Transform
+        {
+            get { return _transform; }
+            set { Update(ref _transform, value); }
         }
 
         /// <summary>
