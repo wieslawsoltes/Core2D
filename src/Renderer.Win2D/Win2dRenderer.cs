@@ -377,13 +377,18 @@ namespace Renderer.Win2D
         /// <inheritdoc/>
         public override object PushMatrix(object ds, MatrixObject matrix)
         {
-            throw new NotImplementedException();
+            var _ds = ds as CanvasDrawingSession;
+            var old = _ds.Transform;
+            _ds.Transform = ToMatrix3x2(matrix) * _ds.Transform;
+            return old;
         }
 
         /// <inheritdoc/>
-        public override void PopMatrix(object dc, object state)
+        public override void PopMatrix(object ds, object state)
         {
-            throw new NotImplementedException();
+            var _ds = ds as CanvasDrawingSession;
+            var old = (N.Matrix3x2)state;
+            _ds.Transform = old;
         }
 
         /// <inheritdoc/>

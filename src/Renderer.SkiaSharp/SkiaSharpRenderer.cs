@@ -390,13 +390,18 @@ namespace Renderer.SkiaSharp
         /// <inheritdoc/>
         public override object PushMatrix(object dc, MatrixObject matrix)
         {
-            throw new NotImplementedException();
+            var canvas = dc as SKCanvas;
+            int count = canvas.Save();
+            canvas.SetMatrix(MatrixHelper.Multiply(ToSKMatrix(matrix), canvas.TotalMatrix));
+            return count;
         }
 
         /// <inheritdoc/>
         public override void PopMatrix(object dc, object state)
         {
-            throw new NotImplementedException();
+            var canvas = dc as SKCanvas;
+            var count = (int)state;
+            canvas.RestoreToCount(count);
         }
 
         /// <inheritdoc/>

@@ -332,13 +332,18 @@ namespace Renderer.WinForms
         /// <inheritdoc/>
         public override object PushMatrix(object dc, MatrixObject matrix)
         {
-            throw new NotImplementedException();
+            var _gfx = dc as Graphics;
+            var state = _gfx.Save();
+            _gfx.MultiplyTransform(ToMatrix(matrix));
+            return state;
         }
 
         /// <inheritdoc/>
         public override void PopMatrix(object dc, object state)
         {
-            throw new NotImplementedException();
+            var _gfx = dc as Graphics;
+            var _state = state as GraphicsState;
+            _gfx.Restore(_state);
         }
 
         /// <inheritdoc/>

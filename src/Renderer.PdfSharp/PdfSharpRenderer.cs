@@ -284,13 +284,18 @@ namespace Renderer.PdfSharp
         /// <inheritdoc/>
         public override object PushMatrix(object dc, Core2D.Renderer.MatrixObject matrix)
         {
-            throw new NotImplementedException();
+            var _gfx = dc as XGraphics;
+            var state = _gfx.Save();
+            _gfx.MultiplyTransform(ToXMatrix(matrix));
+            return state;
         }
 
         /// <inheritdoc/>
         public override void PopMatrix(object dc, object state)
         {
-            throw new NotImplementedException();
+            var _gfx = dc as XGraphics;
+            var _state = state as XGraphicsState;
+            _gfx.Restore(_state);
         }
 
         /// <inheritdoc/>
