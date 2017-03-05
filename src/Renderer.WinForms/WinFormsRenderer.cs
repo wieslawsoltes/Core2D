@@ -330,7 +330,7 @@ namespace Renderer.WinForms
         }
 
         /// <inheritdoc/>
-        public override object PushMatrix(object dc, Core2D.Renderer.MatrixObject matrix)
+        public override object PushMatrix(object dc, MatrixObject matrix)
         {
             throw new NotImplementedException();
         }
