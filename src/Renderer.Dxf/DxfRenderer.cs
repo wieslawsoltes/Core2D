@@ -495,13 +495,14 @@ namespace Renderer.Dxf
         /// <inheritdoc/>
         public override object PushMatrix(object dc, Core2D.Renderer.MatrixObject matrix)
         {
-            throw new NotImplementedException();
+            // TODO: Implement push matrix.
+            return null;
         }
 
         /// <inheritdoc/>
         public override void PopMatrix(object dc, object state)
         {
-            throw new NotImplementedException();
+            // TODO: Implement pop matrix.
         }
 
         /// <inheritdoc/>
