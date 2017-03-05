@@ -375,7 +375,7 @@ namespace Renderer.Win2D
         }
 
         /// <inheritdoc/>
-        public override object PushMatrix(object dc, Core2D.Renderer.MatrixObject matrix)
+        public override object PushMatrix(object ds, MatrixObject matrix)
         {
             throw new NotImplementedException();
         }
