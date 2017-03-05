@@ -6,6 +6,7 @@
       xmlns:local="using:Core2D.Uwp"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
       xmlns:canvas="using:Microsoft.Graphics.Canvas.UI.Xaml"
       xmlns:Project="using:Core2D.Project"
       xmlns:Style="using:Core2D.Style"
@@ -47,80 +48,92 @@
             </CommandBar.SecondaryCommands>
         </CommandBar>
     </Page.TopAppBar>
-    <Grid>
-        <SplitView PanePlacement="Left" IsPaneOpen="True" DisplayMode="Inline" OpenPaneLength="150">
-            <SplitView.Pane>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <ComboBox x:Name="DocumentsComboBox"
-                              ItemsSource="{Binding Project.Documents, Mode=TwoWay}" 
-                              SelectedItem="{Binding Project.CurrentDocument, Mode=TwoWay}" 
-                              Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" 
-                              Grid.Row="0"
-                              HorizontalAlignment="Stretch">
-                        <ComboBox.ItemTemplate>
-                            <DataTemplate x:DataType="Project:XDocument">
-                                <TextBlock Text="{Binding Name}"/>
-                            </DataTemplate>
-                        </ComboBox.ItemTemplate>
-                    </ComboBox>
-                    <ListBox x:Name="ContainersListBox"
-                             ItemsSource="{Binding Project.CurrentDocument.Pages, Mode=TwoWay}" 
-                             SelectedItem="{Binding Project.CurrentContainer, Mode=TwoWay}" 
-                             SelectionChanged="ContainersListBox_SelectionChanged"
-                             Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-                             Grid.Row="1">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate x:DataType="Project:XContainer">
-                                <TextBlock Text="{Binding Name}"/>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                </Grid>
-            </SplitView.Pane>
-            <SplitView.Content>
-                <SplitView PanePlacement="Right" IsPaneOpen="True" DisplayMode="Inline" OpenPaneLength="150">
-                    <SplitView.Content>
-                        <Grid Margin="10">
-                            <canvas:CanvasControl x:Name="canvas" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
-                        </Grid>
-                    </SplitView.Content>
-                    <SplitView.Pane>
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <ComboBox x:Name="StyleLibrariesComboBox"
-                                      ItemsSource="{Binding Project.StyleLibraries, Mode=TwoWay}" 
-                                      SelectedItem="{Binding Project.CurrentStyleLibrary, Mode=TwoWay}" 
-                                      Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" 
-                                      Grid.Row="0"
-                                      HorizontalAlignment="Stretch">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Name}"/>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
-                            <ListBox x:Name="StylesListBox"
-                                     ItemsSource="{Binding Project.CurrentStyleLibrary.Items, Mode=TwoWay}" 
-                                     SelectedItem="{Binding Project.CurrentStyleLibrary.Selected, Mode=TwoWay}" 
-                                     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-                                     Grid.Row="1">
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate x:DataType="Style:BaseStyle">
-                                        <TextBlock Text="{Binding Name}"/>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
-                        </Grid>
-                    </SplitView.Pane>
-                </SplitView>
-            </SplitView.Content>
-        </SplitView>
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"></ColumnDefinition>
+            <ColumnDefinition Width="11"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="11"></ColumnDefinition>
+            <ColumnDefinition Width="150"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <!-- Left -->
+        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Grid.Column="0" Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="11"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <!-- Top -->
+            <ComboBox x:Name="DocumentsComboBox"
+                      ItemsSource="{Binding Project.Documents, Mode=TwoWay}" 
+                      SelectedItem="{Binding Project.CurrentDocument, Mode=TwoWay}" 
+                      Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" 
+                      HorizontalAlignment="Stretch"
+                      Grid.Row="0">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate x:DataType="Project:XDocument">
+                        <TextBlock Text="{Binding Name}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <!-- Splitter -->
+            <controls:GridSplitter Grid.Row="1" ResizeBehavior="BasedOnAlignment" ResizeDirection="Auto" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Height="11" HorizontalAlignment="Stretch"/>
+            <!-- Bottom -->
+            <ListBox x:Name="ContainersListBox"
+                     ItemsSource="{Binding Project.CurrentDocument.Pages, Mode=TwoWay}" 
+                     SelectedItem="{Binding Project.CurrentContainer, Mode=TwoWay}" 
+                     SelectionChanged="ContainersListBox_SelectionChanged"
+                     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+                     Grid.Row="2">
+                <ListBox.ItemTemplate>
+                    <DataTemplate x:DataType="Project:XContainer">
+                        <TextBlock Text="{Binding Name}"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+        <!-- Splitter -->
+        <controls:GridSplitter Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" Width="11" ResizeBehavior="BasedOnAlignment" ResizeDirection="Auto" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"/>
+        <!-- Content -->
+        <Grid Margin="10" Grid.Column="2" Grid.Row="0" Grid.RowSpan="3">
+            <canvas:CanvasControl x:Name="canvas" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+        </Grid>
+        <!-- Splitter -->
+        <controls:GridSplitter Grid.Column="3" Grid.Row="0" Grid.RowSpan="3" Width="11" ResizeBehavior="BasedOnAlignment" ResizeDirection="Auto" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"/>
+        <!-- Right -->
+        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Grid.Column="4" Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="11"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <!-- Top -->
+            <ComboBox x:Name="StyleLibrariesComboBox"
+                      ItemsSource="{Binding Project.StyleLibraries, Mode=TwoWay}" 
+                      SelectedItem="{Binding Project.CurrentStyleLibrary, Mode=TwoWay}" 
+                      Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" 
+                      HorizontalAlignment="Stretch"
+                      Grid.Row="0">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <!-- Splitter -->
+            <controls:GridSplitter Grid.Row="1" ResizeBehavior="BasedOnAlignment" ResizeDirection="Auto" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Height="11" HorizontalAlignment="Stretch"/>
+            <!-- Bottom -->
+            <ListBox x:Name="StylesListBox"
+                     ItemsSource="{Binding Project.CurrentStyleLibrary.Items, Mode=TwoWay}" 
+                     SelectedItem="{Binding Project.CurrentStyleLibrary.Selected, Mode=TwoWay}" 
+                     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+                     Grid.Row="2">
+                <ListBox.ItemTemplate>
+                    <DataTemplate x:DataType="Style:BaseStyle">
+                        <TextBlock Text="{Binding Name}"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
     </Grid>
 </Page>
