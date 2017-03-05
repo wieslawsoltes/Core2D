@@ -10,6 +10,7 @@ using Core2D.Editor.Recent;
 using Core2D.Path;
 using Core2D.Path.Segments;
 using Core2D.Project;
+using Core2D.Renderer;
 using Core2D.Shape;
 using Core2D.Shapes;
 using Core2D.Style;
@@ -25,6 +26,11 @@ namespace Core2D.Editor.Designer
         /// The design time <see cref="ProjectEditor"/>.
         /// </summary>
         public static ProjectEditor Editor { get; set; }
+
+        /// <summary>
+        /// The design time <see cref="Core2D.Renderer.MatrixObject"/> template.
+        /// </summary>
+        public static MatrixObject Transform { get; set; }
 
         /// <summary>
         /// The design time <see cref="Core2D.Project.XContainer"/> template.
@@ -234,6 +240,10 @@ namespace Core2D.Editor.Designer
             // New Project
 
             Editor.OnNewProject();
+
+            // Transform
+
+            Transform = MatrixObject.Identity;
 
             // Data
 
