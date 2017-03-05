@@ -32,6 +32,7 @@ namespace Core2D.Shape
             : base()
         {
             State = ShapeState.Create(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone);
+            Transform = MatrixObject.Create();
             Data = XContext.Create();
         }
 
