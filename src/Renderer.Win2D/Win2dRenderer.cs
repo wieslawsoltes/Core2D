@@ -190,7 +190,7 @@ namespace Renderer.Win2D
                         pt = N.Vector2.Transform(new N.Vector2(x - (float)sx, y), rt);
                         var rect = new Rect2(x - sx, y - ry, sx, sy);
                         var old = ds.Transform;
-                        ds.Transform = rt;
+                        ds.Transform = rt * ds.Transform;
                         DrawRectangleInternal(ds, brush, pen, stroke, style.IsStroked, style.IsFilled, ref rect, thickness);
                         ds.Transform = old;
                     }
@@ -199,7 +199,7 @@ namespace Renderer.Win2D
                     {
                         pt = N.Vector2.Transform(new N.Vector2(x - (float)sx, y), rt);
                         var old = ds.Transform;
-                        ds.Transform = rt;
+                        ds.Transform = rt * ds.Transform;
                         var rect = new Rect2(x - sx, y - ry, sx, sy);
                         DrawEllipseInternal(ds, brush, pen, stroke, style.IsStroked, style.IsFilled, ref rect, thickness);
                         ds.Transform = old;
