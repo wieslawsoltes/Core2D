@@ -336,6 +336,14 @@ namespace Renderer.Win2D
             }
         }
 
+        private N.Matrix3x2 ToMatrix3x2(MatrixObject matrix)
+        {
+            return new N.Matrix3x2(
+                (float)matrix.M11, (float)matrix.M12,
+                (float)matrix.M21, (float)matrix.M22,
+                (float)matrix.OffsetX, (float)matrix.OffsetY);
+        }
+
         /// <inheritdoc/>
         public override void ClearCache(bool isZooming)
         {
