@@ -244,6 +244,14 @@ namespace Renderer.PdfSharp
             }
         }
 
+        private XMatrix ToXMatrix(Core2D.Renderer.MatrixObject matrix)
+        {
+            return new XMatrix(
+                matrix.M11, matrix.M12,
+                matrix.M21, matrix.M22,
+                matrix.OffsetX, matrix.OffsetY);
+        }
+
         /// <inheritdoc/>
         public override void ClearCache(bool isZooming)
         {
