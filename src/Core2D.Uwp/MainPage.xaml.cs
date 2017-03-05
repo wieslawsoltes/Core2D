@@ -12,7 +12,6 @@ using Autofac;
 using Core2D.Data.Database;
 using Core2D.Editor;
 using Core2D.Editor.Factories;
-using Core2D.Editor.Tools;
 using Core2D.Editor.Views.Interfaces;
 using Core2D.Interfaces;
 using Core2D.Project;
@@ -67,9 +66,50 @@ namespace Core2D.Uwp
             _serviceProvider = serviceProvider;
         }
 
+        private async Task<string> GetImageKey(IStorageFile file)
+        {
+            var key = default(string);
+
+            using (var fileStream = await file.OpenStreamForReadAsync())
+            {
+                var editor = _serviceProvider.GetService<ProjectEditor>();
+                var bytes = editor.FileIO.ReadBinary(fileStream);
+                key = editor.Project.AddImageFromFile(file.Path, bytes);
+            }
+
+            return key;
+        }
+
+        private async Task<IStorageFile> GetImageFileAsync()
+        {
+            var picker = new FileOpenPicker();
+            picker.ViewMode = PickerViewMode.Thumbnail;
+            picker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
+            picker.FileTypeFilter.Add(".jpg");
+            picker.FileTypeFilter.Add(".jpeg");
+            picker.FileTypeFilter.Add(".png");
+            picker.FileTypeFilter.Add(".bmp");
+            picker.FileTypeFilter.Add(".gif");
+            picker.FileTypeFilter.Add(".tiff");
+            var file = await picker.PickSingleFileAsync();
+            if (file != null)
+            {
+                return file;
+            }
+            return null;
+        }
+
         public async Task<string> GetImageKeyAsync()
         {
-            return await Task.Run<string>(() => string.Empty);
+            var file = await GetImageFileAsync();
+            if (file == null)
+                return null;
+
+            string key = await GetImageKey(file);
+
+            await _serviceProvider.GetService<MainPage>().CacheImage(key);
+
+            return await Task.Run(() => key);
         }
     }
 
@@ -121,7 +161,6 @@ namespace Core2D.Uwp
         private ContainerPresenter _presenter;
         private ProjectEditor _projectEditor;
         private PointerPressType _pressed;
-        private string _imagePath;
 
         public MainPage()
         {
@@ -297,7 +336,7 @@ namespace Core2D.Uwp
             return new Point(point.X - offsetX, point.Y - offsetY);
         }
 
-        private async void CanvasControl_PointerPressed(object sender, PointerRoutedEventArgs e)
+        private void CanvasControl_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
             var p = e.GetCurrentPoint(sender as CanvasControl);
             var pos = FixPointOffset(p.Position);
@@ -310,23 +349,6 @@ namespace Core2D.Uwp
                         {
                             if (_projectEditor.IsLeftDownAvailable())
                             {
-                                if (_projectEditor.CurrentTool.GetType() == typeof(ToolImage) && _imagePath == null)
-                                {
-                                    var file = await GetImageKeyAsync();
-                                    if (file == null)
-                                        return;
-
-                                    string key = await GetImageKey(file);
-
-                                    await CacheImage(key);
-
-                                    _imagePath = key;
-                                }
-                                else
-                                {
-                                    _imagePath = null;
-                                }
-
                                 _projectEditor.LeftDown(pos.X, pos.Y);
                                 _pressed = PointerPressType.Left;
                             }
@@ -489,7 +511,7 @@ namespace Core2D.Uwp
             }
         }
 
-        private async Task CacheImage(string key)
+        public async Task CacheImage(string key)
         {
             var bytes = _projectEditor.Renderers[0].State.ImageCache.GetImage(key);
             if (bytes != null)
@@ -506,7 +528,7 @@ namespace Core2D.Uwp
             }
         }
 
-        private async Task CacheImages(XProject project)
+        public async Task CacheImages(XProject project)
         {
             var images = XProject.GetAllShapes<XImage>(project);
             if (images != null)
@@ -516,38 +538,6 @@ namespace Core2D.Uwp
                     await CacheImage(image.Key);
                 }
             }
-        }
-
-        private async Task<string> GetImageKey(IStorageFile file)
-        {
-            var key = default(string);
-
-            using (var fileStream = await file.OpenStreamForReadAsync())
-            {
-                var bytes = _projectEditor.FileIO.ReadBinary(fileStream);
-                key = _projectEditor.Project.AddImageFromFile(file.Path, bytes);
-            }
-
-            return key;
-        }
-
-        private async Task<IStorageFile> GetImageKeyAsync()
-        {
-            var picker = new FileOpenPicker();
-            picker.ViewMode = PickerViewMode.Thumbnail;
-            picker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
-            picker.FileTypeFilter.Add(".jpg");
-            picker.FileTypeFilter.Add(".jpeg");
-            picker.FileTypeFilter.Add(".png");
-            picker.FileTypeFilter.Add(".bmp");
-            picker.FileTypeFilter.Add(".gif");
-            picker.FileTypeFilter.Add(".tiff");
-            var file = await picker.PickSingleFileAsync();
-            if (file != null)
-            {
-                return file;
-            }
-            return null;
         }
 
         private async Task<IStorageFile> GetOpenProjectPathAsync()
