@@ -438,11 +438,11 @@ namespace Renderer.Win2D
             CanvasGeometry g;
             using (var builder = new CanvasPathBuilder(_ds))
             {
-                builder.BeginFigure((float)a.Start.X, (float)a.Start.Y);
+                builder.BeginFigure((float)(a.Start.X + dx), (float)(a.Start.Y + dy));
                 builder.AddArc(
                     new N.Vector2(
-                        (float)a.End.X,
-                        (float)a.End.Y),
+                        (float)(a.End.X + dx),
+                        (float)(a.End.Y + dy)),
                     (float)a.Radius.Width,
                     (float)a.Radius.Height,
                     0f,
@@ -479,17 +479,17 @@ namespace Renderer.Win2D
             CanvasGeometry g;
             using (var builder = new CanvasPathBuilder(_ds))
             {
-                builder.BeginFigure((float)bezier.Point1.X, (float)bezier.Point1.Y);
+                builder.BeginFigure((float)(bezier.Point1.X + dx), (float)(bezier.Point1.Y + dy));
                 builder.AddCubicBezier(
                     new N.Vector2(
-                        (float)bezier.Point2.X,
-                        (float)bezier.Point2.Y),
+                        (float)(bezier.Point2.X + dx),
+                        (float)(bezier.Point2.Y + dy)),
                     new N.Vector2(
-                        (float)bezier.Point3.X,
-                        (float)bezier.Point3.Y),
+                        (float)(bezier.Point3.X + dx),
+                        (float)(bezier.Point3.Y + dy)),
                     new N.Vector2(
-                        (float)bezier.Point4.X,
-                        (float)bezier.Point4.Y));
+                        (float)(bezier.Point4.X + dx),
+                        (float)(bezier.Point4.Y + dy)));
                 builder.EndFigure(CanvasFigureLoop.Open);
                 g = CanvasGeometry.CreatePath(builder);
             }
@@ -521,14 +521,14 @@ namespace Renderer.Win2D
             CanvasGeometry g;
             using (var builder = new CanvasPathBuilder(_ds))
             {
-                builder.BeginFigure((float)qbezier.Point1.X, (float)qbezier.Point1.Y);
+                builder.BeginFigure((float)(qbezier.Point1.X + dx), (float)(qbezier.Point1.Y + dy));
                 builder.AddQuadraticBezier(
                     new N.Vector2(
-                        (float)qbezier.Point2.X,
-                        (float)qbezier.Point2.Y),
+                        (float)(qbezier.Point2.X + dx),
+                        (float)(qbezier.Point2.Y + dy)),
                     new N.Vector2(
-                        (float)qbezier.Point3.X,
-                        (float)qbezier.Point3.Y));
+                        (float)(qbezier.Point3.X + dx),
+                        (float)(qbezier.Point3.Y + dy)));
                 builder.EndFigure(CanvasFigureLoop.Open);
                 g = CanvasGeometry.CreatePath(builder);
             }
