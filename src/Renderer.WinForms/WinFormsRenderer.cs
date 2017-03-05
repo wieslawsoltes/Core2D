@@ -290,6 +290,14 @@ namespace Renderer.WinForms
             }
         }
 
+        private Matrix ToMatrix(MatrixObject matrix)
+        {
+            return new Matrix(
+                (float)matrix.M11, (float)matrix.M12,
+                (float)matrix.M21, (float)matrix.M22,
+                (float)matrix.OffsetX, (float)matrix.OffsetY);
+        }
+
         /// <inheritdoc/>
         public override void ClearCache(bool isZooming)
         {
