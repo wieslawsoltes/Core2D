@@ -140,15 +140,9 @@ namespace Core2D.Uwp
             _serviceProvider = _componentContainer.Resolve<IServiceProvider>();
             _projectEditor = _serviceProvider.GetService<ProjectEditor>();
 
-            DataContext = _projectEditor;
-
+            Loaded += MainPage_Loaded;
+            Unloaded += MainPage_Unloaded;
             Window.Current.CoreWindow.KeyDown += CoreWindow_KeyDown;
-            Loaded += (sender, e) => canvas.Focus(FocusState.Programmatic);
-            Unloaded += (sender, e) =>
-            {
-                _projectEditor.Log?.Dispose();
-                _componentContainer?.Dispose();
-            };
 
             _projectEditor.CurrentTool = _projectEditor.Tools.FirstOrDefault(t => t.Name == "Selection");
             _projectEditor.CurrentPathTool = _projectEditor.PathTools.FirstOrDefault(t => t.Name == "Line");
@@ -157,212 +151,25 @@ namespace Core2D.Uwp
 
             _presenter = new EditorPresenter();
 
-            canvas.Draw += CanvasControl_Draw;
             canvas.PointerPressed += CanvasControl_PointerPressed;
             canvas.PointerReleased += CanvasControl_PointerReleased;
             canvas.PointerMoved += CanvasControl_PointerMoved;
             canvas.PointerWheelChanged += CanvasControl_PointerWheelChanged;
             canvas.SizeChanged += Canvas_SizeChanged;
+            canvas.Draw += CanvasControl_Draw;
+
+            DataContext = _projectEditor;
         }
 
-        public Point FixPointOffset(Point point)
+        private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
-            var container = _projectEditor.Project.CurrentContainer;
-            double offsetX = (this.canvas.ActualWidth * this.canvas.DpiScale - container.Width) / 2.0;
-            double offsetY = (this.canvas.ActualHeight * this.canvas.DpiScale - container.Height) / 2.0;
-            return new Point(point.X - offsetX, point.Y - offsetY);
+            canvas.Focus(FocusState.Programmatic);
         }
 
-        private void CanvasControl_Draw(CanvasControl sender, CanvasDrawEventArgs args)
+        private void MainPage_Unloaded(object sender, RoutedEventArgs e)
         {
-            Draw(args.DrawingSession);
-        }
-
-        private async void CanvasControl_PointerPressed(object sender, PointerRoutedEventArgs e)
-        {
-            var p = e.GetCurrentPoint(sender as CanvasControl);
-            var pos = FixPointOffset(p.Position);
-            var type = p.PointerDevice.PointerDeviceType;
-            switch (type)
-            {
-                case PointerDeviceType.Mouse:
-                    {
-                        if (p.Properties.IsLeftButtonPressed)
-                        {
-                            if (_projectEditor.IsLeftDownAvailable())
-                            {
-                                if (_projectEditor.CurrentTool.GetType() == typeof(ToolImage) && _imagePath == null)
-                                {
-                                    var file = await GetImageKeyAsync();
-                                    if (file == null)
-                                        return;
-
-                                    string key = await GetImageKey(file);
-
-                                    await CacheImage(key);
-
-                                    _imagePath = key;
-                                }
-                                else
-                                {
-                                    _imagePath = null;
-                                }
-
-                                _projectEditor.LeftDown(pos.X, pos.Y);
-                                _pressed = PointerPressType.Left;
-                            }
-                        }
-                        //else if (p.Properties.IsMiddleButtonPressed)
-                        //{
-                        //    _pressed = PointerPressType.Middle;
-                        //}
-                        else if (p.Properties.IsRightButtonPressed)
-                        {
-                            if (_projectEditor.IsRightDownAvailable())
-                            {
-                                _projectEditor.RightDown(pos.X, pos.Y);
-                                _pressed = PointerPressType.Right;
-                            }
-                        }
-                        else
-                        {
-                            _pressed = PointerPressType.None;
-                        }
-                    }
-                    break;
-                case PointerDeviceType.Pen:
-                    {
-                        // TODO: Add pen support.
-                        //_pressed = PointerPressType.Pen;
-                    }
-                    break;
-                case PointerDeviceType.Touch:
-                    {
-                        // TODO: Add touch support.
-                        //_pressed = PointerPressType.Touch;
-                    }
-                    break;
-            }
-        }
-
-        private void CanvasControl_PointerReleased(object sender, PointerRoutedEventArgs e)
-        {
-            var p = e.GetCurrentPoint(sender as CanvasControl);
-            var pos = FixPointOffset(p.Position);
-            var type = p.PointerDevice.PointerDeviceType;
-            switch (type)
-            {
-                case PointerDeviceType.Mouse:
-                    {
-                        switch (_pressed)
-                        {
-                            case PointerPressType.None:
-                                break;
-                            case PointerPressType.Left:
-                                {
-                                    if (_projectEditor.IsLeftUpAvailable())
-                                    {
-                                        _projectEditor.LeftUp(pos.X, pos.Y);
-                                    }
-                                }
-                                break;
-                            case PointerPressType.Middle:
-                                break;
-                            case PointerPressType.Right:
-                                {
-                                    if (_projectEditor.IsRightUpAvailable())
-                                    {
-                                        _projectEditor.RightUp(pos.X, pos.Y);
-                                    }
-                                }
-                                break;
-                            case PointerPressType.Pen:
-                            case PointerPressType.Touch:
-                                break;
-                        }
-                    }
-                    break;
-                case PointerDeviceType.Pen:
-                    {
-                        switch (_pressed)
-                        {
-                            case PointerPressType.None:
-                            case PointerPressType.Left:
-                            case PointerPressType.Middle:
-                            case PointerPressType.Right:
-                                break;
-                            case PointerPressType.Pen:
-                                {
-                                    // TODO: Add pen support.
-                                }
-                                break;
-                            case PointerPressType.Touch:
-                                break;
-                        }
-                    }
-                    break;
-                case PointerDeviceType.Touch:
-                    {
-                        switch (_pressed)
-                        {
-                            case PointerPressType.None:
-                            case PointerPressType.Left:
-                            case PointerPressType.Middle:
-                            case PointerPressType.Right:
-                            case PointerPressType.Pen:
-                            case PointerPressType.Touch:
-                                {
-                                    // TODO: Add touch support.
-                                }
-                                break;
-                        }
-                    }
-                    break;
-            }
-
-            _pressed = PointerPressType.None;
-        }
-
-        private void CanvasControl_PointerMoved(object sender, PointerRoutedEventArgs e)
-        {
-            var p = e.GetCurrentPoint(sender as CanvasControl);
-            var pos = FixPointOffset(p.Position);
-
-            if (_projectEditor.IsMoveAvailable())
-            {
-                _projectEditor.Move(pos.X, pos.Y);
-            }
-        }
-
-        private void CanvasControl_PointerWheelChanged(object sender, PointerRoutedEventArgs e)
-        {
-        }
-
-        private void Canvas_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-        }
-
-        private void Draw(CanvasDrawingSession ds)
-        {
-            ds.Antialiasing = CanvasAntialiasing.Aliased;
-            ds.TextAntialiasing = CanvasTextAntialiasing.Auto;
-            ds.Clear(Windows.UI.Colors.White);
-
-            var renderer = _projectEditor.Renderers[0];
-            var container = _projectEditor.Project.CurrentContainer;
-            if (container != null)
-            {
-                var t = Matrix3x2.CreateTranslation(0.0f, 0.0f);
-                var s = Matrix3x2.CreateScale(1.0f);
-                var old = ds.Transform;
-                ds.Transform = s * t;
-
-                double offsetX = (this.canvas.ActualWidth * ds.Transform.M11 - container?.Width ?? 0) / 2.0;
-                double offsetY = (this.canvas.ActualHeight * ds.Transform.M22 - container?.Height ?? 0) / 2.0;
-                _presenter?.Render(ds, _projectEditor.Renderers[0], container, offsetX, offsetY);
-
-                ds.Transform = old;
-            }
+            _projectEditor.Log?.Dispose();
+            _componentContainer?.Dispose();
         }
 
         private async void CoreWindow_KeyDown(CoreWindow sender, KeyEventArgs args)
@@ -479,6 +286,206 @@ namespace Core2D.Uwp
                         _projectEditor.OnDeselectAll();
                         break;
                 }
+            }
+        }
+
+        public Point FixPointOffset(Point point)
+        {
+            var container = _projectEditor.Project.CurrentContainer;
+            double offsetX = (this.canvas.ActualWidth * this.canvas.DpiScale - container.Width) / 2.0;
+            double offsetY = (this.canvas.ActualHeight * this.canvas.DpiScale - container.Height) / 2.0;
+            return new Point(point.X - offsetX, point.Y - offsetY);
+        }
+
+        private async void CanvasControl_PointerPressed(object sender, PointerRoutedEventArgs e)
+        {
+            var p = e.GetCurrentPoint(sender as CanvasControl);
+            var pos = FixPointOffset(p.Position);
+            var type = p.PointerDevice.PointerDeviceType;
+            switch (type)
+            {
+                case PointerDeviceType.Mouse:
+                    {
+                        if (p.Properties.IsLeftButtonPressed)
+                        {
+                            if (_projectEditor.IsLeftDownAvailable())
+                            {
+                                if (_projectEditor.CurrentTool.GetType() == typeof(ToolImage) && _imagePath == null)
+                                {
+                                    var file = await GetImageKeyAsync();
+                                    if (file == null)
+                                        return;
+
+                                    string key = await GetImageKey(file);
+
+                                    await CacheImage(key);
+
+                                    _imagePath = key;
+                                }
+                                else
+                                {
+                                    _imagePath = null;
+                                }
+
+                                _projectEditor.LeftDown(pos.X, pos.Y);
+                                _pressed = PointerPressType.Left;
+                            }
+                        }
+                        else if (p.Properties.IsMiddleButtonPressed)
+                        {
+                            _pressed = PointerPressType.Middle;
+                        }
+                        else if (p.Properties.IsRightButtonPressed)
+                        {
+                            if (_projectEditor.IsRightDownAvailable())
+                            {
+                                _projectEditor.RightDown(pos.X, pos.Y);
+                                _pressed = PointerPressType.Right;
+                            }
+                        }
+                        else
+                        {
+                            _pressed = PointerPressType.None;
+                        }
+                    }
+                    break;
+                case PointerDeviceType.Pen:
+                    {
+                        // TODO: Add pen support.
+                        _pressed = PointerPressType.Pen;
+                    }
+                    break;
+                case PointerDeviceType.Touch:
+                    {
+                        // TODO: Add touch support.
+                        _pressed = PointerPressType.Touch;
+                    }
+                    break;
+            }
+        }
+
+        private void CanvasControl_PointerReleased(object sender, PointerRoutedEventArgs e)
+        {
+            var p = e.GetCurrentPoint(sender as CanvasControl);
+            var pos = FixPointOffset(p.Position);
+            var type = p.PointerDevice.PointerDeviceType;
+            switch (type)
+            {
+                case PointerDeviceType.Mouse:
+                    {
+                        switch (_pressed)
+                        {
+                            case PointerPressType.None:
+                                break;
+                            case PointerPressType.Left:
+                                {
+                                    if (_projectEditor.IsLeftUpAvailable())
+                                    {
+                                        _projectEditor.LeftUp(pos.X, pos.Y);
+                                    }
+                                }
+                                break;
+                            case PointerPressType.Middle:
+                                break;
+                            case PointerPressType.Right:
+                                {
+                                    if (_projectEditor.IsRightUpAvailable())
+                                    {
+                                        _projectEditor.RightUp(pos.X, pos.Y);
+                                    }
+                                }
+                                break;
+                            case PointerPressType.Pen:
+                            case PointerPressType.Touch:
+                                break;
+                        }
+                    }
+                    break;
+                case PointerDeviceType.Pen:
+                    {
+                        switch (_pressed)
+                        {
+                            case PointerPressType.None:
+                            case PointerPressType.Left:
+                            case PointerPressType.Middle:
+                            case PointerPressType.Right:
+                                break;
+                            case PointerPressType.Pen:
+                                {
+                                    // TODO: Add pen support.
+                                }
+                                break;
+                            case PointerPressType.Touch:
+                                break;
+                        }
+                    }
+                    break;
+                case PointerDeviceType.Touch:
+                    {
+                        switch (_pressed)
+                        {
+                            case PointerPressType.None:
+                            case PointerPressType.Left:
+                            case PointerPressType.Middle:
+                            case PointerPressType.Right:
+                            case PointerPressType.Pen:
+                            case PointerPressType.Touch:
+                                {
+                                    // TODO: Add touch support.
+                                }
+                                break;
+                        }
+                    }
+                    break;
+            }
+
+            _pressed = PointerPressType.None;
+        }
+
+        private void CanvasControl_PointerMoved(object sender, PointerRoutedEventArgs e)
+        {
+            var p = e.GetCurrentPoint(sender as CanvasControl);
+            var pos = FixPointOffset(p.Position);
+
+            if (_projectEditor.IsMoveAvailable())
+            {
+                _projectEditor.Move(pos.X, pos.Y);
+            }
+        }
+
+        private void CanvasControl_PointerWheelChanged(object sender, PointerRoutedEventArgs e)
+        {
+        }
+
+        private void Canvas_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+        }
+
+        private void CanvasControl_Draw(CanvasControl sender, CanvasDrawEventArgs args)
+        {
+            Draw(args.DrawingSession);
+        }
+
+        private void Draw(CanvasDrawingSession ds)
+        {
+            var renderer = _projectEditor.Renderers[0];
+            var container = _projectEditor.Project.CurrentContainer;
+            if (container != null)
+            {
+                ds.Antialiasing = CanvasAntialiasing.Aliased;
+                ds.TextAntialiasing = CanvasTextAntialiasing.Auto;
+                ds.Clear(Windows.UI.Colors.White);
+
+                var t = Matrix3x2.CreateTranslation(0.0f, 0.0f);
+                var s = Matrix3x2.CreateScale(1.0f);
+                var old = ds.Transform;
+                ds.Transform = s * t;
+
+                double offsetX = (this.canvas.ActualWidth * ds.Transform.M11 - container.Width) / 2.0;
+                double offsetY = (this.canvas.ActualHeight * ds.Transform.M22 - container.Height) / 2.0;
+                _presenter?.Render(ds, _projectEditor.Renderers[0], container, offsetX, offsetY);
+
+                ds.Transform = old;
             }
         }
 
