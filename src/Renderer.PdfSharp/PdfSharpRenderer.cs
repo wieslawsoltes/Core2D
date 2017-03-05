@@ -266,7 +266,7 @@ namespace Renderer.PdfSharp
         {
             var _gfx = dc as XGraphics;
             _gfx.DrawRectangle(
-                ToXSolidBrush(color), 
+                ToXSolidBrush(color),
                 _scaleToPage(x),
                 _scaleToPage(y),
                 _scaleToPage(width),
