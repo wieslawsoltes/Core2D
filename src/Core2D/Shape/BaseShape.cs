@@ -128,6 +128,35 @@ namespace Core2D.Shape
         public abstract void Move(double dx, double dy);
 
         /// <summary>
+        /// Begins matrix transform.
+        /// </summary>
+        /// <param name="dc">The generic drawing context object.</param>
+        /// <param name="renderer">The generic renderer object used to draw shape.</param>
+        /// <returns>The previous transform state.</returns>
+        public virtual object BeginTransform(object dc, ShapeRenderer renderer)
+        {
+            if (Transform != null)
+            {
+                return renderer.PushMatrix(dc, Transform);
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Ends matrix transform.
+        /// </summary>
+        /// <param name="dc">The generic drawing context object.</param>
+        /// <param name="renderer">The generic renderer object used to draw shape.</param>
+        /// <param name="state">The previous transform state.</param>
+        public virtual void EndTransform(object dc, ShapeRenderer renderer, object state)
+        {
+            if (Transform != null)
+            {
+                renderer.PopMatrix(dc, state);
+            }
+        }
+
+        /// <summary>
         /// Get all points in the shape.
         /// </summary>
         /// <returns>All points in the shape.</returns>
