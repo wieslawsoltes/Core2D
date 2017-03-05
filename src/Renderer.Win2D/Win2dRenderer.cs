@@ -17,6 +17,7 @@ using Windows.UI.Text;
 using N = System.Numerics;
 using Core2D.Spatial;
 using Core2D.Spatial.Arc;
+using Core2D.Shape;
 
 namespace Renderer.Win2D
 {
@@ -89,6 +90,131 @@ namespace Renderer.Win2D
             {
                 ds.DrawLine(p0, p1, isStroked ? pen : Windows.UI.Colors.Transparent, (float)strokeWidth, ss);
             }
+        }
+
+        private static void DrawLineCurveInternal(CanvasDrawingSession ds, Color pen, bool isStroked, ref N.Vector2 pt1, ref N.Vector2 pt2, double curvature, CurveOrientation orientation, PointAlignment pt1a, PointAlignment pt2a, CanvasStrokeStyle stroke, double thickness)
+        {
+            if (isStroked)
+            {
+                CanvasGeometry g;
+                using (var builder = new CanvasPathBuilder(ds))
+                {
+                    builder.BeginFigure(pt1.X, pt1.Y);
+                    double p1x = pt1.X;
+                    double p1y = pt1.Y;
+                    double p2x = pt2.X;
+                    double p2y = pt2.Y;
+                    XLineExtensions.GetCurvedLineBezierControlPoints(orientation, curvature, pt1a, pt2a, ref p1x, ref p1y, ref p2x, ref p2y);
+                    builder.AddCubicBezier(
+                        new N.Vector2(
+                            (float)p1x,
+                            (float)p1y),
+                        new N.Vector2(
+                            (float)p2x,
+                            (float)p2y),
+                        new N.Vector2(
+                            pt2.X,
+                            pt2.Y));
+                    builder.EndFigure(CanvasFigureLoop.Open);
+                    g = CanvasGeometry.CreatePath(builder);
+                }
+                ds.DrawGeometry(g, pen, (float)thickness, stroke);
+                g.Dispose();
+            }
+        }
+
+        private void DrawLineArrowsInternal(CanvasDrawingSession ds, XLine line, double dx, double dy, out N.Vector2 pt1, out N.Vector2 pt2)
+        {
+            double thicknessStartArrow = line.Style.StartArrowStyle.Thickness / _state.ZoomX;
+            double thicknessEndArrow = line.Style.EndArrowStyle.Thickness / _state.ZoomX;
+
+            var fillStartArrow = ToColor(line.Style.StartArrowStyle.Fill);
+            var strokeStartArrow = ToColor(line.Style.StartArrowStyle.Stroke);
+
+            var fillEndArrow = ToColor(line.Style.EndArrowStyle.Fill);
+            var strokeEndArrow = ToColor(line.Style.EndArrowStyle.Stroke);
+
+            var ssStartArrow = CreateStrokeStyle(line.Style.StartArrowStyle);
+            var ssEndArrow = CreateStrokeStyle(line.Style.EndArrowStyle);
+
+            double _x1 = line.Start.X + dx;
+            double _y1 = line.Start.Y + dy;
+            double _x2 = line.End.X + dx;
+            double _y2 = line.End.Y + dy;
+
+            line.GetMaxLength(ref _x1, ref _y1, ref _x2, ref _y2);
+
+            float x1 = (float)_x1;
+            float y1 = (float)_y1;
+            float x2 = (float)_x2;
+            float y2 = (float)_y2;
+
+            var sas = line.Style.StartArrowStyle;
+            var eas = line.Style.EndArrowStyle;
+            float a1 = (float)Math.Atan2(y1 - y2, x1 - x2);
+            float a2 = (float)Math.Atan2(y2 - y1, x2 - x1);
+
+            // Draw start arrow.
+            pt1 = DrawLineArrowInternal(ds, strokeStartArrow, fillStartArrow, ssStartArrow, thicknessStartArrow, x1, y1, a1, sas);
+
+            // Draw end arrow.
+            pt2 = DrawLineArrowInternal(ds, strokeEndArrow, fillEndArrow, ssEndArrow, thicknessEndArrow, x2, y2, a2, sas);
+
+            ssEndArrow.Dispose();
+            ssStartArrow.Dispose();
+        }
+
+        private static N.Vector2 DrawLineArrowInternal(CanvasDrawingSession ds, Color pen, Color brush, CanvasStrokeStyle stroke, double thickness, float x, float y, float angle, ArrowStyle style)
+        {
+            N.Vector2 pt = default(N.Vector2);
+            var rt = N.Matrix3x2.CreateRotation(angle, new N.Vector2(x, y));
+            double rx = style.RadiusX;
+            double ry = style.RadiusY;
+            double sx = 2.0 * rx;
+            double sy = 2.0 * ry;
+
+            switch (style.ArrowType)
+            {
+                default:
+                case ArrowType.None:
+                    {
+                        pt = new N.Vector2(x, y);
+                    }
+                    break;
+                case ArrowType.Rectangle:
+                    {
+                        pt = N.Vector2.Transform(new N.Vector2(x - (float)sx, y), rt);
+                        var rect = new Rect2(x - sx, y - ry, sx, sy);
+                        var old = ds.Transform;
+                        ds.Transform = rt;
+                        DrawRectangleInternal(ds, brush, pen, stroke, style.IsStroked, style.IsFilled, ref rect, thickness);
+                        ds.Transform = old;
+                    }
+                    break;
+                case ArrowType.Ellipse:
+                    {
+                        pt = N.Vector2.Transform(new N.Vector2(x - (float)sx, y), rt);
+                        var old = ds.Transform;
+                        ds.Transform = rt;
+                        var rect = new Rect2(x - sx, y - ry, sx, sy);
+                        DrawEllipseInternal(ds, brush, pen, stroke, style.IsStroked, style.IsFilled, ref rect, thickness);
+                        ds.Transform = old;
+                    }
+                    break;
+                case ArrowType.Arrow:
+                    {
+                        pt = N.Vector2.Transform(new N.Vector2(x, y), rt);
+                        var p11 = N.Vector2.Transform(new N.Vector2(x - (float)sx, y + (float)sy), rt);
+                        var p21 = N.Vector2.Transform(new N.Vector2(x, y), rt);
+                        var p12 = N.Vector2.Transform(new N.Vector2(x - (float)sx, y - (float)sy), rt);
+                        var p22 = N.Vector2.Transform(new N.Vector2(x, y), rt);
+                        DrawLineInternal(ds, pen, stroke, style.IsStroked, ref p11, ref p21, thickness);
+                        DrawLineInternal(ds, pen, stroke, style.IsStroked, ref p12, ref p22, thickness);
+                    }
+                    break;
+            }
+
+            return pt;
         }
 
         private static void DrawRectangleInternal(CanvasDrawingSession ds, Color brush, Color pen, CanvasStrokeStyle ss, bool isStroked, bool isFilled, ref Rect2 rect, double strokeWidth)
@@ -216,145 +342,35 @@ namespace Renderer.Win2D
         /// <inheritdoc/>
         public override void Draw(object ds, XLine line, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
         {
-            // TODO: Finish draw line implementation.
             var _ds = ds as CanvasDrawingSession;
 
             double thicknessLine = line.Style.Thickness / _state.ZoomX;
-            double thicknessStartArrow = line.Style.StartArrowStyle.Thickness / _state.ZoomX;
-            double thicknessEndArrow = line.Style.EndArrowStyle.Thickness / _state.ZoomX;
 
             var fillLine = ToColor(line.Style.Fill);
             var strokeLine = ToColor(line.Style.Stroke);
-
-            var fillStartArrow = ToColor(line.Style.StartArrowStyle.Fill);
-            var strokeStartArrow = ToColor(line.Style.StartArrowStyle.Stroke);
-
-            var fillEndArrow = ToColor(line.Style.EndArrowStyle.Fill);
-            var strokeEndArrow = ToColor(line.Style.EndArrowStyle.Stroke);
-
             var ssLine = CreateStrokeStyle(line.Style);
-            var ssStartArrow = CreateStrokeStyle(line.Style.StartArrowStyle);
-            var ssEndArrow = CreateStrokeStyle(line.Style.EndArrowStyle);
 
-            double _x1 = line.Start.X + dx;
-            double _y1 = line.Start.Y + dy;
-            double _x2 = line.End.X + dx;
-            double _y2 = line.End.Y + dy;
+            N.Vector2 pt1, pt2;
 
-            line.GetMaxLength(ref _x1, ref _y1, ref _x2, ref _y2);
+            DrawLineArrowsInternal(_ds, line, dx, dy, out pt1, out pt2);
 
-            float x1 = (float)_x1;
-            float y1 = (float)_y1;
-            float x2 = (float)_x2;
-            float y2 = (float)_y2;
-
-            var sas = line.Style.StartArrowStyle;
-            var eas = line.Style.EndArrowStyle;
-            float a1 = (float)Math.Atan2(y1 - y2, x1 - x2);
-            float a2 = (float)Math.Atan2(y2 - y1, x2 - x1);
-
-            var t1 = N.Matrix3x2.CreateRotation(a1, new N.Vector2(x1, y1));
-            var t2 = N.Matrix3x2.CreateRotation(a2, new N.Vector2(x2, y2));
-
-            N.Vector2 pt1;
-            N.Vector2 pt2;
-
-            double radiusX1 = sas.RadiusX;
-            double radiusY1 = sas.RadiusY;
-            double sizeX1 = 2.0 * radiusX1;
-            double sizeY1 = 2.0 * radiusY1;
-
-            switch (sas.ArrowType)
+            if (line.Style.LineStyle.IsCurved)
             {
-                default:
-                case ArrowType.None:
-                    {
-                        pt1 = new N.Vector2(x1, y1);
-                    }
-                    break;
-                case ArrowType.Rectangle:
-                    {
-                        pt1 = N.Vector2.Transform(new N.Vector2(x1 - (float)sizeX1, y1), t1);
-                        var rect = new Rect2(x1 - sizeX1, y1 - radiusY1, sizeX1, sizeY1);
-                        var old = _ds.Transform;
-                        _ds.Transform = t1;
-                        DrawRectangleInternal(_ds, fillStartArrow, strokeStartArrow, ssStartArrow, sas.IsStroked, sas.IsFilled, ref rect, thicknessStartArrow);
-                        _ds.Transform = old;
-                    }
-                    break;
-                case ArrowType.Ellipse:
-                    {
-                        pt1 = N.Vector2.Transform(new N.Vector2(x1 - (float)sizeX1, y1), t1);
-                        var old = _ds.Transform;
-                        _ds.Transform = t1;
-                        var rect = new Rect2(x1 - sizeX1, y1 - radiusY1, sizeX1, sizeY1);
-                        DrawEllipseInternal(_ds, fillStartArrow, strokeStartArrow, ssStartArrow, sas.IsStroked, sas.IsFilled, ref rect, thicknessStartArrow);
-                        _ds.Transform = old;
-                    }
-                    break;
-                case ArrowType.Arrow:
-                    {
-                        pt1 = N.Vector2.Transform(new N.Vector2(x1, y1), t1);
-                        var p11 = N.Vector2.Transform(new N.Vector2(x1 - (float)sizeX1, y1 + (float)sizeY1), t1);
-                        var p21 = N.Vector2.Transform(new N.Vector2(x1, y1), t1);
-                        var p12 = N.Vector2.Transform(new N.Vector2(x1 - (float)sizeX1, y1 - (float)sizeY1), t1);
-                        var p22 = N.Vector2.Transform(new N.Vector2(x1, y1), t1);
-                        DrawLineInternal(_ds, strokeStartArrow, ssStartArrow, sas.IsStroked, ref p11, ref p21, thicknessStartArrow);
-                        DrawLineInternal(_ds, strokeStartArrow, ssStartArrow, sas.IsStroked, ref p12, ref p22, thicknessStartArrow);
-                    }
-                    break;
+                DrawLineCurveInternal(
+                    _ds,
+                    strokeLine, line.IsStroked,
+                    ref pt1, ref pt2,
+                    line.Style.LineStyle.Curvature,
+                    line.Style.LineStyle.CurveOrientation,
+                    line.Start.Alignment,
+                    line.End.Alignment,
+                    ssLine, thicknessLine);
+            }
+            else
+            {
+                DrawLineInternal(_ds, strokeLine, ssLine, line.IsStroked, ref pt1, ref pt2, thicknessLine);
             }
 
-            double radiusX2 = eas.RadiusX;
-            double radiusY2 = eas.RadiusY;
-            double sizeX2 = 2.0 * radiusX2;
-            double sizeY2 = 2.0 * radiusY2;
-
-            switch (eas.ArrowType)
-            {
-                default:
-                case ArrowType.None:
-                    {
-                        pt2 = new N.Vector2(x2, y2);
-                    }
-                    break;
-                case ArrowType.Rectangle:
-                    {
-                        pt2 = N.Vector2.Transform(new N.Vector2(x2 - (float)sizeX2, y2), t2);
-                        var rect = new Rect2(x2 - sizeX2, y2 - radiusY2, sizeX2, sizeY2);
-                        var old = _ds.Transform;
-                        _ds.Transform = t1;
-                        DrawRectangleInternal(_ds, fillEndArrow, strokeEndArrow, ssEndArrow, eas.IsStroked, eas.IsFilled, ref rect, thicknessEndArrow);
-                        _ds.Transform = old;
-                    }
-                    break;
-                case ArrowType.Ellipse:
-                    {
-                        pt2 = N.Vector2.Transform(new N.Vector2(x2 - (float)sizeX2, y2), t2);
-                        var old = _ds.Transform;
-                        _ds.Transform = t1;
-                        var rect = new Rect2(x2 - sizeX2, y2 - radiusY2, sizeX2, sizeY2);
-                        DrawEllipseInternal(_ds, fillEndArrow, strokeEndArrow, ssEndArrow, eas.IsStroked, eas.IsFilled, ref rect, thicknessEndArrow);
-                        _ds.Transform = old;
-                    }
-                    break;
-                case ArrowType.Arrow:
-                    {
-                        pt2 = N.Vector2.Transform(new N.Vector2(x2, y2), t2);
-                        var p11 = N.Vector2.Transform(new N.Vector2(x2 - (float)sizeX2, y2 + (float)sizeY2), t2);
-                        var p21 = N.Vector2.Transform(new N.Vector2(x2, y2), t2);
-                        var p12 = N.Vector2.Transform(new N.Vector2(x2 - (float)sizeX2, y2 - (float)sizeY2), t2);
-                        var p22 = N.Vector2.Transform(new N.Vector2(x2, y2), t2);
-                        DrawLineInternal(_ds, strokeEndArrow, ssEndArrow, eas.IsStroked, ref p11, ref p21, thicknessEndArrow);
-                        DrawLineInternal(_ds, strokeEndArrow, ssEndArrow, eas.IsStroked, ref p12, ref p22, thicknessEndArrow);
-                    }
-                    break;
-            }
-
-            DrawLineInternal(_ds, strokeLine, ssLine, line.IsStroked, ref pt1, ref pt2, thicknessLine);
-
-            ssEndArrow.Dispose();
-            ssStartArrow.Dispose();
             ssLine.Dispose();
         }
 
