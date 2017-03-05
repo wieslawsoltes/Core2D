@@ -162,7 +162,7 @@ namespace Renderer.Win2D
             pt1 = DrawLineArrowInternal(ds, strokeStartArrow, fillStartArrow, ssStartArrow, thicknessStartArrow, x1, y1, a1, sas);
 
             // Draw end arrow.
-            pt2 = DrawLineArrowInternal(ds, strokeEndArrow, fillEndArrow, ssEndArrow, thicknessEndArrow, x2, y2, a2, sas);
+            pt2 = DrawLineArrowInternal(ds, strokeEndArrow, fillEndArrow, ssEndArrow, thicknessEndArrow, x2, y2, a2, eas);
 
             ssEndArrow.Dispose();
             ssStartArrow.Dispose();
