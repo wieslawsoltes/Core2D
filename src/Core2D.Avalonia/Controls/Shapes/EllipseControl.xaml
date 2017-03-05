@@ -38,5 +38,8 @@
         <TabItem Header="Style" Classes="property">
             <ContentControl Content="{Binding Style}"/>
         </TabItem>
+        <TabItem Header="Transform" Classes="property">
+            <ContentControl Content="{Binding Transform}"/>
+        </TabItem>
     </TabControl>
 </UserControl>

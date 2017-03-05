@@ -125,5 +125,8 @@
         <TabItem Header="Data">
             <ContentControl Content="{Binding Data}"/>
         </TabItem>
+        <TabItem Header="Transform">
+            <ContentControl Content="{Binding Transform}"/>
+        </TabItem>
     </TabControl>
 </UserControl>

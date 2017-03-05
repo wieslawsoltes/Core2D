@@ -62,5 +62,8 @@
         <TabItem Header="Style">
             <ContentControl Content="{Binding Style}"/>
         </TabItem>
+        <TabItem Header="Transform">
+            <ContentControl Content="{Binding Transform}"/>
+        </TabItem>
     </TabControl>
 </UserControl>
