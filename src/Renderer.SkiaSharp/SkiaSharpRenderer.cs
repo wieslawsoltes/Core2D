@@ -236,7 +236,7 @@ namespace Renderer.SkiaSharp
                         pt = MatrixHelper.TransformPoint(rt, new SKPoint(x - (float)sx, y));
                         var rect = ToSKRect(x - sx, y - ry, sx, sy);
                         int count = canvas.Save();
-                        canvas.SetMatrix(rt);
+                        canvas.SetMatrix(MatrixHelper.Multiply(rt, canvas.TotalMatrix));
                         DrawRectangleInternal(canvas, brush, pen, style.IsStroked, style.IsFilled, ref rect);
                         canvas.RestoreToCount(count);
                     }
@@ -245,7 +245,7 @@ namespace Renderer.SkiaSharp
                     {
                         pt = MatrixHelper.TransformPoint(rt, new SKPoint(x - (float)sx, y));
                         int count = canvas.Save();
-                        canvas.SetMatrix(rt);
+                        canvas.SetMatrix(MatrixHelper.Multiply(rt, canvas.TotalMatrix));
                         var rect = ToSKRect(x - sx, y - ry, sx, sy);
                         DrawEllipseInternal(canvas, brush, pen, style.IsStroked, style.IsFilled, ref rect);
                         canvas.RestoreToCount(count);
