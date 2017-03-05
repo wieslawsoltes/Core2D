@@ -1,23 +1,24 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
+using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Diagnostics;
 using Core2D.Data;
 using Core2D.Data.Database;
 using Core2D.Renderer;
+using Core2D.Shape;
 using Core2D.Shapes;
+using Core2D.Spatial;
+using Core2D.Spatial.Arc;
 using Core2D.Style;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
 using Microsoft.Graphics.Canvas.Text;
-using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
 using Windows.Foundation;
 using Windows.UI;
 using Windows.UI.Text;
 using N = System.Numerics;
-using Core2D.Spatial;
-using Core2D.Spatial.Arc;
-using Core2D.Shape;
 
 namespace Renderer.Win2D
 {
