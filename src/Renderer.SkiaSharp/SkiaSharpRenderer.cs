@@ -351,6 +351,14 @@ namespace Renderer.SkiaSharp
             }
         }
 
+        private SKMatrix ToSKMatrix(MatrixObject matrix)
+        {
+            return MatrixHelper.ToSKMatrix(
+                matrix.M11, matrix.M12,
+                matrix.M21, matrix.M22,
+                matrix.OffsetX, matrix.OffsetY);
+        }
+
         /// <inheritdoc/>
         public override void ClearCache(bool isZooming)
         {
