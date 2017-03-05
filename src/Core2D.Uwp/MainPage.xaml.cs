@@ -517,19 +517,7 @@ namespace Core2D.Uwp
 
         public async Task CacheImage(string key)
         {
-            var bytes = _projectEditor.Renderers[0].State.ImageCache.GetImage(key);
-            if (bytes != null)
-            {
-                using (var ms = new MemoryStream(bytes))
-                {
-                    using (var ras = ms.AsRandomAccessStream())
-                    {
-                        var bi = await CanvasBitmap.LoadAsync(canvas, ras);
-                        (_projectEditor.Renderers[0] as Win2dRenderer).CacheImage(key, bi);
-                        ras.Dispose();
-                    }
-                }
-            }
+            await (_projectEditor.Renderers[0] as Win2dRenderer).CacheImage(key, canvas);
         }
 
         public async Task CacheImages(XProject project)

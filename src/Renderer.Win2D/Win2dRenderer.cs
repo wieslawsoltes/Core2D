@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
+using System.IO;
+using System.Threading.Tasks;
 using Core2D.Data;
 using Core2D.Data.Database;
 using Core2D.Renderer;
@@ -15,6 +17,7 @@ using Core2D.Style;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
 using Microsoft.Graphics.Canvas.Text;
+using Microsoft.Graphics.Canvas.UI.Xaml;
 using Windows.Foundation;
 using Windows.UI;
 using Windows.UI.Text;
@@ -298,15 +301,38 @@ namespace Renderer.Win2D
         }
 
         /// <summary>
-        /// 
+        /// Caches the image bitmap.
         /// </summary>
-        /// <param name="path"></param>
-        /// <param name="bi"></param>
-        public void CacheImage(string path, CanvasBitmap bi)
+        /// <param name="key">The image key.</param>
+        /// <param name="bi">The image bitmap.</param>
+        public void CacheImage(string key, CanvasBitmap bi)
         {
-            if (!_biCache.ContainsKey(path))
+            if (!_biCache.ContainsKey(key))
             {
-                _biCache[path] = bi;
+                _biCache[key] = bi;
+            }
+        }
+
+        /// <summary>
+        /// Caches the image.
+        /// </summary>
+        /// <param name="key">The image key.</param>
+        /// <param name="canvas">The canvas control.</param>
+        /// <returns>The empty task instance.</returns>
+        public async Task CacheImage(string key, CanvasControl canvas)
+        {
+            var bytes = _state.ImageCache.GetImage(key);
+            if (bytes != null)
+            {
+                using (var ms = new MemoryStream(bytes))
+                {
+                    using (var ras = ms.AsRandomAccessStream())
+                    {
+                        var bi = await CanvasBitmap.LoadAsync(canvas, ras);
+                        CacheImage(key, bi);
+                        ras.Dispose();
+                    }
+                }
             }
         }
 
@@ -680,7 +706,7 @@ namespace Renderer.Win2D
             else
             {
                 // Image caching is done in MainPage because calls to GetResults() will throw exception.
-                Debug.WriteLine($"Bitmap cache does not contain key: {image.Key}");
+                //Debug.WriteLine($"Bitmap cache does not contain key: {image.Key}");
             }
         }
 
