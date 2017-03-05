@@ -98,6 +98,8 @@ namespace Core2D.Shapes
         /// <inheritdoc/>
         public override void Draw(object dc, ShapeRenderer renderer, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
         {
+            var state = base.BeginTransform(dc, renderer);
+
             var record = this.Data.Record ?? r;
 
             if (State.Flags.HasFlag(ShapeStateFlags.Visible))
@@ -139,6 +141,8 @@ namespace Core2D.Shapes
                     }
                 }
             }
+
+            base.EndTransform(dc, renderer, state);
         }
 
         /// <inheritdoc/>

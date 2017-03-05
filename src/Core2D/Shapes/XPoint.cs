@@ -67,7 +67,11 @@ namespace Core2D.Shapes
             {
                 if (State.Flags.HasFlag(ShapeStateFlags.Visible))
                 {
+                    var state = base.BeginTransform(dc, renderer);
+
                     _shape.Draw(dc, renderer, X + dx, Y + dy, db, record);
+
+                    base.EndTransform(dc, renderer, state);
                 }
             }
         }
