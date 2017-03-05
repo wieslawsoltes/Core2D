@@ -293,6 +293,12 @@ namespace Core2D.Editor
             MarkAsDirty();
         }
 
+        private void ObserveTransform(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            _invalidateShapes();
+            MarkAsDirty();
+        }
+
         private void Add(XDatabase database)
         {
             if (database == null)
@@ -668,6 +674,11 @@ namespace Core2D.Editor
                 shape.State.PropertyChanged += ObserveState;
             }
 
+            if (shape.Transform != null)
+            {
+                shape.Transform.PropertyChanged += ObserveTransform;
+            }
+
             if (shape is XPoint)
             {
                 var point = shape as XPoint;
@@ -856,6 +867,11 @@ namespace Core2D.Editor
             if (shape.State != null)
             {
                 shape.State.PropertyChanged -= ObserveState;
+            }
+
+            if (shape.Transform != null)
+            {
+                shape.Transform.PropertyChanged -= ObserveTransform;
             }
 
             if (shape is XPoint)
