@@ -111,7 +111,7 @@ namespace Renderer.SkiaSharp
             if (style.Dashes != null)
             {
                 paint.PathEffect = SKPathEffect.CreateDash(
-                    BaseStyle.ConvertDashesToFloatArray(style.Dashes), 
+                    BaseStyle.ConvertDashesToFloatArray(style.Dashes),
                     (float)style.DashOffset);
             }
 
