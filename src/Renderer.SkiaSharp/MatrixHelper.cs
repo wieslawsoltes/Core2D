@@ -10,7 +10,7 @@ namespace Renderer.SkiaSharp
     /// </summary>
     public static class MatrixHelper
     {
-        private static SKMatrix ToSKMatrix(double m11, double m12, double m21, double m22, double m31, double m32)
+        public static SKMatrix ToSKMatrix(double m11, double m12, double m21, double m22, double m31, double m32)
         {
             return new SKMatrix
             {

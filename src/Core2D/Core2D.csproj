@@ -367,6 +367,7 @@
     <Compile Include="Shapes\XRectangle.cs" />
     <Compile Include="Shapes\XText.cs" />
     <Compile Include="Shape\BaseShape.cs" />
+    <Compile Include="Renderer\MatrixObject.cs" />
     <Compile Include="Shape\PointAlignment.cs" />
     <Compile Include="Shape\ShapeState.cs" />
     <Compile Include="Shape\ShapeStateFlags.cs" />

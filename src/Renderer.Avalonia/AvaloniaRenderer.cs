@@ -315,6 +315,14 @@ namespace Renderer.Avalonia
             }
         }
 
+        private A.Matrix ToMatrix(MatrixObject matrix)
+        {
+            return new A.Matrix(
+                matrix.M11, matrix.M12,
+                matrix.M21, matrix.M22,
+                matrix.OffsetX, matrix.OffsetY);
+        }
+
         /// <inheritdoc/>
         public override void ClearCache(bool isZooming)
         {
@@ -335,6 +343,20 @@ namespace Renderer.Avalonia
             var brush = ToBrush(color);
             var rect = new A.Rect(x, y, width, height);
             _dc.FillRectangle(brush, rect);
+        }
+
+        /// <inheritdoc/>
+        public override object PushMatrix(object dc, MatrixObject matrix)
+        {
+            var _dc = dc as AM.DrawingContext;
+            return _dc.PushPreTransform(ToMatrix(matrix));
+        }
+
+        /// <inheritdoc/>
+        public override void PopMatrix(object dc, object state)
+        {
+            var _state = (AM.DrawingContext.PushedState)state;
+            _state.Dispose();
         }
 
         /// <inheritdoc/>

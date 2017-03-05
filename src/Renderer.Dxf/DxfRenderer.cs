@@ -493,6 +493,19 @@ namespace Renderer.Dxf
         }
 
         /// <inheritdoc/>
+        public override object PushMatrix(object dc, Core2D.Renderer.MatrixObject matrix)
+        {
+            // TODO: Implement push matrix.
+            return null;
+        }
+
+        /// <inheritdoc/>
+        public override void PopMatrix(object dc, object state)
+        {
+            // TODO: Implement pop matrix.
+        }
+
+        /// <inheritdoc/>
         public override void Draw(object dc, Core2D.Project.XContainer container, double dx, double dy, ImmutableArray<Core2D.Data.XProperty> db, Core2D.Data.Database.XRecord r)
         {
             var dxf = dc as DxfDocument;

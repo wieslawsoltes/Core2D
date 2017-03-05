@@ -43,6 +43,21 @@ namespace Core2D.Renderer
         public abstract void Fill(object dc, double x, double y, double width, double height, ArgbColor color);
 
         /// <summary>
+        /// Push matrix.
+        /// </summary>
+        /// <param name="dc">The native drawing context.</param>
+        /// <param name="matrix">The matrix to push.</param>
+        /// <returns>The previous matrix state.</returns>
+        public abstract object PushMatrix(object dc, MatrixObject matrix);
+
+        /// <summary>
+        /// Pop matrix.
+        /// </summary>
+        /// <param name="dc">The native drawing context.</param>
+        /// <param name="state">The previous matrix state.</param>
+        public abstract void PopMatrix(object dc, object state);
+
+        /// <summary>
         /// Draws a <see cref="XContainer"/> using drawing context.
         /// </summary>
         /// <param name="dc">The native drawing context.</param>

@@ -20,6 +20,7 @@ namespace Core2D.Shape
         private BaseShape _owner;
         private ShapeState _state;
         private ShapeStyle _style;
+        private MatrixObject _transform;
         private bool _isStroked;
         private bool _isFilled;
         private XContext _data;
@@ -31,6 +32,7 @@ namespace Core2D.Shape
             : base()
         {
             State = ShapeState.Create(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone);
+            Transform = MatrixObject.Create();
             Data = XContext.Create();
         }
 
@@ -69,6 +71,15 @@ namespace Core2D.Shape
         {
             get { return _style; }
             set { Update(ref _style, value); }
+        }
+
+        /// <summary>
+        /// Get or sets shape matrix transform.
+        /// </summary>
+        public MatrixObject Transform
+        {
+            get { return _transform; }
+            set { Update(ref _transform, value); }
         }
 
         /// <summary>
@@ -115,6 +126,35 @@ namespace Core2D.Shape
         /// <param name="dx">The X axis position offset.</param>
         /// <param name="dy">The Y axis position offset.</param>
         public abstract void Move(double dx, double dy);
+
+        /// <summary>
+        /// Begins matrix transform.
+        /// </summary>
+        /// <param name="dc">The generic drawing context object.</param>
+        /// <param name="renderer">The generic renderer object used to draw shape.</param>
+        /// <returns>The previous transform state.</returns>
+        public virtual object BeginTransform(object dc, ShapeRenderer renderer)
+        {
+            if (Transform != null)
+            {
+                return renderer.PushMatrix(dc, Transform);
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Ends matrix transform.
+        /// </summary>
+        /// <param name="dc">The generic drawing context object.</param>
+        /// <param name="renderer">The generic renderer object used to draw shape.</param>
+        /// <param name="state">The previous transform state.</param>
+        public virtual void EndTransform(object dc, ShapeRenderer renderer, object state)
+        {
+            if (Transform != null)
+            {
+                renderer.PopMatrix(dc, state);
+            }
+        }
 
         /// <summary>
         /// Get all points in the shape.

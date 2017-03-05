@@ -111,7 +111,7 @@ namespace Renderer.SkiaSharp
             if (style.Dashes != null)
             {
                 paint.PathEffect = SKPathEffect.CreateDash(
-                    BaseStyle.ConvertDashesToFloatArray(style.Dashes), 
+                    BaseStyle.ConvertDashesToFloatArray(style.Dashes),
                     (float)style.DashOffset);
             }
 
@@ -236,7 +236,7 @@ namespace Renderer.SkiaSharp
                         pt = MatrixHelper.TransformPoint(rt, new SKPoint(x - (float)sx, y));
                         var rect = ToSKRect(x - sx, y - ry, sx, sy);
                         int count = canvas.Save();
-                        canvas.SetMatrix(rt);
+                        canvas.SetMatrix(MatrixHelper.Multiply(rt, canvas.TotalMatrix));
                         DrawRectangleInternal(canvas, brush, pen, style.IsStroked, style.IsFilled, ref rect);
                         canvas.RestoreToCount(count);
                     }
@@ -245,7 +245,7 @@ namespace Renderer.SkiaSharp
                     {
                         pt = MatrixHelper.TransformPoint(rt, new SKPoint(x - (float)sx, y));
                         int count = canvas.Save();
-                        canvas.SetMatrix(rt);
+                        canvas.SetMatrix(MatrixHelper.Multiply(rt, canvas.TotalMatrix));
                         var rect = ToSKRect(x - sx, y - ry, sx, sy);
                         DrawEllipseInternal(canvas, brush, pen, style.IsStroked, style.IsFilled, ref rect);
                         canvas.RestoreToCount(count);
@@ -351,6 +351,14 @@ namespace Renderer.SkiaSharp
             }
         }
 
+        private SKMatrix ToSKMatrix(MatrixObject matrix)
+        {
+            return MatrixHelper.ToSKMatrix(
+                matrix.M11, matrix.M12,
+                matrix.M21, matrix.M22,
+                matrix.OffsetX, matrix.OffsetY);
+        }
+
         /// <inheritdoc/>
         public override void ClearCache(bool isZooming)
         {
@@ -377,6 +385,23 @@ namespace Renderer.SkiaSharp
             {
                 canvas.DrawRect(rect, paint);
             }
+        }
+
+        /// <inheritdoc/>
+        public override object PushMatrix(object dc, MatrixObject matrix)
+        {
+            var canvas = dc as SKCanvas;
+            int count = canvas.Save();
+            canvas.SetMatrix(MatrixHelper.Multiply(ToSKMatrix(matrix), canvas.TotalMatrix));
+            return count;
+        }
+
+        /// <inheritdoc/>
+        public override void PopMatrix(object dc, object state)
+        {
+            var canvas = dc as SKCanvas;
+            var count = (int)state;
+            canvas.RestoreToCount(count);
         }
 
         /// <inheritdoc/>

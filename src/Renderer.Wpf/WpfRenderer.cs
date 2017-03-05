@@ -407,6 +407,14 @@ namespace Renderer.Wpf
             }
         }
 
+        private MatrixTransform ToMatrixTransform(MatrixObject matrix)
+        {
+            return new MatrixTransform(
+                matrix.M11, matrix.M12,
+                matrix.M21, matrix.M22,
+                matrix.OffsetX, matrix.OffsetY);
+        }
+
         /// <inheritdoc/>
         public override void ClearCache(bool isZooming)
         {
@@ -432,6 +440,21 @@ namespace Renderer.Wpf
             var brush = CreateBrush(color);
             var rect = new Rect(x, y, width, height);
             DrawRectangleInternal(_dc, 0.5, brush, null, false, true, ref rect);
+        }
+
+        /// <inheritdoc/>
+        public override object PushMatrix(object dc, MatrixObject matrix)
+        {
+            var _dc = dc as DrawingContext;
+            _dc.PushTransform(ToMatrixTransform(matrix));
+            return null;
+        }
+
+        /// <inheritdoc/>
+        public override void PopMatrix(object dc, object state)
+        {
+            var _dc = dc as DrawingContext;
+            _dc.Pop();
         }
 
         /// <inheritdoc/>

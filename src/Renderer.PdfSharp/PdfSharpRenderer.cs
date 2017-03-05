@@ -244,6 +244,14 @@ namespace Renderer.PdfSharp
             }
         }
 
+        private XMatrix ToXMatrix(Core2D.Renderer.MatrixObject matrix)
+        {
+            return new XMatrix(
+                matrix.M11, matrix.M12,
+                matrix.M21, matrix.M22,
+                matrix.OffsetX, matrix.OffsetY);
+        }
+
         /// <inheritdoc/>
         public override void ClearCache(bool isZooming)
         {
@@ -266,11 +274,28 @@ namespace Renderer.PdfSharp
         {
             var _gfx = dc as XGraphics;
             _gfx.DrawRectangle(
-                ToXSolidBrush(color), 
+                ToXSolidBrush(color),
                 _scaleToPage(x),
                 _scaleToPage(y),
                 _scaleToPage(width),
                 _scaleToPage(height));
+        }
+
+        /// <inheritdoc/>
+        public override object PushMatrix(object dc, Core2D.Renderer.MatrixObject matrix)
+        {
+            var _gfx = dc as XGraphics;
+            var state = _gfx.Save();
+            _gfx.MultiplyTransform(ToXMatrix(matrix));
+            return state;
+        }
+
+        /// <inheritdoc/>
+        public override void PopMatrix(object dc, object state)
+        {
+            var _gfx = dc as XGraphics;
+            var _state = state as XGraphicsState;
+            _gfx.Restore(_state);
         }
 
         /// <inheritdoc/>

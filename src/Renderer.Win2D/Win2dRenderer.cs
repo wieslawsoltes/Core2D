@@ -162,7 +162,7 @@ namespace Renderer.Win2D
             pt1 = DrawLineArrowInternal(ds, strokeStartArrow, fillStartArrow, ssStartArrow, thicknessStartArrow, x1, y1, a1, sas);
 
             // Draw end arrow.
-            pt2 = DrawLineArrowInternal(ds, strokeEndArrow, fillEndArrow, ssEndArrow, thicknessEndArrow, x2, y2, a2, sas);
+            pt2 = DrawLineArrowInternal(ds, strokeEndArrow, fillEndArrow, ssEndArrow, thicknessEndArrow, x2, y2, a2, eas);
 
             ssEndArrow.Dispose();
             ssStartArrow.Dispose();
@@ -190,7 +190,7 @@ namespace Renderer.Win2D
                         pt = N.Vector2.Transform(new N.Vector2(x - (float)sx, y), rt);
                         var rect = new Rect2(x - sx, y - ry, sx, sy);
                         var old = ds.Transform;
-                        ds.Transform = rt;
+                        ds.Transform = rt * ds.Transform;
                         DrawRectangleInternal(ds, brush, pen, stroke, style.IsStroked, style.IsFilled, ref rect, thickness);
                         ds.Transform = old;
                     }
@@ -199,7 +199,7 @@ namespace Renderer.Win2D
                     {
                         pt = N.Vector2.Transform(new N.Vector2(x - (float)sx, y), rt);
                         var old = ds.Transform;
-                        ds.Transform = rt;
+                        ds.Transform = rt * ds.Transform;
                         var rect = new Rect2(x - sx, y - ry, sx, sy);
                         DrawEllipseInternal(ds, brush, pen, stroke, style.IsStroked, style.IsFilled, ref rect, thickness);
                         ds.Transform = old;
@@ -336,6 +336,14 @@ namespace Renderer.Win2D
             }
         }
 
+        private N.Matrix3x2 ToMatrix3x2(MatrixObject matrix)
+        {
+            return new N.Matrix3x2(
+                (float)matrix.M11, (float)matrix.M12,
+                (float)matrix.M21, (float)matrix.M22,
+                (float)matrix.OffsetX, (float)matrix.OffsetY);
+        }
+
         /// <inheritdoc/>
         public override void ClearCache(bool isZooming)
         {
@@ -364,6 +372,23 @@ namespace Renderer.Win2D
                 (float)width,
                 (float)height,
                 brush);
+        }
+
+        /// <inheritdoc/>
+        public override object PushMatrix(object ds, MatrixObject matrix)
+        {
+            var _ds = ds as CanvasDrawingSession;
+            var old = _ds.Transform;
+            _ds.Transform = ToMatrix3x2(matrix) * _ds.Transform;
+            return old;
+        }
+
+        /// <inheritdoc/>
+        public override void PopMatrix(object ds, object state)
+        {
+            var _ds = ds as CanvasDrawingSession;
+            var old = (N.Matrix3x2)state;
+            _ds.Transform = old;
         }
 
         /// <inheritdoc/>

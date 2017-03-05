@@ -290,6 +290,14 @@ namespace Renderer.WinForms
             }
         }
 
+        private Matrix ToMatrix(MatrixObject matrix)
+        {
+            return new Matrix(
+                (float)matrix.M11, (float)matrix.M12,
+                (float)matrix.M21, (float)matrix.M22,
+                (float)matrix.OffsetX, (float)matrix.OffsetY);
+        }
+
         /// <inheritdoc/>
         public override void ClearCache(bool isZooming)
         {
@@ -319,6 +327,23 @@ namespace Renderer.WinForms
                 (float)width,
                 (float)height);
             brush.Dispose();
+        }
+
+        /// <inheritdoc/>
+        public override object PushMatrix(object dc, MatrixObject matrix)
+        {
+            var _gfx = dc as Graphics;
+            var state = _gfx.Save();
+            _gfx.MultiplyTransform(ToMatrix(matrix));
+            return state;
+        }
+
+        /// <inheritdoc/>
+        public override void PopMatrix(object dc, object state)
+        {
+            var _gfx = dc as Graphics;
+            var _state = state as GraphicsState;
+            _gfx.Restore(_state);
         }
 
         /// <inheritdoc/>

@@ -259,6 +259,9 @@
     <Compile Include="Controls\Project\TemplatesControl.xaml.cs">
       <DependentUpon>TemplatesControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Renderer\MatrixControl.xaml.cs">
+      <DependentUpon>MatrixControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Shapes\ArcControl.xaml.cs">
       <DependentUpon>ArcControl.xaml</DependentUpon>
     </Compile>
@@ -601,6 +604,11 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\MainControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Renderer\MatrixControl.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
   </ItemGroup>
