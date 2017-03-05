@@ -331,9 +331,13 @@ namespace Core2D.Uwp
         public Point FixPointOffset(Point point)
         {
             var container = _projectEditor.Project.CurrentContainer;
-            double offsetX = (this.canvas.ActualWidth * this.canvas.DpiScale - container.Width) / 2.0;
-            double offsetY = (this.canvas.ActualHeight * this.canvas.DpiScale - container.Height) / 2.0;
-            return new Point(point.X - offsetX, point.Y - offsetY);
+            if (container != null)
+            {
+                double offsetX = (this.canvas.ActualWidth * this.canvas.DpiScale - container.Width) / 2.0;
+                double offsetY = (this.canvas.ActualHeight * this.canvas.DpiScale - container.Height) / 2.0;
+                return new Point(point.X - offsetX, point.Y - offsetY);
+            }
+            return point;
         }
 
         private void CanvasControl_PointerPressed(object sender, PointerRoutedEventArgs e)
