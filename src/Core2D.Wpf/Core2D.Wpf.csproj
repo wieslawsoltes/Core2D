@@ -127,6 +127,9 @@
     <Compile Include="Controls\Custom\LayerElement.cs" />
     <Compile Include="Controls\Custom\ListBoxDropMode.cs" />
     <Compile Include="Controls\Custom\RecordsListView.cs" />
+    <Compile Include="Controls\Renderer\MatrixControl.xaml.cs">
+      <DependentUpon>MatrixControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Designer\DesignerHelper.cs" />
     <Compile Include="Modules\AppModule.cs" />
     <Compile Include="Modules\CoreModule.cs" />
@@ -320,6 +323,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Data\RecordControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Renderer\MatrixControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

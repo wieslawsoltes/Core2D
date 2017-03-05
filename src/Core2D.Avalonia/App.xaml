@@ -11,12 +11,14 @@
              xmlns:Path="clr-namespace:Core2D.Path;assembly=Core2D"
              xmlns:Segments="clr-namespace:Core2D.Path.Segments;assembly=Core2D"
              xmlns:Project="clr-namespace:Core2D.Project;assembly=Core2D"
+             xmlns:Renderer="clr-namespace:Core2D.Renderer;assembly=Core2D"
              xmlns:Shape="clr-namespace:Core2D.Shape;assembly=Core2D" 
              xmlns:Shapes="clr-namespace:Core2D.Shapes;assembly=Core2D" 
              xmlns:Style="clr-namespace:Core2D.Style;assembly=Core2D" 
              xmlns:data="clr-namespace:Core2D.Avalonia.Controls.Data;assembly=Core2D.Avalonia"
              xmlns:path="clr-namespace:Core2D.Avalonia.Controls.Path;assembly=Core2D.Avalonia"
              xmlns:project="clr-namespace:Core2D.Avalonia.Controls.Project;assembly=Core2D.Avalonia"
+             xmlns:renderer="clr-namespace:Core2D.Avalonia.Controls.Renderer;assembly=Core2D.Avalonia"
              xmlns:shapes="clr-namespace:Core2D.Avalonia.Controls.Shapes;assembly=Core2D.Avalonia"
              xmlns:state="clr-namespace:Core2D.Avalonia.Controls.State;assembly=Core2D.Avalonia"
              xmlns:style="clr-namespace:Core2D.Avalonia.Controls.Style;assembly=Core2D.Avalonia">
@@ -66,6 +68,10 @@
         <!-- State -->
         <DataTemplate DataType="Shape:ShapeState">
             <state:ShapeStateControl/>
+        </DataTemplate>
+        <!-- Renderer -->
+        <DataTemplate DataType="Renderer:MatrixObject">
+            <renderer:MatrixControl/>
         </DataTemplate>
         <!-- Shapes -->
         <DataTemplate DataType="Shapes:XPoint">

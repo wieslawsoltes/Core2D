@@ -12,6 +12,7 @@
              xmlns:Path="clr-namespace:Core2D.Path;assembly=Core2D"
              xmlns:Segments="clr-namespace:Core2D.Path.Segments;assembly=Core2D"
              xmlns:Project="clr-namespace:Core2D.Project;assembly=Core2D"
+             xmlns:Renderer="clr-namespace:Core2D.Renderer;assembly=Core2D"
              xmlns:Shape="clr-namespace:Core2D.Shape;assembly=Core2D" 
              xmlns:Shapes="clr-namespace:Core2D.Shapes;assembly=Core2D" 
              xmlns:Style="clr-namespace:Core2D.Style;assembly=Core2D" 
@@ -20,6 +21,7 @@
              xmlns:data="clr-namespace:Core2D.Wpf.Controls.Data"
              xmlns:path="clr-namespace:Core2D.Wpf.Controls.Path"
              xmlns:project="clr-namespace:Core2D.Wpf.Controls.Project"
+             xmlns:renderer="clr-namespace:Core2D.Wpf.Controls.Renderer"
              xmlns:shapes="clr-namespace:Core2D.Wpf.Controls.Shapes"
              xmlns:state="clr-namespace:Core2D.Wpf.Controls.State"
              xmlns:style="clr-namespace:Core2D.Wpf.Controls.Style"
@@ -145,6 +147,10 @@
         <!-- State -->
         <DataTemplate DataType="{x:Type Shape:ShapeState}">
             <state:ShapeStateControl/>
+        </DataTemplate>
+        <!-- Renderer -->
+        <DataTemplate DataType="{x:Type Renderer:MatrixObject}">
+            <renderer:MatrixControl/>
         </DataTemplate>
         <!-- Shapes -->
         <DataTemplate DataType="{x:Type Shapes:XPoint}">
