@@ -274,6 +274,18 @@ namespace Renderer.PdfSharp
         }
 
         /// <inheritdoc/>
+        public override object PushMatrix(object dc, Core2D.Renderer.MatrixObject matrix)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc/>
+        public override void PopMatrix(object dc, object state)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc/>
         public override void Draw(object dc, Core2D.Shapes.XLine line, double dx, double dy, ImmutableArray<Core2D.Data.XProperty> db, Core2D.Data.Database.XRecord r)
         {
             if (!line.IsStroked)

@@ -322,6 +322,18 @@ namespace Renderer.WinForms
         }
 
         /// <inheritdoc/>
+        public override object PushMatrix(object dc, Core2D.Renderer.MatrixObject matrix)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc/>
+        public override void PopMatrix(object dc, object state)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc/>
         public override void Draw(object dc, XLine line, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
         {
             var _gfx = dc as Graphics;

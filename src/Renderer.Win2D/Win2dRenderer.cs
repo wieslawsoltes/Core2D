@@ -367,6 +367,18 @@ namespace Renderer.Win2D
         }
 
         /// <inheritdoc/>
+        public override object PushMatrix(object dc, Core2D.Renderer.MatrixObject matrix)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc/>
+        public override void PopMatrix(object dc, object state)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc/>
         public override void Draw(object ds, XLine line, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
         {
             var _ds = ds as CanvasDrawingSession;
