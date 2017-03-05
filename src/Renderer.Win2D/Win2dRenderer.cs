@@ -679,8 +679,8 @@ namespace Renderer.Win2D
             }
             else
             {
-                // TODO: Image caching is done in MainPage because calls to GetResults() throw exception.
-                throw new Exception($"Bitmap cache does not contain key: {image.Key}");
+                // Image caching is done in MainPage because calls to GetResults() will throw exception.
+                Debug.WriteLine($"Bitmap cache does not contain key: {image.Key}");
             }
         }
 
