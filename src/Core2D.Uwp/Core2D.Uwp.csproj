@@ -11,14 +11,14 @@
     <AssemblyName>Core2D.Uwp</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.10586.0</TargetPlatformVersion>
+    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
   </PropertyGroup>
-  <Import Project="..\..\Core2D.targets" />
+  <Import Project="..\..\build.targets" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
     <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
     <NoWarn>;2008</NoWarn>
@@ -100,14 +100,13 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <SDKReference Include="WindowsDesktop, Version=10.0.10586.0">
-      <Name>Windows Desktop Extensions for the UWP</Name>
-    </SDKReference>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Core2D.Spatial\Core2D.Spatial.csproj">
-      <Project>{bf27e596-01f5-45af-99fb-703c004d27a5}</Project>
+      <Project>{aa5092f4-bdef-437d-a31b-37df896c8cbc}</Project>
       <Name>Core2D.Spatial</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core2D\Core2D.csproj">
+      <Project>{f822ec0c-2501-487d-87a8-b8d28a761385}</Project>
+      <Name>Core2D</Name>
     </ProjectReference>
     <ProjectReference Include="..\FileSystem.Uwp\FileSystem.Uwp.csproj">
       <Project>{180963c2-9b40-4f63-b288-88328d798098}</Project>
@@ -141,16 +140,16 @@
       <Project>{AE7FF1B5-ABE3-45BF-87CC-44AC580A666A}</Project>
       <Name>TextFieldWriter.CsvHelper</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Core2D\Core2D.csproj">
-      <Project>{4ee581b0-45f3-4d7e-beae-277abf5f3fdd}</Project>
-      <Name>Core2D</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Utilities.Uwp\Utilities.Uwp.csproj">
       <Project>{87632927-9d38-421f-ba51-f088be1e1d5a}</Project>
       <Name>Utilities.Uwp</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <SDKReference Include="WindowsDesktop, Version=10.0.14393.0">
+      <Name>Windows Desktop Extensions for the UWP</Name>
+    </SDKReference>
+  </ItemGroup>
   <Import Project="..\Core2D.Shared\Core2D.Shared.projitems" Label="Shared" />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

@@ -17,7 +17,7 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
   </PropertyGroup>
-  <Import Project="..\..\Core2D.targets" />
+  <Import Project="..\..\build.targets" />
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
   </PropertyGroup>
@@ -66,11 +66,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core2D.Spatial\Core2D.Spatial.csproj">
-      <Project>{bf27e596-01f5-45af-99fb-703c004d27a5}</Project>
+      <Project>{aa5092f4-bdef-437d-a31b-37df896c8cbc}</Project>
       <Name>Core2D.Spatial</Name>
     </ProjectReference>
     <ProjectReference Include="..\Core2D\Core2D.csproj">
-      <Project>{4ee581b0-45f3-4d7e-beae-277abf5f3fdd}</Project>
+      <Project>{f822ec0c-2501-487d-87a8-b8d28a761385}</Project>
       <Name>Core2D</Name>
     </ProjectReference>
   </ItemGroup>

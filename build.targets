@@ -1,9 +1,17 @@
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Version>0.2.0</Version>
+    <Authors>Wiesław Šoltés</Authors>
+    <Company>Wiesław Šoltés</Company>
+    <Description>A multi-platform data driven 2D diagram editor.</Description>
+    <Copyright>Copyright © Wiesław Šoltés 2017</Copyright>
+    <PackageLicenseUrl>https://github.com/wieslawsoltes/Core2D/blob/master/LICENSE.TXT</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/wieslawsoltes/Core2D</PackageProjectUrl>
+  </PropertyGroup>
   <!-- Common Properties -->
   <PropertyGroup>
     <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
     <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
-    <DocumentationFile>bin\$(Platform)\$(Configuration)\$(AssemblyName).XML</DocumentationFile>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -38,36 +46,12 @@
     <PlatformTarget>ARM</PlatformTarget>
   </PropertyGroup>
   <!-- Configurations and Platforms -->
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
-    <DocumentationFile>
-    </DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
-    <DocumentationFile>
-    </DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <DocumentationFile>
-    </DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <DocumentationFile>
-    </DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
-    <DocumentationFile>
-    </DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
-    <DocumentationFile>
-    </DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
-    <DocumentationFile>
-    </DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
-    <DocumentationFile>
-    </DocumentationFile>
-  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'"/>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'"/>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'"/>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'"/>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'"/>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'"/>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'"/>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'"/>
 </Project>
