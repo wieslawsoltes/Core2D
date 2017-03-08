@@ -13,7 +13,8 @@ var isPlatformAnyCPU = StringComparer.OrdinalIgnoreCase.Equals(platform, "AnyCPU
 var isPlatformX86 = StringComparer.OrdinalIgnoreCase.Equals(platform, "x86");
 var isPlatformX64 = StringComparer.OrdinalIgnoreCase.Equals(platform, "x64");
 var MSBuildSolution = "./Core2D.sln";
-var version = ParseAssemblyInfo(File("./src/Core2D.Shared/SharedAssemblyInfo.cs")).AssemblyVersion;
+var version = XmlPeek("./build.targets", "//*[local-name()='Version']/text()");
+Information("Version: {0}", version);
 if (BuildSystem.AppVeyor.IsRunningOnAppVeyor)
 {
     if (BuildSystem.AppVeyor.Environment.Repository.Tag.IsTag && !string.IsNullOrWhiteSpace(BuildSystem.AppVeyor.Environment.Repository.Tag.Name))
