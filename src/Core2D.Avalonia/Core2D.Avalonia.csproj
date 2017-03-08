@@ -1,20 +1,17 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{27CD58AE-D6D4-42AD-A315-2F1CB63454AF}</ProjectGuid>
+    <TargetFrameworks>net46</TargetFrameworks>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Core2D.Avalonia</RootNamespace>
-    <AssemblyName>Core2D.Avalonia</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <EnableDefaultCompileItems>False</EnableDefaultCompileItems>
   </PropertyGroup>
+
   <Import Project="..\..\build.targets" />
+
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -26,6 +23,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
+
   <ItemGroup>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -275,24 +273,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Core2D.Spatial\Core2D.Spatial.csproj">
-      <Project>{aa5092f4-bdef-437d-a31b-37df896c8cbc}</Project>
-      <Name>Core2D.Spatial</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Core2D\Core2D.csproj">
-      <Project>{f822ec0c-2501-487d-87a8-b8d28a761385}</Project>
-      <Name>Core2D</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Renderer.Avalonia\Renderer.Avalonia.csproj">
-      <Project>{e05f3f7e-2176-43dc-90bb-f5c66cfdb12f}</Project>
-      <Name>Renderer.Avalonia</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Utilities.Avalonia\Utilities.Avalonia.csproj">
-      <Project>{c6dbd1fd-c462-4005-b382-97bb4aef26f2}</Project>
-      <Name>Utilities.Avalonia</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Controls\Data\ColumnsControl.xaml" />
   </ItemGroup>
   <ItemGroup>
@@ -494,7 +474,7 @@
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+
   <ItemGroup>
     <PackageReference Include="Autofac">
       <Version>4.4.0</Version>
@@ -539,4 +519,12 @@
       <Version>3.0.0</Version>
     </PackageReference>
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Core2D.Spatial\Core2D.Spatial.csproj" />
+    <ProjectReference Include="..\Core2D\Core2D.csproj" />
+    <ProjectReference Include="..\Renderer.Avalonia\Renderer.Avalonia.csproj" />
+    <ProjectReference Include="..\Utilities.Avalonia\Utilities.Avalonia.csproj" />
+  </ItemGroup>
+
 </Project>
