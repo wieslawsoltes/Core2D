@@ -25,8 +25,8 @@ var dirSuffix = platform + "/" + configuration;
 var buildDirs = 
     GetDirectories("./src/**/bin/" + dirSuffix) + 
     GetDirectories("./src/**/obj/" + dirSuffix) + 
-    GetDirectories("./dependencies/**/bin/" + dirSuffix) + 
-    GetDirectories("./dependencies/**/obj/" + dirSuffix) + 
+    GetDirectories("./apps/**/bin/" + dirSuffix) + 
+    GetDirectories("./apps/**/obj/" + dirSuffix) + 
     GetDirectories("./tests/**/bin/" + dirSuffix) + 
     GetDirectories("./tests/**/obj/" + dirSuffix);
 var artifactsDir = (DirectoryPath)Directory("./artifacts");
