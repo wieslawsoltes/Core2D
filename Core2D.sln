@@ -96,11 +96,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.SkiaDemo", "src\Core2D.SkiaDemo\Core2D.SkiaDemo.csproj", "{BDE5F939-C291-44E3-9FE3-939D85341BB6}"
 EndProject
 Global
-	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		src\Core2D.Shared\Core2D.Shared.projitems*{87632927-9d38-421f-ba51-f088be1e1d5a}*SharedItemsImports = 4
-		src\Core2D.Shared\Core2D.Shared.projitems*{9a474916-ea8c-48fb-8cf6-425d95b6b7fd}*SharedItemsImports = 4
-		src\Core2D.Shared\Core2D.Shared.projitems*{ea79fdcf-c78b-4170-bfbe-beb2303d911d}*SharedItemsImports = 4
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|AnyCPU = Debug|AnyCPU
 		Debug|ARM = Debug|ARM

@@ -74,7 +74,6 @@
       <Name>Core2D</Name>
     </ProjectReference>
   </ItemGroup>
-  <Import Project="..\Core2D.Shared\Core2D.Shared.projitems" Label="Shared" />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
