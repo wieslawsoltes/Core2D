@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net46</TargetFrameworks>
+    <TargetFrameworks>net45</TargetFrameworks>
     <OutputType>Library</OutputType>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <EnableDefaultCompileItems>False</EnableDefaultCompileItems>
@@ -30,7 +30,7 @@
         <DependentUpon>%(Filename)</DependentUpon>
         <SubType>Code</SubType>
     </Compile>
-    <EmbeddedResource Include="**\*.xaml"/>
+    <EmbeddedResource Include="**\*.xaml" />
   </ItemGroup>
 
   <ItemGroup>
