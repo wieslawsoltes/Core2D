@@ -1,5 +1,6 @@
 #addin "nuget:?package=Polly"
 #tool "nuget:?package=xunit.runner.console"
+#tool "nuget:https://dotnet.org/f/nuget-build/?package=NuGet.CommandLine&prerelease,version=4.3.0-beta1-2361"
 
 using System;
 using Polly;
@@ -65,6 +66,7 @@ Task("Restore-NuGet-Packages")
             if(IsRunningOnWindows())
             {
                 NuGetRestore(MSBuildSolution, new NuGetRestoreSettings {
+                    ToolPath = "./tools/NuGet.CommandLine.4.3.0-beta1-2361/tools/NuGet.exe",
                     ToolTimeout = TimeSpan.FromMinutes(toolTimeout),
                     MSBuildVersion = NuGetMSBuildVersion.MSBuild15
                 });
@@ -72,6 +74,7 @@ Task("Restore-NuGet-Packages")
             if(IsRunningOnUnix())
             {
                 NuGetRestore(MSBuildSolution, new NuGetRestoreSettings {
+                    ToolPath = "./tools/NuGet.CommandLine.4.3.0-beta1-2361/tools/NuGet.exe",
                     ToolTimeout = TimeSpan.FromMinutes(toolTimeout),
                     MSBuildVersion = NuGetMSBuildVersion.MSBuild15
                 });
