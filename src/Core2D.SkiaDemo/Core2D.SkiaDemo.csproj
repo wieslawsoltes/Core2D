@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <Import Project="..\..\build.targets" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 
   <ItemGroup>
     <Reference Include="System" />
