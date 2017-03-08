@@ -15,6 +15,7 @@
     <NoStdLib>False</NoStdLib>
     <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
     <TargetFrameworkProfile />
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
   </PropertyGroup>
   <Import Project="..\..\build.targets" />
   <ItemGroup>
