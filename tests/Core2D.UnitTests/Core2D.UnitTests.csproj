@@ -1,239 +1,25 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props" Condition="Exists('..\..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props')" />
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{AB31E0E2-9090-4461-84BE-5C5AAA19758F}</ProjectGuid>
+    <TargetFrameworks>net45</TargetFrameworks>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Core2D.UnitTests</RootNamespace>
-    <AssemblyName>Core2D.UnitTests</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
-    <TargetFrameworkProfile />
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
-    <NoWarn>CS1591</NoWarn>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <NoWarn>CS1591</NoWarn>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
-    <NoWarn>CS1591</NoWarn>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
-    <NoWarn>CS1591</NoWarn>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <NoWarn>CS1591</NoWarn>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
-    <NoWarn>CS1591</NoWarn>
-  </PropertyGroup>
+
   <Import Project="..\..\build.targets" />
+
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.ComponentModel.Composition" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
+    <PackageReference Include="System.Collections.Immutable" Version="1.3.1" />
+    <PackageReference Include="System.ComponentModel" Version="4.3.0" />
+    <PackageReference Include="System.IO.Compression" Version="4.3.0" />
+    <PackageReference Include="System.Reactive.Core" Version="3.0.0" />
+    <PackageReference Include="xunit" Version="2.2.0" />
+    <PackageReference Include="xunit.runner.console" Version="2.2.0" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="Attributes\ContentAttributeTests.cs" />
-    <Compile Include="Attributes\NameAttributeTests.cs" />
-    <Compile Include="Editor\Bounds\LineBoundsTests.cs" />
-    <Compile Include="Editor\Bounds\RectangleBoundsTests.cs" />
-    <Compile Include="Editor\Bounds\ShapeHitTestSelectionTests.cs" />
-    <Compile Include="Editor\Input\InputProcessorTests.cs" />
-    <Compile Include="Editor\ProjectEditorTests_Impl.cs" />
-    <Compile Include="Editor\ProjectEditorTests_Model.cs" />
-    <Compile Include="Editor\ServiceProviderExtensionsTests.cs" />
-    <Compile Include="Editor\Tools\Path\PathToolMoveTests.cs" />
-    <Compile Include="Editor\Tools\Path\ToolPathArcTests.cs" />
-    <Compile Include="Editor\Tools\Path\ToolPathCubicBezierTests.cs" />
-    <Compile Include="Editor\Tools\Path\ToolPathLineTests.cs" />
-    <Compile Include="Editor\Tools\Path\ToolPathQuadraticBezierTests.cs" />
-    <Compile Include="Editor\Tools\Selection\ArcSelectionTests.cs" />
-    <Compile Include="Editor\Tools\Selection\CubicBezierSelectionTests.cs" />
-    <Compile Include="Editor\Tools\Selection\EllipseSelectionTests.cs" />
-    <Compile Include="Editor\Tools\Selection\ImageSelectionTests.cs" />
-    <Compile Include="Editor\Tools\Selection\LineSelectionTests.cs" />
-    <Compile Include="Editor\Tools\Selection\PathSelectionTests.cs" />
-    <Compile Include="Editor\Tools\Selection\PointSelectionTests.cs" />
-    <Compile Include="Editor\Tools\Selection\QuadraticBezierSelectionTests.cs" />
-    <Compile Include="Editor\Tools\Selection\RectangleSelectionTests.cs" />
-    <Compile Include="Editor\Tools\Selection\TextSelectionTests.cs" />
-    <Compile Include="ObservableObjectTests.cs" />
-    <Compile Include="ObservableResourceTests.cs" />
-    <Compile Include="Data\Database\XColumnTests.cs" />
-    <Compile Include="Data\Database\XDatabaseTests.cs" />
-    <Compile Include="Data\XContextTests.cs" />
-    <Compile Include="Data\XPropertyTests.cs" />
-    <Compile Include="Data\Database\XRecordTests.cs" />
-    <Compile Include="Data\Database\XValueTests.cs" />
-    <Compile Include="Editor\Bounds\ConvexHullBoundsTests.cs" />
-    <Compile Include="Editor\Bounds\ShapeHitTestPointTests.cs" />
-    <Compile Include="Editor\Designer\DesignerContextTests.cs" />
-    <Compile Include="Editor\ProjectEditorTests_IInputTarget.cs" />
-    <Compile Include="Editor\Input\CommandTests.cs" />
-    <Compile Include="Editor\Input\CommandOfTTests.cs" />
-    <Compile Include="Editor\Factories\ProjectFactoryTests.cs" />
-    <Compile Include="Editor\Factories\ShapeFactoryTests.cs" />
-    <Compile Include="Editor\ProjectObserverTests.cs" />
-    <Compile Include="Editor\ProjectExtensionsTests.cs" />
-    <Compile Include="Editor\Recent\RecentFileTests.cs" />
-    <Compile Include="Editor\Recent\RecentsTests.cs" />
-    <Compile Include="Editor\Tools\ToolArcTests.cs" />
-    <Compile Include="Editor\Tools\ToolCubicBezierTests.cs" />
-    <Compile Include="Editor\Tools\ToolEllipseTests.cs" />
-    <Compile Include="Editor\Tools\ToolImageTests.cs" />
-    <Compile Include="Editor\Tools\ToolLineTests.cs" />
-    <Compile Include="Editor\Tools\ToolNoneTests.cs" />
-    <Compile Include="Editor\Tools\ToolPathTests.cs" />
-    <Compile Include="Editor\Tools\ToolPointTests.cs" />
-    <Compile Include="Editor\Tools\ToolQuadraticBezierTests.cs" />
-    <Compile Include="Editor\Tools\ToolRectangleTests.cs" />
-    <Compile Include="Editor\Tools\ToolSelectionTests.cs" />
-    <Compile Include="Editor\Tools\ToolTextTests.cs" />
-    <Compile Include="History\StackHistoryTests.cs" />
-    <Compile Include="Math\Arc\GdiArcTests.cs" />
-    <Compile Include="Math\Arc\WpfArcTests.cs" />
-    <Compile Include="Math\ConvexHull\MonotoneChainTests.cs" />
-    <Compile Include="Math\Point2Tests.cs" />
-    <Compile Include="Math\Polygon2Tests.cs" />
-    <Compile Include="Math\Rect2Tests.cs" />
-    <Compile Include="Math\Size2Tests.cs" />
-    <Compile Include="Math\Vector2Tests.cs" />
-    <Compile Include="Math\MathHelpersTests.cs" />
-    <Compile Include="Math\Sat\ProjectionTests.cs" />
-    <Compile Include="Math\Sat\SeparatingAxisTheoremTests.cs" />
-    <Compile Include="Project\XContainerTests.cs" />
-    <Compile Include="Project\XDocumentTests.cs" />
-    <Compile Include="Project\XLayerTests.cs" />
-    <Compile Include="Project\XLibraryOfTTests.cs" />
-    <Compile Include="Project\XOptionsTests.cs" />
-    <Compile Include="Project\XProjectTests_IImageCache.cs" />
-    <Compile Include="Project\XProjectTests_IO.cs" />
-    <Compile Include="Project\XProjectTests.cs" />
-    <Compile Include="Project\XSelectableTests.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Path\Parser\SvgToXPathGeometryParserTests.cs" />
-    <Compile Include="Path\Parser\XPathGeometryParserTests.cs" />
-    <Compile Include="Path\Segments\XArcSegmentTests.cs" />
-    <Compile Include="Path\Segments\XCubicBezierSegmentTests.cs" />
-    <Compile Include="Path\Segments\XLineSegmentTests.cs" />
-    <Compile Include="Path\Segments\XPolyCubicBezierSegmentTests.cs" />
-    <Compile Include="Path\Segments\XPolyLineSegmentTests.cs" />
-    <Compile Include="Path\Segments\XPolyQuadraticBezierSegmentTests.cs" />
-    <Compile Include="Path\Segments\XQuadraticBezierSegmentTests.cs" />
-    <Compile Include="Path\XPathFigureTests.cs" />
-    <Compile Include="Path\XPathGeometryContextTests.cs" />
-    <Compile Include="Path\XPathGeometryTests.cs" />
-    <Compile Include="Path\XPathPolySegmentTests.cs" />
-    <Compile Include="Path\XPathSizeTests.cs" />
-    <Compile Include="Renderer\CacheTests.cs" />
-    <Compile Include="Renderer\Presenters\PrintPresenterTests .cs" />
-    <Compile Include="Renderer\Presenters\EditorPresenterTests.cs" />
-    <Compile Include="Renderer\ShapeRendererStateTests.cs" />
-    <Compile Include="Renderer\ShapeRendererTests.cs" />
-    <Compile Include="Shapes\XArcTests.cs" />
-    <Compile Include="Shapes\XCubicBezierTests.cs" />
-    <Compile Include="Shapes\XEllipseTests.cs" />
-    <Compile Include="Shapes\XGroupTests.cs" />
-    <Compile Include="Shapes\XImageTests.cs" />
-    <Compile Include="Shapes\XLineTests.cs" />
-    <Compile Include="Shapes\XPathTests.cs" />
-    <Compile Include="Shapes\XPointTests.cs" />
-    <Compile Include="Shapes\XQuadraticBezierTests.cs" />
-    <Compile Include="Shapes\XRectangleTests.cs" />
-    <Compile Include="Shapes\XTextTests.cs" />
-    <Compile Include="Shape\ShapeStateFlagsTests.cs" />
-    <Compile Include="Shape\ShapeStateTests.cs" />
-    <Compile Include="Shape\BaseShapeTests.cs" />
-    <Compile Include="Style\ArgbColorTests.cs" />
-    <Compile Include="Style\ArrowStyleTests.cs" />
-    <Compile Include="Style\BaseStyleTests.cs" />
-    <Compile Include="Style\FontStyleFlagsTests.cs" />
-    <Compile Include="Style\FontStyleTests.cs" />
-    <Compile Include="Style\LineFixedLengthFlagsTests.cs" />
-    <Compile Include="Style\LineFixedLengthTests.cs" />
-    <Compile Include="Style\LineStyleTests.cs" />
-    <Compile Include="Style\ShapeStyleByNameComparerTests.cs" />
-    <Compile Include="Style\ShapeStyleTests.cs" />
-    <Compile Include="Style\TextStyleTests.cs" />
-    <Compile Include="Utilities\PropertyChangedObserver.cs" />
-    <Compile Include="Collections\XDatabasesTests.cs" />
-    <Compile Include="Collections\XGroupsTests.cs" />
-    <Compile Include="Collections\XShapesTests.cs" />
-    <Compile Include="Collections\XStylesTests.cs" />
-    <Compile Include="Collections\XTemplatesTests.cs" />
+    <ProjectReference Include="..\..\src\Core2D.Spatial\Core2D.Spatial.csproj" />
+    <ProjectReference Include="..\..\src\Core2D\Core2D.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
-  </ItemGroup>
-  <ItemGroup />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props'))" />
-  </Target>
-  <ItemGroup>
-    <PackageReference Include="System.Collections">
-      <Version>4.3.0</Version>
-    </PackageReference>
-    <PackageReference Include="System.Collections.Immutable">
-      <Version>1.3.1</Version>
-    </PackageReference>
-    <PackageReference Include="System.Diagnostics.Debug">
-      <Version>4.3.0</Version>
-    </PackageReference>
-    <PackageReference Include="System.Globalization">
-      <Version>4.3.0</Version>
-    </PackageReference>
-    <PackageReference Include="System.Linq">
-      <Version>4.3.0</Version>
-    </PackageReference>
-    <PackageReference Include="System.Resources.ResourceManager">
-      <Version>4.3.0</Version>
-    </PackageReference>
-    <PackageReference Include="System.Runtime">
-      <Version>4.3.0</Version>
-    </PackageReference>
-    <PackageReference Include="System.Runtime.Extensions">
-      <Version>4.3.0</Version>
-    </PackageReference>
-    <PackageReference Include="System.Threading">
-      <Version>4.3.0</Version>
-    </PackageReference>
-    <PackageReference Include="xunit">
-      <Version>2.1.0</Version>
-    </PackageReference>
-    <PackageReference Include="xunit.abstractions">
-      <Version>2.0.0</Version>
-    </PackageReference>
-    <PackageReference Include="xunit.assert">
-      <Version>2.1.0</Version>
-    </PackageReference>
-    <PackageReference Include="xunit.core">
-      <Version>2.1.0</Version>
-    </PackageReference>
-    <PackageReference Include="xunit.extensibility.core">
-      <Version>2.1.0</Version>
-    </PackageReference>
-    <PackageReference Include="xunit.extensibility.execution">
-      <Version>2.1.0</Version>
-    </PackageReference>
-    <PackageReference Include="xunit.runner.visualstudio">
-      <Version>2.1.0</Version>
-    </PackageReference>
-  </ItemGroup>
+
 </Project>
