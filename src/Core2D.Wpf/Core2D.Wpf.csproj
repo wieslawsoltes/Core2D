@@ -1,29 +1,14 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{12889680-3769-4914-BE60-5D09E83DF5B2}</ProjectGuid>
+    <TargetFrameworks>net46</TargetFrameworks>
     <OutputType>WinExe</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Core2D.Wpf</RootNamespace>
-    <AssemblyName>Core2D.Wpf</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <WarningLevel>4</WarningLevel>
-    <NoWin32Manifest>False</NoWin32Manifest>
-    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
-    <NoStdLib>False</NoStdLib>
-    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
-    <SignAssembly>False</SignAssembly>
-    <DelaySign>False</DelaySign>
-    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-    <TargetFrameworkProfile />
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <EnableDefaultCompileItems>False</EnableDefaultCompileItems>
   </PropertyGroup>
+
   <Import Project="..\..\build.targets" />
+
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -41,11 +26,8 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
   </ItemGroup>
+   
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
     <Compile Include="Commands\Edit\Clipboard\CopyAsEmfCommand.cs" />
     <Compile Include="Commands\Data\ExportDataCommand.cs" />
     <Compile Include="Commands\Data\ImportDataCommand.cs" />
@@ -70,6 +52,10 @@
     <Compile Include="Commands\Window\ResetWindowLayoutCommand.cs" />
     <Compile Include="Commands\Window\SaveWindowLayoutCommand.cs" />
     <Compile Include="Controls\Custom\ZoomBorder.cs" />
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
     <Compile Include="Controls\Data\ColumnsControl.xaml.cs">
       <DependentUpon>ColumnsControl.xaml</DependentUpon>
     </Compile>
@@ -500,119 +486,63 @@
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
+
   <ItemGroup>
+    <AppDesigner Include="Properties\" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <EmbeddedResource Include="Layouts\Core2D.Wpf.layout" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <AppDesigner Include="Properties\" />
   </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Layouts\Core2D.Wpf.layout" />
+  </ItemGroup>
+   
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+
   <ItemGroup>
-    <PackageReference Include="Autofac">
-      <Version>4.4.0</Version>
-    </PackageReference>
-    <PackageReference Include="Portable.Xaml">
-      <Version>0.15.0</Version>
-    </PackageReference>
-    <PackageReference Include="System.Collections.Immutable">
-      <Version>1.3.1</Version>
-    </PackageReference>
-    <PackageReference Include="System.Windows.Interactivity.WPF">
-      <Version>2.0.20525</Version>
-    </PackageReference>
-    <PackageReference Include="Wpf.Controls.PanAndZoom">
-      <Version>0.4.1-build80-alpha</Version>
-    </PackageReference>
-    <PackageReference Include="Xceed.Wpf.AvalonDock">
-      <Version>2.9.15603.14400</Version>
-    </PackageReference>
+    <PackageReference Include="Autofac" Version="4.4.0" />
+    <PackageReference Include="Portable.Xaml" Version="0.15.0" />
+    <PackageReference Include="System.Collections.Immutable" Version="1.3.1" />
+    <PackageReference Include="System.Windows.Interactivity.WPF" Version="2.0.20525" />
+    <PackageReference Include="Wpf.Controls.PanAndZoom" Version="0.4.1-build80-alpha" />
+    <PackageReference Include="Xceed.Wpf.AvalonDock" Version="2.9.15603.14400" />
   </ItemGroup>
+
   <ItemGroup>
-    <ProjectReference Include="..\Core2D.Spatial\Core2D.Spatial.csproj">
-      <Project>{aa5092f4-bdef-437d-a31b-37df896c8cbc}</Project>
-      <Name>Core2D.Spatial</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Core2D\Core2D.csproj">
-      <Project>{f822ec0c-2501-487d-87a8-b8d28a761385}</Project>
-      <Name>Core2D</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FileSystem.DotNetFx\FileSystem.DotNetFx.csproj">
-      <Project>{d1f867f7-9029-480d-b1e1-b0be4658b182}</Project>
-      <Name>FileSystem.DotNetFx</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FileWriter.Dxf\FileWriter.Dxf.csproj">
-      <Project>{d40b3bcd-0a26-40bb-960b-9464d248c934}</Project>
-      <Name>FileWriter.Dxf</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FileWriter.Emf\FileWriter.Emf.csproj">
-      <Project>{3660fce5-3d0f-412e-93a7-d0d992b4da65}</Project>
-      <Name>FileWriter.Emf</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FileWriter.PdfSharp\FileWriter.PdfSharp.csproj">
-      <Project>{ec0efa51-83f0-4439-be9f-faebd3418c94}</Project>
-      <Name>FileWriter.PdfSharp</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Log.Trace\Log.Trace.csproj">
-      <Project>{68a36926-df55-4f05-9f89-b9ab1463227e}</Project>
-      <Name>Log.Trace</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Renderer.Dxf\Renderer.Dxf.csproj">
-      <Project>{acc2c898-b49b-4ed9-b18c-389f50801b39}</Project>
-      <Name>Renderer.Dxf</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Renderer.PdfSharp\Renderer.PdfSharp.csproj">
-      <Project>{34c8ee31-a1fe-4a74-be36-c1f38bc06fec}</Project>
-      <Name>Renderer.PdfSharp</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Renderer.WinForms\Renderer.WinForms.csproj">
-      <Project>{3dc476e6-5032-4888-9337-221b88653c40}</Project>
-      <Name>Renderer.WinForms</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Renderer.Wpf\Renderer.Wpf.csproj">
-      <Project>{3bfbd239-8979-480d-b1cb-b763f7c915c8}</Project>
-      <Name>Renderer.Wpf</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ScriptRunner.Roslyn\ScriptRunner.Roslyn.csproj">
-      <Project>{352c23cd-8a6d-4c91-9fd2-fc35ecbc8afe}</Project>
-      <Name>ScriptRunner.Roslyn</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Serializer.Newtonsoft\Serializer.Newtonsoft.csproj">
-      <Project>{11e61a53-13d5-4447-8d66-3f328bbfc30a}</Project>
-      <Name>Serializer.Newtonsoft</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Serializer.Xaml\Serializer.Xaml.csproj">
-      <Project>{1dca99ea-f8fe-4ddd-ab81-bf0380c1b33d}</Project>
-      <Name>Serializer.Xaml</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TextFieldReader.CsvHelper\TextFieldReader.CsvHelper.csproj">
-      <Project>{f215adf5-74c1-4e26-9045-b6bbda736092}</Project>
-      <Name>TextFieldReader.CsvHelper</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TextFieldWriter.CsvHelper\TextFieldWriter.CsvHelper.csproj">
-      <Project>{ae7ff1b5-abe3-45bf-87cc-44ac580a666a}</Project>
-      <Name>TextFieldWriter.CsvHelper</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Utilities.Wpf\Utilities.Wpf.csproj">
-      <Project>{e8d9036d-7e08-4405-b767-fb1e654ef66a}</Project>
-      <Name>Utilities.Wpf</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\Core2D.Spatial\Core2D.Spatial.csproj" />
+    <ProjectReference Include="..\Core2D\Core2D.csproj" />
+    <ProjectReference Include="..\FileSystem.DotNetFx\FileSystem.DotNetFx.csproj" />
+    <ProjectReference Include="..\FileWriter.Dxf\FileWriter.Dxf.csproj" />
+    <ProjectReference Include="..\FileWriter.Emf\FileWriter.Emf.csproj" />
+    <ProjectReference Include="..\FileWriter.PdfSharp\FileWriter.PdfSharp.csproj" />
+    <ProjectReference Include="..\Log.Trace\Log.Trace.csproj" />
+    <ProjectReference Include="..\Renderer.Dxf\Renderer.Dxf.csproj" />
+    <ProjectReference Include="..\Renderer.PdfSharp\Renderer.PdfSharp.csproj" />
+    <ProjectReference Include="..\Renderer.WinForms\Renderer.WinForms.csproj" />
+    <ProjectReference Include="..\Renderer.Wpf\Renderer.Wpf.csproj" />
+    <ProjectReference Include="..\ScriptRunner.Roslyn\ScriptRunner.Roslyn.csproj" />
+    <ProjectReference Include="..\Serializer.Newtonsoft\Serializer.Newtonsoft.csproj" />
+    <ProjectReference Include="..\Serializer.Xaml\Serializer.Xaml.csproj" />
+    <ProjectReference Include="..\TextFieldReader.CsvHelper\TextFieldReader.CsvHelper.csproj" />
+    <ProjectReference Include="..\TextFieldWriter.CsvHelper\TextFieldWriter.CsvHelper.csproj" />
+    <ProjectReference Include="..\Utilities.Wpf\Utilities.Wpf.csproj" />
   </ItemGroup>
+
 </Project>
