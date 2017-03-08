@@ -2,7 +2,6 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Windows;
 
 [assembly: AssemblyCompany("Wiesław Šoltés")]
 [assembly: AssemblyCopyright("Copyright © Wiesław Šoltés 2017")]
@@ -11,11 +10,11 @@ using System.Windows;
 [assembly: AssemblyFileVersion("0.2.0")]
 [assembly: AssemblyInformationalVersion("0.2.0")]
 
-[assembly: AssemblyTitle("Core2D.Wpf")]
+[assembly: AssemblyTitle("Core2D.Avalonia.Direct2D")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyProduct("Core2D.Wpf")]
+[assembly: AssemblyProduct("Core2D.Avalonia.Direct2D")]
 [assembly: AssemblyCulture("")]
 
 [assembly: ComVisible(false)]
-[assembly: ThemeInfo(ResourceDictionaryLocation.None, ResourceDictionaryLocation.SourceAssembly)]
+[assembly: Guid("4868069e-3ad4-497e-9b8e-148d1eeacfd7")]
