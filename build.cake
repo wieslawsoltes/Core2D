@@ -1,6 +1,6 @@
 #addin "nuget:?package=Polly"
 #tool "nuget:?package=xunit.runner.console"
-#tool "nuget:https://dotnet.myget.org/F/nuget-build/?package=NuGet.CommandLine&prerelease,version=4.3.0-beta1-2361"
+#tool "nuget:https://dotnet.myget.org/F/nuget-build/?package=NuGet.CommandLine&version=4.3.0-beta1-2361&prerelease"
 
 using System;
 using Polly;
