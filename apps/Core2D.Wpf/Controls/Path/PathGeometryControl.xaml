@@ -1,0 +1,86 @@
+﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
+<!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
+<UserControl x:Class="Core2D.Wpf.Controls.Path.PathGeometryControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Core2D.Wpf" 
+             xmlns:converters="clr-namespace:Core2D.Wpf.Converters"
+             xmlns:designer="clr-namespace:Core2D.Wpf.Designer"
+             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
+             xmlns:Path="clr-namespace:Core2D.Path;assembly=Core2D"
+             xmlns:Segments="clr-namespace:Core2D.Path.Segments;assembly=Core2D"
+             xmlns:custom="clr-namespace:Core2D.Wpf.Controls.Custom"
+             mc:Ignorable="d" 
+             d:DataContext="{x:Static designer:DesignerHelper.PathGeometry}"
+             d:DesignWidth="250" d:DesignHeight="400">
+    <TabControl>
+        <TabItem Header="PathGeometry">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="FillRule" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <ComboBox ItemsSource="{x:Static Editor:Enums.XFillRuleValues}" SelectedItem="{Binding FillRule}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="0" Grid.Column="1"/>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Figures">
+            <TreeView x:Name="tree" ItemsSource="{Binding Figures}" BorderBrush="{x:Null}" BorderThickness="0" HorizontalContentAlignment="Stretch" VerticalAlignment="Stretch">
+                <TreeView.Resources>
+                    <DataTemplate DataType="{x:Type Path:XPathFigure}">
+                        <TextBlock Text="Figure"/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type Segments:XLineSegment}">
+                        <TextBlock Text="LineSegment"/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type Segments:XCubicBezierSegment}">
+                        <TextBlock Text="CubicBezierSegment"/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type Segments:XQuadraticBezierSegment}">
+                        <TextBlock Text="QuadraticBezierSegment"/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type Segments:XArcSegment}">
+                        <TextBlock Text="ArcSegment"/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type Segments:XPolyLineSegment}">
+                        <TextBlock Text="PolyLineSegment"/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type Segments:XPolyCubicBezierSegment}">
+                        <TextBlock Text="PolyCubicBezierSegment"/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type Segments:XPolyQuadraticBezierSegment}">
+                        <TextBlock Text="PolyQuadraticBezierSegment"/>
+                    </DataTemplate>
+                </TreeView.Resources>
+                <TreeView.ItemContainerStyle>
+                    <Style TargetType="TreeViewItem">
+                        <Setter Property="IsExpanded" Value="True"/>
+                    </Style>
+                </TreeView.ItemContainerStyle>
+                <TreeView.ItemTemplate>
+                    <HierarchicalDataTemplate ItemsSource="{Binding Segments}">
+                        <HierarchicalDataTemplate.ItemContainerStyle>
+                            <Style TargetType="TreeViewItem">
+                                <Setter Property="IsExpanded" Value="True"/>
+                            </Style>
+                        </HierarchicalDataTemplate.ItemContainerStyle>
+                        <HierarchicalDataTemplate.ItemTemplate>
+                            <DataTemplate>
+                                <ContentControl Content="{Binding}"/>
+                            </DataTemplate>
+                        </HierarchicalDataTemplate.ItemTemplate>
+                        <ContentControl Content="{Binding}"/>
+                    </HierarchicalDataTemplate>
+                </TreeView.ItemTemplate>
+            </TreeView>
+        </TabItem>
+        <TabItem Header="Selected">
+            <ContentControl Content="{Binding}" DataContext="{Binding ElementName=tree, Path=SelectedItem}"/>
+        </TabItem>
+    </TabControl>
+</UserControl>

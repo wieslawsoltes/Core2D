@@ -1,0 +1,373 @@
+﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
+<!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
+<UserControl x:Class="Core2D.Wpf.Views.StatusControl" 
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Core2D.Wpf" 
+             xmlns:converters="clr-namespace:Core2D.Wpf.Converters" 
+             xmlns:designer="clr-namespace:Core2D.Wpf.Designer"
+             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"  
+             xmlns:custom="clr-namespace:Core2D.Wpf.Controls.Custom"
+             xmlns:p="clr-namespace:Core2D.Wpf.Properties" 
+             mc:Ignorable="d" 
+             d:DataContext="{x:Static designer:DesignerHelper.Editor}"
+             d:DesignWidth="1324" d:DesignHeight="20">
+    <StatusBar Background="Transparent">
+        <StatusBar.ItemsPanel>
+            <ItemsPanelTemplate>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+            </ItemsPanelTemplate>
+        </StatusBar.ItemsPanel>
+        <StatusBarItem Grid.Column="0">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock VerticalAlignment="Center">
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="{}{0}: {1}">
+                            <Binding Source="{x:Static p:Resources.StatusDocuments}"/>
+                            <Binding Path="Project.Documents.Length" FallbackValue="{x:Static p:Resources.StatusNoDocuments}"/>
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+                <TextBlock Text=" - " VerticalAlignment="Center"/>
+                <TextBlock VerticalAlignment="Center">
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="{}{0}: {1}">
+                            <Binding Source="{x:Static p:Resources.StatusPages}"/>
+                            <Binding Path="Project.CurrentDocument.Pages.Length" FallbackValue="{x:Static p:Resources.StatusNoPages}"/>
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+                <TextBlock Text=" - " VerticalAlignment="Center"/>
+                <TextBlock VerticalAlignment="Center">
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="{}{0}: {1}">
+                            <Binding Source="{x:Static p:Resources.StatusLayers}"/>
+                            <Binding Path="Project.CurrentContainer.Layers.Length" FallbackValue="{x:Static p:Resources.StatusNoLayers}"/>
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+                <TextBlock Text=" - " VerticalAlignment="Center"/>
+                <TextBlock VerticalAlignment="Center">
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="{}{0}: {1}">
+                            <Binding Source="{x:Static p:Resources.StatusShapes}"/>
+                            <Binding Path="Project.CurrentContainer.CurrentLayer.Shapes.Length" FallbackValue="{x:Static p:Resources.StatusNoShapes}"/>
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+                <TextBlock Text=" - " VerticalAlignment="Center"/>
+                <TextBlock VerticalAlignment="Center">
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Text" Value="{x:Static p:Resources.StatusSelectedOne}"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Renderers[0].State.SelectedShape}" Value="{x:Null}">
+                                    <Setter Property="Text">
+                                        <Setter.Value>
+                                            <MultiBinding StringFormat="{}{0}: {1}">
+                                                <Binding Source="{x:Static p:Resources.StatusSelected}"/>
+                                                <Binding Path="Renderers[0].State.SelectedShapes.Count" FallbackValue="{x:Static p:Resources.StatusNoSelected}"/>
+                                            </MultiBinding>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </StackPanel>
+        </StatusBarItem>
+        <StatusBarItem Grid.Column="2">
+            <StatusBarItem.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="{x:Static p:Resources.MenuToolNone}" Command="{x:Static Editor:ProjectEditorCommands.ToolNoneCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool.Name, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=None}" InputGestureText="N"/>
+                    <Separator/>
+                    <MenuItem Header="{x:Static p:Resources.MenuToolSelection}" Command="{x:Static Editor:ProjectEditorCommands.ToolSelectionCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool.Name, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Selection}" InputGestureText="S"/>
+                    <Separator/>
+                    <MenuItem Header="{x:Static p:Resources.MenuToolPoint}" Command="{x:Static Editor:ProjectEditorCommands.ToolPointCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool.Name, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Point}" InputGestureText="P"/>
+                    <Separator/>
+                    <MenuItem Header="{x:Static p:Resources.MenuToolLine}" Command="{x:Static Editor:ProjectEditorCommands.ToolLineCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool.Name, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Line}" InputGestureText="L"/>
+                    <MenuItem Header="{x:Static p:Resources.MenuToolArc}" Command="{x:Static Editor:ProjectEditorCommands.ToolArcCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool.Name, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Arc}" InputGestureText="A"/>
+                    <MenuItem Header="{x:Static p:Resources.MenuToolCubicBezier}" Command="{x:Static Editor:ProjectEditorCommands.ToolCubicBezierCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool.Name, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=CubicBezier}" InputGestureText="B"/>
+                    <MenuItem Header="{x:Static p:Resources.MenuToolQuadraticBezier}" Command="{x:Static Editor:ProjectEditorCommands.ToolQuadraticBezierCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool.Name, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=QuadraticBezier}" InputGestureText="Q"/>
+                    <Separator/>
+                    <MenuItem Header="{x:Static p:Resources.MenuToolPath}" Command="{x:Static Editor:ProjectEditorCommands.ToolPathCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool.Name, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Path}" InputGestureText="H"/>
+                    <Separator/>
+                    <MenuItem Header="{x:Static p:Resources.MenuToolRectangle}" Command="{x:Static Editor:ProjectEditorCommands.ToolRectangleCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool.Name, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Rectangle}" InputGestureText="R"/>
+                    <MenuItem Header="{x:Static p:Resources.MenuToolEllipse}" Command="{x:Static Editor:ProjectEditorCommands.ToolEllipseCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool.Name, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Ellipse}" InputGestureText="E"/>
+                    <Separator/>
+                    <MenuItem Header="{x:Static p:Resources.MenuToolText}" Command="{x:Static Editor:ProjectEditorCommands.ToolTextCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool.Name, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Text}" InputGestureText="T"/>
+                    <Separator/>
+                    <MenuItem Header="{x:Static p:Resources.MenuToolImage}" Command="{x:Static Editor:ProjectEditorCommands.ToolImageCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentTool.Name, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Image}" InputGestureText="I"/>
+                </ContextMenu>
+            </StatusBarItem.ContextMenu>
+            <TextBlock VerticalAlignment="Center">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Text" Value="{Binding Path=CurrentTool.Name, Mode=OneWay}"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=CurrentTool.Name, Mode=OneWay}" Value="None">
+                                <Setter Property="Text" Value="{x:Static p:Resources.StatusToolNone}"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=CurrentTool.Name, Mode=OneWay}" Value="Selection">
+                                <Setter Property="Text" Value="{x:Static p:Resources.StatusToolSelection}"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=CurrentTool.Name, Mode=OneWay}" Value="Point}">
+                                <Setter Property="Text" Value="{x:Static p:Resources.StatusToolPoint}"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=CurrentTool.Name, Mode=OneWay}" Value="Line}">
+                                <Setter Property="Text" Value="{x:Static p:Resources.StatusToolLine}"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=CurrentTool.Name, Mode=OneWay}" Value="Arc}">
+                                <Setter Property="Text" Value="{x:Static p:Resources.StatusToolArc}"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=CurrentTool.Name, Mode=OneWay}" Value="CubicBezier}">
+                                <Setter Property="Text" Value="{x:Static p:Resources.StatusToolCubicBezier}"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=CurrentTool.Name, Mode=OneWay}" Value="QuadraticBezier}">
+                                <Setter Property="Text" Value="{x:Static p:Resources.StatusToolQuadraticBezier}"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=CurrentTool.Name, Mode=OneWay}" Value="Path}">
+                                <Setter Property="Text" Value="{x:Static p:Resources.StatusToolPath}"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=CurrentTool.Name, Mode=OneWay}" Value="Rectangle}">
+                                <Setter Property="Text" Value="{x:Static p:Resources.StatusToolRectangle}"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=CurrentTool.Name, Mode=OneWay}" Value="Ellipse}">
+                                <Setter Property="Text" Value="{x:Static p:Resources.StatusToolEllipse}"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=CurrentTool.Name, Mode=OneWay}" Value="Text}">
+                                <Setter Property="Text" Value="{x:Static p:Resources.StatusToolText}"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=CurrentTool.Name, Mode=OneWay}" Value="Image}">
+                                <Setter Property="Text" Value="{x:Static p:Resources.StatusToolImage}"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+        </StatusBarItem>
+        <Separator Grid.Column="3">
+            <Separator.Style>
+                <Style TargetType="Separator">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=CurrentTool.Name, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Path}" Value="True">
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Separator.Style>
+        </Separator>
+        <StatusBarItem Grid.Column="4">
+            <StatusBarItem.Style>
+                <Style TargetType="StatusBarItem">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=CurrentTool.Name, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Path}" Value="True">
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </StatusBarItem.Style>
+            <StatusBarItem.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="{x:Static p:Resources.MenuPathToolLine}" Command="{x:Static Editor:ProjectEditorCommands.ToolLineCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentPathTool.Name, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Line}" InputGestureText="L"/>
+                    <MenuItem Header="{x:Static p:Resources.MenuPathToolArc}" Command="{x:Static Editor:ProjectEditorCommands.ToolArcCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentPathTool.Name, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Arc}" InputGestureText="A"/>
+                    <MenuItem Header="{x:Static p:Resources.MenuPathToolCubicBezier}" Command="{x:Static Editor:ProjectEditorCommands.ToolCubicBezierCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentPathTool.Name, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=CubicBezier}" InputGestureText="B"/>
+                    <MenuItem Header="{x:Static p:Resources.MenuPathToolQuadraticBezier}" Command="{x:Static Editor:ProjectEditorCommands.ToolQuadraticBezierCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentPathTool.Name, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=QuadraticBezier}" InputGestureText="Q"/>
+                    <Separator/>
+                    <MenuItem Header="{x:Static p:Resources.MenuPathToolMove}" Command="{x:Static Editor:ProjectEditorCommands.ToolMoveCommand}" IsCheckable="False" IsChecked="{Binding Path=CurrentPathTool.Name, Mode=OneWay, Converter={StaticResource ObjectEqualsConverter}, ConverterParameter=Move}" InputGestureText="M"/>
+                </ContextMenu>
+            </StatusBarItem.ContextMenu>
+            <TextBlock VerticalAlignment="Center">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Text" Value="{Binding Path=CurrentPathTool.Name, Mode=OneWay}"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=CurrentPathTool.Name, Mode=OneWay}" Value="Line">
+                                <Setter Property="Text" Value="{x:Static p:Resources.StatusPathToolLine}"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=CurrentPathTool.Name, Mode=OneWay}" Value="Arc">
+                                <Setter Property="Text" Value="{x:Static p:Resources.StatusPathToolArc}"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=CurrentPathTool.Name, Mode=OneWay}" Value="CubicBezier">
+                                <Setter Property="Text" Value="{x:Static p:Resources.StatusPathToolCubicBezier}"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=CurrentPathTool.Name, Mode=OneWay}" Value="QuadraticBezier">
+                                <Setter Property="Text" Value="{x:Static p:Resources.StatusPathToolQuadraticBezier}"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=CurrentPathTool.Name, Mode=OneWay}" Value="Move">
+                                <Setter Property="Text" Value="{x:Static p:Resources.StatusPathToolMove}"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+        </StatusBarItem>
+        <Separator Grid.Column="5"/>
+        <StatusBarItem Grid.Column="6">
+            <CheckBox IsChecked="{Binding Project.Options.DefaultIsStroked}">
+                <CheckBox.Template>
+                    <ControlTemplate>
+                        <TextBlock Text="{x:Static p:Resources.StatusOptionsStroked}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Project.Options.DefaultIsStroked, Mode=OneWay}" Value="False">
+                                            <Setter Property="Foreground" Value="DarkGray"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </ControlTemplate>
+                </CheckBox.Template>
+            </CheckBox>
+        </StatusBarItem>
+        <Separator Grid.Column="7"/>
+        <StatusBarItem Grid.Column="8">
+            <CheckBox IsChecked="{Binding Project.Options.DefaultIsFilled}">
+                <CheckBox.Template>
+                    <ControlTemplate>
+                        <TextBlock Text="{x:Static p:Resources.StatusOptionsFilled}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Project.Options.DefaultIsFilled, Mode=OneWay}" Value="False">
+                                            <Setter Property="Foreground" Value="DarkGray"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </ControlTemplate>
+                </CheckBox.Template>
+            </CheckBox>
+        </StatusBarItem>
+        <Separator Grid.Column="9"/>
+        <StatusBarItem Grid.Column="10">
+            <CheckBox IsChecked="{Binding Project.Options.DefaultIsClosed}">
+                <CheckBox.Template>
+                    <ControlTemplate>
+                        <TextBlock Text="{x:Static p:Resources.StatusOptionsClosed}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Project.Options.DefaultIsClosed, Mode=OneWay}" Value="False">
+                                            <Setter Property="Foreground" Value="DarkGray"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </ControlTemplate>
+                </CheckBox.Template>
+            </CheckBox>
+        </StatusBarItem>
+        <Separator Grid.Column="11"/>
+        <StatusBarItem Grid.Column="12">
+            <CheckBox IsChecked="{Binding Project.Options.DefaultIsSmoothJoin}">
+                <CheckBox.Template>
+                    <ControlTemplate>
+                        <TextBlock Text="{x:Static p:Resources.StatusOptionsSmoothJoin}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Project.Options.DefaultIsSmoothJoin, Mode=OneWay}" Value="False">
+                                            <Setter Property="Foreground" Value="DarkGray"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </ControlTemplate>
+                </CheckBox.Template>
+            </CheckBox>
+        </StatusBarItem>
+        <Separator Grid.Column="13"/>
+        <StatusBarItem Grid.Column="14">
+            <CheckBox IsChecked="{Binding Project.Options.SnapToGrid}">
+                <CheckBox.Template>
+                    <ControlTemplate>
+                        <TextBlock Text="{x:Static p:Resources.StatusOptionsSnap}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Project.Options.SnapToGrid, Mode=OneWay}" Value="False">
+                                            <Setter Property="Foreground" Value="DarkGray"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </ControlTemplate>
+                </CheckBox.Template>
+            </CheckBox>
+        </StatusBarItem>
+        <Separator Grid.Column="15"/>
+        <StatusBarItem Grid.Column="16">
+            <CheckBox IsChecked="{Binding Project.Options.TryToConnect}">
+                <CheckBox.Template>
+                    <ControlTemplate>
+                        <TextBlock Text="{x:Static p:Resources.StatusOptionsConnect}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Project.Options.TryToConnect, Mode=OneWay}" Value="False">
+                                            <Setter Property="Foreground" Value="DarkGray"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </ControlTemplate>
+                </CheckBox.Template>
+            </CheckBox>
+        </StatusBarItem>
+        <Separator Grid.Column="17"/>
+        <StatusBarItem Grid.Column="18">
+            <CheckBox IsChecked="{Binding Project.Options.CloneStyle}">
+                <CheckBox.Template>
+                    <ControlTemplate>
+                        <TextBlock Text="{x:Static p:Resources.StatusOptionsCloneStyle}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Project.Options.CloneStyle, Mode=OneWay}" Value="False">
+                                            <Setter Property="Foreground" Value="DarkGray"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </ControlTemplate>
+                </CheckBox.Template>
+            </CheckBox>
+        </StatusBarItem>
+    </StatusBar>
+</UserControl>
