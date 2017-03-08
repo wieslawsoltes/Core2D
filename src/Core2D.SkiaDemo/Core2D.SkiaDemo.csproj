@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>net46</TargetFrameworks>
     <OutputType>WinExe</OutputType>
+    <RuntimeIdentifiers>win7-x64;win7-x86</RuntimeIdentifiers>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <EnableDefaultCompileItems>False</EnableDefaultCompileItems>
     <EnableDefaultEmbeddedResourceItems>False</EnableDefaultEmbeddedResourceItems>
@@ -29,6 +30,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="**\*.cs" Exclude="obj\**" />
+  </ItemGroup>
+
+  <ProjectCapability Include="DynamicDependentFile"/>
+
+  <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -37,21 +44,17 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="**\*.xaml.cs">
+        <DependentUpon>%(Filename)</DependentUpon>
+        <SubType>Code</SubType>
     </Compile>
-    <Page Include="SvgWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="**\*.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <SubType>Designer</SubType> 
     </Page>
-    <Compile Include="SvgWindow.xaml.cs">
-      <DependentUpon>SvgWindow.xaml</DependentUpon>
-    </Compile>
   </ItemGroup>
 
   <ItemGroup>
