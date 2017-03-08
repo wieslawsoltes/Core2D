@@ -67,16 +67,14 @@ Task("Restore-NuGet-Packages")
             {
                 NuGetRestore(MSBuildSolution, new NuGetRestoreSettings {
                     ToolPath = "./tools/NuGet.CommandLine/tools/NuGet.exe",
-                    ToolTimeout = TimeSpan.FromMinutes(toolTimeout),
-                    MSBuildVersion = NuGetMSBuildVersion.MSBuild15
+                    ToolTimeout = TimeSpan.FromMinutes(toolTimeout)
                 });
             }
             if(IsRunningOnUnix())
             {
                 NuGetRestore(MSBuildSolution, new NuGetRestoreSettings {
                     ToolPath = "./tools/NuGet.CommandLine/tools/NuGet.exe",
-                    ToolTimeout = TimeSpan.FromMinutes(toolTimeout),
-                    MSBuildVersion = NuGetMSBuildVersion.MSBuild15
+                    ToolTimeout = TimeSpan.FromMinutes(toolTimeout)
                 });
             }
         });
