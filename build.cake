@@ -65,13 +65,15 @@ Task("Restore-NuGet-Packages")
             if(IsRunningOnWindows())
             {
                 NuGetRestore(MSBuildSolution, new NuGetRestoreSettings {
-                    ToolTimeout = TimeSpan.FromMinutes(toolTimeout)
+                    ToolTimeout = TimeSpan.FromMinutes(toolTimeout),
+                    MSBuildVersion = NuGetMSBuildVersion.MSBuild15
                 });
             }
             if(IsRunningOnUnix())
             {
                 NuGetRestore(MSBuildSolution, new NuGetRestoreSettings {
-                    ToolTimeout = TimeSpan.FromMinutes(toolTimeout)
+                    ToolTimeout = TimeSpan.FromMinutes(toolTimeout),
+                    MSBuildVersion = NuGetMSBuildVersion.MSBuild15
                 });
             }
         });
