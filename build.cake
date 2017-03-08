@@ -1,6 +1,6 @@
-#addin "nuget:?package=Polly&version=4.2.0"
-#addin "nuget:?package=NuGet.Core&version=2.12.0"
-#tool "nuget:?package=xunit.runner.console&version=2.1.0"
+#addin "nuget:?package=Polly"
+#addin "nuget:?package=NuGet.Core"
+#tool "nuget:?package=xunit.runner.console"
 
 using System;
 using Polly;
