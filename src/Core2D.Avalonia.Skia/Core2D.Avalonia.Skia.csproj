@@ -17,6 +17,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <TargetFrameworkProfile />
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
   </PropertyGroup>
   <Import Project="..\..\build.targets" />
   <ItemGroup>
