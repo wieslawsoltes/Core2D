@@ -43,8 +43,6 @@ Task("Clean")
     CleanDirectory(zipRootDir);
 });
 
-Task("Validate-NuGet-Packages")
-
 Task("Restore-NuGet-Packages")
     .IsDependentOn("Clean")
     .Does(() =>
@@ -151,7 +149,6 @@ Task("Default")
   .IsDependentOn("Run-Unit-Tests");
 
 Task("AppVeyor")
-  .IsDependentOn("Validate-NuGet-Packages")
   .IsDependentOn("Run-Unit-Tests")
   .IsDependentOn("Zip-Files");
 
