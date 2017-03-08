@@ -28,7 +28,6 @@
   <ItemGroup>
     <Compile Include="Modules\DependenciesModule.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
 
   <ItemGroup>
