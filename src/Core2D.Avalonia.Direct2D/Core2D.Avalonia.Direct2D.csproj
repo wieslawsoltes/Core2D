@@ -1,23 +1,15 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4868069E-3AD4-497E-9B8E-148D1EEACFD7}</ProjectGuid>
+    <TargetFrameworks>net46</TargetFrameworks>
     <OutputType>WinExe</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Core2D.Avalonia.Direct2D</RootNamespace>
-    <AssemblyName>Core2D.Avalonia.Direct2D</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <NoWin32Manifest>False</NoWin32Manifest>
-    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
-    <NoStdLib>False</NoStdLib>
-    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
-    <TargetFrameworkProfile />
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <EnableDefaultCompileItems>False</EnableDefaultCompileItems>
+    <EnableDefaultEmbeddedResourceItems>False</EnableDefaultEmbeddedResourceItems>
   </PropertyGroup>
+
   <Import Project="..\..\build.targets" />
+
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -32,152 +24,60 @@
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
+
   <ItemGroup>
     <Compile Include="Modules\DependenciesModule.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+
   <ItemGroup>
-    <ProjectReference Include="..\Core2D.Avalonia\Core2D.Avalonia.csproj">
-      <Project>{27cd58ae-d6d4-42ad-a315-2f1cb63454af}</Project>
-      <Name>Core2D.Avalonia</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Core2D.Spatial\Core2D.Spatial.csproj">
-      <Project>{aa5092f4-bdef-437d-a31b-37df896c8cbc}</Project>
-      <Name>Core2D.Spatial</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Core2D\Core2D.csproj">
-      <Project>{f822ec0c-2501-487d-87a8-b8d28a761385}</Project>
-      <Name>Core2D</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FileSystem.DotNetFx\FileSystem.DotNetFx.csproj">
-      <Project>{d1f867f7-9029-480d-b1e1-b0be4658b182}</Project>
-      <Name>FileSystem.DotNetFx</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FileWriter.Dxf\FileWriter.Dxf.csproj">
-      <Project>{d40b3bcd-0a26-40bb-960b-9464d248c934}</Project>
-      <Name>FileWriter.Dxf</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FileWriter.Emf\FileWriter.Emf.csproj">
-      <Project>{3660fce5-3d0f-412e-93a7-d0d992b4da65}</Project>
-      <Name>FileWriter.Emf</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FileWriter.PdfSharp\FileWriter.PdfSharp.csproj">
-      <Project>{EC0EFA51-83F0-4439-BE9F-FAEBD3418C94}</Project>
-      <Name>FileWriter.PdfSharp</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Log.Trace\Log.Trace.csproj">
-      <Project>{68a36926-df55-4f05-9f89-b9ab1463227e}</Project>
-      <Name>Log.Trace</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Renderer.Avalonia\Renderer.Avalonia.csproj">
-      <Project>{e05f3f7e-2176-43dc-90bb-f5c66cfdb12f}</Project>
-      <Name>Renderer.Avalonia</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Renderer.Dxf\Renderer.Dxf.csproj">
-      <Project>{acc2c898-b49b-4ed9-b18c-389f50801b39}</Project>
-      <Name>Renderer.Dxf</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Renderer.PdfSharp\Renderer.PdfSharp.csproj">
-      <Project>{34c8ee31-a1fe-4a74-be36-c1f38bc06fec}</Project>
-      <Name>Renderer.PdfSharp</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Renderer.WinForms\Renderer.WinForms.csproj">
-      <Project>{3dc476e6-5032-4888-9337-221b88653c40}</Project>
-      <Name>Renderer.WinForms</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ScriptRunner.Roslyn\ScriptRunner.Roslyn.csproj">
-      <Project>{352c23cd-8a6d-4c91-9fd2-fc35ecbc8afe}</Project>
-      <Name>ScriptRunner.Roslyn</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Serializer.Newtonsoft\Serializer.Newtonsoft.csproj">
-      <Project>{11E61A53-13D5-4447-8D66-3F328BBFC30A}</Project>
-      <Name>Serializer.Newtonsoft</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Serializer.Xaml\Serializer.Xaml.csproj">
-      <Project>{1DCA99EA-F8FE-4DDD-AB81-BF0380C1B33D}</Project>
-      <Name>Serializer.Xaml</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TextFieldReader.CsvHelper\TextFieldReader.CsvHelper.csproj">
-      <Project>{F215ADF5-74C1-4E26-9045-B6BBDA736092}</Project>
-      <Name>TextFieldReader.CsvHelper</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TextFieldWriter.CsvHelper\TextFieldWriter.CsvHelper.csproj">
-      <Project>{AE7FF1B5-ABE3-45BF-87CC-44AC580A666A}</Project>
-      <Name>TextFieldWriter.CsvHelper</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Utilities.Avalonia\Utilities.Avalonia.csproj">
-      <Project>{C6DBD1FD-C462-4005-B382-97BB4AEF26F2}</Project>
-      <Name>Utilities.Avalonia</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\Core2D.Avalonia\Core2D.Avalonia.csproj" />
+    <ProjectReference Include="..\Core2D.Spatial\Core2D.Spatial.csproj" />
+    <ProjectReference Include="..\Core2D\Core2D.csproj" />
+    <ProjectReference Include="..\FileSystem.DotNetFx\FileSystem.DotNetFx.csproj" />
+    <ProjectReference Include="..\FileWriter.Dxf\FileWriter.Dxf.csproj" />
+    <ProjectReference Include="..\FileWriter.Emf\FileWriter.Emf.csproj" />
+    <ProjectReference Include="..\FileWriter.PdfSharp\FileWriter.PdfSharp.csproj" />
+    <ProjectReference Include="..\Log.Trace\Log.Trace.csproj" />
+    <ProjectReference Include="..\Renderer.Avalonia\Renderer.Avalonia.csproj" />
+    <ProjectReference Include="..\Renderer.Dxf\Renderer.Dxf.csproj" />
+    <ProjectReference Include="..\Renderer.PdfSharp\Renderer.PdfSharp.csproj" />
+    <ProjectReference Include="..\Renderer.WinForms\Renderer.WinForms.csproj" />
+    <ProjectReference Include="..\ScriptRunner.Roslyn\ScriptRunner.Roslyn.csproj" />
+    <ProjectReference Include="..\Serializer.Newtonsoft\Serializer.Newtonsoft.csproj" />
+    <ProjectReference Include="..\Serializer.Xaml\Serializer.Xaml.csproj" />
+    <ProjectReference Include="..\TextFieldReader.CsvHelper\TextFieldReader.CsvHelper.csproj" />
+    <ProjectReference Include="..\TextFieldWriter.CsvHelper\TextFieldWriter.CsvHelper.csproj" />
+    <ProjectReference Include="..\Utilities.Avalonia\Utilities.Avalonia.csproj" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+
   <ItemGroup>
-    <PackageReference Include="Autofac">
-      <Version>4.4.0</Version>
-    </PackageReference>
-    <PackageReference Include="Avalonia">
-      <Version>0.4.1-build2729-alpha</Version>
-    </PackageReference>
-    <PackageReference Include="Avalonia.Controls.PanAndZoom">
-      <Version>0.4.1-build80-alpha</Version>
-    </PackageReference>
-    <PackageReference Include="Avalonia.Direct2D1">
-      <Version>0.4.1-build2729-alpha</Version>
-    </PackageReference>
-    <PackageReference Include="Avalonia.Win32">
-      <Version>0.4.1-build2729-alpha</Version>
-    </PackageReference>
-    <PackageReference Include="Avalonia.Xaml.Behaviors">
-      <Version>0.4.1-build333-alpha</Version>
-    </PackageReference>
-    <PackageReference Include="Portable.Xaml">
-      <Version>0.15.0</Version>
-    </PackageReference>
-    <PackageReference Include="Serilog">
-      <Version>1.5.14</Version>
-    </PackageReference>
-    <PackageReference Include="SharpDX">
-      <Version>3.1.1</Version>
-    </PackageReference>
-    <PackageReference Include="SharpDX.Direct2D1">
-      <Version>3.1.1</Version>
-    </PackageReference>
-    <PackageReference Include="SharpDX.Direct3D11">
-      <Version>3.1.1</Version>
-    </PackageReference>
-    <PackageReference Include="SharpDX.DXGI">
-      <Version>3.1.1</Version>
-    </PackageReference>
-    <PackageReference Include="Splat">
-      <Version>1.6.2</Version>
-    </PackageReference>
-    <PackageReference Include="Sprache">
-      <Version>2.1.0</Version>
-    </PackageReference>
-    <PackageReference Include="System.Collections.Immutable">
-      <Version>1.3.1</Version>
-    </PackageReference>
-    <PackageReference Include="System.Reactive">
-      <Version>3.0.0</Version>
-    </PackageReference>
-    <PackageReference Include="System.Reactive.Core">
-      <Version>3.0.0</Version>
-    </PackageReference>
-    <PackageReference Include="System.Reactive.Interfaces">
-      <Version>3.0.0</Version>
-    </PackageReference>
-    <PackageReference Include="System.Reactive.Linq">
-      <Version>3.0.0</Version>
-    </PackageReference>
-    <PackageReference Include="System.Reactive.PlatformServices">
-      <Version>3.0.0</Version>
-    </PackageReference>
-    <PackageReference Include="System.Reactive.Windows.Threading">
-      <Version>3.0.0</Version>
-    </PackageReference>
+    <PackageReference Include="Autofac" Version="4.4.0" />
+    <PackageReference Include="Avalonia" Version="0.4.1-build2729-alpha" />
+    <PackageReference Include="Avalonia.Controls.PanAndZoom" Version="0.4.1-build80-alpha" />
+    <PackageReference Include="Avalonia.Direct2D1" Version="0.4.1-build2729-alpha" />
+    <PackageReference Include="Avalonia.Win32" Version="0.4.1-build2729-alpha" />
+    <PackageReference Include="Avalonia.Xaml.Behaviors" Version="0.4.1-build333-alpha" />
+    <PackageReference Include="Portable.Xaml" Version="0.15.0" />
+    <PackageReference Include="Serilog" Version="1.5.14" />
+    <PackageReference Include="SharpDX" Version="3.1.1" />
+    <PackageReference Include="SharpDX.Direct2D1" Version="3.1.1" />
+    <PackageReference Include="SharpDX.Direct3D11" Version="3.1.1" />
+    <PackageReference Include="SharpDX.DXGI" Version="3.1.1" />
+    <PackageReference Include="Splat" Version="1.6.2" />
+    <PackageReference Include="Sprache" Version="2.1.0" />
+    <PackageReference Include="System.Collections.Immutable" Version="1.3.1" />
+    <PackageReference Include="System.Reactive" Version="3.0.0" />
+    <PackageReference Include="System.Reactive.Core" Version="3.0.0" />
+    <PackageReference Include="System.Reactive.Interfaces" Version="3.0.0" />
+    <PackageReference Include="System.Reactive.Linq" Version="3.0.0" />
+    <PackageReference Include="System.Reactive.PlatformServices" Version="3.0.0" />
+    <PackageReference Include="System.Reactive.Windows.Threading" Version="3.0.0" />
   </ItemGroup>
+
 </Project>
