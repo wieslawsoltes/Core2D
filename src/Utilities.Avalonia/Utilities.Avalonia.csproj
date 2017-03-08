@@ -8,7 +8,7 @@
 
   <Import Project="..\..\build.targets" />
 
-  <ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net45'">
     <PackageReference Include="Avalonia" Version="0.4.1-build2729-alpha" />
     <PackageReference Include="Serilog" Version="1.5.14" />
     <PackageReference Include="Splat" Version="1.6.2" />
