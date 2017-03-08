@@ -75,13 +75,13 @@ namespace Core2D.Avalonia
             var log = serviceProvider.GetService<ILog>();
             var fileIO = serviceProvider.GetService<IFileSystem>();
 
-            log?.Initialize(System.IO.Path.Combine(fileIO?.GetAssemblyPath(typeof(App)), "Core2D.log"));
+            log?.Initialize(System.IO.Path.Combine(fileIO?.GetAssemblyPath(null), "Core2D.log"));
 
             try
             {
                 var editor = serviceProvider.GetService<ProjectEditor>();
 
-                var path = System.IO.Path.Combine(fileIO.GetAssemblyPath(typeof(App)), "Core2D.recent");
+                var path = System.IO.Path.Combine(fileIO.GetAssemblyPath(null), "Core2D.recent");
                 if (fileIO.Exists(path))
                 {
                     editor.OnLoadRecent(path);

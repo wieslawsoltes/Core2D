@@ -54,11 +54,11 @@ namespace Core2D.Avalonia.Droid
                     .UseAndroid()
                     .SetupWithoutStarting();
 
-                log.Initialize(System.IO.Path.Combine(fileIO?.GetAssemblyPath(typeof(MainActivity)), "Core2D.log"));
+                log.Initialize(System.IO.Path.Combine(fileIO?.GetAssemblyPath(null), "Core2D.log"));
 
                 editor = serviceProvider.GetService<ProjectEditor>();
 
-                var path = System.IO.Path.Combine(fileIO.GetAssemblyPath(typeof(MainActivity)), "Core2D.recent");
+                var path = System.IO.Path.Combine(fileIO.GetAssemblyPath(null), "Core2D.recent");
                 if (fileIO.Exists(path))
                 {
                     editor.OnLoadRecent(path);
@@ -81,7 +81,7 @@ namespace Core2D.Avalonia.Droid
         {
             base.OnDestroy();
 
-            var path = System.IO.Path.Combine(fileIO.GetAssemblyPath(typeof(MainActivity)), "Core2D.recent");
+            var path = System.IO.Path.Combine(fileIO.GetAssemblyPath(null), "Core2D.recent");
             editor.OnSaveRecent(path);
 
             log?.Dispose();
