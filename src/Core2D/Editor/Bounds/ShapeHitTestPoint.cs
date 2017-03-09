@@ -365,22 +365,22 @@ namespace Core2D.Editor.Bounds
                     return HitTestPoint(point, v, threshold, dx, dy);
                 case XLine line:
                     return HitTestLine(line, v, threshold, dx, dy);
-                case XRectangle rect:
-                    return HitTestRectangle(rect, v, threshold, dx, dy);
-                case XEllipse ellipse:
-                    return HitTestEllipse(ellipse, v, threshold, dx, dy);
                 case XArc arc:
                     return HitTestArc(arc, v, threshold, dx, dy);
                 case XCubicBezier cubic:
                     return HitTestCubicBezier(cubic, v, threshold, dx, dy);
                 case XQuadraticBezier quad:
                     return HitTestQuadraticBezier(quad, v, threshold, dx, dy);
-                case XText text:
-                    return HitTestText(text, v, threshold, dx, dy);
-                case XImage image:
-                    return HitTestImage(image, v, threshold, dx, dy);
                 case XPath path:
                     return HitTestPath(path, v, threshold, dx, dy);
+                case XRectangle rect:
+                    return HitTestRectangle(rect, v, threshold, dx, dy);
+                case XEllipse ellipse:
+                    return HitTestEllipse(ellipse, v, threshold, dx, dy);
+                case XImage image:
+                    return HitTestImage(image, v, threshold, dx, dy);
+                case XText text:
+                    return HitTestText(text, v, threshold, dx, dy);
                 case XGroup group:
                     return HitTestGroup(group, v, threshold, dx, dy);
                 case null:
