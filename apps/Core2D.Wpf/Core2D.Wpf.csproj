@@ -580,4 +580,5 @@
     <PackageReference Include="Xceed.Wpf.AvalonDock" Version="2.9.15603.14400" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildThisFileDirectory)..\Shared\nuget.workaround.targets" />
 </Project>
