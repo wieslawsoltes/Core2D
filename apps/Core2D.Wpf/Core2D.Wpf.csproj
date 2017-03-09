@@ -562,7 +562,10 @@
     <ProjectReference Include="..\..\src\Log.Trace\Log.Trace.csproj" />
     <ProjectReference Include="..\..\src\Renderer.Dxf\Renderer.Dxf.csproj" />
     <ProjectReference Include="..\..\src\Renderer.PdfSharp\Renderer.PdfSharp.csproj" />
+    <ProjectReference Include="..\..\src\FileWriter.PdfSkiaSharp\FileWriter.PdfSkiaSharp.csproj" />
+    <ProjectReference Include="..\..\src\FileWriter.SvgSkiaSharp\FileWriter.SvgSkiaSharp.csproj" />
     <ProjectReference Include="..\..\src\Renderer.WinForms\Renderer.WinForms.csproj" />
+    <ProjectReference Include="..\..\src\Renderer.SkiaSharp\Renderer.SkiaSharp.csproj" />
     <ProjectReference Include="..\..\src\Renderer.Wpf\Renderer.Wpf.csproj" />
     <ProjectReference Include="..\..\src\ScriptRunner.Roslyn\ScriptRunner.Roslyn.csproj" />
     <ProjectReference Include="..\..\src\Serializer.Newtonsoft\Serializer.Newtonsoft.csproj" />
@@ -574,6 +577,8 @@
   <ItemGroup>
     <PackageReference Include="Autofac" Version="4.4.0" />
     <PackageReference Include="Portable.Xaml" Version="0.15.0" />
+    <PackageReference Include="SkiaSharp" Version="1.56.1" />
+    <PackageReference Include="SkiaSharp.Views" Version="1.56.1" />
     <PackageReference Include="System.Collections.Immutable" Version="1.3.1" />
     <PackageReference Include="System.Windows.Interactivity.WPF" Version="2.0.20525" />
     <PackageReference Include="Wpf.Controls.PanAndZoom" Version="0.4.1-build80-alpha" />
