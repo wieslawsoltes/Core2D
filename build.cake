@@ -1,5 +1,5 @@
-#addin "nuget:?package=Polly"
-#tool "nuget:?package=xunit.runner.console"
+#addin "nuget:?package=Polly&version=5.0.6"
+#tool "nuget:?package=xunit.runner.console&version=2.2.0"
 #tool "nuget:https://dotnet.myget.org/F/nuget-build/?package=NuGet.CommandLine&version=4.3.0-beta1-2361&prerelease"
 
 using System;
