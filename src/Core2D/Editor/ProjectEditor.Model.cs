@@ -4,6 +4,8 @@ using System;
 using System.Collections.Immutable;
 using System.Linq;
 using Core2D.Data.Database;
+using Core2D.Editor.Bounds;
+using Core2D.Editor.Bounds.Shapes;
 using Core2D.Editor.Factories;
 using Core2D.Editor.Recent;
 using Core2D.Editor.Views.Interfaces;
@@ -37,6 +39,7 @@ namespace Core2D.Editor
         private IView _currentView;
         private readonly Lazy<ImmutableArray<ToolBase>> _tools;
         private readonly Lazy<ImmutableArray<PathToolBase>> _pathTools;
+        private readonly Lazy<HitTest> _hitTest;
         private readonly Lazy<ImmutableArray<IView>> _views;
         private readonly Lazy<ILog> _log;
         private readonly Lazy<ShapeRenderer[]> _renderers;
@@ -213,6 +216,11 @@ namespace Core2D.Editor
         public ImmutableArray<PathToolBase> PathTools => _pathTools.Value;
 
         /// <summary>
+        /// Gets or sets current editor hit test.
+        /// </summary>
+        public HitTest HitTest => _hitTest.Value;
+
+        /// <summary>
         /// Gets or sets registered views.
         /// </summary>
         public ImmutableArray<IView> Views => _views.Value;
@@ -293,6 +301,7 @@ namespace Core2D.Editor
             _currentRecentProject = default(RecentFile);
             _tools = _serviceProvider.GetServiceLazily<ToolBase[], ImmutableArray<ToolBase>>((tools) => tools.Where(tool => !tool.GetType().Name.StartsWith("PathTool")).ToImmutableArray());
             _pathTools = _serviceProvider.GetServiceLazily<PathToolBase[], ImmutableArray<PathToolBase>>((tools) => tools.ToImmutableArray());
+            _hitTest = _serviceProvider.GetServiceLazily<HitTest>(hitTests => hitTests.Register(_serviceProvider.GetService<HitTestBase[]>()));
             _views = _serviceProvider.GetServiceLazily<IView[], ImmutableArray<IView>>((views) => views.ToImmutableArray());
             _log = _serviceProvider.GetServiceLazily<ILog>();
             _renderers = new Lazy<ShapeRenderer[]>(() => new[] { _serviceProvider.GetService<ShapeRenderer>(), _serviceProvider.GetService<ShapeRenderer>() });
