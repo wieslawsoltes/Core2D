@@ -45,6 +45,23 @@ namespace Core2D.Editor
         }
 
         /// <summary>
+        /// Creates <see cref="Lazy{T}"/> for provided type <typeparamref name="T"/> to resolve instance of registered type <typeparamref name="T"/> lazily.
+        /// </summary>
+        /// <typeparam name="T">The type of object that is being lazily initialized.</typeparam>
+        /// <param name="serviceProvider">The service provider instance.</param>
+        /// <param name="initialize">The method to initialize return type.</param>
+        /// <returns>The new instance of type <see cref="Lazy{T}"/>.</returns>
+        public static Lazy<T> GetServiceLazily<T>(this IServiceProvider serviceProvider, Action<T> initialize)
+        {
+            return new Lazy<T>(() =>
+            {
+                var result = (T)serviceProvider.GetService(typeof(T));
+                initialize(result);
+                return result;
+            });
+        }
+
+        /// <summary>
         /// Creates <see cref="Lazy{R}"/> for provided type <typeparamref name="T"/> to resolve instance of registered type <typeparamref name="R"/> lazily.
         /// </summary>
         /// <typeparam name="T">The type of object that is being lazily initialized.</typeparam>
