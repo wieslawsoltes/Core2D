@@ -8,6 +8,8 @@ using FileSystem.DotNetFx;
 using FileWriter.Dxf;
 using FileWriter.Emf;
 using FileWriter.PdfSharp;
+using FileWriter.PdfSkiaSharp;
+using FileWriter.SvgSkiaSharp;
 using Log.Trace;
 using Renderer.Avalonia;
 using ScriptRunner.Roslyn;
