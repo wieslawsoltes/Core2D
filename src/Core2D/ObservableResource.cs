@@ -15,7 +15,11 @@ namespace Core2D
         /// <summary>
         /// Initializes a new instance of the <see cref="ObservableResource"/> class.
         /// </summary>
-        public ObservableResource() : base() => Resources = ImmutableArray.Create<ObservableObject>();
+        public ObservableResource()
+            : base()
+        {
+            Resources = ImmutableArray.Create<ObservableObject>();
+        }
 
         /// <summary>
         /// Gets or sets shape resources.
@@ -23,8 +27,8 @@ namespace Core2D
         [Content]
         public ImmutableArray<ObservableObject> Resources
         {
-            get => _resources;
-            set => Update(ref _resources, value);
+            get { return _resources; }
+            set { Update(ref _resources, value); }
         }
     }
 }
