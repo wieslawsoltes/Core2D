@@ -82,4 +82,5 @@
     <PackageReference Include="System.Reactive.Windows.Threading" Version="3.0.0" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildThisFileDirectory)..\Shared\nuget.workaround.targets" />
 </Project>
