@@ -148,6 +148,9 @@ Task("Zip-Files")
     .IsDependentOn("Run-Unit-Tests")
     .Does(() =>
 {
+    Zip((DirectoryPath)Directory("./tests/"), 
+        zipRootDir.CombineWithFilePath("UnitTests-" + configuration + "-" + version + ".zip"));
+    
     Zip(zipSourceCairoDir, 
         zipTargetCairoFile, 
         GetFiles(zipSourceCairoDir.FullPath + "/*.dll") + 
