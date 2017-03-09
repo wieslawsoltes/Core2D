@@ -2595,17 +2595,10 @@ namespace Core2D.Editor
                     var layer = Project?.CurrentContainer?.CurrentLayer;
                     if (layer != null)
                     {
-                        var target = ShapeHitTestPoint.HitTest(layer.Shapes, new Vector2(x, y), Project.Options.HitThreshold);
-                        if (target != null)
+                        var point = HitTest.TryToGetPoint(layer.Shapes, new Point2(x, y), Project.Options.HitThreshold);
+                        if (point != null)
                         {
-                            if (target is XPoint)
-                            {
-                                var point = target as XPoint;
-                                if (point != null)
-                                {
-                                    point.Shape = shape;
-                                }
-                            }
+                            point.Shape = shape;
                         }
                         else
                         {
@@ -2682,7 +2675,7 @@ namespace Core2D.Editor
                     var layer = Project?.CurrentContainer?.CurrentLayer;
                     if (layer != null)
                     {
-                        var result = ShapeHitTestPoint.HitTest(layer.Shapes, new Vector2(x, y), Project.Options.HitThreshold);
+                        var result = HitTest.TryToGetShape(layer.Shapes, new Point2(x, y), Project.Options.HitThreshold);
                         if (result != null)
                         {
                             Project?.ApplyRecord(result.Data, record);
@@ -2773,7 +2766,7 @@ namespace Core2D.Editor
                     var layer = Project.CurrentContainer?.CurrentLayer;
                     if (layer != null)
                     {
-                        var result = ShapeHitTestPoint.HitTest(layer.Shapes, new Vector2(x, y), Project.Options.HitThreshold);
+                        var result = HitTest.TryToGetShape(layer.Shapes, new Point2(x, y), Project.Options.HitThreshold);
                         if (result != null)
                         {
                             Project.ApplyStyle(result, style);
@@ -2963,10 +2956,17 @@ namespace Core2D.Editor
         {
             if (layer != null)
             {
-                var result = ShapeHitTestPoint.HitTest(layer.Shapes, new Vector2(x, y), Project.Options.HitThreshold);
-                if (result != null)
+                var point = HitTest.TryToGetPoint(layer.Shapes, new Point2(x, y), Project.Options.HitThreshold);
+                if (point != null)
                 {
-                    Select(layer, result);
+                    Select(layer, point);
+                    return true;
+                }
+
+                var shape = HitTest.TryToGetShape(layer.Shapes, new Point2(x, y), Project.Options.HitThreshold);
+                if (shape != null)
+                {
+                    Select(layer, shape);
                     return true;
                 }
 
@@ -2991,7 +2991,7 @@ namespace Core2D.Editor
                     rectangle.TopLeft.Y,
                     rectangle.BottomRight.X,
                     rectangle.BottomRight.Y);
-                var result = ShapeHitTestSelection.HitTest(layer.Shapes, rect, Project.Options.HitThreshold);
+                var result = HitTest.TryToGetShapes(layer.Shapes, rect, Project.Options.HitThreshold);
                 if (result != null)
                 {
                     if (result.Count > 0)
@@ -3002,7 +3002,7 @@ namespace Core2D.Editor
                         }
                         else
                         {
-                            Select(layer, result);
+                            Select(layer, result.ToImmutableHashSet());
                         }
                         return true;
                     }
@@ -3055,17 +3055,26 @@ namespace Core2D.Editor
             if (Renderers?[0]?.State?.SelectedShapes == null
                 && !(Renderers?[0]?.State?.SelectedShape != null && _hover != Renderers?[0]?.State?.SelectedShape))
             {
-                var result = ShapeHitTestPoint.HitTest(Project.CurrentContainer?.CurrentLayer?.Shapes, new Vector2(x, y), Project.Options.HitThreshold);
-                if (result != null)
+                var point = HitTest.TryToGetPoint(Project.CurrentContainer?.CurrentLayer?.Shapes, new Point2(x, y), Project.Options.HitThreshold);
+                if (point != null)
                 {
-                    Hover(Project.CurrentContainer?.CurrentLayer, result);
+                    Hover(Project.CurrentContainer?.CurrentLayer, point);
                     return true;
                 }
                 else
                 {
-                    if (Renderers[0].State.SelectedShape != null && Renderers[0].State.SelectedShape == _hover)
+                    var shape = HitTest.TryToGetShape(Project.CurrentContainer?.CurrentLayer?.Shapes, new Point2(x, y), Project.Options.HitThreshold);
+                    if (shape != null)
                     {
-                        Dehover(Project.CurrentContainer?.CurrentLayer);
+                        Hover(Project.CurrentContainer?.CurrentLayer, shape);
+                        return true;
+                    }
+                    else
+                    {
+                        if (Renderers[0].State.SelectedShape != null && Renderers[0].State.SelectedShape == _hover)
+                        {
+                            Dehover(Project.CurrentContainer?.CurrentLayer);
+                        }
                     }
                 }
             }
@@ -3083,14 +3092,10 @@ namespace Core2D.Editor
         {
             if (Project.Options.TryToConnect)
             {
-                var result = ShapeHitTestPoint.HitTest(
+                return HitTest.TryToGetPoint(
                     Project.CurrentContainer.CurrentLayer.Shapes,
-                    new Vector2(x, y),
+                    new Point2(x, y),
                     Project.Options.HitThreshold);
-                if (result != null && result is XPoint)
-                {
-                    return result as XPoint;
-                }
             }
             return null;
         }
@@ -3130,9 +3135,9 @@ namespace Core2D.Editor
             if (Project?.CurrentContainer == null || Project?.Options == null)
                 return false;
 
-            var result = ShapeHitTestPoint.HitTest(
+            var result = HitTest.TryToGetShape(
                 Project.CurrentContainer.CurrentLayer.Shapes,
-                new Vector2(x, y),
+                new Point2(x, y),
                 Project.Options.HitThreshold);
 
             if (result is XLine)
@@ -3252,7 +3257,7 @@ namespace Core2D.Editor
                     XLine result = null;
                     foreach (var line in lines)
                     {
-                        if (ShapeBounds.Contains(line, new Vector2(connector.X, connector.Y), threshold, 0, 0))
+                        if (HitTest.Contains(line, new Point2(connector.X, connector.Y), threshold))
                         {
                             result = line;
                             break;
