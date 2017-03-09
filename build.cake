@@ -150,7 +150,27 @@ Task("Zip-Files")
 {
     Zip((DirectoryPath)Directory("./tests/"), 
         zipRootDir.CombineWithFilePath("UnitTests-" + configuration + "-" + version + ".zip"));
-    
+
+    if (IsRunningOnWindows() && (isPlatformAnyCPU || isPlatformX86 || isPlatformX64))
+    {
+        var msvcp140 = (isPlatformAnyCPU || isPlatformX86) ?
+            @"C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\redist\x86\Microsoft.VC140.CRT\msvcp140.dll" : 
+            @"C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\redist\x64\Microsoft.VC140.CRT\msvcp140.dll";
+        var vcruntime140 = (isPlatformAnyCPU || isPlatformX86) ?
+            @"C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\redist\x86\Microsoft.VC140.CRT\vcruntime140.dll" :
+            @"C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\redist\x64\Microsoft.VC140.CRT\vcruntime140.dll";
+        CopyFileToDirectory(msvcp140, zipSourceCairoDir);
+        CopyFileToDirectory(vcruntime140, zipSourceCairoDir);
+        CopyFileToDirectory(msvcp140, zipSourceDirect2DDir);
+        CopyFileToDirectory(vcruntime140, zipSourceDirect2DDir);
+        CopyFileToDirectory(msvcp140, zipSourceSkiaDir);
+        CopyFileToDirectory(vcruntime140, zipSourceSkiaDir);
+        CopyFileToDirectory(msvcp140, zipSourceSkiaDemoDir);
+        CopyFileToDirectory(vcruntime140, zipSourceSkiaDemoDir);
+        CopyFileToDirectory(msvcp140, zipSourceWpfDir);
+        CopyFileToDirectory(vcruntime140, zipSourceWpfDir);
+    }
+
     Zip(zipSourceCairoDir, 
         zipTargetCairoFile, 
         GetFiles(zipSourceCairoDir.FullPath + "/*.dll") + 
@@ -160,12 +180,12 @@ Task("Zip-Files")
         zipTargetDirect2DFile, 
         GetFiles(zipSourceDirect2DDir.FullPath + "/*.dll") + 
         GetFiles(zipSourceDirect2DDir.FullPath + "/*.exe"));
-    
+
     Zip(zipSourceSkiaDir, 
         zipTargetSkiaFile, 
         GetFiles(zipSourceSkiaDir.FullPath + "/*.dll") + 
         GetFiles(zipSourceSkiaDir.FullPath + "/*.exe"));
-    
+
     if (IsRunningOnWindows())
     {
         Zip(zipSourceSkiaDemoDir, 
