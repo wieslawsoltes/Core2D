@@ -35,15 +35,15 @@ var zipRootDir = artifactsDir.Combine("zip");
 var platformZip = (platform == "AnyCPU") ? "x86" : platform;
 var dirSuffixZip = platformZip + "/" + configuration;
 var fileZipSuffix = platformZip + "-" + configuration + "-" + version + ".zip";
-var zipSourceCairoDir = (DirectoryPath)Directory("./src/Core2D.Avalonia.Cairo/bin/" + dirSuffixZip);
+var zipSourceCairoDir = (DirectoryPath)Directory("./apps/Core2D.Avalonia.Cairo/bin/" + dirSuffixZip);
 var zipTargetCairoFile = zipRootDir.CombineWithFilePath("Core2D.Avalonia.Cairo-" + fileZipSuffix);
-var zipSourceDirect2DDir = (DirectoryPath)Directory("./src/Core2D.Avalonia.Direct2D/bin/" + dirSuffixZip);
+var zipSourceDirect2DDir = (DirectoryPath)Directory("./apps/Core2D.Avalonia.Direct2D/bin/" + dirSuffixZip);
 var zipTargetDirect2DFile = zipRootDir.CombineWithFilePath("Core2D.Avalonia.Direct2D-" + fileZipSuffix);
-var zipSourceSkiaDir = (DirectoryPath)Directory("./src/Core2D.Avalonia.Skia/bin/" + dirSuffixZip);
+var zipSourceSkiaDir = (DirectoryPath)Directory("./apps/Core2D.Avalonia.Skia/bin/" + dirSuffixZip);
 var zipTargetSkiaFile = zipRootDir.CombineWithFilePath("Core2D.Avalonia.Skia-" + fileZipSuffix);
-var zipSourceSkiaDemoDir = (DirectoryPath)Directory("./src/Core2D.SkiaDemo/bin/" + dirSuffixZip);
+var zipSourceSkiaDemoDir = (DirectoryPath)Directory("./apps/Core2D.SkiaDemo/bin/" + dirSuffixZip);
 var zipTargetSkiaDemoFile = zipRootDir.CombineWithFilePath("Core2D.SkiaDemo-" + fileZipSuffix);
-var zipSourceWpfDir = (DirectoryPath)Directory("./src/Core2D.Wpf/bin/" + dirSuffixZip);
+var zipSourceWpfDir = (DirectoryPath)Directory("./apps/Core2D.Wpf/bin/" + dirSuffixZip);
 var zipTargetWpfFile = zipRootDir.CombineWithFilePath("Core2D.Wpf-" + fileZipSuffix);
 
 Task("Clean")
