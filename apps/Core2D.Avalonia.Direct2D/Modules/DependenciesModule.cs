@@ -35,6 +35,8 @@ namespace Core2D.Avalonia.Direct2D.Modules
             builder.RegisterType<NewtonsoftJsonSerializer>().As<IJsonSerializer>().InstancePerLifetimeScope();
             builder.RegisterType<PortableXamlSerializer>().As<IXamlSerializer>().InstancePerLifetimeScope();
             builder.RegisterType<PdfSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
+            builder.RegisterType<PdfSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
+            builder.RegisterType<SvgSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
             builder.RegisterType<EmfWriter>().As<IFileWriter>().InstancePerLifetimeScope();
             builder.RegisterType<DxfWriter>().As<IFileWriter>().InstancePerLifetimeScope();
             builder.RegisterType<CsvHelperReader>().As<ITextFieldReader<XDatabase>>().InstancePerLifetimeScope();
