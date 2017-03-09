@@ -145,7 +145,7 @@ Task("Run-Unit-Tests")
 });
 
 Task("Zip-Files")
-    .IsDependentOn("Run-Unit-Tests")
+    .IsDependentOn("Build") //.IsDependentOn("Run-Unit-Tests")
     .Does(() =>
 {
     Zip((DirectoryPath)Directory("./tests/"), 
