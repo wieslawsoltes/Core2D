@@ -6,6 +6,8 @@ using Core2D.Interfaces;
 using Core2D.Renderer;
 using FileSystem.DotNetFx;
 using FileWriter.PdfSharp;
+using FileWriter.PdfSkiaSharp;
+using FileWriter.SvgSkiaSharp;
 using Log.Trace;
 using Renderer.Avalonia;
 using ScriptRunner.Roslyn;
