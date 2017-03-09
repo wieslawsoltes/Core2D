@@ -3,6 +3,7 @@
 using System.Windows.Input;
 using Autofac;
 using Core2D.Editor;
+using Core2D.Editor.Bounds;
 using Core2D.Editor.Factories;
 using Core2D.Editor.Views.Interfaces;
 
@@ -21,6 +22,8 @@ namespace Core2D.Wpf.Modules
             builder.RegisterType<ShapeFactory>().As<IShapeFactory>().InstancePerLifetimeScope();
             builder.RegisterAssemblyTypes(typeof(ToolBase).Assembly).As<ToolBase>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterAssemblyTypes(typeof(PathToolBase).Assembly).As<PathToolBase>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterType<HitTest>().As<HitTest>().InstancePerLifetimeScope();
+            builder.RegisterAssemblyTypes(typeof(HitTestBase).Assembly).As<HitTestBase>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<ProjectEditorCommands>().AutoActivate().PropertiesAutowired().InstancePerLifetimeScope();
             builder.RegisterAssemblyTypes(typeof(ProjectEditorCommands).Assembly).AssignableTo<ICommand>().AsImplementedInterfaces().AsSelf().PropertiesAutowired().InstancePerLifetimeScope();
             builder.RegisterAssemblyTypes(typeof(IView).Assembly).As<IView>().InstancePerLifetimeScope();
