@@ -369,12 +369,12 @@ namespace Core2D.Editor.Bounds
                     return HitTestArc(arc, v, threshold, dx, dy);
                 case XCubicBezier cubic:
                     return HitTestCubicBezier(cubic, v, threshold, dx, dy);
-                case XQuadraticBezier quad:
-                    return HitTestQuadraticBezier(quad, v, threshold, dx, dy);
+                case XQuadraticBezier quadratic:
+                    return HitTestQuadraticBezier(quadratic, v, threshold, dx, dy);
                 case XPath path:
                     return HitTestPath(path, v, threshold, dx, dy);
-                case XRectangle rect:
-                    return HitTestRectangle(rect, v, threshold, dx, dy);
+                case XRectangle rectangle:
+                    return HitTestRectangle(rectangle, v, threshold, dx, dy);
                 case XEllipse ellipse:
                     return HitTestEllipse(ellipse, v, threshold, dx, dy);
                 case XImage image:
