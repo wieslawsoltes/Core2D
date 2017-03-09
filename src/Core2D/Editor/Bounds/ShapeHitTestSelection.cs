@@ -6,6 +6,7 @@ using System.Linq;
 using Core2D.Spatial;
 using Core2D.Shape;
 using Core2D.Shapes;
+using System;
 
 namespace Core2D.Editor.Bounds
 {
@@ -189,7 +190,7 @@ namespace Core2D.Editor.Bounds
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <returns></returns>
-        public static bool HitTestQadraticBezier(XQuadraticBezier quadraticBezier, Vector2[] selection, ISet<BaseShape> selected, double dx, double dy)
+        public static bool HitTestQuadraticBezier(XQuadraticBezier quadraticBezier, Vector2[] selection, ISet<BaseShape> selected, double dx, double dy)
         {
             var points = quadraticBezier.GetPoints().ToImmutableArray();
             if (ShapeBounds.Overlap(selection, points, dx, dy))
@@ -335,52 +336,35 @@ namespace Core2D.Editor.Bounds
         /// <returns></returns>
         public static bool HitTest(BaseShape shape, Rect2 rect, Vector2[] selection, ISet<BaseShape> selected, double threshold, double dx, double dy)
         {
-            if (shape is XPoint)
+            switch (shape)
             {
-                return HitTestPoint(shape as XPoint, rect, selected, threshold, dx, dy);
+                case XPoint point:
+                    return HitTestPoint(point, rect, selected, threshold, dx, dy);
+                case XLine line:
+                    return HitTestLine(line, rect, selected, threshold, dx, dy);
+                case XArc arc:
+                    return HitTestArc(arc, rect, selected, dx, dy);
+                case XCubicBezier cubic:
+                    return HitTestCubicBezier(cubic, selection, selected, dx, dy);
+                case XQuadraticBezier quadratic:
+                    return HitTestQuadraticBezier(quadratic, selection, selected, dx, dy);
+                case XPath path:
+                    return HitTestPath(path, selection, selected, dx, dy);
+                case XRectangle rectangle:
+                    return HitTestRectangle(rectangle, rect, selected, dx, dy);
+                case XEllipse ellipse:
+                    return HitTestEllipse(ellipse, rect, selected, dx, dy);
+                case XImage image:
+                    return HitTestImage(image, rect, selected, dx, dy);
+                case XText text:
+                    return HitTestText(text, rect, selected, dx, dy);
+                case XGroup group:
+                    return HitTestGroup(group, rect, selection, selected, threshold, dx, dy);
+                case null:
+                    return false;
+                default:
+                    throw new InvalidOperationException("Unknown shape type.");
             }
-            else if (shape is XLine)
-            {
-                return HitTestLine(shape as XLine, rect, selected, threshold, dx, dy);
-            }
-            else if (shape is XEllipse)
-            {
-                return HitTestEllipse(shape as XEllipse, rect, selected, dx, dy);
-            }
-            else if (shape is XRectangle)
-            {
-                return HitTestRectangle(shape as XRectangle, rect, selected, dx, dy);
-            }
-            else if (shape is XArc)
-            {
-                return HitTestArc(shape as XArc, rect, selected, dx, dy);
-            }
-            else if (shape is XCubicBezier)
-            {
-                return HitTestCubicBezier(shape as XCubicBezier, selection, selected, dx, dy);
-            }
-            else if (shape is XQuadraticBezier)
-            {
-                return HitTestQadraticBezier(shape as XQuadraticBezier, selection, selected, dx, dy);
-            }
-            else if (shape is XText)
-            {
-                return HitTestText(shape as XText, rect, selected, dx, dy);
-            }
-            else if (shape is XImage)
-            {
-                return HitTestImage(shape as XImage, rect, selected, dx, dy);
-            }
-            else if (shape is XPath)
-            {
-                return HitTestPath(shape as XPath, selection, selected, dx, dy);
-            }
-            else if (shape is XGroup)
-            {
-                return HitTestGroup(shape as XGroup, rect, selection, selected, threshold, dx, dy);
-            }
-
-            return false;
         }
 
         /// <summary>
