@@ -184,7 +184,7 @@ Task("Default")
   .IsDependentOn("Run-Unit-Tests");
 
 Task("AppVeyor")
-  .IsDependentOn("Run-Unit-Tests")
+  .IsDependentOn("Build") //.IsDependentOn("Run-Unit-Tests")
   .IsDependentOn("Zip-Files");
 
 RunTarget(target);
