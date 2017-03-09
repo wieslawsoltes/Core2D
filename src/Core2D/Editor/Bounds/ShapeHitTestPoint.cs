@@ -29,7 +29,6 @@ namespace Core2D.Editor.Bounds
             {
                 return point;
             }
-
             return null;
         }
 
@@ -317,7 +316,6 @@ namespace Core2D.Editor.Bounds
                     return path;
                 }
             }
-
             return null;
         }
 
@@ -345,7 +343,7 @@ namespace Core2D.Editor.Bounds
             {
                 return group;
             }
-
+            
             return null;
         }
 
@@ -360,52 +358,35 @@ namespace Core2D.Editor.Bounds
         /// <returns></returns>
         public static BaseShape HitTest(BaseShape shape, Vector2 v, double threshold, double dx, double dy)
         {
-            if (shape is XPoint)
+            switch (shape)
             {
-                return HitTestPoint(shape as XPoint, v, threshold, dx, dy);
+                case XPoint point:
+                    return HitTestPoint(point, v, threshold, dx, dy);
+                case XLine line:
+                    return HitTestLine(line, v, threshold, dx, dy);
+                case XRectangle rect:
+                    return HitTestRectangle(rect, v, threshold, dx, dy);
+                case XEllipse ellipse:
+                    return HitTestEllipse(ellipse, v, threshold, dx, dy);
+                case XArc arc:
+                    return HitTestArc(arc, v, threshold, dx, dy);
+                case XCubicBezier cubic:
+                    return HitTestCubicBezier(cubic, v, threshold, dx, dy);
+                case XQuadraticBezier quad:
+                    return HitTestQuadraticBezier(quad, v, threshold, dx, dy);
+                case XText text:
+                    return HitTestText(text, v, threshold, dx, dy);
+                case XImage image:
+                    return HitTestImage(image, v, threshold, dx, dy);
+                case XPath path:
+                    return HitTestPath(path, v, threshold, dx, dy);
+                case XGroup group:
+                    return HitTestGroup(group, v, threshold, dx, dy);
+                case null:
+                    return null;
+                default:
+                    throw new InvalidOperationException("Unknown shape type.");
             }
-            else if (shape is XLine)
-            {
-                return HitTestLine(shape as XLine, v, threshold, dx, dy);
-            }
-            else if (shape is XRectangle)
-            {
-                return HitTestRectangle(shape as XRectangle, v, threshold, dx, dy);
-            }
-            else if (shape is XEllipse)
-            {
-                return HitTestEllipse(shape as XEllipse, v, threshold, dx, dy);
-            }
-            else if (shape is XArc)
-            {
-                return HitTestArc(shape as XArc, v, threshold, dx, dy);
-            }
-            else if (shape is XCubicBezier)
-            {
-                return HitTestCubicBezier(shape as XCubicBezier, v, threshold, dx, dy);
-            }
-            else if (shape is XQuadraticBezier)
-            {
-                return HitTestQuadraticBezier(shape as XQuadraticBezier, v, threshold, dx, dy);
-            }
-            else if (shape is XText)
-            {
-                return HitTestText(shape as XText, v, threshold, dx, dy);
-            }
-            else if (shape is XImage)
-            {
-                return HitTestImage(shape as XImage, v, threshold, dx, dy);
-            }
-            else if (shape is XPath)
-            {
-                return HitTestPath(shape as XPath, v, threshold, dx, dy);
-            }
-            else if (shape is XGroup)
-            {
-                return HitTestGroup(shape as XGroup, v, threshold, dx, dy);
-            }
-
-            return null;
         }
 
         /// <summary>
@@ -427,7 +408,6 @@ namespace Core2D.Editor.Bounds
                     return result;
                 }
             }
-
             return null;
         }
 
@@ -445,7 +425,6 @@ namespace Core2D.Editor.Bounds
             {
                 return result;
             }
-
             return null;
         }
     }
