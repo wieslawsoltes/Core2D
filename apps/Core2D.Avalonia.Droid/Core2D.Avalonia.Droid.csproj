@@ -168,13 +168,13 @@
       <Version>0.4.1-build2729-alpha</Version>
     </PackageReference>
     <PackageReference Include="Avalonia.Controls.PanAndZoom">
-      <Version>0.4.1-build80-alpha</Version>
+      <Version>0.4.1-build85-alpha</Version>
     </PackageReference>
     <PackageReference Include="Avalonia.Skia.Android">
       <Version>0.4.1-build2729-alpha</Version>
     </PackageReference>
     <PackageReference Include="Avalonia.Xaml.Behaviors">
-      <Version>0.4.1-build333-alpha</Version>
+      <Version>0.4.1-build370-alpha</Version>
     </PackageReference>
     <PackageReference Include="CsvHelper">
       <Version>3.0.0-beta7</Version>

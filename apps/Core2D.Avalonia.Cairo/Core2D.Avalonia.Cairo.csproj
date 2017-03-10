@@ -60,9 +60,9 @@
     <PackageReference Include="Autofac" Version="4.4.0" />
     <PackageReference Include="Avalonia" Version="0.4.1-build2842-alpha" />
     <PackageReference Include="Avalonia.Cairo" Version="0.4.1-build2842-alpha" />
-    <PackageReference Include="Avalonia.Controls.PanAndZoom" Version="0.4.1-build80-alpha" />
+    <PackageReference Include="Avalonia.Controls.PanAndZoom" Version="0.4.1-build85-alpha" />
     <PackageReference Include="Avalonia.Gtk" Version="0.4.1-build2842-alpha" />
-    <PackageReference Include="Avalonia.Xaml.Behaviors" Version="0.4.1-build333-alpha" />
+    <PackageReference Include="Avalonia.Xaml.Behaviors" Version="0.4.1-build371-alpha" />
     <PackageReference Include="Portable.Xaml" Version="0.15.0" />
     <PackageReference Include="Serilog.Sinks.Trace" Version="2.1.0" />
     <PackageReference Include="SkiaSharp" Version="1.56.1" />

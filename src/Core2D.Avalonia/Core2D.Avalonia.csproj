@@ -1,25 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net45</TargetFrameworks>
+    <TargetFrameworks>netstandard1.1</TargetFrameworks>
     <OutputType>Library</OutputType>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <EnableDefaultCompileItems>False</EnableDefaultCompileItems>
   </PropertyGroup>
 
   <Import Project="..\..\build.targets" />
-
-  <ItemGroup Condition="'$(TargetFramework)' == 'net45'">
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
-    <Reference Include="WindowsBase" />
-  </ItemGroup>
 
   <ItemGroup>
     <Compile Include="**\*.cs" Exclude="obj\**" />
@@ -36,8 +24,8 @@
   <ItemGroup>
     <PackageReference Include="Autofac" Version="4.4.0" />
     <PackageReference Include="Avalonia" Version="0.4.1-build2842-alpha" />
-    <PackageReference Include="Avalonia.Controls.PanAndZoom" Version="0.4.1-build80-alpha" />
-    <PackageReference Include="Avalonia.Xaml.Behaviors" Version="0.4.1-build333-alpha" />
+    <PackageReference Include="Avalonia.Controls.PanAndZoom" Version="0.4.1-build85-alpha" />
+    <PackageReference Include="Avalonia.Xaml.Behaviors" Version="0.4.1-build371-alpha" />
     <PackageReference Include="Serilog" Version="2.4.0" />
     <PackageReference Include="Splat" Version="2.0.0" />
     <PackageReference Include="Sprache" Version="2.1.0" />
@@ -47,7 +35,6 @@
     <PackageReference Include="System.Reactive.Interfaces" Version="3.0.0" />
     <PackageReference Include="System.Reactive.Linq" Version="3.0.0" />
     <PackageReference Include="System.Reactive.PlatformServices" Version="3.0.0" />
-    <PackageReference Include="System.Reactive.Windows.Threading" Version="3.0.0" />
   </ItemGroup>
 
   <ItemGroup>

@@ -581,7 +581,7 @@
     <PackageReference Include="SkiaSharp.Views" Version="1.56.1" />
     <PackageReference Include="System.Collections.Immutable" Version="1.3.1" />
     <PackageReference Include="System.Windows.Interactivity.WPF" Version="2.0.20525" />
-    <PackageReference Include="Wpf.Controls.PanAndZoom" Version="0.4.1-build80-alpha" />
+    <PackageReference Include="Wpf.Controls.PanAndZoom" Version="0.4.1-build85-alpha" />
     <PackageReference Include="Xceed.Wpf.AvalonDock" Version="2.9.15603.14400" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
