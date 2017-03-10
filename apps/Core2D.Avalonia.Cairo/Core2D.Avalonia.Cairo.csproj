@@ -58,16 +58,17 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Autofac" Version="4.4.0" />
-    <PackageReference Include="Avalonia" Version="0.4.1-build2729-alpha" />
-    <PackageReference Include="Avalonia.Cairo" Version="0.4.1-build2729-alpha" />
+    <PackageReference Include="Avalonia" Version="0.4.1-build2842-alpha" />
+    <PackageReference Include="Avalonia.Cairo" Version="0.4.1-build2842-alpha" />
     <PackageReference Include="Avalonia.Controls.PanAndZoom" Version="0.4.1-build80-alpha" />
-    <PackageReference Include="Avalonia.Gtk" Version="0.4.1-build2729-alpha" />
+    <PackageReference Include="Avalonia.Gtk" Version="0.4.1-build2842-alpha" />
     <PackageReference Include="Avalonia.Xaml.Behaviors" Version="0.4.1-build333-alpha" />
     <PackageReference Include="Portable.Xaml" Version="0.15.0" />
+    <PackageReference Include="Serilog.Sinks.Trace" Version="2.1.0" />
     <PackageReference Include="SkiaSharp" Version="1.56.1" />
     <PackageReference Include="SkiaSharp.Views" Version="1.56.1" />
-    <PackageReference Include="Serilog" Version="1.5.14" />
-    <PackageReference Include="Splat" Version="1.6.2" />
+    <PackageReference Include="Serilog" Version="2.4.0" />
+    <PackageReference Include="Splat" Version="2.0.0" />
     <PackageReference Include="Sprache" Version="2.1.0" />
     <PackageReference Include="System.Collections.Immutable" Version="1.3.1" />
     <PackageReference Include="System.Reactive" Version="3.0.0" />
