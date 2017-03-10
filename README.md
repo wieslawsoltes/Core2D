@@ -36,7 +36,7 @@ git submodule update --init --recursive
 
 ### Build using IDE
 
-* [Visual Studio Community 2015](https://www.visualstudio.com/en-us/products/visual-studio-community-vs.aspx) for `Windows` builds.
+* [Visual Studio Community 2017](https://www.visualstudio.com/en-us/products/visual-studio-community-vs.aspx) for `Windows` builds.
 
 Open `Core2D.sln` in selected IDE and run `Build` command.
 
