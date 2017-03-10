@@ -36,7 +36,7 @@ git submodule update --init --recursive
 
 ### Build using IDE
 
-* [Visual Studio Community 2017](https://www.visualstudio.com/en-us/products/visual-studio-community-vs.aspx) for `Windows` builds.
+* [Visual Studio Community 2017](https://www.visualstudio.com/pl/vs/community/) for `Windows` builds.
 
 Open `Core2D.sln` in selected IDE and run `Build` command.
 
@@ -57,6 +57,9 @@ $ ./build.sh --target "Default" --platform "AnyCPU" --configuration "Release"
 ## Package Sources
 
 * https://api.nuget.org/v3/index.json
+* https://www.myget.org/F/avalonia-ci/api/v2
+* https://www.myget.org/F/xamlbehaviors-nightly/api/v2
+* https://www.myget.org/F/panandzoom-nightly/api/v2
 
 ## SkiaSharp
 
