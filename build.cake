@@ -119,28 +119,20 @@ Task("Run-Unit-Tests")
     .IsDependentOn("Build")
     .Does(() =>
 {
-    string pattern = "./tests/**/bin/" + platform + "/" + configuration + "/" + unitTestsFramework + "/*.UnitTests.dll";
-    if (isPlatformAnyCPU || isPlatformX86)
+    var assemblies = GetFiles("./tests/**/bin/" + platform + "/" + configuration + "/" + unitTestsFramework + "/*.UnitTests.dll");
+    var settings = new XUnit2Settings { 
+        ToolPath = (isPlatformAnyCPU || isPlatformX86) ? 
+            "./tools/xunit.runner.console/tools/xunit.console.x86.exe" :
+            "./tools/xunit.runner.console/tools/xunit.console.exe",
+        OutputDirectory = testResultsDir,
+        XmlReportV1 = true,
+        NoAppDomain = true,
+        Parallelism = ParallelismOption.None,
+        ShadowCopy = false
+    };
+    foreach (var assembly in assemblies)
     {
-        XUnit2(pattern, new XUnit2Settings { 
-            ToolPath = "./tools/xunit.runner.console/tools/xunit.console.x86.exe",
-            OutputDirectory = testResultsDir,
-            XmlReportV1 = true,
-            NoAppDomain = true
-        });
-    }
-    else if (isPlatformX64)
-    {
-        XUnit2(pattern, new XUnit2Settings { 
-            ToolPath = "./tools/xunit.runner.console/tools/xunit.console.exe",
-            OutputDirectory = testResultsDir,
-            XmlReportV1 = true,
-            NoAppDomain = true
-        });
-    }
-    else
-    {
-        throw new PlatformNotSupportedException("Not supported XUnit platform.");
+        XUnit2(assembly.FullPath, settings);
     }
 });
 
