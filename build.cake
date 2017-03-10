@@ -12,7 +12,7 @@ var isPlatformAnyCPU = StringComparer.OrdinalIgnoreCase.Equals(platform, "AnyCPU
 var isPlatformX86 = StringComparer.OrdinalIgnoreCase.Equals(platform, "x86");
 var isPlatformX64 = StringComparer.OrdinalIgnoreCase.Equals(platform, "x64");
 var MSBuildSolution = "./Core2D.sln";
-var unitTestsFramework = "net45";
+var unitTestsFramework = "net461";
 var version = XmlPeek("./build.targets", "//*[local-name()='Version']/text()");
 Information("Version: {0}", version);
 if (BuildSystem.AppVeyor.IsRunningOnAppVeyor)
