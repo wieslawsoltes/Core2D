@@ -136,13 +136,10 @@ Task("Run-Unit-Tests")
     }
 });
 
-Task("Zip-Files")
-    .IsDependentOn("Run-Unit-Tests")
+Task("Copy-Redist-Files")
+    .IsDependentOn("Build")
     .Does(() =>
 {
-    Zip((DirectoryPath)Directory("./tests/"), 
-        zipRootDir.CombineWithFilePath("UnitTests-" + configuration + "-" + version + ".zip"));
-
     if (IsRunningOnWindows() && (isPlatformAnyCPU || isPlatformX86 || isPlatformX64))
     {
         var msvcp140 = (isPlatformAnyCPU || isPlatformX86) ?
@@ -162,7 +159,13 @@ Task("Zip-Files")
         CopyFileToDirectory(msvcp140, zipSourceWpfDir);
         CopyFileToDirectory(vcruntime140, zipSourceWpfDir);
     }
+});
 
+Task("Zip-Files")
+    //.IsDependentOn("Copy-Redist-Files")
+    .IsDependentOn("Run-Unit-Tests")
+    .Does(() =>
+{
     Zip(zipSourceCairoDir, 
         zipTargetCairoFile, 
         GetFiles(zipSourceCairoDir.FullPath + "/*.dll") + 
