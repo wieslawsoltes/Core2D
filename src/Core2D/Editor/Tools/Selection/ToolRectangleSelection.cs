@@ -3,34 +3,33 @@
 using Core2D.Project;
 using Core2D.Shape;
 using Core2D.Shapes;
-using Core2D.Shapes.Interfaces;
 using Core2D.Style;
 
 namespace Core2D.Editor.Tools.Selection
 {
     /// <summary>
-    /// Helper class for <see cref="XLine"/> shape selection.
+    /// Helper class for <see cref="XRectangle"/> shape selection.
     /// </summary>
-    public class LineSelection
+    public class ToolRectangleSelection
     {
         private readonly XLayer _layer;
-        private readonly ILine _line;
+        private readonly XRectangle _rectangle;
         private readonly ShapeStyle _style;
         private readonly BaseShape _point;
-        private XPoint _startHelperPoint;
-        private XPoint _endHelperPoint;
+        private XPoint _topLeftHelperPoint;
+        private XPoint _bottomRightHelperPoint;
 
         /// <summary>
-        /// Initialize new instance of <see cref="LineSelection"/> class.
+        /// Initialize new instance of <see cref="ToolRectangleSelection"/> class.
         /// </summary>
         /// <param name="layer">The selection shapes layer.</param>
         /// <param name="shape">The selected shape.</param>
         /// <param name="style">The selection shapes style.</param>
         /// <param name="point">The selection point shape.</param>
-        public LineSelection(XLayer layer, ILine shape, ShapeStyle style, BaseShape point)
+        public ToolRectangleSelection(XLayer layer, XRectangle shape, ShapeStyle style, BaseShape point)
         {
             _layer = layer;
-            _line = shape;
+            _rectangle = shape;
             _style = style;
             _point = point;
         }
@@ -40,11 +39,11 @@ namespace Core2D.Editor.Tools.Selection
         /// </summary>
         public void ToStateOne()
         {
-            _startHelperPoint = XPoint.Create(0, 0, _point);
-            _endHelperPoint = XPoint.Create(0, 0, _point);
+            _topLeftHelperPoint = XPoint.Create(0, 0, _point);
+            _bottomRightHelperPoint = XPoint.Create(0, 0, _point);
 
-            _layer.Shapes = _layer.Shapes.Add(_startHelperPoint);
-            _layer.Shapes = _layer.Shapes.Add(_endHelperPoint);
+            _layer.Shapes = _layer.Shapes.Add(_topLeftHelperPoint);
+            _layer.Shapes = _layer.Shapes.Add(_bottomRightHelperPoint);
         }
 
         /// <summary>
@@ -52,16 +51,16 @@ namespace Core2D.Editor.Tools.Selection
         /// </summary>
         public void Move()
         {
-            if (_startHelperPoint != null)
+            if (_topLeftHelperPoint != null)
             {
-                _startHelperPoint.X = _line.Start.X;
-                _startHelperPoint.Y = _line.Start.Y;
+                _topLeftHelperPoint.X = _rectangle.TopLeft.X;
+                _topLeftHelperPoint.Y = _rectangle.TopLeft.Y;
             }
 
-            if (_endHelperPoint != null)
+            if (_bottomRightHelperPoint != null)
             {
-                _endHelperPoint.X = _line.End.X;
-                _endHelperPoint.Y = _line.End.Y;
+                _bottomRightHelperPoint.X = _rectangle.BottomRight.X;
+                _bottomRightHelperPoint.Y = _rectangle.BottomRight.Y;
             }
 
             _layer.Invalidate();
@@ -72,16 +71,16 @@ namespace Core2D.Editor.Tools.Selection
         /// </summary>
         public void Remove()
         {
-            if (_startHelperPoint != null)
+            if (_topLeftHelperPoint != null)
             {
-                _layer.Shapes = _layer.Shapes.Remove(_startHelperPoint);
-                _startHelperPoint = null;
+                _layer.Shapes = _layer.Shapes.Remove(_topLeftHelperPoint);
+                _topLeftHelperPoint = null;
             }
 
-            if (_endHelperPoint != null)
+            if (_bottomRightHelperPoint != null)
             {
-                _layer.Shapes = _layer.Shapes.Remove(_endHelperPoint);
-                _endHelperPoint = null;
+                _layer.Shapes = _layer.Shapes.Remove(_bottomRightHelperPoint);
+                _bottomRightHelperPoint = null;
             }
 
             _layer.Invalidate();

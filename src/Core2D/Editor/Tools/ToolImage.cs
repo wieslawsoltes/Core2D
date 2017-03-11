@@ -15,7 +15,7 @@ namespace Core2D.Editor.Tools
         private readonly IServiceProvider _serviceProvider;
         private ToolState _currentState = ToolState.None;
         private XImage _image;
-        private ImageSelection _selection;
+        private ToolImageSelection _selection;
 
         /// <inheritdoc/>
         public override string Name => "Image";
@@ -152,7 +152,7 @@ namespace Core2D.Editor.Tools
         {
             base.ToStateOne();
             var editor = _serviceProvider.GetService<ProjectEditor>();
-            _selection = new ImageSelection(
+            _selection = new ToolImageSelection(
                 editor.Project.CurrentContainer.HelperLayer,
                 _image,
                 editor.Project.Options.HelperStyle,

@@ -10,7 +10,7 @@ namespace Core2D.Editor.Tools.Selection
     /// <summary>
     /// Helper class for <see cref="XText"/> shape selection.
     /// </summary>
-    public class TextSelection
+    public class ToolTextSelection
     {
         private readonly XLayer _layer;
         private readonly XText _text;
@@ -21,13 +21,13 @@ namespace Core2D.Editor.Tools.Selection
         private XRectangle _helperRectangle;
 
         /// <summary>
-        /// Initialize new instance of <see cref="TextSelection"/> class.
+        /// Initialize new instance of <see cref="ToolTextSelection"/> class.
         /// </summary>
         /// <param name="layer">The selection shapes layer.</param>
         /// <param name="shape">The selected shape.</param>
         /// <param name="style">The selection shapes style.</param>
         /// <param name="point">The selection point shape.</param>
-        public TextSelection(XLayer layer, XText shape, ShapeStyle style, BaseShape point)
+        public ToolTextSelection(XLayer layer, XText shape, ShapeStyle style, BaseShape point)
         {
             _layer = layer;
             _text = shape;

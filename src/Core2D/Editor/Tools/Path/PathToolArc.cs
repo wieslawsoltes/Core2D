@@ -20,7 +20,7 @@ namespace Core2D.Editor.Tools.Path
         private readonly IServiceProvider _serviceProvider;
         private ToolState _currentState = ToolState.None;
         private XPathArc _arc = new XPathArc();
-        private LineSelection _selection;
+        private ToolLineSelection _selection;
         private const double _defaultRotationAngle = 0.0;
         private const bool _defaultIsLargeArc = false;
         private const XSweepDirection _defaultSweepDirection = XSweepDirection.Clockwise;
@@ -186,7 +186,7 @@ namespace Core2D.Editor.Tools.Path
         {
             base.ToStateOne();
             var editor = _serviceProvider.GetService<ProjectEditor>();
-            _selection = new LineSelection(
+            _selection = new ToolLineSelection(
                 editor.Project.CurrentContainer.HelperLayer,
                 _arc,
                 editor.Project.Options.HelperStyle,

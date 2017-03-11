@@ -13,7 +13,7 @@ namespace Core2D.Editor.Tools.Selection
     /// <summary>
     /// Helper class for <see cref="XArc"/> shape selection.
     /// </summary>
-    public class ArcSelection
+    public class ToolArcSelection
     {
         private readonly XLayer _layer;
         private readonly IArc _arc;
@@ -29,13 +29,13 @@ namespace Core2D.Editor.Tools.Selection
         private XPoint _endHelperPoint;
 
         /// <summary>
-        /// Initialize new instance of <see cref="ArcSelection"/> class.
+        /// Initialize new instance of <see cref="ToolArcSelection"/> class.
         /// </summary>
         /// <param name="layer">The selection shapes layer.</param>
         /// <param name="shape">The selected shape.</param>
         /// <param name="style">The selection shapes style.</param>
         /// <param name="point">The selection point shape.</param>
-        public ArcSelection(XLayer layer, IArc shape, ShapeStyle style, BaseShape point)
+        public ToolArcSelection(XLayer layer, IArc shape, ShapeStyle style, BaseShape point)
         {
             _layer = layer;
             _arc = shape;

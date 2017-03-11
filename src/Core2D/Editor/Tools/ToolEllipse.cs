@@ -15,7 +15,7 @@ namespace Core2D.Editor.Tools
         private readonly IServiceProvider _serviceProvider;
         private ToolState _currentState = ToolState.None;
         private XEllipse _ellipse;
-        private EllipseSelection _selection;
+        private ToolEllipseSelection _selection;
 
         /// <inheritdoc/>
         public override string Name => "Ellipse";
@@ -149,7 +149,7 @@ namespace Core2D.Editor.Tools
         {
             base.ToStateOne();
             var editor = _serviceProvider.GetService<ProjectEditor>();
-            _selection = new EllipseSelection(
+            _selection = new ToolEllipseSelection(
                 editor.Project.CurrentContainer.HelperLayer,
                 _ellipse,
                 editor.Project.Options.HelperStyle,

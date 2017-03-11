@@ -15,7 +15,7 @@ namespace Core2D.Editor.Tools
         private readonly IServiceProvider _serviceProvider;
         private ToolState _currentState = ToolState.None;
         private XLine _line;
-        private LineSelection _selection;
+        private ToolLineSelection _selection;
 
         /// <inheritdoc/>
         public override string Name => "Line";
@@ -157,7 +157,7 @@ namespace Core2D.Editor.Tools
         {
             base.ToStateOne();
             var editor = _serviceProvider.GetService<ProjectEditor>();
-            _selection = new LineSelection(
+            _selection = new ToolLineSelection(
                 editor.Project.CurrentContainer.HelperLayer,
                 _line,
                 editor.Project.Options.HelperStyle,

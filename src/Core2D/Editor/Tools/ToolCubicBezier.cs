@@ -15,7 +15,7 @@ namespace Core2D.Editor.Tools
         private readonly IServiceProvider _serviceProvider;
         private ToolState _currentState = ToolState.None;
         private XCubicBezier _cubicBezier;
-        private CubicBezierSelection _selection;
+        private ToolCubicBezierSelection _selection;
 
         /// <inheritdoc/>
         public override string Name => "CubicBezier";
@@ -226,7 +226,7 @@ namespace Core2D.Editor.Tools
         {
             base.ToStateOne();
             var editor = _serviceProvider.GetService<ProjectEditor>();
-            _selection = new CubicBezierSelection(
+            _selection = new ToolCubicBezierSelection(
                 editor.Project.CurrentContainer.HelperLayer,
                 _cubicBezier,
                 editor.Project.Options.HelperStyle,

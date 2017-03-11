@@ -9,33 +9,31 @@ using Core2D.Style;
 namespace Core2D.Editor.Tools.Selection
 {
     /// <summary>
-    /// Helper class for <see cref="XCubicBezier"/> shape selection.
+    /// Helper class for <see cref="XQuadraticBezier"/> shape selection.
     /// </summary>
-    public class CubicBezierSelection
+    public class ToolQuadraticBezierSelection
     {
         private readonly XLayer _layer;
-        private readonly ICubicBezier _cubicBezier;
+        private readonly IQuadraticBezier _quadraticBezier;
         private readonly ShapeStyle _style;
         private readonly BaseShape _point;
         private XLine _line12;
-        private XLine _line43;
-        private XLine _line23;
+        private XLine _line32;
         private XPoint _helperPoint1;
         private XPoint _helperPoint2;
         private XPoint _helperPoint3;
-        private XPoint _helperPoint4;
 
         /// <summary>
-        /// Initialize new instance of <see cref="CubicBezierSelection"/> class.
+        /// Initialize new instance of <see cref="ToolQuadraticBezierSelection"/> class.
         /// </summary>
         /// <param name="layer">The selection shapes layer.</param>
         /// <param name="shape">The selected shape.</param>
         /// <param name="style">The selection shapes style.</param>
         /// <param name="point">The selection point shape.</param>
-        public CubicBezierSelection(XLayer layer, ICubicBezier shape, ShapeStyle style, BaseShape point)
+        public ToolQuadraticBezierSelection(XLayer layer, IQuadraticBezier shape, ShapeStyle style, BaseShape point)
         {
             _layer = layer;
-            _cubicBezier = shape;
+            _quadraticBezier = shape;
             _style = style;
             _point = point;
         }
@@ -46,9 +44,10 @@ namespace Core2D.Editor.Tools.Selection
         public void ToStateOne()
         {
             _helperPoint1 = XPoint.Create(0, 0, _point);
+            _helperPoint3 = XPoint.Create(0, 0, _point);
+
             _layer.Shapes = _layer.Shapes.Add(_helperPoint1);
-            _helperPoint4 = XPoint.Create(0, 0, _point);
-            _layer.Shapes = _layer.Shapes.Add(_helperPoint4);
+            _layer.Shapes = _layer.Shapes.Add(_helperPoint3);
         }
 
         /// <summary>
@@ -57,24 +56,12 @@ namespace Core2D.Editor.Tools.Selection
         public void ToStateTwo()
         {
             _line12 = XLine.Create(0, 0, _style, null);
+            _line32 = XLine.Create(0, 0, _style, null);
             _helperPoint2 = XPoint.Create(0, 0, _point);
 
             _layer.Shapes = _layer.Shapes.Add(_line12);
+            _layer.Shapes = _layer.Shapes.Add(_line32);
             _layer.Shapes = _layer.Shapes.Add(_helperPoint2);
-        }
-
-        /// <summary>
-        /// Transfer selection state to <see cref="ToolState.Three"/>.
-        /// </summary>
-        public void ToStateThree()
-        {
-            _line43 = XLine.Create(0, 0, _style, null);
-            _line23 = XLine.Create(0, 0, _style, null);
-            _helperPoint3 = XPoint.Create(0, 0, _point);
-
-            _layer.Shapes = _layer.Shapes.Add(_line43);
-            _layer.Shapes = _layer.Shapes.Add(_line23);
-            _layer.Shapes = _layer.Shapes.Add(_helperPoint3);
         }
 
         /// <summary>
@@ -84,50 +71,36 @@ namespace Core2D.Editor.Tools.Selection
         {
             if (_line12 != null)
             {
-                _line12.Start.X = _cubicBezier.Point1.X;
-                _line12.Start.Y = _cubicBezier.Point1.Y;
-                _line12.End.X = _cubicBezier.Point2.X;
-                _line12.End.Y = _cubicBezier.Point2.Y;
+                _line12.Start.X = _quadraticBezier.Point1.X;
+                _line12.Start.Y = _quadraticBezier.Point1.Y;
+                _line12.End.X = _quadraticBezier.Point2.X;
+                _line12.End.Y = _quadraticBezier.Point2.Y;
             }
 
-            if (_line43 != null)
+            if (_line32 != null)
             {
-                _line43.Start.X = _cubicBezier.Point4.X;
-                _line43.Start.Y = _cubicBezier.Point4.Y;
-                _line43.End.X = _cubicBezier.Point3.X;
-                _line43.End.Y = _cubicBezier.Point3.Y;
-            }
-
-            if (_line23 != null)
-            {
-                _line23.Start.X = _cubicBezier.Point2.X;
-                _line23.Start.Y = _cubicBezier.Point2.Y;
-                _line23.End.X = _cubicBezier.Point3.X;
-                _line23.End.Y = _cubicBezier.Point3.Y;
+                _line32.Start.X = _quadraticBezier.Point3.X;
+                _line32.Start.Y = _quadraticBezier.Point3.Y;
+                _line32.End.X = _quadraticBezier.Point2.X;
+                _line32.End.Y = _quadraticBezier.Point2.Y;
             }
 
             if (_helperPoint1 != null)
             {
-                _helperPoint1.X = _cubicBezier.Point1.X;
-                _helperPoint1.Y = _cubicBezier.Point1.Y;
+                _helperPoint1.X = _quadraticBezier.Point1.X;
+                _helperPoint1.Y = _quadraticBezier.Point1.Y;
             }
 
             if (_helperPoint2 != null)
             {
-                _helperPoint2.X = _cubicBezier.Point2.X;
-                _helperPoint2.Y = _cubicBezier.Point2.Y;
+                _helperPoint2.X = _quadraticBezier.Point2.X;
+                _helperPoint2.Y = _quadraticBezier.Point2.Y;
             }
 
             if (_helperPoint3 != null)
             {
-                _helperPoint3.X = _cubicBezier.Point3.X;
-                _helperPoint3.Y = _cubicBezier.Point3.Y;
-            }
-
-            if (_helperPoint4 != null)
-            {
-                _helperPoint4.X = _cubicBezier.Point4.X;
-                _helperPoint4.Y = _cubicBezier.Point4.Y;
+                _helperPoint3.X = _quadraticBezier.Point3.X;
+                _helperPoint3.Y = _quadraticBezier.Point3.Y;
             }
 
             _layer.Invalidate();
@@ -144,16 +117,10 @@ namespace Core2D.Editor.Tools.Selection
                 _line12 = null;
             }
 
-            if (_line43 != null)
+            if (_line32 != null)
             {
-                _layer.Shapes = _layer.Shapes.Remove(_line43);
-                _line43 = null;
-            }
-
-            if (_line23 != null)
-            {
-                _layer.Shapes = _layer.Shapes.Remove(_line23);
-                _line23 = null;
+                _layer.Shapes = _layer.Shapes.Remove(_line32);
+                _line32 = null;
             }
 
             if (_helperPoint1 != null)
@@ -172,12 +139,6 @@ namespace Core2D.Editor.Tools.Selection
             {
                 _layer.Shapes = _layer.Shapes.Remove(_helperPoint3);
                 _helperPoint3 = null;
-            }
-
-            if (_helperPoint4 != null)
-            {
-                _layer.Shapes = _layer.Shapes.Remove(_helperPoint4);
-                _helperPoint4 = null;
             }
 
             _layer.Invalidate();

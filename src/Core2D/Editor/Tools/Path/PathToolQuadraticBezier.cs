@@ -18,7 +18,7 @@ namespace Core2D.Editor.Tools.Path
         private readonly IServiceProvider _serviceProvider;
         private ToolState _currentState = ToolState.None;
         private XPathQuadraticBezier _quadraticBezier = new XPathQuadraticBezier();
-        private QuadraticBezierSelection _selection;
+        private ToolQuadraticBezierSelection _selection;
 
         /// <inheritdoc/>
         public override string Name => "QuadraticBezier";
@@ -208,7 +208,7 @@ namespace Core2D.Editor.Tools.Path
         {
             base.ToStateOne();
             var editor = _serviceProvider.GetService<ProjectEditor>();
-            _selection = new QuadraticBezierSelection(
+            _selection = new ToolQuadraticBezierSelection(
                 editor.Project.CurrentContainer.HelperLayer,
                 _quadraticBezier,
                 editor.Project.Options.HelperStyle,

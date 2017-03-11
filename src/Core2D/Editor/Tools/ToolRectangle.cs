@@ -15,7 +15,7 @@ namespace Core2D.Editor.Tools
         private readonly IServiceProvider _serviceProvider;
         private ToolState _currentState = ToolState.None;
         private XRectangle _rectangle;
-        private RectangleSelection _selection;
+        private ToolRectangleSelection _selection;
 
         /// <inheritdoc/>
         public override string Name => "Rectangle";
@@ -148,7 +148,7 @@ namespace Core2D.Editor.Tools
         {
             base.ToStateOne();
             var editor = _serviceProvider.GetService<ProjectEditor>();
-            _selection = new RectangleSelection(
+            _selection = new ToolRectangleSelection(
                 editor.Project.CurrentContainer.HelperLayer,
                 _rectangle,
                 editor.Project.Options.HelperStyle,

@@ -15,7 +15,7 @@ namespace Core2D.Editor.Tools
         private readonly IServiceProvider _serviceProvider;
         private ToolState _currentState = ToolState.None;
         private XText _text;
-        private TextSelection _selection;
+        private ToolTextSelection _selection;
 
         /// <inheritdoc/>
         public override string Name => "Text";
@@ -146,7 +146,7 @@ namespace Core2D.Editor.Tools
         {
             base.ToStateOne();
             var editor = _serviceProvider.GetService<ProjectEditor>();
-            _selection = new TextSelection(
+            _selection = new ToolTextSelection(
                 editor.Project.CurrentContainer.HelperLayer,
                 _text,
                 editor.Project.Options.HelperStyle,

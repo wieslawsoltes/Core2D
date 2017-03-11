@@ -8,28 +8,28 @@ using Core2D.Style;
 namespace Core2D.Editor.Tools.Selection
 {
     /// <summary>
-    /// Helper class for <see cref="XRectangle"/> shape selection.
+    /// Helper class for <see cref="XEllipse"/> shape selection.
     /// </summary>
-    public class RectangleSelection
+    public class ToolEllipseSelection
     {
         private readonly XLayer _layer;
-        private readonly XRectangle _rectangle;
+        private readonly XEllipse _ellipse;
         private readonly ShapeStyle _style;
         private readonly BaseShape _point;
         private XPoint _topLeftHelperPoint;
         private XPoint _bottomRightHelperPoint;
 
         /// <summary>
-        /// Initialize new instance of <see cref="RectangleSelection"/> class.
+        /// Initialize new instance of <see cref="ToolEllipseSelection"/> class.
         /// </summary>
         /// <param name="layer">The selection shapes layer.</param>
         /// <param name="shape">The selected shape.</param>
         /// <param name="style">The selection shapes style.</param>
         /// <param name="point">The selection point shape.</param>
-        public RectangleSelection(XLayer layer, XRectangle shape, ShapeStyle style, BaseShape point)
+        public ToolEllipseSelection(XLayer layer, XEllipse shape, ShapeStyle style, BaseShape point)
         {
             _layer = layer;
-            _rectangle = shape;
+            _ellipse = shape;
             _style = style;
             _point = point;
         }
@@ -53,14 +53,14 @@ namespace Core2D.Editor.Tools.Selection
         {
             if (_topLeftHelperPoint != null)
             {
-                _topLeftHelperPoint.X = _rectangle.TopLeft.X;
-                _topLeftHelperPoint.Y = _rectangle.TopLeft.Y;
+                _topLeftHelperPoint.X = _ellipse.TopLeft.X;
+                _topLeftHelperPoint.Y = _ellipse.TopLeft.Y;
             }
 
             if (_bottomRightHelperPoint != null)
             {
-                _bottomRightHelperPoint.X = _rectangle.BottomRight.X;
-                _bottomRightHelperPoint.Y = _rectangle.BottomRight.Y;
+                _bottomRightHelperPoint.X = _ellipse.BottomRight.X;
+                _bottomRightHelperPoint.Y = _ellipse.BottomRight.Y;
             }
 
             _layer.Invalidate();

@@ -8,28 +8,28 @@ using Core2D.Style;
 namespace Core2D.Editor.Tools.Selection
 {
     /// <summary>
-    /// Helper class for <see cref="XEllipse"/> shape selection.
+    /// Helper class for <see cref="XImage"/> shape selection.
     /// </summary>
-    public class EllipseSelection
+    public class ToolImageSelection
     {
         private readonly XLayer _layer;
-        private readonly XEllipse _ellipse;
+        private readonly XImage _image;
         private readonly ShapeStyle _style;
         private readonly BaseShape _point;
         private XPoint _topLeftHelperPoint;
         private XPoint _bottomRightHelperPoint;
 
         /// <summary>
-        /// Initialize new instance of <see cref="EllipseSelection"/> class.
+        /// Initialize new instance of <see cref="ToolImageSelection"/> class.
         /// </summary>
         /// <param name="layer">The selection shapes layer.</param>
         /// <param name="shape">The selected shape.</param>
         /// <param name="style">The selection shapes style.</param>
         /// <param name="point">The selection point shape.</param>
-        public EllipseSelection(XLayer layer, XEllipse shape, ShapeStyle style, BaseShape point)
+        public ToolImageSelection(XLayer layer, XImage shape, ShapeStyle style, BaseShape point)
         {
             _layer = layer;
-            _ellipse = shape;
+            _image = shape;
             _style = style;
             _point = point;
         }
@@ -53,14 +53,14 @@ namespace Core2D.Editor.Tools.Selection
         {
             if (_topLeftHelperPoint != null)
             {
-                _topLeftHelperPoint.X = _ellipse.TopLeft.X;
-                _topLeftHelperPoint.Y = _ellipse.TopLeft.Y;
+                _topLeftHelperPoint.X = _image.TopLeft.X;
+                _topLeftHelperPoint.Y = _image.TopLeft.Y;
             }
 
             if (_bottomRightHelperPoint != null)
             {
-                _bottomRightHelperPoint.X = _ellipse.BottomRight.X;
-                _bottomRightHelperPoint.Y = _ellipse.BottomRight.Y;
+                _bottomRightHelperPoint.X = _image.BottomRight.X;
+                _bottomRightHelperPoint.Y = _image.BottomRight.Y;
             }
 
             _layer.Invalidate();

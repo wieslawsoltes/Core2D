@@ -19,7 +19,7 @@ namespace Core2D.Editor.Tools
         private XArc _arc;
         private bool _connectedPoint3;
         private bool _connectedPoint4;
-        private ArcSelection _selection;
+        private ToolArcSelection _selection;
 
         /// <inheritdoc/>
         public override string Name => "Arc";
@@ -240,7 +240,7 @@ namespace Core2D.Editor.Tools
         {
             base.ToStateOne();
             var editor = _serviceProvider.GetService<ProjectEditor>();
-            _selection = new ArcSelection(
+            _selection = new ToolArcSelection(
                 editor.Project.CurrentContainer.HelperLayer,
                 _arc,
                 editor.Project.Options.HelperStyle,

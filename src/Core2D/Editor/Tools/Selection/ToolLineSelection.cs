@@ -3,33 +3,34 @@
 using Core2D.Project;
 using Core2D.Shape;
 using Core2D.Shapes;
+using Core2D.Shapes.Interfaces;
 using Core2D.Style;
 
 namespace Core2D.Editor.Tools.Selection
 {
     /// <summary>
-    /// Helper class for <see cref="XImage"/> shape selection.
+    /// Helper class for <see cref="XLine"/> shape selection.
     /// </summary>
-    public class ImageSelection
+    public class ToolLineSelection
     {
         private readonly XLayer _layer;
-        private readonly XImage _image;
+        private readonly ILine _line;
         private readonly ShapeStyle _style;
         private readonly BaseShape _point;
-        private XPoint _topLeftHelperPoint;
-        private XPoint _bottomRightHelperPoint;
+        private XPoint _startHelperPoint;
+        private XPoint _endHelperPoint;
 
         /// <summary>
-        /// Initialize new instance of <see cref="ImageSelection"/> class.
+        /// Initialize new instance of <see cref="ToolLineSelection"/> class.
         /// </summary>
         /// <param name="layer">The selection shapes layer.</param>
         /// <param name="shape">The selected shape.</param>
         /// <param name="style">The selection shapes style.</param>
         /// <param name="point">The selection point shape.</param>
-        public ImageSelection(XLayer layer, XImage shape, ShapeStyle style, BaseShape point)
+        public ToolLineSelection(XLayer layer, ILine shape, ShapeStyle style, BaseShape point)
         {
             _layer = layer;
-            _image = shape;
+            _line = shape;
             _style = style;
             _point = point;
         }
@@ -39,11 +40,11 @@ namespace Core2D.Editor.Tools.Selection
         /// </summary>
         public void ToStateOne()
         {
-            _topLeftHelperPoint = XPoint.Create(0, 0, _point);
-            _bottomRightHelperPoint = XPoint.Create(0, 0, _point);
+            _startHelperPoint = XPoint.Create(0, 0, _point);
+            _endHelperPoint = XPoint.Create(0, 0, _point);
 
-            _layer.Shapes = _layer.Shapes.Add(_topLeftHelperPoint);
-            _layer.Shapes = _layer.Shapes.Add(_bottomRightHelperPoint);
+            _layer.Shapes = _layer.Shapes.Add(_startHelperPoint);
+            _layer.Shapes = _layer.Shapes.Add(_endHelperPoint);
         }
 
         /// <summary>
@@ -51,16 +52,16 @@ namespace Core2D.Editor.Tools.Selection
         /// </summary>
         public void Move()
         {
-            if (_topLeftHelperPoint != null)
+            if (_startHelperPoint != null)
             {
-                _topLeftHelperPoint.X = _image.TopLeft.X;
-                _topLeftHelperPoint.Y = _image.TopLeft.Y;
+                _startHelperPoint.X = _line.Start.X;
+                _startHelperPoint.Y = _line.Start.Y;
             }
 
-            if (_bottomRightHelperPoint != null)
+            if (_endHelperPoint != null)
             {
-                _bottomRightHelperPoint.X = _image.BottomRight.X;
-                _bottomRightHelperPoint.Y = _image.BottomRight.Y;
+                _endHelperPoint.X = _line.End.X;
+                _endHelperPoint.Y = _line.End.Y;
             }
 
             _layer.Invalidate();
@@ -71,16 +72,16 @@ namespace Core2D.Editor.Tools.Selection
         /// </summary>
         public void Remove()
         {
-            if (_topLeftHelperPoint != null)
+            if (_startHelperPoint != null)
             {
-                _layer.Shapes = _layer.Shapes.Remove(_topLeftHelperPoint);
-                _topLeftHelperPoint = null;
+                _layer.Shapes = _layer.Shapes.Remove(_startHelperPoint);
+                _startHelperPoint = null;
             }
 
-            if (_bottomRightHelperPoint != null)
+            if (_endHelperPoint != null)
             {
-                _layer.Shapes = _layer.Shapes.Remove(_bottomRightHelperPoint);
-                _bottomRightHelperPoint = null;
+                _layer.Shapes = _layer.Shapes.Remove(_endHelperPoint);
+                _endHelperPoint = null;
             }
 
             _layer.Invalidate();
