@@ -123,32 +123,21 @@ namespace Core2D.Editor.Tools
             var figure = Geometry.Figures.LastOrDefault();
             if (figure != null)
             {
-                var segment = figure.Segments.LastOrDefault();
-                if (segment != null)
+                switch (figure.Segments.LastOrDefault())
                 {
-                    if (segment is XLineSegment)
-                    {
-                        return (segment as XLineSegment).Point;
-                    }
-                    else if (segment is XArcSegment)
-                    {
-                        return (segment as XArcSegment).Point;
-                    }
-                    else if (segment is XCubicBezierSegment)
-                    {
-                        return (segment as XCubicBezierSegment).Point3;
-                    }
-                    else if (segment is XQuadraticBezierSegment)
-                    {
-                        return (segment as XQuadraticBezierSegment).Point2;
-                    }
-                }
-                else
-                {
-                    return figure.StartPoint;
+                    case XLineSegment line:
+                        return line.Point;
+                    case XArcSegment arc:
+                        return arc.Point;
+                    case XCubicBezierSegment cubic:
+                        return cubic.Point3;
+                    case XQuadraticBezierSegment quadratic:
+                        return quadratic.Point2;
+                    default:
+                    case null:
+                        return figure.StartPoint;
                 }
             }
-
             throw new Exception("Can not find valid last point from path.");
         }
 
