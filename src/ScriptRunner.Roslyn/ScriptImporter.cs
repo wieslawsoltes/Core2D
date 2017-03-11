@@ -25,6 +25,9 @@ namespace ScriptRunner.Roslyn
         /// <returns>The portable references array.</returns>
         public static PortableExecutableReference[] GetReferences()
         {
+#if NETCORE5_0
+            return new PortableExecutableReference[] { };
+#else
             var assemblyPath = Path.GetDirectoryName(typeof(object).GetTypeInfo().Assembly.Location);
             var immutableCollectionsPath = Path.GetDirectoryName(typeof(ImmutableArray<>).GetTypeInfo().Assembly.Location);
             var executingPath = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
@@ -39,6 +42,7 @@ namespace ScriptRunner.Roslyn
                 MetadataReference.CreateFromFile(Path.Combine(executingPath, "Core2D.Spatial.dll")),
                 MetadataReference.CreateFromFile(Assembly.GetEntryAssembly().Location),
             };
+#endif
         }
 
         /// <summary>

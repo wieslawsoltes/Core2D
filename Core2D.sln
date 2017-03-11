@@ -13,6 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{C7162582
 		build.ps1 = build.ps1
 		build.sh = build.sh
 		build.targets = build.targets
+		uwp.targets = uwp.targets
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D", "src\Core2D\Core2D.csproj", "{F822EC0C-2501-487D-87A8-B8D28A761385}"

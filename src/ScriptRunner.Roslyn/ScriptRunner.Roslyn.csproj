@@ -1,11 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net45;netcoreapp1.0</TargetFrameworks>
+    <TargetFrameworks>net45;netcoreapp1.0;uap10.0</TargetFrameworks>
     <OutputType>Library</OutputType>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
   </PropertyGroup>
 
+  <Import Condition="'$(TargetFramework)' == 'uap10.0'" Project="..\..\uwp.targets" />
   <Import Project="..\..\build.targets" />
 
   <ItemGroup>
@@ -18,6 +19,10 @@
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp1.0'">
     <PackageReference Include="System.Runtime.Loader" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'uap10.0'">
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform " Version="5.2.2" />
   </ItemGroup>
 
   <ItemGroup>
