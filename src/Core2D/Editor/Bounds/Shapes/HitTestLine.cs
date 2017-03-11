@@ -16,7 +16,7 @@ namespace Core2D.Editor.Bounds.Shapes
         {
             var line = shape as XLine;
             if (line == null)
-                throw new ArgumentNullException("shape");
+                throw new ArgumentNullException(nameof(shape));
 
             var pointHitTest = registered[typeof(XPoint)];
 
@@ -37,7 +37,7 @@ namespace Core2D.Editor.Bounds.Shapes
         {
             var line = shape as XLine;
             if (line == null)
-                throw new ArgumentNullException("shape");
+                throw new ArgumentNullException(nameof(shape));
 
             var a = new Point2(line.Start.X, line.Start.Y);
             var b = new Point2(line.End.X, line.End.Y);
@@ -50,7 +50,7 @@ namespace Core2D.Editor.Bounds.Shapes
         {
             var line = shape as XLine;
             if (line == null)
-                throw new ArgumentNullException("shape");
+                throw new ArgumentNullException(nameof(shape));
 
             var a = new Point2(line.Start.X, line.Start.Y);
             var b = new Point2(line.End.X, line.End.Y);

@@ -16,7 +16,7 @@ namespace Core2D.Editor.Bounds.Shapes
         {
             var quadratic = shape as XQuadraticBezier;
             if (quadratic == null)
-                throw new ArgumentNullException("shape");
+                throw new ArgumentNullException(nameof(shape));
 
             var pointHitTest = registered[typeof(XPoint)];
 
@@ -42,7 +42,7 @@ namespace Core2D.Editor.Bounds.Shapes
         {
             var quadratic = shape as XQuadraticBezier;
             if (quadratic == null)
-                throw new ArgumentNullException("shape");
+                throw new ArgumentNullException(nameof(shape));
 
             return HitTestHelper.Contains(quadratic.GetPoints(), target);
         }
@@ -51,7 +51,7 @@ namespace Core2D.Editor.Bounds.Shapes
         {
             var quadratic = shape as XQuadraticBezier;
             if (quadratic == null)
-                throw new ArgumentNullException("shape");
+                throw new ArgumentNullException(nameof(shape));
 
             return HitTestHelper.Overlap(quadratic.GetPoints(), target);
         }

@@ -16,7 +16,7 @@ namespace Core2D.Editor.Bounds.Shapes
         {
             var point = shape as XPoint;
             if (point == null)
-                throw new ArgumentNullException("shape");
+                throw new ArgumentNullException(nameof(shape));
 
             if (Point2.FromXY(point.X, point.Y).ExpandToRect(radius).Contains(target.X, target.Y))
             {
@@ -30,7 +30,7 @@ namespace Core2D.Editor.Bounds.Shapes
         {
             var point = shape as XPoint;
             if (point == null)
-                throw new ArgumentNullException("shape");
+                throw new ArgumentNullException(nameof(shape));
 
             return Point2.FromXY(point.X, point.Y).ExpandToRect(radius).Contains(target.X, target.Y);
         }
@@ -39,7 +39,7 @@ namespace Core2D.Editor.Bounds.Shapes
         {
             var point = shape as XPoint;
             if (point == null)
-                throw new ArgumentNullException("shape");
+                throw new ArgumentNullException(nameof(shape));
 
             return Point2.FromXY(point.X, point.Y).ExpandToRect(radius).IntersectsWith(target);
         }

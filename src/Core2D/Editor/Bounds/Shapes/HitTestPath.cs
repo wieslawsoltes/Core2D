@@ -16,7 +16,7 @@ namespace Core2D.Editor.Bounds.Shapes
         {
             var path = shape as XPath;
             if (path == null)
-                throw new ArgumentNullException("shape");
+                throw new ArgumentNullException(nameof(shape));
 
             var pointHitTest = registered[typeof(XPoint)];
 
@@ -35,7 +35,7 @@ namespace Core2D.Editor.Bounds.Shapes
         {
             var path = shape as XPath;
             if (path == null)
-                throw new ArgumentNullException("shape");
+                throw new ArgumentNullException(nameof(shape));
 
             return HitTestHelper.Contains(path.GetPoints(), target);
         }
@@ -44,7 +44,7 @@ namespace Core2D.Editor.Bounds.Shapes
         {
             var path = shape as XPath;
             if (path == null)
-                throw new ArgumentNullException("shape");
+                throw new ArgumentNullException(nameof(shape));
 
             return HitTestHelper.Overlap(path.GetPoints(), target);
         }

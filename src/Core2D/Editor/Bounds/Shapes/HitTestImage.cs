@@ -16,7 +16,7 @@ namespace Core2D.Editor.Bounds.Shapes
         {
             var image = shape as XImage;
             if (image == null)
-                throw new ArgumentNullException("shape");
+                throw new ArgumentNullException(nameof(shape));
 
             var pointHitTest = registered[typeof(XPoint)];
 
@@ -37,7 +37,7 @@ namespace Core2D.Editor.Bounds.Shapes
         {
             var image = shape as XImage;
             if (image == null)
-                throw new ArgumentNullException("shape");
+                throw new ArgumentNullException(nameof(shape));
 
             return Rect2.FromPoints(
                 image.TopLeft.X,
@@ -50,7 +50,7 @@ namespace Core2D.Editor.Bounds.Shapes
         {
             var image = shape as XImage;
             if (image == null)
-                throw new ArgumentNullException("shape");
+                throw new ArgumentNullException(nameof(shape));
 
             return Rect2.FromPoints(
                 image.TopLeft.X,

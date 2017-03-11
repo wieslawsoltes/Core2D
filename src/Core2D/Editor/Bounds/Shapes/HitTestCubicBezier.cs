@@ -16,7 +16,7 @@ namespace Core2D.Editor.Bounds.Shapes
         {
             var cubic = shape as XCubicBezier;
             if (cubic == null)
-                throw new ArgumentNullException("shape");
+                throw new ArgumentNullException(nameof(shape));
 
             var pointHitTest = registered[typeof(XPoint)];
 
@@ -47,7 +47,7 @@ namespace Core2D.Editor.Bounds.Shapes
         {
             var cubic = shape as XCubicBezier;
             if (cubic == null)
-                throw new ArgumentNullException("shape");
+                throw new ArgumentNullException(nameof(shape));
 
             return HitTestHelper.Contains(cubic.GetPoints(), target);
         }
@@ -56,7 +56,7 @@ namespace Core2D.Editor.Bounds.Shapes
         {
             var cubic = shape as XCubicBezier;
             if (cubic == null)
-                throw new ArgumentNullException("shape");
+                throw new ArgumentNullException(nameof(shape));
 
             return HitTestHelper.Overlap(cubic.GetPoints(), target);
         }
