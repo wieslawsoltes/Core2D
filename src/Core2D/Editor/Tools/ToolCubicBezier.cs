@@ -12,9 +12,9 @@ namespace Core2D.Editor.Tools
     /// </summary>
     public class ToolCubicBezier : ToolBase
     {
-        public enum ToolState { None, One, Two, Three }
+        public enum State { Point1, Point4, Point2, Point3 }
         private readonly IServiceProvider _serviceProvider;
-        private ToolState _currentState = ToolState.None;
+        private State _currentState = State.Point1;
         private XCubicBezier _cubicBezier;
         private ToolCubicBezierSelection _selection;
 
@@ -39,7 +39,7 @@ namespace Core2D.Editor.Tools
             double sy = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, editor.Project.Options.SnapY) : y;
             switch (_currentState)
             {
-                case ToolState.None:
+                case State.Point1:
                     {
                         var style = editor.Project.CurrentStyleLibrary.Selected;
                         _cubicBezier = XCubicBezier.Create(
@@ -59,11 +59,11 @@ namespace Core2D.Editor.Tools
                         editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         ToStateOne();
                         Move(_cubicBezier);
-                        _currentState = ToolState.One;
+                        _currentState = State.Point4;
                         editor.CancelAvailable = true;
                     }
                     break;
-                case ToolState.One:
+                case State.Point4:
                     {
                         if (_cubicBezier != null)
                         {
@@ -81,11 +81,11 @@ namespace Core2D.Editor.Tools
                             editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                             ToStateTwo();
                             Move(_cubicBezier);
-                            _currentState = ToolState.Two;
+                            _currentState = State.Point2;
                         }
                     }
                     break;
-                case ToolState.Two:
+                case State.Point2:
                     {
                         if (_cubicBezier != null)
                         {
@@ -101,11 +101,11 @@ namespace Core2D.Editor.Tools
                             editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                             ToStateThree();
                             Move(_cubicBezier);
-                            _currentState = ToolState.Three;
+                            _currentState = State.Point3;
                         }
                     }
                     break;
-                case ToolState.Three:
+                case State.Point3:
                     {
                         if (_cubicBezier != null)
                         {
@@ -122,7 +122,7 @@ namespace Core2D.Editor.Tools
                             Remove();
                             base.Finalize(_cubicBezier);
                             editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, _cubicBezier);
-                            _currentState = ToolState.None;
+                            _currentState = State.Point1;
                             editor.CancelAvailable = false;
                         }
                     }
@@ -137,16 +137,16 @@ namespace Core2D.Editor.Tools
             var editor = _serviceProvider.GetService<ProjectEditor>();
             switch (_currentState)
             {
-                case ToolState.None:
+                case State.Point1:
                     break;
-                case ToolState.One:
-                case ToolState.Two:
-                case ToolState.Three:
+                case State.Point4:
+                case State.Point2:
+                case State.Point3:
                     {
                         editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_cubicBezier);
                         editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         Remove();
-                        _currentState = ToolState.None;
+                        _currentState = State.Point1;
                         editor.CancelAvailable = false;
                     }
                     break;
@@ -162,7 +162,7 @@ namespace Core2D.Editor.Tools
             double sy = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, editor.Project.Options.SnapY) : y;
             switch (_currentState)
             {
-                case ToolState.None:
+                case State.Point1:
                     {
                         if (editor.Project.Options.TryToConnect)
                         {
@@ -170,7 +170,7 @@ namespace Core2D.Editor.Tools
                         }
                     }
                     break;
-                case ToolState.One:
+                case State.Point4:
                     {
                         if (_cubicBezier != null)
                         {
@@ -189,7 +189,7 @@ namespace Core2D.Editor.Tools
                         }
                     }
                     break;
-                case ToolState.Two:
+                case State.Point2:
                     {
                         if (_cubicBezier != null)
                         {
@@ -204,7 +204,7 @@ namespace Core2D.Editor.Tools
                         }
                     }
                     break;
-                case ToolState.Three:
+                case State.Point3:
                     {
                         if (_cubicBezier != null)
                         {
@@ -223,7 +223,7 @@ namespace Core2D.Editor.Tools
         }
 
         /// <summary>
-        /// Transfer tool state to <see cref="ToolState.One"/>.
+        /// Transfer tool state to <see cref="State.Point4"/>.
         /// </summary>
         public void ToStateOne()
         {
@@ -238,7 +238,7 @@ namespace Core2D.Editor.Tools
         }
 
         /// <summary>
-        /// Transfer tool state to <see cref="ToolState.Two"/>.
+        /// Transfer tool state to <see cref="State.Point2"/>.
         /// </summary>
         public void ToStateTwo()
         {
@@ -246,7 +246,7 @@ namespace Core2D.Editor.Tools
         }
 
         /// <summary>
-        /// Transfer tool state to <see cref="ToolState.Three"/>.
+        /// Transfer tool state to <see cref="State.Point3"/>.
         /// </summary>
         public void ToStateThree()
         {

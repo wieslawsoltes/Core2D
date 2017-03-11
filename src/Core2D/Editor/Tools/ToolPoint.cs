@@ -10,9 +10,9 @@ namespace Core2D.Editor.Tools
     /// </summary>
     public class ToolPoint : ToolBase
     {
-        public enum ToolState { None }
+        public enum State { Point }
         private readonly IServiceProvider _serviceProvider;
-        private ToolState _currentState = ToolState.None;
+        private State _currentState = State.Point;
         private XPoint _point;
 
         /// <inheritdoc/>
@@ -36,7 +36,7 @@ namespace Core2D.Editor.Tools
             double sy = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, editor.Project.Options.SnapY) : y;
             switch (_currentState)
             {
-                case ToolState.None:
+                case State.Point:
                     {
                         _point = XPoint.Create(sx, sy, editor.Project.Options.PointShape);
 
@@ -65,7 +65,7 @@ namespace Core2D.Editor.Tools
             double sy = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, editor.Project.Options.SnapY) : y;
             switch (_currentState)
             {
-                case ToolState.None:
+                case State.Point:
                     {
                         if (editor.Project.Options.TryToConnect)
                         {

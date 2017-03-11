@@ -15,9 +15,9 @@ namespace Core2D.Editor.Tools.Path
     /// </summary>
     public class PathToolLine : PathToolBase
     {
-        public enum ToolState { None, One }
+        public enum State { Start, End }
         private readonly IServiceProvider _serviceProvider;
-        private ToolState _currentState = ToolState.None;
+        private State _currentState = State.Start;
         private XPathLine _line = new XPathLine();
         private ToolLineSelection _selection;
 
@@ -43,7 +43,7 @@ namespace Core2D.Editor.Tools.Path
             double sy = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, editor.Project.Options.SnapY) : y;
             switch (_currentState)
             {
-                case ToolState.None:
+                case State.Start:
                     {
                         _line.Start = editor.TryToGetConnectionPoint(sx, sy) ?? XPoint.Create(sx, sy, editor.Project.Options.PointShape);
                         if (!pathTool.IsInitialized)
@@ -63,11 +63,11 @@ namespace Core2D.Editor.Tools.Path
                         editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         ToStateOne();
                         Move(null);
-                        _currentState = ToolState.One;
+                        _currentState = State.End;
                         editor.CancelAvailable = true;
                     }
                     break;
-                case ToolState.One:
+                case State.End:
                     {
                         _line.End.X = sx;
                         _line.End.Y = sy;
@@ -89,7 +89,7 @@ namespace Core2D.Editor.Tools.Path
                             editor.Project.Options.DefaultIsSmoothJoin);
                         editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         Move(null);
-                        _currentState = ToolState.One;
+                        _currentState = State.End;
                     }
                     break;
             }
@@ -103,9 +103,9 @@ namespace Core2D.Editor.Tools.Path
             var pathTool = _serviceProvider.GetService<ToolPath>();
             switch (_currentState)
             {
-                case ToolState.None:
+                case State.Start:
                     break;
-                case ToolState.One:
+                case State.End:
                     {
                         pathTool.RemoveLastSegment<XLineSegment>();
 
@@ -121,7 +121,7 @@ namespace Core2D.Editor.Tools.Path
                             editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         }
                         pathTool.DeInitializeWorkingPath();
-                        _currentState = ToolState.None;
+                        _currentState = State.Start;
                         editor.CancelAvailable = false;
                     }
                     break;
@@ -137,7 +137,7 @@ namespace Core2D.Editor.Tools.Path
             double sy = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, editor.Project.Options.SnapY) : y;
             switch (_currentState)
             {
-                case ToolState.None:
+                case State.Start:
                     {
                         if (editor.Project.Options.TryToConnect)
                         {
@@ -145,7 +145,7 @@ namespace Core2D.Editor.Tools.Path
                         }
                     }
                     break;
-                case ToolState.One:
+                case State.End:
                     {
                         if (editor.Project.Options.TryToConnect)
                         {
@@ -161,7 +161,7 @@ namespace Core2D.Editor.Tools.Path
         }
 
         /// <summary>
-        /// Transfer tool state to <see cref="ToolState.One"/>.
+        /// Transfer tool state to <see cref="State.End"/>.
         /// </summary>
         public void ToStateOne()
         {
@@ -188,7 +188,7 @@ namespace Core2D.Editor.Tools.Path
         {
             base.Remove();
 
-            _currentState = ToolState.None;
+            _currentState = State.Start;
 
             _selection.Remove();
             _selection = null;

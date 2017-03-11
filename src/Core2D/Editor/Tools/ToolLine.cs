@@ -12,9 +12,9 @@ namespace Core2D.Editor.Tools
     /// </summary>
     public class ToolLine : ToolBase
     {
-        public enum ToolState { None, One }
+        public enum State { Start, End }
         private readonly IServiceProvider _serviceProvider;
-        private ToolState _currentState = ToolState.None;
+        private State _currentState = State.Start;
         private XLine _line;
         private ToolLineSelection _selection;
 
@@ -39,7 +39,7 @@ namespace Core2D.Editor.Tools
             double sy = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, editor.Project.Options.SnapY) : y;
             switch (_currentState)
             {
-                case ToolState.None:
+                case State.Start:
                     {
                         var style = editor.Project.CurrentStyleLibrary.Selected;
                         _line = XLine.Create(
@@ -63,11 +63,11 @@ namespace Core2D.Editor.Tools
                         editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         ToStateOne();
                         Move(_line);
-                        _currentState = ToolState.One;
+                        _currentState = State.End;
                         editor.CancelAvailable = true;
                     }
                     break;
-                case ToolState.One:
+                case State.End:
                     {
                         if (_line != null)
                         {
@@ -89,7 +89,7 @@ namespace Core2D.Editor.Tools
                             Remove();
                             base.Finalize(_line);
                             editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, _line);
-                            _currentState = ToolState.None;
+                            _currentState = State.Start;
                             editor.CancelAvailable = false;
                         }
                     }
@@ -104,14 +104,14 @@ namespace Core2D.Editor.Tools
             var editor = _serviceProvider.GetService<ProjectEditor>();
             switch (_currentState)
             {
-                case ToolState.None:
+                case State.Start:
                     break;
-                case ToolState.One:
+                case State.End:
                     {
                         editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_line);
                         editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         Remove();
-                        _currentState = ToolState.None;
+                        _currentState = State.Start;
                         editor.CancelAvailable = false;
                     }
                     break;
@@ -127,7 +127,7 @@ namespace Core2D.Editor.Tools
             double sy = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, editor.Project.Options.SnapY) : y;
             switch (_currentState)
             {
-                case ToolState.None:
+                case State.Start:
                     {
                         if (editor.Project.Options.TryToConnect)
                         {
@@ -135,7 +135,7 @@ namespace Core2D.Editor.Tools
                         }
                     }
                     break;
-                case ToolState.One:
+                case State.End:
                     {
                         if (_line != null)
                         {
@@ -154,7 +154,7 @@ namespace Core2D.Editor.Tools
         }
 
         /// <summary>
-        /// Transfer tool state to <see cref="ToolState.One"/>.
+        /// Transfer tool state to <see cref="State.End"/>.
         /// </summary>
         public void ToStateOne()
         {

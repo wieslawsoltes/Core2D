@@ -15,9 +15,9 @@ namespace Core2D.Editor.Tools.Path
     /// </summary>
     public class PathToolQuadraticBezier : PathToolBase
     {
-        public enum ToolState { None, One, Two }
+        public enum State { Point1, Point3, Point2 }
         private readonly IServiceProvider _serviceProvider;
-        private ToolState _currentState = ToolState.None;
+        private State _currentState = State.Point1;
         private XPathQuadraticBezier _quadraticBezier = new XPathQuadraticBezier();
         private ToolQuadraticBezierSelection _selection;
 
@@ -43,7 +43,7 @@ namespace Core2D.Editor.Tools.Path
             double sy = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, editor.Project.Options.SnapY) : y;
             switch (_currentState)
             {
-                case ToolState.None:
+                case State.Point1:
                     {
                         _quadraticBezier.Point1 = editor.TryToGetConnectionPoint(sx, sy) ?? XPoint.Create(sx, sy, editor.Project.Options.PointShape);
                         if (!pathTool.IsInitialized)
@@ -65,11 +65,11 @@ namespace Core2D.Editor.Tools.Path
                         editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         ToStateOne();
                         Move(null);
-                        _currentState = ToolState.One;
+                        _currentState = State.Point3;
                         editor.CancelAvailable = true;
                     }
                     break;
-                case ToolState.One:
+                case State.Point3:
                     {
                         _quadraticBezier.Point3.X = sx;
                         _quadraticBezier.Point3.Y = sy;
@@ -87,10 +87,10 @@ namespace Core2D.Editor.Tools.Path
                         editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         ToStateTwo();
                         Move(null);
-                        _currentState = ToolState.Two;
+                        _currentState = State.Point2;
                     }
                     break;
-                case ToolState.Two:
+                case State.Point2:
                     {
                         _quadraticBezier.Point2.X = sx;
                         _quadraticBezier.Point2.Y = sy;
@@ -118,7 +118,7 @@ namespace Core2D.Editor.Tools.Path
                         Remove();
                         ToStateOne();
                         Move(null);
-                        _currentState = ToolState.One;
+                        _currentState = State.Point3;
                     }
                     break;
             }
@@ -132,10 +132,10 @@ namespace Core2D.Editor.Tools.Path
             var pathTool = _serviceProvider.GetService<ToolPath>();
             switch (_currentState)
             {
-                case ToolState.None:
+                case State.Point1:
                     break;
-                case ToolState.One:
-                case ToolState.Two:
+                case State.Point3:
+                case State.Point2:
                     {
                         pathTool.RemoveLastSegment<XQuadraticBezierSegment>();
 
@@ -151,7 +151,7 @@ namespace Core2D.Editor.Tools.Path
                             editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         }
                         pathTool.DeInitializeWorkingPath();
-                        _currentState = ToolState.None;
+                        _currentState = State.Point1;
                         editor.CancelAvailable = false;
                     }
                     break;
@@ -167,7 +167,7 @@ namespace Core2D.Editor.Tools.Path
             double sy = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, editor.Project.Options.SnapY) : y;
             switch (_currentState)
             {
-                case ToolState.None:
+                case State.Point1:
                     {
                         if (editor.Project.Options.TryToConnect)
                         {
@@ -175,7 +175,7 @@ namespace Core2D.Editor.Tools.Path
                         }
                     }
                     break;
-                case ToolState.One:
+                case State.Point3:
                     {
                         if (editor.Project.Options.TryToConnect)
                         {
@@ -189,7 +189,7 @@ namespace Core2D.Editor.Tools.Path
                         Move(null);
                     }
                     break;
-                case ToolState.Two:
+                case State.Point2:
                     {
                         if (editor.Project.Options.TryToConnect)
                         {
@@ -205,7 +205,7 @@ namespace Core2D.Editor.Tools.Path
         }
 
         /// <summary>
-        /// Transfer tool state to <see cref="ToolState.One"/>.
+        /// Transfer tool state to <see cref="State.Point3"/>.
         /// </summary>
         public void ToStateOne()
         {
@@ -220,7 +220,7 @@ namespace Core2D.Editor.Tools.Path
         }
 
         /// <summary>
-        /// Transfer tool state to <see cref="ToolState.Two"/>.
+        /// Transfer tool state to <see cref="State.Point2"/>.
         /// </summary>
         public void ToStateTwo()
         {
@@ -240,7 +240,7 @@ namespace Core2D.Editor.Tools.Path
         {
             base.Remove();
 
-            _currentState = ToolState.None;
+            _currentState = State.Point1;
 
             _selection.Remove();
             _selection = null;

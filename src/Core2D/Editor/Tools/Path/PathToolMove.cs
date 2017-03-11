@@ -10,7 +10,9 @@ namespace Core2D.Editor.Tools.Path
     /// </summary>
     public class PathToolMove : PathToolBase
     {
+        public enum State { Move }
         private readonly IServiceProvider _serviceProvider;
+        private State _currentState = State.Move;
 
         /// <inheritdoc/>
         public override string Name => "Move";
@@ -31,9 +33,16 @@ namespace Core2D.Editor.Tools.Path
             var editor = _serviceProvider.GetService<ProjectEditor>();
             double sx = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, editor.Project.Options.SnapX) : x;
             double sy = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, editor.Project.Options.SnapY) : y;
-            if (editor.Project.Options.TryToConnect)
+            switch (_currentState)
             {
-                editor.TryToHoverShape(sx, sy);
+                case State.Move:
+                    {
+                        if (editor.Project.Options.TryToConnect)
+                        {
+                            editor.TryToHoverShape(sx, sy);
+                        }
+                    }
+                    break;
             }
         }
 
@@ -41,21 +50,26 @@ namespace Core2D.Editor.Tools.Path
         public override void LeftDown(double x, double y)
         {
             base.LeftDown(x, y);
-
             var editor = _serviceProvider.GetService<ProjectEditor>();
-            var pathTool = _serviceProvider.GetService<ToolPath>();
-
-            editor.CurrentPathTool = pathTool.PreviousPathTool;
-
             double sx = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, editor.Project.Options.SnapX) : x;
             double sy = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, editor.Project.Options.SnapY) : y;
-            var start = editor.TryToGetConnectionPoint(sx, sy) ?? XPoint.Create(sx, sy, editor.Project.Options.PointShape);
-            pathTool.GeometryContext.BeginFigure(
-                    start,
-                    editor.Project.Options.DefaultIsFilled,
-                    editor.Project.Options.DefaultIsClosed);
+            switch (_currentState)
+            {
+                case State.Move:
+                    {
+                        var pathTool = _serviceProvider.GetService<ToolPath>();
+                        editor.CurrentPathTool = pathTool.PreviousPathTool;
 
-            editor.CurrentPathTool.LeftDown(x, y);
+                        var start = editor.TryToGetConnectionPoint(sx, sy) ?? XPoint.Create(sx, sy, editor.Project.Options.PointShape);
+                        pathTool.GeometryContext.BeginFigure(
+                                start,
+                                editor.Project.Options.DefaultIsFilled,
+                                editor.Project.Options.DefaultIsClosed);
+
+                        editor.CurrentPathTool.LeftDown(x, y);
+                    }
+                    break;
+            }
         }
     }
 }
