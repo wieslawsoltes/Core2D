@@ -12,6 +12,7 @@ namespace Core2D.Editor.Tools
     /// </summary>
     public class ToolQuadraticBezier : ToolBase
     {
+        public enum ToolState { None, One, Two }
         private readonly IServiceProvider _serviceProvider;
         private ToolState _currentState = ToolState.None;
         private XQuadraticBezier _quadraticBezier;
@@ -183,10 +184,11 @@ namespace Core2D.Editor.Tools
             }
         }
 
-        /// <inheritdoc/>
-        public override void ToStateOne()
+        /// <summary>
+        /// Transfer tool state to <see cref="ToolState.One"/>.
+        /// </summary>
+        public void ToStateOne()
         {
-            base.ToStateOne();
             var editor = _serviceProvider.GetService<ProjectEditor>();
             _selection = new ToolQuadraticBezierSelection(
                 editor.Project.CurrentContainer.HelperLayer,
@@ -197,11 +199,11 @@ namespace Core2D.Editor.Tools
             _selection.ToStateOne();
         }
 
-        /// <inheritdoc/>
-        public override void ToStateTwo()
+        /// <summary>
+        /// Transfer tool state to <see cref="ToolState.Two"/>.
+        /// </summary>
+        public void ToStateTwo()
         {
-            base.ToStateTwo();
-
             _selection.ToStateTwo();
         }
 

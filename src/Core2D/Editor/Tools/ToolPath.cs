@@ -16,6 +16,7 @@ namespace Core2D.Editor.Tools
     /// </summary>
     public class ToolPath : ToolBase
     {
+        public enum ToolState { None, One, Two, Three }
         private readonly IServiceProvider _serviceProvider;
         private readonly PathToolLine _pathToolLine;
         private readonly PathToolArc _pathToolArc;
@@ -217,27 +218,74 @@ namespace Core2D.Editor.Tools
             _serviceProvider.GetService<ProjectEditor>().CurrentPathTool.Move(x, y);
         }
 
-        /// <inheritdoc/>
-        public override void ToStateOne()
+        /// <summary>
+        /// Transfer tool state to <see cref="ToolState.One"/>.
+        /// </summary>
+        public void ToStateOne()
         {
-            base.ToStateOne();
-
             var editor = _serviceProvider.GetService<ProjectEditor>();
-            editor.CurrentPathTool.ToStateOne();
+            switch (editor.CurrentPathTool)
+            {
+                case PathToolLine tool:
+                    tool.ToStateOne();
+                    break;
+                case PathToolCubicBezier tool:
+                    tool.ToStateOne();
+                    break;
+                case PathToolQuadraticBezier tool:
+                    tool.ToStateOne();
+                    break;
+                case PathToolArc tool:
+                    tool.ToStateOne();
+                    break;
+                case PathToolMove tool:
+                    break;
+            }
         }
 
-        /// <inheritdoc/>
-        public override void ToStateTwo()
+        /// <summary>
+        /// Transfer tool state to <see cref="ToolState.Two"/>.
+        /// </summary>
+        public void ToStateTwo()
         {
-            base.ToStateTwo();
-            _serviceProvider.GetService<ProjectEditor>().CurrentPathTool.ToStateTwo();
+            var editor = _serviceProvider.GetService<ProjectEditor>();
+            switch (editor.CurrentPathTool)
+            {
+                case PathToolLine tool:
+                    break;
+                case PathToolCubicBezier tool:
+                    tool.ToStateTwo();
+                    break;
+                case PathToolQuadraticBezier tool:
+                    tool.ToStateTwo();
+                    break;
+                case PathToolArc tool:
+                    break;
+                case PathToolMove tool:
+                    break;
+            }
         }
 
-        /// <inheritdoc/>
-        public override void ToStateThree()
+        /// <summary>
+        /// Transfer tool state to <see cref="ToolState.Three"/>.
+        /// </summary>
+        public void ToStateThree()
         {
-            base.ToStateThree();
-            _serviceProvider.GetService<ProjectEditor>().CurrentPathTool.ToStateThree();
+            var editor = _serviceProvider.GetService<ProjectEditor>();
+            switch (editor.CurrentPathTool)
+            {
+                case PathToolLine tool:
+                    break;
+                case PathToolCubicBezier tool:
+                    tool.ToStateThree();
+                    break;
+                case PathToolQuadraticBezier tool:
+                    break;
+                case PathToolArc tool:
+                    break;
+                case PathToolMove tool:
+                    break;
+            }
         }
 
         /// <inheritdoc/>

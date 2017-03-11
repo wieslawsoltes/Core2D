@@ -1,6 +1,5 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-
 using Core2D.Shape;
 
 namespace Core2D.Editor
@@ -57,34 +56,6 @@ namespace Core2D.Editor
         /// <param name="x">The X coordinate of point.</param>
         /// <param name="y">The Y coordinate of point.</param>
         public virtual void Move(double x, double y)
-        {
-        }
-
-        /// <summary>
-        /// Transfer tool state to <see cref="ToolState.One"/>.
-        /// </summary>
-        public virtual void ToStateOne()
-        {
-        }
-
-        /// <summary>
-        /// Transfer tool state to <see cref="ToolState.Two"/>.
-        /// </summary>
-        public virtual void ToStateTwo()
-        {
-        }
-
-        /// <summary>
-        /// Transfer tool state to <see cref="ToolState.Three"/>.
-        /// </summary>
-        public virtual void ToStateThree()
-        {
-        }
-
-        /// <summary>
-        /// Transfer tool state to <see cref="ToolState.Four"/>.
-        /// </summary>
-        public virtual void ToStateFour()
         {
         }
 

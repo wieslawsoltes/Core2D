@@ -15,6 +15,7 @@ namespace Core2D.Editor.Tools.Path
     /// </summary>
     public class PathToolCubicBezier : PathToolBase
     {
+        public enum ToolState { None, One, Two, Three }
         private readonly IServiceProvider _serviceProvider;
         private ToolState _currentState = ToolState.None;
         private XPathCubicBezier _cubicBezier = new XPathCubicBezier();
@@ -243,10 +244,11 @@ namespace Core2D.Editor.Tools.Path
             }
         }
 
-        /// <inheritdoc/>
-        public override void ToStateOne()
+        /// <summary>
+        /// Transfer tool state to <see cref="ToolState.One"/>.
+        /// </summary>
+        public void ToStateOne()
         {
-            base.ToStateOne();
             var editor = _serviceProvider.GetService<ProjectEditor>();
             _selection = new ToolCubicBezierSelection(
                 editor.Project.CurrentContainer.HelperLayer,
@@ -257,19 +259,19 @@ namespace Core2D.Editor.Tools.Path
             _selection.ToStateOne();
         }
 
-        /// <inheritdoc/>
-        public override void ToStateTwo()
+        /// <summary>
+        /// Transfer tool state to <see cref="ToolState.Two"/>.
+        /// </summary>
+        public void ToStateTwo()
         {
-            base.ToStateTwo();
-
             _selection.ToStateTwo();
         }
 
-        /// <inheritdoc/>
-        public override void ToStateThree()
+        /// <summary>
+        /// Transfer tool state to <see cref="ToolState.Three"/>.
+        /// </summary>
+        public void ToStateThree()
         {
-            base.ToStateThree();
-
             _selection.ToStateThree();
         }
 

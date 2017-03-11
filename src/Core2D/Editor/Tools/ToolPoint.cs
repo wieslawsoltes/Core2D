@@ -10,6 +10,7 @@ namespace Core2D.Editor.Tools
     /// </summary>
     public class ToolPoint : ToolBase
     {
+        public enum ToolState { None }
         private readonly IServiceProvider _serviceProvider;
         private ToolState _currentState = ToolState.None;
         private XPoint _point;

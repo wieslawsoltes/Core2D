@@ -3,7 +3,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Core2D.Editor.Bounds;
 using Core2D.Spatial;
 using Core2D.Project;
 using Core2D.Shape;
@@ -16,6 +15,7 @@ namespace Core2D.Editor.Tools
     /// </summary>
     public class ToolSelection : ToolBase
     {
+        public enum ToolState { None, One }
         private readonly IServiceProvider _serviceProvider;
         private ToolState _currentState = ToolState.None;
         private XRectangle _rectangle;

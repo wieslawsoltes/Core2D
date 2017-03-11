@@ -17,6 +17,7 @@ namespace Core2D.Editor.Tools.Path
     /// </summary>
     public class PathToolArc : PathToolBase
     {
+        public enum ToolState { None, One }
         private readonly IServiceProvider _serviceProvider;
         private ToolState _currentState = ToolState.None;
         private XPathArc _arc = new XPathArc();
@@ -181,10 +182,11 @@ namespace Core2D.Editor.Tools.Path
             }
         }
 
-        /// <inheritdoc/>
-        public override void ToStateOne()
+        /// <summary>
+        /// Transfer tool state to <see cref="ToolState.One"/>.
+        /// </summary>
+        public void ToStateOne()
         {
-            base.ToStateOne();
             var editor = _serviceProvider.GetService<ProjectEditor>();
             _selection = new ToolLineSelection(
                 editor.Project.CurrentContainer.HelperLayer,

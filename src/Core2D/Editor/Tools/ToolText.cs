@@ -12,6 +12,7 @@ namespace Core2D.Editor.Tools
     /// </summary>
     public class ToolText : ToolBase
     {
+        public enum ToolState { None, One }
         private readonly IServiceProvider _serviceProvider;
         private ToolState _currentState = ToolState.None;
         private XText _text;
@@ -141,10 +142,11 @@ namespace Core2D.Editor.Tools
             }
         }
 
-        /// <inheritdoc/>
-        public override void ToStateOne()
+        /// <summary>
+        /// Transfer tool state to <see cref="ToolState.One"/>.
+        /// </summary>
+        public void ToStateOne()
         {
-            base.ToStateOne();
             var editor = _serviceProvider.GetService<ProjectEditor>();
             _selection = new ToolTextSelection(
                 editor.Project.CurrentContainer.HelperLayer,
