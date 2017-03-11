@@ -35,9 +35,9 @@ namespace Core2D.Editor.Tools.Selection
         }
 
         /// <summary>
-        /// Transfer selection state to <see cref="ToolState.One"/>.
+        /// Transfer selection state to BottomRight.
         /// </summary>
-        public void ToStateOne()
+        public void ToStateBottomRight()
         {
             _topLeftHelperPoint = XPoint.Create(0, 0, _point);
             _bottomRightHelperPoint = XPoint.Create(0, 0, _point);

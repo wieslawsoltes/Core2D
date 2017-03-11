@@ -72,7 +72,7 @@ namespace Core2D.Editor.Tools.Path
                             editor.Project.Options.DefaultIsStroked,
                             editor.Project.Options.DefaultIsSmoothJoin);
                         editor.Project.CurrentContainer.WorkingLayer.Invalidate();
-                        ToStateOne();
+                        ToStateEnd();
                         Move(null);
                         _currentState = State.End;
                         editor.CancelAvailable = true;
@@ -185,7 +185,7 @@ namespace Core2D.Editor.Tools.Path
         /// <summary>
         /// Transfer tool state to <see cref="State.End"/>.
         /// </summary>
-        public void ToStateOne()
+        public void ToStateEnd()
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
             _selection = new ToolLineSelection(
@@ -194,7 +194,7 @@ namespace Core2D.Editor.Tools.Path
                 editor.Project.Options.HelperStyle,
                 editor.Project.Options.PointShape);
 
-            _selection.ToStateOne();
+            _selection.ToStateEnd();
         }
 
         /// <inheritdoc/>
@@ -202,7 +202,10 @@ namespace Core2D.Editor.Tools.Path
         {
             base.Move(shape);
 
-            _selection.Move();
+            if (_selection != null)
+            {
+                _selection.Move(); 
+            }
         }
 
         /// <inheritdoc/>
@@ -212,8 +215,11 @@ namespace Core2D.Editor.Tools.Path
 
             _currentState = State.Start;
 
-            _selection.Remove();
-            _selection = null;
+            if (_selection != null)
+            {
+                _selection.Remove();
+                _selection = null; 
+            }
         }
     }
 }

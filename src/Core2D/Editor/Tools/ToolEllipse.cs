@@ -57,7 +57,7 @@ namespace Core2D.Editor.Tools
 
                         editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_ellipse);
                         editor.Project.CurrentContainer.WorkingLayer.Invalidate();
-                        ToStateOne();
+                        ToStateBottomRight();
                         Move(_ellipse);
                         _currentState = State.BottomRight;
                         editor.CancelAvailable = true;
@@ -148,7 +148,7 @@ namespace Core2D.Editor.Tools
         /// <summary>
         /// Transfer tool state to <see cref="State.BottomRight"/>.
         /// </summary>
-        public void ToStateOne()
+        public void ToStateBottomRight()
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
             _selection = new ToolEllipseSelection(
@@ -157,7 +157,7 @@ namespace Core2D.Editor.Tools
                 editor.Project.Options.HelperStyle,
                 editor.Project.Options.PointShape);
 
-            _selection.ToStateOne();
+            _selection.ToStateBottomRight();
         }
 
         /// <inheritdoc/>

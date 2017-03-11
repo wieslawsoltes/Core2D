@@ -57,7 +57,7 @@ namespace Core2D.Editor.Tools
 
                         editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_quadraticBezier);
                         editor.Project.CurrentContainer.WorkingLayer.Invalidate();
-                        ToStateOne();
+                        ToStatePoint3();
                         Move(_quadraticBezier);
                         _currentState = State.Point3;
                         editor.CancelAvailable = true;
@@ -79,7 +79,7 @@ namespace Core2D.Editor.Tools
                             }
 
                             editor.Project.CurrentContainer.WorkingLayer.Invalidate();
-                            ToStateTwo();
+                            ToStatePoint2();
                             Move(_quadraticBezier);
                             _currentState = State.Point2;
                         }
@@ -187,7 +187,7 @@ namespace Core2D.Editor.Tools
         /// <summary>
         /// Transfer tool state to <see cref="State.Point3"/>.
         /// </summary>
-        public void ToStateOne()
+        public void ToStatePoint3()
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
             _selection = new ToolQuadraticBezierSelection(
@@ -196,15 +196,15 @@ namespace Core2D.Editor.Tools
                 editor.Project.Options.HelperStyle,
                 editor.Project.Options.PointShape);
 
-            _selection.ToStateOne();
+            _selection.ToStatePoint3();
         }
 
         /// <summary>
         /// Transfer tool state to <see cref="State.Point2"/>.
         /// </summary>
-        public void ToStateTwo()
+        public void ToStatePoint2()
         {
-            _selection.ToStateTwo();
+            _selection.ToStatePoint2();
         }
 
         /// <inheritdoc/>

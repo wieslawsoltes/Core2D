@@ -63,7 +63,7 @@ namespace Core2D.Editor.Tools.Path
                             editor.Project.Options.DefaultIsStroked,
                             editor.Project.Options.DefaultIsSmoothJoin);
                         editor.Project.CurrentContainer.WorkingLayer.Invalidate();
-                        ToStateOne();
+                        ToStatePoint3();
                         Move(null);
                         _currentState = State.Point3;
                         editor.CancelAvailable = true;
@@ -85,7 +85,7 @@ namespace Core2D.Editor.Tools.Path
                             }
                         }
                         editor.Project.CurrentContainer.WorkingLayer.Invalidate();
-                        ToStateTwo();
+                        ToStatePoint2();
                         Move(null);
                         _currentState = State.Point2;
                     }
@@ -116,7 +116,7 @@ namespace Core2D.Editor.Tools.Path
                             editor.Project.Options.DefaultIsSmoothJoin);
                         editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         Remove();
-                        ToStateOne();
+                        ToStatePoint3();
                         Move(null);
                         _currentState = State.Point3;
                     }
@@ -207,7 +207,7 @@ namespace Core2D.Editor.Tools.Path
         /// <summary>
         /// Transfer tool state to <see cref="State.Point3"/>.
         /// </summary>
-        public void ToStateOne()
+        public void ToStatePoint3()
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
             _selection = new ToolQuadraticBezierSelection(
@@ -216,15 +216,15 @@ namespace Core2D.Editor.Tools.Path
                 editor.Project.Options.HelperStyle,
                 editor.Project.Options.PointShape);
 
-            _selection.ToStateOne();
+            _selection.ToStatePoint3();
         }
 
         /// <summary>
         /// Transfer tool state to <see cref="State.Point2"/>.
         /// </summary>
-        public void ToStateTwo()
+        public void ToStatePoint2()
         {
-            _selection.ToStateTwo();
+            _selection.ToStatePoint2();
         }
 
         /// <inheritdoc/>
@@ -232,7 +232,10 @@ namespace Core2D.Editor.Tools.Path
         {
             base.Move(shape);
 
-            _selection.Move();
+            if (_selection != null)
+            {
+                _selection.Move(); 
+            }
         }
 
         /// <inheritdoc/>
@@ -242,8 +245,11 @@ namespace Core2D.Editor.Tools.Path
 
             _currentState = State.Point1;
 
-            _selection.Remove();
-            _selection = null;
+            if (_selection != null)
+            {
+                _selection.Remove();
+                _selection = null; 
+            }
         }
     }
 }

@@ -44,9 +44,9 @@ namespace Core2D.Editor.Tools.Selection
         }
 
         /// <summary>
-        /// Transfer selection state to <see cref="ToolState.One"/>.
+        /// Transfer selection state to Point2.
         /// </summary>
-        public void ToStateOne()
+        public void ToStatePoint2()
         {
             _ellipse = XEllipse.Create(0, 0, _style, null);
             _p1HelperPoint = XPoint.Create(0, 0, _point);
@@ -60,9 +60,9 @@ namespace Core2D.Editor.Tools.Selection
         }
 
         /// <summary>
-        /// Transfer selection state to <see cref="ToolState.Two"/>.
+        /// Transfer selection state to Point3.
         /// </summary>
-        public void ToStateTwo()
+        public void ToStatePoint3()
         {
             if (_p1HelperPoint != null)
             {
@@ -84,9 +84,9 @@ namespace Core2D.Editor.Tools.Selection
         }
 
         /// <summary>
-        /// Transfer selection state to <see cref="ToolState.Three"/>.
+        /// Transfer selection state to Point4.
         /// </summary>
-        public void ToStateThree()
+        public void ToStatePoint4()
         {
             if (_ellipse != null)
             {

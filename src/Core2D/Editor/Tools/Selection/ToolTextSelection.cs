@@ -36,9 +36,9 @@ namespace Core2D.Editor.Tools.Selection
         }
 
         /// <summary>
-        /// Transfer selection state to <see cref="ToolState.One"/>.
+        /// Transfer selection state to BottomRight.
         /// </summary>
-        public void ToStateOne()
+        public void ToStateBottomRight()
         {
             _helperRectangle = XRectangle.Create(0, 0, _style, null);
             _topLeftHelperPoint = XPoint.Create(0, 0, _point);

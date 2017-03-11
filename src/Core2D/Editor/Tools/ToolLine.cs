@@ -61,7 +61,7 @@ namespace Core2D.Editor.Tools
                         }
                         editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_line);
                         editor.Project.CurrentContainer.WorkingLayer.Invalidate();
-                        ToStateOne();
+                        ToStateEnd();
                         Move(_line);
                         _currentState = State.End;
                         editor.CancelAvailable = true;
@@ -156,7 +156,7 @@ namespace Core2D.Editor.Tools
         /// <summary>
         /// Transfer tool state to <see cref="State.End"/>.
         /// </summary>
-        public void ToStateOne()
+        public void ToStateEnd()
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
             _selection = new ToolLineSelection(
@@ -165,7 +165,7 @@ namespace Core2D.Editor.Tools
                 editor.Project.Options.HelperStyle,
                 editor.Project.Options.PointShape);
 
-            _selection.ToStateOne();
+            _selection.ToStateEnd();
         }
 
         /// <inheritdoc/>

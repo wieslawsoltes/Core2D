@@ -41,9 +41,9 @@ namespace Core2D.Editor.Tools.Selection
         }
 
         /// <summary>
-        /// Transfer selection state to <see cref="ToolState.One"/>.
+        /// Transfer selection state to Point4.
         /// </summary>
-        public void ToStateOne()
+        public void ToStatePoint4()
         {
             _helperPoint1 = XPoint.Create(0, 0, _point);
             _layer.Shapes = _layer.Shapes.Add(_helperPoint1);
@@ -52,9 +52,9 @@ namespace Core2D.Editor.Tools.Selection
         }
 
         /// <summary>
-        /// Transfer selection state to <see cref="ToolState.Two"/>.
+        /// Transfer selection state to Point2.
         /// </summary>
-        public void ToStateTwo()
+        public void ToStatePoint2()
         {
             _line12 = XLine.Create(0, 0, _style, null);
             _helperPoint2 = XPoint.Create(0, 0, _point);
@@ -64,9 +64,9 @@ namespace Core2D.Editor.Tools.Selection
         }
 
         /// <summary>
-        /// Transfer selection state to <see cref="ToolState.Three"/>.
+        /// Transfer selection state to Point3.
         /// </summary>
-        public void ToStateThree()
+        public void ToStatePoint3()
         {
             _line43 = XLine.Create(0, 0, _style, null);
             _line23 = XLine.Create(0, 0, _style, null);

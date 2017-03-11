@@ -57,7 +57,7 @@ namespace Core2D.Editor.Tools
 
                         editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_cubicBezier);
                         editor.Project.CurrentContainer.WorkingLayer.Invalidate();
-                        ToStateOne();
+                        ToStatePoint4();
                         Move(_cubicBezier);
                         _currentState = State.Point4;
                         editor.CancelAvailable = true;
@@ -79,7 +79,7 @@ namespace Core2D.Editor.Tools
                             }
 
                             editor.Project.CurrentContainer.WorkingLayer.Invalidate();
-                            ToStateTwo();
+                            ToStatePoint2();
                             Move(_cubicBezier);
                             _currentState = State.Point2;
                         }
@@ -99,7 +99,7 @@ namespace Core2D.Editor.Tools
                             }
 
                             editor.Project.CurrentContainer.WorkingLayer.Invalidate();
-                            ToStateThree();
+                            ToStatePoint3();
                             Move(_cubicBezier);
                             _currentState = State.Point3;
                         }
@@ -225,7 +225,7 @@ namespace Core2D.Editor.Tools
         /// <summary>
         /// Transfer tool state to <see cref="State.Point4"/>.
         /// </summary>
-        public void ToStateOne()
+        public void ToStatePoint4()
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
             _selection = new ToolCubicBezierSelection(
@@ -234,23 +234,23 @@ namespace Core2D.Editor.Tools
                 editor.Project.Options.HelperStyle,
                 editor.Project.Options.PointShape);
 
-            _selection.ToStateOne();
+            _selection.ToStatePoint4();
         }
 
         /// <summary>
         /// Transfer tool state to <see cref="State.Point2"/>.
         /// </summary>
-        public void ToStateTwo()
+        public void ToStatePoint2()
         {
-            _selection.ToStateTwo();
+            _selection.ToStatePoint2();
         }
 
         /// <summary>
         /// Transfer tool state to <see cref="State.Point3"/>.
         /// </summary>
-        public void ToStateThree()
+        public void ToStatePoint3()
         {
-            _selection.ToStateThree();
+            _selection.ToStatePoint3();
         }
 
         /// <inheritdoc/>
