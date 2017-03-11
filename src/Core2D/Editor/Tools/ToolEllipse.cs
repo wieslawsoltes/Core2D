@@ -16,7 +16,7 @@ namespace Core2D.Editor.Tools
         public enum Mode { Rectangle, Circle }
         private readonly IServiceProvider _serviceProvider;
         private State _currentState = State.TopLeft;
-        private Mode _currentMode = Mode.Circle;
+        private Mode _currentMode = Mode.Rectangle;
         private XEllipse _ellipse;
         private ToolEllipseSelection _selection;
         private double _centerX;
