@@ -109,7 +109,7 @@
       <Project>{bf27e596-01f5-45af-99fb-703c004d27a5}</Project>
       <Name>Core2D.Spatial</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\src\FileSystem.Uwp\FileSystem.Uwp.csproj">
+    <ProjectReference Include="..\FileSystem.Uwp\FileSystem.Uwp.csproj">
       <Project>{180963c2-9b40-4f63-b288-88328d798098}</Project>
       <Name>FileSystem.Uwp</Name>
     </ProjectReference>
@@ -121,7 +121,7 @@
       <Project>{E2827255-924C-456E-8049-14E333C6FD18}</Project>
       <Name>FileWriter.SvgSkiaSharp</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\src\Renderer.Win2D\Renderer.Win2D.csproj">
+    <ProjectReference Include="..\Renderer.Win2D\Renderer.Win2D.csproj">
       <Project>{ea79fdcf-c78b-4170-bfbe-beb2303d911d}</Project>
       <Name>Renderer.Win2D</Name>
     </ProjectReference>
@@ -145,7 +145,7 @@
       <Project>{4ee581b0-45f3-4d7e-beae-277abf5f3fdd}</Project>
       <Name>Core2D</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\src\Utilities.Uwp\Utilities.Uwp.csproj">
+    <ProjectReference Include="..\Utilities.Uwp\Utilities.Uwp.csproj">
       <Project>{87632927-9d38-421f-ba51-f088be1e1d5a}</Project>
       <Name>Utilities.Uwp</Name>
     </ProjectReference>
