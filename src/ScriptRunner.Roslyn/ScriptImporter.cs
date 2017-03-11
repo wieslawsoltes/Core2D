@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Composition.Convention;
@@ -24,9 +25,9 @@ namespace ScriptRunner.Roslyn
         /// <returns>The portable references array.</returns>
         public static PortableExecutableReference[] GetReferences()
         {
-            var assemblyPath = Path.GetDirectoryName(typeof(object).Assembly.Location);
-            var immutableCollectionsPath = Path.GetDirectoryName(typeof(ImmutableArray<>).Assembly.Location);
-            var executingPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            var assemblyPath = Path.GetDirectoryName(typeof(object).GetTypeInfo().Assembly.Location);
+            var immutableCollectionsPath = Path.GetDirectoryName(typeof(ImmutableArray<>).GetTypeInfo().Assembly.Location);
+            var executingPath = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
             return new[]
             {
                 MetadataReference.CreateFromFile(Path.Combine(assemblyPath, "mscorlib.dll")),
@@ -86,7 +87,12 @@ namespace ScriptRunner.Roslyn
                 var result = compilation.Emit(ms);
                 if (result.Success)
                 {
-                    var assembly = Assembly.Load(ms.GetBuffer());
+                    Assembly assembly = null;
+#if NET45
+                    assembly = Assembly.Load(ms.GetBuffer());
+#elif NETCOREAPP1_0
+                    assembly = System.Runtime.Loader.AssemblyLoadContext.Default.LoadFromStream(ms);
+#endif
                     if (assembly != null)
                     {
                         return Compose<T>(assembly);

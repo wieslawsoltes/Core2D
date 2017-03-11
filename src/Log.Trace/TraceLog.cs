@@ -17,6 +17,8 @@ namespace Log.Trace
         private const string ErrorPrefix = "Error: ";
 
         private string _lastMessage;
+        private SD.TraceListener _listener;
+        private System.IO.Stream _stream;
 
         /// <inheritdoc/>
         string ILog.LastMessage
@@ -35,7 +37,37 @@ namespace Log.Trace
         {
             try
             {
-                SD.Trace.Listeners.Add(new SD.TextWriterTraceListener(path, "listener"));
+                Close();
+
+                _stream = new System.IO.FileStream(path, System.IO.FileMode.Append);
+                _listener = new SD.TextWriterTraceListener(_stream, "listener");
+
+                SD.Trace.Listeners.Add(_listener);
+            }
+            catch (Exception ex)
+            {
+                SD.Debug.WriteLine(ex.Message);
+                SD.Debug.WriteLine(ex.StackTrace);
+            }
+        }
+
+        private void Close()
+        {
+            try
+            {
+                SD.Trace.Flush();
+
+                if (_listener != null)
+                {
+                    _listener.Dispose();
+                    _listener = null;
+                }
+
+                if (_stream != null)
+                {
+                    _stream.Dispose();
+                    _stream = null;
+                }
             }
             catch (Exception ex)
             {
@@ -47,15 +79,7 @@ namespace Log.Trace
         /// <inheritdoc/>
         void ILog.Close()
         {
-            try
-            {
-                SD.Trace.Flush();
-            }
-            catch (Exception ex)
-            {
-                SD.Debug.WriteLine(ex.Message);
-                SD.Debug.WriteLine(ex.StackTrace);
-            }
+            Close();
         }
 
         /// <inheritdoc/>
