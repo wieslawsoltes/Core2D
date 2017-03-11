@@ -13,10 +13,14 @@ namespace Core2D.Editor.Tools
     public class ToolEllipse : ToolBase
     {
         public enum State { TopLeft, BottomRight }
+        public enum Mode { Rectangle, Circle }
         private readonly IServiceProvider _serviceProvider;
         private State _currentState = State.TopLeft;
+        private Mode _currentMode = Mode.Circle;
         private XEllipse _ellipse;
         private ToolEllipseSelection _selection;
+        private double _centerX;
+        private double _centerY;
 
         /// <inheritdoc/>
         public override string Name => "Ellipse";
@@ -30,6 +34,17 @@ namespace Core2D.Editor.Tools
             _serviceProvider = serviceProvider;
         }
 
+        private void ConstrainToCircle(double sx, double sy)
+        {
+            double rx = Math.Abs(_centerX - sx);
+            double ry = Math.Abs(_centerY - sy);
+            double r = Math.Max(rx, ry);
+            _ellipse.TopLeft.X = _centerX - r;
+            _ellipse.TopLeft.Y = _centerY - r;
+            _ellipse.BottomRight.X = _centerX + r;
+            _ellipse.BottomRight.Y = _centerY + r;
+        }
+
         /// <inheritdoc/>
         public override void LeftDown(double x, double y)
         {
@@ -41,6 +56,12 @@ namespace Core2D.Editor.Tools
             {
                 case State.TopLeft:
                     {
+                        if (_currentMode == Mode.Circle)
+                        {
+                            _centerX = sx;
+                            _centerY = sy;
+                        }
+
                         var style = editor.Project.CurrentStyleLibrary.Selected;
                         _ellipse = XEllipse.Create(
                             sx, sy,
@@ -67,8 +88,15 @@ namespace Core2D.Editor.Tools
                     {
                         if (_ellipse != null)
                         {
-                            _ellipse.BottomRight.X = sx;
-                            _ellipse.BottomRight.Y = sy;
+                            if (_currentMode == Mode.Circle)
+                            {
+                                ConstrainToCircle(sx, sy);
+                            }
+                            else
+                            {
+                                _ellipse.BottomRight.X = sx;
+                                _ellipse.BottomRight.Y = sy;
+                            }
 
                             var result = editor.TryToGetConnectionPoint(sx, sy);
                             if (result != null)
@@ -135,8 +163,16 @@ namespace Core2D.Editor.Tools
                             {
                                 editor.TryToHoverShape(sx, sy);
                             }
-                            _ellipse.BottomRight.X = sx;
-                            _ellipse.BottomRight.Y = sy;
+
+                            if (_currentMode == Mode.Circle)
+                            {
+                                ConstrainToCircle(sx, sy);
+                            }
+                            else
+                            {
+                                _ellipse.BottomRight.X = sx;
+                                _ellipse.BottomRight.Y = sy;
+                            }
                             editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                             Move(_ellipse);
                         }
