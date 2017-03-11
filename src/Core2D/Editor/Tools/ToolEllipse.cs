@@ -4,6 +4,7 @@ using System;
 using Core2D.Editor.Tools.Selection;
 using Core2D.Shape;
 using Core2D.Shapes;
+using static System.Math;
 
 namespace Core2D.Editor.Tools
 {
@@ -34,15 +35,13 @@ namespace Core2D.Editor.Tools
             _serviceProvider = serviceProvider;
         }
 
-        private void ConstrainToCircle(double sx, double sy)
+        private static void CircleConstrain(XPoint tl, XPoint br, double cx, double cy, double px, double py)
         {
-            double rx = Math.Abs(_centerX - sx);
-            double ry = Math.Abs(_centerY - sy);
-            double r = Math.Max(rx, ry);
-            _ellipse.TopLeft.X = _centerX - r;
-            _ellipse.TopLeft.Y = _centerY - r;
-            _ellipse.BottomRight.X = _centerX + r;
-            _ellipse.BottomRight.Y = _centerY + r;
+            double r = Max(Abs(cx - px), Abs(cy - py));
+            tl.X = cx - r;
+            tl.Y = cy - r;
+            br.X = cx + r;
+            br.Y = cy + r;
         }
 
         /// <inheritdoc/>
@@ -90,7 +89,7 @@ namespace Core2D.Editor.Tools
                         {
                             if (_currentMode == Mode.Circle)
                             {
-                                ConstrainToCircle(sx, sy);
+                                CircleConstrain(_ellipse.TopLeft, _ellipse.BottomRight, _centerX, _centerY, sx, sy);
                             }
                             else
                             {
@@ -166,7 +165,7 @@ namespace Core2D.Editor.Tools
 
                             if (_currentMode == Mode.Circle)
                             {
-                                ConstrainToCircle(sx, sy);
+                                CircleConstrain(_ellipse.TopLeft, _ellipse.BottomRight, _centerX, _centerY, sx, sy);
                             }
                             else
                             {
