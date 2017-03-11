@@ -28,6 +28,7 @@ namespace Core2D.Avalonia.Droid
 		{
 			global::Avalonia.Android.Resource.String.ApplicationName = global::Core2D.Avalonia.Droid.Resource.String.ApplicationName;
 			global::Avalonia.Android.Resource.String.Hello = global::Core2D.Avalonia.Droid.Resource.String.Hello;
+			global::Avalonia.Android.Resource.String.library_name = global::Core2D.Avalonia.Droid.Resource.String.library_name;
 			global::Splat.Resource.String.library_name = global::Core2D.Avalonia.Droid.Resource.String.library_name;
 		}
 		
