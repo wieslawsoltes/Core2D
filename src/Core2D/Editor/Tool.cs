@@ -7,7 +7,7 @@ namespace Core2D.Editor
     /// <summary>
     /// Defines tool contract.
     /// </summary>
-    public abstract class Tool
+    public abstract class Tool : ObservableObject
     {
         /// <summary>
         /// Gets the tool name.
