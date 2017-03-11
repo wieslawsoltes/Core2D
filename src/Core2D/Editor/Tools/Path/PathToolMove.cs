@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
+using Core2D.Editor.Tools.Path.Settings;
 using Core2D.Shapes;
 
 namespace Core2D.Editor.Tools.Path
@@ -12,10 +13,20 @@ namespace Core2D.Editor.Tools.Path
     {
         public enum State { Move }
         private readonly IServiceProvider _serviceProvider;
+        private PathToolSettingsMove _settings;
         private State _currentState = State.Move;
 
         /// <inheritdoc/>
         public override string Name => "Move";
+
+        /// <summary>
+        /// Gets or sets the path tool settings.
+        /// </summary>
+        public PathToolSettingsMove Settings
+        {
+            get { return _settings; }
+            set { Update(ref _settings, value); }
+        }
 
         /// <summary>
         /// Initialize new instance of <see cref="PathToolMove"/> class.
@@ -24,6 +35,7 @@ namespace Core2D.Editor.Tools.Path
         public PathToolMove(IServiceProvider serviceProvider) : base()
         {
             _serviceProvider = serviceProvider;
+            _settings = new PathToolSettingsMove();
         }
 
         /// <inheritdoc/>

@@ -3,6 +3,7 @@
 using System;
 using System.Linq;
 using Core2D.Editor.Tools.Path.Shapes;
+using Core2D.Editor.Tools.Path.Settings;
 using Core2D.Editor.Tools.Selection;
 using Core2D.Path.Segments;
 using Core2D.Shape;
@@ -17,6 +18,7 @@ namespace Core2D.Editor.Tools.Path
     {
         public enum State { Start, End }
         private readonly IServiceProvider _serviceProvider;
+        private PathToolSettingsLine _settings;
         private State _currentState = State.Start;
         private XPathLine _line = new XPathLine();
         private ToolLineSelection _selection;
@@ -25,12 +27,22 @@ namespace Core2D.Editor.Tools.Path
         public override string Name => "Line";
 
         /// <summary>
+        /// Gets or sets the path tool settings.
+        /// </summary>
+        public PathToolSettingsLine Settings
+        {
+            get { return _settings; }
+            set { Update(ref _settings, value); }
+        }
+
+        /// <summary>
         /// Initialize new instance of <see cref="PathToolLine"/> class.
         /// </summary>
         /// <param name="serviceProvider">The service provider.</param>
         public PathToolLine(IServiceProvider serviceProvider) : base()
         {
             _serviceProvider = serviceProvider;
+            _settings = new PathToolSettingsLine();
         }
 
         /// <inheritdoc/>

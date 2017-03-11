@@ -3,6 +3,7 @@
 using System;
 using System.Linq;
 using Core2D.Editor.Tools.Path.Shapes;
+using Core2D.Editor.Tools.Path.Settings;
 using Core2D.Editor.Tools.Selection;
 using Core2D.Path.Segments;
 using Core2D.Shape;
@@ -17,6 +18,7 @@ namespace Core2D.Editor.Tools.Path
     {
         public enum State { Point1, Point3, Point2 }
         private readonly IServiceProvider _serviceProvider;
+        private PathToolSettingsQuadraticBezier _settings;
         private State _currentState = State.Point1;
         private XPathQuadraticBezier _quadraticBezier = new XPathQuadraticBezier();
         private ToolQuadraticBezierSelection _selection;
@@ -25,12 +27,22 @@ namespace Core2D.Editor.Tools.Path
         public override string Name => "QuadraticBezier";
 
         /// <summary>
+        /// Gets or sets the path tool settings.
+        /// </summary>
+        public PathToolSettingsQuadraticBezier Settings
+        {
+            get { return _settings; }
+            set { Update(ref _settings, value); }
+        }
+
+        /// <summary>
         /// Initialize new instance of <see cref="PathToolQuadraticBezier"/> class.
         /// </summary>
         /// <param name="serviceProvider">The service provider.</param>
         public PathToolQuadraticBezier(IServiceProvider serviceProvider) : base()
         {
             _serviceProvider = serviceProvider;
+            _settings = new PathToolSettingsQuadraticBezier();
         }
 
         /// <inheritdoc/>

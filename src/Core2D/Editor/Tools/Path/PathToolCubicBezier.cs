@@ -3,6 +3,7 @@
 using System;
 using System.Linq;
 using Core2D.Editor.Tools.Path.Shapes;
+using Core2D.Editor.Tools.Path.Settings;
 using Core2D.Editor.Tools.Selection;
 using Core2D.Path.Segments;
 using Core2D.Shape;
@@ -17,6 +18,7 @@ namespace Core2D.Editor.Tools.Path
     {
         public enum State { Point1, Point4, Point2, Point3 }
         private readonly IServiceProvider _serviceProvider;
+        private PathToolSettingsCubicBezier _settings;
         private State _currentState = State.Point1;
         private XPathCubicBezier _cubicBezier = new XPathCubicBezier();
         private ToolCubicBezierSelection _selection;
@@ -25,12 +27,22 @@ namespace Core2D.Editor.Tools.Path
         public override string Name => "CubicBezier";
 
         /// <summary>
+        /// Gets or sets the path tool settings.
+        /// </summary>
+        public PathToolSettingsCubicBezier Settings
+        {
+            get { return _settings; }
+            set { Update(ref _settings, value); }
+        }
+
+        /// <summary>
         /// Initialize new instance of <see cref="PathToolCubicBezier"/> class.
         /// </summary>
         /// <param name="serviceProvider">The service provider.</param>
         public PathToolCubicBezier(IServiceProvider serviceProvider) : base()
         {
             _serviceProvider = serviceProvider;
+            _settings = new PathToolSettingsCubicBezier();
         }
 
         /// <inheritdoc/>
