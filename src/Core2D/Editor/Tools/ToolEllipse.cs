@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using Core2D.Editor.Tools.Selection;
+using Core2D.Editor.Tools.Settings;
 using Core2D.Shape;
 using Core2D.Shapes;
 using static System.Math;
@@ -16,6 +17,7 @@ namespace Core2D.Editor.Tools
         public enum State { TopLeft, BottomRight }
         public enum Mode { Rectangle, Circle }
         private readonly IServiceProvider _serviceProvider;
+        private ToolSettingsEllipse _settings;
         private State _currentState = State.TopLeft;
         private Mode _currentMode = Mode.Rectangle;
         private XEllipse _ellipse;
@@ -27,12 +29,22 @@ namespace Core2D.Editor.Tools
         public override string Name => "Ellipse";
 
         /// <summary>
+        /// Gets or sets the tool settings.
+        /// </summary>
+        public ToolSettingsEllipse Settings
+        {
+            get { return _settings; }
+            set { Update(ref _settings, value); }
+        }
+
+        /// <summary>
         /// Initialize new instance of <see cref="ToolEllipse"/> class.
         /// </summary>
         /// <param name="serviceProvider">The service provider.</param>
         public ToolEllipse(IServiceProvider serviceProvider) : base()
         {
             _serviceProvider = serviceProvider;
+            _settings = new ToolSettingsEllipse();
         }
 
         private static void CircleConstrain(XPoint tl, XPoint br, double cx, double cy, double px, double py)

@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using Core2D.Editor.Tools.Selection;
+using Core2D.Editor.Tools.Settings;
 using Core2D.Shape;
 using Core2D.Shapes;
 
@@ -14,6 +15,7 @@ namespace Core2D.Editor.Tools
     {
         public enum State { TopLeft, BottomRight }
         private readonly IServiceProvider _serviceProvider;
+        private ToolSettingsText _settings;
         private State _currentState = State.TopLeft;
         private XText _text;
         private ToolTextSelection _selection;
@@ -22,12 +24,22 @@ namespace Core2D.Editor.Tools
         public override string Name => "Text";
 
         /// <summary>
+        /// Gets or sets the tool settings.
+        /// </summary>
+        public ToolSettingsText Settings
+        {
+            get { return _settings; }
+            set { Update(ref _settings, value); }
+        }
+
+        /// <summary>
         /// Initialize new instance of <see cref="ToolText"/> class.
         /// </summary>
         /// <param name="serviceProvider">The service provider.</param>
         public ToolText(IServiceProvider serviceProvider) : base()
         {
             _serviceProvider = serviceProvider;
+            _settings = new ToolSettingsText();
         }
 
         /// <inheritdoc/>

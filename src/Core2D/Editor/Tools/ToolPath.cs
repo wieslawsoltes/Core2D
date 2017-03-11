@@ -4,6 +4,7 @@ using System;
 using System.Collections.Immutable;
 using System.Linq;
 using Core2D.Editor.Tools.Path;
+using Core2D.Editor.Tools.Settings;
 using Core2D.Path;
 using Core2D.Path.Segments;
 using Core2D.Shape;
@@ -17,6 +18,7 @@ namespace Core2D.Editor.Tools
     public class ToolPath : ToolBase
     {
         private readonly IServiceProvider _serviceProvider;
+        private ToolSettingsPath _settings;
         private readonly PathToolLine _pathToolLine;
         private readonly PathToolArc _pathToolArc;
         private readonly PathToolCubicBezier _pathToolCubicBezier;
@@ -52,12 +54,22 @@ namespace Core2D.Editor.Tools
         public override string Name => "Path";
 
         /// <summary>
+        /// Gets or sets the tool settings.
+        /// </summary>
+        public ToolSettingsPath Settings
+        {
+            get { return _settings; }
+            set { Update(ref _settings, value); }
+        }
+
+        /// <summary>
         /// Initialize new instance of <see cref="ToolPath"/> class.
         /// </summary>
         /// <param name="serviceProvider">The service provider.</param>
         public ToolPath(IServiceProvider serviceProvider) : base()
         {
             _serviceProvider = serviceProvider;
+            _settings = new ToolSettingsPath();
             _pathToolLine = serviceProvider.GetService<PathToolLine>();
             _pathToolArc = serviceProvider.GetService<PathToolArc>();
             _pathToolCubicBezier = serviceProvider.GetService<PathToolCubicBezier>();

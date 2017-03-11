@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using Core2D.Editor.Tools.Selection;
+using Core2D.Editor.Tools.Settings;
 using Core2D.Spatial.Arc;
 using Core2D.Shape;
 using Core2D.Shapes;
@@ -16,6 +17,7 @@ namespace Core2D.Editor.Tools
     {
         public enum State { Point1, Point2, Point3, Point4 }
         private readonly IServiceProvider _serviceProvider;
+        private ToolSettingsArc _settings;
         private State _currentState = State.Point1;
         private XArc _arc;
         private bool _connectedPoint3;
@@ -26,12 +28,22 @@ namespace Core2D.Editor.Tools
         public override string Name => "Arc";
 
         /// <summary>
+        /// Gets or sets the tool settings.
+        /// </summary>
+        public ToolSettingsArc Settings
+        {
+            get { return _settings; }
+            set { Update(ref _settings, value); }
+        }
+
+        /// <summary>
         /// Initialize new instance of <see cref="ToolArc"/> class.
         /// </summary>
         /// <param name="serviceProvider">The service provider.</param>
         public ToolArc(IServiceProvider serviceProvider) : base()
         {
             _serviceProvider = serviceProvider;
+            _settings = new ToolSettingsArc();
         }
 
         /// <inheritdoc/>

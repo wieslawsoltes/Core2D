@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
+using Core2D.Editor.Tools.Settings;
 using Core2D.Shapes;
 
 namespace Core2D.Editor.Tools
@@ -12,11 +13,21 @@ namespace Core2D.Editor.Tools
     {
         public enum State { Point }
         private readonly IServiceProvider _serviceProvider;
+        private ToolSettingsPoint _settings;
         private State _currentState = State.Point;
         private XPoint _point;
 
         /// <inheritdoc/>
         public override string Name => "Point";
+
+        /// <summary>
+        /// Gets or sets the tool settings.
+        /// </summary>
+        public ToolSettingsPoint Settings
+        {
+            get { return _settings; }
+            set { Update(ref _settings, value); }
+        }
 
         /// <summary>
         /// Initialize new instance of <see cref="ToolPoint"/> class.
@@ -25,6 +36,7 @@ namespace Core2D.Editor.Tools
         public ToolPoint(IServiceProvider serviceProvider) : base()
         {
             _serviceProvider = serviceProvider;
+            _settings = new ToolSettingsPoint();
         }
 
         /// <inheritdoc/>

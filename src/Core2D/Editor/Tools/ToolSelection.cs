@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Core2D.Editor.Tools.Settings;
 using Core2D.Spatial;
 using Core2D.Project;
 using Core2D.Shape;
@@ -17,6 +18,7 @@ namespace Core2D.Editor.Tools
     {
         public enum State { None, Selected }
         private readonly IServiceProvider _serviceProvider;
+        private ToolSettingsSelection _settings;
         private State _currentState = State.None;
         private XRectangle _rectangle;
         private double _startX;
@@ -30,12 +32,22 @@ namespace Core2D.Editor.Tools
         public override string Name => "Selection";
 
         /// <summary>
+        /// Gets or sets the tool settings.
+        /// </summary>
+        public ToolSettingsSelection Settings
+        {
+            get { return _settings; }
+            set { Update(ref _settings, value); }
+        }
+
+        /// <summary>
         /// Initialize new instance of <see cref="ToolSelection"/> class.
         /// </summary>
         /// <param name="serviceProvider">The service provider.</param>
         public ToolSelection(IServiceProvider serviceProvider) : base()
         {
             _serviceProvider = serviceProvider;
+            _settings = new ToolSettingsSelection();
         }
 
         /// <summary>
