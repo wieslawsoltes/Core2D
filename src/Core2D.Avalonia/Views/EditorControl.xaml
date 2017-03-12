@@ -70,6 +70,11 @@
                     <TabItem Header="Templates" Classes="property">
                         <project:TemplatesControl DataContext="{Binding Project}"/>
                     </TabItem>
+                    <TabItem Header="Container" Classes="property">
+                        <ScrollViewer>
+                            <ContentControl Content="{Binding Project.CurrentContainer}"/>
+                        </ScrollViewer>
+                    </TabItem>
                 </TabControl>
             </Border>
             <GridSplitter Name="rightPanelHSplitter" Classes="horizontal" Grid.Row="1" Height="7"/>
@@ -88,11 +93,6 @@
                     <TabItem Header="Style" Classes="property">
                         <ScrollViewer>
                             <style:ShapeStyleControl DataContext="{Binding Project.CurrentStyleLibrary.Selected}"/>
-                        </ScrollViewer>
-                    </TabItem>
-                    <TabItem Header="Container" Classes="property">
-                        <ScrollViewer>
-                            <ContentControl Content="{Binding Project.CurrentContainer}"/>
                         </ScrollViewer>
                     </TabItem>
                     <TabItem Header="Template" Classes="property">
