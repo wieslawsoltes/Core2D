@@ -16,7 +16,11 @@ namespace FileSystem.DotNetFx
         /// <inheritdoc/>
         string IFileSystem.GetAssemblyPath(Type type)
         {
+#if NETSTANDARD1_3 || NETCORE5_0
+            string codeBase = type.GetTypeInfo().Assembly.FullName;
+#else
             string codeBase = type == null ? Assembly.GetEntryAssembly().CodeBase : type.GetTypeInfo().Assembly.FullName;
+#endif
             var uri = new UriBuilder(codeBase);
             string path = Uri.UnescapeDataString(uri.Path);
             return Path.GetDirectoryName(path);
