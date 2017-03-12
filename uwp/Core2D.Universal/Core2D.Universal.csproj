@@ -99,9 +99,12 @@
     <Compile Include="Commands\File\OpenCommand.cs" />
     <Compile Include="Commands\File\SaveAsCommand.cs" />
     <Compile Include="Commands\File\SaveCommand.cs" />
+    <Compile Include="Importers\UwpImageImporter.cs" />
+    <Compile Include="Locator\ServiceProvider.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Modules\UwpModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -160,6 +163,7 @@
       <Name>Utilities.Uwp</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

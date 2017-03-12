@@ -10,28 +10,15 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Autofac;
 using Core2D.Editor;
-using Core2D.Editor.Bounds;
-using Core2D.Editor.Factories;
 using Core2D.Editor.Views.Interfaces;
-using Core2D.Interfaces;
 using Core2D.Project;
 using Core2D.Renderer;
 using Core2D.Renderer.Presenters;
 using Core2D.Shapes;
-using FileSystem.Uwp;
-//using FileWriter.PdfSkiaSharp;
-//using FileWriter.SvgSkiaSharp;
-//using Log.Trace;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Text;
 using Microsoft.Graphics.Canvas.UI.Xaml;
 using Renderer.Win2D;
-//using ScriptRunner.Roslyn;
-using Serializer.Newtonsoft;
-using Serializer.Xaml;
-//using TextFieldReader.CsvHelper;
-//using TextFieldWriter.CsvHelper;
-using Utilities.Uwp;
 using Windows.Devices.Input;
 using Windows.Foundation;
 using Windows.Storage;
@@ -44,128 +31,13 @@ using Windows.UI.Xaml.Input;
 
 namespace Core2D.Universal
 {
-    class ServiceProvider : IServiceProvider
-    {
-        private readonly ILifetimeScope _scope;
-
-        public ServiceProvider(ILifetimeScope scope)
-        {
-            _scope = scope;
-        }
-
-        object IServiceProvider.GetService(Type serviceType)
-        {
-            return _scope.Resolve(serviceType);
-        }
-    }
-
-    class UwpImageImporter : IImageImporter
-    {
-        private readonly IServiceProvider _serviceProvider;
-
-        public UwpImageImporter(IServiceProvider serviceProvider)
-        {
-            _serviceProvider = serviceProvider;
-        }
-
-        private async Task<string> GetImageKey(IStorageFile file)
-        {
-            var key = default(string);
-
-            using (var fileStream = await file.OpenStreamForReadAsync())
-            {
-                var editor = _serviceProvider.GetService<ProjectEditor>();
-                var bytes = editor.FileIO.ReadBinary(fileStream);
-                key = editor.Project.AddImageFromFile(file.Path, bytes);
-            }
-
-            return key;
-        }
-
-        private async Task<IStorageFile> GetImageFileAsync()
-        {
-            var picker = new FileOpenPicker();
-            picker.ViewMode = PickerViewMode.Thumbnail;
-            picker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
-            picker.FileTypeFilter.Add(".jpg");
-            picker.FileTypeFilter.Add(".jpeg");
-            picker.FileTypeFilter.Add(".png");
-            picker.FileTypeFilter.Add(".bmp");
-            picker.FileTypeFilter.Add(".gif");
-            picker.FileTypeFilter.Add(".tiff");
-            var file = await picker.PickSingleFileAsync();
-            if (file != null)
-            {
-                return file;
-            }
-            return null;
-        }
-
-        public async Task<string> GetImageKeyAsync()
-        {
-            var file = await GetImageFileAsync();
-            if (file == null)
-                return null;
-
-            string key = await GetImageKey(file);
-
-            await _serviceProvider.GetService<MainPage>().CacheImage(key);
-
-            return await Task.Run(() => key);
-        }
-    }
-
-    class UwpModule : Autofac.Module
-    {
-        protected override void Load(ContainerBuilder builder)
-        {
-            // Locator
-            builder.RegisterType<ServiceProvider>().As<IServiceProvider>().InstancePerLifetimeScope();
-            // Core
-            builder.RegisterType<ProjectEditor>().As<ProjectEditor>().InstancePerLifetimeScope();
-            builder.RegisterType<ProjectFactory>().As<IProjectFactory>().InstancePerLifetimeScope();
-            builder.RegisterType<ShapeFactory>().As<IShapeFactory>().InstancePerLifetimeScope();
-            builder.RegisterAssemblyTypes(typeof(ToolBase).GetTypeInfo().Assembly).As<ToolBase>().AsSelf().InstancePerLifetimeScope();
-            builder.RegisterAssemblyTypes(typeof(PathToolBase).GetTypeInfo().Assembly).As<PathToolBase>().AsSelf().InstancePerLifetimeScope();
-            builder.RegisterType<HitTest>().As<HitTest>().InstancePerLifetimeScope();
-            builder.RegisterAssemblyTypes(typeof(HitTestBase).GetTypeInfo().Assembly).As<HitTestBase>().AsSelf().InstancePerLifetimeScope();
-            builder.RegisterType<ProjectEditorCommands>().As<ProjectEditorCommands>().InstancePerLifetimeScope();
-            builder.RegisterType<ProjectEditorCommands>().AutoActivate().PropertiesAutowired().InstancePerLifetimeScope();
-            builder.RegisterAssemblyTypes(typeof(ProjectEditorCommands).GetTypeInfo().Assembly).AssignableTo<ICommand>().AsImplementedInterfaces().AsSelf().PropertiesAutowired().InstancePerLifetimeScope();
-            builder.RegisterAssemblyTypes(typeof(IView).GetTypeInfo().Assembly).As<IView>().InstancePerLifetimeScope();
-            // Dependencies
-            //builder.RegisterType<TraceLog>().As<ILog>().SingleInstance();
-            builder.RegisterType<UwpFileSystem>().As<IFileSystem>().InstancePerLifetimeScope();
-            //builder.RegisterType<RoslynScriptRunner>().As<IScriptRunner>().InstancePerLifetimeScope();
-            builder.RegisterType<NewtonsoftJsonSerializer>().As<IJsonSerializer>().InstancePerLifetimeScope();
-            builder.RegisterType<PortableXamlSerializer>().As<IXamlSerializer>().InstancePerLifetimeScope();
-            //builder.RegisterType<PdfSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
-            //builder.RegisterType<SvgSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
-            //builder.RegisterType<CsvHelperReader>().As<ITextFieldReader<XDatabase>>().InstancePerLifetimeScope();
-            //builder.RegisterType<CsvHelperWriter>().As<ITextFieldWriter<XDatabase>>().InstancePerLifetimeScope();
-            builder.Register<ShapeRenderer>((c) => new Win2dRenderer()).InstancePerDependency();
-            builder.RegisterType<UwpTextClipboard>().As<ITextClipboard>().InstancePerLifetimeScope();
-            // App
-            builder.RegisterType<UwpImageImporter>().As<IImageImporter>().InstancePerLifetimeScope();
-        }
-    }
-
-    enum PointerPressType
-    {
-        None,
-        Left,
-        Middle,
-        Right,
-        Pen,
-        Touch
-    }
-
     public sealed partial class MainPage : Page
     {
         private IContainer _componentContainer;
         private IServiceProvider _serviceProvider;
         private ContainerPresenter _presenter;
         private ProjectEditor _projectEditor;
+        private enum PointerPressType { None, Left, Middle, Right, Pen, Touch }
         private PointerPressType _pressed;
 
         public MainPage()
