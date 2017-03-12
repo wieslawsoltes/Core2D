@@ -12,7 +12,7 @@ using Core2D.Interfaces;
 using Core2D.Renderer;
 using Core2D.Universal.Importers;
 using Core2D.Universal.Locator;
-using FileSystem.Uwp;
+using FileSystem.NetStandard;
 //using FileWriter.PdfSkiaSharp;
 //using FileWriter.SvgSkiaSharp;
 //using Log.Trace;
@@ -46,7 +46,7 @@ namespace Core2D.Universal.Modules
             builder.RegisterAssemblyTypes(typeof(IView).GetTypeInfo().Assembly).As<IView>().InstancePerLifetimeScope();
             // Dependencies
             //builder.RegisterType<TraceLog>().As<ILog>().SingleInstance();
-            builder.RegisterType<UwpFileSystem>().As<IFileSystem>().InstancePerLifetimeScope();
+            builder.RegisterType<NetStandardFileSystem>().As<IFileSystem>().InstancePerLifetimeScope();
             //builder.RegisterType<RoslynScriptRunner>().As<IScriptRunner>().InstancePerLifetimeScope();
             builder.RegisterType<NewtonsoftJsonSerializer>().As<IJsonSerializer>().InstancePerLifetimeScope();
             builder.RegisterType<PortableXamlSerializer>().As<IXamlSerializer>().InstancePerLifetimeScope();
