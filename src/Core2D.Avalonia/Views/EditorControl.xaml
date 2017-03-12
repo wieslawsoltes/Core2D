@@ -16,6 +16,7 @@
              xmlns:data="clr-namespace:Core2D.Avalonia.Controls.Data;assembly=Core2D.Avalonia"
              xmlns:path="clr-namespace:Core2D.Avalonia.Controls.Path;assembly=Core2D.Avalonia"
              xmlns:project="clr-namespace:Core2D.Avalonia.Controls.Project;assembly=Core2D.Avalonia"
+             xmlns:settings="clr-namespace:Core2D.Avalonia.Controls.Settings;assembly=Core2D.Avalonia"
              xmlns:shapes="clr-namespace:Core2D.Avalonia.Controls.Shapes;assembly=Core2D.Avalonia"
              xmlns:state="clr-namespace:Core2D.Avalonia.Controls.State;assembly=Core2D.Avalonia"
              xmlns:style="clr-namespace:Core2D.Avalonia.Controls.Style;assembly=Core2D.Avalonia"
@@ -80,6 +81,9 @@
             <GridSplitter Name="rightPanelHSplitter" Classes="horizontal" Grid.Row="1" Height="7"/>
             <Border Name="rightPanelBottom" Classes="rightBottom" Grid.Row="2">
                 <TabControl Classes="bottom">
+                    <TabItem Header="Tools" Classes="property">
+                        <settings:ToolsControl DataContext="{Binding}"/>
+                    </TabItem>
                     <TabItem Header="Shape" Classes="property">
                         <ScrollViewer>
                             <ContentControl Content="{Binding Project.CurrentContainer.CurrentShape}"/>
