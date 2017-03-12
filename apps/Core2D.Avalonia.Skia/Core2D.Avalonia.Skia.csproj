@@ -49,6 +49,7 @@
     <ProjectReference Include="..\..\src\FileWriter.SvgSkiaSharp\FileWriter.SvgSkiaSharp.csproj" />
     <ProjectReference Include="..\..\src\Log.Trace\Log.Trace.csproj" />
     <ProjectReference Include="..\..\src\Renderer.Avalonia\Renderer.Avalonia.csproj" />
+    <ProjectReference Include="..\..\src\Renderer.SkiaSharp\Renderer.SkiaSharp.csproj" />
     <ProjectReference Include="..\..\src\ScriptRunner.Roslyn\ScriptRunner.Roslyn.csproj" />
     <ProjectReference Include="..\..\src\Serializer.Newtonsoft\Serializer.Newtonsoft.csproj" />
     <ProjectReference Include="..\..\src\Serializer.Xaml\Serializer.Xaml.csproj" />
