@@ -38,6 +38,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Importers\Win32ImageImporter.cs" />
+    <Compile Include="Locator\ServiceProvider.cs" />
+    <Compile Include="Modules\WpfSkiaModule.cs" />
     <Compile Include="SvgWindow.xaml.cs">
       <DependentUpon>SvgWindow.xaml</DependentUpon>
     </Compile>
