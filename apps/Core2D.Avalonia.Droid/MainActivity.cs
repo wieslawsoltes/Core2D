@@ -19,12 +19,12 @@ namespace Core2D.Avalonia.Droid
     [Activity(Label = "Core2D.Droid", MainLauncher = true, Icon = "@drawable/icon", LaunchMode = LaunchMode.SingleInstance)]
     public class MainActivity : AvaloniaActivity
     {
-        IContainer container;
-        IServiceProvider serviceProvider;
-        ILog log;
-        IFileSystem fileIO;
-        ProjectEditor editor;
-        MainControl view;
+        private IContainer container;
+        private IServiceProvider serviceProvider;
+        private ILog log;
+        private IFileSystem fileIO;
+        private ProjectEditor editor;
+        private MainControl view;
 
         protected override void OnCreate(Bundle bundle)
         {
