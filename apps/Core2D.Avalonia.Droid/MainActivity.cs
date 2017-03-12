@@ -8,12 +8,10 @@ using Android.OS;
 using Autofac;
 using Avalonia;
 using Avalonia.Android;
-using Core2D.Avalonia.Converters;
 using Core2D.Avalonia.Droid.Modules;
 using Core2D.Avalonia.Modules;
 using Core2D.Avalonia.Views;
 using Core2D.Editor;
-using Core2D.Editor.Designer;
 using Core2D.Interfaces;
 
 namespace Core2D.Avalonia.Droid
