@@ -24,12 +24,14 @@ if (BuildSystem.AppVeyor.IsRunningOnAppVeyor)
 }
 var dirSuffix = platform + "/" + configuration;
 var buildDirs = 
-    GetDirectories("./src/**/bin/" + dirSuffix) + 
-    GetDirectories("./src/**/obj/" + dirSuffix) + 
-    GetDirectories("./apps/**/bin/" + dirSuffix) + 
-    GetDirectories("./apps/**/obj/" + dirSuffix) + 
-    GetDirectories("./tests/**/bin/" + dirSuffix) + 
-    GetDirectories("./tests/**/obj/" + dirSuffix);
+    GetDirectories("./src/**/bin/**") + 
+    GetDirectories("./src/**/obj/**") + 
+    GetDirectories("./apps/**/bin/**") + 
+    GetDirectories("./apps/**/obj/**") + 
+    GetDirectories("./uwp/**/bin/**") + 
+    GetDirectories("./uwp/**/obj/**") + 
+    GetDirectories("./tests/**/bin/**") + 
+    GetDirectories("./tests/**/obj/**");
 var artifactsDir = (DirectoryPath)Directory("./artifacts");
 var testResultsDir = artifactsDir.Combine("test-results");	
 var zipRootDir = artifactsDir.Combine("zip");
