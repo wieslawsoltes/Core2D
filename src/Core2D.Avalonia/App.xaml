@@ -12,6 +12,8 @@
              xmlns:Segments="clr-namespace:Core2D.Path.Segments;assembly=Core2D"
              xmlns:Project="clr-namespace:Core2D.Project;assembly=Core2D"
              xmlns:Renderer="clr-namespace:Core2D.Renderer;assembly=Core2D"
+             xmlns:SettingsTools="clr-namespace:Core2D.Editor.Tools.Settings;assembly=Core2D"
+             xmlns:SettingsPath="clr-namespace:Core2D.Editor.Tools.Path.Settings;assembly=Core2D"
              xmlns:Shape="clr-namespace:Core2D.Shape;assembly=Core2D" 
              xmlns:Shapes="clr-namespace:Core2D.Shapes;assembly=Core2D" 
              xmlns:Style="clr-namespace:Core2D.Style;assembly=Core2D" 
@@ -19,6 +21,8 @@
              xmlns:path="clr-namespace:Core2D.Avalonia.Controls.Path;assembly=Core2D.Avalonia"
              xmlns:project="clr-namespace:Core2D.Avalonia.Controls.Project;assembly=Core2D.Avalonia"
              xmlns:renderer="clr-namespace:Core2D.Avalonia.Controls.Renderer;assembly=Core2D.Avalonia"
+             xmlns:settingsTools="clr-namespace:Core2D.Avalonia.Controls.Settings.Tools;assembly=Core2D.Avalonia"
+             xmlns:settingsPath="clr-namespace:Core2D.Avalonia.Controls.Settings.Tools.Path;assembly=Core2D.Avalonia"
              xmlns:shapes="clr-namespace:Core2D.Avalonia.Controls.Shapes;assembly=Core2D.Avalonia"
              xmlns:state="clr-namespace:Core2D.Avalonia.Controls.State;assembly=Core2D.Avalonia"
              xmlns:style="clr-namespace:Core2D.Avalonia.Controls.Style;assembly=Core2D.Avalonia">
@@ -72,6 +76,59 @@
         <!-- Renderer -->
         <DataTemplate DataType="Renderer:MatrixObject">
             <renderer:MatrixControl/>
+        </DataTemplate>
+        <!-- Settings Tools -->
+        <DataTemplate DataType="SettingsTools:ToolSettingsArc">
+            <settingsTools:ArcSettingsControl/>
+        </DataTemplate>
+        <DataTemplate DataType="SettingsTools:ToolSettingsCubicBezier">
+            <settingsTools:CubicBezierSettingsControl/>
+        </DataTemplate>
+        <DataTemplate DataType="SettingsTools:ToolSettingsEllipse">
+            <settingsTools:EllipseSettingsControl/>
+        </DataTemplate>
+        <DataTemplate DataType="SettingsTools:ToolSettingsImage">
+            <settingsTools:ImageSettingsControl/>
+        </DataTemplate>
+        <DataTemplate DataType="SettingsTools:ToolSettingsLine">
+            <settingsTools:LineSettingsControl/>
+        </DataTemplate>
+        <DataTemplate DataType="SettingsTools:ToolSettingsNone">
+            <settingsTools:NoneSettingsControl/>
+        </DataTemplate>
+        <DataTemplate DataType="SettingsTools:ToolSettingsPath">
+            <settingsTools:PathSettingsControl/>
+        </DataTemplate>
+        <DataTemplate DataType="SettingsTools:ToolSettingsPoint">
+            <settingsTools:PointSettingsControl/>
+        </DataTemplate>
+        <DataTemplate DataType="SettingsTools:ToolSettingsQuadraticBezier">
+            <settingsTools:QuadraticBezierSettingsControl/>
+        </DataTemplate>
+        <DataTemplate DataType="SettingsTools:ToolSettingsRectangle">
+            <settingsTools:RectangleSettingsControl/>
+        </DataTemplate>
+        <DataTemplate DataType="SettingsTools:ToolSettingsSelection">
+            <settingsTools:SelectionSettingsControl/>
+        </DataTemplate>
+        <DataTemplate DataType="SettingsTools:ToolSettingsText">
+            <settingsTools:TextSettingsControl/>
+        </DataTemplate>
+        <!-- Settings Path -->
+        <DataTemplate DataType="SettingsPath:PathToolSettingsArc">
+            <settingsPath:ArcSettingsControl/>
+        </DataTemplate>
+        <DataTemplate DataType="SettingsPath:PathToolSettingsCubicBezier">
+            <settingsPath:CubicBezierSettingsControl/>
+        </DataTemplate>
+        <DataTemplate DataType="SettingsPath:PathToolSettingsLine">
+            <settingsPath:LineSettingsControl/>
+        </DataTemplate>
+        <DataTemplate DataType="SettingsPath:PathToolSettingsMove">
+            <settingsPath:MoveSettingsControl/>
+        </DataTemplate>
+        <DataTemplate DataType="SettingsPath:PathToolSettingsQuadraticBezier">
+            <settingsPath:QuadraticBezierSettingsControl/>
         </DataTemplate>
         <!-- Shapes -->
         <DataTemplate DataType="Shapes:XPoint">
