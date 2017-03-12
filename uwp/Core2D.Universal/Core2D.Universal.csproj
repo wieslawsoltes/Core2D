@@ -142,9 +142,9 @@
       <Project>{f822ec0c-2501-487d-87a8-b8d28a761385}</Project>
       <Name>Core2D</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\src\FileSystem.DotNetFx\FileSystem.DotNetFx.csproj">
+    <ProjectReference Include="..\..\src\FileSystem.DotNet\FileSystem.DotNet.csproj">
       <Project>{d1f867f7-9029-480d-b1e1-b0be4658b182}</Project>
-      <Name>FileSystem.DotNetFx</Name>
+      <Name>FileSystem.DotNet</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\src\FileWriter.PdfSkiaSharp\FileWriter.PdfSkiaSharp.csproj">
       <Project>{c934ba25-608b-42fa-b766-42efad7da6ff}</Project>

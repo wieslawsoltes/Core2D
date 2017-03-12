@@ -12,7 +12,7 @@ using Core2D.Interfaces;
 using Core2D.Renderer;
 using Core2D.SkiaDemo.Importers;
 using Core2D.SkiaDemo.Locator;
-using FileSystem.DotNetFx;
+using FileSystem.DotNet;
 using FileWriter.Dxf;
 using FileWriter.Emf;
 using FileWriter.PdfSharp;
@@ -45,7 +45,7 @@ namespace Core2D.SkiaDemo.Modules
             builder.RegisterAssemblyTypes(typeof(ProjectEditorCommands).Assembly).AssignableTo<ICommand>().AsImplementedInterfaces().AsSelf().PropertiesAutowired().InstancePerLifetimeScope();
             builder.RegisterAssemblyTypes(typeof(IView).Assembly).As<IView>().InstancePerLifetimeScope();
             // Dependencies
-            builder.RegisterType<DotNetFxFileSystem>().As<IFileSystem>().InstancePerLifetimeScope();
+            builder.RegisterType<DotNetFileSystem>().As<IFileSystem>().InstancePerLifetimeScope();
             builder.RegisterType<NewtonsoftJsonSerializer>().As<IJsonSerializer>().InstancePerLifetimeScope();
             builder.RegisterType<PortableXamlSerializer>().As<IXamlSerializer>().InstancePerLifetimeScope();
             builder.RegisterType<PdfSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();

@@ -6,23 +6,23 @@ using System.Linq;
 using System.Text;
 using Xunit;
 
-namespace FileSystem.DotNetFx.UnitTests
+namespace FileSystem.DotNet.UnitTests
 {
-    public class DotNetFxFileSystemTests
+    public class DotNetFileSystemTests
     {
         [Fact]
-        [Trait("FileSystem.DotNetFx", "Util")]
+        [Trait("FileSystem.DotNet", "Util")]
         public void Implements_IFileSystem_Interface()
         {
-            var target = new DotNetFxFileSystem();
+            var target = new DotNetFileSystem();
             Assert.True(target is IFileSystem);
         }
 
         [Fact]
-        [Trait("FileSystem.DotNetFx", "Util")]
+        [Trait("FileSystem.DotNet", "Util")]
         public void Open_Path_Throws_FileNotFoundException()
         {
-            IFileSystem target = new DotNetFxFileSystem();
+            IFileSystem target = new DotNetFileSystem();
             Assert.Throws<FileNotFoundException>(
                 () =>
                 {
@@ -31,10 +31,10 @@ namespace FileSystem.DotNetFx.UnitTests
         }
 
         [Fact]
-        [Trait("FileSystem.DotNetFx", "Util")]
+        [Trait("FileSystem.DotNet", "Util")]
         public void Create_Path_Creates_New_File()
         {
-            IFileSystem target = new DotNetFxFileSystem();
+            IFileSystem target = new DotNetFileSystem();
 
             using (var stream = target.Create("new1.txt")) { }
             Assert.True(File.Exists("new1.txt"));
@@ -44,10 +44,10 @@ namespace FileSystem.DotNetFx.UnitTests
         }
 
         [Fact]
-        [Trait("FileSystem.DotNetFx", "Util")]
+        [Trait("FileSystem.DotNet", "Util")]
         public void ReadBinary_Read_All_Bytes_From_Stream()
         {
-            IFileSystem target = new DotNetFxFileSystem();
+            IFileSystem target = new DotNetFileSystem();
             var expceted = new byte[] { 0x12, 0x34, 0x56, 0x67 };
             byte[] actual;
 
@@ -60,10 +60,10 @@ namespace FileSystem.DotNetFx.UnitTests
         }
 
         [Fact]
-        [Trait("FileSystem.DotNetFx", "Util")]
+        [Trait("FileSystem.DotNet", "Util")]
         public void WriteBinary_Write_All_Bytes_To_Stream()
         {
-            IFileSystem target = new DotNetFxFileSystem();
+            IFileSystem target = new DotNetFileSystem();
             var expceted = new byte[] { 0x12, 0x34, 0x56, 0x67 };
             byte[] actual;
 
@@ -77,10 +77,10 @@ namespace FileSystem.DotNetFx.UnitTests
         }
 
         [Fact]
-        [Trait("FileSystem.DotNetFx", "Util")]
+        [Trait("FileSystem.DotNet", "Util")]
         public void ReadUtf8Text_Read_String_From_Stream()
         {
-            IFileSystem target = new DotNetFxFileSystem();
+            IFileSystem target = new DotNetFileSystem();
             var expceted = "κόσμε";
             string actual;
             
@@ -93,10 +93,10 @@ namespace FileSystem.DotNetFx.UnitTests
         }
 
         [Fact]
-        [Trait("FileSystem.DotNetFx", "Util")]
+        [Trait("FileSystem.DotNet", "Util")]
         public void WriteUtf8Text_Write_String_To_Stream()
         {
-            IFileSystem target = new DotNetFxFileSystem();
+            IFileSystem target = new DotNetFileSystem();
             var expceted = "κόσμε";
 
             byte[] actual;
@@ -112,10 +112,10 @@ namespace FileSystem.DotNetFx.UnitTests
         }
 
         [Fact]
-        [Trait("FileSystem.DotNetFx", "Util")]
+        [Trait("FileSystem.DotNet", "Util")]
         public void ReadUtf8Text_Read_String_From_Path()
         {
-            IFileSystem target = new DotNetFxFileSystem();
+            IFileSystem target = new DotNetFileSystem();
             Assert.Throws<FileNotFoundException>(
                 () =>
                 {
@@ -124,10 +124,10 @@ namespace FileSystem.DotNetFx.UnitTests
         }
 
         [Fact]
-        [Trait("FileSystem.DotNetFx", "Util")]
+        [Trait("FileSystem.DotNet", "Util")]
         public void WriteUtf8Text_Write_String_To_Path()
         {
-            IFileSystem target = new DotNetFxFileSystem();
+            IFileSystem target = new DotNetFileSystem();
             var expceted = "κόσμε";
 
             target.WriteUtf8Text("new2.txt", expceted);

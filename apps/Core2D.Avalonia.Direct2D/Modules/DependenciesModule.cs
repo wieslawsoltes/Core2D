@@ -4,7 +4,7 @@ using Autofac;
 using Core2D.Data.Database;
 using Core2D.Interfaces;
 using Core2D.Renderer;
-using FileSystem.DotNetFx;
+using FileSystem.DotNet;
 using FileWriter.Dxf;
 using FileWriter.Emf;
 using FileWriter.PdfSharp;
@@ -32,7 +32,7 @@ namespace Core2D.Avalonia.Direct2D.Modules
             builder.RegisterType<AvaloniaRenderer>().As<ShapeRenderer>().InstancePerDependency();
             builder.RegisterType<AvaloniaTextClipboard>().As<ITextClipboard>().InstancePerLifetimeScope();
             builder.RegisterType<TraceLog>().As<ILog>().SingleInstance();
-            builder.RegisterType<DotNetFxFileSystem>().As<IFileSystem>().InstancePerLifetimeScope();
+            builder.RegisterType<DotNetFileSystem>().As<IFileSystem>().InstancePerLifetimeScope();
             builder.RegisterType<RoslynScriptRunner>().As<IScriptRunner>().InstancePerLifetimeScope();
             builder.RegisterType<NewtonsoftJsonSerializer>().As<IJsonSerializer>().InstancePerLifetimeScope();
             builder.RegisterType<PortableXamlSerializer>().As<IXamlSerializer>().InstancePerLifetimeScope();

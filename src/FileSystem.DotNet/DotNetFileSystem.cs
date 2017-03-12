@@ -6,12 +6,12 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 
-namespace FileSystem.DotNetFx
+namespace FileSystem.DotNet
 {
     /// <summary>
     /// File system implementation using System.IO.
     /// </summary>
-    public sealed class DotNetFxFileSystem : IFileSystem
+    public sealed class DotNetFileSystem : IFileSystem
     {
         /// <inheritdoc/>
         string IFileSystem.GetAssemblyPath(Type type)

@@ -91,20 +91,62 @@
     <Folder Include="Assets\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Core2D.Avalonia\Core2D.Avalonia.csproj" />
-    <ProjectReference Include="..\..\src\Core2D.Spatial\Core2D.Spatial.csproj" />
-    <ProjectReference Include="..\..\src\Core2D\Core2D.csproj" />
-    <ProjectReference Include="..\..\src\FileSystem.DotNetFx\FileSystem.DotNetFx.csproj" />
-    <ProjectReference Include="..\..\src\Log.Trace\Log.Trace.csproj" />
-    <ProjectReference Include="..\..\src\FileWriter.PdfSkiaSharp\FileWriter.PdfSkiaSharp.csproj" />
-    <ProjectReference Include="..\..\src\FileWriter.SvgSkiaSharp\FileWriter.SvgSkiaSharp.csproj" />
-    <ProjectReference Include="..\..\src\Renderer.Avalonia\Renderer.Avalonia.csproj" />
-    <ProjectReference Include="..\..\src\Renderer.SkiaSharp\Renderer.SkiaSharp.csproj" />
-    <ProjectReference Include="..\..\src\Serializer.Newtonsoft\Serializer.Newtonsoft.csproj" />
-    <ProjectReference Include="..\..\src\Serializer.Xaml\Serializer.Xaml.csproj" />
-    <ProjectReference Include="..\..\src\TextFieldReader.CsvHelper\TextFieldReader.CsvHelper.csproj" />
-    <ProjectReference Include="..\..\src\TextFieldWriter.CsvHelper\TextFieldWriter.CsvHelper.csproj" />
-    <ProjectReference Include="..\..\src\Utilities.Avalonia\Utilities.Avalonia.csproj" />
+    <ProjectReference Include="..\..\src\Core2D.Avalonia\Core2D.Avalonia.csproj">
+      <Project>{27CD58AE-D6D4-42AD-A315-2F1CB63454AF}</Project>
+      <Name>Core2D.Avalonia</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Core2D.Spatial\Core2D.Spatial.csproj">
+      <Project>{AA5092F4-BDEF-437D-A31B-37DF896C8CBC}</Project>
+      <Name>Core2D.Spatial</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Core2D\Core2D.csproj">
+      <Project>{F822EC0C-2501-487D-87A8-B8D28A761385}</Project>
+      <Name>Core2D</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\FileSystem.DotNet\FileSystem.DotNet.csproj">
+      <Project>{D1F867F7-9029-480D-B1E1-B0BE4658B182}</Project>
+      <Name>FileSystem.DotNet</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Log.Trace\Log.Trace.csproj">
+      <Project>{68A36926-DF55-4F05-9F89-B9AB1463227E}</Project>
+      <Name>Log.Trace</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\FileWriter.PdfSkiaSharp\FileWriter.PdfSkiaSharp.csproj">
+      <Project>{C934BA25-608B-42FA-B766-42EFAD7DA6FF}</Project>
+      <Name>FileWriter.PdfSkiaSharp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\FileWriter.SvgSkiaSharp\FileWriter.SvgSkiaSharp.csproj">
+      <Project>{E2827255-924C-456E-8049-14E333C6FD18}</Project>
+      <Name>FileWriter.SvgSkiaSharp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Renderer.Avalonia\Renderer.Avalonia.csproj">
+      <Project>{E05F3F7E-2176-43DC-90BB-F5C66CFDB12F}</Project>
+      <Name>Renderer.Avalonia</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Renderer.SkiaSharp\Renderer.SkiaSharp.csproj">
+      <Project>{9B8FA9BD-63BE-4560-BA55-0D86AEE1809E}</Project>
+      <Name>Renderer.SkiaSharp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Serializer.Newtonsoft\Serializer.Newtonsoft.csproj">
+      <Project>{11E61A53-13D5-4447-8D66-3F328BBFC30A}</Project>
+      <Name>Serializer.Newtonsoft</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Serializer.Xaml\Serializer.Xaml.csproj">
+      <Project>{1DCA99EA-F8FE-4DDD-AB81-BF0380C1B33D}</Project>
+      <Name>Serializer.Xaml</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\TextFieldReader.CsvHelper\TextFieldReader.CsvHelper.csproj">
+      <Project>{F215ADF5-74C1-4E26-9045-B6BBDA736092}</Project>
+      <Name>TextFieldReader.CsvHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\TextFieldWriter.CsvHelper\TextFieldWriter.CsvHelper.csproj">
+      <Project>{AE7FF1B5-ABE3-45BF-87CC-44AC580A666A}</Project>
+      <Name>TextFieldWriter.CsvHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Utilities.Avalonia\Utilities.Avalonia.csproj">
+      <Project>{C6DBD1FD-C462-4005-B382-97BB4AEF26F2}</Project>
+      <Name>Utilities.Avalonia</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Autofac" Version="4.4.0" />
