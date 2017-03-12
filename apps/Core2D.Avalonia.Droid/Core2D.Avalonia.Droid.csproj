@@ -95,21 +95,16 @@
     <ProjectReference Include="..\..\src\Core2D.Spatial\Core2D.Spatial.csproj" />
     <ProjectReference Include="..\..\src\Core2D\Core2D.csproj" />
     <ProjectReference Include="..\..\src\FileSystem.DotNetFx\FileSystem.DotNetFx.csproj" />
+    <ProjectReference Include="..\..\src\Log.Trace\Log.Trace.csproj" />
     <ProjectReference Include="..\..\src\FileWriter.PdfSkiaSharp\FileWriter.PdfSkiaSharp.csproj" />
     <ProjectReference Include="..\..\src\FileWriter.SvgSkiaSharp\FileWriter.SvgSkiaSharp.csproj" />
-    <ProjectReference Include="..\..\src\Log.Trace\Log.Trace.csproj" />
     <ProjectReference Include="..\..\src\Renderer.Avalonia\Renderer.Avalonia.csproj" />
     <ProjectReference Include="..\..\src\Renderer.SkiaSharp\Renderer.SkiaSharp.csproj" />
-    <ProjectReference Include="..\..\src\ScriptRunner.Roslyn\ScriptRunner.Roslyn.csproj" />
     <ProjectReference Include="..\..\src\Serializer.Newtonsoft\Serializer.Newtonsoft.csproj" />
     <ProjectReference Include="..\..\src\Serializer.Xaml\Serializer.Xaml.csproj" />
     <ProjectReference Include="..\..\src\TextFieldReader.CsvHelper\TextFieldReader.CsvHelper.csproj" />
     <ProjectReference Include="..\..\src\TextFieldWriter.CsvHelper\TextFieldWriter.CsvHelper.csproj" />
     <ProjectReference Include="..\..\src\Utilities.Avalonia\Utilities.Avalonia.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Analyzer Include="..\..\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
-    <Analyzer Include="..\..\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Autofac" Version="4.4.0" />

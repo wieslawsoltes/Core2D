@@ -9,7 +9,7 @@ using FileWriter.PdfSkiaSharp;
 using FileWriter.SvgSkiaSharp;
 using Log.Trace;
 using Renderer.Avalonia;
-using ScriptRunner.Roslyn;
+//using ScriptRunner.Roslyn;
 using Serializer.Newtonsoft;
 using Serializer.Xaml;
 using TextFieldReader.CsvHelper;
@@ -30,7 +30,7 @@ namespace Core2D.Avalonia.Droid.Modules
             builder.RegisterType<AvaloniaTextClipboard>().As<ITextClipboard>().InstancePerLifetimeScope();
             builder.RegisterType<TraceLog>().As<ILog>().SingleInstance();
             builder.RegisterType<DotNetFxFileSystem>().As<IFileSystem>().InstancePerLifetimeScope();
-            builder.RegisterType<RoslynScriptRunner>().As<IScriptRunner>().InstancePerLifetimeScope();
+            //builder.RegisterType<RoslynScriptRunner>().As<IScriptRunner>().InstancePerLifetimeScope();
             builder.RegisterType<NewtonsoftJsonSerializer>().As<IJsonSerializer>().InstancePerLifetimeScope();
             builder.RegisterType<PortableXamlSerializer>().As<IXamlSerializer>().InstancePerLifetimeScope();
             builder.RegisterType<PdfSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
