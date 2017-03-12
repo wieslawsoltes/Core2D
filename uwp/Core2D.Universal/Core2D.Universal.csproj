@@ -142,9 +142,25 @@
       <Project>{f822ec0c-2501-487d-87a8-b8d28a761385}</Project>
       <Name>Core2D</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\src\FileSystem.NetStandard\FileSystem.NetStandard.csproj">
-      <Project>{0634bdbe-8879-4215-a0d3-0e8e3817480d}</Project>
-      <Name>FileSystem.NetStandard</Name>
+    <ProjectReference Include="..\..\src\FileSystem.DotNetFx\FileSystem.DotNetFx.csproj">
+      <Project>{d1f867f7-9029-480d-b1e1-b0be4658b182}</Project>
+      <Name>FileSystem.DotNetFx</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\FileWriter.PdfSkiaSharp\FileWriter.PdfSkiaSharp.csproj">
+      <Project>{c934ba25-608b-42fa-b766-42efad7da6ff}</Project>
+      <Name>FileWriter.PdfSkiaSharp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\FileWriter.SvgSkiaSharp\FileWriter.SvgSkiaSharp.csproj">
+      <Project>{e2827255-924c-456e-8049-14e333c6fd18}</Project>
+      <Name>FileWriter.SvgSkiaSharp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Log.Trace\Log.Trace.csproj">
+      <Project>{68a36926-df55-4f05-9f89-b9ab1463227e}</Project>
+      <Name>Log.Trace</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Renderer.SkiaSharp\Renderer.SkiaSharp.csproj">
+      <Project>{9b8fa9bd-63be-4560-ba55-0d86aee1809e}</Project>
+      <Name>Renderer.SkiaSharp</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\src\Serializer.Newtonsoft\Serializer.Newtonsoft.csproj">
       <Project>{11e61a53-13d5-4447-8d66-3f328bbfc30a}</Project>
@@ -153,6 +169,14 @@
     <ProjectReference Include="..\..\src\Serializer.Xaml\Serializer.Xaml.csproj">
       <Project>{1dca99ea-f8fe-4ddd-ab81-bf0380c1b33d}</Project>
       <Name>Serializer.Xaml</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\TextFieldReader.CsvHelper\TextFieldReader.CsvHelper.csproj">
+      <Project>{f215adf5-74c1-4e26-9045-b6bbda736092}</Project>
+      <Name>TextFieldReader.CsvHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\TextFieldWriter.CsvHelper\TextFieldWriter.CsvHelper.csproj">
+      <Project>{ae7ff1b5-abe3-45bf-87cc-44ac580a666a}</Project>
+      <Name>TextFieldWriter.CsvHelper</Name>
     </ProjectReference>
     <ProjectReference Include="..\Renderer.Win2D\Renderer.Win2D.csproj">
       <Project>{ea79fdcf-c78b-4170-bfbe-beb2303d911d}</Project>
