@@ -22,7 +22,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.Spatial", "src\Core2
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Renderer.Wpf", "src\Renderer.Wpf\Renderer.Wpf.csproj", "{3BFBD239-8979-480D-B1CB-B763F7C915C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileSystem.DotNetFx", "src\FileSystem.DotNetFx\FileSystem.DotNetFx.csproj", "{D1F867F7-9029-480D-B1E1-B0BE4658B182}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileSystem.DotNet", "src\FileSystem.DotNet\FileSystem.DotNet.csproj", "{D1F867F7-9029-480D-B1E1-B0BE4658B182}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileWriter.Dxf", "src\FileWriter.Dxf\FileWriter.Dxf.csproj", "{D40B3BCD-0A26-40BB-960B-9464D248C934}"
 EndProject
@@ -62,7 +62,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.Spatial.UnitTests", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.UnitTests", "tests\Core2D.UnitTests\Core2D.UnitTests.csproj", "{AB31E0E2-9090-4461-84BE-5C5AAA19758F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileSystem.DotNetFx.UnitTests", "tests\FileSystem.DotNetFx.UnitTests\FileSystem.DotNetFx.UnitTests.csproj", "{E9C30F6F-00DD-494A-8E7C-253A5C76E999}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileSystem.DotNet.UnitTests", "tests\FileSystem.DotNet.UnitTests\FileSystem.DotNet.UnitTests.csproj", "{E9C30F6F-00DD-494A-8E7C-253A5C76E999}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serializer.Xaml.UnitTests", "tests\Serializer.Xaml.UnitTests\Serializer.Xaml.UnitTests.csproj", "{6DFDDEC8-933F-4B94-BEC5-933ED73E7D70}"
 EndProject
