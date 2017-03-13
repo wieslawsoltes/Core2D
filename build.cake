@@ -146,11 +146,11 @@ Task("Copy-Redist-Files")
     if (IsRunningOnWindows() && (isPlatformAnyCPU || isPlatformX86 || isPlatformX64))
     {
         var msvcp140 = (isPlatformAnyCPU || isPlatformX86) ?
-            @"C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\redist\x86\Microsoft.VC140.CRT\msvcp140.dll" : 
-            @"C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\redist\x64\Microsoft.VC140.CRT\msvcp140.dll";
+            @"c:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\VC\Redist\MSVC\14.10.25008\x86\Microsoft.VC150.CRT\msvcp140.dll" : 
+            @"c:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\VC\Redist\MSVC\14.10.25008\x64\Microsoft.VC150.CRT\msvcp140.dll";
         var vcruntime140 = (isPlatformAnyCPU || isPlatformX86) ?
-            @"C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\redist\x86\Microsoft.VC140.CRT\vcruntime140.dll" :
-            @"C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\redist\x64\Microsoft.VC140.CRT\vcruntime140.dll";
+            @"c:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\VC\Redist\MSVC\14.10.25008\x86\Microsoft.VC150.CRT\vcruntime140.dll" :
+            @"c:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\VC\Redist\MSVC\14.10.25008\x64\Microsoft.VC150.CRT\vcruntime140.dll";
         CopyFileToDirectory(msvcp140, zipSourceCairoDir);
         CopyFileToDirectory(vcruntime140, zipSourceCairoDir);
         CopyFileToDirectory(msvcp140, zipSourceDirect2DDir);
@@ -164,17 +164,14 @@ Task("Copy-Redist-Files")
     }
 });
 
+
+
+
 Task("Zip-Files")
-    //.IsDependentOn("Copy-Redist-Files")
+    .IsDependentOn("Copy-Redist-Files")
     .IsDependentOn("Run-Unit-Tests")
     .Does(() =>
 {
-    Zip((DirectoryPath)Directory("./vc_redist.x86"), zipRootDir.CombineWithFilePath("vc_redist.x86.zip"));
-    Zip((DirectoryPath)Directory("./vc_redist.x64"), zipRootDir.CombineWithFilePath("vc_redist.x64.zip"));
-
-    Zip((DirectoryPath)Directory("./vc_redist.x86/msvcr"), zipRootDir.CombineWithFilePath("vc_redist.x86_msvcr.zip"));
-    Zip((DirectoryPath)Directory("./vc_redist.x64/msvcr"), zipRootDir.CombineWithFilePath("vc_redist.x64_msvcr.zip"));
-
     Zip(zipSourceCairoDir, 
         zipTargetCairoFile, 
         GetFiles(zipSourceCairoDir.FullPath + "/*.dll") + 
