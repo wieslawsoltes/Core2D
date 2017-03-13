@@ -23,47 +23,47 @@ namespace Core2D.Editor.Input
         public InputProcessor(IInputSource source, IInputTarget target)
         {
             _leftDownDisposable = source.LeftDown.Subscribe(
-                (v) =>
+                (args) =>
                 {
                     if (target.IsLeftDownAvailable())
                     {
-                        target.LeftDown(v.X, v.Y);
+                        target.LeftDown(args.Position.X, args.Position.Y, args.Modifier);
                     }
                 });
 
             _leftUpDisposable = source.LeftUp.Subscribe(
-                (v) =>
+                (args) =>
                 {
                     if (target.IsLeftUpAvailable())
                     {
-                        target.LeftUp(v.X, v.Y);
+                        target.LeftUp(args.Position.X, args.Position.Y, args.Modifier);
                     }
                 });
 
             _rightDownDisposable = source.RightDown.Subscribe(
-                (v) =>
+                (args) =>
                 {
                     if (target.IsRightDownAvailable())
                     {
-                        target.RightDown(v.X, v.Y);
+                        target.RightDown(args.Position.X, args.Position.Y, args.Modifier);
                     }
                 });
 
             _rightUpDisposable = source.RightUp.Subscribe(
-                (v) =>
+                (args) =>
                 {
                     if (target.IsRightUpAvailable())
                     {
-                        target.RightUp(v.X, v.Y);
+                        target.RightUp(args.Position.X, args.Position.Y, args.Modifier);
                     }
                 });
 
             _moveDisposable = source.Move.Subscribe(
-                (v) =>
+                (args) =>
                 {
                     if (target.IsMoveAvailable())
                     {
-                        target.Move(v.X, v.Y);
+                        target.Move(args.Position.X, args.Position.Y, args.Modifier);
                     }
                 });
         }
