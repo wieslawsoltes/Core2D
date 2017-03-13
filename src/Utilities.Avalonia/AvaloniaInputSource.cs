@@ -6,6 +6,7 @@ using System.Reactive.Linq;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
+using Core2D.Editor;
 using Core2D.Editor.Input;
 using Core2D.Spatial;
 
@@ -16,6 +17,28 @@ namespace Utilities.Avalonia
     /// </summary>
     public class AvaloniaInputSource : InputSource
     {
+        private static ModifierFlags ToModifierFlags(InputModifiers inputModifiers)
+        {
+            ModifierFlags modifier = ModifierFlags.None;
+
+            if (inputModifiers.HasFlag(InputModifiers.Alt))
+            {
+                modifier |= ModifierFlags.Alt;
+            }
+
+            if (inputModifiers.HasFlag(InputModifiers.Control))
+            {
+                modifier |= ModifierFlags.Control;
+            }
+
+            if (inputModifiers.HasFlag(InputModifiers.Shift))
+            {
+                modifier |= ModifierFlags.Shift;
+            }
+
+            return modifier;
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="AvaloniaInputSource"/> class.
         /// </summary>
@@ -33,24 +56,42 @@ namespace Utilities.Avalonia
 
         private Vector2 ToVector2(Point point) => new Vector2(point.X, point.Y);
 
-        private IObservable<Vector2> GetPressedObservable(Control target, string eventName, Control relative, Func<Point, Point> translate, MouseButton button)
+        private IObservable<InputArgs> GetPressedObservable(Control target, string eventName, Control relative, Func<Point, Point> translate, MouseButton button)
         {
             return Observable.FromEventPattern<PointerPressedEventArgs>(target, eventName)
-                .Where(e => e.EventArgs.MouseButton == button)
-                .Select(e => ToVector2(translate(e.EventArgs.GetPosition(relative))));
+                .Where(e => e.EventArgs.MouseButton == button).Select(
+                e =>
+                {
+                    return new InputArgs(
+                        ToVector2(
+                            translate(e.EventArgs.GetPosition(relative))),
+                        ToModifierFlags(e.EventArgs.InputModifiers));
+                });
         }
 
-        private IObservable<Vector2> GetReleasedObservable(Control target, string eventName, Control relative, Func<Point, Point> translate, MouseButton button)
+        private IObservable<InputArgs> GetReleasedObservable(Control target, string eventName, Control relative, Func<Point, Point> translate, MouseButton button)
         {
             return Observable.FromEventPattern<PointerReleasedEventArgs>(target, eventName)
-                .Where(e => e.EventArgs.MouseButton == button)
-                .Select(e => ToVector2(translate(e.EventArgs.GetPosition(relative))));
+                .Where(e => e.EventArgs.MouseButton == button).Select(
+                e =>
+                {
+                    return new InputArgs(
+                        ToVector2(
+                            translate(e.EventArgs.GetPosition(relative))),
+                        ToModifierFlags(e.EventArgs.InputModifiers));
+                });
         }
 
-        private IObservable<Vector2> GetMoveObservable(Control target, string eventName, Control relative, Func<Point, Point> translate)
+        private IObservable<InputArgs> GetMoveObservable(Control target, string eventName, Control relative, Func<Point, Point> translate)
         {
-            return Observable.FromEventPattern<PointerEventArgs>(target, eventName)
-                .Select(e => ToVector2(translate(e.EventArgs.GetPosition(relative))));
+            return Observable.FromEventPattern<PointerEventArgs>(target, eventName).Select(
+                e =>
+                {
+                    return new InputArgs(
+                        ToVector2(
+                            translate(e.EventArgs.GetPosition(relative))),
+                        ToModifierFlags(e.EventArgs.InputModifiers));
+                });
         }
     }
 }
