@@ -104,6 +104,22 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
+        public override void Select(ISet<BaseShape> selected)
+        {
+            base.Select(selected);
+            TopLeft.Select(selected);
+            BottomRight.Select(selected);
+        }
+
+        /// <inheritdoc/>
+        public override void Deselect(ISet<BaseShape> selected)
+        {
+            base.Deselect(selected);
+            TopLeft.Deselect(selected);
+            BottomRight.Deselect(selected);
+        }
+
+        /// <inheritdoc/>
         public override IEnumerable<XPoint> GetPoints()
         {
             yield return TopLeft;

@@ -94,6 +94,30 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
+        public override void Select(ISet<BaseShape> selected)
+        {
+            base.Select(selected);
+
+            var points = this.GetPoints();
+            foreach (var point in points)
+            {
+                point.Select(selected);
+            }
+        }
+
+        /// <inheritdoc/>
+        public override void Deselect(ISet<BaseShape> selected)
+        {
+            base.Deselect(selected);
+
+            var points = this.GetPoints();
+            foreach (var point in points)
+            {
+                point.Deselect(selected);
+            }
+        }
+
+        /// <inheritdoc/>
         public override IEnumerable<XPoint> GetPoints()
         {
             return Geometry.Figures.SelectMany(f => f.GetPoints());

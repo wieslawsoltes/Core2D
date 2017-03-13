@@ -128,6 +128,30 @@ namespace Core2D.Shape
         public abstract void Move(double dx, double dy);
 
         /// <summary>
+        /// Selects the shape.
+        /// </summary>
+        /// <param name="selected">The selected shapes set.</param>
+        public virtual void Select(ISet<BaseShape> selected)
+        {
+            if (!selected.Contains(this))
+            {
+                selected.Add(this);
+            }
+        }
+
+        /// <summary>
+        /// Deselects the shape.
+        /// </summary>
+        /// <param name="selected">The selected shapes set.</param>
+        public virtual void Deselect(ISet<BaseShape> selected)
+        {
+            if (selected.Contains(this))
+            {
+                selected.Remove(this);
+            }
+        }
+
+        /// <summary>
         /// Begins matrix transform.
         /// </summary>
         /// <param name="dc">The generic drawing context object.</param>
