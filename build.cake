@@ -169,6 +169,12 @@ Task("Zip-Files")
     .IsDependentOn("Run-Unit-Tests")
     .Does(() =>
 {
+    Zip((DirectoryPath)Directory("./vc_redist.x86"), zipRootDir.CombineWithFilePath("vc_redist.x86.zip"));
+    Zip((DirectoryPath)Directory("./vc_redist.x64"), zipRootDir.CombineWithFilePath("vc_redist.x64.zip"));
+
+    Zip((DirectoryPath)Directory("./vc_redist.x86/msvcr"), zipRootDir.CombineWithFilePath("vc_redist.x86_msvcr.zip"));
+    Zip((DirectoryPath)Directory("./vc_redist.x64/msvcr"), zipRootDir.CombineWithFilePath("vc_redist.x64_msvcr.zip"));
+
     Zip(zipSourceCairoDir, 
         zipTargetCairoFile, 
         GetFiles(zipSourceCairoDir.FullPath + "/*.dll") + 
