@@ -140,17 +140,17 @@ Task("Run-Unit-Tests")
 });
 
 Task("Copy-Redist-Files")
-    .IsDependentOn("Build")
+    .IsDependentOn("Run-Unit-Tests")
     .Does(() =>
 {
     if (IsRunningOnWindows() && (isPlatformAnyCPU || isPlatformX86 || isPlatformX64))
     {
         var msvcp140 = (isPlatformAnyCPU || isPlatformX86) ?
-            @"c:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Redist\MSVC\14.10.25008\x86\Microsoft.VC150.CRT\msvcp140.dll" : 
-            @"c:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Redist\MSVC\14.10.25008\x64\Microsoft.VC150.CRT\msvcp140.dll";
+            @"c:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.10.25008\x86\Microsoft.VC150.CRT\msvcp140.dll" : 
+            @"c:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.10.25008\x64\Microsoft.VC150.CRT\msvcp140.dll";
         var vcruntime140 = (isPlatformAnyCPU || isPlatformX86) ?
-            @"c:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Redist\MSVC\14.10.25008\x86\Microsoft.VC150.CRT\vcruntime140.dll" :
-            @"c:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Redist\MSVC\14.10.25008\x64\Microsoft.VC150.CRT\vcruntime140.dll";
+            @"c:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.10.25008\x86\Microsoft.VC150.CRT\vcruntime140.dll" :
+            @"c:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.10.25008\x64\Microsoft.VC150.CRT\vcruntime140.dll";
         CopyFileToDirectory(msvcp140, zipSourceCairoDir);
         CopyFileToDirectory(vcruntime140, zipSourceCairoDir);
         CopyFileToDirectory(msvcp140, zipSourceDirect2DDir);
@@ -164,11 +164,7 @@ Task("Copy-Redist-Files")
     }
 });
 
-
-
-
 Task("Zip-Files")
-    .IsDependentOn("Copy-Redist-Files")
     .IsDependentOn("Run-Unit-Tests")
     .Does(() =>
 {
@@ -206,6 +202,7 @@ Task("Default")
 
 Task("AppVeyor")
   .IsDependentOn("Run-Unit-Tests")
+  .IsDependentOn("Copy-Redist-Files")
   .IsDependentOn("Zip-Files");
 
 RunTarget(target);
