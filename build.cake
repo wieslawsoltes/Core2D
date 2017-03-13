@@ -165,7 +165,7 @@ Task("Copy-Redist-Files")
 });
 
 Task("Zip-Files")
-    .IsDependentOn("Copy-Redist-Files")
+    //.IsDependentOn("Copy-Redist-Files")
     .IsDependentOn("Run-Unit-Tests")
     .Does(() =>
 {
