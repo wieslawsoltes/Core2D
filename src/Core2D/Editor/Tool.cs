@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System.Diagnostics;
 using Core2D.Shape;
 
 namespace Core2D.Editor
@@ -19,8 +20,10 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="x">The X coordinate of point.</param>
         /// <param name="y">The Y coordinate of point.</param>
-        public virtual void LeftDown(double x, double y)
+        /// <param name="modifier">The modifier flags.</param>
+        public virtual void LeftDown(double x, double y, ModifierFlags modifier)
         {
+            Debug.WriteLine(string.Format("[{0}] LeftDown X={1} Y={2}, Modifier {3}", Name, x, y, modifier));
         }
 
         /// <summary>
@@ -28,8 +31,10 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="x">The X coordinate of point.</param>
         /// <param name="y">The Y coordinate of point.</param>
-        public virtual void LeftUp(double x, double y)
+        /// <param name="modifier">The modifier flags.</param>
+        public virtual void LeftUp(double x, double y, ModifierFlags modifier)
         {
+            Debug.WriteLine(string.Format("[{0}] LeftUp X={1} Y={2}, Modifier {3}", Name, x, y, modifier));
         }
 
         /// <summary>
@@ -37,8 +42,10 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="x">The X coordinate of point.</param>
         /// <param name="y">The Y coordinate of point.</param>
-        public virtual void RightDown(double x, double y)
+        /// <param name="modifier">The modifier flags.</param>
+        public virtual void RightDown(double x, double y, ModifierFlags modifier)
         {
+            Debug.WriteLine(string.Format("[{0}] RightDown X={1} Y={2}, Modifier {3}", Name, x, y, modifier));
         }
 
         /// <summary>
@@ -46,8 +53,10 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="x">The X coordinate of point.</param>
         /// <param name="y">The Y coordinate of point.</param>
-        public virtual void RightUp(double x, double y)
+        /// <param name="modifier">The modifier flags.</param>
+        public virtual void RightUp(double x, double y, ModifierFlags modifier)
         {
+            Debug.WriteLine(string.Format("[{0}] RightUp X={1} Y={2}, Modifier {3}", Name, x, y, modifier));
         }
 
         /// <summary>
@@ -55,8 +64,10 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="x">The X coordinate of point.</param>
         /// <param name="y">The Y coordinate of point.</param>
-        public virtual void Move(double x, double y)
+        /// <param name="modifier">The modifier flags.</param>
+        public virtual void Move(double x, double y, ModifierFlags modifier)
         {
+            Debug.WriteLine(string.Format("[{0}] Move X={1} Y={2}, Modifier {3}", Name, x, y, modifier));
         }
 
         /// <summary>

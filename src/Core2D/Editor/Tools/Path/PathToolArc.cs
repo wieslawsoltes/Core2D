@@ -51,9 +51,9 @@ namespace Core2D.Editor.Tools.Path
         }
 
         /// <inheritdoc/>
-        public override void LeftDown(double x, double y)
+        public override void LeftDown(double x, double y, ModifierFlags modifier)
         {
-            base.LeftDown(x, y);
+            base.LeftDown(x, y, modifier);
             var editor = _serviceProvider.GetService<ProjectEditor>();
             var pathTool = _serviceProvider.GetService<ToolPath>();
             double sx = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, editor.Project.Options.SnapX) : x;
@@ -124,9 +124,9 @@ namespace Core2D.Editor.Tools.Path
         }
 
         /// <inheritdoc/>
-        public override void RightDown(double x, double y)
+        public override void RightDown(double x, double y, ModifierFlags modifier)
         {
-            base.RightDown(x, y);
+            base.RightDown(x, y, modifier);
             var editor = _serviceProvider.GetService<ProjectEditor>();
             var pathTool = _serviceProvider.GetService<ToolPath>();
             switch (_currentState)
@@ -157,9 +157,9 @@ namespace Core2D.Editor.Tools.Path
         }
 
         /// <inheritdoc/>
-        public override void Move(double x, double y)
+        public override void Move(double x, double y, ModifierFlags modifier)
         {
-            base.Move(x, y);
+            base.Move(x, y, modifier);
             var editor = _serviceProvider.GetService<ProjectEditor>();
             var pathTool = _serviceProvider.GetService<ToolPath>();
             double sx = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, editor.Project.Options.SnapX) : x;

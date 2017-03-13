@@ -198,24 +198,24 @@ namespace Core2D.Editor.Tools
         }
 
         /// <inheritdoc/>
-        public override void LeftDown(double x, double y)
+        public override void LeftDown(double x, double y, ModifierFlags modifier)
         {
-            base.LeftDown(x, y);
-            _serviceProvider.GetService<ProjectEditor>().CurrentPathTool.LeftDown(x, y);
+            base.LeftDown(x, y, modifier);
+            _serviceProvider.GetService<ProjectEditor>().CurrentPathTool.LeftDown(x, y, modifier);
         }
 
         /// <inheritdoc/>
-        public override void RightDown(double x, double y)
+        public override void RightDown(double x, double y, ModifierFlags modifier)
         {
-            base.RightDown(x, y);
-            _serviceProvider.GetService<ProjectEditor>().CurrentPathTool.RightDown(x, y);
+            base.RightDown(x, y, modifier);
+            _serviceProvider.GetService<ProjectEditor>().CurrentPathTool.RightDown(x, y, modifier);
         }
 
         /// <inheritdoc/>
-        public override void Move(double x, double y)
+        public override void Move(double x, double y, ModifierFlags modifier)
         {
-            base.Move(x, y);
-            _serviceProvider.GetService<ProjectEditor>().CurrentPathTool.Move(x, y);
+            base.Move(x, y, modifier);
+            _serviceProvider.GetService<ProjectEditor>().CurrentPathTool.Move(x, y, modifier);
         }
 
         /// <inheritdoc/>
