@@ -146,11 +146,11 @@ Task("Copy-Redist-Files")
     if (IsRunningOnWindows() && (isPlatformAnyCPU || isPlatformX86 || isPlatformX64))
     {
         var msvcp140 = (isPlatformAnyCPU || isPlatformX86) ?
-            @"c:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\VC\Redist\MSVC\14.10.25008\x86\Microsoft.VC150.CRT\msvcp140.dll" : 
-            @"c:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\VC\Redist\MSVC\14.10.25008\x64\Microsoft.VC150.CRT\msvcp140.dll";
+            @"c:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Redist\MSVC\14.10.25008\x86\Microsoft.VC150.CRT\msvcp140.dll" : 
+            @"c:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Redist\MSVC\14.10.25008\x64\Microsoft.VC150.CRT\msvcp140.dll";
         var vcruntime140 = (isPlatformAnyCPU || isPlatformX86) ?
-            @"c:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\VC\Redist\MSVC\14.10.25008\x86\Microsoft.VC150.CRT\vcruntime140.dll" :
-            @"c:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\VC\Redist\MSVC\14.10.25008\x64\Microsoft.VC150.CRT\vcruntime140.dll";
+            @"c:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Redist\MSVC\14.10.25008\x86\Microsoft.VC150.CRT\vcruntime140.dll" :
+            @"c:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Redist\MSVC\14.10.25008\x64\Microsoft.VC150.CRT\vcruntime140.dll";
         CopyFileToDirectory(msvcp140, zipSourceCairoDir);
         CopyFileToDirectory(vcruntime140, zipSourceCairoDir);
         CopyFileToDirectory(msvcp140, zipSourceDirect2DDir);
