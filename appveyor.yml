@@ -3,6 +3,9 @@ platform:
 - AnyCPU
 configuration:
 - Release
+install:
+  - if not exist vc_redist.x86.exe appveyor DownloadFile https://download.microsoft.com/download/6/A/A/6AA4EDFF-645B-48C5-81CC-ED5963AEAD48/vc_redist.x86.exe -FileName "vc_redist.x86.exe"
+  - if not exist vc_redist.x64.exe appveyor DownloadFile https://download.microsoft.com/download/6/A/A/6AA4EDFF-645B-48C5-81CC-ED5963AEAD48/vc_redist.x64.exe -FileName "vc_redist.x64.exe"
 before_build:
 - cmd: git submodule update --init
 build_script:
@@ -17,3 +20,6 @@ notifications:
 artifacts:
   - path: artifacts\test-results\*.xml
   - path: artifacts\zip\*.zip
+cache:
+  - vc_redist.x86.exe
+  - vc_redist.x64.exe
