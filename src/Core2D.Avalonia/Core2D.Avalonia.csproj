@@ -15,8 +15,8 @@
 
   <ItemGroup>
     <Compile Update="**\*.xaml.cs">
-        <DependentUpon>%(Filename)</DependentUpon>
-        <SubType>Code</SubType>
+      <DependentUpon>%(Filename)</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <EmbeddedResource Include="**\*.xaml" />
   </ItemGroup>
