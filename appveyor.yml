@@ -8,14 +8,12 @@ install:
   - if not exist dotnet-1.0.1.exe appveyor DownloadFile https://go.microsoft.com/fwlink/?linkid=843448 -FileName "dotnet-1.0.1.exe"
   - if not exist vc_redist.x86.exe appveyor DownloadFile https://download.microsoft.com/download/6/A/A/6AA4EDFF-645B-48C5-81CC-ED5963AEAD48/vc_redist.x86.exe -FileName "vc_redist.x86.exe"
   - if not exist vc_redist.x64.exe appveyor DownloadFile https://download.microsoft.com/download/6/A/A/6AA4EDFF-645B-48C5-81CC-ED5963AEAD48/vc_redist.x64.exe -FileName "vc_redist.x64.exe"
-  - ps: msiexec /i gtk-sharp-2.12.26.msi /quiet /qn /norestart
-  - ps: .\dotnet-1.0.1.exe /quiet
-  - ps: .\vc_redist.x86.exe /?
-  - ps: .\vc_redist.x64.exe /?
-  - ps: .\vc_redist.x86.exe /extract:"vc_redist.x86" /quiet /passive
-  - ps: msiexec /a "vc_redist.x86\vc_red.msi" /qb TARGETDIR="vc_redist.x86\msvcr"
-  - ps: .\vc_redist.x64.exe /extract:"vc_redist.x64" /quiet /passive
-  - ps: msiexec /a "vc_redist.x64\vc_red.msi" /qb TARGETDIR="vc_redist.x64\msvcr"
+  - ps: Start-Process -FilePath "msiexec" -ArgumentList "/i gtk-sharp-2.12.26.msi /quiet /qn /norestart" -Wait -Passthru
+  - ps: Start-Process -FilePath "dotnet-1.0.1.exe" -ArgumentList "/quiet" -Wait -Passthru
+  - ps: Start-Process -FilePath "vc_redist.x86.exe" -ArgumentList " /extract:vc_redist.x86 /quiet /passive" -Wait -Passthru
+  - ps: Start-Process -FilePath "msiexec" -ArgumentList "/a vc_redist.x86\vc_red.msi /qb TARGETDIR=vc_redist.x86\msvcr" -Wait -Passthru
+  - ps: Start-Process -FilePath "vc_redist.x64.exe" -ArgumentList " /extract:vc_redist.x64 /quiet /passive" -Wait -Passthru
+  - ps: Start-Process -FilePath "msiexec" -ArgumentList "/a vc_redist.x64\vc_red.msi /qb TARGETDIR=vc_redist.x64\msvcr" -Wait -Passthru
   - cmd: set PATH=%programfiles(x86)%\GtkSharp\2.12\bin\;%PATH%
 before_build:
 - cmd: git submodule update --init
