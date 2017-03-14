@@ -18,56 +18,46 @@ namespace Core2D.Editor
         /// <summary>
         /// Handle mouse left button down events.
         /// </summary>
-        /// <param name="x">The X coordinate of point.</param>
-        /// <param name="y">The Y coordinate of point.</param>
-        /// <param name="modifier">The modifier flags.</param>
-        public virtual void LeftDown(double x, double y, ModifierFlags modifier)
+        /// <param name="args">The input arguments.</param>
+        public virtual void LeftDown(InputArgs args)
         {
-            Debug.WriteLine(string.Format("[{0}] LeftDown X={1} Y={2}, Modifier {3}", Name, x, y, modifier));
+            Debug.WriteLine($"[{Name}] LeftDown X={args.X} Y={args.Y}, Modifier {args.Modifier}");
         }
 
         /// <summary>
         /// Handle mouse left button up events.
         /// </summary>
-        /// <param name="x">The X coordinate of point.</param>
-        /// <param name="y">The Y coordinate of point.</param>
-        /// <param name="modifier">The modifier flags.</param>
-        public virtual void LeftUp(double x, double y, ModifierFlags modifier)
+        /// <param name="args">The input arguments.</param>
+        public virtual void LeftUp(InputArgs args)
         {
-            Debug.WriteLine(string.Format("[{0}] LeftUp X={1} Y={2}, Modifier {3}", Name, x, y, modifier));
+            Debug.WriteLine($"[{Name}] LeftDown X={args.X} Y={args.Y}, Modifier {args.Modifier}");
         }
 
         /// <summary>
         /// Handle mouse right button down events.
         /// </summary>
-        /// <param name="x">The X coordinate of point.</param>
-        /// <param name="y">The Y coordinate of point.</param>
-        /// <param name="modifier">The modifier flags.</param>
-        public virtual void RightDown(double x, double y, ModifierFlags modifier)
+        /// <param name="args">The input arguments.</param>
+        public virtual void RightDown(InputArgs args)
         {
-            Debug.WriteLine(string.Format("[{0}] RightDown X={1} Y={2}, Modifier {3}", Name, x, y, modifier));
+            Debug.WriteLine($"[{Name}] LeftDown X={args.X} Y={args.Y}, Modifier {args.Modifier}");
         }
 
         /// <summary>
         /// Handle mouse right button up events.
         /// </summary>
-        /// <param name="x">The X coordinate of point.</param>
-        /// <param name="y">The Y coordinate of point.</param>
-        /// <param name="modifier">The modifier flags.</param>
-        public virtual void RightUp(double x, double y, ModifierFlags modifier)
+        /// <param name="args">The input arguments.</param>
+        public virtual void RightUp(InputArgs args)
         {
-            Debug.WriteLine(string.Format("[{0}] RightUp X={1} Y={2}, Modifier {3}", Name, x, y, modifier));
+            Debug.WriteLine($"[{Name}] LeftDown X={args.X} Y={args.Y}, Modifier {args.Modifier}");
         }
 
         /// <summary>
         /// Handle mouse move events.
         /// </summary>
-        /// <param name="x">The X coordinate of point.</param>
-        /// <param name="y">The Y coordinate of point.</param>
-        /// <param name="modifier">The modifier flags.</param>
-        public virtual void Move(double x, double y, ModifierFlags modifier)
+        /// <param name="args">The input arguments.</param>
+        public virtual void Move(InputArgs args)
         {
-            Debug.WriteLine(string.Format("[{0}] Move X={1} Y={2}, Modifier {3}", Name, x, y, modifier));
+            Debug.WriteLine($"[{Name}] LeftDown X={args.X} Y={args.Y}, Modifier {args.Modifier}");
         }
 
         /// <summary>
