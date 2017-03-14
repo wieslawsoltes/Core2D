@@ -23,8 +23,8 @@ namespace Core2D.Style
         [Name]
         public string Name
         {
-            get { return _name; }
-            set { Update(ref _name, value); }
+            get => _name;
+            set => Update(ref _name, value);
         }
 
         /// <summary>
@@ -32,8 +32,8 @@ namespace Core2D.Style
         /// </summary>
         public string FontName
         {
-            get { return _fontName; }
-            set { Update(ref _fontName, value); }
+            get => _fontName;
+            set => Update(ref _fontName, value);
         }
 
         /// <summary>
@@ -41,8 +41,8 @@ namespace Core2D.Style
         /// </summary>
         public string FontFile
         {
-            get { return _fontFile; }
-            set { Update(ref _fontFile, value); }
+            get => _fontFile;
+            set => Update(ref _fontFile, value);
         }
 
         /// <summary>
@@ -50,8 +50,8 @@ namespace Core2D.Style
         /// </summary>
         public double FontSize
         {
-            get { return _fontSize; }
-            set { Update(ref _fontSize, value); }
+            get => _fontSize;
+            set => Update(ref _fontSize, value);
         }
 
         /// <summary>
@@ -59,8 +59,8 @@ namespace Core2D.Style
         /// </summary>
         public FontStyle FontStyle
         {
-            get { return _fontStyle; }
-            set { Update(ref _fontStyle, value); }
+            get => _fontStyle;
+            set => Update(ref _fontStyle, value);
         }
 
         /// <summary>
@@ -68,8 +68,8 @@ namespace Core2D.Style
         /// </summary>
         public TextHAlignment TextHAlignment
         {
-            get { return _textHAlignment; }
-            set { Update(ref _textHAlignment, value); }
+            get => _textHAlignment;
+            set => Update(ref _textHAlignment, value);
         }
 
         /// <summary>
@@ -77,8 +77,8 @@ namespace Core2D.Style
         /// </summary>
         public TextVAlignment TextVAlignment
         {
-            get { return _textVAlignment; }
-            set { Update(ref _textVAlignment, value); }
+            get => _textVAlignment;
+            set => Update(ref _textVAlignment, value);
         }
 
         /// <summary>
