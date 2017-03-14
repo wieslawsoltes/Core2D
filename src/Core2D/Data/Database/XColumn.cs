@@ -21,8 +21,8 @@ namespace Core2D.Data.Database
         /// </summary>
         public Guid Id
         {
-            get { return _id; }
-            set { Update(ref _id, value); }
+            get => _id;
+            set => Update(ref _id, value);
         }
 
         /// <summary>
@@ -31,8 +31,8 @@ namespace Core2D.Data.Database
         [Content]
         public string Name
         {
-            get { return _name; }
-            set { Update(ref _name, value); }
+            get => _name;
+            set => Update(ref _name, value);
         }
 
         /// <summary>
@@ -40,8 +40,8 @@ namespace Core2D.Data.Database
         /// </summary>
         public double Width
         {
-            get { return _width; }
-            set { Update(ref _width, value); }
+            get => _width;
+            set => Update(ref _width, value);
         }
 
         /// <summary>
@@ -49,8 +49,8 @@ namespace Core2D.Data.Database
         /// </summary>
         public bool IsVisible
         {
-            get { return _isVisible; }
-            set { Update(ref _isVisible, value); }
+            get => _isVisible;
+            set => Update(ref _isVisible, value);
         }
 
         /// <summary>
@@ -58,8 +58,8 @@ namespace Core2D.Data.Database
         /// </summary>
         public XDatabase Owner
         {
-            get { return _owner; }
-            set { Update(ref _owner, value); }
+            get => _owner;
+            set => Update(ref _owner, value);
         }
 
         /// <summary>
