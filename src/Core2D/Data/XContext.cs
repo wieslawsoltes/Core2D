@@ -18,11 +18,7 @@ namespace Core2D.Data
         /// <summary>
         /// Initializes a new instance of the <see cref="XContext"/> class.
         /// </summary>
-        public XContext()
-            : base()
-        {
-            _properties = ImmutableArray.Create<XProperty>();
-        }
+        public XContext() : base() => _properties = ImmutableArray.Create<XProperty>();
 
         /// <summary>
         /// Gets or sets a collection <see cref="XProperty"/> that will be used during drawing.
@@ -30,8 +26,8 @@ namespace Core2D.Data
         [Content]
         public ImmutableArray<XProperty> Properties
         {
-            get { return _properties; }
-            set { Update(ref _properties, value); }
+            get => _properties;
+            set => Update(ref _properties, value);
         }
 
         /// <summary>
@@ -39,8 +35,8 @@ namespace Core2D.Data
         /// </summary>
         public XRecord Record
         {
-            get { return _record; }
-            set { Update(ref _record, value); }
+            get => _record;
+            set => Update(ref _record, value);
         }
 
         /// <summary>
@@ -84,22 +80,13 @@ namespace Core2D.Data
         /// Creates a new <see cref="XContext"/> instance.
         /// </summary>
         /// <returns>The new instance of the <see cref="XContext"/> class.</returns>
-        public static XContext Create()
-        {
-            return new XContext();
-        }
+        public static XContext Create() => new XContext();
 
         /// <summary>
         /// Creates a new <see cref="XContext"/> instance.
         /// </summary>
         /// <param name="record">The record instance.</param>
         /// <returns>The new instance of the <see cref="XContext"/> class.</returns>
-        public static XContext Create(XRecord record)
-        {
-            return new XContext()
-            {
-                Record = record
-            };
-        }
+        public static XContext Create(XRecord record) => new XContext() { Record = record };
     }
 }
