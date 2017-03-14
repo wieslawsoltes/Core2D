@@ -32,8 +32,8 @@ namespace Core2D.Data.Database
         /// </summary>
         public Guid Id
         {
-            get { return _id; }
-            set { Update(ref _id, value); }
+            get => _id;
+            set => Update(ref _id, value);
         }
 
         /// <summary>
@@ -41,8 +41,8 @@ namespace Core2D.Data.Database
         /// </summary>
         public ImmutableArray<XColumn> Columns
         {
-            get { return _columns; }
-            set { Update(ref _columns, value); }
+            get => _columns;
+            set => Update(ref _columns, value);
         }
 
         /// <summary>
@@ -51,8 +51,8 @@ namespace Core2D.Data.Database
         [Content]
         public ImmutableArray<XValue> Values
         {
-            get { return _values; }
-            set { Update(ref _values, value); }
+            get => _values;
+            set => Update(ref _values, value);
         }
 
         /// <summary>
@@ -60,8 +60,8 @@ namespace Core2D.Data.Database
         /// </summary>
         public XDatabase Owner
         {
-            get { return _owner; }
-            set { Update(ref _owner, value); }
+            get => _owner;
+            set => Update(ref _owner, value);
         }
 
         /// <summary>
