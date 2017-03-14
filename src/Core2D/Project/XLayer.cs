@@ -40,8 +40,8 @@ namespace Core2D.Project
         [Name]
         public string Name
         {
-            get { return _name; }
-            set { Update(ref _name, value); }
+            get => _name;
+            set => Update(ref _name, value);
         }
 
         /// <summary>
@@ -49,8 +49,8 @@ namespace Core2D.Project
         /// </summary>
         public XContainer Owner
         {
-            get { return _owner; }
-            set { Update(ref _owner, value); }
+            get => _owner;
+            set => Update(ref _owner, value);
         }
 
         /// <summary>
@@ -68,30 +68,19 @@ namespace Core2D.Project
         [Content]
         public ImmutableArray<BaseShape> Shapes
         {
-            get { return _shapes; }
-            set { Update(ref _shapes, value); }
+            get => _shapes;
+            set => Update(ref _shapes, value);
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="XLayer"/> class.
         /// </summary>
-        public XLayer()
-            : base()
-        {
-            _shapes = ImmutableArray.Create<BaseShape>();
-        }
+        public XLayer() : base() => _shapes = ImmutableArray.Create<BaseShape>();
 
         /// <summary>
         /// Invalidate layer shapes.
         /// </summary>
-        public void Invalidate()
-        {
-            var handler = InvalidateLayer;
-            if (handler != null)
-            {
-                handler(this, new InvalidateLayerEventArgs());
-            }
-        }
+        public void Invalidate() => InvalidateLayer?.Invoke(this, new InvalidateLayerEventArgs());
 
         /// <summary>
         /// Creates a new <see cref="XLayer"/> instance.
