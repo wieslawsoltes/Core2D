@@ -20,8 +20,8 @@ namespace Core2D.Path
         [Content]
         public ImmutableArray<XPathFigure> Figures
         {
-            get { return _figures; }
-            set { Update(ref _figures, value); }
+            get => _figures;
+            set => Update(ref _figures, value);
         }
 
         /// <summary>
@@ -29,17 +29,14 @@ namespace Core2D.Path
         /// </summary>
         public XFillRule FillRule
         {
-            get { return _fillRule; }
-            set { Update(ref _fillRule, value); }
+            get => _fillRule;
+            set => Update(ref _fillRule, value);
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="XPathGeometry"/> class.
         /// </summary>
-        public XPathGeometry()
-        {
-            Figures = ImmutableArray.Create<XPathFigure>();
-        }
+        public XPathGeometry() => Figures = ImmutableArray.Create<XPathFigure>();
 
         /// <summary>
         /// Creates a new <see cref="XPathGeometry"/> instance.
