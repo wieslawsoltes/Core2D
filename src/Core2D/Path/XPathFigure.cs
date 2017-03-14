@@ -24,8 +24,8 @@ namespace Core2D.Path
         /// </summary>
         public XPoint StartPoint
         {
-            get { return _startPoint; }
-            set { Update(ref _startPoint, value); }
+            get => _startPoint;
+            set => Update(ref _startPoint, value);
         }
 
         /// <summary>
@@ -34,8 +34,8 @@ namespace Core2D.Path
         [Content]
         public ImmutableArray<XPathSegment> Segments
         {
-            get { return _segments; }
-            set { Update(ref _segments, value); }
+            get => _segments;
+            set => Update(ref _segments, value);
         }
 
         /// <summary>
@@ -43,8 +43,8 @@ namespace Core2D.Path
         /// </summary>
         public bool IsFilled
         {
-            get { return _isFilled; }
-            set { Update(ref _isFilled, value); }
+            get => _isFilled;
+            set => Update(ref _isFilled, value);
         }
 
         /// <summary>
@@ -52,8 +52,8 @@ namespace Core2D.Path
         /// </summary>
         public bool IsClosed
         {
-            get { return _isClosed; }
-            set { Update(ref _isClosed, value); }
+            get => _isClosed;
+            set => Update(ref _isClosed, value);
         }
 
         /// <summary>
