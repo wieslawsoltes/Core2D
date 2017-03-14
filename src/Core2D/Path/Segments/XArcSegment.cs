@@ -21,8 +21,8 @@ namespace Core2D.Path.Segments
         /// </summary>
         public XPoint Point
         {
-            get { return _point; }
-            set { Update(ref _point, value); }
+            get => _point;
+            set => Update(ref _point, value);
         }
 
         /// <summary>
@@ -30,8 +30,8 @@ namespace Core2D.Path.Segments
         /// </summary>
         public XPathSize Size
         {
-            get { return _size; }
-            set { Update(ref _size, value); }
+            get => _size;
+            set => Update(ref _size, value);
         }
 
         /// <summary>
@@ -39,8 +39,8 @@ namespace Core2D.Path.Segments
         /// </summary>
         public double RotationAngle
         {
-            get { return _rotationAngle; }
-            set { Update(ref _rotationAngle, value); }
+            get => _rotationAngle;
+            set => Update(ref _rotationAngle, value);
         }
 
         /// <summary>
@@ -48,8 +48,8 @@ namespace Core2D.Path.Segments
         /// </summary>
         public bool IsLargeArc
         {
-            get { return _isLargeArc; }
-            set { Update(ref _isLargeArc, value); }
+            get => _isLargeArc;
+            set => Update(ref _isLargeArc, value);
         }
 
         /// <summary>
@@ -57,8 +57,8 @@ namespace Core2D.Path.Segments
         /// </summary>
         public XSweepDirection SweepDirection
         {
-            get { return _sweepDirection; }
-            set { Update(ref _sweepDirection, value); }
+            get => _sweepDirection;
+            set => Update(ref _sweepDirection, value);
         }
 
         /// <inheritdoc/>
