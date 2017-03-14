@@ -22,8 +22,8 @@ namespace Core2D.Style
         /// </summary>
         public byte A
         {
-            get { return _a; }
-            set { Update(ref _a, value); }
+            get => _a;
+            set => Update(ref _a, value);
         }
 
         /// <summary>
@@ -31,8 +31,8 @@ namespace Core2D.Style
         /// </summary>
         public byte R
         {
-            get { return _r; }
-            set { Update(ref _r, value); }
+            get => _r;
+            set => Update(ref _r, value);
         }
 
         /// <summary>
@@ -40,8 +40,8 @@ namespace Core2D.Style
         /// </summary>
         public byte G
         {
-            get { return _g; }
-            set { Update(ref _g, value); }
+            get => _g;
+            set => Update(ref _g, value);
         }
 
         /// <summary>
@@ -49,8 +49,8 @@ namespace Core2D.Style
         /// </summary>
         public byte B
         {
-            get { return _b; }
-            set { Update(ref _b, value); }
+            get => _b;
+            set => Update(ref _b, value);
         }
 
         /// <summary>
