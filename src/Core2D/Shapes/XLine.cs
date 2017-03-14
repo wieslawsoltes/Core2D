@@ -24,8 +24,8 @@ namespace Core2D.Shapes
         /// </summary>
         public XPoint Start
         {
-            get { return _start; }
-            set { Update(ref _start, value); }
+            get => _start;
+            set => Update(ref _start, value);
         }
 
         /// <summary>
@@ -33,8 +33,8 @@ namespace Core2D.Shapes
         /// </summary>
         public XPoint End
         {
-            get { return _end; }
-            set { Update(ref _end, value); }
+            get => _end;
+            set => Update(ref _end, value);
         }
 
         /// <inheritdoc/>
