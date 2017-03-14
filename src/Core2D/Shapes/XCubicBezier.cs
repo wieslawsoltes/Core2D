@@ -26,8 +26,8 @@ namespace Core2D.Shapes
         /// </summary>
         public XPoint Point1
         {
-            get { return _point1; }
-            set { Update(ref _point1, value); }
+            get => _point1;
+            set => Update(ref _point1, value);
         }
 
         /// <summary>
@@ -35,8 +35,8 @@ namespace Core2D.Shapes
         /// </summary>
         public XPoint Point2
         {
-            get { return _point2; }
-            set { Update(ref _point2, value); }
+            get => _point2;
+            set => Update(ref _point2, value);
         }
 
         /// <summary>
@@ -44,8 +44,8 @@ namespace Core2D.Shapes
         /// </summary>
         public XPoint Point3
         {
-            get { return _point3; }
-            set { Update(ref _point3, value); }
+            get => _point3;
+            set => Update(ref _point3, value);
         }
 
         /// <summary>
@@ -53,8 +53,8 @@ namespace Core2D.Shapes
         /// </summary>
         public XPoint Point4
         {
-            get { return _point4; }
-            set { Update(ref _point4, value); }
+            get => _point4;
+            set => Update(ref _point4, value);
         }
 
         /// <inheritdoc/>
