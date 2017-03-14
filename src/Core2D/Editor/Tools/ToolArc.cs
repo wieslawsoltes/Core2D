@@ -51,8 +51,7 @@ namespace Core2D.Editor.Tools
         {
             base.LeftDown(args);
             var editor = _serviceProvider.GetService<ProjectEditor>();
-            double sx = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(args.X, editor.Project.Options.SnapX) : args.X;
-            double sy = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(args.Y, editor.Project.Options.SnapY) : args.Y;
+            (double sx, double sy) = editor.TryToSnap(args);
             switch (_currentState)
             {
                 case State.Point1:
@@ -188,8 +187,7 @@ namespace Core2D.Editor.Tools
         {
             base.Move(args);
             var editor = _serviceProvider.GetService<ProjectEditor>();
-            double sx = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(args.X, editor.Project.Options.SnapX) : args.X;
-            double sy = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(args.Y, editor.Project.Options.SnapY) : args.Y;
+            (double sx, double sy) = editor.TryToSnap(args);
             switch (_currentState)
             {
                 case State.Point1:
