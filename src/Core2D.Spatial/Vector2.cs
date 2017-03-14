@@ -58,6 +58,12 @@ namespace Core2D.Spatial
             this.Y = y;
         }
 
+        public void Deconstruct(out double x, out double y)
+        {
+            x = this.X;
+            y = this.Y;
+        }
+
         public Vector2 Negate()
         {
             return new Vector2(-X, -Y);
