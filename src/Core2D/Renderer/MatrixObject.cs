@@ -48,8 +48,8 @@ namespace Core2D.Renderer
         /// </summary>
         public double M11
         {
-            get { return _m11; }
-            set { Update(ref _m11, value); }
+            get => _m11;
+            set => Update(ref _m11, value);
         }
 
         /// <summary>
@@ -57,8 +57,8 @@ namespace Core2D.Renderer
         /// </summary>
         public double M12
         {
-            get { return _m12; }
-            set { Update(ref _m12, value); }
+            get => _m12;
+            set => Update(ref _m12, value);
         }
 
         /// <summary>
@@ -66,8 +66,8 @@ namespace Core2D.Renderer
         /// </summary>
         public double M21
         {
-            get { return _m21; }
-            set { Update(ref _m21, value); }
+            get => _m21;
+            set => Update(ref _m21, value);
         }
 
         /// <summary>
@@ -75,8 +75,8 @@ namespace Core2D.Renderer
         /// </summary>
         public double M22
         {
-            get { return _m22; }
-            set { Update(ref _m22, value); }
+            get => _m22;
+            set => Update(ref _m22, value);
         }
 
         /// <summary>
@@ -84,8 +84,8 @@ namespace Core2D.Renderer
         /// </summary>
         public double OffsetX
         {
-            get { return _offsetX; }
-            set { Update(ref _offsetX, value); }
+            get => _offsetX;
+            set => Update(ref _offsetX, value);
         }
 
         /// <summary>
@@ -93,8 +93,8 @@ namespace Core2D.Renderer
         /// </summary>
         public double OffsetY
         {
-            get { return _offsetY; }
-            set { Update(ref _offsetY, value); }
+            get => _offsetY;
+            set => Update(ref _offsetY, value);
         }
 
         /// <summary>
