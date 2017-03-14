@@ -26,8 +26,8 @@ namespace Core2D.Shapes
         /// </summary>
         public XPoint TopLeft
         {
-            get { return _topLeft; }
-            set { Update(ref _topLeft, value); }
+            get => _topLeft;
+            set => Update(ref _topLeft, value);
         }
 
         /// <summary>
@@ -35,8 +35,8 @@ namespace Core2D.Shapes
         /// </summary>
         public XPoint BottomRight
         {
-            get { return _bottomRight; }
-            set { Update(ref _bottomRight, value); }
+            get => _bottomRight;
+            set => Update(ref _bottomRight, value);
         }
 
         /// <summary>
@@ -44,8 +44,8 @@ namespace Core2D.Shapes
         /// </summary>
         public string Text
         {
-            get { return _text; }
-            set { Update(ref _text, value); }
+            get => _text;
+            set => Update(ref _text, value);
         }
 
         /// <inheritdoc/>
