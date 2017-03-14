@@ -34,8 +34,8 @@ namespace Core2D.Project
         /// </summary>
         public bool SnapToGrid
         {
-            get { return _snapToGrid; }
-            set { Update(ref _snapToGrid, value); }
+            get => _snapToGrid;
+            set => Update(ref _snapToGrid, value);
         }
 
         /// <summary>
@@ -43,8 +43,8 @@ namespace Core2D.Project
         /// </summary>
         public double SnapX
         {
-            get { return _snapX; }
-            set { Update(ref _snapX, value); }
+            get => _snapX;
+            set => Update(ref _snapX, value);
         }
 
         /// <summary>
@@ -52,8 +52,8 @@ namespace Core2D.Project
         /// </summary>
         public double SnapY
         {
-            get { return _snapY; }
-            set { Update(ref _snapY, value); }
+            get => _snapY;
+            set => Update(ref _snapY, value);
         }
 
         /// <summary>
@@ -61,8 +61,8 @@ namespace Core2D.Project
         /// </summary>
         public double HitThreshold
         {
-            get { return _hitThreshold; }
-            set { Update(ref _hitThreshold, value); }
+            get => _hitThreshold;
+            set => Update(ref _hitThreshold, value);
         }
 
         /// <summary>
@@ -70,8 +70,8 @@ namespace Core2D.Project
         /// </summary>
         public XMoveMode MoveMode
         {
-            get { return _moveMode; }
-            set { Update(ref _moveMode, value); }
+            get => _moveMode;
+            set => Update(ref _moveMode, value);
         }
 
         /// <summary>
@@ -79,8 +79,8 @@ namespace Core2D.Project
         /// </summary>
         public bool DefaultIsStroked
         {
-            get { return _defaultIsStroked; }
-            set { Update(ref _defaultIsStroked, value); }
+            get => _defaultIsStroked;
+            set => Update(ref _defaultIsStroked, value);
         }
 
         /// <summary>
@@ -88,8 +88,8 @@ namespace Core2D.Project
         /// </summary>
         public bool DefaultIsFilled
         {
-            get { return _defaultIsFilled; }
-            set { Update(ref _defaultIsFilled, value); }
+            get => _defaultIsFilled;
+            set => Update(ref _defaultIsFilled, value);
         }
 
         /// <summary>
@@ -97,8 +97,8 @@ namespace Core2D.Project
         /// </summary>
         public bool DefaultIsClosed
         {
-            get { return _defaultIsClosed; }
-            set { Update(ref _defaultIsClosed, value); }
+            get => _defaultIsClosed;
+            set => Update(ref _defaultIsClosed, value);
         }
 
         /// <summary>
@@ -106,8 +106,8 @@ namespace Core2D.Project
         /// </summary>
         public bool DefaultIsSmoothJoin
         {
-            get { return _defaultIsSmoothJoin; }
-            set { Update(ref _defaultIsSmoothJoin, value); }
+            get => _defaultIsSmoothJoin;
+            set => Update(ref _defaultIsSmoothJoin, value);
         }
 
         /// <summary>
@@ -115,8 +115,8 @@ namespace Core2D.Project
         /// </summary>
         public XFillRule DefaultFillRule
         {
-            get { return _defaultFillRule; }
-            set { Update(ref _defaultFillRule, value); }
+            get => _defaultFillRule;
+            set => Update(ref _defaultFillRule, value);
         }
 
         /// <summary>
@@ -124,8 +124,8 @@ namespace Core2D.Project
         /// </summary>
         public bool TryToConnect
         {
-            get { return _tryToConnect; }
-            set { Update(ref _tryToConnect, value); }
+            get => _tryToConnect;
+            set => Update(ref _tryToConnect, value);
         }
 
         /// <summary>
@@ -133,8 +133,8 @@ namespace Core2D.Project
         /// </summary>
         public BaseShape PointShape
         {
-            get { return _pointShape; }
-            set { Update(ref _pointShape, value); }
+            get => _pointShape;
+            set => Update(ref _pointShape, value);
         }
 
         /// <summary>
@@ -142,8 +142,8 @@ namespace Core2D.Project
         /// </summary>
         public ShapeStyle PointStyle
         {
-            get { return _pointStyle; }
-            set { Update(ref _pointStyle, value); }
+            get => _pointStyle;
+            set => Update(ref _pointStyle, value);
         }
 
         /// <summary>
@@ -151,8 +151,8 @@ namespace Core2D.Project
         /// </summary>
         public ShapeStyle SelectionStyle
         {
-            get { return _selectionStyle; }
-            set { Update(ref _selectionStyle, value); }
+            get => _selectionStyle;
+            set => Update(ref _selectionStyle, value);
         }
 
         /// <summary>
@@ -160,8 +160,8 @@ namespace Core2D.Project
         /// </summary>
         public ShapeStyle HelperStyle
         {
-            get { return _helperStyle; }
-            set { Update(ref _helperStyle, value); }
+            get => _helperStyle;
+            set => Update(ref _helperStyle, value);
         }
 
         /// <summary>
@@ -169,8 +169,8 @@ namespace Core2D.Project
         /// </summary>
         public bool CloneStyle
         {
-            get { return _cloneStyle; }
-            set { Update(ref _cloneStyle, value); }
+            get => _cloneStyle;
+            set => Update(ref _cloneStyle, value);
         }
 
         /// <summary>
