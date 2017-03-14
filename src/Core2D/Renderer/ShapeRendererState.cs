@@ -24,8 +24,8 @@ namespace Core2D.Renderer
         /// </summary>
         public double PanX
         {
-            get { return _panX; }
-            set { Update(ref _panX, value); }
+            get => _panX;
+            set => Update(ref _panX, value);
         }
 
         /// <summary>
@@ -33,8 +33,8 @@ namespace Core2D.Renderer
         /// </summary>
         public double PanY
         {
-            get { return _panY; }
-            set { Update(ref _panY, value); }
+            get => _panY;
+            set => Update(ref _panY, value);
         }
 
         /// <summary>
@@ -42,8 +42,8 @@ namespace Core2D.Renderer
         /// </summary>
         public double ZoomX
         {
-            get { return _zoomX; }
-            set { Update(ref _zoomX, value); }
+            get => _zoomX;
+            set => Update(ref _zoomX, value);
         }
 
         /// <summary>
@@ -51,8 +51,8 @@ namespace Core2D.Renderer
         /// </summary>
         public double ZoomY
         {
-            get { return _zoomY; }
-            set { Update(ref _zoomY, value); }
+            get => _zoomY;
+            set => Update(ref _zoomY, value);
         }
 
         /// <summary>
@@ -60,8 +60,8 @@ namespace Core2D.Renderer
         /// </summary>
         public ShapeState DrawShapeState
         {
-            get { return _drawShapeState; }
-            set { Update(ref _drawShapeState, value); }
+            get => _drawShapeState;
+            set => Update(ref _drawShapeState, value);
         }
 
         /// <summary>
@@ -69,8 +69,8 @@ namespace Core2D.Renderer
         /// </summary>
         public BaseShape SelectedShape
         {
-            get { return _selectedShape; }
-            set { Update(ref _selectedShape, value); }
+            get => _selectedShape;
+            set => Update(ref _selectedShape, value);
         }
 
         /// <summary>
@@ -78,8 +78,8 @@ namespace Core2D.Renderer
         /// </summary>
         public ImmutableHashSet<BaseShape> SelectedShapes
         {
-            get { return _selectedShapes; }
-            set { Update(ref _selectedShapes, value); }
+            get => _selectedShapes;
+            set => Update(ref _selectedShapes, value);
         }
 
         /// <summary>
@@ -87,8 +87,8 @@ namespace Core2D.Renderer
         /// </summary>
         public IImageCache ImageCache
         {
-            get { return _imageCache; }
-            set { Update(ref _imageCache, value); }
+            get => _imageCache;
+            set => Update(ref _imageCache, value);
         }
 
         /// <summary>
