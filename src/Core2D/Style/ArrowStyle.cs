@@ -19,8 +19,8 @@ namespace Core2D.Style
         /// </summary>
         public ArrowType ArrowType
         {
-            get { return _arrowType; }
-            set { Update(ref _arrowType, value); }
+            get => _arrowType;
+            set => Update(ref _arrowType, value);
         }
 
         /// <summary>
@@ -28,8 +28,8 @@ namespace Core2D.Style
         /// </summary>
         public bool IsStroked
         {
-            get { return _isStroked; }
-            set { Update(ref _isStroked, value); }
+            get => _isStroked;
+            set => Update(ref _isStroked, value);
         }
 
         /// <summary>
@@ -37,8 +37,8 @@ namespace Core2D.Style
         /// </summary>
         public bool IsFilled
         {
-            get { return _isFilled; }
-            set { Update(ref _isFilled, value); }
+            get => _isFilled;
+            set => Update(ref _isFilled, value);
         }
 
         /// <summary>
@@ -46,8 +46,8 @@ namespace Core2D.Style
         /// </summary>
         public double RadiusX
         {
-            get { return _radiusX; }
-            set { Update(ref _radiusX, value); }
+            get => _radiusX;
+            set => Update(ref _radiusX, value);
         }
 
         /// <summary>
@@ -55,8 +55,8 @@ namespace Core2D.Style
         /// </summary>
         public double RadiusY
         {
-            get { return _radiusY; }
-            set { Update(ref _radiusY, value); }
+            get => _radiusY;
+            set => Update(ref _radiusY, value);
         }
 
         /// <summary>
