@@ -42,8 +42,8 @@ namespace Core2D.Shape
         [Name]
         public virtual string Name
         {
-            get { return _name; }
-            set { Update(ref _name, value); }
+            get => _name;
+            set => Update(ref _name, value);
         }
 
         /// <summary>
@@ -51,8 +51,8 @@ namespace Core2D.Shape
         /// </summary>
         public virtual BaseShape Owner
         {
-            get { return _owner; }
-            set { Update(ref _owner, value); }
+            get => _owner;
+            set => Update(ref _owner, value);
         }
 
         /// <summary>
@@ -60,8 +60,8 @@ namespace Core2D.Shape
         /// </summary>
         public virtual ShapeState State
         {
-            get { return _state; }
-            set { Update(ref _state, value); }
+            get => _state;
+            set => Update(ref _state, value);
         }
 
         /// <summary>
@@ -69,8 +69,8 @@ namespace Core2D.Shape
         /// </summary>
         public virtual ShapeStyle Style
         {
-            get { return _style; }
-            set { Update(ref _style, value); }
+            get => _style;
+            set => Update(ref _style, value);
         }
 
         /// <summary>
@@ -78,8 +78,8 @@ namespace Core2D.Shape
         /// </summary>
         public MatrixObject Transform
         {
-            get { return _transform; }
-            set { Update(ref _transform, value); }
+            get => _transform;
+            set => Update(ref _transform, value);
         }
 
         /// <summary>
@@ -87,8 +87,8 @@ namespace Core2D.Shape
         /// </summary>
         public virtual bool IsStroked
         {
-            get { return _isStroked; }
-            set { Update(ref _isStroked, value); }
+            get => _isStroked;
+            set => Update(ref _isStroked, value);
         }
 
         /// <summary>
@@ -96,8 +96,8 @@ namespace Core2D.Shape
         /// </summary>
         public virtual bool IsFilled
         {
-            get { return _isFilled; }
-            set { Update(ref _isFilled, value); }
+            get => _isFilled;
+            set => Update(ref _isFilled, value);
         }
 
         /// <summary>
@@ -105,8 +105,8 @@ namespace Core2D.Shape
         /// </summary>
         public virtual XContext Data
         {
-            get { return _data; }
-            set { Update(ref _data, value); }
+            get => _data;
+            set => Update(ref _data, value);
         }
 
         /// <summary>
