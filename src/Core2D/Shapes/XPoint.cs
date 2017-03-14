@@ -27,8 +27,8 @@ namespace Core2D.Shapes
         /// </summary>
         public double X
         {
-            get { return _x; }
-            set { Update(ref _x, value); }
+            get => _x;
+            set => Update(ref _x, value);
         }
 
         /// <summary>
@@ -36,8 +36,8 @@ namespace Core2D.Shapes
         /// </summary>
         public double Y
         {
-            get { return _y; }
-            set { Update(ref _y, value); }
+            get => _y;
+            set => Update(ref _y, value);
         }
 
         /// <summary>
@@ -45,8 +45,8 @@ namespace Core2D.Shapes
         /// </summary>
         public PointAlignment Alignment
         {
-            get { return _alignment; }
-            set { Update(ref _alignment, value); }
+            get => _alignment;
+            set => Update(ref _alignment, value);
         }
 
         /// <summary>
@@ -54,8 +54,8 @@ namespace Core2D.Shapes
         /// </summary>
         public BaseShape Shape
         {
-            get { return _shape; }
-            set { Update(ref _shape, value); }
+            get => _shape;
+            set => Update(ref _shape, value);
         }
 
         /// <inheritdoc/>
