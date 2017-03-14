@@ -21,8 +21,8 @@ namespace Core2D.Renderer
         /// </summary>
         public virtual ShapeRendererState State
         {
-            get { return _state; }
-            set { Update(ref _state, value); }
+            get => _state;
+            set => Update(ref _state, value);
         }
 
         /// <summary>
