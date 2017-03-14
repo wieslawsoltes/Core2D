@@ -61,8 +61,6 @@ namespace Utilities.Uwp
             Move = GetMoveObservable(source, "PointerMoved", relative, translate);
         }
 
-        private Vector2 ToVector2(Point point) => new Vector2(point.X, point.Y);
-
         private IObservable<InputArgs> GetPressedObservable(UIElement target, string eventName, UIElement relative, Func<Point, Point> translate, PointerPressType press)
         {
             return Observable.FromEventPattern<PointerRoutedEventArgs>(target, eventName)
@@ -101,10 +99,8 @@ namespace Utilities.Uwp
                 .Select(
                 e =>
                 {
-                    return new InputArgs(
-                        ToVector2(
-                            translate(e.EventArgs.GetCurrentPoint(relative).Position)),
-                        ToModifierFlags());
+                    var point = translate(e.EventArgs.GetCurrentPoint(relative).Position);
+                    return new InputArgs(point.X, point.Y, ToModifierFlags());
                 });
         }
 
@@ -130,10 +126,8 @@ namespace Utilities.Uwp
                 .Select(
                 e =>
                 {
-                    return new InputArgs(
-                        ToVector2(
-                            translate(e.EventArgs.GetCurrentPoint(relative).Position)),
-                        ToModifierFlags());
+                    var point = translate(e.EventArgs.GetCurrentPoint(relative).Position);
+                    return new InputArgs(point.X, point.Y, ToModifierFlags());
                 });
         }
 
@@ -142,10 +136,8 @@ namespace Utilities.Uwp
             return Observable.FromEventPattern<PointerRoutedEventArgs>(target, eventName).Select(
                 e =>
                 {
-                    return new InputArgs(
-                        ToVector2(
-                            translate(e.EventArgs.GetCurrentPoint(relative).Position)),
-                        ToModifierFlags());
+                    var point = translate(e.EventArgs.GetCurrentPoint(relative).Position);
+                    return new InputArgs(point.X, point.Y, ToModifierFlags());
                 });
         }
     }

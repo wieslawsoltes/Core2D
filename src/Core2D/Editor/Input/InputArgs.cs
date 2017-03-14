@@ -1,6 +1,5 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Core2D.Spatial;
 
 namespace Core2D.Editor.Input
 {
@@ -10,9 +9,14 @@ namespace Core2D.Editor.Input
     public struct InputArgs
     {
         /// <summary>
-        /// Gets input position.
+        /// Gets input X position.
         /// </summary>
-        public Vector2 Position { get; }
+        public double X { get; }
+
+        /// <summary>
+        /// Gets input Y position.
+        /// </summary>
+        public double Y { get; }
 
         /// <summary>
         /// Gets input modifier flags.
@@ -22,12 +26,27 @@ namespace Core2D.Editor.Input
         /// <summary>
         /// Initializes a new instance of the <see cref="InputArgs"/> struct.
         /// </summary>
-        /// <param name="position">The input position.</param>
-        /// <param name="modifier">The modifier flags.</param>
-        public InputArgs(Vector2 position, ModifierFlags modifier)
+        /// <param name="x">The input X position.</param>
+        /// <param name="y">The input Y position.</param>
+        /// <param name="modifier">The input modifier flags.</param>
+        public InputArgs(double x, double y, ModifierFlags modifier)
         {
-            this.Position = position;
+            this.X = x;
+            this.Y = y;
             this.Modifier = modifier;
+        }
+        
+        public void Deconstruct(out double x, out double y)
+        {
+            x = this.X;
+            y = this.Y;
+        }
+        
+        public void Deconstruct(out double x, out double y, out ModifierFlags modifier)
+        {
+            x = this.X;
+            y = this.Y;
+            modifier = this.Modifier;
         }
     }
 }

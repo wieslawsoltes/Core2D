@@ -40,12 +40,11 @@ namespace Core2D.Editor.Tools
         }
 
         /// <inheritdoc/>
-        public override void LeftDown(double x, double y, ModifierFlags modifier)
+        public override void LeftDown(InputArgs args)
         {
-            base.LeftDown(x, y, modifier);
+            base.LeftDown(args);
             var editor = _serviceProvider.GetService<ProjectEditor>();
-            double sx = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, editor.Project.Options.SnapX) : x;
-            double sy = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, editor.Project.Options.SnapY) : y;
+            (double sx, double sy) = editor.TryToSnap(args);
             switch (_currentState)
             {
                 case State.Point:
@@ -54,7 +53,7 @@ namespace Core2D.Editor.Tools
 
                         if (editor.Project.Options.TryToConnect)
                         {
-                            if (!editor.TryToSplitLine(x, y, _point, true))
+                            if (!editor.TryToSplitLine(args.X, args.Y, _point, true))
                             {
                                 editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, _point);
                             }
@@ -69,12 +68,11 @@ namespace Core2D.Editor.Tools
         }
 
         /// <inheritdoc/>
-        public override void Move(double x, double y, ModifierFlags modifier)
+        public override void Move(InputArgs args)
         {
-            base.Move(x, y, modifier);
+            base.Move(args);
             var editor = _serviceProvider.GetService<ProjectEditor>();
-            double sx = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, editor.Project.Options.SnapX) : x;
-            double sy = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, editor.Project.Options.SnapY) : y;
+            (double sx, double sy) = editor.TryToSnap(args);
             switch (_currentState)
             {
                 case State.Point:

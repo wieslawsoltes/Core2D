@@ -48,6 +48,19 @@ namespace Core2D.Editor
         }
 
         /// <summary>
+        /// Try to snap input arguments.
+        /// </summary>
+        /// <param name="args">The input arguments.</param>
+        /// <returns>The snapped value if enabled otherwise original position.</returns>
+        public (double sx, double sy) TryToSnap(InputArgs args)
+        {
+            if (Project != null && Project.Options.SnapToGrid == true)
+                return (Snap(args.X, Project.Options.SnapX), Snap(args.Y, Project.Options.SnapY));
+            else
+                return (args.X, args.Y);
+        }
+
+        /// <summary>
         /// Get object item name.
         /// </summary>
         /// <param name="item">The object item.</param>

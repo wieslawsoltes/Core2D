@@ -57,12 +57,11 @@ namespace Core2D.Editor.Tools
         }
 
         /// <inheritdoc/>
-        public override void LeftDown(double x, double y, ModifierFlags modifier)
+        public override void LeftDown(InputArgs args)
         {
-            base.LeftDown(x, y, modifier);
+            base.LeftDown(args);
             var editor = _serviceProvider.GetService<ProjectEditor>();
-            double sx = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, editor.Project.Options.SnapX) : x;
-            double sy = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, editor.Project.Options.SnapY) : y;
+            (double sx, double sy) = editor.TryToSnap(args);
             switch (_currentState)
             {
                 case State.TopLeft:
@@ -129,9 +128,9 @@ namespace Core2D.Editor.Tools
         }
 
         /// <inheritdoc/>
-        public override void RightDown(double x, double y, ModifierFlags modifier)
+        public override void RightDown(InputArgs args)
         {
-            base.RightDown(x, y, modifier);
+            base.RightDown(args);
             var editor = _serviceProvider.GetService<ProjectEditor>();
             switch (_currentState)
             {
@@ -150,12 +149,11 @@ namespace Core2D.Editor.Tools
         }
 
         /// <inheritdoc/>
-        public override void Move(double x, double y, ModifierFlags modifier)
+        public override void Move(InputArgs args)
         {
-            base.Move(x, y, modifier);
+            base.Move(args);
             var editor = _serviceProvider.GetService<ProjectEditor>();
-            double sx = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, editor.Project.Options.SnapX) : x;
-            double sy = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, editor.Project.Options.SnapY) : y;
+            (double sx, double sy) = editor.TryToSnap(args);
             switch (_currentState)
             {
                 case State.TopLeft:

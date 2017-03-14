@@ -10,6 +10,21 @@ namespace Core2D.Editor
     public partial class ProjectEditor : IInputTarget
     {
         /// <inheritdoc/>
+        public void LeftDown(InputArgs args) => CurrentTool.LeftDown(args);
+
+        /// <inheritdoc/>
+        public void LeftUp(InputArgs args) => CurrentTool.LeftUp(args);
+
+        /// <inheritdoc/>
+        public void RightDown(InputArgs args) => CurrentTool.RightDown(args);
+
+        /// <inheritdoc/>
+        public void RightUp(InputArgs args) => CurrentTool.RightUp(args);
+
+        /// <inheritdoc/>
+        public void Move(InputArgs args) => CurrentTool.Move(args);
+
+        /// <inheritdoc/>
         public bool IsLeftDownAvailable()
         {
             return _project?.CurrentContainer?.CurrentLayer != null
@@ -54,36 +69,6 @@ namespace Core2D.Editor
         {
             return Renderers?[0]?.State?.SelectedShape != null
                 || Renderers?[0]?.State?.SelectedShapes != null;
-        }
-
-        /// <inheritdoc/>
-        public void LeftDown(double x, double y, ModifierFlags modifier)
-        {
-            CurrentTool.LeftDown(x, y, modifier);
-        }
-
-        /// <inheritdoc/>
-        public void LeftUp(double x, double y, ModifierFlags modifier)
-        {
-            CurrentTool.LeftUp(x, y, modifier);
-        }
-
-        /// <inheritdoc/>
-        public void RightDown(double x, double y, ModifierFlags modifier)
-        {
-            CurrentTool.RightDown(x, y, modifier);
-        }
-
-        /// <inheritdoc/>
-        public void RightUp(double x, double y, ModifierFlags modifier)
-        {
-            CurrentTool.RightUp(x, y, modifier);
-        }
-
-        /// <inheritdoc/>
-        public void Move(double x, double y, ModifierFlags modifier)
-        {
-            CurrentTool.Move(x, y, modifier);
         }
     }
 }

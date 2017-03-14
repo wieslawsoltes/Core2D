@@ -16,6 +16,12 @@ namespace Core2D.Spatial
             this.Y = y;
         }
 
+        public void Deconstruct(out double x, out double y)
+        {
+            x = this.X;
+            y = this.Y;
+        }
+
         public static Point2 FromXY(double x, double y)
         {
             return new Point2(x, y);

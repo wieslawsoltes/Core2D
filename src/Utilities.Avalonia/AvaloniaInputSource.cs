@@ -54,18 +54,14 @@ namespace Utilities.Avalonia
             Move = GetMoveObservable(source, "PointerMoved", relative, translate);
         }
 
-        private Vector2 ToVector2(Point point) => new Vector2(point.X, point.Y);
-
         private IObservable<InputArgs> GetPressedObservable(Control target, string eventName, Control relative, Func<Point, Point> translate, MouseButton button)
         {
             return Observable.FromEventPattern<PointerPressedEventArgs>(target, eventName)
                 .Where(e => e.EventArgs.MouseButton == button).Select(
                 e =>
                 {
-                    return new InputArgs(
-                        ToVector2(
-                            translate(e.EventArgs.GetPosition(relative))),
-                        ToModifierFlags(e.EventArgs.InputModifiers));
+                    var point = translate(e.EventArgs.GetPosition(relative));
+                    return new InputArgs(point.X, point.Y, ToModifierFlags(e.EventArgs.InputModifiers));
                 });
         }
 
@@ -75,10 +71,8 @@ namespace Utilities.Avalonia
                 .Where(e => e.EventArgs.MouseButton == button).Select(
                 e =>
                 {
-                    return new InputArgs(
-                        ToVector2(
-                            translate(e.EventArgs.GetPosition(relative))),
-                        ToModifierFlags(e.EventArgs.InputModifiers));
+                    var point = translate(e.EventArgs.GetPosition(relative));
+                    return new InputArgs(point.X, point.Y, ToModifierFlags(e.EventArgs.InputModifiers));
                 });
         }
 
@@ -87,10 +81,8 @@ namespace Utilities.Avalonia
             return Observable.FromEventPattern<PointerEventArgs>(target, eventName).Select(
                 e =>
                 {
-                    return new InputArgs(
-                        ToVector2(
-                            translate(e.EventArgs.GetPosition(relative))),
-                        ToModifierFlags(e.EventArgs.InputModifiers));
+                    var point = translate(e.EventArgs.GetPosition(relative));
+                    return new InputArgs(point.X, point.Y, ToModifierFlags(e.EventArgs.InputModifiers));
                 });
         }
     }
