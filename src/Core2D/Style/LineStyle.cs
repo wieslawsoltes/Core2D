@@ -21,8 +21,8 @@ namespace Core2D.Style
         [Name]
         public string Name
         {
-            get { return _name; }
-            set { Update(ref _name, value); }
+            get => _name;
+            set => Update(ref _name, value);
         }
 
         /// <summary>
@@ -30,8 +30,8 @@ namespace Core2D.Style
         /// </summary>
         public bool IsCurved
         {
-            get { return _isCurved; }
-            set { Update(ref _isCurved, value); }
+            get => _isCurved;
+            set => Update(ref _isCurved, value);
         }
 
         /// <summary>
@@ -39,8 +39,8 @@ namespace Core2D.Style
         /// </summary>
         public double Curvature
         {
-            get { return _curvature; }
-            set { Update(ref _curvature, value); }
+            get => _curvature;
+            set => Update(ref _curvature, value);
         }
 
         /// <summary>
@@ -48,8 +48,8 @@ namespace Core2D.Style
         /// </summary>
         public CurveOrientation CurveOrientation
         {
-            get { return _curveOrientation; }
-            set { Update(ref _curveOrientation, value); }
+            get => _curveOrientation;
+            set => Update(ref _curveOrientation, value);
         }
 
         /// <summary>
@@ -57,8 +57,8 @@ namespace Core2D.Style
         /// </summary>
         public LineFixedLength FixedLength
         {
-            get { return _fixedLength; }
-            set { Update(ref _fixedLength, value); }
+            get => _fixedLength;
+            set => Update(ref _fixedLength, value);
         }
 
         /// <summary>
