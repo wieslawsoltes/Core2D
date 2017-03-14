@@ -48,6 +48,7 @@ namespace Core2D.Editor.Tools
         {
             base.LeftDown(args);
             var editor = _serviceProvider.GetService<ProjectEditor>();
+            (double x, double y) = args;
             (double sx, double sy) = editor.TryToSnap(args);
             switch (_currentState)
             {
