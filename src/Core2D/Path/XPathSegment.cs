@@ -19,8 +19,8 @@ namespace Core2D.Path
         /// </summary>
         public bool IsStroked
         {
-            get { return _isStroked; }
-            set { Update(ref _isStroked, value); }
+            get => _isStroked;
+            set => Update(ref _isStroked, value);
         }
 
         /// <summary>
@@ -28,8 +28,8 @@ namespace Core2D.Path
         /// </summary>
         public bool IsSmoothJoin
         {
-            get { return _isSmoothJoin; }
-            set { Update(ref _isSmoothJoin, value); }
+            get => _isSmoothJoin;
+            set => Update(ref _isSmoothJoin, value);
         }
 
         /// <summary>
