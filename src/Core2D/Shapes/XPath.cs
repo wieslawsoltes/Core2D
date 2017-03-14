@@ -29,8 +29,8 @@ namespace Core2D.Shapes
         /// </remarks>
         public XPathGeometry Geometry
         {
-            get { return _geometry; }
-            set { Update(ref _geometry, value); }
+            get => _geometry;
+            set => Update(ref _geometry, value);
         }
 
         /// <inheritdoc/>
