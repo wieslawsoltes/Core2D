@@ -21,8 +21,8 @@ namespace Core2D.Shapes
         /// </summary>
         public string Key
         {
-            get { return _key; }
-            set { Update(ref _key, value); }
+            get => _key;
+            set => Update(ref _key, value);
         }
 
         /// <inheritdoc/>
