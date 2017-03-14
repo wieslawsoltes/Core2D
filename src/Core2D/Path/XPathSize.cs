@@ -16,8 +16,8 @@ namespace Core2D.Path
         /// </summary>
         public double Width
         {
-            get { return _width; }
-            set { Update(ref _width, value); }
+            get => _width;
+            set => Update(ref _width, value);
         }
 
         /// <summary>
@@ -25,8 +25,8 @@ namespace Core2D.Path
         /// </summary>
         public double Height
         {
-            get { return _height; }
-            set { Update(ref _height, value); }
+            get => _height;
+            set => Update(ref _height, value);
         }
 
         /// <summary>
@@ -45,9 +45,6 @@ namespace Core2D.Path
         }
 
         /// <inheritdoc/>
-        public override string ToString()
-        {
-            return string.Format("{0},{1}", Width, Height);
-        }
+        public override string ToString() => $"{Width},{Height}";
     }
 }
