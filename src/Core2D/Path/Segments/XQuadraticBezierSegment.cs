@@ -18,8 +18,8 @@ namespace Core2D.Path.Segments
         /// </summary>
         public XPoint Point1
         {
-            get { return _point1; }
-            set { Update(ref _point1, value); }
+            get => _point1;
+            set => Update(ref _point1, value);
         }
 
         /// <summary>
@@ -27,8 +27,8 @@ namespace Core2D.Path.Segments
         /// </summary>
         public XPoint Point2
         {
-            get { return _point2; }
-            set { Update(ref _point2, value); }
+            get => _point2;
+            set => Update(ref _point2, value);
         }
 
         /// <inheritdoc/>
@@ -58,9 +58,6 @@ namespace Core2D.Path.Segments
         }
 
         /// <inheritdoc/>
-        public override string ToString()
-        {
-            return string.Format("Q{1}{0}{2}", " ", Point1, Point2);
-        }
+        public override string ToString() => string.Format("Q{1}{0}{2}", " ", Point1, Point2);
     }
 }
