@@ -17,8 +17,8 @@ namespace Core2D.Data.Database
         [Content]
         public string Content
         {
-            get { return _content; }
-            set { Update(ref _content, value); }
+            get => _content;
+            set => Update(ref _content, value);
         }
 
         /// <summary>
@@ -26,12 +26,6 @@ namespace Core2D.Data.Database
         /// </summary>
         /// <param name="content">The value content.</param>
         /// <returns>The new instance of the <see cref="XValue"/> class.</returns>
-        public static XValue Create(string content)
-        {
-            return new XValue()
-            {
-                Content = content,
-            };
-        }
+        public static XValue Create(string content) => new XValue() { Content = content };
     }
 }
