@@ -33,8 +33,8 @@ namespace Core2D.Project
         [Name]
         public string Name
         {
-            get { return _name; }
-            set { Update(ref _name, value); }
+            get => _name;
+            set => Update(ref _name, value);
         }
 
         /// <summary>
@@ -112,8 +112,8 @@ namespace Core2D.Project
         [Content]
         public ImmutableArray<XLayer> Layers
         {
-            get { return _layers; }
-            set { Update(ref _layers, value); }
+            get => _layers;
+            set => Update(ref _layers, value);
         }
 
         /// <summary>
@@ -121,8 +121,8 @@ namespace Core2D.Project
         /// </summary>
         public XLayer CurrentLayer
         {
-            get { return _currentLayer; }
-            set { Update(ref _currentLayer, value); }
+            get => _currentLayer;
+            set => Update(ref _currentLayer, value);
         }
 
         /// <summary>
@@ -130,8 +130,8 @@ namespace Core2D.Project
         /// </summary>
         public XLayer WorkingLayer
         {
-            get { return _workingLayer; }
-            set { Update(ref _workingLayer, value); }
+            get => _workingLayer;
+            set => Update(ref _workingLayer, value);
         }
 
         /// <summary>
@@ -139,8 +139,8 @@ namespace Core2D.Project
         /// </summary>
         public XLayer HelperLayer
         {
-            get { return _helperLayer; }
-            set { Update(ref _helperLayer, value); }
+            get => _helperLayer;
+            set => Update(ref _helperLayer, value);
         }
 
         /// <summary>
@@ -148,8 +148,8 @@ namespace Core2D.Project
         /// </summary>
         public BaseShape CurrentShape
         {
-            get { return _currentShape; }
-            set { Update(ref _currentShape, value); }
+            get => _currentShape;
+            set => Update(ref _currentShape, value);
         }
 
         /// <summary>
@@ -157,8 +157,8 @@ namespace Core2D.Project
         /// </summary>
         public XContainer Template
         {
-            get { return _template; }
-            set { Update(ref _template, value); }
+            get => _template;
+            set => Update(ref _template, value);
         }
 
         /// <summary>
@@ -166,8 +166,8 @@ namespace Core2D.Project
         /// </summary>
         public XContext Data
         {
-            get { return _data; }
-            set { Update(ref _data, value); }
+            get => _data;
+            set => Update(ref _data, value);
         }
 
         /// <summary>
@@ -175,8 +175,8 @@ namespace Core2D.Project
         /// </summary>
         public bool IsExpanded
         {
-            get { return _isExpanded; }
-            set { Update(ref _isExpanded, value); }
+            get => _isExpanded;
+            set => Update(ref _isExpanded, value);
         }
 
         /// <summary>
@@ -228,10 +228,7 @@ namespace Core2D.Project
         /// Set current layer.
         /// </summary>
         /// <param name="layer">The layer instance.</param>
-        public void SetCurrentLayer(XLayer layer)
-        {
-            CurrentLayer = layer;
-        }
+        public void SetCurrentLayer(XLayer layer) => CurrentLayer = layer;
 
         /// <summary>
         /// Invalidate container layers.
