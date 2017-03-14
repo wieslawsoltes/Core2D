@@ -39,32 +39,11 @@ namespace Core2D.Editor.Tools.Path
         }
 
         /// <inheritdoc/>
-        public override void Move(double x, double y, ModifierFlags modifier)
+        public override void LeftDown(InputArgs args)
         {
-            base.Move(x, y, modifier);
+            base.LeftDown(args);
             var editor = _serviceProvider.GetService<ProjectEditor>();
-            double sx = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, editor.Project.Options.SnapX) : x;
-            double sy = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, editor.Project.Options.SnapY) : y;
-            switch (_currentState)
-            {
-                case State.Move:
-                    {
-                        if (editor.Project.Options.TryToConnect)
-                        {
-                            editor.TryToHoverShape(sx, sy);
-                        }
-                    }
-                    break;
-            }
-        }
-
-        /// <inheritdoc/>
-        public override void LeftDown(double x, double y, ModifierFlags modifier)
-        {
-            base.LeftDown(x, y, modifier);
-            var editor = _serviceProvider.GetService<ProjectEditor>();
-            double sx = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, editor.Project.Options.SnapX) : x;
-            double sy = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, editor.Project.Options.SnapY) : y;
+            (double sx, double sy) = editor.TryToSnap(args);
             switch (_currentState)
             {
                 case State.Move:
@@ -78,7 +57,26 @@ namespace Core2D.Editor.Tools.Path
                                 editor.Project.Options.DefaultIsFilled,
                                 editor.Project.Options.DefaultIsClosed);
 
-                        editor.CurrentPathTool.LeftDown(x, y, modifier);
+                        editor.CurrentPathTool.LeftDown(args);
+                    }
+                    break;
+            }
+        }
+
+        /// <inheritdoc/>
+        public override void Move(InputArgs args)
+        {
+            base.Move(args);
+            var editor = _serviceProvider.GetService<ProjectEditor>();
+            (double sx, double sy) = editor.TryToSnap(args);
+            switch (_currentState)
+            {
+                case State.Move:
+                    {
+                        if (editor.Project.Options.TryToConnect)
+                        {
+                            editor.TryToHoverShape(sx, sy);
+                        }
                     }
                     break;
             }
