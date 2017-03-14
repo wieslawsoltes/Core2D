@@ -8,18 +8,18 @@ using Core2D.Renderer.Presenters;
 using Core2D.Shape;
 using Renderer.SkiaSharp;
 
-namespace FileWriter.SvgSkiaSharp
+namespace FileWriter.SkiaSharpWebp
 {
     /// <summary>
-    /// SkiaSharp svg <see cref="IFileWriter"/> implementation.
+    /// SkiaSharp webp <see cref="IFileWriter"/> implementation.
     /// </summary>
-    public sealed class SvgSkiaSharpWriter : IFileWriter
+    public sealed class WebpSkiaSharpWriter : IFileWriter
     {
         /// <inheritdoc/>
-        string IFileWriter.Name { get; } = "Svg (SkiaSharp)";
+        string IFileWriter.Name { get; } = "Webp (SkiaSharp)";
 
         /// <inheritdoc/>
-        string IFileWriter.Extension { get; } = "svg";
+        string IFileWriter.Extension { get; } = "webp";
 
         /// <inheritdoc/>
         void IFileWriter.Save(string path, object item, object options)
@@ -37,7 +37,7 @@ namespace FileWriter.SvgSkiaSharp
 
             var presenter = new ExportPresenter();
 
-            IProjectExporter exporter = new SvgSkiaSharpExporter(renderer, presenter);
+            IProjectExporter exporter = new WebpSkiaSharpExporter(renderer, presenter);
 
             if (item is XContainer)
             {
@@ -45,11 +45,11 @@ namespace FileWriter.SvgSkiaSharp
             }
             else if (item is XDocument)
             {
-                throw new NotSupportedException("Saving documents as svg drawing is not supported.");
+                throw new NotSupportedException("Saving documents as webp drawing is not supported.");
             }
             else if (item is XProject)
             {
-                throw new NotSupportedException("Saving projects as svg drawing is not supported.");
+                throw new NotSupportedException("Saving projects as webp drawing is not supported.");
             }
         }
     }
