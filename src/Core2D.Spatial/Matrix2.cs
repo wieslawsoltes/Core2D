@@ -24,6 +24,16 @@ namespace Core2D.Spatial
             this.OffsetY = offsetY;
         }
 
+        public void Deconstruct(out double m11, out double m12, out double m21, out double m22, out double offsetX, double out offsetY)
+        {
+            m11 = this.M11;
+            m12 = this.M12;
+            m21 = this.M21;
+            m22 = this.M22;
+            offsetX = this.OffsetX;
+            offsetY = this.OffsetY;
+        }
+
         public static readonly Matrix2 Identity = new Matrix2(1.0, 0.0, 0.0, 1.0, 0.0, 0.0);
 
         public bool IsIdentity
