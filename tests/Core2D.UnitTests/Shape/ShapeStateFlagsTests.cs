@@ -8,11 +8,5 @@ namespace Core2D.UnitTests
 {
     public class ShapeStateFlagsTests
     {
-        [Fact]
-        [Trait("Core2D.Shape", "Shape")]
-        public void Flags_Attribute_Not_Null()
-        {
-            Assert.NotNull(Attribute.GetCustomAttribute(typeof(ShapeStateFlags), typeof(FlagsAttribute)));
-        }
     }
 }

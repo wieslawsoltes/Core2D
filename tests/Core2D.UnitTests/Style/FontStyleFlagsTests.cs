@@ -8,11 +8,5 @@ namespace Core2D.UnitTests
 {
     public class FontStyleFlagsTests
     {
-        [Fact]
-        [Trait("Core2D.Style", "Style")]
-        public void Flags_Attribute_Not_Null()
-        {
-            Assert.NotNull(Attribute.GetCustomAttribute(typeof(FontStyleFlags), typeof(FlagsAttribute)));
-        }
     }
 }
