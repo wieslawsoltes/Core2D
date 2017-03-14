@@ -35,5 +35,18 @@ namespace Core2D.Editor.Input
             this.Y = y;
             this.Modifier = modifier;
         }
+        
+        public void Deconstruct(out double x, out double y)
+        {
+            x = this.X;
+            y = this.Y;
+        }
+        
+        public void Deconstruct(out double x, out double y, out ModifierFlags modifier)
+        {
+            x = this.X;
+            y = this.Y;
+            modifier = this.Modifier;
+        }
     }
 }
