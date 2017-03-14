@@ -21,24 +21,17 @@ namespace Core2D.Path
         [Content]
         public ImmutableArray<XPoint> Points
         {
-            get { return _points; }
-            set { Update(ref _points, value); }
+            get => _points;
+            set => Update(ref _points, value);
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="XPathPolySegment"/> class.
         /// </summary>
-        public XPathPolySegment()
-            : base()
-        {
-            Points = ImmutableArray.Create<XPoint>();
-        }
+        public XPathPolySegment() : base() => Points = ImmutableArray.Create<XPoint>();
 
         /// <inheritdoc/>
-        public override IEnumerable<XPoint> GetPoints()
-        {
-            return Points;
-        }
+        public override IEnumerable<XPoint> GetPoints() => Points;
 
         /// <summary>
         /// Creates a string representation of points collection.
