@@ -17,8 +17,8 @@ namespace Core2D.Path.Segments
         /// </summary>
         public XPoint Point
         {
-            get { return _point; }
-            set { Update(ref _point, value); }
+            get => _point;
+            set => Update(ref _point, value);
         }
 
         /// <inheritdoc/>
@@ -45,9 +45,6 @@ namespace Core2D.Path.Segments
         }
 
         /// <inheritdoc/>
-        public override string ToString()
-        {
-            return "L" + Point.ToString();
-        }
+        public override string ToString() => "L" + Point.ToString();
     }
 }
