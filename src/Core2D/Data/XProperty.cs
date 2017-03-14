@@ -18,8 +18,8 @@ namespace Core2D.Data
         /// </summary>
         public string Name
         {
-            get { return _name; }
-            set { Update(ref _name, value); }
+            get => _name;
+            set => Update(ref _name, value);
         }
 
         /// <summary>
@@ -28,8 +28,8 @@ namespace Core2D.Data
         [Content]
         public string Value
         {
-            get { return _value; }
-            set { Update(ref _value, value); }
+            get => _value;
+            set => Update(ref _value, value);
         }
 
         /// <summary>
@@ -37,8 +37,8 @@ namespace Core2D.Data
         /// </summary>
         public XContext Owner
         {
-            get { return _owner; }
-            set { Update(ref _owner, value); }
+            get => _owner;
+            set => Update(ref _owner, value);
         }
 
         /// <summary>
@@ -59,9 +59,6 @@ namespace Core2D.Data
         }
 
         /// <inheritdoc/>
-        public override string ToString()
-        {
-            return _value.ToString();
-        }
+        public override string ToString() => _value.ToString();
     }
 }
