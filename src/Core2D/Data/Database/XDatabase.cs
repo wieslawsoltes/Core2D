@@ -38,8 +38,8 @@ namespace Core2D.Data.Database
         /// </summary>
         public string Name
         {
-            get { return _name; }
-            set { Update(ref _name, value); }
+            get => _name;
+            set => Update(ref _name, value);
         }
 
         /// <summary>
@@ -47,8 +47,8 @@ namespace Core2D.Data.Database
         /// </summary>
         public string IdColumnName
         {
-            get { return _idColumnName; }
-            set { Update(ref _idColumnName, value); }
+            get => _idColumnName;
+            set => Update(ref _idColumnName, value);
         }
 
         /// <summary>
@@ -56,8 +56,8 @@ namespace Core2D.Data.Database
         /// </summary>
         public ImmutableArray<XColumn> Columns
         {
-            get { return _columns; }
-            set { Update(ref _columns, value); }
+            get => _columns;
+            set => Update(ref _columns, value);
         }
 
         /// <summary>
@@ -66,8 +66,8 @@ namespace Core2D.Data.Database
         [Content]
         public ImmutableArray<XRecord> Records
         {
-            get { return _records; }
-            set { Update(ref _records, value); }
+            get => _records;
+            set => Update(ref _records, value);
         }
 
         /// <summary>
@@ -75,8 +75,8 @@ namespace Core2D.Data.Database
         /// </summary>
         public XRecord CurrentRecord
         {
-            get { return _currentRecord; }
-            set { Update(ref _currentRecord, value); }
+            get => _currentRecord;
+            set => Update(ref _currentRecord, value);
         }
 
         /// <summary>
