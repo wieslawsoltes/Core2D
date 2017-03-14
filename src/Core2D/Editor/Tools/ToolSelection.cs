@@ -118,14 +118,11 @@ namespace Core2D.Editor.Tools
         /// <summary>
         /// Move selected shapes to new location.
         /// </summary>
-        /// <param name="x">The X coordinate of point.</param>
-        /// <param name="y">The Y coordinate of point.</param>
-        private void MoveSelectionCacheTo(double x, double y)
+        /// <param name="args">The input arguments.</param>
+        private void MoveSelectionCacheTo(InputArgs args)
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
-            double sx = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, editor.Project.Options.SnapX) : x;
-            double sy = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, editor.Project.Options.SnapY) : y;
-
+            (double sx, double sy) = editor.TryToSnap(args);
             double dx = sx - _startX;
             double dy = sy - _startY;
 
@@ -144,10 +141,12 @@ namespace Core2D.Editor.Tools
         }
 
         /// <inheritdoc/>
-        public override void LeftDown(double x, double y, ModifierFlags modifier)
+        public override void LeftDown(InputArgs args)
         {
-            base.LeftDown(x, y, modifier);
+            base.LeftDown(args);
             var editor = _serviceProvider.GetService<ProjectEditor>();
+            (double x, double y) = args;
+            (double sx, double sy) = editor.TryToSnap(args);
             switch (_currentState)
             {
                 case State.None:
@@ -159,8 +158,8 @@ namespace Core2D.Editor.Tools
                             var result = editor.HitTest.TryToGetShape(editor.Project.CurrentContainer.CurrentLayer.Shapes, new Point2(x, y), editor.Project.Options.HitThreshold);
                             if (result != null)
                             {
-                                _startX = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, editor.Project.Options.SnapX) : x;
-                                _startY = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, editor.Project.Options.SnapY) : y;
+                                _startX = sx;
+                                _startY = sy;
                                 _historyX = _startX;
                                 _historyY = _startY;
                                 GenerateMoveSelectionCache();
@@ -172,8 +171,8 @@ namespace Core2D.Editor.Tools
 
                         if (editor.TryToSelectShape(editor.Project.CurrentContainer.CurrentLayer, x, y))
                         {
-                            _startX = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, editor.Project.Options.SnapX) : x;
-                            _startY = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, editor.Project.Options.SnapY) : y;
+                            _startX = sx;
+                            _startY = sy;
                             _historyX = _startX;
                             _historyY = _startY;
                             GenerateMoveSelectionCache();
@@ -210,9 +209,9 @@ namespace Core2D.Editor.Tools
         }
 
         /// <inheritdoc/>
-        public override void LeftUp(double x, double y, ModifierFlags modifier)
+        public override void LeftUp(InputArgs args)
         {
-            base.LeftUp(x, y, modifier);
+            base.LeftUp(args);
             var editor = _serviceProvider.GetService<ProjectEditor>();
             switch (_currentState)
             {
@@ -222,8 +221,7 @@ namespace Core2D.Editor.Tools
                     {
                         if (editor.IsSelectionAvailable())
                         {
-                            double sx = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(x, editor.Project.Options.SnapX) : x;
-                            double sy = editor.Project.Options.SnapToGrid ? ProjectEditor.Snap(y, editor.Project.Options.SnapY) : y;
+                            (double sx, double sy) = editor.TryToSnap(args);
                             if (_historyX != sx || _historyY != sy)
                             {
                                 double dx = sx - _historyX;
@@ -266,8 +264,8 @@ namespace Core2D.Editor.Tools
 
                         if (_rectangle != null)
                         {
-                            _rectangle.BottomRight.X = x;
-                            _rectangle.BottomRight.Y = y;
+                            _rectangle.BottomRight.X = args.X;
+                            _rectangle.BottomRight.Y = args.Y;
                             editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_rectangle);
                             editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                             _currentState = State.None;
@@ -280,9 +278,9 @@ namespace Core2D.Editor.Tools
         }
 
         /// <inheritdoc/>
-        public override void RightDown(double x, double y, ModifierFlags modifier)
+        public override void RightDown(InputArgs args)
         {
-            base.RightDown(x, y, modifier);
+            base.RightDown(args);
             var editor = _serviceProvider.GetService<ProjectEditor>();
             switch (_currentState)
             {
@@ -301,30 +299,30 @@ namespace Core2D.Editor.Tools
         }
 
         /// <inheritdoc/>
-        public override void Move(double x, double y, ModifierFlags modifier)
+        public override void Move(InputArgs args)
         {
-            base.Move(x, y, modifier);
+            base.Move(args);
             var editor = _serviceProvider.GetService<ProjectEditor>();
             switch (_currentState)
             {
                 case State.None:
                     {
-                        editor.TryToHoverShape(x, y);
+                        editor.TryToHoverShape(args.X, args.Y);
                     }
                     break;
                 case State.Selected:
                     {
                         if (editor.IsSelectionAvailable())
                         {
-                            MoveSelectionCacheTo(x, y);
+                            MoveSelectionCacheTo(args);
                             editor.Project.CurrentContainer.CurrentLayer.Invalidate();
                             break;
                         }
 
                         if (_rectangle != null)
                         {
-                            _rectangle.BottomRight.X = x;
-                            _rectangle.BottomRight.Y = y;
+                            _rectangle.BottomRight.X = args.X;
+                            _rectangle.BottomRight.Y = args.Y;
                             editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         }
                     }
