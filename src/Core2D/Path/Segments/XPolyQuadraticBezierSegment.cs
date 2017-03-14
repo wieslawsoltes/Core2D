@@ -28,9 +28,6 @@ namespace Core2D.Path.Segments
         }
 
         /// <inheritdoc/>
-        public override string ToString()
-        {
-            return (Points != null) && (Points.Length >= 1) ? "Q" + ToString(Points) : "";
-        }
+        public override string ToString() => (Points != null) && (Points.Length >= 1) ? "Q" + ToString(Points) : "";
     }
 }
