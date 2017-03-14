@@ -13,10 +13,18 @@ namespace Core2D.Spatial
 
         public Rect2(double x, double y, double width, double height)
         {
-            X = x;
-            Y = y;
-            Width = width;
-            Height = height;
+            this.X = x;
+            this.Y = y;
+            this.Width = width;
+            this.Height = height;
+        }
+
+        public void Deconstruct(out double x, out double y, out double width, out double height)
+        {
+            x = this.X;
+            y = this.Y;
+            width = this.Width;
+            height = this.Height;
         }
 
         public static Rect2 FromPoints(double x1, double y1, double x2, double y2, double dx = 0.0, double dy = 0.0)
