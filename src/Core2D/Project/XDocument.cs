@@ -20,8 +20,8 @@ namespace Core2D.Project
         [Name]
         public string Name
         {
-            get { return _name; }
-            set { Update(ref _name, value); }
+            get => _name;
+            set => Update(ref _name, value);
         }
 
         /// <summary>
@@ -29,8 +29,8 @@ namespace Core2D.Project
         /// </summary>
         public bool IsExpanded
         {
-            get { return _isExpanded; }
-            set { Update(ref _isExpanded, value); }
+            get => _isExpanded;
+            set => Update(ref _isExpanded, value);
         }
 
         /// <summary>
@@ -39,30 +39,20 @@ namespace Core2D.Project
         [Content]
         public ImmutableArray<XContainer> Pages
         {
-            get { return _pages; }
-            set { Update(ref _pages, value); }
+            get => _pages;
+            set => Update(ref _pages, value);
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="XDocument"/> class.
         /// </summary>
-        public XDocument()
-            : base()
-        {
-            _pages = ImmutableArray.Create<XContainer>();
-        }
+        public XDocument() : base() => _pages = ImmutableArray.Create<XContainer>();
 
         /// <summary>
         /// Creates a new <see cref="XDocument"/> instance.
         /// </summary>
         /// <param name="name">The document name.</param>
         /// <returns>The new instance of the <see cref="XDocument"/> class.</returns>
-        public static XDocument Create(string name = "Document")
-        {
-            return new XDocument()
-            {
-                Name = name
-            };
-        }
+        public static XDocument Create(string name = "Document") => new XDocument() { Name = name };
     }
 }
