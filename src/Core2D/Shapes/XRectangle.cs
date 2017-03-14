@@ -25,8 +25,8 @@ namespace Core2D.Shapes
         /// </summary>
         public bool IsGrid
         {
-            get { return _isGrid; }
-            set { Update(ref _isGrid, value); }
+            get => _isGrid;
+            set => Update(ref _isGrid, value);
         }
 
         /// <summary>
@@ -34,8 +34,8 @@ namespace Core2D.Shapes
         /// </summary>
         public double OffsetX
         {
-            get { return _offsetX; }
-            set { Update(ref _offsetX, value); }
+            get => _offsetX;
+            set => Update(ref _offsetX, value);
         }
 
         /// <summary>
@@ -43,8 +43,8 @@ namespace Core2D.Shapes
         /// </summary>
         public double OffsetY
         {
-            get { return _offsetY; }
-            set { Update(ref _offsetY, value); }
+            get => _offsetY;
+            set => Update(ref _offsetY, value);
         }
 
         /// <summary>
@@ -52,8 +52,8 @@ namespace Core2D.Shapes
         /// </summary>
         public double CellWidth
         {
-            get { return _cellWidth; }
-            set { Update(ref _cellWidth, value); }
+            get => _cellWidth;
+            set => Update(ref _cellWidth, value);
         }
 
         /// <summary>
@@ -61,8 +61,8 @@ namespace Core2D.Shapes
         /// </summary>
         public double CellHeight
         {
-            get { return _cellHeight; }
-            set { Update(ref _cellHeight, value); }
+            get => _cellHeight;
+            set => Update(ref _cellHeight, value);
         }
 
         /// <inheritdoc/>
