@@ -27,8 +27,8 @@ namespace Core2D.Style
         [Name]
         public string Name
         {
-            get { return _name; }
-            set { Update(ref _name, value); }
+            get => _name;
+            set => Update(ref _name, value);
         }
 
         /// <summary>
@@ -36,8 +36,8 @@ namespace Core2D.Style
         /// </summary>
         public ArgbColor Stroke
         {
-            get { return _stroke; }
-            set { Update(ref _stroke, value); }
+            get => _stroke;
+            set => Update(ref _stroke, value);
         }
 
         /// <summary>
@@ -45,8 +45,8 @@ namespace Core2D.Style
         /// </summary>
         public ArgbColor Fill
         {
-            get { return _fill; }
-            set { Update(ref _fill, value); }
+            get => _fill;
+            set => Update(ref _fill, value);
         }
 
         /// <summary>
@@ -54,8 +54,8 @@ namespace Core2D.Style
         /// </summary>
         public double Thickness
         {
-            get { return _thickness; }
-            set { Update(ref _thickness, value); }
+            get => _thickness;
+            set => Update(ref _thickness, value);
         }
 
         /// <summary>
@@ -63,8 +63,8 @@ namespace Core2D.Style
         /// </summary>
         public LineCap LineCap
         {
-            get { return _lineCap; }
-            set { Update(ref _lineCap, value); }
+            get => _lineCap;
+            set => Update(ref _lineCap, value);
         }
 
         /// <summary>
@@ -72,8 +72,8 @@ namespace Core2D.Style
         /// </summary>
         public string Dashes
         {
-            get { return _dashes; }
-            set { Update(ref _dashes, value); }
+            get => _dashes;
+            set => Update(ref _dashes, value);
         }
 
         /// <summary>
@@ -81,8 +81,8 @@ namespace Core2D.Style
         /// </summary>
         public double DashOffset
         {
-            get { return _dashOffset; }
-            set { Update(ref _dashOffset, value); }
+            get => _dashOffset;
+            set => Update(ref _dashOffset, value);
         }
 
         /// <summary>
