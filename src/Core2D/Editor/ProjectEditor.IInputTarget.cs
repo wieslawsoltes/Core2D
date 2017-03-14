@@ -57,33 +57,33 @@ namespace Core2D.Editor
         }
 
         /// <inheritdoc/>
-        public void LeftDown(double x, double y)
+        public void LeftDown(double x, double y, ModifierFlags modifier)
         {
-            CurrentTool.LeftDown(x, y);
+            CurrentTool.LeftDown(x, y, modifier);
         }
 
         /// <inheritdoc/>
-        public void LeftUp(double x, double y)
+        public void LeftUp(double x, double y, ModifierFlags modifier)
         {
-            CurrentTool.LeftUp(x, y);
+            CurrentTool.LeftUp(x, y, modifier);
         }
 
         /// <inheritdoc/>
-        public void RightDown(double x, double y)
+        public void RightDown(double x, double y, ModifierFlags modifier)
         {
-            CurrentTool.RightDown(x, y);
+            CurrentTool.RightDown(x, y, modifier);
         }
 
         /// <inheritdoc/>
-        public void RightUp(double x, double y)
+        public void RightUp(double x, double y, ModifierFlags modifier)
         {
-            CurrentTool.RightUp(x, y);
+            CurrentTool.RightUp(x, y, modifier);
         }
 
         /// <inheritdoc/>
-        public void Move(double x, double y)
+        public void Move(double x, double y, ModifierFlags modifier)
         {
-            CurrentTool.Move(x, y);
+            CurrentTool.Move(x, y, modifier);
         }
     }
 }

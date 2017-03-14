@@ -4,6 +4,7 @@ using System;
 using System.Reactive.Linq;
 using System.Windows;
 using System.Windows.Input;
+using Core2D.Editor;
 using Core2D.Editor.Input;
 using Core2D.Spatial;
 
@@ -14,6 +15,28 @@ namespace Utilities.Wpf
     /// </summary>
     public class WpfInputSource : InputSource
     {
+        private static ModifierFlags GetModifier()
+        {
+            ModifierFlags modifier = ModifierFlags.None;
+
+            if (Keyboard.Modifiers.HasFlag(ModifierKeys.Alt))
+            {
+                modifier |= ModifierFlags.Alt;
+            }
+
+            if (Keyboard.Modifiers.HasFlag(ModifierKeys.Control))
+            {
+                modifier |= ModifierFlags.Control;
+            }
+
+            if (Keyboard.Modifiers.HasFlag(ModifierKeys.Shift))
+            {
+                modifier |= ModifierFlags.Shift;
+            }
+
+            return modifier;
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="WpfInputSource"/> class.
         /// </summary>
@@ -31,13 +54,16 @@ namespace Utilities.Wpf
 
         private Vector2 ToVector2(Point point) => new Vector2(point.X, point.Y);
 
-        private IObservable<Vector2> GetObservable(UIElement target, string eventName, UIElement relative, Func<Point, Point> translate)
+        private IObservable<InputArgs> GetObservable(UIElement target, string eventName, UIElement relative, Func<Point, Point> translate)
         {
             return Observable.FromEventPattern<MouseEventArgs>(target, eventName).Select(
                 e =>
                 {
                     target.Focus();
-                    return ToVector2(translate(e.EventArgs.GetPosition(relative)));
+                    return new InputArgs(
+                        ToVector2(
+                            translate(e.EventArgs.GetPosition(relative))), 
+                        GetModifier());
                 });
         }
     }

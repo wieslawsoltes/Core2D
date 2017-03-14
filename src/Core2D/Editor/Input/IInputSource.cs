@@ -13,26 +13,26 @@ namespace Core2D.Editor.Input
         /// <summary>
         /// Left down events.
         /// </summary>
-        IObservable<Vector2> LeftDown { get; set; }
+        IObservable<InputArgs> LeftDown { get; set; }
 
         /// <summary>
         /// Left up events.
         /// </summary>
-        IObservable<Vector2> LeftUp { get; set; }
+        IObservable<InputArgs> LeftUp { get; set; }
 
         /// <summary>
         /// Right down events.
         /// </summary>
-        IObservable<Vector2> RightDown { get; set; }
+        IObservable<InputArgs> RightDown { get; set; }
 
         /// <summary>
         /// Right up events.
         /// </summary>
-        IObservable<Vector2> RightUp { get; set; }
+        IObservable<InputArgs> RightUp { get; set; }
 
         /// <summary>
         /// Move events.
         /// </summary>
-        IObservable<Vector2> Move { get; set; }
+        IObservable<InputArgs> Move { get; set; }
     }
 }

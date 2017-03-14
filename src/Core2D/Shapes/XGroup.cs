@@ -163,6 +163,28 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
+        public override void Select(ISet<BaseShape> selected)
+        {
+            base.Select(selected);
+
+            foreach (var connector in Connectors)
+            {
+                connector.Select(selected);
+            }
+        }
+
+        /// <inheritdoc/>
+        public override void Deselect(ISet<BaseShape> selected)
+        {
+            base.Deselect(selected);
+
+            foreach (var connector in Connectors)
+            {
+                connector.Deselect(selected);
+            }
+        }
+
+        /// <inheritdoc/>
         public override IEnumerable<XPoint> GetPoints()
         {
             return Enumerable.Concat(Shapes.SelectMany(s => s.GetPoints()), Connectors);

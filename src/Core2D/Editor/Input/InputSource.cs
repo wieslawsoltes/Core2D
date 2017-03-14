@@ -11,18 +11,18 @@ namespace Core2D.Editor.Input
     public abstract class InputSource : IInputSource
     {
         /// <inheritdoc/>
-        public virtual IObservable<Vector2> LeftDown { get; set; }
+        public virtual IObservable<InputArgs> LeftDown { get; set; }
 
         /// <inheritdoc/>
-        public virtual IObservable<Vector2> LeftUp { get; set; }
+        public virtual IObservable<InputArgs> LeftUp { get; set; }
 
         /// <inheritdoc/>
-        public virtual IObservable<Vector2> RightDown { get; set; }
+        public virtual IObservable<InputArgs> RightDown { get; set; }
 
         /// <inheritdoc/>
-        public virtual IObservable<Vector2> RightUp { get; set; }
+        public virtual IObservable<InputArgs> RightUp { get; set; }
 
         /// <inheritdoc/>
-        public virtual IObservable<Vector2> Move { get; set; }
+        public virtual IObservable<InputArgs> Move { get; set; }
     }
 }

@@ -13,35 +13,40 @@ namespace Core2D.Editor.Input
         /// </summary>
         /// <param name="x">The X coordinate of point.</param>
         /// <param name="y">The Y coordinate of point.</param>
-        void LeftDown(double x, double y);
+        /// <param name="modifier">The modifier flags.</param>
+        void LeftDown(double x, double y, ModifierFlags modifier);
 
         /// <summary>
         /// Handle left up events.
         /// </summary>
         /// <param name="x">The X coordinate of point.</param>
         /// <param name="y">The Y coordinate of point.</param>
-        void LeftUp(double x, double y);
+        /// <param name="modifier">The modifier flags.</param>
+        void LeftUp(double x, double y, ModifierFlags modifier);
 
         /// <summary>
         /// Handle right down events.
         /// </summary>
         /// <param name="x">The X coordinate of point.</param>
         /// <param name="y">The Y coordinate of point.</param>
-        void RightDown(double x, double y);
+        /// <param name="modifier">The modifier flags.</param>
+        void RightDown(double x, double y, ModifierFlags modifier);
 
         /// <summary>
         /// Handle right up events.
         /// </summary>
         /// <param name="x">The X coordinate of point.</param>
         /// <param name="y">The Y coordinate of point.</param>
-        void RightUp(double x, double y);
+        /// <param name="modifier">The modifier flags.</param>
+        void RightUp(double x, double y, ModifierFlags modifier);
 
         /// <summary>
         /// Handle move events.
         /// </summary>
         /// <param name="x">The X coordinate of point.</param>
         /// <param name="y">The Y coordinate of point.</param>
-        void Move(double x, double y);
+        /// <param name="modifier">The modifier flags.</param>
+        void Move(double x, double y, ModifierFlags modifier);
 
         /// <summary>
         /// Check if left down action is available.

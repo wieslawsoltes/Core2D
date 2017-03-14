@@ -11,6 +11,9 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform " Version="5.2.2" />
+    <PackageReference Include="System.Reactive.Core" Version="3.0.0" />
+    <PackageReference Include="System.Reactive.Interfaces" Version="3.0.0" />
+    <PackageReference Include="System.Reactive.Linq" Version="3.0.0" />
   </ItemGroup>
 
   <ItemGroup>

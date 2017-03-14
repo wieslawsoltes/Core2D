@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Autofac;
 using Core2D.Editor;
+using Core2D.Editor.Input;
 using Core2D.Editor.Views.Interfaces;
 using Core2D.Project;
 using Core2D.Renderer;
@@ -19,6 +20,7 @@ using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Text;
 using Microsoft.Graphics.Canvas.UI.Xaml;
 using Renderer.Win2D;
+using Utilities.Uwp;
 using Windows.Devices.Input;
 using Windows.Foundation;
 using Windows.Storage;
@@ -37,8 +39,7 @@ namespace Core2D.Universal
         private IServiceProvider _serviceProvider;
         private ContainerPresenter _presenter;
         private ProjectEditor _projectEditor;
-        private enum PointerPressType { None, Left, Middle, Right, Pen, Touch }
-        private PointerPressType _pressed;
+        private InputProcessor _inputProcessor;
 
         public MainPage()
         {
@@ -68,11 +69,13 @@ namespace Core2D.Universal
 
             _presenter = new EditorPresenter();
 
-            canvas.PointerPressed += CanvasControl_PointerPressed;
-            canvas.PointerReleased += CanvasControl_PointerReleased;
-            canvas.PointerMoved += CanvasControl_PointerMoved;
-            canvas.PointerWheelChanged += CanvasControl_PointerWheelChanged;
-            canvas.SizeChanged += Canvas_SizeChanged;
+            _inputProcessor = new InputProcessor(
+                new UwpInputSource(
+                    canvas,
+                    canvas,
+                    FixPointOffset),
+                _projectEditor);
+
             canvas.Draw += CanvasControl_Draw;
 
             DataContext = _projectEditor;
@@ -216,153 +219,6 @@ namespace Core2D.Universal
                 return new Point(point.X - offsetX, point.Y - offsetY);
             }
             return point;
-        }
-
-        private void CanvasControl_PointerPressed(object sender, PointerRoutedEventArgs e)
-        {
-            var p = e.GetCurrentPoint(sender as CanvasControl);
-            var pos = FixPointOffset(p.Position);
-            var type = p.PointerDevice.PointerDeviceType;
-            switch (type)
-            {
-                case PointerDeviceType.Mouse:
-                    {
-                        if (p.Properties.IsLeftButtonPressed)
-                        {
-                            if (_projectEditor.IsLeftDownAvailable())
-                            {
-                                _projectEditor.LeftDown(pos.X, pos.Y);
-                                _pressed = PointerPressType.Left;
-                            }
-                        }
-                        else if (p.Properties.IsMiddleButtonPressed)
-                        {
-                            _pressed = PointerPressType.Middle;
-                        }
-                        else if (p.Properties.IsRightButtonPressed)
-                        {
-                            if (_projectEditor.IsRightDownAvailable())
-                            {
-                                _projectEditor.RightDown(pos.X, pos.Y);
-                                _pressed = PointerPressType.Right;
-                            }
-                        }
-                        else
-                        {
-                            _pressed = PointerPressType.None;
-                        }
-                    }
-                    break;
-                case PointerDeviceType.Pen:
-                    {
-                        // TODO: Add pen support.
-                        _pressed = PointerPressType.Pen;
-                    }
-                    break;
-                case PointerDeviceType.Touch:
-                    {
-                        // TODO: Add touch support.
-                        _pressed = PointerPressType.Touch;
-                    }
-                    break;
-            }
-        }
-
-        private void CanvasControl_PointerReleased(object sender, PointerRoutedEventArgs e)
-        {
-            var p = e.GetCurrentPoint(sender as CanvasControl);
-            var pos = FixPointOffset(p.Position);
-            var type = p.PointerDevice.PointerDeviceType;
-            switch (type)
-            {
-                case PointerDeviceType.Mouse:
-                    {
-                        switch (_pressed)
-                        {
-                            case PointerPressType.None:
-                                break;
-                            case PointerPressType.Left:
-                                {
-                                    if (_projectEditor.IsLeftUpAvailable())
-                                    {
-                                        _projectEditor.LeftUp(pos.X, pos.Y);
-                                    }
-                                }
-                                break;
-                            case PointerPressType.Middle:
-                                break;
-                            case PointerPressType.Right:
-                                {
-                                    if (_projectEditor.IsRightUpAvailable())
-                                    {
-                                        _projectEditor.RightUp(pos.X, pos.Y);
-                                    }
-                                }
-                                break;
-                            case PointerPressType.Pen:
-                            case PointerPressType.Touch:
-                                break;
-                        }
-                    }
-                    break;
-                case PointerDeviceType.Pen:
-                    {
-                        switch (_pressed)
-                        {
-                            case PointerPressType.None:
-                            case PointerPressType.Left:
-                            case PointerPressType.Middle:
-                            case PointerPressType.Right:
-                                break;
-                            case PointerPressType.Pen:
-                                {
-                                    // TODO: Add pen support.
-                                }
-                                break;
-                            case PointerPressType.Touch:
-                                break;
-                        }
-                    }
-                    break;
-                case PointerDeviceType.Touch:
-                    {
-                        switch (_pressed)
-                        {
-                            case PointerPressType.None:
-                            case PointerPressType.Left:
-                            case PointerPressType.Middle:
-                            case PointerPressType.Right:
-                            case PointerPressType.Pen:
-                            case PointerPressType.Touch:
-                                {
-                                    // TODO: Add touch support.
-                                }
-                                break;
-                        }
-                    }
-                    break;
-            }
-
-            _pressed = PointerPressType.None;
-        }
-
-        private void CanvasControl_PointerMoved(object sender, PointerRoutedEventArgs e)
-        {
-            var p = e.GetCurrentPoint(sender as CanvasControl);
-            var pos = FixPointOffset(p.Position);
-
-            if (_projectEditor.IsMoveAvailable())
-            {
-                _projectEditor.Move(pos.X, pos.Y);
-            }
-        }
-
-        private void CanvasControl_PointerWheelChanged(object sender, PointerRoutedEventArgs e)
-        {
-        }
-
-        private void Canvas_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
         }
 
         private void CanvasControl_Draw(CanvasControl sender, CanvasDrawEventArgs args)
