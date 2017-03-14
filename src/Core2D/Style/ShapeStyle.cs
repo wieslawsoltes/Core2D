@@ -18,8 +18,8 @@ namespace Core2D.Style
         /// </summary>
         public LineStyle LineStyle
         {
-            get { return _lineStyle; }
-            set { Update(ref _lineStyle, value); }
+            get => _lineStyle;
+            set => Update(ref _lineStyle, value);
         }
 
         /// <summary>
@@ -27,8 +27,8 @@ namespace Core2D.Style
         /// </summary>
         public ArrowStyle StartArrowStyle
         {
-            get { return _startArrowStyle; }
-            set { Update(ref _startArrowStyle, value); }
+            get => _startArrowStyle;
+            set => Update(ref _startArrowStyle, value);
         }
 
         /// <summary>
@@ -36,8 +36,8 @@ namespace Core2D.Style
         /// </summary>
         public ArrowStyle EndArrowStyle
         {
-            get { return _endArrowStyle; }
-            set { Update(ref _endArrowStyle, value); }
+            get => _endArrowStyle;
+            set => Update(ref _endArrowStyle, value);
         }
 
         /// <summary>
@@ -45,8 +45,8 @@ namespace Core2D.Style
         /// </summary>
         public TextStyle TextStyle
         {
-            get { return _textStyle; }
-            set { Update(ref _textStyle, value); }
+            get => _textStyle;
+            set => Update(ref _textStyle, value);
         }
 
         /// <summary>
