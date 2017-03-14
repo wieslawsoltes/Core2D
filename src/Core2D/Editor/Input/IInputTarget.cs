@@ -11,42 +11,32 @@ namespace Core2D.Editor.Input
         /// <summary>
         /// Handle left down events.
         /// </summary>
-        /// <param name="x">The X coordinate of point.</param>
-        /// <param name="y">The Y coordinate of point.</param>
-        /// <param name="modifier">The modifier flags.</param>
-        void LeftDown(double x, double y, ModifierFlags modifier);
+        /// <param name="args">The input arguments.</param>
+        void LeftDown(InputArgs args);
 
         /// <summary>
         /// Handle left up events.
         /// </summary>
-        /// <param name="x">The X coordinate of point.</param>
-        /// <param name="y">The Y coordinate of point.</param>
-        /// <param name="modifier">The modifier flags.</param>
-        void LeftUp(double x, double y, ModifierFlags modifier);
+        /// <param name="args">The input arguments.</param>
+        void LeftUp(InputArgs args);
 
         /// <summary>
         /// Handle right down events.
         /// </summary>
-        /// <param name="x">The X coordinate of point.</param>
-        /// <param name="y">The Y coordinate of point.</param>
-        /// <param name="modifier">The modifier flags.</param>
-        void RightDown(double x, double y, ModifierFlags modifier);
+        /// <param name="args">The input arguments.</param>
+        void RightDown(InputArgs args);
 
         /// <summary>
         /// Handle right up events.
         /// </summary>
-        /// <param name="x">The X coordinate of point.</param>
-        /// <param name="y">The Y coordinate of point.</param>
-        /// <param name="modifier">The modifier flags.</param>
-        void RightUp(double x, double y, ModifierFlags modifier);
+        /// <param name="args">The input arguments.</param>
+        void RightUp(InputArgs args);
 
         /// <summary>
         /// Handle move events.
         /// </summary>
-        /// <param name="x">The X coordinate of point.</param>
-        /// <param name="y">The Y coordinate of point.</param>
-        /// <param name="modifier">The modifier flags.</param>
-        void Move(double x, double y, ModifierFlags modifier);
+        /// <param name="args">The input arguments.</param>
+        void Move(InputArgs args);
 
         /// <summary>
         /// Check if left down action is available.
