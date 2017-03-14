@@ -22,8 +22,8 @@ namespace Core2D.Project
         [Name]
         public string Name
         {
-            get { return _name; }
-            set { Update(ref _name, value); }
+            get => _name;
+            set => Update(ref _name, value);
         }
 
         /// <summary>
@@ -32,8 +32,8 @@ namespace Core2D.Project
         [Content]
         public ImmutableArray<T> Items
         {
-            get { return _items; }
-            set { Update(ref _items, value); }
+            get => _items;
+            set => Update(ref _items, value);
         }
 
         /// <summary>
@@ -41,8 +41,8 @@ namespace Core2D.Project
         /// </summary>
         public T Selected
         {
-            get { return _selected; }
-            set { Update(ref _selected, value); }
+            get => _selected;
+            set => Update(ref _selected, value);
         }
 
         /// <summary>
@@ -59,23 +59,14 @@ namespace Core2D.Project
         /// Set selected.
         /// </summary>
         /// <param name="item">The item instance.</param>
-        public void SetSelected(T item)
-        {
-            Selected = item;
-        }
+        public void SetSelected(T item) => Selected = item;
 
         /// <summary>
         /// Creates a new instance of the <see cref="XLibrary{T}"/> class.
         /// </summary>
         /// <param name="name">The library name.</param>
         /// <returns>The new instance of the <see cref="XLibrary{T}"/> class.</returns>
-        public static XLibrary<T> Create(string name)
-        {
-            return new XLibrary<T>()
-            {
-                Name = name
-            };
-        }
+        public static XLibrary<T> Create(string name) => new XLibrary<T>() { Name = name };
 
         /// <summary>
         /// Creates a new instance of the <see cref="XLibrary{T}"/> class.
