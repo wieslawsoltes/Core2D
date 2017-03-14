@@ -52,18 +52,14 @@ namespace Utilities.Wpf
             Move = GetObservable(source, "PreviewMouseMove", relative, translate);
         }
 
-        private Vector2 ToVector2(Point point) => new Vector2(point.X, point.Y);
-
         private IObservable<InputArgs> GetObservable(UIElement target, string eventName, UIElement relative, Func<Point, Point> translate)
         {
             return Observable.FromEventPattern<MouseEventArgs>(target, eventName).Select(
                 e =>
                 {
                     target.Focus();
-                    return new InputArgs(
-                        ToVector2(
-                            translate(e.EventArgs.GetPosition(relative))), 
-                        GetModifier());
+                    var point = translate(e.EventArgs.GetPosition(relative));
+                    return new InputArgs(point.X, point.Y, GetModifier());
                 });
         }
     }
