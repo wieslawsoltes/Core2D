@@ -39,8 +39,8 @@ namespace Core2D.Project
         [Name]
         public string Name
         {
-            get { return _name; }
-            set { Update(ref _name, value); }
+            get => _name;
+            set => Update(ref _name, value);
         }
 
         /// <summary>
@@ -48,8 +48,8 @@ namespace Core2D.Project
         /// </summary>
         public XOptions Options
         {
-            get { return _options; }
-            set { Update(ref _options, value); }
+            get => _options;
+            set => Update(ref _options, value);
         }
 
         /// <summary>
@@ -57,8 +57,8 @@ namespace Core2D.Project
         /// </summary>
         public IHistory History
         {
-            get { return _history; }
-            set { Update(ref _history, value); }
+            get => _history;
+            set => Update(ref _history, value);
         }
 
         /// <summary>
@@ -66,8 +66,8 @@ namespace Core2D.Project
         /// </summary>
         public ImmutableArray<XLibrary<ShapeStyle>> StyleLibraries
         {
-            get { return _styleLibraries; }
-            set { Update(ref _styleLibraries, value); }
+            get => _styleLibraries;
+            set => Update(ref _styleLibraries, value);
         }
 
         /// <summary>
@@ -75,8 +75,8 @@ namespace Core2D.Project
         /// </summary>
         public ImmutableArray<XLibrary<XGroup>> GroupLibraries
         {
-            get { return _groupLibraries; }
-            set { Update(ref _groupLibraries, value); }
+            get => _groupLibraries;
+            set => Update(ref _groupLibraries, value);
         }
 
         /// <summary>
@@ -84,8 +84,8 @@ namespace Core2D.Project
         /// </summary>
         public ImmutableArray<XDatabase> Databases
         {
-            get { return _databases; }
-            set { Update(ref _databases, value); }
+            get => _databases;
+            set => Update(ref _databases, value);
         }
 
         /// <summary>
@@ -93,8 +93,8 @@ namespace Core2D.Project
         /// </summary>
         public ImmutableArray<XContainer> Templates
         {
-            get { return _templates; }
-            set { Update(ref _templates, value); }
+            get => _templates;
+            set => Update(ref _templates, value);
         }
 
         /// <summary>
@@ -103,8 +103,8 @@ namespace Core2D.Project
         [Content]
         public ImmutableArray<XDocument> Documents
         {
-            get { return _documents; }
-            set { Update(ref _documents, value); }
+            get => _documents;
+            set => Update(ref _documents, value);
         }
 
         /// <summary>
@@ -112,8 +112,8 @@ namespace Core2D.Project
         /// </summary>
         public XLibrary<ShapeStyle> CurrentStyleLibrary
         {
-            get { return _currentStyleLibrary; }
-            set { Update(ref _currentStyleLibrary, value); }
+            get => _currentStyleLibrary;
+            set => Update(ref _currentStyleLibrary, value);
         }
 
         /// <summary>
@@ -121,8 +121,8 @@ namespace Core2D.Project
         /// </summary>
         public XLibrary<XGroup> CurrentGroupLibrary
         {
-            get { return _currentGroupLibrary; }
-            set { Update(ref _currentGroupLibrary, value); }
+            get => _currentGroupLibrary;
+            set => Update(ref _currentGroupLibrary, value);
         }
 
         /// <summary>
@@ -130,8 +130,8 @@ namespace Core2D.Project
         /// </summary>
         public XDatabase CurrentDatabase
         {
-            get { return _currentDatabase; }
-            set { Update(ref _currentDatabase, value); }
+            get => _currentDatabase;
+            set => Update(ref _currentDatabase, value);
         }
 
         /// <summary>
@@ -139,8 +139,8 @@ namespace Core2D.Project
         /// </summary>
         public XContainer CurrentTemplate
         {
-            get { return _currentTemplate; }
-            set { Update(ref _currentTemplate, value); }
+            get => _currentTemplate;
+            set => Update(ref _currentTemplate, value);
         }
 
         /// <summary>
@@ -206,55 +206,37 @@ namespace Core2D.Project
         /// Set current document.
         /// </summary>
         /// <param name="document">The document instance.</param>
-        public void SetCurrentDocument(XDocument document)
-        {
-            CurrentDocument = document;
-        }
+        public void SetCurrentDocument(XDocument document) => CurrentDocument = document;
 
         /// <summary>
         /// Set current container.
         /// </summary>
         /// <param name="container">The container instance.</param>
-        public void SetCurrentContainer(XContainer container)
-        {
-            CurrentContainer = container;
-        }
+        public void SetCurrentContainer(XContainer container) => CurrentContainer = container;
 
         /// <summary>
         /// Set current template.
         /// </summary>
         /// <param name="template">The template instance.</param>
-        public void SetCurrentTemplate(XContainer template)
-        {
-            CurrentTemplate = template;
-        }
+        public void SetCurrentTemplate(XContainer template) => CurrentTemplate = template;
 
         /// <summary>
         /// Set current database.
         /// </summary>
         /// <param name="db">The database instance.</param>
-        public void SetCurrentDatabase(XDatabase db)
-        {
-            CurrentDatabase = db;
-        }
+        public void SetCurrentDatabase(XDatabase db) => CurrentDatabase = db;
 
         /// <summary>
         /// Set current group library.
         /// </summary>
         /// <param name="library">The group library instance.</param>
-        public void SetCurrentGroupLibrary(XLibrary<XGroup> library)
-        {
-            CurrentGroupLibrary = library;
-        }
+        public void SetCurrentGroupLibrary(XLibrary<XGroup> library) => CurrentGroupLibrary = library;
 
         /// <summary>
         /// Set current group.
         /// </summary>
         /// <param name="library">The style library instance.</param>
-        public void SetCurrentStyleLibrary(XLibrary<ShapeStyle> library)
-        {
-            CurrentStyleLibrary = library;
-        }
+        public void SetCurrentStyleLibrary(XLibrary<ShapeStyle> library) => CurrentStyleLibrary = library;
 
         /// <summary>
         /// Set selected value.
