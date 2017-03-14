@@ -5,7 +5,6 @@ using System.Collections.Immutable;
 using System.Linq;
 using Core2D.Data.Database;
 using Core2D.Editor.Bounds;
-using Core2D.Editor.Bounds.Shapes;
 using Core2D.Editor.Factories;
 using Core2D.Editor.Recent;
 using Core2D.Editor.Views.Interfaces;
@@ -60,8 +59,8 @@ namespace Core2D.Editor
         /// </summary>
         public XProject Project
         {
-            get { return _project; }
-            set { Update(ref _project, value); }
+            get => _project;
+            set => Update(ref _project, value);
         }
 
         /// <summary>
@@ -69,8 +68,8 @@ namespace Core2D.Editor
         /// </summary>
         public string ProjectPath
         {
-            get { return _projectPath; }
-            set { Update(ref _projectPath, value); }
+            get => _projectPath;
+            set => Update(ref _projectPath, value);
         }
 
         /// <summary>
@@ -78,8 +77,8 @@ namespace Core2D.Editor
         /// </summary>
         public bool IsProjectDirty
         {
-            get { return _isProjectDirty; }
-            set { Update(ref _isProjectDirty, value); }
+            get => _isProjectDirty;
+            set => Update(ref _isProjectDirty, value);
         }
 
         /// <summary>
@@ -87,8 +86,8 @@ namespace Core2D.Editor
         /// </summary>
         public ProjectObserver Observer
         {
-            get { return _observer; }
-            set { Update(ref _observer, value); }
+            get => _observer;
+            set => Update(ref _observer, value);
         }
 
         /// <summary>
@@ -97,8 +96,8 @@ namespace Core2D.Editor
         /// <remarks>Invalidate current container control.</remarks>
         public Action Invalidate
         {
-            get { return _invalidate; }
-            set { Update(ref _invalidate, value); }
+            get => _invalidate;
+            set => Update(ref _invalidate, value);
         }
 
         /// <summary>
@@ -107,8 +106,8 @@ namespace Core2D.Editor
         /// <remarks>Reset view size to defaults.</remarks>
         public Action ResetZoom
         {
-            get { return _resetZoom; }
-            set { Update(ref _resetZoom, value); }
+            get => _resetZoom;
+            set => Update(ref _resetZoom, value);
         }
 
         /// <summary>
@@ -117,8 +116,8 @@ namespace Core2D.Editor
         /// <remarks>Auto-fit view to the available extents.</remarks>
         public Action AutoFitZoom
         {
-            get { return _extentZoom; }
-            set { Update(ref _extentZoom, value); }
+            get => _extentZoom;
+            set => Update(ref _extentZoom, value);
         }
 
         /// <summary>
@@ -127,8 +126,8 @@ namespace Core2D.Editor
         /// <remarks>Auto-fit view to the available extents.</remarks>
         public Action LoadLayout
         {
-            get { return _loadLayout; }
-            set { Update(ref _loadLayout, value); }
+            get => _loadLayout;
+            set => Update(ref _loadLayout, value);
         }
 
         /// <summary>
@@ -137,8 +136,8 @@ namespace Core2D.Editor
         /// <remarks>Auto-fit view to the available extents.</remarks>
         public Action SaveLayout
         {
-            get { return _saveLayout; }
-            set { Update(ref _saveLayout, value); }
+            get => _saveLayout;
+            set => Update(ref _saveLayout, value);
         }
 
         /// <summary>
@@ -147,8 +146,8 @@ namespace Core2D.Editor
         /// <remarks>Reset editor layout.</remarks>
         public Action ResetLayout
         {
-            get { return _resetLayout; }
-            set { Update(ref _resetLayout, value); }
+            get => _resetLayout;
+            set => Update(ref _resetLayout, value);
         }
 
         /// <summary>
@@ -156,8 +155,8 @@ namespace Core2D.Editor
         /// </summary>
         public bool CancelAvailable
         {
-            get { return _cancelAvailable; }
-            set { Update(ref _cancelAvailable, value); }
+            get => _cancelAvailable;
+            set => Update(ref _cancelAvailable, value);
         }
 
         /// <summary>
@@ -165,8 +164,8 @@ namespace Core2D.Editor
         /// </summary>
         public ToolBase CurrentTool
         {
-            get { return _currentTool; }
-            set { Update(ref _currentTool, value); }
+            get => _currentTool;
+            set => Update(ref _currentTool, value);
         }
 
         /// <summary>
@@ -174,8 +173,8 @@ namespace Core2D.Editor
         /// </summary>
         public PathToolBase CurrentPathTool
         {
-            get { return _currentPathTool; }
-            set { Update(ref _currentPathTool, value); }
+            get => _currentPathTool;
+            set => Update(ref _currentPathTool, value);
         }
 
         /// <summary>
@@ -183,8 +182,8 @@ namespace Core2D.Editor
         /// </summary>
         public ImmutableArray<RecentFile> RecentProjects
         {
-            get { return _recentProjects; }
-            set { Update(ref _recentProjects, value); }
+            get => _recentProjects;
+            set => Update(ref _recentProjects, value);
         }
 
         /// <summary>
@@ -192,8 +191,8 @@ namespace Core2D.Editor
         /// </summary>
         public RecentFile CurrentRecentProject
         {
-            get { return _currentRecentProject; }
-            set { Update(ref _currentRecentProject, value); }
+            get => _currentRecentProject;
+            set => Update(ref _currentRecentProject, value);
         }
 
         /// <summary>
@@ -201,8 +200,8 @@ namespace Core2D.Editor
         /// </summary>
         public IView CurrentView
         {
-            get { return _currentView; }
-            set { Update(ref _currentView, value); }
+            get => _currentView;
+            set => Update(ref _currentView, value);
         }
 
         /// <summary>

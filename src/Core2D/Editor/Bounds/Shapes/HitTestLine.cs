@@ -10,7 +10,7 @@ namespace Core2D.Editor.Bounds.Shapes
 {
     public class HitTestLine : HitTestBase
     {
-        public override Type TargetType { get { return typeof(XLine); } }
+        public override Type TargetType => typeof(XLine);
 
         public override XPoint TryToGetPoint(BaseShape shape, Point2 target, double radius, IDictionary<Type, HitTestBase> registered)
         {

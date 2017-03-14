@@ -60,7 +60,7 @@ namespace Core2D.Shapes
         /// </summary>
         public ImmutableArray<BaseShape> Shapes
         {
-            get { return _shapes; }
+            get => _shapes;
             set
             {
                 if(Update(ref _shapes, value))
@@ -75,7 +75,7 @@ namespace Core2D.Shapes
         /// </summary>
         public ImmutableArray<XPoint> Connectors
         {
-            get { return _connectors; }
+            get => _connectors;
             set
             {
                 if (Update(ref _connectors, value))

@@ -37,8 +37,8 @@ namespace Core2D.Editor.Tools
         /// </summary>
         public ToolSettingsSelection Settings
         {
-            get { return _settings; }
-            set { Update(ref _settings, value); }
+            get => _settings;
+            set => Update(ref _settings, value);
         }
 
         /// <summary>

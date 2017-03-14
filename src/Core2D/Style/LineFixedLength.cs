@@ -22,17 +22,22 @@ namespace Core2D.Style
         [Content]
         public LineFixedLengthFlags Flags
         {
-            get { return _flags; }
+            get => _flags;
             set
             {
                 Update(ref _flags, value);
-                Notify(nameof(Disabled));
-                Notify(nameof(Start));
-                Notify(nameof(End));
-                Notify(nameof(Vertical));
-                Notify(nameof(Horizontal));
-                Notify(nameof(All));
+                NotifyAll();
             }
+        }
+
+        private void NotifyAll()
+        {
+            Notify(nameof(Disabled));
+            Notify(nameof(Start));
+            Notify(nameof(End));
+            Notify(nameof(Vertical));
+            Notify(nameof(Horizontal));
+            Notify(nameof(All));
         }
 
         /// <summary>
@@ -40,14 +45,8 @@ namespace Core2D.Style
         /// </summary>
         public bool Disabled
         {
-            get { return _flags == LineFixedLengthFlags.Disabled; }
-            set
-            {
-                if (value == true)
-                    Flags = _flags | LineFixedLengthFlags.Disabled;
-                else
-                    Flags = _flags & ~LineFixedLengthFlags.Disabled;
-            }
+            get => _flags == LineFixedLengthFlags.Disabled;
+            set => Flags = value ? _flags | LineFixedLengthFlags.Disabled : _flags & ~LineFixedLengthFlags.Disabled;
         }
 
         /// <summary>
@@ -55,14 +54,8 @@ namespace Core2D.Style
         /// </summary>
         public bool Start
         {
-            get { return _flags.HasFlag(LineFixedLengthFlags.Start); }
-            set
-            {
-                if (value == true)
-                    Flags = _flags | LineFixedLengthFlags.Start;
-                else
-                    Flags = _flags & ~LineFixedLengthFlags.Start;
-            }
+            get => _flags.HasFlag(LineFixedLengthFlags.Start);
+            set => Flags = value ? _flags | LineFixedLengthFlags.Start : _flags & ~LineFixedLengthFlags.Start;
         }
 
         /// <summary>
@@ -70,14 +63,8 @@ namespace Core2D.Style
         /// </summary>
         public bool End
         {
-            get { return _flags.HasFlag(LineFixedLengthFlags.End); }
-            set
-            {
-                if (value == true)
-                    Flags = _flags | LineFixedLengthFlags.End;
-                else
-                    Flags = _flags & ~LineFixedLengthFlags.End;
-            }
+            get => _flags.HasFlag(LineFixedLengthFlags.End);
+            set => Flags = value ? _flags | LineFixedLengthFlags.End : _flags & ~LineFixedLengthFlags.End;
         }
 
         /// <summary>
@@ -85,14 +72,8 @@ namespace Core2D.Style
         /// </summary>
         public bool Vertical
         {
-            get { return _flags.HasFlag(LineFixedLengthFlags.Vertical); }
-            set
-            {
-                if (value == true)
-                    Flags = _flags | LineFixedLengthFlags.Vertical;
-                else
-                    Flags = _flags & ~LineFixedLengthFlags.Vertical;
-            }
+            get => _flags.HasFlag(LineFixedLengthFlags.Vertical);
+            set => Flags = value ? _flags | LineFixedLengthFlags.Vertical : _flags & ~LineFixedLengthFlags.Vertical;
         }
 
         /// <summary>
@@ -100,14 +81,8 @@ namespace Core2D.Style
         /// </summary>
         public bool Horizontal
         {
-            get { return _flags.HasFlag(LineFixedLengthFlags.Horizontal); }
-            set
-            {
-                if (value == true)
-                    Flags = _flags | LineFixedLengthFlags.Horizontal;
-                else
-                    Flags = _flags & ~LineFixedLengthFlags.Horizontal;
-            }
+            get => _flags.HasFlag(LineFixedLengthFlags.Horizontal);
+            set => Flags = value ? _flags | LineFixedLengthFlags.Horizontal : _flags & ~LineFixedLengthFlags.Horizontal;
         }
 
         /// <summary>
@@ -115,14 +90,8 @@ namespace Core2D.Style
         /// </summary>
         public bool All
         {
-            get { return _flags.HasFlag(LineFixedLengthFlags.All); }
-            set
-            {
-                if (value == true)
-                    Flags = _flags | LineFixedLengthFlags.All;
-                else
-                    Flags = _flags & ~LineFixedLengthFlags.All;
-            }
+            get => _flags.HasFlag(LineFixedLengthFlags.All);
+            set => Flags = value ? _flags | LineFixedLengthFlags.All : _flags & ~LineFixedLengthFlags.All;
         }
 
         /// <summary>
@@ -130,8 +99,8 @@ namespace Core2D.Style
         /// </summary>
         public ShapeState StartTrigger
         {
-            get { return _startTrigger; }
-            set { Update(ref _startTrigger, value); }
+            get => _startTrigger;
+            set => Update(ref _startTrigger, value);
         }
 
         /// <summary>
@@ -139,8 +108,8 @@ namespace Core2D.Style
         /// </summary>
         public ShapeState EndTrigger
         {
-            get { return _endTrigger; }
-            set { Update(ref _endTrigger, value); }
+            get => _endTrigger;
+            set => Update(ref _endTrigger, value);
         }
 
         /// <summary>
@@ -148,8 +117,8 @@ namespace Core2D.Style
         /// </summary>
         public double Length
         {
-            get { return _length; }
-            set { Update(ref _length, value); }
+            get => _length;
+            set => Update(ref _length, value);
         }
 
         /// <summary>

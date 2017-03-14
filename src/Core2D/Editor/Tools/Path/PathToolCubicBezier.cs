@@ -32,8 +32,8 @@ namespace Core2D.Editor.Tools.Path
         /// </summary>
         public PathToolSettingsCubicBezier Settings
         {
-            get { return _settings; }
-            set { Update(ref _settings, value); }
+            get => _settings;
+            set => Update(ref _settings, value);
         }
 
         /// <summary>

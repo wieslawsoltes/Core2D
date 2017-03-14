@@ -18,16 +18,21 @@ namespace Core2D.Style
         [Content]
         public FontStyleFlags Flags
         {
-            get { return _flags; }
+            get => _flags;
             set
             {
                 Update(ref _flags, value);
-                Notify(nameof(Regular));
-                Notify(nameof(Bold));
-                Notify(nameof(Italic));
-                Notify(nameof(Underline));
-                Notify(nameof(Strikeout));
+                NatifyAll();
             }
+        }
+
+        private void NatifyAll()
+        {
+            Notify(nameof(Regular));
+            Notify(nameof(Bold));
+            Notify(nameof(Italic));
+            Notify(nameof(Underline));
+            Notify(nameof(Strikeout));
         }
 
         /// <summary>
@@ -35,14 +40,8 @@ namespace Core2D.Style
         /// </summary>
         public bool Regular
         {
-            get { return _flags == FontStyleFlags.Regular; }
-            set
-            {
-                if (value == true)
-                    Flags = _flags | FontStyleFlags.Regular;
-                else
-                    Flags = _flags & ~FontStyleFlags.Regular;
-            }
+            get => _flags == FontStyleFlags.Regular;
+            set => Flags = value ? _flags | FontStyleFlags.Regular : _flags & ~FontStyleFlags.Regular;
         }
 
         /// <summary>
@@ -50,14 +49,8 @@ namespace Core2D.Style
         /// </summary>
         public bool Bold
         {
-            get { return _flags.HasFlag(FontStyleFlags.Bold); }
-            set
-            {
-                if (value == true)
-                    Flags = _flags | FontStyleFlags.Bold;
-                else
-                    Flags = _flags & ~FontStyleFlags.Bold;
-            }
+            get => _flags.HasFlag(FontStyleFlags.Bold);
+            set => Flags = value ? _flags | FontStyleFlags.Bold : _flags & ~FontStyleFlags.Bold;
         }
 
         /// <summary>
@@ -65,14 +58,8 @@ namespace Core2D.Style
         /// </summary>
         public bool Italic
         {
-            get { return _flags.HasFlag(FontStyleFlags.Italic); }
-            set
-            {
-                if (value == true)
-                    Flags = _flags | FontStyleFlags.Italic;
-                else
-                    Flags = _flags & ~FontStyleFlags.Italic;
-            }
+            get => _flags.HasFlag(FontStyleFlags.Italic);
+            set => Flags = value ? _flags | FontStyleFlags.Italic : _flags & ~FontStyleFlags.Italic;
         }
 
         /// <summary>
@@ -80,14 +67,8 @@ namespace Core2D.Style
         /// </summary>
         public bool Underline
         {
-            get { return _flags.HasFlag(FontStyleFlags.Underline); }
-            set
-            {
-                if (value == true)
-                    Flags = _flags | FontStyleFlags.Underline;
-                else
-                    Flags = _flags & ~FontStyleFlags.Underline;
-            }
+            get => _flags.HasFlag(FontStyleFlags.Underline);
+            set => Flags = value ? _flags | FontStyleFlags.Underline : _flags & ~FontStyleFlags.Underline;
         }
 
         /// <summary>
@@ -95,14 +76,8 @@ namespace Core2D.Style
         /// </summary>
         public bool Strikeout
         {
-            get { return _flags.HasFlag(FontStyleFlags.Strikeout); }
-            set
-            {
-                if (value == true)
-                    Flags = _flags | FontStyleFlags.Strikeout;
-                else
-                    Flags = _flags & ~FontStyleFlags.Strikeout;
-            }
+            get => _flags.HasFlag(FontStyleFlags.Strikeout);
+            set => Flags = value ? _flags | FontStyleFlags.Strikeout : _flags & ~FontStyleFlags.Strikeout;
         }
 
         /// <summary>

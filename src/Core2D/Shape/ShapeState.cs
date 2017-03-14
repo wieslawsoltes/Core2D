@@ -18,20 +18,25 @@ namespace Core2D.Shape
         [Content]
         public ShapeStateFlags Flags
         {
-            get { return _flags; }
+            get => _flags;
             set
             {
                 Update(ref _flags, value);
-                Notify(nameof(Default));
-                Notify(nameof(Visible));
-                Notify(nameof(Printable));
-                Notify(nameof(Locked));
-                Notify(nameof(Connector));
-                Notify(nameof(None));
-                Notify(nameof(Standalone));
-                Notify(nameof(Input));
-                Notify(nameof(Output));
+                NotifyAll();
             }
+        }
+
+        private void NotifyAll()
+        {
+            Notify(nameof(Default));
+            Notify(nameof(Visible));
+            Notify(nameof(Printable));
+            Notify(nameof(Locked));
+            Notify(nameof(Connector));
+            Notify(nameof(None));
+            Notify(nameof(Standalone));
+            Notify(nameof(Input));
+            Notify(nameof(Output));
         }
 
         /// <summary>
@@ -39,14 +44,8 @@ namespace Core2D.Shape
         /// </summary>
         public bool Default
         {
-            get { return _flags == ShapeStateFlags.Default; }
-            set
-            {
-                if (value == true)
-                    Flags = _flags | ShapeStateFlags.Default;
-                else
-                    Flags = _flags & ~ShapeStateFlags.Default;
-            }
+            get => _flags == ShapeStateFlags.Default;
+            set => Flags = value ? _flags | ShapeStateFlags.Default : _flags & ~ShapeStateFlags.Default;
         }
 
         /// <summary>
@@ -54,14 +53,8 @@ namespace Core2D.Shape
         /// </summary>
         public bool Visible
         {
-            get { return _flags.HasFlag(ShapeStateFlags.Visible); }
-            set
-            {
-                if (value == true)
-                    Flags = _flags | ShapeStateFlags.Visible;
-                else
-                    Flags = _flags & ~ShapeStateFlags.Visible;
-            }
+            get => _flags.HasFlag(ShapeStateFlags.Visible);
+            set => Flags = value ? _flags | ShapeStateFlags.Visible : _flags & ~ShapeStateFlags.Visible;
         }
 
         /// <summary>
@@ -69,14 +62,8 @@ namespace Core2D.Shape
         /// </summary>
         public bool Printable
         {
-            get { return _flags.HasFlag(ShapeStateFlags.Printable); }
-            set
-            {
-                if (value == true)
-                    Flags = _flags | ShapeStateFlags.Printable;
-                else
-                    Flags = _flags & ~ShapeStateFlags.Printable;
-            }
+            get => _flags.HasFlag(ShapeStateFlags.Printable);
+            set => Flags = value ? _flags | ShapeStateFlags.Printable : _flags & ~ShapeStateFlags.Printable;
         }
 
         /// <summary>
@@ -84,14 +71,8 @@ namespace Core2D.Shape
         /// </summary>
         public bool Locked
         {
-            get { return _flags.HasFlag(ShapeStateFlags.Locked); }
-            set
-            {
-                if (value == true)
-                    Flags = _flags | ShapeStateFlags.Locked;
-                else
-                    Flags = _flags & ~ShapeStateFlags.Locked;
-            }
+            get => _flags.HasFlag(ShapeStateFlags.Locked);
+            set => Flags = value ? _flags | ShapeStateFlags.Locked : _flags & ~ShapeStateFlags.Locked;
         }
 
         /// <summary>
@@ -99,14 +80,8 @@ namespace Core2D.Shape
         /// </summary>
         public bool Connector
         {
-            get { return _flags.HasFlag(ShapeStateFlags.Connector); }
-            set
-            {
-                if (value == true)
-                    Flags = _flags | ShapeStateFlags.Connector;
-                else
-                    Flags = _flags & ~ShapeStateFlags.Connector;
-            }
+            get => _flags.HasFlag(ShapeStateFlags.Connector);
+            set => Flags = value ? _flags | ShapeStateFlags.Connector : _flags & ~ShapeStateFlags.Connector;
         }
 
         /// <summary>
@@ -114,14 +89,8 @@ namespace Core2D.Shape
         /// </summary>
         public bool None
         {
-            get { return _flags.HasFlag(ShapeStateFlags.None); }
-            set
-            {
-                if (value == true)
-                    Flags = _flags | ShapeStateFlags.None;
-                else
-                    Flags = _flags & ~ShapeStateFlags.None;
-            }
+            get => _flags.HasFlag(ShapeStateFlags.None);
+            set => Flags = value ? _flags | ShapeStateFlags.None : _flags & ~ShapeStateFlags.None;
         }
 
         /// <summary>
@@ -129,14 +98,8 @@ namespace Core2D.Shape
         /// </summary>
         public bool Standalone
         {
-            get { return _flags.HasFlag(ShapeStateFlags.Standalone); }
-            set
-            {
-                if (value == true)
-                    Flags = _flags | ShapeStateFlags.Standalone;
-                else
-                    Flags = _flags & ~ShapeStateFlags.Standalone;
-            }
+            get => _flags.HasFlag(ShapeStateFlags.Standalone);
+            set => Flags = value ? _flags | ShapeStateFlags.Standalone : _flags & ~ShapeStateFlags.Standalone;
         }
 
         /// <summary>
@@ -144,14 +107,8 @@ namespace Core2D.Shape
         /// </summary>
         public bool Input
         {
-            get { return _flags.HasFlag(ShapeStateFlags.Input); }
-            set
-            {
-                if (value == true)
-                    Flags = _flags | ShapeStateFlags.Input;
-                else
-                    Flags = _flags & ~ShapeStateFlags.Input;
-            }
+            get => _flags.HasFlag(ShapeStateFlags.Input);
+            set => Flags = value ? _flags | ShapeStateFlags.Input : _flags & ~ShapeStateFlags.Input;
         }
 
         /// <summary>
@@ -159,14 +116,8 @@ namespace Core2D.Shape
         /// </summary>
         public bool Output
         {
-            get { return _flags.HasFlag(ShapeStateFlags.Output); }
-            set
-            {
-                if (value == true)
-                    Flags = _flags | ShapeStateFlags.Output;
-                else
-                    Flags = _flags & ~ShapeStateFlags.Output;
-            }
+            get => _flags.HasFlag(ShapeStateFlags.Output);
+            set => Flags = value ? _flags | ShapeStateFlags.Output : _flags & ~ShapeStateFlags.Output;
         }
 
         /// <summary>

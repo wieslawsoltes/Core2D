@@ -17,8 +17,8 @@ namespace Core2D.Editor.Recent
         /// </summary>
         public ImmutableArray<RecentFile> Files
         {
-            get { return _files; }
-            set { Update(ref _files, value); }
+            get => _files;
+            set => Update(ref _files, value);
         }
         
         /// <summary>
@@ -26,8 +26,8 @@ namespace Core2D.Editor.Recent
         /// </summary>
         public RecentFile Current
         {
-            get { return _current; }
-            set { Update(ref _current, value); }
+            get => _current;
+            set => Update(ref _current, value);
         }
 
         /// <summary>

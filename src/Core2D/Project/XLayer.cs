@@ -58,8 +58,12 @@ namespace Core2D.Project
         /// </summary>
         public bool IsVisible
         {
-            get { return _isVisible; }
-            set { Update(ref _isVisible, value); Invalidate(); }
+            get => _isVisible;
+            set
+            {
+                Update(ref _isVisible, value);
+                Invalidate();
+            }
         }
 
         /// <summary>

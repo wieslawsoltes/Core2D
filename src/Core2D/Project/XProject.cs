@@ -148,7 +148,7 @@ namespace Core2D.Project
         /// </summary>
         public XDocument CurrentDocument
         {
-            get { return _currentDocument; }
+            get => _currentDocument;
             set
             {
                 Update(ref _currentDocument, value);
@@ -164,7 +164,7 @@ namespace Core2D.Project
         /// </summary>
         public XContainer CurrentContainer
         {
-            get { return _currentContainer; }
+            get => _currentContainer;
             set
             {
                 Update(ref _currentContainer, value);
@@ -180,7 +180,7 @@ namespace Core2D.Project
         /// </summary>
         public XSelectable Selected
         {
-            get { return _selected; }
+            get => _selected;
             set
             {
                 SetSelected(value);

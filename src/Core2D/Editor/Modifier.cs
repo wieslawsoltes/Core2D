@@ -18,7 +18,7 @@ namespace Core2D.Editor
         [Content]
         public ModifierFlags Flags
         {
-            get { return _flags; }
+            get => _flags;
             set
             {
                 Update(ref _flags, value);

@@ -16,8 +16,8 @@ namespace Core2D.Editor.Recent
         /// </summary>
         public string Name
         {
-            get { return _name; }
-            set { Update(ref _name, value); }
+            get => _name;
+            set => Update(ref _name, value);
         }
 
         /// <summary>
@@ -25,8 +25,8 @@ namespace Core2D.Editor.Recent
         /// </summary>
         public string Path
         {
-            get { return _path; }
-            set { Update(ref _path, value); }
+            get => _path;
+            set => Update(ref _path, value);
         }
 
         /// <summary>

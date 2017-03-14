@@ -26,73 +26,46 @@ namespace Core2D.Editor
         /// <summary>
         /// The <see cref="LineCap"/> enum values.
         /// </summary>
-        public static LineCap[] LineCapValues
-        {
-            get { return _lineCapValues; }
-        }
+        public static LineCap[] LineCapValues => _lineCapValues;
 
         /// <summary>
         /// The <see cref="CurveOrientation"/> enum values.
         /// </summary>
-        public static CurveOrientation[] CurveOrientationValues
-        {
-            get { return _curveOrientationValues; }
-        }
+        public static CurveOrientation[] CurveOrientationValues => _curveOrientationValues;
 
         /// <summary>
         /// The <see cref="ArrowType"/> enum values.
         /// </summary>
-        public static ArrowType[] ArrowTypeValues
-        {
-            get { return _arrowTypeValues; }
-        }
+        public static ArrowType[] ArrowTypeValues => _arrowTypeValues;
 
         /// <summary>
         /// The <see cref="TextHAlignment"/> enum values.
         /// </summary>
-        public static TextHAlignment[] TextHAlignmentValues
-        {
-            get { return _textHAlignmentValues; }
-        }
+        public static TextHAlignment[] TextHAlignmentValues => _textHAlignmentValues;
 
         /// <summary>
         /// The <see cref="TextVAlignment"/> enum values.
         /// </summary>
-        public static TextVAlignment[] TextVAlignmentValues
-        {
-            get { return _textVAlignmentValues; }
-        }
+        public static TextVAlignment[] TextVAlignmentValues => _textVAlignmentValues;
 
         /// <summary>
         /// The <see cref="XMoveMode"/> enum values.
         /// </summary>
-        public static XMoveMode[] MoveModeValues
-        {
-            get { return _moveModeValues; }
-        }
+        public static XMoveMode[] MoveModeValues => _moveModeValues;
 
         /// <summary>
         /// The <see cref="XFillRule"/> enum values.
         /// </summary>
-        public static XFillRule[] XFillRuleValues
-        {
-            get { return _xFillRuleValues; }
-        }
+        public static XFillRule[] XFillRuleValues => _xFillRuleValues;
 
         /// <summary>
         /// The <see cref="XSweepDirection"/> enum values.
         /// </summary>
-        public static XSweepDirection[] XSweepDirectionValues
-        {
-            get { return _xSweepDirectionValues; }
-        }
+        public static XSweepDirection[] XSweepDirectionValues => _xSweepDirectionValues;
 
         /// <summary>
         /// The <see cref="PointAlignment"/> enum values.
         /// </summary>
-        public static PointAlignment[] PointAlignmentValues
-        {
-            get { return _pointAlignmentValues; }
-        }
+        public static PointAlignment[] PointAlignmentValues => _pointAlignmentValues;
     }
 }

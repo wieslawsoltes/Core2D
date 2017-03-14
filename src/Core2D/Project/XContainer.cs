@@ -45,7 +45,7 @@ namespace Core2D.Project
         /// </remarks>
         public double Width
         {
-            get { return _template != null ? _template.Width : _width; }
+            get => _template != null ? _template.Width : _width;
             set
             {
                 if (_template != null)
@@ -68,7 +68,7 @@ namespace Core2D.Project
         /// </remarks>
         public double Height
         {
-            get { return _template != null ? _template.Height : _height; }
+            get => _template != null ? _template.Height : _height;
             set
             {
                 if (_template != null)
@@ -91,7 +91,7 @@ namespace Core2D.Project
         /// </remarks>
         public ArgbColor Background
         {
-            get { return _template != null ? _template.Background : _background; }
+            get => _template != null ? _template.Background : _background;
             set
             {
                 if (_template != null)
