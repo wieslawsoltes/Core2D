@@ -56,64 +56,64 @@
       <HintPath>..\..\packages\Autofac.4.4.0\lib\netstandard1.1\Autofac.dll</HintPath>
     </Reference>
     <Reference Include="Avalonia.Android, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Avalonia.Android.0.4.1-build2842-alpha\lib\MonoAndroid10\Avalonia.Android.dll</HintPath>
+      <HintPath>..\..\packages\Avalonia.Android.0.4.1-build2859-alpha\lib\MonoAndroid10\Avalonia.Android.dll</HintPath>
     </Reference>
     <Reference Include="Avalonia.Animation, Version=0.4.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Avalonia.0.4.1-build2842-alpha\lib\netstandard1.1\Avalonia.Animation.dll</HintPath>
+      <HintPath>..\..\packages\Avalonia.0.4.1-build2859-alpha\lib\netstandard1.1\Avalonia.Animation.dll</HintPath>
     </Reference>
     <Reference Include="Avalonia.Base, Version=0.4.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Avalonia.0.4.1-build2842-alpha\lib\netstandard1.1\Avalonia.Base.dll</HintPath>
+      <HintPath>..\..\packages\Avalonia.0.4.1-build2859-alpha\lib\netstandard1.1\Avalonia.Base.dll</HintPath>
     </Reference>
     <Reference Include="Avalonia.Controls, Version=0.4.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Avalonia.0.4.1-build2842-alpha\lib\netstandard1.1\Avalonia.Controls.dll</HintPath>
+      <HintPath>..\..\packages\Avalonia.0.4.1-build2859-alpha\lib\netstandard1.1\Avalonia.Controls.dll</HintPath>
     </Reference>
     <Reference Include="Avalonia.Controls.PanAndZoom, Version=0.4.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Avalonia.Controls.PanAndZoom.0.4.1-build85-alpha\lib\netstandard1.1\Avalonia.Controls.PanAndZoom.dll</HintPath>
+      <HintPath>..\..\packages\Avalonia.Controls.PanAndZoom.0.4.1-build87-alpha\lib\netstandard1.1\Avalonia.Controls.PanAndZoom.dll</HintPath>
     </Reference>
     <Reference Include="Avalonia.DesignerSupport, Version=0.4.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Avalonia.0.4.1-build2842-alpha\lib\netstandard1.1\Avalonia.DesignerSupport.dll</HintPath>
+      <HintPath>..\..\packages\Avalonia.0.4.1-build2859-alpha\lib\netstandard1.1\Avalonia.DesignerSupport.dll</HintPath>
     </Reference>
     <Reference Include="Avalonia.Diagnostics, Version=0.4.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Avalonia.0.4.1-build2842-alpha\lib\netstandard1.1\Avalonia.Diagnostics.dll</HintPath>
+      <HintPath>..\..\packages\Avalonia.0.4.1-build2859-alpha\lib\netstandard1.1\Avalonia.Diagnostics.dll</HintPath>
     </Reference>
     <Reference Include="Avalonia.Input, Version=0.4.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Avalonia.0.4.1-build2842-alpha\lib\netstandard1.1\Avalonia.Input.dll</HintPath>
+      <HintPath>..\..\packages\Avalonia.0.4.1-build2859-alpha\lib\netstandard1.1\Avalonia.Input.dll</HintPath>
     </Reference>
     <Reference Include="Avalonia.Interactivity, Version=0.4.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Avalonia.0.4.1-build2842-alpha\lib\netstandard1.1\Avalonia.Interactivity.dll</HintPath>
+      <HintPath>..\..\packages\Avalonia.0.4.1-build2859-alpha\lib\netstandard1.1\Avalonia.Interactivity.dll</HintPath>
     </Reference>
     <Reference Include="Avalonia.Layout, Version=0.4.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Avalonia.0.4.1-build2842-alpha\lib\netstandard1.1\Avalonia.Layout.dll</HintPath>
+      <HintPath>..\..\packages\Avalonia.0.4.1-build2859-alpha\lib\netstandard1.1\Avalonia.Layout.dll</HintPath>
     </Reference>
     <Reference Include="Avalonia.Logging.Serilog, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Avalonia.0.4.1-build2842-alpha\lib\netstandard1.1\Avalonia.Logging.Serilog.dll</HintPath>
+      <HintPath>..\..\packages\Avalonia.0.4.1-build2859-alpha\lib\netstandard1.1\Avalonia.Logging.Serilog.dll</HintPath>
     </Reference>
     <Reference Include="Avalonia.Markup, Version=0.4.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Avalonia.0.4.1-build2842-alpha\lib\netstandard1.1\Avalonia.Markup.dll</HintPath>
+      <HintPath>..\..\packages\Avalonia.0.4.1-build2859-alpha\lib\netstandard1.1\Avalonia.Markup.dll</HintPath>
     </Reference>
     <Reference Include="Avalonia.Markup.Xaml, Version=0.4.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Avalonia.0.4.1-build2842-alpha\lib\netstandard1.1\Avalonia.Markup.Xaml.dll</HintPath>
+      <HintPath>..\..\packages\Avalonia.0.4.1-build2859-alpha\lib\netstandard1.1\Avalonia.Markup.Xaml.dll</HintPath>
     </Reference>
     <Reference Include="Avalonia.ReactiveUI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Avalonia.0.4.1-build2842-alpha\lib\netstandard1.1\Avalonia.ReactiveUI.dll</HintPath>
+      <HintPath>..\..\packages\Avalonia.0.4.1-build2859-alpha\lib\netstandard1.1\Avalonia.ReactiveUI.dll</HintPath>
     </Reference>
     <Reference Include="Avalonia.Skia.Android, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Avalonia.Skia.Android.0.4.1-build2842-alpha\lib\MonoAndroid10\Avalonia.Skia.Android.dll</HintPath>
+      <HintPath>..\..\packages\Avalonia.Skia.Android.0.4.1-build2859-alpha\lib\MonoAndroid10\Avalonia.Skia.Android.dll</HintPath>
     </Reference>
     <Reference Include="Avalonia.Styling, Version=0.4.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Avalonia.0.4.1-build2842-alpha\lib\netstandard1.1\Avalonia.Styling.dll</HintPath>
+      <HintPath>..\..\packages\Avalonia.0.4.1-build2859-alpha\lib\netstandard1.1\Avalonia.Styling.dll</HintPath>
     </Reference>
     <Reference Include="Avalonia.Themes.Default, Version=0.4.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Avalonia.0.4.1-build2842-alpha\lib\netstandard1.1\Avalonia.Themes.Default.dll</HintPath>
+      <HintPath>..\..\packages\Avalonia.0.4.1-build2859-alpha\lib\netstandard1.1\Avalonia.Themes.Default.dll</HintPath>
     </Reference>
     <Reference Include="Avalonia.Visuals, Version=0.4.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Avalonia.0.4.1-build2842-alpha\lib\netstandard1.1\Avalonia.Visuals.dll</HintPath>
+      <HintPath>..\..\packages\Avalonia.0.4.1-build2859-alpha\lib\netstandard1.1\Avalonia.Visuals.dll</HintPath>
     </Reference>
     <Reference Include="Avalonia.Xaml.Interactions, Version=0.4.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Avalonia.Xaml.Behaviors.0.4.1-build371-alpha\lib\netstandard1.1\Avalonia.Xaml.Interactions.dll</HintPath>
+      <HintPath>..\..\packages\Avalonia.Xaml.Behaviors.0.4.1-build380-alpha\lib\netstandard1.1\Avalonia.Xaml.Interactions.dll</HintPath>
     </Reference>
     <Reference Include="Avalonia.Xaml.Interactivity, Version=0.4.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Avalonia.Xaml.Behaviors.0.4.1-build371-alpha\lib\netstandard1.1\Avalonia.Xaml.Interactivity.dll</HintPath>
+      <HintPath>..\..\packages\Avalonia.Xaml.Behaviors.0.4.1-build380-alpha\lib\netstandard1.1\Avalonia.Xaml.Interactivity.dll</HintPath>
     </Reference>
     <Reference Include="CsvHelper, Version=3.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
       <HintPath>..\..\packages\CsvHelper.3.0.0-beta7\lib\netstandard1.3\CsvHelper.dll</HintPath>
@@ -155,6 +155,9 @@
     </Reference>
     <Reference Include="System.Reactive.PlatformServices, Version=3.0.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
       <HintPath>..\..\packages\System.Reactive.PlatformServices.3.0.0\lib\netstandard1.3\System.Reactive.PlatformServices.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.ValueTuple.4.3.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
