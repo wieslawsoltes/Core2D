@@ -22,7 +22,6 @@ if (BuildSystem.AppVeyor.IsRunningOnAppVeyor)
     else
         version += "-build" + EnvironmentVariable("APPVEYOR_BUILD_NUMBER");
 }
-var dirSuffix = platform + "/" + configuration;
 var buildDirs = 
     GetDirectories("./src/**/bin/**") + 
     GetDirectories("./src/**/obj/**") + 
