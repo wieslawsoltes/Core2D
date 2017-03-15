@@ -143,10 +143,34 @@ Task("Build-NetCore")
     .IsDependentOn("Clean")
     .Does(() =>
 {
-    DotNetCoreRestore("./apps/Core2D.Avalonia.NetCore");
-    DotNetCoreBuild("./apps/Core2D.Avalonia.NetCore", new DotNetCoreBuildSettings {
+    var project = "./apps/Core2D.Avalonia.NetCore";
+    DotNetCoreRestore(project);
+    DotNetCoreBuild(project, new DotNetCoreBuildSettings {
         Configuration = configuration
     });
+
+    if (IsRunningOnWindows())
+    {
+        var runtimes = new List<string>() { 
+            "win7-x64", 
+            "win7-x86"
+        };
+
+        foreach(var framework in runtimes)
+        {
+            var output = zipRootDir.CombineWithFilePath(project + "-" + runtime);
+            var zip = zipRootDir.CombineWithFilePath(project + "-" + runtime + "-" + configuration + "-" + version + ".zip");
+
+            DotNetCorePublish("./src/*", new DotNetCorePublishSettings {
+                Framework = "netcoreapp1.1",
+                Configuration = configuration,
+                Runtime = runtime,
+                OutputDirectory = output;
+            });
+
+            Zip(output, zip);
+        }
+    }
 });
 
 Task("Run-Unit-Tests-NetCore")
@@ -175,10 +199,12 @@ Task("Run-Unit-Tests-NetCore")
 
         foreach(var framework in frameworks)
         {
-            DotNetCoreTest(unitTest, new DotNetCoreTestSettings {
-                Configuration = configuration,
-                Framework = framework
-            });
+            DotNetCoreTest(
+                System.IO.Path.Combine(unitTest, System.IO.Path.GetFileName(unitTest) + ".csproj", 
+                new DotNetCoreTestSettings {
+                    Configuration = configuration,
+                    Framework = framework
+                });
         }
     }
 });
