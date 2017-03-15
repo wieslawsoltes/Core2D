@@ -94,7 +94,7 @@ dotnet publish -r win7-x86 -o win7-x86
 Open up a terminal prompt and execute:
 ```Bash
 dotnet publish -r ubuntu.16.10-x64 -o ubuntu.16.10-x64
-```Bash
+```
 
 ## Package Sources
 
