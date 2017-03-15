@@ -161,7 +161,7 @@ Task("Build-NetCore")
             var output = zipRootDir.CombineWithFilePath(project + "-" + runtime);
             var zip = zipRootDir.CombineWithFilePath(project + "-" + runtime + "-" + configuration + "-" + version + ".zip");
 
-            DotNetCorePublish("./src/*", new DotNetCorePublishSettings {
+            DotNetCorePublish(project, new DotNetCorePublishSettings {
                 Framework = "netcoreapp1.1",
                 Configuration = configuration,
                 Runtime = runtime,
