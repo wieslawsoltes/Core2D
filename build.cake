@@ -166,7 +166,7 @@ Task("Build-NetCore")
     {
         foreach(var runtime in runtimesNetCore)
         {
-            var outputDir = zipRootDir.CombineWithFilePath(projectNetCoreName + "-" + runtime);
+            var outputDir = zipRootDir.Combine(projectNetCoreName + "-" + runtime);
             var zipFile = zipRootDir.CombineWithFilePath(projectNetCoreName + "-" + runtime + "-" + configuration + "-" + version + ".zip");
 
             DotNetCorePublish(projectNetCore, new DotNetCorePublishSettings {
