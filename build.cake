@@ -85,14 +85,14 @@ Task("Restore-NuGet-Packages")
                 toolTimeout+=0.5;
             }})
         .Execute(()=> {
-            if(IsRunningOnWindows())
+            if (IsRunningOnWindows())
             {
                 NuGetRestore(MSBuildSolution, new NuGetRestoreSettings {
                     ToolPath = "./tools/NuGet.CommandLine/tools/NuGet.exe",
                     ToolTimeout = TimeSpan.FromMinutes(toolTimeout)
                 });
             }
-            if(IsRunningOnUnix())
+            if (IsRunningOnUnix())
             {
                 NuGetRestore(MSBuildSolution, new NuGetRestoreSettings {
                     ToolPath = "./tools/NuGet.CommandLine/tools/NuGet.exe",
@@ -106,7 +106,7 @@ Task("Build")
     .IsDependentOn("Restore-NuGet-Packages")
     .Does(() =>
 {
-    if(IsRunningOnWindows())
+    if (IsRunningOnWindows())
     {
         MSBuild(MSBuildSolution, settings => {
             settings.WithProperty("UseRoslynPathHack", "true");
@@ -116,7 +116,7 @@ Task("Build")
             settings.SetVerbosity(Verbosity.Minimal);
         });   
     }
-    if(IsRunningOnUnix())
+    if (IsRunningOnUnix())
     {
         XBuild(MSBuildSolution, settings => {
             settings.UseToolVersion(XBuildToolVersion.Default);
