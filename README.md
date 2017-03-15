@@ -77,6 +77,25 @@ dotnet restore
 dotnet build
 ```
 
+### Publishing stand-alone .NET Core application
+
+You can publish `Core2D` application and all of its dependencies for one of the [.NET Core supported runtimes](https://docs.microsoft.com/en-us/dotnet/articles/core/rid-catalog). Below are few command-line examples.
+
+Open up a Powershell prompt and execute:
+```PowerShell
+dotnet publish -r win7-x64 -o win7-x64
+```
+
+Open up a Powershell prompt and execute:
+```PowerShell
+dotnet publish -r win7-x86 -o win7-x86
+```
+
+Open up a terminal prompt and execute:
+```Bash
+dotnet publish -r ubuntu.16.10-x64 -o ubuntu.16.10-x64
+```Bash
+
 ## Package Sources
 
 * https://api.nuget.org/v3/index.json
