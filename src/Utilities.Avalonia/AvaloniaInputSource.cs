@@ -8,7 +8,6 @@ using Avalonia.Controls;
 using Avalonia.Input;
 using Core2D.Editor;
 using Core2D.Editor.Input;
-using Core2D.Spatial;
 
 namespace Utilities.Avalonia
 {
@@ -47,16 +46,18 @@ namespace Utilities.Avalonia
         /// <param name="translate">The translate function.</param>
         public AvaloniaInputSource(Control source, Control relative, Func<Point, Point> translate)
         {
-            LeftDown = GetPressedObservable(source, "PointerPressed", relative, translate, MouseButton.Left);
-            LeftUp = GetReleasedObservable(source, "PointerReleased", relative, translate, MouseButton.Left);
-            RightDown = GetPressedObservable(source, "PointerPressed", relative, translate, MouseButton.Right);
-            RightUp = GetReleasedObservable(source, "PointerReleased", relative, translate, MouseButton.Right);
-            Move = GetMoveObservable(source, "PointerMoved", relative, translate);
+            LeftDown = GetPointerPressedObservable(source, relative, translate, MouseButton.Left);
+            LeftUp = GetPointerReleasedObservable(source, relative, translate, MouseButton.Left);
+            RightDown = GetPointerPressedObservable(source, relative, translate, MouseButton.Right);
+            RightUp = GetPointerReleasedObservable(source, relative, translate, MouseButton.Right);
+            Move = GetPointerMovedObservable(source, relative, translate);
         }
 
-        private IObservable<InputArgs> GetPressedObservable(Control target, string eventName, Control relative, Func<Point, Point> translate, MouseButton button)
+        private static IObservable<InputArgs> GetPointerPressedObservable(Control target, Control relative, Func<Point, Point> translate, MouseButton button)
         {
-            return Observable.FromEventPattern<PointerPressedEventArgs>(target, eventName)
+            return Observable.FromEventPattern<EventHandler<PointerPressedEventArgs>, PointerPressedEventArgs>(
+                handler => target.PointerPressed += handler,
+                handler => target.PointerPressed -= handler)
                 .Where(e => e.EventArgs.MouseButton == button).Select(
                 e =>
                 {
@@ -65,9 +66,11 @@ namespace Utilities.Avalonia
                 });
         }
 
-        private IObservable<InputArgs> GetReleasedObservable(Control target, string eventName, Control relative, Func<Point, Point> translate, MouseButton button)
+        private static IObservable<InputArgs> GetPointerReleasedObservable(Control target, Control relative, Func<Point, Point> translate, MouseButton button)
         {
-            return Observable.FromEventPattern<PointerReleasedEventArgs>(target, eventName)
+            return Observable.FromEventPattern<EventHandler<PointerReleasedEventArgs>, PointerReleasedEventArgs>(
+                handler => target.PointerReleased += handler,
+                handler => target.PointerReleased -= handler)
                 .Where(e => e.EventArgs.MouseButton == button).Select(
                 e =>
                 {
@@ -76,9 +79,12 @@ namespace Utilities.Avalonia
                 });
         }
 
-        private IObservable<InputArgs> GetMoveObservable(Control target, string eventName, Control relative, Func<Point, Point> translate)
+        private static IObservable<InputArgs> GetPointerMovedObservable(Control target, Control relative, Func<Point, Point> translate)
         {
-            return Observable.FromEventPattern<PointerEventArgs>(target, eventName).Select(
+            return Observable.FromEventPattern<EventHandler<PointerEventArgs>, PointerEventArgs>(
+                handler => target.PointerMoved += handler,
+                handler => target.PointerMoved -= handler)
+                .Select(
                 e =>
                 {
                     var point = translate(e.EventArgs.GetPosition(relative));
