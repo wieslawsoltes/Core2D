@@ -208,7 +208,7 @@ Task("Run-Unit-Tests-NetCore")
 
     if (IsRunningOnWindows())
     {
-        frameworks.Add("net461");
+        frameworksNetCore.Add("net461");
     }
 
     foreach (var unitTest in unitTestsNetCore)
