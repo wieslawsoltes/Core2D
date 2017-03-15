@@ -1,7 +1,7 @@
 ﻿{
   "dependencies": {
     "Autofac": "4.4.0",
-    "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2",
+    "Microsoft.NETCore.UniversalWindowsPlatform": "5.3.1",
     "Microsoft.Toolkit.Uwp.UI.Controls": "1.3.1"
   },
   "frameworks": {

@@ -10,7 +10,7 @@
   <Import Project="..\..\build.targets" />
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform " Version="5.2.2" />
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform " Version="5.3.1" />
     <PackageReference Include="Win2D.uwp" Version="1.20.0" />
   </ItemGroup>
 
