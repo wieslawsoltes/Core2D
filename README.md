@@ -23,7 +23,12 @@ Core2D is a multi-platform application for making data driven 2D diagrams.
 
 ## Supported Platforms
 
-* `Windows` 7/8/8.1/10 using `Core2D.Wpf` builds.
+* `Windows 7 SP1 or higher` using `Core2D.Wpf` or `Core2D.Avalonia.*` projects.
+* `Windows 10` using `Core2D.Uwp` project.
+* `.NET Core` supported platforms using `Core2D.Avalonia.NetCore` project.
+* `Linux` using `Core2D.Avalonia.*` projects.
+* `macOS` using `Core2D.Avalonia.*` projects.
+* `Android` using `Core2D.Avalonia.Android` project.
 
 The core library and editor are portable and should work on all platforms where C# is supported.
 
@@ -53,6 +58,23 @@ PS> .\build.ps1 -Target "Default" -Platform "AnyCPU" -Configuration "Release"
 Open up a terminal prompt and execute the bootstrapper script:
 ```Bash
 $ ./build.sh --target "Default" --platform "AnyCPU" --configuration "Release"
+```
+### Build using .NET Core
+
+* [.NET Core](https://www.microsoft.com/net/download/core) for `Windows`, `Linux` and `macOS` builds.
+
+Open up a Powershell prompt and execute:
+```PowerShell
+cd apps/Core2D.Avalonia.NetCore
+dotnet restore
+dotnet build
+```
+
+Open up a terminal prompt and execute:
+```Bash
+cd apps/Core2D.Avalonia.NetCore
+dotnet restore
+dotnet build
 ```
 
 ## Package Sources
