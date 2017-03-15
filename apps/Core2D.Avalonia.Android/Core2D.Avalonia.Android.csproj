@@ -110,10 +110,10 @@
       <HintPath>..\..\packages\Avalonia.0.4.1-build2859-alpha\lib\netstandard1.1\Avalonia.Visuals.dll</HintPath>
     </Reference>
     <Reference Include="Avalonia.Xaml.Interactions, Version=0.4.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Avalonia.Xaml.Behaviors.0.4.1-build380-alpha\lib\netstandard1.1\Avalonia.Xaml.Interactions.dll</HintPath>
+      <HintPath>..\..\packages\Avalonia.Xaml.Behaviors.0.4.1-build381-alpha\lib\netstandard1.1\Avalonia.Xaml.Interactions.dll</HintPath>
     </Reference>
     <Reference Include="Avalonia.Xaml.Interactivity, Version=0.4.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Avalonia.Xaml.Behaviors.0.4.1-build380-alpha\lib\netstandard1.1\Avalonia.Xaml.Interactivity.dll</HintPath>
+      <HintPath>..\..\packages\Avalonia.Xaml.Behaviors.0.4.1-build381-alpha\lib\netstandard1.1\Avalonia.Xaml.Interactivity.dll</HintPath>
     </Reference>
     <Reference Include="CsvHelper, Version=3.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
       <HintPath>..\..\packages\CsvHelper.3.0.0-beta7\lib\netstandard1.3\CsvHelper.dll</HintPath>

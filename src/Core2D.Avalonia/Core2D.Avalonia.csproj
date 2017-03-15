@@ -25,7 +25,7 @@
     <PackageReference Include="Autofac" Version="4.4.0" />
     <PackageReference Include="Avalonia" Version="0.4.1-build2859-alpha" />
     <PackageReference Include="Avalonia.Controls.PanAndZoom" Version="0.4.1-build87-alpha" />
-    <PackageReference Include="Avalonia.Xaml.Behaviors" Version="0.4.1-build380-alpha" />
+    <PackageReference Include="Avalonia.Xaml.Behaviors" Version="0.4.1-build381-alpha" />
     <PackageReference Include="Serilog" Version="2.4.0" />
     <PackageReference Include="Splat" Version="2.0.0" />
     <PackageReference Include="Sprache" Version="2.1.0" />

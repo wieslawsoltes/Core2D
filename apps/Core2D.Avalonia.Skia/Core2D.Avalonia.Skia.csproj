@@ -140,7 +140,7 @@
     <PackageReference Include="Avalonia.Controls.PanAndZoom" Version="0.4.1-build87-alpha" />
     <PackageReference Include="Avalonia.Skia.Desktop" Version="0.4.1-build2859-alpha" />
     <PackageReference Include="Avalonia.Win32" Version="0.4.1-build2859-alpha" />
-    <PackageReference Include="Avalonia.Xaml.Behaviors" Version="0.4.1-build380-alpha" />
+    <PackageReference Include="Avalonia.Xaml.Behaviors" Version="0.4.1-build381-alpha" />
     <PackageReference Include="Portable.Xaml" Version="0.15.0" />
     <PackageReference Include="Serilog" Version="2.4.0" />
     <PackageReference Include="Serilog.Sinks.Trace" Version="2.1.0" />
