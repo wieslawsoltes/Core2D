@@ -156,7 +156,7 @@ Task("Build-NetCore")
             "win7-x86"
         };
 
-        foreach(var framework in runtimes)
+        foreach(var runtime in runtimes)
         {
             var output = zipRootDir.CombineWithFilePath(project + "-" + runtime);
             var zip = zipRootDir.CombineWithFilePath(project + "-" + runtime + "-" + configuration + "-" + version + ".zip");
@@ -165,10 +165,10 @@ Task("Build-NetCore")
                 Framework = "netcoreapp1.1",
                 Configuration = configuration,
                 Runtime = runtime,
-                OutputDirectory = output;
+                OutputDirectory = output.FullPath
             });
 
-            Zip(output, zip);
+            Zip(output.FullPath, zip);
         }
     }
 });
@@ -200,7 +200,7 @@ Task("Run-Unit-Tests-NetCore")
         foreach(var framework in frameworks)
         {
             DotNetCoreTest(
-                System.IO.Path.Combine(unitTest, System.IO.Path.GetFileName(unitTest) + ".csproj", 
+                System.IO.Path.Combine(unitTest, System.IO.Path.GetFileName(unitTest) + ".csproj"), 
                 new DotNetCoreTestSettings {
                     Configuration = configuration,
                     Framework = framework
