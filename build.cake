@@ -153,12 +153,12 @@ Task("Build-NetCore")
     .Does(() =>
 {
     var projectNetCore = "./apps/Core2D.Avalonia.NetCore";
-    var projectName = System.IO.Path.GetFileName(projectNetCore);
+    var projectNetCoreName = System.IO.Path.GetFileName(projectNetCore);
     var frameworkNetCore = "netcoreapp1.1";
     var runtimesNetCore = new List<string>() { "win7-x86", "win7-x64" };
 
-    DotNetCoreRestore(project);
-    DotNetCoreBuild(project, new DotNetCoreBuildSettings {
+    DotNetCoreRestore(projectNetCore);
+    DotNetCoreBuild(projectNetCore, new DotNetCoreBuildSettings {
         Configuration = configuration
     });
 
@@ -166,8 +166,8 @@ Task("Build-NetCore")
     {
         foreach(var runtime in runtimesNetCore)
         {
-            var outputDir = zipRootDir.CombineWithFilePath(projectName + "-" + runtime);
-            var zipFile = zipRootDir.CombineWithFilePath(projectName + "-" + runtime + "-" + configuration + "-" + version + ".zip");
+            var outputDir = zipRootDir.CombineWithFilePath(projectNetCoreName + "-" + runtime);
+            var zipFile = zipRootDir.CombineWithFilePath(projectNetCoreName + "-" + runtime + "-" + configuration + "-" + version + ".zip");
 
             DotNetCorePublish(projectNetCore, new DotNetCorePublishSettings {
                 Framework = frameworkNetCore,
