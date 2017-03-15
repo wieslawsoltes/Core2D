@@ -14,6 +14,7 @@ var isPlatformX64 = StringComparer.OrdinalIgnoreCase.Equals(platform, "x64");
 var MSBuildSolution = "./Core2D.sln";
 var unitTestsFramework = "net461";
 var version = XmlPeek("./build.targets", "//*[local-name()='Version']/text()");
+
 Information("Version: {0}", version);
 if (BuildSystem.AppVeyor.IsRunningOnAppVeyor)
 {
@@ -22,6 +23,7 @@ if (BuildSystem.AppVeyor.IsRunningOnAppVeyor)
     else
         version += "-build" + EnvironmentVariable("APPVEYOR_BUILD_NUMBER");
 }
+
 var buildDirs = 
     GetDirectories("./src/**/bin/**") + 
     GetDirectories("./src/**/obj/**") + 
@@ -31,12 +33,15 @@ var buildDirs =
     GetDirectories("./uwp/**/obj/**") + 
     GetDirectories("./tests/**/bin/**") + 
     GetDirectories("./tests/**/obj/**");
+
 var artifactsDir = (DirectoryPath)Directory("./artifacts");
 var testResultsDir = artifactsDir.Combine("test-results");	
 var zipRootDir = artifactsDir.Combine("zip");
+
 var platformZip = (platform == "AnyCPU") ? "x86" : platform;
 var dirSuffixZip = platformZip + "/" + configuration;
 var fileZipSuffix = platformZip + "-" + configuration + "-" + version + ".zip";
+
 var zipSourceCairoDir = (DirectoryPath)Directory("./apps/Core2D.Avalonia.Cairo/bin/" + dirSuffixZip);
 var zipTargetCairoFile = zipRootDir.CombineWithFilePath("Core2D.Avalonia.Cairo-" + fileZipSuffix);
 var zipSourceDirect2DDir = (DirectoryPath)Directory("./apps/Core2D.Avalonia.Direct2D/bin/" + dirSuffixZip);
@@ -47,6 +52,11 @@ var zipSourceSkiaDemoDir = (DirectoryPath)Directory("./apps/Core2D.SkiaDemo/bin/
 var zipTargetSkiaDemoFile = zipRootDir.CombineWithFilePath("Core2D.SkiaDemo-" + fileZipSuffix);
 var zipSourceWpfDir = (DirectoryPath)Directory("./apps/Core2D.Wpf/bin/" + dirSuffixZip);
 var zipTargetWpfFile = zipRootDir.CombineWithFilePath("Core2D.Wpf-" + fileZipSuffix);
+
+var msvcp140_x86 = @"c:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.10.25008\x86\Microsoft.VC150.CRT\msvcp140.dll";
+var msvcp140_x64 = @"c:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.10.25008\x64\Microsoft.VC150.CRT\msvcp140.dll";
+var vcruntime140_x86 = @"c:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.10.25008\x86\Microsoft.VC150.CRT\vcruntime140.dll";
+var vcruntime140_x64 = @"c:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.10.25008\x64\Microsoft.VC150.CRT\vcruntime140.dll";
 
 Task("Clean")
     .Does(() =>
@@ -142,8 +152,10 @@ Task("Build-NetCore")
     .IsDependentOn("Clean")
     .Does(() =>
 {
-    var project = "./apps/Core2D.Avalonia.NetCore";
-    var projectName = System.IO.Path.GetFileName(project);
+    var projectNetCore = "./apps/Core2D.Avalonia.NetCore";
+    var projectName = System.IO.Path.GetFileName(projectNetCore);
+    var frameworkNetCore = "netcoreapp1.1";
+    var runtimesNetCore = new List<string>() { "win7-x86", "win7-x64" };
 
     DotNetCoreRestore(project);
     DotNetCoreBuild(project, new DotNetCoreBuildSettings {
@@ -152,24 +164,31 @@ Task("Build-NetCore")
 
     if (IsRunningOnWindows())
     {
-        var runtimes = new List<string>() { 
-            "win7-x64", 
-            "win7-x86"
-        };
-
-        foreach(var runtime in runtimes)
+        foreach(var runtime in runtimesNetCore)
         {
-            var output = zipRootDir.CombineWithFilePath(projectName + "-" + runtime);
-            var zip = zipRootDir.CombineWithFilePath(projectName + "-" + runtime + "-" + configuration + "-" + version + ".zip");
+            var outputDir = zipRootDir.CombineWithFilePath(projectName + "-" + runtime);
+            var zipFile = zipRootDir.CombineWithFilePath(projectName + "-" + runtime + "-" + configuration + "-" + version + ".zip");
 
-            DotNetCorePublish(project, new DotNetCorePublishSettings {
-                Framework = "netcoreapp1.1",
+            DotNetCorePublish(projectNetCore, new DotNetCorePublishSettings {
+                Framework = frameworkNetCore,
                 Configuration = configuration,
                 Runtime = runtime,
-                OutputDirectory = output.FullPath
+                OutputDirectory = outputDir.FullPath
             });
 
-            Zip(output.FullPath, zip);
+            if (runtime == "win7-x86")
+            {
+                CopyFileToDirectory(msvcp140_x86, outputDir);
+                CopyFileToDirectory(vcruntime140_x86, outputDir);
+            }
+
+            if (runtime == "win7-x64")
+            {
+                CopyFileToDirectory(msvcp140_x64, outputDir);
+                CopyFileToDirectory(vcruntime140_x64, outputDir);
+            }
+
+            Zip(outputDir.FullPath, zipFile);
         }
     }
 });
@@ -178,34 +197,32 @@ Task("Run-Unit-Tests-NetCore")
     .IsDependentOn("Clean")
     .Does(() =>
 {
-    var unitTests = new List<string>() { 
+    var unitTestsNetCore = new List<string>() { 
         "./tests/Core2D.Spatial.UnitTests",
         "./tests/Core2D.UnitTests",
         "./tests/FileSystem.DotNet.UnitTests",
         "./tests/Serializer.Xaml.UnitTests"
     };
 
-    var frameworks = new List<string>() { 
-        "netcoreapp1.1" 
-    };
+    var frameworksNetCore = new List<string>() { "netcoreapp1.1" };
 
     if (IsRunningOnWindows())
     {
         frameworks.Add("net461");
     }
 
-    foreach (var unitTest in unitTests)
+    foreach (var unitTest in unitTestsNetCore)
     {
+        var project = System.IO.Path.Combine(unitTest, System.IO.Path.GetFileName(unitTest) + ".csproj");
+        
         DotNetCoreRestore(unitTest);
 
-        foreach(var framework in frameworks)
+        foreach(var framework in frameworksNetCore)
         {
-            DotNetCoreTest(
-                System.IO.Path.Combine(unitTest, System.IO.Path.GetFileName(unitTest) + ".csproj"), 
-                new DotNetCoreTestSettings {
-                    Configuration = configuration,
-                    Framework = framework
-                });
+            DotNetCoreTest(project, new DotNetCoreTestSettings {
+                Configuration = configuration,
+                Framework = framework
+            });
         }
     }
 });
@@ -216,12 +233,8 @@ Task("Copy-Redist-Files")
 {
     if (IsRunningOnWindows() && (isPlatformAnyCPU || isPlatformX86 || isPlatformX64))
     {
-        var msvcp140 = (isPlatformAnyCPU || isPlatformX86) ?
-            @"c:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.10.25008\x86\Microsoft.VC150.CRT\msvcp140.dll" : 
-            @"c:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.10.25008\x64\Microsoft.VC150.CRT\msvcp140.dll";
-        var vcruntime140 = (isPlatformAnyCPU || isPlatformX86) ?
-            @"c:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.10.25008\x86\Microsoft.VC150.CRT\vcruntime140.dll" :
-            @"c:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.10.25008\x64\Microsoft.VC150.CRT\vcruntime140.dll";
+        var msvcp140 = (isPlatformAnyCPU || isPlatformX86) ? msvcp140_x86 : msvcp140_x64;
+        var vcruntime140 = (isPlatformAnyCPU || isPlatformX86) ? vcruntime140_x86 : vcruntime140_x64;
         CopyFileToDirectory(msvcp140, zipSourceCairoDir);
         CopyFileToDirectory(vcruntime140, zipSourceCairoDir);
         CopyFileToDirectory(msvcp140, zipSourceDirect2DDir);
