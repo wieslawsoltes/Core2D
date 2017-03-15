@@ -139,6 +139,50 @@ Task("Run-Unit-Tests")
     }
 });
 
+Task("Build-NetCore")
+    .IsDependentOn("Clean")
+    .Does(() =>
+{
+    DotNetCoreRestore("./apps/Core2D.Avalonia.NetCore");
+    DotNetCoreBuild("./apps/Core2D.Avalonia.NetCore", new DotNetCoreBuildSettings {
+        Configuration = configuration
+    });
+});
+
+Task("Run-Unit-Tests-NetCore")
+    .IsDependentOn("Clean")
+    .Does(() =>
+{
+    var unitTests = new List<string>() { 
+        "./tests/Core2D.Spatial.UnitTests",
+        "./tests/Core2D.UnitTests",
+        "./tests/FileSystem.DotNet.UnitTests",
+        "./tests/Serializer.Xaml.UnitTests"
+    };
+
+    var frameworks = new List<string>() { 
+        "netcoreapp1.1" 
+    };
+
+    if (IsRunningOnWindows())
+    {
+        frameworks.Add("net461");
+    }
+
+    foreach (var unitTest in unitTests)
+    {
+        DotNetCoreRestore(unitTest);
+
+        foreach(var framework in frameworks)
+        {
+            DotNetCoreTest(unitTest, new DotNetCoreTestSettings {
+                Configuration = configuration,
+                Framework = framework
+            });
+        }
+    }
+});
+
 Task("Copy-Redist-Files")
     .IsDependentOn("Run-Unit-Tests")
     .Does(() =>
@@ -201,8 +245,14 @@ Task("Default")
   .IsDependentOn("Run-Unit-Tests");
 
 Task("AppVeyor")
+  .IsDependentOn("Build-NetCore")
+  .IsDependentOn("Run-Unit-Tests-NetCore")
   .IsDependentOn("Run-Unit-Tests")
   .IsDependentOn("Copy-Redist-Files")
   .IsDependentOn("Zip-Files");
+
+Task("Travis")
+  .IsDependentOn("Build-NetCore")
+  .IsDependentOn("Run-Unit-Tests-NetCore");
 
 RunTarget(target);
