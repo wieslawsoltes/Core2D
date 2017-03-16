@@ -60,20 +60,31 @@ var unitTestsFramework = "net461";
 // .NET Core Projects
 ///////////////////////////////////////////////////////////////////////////////
 
+var netCoreApps = new string[] { "Core2D.Avalonia.NetCore", "Core2D.Avalonia.NetStandard" };
+var netCoreProjects = netCoreApps.Select(app => 
+    new {
+        Path = $"./apps/{app[0]}",
+        Name = netCoreApps[0],
+        Framework = XmlPeek($"./apps/{app[0]}/{app[0]}.csproj", "//*[local-name()='TargetFramework']/text()"),
+        Runtimes = XmlPeek($"./apps/{app[0]}/{app[0]}.csproj", "//*[local-name()='RuntimeIdentifiers']/text()").Split(';')
+    }).ToList();
+
+/*
 var netCoreProjects = new [] {
     new {
-        Path = "./apps/Core2D.Avalonia.NetCore",
-        Name = "Core2D.Avalonia.NetCore",
-        Framework = XmlPeek("./apps/Core2D.Avalonia.NetCore/Core2D.Avalonia.NetCore.csproj", "//*[local-name()='TargetFramework']/text()"),
-        Runtimes = XmlPeek("./apps/Core2D.Avalonia.NetCore/Core2D.Avalonia.NetCore.csproj", "//*[local-name()='RuntimeIdentifiers']/text()").Split(';')
+        Path = $"./apps/{netCoreApps[0]}",
+        Name = netCoreApps[0],
+        Framework = XmlPeek($"./apps/{netCoreApps[0]}/{netCoreApps[0]}.csproj", "//*[local-name()='TargetFramework']/text()"),
+        Runtimes = XmlPeek($"./apps/{netCoreApps[0]}/{netCoreApps[0]}.csproj", "//*[local-name()='RuntimeIdentifiers']/text()").Split(';')
     },
     new {
-        Path = "./apps/Core2D.Avalonia.NetStandard",
-        Name = "Core2D.Avalonia.NetStandard",
-        Framework = XmlPeek("./apps/Core2D.Avalonia.NetStandard/Core2D.Avalonia.NetStandard.csproj", "//*[local-name()='TargetFramework']/text()"),
-        Runtimes = XmlPeek("./apps/Core2D.Avalonia.NetStandard/Core2D.Avalonia.NetStandard.csproj", "//*[local-name()='RuntimeIdentifiers']/text()").Split(';')
+        Path = $"./apps/{netCoreApps[1]}",
+        Name = netCoreApps[1],
+        Framework = XmlPeek($"./apps/{netCoreApps[1]}/{netCoreApps[1]}.csproj", "//*[local-name()='TargetFramework']/text()"),
+        Runtimes = XmlPeek($"./apps/{netCoreApps[1]}/{netCoreApps[1]}.csproj", "//*[local-name()='RuntimeIdentifiers']/text()").Split(';')
     }
 };
+*/
 
 ///////////////////////////////////////////////////////////////////////////////
 // .NET Core UnitTests
