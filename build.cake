@@ -63,13 +63,14 @@ var unitTestsFramework = "net461";
 // .NET Core Projects
 ///////////////////////////////////////////////////////////////////////////////
 
+var netCoreAppsRoot= "./apps";
 var netCoreApps = new string[] { "Core2D.Avalonia.NetCore", "Core2D.Avalonia.NetStandard" };
-var netCoreProjects = netCoreApps.Select(app => 
+var netCoreProjects = netCoreApps.Select(name => 
     new {
-        Path = $"./apps/{app[0]}",
-        Name = netCoreApps[0],
-        Framework = XmlPeek($"./apps/{app[0]}/{app[0]}.csproj", "//*[local-name()='TargetFramework']/text()"),
-        Runtimes = XmlPeek($"./apps/{app[0]}/{app[0]}.csproj", "//*[local-name()='RuntimeIdentifiers']/text()").Split(';')
+        Path = $"{netCoreAppsRoot}/{name}",
+        Name = name,
+        Framework = XmlPeek($"{netCoreAppsRoot}/{name}/{name}.csproj", "//*[local-name()='TargetFramework']/text()"),
+        Runtimes = XmlPeek($"{netCoreAppsRoot}/{name}/{name}.csproj", "//*[local-name()='RuntimeIdentifiers']/text()").Split(';')
     }).ToList();
 
 /*
