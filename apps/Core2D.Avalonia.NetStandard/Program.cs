@@ -5,7 +5,7 @@ using Autofac;
 using Avalonia;
 using Avalonia.Logging.Serilog;
 using Core2D.Avalonia.Modules;
-using Core2D.Avalonia.NetCore.Modules;
+using Core2D.Avalonia.NetStandard.Modules;
 using Core2D.Interfaces;
 using Serilog;
 
