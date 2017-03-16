@@ -155,15 +155,15 @@ Task("Build-NetCore")
     var projectNetCore = "./apps/Core2D.Avalonia.NetCore";
     var projectNetCoreName = System.IO.Path.GetFileName(projectNetCore);
     var frameworkNetCore = "netcoreapp1.1";
-    var runtimesNetCore = new List<string>() { "win7-x86", "win7-x64" };
+    var runtimesNetCore = new List<string>() { "win7-x86", "win7-x64", "ubuntu.16.10-x64" };
 
     DotNetCoreRestore(projectNetCore);
     DotNetCoreBuild(projectNetCore, new DotNetCoreBuildSettings {
         Configuration = configuration
     });
 
-    if (IsRunningOnWindows())
-    {
+    //if (IsRunningOnWindows())
+    //{
         foreach(var runtime in runtimesNetCore)
         {
             var outputDir = zipRootDir.Combine(projectNetCoreName + "-" + runtime);
@@ -190,7 +190,7 @@ Task("Build-NetCore")
 
             Zip(outputDir.FullPath, zipFile);
         }
-    }
+    //}
 });
 
 Task("Run-Unit-Tests-NetCore")
