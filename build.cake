@@ -1,21 +1,46 @@
+///////////////////////////////////////////////////////////////////////////////
+// ADDINS
+///////////////////////////////////////////////////////////////////////////////
+
 #addin "nuget:?package=Polly&version=5.0.6"
+
+///////////////////////////////////////////////////////////////////////////////
+// TOOLS
+///////////////////////////////////////////////////////////////////////////////
+
 #tool "nuget:?package=xunit.runner.console&version=2.2.0"
 #tool "nuget:https://dotnet.myget.org/F/nuget-build/?package=NuGet.CommandLine&version=4.3.0-beta1-2361&prerelease"
+
+///////////////////////////////////////////////////////////////////////////////
+// USINGS
+///////////////////////////////////////////////////////////////////////////////
 
 using System;
 using Polly;
 
+///////////////////////////////////////////////////////////////////////////////
+// ARGUMENTS
+///////////////////////////////////////////////////////////////////////////////
+
 var target = Argument("target", "Default");
 var platform = Argument("platform", "AnyCPU");
 var configuration = Argument("configuration", "Release");
+
+///////////////////////////////////////////////////////////////////////////////
+// PARAMETERS
+///////////////////////////////////////////////////////////////////////////////
+
 var isPlatformAnyCPU = StringComparer.OrdinalIgnoreCase.Equals(platform, "AnyCPU");
 var isPlatformX86 = StringComparer.OrdinalIgnoreCase.Equals(platform, "x86");
 var isPlatformX64 = StringComparer.OrdinalIgnoreCase.Equals(platform, "x64");
-var MSBuildSolution = "./Core2D.sln";
-var unitTestsFramework = "net461";
-var version = XmlPeek("./build.targets", "//*[local-name()='Version']/text()");
 
+///////////////////////////////////////////////////////////////////////////////
+// VERSION
+///////////////////////////////////////////////////////////////////////////////
+
+var version = XmlPeek("./build.targets", "//*[local-name()='Version']/text()");
 Information("Version: {0}", version);
+
 if (BuildSystem.AppVeyor.IsRunningOnAppVeyor)
 {
     if (BuildSystem.AppVeyor.Environment.Repository.Tag.IsTag && !string.IsNullOrWhiteSpace(BuildSystem.AppVeyor.Environment.Repository.Tag.Name))
@@ -23,6 +48,37 @@ if (BuildSystem.AppVeyor.IsRunningOnAppVeyor)
     else
         version += "-build" + EnvironmentVariable("APPVEYOR_BUILD_NUMBER");
 }
+
+///////////////////////////////////////////////////////////////////////////////
+// VISUAL STUDIO
+///////////////////////////////////////////////////////////////////////////////
+
+var MSBuildSolution = "./Core2D.sln";
+var unitTestsFramework = "net461";
+
+///////////////////////////////////////////////////////////////////////////////
+// .NET Core
+///////////////////////////////////////////////////////////////////////////////
+
+var projectNetCore = "./apps/Core2D.Avalonia.NetCore";
+var projectNetCoreName = System.IO.Path.GetFileName(projectNetCore);
+var frameworkNetCore = "netcoreapp1.1";
+var runtimesNetCore = new List<string>() { "win7-x86", "win7-x64", "ubuntu.16.10-x64" };
+var unitTestsNetCore = new List<string>() { 
+    "./tests/Core2D.Spatial.UnitTests",
+    "./tests/Core2D.UnitTests",
+    "./tests/FileSystem.DotNet.UnitTests",
+    "./tests/Serializer.Xaml.UnitTests"
+};
+var frameworksNetCore = new List<string>() { "netcoreapp1.1" };
+if (IsRunningOnWindows())
+{
+    frameworksNetCore.Add("net461");
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// PATHS
+///////////////////////////////////////////////////////////////////////////////
 
 var buildDirs = 
     GetDirectories("./src/**/bin/**") + 
@@ -58,6 +114,10 @@ var msvcp140_x64 = @"c:\Program Files (x86)\Microsoft Visual Studio\2017\Communi
 var vcruntime140_x86 = @"c:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.10.25008\x86\Microsoft.VC150.CRT\vcruntime140.dll";
 var vcruntime140_x64 = @"c:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.10.25008\x64\Microsoft.VC150.CRT\vcruntime140.dll";
 
+///////////////////////////////////////////////////////////////////////////////
+// TASKS: COMMON
+///////////////////////////////////////////////////////////////////////////////
+
 Task("Clean")
     .Does(() =>
 {
@@ -65,6 +125,10 @@ Task("Clean")
     CleanDirectory(testResultsDir);
     CleanDirectory(zipRootDir);
 });
+
+///////////////////////////////////////////////////////////////////////////////
+// TASKS: VISUAL STUDIO
+///////////////////////////////////////////////////////////////////////////////
 
 Task("Restore-NuGet-Packages")
     .IsDependentOn("Clean")
@@ -148,85 +212,6 @@ Task("Run-Unit-Tests")
     }
 });
 
-Task("Build-NetCore")
-    .IsDependentOn("Clean")
-    .Does(() =>
-{
-    var projectNetCore = "./apps/Core2D.Avalonia.NetCore";
-    var projectNetCoreName = System.IO.Path.GetFileName(projectNetCore);
-    var frameworkNetCore = "netcoreapp1.1";
-    var runtimesNetCore = new List<string>() { "win7-x86", "win7-x64", "ubuntu.16.10-x64" };
-
-    DotNetCoreRestore(projectNetCore);
-    DotNetCoreBuild(projectNetCore, new DotNetCoreBuildSettings {
-        Configuration = configuration
-    });
-
-    //if (IsRunningOnWindows())
-    //{
-        foreach(var runtime in runtimesNetCore)
-        {
-            var outputDir = zipRootDir.Combine(projectNetCoreName + "-" + runtime);
-            var zipFile = zipRootDir.CombineWithFilePath(projectNetCoreName + "-" + runtime + "-" + configuration + "-" + version + ".zip");
-
-            DotNetCorePublish(projectNetCore, new DotNetCorePublishSettings {
-                Framework = frameworkNetCore,
-                Configuration = configuration,
-                Runtime = runtime,
-                OutputDirectory = outputDir.FullPath
-            });
-
-            if (IsRunningOnWindows() && runtime == "win7-x86")
-            {
-                CopyFileToDirectory(msvcp140_x86, outputDir);
-                CopyFileToDirectory(vcruntime140_x86, outputDir);
-            }
-
-            if (IsRunningOnWindows() && runtime == "win7-x64")
-            {
-                CopyFileToDirectory(msvcp140_x64, outputDir);
-                CopyFileToDirectory(vcruntime140_x64, outputDir);
-            }
-
-            Zip(outputDir.FullPath, zipFile);
-        }
-    //}
-});
-
-Task("Run-Unit-Tests-NetCore")
-    .IsDependentOn("Clean")
-    .Does(() =>
-{
-    var unitTestsNetCore = new List<string>() { 
-        "./tests/Core2D.Spatial.UnitTests",
-        "./tests/Core2D.UnitTests",
-        "./tests/FileSystem.DotNet.UnitTests",
-        "./tests/Serializer.Xaml.UnitTests"
-    };
-
-    var frameworksNetCore = new List<string>() { "netcoreapp1.1" };
-
-    if (IsRunningOnWindows())
-    {
-        frameworksNetCore.Add("net461");
-    }
-
-    foreach (var unitTest in unitTestsNetCore)
-    {
-        var project = System.IO.Path.Combine(unitTest, System.IO.Path.GetFileName(unitTest) + ".csproj");
-        
-        DotNetCoreRestore(unitTest);
-
-        foreach(var framework in frameworksNetCore)
-        {
-            DotNetCoreTest(project, new DotNetCoreTestSettings {
-                Configuration = configuration,
-                Framework = framework
-            });
-        }
-    }
-});
-
 Task("Copy-Redist-Files")
     .IsDependentOn("Run-Unit-Tests")
     .Does(() =>
@@ -281,18 +266,123 @@ Task("Zip-Files")
     }
 });
 
+///////////////////////////////////////////////////////////////////////////////
+// TASKS: .NET Core
+///////////////////////////////////////////////////////////////////////////////
+
+Task("Restore-NetCore")
+    .IsDependentOn("Clean")
+    .Does(() =>
+{
+    DotNetCoreRestore(projectNetCore);
+});
+
+Task("Build-NetCore")
+    .IsDependentOn("Restore-NetCore")
+    .Does(() =>
+{
+    DotNetCoreBuild(projectNetCore, new DotNetCoreBuildSettings {
+        Configuration = configuration
+    });
+});
+
+Task("Publish-NetCore")
+    .IsDependentOn("Restore-NetCore")
+    .Does(() =>
+{
+    foreach(var runtime in runtimesNetCore)
+    {
+        var outputDir = zipRootDir.Combine(projectNetCoreName + "-" + runtime);
+
+        DotNetCorePublish(projectNetCore, new DotNetCorePublishSettings {
+            Framework = frameworkNetCore,
+            Configuration = configuration,
+            Runtime = runtime,
+            OutputDirectory = outputDir.FullPath
+        });
+    }
+});
+
+Task("Run-Unit-Tests-NetCore")
+    .IsDependentOn("Clean")
+    .Does(() =>
+{
+    foreach (var unitTest in unitTestsNetCore)
+    {
+        var project = System.IO.Path.Combine(unitTest, System.IO.Path.GetFileName(unitTest) + ".csproj");
+        
+        DotNetCoreRestore(unitTest);
+
+        foreach(var framework in frameworksNetCore)
+        {
+            DotNetCoreTest(project, new DotNetCoreTestSettings {
+                Configuration = configuration,
+                Framework = framework
+            });
+        }
+    }
+});
+
+Task("Copy-Redist-Files-NetCore")
+    .IsDependentOn("Publish-NetCore")
+    .Does(() =>
+{
+    foreach(var runtime in runtimesNetCore)
+    {
+        var outputDir = zipRootDir.Combine(projectNetCoreName + "-" + runtime);
+
+        if (IsRunningOnWindows() && runtime == "win7-x86")
+        {
+            CopyFileToDirectory(msvcp140_x86, outputDir);
+            CopyFileToDirectory(vcruntime140_x86, outputDir);
+        }
+
+        if (IsRunningOnWindows() && runtime == "win7-x64")
+        {
+            CopyFileToDirectory(msvcp140_x64, outputDir);
+            CopyFileToDirectory(vcruntime140_x64, outputDir);
+        }
+    }
+});
+
+Task("Zip-Files-NetCore")
+    .IsDependentOn("Publish-NetCore")
+    .Does(() =>
+{
+    foreach(var runtime in runtimesNetCore)
+    {
+        var outputDir = zipRootDir.Combine(projectNetCoreName + "-" + runtime);
+        var zipFile = zipRootDir.CombineWithFilePath(projectNetCoreName + "-" + runtime + "-" + configuration + "-" + version + ".zip");
+
+        Zip(outputDir.FullPath, zipFile);
+    }
+});
+
+///////////////////////////////////////////////////////////////////////////////
+// TARGETS
+///////////////////////////////////////////////////////////////////////////////
+
 Task("Default")
   .IsDependentOn("Run-Unit-Tests");
 
 Task("AppVeyor")
-  .IsDependentOn("Build-NetCore")
   .IsDependentOn("Run-Unit-Tests-NetCore")
+  .IsDependentOn("Build-NetCore")
+  .IsDependentOn("Publish-NetCore")
+  .IsDependentOn("Copy-Redist-Files-NetCore")
+  .IsDependentOn("Zip-Files-NetCore")
   .IsDependentOn("Run-Unit-Tests")
   .IsDependentOn("Copy-Redist-Files")
   .IsDependentOn("Zip-Files");
 
 Task("Travis")
+  .IsDependentOn("Run-Unit-Tests-NetCore")
   .IsDependentOn("Build-NetCore")
-  .IsDependentOn("Run-Unit-Tests-NetCore");
+  .IsDependentOn("Publish-NetCore")
+  .IsDependentOn("Zip-Files-NetCore");
+
+///////////////////////////////////////////////////////////////////////////////
+// EXECUTE
+///////////////////////////////////////////////////////////////////////////////
 
 RunTarget(target);
