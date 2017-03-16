@@ -67,10 +67,10 @@ var netCoreAppsRoot= "./apps";
 var netCoreApps = new string[] { "Core2D.Avalonia.NetCore", "Core2D.Avalonia.NetStandard" };
 var netCoreProjects = netCoreApps.Select(name => 
     new {
-        Path = $"{netCoreAppsRoot}/{name}",
+        Path = string.Format("{0}/{1}", netCoreAppsRoot, name),
         Name = name,
-        Framework = XmlPeek($"{netCoreAppsRoot}/{name}/{name}.csproj", "//*[local-name()='TargetFramework']/text()"),
-        Runtimes = XmlPeek($"{netCoreAppsRoot}/{name}/{name}.csproj", "//*[local-name()='RuntimeIdentifiers']/text()").Split(';')
+        Framework = XmlPeek(string.Format("{0}/{1}/{1}.csproj", netCoreAppsRoot, name), "//*[local-name()='TargetFramework']/text()"),
+        Runtimes = XmlPeek(string.Format("{0}/{1}/{1}.csproj", netCoreAppsRoot, name), "//*[local-name()='RuntimeIdentifiers']/text()").Split(';')
     }).ToList();
 
 /*
