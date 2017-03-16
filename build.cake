@@ -176,13 +176,13 @@ Task("Build-NetCore")
                 OutputDirectory = outputDir.FullPath
             });
 
-            if (runtime == "win7-x86")
+            if (IsRunningOnWindows() && runtime == "win7-x86")
             {
                 CopyFileToDirectory(msvcp140_x86, outputDir);
                 CopyFileToDirectory(vcruntime140_x86, outputDir);
             }
 
-            if (runtime == "win7-x64")
+            if (IsRunningOnWindows() && runtime == "win7-x64")
             {
                 CopyFileToDirectory(msvcp140_x64, outputDir);
                 CopyFileToDirectory(vcruntime140_x64, outputDir);
