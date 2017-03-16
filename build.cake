@@ -50,20 +50,35 @@ if (BuildSystem.AppVeyor.IsRunningOnAppVeyor)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-// VISUAL STUDIO
+// Visual Studio
 ///////////////////////////////////////////////////////////////////////////////
 
 var MSBuildSolution = "./Core2D.sln";
 var unitTestsFramework = "net461";
 
 ///////////////////////////////////////////////////////////////////////////////
-// .NET Core
+// .NET Core Projects
 ///////////////////////////////////////////////////////////////////////////////
 
-var projectNetCore = "./apps/Core2D.Avalonia.NetCore";
-var projectNetCoreName = System.IO.Path.GetFileName(projectNetCore);
-var frameworkNetCore = "netcoreapp1.1";
-var runtimesNetCore = new List<string>() { "win7-x86", "win7-x64", "ubuntu.16.10-x64" };
+var netCoreProjects = new [] {
+    new {
+        Path = "./apps/Core2D.Avalonia.NetCore",
+        Name = "Core2D.Avalonia.NetCore",
+        Framework = XmlPeek("./apps/Core2D.Avalonia.NetCore/Core2D.Avalonia.NetCore.csproj", "//*[local-name()='TargetFramework']/text()"),
+        Runtimes = XmlPeek("./apps/Core2D.Avalonia.NetCore/Core2D.Avalonia.NetCore.csproj", "//*[local-name()='RuntimeIdentifiers']/text()").Split(';')
+    },
+    new {
+        Path = "./apps/Core2D.Avalonia.NetStandard",
+        Name = "Core2D.Avalonia.NetStandard",
+        Framework = XmlPeek("./apps/Core2D.Avalonia.NetStandard/Core2D.Avalonia.NetStandard.csproj", "//*[local-name()='TargetFramework']/text()"),
+        Runtimes = XmlPeek("./apps/Core2D.Avalonia.NetStandard/Core2D.Avalonia.NetStandard.csproj", "//*[local-name()='RuntimeIdentifiers']/text()").Split(';')
+    }
+};
+
+///////////////////////////////////////////////////////////////////////////////
+// .NET Core UnitTests
+///////////////////////////////////////////////////////////////////////////////
+
 var unitTestsNetCore = new List<string>() { 
     "./tests/Core2D.Spatial.UnitTests",
     "./tests/Core2D.UnitTests",
@@ -274,32 +289,9 @@ Task("Restore-NetCore")
     .IsDependentOn("Clean")
     .Does(() =>
 {
-    DotNetCoreRestore(projectNetCore);
-});
-
-Task("Build-NetCore")
-    .IsDependentOn("Restore-NetCore")
-    .Does(() =>
-{
-    DotNetCoreBuild(projectNetCore, new DotNetCoreBuildSettings {
-        Configuration = configuration
-    });
-});
-
-Task("Publish-NetCore")
-    .IsDependentOn("Restore-NetCore")
-    .Does(() =>
-{
-    foreach(var runtime in runtimesNetCore)
+    foreach (var project in netCoreProjects)
     {
-        var outputDir = zipRootDir.Combine(projectNetCoreName + "-" + runtime);
-
-        DotNetCorePublish(projectNetCore, new DotNetCorePublishSettings {
-            Framework = frameworkNetCore,
-            Configuration = configuration,
-            Runtime = runtime,
-            OutputDirectory = outputDir.FullPath
-        });
+        DotNetCoreRestore(project.Path);
     }
 });
 
@@ -310,9 +302,7 @@ Task("Run-Unit-Tests-NetCore")
     foreach (var unitTest in unitTestsNetCore)
     {
         var project = System.IO.Path.Combine(unitTest, System.IO.Path.GetFileName(unitTest) + ".csproj");
-        
         DotNetCoreRestore(unitTest);
-
         foreach(var framework in frameworksNetCore)
         {
             DotNetCoreTest(project, new DotNetCoreTestSettings {
@@ -323,24 +313,56 @@ Task("Run-Unit-Tests-NetCore")
     }
 });
 
+Task("Build-NetCore")
+    .IsDependentOn("Restore-NetCore")
+    .Does(() =>
+{
+    foreach (var project in netCoreProjects)
+    {
+        DotNetCoreBuild(project.Path, new DotNetCoreBuildSettings {
+            Configuration = configuration
+        });
+    }
+});
+
+Task("Publish-NetCore")
+    .IsDependentOn("Restore-NetCore")
+    .Does(() =>
+{
+    foreach (var project in netCoreProjects)
+    {
+        foreach(var runtime in project.Runtimes)
+        {
+            var outputDir = zipRootDir.Combine(project.Name + "-" + runtime);
+            DotNetCorePublish(project.Path, new DotNetCorePublishSettings {
+                Framework = project.Framework,
+                Configuration = configuration,
+                Runtime = runtime,
+                OutputDirectory = outputDir.FullPath
+            });
+        }
+    }
+});
+
 Task("Copy-Redist-Files-NetCore")
     .IsDependentOn("Publish-NetCore")
     .Does(() =>
 {
-    foreach(var runtime in runtimesNetCore)
+    foreach (var project in netCoreProjects)
     {
-        var outputDir = zipRootDir.Combine(projectNetCoreName + "-" + runtime);
-
-        if (IsRunningOnWindows() && runtime == "win7-x86")
+        foreach(var runtime in project.Runtimes)
         {
-            CopyFileToDirectory(msvcp140_x86, outputDir);
-            CopyFileToDirectory(vcruntime140_x86, outputDir);
-        }
-
-        if (IsRunningOnWindows() && runtime == "win7-x64")
-        {
-            CopyFileToDirectory(msvcp140_x64, outputDir);
-            CopyFileToDirectory(vcruntime140_x64, outputDir);
+            var outputDir = zipRootDir.Combine(project.Name + "-" + runtime);
+            if (IsRunningOnWindows() && runtime == "win7-x86")
+            {
+                CopyFileToDirectory(msvcp140_x86, outputDir);
+                CopyFileToDirectory(vcruntime140_x86, outputDir);
+            }
+            if (IsRunningOnWindows() && runtime == "win7-x64")
+            {
+                CopyFileToDirectory(msvcp140_x64, outputDir);
+                CopyFileToDirectory(vcruntime140_x64, outputDir);
+            }
         }
     }
 });
@@ -349,12 +371,14 @@ Task("Zip-Files-NetCore")
     .IsDependentOn("Publish-NetCore")
     .Does(() =>
 {
-    foreach(var runtime in runtimesNetCore)
+    foreach (var project in netCoreProjects)
     {
-        var outputDir = zipRootDir.Combine(projectNetCoreName + "-" + runtime);
-        var zipFile = zipRootDir.CombineWithFilePath(projectNetCoreName + "-" + runtime + "-" + configuration + "-" + version + ".zip");
-
-        Zip(outputDir.FullPath, zipFile);
+        foreach(var runtime in project.Runtimes)
+        {
+            var outputDir = zipRootDir.Combine(project.Name + "-" + runtime);
+            var zipFile = zipRootDir.CombineWithFilePath(project.Name + "-" + runtime + "-" + configuration + "-" + version + ".zip");
+            Zip(outputDir.FullPath, zipFile);
+        }
     }
 });
 
