@@ -77,9 +77,9 @@ dotnet restore
 dotnet build
 ```
 
-### Publishing stand-alone .NET Core application
+### Publishing self-contained .NET Core application
 
-You can publish `Core2D` application and all of its dependencies for one of the [.NET Core supported runtimes](https://docs.microsoft.com/en-us/dotnet/articles/core/rid-catalog). Below are few command-line examples.
+You can publish self-contained `Core2D` application and all of its dependencies for one of the [.NET Core supported runtimes](https://docs.microsoft.com/en-us/dotnet/articles/core/rid-catalog). Below are few command-line examples.
 
 Open up a Powershell prompt and execute:
 ```PowerShell
