@@ -5,31 +5,5 @@
     <PackageReference Include="Avalonia.Skia.Desktop" Version="0.4.1-build2859-alpha" />
     <PackageReference Include="Avalonia.Skia.Linux.Natives" Version="1.56.1.3" />
     <PackageReference Include="Serilog.Sinks.Trace" Version="2.1.0" />
-    <PackageReference Include="SkiaSharp" Version="1.56.1-beta" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\Core2D.Avalonia\Core2D.Avalonia.csproj" />
-    <ProjectReference Include="..\..\src\Core2D.Spatial\Core2D.Spatial.csproj" />
-    <ProjectReference Include="..\..\src\Core2D\Core2D.csproj" />
-    <ProjectReference Include="..\..\src\FileSystem.DotNet\FileSystem.DotNet.csproj" />
-    <ProjectReference Include="..\..\src\FileWriter.SkiaSharpBmp\FileWriter.SkiaSharpBmp.csproj" />
-    <ProjectReference Include="..\..\src\FileWriter.SkiaSharpGif\FileWriter.SkiaSharpGif.csproj" />
-    <ProjectReference Include="..\..\src\FileWriter.SkiaSharpIco\FileWriter.SkiaSharpIco.csproj" />
-    <ProjectReference Include="..\..\src\FileWriter.SkiaSharpJpeg\FileWriter.SkiaSharpJpeg.csproj" />
-    <ProjectReference Include="..\..\src\FileWriter.SkiaSharpKtx\FileWriter.SkiaSharpKtx.csproj" />
-    <ProjectReference Include="..\..\src\FileWriter.SkiaSharpPdf\FileWriter.SkiaSharpPdf.csproj" />
-    <ProjectReference Include="..\..\src\FileWriter.SkiaSharpPng\FileWriter.SkiaSharpPng.csproj" />
-    <ProjectReference Include="..\..\src\FileWriter.SkiaSharpSvg\FileWriter.SkiaSharpSvg.csproj" />
-    <ProjectReference Include="..\..\src\FileWriter.SkiaSharpWbmp\FileWriter.SkiaSharpWbmp.csproj" />
-    <ProjectReference Include="..\..\src\FileWriter.SkiaSharpWebp\FileWriter.SkiaSharpWebp.csproj" />
-    <ProjectReference Include="..\..\src\Log.Trace\Log.Trace.csproj" />
-    <ProjectReference Include="..\..\src\Renderer.Avalonia\Renderer.Avalonia.csproj" />
-    <ProjectReference Include="..\..\src\Renderer.SkiaSharp\Renderer.SkiaSharp.csproj" />
-    <ProjectReference Include="..\..\src\ScriptRunner.Roslyn\ScriptRunner.Roslyn.csproj" />
-    <ProjectReference Include="..\..\src\Serializer.Newtonsoft\Serializer.Newtonsoft.csproj" />
-    <ProjectReference Include="..\..\src\Serializer.Xaml\Serializer.Xaml.csproj" />
-    <ProjectReference Include="..\..\src\TextFieldReader.CsvHelper\TextFieldReader.CsvHelper.csproj" />
-    <ProjectReference Include="..\..\src\TextFieldWriter.CsvHelper\TextFieldWriter.CsvHelper.csproj" />
-    <ProjectReference Include="..\..\src\Utilities.Avalonia\Utilities.Avalonia.csproj" />
   </ItemGroup>
 </Project>
