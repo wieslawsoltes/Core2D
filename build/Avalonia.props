@@ -1,24 +1,16 @@
 ﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="0.4.1-build2859-alpha" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="Avalonia.Controls.PanAndZoom" Version="0.4.1-build87-alpha" />
     <PackageReference Include="Avalonia.Xaml.Behaviors" Version="0.4.1-build382-alpha" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="Serilog" Version="2.4.0" />
     <PackageReference Include="Splat" Version="2.0.0" />
     <PackageReference Include="Sprache" Version="2.1.0" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="System.Reactive" Version="3.0.0" />
     <PackageReference Include="System.Reactive.Core" Version="3.0.0" />
     <PackageReference Include="System.Reactive.Interfaces" Version="3.0.0" />
     <PackageReference Include="System.Reactive.Linq" Version="3.0.0" />
     <PackageReference Include="System.Reactive.PlatformServices" Version="3.0.0" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="System.ComponentModel" Version="4.3.0" />
     <PackageReference Include="System.Composition" Version="1.0.31" />
     <PackageReference Include="System.Composition.Convention" Version="1.0.31" />
