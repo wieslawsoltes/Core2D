@@ -10,4 +10,8 @@
     <PackageReference Include="System.Reactive.Linq" Version="3.0.0" />
     <PackageReference Include="System.Reactive.PlatformServices" Version="3.0.0" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Avalonia.Controls.PanAndZoom" Version="0.4.1-build87-alpha" />
+    <PackageReference Include="Avalonia.Xaml.Behaviors" Version="0.4.1-build382-alpha" />
+  </ItemGroup>
 </Project>
