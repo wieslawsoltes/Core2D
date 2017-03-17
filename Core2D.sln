@@ -8,13 +8,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{8756F874-0C1B-4AB8-83E0-0BEDA782D212}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{C7162582-C1FD-45FB-99FD-6770D67B5A21}"
-	ProjectSection(SolutionItems) = preProject
-		build.cake = build.cake
-		build.ps1 = build.ps1
-		build.sh = build.sh
-		build.targets = build.targets
-		uwp.targets = uwp.targets
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D", "src\Core2D\Core2D.csproj", "{F822EC0C-2501-487D-87A8-B8D28A761385}"
 EndProject
@@ -109,6 +102,25 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.SkiaDemo", "apps\Core2D.SkiaDemo\Core2D.SkiaDemo.csproj", "{BDE5F939-C291-44E3-9FE3-939D85341BB6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.Avalonia.NetCore", "apps\Core2D.Avalonia.NetCore\Core2D.Avalonia.NetCore.csproj", "{0C7EA04E-94D8-49B7-B387-C031B2422F3B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "props", "props", "{3C45CABF-3E2E-455B-AACF-1FB63D331F9C}"
+	ProjectSection(SolutionItems) = preProject
+		build\Avalonia.props = build\Avalonia.props
+		build\Avalonia.Direct2D.props = build\Avalonia.Direct2D.props
+		build\Avalonia.NetStandard.props = build\Avalonia.NetStandard.props
+		build\Avalonia.SkiaSharp.props = build\Avalonia.SkiaSharp.props
+		build\Default.props = build\Default.props
+		build\Net45.props = build\Net45.props
+		build\Rx.props = build\Rx.props
+		build\SharpDX.props = build\SharpDX.props
+		build\SkiaSharp.props = build\SkiaSharp.props
+		build\XUnit.props = build\XUnit.props
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "targets", "targets", "{C5B55AFD-7C8E-4071-ACD8-81DB364765DA}"
+	ProjectSection(SolutionItems) = preProject
+		build\Default.targets = build\Default.targets
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -813,5 +825,7 @@ Global
 		{4868069E-3AD4-497E-9B8E-148D1EEACFD7} = {4322259E-219C-4F6C-9A1B-3DEB14B224A7}
 		{BDE5F939-C291-44E3-9FE3-939D85341BB6} = {4322259E-219C-4F6C-9A1B-3DEB14B224A7}
 		{0C7EA04E-94D8-49B7-B387-C031B2422F3B} = {4322259E-219C-4F6C-9A1B-3DEB14B224A7}
+		{3C45CABF-3E2E-455B-AACF-1FB63D331F9C} = {C7162582-C1FD-45FB-99FD-6770D67B5A21}
+		{C5B55AFD-7C8E-4071-ACD8-81DB364765DA} = {C7162582-C1FD-45FB-99FD-6770D67B5A21}
 	EndGlobalSection
 EndGlobal
