@@ -24,7 +24,6 @@ Core2D is a multi-platform application for making data driven 2D diagrams.
 ## Supported Platforms
 
 * `Windows 7 SP1 or higher` using `Core2D.Wpf` or `Core2D.Avalonia.*` projects.
-* `Windows 10` using `Core2D.Uwp` project.
 * `.NET Core` supported platforms using `Core2D.Avalonia.NetCore` project.
 * `Linux` using `Core2D.Avalonia.*` projects.
 * `macOS` using `Core2D.Avalonia.*` projects.
