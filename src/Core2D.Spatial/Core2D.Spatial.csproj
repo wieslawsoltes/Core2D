@@ -6,6 +6,6 @@
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
   </PropertyGroup>
 
-  <Import Project="..\..\build.targets" />
+  <Import Project="..\..\build\Default.targets" />
 
 </Project>
