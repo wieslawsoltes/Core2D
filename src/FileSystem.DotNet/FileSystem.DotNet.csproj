@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <Import Project="..\..\build\Default.targets" />
+  <Import Project="..\..\build\Default.props" />
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net45'">
     <Reference Include="System" />
