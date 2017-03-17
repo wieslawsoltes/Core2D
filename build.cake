@@ -41,7 +41,7 @@ var isPlatformX64 = StringComparer.OrdinalIgnoreCase.Equals(platform, "x64");
 // VERSION
 ///////////////////////////////////////////////////////////////////////////////
 
-var version = XmlPeek("./Build/Default.targets", "//*[local-name()='Version']/text()");
+var version = XmlPeek("./build/Default.targets", "//*[local-name()='Version']/text()");
 Information("Version: {0}", version);
 
 if (BuildSystem.AppVeyor.IsRunningOnAppVeyor)
@@ -57,7 +57,7 @@ if (BuildSystem.AppVeyor.IsRunningOnAppVeyor)
 ///////////////////////////////////////////////////////////////////////////////
 
 var MSBuildSolution = "./Core2D.sln";
-var unitTestsFramework = "net461";
+var UnitTestsFramework = "net461";
 
 ///////////////////////////////////////////////////////////////////////////////
 // .NET Core Projects
@@ -77,13 +77,21 @@ var netCoreProjects = netCoreApps.Select(name =>
 // .NET Core UnitTests
 ///////////////////////////////////////////////////////////////////////////////
 
-var unitTestsNetCore = new List<string>() { 
-    "./tests/Core2D.Spatial.UnitTests",
-    "./tests/Core2D.UnitTests",
-    "./tests/FileSystem.DotNet.UnitTests",
-    "./tests/Serializer.Xaml.UnitTests"
+var netCoreUnitTestsRoot= "./tests";
+var netCoreUnitTests = new string[] { 
+    "Core2D.Spatial.UnitTests",
+    "Core2D.UnitTests",
+    "FileSystem.DotNet.UnitTests",
+    "Serializer.Xaml.UnitTests"
 };
-var frameworksNetCore = new List<string>() { "netcoreapp1.1" };
+var netCoreUnitTestsProjects = netCoreUnitTests.Select(name => 
+    new {
+        Name = name,
+        Path = string.Format("{0}/{1}", netCoreUnitTestsRoot, name),
+        File = string.Format("{0}/{1}/{1}.csproj", netCoreUnitTestsRoot, name)
+    }).ToList();
+
+var netCoreUnitTestsFrameworks = new List<string>() { "netcoreapp1.1" };
 if (IsRunningOnWindows())
 {
     frameworksNetCore.Add("net461");
@@ -96,12 +104,10 @@ if (IsRunningOnWindows())
 var buildDirs = 
     GetDirectories("./src/**/bin/**") + 
     GetDirectories("./src/**/obj/**") + 
-    GetDirectories("./apps/**/bin/**") + 
-    GetDirectories("./apps/**/obj/**") + 
-    GetDirectories("./uwp/**/bin/**") + 
-    GetDirectories("./uwp/**/obj/**") + 
     GetDirectories("./tests/**/bin/**") + 
-    GetDirectories("./tests/**/obj/**");
+    GetDirectories("./tests/**/obj/**") + 
+    GetDirectories("./apps/**/bin/**") + 
+    GetDirectories("./apps/**/obj/**");
 
 var artifactsDir = (DirectoryPath)Directory("./artifacts");
 var testResultsDir = artifactsDir.Combine("test-results");	
@@ -206,7 +212,7 @@ Task("Run-Unit-Tests")
     .IsDependentOn("Build")
     .Does(() =>
 {
-    var assemblies = GetFiles("./tests/**/bin/" + platform + "/" + configuration + "/" + unitTestsFramework + "/*.UnitTests.dll");
+    var assemblies = GetFiles("./tests/**/bin/" + platform + "/" + configuration + "/" + UnitTestsFramework + "/*.UnitTests.dll");
     var settings = new XUnit2Settings { 
         ToolPath = (isPlatformAnyCPU || isPlatformX86) ? 
             "./tools/xunit.runner.console/tools/xunit.console.x86.exe" :
@@ -285,13 +291,12 @@ Task("Run-Unit-Tests-NetCore")
     .IsDependentOn("Clean")
     .Does(() =>
 {
-    foreach (var unitTest in unitTestsNetCore)
+    foreach (var project in netCoreUnitTestsProjects)
     {
-        var project = System.IO.Path.Combine(unitTest, System.IO.Path.GetFileName(unitTest) + ".csproj");
-        DotNetCoreRestore(unitTest);
-        foreach(var framework in frameworksNetCore)
+        DotNetCoreRestore(project.Path);
+        foreach(var framework in netCoreUnitTestsFrameworks)
         {
-            DotNetCoreTest(project, new DotNetCoreTestSettings {
+            DotNetCoreTest(project.File, new DotNetCoreTestSettings {
                 Configuration = configuration,
                 Framework = framework
             });
