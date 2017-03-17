@@ -111,8 +111,6 @@ var platformZip = (platform == "AnyCPU") ? "x86" : platform;
 var dirSuffixZip = platformZip + "/" + configuration;
 var fileZipSuffix = platformZip + "-" + configuration + "-" + version + ".zip";
 
-var zipSourceCairoDir = (DirectoryPath)Directory("./apps/Core2D.Avalonia.Cairo/bin/" + dirSuffixZip);
-var zipTargetCairoFile = zipRootDir.CombineWithFilePath("Core2D.Avalonia.Cairo-" + fileZipSuffix);
 var zipSourceDirect2DDir = (DirectoryPath)Directory("./apps/Core2D.Avalonia.Direct2D/bin/" + dirSuffixZip);
 var zipTargetDirect2DFile = zipRootDir.CombineWithFilePath("Core2D.Avalonia.Direct2D-" + fileZipSuffix);
 var zipSourceSkiaDir = (DirectoryPath)Directory("./apps/Core2D.Avalonia.Skia/bin/" + dirSuffixZip);
@@ -233,8 +231,6 @@ Task("Copy-Redist-Files")
     {
         var msvcp140 = (isPlatformAnyCPU || isPlatformX86) ? msvcp140_x86 : msvcp140_x64;
         var vcruntime140 = (isPlatformAnyCPU || isPlatformX86) ? vcruntime140_x86 : vcruntime140_x64;
-        CopyFileToDirectory(msvcp140, zipSourceCairoDir);
-        CopyFileToDirectory(vcruntime140, zipSourceCairoDir);
         CopyFileToDirectory(msvcp140, zipSourceDirect2DDir);
         CopyFileToDirectory(vcruntime140, zipSourceDirect2DDir);
         CopyFileToDirectory(msvcp140, zipSourceSkiaDir);
@@ -250,11 +246,6 @@ Task("Zip-Files")
     .IsDependentOn("Run-Unit-Tests")
     .Does(() =>
 {
-    Zip(zipSourceCairoDir, 
-        zipTargetCairoFile, 
-        GetFiles(zipSourceCairoDir.FullPath + "/*.dll") + 
-        GetFiles(zipSourceCairoDir.FullPath + "/*.exe"));
-
     Zip(zipSourceDirect2DDir, 
         zipTargetDirect2DFile, 
         GetFiles(zipSourceDirect2DDir.FullPath + "/*.dll") + 
@@ -265,18 +256,15 @@ Task("Zip-Files")
         GetFiles(zipSourceSkiaDir.FullPath + "/*.dll") + 
         GetFiles(zipSourceSkiaDir.FullPath + "/*.exe"));
 
-    if (IsRunningOnWindows())
-    {
-        Zip(zipSourceSkiaDemoDir, 
-            zipTargetSkiaDemoFile, 
-            GetFiles(zipSourceSkiaDemoDir.FullPath + "/*.dll") + 
-            GetFiles(zipSourceSkiaDemoDir.FullPath + "/*.exe"));
+    Zip(zipSourceSkiaDemoDir, 
+        zipTargetSkiaDemoFile, 
+        GetFiles(zipSourceSkiaDemoDir.FullPath + "/*.dll") + 
+        GetFiles(zipSourceSkiaDemoDir.FullPath + "/*.exe"));
 
-        Zip(zipSourceWpfDir, 
-            zipTargetWpfFile, 
-            GetFiles(zipSourceWpfDir.FullPath + "/*.dll") + 
-            GetFiles(zipSourceWpfDir.FullPath + "/*.exe"));
-    }
+    Zip(zipSourceWpfDir, 
+        zipTargetWpfFile, 
+        GetFiles(zipSourceWpfDir.FullPath + "/*.dll") + 
+        GetFiles(zipSourceWpfDir.FullPath + "/*.exe"));
 });
 
 ///////////////////////////////////////////////////////////////////////////////
