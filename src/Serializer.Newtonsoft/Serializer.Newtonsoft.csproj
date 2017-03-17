@@ -6,7 +6,7 @@
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
   </PropertyGroup>
 
-  <Import Project="..\..\build.targets" />
+  <Import Project="..\..\build\Default.targets" />
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="10.0.1-beta1" />
