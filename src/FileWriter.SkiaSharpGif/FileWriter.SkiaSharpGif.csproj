@@ -7,10 +7,7 @@
   </PropertyGroup>
 
   <Import Project="..\..\build\Default.targets" />
-
-  <ItemGroup>
-    <PackageReference Include="SkiaSharp" Version="1.56.1" />
-  </ItemGroup>
+  <Import Project="..\..\build\SkiaSharp.props" />
 
   <ItemGroup>
     <ProjectReference Include="..\Core2D\Core2D.csproj" />
