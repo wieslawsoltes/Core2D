@@ -9,6 +9,7 @@
 
   <Import Project="..\..\build\Default.targets" />
   <Import Project="..\..\build\Default.props" />
+  <Import Project="..\..\build\Rx.props" />
   <Import Project="..\..\build\Avalonia.props" />
 
   <ItemGroup>
