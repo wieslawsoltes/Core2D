@@ -1,9 +1,53 @@
 ﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-    <ItemGroup>
-      <PackageReference Include="Avalonia.Gtk3" Version="0.4.1-build2859-alpha" />
-      <PackageReference Include="Avalonia.Skia.Desktop" Version="0.4.1-build2859-alpha" />
-      <PackageReference Include="Avalonia.Skia.Linux.Natives" Version="1.56.1.3" />
-      <PackageReference Include="Avalonia.Win32" Version="0.4.1-build2859-alpha" />
-      <PackageReference Include="SkiaSharp" Version="1.56.1-beta" />
-    </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia.Gtk3" Version="0.4.1-build2859-alpha" />
+    <PackageReference Include="Avalonia.Win32" Version="0.4.1-build2859-alpha" />
+    <PackageReference Include="Avalonia.Skia.Desktop" Version="0.4.1-build2859-alpha" />
+    <PackageReference Include="Avalonia.Skia.Linux.Natives" Version="1.56.1.3" />
+    <PackageReference Include="SkiaSharp" Version="1.56.1-beta" />
+    <PackageReference Include="Serilog.Sinks.Trace" Version="2.1.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="4.4.0" />
+    <PackageReference Include="CsvHelper" Version="3.0.0-beta7" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="2.0.0-beta5" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.1-beta1" />
+    <PackageReference Include="Portable.Xaml" Version="0.15.0" />
+    <PackageReference Include="System.Collections.Immutable" Version="1.3.1" />
+    <PackageReference Include="System.ComponentModel" Version="4.3.0" />
+    <PackageReference Include="System.Composition" Version="1.0.31" />
+    <PackageReference Include="System.Composition.Convention" Version="1.0.31" />
+    <PackageReference Include="System.Composition.Hosting" Version="1.0.31" />
+    <PackageReference Include="System.Diagnostics.TextWriterTraceListener" Version="4.3.0" />
+    <PackageReference Include="System.Diagnostics.TraceSource" Version="4.3.0" />
+    <PackageReference Include="System.IO.Compression" Version="4.3.0" />
+    <PackageReference Include="System.Runtime.Loader" Version="4.3.0" />
+    <PackageReference Include="System.ValueTuple" Version="4.3.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Core2D.Avalonia\Core2D.Avalonia.csproj" />
+    <ProjectReference Include="..\..\src\Core2D.Spatial\Core2D.Spatial.csproj" />
+    <ProjectReference Include="..\..\src\Core2D\Core2D.csproj" />
+    <ProjectReference Include="..\..\src\FileSystem.DotNet\FileSystem.DotNet.csproj" />
+    <ProjectReference Include="..\..\src\FileWriter.SkiaSharpBmp\FileWriter.SkiaSharpBmp.csproj" />
+    <ProjectReference Include="..\..\src\FileWriter.SkiaSharpGif\FileWriter.SkiaSharpGif.csproj" />
+    <ProjectReference Include="..\..\src\FileWriter.SkiaSharpIco\FileWriter.SkiaSharpIco.csproj" />
+    <ProjectReference Include="..\..\src\FileWriter.SkiaSharpJpeg\FileWriter.SkiaSharpJpeg.csproj" />
+    <ProjectReference Include="..\..\src\FileWriter.SkiaSharpKtx\FileWriter.SkiaSharpKtx.csproj" />
+    <ProjectReference Include="..\..\src\FileWriter.SkiaSharpPdf\FileWriter.SkiaSharpPdf.csproj" />
+    <ProjectReference Include="..\..\src\FileWriter.SkiaSharpPng\FileWriter.SkiaSharpPng.csproj" />
+    <ProjectReference Include="..\..\src\FileWriter.SkiaSharpSvg\FileWriter.SkiaSharpSvg.csproj" />
+    <ProjectReference Include="..\..\src\FileWriter.SkiaSharpWbmp\FileWriter.SkiaSharpWbmp.csproj" />
+    <ProjectReference Include="..\..\src\FileWriter.SkiaSharpWebp\FileWriter.SkiaSharpWebp.csproj" />
+    <ProjectReference Include="..\..\src\Log.Trace\Log.Trace.csproj" />
+    <ProjectReference Include="..\..\src\Renderer.Avalonia\Renderer.Avalonia.csproj" />
+    <ProjectReference Include="..\..\src\Renderer.SkiaSharp\Renderer.SkiaSharp.csproj" />
+    <ProjectReference Include="..\..\src\ScriptRunner.Roslyn\ScriptRunner.Roslyn.csproj" />
+    <ProjectReference Include="..\..\src\Serializer.Newtonsoft\Serializer.Newtonsoft.csproj" />
+    <ProjectReference Include="..\..\src\Serializer.Xaml\Serializer.Xaml.csproj" />
+    <ProjectReference Include="..\..\src\TextFieldReader.CsvHelper\TextFieldReader.CsvHelper.csproj" />
+    <ProjectReference Include="..\..\src\TextFieldWriter.CsvHelper\TextFieldWriter.CsvHelper.csproj" />
+    <ProjectReference Include="..\..\src\Utilities.Avalonia\Utilities.Avalonia.csproj" />
+  </ItemGroup>
 </Project>
