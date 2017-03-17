@@ -90,11 +90,10 @@ var netCoreUnitTestsProjects = netCoreUnitTests.Select(name =>
         Path = string.Format("{0}/{1}", netCoreUnitTestsRoot, name),
         File = string.Format("{0}/{1}/{1}.csproj", netCoreUnitTestsRoot, name)
     }).ToList();
-
 var netCoreUnitTestsFrameworks = new List<string>() { "netcoreapp1.1" };
 if (IsRunningOnWindows())
 {
-    frameworksNetCore.Add("net461");
+    netCoreUnitTestsFrameworks.Add("net461");
 }
 
 ///////////////////////////////////////////////////////////////////////////////
