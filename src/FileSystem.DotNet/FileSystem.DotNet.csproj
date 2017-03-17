@@ -6,7 +6,7 @@
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
   </PropertyGroup>
 
-  <Import Project="..\..\build.targets" />
+  <Import Project="..\..\build\Default.targets" />
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net45'">
     <Reference Include="System" />
