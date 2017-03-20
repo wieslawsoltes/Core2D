@@ -3,6 +3,5 @@
     <PackageReference Include="Avalonia.Win32" Version="0.4.1-build2884-alpha" />
     <PackageReference Include="Avalonia.Direct2D1" Version="0.4.1-build2884-alpha" />
     <PackageReference Include="Serilog.Sinks.Trace" Version="2.1.0" />
-    <PackageReference Include="System.Reactive.Windows.Threading" Version="3.0.0" />
   </ItemGroup>
 </Project>
