@@ -129,6 +129,7 @@ var msvcp140_x86 = @"c:\Program Files (x86)\Microsoft Visual Studio\2017\Communi
 var msvcp140_x64 = @"c:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.10.25008\x64\Microsoft.VC150.CRT\msvcp140.dll";
 var vcruntime140_x86 = @"c:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.10.25008\x86\Microsoft.VC150.CRT\vcruntime140.dll";
 var vcruntime140_x64 = @"c:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.10.25008\x64\Microsoft.VC150.CRT\vcruntime140.dll";
+var editbin = @"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.10.25017\bin\HostX86\x86\editbin.exe";
 
 ///////////////////////////////////////////////////////////////////////////////
 // TASKS: COMMON
@@ -330,6 +331,14 @@ Task("Publish-NetCore")
                 Runtime = runtime,
                 OutputDirectory = outputDir.FullPath
             });
+
+            if (IsRunningOnWindows() && (runtime == "win7-x86" || runtime == "win7-x64"))
+            {
+                var targetExe = outputDir.CombineWithFilePath(project.Name + ".exe");
+                var exitCodeWithArgument = StartProcess(editbin, new ProcessSettings { 
+                    Arguments = "/subsystem:windows " + targetExe.FullPath
+                });
+            }
         }
     }
 });
