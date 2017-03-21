@@ -296,6 +296,7 @@ Task("Run-Unit-Tests-NetCore")
         DotNetCoreRestore(project.Path);
         foreach(var framework in netCoreUnitTestsFrameworks)
         {
+            Information("Running tests for: {0}, framework: {1}", project.Name, framework);
             DotNetCoreTest(project.File, new DotNetCoreTestSettings {
                 Configuration = configuration,
                 Framework = framework
@@ -310,6 +311,7 @@ Task("Build-NetCore")
 {
     foreach (var project in netCoreProjects)
     {
+        Information("Building: {0}", project.Name);
         DotNetCoreBuild(project.Path, new DotNetCoreBuildSettings {
             Configuration = configuration
         });
@@ -325,6 +327,7 @@ Task("Publish-NetCore")
         foreach(var runtime in project.Runtimes)
         {
             var outputDir = zipRootDir.Combine(project.Name + "-" + runtime);
+            Information("Publishing: {0}, runtime: {1}", project.Name, runtime);
             DotNetCorePublish(project.Path, new DotNetCorePublishSettings {
                 Framework = project.Framework,
                 Configuration = configuration,
@@ -334,10 +337,12 @@ Task("Publish-NetCore")
 
             if (IsRunningOnWindows() && (runtime == "win7-x86" || runtime == "win7-x64"))
             {
+                Information("Patching executable subsystem for: {0}, runtime: {1}", project.Name, runtime);
                 var targetExe = outputDir.CombineWithFilePath(project.Name + ".exe");
                 var exitCodeWithArgument = StartProcess(editbin, new ProcessSettings { 
                     Arguments = "/subsystem:windows " + targetExe.FullPath
                 });
+                Information("The editbin command exit code: {0}", exitCodeWithArgument);
             }
         }
     }
@@ -354,11 +359,13 @@ Task("Copy-Redist-Files-NetCore")
             var outputDir = zipRootDir.Combine(project.Name + "-" + runtime);
             if (IsRunningOnWindows() && runtime == "win7-x86")
             {
+                Information("Copying redist files for: {0}, runtime: {1}", project.Name, runtime);
                 CopyFileToDirectory(msvcp140_x86, outputDir);
                 CopyFileToDirectory(vcruntime140_x86, outputDir);
             }
             if (IsRunningOnWindows() && runtime == "win7-x64")
             {
+                Information("Copying redist files for: {0}, runtime: {1}", project.Name, runtime);
                 CopyFileToDirectory(msvcp140_x64, outputDir);
                 CopyFileToDirectory(vcruntime140_x64, outputDir);
             }
@@ -376,6 +383,7 @@ Task("Zip-Files-NetCore")
         {
             var outputDir = zipRootDir.Combine(project.Name + "-" + runtime);
             var zipFile = zipRootDir.CombineWithFilePath(project.Name + "-" + runtime + "-" + configuration + "-" + version + ".zip");
+            Information("Zip files for: {0}, runtime: {1}", project.Name, runtime);
             Zip(outputDir.FullPath, zipFile);
         }
     }
