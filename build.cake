@@ -64,7 +64,7 @@ var UnitTestsFramework = "net461";
 ///////////////////////////////////////////////////////////////////////////////
 
 var netCoreAppsRoot= "./apps";
-var netCoreApps = new string[] { "Core2D.Avalonia.NetCore", /* "Core2D.Avalonia.NetStandard" */ };
+var netCoreApps = new string[] { "Core2D.Avalonia.NetCore" };
 var netCoreProjects = netCoreApps.Select(name => 
     new {
         Path = string.Format("{0}/{1}", netCoreAppsRoot, name),
