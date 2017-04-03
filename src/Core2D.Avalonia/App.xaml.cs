@@ -8,6 +8,7 @@ using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Core2D.Avalonia.Converters;
 using Core2D.Avalonia.Modules;
+using Core2D.Avalonia.Views;
 using Core2D.Editor;
 using Core2D.Editor.Designer;
 using Core2D.Interfaces;
@@ -111,6 +112,32 @@ namespace Core2D.Avalonia
                     log?.LogError($"{ex.InnerException.Message}{Environment.NewLine}{ex.InnerException.StackTrace}");
                 }
             }
+        }
+        
+        /// <summary>
+        /// Initialize application context and returns main view.
+        /// </summary>
+        /// <param name="serviceProvider">The service provider.</param>
+        /// <returns>The main view.</returns>
+        public UserControl CreateView(IServiceProvider serviceProvider)
+        {
+            InitializeConverters(serviceProvider);
+
+            var log = serviceProvider.GetService<ILog>();
+            var fileIO = serviceProvider.GetService<IFileSystem>();
+
+            log?.Initialize(System.IO.Path.Combine(fileIO?.GetAssemblyPath(null), "Core2D.log"));
+
+            var editor = serviceProvider.GetService<ProjectEditor>();
+
+            editor.CurrentView = editor.Views.FirstOrDefault(v => v.Name == "Dashboard");
+            editor.CurrentTool = editor.Tools.FirstOrDefault(t => t.Name == "Selection");
+            editor.CurrentPathTool = editor.PathTools.FirstOrDefault(t => t.Name == "Line");
+
+            var view = new MainControl();
+            view.DataContext = editor;
+
+            return view;
         }
     }
 }
