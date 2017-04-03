@@ -38,7 +38,6 @@ namespace Core2D.Avalonia.NetCore
             if (fbdev == true)
             {
                 IContainer container = builder.Build();
-                ILog log = container.Resolve<ILog>()
                 var app = new App();
                 AppBuilder.Configure(app)
                     .InitializeWithLinuxFramebuffer(tl =>
