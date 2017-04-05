@@ -9,7 +9,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #tool "nuget:?package=xunit.runner.console&version=2.2.0"
-#tool "nuget:https://dotnet.myget.org/F/nuget-build/?package=NuGet.CommandLine&version=4.3.0-beta1-2361&prerelease"
+#tool "nuget:https://dotnet.myget.org/F/nuget-build/?package=NuGet.CommandLine&version=4.3.0-preview1-3980&prerelease"
 
 ///////////////////////////////////////////////////////////////////////////////
 // USINGS
