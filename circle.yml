@@ -11,3 +11,6 @@ jobs:
       - checkout
       - run: dotnet restore apps/Core2D.Avalonia.NetCore
       - run: dotnet build apps/Core2D.Avalonia.NetCore/Core2D.Avalonia.NetCore.csproj
+    notify:
+      webhooks:
+        - url: https://webhooks.gitter.im/e/18bc2743c91ff21c0246
