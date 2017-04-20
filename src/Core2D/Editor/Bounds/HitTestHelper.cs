@@ -3,9 +3,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Core2D.Shapes;
-using Core2D.Spatial;
-using Core2D.Spatial.ConvexHull;
-using Core2D.Spatial.Sat;
+using Spatial;
+using Spatial.ConvexHull;
+using Spatial.Sat;
 
 namespace Core2D.Editor.Bounds
 {

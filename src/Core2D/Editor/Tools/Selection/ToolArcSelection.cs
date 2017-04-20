@@ -1,12 +1,12 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Core2D.Spatial.Arc;
+using Spatial.Arc;
 using Core2D.Project;
 using Core2D.Shape;
 using Core2D.Shapes;
 using Core2D.Shapes.Interfaces;
 using Core2D.Style;
-using Core2D.Spatial;
+using Spatial;
 
 namespace Core2D.Editor.Tools.Selection
 {

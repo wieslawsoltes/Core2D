@@ -4,10 +4,10 @@ using System;
 using Core2D.Editor.Input;
 using Core2D.Editor.Tools.Selection;
 using Core2D.Editor.Tools.Settings;
-using Core2D.Spatial.Arc;
+using Spatial.Arc;
 using Core2D.Shape;
 using Core2D.Shapes;
-using Core2D.Spatial;
+using Spatial;
 
 namespace Core2D.Editor.Tools
 {

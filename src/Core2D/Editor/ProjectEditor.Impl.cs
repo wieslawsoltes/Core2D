@@ -16,7 +16,7 @@ using Core2D.Editor.Tools;
 using Core2D.Editor.Tools.Path;
 using Core2D.History;
 using Core2D.Interfaces;
-using Core2D.Spatial;
+using Spatial;
 using Core2D.Path.Parser;
 using Core2D.Project;
 using Core2D.Renderer;

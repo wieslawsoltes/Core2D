@@ -12,7 +12,6 @@
   <Import Project="..\..\build\XUnit.props" />
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Core2D.Spatial\Core2D.Spatial.csproj" />
     <ProjectReference Include="..\..\src\Core2D\Core2D.csproj" />
   </ItemGroup>
 

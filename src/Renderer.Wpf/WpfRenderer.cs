@@ -10,12 +10,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Core2D.Data;
 using Core2D.Data.Database;
-using Core2D.Spatial.Arc;
+using Spatial.Arc;
 using Core2D.Path;
 using Core2D.Renderer;
 using Core2D.Shapes;
 using Core2D.Style;
-using Core2D.Spatial;
+using Spatial;
 
 namespace Renderer.Wpf
 {

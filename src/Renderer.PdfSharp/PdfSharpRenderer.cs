@@ -212,7 +212,7 @@ namespace Renderer.PdfSharp
             }
         }
 
-        private void DrawGridInternal(XGraphics gfx, XPen stroke, ref Core2D.Spatial.Rect2 rect, double offsetX, double offsetY, double cellWidth, double cellHeight, bool isStroked)
+        private void DrawGridInternal(XGraphics gfx, XPen stroke, ref Spatial.Rect2 rect, double offsetX, double offsetY, double cellWidth, double cellHeight, bool isStroked)
         {
             double ox = rect.X;
             double oy = rect.Y;
@@ -333,7 +333,7 @@ namespace Renderer.PdfSharp
         {
             var _gfx = dc as XGraphics;
 
-            var rect = Core2D.Spatial.Rect2.FromPoints(
+            var rect = Spatial.Rect2.FromPoints(
                 rectangle.TopLeft.X,
                 rectangle.TopLeft.Y,
                 rectangle.BottomRight.X,
@@ -386,7 +386,7 @@ namespace Renderer.PdfSharp
         {
             var _gfx = dc as XGraphics;
 
-            var rect = Core2D.Spatial.Rect2.FromPoints(
+            var rect = Spatial.Rect2.FromPoints(
                 ellipse.TopLeft.X,
                 ellipse.TopLeft.Y,
                 ellipse.BottomRight.X,
@@ -428,11 +428,11 @@ namespace Renderer.PdfSharp
         {
             var _gfx = dc as XGraphics;
 
-            var a = new Core2D.Spatial.Arc.GdiArc(
-                Core2D.Spatial.Point2.FromXY(arc.Point1.X, arc.Point1.Y),
-                Core2D.Spatial.Point2.FromXY(arc.Point2.X, arc.Point2.Y),
-                Core2D.Spatial.Point2.FromXY(arc.Point3.X, arc.Point3.Y),
-                Core2D.Spatial.Point2.FromXY(arc.Point4.X, arc.Point4.Y));
+            var a = new Spatial.Arc.GdiArc(
+                Spatial.Point2.FromXY(arc.Point1.X, arc.Point1.Y),
+                Spatial.Point2.FromXY(arc.Point2.X, arc.Point2.Y),
+                Spatial.Point2.FromXY(arc.Point3.X, arc.Point3.Y),
+                Spatial.Point2.FromXY(arc.Point4.X, arc.Point4.Y));
 
             if (arc.IsFilled)
             {
@@ -626,7 +626,7 @@ namespace Renderer.PdfSharp
                 fontStyle,
                 options);
 
-            var rect = Core2D.Spatial.Rect2.FromPoints(
+            var rect = Spatial.Rect2.FromPoints(
                 text.TopLeft.X,
                 text.TopLeft.Y,
                 text.BottomRight.X,
@@ -679,7 +679,7 @@ namespace Renderer.PdfSharp
         {
             var _gfx = dc as XGraphics;
 
-            var rect = Core2D.Spatial.Rect2.FromPoints(
+            var rect = Spatial.Rect2.FromPoints(
                 image.TopLeft.X,
                 image.TopLeft.Y,
                 image.BottomRight.X,

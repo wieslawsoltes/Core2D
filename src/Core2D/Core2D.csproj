@@ -17,8 +17,4 @@
     <PackageReference Include="System.ValueTuple" Version="4.3.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Core2D.Spatial\Core2D.Spatial.csproj" />
-  </ItemGroup>
-
 </Project>

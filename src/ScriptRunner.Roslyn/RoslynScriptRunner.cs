@@ -41,10 +41,10 @@ namespace ScriptRunner.Roslyn
             using Core2D.Editor.Views.Interfaces;
             using Core2D.History;
             using Core2D.Interfaces;
-            using Core2D.Spatial;
-            using Core2D.Spatial.Arc;
-            using Core2D.Spatial.ConvexHull;
-            using Core2D.Spatial.Sat;
+            using Spatial;
+            using Spatial.Arc;
+            using Spatial.ConvexHull;
+            using Spatial.Sat;
             using Core2D.Path;
             using Core2D.Path.Parser;
             using Core2D.Path.Segments;

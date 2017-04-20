@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Core2D.Editor.Input;
 using Core2D.Editor.Tools.Settings;
-using Core2D.Spatial;
+using Spatial;
 using Core2D.Project;
 using Core2D.Shape;
 using Core2D.Shapes;

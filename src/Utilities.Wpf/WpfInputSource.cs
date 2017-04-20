@@ -6,7 +6,7 @@ using System.Windows;
 using System.Windows.Input;
 using Core2D.Editor;
 using Core2D.Editor.Input;
-using Core2D.Spatial;
+using Spatial;
 
 namespace Utilities.Wpf
 {

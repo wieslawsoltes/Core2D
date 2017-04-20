@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using Core2D.Shape;
 using Core2D.Shapes;
-using Core2D.Spatial;
+using Spatial;
 
 namespace Core2D.Editor.Bounds.Shapes
 {

@@ -557,10 +557,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Core2D.Spatial\Core2D.Spatial.csproj">
-      <Project>{AA5092F4-BDEF-437D-A31B-37DF896C8CBC}</Project>
-      <Name>Core2D.Spatial</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\src\Core2D\Core2D.csproj">
       <Project>{F822EC0C-2501-487D-87A8-B8D28A761385}</Project>
       <Name>Core2D</Name>
