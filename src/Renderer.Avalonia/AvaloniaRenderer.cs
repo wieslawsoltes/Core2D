@@ -581,21 +581,27 @@ namespace Renderer.Avalonia
 
             if (text.Style.TextStyle.FontSize >= 0.0)
             {
-                var ft = new AM.FormattedText(
-                    tbind,
-                    text.Style.TextStyle.FontName,
-                    text.Style.TextStyle.FontSize * _textScaleFactor,
-                    fontStyle,
-                    AM.TextAlignment.Left,
-                    fontWeight);
+                var tf = new AM.Typeface()
+                {
+                    FontFamilyName = text.Style.TextStyle.FontName,
+                    FontSize = text.Style.TextStyle.FontSize * _textScaleFactor,
+                    Style = fontStyle,
+                    Weight = fontWeight
+                };
+
+                var ft = new AM.FormattedText()
+                {
+                    Typeface = tf,
+                    Text = tbind,
+                    TextAlignment = AM.TextAlignment.Left,
+                    Wrapping = AM.TextWrapping.NoWrap
+                };
 
                 var rect = CreateRect(text.TopLeft, text.BottomRight, dx, dy);
                 var size = ft.Measure();
                 var origin = GetTextOrigin(text.Style, ref rect, ref size);
 
                 _gfx.DrawText(brush, origin, ft);
-
-                ft.Dispose();
             }
         }
 
