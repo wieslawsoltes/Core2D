@@ -581,13 +581,11 @@ namespace Renderer.Avalonia
 
             if (text.Style.TextStyle.FontSize >= 0.0)
             {
-                var tf = new AM.Typeface()
-                {
-                    FontFamilyName = text.Style.TextStyle.FontName,
-                    FontSize = text.Style.TextStyle.FontSize * _textScaleFactor,
-                    Style = fontStyle,
-                    Weight = fontWeight
-                };
+                var tf = new AM.Typeface(
+                    text.Style.TextStyle.FontName,
+                    text.Style.TextStyle.FontSize * _textScaleFactor,
+                    fontStyle,
+                    fontWeight);
 
                 var ft = new AM.FormattedText()
                 {
