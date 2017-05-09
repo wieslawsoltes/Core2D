@@ -1,0 +1,7 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <PackageReference Include="OpenTK" Version="1.1.2349.61993" />
+    <PackageReference Include="OpenTK.GLControl" Version="1.1.2349.61993" />
+    <PackageReference Include="SkiaSharp.Views" Version="1.56.1-beta" />
+  </ItemGroup>
+</Project>
