@@ -29,6 +29,7 @@
   <Import Project="..\..\build\Rx.props" />
   <Import Project="..\..\build\Net45.props" />
   <Import Project="..\..\build\SkiaSharp.props" />
+  <Import Project="..\..\build\WPF.props" />
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -665,11 +666,6 @@
       <Project>{E8D9036D-7E08-4405-B767-FB1E654EF66A}</Project>
       <Name>Utilities.Wpf</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="System.Windows.Interactivity.WPF" Version="2.0.20525" />
-    <PackageReference Include="Wpf.Controls.PanAndZoom" Version="0.4.1-build87-alpha" />
-    <PackageReference Include="Xceed.Wpf.AvalonDock" Version="2.9.15603.14400" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildThisFileDirectory)..\Shared\nuget.workaround.targets" />
