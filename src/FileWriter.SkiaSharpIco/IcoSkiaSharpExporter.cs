@@ -56,7 +56,7 @@ namespace FileWriter.SkiaSharpIco
                     _presenter.Render(canvas, _renderer, container, 0, 0);
                 }
                 using (var image = SKImage.FromBitmap(bitmap))
-                using (var data = image.Encode(SKImageEncodeFormat.Ico, 100))
+                using (var data = image.Encode(SKEncodedImageFormat.Ico, 100))
                 using (var stream = File.OpenWrite(path))
                 {
                     data.SaveTo(stream);

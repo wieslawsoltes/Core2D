@@ -56,7 +56,7 @@ namespace FileWriter.SkiaSharpWebp
                     _presenter.Render(canvas, _renderer, container, 0, 0);
                 }
                 using (var image = SKImage.FromBitmap(bitmap))
-                using (var data = image.Encode(SKImageEncodeFormat.Webp, 100))
+                using (var data = image.Encode(SKEncodedImageFormat.Webp, 100))
                 using (var stream = File.OpenWrite(path))
                 {
                     data.SaveTo(stream);

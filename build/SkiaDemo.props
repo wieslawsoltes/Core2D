@@ -2,6 +2,6 @@
   <ItemGroup>
     <PackageReference Include="OpenTK" Version="1.1.2349.61993" />
     <PackageReference Include="OpenTK.GLControl" Version="1.1.2349.61993" />
-    <PackageReference Include="SkiaSharp.Views" Version="1.56.1-beta" />
+    <PackageReference Include="SkiaSharp.Views" Version="1.57.1" />
   </ItemGroup>
 </Project>

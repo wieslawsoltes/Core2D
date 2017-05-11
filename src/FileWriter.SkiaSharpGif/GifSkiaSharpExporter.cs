@@ -56,7 +56,7 @@ namespace FileWriter.SkiaSharpGif
                     _presenter.Render(canvas, _renderer, container, 0, 0);
                 }
                 using (var image = SKImage.FromBitmap(bitmap))
-                using (var data = image.Encode(SKImageEncodeFormat.Gif, 100))
+                using (var data = image.Encode(SKEncodedImageFormat.Gif, 100))
                 using (var stream = File.OpenWrite(path))
                 {
                     data.SaveTo(stream);
