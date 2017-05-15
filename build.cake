@@ -111,7 +111,7 @@ var artifactsDir = (DirectoryPath)Directory("./artifacts");
 var testResultsDir = artifactsDir.Combine("test-results");	
 var zipRootDir = artifactsDir.Combine("zip");
 
-var dirSuffixZip = configuration;
+var dirSuffixZip = platform + "/" + configuration;
 var fileZipSuffix = configuration + "-" + version + ".zip";
 
 var zipSourceDirect2DDir = (DirectoryPath)Directory("./apps/Core2D.Avalonia.Direct2D/bin/" + dirSuffixZip);
