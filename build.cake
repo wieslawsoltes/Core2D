@@ -2,14 +2,13 @@
 // ADDINS
 ///////////////////////////////////////////////////////////////////////////////
 
-#addin "nuget:?package=Polly&version=5.0.6"
+#addin "nuget:?package=Polly&version=5.1.0"
 
 ///////////////////////////////////////////////////////////////////////////////
 // TOOLS
 ///////////////////////////////////////////////////////////////////////////////
 
 #tool "nuget:?package=xunit.runner.console&version=2.2.0"
-#tool "nuget:https://dotnet.myget.org/F/nuget-build/?package=NuGet.CommandLine&version=4.3.0-preview1-3980&prerelease"
 
 ///////////////////////////////////////////////////////////////////////////////
 // USINGS
@@ -167,14 +166,12 @@ Task("Restore-NuGet-Packages")
             if (IsRunningOnWindows())
             {
                 NuGetRestore(MSBuildSolution, new NuGetRestoreSettings {
-                    ToolPath = "./tools/NuGet.CommandLine/tools/NuGet.exe",
                     ToolTimeout = TimeSpan.FromMinutes(toolTimeout)
                 });
             }
             if (IsRunningOnUnix())
             {
                 NuGetRestore(MSBuildSolution, new NuGetRestoreSettings {
-                    ToolPath = "./tools/NuGet.CommandLine/tools/NuGet.exe",
                     ToolTimeout = TimeSpan.FromMinutes(toolTimeout)
                 });
             }
