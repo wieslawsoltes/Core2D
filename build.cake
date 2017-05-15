@@ -188,7 +188,6 @@ Task("Build")
     if (IsRunningOnWindows())
     {
         MSBuild(MSBuildSolution, settings => {
-            settings.WithProperty("UseRoslynPathHack", "true");
             settings.UseToolVersion(MSBuildToolVersion.VS2017);
             settings.SetConfiguration(configuration);
             settings.WithProperty("Platform", platform);
