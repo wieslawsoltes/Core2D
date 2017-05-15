@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.4
+VisualStudioVersion = 15.0.26430.6
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BC6BAFE6-1735-4549-A7CC-819274780B38}"
 EndProject
@@ -109,7 +109,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "props", "props", "{3C45CABF
 		build\Net45.props = build\Net45.props
 		build\Rx.props = build\Rx.props
 		build\SharpDX.props = build\SharpDX.props
+		build\SkiaDemo.props = build\SkiaDemo.props
 		build\SkiaSharp.props = build\SkiaSharp.props
+		build\WPF.props = build\WPF.props
 		build\XUnit.props = build\XUnit.props
 	EndProjectSection
 EndProject
