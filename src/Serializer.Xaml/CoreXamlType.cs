@@ -1,10 +1,13 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Portable.Xaml;
-using Portable.Xaml.ComponentModel;
-using Portable.Xaml.Schema;
 using System;
+#if NETSTANDARD
 using System.ComponentModel;
+#else
+using Portable.Xaml.ComponentModel;
+#endif
+using Portable.Xaml;
+using Portable.Xaml.Schema;
 
 namespace Serializer.Xaml
 {
