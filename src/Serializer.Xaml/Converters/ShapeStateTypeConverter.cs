@@ -3,6 +3,7 @@
 using Core2D.Shape;
 using Portable.Xaml.ComponentModel;
 using System;
+using System.ComponentModel;
 using System.Globalization;
 
 namespace Serializer.Xaml.Converters
