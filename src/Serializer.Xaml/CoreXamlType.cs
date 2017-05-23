@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
-#if NETSTANDARD
+#if NETSTANDARD1_3
 using System.ComponentModel;
 #else
 using Portable.Xaml.ComponentModel;
