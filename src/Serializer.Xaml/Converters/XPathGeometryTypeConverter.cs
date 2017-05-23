@@ -4,6 +4,7 @@ using Core2D.Path;
 using Core2D.Path.Parser;
 using Portable.Xaml.ComponentModel;
 using System;
+using System.ComponentModel;
 using System.Globalization;
 
 namespace Serializer.Xaml.Converters
