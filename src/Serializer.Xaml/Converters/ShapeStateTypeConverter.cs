@@ -1,10 +1,13 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Core2D.Shape;
-using Portable.Xaml.ComponentModel;
 using System;
-using System.ComponentModel;
 using System.Globalization;
+#if NETSTANDARD
+using System.ComponentModel;
+#else
+using Portable.Xaml.ComponentModel;
+#endif
+using Core2D.Shape;
 
 namespace Serializer.Xaml.Converters
 {
