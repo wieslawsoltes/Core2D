@@ -3,10 +3,9 @@
 using System;
 #if NETSTANDARD1_3
 using System.ComponentModel;
-#else
-using Portable.Xaml.ComponentModel;
 #endif
 using Portable.Xaml;
+using Portable.Xaml.ComponentModel;
 using Portable.Xaml.Schema;
 
 namespace Serializer.Xaml
