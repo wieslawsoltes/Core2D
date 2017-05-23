@@ -4,6 +4,7 @@ using Portable.Xaml;
 using Portable.Xaml.ComponentModel;
 using Portable.Xaml.Schema;
 using System;
+using System.ComponentModel;
 
 namespace Serializer.Xaml
 {
