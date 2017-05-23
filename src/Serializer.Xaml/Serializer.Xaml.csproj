@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard1.3</TargetFrameworks>
+    <TargetFrameworks>netstandard1.3;net45</TargetFrameworks>
     <OutputType>Library</OutputType>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
   </PropertyGroup>
