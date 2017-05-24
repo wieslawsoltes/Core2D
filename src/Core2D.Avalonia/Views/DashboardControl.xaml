@@ -5,9 +5,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+             xmlns:iac="clr-namespace:Avalonia.Xaml.Interactions.Custom;assembly=Avalonia.Xaml.Interactions.Custom"
              xmlns:local="clr-namespace:Core2D.Avalonia;assembly=Core2D.Avalonia"
-             xmlns:actions="clr-namespace:Core2D.Avalonia.Interactions.Actions;assembly=Core2D.Avalonia"
-             xmlns:behaviors="clr-namespace:Core2D.Avalonia.Interactions.Behaviors;assembly=Core2D.Avalonia"
              xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
              xmlns:Recent="clr-namespace:Core2D.Editor.Recent;assembly=Core2D"
@@ -18,17 +17,17 @@
         <TextBlock Text="Core2D" Classes="title" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="1"/>
         <Button Content="New Project" Classes="project" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="1" Grid.RowSpan="1" Command="{Static Editor:ProjectEditorCommands.NewCommand}" CommandParameter="{Binding}">
             <i:Interaction.Behaviors>
-                <behaviors:FocusOnPointerMovedBehavior/>
+                <iac:FocusOnPointerMovedBehavior/>
             </i:Interaction.Behaviors>
         </Button>
         <Button Content="Open Project" Classes="project" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="1" Grid.RowSpan="1" Command="{Static Editor:ProjectEditorCommands.OpenCommand}">
             <i:Interaction.Behaviors>
-                <behaviors:FocusOnPointerMovedBehavior/>
+                <iac:FocusOnPointerMovedBehavior/>
             </i:Interaction.Behaviors>
         </Button>
         <Button Content="Open Recent" Classes="project" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="1" Grid.RowSpan="1" Command="{Static Editor:ProjectEditorCommands.OpenCommand}" CommandParameter="{Binding CurrentRecentProject.Path}">
             <i:Interaction.Behaviors>
-                <behaviors:FocusOnPointerMovedBehavior/>
+                <iac:FocusOnPointerMovedBehavior/>
             </i:Interaction.Behaviors>
         </Button>
         <TextBlock Text="recent" Classes="recent" Grid.Column="3" Grid.ColumnSpan="1" Grid.Row="2" Grid.RowSpan="1"/>
@@ -37,7 +36,7 @@
                 <DataTemplate DataType="Recent:RecentFile">
                     <Grid Name="grid" Cursor="Hand">
                         <i:Interaction.Behaviors>
-                            <behaviors:SelectListBoxItemOnPointerMovedBehavior/>
+                            <iac:SelectListBoxItemOnPointerMovedBehavior/>
                             <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #grid}">
                                 <ia:InvokeCommandAction Command="{Static Editor:ProjectEditorCommands.OpenCommand}" CommandParameter="{Binding Path}"/>
                             </ia:EventTriggerBehavior>
