@@ -93,13 +93,7 @@ namespace Core2D.Avalonia
                 editor.CurrentPathTool = editor.PathTools.FirstOrDefault(t => t.Name == "Line");
 
                 var window = serviceProvider.GetService<Windows.MainWindow>();
-
-                window.Closed +=
-                    (sender, e) =>
-                    {
-                        editor.OnSaveRecent(path);
-                    };
-
+                window.Closed += (sender, e) => editor.OnSaveRecent(path);
                 window.DataContext = editor;
                 window.Show();
                 Run(window);
@@ -134,10 +128,10 @@ namespace Core2D.Avalonia
             editor.CurrentTool = editor.Tools.FirstOrDefault(t => t.Name == "Selection");
             editor.CurrentPathTool = editor.PathTools.FirstOrDefault(t => t.Name == "Line");
 
-            var view = new MainControl();
-            view.DataContext = editor;
-
-            return view;
+            return new MainControl()
+            {
+                DataContext = editor
+            };
         }
     }
 }
