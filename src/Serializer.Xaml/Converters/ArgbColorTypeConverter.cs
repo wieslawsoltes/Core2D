@@ -4,9 +4,10 @@ using System;
 using System.Globalization;
 #if NETSTANDARD1_3
 using System.ComponentModel;
+#else
+using Portable.Xaml.ComponentModel;
 #endif
 using Core2D.Style;
-using Portable.Xaml.ComponentModel;
 
 namespace Serializer.Xaml.Converters
 {
@@ -36,12 +37,7 @@ namespace Serializer.Xaml.Converters
         /// <inheritdoc/>
         public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
         {
-            var color = value as ArgbColor;
-            if (color != null)
-            {
-                return ArgbColor.ToHtml(color);
-            }
-            throw new NotSupportedException();
+            return value is ArgbColor color ? ArgbColor.ToHtml(color) : throw new NotSupportedException();
         }
     }
 }

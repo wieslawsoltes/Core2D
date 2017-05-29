@@ -25,8 +25,7 @@ namespace Core2D.Wpf.Controls.Project
         /// <param name="e">The event data.</param>
         private void TreeViewItem_MouseRightButtonDown(object sender, MouseEventArgs e)
         {
-            var item = sender as TreeViewItem;
-            if (item != null)
+            if (sender is TreeViewItem item)
             {
                 item.IsSelected = true;
                 item.BringIntoView();

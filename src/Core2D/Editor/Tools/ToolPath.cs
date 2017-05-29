@@ -88,8 +88,7 @@ namespace Core2D.Editor.Tools
             var figure = Geometry.Figures.LastOrDefault();
             if (figure != null)
             {
-                var segment = figure.Segments.LastOrDefault() as T;
-                if (segment != null)
+                if (figure.Segments.LastOrDefault() is T segment)
                 {
                     figure.Segments = figure.Segments.Remove(segment);
                 }

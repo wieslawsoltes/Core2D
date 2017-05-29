@@ -24,14 +24,13 @@ namespace Core2D.Wpf.Converters
         /// <returns>A converted value.</returns>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var color = value as ArgbColor;
-            if (color != null && value != DependencyProperty.UnsetValue)
+            if (value is ArgbColor color && value != DependencyProperty.UnsetValue)
             {
                 var brush = new SolidColorBrush(
                     Color.FromArgb(
                         color.A,
-                        color.R, 
-                        color.G, 
+                        color.R,
+                        color.G,
                         color.B));
                 brush.Freeze();
                 return brush;
@@ -49,8 +48,7 @@ namespace Core2D.Wpf.Converters
         /// <returns>A converted value.</returns>
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var brush = value as SolidColorBrush;
-            if (brush != null && value != DependencyProperty.UnsetValue)
+            if (value is SolidColorBrush brush && value != DependencyProperty.UnsetValue)
             {
                 return ArgbColor.Create(
                     brush.Color.A,

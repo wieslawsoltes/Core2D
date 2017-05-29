@@ -26,8 +26,7 @@ namespace Core2D.Wpf.Controls.Custom
             if (parentObject == null)
                 return null;
 
-            P parent = parentObject as P;
-            if (parent != null)
+            if (parentObject is P parent)
                 return parent;
 
             return FindVisualParent<P>(parentObject);
@@ -52,8 +51,7 @@ namespace Core2D.Wpf.Controls.Custom
             DataContextChanged +=
                 (sender, e) =>
                 {
-                    var old = e.OldValue as XDatabase;
-                    if (old != null)
+                    if (e.OldValue is XDatabase old)
                     {
                         StopObservingColumns(old);
                     }
@@ -70,8 +68,7 @@ namespace Core2D.Wpf.Controls.Custom
         /// </summary>
         public void InitializeColumnsView()
         {
-            var database = DataContext as XDatabase;
-            if (database != null)
+            if (DataContext is XDatabase database)
             {
                 this.View = CreateColumnsView(database.Columns);
                 StopObservingColumns(database);

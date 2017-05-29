@@ -130,8 +130,7 @@ namespace Core2D.Wpf.Views
             {
                 try
                 {
-                    var shape = e.Data.GetData(typeof(BaseShape)) as BaseShape;
-                    if (shape != null)
+                    if (e.Data.GetData(typeof(BaseShape)) is BaseShape shape)
                     {
                         var p = e.GetPosition(drawableControl);
                         _projectEditor.OnDropShape(shape, p.X, p.Y);
@@ -149,8 +148,7 @@ namespace Core2D.Wpf.Views
             {
                 try
                 {
-                    var group = e.Data.GetData(typeof(XGroup)) as XGroup;
-                    if (group != null)
+                    if (e.Data.GetData(typeof(XGroup)) is XGroup group)
                     {
                         var p = e.GetPosition(drawableControl);
                         _projectEditor.OnDropShapeAsClone(group, p.X, p.Y);
@@ -168,8 +166,7 @@ namespace Core2D.Wpf.Views
             {
                 try
                 {
-                    var record = e.Data.GetData(typeof(XRecord)) as XRecord;
-                    if (record != null)
+                    if (e.Data.GetData(typeof(XRecord)) is XRecord record)
                     {
                         var p = e.GetPosition(drawableControl);
                         _projectEditor.OnDropRecord(record, p.X, p.Y);
@@ -187,8 +184,7 @@ namespace Core2D.Wpf.Views
             {
                 try
                 {
-                    var style = e.Data.GetData(typeof(ShapeStyle)) as ShapeStyle;
-                    if (style != null)
+                    if (e.Data.GetData(typeof(ShapeStyle)) is ShapeStyle style)
                     {
                         var p = e.GetPosition(drawableControl);
                         _projectEditor.OnDropStyle(style, p.X, p.Y);
@@ -206,8 +202,7 @@ namespace Core2D.Wpf.Views
             {
                 try
                 {
-                    var template = e.Data.GetData(typeof(XContainer)) as XContainer;
-                    if (template != null)
+                    if (e.Data.GetData(typeof(XContainer)) is XContainer template)
                     {
                         _projectEditor.OnApplyTemplate(template);
                         e.Handled = true;
@@ -288,8 +283,7 @@ namespace Core2D.Wpf.Views
             serializer.LayoutSerializationCallback +=
                 (s, e) =>
                 {
-                    var element = e.Content as FrameworkElement;
-                    if (element != null)
+                    if (e.Content is FrameworkElement element)
                     {
                         element.DataContext = _projectEditor;
                     }
@@ -319,8 +313,7 @@ namespace Core2D.Wpf.Views
             serializer.LayoutSerializationCallback +=
                 (s, e) =>
                 {
-                    var element = e.Content as FrameworkElement;
-                    if (element != null)
+                    if (e.Content is FrameworkElement element)
                     {
                         element.DataContext = _projectEditor;
                     }

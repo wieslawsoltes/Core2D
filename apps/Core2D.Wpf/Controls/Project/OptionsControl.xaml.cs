@@ -50,13 +50,11 @@ namespace Core2D.Wpf.Controls.Project
                     {
                         try
                         {
-                            var shape = e.Data.GetData(typeof(BaseShape)) as BaseShape;
-                            if (shape != null)
+                            if (e.Data.GetData(typeof(BaseShape)) is BaseShape shape)
                             {
                                 if (pointShape.DataContext != null)
                                 {
-                                    var options = pointShape.DataContext as XOptions;
-                                    if (options != null)
+                                    if (pointShape.DataContext is XOptions options)
                                     {
                                         options.PointShape = shape;
                                     }
@@ -93,13 +91,11 @@ namespace Core2D.Wpf.Controls.Project
                     {
                         try
                         {
-                            var style = e.Data.GetData(typeof(ShapeStyle)) as ShapeStyle;
-                            if (style != null)
+                            if (e.Data.GetData(typeof(ShapeStyle)) is ShapeStyle style)
                             {
                                 if (pointStyle.DataContext != null)
                                 {
-                                    var options = pointStyle.DataContext as XOptions;
-                                    if (options != null)
+                                    if (pointStyle.DataContext is XOptions options)
                                     {
                                         options.PointStyle = style;
                                     }
@@ -136,13 +132,11 @@ namespace Core2D.Wpf.Controls.Project
                     {
                         try
                         {
-                            var style = e.Data.GetData(typeof(ShapeStyle)) as ShapeStyle;
-                            if (style != null)
+                            if (e.Data.GetData(typeof(ShapeStyle)) is ShapeStyle style)
                             {
                                 if (selectionStyle.DataContext != null)
                                 {
-                                    var options = selectionStyle.DataContext as XOptions;
-                                    if (options != null)
+                                    if (selectionStyle.DataContext is XOptions options)
                                     {
                                         options.SelectionStyle = style;
                                     }
@@ -179,13 +173,11 @@ namespace Core2D.Wpf.Controls.Project
                     {
                         try
                         {
-                            var style = e.Data.GetData(typeof(ShapeStyle)) as ShapeStyle;
-                            if (style != null)
+                            if (e.Data.GetData(typeof(ShapeStyle)) is ShapeStyle style)
                             {
                                 if (helperStyle.DataContext != null)
                                 {
-                                    var options = helperStyle.DataContext as XOptions;
-                                    if (options != null)
+                                    if (helperStyle.DataContext is XOptions options)
                                     {
                                         options.HelperStyle = style;
                                     }

@@ -4,10 +4,11 @@ using System;
 using System.Globalization;
 #if NETSTANDARD1_3
 using System.ComponentModel;
+#else
+using Portable.Xaml.ComponentModel;
 #endif
 using Core2D.Path;
 using Core2D.Path.Parser;
-using Portable.Xaml.ComponentModel;
 
 namespace Serializer.Xaml.Converters
 {
@@ -37,12 +38,7 @@ namespace Serializer.Xaml.Converters
         /// <inheritdoc/>
         public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
         {
-            var geometry = value as XPathGeometry;
-            if (geometry != null)
-            {
-                return geometry.ToString();
-            }
-            throw new NotSupportedException();
+            return value is XPathGeometry geometry ? geometry.ToString() : throw new NotSupportedException();
         }
     }
 }

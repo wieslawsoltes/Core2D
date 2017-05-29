@@ -12,8 +12,7 @@ namespace Serializer.Xaml
 
         private static void Save(XamlXmlWriter writer, object instance)
         {
-            var readerSettings = new XamlObjectReaderSettings();
-            using (var reader = new XamlObjectReader(instance, context, readerSettings))
+            using (var reader = new XamlObjectReader(instance, context, new XamlObjectReaderSettings()))
             {
                 XamlServices.Transform(reader, writer);
             }

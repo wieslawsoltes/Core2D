@@ -147,8 +147,7 @@ namespace Core2D.Wpf.Controls.Custom
                 DeInitialize();
             }
 
-            var layer = DataContext as XLayer;
-            if (layer != null)
+            if (DataContext is XLayer layer)
             {
                 _layer = layer;
                 _layer.InvalidateLayer += Invalidate;
@@ -173,8 +172,7 @@ namespace Core2D.Wpf.Controls.Custom
 
         private void Render(DrawingContext drawingContext)
         {
-            var layer = DataContext as XLayer;
-            if (layer != null && layer.IsVisible)
+            if (DataContext is XLayer layer && layer.IsVisible)
             {
                 var renderer = LayerElement.GetRenderer(this);
                 if (renderer != null)

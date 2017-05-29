@@ -835,9 +835,8 @@ namespace Core2D.Editor
             }
             else if (shape is XGroup)
             {
-                var group = shape as XGroup;
 
-                if (group != null)
+                if (shape is XGroup group)
                 {
                     if (group.Shapes != null)
                     {
@@ -1030,9 +1029,8 @@ namespace Core2D.Editor
             }
             else if (shape is XGroup)
             {
-                var group = shape as XGroup;
 
-                if (group != null)
+                if (shape is XGroup group)
                 {
                     if (group.Shapes != null)
                     {

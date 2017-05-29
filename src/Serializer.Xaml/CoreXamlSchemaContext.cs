@@ -20,9 +20,7 @@ namespace Serializer.Xaml
 
         public override XamlType GetXamlType(Type type)
         {
-            XamlType xamlType;
-
-            if (!_typeCache.TryGetValue(type, out xamlType))
+            if (!_typeCache.TryGetValue(type, out XamlType xamlType))
             {
                 xamlType = new CoreXamlType(type, this);
                 _typeCache.Add(type, xamlType);

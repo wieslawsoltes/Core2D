@@ -1513,8 +1513,7 @@ namespace Core2D.Editor
         {
             if (Project != null && library != null)
             {
-                var group = Renderers?[0]?.State?.SelectedShape as XGroup;
-                if (group != null)
+                if (Renderers?[0]?.State?.SelectedShape is XGroup group)
                 {
                     var clone = CloneShape(group);
                     if (clone != null)
@@ -2583,8 +2582,7 @@ namespace Core2D.Editor
                     var target = Renderers[0].State.SelectedShape;
                     if (target is XPoint)
                     {
-                        var point = target as XPoint;
-                        if (point != null)
+                        if (target is XPoint point)
                         {
                             point.Shape = shape;
                         }
@@ -2596,8 +2594,7 @@ namespace Core2D.Editor
                     {
                         if (target is XPoint)
                         {
-                            var point = target as XPoint;
-                            if (point != null)
+                            if (target is XPoint point)
                             {
                                 point.Shape = shape;
                             }

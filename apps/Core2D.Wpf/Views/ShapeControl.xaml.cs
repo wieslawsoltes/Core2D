@@ -46,13 +46,11 @@ namespace Core2D.Wpf.Views
                     {
                         try
                         {
-                            var style = e.Data.GetData(typeof(ShapeStyle)) as ShapeStyle;
-                            if (style != null)
+                            if (e.Data.GetData(typeof(ShapeStyle)) is ShapeStyle style)
                             {
                                 if (content.Content != null)
                                 {
-                                    var shape = content.Content as BaseShape;
-                                    if (shape != null)
+                                    if (content.Content is BaseShape shape)
                                     {
                                         shape.Style = style;
                                     }

@@ -4,9 +4,10 @@ using System;
 using System.Globalization;
 #if NETSTANDARD1_3
 using System.ComponentModel;
+#else
+using Portable.Xaml.ComponentModel;
 #endif
 using Core2D.Shape;
-using Portable.Xaml.ComponentModel;
 
 namespace Serializer.Xaml.Converters
 {
@@ -36,12 +37,7 @@ namespace Serializer.Xaml.Converters
         /// <inheritdoc/>
         public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
         {
-            var state = value as ShapeState;
-            if (state != null)
-            {
-                return state.ToString();
-            }
-            throw new NotSupportedException();
+            return value is ShapeState state ? state.ToString() : throw new NotSupportedException();
         }
     }
 }

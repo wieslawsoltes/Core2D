@@ -46,13 +46,11 @@ namespace Core2D.Wpf.Controls.Data
                     {
                         try
                         {
-                            var record = e.Data.GetData(typeof(XRecord)) as XRecord;
-                            if (record != null)
+                            if (e.Data.GetData(typeof(XRecord)) is XRecord record)
                             {
                                 if (this.DataContext != null)
                                 {
-                                    var data = this.DataContext as XContext;
-                                    if (data != null)
+                                    if (this.DataContext is XContext data)
                                     {
                                         data.Record = record;
                                     }

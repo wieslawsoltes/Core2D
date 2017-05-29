@@ -30,8 +30,7 @@ namespace Core2D.Wpf.Controls.Custom
             if (parentObject == null)
                 return null;
 
-            P parent = parentObject as P;
-            if (parent != null)
+            if (parentObject is P parent)
                 return parent;
 
             return FindVisualParent<P>(parentObject);
