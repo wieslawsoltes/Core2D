@@ -277,5 +277,107 @@ namespace Core2D.Project
 
             return g;
         }
+
+        /// <summary>
+        /// Check whether the <see cref="SnapToGrid"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeSnapToGrid() => _snapToGrid != default(bool);
+
+        /// <summary>
+        /// Check whether the <see cref="SnapX"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeSnapX() => _snapX != default(double);
+
+        /// <summary>
+        /// Check whether the <see cref="SnapY"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeSnapY() => _snapY != default(double);
+
+        /// <summary>
+        /// Check whether the <see cref="HitThreshold"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeHitThreshold() => _hitThreshold != default(double);
+
+        /// <summary>
+        /// Check whether the <see cref="MoveMode"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeMoveMode() => _moveMode != default(XMoveMode);
+
+        /// <summary>
+        /// Check whether the <see cref="DefaultIsStroked"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeDefaultIsStroked() => _defaultIsStroked != default(bool);
+
+        /// <summary>
+        /// Check whether the <see cref="DefaultIsFilled"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeDefaultIsFilled() => _defaultIsFilled != default(bool);
+
+        /// <summary>
+        /// Check whether the <see cref="DefaultIsClosed"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeDefaultIsClosed() => _defaultIsClosed != default(bool);
+
+        /// <summary>
+        /// Check whether the <see cref="DefaultIsSmoothJoin"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeDefaultIsSmoothJoin() => _defaultIsSmoothJoin != default(bool);
+
+        /// <summary>
+        /// Check whether the <see cref="DefaultFillRule"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeDefaultFillRule() => _defaultFillRule != default(XFillRule);
+
+        /// <summary>
+        /// Check whether the <see cref="TryToConnect"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeTryToConnect() => _tryToConnect != default(bool);
+
+        /// <summary>
+        /// Check whether the <see cref="PointShape"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializePointShape() => _pointShape != null;
+
+        /// <summary>
+        /// Check whether the <see cref="PointStyle"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializePointStyle() => _pointStyle != null;
+
+        /// <summary>
+        /// Check whether the <see cref="Options"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeOptions() => _options != null;
+
+        /// <summary>
+        /// Check whether the <see cref="SelectionStyle"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeSelectionStyle() => _selectionStyle != null;
+
+        /// <summary>
+        /// Check whether the <see cref="HelperStyle"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeHelperStyle() => _helperStyle != null;
+
+        /// <summary>
+        /// Check whether the <see cref="CloneStyle"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeCloneStyle() => _cloneStyle != default(bool);
     }
 }
