@@ -2288,8 +2288,7 @@ namespace Core2D.Editor
 
                     if (!string.IsNullOrWhiteSpace(shape.Style.Name))
                     {
-                        ShapeStyle style;
-                        if (styles.TryGetValue(shape.Style.Name, out style))
+                        if (styles.TryGetValue(shape.Style.Name, out ShapeStyle style))
                         {
                             // Use existing style.
                             shape.Style = style;
@@ -2346,8 +2345,7 @@ namespace Core2D.Editor
                     if (shape?.Data?.Record == null)
                         continue;
 
-                    XRecord record;
-                    if (records.TryGetValue(shape.Data.Record.Id, out record))
+                    if (records.TryGetValue(shape.Data.Record.Id, out XRecord record))
                     {
                         // Use existing record.
                         shape.Data.Record = record;

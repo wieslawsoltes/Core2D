@@ -50,8 +50,7 @@ namespace Core2D.Avalonia.Converters
                 return AvaloniaProperty.UnsetValue;
             }
 
-            byte result;
-            if (byte.TryParse((string)value, out result))
+            if (byte.TryParse((string)value, out byte result))
             {
                 return result;
             }

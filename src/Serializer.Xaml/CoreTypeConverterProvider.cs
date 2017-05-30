@@ -21,8 +21,7 @@ namespace Serializer.Xaml
 
         public static Type Find(Type type)
         {
-            Type result;
-            _registered.TryGetValue(type, out result);
+            _registered.TryGetValue(type, out Type result);
             return result;
         }
     }

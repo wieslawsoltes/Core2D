@@ -411,9 +411,7 @@ namespace Renderer.SkiaSharp
 
             using (SKPaint strokeLine = ToSKPaintPen(line.Style, _scaleToPage, _sourceDpi, _targetDpi))
             {
-                SKPoint pt1, pt2;
-
-                DrawLineArrowsInternal(canvas, line, dx, dy, out pt1, out pt2);
+                DrawLineArrowsInternal(canvas, line, dx, dy, out SKPoint pt1, out SKPoint pt2);
 
                 if (line.Style.LineStyle.IsCurved)
                 {

@@ -45,8 +45,7 @@ namespace Core2D.Project
         /// <inheritdoc/>
         public byte[] GetImage(string key)
         {
-            byte[] bytes;
-            if (_images.TryGetValue(key, out bytes))
+            if (_images.TryGetValue(key, out byte[] bytes))
                 return bytes;
             else
                 return null;

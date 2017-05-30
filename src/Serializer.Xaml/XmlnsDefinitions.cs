@@ -2,8 +2,6 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Portable.Xaml.Markup;
 using Serializer.Xaml;
-using System.Reflection;
-using System.Resources;
 
 [assembly: XmlnsDefinition(CoreXamlSchemaContext.CoreNamespace, "Core2D", AssemblyName = "Core2D")]
 [assembly: XmlnsDefinition(CoreXamlSchemaContext.CoreNamespace, "Core2D.Collections", AssemblyName = "Core2D")]

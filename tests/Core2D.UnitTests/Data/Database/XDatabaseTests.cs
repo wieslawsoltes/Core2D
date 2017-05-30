@@ -119,8 +119,7 @@ namespace Core2D.UnitTests
 
             var source = XDatabase.FromFields("Source", sourceFields, "Id");
 
-            ImmutableArray<XRecord>.Builder target;
-            bool isDirty = XDatabase.Update(destination, source, out target);
+            bool isDirty = XDatabase.Update(destination, source, out ImmutableArray<XRecord>.Builder target);
 
             Assert.True(isDirty);
             Assert.NotNull(target);

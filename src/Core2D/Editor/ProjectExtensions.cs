@@ -495,8 +495,7 @@ namespace Core2D.Editor
         {
             if (destination != null && source != null)
             {
-                ImmutableArray<XRecord>.Builder records;
-                bool isDirty = XDatabase.Update(destination, source, out records);
+                bool isDirty = XDatabase.Update(destination, source, out ImmutableArray<XRecord>.Builder records);
 
                 if (isDirty && records != null)
                 {

@@ -208,8 +208,7 @@ namespace Core2D.Shapes
                     // Try to bind to internal Data.Record or external (r) data record using Text property as Column.Name name.
                     if (record != null)
                     {
-                        string value;
-                        bool success = TryToBind(record, bidning, out value);
+                        bool success = TryToBind(record, bidning, out string value);
                         if (success)
                         {
                             return value;
@@ -219,8 +218,7 @@ namespace Core2D.Shapes
                     // Try to bind to external Properties database (e.g. Container.Data.Properties) using Text property as Property.Name name.
                     if (db != null)
                     {
-                        string value;
-                        bool success = TryToBind(db, bidning, out value);
+                        bool success = TryToBind(db, bidning, out string value);
                         if (success)
                         {
                             return value;

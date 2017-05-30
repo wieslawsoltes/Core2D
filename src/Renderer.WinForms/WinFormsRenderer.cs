@@ -352,9 +352,7 @@ namespace Renderer.WinForms
             var _gfx = dc as Graphics;
 
             Pen strokeLine = ToPen(line.Style, _scaleToPage);
-            PointF pt1, pt2;
-
-            DrawLineArrowsInternal(line, dx, dy, _gfx, out pt1, out pt2);
+            DrawLineArrowsInternal(line, dx, dy, _gfx, out PointF pt1, out PointF pt2);
 
             if (line.Style.LineStyle.IsCurved)
             {

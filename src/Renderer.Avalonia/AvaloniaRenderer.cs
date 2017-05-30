@@ -365,9 +365,7 @@ namespace Renderer.Avalonia
             var _dc = dc as AM.DrawingContext;
 
             AM.Pen strokeLine = ToPen(line.Style, _scaleToPage);
-            A.Point pt1, pt2;
-
-            DrawLineArrowsInternal(_dc, line, dx, dy, out pt1, out pt2);
+            DrawLineArrowsInternal(_dc, line, dx, dy, out A.Point pt1, out A.Point pt2);
 
             if (line.Style.LineStyle.IsCurved)
             {

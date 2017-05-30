@@ -490,8 +490,7 @@ namespace Renderer.Wpf
                 _styleCache.Set(style, Tuple.Create(fillLine, strokeLine));
             }
 
-            Point pt1, pt2;
-            DrawLineArrowsInternal(_dc, line, style, halfStartArrow, halfEndArrow, thicknessStartArrow, thicknessEndArrow, dx, dy, out pt1, out pt2);
+            DrawLineArrowsInternal(_dc, line, style, halfStartArrow, halfEndArrow, thicknessStartArrow, thicknessEndArrow, dx, dy, out Point pt1, out Point pt2);
 
             if (line.Style.LineStyle.IsCurved)
             {

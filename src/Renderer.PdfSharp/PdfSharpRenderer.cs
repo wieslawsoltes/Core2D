@@ -307,9 +307,7 @@ namespace Renderer.PdfSharp
             var _gfx = dc as XGraphics;
 
             XPen strokeLine = ToXPen(line.Style, _scaleToPage, _sourceDpi, _targetDpi);
-            XPoint pt1, pt2;
-
-            DrawLineArrowsInternal(_gfx, line, dx, dy, out pt1, out pt2);
+            DrawLineArrowsInternal(_gfx, line, dx, dy, out XPoint pt1, out XPoint pt2);
 
             if (line.Style.LineStyle.IsCurved)
             {

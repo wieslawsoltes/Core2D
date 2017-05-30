@@ -953,9 +953,7 @@ namespace Renderer.Dxf
             var dxf = dc as DxfDocument;
             var style = path.Style;
 
-            IList<HatchBoundaryPath> bounds;
-            ICollection<EntityObject> entities;
-            CreateHatchBoundsAndEntitiess(path.Geometry, dx, dy, out bounds, out entities);
+            CreateHatchBoundsAndEntitiess(path.Geometry, dx, dy, out IList<HatchBoundaryPath> bounds, out ICollection<EntityObject> entities);
             if (entities == null || bounds == null)
                 return;
 

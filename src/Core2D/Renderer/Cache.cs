@@ -80,8 +80,7 @@ namespace Core2D.Renderer
         /// <returns>The value from storage.</returns>
         public TValue Get(TKey key)
         {
-            TValue data;
-            if (_storage.TryGetValue(key, out data))
+            if (_storage.TryGetValue(key, out TValue data))
             {
                 return data;
             }
