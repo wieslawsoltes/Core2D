@@ -7,6 +7,7 @@ using Serializer.Xaml;
 [assembly: XmlnsDefinition(CoreXamlSchemaContext.CoreNamespace, "Core2D.Collections", AssemblyName = "Core2D")]
 [assembly: XmlnsDefinition(CoreXamlSchemaContext.CoreNamespace, "Core2D.Data", AssemblyName = "Core2D")]
 [assembly: XmlnsDefinition(CoreXamlSchemaContext.CoreNamespace, "Core2D.Data.Database", AssemblyName = "Core2D")]
+[assembly: XmlnsDefinition(CoreXamlSchemaContext.CoreNamespace, "Core2D.History", AssemblyName = "Core2D")]
 [assembly: XmlnsDefinition(CoreXamlSchemaContext.CoreNamespace, "Core2D.Interfaces", AssemblyName = "Core2D")]
 [assembly: XmlnsDefinition(CoreXamlSchemaContext.CoreNamespace, "Core2D.Path", AssemblyName = "Core2D")]
 [assembly: XmlnsDefinition(CoreXamlSchemaContext.CoreNamespace, "Core2D.Path.Segments", AssemblyName = "Core2D")]
@@ -17,6 +18,18 @@ using Serializer.Xaml;
 [assembly: XmlnsDefinition(CoreXamlSchemaContext.CoreNamespace, "Core2D.Style", AssemblyName = "Core2D")]
 
 [assembly: XmlnsPrefix(CoreXamlSchemaContext.CoreNamespace, "c")]
+
+[assembly: XmlnsDefinition(CoreXamlSchemaContext.EditorNamespace, "Core2D.Editor", AssemblyName = "Core2D")]
+[assembly: XmlnsDefinition(CoreXamlSchemaContext.EditorNamespace, "Core2D.Editor.Bounds", AssemblyName = "Core2D")]
+[assembly: XmlnsDefinition(CoreXamlSchemaContext.EditorNamespace, "Core2D.Editor.Designer", AssemblyName = "Core2D")]
+[assembly: XmlnsDefinition(CoreXamlSchemaContext.EditorNamespace, "Core2D.Editor.Factories", AssemblyName = "Core2D")]
+[assembly: XmlnsDefinition(CoreXamlSchemaContext.EditorNamespace, "Core2D.Editor.Input", AssemblyName = "Core2D")]
+[assembly: XmlnsDefinition(CoreXamlSchemaContext.EditorNamespace, "Core2D.Editor.Interfaces", AssemblyName = "Core2D")]
+[assembly: XmlnsDefinition(CoreXamlSchemaContext.EditorNamespace, "Core2D.Editor.Tools", AssemblyName = "Core2D")]
+[assembly: XmlnsDefinition(CoreXamlSchemaContext.EditorNamespace, "Core2D.Editor.Views", AssemblyName = "Core2D")]
+[assembly: XmlnsDefinition(CoreXamlSchemaContext.EditorNamespace, "Core2D.Editor.Recent", AssemblyName = "Core2D")]
+
+[assembly: XmlnsPrefix(CoreXamlSchemaContext.EditorNamespace, "e")]
 
 [assembly: XmlnsDefinition(CoreXamlSchemaContext.SpatialNamespace, "Spatial", AssemblyName = "Math.Spatial")]
 [assembly: XmlnsDefinition(CoreXamlSchemaContext.SpatialNamespace, "Spatial.Arc", AssemblyName = "Math.Spatial")]
