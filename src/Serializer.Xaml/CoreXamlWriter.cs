@@ -10,9 +10,11 @@ namespace Serializer.Xaml
     {
         internal static readonly XamlSchemaContext context = new CoreXamlSchemaContext();
 
+        internal static readonly XamlObjectReaderSettings settings = new XamlObjectReaderSettings();
+
         private static void Save(XamlXmlWriter writer, object instance)
         {
-            using (var reader = new XamlObjectReader(instance, context, new XamlObjectReaderSettings()))
+            using (var reader = new XamlObjectReader(instance, context, settings))
             {
                 XamlServices.Transform(reader, writer);
             }
