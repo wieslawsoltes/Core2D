@@ -120,5 +120,29 @@ namespace Core2D.Data.Database
                 Owner = owner
             };
         }
+
+        /// <summary>
+        /// Check whether the <see cref="Id"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeId() => _id != Guid.Empty;
+
+        /// <summary>
+        /// Check whether the <see cref="Columns"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeColumns() => _columns.IsEmpty == false;
+
+        /// <summary>
+        /// Check whether the <see cref="Values"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeValues() => _values.IsEmpty == false;
+
+        /// <summary>
+        /// Check whether the <see cref="Owner"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeOwner() => _owner != null;
     }
 }

@@ -124,5 +124,29 @@ namespace Core2D.Path
                 + (Segments != null ? ToString(Segments) : "")
                 + (IsClosed ? "z" : "");
         }
+
+        /// <summary>
+        /// Check whether the <see cref="StartPoint"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeStartPoint() => _startPoint != null;
+
+        /// <summary>
+        /// Check whether the <see cref="Segments"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeSegments() => _segments.IsEmpty == false;
+
+        /// <summary>
+        /// Check whether the <see cref="IsFilled"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeIsFilled() => _isFilled != default(bool);
+
+        /// <summary>
+        /// Check whether the <see cref="IsClosed"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeIsClosed() => _isClosed != default(bool);
     }
 }

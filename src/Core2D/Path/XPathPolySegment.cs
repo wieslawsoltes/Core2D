@@ -56,5 +56,11 @@ namespace Core2D.Path
             }
             return sb.ToString();
         }
+
+        /// <summary>
+        /// Check whether the <see cref="Points"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializePoints() => _points.IsEmpty == false;
     }
 }

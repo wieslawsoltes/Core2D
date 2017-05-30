@@ -102,5 +102,29 @@ namespace Core2D.Project
                 IsVisible = isVisible
             };
         }
+
+        /// <summary>
+        /// Check whether the <see cref="Name"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeName() => !String.IsNullOrWhiteSpace(_name);
+
+        /// <summary>
+        /// Check whether the <see cref="Owner"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeOwner() => _owner != null;
+
+        /// <summary>
+        /// Check whether the <see cref="IsVisible"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeIsVisible() => _isVisible != default(bool);
+
+        /// <summary>
+        /// Check whether the <see cref="Shapes"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeShapes() => _shapes.IsEmpty == false;
     }
 }

@@ -154,5 +154,35 @@ namespace Core2D.Style
                 RadiusY = _radiusY
             };
         }
+
+        /// <summary>
+        /// Check whether the <see cref="ArrowType"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeArrowType() => _arrowType != default(ArrowType);
+
+        /// <summary>
+        /// Check whether the <see cref="IsStroked"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeIsStroked() => _isStroked != default(bool);
+
+        /// <summary>
+        /// Check whether the <see cref="IsFilled"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeIsFilled() => _isFilled != default(bool);
+
+        /// <summary>
+        /// Check whether the <see cref="RadiusX"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeRadiusX() => _radiusX != default(double);
+
+        /// <summary>
+        /// Check whether the <see cref="RadiusY"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeRadiusY() => _radiusY != default(double);
     }
 }

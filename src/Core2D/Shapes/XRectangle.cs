@@ -162,5 +162,35 @@ namespace Core2D.Shapes
                 CellHeight = 30.0
             };
         }
+
+        /// <summary>
+        /// Check whether the <see cref="IsGrid"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeIsGrid() => _isGrid != default(bool);
+
+        /// <summary>
+        /// Check whether the <see cref="OffsetX"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeOffsetX() => _offsetX != default(double);
+
+        /// <summary>
+        /// Check whether the <see cref="OffsetY"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeOffsetY() => _offsetY != default(double);
+
+        /// <summary>
+        /// Check whether the <see cref="CellWidth"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeCellWidth() => _cellWidth != default(double);
+
+        /// <summary>
+        /// Check whether the <see cref="CellHeight"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeCellHeight() => _cellHeight != default(double);
     }
 }

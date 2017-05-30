@@ -37,5 +37,17 @@ namespace Core2D.Path
         /// </summary>
         /// <returns>All points in the segment.</returns>
         public abstract IEnumerable<XPoint> GetPoints();
+
+        /// <summary>
+        /// Check whether the <see cref="IsStroked"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeIsStroked() => _isStroked != default(bool);
+
+        /// <summary>
+        /// Check whether the <see cref="IsSmoothJoin"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeIsSmoothJoin() => _isSmoothJoin != default(bool);
     }
 }

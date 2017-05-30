@@ -311,5 +311,23 @@ namespace Core2D.Shapes
                 Text = text
             };
         }
+
+        /// <summary>
+        /// Check whether the <see cref="TopLeft"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeTopLeft() => _topLeft != null;
+
+        /// <summary>
+        /// Check whether the <see cref="BottomRight"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeBottomRight() => _bottomRight != null;
+
+        /// <summary>
+        /// Check whether the <see cref="Text"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeText() => !String.IsNullOrWhiteSpace(_text);
     }
 }

@@ -46,5 +46,11 @@ namespace Core2D.Path.Segments
 
         /// <inheritdoc/>
         public override string ToString() => "L" + Point.ToString();
+
+        /// <summary>
+        /// Check whether the <see cref="Point"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializePoint() => _point != null;
     }
 }

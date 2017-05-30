@@ -162,5 +162,65 @@ namespace Core2D.Shape
                 Flags = _flags
             };
         }
+
+        /// <summary>
+        /// Check whether the <see cref="Flags"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeFlags() => _flags != default(ShapeStateFlags);
+
+        /// <summary>
+        /// The <see cref="Default"/> property is not serialized.
+        /// </summary>
+        /// <returns>Returns always false.</returns>
+        public bool ShouldSerializeDefault() => false;
+
+        /// <summary>
+        /// The <see cref="Visible"/> property is not serialized.
+        /// </summary>
+        /// <returns>Returns always false.</returns>
+        public bool ShouldSerializeVisible() => false;
+
+        /// <summary>
+        /// The <see cref="Printable"/> property is not serialized.
+        /// </summary>
+        /// <returns>Returns always false.</returns>
+        public bool ShouldSerializePrintable() => false;
+
+        /// <summary>
+        /// The <see cref="Locked"/> property is not serialized.
+        /// </summary>
+        /// <returns>Returns always false.</returns>
+        public bool ShouldSerializeLocked() => false;
+
+        /// <summary>
+        /// The <see cref="Connector"/> property is not serialized.
+        /// </summary>
+        /// <returns>Returns always false.</returns>
+        public bool ShouldSerializeConnector() => false;
+
+        /// <summary>
+        /// The <see cref="None"/> property is not serialized.
+        /// </summary>
+        /// <returns>Returns always false.</returns>
+        public bool ShouldSerializeNone() => false;
+
+        /// <summary>
+        /// The <see cref="Standalone"/> property is not serialized.
+        /// </summary>
+        /// <returns>Returns always false.</returns>
+        public bool ShouldSerializeStandalone() => false;
+
+        /// <summary>
+        /// The <see cref="Input"/> property is not serialized.
+        /// </summary>
+        /// <returns>Returns always false.</returns>
+        public bool ShouldSerializeInput() => false;
+
+        /// <summary>
+        /// The <see cref="Output"/> property is not serialized.
+        /// </summary>
+        /// <returns>Returns always false.</returns>
+        public bool ShouldSerializeOutput() => false;
     }
 }
