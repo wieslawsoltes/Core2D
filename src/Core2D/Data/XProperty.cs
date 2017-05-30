@@ -60,5 +60,23 @@ namespace Core2D.Data
 
         /// <inheritdoc/>
         public override string ToString() => _value.ToString();
+
+        /// <summary>
+        /// Check whether the <see cref="Name"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeName() => _name != null;
+
+        /// <summary>
+        /// Check whether the <see cref="Value"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeValue() => _value != null;
+
+        /// <summary>
+        /// Check whether the <see cref="Owner"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeOwner() => _owner != null;
     }
 }
