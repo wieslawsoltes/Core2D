@@ -304,7 +304,7 @@ namespace Core2D.Editor.Designer
             Group = XGroup.Create(Constants.DefaulGroupName);
             Image = XImage.Create(0, 0, Style, null, "key");
             Line = XLine.Create(0, 0, Style, null);
-            Path = XPath.Create("Path", Style, null);
+            Path = XPath.Create(Style, null);
             Point = XPoint.Create();
             QuadraticBezier = XQuadraticBezier.Create(0, 0, Style, null);
             Rectangle = XRectangle.Create(0, 0, Style, null);

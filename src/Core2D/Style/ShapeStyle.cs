@@ -81,12 +81,12 @@ namespace Core2D.Style
                 LineCap = lineCap,
                 Dashes = dashes,
                 DashOffset = dashOffset,
-                LineStyle = lineStyle ?? LineStyle.Create("Line"),
-                TextStyle = textStyle ?? TextStyle.Create("Text")
+                LineStyle = lineStyle ?? LineStyle.Create(),
+                TextStyle = textStyle ?? TextStyle.Create()
             };
 
-            style.StartArrowStyle = startArrowStyle ?? ArrowStyle.Create("Start", style);
-            style.EndArrowStyle = endArrowStyle ?? ArrowStyle.Create("End", style);
+            style.StartArrowStyle = startArrowStyle ?? ArrowStyle.Create(style);
+            style.EndArrowStyle = endArrowStyle ?? ArrowStyle.Create(style);
 
             return style;
         }
