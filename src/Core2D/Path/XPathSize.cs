@@ -46,5 +46,17 @@ namespace Core2D.Path
 
         /// <inheritdoc/>
         public override string ToString() => $"{Width},{Height}";
+
+        /// <summary>
+        /// Check whether the <see cref="Width"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeWidth() => _width != default(double);
+
+        /// <summary>
+        /// Check whether the <see cref="Height"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeHeight() => _height != default(double);
     }
 }
