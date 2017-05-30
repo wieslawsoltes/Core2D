@@ -26,5 +26,11 @@ namespace Core2D
             get => _resources;
             set => Update(ref _resources, value);
         }
+
+        /// <summary>
+        /// Check whether the <see cref="Resources"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeResources() => _resources.IsEmpty == false;
     }
 }
