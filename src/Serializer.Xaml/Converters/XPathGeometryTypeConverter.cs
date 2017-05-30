@@ -26,7 +26,7 @@ namespace Serializer.Xaml.Converters
         /// <inheritdoc/>
         public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
         {
-            return destinationType == typeof(string);
+            return false; // destinationType == typeof(string);
         }
 
         /// <inheritdoc/>
