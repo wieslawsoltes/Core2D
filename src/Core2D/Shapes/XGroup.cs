@@ -22,38 +22,7 @@ namespace Core2D.Shapes
         /// <summary>
         /// Gets all properties from <see cref="Shapes"/> collection.
         /// </summary>
-        public ImmutableArray<XProperty> ShapesProperties
-        {
-            get
-            {
-                if (_shapesProperties == null)
-                {
-                    if (_shapes != null)
-                    {
-                        var builder = ImmutableArray.CreateBuilder<XProperty>();
-
-                        foreach (var shape in _shapes)
-                        {
-                            foreach (var property in shape.Data.Properties)
-                            {
-                                builder.Add(property);
-                            }
-                        }
-
-                        foreach (var connector in _connectors)
-                        {
-                            foreach (var property in connector.Data.Properties)
-                            {
-                                builder.Add(property);
-                            }
-                        }
-
-                        _shapesProperties = builder.ToImmutable();
-                    }
-                }
-                return _shapesProperties;
-            }
-        }
+        public ImmutableArray<XProperty> ShapesProperties => GetShapeProperties();
 
         /// <summary>
         /// Gets or sets shapes collection.
@@ -63,7 +32,7 @@ namespace Core2D.Shapes
             get => _shapes;
             set
             {
-                if(Update(ref _shapes, value))
+                if (Update(ref _shapes, value))
                 {
                     _shapesProperties = default(ImmutableArray<XProperty>);
                 }
@@ -93,6 +62,36 @@ namespace Core2D.Shapes
         {
             _shapes = ImmutableArray.Create<BaseShape>();
             _connectors = ImmutableArray.Create<XPoint>();
+        }
+
+        private ImmutableArray<XProperty> GetShapeProperties()
+        {
+            if (_shapesProperties == null)
+            {
+                if (_shapes != null)
+                {
+                    var builder = ImmutableArray.CreateBuilder<XProperty>();
+
+                    foreach (var shape in _shapes)
+                    {
+                        foreach (var property in shape.Data.Properties)
+                        {
+                            builder.Add(property);
+                        }
+                    }
+
+                    foreach (var connector in _connectors)
+                    {
+                        foreach (var property in connector.Data.Properties)
+                        {
+                            builder.Add(property);
+                        }
+                    }
+
+                    _shapesProperties = builder.ToImmutable();
+                }
+            }
+            return _shapesProperties;
         }
 
         /// <inheritdoc/>
