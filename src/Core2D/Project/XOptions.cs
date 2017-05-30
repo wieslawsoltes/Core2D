@@ -357,12 +357,6 @@ namespace Core2D.Project
         public bool ShouldSerializePointStyle() => _pointStyle != null;
 
         /// <summary>
-        /// Check whether the <see cref="Options"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeOptions() => _options != null;
-
-        /// <summary>
         /// Check whether the <see cref="SelectionStyle"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
