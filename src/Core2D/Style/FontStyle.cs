@@ -121,5 +121,41 @@ namespace Core2D.Style
                 Flags = _flags
             };
         }
+
+        /// <summary>
+        /// Check whether the <see cref="Flags"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeFlags() => _flags != default(FontStyleFlags);
+
+        /// <summary>
+        /// The <see cref="Regular"/> property is not serialized.
+        /// </summary>
+        /// <returns>Returns always false.</returns>
+        public bool ShouldSerializeRegular() => false;
+
+        /// <summary>
+        /// The <see cref="Bold"/> property is not serialized.
+        /// </summary>
+        /// <returns>Returns always false.</returns>
+        public bool ShouldSerializeBold() => false;
+
+        /// <summary>
+        /// The <see cref="Italic"/> property is not serialized.
+        /// </summary>
+        /// <returns>Returns always false.</returns>
+        public bool ShouldSerializeItalic() => false;
+
+        /// <summary>
+        /// The <see cref="Underline"/> property is not serialized.
+        /// </summary>
+        /// <returns>Returns always false.</returns>
+        public bool ShouldSerializeUnderline() => false;
+
+        /// <summary>
+        /// The <see cref="Strikeout"/> property is not serialized.
+        /// </summary>
+        /// <returns>Returns always false.</returns>
+        public bool ShouldSerializeStrikeout() => false;
     }
 }

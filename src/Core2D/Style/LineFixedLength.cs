@@ -171,5 +171,65 @@ namespace Core2D.Style
                 EndTrigger = _endTrigger.Clone()
             };
         }
+
+        /// <summary>
+        /// Check whether the <see cref="Flags"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeFlags() => _flags != default(LineFixedLengthFlags);
+
+        /// <summary>
+        /// The <see cref="Disabled"/> property is not serialized.
+        /// </summary>
+        /// <returns>Returns always false.</returns>
+        public bool ShouldSerializeDisabled() => false;
+
+        /// <summary>
+        /// The <see cref="Start"/> property is not serialized.
+        /// </summary>
+        /// <returns>Returns always false.</returns>
+        public bool ShouldSerializeStart() => false;
+
+        /// <summary>
+        /// The <see cref="End"/> property is not serialized.
+        /// </summary>
+        /// <returns>Returns always false.</returns>
+        public bool ShouldSerializeEnd() => false;
+
+        /// <summary>
+        /// The <see cref="Vertical"/> property is not serialized.
+        /// </summary>
+        /// <returns>Returns always false.</returns>
+        public bool ShouldSerializeVertical() => false;
+
+        /// <summary>
+        /// The <see cref="Horizontal"/> property is not serialized.
+        /// </summary>
+        /// <returns>Returns always false.</returns>
+        public bool ShouldSerializeHorizontal() => false;
+
+        /// <summary>
+        /// The <see cref="All"/> property is not serialized.
+        /// </summary>
+        /// <returns>Returns always false.</returns>
+        public bool ShouldSerializeAll() => false;
+
+        /// <summary>
+        /// Check whether the <see cref="StartTrigger"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeStartTrigger() => _startTrigger != null;
+
+        /// <summary>
+        /// Check whether the <see cref="EndTrigger"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeEndTrigger() => _endTrigger != null;
+
+        /// <summary>
+        /// Check whether the <see cref="Length"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeLength() => _length != default(double);
     }
 }

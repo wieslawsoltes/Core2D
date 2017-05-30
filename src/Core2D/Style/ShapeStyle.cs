@@ -142,5 +142,29 @@ namespace Core2D.Style
                 EndArrowStyle = _endArrowStyle.Clone()
             };
         }
+
+        /// <summary>
+        /// Check whether the <see cref="LineStyle"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeLineStyle() => _lineStyle != null;
+
+        /// <summary>
+        /// Check whether the <see cref="StartArrowStyle"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeStartArrowStyle() => _startArrowStyle != null;
+
+        /// <summary>
+        /// Check whether the <see cref="EndArrowStyle"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeEndArrowStyle() => _endArrowStyle != null;
+
+        /// <summary>
+        /// Check whether the <see cref="TextStyle"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeTextStyle() => _textStyle != null;
     }
 }

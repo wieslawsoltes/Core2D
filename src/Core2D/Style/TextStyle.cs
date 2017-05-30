@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
 using Core2D.Attributes;
 
 namespace Core2D.Style
@@ -123,5 +124,47 @@ namespace Core2D.Style
                 TextVAlignment = _textVAlignment
             };
         }
+
+        /// <summary>
+        /// Check whether the <see cref="Name"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeName() => !String.IsNullOrWhiteSpace(_name);
+
+        /// <summary>
+        /// Check whether the <see cref="FontName"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeFontName() => !String.IsNullOrWhiteSpace(_fontName);
+
+        /// <summary>
+        /// Check whether the <see cref="FontFile"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeFontFile() => !String.IsNullOrWhiteSpace(_fontFile);
+
+        /// <summary>
+        /// Check whether the <see cref="FontSize"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeFontSize() => _fontSize != default(double);
+
+        /// <summary>
+        /// Check whether the <see cref="FontStyle"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeFontStyle() => _fontStyle != null;
+
+        /// <summary>
+        /// Check whether the <see cref="TextHAlignment"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeTextHAlignment() => _textHAlignment != default(TextHAlignment);
+
+        /// <summary>
+        /// Check whether the <see cref="TextVAlignment"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeTextVAlignment() => _textVAlignment != default(TextVAlignment);
     }
 }

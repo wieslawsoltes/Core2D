@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
 using Core2D.Attributes;
 
 namespace Core2D.Style
@@ -71,10 +72,10 @@ namespace Core2D.Style
         /// <param name="fixedLength">The line style fixed length.</param>
         /// <returns>The new instance of the <see cref="LineStyle"/> class.</returns>
         public static LineStyle Create(
-            string name = "", 
-            bool isCurved = false, 
-            double curvature = 50.0, 
-            CurveOrientation curveOrientation = CurveOrientation.Auto, 
+            string name = "",
+            bool isCurved = false,
+            double curvature = 50.0,
+            CurveOrientation curveOrientation = CurveOrientation.Auto,
             LineFixedLength fixedLength = null)
         {
             return new LineStyle()
@@ -102,5 +103,35 @@ namespace Core2D.Style
                 FixedLength = _fixedLength.Clone()
             };
         }
+
+        /// <summary>
+        /// Check whether the <see cref="Name"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeName() => !String.IsNullOrWhiteSpace(_name);
+
+        /// <summary>
+        /// Check whether the <see cref="IsCurved"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeIsCurved() => _isCurved != default(bool);
+
+        /// <summary>
+        /// Check whether the <see cref="Curvature"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeCurvature() => _curvature != default(double);
+
+        /// <summary>
+        /// Check whether the <see cref="CurveOrientation"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeCurveOrientation() => _curveOrientation != default(CurveOrientation);
+
+        /// <summary>
+        /// Check whether the <see cref="FixedLength"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeFixedLength() => _fixedLength != null;
     }
 }
