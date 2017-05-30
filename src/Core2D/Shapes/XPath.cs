@@ -126,6 +126,25 @@ namespace Core2D.Shapes
         /// <summary>
         /// Creates a new <see cref="XPath"/> instance.
         /// </summary>
+        /// <param name="style">The shape style.</param>
+        /// <param name="geometry">The path geometry.</param>
+        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
+        /// <param name="isFilled">The flag indicating whether shape is filled.</param>
+        /// <returns>The new instance of the <see cref="XPath"/> class.</returns>
+        public static XPath Create(ShapeStyle style, XPathGeometry geometry, bool isStroked = true, bool isFilled = true)
+        {
+            return new XPath()
+            {
+                Style = style,
+                IsStroked = isStroked,
+                IsFilled = isFilled,
+                Geometry = geometry
+            };
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="XPath"/> instance.
+        /// </summary>
         /// <param name="name">The shape name.</param>
         /// <param name="style">The shape style.</param>
         /// <param name="geometry">The path geometry.</param>

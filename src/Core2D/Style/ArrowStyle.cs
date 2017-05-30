@@ -111,6 +111,28 @@ namespace Core2D.Style
         /// <summary>
         /// Creates a new <see cref="ArrowStyle"/> instance.
         /// </summary>
+        /// <param name="source">The source style.</param>
+        /// <param name="arrowType">The arrow type.</param>
+        /// <param name="isStroked">The arrow shape stroke flag.</param>
+        /// <param name="isFilled">The arrow shape fill flag.</param>
+        /// <param name="radiusX">The arrow X axis radius.</param>
+        /// <param name="radiusY">The arrow Y axis radius.</param>
+        /// <returns>The new instance of the <see cref="ArrowStyle"/> class.</returns>
+        public static ArrowStyle Create(BaseStyle source, ArrowType arrowType = ArrowType.None, bool isStroked = true, bool isFilled = false, double radiusX = 5.0, double radiusY = 5.0)
+        {
+            return new ArrowStyle(source)
+            {
+                ArrowType = arrowType,
+                IsStroked = isStroked,
+                IsFilled = isFilled,
+                RadiusX = radiusX,
+                RadiusY = radiusY
+            };
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="ArrowStyle"/> instance.
+        /// </summary>
         /// <param name="name">The arrow style name.</param>
         /// <param name="source">The source style.</param>
         /// <param name="arrowType">The arrow type.</param>
