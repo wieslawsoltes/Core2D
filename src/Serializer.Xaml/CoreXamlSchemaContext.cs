@@ -11,6 +11,8 @@ namespace Serializer.Xaml
     {
         public const string CoreNamespace = "https://github.com/Core2D";
 
+        public const string EditorNamespace = "https://github.com/Core2D.Editor";
+
         public const string SpatialNamespace = "https://github.com/Math.Spatial";
 
         private readonly Dictionary<Type, XamlType> _typeCache = new Dictionary<Type, XamlType>();
