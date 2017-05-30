@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
 using System.Collections.Immutable;
 using Core2D.Attributes;
 
@@ -54,5 +55,23 @@ namespace Core2D.Project
         /// <param name="name">The document name.</param>
         /// <returns>The new instance of the <see cref="XDocument"/> class.</returns>
         public static XDocument Create(string name = "Document") => new XDocument() { Name = name };
+
+        /// <summary>
+        /// Check whether the <see cref="Name"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeName() => !String.IsNullOrWhiteSpace(_name);
+
+        /// <summary>
+        /// Check whether the <see cref="IsExpanded"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeIsExpanded() => _isExpanded != default(bool);
+
+        /// <summary>
+        /// Check whether the <see cref="Pages"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializePages() => _pages.IsEmpty == false;
     }
 }
