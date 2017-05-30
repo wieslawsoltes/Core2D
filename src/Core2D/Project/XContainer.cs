@@ -314,5 +314,77 @@ namespace Core2D.Project
 
             return template;
         }
+
+        /// <summary>
+        /// Check whether the <see cref="Name"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeName() => !String.IsNullOrWhiteSpace(_name);
+
+        /// <summary>
+        /// Check whether the <see cref="Width"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeWidth() => _width != default(double);
+
+        /// <summary>
+        /// Check whether the <see cref="Height"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeHeight() => _height != default(double);
+
+        /// <summary>
+        /// Check whether the <see cref="Background"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeBackground() => _background != null;
+
+        /// <summary>
+        /// Check whether the <see cref="Layers"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeLayers() => _layers.IsEmpty == false;
+
+        /// <summary>
+        /// Check whether the <see cref="CurrentLayer"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeCurrentLayer() => _currentLayer != null;
+
+        /// <summary>
+        /// Check whether the <see cref="WorkingLayer"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeWorkingLayer() => false;
+
+        /// <summary>
+        /// Check whether the <see cref="HelperLayer"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeHelperLayer() => false;
+
+        /// <summary>
+        /// Check whether the <see cref="CurrentShape"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeCurrentShape() => false;
+
+        /// <summary>
+        /// Check whether the <see cref="Template"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeTemplate() => _template != null;
+
+        /// <summary>
+        /// Check whether the <see cref="Data"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeData() => _data != null;
+
+        /// <summary>
+        /// Check whether the <see cref="IsExpanded"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeIsExpanded() => _isExpanded != default(bool);
     }
 }
