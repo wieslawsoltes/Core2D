@@ -88,5 +88,17 @@ namespace Core2D.Data
         /// <param name="record">The record instance.</param>
         /// <returns>The new instance of the <see cref="XContext"/> class.</returns>
         public static XContext Create(XRecord record) => new XContext() { Record = record };
+
+        /// <summary>
+        /// Check whether the <see cref="Properties"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeProperties() => _properties.IsEmpty == false;
+
+        /// <summary>
+        /// Check whether the <see cref="Record"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeRecord() => _record != null;
     }
 }
