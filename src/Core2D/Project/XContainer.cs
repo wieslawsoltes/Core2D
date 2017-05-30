@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
 using System.Collections.Immutable;
 using System.Linq;
 using Core2D.Attributes;
@@ -355,19 +356,19 @@ namespace Core2D.Project
         /// Check whether the <see cref="WorkingLayer"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeWorkingLayer() => false;
+        public bool ShouldSerializeWorkingLayer() => _workingLayer != null;
 
         /// <summary>
         /// Check whether the <see cref="HelperLayer"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeHelperLayer() => false;
+        public bool ShouldSerializeHelperLayer() => _helperLayer != null;
 
         /// <summary>
         /// Check whether the <see cref="CurrentShape"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeCurrentShape() => false;
+        public bool ShouldSerializeCurrentShape() => _currentShape != null;
 
         /// <summary>
         /// Check whether the <see cref="Template"/> property has changed from its default value.
