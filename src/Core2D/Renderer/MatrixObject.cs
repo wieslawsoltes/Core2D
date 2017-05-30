@@ -116,5 +116,41 @@ namespace Core2D.Renderer
         {
             return new MatrixObject(m11, m12, m21, m22, offsetX, offsetY);
         }
+
+        /// <summary>
+        /// Check whether the <see cref="M11"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeM11() => _m11 != default(double);
+
+        /// <summary>
+        /// Check whether the <see cref="M12"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeM12() => _m12 != default(double);
+
+        /// <summary>
+        /// Check whether the <see cref="M21"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeM21() => _m21 != default(double);
+
+        /// <summary>
+        /// Check whether the <see cref="M22"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeM22() => _m22 != default(double);
+
+        /// <summary>
+        /// Check whether the <see cref="OffsetX"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeOffsetX() => _offsetX != default(double);
+
+        /// <summary>
+        /// Check whether the <see cref="OffsetY"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeOffsetY() => _offsetY != default(double);
     }
 }
