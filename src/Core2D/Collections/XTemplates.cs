@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
 using System.Collections.Immutable;
 using Core2D.Attributes;
 using Core2D.Project;
@@ -30,5 +31,17 @@ namespace Core2D.Collections
         {
             Children = ImmutableArray.Create<XContainer>();
         }
+
+        /// <summary>
+        /// Check whether the <see cref="Name"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeName() => !String.IsNullOrWhiteSpace(Name);
+
+        /// <summary>
+        /// Check whether the <see cref="Children"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeChildren() => Children.IsEmpty == false;
     }
 }
