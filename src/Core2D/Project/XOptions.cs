@@ -228,7 +228,9 @@ namespace Core2D.Project
         /// <returns>The new instance of the <see cref="BaseShape"/> class.</returns>
         public static BaseShape EllipsePointShape(ShapeStyle pss)
         {
-            return XEllipse.Create(-4, -4, 4, 4, pss, null, true, false);
+            var ellipse = XEllipse.Create(-4, -4, 4, 4, pss, null, true, false);
+            ellipse.Name = "EllipsePoint";
+            return ellipse;
         }
 
         /// <summary>
@@ -238,7 +240,9 @@ namespace Core2D.Project
         /// <returns>The new instance of the <see cref="BaseShape"/> class.</returns>
         public static BaseShape FilledEllipsePointShape(ShapeStyle pss)
         {
-            return XEllipse.Create(-3, -3, 3, 3, pss, null, true, true);
+            var ellipse = XEllipse.Create(-3, -3, 3, 3, pss, null, true, true);
+            ellipse.Name = "FilledEllipsePoint";
+            return ellipse;
         }
 
         /// <summary>
@@ -248,7 +252,9 @@ namespace Core2D.Project
         /// <returns>The new instance of the <see cref="BaseShape"/> class.</returns>
         public static BaseShape RectanglePointShape(ShapeStyle pss)
         {
-            return XRectangle.Create(-4, -4, 4, 4, pss, null, true, false);
+            var rectangle = XRectangle.Create(-4, -4, 4, 4, pss, null, true, false);
+            rectangle.Name = "RectanglePoint";
+            return rectangle;
         }
 
         /// <summary>
@@ -258,7 +264,9 @@ namespace Core2D.Project
         /// <returns>The new instance of the <see cref="BaseShape"/> class.</returns>
         public static BaseShape FilledRectanglePointShape(ShapeStyle pss)
         {
-            return XRectangle.Create(-3, -3, 3, 3, pss, null, true, true);
+            var rectangle = XRectangle.Create(-3, -3, 3, 3, pss, null, true, true);
+            rectangle.Name = "FilledRectanglePoint";
+            return rectangle;
         }
 
         /// <summary>
@@ -268,14 +276,12 @@ namespace Core2D.Project
         /// <returns>The new instance of the <see cref="BaseShape"/> class.</returns>
         public static BaseShape CrossPointShape(ShapeStyle pss)
         {
-            var g = XGroup.Create("PointShape");
-
-            var builder = g.Shapes.ToBuilder();
+            var group = XGroup.Create("CrossPoint");
+            var builder = group.Shapes.ToBuilder();
             builder.Add(XLine.Create(-4, 0, 4, 0, pss, null));
             builder.Add(XLine.Create(0, -4, 0, 4, pss, null));
-            g.Shapes = builder.ToImmutable();
-
-            return g;
+            group.Shapes = builder.ToImmutable();
+            return group;
         }
 
         /// <summary>
