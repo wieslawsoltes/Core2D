@@ -10,7 +10,7 @@ namespace Core2D.Data.Database
     /// </summary>
     public class XColumn : ObservableObject
     {
-        private Guid _id;
+        private string _id;
         private string _name;
         private double _width;
         private bool _isVisible;
@@ -20,7 +20,7 @@ namespace Core2D.Data.Database
         /// Gets or sets column Id.
         /// </summary>
         [Name]
-        public Guid Id
+        public string Id
         {
             get => _id;
             set => Update(ref _id, value);
@@ -74,7 +74,7 @@ namespace Core2D.Data.Database
         {
             return new XColumn()
             {
-                Id = Guid.NewGuid(),
+                Id = Guid.NewGuid().ToString(),
                 Name = name,
                 Width = width,
                 IsVisible = isVisible,
@@ -86,7 +86,7 @@ namespace Core2D.Data.Database
         /// Check whether the <see cref="Id"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeId() => _id != Guid.Empty;
+        public bool ShouldSerializeId() => !String.IsNullOrWhiteSpace(_id);
 
         /// <summary>
         /// Check whether the <see cref="Name"/> property has changed from its default value.
