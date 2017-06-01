@@ -3,14 +3,14 @@
 using Portable.Xaml.Markup;
 using Serializer.Xaml;
 
-[assembly: XmlnsDefinition(XamlConstants.EditorNamespace, "Core2D.Editor", AssemblyName = "Core2D")]
-[assembly: XmlnsDefinition(XamlConstants.EditorNamespace, "Core2D.Editor.Bounds", AssemblyName = "Core2D")]
-[assembly: XmlnsDefinition(XamlConstants.EditorNamespace, "Core2D.Editor.Designer", AssemblyName = "Core2D")]
-[assembly: XmlnsDefinition(XamlConstants.EditorNamespace, "Core2D.Editor.Factories", AssemblyName = "Core2D")]
-[assembly: XmlnsDefinition(XamlConstants.EditorNamespace, "Core2D.Editor.Input", AssemblyName = "Core2D")]
-[assembly: XmlnsDefinition(XamlConstants.EditorNamespace, "Core2D.Editor.Interfaces", AssemblyName = "Core2D")]
-[assembly: XmlnsDefinition(XamlConstants.EditorNamespace, "Core2D.Editor.Tools", AssemblyName = "Core2D")]
-[assembly: XmlnsDefinition(XamlConstants.EditorNamespace, "Core2D.Editor.Views", AssemblyName = "Core2D")]
-[assembly: XmlnsDefinition(XamlConstants.EditorNamespace, "Core2D.Editor.Recent", AssemblyName = "Core2D")]
+[assembly: XmlnsDefinition(XamlConstants.EditorNamespace, "Core2D.Editor", AssemblyName = "Core2D.Editor")]
+[assembly: XmlnsDefinition(XamlConstants.EditorNamespace, "Core2D.Editor.Bounds", AssemblyName = "Core2D.Editor")]
+[assembly: XmlnsDefinition(XamlConstants.EditorNamespace, "Core2D.Editor.Designer", AssemblyName = "Core2D.Editor")]
+[assembly: XmlnsDefinition(XamlConstants.EditorNamespace, "Core2D.Editor.Factories", AssemblyName = "Core2D.Editor")]
+[assembly: XmlnsDefinition(XamlConstants.EditorNamespace, "Core2D.Editor.Input", AssemblyName = "Core2D.Editor")]
+[assembly: XmlnsDefinition(XamlConstants.EditorNamespace, "Core2D.Editor.Interfaces", AssemblyName = "Core2D.Editor")]
+[assembly: XmlnsDefinition(XamlConstants.EditorNamespace, "Core2D.Editor.Tools", AssemblyName = "Core2D.Editor")]
+[assembly: XmlnsDefinition(XamlConstants.EditorNamespace, "Core2D.Editor.Views", AssemblyName = "Core2D.Editor")]
+[assembly: XmlnsDefinition(XamlConstants.EditorNamespace, "Core2D.Editor.Recent", AssemblyName = "Core2D.Editor")]
 
 [assembly: XmlnsPrefix(XamlConstants.EditorNamespace, "e")]
