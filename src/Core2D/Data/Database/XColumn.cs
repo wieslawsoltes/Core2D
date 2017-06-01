@@ -19,6 +19,7 @@ namespace Core2D.Data.Database
         /// <summary>
         /// Gets or sets column Id.
         /// </summary>
+        [Name]
         public Guid Id
         {
             get => _id;
@@ -28,7 +29,6 @@ namespace Core2D.Data.Database
         /// <summary>
         /// Gets or sets column name.
         /// </summary>
-        [Content]
         public string Name
         {
             get => _name;
