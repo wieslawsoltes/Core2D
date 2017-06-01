@@ -30,6 +30,7 @@ namespace Core2D.Data.Database
         /// <summary>
         /// Gets or sets record Id.
         /// </summary>
+        [Name]
         public Guid Id
         {
             get => _id;
