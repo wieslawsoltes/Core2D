@@ -99,13 +99,6 @@ namespace Core2D.Editor
 
         private void ObserveRecord(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(XRecord.Columns))
-            {
-                var record = sender as XRecord;
-                Remove(record.Columns);
-                Add(record.Columns);
-            }
-
             if (e.PropertyName == nameof(XRecord.Values))
             {
                 var record = sender as XRecord;
