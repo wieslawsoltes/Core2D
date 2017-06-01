@@ -2355,7 +2355,7 @@ namespace Core2D.Editor
                         // Create Imported database.
                         if (Project?.CurrentDatabase == null)
                         {
-                            var db = XDatabase.Create(Constants.ImportedDatabaseName, shape.Data.Record.Columns);
+                            var db = XDatabase.Create(Constants.ImportedDatabaseName, shape.Data.Record.Owner.Columns);
                             Project.AddDatabase(db);
                             Project.SetCurrentDatabase(db);
                         }
@@ -2729,10 +2729,10 @@ namespace Core2D.Editor
 
             for (int i = 0; i < length; i++)
             {
-                var column = record.Columns[i];
+                var column = record.Owner.Columns[i];
                 if (column.IsVisible)
                 {
-                    var binding = "{" + record.Columns[i].Name + "}";
+                    var binding = "{" + record.Owner.Columns[i].Name + "}";
                     var text = XText.Create(px, py, px + width, py + height, style, point, binding);
                     g.AddShape(text);
                     py += height;
