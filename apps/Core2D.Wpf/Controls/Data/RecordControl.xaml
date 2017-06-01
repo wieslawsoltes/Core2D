@@ -48,7 +48,7 @@
                 </Style>
             </TextBlock.Style>
         </TextBlock>
-        <ItemsControl VerticalContentAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Columns, UpdateSourceTrigger=PropertyChanged}">
+        <ItemsControl VerticalContentAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Owner.Columns, UpdateSourceTrigger=PropertyChanged}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Grid Height="Auto" VerticalAlignment="Top">
