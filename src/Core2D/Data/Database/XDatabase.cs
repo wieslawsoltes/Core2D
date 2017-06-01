@@ -37,6 +37,7 @@ namespace Core2D.Data.Database
         /// <summary>
         /// Gets or sets database name.
         /// </summary>
+        [Name]
         public string Name
         {
             get => _name;
