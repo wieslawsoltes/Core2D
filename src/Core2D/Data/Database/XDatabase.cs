@@ -150,6 +150,8 @@ namespace Core2D.Data.Database
 
             if (columns.Length >= 1 && columns[0].Name == idColumnName)
             {
+                db.Columns = columns;
+
                 // Use existing record Id.
                 var tempRecords = fields
                     .Skip(1)
@@ -157,27 +159,23 @@ namespace Core2D.Data.Database
                             XRecord.Create(
                                 db,
                                 v.FirstOrDefault(),
-                                columns,
                                 ImmutableArray.CreateRange<XValue>(v.Select(c => XValue.Create(c)))));
-                var records = ImmutableArray.CreateRange<XRecord>(tempRecords);
 
-                db.Columns = columns;
-                db.Records = records;
+                db.Records = ImmutableArray.CreateRange<XRecord>(tempRecords);
             }
             else
             {
+                db.Columns = columns;
+
                 // Create records with new Id.
                 var tempRecords = fields
                     .Skip(1)
                     .Select(v =>
                             XRecord.Create(
                                 db,
-                                columns,
                                 ImmutableArray.CreateRange<XValue>(v.Select(c => XValue.Create(c)))));
-                var records = ImmutableArray.CreateRange<XRecord>(tempRecords);
 
-                db.Columns = columns;
-                db.Records = records;
+                db.Records = ImmutableArray.CreateRange<XRecord>(tempRecords);
             }
 
             return db;
@@ -262,9 +260,6 @@ namespace Core2D.Data.Database
                 if (result == null)
                 {
                     var r = source.Records[i];
-
-                    // Use existing columns.
-                    r.Columns = destination.Columns;
 
                     // Skip Id column.
                     r.Values = r.Values.Skip(1).ToImmutableArray();
