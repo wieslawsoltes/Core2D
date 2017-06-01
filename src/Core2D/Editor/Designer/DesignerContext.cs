@@ -254,7 +254,6 @@ namespace Core2D.Editor.Designer
             var values = Enumerable.Repeat("<empty>", db.Columns.Length).Select(c => XValue.Create(c));
             var record = XRecord.Create(
                 db,
-                db.Columns,
                 ImmutableArray.CreateRange(values));
             db.Records = db.Records.Add(record);
             db.CurrentRecord = record;
