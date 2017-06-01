@@ -2318,7 +2318,7 @@ namespace Core2D.Editor
             }
         }
 
-        private IDictionary<Guid, XRecord> GenerateRecordDictionaryById()
+        private IDictionary<string, XRecord> GenerateRecordDictionaryById()
         {
             return Project?.Databases
                 .Where(d => d?.Records != null && d?.Records.Length > 0)
