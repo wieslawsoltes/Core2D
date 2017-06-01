@@ -117,6 +117,36 @@ namespace Core2D.Renderer
             return new MatrixObject(m11, m12, m21, m22, offsetX, offsetY);
         }
 
+        /// <inheritdoc/>
+        public override string ToString()
+        {
+            return string.Format("{0},{1},{2},{3},{4},{5}", _m11, _m12, _m21, _m22, _offsetX, _offsetY);
+        }
+
+        /// <summary>
+        /// Parses a <see cref="MatrixObject"/> string.
+        /// </summary>
+        /// <param name="s">The string.</param>
+        /// <returns>The parsed <see cref="MatrixObject"/>.</returns>
+        public static MatrixObject Parse(string s)
+        {
+            var parts = s.Split(new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries).Select(x => x.Trim()).ToList();
+            if (parts.Count == 6)
+            {
+                return MatrixObject.Create(
+                    double.Parse(parts[0]),
+                    double.Parse(parts[1]),
+                    double.Parse(parts[2]),
+                    double.Parse(parts[3]),
+                    double.Parse(parts[4]),
+                    double.Parse(parts[5]));
+            }
+            else
+            {
+                throw new FormatException("Invalid Matrix.");
+            }
+        }
+
         /// <summary>
         /// Check whether the <see cref="M11"/> property has changed from its default value.
         /// </summary>
