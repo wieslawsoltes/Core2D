@@ -17,14 +17,6 @@ namespace Core2D.UnitTests
 
         [Fact]
         [Trait("Core2D.Data", "Database")]
-        public void Columns_Not_Null()
-        {
-            var target = new XRecord();
-            Assert.NotNull(target.Columns);
-        }
-
-        [Fact]
-        [Trait("Core2D.Data", "Database")]
         public void Values_Not_Null()
         {
             var target = new XRecord();
