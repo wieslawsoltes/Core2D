@@ -81,7 +81,7 @@
                         <DataGrid.RowDetailsTemplate>
                             <DataTemplate>
                                 <DockPanel>
-                                    <DataGrid ItemsSource="{Binding Columns}" AutoGenerateColumns="False" HeadersVisibility="None" DockPanel.Dock="Left">
+                                    <DataGrid ItemsSource="{Binding Owner.Columns}" AutoGenerateColumns="False" HeadersVisibility="None" DockPanel.Dock="Left">
                                         <DataGrid.Columns>
                                             <DataGridTextColumn Header="Name" Binding="{Binding Name}" IsReadOnly="True"/>
                                         </DataGrid.Columns>
