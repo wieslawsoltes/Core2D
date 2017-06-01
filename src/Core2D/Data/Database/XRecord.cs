@@ -13,7 +13,6 @@ namespace Core2D.Data.Database
     public class XRecord : ObservableObject
     {
         private string _id;
-        private ImmutableArray<XColumn> _columns;
         private ImmutableArray<XValue> _values;
         private XDatabase _owner;
 
@@ -23,7 +22,6 @@ namespace Core2D.Data.Database
         public XRecord()
             : base()
         {
-            _columns = ImmutableArray.Create<XColumn>();
             _values = ImmutableArray.Create<XValue>();
         }
 
@@ -35,15 +33,6 @@ namespace Core2D.Data.Database
         {
             get => _id;
             set => Update(ref _id, value);
-        }
-
-        /// <summary>
-        /// Gets or sets record columns.
-        /// </summary>
-        public ImmutableArray<XColumn> Columns
-        {
-            get => _columns;
-            set => Update(ref _columns, value);
         }
 
         /// <summary>
@@ -69,15 +58,13 @@ namespace Core2D.Data.Database
         /// Creates a new <see cref="XRecord"/> instance.
         /// </summary>
         /// <param name="owner">The record owner.</param>
-        /// <param name="columns">The record columns.</param>
         /// <param name="values">The record values.</param>
         /// <returns>The new instance of the <see cref="XRecord"/> class.</returns>
-        public static XRecord Create(XDatabase owner, ImmutableArray<XColumn> columns, ImmutableArray<XValue> values)
+        public static XRecord Create(XDatabase owner, ImmutableArray<XValue> values)
         {
             return new XRecord()
             {
                 Id = Guid.NewGuid().ToString(),
-                Columns = columns,
                 Values = values,
                 Owner = owner
             };
@@ -88,15 +75,13 @@ namespace Core2D.Data.Database
         /// </summary>
         /// <param name="owner">The record owner.</param>
         /// <param name="id">The record Id.</param>
-        /// <param name="columns">The record columns.</param>
         /// <param name="values">The record values.</param>
         /// <returns>The new instance of the <see cref="XRecord"/> class.</returns>
-        public static XRecord Create(XDatabase owner, string id, ImmutableArray<XColumn> columns, ImmutableArray<XValue> values)
+        public static XRecord Create(XDatabase owner, string id, ImmutableArray<XValue> values)
         {
             return new XRecord()
             {
                 Id = string.IsNullOrWhiteSpace(id) ? Guid.NewGuid().ToString() : id,
-                Columns = columns,
                 Values = values,
                 Owner = owner
             };
@@ -113,7 +98,6 @@ namespace Core2D.Data.Database
             return new XRecord()
             {
                 Id = Guid.NewGuid().ToString(),
-                Columns = owner.Columns,
                 Values = ImmutableArray.CreateRange(
                     Enumerable.Repeat(
                         value, 
@@ -127,12 +111,6 @@ namespace Core2D.Data.Database
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public bool ShouldSerializeId() => !String.IsNullOrWhiteSpace(_id);
-
-        /// <summary>
-        /// Check whether the <see cref="Columns"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeColumns() => _columns.IsEmpty == false;
 
         /// <summary>
         /// Check whether the <see cref="Values"/> property has changed from its default value.
