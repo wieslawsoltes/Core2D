@@ -104,20 +104,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "targets", "targets", "{C5B5
 		build\Default.targets = build\Default.targets
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ci", "ci", "{D5836634-C455-41CF-AB13-A8262396A955}"
-	ProjectSection(SolutionItems) = preProject
-		.travis.yml = .travis.yml
-		_config.yml = _config.yml
-		appveyor.yml = appveyor.yml
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "git", "git", "{94D9AD96-3170-4F35-A62D-54DC7DB38AFD}"
-	ProjectSection(SolutionItems) = preProject
-		.gitattributes = .gitattributes
-		.gitignore = .gitignore
-		.gitmodules = .gitmodules
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "cake", "cake", "{5D7560B3-A467-406A-B821-525DB33B09DB}"
 	ProjectSection(SolutionItems) = preProject
 		build.cake = build.cake
@@ -805,8 +791,6 @@ Global
 		{0C7EA04E-94D8-49B7-B387-C031B2422F3B} = {4322259E-219C-4F6C-9A1B-3DEB14B224A7}
 		{3C45CABF-3E2E-455B-AACF-1FB63D331F9C} = {C7162582-C1FD-45FB-99FD-6770D67B5A21}
 		{C5B55AFD-7C8E-4071-ACD8-81DB364765DA} = {C7162582-C1FD-45FB-99FD-6770D67B5A21}
-		{D5836634-C455-41CF-AB13-A8262396A955} = {C7162582-C1FD-45FB-99FD-6770D67B5A21}
-		{94D9AD96-3170-4F35-A62D-54DC7DB38AFD} = {C7162582-C1FD-45FB-99FD-6770D67B5A21}
 		{5D7560B3-A467-406A-B821-525DB33B09DB} = {C7162582-C1FD-45FB-99FD-6770D67B5A21}
 		{DDE59F10-F84A-4919-B221-38414B958103} = {C7162582-C1FD-45FB-99FD-6770D67B5A21}
 		{93B60E5F-458B-4F04-B502-FA538CD4687C} = {C7162582-C1FD-45FB-99FD-6770D67B5A21}
