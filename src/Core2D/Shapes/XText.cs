@@ -141,7 +141,7 @@ namespace Core2D.Shapes
                 return false;
             }
 
-            var columns = r.Columns;
+            var columns = r.Owner.Columns;
             var values = r.Values;
             if (columns == null || values == null || columns.Length != values.Length)
             {
