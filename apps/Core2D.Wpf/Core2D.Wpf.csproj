@@ -558,6 +558,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Core2D.Editor\Core2D.Editor.csproj">
+      <Project>{528f510f-1fa0-4ab5-93fa-ef10abfe2c37}</Project>
+      <Name>Core2D.Editor</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\src\Core2D\Core2D.csproj">
       <Project>{F822EC0C-2501-487D-87A8-B8D28A761385}</Project>
       <Name>Core2D</Name>

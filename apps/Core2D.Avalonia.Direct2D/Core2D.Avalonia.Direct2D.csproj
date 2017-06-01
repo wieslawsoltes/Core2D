@@ -45,10 +45,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Core2D.Avalonia\Core2D.Avalonia.csproj">
-      <Project>{27CD58AE-D6D4-42AD-A315-2F1CB63454AF}</Project>
-      <Name>Core2D.Avalonia</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\src\Core2D\Core2D.csproj">
       <Project>{F822EC0C-2501-487D-87A8-B8D28A761385}</Project>
       <Name>Core2D</Name>
@@ -156,6 +152,10 @@
     <ProjectReference Include="..\..\src\Utilities.Avalonia\Utilities.Avalonia.csproj">
       <Project>{C6DBD1FD-C462-4005-B382-97BB4AEF26F2}</Project>
       <Name>Utilities.Avalonia</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core2D.Avalonia\Core2D.Avalonia.csproj">
+      <Project>{40d077d5-ee76-4baf-a1b4-f1d362d62eef}</Project>
+      <Name>Core2D.Avalonia</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

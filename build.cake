@@ -79,8 +79,7 @@ var netCoreProjects = netCoreApps.Select(name =>
 var netCoreUnitTestsRoot= "./tests";
 var netCoreUnitTests = new string[] { 
     "Core2D.UnitTests",
-    "FileSystem.DotNet.UnitTests",
-    "Serializer.Xaml.UnitTests"
+    "FileSystem.DotNet.UnitTests"
 };
 var netCoreUnitTestsProjects = netCoreUnitTests.Select(name => 
     new {

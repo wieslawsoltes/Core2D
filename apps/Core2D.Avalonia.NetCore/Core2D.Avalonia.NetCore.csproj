@@ -14,7 +14,6 @@
   <Import Project="..\..\build\SkiaSharp.props" />
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Core2D.Avalonia\Core2D.Avalonia.csproj" />
     <ProjectReference Include="..\..\src\Core2D\Core2D.csproj" />
     <ProjectReference Include="..\..\src\FileSystem.DotNet\FileSystem.DotNet.csproj" />
     <ProjectReference Include="..\..\src\FileWriter.SkiaSharpBmp\FileWriter.SkiaSharpBmp.csproj" />
@@ -36,6 +35,7 @@
     <ProjectReference Include="..\..\src\TextFieldReader.CsvHelper\TextFieldReader.CsvHelper.csproj" />
     <ProjectReference Include="..\..\src\TextFieldWriter.CsvHelper\TextFieldWriter.CsvHelper.csproj" />
     <ProjectReference Include="..\..\src\Utilities.Avalonia\Utilities.Avalonia.csproj" />
+    <ProjectReference Include="..\Core2D.Avalonia\Core2D.Avalonia.csproj" />
   </ItemGroup>
 
 </Project>

@@ -25,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Core2D.Editor\Core2D.Editor.csproj" />
     <ProjectReference Include="..\Core2D\Core2D.csproj" />
   </ItemGroup>
 

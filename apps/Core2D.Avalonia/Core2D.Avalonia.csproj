@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard1.1</TargetFrameworks>
+    <OutputType>Library</OutputType>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <EnableDefaultCompileItems>False</EnableDefaultCompileItems>
+  </PropertyGroup>
+
+  <Import Project="..\..\build\Default.targets" />
+  <Import Project="..\..\build\Default.props" />
+  <Import Project="..\..\build\Rx.props" />
+  <Import Project="..\..\build\Avalonia.props" />
+
+  <ItemGroup>
+    <Compile Include="**\*.cs" Exclude="obj\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="**\*.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <EmbeddedResource Include="**\*.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Core2D.Editor\Core2D.Editor.csproj" />
+    <ProjectReference Include="..\..\src\Core2D\Core2D.csproj" />
+    <ProjectReference Include="..\..\src\Renderer.Avalonia\Renderer.Avalonia.csproj" />
+    <ProjectReference Include="..\..\src\Utilities.Avalonia\Utilities.Avalonia.csproj" />
+  </ItemGroup>
+
+</Project>

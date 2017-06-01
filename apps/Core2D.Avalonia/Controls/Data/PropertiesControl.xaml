@@ -1,0 +1,40 @@
+﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
+<!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
+<UserControl x:Class="Core2D.Avalonia.Controls.Data.PropertiesControl"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Core2D.Avalonia;assembly=Core2D.Avalonia"
+             xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"
+             xmlns:Data="clr-namespace:Core2D.Data;assembly=Core2D"
+             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor"
+             xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
+             Design.DataContext="{Static Designer:DesignerContext.Data}"
+             Design.Width="250" Design.Height="400">
+    <Grid RowDefinitions="Auto,Auto,*" ColumnDefinitions="50*,Auto,50*">
+        <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Right">
+            <MenuItem Header="+" Command="{Static Editor:ProjectEditorCommands.AddPropertyCommand}" CommandParameter="{Binding}"/>
+        </Menu>
+        <GridSplitter Classes="vertical" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Width="6"/>
+        <TextBlock Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" Text="Name" Classes="default"/>
+        <TextBlock Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" Text="Value" Classes="default"/>
+        <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="2" Items="{Binding Properties}">
+            <ItemsControl.DataTemplates>
+                <DataTemplate DataType="Data:XProperty">
+                    <Grid VerticalAlignment="Top">
+                        <TextBox VerticalAlignment="Center" Text="{Binding Name, Mode=TwoWay}" Classes="property"/>
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.DataTemplates>
+        </ItemsControl>
+        <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="2" Items="{Binding Properties}">
+            <ItemsControl.DataTemplates>
+                <DataTemplate DataType="Data:XProperty">
+                    <Grid VerticalAlignment="Top" ColumnDefinitions="*,30">
+                        <TextBox VerticalAlignment="Center" Text="{Binding Value, Mode=TwoWay}" Classes="property" Grid.Column="0"/>
+                        <Button VerticalAlignment="Center" Content="-" Classes="property" Grid.Column="1" Command="{Static Editor:ProjectEditorCommands.RemovePropertyCommand}" CommandParameter="{Binding}"/>
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.DataTemplates>
+        </ItemsControl>
+    </Grid>
+</UserControl>

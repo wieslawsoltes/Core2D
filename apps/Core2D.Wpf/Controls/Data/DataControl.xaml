@@ -8,7 +8,7 @@
              xmlns:local="clr-namespace:Core2D.Wpf" 
              xmlns:converters="clr-namespace:Core2D.Wpf.Converters" 
              xmlns:designer="clr-namespace:Core2D.Wpf.Designer"
-             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D" 
+             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor" 
              xmlns:custom="clr-namespace:Core2D.Wpf.Controls.Custom"
              xmlns:data="clr-namespace:Core2D.Wpf.Controls.Data"
              mc:Ignorable="d" 
