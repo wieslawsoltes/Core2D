@@ -13,7 +13,7 @@
         <GridSplitter Classes="vertical" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Width="6"/>
         <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Text="Name" Classes="default"/>
         <TextBlock Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Text="Value" Classes="default"/>
-        <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding Columns}">
+        <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding Owner.Columns}">
             <ItemsControl.DataTemplates>
                 <DataTemplate DataType="Database:XColumn">
                     <Grid VerticalAlignment="Top">
