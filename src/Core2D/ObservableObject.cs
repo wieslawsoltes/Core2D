@@ -20,7 +20,7 @@ namespace Core2D
         /// Gets or sets resource name.
         /// </summary>
         [Name]
-        public string Id
+        public virtual string Id
         {
             get => _id;
             set => Update(ref _id, value);
@@ -29,7 +29,7 @@ namespace Core2D
         /// <summary>
         /// Gets or sets resource name.
         /// </summary>
-        public string Name
+        public virtual string Name
         {
             get => _name;
             set => Update(ref _name, value);
@@ -38,7 +38,7 @@ namespace Core2D
         /// <summary>
         /// Gets or sets shape resources.
         /// </summary>
-        public ImmutableArray<ObservableObject> Resources
+        public virtual ImmutableArray<ObservableObject> Resources
         {
             get => _resources;
             set => Update(ref _resources, value);
