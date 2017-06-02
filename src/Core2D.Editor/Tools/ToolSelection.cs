@@ -52,6 +52,38 @@ namespace Core2D.Editor.Tools
         }
 
         /// <summary>
+        /// Validate if point can move.
+        /// </summary>
+        /// <remarks>Do not move connector points if they have owner or are locked.</remarks>
+        /// <param name="shape">The shape object.</param>
+        /// <param name="point">The point to validate.</param>
+        /// <returns>True if point is valid, otherwise false.</returns>
+        private static bool Validate(BaseShape shape, XPoint point)
+        {
+            if (point.State.Flags.HasFlag(ShapeStateFlags.Locked))
+            {
+                return false;
+            }
+
+            if (point.State.Flags.HasFlag(ShapeStateFlags.Connector) && point.Owner != shape)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Get all valid points in the shapes.
+        /// </summary>
+        /// <param name="shapes">The shapes to scan.</param>
+        /// <returns>All points in the shape.</returns>
+        private static IEnumerable<XPoint> GetMovePoints(IEnumerable<BaseShape> shapes)
+        {
+            return shapes.SelectMany(s => s.GetPoints().Where(p => Validate(s, p))).Distinct();
+        }
+
+        /// <summary>
         /// Generate selected shapes cache.
         /// </summary>
         private void GenerateMoveSelectionCache()
@@ -66,17 +98,19 @@ namespace Core2D.Editor.Tools
                 {
                     case XMoveMode.Point:
                         {
-                            if (!state.Flags.HasFlag(ShapeStateFlags.Locked))
+                            if (!state.Flags.HasFlag(ShapeStateFlags.Locked)
+                                && !state.Flags.HasFlag(ShapeStateFlags.Connector))
                             {
                                 var shape = editor.Renderers[0].State.SelectedShape;
                                 var shapes = Enumerable.Repeat(shape, 1);
-                                _pointsCache = shapes.SelectMany(s => s.GetPoints()).Distinct().ToList();
+                                _pointsCache = GetMovePoints(shapes).ToList();
                             }
                         }
                         break;
                     case XMoveMode.Shape:
                         {
-                            if (!state.Flags.HasFlag(ShapeStateFlags.Locked) && !state.Flags.HasFlag(ShapeStateFlags.Connector))
+                            if (!state.Flags.HasFlag(ShapeStateFlags.Locked)
+                                && !state.Flags.HasFlag(ShapeStateFlags.Connector))
                             {
                                 var shape = editor.Renderers[0].State.SelectedShape;
                                 var shapes = Enumerable.Repeat(shape, 1).ToList();
@@ -89,13 +123,15 @@ namespace Core2D.Editor.Tools
 
             if (editor.Renderers[0].State.SelectedShapes != null)
             {
-                var shapes = editor.Renderers[0].State.SelectedShapes.Where(s => !s.State.Flags.HasFlag(ShapeStateFlags.Locked));
+                var shapes = editor.Renderers[0].State.SelectedShapes
+                    .Where(s => !s.State.Flags.HasFlag(ShapeStateFlags.Locked)
+                             && !s.State.Flags.HasFlag(ShapeStateFlags.Connector));
 
                 switch (editor.Project.Options.MoveMode)
                 {
                     case XMoveMode.Point:
                         {
-                            _pointsCache = shapes.SelectMany(s => s.GetPoints()).Distinct().ToList();
+                            _pointsCache = GetMovePoints(shapes).ToList();
                         }
                         break;
                     case XMoveMode.Shape:
