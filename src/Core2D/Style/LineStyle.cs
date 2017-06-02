@@ -85,7 +85,7 @@ namespace Core2D.Style
         {
             return new LineStyle()
             {
-                Name = _name,
+                Name = Name,
                 IsCurved = _isCurved,
                 Curvature = _curvature,
                 CurveOrientation = _curveOrientation,
