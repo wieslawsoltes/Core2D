@@ -10,12 +10,18 @@ namespace Core2D
     /// </summary>
     public abstract class ObservableResource : ObservableObject
     {
-        private ImmutableArray<ObservableObject> _resources;
+        private string _name = null;
+        private ImmutableArray<ObservableObject> _resources = ImmutableArray.Create<ObservableObject>();
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ObservableResource"/> class.
+        /// Gets or sets resource name.
         /// </summary>
-        public ObservableResource() : base() => _resources = ImmutableArray.Create<ObservableObject>();
+        [Name]
+        public string Name
+        {
+            get => _name;
+            set => Update(ref _name, value);
+        }
 
         /// <summary>
         /// Gets or sets shape resources.
@@ -26,6 +32,12 @@ namespace Core2D
             get => _resources;
             set => Update(ref _resources, value);
         }
+
+        /// <summary>
+        /// Check whether the <see cref="Name"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public bool ShouldSerializeName() => !String.IsNullOrWhiteSpace(_name);
 
         /// <summary>
         /// Check whether the <see cref="Resources"/> property has changed from its default value.
