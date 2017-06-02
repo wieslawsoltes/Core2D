@@ -1,7 +1,0 @@
-<XContext xmlns="https://github.com/Core2D">
-    <XContext.Properties>
-        <XProperty Name="Property1" Value="Value1"/>
-        <XProperty Name="Property2" Value="Value2"/>
-        <XProperty Name="Property3" Value="Value3"/>
-    </XContext.Properties>
-</XContext>
