@@ -27,7 +27,7 @@ namespace Core2D.Editor.Tools
         private double _centerY;
 
         /// <inheritdoc/>
-        public override string Name => "Ellipse";
+        public override string Title => "Ellipse";
 
         /// <summary>
         /// Gets or sets the tool settings.
