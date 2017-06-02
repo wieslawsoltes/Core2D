@@ -121,19 +121,19 @@
                     <DropDown Classes="tool" Items="{Binding Tools}" SelectedItem="{Binding CurrentTool, Mode=TwoWay}">
                         <DropDown.DataTemplates>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Name}"/>
+                                <TextBlock Text="{Binding Title}"/>
                             </DataTemplate>
                         </DropDown.DataTemplates>
                     </DropDown>
                     <DropDown Classes="tool" Items="{Binding PathTools}" SelectedItem="{Binding CurrentPathTool, Mode=TwoWay}">
                         <DropDown.DataTemplates>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Name}"/>
+                                <TextBlock Text="{Binding Title}"/>
                             </DataTemplate>
                         </DropDown.DataTemplates>
                         <DropDown.IsVisible>
                             <MultiBinding Mode="OneWay" Converter="{Static converters:ObjectEqualityMultiConverter.Instance}">
-                                <Binding Path="CurrentTool.Name"/>
+                                <Binding Path="CurrentTool.Title"/>
                                 <Binding Source="Path"/>
                             </MultiBinding>
                         </DropDown.IsVisible>
