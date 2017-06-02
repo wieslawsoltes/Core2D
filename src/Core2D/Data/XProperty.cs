@@ -10,18 +10,8 @@ namespace Core2D.Data
     /// </summary>
     public class XProperty : ObservableObject
     {
-        private string _name;
         private string _value;
         private XContext _owner;
-
-        /// <summary>
-        /// Gets or sets property name.
-        /// </summary>
-        public string Name
-        {
-            get => _name;
-            set => Update(ref _name, value);
-        }
 
         /// <summary>
         /// Gets or sets property value.
@@ -61,12 +51,6 @@ namespace Core2D.Data
 
         /// <inheritdoc/>
         public override string ToString() => _value.ToString();
-
-        /// <summary>
-        /// Check whether the <see cref="Name"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeName() => !String.IsNullOrWhiteSpace(_name);
 
         /// <summary>
         /// Check whether the <see cref="Value"/> property has changed from its default value.
