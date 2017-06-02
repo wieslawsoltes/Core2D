@@ -15,9 +15,8 @@ namespace Core2D.Shape
     /// <summary>
     /// Base class for shapes.
     /// </summary>
-    public abstract class BaseShape : ObservableResource
+    public abstract class BaseShape : ObservableObject
     {
-        private string _name;
         private BaseShape _owner;
         private ShapeState _state;
         private ShapeStyle _style;
@@ -35,16 +34,6 @@ namespace Core2D.Shape
             State = ShapeState.Create(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone);
             Transform = MatrixObject.Create();
             Data = XContext.Create();
-        }
-
-        /// <summary>
-        /// Gets or sets shape name.
-        /// </summary>
-        [Name]
-        public virtual string Name
-        {
-            get => _name;
-            set => Update(ref _name, value);
         }
 
         /// <summary>
@@ -186,12 +175,6 @@ namespace Core2D.Shape
         /// </summary>
         /// <returns>All points in the shape.</returns>
         public abstract IEnumerable<XPoint> GetPoints();
-
-        /// <summary>
-        /// Check whether the <see cref="Name"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeName() => !String.IsNullOrWhiteSpace(_name);
 
         /// <summary>
         /// Check whether the <see cref="Owner"/> property has changed from its default value.
