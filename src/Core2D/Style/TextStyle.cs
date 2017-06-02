@@ -104,7 +104,7 @@ namespace Core2D.Style
         {
             return new TextStyle()
             {
-                Name = _name,
+                Name = Name,
                 FontName = _fontName,
                 FontFile = _fontFile,
                 FontSize = _fontSize,
