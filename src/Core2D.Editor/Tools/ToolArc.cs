@@ -26,7 +26,7 @@ namespace Core2D.Editor.Tools
         private ToolArcSelection _selection;
 
         /// <inheritdoc/>
-        public override string Name => "Arc";
+        public override string Title => "Arc";
 
         /// <summary>
         /// Gets or sets the tool settings.
