@@ -53,7 +53,6 @@ namespace Core2D.Data.Database
         {
             return new XRecord()
             {
-                Id = Guid.NewGuid().ToString(),
                 Values = values,
                 Owner = owner
             };
@@ -68,12 +67,18 @@ namespace Core2D.Data.Database
         /// <returns>The new instance of the <see cref="XRecord"/> class.</returns>
         public static XRecord Create(XDatabase owner, string id, ImmutableArray<XValue> values)
         {
-            return new XRecord()
+            var record = new XRecord()
             {
-                Id = string.IsNullOrWhiteSpace(id) ? Guid.NewGuid().ToString() : id,
                 Values = values,
                 Owner = owner
             };
+
+            if (!String.IsNullOrWhiteSpace(id))
+            {
+                record.Id = id;
+            }
+
+            return record;
         }
 
         /// <summary>
@@ -86,7 +91,6 @@ namespace Core2D.Data.Database
         {
             return new XRecord()
             {
-                Id = Guid.NewGuid().ToString(),
                 Values = ImmutableArray.CreateRange(
                     Enumerable.Repeat(
                         value, 
