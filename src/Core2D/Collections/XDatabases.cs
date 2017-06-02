@@ -27,12 +27,6 @@ namespace Core2D.Collections
         }
 
         /// <summary>
-        /// Check whether the <see cref="Name"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeName() => !String.IsNullOrWhiteSpace(Name);
-
-        /// <summary>
         /// Check whether the <see cref="Children"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
