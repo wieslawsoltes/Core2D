@@ -22,7 +22,7 @@ namespace Core2D.Editor.Tools
         private ToolImageSelection _selection;
 
         /// <inheritdoc/>
-        public override string Name => "Image";
+        public override string Title => "Image";
 
         /// <summary>
         /// Gets or sets the tool settings.
