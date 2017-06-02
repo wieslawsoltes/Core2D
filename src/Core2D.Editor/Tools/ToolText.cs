@@ -22,7 +22,7 @@ namespace Core2D.Editor.Tools
         private ToolTextSelection _selection;
 
         /// <inheritdoc/>
-        public override string Name => "Text";
+        public override string Title => "Text";
 
         /// <summary>
         /// Gets or sets the tool settings.
