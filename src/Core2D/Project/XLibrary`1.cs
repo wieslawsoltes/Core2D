@@ -13,19 +13,8 @@ namespace Core2D.Project
     /// </summary>
     public class XLibrary<T> : ObservableObject, ILibrary
     {
-        private string _name;
         private ImmutableArray<T> _items;
         private T _selected;
-
-        /// <summary>
-        /// Gets or sets library name.
-        /// </summary>
-        [Name]
-        public string Name
-        {
-            get => _name;
-            set => Update(ref _name, value);
-        }
 
         /// <summary>
         /// Gets or sets a items collection.
@@ -84,12 +73,6 @@ namespace Core2D.Project
                 Selected = items.FirstOrDefault()
             };
         }
-
-        /// <summary>
-        /// Check whether the <see cref="Name"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeName() => !String.IsNullOrWhiteSpace(_name);
 
         /// <summary>
         /// Check whether the <see cref="Items"/> property has changed from its default value.
