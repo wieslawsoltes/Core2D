@@ -22,7 +22,7 @@ namespace Core2D.Editor.Tools
         private ToolLineSelection _selection;
 
         /// <inheritdoc/>
-        public override string Name => "Line";
+        public override string Title => "Line";
 
         /// <summary>
         /// Gets or sets the tool settings.
