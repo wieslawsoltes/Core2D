@@ -22,7 +22,7 @@ namespace Core2D.Editor.Tools
         private ToolCubicBezierSelection _selection;
 
         /// <inheritdoc/>
-        public override string Name => "CubicBezier";
+        public override string Title => "CubicBezier";
 
         /// <summary>
         /// Gets or sets the tool settings.
