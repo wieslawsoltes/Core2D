@@ -9,6 +9,22 @@ namespace Core2D.UnitTests
     {
         [Fact]
         [Trait("Core2D", "Base")]
+        public void Resources_Not_Null()
+        {
+            var target = new Class1();
+            Assert.NotNull(target.Resources);
+        }
+
+        [Fact]
+        [Trait("Core2D", "Base")]
+        public void Resources_Is_ImmutableArray()
+        {
+            var target = new Class1();
+            Assert.IsType<ImmutableArray<ObservableObject>>(target.Resources);
+        }
+
+        [Fact]
+        [Trait("Core2D", "Base")]
         public void Implements_INotifyPropertyChanged_Interface()
         {
             var target = new Class1();
