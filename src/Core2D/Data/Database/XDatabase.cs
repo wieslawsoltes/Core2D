@@ -13,7 +13,6 @@ namespace Core2D.Data.Database
     /// </summary>
     public class XDatabase : ObservableObject
     {
-        private string _name;
         private string _idColumnName;
         private ImmutableArray<XColumn> _columns;
         private ImmutableArray<XRecord> _records;
@@ -33,16 +32,6 @@ namespace Core2D.Data.Database
         /// Default Id column name.
         /// </summary>
         public const string DefaultIdColumnName = "Id";
-
-        /// <summary>
-        /// Gets or sets database name.
-        /// </summary>
-        [Name]
-        public string Name
-        {
-            get => _name;
-            set => Update(ref _name, value);
-        }
 
         /// <summary>
         /// Gets or sets Id column name.
@@ -272,12 +261,6 @@ namespace Core2D.Data.Database
 
             return isDirty;
         }
-
-        /// <summary>
-        /// Check whether the <see cref="Name"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeName() => !String.IsNullOrWhiteSpace(_name);
 
         /// <summary>
         /// Check whether the <see cref="IdColumnName"/> property has changed from its default value.
