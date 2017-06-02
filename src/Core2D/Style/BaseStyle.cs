@@ -13,23 +13,12 @@ namespace Core2D.Style
     /// </summary>
     public abstract class BaseStyle : ObservableResource
     {
-        private string _name;
         private ArgbColor _stroke;
         private ArgbColor _fill;
         private double _thickness;
         private LineCap _lineCap;
         private string _dashes;
         private double _dashOffset;
-
-        /// <summary>
-        /// Gets or sets style name.
-        /// </summary>
-        [Name]
-        public string Name
-        {
-            get => _name;
-            set => Update(ref _name, value);
-        }
 
         /// <summary>
         /// Gets or sets stroke color.
@@ -192,12 +181,6 @@ namespace Core2D.Style
 
             return null;
         }
-
-        /// <summary>
-        /// Check whether the <see cref="Name"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeName() => !String.IsNullOrWhiteSpace(_name);
 
         /// <summary>
         /// Check whether the <see cref="Stroke"/> property has changed from its default value.
