@@ -18,7 +18,7 @@ namespace Core2D.Editor.Tools.Path
         private State _currentState = State.Move;
 
         /// <inheritdoc/>
-        public override string Name => "Move";
+        public override string Title => "Move";
 
         /// <summary>
         /// Gets or sets the path tool settings.
