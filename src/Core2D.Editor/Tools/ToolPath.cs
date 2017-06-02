@@ -52,7 +52,7 @@ namespace Core2D.Editor.Tools
         internal PathToolBase PreviousPathTool { get; set; }
 
         /// <inheritdoc/>
-        public override string Name => "Path";
+        public override string Title => "Path";
 
         /// <summary>
         /// Gets or sets the tool settings.
