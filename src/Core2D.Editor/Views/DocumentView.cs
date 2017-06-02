@@ -13,7 +13,7 @@ namespace Core2D.Editor.Views
         private Lazy<ProjectEditor> _context;
 
         /// <inheritdoc/>
-        public override string Name => "Document";
+        public override string Title => "Document";
 
         /// <inheritdoc/>
         public override object Context => _context.Value;
