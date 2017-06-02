@@ -11,7 +11,7 @@ namespace Core2D.Style
     /// <summary>
     /// Base style.
     /// </summary>
-    public abstract class BaseStyle : ObservableResource
+    public abstract class BaseStyle : ObservableObject
     {
         private ArgbColor _stroke;
         private ArgbColor _fill;
