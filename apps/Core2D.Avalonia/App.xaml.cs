@@ -88,9 +88,9 @@ namespace Core2D.Avalonia
                     editor.OnLoadRecent(path);
                 }
 
-                editor.CurrentView = editor.Views.FirstOrDefault(v => v.Name == "Dashboard");
-                editor.CurrentTool = editor.Tools.FirstOrDefault(t => t.Name == "Selection");
-                editor.CurrentPathTool = editor.PathTools.FirstOrDefault(t => t.Name == "Line");
+                editor.CurrentView = editor.Views.FirstOrDefault(v => v.Title == "Dashboard");
+                editor.CurrentTool = editor.Tools.FirstOrDefault(t => t.Title == "Selection");
+                editor.CurrentPathTool = editor.PathTools.FirstOrDefault(t => t.Title == "Line");
 
                 var window = serviceProvider.GetService<Windows.MainWindow>();
                 window.Closed += (sender, e) => editor.OnSaveRecent(path);
@@ -124,9 +124,9 @@ namespace Core2D.Avalonia
 
             var editor = serviceProvider.GetService<ProjectEditor>();
 
-            editor.CurrentView = editor.Views.FirstOrDefault(v => v.Name == "Dashboard");
-            editor.CurrentTool = editor.Tools.FirstOrDefault(t => t.Name == "Selection");
-            editor.CurrentPathTool = editor.PathTools.FirstOrDefault(t => t.Name == "Line");
+            editor.CurrentView = editor.Views.FirstOrDefault(v => v.Title == "Dashboard");
+            editor.CurrentTool = editor.Tools.FirstOrDefault(t => t.Title == "Selection");
+            editor.CurrentPathTool = editor.PathTools.FirstOrDefault(t => t.Title == "Line");
 
             return new MainControl()
             {
