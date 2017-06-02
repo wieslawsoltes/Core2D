@@ -16,7 +16,7 @@
                 <DropDown Items="{Binding Tools}" SelectedItem="{Binding CurrentTool, Mode=TwoWay}" Grid.Row="0" Classes="default">
                     <DropDown.DataTemplates>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Name}"/>
+                            <TextBlock Text="{Binding Title}"/>
                         </DataTemplate>
                     </DropDown.DataTemplates>
                 </DropDown>
@@ -28,7 +28,7 @@
                 <DropDown Items="{Binding PathTools}" SelectedItem="{Binding CurrentPathTool, Mode=TwoWay}" Grid.Row="0" Classes="default">
                     <DropDown.DataTemplates>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Name}"/>
+                            <TextBlock Text="{Binding Title}"/>
                         </DataTemplate>
                     </DropDown.DataTemplates>
                 </DropDown>
