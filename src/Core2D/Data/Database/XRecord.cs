@@ -12,7 +12,6 @@ namespace Core2D.Data.Database
     /// </summary>
     public class XRecord : ObservableObject
     {
-        private string _id;
         private ImmutableArray<XValue> _values;
         private XDatabase _owner;
 
@@ -23,16 +22,6 @@ namespace Core2D.Data.Database
             : base()
         {
             _values = ImmutableArray.Create<XValue>();
-        }
-
-        /// <summary>
-        /// Gets or sets record Id.
-        /// </summary>
-        [Name]
-        public string Id
-        {
-            get => _id;
-            set => Update(ref _id, value);
         }
 
         /// <summary>
@@ -105,12 +94,6 @@ namespace Core2D.Data.Database
                 Owner = owner
             };
         }
-
-        /// <summary>
-        /// Check whether the <see cref="Id"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeId() => !String.IsNullOrWhiteSpace(_id);
 
         /// <summary>
         /// Check whether the <see cref="Values"/> property has changed from its default value.
