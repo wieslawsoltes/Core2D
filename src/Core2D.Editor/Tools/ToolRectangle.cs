@@ -22,7 +22,7 @@ namespace Core2D.Editor.Tools
         private ToolRectangleSelection _selection;
 
         /// <inheritdoc/>
-        public override string Name => "Rectangle";
+        public override string Title => "Rectangle";
 
         /// <summary>
         /// Gets or sets the tool settings.
