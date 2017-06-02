@@ -1130,7 +1130,7 @@ namespace Core2D.Editor
         /// </summary>
         public void OnToolNone()
         {
-            CurrentTool = Tools.FirstOrDefault(t => t.Name == "None");
+            CurrentTool = Tools.FirstOrDefault(t => t.Title == "None");
         }
 
         /// <summary>
@@ -1138,7 +1138,7 @@ namespace Core2D.Editor
         /// </summary>
         public void OnToolSelection()
         {
-            CurrentTool = Tools.FirstOrDefault(t => t.Name == "Selection");
+            CurrentTool = Tools.FirstOrDefault(t => t.Title == "Selection");
         }
 
         /// <summary>
@@ -1146,7 +1146,7 @@ namespace Core2D.Editor
         /// </summary>
         public void OnToolPoint()
         {
-            CurrentTool = Tools.FirstOrDefault(t => t.Name == "Point");
+            CurrentTool = Tools.FirstOrDefault(t => t.Title == "Point");
         }
 
         /// <summary>
@@ -1154,7 +1154,7 @@ namespace Core2D.Editor
         /// </summary>
         public void OnToolLine()
         {
-            if (CurrentTool.Name == "Path" && CurrentPathTool.Name != "Line")
+            if (CurrentTool.Title == "Path" && CurrentPathTool.Title != "Line")
             {
                 var tool = Tools.FirstOrDefault(t => t.Name == "Path");
                 if (tool != null)
@@ -1162,11 +1162,11 @@ namespace Core2D.Editor
                     var pathTool = tool as ToolPath;
                     pathTool.RemoveLastSegment();
                 }
-                CurrentPathTool = PathTools.FirstOrDefault(t => t.Name == "Line");
+                CurrentPathTool = PathTools.FirstOrDefault(t => t.Title == "Line");
             }
             else
             {
-                CurrentTool = Tools.FirstOrDefault(t => t.Name == "Line");
+                CurrentTool = Tools.FirstOrDefault(t => t.Title == "Line");
             }
         }
 
@@ -1175,19 +1175,19 @@ namespace Core2D.Editor
         /// </summary>
         public void OnToolArc()
         {
-            if (CurrentTool.Name == "Path" && CurrentPathTool.Name != "Arc")
+            if (CurrentTool.Title == "Path" && CurrentPathTool.Title != "Arc")
             {
-                var tool = Tools.FirstOrDefault(t => t.Name == "Path");
+                var tool = Tools.FirstOrDefault(t => t.Title == "Path");
                 if (tool != null)
                 {
                     var pathTool = tool as ToolPath;
                     pathTool.RemoveLastSegment();
                 }
-                CurrentPathTool = PathTools.FirstOrDefault(t => t.Name == "Arc");
+                CurrentPathTool = PathTools.FirstOrDefault(t => t.Title == "Arc");
             }
             else
             {
-                CurrentTool = Tools.FirstOrDefault(t => t.Name == "Arc");
+                CurrentTool = Tools.FirstOrDefault(t => t.Title == "Arc");
             }
         }
 
@@ -1196,19 +1196,19 @@ namespace Core2D.Editor
         /// </summary>
         public void OnToolCubicBezier()
         {
-            if (CurrentTool.Name == "Path" && CurrentPathTool.Name != "CubicBezier")
+            if (CurrentTool.Title == "Path" && CurrentPathTool.Title != "CubicBezier")
             {
-                var tool = Tools.FirstOrDefault(t => t.Name == "Path");
+                var tool = Tools.FirstOrDefault(t => t.Title == "Path");
                 if (tool != null)
                 {
                     var pathTool = tool as ToolPath;
                     pathTool.RemoveLastSegment();
                 }
-                CurrentPathTool = PathTools.FirstOrDefault(t => t.Name == "CubicBezier");
+                CurrentPathTool = PathTools.FirstOrDefault(t => t.Title == "CubicBezier");
             }
             else
             {
-                CurrentTool = Tools.FirstOrDefault(t => t.Name == "CubicBezier");
+                CurrentTool = Tools.FirstOrDefault(t => t.Title == "CubicBezier");
             }
         }
 
@@ -1217,19 +1217,19 @@ namespace Core2D.Editor
         /// </summary>
         public void OnToolQuadraticBezier()
         {
-            if (CurrentTool.Name == "Path" && CurrentPathTool.Name != "QuadraticBezier")
+            if (CurrentTool.Title == "Path" && CurrentPathTool.Title != "QuadraticBezier")
             {
-                var tool = Tools.FirstOrDefault(t => t.Name == "Path");
+                var tool = Tools.FirstOrDefault(t => t.Title == "Path");
                 if (tool != null)
                 {
                     var pathTool = tool as ToolPath;
                     pathTool.RemoveLastSegment();
                 }
-                CurrentPathTool = PathTools.FirstOrDefault(t => t.Name == "QuadraticBezier");
+                CurrentPathTool = PathTools.FirstOrDefault(t => t.Title == "QuadraticBezier");
             }
             else
             {
-                CurrentTool = Tools.FirstOrDefault(t => t.Name == "QuadraticBezier");
+                CurrentTool = Tools.FirstOrDefault(t => t.Title == "QuadraticBezier");
             }
         }
 
@@ -1238,7 +1238,7 @@ namespace Core2D.Editor
         /// </summary>
         public void OnToolPath()
         {
-            CurrentTool = Tools.FirstOrDefault(t => t.Name == "Path");
+            CurrentTool = Tools.FirstOrDefault(t => t.Title == "Path");
         }
 
         /// <summary>
@@ -1246,7 +1246,7 @@ namespace Core2D.Editor
         /// </summary>
         public void OnToolRectangle()
         {
-            CurrentTool = Tools.FirstOrDefault(t => t.Name == "Rectangle");
+            CurrentTool = Tools.FirstOrDefault(t => t.Title == "Rectangle");
         }
 
         /// <summary>
@@ -1254,7 +1254,7 @@ namespace Core2D.Editor
         /// </summary>
         public void OnToolEllipse()
         {
-            CurrentTool = Tools.FirstOrDefault(t => t.Name == "Ellipse");
+            CurrentTool = Tools.FirstOrDefault(t => t.Title == "Ellipse");
         }
 
         /// <summary>
@@ -1262,7 +1262,7 @@ namespace Core2D.Editor
         /// </summary>
         public void OnToolText()
         {
-            CurrentTool = Tools.FirstOrDefault(t => t.Name == "Text");
+            CurrentTool = Tools.FirstOrDefault(t => t.Title == "Text");
         }
 
         /// <summary>
@@ -1270,7 +1270,7 @@ namespace Core2D.Editor
         /// </summary>
         public void OnToolImage()
         {
-            CurrentTool = Tools.FirstOrDefault(t => t.Name == "Image");
+            CurrentTool = Tools.FirstOrDefault(t => t.Title == "Image");
         }
 
         /// <summary>
@@ -1278,15 +1278,15 @@ namespace Core2D.Editor
         /// </summary>
         public void OnToolMove()
         {
-            if (CurrentTool.Name == "Path" && CurrentPathTool.Name != "Move")
+            if (CurrentTool.Title == "Path" && CurrentPathTool.Title != "Move")
             {
-                var tool = Tools.FirstOrDefault(t => t.Name == "Path");
+                var tool = Tools.FirstOrDefault(t => t.Title == "Path");
                 if (tool != null)
                 {
                     var pathTool = tool as ToolPath;
                     pathTool.RemoveLastSegment();
                 }
-                CurrentPathTool = PathTools.FirstOrDefault(t => t.Name == "Move");
+                CurrentPathTool = PathTools.FirstOrDefault(t => t.Title == "Move");
             }
         }
 
