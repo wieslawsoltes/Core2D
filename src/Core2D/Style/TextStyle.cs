@@ -10,23 +10,12 @@ namespace Core2D.Style
     /// </summary>
     public class TextStyle : ObservableObject
     {
-        private string _name;
         private string _fontName;
         private string _fontFile;
         private double _fontSize;
         private FontStyle _fontStyle;
         private TextHAlignment _textHAlignment;
         private TextVAlignment _textVAlignment;
-
-        /// <summary>
-        /// Gets or sets text style name.
-        /// </summary>
-        [Name]
-        public string Name
-        {
-            get => _name;
-            set => Update(ref _name, value);
-        }
 
         /// <summary>
         /// Gets or sets font name.
@@ -124,12 +113,6 @@ namespace Core2D.Style
                 TextVAlignment = _textVAlignment
             };
         }
-
-        /// <summary>
-        /// Check whether the <see cref="Name"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeName() => !String.IsNullOrWhiteSpace(_name);
 
         /// <summary>
         /// Check whether the <see cref="FontName"/> property has changed from its default value.
