@@ -11,9 +11,9 @@ namespace Core2D.Editor
     public abstract class ViewBase<T> : ObservableObject, IView
     {
         /// <inheritdoc/>
-        public abstract override string Name { get; set; }
+        public abstract string Title { get; }
 
         /// <inheritdoc/>
-        public abstract object Context { get; set; }
+        public abstract object Context { get; }
     }
 }
