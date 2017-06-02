@@ -120,97 +120,97 @@
         <MenuItem Header="_Tool">
             <MenuItem Header="_None" Command="{Static Editor:ProjectEditorCommands.ToolNoneCommand}">
                 <MenuItem.Icon>
-                    <CheckBox IsChecked="{Binding CurrentTool.Name, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter=None, Mode=OneWay}" Classes="menu"/>
+                    <CheckBox IsChecked="{Binding CurrentTool.Title, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter=None, Mode=OneWay}" Classes="menu"/>
                 </MenuItem.Icon>
             </MenuItem>
             <Separator/>
             <MenuItem Header="_Selection" Command="{Static Editor:ProjectEditorCommands.ToolSelectionCommand}">
                 <MenuItem.Icon>
-                    <CheckBox IsChecked="{Binding CurrentTool.Name, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter=Selection, Mode=OneWay}" Classes="menu"/>
+                    <CheckBox IsChecked="{Binding CurrentTool.Title, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter=Selection, Mode=OneWay}" Classes="menu"/>
                 </MenuItem.Icon>
             </MenuItem>
             <Separator/>
             <MenuItem Header="_Point" Command="{Static Editor:ProjectEditorCommands.ToolPointCommand}">
                 <MenuItem.Icon>
-                    <CheckBox IsChecked="{Binding CurrentTool.Name, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter=Point, Mode=OneWay}" Classes="menu"/>
+                    <CheckBox IsChecked="{Binding CurrentTool.Title, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter=Point, Mode=OneWay}" Classes="menu"/>
                 </MenuItem.Icon>
             </MenuItem>
             <Separator/>
             <MenuItem Header="_Line" Command="{Static Editor:ProjectEditorCommands.ToolLineCommand}">
                 <MenuItem.Icon>
-                    <CheckBox IsChecked="{Binding CurrentTool.Name, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter=Line, Mode=OneWay}" Classes="menu"/>
+                    <CheckBox IsChecked="{Binding CurrentTool.Title, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter=Line, Mode=OneWay}" Classes="menu"/>
                 </MenuItem.Icon>
             </MenuItem>
             <MenuItem Header="_Arc" Command="{Static Editor:ProjectEditorCommands.ToolArcCommand}">
                 <MenuItem.Icon>
-                    <CheckBox IsChecked="{Binding CurrentTool.Name, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter=Arc, Mode=OneWay}" Classes="menu"/>
+                    <CheckBox IsChecked="{Binding CurrentTool.Title, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter=Arc, Mode=OneWay}" Classes="menu"/>
                 </MenuItem.Icon>
             </MenuItem>
             <MenuItem Header="Cubic _Bezier" Command="{Static Editor:ProjectEditorCommands.ToolCubicBezierCommand}">
                 <MenuItem.Icon>
-                    <CheckBox IsChecked="{Binding CurrentTool.Name, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter=CubicBezier, Mode=OneWay}" Classes="menu"/>
+                    <CheckBox IsChecked="{Binding CurrentTool.Title, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter=CubicBezier, Mode=OneWay}" Classes="menu"/>
                 </MenuItem.Icon>
             </MenuItem>
             <MenuItem Header="_Quadratic Bezier" Command="{Static Editor:ProjectEditorCommands.ToolQuadraticBezierCommand}">
                 <MenuItem.Icon>
-                    <CheckBox IsChecked="{Binding CurrentTool.Name, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter=QuadraticBezier, Mode=OneWay}" Classes="menu"/>
+                    <CheckBox IsChecked="{Binding CurrentTool.Title, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter=QuadraticBezier, Mode=OneWay}" Classes="menu"/>
                 </MenuItem.Icon>
             </MenuItem>
             <Separator/>
             <MenuItem Header="Pat_h" Command="{Static Editor:ProjectEditorCommands.ToolPathCommand}">
                 <MenuItem.Icon>
-                    <CheckBox IsChecked="{Binding CurrentTool.Name, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter=Path, Mode=OneWay}" Classes="menu"/>
+                    <CheckBox IsChecked="{Binding CurrentTool.Title, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter=Path, Mode=OneWay}" Classes="menu"/>
                 </MenuItem.Icon>
             </MenuItem>
             <MenuItem Header="Path T_ool">
                 <MenuItem Header="_Line" Command="{Static Editor:ProjectEditorCommands.ToolLineCommand}">
                     <MenuItem.Icon>
-                        <CheckBox IsChecked="{Binding CurrentPathTool.Name, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter=Line, Mode=OneWay}" Classes="menu"/>
+                        <CheckBox IsChecked="{Binding CurrentPathTool.Title, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter=Line, Mode=OneWay}" Classes="menu"/>
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="_Arc" Command="{Static Editor:ProjectEditorCommands.ToolArcCommand}">
                     <MenuItem.Icon>
-                        <CheckBox IsChecked="{Binding CurrentPathTool.Name, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter=Arc, Mode=OneWay}" Classes="menu"/>
+                        <CheckBox IsChecked="{Binding CurrentPathTool.Title, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter=Arc, Mode=OneWay}" Classes="menu"/>
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="Cubic _Bezier" Command="{Static Editor:ProjectEditorCommands.ToolCubicBezierCommand}">
                     <MenuItem.Icon>
-                        <CheckBox IsChecked="{Binding CurrentPathTool.Name, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter=CubicBezier, Mode=OneWay}" Classes="menu"/>
+                        <CheckBox IsChecked="{Binding CurrentPathTool.Title, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter=CubicBezier, Mode=OneWay}" Classes="menu"/>
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="_Quadratic Bezier" Command="{Static Editor:ProjectEditorCommands.ToolQuadraticBezierCommand}">
                     <MenuItem.Icon>
-                        <CheckBox IsChecked="{Binding CurrentPathTool.Name, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter=QuadraticBezier, Mode=OneWay}" Classes="menu"/>
+                        <CheckBox IsChecked="{Binding CurrentPathTool.Title, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter=QuadraticBezier, Mode=OneWay}" Classes="menu"/>
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator/>
                 <MenuItem Header="_Move" Command="{Static Editor:ProjectEditorCommands.ToolMoveCommand}">
                     <MenuItem.Icon>
-                        <CheckBox IsChecked="{Binding CurrentPathTool.Name, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter=Move, Mode=OneWay}" Classes="menu"/>
+                        <CheckBox IsChecked="{Binding CurrentPathTool.Title, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter=Move, Mode=OneWay}" Classes="menu"/>
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
             <Separator/>
             <MenuItem Header="_Rectangle" Command="{Static Editor:ProjectEditorCommands.ToolRectangleCommand}">
                 <MenuItem.Icon>
-                    <CheckBox IsChecked="{Binding CurrentTool.Name, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter=Rectangle, Mode=OneWay}" Classes="menu"/>
+                    <CheckBox IsChecked="{Binding CurrentTool.Title, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter=Rectangle, Mode=OneWay}" Classes="menu"/>
                 </MenuItem.Icon>
             </MenuItem>
             <MenuItem Header="_Ellipse" Command="{Static Editor:ProjectEditorCommands.ToolEllipseCommand}">
                 <MenuItem.Icon>
-                    <CheckBox IsChecked="{Binding CurrentTool.Name, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter=Ellipse, Mode=OneWay}" Classes="menu"/>
+                    <CheckBox IsChecked="{Binding CurrentTool.Title, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter=Ellipse, Mode=OneWay}" Classes="menu"/>
                 </MenuItem.Icon>
             </MenuItem>
             <Separator/>
             <MenuItem Header="_Text" Command="{Static Editor:ProjectEditorCommands.ToolTextCommand}">
                 <MenuItem.Icon>
-                    <CheckBox IsChecked="{Binding CurrentTool.Name, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter=Text, Mode=OneWay}" Classes="menu"/>
+                    <CheckBox IsChecked="{Binding CurrentTool.Title, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter=Text, Mode=OneWay}" Classes="menu"/>
                 </MenuItem.Icon>
             </MenuItem>
             <Separator/>
             <MenuItem Header="_Image" Command="{Static Editor:ProjectEditorCommands.ToolImageCommand}">
                 <MenuItem.Icon>
-                    <CheckBox IsChecked="{Binding CurrentTool.Name, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter=Image, Mode=OneWay}" Classes="menu"/>
+                    <CheckBox IsChecked="{Binding CurrentTool.Title, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter=Image, Mode=OneWay}" Classes="menu"/>
                 </MenuItem.Icon>
             </MenuItem>
         </MenuItem>
