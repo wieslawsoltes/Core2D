@@ -50,8 +50,8 @@ namespace Core2D.SkiaDemo
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            _projectEditor.CurrentTool = _projectEditor.Tools.FirstOrDefault(t => t.Name == "Selection");
-            _projectEditor.CurrentPathTool = _projectEditor.PathTools.FirstOrDefault(t => t.Name == "Line");
+            _projectEditor.CurrentTool = _projectEditor.Tools.FirstOrDefault(t => t.Title == "Selection");
+            _projectEditor.CurrentPathTool = _projectEditor.PathTools.FirstOrDefault(t => t.Title == "Line");
             _projectEditor.OnNewProject();
 
             _projectEditor.Invalidate = () =>
