@@ -30,7 +30,7 @@ namespace Core2D.Editor.Tools
         private IEnumerable<BaseShape> _shapesCache;
 
         /// <inheritdoc/>
-        public override string Name => "Selection";
+        public override string Title => "Selection";
 
         /// <summary>
         /// Gets or sets the tool settings.
