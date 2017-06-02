@@ -25,7 +25,7 @@ namespace Core2D.Editor.Tools.Path
         private ToolLineSelection _selection;
 
         /// <inheritdoc/>
-        public override string Name => "Line";
+        public override string Title => "Line";
 
         /// <summary>
         /// Gets or sets the path tool settings.
