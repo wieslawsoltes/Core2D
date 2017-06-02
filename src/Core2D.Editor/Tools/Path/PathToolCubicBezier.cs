@@ -25,7 +25,7 @@ namespace Core2D.Editor.Tools.Path
         private ToolCubicBezierSelection _selection;
 
         /// <inheritdoc/>
-        public override string Name => "CubicBezier";
+        public override string Title => "CubicBezier";
 
         /// <summary>
         /// Gets or sets the path tool settings.
