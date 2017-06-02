@@ -12,9 +12,9 @@ namespace Core2D.Editor
     public abstract class Tool : ObservableObject
     {
         /// <summary>
-        /// Gets the tool name.
+        /// Gets the tool title.
         /// </summary>
-        public abstract string Name { get; }
+        public abstract string Title { get; }
 
         /// <summary>
         /// Handle mouse left button down events.
@@ -22,7 +22,7 @@ namespace Core2D.Editor
         /// <param name="args">The input arguments.</param>
         public virtual void LeftDown(InputArgs args)
         {
-            Debug.WriteLine($"[{Name}] LeftDown X={args.X} Y={args.Y}, Modifier {args.Modifier}");
+            Debug.WriteLine($"[{Title}] LeftDown X={args.X} Y={args.Y}, Modifier {args.Modifier}");
         }
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace Core2D.Editor
         /// <param name="args">The input arguments.</param>
         public virtual void LeftUp(InputArgs args)
         {
-            Debug.WriteLine($"[{Name}] LeftDown X={args.X} Y={args.Y}, Modifier {args.Modifier}");
+            Debug.WriteLine($"[{Title}] LeftDown X={args.X} Y={args.Y}, Modifier {args.Modifier}");
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace Core2D.Editor
         /// <param name="args">The input arguments.</param>
         public virtual void RightDown(InputArgs args)
         {
-            Debug.WriteLine($"[{Name}] LeftDown X={args.X} Y={args.Y}, Modifier {args.Modifier}");
+            Debug.WriteLine($"[{Title}] LeftDown X={args.X} Y={args.Y}, Modifier {args.Modifier}");
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace Core2D.Editor
         /// <param name="args">The input arguments.</param>
         public virtual void RightUp(InputArgs args)
         {
-            Debug.WriteLine($"[{Name}] LeftDown X={args.X} Y={args.Y}, Modifier {args.Modifier}");
+            Debug.WriteLine($"[{Title}] LeftDown X={args.X} Y={args.Y}, Modifier {args.Modifier}");
         }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace Core2D.Editor
         /// <param name="args">The input arguments.</param>
         public virtual void Move(InputArgs args)
         {
-            Debug.WriteLine($"[{Name}] LeftDown X={args.X} Y={args.Y}, Modifier {args.Modifier}");
+            Debug.WriteLine($"[{Title}] LeftDown X={args.X} Y={args.Y}, Modifier {args.Modifier}");
         }
 
         /// <summary>
