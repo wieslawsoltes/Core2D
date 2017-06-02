@@ -11,19 +11,8 @@ namespace Core2D.Project
     /// </summary>
     public class XDocument : XSelectable
     {
-        private string _name;
         private bool _isExpanded = true;
         private ImmutableArray<XContainer> _pages;
-
-        /// <summary>
-        /// Gets or sets document name.
-        /// </summary>
-        [Name]
-        public string Name
-        {
-            get => _name;
-            set => Update(ref _name, value);
-        }
 
         /// <summary>
         /// Gets or sets flag indicating whether document is expanded.
@@ -55,12 +44,6 @@ namespace Core2D.Project
         /// <param name="name">The document name.</param>
         /// <returns>The new instance of the <see cref="XDocument"/> class.</returns>
         public static XDocument Create(string name = "Document") => new XDocument() { Name = name };
-
-        /// <summary>
-        /// Check whether the <see cref="Name"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeName() => !String.IsNullOrWhiteSpace(_name);
 
         /// <summary>
         /// Check whether the <see cref="IsExpanded"/> property has changed from its default value.
