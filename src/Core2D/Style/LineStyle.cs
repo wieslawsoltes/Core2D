@@ -10,21 +10,10 @@ namespace Core2D.Style
     /// </summary>
     public class LineStyle : ObservableObject
     {
-        private string _name;
         private bool _isCurved;
         private double _curvature;
         private CurveOrientation _curveOrientation;
         private LineFixedLength _fixedLength;
-
-        /// <summary>
-        /// Gets or sets line style name.
-        /// </summary>
-        [Name]
-        public string Name
-        {
-            get => _name;
-            set => Update(ref _name, value);
-        }
 
         /// <summary>
         /// Gets or sets value indicating whether line is curved.
@@ -103,12 +92,6 @@ namespace Core2D.Style
                 FixedLength = _fixedLength.Clone()
             };
         }
-
-        /// <summary>
-        /// Check whether the <see cref="Name"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeName() => !String.IsNullOrWhiteSpace(_name);
 
         /// <summary>
         /// Check whether the <see cref="IsCurved"/> property has changed from its default value.
