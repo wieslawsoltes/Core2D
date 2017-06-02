@@ -6,7 +6,7 @@ namespace Core2D.Project
     /// <summary>
     /// Selectable base class.
     /// </summary>
-    public abstract class XSelectable : ObservableResource
+    public abstract class XSelectable : ObservableObject
     {
     }
 }
