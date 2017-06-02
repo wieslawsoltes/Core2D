@@ -10,30 +10,9 @@ namespace Core2D.Data.Database
     /// </summary>
     public class XColumn : ObservableObject
     {
-        private string _id;
-        private string _name;
         private double _width;
         private bool _isVisible;
         private XDatabase _owner;
-
-        /// <summary>
-        /// Gets or sets column Id.
-        /// </summary>
-        [Name]
-        public string Id
-        {
-            get => _id;
-            set => Update(ref _id, value);
-        }
-
-        /// <summary>
-        /// Gets or sets column name.
-        /// </summary>
-        public string Name
-        {
-            get => _name;
-            set => Update(ref _name, value);
-        }
 
         /// <summary>
         /// Gets or sets column display width.
@@ -81,18 +60,6 @@ namespace Core2D.Data.Database
                 Owner = owner
             };
         }
-
-        /// <summary>
-        /// Check whether the <see cref="Id"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeId() => !String.IsNullOrWhiteSpace(_id);
-
-        /// <summary>
-        /// Check whether the <see cref="Name"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeName() => !String.IsNullOrWhiteSpace(_name);
 
         /// <summary>
         /// Check whether the <see cref="Width"/> property has changed from its default value.
