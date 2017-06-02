@@ -1,5 +1,0 @@
-<XContainer xmlns="https://github.com/Core2D" Name="Template" Width="800" Height="600" Background="#00FFFFFF">
-    <XContainer.Layers>
-        <XLayer Name="TemplateLayer"/>
-    </XContainer.Layers>
-</XContainer>
