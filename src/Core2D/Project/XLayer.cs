@@ -29,20 +29,9 @@ namespace Core2D.Project
         /// </summary>
         public event InvalidateLayerEventHandler InvalidateLayer;
 
-        private string _name;
         private XContainer _owner;
         private bool _isVisible = true;
         private ImmutableArray<BaseShape> _shapes;
-
-        /// <summary>
-        /// Gets or sets layer name.
-        /// </summary>
-        [Name]
-        public string Name
-        {
-            get => _name;
-            set => Update(ref _name, value);
-        }
 
         /// <summary>
         /// Gets or sets layer owner.
@@ -102,12 +91,6 @@ namespace Core2D.Project
                 IsVisible = isVisible
             };
         }
-
-        /// <summary>
-        /// Check whether the <see cref="Name"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeName() => !String.IsNullOrWhiteSpace(_name);
 
         /// <summary>
         /// Check whether the <see cref="Owner"/> property has changed from its default value.
