@@ -43,7 +43,7 @@
             <MenuItem Header="{x:Static p:Resources.MenuViewViews}" Tag="{Binding}" ItemsSource="{Binding Views}">
                 <MenuItem.ItemContainerStyle>
                     <Style TargetType="MenuItem">
-                        <Setter Property="Header" Value="{Binding Name}"/>
+                        <Setter Property="Header" Value="{Binding Title}"/>
                         <Setter Property="Command" Value="{x:Static Editor:ProjectEditorCommands.ChangeCurrentViewCommand}"/>
                         <Setter Property="CommandParameter" Value="{Binding}"/>
                         <Setter Property="IsCheckable" Value="True"/>
