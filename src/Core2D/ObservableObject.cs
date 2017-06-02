@@ -18,7 +18,7 @@ namespace Core2D
         private ImmutableArray<ObservableObject> _resources = ImmutableArray.Create<ObservableObject>();
 
         /// <summary>
-        /// Gets or sets resource name.
+        /// Gets or sets observable object name.
         /// </summary>
         [Name]
         public virtual string Id
@@ -28,7 +28,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Gets or sets resource name.
+        /// Gets or sets observable object name.
         /// </summary>
         public virtual string Name
         {
@@ -37,7 +37,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Gets or sets shape resources.
+        /// Gets or sets observable object resources.
         /// </summary>
         public virtual ImmutableArray<ObservableObject> Resources
         {
