@@ -18,7 +18,6 @@ namespace Core2D.Project
     /// </summary>
     public partial class XProject : XSelectable
     {
-        private string _name;
         private XOptions _options;
         private IHistory _history;
         private ImmutableArray<XLibrary<ShapeStyle>> _styleLibraries;
@@ -33,16 +32,6 @@ namespace Core2D.Project
         private XDocument _currentDocument;
         private XContainer _currentContainer;
         private XSelectable _selected;
-
-        /// <summary>
-        /// Gets or sets project name.
-        /// </summary>
-        [Name]
-        public string Name
-        {
-            get => _name;
-            set => Update(ref _name, value);
-        }
 
         /// <summary>
         /// Gets or sets project options.
@@ -363,12 +352,6 @@ namespace Core2D.Project
                 Name = name
             };
         }
-
-        /// <summary>
-        /// Check whether the <see cref="Name"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeName() => !String.IsNullOrWhiteSpace(_name);
 
         /// <summary>
         /// Check whether the <see cref="Options"/> property has changed from its default value.
