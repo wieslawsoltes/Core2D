@@ -13,8 +13,8 @@ namespace Core2D
     /// </summary>
     public abstract class ObservableObject : INotifyPropertyChanged
     {
-        private string _id = null;
-        private string _name = null;
+        private string _id = Guid.NewGuid().ToString();
+        private string _name = "";
         private ImmutableArray<ObservableObject> _resources = ImmutableArray.Create<ObservableObject>();
 
         /// <summary>
