@@ -15,7 +15,6 @@ namespace Core2D.Project
     /// </summary>
     public class XContainer : XSelectable
     {
-        private string _name;
         private double _width;
         private double _height;
         private ArgbColor _background;
@@ -27,16 +26,6 @@ namespace Core2D.Project
         private XContainer _template;
         private XContext _data;
         private bool _isExpanded = false;
-
-        /// <summary>
-        /// Gets or sets container name.
-        /// </summary>
-        [Name]
-        public string Name
-        {
-            get => _name;
-            set => Update(ref _name, value);
-        }
 
         /// <summary>
         /// Gets or sets container width.
@@ -315,12 +304,6 @@ namespace Core2D.Project
 
             return template;
         }
-
-        /// <summary>
-        /// Check whether the <see cref="Name"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeName() => !String.IsNullOrWhiteSpace(_name);
 
         /// <summary>
         /// Check whether the <see cref="Width"/> property has changed from its default value.
