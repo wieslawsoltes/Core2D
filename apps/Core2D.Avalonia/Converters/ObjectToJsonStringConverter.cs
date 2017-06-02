@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
+using System.Diagnostics;
 using System.Globalization;
 using Avalonia;
 using Avalonia.Markup;
@@ -39,7 +40,11 @@ namespace Core2D.Avalonia.Converters
                 {
                     return JsonSerializer?.Value?.Serialize(value);
                 }
-                catch (Exception) { }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                    Debug.WriteLine(ex.StackTrace);
+                }
             }
             return AvaloniaProperty.UnsetValue;
         }
