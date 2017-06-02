@@ -16,10 +16,10 @@ namespace Core2D.UnitTests
     {
         [Fact]
         [Trait("Core2D.Shape", "Shape")]
-        public void Inherits_From_ObservableResource()
+        public void Inherits_From_ObservableObject()
         {
             var target = new Class1();
-            Assert.True(target is ObservableResource);
+            Assert.True(target is ObservableObject);
         }
 
         [Fact]
