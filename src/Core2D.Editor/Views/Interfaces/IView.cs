@@ -9,13 +9,13 @@ namespace Core2D.Editor.Views.Interfaces
     public interface IView
     {
         /// <summary>
-        /// Gets view name.
+        /// Gets view title.
         /// </summary>
-       string Name { get; set; }
+       string Title { get; }
 
         /// <summary>
         /// Gets view context.
         /// </summary>
-        object Context { get; set; }
+        object Context { get; }
     }
 }
