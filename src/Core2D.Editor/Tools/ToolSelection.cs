@@ -54,7 +54,7 @@ namespace Core2D.Editor.Tools
         /// <summary>
         /// Validate if point can move.
         /// </summary>
-        /// <remarks>Do not move connector points if they have owner or are locked.</remarks>
+        /// <remarks>Do not move points if they are (1) connector and have owner or (2) are locked.</remarks>
         /// <param name="shape">The shape object.</param>
         /// <param name="point">The point to validate.</param>
         /// <returns>True if point is valid, otherwise false.</returns>
