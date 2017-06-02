@@ -30,7 +30,7 @@ namespace Core2D.Editor.Tools.Path
         private const XSweepDirection _defaultSweepDirection = XSweepDirection.Clockwise;
 
         /// <inheritdoc/>
-        public override string Name => "Arc";
+        public override string Title => "Arc";
 
         /// <summary>
         /// Gets or sets the path tool settings.
