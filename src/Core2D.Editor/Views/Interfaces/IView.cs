@@ -11,11 +11,11 @@ namespace Core2D.Editor.Views.Interfaces
         /// <summary>
         /// Gets view name.
         /// </summary>
-       string Name { get; }
+       string Name { get; set; }
 
         /// <summary>
         /// Gets view context.
         /// </summary>
-        object Context { get; }
+        object Context { get; set; }
     }
 }
