@@ -94,7 +94,7 @@
             <MenuItem Header="_Views" Items="{Binding Views}">
                 <MenuItem.Styles>
                     <Style Selector="MenuItem">
-                        <Setter Property="Header" Value="{Binding Name}"/>
+                        <Setter Property="Header" Value="{Binding Title}"/>
                         <Setter Property="Command" Value="{Static Editor:ProjectEditorCommands.ChangeCurrentViewCommand}"/>
                         <Setter Property="CommandParameter" Value="{Binding}"/>
                         <Setter Property="Icon">
