@@ -15,7 +15,7 @@ namespace Core2D.Editor.Tools
         private ToolSettingsNone _settings;
 
         /// <inheritdoc/>
-        public override string Name => "None";
+        public override string Title => "None";
 
         /// <summary>
         /// Gets or sets the tool settings.
