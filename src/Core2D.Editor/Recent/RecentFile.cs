@@ -1,47 +1,36 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using System.Collections.Immutable;
 
 namespace Core2D.Editor.Recent
 {
     /// <summary>
-    /// Recent files.
+    /// Recent file.
     /// </summary>
-    public class Recents : ObservableObject
+    public class RecentFile : ObservableObject
     {
-        private ImmutableArray<RecentFile> _files = ImmutableArray.Create<RecentFile>();
-        private RecentFile _current = default(RecentFile);
-        
+        private string _path;
+
         /// <summary>
-        /// Gets or sets recent file entries.
+        /// Gets or sets recent file path.
         /// </summary>
-        public ImmutableArray<RecentFile> Files
+        public string Path
         {
-            get => _files;
-            set => Update(ref _files, value);
-        }
-        
-        /// <summary>
-        /// Gets or sets current recent file.
-        /// </summary>
-        public RecentFile Current
-        {
-            get => _current;
-            set => Update(ref _current, value);
+            get => _path;
+            set => Update(ref _path, value);
         }
 
         /// <summary>
-        /// Creates a new <see cref="Recents"/> instance.
+        /// Creates a new <see cref="RecentFile"/> instance.
         /// </summary>
-        /// <param name="files">The recent files.</param>
-        /// <param name="current">The current recent file.</param>
-        /// <returns>The new instance of the <see cref="Recents"/> class.</returns>
-        public static Recents Create(ImmutableArray<RecentFile> files, RecentFile current)
+        /// <param name="name">The recent file name.</param>
+        /// <param name="path">The recent file path.</param>
+        /// <returns>The new instance of the <see cref="RecentFile"/> class.</returns>
+        public static RecentFile Create(string name, string path)
         {
-            return new Recents()
+            return new RecentFile()
             {
-                Files = files,
-                Current = current
+                Name = name,
+                Path = path
             };
         }
     }
