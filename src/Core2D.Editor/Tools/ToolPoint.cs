@@ -19,7 +19,7 @@ namespace Core2D.Editor.Tools
         private XPoint _point;
 
         /// <inheritdoc/>
-        public override string Name => "Point";
+        public override string Title => "Point";
 
         /// <summary>
         /// Gets or sets the tool settings.
