@@ -109,48 +109,48 @@ namespace Core2D.Renderer
         /// Check whether the <see cref="PanX"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializePanX() => _panX != default(double);
+        public virtual bool ShouldSerializePanX() => _panX != default(double);
 
         /// <summary>
         /// Check whether the <see cref="PanY"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializePanY() => _panY != default(double);
+        public virtual bool ShouldSerializePanY() => _panY != default(double);
 
         /// <summary>
         /// Check whether the <see cref="ZoomX"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeZoomX() => _zoomX != default(double);
+        public virtual bool ShouldSerializeZoomX() => _zoomX != default(double);
 
         /// <summary>
         /// Check whether the <see cref="ZoomY"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeZoomY() => _zoomY != default(double);
+        public virtual bool ShouldSerializeZoomY() => _zoomY != default(double);
 
         /// <summary>
         /// Check whether the <see cref="DrawShapeState"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeDrawShapeState() => _drawShapeState != null;
+        public virtual bool ShouldSerializeDrawShapeState() => _drawShapeState != null;
 
         /// <summary>
         /// Check whether the <see cref="SelectedShape"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeSelectedShape() => _selectedShape != null;
+        public virtual bool ShouldSerializeSelectedShape() => _selectedShape != null;
 
         /// <summary>
         /// Check whether the <see cref="SelectedShapes"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeSelectedShapes() => _selectedShapes.IsEmpty == false;
+        public virtual bool ShouldSerializeSelectedShapes() => _selectedShapes.IsEmpty == false;
 
         /// <summary>
         /// Check whether the <see cref="ImageCache"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeImageCache() => _imageCache != null;
+        public virtual bool ShouldSerializeImageCache() => _imageCache != null;
     }
 }

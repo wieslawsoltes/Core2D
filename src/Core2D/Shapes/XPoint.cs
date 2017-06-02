@@ -186,24 +186,24 @@ namespace Core2D.Shapes
         /// Check whether the <see cref="X"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeX() => _x != default(double);
+        public virtual bool ShouldSerializeX() => _x != default(double);
 
         /// <summary>
         /// Check whether the <see cref="Y"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeY() => _y != default(double);
+        public virtual bool ShouldSerializeY() => _y != default(double);
 
         /// <summary>
         /// Check whether the <see cref="Alignment"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeAlignment() => _alignment != default(PointAlignment);
+        public virtual bool ShouldSerializeAlignment() => _alignment != default(PointAlignment);
 
         /// <summary>
         /// Check whether the <see cref="Shape"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeShape() => _shape != null;
+        public virtual bool ShouldSerializeShape() => _shape != null;
     }
 }

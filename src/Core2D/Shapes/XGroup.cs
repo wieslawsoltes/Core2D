@@ -349,12 +349,12 @@ namespace Core2D.Shapes
         /// Check whether the <see cref="Shapes"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeShapes() => _shapes.IsEmpty == false;
+        public virtual bool ShouldSerializeShapes() => _shapes.IsEmpty == false;
 
         /// <summary>
         /// Check whether the <see cref="Connectors"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeConnectors() => _connectors.IsEmpty == false;
+        public virtual bool ShouldSerializeConnectors() => _connectors.IsEmpty == false;
     }
 }

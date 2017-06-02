@@ -51,6 +51,6 @@ namespace Core2D.Path.Segments
         /// Check whether the <see cref="Point"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializePoint() => _point != null;
+        public virtual bool ShouldSerializePoint() => _point != null;
     }
 }

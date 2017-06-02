@@ -109,30 +109,30 @@ namespace Core2D.Path.Segments
         /// Check whether the <see cref="Point"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializePoint() => _point != null;
+        public virtual bool ShouldSerializePoint() => _point != null;
 
         /// <summary>
         /// Check whether the <see cref="Size"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeSize() => _size != null;
+        public virtual bool ShouldSerializeSize() => _size != null;
 
         /// <summary>
         /// Check whether the <see cref="RotationAngle"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeRotationAngle() => _rotationAngle != default(double);
+        public virtual bool ShouldSerializeRotationAngle() => _rotationAngle != default(double);
 
         /// <summary>
         /// Check whether the <see cref="IsLargeArc"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeIsLargeArc() => _isLargeArc != default(bool);
+        public virtual bool ShouldSerializeIsLargeArc() => _isLargeArc != default(bool);
 
         /// <summary>
         /// Check whether the <see cref="SweepDirection"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeSweepDirection() => _sweepDirection != default(XSweepDirection);
+        public virtual bool ShouldSerializeSweepDirection() => _sweepDirection != default(XSweepDirection);
     }
 }

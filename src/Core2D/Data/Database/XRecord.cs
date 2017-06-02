@@ -103,12 +103,12 @@ namespace Core2D.Data.Database
         /// Check whether the <see cref="Values"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeValues() => _values.IsEmpty == false;
+        public virtual bool ShouldSerializeValues() => _values.IsEmpty == false;
 
         /// <summary>
         /// Check whether the <see cref="Owner"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeOwner() => _owner != null;
+        public virtual bool ShouldSerializeOwner() => _owner != null;
     }
 }

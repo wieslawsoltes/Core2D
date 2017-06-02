@@ -182,12 +182,12 @@ namespace Core2D.Shapes
         /// Check whether the <see cref="Start"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeStart() => _start != null;
+        public virtual bool ShouldSerializeStart() => _start != null;
 
         /// <summary>
         /// Check whether the <see cref="End"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeEnd() => _end != null;
+        public virtual bool ShouldSerializeEnd() => _end != null;
     }
 }

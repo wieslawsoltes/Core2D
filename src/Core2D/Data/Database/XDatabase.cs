@@ -266,24 +266,24 @@ namespace Core2D.Data.Database
         /// Check whether the <see cref="IdColumnName"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeIdColumnName() => !String.IsNullOrWhiteSpace(_idColumnName);
+        public virtual bool ShouldSerializeIdColumnName() => !String.IsNullOrWhiteSpace(_idColumnName);
 
         /// <summary>
         /// Check whether the <see cref="Columns"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeColumns() => _columns.IsEmpty == false;
+        public virtual bool ShouldSerializeColumns() => _columns.IsEmpty == false;
 
         /// <summary>
         /// Check whether the <see cref="Records"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeRecords() => _records.IsEmpty == false;
+        public virtual bool ShouldSerializeRecords() => _records.IsEmpty == false;
 
         /// <summary>
         /// Check whether the <see cref="CurrentRecord"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeCurrentRecord() => _currentRecord != null;
+        public virtual bool ShouldSerializeCurrentRecord() => _currentRecord != null;
     }
 }

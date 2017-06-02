@@ -29,7 +29,7 @@ namespace Core2D.Renderer
         /// Check whether the <see cref="State"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeState() => _state != null;
+        public virtual bool ShouldSerializeState() => _state != null;
 
         /// <summary>
         /// Clears renderer cache.

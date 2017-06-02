@@ -154,24 +154,24 @@ namespace Core2D.Style
         /// Check whether the <see cref="A"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeA() => _a != default(byte);
+        public virtual bool ShouldSerializeA() => _a != default(byte);
 
         /// <summary>
         /// Check whether the <see cref="R"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeR() => _r != default(byte);
+        public virtual bool ShouldSerializeR() => _r != default(byte);
 
         /// <summary>
         /// Check whether the <see cref="G"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeG() => _g != default(byte);
+        public virtual bool ShouldSerializeG() => _g != default(byte);
 
         /// <summary>
         /// Check whether the <see cref="B"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeB() => _b != default(byte);
+        public virtual bool ShouldSerializeB() => _b != default(byte);
     }
 }

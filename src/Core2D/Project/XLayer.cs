@@ -96,18 +96,18 @@ namespace Core2D.Project
         /// Check whether the <see cref="Owner"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeOwner() => _owner != null;
+        public virtual bool ShouldSerializeOwner() => _owner != null;
 
         /// <summary>
         /// Check whether the <see cref="IsVisible"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeIsVisible() => _isVisible != default(bool);
+        public virtual bool ShouldSerializeIsVisible() => _isVisible != default(bool);
 
         /// <summary>
         /// Check whether the <see cref="Shapes"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeShapes() => _shapes.IsEmpty == false;
+        public virtual bool ShouldSerializeShapes() => _shapes.IsEmpty == false;
     }
 }

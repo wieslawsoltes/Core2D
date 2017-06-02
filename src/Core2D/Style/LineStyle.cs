@@ -97,24 +97,24 @@ namespace Core2D.Style
         /// Check whether the <see cref="IsCurved"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeIsCurved() => _isCurved != default(bool);
+        public virtual bool ShouldSerializeIsCurved() => _isCurved != default(bool);
 
         /// <summary>
         /// Check whether the <see cref="Curvature"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeCurvature() => _curvature != default(double);
+        public virtual bool ShouldSerializeCurvature() => _curvature != default(double);
 
         /// <summary>
         /// Check whether the <see cref="CurveOrientation"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeCurveOrientation() => _curveOrientation != default(CurveOrientation);
+        public virtual bool ShouldSerializeCurveOrientation() => _curveOrientation != default(CurveOrientation);
 
         /// <summary>
         /// Check whether the <see cref="FixedLength"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeFixedLength() => _fixedLength != null;
+        public virtual bool ShouldSerializeFixedLength() => _fixedLength != null;
     }
 }

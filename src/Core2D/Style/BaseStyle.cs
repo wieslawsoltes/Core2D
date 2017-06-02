@@ -186,36 +186,36 @@ namespace Core2D.Style
         /// Check whether the <see cref="Stroke"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeStroke() => _stroke != null;
+        public virtual bool ShouldSerializeStroke() => _stroke != null;
 
         /// <summary>
         /// Check whether the <see cref="Fill"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeFill() => _fill != null;
+        public virtual bool ShouldSerializeFill() => _fill != null;
 
         /// <summary>
         /// Check whether the <see cref="Thickness"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeThickness() => _thickness != default(double);
+        public virtual bool ShouldSerializeThickness() => _thickness != default(double);
 
         /// <summary>
         /// Check whether the <see cref="LineCap"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeLineCap() => _lineCap != default(LineCap);
+        public virtual bool ShouldSerializeLineCap() => _lineCap != default(LineCap);
 
         /// <summary>
         /// Check whether the <see cref="Dashes"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeDashes() => !String.IsNullOrWhiteSpace(_dashes);
+        public virtual bool ShouldSerializeDashes() => !String.IsNullOrWhiteSpace(_dashes);
 
         /// <summary>
         /// Check whether the <see cref="DashOffset"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeDashOffset() => _dashOffset != default(double);
+        public virtual bool ShouldSerializeDashOffset() => _dashOffset != default(double);
     }
 }

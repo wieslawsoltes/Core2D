@@ -126,36 +126,36 @@ namespace Core2D.Style
         /// Check whether the <see cref="Flags"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeFlags() => _flags != default(FontStyleFlags);
+        public virtual bool ShouldSerializeFlags() => _flags != default(FontStyleFlags);
 
         /// <summary>
         /// The <see cref="Regular"/> property is not serialized.
         /// </summary>
         /// <returns>Returns always false.</returns>
-        public bool ShouldSerializeRegular() => false;
+        public virtual bool ShouldSerializeRegular() => false;
 
         /// <summary>
         /// The <see cref="Bold"/> property is not serialized.
         /// </summary>
         /// <returns>Returns always false.</returns>
-        public bool ShouldSerializeBold() => false;
+        public virtual bool ShouldSerializeBold() => false;
 
         /// <summary>
         /// The <see cref="Italic"/> property is not serialized.
         /// </summary>
         /// <returns>Returns always false.</returns>
-        public bool ShouldSerializeItalic() => false;
+        public virtual bool ShouldSerializeItalic() => false;
 
         /// <summary>
         /// The <see cref="Underline"/> property is not serialized.
         /// </summary>
         /// <returns>Returns always false.</returns>
-        public bool ShouldSerializeUnderline() => false;
+        public virtual bool ShouldSerializeUnderline() => false;
 
         /// <summary>
         /// The <see cref="Strikeout"/> property is not serialized.
         /// </summary>
         /// <returns>Returns always false.</returns>
-        public bool ShouldSerializeStrikeout() => false;
+        public virtual bool ShouldSerializeStrikeout() => false;
     }
 }

@@ -180,42 +180,42 @@ namespace Core2D.Shape
         /// Check whether the <see cref="Owner"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeOwner() => _owner != null;
+        public virtual bool ShouldSerializeOwner() => _owner != null;
 
         /// <summary>
         /// Check whether the <see cref="State"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeState() => _state != null;
+        public virtual bool ShouldSerializeState() => _state != null;
 
         /// <summary>
         /// Check whether the <see cref="Style"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeStyle() => _style != null;
+        public virtual bool ShouldSerializeStyle() => _style != null;
 
         /// <summary>
         /// Check whether the <see cref="Transform"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeTransform() => _transform != null;
+        public virtual bool ShouldSerializeTransform() => _transform != null;
 
         /// <summary>
         /// Check whether the <see cref="IsStroked"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeIsStroked() => _isStroked != default(bool);
+        public virtual bool ShouldSerializeIsStroked() => _isStroked != default(bool);
 
         /// <summary>
         /// Check whether the <see cref="IsFilled"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeIsFilled() => _isFilled != default(bool);
+        public virtual bool ShouldSerializeIsFilled() => _isFilled != default(bool);
 
         /// <summary>
         /// Check whether the <see cref="Data"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeData() => _data != null;
+        public virtual bool ShouldSerializeData() => _data != null;
     }
 }

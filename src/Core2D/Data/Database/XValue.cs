@@ -33,6 +33,6 @@ namespace Core2D.Data.Database
         /// Check whether the <see cref="Content"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeContent() => !String.IsNullOrWhiteSpace(_content);
+        public virtual bool ShouldSerializeContent() => !String.IsNullOrWhiteSpace(_content);
     }
 }

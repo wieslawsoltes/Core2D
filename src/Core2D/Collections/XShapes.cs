@@ -30,6 +30,6 @@ namespace Core2D.Collections
         /// Check whether the <see cref="Children"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeChildren() => Children.IsEmpty == false;
+        public virtual bool ShouldSerializeChildren() => Children.IsEmpty == false;
     }
 }

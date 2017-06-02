@@ -78,12 +78,12 @@ namespace Core2D.Project
         /// Check whether the <see cref="Items"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeItems() => _items.IsEmpty == false;
+        public virtual bool ShouldSerializeItems() => _items.IsEmpty == false;
 
         /// <summary>
         /// Check whether the <see cref="Selected"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeSelected() => _selected != null;
+        public virtual bool ShouldSerializeSelected() => _selected != null;
     }
 }

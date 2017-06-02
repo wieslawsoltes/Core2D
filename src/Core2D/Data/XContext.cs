@@ -93,12 +93,12 @@ namespace Core2D.Data
         /// Check whether the <see cref="Properties"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeProperties() => _properties.IsEmpty == false;
+        public virtual bool ShouldSerializeProperties() => _properties.IsEmpty == false;
 
         /// <summary>
         /// Check whether the <see cref="Record"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeRecord() => _record != null;
+        public virtual bool ShouldSerializeRecord() => _record != null;
     }
 }

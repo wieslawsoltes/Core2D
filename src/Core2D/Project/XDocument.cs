@@ -49,12 +49,12 @@ namespace Core2D.Project
         /// Check whether the <see cref="IsExpanded"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeIsExpanded() => _isExpanded != default(bool);
+        public virtual bool ShouldSerializeIsExpanded() => _isExpanded != default(bool);
 
         /// <summary>
         /// Check whether the <see cref="Pages"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializePages() => _pages.IsEmpty == false;
+        public virtual bool ShouldSerializePages() => _pages.IsEmpty == false;
     }
 }

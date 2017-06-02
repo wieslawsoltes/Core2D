@@ -357,84 +357,84 @@ namespace Core2D.Project
         /// Check whether the <see cref="Options"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeOptions() => _options != null;
+        public virtual bool ShouldSerializeOptions() => _options != null;
 
         /// <summary>
         /// Check whether the <see cref="History"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeHistory() => _history != null;
+        public virtual bool ShouldSerializeHistory() => _history != null;
 
         /// <summary>
         /// Check whether the <see cref="StyleLibraries"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeStyleLibraries() => _styleLibraries.IsEmpty == false;
+        public virtual bool ShouldSerializeStyleLibraries() => _styleLibraries.IsEmpty == false;
 
         /// <summary>
         /// Check whether the <see cref="GroupLibraries"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeGroupLibraries() => _groupLibraries.IsEmpty == false;
+        public virtual bool ShouldSerializeGroupLibraries() => _groupLibraries.IsEmpty == false;
 
         /// <summary>
         /// Check whether the <see cref="Databases"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeDatabases() => _databases.IsEmpty == false;
+        public virtual bool ShouldSerializeDatabases() => _databases.IsEmpty == false;
 
         /// <summary>
         /// Check whether the <see cref="Templates"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeTemplates() => _templates.IsEmpty == false;
+        public virtual bool ShouldSerializeTemplates() => _templates.IsEmpty == false;
 
         /// <summary>
         /// Check whether the <see cref="Documents"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeDocuments() => _documents.IsEmpty == false;
+        public virtual bool ShouldSerializeDocuments() => _documents.IsEmpty == false;
 
         /// <summary>
         /// Check whether the <see cref="CurrentStyleLibrary"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeCurrentStyleLibrary() => _currentStyleLibrary != null;
+        public virtual bool ShouldSerializeCurrentStyleLibrary() => _currentStyleLibrary != null;
 
         /// <summary>
         /// Check whether the <see cref="CurrentGroupLibrary"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeCurrentGroupLibrary() => _currentGroupLibrary != null;
+        public virtual bool ShouldSerializeCurrentGroupLibrary() => _currentGroupLibrary != null;
 
         /// <summary>
         /// Check whether the <see cref="CurrentDatabase"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeCurrentDatabase() => _currentDatabase != null;
+        public virtual bool ShouldSerializeCurrentDatabase() => _currentDatabase != null;
 
         /// <summary>
         /// Check whether the <see cref="CurrentTemplate"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeCurrentTemplate() => _currentTemplate != null;
+        public virtual bool ShouldSerializeCurrentTemplate() => _currentTemplate != null;
 
         /// <summary>
         /// Check whether the <see cref="CurrentDocument"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeCurrentDocument() => _currentDocument != null;
+        public virtual bool ShouldSerializeCurrentDocument() => _currentDocument != null;
 
         /// <summary>
         /// Check whether the <see cref="CurrentContainer"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeCurrentContainer() => _currentContainer != null;
+        public virtual bool ShouldSerializeCurrentContainer() => _currentContainer != null;
 
         /// <summary>
         /// Check whether the <see cref="Selected"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeSelected() => _selected != null;
+        public virtual bool ShouldSerializeSelected() => _selected != null;
     }
 }
