@@ -25,7 +25,7 @@ namespace Core2D.Editor.Tools.Path
         private ToolQuadraticBezierSelection _selection;
 
         /// <inheritdoc/>
-        public override string Name => "QuadraticBezier";
+        public override string Title => "QuadraticBezier";
 
         /// <summary>
         /// Gets or sets the path tool settings.
