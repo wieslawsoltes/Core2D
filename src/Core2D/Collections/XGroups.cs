@@ -10,14 +10,8 @@ namespace Core2D.Collections
     /// <summary>
     /// Observable <see cref="XGroup"/> collection.
     /// </summary>
-    public class XGroups : ObservableResource
+    public class XGroups : ObservableObject
     {
-        /// <summary>
-        /// Gets or sets resource name.
-        /// </summary>
-        [Name]
-        public string Name { get; set; }
-
         /// <summary>
         /// Gets or sets children collection.
         /// </summary>
@@ -31,12 +25,6 @@ namespace Core2D.Collections
         {
             Children = ImmutableArray.Create<XGroup>();
         }
-
-        /// <summary>
-        /// Check whether the <see cref="Name"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public bool ShouldSerializeName() => !String.IsNullOrWhiteSpace(Name);
 
         /// <summary>
         /// Check whether the <see cref="Children"/> property has changed from its default value.
