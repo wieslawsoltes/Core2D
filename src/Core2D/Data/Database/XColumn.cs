@@ -53,7 +53,6 @@ namespace Core2D.Data.Database
         {
             return new XColumn()
             {
-                Id = Guid.NewGuid().ToString(),
                 Name = name,
                 Width = width,
                 IsVisible = isVisible,
