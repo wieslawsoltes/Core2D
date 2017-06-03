@@ -116,42 +116,38 @@
                     </MultiBinding>
                 </TextBlock.Text>
             </TextBlock>
-            <WrapPanel Name="toolsPanel" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center">
-                <WrapPanel Name="toolPanel">
-                    <DropDown Classes="tool" Items="{Binding Tools}" SelectedItem="{Binding CurrentTool, Mode=TwoWay}">
-                        <DropDown.DataTemplates>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Title}"/>
-                            </DataTemplate>
-                        </DropDown.DataTemplates>
-                    </DropDown>
-                    <DropDown Classes="tool" Items="{Binding PathTools}" SelectedItem="{Binding CurrentPathTool, Mode=TwoWay}">
-                        <DropDown.DataTemplates>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Title}"/>
-                            </DataTemplate>
-                        </DropDown.DataTemplates>
-                        <DropDown.IsVisible>
-                            <MultiBinding Mode="OneWay" Converter="{Static converters:ObjectEqualityMultiConverter.Instance}">
-                                <Binding Path="CurrentTool.Title"/>
-                                <Binding Source="Path"/>
-                            </MultiBinding>
-                        </DropDown.IsVisible>
-                    </DropDown>
-                </WrapPanel>
-                <WrapPanel Name="optionsPanel">
-                    <Button Content="Reset" Classes="autofit" Command="{Static Editor:ProjectEditorCommands.ZoomResetCommand}"/>
-                    <Button Content="AutoFit" Classes="autofit" Command="{Static Editor:ProjectEditorCommands.ZoomAutoFitCommand}"/>
-                    <DropDown Classes="autofit" Items="{Static paz:ZoomBorder.AutoFitModes}" SelectedItem="{Binding #zoomBorder.AutoFitMode, Mode=TwoWay}"/>
-                    <TextBox Classes="autofit" Text="{Binding #zoomBorder.ZoomSpeed, Mode=TwoWay}" Width="50"/>
-                    <CheckBox Classes="options" Content="Stroked" IsChecked="{Binding Project.Options.DefaultIsStroked, Mode=TwoWay}"/>
-                    <CheckBox Classes="options" Content="Filled" IsChecked="{Binding Project.Options.DefaultIsFilled, Mode=TwoWay}"/>
-                    <CheckBox Classes="options" Content="Closed" IsChecked="{Binding Project.Options.DefaultIsClosed, Mode=TwoWay}"/>
-                    <CheckBox Classes="options" Content="SmoothJoin" IsChecked="{Binding Project.Options.DefaultIsSmoothJoin, Mode=TwoWay}"/>
-                    <CheckBox Classes="options" Content="Snap" IsChecked="{Binding Project.Options.SnapToGrid, Mode=TwoWay}"/>
-                    <CheckBox Classes="options" Content="Connect" IsChecked="{Binding Project.Options.TryToConnect, Mode=TwoWay}"/>
-                    <CheckBox Classes="options" Content="CloneStyle" IsChecked="{Binding Project.Options.CloneStyle, Mode=TwoWay}"/>
-                </WrapPanel>
+            <WrapPanel Name="optionsPanel" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <DropDown Classes="tool" Items="{Binding Tools}" SelectedItem="{Binding CurrentTool, Mode=TwoWay}">
+                    <DropDown.DataTemplates>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Title}"/>
+                        </DataTemplate>
+                    </DropDown.DataTemplates>
+                </DropDown>
+                <DropDown Classes="tool" Items="{Binding PathTools}" SelectedItem="{Binding CurrentPathTool, Mode=TwoWay}">
+                    <DropDown.DataTemplates>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Title}"/>
+                        </DataTemplate>
+                    </DropDown.DataTemplates>
+                    <DropDown.IsVisible>
+                        <MultiBinding Mode="OneWay" Converter="{Static converters:ObjectEqualityMultiConverter.Instance}">
+                            <Binding Path="CurrentTool.Title"/>
+                            <Binding Source="Path"/>
+                        </MultiBinding>
+                    </DropDown.IsVisible>
+                </DropDown>
+                <Button Content="Reset" Classes="autofit" Command="{Static Editor:ProjectEditorCommands.ZoomResetCommand}"/>
+                <Button Content="AutoFit" Classes="autofit" Command="{Static Editor:ProjectEditorCommands.ZoomAutoFitCommand}"/>
+                <DropDown Classes="autofit" Items="{Static paz:ZoomBorder.AutoFitModes}" SelectedItem="{Binding #zoomBorder.AutoFitMode, Mode=TwoWay}"/>
+                <TextBox Classes="autofit" Text="{Binding #zoomBorder.ZoomSpeed, Mode=TwoWay}" Width="50"/>
+                <CheckBox Classes="options" Content="Stroked" IsChecked="{Binding Project.Options.DefaultIsStroked, Mode=TwoWay}"/>
+                <CheckBox Classes="options" Content="Filled" IsChecked="{Binding Project.Options.DefaultIsFilled, Mode=TwoWay}"/>
+                <CheckBox Classes="options" Content="Closed" IsChecked="{Binding Project.Options.DefaultIsClosed, Mode=TwoWay}"/>
+                <CheckBox Classes="options" Content="SmoothJoin" IsChecked="{Binding Project.Options.DefaultIsSmoothJoin, Mode=TwoWay}"/>
+                <CheckBox Classes="options" Content="Snap" IsChecked="{Binding Project.Options.SnapToGrid, Mode=TwoWay}"/>
+                <CheckBox Classes="options" Content="Connect" IsChecked="{Binding Project.Options.TryToConnect, Mode=TwoWay}"/>
+                <CheckBox Classes="options" Content="CloneStyle" IsChecked="{Binding Project.Options.CloneStyle, Mode=TwoWay}"/>
             </WrapPanel>
         </Grid> 
     </Grid>
