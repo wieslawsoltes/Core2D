@@ -3,31 +3,31 @@
 <Styles xmlns="https://github.com/avaloniaui">
     <!-- Border -->
     <Style Selector="Border.leftTop">
-        <Setter Property="Margin" Value="0"/>
+        <Setter Property="Margin" Value="1"/>
         <Setter Property="Padding" Value="3,3,3,3"/>
         <Setter Property="BorderBrush" Value="{StyleResource ThemeBorderLightBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
     </Style>
     <Style Selector="Border.leftBottom">
-        <Setter Property="Margin" Value="0"/>
+        <Setter Property="Margin" Value="1"/>
         <Setter Property="Padding" Value="3,3,3,3"/>
         <Setter Property="BorderBrush" Value="{StyleResource ThemeBorderLightBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
     </Style>
     <Style Selector="Border.rightTop">
-        <Setter Property="Margin" Value="0"/>
+        <Setter Property="Margin" Value="1"/>
         <Setter Property="Padding" Value="3,3,3,3"/>
         <Setter Property="BorderBrush" Value="{StyleResource ThemeBorderLightBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
     </Style>
     <Style Selector="Border.rightBottom">
-        <Setter Property="Margin" Value="0"/>
+        <Setter Property="Margin" Value="1"/>
         <Setter Property="Padding" Value="3,3,3,3"/>
         <Setter Property="BorderBrush" Value="{StyleResource ThemeBorderLightBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
     </Style>
     <Style Selector="Border.container">
-        <Setter Property="Margin" Value="0"/>
+        <Setter Property="Margin" Value="1"/>
         <Setter Property="Padding" Value="3,3,3,3"/>
         <Setter Property="Background" Value="{StyleResource TemplateCheckerBoard}"/>
         <Setter Property="BorderThickness" Value="1"/>
