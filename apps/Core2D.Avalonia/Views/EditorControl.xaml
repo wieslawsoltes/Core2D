@@ -139,13 +139,11 @@
                         </DropDown.IsVisible>
                     </DropDown>
                 </WrapPanel>
-                <WrapPanel Name="zoomPanel">
+                <WrapPanel Name="optionsPanel">
                     <Button Content="Reset" Classes="autofit" Command="{Static Editor:ProjectEditorCommands.ZoomResetCommand}"/>
                     <Button Content="AutoFit" Classes="autofit" Command="{Static Editor:ProjectEditorCommands.ZoomAutoFitCommand}"/>
                     <DropDown Classes="autofit" Items="{Static paz:ZoomBorder.AutoFitModes}" SelectedItem="{Binding #zoomBorder.AutoFitMode, Mode=TwoWay}"/>
                     <TextBox Classes="autofit" Text="{Binding #zoomBorder.ZoomSpeed, Mode=TwoWay}" Width="50"/>
-                </WrapPanel>
-                <WrapPanel Name="optionsPanel">
                     <CheckBox Classes="options" Content="Stroked" IsChecked="{Binding Project.Options.DefaultIsStroked, Mode=TwoWay}"/>
                     <CheckBox Classes="options" Content="Filled" IsChecked="{Binding Project.Options.DefaultIsFilled, Mode=TwoWay}"/>
                     <CheckBox Classes="options" Content="Closed" IsChecked="{Binding Project.Options.DefaultIsClosed, Mode=TwoWay}"/>
