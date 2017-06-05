@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Core2D\Core2D.csproj" />
+    <ProjectReference Include="..\..\src\Core2D\Core2D.csproj" />
     <ProjectReference Include="..\Renderer.Dxf\Renderer.Dxf.csproj" />
   </ItemGroup>
 
