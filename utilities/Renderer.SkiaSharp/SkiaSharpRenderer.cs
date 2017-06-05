@@ -87,46 +87,43 @@ namespace Renderer.SkiaSharp
 
         private SKColor ToSKColor(ArgbColor color) => new SKColor(color.R, color.G, color.B, color.A);
 
-        private SKPaint ToSKPaintPen(BaseStyle style, Func<double, float> scale, double sourceDpi, double targetDpi)
+        private static SKStrokeCap ToStrokeCap(BaseStyle style)
         {
-            var paint = new SKPaint();
-            paint.IsAntialias = _isAntialias;
-            paint.IsStroke = true;
-            paint.StrokeWidth = scale(style.Thickness * targetDpi / sourceDpi);
-            paint.Color = ToSKColor(style.Stroke);
-
             switch (style.LineCap)
             {
+                default:
                 case LineCap.Flat:
-                    paint.StrokeCap = SKStrokeCap.Butt;
-                    break;
+                    return SKStrokeCap.Butt;
                 case LineCap.Square:
-                    paint.StrokeCap = SKStrokeCap.Square;
-                    break;
+                    return SKStrokeCap.Square;
                 case LineCap.Round:
-                    paint.StrokeCap = SKStrokeCap.Round;
-                    break;
+                    return SKStrokeCap.Round;
             }
+        }
 
-            if (style.Dashes != null)
+        private SKPaint ToSKPaintPen(BaseStyle style, Func<double, float> scale, double sourceDpi, double targetDpi)
+        {
+            return new SKPaint()
             {
-                paint.PathEffect = SKPathEffect.CreateDash(
-                    BaseStyle.ConvertDashesToFloatArray(style.Dashes),
-                    (float)style.DashOffset);
-            }
-
-            return paint;
+                IsAntialias = _isAntialias,
+                IsStroke = true,
+                StrokeWidth = scale(style.Thickness * targetDpi / sourceDpi),
+                Color = ToSKColor(style.Stroke),
+                StrokeCap = ToStrokeCap(style),
+                PathEffect = style.Dashes != null ? SKPathEffect.CreateDash(BaseStyle.ConvertDashesToFloatArray(style.Dashes), (float)style.DashOffset) : null
+            };
         }
 
         private SKPaint ToSKPaintBrush(ArgbColor color)
         {
-            var paint = new SKPaint();
-            paint.IsAntialias = _isAntialias;
-            paint.IsStroke = false;
-            paint.LcdRenderText = true;
-            paint.SubpixelText = true;
-            paint.Color = ToSKColor(color);
-            return paint;
+            return new SKPaint()
+            {
+                IsAntialias = _isAntialias,
+                IsStroke = false,
+                LcdRenderText = true,
+                SubpixelText = true,
+                Color = ToSKColor(color)
+            };
         }
 
         private SKRect ToSKRect(double x, double y, double width, double height)
