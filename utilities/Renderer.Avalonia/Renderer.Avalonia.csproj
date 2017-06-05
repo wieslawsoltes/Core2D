@@ -12,7 +12,7 @@
   <Import Project="..\..\build\Avalonia.props" />
 
   <ItemGroup>
-    <ProjectReference Include="..\Core2D\Core2D.csproj" />
+    <ProjectReference Include="..\..\src\Core2D\Core2D.csproj" />
   </ItemGroup>
 
 </Project>
