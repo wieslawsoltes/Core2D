@@ -16,16 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\Core2D\Core2D.csproj" />
     <ProjectReference Include="..\..\src\FileSystem.DotNet\FileSystem.DotNet.csproj" />
-    <ProjectReference Include="..\..\src\FileWriter.SkiaSharpBmp\FileWriter.SkiaSharpBmp.csproj" />
-    <ProjectReference Include="..\..\src\FileWriter.SkiaSharpGif\FileWriter.SkiaSharpGif.csproj" />
-    <ProjectReference Include="..\..\src\FileWriter.SkiaSharpIco\FileWriter.SkiaSharpIco.csproj" />
-    <ProjectReference Include="..\..\src\FileWriter.SkiaSharpJpeg\FileWriter.SkiaSharpJpeg.csproj" />
-    <ProjectReference Include="..\..\src\FileWriter.SkiaSharpKtx\FileWriter.SkiaSharpKtx.csproj" />
-    <ProjectReference Include="..\..\src\FileWriter.SkiaSharpPdf\FileWriter.SkiaSharpPdf.csproj" />
-    <ProjectReference Include="..\..\src\FileWriter.SkiaSharpPng\FileWriter.SkiaSharpPng.csproj" />
-    <ProjectReference Include="..\..\src\FileWriter.SkiaSharpSvg\FileWriter.SkiaSharpSvg.csproj" />
-    <ProjectReference Include="..\..\src\FileWriter.SkiaSharpWbmp\FileWriter.SkiaSharpWbmp.csproj" />
-    <ProjectReference Include="..\..\src\FileWriter.SkiaSharpWebp\FileWriter.SkiaSharpWebp.csproj" />
+    <ProjectReference Include="..\..\src\FileWriter.SkiaSharp\FileWriter.SkiaSharp.csproj" />
     <ProjectReference Include="..\..\src\Log.Trace\Log.Trace.csproj" />
     <ProjectReference Include="..\..\src\Renderer.Avalonia\Renderer.Avalonia.csproj" />
     <ProjectReference Include="..\..\src\Renderer.SkiaSharp\Renderer.SkiaSharp.csproj" />
