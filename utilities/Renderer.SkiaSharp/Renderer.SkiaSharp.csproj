@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard1.3;net45;netcoreapp1.0</TargetFrameworks>
+    <OutputType>Library</OutputType>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <Import Project="..\..\build\Default.targets" />
+  <Import Project="..\..\build\Default.props" />
+  <Import Project="..\..\build\SkiaSharp.props" />
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Core2D\Core2D.csproj" />
+  </ItemGroup>
+
+</Project>

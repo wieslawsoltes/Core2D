@@ -100,6 +100,8 @@ if (IsRunningOnWindows())
 var buildDirs = 
     GetDirectories("./src/**/bin/**") + 
     GetDirectories("./src/**/obj/**") + 
+    GetDirectories("./utilities/**/bin/**") + 
+    GetDirectories("./utilities/**/obj/**") + 
     GetDirectories("./tests/**/bin/**") + 
     GetDirectories("./tests/**/obj/**") + 
     GetDirectories("./apps/**/bin/**") + 

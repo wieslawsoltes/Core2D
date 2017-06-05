@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net45</TargetFrameworks>
+    <OutputType>Library</OutputType>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <Import Project="..\..\build\Default.targets" />
+  <Import Project="..\..\build\Default.props" />
+  <Import Project="..\..\build\Net45.props" />
+
+  <ItemGroup>
+    <PackageReference Include="netDXF" Version="2.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Core2D\Core2D.csproj" />
+  </ItemGroup>
+
+</Project>
