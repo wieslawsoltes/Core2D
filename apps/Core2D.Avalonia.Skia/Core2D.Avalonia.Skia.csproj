@@ -55,7 +55,7 @@
     </ProjectReference>
     <ProjectReference Include="..\..\src\FileWriter.SkiaSharp\FileWriter.SkiaSharp.csproj">
       <Project>{ce2d5901-94d6-491f-a78e-4446160e621f}</Project>
-      <Name>FileWriter.SkiaSharpBmp</Name>
+      <Name>FileWriter.SkiaSharp</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\src\Log.Trace\Log.Trace.csproj">
       <Project>{68A36926-DF55-4F05-9F89-B9AB1463227E}</Project>
