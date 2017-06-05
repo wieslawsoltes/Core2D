@@ -39,7 +39,8 @@ namespace ScriptRunner.Roslyn
                 MetadataReference.CreateFromFile(Path.Combine(assemblyPath, "System.Runtime.dll")),
                 MetadataReference.CreateFromFile(Path.Combine(immutableCollectionsPath, "System.Collections.Immutable.dll")),
                 MetadataReference.CreateFromFile(Path.Combine(executingPath, "Core2D.dll")),
-                MetadataReference.CreateFromFile(Path.Combine(executingPath, "Core2D.Spatial.dll")),
+                MetadataReference.CreateFromFile(Path.Combine(executingPath, "Core2D.Editor.dll")),
+                MetadataReference.CreateFromFile(Path.Combine(executingPath, "Math.Spatial.dll")),
                 MetadataReference.CreateFromFile(Assembly.GetEntryAssembly().Location),
             };
 #endif
