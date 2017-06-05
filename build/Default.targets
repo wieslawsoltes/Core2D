@@ -8,50 +8,27 @@
     <PackageLicenseUrl>https://github.com/wieslawsoltes/Core2D/blob/master/LICENSE.TXT</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/wieslawsoltes/Core2D</PackageProjectUrl>
   </PropertyGroup>
-  <!-- Common Properties -->
   <PropertyGroup>
     <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
     <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <!-- Configuration: Debug -->
   <PropertyGroup Condition="$(Configuration.Contains('Debug'))">
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
-  <!-- Configuration: Release -->
   <PropertyGroup Condition="$(Configuration.Contains('Release'))">
     <DefineConstants>TRACE</DefineConstants>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <DebugSymbols>false</DebugSymbols>
   </PropertyGroup>
-  <!-- Platform: AnyCPU -->
   <PropertyGroup Condition="$(Platform.Contains('AnyCPU'))">
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
-  <!-- Platform: x64 -->
-  <PropertyGroup Condition="$(Platform.Contains('x64'))">
-    <PlatformTarget>x64</PlatformTarget>
-  </PropertyGroup>
-  <!-- Platform: x86 -->
-  <PropertyGroup Condition="$(Platform.Contains('x86'))">
-    <PlatformTarget>x86</PlatformTarget>
-  </PropertyGroup>
-  <!-- Platform: ARM -->
-  <PropertyGroup Condition="$(Platform.Contains('ARM'))">
-    <PlatformTarget>ARM</PlatformTarget>
-  </PropertyGroup>
-  <!-- Configurations and Platforms -->
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'"/>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'"/>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'"/>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'"/>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'"/>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'"/>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'"/>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'"/>
 </Project>
