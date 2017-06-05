@@ -118,45 +118,9 @@
       <Project>{EC0EFA51-83F0-4439-BE9F-FAEBD3418C94}</Project>
       <Name>FileWriter.PdfSharp</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\src\FileWriter.SkiaSharpBmp\FileWriter.SkiaSharpBmp.csproj">
+    <ProjectReference Include="..\..\src\FileWriter.SkiaSharp\FileWriter.SkiaSharp.csproj">
       <Project>{ce2d5901-94d6-491f-a78e-4446160e621f}</Project>
       <Name>FileWriter.SkiaSharpBmp</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\src\FileWriter.SkiaSharpGif\FileWriter.SkiaSharpGif.csproj">
-      <Project>{7715bbdd-4cce-419e-8d86-94e0458c26c6}</Project>
-      <Name>FileWriter.SkiaSharpGif</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\src\FileWriter.SkiaSharpIco\FileWriter.SkiaSharpIco.csproj">
-      <Project>{47f29ef1-1861-4841-ab1d-95445365841d}</Project>
-      <Name>FileWriter.SkiaSharpIco</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\src\FileWriter.SkiaSharpJpeg\FileWriter.SkiaSharpJpeg.csproj">
-      <Project>{94dab8db-88fe-4328-8d75-3b96168c9054}</Project>
-      <Name>FileWriter.SkiaSharpJpeg</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\src\FileWriter.SkiaSharpKtx\FileWriter.SkiaSharpKtx.csproj">
-      <Project>{8c6472a3-74a5-4617-9abb-b0f8a81785fe}</Project>
-      <Name>FileWriter.SkiaSharpKtx</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\src\FileWriter.SkiaSharpPdf\FileWriter.SkiaSharpPdf.csproj">
-      <Project>{C934BA25-608B-42FA-B766-42EFAD7DA6FF}</Project>
-      <Name>FileWriter.SkiaSharpPdf</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\src\FileWriter.SkiaSharpPng\FileWriter.SkiaSharpPng.csproj">
-      <Project>{e2596160-6a4f-47a1-b56d-d87b8ac3ab7d}</Project>
-      <Name>FileWriter.SkiaSharpPng</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\src\FileWriter.SkiaSharpSvg\FileWriter.SkiaSharpSvg.csproj">
-      <Project>{E2827255-924C-456E-8049-14E333C6FD18}</Project>
-      <Name>FileWriter.SkiaSharpSvg</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\src\FileWriter.SkiaSharpWbmp\FileWriter.SkiaSharpWbmp.csproj">
-      <Project>{2d1993bf-96f6-4dd1-a240-447a247d3525}</Project>
-      <Name>FileWriter.SkiaSharpWbmp</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\src\FileWriter.SkiaSharpWebp\FileWriter.SkiaSharpWebp.csproj">
-      <Project>{be4bbc40-8711-4bbb-bb6b-fea09ba17e44}</Project>
-      <Name>FileWriter.SkiaSharpWebp</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\src\Renderer.Dxf\Renderer.Dxf.csproj">
       <Project>{ACC2C898-B49B-4ED9-B18C-389F50801B39}</Project>
