@@ -584,7 +584,7 @@
     </ProjectReference>
     <ProjectReference Include="..\..\src\FileWriter.SkiaSharp\FileWriter.SkiaSharp.csproj">
       <Project>{ce2d5901-94d6-491f-a78e-4446160e621f}</Project>
-      <Name>FileWriter.SkiaSharpBmp</Name>
+      <Name>FileWriter.SkiaSharp</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\src\Log.Trace\Log.Trace.csproj">
       <Project>{68A36926-DF55-4F05-9F89-B9AB1463227E}</Project>
@@ -597,14 +597,6 @@
     <ProjectReference Include="..\..\src\Renderer.PdfSharp\Renderer.PdfSharp.csproj">
       <Project>{34C8EE31-A1FE-4A74-BE36-C1F38BC06FEC}</Project>
       <Name>Renderer.PdfSharp</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\src\FileWriter.SkiaSharpPdf\FileWriter.SkiaSharpPdf.csproj">
-      <Project>{C934BA25-608B-42FA-B766-42EFAD7DA6FF}</Project>
-      <Name>FileWriter.SkiaSharpPdf</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\src\FileWriter.SkiaSharpSvg\FileWriter.SkiaSharpSvg.csproj">
-      <Project>{E2827255-924C-456E-8049-14E333C6FD18}</Project>
-      <Name>FileWriter.SkiaSharpSvg</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\src\Renderer.WinForms\Renderer.WinForms.csproj">
       <Project>{3DC476E6-5032-4888-9337-221B88653C40}</Project>
