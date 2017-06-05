@@ -120,7 +120,7 @@
     </ProjectReference>
     <ProjectReference Include="..\..\src\FileWriter.SkiaSharp\FileWriter.SkiaSharp.csproj">
       <Project>{ce2d5901-94d6-491f-a78e-4446160e621f}</Project>
-      <Name>FileWriter.SkiaSharpBmp</Name>
+      <Name>FileWriter.SkiaSharp</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\src\Renderer.Dxf\Renderer.Dxf.csproj">
       <Project>{ACC2C898-B49B-4ED9-B18C-389F50801B39}</Project>
