@@ -11,43 +11,43 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Editor", "src\Core2D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "utilities", "utilities", "{02F7371B-FFDA-46ED-B5FE-9D643EA3354A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileSystem.DotNet", "src\FileSystem.DotNet\FileSystem.DotNet.csproj", "{D1F867F7-9029-480D-B1E1-B0BE4658B182}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileSystem.DotNet", "utilities\FileSystem.DotNet\FileSystem.DotNet.csproj", "{D1F867F7-9029-480D-B1E1-B0BE4658B182}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileWriter.Dxf", "src\FileWriter.Dxf\FileWriter.Dxf.csproj", "{D40B3BCD-0A26-40BB-960B-9464D248C934}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileWriter.Dxf", "utilities\FileWriter.Dxf\FileWriter.Dxf.csproj", "{D40B3BCD-0A26-40BB-960B-9464D248C934}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileWriter.Emf", "src\FileWriter.Emf\FileWriter.Emf.csproj", "{3660FCE5-3D0F-412E-93A7-D0D992B4DA65}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileWriter.Emf", "utilities\FileWriter.Emf\FileWriter.Emf.csproj", "{3660FCE5-3D0F-412E-93A7-D0D992B4DA65}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileWriter.PdfSharp", "src\FileWriter.PdfSharp\FileWriter.PdfSharp.csproj", "{EC0EFA51-83F0-4439-BE9F-FAEBD3418C94}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileWriter.PdfSharp", "utilities\FileWriter.PdfSharp\FileWriter.PdfSharp.csproj", "{EC0EFA51-83F0-4439-BE9F-FAEBD3418C94}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileWriter.SkiaSharp", "src\FileWriter.SkiaSharp\FileWriter.SkiaSharp.csproj", "{CE2D5901-94D6-491F-A78E-4446160E621F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileWriter.SkiaSharp", "utilities\FileWriter.SkiaSharp\FileWriter.SkiaSharp.csproj", "{CE2D5901-94D6-491F-A78E-4446160E621F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Log.Trace", "src\Log.Trace\Log.Trace.csproj", "{68A36926-DF55-4F05-9F89-B9AB1463227E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Log.Trace", "utilities\Log.Trace\Log.Trace.csproj", "{68A36926-DF55-4F05-9F89-B9AB1463227E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Renderer.Avalonia", "src\Renderer.Avalonia\Renderer.Avalonia.csproj", "{E05F3F7E-2176-43DC-90BB-F5C66CFDB12F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Renderer.Avalonia", "utilities\Renderer.Avalonia\Renderer.Avalonia.csproj", "{E05F3F7E-2176-43DC-90BB-F5C66CFDB12F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Renderer.Dxf", "src\Renderer.Dxf\Renderer.Dxf.csproj", "{ACC2C898-B49B-4ED9-B18C-389F50801B39}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Renderer.Dxf", "utilities\Renderer.Dxf\Renderer.Dxf.csproj", "{ACC2C898-B49B-4ED9-B18C-389F50801B39}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Renderer.PdfSharp", "src\Renderer.PdfSharp\Renderer.PdfSharp.csproj", "{34C8EE31-A1FE-4A74-BE36-C1F38BC06FEC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Renderer.PdfSharp", "utilities\Renderer.PdfSharp\Renderer.PdfSharp.csproj", "{34C8EE31-A1FE-4A74-BE36-C1F38BC06FEC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Renderer.SkiaSharp", "src\Renderer.SkiaSharp\Renderer.SkiaSharp.csproj", "{9B8FA9BD-63BE-4560-BA55-0D86AEE1809E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Renderer.SkiaSharp", "utilities\Renderer.SkiaSharp\Renderer.SkiaSharp.csproj", "{9B8FA9BD-63BE-4560-BA55-0D86AEE1809E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Renderer.WinForms", "src\Renderer.WinForms\Renderer.WinForms.csproj", "{3DC476E6-5032-4888-9337-221B88653C40}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Renderer.WinForms", "utilities\Renderer.WinForms\Renderer.WinForms.csproj", "{3DC476E6-5032-4888-9337-221B88653C40}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Renderer.Wpf", "src\Renderer.Wpf\Renderer.Wpf.csproj", "{3BFBD239-8979-480D-B1CB-B763F7C915C8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Renderer.Wpf", "utilities\Renderer.Wpf\Renderer.Wpf.csproj", "{3BFBD239-8979-480D-B1CB-B763F7C915C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serializer.Newtonsoft", "src\Serializer.Newtonsoft\Serializer.Newtonsoft.csproj", "{11E61A53-13D5-4447-8D66-3F328BBFC30A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serializer.Newtonsoft", "utilities\Serializer.Newtonsoft\Serializer.Newtonsoft.csproj", "{11E61A53-13D5-4447-8D66-3F328BBFC30A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serializer.Xaml", "src\Serializer.Xaml\Serializer.Xaml.csproj", "{1DCA99EA-F8FE-4DDD-AB81-BF0380C1B33D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serializer.Xaml", "utilities\Serializer.Xaml\Serializer.Xaml.csproj", "{1DCA99EA-F8FE-4DDD-AB81-BF0380C1B33D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptRunner.Roslyn", "src\ScriptRunner.Roslyn\ScriptRunner.Roslyn.csproj", "{352C23CD-8A6D-4C91-9FD2-FC35ECBC8AFE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptRunner.Roslyn", "utilities\ScriptRunner.Roslyn\ScriptRunner.Roslyn.csproj", "{352C23CD-8A6D-4C91-9FD2-FC35ECBC8AFE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextFieldReader.CsvHelper", "src\TextFieldReader.CsvHelper\TextFieldReader.CsvHelper.csproj", "{F215ADF5-74C1-4E26-9045-B6BBDA736092}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextFieldReader.CsvHelper", "utilities\TextFieldReader.CsvHelper\TextFieldReader.CsvHelper.csproj", "{F215ADF5-74C1-4E26-9045-B6BBDA736092}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextFieldWriter.CsvHelper", "src\TextFieldWriter.CsvHelper\TextFieldWriter.CsvHelper.csproj", "{AE7FF1B5-ABE3-45BF-87CC-44AC580A666A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextFieldWriter.CsvHelper", "utilities\TextFieldWriter.CsvHelper\TextFieldWriter.CsvHelper.csproj", "{AE7FF1B5-ABE3-45BF-87CC-44AC580A666A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilities.Avalonia", "src\Utilities.Avalonia\Utilities.Avalonia.csproj", "{C6DBD1FD-C462-4005-B382-97BB4AEF26F2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilities.Avalonia", "utilities\Utilities.Avalonia\Utilities.Avalonia.csproj", "{C6DBD1FD-C462-4005-B382-97BB4AEF26F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilities.Wpf", "src\Utilities.Wpf\Utilities.Wpf.csproj", "{E8D9036D-7E08-4405-B767-FB1E654EF66A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilities.Wpf", "utilities\Utilities.Wpf\Utilities.Wpf.csproj", "{E8D9036D-7E08-4405-B767-FB1E654EF66A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{8756F874-0C1B-4AB8-83E0-0BEDA782D212}"
 EndProject
