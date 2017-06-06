@@ -205,6 +205,7 @@ Task("Build")
             settings.UseToolVersion(MSBuildToolVersion.VS2017);
             settings.SetConfiguration(configuration);
             settings.WithProperty("Platform", platform);
+            settings.WithProperty("VersionSuffix", suffix);
             settings.SetVerbosity(Verbosity.Minimal);
         });   
     }
@@ -214,6 +215,7 @@ Task("Build")
             settings.UseToolVersion(XBuildToolVersion.Default);
             settings.SetConfiguration(configuration);
             settings.WithProperty("Platform", platform);
+            settings.WithProperty("VersionSuffix", suffix);
             settings.SetVerbosity(Verbosity.Minimal);
         });
     }
@@ -324,7 +326,8 @@ Task("Build-NetCore")
     {
         Information("Building: {0}", project.Name);
         DotNetCoreBuild(project.Path, new DotNetCoreBuildSettings {
-            Configuration = configuration
+            Configuration = configuration,
+            VersionSuffix = suffix
         });
     }
 });
@@ -342,6 +345,7 @@ Task("Publish-NetCore")
             DotNetCorePublish(project.Path, new DotNetCorePublishSettings {
                 Framework = project.Framework,
                 Configuration = configuration,
+                VersionSuffix = suffix,
                 Runtime = runtime,
                 OutputDirectory = outputDir.FullPath
             });
