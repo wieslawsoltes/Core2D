@@ -104,7 +104,6 @@
   <ItemGroup>
     <Compile Include="Designer\DesignerHelper.cs" />
     <Compile Include="Importers\Win32ImageImporter.cs" />
-    <Compile Include="Locator\ServiceProvider.cs" />
     <Compile Include="Modules\AppModule.cs" />
     <Compile Include="Modules\CoreModule.cs" />
     <Compile Include="Modules\DependenciesModule.cs" />
@@ -621,6 +620,10 @@
     <ProjectReference Include="..\..\utilities\Serializer.Xaml\Serializer.Xaml.csproj">
       <Project>{1DCA99EA-F8FE-4DDD-AB81-BF0380C1B33D}</Project>
       <Name>Serializer.Xaml</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\utilities\ServiceProvider.Autofac\ServiceProvider.Autofac.csproj">
+      <Project>{7D5D7DF6-058D-4F2E-A3A8-47F89B6E2E7C}</Project>
+      <Name>ServiceProvider.Autofac</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\utilities\TextFieldReader.CsvHelper\TextFieldReader.CsvHelper.csproj">
       <Project>{F215ADF5-74C1-4E26-9045-B6BBDA736092}</Project>

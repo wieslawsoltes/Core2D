@@ -11,7 +11,6 @@ using Core2D.Editor.Views.Interfaces;
 using Core2D.Interfaces;
 using Core2D.Renderer;
 using Core2D.SkiaDemo.Importers;
-using Core2D.SkiaDemo.Locator;
 using FileSystem.DotNet;
 using FileWriter.Dxf;
 using FileWriter.Emf;
@@ -29,6 +28,7 @@ using FileWriter.SkiaSharpWebp;
 using Renderer.SkiaSharp;
 using Serializer.Newtonsoft;
 using Serializer.Xaml;
+using ServiceProvider.Autofac;
 using TextFieldReader.CsvHelper;
 using TextFieldWriter.CsvHelper;
 using Utilities.Wpf;
@@ -40,7 +40,7 @@ namespace Core2D.SkiaDemo.Modules
         protected override void Load(ContainerBuilder builder)
         {
             // Locator
-            builder.RegisterType<ServiceProvider>().As<IServiceProvider>().InstancePerLifetimeScope();
+            builder.RegisterType<AutofacServiceProvider>().As<IServiceProvider>().InstancePerLifetimeScope();
             // Core
             builder.RegisterType<ProjectEditor>().As<ProjectEditor>().InstancePerLifetimeScope();
             builder.RegisterType<ProjectFactory>().As<IProjectFactory>().InstancePerLifetimeScope();

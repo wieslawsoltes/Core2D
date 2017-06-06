@@ -3,20 +3,20 @@
 using System;
 using Autofac;
 
-namespace Core2D.Wpf.Locator
+namespace ServiceProvider.Autofac
 {
     /// <summary>
     /// Service provider based on lifetime scope.
     /// </summary>
-    public class ServiceProvider : IServiceProvider
+    public class AutofacServiceProvider : IServiceProvider
     {
         private readonly ILifetimeScope _scope;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ServiceProvider"/> class.
+        /// Initializes a new instance of the <see cref="AutofacServiceProvider"/> class.
         /// </summary>
         /// <param name="scope">The lifetime scope.</param>
-        public ServiceProvider(ILifetimeScope scope)
+        public AutofacServiceProvider(ILifetimeScope scope)
         {
             _scope = scope;
         }

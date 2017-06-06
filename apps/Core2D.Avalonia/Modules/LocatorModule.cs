@@ -2,7 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using Autofac;
-using Core2D.Avalonia.Locator;
+using ServiceProvider.Autofac;
 
 namespace Core2D.Avalonia.Modules
 {
@@ -14,7 +14,7 @@ namespace Core2D.Avalonia.Modules
         /// <inheritdoc/>
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<ServiceProvider>().As<IServiceProvider>().InstancePerLifetimeScope();
+            builder.RegisterType<AutofacServiceProvider>().As<IServiceProvider>().InstancePerLifetimeScope();
         }
     }
 }

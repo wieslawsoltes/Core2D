@@ -28,6 +28,7 @@
     <ProjectReference Include="..\..\src\Core2D.Editor\Core2D.Editor.csproj" />
     <ProjectReference Include="..\..\src\Core2D\Core2D.csproj" />
     <ProjectReference Include="..\..\utilities\Renderer.Avalonia\Renderer.Avalonia.csproj" />
+    <ProjectReference Include="..\..\utilities\ServiceProvider.Autofac\ServiceProvider.Autofac.csproj" />
     <ProjectReference Include="..\..\utilities\Utilities.Avalonia\Utilities.Avalonia.csproj" />
   </ItemGroup>
 
