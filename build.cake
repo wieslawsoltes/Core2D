@@ -40,16 +40,30 @@ var isPlatformX64 = StringComparer.OrdinalIgnoreCase.Equals(platform, "x64");
 // VERSION
 ///////////////////////////////////////////////////////////////////////////////
 
-var version = XmlPeek("./build/Default.targets", "//*[local-name()='Version']/text()");
-Information("Version: {0}", version);
+var version = XmlPeek("./build/Default.props", "//*[local-name()='Version']/text()");
+var suffix = "";
+var publishNuGet = false;
+var publishMyGet = false;
 
 if (BuildSystem.AppVeyor.IsRunningOnAppVeyor)
 {
     if (BuildSystem.AppVeyor.Environment.Repository.Tag.IsTag && !string.IsNullOrWhiteSpace(BuildSystem.AppVeyor.Environment.Repository.Tag.Name))
+    {
         version = BuildSystem.AppVeyor.Environment.Repository.Tag.Name;
+        suffix = "";
+        publishNuGet = true;
+        publishMyGet = false;
+    }
     else
-        version += "-build" + EnvironmentVariable("APPVEYOR_BUILD_NUMBER");
+    {
+        suffix = "-build" + EnvironmentVariable("APPVEYOR_BUILD_NUMBER");
+        version += suffix;
+        publishNuGet = false;
+        publishMyGet = true;
+    }
 }
+
+Information("Version: {0}", version);
 
 ///////////////////////////////////////////////////////////////////////////////
 // Visual Studio
@@ -110,6 +124,7 @@ var buildDirs =
 var artifactsDir = (DirectoryPath)Directory("./artifacts");
 var testResultsDir = artifactsDir.Combine("test-results");	
 var zipRootDir = artifactsDir.Combine("zip");
+var nugetRootDir = artifactsDir.Combine("nuget");
 
 var dirSuffixZip = platform + "/" + configuration;
 var fileZipSuffix = configuration + "-" + version + ".zip";
@@ -385,8 +400,91 @@ Task("Zip-Files-NetCore")
 });
 
 ///////////////////////////////////////////////////////////////////////////////
+// TASKS: NuGet
+///////////////////////////////////////////////////////////////////////////////
+
+Task("Create-NuGet-Packages")
+    .IsDependentOn("Run-Unit-Tests")
+    .IsDependentOn("Run-Unit-Tests-NetCore")
+    .Does(() =>
+{
+    var settings = new DotNetCorePackSettings {
+         Configuration = configuration,
+         VersionSuffix = suffix,
+         OutputDirectory = nugetRootDir
+    };
+
+    foreach(var project in GetFiles("./src/**/*.csproj"))
+    {
+        Information("Pack: {0}", project);
+        DotNetCorePack(project.FullPath, settings);
+    }
+
+    foreach(var project in GetFiles("./utilities/**/*.csproj"))
+    {
+        Information("Pack: {0}", project);
+        DotNetCorePack(project.FullPath, settings);
+    }
+});
+
+Task("Publish-MyGet")
+    .IsDependentOn("Create-NuGet-Packages")
+    .WithCriteria(() => publishMyGet)
+    .Does(() =>
+{
+    var apiKey = EnvironmentVariable("MYGET_API_KEY");
+    if(string.IsNullOrEmpty(apiKey)) 
+    {
+        throw new InvalidOperationException("Could not resolve MyGet API key.");
+    }
+
+    var apiUrl = EnvironmentVariable("MYGET_API_URL");
+    if(string.IsNullOrEmpty(apiUrl)) 
+    {
+        throw new InvalidOperationException("Could not resolve MyGet API url.");
+    }
+
+    foreach(var nupkg in GetFiles(nugetRootDir.FullPath + "/*.nupkg"))
+    {
+        NuGetPush(nupkg, new NuGetPushSettings {
+            Source = apiUrl,
+            ApiKey = apiKey
+        });
+    }
+});
+
+Task("Publish-NuGet")
+    .IsDependentOn("Create-NuGet-Packages")
+    .WithCriteria(() => publishNuGet)
+    .Does(() =>
+{
+    var apiKey = EnvironmentVariable("NUGET_API_KEY");
+    if(string.IsNullOrEmpty(apiKey)) 
+    {
+        throw new InvalidOperationException("Could not resolve NuGet API key.");
+    }
+
+    var apiUrl = EnvironmentVariable("NUGET_API_URL");
+    if(string.IsNullOrEmpty(apiUrl)) 
+    {
+        throw new InvalidOperationException("Could not resolve NuGet API url.");
+    }
+
+    foreach(var nupkg in GetFiles(nugetRootDir.FullPath + "/*.nupkg"))
+    {
+        NuGetPush(nupkg, new NuGetPushSettings {
+            ApiKey = apiKey,
+            Source = apiUrl
+        });
+    }
+});
+
+///////////////////////////////////////////////////////////////////////////////
 // TARGETS
 ///////////////////////////////////////////////////////////////////////////////
+
+Task("Package")
+  .IsDependentOn("Create-NuGet-Packages");
 
 Task("Default")
   .IsDependentOn("Run-Unit-Tests");
@@ -399,7 +497,9 @@ Task("AppVeyor")
   .IsDependentOn("Zip-Files-NetCore")
   .IsDependentOn("Run-Unit-Tests")
   .IsDependentOn("Copy-Redist-Files")
-  .IsDependentOn("Zip-Files");
+  .IsDependentOn("Zip-Files")
+  .IsDependentOn("Publish-MyGet")
+  .IsDependentOn("Publish-NuGet");
 
 Task("Travis")
   .IsDependentOn("Run-Unit-Tests-NetCore")
