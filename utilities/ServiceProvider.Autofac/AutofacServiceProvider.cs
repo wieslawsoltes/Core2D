@@ -13,10 +13,10 @@ namespace ServiceProvider.Autofac
         private readonly ILifetimeScope _scope;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ServiceProvider"/> class.
+        /// Initializes a new instance of the <see cref="AutofacServiceProvider"/> class.
         /// </summary>
         /// <param name="scope">The lifetime scope.</param>
-        public ServiceProvider(ILifetimeScope scope)
+        public AutofacServiceProvider(ILifetimeScope scope)
         {
             _scope = scope;
         }
