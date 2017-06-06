@@ -4,4 +4,9 @@
     <PackageReference Include="Avalonia.Direct2D1" Version="0.5.1" />
     <PackageReference Include="Serilog.Sinks.Trace" Version="2.1.0" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Avalonia.Xaml.Interactions" Version="0.5.1" />
+    <PackageReference Include="Avalonia.Xaml.Interactions.Custom" Version="0.5.1" />
+    <PackageReference Include="Avalonia.Controls.PanAndZoom" Version="0.5.1" />
+  </ItemGroup>
 </Project>

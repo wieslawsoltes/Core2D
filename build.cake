@@ -93,7 +93,7 @@ var netCoreProjects = netCoreApps.Select(name =>
 var netCoreUnitTestsRoot= "./tests";
 var netCoreUnitTests = new string[] { 
     "Core2D.UnitTests",
-    "FileSystem.DotNet.UnitTests"
+    "Core2D.FileSystem.DotNet.UnitTests"
 };
 var netCoreUnitTestsProjects = netCoreUnitTests.Select(name => 
     new {
@@ -154,6 +154,7 @@ Task("Clean")
     CleanDirectories(buildDirs);
     CleanDirectory(testResultsDir);
     CleanDirectory(zipRootDir);
+    CleanDirectory(nugetRootDir);
 });
 
 ///////////////////////////////////////////////////////////////////////////////

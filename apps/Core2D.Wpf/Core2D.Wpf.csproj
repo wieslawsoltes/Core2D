@@ -565,77 +565,77 @@
       <Project>{F822EC0C-2501-487D-87A8-B8D28A761385}</Project>
       <Name>Core2D</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\utilities\FileSystem.DotNet\FileSystem.DotNet.csproj">
+    <ProjectReference Include="..\..\utilities\Core2D.FileSystem.DotNet\Core2D.FileSystem.DotNet.csproj">
       <Project>{D1F867F7-9029-480D-B1E1-B0BE4658B182}</Project>
-      <Name>FileSystem.DotNet</Name>
+      <Name>Core2D.FileSystem.DotNet</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\utilities\FileWriter.Dxf\FileWriter.Dxf.csproj">
+    <ProjectReference Include="..\..\utilities\Core2D.FileWriter.Dxf\Core2D.FileWriter.Dxf.csproj">
       <Project>{D40B3BCD-0A26-40BB-960B-9464D248C934}</Project>
-      <Name>FileWriter.Dxf</Name>
+      <Name>Core2D.FileWriter.Dxf</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\utilities\FileWriter.Emf\FileWriter.Emf.csproj">
+    <ProjectReference Include="..\..\utilities\Core2D.FileWriter.Emf\Core2D.FileWriter.Emf.csproj">
       <Project>{3660FCE5-3D0F-412E-93A7-D0D992B4DA65}</Project>
-      <Name>FileWriter.Emf</Name>
+      <Name>Core2D.FileWriter.Emf</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\utilities\FileWriter.PdfSharp\FileWriter.PdfSharp.csproj">
+    <ProjectReference Include="..\..\utilities\Core2D.FileWriter.PdfSharp\Core2D.FileWriter.PdfSharp.csproj">
       <Project>{EC0EFA51-83F0-4439-BE9F-FAEBD3418C94}</Project>
-      <Name>FileWriter.PdfSharp</Name>
+      <Name>Core2D.FileWriter.PdfSharp</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\utilities\FileWriter.SkiaSharp\FileWriter.SkiaSharp.csproj">
+    <ProjectReference Include="..\..\utilities\Core2D.FileWriter.SkiaSharp\Core2D.FileWriter.SkiaSharp.csproj">
       <Project>{ce2d5901-94d6-491f-a78e-4446160e621f}</Project>
-      <Name>FileWriter.SkiaSharp</Name>
+      <Name>Core2D.FileWriter.SkiaSharp</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\utilities\Log.Trace\Log.Trace.csproj">
+    <ProjectReference Include="..\..\utilities\Core2D.Log.Trace\Core2D.Log.Trace.csproj">
       <Project>{68A36926-DF55-4F05-9F89-B9AB1463227E}</Project>
-      <Name>Log.Trace</Name>
+      <Name>Core2D.Log.Trace</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\utilities\Renderer.Dxf\Renderer.Dxf.csproj">
+    <ProjectReference Include="..\..\utilities\Core2D.Renderer.Dxf\Core2D.Renderer.Dxf.csproj">
       <Project>{ACC2C898-B49B-4ED9-B18C-389F50801B39}</Project>
-      <Name>Renderer.Dxf</Name>
+      <Name>Core2D.Renderer.Dxf</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\utilities\Renderer.PdfSharp\Renderer.PdfSharp.csproj">
+    <ProjectReference Include="..\..\utilities\Core2D.Renderer.PdfSharp\Core2D.Renderer.PdfSharp.csproj">
       <Project>{34C8EE31-A1FE-4A74-BE36-C1F38BC06FEC}</Project>
-      <Name>Renderer.PdfSharp</Name>
+      <Name>Core2D.Renderer.PdfSharp</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\utilities\Renderer.WinForms\Renderer.WinForms.csproj">
+    <ProjectReference Include="..\..\utilities\Core2D.Renderer.WinForms\Core2D.Renderer.WinForms.csproj">
       <Project>{3DC476E6-5032-4888-9337-221B88653C40}</Project>
-      <Name>Renderer.WinForms</Name>
+      <Name>Core2D.Renderer.WinForms</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\utilities\Renderer.SkiaSharp\Renderer.SkiaSharp.csproj">
+    <ProjectReference Include="..\..\utilities\Core2D.Renderer.SkiaSharp\Core2D.Renderer.SkiaSharp.csproj">
       <Project>{9B8FA9BD-63BE-4560-BA55-0D86AEE1809E}</Project>
-      <Name>Renderer.SkiaSharp</Name>
+      <Name>Core2D.Renderer.SkiaSharp</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\utilities\Renderer.Wpf\Renderer.Wpf.csproj">
+    <ProjectReference Include="..\..\utilities\Core2D.Renderer.Wpf\Core2D.Renderer.Wpf.csproj">
       <Project>{3BFBD239-8979-480D-B1CB-B763F7C915C8}</Project>
-      <Name>Renderer.Wpf</Name>
+      <Name>Core2D.Renderer.Wpf</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\utilities\ScriptRunner.Roslyn\ScriptRunner.Roslyn.csproj">
+    <ProjectReference Include="..\..\utilities\Core2D.ScriptRunner.Roslyn\Core2D.ScriptRunner.Roslyn.csproj">
       <Project>{352C23CD-8A6D-4C91-9FD2-FC35ECBC8AFE}</Project>
-      <Name>ScriptRunner.Roslyn</Name>
+      <Name>Core2D.ScriptRunner.Roslyn</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\utilities\Serializer.Newtonsoft\Serializer.Newtonsoft.csproj">
+    <ProjectReference Include="..\..\utilities\Core2D.Serializer.Newtonsoft\Core2D.Serializer.Newtonsoft.csproj">
       <Project>{11E61A53-13D5-4447-8D66-3F328BBFC30A}</Project>
-      <Name>Serializer.Newtonsoft</Name>
+      <Name>Core2D.Serializer.Newtonsoft</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\utilities\Serializer.Xaml\Serializer.Xaml.csproj">
+    <ProjectReference Include="..\..\utilities\Core2D.Serializer.Xaml\Core2D.Serializer.Xaml.csproj">
       <Project>{1DCA99EA-F8FE-4DDD-AB81-BF0380C1B33D}</Project>
-      <Name>Serializer.Xaml</Name>
+      <Name>Core2D.Serializer.Xaml</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\utilities\ServiceProvider.Autofac\ServiceProvider.Autofac.csproj">
+    <ProjectReference Include="..\..\utilities\Core2D.ServiceProvider.Autofac\Core2D.ServiceProvider.Autofac.csproj">
       <Project>{7D5D7DF6-058D-4F2E-A3A8-47F89B6E2E7C}</Project>
-      <Name>ServiceProvider.Autofac</Name>
+      <Name>Core2D.ServiceProvider.Autofac</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\utilities\TextFieldReader.CsvHelper\TextFieldReader.CsvHelper.csproj">
+    <ProjectReference Include="..\..\utilities\Core2D.TextFieldReader.CsvHelper\Core2D.TextFieldReader.CsvHelper.csproj">
       <Project>{F215ADF5-74C1-4E26-9045-B6BBDA736092}</Project>
-      <Name>TextFieldReader.CsvHelper</Name>
+      <Name>Core2D.TextFieldReader.CsvHelper</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\utilities\TextFieldWriter.CsvHelper\TextFieldWriter.CsvHelper.csproj">
+    <ProjectReference Include="..\..\utilities\Core2D.TextFieldWriter.CsvHelper\Core2D.TextFieldWriter.CsvHelper.csproj">
       <Project>{AE7FF1B5-ABE3-45BF-87CC-44AC580A666A}</Project>
-      <Name>TextFieldWriter.CsvHelper</Name>
+      <Name>Core2D.TextFieldWriter.CsvHelper</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\utilities\Utilities.Wpf\Utilities.Wpf.csproj">
+    <ProjectReference Include="..\..\utilities\Core2D.Utilities.Wpf\Core2D.Utilities.Wpf.csproj">
       <Project>{E8D9036D-7E08-4405-B767-FB1E654EF66A}</Project>
-      <Name>Utilities.Wpf</Name>
+      <Name>Core2D.Utilities.Wpf</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
