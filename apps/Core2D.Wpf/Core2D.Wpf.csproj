@@ -104,7 +104,6 @@
   <ItemGroup>
     <Compile Include="Designer\DesignerHelper.cs" />
     <Compile Include="Importers\Win32ImageImporter.cs" />
-    <Compile Include="Locator\ServiceProvider.cs" />
     <Compile Include="Modules\AppModule.cs" />
     <Compile Include="Modules\CoreModule.cs" />
     <Compile Include="Modules\DependenciesModule.cs" />
