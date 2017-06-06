@@ -127,7 +127,7 @@ var zipRootDir = artifactsDir.Combine("zip");
 var nugetRootDir = artifactsDir.Combine("nuget");
 
 var dirSuffixZip = platform + "/" + configuration;
-var fileZipSuffix = configuration + "-" + version + ".zip";
+var fileZipSuffix = version + ".zip";
 
 var zipSourceDirect2DDir = (DirectoryPath)Directory("./apps/Core2D.Avalonia.Direct2D/bin/" + dirSuffixZip);
 var zipTargetDirect2DFile = zipRootDir.CombineWithFilePath("Core2D.Avalonia.Direct2D-" + fileZipSuffix);
@@ -397,7 +397,7 @@ Task("Zip-Files-NetCore")
         foreach(var runtime in project.Runtimes)
         {
             var outputDir = zipRootDir.Combine(project.Name + "-" + runtime);
-            var zipFile = zipRootDir.CombineWithFilePath(project.Name + "-" + runtime + "-" + configuration + "-" + version + ".zip");
+            var zipFile = zipRootDir.CombineWithFilePath(project.Name + "-" + runtime + "-" + version + ".zip");
             Information("Zip files for: {0}, runtime: {1}", project.Name, runtime);
             Zip(outputDir.FullPath, zipFile);
         }
