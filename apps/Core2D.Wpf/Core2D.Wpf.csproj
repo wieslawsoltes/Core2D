@@ -27,7 +27,6 @@
   <Import Project="..\..\build\Default.targets" />
   <Import Project="..\..\build\Default.props" />
   <Import Project="..\..\build\Rx.props" />
-  <Import Project="..\..\build\Net45.props" />
   <Import Project="..\..\build\SkiaSharp.props" />
   <Import Project="..\..\build\WPF.props" />
   <ItemGroup>

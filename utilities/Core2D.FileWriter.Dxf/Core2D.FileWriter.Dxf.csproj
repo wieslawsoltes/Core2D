@@ -8,7 +8,6 @@
 
   <Import Project="..\..\build\Default.targets" />
   <Import Project="..\..\build\Default.props" />
-  <Import Project="..\..\build\Net45.props" />
 
   <ItemGroup>
     <PackageReference Include="netDXF" Version="2.0.2" />

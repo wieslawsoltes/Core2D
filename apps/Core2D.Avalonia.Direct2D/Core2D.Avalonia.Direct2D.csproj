@@ -18,7 +18,6 @@
   <Import Project="..\..\build\Default.targets" />
   <Import Project="..\..\build\Default.props" />
   <Import Project="..\..\build\Rx.props" />
-  <Import Project="..\..\build\Net45.props" />
   <Import Project="..\..\build\Avalonia.props" />
   <Import Project="..\..\build\Avalonia.Direct2D.props" />
   <Import Project="..\..\build\SharpDX.props" />
