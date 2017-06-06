@@ -5,7 +5,7 @@ using Portable.Xaml.ComponentModel;
 using System;
 using System.Collections.Generic;
 
-namespace Serializer.Xaml
+namespace Core2D.Serializer.Xaml
 {
     internal class CoreXamlSchemaContext : XamlSchemaContext
     {

@@ -8,7 +8,7 @@ using Core2D.Editor;
 using Core2D.Editor.Input;
 using Spatial;
 
-namespace Utilities.Wpf
+namespace Core2D.Utilities.Wpf
 {
     /// <summary>
     /// Provides mouse input from <see cref="UIElement"/>.

@@ -8,7 +8,7 @@ using System.Windows.Media;
 using Core2D.Path;
 using Core2D.Shapes;
 
-namespace Renderer.Wpf
+namespace Core2D.Renderer.Wpf
 {
     /// <summary>
     /// 

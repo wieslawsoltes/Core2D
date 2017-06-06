@@ -7,7 +7,7 @@ using Core2D.Style;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 
-namespace Renderer.PdfSharp
+namespace Core2D.Renderer.PdfSharp
 {
     /// <summary>
     /// Native PdfSharp shape renderer.

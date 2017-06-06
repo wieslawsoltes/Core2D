@@ -10,8 +10,8 @@ using Core2D.Project;
 using Core2D.Shape;
 using Core2D.Shapes;
 using Core2D.Style;
+using Core2D.Utilities.Wpf;
 using Microsoft.Win32;
-using Utilities.Wpf;
 using Xceed.Wpf.AvalonDock.Layout.Serialization;
 
 namespace Core2D.Wpf.Views

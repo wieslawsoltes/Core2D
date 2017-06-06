@@ -7,7 +7,7 @@ using Core2D.Project;
 using Core2D.Renderer;
 using SkiaSharp;
 
-namespace FileWriter.SkiaSharpIco
+namespace Core2D.FileWriter.SkiaSharpIco
 {
     /// <summary>
     /// SkiaSharp ico <see cref="IProjectExporter"/> implementation.

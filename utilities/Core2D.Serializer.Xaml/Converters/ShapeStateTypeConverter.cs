@@ -9,7 +9,7 @@ using Portable.Xaml.ComponentModel;
 #endif
 using Core2D.Shape;
 
-namespace Serializer.Xaml.Converters
+namespace Core2D.Serializer.Xaml.Converters
 {
     /// <summary>
     /// Defines <see cref="ShapeState"/> type converter.

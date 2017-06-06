@@ -7,7 +7,7 @@ using Core2D.Project;
 using Core2D.Renderer;
 using SkiaSharp;
 
-namespace FileWriter.SkiaSharpKtx
+namespace Core2D.FileWriter.SkiaSharpKtx
 {
     /// <summary>
     /// SkiaSharp ktx <see cref="IProjectExporter"/> implementation.

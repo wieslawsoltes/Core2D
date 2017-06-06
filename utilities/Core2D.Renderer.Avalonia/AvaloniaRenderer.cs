@@ -17,7 +17,7 @@ using AM = Avalonia.Media;
 using AMI = Avalonia.Media.Imaging;
 using APAZ = Avalonia.Controls.PanAndZoom;
 
-namespace Renderer.Avalonia
+namespace Core2D.Renderer.Avalonia
 {
     /// <summary>
     /// Native Avalonia shape renderer.

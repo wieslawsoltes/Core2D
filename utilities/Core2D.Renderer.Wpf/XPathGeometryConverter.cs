@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Media;
 
-namespace Renderer.Wpf
+namespace Core2D.Renderer.Wpf
 {
     /// <summary>
     /// 

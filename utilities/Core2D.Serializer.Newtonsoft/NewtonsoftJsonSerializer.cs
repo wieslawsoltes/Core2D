@@ -4,7 +4,7 @@ using Core2D.Interfaces;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace Serializer.Newtonsoft
+namespace Core2D.Serializer.Newtonsoft
 {
     /// <summary>
     /// Json serializer.

@@ -3,7 +3,7 @@
 using System;
 using Autofac;
 
-namespace ServiceProvider.Autofac
+namespace Core2D.ServiceProvider.Autofac
 {
     /// <summary>
     /// Service provider based on lifetime scope.

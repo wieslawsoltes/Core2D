@@ -2,7 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using Autofac;
-using ServiceProvider.Autofac;
+using Core2D.ServiceProvider.Autofac;
 
 namespace Core2D.Avalonia.Modules
 {

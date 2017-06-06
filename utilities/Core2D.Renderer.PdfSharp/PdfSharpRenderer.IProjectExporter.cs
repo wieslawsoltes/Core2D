@@ -5,7 +5,7 @@ using PdfSharp;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 
-namespace Renderer.PdfSharp
+namespace Core2D.Renderer.PdfSharp
 {
     /// <summary>
     /// PdfSharp pdf <see cref="Core2D.Interfaces.IProjectExporter"/> implementation.

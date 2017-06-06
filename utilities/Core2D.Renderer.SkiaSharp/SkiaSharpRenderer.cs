@@ -13,7 +13,7 @@ using Core2D.Shapes;
 using Core2D.Style;
 using SkiaSharp;
 
-namespace Renderer.SkiaSharp
+namespace Core2D.Renderer.SkiaSharp
 {
     /// <summary>
     /// Native SkiaSharp shape renderer.

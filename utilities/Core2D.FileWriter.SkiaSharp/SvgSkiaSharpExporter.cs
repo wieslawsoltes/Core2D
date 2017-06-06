@@ -6,7 +6,7 @@ using Core2D.Project;
 using Core2D.Renderer;
 using SkiaSharp;
 
-namespace FileWriter.SkiaSharpSvg
+namespace Core2D.FileWriter.SkiaSharpSvg
 {
     /// <summary>
     /// SkiaSharp svg <see cref="IProjectExporter"/> implementation.

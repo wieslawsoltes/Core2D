@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.Globalization;
 using CSV = CsvHelper;
 
-namespace TextFieldWriter.CsvHelper
+namespace Core2D.TextFieldWriter.CsvHelper
 {
     /// <summary>
     /// Defines <see cref="XDatabase"/> to the text fields writer.

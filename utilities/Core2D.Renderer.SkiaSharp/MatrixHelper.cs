@@ -3,7 +3,7 @@
 using SkiaSharp;
 using static System.Math;
 
-namespace Renderer.SkiaSharp
+namespace Core2D.Renderer.SkiaSharp
 {
     /// <summary>
     /// SkiaSharp Matrix helper methods.

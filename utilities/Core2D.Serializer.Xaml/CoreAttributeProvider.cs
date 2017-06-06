@@ -5,7 +5,7 @@ using System;
 using System.Linq;
 using System.Reflection;
 
-namespace Serializer.Xaml
+namespace Core2D.Serializer.Xaml
 {
     internal class CoreAttributeProvider : Portable.Xaml.ComponentModel.ICustomAttributeProvider
     {

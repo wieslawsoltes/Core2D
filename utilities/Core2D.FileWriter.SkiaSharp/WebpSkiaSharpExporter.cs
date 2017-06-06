@@ -7,7 +7,7 @@ using Core2D.Project;
 using Core2D.Renderer;
 using SkiaSharp;
 
-namespace FileWriter.SkiaSharpWebp
+namespace Core2D.FileWriter.SkiaSharpWebp
 {
     /// <summary>
     /// SkiaSharp webp <see cref="IProjectExporter"/> implementation.

@@ -4,7 +4,7 @@ using PdfSharp.Drawing;
 using System;
 using System.Linq;
 
-namespace Renderer.PdfSharp
+namespace Core2D.Renderer.PdfSharp
 {
     /// <summary>
     /// 

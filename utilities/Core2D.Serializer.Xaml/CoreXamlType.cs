@@ -8,7 +8,7 @@ using Portable.Xaml;
 using Portable.Xaml.ComponentModel;
 using Portable.Xaml.Schema;
 
-namespace Serializer.Xaml
+namespace Core2D.Serializer.Xaml
 {
     internal class CoreXamlType : XamlType
     {

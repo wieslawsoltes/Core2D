@@ -4,11 +4,11 @@ using Core2D.Path;
 using Core2D.Renderer;
 using Core2D.Shape;
 using Core2D.Style;
-using Serializer.Xaml.Converters;
+using Core2D.Serializer.Xaml.Converters;
 using System;
 using System.Collections.Generic;
 
-namespace Serializer.Xaml
+namespace Core2D.Serializer.Xaml
 {
     internal static class CoreTypeConverterProvider
     {

@@ -4,7 +4,7 @@ using System;
 using System.Drawing.Drawing2D;
 using System.Linq;
 
-namespace Renderer.WinForms
+namespace Core2D.Renderer.WinForms
 {
     /// <summary>
     /// 

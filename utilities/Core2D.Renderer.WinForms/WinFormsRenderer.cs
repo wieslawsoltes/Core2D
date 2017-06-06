@@ -14,7 +14,7 @@ using Core2D.Shape;
 using Core2D.Shapes;
 using Core2D.Style;
 
-namespace Renderer.WinForms
+namespace Core2D.Renderer.WinForms
 {
     /// <summary>
     /// Native Windows Forms shape renderer.

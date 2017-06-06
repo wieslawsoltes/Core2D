@@ -8,7 +8,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using System.Reflection;
 
-namespace Serializer.Newtonsoft
+namespace Core2D.Serializer.Newtonsoft
 {
     /// <inheritdoc/>
     internal class ProjectContractResolver : DefaultContractResolver

@@ -7,7 +7,7 @@ using Core2D.Project;
 using Core2D.Renderer;
 using SkiaSharp;
 
-namespace FileWriter.SkiaSharpWbmp
+namespace Core2D.FileWriter.SkiaSharpWbmp
 {
     /// <summary>
     /// SkiaSharp wbmp <see cref="IProjectExporter"/> implementation.

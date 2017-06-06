@@ -7,7 +7,7 @@ using Avalonia.Controls.PanAndZoom;
 using Avalonia.Markup.Xaml;
 using Core2D.Editor;
 using Core2D.Editor.Input;
-using Utilities.Avalonia;
+using Core2D.Utilities.Avalonia;
 
 namespace Core2D.Avalonia.Views
 {

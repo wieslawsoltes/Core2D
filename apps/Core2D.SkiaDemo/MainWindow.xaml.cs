@@ -14,12 +14,12 @@ using Core2D.Interfaces;
 using Core2D.Project;
 using Core2D.Renderer;
 using Core2D.Renderer.Presenters;
+using Core2D.Renderer.SkiaSharp;
 using Core2D.Shape;
+using Core2D.Utilities.Wpf;
 using Microsoft.Win32;
-using Renderer.SkiaSharp;
 using SkiaSharp;
 using SkiaSharp.Views.Desktop;
-using Utilities.Wpf;
 
 namespace Core2D.SkiaDemo
 {

@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Portable.Xaml.Markup;
-using Serializer.Xaml;
+using Core2D.Serializer.Xaml;
 
 [assembly: XmlnsDefinition(XamlConstants.CoreNamespace, "Core2D", AssemblyName = "Core2D")]
 [assembly: XmlnsDefinition(XamlConstants.CoreNamespace, "Core2D.Collections", AssemblyName = "Core2D")]

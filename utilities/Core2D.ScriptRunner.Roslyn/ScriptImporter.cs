@@ -6,13 +6,12 @@ using System.Collections.Immutable;
 using System.Composition.Convention;
 using System.Composition.Hosting;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 
-namespace ScriptRunner.Roslyn
+namespace Core2D.ScriptRunner.Roslyn
 {
     /// <summary>
     /// CSharp script importer.
@@ -28,19 +27,19 @@ namespace ScriptRunner.Roslyn
 #if NETCORE5_0
             return new PortableExecutableReference[] { };
 #else
-            var assemblyPath = Path.GetDirectoryName(typeof(object).GetTypeInfo().Assembly.Location);
-            var immutableCollectionsPath = Path.GetDirectoryName(typeof(ImmutableArray<>).GetTypeInfo().Assembly.Location);
-            var executingPath = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+            var assemblyPath = System.IO.Path.GetDirectoryName(typeof(object).GetTypeInfo().Assembly.Location);
+            var immutableCollectionsPath = System.IO.Path.GetDirectoryName(typeof(ImmutableArray<>).GetTypeInfo().Assembly.Location);
+            var executingPath = System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
             return new[]
             {
-                MetadataReference.CreateFromFile(Path.Combine(assemblyPath, "mscorlib.dll")),
-                MetadataReference.CreateFromFile(Path.Combine(assemblyPath, "System.dll")),
-                MetadataReference.CreateFromFile(Path.Combine(assemblyPath, "System.Core.dll")),
-                MetadataReference.CreateFromFile(Path.Combine(assemblyPath, "System.Runtime.dll")),
-                MetadataReference.CreateFromFile(Path.Combine(immutableCollectionsPath, "System.Collections.Immutable.dll")),
-                MetadataReference.CreateFromFile(Path.Combine(executingPath, "Core2D.dll")),
-                MetadataReference.CreateFromFile(Path.Combine(executingPath, "Core2D.Editor.dll")),
-                MetadataReference.CreateFromFile(Path.Combine(executingPath, "Math.Spatial.dll")),
+                MetadataReference.CreateFromFile(System.IO.Path.Combine(assemblyPath, "mscorlib.dll")),
+                MetadataReference.CreateFromFile(System.IO.Path.Combine(assemblyPath, "System.dll")),
+                MetadataReference.CreateFromFile(System.IO.Path.Combine(assemblyPath, "System.Core.dll")),
+                MetadataReference.CreateFromFile(System.IO.Path.Combine(assemblyPath, "System.Runtime.dll")),
+                MetadataReference.CreateFromFile(System.IO.Path.Combine(immutableCollectionsPath, "System.Collections.Immutable.dll")),
+                MetadataReference.CreateFromFile(System.IO.Path.Combine(executingPath, "Core2D.dll")),
+                MetadataReference.CreateFromFile(System.IO.Path.Combine(executingPath, "Core2D.Editor.dll")),
+                MetadataReference.CreateFromFile(System.IO.Path.Combine(executingPath, "Math.Spatial.dll")),
                 MetadataReference.CreateFromFile(Assembly.GetEntryAssembly().Location),
             };
 #endif
@@ -87,7 +86,7 @@ namespace ScriptRunner.Roslyn
                     outputKind: OutputKind.DynamicallyLinkedLibrary,
                     assemblyIdentityComparer: DesktopAssemblyIdentityComparer.Default));
 
-            using (var ms = new MemoryStream())
+            using (var ms = new System.IO.MemoryStream())
             {
                 var result = compilation.Emit(ms);
                 if (result.Success)

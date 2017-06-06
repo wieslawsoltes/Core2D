@@ -9,7 +9,7 @@ using netDxf.Entities;
 using netDxf.Objects;
 using netDxf.Tables;
 
-namespace Renderer.Dxf
+namespace Core2D.Renderer.Dxf
 {
     /// <summary>
     /// Native netDxf shape renderer.

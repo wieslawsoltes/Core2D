@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
-using System.IO;
 
 namespace Core2D.Interfaces
 {
@@ -29,42 +28,42 @@ namespace Core2D.Interfaces
         /// </summary>
         /// <param name="path">The file to be opened for reading.</param>
         /// <returns>A read-only stream on the specified path.</returns>
-        Stream Open(string path);
+        System.IO.Stream Open(string path);
 
         /// <summary>
         /// Creates or overwrites a file in the specified path.
         /// </summary>
         /// <param name="path">The path and name of the file to create.</param>
         /// <returns> A stream that provides read/write access to the file specified in path.</returns>
-        Stream Create(string path);
+        System.IO.Stream Create(string path);
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="stream"></param>
         /// <returns></returns>
-        byte[] ReadBinary(Stream stream);
+        byte[] ReadBinary(System.IO.Stream stream);
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="stream"></param>
         /// <param name="bytes"></param>
-        void WriteBinary(Stream stream, byte[] bytes);
+        void WriteBinary(System.IO.Stream stream, byte[] bytes);
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="stream"></param>
         /// <returns></returns>
-        string ReadUtf8Text(Stream stream);
+        string ReadUtf8Text(System.IO.Stream stream);
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="stream"></param>
         /// <param name="text"></param>
-        void WriteUtf8Text(Stream stream, string text);
+        void WriteUtf8Text(System.IO.Stream stream, string text);
 
         /// <summary>
         /// 

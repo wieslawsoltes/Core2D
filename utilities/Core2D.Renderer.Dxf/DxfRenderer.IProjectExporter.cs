@@ -5,7 +5,7 @@ using netDxf;
 using netDxf.Header;
 using netDxf.Objects;
 
-namespace Renderer.Dxf
+namespace Core2D.Renderer.Dxf
 {
     /// <summary>
     /// netDxf dxf <see cref="Core2D.Interfaces.IProjectExporter"/> implementation.

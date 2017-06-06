@@ -5,7 +5,7 @@ using Core2D.Interfaces;
 using System;
 using SD = System.Diagnostics;
 
-namespace Log.Trace
+namespace Core2D.Log.Trace
 {
     /// <summary>
     /// Trace message logger.

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using Core2D.Editor;
 using Core2D.Interfaces;
 
-namespace ScriptRunner.Roslyn
+namespace Core2D.ScriptRunner.Roslyn
 {
     /// <inheritdoc/>
     public class RoslynScriptRunner : IScriptRunner

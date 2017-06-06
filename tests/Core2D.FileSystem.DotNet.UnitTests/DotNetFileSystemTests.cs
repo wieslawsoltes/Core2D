@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using Xunit;
 
-namespace FileSystem.DotNet.UnitTests
+namespace Core2D.FileSystem.DotNet.UnitTests
 {
     public class DotNetFileSystemTests
     {

@@ -6,7 +6,7 @@ using Core2D.Path.Segments;
 using Core2D.Shapes;
 using SkiaSharp;
 
-namespace Renderer.SkiaSharp
+namespace Core2D.Renderer.SkiaSharp
 {
     /// <summary>
     /// 

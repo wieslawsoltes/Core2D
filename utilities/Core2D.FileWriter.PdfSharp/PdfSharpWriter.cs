@@ -4,9 +4,9 @@ using Core2D.Interfaces;
 using Core2D.Project;
 using Core2D.Renderer;
 using Core2D.Shape;
-using Renderer.PdfSharp;
+using Core2D.Renderer.PdfSharp;
 
-namespace FileWriter.PdfSharp
+namespace Core2D.FileWriter.PdfSharp
 {
     /// <summary>
     /// PdfSharp file writer.

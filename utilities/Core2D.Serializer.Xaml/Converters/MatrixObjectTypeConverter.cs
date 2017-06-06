@@ -9,7 +9,7 @@ using Portable.Xaml.ComponentModel;
 #endif
 using Core2D.Renderer;
 
-namespace Serializer.Xaml.Converters
+namespace Core2D.Serializer.Xaml.Converters
 {
     /// <summary>
     /// Defines <see cref="MatrixObject"/> type converter.

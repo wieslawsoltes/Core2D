@@ -2,27 +2,27 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Autofac;
 using Core2D.Data.Database;
+using Core2D.FileSystem.DotNet;
+using Core2D.FileWriter.SkiaSharpBmp;
+using Core2D.FileWriter.SkiaSharpGif;
+using Core2D.FileWriter.SkiaSharpIco;
+using Core2D.FileWriter.SkiaSharpJpeg;
+using Core2D.FileWriter.SkiaSharpKtx;
+using Core2D.FileWriter.SkiaSharpPdf;
+using Core2D.FileWriter.SkiaSharpPng;
+using Core2D.FileWriter.SkiaSharpSvg;
+using Core2D.FileWriter.SkiaSharpWbmp;
+using Core2D.FileWriter.SkiaSharpWebp;
 using Core2D.Interfaces;
+using Core2D.Log.Trace;
 using Core2D.Renderer;
-using FileSystem.DotNet;
-using FileWriter.SkiaSharpBmp;
-using FileWriter.SkiaSharpGif;
-using FileWriter.SkiaSharpIco;
-using FileWriter.SkiaSharpJpeg;
-using FileWriter.SkiaSharpKtx;
-using FileWriter.SkiaSharpPdf;
-using FileWriter.SkiaSharpPng;
-using FileWriter.SkiaSharpSvg;
-using FileWriter.SkiaSharpWbmp;
-using FileWriter.SkiaSharpWebp;
-using Log.Trace;
-using Renderer.Avalonia;
-using ScriptRunner.Roslyn;
-using Serializer.Newtonsoft;
-using Serializer.Xaml;
-using TextFieldReader.CsvHelper;
-using TextFieldWriter.CsvHelper;
-using Utilities.Avalonia;
+using Core2D.Renderer.Avalonia;
+using Core2D.ScriptRunner.Roslyn;
+using Core2D.Serializer.Newtonsoft;
+using Core2D.Serializer.Xaml;
+using Core2D.TextFieldReader.CsvHelper;
+using Core2D.TextFieldWriter.CsvHelper;
+using Core2D.Utilities.Avalonia;
 
 namespace Core2D.Avalonia.Skia.Modules
 {

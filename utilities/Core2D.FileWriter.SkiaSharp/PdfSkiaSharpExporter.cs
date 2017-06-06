@@ -6,7 +6,7 @@ using Core2D.Renderer;
 using Core2D.Renderer.Presenters;
 using SkiaSharp;
 
-namespace FileWriter.SkiaSharpPdf
+namespace Core2D.FileWriter.SkiaSharpPdf
 {
     /// <summary>
     /// SkiaSharp pdf <see cref="IProjectExporter"/> implementation.

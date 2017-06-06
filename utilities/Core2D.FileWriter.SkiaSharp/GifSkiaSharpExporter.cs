@@ -7,7 +7,7 @@ using Core2D.Project;
 using Core2D.Renderer;
 using SkiaSharp;
 
-namespace FileWriter.SkiaSharpGif
+namespace Core2D.FileWriter.SkiaSharpGif
 {
     /// <summary>
     /// SkiaSharp gif <see cref="IProjectExporter"/> implementation.

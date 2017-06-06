@@ -17,7 +17,7 @@ using Core2D.Shapes;
 using Core2D.Style;
 using Spatial;
 
-namespace Renderer.Wpf
+namespace Core2D.Renderer.Wpf
 {
     /// <summary>
     /// Native Windows Presentation Foundation shape renderer.

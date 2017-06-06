@@ -4,9 +4,9 @@ using Core2D.Interfaces;
 using Core2D.Project;
 using Core2D.Renderer;
 using Core2D.Shape;
-using Renderer.Dxf;
+using Core2D.Renderer.Dxf;
 
-namespace FileWriter.Dxf
+namespace Core2D.FileWriter.Dxf
 {
     /// <summary>
     /// netDxf file writer.

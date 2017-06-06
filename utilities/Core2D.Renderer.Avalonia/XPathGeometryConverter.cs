@@ -7,7 +7,7 @@ using Core2D.Path;
 using Core2D.Path.Segments;
 using Core2D.Shapes;
 
-namespace Renderer.Avalonia
+namespace Core2D.Renderer.Avalonia
 {
     /// <summary>
     /// 

@@ -4,7 +4,7 @@ using System.Linq;
 using Core2D.Editor;
 using Core2D.Editor.Commands;
 using Core2D.Editor.Input;
-using FileWriter.Emf;
+using Core2D.FileWriter.Emf;
 
 namespace Core2D.Wpf.Commands
 {

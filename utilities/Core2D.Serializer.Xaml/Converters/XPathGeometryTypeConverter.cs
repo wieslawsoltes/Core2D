@@ -10,7 +10,7 @@ using Portable.Xaml.ComponentModel;
 using Core2D.Path;
 using Core2D.Path.Parser;
 
-namespace Serializer.Xaml.Converters
+namespace Core2D.Serializer.Xaml.Converters
 {
     /// <summary>
     /// Defines <see cref="XPathGeometry"/> type converter.

@@ -4,20 +4,19 @@ using Core2D.Data.Database;
 using Core2D.Interfaces;
 using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
 using System.Linq;
 using CSV = CsvHelper;
 
-namespace TextFieldReader.CsvHelper
+namespace Core2D.TextFieldReader.CsvHelper
 {
     /// <summary>
     /// Defines the text fields to <see cref="XDatabase"/> reader.
     /// </summary>
     public sealed class CsvHelperReader : ITextFieldReader<XDatabase>
     {
-        private static IEnumerable<string[]> ReadInternal(Stream stream)
+        private static IEnumerable<string[]> ReadInternal(System.IO.Stream stream)
         {
-            using (var reader = new StreamReader(stream))
+            using (var reader = new System.IO.StreamReader(stream))
             {
                 var configuration = new CSV.Configuration.CsvConfiguration();
                 configuration.Delimiter = CultureInfo.CurrentCulture.TextInfo.ListSeparator;
@@ -46,10 +45,10 @@ namespace TextFieldReader.CsvHelper
         /// <returns>The new instance of the <see cref="XDatabase"/> class</returns>
         XDatabase ITextFieldReader<XDatabase>.Read(string path, IFileSystem fs)
         {
-            using (var stream = fs.Open(path))
+            using (System.IO.Stream stream = fs.Open(path))
             {
                 var fields = ReadInternal(stream).ToList();
-                var name = Path.GetFileNameWithoutExtension(path);
+                var name = System.IO.Path.GetFileNameWithoutExtension(path);
                 return XDatabase.FromFields(name, fields);
             }
         }

@@ -4,7 +4,7 @@ using Core2D.Style;
 using Newtonsoft.Json;
 using System;
 
-namespace Serializer.Newtonsoft
+namespace Core2D.Serializer.Newtonsoft
 {
     /// <inheritdoc/>
     internal class ArgbColorJsonConverter : JsonConverter
