@@ -2,7 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Globalization;
-#if NETSTANDARD1_3
+#if NETSTANDARD1_3 || NETCOREAPP1_0
 using System.ComponentModel;
 #else
 using Portable.Xaml.ComponentModel;

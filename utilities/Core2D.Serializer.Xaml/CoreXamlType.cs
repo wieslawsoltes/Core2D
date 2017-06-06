@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
-#if NETSTANDARD1_3
+#if NETSTANDARD1_3 || NETCOREAPP1_0
 using System.ComponentModel;
 #endif
 using Portable.Xaml;
