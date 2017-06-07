@@ -265,25 +265,10 @@ Task("Zip-Files")
     .IsDependentOn("Run-Unit-Tests")
     .Does(() =>
 {
-    Zip(zipSourceDirect2DDir, 
-        zipTargetDirect2DFile, 
-        GetFiles(zipSourceDirect2DDir.FullPath + "/*.dll") + 
-        GetFiles(zipSourceDirect2DDir.FullPath + "/*.exe"));
-
-    Zip(zipSourceSkiaDir, 
-        zipTargetSkiaFile, 
-        GetFiles(zipSourceSkiaDir.FullPath + "/*.dll") + 
-        GetFiles(zipSourceSkiaDir.FullPath + "/*.exe"));
-
-    Zip(zipSourceSkiaDemoDir, 
-        zipTargetSkiaDemoFile, 
-        GetFiles(zipSourceSkiaDemoDir.FullPath + "/*.dll") + 
-        GetFiles(zipSourceSkiaDemoDir.FullPath + "/*.exe"));
-
-    Zip(zipSourceWpfDir, 
-        zipTargetWpfFile, 
-        GetFiles(zipSourceWpfDir.FullPath + "/*.dll") + 
-        GetFiles(zipSourceWpfDir.FullPath + "/*.exe"));
+    Zip(zipSourceDirect2DDir.FullPath, zipTargetDirect2DFile);
+    Zip(zipSourceSkiaDirr.FullPath,  zipTargetSkiaFile);
+    Zip(zipSourceSkiaDemoDirr.FullPath, zipTargetSkiaDemoFile);
+    Zip(zipSourceWpfDirr.FullPath, zipTargetWpfFile);
 });
 
 ///////////////////////////////////////////////////////////////////////////////
