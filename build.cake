@@ -403,23 +403,35 @@ Task("Create-NuGet-Packages")
     .IsDependentOn("Run-Unit-Tests-NetCore")
     .Does(() =>
 {
-    var settings = new DotNetCorePackSettings {
-        Configuration = configuration,
-        VersionSuffix = suffix,
-        OutputDirectory = nugetRootDir
-    };
+    var projects = GetFiles("./src/**/*.csproj") + 
+                   GetFiles("./utilities/**/*.csproj");
 
-    foreach(var project in GetFiles("./src/**/*.csproj"))
+    // Workaround for: https://github.com/NuGet/Home/issues/4337
+
+    foreach(var project in projects)
     {
-        Information("Pack: {0}", project);
-        DotNetCorePack(project.FullPath, settings);
+        Information("Restore & Pack : {0}", project);
+        MSBuild(project.FullPath, settings => {
+            settings.UseToolVersion(MSBuildToolVersion.VS2017);
+            settings.SetConfiguration(configuration);
+            settings.WithProperty("Platform", platform);
+            settings.WithProperty("VersionSuffix", suffix);
+            settings.WithProperty("PackageOutputPath", MakeAbsolute(nugetRootDir).FullPath);
+            settings.WithTarget("Restore");
+            settings.WithTarget("Pack");
+            settings.SetVerbosity(Verbosity.Minimal);
+        });   
     }
 
-    foreach(var project in GetFiles("./utilities/**/*.csproj"))
-    {
-        Information("Pack: {0}", project);
-        DotNetCorePack(project.FullPath, settings);
-    }
+    //foreach(var project in projects)
+    //{
+    //    Information("Pack: {0}", project);
+    //    DotNetCorePack(project.FullPath, new DotNetCorePackSettings {
+    //        Configuration = configuration,
+    //        VersionSuffix = suffix,
+    //        OutputDirectory = nugetRootDir
+    //    });
+    //}
 });
 
 Task("Publish-MyGet")
