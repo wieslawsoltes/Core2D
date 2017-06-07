@@ -8,5 +8,6 @@
 
   <Import Project="..\..\build\Default.targets" />
   <Import Project="..\..\build\Default.props" />
+  <Import Project="..\..\build\Autofac.props" />
 
 </Project>
