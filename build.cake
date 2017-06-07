@@ -266,9 +266,9 @@ Task("Zip-Files")
     .Does(() =>
 {
     Zip(zipSourceDirect2DDir.FullPath, zipTargetDirect2DFile);
-    Zip(zipSourceSkiaDirr.FullPath,  zipTargetSkiaFile);
-    Zip(zipSourceSkiaDemoDirr.FullPath, zipTargetSkiaDemoFile);
-    Zip(zipSourceWpfDirr.FullPath, zipTargetWpfFile);
+    Zip(zipSourceSkiaDir.FullPath,  zipTargetSkiaFile);
+    Zip(zipSourceSkiaDemoDir.FullPath, zipTargetSkiaDemoFile);
+    Zip(zipSourceWpfDir.FullPath, zipTargetWpfFile);
 });
 
 ///////////////////////////////////////////////////////////////////////////////
