@@ -129,12 +129,17 @@ var nugetRootDir = artifactsDir.Combine("nuget");
 var dirSuffixZip = platform + "/" + configuration;
 var fileZipSuffix = version + ".zip";
 
+var zipTargetNuGetFile = zipRootDir.CombineWithFilePath("Core2D-NuGet-Packages-" + fileZipSuffix);
+
 var zipSourceDirect2DDir = (DirectoryPath)Directory("./apps/Core2D.Avalonia.Direct2D/bin/" + dirSuffixZip);
 var zipTargetDirect2DFile = zipRootDir.CombineWithFilePath("Core2D.Avalonia.Direct2D-" + fileZipSuffix);
+
 var zipSourceSkiaDir = (DirectoryPath)Directory("./apps/Core2D.Avalonia.Skia/bin/" + dirSuffixZip);
 var zipTargetSkiaFile = zipRootDir.CombineWithFilePath("Core2D.Avalonia.Skia-" + fileZipSuffix);
+
 var zipSourceSkiaDemoDir = (DirectoryPath)Directory("./apps/Core2D.SkiaDemo/bin/" + dirSuffixZip);
 var zipTargetSkiaDemoFile = zipRootDir.CombineWithFilePath("Core2D.SkiaDemo-" + fileZipSuffix);
+
 var zipSourceWpfDir = (DirectoryPath)Directory("./apps/Core2D.Wpf/bin/" + dirSuffixZip);
 var zipTargetWpfFile = zipRootDir.CombineWithFilePath("Core2D.Wpf-" + fileZipSuffix);
 
@@ -265,6 +270,7 @@ Task("Zip-Files")
     .IsDependentOn("Run-Unit-Tests")
     .Does(() =>
 {
+    Zip(nugetRootDir.FullPath, zipTargetNuGetFile);
     Zip(zipSourceDirect2DDir.FullPath, zipTargetDirect2DFile);
     Zip(zipSourceSkiaDir.FullPath,  zipTargetSkiaFile);
     Zip(zipSourceSkiaDemoDir.FullPath, zipTargetSkiaDemoFile);
