@@ -25,7 +25,7 @@ Core2D is a multi-platform application for making data driven 2D diagrams.
 * The `Json` format is supported for imported and exported resources. 
 * The `Xaml` format is supported for imported and exported resources. 
 * Database records are imported, exported and updated as `csv`.
-* The clipboard data is stored as `Json`.
+* The clipboard data is stored as `Json` string.
 
 ## Supported Platforms
 
@@ -102,7 +102,7 @@ dotnet publish -r ubuntu.16.10-x64 -o ubuntu.16.10-x64
 
 ## NuGet
 
-Core2D core libraries are also delivered as a NuGet package.
+Core2D core libraries are delivered as a NuGet packages.
 
 You can find the packages here [NuGet](https://www.nuget.org/packages/Core2D/) or by using nightly build feed:
 * Add `https://www.myget.org/F/core2d-nightly/api/v2` to your package sources
@@ -152,7 +152,7 @@ The `libSkiaSharp.dll` from SkiaSharp package requires [Microsoft Visual C++ 201
 
 ### Required Visual C++ Runtime Files
 
-Projects referencing `SkiaShar`p require `Visual C++ Runtime Files` from `Visual Studio Community 2017`.
+Projects referencing `SkiaSharp` require `Visual C++ Runtime Files` from `Visual Studio Community 2017`.
 
 #### x86 Platform
 
