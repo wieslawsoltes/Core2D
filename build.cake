@@ -40,7 +40,7 @@ var isPlatformX64 = StringComparer.OrdinalIgnoreCase.Equals(platform, "x64");
 // VERSION
 ///////////////////////////////////////////////////////////////////////////////
 
-var version = XmlPeek("./build/Default.props", "//*[local-name()='Version']/text()");
+var version = XmlPeek("./build/Default.props", "//*[local-name()='Version']/text()").TrimEnd("$(VersionSuffix)");
 var suffix = "";
 var publishNuGet = false;
 var publishMyGet = false;
