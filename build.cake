@@ -404,9 +404,9 @@ Task("Create-NuGet-Packages")
     .Does(() =>
 {
     var settings = new DotNetCorePackSettings {
-         Configuration = configuration,
-         VersionSuffix = suffix,
-         OutputDirectory = nugetRootDir
+        Configuration = configuration,
+        VersionSuffix = suffix,
+        OutputDirectory = nugetRootDir
     };
 
     foreach(var project in GetFiles("./src/**/*.csproj"))
