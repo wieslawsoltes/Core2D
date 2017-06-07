@@ -270,7 +270,6 @@ Task("Zip-Files")
     .IsDependentOn("Run-Unit-Tests")
     .Does(() =>
 {
-    Zip(nugetRootDir.FullPath, zipTargetNuGetFile);
     Zip(zipSourceDirect2DDir.FullPath, zipTargetDirect2DFile);
     Zip(zipSourceSkiaDir.FullPath,  zipTargetSkiaFile);
     Zip(zipSourceSkiaDemoDir.FullPath, zipTargetSkiaDemoFile);
@@ -475,6 +474,13 @@ Task("Publish-NuGet")
     }
 });
 
+Task("Zip-Files-NuGet")
+    .IsDependentOn("Create-NuGet-Packages")
+    .Does(() =>
+{
+    Zip(nugetRootDir.FullPath, zipTargetNuGetFile);
+});
+
 ///////////////////////////////////////////////////////////////////////////////
 // TARGETS
 ///////////////////////////////////////////////////////////////////////////////
@@ -494,6 +500,7 @@ Task("AppVeyor")
   .IsDependentOn("Run-Unit-Tests")
   .IsDependentOn("Copy-Redist-Files")
   .IsDependentOn("Zip-Files")
+  .IsDependentOn("Zip-Files-NuGet")
   .IsDependentOn("Publish-MyGet")
   .IsDependentOn("Publish-NuGet");
 
