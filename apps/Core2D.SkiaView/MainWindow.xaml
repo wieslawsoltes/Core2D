@@ -17,14 +17,12 @@
         </Grid.RowDefinitions>
         <Menu Grid.Row="0" Background="{x:Null}">
             <MenuItem Header="_File">
-                <MenuItem Name="FileOpen" Header="_Open" Click="FileOpen_Click"/>
-                <Separator/>
-                <MenuItem Name="FileClose" Header="_Close" Click="FileClose_Click"/>
-                <Separator/>
-                <MenuItem Name="FileExit" Header="E_xit" Click="FileExit_Click"/>
+                <MenuItem Name="FileOpen" Header="_Open"/>
+                <MenuItem Name="FileClose" Header="_Close"/>
+                <MenuItem Name="FileExit" Header="E_xit"/>
             </MenuItem>
         </Menu>
-        <views:SKElement x:Name="canvas" Grid.Row="1" PaintSurface="OnPaintCanvas" Visibility="Visible" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FocusVisualStyle="{x:Null}"/>
+        <views:SKElement x:Name="CanvasElement" Grid.Row="1" Visibility="Visible" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FocusVisualStyle="{x:Null}"/>
     </Grid>
 </Window>
  
