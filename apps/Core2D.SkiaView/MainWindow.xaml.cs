@@ -21,9 +21,10 @@ namespace Core2D.SkiaView
         private ShapeRenderer _renderer;
         private XProject _project;
 
-        public MainWindow(IServiceProvider serviceProvider)
+        public MainWindow()
         {
             InitializeComponent();
+
             InitializeContainer();
 
             Loaded += MainWindow_Loaded;

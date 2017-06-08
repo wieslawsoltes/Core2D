@@ -24,6 +24,7 @@ using Core2D.FileWriter.SkiaSharpWbmp;
 using Core2D.FileWriter.SkiaSharpWebp;
 using Core2D.Interfaces;
 using Core2D.Renderer;
+using Core2D.Renderer.Presenters;
 using Core2D.Renderer.SkiaSharp;
 using Core2D.Serializer.Newtonsoft;
 using Core2D.Serializer.Xaml;
@@ -72,6 +73,7 @@ namespace Core2D.SkiaDemo.Modules
             builder.RegisterType<CsvHelperReader>().As<ITextFieldReader<XDatabase>>().InstancePerLifetimeScope();
             builder.RegisterType<CsvHelperWriter>().As<ITextFieldWriter<XDatabase>>().InstancePerLifetimeScope();
             builder.Register<ShapeRenderer>((c) => new SkiaSharpRenderer(true, 96.0)).InstancePerDependency();
+            builder.RegisterType<EditorPresenter>().As<ContainerPresenter>().InstancePerLifetimeScope();
             builder.RegisterType<WpfTextClipboard>().As<ITextClipboard>().InstancePerLifetimeScope();
             // App
             builder.RegisterType<Win32ImageImporter>().As<IImageImporter>().InstancePerLifetimeScope();

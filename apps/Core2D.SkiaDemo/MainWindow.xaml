@@ -15,9 +15,8 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <views:SKElement x:Name="canvas" PaintSurface="OnPaintCanvas" Visibility="Visible" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FocusVisualStyle="{x:Null}"/>
-        <WindowsFormsHost x:Name="glhost" Initialized="OnGLControlHost" Visibility="Collapsed" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FocusVisualStyle="{x:Null}"/>
-        <TextBlock x:Name="helpText" Grid.Column="1" Margin="4" FontFamily="Consolas" FontWeight="UltraLight" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Stretch">
+        <views:SKElement x:Name="CanvasElement" Visibility="Visible" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FocusVisualStyle="{x:Null}"/>
+        <TextBlock x:Name="HelpText" Grid.Column="1" Margin="4" FontFamily="Consolas" FontWeight="UltraLight" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Stretch">
             <Run FontWeight="Bold">File</Run><LineBreak/>
             <Run>Ctrl+N: New Project</Run><LineBreak/>
             <Run>Ctrl+O: Open Project</Run><LineBreak/>

@@ -6,8 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Forms.Integration;
 using System.Windows.Input;
+using Autofac;
 using Core2D.Editor;
 using Core2D.Editor.Input;
 using Core2D.Interfaces;
@@ -25,19 +25,19 @@ namespace Core2D.SkiaDemo
 {
     public partial class MainWindow : Window
     {
-        private readonly IServiceProvider _serviceProvider;
+        private IContainer _container;
+        private IServiceProvider _serviceProvider;
         private ContainerPresenter _presenter;
         private ProjectEditor _projectEditor;
         private InputProcessor _inputProcessor;
         private SvgWindow _previewWindow;
-        private bool isClosing = false;
+        private bool _isClosing = false;
 
-        public MainWindow(IServiceProvider serviceProvider)
+        public MainWindow()
         {
             InitializeComponent();
 
-            _serviceProvider = serviceProvider;
-            _projectEditor = _serviceProvider.GetService<ProjectEditor>();
+            InitializeContainer();
 
             Loaded += MainWindow_Loaded;
             Closing += MainWindow_Closing;
@@ -46,48 +46,62 @@ namespace Core2D.SkiaDemo
             _previewWindow = new SvgWindow();
             _previewWindow.svgButton.Click += PreviewWindowSvgButton_Click;
             _previewWindow.Closing += PreviewWindow_Closing;
+
+            CanvasElement.PaintSurface += PaintSurface;
         }
 
-        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        private void InitializeContainer()
         {
+            var builder = new ContainerBuilder();
+
+            builder.RegisterAssemblyModules(typeof(MainWindow).Assembly);
+
+            _container = builder.Build();
+
+            _serviceProvider = _container.Resolve<IServiceProvider>();
+
+            _presenter = _serviceProvider.GetService<ContainerPresenter>();
+            _projectEditor = _serviceProvider.GetService<ProjectEditor>();
+
             _projectEditor.CurrentTool = _projectEditor.Tools.FirstOrDefault(t => t.Title == "Selection");
             _projectEditor.CurrentPathTool = _projectEditor.PathTools.FirstOrDefault(t => t.Title == "Line");
             _projectEditor.OnNewProject();
 
             _projectEditor.Invalidate = () =>
             {
-                OnRefreshRequested(null, null);
+                RefreshRequested(null, null);
                 if (_previewWindow.svgLive.IsChecked == true)
                 {
                     UpdateSvg();
                 }
             };
 
-            _presenter = new EditorPresenter();
-
-            canvas.Focusable = true;
-            canvas.Focus();
-            OnRefreshRequested(null, null);
-
             _inputProcessor = new InputProcessor(
                 new WpfInputSource(
-                    canvas,
-                    canvas,
+                    CanvasElement,
+                    CanvasElement,
                     FixPointOffset),
                 _projectEditor);
+        }
+
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            CanvasElement.Focusable = true;
+            CanvasElement.Focus();
+            RefreshRequested(null, null);
         }
 
         private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             _inputProcessor.Dispose();
-            isClosing = true;
+            _isClosing = true;
             _previewWindow.Close();
+            _container.Dispose();
         }
 
         private void MainWindow_KeyDown(object sender, KeyEventArgs e)
         {
-            bool isControl = Keyboard.Modifiers == ModifierKeys.Control;
-            if (isControl)
+            if (Keyboard.Modifiers == ModifierKeys.Control)
             {
                 switch (e.Key)
                 {
@@ -213,7 +227,7 @@ namespace Core2D.SkiaDemo
 
         private void PreviewWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (!isClosing)
+            if (!_isClosing)
             {
                 _previewWindow.Hide();
                 e.Cancel = true;
@@ -224,45 +238,30 @@ namespace Core2D.SkiaDemo
         {
             var container = _projectEditor.Project.CurrentContainer;
             var matrix = PresentationSource.FromVisual(this).CompositionTarget.TransformToDevice;
-            double offsetX = (this.canvas.ActualWidth * matrix.M11 - container.Width) / 2.0;
-            double offsetY = (this.canvas.ActualHeight * matrix.M22 - container.Height) / 2.0;
+            double offsetX = (CanvasElement.ActualWidth * matrix.M11 - container.Width) / 2.0;
+            double offsetY = (CanvasElement.ActualHeight * matrix.M22 - container.Height) / 2.0;
             return new Point(point.X - offsetX, point.Y - offsetY);
         }
 
-        private void OnGLControlHost(object sender, EventArgs e)
+        private void PaintSurface(object sender, SKPaintSurfaceEventArgs e)
         {
-            var glControl = new SKGLControl();
-            glControl.PaintSurface += OnPaintGL;
-            glControl.Dock = System.Windows.Forms.DockStyle.Fill;
-
-            var host = (WindowsFormsHost)sender;
-            host.Child = glControl;
+            PaintSurface(e.Surface.Canvas, e.Info.Width, e.Info.Height);
         }
 
-        private void OnPaintGL(object sender, SKPaintGLSurfaceEventArgs e)
+        private void RefreshRequested(object sender, EventArgs e)
         {
-            OnPaintSurface(e.Surface.Canvas, e.RenderTarget.Width, e.RenderTarget.Height);
+            CanvasElement.InvalidateVisual();
         }
 
-        private void OnPaintCanvas(object sender, SKPaintSurfaceEventArgs e)
+        private void PaintSurface(SKCanvas canvas, int width, int height)
         {
-            OnPaintSurface(e.Surface.Canvas, e.Info.Width, e.Info.Height);
-        }
-
-        private void OnRefreshRequested(object sender, EventArgs e)
-        {
-            canvas.InvalidateVisual();
-            glhost.Child?.Invalidate();
-        }
-
-        private void OnPaintSurface(SKCanvas canvas, int width, int height)
-        {
-            var container = _projectEditor.Project?.CurrentContainer;
+            var container = _projectEditor?.Project?.CurrentContainer;
             if (container != null)
             {
                 var matrix = PresentationSource.FromVisual(this).CompositionTarget.TransformToDevice;
-                double offsetX = (this.canvas.ActualWidth * matrix.M11 - container?.Width ?? 0) / 2.0;
-                double offsetY = (this.canvas.ActualHeight * matrix.M22 - container?.Height ?? 0) / 2.0;
+                double offsetX = (CanvasElement.ActualWidth * matrix.M11 - container?.Width ?? 0) / 2.0;
+                double offsetY = (CanvasElement.ActualHeight * matrix.M22 - container?.Height ?? 0) / 2.0;
+
                 canvas.Clear(SKColors.White);
                 _presenter?.Render(canvas, _projectEditor.Renderers[0], container, offsetX, offsetY);
             }
@@ -287,7 +286,9 @@ namespace Core2D.SkiaDemo
                     }
                     renderer.State.ImageCache = _projectEditor.Project;
 
-                    var presenter = exportPresenter ? (ContainerPresenter)new ExportPresenter() : (ContainerPresenter)new EditorPresenter();
+                    var presenter = exportPresenter ?
+                        (ContainerPresenter)new ExportPresenter() :
+                        (ContainerPresenter)new EditorPresenter();
 
                     using (var ms = new MemoryStream())
                     {
@@ -330,7 +331,7 @@ namespace Core2D.SkiaDemo
             if (dlg.ShowDialog(this) == true)
             {
                 _projectEditor.OnOpen(dlg.FileName);
-                OnRefreshRequested(null, null);
+                RefreshRequested(null, null);
             }
         }
 
