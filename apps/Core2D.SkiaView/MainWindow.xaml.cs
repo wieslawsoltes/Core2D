@@ -15,8 +15,8 @@ namespace Core2D.SkiaView
 {
     public partial class MainWindow : Window
     {
-        private readonly IContainer _container;
-        private readonly IServiceProvider _serviceProvider;
+        private IContainer _container;
+        private IServiceProvider _serviceProvider;
         private ContainerPresenter _presenter;
         private ShapeRenderer _renderer;
         private XProject _project;
@@ -25,14 +25,14 @@ namespace Core2D.SkiaView
         {
             InitializeComponent();
             InitializeContainer();
-            
+
             Loaded += MainWindow_Loaded;
             Closing += MainWindow_Closing;
-            
+
             FileOpen.Click += FileOpen_Click;
             FileClose.Click += FileClose_Click;
             FileExit.Click += FileExit_Click;
-            
+
             CanvasElement.PaintSurface += PaintSurface;
         }
 
@@ -54,7 +54,7 @@ namespace Core2D.SkiaView
         {
             CanvasElement.Focusable = true;
             CanvasElement.Focus();
-            OnRefreshRequested(null, null);
+            RefreshRequested(null, null);
         }
 
         private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -101,8 +101,8 @@ namespace Core2D.SkiaView
             if (container != null)
             {
                 var matrix = PresentationSource.FromVisual(this).CompositionTarget.TransformToDevice;
-                double offsetX = (this.canvas.ActualWidth * matrix.M11 - container?.Width ?? 0) / 2.0;
-                double offsetY = (this.canvas.ActualHeight * matrix.M22 - container?.Height ?? 0) / 2.0;
+                double offsetX = (CanvasElement.ActualWidth * matrix.M11 - container?.Width ?? 0) / 2.0;
+                double offsetY = (CanvasElement.ActualHeight * matrix.M22 - container?.Height ?? 0) / 2.0;
 
                 canvas.Clear(SKColors.White);
                 _presenter?.Render(canvas, _renderer, container, offsetX, offsetY);
@@ -118,8 +118,8 @@ namespace Core2D.SkiaView
 
         private void OpenProject(string path)
         {
-            var project = XProject.Open(path, 
-                _serviceProvider.GetService<IFileSystem>(), 
+            var project = XProject.Open(path,
+                _serviceProvider.GetService<IFileSystem>(),
                 _serviceProvider.GetService<IJsonSerializer>());
 
             SetProject(project);
