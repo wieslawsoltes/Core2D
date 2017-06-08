@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows;
 using Autofac;
@@ -58,7 +57,7 @@ namespace Core2D.SkiaView
             OnRefreshRequested(null, null);
         }
 
-        private void MainWindow_Closing(object sender, CancelEventArgs e)
+        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             _container.Dispose();
         }
