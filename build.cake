@@ -119,7 +119,9 @@ var buildDirs =
     GetDirectories("./tests/**/bin/**") + 
     GetDirectories("./tests/**/obj/**") + 
     GetDirectories("./apps/**/bin/**") + 
-    GetDirectories("./apps/**/obj/**");
+    GetDirectories("./apps/**/obj/**") +
+    GetDirectories("./samples/**/bin/**") + 
+    GetDirectories("./samples/**/obj/**");
 
 var artifactsDir = (DirectoryPath)Directory("./artifacts");
 var testResultsDir = artifactsDir.Combine("test-results");	
@@ -137,11 +139,17 @@ var zipTargetDirect2DFile = zipRootDir.CombineWithFilePath("Core2D.Avalonia.Dire
 var zipSourceSkiaDir = (DirectoryPath)Directory("./apps/Core2D.Avalonia.Skia/bin/" + dirSuffixZip);
 var zipTargetSkiaFile = zipRootDir.CombineWithFilePath("Core2D.Avalonia.Skia-" + fileZipSuffix);
 
-var zipSourceSkiaDemoDir = (DirectoryPath)Directory("./apps/Core2D.SkiaDemo/bin/" + dirSuffixZip);
-var zipTargetSkiaDemoFile = zipRootDir.CombineWithFilePath("Core2D.SkiaDemo-" + fileZipSuffix);
-
 var zipSourceWpfDir = (DirectoryPath)Directory("./apps/Core2D.Wpf/bin/" + dirSuffixZip);
 var zipTargetWpfFile = zipRootDir.CombineWithFilePath("Core2D.Wpf-" + fileZipSuffix);
+
+var zipSourceSkiaDemoDir = (DirectoryPath)Directory("./samples/Core2D.SkiaDemo/bin/" + dirSuffixZip);
+var zipTargetSkiaDemoFile = zipRootDir.CombineWithFilePath("Core2D.SkiaDemo-" + fileZipSuffix);
+
+var zipSourceSkiaViewAutofacDir = (DirectoryPath)Directory("./samples/Core2D.SkiaViewAutofac/bin/" + dirSuffixZip);
+var zipTargetSkiaViewAutofacFile = zipRootDir.CombineWithFilePath("Core2D.SkiaViewAutofac-" + fileZipSuffix);
+
+var zipSourceSkiaViewNoAutofacDir = (DirectoryPath)Directory("./samples/Core2D.SkiaViewNoAutofac/bin/" + dirSuffixZip);
+var zipTargetSkiaViewNoAutofacFile = zipRootDir.CombineWithFilePath("Core2D.SkiaViewNoAutofac-" + fileZipSuffix);
 
 var msvcp140_x86 = @"c:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.10.25008\x86\Microsoft.VC150.CRT\msvcp140.dll";
 var msvcp140_x64 = @"c:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.10.25008\x64\Microsoft.VC150.CRT\msvcp140.dll";
@@ -255,14 +263,24 @@ Task("Copy-Redist-Files")
     {
         var msvcp140 = (isPlatformAnyCPU || isPlatformX86) ? msvcp140_x86 : msvcp140_x64;
         var vcruntime140 = (isPlatformAnyCPU || isPlatformX86) ? vcruntime140_x86 : vcruntime140_x64;
+
         CopyFileToDirectory(msvcp140, zipSourceDirect2DDir);
         CopyFileToDirectory(vcruntime140, zipSourceDirect2DDir);
+
         CopyFileToDirectory(msvcp140, zipSourceSkiaDir);
         CopyFileToDirectory(vcruntime140, zipSourceSkiaDir);
-        CopyFileToDirectory(msvcp140, zipSourceSkiaDemoDir);
-        CopyFileToDirectory(vcruntime140, zipSourceSkiaDemoDir);
+
         CopyFileToDirectory(msvcp140, zipSourceWpfDir);
         CopyFileToDirectory(vcruntime140, zipSourceWpfDir);
+
+        CopyFileToDirectory(msvcp140, zipSourceSkiaDemoDir);
+        CopyFileToDirectory(vcruntime140, zipSourceSkiaDemoDir);
+
+        CopyFileToDirectory(msvcp140, zipSourceSkiaViewAutofacDir);
+        CopyFileToDirectory(vcruntime140, zipSourceSkiaViewAutofacDir);
+
+        CopyFileToDirectory(msvcp140, zipSourceSkiaViewNoAutofacDir);
+        CopyFileToDirectory(vcruntime140, zipSourceSkiaViewNoAutofacDir);
     }
 });
 
@@ -272,8 +290,11 @@ Task("Zip-Files")
 {
     Zip(zipSourceDirect2DDir.FullPath, zipTargetDirect2DFile);
     Zip(zipSourceSkiaDir.FullPath,  zipTargetSkiaFile);
-    Zip(zipSourceSkiaDemoDir.FullPath, zipTargetSkiaDemoFile);
     Zip(zipSourceWpfDir.FullPath, zipTargetWpfFile);
+
+    Zip(zipSourceSkiaDemoDir.FullPath, zipTargetSkiaDemoFile);
+    Zip(zipSourceSkiaViewAutofacDir.FullPath, zipTargetSkiaViewAutofacFile);
+    Zip(zipSourceSkiaViewNoAutofacDir.FullPath, zipTargetSkiaViewNoAutofacFile);
 });
 
 ///////////////////////////////////////////////////////////////////////////////

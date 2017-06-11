@@ -1,20 +1,20 @@
-Ôªø// Copyright (c) Wies≈Çaw ≈†olt√©s. All rights reserved.
+// Copyright (c) Wies≥aw äoltÈs. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows;
 
-[assembly: AssemblyCompany("Wies≈Çaw ≈†olt√©s")]
-[assembly: AssemblyCopyright("Copyright ¬© Wies≈Çaw ≈†olt√©s 2017")]
+[assembly: AssemblyCompany("Wies≥aw äoltÈs")]
+[assembly: AssemblyCopyright("Copyright © Wies≥aw äoltÈs 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyVersion("0.4.0")]
 [assembly: AssemblyFileVersion("0.4.0")]
 [assembly: AssemblyInformationalVersion("0.4.0")]
 
-[assembly: AssemblyTitle("Core2D.SkiaView")]
+[assembly: AssemblyTitle("Core2D.SkiaViewNoAutofac")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyProduct("Core2D.SkiaView")]
+[assembly: AssemblyProduct("Core2D.SkiaViewNoAutofac")]
 [assembly: AssemblyCulture("")]
 
 [assembly: ComVisible(false)]
