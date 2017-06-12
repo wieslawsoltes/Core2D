@@ -3,14 +3,13 @@
 using System;
 using System.Diagnostics;
 using System.Windows;
-using Core2D.SkiaView;
 using Microsoft.Win32;
 
 namespace Core2D.SkiaViewNoAutofac
 {
     public partial class MainWindow : Window
     {
-        private SKElementHelper _helper;
+        private NoAutofacSkiaViewHelper Helper { get; set; }
 
         public MainWindow()
         {
@@ -20,10 +19,8 @@ namespace Core2D.SkiaViewNoAutofac
 
         private void Initialize()
         {
-            _helper = new SKElementHelper(CanvasElement);
-
+            Helper = new NoAutofacSkiaViewHelper(CanvasElement);
             Loaded += MainWindow_Loaded;
-
             FileOpen.Click += FileOpen_Click;
             FileClose.Click += FileClose_Click;
             FileExit.Click += FileExit_Click;
@@ -33,8 +30,7 @@ namespace Core2D.SkiaViewNoAutofac
         {
             CanvasElement.Focusable = true;
             CanvasElement.Focus();
-
-            _helper.RefreshRequested(null, null);
+            Helper.RefreshRequested(null, null);
         }
 
         private void FileOpen_Click(object sender, RoutedEventArgs e)
@@ -48,8 +44,8 @@ namespace Core2D.SkiaViewNoAutofac
 
                 if (dlg.ShowDialog(this) == true)
                 {
-                    _helper.OpenProject(dlg.FileName);
-                    _helper.RefreshRequested(null, null);
+                    Helper.OpenProject(dlg.FileName);
+                    Helper.RefreshRequested(null, null);
                 }
             }
             catch (Exception ex)
@@ -63,8 +59,8 @@ namespace Core2D.SkiaViewNoAutofac
         {
             try
             {
-                _helper.CloseProject();
-                _helper.RefreshRequested(null, null);
+                Helper.CloseProject();
+                Helper.RefreshRequested(null, null);
             }
             catch (Exception ex)
             {

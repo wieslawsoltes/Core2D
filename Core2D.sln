@@ -118,6 +118,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.SkiaViewAutofac", "s
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.SkiaViewNoAutofac", "samples\Core2D.SkiaViewNoAutofac\Core2D.SkiaViewNoAutofac.csproj", "{E71EDABA-377D-4A61-B0AA-3CD74DCB2A23}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{4FCDE30A-D059-4979-835B-DD7C56CAB35D}"
+	ProjectSection(SolutionItems) = preProject
+		samples\Shared\SkiaViewHelper.cs = samples\Shared\SkiaViewHelper.cs
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|AnyCPU = Debug|AnyCPU
@@ -294,5 +299,6 @@ Global
 		{BDE5F939-C291-44E3-9FE3-939D85341BB6} = {46B42B0C-D5DC-4657-826E-9F8E43B8CCB3}
 		{2E1709D9-9A10-4323-BC2B-1AB0D9D4F949} = {46B42B0C-D5DC-4657-826E-9F8E43B8CCB3}
 		{E71EDABA-377D-4A61-B0AA-3CD74DCB2A23} = {46B42B0C-D5DC-4657-826E-9F8E43B8CCB3}
+		{4FCDE30A-D059-4979-835B-DD7C56CAB35D} = {46B42B0C-D5DC-4657-826E-9F8E43B8CCB3}
 	EndGlobalSection
 EndGlobal

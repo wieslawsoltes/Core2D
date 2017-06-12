@@ -41,9 +41,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="..\Core2D.SkiaViewNoAutofac\SKElementHelper.cs">
-      <Link>SKElementHelper.cs</Link>
+    <Compile Include="..\Shared\SkiaViewHelper.cs">
+      <Link>SkiaViewHelper.cs</Link>
     </Compile>
+    <Compile Include="SkiaViewAutofacHelper.cs" />
     <Compile Include="SkiaViewAutofacModule.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

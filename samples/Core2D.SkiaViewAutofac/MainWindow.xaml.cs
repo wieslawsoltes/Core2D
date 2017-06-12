@@ -4,15 +4,14 @@ using System;
 using System.Diagnostics;
 using System.Windows;
 using Autofac;
-using Core2D.SkiaView;
 using Microsoft.Win32;
 
 namespace Core2D.SkiaViewAutofac
 {
     public partial class MainWindow : Window
     {
-        private IContainer _container;
-        private SKElementHelper _helper;
+        private IContainer Container { get; set; }
+        private AutofacSkiaViewHelper Helper { get; set; }
 
         public MainWindow()
         {
@@ -24,8 +23,8 @@ namespace Core2D.SkiaViewAutofac
         {
             var builder = new ContainerBuilder();
             builder.RegisterAssemblyModules(typeof(MainWindow).Assembly);
-            _container = builder.Build();
-            _helper = new SKElementHelper(CanvasElement, _container.Resolve<IServiceProvider>());
+            Container = builder.Build();
+            Helper = new AutofacSkiaViewHelper(CanvasElement, Container.Resolve<IServiceProvider>());
 
             Loaded += MainWindow_Loaded;
             Closing += MainWindow_Closing;
@@ -39,13 +38,12 @@ namespace Core2D.SkiaViewAutofac
         {
             CanvasElement.Focusable = true;
             CanvasElement.Focus();
-
-            _helper.RefreshRequested(null, null);
+            Helper.RefreshRequested(null, null);
         }
 
         private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            _container.Dispose();
+            Container.Dispose();
         }
 
         private void FileOpen_Click(object sender, RoutedEventArgs e)
@@ -59,8 +57,8 @@ namespace Core2D.SkiaViewAutofac
 
                 if (dlg.ShowDialog(this) == true)
                 {
-                    _helper.OpenProject(dlg.FileName);
-                    _helper.RefreshRequested(null, null);
+                    Helper.OpenProject(dlg.FileName);
+                    Helper.RefreshRequested(null, null);
                 }
             }
             catch (Exception ex)
@@ -74,8 +72,8 @@ namespace Core2D.SkiaViewAutofac
         {
             try
             {
-                _helper.CloseProject();
-                _helper.RefreshRequested(null, null);
+                Helper.CloseProject();
+                Helper.RefreshRequested(null, null);
             }
             catch (Exception ex)
             {
