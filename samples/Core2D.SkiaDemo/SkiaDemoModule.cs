@@ -29,14 +29,13 @@ using Core2D.Renderer.SkiaSharp;
 using Core2D.Serializer.Newtonsoft;
 using Core2D.Serializer.Xaml;
 using Core2D.ServiceProvider.Autofac;
-using Core2D.SkiaDemo.Importers;
 using Core2D.TextFieldReader.CsvHelper;
 using Core2D.TextFieldWriter.CsvHelper;
 using Core2D.Utilities.Wpf;
 
-namespace Core2D.SkiaDemo.Modules
+namespace Core2D.SkiaDemo
 {
-    public class WpfSkiaModule : Module
+    public class SkiaDemoModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {

@@ -6,7 +6,7 @@ using Core2D.Editor;
 using Core2D.Interfaces;
 using Microsoft.Win32;
 
-namespace Core2D.SkiaDemo.Importers
+namespace Core2D.SkiaDemo
 {
     public class Win32ImageImporter : IImageImporter
     {

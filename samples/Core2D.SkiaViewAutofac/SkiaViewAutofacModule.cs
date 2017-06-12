@@ -10,9 +10,9 @@ using Core2D.Renderer.SkiaSharp;
 using Core2D.Serializer.Newtonsoft;
 using Core2D.ServiceProvider.Autofac;
 
-namespace Core2D.SkiaView
+namespace Core2D.SkiaViewAutofac
 {
-    public class SkiaViewModule : Module
+    public class SkiaViewAutofacModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {
