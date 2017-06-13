@@ -100,6 +100,35 @@ namespace Core2D.Shape
         }
 
         /// <summary>
+        /// Begins matrix transform.
+        /// </summary>
+        /// <param name="dc">The generic drawing context object.</param>
+        /// <param name="renderer">The generic renderer object used to draw shape.</param>
+        /// <returns>The previous transform state.</returns>
+        public virtual object BeginTransform(object dc, ShapeRenderer renderer)
+        {
+            if (Transform != null)
+            {
+                return renderer.PushMatrix(dc, Transform);
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Ends matrix transform.
+        /// </summary>
+        /// <param name="dc">The generic drawing context object.</param>
+        /// <param name="renderer">The generic renderer object used to draw shape.</param>
+        /// <param name="state">The previous transform state.</param>
+        public virtual void EndTransform(object dc, ShapeRenderer renderer, object state)
+        {
+            if (Transform != null)
+            {
+                renderer.PopMatrix(dc, state);
+            }
+        }
+
+        /// <summary>
         /// Draws shape using current <see cref="ShapeRenderer"/>.
         /// </summary>
         /// <param name="dc">The generic drawing context object.</param>
@@ -138,35 +167,6 @@ namespace Core2D.Shape
             if (selected.Contains(this))
             {
                 selected.Remove(this);
-            }
-        }
-
-        /// <summary>
-        /// Begins matrix transform.
-        /// </summary>
-        /// <param name="dc">The generic drawing context object.</param>
-        /// <param name="renderer">The generic renderer object used to draw shape.</param>
-        /// <returns>The previous transform state.</returns>
-        public virtual object BeginTransform(object dc, ShapeRenderer renderer)
-        {
-            if (Transform != null)
-            {
-                return renderer.PushMatrix(dc, Transform);
-            }
-            return null;
-        }
-
-        /// <summary>
-        /// Ends matrix transform.
-        /// </summary>
-        /// <param name="dc">The generic drawing context object.</param>
-        /// <param name="renderer">The generic renderer object used to draw shape.</param>
-        /// <param name="state">The previous transform state.</param>
-        public virtual void EndTransform(object dc, ShapeRenderer renderer, object state)
-        {
-            if (Transform != null)
-            {
-                renderer.PopMatrix(dc, state);
             }
         }
 
