@@ -506,7 +506,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.Project.XContainer container, double dx, double dy, ImmutableArray<Core2D.Data.XProperty> db, Core2D.Data.Database.XRecord r)
+        public override void Draw(object dc, Core2D.Project.XContainer container, double dx, double dy, object db, object r)
         {
             var dxf = dc as DxfDocument;
 
@@ -526,7 +526,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.Project.XLayer layer, double dx, double dy, ImmutableArray<Core2D.Data.XProperty> db, Core2D.Data.Database.XRecord r)
+        public override void Draw(object dc, Core2D.Project.XLayer layer, double dx, double dy, object db, object r)
         {
             var dxf = dc as DxfDocument;
 
@@ -540,7 +540,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.Shapes.XLine line, double dx, double dy, ImmutableArray<Core2D.Data.XProperty> db, Core2D.Data.Database.XRecord r)
+        public override void Draw(object dc, Core2D.Shapes.XLine line, double dx, double dy, object db, object r)
         {
             if (!line.IsStroked)
                 return;
@@ -564,7 +564,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.Shapes.XRectangle rectangle, double dx, double dy, ImmutableArray<Core2D.Data.XProperty> db, Core2D.Data.Database.XRecord r)
+        public override void Draw(object dc, Core2D.Shapes.XRectangle rectangle, double dx, double dy, object db, object r)
         {
             if (!rectangle.IsStroked && !rectangle.IsFilled && !rectangle.IsGrid)
                 return;
@@ -593,7 +593,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.Shapes.XEllipse ellipse, double dx, double dy, ImmutableArray<Core2D.Data.XProperty> db, Core2D.Data.Database.XRecord r)
+        public override void Draw(object dc, Core2D.Shapes.XEllipse ellipse, double dx, double dy, object db, object r)
         {
             if (!ellipse.IsStroked && !ellipse.IsFilled)
                 return;
@@ -611,7 +611,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.Shapes.XArc arc, double dx, double dy, ImmutableArray<Core2D.Data.XProperty> db, Core2D.Data.Database.XRecord r)
+        public override void Draw(object dc, Core2D.Shapes.XArc arc, double dx, double dy, object db, object r)
         {
             var dxf = dc as DxfDocument;
             var style = arc.Style;
@@ -658,7 +658,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.Shapes.XCubicBezier cubicBezier, double dx, double dy, ImmutableArray<Core2D.Data.XProperty> db, Core2D.Data.Database.XRecord r)
+        public override void Draw(object dc, Core2D.Shapes.XCubicBezier cubicBezier, double dx, double dy, object db, object r)
         {
             if (!cubicBezier.IsStroked && !cubicBezier.IsFilled)
                 return;
@@ -715,7 +715,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.Shapes.XQuadraticBezier quadraticBezier, double dx, double dy, ImmutableArray<Core2D.Data.XProperty> db, Core2D.Data.Database.XRecord r)
+        public override void Draw(object dc, Core2D.Shapes.XQuadraticBezier quadraticBezier, double dx, double dy, object db, object r)
         {
             if (!quadraticBezier.IsStroked && !quadraticBezier.IsFilled)
                 return;
@@ -770,11 +770,13 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.Shapes.XText text, double dx, double dy, ImmutableArray<Core2D.Data.XProperty> db, Core2D.Data.Database.XRecord r)
+        public override void Draw(object dc, Core2D.Shapes.XText text, double dx, double dy, object db, object r)
         {
             var dxf = dc as DxfDocument;
 
-            var tbind = text.BindText(db, r);
+            var properties = (ImmutableArray<Data.XProperty>)db;
+            var record = (Data.Database.XRecord)r;
+            var tbind = text.BindText(properties, record);
             if (string.IsNullOrEmpty(tbind))
                 return;
 
@@ -899,7 +901,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.Shapes.XImage image, double dx, double dy, ImmutableArray<Core2D.Data.XProperty> db, Core2D.Data.Database.XRecord r)
+        public override void Draw(object dc, Core2D.Shapes.XImage image, double dx, double dy, object db, object r)
         {
             var dxf = dc as DxfDocument;
 
@@ -945,7 +947,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.Shapes.XPath path, double dx, double dy, ImmutableArray<Core2D.Data.XProperty> db, Core2D.Data.Database.XRecord r)
+        public override void Draw(object dc, Core2D.Shapes.XPath path, double dx, double dy, object db, object r)
         {
             if (!path.IsStroked && !path.IsFilled)
                 return;

@@ -13,7 +13,7 @@ namespace Core2D.Shape
     /// <summary>
     /// Base class for shapes.
     /// </summary>
-    public abstract class BaseShape : ObservableObject, ISelectable
+    public abstract class BaseShape : ObservableObject, IDrawable, ISelectable
     {
         private BaseShape _owner;
         private ShapeState _state;
@@ -133,9 +133,9 @@ namespace Core2D.Shape
         /// <param name="renderer">The generic renderer object used to draw shape.</param>
         /// <param name="dx">The X axis draw position offset.</param>
         /// <param name="dy">The Y axis draw position offset.</param>
-        /// <param name="db">The properties database used for binding.</param>
-        /// <param name="r">The external data record used for binding.</param>
-        public abstract void Draw(object dc, ShapeRenderer renderer, double dx, double dy, ImmutableArray<XProperty> db, XRecord r);
+        /// <param name="db">The properties database.</param>
+        /// <param name="r">The database record.</param>
+        public abstract void Draw(object dc, ShapeRenderer renderer, double dx, double dy, object db, object r);
 
         /// <summary>
         /// Moves shape to new position using X and Y axis offset.

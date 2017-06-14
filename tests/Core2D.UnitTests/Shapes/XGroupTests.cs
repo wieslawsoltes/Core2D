@@ -261,7 +261,7 @@ namespace Core2D.UnitTests
 
         public class Class1 : BaseShape
         {
-            public override void Draw(object dc, ShapeRenderer renderer, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
+            public override void Draw(object dc, ShapeRenderer renderer, double dx, double dy, object db, object r)
             {
                 throw new NotImplementedException();
             }
@@ -271,7 +271,7 @@ namespace Core2D.UnitTests
                 throw new NotImplementedException();
             }
 
-            public override void Move(double dx, double dy)
+            public override void Move(ISet<BaseShape> selected, double dx, double dy)
             {
                 throw new NotImplementedException();
             }

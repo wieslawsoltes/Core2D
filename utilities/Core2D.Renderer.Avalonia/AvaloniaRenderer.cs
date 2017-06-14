@@ -360,7 +360,7 @@ namespace Core2D.Renderer.Avalonia
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XLine line, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
+        public override void Draw(object dc, XLine line, double dx, double dy, object db, object r)
         {
             var _dc = dc as AM.DrawingContext;
 
@@ -385,7 +385,7 @@ namespace Core2D.Renderer.Avalonia
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XRectangle rectangle, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
+        public override void Draw(object dc, XRectangle rectangle, double dx, double dy, object db, object r)
         {
             var _dc = dc as AM.DrawingContext;
 
@@ -415,7 +415,7 @@ namespace Core2D.Renderer.Avalonia
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XEllipse ellipse, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
+        public override void Draw(object dc, XEllipse ellipse, double dx, double dy, object db, object r)
         {
             var _dc = dc as AM.DrawingContext;
 
@@ -434,7 +434,7 @@ namespace Core2D.Renderer.Avalonia
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XArc arc, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
+        public override void Draw(object dc, XArc arc, double dx, double dy, object db, object r)
         {
             if (!arc.IsFilled && !arc.IsStroked)
                 return;
@@ -474,7 +474,7 @@ namespace Core2D.Renderer.Avalonia
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XCubicBezier cubicBezier, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
+        public override void Draw(object dc, XCubicBezier cubicBezier, double dx, double dy, object db, object r)
         {
             if (!cubicBezier.IsFilled && !cubicBezier.IsStroked)
                 return;
@@ -506,7 +506,7 @@ namespace Core2D.Renderer.Avalonia
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XQuadraticBezier quadraticBezier, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
+        public override void Draw(object dc, XQuadraticBezier quadraticBezier, double dx, double dy, object db, object r)
         {
             if (!quadraticBezier.IsFilled && !quadraticBezier.IsStroked)
                 return;
@@ -537,11 +537,13 @@ namespace Core2D.Renderer.Avalonia
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XText text, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
+        public override void Draw(object dc, XText text, double dx, double dy, object db, object r)
         {
             var _gfx = dc as AM.DrawingContext;
 
-            var tbind = text.BindText(db, r);
+            var properties = (ImmutableArray<XProperty>)db;
+            var record = (XRecord)r;
+            var tbind = text.BindText(properties, record);
             if (string.IsNullOrEmpty(tbind))
                 return;
 
@@ -602,7 +604,7 @@ namespace Core2D.Renderer.Avalonia
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XImage image, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
+        public override void Draw(object dc, XImage image, double dx, double dy, object db, object r)
         {
             var _dc = dc as AM.DrawingContext;
 
@@ -674,7 +676,7 @@ namespace Core2D.Renderer.Avalonia
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XPath path, double dx, double dy, ImmutableArray<XProperty> db, XRecord r)
+        public override void Draw(object dc, XPath path, double dx, double dy, object db, object r)
         {
             if (!path.IsFilled && !path.IsStroked)
                 return;
