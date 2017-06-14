@@ -1,6 +1,5 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using System.Collections.Immutable;
 using System.ComponentModel;
 using Xunit;
 
@@ -8,22 +7,6 @@ namespace Core2D.UnitTests
 {
     public class ObservableObjectTests
     {
-        [Fact]
-        [Trait("Core2D", "Base")]
-        public void Resources_Not_Null()
-        {
-            var target = new Class1();
-            Assert.NotNull(target.Resources);
-        }
-
-        [Fact]
-        [Trait("Core2D", "Base")]
-        public void Resources_Is_ImmutableArray()
-        {
-            var target = new Class1();
-            Assert.IsType<ImmutableArray<ObservableObject>>(target.Resources);
-        }
-
         [Fact]
         [Trait("Core2D", "Base")]
         public void Implements_INotifyPropertyChanged_Interface()
