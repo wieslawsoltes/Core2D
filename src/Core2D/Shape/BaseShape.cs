@@ -13,7 +13,7 @@ namespace Core2D.Shape
     /// <summary>
     /// Base class for shapes.
     /// </summary>
-    public abstract class BaseShape : ObservableObject
+    public abstract class BaseShape : ObservableObject, ISelectable
     {
         private BaseShape _owner;
         private ShapeState _state;
@@ -140,9 +140,10 @@ namespace Core2D.Shape
         /// <summary>
         /// Moves shape to new position using X and Y axis offset.
         /// </summary>
+        /// <param name="selected">The selected shapes set.</param>
         /// <param name="dx">The X axis position offset.</param>
         /// <param name="dy">The Y axis position offset.</param>
-        public abstract void Move(double dx, double dy);
+        public abstract void Move(ISet<BaseShape> selected, double dx, double dy);
 
         /// <summary>
         /// Selects the shape.

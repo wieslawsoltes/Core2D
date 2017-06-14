@@ -84,12 +84,12 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override void Move(double dx, double dy)
+        public override void Move(ISet<BaseShape> selected, double dx, double dy)
         {
             var points = this.GetPoints();
             foreach (var point in points)
             {
-                point.Move(dx, dy);
+                point.Move(selected, dx, dy);
             }
         }
 

@@ -3,7 +3,7 @@
 using System.Collections.Generic;
 using Core2D.Shape;
 
-namespace Draw2D.Core
+namespace Core2D
 {
     /// <summary>
     /// Defines selectable shape contract.

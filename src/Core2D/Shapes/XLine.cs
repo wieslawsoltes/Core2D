@@ -79,16 +79,16 @@ namespace Core2D.Shapes
         }
 
         /// <inheritdoc/>
-        public override void Move(double dx, double dy)
+        public override void Move(ISet<BaseShape> selected, double dx, double dy)
         {
             if (!Start.State.Flags.HasFlag(ShapeStateFlags.Connector))
             {
-                Start.Move(dx, dy);
+                Start.Move(selected, dx, dy);
             }
 
             if (!End.State.Flags.HasFlag(ShapeStateFlags.Connector))
             {
-                End.Move(dx, dy);
+                End.Move(selected, dx, dy);
             }
         }
 

@@ -2640,7 +2640,7 @@ namespace Core2D.Editor
                 if (clone != null)
                 {
                     Deselect(Project?.CurrentContainer?.CurrentLayer);
-                    clone.Move(sx, sy);
+                    clone.Move(null, sx, sy);
 
                     Project.AddShape(Project?.CurrentContainer?.CurrentLayer, clone);
 
@@ -3537,7 +3537,7 @@ namespace Core2D.Editor
             {
                 if (!shape.State.Flags.HasFlag(ShapeStateFlags.Locked))
                 {
-                    shape.Move(dx, dy);
+                    shape.Move(null, dx, dy);
                 }
             }
         }
