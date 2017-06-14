@@ -97,12 +97,7 @@ namespace Core2D.Shape
             set => Update(ref _data, value);
         }
 
-        /// <summary>
-        /// Begins matrix transform.
-        /// </summary>
-        /// <param name="dc">The generic drawing context object.</param>
-        /// <param name="renderer">The generic renderer object used to draw shape.</param>
-        /// <returns>The previous transform state.</returns>
+        /// <inheritdoc/>
         public virtual object BeginTransform(object dc, ShapeRenderer renderer)
         {
             if (Transform != null)
@@ -112,12 +107,7 @@ namespace Core2D.Shape
             return null;
         }
 
-        /// <summary>
-        /// Ends matrix transform.
-        /// </summary>
-        /// <param name="dc">The generic drawing context object.</param>
-        /// <param name="renderer">The generic renderer object used to draw shape.</param>
-        /// <param name="state">The previous transform state.</param>
+        /// <inheritdoc/>
         public virtual void EndTransform(object dc, ShapeRenderer renderer, object state)
         {
             if (Transform != null)
@@ -126,29 +116,19 @@ namespace Core2D.Shape
             }
         }
 
-        /// <summary>
-        /// Draws shape using current <see cref="ShapeRenderer"/>.
-        /// </summary>
-        /// <param name="dc">The generic drawing context object.</param>
-        /// <param name="renderer">The generic renderer object used to draw shape.</param>
-        /// <param name="dx">The X axis draw position offset.</param>
-        /// <param name="dy">The Y axis draw position offset.</param>
-        /// <param name="db">The properties database.</param>
-        /// <param name="r">The database record.</param>
+        /// <inheritdoc/>
         public abstract void Draw(object dc, ShapeRenderer renderer, double dx, double dy, object db, object r);
 
-        /// <summary>
-        /// Moves shape to new position using X and Y axis offset.
-        /// </summary>
-        /// <param name="selected">The selected shapes set.</param>
-        /// <param name="dx">The X axis position offset.</param>
-        /// <param name="dy">The Y axis position offset.</param>
+        /// <inheritdoc/>
+        public virtual bool Invalidate(ShapeRenderer renderer, double dx, double dy)
+        {
+            return false;
+        }
+
+        /// <inheritdoc/>
         public abstract void Move(ISet<BaseShape> selected, double dx, double dy);
 
-        /// <summary>
-        /// Selects the shape.
-        /// </summary>
-        /// <param name="selected">The selected shapes set.</param>
+        /// <inheritdoc/>
         public virtual void Select(ISet<BaseShape> selected)
         {
             if (!selected.Contains(this))
@@ -157,10 +137,7 @@ namespace Core2D.Shape
             }
         }
 
-        /// <summary>
-        /// Deselects the shape.
-        /// </summary>
-        /// <param name="selected">The selected shapes set.</param>
+        /// <inheritdoc/>
         public virtual void Deselect(ISet<BaseShape> selected)
         {
             if (selected.Contains(this))

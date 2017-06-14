@@ -46,5 +46,14 @@ namespace Core2D
         /// <param name="db">The properties database.</param>
         /// <param name="r">The database record.</param>
         void Draw(object dc, ShapeRenderer renderer, double dx, double dy, object db, object r);
+
+        /// <summary>
+        /// Invalidates shape renderer cache.
+        /// </summary>
+        /// <param name="renderer">The generic renderer object used to draw shape.</param>
+        /// <param name="dx">The X axis draw position offset.</param>
+        /// <param name="dy">The Y axis draw position offset.</param>
+        /// <returns>Returns true if shape was invalidated; otherwise, returns false.</returns>
+        bool Invalidate(ShapeRenderer renderer, double dx, double dy);
     }
 }
