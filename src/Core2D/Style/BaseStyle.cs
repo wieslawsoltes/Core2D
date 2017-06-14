@@ -4,7 +4,6 @@ using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
-using Core2D.Attributes;
 
 namespace Core2D.Style
 {
