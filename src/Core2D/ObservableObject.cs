@@ -35,6 +35,17 @@ namespace Core2D
         }
 
         /// <summary>
+        /// Gets or sets is dirty flag.
+        /// </summary>
+        internal bool IsDirty { get; set; }
+
+        /// <summary>
+        /// Set the <see cref="IsDirty"/> flag value.
+        /// </summary>
+        /// <param name="value">The new value of <see cref="IsDirty"/> flag.</param>
+        public void MarkAsDirty(bool value) => IsDirty = value;
+
+        /// <summary>
         /// Occurs when a property value changes.
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
@@ -61,6 +72,7 @@ namespace Core2D
             if (!Equals(field, value))
             {
                 field = value;
+                IsDirty = true;
                 Notify(propertyName);
                 return true;
             }
@@ -78,5 +90,11 @@ namespace Core2D
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeName() => !String.IsNullOrWhiteSpace(_name);
+
+        /// <summary>
+        /// The <see cref="IsDirty"/> property is not serialized.
+        /// </summary>
+        /// <returns>Returns always false.</returns>
+        public virtual bool ShouldSerializeIsDirty() => false;
     }
 }
