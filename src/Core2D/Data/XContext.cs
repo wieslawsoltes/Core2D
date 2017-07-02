@@ -1,5 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Core2D.Attributes;
@@ -10,7 +12,7 @@ namespace Core2D.Data
     /// <summary>
     /// Data context.
     /// </summary>
-    public class XContext : ObservableObject
+    public class XContext : ObservableObject, ICopyable
     {
         private ImmutableArray<XProperty> _properties;
         private XRecord _record;
@@ -74,6 +76,12 @@ namespace Core2D.Data
                     }
                 }
             }
+        }
+
+        /// <inheritdoc/>
+        public virtual object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>

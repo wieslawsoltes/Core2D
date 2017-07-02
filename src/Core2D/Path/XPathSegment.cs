@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
 using System.Collections.Generic;
 using Core2D.Shapes;
 
@@ -8,7 +9,7 @@ namespace Core2D.Path
     /// <summary>
     /// <see cref="XPathFigure"/> segment base class.
     /// </summary>
-    public abstract class XPathSegment : ObservableObject
+    public abstract class XPathSegment : ObservableObject, ICopyable
     {
         private bool _isStroked;
         private bool _isSmoothJoin;
@@ -36,6 +37,12 @@ namespace Core2D.Path
         /// </summary>
         /// <returns>All points in the segment.</returns>
         public abstract IEnumerable<XPoint> GetPoints();
+
+        /// <inheritdoc/>
+        public virtual object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
+        }
 
         /// <summary>
         /// Check whether the <see cref="IsStroked"/> property has changed from its default value.

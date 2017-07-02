@@ -1,12 +1,15 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
+using System;
+using System.Collections.Generic;
+
 namespace Core2D.Path
 {
     /// <summary>
     /// Path size.
     /// </summary>
-    public class XPathSize : ObservableObject
+    public class XPathSize : ObservableObject, ICopyable
     {
         private double _width;
         private double _height;
@@ -27,6 +30,12 @@ namespace Core2D.Path
         {
             get => _height;
             set => Update(ref _height, value);
+        }
+
+        /// <inheritdoc/>
+        public virtual object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>

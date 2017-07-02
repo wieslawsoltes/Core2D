@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Core2D.Path;
@@ -12,7 +13,7 @@ namespace Core2D.Shapes
     /// <summary>
     /// Path shape.
     /// </summary>
-    public class XPath : BaseShape
+    public class XPath : BaseShape, ICopyable
     {
         private XPathGeometry _geometry;
 
@@ -118,6 +119,12 @@ namespace Core2D.Shapes
         public override IEnumerable<XPoint> GetPoints()
         {
             return Geometry.Figures.SelectMany(f => f.GetPoints());
+        }
+
+        /// <inheritdoc/>
+        public virtual object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>

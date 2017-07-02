@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Text;
@@ -11,7 +12,7 @@ namespace Core2D.Path
     /// <summary>
     /// <see cref="XPathFigure"/> poly segment base class.
     /// </summary>
-    public abstract class XPathPolySegment : XPathSegment
+    public abstract class XPathPolySegment : XPathSegment, ICopyable
     {
         private ImmutableArray<XPoint> _points;
 
@@ -32,6 +33,12 @@ namespace Core2D.Path
 
         /// <inheritdoc/>
         public override IEnumerable<XPoint> GetPoints() => Points;
+
+        /// <inheritdoc/>
+        public override object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
+        }
 
         /// <summary>
         /// Creates a string representation of points collection.

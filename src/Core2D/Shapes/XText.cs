@@ -15,7 +15,7 @@ namespace Core2D.Shapes
     /// <summary>
     /// Text shape.
     /// </summary>
-    public class XText : BaseShape
+    public class XText : BaseShape, ICopyable
     {
         private XPoint _topLeft;
         private XPoint _bottomRight;
@@ -124,6 +124,12 @@ namespace Core2D.Shapes
         {
             yield return TopLeft;
             yield return BottomRight;
+        }
+
+        /// <inheritdoc/>
+        public virtual object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>

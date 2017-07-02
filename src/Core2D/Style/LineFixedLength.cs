@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
+using System.Collections.Generic;
 using Core2D.Attributes;
 using Core2D.Shape;
 
@@ -9,7 +10,7 @@ namespace Core2D.Style
     /// <summary>
     /// Line fixed length.
     /// </summary>
-    public class LineFixedLength : ObservableObject
+    public class LineFixedLength : ObservableObject, ICopyable
     {
         private LineFixedLengthFlags _flags;
         private ShapeState _startTrigger;
@@ -119,6 +120,12 @@ namespace Core2D.Style
         {
             get => _length;
             set => Update(ref _length, value);
+        }
+
+        /// <inheritdoc/>
+        public virtual object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>

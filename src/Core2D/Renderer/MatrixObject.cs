@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Core2D.Renderer
@@ -8,7 +9,7 @@ namespace Core2D.Renderer
     /// <summary>
     /// Transformation matrix.
     /// </summary>
-    public class MatrixObject : ObservableObject
+    public class MatrixObject : ObservableObject, ICopyable
     {
         private double _m11;
         private double _m12;
@@ -97,6 +98,12 @@ namespace Core2D.Renderer
         {
             get => _offsetY;
             set => Update(ref _offsetY, value);
+        }
+
+        /// <inheritdoc/>
+        public virtual object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>

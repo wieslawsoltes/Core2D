@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
 using System.Collections.Generic;
 using Core2D.Renderer;
 using Core2D.Shape;
@@ -11,7 +12,7 @@ namespace Core2D.Shapes
     /// <summary>
     /// Cubic bezier shape.
     /// </summary>
-    public class XCubicBezier : BaseShape, ICubicBezier
+    public class XCubicBezier : BaseShape, ICubicBezier, ICopyable
     {
         private XPoint _point1;
         private XPoint _point2;
@@ -158,6 +159,12 @@ namespace Core2D.Shapes
             yield return Point2;
             yield return Point3;
             yield return Point4;
+        }
+
+        /// <inheritdoc/>
+        public virtual object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>

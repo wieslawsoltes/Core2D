@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace Core2D.Path
     /// <summary>
     /// Path figure.
     /// </summary>
-    public class XPathFigure : ObservableObject
+    public class XPathFigure : ObservableObject, ICopyable
     {
         private XPoint _startPoint;
         private ImmutableArray<XPathSegment> _segments;
@@ -77,6 +78,12 @@ namespace Core2D.Path
             {
                 yield return point;
             }
+        }
+
+        /// <inheritdoc/>
+        public virtual object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>

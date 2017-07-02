@@ -1,5 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
+using System.Collections.Generic;
 using Core2D.Path;
 using Core2D.Shape;
 using Core2D.Shapes;
@@ -10,7 +12,7 @@ namespace Core2D.Project
     /// <summary>
     /// Project options.
     /// </summary>
-    public class XOptions : ObservableObject
+    public class XOptions : ObservableObject, ICopyable
     {
         private bool _snapToGrid = true;
         private double _snapX = 15.0;
@@ -171,6 +173,12 @@ namespace Core2D.Project
         {
             get => _cloneStyle;
             set => Update(ref _cloneStyle, value);
+        }
+
+        /// <inheritdoc/>
+        public virtual object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>

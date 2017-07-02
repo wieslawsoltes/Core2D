@@ -1,12 +1,15 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
+using System;
+using System.Collections.Generic;
+
 namespace Core2D.Style
 {
     /// <summary>
     /// Shape style.
     /// </summary>
-    public class ShapeStyle : BaseStyle
+    public class ShapeStyle : BaseStyle, ICopyable
     {
         private LineStyle _lineStyle;
         private ArrowStyle _startArrowStyle;
@@ -47,6 +50,12 @@ namespace Core2D.Style
         {
             get => _textStyle;
             set => Update(ref _textStyle, value);
+        }
+
+        /// <inheritdoc/>
+        public override object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>

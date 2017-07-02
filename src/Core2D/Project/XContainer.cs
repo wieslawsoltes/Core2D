@@ -1,5 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Core2D.Attributes;
@@ -12,7 +14,7 @@ namespace Core2D.Project
     /// <summary>
     /// Container base class.
     /// </summary>
-    public class XContainer : XSelectable
+    public class XContainer : XSelectable, ICopyable
     {
         private double _width;
         private double _height;
@@ -246,6 +248,12 @@ namespace Core2D.Project
             {
                 HelperLayer.Invalidate();
             }
+        }
+
+        /// <inheritdoc/>
+        public virtual object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>

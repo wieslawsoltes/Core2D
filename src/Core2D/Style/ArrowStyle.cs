@@ -1,12 +1,15 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
+using System;
+using System.Collections.Generic;
+
 namespace Core2D.Style
 {
     /// <summary>
     /// Line ending arrow style.
     /// </summary>
-    public class ArrowStyle : BaseStyle
+    public class ArrowStyle : BaseStyle, ICopyable
     {
         private ArrowType _arrowType;
         private bool _isStroked;
@@ -86,6 +89,12 @@ namespace Core2D.Style
             LineCap = source.LineCap;
             Dashes = source.Dashes != null ? source.Dashes : default(string);
             DashOffset = source.DashOffset;
+        }
+
+        /// <inheritdoc/>
+        public override object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>

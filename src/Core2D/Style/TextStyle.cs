@@ -1,13 +1,14 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
+using System.Collections.Generic;
 
 namespace Core2D.Style
 {
     /// <summary>
     /// Text style.
     /// </summary>
-    public class TextStyle : ObservableObject
+    public class TextStyle : ObservableObject, ICopyable
     {
         private string _fontName;
         private string _fontFile;
@@ -68,6 +69,12 @@ namespace Core2D.Style
         {
             get => _textVAlignment;
             set => Update(ref _textVAlignment, value);
+        }
+
+        /// <inheritdoc/>
+        public virtual object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>

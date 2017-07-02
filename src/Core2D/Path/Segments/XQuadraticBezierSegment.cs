@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
 using System.Collections.Generic;
 using Core2D.Shapes;
 
@@ -8,7 +9,7 @@ namespace Core2D.Path.Segments
     /// <summary>
     /// Quadratic bezier path segment.
     /// </summary>
-    public class XQuadraticBezierSegment : XPathSegment
+    public class XQuadraticBezierSegment : XPathSegment, ICopyable
     {
         private XPoint _point1;
         private XPoint _point2;
@@ -36,6 +37,12 @@ namespace Core2D.Path.Segments
         {
             yield return Point1;
             yield return Point2;
+        }
+
+        /// <inheritdoc/>
+        public override object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>

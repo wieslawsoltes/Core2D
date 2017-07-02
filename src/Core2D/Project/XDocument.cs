@@ -1,5 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using Core2D.Attributes;
 
@@ -8,7 +10,7 @@ namespace Core2D.Project
     /// <summary>
     /// Document model.
     /// </summary>
-    public class XDocument : XSelectable
+    public class XDocument : XSelectable, ICopyable
     {
         private bool _isExpanded = true;
         private ImmutableArray<XContainer> _pages;
@@ -36,6 +38,12 @@ namespace Core2D.Project
         /// Initializes a new instance of the <see cref="XDocument"/> class.
         /// </summary>
         public XDocument() : base() => _pages = ImmutableArray.Create<XContainer>();
+
+        /// <inheritdoc/>
+        public virtual object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
+        }
 
         /// <summary>
         /// Creates a new <see cref="XDocument"/> instance.

@@ -1,12 +1,15 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
+using System;
+using System.Collections.Generic;
+
 namespace Core2D.Style
 {
     /// <summary>
     /// Line style.
     /// </summary>
-    public class LineStyle : ObservableObject
+    public class LineStyle : ObservableObject, ICopyable
     {
         private bool _isCurved;
         private double _curvature;
@@ -47,6 +50,12 @@ namespace Core2D.Style
         {
             get => _fixedLength;
             set => Update(ref _fixedLength, value);
+        }
+
+        /// <inheritdoc/>
+        public virtual object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>

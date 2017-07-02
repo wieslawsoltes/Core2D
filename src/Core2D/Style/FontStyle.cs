@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
+using System.Collections.Generic;
 using Core2D.Attributes;
 
 namespace Core2D.Style
@@ -8,7 +9,7 @@ namespace Core2D.Style
     /// <summary>
     /// Specifies style flags proxy information applied to text.
     /// </summary>
-    public class FontStyle : ObservableObject
+    public class FontStyle : ObservableObject, ICopyable
     {
         private FontStyleFlags _flags;
 
@@ -78,6 +79,12 @@ namespace Core2D.Style
         {
             get => _flags.HasFlag(FontStyleFlags.Strikeout);
             set => Flags = value ? _flags | FontStyleFlags.Strikeout : _flags & ~FontStyleFlags.Strikeout;
+        }
+
+        /// <inheritdoc/>
+        public virtual object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>

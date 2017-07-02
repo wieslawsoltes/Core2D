@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace Core2D.Project
     /// <summary>
     /// Named items library.
     /// </summary>
-    public class XLibrary<T> : ObservableObject, ILibrary
+    public class XLibrary<T> : ObservableObject, ILibrary, ICopyable
     {
         private ImmutableArray<T> _items;
         private T _selected;
@@ -49,6 +50,12 @@ namespace Core2D.Project
         /// </summary>
         /// <param name="item">The item instance.</param>
         public void SetSelected(T item) => Selected = item;
+
+        /// <inheritdoc/>
+        public virtual object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
+        }
 
         /// <summary>
         /// Creates a new instance of the <see cref="XLibrary{T}"/> class.

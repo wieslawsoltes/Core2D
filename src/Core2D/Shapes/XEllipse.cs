@@ -1,5 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
+using System.Collections.Generic;
 using Core2D.Renderer;
 using Core2D.Shape;
 using Core2D.Style;
@@ -9,7 +11,7 @@ namespace Core2D.Shapes
     /// <summary>
     /// Ellipse shape.
     /// </summary>
-    public class XEllipse : XText
+    public class XEllipse : XText, ICopyable
     {
         /// <inheritdoc/>
         public override void Draw(object dc, ShapeRenderer renderer, double dx, double dy, object db, object r)
@@ -26,6 +28,12 @@ namespace Core2D.Shapes
 
                 base.Draw(dc, renderer, dx, dy, db, record);
             }
+        }
+
+        /// <inheritdoc/>
+        public override object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>

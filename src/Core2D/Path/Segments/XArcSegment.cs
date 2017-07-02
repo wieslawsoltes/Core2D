@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
 using System.Collections.Generic;
 using Core2D.Shapes;
 
@@ -8,7 +9,7 @@ namespace Core2D.Path.Segments
     /// <summary>
     /// Arc path segment.
     /// </summary>
-    public class XArcSegment : XPathSegment
+    public class XArcSegment : XPathSegment, ICopyable
     {
         private XPoint _point;
         private XPathSize _size;
@@ -65,6 +66,12 @@ namespace Core2D.Path.Segments
         public override IEnumerable<XPoint> GetPoints()
         {
             yield return Point;
+        }
+
+        /// <inheritdoc/>
+        public override object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>

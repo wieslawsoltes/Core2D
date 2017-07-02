@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace Core2D.Style
     /// <summary>
     /// Base style.
     /// </summary>
-    public abstract class BaseStyle : ObservableObject
+    public abstract class BaseStyle : ObservableObject, ICopyable
     {
         private ArgbColor _stroke;
         private ArgbColor _fill;
@@ -71,6 +72,12 @@ namespace Core2D.Style
         {
             get => _dashOffset;
             set => Update(ref _dashOffset, value);
+        }
+
+        /// <inheritdoc/>
+        public virtual object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>

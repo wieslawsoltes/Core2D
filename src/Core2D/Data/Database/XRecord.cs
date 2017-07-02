@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Core2D.Attributes;
@@ -10,7 +11,7 @@ namespace Core2D.Data.Database
     /// <summary>
     /// Database record.
     /// </summary>
-    public class XRecord : ObservableObject
+    public class XRecord : ObservableObject, ICopyable
     {
         private ImmutableArray<XValue> _values;
         private XDatabase _owner;
@@ -41,6 +42,12 @@ namespace Core2D.Data.Database
         {
             get => _owner;
             set => Update(ref _owner, value);
+        }
+
+        /// <inheritdoc/>
+        public virtual object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>

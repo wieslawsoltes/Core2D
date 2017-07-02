@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
 using System.Collections.Generic;
 using Core2D.Renderer;
 using Core2D.Shape;
@@ -11,7 +12,7 @@ namespace Core2D.Shapes
     /// <summary>
     /// Line shape.
     /// </summary>
-    public class XLine : BaseShape, ILine
+    public class XLine : BaseShape, ILine, ICopyable
     {
         private XPoint _start;
         private XPoint _end;
@@ -110,6 +111,12 @@ namespace Core2D.Shapes
         {
             yield return Start;
             yield return End;
+        }
+
+        /// <inheritdoc/>
+        public virtual object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>

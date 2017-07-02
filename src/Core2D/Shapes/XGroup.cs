@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace Core2D.Shapes
     /// <summary>
     /// Group shape.
     /// </summary>
-    public class XGroup : BaseShape
+    public class XGroup : BaseShape, ICopyable
     {
         private ImmutableArray<XProperty> _shapesProperties;
         private ImmutableArray<BaseShape> _shapes;
@@ -186,6 +187,12 @@ namespace Core2D.Shapes
         public override IEnumerable<XPoint> GetPoints()
         {
             return Enumerable.Concat(Shapes.SelectMany(s => s.GetPoints()), Connectors);
+        }
+
+        /// <inheritdoc/>
+        public virtual object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>

@@ -11,7 +11,7 @@ namespace Core2D.Data.Database
     /// <summary>
     /// Records database.
     /// </summary>
-    public class XDatabase : ObservableObject
+    public class XDatabase : ObservableObject, ICopyable
     {
         private string _idColumnName;
         private ImmutableArray<XColumn> _columns;
@@ -68,6 +68,12 @@ namespace Core2D.Data.Database
         {
             get => _currentRecord;
             set => Update(ref _currentRecord, value);
+        }
+
+        /// <inheritdoc/>
+        public virtual object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>

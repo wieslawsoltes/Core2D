@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using Core2D.Attributes;
 using Core2D.Shape;
@@ -22,7 +23,7 @@ namespace Core2D.Project
     /// <summary>
     /// Container layer.
     /// </summary>
-    public class XLayer : XSelectable
+    public class XLayer : XSelectable, ICopyable
     {
         /// <summary>
         /// Invalidate layer event.
@@ -74,6 +75,12 @@ namespace Core2D.Project
         /// Invalidate layer shapes.
         /// </summary>
         public void Invalidate() => InvalidateLayer?.Invoke(this, new InvalidateLayerEventArgs());
+
+        /// <inheritdoc/>
+        public virtual object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
+        }
 
         /// <summary>
         /// Creates a new <see cref="XLayer"/> instance.

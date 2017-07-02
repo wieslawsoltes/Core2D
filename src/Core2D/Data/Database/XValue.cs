@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
+using System.Collections.Generic;
 using Core2D.Attributes;
 
 namespace Core2D.Data.Database
@@ -8,7 +9,7 @@ namespace Core2D.Data.Database
     /// <summary>
     /// Record value.
     /// </summary>
-    public class XValue : ObservableObject
+    public class XValue : ObservableObject, ICopyable
     {
         private string _content;
 
@@ -20,6 +21,12 @@ namespace Core2D.Data.Database
         {
             get => _content;
             set => Update(ref _content, value);
+        }
+
+        /// <inheritdoc/>
+        public virtual object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>

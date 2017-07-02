@@ -1,5 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using Core2D.Attributes;
 using Core2D.Style;
@@ -9,7 +11,7 @@ namespace Core2D.Collections
     /// <summary>
     /// Observable <see cref="ShapeStyle"/> collection.
     /// </summary>
-    public class XStyles : ObservableObject
+    public class XStyles : ObservableObject, ICopyable
     {
         /// <summary>
         /// Gets or sets children collection.
@@ -23,6 +25,12 @@ namespace Core2D.Collections
         public XStyles()
         {
             Children = ImmutableArray.Create<ShapeStyle>();
+        }
+
+        /// <inheritdoc/>
+        public virtual object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>

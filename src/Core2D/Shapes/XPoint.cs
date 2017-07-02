@@ -7,13 +7,14 @@ using Core2D.Renderer;
 using Core2D.Shape;
 using Core2D.Style;
 using static System.Math;
+using System;
 
 namespace Core2D.Shapes
 {
     /// <summary>
     /// Point shape.
     /// </summary>
-    public class XPoint : BaseShape
+    public class XPoint : BaseShape, ICopyable
     {
         private double _x;
         private double _y;
@@ -85,6 +86,12 @@ namespace Core2D.Shapes
         public override IEnumerable<XPoint> GetPoints()
         {
             yield return this;
+        }
+
+        /// <inheritdoc/>
+        public virtual object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>

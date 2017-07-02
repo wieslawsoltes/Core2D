@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
@@ -10,7 +11,7 @@ namespace Core2D.Style
     /// <summary>
     /// Color definition using alpha, red, green and blue channels.
     /// </summary>
-    public class ArgbColor : ObservableObject
+    public class ArgbColor : ObservableObject, ICopyable
     {
         private byte _a;
         private byte _r;
@@ -51,6 +52,12 @@ namespace Core2D.Style
         {
             get => _b;
             set => Update(ref _b, value);
+        }
+
+        /// <inheritdoc/>
+        public virtual object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>

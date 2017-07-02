@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
+using System.Collections.Generic;
 using Core2D.Attributes;
 
 namespace Core2D.Shape
@@ -8,7 +9,7 @@ namespace Core2D.Shape
     /// <summary>
     /// Shape state.
     /// </summary>
-    public class ShapeState : ObservableObject
+    public class ShapeState : ObservableObject, ICopyable
     {
         private ShapeStateFlags _flags;
 
@@ -118,6 +119,12 @@ namespace Core2D.Shape
         {
             get => _flags.HasFlag(ShapeStateFlags.Output);
             set => Flags = value ? _flags | ShapeStateFlags.Output : _flags & ~ShapeStateFlags.Output;
+        }
+
+        /// <inheritdoc/>
+        public virtual object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>

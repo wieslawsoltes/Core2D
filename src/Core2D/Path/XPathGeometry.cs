@@ -1,5 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Text;
 using Core2D.Attributes;
@@ -9,7 +11,7 @@ namespace Core2D.Path
     /// <summary>
     /// Path geometry.
     /// </summary>
-    public class XPathGeometry : ObservableObject
+    public class XPathGeometry : ObservableObject, ICopyable
     {
         private ImmutableArray<XPathFigure> _figures;
         private XFillRule _fillRule;
@@ -37,6 +39,12 @@ namespace Core2D.Path
         /// Initializes a new instance of the <see cref="XPathGeometry"/> class.
         /// </summary>
         public XPathGeometry() => Figures = ImmutableArray.Create<XPathFigure>();
+
+        /// <inheritdoc/>
+        public virtual object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
+        }
 
         /// <summary>
         /// Creates a new <see cref="XPathGeometry"/> instance.
