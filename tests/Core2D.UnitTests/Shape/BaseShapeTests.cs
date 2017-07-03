@@ -46,6 +46,14 @@ namespace Core2D.UnitTests
             Assert.NotNull(target.Data);
         }
 
+        [Fact]
+        [Trait("Core2D.Shape", "Shape")]
+        public void Transform_Not_Null()
+        {
+            var target = new Class1();
+            Assert.NotNull(target.Transform);
+        }
+
         private class Class1 : BaseShape
         {
             public override void Draw(object dc, ShapeRenderer renderer, double dx, double dy, object db, object r)
