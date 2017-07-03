@@ -67,7 +67,7 @@ namespace Core2D.Shapes
         /// <inheritdoc/>
         public override void Draw(object dc, ShapeRenderer renderer, double dx, double dy, object db, object r)
         {
-            var record = this.Data.Record ?? r;
+            var record = this.Data?.Record ?? r;
 
             if (State.Flags.HasFlag(ShapeStateFlags.Visible))
             {

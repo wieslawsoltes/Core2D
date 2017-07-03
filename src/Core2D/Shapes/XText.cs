@@ -53,7 +53,7 @@ namespace Core2D.Shapes
         {
             var state = base.BeginTransform(dc, renderer);
 
-            var record = this.Data.Record ?? r;
+            var record = this.Data?.Record ?? r;
 
             if (State.Flags.HasFlag(ShapeStateFlags.Visible))
             {
@@ -202,7 +202,7 @@ namespace Core2D.Shapes
         /// <returns>The string bound to properties or data record.</returns>
         public string BindText(ImmutableArray<XProperty> db, XRecord r)
         {
-            var record = this.Data.Record ?? r;
+            var record = this.Data?.Record ?? r;
 
             if (!string.IsNullOrEmpty(_text))
             {
@@ -234,7 +234,7 @@ namespace Core2D.Shapes
             }
 
             // Try to bind to Properties using Text as formatting.
-            if (this.Data.Properties != null && this.Data.Properties.Length > 0)
+            if (this.Data?.Properties != null && this.Data.Properties.Length > 0)
             {
                 try
                 {
