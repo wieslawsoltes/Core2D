@@ -1,13 +1,13 @@
 ﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="0.5.1" />
+    <PackageReference Include="Avalonia" Version="0.5.1-build3351-alpha" />
     <PackageReference Include="Serilog" Version="2.4.0" />
     <PackageReference Include="Splat" Version="2.0.0" />
     <PackageReference Include="Sprache" Version="2.1.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Avalonia.Xaml.Interactions" Version="0.5.1" />
-    <PackageReference Include="Avalonia.Xaml.Interactions.Custom" Version="0.5.1" />
-    <PackageReference Include="Avalonia.Controls.PanAndZoom" Version="0.5.1" />
+    <PackageReference Include="Avalonia.Xaml.Interactions" Version="0.5.1-build430-alpha" />
+    <PackageReference Include="Avalonia.Xaml.Interactions.Custom" Version="0.5.1-build430-alpha" />
+    <PackageReference Include="Avalonia.Controls.PanAndZoom" Version="0.5.1-build115-alpha" />
   </ItemGroup>
 </Project>
