@@ -21,7 +21,7 @@ namespace Core2D.Editor.Tools
         private ToolSettingsEllipse _settings;
         private State _currentState = State.TopLeft;
         private Mode _currentMode = Mode.Rectangle;
-        private XEllipse _ellipse;
+        private EllipseShape _ellipse;
         private ToolEllipseSelection _selection;
         private double _centerX;
         private double _centerY;
@@ -48,7 +48,7 @@ namespace Core2D.Editor.Tools
             _settings = new ToolSettingsEllipse();
         }
 
-        private static void CircleConstrain(XPoint tl, XPoint br, double cx, double cy, double px, double py)
+        private static void CircleConstrain(PointShape tl, PointShape br, double cx, double cy, double px, double py)
         {
             double r = Max(Abs(cx - px), Abs(cy - py));
             tl.X = cx - r;
@@ -74,7 +74,7 @@ namespace Core2D.Editor.Tools
                         }
 
                         var style = editor.Project.CurrentStyleLibrary.Selected;
-                        _ellipse = XEllipse.Create(
+                        _ellipse = EllipseShape.Create(
                             sx, sy,
                             editor.Project.Options.CloneStyle ? style.Clone() : style,
                             editor.Project.Options.PointShape,

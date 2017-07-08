@@ -63,7 +63,7 @@
                             <TabItem Header="Connectors" Classes="property">
                                 <ListBox Name="connectors" Items="{Binding Connectors}" Classes="default">
                                     <ListBox.DataTemplates>
-                                        <DataTemplate DataType="Shapes:XPoint">
+                                        <DataTemplate DataType="Shapes:PointShape">
                                             <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="list"/>
                                         </DataTemplate>
                                     </ListBox.DataTemplates>

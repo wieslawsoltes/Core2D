@@ -52,7 +52,7 @@ namespace Core2D.Editor.Tools.Path
                         var pathTool = _serviceProvider.GetService<ToolPath>();
                         editor.CurrentPathTool = pathTool.PreviousPathTool;
 
-                        var start = editor.TryToGetConnectionPoint(sx, sy) ?? XPoint.Create(sx, sy, editor.Project.Options.PointShape);
+                        var start = editor.TryToGetConnectionPoint(sx, sy) ?? PointShape.Create(sx, sy, editor.Project.Options.PointShape);
                         pathTool.GeometryContext.BeginFigure(
                                 start,
                                 editor.Project.Options.DefaultIsFilled,

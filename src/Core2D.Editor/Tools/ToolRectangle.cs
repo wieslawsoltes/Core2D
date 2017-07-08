@@ -18,7 +18,7 @@ namespace Core2D.Editor.Tools
         private readonly IServiceProvider _serviceProvider;
         private ToolSettingsRectangle _settings;
         private State _currentState = State.TopLeft;
-        private XRectangle _rectangle;
+        private RectangleShape _rectangle;
         private ToolRectangleSelection _selection;
 
         /// <inheritdoc/>
@@ -54,7 +54,7 @@ namespace Core2D.Editor.Tools
                 case State.TopLeft:
                     {
                         var style = editor.Project.CurrentStyleLibrary.Selected;
-                        _rectangle = XRectangle.Create(
+                        _rectangle = RectangleShape.Create(
                             sx, sy,
                             editor.Project.Options.CloneStyle ? style.Clone() : style,
                             editor.Project.Options.PointShape,

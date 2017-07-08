@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using Core2D.Shapes;
 using Core2D.Style;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
@@ -83,7 +84,7 @@ namespace Core2D.Renderer.PdfSharp
                 double p1y = pt1.Y;
                 double p2x = pt2.X;
                 double p2y = pt2.Y;
-                Core2D.Shapes.XLineExtensions.GetCurvedLineBezierControlPoints(orientation, curvature, pt1a, pt2a, ref p1x, ref p1y, ref p2x, ref p2y);
+                Core2D.Shapes.LineShapeExtensions.GetCurvedLineBezierControlPoints(orientation, curvature, pt1a, pt2a, ref p1x, ref p1y, ref p2x, ref p2y);
                 path.AddBezier(
                     pt1.X, pt1.Y,
                     p1x, p1y,
@@ -93,7 +94,7 @@ namespace Core2D.Renderer.PdfSharp
             }
         }
 
-        private void DrawLineArrowsInternal(XGraphics gfx, Core2D.Shapes.XLine line, double dx, double dy, out XPoint pt1, out XPoint pt2)
+        private void DrawLineArrowsInternal(XGraphics gfx, Core2D.Shapes.LineShape line, double dx, double dy, out XPoint pt1, out XPoint pt2)
         {
             XSolidBrush fillStartArrow = ToXSolidBrush(line.Style.StartArrowStyle.Fill);
             XPen strokeStartArrow = ToXPen(line.Style.StartArrowStyle, _scaleToPage, _sourceDpi, _targetDpi);
@@ -106,7 +107,7 @@ namespace Core2D.Renderer.PdfSharp
             double _x2 = line.End.X + dx;
             double _y2 = line.End.Y + dy;
 
-            Core2D.Shapes.XLineExtensions.GetMaxLength(line, ref _x1, ref _y1, ref _x2, ref _y2);
+            Core2D.Shapes.LineShapeExtensions.GetMaxLength(line, ref _x1, ref _y1, ref _x2, ref _y2);
 
             double x1 = _scaleToPage(_x1);
             double y1 = _scaleToPage(_y1);
@@ -299,7 +300,7 @@ namespace Core2D.Renderer.PdfSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.Shapes.XLine line, double dx, double dy, object db, object r)
+        public override void Draw(object dc, Core2D.Shapes.LineShape line, double dx, double dy, object db, object r)
         {
             if (!line.IsStroked)
                 return;
@@ -327,7 +328,7 @@ namespace Core2D.Renderer.PdfSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.Shapes.XRectangle rectangle, double dx, double dy, object db, object r)
+        public override void Draw(object dc, Core2D.Shapes.RectangleShape rectangle, double dx, double dy, object db, object r)
         {
             var _gfx = dc as XGraphics;
 
@@ -380,7 +381,7 @@ namespace Core2D.Renderer.PdfSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.Shapes.XEllipse ellipse, double dx, double dy, object db, object r)
+        public override void Draw(object dc, Core2D.Shapes.EllipseShape ellipse, double dx, double dy, object db, object r)
         {
             var _gfx = dc as XGraphics;
 
@@ -422,7 +423,7 @@ namespace Core2D.Renderer.PdfSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.Shapes.XArc arc, double dx, double dy, object db, object r)
+        public override void Draw(object dc, Core2D.Shapes.ArcShape arc, double dx, double dy, object db, object r)
         {
             var _gfx = dc as XGraphics;
 
@@ -475,7 +476,7 @@ namespace Core2D.Renderer.PdfSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.Shapes.XCubicBezier cubicBezier, double dx, double dy, object db, object r)
+        public override void Draw(object dc, Core2D.Shapes.CubicBezierShape cubicBezier, double dx, double dy, object db, object r)
         {
             var _gfx = dc as XGraphics;
 
@@ -525,7 +526,7 @@ namespace Core2D.Renderer.PdfSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.Shapes.XQuadraticBezier quadraticBezier, double dx, double dy, object db, object r)
+        public override void Draw(object dc, Core2D.Shapes.QuadraticBezierShape quadraticBezier, double dx, double dy, object db, object r)
         {
             var _gfx = dc as XGraphics;
 
@@ -584,7 +585,7 @@ namespace Core2D.Renderer.PdfSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.Shapes.XText text, double dx, double dy, object db, object r)
+        public override void Draw(object dc, Core2D.Shapes.TextShape text, double dx, double dy, object db, object r)
         {
             var _gfx = dc as XGraphics;
 
@@ -675,7 +676,7 @@ namespace Core2D.Renderer.PdfSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.Shapes.XImage image, double dx, double dy, object db, object r)
+        public override void Draw(object dc, Core2D.Shapes.ImageShape image, double dx, double dy, object db, object r)
         {
             var _gfx = dc as XGraphics;
 
@@ -739,7 +740,7 @@ namespace Core2D.Renderer.PdfSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.Shapes.XPath path, double dx, double dy, object db, object r)
+        public override void Draw(object dc, Core2D.Shapes.PathShape path, double dx, double dy, object db, object r)
         {
             var _gfx = dc as XGraphics;
 

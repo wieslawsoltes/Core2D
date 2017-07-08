@@ -112,7 +112,7 @@ namespace Core2D.Editor.Factories
                 .Items.FirstOrDefault(s => s.Name == "Grid");
             var layer = template.Layers.FirstOrDefault();
             var builder = layer.Shapes.ToBuilder();
-            var grid = XRectangle.Create(
+            var grid = RectangleShape.Create(
                 0, 0,
                 template.Width, template.Height,
                 style,
@@ -162,7 +162,7 @@ namespace Core2D.Editor.Factories
 
             // Group Libraries
             var glBuilder = project.GroupLibraries.ToBuilder();
-            glBuilder.Add(XLibrary<XGroup>.Create("Default"));
+            glBuilder.Add(XLibrary<GroupShape>.Create("Default"));
             project.GroupLibraries = glBuilder.ToImmutable();
 
             project.SetCurrentGroupLibrary(project.GroupLibraries.FirstOrDefault());

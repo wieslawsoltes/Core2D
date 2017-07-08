@@ -23,11 +23,11 @@ namespace Core2D.Editor.Tools.Path
         private readonly IServiceProvider _serviceProvider;
         private PathToolSettingsArc _settings;
         private State _currentState = State.Start;
-        private XPathArc _arc = new XPathArc();
+        private PathShapeArc _arc = new PathShapeArc();
         private ToolLineSelection _selection;
         private const double _defaultRotationAngle = 0.0;
         private const bool _defaultIsLargeArc = false;
-        private const XSweepDirection _defaultSweepDirection = XSweepDirection.Clockwise;
+        private const SweepDirection _defaultSweepDirection = SweepDirection.Clockwise;
 
         /// <inheritdoc/>
         public override string Title => "Arc";
@@ -62,7 +62,7 @@ namespace Core2D.Editor.Tools.Path
             {
                 case State.Start:
                     {
-                        _arc.Start = editor.TryToGetConnectionPoint(sx, sy) ?? XPoint.Create(sx, sy, editor.Project.Options.PointShape);
+                        _arc.Start = editor.TryToGetConnectionPoint(sx, sy) ?? PointShape.Create(sx, sy, editor.Project.Options.PointShape);
                         if (!pathTool.IsInitialized)
                         {
                             pathTool.InitializeWorkingPath(_arc.Start);
@@ -72,10 +72,10 @@ namespace Core2D.Editor.Tools.Path
                             _arc.Start = pathTool.GetLastPathPoint();
                         }
 
-                        _arc.End = XPoint.Create(sx, sy, editor.Project.Options.PointShape);
+                        _arc.End = PointShape.Create(sx, sy, editor.Project.Options.PointShape);
                         pathTool.GeometryContext.ArcTo(
                             _arc.End,
-                            XPathSize.Create(
+                            PathSize.Create(
                                 Abs(_arc.Start.X - _arc.End.X),
                                 Abs(_arc.Start.Y - _arc.End.Y)),
                             _defaultRotationAngle,
@@ -103,10 +103,10 @@ namespace Core2D.Editor.Tools.Path
                             }
                         }
                         _arc.Start = _arc.End;
-                        _arc.End = XPoint.Create(sx, sy, editor.Project.Options.PointShape);
+                        _arc.End = PointShape.Create(sx, sy, editor.Project.Options.PointShape);
                         pathTool.GeometryContext.ArcTo(
                             _arc.End,
-                            XPathSize.Create(
+                            PathSize.Create(
                                 Abs(_arc.Start.X - _arc.End.X),
                                 Abs(_arc.Start.Y - _arc.End.Y)),
                             _defaultRotationAngle,
@@ -135,7 +135,7 @@ namespace Core2D.Editor.Tools.Path
                     break;
                 case State.End:
                     {
-                        pathTool.RemoveLastSegment<XArcSegment>();
+                        pathTool.RemoveLastSegment<ArcSegment>();
 
                         editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(pathTool.Path);
                         Remove();
@@ -182,7 +182,7 @@ namespace Core2D.Editor.Tools.Path
                         _arc.End.X = sx;
                         _arc.End.Y = sy;
                         var figure = pathTool.Geometry.Figures.LastOrDefault();
-                        var arc = figure.Segments.LastOrDefault() as XArcSegment;
+                        var arc = figure.Segments.LastOrDefault() as ArcSegment;
                         arc.Point = _arc.End;
                         arc.Size.Width = Abs(_arc.Start.X - _arc.End.X);
                         arc.Size.Height = Abs(_arc.Start.Y - _arc.End.Y);

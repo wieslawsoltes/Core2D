@@ -5,10 +5,10 @@ using Core2D.Shapes.Interfaces;
 
 namespace Core2D.Editor.Tools.Path.Shapes
 {
-    internal class XPathQuadraticBezier : IQuadraticBezier
+    internal class PathShapeQuadraticBezier : IQuadraticBezier
     {
-        public XPoint Point1 { get; set; }
-        public XPoint Point2 { get; set; }
-        public XPoint Point3 { get; set; }
+        public PointShape Point1 { get; set; }
+        public PointShape Point2 { get; set; }
+        public PointShape Point3 { get; set; }
     }
 }

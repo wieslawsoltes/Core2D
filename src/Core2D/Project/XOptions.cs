@@ -23,7 +23,7 @@ namespace Core2D.Project
         private bool _defaultIsFilled = false;
         private bool _defaultIsClosed = true;
         private bool _defaultIsSmoothJoin = true;
-        private XFillRule _defaultFillRule = XFillRule.EvenOdd;
+        private FillRule _defaultFillRule = FillRule.EvenOdd;
         private bool _tryToConnect = false;
         private BaseShape _pointShape;
         private ShapeStyle _pointStyle;
@@ -115,7 +115,7 @@ namespace Core2D.Project
         /// <summary>
         /// Gets or sets value indicating path fill rule during creation.
         /// </summary>
-        public XFillRule DefaultFillRule
+        public FillRule DefaultFillRule
         {
             get => _defaultFillRule;
             set => Update(ref _defaultFillRule, value);
@@ -198,7 +198,7 @@ namespace Core2D.Project
                 DefaultIsFilled = false,
                 DefaultIsClosed = true,
                 DefaultIsSmoothJoin = true,
-                DefaultFillRule = XFillRule.EvenOdd,
+                DefaultFillRule = FillRule.EvenOdd,
                 TryToConnect = false,
                 CloneStyle = false
             };
@@ -236,7 +236,7 @@ namespace Core2D.Project
         /// <returns>The new instance of the <see cref="BaseShape"/> class.</returns>
         public static BaseShape EllipsePointShape(ShapeStyle pss)
         {
-            var ellipse = XEllipse.Create(-4, -4, 4, 4, pss, null, true, false);
+            var ellipse = EllipseShape.Create(-4, -4, 4, 4, pss, null, true, false);
             ellipse.Name = "EllipsePoint";
             return ellipse;
         }
@@ -248,7 +248,7 @@ namespace Core2D.Project
         /// <returns>The new instance of the <see cref="BaseShape"/> class.</returns>
         public static BaseShape FilledEllipsePointShape(ShapeStyle pss)
         {
-            var ellipse = XEllipse.Create(-3, -3, 3, 3, pss, null, true, true);
+            var ellipse = EllipseShape.Create(-3, -3, 3, 3, pss, null, true, true);
             ellipse.Name = "FilledEllipsePoint";
             return ellipse;
         }
@@ -260,7 +260,7 @@ namespace Core2D.Project
         /// <returns>The new instance of the <see cref="BaseShape"/> class.</returns>
         public static BaseShape RectanglePointShape(ShapeStyle pss)
         {
-            var rectangle = XRectangle.Create(-4, -4, 4, 4, pss, null, true, false);
+            var rectangle = RectangleShape.Create(-4, -4, 4, 4, pss, null, true, false);
             rectangle.Name = "RectanglePoint";
             return rectangle;
         }
@@ -272,7 +272,7 @@ namespace Core2D.Project
         /// <returns>The new instance of the <see cref="BaseShape"/> class.</returns>
         public static BaseShape FilledRectanglePointShape(ShapeStyle pss)
         {
-            var rectangle = XRectangle.Create(-3, -3, 3, 3, pss, null, true, true);
+            var rectangle = RectangleShape.Create(-3, -3, 3, 3, pss, null, true, true);
             rectangle.Name = "FilledRectanglePoint";
             return rectangle;
         }
@@ -284,10 +284,10 @@ namespace Core2D.Project
         /// <returns>The new instance of the <see cref="BaseShape"/> class.</returns>
         public static BaseShape CrossPointShape(ShapeStyle pss)
         {
-            var group = XGroup.Create("CrossPoint");
+            var group = GroupShape.Create("CrossPoint");
             var builder = group.Shapes.ToBuilder();
-            builder.Add(XLine.Create(-4, 0, 4, 0, pss, null));
-            builder.Add(XLine.Create(0, -4, 0, 4, pss, null));
+            builder.Add(LineShape.Create(-4, 0, 4, 0, pss, null));
+            builder.Add(LineShape.Create(0, -4, 0, 4, pss, null));
             group.Shapes = builder.ToImmutable();
             return group;
         }
@@ -350,7 +350,7 @@ namespace Core2D.Project
         /// Check whether the <see cref="DefaultFillRule"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeDefaultFillRule() => _defaultFillRule != default(XFillRule);
+        public virtual bool ShouldSerializeDefaultFillRule() => _defaultFillRule != default(FillRule);
 
         /// <summary>
         /// Check whether the <see cref="TryToConnect"/> property has changed from its default value.

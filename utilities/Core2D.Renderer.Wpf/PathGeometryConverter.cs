@@ -15,14 +15,14 @@ namespace Core2D.Renderer.Wpf
     /// </summary>
     public static class PathGeometryConverter
     {
-        private static ImmutableArray<XPoint> ToXPoints(this IEnumerable<Point> points, double dx, double dy)
+        private static ImmutableArray<PointShape> ToPointShapes(this IEnumerable<Point> points, double dx, double dy)
         {
-            var xpoints = ImmutableArray.CreateBuilder<XPoint>();
+            var PointShapes = ImmutableArray.CreateBuilder<PointShape>();
             foreach (var point in points)
             {
-                xpoints.Add(XPoint.Create(point.X + dx, point.Y + dy));
+                PointShapes.Add(PointShape.Create(point.X + dx, point.Y + dy));
             }
-            return xpoints.ToImmutable();
+            return PointShapes.ToImmutable();
         }
 
         /// <summary>
@@ -32,18 +32,18 @@ namespace Core2D.Renderer.Wpf
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <returns></returns>
-        public static XPathGeometry ToXPathGeometry(this PathGeometry pg, double dx, double dy)
+        public static Path.PathGeometry ToPathGeometry(this System.Windows.Media.PathGeometry pg, double dx, double dy)
         {
-            var geometry = XPathGeometry.Create(
-                ImmutableArray.Create<XPathFigure>(),
-                pg.FillRule == FillRule.EvenOdd ? XFillRule.EvenOdd : XFillRule.Nonzero);
+            var geometry = Path.PathGeometry.Create(
+                ImmutableArray.Create<Path.PathFigure>(),
+                pg.FillRule == System.Windows.Media.FillRule.EvenOdd ? Path.FillRule.EvenOdd : Path.FillRule.Nonzero);
 
-            var context = new XPathGeometryContext(geometry);
+            var context = new PathGeometryContext(geometry);
 
             foreach (var pf in pg.Figures)
             {
                 context.BeginFigure(
-                    XPoint.Create(pf.StartPoint.X + dx, pf.StartPoint.Y + dy),
+                    PointShape.Create(pf.StartPoint.X + dx, pf.StartPoint.Y + dy),
                     pf.IsFilled,
                     pf.IsClosed);
 
@@ -53,11 +53,11 @@ namespace Core2D.Renderer.Wpf
                     {
                         var arcSegment = segment as ArcSegment;
                         context.ArcTo(
-                            XPoint.Create(arcSegment.Point.X + dx, arcSegment.Point.Y + dy),
-                            XPathSize.Create(arcSegment.Size.Width, arcSegment.Size.Height),
+                            PointShape.Create(arcSegment.Point.X + dx, arcSegment.Point.Y + dy),
+                            PathSize.Create(arcSegment.Size.Width, arcSegment.Size.Height),
                             arcSegment.RotationAngle,
                             arcSegment.IsLargeArc,
-                            arcSegment.SweepDirection == SweepDirection.Clockwise ? XSweepDirection.Clockwise : XSweepDirection.Counterclockwise,
+                            arcSegment.SweepDirection == System.Windows.Media.SweepDirection.Clockwise ? Path.SweepDirection.Clockwise : Path.SweepDirection.Counterclockwise,
                             arcSegment.IsStroked,
                             arcSegment.IsSmoothJoin);
                     }
@@ -65,9 +65,9 @@ namespace Core2D.Renderer.Wpf
                     {
                         var cubicBezierSegment = segment as BezierSegment;
                         context.CubicBezierTo(
-                            XPoint.Create(cubicBezierSegment.Point1.X + dx, cubicBezierSegment.Point1.Y + dy),
-                            XPoint.Create(cubicBezierSegment.Point2.X + dx, cubicBezierSegment.Point2.Y + dy),
-                            XPoint.Create(cubicBezierSegment.Point3.X + dx, cubicBezierSegment.Point3.Y + dy),
+                            PointShape.Create(cubicBezierSegment.Point1.X + dx, cubicBezierSegment.Point1.Y + dy),
+                            PointShape.Create(cubicBezierSegment.Point2.X + dx, cubicBezierSegment.Point2.Y + dy),
+                            PointShape.Create(cubicBezierSegment.Point3.X + dx, cubicBezierSegment.Point3.Y + dy),
                             cubicBezierSegment.IsStroked,
                             cubicBezierSegment.IsSmoothJoin);
                     }
@@ -75,7 +75,7 @@ namespace Core2D.Renderer.Wpf
                     {
                         var lineSegment = segment as LineSegment;
                         context.LineTo(
-                            XPoint.Create(lineSegment.Point.X + dx, lineSegment.Point.Y + dy),
+                            PointShape.Create(lineSegment.Point.X + dx, lineSegment.Point.Y + dy),
                             lineSegment.IsStroked,
                             lineSegment.IsSmoothJoin);
                     }
@@ -83,7 +83,7 @@ namespace Core2D.Renderer.Wpf
                     {
                         var polyCubicBezierSegment = segment as PolyBezierSegment;
                         context.PolyCubicBezierTo(
-                            ToXPoints(polyCubicBezierSegment.Points, dx, dy),
+                            ToPointShapes(polyCubicBezierSegment.Points, dx, dy),
                             polyCubicBezierSegment.IsStroked,
                             polyCubicBezierSegment.IsSmoothJoin);
                     }
@@ -91,7 +91,7 @@ namespace Core2D.Renderer.Wpf
                     {
                         var polyLineSegment = segment as PolyLineSegment;
                         context.PolyLineTo(
-                            ToXPoints(polyLineSegment.Points, dx, dy),
+                            ToPointShapes(polyLineSegment.Points, dx, dy),
                             polyLineSegment.IsStroked,
                             polyLineSegment.IsSmoothJoin);
                     }
@@ -99,7 +99,7 @@ namespace Core2D.Renderer.Wpf
                     {
                         var polyQuadraticSegment = segment as PolyQuadraticBezierSegment;
                         context.PolyQuadraticBezierTo(
-                            ToXPoints(polyQuadraticSegment.Points, dx, dy),
+                            ToPointShapes(polyQuadraticSegment.Points, dx, dy),
                             polyQuadraticSegment.IsStroked,
                             polyQuadraticSegment.IsSmoothJoin);
                     }
@@ -107,8 +107,8 @@ namespace Core2D.Renderer.Wpf
                     {
                         var quadraticBezierSegment = segment as QuadraticBezierSegment;
                         context.QuadraticBezierTo(
-                            XPoint.Create(quadraticBezierSegment.Point1.X + dx, quadraticBezierSegment.Point1.Y + dy),
-                            XPoint.Create(quadraticBezierSegment.Point2.X + dx, quadraticBezierSegment.Point2.Y + dy),
+                            PointShape.Create(quadraticBezierSegment.Point1.X + dx, quadraticBezierSegment.Point1.Y + dy),
+                            PointShape.Create(quadraticBezierSegment.Point2.X + dx, quadraticBezierSegment.Point2.Y + dy),
                             quadraticBezierSegment.IsStroked,
                             quadraticBezierSegment.IsSmoothJoin);
                     }
@@ -127,11 +127,11 @@ namespace Core2D.Renderer.Wpf
         /// </summary>
         /// <param name="source"></param>
         /// <returns></returns>
-        public static XPathGeometry ToXPathGeometry(this string source)
+        public static Path.PathGeometry ToPathGeometry(this string source)
         {
             var g = Geometry.Parse(source);
-            var pg = PathGeometry.CreateFromGeometry(g);
-            return ToXPathGeometry(pg, 0.0, 0.0);
+            var pg = System.Windows.Media.PathGeometry.CreateFromGeometry(g);
+            return ToPathGeometry(pg, 0.0, 0.0);
         }
     }
 }

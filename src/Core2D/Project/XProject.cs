@@ -21,12 +21,12 @@ namespace Core2D.Project
         private XOptions _options;
         private IHistory _history;
         private ImmutableArray<XLibrary<ShapeStyle>> _styleLibraries;
-        private ImmutableArray<XLibrary<XGroup>> _groupLibraries;
+        private ImmutableArray<XLibrary<GroupShape>> _groupLibraries;
         private ImmutableArray<XDatabase> _databases;
         private ImmutableArray<XContainer> _templates;
         private ImmutableArray<XDocument> _documents;
         private XLibrary<ShapeStyle> _currentStyleLibrary;
-        private XLibrary<XGroup> _currentGroupLibrary;
+        private XLibrary<GroupShape> _currentGroupLibrary;
         private XDatabase _currentDatabase;
         private XContainer _currentTemplate;
         private XDocument _currentDocument;
@@ -63,7 +63,7 @@ namespace Core2D.Project
         /// <summary>
         /// Gets or sets project group libraries.
         /// </summary>
-        public ImmutableArray<XLibrary<XGroup>> GroupLibraries
+        public ImmutableArray<XLibrary<GroupShape>> GroupLibraries
         {
             get => _groupLibraries;
             set => Update(ref _groupLibraries, value);
@@ -109,7 +109,7 @@ namespace Core2D.Project
         /// <summary>
         /// Gets or sets project current group library.
         /// </summary>
-        public XLibrary<XGroup> CurrentGroupLibrary
+        public XLibrary<GroupShape> CurrentGroupLibrary
         {
             get => _currentGroupLibrary;
             set => Update(ref _currentGroupLibrary, value);
@@ -186,7 +186,7 @@ namespace Core2D.Project
         {
             _options = XOptions.Create();
             _styleLibraries = ImmutableArray.Create<XLibrary<ShapeStyle>>();
-            _groupLibraries = ImmutableArray.Create<XLibrary<XGroup>>();
+            _groupLibraries = ImmutableArray.Create<XLibrary<GroupShape>>();
             _databases = ImmutableArray.Create<XDatabase>();
             _templates = ImmutableArray.Create<XContainer>();
             _documents = ImmutableArray.Create<XDocument>();
@@ -220,7 +220,7 @@ namespace Core2D.Project
         /// Set current group library.
         /// </summary>
         /// <param name="library">The group library instance.</param>
-        public void SetCurrentGroupLibrary(XLibrary<XGroup> library) => CurrentGroupLibrary = library;
+        public void SetCurrentGroupLibrary(XLibrary<GroupShape> library) => CurrentGroupLibrary = library;
 
         /// <summary>
         /// Set current group.
@@ -297,9 +297,9 @@ namespace Core2D.Project
 
             foreach (var shape in shapes)
             {
-                if (shape is XGroup)
+                if (shape is GroupShape)
                 {
-                    foreach (var s in GetAllShapes((shape as XGroup)?.Shapes))
+                    foreach (var s in GetAllShapes((shape as GroupShape)?.Shapes))
                     {
                         yield return s;
                     }

@@ -11,15 +11,15 @@ namespace Core2D.Editor.Bounds.Shapes
 {
     public class HitTestGroup : HitTestBase
     {
-        public override Type TargetType => typeof(XGroup);
+        public override Type TargetType => typeof(GroupShape);
 
-        public override XPoint TryToGetPoint(BaseShape shape, Point2 target, double radius, IDictionary<Type, HitTestBase> registered)
+        public override PointShape TryToGetPoint(BaseShape shape, Point2 target, double radius, IDictionary<Type, HitTestBase> registered)
         {
-            var group = shape as XGroup;
+            var group = shape as GroupShape;
             if (group == null)
                 throw new ArgumentNullException(nameof(shape));
 
-            var pointHitTest = registered[typeof(XPoint)];
+            var pointHitTest = registered[typeof(PointShape)];
 
             foreach (var groupPoint in group.Connectors.Reverse())
             {
@@ -34,14 +34,14 @@ namespace Core2D.Editor.Bounds.Shapes
 
         public override bool Contains(BaseShape shape, Point2 target, double radius, IDictionary<Type, HitTestBase> registered)
         {
-            var group = shape as XGroup;
+            var group = shape as GroupShape;
             if (group == null)
                 throw new ArgumentNullException(nameof(shape));
 
-            foreach (var XGroup in group.Shapes.Reverse())
+            foreach (var GroupShape in group.Shapes.Reverse())
             {
-                var hitTest = registered[XGroup.GetType()];
-                var result = hitTest.Contains(XGroup, target, radius, registered);
+                var hitTest = registered[GroupShape.GetType()];
+                var result = hitTest.Contains(GroupShape, target, radius, registered);
                 if (result == true)
                 {
                     return true;
@@ -52,14 +52,14 @@ namespace Core2D.Editor.Bounds.Shapes
 
         public override bool Overlaps(BaseShape shape, Rect2 target, double radius, IDictionary<Type, HitTestBase> registered)
         {
-            var group = shape as XGroup;
+            var group = shape as GroupShape;
             if (group == null)
                 throw new ArgumentNullException(nameof(shape));
 
-            foreach (var XGroup in group.Shapes.Reverse())
+            foreach (var GroupShape in group.Shapes.Reverse())
             {
-                var hitTest = registered[XGroup.GetType()];
-                var result = hitTest.Overlaps(XGroup, target, radius, registered);
+                var hitTest = registered[GroupShape.GetType()];
+                var result = hitTest.Overlaps(GroupShape, target, radius, registered);
                 if (result == true)
                 {
                     return true;

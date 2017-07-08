@@ -11,21 +11,21 @@ namespace Core2D.Shapes.Interfaces
         /// <summary>
         /// Gets or sets top-left corner point.
         /// </summary>
-        XPoint Point1 { get; set; }
+        PointShape Point1 { get; set; }
 
         /// <summary>
         /// Gets or sets bottom-right corner point.
         /// </summary>
-        XPoint Point2 { get; set; }
+        PointShape Point2 { get; set; }
 
         /// <summary>
         /// Gets or sets point used to calculate arc start angle.
         /// </summary>
-        XPoint Point3 { get; set; }
+        PointShape Point3 { get; set; }
 
         /// <summary>
         /// Gets or sets point used to calculate arc end angle.
         /// </summary>
-        XPoint Point4 { get; set; }
+        PointShape Point4 { get; set; }
     }
 }

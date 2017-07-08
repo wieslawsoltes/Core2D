@@ -9,7 +9,7 @@ using Core2D.Style;
 namespace Core2D.Editor.Tools.Selection
 {
     /// <summary>
-    /// Helper class for <see cref="XLine"/> shape selection.
+    /// Helper class for <see cref="LineShape"/> shape selection.
     /// </summary>
     public class ToolLineSelection
     {
@@ -17,8 +17,8 @@ namespace Core2D.Editor.Tools.Selection
         private readonly ILine _line;
         private readonly ShapeStyle _style;
         private readonly BaseShape _point;
-        private XPoint _startHelperPoint;
-        private XPoint _endHelperPoint;
+        private PointShape _startHelperPoint;
+        private PointShape _endHelperPoint;
 
         /// <summary>
         /// Initialize new instance of <see cref="ToolLineSelection"/> class.
@@ -40,8 +40,8 @@ namespace Core2D.Editor.Tools.Selection
         /// </summary>
         public void ToStateEnd()
         {
-            _startHelperPoint = XPoint.Create(0, 0, _point);
-            _endHelperPoint = XPoint.Create(0, 0, _point);
+            _startHelperPoint = PointShape.Create(0, 0, _point);
+            _endHelperPoint = PointShape.Create(0, 0, _point);
 
             _layer.Shapes = _layer.Shapes.Add(_startHelperPoint);
             _layer.Shapes = _layer.Shapes.Add(_endHelperPoint);

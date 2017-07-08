@@ -30,12 +30,12 @@ namespace Core2D.Editor.Bounds
             }
         }
 
-        public XPoint TryToGetPoint(BaseShape shape, Point2 target, double radius)
+        public PointShape TryToGetPoint(BaseShape shape, Point2 target, double radius)
         {
             return Registered[shape.GetType()].TryToGetPoint(shape, target, radius, Registered);
         }
 
-        public XPoint TryToGetPoint(IEnumerable<BaseShape> shapes, Point2 target, double radius)
+        public PointShape TryToGetPoint(IEnumerable<BaseShape> shapes, Point2 target, double radius)
         {
             foreach (var shape in shapes)
             {

@@ -8,14 +8,14 @@ using System.Windows.Controls;
 namespace Core2D.Wpf.Controls.Custom.Lists
 {
     /// <summary>
-    /// The <see cref="ListBox"/> control for <see cref="XGroup"/> items with drag and drop support.
+    /// The <see cref="ListBox"/> control for <see cref="GroupShape"/> items with drag and drop support.
     /// </summary>
-    public class XGroupDragAndDropListBox : DragAndDropListBox<XGroup>
+    public class GroupShapeDragAndDropListBox : DragAndDropListBox<GroupShape>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="XGroupDragAndDropListBox"/> class.
+        /// Initializes a new instance of the <see cref="GroupShapeDragAndDropListBox"/> class.
         /// </summary>
-        public XGroupDragAndDropListBox()
+        public GroupShapeDragAndDropListBox()
             : base()
         {
             this.Initialized += (s, e) => base.Initialize();
@@ -25,7 +25,7 @@ namespace Core2D.Wpf.Controls.Custom.Lists
         /// Updates DataContext collection ImmutableArray property.
         /// </summary>
         /// <param name="array">The updated immutable array.</param>
-        protected override void UpdateDataContext(ImmutableArray<XGroup> array)
+        protected override void UpdateDataContext(ImmutableArray<GroupShape> array)
         {
             var editor = (ProjectEditor)this.Tag;
 

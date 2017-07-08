@@ -26,13 +26,13 @@ namespace Core2D.Renderer.Wpf
     {
         private Cache<ShapeStyle, Tuple<Brush, Pen>> _styleCache = Cache<ShapeStyle, Tuple<Brush, Pen>>.Create();
         private Cache<ArrowStyle, Tuple<Brush, Pen>> _arrowStyleCache = Cache<ArrowStyle, Tuple<Brush, Pen>>.Create();
-        private Cache<XLine, PathGeometry> _curvedLineCache = Cache<XLine, PathGeometry>.Create();
-        private Cache<XArc, PathGeometry> _arcCache = Cache<XArc, PathGeometry>.Create();
-        private Cache<XCubicBezier, PathGeometry> _cubicBezierCache = Cache<XCubicBezier, PathGeometry>.Create();
-        private Cache<XQuadraticBezier, PathGeometry> _quadraticBezierCache = Cache<XQuadraticBezier, PathGeometry>.Create();
-        private Cache<XText, Tuple<string, FormattedText, ShapeStyle>> _textCache = Cache<XText, Tuple<string, FormattedText, ShapeStyle>>.Create();
+        private Cache<LineShape, System.Windows.Media.PathGeometry> _curvedLineCache = Cache<LineShape, System.Windows.Media.PathGeometry>.Create();
+        private Cache<ArcShape, System.Windows.Media.PathGeometry> _arcCache = Cache<ArcShape, System.Windows.Media.PathGeometry>.Create();
+        private Cache<CubicBezierShape, System.Windows.Media.PathGeometry> _cubicBezierCache = Cache<CubicBezierShape, System.Windows.Media.PathGeometry>.Create();
+        private Cache<QuadraticBezierShape, System.Windows.Media.PathGeometry> _quadraticBezierCache = Cache<QuadraticBezierShape, System.Windows.Media.PathGeometry>.Create();
+        private Cache<TextShape, Tuple<string, FormattedText, ShapeStyle>> _textCache = Cache<TextShape, Tuple<string, FormattedText, ShapeStyle>>.Create();
         private Cache<string, BitmapImage> _biCache = Cache<string, BitmapImage>.Create(bi => bi.StreamSource.Dispose());
-        private Cache<XPath, Tuple<XPathGeometry, StreamGeometry, ShapeStyle>> _pathCache = Cache<XPath, Tuple<XPathGeometry, StreamGeometry, ShapeStyle>>.Create();
+        private Cache<PathShape, Tuple<Path.PathGeometry, StreamGeometry, ShapeStyle>> _pathCache = Cache<PathShape, Tuple<Path.PathGeometry, StreamGeometry, ShapeStyle>>.Create();
         private ShapeRendererState _state = new ShapeRendererState();
 
         /// <inheritdoc/>
@@ -130,7 +130,7 @@ namespace Core2D.Renderer.Wpf
             return pen;
         }
 
-        private static Rect CreateRect(XPoint tl, XPoint br, double dx, double dy)
+        private static Rect CreateRect(PointShape tl, PointShape br, double dx, double dy)
         {
             double tlx = Math.Min(tl.X, br.X);
             double tly = Math.Min(tl.Y, br.Y);
@@ -154,13 +154,13 @@ namespace Core2D.Renderer.Wpf
             dc.Pop();
         }
 
-        private void DrawLineCurveInternal(DrawingContext dc, double half, Pen pen, XLine line, ref Point pt1, ref Point pt2, double dx, double dy)
+        private void DrawLineCurveInternal(DrawingContext dc, double half, Pen pen, LineShape line, ref Point pt1, ref Point pt2, double dx, double dy)
         {
             double p1x = pt1.X;
             double p1y = pt1.Y;
             double p2x = pt2.X;
             double p2y = pt2.Y;
-            XLineExtensions.GetCurvedLineBezierControlPoints(
+            LineShapeExtensions.GetCurvedLineBezierControlPoints(
                 line.Style.LineStyle.CurveOrientation,
                 line.Style.LineStyle.Curvature,
                 line.Start.Alignment,
@@ -168,7 +168,7 @@ namespace Core2D.Renderer.Wpf
                 ref p1x, ref p1y,
                 ref p2x, ref p2y);
 
-            PathGeometry pg = _curvedLineCache.Get(line);
+            System.Windows.Media.PathGeometry pg = _curvedLineCache.Get(line);
             if (pg != null)
             {
                 var pf = pg.Figures[0];
@@ -182,7 +182,7 @@ namespace Core2D.Renderer.Wpf
             }
             else
             {
-                var pf = new PathFigure()
+                var pf = new System.Windows.Media.PathFigure()
                 {
                     StartPoint = new Point(pt1.X + dx, pt1.Y + dy),
                     IsFilled = false
@@ -195,7 +195,7 @@ namespace Core2D.Renderer.Wpf
                 //bs.Freeze();
                 pf.Segments.Add(bs);
                 //pf.Freeze();
-                pg = new PathGeometry();
+                pg = new System.Windows.Media.PathGeometry();
                 pg.Figures.Add(pf);
                 //pg.Freeze();
 
@@ -205,7 +205,7 @@ namespace Core2D.Renderer.Wpf
             DrawPathGeometryInternal(dc, half, null, pen, line.IsStroked, false, pg);
         }
 
-        private void DrawLineArrowsInternal(DrawingContext dc, XLine line, ShapeStyle style, double halfStart, double halfEnd, double thicknessStart, double thicknessEnd, double dx, double dy, out Point pt1, out Point pt2)
+        private void DrawLineArrowsInternal(DrawingContext dc, LineShape line, ShapeStyle style, double halfStart, double halfEnd, double thicknessStart, double thicknessEnd, double dx, double dy, out Point pt1, out Point pt2)
         {
             // Start arrow style.
             Tuple<Brush, Pen> startArrowCache = _arrowStyleCache.Get(style.StartArrowStyle);
@@ -362,7 +362,7 @@ namespace Core2D.Renderer.Wpf
             dc.Pop();
         }
 
-        private static void DrawPathGeometryInternal(DrawingContext dc, double half, Brush brush, Pen pen, bool isStroked, bool isFilled, PathGeometry pg)
+        private static void DrawPathGeometryInternal(DrawingContext dc, double half, Brush brush, Pen pen, bool isStroked, bool isFilled, System.Windows.Media.PathGeometry pg)
         {
             if (!isStroked && !isFilled)
                 return;
@@ -458,7 +458,7 @@ namespace Core2D.Renderer.Wpf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XLine line, double dx, double dy, object db, object r)
+        public override void Draw(object dc, LineShape line, double dx, double dy, object db, object r)
         {
             var _dc = dc as DrawingContext;
 
@@ -503,7 +503,7 @@ namespace Core2D.Renderer.Wpf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XRectangle rectangle, double dx, double dy, object db, object r)
+        public override void Draw(object dc, RectangleShape rectangle, double dx, double dy, object db, object r)
         {
             var _dc = dc as DrawingContext;
 
@@ -540,7 +540,7 @@ namespace Core2D.Renderer.Wpf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XEllipse ellipse, double dx, double dy, object db, object r)
+        public override void Draw(object dc, EllipseShape ellipse, double dx, double dy, object db, object r)
         {
             var _dc = dc as DrawingContext;
 
@@ -575,7 +575,7 @@ namespace Core2D.Renderer.Wpf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XArc arc, double dx, double dy, object db, object r)
+        public override void Draw(object dc, ArcShape arc, double dx, double dy, object db, object r)
         {
             var _dc = dc as DrawingContext;
 
@@ -607,7 +607,7 @@ namespace Core2D.Renderer.Wpf
                 Point2.FromXY(arc.Point3.X, arc.Point3.Y),
                 Point2.FromXY(arc.Point4.X, arc.Point4.Y));
 
-            PathGeometry pg = _arcCache.Get(arc);
+            System.Windows.Media.PathGeometry pg = _arcCache.Get(arc);
             if (pg != null)
             {
                 var pf = pg.Figures[0];
@@ -621,7 +621,7 @@ namespace Core2D.Renderer.Wpf
             }
             else
             {
-                var pf = new PathFigure()
+                var pf = new System.Windows.Media.PathFigure()
                 {
                     StartPoint = new Point(a.Start.X, a.Start.Y),
                     IsFilled = arc.IsFilled
@@ -631,13 +631,13 @@ namespace Core2D.Renderer.Wpf
                     new Point(a.End.X, a.End.Y),
                     new Size(a.Radius.Width, a.Radius.Height),
                     0.0,
-                    a.IsLargeArc, SweepDirection.Clockwise,
+                    a.IsLargeArc, System.Windows.Media.SweepDirection.Clockwise,
                     arc.IsStroked);
 
                 //segment.Freeze();
                 pf.Segments.Add(segment);
                 //pf.Freeze();
-                pg = new PathGeometry();
+                pg = new System.Windows.Media.PathGeometry();
                 pg.Figures.Add(pf);
                 //pg.Freeze();
 
@@ -648,7 +648,7 @@ namespace Core2D.Renderer.Wpf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XCubicBezier cubicBezier, double dx, double dy, object db, object r)
+        public override void Draw(object dc, CubicBezierShape cubicBezier, double dx, double dy, object db, object r)
         {
             var _dc = dc as DrawingContext;
 
@@ -674,7 +674,7 @@ namespace Core2D.Renderer.Wpf
                 _styleCache.Set(style, Tuple.Create(fill, stroke));
             }
 
-            PathGeometry pg = _cubicBezierCache.Get(cubicBezier);
+            System.Windows.Media.PathGeometry pg = _cubicBezierCache.Get(cubicBezier);
             if (pg != null)
             {
                 var pf = pg.Figures[0];
@@ -688,7 +688,7 @@ namespace Core2D.Renderer.Wpf
             }
             else
             {
-                var pf = new PathFigure()
+                var pf = new System.Windows.Media.PathFigure()
                 {
                     StartPoint = new Point(cubicBezier.Point1.X + dx, cubicBezier.Point1.Y + dy),
                     IsFilled = cubicBezier.IsFilled
@@ -701,7 +701,7 @@ namespace Core2D.Renderer.Wpf
                 //bs.Freeze();
                 pf.Segments.Add(bs);
                 //pf.Freeze();
-                pg = new PathGeometry();
+                pg = new System.Windows.Media.PathGeometry();
                 pg.Figures.Add(pf);
                 //pg.Freeze();
 
@@ -712,7 +712,7 @@ namespace Core2D.Renderer.Wpf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XQuadraticBezier quadraticBezier, double dx, double dy, object db, object r)
+        public override void Draw(object dc, QuadraticBezierShape quadraticBezier, double dx, double dy, object db, object r)
         {
             var _dc = dc as DrawingContext;
 
@@ -738,7 +738,7 @@ namespace Core2D.Renderer.Wpf
                 _styleCache.Set(style, Tuple.Create(fill, stroke));
             }
 
-            PathGeometry pg = _quadraticBezierCache.Get(quadraticBezier);
+            System.Windows.Media.PathGeometry pg = _quadraticBezierCache.Get(quadraticBezier);
             if (pg != null)
             {
                 var pf = pg.Figures[0];
@@ -751,7 +751,7 @@ namespace Core2D.Renderer.Wpf
             }
             else
             {
-                var pf = new PathFigure()
+                var pf = new System.Windows.Media.PathFigure()
                 {
                     StartPoint = new Point(quadraticBezier.Point1.X + dx, quadraticBezier.Point1.Y + dy),
                     IsFilled = quadraticBezier.IsFilled
@@ -764,7 +764,7 @@ namespace Core2D.Renderer.Wpf
                 //bs.Freeze();
                 pf.Segments.Add(qbs);
                 //pf.Freeze();
-                pg = new PathGeometry();
+                pg = new System.Windows.Media.PathGeometry();
                 pg.Figures.Add(pf);
                 //pg.Freeze();
 
@@ -775,7 +775,7 @@ namespace Core2D.Renderer.Wpf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XText text, double dx, double dy, object db, object r)
+        public override void Draw(object dc, TextShape text, double dx, double dy, object db, object r)
         {
             var _dc = dc as DrawingContext;
 
@@ -878,7 +878,7 @@ namespace Core2D.Renderer.Wpf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XImage image, double dx, double dy, object db, object r)
+        public override void Draw(object dc, ImageShape image, double dx, double dy, object db, object r)
         {
             if (image.Key == null)
                 return;
@@ -955,7 +955,7 @@ namespace Core2D.Renderer.Wpf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XPath path, double dx, double dy, object db, object r)
+        public override void Draw(object dc, PathShape path, double dx, double dy, object db, object r)
         {
             if (path.Geometry == null)
                 return;
@@ -984,7 +984,7 @@ namespace Core2D.Renderer.Wpf
                 _styleCache.Set(style, Tuple.Create(fill, stroke));
             }
 
-            Tuple<XPathGeometry, StreamGeometry, ShapeStyle> pcache = _pathCache.Get(path);
+            Tuple<Path.PathGeometry, StreamGeometry, ShapeStyle> pcache = _pathCache.Get(path);
             StreamGeometry sg;
 
             if (pcache != null
@@ -998,7 +998,7 @@ namespace Core2D.Renderer.Wpf
             {
                 sg = path.Geometry.ToStreamGeometry(dx, dy);
 
-                // TODO: Enable XPath caching, cache is disabled to enable PathHelper to work.
+                // TODO: Enable PathShape caching, cache is disabled to enable PathHelper to work.
                 //_pathCache.Set(path, Tuple.Create(path.Geometry, sg, style));
 
                 _dc.DrawGeometry(path.IsFilled ? fill : null, path.IsStroked ? stroke : null, sg);

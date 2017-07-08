@@ -9,14 +9,14 @@ using System.Windows.Controls;
 namespace Core2D.Wpf.Controls.Custom.Lists
 {
     /// <summary>
-    /// The <see cref="ListBox"/> control for <see cref="XGroup.Shapes"/> items with drag and drop support.
+    /// The <see cref="ListBox"/> control for <see cref="GroupShape.Shapes"/> items with drag and drop support.
     /// </summary>
-    public class XGroupShapesDragAndDropListBox : DragAndDropListBox<BaseShape>
+    public class GroupShapeShapesDragAndDropListBox : DragAndDropListBox<BaseShape>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="XGroupShapesDragAndDropListBox"/> class.
+        /// Initializes a new instance of the <see cref="GroupShapeShapesDragAndDropListBox"/> class.
         /// </summary>
-        public XGroupShapesDragAndDropListBox()
+        public GroupShapeShapesDragAndDropListBox()
             : base()
         {
             this.Initialized += (s, e) => base.Initialize();
@@ -29,7 +29,7 @@ namespace Core2D.Wpf.Controls.Custom.Lists
         protected override void UpdateDataContext(ImmutableArray<BaseShape> array)
         {
             var editor = (ProjectEditor)this.Tag;
-            var group = this.DataContext as XGroup;
+            var group = this.DataContext as GroupShape;
             if (group == null)
                 return;
 

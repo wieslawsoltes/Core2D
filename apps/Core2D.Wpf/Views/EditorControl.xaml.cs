@@ -97,7 +97,7 @@ namespace Core2D.Wpf.Views
         {
             if (!e.Data.GetDataPresent(DataFormats.FileDrop)
                 && !e.Data.GetDataPresent(typeof(BaseShape))
-                && !e.Data.GetDataPresent(typeof(XGroup))
+                && !e.Data.GetDataPresent(typeof(GroupShape))
                 && !e.Data.GetDataPresent(typeof(XRecord))
                 && !e.Data.GetDataPresent(typeof(ShapeStyle)))
             {
@@ -144,11 +144,11 @@ namespace Core2D.Wpf.Views
             }
 
             // Groups.
-            if (e.Data.GetDataPresent(typeof(XGroup)))
+            if (e.Data.GetDataPresent(typeof(GroupShape)))
             {
                 try
                 {
-                    if (e.Data.GetData(typeof(XGroup)) is XGroup group)
+                    if (e.Data.GetData(typeof(GroupShape)) is GroupShape group)
                     {
                         var p = e.GetPosition(drawableControl);
                         _projectEditor.OnDropShapeAsClone(group, p.X, p.Y);

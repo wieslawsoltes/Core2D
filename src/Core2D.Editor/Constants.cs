@@ -1,10 +1,5 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Core2D.Data;
-using Core2D.Data.Database;
-using Core2D.Project;
-using Core2D.Shapes;
-using Core2D.Style;
 
 namespace Core2D.Editor
 {
@@ -54,12 +49,12 @@ namespace Core2D.Editor
         public const string DefaulValue = "<empty>";
 
         /// <summary>
-        /// Default <see cref="XLibrary{XGroup}"/> name.
+        /// Default <see cref="XLibrary{GroupShape}"/> name.
         /// </summary>
         public const string DefaulGroupLibraryName = "Groups";
 
         /// <summary>
-        /// Default <see cref="XGroup"/> name.
+        /// Default <see cref="GroupShape"/> name.
         /// </summary>
         public const string DefaulGroupName = "Group";
 

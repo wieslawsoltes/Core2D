@@ -18,7 +18,7 @@ namespace Core2D.Editor.Tools
         private readonly IServiceProvider _serviceProvider;
         private ToolSettingsImage _settings;
         private State _currentState = State.TopLeft;
-        private XImage _image;
+        private ImageShape _image;
         private ToolImageSelection _selection;
 
         /// <inheritdoc/>
@@ -61,7 +61,7 @@ namespace Core2D.Editor.Tools
                             return;
 
                         var style = editor.Project.CurrentStyleLibrary.Selected;
-                        _image = XImage.Create(
+                        _image = ImageShape.Create(
                             sx, sy,
                             editor.Project.Options.CloneStyle ? style.Clone() : style,
                             editor.Project.Options.PointShape,

@@ -10,15 +10,15 @@ namespace Core2D.Editor.Bounds.Shapes
 {
     public class HitTestCubicBezier : HitTestBase
     {
-        public override Type TargetType => typeof(XCubicBezier);
+        public override Type TargetType => typeof(CubicBezierShape);
 
-        public override XPoint TryToGetPoint(BaseShape shape, Point2 target, double radius, IDictionary<Type, HitTestBase> registered)
+        public override PointShape TryToGetPoint(BaseShape shape, Point2 target, double radius, IDictionary<Type, HitTestBase> registered)
         {
-            var cubic = shape as XCubicBezier;
+            var cubic = shape as CubicBezierShape;
             if (cubic == null)
                 throw new ArgumentNullException(nameof(shape));
 
-            var pointHitTest = registered[typeof(XPoint)];
+            var pointHitTest = registered[typeof(PointShape)];
 
             if (pointHitTest.TryToGetPoint(cubic.Point1, target, radius, registered) != null)
             {
@@ -45,7 +45,7 @@ namespace Core2D.Editor.Bounds.Shapes
 
         public override bool Contains(BaseShape shape, Point2 target, double radius, IDictionary<Type, HitTestBase> registered)
         {
-            var cubic = shape as XCubicBezier;
+            var cubic = shape as CubicBezierShape;
             if (cubic == null)
                 throw new ArgumentNullException(nameof(shape));
 
@@ -54,7 +54,7 @@ namespace Core2D.Editor.Bounds.Shapes
 
         public override bool Overlaps(BaseShape shape, Rect2 target, double radius, IDictionary<Type, HitTestBase> registered)
         {
-            var cubic = shape as XCubicBezier;
+            var cubic = shape as CubicBezierShape;
             if (cubic == null)
                 throw new ArgumentNullException(nameof(shape));
 

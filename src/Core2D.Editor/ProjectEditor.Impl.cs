@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
-using Core2D.Collections;
 using Core2D.Data;
 using Core2D.Data.Database;
 using Core2D.Editor.Bounds;
@@ -13,7 +12,6 @@ using Core2D.Editor.Input;
 using Core2D.Editor.Views.Interfaces;
 using Core2D.Editor.Recent;
 using Core2D.Editor.Tools;
-using Core2D.Editor.Tools.Path;
 using Core2D.History;
 using Core2D.Interfaces;
 using Spatial;
@@ -75,8 +73,8 @@ namespace Core2D.Editor
                     return (item as BaseShape).Name;
                 else if (item is XLibrary<ShapeStyle>)
                     return (item as XLibrary<ShapeStyle>).Name;
-                else if (item is XLibrary<XGroup>)
-                    return (item as XLibrary<XGroup>).Name;
+                else if (item is XLibrary<GroupShape>)
+                    return (item as XLibrary<GroupShape>).Name;
                 if (item is XContainer)
                     return (item as XContainer).Name;
                 if (item is XLayer)
@@ -365,9 +363,9 @@ namespace Core2D.Editor
             }
             else if (item is BaseShape)
             {
-                if (item is XGroup)
+                if (item is GroupShape)
                 {
-                    var group = item as XGroup;
+                    var group = item as GroupShape;
                     if (restore)
                     {
                         var shapes = Enumerable.Repeat(group, 1);
@@ -381,9 +379,9 @@ namespace Core2D.Editor
                     Project?.AddShape(Project?.CurrentContainer?.CurrentLayer, item as BaseShape);
                 }
             }
-            else if (item is IList<XGroup>)
+            else if (item is IList<GroupShape>)
             {
-                var groups = item as IList<XGroup>;
+                var groups = item as IList<GroupShape>;
                 if (restore)
                 {
                     TryToRestoreStyles(groups);
@@ -399,62 +397,20 @@ namespace Core2D.Editor
             {
                 Project.AddStyleLibraries(item as IList<XLibrary<ShapeStyle>>);
             }
-            else if (item is XLibrary<XGroup>)
+            else if (item is XLibrary<GroupShape>)
             {
-                var gl = item as XLibrary<XGroup>;
+                var gl = item as XLibrary<GroupShape>;
                 TryToRestoreStyles(gl.Items);
                 TryToRestoreRecords(gl.Items);
                 Project.AddGroupLibrary(gl);
             }
-            else if (item is IList<XLibrary<XGroup>>)
+            else if (item is IList<XLibrary<GroupShape>>)
             {
-                var gll = item as IList<XLibrary<XGroup>>;
+                var gll = item as IList<XLibrary<GroupShape>>;
                 var shapes = gll.SelectMany(x => x.Items);
                 TryToRestoreStyles(shapes);
                 TryToRestoreRecords(shapes);
                 Project.AddGroupLibraries(gll);
-            }
-            else if (item is XStyles)
-            {
-                var styles = item as XStyles;
-                var library = XLibrary<ShapeStyle>.Create(styles.Name, styles.Children);
-                Project?.AddStyleLibrary(library);
-            }
-            else if (item is XShapes)
-            {
-                var shapes = (item as XShapes).Children;
-                if (shapes.Length > 0)
-                {
-                    Project?.AddShapes(Project?.CurrentContainer?.CurrentLayer, shapes);
-                }
-            }
-            else if (item is XGroups)
-            {
-                var groups = item as XGroups;
-                var library = XLibrary<XGroup>.Create(groups.Name, groups.Children);
-                Project?.AddGroupLibrary(library);
-            }
-            else if (item is XDatabases)
-            {
-                var databases = (item as XDatabases).Children;
-                if (databases.Length > 0)
-                {
-                    foreach (var database in databases)
-                    {
-                        Project?.AddDatabase(database);
-                    }
-                }
-            }
-            else if (item is XTemplates)
-            {
-                var templates = (item as XTemplates).Children;
-                if (templates.Length > 0)
-                {
-                    foreach (var template in templates)
-                    {
-                        Project?.AddTemplate(template);
-                    }
-                }
             }
             else if (item is XContext)
             {
@@ -1490,7 +1446,7 @@ namespace Core2D.Editor
         /// </summary>
         public void OnAddGroupLibrary()
         {
-            var gl = XLibrary<XGroup>.Create(Constants.DefaulGroupLibraryName);
+            var gl = XLibrary<GroupShape>.Create(Constants.DefaulGroupLibraryName);
             Project.AddGroupLibrary(gl);
             Project.SetCurrentGroupLibrary(gl);
         }
@@ -1499,7 +1455,7 @@ namespace Core2D.Editor
         /// Remove group library.
         /// </summary>
         /// <param name="library">The group library to remove.</param>
-        public void OnRemoveGroupLibrary(XLibrary<XGroup> library)
+        public void OnRemoveGroupLibrary(XLibrary<GroupShape> library)
         {
             Project.RemoveGroupLibrary(library);
             Project.SetCurrentGroupLibrary(Project?.GroupLibraries.FirstOrDefault());
@@ -1509,11 +1465,11 @@ namespace Core2D.Editor
         /// Add group.
         /// </summary>
         /// <param name="library">The group library.</param>
-        public void OnAddGroup(XLibrary<XGroup> library)
+        public void OnAddGroup(XLibrary<GroupShape> library)
         {
             if (Project != null && library != null)
             {
-                if (Renderers?[0]?.State?.SelectedShape is XGroup group)
+                if (Renderers?[0]?.State?.SelectedShape is GroupShape group)
                 {
                     var clone = CloneShape(group);
                     if (clone != null)
@@ -1528,7 +1484,7 @@ namespace Core2D.Editor
         /// Remove group.
         /// </summary>
         /// <param name="group">The group item.</param>
-        public void OnRemoveGroup(XGroup group)
+        public void OnRemoveGroup(GroupShape group)
         {
             if (Project != null && group != null)
             {
@@ -1541,7 +1497,7 @@ namespace Core2D.Editor
         /// Insert current group to container.
         /// </summary>
         /// <param name="group">The group instance.</param>
-        public void OnInsertGroup(XGroup group)
+        public void OnInsertGroup(GroupShape group)
         {
             if (Project?.CurrentContainer != null)
             {
@@ -2190,11 +2146,11 @@ namespace Core2D.Editor
                 // Try to parse SVG path geometry. 
                 try
                 {
-                    var geometry = XPathGeometryParser.Parse(text);
+                    var geometry = PathGeometryParser.Parse(text);
                     var style = Project?.CurrentStyleLibrary?.Selected;
                     if (style != null)
                     {
-                        var path = XPath.Create(
+                        var path = PathShape.Create(
                             "Path",
                             Project.Options.CloneStyle ? style.Clone() : style,
                             geometry,
@@ -2578,9 +2534,9 @@ namespace Core2D.Editor
                 if (Renderers?[0]?.State?.SelectedShape != null)
                 {
                     var target = Renderers[0].State.SelectedShape;
-                    if (target is XPoint)
+                    if (target is PointShape)
                     {
-                        if (target is XPoint point)
+                        if (target is PointShape point)
                         {
                             point.Shape = shape;
                         }
@@ -2590,9 +2546,9 @@ namespace Core2D.Editor
                 {
                     foreach (var target in Renderers[0].State.SelectedShapes)
                     {
-                        if (target is XPoint)
+                        if (target is PointShape)
                         {
-                            if (target is XPoint point)
+                            if (target is PointShape point)
                             {
                                 point.Shape = shape;
                             }
@@ -2648,11 +2604,11 @@ namespace Core2D.Editor
 
                     if (Project.Options.TryToConnect)
                     {
-                        if (clone is XGroup)
+                        if (clone is GroupShape)
                         {
                             TryToConnectLines(
-                                XProject.GetAllShapes<XLine>(Project?.CurrentContainer?.CurrentLayer?.Shapes),
-                                (clone as XGroup).Connectors,
+                                XProject.GetAllShapes<LineShape>(Project?.CurrentContainer?.CurrentLayer?.Shapes),
+                                (clone as GroupShape).Connectors,
                                 Project.Options.HitThreshold);
                         }
                     }
@@ -2717,7 +2673,7 @@ namespace Core2D.Editor
             double sx = Project.Options.SnapToGrid ? Snap(x, Project.Options.SnapX) : x;
             double sy = Project.Options.SnapToGrid ? Snap(y, Project.Options.SnapY) : y;
 
-            var g = XGroup.Create(Constants.DefaulGroupName);
+            var g = GroupShape.Create(Constants.DefaulGroupName);
 
             g.Data.Record = record;
 
@@ -2733,19 +2689,19 @@ namespace Core2D.Editor
                 if (column.IsVisible)
                 {
                     var binding = "{" + record.Owner.Columns[i].Name + "}";
-                    var text = XText.Create(px, py, px + width, py + height, style, point, binding);
+                    var text = TextShape.Create(px, py, px + width, py + height, style, point, binding);
                     g.AddShape(text);
                     py += height;
                 }
             }
 
-            var rectangle = XRectangle.Create(sx, sy, sx + width, sy + length * height, style, point);
+            var rectangle = RectangleShape.Create(sx, sy, sx + width, sy + length * height, style, point);
             g.AddShape(rectangle);
 
-            var pt = XPoint.Create(sx + width / 2, sy, point);
-            var pb = XPoint.Create(sx + width / 2, sy + length * height, point);
-            var pl = XPoint.Create(sx, sy + (length * height) / 2, point);
-            var pr = XPoint.Create(sx + width, sy + (length * height) / 2, point);
+            var pt = PointShape.Create(sx + width / 2, sy, point);
+            var pb = PointShape.Create(sx + width / 2, sy + length * height, point);
+            var pl = PointShape.Create(sx, sy + (length * height) / 2, point);
+            var pr = PointShape.Create(sx + width, sy + (length * height) / 2, point);
 
             g.AddConnectorAsNone(pt);
             g.AddConnectorAsNone(pb);
@@ -2991,7 +2947,7 @@ namespace Core2D.Editor
         /// <param name="layer">The layer object.</param>
         /// <param name="rectangle">The selection rectangle.</param>
         /// <returns>True if selecting shapes was successful.</returns>
-        public bool TryToSelectShapes(XLayer layer, XRectangle rectangle)
+        public bool TryToSelectShapes(XLayer layer, RectangleShape rectangle)
         {
             if (layer != null)
             {
@@ -3097,7 +3053,7 @@ namespace Core2D.Editor
         /// <param name="x">The X coordinate of point.</param>
         /// <param name="y">The Y coordinate of point.</param>
         /// <returns>The connected point if success.</returns>
-        public XPoint TryToGetConnectionPoint(double x, double y)
+        public PointShape TryToGetConnectionPoint(double x, double y)
         {
             if (Project.Options.TryToConnect)
             {
@@ -3109,7 +3065,7 @@ namespace Core2D.Editor
             return null;
         }
 
-        private void SwapLineStart(XLine line, XPoint point)
+        private void SwapLineStart(LineShape line, PointShape point)
         {
             if (line?.Start != null && point != null)
             {
@@ -3120,7 +3076,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void SwapLineEnd(XLine line, XPoint point)
+        private void SwapLineEnd(LineShape line, PointShape point)
         {
             if (line?.End != null && point != null)
             {
@@ -3139,7 +3095,7 @@ namespace Core2D.Editor
         /// <param name="point">The point used for split line start or end.</param>
         /// <param name="select">The flag indicating whether to select split line.</param>
         /// <returns>True if line split was successful.</returns>
-        public bool TryToSplitLine(double x, double y, XPoint point, bool select = false)
+        public bool TryToSplitLine(double x, double y, PointShape point, bool select = false)
         {
             if (Project?.CurrentContainer == null || Project?.Options == null)
                 return false;
@@ -3149,9 +3105,9 @@ namespace Core2D.Editor
                 new Point2(x, y),
                 Project.Options.HitThreshold);
 
-            if (result is XLine)
+            if (result is LineShape)
             {
-                var line = result as XLine;
+                var line = result as LineShape;
 
                 if (!Project.Options.SnapToGrid)
                 {
@@ -3163,7 +3119,7 @@ namespace Core2D.Editor
                     point.Y = nearest.Y;
                 }
 
-                var split = XLine.Create(
+                var split = LineShape.Create(
                     x, y,
                     line.Style,
                     Project.Options.PointShape,
@@ -3205,7 +3161,7 @@ namespace Core2D.Editor
         /// <param name="p0">The first connector point.</param>
         /// <param name="p1">The second connector point.</param>
         /// <returns>True if line split was successful.</returns>
-        public bool TryToSplitLine(XLine line, XPoint p0, XPoint p1)
+        public bool TryToSplitLine(LineShape line, PointShape p0, PointShape p1)
         {
             if (Project?.Options == null)
                 return false;
@@ -3218,10 +3174,10 @@ namespace Core2D.Editor
             if (line.Start.X != line.End.X && line.Start.Y != line.End.Y)
                 return false;
 
-            XLine split;
+            LineShape split;
             if (line.Start.X > line.End.X || line.Start.Y > line.End.Y)
             {
-                split = XLine.Create(
+                split = LineShape.Create(
                     p0,
                     line.End,
                     line.Style,
@@ -3232,7 +3188,7 @@ namespace Core2D.Editor
             }
             else
             {
-                split = XLine.Create(
+                split = LineShape.Create(
                     p1,
                     line.End,
                     line.Style,
@@ -3254,16 +3210,16 @@ namespace Core2D.Editor
         /// <param name="connectors">The connectors array.</param>
         /// <param name="threshold">The connection threshold.</param>
         /// <returns>True if connection was successful.</returns>
-        public bool TryToConnectLines(IEnumerable<XLine> lines, ImmutableArray<XPoint> connectors, double threshold)
+        public bool TryToConnectLines(IEnumerable<LineShape> lines, ImmutableArray<PointShape> connectors, double threshold)
         {
             if (connectors.Length > 0)
             {
-                var lineToPoints = new Dictionary<XLine, IList<XPoint>>();
+                var lineToPoints = new Dictionary<LineShape, IList<PointShape>>();
 
                 // Find possible connector to line connections.
                 foreach (var connector in connectors)
                 {
-                    XLine result = null;
+                    LineShape result = null;
                     foreach (var line in lines)
                     {
                         if (HitTest.Contains(line, new Point2(connector.X, connector.Y), threshold))
@@ -3281,7 +3237,7 @@ namespace Core2D.Editor
                         }
                         else
                         {
-                            lineToPoints.Add(result, new List<XPoint>());
+                            lineToPoints.Add(result, new List<PointShape>());
                             lineToPoints[result].Add(connector);
                         }
                     }
@@ -3291,8 +3247,8 @@ namespace Core2D.Editor
                 bool success = false;
                 foreach (var kv in lineToPoints)
                 {
-                    XLine line = kv.Key;
-                    IList<XPoint> points = kv.Value;
+                    LineShape line = kv.Key;
+                    IList<PointShape> points = kv.Value;
                     if (points.Count == 2)
                     {
                         var p0 = points[0];
@@ -3334,12 +3290,12 @@ namespace Core2D.Editor
             return false;
         }
 
-        private XGroup Group(XLayer layer, ImmutableHashSet<BaseShape> shapes, string name)
+        private GroupShape Group(XLayer layer, ImmutableHashSet<BaseShape> shapes, string name)
         {
             if (layer != null && shapes != null)
             {
                 var source = layer.Shapes.ToBuilder();
-                var group = XGroup.Group(name, shapes, source);
+                var group = GroupShape.Group(name, shapes, source);
 
                 var previous = layer.Shapes;
                 var next = source.ToImmutable();
@@ -3358,7 +3314,7 @@ namespace Core2D.Editor
             {
                 var source = layer.Shapes.ToBuilder();
 
-                XGroup.Ungroup(shapes, source);
+                GroupShape.Ungroup(shapes, source);
 
                 var previous = layer.Shapes;
                 var next = source.ToImmutable();
@@ -3373,7 +3329,7 @@ namespace Core2D.Editor
             {
                 var source = layer.Shapes.ToBuilder();
 
-                XGroup.Ungroup(shape as XGroup, source);
+                GroupShape.Ungroup(shape as GroupShape, source);
 
                 var previous = layer.Shapes;
                 var next = source.ToImmutable();
@@ -3387,7 +3343,7 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="shapes">The selected shapes.</param>
         /// <param name="name">The group name.</param>
-        public XGroup Group(ImmutableHashSet<BaseShape> shapes, string name)
+        public GroupShape Group(ImmutableHashSet<BaseShape> shapes, string name)
         {
             var layer = Project?.CurrentContainer?.CurrentLayer;
             if (layer != null)
@@ -3408,7 +3364,7 @@ namespace Core2D.Editor
             var layer = Project?.CurrentContainer?.CurrentLayer;
             if (layer != null)
             {
-                if (shape != null && shape is XGroup)
+                if (shape != null && shape is GroupShape)
                 {
                     Ungroup(layer, shape);
                     return true;

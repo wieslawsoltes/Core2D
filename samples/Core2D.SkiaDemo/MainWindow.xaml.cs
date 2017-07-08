@@ -80,7 +80,7 @@ namespace Core2D.SkiaDemo
                 new WpfInputSource(
                     CanvasElement,
                     CanvasElement,
-                    FixPointOffset),
+                    FiPointShapeOffset),
                 _projectEditor);
         }
 
@@ -234,7 +234,7 @@ namespace Core2D.SkiaDemo
             }
         }
 
-        public Point FixPointOffset(Point point)
+        public Point FiPointShapeOffset(Point point)
         {
             var container = _projectEditor.Project.CurrentContainer;
             var matrix = PresentationSource.FromVisual(this).CompositionTarget.TransformToDevice;

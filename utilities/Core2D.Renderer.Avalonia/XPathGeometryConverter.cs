@@ -12,7 +12,7 @@ namespace Core2D.Renderer.Avalonia
     /// <summary>
     /// 
     /// </summary>
-    public static class XPathGeometryConverter
+    public static class PathGeometryConverter
     {
         /// <summary>
         /// 
@@ -21,15 +21,15 @@ namespace Core2D.Renderer.Avalonia
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <returns></returns>
-        public static StreamGeometry ToStreamGeometry(this XPathGeometry xpg, double dx, double dy)
+        public static StreamGeometry ToStreamGeometry(this Path.PathGeometry xpg, double dx, double dy)
         {
             var sg = new StreamGeometry();
 
             using (var sgc = sg.Open())
             {
-                var previous = default(XPoint);
+                var previous = default(PointShape);
 
-                sgc.SetFillRule(xpg.FillRule == XFillRule.Nonzero ? FillRule.NonZero : FillRule.EvenOdd);
+                sgc.SetFillRule(xpg.FillRule == Path.FillRule.Nonzero ? global::Avalonia.Media.FillRule.NonZero : global::Avalonia.Media.FillRule.EvenOdd);
 
                 foreach (var xpf in xpg.Figures)
                 {
@@ -39,21 +39,21 @@ namespace Core2D.Renderer.Avalonia
 
                     foreach (var segment in xpf.Segments)
                     {
-                        if (segment is XArcSegment)
+                        if (segment is Path.Segments.ArcSegment)
                         {
-                            var arcSegment = segment as XArcSegment;
+                            var arcSegment = segment as Path.Segments.ArcSegment;
                             sgc.ArcTo(
                                 new Point(arcSegment.Point.X + dx, arcSegment.Point.Y + dy),
                                 new Size(arcSegment.Size.Width,  arcSegment.Size.Height),
                                 arcSegment.RotationAngle,
                                 arcSegment.IsLargeArc,
-                                arcSegment.SweepDirection == XSweepDirection.Clockwise ? SweepDirection.Clockwise : SweepDirection.CounterClockwise);
+                                arcSegment.SweepDirection == Path.SweepDirection.Clockwise ? global::Avalonia.Media.SweepDirection.Clockwise : global::Avalonia.Media.SweepDirection.CounterClockwise);
 
                             previous = arcSegment.Point;
                         }
-                        else if (segment is XCubicBezierSegment)
+                        else if (segment is CubicBezierSegment)
                         {
-                            var cubicBezierSegment = segment as XCubicBezierSegment;
+                            var cubicBezierSegment = segment as CubicBezierSegment;
                             sgc.CubicBezierTo(
                                 new Point(cubicBezierSegment.Point1.X + dx, cubicBezierSegment.Point1.Y + dy),
                                 new Point(cubicBezierSegment.Point2.X + dx, cubicBezierSegment.Point2.Y + dy),
@@ -61,17 +61,17 @@ namespace Core2D.Renderer.Avalonia
 
                             previous = cubicBezierSegment.Point3;
                         }
-                        else if (segment is XLineSegment)
+                        else if (segment is Path.Segments.LineSegment)
                         {
-                            var lineSegment = segment as XLineSegment;
+                            var lineSegment = segment as Path.Segments.LineSegment;
                             sgc.LineTo(
                                 new Point(lineSegment.Point.X + dx, lineSegment.Point.Y + dy));
 
                             previous = lineSegment.Point;
                         }
-                        else if (segment is XPolyCubicBezierSegment)
+                        else if (segment is PolyCubicBezierSegment)
                         {
-                            var polyCubicBezierSegment = segment as XPolyCubicBezierSegment;
+                            var polyCubicBezierSegment = segment as PolyCubicBezierSegment;
                             if (polyCubicBezierSegment.Points.Length >= 3)
                             {
                                 sgc.CubicBezierTo(
@@ -108,9 +108,9 @@ namespace Core2D.Renderer.Avalonia
                                 }
                             }
                         }
-                        else if (segment is XPolyLineSegment)
+                        else if (segment is PolyLineSegment)
                         {
-                            var polyLineSegment = segment as XPolyLineSegment;
+                            var polyLineSegment = segment as PolyLineSegment;
                             if (polyLineSegment.Points.Length >= 1)
                             {
                                 sgc.LineTo(
@@ -134,9 +134,9 @@ namespace Core2D.Renderer.Avalonia
                                 }
                             }
                         }
-                        else if (segment is XPolyQuadraticBezierSegment)
+                        else if (segment is PolyQuadraticBezierSegment)
                         {
-                            var polyQuadraticSegment = segment as XPolyQuadraticBezierSegment;
+                            var polyQuadraticSegment = segment as PolyQuadraticBezierSegment;
                             if (polyQuadraticSegment.Points.Length >= 2)
                             {
                                 sgc.QuadraticBezierTo(
@@ -167,9 +167,9 @@ namespace Core2D.Renderer.Avalonia
                                 }
                             }
                         }
-                        else if (segment is XQuadraticBezierSegment)
+                        else if (segment is Path.Segments.QuadraticBezierSegment)
                         {
-                            var quadraticBezierSegment = segment as XQuadraticBezierSegment;
+                            var quadraticBezierSegment = segment as Path.Segments.QuadraticBezierSegment;
                             sgc.QuadraticBezierTo(
                                 new Point(
                                     quadraticBezierSegment.Point1.X + dx,
@@ -200,7 +200,7 @@ namespace Core2D.Renderer.Avalonia
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <returns></returns>
-        public static Geometry ToGeometry(this XPathGeometry xpg, double dx, double dy)
+        public static Geometry ToGeometry(this Path.PathGeometry xpg, double dx, double dy)
         {
             return ToStreamGeometry(xpg, dx, dy);
         }
@@ -210,7 +210,7 @@ namespace Core2D.Renderer.Avalonia
         /// </summary>
         /// <param name="xpg"></param>
         /// <returns></returns>
-        public static string ToSource(this XPathGeometry xpg)
+        public static string ToSource(this Path.PathGeometry xpg)
         {
             return ToStreamGeometry(xpg, 0.0, 0.0).ToString();
         }

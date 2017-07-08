@@ -122,7 +122,7 @@ namespace Core2D.Renderer.Avalonia
             return new AM.SolidColorBrush(ToColor(color));
         }
 
-        private static Rect2 CreateRect(XPoint tl, XPoint br, double dx, double dy)
+        private static Rect2 CreateRect(PointShape tl, PointShape br, double dx, double dy)
         {
             return Rect2.FromPoints(tl.X, tl.Y, br.X, br.Y, dx, dy);
         }
@@ -147,7 +147,7 @@ namespace Core2D.Renderer.Avalonia
                     double p1y = pt1.Y;
                     double p2x = pt2.X;
                     double p2y = pt2.Y;
-                    XLineExtensions.GetCurvedLineBezierControlPoints(orientation, curvature, pt1a, pt2a, ref p1x, ref p1y, ref p2x, ref p2y);
+                    LineShapeExtensions.GetCurvedLineBezierControlPoints(orientation, curvature, pt1a, pt2a, ref p1x, ref p1y, ref p2x, ref p2y);
                     sgc.CubicBezierTo(
                         new A.Point(p1x, p1y),
                         new A.Point(p2x, p2y),
@@ -158,7 +158,7 @@ namespace Core2D.Renderer.Avalonia
             }
         }
 
-        private void DrawLineArrowsInternal(AM.DrawingContext dc, XLine line, double dx, double dy, out A.Point pt1, out A.Point pt2)
+        private void DrawLineArrowsInternal(AM.DrawingContext dc, LineShape line, double dx, double dy, out A.Point pt1, out A.Point pt2)
         {
             AM.IBrush fillStartArrow = ToBrush(line.Style.StartArrowStyle.Fill);
             AM.Pen strokeStartArrow = ToPen(line.Style.StartArrowStyle, _scaleToPage);
@@ -360,7 +360,7 @@ namespace Core2D.Renderer.Avalonia
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XLine line, double dx, double dy, object db, object r)
+        public override void Draw(object dc, LineShape line, double dx, double dy, object db, object r)
         {
             var _dc = dc as AM.DrawingContext;
 
@@ -385,7 +385,7 @@ namespace Core2D.Renderer.Avalonia
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XRectangle rectangle, double dx, double dy, object db, object r)
+        public override void Draw(object dc, RectangleShape rectangle, double dx, double dy, object db, object r)
         {
             var _dc = dc as AM.DrawingContext;
 
@@ -415,7 +415,7 @@ namespace Core2D.Renderer.Avalonia
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XEllipse ellipse, double dx, double dy, object db, object r)
+        public override void Draw(object dc, EllipseShape ellipse, double dx, double dy, object db, object r)
         {
             var _dc = dc as AM.DrawingContext;
 
@@ -434,7 +434,7 @@ namespace Core2D.Renderer.Avalonia
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XArc arc, double dx, double dy, object db, object r)
+        public override void Draw(object dc, ArcShape arc, double dx, double dy, object db, object r)
         {
             if (!arc.IsFilled && !arc.IsStroked)
                 return;
@@ -474,7 +474,7 @@ namespace Core2D.Renderer.Avalonia
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XCubicBezier cubicBezier, double dx, double dy, object db, object r)
+        public override void Draw(object dc, CubicBezierShape cubicBezier, double dx, double dy, object db, object r)
         {
             if (!cubicBezier.IsFilled && !cubicBezier.IsStroked)
                 return;
@@ -506,7 +506,7 @@ namespace Core2D.Renderer.Avalonia
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XQuadraticBezier quadraticBezier, double dx, double dy, object db, object r)
+        public override void Draw(object dc, QuadraticBezierShape quadraticBezier, double dx, double dy, object db, object r)
         {
             if (!quadraticBezier.IsFilled && !quadraticBezier.IsStroked)
                 return;
@@ -537,7 +537,7 @@ namespace Core2D.Renderer.Avalonia
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XText text, double dx, double dy, object db, object r)
+        public override void Draw(object dc, TextShape text, double dx, double dy, object db, object r)
         {
             var _gfx = dc as AM.DrawingContext;
 
@@ -604,7 +604,7 @@ namespace Core2D.Renderer.Avalonia
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XImage image, double dx, double dy, object db, object r)
+        public override void Draw(object dc, ImageShape image, double dx, double dy, object db, object r)
         {
             var _dc = dc as AM.DrawingContext;
 
@@ -676,7 +676,7 @@ namespace Core2D.Renderer.Avalonia
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, XPath path, double dx, double dy, object db, object r)
+        public override void Draw(object dc, PathShape path, double dx, double dy, object db, object r)
         {
             if (!path.IsFilled && !path.IsStroked)
                 return;

@@ -81,7 +81,7 @@
                                 </TextBlock.ContextMenu>
                             </TextBlock>
                         </TreeDataTemplate>
-                        <TreeDataTemplate DataType="Shapes:XGroup" ItemsSource="{Binding Resources}">
+                        <TreeDataTemplate DataType="Shapes:GroupShape" ItemsSource="{Binding Resources}">
                             <TextBlock Text="{Binding Name}" Classes="tree">
                                 <TextBlock.ContextMenu>
                                     <ContextMenu Classes="default">

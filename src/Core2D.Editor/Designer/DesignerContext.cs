@@ -118,109 +118,109 @@ namespace Core2D.Editor.Designer
         public static TextStyle TextStyle { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Shapes.XArc"/>.
+        /// The design time <see cref="Core2D.Shapes.ArcShape"/>.
         /// </summary>
-        public static XArc Arc { get; set; }
+        public static ArcShape Arc { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Shapes.XCubicBezier"/>.
+        /// The design time <see cref="Core2D.Shapes.CubicBezierShape"/>.
         /// </summary>
-        public static XCubicBezier CubicBezier { get; set; }
+        public static CubicBezierShape CubicBezier { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Shapes.XEllipse"/>.
+        /// The design time <see cref="Core2D.Shapes.EllipseShape"/>.
         /// </summary>
-        public static XEllipse Ellipse { get; set; }
+        public static EllipseShape Ellipse { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Shapes.XGroup"/>.
+        /// The design time <see cref="Core2D.Shapes.GroupShape"/>.
         /// </summary>
-        public static XGroup Group { get; set; }
+        public static GroupShape Group { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Shapes.XImage"/>.
+        /// The design time <see cref="Core2D.Shapes.ImageShape"/>.
         /// </summary>
-        public static XImage Image { get; set; }
+        public static ImageShape Image { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Shapes.XLine"/>.
+        /// The design time <see cref="Core2D.Shapes.LineShape"/>.
         /// </summary>
-        public static XLine Line { get; set; }
+        public static LineShape Line { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Shapes.XPath"/>.
+        /// The design time <see cref="Core2D.Shapes.PathShape"/>.
         /// </summary>
-        public static XPath Path { get; set; }
+        public static PathShape Path { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Shapes.XPoint"/>.
+        /// The design time <see cref="Core2D.Shapes.PointShape"/>.
         /// </summary>
-        public static XPoint Point { get; set; }
+        public static PointShape Point { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Shapes.XQuadraticBezier"/>.
+        /// The design time <see cref="Core2D.Shapes.QuadraticBezierShape"/>.
         /// </summary>
-        public static XQuadraticBezier QuadraticBezier { get; set; }
+        public static QuadraticBezierShape QuadraticBezier { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Shapes.XRectangle"/>.
+        /// The design time <see cref="Core2D.Shapes.RectangleShape"/>.
         /// </summary>
-        public static XRectangle Rectangle { get; set; }
+        public static RectangleShape Rectangle { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Shapes.XText"/>.
+        /// The design time <see cref="Core2D.Shapes.TextShape"/>.
         /// </summary>
-        public static XText Text { get; set; }
+        public static TextShape Text { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Path.Segments.XArcSegment"/>.
+        /// The design time <see cref="Core2D.Path.Segments.ArcSegment"/>.
         /// </summary>
-        public static XArcSegment ArcSegment { get; set; }
+        public static ArcSegment ArcSegment { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Path.Segments.XCubicBezierSegment"/>.
+        /// The design time <see cref="Core2D.Path.Segments.CubicBezierSegment"/>.
         /// </summary>
-        public static XCubicBezierSegment CubicBezierSegment { get; set; }
+        public static CubicBezierSegment CubicBezierSegment { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Path.Segments.XLineSegment"/>.
+        /// The design time <see cref="Core2D.Path.Segments.LineSegment"/>.
         /// </summary>
-        public static XLineSegment LineSegment { get; set; }
+        public static LineSegment LineSegment { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Path.XPathFigure"/>.
+        /// The design time <see cref="Core2D.Path.PathFigure"/>.
         /// </summary>
-        public static XPathFigure PathFigure { get; set; }
+        public static PathFigure PathFigure { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Path.XPathGeometry"/>.
+        /// The design time <see cref="Core2D.Path.PathGeometry"/>.
         /// </summary>
-        public static XPathGeometry PathGeometry { get; set; }
+        public static PathGeometry PathGeometry { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Path.XPathSize"/>.
+        /// The design time <see cref="Core2D.Path.PathSize"/>.
         /// </summary>
-        public static XPathSize PathSize { get; set; }
+        public static PathSize PathSize { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Path.Segments.XPolyCubicBezierSegment"/>.
+        /// The design time <see cref="Core2D.Path.Segments.PolyCubicBezierSegment"/>.
         /// </summary>
-        public static XPolyCubicBezierSegment PolyCubicBezierSegment { get; set; }
+        public static PolyCubicBezierSegment PolyCubicBezierSegment { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Path.Segments.XPolyLineSegment"/>.
+        /// The design time <see cref="Core2D.Path.Segments.PolyLineSegment"/>.
         /// </summary>
-        public static XPolyLineSegment PolyLineSegment { get; set; }
+        public static PolyLineSegment PolyLineSegment { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Path.Segments.XPolyQuadraticBezierSegment"/>.
+        /// The design time <see cref="Core2D.Path.Segments.PolyQuadraticBezierSegment"/>.
         /// </summary>
-        public static XPolyQuadraticBezierSegment PolyQuadraticBezierSegment { get; set; }
+        public static PolyQuadraticBezierSegment PolyQuadraticBezierSegment { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Path.Segments.XQuadraticBezierSegment"/>.
+        /// The design time <see cref="Core2D.Path.Segments.QuadraticBezierSegment"/>.
         /// </summary>
-        public static XQuadraticBezierSegment QuadraticBezierSegment { get; set; }
+        public static QuadraticBezierSegment QuadraticBezierSegment { get; set; }
 
         /// <summary>
         /// Initializes static designer context.
@@ -272,7 +272,7 @@ namespace Core2D.Editor.Designer
 
             Page = XContainer.CreatePage();
             var layer = Page.Layers.FirstOrDefault();
-            layer.Shapes = layer.Shapes.Add(XLine.Create(0, 0, null, null));
+            layer.Shapes = layer.Shapes.Add(LineShape.Create(0, 0, null, null));
             Page.CurrentLayer = layer;
             Page.CurrentShape = layer.Shapes.FirstOrDefault();
             Page.Template = Template;
@@ -297,30 +297,30 @@ namespace Core2D.Editor.Designer
 
             // Shapes
 
-            Arc = XArc.Create(0, 0, Style, null);
-            CubicBezier = XCubicBezier.Create(0, 0, Style, null);
-            Ellipse = XEllipse.Create(0, 0, Style, null);
-            Group = XGroup.Create(Constants.DefaulGroupName);
-            Image = XImage.Create(0, 0, Style, null, "key");
-            Line = XLine.Create(0, 0, Style, null);
-            Path = XPath.Create(Style, null);
-            Point = XPoint.Create();
-            QuadraticBezier = XQuadraticBezier.Create(0, 0, Style, null);
-            Rectangle = XRectangle.Create(0, 0, Style, null);
-            Text = XText.Create(0, 0, Style, null, "Text");
+            Arc = ArcShape.Create(0, 0, Style, null);
+            CubicBezier = CubicBezierShape.Create(0, 0, Style, null);
+            Ellipse = EllipseShape.Create(0, 0, Style, null);
+            Group = GroupShape.Create(Constants.DefaulGroupName);
+            Image = ImageShape.Create(0, 0, Style, null, "key");
+            Line = LineShape.Create(0, 0, Style, null);
+            Path = PathShape.Create(Style, null);
+            Point = PointShape.Create();
+            QuadraticBezier = QuadraticBezierShape.Create(0, 0, Style, null);
+            Rectangle = RectangleShape.Create(0, 0, Style, null);
+            Text = TextShape.Create(0, 0, Style, null, "Text");
 
             // Path
 
-            ArcSegment = XArcSegment.Create(XPoint.Create(), XPathSize.Create(), 180, true, XSweepDirection.Clockwise, true, true);
-            CubicBezierSegment = XCubicBezierSegment.Create(XPoint.Create(), XPoint.Create(), XPoint.Create(), true, true);
-            LineSegment = XLineSegment.Create(XPoint.Create(), true, true);
-            PathFigure = XPathFigure.Create(XPoint.Create(), false, true);
-            PathGeometry = XPathGeometry.Create(ImmutableArray.Create<XPathFigure>(), XFillRule.EvenOdd);
-            PathSize = XPathSize.Create();
-            PolyCubicBezierSegment = XPolyCubicBezierSegment.Create(ImmutableArray.Create<XPoint>(), true, true);
-            PolyLineSegment = XPolyLineSegment.Create(ImmutableArray.Create<XPoint>(), true, true);
-            PolyQuadraticBezierSegment = XPolyQuadraticBezierSegment.Create(ImmutableArray.Create<XPoint>(), true, true);
-            QuadraticBezierSegment = XQuadraticBezierSegment.Create(XPoint.Create(), XPoint.Create(), true, true);
+            ArcSegment = ArcSegment.Create(PointShape.Create(), PathSize.Create(), 180, true, SweepDirection.Clockwise, true, true);
+            CubicBezierSegment = CubicBezierSegment.Create(PointShape.Create(), PointShape.Create(), PointShape.Create(), true, true);
+            LineSegment = LineSegment.Create(PointShape.Create(), true, true);
+            PathFigure = PathFigure.Create(PointShape.Create(), false, true);
+            PathGeometry = PathGeometry.Create(ImmutableArray.Create<PathFigure>(), FillRule.EvenOdd);
+            PathSize = PathSize.Create();
+            PolyCubicBezierSegment = PolyCubicBezierSegment.Create(ImmutableArray.Create<PointShape>(), true, true);
+            PolyLineSegment = PolyLineSegment.Create(ImmutableArray.Create<PointShape>(), true, true);
+            PolyQuadraticBezierSegment = PolyQuadraticBezierSegment.Create(ImmutableArray.Create<PointShape>(), true, true);
+            QuadraticBezierSegment = QuadraticBezierSegment.Create(PointShape.Create(), PointShape.Create(), true, true);
         }
     }
 }

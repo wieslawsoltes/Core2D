@@ -8,12 +8,12 @@ using Core2D.Style;
 namespace Core2D.Editor.Tools.Selection
 {
     /// <summary>
-    /// Helper class for <see cref="XPoint"/> shape selection.
+    /// Helper class for <see cref="PointShape"/> shape selection.
     /// </summary>
     public class ToolPointSelection
     {
         private readonly XLayer _layer;
-        private readonly XPoint _shape;
+        private readonly PointShape _shape;
         private readonly ShapeStyle _style;
         private readonly BaseShape _point;
 
@@ -24,7 +24,7 @@ namespace Core2D.Editor.Tools.Selection
         /// <param name="shape">The selected shape.</param>
         /// <param name="style">The selection shapes style.</param>
         /// <param name="point">The selection point shape.</param>
-        public ToolPointSelection(XLayer layer, XPoint shape, ShapeStyle style, BaseShape point)
+        public ToolPointSelection(XLayer layer, PointShape shape, ShapeStyle style, BaseShape point)
         {
             _layer = layer;
             _shape = shape;

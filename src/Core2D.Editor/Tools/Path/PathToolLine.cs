@@ -21,7 +21,7 @@ namespace Core2D.Editor.Tools.Path
         private readonly IServiceProvider _serviceProvider;
         private PathToolSettingsLine _settings;
         private State _currentState = State.Start;
-        private XPathLine _line = new XPathLine();
+        private PathShapeLine _line = new PathShapeLine();
         private ToolLineSelection _selection;
 
         /// <inheritdoc/>
@@ -57,7 +57,7 @@ namespace Core2D.Editor.Tools.Path
             {
                 case State.Start:
                     {
-                        _line.Start = editor.TryToGetConnectionPoint(sx, sy) ?? XPoint.Create(sx, sy, editor.Project.Options.PointShape);
+                        _line.Start = editor.TryToGetConnectionPoint(sx, sy) ?? PointShape.Create(sx, sy, editor.Project.Options.PointShape);
                         if (!pathTool.IsInitialized)
                         {
                             pathTool.InitializeWorkingPath(_line.Start);
@@ -67,7 +67,7 @@ namespace Core2D.Editor.Tools.Path
                             _line.Start = pathTool.GetLastPathPoint();
                         }
 
-                        _line.End = XPoint.Create(sx, sy, editor.Project.Options.PointShape);
+                        _line.End = PointShape.Create(sx, sy, editor.Project.Options.PointShape);
                         pathTool.GeometryContext.LineTo(
                             _line.End,
                             editor.Project.Options.DefaultIsStroked,
@@ -89,13 +89,13 @@ namespace Core2D.Editor.Tools.Path
                             if (end != null)
                             {
                                 var figure = pathTool.Geometry.Figures.LastOrDefault();
-                                var line = figure.Segments.LastOrDefault() as XLineSegment;
+                                var line = figure.Segments.LastOrDefault() as LineSegment;
                                 line.Point = end;
                             }
                         }
 
                         _line.Start = _line.End;
-                        _line.End = XPoint.Create(sx, sy, editor.Project.Options.PointShape);
+                        _line.End = PointShape.Create(sx, sy, editor.Project.Options.PointShape);
                         pathTool.GeometryContext.LineTo(_line.End,
                             editor.Project.Options.DefaultIsStroked,
                             editor.Project.Options.DefaultIsSmoothJoin);
@@ -119,7 +119,7 @@ namespace Core2D.Editor.Tools.Path
                     break;
                 case State.End:
                     {
-                        pathTool.RemoveLastSegment<XLineSegment>();
+                        pathTool.RemoveLastSegment<LineSegment>();
 
                         editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(pathTool.Path);
                         Remove();

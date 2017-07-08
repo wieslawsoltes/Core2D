@@ -25,10 +25,10 @@
                     </Style>
                 </TreeView.Styles>
                 <TreeView.DataTemplates>
-                    <TreeDataTemplate DataType="Path:XPathFigure" ItemsSource="{Binding Segments}">
+                    <TreeDataTemplate DataType="Path:PathFigure" ItemsSource="{Binding Segments}">
                         <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="tree"/>
                     </TreeDataTemplate>
-                    <DataTemplate DataType="Path:XPathSegment">
+                    <DataTemplate DataType="Path:PathSegment">
                         <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="tree"/>
                     </DataTemplate>
                 </TreeView.DataTemplates>

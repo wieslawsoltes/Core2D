@@ -148,7 +148,7 @@ namespace Core2D.Shape
         /// Get all points in the shape.
         /// </summary>
         /// <returns>All points in the shape.</returns>
-        public abstract IEnumerable<XPoint> GetPoints();
+        public abstract IEnumerable<PointShape> GetPoints();
 
         /// <summary>
         /// Check whether the <see cref="Owner"/> property has changed from its default value.

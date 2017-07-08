@@ -93,7 +93,7 @@ namespace Core2D.Project
 
         private static IEnumerable<string> GetUsedKeys(XProject project)
         {
-            return XProject.GetAllShapes<XImage>(project).Select(i => i.Key).Distinct();
+            return XProject.GetAllShapes<ImageShape>(project).Select(i => i.Key).Distinct();
         }
 
         private static XProject ReadProject(ZipArchiveEntry projectEntry, IFileSystem fileIO, IJsonSerializer serializer)

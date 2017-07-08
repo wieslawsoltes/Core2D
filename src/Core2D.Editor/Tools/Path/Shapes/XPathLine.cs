@@ -5,9 +5,9 @@ using Core2D.Shapes.Interfaces;
 
 namespace Core2D.Editor.Tools.Path.Shapes
 {
-    internal class XPathLine : ILine
+    internal class PathShapeLine : ILine
     {
-        public XPoint Start { get; set; }
-        public XPoint End { get; set; }
+        public PointShape Start { get; set; }
+        public PointShape End { get; set; }
     }
 }

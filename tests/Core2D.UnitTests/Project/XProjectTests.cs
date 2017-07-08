@@ -132,7 +132,7 @@ namespace Core2D.UnitTests
         {
             var target = new XProject();
 
-            var library = XLibrary<XGroup>.Create("Library1");
+            var library = XLibrary<GroupShape>.Create("Library1");
             target.GroupLibraries = target.GroupLibraries.Add(library);
 
             target.SetCurrentGroupLibrary(library);

@@ -18,7 +18,7 @@ namespace Core2D.Editor.Tools
         private readonly IServiceProvider _serviceProvider;
         private ToolSettingsText _settings;
         private State _currentState = State.TopLeft;
-        private XText _text;
+        private TextShape _text;
         private ToolTextSelection _selection;
 
         /// <inheritdoc/>
@@ -54,7 +54,7 @@ namespace Core2D.Editor.Tools
                 case State.TopLeft:
                     {
                         var style = editor.Project.CurrentStyleLibrary.Selected;
-                        _text = XText.Create(
+                        _text = TextShape.Create(
                             sx, sy,
                             editor.Project.Options.CloneStyle ? style.Clone() : style,
                             editor.Project.Options.PointShape,

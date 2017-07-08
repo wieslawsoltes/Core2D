@@ -131,68 +131,68 @@
             <settingsPath:QuadraticBezierSettingsControl/>
         </DataTemplate>
         <!-- Shapes -->
-        <DataTemplate DataType="Shapes:XPoint">
+        <DataTemplate DataType="Shapes:PointShape">
             <shapes:PointControl/>
         </DataTemplate>
-        <DataTemplate DataType="Shapes:XLine">
+        <DataTemplate DataType="Shapes:LineShape">
             <shapes:LineControl/>
         </DataTemplate>
-        <DataTemplate DataType="Shapes:XRectangle">
+        <DataTemplate DataType="Shapes:RectangleShape">
             <shapes:RectangleControl/>
         </DataTemplate>
-        <DataTemplate DataType="Shapes:XEllipse">
+        <DataTemplate DataType="Shapes:EllipseShape">
             <shapes:EllipseControl/>
         </DataTemplate>
-        <DataTemplate DataType="Shapes:XImage">
+        <DataTemplate DataType="Shapes:ImageShape">
             <shapes:ImageControl/>
         </DataTemplate>
-        <DataTemplate DataType="Shapes:XText">
+        <DataTemplate DataType="Shapes:TextShape">
             <shapes:TextControl/>
         </DataTemplate>
-        <DataTemplate DataType="Shapes:XArc">
+        <DataTemplate DataType="Shapes:ArcShape">
             <shapes:ArcControl/>
         </DataTemplate>
-        <DataTemplate DataType="Shapes:XCubicBezier">
+        <DataTemplate DataType="Shapes:CubicBezierShape">
             <shapes:CubicBezierControl/>
         </DataTemplate>
-        <DataTemplate DataType="Shapes:XQuadraticBezier">
+        <DataTemplate DataType="Shapes:QuadraticBezierShape">
             <shapes:QuadraticBezierControl/>
         </DataTemplate>
-        <DataTemplate DataType="Shapes:XGroup">
+        <DataTemplate DataType="Shapes:GroupShape">
             <shapes:GroupControl/>
         </DataTemplate>
-        <DataTemplate DataType="Shapes:XPath">
+        <DataTemplate DataType="Shapes:PathShape">
             <shapes:PathControl/>
         </DataTemplate>
         <!-- Path -->
-        <DataTemplate DataType="Path:XPathSize">
+        <DataTemplate DataType="Path:PathSize">
             <path:PathSizeControl/>
         </DataTemplate>
-        <DataTemplate DataType="Segments:XArcSegment">
+        <DataTemplate DataType="Segments:ArcSegment">
             <path:ArcSegmentControl/>
         </DataTemplate>
-        <DataTemplate DataType="Segments:XCubicBezierSegment">
+        <DataTemplate DataType="Segments:CubicBezierSegment">
             <path:CubicBezierSegmentControl/>
         </DataTemplate>
-        <DataTemplate DataType="Segments:XLineSegment">
+        <DataTemplate DataType="Segments:LineSegment">
             <path:LineSegmentControl/>
         </DataTemplate>
-        <DataTemplate DataType="Segments:XPolyCubicBezierSegment">
+        <DataTemplate DataType="Segments:PolyCubicBezierSegment">
             <path:PolyCubicBezierSegmentControl/>
         </DataTemplate>
-        <DataTemplate DataType="Segments:XPolyLineSegment">
+        <DataTemplate DataType="Segments:PolyLineSegment">
             <path:PolyLineSegmentControl/>
         </DataTemplate>
-        <DataTemplate DataType="Segments:XPolyQuadraticBezierSegment">
+        <DataTemplate DataType="Segments:PolyQuadraticBezierSegment">
             <path:PolyQuadraticBezierSegmentControl/>
         </DataTemplate>
-        <DataTemplate DataType="Segments:XQuadraticBezierSegment">
+        <DataTemplate DataType="Segments:QuadraticBezierSegment">
             <path:QuadraticBezierSegmentControl/>
         </DataTemplate>
-        <DataTemplate DataType="Path:XPathFigure">
+        <DataTemplate DataType="Path:PathFigure">
             <path:PathFigureControl/>
         </DataTemplate>
-        <DataTemplate DataType="Path:XPathGeometry">
+        <DataTemplate DataType="Path:PathGeometry">
             <path:PathGeometryControl/>
         </DataTemplate>
         <!-- Project -->

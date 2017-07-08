@@ -17,7 +17,7 @@ namespace Core2D.Serializer.Xaml
             { typeof(ArgbColor), typeof(ArgbColorTypeConverter) },
             { typeof(FontStyle), typeof(FontStyleTypeConverter) },
             { typeof(ShapeState), typeof(ShapeStateTypeConverter) },
-            { typeof(XPathGeometry), typeof(XPathGeometryTypeConverter) },
+            { typeof(PathGeometry), typeof(PathGeometryTypeConverter) },
             { typeof(MatrixObject), typeof(MatrixObjectTypeConverter) }
         };
 

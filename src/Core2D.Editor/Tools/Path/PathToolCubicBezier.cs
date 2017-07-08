@@ -21,7 +21,7 @@ namespace Core2D.Editor.Tools.Path
         private readonly IServiceProvider _serviceProvider;
         private PathToolSettingsCubicBezier _settings;
         private State _currentState = State.Point1;
-        private XPathCubicBezier _cubicBezier = new XPathCubicBezier();
+        private PathShapeCubicBezier _cubicBezier = new PathShapeCubicBezier();
         private ToolCubicBezierSelection _selection;
 
         /// <inheritdoc/>
@@ -57,7 +57,7 @@ namespace Core2D.Editor.Tools.Path
             {
                 case State.Point1:
                     {
-                        _cubicBezier.Point1 = editor.TryToGetConnectionPoint(sx, sy) ?? XPoint.Create(sx, sy, editor.Project.Options.PointShape);
+                        _cubicBezier.Point1 = editor.TryToGetConnectionPoint(sx, sy) ?? PointShape.Create(sx, sy, editor.Project.Options.PointShape);
                         if (!pathTool.IsInitialized)
                         {
                             pathTool.InitializeWorkingPath(_cubicBezier.Point1);
@@ -67,9 +67,9 @@ namespace Core2D.Editor.Tools.Path
                             _cubicBezier.Point1 = pathTool.GetLastPathPoint();
                         }
 
-                        _cubicBezier.Point2 = XPoint.Create(sx, sy, editor.Project.Options.PointShape);
-                        _cubicBezier.Point3 = XPoint.Create(sx, sy, editor.Project.Options.PointShape);
-                        _cubicBezier.Point4 = XPoint.Create(sx, sy, editor.Project.Options.PointShape);
+                        _cubicBezier.Point2 = PointShape.Create(sx, sy, editor.Project.Options.PointShape);
+                        _cubicBezier.Point3 = PointShape.Create(sx, sy, editor.Project.Options.PointShape);
+                        _cubicBezier.Point4 = PointShape.Create(sx, sy, editor.Project.Options.PointShape);
                         pathTool.GeometryContext.CubicBezierTo(
                             _cubicBezier.Point2,
                             _cubicBezier.Point3,
@@ -93,7 +93,7 @@ namespace Core2D.Editor.Tools.Path
                             if (point3 != null)
                             {
                                 var figure = pathTool.Geometry.Figures.LastOrDefault();
-                                var cubicBezier = figure.Segments.LastOrDefault() as XCubicBezierSegment;
+                                var cubicBezier = figure.Segments.LastOrDefault() as CubicBezierSegment;
                                 cubicBezier.Point3 = point3;
                                 _cubicBezier.Point4 = point3;
                             }
@@ -114,7 +114,7 @@ namespace Core2D.Editor.Tools.Path
                             if (point1 != null)
                             {
                                 var figure = pathTool.Geometry.Figures.LastOrDefault();
-                                var cubicBezier = figure.Segments.LastOrDefault() as XCubicBezierSegment;
+                                var cubicBezier = figure.Segments.LastOrDefault() as CubicBezierSegment;
                                 cubicBezier.Point1 = point1;
                                 _cubicBezier.Point2 = point1;
                             }
@@ -135,16 +135,16 @@ namespace Core2D.Editor.Tools.Path
                             if (point2 != null)
                             {
                                 var figure = pathTool.Geometry.Figures.LastOrDefault();
-                                var cubicBezier = figure.Segments.LastOrDefault() as XCubicBezierSegment;
+                                var cubicBezier = figure.Segments.LastOrDefault() as CubicBezierSegment;
                                 cubicBezier.Point2 = point2;
                                 _cubicBezier.Point3 = point2;
                             }
                         }
 
                         _cubicBezier.Point1 = _cubicBezier.Point4;
-                        _cubicBezier.Point2 = XPoint.Create(sx, sy, editor.Project.Options.PointShape);
-                        _cubicBezier.Point3 = XPoint.Create(sx, sy, editor.Project.Options.PointShape);
-                        _cubicBezier.Point4 = XPoint.Create(sx, sy, editor.Project.Options.PointShape);
+                        _cubicBezier.Point2 = PointShape.Create(sx, sy, editor.Project.Options.PointShape);
+                        _cubicBezier.Point3 = PointShape.Create(sx, sy, editor.Project.Options.PointShape);
+                        _cubicBezier.Point4 = PointShape.Create(sx, sy, editor.Project.Options.PointShape);
                         pathTool.GeometryContext.CubicBezierTo(
                             _cubicBezier.Point2,
                             _cubicBezier.Point3,
@@ -175,7 +175,7 @@ namespace Core2D.Editor.Tools.Path
                 case State.Point2:
                 case State.Point3:
                     {
-                        pathTool.RemoveLastSegment<XCubicBezierSegment>();
+                        pathTool.RemoveLastSegment<CubicBezierSegment>();
 
                         editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(pathTool.Path);
                         Remove();

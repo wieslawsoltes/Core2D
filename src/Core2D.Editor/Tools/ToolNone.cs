@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
-using Core2D.Editor.Input;
 using Core2D.Editor.Tools.Settings;
 
 namespace Core2D.Editor.Tools

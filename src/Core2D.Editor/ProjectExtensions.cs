@@ -636,7 +636,7 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="project">The project instance.</param>
         /// <param name="library">The group library instance.</param>
-        public static void AddGroupLibrary(this XProject project, XLibrary<XGroup> library)
+        public static void AddGroupLibrary(this XProject project, XLibrary<GroupShape> library)
         {
             if (project?.GroupLibraries != null && library != null)
             {
@@ -652,7 +652,7 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="project">The project instance.</param>
         /// <param name="libraries">The group libraries collection.</param>
-        public static void AddGroupLibraries(this XProject project, IEnumerable<XLibrary<XGroup>> libraries)
+        public static void AddGroupLibraries(this XProject project, IEnumerable<XLibrary<GroupShape>> libraries)
         {
             if (project?.GroupLibraries != null && libraries != null)
             {
@@ -671,7 +671,7 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="project">The project instance.</param>
         /// <param name="library">The group library instance.</param>
-        public static void RemoveGroupLibrary(this XProject project, XLibrary<XGroup> library)
+        public static void RemoveGroupLibrary(this XProject project, XLibrary<GroupShape> library)
         {
             if (project?.GroupLibraries != null && library != null)
             {
@@ -777,9 +777,9 @@ namespace Core2D.Editor
         {
             if (shape != null && style != null)
             {
-                if (shape is XGroup)
+                if (shape is GroupShape)
                 {
-                    var shapes = XProject.GetAllShapes((shape as XGroup).Shapes);
+                    var shapes = XProject.GetAllShapes((shape as GroupShape).Shapes);
                     foreach (var child in shapes)
                     {
                         var previous = child.Style;
@@ -804,7 +804,7 @@ namespace Core2D.Editor
         /// <param name="project">The project instance.</param>
         /// <param name="library">The group library instance.</param>
         /// <param name="group">The group instance.</param>
-        public static void AddGroup(this XProject project, XLibrary<XGroup> library, XGroup group)
+        public static void AddGroup(this XProject project, XLibrary<GroupShape> library, GroupShape group)
         {
             AddItem(project, library, group);
         }
@@ -815,7 +815,7 @@ namespace Core2D.Editor
         /// <param name="project">The project instance.</param>
         /// <param name="group">The group instance.</param>
         /// <returns>The owner group library.</returns>
-        public static XLibrary<XGroup> RemoveGroup(this XProject project, XGroup group)
+        public static XLibrary<GroupShape> RemoveGroup(this XProject project, GroupShape group)
         {
             if (project?.GroupLibraries != null && group != null)
             {

@@ -5,11 +5,11 @@ using Core2D.Shapes.Interfaces;
 
 namespace Core2D.Editor.Tools.Path.Shapes
 {
-    internal class XPathCubicBezier : ICubicBezier
+    internal class PathShapeCubicBezier : ICubicBezier
     {
-        public XPoint Point1 { get; set; }
-        public XPoint Point2 { get; set; }
-        public XPoint Point3 { get; set; }
-        public XPoint Point4 { get; set; }
+        public PointShape Point1 { get; set; }
+        public PointShape Point2 { get; set; }
+        public PointShape Point3 { get; set; }
+        public PointShape Point4 { get; set; }
     }
 }
