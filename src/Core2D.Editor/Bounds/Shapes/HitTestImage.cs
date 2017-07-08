@@ -10,15 +10,15 @@ namespace Core2D.Editor.Bounds.Shapes
 {
     public class HitTestImage : HitTestBase
     {
-        public override Type TargetType => typeof(XImage);
+        public override Type TargetType => typeof(ImageShape);
 
-        public override XPoint TryToGetPoint(BaseShape shape, Point2 target, double radius, IDictionary<Type, HitTestBase> registered)
+        public override PointShape TryToGetPoint(BaseShape shape, Point2 target, double radius, IDictionary<Type, HitTestBase> registered)
         {
-            var image = shape as XImage;
+            var image = shape as ImageShape;
             if (image == null)
                 throw new ArgumentNullException(nameof(shape));
 
-            var pointHitTest = registered[typeof(XPoint)];
+            var pointHitTest = registered[typeof(PointShape)];
 
             if (pointHitTest.TryToGetPoint(image.TopLeft, target, radius, registered) != null)
             {
@@ -35,7 +35,7 @@ namespace Core2D.Editor.Bounds.Shapes
 
         public override bool Contains(BaseShape shape, Point2 target, double radius, IDictionary<Type, HitTestBase> registered)
         {
-            var image = shape as XImage;
+            var image = shape as ImageShape;
             if (image == null)
                 throw new ArgumentNullException(nameof(shape));
 
@@ -48,7 +48,7 @@ namespace Core2D.Editor.Bounds.Shapes
 
         public override bool Overlaps(BaseShape shape, Rect2 target, double radius, IDictionary<Type, HitTestBase> registered)
         {
-            var image = shape as XImage;
+            var image = shape as ImageShape;
             if (image == null)
                 throw new ArgumentNullException(nameof(shape));
 

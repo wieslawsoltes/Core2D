@@ -32,28 +32,28 @@
         <TabItem Header="Figures">
             <TreeView x:Name="tree" ItemsSource="{Binding Figures}" BorderBrush="{x:Null}" BorderThickness="0" HorizontalContentAlignment="Stretch" VerticalAlignment="Stretch">
                 <TreeView.Resources>
-                    <DataTemplate DataType="{x:Type Path:XPathFigure}">
+                    <DataTemplate DataType="{x:Type Path:PathFigure}">
                         <TextBlock Text="Figure"/>
                     </DataTemplate>
-                    <DataTemplate DataType="{x:Type Segments:XLineSegment}">
+                    <DataTemplate DataType="{x:Type Segments:LineSegment}">
                         <TextBlock Text="LineSegment"/>
                     </DataTemplate>
-                    <DataTemplate DataType="{x:Type Segments:XCubicBezierSegment}">
+                    <DataTemplate DataType="{x:Type Segments:CubicBezierSegment}">
                         <TextBlock Text="CubicBezierSegment"/>
                     </DataTemplate>
-                    <DataTemplate DataType="{x:Type Segments:XQuadraticBezierSegment}">
+                    <DataTemplate DataType="{x:Type Segments:QuadraticBezierSegment}">
                         <TextBlock Text="QuadraticBezierSegment"/>
                     </DataTemplate>
-                    <DataTemplate DataType="{x:Type Segments:XArcSegment}">
+                    <DataTemplate DataType="{x:Type Segments:ArcSegment}">
                         <TextBlock Text="ArcSegment"/>
                     </DataTemplate>
-                    <DataTemplate DataType="{x:Type Segments:XPolyLineSegment}">
+                    <DataTemplate DataType="{x:Type Segments:PolyLineSegment}">
                         <TextBlock Text="PolyLineSegment"/>
                     </DataTemplate>
-                    <DataTemplate DataType="{x:Type Segments:XPolyCubicBezierSegment}">
+                    <DataTemplate DataType="{x:Type Segments:PolyCubicBezierSegment}">
                         <TextBlock Text="PolyCubicBezierSegment"/>
                     </DataTemplate>
-                    <DataTemplate DataType="{x:Type Segments:XPolyQuadraticBezierSegment}">
+                    <DataTemplate DataType="{x:Type Segments:PolyQuadraticBezierSegment}">
                         <TextBlock Text="PolyQuadraticBezierSegment"/>
                     </DataTemplate>
                 </TreeView.Resources>

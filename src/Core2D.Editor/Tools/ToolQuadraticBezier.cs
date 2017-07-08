@@ -18,7 +18,7 @@ namespace Core2D.Editor.Tools
         private readonly IServiceProvider _serviceProvider;
         private ToolSettingsQuadraticBezier _settings;
         private State _currentState = State.Point1;
-        private XQuadraticBezier _quadraticBezier;
+        private QuadraticBezierShape _quadraticBezier;
         private ToolQuadraticBezierSelection _selection;
 
         /// <inheritdoc/>
@@ -54,7 +54,7 @@ namespace Core2D.Editor.Tools
                 case State.Point1:
                     {
                         var style = editor.Project.CurrentStyleLibrary.Selected;
-                        _quadraticBezier = XQuadraticBezier.Create(
+                        _quadraticBezier = QuadraticBezierShape.Create(
                             sx, sy,
                             editor.Project.Options.CloneStyle ? style.Clone() : style,
                             editor.Project.Options.PointShape,

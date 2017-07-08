@@ -18,7 +18,7 @@ namespace Core2D.Editor.Tools
         private readonly IServiceProvider _serviceProvider;
         private ToolSettingsCubicBezier _settings;
         private State _currentState = State.Point1;
-        private XCubicBezier _cubicBezier;
+        private CubicBezierShape _cubicBezier;
         private ToolCubicBezierSelection _selection;
 
         /// <inheritdoc/>
@@ -54,7 +54,7 @@ namespace Core2D.Editor.Tools
                 case State.Point1:
                     {
                         var style = editor.Project.CurrentStyleLibrary.Selected;
-                        _cubicBezier = XCubicBezier.Create(
+                        _cubicBezier = CubicBezierShape.Create(
                             sx, sy,
                             editor.Project.Options.CloneStyle ? style.Clone() : style,
                             editor.Project.Options.PointShape,

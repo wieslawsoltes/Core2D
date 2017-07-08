@@ -10,15 +10,15 @@ namespace Core2D.Editor.Bounds.Shapes
 {
     public class HitTestArc : HitTestBase
     {
-        public override Type TargetType => typeof(XArc);
+        public override Type TargetType => typeof(ArcShape);
 
-        public override XPoint TryToGetPoint(BaseShape shape, Point2 target, double radius, IDictionary<Type, HitTestBase> registered)
+        public override PointShape TryToGetPoint(BaseShape shape, Point2 target, double radius, IDictionary<Type, HitTestBase> registered)
         {
-            var arc = shape as XArc;
+            var arc = shape as ArcShape;
             if (arc == null)
                 throw new ArgumentNullException(nameof(shape));
 
-            var pointHitTest = registered[typeof(XPoint)];
+            var pointHitTest = registered[typeof(PointShape)];
 
             if (pointHitTest.TryToGetPoint(arc.Point1, target, radius, registered) != null)
             {
@@ -45,7 +45,7 @@ namespace Core2D.Editor.Bounds.Shapes
 
         public override bool Contains(BaseShape shape, Point2 target, double radius, IDictionary<Type, HitTestBase> registered)
         {
-            var arc = shape as XArc;
+            var arc = shape as ArcShape;
             if (arc == null)
                 throw new ArgumentNullException(nameof(shape));
 
@@ -54,14 +54,14 @@ namespace Core2D.Editor.Bounds.Shapes
 
         public override bool Overlaps(BaseShape shape, Rect2 target, double radius, IDictionary<Type, HitTestBase> registered)
         {
-            var arc = shape as XArc;
+            var arc = shape as ArcShape;
             if (arc == null)
                 throw new ArgumentNullException(nameof(shape));
 
             return ArcBounds(arc).IntersectsWith(target);
         }
 
-        public static Rect2 ArcBounds(XArc arc)
+        public static Rect2 ArcBounds(ArcShape arc)
         {
             double x1 = arc.Point1.X;
             double y1 = arc.Point1.Y;

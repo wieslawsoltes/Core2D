@@ -9,21 +9,21 @@ using Core2D.Style;
 namespace Core2D.Editor.Tools.Selection
 {
     /// <summary>
-    /// Helper class for <see cref="XCubicBezier"/> shape selection.
+    /// Helper class for <see cref="CubicBezierShape"/> shape selection.
     /// </summary>
     public class ToolCubicBezierSelection
     {
-        private readonly XLayer _layer;
+        private readonly LayerContainer _layer;
         private readonly ICubicBezier _cubicBezier;
         private readonly ShapeStyle _style;
         private readonly BaseShape _point;
-        private XLine _line12;
-        private XLine _line43;
-        private XLine _line23;
-        private XPoint _helperPoint1;
-        private XPoint _helperPoint2;
-        private XPoint _helperPoint3;
-        private XPoint _helperPoint4;
+        private LineShape _line12;
+        private LineShape _line43;
+        private LineShape _line23;
+        private PointShape _helperPoint1;
+        private PointShape _helperPoint2;
+        private PointShape _helperPoint3;
+        private PointShape _helperPoint4;
 
         /// <summary>
         /// Initialize new instance of <see cref="ToolCubicBezierSelection"/> class.
@@ -32,7 +32,7 @@ namespace Core2D.Editor.Tools.Selection
         /// <param name="shape">The selected shape.</param>
         /// <param name="style">The selection shapes style.</param>
         /// <param name="point">The selection point shape.</param>
-        public ToolCubicBezierSelection(XLayer layer, ICubicBezier shape, ShapeStyle style, BaseShape point)
+        public ToolCubicBezierSelection(LayerContainer layer, ICubicBezier shape, ShapeStyle style, BaseShape point)
         {
             _layer = layer;
             _cubicBezier = shape;
@@ -45,9 +45,9 @@ namespace Core2D.Editor.Tools.Selection
         /// </summary>
         public void ToStatePoint4()
         {
-            _helperPoint1 = XPoint.Create(0, 0, _point);
+            _helperPoint1 = PointShape.Create(0, 0, _point);
             _layer.Shapes = _layer.Shapes.Add(_helperPoint1);
-            _helperPoint4 = XPoint.Create(0, 0, _point);
+            _helperPoint4 = PointShape.Create(0, 0, _point);
             _layer.Shapes = _layer.Shapes.Add(_helperPoint4);
         }
 
@@ -56,8 +56,8 @@ namespace Core2D.Editor.Tools.Selection
         /// </summary>
         public void ToStatePoint2()
         {
-            _line12 = XLine.Create(0, 0, _style, null);
-            _helperPoint2 = XPoint.Create(0, 0, _point);
+            _line12 = LineShape.Create(0, 0, _style, null);
+            _helperPoint2 = PointShape.Create(0, 0, _point);
 
             _layer.Shapes = _layer.Shapes.Add(_line12);
             _layer.Shapes = _layer.Shapes.Add(_helperPoint2);
@@ -68,9 +68,9 @@ namespace Core2D.Editor.Tools.Selection
         /// </summary>
         public void ToStatePoint3()
         {
-            _line43 = XLine.Create(0, 0, _style, null);
-            _line23 = XLine.Create(0, 0, _style, null);
-            _helperPoint3 = XPoint.Create(0, 0, _point);
+            _line43 = LineShape.Create(0, 0, _style, null);
+            _line23 = LineShape.Create(0, 0, _style, null);
+            _helperPoint3 = PointShape.Create(0, 0, _point);
 
             _layer.Shapes = _layer.Shapes.Add(_line43);
             _layer.Shapes = _layer.Shapes.Add(_line23);

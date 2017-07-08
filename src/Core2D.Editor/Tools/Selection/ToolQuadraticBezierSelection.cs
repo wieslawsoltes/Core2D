@@ -9,19 +9,19 @@ using Core2D.Style;
 namespace Core2D.Editor.Tools.Selection
 {
     /// <summary>
-    /// Helper class for <see cref="XQuadraticBezier"/> shape selection.
+    /// Helper class for <see cref="QuadraticBezierShape"/> shape selection.
     /// </summary>
     public class ToolQuadraticBezierSelection
     {
-        private readonly XLayer _layer;
+        private readonly LayerContainer _layer;
         private readonly IQuadraticBezier _quadraticBezier;
         private readonly ShapeStyle _style;
         private readonly BaseShape _point;
-        private XLine _line12;
-        private XLine _line32;
-        private XPoint _helperPoint1;
-        private XPoint _helperPoint2;
-        private XPoint _helperPoint3;
+        private LineShape _line12;
+        private LineShape _line32;
+        private PointShape _helperPoint1;
+        private PointShape _helperPoint2;
+        private PointShape _helperPoint3;
 
         /// <summary>
         /// Initialize new instance of <see cref="ToolQuadraticBezierSelection"/> class.
@@ -30,7 +30,7 @@ namespace Core2D.Editor.Tools.Selection
         /// <param name="shape">The selected shape.</param>
         /// <param name="style">The selection shapes style.</param>
         /// <param name="point">The selection point shape.</param>
-        public ToolQuadraticBezierSelection(XLayer layer, IQuadraticBezier shape, ShapeStyle style, BaseShape point)
+        public ToolQuadraticBezierSelection(LayerContainer layer, IQuadraticBezier shape, ShapeStyle style, BaseShape point)
         {
             _layer = layer;
             _quadraticBezier = shape;
@@ -43,8 +43,8 @@ namespace Core2D.Editor.Tools.Selection
         /// </summary>
         public void ToStatePoint3()
         {
-            _helperPoint1 = XPoint.Create(0, 0, _point);
-            _helperPoint3 = XPoint.Create(0, 0, _point);
+            _helperPoint1 = PointShape.Create(0, 0, _point);
+            _helperPoint3 = PointShape.Create(0, 0, _point);
 
             _layer.Shapes = _layer.Shapes.Add(_helperPoint1);
             _layer.Shapes = _layer.Shapes.Add(_helperPoint3);
@@ -55,9 +55,9 @@ namespace Core2D.Editor.Tools.Selection
         /// </summary>
         public void ToStatePoint2()
         {
-            _line12 = XLine.Create(0, 0, _style, null);
-            _line32 = XLine.Create(0, 0, _style, null);
-            _helperPoint2 = XPoint.Create(0, 0, _point);
+            _line12 = LineShape.Create(0, 0, _style, null);
+            _line32 = LineShape.Create(0, 0, _style, null);
+            _helperPoint2 = PointShape.Create(0, 0, _point);
 
             _layer.Shapes = _layer.Shapes.Add(_line12);
             _layer.Shapes = _layer.Shapes.Add(_line32);

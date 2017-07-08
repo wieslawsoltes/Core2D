@@ -80,7 +80,7 @@ namespace Core2D.SkiaDemo
                 new WpfInputSource(
                     CanvasElement,
                     CanvasElement,
-                    FixPointOffset),
+                    FiPointShapeOffset),
                 _projectEditor);
         }
 
@@ -234,7 +234,7 @@ namespace Core2D.SkiaDemo
             }
         }
 
-        public Point FixPointOffset(Point point)
+        public Point FiPointShapeOffset(Point point)
         {
             var container = _projectEditor.Project.CurrentContainer;
             var matrix = PresentationSource.FromVisual(this).CompositionTarget.TransformToDevice;
@@ -354,17 +354,17 @@ namespace Core2D.SkiaDemo
         {
             string name = string.Empty;
 
-            if (item is XProject)
+            if (item is ProjectContainer)
             {
-                name = (item as XProject).Name;
+                name = (item as ProjectContainer).Name;
             }
-            else if (item is XDocument)
+            else if (item is DocumentContainer)
             {
-                name = (item as XDocument).Name;
+                name = (item as DocumentContainer).Name;
             }
-            else if (item is XContainer)
+            else if (item is PageContainer)
             {
-                name = (item as XContainer).Name;
+                name = (item as PageContainer).Name;
             }
 
             var sb = new StringBuilder();

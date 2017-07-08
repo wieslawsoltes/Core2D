@@ -8,9 +8,9 @@ using System.Windows.Controls;
 namespace Core2D.Wpf.Controls.Custom.Lists
 {
     /// <summary>
-    /// The <see cref="ListBox"/> control for <see cref="XContainer"/> items with drag and drop support.
+    /// The <see cref="ListBox"/> control for <see cref="PageContainer"/> items with drag and drop support.
     /// </summary>
-    public class XTemplateDragAndDropListBox : DragAndDropListBox<XContainer>
+    public class XTemplateDragAndDropListBox : DragAndDropListBox<PageContainer>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="XTemplateDragAndDropListBox"/> class.
@@ -25,7 +25,7 @@ namespace Core2D.Wpf.Controls.Custom.Lists
         /// Updates DataContext collection ImmutableArray property.
         /// </summary>
         /// <param name="array">The updated immutable array.</param>
-        protected override void UpdateDataContext(ImmutableArray<XContainer> array)
+        protected override void UpdateDataContext(ImmutableArray<PageContainer> array)
         {
             var editor = (ProjectEditor)this.Tag;
 

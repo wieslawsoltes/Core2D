@@ -37,17 +37,17 @@ namespace Core2D.Wpf.Commands
                 name = editor.Project.Name;
                 item = editor.Project;
             }
-            else if (item is XProject)
+            else if (item is ProjectContainer)
             {
-                name = (item as XProject).Name;
+                name = (item as ProjectContainer).Name;
             }
-            else if (item is XDocument)
+            else if (item is DocumentContainer)
             {
-                name = (item as XDocument).Name;
+                name = (item as DocumentContainer).Name;
             }
-            else if (item is XContainer)
+            else if (item is PageContainer)
             {
-                name = (item as XContainer).Name;
+                name = (item as PageContainer).Name;
             }
 
             var sb = new StringBuilder();

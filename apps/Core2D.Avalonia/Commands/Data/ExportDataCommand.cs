@@ -2,7 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Avalonia.Controls;
 using Core2D.Avalonia.Windows;
-using Core2D.Data.Database;
+using Core2D.Data;
 using Core2D.Editor;
 using Core2D.Editor.Commands;
 using Core2D.Editor.Input;
@@ -10,16 +10,16 @@ using Core2D.Editor.Input;
 namespace Core2D.Avalonia.Commands
 {
     /// <inheritdoc/>
-    public class ExportDataCommand : Command<XDatabase>, IExportDataCommand
+    public class ExportDataCommand : Command<Database>, IExportDataCommand
     {
         /// <inheritdoc/>
-        public override bool CanRun(XDatabase db)
+        public override bool CanRun(Database db)
         {
             return ServiceProvider.GetService<ProjectEditor>().IsEditMode();
         }
 
         /// <inheritdoc/>
-        public override async void Run(XDatabase db)
+        public override async void Run(Database db)
         {
             if (db != null)
             {

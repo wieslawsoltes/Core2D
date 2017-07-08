@@ -39,7 +39,7 @@
                 <KeyBinding Command="{Static Editor:ProjectEditorCommands.ExportObjectCommand}" CommandParameter="{Binding #groups.SelectedItem}" Gesture="Ctrl+E"/>
             </ListBox.KeyBindings>
             <ListBox.DataTemplates>
-                <DataTemplate DataType="Shapes:XGroup">
+                <DataTemplate DataType="Shapes:GroupShape">
                     <TextBlock Name="group" Text="{Binding Name}" Classes="list">
                         <i:Interaction.Behaviors>
                             <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #group}">

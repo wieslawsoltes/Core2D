@@ -260,37 +260,37 @@ namespace Core2D.Editor
         public static IToolMoveCommand ToolMoveCommand { get; set; }
 
         /// <summary>
-        /// Toggle <see cref="XOptions.DefaultIsStroked"/> option.
+        /// Toggle <see cref="Project.Options.DefaultIsStroked"/> option.
         /// </summary>
         public static IDefaultIsStrokedCommand DefaultIsStrokedCommand { get; set; }
 
         /// <summary>
-        /// Toggle <see cref="XOptions.DefaultIsFilled"/> option.
+        /// Toggle <see cref="Project.Options.DefaultIsFilled"/> option.
         /// </summary>
         public static IDefaultIsFilledCommand DefaultIsFilledCommand { get; set; }
 
         /// <summary>
-        /// Toggle <see cref="XOptions.DefaultIsClosed"/> option.
+        /// Toggle <see cref="Project.Options.DefaultIsClosed"/> option.
         /// </summary>
         public static IDefaultIsClosedCommand DefaultIsClosedCommand { get; set; }
 
         /// <summary>
-        /// Toggle <see cref="XOptions.DefaultIsSmoothJoin"/> option.
+        /// Toggle <see cref="Project.Options.DefaultIsSmoothJoin"/> option.
         /// </summary>
         public static IDefaultIsSmoothJoinCommand DefaultIsSmoothJoinCommand { get; set; }
 
         /// <summary>
-        /// Toggle <see cref="XOptions.SnapToGrid"/> option.
+        /// Toggle <see cref="Project.Options.SnapToGrid"/> option.
         /// </summary>
         public static ISnapToGridCommand SnapToGridCommand { get; set; }
 
         /// <summary>
-        /// Toggle <see cref="XOptions.TryToConnect"/> option.
+        /// Toggle <see cref="Project.Options.TryToConnect"/> option.
         /// </summary>
         public static ITryToConnectCommand TryToConnectCommand { get; set; }
 
         /// <summary>
-        /// Toggle <see cref="XOptions.CloneStyle"/> option.
+        /// Toggle <see cref="Project.Options.CloneStyle"/> option.
         /// </summary>
         public static ICloneStyleCommand CloneStyleCommand { get; set; }
 

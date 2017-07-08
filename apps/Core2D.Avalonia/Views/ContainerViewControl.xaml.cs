@@ -21,8 +21,8 @@ namespace Core2D.Avalonia.Views
         /// <summary>
         /// Gets or sets container property.
         /// </summary>
-        public static readonly AvaloniaProperty<XContainer> ContainerProperty =
-            AvaloniaProperty.Register<ContainerViewControl, XContainer>(nameof(Container));
+        public static readonly AvaloniaProperty<PageContainer> ContainerProperty =
+            AvaloniaProperty.Register<ContainerViewControl, PageContainer>(nameof(Container));
 
         /// <summary>
         /// Gets or sets renderer property.
@@ -33,7 +33,7 @@ namespace Core2D.Avalonia.Views
         /// <summary>
         /// Gets or sets container property.
         /// </summary>
-        public XContainer Container
+        public PageContainer Container
         {
             get { return GetValue(ContainerProperty); }
             set { SetValue(ContainerProperty, value); }

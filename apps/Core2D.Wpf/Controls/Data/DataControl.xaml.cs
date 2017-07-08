@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Core2D.Data;
-using Core2D.Data.Database;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -32,7 +31,7 @@ namespace Core2D.Wpf.Controls.Data
             this.DragEnter +=
                 (s, e) =>
                 {
-                    if (!e.Data.GetDataPresent(typeof(XRecord)))
+                    if (!e.Data.GetDataPresent(typeof(Record)))
                     {
                         e.Effects = DragDropEffects.None;
                         e.Handled = true;
@@ -42,15 +41,15 @@ namespace Core2D.Wpf.Controls.Data
             this.Drop +=
                 (s, e) =>
                 {
-                    if (e.Data.GetDataPresent(typeof(XRecord)))
+                    if (e.Data.GetDataPresent(typeof(Record)))
                     {
                         try
                         {
-                            if (e.Data.GetData(typeof(XRecord)) is XRecord record)
+                            if (e.Data.GetData(typeof(Record)) is Record record)
                             {
                                 if (this.DataContext != null)
                                 {
-                                    if (this.DataContext is XContext data)
+                                    if (this.DataContext is Core2D.Data.Context data)
                                     {
                                         data.Record = record;
                                     }

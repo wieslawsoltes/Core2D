@@ -8,14 +8,14 @@ using System.Windows.Controls;
 namespace Core2D.Wpf.Controls.Custom.Lists
 {
     /// <summary>
-    /// The <see cref="ListBox"/> control for <see cref="XLayer"/> items with drag and drop support.
+    /// The <see cref="ListBox"/> control for <see cref="LayerContainer"/> items with drag and drop support.
     /// </summary>
-    public class XLayerDragAndDropListBox : DragAndDropListBox<XLayer>
+    public class LayerContainerDragAndDropListBox : DragAndDropListBox<LayerContainer>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="XLayerDragAndDropListBox"/> class.
+        /// Initializes a new instance of the <see cref="LayerContainerDragAndDropListBox"/> class.
         /// </summary>
-        public XLayerDragAndDropListBox()
+        public LayerContainerDragAndDropListBox()
             : base()
         {
             this.Initialized += (s, e) => base.Initialize();
@@ -25,7 +25,7 @@ namespace Core2D.Wpf.Controls.Custom.Lists
         /// Updates DataContext binding to ImmutableArray collection property.
         /// </summary>
         /// <param name="array">The updated immutable array.</param>
-        protected override void UpdateDataContext(ImmutableArray<XLayer> array)
+        protected override void UpdateDataContext(ImmutableArray<LayerContainer> array)
         {
             var editor = (ProjectEditor)this.Tag;
 

@@ -10,16 +10,16 @@ using Microsoft.Win32;
 namespace Core2D.Wpf.Commands
 {
     /// <inheritdoc/>
-    public class ImportDataCommand : Command<XProject>, IImportDataCommand
+    public class ImportDataCommand : Command<ProjectContainer>, IImportDataCommand
     {
         /// <inheritdoc/>
-        public override bool CanRun(XProject project)
+        public override bool CanRun(ProjectContainer project)
         {
             return ServiceProvider.GetService<ProjectEditor>().IsEditMode();
         }
 
         /// <inheritdoc/>
-        public override void Run(XProject project)
+        public override void Run(ProjectContainer project)
         {
             var dlg = new OpenFileDialog()
             {

@@ -54,7 +54,7 @@ namespace Core2D.Wpf.Controls.Project
                             {
                                 if (pointShape.DataContext != null)
                                 {
-                                    if (pointShape.DataContext is XOptions options)
+                                    if (pointShape.DataContext is Options options)
                                     {
                                         options.PointShape = shape;
                                     }
@@ -95,7 +95,7 @@ namespace Core2D.Wpf.Controls.Project
                             {
                                 if (pointStyle.DataContext != null)
                                 {
-                                    if (pointStyle.DataContext is XOptions options)
+                                    if (pointStyle.DataContext is Options options)
                                     {
                                         options.PointStyle = style;
                                     }
@@ -136,7 +136,7 @@ namespace Core2D.Wpf.Controls.Project
                             {
                                 if (selectionStyle.DataContext != null)
                                 {
-                                    if (selectionStyle.DataContext is XOptions options)
+                                    if (selectionStyle.DataContext is Options options)
                                     {
                                         options.SelectionStyle = style;
                                     }
@@ -177,7 +177,7 @@ namespace Core2D.Wpf.Controls.Project
                             {
                                 if (helperStyle.DataContext != null)
                                 {
-                                    if (helperStyle.DataContext is XOptions options)
+                                    if (helperStyle.DataContext is Options options)
                                     {
                                         options.HelperStyle = style;
                                     }

@@ -6,14 +6,14 @@ using Core2D.Editor.Input;
 namespace Core2D.Editor.Commands
 {
     /// <inheritdoc/>
-    public class AddPropertyCommand : Command<XContext>, IAddPropertyCommand
+    public class AddPropertyCommand : Command<Data.Context>, IAddPropertyCommand
     {
         /// <inheritdoc/>
-        public override bool CanRun(XContext data)
+        public override bool CanRun(Data.Context data)
             => ServiceProvider.GetService<ProjectEditor>().IsEditMode();
 
         /// <inheritdoc/>
-        public override void Run(XContext data)
+        public override void Run(Data.Context data)
             => ServiceProvider.GetService<ProjectEditor>().OnAddProperty(data);
     }
 }

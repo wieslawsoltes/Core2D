@@ -7,14 +7,14 @@ using Core2D.Shapes;
 namespace Core2D.Editor.Commands
 {
     /// <inheritdoc/>
-    public class AddGroupCommand : Command<XLibrary<XGroup>>, IAddGroupCommand
+    public class AddGroupCommand : Command<Library<GroupShape>>, IAddGroupCommand
     {
         /// <inheritdoc/>
-        public override bool CanRun(XLibrary<XGroup> library)
+        public override bool CanRun(Library<GroupShape> library)
             => ServiceProvider.GetService<ProjectEditor>().IsEditMode();
 
         /// <inheritdoc/>
-        public override void Run(XLibrary<XGroup> library)
+        public override void Run(Library<GroupShape> library)
             => ServiceProvider.GetService<ProjectEditor>().OnAddGroup(library);
     }
 }

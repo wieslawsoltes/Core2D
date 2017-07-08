@@ -34,17 +34,17 @@ namespace Core2D.Editor.Tools
         /// <summary>
         /// Gets or sets current path.
         /// </summary>
-        internal XPath Path { get; set; }
+        internal PathShape Path { get; set; }
 
         /// <summary>
         /// Gets or sets current geometry.
         /// </summary>
-        internal XPathGeometry Geometry { get; set; }
+        internal PathGeometry Geometry { get; set; }
 
         /// <summary>
         /// Gets or sets current geometry context.
         /// </summary>
-        internal XGeometryContext GeometryContext { get; set; }
+        internal GeometryContext GeometryContext { get; set; }
 
         /// <summary>
         /// Gets or sets previous path tool.
@@ -80,10 +80,10 @@ namespace Core2D.Editor.Tools
         }
 
         /// <summary>
-        /// Remove last <see cref="XPathSegment"/> segment from the previous figure.
+        /// Remove last <see cref="PathSegment"/> segment from the previous figure.
         /// </summary>
         /// <typeparam name="T">The type of the path segment to remove.</typeparam>
-        public void RemoveLastSegment<T>() where T : XPathSegment
+        public void RemoveLastSegment<T>() where T : PathSegment
         {
             var figure = Geometry.Figures.LastOrDefault();
             if (figure != null)
@@ -102,22 +102,22 @@ namespace Core2D.Editor.Tools
         {
             if (PreviousPathTool == _pathToolLine)
             {
-                RemoveLastSegment<XLineSegment>();
+                RemoveLastSegment<LineSegment>();
                 _pathToolLine.Remove();
             }
             else if (PreviousPathTool == _pathToolArc)
             {
-                RemoveLastSegment<XArcSegment>();
+                RemoveLastSegment<ArcSegment>();
                 _pathToolArc.Remove();
             }
             else if (PreviousPathTool == _pathToolCubicBezier)
             {
-                RemoveLastSegment<XCubicBezierSegment>();
+                RemoveLastSegment<CubicBezierSegment>();
                 _pathToolCubicBezier.Remove();
             }
             else if (PreviousPathTool == _pathToolQuadraticBezier)
             {
-                RemoveLastSegment<XQuadraticBezierSegment>();
+                RemoveLastSegment<QuadraticBezierSegment>();
                 _pathToolQuadraticBezier.Remove();
             }
 
@@ -130,20 +130,20 @@ namespace Core2D.Editor.Tools
         /// Gets last point in the current path.
         /// </summary>
         /// <returns>The last path point.</returns>
-        public XPoint GetLastPathPoint()
+        public PointShape GetLastPathPoint()
         {
             var figure = Geometry.Figures.LastOrDefault();
             if (figure != null)
             {
                 switch (figure.Segments.LastOrDefault())
                 {
-                    case XLineSegment line:
+                    case LineSegment line:
                         return line.Point;
-                    case XArcSegment arc:
+                    case ArcSegment arc:
                         return arc.Point;
-                    case XCubicBezierSegment cubic:
+                    case CubicBezierSegment cubic:
                         return cubic.Point3;
-                    case XQuadraticBezierSegment quadratic:
+                    case QuadraticBezierSegment quadratic:
                         return quadratic.Point2;
                     default:
                     case null:
@@ -157,15 +157,15 @@ namespace Core2D.Editor.Tools
         /// Initializes working path.
         /// </summary>
         /// <param name="start">The path start point.</param>
-        public void InitializeWorkingPath(XPoint start)
+        public void InitializeWorkingPath(PointShape start)
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
 
-            Geometry = XPathGeometry.Create(
-                ImmutableArray.Create<XPathFigure>(),
+            Geometry = PathGeometry.Create(
+                ImmutableArray.Create<PathFigure>(),
                 editor.Project.Options.DefaultFillRule);
 
-            GeometryContext = new XPathGeometryContext(Geometry);
+            GeometryContext = new PathGeometryContext(Geometry);
 
             GeometryContext.BeginFigure(
                 start,
@@ -173,7 +173,7 @@ namespace Core2D.Editor.Tools
                 editor.Project.Options.DefaultIsClosed);
 
             var style = editor.Project.CurrentStyleLibrary.Selected;
-            Path = XPath.Create(
+            Path = PathShape.Create(
                 "Path",
                 editor.Project.Options.CloneStyle ? style.Clone() : style,
                 Geometry,

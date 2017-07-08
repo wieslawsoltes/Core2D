@@ -8,16 +8,16 @@ using Core2D.Style;
 namespace Core2D.Editor.Tools.Selection
 {
     /// <summary>
-    /// Helper class for <see cref="XEllipse"/> shape selection.
+    /// Helper class for <see cref="EllipseShape"/> shape selection.
     /// </summary>
     public class ToolEllipseSelection
     {
-        private readonly XLayer _layer;
-        private readonly XEllipse _ellipse;
+        private readonly LayerContainer _layer;
+        private readonly EllipseShape _ellipse;
         private readonly ShapeStyle _style;
         private readonly BaseShape _point;
-        private XPoint _topLeftHelperPoint;
-        private XPoint _bottomRightHelperPoint;
+        private PointShape _topLeftHelperPoint;
+        private PointShape _bottomRightHelperPoint;
 
         /// <summary>
         /// Initialize new instance of <see cref="ToolEllipseSelection"/> class.
@@ -26,7 +26,7 @@ namespace Core2D.Editor.Tools.Selection
         /// <param name="shape">The selected shape.</param>
         /// <param name="style">The selection shapes style.</param>
         /// <param name="point">The selection point shape.</param>
-        public ToolEllipseSelection(XLayer layer, XEllipse shape, ShapeStyle style, BaseShape point)
+        public ToolEllipseSelection(LayerContainer layer, EllipseShape shape, ShapeStyle style, BaseShape point)
         {
             _layer = layer;
             _ellipse = shape;
@@ -39,8 +39,8 @@ namespace Core2D.Editor.Tools.Selection
         /// </summary>
         public void ToStateBottomRight()
         {
-            _topLeftHelperPoint = XPoint.Create(0, 0, _point);
-            _bottomRightHelperPoint = XPoint.Create(0, 0, _point);
+            _topLeftHelperPoint = PointShape.Create(0, 0, _point);
+            _bottomRightHelperPoint = PointShape.Create(0, 0, _point);
 
             _layer.Shapes = _layer.Shapes.Add(_topLeftHelperPoint);
             _layer.Shapes = _layer.Shapes.Add(_bottomRightHelperPoint);

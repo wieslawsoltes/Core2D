@@ -33,7 +33,7 @@ namespace Core2D.SkiaViewNoAutofac
             _element.PaintSurface += PaintSurface;
         }
 
-        public override void GetOffset(XContainer container, out double offsetX, out double offsetY)
+        public override void GetOffset(PageContainer container, out double offsetX, out double offsetY)
         {
             var visual = _element;
             var matrix = PresentationSource.FromVisual(visual).CompositionTarget.TransformToDevice;

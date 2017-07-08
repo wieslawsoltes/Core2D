@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Core2D.Data.Database;
+using Core2D.Data;
 using Core2D.Interfaces;
 using System.Collections.Generic;
 using System.Globalization;
@@ -10,9 +10,9 @@ using CSV = CsvHelper;
 namespace Core2D.TextFieldReader.CsvHelper
 {
     /// <summary>
-    /// Defines the text fields to <see cref="XDatabase"/> reader.
+    /// Defines the text fields to <see cref="Database"/> reader.
     /// </summary>
-    public sealed class CsvHelperReader : ITextFieldReader<XDatabase>
+    public sealed class CsvHelperReader : ITextFieldReader<Database>
     {
         private static IEnumerable<string[]> ReadInternal(System.IO.Stream stream)
         {
@@ -42,14 +42,14 @@ namespace Core2D.TextFieldReader.CsvHelper
         /// </summary>
         /// <param name="path">The fields file path.</param>
         /// <param name="fs">The file system.</param>
-        /// <returns>The new instance of the <see cref="XDatabase"/> class</returns>
-        XDatabase ITextFieldReader<XDatabase>.Read(string path, IFileSystem fs)
+        /// <returns>The new instance of the <see cref="Database"/> class</returns>
+        Database ITextFieldReader<Database>.Read(string path, IFileSystem fs)
         {
             using (System.IO.Stream stream = fs.Open(path))
             {
                 var fields = ReadInternal(stream).ToList();
                 var name = System.IO.Path.GetFileNameWithoutExtension(path);
-                return XDatabase.FromFields(name, fields);
+                return Database.FromFields(name, fields);
             }
         }
     }

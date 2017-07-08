@@ -83,7 +83,7 @@ namespace Core2D.Renderer.Dxf
             };
         }
 
-        private Ellipse CreateEllipticalArc(Core2D.Shapes.XArc arc, double dx, double dy)
+        private Ellipse CreateEllipticalArc(Core2D.Shapes.ArcShape arc, double dx, double dy)
         {
             var a = new Spatial.Arc.GdiArc(
                 Spatial.Point2.FromXY(arc.Point1.X, arc.Point1.Y),
@@ -295,7 +295,7 @@ namespace Core2D.Renderer.Dxf
             }
         }
 
-        private void CreateHatchBoundsAndEntitiess(Core2D.Path.XPathGeometry pg, double dx, double dy, out IList<HatchBoundaryPath> bounds, out ICollection<EntityObject> entities)
+        private void CreateHatchBoundsAndEntitiess(Core2D.Path.PathGeometry pg, double dx, double dy, out IList<HatchBoundaryPath> bounds, out ICollection<EntityObject> entities)
         {
             bounds = new List<HatchBoundaryPath>();
             entities = new List<EntityObject>();
@@ -309,16 +309,16 @@ namespace Core2D.Renderer.Dxf
 
                 foreach (var segment in pf.Segments)
                 {
-                    if (segment is Core2D.Path.Segments.XArcSegment)
+                    if (segment is Core2D.Path.Segments.ArcSegment)
                     {
                         throw new NotSupportedException("Not supported segment type: " + segment.GetType());
-                        //var arcSegment = segment as XArcSegment;
+                        //var arcSegment = segment as ArcSegment;
                         // TODO: Convert WPF/SVG elliptical arc segment format to DXF ellipse arc.
                         //startPoint = arcSegment.Point;
                     }
-                    else if (segment is Core2D.Path.Segments.XCubicBezierSegment)
+                    else if (segment is Core2D.Path.Segments.CubicBezierSegment)
                     {
-                        var cubicBezierSegment = segment as Core2D.Path.Segments.XCubicBezierSegment;
+                        var cubicBezierSegment = segment as Core2D.Path.Segments.CubicBezierSegment;
                         var dxfSpline = CreateCubicSpline(
                             startPoint.X + dx,
                             startPoint.Y + dy,
@@ -332,9 +332,9 @@ namespace Core2D.Renderer.Dxf
                         entities.Add((Spline)dxfSpline.Clone());
                         startPoint = cubicBezierSegment.Point3;
                     }
-                    else if (segment is Core2D.Path.Segments.XLineSegment)
+                    else if (segment is Core2D.Path.Segments.LineSegment)
                     {
-                        var lineSegment = segment as Core2D.Path.Segments.XLineSegment;
+                        var lineSegment = segment as Core2D.Path.Segments.LineSegment;
                         var dxfLine = CreateLine(
                             startPoint.X + dx,
                             startPoint.Y + dy,
@@ -344,9 +344,9 @@ namespace Core2D.Renderer.Dxf
                         entities.Add((Line)dxfLine.Clone());
                         startPoint = lineSegment.Point;
                     }
-                    else if (segment is Core2D.Path.Segments.XPolyCubicBezierSegment)
+                    else if (segment is Core2D.Path.Segments.PolyCubicBezierSegment)
                     {
-                        var polyCubicBezierSegment = segment as Core2D.Path.Segments.XPolyCubicBezierSegment;
+                        var polyCubicBezierSegment = segment as Core2D.Path.Segments.PolyCubicBezierSegment;
                         if (polyCubicBezierSegment.Points.Length >= 3)
                         {
                             var dxfSpline = CreateCubicSpline(
@@ -383,9 +383,9 @@ namespace Core2D.Renderer.Dxf
 
                         startPoint = polyCubicBezierSegment.Points.Last();
                     }
-                    else if (segment is Core2D.Path.Segments.XPolyLineSegment)
+                    else if (segment is Core2D.Path.Segments.PolyLineSegment)
                     {
-                        var polyLineSegment = segment as Core2D.Path.Segments.XPolyLineSegment;
+                        var polyLineSegment = segment as Core2D.Path.Segments.PolyLineSegment;
                         if (polyLineSegment.Points.Length >= 1)
                         {
                             var dxfLine = CreateLine(
@@ -413,9 +413,9 @@ namespace Core2D.Renderer.Dxf
 
                         startPoint = polyLineSegment.Points.Last();
                     }
-                    else if (segment is Core2D.Path.Segments.XPolyQuadraticBezierSegment)
+                    else if (segment is Core2D.Path.Segments.PolyQuadraticBezierSegment)
                     {
-                        var polyQuadraticSegment = segment as Core2D.Path.Segments.XPolyQuadraticBezierSegment;
+                        var polyQuadraticSegment = segment as Core2D.Path.Segments.PolyQuadraticBezierSegment;
                         if (polyQuadraticSegment.Points.Length >= 2)
                         {
                             var dxfSpline = CreateQuadraticSpline(
@@ -448,9 +448,9 @@ namespace Core2D.Renderer.Dxf
 
                         startPoint = polyQuadraticSegment.Points.Last();
                     }
-                    else if (segment is Core2D.Path.Segments.XQuadraticBezierSegment)
+                    else if (segment is Core2D.Path.Segments.QuadraticBezierSegment)
                     {
-                        var quadraticBezierSegment = segment as Core2D.Path.Segments.XQuadraticBezierSegment;
+                        var quadraticBezierSegment = segment as Core2D.Path.Segments.QuadraticBezierSegment;
                         var dxfSpline = CreateQuadraticSpline(
                             startPoint.X + dx,
                             startPoint.Y + dy,
@@ -506,7 +506,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.Project.XContainer container, double dx, double dy, object db, object r)
+        public override void Draw(object dc, Core2D.Project.PageContainer container, double dx, double dy, object db, object r)
         {
             var dxf = dc as DxfDocument;
 
@@ -526,7 +526,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.Project.XLayer layer, double dx, double dy, object db, object r)
+        public override void Draw(object dc, Core2D.Project.LayerContainer layer, double dx, double dy, object db, object r)
         {
             var dxf = dc as DxfDocument;
 
@@ -540,7 +540,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.Shapes.XLine line, double dx, double dy, object db, object r)
+        public override void Draw(object dc, Core2D.Shapes.LineShape line, double dx, double dy, object db, object r)
         {
             if (!line.IsStroked)
                 return;
@@ -552,7 +552,7 @@ namespace Core2D.Renderer.Dxf
             double _x2 = line.End.X + dx;
             double _y2 = line.End.Y + dy;
 
-            Core2D.Shapes.XLineExtensions.GetMaxLength(line, ref _x1, ref _y1, ref _x2, ref _y2);
+            Core2D.Shapes.LineShapeExtensions.GetMaxLength(line, ref _x1, ref _y1, ref _x2, ref _y2);
 
             // TODO: Draw line start arrow.
 
@@ -564,7 +564,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.Shapes.XRectangle rectangle, double dx, double dy, object db, object r)
+        public override void Draw(object dc, Core2D.Shapes.RectangleShape rectangle, double dx, double dy, object db, object r)
         {
             if (!rectangle.IsStroked && !rectangle.IsFilled && !rectangle.IsGrid)
                 return;
@@ -593,7 +593,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.Shapes.XEllipse ellipse, double dx, double dy, object db, object r)
+        public override void Draw(object dc, Core2D.Shapes.EllipseShape ellipse, double dx, double dy, object db, object r)
         {
             if (!ellipse.IsStroked && !ellipse.IsFilled)
                 return;
@@ -611,7 +611,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.Shapes.XArc arc, double dx, double dy, object db, object r)
+        public override void Draw(object dc, Core2D.Shapes.ArcShape arc, double dx, double dy, object db, object r)
         {
             var dxf = dc as DxfDocument;
             var style = arc.Style;
@@ -658,7 +658,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.Shapes.XCubicBezier cubicBezier, double dx, double dy, object db, object r)
+        public override void Draw(object dc, Core2D.Shapes.CubicBezierShape cubicBezier, double dx, double dy, object db, object r)
         {
             if (!cubicBezier.IsStroked && !cubicBezier.IsFilled)
                 return;
@@ -715,7 +715,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.Shapes.XQuadraticBezier quadraticBezier, double dx, double dy, object db, object r)
+        public override void Draw(object dc, Core2D.Shapes.QuadraticBezierShape quadraticBezier, double dx, double dy, object db, object r)
         {
             if (!quadraticBezier.IsStroked && !quadraticBezier.IsFilled)
                 return;
@@ -770,12 +770,12 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.Shapes.XText text, double dx, double dy, object db, object r)
+        public override void Draw(object dc, Core2D.Shapes.TextShape text, double dx, double dy, object db, object r)
         {
             var dxf = dc as DxfDocument;
 
-            var properties = (ImmutableArray<Data.XProperty>)db;
-            var record = (Data.Database.XRecord)r;
+            var properties = (ImmutableArray<Data.Property>)db;
+            var record = (Data.Record)r;
             var tbind = text.BindText(properties, record);
             if (string.IsNullOrEmpty(tbind))
                 return;
@@ -901,7 +901,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.Shapes.XImage image, double dx, double dy, object db, object r)
+        public override void Draw(object dc, Core2D.Shapes.ImageShape image, double dx, double dy, object db, object r)
         {
             var dxf = dc as DxfDocument;
 
@@ -947,7 +947,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.Shapes.XPath path, double dx, double dy, object db, object r)
+        public override void Draw(object dc, Core2D.Shapes.PathShape path, double dx, double dy, object db, object r)
         {
             if (!path.IsStroked && !path.IsFilled)
                 return;

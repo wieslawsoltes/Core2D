@@ -16,7 +16,7 @@ namespace Core2D.Editor.Tools
         private readonly IServiceProvider _serviceProvider;
         private ToolSettingsPoint _settings;
         private State _currentState = State.Point;
-        private XPoint _point;
+        private PointShape _point;
 
         /// <inheritdoc/>
         public override string Title => "Point";
@@ -50,7 +50,7 @@ namespace Core2D.Editor.Tools
             {
                 case State.Point:
                     {
-                        _point = XPoint.Create(sx, sy, editor.Project.Options.PointShape);
+                        _point = PointShape.Create(sx, sy, editor.Project.Options.PointShape);
 
                         if (editor.Project.Options.TryToConnect)
                         {

@@ -13,7 +13,7 @@ namespace Core2D.Renderer.PdfSharp
     public partial class PdfSharpRenderer : Core2D.Renderer.ShapeRenderer, Core2D.Interfaces.IProjectExporter
     {
         /// <inheritdoc/>
-        void Core2D.Interfaces.IProjectExporter.Save(string path, Core2D.Project.XContainer container)
+        void Core2D.Interfaces.IProjectExporter.Save(string path, Core2D.Project.PageContainer container)
         {
             using (var pdf = new PdfDocument())
             {
@@ -23,7 +23,7 @@ namespace Core2D.Renderer.PdfSharp
         }
 
         /// <inheritdoc/>
-        void Core2D.Interfaces.IProjectExporter.Save(string path, Core2D.Project.XDocument document)
+        void Core2D.Interfaces.IProjectExporter.Save(string path, Core2D.Project.DocumentContainer document)
         {
             using (var pdf = new PdfDocument())
             {
@@ -57,7 +57,7 @@ namespace Core2D.Renderer.PdfSharp
         }
 
         /// <inheritdoc/>
-        void Core2D.Interfaces.IProjectExporter.Save(string path, Core2D.Project.XProject project)
+        void Core2D.Interfaces.IProjectExporter.Save(string path, Core2D.Project.ProjectContainer project)
         {
             using (var pdf = new PdfDocument())
             {
@@ -105,7 +105,7 @@ namespace Core2D.Renderer.PdfSharp
             }
         }
 
-        private PdfPage Add(PdfDocument pdf, Core2D.Project.XContainer container)
+        private PdfPage Add(PdfDocument pdf, Core2D.Project.PageContainer container)
         {
             // Create A3 page size with Landscape orientation.
             PdfPage pdfPage = pdf.AddPage();
@@ -129,10 +129,10 @@ namespace Core2D.Renderer.PdfSharp
                 }
 
                 // Draw template contents to pdf graphics.
-                Draw(gfx, container.Template, 0.0, 0.0, container.Data.Properties, container.Data.Record);
+                base.Draw(gfx, container.Template, 0.0, 0.0, (object)container.Data.Properties, (object)container.Data.Record);
 
                 // Draw page contents to pdf graphics.
-                Draw(gfx, container, 0.0, 0.0, container.Data.Properties, container.Data.Record);
+                base.Draw(gfx, container, 0.0, 0.0, (object)container.Data.Properties, (object)container.Data.Record);
             }
 
             return pdfPage;

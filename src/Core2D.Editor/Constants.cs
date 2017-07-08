@@ -1,10 +1,5 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Core2D.Data;
-using Core2D.Data.Database;
-using Core2D.Project;
-using Core2D.Shapes;
-using Core2D.Style;
 
 namespace Core2D.Editor
 {
@@ -14,37 +9,37 @@ namespace Core2D.Editor
     public static class Constants
     {
         /// <summary>
-        /// Default <see cref="XLayer"/> name.
+        /// Default <see cref="Core2D.Project.LayerContainer"/> name.
         /// </summary>
         public const string DefaultLayerName = "Layer";
 
         /// <summary>
-        /// Default <see cref="XContainer"/> template name.
+        /// Default <see cref="Core2D.Project.PageContainer"/> template name.
         /// </summary>
         public const string DefaultTemplateName = "Template";
 
         /// <summary>
-        /// Default <see cref="XContainer"/> page name.
+        /// Default <see cref="Core2D.Project.PageContainer"/> page name.
         /// </summary>
         public const string DefaultPageName = "Page";
 
         /// <summary>
-        /// Default <see cref="XDocument"/> name.
+        /// Default <see cref="Core2D.Project.DocumentContainer"/> name.
         /// </summary>
         public const string DefaultDocumentName = "Document";
 
         /// <summary>
-        /// Default <see cref="XDatabase"/> name.
+        /// Default <see cref="Core2D.Data.Database"/> name.
         /// </summary>
         public const string DefaultDatabaseName = "Db";
 
         /// <summary>
-        /// Default <see cref="XColumn"/> name.
+        /// Default <see cref="Core2D.Data.Column"/> name.
         /// </summary>
         public const string DefaulColumnName = "Column";
 
         /// <summary>
-        /// Default <see cref="XProperty"/> name.
+        /// Default <see cref="Core2D.Data.Property"/> name.
         /// </summary>
         public const string DefaulPropertyName = "Property";
 
@@ -54,32 +49,32 @@ namespace Core2D.Editor
         public const string DefaulValue = "<empty>";
 
         /// <summary>
-        /// Default <see cref="XLibrary{XGroup}"/> name.
+        /// Default <see cref="Core2D.Project.Library{GroupShape}"/> name.
         /// </summary>
         public const string DefaulGroupLibraryName = "Groups";
 
         /// <summary>
-        /// Default <see cref="XGroup"/> name.
+        /// Default <see cref="Core2D.Shapes.GroupShape"/> name.
         /// </summary>
         public const string DefaulGroupName = "Group";
 
         /// <summary>
-        /// Default <see cref="XLibrary{ShapeStyle}"/> name.
+        /// Default <see cref="Core2D.Project.Library{ShapeStyle}"/> name.
         /// </summary>
         public const string DefaulStyleLibraryName = "Styles";
 
         /// <summary>
-        /// Default <see cref="ShapeStyle"/> name.
+        /// Default <see cref="Core2D.Style.ShapeStyle"/> name.
         /// </summary>
         public const string DefaulStyleName = "Style";
 
         /// <summary>
-        /// Default imported <see cref="XLibrary{ShapeStyle}"/> name.
+        /// Default imported <see cref="Core2D.Project.Library{ShapeStyle}"/> name.
         /// </summary>
         public const string ImportedStyleLibraryName = "Imported";
 
         /// <summary>
-        /// Default imported <see cref="XDatabase"/> name.
+        /// Default imported <see cref="Core2D.Data.Database"/> name.
         /// </summary>
         public const string ImportedDatabaseName = "Imported";
 

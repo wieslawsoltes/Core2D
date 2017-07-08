@@ -13,9 +13,9 @@ using Core2D.Path.Parser;
 namespace Core2D.Serializer.Xaml.Converters
 {
     /// <summary>
-    /// Defines <see cref="XPathGeometry"/> type converter.
+    /// Defines <see cref="PathGeometry"/> type converter.
     /// </summary>
-    internal class XPathGeometryTypeConverter : TypeConverter
+    internal class PathGeometryTypeConverter : TypeConverter
     {
         /// <inheritdoc/>
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
@@ -32,13 +32,13 @@ namespace Core2D.Serializer.Xaml.Converters
         /// <inheritdoc/>
         public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
         {
-            return XPathGeometryParser.Parse((string)value);
+            return PathGeometryParser.Parse((string)value);
         }
 
         /// <inheritdoc/>
         public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
         {
-            return value is XPathGeometry geometry ? geometry.ToString() : throw new NotSupportedException();
+            return value is PathGeometry geometry ? geometry.ToString() : throw new NotSupportedException();
         }
     }
 }

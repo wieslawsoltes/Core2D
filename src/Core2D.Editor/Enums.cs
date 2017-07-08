@@ -18,9 +18,9 @@ namespace Core2D.Editor
         private static ArrowType[] _arrowTypeValues = (ArrowType[])Enum.GetValues(typeof(ArrowType));
         private static TextHAlignment[] _textHAlignmentValues = (TextHAlignment[])Enum.GetValues(typeof(TextHAlignment));
         private static TextVAlignment[] _textVAlignmentValues = (TextVAlignment[])Enum.GetValues(typeof(TextVAlignment));
-        private static XMoveMode[] _moveModeValues = (XMoveMode[])Enum.GetValues(typeof(XMoveMode));
-        private static XFillRule[] _xFillRuleValues = (XFillRule[])Enum.GetValues(typeof(XFillRule));
-        private static XSweepDirection[] _xSweepDirectionValues = (XSweepDirection[])Enum.GetValues(typeof(XSweepDirection));
+        private static MoveMode[] _moveModeValues = (MoveMode[])Enum.GetValues(typeof(MoveMode));
+        private static FillRule[] _xFillRuleValues = (FillRule[])Enum.GetValues(typeof(FillRule));
+        private static SweepDirection[] _xSweepDirectionValues = (SweepDirection[])Enum.GetValues(typeof(SweepDirection));
         private static PointAlignment[] _pointAlignmentValues = (PointAlignment[])Enum.GetValues(typeof(PointAlignment));
 
         /// <summary>
@@ -49,19 +49,19 @@ namespace Core2D.Editor
         public static TextVAlignment[] TextVAlignmentValues => _textVAlignmentValues;
 
         /// <summary>
-        /// The <see cref="XMoveMode"/> enum values.
+        /// The <see cref="MoveMode"/> enum values.
         /// </summary>
-        public static XMoveMode[] MoveModeValues => _moveModeValues;
+        public static MoveMode[] MoveModeValues => _moveModeValues;
 
         /// <summary>
-        /// The <see cref="XFillRule"/> enum values.
+        /// The <see cref="FillRule"/> enum values.
         /// </summary>
-        public static XFillRule[] XFillRuleValues => _xFillRuleValues;
+        public static FillRule[] XFillRuleValues => _xFillRuleValues;
 
         /// <summary>
-        /// The <see cref="XSweepDirection"/> enum values.
+        /// The <see cref="SweepDirection"/> enum values.
         /// </summary>
-        public static XSweepDirection[] XSweepDirectionValues => _xSweepDirectionValues;
+        public static SweepDirection[] XSweepDirectionValues => _xSweepDirectionValues;
 
         /// <summary>
         /// The <see cref="PointAlignment"/> enum values.

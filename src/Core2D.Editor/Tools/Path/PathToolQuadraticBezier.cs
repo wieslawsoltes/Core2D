@@ -21,7 +21,7 @@ namespace Core2D.Editor.Tools.Path
         private readonly IServiceProvider _serviceProvider;
         private PathToolSettingsQuadraticBezier _settings;
         private State _currentState = State.Point1;
-        private XPathQuadraticBezier _quadraticBezier = new XPathQuadraticBezier();
+        private PathShapeQuadraticBezier _quadraticBezier = new PathShapeQuadraticBezier();
         private ToolQuadraticBezierSelection _selection;
 
         /// <inheritdoc/>
@@ -57,7 +57,7 @@ namespace Core2D.Editor.Tools.Path
             {
                 case State.Point1:
                     {
-                        _quadraticBezier.Point1 = editor.TryToGetConnectionPoint(sx, sy) ?? XPoint.Create(sx, sy, editor.Project.Options.PointShape);
+                        _quadraticBezier.Point1 = editor.TryToGetConnectionPoint(sx, sy) ?? PointShape.Create(sx, sy, editor.Project.Options.PointShape);
                         if (!pathTool.IsInitialized)
                         {
                             pathTool.InitializeWorkingPath(_quadraticBezier.Point1);
@@ -67,8 +67,8 @@ namespace Core2D.Editor.Tools.Path
                             _quadraticBezier.Point1 = pathTool.GetLastPathPoint();
                         }
 
-                        _quadraticBezier.Point2 = XPoint.Create(sx, sy, editor.Project.Options.PointShape);
-                        _quadraticBezier.Point3 = XPoint.Create(sx, sy, editor.Project.Options.PointShape);
+                        _quadraticBezier.Point2 = PointShape.Create(sx, sy, editor.Project.Options.PointShape);
+                        _quadraticBezier.Point3 = PointShape.Create(sx, sy, editor.Project.Options.PointShape);
                         pathTool.GeometryContext.QuadraticBezierTo(
                             _quadraticBezier.Point2,
                             _quadraticBezier.Point3,
@@ -91,7 +91,7 @@ namespace Core2D.Editor.Tools.Path
                             if (point2 != null)
                             {
                                 var figure = pathTool.Geometry.Figures.LastOrDefault();
-                                var quadraticBezier = figure.Segments.LastOrDefault() as XQuadraticBezierSegment;
+                                var quadraticBezier = figure.Segments.LastOrDefault() as QuadraticBezierSegment;
                                 quadraticBezier.Point2 = point2;
                                 _quadraticBezier.Point3 = point2;
                             }
@@ -112,15 +112,15 @@ namespace Core2D.Editor.Tools.Path
                             if (point1 != null)
                             {
                                 var figure = pathTool.Geometry.Figures.LastOrDefault();
-                                var quadraticBezier = figure.Segments.LastOrDefault() as XQuadraticBezierSegment;
+                                var quadraticBezier = figure.Segments.LastOrDefault() as QuadraticBezierSegment;
                                 quadraticBezier.Point1 = point1;
                                 _quadraticBezier.Point2 = point1;
                             }
                         }
 
                         _quadraticBezier.Point1 = _quadraticBezier.Point3;
-                        _quadraticBezier.Point2 = XPoint.Create(sx, sy, editor.Project.Options.PointShape);
-                        _quadraticBezier.Point3 = XPoint.Create(sx, sy, editor.Project.Options.PointShape);
+                        _quadraticBezier.Point2 = PointShape.Create(sx, sy, editor.Project.Options.PointShape);
+                        _quadraticBezier.Point3 = PointShape.Create(sx, sy, editor.Project.Options.PointShape);
                         pathTool.GeometryContext.QuadraticBezierTo(
                             _quadraticBezier.Point2,
                             _quadraticBezier.Point3,
@@ -149,7 +149,7 @@ namespace Core2D.Editor.Tools.Path
                 case State.Point3:
                 case State.Point2:
                     {
-                        pathTool.RemoveLastSegment<XQuadraticBezierSegment>();
+                        pathTool.RemoveLastSegment<QuadraticBezierSegment>();
 
                         editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(pathTool.Path);
                         Remove();

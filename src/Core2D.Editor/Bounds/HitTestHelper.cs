@@ -25,7 +25,7 @@ namespace Core2D.Editor.Bounds
             };
         }
 
-        public static void ToConvexHull(IEnumerable<XPoint> points, out int k, out Vector2[] convexHull)
+        public static void ToConvexHull(IEnumerable<PointShape> points, out int k, out Vector2[] convexHull)
         {
             Vector2[] vertices = new Vector2[points.Count()];
             int i = 0;
@@ -37,7 +37,7 @@ namespace Core2D.Editor.Bounds
             MC.ConvexHull(vertices, out convexHull, out k);
         }
 
-        public static bool Contains(IEnumerable<XPoint> points, Point2 point)
+        public static bool Contains(IEnumerable<PointShape> points, Point2 point)
         {
             ToConvexHull(points, out int k, out Vector2[] convexHull);
             bool contains = false;
@@ -52,14 +52,14 @@ namespace Core2D.Editor.Bounds
             return contains;
         }
 
-        public static bool Overlap(IEnumerable<XPoint> points, Vector2[] selection)
+        public static bool Overlap(IEnumerable<PointShape> points, Vector2[] selection)
         {
             ToConvexHull(points, out int k, out Vector2[] convexHull);
             Vector2[] vertices = convexHull.Take(k).ToArray();
             return SAT.Overlap(selection, vertices);
         }
 
-        public static bool Overlap(IEnumerable<XPoint> points, Rect2 rect)
+        public static bool Overlap(IEnumerable<PointShape> points, Rect2 rect)
         {
             return Overlap(points, ToSelection(rect));
         }

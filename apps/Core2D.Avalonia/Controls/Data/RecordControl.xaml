@@ -5,7 +5,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Core2D.Avalonia;assembly=Core2D.Avalonia"
              xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"
-             xmlns:Database="clr-namespace:Core2D.Data.Database;assembly=Core2D"
+             xmlns:Data="clr-namespace:Core2D.Data;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
              Design.DataContext="{Static Designer:DesignerContext.Record}"
              Design.Width="250" Design.Height="400">
@@ -15,7 +15,7 @@
         <TextBlock Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Text="Value" Classes="default"/>
         <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding Owner.Columns}">
             <ItemsControl.DataTemplates>
-                <DataTemplate DataType="Database:XColumn">
+                <DataTemplate DataType="Data:Column">
                     <Grid VerticalAlignment="Top">
                         <TextBox VerticalAlignment="Center" Text="{Binding Name, Mode=TwoWay}" Classes="property"/>
                     </Grid>
@@ -24,7 +24,7 @@
         </ItemsControl>
         <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="1" Items="{Binding Values}">
             <ItemsControl.DataTemplates>
-                <DataTemplate DataType="Database:XValue">
+                <DataTemplate DataType="Data:Value">
                     <Grid VerticalAlignment="Top">
                         <TextBox VerticalAlignment="Center" Text="{Binding Content, Mode=TwoWay}" Classes="property"/>
                     </Grid>

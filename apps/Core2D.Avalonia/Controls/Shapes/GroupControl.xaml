@@ -24,7 +24,7 @@
                             <TextBlock Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Text="Value" Classes="default"/>
                             <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding ShapesProperties}">
                                 <ItemsControl.DataTemplates>
-                                    <DataTemplate DataType="Data:XProperty">
+                                    <DataTemplate DataType="Data:Property">
                                         <Grid VerticalAlignment="Top">
                                             <TextBox VerticalAlignment="Center" Text="{Binding Name, Mode=TwoWay}" Classes="property"/>
                                         </Grid>
@@ -33,7 +33,7 @@
                             </ItemsControl>
                             <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="1" Items="{Binding ShapesProperties}">
                                 <ItemsControl.DataTemplates>
-                                    <DataTemplate DataType="Data:XProperty">
+                                    <DataTemplate DataType="Data:Property">
                                         <Grid VerticalAlignment="Top">
                                             <TextBox VerticalAlignment="Center" Text="{Binding Value, Mode=TwoWay}" Classes="property"/>
                                         </Grid>
@@ -63,7 +63,7 @@
                             <TabItem Header="Connectors" Classes="property">
                                 <ListBox Name="connectors" Items="{Binding Connectors}" Classes="default">
                                     <ListBox.DataTemplates>
-                                        <DataTemplate DataType="Shapes:XPoint">
+                                        <DataTemplate DataType="Shapes:PointShape">
                                             <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="list"/>
                                         </DataTemplate>
                                     </ListBox.DataTemplates>

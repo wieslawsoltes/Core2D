@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Core2D.Data;
-using Core2D.Data.Database;
 using Core2D.Interfaces;
 using Core2D.Project;
 using Core2D.Renderer;
@@ -40,7 +39,7 @@ namespace Core2D.FileWriter.Emf
         /// <param name="record"></param>
         /// <param name="ic"></param>
         /// <returns></returns>
-        public static MemoryStream MakeMetafileStream(Bitmap bitmap, IEnumerable<BaseShape> shapes, ImmutableArray<XProperty> properties, XRecord record, IImageCache ic)
+        public static MemoryStream MakeMetafileStream(Bitmap bitmap, IEnumerable<BaseShape> shapes, ImmutableArray<Property> properties, Record record, IImageCache ic)
         {
             var g = default(Graphics);
             var mf = default(Metafile);
@@ -102,7 +101,7 @@ namespace Core2D.FileWriter.Emf
         /// <param name="container"></param>
         /// <param name="ic"></param>
         /// <returns></returns>
-        public static MemoryStream MakeMetafileStream(Bitmap bitmap, XContainer container, IImageCache ic)
+        public static MemoryStream MakeMetafileStream(Bitmap bitmap, PageContainer container, IImageCache ic)
         {
             var g = default(Graphics);
             var mf = default(Metafile);
@@ -131,8 +130,8 @@ namespace Core2D.FileWriter.Emf
 
                     g.PageUnit = GraphicsUnit.Display;
 
-                    r.Draw(g, container.Template, 0.0, 0.0, container.Data.Properties, container.Data.Record);
-                    r.Draw(g, container, 0.0, 0.0, container.Data.Properties, container.Data.Record);
+                    r.Draw(g, container.Template, 0.0, 0.0, (object)container.Data.Properties, (object)container.Data.Record);
+                    r.Draw(g, container, 0.0, 0.0, (object)container.Data.Properties, (object)container.Data.Record);
 
                     r.ClearCache(isZooming: false);
                 }
@@ -161,7 +160,7 @@ namespace Core2D.FileWriter.Emf
         /// <param name="properties"></param>
         /// <param name="record"></param>
         /// <param name="ic"></param>
-        public static void SetClipboard(IEnumerable<BaseShape> shapes, double width, double height, ImmutableArray<XProperty> properties, XRecord record, IImageCache ic)
+        public static void SetClipboard(IEnumerable<BaseShape> shapes, double width, double height, ImmutableArray<Property> properties, Record record, IImageCache ic)
         {
             try
             {
@@ -187,7 +186,7 @@ namespace Core2D.FileWriter.Emf
         /// </summary>
         /// <param name="container"></param>
         /// <param name="ic"></param>
-        public static void SetClipboard(XContainer container, IImageCache ic)
+        public static void SetClipboard(PageContainer container, IImageCache ic)
         {
             try
             {
@@ -217,7 +216,7 @@ namespace Core2D.FileWriter.Emf
         /// <param name="path"></param>
         /// <param name="container"></param>
         /// <param name="ic"></param>
-        public static void Save(string path, XContainer container, IImageCache ic)
+        public static void Save(string path, PageContainer container, IImageCache ic)
         {
             if (container == null || container.Template == null)
                 return;
@@ -244,15 +243,15 @@ namespace Core2D.FileWriter.Emf
             if (options == null)
                 return;
 
-            if (item is XContainer)
+            if (item is PageContainer)
             {
-                Save(path, item as XContainer, ic);
+                Save(path, item as PageContainer, ic);
             }
-            else if (item is XDocument)
+            else if (item is DocumentContainer)
             {
                 throw new NotSupportedException("Saving documents as emf drawing is not supported.");
             }
-            else if (item is XProject)
+            else if (item is ProjectContainer)
             {
                 throw new NotSupportedException("Saving projects as emf drawing is not supported.");
             }

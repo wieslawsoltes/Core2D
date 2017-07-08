@@ -3,7 +3,7 @@
 using System;
 using System.Windows;
 using System.Windows.Controls;
-using Core2D.Data.Database;
+using Core2D.Data;
 using Core2D.Editor;
 using Core2D.Editor.Input;
 using Core2D.Project;
@@ -97,8 +97,8 @@ namespace Core2D.Wpf.Views
         {
             if (!e.Data.GetDataPresent(DataFormats.FileDrop)
                 && !e.Data.GetDataPresent(typeof(BaseShape))
-                && !e.Data.GetDataPresent(typeof(XGroup))
-                && !e.Data.GetDataPresent(typeof(XRecord))
+                && !e.Data.GetDataPresent(typeof(GroupShape))
+                && !e.Data.GetDataPresent(typeof(Record))
                 && !e.Data.GetDataPresent(typeof(ShapeStyle)))
             {
                 e.Effects = DragDropEffects.None;
@@ -144,11 +144,11 @@ namespace Core2D.Wpf.Views
             }
 
             // Groups.
-            if (e.Data.GetDataPresent(typeof(XGroup)))
+            if (e.Data.GetDataPresent(typeof(GroupShape)))
             {
                 try
                 {
-                    if (e.Data.GetData(typeof(XGroup)) is XGroup group)
+                    if (e.Data.GetData(typeof(GroupShape)) is GroupShape group)
                     {
                         var p = e.GetPosition(drawableControl);
                         _projectEditor.OnDropShapeAsClone(group, p.X, p.Y);
@@ -162,11 +162,11 @@ namespace Core2D.Wpf.Views
             }
 
             // Records.
-            if (e.Data.GetDataPresent(typeof(XRecord)))
+            if (e.Data.GetDataPresent(typeof(Record)))
             {
                 try
                 {
-                    if (e.Data.GetData(typeof(XRecord)) is XRecord record)
+                    if (e.Data.GetData(typeof(Record)) is Record record)
                     {
                         var p = e.GetPosition(drawableControl);
                         _projectEditor.OnDropRecord(record, p.X, p.Y);
@@ -198,11 +198,11 @@ namespace Core2D.Wpf.Views
             }
 
             // Templates.
-            if (e.Data.GetDataPresent(typeof(XContainer)))
+            if (e.Data.GetDataPresent(typeof(PageContainer)))
             {
                 try
                 {
-                    if (e.Data.GetData(typeof(XContainer)) is XContainer template)
+                    if (e.Data.GetData(typeof(PageContainer)) is PageContainer template)
                     {
                         _projectEditor.OnApplyTemplate(template);
                         e.Handled = true;

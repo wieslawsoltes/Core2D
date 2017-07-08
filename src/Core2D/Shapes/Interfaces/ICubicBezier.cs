@@ -11,21 +11,21 @@ namespace Core2D.Shapes.Interfaces
         /// <summary>
         /// Gets or sets start point.
         /// </summary>
-        XPoint Point1 { get; set; }
+        PointShape Point1 { get; set; }
 
         /// <summary>
         /// Gets or sets first control point.
         /// </summary>
-        XPoint Point2 { get; set; }
+        PointShape Point2 { get; set; }
 
         /// <summary>
         /// Gets or sets second control point.
         /// </summary>
-        XPoint Point3 { get; set; }
+        PointShape Point3 { get; set; }
 
         /// <summary>
         /// Gets or sets end point.
         /// </summary>
-        XPoint Point4 { get; set; }
+        PointShape Point4 { get; set; }
     }
 }

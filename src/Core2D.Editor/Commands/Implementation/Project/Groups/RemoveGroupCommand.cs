@@ -6,14 +6,14 @@ using Core2D.Shapes;
 namespace Core2D.Editor.Commands
 {
     /// <inheritdoc/>
-    public class RemoveGroupCommand : Command<XGroup>, IRemoveGroupCommand
+    public class RemoveGroupCommand : Command<GroupShape>, IRemoveGroupCommand
     {
         /// <inheritdoc/>
-        public override bool CanRun(XGroup group)
+        public override bool CanRun(GroupShape group)
             => ServiceProvider.GetService<ProjectEditor>().IsEditMode();
 
         /// <inheritdoc/>
-        public override void Run(XGroup group)
+        public override void Run(GroupShape group)
             => ServiceProvider.GetService<ProjectEditor>().OnRemoveGroup(group);
     }
 }

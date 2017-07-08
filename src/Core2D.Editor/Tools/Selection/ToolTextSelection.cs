@@ -8,17 +8,17 @@ using Core2D.Style;
 namespace Core2D.Editor.Tools.Selection
 {
     /// <summary>
-    /// Helper class for <see cref="XText"/> shape selection.
+    /// Helper class for <see cref="TextShape"/> shape selection.
     /// </summary>
     public class ToolTextSelection
     {
-        private readonly XLayer _layer;
-        private readonly XText _text;
+        private readonly LayerContainer _layer;
+        private readonly TextShape _text;
         private readonly ShapeStyle _style;
         private readonly BaseShape _point;
-        private XPoint _topLeftHelperPoint;
-        private XPoint _bottomRightHelperPoint;
-        private XRectangle _helperRectangle;
+        private PointShape _topLeftHelperPoint;
+        private PointShape _bottomRightHelperPoint;
+        private RectangleShape _helperRectangle;
 
         /// <summary>
         /// Initialize new instance of <see cref="ToolTextSelection"/> class.
@@ -27,7 +27,7 @@ namespace Core2D.Editor.Tools.Selection
         /// <param name="shape">The selected shape.</param>
         /// <param name="style">The selection shapes style.</param>
         /// <param name="point">The selection point shape.</param>
-        public ToolTextSelection(XLayer layer, XText shape, ShapeStyle style, BaseShape point)
+        public ToolTextSelection(LayerContainer layer, TextShape shape, ShapeStyle style, BaseShape point)
         {
             _layer = layer;
             _text = shape;
@@ -40,9 +40,9 @@ namespace Core2D.Editor.Tools.Selection
         /// </summary>
         public void ToStateBottomRight()
         {
-            _helperRectangle = XRectangle.Create(0, 0, _style, null);
-            _topLeftHelperPoint = XPoint.Create(0, 0, _point);
-            _bottomRightHelperPoint = XPoint.Create(0, 0, _point);
+            _helperRectangle = RectangleShape.Create(0, 0, _style, null);
+            _topLeftHelperPoint = PointShape.Create(0, 0, _point);
+            _bottomRightHelperPoint = PointShape.Create(0, 0, _point);
 
             _layer.Shapes = _layer.Shapes.Add(_helperRectangle);
             _layer.Shapes = _layer.Shapes.Add(_topLeftHelperPoint);

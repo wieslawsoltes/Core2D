@@ -11,7 +11,7 @@ namespace Core2D.Renderer.SkiaSharp
     /// <summary>
     /// 
     /// </summary>
-    public static class XPathGeometryConverter
+    public static class PathGeometryConverter
     {
         /// <summary>
         /// 
@@ -21,14 +21,14 @@ namespace Core2D.Renderer.SkiaSharp
         /// <param name="dy"></param>
         /// <param name="scale"></param>
         /// <returns></returns>
-        public static SKPath ToSKPath(this XPathGeometry xpg, double dx, double dy, Func<double, float> scale)
+        public static SKPath ToSKPath(this PathGeometry xpg, double dx, double dy, Func<double, float> scale)
         {
             var path = new SKPath();
-            path.FillType = xpg.FillRule == XFillRule.EvenOdd ? SKPathFillType.EvenOdd : SKPathFillType.Winding;
+            path.FillType = xpg.FillRule == FillRule.EvenOdd ? SKPathFillType.EvenOdd : SKPathFillType.Winding;
 
             foreach (var xpf in xpg.Figures)
             {
-                var previous = default(XPoint);
+                var previous = default(PointShape);
 
                 // Begin new figure.
                 path.MoveTo(
@@ -39,23 +39,23 @@ namespace Core2D.Renderer.SkiaSharp
 
                 foreach (var segment in xpf.Segments)
                 {
-                    if (segment is XArcSegment)
+                    if (segment is ArcSegment)
                     {
-                        var arcSegment = segment as XArcSegment;
+                        var arcSegment = segment as ArcSegment;
                         path.ArcTo(
                             scale(arcSegment.Size.Width),
                             scale(arcSegment.Size.Height), 
                             (float)arcSegment.RotationAngle, 
                             arcSegment.IsLargeArc ? SKPathArcSize.Large : SKPathArcSize.Small,
-                            arcSegment.SweepDirection == XSweepDirection.Clockwise ? SKPathDirection.Clockwise : SKPathDirection.CounterClockwise,
+                            arcSegment.SweepDirection == SweepDirection.Clockwise ? SKPathDirection.Clockwise : SKPathDirection.CounterClockwise,
                             scale(arcSegment.Point.X + dx),
                             scale(arcSegment.Point.Y + dy));
 
                         previous = arcSegment.Point;
                     }
-                    else if (segment is XCubicBezierSegment)
+                    else if (segment is CubicBezierSegment)
                     {
-                        var cubicBezierSegment = segment as XCubicBezierSegment;
+                        var cubicBezierSegment = segment as CubicBezierSegment;
                         path.CubicTo(
                             scale(cubicBezierSegment.Point1.X + dx),
                             scale(cubicBezierSegment.Point1.Y + dy),
@@ -66,18 +66,18 @@ namespace Core2D.Renderer.SkiaSharp
 
                         previous = cubicBezierSegment.Point3;
                     }
-                    else if (segment is XLineSegment)
+                    else if (segment is LineSegment)
                     {
-                        var lineSegment = segment as XLineSegment;
+                        var lineSegment = segment as LineSegment;
                         path.LineTo(
                             scale(lineSegment.Point.X + dx),
                             scale(lineSegment.Point.Y + dy));
 
                         previous = lineSegment.Point;
                     }
-                    else if (segment is XPolyCubicBezierSegment)
+                    else if (segment is PolyCubicBezierSegment)
                     {
-                        var polyCubicBezierSegment = segment as XPolyCubicBezierSegment;
+                        var polyCubicBezierSegment = segment as PolyCubicBezierSegment;
                         if (polyCubicBezierSegment.Points.Length >= 3)
                         {
                             path.CubicTo(
@@ -108,9 +108,9 @@ namespace Core2D.Renderer.SkiaSharp
                             }
                         }
                     }
-                    else if (segment is XPolyLineSegment)
+                    else if (segment is PolyLineSegment)
                     {
-                        var polyLineSegment = segment as XPolyLineSegment;
+                        var polyLineSegment = segment as PolyLineSegment;
                         if (polyLineSegment.Points.Length >= 1)
                         {
                             path.LineTo(
@@ -132,9 +132,9 @@ namespace Core2D.Renderer.SkiaSharp
                             }
                         }
                     }
-                    else if (segment is XPolyQuadraticBezierSegment)
+                    else if (segment is PolyQuadraticBezierSegment)
                     {
-                        var polyQuadraticSegment = segment as XPolyQuadraticBezierSegment;
+                        var polyQuadraticSegment = segment as PolyQuadraticBezierSegment;
                         if (polyQuadraticSegment.Points.Length >= 2)
                         {
                             path.QuadTo(
@@ -161,9 +161,9 @@ namespace Core2D.Renderer.SkiaSharp
                             }
                         }
                     }
-                    else if (segment is XQuadraticBezierSegment)
+                    else if (segment is QuadraticBezierSegment)
                     {
-                        var quadraticBezierSegment = segment as XQuadraticBezierSegment;
+                        var quadraticBezierSegment = segment as QuadraticBezierSegment;
                         path.QuadTo(
                             scale(quadraticBezierSegment.Point1.X + dx),
                             scale(quadraticBezierSegment.Point1.Y + dy),

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Core2D.Data;
-using Core2D.Data.Database;
 using Core2D.Project;
 using Core2D.Shape;
 using Core2D.Shapes;
@@ -22,7 +21,7 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="project">The project instance.</param>
         /// <param name="document">The document instance.</param>
-        public static void AddDocument(this XProject project, XDocument document)
+        public static void AddDocument(this ProjectContainer project, DocumentContainer document)
         {
             if (project?.Documents != null && document != null)
             {
@@ -39,7 +38,7 @@ namespace Core2D.Editor
         /// <param name="project">The project instance.</param>
         /// <param name="document">The document instance.</param>
         /// <param name="index">The document index.</param>
-        public static void AddDocumentAt(this XProject project, XDocument document, int index)
+        public static void AddDocumentAt(this ProjectContainer project, DocumentContainer document, int index)
         {
             if (project?.Documents != null && document != null && index >= 0)
             {
@@ -51,11 +50,11 @@ namespace Core2D.Editor
         }
 
         /// <summary>
-        /// Remove document object from project <see cref="XProject.Documents"/> collection.
+        /// Remove document object from project <see cref="ProjectContainer.Documents"/> collection.
         /// </summary>
         /// <param name="project">The project instance.</param>
-        /// <param name="document">The document object to remove from project <see cref="XProject.Documents"/> collection.</param>
-        public static void RemoveDocument(this XProject project, XDocument document)
+        /// <param name="document">The document object to remove from project <see cref="ProjectContainer.Documents"/> collection.</param>
+        public static void RemoveDocument(this ProjectContainer project, DocumentContainer document)
         {
             if (project?.Documents != null && document != null)
             {
@@ -72,7 +71,7 @@ namespace Core2D.Editor
         /// <param name="project">The project instance.</param>
         /// <param name="document">The document instance.</param>
         /// <param name="index">The document index.</param>
-        public static void ReplaceDocument(this XProject project, XDocument document, int index)
+        public static void ReplaceDocument(this ProjectContainer project, DocumentContainer document, int index)
         {
             if (document != null && index >= 0)
             {
@@ -92,7 +91,7 @@ namespace Core2D.Editor
         /// <param name="project">The project instance.</param>
         /// <param name="document">The document instance.</param>
         /// <param name="page">The page instance.</param>
-        public static void AddPage(this XProject project, XDocument document, XContainer page)
+        public static void AddPage(this ProjectContainer project, DocumentContainer document, PageContainer page)
         {
             if (document != null && page != null)
             {
@@ -110,7 +109,7 @@ namespace Core2D.Editor
         /// <param name="document">The document instance.</param>
         /// <param name="page">The page instance.</param>
         /// <param name="index">The page index.</param>
-        public static void AddPageAt(this XProject project, XDocument document, XContainer page, int index)
+        public static void AddPageAt(this ProjectContainer project, DocumentContainer document, PageContainer page, int index)
         {
             if (document != null && page != null && index >= 0)
             {
@@ -122,12 +121,12 @@ namespace Core2D.Editor
         }
 
         /// <summary>
-        /// Remove page object from owner document <see cref="XDocument.Pages"/> collection.
+        /// Remove page object from owner document <see cref="DocumentContainer.Pages"/> collection.
         /// </summary>
         /// <param name="project">The project instance.</param>
-        /// <param name="page">The page object to remove from document <see cref="XDocument.Pages"/> collection.</param>
+        /// <param name="page">The page object to remove from document <see cref="DocumentContainer.Pages"/> collection.</param>
         /// <returns>The owner document.</returns>
-        public static XDocument RemovePage(this XProject project, XContainer page)
+        public static DocumentContainer RemovePage(this ProjectContainer project, PageContainer page)
         {
             if (project?.Documents != null && page != null)
             {
@@ -151,7 +150,7 @@ namespace Core2D.Editor
         /// <param name="document">The document instance.</param>
         /// <param name="page">The page instance.</param>
         /// <param name="index">The page index.</param>
-        public static void ReplacePage(this XProject project, XDocument document, XContainer page, int index)
+        public static void ReplacePage(this ProjectContainer project, DocumentContainer document, PageContainer page, int index)
         {
             if (document != null && page != null && index >= 0)
             {
@@ -170,7 +169,7 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="project">The project instance.</param>
         /// <param name="template">The template instance.</param>
-        public static void AddTemplate(this XProject project, XContainer template)
+        public static void AddTemplate(this ProjectContainer project, PageContainer template)
         {
             if (project?.Templates != null && template != null)
             {
@@ -186,7 +185,7 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="project">The project instance.</param>
         /// <param name="templates">The templates collection.</param>
-        public static void AddTemplates(this XProject project, IEnumerable<XContainer> templates)
+        public static void AddTemplates(this ProjectContainer project, IEnumerable<PageContainer> templates)
         {
             if (project?.Templates != null && templates != null)
             {
@@ -205,7 +204,7 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="project">The project instance.</param>
         /// <param name="template">The template instance</param>
-        public static void RemoveTemplate(this XProject project, XContainer template)
+        public static void RemoveTemplate(this ProjectContainer project, PageContainer template)
         {
             if (project?.Templates != null && template != null)
             {
@@ -222,7 +221,7 @@ namespace Core2D.Editor
         /// <param name="project">The project instance.</param>
         /// <param name="page">The page instance.</param>
         /// <param name="template">The template instance.</param>
-        public static void ApplyTemplate(this XProject project, XContainer page, XContainer template)
+        public static void ApplyTemplate(this ProjectContainer project, PageContainer page, PageContainer template)
         {
             if (page != null && template != null)
             {
@@ -239,7 +238,7 @@ namespace Core2D.Editor
         /// <param name="project">The project instance.</param>
         /// <param name="container">The container instance.</param>
         /// <param name="layer">The layer instance.</param>
-        public static void AddLayer(this XProject project, XContainer container, XLayer layer)
+        public static void AddLayer(this ProjectContainer project, PageContainer container, LayerContainer layer)
         {
             if (container != null && container.Layers != null && layer != null)
             {
@@ -255,7 +254,7 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="project">The project instance.</param>
         /// <param name="layer">The layer instance.</param>
-        public static void RemoveLayer(this XProject project, XLayer layer)
+        public static void RemoveLayer(this ProjectContainer project, LayerContainer layer)
         {
             var container = layer?.Owner;
             if (container != null && container.Layers != null)
@@ -272,7 +271,7 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="project">The project instance.</param>
         /// <param name="layer">The layer instance.</param>
-        public static void ClearLayer(this XProject project, XLayer layer)
+        public static void ClearLayer(this ProjectContainer project, LayerContainer layer)
         {
             if (layer != null)
             {
@@ -289,7 +288,7 @@ namespace Core2D.Editor
         /// <param name="project">The project instance.</param>
         /// <param name="layer">The layer instance.</param>
         /// <param name="shape">The shape instance.</param>
-        public static void AddShape(this XProject project, XLayer layer, BaseShape shape)
+        public static void AddShape(this ProjectContainer project, LayerContainer layer, BaseShape shape)
         {
             if (layer != null && layer.Shapes != null && shape != null)
             {
@@ -307,7 +306,7 @@ namespace Core2D.Editor
         /// <param name="layer">The layer instance.</param>
         /// <param name="shape">The shape instance.</param>
         /// <param name="index">The shape index.</param>
-        public static void AddShapeAt(this XProject project, XLayer layer, BaseShape shape, int index)
+        public static void AddShapeAt(this ProjectContainer project, LayerContainer layer, BaseShape shape, int index)
         {
             if (layer?.Shapes != null && shape != null)
             {
@@ -324,7 +323,7 @@ namespace Core2D.Editor
         /// <param name="project">The project instance.</param>
         /// <param name="layer">The layer instance.</param>
         /// <param name="shapes">The shapes collection.</param>
-        public static void AddShapes(this XProject project, XLayer layer, IEnumerable<BaseShape> shapes)
+        public static void AddShapes(this ProjectContainer project, LayerContainer layer, IEnumerable<BaseShape> shapes)
         {
             if (layer?.Shapes != null && shapes != null)
             {
@@ -344,7 +343,7 @@ namespace Core2D.Editor
         /// <param name="project">The project instance.</param>
         /// <param name="layer">The layer instance.</param>
         /// <param name="shape">The shape instance.</param>
-        public static void RemoveShape(this XProject project, XLayer layer, BaseShape shape)
+        public static void RemoveShape(this ProjectContainer project, LayerContainer layer, BaseShape shape)
         {
             if (layer?.Shapes != null && shape != null)
             {
@@ -361,7 +360,7 @@ namespace Core2D.Editor
         /// <param name="project">The project instance.</param>
         /// <param name="shape">The shape instance.</param>
         /// <returns>The owner layer.</returns>
-        public static XLayer RemoveShape(this XProject project, BaseShape shape)
+        public static LayerContainer RemoveShape(this ProjectContainer project, BaseShape shape)
         {
             if (project?.Documents != null && shape != null)
             {
@@ -382,7 +381,7 @@ namespace Core2D.Editor
         /// <param name="layer">The layer instance.</param>
         /// <param name="shape">The shape instance.</param>
         /// <param name="index">The shape index.</param>
-        public static void ReplaceShape(this XProject project, XLayer layer, BaseShape shape, int index)
+        public static void ReplaceShape(this ProjectContainer project, LayerContainer layer, BaseShape shape, int index)
         {
             if (layer != null && shape != null && index >= 0)
             {
@@ -404,7 +403,7 @@ namespace Core2D.Editor
         /// <param name="shape">The shape instance.</param>
         /// <param name="insertIndex">The shape insert index.</param>
         /// <param name="removeIndex">The shape remove index.</param>
-        public static void SwapShape(this XProject project, XLayer layer, BaseShape shape, int insertIndex, int removeIndex)
+        public static void SwapShape(this ProjectContainer project, LayerContainer layer, BaseShape shape, int insertIndex, int removeIndex)
         {
             if (layer != null && shape != null && insertIndex >= 0 && removeIndex >= 0)
             {
@@ -425,7 +424,7 @@ namespace Core2D.Editor
         /// <param name="project">The project instance.</param>
         /// <param name="data">The data instance.</param>
         /// <param name="property">The property instance.</param>
-        public static void AddProperty(this XProject project, XContext data, XProperty property)
+        public static void AddProperty(this ProjectContainer project, Data.Context data, Property property)
         {
             if (data?.Properties != null && property != null)
             {
@@ -441,7 +440,7 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="project">The project instance.</param>
         /// <param name="property">The property instance.</param>
-        public static void RemoveProperty(this XProject project, XProperty property)
+        public static void RemoveProperty(this ProjectContainer project, Property property)
         {
             var data = property?.Owner;
             if (data != null && data.Properties != null)
@@ -458,7 +457,7 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="project">The project instance.</param>
         /// <param name="db">The database instance.</param>
-        public static void AddDatabase(this XProject project, XDatabase db)
+        public static void AddDatabase(this ProjectContainer project, Database db)
         {
             if (project?.Databases != null && db != null)
             {
@@ -473,8 +472,8 @@ namespace Core2D.Editor
         /// Remove database.
         /// </summary>
         /// <param name="project">The project instance.</param>
-        /// <param name="db">The <see cref="XDatabase"/> to remove.</param>
-        public static void RemoveDatabase(this XProject project, XDatabase db)
+        /// <param name="db">The <see cref="Database"/> to remove.</param>
+        public static void RemoveDatabase(this ProjectContainer project, Database db)
         {
             if (project?.Databases != null && db != null)
             {
@@ -491,11 +490,11 @@ namespace Core2D.Editor
         /// <param name="project">The project instance.</param>
         /// <param name="destination">The destination database.</param>
         /// <param name="source">The source database.</param>
-        public static void UpdateDatabase(this XProject project, XDatabase destination, XDatabase source)
+        public static void UpdateDatabase(this ProjectContainer project, Database destination, Database source)
         {
             if (destination != null && source != null)
             {
-                bool isDirty = XDatabase.Update(destination, source, out ImmutableArray<XRecord>.Builder records);
+                bool isDirty = Database.Update(destination, source, out ImmutableArray<Record>.Builder records);
 
                 if (isDirty && records != null)
                 {
@@ -518,7 +517,7 @@ namespace Core2D.Editor
         /// <param name="project">The project instance.</param>
         /// <param name="db">The database instance.</param>
         /// <param name="column">The column instance.</param>
-        public static void AddColumn(this XProject project, XDatabase db, XColumn column)
+        public static void AddColumn(this ProjectContainer project, Database db, Column column)
         {
             if (db?.Columns != null && column != null)
             {
@@ -533,8 +532,8 @@ namespace Core2D.Editor
         /// Remove column from database columns collection.
         /// </summary>
         /// <param name="project">The project instance.</param>
-        /// <param name="column">The <see cref="XColumn"/> to remove.</param>
-        public static void RemoveColumn(this XProject project, XColumn column)
+        /// <param name="column">The <see cref="Column"/> to remove.</param>
+        public static void RemoveColumn(this ProjectContainer project, Column column)
         {
             var db = column?.Owner;
             if (db != null && db.Columns != null)
@@ -552,7 +551,7 @@ namespace Core2D.Editor
         /// <param name="project">The project instance.</param>
         /// <param name="db">The database instance.</param>
         /// <param name="record">The record instance.</param>
-        public static void AddRecord(this XProject project, XDatabase db, XRecord record)
+        public static void AddRecord(this ProjectContainer project, Database db, Record record)
         {
             if (db?.Records != null)
             {
@@ -568,7 +567,7 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="project">The project instance.</param>
         /// <param name="record">The record instance.</param>
-        public static void RemoveRecord(this XProject project, XRecord record)
+        public static void RemoveRecord(this ProjectContainer project, Record record)
         {
             var db = record?.Owner;
             if (db != null && db.Records != null)
@@ -585,13 +584,13 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="project">The project instance.</param>
         /// <param name="data">The data instance.</param>
-        public static void ResetRecord(this XProject project, XContext data)
+        public static void ResetRecord(this ProjectContainer project, Data.Context data)
         {
             var record = data?.Record;
             if (record != null)
             {
                 var previous = record;
-                var next = default(XRecord);
+                var next = default(Record);
                 project?.History?.Snapshot(previous, next, (p) => data.Record = p);
                 data.Record = next;
             }
@@ -603,7 +602,7 @@ namespace Core2D.Editor
         /// <param name="project">The project instance.</param>
         /// <param name="data">The data instance.</param>
         /// <param name="record">The record instance.</param>
-        public static void ApplyRecord(this XProject project, XContext data, XRecord record)
+        public static void ApplyRecord(this ProjectContainer project, Data.Context data, Record record)
         {
             if (data != null && record != null)
             {
@@ -620,7 +619,7 @@ namespace Core2D.Editor
         /// <param name="project">The project instance.</param>
         /// <param name="shape">The shape instance.</param>
         /// <param name="data">The data instance.</param>
-        public static void ApplyData(this XProject project, BaseShape shape, XContext data)
+        public static void ApplyData(this ProjectContainer project, BaseShape shape, Data.Context data)
         {
             if (shape != null && data != null)
             {
@@ -636,7 +635,7 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="project">The project instance.</param>
         /// <param name="library">The group library instance.</param>
-        public static void AddGroupLibrary(this XProject project, XLibrary<XGroup> library)
+        public static void AddGroupLibrary(this ProjectContainer project, Library<GroupShape> library)
         {
             if (project?.GroupLibraries != null && library != null)
             {
@@ -652,7 +651,7 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="project">The project instance.</param>
         /// <param name="libraries">The group libraries collection.</param>
-        public static void AddGroupLibraries(this XProject project, IEnumerable<XLibrary<XGroup>> libraries)
+        public static void AddGroupLibraries(this ProjectContainer project, IEnumerable<Library<GroupShape>> libraries)
         {
             if (project?.GroupLibraries != null && libraries != null)
             {
@@ -671,7 +670,7 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="project">The project instance.</param>
         /// <param name="library">The group library instance.</param>
-        public static void RemoveGroupLibrary(this XProject project, XLibrary<XGroup> library)
+        public static void RemoveGroupLibrary(this ProjectContainer project, Library<GroupShape> library)
         {
             if (project?.GroupLibraries != null && library != null)
             {
@@ -687,7 +686,7 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="project">The project instance.</param>
         /// <param name="library">The style library instance.</param>
-        public static void AddStyleLibrary(this XProject project, XLibrary<ShapeStyle> library)
+        public static void AddStyleLibrary(this ProjectContainer project, Library<ShapeStyle> library)
         {
             if (project?.StyleLibraries != null && library != null)
             {
@@ -703,7 +702,7 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="project">The project instance.</param>
         /// <param name="libraries">The style libraries collection.</param>
-        public static void AddStyleLibraries(this XProject project, IEnumerable<XLibrary<ShapeStyle>> libraries)
+        public static void AddStyleLibraries(this ProjectContainer project, IEnumerable<Library<ShapeStyle>> libraries)
         {
             if (project?.StyleLibraries != null && libraries != null)
             {
@@ -722,7 +721,7 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="project">The project instance.</param>
         /// <param name="library">The style library instance.</param>
-        public static void RemoveStyleLibrary(this XProject project, XLibrary<ShapeStyle> library)
+        public static void RemoveStyleLibrary(this ProjectContainer project, Library<ShapeStyle> library)
         {
             if (project?.CurrentStyleLibrary != null && library != null)
             {
@@ -739,7 +738,7 @@ namespace Core2D.Editor
         /// <param name="project">The project instance.</param>
         /// <param name="library">The style library instance.</param>
         /// <param name="style">The style instance.</param>
-        public static void AddStyle(this XProject project, XLibrary<ShapeStyle> library, ShapeStyle style)
+        public static void AddStyle(this ProjectContainer project, Library<ShapeStyle> library, ShapeStyle style)
         {
             AddItem(project, library, style);
         }
@@ -750,7 +749,7 @@ namespace Core2D.Editor
         /// <param name="project">The project instance.</param>
         /// <param name="style">The style instance.</param>
         /// <returns>The owner style library.</returns>
-        public static XLibrary<ShapeStyle> RemoveStyle(this XProject project, ShapeStyle style)
+        public static Library<ShapeStyle> RemoveStyle(this ProjectContainer project, ShapeStyle style)
         {
             if (project?.StyleLibraries != null && style != null)
             {
@@ -773,13 +772,13 @@ namespace Core2D.Editor
         /// <param name="project">The project instance.</param>
         /// <param name="shape">The shape instance.</param>
         /// <param name="style">The style instance.</param>
-        public static void ApplyStyle(this XProject project, BaseShape shape, ShapeStyle style)
+        public static void ApplyStyle(this ProjectContainer project, BaseShape shape, ShapeStyle style)
         {
             if (shape != null && style != null)
             {
-                if (shape is XGroup)
+                if (shape is GroupShape)
                 {
-                    var shapes = XProject.GetAllShapes((shape as XGroup).Shapes);
+                    var shapes = ProjectContainer.GetAllShapes((shape as GroupShape).Shapes);
                     foreach (var child in shapes)
                     {
                         var previous = child.Style;
@@ -804,7 +803,7 @@ namespace Core2D.Editor
         /// <param name="project">The project instance.</param>
         /// <param name="library">The group library instance.</param>
         /// <param name="group">The group instance.</param>
-        public static void AddGroup(this XProject project, XLibrary<XGroup> library, XGroup group)
+        public static void AddGroup(this ProjectContainer project, Library<GroupShape> library, GroupShape group)
         {
             AddItem(project, library, group);
         }
@@ -815,7 +814,7 @@ namespace Core2D.Editor
         /// <param name="project">The project instance.</param>
         /// <param name="group">The group instance.</param>
         /// <returns>The owner group library.</returns>
-        public static XLibrary<XGroup> RemoveGroup(this XProject project, XGroup group)
+        public static Library<GroupShape> RemoveGroup(this ProjectContainer project, GroupShape group)
         {
             if (project?.GroupLibraries != null && group != null)
             {
@@ -838,7 +837,7 @@ namespace Core2D.Editor
         /// <param name="project">The project instance.</param>
         /// <param name="library">The library instance.</param>
         /// <param name="item">The item instance.</param>
-        public static void AddItem<T>(this XProject project, XLibrary<T> library, T item)
+        public static void AddItem<T>(this ProjectContainer project, Library<T> library, T item)
         {
             if (library?.Items != null && item != null)
             {
@@ -855,7 +854,7 @@ namespace Core2D.Editor
         /// <param name="project">The project instance.</param>
         /// <param name="library">The library instance.</param>
         /// <param name="items">The items collection.</param>
-        public static void AddItems<T>(this XProject project, XLibrary<T> library, IEnumerable<T> items)
+        public static void AddItems<T>(this ProjectContainer project, Library<T> library, IEnumerable<T> items)
         {
             if (library?.Items != null && items != null)
             {

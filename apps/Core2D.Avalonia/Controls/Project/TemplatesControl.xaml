@@ -20,7 +20,7 @@
                 <KeyBinding Command="{Static Editor:ProjectEditorCommands.ExportObjectCommand}" CommandParameter="{Binding #templates.SelectedItem}" Gesture="Ctrl+E"/>
             </ListBox.KeyBindings>
             <ListBox.DataTemplates>
-                <DataTemplate DataType="Project:XContainer">
+                <DataTemplate DataType="Project:PageContainer">
                     <TextBlock Name="template" Text="{Binding Name}" Classes="list">
                         <i:Interaction.Behaviors>
                             <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #template}">

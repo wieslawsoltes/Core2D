@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Core2D.Data.Database;
+using Core2D.Data;
 using Core2D.Interfaces;
 using System;
 using System.Diagnostics;
@@ -10,9 +10,9 @@ using CSV = CsvHelper;
 namespace Core2D.TextFieldWriter.CsvHelper
 {
     /// <summary>
-    /// Defines <see cref="XDatabase"/> to the text fields writer.
+    /// Defines <see cref="Database"/> to the text fields writer.
     /// </summary>
-    public sealed class CsvHelperWriter : ITextFieldWriter<XDatabase>
+    public sealed class CsvHelperWriter : ITextFieldWriter<Database>
     {
         /// <summary>
         /// Write database records to text based file format.
@@ -20,7 +20,7 @@ namespace Core2D.TextFieldWriter.CsvHelper
         /// <param name="path">The fields file path.</param>
         /// <param name="fs">The file system.</param>
         /// <param name="database">The source records database.</param>
-        void ITextFieldWriter<XDatabase>.Write(string path, IFileSystem fs, XDatabase database)
+        void ITextFieldWriter<Database>.Write(string path, IFileSystem fs, Database database)
         {
             using (var writer = new System.IO.StringWriter())
             {

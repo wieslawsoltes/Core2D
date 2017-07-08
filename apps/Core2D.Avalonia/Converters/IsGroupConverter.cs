@@ -8,7 +8,7 @@ using System.Globalization;
 namespace Core2D.Avalonia.Converters
 {
     /// <summary>
-    /// Converts a binding value object from <see cref="object"/> to <see cref="bool"/> True if value is not equal to null and is of type <see cref="XGroup"/> otherwise return False.
+    /// Converts a binding value object from <see cref="object"/> to <see cref="bool"/> True if value is not equal to null and is of type <see cref="GroupShape"/> otherwise return False.
     /// </summary>
     public class IsGroupConverter : IValueConverter
     {
@@ -27,7 +27,7 @@ namespace Core2D.Avalonia.Converters
         /// <returns>The converted value.</returns>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value != null && value.GetType() == typeof(XGroup);
+            return value != null && value.GetType() == typeof(GroupShape);
         }
 
         /// <summary>

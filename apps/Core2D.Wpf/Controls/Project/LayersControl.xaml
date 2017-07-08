@@ -29,24 +29,24 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Control Template="{StaticResource LayersMenu}" Grid.Row="0" Margin="2,0,2,0"/>
-        <lists:XLayerDragAndDropListBox DataContext="{Binding Layers}" Tag="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" ItemsSource="{Binding}" SelectedItem="{Binding DataContext.CurrentLayer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" HorizontalContentAlignment="Stretch" BorderBrush="{x:Null}" Grid.Row="1">
-            <lists:XLayerDragAndDropListBox.Resources>
+        <lists:LayerContainerDragAndDropListBox DataContext="{Binding Layers}" Tag="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" ItemsSource="{Binding}" SelectedItem="{Binding DataContext.CurrentLayer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" HorizontalContentAlignment="Stretch" BorderBrush="{x:Null}" Grid.Row="1">
+            <lists:LayerContainerDragAndDropListBox.Resources>
                 <ContextMenu x:Key="LayerContextMenu" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
                     <MenuItem Header="_Add Layer" InputGestureText="Ctrl+N" Command="{x:Static Editor:ProjectEditorCommands.AddLayerCommand}" CommandParameter="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"/>
                     <Separator/>
-                    <MenuItem Header="_Delete" InputGestureText="Del" Command="{x:Static Editor:ProjectEditorCommands.RemoveLayerCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type lists:XLayerDragAndDropListBox}}}"/>
+                    <MenuItem Header="_Delete" InputGestureText="Del" Command="{x:Static Editor:ProjectEditorCommands.RemoveLayerCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type lists:LayerContainerDragAndDropListBox}}}"/>
                 </ContextMenu>
-            </lists:XLayerDragAndDropListBox.Resources>
-            <lists:XLayerDragAndDropListBox.InputBindings>
+            </lists:LayerContainerDragAndDropListBox.Resources>
+            <lists:LayerContainerDragAndDropListBox.InputBindings>
                 <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.AddLayerCommand}" CommandParameter="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Gesture="Ctrl+N"/>
-                <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.RemoveLayerCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type lists:XLayerDragAndDropListBox}}}" Gesture="Del"/>
-            </lists:XLayerDragAndDropListBox.InputBindings>
-            <lists:XLayerDragAndDropListBox.ItemContainerStyle>
+                <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.RemoveLayerCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type lists:LayerContainerDragAndDropListBox}}}" Gesture="Del"/>
+            </lists:LayerContainerDragAndDropListBox.InputBindings>
+            <lists:LayerContainerDragAndDropListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
                     <Setter Property="ContextMenu" Value="{StaticResource LayerContextMenu}"/>
                 </Style>
-            </lists:XLayerDragAndDropListBox.ItemContainerStyle>
-            <lists:XLayerDragAndDropListBox.ItemTemplate>
+            </lists:LayerContainerDragAndDropListBox.ItemContainerStyle>
+            <lists:LayerContainerDragAndDropListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -57,8 +57,8 @@
                         <TextBlock Text="{Binding Name}" Margin="0,5,0,5" Grid.Column="1"/>
                     </Grid>
                 </DataTemplate>
-            </lists:XLayerDragAndDropListBox.ItemTemplate>
-        </lists:XLayerDragAndDropListBox>
+            </lists:LayerContainerDragAndDropListBox.ItemTemplate>
+        </lists:LayerContainerDragAndDropListBox>
         <Grid Grid.Row="2">
             <Grid.Style>
                 <Style TargetType="Grid">

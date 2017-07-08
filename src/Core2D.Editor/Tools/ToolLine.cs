@@ -18,7 +18,7 @@ namespace Core2D.Editor.Tools
         private readonly IServiceProvider _serviceProvider;
         private ToolSettingsLine _settings;
         private State _currentState = State.Start;
-        private XLine _line;
+        private LineShape _line;
         private ToolLineSelection _selection;
 
         /// <inheritdoc/>
@@ -55,7 +55,7 @@ namespace Core2D.Editor.Tools
                 case State.Start:
                     {
                         var style = editor.Project.CurrentStyleLibrary.Selected;
-                        _line = XLine.Create(
+                        _line = LineShape.Create(
                             sx, sy,
                             editor.Project.Options.CloneStyle ? style.Clone() : style,
                             editor.Project.Options.PointShape,

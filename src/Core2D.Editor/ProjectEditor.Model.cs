@@ -3,7 +3,7 @@
 using System;
 using System.Collections.Immutable;
 using System.Linq;
-using Core2D.Data.Database;
+using Core2D.Data;
 using Core2D.Editor.Bounds;
 using Core2D.Editor.Factories;
 using Core2D.Editor.Recent;
@@ -20,7 +20,7 @@ namespace Core2D.Editor
     public partial class ProjectEditor : ObservableObject
     {
         private readonly IServiceProvider _serviceProvider;
-        private XProject _project;
+        private ProjectContainer _project;
         private string _projectPath;
         private bool _isProjectDirty;
         private ProjectObserver _observer;
@@ -49,15 +49,15 @@ namespace Core2D.Editor
         private readonly Lazy<IJsonSerializer> _jsonSerializer;
         private readonly Lazy<IXamlSerializer> _xamlSerializer;
         private readonly Lazy<ImmutableArray<IFileWriter>> _fileWriters;
-        private readonly Lazy<ITextFieldReader<XDatabase>> _csvReader;
-        private readonly Lazy<ITextFieldWriter<XDatabase>> _csvWriter;
+        private readonly Lazy<ITextFieldReader<Database>> _csvReader;
+        private readonly Lazy<ITextFieldWriter<Database>> _csvWriter;
         private readonly Lazy<IImageImporter> _imageImporter;
         private readonly Lazy<ProjectEditorCommands> _editorCommands;
 
         /// <summary>
         /// Gets or sets current project.
         /// </summary>
-        public XProject Project
+        public ProjectContainer Project
         {
             get => _project;
             set => Update(ref _project, value);
@@ -272,12 +272,12 @@ namespace Core2D.Editor
         /// <summary>
         /// Gets Csv file reader.
         /// </summary>
-        public ITextFieldReader<XDatabase> CsvReader => _csvReader.Value;
+        public ITextFieldReader<Database> CsvReader => _csvReader.Value;
 
         /// <summary>
         /// Gets Csv file writer.
         /// </summary>
-        public ITextFieldWriter<XDatabase> CsvWriter => _csvWriter.Value;
+        public ITextFieldWriter<Database> CsvWriter => _csvWriter.Value;
 
         /// <summary>
         /// Gets image key importer.
@@ -311,8 +311,8 @@ namespace Core2D.Editor
             _jsonSerializer = _serviceProvider.GetServiceLazily<IJsonSerializer>();
             _xamlSerializer = _serviceProvider.GetServiceLazily<IXamlSerializer>();
             _fileWriters = _serviceProvider.GetServiceLazily<IFileWriter[], ImmutableArray<IFileWriter>>((writers) => writers.ToImmutableArray());
-            _csvReader = _serviceProvider.GetServiceLazily<ITextFieldReader<XDatabase>>();
-            _csvWriter = _serviceProvider.GetServiceLazily<ITextFieldWriter<XDatabase>>();
+            _csvReader = _serviceProvider.GetServiceLazily<ITextFieldReader<Database>>();
+            _csvWriter = _serviceProvider.GetServiceLazily<ITextFieldWriter<Database>>();
             _imageImporter = _serviceProvider.GetServiceLazily<IImageImporter>();
             _editorCommands = _serviceProvider.GetServiceLazily<ProjectEditorCommands>();
         }

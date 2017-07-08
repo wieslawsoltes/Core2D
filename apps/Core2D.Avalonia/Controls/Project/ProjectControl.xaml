@@ -44,7 +44,7 @@
                 </Style>
             </TreeView.Styles>
             <TreeView.DataTemplates>
-                <TreeDataTemplate DataType="Project:XDocument" ItemsSource="{Binding Pages}">
+                <TreeDataTemplate DataType="Project:DocumentContainer" ItemsSource="{Binding Pages}">
                     <Grid>
                         <!--
                         <i:Interaction.Behaviors>
@@ -71,7 +71,7 @@
                         </TextBlock>                        
                     </Grid>
                 </TreeDataTemplate>
-                <TreeDataTemplate DataType="Project:XContainer" ItemsSource="{Binding Layers}">
+                <TreeDataTemplate DataType="Project:PageContainer" ItemsSource="{Binding Layers}">
                     <Grid Name="root">
                         <i:Interaction.Behaviors>
                             <iac:BindTagToVisualRootDataContextBehavior/>
@@ -120,7 +120,7 @@
                         </TextBlock>
                     </Grid>
                 </TreeDataTemplate>
-                <DataTemplate DataType="Project:XLayer">
+                <DataTemplate DataType="Project:LayerContainer">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch">
                         <StackPanel.ContextMenu>
                             <ContextMenu Classes="default">
