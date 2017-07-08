@@ -6,14 +6,14 @@ using Core2D.Editor.Input;
 namespace Core2D.Editor.Commands
 {
     /// <inheritdoc/>
-    public class RemovePropertyCommand : Command<XProperty>, IRemovePropertyCommand
+    public class RemovePropertyCommand : Command<Property>, IRemovePropertyCommand
     {
         /// <inheritdoc/>
-        public override bool CanRun(XProperty property)
+        public override bool CanRun(Property property)
             => ServiceProvider.GetService<ProjectEditor>().IsEditMode();
 
         /// <inheritdoc/>
-        public override void Run(XProperty property)
+        public override void Run(Property property)
             => ServiceProvider.GetService<ProjectEditor>().OnRemoveProperty(property);
     }
 }

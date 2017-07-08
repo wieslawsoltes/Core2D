@@ -6,14 +6,14 @@ using Core2D.Editor.Input;
 namespace Core2D.Editor.Commands
 {
     /// <inheritdoc/>
-    public class RemoveColumnCommand : Command<XColumn>, IRemoveColumnCommand
+    public class RemoveColumnCommand : Command<Column>, IRemoveColumnCommand
     {
         /// <inheritdoc/>
-        public override bool CanRun(XColumn column)
+        public override bool CanRun(Column column)
             => ServiceProvider.GetService<ProjectEditor>().IsEditMode();
 
         /// <inheritdoc/>
-        public override void Run(XColumn column)
+        public override void Run(Column column)
             => ServiceProvider.GetService<ProjectEditor>().OnRemoveColumn(column);
     }
 }

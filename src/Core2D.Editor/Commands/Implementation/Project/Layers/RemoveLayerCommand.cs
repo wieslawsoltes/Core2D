@@ -6,14 +6,14 @@ using Core2D.Project;
 namespace Core2D.Editor.Commands
 {
     /// <inheritdoc/>
-    public class RemoveLayerCommand : Command<XLayer>, IRemoveLayerCommand
+    public class RemoveLayerCommand : Command<LayerContainer>, IRemoveLayerCommand
     {
         /// <inheritdoc/>
-        public override bool CanRun(XLayer layer)
+        public override bool CanRun(LayerContainer layer)
             => ServiceProvider.GetService<ProjectEditor>().IsEditMode();
 
         /// <inheritdoc/>
-        public override void Run(XLayer layer)
+        public override void Run(LayerContainer layer)
             => ServiceProvider.GetService<ProjectEditor>().OnRemoveLayer(layer);
     }
 }

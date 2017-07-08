@@ -13,7 +13,7 @@ namespace Core2D.Project
     /// <summary>
     /// Project input/output.
     /// </summary>
-    public partial class XProject
+    public partial class ProjectContainer
     {
         /// <summary>
         /// Project Json data entry name.
@@ -32,7 +32,7 @@ namespace Core2D.Project
         /// <param name="fileIO"></param>
         /// <param name="serializer"></param>
         /// <returns></returns>
-        public static XProject Open(string path, IFileSystem fileIO, IJsonSerializer serializer)
+        public static ProjectContainer Open(string path, IFileSystem fileIO, IJsonSerializer serializer)
         {
             using (var stream = fileIO.Open(path))
             {
@@ -47,7 +47,7 @@ namespace Core2D.Project
         /// <param name="path"></param>
         /// <param name="fileIO"></param>
         /// <param name="serializer"></param>
-        public static void Save(XProject project, string path, IFileSystem fileIO, IJsonSerializer serializer)
+        public static void Save(ProjectContainer project, string path, IFileSystem fileIO, IJsonSerializer serializer)
         {
             using (var stream = fileIO.Create(path))
             {
@@ -62,7 +62,7 @@ namespace Core2D.Project
         /// <param name="fileIO"></param>
         /// <param name="serializer"></param>
         /// <returns></returns>
-        public static XProject Open(Stream stream, IFileSystem fileIO, IJsonSerializer serializer)
+        public static ProjectContainer Open(Stream stream, IFileSystem fileIO, IJsonSerializer serializer)
         {
             using (var archive = new ZipArchive(stream, ZipArchiveMode.Read))
             {
@@ -80,7 +80,7 @@ namespace Core2D.Project
         /// <param name="stream"></param>
         /// <param name="fileIO"></param>
         /// <param name="serializer"></param>
-        public static void Save(XProject project, Stream stream, IFileSystem fileIO, IJsonSerializer serializer)
+        public static void Save(ProjectContainer project, Stream stream, IFileSystem fileIO, IJsonSerializer serializer)
         {
             using (var archive = new ZipArchive(stream, ZipArchiveMode.Create))
             {
@@ -91,20 +91,20 @@ namespace Core2D.Project
             }
         }
 
-        private static IEnumerable<string> GetUsedKeys(XProject project)
+        private static IEnumerable<string> GetUsedKeys(ProjectContainer project)
         {
-            return XProject.GetAllShapes<ImageShape>(project).Select(i => i.Key).Distinct();
+            return ProjectContainer.GetAllShapes<ImageShape>(project).Select(i => i.Key).Distinct();
         }
 
-        private static XProject ReadProject(ZipArchiveEntry projectEntry, IFileSystem fileIO, IJsonSerializer serializer)
+        private static ProjectContainer ReadProject(ZipArchiveEntry projectEntry, IFileSystem fileIO, IJsonSerializer serializer)
         {
             using (var entryStream = projectEntry.Open())
             {
-                return serializer.Deserialize<XProject>(fileIO.ReadUtf8Text(entryStream));
+                return serializer.Deserialize<ProjectContainer>(fileIO.ReadUtf8Text(entryStream));
             }
         }
 
-        private static void WriteProject(XProject project, ZipArchiveEntry projectEntry, IFileSystem fileIO, IJsonSerializer serializer)
+        private static void WriteProject(ProjectContainer project, ZipArchiveEntry projectEntry, IFileSystem fileIO, IJsonSerializer serializer)
         {
             using (var jsonStream = projectEntry.Open())
             {

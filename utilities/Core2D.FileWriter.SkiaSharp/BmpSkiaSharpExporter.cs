@@ -29,24 +29,24 @@ namespace Core2D.FileWriter.SkiaSharpBmp
         }
 
         /// <inheritdoc/>
-        void IProjectExporter.Save(string path, XContainer container)
+        void IProjectExporter.Save(string path, PageContainer container)
         {
             Save(path, container);
         }
 
         /// <inheritdoc/>
-        void IProjectExporter.Save(string path, XDocument document)
+        void IProjectExporter.Save(string path, DocumentContainer document)
         {
             throw new NotSupportedException("Saving documents as bmp drawing is not supported.");
         }
 
         /// <inheritdoc/>
-        void IProjectExporter.Save(string path, XProject project)
+        void IProjectExporter.Save(string path, ProjectContainer project)
         {
             throw new NotSupportedException("Saving projects as bmp drawing is not supported.");
         }
 
-        void Save(string path, XContainer container)
+        void Save(string path, PageContainer container)
         {
             var info = new SKImageInfo((int)container.Width, (int)container.Height);
             using (var bitmap = new SKBitmap(info))

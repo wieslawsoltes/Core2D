@@ -139,7 +139,7 @@ namespace Core2D.Shapes
         /// <param name="columnName">The column name.</param>
         /// <param name="value">The output string bound to data record.</param>
         /// <returns>True if binding was successful.</returns>
-        private static bool TryToBind(XRecord r, string columnName, out string value)
+        private static bool TryToBind(Record r, string columnName, out string value)
         {
             if (string.IsNullOrEmpty(columnName) || r == null)
             {
@@ -175,7 +175,7 @@ namespace Core2D.Shapes
         /// <param name="propertyName">The target property name.</param>
         /// <param name="value">The string bound to properties.</param>
         /// <returns>True if binding was successful.</returns>
-        private static bool TryToBind(ImmutableArray<XProperty> db, string propertyName, out string value)
+        private static bool TryToBind(ImmutableArray<Property> db, string propertyName, out string value)
         {
             if (string.IsNullOrEmpty(propertyName) || db == null)
             {
@@ -200,7 +200,7 @@ namespace Core2D.Shapes
         /// <param name="db">The properties database used for binding.</param>
         /// <param name="r">The external data record used for binding.</param>
         /// <returns>The string bound to properties or data record.</returns>
-        public string BindText(ImmutableArray<XProperty> db, XRecord r)
+        public string BindText(ImmutableArray<Property> db, Record r)
         {
             var record = this.Data?.Record ?? r;
 

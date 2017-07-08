@@ -5,21 +5,21 @@ using Xunit;
 
 namespace Core2D.UnitTests
 {
-    public class XLayerTests
+    public class LayerContainerTests
     {
         [Fact]
         [Trait("Core2D.Project", "Project")]
         public void Inherits_From_Selectable()
         {
-            var target = new XLayer();
-            Assert.True(target is XSelectable);
+            var target = new LayerContainer();
+            Assert.True(target is SelectableObject);
         }
 
         [Fact]
         [Trait("Core2D.Project", "Project")]
         public void Shapes_Not_Null()
         {
-            var target = new XLayer();
+            var target = new LayerContainer();
             Assert.NotNull(target.Shapes);
         }
 
@@ -27,7 +27,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Project", "Project")]
         public void Setting_IsVisible_Should_Invalidate_Layer()
         {
-            var target = XLayer.Create("Layer1");
+            var target = LayerContainer.Create("Layer1");
 
             bool raised = false;
 
@@ -45,7 +45,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Project", "Project")]
         public void Invalidate_Raises_InvalidateLayer_Event()
         {
-            var target = XLayer.Create("Layer1");
+            var target = LayerContainer.Create("Layer1");
 
             bool raised = false;
 
@@ -63,7 +63,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Project", "Project")]
         public void Invalidate_Sets_EventArgs()
         {
-            var target = XLayer.Create("Layer1");
+            var target = LayerContainer.Create("Layer1");
 
             InvalidateLayerEventArgs args = null;
 

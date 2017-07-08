@@ -61,15 +61,15 @@ namespace Core2D.Renderer
         public abstract void PopMatrix(object dc, object state);
 
         /// <summary>
-        /// Draws a <see cref="XContainer"/> using drawing context.
+        /// Draws a <see cref="PageContainer"/> using drawing context.
         /// </summary>
         /// <param name="dc">The native drawing context.</param>
-        /// <param name="container">The <see cref="XContainer"/> object.</param>
+        /// <param name="container">The <see cref="PageContainer"/> object.</param>
         /// <param name="dx">The X coordinate offset.</param>
         /// <param name="dy">The Y coordinate offset.</param>
         /// <param name="db">The properties database.</param>
         /// <param name="r">The data record.</param>
-        public virtual void Draw(object dc, XContainer container, double dx, double dy, object db, object r)
+        public virtual void Draw(object dc, PageContainer container, double dx, double dy, object db, object r)
         {
             foreach (var layer in container.Layers)
             {
@@ -81,15 +81,15 @@ namespace Core2D.Renderer
         }
 
         /// <summary>
-        /// Draws a <see cref="XLayer"/> using drawing context.
+        /// Draws a <see cref="LayerContainer"/> using drawing context.
         /// </summary>
         /// <param name="dc">The native drawing context.</param>
-        /// <param name="layer">The <see cref="XLayer"/> object.</param>
+        /// <param name="layer">The <see cref="LayerContainer"/> object.</param>
         /// <param name="dx">The X coordinate offset.</param>
         /// <param name="dy">The Y coordinate offset.</param>
         /// <param name="db">The properties database.</param>
         /// <param name="r">The data record.</param>
-        public virtual void Draw(object dc, XLayer layer, double dx, double dy, object db, object r)
+        public virtual void Draw(object dc, LayerContainer layer, double dx, double dy, object db, object r)
         {
             foreach (var shape in layer.Shapes)
             {

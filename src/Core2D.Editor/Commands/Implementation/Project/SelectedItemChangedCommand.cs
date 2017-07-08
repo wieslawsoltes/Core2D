@@ -6,14 +6,14 @@ using Core2D.Project;
 namespace Core2D.Editor.Commands
 {
     /// <inheritdoc/>
-    public class SelectedItemChangedCommand : Command<XSelectable>, ISelectedItemChangedCommand
+    public class SelectedItemChangedCommand : Command<SelectableObject>, ISelectedItemChangedCommand
     {
         /// <inheritdoc/>
-        public override bool CanRun(XSelectable item)
+        public override bool CanRun(SelectableObject item)
             => ServiceProvider.GetService<ProjectEditor>().IsEditMode();
 
         /// <inheritdoc/>
-        public override void Run(XSelectable item)
+        public override void Run(SelectableObject item)
             => ServiceProvider.GetService<ProjectEditor>().OnSelectedItemChanged(item);
     }
 }

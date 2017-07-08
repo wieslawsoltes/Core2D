@@ -6,14 +6,14 @@ using Core2D.Editor.Input;
 namespace Core2D.Editor.Commands
 {
     /// <inheritdoc/>
-    public class RemoveDatabaseCommand : Command<XDatabase>, IRemoveDatabaseCommand
+    public class RemoveDatabaseCommand : Command<Database>, IRemoveDatabaseCommand
     {
         /// <inheritdoc/>
-        public override bool CanRun(XDatabase db)
+        public override bool CanRun(Database db)
             => ServiceProvider.GetService<ProjectEditor>().IsEditMode();
 
         /// <inheritdoc/>
-        public override void Run(XDatabase db)
+        public override void Run(Database db)
             => ServiceProvider.GetService<ProjectEditor>().OnRemoveDatabase(db);
     }
 }

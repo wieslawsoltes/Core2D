@@ -12,7 +12,7 @@ namespace Core2D.Editor.Tools.Selection
     /// </summary>
     public class ToolRectangleSelection
     {
-        private readonly XLayer _layer;
+        private readonly LayerContainer _layer;
         private readonly RectangleShape _rectangle;
         private readonly ShapeStyle _style;
         private readonly BaseShape _point;
@@ -26,7 +26,7 @@ namespace Core2D.Editor.Tools.Selection
         /// <param name="shape">The selected shape.</param>
         /// <param name="style">The selection shapes style.</param>
         /// <param name="point">The selection point shape.</param>
-        public ToolRectangleSelection(XLayer layer, RectangleShape shape, ShapeStyle style, BaseShape point)
+        public ToolRectangleSelection(LayerContainer layer, RectangleShape shape, ShapeStyle style, BaseShape point)
         {
             _layer = layer;
             _rectangle = shape;

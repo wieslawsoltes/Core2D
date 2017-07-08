@@ -10,16 +10,16 @@ using Microsoft.Win32;
 namespace Core2D.Wpf.Commands
 {
     /// <inheritdoc/>
-    public class ExportDataCommand : Command<XDatabase>, IExportDataCommand
+    public class ExportDataCommand : Command<Database>, IExportDataCommand
     {
         /// <inheritdoc/>
-        public override bool CanRun(XDatabase db)
+        public override bool CanRun(Database db)
         {
             return ServiceProvider.GetService<ProjectEditor>().IsEditMode();
         }
 
         /// <inheritdoc/>
-        public override void Run(XDatabase db)
+        public override void Run(Database db)
         {
             if (db != null)
             {

@@ -38,17 +38,17 @@ namespace Core2D.FileWriter.SkiaSharpPdf
 
             IProjectExporter exporter = new PdfSkiaSharpExporter(renderer, presenter, 72.0f);
 
-            if (item is XContainer)
+            if (item is PageContainer)
             {
-                exporter.Save(path, item as XContainer);
+                exporter.Save(path, item as PageContainer);
             }
-            else if (item is XDocument)
+            else if (item is DocumentContainer)
             {
-                exporter.Save(path, item as XDocument);
+                exporter.Save(path, item as DocumentContainer);
             }
-            else if (item is XProject)
+            else if (item is ProjectContainer)
             {
-                exporter.Save(path, item as XProject);
+                exporter.Save(path, item as ProjectContainer);
             }
         }
     }

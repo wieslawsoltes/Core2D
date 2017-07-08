@@ -9,7 +9,7 @@ namespace Core2D.Data.Database
     /// <summary>
     /// Record value.
     /// </summary>
-    public class XValue : ObservableObject, ICopyable
+    public class Value : ObservableObject, ICopyable
     {
         private string _content;
 
@@ -30,11 +30,11 @@ namespace Core2D.Data.Database
         }
 
         /// <summary>
-        /// Creates a new <see cref="XValue"/> instance.
+        /// Creates a new <see cref="Value"/> instance.
         /// </summary>
         /// <param name="content">The value content.</param>
-        /// <returns>The new instance of the <see cref="XValue"/> class.</returns>
-        public static XValue Create(string content) => new XValue() { Content = content };
+        /// <returns>The new instance of the <see cref="Value"/> class.</returns>
+        public static Value Create(string content) => new Value() { Content = content };
 
         /// <summary>
         /// Check whether the <see cref="Content"/> property has changed from its default value.

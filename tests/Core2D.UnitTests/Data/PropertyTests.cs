@@ -5,13 +5,13 @@ using Xunit;
 
 namespace Core2D.UnitTests
 {
-    public class XPropertyTests
+    public class PropertyTests
     {
         [Fact]
         [Trait("Core2D.Data", "Data")]
         public void Inherits_From_ObservableObject()
         {
-            var target = new XProperty();
+            var target = new Property();
             Assert.True(target is ObservableObject);
         }
         
@@ -19,7 +19,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Data", "Data")]
         public void ToString_Should_Return_Value_String()
         {
-            var target = XProperty.Create(null, "Property1", "Value1");
+            var target = Property.Create(null, "Property1", "Value1");
 
             Assert.Equal("Value1", target.ToString());
         }

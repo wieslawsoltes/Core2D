@@ -10,10 +10,10 @@ namespace Core2D.Project
     /// <summary>
     /// Document model.
     /// </summary>
-    public class XDocument : XSelectable, ICopyable
+    public class DocumentContainer : SelectableObject, ICopyable
     {
         private bool _isExpanded = true;
-        private ImmutableArray<XContainer> _pages;
+        private ImmutableArray<PageContainer> _pages;
 
         /// <summary>
         /// Gets or sets flag indicating whether document is expanded.
@@ -28,16 +28,16 @@ namespace Core2D.Project
         /// Gets or sets document pages.
         /// </summary>
         [Content]
-        public ImmutableArray<XContainer> Pages
+        public ImmutableArray<PageContainer> Pages
         {
             get => _pages;
             set => Update(ref _pages, value);
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="XDocument"/> class.
+        /// Initializes a new instance of the <see cref="DocumentContainer"/> class.
         /// </summary>
-        public XDocument() : base() => _pages = ImmutableArray.Create<XContainer>();
+        public DocumentContainer() : base() => _pages = ImmutableArray.Create<PageContainer>();
 
         /// <inheritdoc/>
         public virtual object Copy(IDictionary<object, object> shared)
@@ -46,11 +46,11 @@ namespace Core2D.Project
         }
 
         /// <summary>
-        /// Creates a new <see cref="XDocument"/> instance.
+        /// Creates a new <see cref="DocumentContainer"/> instance.
         /// </summary>
         /// <param name="name">The document name.</param>
-        /// <returns>The new instance of the <see cref="XDocument"/> class.</returns>
-        public static XDocument Create(string name = "Document") => new XDocument() { Name = name };
+        /// <returns>The new instance of the <see cref="DocumentContainer"/> class.</returns>
+        public static DocumentContainer Create(string name = "Document") => new DocumentContainer() { Name = name };
 
         /// <summary>
         /// Check whether the <see cref="IsExpanded"/> property has changed from its default value.

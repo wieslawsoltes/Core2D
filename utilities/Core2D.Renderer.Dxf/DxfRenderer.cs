@@ -506,7 +506,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.Project.XContainer container, double dx, double dy, object db, object r)
+        public override void Draw(object dc, Core2D.Project.PageContainer container, double dx, double dy, object db, object r)
         {
             var dxf = dc as DxfDocument;
 
@@ -526,7 +526,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.Project.XLayer layer, double dx, double dy, object db, object r)
+        public override void Draw(object dc, Core2D.Project.LayerContainer layer, double dx, double dy, object db, object r)
         {
             var dxf = dc as DxfDocument;
 
@@ -774,8 +774,8 @@ namespace Core2D.Renderer.Dxf
         {
             var dxf = dc as DxfDocument;
 
-            var properties = (ImmutableArray<Data.XProperty>)db;
-            var record = (Data.Database.XRecord)r;
+            var properties = (ImmutableArray<Data.Property>)db;
+            var record = (Data.Database.Record)r;
             var tbind = text.BindText(properties, record);
             if (string.IsNullOrEmpty(tbind))
                 return;

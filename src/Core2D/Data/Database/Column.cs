@@ -9,11 +9,11 @@ namespace Core2D.Data.Database
     /// <summary>
     /// Database column.
     /// </summary>
-    public class XColumn : ObservableObject, ICopyable
+    public class Column : ObservableObject, ICopyable
     {
         private double _width;
         private bool _isVisible;
-        private XDatabase _owner;
+        private Database _owner;
 
         /// <summary>
         /// Gets or sets column display width.
@@ -36,7 +36,7 @@ namespace Core2D.Data.Database
         /// <summary>
         /// Gets or sets column owner object.
         /// </summary>
-        public XDatabase Owner
+        public Database Owner
         {
             get => _owner;
             set => Update(ref _owner, value);
@@ -49,16 +49,16 @@ namespace Core2D.Data.Database
         }
 
         /// <summary>
-        /// Creates a new <see cref="XColumn"/> instance.
+        /// Creates a new <see cref="Column"/> instance.
         /// </summary>
         /// <param name="owner">The owner instance.</param>
         /// <param name="name">The column name.</param>
         /// <param name="width">The column width.</param>
         /// <param name="isVisible">The flag indicating whether column is visible.</param>
-        /// <returns>The new instance of the <see cref="XColumn"/> class.</returns>
-        public static XColumn Create(XDatabase owner, string name, double width = double.NaN, bool isVisible = true)
+        /// <returns>The new instance of the <see cref="Column"/> class.</returns>
+        public static Column Create(Database owner, string name, double width = double.NaN, bool isVisible = true)
         {
-            return new XColumn()
+            return new Column()
             {
                 Name = name,
                 Width = width,

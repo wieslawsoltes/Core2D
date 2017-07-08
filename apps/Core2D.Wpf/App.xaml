@@ -135,13 +135,13 @@
             <style:ShapeStyleControl/>
         </DataTemplate>
         <!-- Data -->
-        <DataTemplate DataType="{x:Type Database:XRecord}">
+        <DataTemplate DataType="{x:Type Database:Record}">
             <data:RecordControl/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type Database:XDatabase}">
+        <DataTemplate DataType="{x:Type Database:Database}">
             <data:DatabaseControl/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type Data:XContext}">
+        <DataTemplate DataType="{x:Type Data:Context}">
             <data:DataControl/>
         </DataTemplate>
         <!-- State -->
@@ -218,19 +218,19 @@
             <path:PathGeometryControl/>
         </DataTemplate>
         <!-- Project -->
-        <DataTemplate DataType="{x:Type Project:XOptions}">
+        <DataTemplate DataType="{x:Type Project:Options}">
             <project:OptionsControl/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type Project:XProject}">
+        <DataTemplate DataType="{x:Type Project:ProjectContainer}">
             <project:ProjectControl/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type Project:XDocument}">
+        <DataTemplate DataType="{x:Type Project:DocumentContainer}">
             <project:DocumentControl/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type Project:XContainer}">
+        <DataTemplate DataType="{x:Type Project:PageContainer}">
             <project:ContainerControl/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type Project:XLayer}">
+        <DataTemplate DataType="{x:Type Project:LayerContainer}">
             <project:LayerControl/>
         </DataTemplate>
     </Application.Resources>

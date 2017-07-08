@@ -599,8 +599,8 @@ namespace Core2D.Renderer.WinForms
         {
             var _gfx = dc as Graphics;
 
-            var properties = (ImmutableArray<XProperty>)db;
-            var record = (XRecord)r;
+            var properties = (ImmutableArray<Property>)db;
+            var record = (Record)r;
             var tbind = text.BindText(properties, record);
             if (string.IsNullOrEmpty(tbind))
                 return;

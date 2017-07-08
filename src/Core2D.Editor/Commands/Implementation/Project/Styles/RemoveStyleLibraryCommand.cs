@@ -7,14 +7,14 @@ using Core2D.Style;
 namespace Core2D.Editor.Commands
 {
     /// <inheritdoc/>
-    public class RemoveStyleLibraryCommand : Command<XLibrary<ShapeStyle>>, IRemoveStyleLibraryCommand
+    public class RemoveStyleLibraryCommand : Command<Library<ShapeStyle>>, IRemoveStyleLibraryCommand
     {
         /// <inheritdoc/>
-        public override bool CanRun(XLibrary<ShapeStyle> library)
+        public override bool CanRun(Library<ShapeStyle> library)
             => ServiceProvider.GetService<ProjectEditor>().IsEditMode();
 
         /// <inheritdoc/>
-        public override void Run(XLibrary<ShapeStyle> library)
+        public override void Run(Library<ShapeStyle> library)
             => ServiceProvider.GetService<ProjectEditor>().OnRemoveStyleLibrary(library);
     }
 }

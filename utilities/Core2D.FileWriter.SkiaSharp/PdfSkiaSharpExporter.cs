@@ -31,7 +31,7 @@ namespace Core2D.FileWriter.SkiaSharpPdf
         }
 
         /// <inheritdoc/>
-        void IProjectExporter.Save(string path, XContainer container)
+        void IProjectExporter.Save(string path, PageContainer container)
         {
             using (var stream = new SKFileWStream(path))
             {
@@ -44,7 +44,7 @@ namespace Core2D.FileWriter.SkiaSharpPdf
         }
 
         /// <inheritdoc/>
-        void IProjectExporter.Save(string path, XDocument document)
+        void IProjectExporter.Save(string path, DocumentContainer document)
         {
             using (var stream = new SKFileWStream(path))
             {
@@ -62,7 +62,7 @@ namespace Core2D.FileWriter.SkiaSharpPdf
         }
 
         /// <inheritdoc/>
-        void IProjectExporter.Save(string path, XProject project)
+        void IProjectExporter.Save(string path, ProjectContainer project)
         {
             using (var stream = new SKFileWStream(path))
             {
@@ -82,7 +82,7 @@ namespace Core2D.FileWriter.SkiaSharpPdf
             }
         }
 
-        private void Add(SKDocument pdf, XContainer container)
+        private void Add(SKDocument pdf, PageContainer container)
         {
             using (var canvas = pdf.BeginPage((float)container.Template.Width, (float)container.Template.Height))
             {

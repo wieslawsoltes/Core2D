@@ -17,7 +17,7 @@
         </Menu>
         <DropDown Items="{Binding Databases}" SelectedItem="{Binding CurrentDatabase, Mode=TwoWay}" Grid.Row="1" Classes="default" IsVisible="{Binding CurrentDatabase, Converter={Static converters:IsNotNullConverter.Instance}}">
             <DropDown.DataTemplates>
-                <DataTemplate DataType="Database:XDatabase">
+                <DataTemplate DataType="Database:Database">
                     <TextBlock Text="{Binding Name}" Classes="default"/>
                 </DataTemplate>
             </DropDown.DataTemplates>

@@ -5,7 +5,7 @@ using System.Windows.Input;
 namespace Core2D.Editor.Commands
 {
     /// <summary>
-    /// Toggle <see cref="XOptions.CloneStyle"/> option.
+    /// Toggle <see cref="Project.Options.CloneStyle"/> option.
     /// </summary>
     public interface ICloneStyleCommand : ICommand
     {

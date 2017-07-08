@@ -57,8 +57,8 @@ namespace Core2D.Avalonia.Direct2D.Modules
             builder.RegisterType<WebpSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
             builder.RegisterType<EmfWriter>().As<IFileWriter>().InstancePerLifetimeScope();
             builder.RegisterType<DxfWriter>().As<IFileWriter>().InstancePerLifetimeScope();
-            builder.RegisterType<CsvHelperReader>().As<ITextFieldReader<XDatabase>>().InstancePerLifetimeScope();
-            builder.RegisterType<CsvHelperWriter>().As<ITextFieldWriter<XDatabase>>().InstancePerLifetimeScope();
+            builder.RegisterType<CsvHelperReader>().As<ITextFieldReader<Database>>().InstancePerLifetimeScope();
+            builder.RegisterType<CsvHelperWriter>().As<ITextFieldWriter<Database>>().InstancePerLifetimeScope();
         }
     }
 }

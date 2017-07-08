@@ -5,7 +5,7 @@ using System.Windows.Input;
 namespace Core2D.Editor.Commands
 {
     /// <summary>
-    /// Toggle <see cref="XOptions.TryToConnect"/> option.
+    /// Toggle <see cref="Project.Options.TryToConnect"/> option.
     /// </summary>
     public interface ITryToConnectCommand : ICommand
     {

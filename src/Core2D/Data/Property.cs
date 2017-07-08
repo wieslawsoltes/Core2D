@@ -9,10 +9,10 @@ namespace Core2D.Data
     /// <summary>
     /// Data property.
     /// </summary>
-    public class XProperty : ObservableObject, ICopyable
+    public class Property : ObservableObject, ICopyable
     {
         private string _value;
-        private XContext _owner;
+        private Context _owner;
 
         /// <summary>
         /// Gets or sets property value.
@@ -27,7 +27,7 @@ namespace Core2D.Data
         /// <summary>
         /// Gets or sets property owner.
         /// </summary>
-        public XContext Owner
+        public Context Owner
         {
             get => _owner;
             set => Update(ref _owner, value);
@@ -40,15 +40,15 @@ namespace Core2D.Data
         }
 
         /// <summary>
-        /// Creates a new <see cref="XProperty"/> instance.
+        /// Creates a new <see cref="Property"/> instance.
         /// </summary>
         /// <param name="owner">The property owner.</param>
         /// <param name="name">The property name.</param>
         /// <param name="value">The property value.</param>
-        /// <returns>The new instance of the <see cref="XProperty"/> class.</returns>
-        public static XProperty Create(XContext owner, string name, string value)
+        /// <returns>The new instance of the <see cref="Property"/> class.</returns>
+        public static Property Create(Context owner, string name, string value)
         {
-            return new XProperty()
+            return new Property()
             {
                 Name = name,
                 Value = value,

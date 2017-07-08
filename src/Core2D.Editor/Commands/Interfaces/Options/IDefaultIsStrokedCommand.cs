@@ -5,7 +5,7 @@ using System.Windows.Input;
 namespace Core2D.Editor.Commands
 {
     /// <summary>
-    /// Toggle <see cref="XOptions.DefaultIsStroked"/> option.
+    /// Toggle <see cref="Project.Options.DefaultIsStroked"/> option.
     /// </summary>
     public interface IDefaultIsStrokedCommand : ICommand
     {

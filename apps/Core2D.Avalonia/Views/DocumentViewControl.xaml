@@ -29,7 +29,7 @@
                     </Style>
                 </TabStrip.Styles>
                 <TabStrip.DataTemplates>
-                    <DataTemplate DataType="Project:XDocument">
+                    <DataTemplate DataType="Project:DocumentContainer">
                         <TextBlock Text="{Binding Name}" Margin="2"/>
                     </DataTemplate>
                 </TabStrip.DataTemplates>
@@ -39,10 +39,10 @@
         <ScrollViewer>
             <Carousel Items="{Binding Project.Documents}" SelectedIndex="{Binding #documents.SelectedIndex}" IsVirtualized="False" VerticalAlignment="Center" Margin="2">
                 <Carousel.DataTemplates>
-                    <DataTemplate DataType="Project:XDocument">
+                    <DataTemplate DataType="Project:DocumentContainer">
                         <ItemsControl VerticalAlignment="Stretch" Items="{Binding Pages}">
                             <ItemsControl.DataTemplates>
-                                <DataTemplate DataType="Project:XContainer">
+                                <DataTemplate DataType="Project:PageContainer">
                                     <views:ContainerViewControl Container="{Binding}" ClipToBounds="False" Margin="0,4,0,4"/>
                                 </DataTemplate>
                             </ItemsControl.DataTemplates>

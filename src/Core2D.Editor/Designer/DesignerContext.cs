@@ -33,34 +33,34 @@ namespace Core2D.Editor.Designer
         public static MatrixObject Transform { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Project.XContainer"/> template.
+        /// The design time <see cref="Core2D.Project.PageContainer"/> template.
         /// </summary>
-        public static XContainer Template { get; set; }
+        public static PageContainer Template { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Project.XContainer"/> page.
+        /// The design time <see cref="Core2D.Project.PageContainer"/> page.
         /// </summary>
-        public static XContainer Page { get; set; }
+        public static PageContainer Page { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Project.XDocument"/>.
+        /// The design time <see cref="Core2D.Project.DocumentContainer"/>.
         /// </summary>
-        public static XDocument Document { get; set; }
+        public static DocumentContainer Document { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Project.XLayer"/>.
+        /// The design time <see cref="Core2D.Project.LayerContainer"/>.
         /// </summary>
-        public static XLayer Layer { get; set; }
+        public static LayerContainer Layer { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Project.XOptions"/>.
+        /// The design time <see cref="Core2D.Project.Options"/>.
         /// </summary>
-        public static XOptions Options { get; set; }
+        public static Options Options { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Project.XProject"/>.
+        /// The design time <see cref="Core2D.Project.ProjectContainer"/>.
         /// </summary>
-        public static XProject Project { get; set; }
+        public static ProjectContainer Project { get; set; }
 
         /// <summary>
         /// The design time <see cref="Core2D.Shape.ShapeState"/>.
@@ -68,19 +68,19 @@ namespace Core2D.Editor.Designer
         public static ShapeState State { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Data.Database.XDatabase"/>.
+        /// The design time <see cref="Core2D.Data.Database.Database"/>.
         /// </summary>
-        public static XDatabase Database { get; set; }
+        public static Database Database { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Data.XContext"/>.
+        /// The design time <see cref="Core2D.Data.Context"/>.
         /// </summary>
-        public static XContext Data { get; set; }
+        public static Context Data { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Data.Database.XRecord"/>.
+        /// The design time <see cref="Core2D.Data.Database.Record"/>.
         /// </summary>
-        public static XRecord Record { get; set; }
+        public static Record Record { get; set; }
 
         /// <summary>
         /// The design time <see cref="Core2D.Style.ArgbColor"/>.
@@ -247,19 +247,19 @@ namespace Core2D.Editor.Designer
 
             // Data
 
-            var db = XDatabase.Create("Db");
+            var db = Database.Create("Db");
             var fields = new string[] { "Column0", "Column1" };
-            var columns = ImmutableArray.CreateRange(fields.Select(c => XColumn.Create(db, c)));
+            var columns = ImmutableArray.CreateRange(fields.Select(c => Column.Create(db, c)));
             db.Columns = columns;
-            var values = Enumerable.Repeat("<empty>", db.Columns.Length).Select(c => XValue.Create(c));
-            var record = XRecord.Create(
+            var values = Enumerable.Repeat("<empty>", db.Columns.Length).Select(c => Value.Create(c));
+            var record = Record.Create(
                 db,
                 ImmutableArray.CreateRange(values));
             db.Records = db.Records.Add(record);
             db.CurrentRecord = record;
 
             Database = db;
-            Data = XContext.Create(record);
+            Data = Core2D.Data.Context.Create(record);
             Record = record;
 
             // Project
@@ -268,18 +268,18 @@ namespace Core2D.Editor.Designer
 
             Project = factory.GetProject();
 
-            Template = XContainer.CreateTemplate();
+            Template = PageContainer.CreateTemplate();
 
-            Page = XContainer.CreatePage();
+            Page = PageContainer.CreatePage();
             var layer = Page.Layers.FirstOrDefault();
             layer.Shapes = layer.Shapes.Add(LineShape.Create(0, 0, null, null));
             Page.CurrentLayer = layer;
             Page.CurrentShape = layer.Shapes.FirstOrDefault();
             Page.Template = Template;
 
-            Document = XDocument.Create();
-            Layer = XLayer.Create();
-            Options = XOptions.Create();
+            Document = DocumentContainer.Create();
+            Layer = LayerContainer.Create();
+            Options = Options.Create();
 
             // State
 

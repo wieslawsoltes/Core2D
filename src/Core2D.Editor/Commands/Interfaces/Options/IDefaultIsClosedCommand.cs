@@ -5,7 +5,7 @@ using System.Windows.Input;
 namespace Core2D.Editor.Commands
 {
     /// <summary>
-    /// Toggle <see cref="XOptions.DefaultIsClosed"/> option.
+    /// Toggle <see cref="Project.Options.DefaultIsClosed"/> option.
     /// </summary>
     public interface IDefaultIsClosedCommand : ICommand
     {

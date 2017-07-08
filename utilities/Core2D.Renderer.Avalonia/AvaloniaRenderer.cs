@@ -541,8 +541,8 @@ namespace Core2D.Renderer.Avalonia
         {
             var _gfx = dc as AM.DrawingContext;
 
-            var properties = (ImmutableArray<XProperty>)db;
-            var record = (XRecord)r;
+            var properties = (ImmutableArray<Property>)db;
+            var record = (Record)r;
             var tbind = text.BindText(properties, record);
             if (string.IsNullOrEmpty(tbind))
                 return;

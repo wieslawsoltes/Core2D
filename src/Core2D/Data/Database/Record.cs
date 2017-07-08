@@ -11,25 +11,25 @@ namespace Core2D.Data.Database
     /// <summary>
     /// Database record.
     /// </summary>
-    public class XRecord : ObservableObject, ICopyable
+    public class Record : ObservableObject, ICopyable
     {
-        private ImmutableArray<XValue> _values;
-        private XDatabase _owner;
+        private ImmutableArray<Value> _values;
+        private Database _owner;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="XRecord"/> class.
+        /// Initializes a new instance of the <see cref="Record"/> class.
         /// </summary>
-        public XRecord()
+        public Record()
             : base()
         {
-            _values = ImmutableArray.Create<XValue>();
+            _values = ImmutableArray.Create<Value>();
         }
 
         /// <summary>
         /// Gets or sets record values.
         /// </summary>
         [Content]
-        public ImmutableArray<XValue> Values
+        public ImmutableArray<Value> Values
         {
             get => _values;
             set => Update(ref _values, value);
@@ -38,7 +38,7 @@ namespace Core2D.Data.Database
         /// <summary>
         /// Gets or sets record owner.
         /// </summary>
-        public XDatabase Owner
+        public Database Owner
         {
             get => _owner;
             set => Update(ref _owner, value);
@@ -51,14 +51,14 @@ namespace Core2D.Data.Database
         }
 
         /// <summary>
-        /// Creates a new <see cref="XRecord"/> instance.
+        /// Creates a new <see cref="Record"/> instance.
         /// </summary>
         /// <param name="owner">The record owner.</param>
         /// <param name="values">The record values.</param>
-        /// <returns>The new instance of the <see cref="XRecord"/> class.</returns>
-        public static XRecord Create(XDatabase owner, ImmutableArray<XValue> values)
+        /// <returns>The new instance of the <see cref="Record"/> class.</returns>
+        public static Record Create(Database owner, ImmutableArray<Value> values)
         {
-            return new XRecord()
+            return new Record()
             {
                 Values = values,
                 Owner = owner
@@ -66,15 +66,15 @@ namespace Core2D.Data.Database
         }
 
         /// <summary>
-        /// Creates a new <see cref="XRecord"/> instance.
+        /// Creates a new <see cref="Record"/> instance.
         /// </summary>
         /// <param name="owner">The record owner.</param>
         /// <param name="id">The record Id.</param>
         /// <param name="values">The record values.</param>
-        /// <returns>The new instance of the <see cref="XRecord"/> class.</returns>
-        public static XRecord Create(XDatabase owner, string id, ImmutableArray<XValue> values)
+        /// <returns>The new instance of the <see cref="Record"/> class.</returns>
+        public static Record Create(Database owner, string id, ImmutableArray<Value> values)
         {
-            var record = new XRecord()
+            var record = new Record()
             {
                 Values = values,
                 Owner = owner
@@ -89,19 +89,19 @@ namespace Core2D.Data.Database
         }
 
         /// <summary>
-        /// Creates a new <see cref="XRecord"/> instance.
+        /// Creates a new <see cref="Record"/> instance.
         /// </summary>
         /// <param name="owner">The record owner.</param>
         /// <param name="value">The record value.</param>
-        /// <returns>The new instance of the <see cref="XRecord"/> class.</returns>
-        public static XRecord Create(XDatabase owner, string value)
+        /// <returns>The new instance of the <see cref="Record"/> class.</returns>
+        public static Record Create(Database owner, string value)
         {
-            return new XRecord()
+            return new Record()
             {
                 Values = ImmutableArray.CreateRange(
                     Enumerable.Repeat(
                         value, 
-                        owner.Columns.Length).Select(c => XValue.Create(c))),
+                        owner.Columns.Length).Select(c => Value.Create(c))),
                 Owner = owner
             };
         }

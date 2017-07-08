@@ -6,14 +6,14 @@ using Core2D.Project;
 namespace Core2D.Editor.Commands
 {
     /// <inheritdoc/>
-    public class EditTemplateCommand : Command<XContainer>, IEditTemplateCommand
+    public class EditTemplateCommand : Command<PageContainer>, IEditTemplateCommand
     {
         /// <inheritdoc/>
-        public override bool CanRun(XContainer template)
+        public override bool CanRun(PageContainer template)
             => ServiceProvider.GetService<ProjectEditor>().IsEditMode();
 
         /// <inheritdoc/>
-        public override void Run(XContainer template)
+        public override void Run(PageContainer template)
             => ServiceProvider.GetService<ProjectEditor>().OnEditTemplate(template);
     }
 }

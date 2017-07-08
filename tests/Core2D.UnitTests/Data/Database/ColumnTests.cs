@@ -5,13 +5,13 @@ using Xunit;
 
 namespace Core2D.UnitTests
 {
-    public class XValueTests
+    public class ColumnTests
     {
         [Fact]
         [Trait("Core2D.Data", "Database")]
         public void Inherits_From_ObservableObject()
         {
-            var target = new XValue();
+            var target = new Column();
             Assert.True(target is ObservableObject);
         }
     }

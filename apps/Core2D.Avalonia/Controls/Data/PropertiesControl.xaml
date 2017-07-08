@@ -19,7 +19,7 @@
         <TextBlock Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" Text="Value" Classes="default"/>
         <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="2" Items="{Binding Properties}">
             <ItemsControl.DataTemplates>
-                <DataTemplate DataType="Data:XProperty">
+                <DataTemplate DataType="Data:Property">
                     <Grid VerticalAlignment="Top">
                         <TextBox VerticalAlignment="Center" Text="{Binding Name, Mode=TwoWay}" Classes="property"/>
                     </Grid>
@@ -28,7 +28,7 @@
         </ItemsControl>
         <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="2" Items="{Binding Properties}">
             <ItemsControl.DataTemplates>
-                <DataTemplate DataType="Data:XProperty">
+                <DataTemplate DataType="Data:Property">
                     <Grid VerticalAlignment="Top" ColumnDefinitions="*,30">
                         <TextBox VerticalAlignment="Center" Text="{Binding Value, Mode=TwoWay}" Classes="property" Grid.Column="0"/>
                         <Button VerticalAlignment="Center" Content="-" Classes="property" Grid.Column="1" Command="{Static Editor:ProjectEditorCommands.RemovePropertyCommand}" CommandParameter="{Binding}"/>

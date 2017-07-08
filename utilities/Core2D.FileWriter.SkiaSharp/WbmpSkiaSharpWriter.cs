@@ -39,15 +39,15 @@ namespace Core2D.FileWriter.SkiaSharpWbmp
 
             IProjectExporter exporter = new WbmpSkiaSharpExporter(renderer, presenter);
 
-            if (item is XContainer)
+            if (item is PageContainer)
             {
-                exporter.Save(path, item as XContainer);
+                exporter.Save(path, item as PageContainer);
             }
-            else if (item is XDocument)
+            else if (item is DocumentContainer)
             {
                 throw new NotSupportedException("Saving documents as wbmp drawing is not supported.");
             }
-            else if (item is XProject)
+            else if (item is ProjectContainer)
             {
                 throw new NotSupportedException("Saving projects as wbmp drawing is not supported.");
             }

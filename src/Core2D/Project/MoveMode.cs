@@ -4,9 +4,18 @@
 namespace Core2D.Project
 {
     /// <summary>
-    /// Selectable base class.
+    /// Specifies move modes.
     /// </summary>
-    public abstract class XSelectable : ObservableObject
+    public enum MoveMode
     {
+        /// <summary>
+        /// Point move mode.
+        /// </summary>
+        Point,
+
+        /// <summary>
+        /// Shape move mode.
+        /// </summary>
+        Shape
     }
 }

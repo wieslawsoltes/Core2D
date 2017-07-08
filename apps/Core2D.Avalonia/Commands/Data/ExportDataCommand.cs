@@ -10,16 +10,16 @@ using Core2D.Editor.Input;
 namespace Core2D.Avalonia.Commands
 {
     /// <inheritdoc/>
-    public class ExportDataCommand : Command<XDatabase>, IExportDataCommand
+    public class ExportDataCommand : Command<Database>, IExportDataCommand
     {
         /// <inheritdoc/>
-        public override bool CanRun(XDatabase db)
+        public override bool CanRun(Database db)
         {
             return ServiceProvider.GetService<ProjectEditor>().IsEditMode();
         }
 
         /// <inheritdoc/>
-        public override async void Run(XDatabase db)
+        public override async void Run(Database db)
         {
             if (db != null)
             {

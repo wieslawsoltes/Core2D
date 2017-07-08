@@ -11,7 +11,7 @@ namespace Core2D.Project
     /// <summary>
     /// Named items library.
     /// </summary>
-    public class XLibrary<T> : ObservableObject, ILibrary, ICopyable
+    public class Library<T> : ObservableObject, ILibrary, ICopyable
     {
         private ImmutableArray<T> _items;
         private T _selected;
@@ -36,9 +36,9 @@ namespace Core2D.Project
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="XLibrary{T}"/> class.
+        /// Initializes a new instance of the <see cref="Library{T}"/> class.
         /// </summary>
-        public XLibrary()
+        public Library()
             : base()
         {
             _items = ImmutableArray.Create<T>();
@@ -58,21 +58,21 @@ namespace Core2D.Project
         }
 
         /// <summary>
-        /// Creates a new instance of the <see cref="XLibrary{T}"/> class.
+        /// Creates a new instance of the <see cref="Library{T}"/> class.
         /// </summary>
         /// <param name="name">The library name.</param>
-        /// <returns>The new instance of the <see cref="XLibrary{T}"/> class.</returns>
-        public static XLibrary<T> Create(string name) => new XLibrary<T>() { Name = name };
+        /// <returns>The new instance of the <see cref="Library{T}"/> class.</returns>
+        public static Library<T> Create(string name) => new Library<T>() { Name = name };
 
         /// <summary>
-        /// Creates a new instance of the <see cref="XLibrary{T}"/> class.
+        /// Creates a new instance of the <see cref="Library{T}"/> class.
         /// </summary>
         /// <param name="name">The library name.</param>
         /// <param name="items">The items collection.</param>
-        /// <returns>The new instance of the <see cref="XLibrary{T}"/> class.</returns>
-        public static XLibrary<T> Create(string name, IEnumerable<T> items)
+        /// <returns>The new instance of the <see cref="Library{T}"/> class.</returns>
+        public static Library<T> Create(string name, IEnumerable<T> items)
         {
-            return new XLibrary<T>()
+            return new Library<T>()
             {
                 Name = name,
                 Items = ImmutableArray.CreateRange<T>(items),

@@ -44,11 +44,11 @@ namespace Core2D.UnitTests
             var target = new GroupShape();
 
             var shape = new Class1();
-            shape.Data.Properties = shape.Data.Properties.Add(new XProperty());
+            shape.Data.Properties = shape.Data.Properties.Add(new Property());
             target.Shapes = target.Shapes.Add(shape);
 
             var point = new PointShape();
-            point.Data.Properties = point.Data.Properties.Add(new XProperty());
+            point.Data.Properties = point.Data.Properties.Add(new Property());
             target.Connectors = target.Connectors.Add(point);
 
             Assert.Equal(2, target.ShapesProperties.Length);
@@ -61,13 +61,13 @@ namespace Core2D.UnitTests
             var target = new GroupShape();
 
             var shape1 = new Class1();
-            shape1.Data.Properties = shape1.Data.Properties.Add(new XProperty());
+            shape1.Data.Properties = shape1.Data.Properties.Add(new Property());
             target.Shapes = target.Shapes.Add(shape1);
 
             Assert.Equal(1, target.ShapesProperties.Length);
 
             var shape2 = new Class1();
-            shape2.Data.Properties = shape2.Data.Properties.Add(new XProperty());
+            shape2.Data.Properties = shape2.Data.Properties.Add(new Property());
             target.Shapes = target.Shapes.Add(shape2);
 
             Assert.Equal(2, target.ShapesProperties.Length);
@@ -80,13 +80,13 @@ namespace Core2D.UnitTests
             var target = new GroupShape();
 
             var point1 = new PointShape();
-            point1.Data.Properties = point1.Data.Properties.Add(new XProperty());
+            point1.Data.Properties = point1.Data.Properties.Add(new Property());
             target.Connectors = target.Connectors.Add(point1);
 
             Assert.Equal(1, target.ShapesProperties.Length);
 
             var point2 = new PointShape();
-            point2.Data.Properties = point2.Data.Properties.Add(new XProperty());
+            point2.Data.Properties = point2.Data.Properties.Add(new Property());
             target.Connectors = target.Connectors.Add(point2);
 
             Assert.Equal(2, target.ShapesProperties.Length);
@@ -99,11 +99,11 @@ namespace Core2D.UnitTests
             var target = new GroupShape();
 
             var text = new TextShape();
-            text.Data.Properties = text.Data.Properties.Add(new XProperty());
+            text.Data.Properties = text.Data.Properties.Add(new Property());
             target.Shapes = target.Shapes.Add(text);
 
             var point = new PointShape();
-            point.Data.Properties = point.Data.Properties.Add(new XProperty());
+            point.Data.Properties = point.Data.Properties.Add(new Property());
             target.Connectors = target.Connectors.Add(point);
 
             Assert.Equal(3, target.GetPoints().Count());

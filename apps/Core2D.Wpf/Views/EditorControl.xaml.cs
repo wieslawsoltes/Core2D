@@ -98,7 +98,7 @@ namespace Core2D.Wpf.Views
             if (!e.Data.GetDataPresent(DataFormats.FileDrop)
                 && !e.Data.GetDataPresent(typeof(BaseShape))
                 && !e.Data.GetDataPresent(typeof(GroupShape))
-                && !e.Data.GetDataPresent(typeof(XRecord))
+                && !e.Data.GetDataPresent(typeof(Record))
                 && !e.Data.GetDataPresent(typeof(ShapeStyle)))
             {
                 e.Effects = DragDropEffects.None;
@@ -162,11 +162,11 @@ namespace Core2D.Wpf.Views
             }
 
             // Records.
-            if (e.Data.GetDataPresent(typeof(XRecord)))
+            if (e.Data.GetDataPresent(typeof(Record)))
             {
                 try
                 {
-                    if (e.Data.GetData(typeof(XRecord)) is XRecord record)
+                    if (e.Data.GetData(typeof(Record)) is Record record)
                     {
                         var p = e.GetPosition(drawableControl);
                         _projectEditor.OnDropRecord(record, p.X, p.Y);
@@ -198,11 +198,11 @@ namespace Core2D.Wpf.Views
             }
 
             // Templates.
-            if (e.Data.GetDataPresent(typeof(XContainer)))
+            if (e.Data.GetDataPresent(typeof(PageContainer)))
             {
                 try
                 {
-                    if (e.Data.GetData(typeof(XContainer)) is XContainer template)
+                    if (e.Data.GetData(typeof(PageContainer)) is PageContainer template)
                     {
                         _projectEditor.OnApplyTemplate(template);
                         e.Handled = true;

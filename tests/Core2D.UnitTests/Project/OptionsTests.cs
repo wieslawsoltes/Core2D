@@ -5,18 +5,14 @@ using Xunit;
 
 namespace Core2D.UnitTests
 {
-    public class XSelectableTests
+    public class OptionsTests
     {
         [Fact]
         [Trait("Core2D.Project", "Project")]
         public void Inherits_From_ObservableObject()
         {
-            var target = new Class1();
+            var target = new Options();
             Assert.True(target is ObservableObject);
-        }
-        
-        private class Class1 : XSelectable
-        {
         }
     }
 }

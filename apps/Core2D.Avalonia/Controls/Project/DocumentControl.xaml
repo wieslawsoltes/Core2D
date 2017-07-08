@@ -19,7 +19,7 @@
         <TabItem Header="Pages" Classes="property">
             <ListBox Items="{Binding Pages}" Classes="default">
                 <ListBox.DataTemplates>
-                    <DataTemplate DataType="Project:XContainer">
+                    <DataTemplate DataType="Project:PageContainer">
                         <TextBlock Text="{Binding Name}" Classes="list"/>
                     </DataTemplate>
                 </ListBox.DataTemplates>

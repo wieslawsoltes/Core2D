@@ -15,7 +15,7 @@ namespace Core2D.Editor.Tools.Selection
     /// </summary>
     public class ToolArcSelection
     {
-        private readonly XLayer _layer;
+        private readonly LayerContainer _layer;
         private readonly IArc _arc;
         private readonly ShapeStyle _style;
         private readonly BaseShape _point;
@@ -35,7 +35,7 @@ namespace Core2D.Editor.Tools.Selection
         /// <param name="shape">The selected shape.</param>
         /// <param name="style">The selection shapes style.</param>
         /// <param name="point">The selection point shape.</param>
-        public ToolArcSelection(XLayer layer, IArc shape, ShapeStyle style, BaseShape point)
+        public ToolArcSelection(LayerContainer layer, IArc shape, ShapeStyle style, BaseShape point)
         {
             _layer = layer;
             _arc = shape;

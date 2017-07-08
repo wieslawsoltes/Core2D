@@ -5,7 +5,7 @@ using System.Windows.Input;
 namespace Core2D.Editor.Commands
 {
     /// <summary>
-    /// Toggle <see cref="XOptions.SnapToGrid"/> option.
+    /// Toggle <see cref="Project.Options.SnapToGrid"/> option.
     /// </summary>
     public interface ISnapToGridCommand : ICommand
     {

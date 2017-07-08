@@ -152,7 +152,7 @@ namespace Core2D.Shapes
         /// <returns>The new instance of the <see cref="PointShape"/> class.</returns>
         public PointShape Clone()
         {
-            var data = XContext.Create(this.Data.Record);
+            var data = Core2D.Data.Context.Create((Data.Database.Record)this.Data.Record);
 
             // The property Value is of type object and is not cloned.
             if (this.Data.Properties.Length > 0)
@@ -161,7 +161,7 @@ namespace Core2D.Shapes
                 foreach (var property in this.Data.Properties)
                 {
                     builder.Add(
-                        XProperty.Create(
+                        Property.Create(
                             data,
                             property.Name,
                             property.Value));

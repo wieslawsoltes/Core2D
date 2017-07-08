@@ -5,13 +5,13 @@ using Xunit;
 
 namespace Core2D.UnitTests
 {
-    public class XLibraryOfTTests
+    public class LibraryOfTTests
     {
         [Fact]
         [Trait("Core2D.Project", "Project")]
         public void Inherits_From_ObservableObject()
         {
-            var target = new XLibrary<XContainer>();
+            var target = new Library<PageContainer>();
             Assert.True(target is ObservableObject);
         }
 
@@ -19,7 +19,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Project", "Project")]
         public void Items_Not_Null()
         {
-            var target = new XLibrary<XContainer>();
+            var target = new Library<PageContainer>();
             Assert.NotNull(target.Items);
         }
 
@@ -27,7 +27,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Project", "Project")]
         public void Selected_Is_Null()
         {
-            var target = new XLibrary<XContainer>();
+            var target = new Library<PageContainer>();
             Assert.Null(target.Selected);
         }
 
@@ -35,9 +35,9 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Project", "Project")]
         public void SetSelected_Sets_Selected()
         {
-            var target = new XLibrary<XContainer>();
+            var target = new Library<PageContainer>();
 
-            var item = XContainer.CreateTemplate();
+            var item = PageContainer.CreateTemplate();
             target.Items = target.Items.Add(item);
 
             target.SetSelected(item);

@@ -5,13 +5,13 @@ using Xunit;
 
 namespace Core2D.UnitTests
 {
-    public class XContextTests
+    public class ContextTests
     {
         [Fact]
         [Trait("Core2D.Data", "Database")]
         public void Inherits_From_ObservableObject()
         {
-            var target = new XContext();
+            var target = new Context();
             Assert.True(target is ObservableObject);
         }
 
@@ -19,34 +19,34 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Data", "Database")]
         public void Properties_Not_Null()
         {
-            var target = new XContext();
+            var target = new Context();
             Assert.NotNull(target.Properties);
         }
 
         [Fact]
         [Trait("Core2D.Data", "Database")]
-        public void this_Operator_Returns_Null()
+        public void This_Operator_Returns_Null()
         {
-            var target = new XContext();
+            var target = new Context();
             Assert.Equal(null, target["Name1"]);
         }
 
         [Fact]
         [Trait("Core2D.Data", "Database")]
-        public void this_Operator_Returns_Property_Value()
+        public void This_Operator_Returns_Property_Value()
         {
-            var target = new XContext();
-            target.Properties = target.Properties.Add(XProperty.Create(target, "Name1", "Value1"));
+            var target = new Context();
+            target.Properties = target.Properties.Add(Property.Create(target, "Name1", "Value1"));
 
             Assert.Equal("Value1", target["Name1"]);
         }
 
         [Fact]
         [Trait("Core2D.Data", "Database")]
-        public void this_Operator_Sets_Property_Value()
+        public void This_Operator_Sets_Property_Value()
         {
-            var target = new XContext();
-            target.Properties = target.Properties.Add(XProperty.Create(target, "Name1", "Value1"));
+            var target = new Context();
+            target.Properties = target.Properties.Add(Property.Create(target, "Name1", "Value1"));
 
             target["Name1"] = "NewValue1";
             Assert.Equal("NewValue1", target["Name1"]);
@@ -54,9 +54,9 @@ namespace Core2D.UnitTests
 
         [Fact]
         [Trait("Core2D.Data", "Database")]
-        public void this_Operator_Creates_Property()
+        public void This_Operator_Creates_Property()
         {
-            var target = new XContext();
+            var target = new Context();
             Assert.Equal(0, target.Properties.Length);
 
             target["Name1"] = "Value1";

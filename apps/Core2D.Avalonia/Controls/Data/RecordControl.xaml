@@ -15,7 +15,7 @@
         <TextBlock Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Text="Value" Classes="default"/>
         <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding Owner.Columns}">
             <ItemsControl.DataTemplates>
-                <DataTemplate DataType="Database:XColumn">
+                <DataTemplate DataType="Database:Column">
                     <Grid VerticalAlignment="Top">
                         <TextBox VerticalAlignment="Center" Text="{Binding Name, Mode=TwoWay}" Classes="property"/>
                     </Grid>
@@ -24,7 +24,7 @@
         </ItemsControl>
         <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="1" Items="{Binding Values}">
             <ItemsControl.DataTemplates>
-                <DataTemplate DataType="Database:XValue">
+                <DataTemplate DataType="Database:Value">
                     <Grid VerticalAlignment="Top">
                         <TextBox VerticalAlignment="Center" Text="{Binding Content, Mode=TwoWay}" Classes="property"/>
                     </Grid>

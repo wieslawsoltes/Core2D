@@ -12,13 +12,13 @@ namespace Core2D.Project
     /// <summary>
     /// Project options.
     /// </summary>
-    public class XOptions : ObservableObject, ICopyable
+    public class Options : ObservableObject, ICopyable
     {
         private bool _snapToGrid = true;
         private double _snapX = 15.0;
         private double _snapY = 15.0;
         private double _hitThreshold = 7.0;
-        private XMoveMode _moveMode = XMoveMode.Point;
+        private MoveMode _moveMode = MoveMode.Point;
         private bool _defaultIsStroked = true;
         private bool _defaultIsFilled = false;
         private bool _defaultIsClosed = true;
@@ -70,7 +70,7 @@ namespace Core2D.Project
         /// <summary>
         /// Gets or sets how selected shapes are moved.
         /// </summary>
-        public XMoveMode MoveMode
+        public MoveMode MoveMode
         {
             get => _moveMode;
             set => Update(ref _moveMode, value);
@@ -182,18 +182,18 @@ namespace Core2D.Project
         }
 
         /// <summary>
-        /// Creates a new <see cref="XOptions"/> instance.
+        /// Creates a new <see cref="Options"/> instance.
         /// </summary>
-        /// <returns>The new instance of the <see cref="XOptions"/> class.</returns>
-        public static XOptions Create()
+        /// <returns>The new instance of the <see cref="Options"/> class.</returns>
+        public static Options Create()
         {
-            var options = new XOptions()
+            var options = new Options()
             {
                 SnapToGrid = true,
                 SnapX = 15.0,
                 SnapY = 15.0,
                 HitThreshold = 7.0,
-                MoveMode = XMoveMode.Point,
+                MoveMode = MoveMode.Point,
                 DefaultIsStroked = true,
                 DefaultIsFilled = false,
                 DefaultIsClosed = true,
@@ -320,7 +320,7 @@ namespace Core2D.Project
         /// Check whether the <see cref="MoveMode"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeMoveMode() => _moveMode != default(XMoveMode);
+        public virtual bool ShouldSerializeMoveMode() => _moveMode != default(MoveMode);
 
         /// <summary>
         /// Check whether the <see cref="DefaultIsStroked"/> property has changed from its default value.

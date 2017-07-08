@@ -15,14 +15,14 @@ namespace Core2D.Shapes
     /// </summary>
     public class GroupShape : BaseShape, ICopyable
     {
-        private ImmutableArray<XProperty> _shapesProperties;
+        private ImmutableArray<Property> _shapesProperties;
         private ImmutableArray<BaseShape> _shapes;
         private ImmutableArray<PointShape> _connectors;
 
         /// <summary>
         /// Gets all properties from <see cref="Shapes"/> collection.
         /// </summary>
-        public ImmutableArray<XProperty> ShapesProperties => GetShapeProperties();
+        public ImmutableArray<Property> ShapesProperties => GetShapeProperties();
 
         /// <summary>
         /// Gets or sets shapes collection.
@@ -34,7 +34,7 @@ namespace Core2D.Shapes
             {
                 if (Update(ref _shapes, value))
                 {
-                    _shapesProperties = default(ImmutableArray<XProperty>);
+                    _shapesProperties = default(ImmutableArray<Property>);
                 }
             }
         }
@@ -49,7 +49,7 @@ namespace Core2D.Shapes
             {
                 if (Update(ref _connectors, value))
                 {
-                    _shapesProperties = default(ImmutableArray<XProperty>);
+                    _shapesProperties = default(ImmutableArray<Property>);
                 }
             }
         }
@@ -64,13 +64,13 @@ namespace Core2D.Shapes
             _connectors = ImmutableArray.Create<PointShape>();
         }
 
-        private ImmutableArray<XProperty> GetShapeProperties()
+        private ImmutableArray<Property> GetShapeProperties()
         {
             if (_shapesProperties == null)
             {
                 if (_shapes != null)
                 {
-                    var builder = ImmutableArray.CreateBuilder<XProperty>();
+                    var builder = ImmutableArray.CreateBuilder<Property>();
 
                     foreach (var shape in _shapes)
                     {

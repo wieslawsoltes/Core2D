@@ -29,7 +29,7 @@
                 <KeyBinding Command="{Static Editor:ProjectEditorCommands.RemoveRecordCommand}" CommandParameter="{Binding #records.SelectedItem}" Gesture="Delete"/>
             </ListBox.KeyBindings>
             <ListBox.DataTemplates>
-                <DataTemplate DataType="Database:XRecord">
+                <DataTemplate DataType="Database:Record">
                     <TextBlock Name="record" Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="list">
                         <i:Interaction.Behaviors>
                             <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #record}">

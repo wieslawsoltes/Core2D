@@ -7,14 +7,14 @@ using Xunit;
 
 namespace Core2D.UnitTests
 {
-    public class XContainerTests
+    public class PageContainerTests
     {
         [Fact]
         [Trait("Core2D.Project", "Project")]
         public void Inherits_From_Selectable()
         {
             var target = new Class1();
-            Assert.True(target is XSelectable);
+            Assert.True(target is SelectableObject);
         }
 
         [Fact]
@@ -31,7 +31,7 @@ namespace Core2D.UnitTests
         {
             var target = new Class1();
 
-            var layer = XLayer.Create("Layer1", target);
+            var layer = LayerContainer.Create("Layer1", target);
             target.Layers = target.Layers.Add(layer);
 
             target.SetCurrentLayer(layer);
@@ -45,13 +45,13 @@ namespace Core2D.UnitTests
         {
             var target = new Class1();
 
-            var layer1 = XLayer.Create("Layer1", target);
-            var layer2 = XLayer.Create("Layer2", target);
+            var layer1 = LayerContainer.Create("Layer1", target);
+            var layer2 = LayerContainer.Create("Layer2", target);
             target.Layers = target.Layers.Add(layer1);
             target.Layers = target.Layers.Add(layer2);
 
-            var workingLayer = XLayer.Create("WorkingLayer", target);
-            var helperLayer = XLayer.Create("HelperLayer", target);
+            var workingLayer = LayerContainer.Create("WorkingLayer", target);
+            var helperLayer = LayerContainer.Create("HelperLayer", target);
             target.WorkingLayer = workingLayer;
             target.HelperLayer = helperLayer;
 
@@ -119,7 +119,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Project", "Project")]
         public void Data_Not_Null()
         {
-            var target = new XContainer();
+            var target = new PageContainer();
             Assert.NotNull(target.Data);
         }
 
@@ -127,7 +127,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Project", "Project")]
         public void this_Operator_Returns_Null()
         {
-            var target = new XContainer();
+            var target = new PageContainer();
             Assert.Equal(null, target["Name1"]);
         }
 
@@ -135,8 +135,8 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Project", "Project")]
         public void this_Operator_Returns_Property_Value()
         {
-            var target = new XContainer();
-            target.Data.Properties = target.Data.Properties.Add(XProperty.Create(target.Data, "Name1", "Value1"));
+            var target = new PageContainer();
+            target.Data.Properties = target.Data.Properties.Add(Property.Create(target.Data, "Name1", "Value1"));
 
             Assert.Equal("Value1", target["Name1"]);
         }
@@ -145,8 +145,8 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Project", "Project")]
         public void this_Operator_Sets_Property_Value()
         {
-            var target = new XContainer();
-            target.Data.Properties = target.Data.Properties.Add(XProperty.Create(target.Data, "Name1", "Value1"));
+            var target = new PageContainer();
+            target.Data.Properties = target.Data.Properties.Add(Property.Create(target.Data, "Name1", "Value1"));
 
             target["Name1"] = "NewValue1";
             Assert.Equal("NewValue1", target["Name1"]);
@@ -156,7 +156,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Project", "Project")]
         public void this_Operator_Creates_Property()
         {
-            var target = new XContainer();
+            var target = new PageContainer();
             Assert.Equal(0, target.Data.Properties.Length);
 
             target["Name1"] = "Value1";
@@ -169,12 +169,12 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Project", "Project")]
         public void Invalidate_Should_Invalidate_Template()
         {
-            var target = new XContainer()
+            var target = new PageContainer()
             {
-                Template = new XContainer()
+                Template = new PageContainer()
             };
 
-            var layer = XLayer.Create("Layer1", target);
+            var layer = LayerContainer.Create("Layer1", target);
             target.Template.Layers = target.Template.Layers.Add(layer);
 
             bool raised = false;
@@ -189,7 +189,7 @@ namespace Core2D.UnitTests
             Assert.True(raised);
         }
 
-        public class Class1 : XContainer
+        public class Class1 : PageContainer
         {
         }
     }

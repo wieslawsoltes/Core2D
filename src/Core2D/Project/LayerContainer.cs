@@ -23,21 +23,21 @@ namespace Core2D.Project
     /// <summary>
     /// Container layer.
     /// </summary>
-    public class XLayer : XSelectable, ICopyable
+    public class LayerContainer : SelectableObject, ICopyable
     {
         /// <summary>
         /// Invalidate layer event.
         /// </summary>
         public event InvalidateLayerEventHandler InvalidateLayer;
 
-        private XContainer _owner;
+        private PageContainer _owner;
         private bool _isVisible = true;
         private ImmutableArray<BaseShape> _shapes;
 
         /// <summary>
         /// Gets or sets layer owner.
         /// </summary>
-        public XContainer Owner
+        public PageContainer Owner
         {
             get => _owner;
             set => Update(ref _owner, value);
@@ -67,9 +67,9 @@ namespace Core2D.Project
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="XLayer"/> class.
+        /// Initializes a new instance of the <see cref="LayerContainer"/> class.
         /// </summary>
-        public XLayer() : base() => _shapes = ImmutableArray.Create<BaseShape>();
+        public LayerContainer() : base() => _shapes = ImmutableArray.Create<BaseShape>();
 
         /// <summary>
         /// Invalidate layer shapes.
@@ -83,15 +83,15 @@ namespace Core2D.Project
         }
 
         /// <summary>
-        /// Creates a new <see cref="XLayer"/> instance.
+        /// Creates a new <see cref="LayerContainer"/> instance.
         /// </summary>
         /// <param name="name">The layer name.</param>
         /// <param name="owner">The layer owner.</param>
         /// <param name="isVisible">The flag indicating whether layer is visible.</param>
-        /// <returns>The new instance of the <see cref="XLayer"/>.</returns>
-        public static XLayer Create(string name = "Layer", XContainer owner = null, bool isVisible = true)
+        /// <returns>The new instance of the <see cref="LayerContainer"/>.</returns>
+        public static LayerContainer Create(string name = "Layer", PageContainer owner = null, bool isVisible = true)
         {
-            return new XLayer()
+            return new LayerContainer()
             {
                 Name = name,
                 Owner = owner,

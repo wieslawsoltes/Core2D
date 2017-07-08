@@ -15,22 +15,22 @@ namespace Core2D.SkiaView
         public IJsonSerializer JsonSerializer { get; set; }
         public ContainerPresenter Presenter { get; set; }
         public ShapeRenderer Renderer { get; set; }
-        public XProject Project { get; set; }
+        public ProjectContainer Project { get; set; }
 
-        public abstract void GetOffset(XContainer container, out double offsetX, out double offsetY);
+        public abstract void GetOffset(PageContainer container, out double offsetX, out double offsetY);
 
         public abstract void RefreshRequested(object sender, EventArgs e);
 
         public SKColor ToSKColor(ArgbColor color) => new SKColor(color.R, color.G, color.B, color.A);
 
-        public void PaintSurface(XContainer container, SKCanvas canvas, int width, int height)
+        public void PaintSurface(PageContainer container, SKCanvas canvas, int width, int height)
         {
             GetOffset(container, out double offsetX, out double offsetY);
             canvas.Clear(ToSKColor(container.Background));
             Presenter.Render(canvas, Renderer, container, offsetX, offsetY);
         }
 
-        public void UpdateCache(XProject project)
+        public void UpdateCache(ProjectContainer project)
         {
             Renderer.ClearCache(isZooming: false);
             Renderer.State.ImageCache = project;
@@ -38,7 +38,7 @@ namespace Core2D.SkiaView
 
         public void OpenProject(string path)
         {
-            var project = XProject.Open(path, FileSystem, JsonSerializer);
+            var project = ProjectContainer.Open(path, FileSystem, JsonSerializer);
             if (project != null)
             {
                 Project = project;

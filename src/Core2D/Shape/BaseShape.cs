@@ -19,7 +19,7 @@ namespace Core2D.Shape
         private MatrixObject _transform;
         private bool _isStroked;
         private bool _isFilled;
-        private XContext _data;
+        private Data.Context _data;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BaseShape"/> class.
@@ -29,7 +29,7 @@ namespace Core2D.Shape
         {
             State = ShapeState.Create(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone);
             Transform = MatrixObject.Create();
-            Data = XContext.Create();
+            Data = Core2D.Data.Context.Create();
         }
 
         /// <summary>
@@ -87,9 +87,9 @@ namespace Core2D.Shape
         }
 
         /// <summary>
-        /// Gets or sets shape <see cref="Core2D.Data"/>.
+        /// Gets or sets shape <see cref="Core2D.Data.Context"/>.
         /// </summary>
-        public virtual XContext Data
+        public virtual Context Data
         {
             get => _data;
             set => Update(ref _data, value);

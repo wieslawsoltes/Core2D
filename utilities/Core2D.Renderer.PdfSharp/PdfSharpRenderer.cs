@@ -589,8 +589,8 @@ namespace Core2D.Renderer.PdfSharp
         {
             var _gfx = dc as XGraphics;
 
-            var properties = (ImmutableArray<Data.XProperty>)db;
-            var record = (Data.Database.XRecord)r;
+            var properties = (ImmutableArray<Data.Property>)db;
+            var record = (Data.Database.Record)r;
             var tbind = text.BindText(properties, record);
             if (string.IsNullOrEmpty(tbind))
                 return;

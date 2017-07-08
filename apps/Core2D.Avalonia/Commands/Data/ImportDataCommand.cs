@@ -11,16 +11,16 @@ using Core2D.Project;
 namespace Core2D.Avalonia.Commands
 {
     /// <inheritdoc/>
-    public class ImportDataCommand : Command<XProject>, IImportDataCommand
+    public class ImportDataCommand : Command<ProjectContainer>, IImportDataCommand
     {
         /// <inheritdoc/>
-        public override bool CanRun(XProject project)
+        public override bool CanRun(ProjectContainer project)
         {
             return ServiceProvider.GetService<ProjectEditor>().IsEditMode();
         }
 
         /// <inheritdoc/>
-        public override async void Run(XProject project)
+        public override async void Run(ProjectContainer project)
         {
             var dlg = new OpenFileDialog();
             dlg.Filters.Add(new FileDialogFilter() { Name = "Csv", Extensions = { "csv" } });

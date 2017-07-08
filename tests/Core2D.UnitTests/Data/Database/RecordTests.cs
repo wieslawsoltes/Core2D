@@ -5,13 +5,13 @@ using Xunit;
 
 namespace Core2D.UnitTests
 {
-    public class XRecordTests
+    public class RecordTests
     {
         [Fact]
         [Trait("Core2D.Data", "Database")]
         public void Inherits_From_ObservableObject()
         {
-            var target = new XRecord();
+            var target = new Data.Database.Record();
             Assert.True(target is ObservableObject);
         }
 
@@ -19,7 +19,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Data", "Database")]
         public void Values_Not_Null()
         {
-            var target = new XRecord();
+            var target = new Data.Database.Record();
             Assert.NotNull(target.Values);
         }
     }

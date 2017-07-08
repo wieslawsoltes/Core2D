@@ -14,18 +14,18 @@ namespace Core2D.Project
     /// <summary>
     /// Container base class.
     /// </summary>
-    public class XContainer : XSelectable, ICopyable
+    public class PageContainer : SelectableObject, ICopyable
     {
         private double _width;
         private double _height;
         private ArgbColor _background;
-        private ImmutableArray<XLayer> _layers;
-        private XLayer _currentLayer;
-        private XLayer _workingLayer;
-        private XLayer _helperLayer;
+        private ImmutableArray<LayerContainer> _layers;
+        private LayerContainer _currentLayer;
+        private LayerContainer _workingLayer;
+        private LayerContainer _helperLayer;
         private BaseShape _currentShape;
-        private XContainer _template;
-        private XContext _data;
+        private PageContainer _template;
+        private Data.Context _data;
         private bool _isExpanded = false;
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace Core2D.Project
         /// Gets or sets container layers.
         /// </summary>
         [Content]
-        public ImmutableArray<XLayer> Layers
+        public ImmutableArray<LayerContainer> Layers
         {
             get => _layers;
             set => Update(ref _layers, value);
@@ -110,7 +110,7 @@ namespace Core2D.Project
         /// <summary>
         /// Gets or sets current container layer.
         /// </summary>
-        public XLayer CurrentLayer
+        public LayerContainer CurrentLayer
         {
             get => _currentLayer;
             set => Update(ref _currentLayer, value);
@@ -119,7 +119,7 @@ namespace Core2D.Project
         /// <summary>
         /// Gets or sets working container layer.
         /// </summary>
-        public XLayer WorkingLayer
+        public LayerContainer WorkingLayer
         {
             get => _workingLayer;
             set => Update(ref _workingLayer, value);
@@ -128,7 +128,7 @@ namespace Core2D.Project
         /// <summary>
         /// Gets or sets helper container layer.
         /// </summary>
-        public XLayer HelperLayer
+        public LayerContainer HelperLayer
         {
             get => _helperLayer;
             set => Update(ref _helperLayer, value);
@@ -146,7 +146,7 @@ namespace Core2D.Project
         /// <summary>
         /// Gets or sets container template.
         /// </summary>
-        public XContainer Template
+        public PageContainer Template
         {
             get => _template;
             set => Update(ref _template, value);
@@ -155,7 +155,7 @@ namespace Core2D.Project
         /// <summary>
         /// Gets or sets container data.
         /// </summary>
-        public XContext Data
+        public Context Data
         {
             get => _data;
             set => Update(ref _data, value);
@@ -198,7 +198,7 @@ namespace Core2D.Project
                     }
                     else
                     {
-                        var property = XProperty.Create(_data, name, value);
+                        var property = Property.Create(_data, name, value);
                         _data.Properties = _data.Properties.Add(property);
                     }
                 }
@@ -206,20 +206,20 @@ namespace Core2D.Project
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="XContainer"/> class.
+        /// Initializes a new instance of the <see cref="PageContainer"/> class.
         /// </summary>
-        public XContainer()
+        public PageContainer()
             : base()
         {
-            _layers = ImmutableArray.Create<XLayer>();
-            _data = new XContext();
+            _layers = ImmutableArray.Create<LayerContainer>();
+            _data = new Data.Context();
         }
 
         /// <summary>
         /// Set current layer.
         /// </summary>
         /// <param name="layer">The layer instance.</param>
-        public void SetCurrentLayer(XLayer layer) => CurrentLayer = layer;
+        public void SetCurrentLayer(LayerContainer layer) => CurrentLayer = layer;
 
         /// <summary>
         /// Invalidate container layers.
@@ -257,40 +257,40 @@ namespace Core2D.Project
         }
 
         /// <summary>
-        /// Creates a new <see cref="XContainer"/> page instance.
+        /// Creates a new <see cref="PageContainer"/> page instance.
         /// </summary>
         /// <param name="name">The page name.</param>
-        /// <returns>The new instance of the <see cref="XContainer"/>.</returns>
-        public static XContainer CreatePage(string name = "Page")
+        /// <returns>The new instance of the <see cref="PageContainer"/>.</returns>
+        public static PageContainer CreatePage(string name = "Page")
         {
-            var page = new XContainer()
+            var page = new PageContainer()
             {
                 Name = name
             };
 
             var builder = page.Layers.ToBuilder();
-            builder.Add(XLayer.Create("Layer1", page));
-            builder.Add(XLayer.Create("Layer2", page));
-            builder.Add(XLayer.Create("Layer3", page));
+            builder.Add(LayerContainer.Create("Layer1", page));
+            builder.Add(LayerContainer.Create("Layer2", page));
+            builder.Add(LayerContainer.Create("Layer3", page));
             page.Layers = builder.ToImmutable();
 
             page.CurrentLayer = page.Layers.FirstOrDefault();
-            page.WorkingLayer = XLayer.Create("Working", page);
-            page.HelperLayer = XLayer.Create("Helper", page);
+            page.WorkingLayer = LayerContainer.Create("Working", page);
+            page.HelperLayer = LayerContainer.Create("Helper", page);
 
             return page;
         }
 
         /// <summary>
-        /// Creates a new <see cref="XContainer"/> template instance.
+        /// Creates a new <see cref="PageContainer"/> template instance.
         /// </summary>
         /// <param name="name">The template name.</param>
         /// <param name="width">The template width.</param>
         /// <param name="height">The template height.</param>
-        /// <returns>The new instance of the <see cref="XContainer"/>.</returns>
-        public static XContainer CreateTemplate(string name = "Template", double width = 840, double height = 600)
+        /// <returns>The new instance of the <see cref="PageContainer"/>.</returns>
+        public static PageContainer CreateTemplate(string name = "Template", double width = 840, double height = 600)
         {
-            var template = new XContainer()
+            var template = new PageContainer()
             {
                 Name = name
             };
@@ -300,14 +300,14 @@ namespace Core2D.Project
             template.Height = height;
 
             var builder = template.Layers.ToBuilder();
-            builder.Add(XLayer.Create("TemplateLayer1", template));
-            builder.Add(XLayer.Create("TemplateLayer2", template));
-            builder.Add(XLayer.Create("TemplateLayer3", template));
+            builder.Add(LayerContainer.Create("TemplateLayer1", template));
+            builder.Add(LayerContainer.Create("TemplateLayer2", template));
+            builder.Add(LayerContainer.Create("TemplateLayer3", template));
             template.Layers = builder.ToImmutable();
 
             template.CurrentLayer = template.Layers.FirstOrDefault();
-            template.WorkingLayer = XLayer.Create("TemplateWorking", template);
-            template.HelperLayer = XLayer.Create("TemplateHelper", template);
+            template.WorkingLayer = LayerContainer.Create("TemplateWorking", template);
+            template.HelperLayer = LayerContainer.Create("TemplateHelper", template);
 
             return template;
         }

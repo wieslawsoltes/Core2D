@@ -96,7 +96,7 @@ namespace Core2D.Editor.Tools
 
                 switch (editor.Project.Options.MoveMode)
                 {
-                    case XMoveMode.Point:
+                    case MoveMode.Point:
                         {
                             if (!state.Flags.HasFlag(ShapeStateFlags.Locked)
                                 && !state.Flags.HasFlag(ShapeStateFlags.Connector))
@@ -107,7 +107,7 @@ namespace Core2D.Editor.Tools
                             }
                         }
                         break;
-                    case XMoveMode.Shape:
+                    case MoveMode.Shape:
                         {
                             if (!state.Flags.HasFlag(ShapeStateFlags.Locked)
                                 && !state.Flags.HasFlag(ShapeStateFlags.Connector))
@@ -129,12 +129,12 @@ namespace Core2D.Editor.Tools
 
                 switch (editor.Project.Options.MoveMode)
                 {
-                    case XMoveMode.Point:
+                    case MoveMode.Point:
                         {
                             _pointsCache = GetMovePoints(shapes).ToList();
                         }
                         break;
-                    case XMoveMode.Shape:
+                    case MoveMode.Shape:
                         {
                             _shapesCache = shapes.ToList();
                         }

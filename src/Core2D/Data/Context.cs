@@ -12,21 +12,21 @@ namespace Core2D.Data
     /// <summary>
     /// Data context.
     /// </summary>
-    public class XContext : ObservableObject, ICopyable
+    public class Context : ObservableObject, ICopyable
     {
-        private ImmutableArray<XProperty> _properties;
-        private XRecord _record;
+        private ImmutableArray<Property> _properties;
+        private Record _record;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="XContext"/> class.
+        /// Initializes a new instance of the <see cref="Context"/> class.
         /// </summary>
-        public XContext() : base() => _properties = ImmutableArray.Create<XProperty>();
+        public Context() : base() => _properties = ImmutableArray.Create<Property>();
 
         /// <summary>
-        /// Gets or sets a collection <see cref="XProperty"/> that will be used during drawing.
+        /// Gets or sets a collection <see cref="Property"/> that will be used during drawing.
         /// </summary>
         [Content]
-        public ImmutableArray<XProperty> Properties
+        public ImmutableArray<Property> Properties
         {
             get => _properties;
             set => Update(ref _properties, value);
@@ -35,14 +35,14 @@ namespace Core2D.Data
         /// <summary>
         /// Gets or sets shape data record.
         /// </summary>
-        public XRecord Record
+        public Record Record
         {
             get => _record;
             set => Update(ref _record, value);
         }
 
         /// <summary>
-        /// Gets or sets <see cref="XProperty.Value"/> using name as key for <see cref="Properties"/> array values.
+        /// Gets or sets <see cref="Property.Value"/> using name as key for <see cref="Properties"/> array values.
         /// </summary>
         /// <remarks>
         /// If property with the specified key does not exist it is created.
@@ -71,7 +71,7 @@ namespace Core2D.Data
                     }
                     else
                     {
-                        var property = XProperty.Create(this, name, value);
+                        var property = Property.Create(this, name, value);
                         Properties = Properties.Add(property);
                     }
                 }
@@ -85,17 +85,17 @@ namespace Core2D.Data
         }
 
         /// <summary>
-        /// Creates a new <see cref="XContext"/> instance.
+        /// Creates a new <see cref="Context"/> instance.
         /// </summary>
-        /// <returns>The new instance of the <see cref="XContext"/> class.</returns>
-        public static XContext Create() => new XContext();
+        /// <returns>The new instance of the <see cref="Context"/> class.</returns>
+        public static Context Create() => new Context();
 
         /// <summary>
-        /// Creates a new <see cref="XContext"/> instance.
+        /// Creates a new <see cref="Context"/> instance.
         /// </summary>
         /// <param name="record">The record instance.</param>
-        /// <returns>The new instance of the <see cref="XContext"/> class.</returns>
-        public static XContext Create(XRecord record) => new XContext() { Record = record };
+        /// <returns>The new instance of the <see cref="Context"/> class.</returns>
+        public static Context Create(Record record) => new Context() { Record = record };
 
         /// <summary>
         /// Check whether the <see cref="Properties"/> property has changed from its default value.

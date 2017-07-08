@@ -5,21 +5,21 @@ using Xunit;
 
 namespace Core2D.UnitTests
 {
-    public class XDocumentTests
+    public class DocumentContainerTests
     {
         [Fact]
         [Trait("Core2D.Project", "Project")]
         public void Inherits_From_Selectable()
         {
-            var target = new XDocument();
-            Assert.True(target is XSelectable);
+            var target = new DocumentContainer();
+            Assert.True(target is SelectableObject);
         }
 
         [Fact]
         [Trait("Core2D.Project", "Project")]
         public void Pages_Not_Null()
         {
-            var target = new XDocument();
+            var target = new DocumentContainer();
             Assert.NotNull(target.Pages);
         }
     }

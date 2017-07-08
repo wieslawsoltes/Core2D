@@ -9,7 +9,7 @@ namespace Core2D.Project
     /// <summary>
     /// Project image cache implementation.
     /// </summary>
-    public partial class XProject : XSelectable, IImageCache
+    public partial class ProjectContainer : SelectableObject, IImageCache
     {
         private IDictionary<string, byte[]> _images = new Dictionary<string, byte[]>();
 

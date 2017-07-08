@@ -23,7 +23,7 @@
                         <KeyBinding Command="{Static Editor:ProjectEditorCommands.RemoveLayerCommand}" CommandParameter="{Binding #layers.SelectedItem}" Gesture="Delete"/>
                     </ListBox.KeyBindings>
                     <ListBox.DataTemplates>
-                        <DataTemplate DataType="Project:XLayer">
+                        <DataTemplate DataType="Project:LayerContainer">
                             <Grid ColumnDefinitions="Auto,*">
                                 <Grid.ContextMenu>
                                     <ContextMenu Classes="default">
