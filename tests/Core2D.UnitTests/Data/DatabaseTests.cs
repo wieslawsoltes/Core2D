@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Core2D.Data.Database;
+using Core2D.Data;
 using System.Collections.Immutable;
 using Xunit;
 
@@ -119,7 +119,7 @@ namespace Core2D.UnitTests
 
             var source = Database.FromFields("Source", sourceFields, "Id");
 
-            bool isDirty = Database.Update(destination, source, out ImmutableArray<Data.Database.Record>.Builder target);
+            bool isDirty = Database.Update(destination, source, out ImmutableArray<Data.Record>.Builder target);
 
             Assert.True(isDirty);
             Assert.NotNull(target);

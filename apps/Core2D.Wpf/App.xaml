@@ -7,7 +7,6 @@
              xmlns:local="clr-namespace:Core2D.Wpf" 
              xmlns:converters="clr-namespace:Core2D.Wpf.Converters" 
              xmlns:Data="clr-namespace:Core2D.Data;assembly=Core2D"
-             xmlns:Database="clr-namespace:Core2D.Data.Database;assembly=Core2D"
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor"
              xmlns:Path="clr-namespace:Core2D.Path;assembly=Core2D"
              xmlns:Segments="clr-namespace:Core2D.Path.Segments;assembly=Core2D"
@@ -135,10 +134,10 @@
             <style:ShapeStyleControl/>
         </DataTemplate>
         <!-- Data -->
-        <DataTemplate DataType="{x:Type Database:Record}">
+        <DataTemplate DataType="{x:Type Data:Record}">
             <data:RecordControl/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type Database:Database}">
+        <DataTemplate DataType="{x:Type Data:Database}">
             <data:DatabaseControl/>
         </DataTemplate>
         <DataTemplate DataType="{x:Type Data:Context}">

@@ -6,7 +6,6 @@ using Core2D.Serializer.Xaml;
 [assembly: XmlnsDefinition(XamlConstants.CoreNamespace, "Core2D", AssemblyName = "Core2D")]
 [assembly: XmlnsDefinition(XamlConstants.CoreNamespace, "Core2D.Collections", AssemblyName = "Core2D")]
 [assembly: XmlnsDefinition(XamlConstants.CoreNamespace, "Core2D.Data", AssemblyName = "Core2D")]
-[assembly: XmlnsDefinition(XamlConstants.CoreNamespace, "Core2D.Data.Database", AssemblyName = "Core2D")]
 [assembly: XmlnsDefinition(XamlConstants.CoreNamespace, "Core2D.History", AssemblyName = "Core2D")]
 [assembly: XmlnsDefinition(XamlConstants.CoreNamespace, "Core2D.Interfaces", AssemblyName = "Core2D")]
 [assembly: XmlnsDefinition(XamlConstants.CoreNamespace, "Core2D.Path", AssemblyName = "Core2D")]

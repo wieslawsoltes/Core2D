@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Core2D.Avalonia;assembly=Core2D.Avalonia"
              xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"
              xmlns:Core="clr-namespace:Core2D;assembly=Core2D"
-             xmlns:Database="clr-namespace:Core2D.Data.Database;assembly=Core2D"
+             xmlns:Data="clr-namespace:Core2D.Data;assembly=Core2D"
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor"
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
              xmlns:Project="clr-namespace:Core2D.Project;assembly=Core2D"
@@ -114,7 +114,7 @@
                         </Style>
                     </TreeViewItem.Styles>
                     <TreeViewItem.DataTemplates>
-                        <DataTemplate DataType="Database:Database">
+                        <DataTemplate DataType="Data:Database">
                             <TextBlock Text="{Binding Name}" Classes="tree">
                                 <TextBlock.ContextMenu>
                                     <ContextMenu Classes="default">

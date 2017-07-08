@@ -1,13 +1,13 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
 using System.Collections.Generic;
 using Core2D.Data;
-using Spatial;
 using Core2D.Renderer;
 using Core2D.Shape;
 using Core2D.Style;
+using Spatial;
 using static System.Math;
-using System;
 
 namespace Core2D.Shapes
 {
@@ -152,7 +152,7 @@ namespace Core2D.Shapes
         /// <returns>The new instance of the <see cref="PointShape"/> class.</returns>
         public PointShape Clone()
         {
-            var data = Core2D.Data.Context.Create((Data.Database.Record)this.Data.Record);
+            var data = Context.Create(this.Data.Record);
 
             // The property Value is of type object and is not cloned.
             if (this.Data.Properties.Length > 0)

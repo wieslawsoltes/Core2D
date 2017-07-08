@@ -4,7 +4,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Core2D.Data.Database
+namespace Core2D.Data
 {
     /// <summary>
     /// Database column.

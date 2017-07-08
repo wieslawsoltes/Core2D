@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
 using Core2D.Data;
-using Core2D.Data.Database;
 using Spatial;
 using Spatial.Arc;
 using Core2D.Renderer;

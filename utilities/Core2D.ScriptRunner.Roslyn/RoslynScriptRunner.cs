@@ -27,7 +27,6 @@ namespace Core2D.ScriptRunner.Roslyn
             using Core2D.Attributes;
             using Core2D.Collections;
             using Core2D.Data;
-            using Core2D.Data.Database;
             using Core2D.Editor;
             using Core2D.Editor.Bounds;
             using Core2D.Editor.Factories;

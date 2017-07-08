@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using Core2D.Attributes;
 
-namespace Core2D.Data.Database
+namespace Core2D.Data
 {
     /// <summary>
     /// Record value.

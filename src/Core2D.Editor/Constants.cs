@@ -29,12 +29,12 @@ namespace Core2D.Editor
         public const string DefaultDocumentName = "Document";
 
         /// <summary>
-        /// Default <see cref="Core2D.Data.Database.Database"/> name.
+        /// Default <see cref="Core2D.Data.Database"/> name.
         /// </summary>
         public const string DefaultDatabaseName = "Db";
 
         /// <summary>
-        /// Default <see cref="Core2D.Data.Database.Column"/> name.
+        /// Default <see cref="Core2D.Data.Column"/> name.
         /// </summary>
         public const string DefaulColumnName = "Column";
 
@@ -74,7 +74,7 @@ namespace Core2D.Editor
         public const string ImportedStyleLibraryName = "Imported";
 
         /// <summary>
-        /// Default imported <see cref="Core2D.Data.Database.Database"/> name.
+        /// Default imported <see cref="Core2D.Data.Database"/> name.
         /// </summary>
         public const string ImportedDatabaseName = "Imported";
 

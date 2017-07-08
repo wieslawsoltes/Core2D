@@ -4,7 +4,7 @@ using System;
 using System.Collections.Immutable;
 using System.Linq;
 using Core2D.Data;
-using Core2D.Data.Database;
+using Core2D.Data;
 using Core2D.Editor.Factories;
 using Core2D.Editor.Recent;
 using Core2D.Path;
@@ -68,7 +68,7 @@ namespace Core2D.Editor.Designer
         public static ShapeState State { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Data.Database.Database"/>.
+        /// The design time <see cref="Core2D.Data.Database"/>.
         /// </summary>
         public static Database Database { get; set; }
 
@@ -78,7 +78,7 @@ namespace Core2D.Editor.Designer
         public static Context Data { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Data.Database.Record"/>.
+        /// The design time <see cref="Core2D.Data.Record"/>.
         /// </summary>
         public static Record Record { get; set; }
 

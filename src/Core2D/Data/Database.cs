@@ -6,7 +6,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using Core2D.Attributes;
 
-namespace Core2D.Data.Database
+namespace Core2D.Data
 {
     /// <summary>
     /// Records database.

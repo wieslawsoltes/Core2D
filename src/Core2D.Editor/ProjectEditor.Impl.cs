@@ -6,7 +6,6 @@ using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
 using Core2D.Data;
-using Core2D.Data.Database;
 using Core2D.Editor.Bounds;
 using Core2D.Editor.Input;
 using Core2D.Editor.Views.Interfaces;

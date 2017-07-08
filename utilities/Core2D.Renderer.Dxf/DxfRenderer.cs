@@ -775,7 +775,7 @@ namespace Core2D.Renderer.Dxf
             var dxf = dc as DxfDocument;
 
             var properties = (ImmutableArray<Data.Property>)db;
-            var record = (Data.Database.Record)r;
+            var record = (Data.Record)r;
             var tbind = text.BindText(properties, record);
             if (string.IsNullOrEmpty(tbind))
                 return;

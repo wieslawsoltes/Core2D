@@ -3,7 +3,6 @@
 using System;
 using System.Collections.Generic;
 using Core2D.Data;
-using Core2D.Data.Database;
 using Core2D.Path;
 using Core2D.Path.Segments;
 using Core2D.Project;

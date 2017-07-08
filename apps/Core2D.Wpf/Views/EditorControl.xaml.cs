@@ -3,7 +3,7 @@
 using System;
 using System.Windows;
 using System.Windows.Controls;
-using Core2D.Data.Database;
+using Core2D.Data;
 using Core2D.Editor;
 using Core2D.Editor.Input;
 using Core2D.Project;
