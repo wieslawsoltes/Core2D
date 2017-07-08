@@ -10,8 +10,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Core2D.Data;
 using Spatial.Arc;
-using Core2D.Path;
-using Core2D.Renderer;
 using Core2D.Shapes;
 using Core2D.Style;
 using Spatial;

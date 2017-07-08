@@ -4,7 +4,6 @@ using System;
 using System.Collections.Immutable;
 using System.Linq;
 using Core2D.Data;
-using Core2D.Data;
 using Core2D.Editor.Factories;
 using Core2D.Editor.Recent;
 using Core2D.Path;

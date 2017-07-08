@@ -6,7 +6,6 @@ using System.Globalization;
 using System.Linq;
 using Avalonia.Markup;
 using Avalonia;
-using Avalonia.Data;
 
 namespace Core2D.Avalonia.Converters
 {

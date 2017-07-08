@@ -8,7 +8,6 @@ using System.Drawing.Drawing2D;
 using Core2D.Data;
 using Spatial;
 using Spatial.Arc;
-using Core2D.Renderer;
 using Core2D.Shape;
 using Core2D.Shapes;
 using Core2D.Style;

@@ -3,7 +3,6 @@
 using System;
 using Avalonia;
 using Avalonia.Media;
-using Core2D.Path;
 using Core2D.Path.Segments;
 using Core2D.Shapes;
 

@@ -3,7 +3,6 @@
 using Core2D.Editor;
 using Core2D.Style;
 using System.Collections.Immutable;
-using System.Windows.Controls;
 
 namespace Core2D.Wpf.Controls.Custom.Lists
 {
