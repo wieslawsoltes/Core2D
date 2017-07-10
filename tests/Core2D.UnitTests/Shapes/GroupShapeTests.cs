@@ -15,10 +15,10 @@ namespace Core2D.UnitTests
     {
         [Fact]
         [Trait("Core2D.Shapes", "Shapes")]
-        public void Inherits_From_BaseShape()
+        public void Inherits_From_ConnectableShape()
         {
             var target = new GroupShape();
-            Assert.True(target is BaseShape);
+            Assert.True(target is ConnectableShape);
         }
 
         [Fact]
@@ -27,14 +27,6 @@ namespace Core2D.UnitTests
         {
             var target = new GroupShape();
             Assert.NotNull(target.Shapes);
-        }
-
-        [Fact]
-        [Trait("Core2D.Shapes", "Shapes")]
-        public void Connectors_Not_Null()
-        {
-            var target = new GroupShape();
-            Assert.NotNull(target.Connectors);
         }
 
         [Fact]
@@ -75,25 +67,6 @@ namespace Core2D.UnitTests
 
         [Fact]
         [Trait("Core2D.Shapes", "Shapes")]
-        public void ShapesProperties_Cache_Should_Reset_After_Connectors_Updated()
-        {
-            var target = new GroupShape();
-
-            var point1 = new PointShape();
-            point1.Data.Properties = point1.Data.Properties.Add(new Property());
-            target.Connectors = target.Connectors.Add(point1);
-
-            Assert.Equal(1, target.ShapesProperties.Length);
-
-            var point2 = new PointShape();
-            point2.Data.Properties = point2.Data.Properties.Add(new Property());
-            target.Connectors = target.Connectors.Add(point2);
-
-            Assert.Equal(2, target.ShapesProperties.Length);
-        }
-
-        [Fact]
-        [Trait("Core2D.Shapes", "Shapes")]
         public void GetPoints_Returns_Shapes_And_Connector_Points()
         {
             var target = new GroupShape();
@@ -123,55 +96,7 @@ namespace Core2D.UnitTests
             Assert.Contains(shape, target.Shapes);
             Assert.Equal(1, target.Shapes.Length);
         }
-
-        [Fact]
-        [Trait("Core2D.Shapes", "Shapes")]
-        public void AddConnectorAsNone_Add_Point_To_Connectors_As_None()
-        {
-            var target = new GroupShape();
-            var point = new PointShape();
-
-            target.AddConnectorAsNone(point);
-
-            Assert.Equal(point.Owner, target);
-            Assert.True(point.State.Flags.HasFlag(ShapeStateFlags.Connector | ShapeStateFlags.None));
-            Assert.False(point.State.Flags.HasFlag(ShapeStateFlags.Standalone));
-            Assert.Contains(point, target.Connectors);
-            Assert.Equal(1, target.Connectors.Length);
-        }
-
-        [Fact]
-        [Trait("Core2D.Shapes", "Shapes")]
-        public void AddConnectorAsInput_Add_Point_To_Connectors_As_Input()
-        {
-            var target = new GroupShape();
-            var point = new PointShape();
-
-            target.AddConnectorAsInput(point);
-
-            Assert.Equal(point.Owner, target);
-            Assert.True(point.State.Flags.HasFlag(ShapeStateFlags.Connector | ShapeStateFlags.Input));
-            Assert.False(point.State.Flags.HasFlag(ShapeStateFlags.Standalone));
-            Assert.Contains(point, target.Connectors);
-            Assert.Equal(1, target.Connectors.Length);
-        }
-
-        [Fact]
-        [Trait("Core2D.Shapes", "Shapes")]
-        public void AddConnectorAsOutput_Add_Point_To_Connectors_As_Output()
-        {
-            var target = new GroupShape();
-            var point = new PointShape();
-
-            target.AddConnectorAsOutput(point);
-
-            Assert.Equal(point.Owner, target);
-            Assert.True(point.State.Flags.HasFlag(ShapeStateFlags.Connector | ShapeStateFlags.Output));
-            Assert.False(point.State.Flags.HasFlag(ShapeStateFlags.Standalone));
-            Assert.Contains(point, target.Connectors);
-            Assert.Equal(1, target.Connectors.Length);
-        }
-
+        
         [Fact]
         [Trait("Core2D.Shapes", "Shapes")]
         public void Group_Shapes_Remove_And_Add_To_Source()
