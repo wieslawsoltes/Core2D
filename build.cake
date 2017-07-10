@@ -51,15 +51,13 @@ if (BuildSystem.AppVeyor.IsRunningOnAppVeyor)
     {
         version = BuildSystem.AppVeyor.Environment.Repository.Tag.Name;
         suffix = "";
-        publishNuGet = true;
-        publishMyGet = false;
+        publishNuGet = !BuildSystem.AppVeyor.Environment.PullRequest.IsPullRequest;
     }
     else
     {
         suffix = "-build" + EnvironmentVariable("APPVEYOR_BUILD_NUMBER");
         version += suffix;
-        publishNuGet = false;
-        publishMyGet = true;
+        publishMyGet = !BuildSystem.AppVeyor.Environment.PullRequest.IsPullRequest;
     }
 }
 
