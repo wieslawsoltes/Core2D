@@ -1,6 +1,8 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
+using Core2D.Interfaces;
+using Core2D.Project;
 using PdfSharp;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
@@ -8,12 +10,12 @@ using PdfSharp.Pdf;
 namespace Core2D.Renderer.PdfSharp
 {
     /// <summary>
-    /// PdfSharp pdf <see cref="Core2D.Interfaces.IProjectExporter"/> implementation.
+    /// PdfSharp pdf <see cref="IProjectExporter"/> implementation.
     /// </summary>
-    public partial class PdfSharpRenderer : Core2D.Renderer.ShapeRenderer, Core2D.Interfaces.IProjectExporter
+    public partial class PdfSharpRenderer : ShapeRenderer, IProjectExporter
     {
         /// <inheritdoc/>
-        void Core2D.Interfaces.IProjectExporter.Save(string path, Core2D.Project.PageContainer container)
+        void IProjectExporter.Save(string path, PageContainer container)
         {
             using (var pdf = new PdfDocument())
             {
@@ -23,7 +25,7 @@ namespace Core2D.Renderer.PdfSharp
         }
 
         /// <inheritdoc/>
-        void Core2D.Interfaces.IProjectExporter.Save(string path, Core2D.Project.DocumentContainer document)
+        void IProjectExporter.Save(string path, DocumentContainer document)
         {
             using (var pdf = new PdfDocument())
             {
@@ -57,7 +59,7 @@ namespace Core2D.Renderer.PdfSharp
         }
 
         /// <inheritdoc/>
-        void Core2D.Interfaces.IProjectExporter.Save(string path, Core2D.Project.ProjectContainer project)
+        void IProjectExporter.Save(string path, ProjectContainer project)
         {
             using (var pdf = new PdfDocument())
             {
@@ -105,7 +107,7 @@ namespace Core2D.Renderer.PdfSharp
             }
         }
 
-        private PdfPage Add(PdfDocument pdf, Core2D.Project.PageContainer container)
+        private PdfPage Add(PdfDocument pdf, PageContainer container)
         {
             // Create A3 page size with Landscape orientation.
             PdfPage pdfPage = pdf.AddPage();

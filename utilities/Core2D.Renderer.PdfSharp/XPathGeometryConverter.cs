@@ -3,6 +3,8 @@
 using PdfSharp.Drawing;
 using System;
 using System.Linq;
+using Core2D.Path;
+using Core2D.Path.Segments;
 
 namespace Core2D.Renderer.PdfSharp
 {
@@ -19,10 +21,12 @@ namespace Core2D.Renderer.PdfSharp
         /// <param name="dy"></param>
         /// <param name="scale"></param>
         /// <returns></returns>
-        public static XGraphicsPath ToXGraphicsPath(this Core2D.Path.PathGeometry pg, double dx, double dy, Func<double, double> scale)
+        public static XGraphicsPath ToXGraphicsPath(this PathGeometry pg, double dx, double dy, Func<double, double> scale)
         {
-            var gp = new XGraphicsPath();
-            gp.FillMode = pg.FillRule == Core2D.Path.FillRule.EvenOdd ? XFillMode.Alternate : XFillMode.Winding;
+            var gp = new XGraphicsPath()
+            {
+                FillMode = pg.FillRule == FillRule.EvenOdd ? XFillMode.Alternate : XFillMode.Winding
+            };
 
             foreach (var pf in pg.Figures)
             {
@@ -30,19 +34,14 @@ namespace Core2D.Renderer.PdfSharp
 
                 foreach (var segment in pf.Segments)
                 {
-                    if (segment is Core2D.Path.Segments.ArcSegment)
+                    if (segment is ArcSegment)
                     {
-#if CORE
-                        //var arcSegment = segment as Core2D.ArcSegment;
-                        // TODO: Convert WPF/SVG elliptical arc segment format to GDI+ bezier curves.
-                        //startPoint = arcSegment.Point;
-#endif
 #if WPF
-                        var arcSegment = segment as Core2D.Path.Segments.ArcSegment;
-                        var point1 = new PointShape(
+                        var arcSegment = segment as ArcSegment;
+                        var point1 = new XPoint(
                             scale(startPoint.X + dx),
                             scale(startPoint.Y + dy));
-                        var point2 = new PointShape(
+                        var point2 = new XPoint(
                             scale(arcSegment.Point.X + dx),
                             scale(arcSegment.Point.Y + dy));
                         var size = new XSize(
@@ -52,13 +51,18 @@ namespace Core2D.Renderer.PdfSharp
                             point1,
                             point2,
                             size, arcSegment.RotationAngle, arcSegment.IsLargeArc,
-                            arcSegment.SweepDirection == Core2D.Path.XSweepDirection.Clockwise ? XSweepDirection.Clockwise : XSweepDirection.Counterclockwise);
+                            arcSegment.SweepDirection == SweepDirection.Clockwise ? XSweepDirection.Clockwise : XSweepDirection.Counterclockwise);
                         startPoint = arcSegment.Point;
+#else
+                        throw new NotSupportedException("Not supported segment type: " + segment.GetType());
+                        //var arcSegment = segment as ArcSegment;
+                        // TODO: Convert WPF/SVG elliptical arc segment format to GDI+ bezier curves.
+                        //startPoint = arcSegment.Point;
 #endif
                     }
-                    else if (segment is Core2D.Path.Segments.CubicBezierSegment)
+                    else if (segment is CubicBezierSegment)
                     {
-                        var cubicBezierSegment = segment as Core2D.Path.Segments.CubicBezierSegment;
+                        var cubicBezierSegment = segment as CubicBezierSegment;
                         gp.AddBezier(
                             scale(startPoint.X + dx),
                             scale(startPoint.Y + dy),
@@ -70,9 +74,9 @@ namespace Core2D.Renderer.PdfSharp
                             scale(cubicBezierSegment.Point3.Y + dy));
                         startPoint = cubicBezierSegment.Point3;
                     }
-                    else if (segment is Core2D.Path.Segments.LineSegment)
+                    else if (segment is LineSegment)
                     {
-                        var lineSegment = segment as Core2D.Path.Segments.LineSegment;
+                        var lineSegment = segment as LineSegment;
                         gp.AddLine(
                             scale(startPoint.X + dx),
                             scale(startPoint.Y + dy),
@@ -80,9 +84,9 @@ namespace Core2D.Renderer.PdfSharp
                             scale(lineSegment.Point.Y + dy));
                         startPoint = lineSegment.Point;
                     }
-                    else if (segment is Core2D.Path.Segments.PolyCubicBezierSegment)
+                    else if (segment is PolyCubicBezierSegment)
                     {
-                        var polyCubicBezierSegment = segment as Core2D.Path.Segments.PolyCubicBezierSegment;
+                        var polyCubicBezierSegment = segment as PolyCubicBezierSegment;
                         if (polyCubicBezierSegment.Points.Length >= 3)
                         {
                             gp.AddBezier(
@@ -115,9 +119,9 @@ namespace Core2D.Renderer.PdfSharp
 
                         startPoint = polyCubicBezierSegment.Points.Last();
                     }
-                    else if (segment is Core2D.Path.Segments.PolyLineSegment)
+                    else if (segment is PolyLineSegment)
                     {
-                        var polyLineSegment = segment as Core2D.Path.Segments.PolyLineSegment;
+                        var polyLineSegment = segment as PolyLineSegment;
                         if (polyLineSegment.Points.Length >= 1)
                         {
                             gp.AddLine(
@@ -141,9 +145,9 @@ namespace Core2D.Renderer.PdfSharp
 
                         startPoint = polyLineSegment.Points.Last();
                     }
-                    else if (segment is Core2D.Path.Segments.PolyQuadraticBezierSegment)
+                    else if (segment is PolyQuadraticBezierSegment)
                     {
-                        var polyQuadraticSegment = segment as Core2D.Path.Segments.PolyQuadraticBezierSegment;
+                        var polyQuadraticSegment = segment as PolyQuadraticBezierSegment;
                         if (polyQuadraticSegment.Points.Length >= 2)
                         {
                             var p1 = startPoint;
@@ -198,9 +202,9 @@ namespace Core2D.Renderer.PdfSharp
 
                         startPoint = polyQuadraticSegment.Points.Last();
                     }
-                    else if (segment is Core2D.Path.Segments.QuadraticBezierSegment)
+                    else if (segment is QuadraticBezierSegment)
                     {
-                        var quadraticBezierSegment = segment as Core2D.Path.Segments.QuadraticBezierSegment;
+                        var quadraticBezierSegment = segment as QuadraticBezierSegment;
                         var p1 = startPoint;
                         var p2 = quadraticBezierSegment.Point1;
                         var p3 = quadraticBezierSegment.Point2;

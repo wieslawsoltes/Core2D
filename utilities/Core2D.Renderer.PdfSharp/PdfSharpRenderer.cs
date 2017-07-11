@@ -4,15 +4,17 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using Core2D.Style;
+using Core2D.Shapes;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
+using Core2D.Data;
 
 namespace Core2D.Renderer.PdfSharp
 {
     /// <summary>
     /// Native PdfSharp shape renderer.
     /// </summary>
-    public partial class PdfSharpRenderer : Core2D.Renderer.ShapeRenderer
+    public partial class PdfSharpRenderer : ShapeRenderer
     {
         private bool _enableImageCache = true;
         private IDictionary<string, XImage> _biCache;
@@ -33,35 +35,35 @@ namespace Core2D.Renderer.PdfSharp
         /// Creates a new <see cref="PdfSharpRenderer"/> instance.
         /// </summary>
         /// <returns>The new instance of the <see cref="PdfSharpRenderer"/> class.</returns>
-        public static Core2D.Renderer.ShapeRenderer Create() => new PdfSharpRenderer();
+        public static ShapeRenderer Create() => new PdfSharpRenderer();
 
-        private static XColor ToXColor(Core2D.Style.ArgbColor color) => XColor.FromArgb(color.A, color.R, color.G, color.B);
+        private static XColor ToXColor(ArgbColor color) => XColor.FromArgb(color.A, color.R, color.G, color.B);
 
-        private static XPen ToXPen(Core2D.Style.BaseStyle style, Func<double, double> scale, double sourceDpi, double targetDpi)
+        private static XPen ToXPen(BaseStyle style, Func<double, double> scale, double sourceDpi, double targetDpi)
         {
             var pen = new XPen(ToXColor(style.Stroke), scale(style.Thickness * targetDpi / sourceDpi));
             switch (style.LineCap)
             {
-                case Core2D.Style.LineCap.Flat:
+                case LineCap.Flat:
                     pen.LineCap = XLineCap.Flat;
                     break;
-                case Core2D.Style.LineCap.Square:
+                case LineCap.Square:
                     pen.LineCap = XLineCap.Square;
                     break;
-                case Core2D.Style.LineCap.Round:
+                case LineCap.Round:
                     pen.LineCap = XLineCap.Round;
                     break;
             }
             if (style.Dashes != null)
             {
                 // TODO: Convert to correct dash values.
-                pen.DashPattern = Core2D.Style.ShapeStyle.ConvertDashesToDoubleArray(style.Dashes);
+                pen.DashPattern = ShapeStyle.ConvertDashesToDoubleArray(style.Dashes);
             }
             pen.DashOffset = style.DashOffset;
             return pen;
         }
 
-        private static XSolidBrush ToXSolidBrush(Core2D.Style.ArgbColor color)
+        private static XSolidBrush ToXSolidBrush(ArgbColor color)
         {
             return new XSolidBrush(ToXColor(color));
         }
@@ -74,7 +76,7 @@ namespace Core2D.Renderer.PdfSharp
             }
         }
 
-        private static void DrawLineCurveInternal(XGraphics gfx, XPen pen, bool isStroked, ref XPoint pt1, ref XPoint pt2, double curvature, Core2D.Style.CurveOrientation orientation, Core2D.Shape.PointAlignment pt1a, Core2D.Shape.PointAlignment pt2a)
+        private static void DrawLineCurveInternal(XGraphics gfx, XPen pen, bool isStroked, ref XPoint pt1, ref XPoint pt2, double curvature, CurveOrientation orientation, Core2D.Shape.PointAlignment pt1a, Core2D.Shape.PointAlignment pt2a)
         {
             if (isStroked)
             {
@@ -83,7 +85,7 @@ namespace Core2D.Renderer.PdfSharp
                 double p1y = pt1.Y;
                 double p2x = pt2.X;
                 double p2y = pt2.Y;
-                Core2D.Shapes.LineShapeExtensions.GetCurvedLineBezierControlPoints(orientation, curvature, pt1a, pt2a, ref p1x, ref p1y, ref p2x, ref p2y);
+                LineShapeExtensions.GetCurvedLineBezierControlPoints(orientation, curvature, pt1a, pt2a, ref p1x, ref p1y, ref p2x, ref p2y);
                 path.AddBezier(
                     pt1.X, pt1.Y,
                     p1x, p1y,
@@ -93,7 +95,7 @@ namespace Core2D.Renderer.PdfSharp
             }
         }
 
-        private void DrawLineArrowsInternal(XGraphics gfx, Core2D.Shapes.LineShape line, double dx, double dy, out XPoint pt1, out XPoint pt2)
+        private void DrawLineArrowsInternal(XGraphics gfx, LineShape line, double dx, double dy, out XPoint pt1, out XPoint pt2)
         {
             XSolidBrush fillStartArrow = ToXSolidBrush(line.Style.StartArrowStyle.Fill);
             XPen strokeStartArrow = ToXPen(line.Style.StartArrowStyle, _scaleToPage, _sourceDpi, _targetDpi);
@@ -106,7 +108,7 @@ namespace Core2D.Renderer.PdfSharp
             double _x2 = line.End.X + dx;
             double _y2 = line.End.Y + dy;
 
-            Core2D.Shapes.LineShapeExtensions.GetMaxLength(line, ref _x1, ref _y1, ref _x2, ref _y2);
+            LineShapeExtensions.GetMaxLength(line, ref _x1, ref _y1, ref _x2, ref _y2);
 
             double x1 = _scaleToPage(_x1);
             double y1 = _scaleToPage(_y1);
@@ -125,7 +127,7 @@ namespace Core2D.Renderer.PdfSharp
             pt2 = DrawLineArrowInternal(gfx, strokeEndArrow, fillEndArrow, x2, y2, a2, eas);
         }
 
-        private static XPoint DrawLineArrowInternal(XGraphics gfx, XPen pen, XSolidBrush brush, double x, double y, double angle, Core2D.Style.ArrowStyle style)
+        private static XPoint DrawLineArrowInternal(XGraphics gfx, XPen pen, XSolidBrush brush, double x, double y, double angle, ArrowStyle style)
         {
             XPoint pt;
             var rt = new XMatrix();
@@ -139,12 +141,12 @@ namespace Core2D.Renderer.PdfSharp
             switch (style.ArrowType)
             {
                 default:
-                case Core2D.Style.ArrowType.None:
+                case ArrowType.None:
                     {
                         pt = new XPoint(x, y);
                     }
                     break;
-                case Core2D.Style.ArrowType.Rectangle:
+                case ArrowType.Rectangle:
                     {
                         pt = rt.Transform(new XPoint(x - sx, y));
                         var rect = new XRect(x - sx, y - ry, sx, sy);
@@ -154,7 +156,7 @@ namespace Core2D.Renderer.PdfSharp
                         gfx.Restore();
                     }
                     break;
-                case Core2D.Style.ArrowType.Ellipse:
+                case ArrowType.Ellipse:
                     {
                         pt = rt.Transform(new XPoint(x - sx, y));
                         gfx.Save();
@@ -164,7 +166,7 @@ namespace Core2D.Renderer.PdfSharp
                         gfx.Restore();
                     }
                     break;
-                case Core2D.Style.ArrowType.Arrow:
+                case ArrowType.Arrow:
                     {
                         pt = rt.Transform(new XPoint(x, y));
                         var p11 = rt.Transform(new XPoint(x - sx, y + sy));
@@ -244,7 +246,7 @@ namespace Core2D.Renderer.PdfSharp
             }
         }
 
-        private XMatrix ToXMatrix(Core2D.Renderer.MatrixObject matrix)
+        private XMatrix ToXMatrix(MatrixObject matrix)
         {
             return new XMatrix(
                 matrix.M11, matrix.M12,
@@ -282,7 +284,7 @@ namespace Core2D.Renderer.PdfSharp
         }
 
         /// <inheritdoc/>
-        public override object PushMatrix(object dc, Core2D.Renderer.MatrixObject matrix)
+        public override object PushMatrix(object dc, MatrixObject matrix)
         {
             var _gfx = dc as XGraphics;
             var state = _gfx.Save();
@@ -299,7 +301,7 @@ namespace Core2D.Renderer.PdfSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.Shapes.LineShape line, double dx, double dy, object db, object r)
+        public override void Draw(object dc, LineShape line, double dx, double dy, object db, object r)
         {
             if (!line.IsStroked)
                 return;
@@ -327,7 +329,7 @@ namespace Core2D.Renderer.PdfSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.Shapes.RectangleShape rectangle, double dx, double dy, object db, object r)
+        public override void Draw(object dc, RectangleShape rectangle, double dx, double dy, object db, object r)
         {
             var _gfx = dc as XGraphics;
 
@@ -380,7 +382,7 @@ namespace Core2D.Renderer.PdfSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.Shapes.EllipseShape ellipse, double dx, double dy, object db, object r)
+        public override void Draw(object dc, EllipseShape ellipse, double dx, double dy, object db, object r)
         {
             var _gfx = dc as XGraphics;
 
@@ -422,7 +424,7 @@ namespace Core2D.Renderer.PdfSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.Shapes.ArcShape arc, double dx, double dy, object db, object r)
+        public override void Draw(object dc, ArcShape arc, double dx, double dy, object db, object r)
         {
             var _gfx = dc as XGraphics;
 
@@ -475,7 +477,7 @@ namespace Core2D.Renderer.PdfSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.Shapes.CubicBezierShape cubicBezier, double dx, double dy, object db, object r)
+        public override void Draw(object dc, CubicBezierShape cubicBezier, double dx, double dy, object db, object r)
         {
             var _gfx = dc as XGraphics;
 
@@ -525,7 +527,7 @@ namespace Core2D.Renderer.PdfSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.Shapes.QuadraticBezierShape quadraticBezier, double dx, double dy, object db, object r)
+        public override void Draw(object dc, QuadraticBezierShape quadraticBezier, double dx, double dy, object db, object r)
         {
             var _gfx = dc as XGraphics;
 
@@ -584,12 +586,12 @@ namespace Core2D.Renderer.PdfSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.Shapes.TextShape text, double dx, double dy, object db, object r)
+        public override void Draw(object dc, TextShape text, double dx, double dy, object db, object r)
         {
             var _gfx = dc as XGraphics;
 
-            var properties = (ImmutableArray<Data.Property>)db;
-            var record = (Data.Record)r;
+            var properties = (ImmutableArray<Property>)db;
+            var record = (Record)r;
             var tbind = text.BindText(properties, record);
             if (string.IsNullOrEmpty(tbind))
                 return;
@@ -599,22 +601,22 @@ namespace Core2D.Renderer.PdfSharp
             var fontStyle = XFontStyle.Regular;
             if (text.Style.TextStyle.FontStyle != null)
             {
-                if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Core2D.Style.FontStyleFlags.Bold))
+                if (text.Style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Bold))
                 {
                     fontStyle |= XFontStyle.Bold;
                 }
 
-                if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Core2D.Style.FontStyleFlags.Italic))
+                if (text.Style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Italic))
                 {
                     fontStyle |= XFontStyle.Italic;
                 }
 
-                if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Core2D.Style.FontStyleFlags.Underline))
+                if (text.Style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Underline))
                 {
                     fontStyle |= XFontStyle.Underline;
                 }
 
-                if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Core2D.Style.FontStyleFlags.Strikeout))
+                if (text.Style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Strikeout))
                 {
                     fontStyle |= XFontStyle.Strikeout;
                 }
@@ -642,26 +644,26 @@ namespace Core2D.Renderer.PdfSharp
             var format = new XStringFormat();
             switch (text.Style.TextStyle.TextHAlignment)
             {
-                case Core2D.Style.TextHAlignment.Left:
+                case TextHAlignment.Left:
                     format.Alignment = XStringAlignment.Near;
                     break;
-                case Core2D.Style.TextHAlignment.Center:
+                case TextHAlignment.Center:
                     format.Alignment = XStringAlignment.Center;
                     break;
-                case Core2D.Style.TextHAlignment.Right:
+                case TextHAlignment.Right:
                     format.Alignment = XStringAlignment.Far;
                     break;
             }
 
             switch (text.Style.TextStyle.TextVAlignment)
             {
-                case Core2D.Style.TextVAlignment.Top:
+                case TextVAlignment.Top:
                     format.LineAlignment = XLineAlignment.Near;
                     break;
-                case Core2D.Style.TextVAlignment.Center:
+                case TextVAlignment.Center:
                     format.LineAlignment = XLineAlignment.Center;
                     break;
-                case Core2D.Style.TextVAlignment.Bottom:
+                case TextVAlignment.Bottom:
                     format.LineAlignment = XLineAlignment.Far;
                     break;
             }
@@ -675,7 +677,7 @@ namespace Core2D.Renderer.PdfSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.Shapes.ImageShape image, double dx, double dy, object db, object r)
+        public override void Draw(object dc, ImageShape image, double dx, double dy, object db, object r)
         {
             var _gfx = dc as XGraphics;
 
@@ -739,7 +741,7 @@ namespace Core2D.Renderer.PdfSharp
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.Shapes.PathShape path, double dx, double dy, object db, object r)
+        public override void Draw(object dc, PathShape path, double dx, double dy, object db, object r)
         {
             var _gfx = dc as XGraphics;
 
