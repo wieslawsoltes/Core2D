@@ -136,17 +136,6 @@ namespace Core2D.Shapes
         }
 
         /// <summary>
-        /// Adds <see cref="BaseShape"/> to <see cref="Shapes"/> collection.
-        /// </summary>
-        /// <param name="shape">The shape object.</param>
-        public void AddShape(BaseShape shape)
-        {
-            shape.Owner = this;
-            shape.State.Flags &= ~ShapeStateFlags.Standalone;
-            Shapes = Shapes.Add(shape);
-        }
-
-        /// <summary>
         /// Creates a new <see cref="GroupShape"/> instance.
         /// </summary>
         /// <param name="name">The group name.</param>
