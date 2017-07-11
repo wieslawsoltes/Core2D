@@ -258,7 +258,7 @@ namespace Core2D.Path.Parser
         {
             if (!_figureStarted)
             {
-                _context.BeginFigure(PointShape.FromPoint2(_lastStart), _isFilled, !_isClosed);
+                _context.BeginFigure(_lastStart.AsPointShape(), _isFilled, !_isClosed);
                 _figureStarted = true;
             }
         }
@@ -302,7 +302,7 @@ namespace Core2D.Path.Parser
                     case 'M':
                         _lastPoint = ReadPoint(cmd, !_allowComma);
 
-                        _context.BeginFigure(PointShape.FromPoint2(_lastPoint), _isFilled, !_isClosed);
+                        _context.BeginFigure(_lastPoint.AsPointShape(), _isFilled, !_isClosed);
                         _figureStarted = true;
                         _lastStart = _lastPoint;
                         last_cmd = 'M';
@@ -310,7 +310,7 @@ namespace Core2D.Path.Parser
                         while (IsNumber(_allowComma))
                         {
                             _lastPoint = ReadPoint(cmd, !_allowComma);
-                            _context.LineTo(PointShape.FromPoint2(_lastPoint), _isStroked, !_isSmoothJoin);
+                            _context.LineTo(_lastPoint.AsPointShape(), _isStroked, !_isSmoothJoin);
                             last_cmd = 'L';
                         }
                         break;
@@ -347,7 +347,7 @@ namespace Core2D.Path.Parser
                                     break;
                             }
 
-                            _context.LineTo(PointShape.FromPoint2(_lastPoint), _isStroked, !_isSmoothJoin);
+                            _context.LineTo(_lastPoint.AsPointShape(), _isStroked, !_isSmoothJoin);
                         }
                         while (IsNumber(_allowComma));
 
@@ -386,9 +386,9 @@ namespace Core2D.Path.Parser
 
                             _lastPoint = ReadPoint(cmd, _allowComma);
                             _context.CubicBezierTo(
-                                PointShape.FromPoint2(p),
-                                PointShape.FromPoint2(_secondLastPoint),
-                                PointShape.FromPoint2(_lastPoint),
+                                p.AsPointShape(),
+                                _secondLastPoint.AsPointShape(),
+                                _lastPoint.AsPointShape(),
                                 _isStroked,
                                 !_isSmoothJoin);
 
@@ -426,8 +426,8 @@ namespace Core2D.Path.Parser
                             }
 
                             _context.QuadraticBezierTo(
-                                PointShape.FromPoint2(_secondLastPoint),
-                                PointShape.FromPoint2(_lastPoint),
+                                _secondLastPoint.AsPointShape(),
+                                _lastPoint.AsPointShape(),
                                 _isStroked,
                                 !_isSmoothJoin);
 
@@ -452,7 +452,7 @@ namespace Core2D.Path.Parser
                             _lastPoint = ReadPoint(cmd, _allowComma);
 
                             _context.ArcTo(
-                                PointShape.FromPoint2(_lastPoint),
+                                _lastPoint.AsPointShape(),
                                 PathSize.Create(w, h),
                                 rotation,
                                 large,

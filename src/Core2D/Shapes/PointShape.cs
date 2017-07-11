@@ -6,8 +6,6 @@ using Core2D.Data;
 using Core2D.Renderer;
 using Core2D.Shape;
 using Core2D.Style;
-using Spatial;
-using static System.Math;
 
 namespace Core2D.Shapes
 {
@@ -95,18 +93,6 @@ namespace Core2D.Shapes
         }
 
         /// <summary>
-        /// Calculates distance between points.
-        /// </summary>
-        /// <param name="point">The other point</param>
-        /// <returns>The distance between points.</returns>
-        public double DistanceTo(PointShape point)
-        {
-            double dx = this.X - point.X;
-            double dy = this.Y - point.Y;
-            return Sqrt(dx * dx + dy * dy);
-        }
-
-        /// <summary>
         /// Creates a new <see cref="PointShape"/> instance.
         /// </summary>
         /// <param name="x">The X coordinate of point.</param>
@@ -125,24 +111,6 @@ namespace Core2D.Shapes
                 Y = y,
                 Alignment = alignment,
                 Shape = shape
-            };
-        }
-
-        /// <summary>
-        /// Creates a new <see cref="PointShape"/> instance.
-        /// </summary>
-        /// <param name="point">The source point.</param>
-        /// <returns>The new instance of the <see cref="PointShape"/> class.</returns>
-        public static PointShape FromPoint2(Point2 point)
-        {
-            return new PointShape()
-            {
-                Name = "",
-                Style = default(ShapeStyle),
-                X = point.X,
-                Y = point.Y,
-                Alignment = PointAlignment.None,
-                Shape = null
             };
         }
 
