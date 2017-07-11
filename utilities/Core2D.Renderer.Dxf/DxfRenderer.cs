@@ -4,6 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using Core2D.Path;
+using Core2D.Path.Segments;
+using Core2D.Shapes;
+using Core2D.Style;
 using netDxf;
 using netDxf.Entities;
 using netDxf.Objects;
@@ -14,9 +18,9 @@ namespace Core2D.Renderer.Dxf
     /// <summary>
     /// Native netDxf shape renderer.
     /// </summary>
-    public partial class DxfRenderer : Core2D.Renderer.ShapeRenderer
+    public partial class DxfRenderer : ShapeRenderer
     {
-        private Core2D.Renderer.Cache<string, ImageDefinition> _biCache = Core2D.Renderer.Cache<string, ImageDefinition>.Create();
+        private Cache<string, ImageDefinition> _biCache = Cache<string, ImageDefinition>.Create();
         private double _pageWidth;
         private double _pageHeight;
         private string _outputPath;
@@ -36,7 +40,7 @@ namespace Core2D.Renderer.Dxf
         /// Creates a new <see cref="DxfRenderer"/> instance.
         /// </summary>
         /// <returns>The new instance of the <see cref="DxfRenderer"/> class.</returns>
-        public static Core2D.Renderer.ShapeRenderer Create() => new DxfRenderer();
+        public static ShapeRenderer Create() => new DxfRenderer();
 
         private static double LineweightFactor = 96.0 / 2540.0;
 
@@ -48,9 +52,9 @@ namespace Core2D.Renderer.Dxf
             return (Lineweight)Lineweights.OrderBy(x => Math.Abs((long)x - lineweight)).First();
         }
 
-        private static AciColor ToColor(Core2D.Style.ArgbColor color) => new AciColor(color.R, color.G, color.B);
+        private static AciColor ToColor(ArgbColor color) => new AciColor(color.R, color.G, color.B);
 
-        private static short ToTransparency(Core2D.Style.ArgbColor color) => (short)(90.0 - color.A * 90.0 / 255.0);
+        private static short ToTransparency(ArgbColor color) => (short)(90.0 - color.A * 90.0 / 255.0);
 
         private double ToDxfX(double x) => x;
 
@@ -83,7 +87,7 @@ namespace Core2D.Renderer.Dxf
             };
         }
 
-        private Ellipse CreateEllipticalArc(Core2D.Shapes.ArcShape arc, double dx, double dy)
+        private Ellipse CreateEllipticalArc(ArcShape arc, double dx, double dy)
         {
             var a = new Spatial.Arc.GdiArc(
                 Spatial.Point2.FromXY(arc.Point1.X, arc.Point1.Y),
@@ -156,7 +160,7 @@ namespace Core2D.Renderer.Dxf
                 }, 3);
         }
 
-        private void DrawLineInternal(DxfDocument dxf, Layer layer, Core2D.Style.BaseStyle style, bool isStroked, double x1, double y1, double x2, double y2)
+        private void DrawLineInternal(DxfDocument dxf, Layer layer, BaseStyle style, bool isStroked, double x1, double y1, double x2, double y2)
         {
             if (isStroked)
             {
@@ -175,7 +179,7 @@ namespace Core2D.Renderer.Dxf
             }
         }
 
-        private void DrawRectangleInternal(DxfDocument dxf, Layer layer, bool isFilled, bool isStroked, Core2D.Style.BaseStyle style, ref Spatial.Rect2 rect)
+        private void DrawRectangleInternal(DxfDocument dxf, Layer layer, bool isFilled, bool isStroked, BaseStyle style, ref Spatial.Rect2 rect)
         {
             if (isFilled)
             {
@@ -188,7 +192,7 @@ namespace Core2D.Renderer.Dxf
             }
         }
 
-        private void FillRectangle(DxfDocument dxf, Layer layer, double x, double y, double width, double height, Core2D.Style.ArgbColor color)
+        private void FillRectangle(DxfDocument dxf, Layer layer, double x, double y, double width, double height, ArgbColor color)
         {
             var fill = ToColor(color);
             var fillTransparency = ToTransparency(color);
@@ -214,7 +218,7 @@ namespace Core2D.Renderer.Dxf
             dxf.AddEntity(hatch);
         }
 
-        private void StrokeRectangle(DxfDocument dxf, Layer layer, Core2D.Style.BaseStyle style, double x, double y, double width, double height)
+        private void StrokeRectangle(DxfDocument dxf, Layer layer, BaseStyle style, double x, double y, double width, double height)
         {
             DrawLineInternal(dxf, layer, style, true, x, y, x + width, y);
             DrawLineInternal(dxf, layer, style, true, x + width, y, x + width, y + height);
@@ -222,7 +226,7 @@ namespace Core2D.Renderer.Dxf
             DrawLineInternal(dxf, layer, style, true, x, y + height, x, y);
         }
 
-        private void DrawEllipseInternal(DxfDocument dxf, Layer layer, bool isFilled, bool isStroked, Core2D.Style.BaseStyle style, ref Spatial.Rect2 rect)
+        private void DrawEllipseInternal(DxfDocument dxf, Layer layer, bool isFilled, bool isStroked, BaseStyle style, ref Spatial.Rect2 rect)
         {
             var dxfEllipse = CreateEllipse(rect.X, rect.Y, rect.Width, rect.Height);
 
@@ -237,7 +241,7 @@ namespace Core2D.Renderer.Dxf
             }
         }
 
-        private void StrokeEllipse(DxfDocument dxf, Layer layer, Ellipse dxfEllipse, Core2D.Style.ArgbColor color, double thickness)
+        private void StrokeEllipse(DxfDocument dxf, Layer layer, Ellipse dxfEllipse, ArgbColor color, double thickness)
         {
             var stroke = ToColor(color);
             var strokeTansparency = ToTransparency(color);
@@ -251,7 +255,7 @@ namespace Core2D.Renderer.Dxf
             dxf.AddEntity(dxfEllipse);
         }
 
-        private void FillEllipse(DxfDocument dxf, Layer layer, Ellipse dxfEllipse, Core2D.Style.ArgbColor color)
+        private void FillEllipse(DxfDocument dxf, Layer layer, Ellipse dxfEllipse, ArgbColor color)
         {
             var fill = ToColor(color);
             var fillTransparency = ToTransparency(color);
@@ -275,7 +279,7 @@ namespace Core2D.Renderer.Dxf
             dxf.AddEntity(hatch);
         }
 
-        private void DrawGridInternal(DxfDocument dxf, Layer layer, Core2D.Style.ShapeStyle style, double offsetX, double offsetY, double cellWidth, double cellHeight, ref Spatial.Rect2 rect)
+        private void DrawGridInternal(DxfDocument dxf, Layer layer, ShapeStyle style, double offsetX, double offsetY, double cellWidth, double cellHeight, ref Spatial.Rect2 rect)
         {
             double ox = rect.X;
             double oy = rect.Y;
@@ -295,12 +299,12 @@ namespace Core2D.Renderer.Dxf
             }
         }
 
-        private void CreateHatchBoundsAndEntitiess(Core2D.Path.PathGeometry pg, double dx, double dy, out IList<HatchBoundaryPath> bounds, out ICollection<EntityObject> entities)
+        private void CreateHatchBoundsAndEntitiess(PathGeometry pg, double dx, double dy, out IList<HatchBoundaryPath> bounds, out ICollection<EntityObject> entities)
         {
             bounds = new List<HatchBoundaryPath>();
             entities = new List<EntityObject>();
 
-            // TODO: FillMode = pg.FillRule == XFillRule.EvenOdd ? FillMode.Alternate : FillMode.Winding;
+            // TODO: FillMode = pg.FillRule == FillRule.EvenOdd ? FillMode.Alternate : FillMode.Winding;
 
             foreach (var pf in pg.Figures)
             {
@@ -309,16 +313,16 @@ namespace Core2D.Renderer.Dxf
 
                 foreach (var segment in pf.Segments)
                 {
-                    if (segment is Core2D.Path.Segments.ArcSegment)
+                    if (segment is ArcSegment)
                     {
                         throw new NotSupportedException("Not supported segment type: " + segment.GetType());
                         //var arcSegment = segment as ArcSegment;
                         // TODO: Convert WPF/SVG elliptical arc segment format to DXF ellipse arc.
                         //startPoint = arcSegment.Point;
                     }
-                    else if (segment is Core2D.Path.Segments.CubicBezierSegment)
+                    else if (segment is CubicBezierSegment)
                     {
-                        var cubicBezierSegment = segment as Core2D.Path.Segments.CubicBezierSegment;
+                        var cubicBezierSegment = segment as CubicBezierSegment;
                         var dxfSpline = CreateCubicSpline(
                             startPoint.X + dx,
                             startPoint.Y + dy,
@@ -332,9 +336,9 @@ namespace Core2D.Renderer.Dxf
                         entities.Add((Spline)dxfSpline.Clone());
                         startPoint = cubicBezierSegment.Point3;
                     }
-                    else if (segment is Core2D.Path.Segments.LineSegment)
+                    else if (segment is LineSegment)
                     {
-                        var lineSegment = segment as Core2D.Path.Segments.LineSegment;
+                        var lineSegment = segment as LineSegment;
                         var dxfLine = CreateLine(
                             startPoint.X + dx,
                             startPoint.Y + dy,
@@ -344,9 +348,9 @@ namespace Core2D.Renderer.Dxf
                         entities.Add((Line)dxfLine.Clone());
                         startPoint = lineSegment.Point;
                     }
-                    else if (segment is Core2D.Path.Segments.PolyCubicBezierSegment)
+                    else if (segment is PolyCubicBezierSegment)
                     {
-                        var polyCubicBezierSegment = segment as Core2D.Path.Segments.PolyCubicBezierSegment;
+                        var polyCubicBezierSegment = segment as PolyCubicBezierSegment;
                         if (polyCubicBezierSegment.Points.Length >= 3)
                         {
                             var dxfSpline = CreateCubicSpline(
@@ -383,9 +387,9 @@ namespace Core2D.Renderer.Dxf
 
                         startPoint = polyCubicBezierSegment.Points.Last();
                     }
-                    else if (segment is Core2D.Path.Segments.PolyLineSegment)
+                    else if (segment is PolyLineSegment)
                     {
-                        var polyLineSegment = segment as Core2D.Path.Segments.PolyLineSegment;
+                        var polyLineSegment = segment as PolyLineSegment;
                         if (polyLineSegment.Points.Length >= 1)
                         {
                             var dxfLine = CreateLine(
@@ -413,9 +417,9 @@ namespace Core2D.Renderer.Dxf
 
                         startPoint = polyLineSegment.Points.Last();
                     }
-                    else if (segment is Core2D.Path.Segments.PolyQuadraticBezierSegment)
+                    else if (segment is PolyQuadraticBezierSegment)
                     {
-                        var polyQuadraticSegment = segment as Core2D.Path.Segments.PolyQuadraticBezierSegment;
+                        var polyQuadraticSegment = segment as PolyQuadraticBezierSegment;
                         if (polyQuadraticSegment.Points.Length >= 2)
                         {
                             var dxfSpline = CreateQuadraticSpline(
@@ -448,9 +452,9 @@ namespace Core2D.Renderer.Dxf
 
                         startPoint = polyQuadraticSegment.Points.Last();
                     }
-                    else if (segment is Core2D.Path.Segments.QuadraticBezierSegment)
+                    else if (segment is QuadraticBezierSegment)
                     {
-                        var quadraticBezierSegment = segment as Core2D.Path.Segments.QuadraticBezierSegment;
+                        var quadraticBezierSegment = segment as QuadraticBezierSegment;
                         var dxfSpline = CreateQuadraticSpline(
                             startPoint.X + dx,
                             startPoint.Y + dy,
@@ -485,7 +489,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Fill(object dc, double x, double y, double width, double height, Core2D.Style.ArgbColor color)
+        public override void Fill(object dc, double x, double y, double width, double height, ArgbColor color)
         {
             var dxf = dc as DxfDocument;
             var rect = Spatial.Rect2.FromPoints(x, y, x + width, y + height);
@@ -493,7 +497,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override object PushMatrix(object dc, Core2D.Renderer.MatrixObject matrix)
+        public override object PushMatrix(object dc, MatrixObject matrix)
         {
             // TODO: Implement push matrix.
             return null;
@@ -540,7 +544,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.Shapes.LineShape line, double dx, double dy, object db, object r)
+        public override void Draw(object dc, LineShape line, double dx, double dy, object db, object r)
         {
             if (!line.IsStroked)
                 return;
@@ -552,7 +556,7 @@ namespace Core2D.Renderer.Dxf
             double _x2 = line.End.X + dx;
             double _y2 = line.End.Y + dy;
 
-            Core2D.Shapes.LineShapeExtensions.GetMaxLength(line, ref _x1, ref _y1, ref _x2, ref _y2);
+            LineShapeExtensions.GetMaxLength(line, ref _x1, ref _y1, ref _x2, ref _y2);
 
             // TODO: Draw line start arrow.
 
@@ -564,7 +568,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.Shapes.RectangleShape rectangle, double dx, double dy, object db, object r)
+        public override void Draw(object dc, RectangleShape rectangle, double dx, double dy, object db, object r)
         {
             if (!rectangle.IsStroked && !rectangle.IsFilled && !rectangle.IsGrid)
                 return;
@@ -593,7 +597,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.Shapes.EllipseShape ellipse, double dx, double dy, object db, object r)
+        public override void Draw(object dc, EllipseShape ellipse, double dx, double dy, object db, object r)
         {
             if (!ellipse.IsStroked && !ellipse.IsFilled)
                 return;
@@ -611,7 +615,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.Shapes.ArcShape arc, double dx, double dy, object db, object r)
+        public override void Draw(object dc, ArcShape arc, double dx, double dy, object db, object r)
         {
             var dxf = dc as DxfDocument;
             var style = arc.Style;
@@ -658,7 +662,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.Shapes.CubicBezierShape cubicBezier, double dx, double dy, object db, object r)
+        public override void Draw(object dc, CubicBezierShape cubicBezier, double dx, double dy, object db, object r)
         {
             if (!cubicBezier.IsStroked && !cubicBezier.IsFilled)
                 return;
@@ -715,7 +719,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.Shapes.QuadraticBezierShape quadraticBezier, double dx, double dy, object db, object r)
+        public override void Draw(object dc, QuadraticBezierShape quadraticBezier, double dx, double dy, object db, object r)
         {
             if (!quadraticBezier.IsStroked && !quadraticBezier.IsFilled)
                 return;
@@ -770,7 +774,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.Shapes.TextShape text, double dx, double dy, object db, object r)
+        public override void Draw(object dc, TextShape text, double dx, double dy, object db, object r)
         {
             var dxf = dc as DxfDocument;
 
@@ -796,13 +800,13 @@ namespace Core2D.Renderer.Dxf
             switch (text.Style.TextStyle.TextHAlignment)
             {
                 default:
-                case Core2D.Style.TextHAlignment.Left:
+                case TextHAlignment.Left:
                     x = rect.X;
                     break;
-                case Core2D.Style.TextHAlignment.Center:
+                case TextHAlignment.Center:
                     x = rect.X + rect.Width / 2.0;
                     break;
-                case Core2D.Style.TextHAlignment.Right:
+                case TextHAlignment.Right:
                     x = rect.X + rect.Width;
                     break;
             }
@@ -810,13 +814,13 @@ namespace Core2D.Renderer.Dxf
             switch (text.Style.TextStyle.TextVAlignment)
             {
                 default:
-                case Core2D.Style.TextVAlignment.Top:
+                case TextVAlignment.Top:
                     y = rect.Y;
                     break;
-                case Core2D.Style.TextVAlignment.Center:
+                case TextVAlignment.Center:
                     y = rect.Y + rect.Height / 2.0;
                     break;
-                case Core2D.Style.TextVAlignment.Bottom:
+                case TextVAlignment.Bottom:
                     y = rect.Y + rect.Height;
                     break;
             }
@@ -824,54 +828,54 @@ namespace Core2D.Renderer.Dxf
             switch (text.Style.TextStyle.TextVAlignment)
             {
                 default:
-                case Core2D.Style.TextVAlignment.Top:
+                case TextVAlignment.Top:
                     switch (text.Style.TextStyle.TextHAlignment)
                     {
                         default:
-                        case Core2D.Style.TextHAlignment.Left:
+                        case TextHAlignment.Left:
                             attachmentPoint = MTextAttachmentPoint.TopLeft;
                             break;
-                        case Core2D.Style.TextHAlignment.Center:
+                        case TextHAlignment.Center:
                             attachmentPoint = MTextAttachmentPoint.TopCenter;
                             break;
-                        case Core2D.Style.TextHAlignment.Right:
+                        case TextHAlignment.Right:
                             attachmentPoint = MTextAttachmentPoint.TopRight;
                             break;
                     }
                     break;
-                case Core2D.Style.TextVAlignment.Center:
+                case TextVAlignment.Center:
                     switch (text.Style.TextStyle.TextHAlignment)
                     {
                         default:
-                        case Core2D.Style.TextHAlignment.Left:
+                        case TextHAlignment.Left:
                             attachmentPoint = MTextAttachmentPoint.MiddleLeft;
                             break;
-                        case Core2D.Style.TextHAlignment.Center:
+                        case TextHAlignment.Center:
                             attachmentPoint = MTextAttachmentPoint.MiddleCenter;
                             break;
-                        case Core2D.Style.TextHAlignment.Right:
+                        case TextHAlignment.Right:
                             attachmentPoint = MTextAttachmentPoint.MiddleRight;
                             break;
                     }
                     break;
-                case Core2D.Style.TextVAlignment.Bottom:
+                case TextVAlignment.Bottom:
                     switch (text.Style.TextStyle.TextHAlignment)
                     {
                         default:
-                        case Core2D.Style.TextHAlignment.Left:
+                        case TextHAlignment.Left:
                             attachmentPoint = MTextAttachmentPoint.BottomLeft;
                             break;
-                        case Core2D.Style.TextHAlignment.Center:
+                        case TextHAlignment.Center:
                             attachmentPoint = MTextAttachmentPoint.BottomCenter;
                             break;
-                        case Core2D.Style.TextHAlignment.Right:
+                        case TextHAlignment.Right:
                             attachmentPoint = MTextAttachmentPoint.BottomRight;
                             break;
                     }
                     break;
             }
 
-            var ts = new TextStyle(style.TextStyle.FontName, style.TextStyle.FontFile);
+            var ts = new netDxf.Tables.TextStyle(style.TextStyle.FontName, style.TextStyle.FontFile);
             var dxfMText = new MText(
                 new Vector3(ToDxfX(x), ToDxfY(y), 0),
                 text.Style.TextStyle.FontSize * _targetDpi / _sourceDpi,
@@ -883,10 +887,10 @@ namespace Core2D.Renderer.Dxf
             var fs = text.Style.TextStyle.FontStyle;
             if (fs != null)
             {
-                options.Bold = fs.Flags.HasFlag(Core2D.Style.FontStyleFlags.Bold);
-                options.Italic = fs.Flags.HasFlag(Core2D.Style.FontStyleFlags.Italic);
-                options.Underline = fs.Flags.HasFlag(Core2D.Style.FontStyleFlags.Underline);
-                options.StrikeThrough = fs.Flags.HasFlag(Core2D.Style.FontStyleFlags.Strikeout);
+                options.Bold = fs.Flags.HasFlag(FontStyleFlags.Bold);
+                options.Italic = fs.Flags.HasFlag(FontStyleFlags.Italic);
+                options.Underline = fs.Flags.HasFlag(FontStyleFlags.Underline);
+                options.StrikeThrough = fs.Flags.HasFlag(FontStyleFlags.Strikeout);
             }
 
             options.Aligment = MTextFormattingOptions.TextAligment.Default;
@@ -901,7 +905,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.Shapes.ImageShape image, double dx, double dy, object db, object r)
+        public override void Draw(object dc, ImageShape image, double dx, double dy, object db, object r)
         {
             var dxf = dc as DxfDocument;
 
@@ -947,7 +951,7 @@ namespace Core2D.Renderer.Dxf
         }
 
         /// <inheritdoc/>
-        public override void Draw(object dc, Core2D.Shapes.PathShape path, double dx, double dy, object db, object r)
+        public override void Draw(object dc, PathShape path, double dx, double dy, object db, object r)
         {
             if (!path.IsStroked && !path.IsFilled)
                 return;
