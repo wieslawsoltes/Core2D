@@ -109,7 +109,7 @@ namespace Core2D.UnitTests
             var shapes = new BaseShape[] { shape1, shape2, point1, point2 };
             var source = shapes.ToList();
 
-            var target = GroupShape.Group(shapes, "g", source);
+            var target = shapes.Group("g", source);
 
             Assert.Equal("g", target.Name);
 
@@ -137,7 +137,7 @@ namespace Core2D.UnitTests
             var shapes = new BaseShape[] { shape1, shape2, point1, point2 };
             var source = shapes.ToList();
 
-            GroupShape.Group(shapes, "g", null);
+            shapes.Group("g", null);
 
             Assert.Contains(shape1, source);
             Assert.Contains(shape2, source);
@@ -164,7 +164,7 @@ namespace Core2D.UnitTests
 
             var source = new List<BaseShape> { target };
 
-            GroupShape.Ungroup(target, source);
+            target.Ungroup(source);
 
             Assert.Contains(shape, source);
             Assert.Contains(point1, source);
