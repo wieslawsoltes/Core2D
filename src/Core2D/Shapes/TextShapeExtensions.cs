@@ -77,17 +77,17 @@ namespace Core2D.Shapes
         /// <summary>
         /// Bind properties or data record to <see cref="TextShape.Text"/> property.
         /// </summary>
-        /// <param name="shape">The text shape instance.</param>
+        /// <param name="text">The text shape instance.</param>
         /// <param name="db">The properties database used for binding.</param>
         /// <param name="r">The external data record used for binding.</param>
         /// <returns>The string bound to properties or data record.</returns>
-        public static string BindText(this TextShape shape, ImmutableArray<Property> db, Record r)
+        public static string BindText(this TextShape text, ImmutableArray<Property> db, Record r)
         {
-            var record = shape.Data?.Record ?? r;
+            var record = text.Data?.Record ?? r;
 
-            if (!string.IsNullOrEmpty(shape.Text))
+            if (!string.IsNullOrEmpty(text.Text))
             {
-                var trimmed = shape.Text.Trim();
+                var trimmed = text.Text.Trim();
                 if (trimmed.Length >= 3 && trimmed.TrimStart().StartsWith("{") && trimmed.TrimEnd().EndsWith("}"))
                 {
                     var bidning = trimmed.Substring(1, trimmed.Length - 2);
@@ -115,20 +115,20 @@ namespace Core2D.Shapes
             }
 
             // Try to bind to Properties using Text as formatting.
-            if (shape.Data?.Properties != null && shape.Data.Properties.Length > 0)
+            if (text.Data?.Properties != null && text.Data.Properties.Length > 0)
             {
                 try
                 {
-                    var args = shape.Data.Properties.Where(x => x != null).Select(x => x.Value).ToArray();
-                    if (shape.Text != null && args != null && args.Length > 0)
+                    var args = text.Data.Properties.Where(x => x != null).Select(x => x.Value).ToArray();
+                    if (text.Text != null && args != null && args.Length > 0)
                     {
-                        return string.Format(shape.Text, args);
+                        return string.Format(text.Text, args);
                     }
                 }
                 catch (FormatException) { }
             }
 
-            return shape.Text;
+            return text.Text;
         }
     }
 }
