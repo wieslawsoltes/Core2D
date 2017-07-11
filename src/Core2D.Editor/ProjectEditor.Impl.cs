@@ -3313,7 +3313,13 @@ namespace Core2D.Editor
             {
                 var source = layer.Shapes.ToBuilder();
 
-                GroupShape.Ungroup(shapes, source);
+                foreach (var shape in shapes)
+                {
+                    if (shape is GroupShape group)
+                    {
+                        GroupShape.Ungroup(group, source);
+                    }
+                }
 
                 var previous = layer.Shapes;
                 var next = source.ToImmutable();
@@ -3322,13 +3328,13 @@ namespace Core2D.Editor
             }
         }
 
-        private void Ungroup(LayerContainer layer, BaseShape shape)
+        private void Ungroup(LayerContainer layer, GroupShape group)
         {
-            if (layer != null && shape != null)
+            if (layer != null && group != null)
             {
                 var source = layer.Shapes.ToBuilder();
 
-                GroupShape.Ungroup(shape as GroupShape, source);
+                GroupShape.Ungroup(group, source);
 
                 var previous = layer.Shapes;
                 var next = source.ToImmutable();
@@ -3363,9 +3369,9 @@ namespace Core2D.Editor
             var layer = Project?.CurrentContainer?.CurrentLayer;
             if (layer != null)
             {
-                if (shape != null && shape is GroupShape)
+                if (shape != null && shape is GroupShape group)
                 {
-                    Ungroup(layer, shape);
+                    Ungroup(layer, group);
                     return true;
                 }
 

@@ -188,49 +188,31 @@ namespace Core2D.Shapes
         }
 
         /// <summary>
-        /// Remove shape from group.
-        /// </summary>
-        /// <param name="shape">The shape instance.</param>
-        /// <param name="source">The source shapes collection.</param>
-        public static void RemoveFromGroup(BaseShape shape, IList<BaseShape> source)
-        {
-            if (shape is PointShape)
-            {
-                // Remove connector related state flags.
-                shape.State.Flags &=
-                    ~(ShapeStateFlags.Connector
-                    | ShapeStateFlags.None
-                    | ShapeStateFlags.Input
-                    | ShapeStateFlags.Output);
-            }
-
-            // Add shape standalone flag.
-            shape.State.Flags |= ShapeStateFlags.Standalone;
-
-            // Add shape to source collection.
-            source.Add(shape);
-        }
-
-        /// <summary>
         /// Ungroup shapes.
         /// </summary>
         /// <param name="shapes">The shapes collection.</param>
         /// <param name="source">The source shapes collection.</param>
-        /// <param name="isGroupShape">The flag indicating whether shapes are part of a group.</param>
-        public static void Ungroup(IEnumerable<BaseShape> shapes, IList<BaseShape> source, bool isGroupShape = false)
+        private static void Ungroup(IEnumerable<BaseShape> shapes, IList<BaseShape> source)
         {
             if (shapes != null && source != null)
             {
                 foreach (var shape in shapes)
                 {
-                    if (shape is GroupShape)
+                    if (shape is PointShape point)
                     {
-                        Ungroup(shape as GroupShape, source);
+                        // Remove connector related state flags.
+                        point.State.Flags &=
+                            ~(ShapeStateFlags.Connector
+                            | ShapeStateFlags.None
+                            | ShapeStateFlags.Input
+                            | ShapeStateFlags.Output);
                     }
-                    else if (isGroupShape)
-                    {
-                        RemoveFromGroup(shape, source);
-                    }
+
+                    // Add shape standalone flag.
+                    shape.State.Flags |= ShapeStateFlags.Standalone;
+
+                    // Add shape to source collection.
+                    source.Add(shape);
                 }
             }
         }
@@ -242,8 +224,8 @@ namespace Core2D.Shapes
         /// <param name="source">The source shapes collection.</param>
         public static void Ungroup(GroupShape group, IList<BaseShape> source)
         {
-            Ungroup(group.Shapes, source, isGroupShape: true);
-            Ungroup(group.Connectors, source, isGroupShape: true);
+            Ungroup(group.Shapes, source);
+            Ungroup(group.Connectors, source);
 
             // Remove group from source collection.
             source.Remove(group);
