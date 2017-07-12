@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using Core2D.Data;
 using Core2D.Path;
 using Core2D.Path.Segments;
 using Core2D.Shapes;
@@ -778,8 +779,8 @@ namespace Core2D.Renderer.Dxf
         {
             var dxf = dc as DxfDocument;
 
-            var properties = (ImmutableArray<Data.Property>)db;
-            var record = (Data.Record)r;
+            var properties = (ImmutableArray<Property>)db;
+            var record = (Record)r;
             var tbind = text.BindText(properties, record);
             if (string.IsNullOrEmpty(tbind))
                 return;

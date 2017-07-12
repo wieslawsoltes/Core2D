@@ -25,7 +25,7 @@ namespace Core2D.Project
         private LayerContainer _helperLayer;
         private BaseShape _currentShape;
         private PageContainer _template;
-        private Data.Context _data;
+        private Context _data;
         private bool _isExpanded = false;
 
         /// <summary>
@@ -212,7 +212,7 @@ namespace Core2D.Project
             : base()
         {
             _layers = ImmutableArray.Create<LayerContainer>();
-            _data = new Data.Context();
+            _data = new Context();
         }
 
         /// <summary>

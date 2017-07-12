@@ -424,7 +424,7 @@ namespace Core2D.Editor
         /// <param name="project">The project instance.</param>
         /// <param name="data">The data instance.</param>
         /// <param name="property">The property instance.</param>
-        public static void AddProperty(this ProjectContainer project, Data.Context data, Property property)
+        public static void AddProperty(this ProjectContainer project, Context data, Property property)
         {
             if (data?.Properties != null && property != null)
             {
@@ -584,7 +584,7 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="project">The project instance.</param>
         /// <param name="data">The data instance.</param>
-        public static void ResetRecord(this ProjectContainer project, Data.Context data)
+        public static void ResetRecord(this ProjectContainer project, Context data)
         {
             var record = data?.Record;
             if (record != null)
@@ -602,7 +602,7 @@ namespace Core2D.Editor
         /// <param name="project">The project instance.</param>
         /// <param name="data">The data instance.</param>
         /// <param name="record">The record instance.</param>
-        public static void ApplyRecord(this ProjectContainer project, Data.Context data, Record record)
+        public static void ApplyRecord(this ProjectContainer project, Context data, Record record)
         {
             if (data != null && record != null)
             {
@@ -619,7 +619,7 @@ namespace Core2D.Editor
         /// <param name="project">The project instance.</param>
         /// <param name="shape">The shape instance.</param>
         /// <param name="data">The data instance.</param>
-        public static void ApplyData(this ProjectContainer project, BaseShape shape, Data.Context data)
+        public static void ApplyData(this ProjectContainer project, BaseShape shape, Context data)
         {
             if (shape != null && data != null)
             {

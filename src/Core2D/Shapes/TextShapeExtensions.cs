@@ -92,7 +92,7 @@ namespace Core2D.Shapes
                 {
                     var bidning = trimmed.Substring(1, trimmed.Length - 2);
 
-                    // Try to bind to internal Data.Record or external (r) data record using Text property as Column.Name name.
+                    // Try to bind to internal Record or external (r) data record using Text property as Column.Name name.
                     if (record != null)
                     {
                         bool success = TryToBind(record, bidning, out string value);

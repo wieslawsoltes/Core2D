@@ -411,18 +411,18 @@ namespace Core2D.Editor
                 TryToRestoreRecords(shapes);
                 Project.AddGroupLibraries(gll);
             }
-            else if (item is Data.Context)
+            else if (item is Context)
             {
                 if (Renderers?[0]?.State?.SelectedShape != null || (Renderers?[0]?.State?.SelectedShapes?.Count > 0))
                 {
-                    OnApplyData(item as Data.Context);
+                    OnApplyData(item as Context);
                 }
                 else
                 {
                     var container = Project?.CurrentContainer;
                     if (container != null)
                     {
-                        container.Data = item as Data.Context;
+                        container.Data = item as Context;
                     }
                 }
             }
@@ -1382,7 +1382,7 @@ namespace Core2D.Editor
         /// Reset data context record.
         /// </summary>
         /// <param name="data">The data context.</param>
-        public void OnResetRecord(Data.Context data)
+        public void OnResetRecord(Context data)
         {
             Project.ResetRecord(data);
         }
@@ -1406,7 +1406,7 @@ namespace Core2D.Editor
                 {
                     foreach (var shape in Renderers[0].State.SelectedShapes)
                     {
-                        Project.ApplyRecord((Data.Context)shape.Data, record);
+                        Project.ApplyRecord((Context)shape.Data, record);
                     }
                 }
 
@@ -1426,7 +1426,7 @@ namespace Core2D.Editor
         /// Add property to data context.
         /// </summary>
         /// <param name="data">The data context.</param>
-        public void OnAddProperty(Data.Context data)
+        public void OnAddProperty(Context data)
         {
             Project.AddProperty(data, Property.Create(data, Constants.DefaulPropertyName, Constants.DefaulValue));
         }
@@ -1591,7 +1591,7 @@ namespace Core2D.Editor
         /// Set current data as selected shape data.
         /// </summary>
         /// <param name="data">The data item.</param>
-        public void OnApplyData(Data.Context data)
+        public void OnApplyData(Context data)
         {
             if (data != null)
             {
@@ -2300,24 +2300,24 @@ namespace Core2D.Editor
                     if (shape?.Data?.Record == null)
                         continue;
 
-                    if (records.TryGetValue((string)shape.Data.Record.Id, out Record record))
+                    if (records.TryGetValue((string)shape.Record.Id, out Record record))
                     {
                         // Use existing record.
-                        shape.Data.Record = record;
+                        shape.Record = record;
                     }
                     else
                     {
                         // Create Imported database.
                         if (Project?.CurrentDatabase == null)
                         {
-                            var db = Database.Create(Constants.ImportedDatabaseName, (ImmutableArray<Column>)shape.Data.Record.Owner.Columns);
+                            var db = Database.Create(Constants.ImportedDatabaseName, (ImmutableArray<Column>)shape.Record.Owner.Columns);
                             Project.AddDatabase(db);
                             Project.SetCurrentDatabase(db);
                         }
 
                         // Add missing data record.
-                        shape.Data.Record.Owner = Project.CurrentDatabase;
-                        Project?.AddRecord(Project?.CurrentDatabase, (Record)shape.Data.Record);
+                        shape.Record.Owner = Project.CurrentDatabase;
+                        Project?.AddRecord(Project?.CurrentDatabase, (Record)shape.Record);
 
                         // Recreate records dictionary.
                         records = GenerateRecordDictionaryById();
@@ -2674,7 +2674,7 @@ namespace Core2D.Editor
 
             var g = GroupShape.Create(Constants.DefaulGroupName);
 
-            g.Data.Record = record;
+            g.Record = record;
 
             var length = record.Values.Length;
             double px = sx;

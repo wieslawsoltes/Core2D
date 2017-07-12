@@ -19,7 +19,7 @@ namespace Core2D.Shape
         private MatrixObject _transform;
         private bool _isStroked;
         private bool _isFilled;
-        private Data.Context _data;
+        private Context _data;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BaseShape"/> class.

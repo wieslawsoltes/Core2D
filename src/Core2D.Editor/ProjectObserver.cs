@@ -171,7 +171,7 @@ namespace Core2D.Editor
 
         private void ObservePage(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(Data.Context.Properties))
+            if (e.PropertyName == nameof(Context.Properties))
             {
                 var container = sender as PageContainer;
                 Remove((IEnumerable<Property>)container.Data.Properties);
@@ -268,9 +268,9 @@ namespace Core2D.Editor
 
         private void ObserveData(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(Data.Context.Properties))
+            if (e.PropertyName == nameof(Context.Properties))
             {
-                var data = sender as Data.Context;
+                var data = sender as Context;
                 Remove(data.Properties);
                 Add(data.Properties);
             }
@@ -572,7 +572,7 @@ namespace Core2D.Editor
 
             if (container.Data != null)
             {
-                Add((Data.Context)container.Data);
+                Add((Context)container.Data);
             }
 
             if (container.WorkingLayer != null)
@@ -605,7 +605,7 @@ namespace Core2D.Editor
 
             if (container.Data != null)
             {
-                Remove((Data.Context)container.Data);
+                Remove((Context)container.Data);
             }
 
             if (container.WorkingLayer != null)
@@ -658,7 +658,7 @@ namespace Core2D.Editor
 
             if (shape.Data != null)
             {
-                Add((Data.Context)shape.Data);
+                Add((Context)shape.Data);
             }
 
             if (shape.State != null)
@@ -852,7 +852,7 @@ namespace Core2D.Editor
 
             if (shape.Data != null)
             {
-                Remove((Data.Context)shape.Data);
+                Remove((Context)shape.Data);
             }
 
             if (shape.State != null)
@@ -1209,7 +1209,7 @@ namespace Core2D.Editor
             }
         }
 
-        private void Add(Data.Context data)
+        private void Add(Context data)
         {
             if (data == null)
                 return;
@@ -1222,7 +1222,7 @@ namespace Core2D.Editor
             data.PropertyChanged += ObserveData;
         }
 
-        private void Remove(Data.Context data)
+        private void Remove(Context data)
         {
             if (data == null)
                 return;

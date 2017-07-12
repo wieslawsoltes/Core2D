@@ -1,18 +1,19 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Core2D.Editor.Input;
+using Core2D.Data;
 
 namespace Core2D.Editor.Commands
 {
     /// <inheritdoc/>
-    public class AddPropertyCommand : Command<Data.Context>, IAddPropertyCommand
+    public class AddPropertyCommand : Command<Context>, IAddPropertyCommand
     {
         /// <inheritdoc/>
-        public override bool CanRun(Data.Context data)
+        public override bool CanRun(Context data)
             => ServiceProvider.GetService<ProjectEditor>().IsEditMode();
 
         /// <inheritdoc/>
-        public override void Run(Data.Context data)
+        public override void Run(Context data)
             => ServiceProvider.GetService<ProjectEditor>().OnAddProperty(data);
     }
 }
