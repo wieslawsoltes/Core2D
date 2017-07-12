@@ -49,7 +49,7 @@ namespace Core2D.Wpf.Controls.Data
                             {
                                 if (this.DataContext != null)
                                 {
-                                    if (this.DataContext is Core2D.Data.Context data)
+                                    if (this.DataContext is Context data)
                                     {
                                         data.Record = record;
                                     }

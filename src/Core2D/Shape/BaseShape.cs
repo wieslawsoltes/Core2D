@@ -29,7 +29,7 @@ namespace Core2D.Shape
         {
             State = ShapeState.Create(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone);
             Transform = MatrixObject.Create();
-            Data = Core2D.Data.Context.Create();
+            Data = Context.Create();
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace Core2D.Shape
         }
 
         /// <summary>
-        /// Gets or sets shape <see cref="Core2D.Data.Context"/>.
+        /// Gets or sets shape <see cref="Context"/>.
         /// </summary>
         public virtual Context Data
         {

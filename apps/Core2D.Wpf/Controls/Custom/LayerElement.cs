@@ -15,32 +15,32 @@ namespace Core2D.Wpf.Controls.Custom
     public class LayerElement : FrameworkElement
     {
         /// <summary>
-        /// Gets the <see cref="Core2D.Data.Context"/> from <see cref="DependencyProperty"/> object.
+        /// Gets the <see cref="Context"/> from <see cref="DependencyProperty"/> object.
         /// </summary>
         /// <param name="obj">The <see cref="DependencyProperty"/> object.</param>
-        /// <returns>The <see cref="Core2D.Data.Context"/> value.</returns>
+        /// <returns>The <see cref="Context"/> value.</returns>
         public static Context GetData(DependencyObject obj)
         {
-            return (Core2D.Data.Context)obj.GetValue(DataProperty);
+            return (Context)obj.GetValue(DataProperty);
         }
 
         /// <summary>
-        /// Sets the <see cref="DependencyProperty"/> object value as <see cref="Core2D.Data.Context"/>.
+        /// Sets the <see cref="DependencyProperty"/> object value as <see cref="Context"/>.
         /// </summary>
         /// <param name="obj">The <see cref="DependencyProperty"/> object.</param>
-        /// <param name="value">The <see cref="Core2D.Data.Context"/> value.</param>
-        public static void SetData(DependencyObject obj, Core2D.Data.Context value)
+        /// <param name="value">The <see cref="Context"/> value.</param>
+        public static void SetData(DependencyObject obj, Context value)
         {
             obj.SetValue(DataProperty, value);
         }
 
         /// <summary>
-        /// The attached <see cref="DependencyProperty"/> for <see cref="Core2D.Data.Context"/> type.
+        /// The attached <see cref="DependencyProperty"/> for <see cref="Context"/> type.
         /// </summary>
         public static readonly DependencyProperty DataProperty =
             DependencyProperty.RegisterAttached(
                 "Data",
-                typeof(Core2D.Data.Context),
+                typeof(Context),
                 typeof(LayerElement),
                 new FrameworkPropertyMetadata(
                     null,

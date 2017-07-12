@@ -67,17 +67,17 @@ namespace Core2D.Editor.Designer
         public static ShapeState State { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Data.Database"/>.
+        /// The design time <see cref="Database"/>.
         /// </summary>
         public static Database Database { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Data.Context"/>.
+        /// The design time <see cref="Context"/>.
         /// </summary>
         public static Context Data { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Data.Record"/>.
+        /// The design time <see cref="Record"/>.
         /// </summary>
         public static Record Record { get; set; }
 
@@ -258,7 +258,7 @@ namespace Core2D.Editor.Designer
             db.CurrentRecord = record;
 
             Database = db;
-            Data = Core2D.Data.Context.Create(record);
+            Data = Context.Create(record);
             Record = record;
 
             // Project
