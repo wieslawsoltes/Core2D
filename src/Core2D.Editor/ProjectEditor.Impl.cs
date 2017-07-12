@@ -2300,24 +2300,24 @@ namespace Core2D.Editor
                     if (shape?.Data?.Record == null)
                         continue;
 
-                    if (records.TryGetValue((string)shape.Record.Id, out Record record))
+                    if (records.TryGetValue((string)shape.Data.Record.Id, out Record record))
                     {
                         // Use existing record.
-                        shape.Record = record;
+                        shape.Data.Record = record;
                     }
                     else
                     {
                         // Create Imported database.
                         if (Project?.CurrentDatabase == null)
                         {
-                            var db = Database.Create(Constants.ImportedDatabaseName, (ImmutableArray<Column>)shape.Record.Owner.Columns);
+                            var db = Database.Create(Constants.ImportedDatabaseName, (ImmutableArray<Column>)shape.Data.Record.Owner.Columns);
                             Project.AddDatabase(db);
                             Project.SetCurrentDatabase(db);
                         }
 
                         // Add missing data record.
-                        shape.Record.Owner = Project.CurrentDatabase;
-                        Project?.AddRecord(Project?.CurrentDatabase, (Record)shape.Record);
+                        shape.Data.Record.Owner = Project.CurrentDatabase;
+                        Project?.AddRecord(Project?.CurrentDatabase, (Record)shape.Data.Record);
 
                         // Recreate records dictionary.
                         records = GenerateRecordDictionaryById();
@@ -2674,7 +2674,7 @@ namespace Core2D.Editor
 
             var g = GroupShape.Create(Constants.DefaulGroupName);
 
-            g.Record = record;
+            g.Data.Record = record;
 
             var length = record.Values.Length;
             double px = sx;
