@@ -47,7 +47,7 @@ namespace Core2D.ScriptRunner.Roslyn
             using Core2D.Path;
             using Core2D.Path.Parser;
             using Core2D.Path.Segments;
-            using Core2D.Project;
+            using Core2D.Containers;
             using Core2D.Renderer;
             using Core2D.Renderer.Presenters;
             using Core2D.Shape;

@@ -9,22 +9,22 @@ namespace Core2D.Editor
     public static class Constants
     {
         /// <summary>
-        /// Default <see cref="Core2D.Project.LayerContainer"/> name.
+        /// Default <see cref="Core2D.Containers.LayerContainer"/> name.
         /// </summary>
         public const string DefaultLayerName = "Layer";
 
         /// <summary>
-        /// Default <see cref="Core2D.Project.PageContainer"/> template name.
+        /// Default <see cref="Core2D.Containers.PageContainer"/> template name.
         /// </summary>
         public const string DefaultTemplateName = "Template";
 
         /// <summary>
-        /// Default <see cref="Core2D.Project.PageContainer"/> page name.
+        /// Default <see cref="Core2D.Containers.PageContainer"/> page name.
         /// </summary>
         public const string DefaultPageName = "Page";
 
         /// <summary>
-        /// Default <see cref="Core2D.Project.DocumentContainer"/> name.
+        /// Default <see cref="Core2D.Containers.DocumentContainer"/> name.
         /// </summary>
         public const string DefaultDocumentName = "Document";
 
@@ -49,7 +49,7 @@ namespace Core2D.Editor
         public const string DefaulValue = "<empty>";
 
         /// <summary>
-        /// Default <see cref="Core2D.Project.Library{GroupShape}"/> name.
+        /// Default <see cref="Core2D.Containers.Library{GroupShape}"/> name.
         /// </summary>
         public const string DefaulGroupLibraryName = "Groups";
 
@@ -59,7 +59,7 @@ namespace Core2D.Editor
         public const string DefaulGroupName = "Group";
 
         /// <summary>
-        /// Default <see cref="Core2D.Project.Library{ShapeStyle}"/> name.
+        /// Default <see cref="Core2D.Containers.Library{ShapeStyle}"/> name.
         /// </summary>
         public const string DefaulStyleLibraryName = "Styles";
 
@@ -69,7 +69,7 @@ namespace Core2D.Editor
         public const string DefaulStyleName = "Style";
 
         /// <summary>
-        /// Default imported <see cref="Core2D.Project.Library{ShapeStyle}"/> name.
+        /// Default imported <see cref="Core2D.Containers.Library{ShapeStyle}"/> name.
         /// </summary>
         public const string ImportedStyleLibraryName = "Imported";
 

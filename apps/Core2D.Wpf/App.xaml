@@ -10,7 +10,7 @@
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor"
              xmlns:Path="clr-namespace:Core2D.Path;assembly=Core2D"
              xmlns:Segments="clr-namespace:Core2D.Path.Segments;assembly=Core2D"
-             xmlns:Project="clr-namespace:Core2D.Project;assembly=Core2D"
+             xmlns:Containers="clr-namespace:Core2D.Containers;assembly=Core2D"
              xmlns:Renderer="clr-namespace:Core2D.Renderer;assembly=Core2D"
              xmlns:Shape="clr-namespace:Core2D.Shape;assembly=Core2D" 
              xmlns:Shapes="clr-namespace:Core2D.Shapes;assembly=Core2D" 
@@ -19,7 +19,7 @@
              xmlns:lists="clr-namespace:Core2D.Wpf.Controls.Custom.Lists"
              xmlns:data="clr-namespace:Core2D.Wpf.Controls.Data"
              xmlns:path="clr-namespace:Core2D.Wpf.Controls.Path"
-             xmlns:project="clr-namespace:Core2D.Wpf.Controls.Project"
+             xmlns:project="clr-namespace:Core2D.Wpf.Controls.Containers"
              xmlns:renderer="clr-namespace:Core2D.Wpf.Controls.Renderer"
              xmlns:shapes="clr-namespace:Core2D.Wpf.Controls.Shapes"
              xmlns:state="clr-namespace:Core2D.Wpf.Controls.State"
@@ -216,20 +216,20 @@
         <DataTemplate DataType="{x:Type Path:PathGeometry}">
             <path:PathGeometryControl/>
         </DataTemplate>
-        <!-- Project -->
-        <DataTemplate DataType="{x:Type Project:Options}">
+        <!-- Containers -->
+        <DataTemplate DataType="{x:Type Containers:Options}">
             <project:OptionsControl/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type Project:ProjectContainer}">
+        <DataTemplate DataType="{x:Type Containers:ProjectContainer}">
             <project:ProjectControl/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type Project:DocumentContainer}">
+        <DataTemplate DataType="{x:Type Containers:DocumentContainer}">
             <project:DocumentControl/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type Project:PageContainer}">
+        <DataTemplate DataType="{x:Type Containers:PageContainer}">
             <project:ContainerControl/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type Project:LayerContainer}">
+        <DataTemplate DataType="{x:Type Containers:LayerContainer}">
             <project:LayerControl/>
         </DataTemplate>
     </Application.Resources>

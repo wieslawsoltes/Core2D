@@ -175,37 +175,37 @@
     <Compile Include="Controls\Path\QuadraticBezierSegmentControl.xaml.cs">
       <DependentUpon>QuadraticBezierSegmentControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Project\ContainerControl.xaml.cs">
+    <Compile Include="Controls\Containers\ContainerControl.xaml.cs">
       <DependentUpon>ContainerControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Project\DocumentControl.xaml.cs">
+    <Compile Include="Controls\Containers\DocumentControl.xaml.cs">
       <DependentUpon>DocumentControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Project\ImagesControl.xaml.cs">
+    <Compile Include="Controls\Containers\ImagesControl.xaml.cs">
       <DependentUpon>ImagesControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Project\LayerControl.xaml.cs">
+    <Compile Include="Controls\Containers\LayerControl.xaml.cs">
       <DependentUpon>LayerControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Project\LayersControl.xaml.cs">
+    <Compile Include="Controls\Containers\LayersControl.xaml.cs">
       <DependentUpon>LayersControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Project\OptionsControl.xaml.cs">
+    <Compile Include="Controls\Containers\OptionsControl.xaml.cs">
       <DependentUpon>OptionsControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Data\RecordsControl.xaml.cs">
       <DependentUpon>RecordsControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Project\DatabasesControl.xaml.cs">
+    <Compile Include="Controls\Containers\DatabasesControl.xaml.cs">
       <DependentUpon>DatabasesControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Project\GroupsControl.xaml.cs">
+    <Compile Include="Controls\Containers\GroupsControl.xaml.cs">
       <DependentUpon>GroupsControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Project\ProjectControl.xaml.cs">
+    <Compile Include="Controls\Containers\ProjectControl.xaml.cs">
       <DependentUpon>ProjectControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Project\ShapesControl.xaml.cs">
+    <Compile Include="Controls\Containers\ShapesControl.xaml.cs">
       <DependentUpon>ShapesControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Shapes\ArcControl.xaml.cs">
@@ -265,14 +265,14 @@
     <Compile Include="Controls\Style\StyleControl.xaml.cs">
       <DependentUpon>StyleControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Project\TemplatesControl.xaml.cs">
+    <Compile Include="Controls\Containers\TemplatesControl.xaml.cs">
       <DependentUpon>TemplatesControl.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Controls\Style\TextStyleControl.xaml.cs">
       <DependentUpon>TextStyleControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Project\StylesControl.xaml.cs">
+    <Compile Include="Controls\Containers\StylesControl.xaml.cs">
       <DependentUpon>StylesControl.xaml</DependentUpon>
     </Compile>
     <Page Include="Controls\Data\ColumnsControl.xaml">
@@ -339,27 +339,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\Project\ContainerControl.xaml">
+    <Page Include="Controls\Containers\ContainerControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\Project\DocumentControl.xaml">
+    <Page Include="Controls\Containers\DocumentControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\Project\ImagesControl.xaml">
+    <Page Include="Controls\Containers\ImagesControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\Project\LayerControl.xaml">
+    <Page Include="Controls\Containers\LayerControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\Project\LayersControl.xaml">
+    <Page Include="Controls\Containers\LayersControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\Project\OptionsControl.xaml">
+    <Page Include="Controls\Containers\OptionsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -367,15 +367,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\Project\DatabasesControl.xaml">
+    <Page Include="Controls\Containers\DatabasesControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\Project\GroupsControl.xaml">
+    <Page Include="Controls\Containers\GroupsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\Project\ProjectControl.xaml">
+    <Page Include="Controls\Containers\ProjectControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -455,7 +455,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\Project\StylesControl.xaml">
+    <Page Include="Controls\Containers\StylesControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -463,11 +463,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\Project\ShapesControl.xaml">
+    <Page Include="Controls\Containers\ShapesControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\Project\TemplatesControl.xaml">
+    <Page Include="Controls\Containers\TemplatesControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

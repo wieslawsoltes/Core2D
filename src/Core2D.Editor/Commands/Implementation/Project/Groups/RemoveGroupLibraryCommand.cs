@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Core2D.Editor.Input;
-using Core2D.Project;
+using Core2D.Containers;
 using Core2D.Shapes;
 
 namespace Core2D.Editor.Commands

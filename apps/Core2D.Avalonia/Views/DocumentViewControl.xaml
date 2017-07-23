@@ -5,7 +5,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Core2D.Avalonia;assembly=Core2D.Avalonia"
              xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"
-             xmlns:Project="clr-namespace:Core2D.Project;assembly=Core2D"
+             xmlns:Containers="clr-namespace:Core2D.Containers;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
              xmlns:renderer="clr-namespace:Core2D.Avalonia.Renderer;assembly=Core2D.Avalonia"
              xmlns:views="clr-namespace:Core2D.Avalonia.Views;assembly=Core2D.Avalonia"
@@ -29,7 +29,7 @@
                     </Style>
                 </TabStrip.Styles>
                 <TabStrip.DataTemplates>
-                    <DataTemplate DataType="Project:DocumentContainer">
+                    <DataTemplate DataType="Containers:DocumentContainer">
                         <TextBlock Text="{Binding Name}" Margin="2"/>
                     </DataTemplate>
                 </TabStrip.DataTemplates>
@@ -39,10 +39,10 @@
         <ScrollViewer>
             <Carousel Items="{Binding Project.Documents}" SelectedIndex="{Binding #documents.SelectedIndex}" IsVirtualized="False" VerticalAlignment="Center" Margin="2">
                 <Carousel.DataTemplates>
-                    <DataTemplate DataType="Project:DocumentContainer">
+                    <DataTemplate DataType="Containers:DocumentContainer">
                         <ItemsControl VerticalAlignment="Stretch" Items="{Binding Pages}">
                             <ItemsControl.DataTemplates>
-                                <DataTemplate DataType="Project:PageContainer">
+                                <DataTemplate DataType="Containers:PageContainer">
                                     <views:ContainerViewControl Container="{Binding}" ClipToBounds="False" Margin="0,4,0,4"/>
                                 </DataTemplate>
                             </ItemsControl.DataTemplates>
