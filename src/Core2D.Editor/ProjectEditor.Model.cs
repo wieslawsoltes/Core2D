@@ -9,7 +9,7 @@ using Core2D.Editor.Factories;
 using Core2D.Editor.Recent;
 using Core2D.Editor.Views.Interfaces;
 using Core2D.Interfaces;
-using Core2D.Project;
+using Core2D.Containers;
 using Core2D.Renderer;
 
 namespace Core2D.Editor

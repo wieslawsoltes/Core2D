@@ -8,7 +8,7 @@ using Core2D.Editor.Factories;
 using Core2D.Editor.Recent;
 using Core2D.Path;
 using Core2D.Path.Segments;
-using Core2D.Project;
+using Core2D.Containers;
 using Core2D.Renderer;
 using Core2D.Shape;
 using Core2D.Shapes;
@@ -32,32 +32,32 @@ namespace Core2D.Editor.Designer
         public static MatrixObject Transform { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Project.PageContainer"/> template.
+        /// The design time <see cref="Core2D.Containers.PageContainer"/> template.
         /// </summary>
         public static PageContainer Template { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Project.PageContainer"/> page.
+        /// The design time <see cref="Core2D.Containers.PageContainer"/> page.
         /// </summary>
         public static PageContainer Page { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Project.DocumentContainer"/>.
+        /// The design time <see cref="Core2D.Containers.DocumentContainer"/>.
         /// </summary>
         public static DocumentContainer Document { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Project.LayerContainer"/>.
+        /// The design time <see cref="Core2D.Containers.LayerContainer"/>.
         /// </summary>
         public static LayerContainer Layer { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Project.Options"/>.
+        /// The design time <see cref="Core2D.Containers.Options"/>.
         /// </summary>
         public static Options Options { get; set; }
 
         /// <summary>
-        /// The design time <see cref="Core2D.Project.ProjectContainer"/>.
+        /// The design time <see cref="Core2D.Containers.ProjectContainer"/>.
         /// </summary>
         public static ProjectContainer Project { get; set; }
 

@@ -11,7 +11,7 @@ using Autofac;
 using Core2D.Editor;
 using Core2D.Editor.Input;
 using Core2D.Interfaces;
-using Core2D.Project;
+using Core2D.Containers;
 using Core2D.Renderer;
 using Core2D.Renderer.Presenters;
 using Core2D.Renderer.SkiaSharp;

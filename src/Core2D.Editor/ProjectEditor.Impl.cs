@@ -15,7 +15,7 @@ using Core2D.History;
 using Core2D.Interfaces;
 using Spatial;
 using Core2D.Path.Parser;
-using Core2D.Project;
+using Core2D.Containers;
 using Core2D.Renderer;
 using Core2D.Shape;
 using Core2D.Shapes;

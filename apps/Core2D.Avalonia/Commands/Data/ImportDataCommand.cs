@@ -6,7 +6,7 @@ using Core2D.Avalonia.Windows;
 using Core2D.Editor;
 using Core2D.Editor.Commands;
 using Core2D.Editor.Input;
-using Core2D.Project;
+using Core2D.Containers;
 
 namespace Core2D.Avalonia.Commands
 {

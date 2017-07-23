@@ -9,7 +9,7 @@
              xmlns:Data="clr-namespace:Core2D.Data;assembly=Core2D"
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor"
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
-             xmlns:Project="clr-namespace:Core2D.Project;assembly=Core2D"
+             xmlns:Containers="clr-namespace:Core2D.Containers;assembly=Core2D"
              xmlns:Shape="clr-namespace:Core2D.Shape;assembly=Core2D"
              xmlns:Style="clr-namespace:Core2D.Style;assembly=Core2D"
              Design.DataContext="{Static Designer:DesignerContext.Editor}"
@@ -19,7 +19,7 @@
             <TreeView.KeyBindings>
                 <KeyBinding Command="{Static Editor:ProjectEditorCommands.ExportObjectCommand}" CommandParameter="{Binding #project.SelectedItem}" Gesture="Ctrl+E"/>
             </TreeView.KeyBindings>
-            <!-- Project -->
+            <!-- Containers -->
             <TreeViewItem Header="Project" DataContext="{Binding Project}" IsExpanded="True">
                 <TreeViewItem.ContextMenu>
                     <ContextMenu Classes="default">
@@ -39,7 +39,7 @@
                         </Style>
                     </TreeViewItem.Styles>
                     <TreeViewItem.DataTemplates>
-                        <TreeDataTemplate DataType="Project:ILibrary" ItemsSource="{Binding Items}">
+                        <TreeDataTemplate DataType="Containers:ILibrary" ItemsSource="{Binding Items}">
                             <TextBlock Text="{Binding Name}" Classes="tree">
                                 <TextBlock.ContextMenu>
                                     <ContextMenu Classes="default">
@@ -72,7 +72,7 @@
                         </Style>
                     </TreeViewItem.Styles>
                     <TreeViewItem.DataTemplates>
-                        <TreeDataTemplate DataType="Project:ILibrary" ItemsSource="{Binding Items}">
+                        <TreeDataTemplate DataType="Containers:ILibrary" ItemsSource="{Binding Items}">
                             <TextBlock Text="{Binding Name}" Classes="tree">
                                 <TextBlock.ContextMenu>
                                     <ContextMenu Classes="default">
@@ -138,7 +138,7 @@
                         </Style>
                     </TreeViewItem.Styles>
                     <TreeViewItem.DataTemplates>
-                        <TreeDataTemplate DataType="Project:PageContainer" ItemsSource="{Binding Layers}">
+                        <TreeDataTemplate DataType="Containers:PageContainer" ItemsSource="{Binding Layers}">
                             <TextBlock Text="{Binding Name}" Classes="tree">
                                 <TextBlock.ContextMenu>
                                     <ContextMenu Classes="default">
@@ -147,7 +147,7 @@
                                 </TextBlock.ContextMenu>
                             </TextBlock>
                         </TreeDataTemplate>
-                        <TreeDataTemplate DataType="Project:LayerContainer" ItemsSource="{Binding Shapes}">
+                        <TreeDataTemplate DataType="Containers:LayerContainer" ItemsSource="{Binding Shapes}">
                             <TextBlock Text="{Binding Name}" Classes="tree">
                                 <TextBlock.ContextMenu>
                                     <ContextMenu Classes="default">
@@ -189,7 +189,7 @@
                         </Style>
                     </TreeViewItem.Styles>
                     <TreeViewItem.DataTemplates>
-                        <TreeDataTemplate DataType="Project:DocumentContainer" ItemsSource="{Binding Pages}">
+                        <TreeDataTemplate DataType="Containers:DocumentContainer" ItemsSource="{Binding Pages}">
                             <TextBlock Text="{Binding Name}" Classes="tree">
                                 <TextBlock.ContextMenu>
                                     <ContextMenu Classes="default">
@@ -198,7 +198,7 @@
                                 </TextBlock.ContextMenu>
                             </TextBlock>
                         </TreeDataTemplate>
-                        <TreeDataTemplate DataType="Project:PageContainer" ItemsSource="{Binding Layers}">
+                        <TreeDataTemplate DataType="Containers:PageContainer" ItemsSource="{Binding Layers}">
                             <TextBlock Text="{Binding Name}" Classes="tree">
                                 <TextBlock.ContextMenu>
                                     <ContextMenu Classes="default">
@@ -207,7 +207,7 @@
                                 </TextBlock.ContextMenu>
                             </TextBlock>
                         </TreeDataTemplate>
-                        <TreeDataTemplate DataType="Project:LayerContainer" ItemsSource="{Binding Shapes}">
+                        <TreeDataTemplate DataType="Containers:LayerContainer" ItemsSource="{Binding Shapes}">
                             <TextBlock Text="{Binding Name}" Classes="tree">
                                 <TextBlock.ContextMenu>
                                     <ContextMenu Classes="default">

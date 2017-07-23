@@ -9,7 +9,7 @@
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor"
              xmlns:Path="clr-namespace:Core2D.Path;assembly=Core2D"
              xmlns:Segments="clr-namespace:Core2D.Path.Segments;assembly=Core2D"
-             xmlns:Project="clr-namespace:Core2D.Project;assembly=Core2D"
+             xmlns:Containers="clr-namespace:Core2D.Containers;assembly=Core2D"
              xmlns:Renderer="clr-namespace:Core2D.Renderer;assembly=Core2D"
              xmlns:SettingsTools="clr-namespace:Core2D.Editor.Tools.Settings;assembly=Core2D.Editor"
              xmlns:SettingsPath="clr-namespace:Core2D.Editor.Tools.Path.Settings;assembly=Core2D.Editor"
@@ -18,7 +18,7 @@
              xmlns:Style="clr-namespace:Core2D.Style;assembly=Core2D" 
              xmlns:data="clr-namespace:Core2D.Avalonia.Controls.Data;assembly=Core2D.Avalonia"
              xmlns:path="clr-namespace:Core2D.Avalonia.Controls.Path;assembly=Core2D.Avalonia"
-             xmlns:project="clr-namespace:Core2D.Avalonia.Controls.Project;assembly=Core2D.Avalonia"
+             xmlns:project="clr-namespace:Core2D.Avalonia.Controls.Containers;assembly=Core2D.Avalonia"
              xmlns:renderer="clr-namespace:Core2D.Avalonia.Controls.Renderer;assembly=Core2D.Avalonia"
              xmlns:settingsTools="clr-namespace:Core2D.Avalonia.Controls.Settings.Tools;assembly=Core2D.Avalonia"
              xmlns:settingsPath="clr-namespace:Core2D.Avalonia.Controls.Settings.Tools.Path;assembly=Core2D.Avalonia"
@@ -194,23 +194,23 @@
         <DataTemplate DataType="Path:PathGeometry">
             <path:PathGeometryControl/>
         </DataTemplate>
-        <!-- Project -->
-        <DataTemplate DataType="Project:ILibrary">
+        <!-- Containers -->
+        <DataTemplate DataType="Containers:ILibrary">
             <project:LibraryControl/>
         </DataTemplate>
-        <DataTemplate DataType="Project:Options">
+        <DataTemplate DataType="Containers:Options">
             <project:OptionsControl/>
         </DataTemplate>
-        <DataTemplate DataType="Project:ProjectContainer">
+        <DataTemplate DataType="Containers:ProjectContainer">
             <project:ProjectControl/>
         </DataTemplate>
-        <DataTemplate DataType="Project:DocumentContainer">
+        <DataTemplate DataType="Containers:DocumentContainer">
             <project:DocumentControl/>
         </DataTemplate>
-        <DataTemplate DataType="Project:PageContainer">
+        <DataTemplate DataType="Containers:PageContainer">
             <project:ContainerControl/>
         </DataTemplate>
-        <DataTemplate DataType="Project:LayerContainer">
+        <DataTemplate DataType="Containers:LayerContainer">
             <project:LayerControl/>
         </DataTemplate>
     </Application.DataTemplates>

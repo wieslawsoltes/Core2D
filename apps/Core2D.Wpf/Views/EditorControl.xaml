@@ -7,12 +7,12 @@
              xmlns:converters="clr-namespace:Core2D.Wpf.Converters" 
              xmlns:designer="clr-namespace:Core2D.Wpf.Designer" 
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor" 
-             xmlns:Project="clr-namespace:Core2D.Project;assembly=Core2D" 
+             xmlns:Containers="clr-namespace:Core2D.Containers;assembly=Core2D" 
              xmlns:custom="clr-namespace:Core2D.Wpf.Controls.Custom"
              xmlns:lists="clr-namespace:Core2D.Wpf.Controls.Custom.Lists"
              xmlns:data="clr-namespace:Core2D.Wpf.Controls.Data"
              xmlns:path="clr-namespace:Core2D.Wpf.Controls.Path"
-             xmlns:project="clr-namespace:Core2D.Wpf.Controls.Project"
+             xmlns:project="clr-namespace:Core2D.Wpf.Controls.Containers"
              xmlns:shapes="clr-namespace:Core2D.Wpf.Controls.Shapes"
              xmlns:state="clr-namespace:Core2D.Wpf.Controls.State"
              xmlns:style="clr-namespace:Core2D.Wpf.Controls.Style"
@@ -156,7 +156,7 @@
                                     <Border Padding="5" VerticalAlignment="Center" HorizontalAlignment="Center" ClipToBounds="False" BorderBrush="{x:Null}" BorderThickness="0" FocusVisualStyle="{x:Null}" Focusable="False">
                                         <ContentControl x:Name="drawableControl" Content="{Binding Project.CurrentContainer}" ClipToBounds="False" custom:LayerElement.Renderer="{Binding Renderers[0]}">
                                             <ContentControl.Resources>
-                                                <DataTemplate DataType="{x:Type Project:PageContainer}">
+                                                <DataTemplate DataType="{x:Type Containers:PageContainer}">
                                                     <views:ContainerControl/>
                                                 </DataTemplate>
                                             </ContentControl.Resources>

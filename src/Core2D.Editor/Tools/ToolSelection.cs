@@ -6,7 +6,7 @@ using System.Linq;
 using Core2D.Editor.Input;
 using Core2D.Editor.Tools.Settings;
 using Spatial;
-using Core2D.Project;
+using Core2D.Containers;
 using Core2D.Shape;
 using Core2D.Shapes;
 
