@@ -11,6 +11,7 @@
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
              xmlns:Containers="clr-namespace:Core2D.Containers;assembly=Core2D"
              xmlns:Shape="clr-namespace:Core2D.Shape;assembly=Core2D"
+             xmlns:Shapes="clr-namespace:Core2D.Shapes;assembly=Core2D"
              xmlns:Style="clr-namespace:Core2D.Style;assembly=Core2D"
              Design.DataContext="{Static Designer:DesignerContext.Editor}"
              Design.Width="1000" Design.Height="600">
