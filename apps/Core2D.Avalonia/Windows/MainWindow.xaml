@@ -9,7 +9,7 @@
         xmlns:views="clr-namespace:Core2D.Avalonia.Views;assembly=Core2D.Avalonia"
         Width="1324" Height="690"
         UseLayoutRounding="True"
-        WindowState="Normal"
+        WindowState="Maximized"
         Design.DataContext="{Static Designer:DesignerContext.Editor}"
         Design.Width="1200" Design.Height="580">
     <Window.Title>
