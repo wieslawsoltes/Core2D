@@ -13,6 +13,6 @@ namespace Core2D.Editor.Commands
 
         /// <inheritdoc/>
         public override void Run()
-            => ServiceProvider.GetService<ProjectEditor>().OnClose();
+            => ServiceProvider.GetService<ProjectEditor>().OnCloseProject();
     }
 }

@@ -29,7 +29,7 @@ namespace Core2D.Avalonia.Commands
             var result = await dlg.ShowAsync(ServiceProvider.GetService<MainWindow>());
             if (result != null)
             {
-                editor.OnSave(result);
+                editor.OnSaveProject(result);
             }
         }
     }

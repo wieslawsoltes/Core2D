@@ -21,7 +21,7 @@ namespace Core2D.Avalonia.Commands
             var editor = ServiceProvider.GetService<ProjectEditor>();
             if (!string.IsNullOrEmpty(editor.ProjectPath))
             {
-                editor.OnSave(editor.ProjectPath);
+                editor.OnSaveProject(editor.ProjectPath);
             }
             else
             {

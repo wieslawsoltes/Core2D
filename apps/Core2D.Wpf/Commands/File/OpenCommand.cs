@@ -32,14 +32,14 @@ namespace Core2D.Wpf.Commands
 
                 if (dlg.ShowDialog(ServiceProvider.GetService<MainWindow>()) == true)
                 {
-                    ServiceProvider.GetService<ProjectEditor>().OnOpen(dlg.FileName);
+                    ServiceProvider.GetService<ProjectEditor>().OnOpenProject(dlg.FileName);
                 }
             }
             else
             {
                 if (File.Exists(path))
                 {
-                    ServiceProvider.GetService<ProjectEditor>().OnOpen(path);
+                    ServiceProvider.GetService<ProjectEditor>().OnOpenProject(path);
                 }
             }
         }

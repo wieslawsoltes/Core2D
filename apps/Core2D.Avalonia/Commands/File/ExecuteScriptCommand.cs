@@ -37,7 +37,7 @@ namespace Core2D.Avalonia.Commands
             {
                 if (ServiceProvider.GetService<IFileSystem>().Exists(path))
                 {
-                    ServiceProvider.GetService<ProjectEditor>().OnOpen(path);
+                    ServiceProvider.GetService<ProjectEditor>().OnOpenProject(path);
                 }
             }
         }

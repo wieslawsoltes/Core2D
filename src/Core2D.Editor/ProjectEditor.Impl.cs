@@ -191,7 +191,7 @@ namespace Core2D.Editor
         /// Open project.
         /// </summary>
         /// <param name="path">The project file path.</param>
-        public void OnOpen(string path)
+        public void OnOpenProject(string path)
         {
             try
             {
@@ -202,7 +202,7 @@ namespace Core2D.Editor
                         var project = ProjectContainer.Open(path, FileIO, JsonSerializer);
                         if (project != null)
                         {
-                            OnOpen(project, path);
+                            OnOpenProject(project, path);
                         }
                     }
                 }
@@ -218,7 +218,7 @@ namespace Core2D.Editor
         /// </summary>
         /// <param name="project">The project to open.</param>
         /// <param name="path">The project file path.</param>
-        public void OnOpen(ProjectContainer project, string path)
+        public void OnOpenProject(ProjectContainer project, string path)
         {
             try
             {
@@ -239,7 +239,7 @@ namespace Core2D.Editor
         /// <summary>
         /// Close project.
         /// </summary>
-        public void OnClose()
+        public void OnCloseProject()
         {
             OnChangeCurrentView(Views.FirstOrDefault(view => view.Title == "Dashboard"));
             Project?.History?.Reset();
@@ -250,7 +250,7 @@ namespace Core2D.Editor
         /// Save project.
         /// </summary>
         /// <param name="path">The project file path.</param>
-        public void OnSave(string path)
+        public void OnSaveProject(string path)
         {
             try
             {
@@ -2489,7 +2489,7 @@ namespace Core2D.Editor
 
                         if (string.Compare(ext, Constants.ProjectExtension, StringComparison.OrdinalIgnoreCase) == 0)
                         {
-                            OnOpen(path);
+                            OnOpenProject(path);
                             result = true;
                         }
                         else if (string.Compare(ext, Constants.CsvExtension, StringComparison.OrdinalIgnoreCase) == 0)

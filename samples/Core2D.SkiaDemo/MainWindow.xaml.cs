@@ -330,7 +330,7 @@ namespace Core2D.SkiaDemo
 
             if (dlg.ShowDialog(this) == true)
             {
-                _projectEditor.OnOpen(dlg.FileName);
+                _projectEditor.OnOpenProject(dlg.FileName);
                 RefreshRequested(null, null);
             }
         }
@@ -346,7 +346,7 @@ namespace Core2D.SkiaDemo
 
             if (dlg.ShowDialog(this) == true)
             {
-                _projectEditor.OnSave(dlg.FileName);
+                _projectEditor.OnSaveProject(dlg.FileName);
             }
         }
 

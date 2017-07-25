@@ -30,7 +30,7 @@ namespace Core2D.Wpf.Commands
 
             if (dlg.ShowDialog(ServiceProvider.GetService<MainWindow>()) == true)
             {
-                editor.OnSave(dlg.FileName);
+                editor.OnSaveProject(dlg.FileName);
             }
         }
     }

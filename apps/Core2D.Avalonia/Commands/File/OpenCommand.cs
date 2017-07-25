@@ -31,7 +31,7 @@ namespace Core2D.Avalonia.Commands
                 if (result != null)
                 {
                     var editor = ServiceProvider.GetService<ProjectEditor>();
-                    editor.OnOpen(result.FirstOrDefault());
+                    editor.OnOpenProject(result.FirstOrDefault());
                     editor.Invalidate?.Invoke();
                 }
             }
@@ -39,7 +39,7 @@ namespace Core2D.Avalonia.Commands
             {
                 if (ServiceProvider.GetService<IFileSystem>().Exists(path))
                 {
-                    ServiceProvider.GetService<ProjectEditor>().OnOpen(path);
+                    ServiceProvider.GetService<ProjectEditor>().OnOpenProject(path);
                 }
             }
         }
