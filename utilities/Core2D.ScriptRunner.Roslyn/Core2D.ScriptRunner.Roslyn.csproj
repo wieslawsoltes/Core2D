@@ -8,22 +8,8 @@
 
   <Import Project="..\..\build\Default.targets" />
   <Import Project="..\..\build\Default.props" />
+  <Import Project="..\..\build\Roslyn.props" />
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="2.0.0-beta5" />
-    <PackageReference Include="System.Composition" Version="1.0.31" />
-    <PackageReference Include="System.Composition.Convention" Version="1.0.31" />
-    <PackageReference Include="System.Composition.Hosting" Version="1.0.31" />
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard1.5'">
-    <PackageReference Include="System.Runtime.Loader" Version="4.3.0" />
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp1.0'">
-    <PackageReference Include="System.Runtime.Loader" Version="4.3.0" />
-  </ItemGroup>
-   
   <ItemGroup>
     <ProjectReference Include="..\..\src\Core2D.Editor\Core2D.Editor.csproj" />
     <ProjectReference Include="..\..\src\Core2D\Core2D.csproj" />

@@ -8,10 +8,7 @@
 
   <Import Project="..\..\build\Default.targets" />
   <Import Project="..\..\build\Default.props" />
-
-  <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="10.0.2" />
-  </ItemGroup>
+  <Import Project="..\..\build\Newtonsoft.Json.props" />
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Core2D\Core2D.csproj" />

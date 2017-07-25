@@ -8,17 +8,7 @@
 
   <Import Project="..\..\build\Default.targets" />
   <Import Project="..\..\build\Default.props" />
-
-  <ItemGroup>
-    <PackageReference Include="Portable.Xaml" Version="0.17.0-alpha" />
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard1.3'">
-    <PackageReference Include="System.ComponentModel" Version="4.3.0" />
-    <PackageReference Include="System.Dynamic.Runtime" Version="4.3.0" />
-    <PackageReference Include="System.Runtime.Serialization.Primitives" Version="4.3.0" />
-    <PackageReference Include="System.ComponentModel.TypeConverter" Version="4.3.0" />
-  </ItemGroup>
+  <Import Project="..\..\build\Portable.Xaml.props" />
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Core2D\Core2D.csproj" />
