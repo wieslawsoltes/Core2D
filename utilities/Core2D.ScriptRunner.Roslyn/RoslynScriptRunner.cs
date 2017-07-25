@@ -23,37 +23,43 @@ namespace Core2D.ScriptRunner.Roslyn
             using System.Reflection;
             using System.Text;
             using System.Threading.Tasks;
-            using Core2D;
-            using Core2D.Attributes;
-            using Core2D.Collections;
-            using Core2D.Data;
-            using Core2D.Editor;
-            using Core2D.Editor.Bounds;
-            using Core2D.Editor.Factories;
-            using Core2D.Editor.Input;
-            using Core2D.Editor.Recent;
-            using Core2D.Editor.Tools;
-            using Core2D.Editor.Tools.Path;
-            using Core2D.Editor.Tools.Path.Shapes;
-            using Core2D.Editor.Tools.Selection;
-            using Core2D.Editor.Views;
-            using Core2D.Editor.Views.Interfaces;
-            using Core2D.History;
-            using Core2D.Interfaces;
+
             using Spatial;
             using Spatial.Arc;
             using Spatial.ConvexHull;
             using Spatial.Sat;
+
+            using Core2D;
+            using Core2D.Attributes;
+            using Core2D.Containers;
+            using Core2D.Data;
+            using Core2D.History;
+            using Core2D.Interfaces;
             using Core2D.Path;
             using Core2D.Path.Parser;
             using Core2D.Path.Segments;
-            using Core2D.Containers;
             using Core2D.Renderer;
             using Core2D.Renderer.Presenters;
             using Core2D.Shape;
             using Core2D.Shapes;
             using Core2D.Shapes.Interfaces;
             using Core2D.Style;
+
+            using Core2D.Editor;
+            using Core2D.Editor.Bounds;
+            using Core2D.Editor.Commands;
+            using Core2D.Editor.Designer;
+            using Core2D.Editor.Factories;
+            using Core2D.Editor.Input;
+            using Core2D.Editor.Recent;
+            using Core2D.Editor.Tools;
+            using Core2D.Editor.Tools.Path;
+            using Core2D.Editor.Tools.Path.Settings;
+            using Core2D.Editor.Tools.Path.Shapes;
+            using Core2D.Editor.Tools.Selection;
+            using Core2D.Editor.Tools.Settings;
+            using Core2D.Editor.Views;
+            using Core2D.Editor.Views.Interfaces;
 
             public class ScriptHost : ScriptBase 
             { 
