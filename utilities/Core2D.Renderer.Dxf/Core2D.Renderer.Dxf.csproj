@@ -7,11 +7,9 @@
   </PropertyGroup>
 
   <Import Project="..\..\build\Default.targets" />
-  <Import Project="..\..\build\Default.props" />
-
-  <ItemGroup>
-    <PackageReference Include="netDXF" Version="2.0.2" />
-  </ItemGroup>
+  <Import Project="..\..\build\NuGet.props" />
+  <Import Project="..\..\build\Base.props" />
+  <Import Project="..\..\build\netDXF.props" />
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Core2D\Core2D.csproj" />

@@ -19,7 +19,8 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <Import Project="..\..\build\Default.targets" />
-  <Import Project="..\..\build\Default.props" />
+  <Import Project="..\..\build\NuGet.props" />
+  <Import Project="..\..\build\Base.props" />
   <Import Project="..\..\build\Autofac.props" />
   <Import Project="..\..\build\Rx.props" />
   <Import Project="..\..\build\Avalonia.props" />
