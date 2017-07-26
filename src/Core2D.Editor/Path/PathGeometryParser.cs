@@ -2,8 +2,9 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Collections.Immutable;
+using Core2D.Path;
 
-namespace Core2D.Path.Parser
+namespace Core2D.Editor.Path
 {
     /// <summary>
     /// <see cref="PathGeometry"/> mini-language string representation parser.

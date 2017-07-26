@@ -1,6 +1,5 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Core2D.Path;
 using Core2D.Renderer;
 using Core2D.Shape;
 using Core2D.Style;
@@ -17,7 +16,6 @@ namespace Core2D.Serializer.Xaml
             { typeof(ArgbColor), typeof(ArgbColorTypeConverter) },
             { typeof(FontStyle), typeof(FontStyleTypeConverter) },
             { typeof(ShapeState), typeof(ShapeStateTypeConverter) },
-            { typeof(PathGeometry), typeof(PathGeometryTypeConverter) },
             { typeof(MatrixObject), typeof(MatrixObjectTypeConverter) }
         };
 

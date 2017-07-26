@@ -9,6 +9,7 @@
   <Import Project="..\..\build\Default.targets" />
   <Import Project="..\..\build\NuGet.props" />
   <Import Project="..\..\build\Base.props" />
+  <Import Project="..\..\build\Math.Spatial.props" />
   <Import Project="..\..\build\PDFsharp.props" />
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net45'">
