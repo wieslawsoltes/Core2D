@@ -39,7 +39,7 @@ namespace Core2D.ScriptRunner.Roslyn
                 MetadataReference.CreateFromFile(System.IO.Path.Combine(executingPath, "Core2D.dll")),
                 MetadataReference.CreateFromFile(System.IO.Path.Combine(executingPath, "Core2D.Editor.dll")),
                 MetadataReference.CreateFromFile(System.IO.Path.Combine(executingPath, "Math.Spatial.dll")),
-                MetadataReference.CreateFromFile(Assembly.GetEntryAssembly().Location),
+                MetadataReference.CreateFromFile(Assembly.GetEntryAssembly().Location)
             };
 #endif
         }
@@ -93,7 +93,7 @@ namespace Core2D.ScriptRunner.Roslyn
                     Assembly assembly = null;
 #if NET461
                     assembly = Assembly.Load(ms.GetBuffer());
-#elif NETCOREAPP1_0
+#elif NETCOREAPP1_1
                     assembly = System.Runtime.Loader.AssemblyLoadContext.Default.LoadFromStream(ms);
 #endif
                     if (assembly != null)
