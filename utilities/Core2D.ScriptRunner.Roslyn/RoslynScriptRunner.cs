@@ -36,7 +36,6 @@ namespace Core2D.ScriptRunner.Roslyn
             using Core2D.History;
             using Core2D.Interfaces;
             using Core2D.Path;
-            using Core2D.Path.Parser;
             using Core2D.Path.Segments;
             using Core2D.Renderer;
             using Core2D.Renderer.Presenters;
@@ -52,6 +51,7 @@ namespace Core2D.ScriptRunner.Roslyn
             using Core2D.Editor.Factories;
             using Core2D.Editor.Input;
             using Core2D.Editor.Recent;
+            using Core2D.Editor.Path;
             using Core2D.Editor.Tools;
             using Core2D.Editor.Tools.Path;
             using Core2D.Editor.Tools.Path.Settings;
