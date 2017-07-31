@@ -13,8 +13,10 @@
   <Import Project="..\..\build\Autofac.props" />
   <Import Project="..\..\build\Rx.props" />
   <Import Project="..\..\build\Avalonia.props" />
-  <Import Project="..\..\build\Avalonia.NetStandard.props" />
+  <Import Project="..\..\build\Avalonia.SkiaSharp.props" />
   <Import Project="..\..\build\SkiaSharp.props" />
+  <Import Project="..\..\build\Avalonia.Direct2D.props" />
+  <Import Project="..\..\build\SharpDX.props" />
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Core2D.Editor\Core2D.Editor.csproj" />
