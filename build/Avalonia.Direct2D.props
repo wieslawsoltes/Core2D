@@ -1,5 +1,6 @@
 ﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+    <PackageReference Include="Avalonia.Gtk3" Version="0.5.1-build3567-alpha" />
     <PackageReference Include="Avalonia.Win32" Version="0.5.1-build3567-alpha" />
     <PackageReference Include="Avalonia.Direct2D1" Version="0.5.1-build3567-alpha" />
     <PackageReference Include="Serilog.Sinks.Trace" Version="2.1.0" />
