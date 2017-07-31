@@ -3,6 +3,7 @@
 using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 using Autofac;
 using Avalonia;
 using Avalonia.Logging.Serilog;
@@ -43,7 +44,7 @@ namespace Core2D.Avalonia.NetCore
                     .InitializeWithLinuxFramebuffer(tl =>
                     {
                         tl.Content = app.CreateView(container.Resolve<IServiceProvider>());
-                        System.Threading.ThreadPool.QueueUserWorkItem(_ => ConsoleSilencer());
+                        ThreadPool.QueueUserWorkItem(_ => ConsoleSilencer());
                     });
             }
             else
