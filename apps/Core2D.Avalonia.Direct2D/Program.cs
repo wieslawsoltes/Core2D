@@ -37,10 +37,13 @@ namespace Core2D.Avalonia.Direct2D
                 using (var log = container.Resolve<ILog>())
                 {
                     var app = new App();
-                    AppBuilder.Configure(app)
+                    var appBuilder = AppBuilder.Configure(app)
                         .UseWin32()
                         .UseDirect2D1()
                         .SetupWithoutStarting();
+                    app.SetRuntimeInfo(appBuilder.RuntimePlatform.GetRuntimeInfo());
+                    app.SetWindowingSubsystemName(appBuilder.WindowingSubsystemName);
+                    app.SetRenderingSubsystemName(appBuilder.RenderingSubsystemName);
                     app.Start(container.Resolve<IServiceProvider>());
                 }
             }

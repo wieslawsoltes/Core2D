@@ -6,6 +6,7 @@ using Autofac;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using Avalonia.Platform;
 using Core2D.Avalonia.Converters;
 using Core2D.Avalonia.Modules;
 using Core2D.Avalonia.Views;
@@ -20,6 +21,39 @@ namespace Core2D.Avalonia
     /// </summary>
     public partial class App : Application
     {
+        /// <summary>
+        /// Gets or sets runtime platform info.
+        /// </summary>
+        public RuntimePlatformInfo RuntimeInfo { get; private set; }
+
+        /// <summary>
+        /// Gets or sets windowing subsystem name.
+        /// </summary>
+        public string WindowingSubsystemName { get; private set; }
+
+        /// <summary>
+        /// Gets or sets rendering subsystem name.
+        /// </summary>
+        public string RenderingSubsystemName { get; private set; }
+
+        /// <summary>
+        /// Set current runtime platform info.
+        /// </summary>
+        /// <param name="info">The runtime platform info.</param>
+        public void SetRuntimeInfo(RuntimePlatformInfo info) => RuntimeInfo = info;
+
+        /// <summary>
+        /// Set current windowing subsystem name.
+        /// </summary>
+        /// <param name="name">The windowing subsystem name.</param>
+        public void SetWindowingSubsystemName(string name) => WindowingSubsystemName = name;
+
+        /// <summary>
+        /// Set current rendering subsystem name.
+        /// </summary>
+        /// <param name="name">The rendering subsystem name.</param>
+        public void SetRenderingSubsystemName(string name) => RenderingSubsystemName = name;
+
         /// <summary>
         /// Initializes static data.
         /// </summary>
@@ -107,7 +141,7 @@ namespace Core2D.Avalonia
                 }
             }
         }
-        
+
         /// <summary>
         /// Initialize application context and returns main view.
         /// </summary>

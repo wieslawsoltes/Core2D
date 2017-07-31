@@ -515,6 +515,11 @@ namespace Core2D.Editor
         public static IDocumentViewerCommand DocumentViewerCommand { get; set; }
 
         /// <summary>
+        /// Show about dialog.
+        /// </summary>
+        public static IAboutDialogCommand AboutDialogCommand { get; set; }
+
+        /// <summary>
         /// Change current view.
         /// </summary>
         public static IChangeCurrentViewCommand ChangeCurrentViewCommand { get; set; }

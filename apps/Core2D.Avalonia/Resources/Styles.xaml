@@ -267,6 +267,14 @@
         <Setter Property="Margin" Value="1"/>
         <Setter Property="FontSize" Value="12"/>
     </Style>
+    <Style Selector="TextBlock.aboutTitle">
+        <Setter Property="Margin" Value="2"/>
+        <Setter Property="FontSize" Value="28"/>
+    </Style>
+    <Style Selector="TextBlock.aboutText">
+        <Setter Property="Margin" Value="2"/>
+        <Setter Property="FontSize" Value="12"/>
+    </Style>
     <Style Selector="TextBlock.list">
         <Setter Property="Margin" Value="1"/>
         <Setter Property="FontSize" Value="12"/>

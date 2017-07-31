@@ -37,10 +37,13 @@ namespace Core2D.Avalonia.Skia
                 using (var log = container.Resolve<ILog>())
                 {
                     var app = new App();
-                    AppBuilder.Configure(app)
+                    var appBuilder = AppBuilder.Configure(app)
                         .UseWin32()
                         .UseSkia()
                         .SetupWithoutStarting();
+                    app.SetRuntimeInfo(appBuilder.RuntimePlatform.GetRuntimeInfo());
+                    app.SetWindowingSubsystemName(appBuilder.WindowingSubsystemName);
+                    app.SetRenderingSubsystemName(appBuilder.RenderingSubsystemName);
                     app.Start(container.Resolve<IServiceProvider>());
                 }
             }
