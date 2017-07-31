@@ -39,7 +39,7 @@ namespace Core2D.Avalonia.Direct2D
                 {
                     var app = new App();
                     var appBuilder = AppBuilder.Configure(app)
-                        .UseWin32()
+                        .UsePlatformDetect()
                         .UseDirect2D1()
                         .SetupWithoutStarting();
                     var aboutInfo = app.CreateAboutInfo(

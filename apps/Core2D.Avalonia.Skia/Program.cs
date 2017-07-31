@@ -39,7 +39,7 @@ namespace Core2D.Avalonia.Skia
                 {
                     var app = new App();
                     var appBuilder = AppBuilder.Configure(app)
-                        .UseWin32()
+                        .UsePlatformDetect()
                         .UseSkia()
                         .SetupWithoutStarting();
                     var aboutInfo = app.CreateAboutInfo(
