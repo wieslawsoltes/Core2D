@@ -286,5 +286,8 @@
                 </MenuItem.Icon>
             </MenuItem>
         </MenuItem>
+        <MenuItem Header="_Help">
+            <MenuItem Header="_About Core2D" Command="{Static Editor:ProjectEditorCommands.AboutDialogCommand}"/>
+        </MenuItem>
     </Menu>
 </UserControl>

@@ -51,6 +51,9 @@
             <DataTemplate DataType="Views:DocumentView">
                 <views:DocumentViewControl/>
             </DataTemplate>
+            <DataTemplate DataType="Views:AboutView">
+                <views:AboutViewControl/>
+            </DataTemplate>
         </Carousel.DataTemplates>
     </Carousel>
 </UserControl>
