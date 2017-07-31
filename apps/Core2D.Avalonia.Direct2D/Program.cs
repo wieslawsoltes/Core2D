@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
+using System.Diagnostics;
 using Autofac;
 using Avalonia;
 using Avalonia.Logging.Serilog;
@@ -41,10 +42,12 @@ namespace Core2D.Avalonia.Direct2D
                         .UseWin32()
                         .UseDirect2D1()
                         .SetupWithoutStarting();
-                    app.SetRuntimeInfo(appBuilder.RuntimePlatform.GetRuntimeInfo());
-                    app.SetWindowingSubsystemName(appBuilder.WindowingSubsystemName);
-                    app.SetRenderingSubsystemName(appBuilder.RenderingSubsystemName);
-                    app.Start(container.Resolve<IServiceProvider>());
+                    var aboutInfo = app.CreateAboutInfo(
+                        appBuilder.RuntimePlatform.GetRuntimeInfo(),
+                        appBuilder.WindowingSubsystemName,
+                        appBuilder.RenderingSubsystemName);
+                    Debug.Write(aboutInfo);
+                    app.Start(container.Resolve<IServiceProvider>(), aboutInfo);
                 }
             }
         }

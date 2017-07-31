@@ -3,6 +3,7 @@
 using System;
 using Autofac;
 using Avalonia;
+using Avalonia.Diagnostics;
 using Avalonia.Logging.Serilog;
 using Core2D.Avalonia.Modules;
 using Core2D.Avalonia.Skia.Modules;
@@ -41,10 +42,12 @@ namespace Core2D.Avalonia.Skia
                         .UseWin32()
                         .UseSkia()
                         .SetupWithoutStarting();
-                    app.SetRuntimeInfo(appBuilder.RuntimePlatform.GetRuntimeInfo());
-                    app.SetWindowingSubsystemName(appBuilder.WindowingSubsystemName);
-                    app.SetRenderingSubsystemName(appBuilder.RenderingSubsystemName);
-                    app.Start(container.Resolve<IServiceProvider>());
+                    var aboutInfo = app.CreateAboutInfo(
+                        appBuilder.RuntimePlatform.GetRuntimeInfo(),
+                        appBuilder.WindowingSubsystemName,
+                        appBuilder.RenderingSubsystemName);
+                    Debug.Write(aboutInfo);
+                    app.Start(container.Resolve<IServiceProvider>(), aboutInfo);
                 }
             }
         }

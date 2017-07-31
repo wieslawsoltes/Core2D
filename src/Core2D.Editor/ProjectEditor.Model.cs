@@ -36,6 +36,7 @@ namespace Core2D.Editor
         private ImmutableArray<RecentFile> _recentProjects;
         private RecentFile _currentRecentProject;
         private IView _currentView;
+        private AboutInfo _aboutInfo;
         private readonly Lazy<ImmutableArray<ToolBase>> _tools;
         private readonly Lazy<ImmutableArray<PathToolBase>> _pathTools;
         private readonly Lazy<HitTest> _hitTest;
@@ -202,6 +203,15 @@ namespace Core2D.Editor
         {
             get => _currentView;
             set => Update(ref _currentView, value);
+        }
+
+        /// <summary>
+        /// Gets or sets about info.
+        /// </summary>
+        public AboutInfo AboutInfo
+        {
+            get => _aboutInfo;
+            set => Update(ref _aboutInfo, value);
         }
 
         /// <summary>

@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Linq;
+using System.Reflection;
 using Autofac;
 using Avalonia;
 using Avalonia.Controls;
@@ -21,39 +22,6 @@ namespace Core2D.Avalonia
     /// </summary>
     public partial class App : Application
     {
-        /// <summary>
-        /// Gets or sets runtime platform info.
-        /// </summary>
-        public RuntimePlatformInfo RuntimeInfo { get; private set; }
-
-        /// <summary>
-        /// Gets or sets windowing subsystem name.
-        /// </summary>
-        public string WindowingSubsystemName { get; private set; }
-
-        /// <summary>
-        /// Gets or sets rendering subsystem name.
-        /// </summary>
-        public string RenderingSubsystemName { get; private set; }
-
-        /// <summary>
-        /// Set current runtime platform info.
-        /// </summary>
-        /// <param name="info">The runtime platform info.</param>
-        public void SetRuntimeInfo(RuntimePlatformInfo info) => RuntimeInfo = info;
-
-        /// <summary>
-        /// Set current windowing subsystem name.
-        /// </summary>
-        /// <param name="name">The windowing subsystem name.</param>
-        public void SetWindowingSubsystemName(string name) => WindowingSubsystemName = name;
-
-        /// <summary>
-        /// Set current rendering subsystem name.
-        /// </summary>
-        /// <param name="name">The rendering subsystem name.</param>
-        public void SetRenderingSubsystemName(string name) => RenderingSubsystemName = name;
-
         /// <summary>
         /// Initializes static data.
         /// </summary>
@@ -100,10 +68,39 @@ namespace Core2D.Avalonia
         }
 
         /// <summary>
+        /// Initialize application about information.
+        /// </summary>
+        /// <param name="runtimeInfo">The runtime info.</param>
+        /// <param name="windowingSubsystem">The windowing subsystem.</param>
+        /// <param name="renderingSubsystem">The rendering subsystem.</param>
+        /// <returns>The about information.</returns>
+        public AboutInfo CreateAboutInfo(RuntimePlatformInfo runtimeInfo, string windowingSubsystem, string renderingSubsystem)
+        {
+            return new AboutInfo()
+            {
+                Title = "Core2D",
+                Version = $"{this.GetType().GetTypeInfo().Assembly.GetName().Version}",
+                Description = "A multi-platform data driven 2D diagram editor.",
+                Copyright = "Copyright (c) Wiesław Šoltés. All rights reserved.",
+                License = "Licensed under the MIT license. See LICENSE file in the project root for full license information.",
+                OperatingSystem = $"{runtimeInfo.OperatingSystem}",
+                IsDesktop = runtimeInfo.IsDesktop,
+                IsMobile = runtimeInfo.IsMobile,
+                IsCoreClr = runtimeInfo.IsCoreClr,
+                IsMono = runtimeInfo.IsMono,
+                IsDotNetFramework = runtimeInfo.IsDotNetFramework,
+                IsUnix = runtimeInfo.IsUnix,
+                WindowingSubsystemName = windowingSubsystem,
+                RenderingSubsystemName = renderingSubsystem
+            };
+        }
+
+        /// <summary>
         /// Initialize application context and displays main window.
         /// </summary>
         /// <param name="serviceProvider">The service provider.</param>
-        public void Start(IServiceProvider serviceProvider)
+        /// <param name="aboutInfo">The about information.</param>
+        public void Start(IServiceProvider serviceProvider, AboutInfo aboutInfo)
         {
             InitializeConverters(serviceProvider);
 
@@ -125,6 +122,8 @@ namespace Core2D.Avalonia
                 editor.CurrentView = editor.Views.FirstOrDefault(v => v.Title == "Dashboard");
                 editor.CurrentTool = editor.Tools.FirstOrDefault(t => t.Title == "Selection");
                 editor.CurrentPathTool = editor.PathTools.FirstOrDefault(t => t.Title == "Line");
+
+                editor.AboutInfo = aboutInfo;
 
                 var window = serviceProvider.GetService<Windows.MainWindow>();
                 window.Closed += (sender, e) => editor.OnSaveRecent(path);
