@@ -28,6 +28,9 @@ namespace Core2D.Avalonia.NetCore
             InitializeLogging();
 
             var fbdev = args.Contains("--fbdev");
+            var direct2d1 = args.Contains("--direct2d1");
+            var skia = args.Contains("--skia");
+
             var builder = new ContainerBuilder();
 
             builder.RegisterModule<LocatorModule>();
@@ -54,14 +57,25 @@ namespace Core2D.Avalonia.NetCore
                     using (ILog log = container.Resolve<ILog>())
                     {
                         var app = new App();
-                        var appBuilder = AppBuilder.Configure(app)
-                            .UsePlatformDetect()
-                            .SetupWithoutStarting();
+                        var appBuilder = AppBuilder.Configure(app).UsePlatformDetect();
+
+                        if (direct2d1 == true)
+                        {
+                            appBuilder.UseDirect2D1();
+                        }
+                        else if (skia == true)
+                        {
+                            appBuilder.UseSkia();
+                        }
+
+                        appBuilder.SetupWithoutStarting();
+
                         var aboutInfo = app.CreateAboutInfo(
                             appBuilder.RuntimePlatform.GetRuntimeInfo(),
                             appBuilder.WindowingSubsystemName,
                             appBuilder.RenderingSubsystemName);
                         Debug.Write(aboutInfo);
+
                         app.Start(container.Resolve<IServiceProvider>(), aboutInfo);
                     }
                 }
