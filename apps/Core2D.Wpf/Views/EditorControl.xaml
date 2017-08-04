@@ -114,7 +114,7 @@
                     <ad:LayoutDocumentPaneGroup Orientation="Horizontal">
                         <ad:LayoutDocumentPane ShowHeader="False">
                             <ad:LayoutDocument x:Name="canvasWindow" CanClose="False" ContentId="canvas" Title="{x:Static p:Resources.WindowTitleCanvas}">
-                                <custom:ZoomBorder x:Name="zoomBorder" Width="10000" Height="10000" AutoFitMode="Extent" ZoomSpeed="1.2" Background="{StaticResource TemplateCheckerBoard}" ClipToBounds="False" BorderBrush="{x:Null}" BorderThickness="0" FocusVisualStyle="{x:Null}" Focusable="True" VerticalAlignment="Center" HorizontalAlignment="Center" Tag="{Binding CancelAvailable}">
+                                <custom:ZoomBorder x:Name="zoomBorder" Stretch="None" ZoomSpeed="1.2" Background="{StaticResource TemplateCheckerBoard}" ClipToBounds="False" BorderBrush="{x:Null}" BorderThickness="0" FocusVisualStyle="{x:Null}" Focusable="True" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Tag="{Binding CancelAvailable}">
                                     <custom:ZoomBorder.InputBindings>
                                         <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.DeleteCommand}" CommandParameter="{Binding}" Key="Delete" Modifiers=""/>
                                         <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.DeselectAllCommand}" Key="Esc" Modifiers=""/>
@@ -153,27 +153,25 @@
                                         <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.TryToConnectCommand}" Key="C" Modifiers=""/>
                                         <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.CloneStyleCommand}" Key="Y" Modifiers=""/>
                                     </custom:ZoomBorder.InputBindings>
-                                    <Border Padding="5" VerticalAlignment="Center" HorizontalAlignment="Center" ClipToBounds="False" BorderBrush="{x:Null}" BorderThickness="0" FocusVisualStyle="{x:Null}" Focusable="False">
-                                        <ContentControl x:Name="drawableControl" Content="{Binding Project.CurrentContainer}" ClipToBounds="False" custom:LayerElement.Renderer="{Binding Renderers[0]}">
-                                            <ContentControl.Resources>
-                                                <DataTemplate DataType="{x:Type Containers:PageContainer}">
-                                                    <views:ContainerControl/>
-                                                </DataTemplate>
-                                            </ContentControl.Resources>
-                                            <ContentControl.Style>
-                                                <Style TargetType="ContentControl">
-                                                    <Setter Property="Width" Value="{Binding Project.CurrentContainer.Width}"/>
-                                                    <Setter Property="Height" Value="{Binding Project.CurrentContainer.Height}"/>
-                                                    <Setter Property="Visibility" Value="Visible"/>
-                                                    <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding Project.CurrentContainer}" Value="{x:Null}">
-                                                            <Setter Property="Visibility" Value="Hidden"/>
-                                                        </DataTrigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </ContentControl.Style>
-                                        </ContentControl>
-                                    </Border>
+                                    <ContentControl x:Name="drawableControl" Content="{Binding Project.CurrentContainer}" ClipToBounds="False" custom:LayerElement.Renderer="{Binding Renderers[0]}">
+                                        <ContentControl.Resources>
+                                            <DataTemplate DataType="{x:Type Containers:PageContainer}">
+                                                <views:ContainerControl/>
+                                            </DataTemplate>
+                                        </ContentControl.Resources>
+                                        <ContentControl.Style>
+                                            <Style TargetType="ContentControl">
+                                                <Setter Property="Width" Value="{Binding Project.CurrentContainer.Width}"/>
+                                                <Setter Property="Height" Value="{Binding Project.CurrentContainer.Height}"/>
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Project.CurrentContainer}" Value="{x:Null}">
+                                                        <Setter Property="Visibility" Value="Hidden"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </ContentControl.Style>
+                                    </ContentControl>
                                 </custom:ZoomBorder>
                             </ad:LayoutDocument>
                         </ad:LayoutDocumentPane>
