@@ -65,6 +65,7 @@ namespace Core2D.SkiaDemo
 
             _projectEditor.CurrentTool = _projectEditor.Tools.FirstOrDefault(t => t.Title == "Selection");
             _projectEditor.CurrentPathTool = _projectEditor.PathTools.FirstOrDefault(t => t.Title == "Line");
+            _projectEditor.IsToolIdle = true;
             _projectEditor.OnNewProject();
 
             _projectEditor.Invalidate = () =>

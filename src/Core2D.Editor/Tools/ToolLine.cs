@@ -77,7 +77,7 @@ namespace Core2D.Editor.Tools
                         ToStateEnd();
                         Move(_line);
                         _currentState = State.End;
-                        editor.CancelAvailable = true;
+                        editor.IsToolIdle = false;
                     }
                     break;
                 case State.End:
@@ -103,7 +103,7 @@ namespace Core2D.Editor.Tools
                             base.Finalize(_line);
                             editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, _line);
                             _currentState = State.Start;
-                            editor.CancelAvailable = false;
+                            editor.IsToolIdle = true;
                         }
                     }
                     break;
@@ -125,7 +125,7 @@ namespace Core2D.Editor.Tools
                         editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         Remove();
                         _currentState = State.Start;
-                        editor.CancelAvailable = false;
+                        editor.IsToolIdle = true;
                     }
                     break;
             }

@@ -76,7 +76,7 @@ namespace Core2D.Editor.Tools.Path
                         ToStateEnd();
                         Move(null);
                         _currentState = State.End;
-                        editor.CancelAvailable = true;
+                        editor.IsToolIdle = false;
                     }
                     break;
                 case State.End:
@@ -134,7 +134,7 @@ namespace Core2D.Editor.Tools.Path
                         }
                         pathTool.DeInitializeWorkingPath();
                         _currentState = State.Start;
-                        editor.CancelAvailable = false;
+                        editor.IsToolIdle = true;
                     }
                     break;
             }

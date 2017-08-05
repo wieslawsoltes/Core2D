@@ -30,7 +30,7 @@ namespace Core2D.Editor
         private Action _loadLayout;
         private Action _saveLayout;
         private Action _resetLayout;
-        private bool _cancelAvailable;
+        private bool _isToolIdle;
         private ToolBase _currentTool;
         private PathToolBase _currentPathTool;
         private ImmutableArray<RecentFile> _recentProjects;
@@ -152,12 +152,12 @@ namespace Core2D.Editor
         }
 
         /// <summary>
-        /// Gets or sets flag indicating that current operation can be canceled.
+        /// Gets or sets flag indicating that current tool is in idle mode.
         /// </summary>
-        public bool CancelAvailable
+        public bool IsToolIdle
         {
-            get => _cancelAvailable;
-            set => Update(ref _cancelAvailable, value);
+            get => _isToolIdle;
+            set => Update(ref _isToolIdle, value);
         }
 
         /// <summary>

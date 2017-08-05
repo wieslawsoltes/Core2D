@@ -72,7 +72,7 @@ namespace Core2D.Editor.Tools
                         ToStatePoint4();
                         Move(_cubicBezier);
                         _currentState = State.Point4;
-                        editor.CancelAvailable = true;
+                        editor.IsToolIdle = false;
                     }
                     break;
                 case State.Point4:
@@ -135,7 +135,7 @@ namespace Core2D.Editor.Tools
                             base.Finalize(_cubicBezier);
                             editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, _cubicBezier);
                             _currentState = State.Point1;
-                            editor.CancelAvailable = false;
+                            editor.IsToolIdle = true;
                         }
                     }
                     break;
@@ -159,7 +159,7 @@ namespace Core2D.Editor.Tools
                         editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         Remove();
                         _currentState = State.Point1;
-                        editor.CancelAvailable = false;
+                        editor.IsToolIdle = true;
                     }
                     break;
             }

@@ -72,7 +72,7 @@ namespace Core2D.Editor.Tools
                         ToStateBottomRight();
                         Move(_rectangle);
                         _currentState = State.BottomRight;
-                        editor.CancelAvailable = true;
+                        editor.IsToolIdle = false;
                     }
                     break;
                 case State.BottomRight:
@@ -93,7 +93,7 @@ namespace Core2D.Editor.Tools
                             Finalize(_rectangle);
                             editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, _rectangle);
                             _currentState = State.TopLeft;
-                            editor.CancelAvailable = false;
+                            editor.IsToolIdle = true;
                         }
                     }
                     break;
@@ -115,7 +115,7 @@ namespace Core2D.Editor.Tools
                         editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         Remove();
                         _currentState = State.TopLeft;
-                        editor.CancelAvailable = false;
+                        editor.IsToolIdle = true;
                     }
                     break;
             }

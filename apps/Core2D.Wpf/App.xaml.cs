@@ -64,6 +64,7 @@ namespace Core2D.Wpf
                 editor.CurrentView = editor.Views.FirstOrDefault(v => v.Title == "Dashboard");
                 editor.CurrentTool = editor.Tools.FirstOrDefault(t => t.Title == "Selection");
                 editor.CurrentPathTool = editor.PathTools.FirstOrDefault(t => t.Title == "Line");
+                editor.IsToolIdle = true;
 
                 var window = serviceProvider.GetService<Windows.MainWindow>();
                 bool isLoaded = false;

@@ -122,6 +122,7 @@ namespace Core2D.Avalonia
                 editor.CurrentView = editor.Views.FirstOrDefault(v => v.Title == "Dashboard");
                 editor.CurrentTool = editor.Tools.FirstOrDefault(t => t.Title == "Selection");
                 editor.CurrentPathTool = editor.PathTools.FirstOrDefault(t => t.Title == "Line");
+                editor.IsToolIdle = true;
 
                 editor.AboutInfo = aboutInfo;
 
@@ -160,6 +161,7 @@ namespace Core2D.Avalonia
             editor.CurrentView = editor.Views.FirstOrDefault(v => v.Title == "Dashboard");
             editor.CurrentTool = editor.Tools.FirstOrDefault(t => t.Title == "Selection");
             editor.CurrentPathTool = editor.PathTools.FirstOrDefault(t => t.Title == "Line");
+            editor.IsToolIdle = true;
 
             return new MainControl()
             {

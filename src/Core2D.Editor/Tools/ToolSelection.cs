@@ -201,7 +201,7 @@ namespace Core2D.Editor.Tools
                                 _historyY = _startY;
                                 GenerateMoveSelectionCache();
                                 _currentState = State.Selected;
-                                editor.CancelAvailable = true;
+                                editor.IsToolIdle = false;
                                 break;
                             }
                         }
@@ -214,7 +214,7 @@ namespace Core2D.Editor.Tools
                             _historyY = _startY;
                             GenerateMoveSelectionCache();
                             _currentState = State.Selected;
-                            editor.CancelAvailable = true;
+                            editor.IsToolIdle = false;
                             break;
                         }
 
@@ -226,7 +226,7 @@ namespace Core2D.Editor.Tools
                         editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_rectangle);
                         editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         _currentState = State.Selected;
-                        editor.CancelAvailable = true;
+                        editor.IsToolIdle = false;
                     }
                     break;
                 case State.Selected:
@@ -238,7 +238,7 @@ namespace Core2D.Editor.Tools
                             editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_rectangle);
                             editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                             _currentState = State.None;
-                            editor.CancelAvailable = false;
+                            editor.IsToolIdle = true;
                         }
                     }
                     break;
@@ -295,7 +295,7 @@ namespace Core2D.Editor.Tools
 
                             DisposeMoveSelectionCache();
                             _currentState = State.None;
-                            editor.CancelAvailable = false;
+                            editor.IsToolIdle = true;
                             break;
                         }
 
@@ -307,7 +307,7 @@ namespace Core2D.Editor.Tools
                             editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                             _currentState = State.None;
                             editor.TryToSelectShapes(editor.Project.CurrentContainer.CurrentLayer, _rectangle);
-                            editor.CancelAvailable = false;
+                            editor.IsToolIdle = true;
                         }
                     }
                     break;
@@ -329,7 +329,7 @@ namespace Core2D.Editor.Tools
                 case State.Selected:
                     {
                         DisposeMoveSelectionCache();
-                        editor.CancelAvailable = false;
+                        editor.IsToolIdle = true;
                     }
                     break;
             }

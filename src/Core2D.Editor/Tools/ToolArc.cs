@@ -77,7 +77,7 @@ namespace Core2D.Editor.Tools
                         ToStatePoint2();
                         Move(_arc);
                         _currentState = State.Point2;
-                        editor.CancelAvailable = true;
+                        editor.IsToolIdle = false;
                     }
                     break;
                 case State.Point2:
@@ -153,7 +153,7 @@ namespace Core2D.Editor.Tools
                             Finalize(_arc);
                             editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, _arc);
                             _currentState = State.Point1;
-                            editor.CancelAvailable = false;
+                            editor.IsToolIdle = true;
                         }
                     }
                     break;
@@ -177,7 +177,7 @@ namespace Core2D.Editor.Tools
                         editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         Remove();
                         _currentState = State.Point1;
-                        editor.CancelAvailable = false;
+                        editor.IsToolIdle = true;
                     }
                     break;
             }

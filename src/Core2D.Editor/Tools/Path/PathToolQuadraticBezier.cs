@@ -78,7 +78,7 @@ namespace Core2D.Editor.Tools.Path
                         ToStatePoint3();
                         Move(null);
                         _currentState = State.Point3;
-                        editor.CancelAvailable = true;
+                        editor.IsToolIdle = false;
                     }
                     break;
                 case State.Point3:
@@ -164,7 +164,7 @@ namespace Core2D.Editor.Tools.Path
                         }
                         pathTool.DeInitializeWorkingPath();
                         _currentState = State.Point1;
-                        editor.CancelAvailable = false;
+                        editor.IsToolIdle = true;
                     }
                     break;
             }
