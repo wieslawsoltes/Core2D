@@ -66,6 +66,18 @@
                 </MenuItem.Styles>
             </MenuItem>
         </MenuItem>
+        <MenuItem Header="_Debug">
+            <MenuItem Header="DrawDirtyRects" x:Name="DebugDrawDirtyRects">
+                <MenuItem.Icon>
+                    <CheckBox Classes="menu" IsChecked="False" x:Name="DebugDrawDirtyRectsCheckBox"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="DrawFps" x:Name="DebugDrawFps">
+                <MenuItem.Icon>
+                    <CheckBox Classes="menu" IsChecked="False" x:Name="DebugDebugDrawFpsCheckBox"/>
+                </MenuItem.Icon>
+            </MenuItem>
+        </MenuItem>
         <MenuItem Header="_Help">
             <MenuItem Header="_About Core2D" Command="{Static Editor:ProjectEditorCommands.AboutDialogCommand}"/>
         </MenuItem>

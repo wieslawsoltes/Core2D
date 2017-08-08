@@ -18,10 +18,6 @@ namespace Core2D.Avalonia.Windows
         {
             this.InitializeComponent();
             this.AttachDevTools();
-#if DEBUG
-            Renderer.DrawDirtyRects = true;
-            Renderer.DrawFps = true;
-#endif
         }
 
         /// <summary>
