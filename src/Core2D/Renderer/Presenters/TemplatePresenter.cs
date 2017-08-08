@@ -7,26 +7,21 @@ using Core2D.Containers;
 namespace Core2D.Renderer.Presenters
 {
     /// <summary>
-    /// Editor container presenter.
+    /// Template container presenter.
     /// </summary>
-    public class EditorPresenter : ContainerPresenter
+    public class TemplatePresenter : ContainerPresenter
     {
         /// <inheritdoc/>
         public override void Render(object dc, ShapeRenderer renderer, PageContainer container, double dx, double dy)
         {
+            renderer.Fill(dc, dx, dy, container.Width, container.Height, container.Background);
+
             var db = container.Data == null ? default(ImmutableArray<Property>) : container.Data.Properties;
             var r = container.Data == null ? default(Record) : container.Data.Record;
 
-            renderer.Draw(dc, container, dx, dy, db, r);
-
-            if (container.WorkingLayer != null)
+            if (container.Template != null)
             {
-                renderer.Draw(dc, container.WorkingLayer, dx, dy, db, r);
-            }
-
-            if (container.HelperLayer != null)
-            {
-                renderer.Draw(dc, container.HelperLayer, dx, dy, db, r);
+                renderer.Draw(dc, container.Template, dx, dy, db, r); 
             }
         }
     }

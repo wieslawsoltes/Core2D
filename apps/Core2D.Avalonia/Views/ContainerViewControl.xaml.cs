@@ -16,7 +16,8 @@ namespace Core2D.Avalonia.Views
     /// </summary>
     public class ContainerViewControl : UserControl
     {
-        private static ContainerPresenter _presenter = new EditorPresenter();
+        private static ContainerPresenter _editorPresenter = new EditorPresenter();
+        private static ContainerPresenter _templatePresenter = new TemplatePresenter();
 
         /// <summary>
         /// Gets or sets container property.
@@ -76,14 +77,16 @@ namespace Core2D.Avalonia.Views
             {
                 if (Renderer != null)
                 {
-                    _presenter.Render(context, Renderer, Container, 0.0, 0.0);
+                    _templatePresenter.Render(context, Renderer, Container, 0.0, 0.0);
+                    _editorPresenter.Render(context, Renderer, Container, 0.0, 0.0);
                 }
                 else
                 {
                     var renderer = GetValue(RendererOptions.RendererProperty);
                     if (renderer != null)
                     {
-                        _presenter.Render(context, renderer, Container, 0.0, 0.0);
+                        _templatePresenter.Render(context, renderer, Container, 0.0, 0.0);
+                        _editorPresenter.Render(context, renderer, Container, 0.0, 0.0);
                     }
                 }
             }
