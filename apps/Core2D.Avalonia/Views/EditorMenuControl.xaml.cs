@@ -59,7 +59,7 @@ namespace Core2D.Avalonia.Views
         {
             bool value = !VisualRoot.Renderer.DrawFps;
             VisualRoot.Renderer.DrawFps = value;
-            this.FindControl<CheckBox>("DebugDebugDrawFpsCheckBox").IsChecked = value;
+            this.FindControl<CheckBox>("DebugDrawFpsCheckBox").IsChecked = value;
         }
     }
 }

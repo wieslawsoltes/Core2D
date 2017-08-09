@@ -294,7 +294,7 @@
             </MenuItem>
             <MenuItem Header="DrawFps" x:Name="DebugDrawFps">
                 <MenuItem.Icon>
-                    <CheckBox Classes="menu" IsChecked="False" x:Name="DebugDebugDrawFpsCheckBox"/>
+                    <CheckBox Classes="menu" IsChecked="False" x:Name="DebugDrawFpsCheckBox"/>
                 </MenuItem.Icon>
             </MenuItem>
         </MenuItem>
