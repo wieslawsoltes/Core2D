@@ -149,11 +149,11 @@ var zipTargetSkiaViewAutofacFile = zipRootDir.CombineWithFilePath("Core2D.SkiaVi
 var zipSourceSkiaViewNoAutofacDir = (DirectoryPath)Directory("./samples/Core2D.SkiaViewNoAutofac/bin/" + dirSuffixZip);
 var zipTargetSkiaViewNoAutofacFile = zipRootDir.CombineWithFilePath("Core2D.SkiaViewNoAutofac-" + fileZipSuffix);
 
-var msvcp140_x86 = @"c:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.10.25008\x86\Microsoft.VC150.CRT\msvcp140.dll";
-var msvcp140_x64 = @"c:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.10.25008\x64\Microsoft.VC150.CRT\msvcp140.dll";
-var vcruntime140_x86 = @"c:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.10.25008\x86\Microsoft.VC150.CRT\vcruntime140.dll";
-var vcruntime140_x64 = @"c:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.10.25008\x64\Microsoft.VC150.CRT\vcruntime140.dll";
-var editbin = @"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.10.25017\bin\HostX86\x86\editbin.exe";
+var msvcp140_x86 = @"c:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.11.25415\x86\Microsoft.VC150.CRT\msvcp140.dll";
+var msvcp140_x64 = @"c:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.11.25415\x64\Microsoft.VC150.CRT\msvcp140.dll";
+var vcruntime140_x86 = @"c:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.11.25415\x86\Microsoft.VC150.CRT\vcruntime140.dll";
+var vcruntime140_x64 = @"c:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.11.25415\x64\Microsoft.VC150.CRT\vcruntime140.dll";
+var editbin = @"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.11.25503\bin\HostX86\x86\editbin.exe";
 
 ///////////////////////////////////////////////////////////////////////////////
 // TASKS: COMMON
