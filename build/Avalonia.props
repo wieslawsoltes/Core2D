@@ -13,6 +13,6 @@
     <PackageReference Include="Avalonia.Xaml.Interactions.Custom" Version="0.5.1-build446-alpha" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Avalonia.Controls.PanAndZoom" Version="1.0.0-build152-alpha" />
+    <PackageReference Include="Avalonia.Controls.PanAndZoom" Version="1.0.0-build158-alpha" />
   </ItemGroup>
 </Project>
