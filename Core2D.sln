@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.16
+VisualStudioVersion = 15.0.26730.8
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BC6BAFE6-1735-4549-A7CC-819274780B38}"
 EndProject
@@ -80,6 +80,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "props", "props", "{3C45CABF
 		build\Base.props = build\Base.props
 		build\CsvHelper.props = build\CsvHelper.props
 		build\Math.Spatial.props = build\Math.Spatial.props
+		build\NETCore.props = build\NETCore.props
 		build\netDXF.props = build\netDXF.props
 		build\Newtonsoft.Json.props = build\Newtonsoft.Json.props
 		build\NuGet.props = build\NuGet.props
@@ -293,5 +294,8 @@ Global
 		{2E1709D9-9A10-4323-BC2B-1AB0D9D4F949} = {46B42B0C-D5DC-4657-826E-9F8E43B8CCB3}
 		{E71EDABA-377D-4A61-B0AA-3CD74DCB2A23} = {46B42B0C-D5DC-4657-826E-9F8E43B8CCB3}
 		{4FCDE30A-D059-4979-835B-DD7C56CAB35D} = {46B42B0C-D5DC-4657-826E-9F8E43B8CCB3}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2614B90F-C6F8-435C-8BD0-09AEE3ABAD2B}
 	EndGlobalSection
 EndGlobal
