@@ -35,6 +35,7 @@ var configuration = Argument("configuration", "Release");
 var isPlatformAnyCPU = StringComparer.OrdinalIgnoreCase.Equals(platform, "AnyCPU");
 var isPlatformX86 = StringComparer.OrdinalIgnoreCase.Equals(platform, "x86");
 var isPlatformX64 = StringComparer.OrdinalIgnoreCase.Equals(platform, "x64");
+var isPullRequest = BuildSystem.AppVeyor.Environment.PullRequest.IsPullRequest;
 
 ///////////////////////////////////////////////////////////////////////////////
 // VERSION
@@ -47,17 +48,22 @@ var publishMyGet = false;
 
 if (BuildSystem.AppVeyor.IsRunningOnAppVeyor)
 {
-    if (BuildSystem.AppVeyor.Environment.Repository.Tag.IsTag && !string.IsNullOrWhiteSpace(BuildSystem.AppVeyor.Environment.Repository.Tag.Name))
+    var isTag = BuildSystem.AppVeyor.Environment.Repository.Tag.IsTag;
+    var haveTag = !string.IsNullOrWhiteSpace(BuildSystem.AppVeyor.Environment.Repository.Tag.Name);
+    var tagName = BuildSystem.AppVeyor.Environment.Repository.Tag.Name;
+    var buildNumber = EnvironmentVariable("APPVEYOR_BUILD_NUMBER");
+
+    if (isTag && haveTag)
     {
-        version = BuildSystem.AppVeyor.Environment.Repository.Tag.Name;
+        version = tagName;
         suffix = "";
-        publishNuGet = !BuildSystem.AppVeyor.Environment.PullRequest.IsPullRequest;
+        publishNuGet = !isPullRequest;
     }
     else
     {
-        suffix = "-build" + EnvironmentVariable("APPVEYOR_BUILD_NUMBER");
+        suffix = "-build" + buildNumber;
         version += suffix;
-        publishMyGet = !BuildSystem.AppVeyor.Environment.PullRequest.IsPullRequest;
+        publishMyGet = !isPullRequest;
     }
 }
 
@@ -255,6 +261,7 @@ Task("Run-Unit-Tests")
 
 Task("Copy-Redist-Files")
     .IsDependentOn("Run-Unit-Tests")
+    .WithCriteria(() => !isPullRequest)
     .Does(() =>
 {
     if (IsRunningOnWindows() && (isPlatformAnyCPU || isPlatformX86 || isPlatformX64))
@@ -284,6 +291,7 @@ Task("Copy-Redist-Files")
 
 Task("Zip-Files")
     .IsDependentOn("Run-Unit-Tests")
+    .WithCriteria(() => !isPullRequest)
     .Does(() =>
 {
     Zip(zipSourceDirect2DDir.FullPath, zipTargetDirect2DFile);
@@ -343,6 +351,7 @@ Task("Build-NetCore")
 
 Task("Publish-NetCore")
     .IsDependentOn("Restore-NetCore")
+    .WithCriteria(() => !isPullRequest)
     .Does(() =>
 {
     foreach (var project in netCoreProjects)
@@ -374,6 +383,7 @@ Task("Publish-NetCore")
 
 Task("Copy-Redist-Files-NetCore")
     .IsDependentOn("Publish-NetCore")
+    .WithCriteria(() => !isPullRequest)
     .Does(() =>
 {
     foreach (var project in netCoreProjects)
@@ -399,6 +409,7 @@ Task("Copy-Redist-Files-NetCore")
 
 Task("Zip-Files-NetCore")
     .IsDependentOn("Publish-NetCore")
+    .WithCriteria(() => !isPullRequest)
     .Does(() =>
 {
     foreach (var project in netCoreProjects)
@@ -420,6 +431,7 @@ Task("Zip-Files-NetCore")
 Task("Create-NuGet-Packages")
     .IsDependentOn("Run-Unit-Tests")
     .IsDependentOn("Run-Unit-Tests-NetCore")
+    .WithCriteria(() => !isPullRequest)
     .Does(() =>
 {
     var projects = GetFiles("./src/**/*.csproj") + 
@@ -456,6 +468,7 @@ Task("Create-NuGet-Packages")
 Task("Publish-MyGet")
     .IsDependentOn("Create-NuGet-Packages")
     .WithCriteria(() => publishMyGet)
+    .WithCriteria(() => !isPullRequest)
     .Does(() =>
 {
     var apiKey = EnvironmentVariable("MYGET_API_KEY");
@@ -482,6 +495,7 @@ Task("Publish-MyGet")
 Task("Publish-NuGet")
     .IsDependentOn("Create-NuGet-Packages")
     .WithCriteria(() => publishNuGet)
+    .WithCriteria(() => !isPullRequest)
     .Does(() =>
 {
     var apiKey = EnvironmentVariable("NUGET_API_KEY");
@@ -507,6 +521,7 @@ Task("Publish-NuGet")
 
 Task("Zip-Files-NuGet")
     .IsDependentOn("Create-NuGet-Packages")
+    .WithCriteria(() => !isPullRequest)
     .Does(() =>
 {
     Zip(nugetRootDir.FullPath, zipTargetNuGetFile);
