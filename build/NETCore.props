@@ -6,4 +6,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Packaging.Tools.Trimming" Version="1.0.0-preview2-25401-01" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="ILLink.Tasks" Version="0.1.4-preview-906439" />
+  </ItemGroup>
 </Project>
