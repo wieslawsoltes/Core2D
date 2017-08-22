@@ -6,7 +6,7 @@
     <RuntimeIdentifiers>win7-x64;ubuntu.14.04-x64;osx.10.12-x64</RuntimeIdentifiers>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <TrimUnusedDependencies>False</TrimUnusedDependencies>
-    <LinkDuringPublish>True</LinkDuringPublish>
+    <LinkDuringPublish>False</LinkDuringPublish>
     <ShowLinkerSizeComparison>True</ShowLinkerSizeComparison>
   </PropertyGroup>
 
