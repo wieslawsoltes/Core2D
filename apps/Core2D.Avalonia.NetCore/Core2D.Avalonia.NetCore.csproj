@@ -5,7 +5,7 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <RuntimeIdentifiers>win7-x64;ubuntu.14.04-x64;osx.10.12-x64</RuntimeIdentifiers>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
-    <TrimUnusedDependencies>True</TrimUnusedDependencies>
+    <TrimUnusedDependencies>False</TrimUnusedDependencies>
   </PropertyGroup>
 
   <Import Project="..\..\build\Default.targets" />
