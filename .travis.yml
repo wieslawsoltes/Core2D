@@ -1,7 +1,5 @@
 language: csharp
-os:
-  - linux
-  - osx
+os: linux
 dist: trusty
 env:
   global:
