@@ -5,10 +5,17 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <RuntimeIdentifiers>win7-x64;ubuntu.14.04-x64;osx.10.12-x64</RuntimeIdentifiers>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <TrimUnusedDependencies>False</TrimUnusedDependencies>
-    <LinkDuringPublish>False</LinkDuringPublish>
+    <LinkDuringPublish>True</LinkDuringPublish>
     <ShowLinkerSizeComparison>True</ShowLinkerSizeComparison>
   </PropertyGroup>
+
+  <ItemGroup>
+    <LinkerRootDescriptors Include="linker.xml" />
+  </ItemGroup>
 
   <Import Project="..\..\build\Default.targets" />
   <Import Project="..\..\build\NETCore.props" />
