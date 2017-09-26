@@ -25,9 +25,8 @@
   <Import Project="..\..\build\Autofac.props" />
   <Import Project="..\..\build\Rx.props" />
   <Import Project="..\..\build\Avalonia.props" />
-  <Import Project="..\..\build\Avalonia.SkiaSharp.props" />
+  <Import Project="..\..\build\Avalonia.Desktop.props" />
   <Import Project="..\..\build\SkiaSharp.props" />
-  <Import Project="..\..\build\Avalonia.Direct2D.props" />
   <Import Project="..\..\build\SharpDX.props" />
 
   <ItemGroup>
