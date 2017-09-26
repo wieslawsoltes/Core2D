@@ -29,10 +29,10 @@ Core2D is a multi-platform application for making data driven 2D diagrams.
 
 ## Supported Platforms
 
-* `Windows 7 SP1 or higher` using `Core2D.Wpf` or `Core2D.Avalonia.Direct2D` project.
-* `.NET Core` supported platforms using `Core2D.Avalonia.NetCore` project.
-* `Linux` using `Core2D.Avalonia.NetCore` project.
-* `macOS` using `Core2D.Avalonia.NetCore` project.
+* `Windows 7 SP1 or higher` using `Core2D.Wpf` or `Core2D.Avalonia` project.
+* `Linux` using `Core2D.Avalonia` project.
+* `macOS` using `Core2D.Avalonia` project.
+* `.NET Core` supported platforms using `Core2D.Avalonia` project.
 
 The core library and editor are portable and should work on all platforms where C# is supported.
 
@@ -69,14 +69,14 @@ $ ./build.sh --target "Default" --platform "AnyCPU" --configuration "Release"
 
 Open up a Powershell prompt and execute:
 ```PowerShell
-cd apps/Core2D.Avalonia.NetCore
+cd apps/Core2D.Avalonia
 dotnet restore
 dotnet build
 ```
 
 Open up a terminal prompt and execute:
 ```Bash
-cd apps/Core2D.Avalonia.NetCore
+cd apps/Core2D.Avalonia
 dotnet restore
 dotnet build
 ```
@@ -87,16 +87,22 @@ You can publish self-contained `Core2D` application and all of its dependencies 
 
 Open up a Powershell prompt and execute:
 ```PowerShell
+cd apps/Core2D.Avalonia
+dotnet restore
 dotnet publish -r win7-x64 -o win7-x64
 ```
 
 Open up a Powershell prompt and execute:
 ```PowerShell
+cd apps/Core2D.Avalonia
+dotnet restore
 dotnet publish -r win7-x86 -o win7-x86
 ```
 
 Open up a terminal prompt and execute:
 ```Bash
+cd apps/Core2D.Avalonia
+dotnet restore
 dotnet publish -r ubuntu.16.10-x64 -o ubuntu.16.10-x64
 ```
 
