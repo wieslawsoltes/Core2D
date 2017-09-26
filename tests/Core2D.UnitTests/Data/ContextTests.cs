@@ -20,7 +20,7 @@ namespace Core2D.UnitTests
         public void Properties_Not_Null()
         {
             var target = new Context();
-            Assert.NotNull(target.Properties);
+            Assert.False(target.Properties.IsDefault);
         }
 
         [Fact]
@@ -28,7 +28,7 @@ namespace Core2D.UnitTests
         public void This_Operator_Returns_Null()
         {
             var target = new Context();
-            Assert.Equal(null, target["Name1"]);
+            Assert.Null(target["Name1"]);
         }
 
         [Fact]
@@ -57,10 +57,10 @@ namespace Core2D.UnitTests
         public void This_Operator_Creates_Property()
         {
             var target = new Context();
-            Assert.Equal(0, target.Properties.Length);
+            Assert.Empty(target.Properties);
 
             target["Name1"] = "Value1";
-            Assert.Equal(1, target.Properties.Length);
+            Assert.Contains("Value1", target.Properties);
 
             Assert.Equal(target, target.Properties[0].Owner);
         }
