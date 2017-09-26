@@ -49,7 +49,7 @@ namespace Core2D.UnitTests
             var key = target.AddImageFromFile(@"C:/Images/image.jpg", new byte[] { });
 
             Assert.Equal(ProjectContainer.ImageEntryNamePrefix + "image.jpg", key);
-            Assert.Contains(key, target.Keys);
+            Assert.Contains(target.Keys, item => item.Key == key);
             Assert.Equal("Keys", actual);
         }
 
@@ -71,7 +71,7 @@ namespace Core2D.UnitTests
 
             Assert.Equal(key, key1);
             Assert.Equal(key, key2);
-            Assert.Contains(key, target.Keys);
+            Assert.Contains(target.Keys, item => item.Key == key);
             Assert.Equal(1, count);
         }
 
@@ -92,7 +92,7 @@ namespace Core2D.UnitTests
             target.AddImage(key, new byte[] { });
 
             Assert.Equal(key, target.Keys.First().Key);
-            Assert.Contains(key, target.Keys);
+            Assert.Contains(target.Keys, item => item.Key == key);
             Assert.Equal("Keys", actual);
         }
 
@@ -114,7 +114,7 @@ namespace Core2D.UnitTests
             target.AddImage(key, new byte[] { });
 
             Assert.Equal(key, target.Keys.First().Key);
-            Assert.Contains(key, target.Keys);
+            Assert.Contains(target.Keys, item => item.Key == key);
             Assert.Equal(1, count);
         }
 
@@ -221,7 +221,7 @@ namespace Core2D.UnitTests
             target.PurgeUnusedImages(used);
 
             Assert.Equal(key2, target.Keys.First().Key);
-            Assert.Contains(key2, target.Keys);
+            Assert.Contains(target.Keys, item => item.Key == key2);
             Assert.Equal(4, count);
         }
     }
