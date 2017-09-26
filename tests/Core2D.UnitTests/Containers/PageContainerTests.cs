@@ -22,7 +22,7 @@ namespace Core2D.UnitTests
         public void Layers_Not_Null()
         {
             var target = new Class1();
-            Assert.NotNull(target.Layers);
+            Assert.False(target.Layers.IsDefault);
         }
 
         [Fact]
