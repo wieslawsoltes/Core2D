@@ -20,7 +20,7 @@ namespace Core2D.UnitTests
         public void Items_Not_Null()
         {
             var target = new Library<PageContainer>();
-            Assert.NotNull(target.Items);
+            Assert.False(target.Items.IsDefault);
         }
 
         [Fact]
