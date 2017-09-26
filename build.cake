@@ -2,13 +2,14 @@
 // ADDINS
 ///////////////////////////////////////////////////////////////////////////////
 
-#addin "nuget:?package=Polly&version=5.1.0"
+#addin "nuget:?package=Polly&version=5.3.1"
 
 ///////////////////////////////////////////////////////////////////////////////
 // TOOLS
 ///////////////////////////////////////////////////////////////////////////////
 
-#tool "nuget:?package=xunit.runner.console&version=2.2.0"
+#tool "nuget:?package=NuGet.CommandLine&version=4.3.0"
+#tool "nuget:?package=xunit.runner.console&version=2.3.0-beta5-build3769"
 
 ///////////////////////////////////////////////////////////////////////////////
 // USINGS
@@ -81,7 +82,7 @@ var UnitTestsFramework = "net461";
 ///////////////////////////////////////////////////////////////////////////////
 
 var netCoreAppsRoot= "./apps";
-var netCoreApps = new string[] { "Core2D.Avalonia.NetCore" };
+var netCoreApps = new string[] { "Core2D.Avalonia" };
 var netCoreProjects = netCoreApps.Select(name => 
     new {
         Path = string.Format("{0}/{1}", netCoreAppsRoot, name),
@@ -123,9 +124,7 @@ var buildDirs =
     GetDirectories("./tests/**/bin/**") + 
     GetDirectories("./tests/**/obj/**") + 
     GetDirectories("./apps/**/bin/**") + 
-    GetDirectories("./apps/**/obj/**") +
-    GetDirectories("./samples/**/bin/**") + 
-    GetDirectories("./samples/**/obj/**");
+    GetDirectories("./apps/**/obj/**");
 
 var artifactsDir = (DirectoryPath)Directory("./artifacts");
 var testResultsDir = artifactsDir.Combine("test-results");	
@@ -137,23 +136,8 @@ var fileZipSuffix = version + ".zip";
 
 var zipTargetNuGetFile = zipRootDir.CombineWithFilePath("Core2D-NuGet-Packages-" + fileZipSuffix);
 
-var zipSourceDirect2DDir = (DirectoryPath)Directory("./apps/Core2D.Avalonia.Direct2D/bin/" + dirSuffixZip);
-var zipTargetDirect2DFile = zipRootDir.CombineWithFilePath("Core2D.Avalonia.Direct2D-" + fileZipSuffix);
-
-var zipSourceSkiaDir = (DirectoryPath)Directory("./apps/Core2D.Avalonia.Skia/bin/" + dirSuffixZip);
-var zipTargetSkiaFile = zipRootDir.CombineWithFilePath("Core2D.Avalonia.Skia-" + fileZipSuffix);
-
 var zipSourceWpfDir = (DirectoryPath)Directory("./apps/Core2D.Wpf/bin/" + dirSuffixZip);
 var zipTargetWpfFile = zipRootDir.CombineWithFilePath("Core2D.Wpf-" + fileZipSuffix);
-
-var zipSourceSkiaDemoDir = (DirectoryPath)Directory("./samples/Core2D.SkiaDemo/bin/" + dirSuffixZip);
-var zipTargetSkiaDemoFile = zipRootDir.CombineWithFilePath("Core2D.SkiaDemo-" + fileZipSuffix);
-
-var zipSourceSkiaViewAutofacDir = (DirectoryPath)Directory("./samples/Core2D.SkiaViewAutofac/bin/" + dirSuffixZip);
-var zipTargetSkiaViewAutofacFile = zipRootDir.CombineWithFilePath("Core2D.SkiaViewAutofac-" + fileZipSuffix);
-
-var zipSourceSkiaViewNoAutofacDir = (DirectoryPath)Directory("./samples/Core2D.SkiaViewNoAutofac/bin/" + dirSuffixZip);
-var zipTargetSkiaViewNoAutofacFile = zipRootDir.CombineWithFilePath("Core2D.SkiaViewNoAutofac-" + fileZipSuffix);
 
 var msvcp140_x86 = @"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.11.25325\x86\Microsoft.VC141.CRT\msvcp140.dll";
 var msvcp140_x64 = @"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.11.25325\x64\Microsoft.VC141.CRT\msvcp140.dll";
@@ -197,18 +181,9 @@ Task("Restore-NuGet-Packages")
                 toolTimeout+=0.5;
             }})
         .Execute(()=> {
-            if (IsRunningOnWindows())
-            {
-                NuGetRestore(MSBuildSolution, new NuGetRestoreSettings {
-                    ToolTimeout = TimeSpan.FromMinutes(toolTimeout)
-                });
-            }
-            if (IsRunningOnUnix())
-            {
-                NuGetRestore(MSBuildSolution, new NuGetRestoreSettings {
-                    ToolTimeout = TimeSpan.FromMinutes(toolTimeout)
-                });
-            }
+            NuGetRestore(MSBuildSolution, new NuGetRestoreSettings {
+                ToolTimeout = TimeSpan.FromMinutes(toolTimeout)
+            });
         });
 });
 
@@ -216,26 +191,13 @@ Task("Build")
     .IsDependentOn("Restore-NuGet-Packages")
     .Does(() =>
 {
-    if (IsRunningOnWindows())
-    {
-        MSBuild(MSBuildSolution, settings => {
-            settings.UseToolVersion(MSBuildToolVersion.VS2017);
-            settings.SetConfiguration(configuration);
-            settings.WithProperty("Platform", platform);
-            settings.WithProperty("VersionSuffix", suffix);
-            settings.SetVerbosity(Verbosity.Minimal);
-        });   
-    }
-    if (IsRunningOnUnix())
-    {
-        XBuild(MSBuildSolution, settings => {
-            settings.UseToolVersion(XBuildToolVersion.Default);
-            settings.SetConfiguration(configuration);
-            settings.WithProperty("Platform", platform);
-            settings.WithProperty("VersionSuffix", suffix);
-            settings.SetVerbosity(Verbosity.Minimal);
-        });
-    }
+    MSBuild(MSBuildSolution, settings => {
+        settings.UseToolVersion(MSBuildToolVersion.VS2017);
+        settings.SetConfiguration(configuration);
+        settings.WithProperty("Platform", platform);
+        settings.WithProperty("VersionSuffix", suffix);
+        settings.SetVerbosity(Verbosity.Minimal);
+    });
 });
 
 Task("Run-Unit-Tests")
@@ -245,8 +207,8 @@ Task("Run-Unit-Tests")
     var assemblies = GetFiles("./tests/**/bin/" + platform + "/" + configuration + "/" + UnitTestsFramework + "/*.UnitTests.dll");
     var settings = new XUnit2Settings { 
         ToolPath = (isPlatformAnyCPU || isPlatformX86) ? 
-            "./tools/xunit.runner.console/tools/xunit.console.x86.exe" :
-            "./tools/xunit.runner.console/tools/xunit.console.exe",
+            Context.Tools.Resolve("xunit.console.x86.exe") :
+            Context.Tools.Resolve("xunit.console.exe"),
         OutputDirectory = testResultsDir,
         XmlReportV1 = true,
         NoAppDomain = true,
@@ -269,23 +231,8 @@ Task("Copy-Redist-Files")
         var msvcp140 = (isPlatformAnyCPU || isPlatformX86) ? msvcp140_x86 : msvcp140_x64;
         var vcruntime140 = (isPlatformAnyCPU || isPlatformX86) ? vcruntime140_x86 : vcruntime140_x64;
 
-        CopyFileToDirectory(msvcp140, zipSourceDirect2DDir);
-        CopyFileToDirectory(vcruntime140, zipSourceDirect2DDir);
-
-        CopyFileToDirectory(msvcp140, zipSourceSkiaDir);
-        CopyFileToDirectory(vcruntime140, zipSourceSkiaDir);
-
         CopyFileToDirectory(msvcp140, zipSourceWpfDir);
         CopyFileToDirectory(vcruntime140, zipSourceWpfDir);
-
-        CopyFileToDirectory(msvcp140, zipSourceSkiaDemoDir);
-        CopyFileToDirectory(vcruntime140, zipSourceSkiaDemoDir);
-
-        CopyFileToDirectory(msvcp140, zipSourceSkiaViewAutofacDir);
-        CopyFileToDirectory(vcruntime140, zipSourceSkiaViewAutofacDir);
-
-        CopyFileToDirectory(msvcp140, zipSourceSkiaViewNoAutofacDir);
-        CopyFileToDirectory(vcruntime140, zipSourceSkiaViewNoAutofacDir);
     }
 });
 
@@ -294,13 +241,7 @@ Task("Zip-Files")
     .WithCriteria(() => !isPullRequest)
     .Does(() =>
 {
-    Zip(zipSourceDirect2DDir.FullPath, zipTargetDirect2DFile);
-    Zip(zipSourceSkiaDir.FullPath,  zipTargetSkiaFile);
     Zip(zipSourceWpfDir.FullPath, zipTargetWpfFile);
-
-    Zip(zipSourceSkiaDemoDir.FullPath, zipTargetSkiaDemoFile);
-    Zip(zipSourceSkiaViewAutofacDir.FullPath, zipTargetSkiaViewAutofacFile);
-    Zip(zipSourceSkiaViewNoAutofacDir.FullPath, zipTargetSkiaViewNoAutofacFile);
 });
 
 ///////////////////////////////////////////////////////////////////////////////
