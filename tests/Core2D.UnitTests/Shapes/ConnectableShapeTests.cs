@@ -26,7 +26,7 @@ namespace Core2D.UnitTests
         public void Connectors_Not_Null()
         {
             var target = new Class2();
-            Assert.NotNull(target.Connectors);
+            Assert.False(target.Connectors.IsDefault);
         }
 
         [Fact]
@@ -39,7 +39,8 @@ namespace Core2D.UnitTests
             point.Data.Properties = point.Data.Properties.Add(new Property());
             target.Connectors = target.Connectors.Add(point);
 
-            Assert.Equal(1, target.GetPoints().Count());
+            var count = target.GetPoints().Count();
+            Assert.Equal(1, count);
         }
 
         [Fact]
@@ -55,7 +56,9 @@ namespace Core2D.UnitTests
             Assert.True(point.State.Flags.HasFlag(ShapeStateFlags.Connector | ShapeStateFlags.None));
             Assert.False(point.State.Flags.HasFlag(ShapeStateFlags.Standalone));
             Assert.Contains(point, target.Connectors);
-            Assert.Equal(1, target.Connectors.Length);
+            
+            var length = target.Connectors.Length;
+            Assert.Equal(1, length);
         }
 
         [Fact]
@@ -71,7 +74,9 @@ namespace Core2D.UnitTests
             Assert.True(point.State.Flags.HasFlag(ShapeStateFlags.Connector | ShapeStateFlags.Input));
             Assert.False(point.State.Flags.HasFlag(ShapeStateFlags.Standalone));
             Assert.Contains(point, target.Connectors);
-            Assert.Equal(1, target.Connectors.Length);
+
+            var length = target.Connectors.Length;
+            Assert.Equal(1, length);
         }
 
         [Fact]
@@ -87,7 +92,9 @@ namespace Core2D.UnitTests
             Assert.True(point.State.Flags.HasFlag(ShapeStateFlags.Connector | ShapeStateFlags.Output));
             Assert.False(point.State.Flags.HasFlag(ShapeStateFlags.Standalone));
             Assert.Contains(point, target.Connectors);
-            Assert.Equal(1, target.Connectors.Length);
+
+            var length = target.Connectors.Length;
+            Assert.Equal(1, length);
         }
         
         public class Class1 : BaseShape
