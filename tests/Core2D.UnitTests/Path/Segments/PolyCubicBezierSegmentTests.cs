@@ -14,7 +14,7 @@ namespace Core2D.UnitTests
         public void Points_Not_Null()
         {
             var target = new PolyCubicBezierSegment();
-            Assert.NotNull(target.Points);
+            Assert.False(target.Points.IsDefault);
         }
 
         [Fact]
