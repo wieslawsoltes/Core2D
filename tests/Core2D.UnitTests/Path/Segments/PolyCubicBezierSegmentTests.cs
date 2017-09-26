@@ -29,8 +29,9 @@ namespace Core2D.UnitTests
             segment.Points = segment.Points.Add(new PointShape());
 
             var target = segment.GetPoints();
+            var count = target.Count();
 
-            Assert.Equal(5, target.Count());
+            Assert.Equal(5, count);
 
             Assert.Equal(segment.Points, target);
         }
