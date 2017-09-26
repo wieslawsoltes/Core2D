@@ -24,9 +24,9 @@ namespace Core2D.UnitTests
             };
 
             var target = segment.GetPoints();
+            var count = target.Count();
 
-            Assert.Equal(1, target.Count());
-
+            Assert.Equal(1, count);
             Assert.Contains(segment.Point, target);
         }
 
