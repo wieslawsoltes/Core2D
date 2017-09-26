@@ -128,7 +128,7 @@ namespace Core2D.UnitTests
         public void this_Operator_Returns_Null()
         {
             var target = new PageContainer();
-            Assert.Equal(null, target["Name1"]);
+            Assert.Null(target["Name1"]);
         }
 
         [Fact]
@@ -157,10 +157,10 @@ namespace Core2D.UnitTests
         public void this_Operator_Creates_Property()
         {
             var target = new PageContainer();
-            Assert.Equal(0, target.Data.Properties.Length);
+            Assert.Empty(target.Data.Properties);
 
             target["Name1"] = "Value1";
-            Assert.Equal(1, target.Data.Properties.Length);
+            Assert.Contains("Value1", target.Data.Properties);
 
             Assert.Equal(target.Data, target.Data.Properties[0].Owner);
         }
