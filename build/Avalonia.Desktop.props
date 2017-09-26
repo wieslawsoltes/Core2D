@@ -1,7 +1,7 @@
 ﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <PackageReference Include="Avalonia.Desktop" Version="0.5.2-build3697-alpha" />
-    <PackageReference Include="Avalonia.LinuxFramebuffer" Version="0.5.2-build3697-alpha" />   
+    <PackageReference Include="Avalonia.Desktop" Version="0.5.2-build3857-alpha" />
+    <PackageReference Include="Avalonia.LinuxFramebuffer" Version="0.5.2-build3857-alpha" />   
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Serilog.Sinks.Trace" Version="2.1.0" />
