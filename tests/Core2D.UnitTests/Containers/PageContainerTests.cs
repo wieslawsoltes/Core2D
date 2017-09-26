@@ -160,7 +160,7 @@ namespace Core2D.UnitTests
             Assert.Empty(target.Data.Properties);
 
             target["Name1"] = "Value1";
-            Assert.Contains("Value1", target.Data.Properties);
+            Assert.Equal("Value1", target.Data.Properties[0].Value);
 
             Assert.Equal(target.Data, target.Data.Properties[0].Owner);
         }
