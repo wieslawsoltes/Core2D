@@ -13,7 +13,7 @@ namespace Core2D.UnitTests
         public void Figures_Not_Null()
         {
             var target = new PathGeometry();
-            Assert.NotNull(target.Figures);
+            Assert.False(target.Figures.IsDefault);
         }
 
         [Fact]
