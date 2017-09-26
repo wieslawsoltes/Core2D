@@ -29,7 +29,8 @@ namespace Core2D.UnitTests
         public void Equals_First_Object_Null_Return_False()
         {
             var x = ShapeStyle.Create();
-            Assert.NotEqual(null, x, new ShapeStyleByNameComparer());
+            var c = new ShapeStyleByNameComparer();
+            Assert.False(c.Equals(null, x));
         }
 
         [Fact]
@@ -37,7 +38,8 @@ namespace Core2D.UnitTests
         public void Equals_Second_Object_Null_Return_False()
         {
             var y = ShapeStyle.Create();
-            Assert.NotEqual(y, null, new ShapeStyleByNameComparer());
+            var c = new ShapeStyleByNameComparer();
+            Assert.False(c.Equals(y, null));
         }
 
         [Fact]
