@@ -26,7 +26,7 @@ namespace Core2D.UnitTests
         public void Shapes_Not_Null()
         {
             var target = new GroupShape();
-            Assert.NotNull(target.Shapes);
+            Assert.False(target.Shapes.IsDefault);
         }
 
         [Fact]
@@ -43,7 +43,8 @@ namespace Core2D.UnitTests
             point.Data.Properties = point.Data.Properties.Add(new Property());
             target.Connectors = target.Connectors.Add(point);
 
-            Assert.Equal(2, target.ShapesProperties.Length);
+            var length = target.ShapesProperties.Length;
+            Assert.Equal(2, length);
         }
 
         [Fact]
@@ -56,13 +57,15 @@ namespace Core2D.UnitTests
             shape1.Data.Properties = shape1.Data.Properties.Add(new Property());
             target.Shapes = target.Shapes.Add(shape1);
 
-            Assert.Equal(1, target.ShapesProperties.Length);
+            var length1 = target.ShapesProperties.Length;
+            Assert.Equal(1, length1);
 
             var shape2 = new Class1();
             shape2.Data.Properties = shape2.Data.Properties.Add(new Property());
             target.Shapes = target.Shapes.Add(shape2);
 
-            Assert.Equal(2, target.ShapesProperties.Length);
+            var length2 = target.ShapesProperties.Length;
+            Assert.Equal(2, length2);
         }
 
         [Fact]
@@ -79,7 +82,8 @@ namespace Core2D.UnitTests
             point.Data.Properties = point.Data.Properties.Add(new Property());
             target.Connectors = target.Connectors.Add(point);
 
-            Assert.Equal(3, target.GetPoints().Count());
+            var count = target.GetPoints().Count();
+            Assert.Equal(3, count);
         }
 
         [Fact]
@@ -94,7 +98,9 @@ namespace Core2D.UnitTests
             Assert.Equal(shape.Owner, target);
             Assert.False(shape.State.Flags.HasFlag(ShapeStateFlags.Standalone));
             Assert.Contains(shape, target.Shapes);
-            Assert.Equal(1, target.Shapes.Length);
+            
+            var length = target.Shapes.Length;
+            Assert.Equal(1, length);
         }
         
         [Fact]
@@ -115,14 +121,20 @@ namespace Core2D.UnitTests
 
             Assert.Contains(shape1, target.Shapes);
             Assert.Contains(shape2, target.Shapes);
-            Assert.Equal(2, target.Shapes.Length);
+            
+            var lengthShapes = target.Shapes.Length;
+            Assert.Equal(2, lengthShapes);
 
             Assert.Contains(point1, target.Connectors);
             Assert.Contains(point2, target.Connectors);
-            Assert.Equal(2, target.Connectors.Length);
+
+            var lengthConnectors = target.Connectors.Length;
+            Assert.Equal(2, lengthConnectors);
 
             Assert.Contains(target, source);
-            Assert.Equal(1, source.Count);
+
+            var count = source.Count;
+            Assert.Equal(1, count);
         }
 
         [Fact]
@@ -143,7 +155,9 @@ namespace Core2D.UnitTests
             Assert.Contains(shape2, source);
             Assert.Contains(point1, source);
             Assert.Contains(point2, source);
-            Assert.Equal(4, source.Count);
+
+            var count = source.Count;
+            Assert.Equal(4, count);
         }
 
         [Fact]
@@ -170,7 +184,9 @@ namespace Core2D.UnitTests
             Assert.Contains(point1, source);
             Assert.Contains(point2, source);
             Assert.Contains(point3, source);
-            Assert.Equal(4, source.Count);
+
+            var count = source.Count;
+            Assert.Equal(4, count);
 
             Assert.False(point1.State.Flags.HasFlag(ShapeStateFlags.Connector | ShapeStateFlags.None));
             Assert.False(point2.State.Flags.HasFlag(ShapeStateFlags.Connector | ShapeStateFlags.Input));
