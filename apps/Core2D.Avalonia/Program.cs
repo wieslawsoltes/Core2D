@@ -28,10 +28,6 @@ namespace Core2D.Avalonia
             {
                 InitializeLogging();
 
-                var fbdev = args.Contains("--fbdev");
-                var direct2d1 = args.Contains("--direct2d1");
-                var skia = args.Contains("--skia");
-
                 var builder = new ContainerBuilder();
 
                 builder.RegisterModule<LocatorModule>();
@@ -40,45 +36,22 @@ namespace Core2D.Avalonia
                 builder.RegisterModule<AppModule>();
                 builder.RegisterModule<ViewModule>();
 
-                if (fbdev == true)
+                using (IContainer container = builder.Build())
                 {
-                    IContainer container = builder.Build();
-                    var app = new App();
-                    AppBuilder.Configure(app)
-                        .InitializeWithLinuxFramebuffer(tl =>
-                        {
-                            tl.Content = app.CreateView(container.Resolve<IServiceProvider>());
-                            ThreadPool.QueueUserWorkItem(_ => ConsoleSilencer());
-                        });
-                }
-                else
-                {
-                    using (IContainer container = builder.Build())
+                    using (ILog log = container.Resolve<ILog>())
                     {
-                        using (ILog log = container.Resolve<ILog>())
-                        {
-                            var app = new App();
-                            var appBuilder = AppBuilder.Configure(app).UsePlatformDetect();
+                        var app = new App();
+                        var appBuilder = AppBuilder.Configure(app).UsePlatformDetect();
 
-                            if (direct2d1 == true)
-                            {
-                                appBuilder.UseDirect2D1();
-                            }
-                            else if (skia == true)
-                            {
-                                appBuilder.UseSkia();
-                            }
+                        appBuilder.SetupWithoutStarting();
 
-                            appBuilder.SetupWithoutStarting();
+                        var aboutInfo = app.CreateAboutInfo(
+                            appBuilder.RuntimePlatform.GetRuntimeInfo(),
+                            appBuilder.WindowingSubsystemName,
+                            appBuilder.RenderingSubsystemName);
+                        Debug.Write(aboutInfo);
 
-                            var aboutInfo = app.CreateAboutInfo(
-                                appBuilder.RuntimePlatform.GetRuntimeInfo(),
-                                appBuilder.WindowingSubsystemName,
-                                appBuilder.RenderingSubsystemName);
-                            Debug.Write(aboutInfo);
-
-                            app.Start(container.Resolve<IServiceProvider>(), aboutInfo);
-                        }
+                        app.Start(container.Resolve<IServiceProvider>(), aboutInfo);
                     }
                 }
             }
@@ -87,16 +60,6 @@ namespace Core2D.Avalonia
                 Console.WriteLine(ex.Message);
                 Console.WriteLine(ex.StackTrace);
             }
-        }
-
-        /// <summary>
-        /// Silence the console.
-        /// </summary>
-        static void ConsoleSilencer()
-        {
-            Console.CursorVisible = false;
-            while (true)
-                Console.ReadKey(true);
         }
 
         /// <summary>
