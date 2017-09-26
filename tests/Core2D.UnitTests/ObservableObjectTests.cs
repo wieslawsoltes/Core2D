@@ -46,7 +46,7 @@ namespace Core2D.UnitTests
             target.TestProperty = "Test";
 
             Assert.True(raised);
-            Assert.Equal(target.TestProperty, "Test");
+            Assert.Equal("Test", target.TestProperty);
         }
 
         [Fact]
