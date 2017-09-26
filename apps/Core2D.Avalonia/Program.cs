@@ -12,7 +12,7 @@ using Core2D.Avalonia.NetCore.Modules;
 using Core2D.Interfaces;
 using Serilog;
 
-namespace Core2D.Avalonia.NetCore
+namespace Core2D.Avalonia
 {
     /// <summary>
     /// Encapsulates an Avalonia program.
