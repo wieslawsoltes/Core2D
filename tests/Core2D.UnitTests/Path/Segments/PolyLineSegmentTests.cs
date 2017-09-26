@@ -14,7 +14,7 @@ namespace Core2D.UnitTests
         public void Points_Not_Null()
         {
             var target = new PolyLineSegment();
-            Assert.NotNull(target.Points);
+            Assert.False(target.Points.IsDefault);
         }
 
         [Fact]
@@ -29,8 +29,9 @@ namespace Core2D.UnitTests
             segment.Points = segment.Points.Add(new PointShape());
 
             var target = segment.GetPoints();
+            var count = target.Count();
 
-            Assert.Equal(5, target.Count());
+            Assert.Equal(5, count);
 
             Assert.Equal(segment.Points, target);
         }
