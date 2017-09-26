@@ -20,7 +20,7 @@ namespace Core2D.UnitTests
         public void Pages_Not_Null()
         {
             var target = new DocumentContainer();
-            Assert.NotNull(target.Pages);
+            Assert.False(target.Pages.IsDefault);
         }
     }
 }
