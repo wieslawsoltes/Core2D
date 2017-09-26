@@ -5,6 +5,7 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <RuntimeIdentifiers>win7-x64;ubuntu.14.04-x64;osx.10.12-x64</RuntimeIdentifiers>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <EnableDefaultCompileItems>False</EnableDefaultCompileItems>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -30,6 +31,18 @@
   <Import Project="..\..\build\SharpDX.props" />
 
   <ItemGroup>
+    <Compile Include="**\*.cs" Exclude="obj\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="**\*.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <EmbeddedResource Include="**\*.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\src\Core2D.Editor\Core2D.Editor.csproj" />
     <ProjectReference Include="..\..\src\Core2D\Core2D.csproj" />
     <ProjectReference Include="..\..\utilities\Core2D.FileSystem.DotNet\Core2D.FileSystem.DotNet.csproj" />
@@ -40,10 +53,10 @@
     <ProjectReference Include="..\..\utilities\Core2D.ScriptRunner.Roslyn\Core2D.ScriptRunner.Roslyn.csproj" />
     <ProjectReference Include="..\..\utilities\Core2D.Serializer.Newtonsoft\Core2D.Serializer.Newtonsoft.csproj" />
     <ProjectReference Include="..\..\utilities\Core2D.Serializer.Xaml\Core2D.Serializer.Xaml.csproj" />
+    <ProjectReference Include="..\..\utilities\Core2D.ServiceProvider.Autofac\Core2D.ServiceProvider.Autofac.csproj" />
     <ProjectReference Include="..\..\utilities\Core2D.TextFieldReader.CsvHelper\Core2D.TextFieldReader.CsvHelper.csproj" />
     <ProjectReference Include="..\..\utilities\Core2D.TextFieldWriter.CsvHelper\Core2D.TextFieldWriter.CsvHelper.csproj" />
     <ProjectReference Include="..\..\utilities\Core2D.Utilities.Avalonia\Core2D.Utilities.Avalonia.csproj" />
-    <ProjectReference Include="..\Core2D.Avalonia\Core2D.Avalonia.csproj" />
   </ItemGroup>
 
 </Project>
