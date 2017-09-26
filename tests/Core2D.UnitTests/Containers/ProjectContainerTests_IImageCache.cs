@@ -164,7 +164,7 @@ namespace Core2D.UnitTests
             target.AddImage(key, new byte[] { });
             target.RemoveImage(key);
 
-            Assert.Equal(0, target.Keys.Count());
+            Assert.Empty(target.Keys);
             Assert.Equal(2, count);
         }
 
@@ -192,7 +192,7 @@ namespace Core2D.UnitTests
 
             target.PurgeUnusedImages(used);
 
-            Assert.Equal(0, target.Keys.Count());
+            Assert.Empty(target.Keys);
             Assert.Equal(4, count);
         }
 
@@ -221,7 +221,7 @@ namespace Core2D.UnitTests
             target.PurgeUnusedImages(used);
 
             Assert.Equal(key2, target.Keys.First().Key);
-            Assert.Equal(1, target.Keys.Count());
+            Assert.Contains(key2, target.Keys);
             Assert.Equal(4, count);
         }
     }
