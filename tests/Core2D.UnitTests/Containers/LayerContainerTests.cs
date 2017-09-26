@@ -20,7 +20,7 @@ namespace Core2D.UnitTests
         public void Shapes_Not_Null()
         {
             var target = new LayerContainer();
-            Assert.NotNull(target.Shapes);
+            Assert.False(target.Shapes.IsDefault);
         }
 
         [Fact]
