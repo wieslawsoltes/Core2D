@@ -24,7 +24,7 @@ using Core2D.TextFieldReader.CsvHelper;
 using Core2D.TextFieldWriter.CsvHelper;
 using Core2D.Utilities.Avalonia;
 
-namespace Core2D.Avalonia.NetCore.Modules
+namespace Core2D.Avalonia.Modules
 {
     /// <summary>
     /// Dependencies components module.
