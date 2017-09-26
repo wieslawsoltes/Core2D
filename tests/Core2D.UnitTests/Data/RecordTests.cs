@@ -20,7 +20,7 @@ namespace Core2D.UnitTests
         public void Values_Not_Null()
         {
             var target = new Data.Record();
-            Assert.NotNull(target.Values);
+            Assert.False(target.Values.IsDefault);
         }
     }
 }
