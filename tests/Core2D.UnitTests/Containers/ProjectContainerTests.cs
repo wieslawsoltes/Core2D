@@ -31,7 +31,7 @@ namespace Core2D.UnitTests
         public void StyleLibraries_Not_Null()
         {
             var target = new ProjectContainer();
-            Assert.NotNull(target.StyleLibraries);
+            Assert.False(target.StyleLibraries.IsDefault);
         }
 
         [Fact]
@@ -39,7 +39,7 @@ namespace Core2D.UnitTests
         public void GroupLibraries_Not_Null()
         {
             var target = new ProjectContainer();
-            Assert.NotNull(target.GroupLibraries);
+            Assert.False(target.GroupLibraries.IsDefault);
         }
 
         [Fact]
@@ -47,7 +47,7 @@ namespace Core2D.UnitTests
         public void Databases_Not_Null()
         {
             var target = new ProjectContainer();
-            Assert.NotNull(target.Databases);
+            Assert.False(target.Databases.IsDefault);
         }
 
         [Fact]
@@ -55,7 +55,7 @@ namespace Core2D.UnitTests
         public void Templates_Not_Null()
         {
             var target = new ProjectContainer();
-            Assert.NotNull(target.Templates);
+            Assert.False(target.Templates.IsDefault);
         }
 
         [Fact]
@@ -63,7 +63,7 @@ namespace Core2D.UnitTests
         public void Documents_Not_Null()
         {
             var target = new ProjectContainer();
-            Assert.NotNull(target.Documents);
+            Assert.False(target.Documents.IsDefault);
         }
 
         [Fact]
