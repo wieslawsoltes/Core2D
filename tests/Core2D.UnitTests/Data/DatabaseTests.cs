@@ -21,7 +21,7 @@ namespace Core2D.UnitTests
         public void Columns_Not_Null()
         {
             var target = new Database();
-            Assert.NotNull(target.Columns);
+            Assert.False(target.Columns.IsDefault);
         }
 
         [Fact]
@@ -29,7 +29,7 @@ namespace Core2D.UnitTests
         public void Records_Not_Null()
         {
             var target = new Database();
-            Assert.NotNull(target.Records);
+            Assert.False(target.Records.IsDefault);
         }
 
         [Fact]
