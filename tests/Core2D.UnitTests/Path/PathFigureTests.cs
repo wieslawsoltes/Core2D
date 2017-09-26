@@ -24,7 +24,7 @@ namespace Core2D.UnitTests
         public void Segments_Not_Null()
         {
             var target = new PathFigure();
-            Assert.NotNull(target.Segments);
+            Assert.False(target.Segments.IsDefault);
         }
 
         [Fact]
