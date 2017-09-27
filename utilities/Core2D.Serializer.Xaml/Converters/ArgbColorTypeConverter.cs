@@ -2,11 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Globalization;
-#if NETSTANDARD2_0 || NETCOREAPP2_0
 using System.ComponentModel;
-#else
-using Portable.Xaml.ComponentModel;
-#endif
 using Core2D.Style;
 
 namespace Core2D.Serializer.Xaml.Converters
