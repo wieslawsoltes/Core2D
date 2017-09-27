@@ -25,7 +25,7 @@ namespace Core2D.Wpf.Commands
             {
                 var dlg = new OpenFileDialog()
                 {
-                    Filter = "Json (*.json)|*.json|Xaml (*.xaml)|*.xaml",
+                    Filter = "Json (*.json)|*.json",
                     Multiselect = true,
                     FilterIndex = 0
                 };
@@ -41,9 +41,6 @@ namespace Core2D.Wpf.Commands
                         {
                             case 1:
                                 ServiceProvider.GetService<ProjectEditor>().OnImportJson(result);
-                                break;
-                            case 2:
-                                ServiceProvider.GetService<ProjectEditor>().OnImportXaml(result);
                                 break;
                             default:
                                 break;

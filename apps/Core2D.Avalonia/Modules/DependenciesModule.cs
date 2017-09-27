@@ -19,7 +19,6 @@ using Core2D.Renderer;
 using Core2D.Renderer.Avalonia;
 using Core2D.ScriptRunner.Roslyn;
 using Core2D.Serializer.Newtonsoft;
-using Core2D.Serializer.Xaml;
 using Core2D.TextFieldReader.CsvHelper;
 using Core2D.TextFieldWriter.CsvHelper;
 using Core2D.Utilities.Avalonia;
@@ -40,7 +39,6 @@ namespace Core2D.Avalonia.Modules
             builder.RegisterType<DotNetFileSystem>().As<IFileSystem>().InstancePerLifetimeScope();
             builder.RegisterType<RoslynScriptRunner>().As<IScriptRunner>().InstancePerLifetimeScope();
             builder.RegisterType<NewtonsoftJsonSerializer>().As<IJsonSerializer>().InstancePerLifetimeScope();
-            builder.RegisterType<PortableXamlSerializer>().As<IXamlSerializer>().InstancePerLifetimeScope();
             builder.RegisterType<BmpSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
             builder.RegisterType<GifSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
             builder.RegisterType<IcoSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();

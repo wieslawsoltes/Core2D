@@ -89,11 +89,6 @@ namespace Core2D.Editor
         public const string CsvExtension = ".csv";
 
         /// <summary>
-        /// Xaml file extension.
-        /// </summary>
-        public const string XamlExtension = ".xaml";
-
-        /// <summary>
         /// Json file extension.
         /// </summary>
         public const string JsonExtension = ".json";

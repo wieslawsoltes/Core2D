@@ -26,7 +26,6 @@ namespace Core2D.Avalonia.Commands
             {
                 var dlg = new SaveFileDialog();
                 dlg.Filters.Add(new FileDialogFilter() { Name = "Json", Extensions = { "json" } });
-                dlg.Filters.Add(new FileDialogFilter() { Name = "Xaml", Extensions = { "xaml" } });
                 dlg.InitialFileName = editor?.GetName(item);
                 dlg.DefaultExtension = "json";
                 var path = await dlg.ShowAsync(ServiceProvider.GetService<MainWindow>());
@@ -36,10 +35,6 @@ namespace Core2D.Avalonia.Commands
                     if (string.Compare(resultExtension, ".json", StringComparison.OrdinalIgnoreCase) == 0)
                     {
                         editor.OnExportJson(path, item);
-                    }
-                    else if (string.Compare(resultExtension, ".xaml", StringComparison.OrdinalIgnoreCase) == 0)
-                    {
-                        editor.OnExportXaml(path, item);
                     }
                 }
             }

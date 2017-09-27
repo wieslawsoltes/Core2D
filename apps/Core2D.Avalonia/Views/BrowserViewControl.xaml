@@ -290,18 +290,6 @@
                 <TabItem Header="Properties" Classes="property">
                     <ContentControl Content="{Binding #project.SelectedItem, Converter={Static converters:TreeViewSelectedItemToObjectConverter.Instance}}" Classes="project" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                 </TabItem>
-                <TabItem Header="Xaml" Classes="property">
-                    <TextBox DataContext="{Binding #project.SelectedItem, Converter={Static converters:TreeViewSelectedItemToObjectConverter.Instance}}" Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToXamlStringConverter.Instance}}" Classes="project" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                        <TextBox.KeyBindings>
-                            <KeyBinding Command="{Static Editor:ProjectEditorCommands.ExportXamlCommand}" CommandParameter="{Binding}" Gesture="Ctrl+E"/>
-                        </TextBox.KeyBindings>
-                        <TextBox.ContextMenu>
-                            <ContextMenu Classes="default">
-                                <MenuItem Header="E_xport" Command="{Static Editor:ProjectEditorCommands.ExportXamlCommand}" CommandParameter="{Binding}"/>
-                            </ContextMenu>
-                        </TextBox.ContextMenu>
-                    </TextBox>
-                </TabItem>
                 <TabItem Header="Json" Classes="property">
                     <TextBox DataContext="{Binding #project.SelectedItem, Converter={Static converters:TreeViewSelectedItemToObjectConverter.Instance}}" Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToJsonStringConverter.Instance}}" Classes="project" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <TextBox.KeyBindings>

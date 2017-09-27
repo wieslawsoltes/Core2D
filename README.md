@@ -21,9 +21,8 @@ Core2D is a multi-platform application for making data driven 2D diagrams.
 
 * The project models is stored as `Json` in `zip` archive.
 * The project images are stored  as files in `zip` archive.
-* Resources are defined as `Json` or `Xaml`.
-* The `Json` format is supported for imported and exported resources. 
-* The `Xaml` format is supported for imported and exported resources. 
+* Resources are defined as `Json`.
+* The `Json` format is supported for imported and exported resources.
 * Database records are imported, exported and updated as `csv`.
 * The clipboard data is stored as `Json` string.
 
@@ -136,7 +135,6 @@ You can install the package like this:
 * [Core2D.Renderer.Wpf](https://www.nuget.org/packages/Core2D.Renderer.Wpf)
 * [Core2D.ScriptRunner.Roslyn](https://www.nuget.org/packages/Core2D.ScriptRunner.Roslyn)
 * [Core2D.Serializer.Newtonsoft](https://www.nuget.org/packages/Core2D.Serializer.Newtonsoft)
-* [Core2D.Serializer.Xaml](https://www.nuget.org/packages/Core2D.Serializer.Xaml)
 * [Core2D.ServiceProvider.Autofac](https://www.nuget.org/packages/Core2D.ServiceProvider.Autofac)
 * [Core2D.TextFieldReader.CsvHelper](https://www.nuget.org/packages/Core2D.TextFieldReader.CsvHelper)
 * [Core2D.TextFieldWriter.CsvHelper](https://www.nuget.org/packages/Core2D.TextFieldWriter.CsvHelper)
@@ -149,7 +147,6 @@ You can install the package like this:
 * https://www.myget.org/F/avalonia-ci/api/v2
 * https://www.myget.org/F/xamlbehaviors-nightly/api/v2
 * https://www.myget.org/F/panandzoom-nightly/api/v2
-* https://ci.appveyor.com/nuget/portable-xaml
 
 ## SkiaSharp
 

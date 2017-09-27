@@ -25,7 +25,7 @@ namespace Core2D.Wpf.Commands
             {
                 var dlg = new SaveFileDialog()
                 {
-                    Filter = "Json (*.json)|*.json|Xaml (*.xaml)|*.xaml",
+                    Filter = "Json (*.json)|*.json",
                     FilterIndex = 0,
                     FileName = editor.GetName(item)
                 };
@@ -36,9 +36,6 @@ namespace Core2D.Wpf.Commands
                     {
                         case 1:
                             editor.OnExportJson(dlg.FileName, item);
-                            break;
-                        case 2:
-                            editor.OnExportXaml(dlg.FileName, item);
                             break;
                         default:
                             break;

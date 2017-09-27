@@ -80,10 +80,8 @@
     <Compile Include="Commands\File\ExportCommand.cs" />
     <Compile Include="Commands\File\Export\ExportJsonCommand.cs" />
     <Compile Include="Commands\File\Export\ExportObjectCommand.cs" />
-    <Compile Include="Commands\File\Export\ExportXamlCommand.cs" />
     <Compile Include="Commands\File\Import\ImportJsonCommand.cs" />
     <Compile Include="Commands\File\Import\ImportObjectCommand.cs" />
-    <Compile Include="Commands\File\Import\ImportXamlCommand.cs" />
     <Compile Include="Commands\File\OpenCommand.cs" />
     <Compile Include="Commands\File\SaveAsCommand.cs" />
     <Compile Include="Commands\File\SaveCommand.cs" />
@@ -619,10 +617,6 @@
     <ProjectReference Include="..\..\utilities\Core2D.Serializer.Newtonsoft\Core2D.Serializer.Newtonsoft.csproj">
       <Project>{11E61A53-13D5-4447-8D66-3F328BBFC30A}</Project>
       <Name>Core2D.Serializer.Newtonsoft</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\utilities\Core2D.Serializer.Xaml\Core2D.Serializer.Xaml.csproj">
-      <Project>{1DCA99EA-F8FE-4DDD-AB81-BF0380C1B33D}</Project>
-      <Name>Core2D.Serializer.Xaml</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\utilities\Core2D.ServiceProvider.Autofac\Core2D.ServiceProvider.Autofac.csproj">
       <Project>{7D5D7DF6-058D-4F2E-A3A8-47F89B6E2E7C}</Project>

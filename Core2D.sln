@@ -37,8 +37,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Renderer.Wpf", "util
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Serializer.Newtonsoft", "utilities\Core2D.Serializer.Newtonsoft\Core2D.Serializer.Newtonsoft.csproj", "{11E61A53-13D5-4447-8D66-3F328BBFC30A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Serializer.Xaml", "utilities\Core2D.Serializer.Xaml\Core2D.Serializer.Xaml.csproj", "{1DCA99EA-F8FE-4DDD-AB81-BF0380C1B33D}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.ServiceProvider.Autofac", "utilities\Core2D.ServiceProvider.Autofac\Core2D.ServiceProvider.Autofac.csproj", "{7D5D7DF6-058D-4F2E-A3A8-47F89B6E2E7C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.ScriptRunner.Roslyn", "utilities\Core2D.ScriptRunner.Roslyn\Core2D.ScriptRunner.Roslyn.csproj", "{352C23CD-8A6D-4C91-9FD2-FC35ECBC8AFE}"
@@ -79,7 +77,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "props", "props", "{3C45CABF
 		build\Newtonsoft.Json.props = build\Newtonsoft.Json.props
 		build\NuGet.props = build\NuGet.props
 		build\PDFsharp.props = build\PDFsharp.props
-		build\Portable.Xaml.props = build\Portable.Xaml.props
 		build\Roslyn.props = build\Roslyn.props
 		build\Rx.props = build\Rx.props
 		build\SharpDX.props = build\SharpDX.props
@@ -164,10 +161,6 @@ Global
 		{11E61A53-13D5-4447-8D66-3F328BBFC30A}.Debug|AnyCPU.Build.0 = Debug|Any CPU
 		{11E61A53-13D5-4447-8D66-3F328BBFC30A}.Release|AnyCPU.ActiveCfg = Release|Any CPU
 		{11E61A53-13D5-4447-8D66-3F328BBFC30A}.Release|AnyCPU.Build.0 = Release|Any CPU
-		{1DCA99EA-F8FE-4DDD-AB81-BF0380C1B33D}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
-		{1DCA99EA-F8FE-4DDD-AB81-BF0380C1B33D}.Debug|AnyCPU.Build.0 = Debug|Any CPU
-		{1DCA99EA-F8FE-4DDD-AB81-BF0380C1B33D}.Release|AnyCPU.ActiveCfg = Release|Any CPU
-		{1DCA99EA-F8FE-4DDD-AB81-BF0380C1B33D}.Release|AnyCPU.Build.0 = Release|Any CPU
 		{7D5D7DF6-058D-4F2E-A3A8-47F89B6E2E7C}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
 		{7D5D7DF6-058D-4F2E-A3A8-47F89B6E2E7C}.Debug|AnyCPU.Build.0 = Debug|Any CPU
 		{7D5D7DF6-058D-4F2E-A3A8-47F89B6E2E7C}.Release|AnyCPU.ActiveCfg = Release|Any CPU
@@ -229,7 +222,6 @@ Global
 		{3DC476E6-5032-4888-9337-221B88653C40} = {02F7371B-FFDA-46ED-B5FE-9D643EA3354A}
 		{3BFBD239-8979-480D-B1CB-B763F7C915C8} = {02F7371B-FFDA-46ED-B5FE-9D643EA3354A}
 		{11E61A53-13D5-4447-8D66-3F328BBFC30A} = {02F7371B-FFDA-46ED-B5FE-9D643EA3354A}
-		{1DCA99EA-F8FE-4DDD-AB81-BF0380C1B33D} = {02F7371B-FFDA-46ED-B5FE-9D643EA3354A}
 		{7D5D7DF6-058D-4F2E-A3A8-47F89B6E2E7C} = {02F7371B-FFDA-46ED-B5FE-9D643EA3354A}
 		{352C23CD-8A6D-4C91-9FD2-FC35ECBC8AFE} = {02F7371B-FFDA-46ED-B5FE-9D643EA3354A}
 		{F215ADF5-74C1-4E26-9045-B6BBDA736092} = {02F7371B-FFDA-46ED-B5FE-9D643EA3354A}
