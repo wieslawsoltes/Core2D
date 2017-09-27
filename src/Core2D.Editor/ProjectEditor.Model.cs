@@ -48,7 +48,6 @@ namespace Core2D.Editor
         private readonly Lazy<IShapeFactory> _shapeFactory;
         private readonly Lazy<ITextClipboard> _textClipboard;
         private readonly Lazy<IJsonSerializer> _jsonSerializer;
-        private readonly Lazy<IXamlSerializer> _xamlSerializer;
         private readonly Lazy<ImmutableArray<IFileWriter>> _fileWriters;
         private readonly Lazy<ITextFieldReader<Database>> _csvReader;
         private readonly Lazy<ITextFieldWriter<Database>> _csvWriter;
@@ -270,11 +269,6 @@ namespace Core2D.Editor
         public IJsonSerializer JsonSerializer => _jsonSerializer.Value;
 
         /// <summary>
-        /// Gets Xaml serializer.
-        /// </summary>
-        public IXamlSerializer XamlSerializer => _xamlSerializer.Value;
-
-        /// <summary>
         /// Gets available file writers.
         /// </summary>
         public ImmutableArray<IFileWriter> FileWriters => _fileWriters.Value;
@@ -319,7 +313,6 @@ namespace Core2D.Editor
             _shapeFactory = _serviceProvider.GetServiceLazily<IShapeFactory>();
             _textClipboard = _serviceProvider.GetServiceLazily<ITextClipboard>();
             _jsonSerializer = _serviceProvider.GetServiceLazily<IJsonSerializer>();
-            _xamlSerializer = _serviceProvider.GetServiceLazily<IXamlSerializer>();
             _fileWriters = _serviceProvider.GetServiceLazily<IFileWriter[], ImmutableArray<IFileWriter>>((writers) => writers.ToImmutableArray());
             _csvReader = _serviceProvider.GetServiceLazily<ITextFieldReader<Database>>();
             _csvWriter = _serviceProvider.GetServiceLazily<ITextFieldWriter<Database>>();

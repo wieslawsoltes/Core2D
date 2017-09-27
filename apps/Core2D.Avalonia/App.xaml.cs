@@ -57,7 +57,6 @@ namespace Core2D.Avalonia
         /// <param name="serviceProvider">The service provider.</param>
         public static void InitializeConverters(IServiceProvider serviceProvider)
         {
-            ObjectToXamlStringConverter.XamlSerializer = serviceProvider.GetServiceLazily<IXamlSerializer>();
             ObjectToJsonStringConverter.JsonSerializer = serviceProvider.GetServiceLazily<IJsonSerializer>();
         }
 

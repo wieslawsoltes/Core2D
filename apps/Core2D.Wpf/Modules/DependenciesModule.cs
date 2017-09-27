@@ -22,7 +22,6 @@ using Core2D.Renderer;
 using Core2D.Renderer.Wpf;
 using Core2D.ScriptRunner.Roslyn;
 using Core2D.Serializer.Newtonsoft;
-using Core2D.Serializer.Xaml;
 using Core2D.TextFieldReader.CsvHelper;
 using Core2D.TextFieldWriter.CsvHelper;
 using Core2D.Utilities.Wpf;
@@ -41,7 +40,6 @@ namespace Core2D.Wpf.Modules
             builder.RegisterType<DotNetFileSystem>().As<IFileSystem>().InstancePerLifetimeScope();
             builder.RegisterType<RoslynScriptRunner>().As<IScriptRunner>().InstancePerLifetimeScope();
             builder.RegisterType<NewtonsoftJsonSerializer>().As<IJsonSerializer>().InstancePerLifetimeScope();
-            builder.RegisterType<PortableXamlSerializer>().As<IXamlSerializer>().InstancePerLifetimeScope();
             builder.RegisterType<PdfSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
             builder.RegisterType<BmpSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
             builder.RegisterType<GifSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();

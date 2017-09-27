@@ -515,60 +515,6 @@ namespace Core2D.Editor
         }
 
         /// <summary>
-        /// Import Xaml from a file.
-        /// </summary>
-        /// <param name="path">The xaml file path.</param>
-        public void OnImportXaml(string path)
-        {
-            try
-            {
-                var xaml = FileIO?.ReadUtf8Text(path);
-                if (!string.IsNullOrWhiteSpace(xaml))
-                {
-                    OnImportXamlString(xaml);
-                }
-            }
-            catch (Exception ex)
-            {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
-            }
-        }
-
-        /// <summary>
-        /// Import Xaml string.
-        /// </summary>
-        /// <param name="xaml">The xaml string.</param>
-        public void OnImportXamlString(string xaml)
-        {
-            var item = XamlSerializer?.Deserialize<object>(xaml);
-            if (item != null)
-            {
-                OnImportObject(item, false);
-            }
-        }
-
-        /// <summary>
-        /// Export Xaml to a file.
-        /// </summary>
-        /// <param name="path">The xaml file path.</param>
-        /// <param name="item">The object item.</param>
-        public void OnExportXaml(string path, object item)
-        {
-            try
-            {
-                var xaml = XamlSerializer?.Serialize(item);
-                if (!string.IsNullOrWhiteSpace(xaml))
-                {
-                    FileIO?.WriteUtf8Text(path, xaml);
-                }
-            }
-            catch (Exception ex)
-            {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
-            }
-        }
-
-        /// <summary>
         /// Import Json from a file.
         /// </summary>
         /// <param name="path">The json file path.</param>
@@ -2165,20 +2111,6 @@ namespace Core2D.Editor
                     exception = ex;
                 }
 
-                // Try to deserialize Xaml.
-                try
-                {
-                    if (XamlSerializer != null)
-                    {
-                        OnImportXamlString(text);
-                        return;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    exception = ex;
-                }
-
                 // Try to deserialize Json.
                 try
                 {
@@ -2500,11 +2432,6 @@ namespace Core2D.Editor
                         else if (string.Compare(ext, Constants.JsonExtension, StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             OnImportJson(path);
-                            result = true;
-                        }
-                        else if (string.Compare(ext, Constants.XamlExtension, StringComparison.OrdinalIgnoreCase) == 0)
-                        {
-                            OnImportXaml(path);
                             result = true;
                         }
                     }
