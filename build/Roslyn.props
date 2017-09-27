@@ -5,7 +5,7 @@
     <PackageReference Include="System.Composition.Convention" Version="1.1.0" />
     <PackageReference Include="System.Composition.Hosting" Version="1.1.0" />
   </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard1.3'">
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
     <PackageReference Include="System.Runtime.Loader" Version="4.3.0" />
   </ItemGroup>
 </Project>

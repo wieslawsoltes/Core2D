@@ -93,7 +93,7 @@ namespace Core2D.ScriptRunner.Roslyn
                     Assembly assembly = null;
 #if NET461
                     assembly = Assembly.Load(ms.GetBuffer());
-#elif NETCOREAPP1_1
+#elif NETCOREAPP2_0
                     assembly = System.Runtime.Loader.AssemblyLoadContext.Default.LoadFromStream(ms);
 #endif
                     if (assembly != null)
