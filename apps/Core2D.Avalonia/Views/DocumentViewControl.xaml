@@ -34,7 +34,7 @@
                     </DataTemplate>
                 </TabStrip.DataTemplates>
             </TabStrip>
-            <Grid Background="{StyleResource ThemeBorderMidBrush}" Height="2"/>
+            <Grid Background="{DynamicResource ThemeBorderMidBrush}" Height="2"/>
         </StackPanel>
         <ScrollViewer>
             <Carousel Items="{Binding Project.Documents}" SelectedIndex="{Binding #documents.SelectedIndex}" IsVirtualized="False" VerticalAlignment="Center" Margin="2">
