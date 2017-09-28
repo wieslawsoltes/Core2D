@@ -114,7 +114,7 @@
                     <ad:LayoutDocumentPaneGroup Orientation="Horizontal">
                         <ad:LayoutDocumentPane ShowHeader="False">
                             <ad:LayoutDocument x:Name="canvasWindow" CanClose="False" ContentId="canvas" Title="{x:Static p:Resources.WindowTitleCanvas}">
-                                <custom:ZoomBorder x:Name="zoomBorder" Stretch="None" ZoomSpeed="1.2" PanButton="Left" EnableInput="{Binding IsToolIdle}" Background="{StaticResource TemplateCheckerBoard}" ClipToBounds="False" BorderBrush="{x:Null}" BorderThickness="0" FocusVisualStyle="{x:Null}" Focusable="True" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                <custom:ZoomBorder x:Name="zoomBorder" Stretch="None" ZoomSpeed="1.2" PanButton="Left" EnableInput="{Binding IsToolIdle}" Background="{DynamicResource TemplateCheckerBoard}" ClipToBounds="False" BorderBrush="{x:Null}" BorderThickness="0" FocusVisualStyle="{x:Null}" Focusable="True" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                                     <custom:ZoomBorder.InputBindings>
                                         <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.DeleteCommand}" CommandParameter="{Binding}" Key="Delete" Modifiers=""/>
                                         <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.DeselectAllCommand}" Key="Esc" Modifiers=""/>
