@@ -36,38 +36,13 @@ var configuration = Argument("configuration", "Release");
 var isPlatformAnyCPU = StringComparer.OrdinalIgnoreCase.Equals(platform, "AnyCPU");
 var isPlatformX86 = StringComparer.OrdinalIgnoreCase.Equals(platform, "x86");
 var isPlatformX64 = StringComparer.OrdinalIgnoreCase.Equals(platform, "x64");
-var isPullRequest = BuildSystem.AppVeyor.Environment.PullRequest.IsPullRequest;
-var isMasterBranch = StringComparer.OrdinalIgnoreCase.Equals("master", BuildSystem.AppVeyor.Environment.Repository.Branch);
 
 ///////////////////////////////////////////////////////////////////////////////
 // VERSION
 ///////////////////////////////////////////////////////////////////////////////
 
-var version = XmlPeek("./build/NuGet.props", "//*[local-name()='Version']/text()").Replace("$(VersionSuffix)", "");
-var suffix = "";
-var publishNuGet = false;
-var publishMyGet = false;
-
-if (BuildSystem.AppVeyor.IsRunningOnAppVeyor)
-{
-    var isTag = BuildSystem.AppVeyor.Environment.Repository.Tag.IsTag;
-    var haveTag = !string.IsNullOrWhiteSpace(BuildSystem.AppVeyor.Environment.Repository.Tag.Name);
-    var tagName = BuildSystem.AppVeyor.Environment.Repository.Tag.Name;
-    var buildNumber = EnvironmentVariable("APPVEYOR_BUILD_NUMBER");
-
-    if (isTag && haveTag)
-    {
-        version = tagName;
-        suffix = "";
-        publishNuGet = !isPullRequest && isMasterBranch;
-    }
-    else
-    {
-        suffix = "-build" + buildNumber;
-        version += suffix;
-        publishMyGet = !isPullRequest && isMasterBranch;
-    }
-}
+var suffix = BuildSystem.AppVeyor.IsRunningOnAppVeyor ? "-build" + EnvironmentVariable("APPVEYOR_BUILD_NUMBER") : "";
+var version = XmlPeek("./build/NuGet.props", "//*[local-name()='Version']/text()") + suffix;
 
 Information("Version: {0}", version);
 
@@ -126,20 +101,15 @@ var buildDirs =
     GetDirectories("./tests/**/obj/**") + 
     GetDirectories("./apps/**/bin/**") + 
     GetDirectories("./apps/**/obj/**");
-
 var artifactsDir = (DirectoryPath)Directory("./artifacts");
 var testResultsDir = artifactsDir.Combine("test-results");	
 var zipRootDir = artifactsDir.Combine("zip");
 var nugetRootDir = artifactsDir.Combine("nuget");
-
 var dirSuffixZip = platform + "/" + configuration;
 var fileZipSuffix = version + ".zip";
-
 var zipTargetNuGetFile = zipRootDir.CombineWithFilePath("Core2D-NuGet-Packages-" + fileZipSuffix);
-
 var zipSourceWpfDir = (DirectoryPath)Directory("./apps/Core2D.Wpf/bin/" + dirSuffixZip);
 var zipTargetWpfFile = zipRootDir.CombineWithFilePath("Core2D.Wpf-" + fileZipSuffix);
-
 var msvcp140_x86 = @"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.11.25325\x86\Microsoft.VC141.CRT\msvcp140.dll";
 var msvcp140_x64 = @"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.11.25325\x64\Microsoft.VC141.CRT\msvcp140.dll";
 var vcruntime140_x86 = @"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.11.25325\x86\Microsoft.VC141.CRT\vcruntime140.dll";
@@ -196,7 +166,6 @@ Task("Build")
         settings.UseToolVersion(MSBuildToolVersion.VS2017);
         settings.SetConfiguration(configuration);
         settings.WithProperty("Platform", platform);
-        settings.WithProperty("VersionSuffix", suffix);
         settings.SetVerbosity(Verbosity.Minimal);
     });
 });
@@ -224,7 +193,6 @@ Task("Run-Unit-Tests")
 
 Task("Copy-Redist-Files")
     .IsDependentOn("Run-Unit-Tests")
-    .WithCriteria(() => !isPullRequest)
     .Does(() =>
 {
     if (IsRunningOnWindows() && (isPlatformAnyCPU || isPlatformX86 || isPlatformX64))
@@ -239,7 +207,6 @@ Task("Copy-Redist-Files")
 
 Task("Zip-Files")
     .IsDependentOn("Run-Unit-Tests")
-    .WithCriteria(() => !isPullRequest)
     .Does(() =>
 {
     Zip(zipSourceWpfDir.FullPath, zipTargetWpfFile);
@@ -285,15 +252,13 @@ Task("Build-NetCore")
     {
         Information("Building: {0}", project.Name);
         DotNetCoreBuild(project.Path, new DotNetCoreBuildSettings {
-            Configuration = configuration,
-            VersionSuffix = suffix
+            Configuration = configuration
         });
     }
 });
 
 Task("Publish-NetCore")
     .IsDependentOn("Restore-NetCore")
-    .WithCriteria(() => !isPullRequest)
     .Does(() =>
 {
     foreach (var project in netCoreProjects)
@@ -305,7 +270,6 @@ Task("Publish-NetCore")
             DotNetCorePublish(project.Path, new DotNetCorePublishSettings {
                 Framework = project.Framework,
                 Configuration = configuration,
-                VersionSuffix = suffix,
                 Runtime = runtime,
                 OutputDirectory = outputDir.FullPath
             });
@@ -325,7 +289,6 @@ Task("Publish-NetCore")
 
 Task("Copy-Redist-Files-NetCore")
     .IsDependentOn("Publish-NetCore")
-    .WithCriteria(() => !isPullRequest)
     .Does(() =>
 {
     foreach (var project in netCoreProjects)
@@ -351,7 +314,6 @@ Task("Copy-Redist-Files-NetCore")
 
 Task("Zip-Files-NetCore")
     .IsDependentOn("Publish-NetCore")
-    .WithCriteria(() => !isPullRequest)
     .Does(() =>
 {
     foreach (var project in netCoreProjects)
@@ -367,114 +329,14 @@ Task("Zip-Files-NetCore")
 });
 
 ///////////////////////////////////////////////////////////////////////////////
-// TASKS: NuGet
-///////////////////////////////////////////////////////////////////////////////
-
-Task("Create-NuGet-Packages")
-    .IsDependentOn("Run-Unit-Tests")
-    .IsDependentOn("Run-Unit-Tests-NetCore")
-    .WithCriteria(() => !isPullRequest)
-    .Does(() =>
-{
-    var projects = GetFiles("./src/**/*.csproj") + 
-                   GetFiles("./utilities/**/*.csproj");
-
-    // Workaround for: https://github.com/NuGet/Home/issues/4337
-
-    foreach(var project in projects)
-    {
-        Information("Restore & Pack : {0}", project);
-        MSBuild(project.FullPath, settings => {
-            settings.UseToolVersion(MSBuildToolVersion.VS2017);
-            settings.SetConfiguration(configuration);
-            settings.WithProperty("Platform", platform);
-            settings.WithProperty("VersionSuffix", suffix);
-            settings.WithProperty("PackageOutputPath", MakeAbsolute(nugetRootDir).FullPath);
-            settings.WithTarget("Restore");
-            settings.WithTarget("Pack");
-            settings.SetVerbosity(Verbosity.Minimal);
-        });   
-    }
-
-    //foreach(var project in projects)
-    //{
-    //    Information("Pack: {0}", project);
-    //    DotNetCorePack(project.FullPath, new DotNetCorePackSettings {
-    //        Configuration = configuration,
-    //        VersionSuffix = suffix,
-    //        OutputDirectory = nugetRootDir
-    //    });
-    //}
-});
-
-Task("Publish-MyGet")
-    .IsDependentOn("Create-NuGet-Packages")
-    .WithCriteria(() => publishMyGet)
-    .WithCriteria(() => !isPullRequest)
-    .Does(() =>
-{
-    var apiKey = EnvironmentVariable("MYGET_API_KEY");
-    if(string.IsNullOrEmpty(apiKey)) 
-    {
-        throw new InvalidOperationException("Could not resolve MyGet API key.");
-    }
-
-    var apiUrl = EnvironmentVariable("MYGET_API_URL");
-    if(string.IsNullOrEmpty(apiUrl)) 
-    {
-        throw new InvalidOperationException("Could not resolve MyGet API url.");
-    }
-
-    foreach(var nupkg in GetFiles(nugetRootDir.FullPath + "/*.nupkg"))
-    {
-        NuGetPush(nupkg, new NuGetPushSettings {
-            Source = apiUrl,
-            ApiKey = apiKey
-        });
-    }
-});
-
-Task("Publish-NuGet")
-    .IsDependentOn("Create-NuGet-Packages")
-    .WithCriteria(() => publishNuGet)
-    .WithCriteria(() => !isPullRequest)
-    .Does(() =>
-{
-    var apiKey = EnvironmentVariable("NUGET_API_KEY");
-    if(string.IsNullOrEmpty(apiKey)) 
-    {
-        throw new InvalidOperationException("Could not resolve NuGet API key.");
-    }
-
-    var apiUrl = EnvironmentVariable("NUGET_API_URL");
-    if(string.IsNullOrEmpty(apiUrl)) 
-    {
-        throw new InvalidOperationException("Could not resolve NuGet API url.");
-    }
-
-    foreach(var nupkg in GetFiles(nugetRootDir.FullPath + "/*.nupkg"))
-    {
-        NuGetPush(nupkg, new NuGetPushSettings {
-            ApiKey = apiKey,
-            Source = apiUrl
-        });
-    }
-});
-
-Task("Zip-Files-NuGet")
-    .IsDependentOn("Create-NuGet-Packages")
-    .WithCriteria(() => !isPullRequest)
-    .Does(() =>
-{
-    Zip(nugetRootDir.FullPath, zipTargetNuGetFile);
-});
-
-///////////////////////////////////////////////////////////////////////////////
 // TARGETS
 ///////////////////////////////////////////////////////////////////////////////
 
 Task("Package")
-  .IsDependentOn("Create-NuGet-Packages");
+  .IsDependentOn("Copy-Redist-Files-NetCore")
+  .IsDependentOn("Zip-Files-NetCore")
+  .IsDependentOn("Copy-Redist-Files")
+  .IsDependentOn("Zip-Files");
 
 Task("Default")
   .IsDependentOn("Run-Unit-Tests");
@@ -487,10 +349,7 @@ Task("AppVeyor")
   .IsDependentOn("Zip-Files-NetCore")
   .IsDependentOn("Run-Unit-Tests")
   .IsDependentOn("Copy-Redist-Files")
-  .IsDependentOn("Zip-Files")
-  .IsDependentOn("Zip-Files-NuGet")
-  .IsDependentOn("Publish-MyGet")
-  .IsDependentOn("Publish-NuGet");
+  .IsDependentOn("Zip-Files");
 
 Task("Travis")
   .IsDependentOn("Run-Unit-Tests-NetCore")
