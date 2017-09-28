@@ -104,10 +104,8 @@ var buildDirs =
 var artifactsDir = (DirectoryPath)Directory("./artifacts");
 var testResultsDir = artifactsDir.Combine("test-results");	
 var zipRootDir = artifactsDir.Combine("zip");
-var nugetRootDir = artifactsDir.Combine("nuget");
 var dirSuffixZip = platform + "/" + configuration;
 var fileZipSuffix = version + ".zip";
-var zipTargetNuGetFile = zipRootDir.CombineWithFilePath("Core2D-NuGet-Packages-" + fileZipSuffix);
 var zipSourceWpfDir = (DirectoryPath)Directory("./apps/Core2D.Wpf/bin/" + dirSuffixZip);
 var zipTargetWpfFile = zipRootDir.CombineWithFilePath("Core2D.Wpf-" + fileZipSuffix);
 var msvcp140_x86 = @"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.11.25325\x86\Microsoft.VC141.CRT\msvcp140.dll";
@@ -126,7 +124,6 @@ Task("Clean")
     CleanDirectories(buildDirs);
     CleanDirectory(testResultsDir);
     CleanDirectory(zipRootDir);
-    CleanDirectory(nugetRootDir);
 });
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -353,9 +350,7 @@ Task("AppVeyor")
 
 Task("Travis")
   .IsDependentOn("Run-Unit-Tests-NetCore")
-  .IsDependentOn("Build-NetCore")
-  .IsDependentOn("Publish-NetCore")
-  .IsDependentOn("Zip-Files-NetCore");
+  .IsDependentOn("Build-NetCore");
 
 ///////////////////////////////////////////////////////////////////////////////
 // EXECUTE
