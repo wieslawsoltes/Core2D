@@ -6,9 +6,6 @@
 [![Build Status](https://travis-ci.org/wieslawsoltes/Core2D.svg?branch=master)](https://travis-ci.org/wieslawsoltes/Core2D)
 [![CircleCI](https://circleci.com/gh/wieslawsoltes/Core2D/tree/master.svg?style=svg)](https://circleci.com/gh/wieslawsoltes/Core2D/tree/master)
 
-[![NuGet](https://img.shields.io/nuget/v/Core2D.svg)](https://www.nuget.org/packages/Core2D)
-[![MyGet](https://img.shields.io/myget/core2d-nightly/vpre/Core2D.svg?label=myget)](https://www.myget.org/gallery/core2d-nightly)
-
 [![CodeFactor](https://www.codefactor.io/repository/github/wieslawsoltes/core2d/badge)](https://www.codefactor.io/repository/github/wieslawsoltes/core2d)
 
 A multi-platform data driven 2D diagram editor.
@@ -105,43 +102,6 @@ cd apps/Core2D.Avalonia
 dotnet restore
 dotnet publish -r ubuntu.16.10-x64 -o ubuntu.16.10-x64
 ```
-
-## NuGet
-
-Core2D core libraries are delivered as a NuGet packages.
-
-You can find the packages here [NuGet](https://www.nuget.org/packages/Core2D/) or by using nightly build feed:
-* Add `https://www.myget.org/F/core2d-nightly/api/v2` to your package sources
-* Update your package using `Core2D` feed
-
-You can install the package like this:
-
-`Install-Package Core2D -Pre`
-
-### Available Packages
-
-* [Core2D](https://www.nuget.org/packages/Core2D)
-* [Core2D.Editor](https://www.nuget.org/packages/Core2D.Editor)
-* [Core2D.FileSystem.DotNet](https://www.nuget.org/packages/Core2D.FileSystem.DotNet)
-* [Core2D.FileWriter.Dxf](https://www.nuget.org/packages/Core2D.FileWriter.Dxf)
-* [Core2D.FileWriter.Emf](https://www.nuget.org/packages/Core2D.FileWriter.Emf)
-* [Core2D.FileWriter.PdfSharp](https://www.nuget.org/packages/Core2D.FileWriter.PdfSharp)
-* [Core2D.FileWriter.SkiaSharp](https://www.nuget.org/packages/Core2D.FileWriter.SkiaSharp)
-* [Core2D.Log.Trace](https://www.nuget.org/packages/Core2D.Log.Trace)
-* [Core2D.Renderer.Avalonia](https://www.nuget.org/packages/Core2D.Renderer.Avalonia)
-* [Core2D.Renderer.Dxf](https://www.nuget.org/packages/Core2D.Renderer.Dxf)
-* [Core2D.Renderer.PdfSharp](https://www.nuget.org/packages/Core2D.Renderer.PdfSharp)
-* [Core2D.Renderer.SkiaSharp](https://www.nuget.org/packages/Core2D.Renderer.SkiaSharp)
-* [Core2D.Renderer.WinForms](https://www.nuget.org/packages/Core2D.Renderer.WinForms)
-* [Core2D.Renderer.Wpf](https://www.nuget.org/packages/Core2D.Renderer.Wpf)
-* [Core2D.ScriptRunner.Roslyn](https://www.nuget.org/packages/Core2D.ScriptRunner.Roslyn)
-* [Core2D.Serializer.Newtonsoft](https://www.nuget.org/packages/Core2D.Serializer.Newtonsoft)
-* [Core2D.Serializer.Xaml](https://www.nuget.org/packages/Core2D.Serializer.Xaml)
-* [Core2D.ServiceProvider.Autofac](https://www.nuget.org/packages/Core2D.ServiceProvider.Autofac)
-* [Core2D.TextFieldReader.CsvHelper](https://www.nuget.org/packages/Core2D.TextFieldReader.CsvHelper)
-* [Core2D.TextFieldWriter.CsvHelper](https://www.nuget.org/packages/Core2D.TextFieldWriter.CsvHelper)
-* [Core2D.Utilities.Avalonia](https://www.nuget.org/packages/Core2D.Utilities.Avalonia)
-* [Core2D.Utilities.Wpf](https://www.nuget.org/packages/Core2D.Utilities.Wpf)
 
 ## Package Sources
 
