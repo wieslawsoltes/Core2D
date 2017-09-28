@@ -8,16 +8,6 @@
     <EnableDefaultCompileItems>False</EnableDefaultCompileItems>
   </PropertyGroup>
 
-  <PropertyGroup>
-    <TrimUnusedDependencies>False</TrimUnusedDependencies>
-    <LinkDuringPublish>True</LinkDuringPublish>
-    <ShowLinkerSizeComparison>True</ShowLinkerSizeComparison>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <LinkerRootDescriptors Include="linker.xml" />
-  </ItemGroup>
-
   <Import Project="..\..\build\Default.targets" />
   <Import Project="..\..\build\NETCore.props" />
   <Import Project="..\..\build\NuGet.props" />
