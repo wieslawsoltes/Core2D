@@ -27,7 +27,7 @@
                 <ColumnDefinition Width="50"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Rectangle Fill="{StaticResource ColorCheckerBoard}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Margin="5,2,5,2" Height="20"/>
+            <Rectangle Fill="{DynamicResource ColorCheckerBoard}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Margin="5,2,5,2" Height="20"/>
             <Rectangle Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Margin="5,2,5,2" Height="20">
                 <Rectangle.Fill>
                     <MultiBinding Converter="{StaticResource ArgbColorToBrushMultiConverter}">
