@@ -12,7 +12,7 @@ using Serilog;
 namespace Core2D.Avalonia
 {
     /// <summary>
-    /// Encapsulates an Avalonia program.
+    /// Encapsulates an Core2D avalonia program.
     /// </summary>
     class Program
     {
