@@ -72,6 +72,64 @@
                             <ContentControl Content="{Binding Project.CurrentContainer}"/>
                         </ScrollViewer>
                     </TabItem>
+                    <TabItem Header="Zoom" Classes="property">
+                        <TabControl Classes="default">
+                            <TabItem Header="Status" Classes="property">
+                                <ScrollViewer>
+                                    <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
+                                        <TextBlock Text="ZoomX:" Classes="left" Grid.Row="0" Grid.Column="0"/>
+                                        <TextBlock Text="{Binding #zoomBorder.ZoomY}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                                        <TextBlock Text="ZoomY:" Classes="left" Grid.Row="1" Grid.Column="0"/>
+                                        <TextBlock Text="{Binding #zoomBorder.ZoomY}" Classes="left" Grid.Row="1" Grid.Column="1"/>
+                                        <TextBlock Text="OffsetX:" Classes="left" Grid.Row="2" Grid.Column="0"/>
+                                        <TextBlock Text="{Binding #zoomBorder.OffsetX}" Classes="left" Grid.Row="2" Grid.Column="1"/>
+                                        <TextBlock Text="OffsetY:" Classes="left" Grid.Row="2" Grid.Column="0"/>
+                                        <TextBlock Text="{Binding #zoomBorder.OffsetY}" Classes="left" Grid.Row="2" Grid.Column="1"/>
+                                        <Button Content="Reset" Classes="autofit" Command="{Static Editor:ProjectEditorCommands.ZoomResetCommand}" Classes="default" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"/>
+                                        <Button Content="AutoFit" Classes="autofit" Command="{Static Editor:ProjectEditorCommands.ZoomAutoFitCommand}" Classes="default" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"/>  
+                                    </Grid>
+                                </ScrollViewer>
+                            </TabItem>
+                            <TabItem Header="Options" Classes="property">
+                                <ScrollViewer>
+                                    <Grid RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
+                                        <TextBlock Text="PanButton:" Classes="left" Grid.Row="0" Grid.Column="0"/>
+                                        <DropDown Items="{Static paz:ZoomBorder.ButtonNames}" SelectedItem="{Binding #zoomBorder.PanButton, Mode=TwoWay}" Classes="default" Grid.Row="0" Grid.Column="1"/>
+                                        <TextBlock Text="Stretch:" Classes="left" Grid.Row="1" Grid.Column="0"/>
+                                        <DropDown Items="{Static paz:ZoomBorder.StretchModes}" SelectedItem="{Binding #zoomBorder.Stretch, Mode=TwoWay}" Classes="default" Grid.Row="1" Grid.Column="1"/>
+                                        <TextBlock Text="ZoomSpeed:" Classes="left" Grid.Row="2" Grid.Column="0"/>
+                                        <TextBox Text="{Binding #zoomBorder.ZoomSpeed, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
+                                        <TextBlock Text="EnableInput:" Classes="left" Grid.Row="3" Grid.Column="0"/>
+                                        <CheckBox IsChecked="{Binding #zoomBorder.EnableInput}" Content="" Classes="default" Grid.Row="3" Grid.Column="1"/>   
+                                    </Grid>
+                                </ScrollViewer>
+                            </TabItem>    
+                            <TabItem Header="Constrains" Classes="property">
+                                <ScrollViewer>
+                                    <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
+                                        <TextBlock Text="MinZoomX:" Classes="left" Grid.Row="0" Grid.Column="0"/>
+                                        <TextBox Text="{Binding #zoomBorder.MinZoomX, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                                        <TextBlock Text="MaxZoomX:" Classes="left" Grid.Row="1" Grid.Column="0"/>
+                                        <TextBox Text="{Binding #zoomBorder.MaxZoomX, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
+                                        <TextBlock Text="MinZoomY:" Classes="left" Grid.Row="2" Grid.Column="0"/>
+                                        <TextBox Text="{Binding #zoomBorder.MinZoomY, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
+                                        <TextBlock Text="MaxZoomY:" Classes="left" Grid.Row="3" Grid.Column="0"/>
+                                        <TextBox Text="{Binding #zoomBorder.MaxZoomY, Mode=TwoWay}" Classes="left" Grid.Row="3" Grid.Column="1"/>
+                                        <TextBlock Text="MinOffsetY:" Classes="left" Grid.Row="4" Grid.Column="0"/>
+                                        <TextBox Text="{Binding #zoomBorder.MinOffsetY, Mode=TwoWay}" Classes="left" Grid.Row="4" Grid.Column="1"/>
+                                        <TextBlock Text="MaxOffsetX:" Classes="left" Grid.Row="5" Grid.Column="0"/>
+                                        <TextBox Text="{Binding #zoomBorder.MaxOffsetX, Mode=TwoWay}" Classes="left" Grid.Row="5" Grid.Column="1"/>
+                                        <TextBlock Text="MinOffsetX:" Classes="left" Grid.Row="6" Grid.Column="0"/>
+                                        <TextBox Text="{Binding #zoomBorder.MinOffsetX, Mode=TwoWay}" Classes="left" Grid.Row="6" Grid.Column="1"/>
+                                        <TextBlock Text="MaxOffsetY:" Classes="left" Grid.Row="7" Grid.Column="0"/>
+                                        <TextBox Text="{Binding #zoomBorder.MaxOffsetY, Mode=TwoWay}" Classes="left" Grid.Row="7" Grid.Column="1"/>
+                                        <TextBlock Text="EnableConstrains:" Classes="left" Grid.Row="8" Grid.Column="0"/>
+                                        <CheckBox IsChecked="{Binding #zoomBorder.EnableConstrains}" Content="" Classes="default" Grid.Row="8" Grid.Column="1"/>  
+                                    </Grid>
+                                </ScrollViewer>
+                            </TabItem>   
+                        </TabControl>
+                    </TabItem>
                 </TabControl>
             </Border>
             <GridSplitter Name="rightPanelHSplitter" Classes="horizontal" Grid.Row="1" Height="7"/>
@@ -137,10 +195,6 @@
                         </MultiBinding>
                     </DropDown.IsVisible>
                 </DropDown>
-                <Button Content="Reset" Classes="autofit" Command="{Static Editor:ProjectEditorCommands.ZoomResetCommand}"/>
-                <Button Content="AutoFit" Classes="autofit" Command="{Static Editor:ProjectEditorCommands.ZoomAutoFitCommand}"/>
-                <DropDown Classes="autofit" Items="{Static paz:ZoomBorder.StretchModes}" SelectedItem="{Binding #zoomBorder.Stretch, Mode=TwoWay}"/>
-                <TextBox Classes="autofit" Text="{Binding #zoomBorder.ZoomSpeed, Mode=TwoWay}" Width="50"/>
                 <CheckBox Classes="options" Content="Stroked" IsChecked="{Binding Project.Options.DefaultIsStroked, Mode=TwoWay}"/>
                 <CheckBox Classes="options" Content="Filled" IsChecked="{Binding Project.Options.DefaultIsFilled, Mode=TwoWay}"/>
                 <CheckBox Classes="options" Content="Closed" IsChecked="{Binding Project.Options.DefaultIsClosed, Mode=TwoWay}"/>
