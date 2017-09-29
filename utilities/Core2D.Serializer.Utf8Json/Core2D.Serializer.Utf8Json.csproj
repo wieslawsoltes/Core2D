@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
+    <OutputType>Library</OutputType>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <Import Project="..\..\build\Default.targets" />
+  <Import Project="..\..\build\NuGet.props" />
+  <Import Project="..\..\build\Utf8Json.props" />
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Core2D\Core2D.csproj" />
+  </ItemGroup>
+
+</Project>
