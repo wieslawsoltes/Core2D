@@ -37,8 +37,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Renderer.Wpf", "util
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Serializer.Newtonsoft", "utilities\Core2D.Serializer.Newtonsoft\Core2D.Serializer.Newtonsoft.csproj", "{11E61A53-13D5-4447-8D66-3F328BBFC30A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Serializer.Utf8Json", "utilities\Core2D.Serializer.Utf8Json\Core2D.Serializer.Utf8Json.csproj", "{515A77A7-1E61-4EFD-ACD2-54694C58D250}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Serializer.Xaml", "utilities\Core2D.Serializer.Xaml\Core2D.Serializer.Xaml.csproj", "{1DCA99EA-F8FE-4DDD-AB81-BF0380C1B33D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.ServiceProvider.Autofac", "utilities\Core2D.ServiceProvider.Autofac\Core2D.ServiceProvider.Autofac.csproj", "{7D5D7DF6-058D-4F2E-A3A8-47F89B6E2E7C}"
@@ -86,7 +84,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "props", "props", "{3C45CABF
 		build\Rx.props = build\Rx.props
 		build\SharpDX.props = build\SharpDX.props
 		build\SkiaSharp.props = build\SkiaSharp.props
-		build\Utf8Json.props = build\Utf8Json.props
 		build\WPF.props = build\WPF.props
 		build\XUnit.props = build\XUnit.props
 	EndProjectSection
@@ -211,10 +208,6 @@ Global
 		{0C7EA04E-94D8-49B7-B387-C031B2422F3B}.Debug|AnyCPU.Build.0 = Debug|Any CPU
 		{0C7EA04E-94D8-49B7-B387-C031B2422F3B}.Release|AnyCPU.ActiveCfg = Release|Any CPU
 		{0C7EA04E-94D8-49B7-B387-C031B2422F3B}.Release|AnyCPU.Build.0 = Release|Any CPU
-		{515A77A7-1E61-4EFD-ACD2-54694C58D250}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
-		{515A77A7-1E61-4EFD-ACD2-54694C58D250}.Debug|AnyCPU.Build.0 = Debug|Any CPU
-		{515A77A7-1E61-4EFD-ACD2-54694C58D250}.Release|AnyCPU.ActiveCfg = Release|Any CPU
-		{515A77A7-1E61-4EFD-ACD2-54694C58D250}.Release|AnyCPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -251,7 +244,6 @@ Global
 		{3C45CABF-3E2E-455B-AACF-1FB63D331F9C} = {C7162582-C1FD-45FB-99FD-6770D67B5A21}
 		{C5B55AFD-7C8E-4071-ACD8-81DB364765DA} = {C7162582-C1FD-45FB-99FD-6770D67B5A21}
 		{DDE59F10-F84A-4919-B221-38414B958103} = {C7162582-C1FD-45FB-99FD-6770D67B5A21}
-		{515A77A7-1E61-4EFD-ACD2-54694C58D250} = {02F7371B-FFDA-46ED-B5FE-9D643EA3354A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2614B90F-C6F8-435C-8BD0-09AEE3ABAD2B}
