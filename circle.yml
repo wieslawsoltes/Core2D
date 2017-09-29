@@ -11,10 +11,6 @@ jobs:
       - checkout
       - run: dotnet restore apps/Core2D.Avalonia
       - run: dotnet build apps/Core2D.Avalonia/Core2D.Avalonia.csproj
-      - run: dotnet publish apps/Core2D.Avalonia/Core2D.Avalonia.csproj -c Release -r win7-x64 -o bin/win7-x64
-      - store_artifacts:
-          path: ~/Core2D/apps/Core2D.Avalonia/bin/win7-x64
-          destination: Core2D.Avalonia-win7-x64
     notify:
       webhooks:
         - url: https://webhooks.gitter.im/e/18bc2743c91ff21c0246
