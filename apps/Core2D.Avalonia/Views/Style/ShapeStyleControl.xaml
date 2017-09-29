@@ -1,0 +1,39 @@
+﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
+<!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
+<UserControl x:Class="Core2D.Avalonia.Views.Style.ShapeStyleControl"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Core2D.Avalonia;assembly=Core2D.Avalonia"
+             xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"
+             xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
+             xmlns:style="clr-namespace:Core2D.Avalonia.Views.Style;assembly=Core2D.Avalonia"
+             Design.DataContext="{Static Designer:DesignerContext.Style}"
+             Design.Width="250" Design.Height="400">
+    <TabControl Classes="default">
+        <TabItem Header="Style" Classes="property">
+            <style:StyleControl/>
+        </TabItem>
+        <TabItem Header="Stroke" Classes="property">
+            <ContentControl Content="{Binding Stroke}"/>
+        </TabItem>
+        <TabItem Header="Fill" Classes="property">
+            <ContentControl Content="{Binding Fill}"/>
+        </TabItem>
+        <TabItem Header="Text" Classes="property">
+            <ContentControl Content="{Binding TextStyle}"/>
+        </TabItem>
+        <TabItem Header="Line" Classes="property">
+            <TabControl Classes="default">
+                <TabItem Header="LineStyle" Classes="property">
+                    <ContentControl Content="{Binding LineStyle}"/>
+                </TabItem>
+                <TabItem Header="StartArrow" Classes="property">
+                    <ContentControl Content="{Binding StartArrowStyle}"/>
+                </TabItem>
+                <TabItem Header="EndArrow" Classes="property">
+                    <ContentControl Content="{Binding EndArrowStyle}"/>
+                </TabItem>
+            </TabControl>
+        </TabItem>
+    </TabControl>
+</UserControl>

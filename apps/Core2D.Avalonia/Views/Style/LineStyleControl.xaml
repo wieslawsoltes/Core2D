@@ -1,0 +1,30 @@
+﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
+<!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
+<UserControl x:Class="Core2D.Avalonia.Views.Style.LineStyleControl"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Core2D.Avalonia;assembly=Core2D.Avalonia"
+             xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"
+             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor"
+             xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
+             Design.DataContext="{Static Designer:DesignerContext.LineStyle}"
+             Design.Width="250" Design.Height="400">
+    <TabControl Classes="default">
+        <TabItem Header="LineStyle" Classes="property">
+            <Grid RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,50,*">
+                <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
+                <TextBox Text="{Binding Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"/>
+                <TextBlock Text="IsCurved" Classes="left" Grid.Row="1" Grid.Column="0"/>
+                <CheckBox IsChecked="{Binding IsCurved, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"/>
+                <TextBlock Text="Curvature" Classes="left" Grid.Row="2" Grid.Column="0"/>
+                <TextBox Text="{Binding Curvature, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
+                <Slider Classes="slider" Value="{Binding Curvature, Mode=TwoWay}" Minimum="0" Maximum="100" Grid.Row="2" Grid.Column="2"/>
+                <TextBlock Text="CurveOrientation" Classes="left" Grid.Row="3" Grid.Column="0"/>
+                <DropDown Items="{Static Editor:Enums.CurveOrientationValues}" SelectedItem="{Binding CurveOrientation, Mode=TwoWay}" Classes="default" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"/>
+            </Grid>
+        </TabItem>
+        <TabItem Header="FixedLength" Classes="property">
+            <ContentControl Content="{Binding FixedLength}"/>
+        </TabItem>
+    </TabControl>
+</UserControl>
