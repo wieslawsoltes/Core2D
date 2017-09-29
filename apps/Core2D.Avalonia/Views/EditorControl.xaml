@@ -76,17 +76,17 @@
                         <TabControl Classes="default">
                             <TabItem Header="Status" Classes="property">
                                 <ScrollViewer>
-                                    <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
+                                    <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
                                         <TextBlock Text="ZoomX:" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                                        <TextBlock Text="{Binding #zoomBorder.ZoomY}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                                        <TextBlock Text="{Binding #zoomBorder.ZoomX, Mode=OneWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
                                         <TextBlock Text="ZoomY:" Classes="left" Grid.Row="1" Grid.Column="0"/>
-                                        <TextBlock Text="{Binding #zoomBorder.ZoomY}" Classes="left" Grid.Row="1" Grid.Column="1"/>
+                                        <TextBlock Text="{Binding #zoomBorder.ZoomY, Mode=OneWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
                                         <TextBlock Text="OffsetX:" Classes="left" Grid.Row="2" Grid.Column="0"/>
-                                        <TextBlock Text="{Binding #zoomBorder.OffsetX}" Classes="left" Grid.Row="2" Grid.Column="1"/>
-                                        <TextBlock Text="OffsetY:" Classes="left" Grid.Row="2" Grid.Column="0"/>
-                                        <TextBlock Text="{Binding #zoomBorder.OffsetY}" Classes="left" Grid.Row="2" Grid.Column="1"/>
-                                        <Button Content="Reset" Classes="autofit" Command="{Static Editor:ProjectEditorCommands.ZoomResetCommand}" Classes="default" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"/>
-                                        <Button Content="AutoFit" Classes="autofit" Command="{Static Editor:ProjectEditorCommands.ZoomAutoFitCommand}" Classes="default" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"/>  
+                                        <TextBlock Text="{Binding #zoomBorder.OffsetX, Mode=OneWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
+                                        <TextBlock Text="OffsetY:" Classes="left" Grid.Row="3" Grid.Column="0"/>
+                                        <TextBlock Text="{Binding #zoomBorder.OffsetY, Mode=OneWay}" Classes="left" Grid.Row="3" Grid.Column="1"/>
+                                        <Button Content="Reset" Command="{Static Editor:ProjectEditorCommands.ZoomResetCommand}" Classes="default" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"/>
+                                        <Button Content="AutoFit" Command="{Static Editor:ProjectEditorCommands.ZoomAutoFitCommand}" Classes="default" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"/>  
                                     </Grid>
                                 </ScrollViewer>
                             </TabItem>
