@@ -13,7 +13,7 @@
              xmlns:Recent="clr-namespace:Core2D.Editor.Recent;assembly=Core2D.Editor"
              xmlns:Containers="clr-namespace:Core2D.Containers;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
-             Design.DataContext="{Static Designer:DesignerContext.Editor}"
+             Design.DataContext="{x:Static Designer:DesignerContext.Editor}"
              Design.Width="800" Design.Height="20">
     <Menu>
         <Menu.ItemsPanel>
@@ -22,30 +22,30 @@
             </ItemsPanelTemplate>
         </Menu.ItemsPanel>
         <MenuItem Header="_File">
-            <MenuItem Header="_New" Command="{Static Editor:ProjectEditorCommands.NewCommand}" CommandParameter="{Binding}"/>
+            <MenuItem Header="_New" Command="{x:Static Editor:ProjectEditorCommands.NewCommand}" CommandParameter="{Binding}"/>
             <Separator/>
-            <MenuItem Header="_Open..." Command="{Static Editor:ProjectEditorCommands.OpenCommand}"/>
+            <MenuItem Header="_Open..." Command="{x:Static Editor:ProjectEditorCommands.OpenCommand}"/>
             <Separator/>
-            <MenuItem Header="Execu_te Script..." Command="{Static Editor:ProjectEditorCommands.ExecuteScriptCommand}"/>
+            <MenuItem Header="Execu_te Script..." Command="{x:Static Editor:ProjectEditorCommands.ExecuteScriptCommand}"/>
             <Separator/>
             <MenuItem Header="_Recent" Items="{Binding RecentProjects}">
                 <MenuItem.Styles>
                     <Style Selector="MenuItem">
                         <Setter Property="Header" Value="{Binding Name}"/>
-                        <Setter Property="Command" Value="{Static Editor:ProjectEditorCommands.OpenCommand}"/>
+                        <Setter Property="Command" Value="{x:Static Editor:ProjectEditorCommands.OpenCommand}"/>
                         <Setter Property="CommandParameter" Value="{Binding Path}"/>
                     </Style>
                 </MenuItem.Styles>
             </MenuItem>
             <Separator/>
-            <MenuItem Header="E_xit" Command="{Static Editor:ProjectEditorCommands.ExitCommand}"/>
+            <MenuItem Header="E_xit" Command="{x:Static Editor:ProjectEditorCommands.ExitCommand}"/>
         </MenuItem>
         <MenuItem Header="_View">
             <MenuItem Header="_Views" Items="{Binding Views}">
                 <MenuItem.Styles>
                     <Style Selector="MenuItem">
                         <Setter Property="Header" Value="{Binding Title}"/>
-                        <Setter Property="Command" Value="{Static Editor:ProjectEditorCommands.ChangeCurrentViewCommand}"/>
+                        <Setter Property="Command" Value="{x:Static Editor:ProjectEditorCommands.ChangeCurrentViewCommand}"/>
                         <Setter Property="CommandParameter" Value="{Binding}"/>
                         <Setter Property="Icon">
                             <Template>
@@ -54,9 +54,9 @@
                                         <iac:BindTagToVisualRootDataContextBehavior/>
                                     </i:Interaction.Behaviors>
                                     <CheckBox.IsChecked>
-                                        <MultiBinding Mode="OneWay" Converter="{Static converters:ObjectEqualityMultiConverter.Instance}">
-                                            <Binding ElementName="icon" Path="DataContext" Converter="{Static converters:ObjectToObjectConverter.Instance}"/>
-                                            <Binding ElementName="icon" Path="Tag.CurrentView" Converter="{Static converters:ObjectToObjectConverter.Instance}"/>
+                                        <MultiBinding Mode="OneWay" Converter="{x:Static converters:ObjectEqualityMultiConverter.Instance}">
+                                            <Binding ElementName="icon" Path="DataContext" Converter="{x:Static converters:ObjectToObjectConverter.Instance}"/>
+                                            <Binding ElementName="icon" Path="Tag.CurrentView" Converter="{x:Static converters:ObjectToObjectConverter.Instance}"/>
                                         </MultiBinding>
                                     </CheckBox.IsChecked>
                                 </CheckBox>
@@ -79,7 +79,7 @@
             </MenuItem>
         </MenuItem>
         <MenuItem Header="_Help">
-            <MenuItem Header="_About Core2D" Command="{Static Editor:ProjectEditorCommands.AboutDialogCommand}"/>
+            <MenuItem Header="_About Core2D" Command="{x:Static Editor:ProjectEditorCommands.AboutDialogCommand}"/>
         </MenuItem>
     </Menu>
 </UserControl>

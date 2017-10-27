@@ -8,13 +8,13 @@
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor"
              xmlns:Path="clr-namespace:Core2D.Path;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
-             Design.DataContext="{Static Designer:DesignerContext.PathGeometry}"
+             Design.DataContext="{x:Static Designer:DesignerContext.PathGeometry}"
              Design.Width="250" Design.Height="400">
     <TabControl Classes="default">
         <TabItem Header="PathGeometry" Classes="property">
             <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*">
                 <TextBlock Text="FillRule" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                <DropDown Items="{Static Editor:Enums.XFillRuleValues}" SelectedItem="{Binding FillRule, Mode=TwoWay}" Classes="default" Grid.Row="0" Grid.Column="1"/>
+                <DropDown Items="{x:Static Editor:Enums.XFillRuleValues}" SelectedItem="{Binding FillRule, Mode=TwoWay}" Classes="default" Grid.Row="0" Grid.Column="1"/>
             </Grid>
         </TabItem>
         <TabItem Header="Figures" Classes="property">
@@ -26,10 +26,10 @@
                 </TreeView.Styles>
                 <TreeView.DataTemplates>
                     <TreeDataTemplate DataType="Path:PathFigure" ItemsSource="{Binding Segments}">
-                        <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="tree"/>
+                        <TextBlock Text="{Binding Mode=OneWay, Converter={x:Static converters:ObjectToTypeStringConverter.Instance}}" Classes="tree"/>
                     </TreeDataTemplate>
                     <DataTemplate DataType="Path:PathSegment">
-                        <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="tree"/>
+                        <TextBlock Text="{Binding Mode=OneWay, Converter={x:Static converters:ObjectToTypeStringConverter.Instance}}" Classes="tree"/>
                     </DataTemplate>
                 </TreeView.DataTemplates>
             </TreeView>

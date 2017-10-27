@@ -10,7 +10,7 @@
         Width="1200" Height="690"
         UseLayoutRounding="True"
         WindowState="Normal"
-        Design.DataContext="{Static Designer:DesignerContext.Editor}"
+        Design.DataContext="{x:Static Designer:DesignerContext.Editor}"
         Design.Width="1200" Design.Height="670"
         Title="Document Viewer">
     <views:DocumentViewControl VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>

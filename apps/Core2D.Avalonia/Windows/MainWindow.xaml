@@ -10,10 +10,10 @@
         Width="1324" Height="690"
         UseLayoutRounding="True"
         WindowState="Maximized"
-        Design.DataContext="{Static Designer:DesignerContext.Editor}"
+        Design.DataContext="{x:Static Designer:DesignerContext.Editor}"
         Design.Width="1200" Design.Height="580">
     <Window.Title>
-        <MultiBinding Mode="OneWay" Converter="{Static converters:EditorToTitleMultiConverter.Instance}">
+        <MultiBinding Mode="OneWay" Converter="{x:Static converters:EditorToTitleMultiConverter.Instance}">
             <Binding Path="Project.Name"/>
             <Binding Path="IsProjectDirty"/>
         </MultiBinding>

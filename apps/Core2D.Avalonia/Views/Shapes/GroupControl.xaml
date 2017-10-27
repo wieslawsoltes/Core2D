@@ -9,7 +9,7 @@
              xmlns:Shape="clr-namespace:Core2D.Shape;assembly=Core2D" 
              xmlns:Shapes="clr-namespace:Core2D.Shapes;assembly=Core2D" 
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
-             Design.DataContext="{Static Designer:DesignerContext.Group}"
+             Design.DataContext="{x:Static Designer:DesignerContext.Group}"
              Design.Width="250" Design.Height="400">
     <TabControl Classes="default">
         <TabItem Header="Group" Classes="property">
@@ -48,7 +48,7 @@
                                 <ListBox Name="shapes" Items="{Binding Shapes}" Classes="default">
                                     <ListBox.DataTemplates>
                                         <DataTemplate DataType="Shape:BaseShape">
-                                            <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="list"/>
+                                            <TextBlock Text="{Binding Mode=OneWay, Converter={x:Static converters:ObjectToTypeStringConverter.Instance}}" Classes="list"/>
                                         </DataTemplate>
                                     </ListBox.DataTemplates>
                                 </ListBox>
@@ -64,7 +64,7 @@
                                 <ListBox Name="connectors" Items="{Binding Connectors}" Classes="default">
                                     <ListBox.DataTemplates>
                                         <DataTemplate DataType="Shapes:PointShape">
-                                            <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="list"/>
+                                            <TextBlock Text="{Binding Mode=OneWay, Converter={x:Static converters:ObjectToTypeStringConverter.Instance}}" Classes="list"/>
                                         </DataTemplate>
                                     </ListBox.DataTemplates>
                                 </ListBox>

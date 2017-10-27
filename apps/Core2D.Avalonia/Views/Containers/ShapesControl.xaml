@@ -8,13 +8,13 @@
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor"
              xmlns:Shape="clr-namespace:Core2D.Shape;assembly=Core2D" 
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
-             Design.DataContext="{Static Designer:DesignerContext.Page}"
+             Design.DataContext="{x:Static Designer:DesignerContext.Page}"
              Design.Width="250" Design.Height="400">
     <TabControl Classes="default">
         <TabItem Header="Shapes" Classes="property">
             <Grid RowDefinitions="Auto,*,Auto">
                 <Menu Grid.Row="0" HorizontalAlignment="Right">
-                    <MenuItem Header="-" Command="{Static Editor:ProjectEditorCommands.RemoveShapeCommand}" CommandParameter="{Binding CurrentShape}" IsVisible="{Binding CurrentShape, Converter={Static converters:IsNotNullConverter.Instance}}"/>
+                    <MenuItem Header="-" Command="{x:Static Editor:ProjectEditorCommands.RemoveShapeCommand}" CommandParameter="{Binding CurrentShape}" IsVisible="{Binding CurrentShape, Converter={x:Static converters:IsNotNullConverter.Instance}}"/>
                 </Menu>
                 <ListBox Name="shapes" Items="{Binding CurrentLayer.Shapes}" SelectedItem="{Binding CurrentShape, Mode=TwoWay}" VirtualizationMode="Simple" Classes="default" Grid.Row="1">
                     <ListBox.ItemsPanel>
@@ -23,21 +23,21 @@
                         </ItemsPanelTemplate>
                     </ListBox.ItemsPanel>
                     <ListBox.KeyBindings>
-                        <KeyBinding Command="{Static Editor:ProjectEditorCommands.RemoveShapeCommand}" CommandParameter="{Binding #shapes.SelectedItem}" Gesture="Delete"/>
+                        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.RemoveShapeCommand}" CommandParameter="{Binding #shapes.SelectedItem}" Gesture="Delete"/>
                     </ListBox.KeyBindings>
                     <ListBox.DataTemplates>
                         <DataTemplate DataType="Shape:BaseShape">
-                            <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="list">
+                            <TextBlock Text="{Binding Mode=OneWay, Converter={x:Static converters:ObjectToTypeStringConverter.Instance}}" Classes="list">
                                 <TextBlock.ContextMenu>
                                     <ContextMenu Classes="default">
-                                        <MenuItem Header="_Delete" Command="{Static Editor:ProjectEditorCommands.RemoveShapeCommand}" CommandParameter="{Binding}"/>
+                                        <MenuItem Header="_Delete" Command="{x:Static Editor:ProjectEditorCommands.RemoveShapeCommand}" CommandParameter="{Binding}"/>
                                     </ContextMenu>
                                 </TextBlock.ContextMenu>
                             </TextBlock>
                         </DataTemplate>
                     </ListBox.DataTemplates>
                 </ListBox>
-                <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="2" IsVisible="{Binding CurrentShape, Converter={Static converters:IsNotNullConverter.Instance}}">
+                <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="2" IsVisible="{Binding CurrentShape, Converter={x:Static converters:IsNotNullConverter.Instance}}">
                     <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
                     <TextBox Text="{Binding CurrentShape.Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
                 </Grid>

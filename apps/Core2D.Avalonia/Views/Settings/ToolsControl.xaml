@@ -8,7 +8,7 @@
              xmlns:Data="clr-namespace:Core2D.Data;assembly=Core2D"
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor"
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
-             Design.DataContext="{Static Designer:DesignerContext.Editor}"
+             Design.DataContext="{x:Static Designer:DesignerContext.Editor}"
              Design.Width="250" Design.Height="400">
     <TabControl Classes="default">
         <TabItem Header="Main" Classes="property">

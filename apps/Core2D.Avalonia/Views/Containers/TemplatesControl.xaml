@@ -10,32 +10,32 @@
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor"
              xmlns:Containers="clr-namespace:Core2D.Containers;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
-             Design.DataContext="{Static Designer:DesignerContext.Project}"
+             Design.DataContext="{x:Static Designer:DesignerContext.Project}"
              Design.Width="250" Design.Height="400">
     <Grid RowDefinitions="Auto,*,Auto">
         <ListBox Name="templates" Items="{Binding Templates}" SelectedItem="{Binding CurrentTemplate, Mode=TwoWay}" Grid.Row="1" Classes="default">
             <ListBox.KeyBindings>
-                <KeyBinding Command="{Static Editor:ProjectEditorCommands.AddTemplateCommand}" Gesture="Ctrl+N"/>
-                <KeyBinding Command="{Static Editor:ProjectEditorCommands.RemoveTemplateCommand}" CommandParameter="{Binding #templates.SelectedItem}" Gesture="Delete"/>
-                <KeyBinding Command="{Static Editor:ProjectEditorCommands.ExportObjectCommand}" CommandParameter="{Binding #templates.SelectedItem}" Gesture="Ctrl+E"/>
+                <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.AddTemplateCommand}" Gesture="Ctrl+N"/>
+                <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.RemoveTemplateCommand}" CommandParameter="{Binding #templates.SelectedItem}" Gesture="Delete"/>
+                <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.ExportObjectCommand}" CommandParameter="{Binding #templates.SelectedItem}" Gesture="Ctrl+E"/>
             </ListBox.KeyBindings>
             <ListBox.DataTemplates>
                 <DataTemplate DataType="Containers:PageContainer">
                     <TextBlock Name="template" Text="{Binding Name}" Classes="list">
                         <i:Interaction.Behaviors>
                             <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #template}">
-                                <ia:InvokeCommandAction Command="{Static Editor:ProjectEditorCommands.ApplyTemplateCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                <ia:InvokeCommandAction Command="{x:Static Editor:ProjectEditorCommands.ApplyTemplateCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                             </ia:EventTriggerBehavior>
                         </i:Interaction.Behaviors>
                         <TextBlock.ContextMenu>
                             <ContextMenu Classes="default">
-                                <MenuItem Header="_Edit Template" Command="{Static Editor:ProjectEditorCommands.EditTemplateCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                <MenuItem Header="_Edit Template" Command="{x:Static Editor:ProjectEditorCommands.EditTemplateCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                                 <Separator/>
-                                <MenuItem Header="_Add Template" Command="{Static Editor:ProjectEditorCommands.AddTemplateCommand}"/>
+                                <MenuItem Header="_Add Template" Command="{x:Static Editor:ProjectEditorCommands.AddTemplateCommand}"/>
                                 <Separator/>
-                                <MenuItem Header="_Delete" Command="{Static Editor:ProjectEditorCommands.RemoveTemplateCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                <MenuItem Header="_Delete" Command="{x:Static Editor:ProjectEditorCommands.RemoveTemplateCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                                 <Separator/>
-                                <MenuItem Header="E_xport" Command="{Static Editor:ProjectEditorCommands.ExportObjectCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                <MenuItem Header="E_xport" Command="{x:Static Editor:ProjectEditorCommands.ExportObjectCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                             </ContextMenu>
                         </TextBlock.ContextMenu>
                     </TextBlock>
@@ -43,12 +43,12 @@
             </ListBox.DataTemplates>
         </ListBox>
         <Menu Grid.Row="0" HorizontalAlignment="Right">
-            <MenuItem Header="apply" Command="{Static Editor:ProjectEditorCommands.ApplyTemplateCommand}" CommandParameter="{Binding CurrentTemplate}" IsVisible="{Binding #templates.SelectedItem, Converter={Static converters:IsNotNullConverter.Instance}}"/>
-            <MenuItem Header="edit" Command="{Static Editor:ProjectEditorCommands.EditTemplateCommand}" CommandParameter="{Binding CurrentTemplate}" IsVisible="{Binding #templates.SelectedItem, Converter={Static converters:IsNotNullConverter.Instance}}"/>
-            <MenuItem Header="+" Command="{Static Editor:ProjectEditorCommands.AddTemplateCommand}"/>
-            <MenuItem Header="-" Command="{Static Editor:ProjectEditorCommands.RemoveTemplateCommand}" CommandParameter="{Binding CurrentTemplate}" IsVisible="{Binding #templates.SelectedItem, Converter={Static converters:IsNotNullConverter.Instance}}"/>
+            <MenuItem Header="apply" Command="{x:Static Editor:ProjectEditorCommands.ApplyTemplateCommand}" CommandParameter="{Binding CurrentTemplate}" IsVisible="{Binding #templates.SelectedItem, Converter={x:Static converters:IsNotNullConverter.Instance}}"/>
+            <MenuItem Header="edit" Command="{x:Static Editor:ProjectEditorCommands.EditTemplateCommand}" CommandParameter="{Binding CurrentTemplate}" IsVisible="{Binding #templates.SelectedItem, Converter={x:Static converters:IsNotNullConverter.Instance}}"/>
+            <MenuItem Header="+" Command="{x:Static Editor:ProjectEditorCommands.AddTemplateCommand}"/>
+            <MenuItem Header="-" Command="{x:Static Editor:ProjectEditorCommands.RemoveTemplateCommand}" CommandParameter="{Binding CurrentTemplate}" IsVisible="{Binding #templates.SelectedItem, Converter={x:Static converters:IsNotNullConverter.Instance}}"/>
         </Menu>
-        <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="2" IsVisible="{Binding #templates.SelectedItem, Converter={Static converters:IsNotNullConverter.Instance}}">
+        <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="2" IsVisible="{Binding #templates.SelectedItem, Converter={x:Static converters:IsNotNullConverter.Instance}}">
             <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
             <TextBox Text="{Binding #templates.SelectedItem.Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
         </Grid>

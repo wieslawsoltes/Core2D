@@ -12,30 +12,30 @@
              xmlns:Containers="clr-namespace:Core2D.Containers;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
              xmlns:project="clr-namespace:Core2D.Avalonia.Views.Containers;assembly=Core2D.Avalonia"
-             Design.DataContext="{Static Designer:DesignerContext.Project}"
+             Design.DataContext="{x:Static Designer:DesignerContext.Project}"
              Design.Width="250" Design.Height="400">
     <Grid RowDefinitions="Auto,*,Auto" ColumnDefinitions="*">
         <Grid Grid.Row="0" RowDefinitions="*" ColumnDefinitions="*,Auto">
             <TextBox Text="{Binding Name, Mode=TwoWay}" Classes="left" Grid.Column="0"/>
             <Menu Grid.Column="1" HorizontalAlignment="Right">
-                <MenuItem Header="+" Command="{Static Editor:ProjectEditorCommands.NewCommand}" CommandParameter="{Binding Selected}"/>
-                <MenuItem Header="-" Command="{Static Editor:ProjectEditorCommands.DeleteCommand}" CommandParameter="{Binding Selected}" IsVisible="{Binding Selected, Converter={Static converters:IsNotNullConverter.Instance}}"/>
+                <MenuItem Header="+" Command="{x:Static Editor:ProjectEditorCommands.NewCommand}" CommandParameter="{Binding Selected}"/>
+                <MenuItem Header="-" Command="{x:Static Editor:ProjectEditorCommands.DeleteCommand}" CommandParameter="{Binding Selected}" IsVisible="{Binding Selected, Converter={x:Static converters:IsNotNullConverter.Instance}}"/>
             </Menu>
         </Grid>
         <TreeView Name="documents" Items="{Binding Documents}" SelectedItem="{Binding Selected, Mode=TwoWay}" Grid.Row="1" Classes="default">
             <TreeView.KeyBindings>
-                <KeyBinding Command="{Static Editor:ProjectEditorCommands.NewCommand}" CommandParameter="{Binding #documents.SelectedItem}" Gesture="Ctrl+N"/>
-                <KeyBinding Command="{Static Editor:ProjectEditorCommands.CutCommand}" CommandParameter="{Binding #documents.SelectedItem}" Gesture="Ctrl+X"/>
-                <KeyBinding Command="{Static Editor:ProjectEditorCommands.CopyCommand}" CommandParameter="{Binding #documents.SelectedItem}" Gesture="Ctrl+C"/>
-                <KeyBinding Command="{Static Editor:ProjectEditorCommands.PasteCommand}" CommandParameter="{Binding #documents.SelectedItem}" Gesture="Ctrl+V"/>
-                <KeyBinding Command="{Static Editor:ProjectEditorCommands.DeleteCommand}" CommandParameter="{Binding #documents.SelectedItem}" Gesture="Delete"/>
-                <KeyBinding Command="{Static Editor:ProjectEditorCommands.ExportCommand}" CommandParameter="{Binding #documents.SelectedItem}" Gesture="Ctrl+E"/>
+                <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.NewCommand}" CommandParameter="{Binding #documents.SelectedItem}" Gesture="Ctrl+N"/>
+                <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.CutCommand}" CommandParameter="{Binding #documents.SelectedItem}" Gesture="Ctrl+X"/>
+                <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.CopyCommand}" CommandParameter="{Binding #documents.SelectedItem}" Gesture="Ctrl+C"/>
+                <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.PasteCommand}" CommandParameter="{Binding #documents.SelectedItem}" Gesture="Ctrl+V"/>
+                <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.DeleteCommand}" CommandParameter="{Binding #documents.SelectedItem}" Gesture="Delete"/>
+                <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.ExportCommand}" CommandParameter="{Binding #documents.SelectedItem}" Gesture="Ctrl+E"/>
             </TreeView.KeyBindings>
             <TreeView.ContextMenu>
                 <ContextMenu Classes="default">
-                    <MenuItem Header="_Add Document" Command="{Static Editor:ProjectEditorCommands.AddDocumentCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                    <MenuItem Header="_Add Document" Command="{x:Static Editor:ProjectEditorCommands.AddDocumentCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                     <Separator/>
-                    <MenuItem Header="E_xport" Command="{Static Editor:ProjectEditorCommands.ExportCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                    <MenuItem Header="E_xport" Command="{x:Static Editor:ProjectEditorCommands.ExportCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                 </ContextMenu>
             </TreeView.ContextMenu>
             <TreeView.Styles>
@@ -54,18 +54,18 @@
                         <TextBlock Text="{Binding Name}" Classes="tree">
                             <TextBlock.ContextMenu>
                                 <ContextMenu Classes="default">
-                                    <MenuItem Header="_Add Page" Command="{Static Editor:ProjectEditorCommands.AddPageCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                    <MenuItem Header="_Add Page" Command="{x:Static Editor:ProjectEditorCommands.AddPageCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                                     <Separator/>
-                                    <MenuItem Header="Insert Document Bef_ore" Command="{Static Editor:ProjectEditorCommands.InsertDocumentBeforeCommand}" CommandParameter="{Binding Mode=OneWay}"/>
-                                    <MenuItem Header="Insert Document Aft_er" Command="{Static Editor:ProjectEditorCommands.InsertDocumentAfterCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                    <MenuItem Header="Insert Document Bef_ore" Command="{x:Static Editor:ProjectEditorCommands.InsertDocumentBeforeCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                    <MenuItem Header="Insert Document Aft_er" Command="{x:Static Editor:ProjectEditorCommands.InsertDocumentAfterCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                                     <Separator/>
-                                    <MenuItem Header="Cu_t" Command="{Static Editor:ProjectEditorCommands.CutCommand}" CommandParameter="{Binding Mode=OneWay}"/>
-                                    <MenuItem Header="_Copy" Command="{Static Editor:ProjectEditorCommands.CopyCommand}" CommandParameter="{Binding Mode=OneWay}"/>
-                                    <MenuItem Header="_Paste" Command="{Static Editor:ProjectEditorCommands.PasteCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                    <MenuItem Header="Cu_t" Command="{x:Static Editor:ProjectEditorCommands.CutCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                    <MenuItem Header="_Copy" Command="{x:Static Editor:ProjectEditorCommands.CopyCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                    <MenuItem Header="_Paste" Command="{x:Static Editor:ProjectEditorCommands.PasteCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                                     <Separator/>
-                                    <MenuItem Header="_Delete" Command="{Static Editor:ProjectEditorCommands.DeleteCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                    <MenuItem Header="_Delete" Command="{x:Static Editor:ProjectEditorCommands.DeleteCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                                     <Separator/>
-                                    <MenuItem Header="E_xport" Command="{Static Editor:ProjectEditorCommands.ExportCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                    <MenuItem Header="E_xport" Command="{x:Static Editor:ProjectEditorCommands.ExportCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                                 </ContextMenu>
                             </TextBlock.ContextMenu>
                         </TextBlock>                        
@@ -84,7 +84,7 @@
                                         <MenuItem.Styles>
                                             <Style Selector="MenuItem">
                                                 <Setter Property="Header" Value="{Binding Name}"/>
-                                                <Setter Property="Command" Value="{Static Editor:ProjectEditorCommands.ApplyTemplateCommand}"/>
+                                                <Setter Property="Command" Value="{x:Static Editor:ProjectEditorCommands.ApplyTemplateCommand}"/>
                                                 <Setter Property="CommandParameter" Value="{Binding}"/>
                                                 <Setter Property="Icon">
                                                     <Template>
@@ -93,9 +93,9 @@
                                                                 <iac:BindTagToVisualRootDataContextBehavior/>
                                                             </i:Interaction.Behaviors>
                                                             <CheckBox.IsChecked>
-                                                                <MultiBinding Mode="OneWay" Converter="{Static converters:ObjectEqualityMultiConverter.Instance}">
-                                                                    <Binding ElementName="icon" Path="DataContext" Converter="{Static converters:ObjectToObjectConverter.Instance}"/>
-                                                                    <Binding ElementName="icon" Path="Tag.Template" Converter="{Static converters:ObjectToObjectConverter.Instance}"/>
+                                                                <MultiBinding Mode="OneWay" Converter="{x:Static converters:ObjectEqualityMultiConverter.Instance}">
+                                                                    <Binding ElementName="icon" Path="DataContext" Converter="{x:Static converters:ObjectToObjectConverter.Instance}"/>
+                                                                    <Binding ElementName="icon" Path="Tag.Template" Converter="{x:Static converters:ObjectToObjectConverter.Instance}"/>
                                                                 </MultiBinding>
                                                             </CheckBox.IsChecked>
                                                         </CheckBox>
@@ -105,16 +105,16 @@
                                         </MenuItem.Styles>
                                     </MenuItem>
                                     <Separator/>
-                                    <MenuItem Header="Insert Page Bef_ore" Command="{Static Editor:ProjectEditorCommands.InsertPageBeforeCommand}" CommandParameter="{Binding Mode=OneWay}"/>
-                                    <MenuItem Header="Insert Page Aft_er" Command="{Static Editor:ProjectEditorCommands.InsertPageAfterCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                    <MenuItem Header="Insert Page Bef_ore" Command="{x:Static Editor:ProjectEditorCommands.InsertPageBeforeCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                    <MenuItem Header="Insert Page Aft_er" Command="{x:Static Editor:ProjectEditorCommands.InsertPageAfterCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                                     <Separator/>
-                                    <MenuItem Header="Cu_t" Command="{Static Editor:ProjectEditorCommands.CutCommand}" CommandParameter="{Binding Mode=OneWay}"/>
-                                    <MenuItem Header="_Copy" Command="{Static Editor:ProjectEditorCommands.CopyCommand}" CommandParameter="{Binding Mode=OneWay}"/>
-                                    <MenuItem Header="_Paste" Command="{Static Editor:ProjectEditorCommands.PasteCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                    <MenuItem Header="Cu_t" Command="{x:Static Editor:ProjectEditorCommands.CutCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                    <MenuItem Header="_Copy" Command="{x:Static Editor:ProjectEditorCommands.CopyCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                    <MenuItem Header="_Paste" Command="{x:Static Editor:ProjectEditorCommands.PasteCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                                     <Separator/>
-                                    <MenuItem Header="_Delete" Command="{Static Editor:ProjectEditorCommands.DeleteCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                    <MenuItem Header="_Delete" Command="{x:Static Editor:ProjectEditorCommands.DeleteCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                                     <Separator/>
-                                    <MenuItem Header="E_xport" Command="{Static Editor:ProjectEditorCommands.ExportCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                    <MenuItem Header="E_xport" Command="{x:Static Editor:ProjectEditorCommands.ExportCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                                 </ContextMenu>
                             </TextBlock.ContextMenu>
                         </TextBlock>
@@ -124,9 +124,9 @@
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch">
                         <StackPanel.ContextMenu>
                             <ContextMenu Classes="default">
-                                <MenuItem Header="_Add Layer" Command="{Static Editor:ProjectEditorCommands.AddLayerCommand}" CommandParameter="{Binding Owner, Mode=OneWay}"/>
+                                <MenuItem Header="_Add Layer" Command="{x:Static Editor:ProjectEditorCommands.AddLayerCommand}" CommandParameter="{Binding Owner, Mode=OneWay}"/>
                                 <Separator/>
-                                <MenuItem Header="_Delete" Command="{Static Editor:ProjectEditorCommands.RemoveLayerCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                <MenuItem Header="_Delete" Command="{x:Static Editor:ProjectEditorCommands.RemoveLayerCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                             </ContextMenu>
                         </StackPanel.ContextMenu>
                         <CheckBox IsChecked="{Binding IsVisible, Mode=TwoWay}" Classes="default"/>
@@ -135,7 +135,7 @@
                 </DataTemplate>
             </TreeView.DataTemplates>
         </TreeView>
-        <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="2" IsVisible="{Binding Selected, Converter={Static converters:IsNotNullConverter.Instance}}">
+        <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="2" IsVisible="{Binding Selected, Converter={x:Static converters:IsNotNullConverter.Instance}}">
             <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
             <TextBox Text="{Binding Selected.Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
         </Grid>

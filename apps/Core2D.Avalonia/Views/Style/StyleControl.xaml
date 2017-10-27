@@ -7,7 +7,7 @@
              xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor"
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
-             Design.DataContext="{Static Designer:DesignerContext.Style}"
+             Design.DataContext="{x:Static Designer:DesignerContext.Style}"
              Design.Width="250" Design.Height="400">
     <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,50,*">
         <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
@@ -16,7 +16,7 @@
         <TextBox Text="{Binding Thickness, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
         <Slider Classes="slider" Value="{Binding Thickness, Mode=TwoWay}" Minimum="0" Maximum="30" Grid.Row="1" Grid.Column="2"/>
         <TextBlock Text="Line Cap" Classes="left" Grid.Row="2" Grid.Column="0"/>
-        <DropDown Items="{Static Editor:Enums.LineCapValues}" SelectedItem="{Binding LineCap, Mode=TwoWay}" Classes="default" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"/>
+        <DropDown Items="{x:Static Editor:Enums.LineCapValues}" SelectedItem="{Binding LineCap, Mode=TwoWay}" Classes="default" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"/>
         <TextBlock Text="Dashes" Classes="left" Grid.Row="3" Grid.Column="0"/>
         <TextBox Text="{Binding Dashes, Mode=TwoWay}" Classes="left" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"/>
         <TextBlock Text="Dash Offset" Classes="left" Grid.Row="4" Grid.Column="0"/>

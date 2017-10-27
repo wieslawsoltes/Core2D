@@ -18,7 +18,7 @@
              xmlns:style="clr-namespace:Core2D.Avalonia.Views.Style;assembly=Core2D.Avalonia"
              xmlns:editor="clr-namespace:Core2D.Avalonia.Views.Editor;assembly=Core2D.Avalonia"
              xmlns:views="clr-namespace:Core2D.Avalonia.Views;assembly=Core2D.Avalonia"
-             Design.DataContext="{Static Designer:DesignerContext.Editor}"
+             Design.DataContext="{x:Static Designer:DesignerContext.Editor}"
              Design.Width="1200" Design.Height="540">
     <Grid Name="rootPanel" ColumnDefinitions="180,Auto,*,Auto,240" RowDefinitions="*,Auto" Margin="6,6,6,2">
         <GridSplitter Name="leftPanelVSplitter" Classes="vertical" Grid.Column="1" Grid.Row="0" Width="6"/>
@@ -85,8 +85,8 @@
                                         <TextBlock Text="{Binding #zoomBorder.OffsetX, Mode=OneWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
                                         <TextBlock Text="OffsetY:" Classes="left" Grid.Row="3" Grid.Column="0"/>
                                         <TextBlock Text="{Binding #zoomBorder.OffsetY, Mode=OneWay}" Classes="left" Grid.Row="3" Grid.Column="1"/>
-                                        <Button Content="Reset" Command="{Static Editor:ProjectEditorCommands.ZoomResetCommand}" Classes="default" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"/>
-                                        <Button Content="AutoFit" Command="{Static Editor:ProjectEditorCommands.ZoomAutoFitCommand}" Classes="default" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"/>  
+                                        <Button Content="Reset" Command="{x:Static Editor:ProjectEditorCommands.ZoomResetCommand}" Classes="default" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"/>
+                                        <Button Content="AutoFit" Command="{x:Static Editor:ProjectEditorCommands.ZoomAutoFitCommand}" Classes="default" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"/>  
                                     </Grid>
                                 </ScrollViewer>
                             </TabItem>
@@ -94,9 +94,9 @@
                                 <ScrollViewer>
                                     <Grid RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
                                         <TextBlock Text="PanButton:" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                                        <DropDown Items="{Static paz:ZoomBorder.ButtonNames}" SelectedItem="{Binding #zoomBorder.PanButton, Mode=TwoWay}" Classes="default" Grid.Row="0" Grid.Column="1"/>
+                                        <DropDown Items="{x:Static paz:ZoomBorder.ButtonNames}" SelectedItem="{Binding #zoomBorder.PanButton, Mode=TwoWay}" Classes="default" Grid.Row="0" Grid.Column="1"/>
                                         <TextBlock Text="Stretch:" Classes="left" Grid.Row="1" Grid.Column="0"/>
-                                        <DropDown Items="{Static paz:ZoomBorder.StretchModes}" SelectedItem="{Binding #zoomBorder.Stretch, Mode=TwoWay}" Classes="default" Grid.Row="1" Grid.Column="1"/>
+                                        <DropDown Items="{x:Static paz:ZoomBorder.StretchModes}" SelectedItem="{Binding #zoomBorder.Stretch, Mode=TwoWay}" Classes="default" Grid.Row="1" Grid.Column="1"/>
                                         <TextBlock Text="ZoomSpeed:" Classes="left" Grid.Row="2" Grid.Column="0"/>
                                         <TextBox Text="{Binding #zoomBorder.ZoomSpeed, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
                                         <TextBlock Text="EnableInput:" Classes="left" Grid.Row="3" Grid.Column="0"/>
@@ -164,13 +164,13 @@
         <Grid ColumnDefinitions="Auto,*" Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="1" Margin="0,2,0,0">
             <TextBlock Name="statsPanel" Classes="stats" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center">
                 <TextBlock.Text>
-                    <MultiBinding Mode="OneWay" Converter="{Static converters:EditorToStatsMultiConverter.Instance}">
+                    <MultiBinding Mode="OneWay" Converter="{x:Static converters:EditorToStatsMultiConverter.Instance}">
                         <Binding Path="Project.Documents.Length"/>
                         <Binding Path="Project.CurrentDocument.Pages.Length"/>
                         <Binding Path="Project.CurrentContainer.Layers.Length"/>
                         <Binding Path="Project.CurrentContainer.CurrentLayer.Shapes.Length"/>
-                        <Binding Path="Renderers[0].State.SelectedShape" Converter="{Static converters:ObjectToObjectConverter.Instance}"/>
-                        <Binding Path="Renderers[0].State.SelectedShapes" Converter="{Static converters:ObjectToObjectConverter.Instance}"/>
+                        <Binding Path="Renderers[0].State.SelectedShape" Converter="{x:Static converters:ObjectToObjectConverter.Instance}"/>
+                        <Binding Path="Renderers[0].State.SelectedShapes" Converter="{x:Static converters:ObjectToObjectConverter.Instance}"/>
                     </MultiBinding>
                 </TextBlock.Text>
             </TextBlock>
@@ -189,7 +189,7 @@
                         </DataTemplate>
                     </DropDown.DataTemplates>
                     <DropDown.IsVisible>
-                        <MultiBinding Mode="OneWay" Converter="{Static converters:ObjectEqualityMultiConverter.Instance}">
+                        <MultiBinding Mode="OneWay" Converter="{x:Static converters:ObjectEqualityMultiConverter.Instance}">
                             <Binding Path="CurrentTool.Title"/>
                             <Binding Source="Path"/>
                         </MultiBinding>

@@ -9,7 +9,7 @@
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
              xmlns:renderer="clr-namespace:Core2D.Avalonia.Renderer;assembly=Core2D.Avalonia"
              xmlns:views="clr-namespace:Core2D.Avalonia.Views;assembly=Core2D.Avalonia"
-             Design.DataContext="{Static Designer:DesignerContext.Editor}"
+             Design.DataContext="{x:Static Designer:DesignerContext.Editor}"
              Design.Width="1200" Design.Height="540">
     <DockPanel renderer:RendererOptions.Renderer="{Binding Renderers[1]}">
         <StackPanel DockPanel.Dock="Top">
