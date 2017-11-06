@@ -1,6 +1,6 @@
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <PackageReference Include="Avalonia.Desktop" Version="0.5.2-build4189-alpha" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.5.2-build4207-alpha" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="SharpDX" Version="4.0.1" />
