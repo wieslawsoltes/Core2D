@@ -164,6 +164,7 @@ Task("Build")
         settings.SetConfiguration(configuration);
         settings.WithProperty("Platform", platform);
         settings.SetVerbosity(Verbosity.Minimal);
+        settings.SetMaxCpuCount(0);
     });
 });
 
@@ -249,7 +250,10 @@ Task("Build-NetCore")
     {
         Information("Building: {0}", project.Name);
         DotNetCoreBuild(project.Path, new DotNetCoreBuildSettings {
-            Configuration = configuration
+            Configuration = configuration,
+            MSBuildSettings = new DotNetCoreMSBuildSettings() {
+                MaxCpuCount = 0
+            }
         });
     }
 });
