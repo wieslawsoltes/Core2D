@@ -1,18 +1,19 @@
-﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="0.5.2-build4207-alpha" />
+    <PackageReference Include="Avalonia" Version="0.5.2-build4248-alpha" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Serilog" Version="2.4.0" />
+    <PackageReference Include="Serilog" Version="2.5.0" />
     <PackageReference Include="Splat" Version="2.0.0" />
     <PackageReference Include="Sprache" Version="2.1.0" />
     <PackageReference Include="System.ValueTuple" Version="4.3.1" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Avalonia.Xaml.Interactions" Version="0.5.2-build486-alpha" />
-    <PackageReference Include="Avalonia.Xaml.Interactions.Custom" Version="0.5.2-build486-alpha" />
+    <PackageReference Include="Avalonia.Xaml.Interactions" Version="0.5.2-build488-alpha" />
+    <PackageReference Include="Avalonia.Xaml.Interactions.Custom" Version="0.5.2-build488-alpha" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Avalonia.Controls.PanAndZoom" Version="1.0.0-build209-alpha" />
+    <PackageReference Include="Avalonia.Controls.PanAndZoom" Version="1.0.0-build215-alpha" />
   </ItemGroup>
 </Project>
