@@ -3,6 +3,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #addin "nuget:?package=Polly&version=5.3.1"
+#addin "nuget:?package=PackageReferenceEditor&version=0.0.3"
 
 ///////////////////////////////////////////////////////////////////////////////
 // TOOLS
@@ -19,6 +20,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using PackageReferenceEditor;
 using Polly;
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -113,6 +115,13 @@ var msvcp140_x64 = @"C:\Program Files (x86)\Microsoft Visual Studio\2017\Communi
 var vcruntime140_x86 = @"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.11.25325\x86\Microsoft.VC141.CRT\vcruntime140.dll";
 var vcruntime140_x64 = @"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.11.25325\x64\Microsoft.VC141.CRT\vcruntime140.dll";
 var editbin = @"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.11.25503\bin\HostX86\x86\editbin.exe";
+
+///////////////////////////////////////////////////////////////////////////////
+// VALIDATE
+///////////////////////////////////////////////////////////////////////////////
+
+Updater.FindReferences(""./build", "*.props", new string[] { }).ValidateVersions();	
+Updater.FindReferences(""./", "*.csproj", new string[] { }).ValidateVersions();	
 
 ///////////////////////////////////////////////////////////////////////////////
 // TASKS: COMMON
