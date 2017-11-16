@@ -120,8 +120,8 @@ var editbin = @"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC
 // VALIDATE
 ///////////////////////////////////////////////////////////////////////////////
 
-Updater.FindReferences(""./build", "*.props", new string[] { }).ValidateVersions();	
-Updater.FindReferences(""./", "*.csproj", new string[] { }).ValidateVersions();	
+Updater.FindReferences("./build", "*.props", new string[] { }).ValidateVersions();	
+Updater.FindReferences("./", "*.csproj", new string[] { }).ValidateVersions();	
 
 ///////////////////////////////////////////////////////////////////////////////
 // TASKS: COMMON
