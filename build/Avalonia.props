@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="0.5.2-build4248-alpha" />
+    <PackageReference Include="Avalonia" Version="0.5.2-build4356-alpha" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Serilog" Version="2.5.0" />
