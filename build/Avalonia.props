@@ -10,10 +10,10 @@
     <PackageReference Include="System.ValueTuple" Version="4.3.1" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Avalonia.Xaml.Interactions" Version="0.5.2-build493-alpha" />
-    <PackageReference Include="Avalonia.Xaml.Interactions.Custom" Version="0.5.2-build493-alpha" />
+    <PackageReference Include="Avalonia.Xaml.Interactions" Version="0.5.2-build494-alpha" />
+    <PackageReference Include="Avalonia.Xaml.Interactions.Custom" Version="0.5.2-build494-alpha" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Avalonia.Controls.PanAndZoom" Version="1.0.0-build219-alpha" />
+    <PackageReference Include="Avalonia.Controls.PanAndZoom" Version="1.0.0-build220-alpha" />
   </ItemGroup>
 </Project>
