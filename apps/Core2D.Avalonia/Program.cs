@@ -7,7 +7,6 @@ using Avalonia;
 using Avalonia.Logging.Serilog;
 using Core2D.Avalonia.Modules;
 using Core2D.Interfaces;
-using Serilog;
 
 namespace Core2D.Avalonia
 {
@@ -17,6 +16,15 @@ namespace Core2D.Avalonia
     class Program
     {
         /// <summary>
+        /// Builds Avalonia app.
+        /// </summary>
+        /// <returns>The Avalonia app builder.</returns>
+        public static AppBuilder BuildAvaloniaApp()
+            => AppBuilder.Configure<App>()
+                         .UsePlatformDetect()
+                         .LogToDebug();
+
+        /// <summary>
         /// Program entry point.
         /// </summary>
         /// <param name="args">The program arguments.</param>
@@ -24,31 +32,23 @@ namespace Core2D.Avalonia
         {
             try
             {
-                InitializeLogging();
-
                 var builder = new ContainerBuilder();
-
                 builder.RegisterModule<LocatorModule>();
                 builder.RegisterModule<CoreModule>();
                 builder.RegisterModule<DependenciesModule>();
                 builder.RegisterModule<AppModule>();
                 builder.RegisterModule<ViewModule>();
-
                 using (IContainer container = builder.Build())
                 {
                     using (ILog log = container.Resolve<ILog>())
                     {
-                        var app = new App();
-                        var appBuilder = AppBuilder.Configure(app).UsePlatformDetect();
-
-                        appBuilder.SetupWithoutStarting();
-
+                        var appBuilder = BuildAvaloniaApp().SetupWithoutStarting();
+                        var app = appBuilder.Instance as App;
                         var aboutInfo = app.CreateAboutInfo(
                             appBuilder.RuntimePlatform.GetRuntimeInfo(),
                             appBuilder.WindowingSubsystemName,
                             appBuilder.RenderingSubsystemName);
                         Debug.Write(aboutInfo);
-
                         app.Start(container.Resolve<IServiceProvider>(), aboutInfo);
                     }
                 }
@@ -58,19 +58,6 @@ namespace Core2D.Avalonia
                 Console.WriteLine(ex.Message);
                 Console.WriteLine(ex.StackTrace);
             }
-        }
-
-        /// <summary>
-        /// Initialize the Serilog logger.
-        /// </summary>
-        static void InitializeLogging()
-        {
-#if DEBUG
-            SerilogLogger.Initialize(new LoggerConfiguration()
-                .MinimumLevel.Warning()
-                .WriteTo.Trace(outputTemplate: "{Area}: {Message}")
-                .CreateLogger());
-#endif
         }
     }
 }
