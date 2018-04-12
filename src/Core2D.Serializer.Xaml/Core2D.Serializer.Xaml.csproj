@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
+    <OutputType>Library</OutputType>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <Import Project="..\..\build\Default.targets" />
+  <Import Project="..\..\build\NuGet.props" />
+  <Import Project="..\..\build\Base.props" />
+  <Import Project="..\..\build\Portable.Xaml.props" />
+
+  <ItemGroup>
+    <ProjectReference Include="..\Core2D\Core2D.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -11,45 +11,45 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Editor", "src\Core2D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "utilities", "utilities", "{02F7371B-FFDA-46ED-B5FE-9D643EA3354A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.FileSystem.DotNet", "utilities\Core2D.FileSystem.DotNet\Core2D.FileSystem.DotNet.csproj", "{D1F867F7-9029-480D-B1E1-B0BE4658B182}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.FileSystem.DotNet", "src\Core2D.FileSystem.DotNet\Core2D.FileSystem.DotNet.csproj", "{D1F867F7-9029-480D-B1E1-B0BE4658B182}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.FileWriter.Dxf", "utilities\Core2D.FileWriter.Dxf\Core2D.FileWriter.Dxf.csproj", "{D40B3BCD-0A26-40BB-960B-9464D248C934}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.FileWriter.Dxf", "src\Core2D.FileWriter.Dxf\Core2D.FileWriter.Dxf.csproj", "{D40B3BCD-0A26-40BB-960B-9464D248C934}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.FileWriter.Emf", "utilities\Core2D.FileWriter.Emf\Core2D.FileWriter.Emf.csproj", "{3660FCE5-3D0F-412E-93A7-D0D992B4DA65}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.FileWriter.Emf", "src\Core2D.FileWriter.Emf\Core2D.FileWriter.Emf.csproj", "{3660FCE5-3D0F-412E-93A7-D0D992B4DA65}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.FileWriter.PdfSharp", "utilities\Core2D.FileWriter.PdfSharp\Core2D.FileWriter.PdfSharp.csproj", "{EC0EFA51-83F0-4439-BE9F-FAEBD3418C94}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.FileWriter.PdfSharp", "src\Core2D.FileWriter.PdfSharp\Core2D.FileWriter.PdfSharp.csproj", "{EC0EFA51-83F0-4439-BE9F-FAEBD3418C94}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.FileWriter.SkiaSharp", "utilities\Core2D.FileWriter.SkiaSharp\Core2D.FileWriter.SkiaSharp.csproj", "{CE2D5901-94D6-491F-A78E-4446160E621F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.FileWriter.SkiaSharp", "src\Core2D.FileWriter.SkiaSharp\Core2D.FileWriter.SkiaSharp.csproj", "{CE2D5901-94D6-491F-A78E-4446160E621F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Log.Trace", "utilities\Core2D.Log.Trace\Core2D.Log.Trace.csproj", "{68A36926-DF55-4F05-9F89-B9AB1463227E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Log.Trace", "src\Core2D.Log.Trace\Core2D.Log.Trace.csproj", "{68A36926-DF55-4F05-9F89-B9AB1463227E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Renderer.Avalonia", "utilities\Core2D.Renderer.Avalonia\Core2D.Renderer.Avalonia.csproj", "{E05F3F7E-2176-43DC-90BB-F5C66CFDB12F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Renderer.Avalonia", "src\Core2D.Renderer.Avalonia\Core2D.Renderer.Avalonia.csproj", "{E05F3F7E-2176-43DC-90BB-F5C66CFDB12F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Renderer.Dxf", "utilities\Core2D.Renderer.Dxf\Core2D.Renderer.Dxf.csproj", "{ACC2C898-B49B-4ED9-B18C-389F50801B39}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Renderer.Dxf", "src\Core2D.Renderer.Dxf\Core2D.Renderer.Dxf.csproj", "{ACC2C898-B49B-4ED9-B18C-389F50801B39}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Renderer.PdfSharp", "utilities\Core2D.Renderer.PdfSharp\Core2D.Renderer.PdfSharp.csproj", "{34C8EE31-A1FE-4A74-BE36-C1F38BC06FEC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Renderer.PdfSharp", "src\Core2D.Renderer.PdfSharp\Core2D.Renderer.PdfSharp.csproj", "{34C8EE31-A1FE-4A74-BE36-C1F38BC06FEC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Renderer.SkiaSharp", "utilities\Core2D.Renderer.SkiaSharp\Core2D.Renderer.SkiaSharp.csproj", "{9B8FA9BD-63BE-4560-BA55-0D86AEE1809E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Renderer.SkiaSharp", "src\Core2D.Renderer.SkiaSharp\Core2D.Renderer.SkiaSharp.csproj", "{9B8FA9BD-63BE-4560-BA55-0D86AEE1809E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Renderer.WinForms", "utilities\Core2D.Renderer.WinForms\Core2D.Renderer.WinForms.csproj", "{3DC476E6-5032-4888-9337-221B88653C40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Renderer.WinForms", "src\Core2D.Renderer.WinForms\Core2D.Renderer.WinForms.csproj", "{3DC476E6-5032-4888-9337-221B88653C40}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Renderer.Wpf", "utilities\Core2D.Renderer.Wpf\Core2D.Renderer.Wpf.csproj", "{3BFBD239-8979-480D-B1CB-B763F7C915C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Renderer.Wpf", "src\Core2D.Renderer.Wpf\Core2D.Renderer.Wpf.csproj", "{3BFBD239-8979-480D-B1CB-B763F7C915C8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Serializer.Newtonsoft", "utilities\Core2D.Serializer.Newtonsoft\Core2D.Serializer.Newtonsoft.csproj", "{11E61A53-13D5-4447-8D66-3F328BBFC30A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Serializer.Newtonsoft", "src\Core2D.Serializer.Newtonsoft\Core2D.Serializer.Newtonsoft.csproj", "{11E61A53-13D5-4447-8D66-3F328BBFC30A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Serializer.Xaml", "utilities\Core2D.Serializer.Xaml\Core2D.Serializer.Xaml.csproj", "{1DCA99EA-F8FE-4DDD-AB81-BF0380C1B33D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Serializer.Xaml", "src\Core2D.Serializer.Xaml\Core2D.Serializer.Xaml.csproj", "{1DCA99EA-F8FE-4DDD-AB81-BF0380C1B33D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.ServiceProvider.Autofac", "utilities\Core2D.ServiceProvider.Autofac\Core2D.ServiceProvider.Autofac.csproj", "{7D5D7DF6-058D-4F2E-A3A8-47F89B6E2E7C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.ServiceProvider.Autofac", "src\Core2D.ServiceProvider.Autofac\Core2D.ServiceProvider.Autofac.csproj", "{7D5D7DF6-058D-4F2E-A3A8-47F89B6E2E7C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.ScriptRunner.Roslyn", "utilities\Core2D.ScriptRunner.Roslyn\Core2D.ScriptRunner.Roslyn.csproj", "{352C23CD-8A6D-4C91-9FD2-FC35ECBC8AFE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.ScriptRunner.Roslyn", "src\Core2D.ScriptRunner.Roslyn\Core2D.ScriptRunner.Roslyn.csproj", "{352C23CD-8A6D-4C91-9FD2-FC35ECBC8AFE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.TextFieldReader.CsvHelper", "utilities\Core2D.TextFieldReader.CsvHelper\Core2D.TextFieldReader.CsvHelper.csproj", "{F215ADF5-74C1-4E26-9045-B6BBDA736092}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.TextFieldReader.CsvHelper", "src\Core2D.TextFieldReader.CsvHelper\Core2D.TextFieldReader.CsvHelper.csproj", "{F215ADF5-74C1-4E26-9045-B6BBDA736092}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.TextFieldWriter.CsvHelper", "utilities\Core2D.TextFieldWriter.CsvHelper\Core2D.TextFieldWriter.CsvHelper.csproj", "{AE7FF1B5-ABE3-45BF-87CC-44AC580A666A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.TextFieldWriter.CsvHelper", "src\Core2D.TextFieldWriter.CsvHelper\Core2D.TextFieldWriter.CsvHelper.csproj", "{AE7FF1B5-ABE3-45BF-87CC-44AC580A666A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Utilities.Avalonia", "utilities\Core2D.Utilities.Avalonia\Core2D.Utilities.Avalonia.csproj", "{C6DBD1FD-C462-4005-B382-97BB4AEF26F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Utilities.Avalonia", "src\Core2D.Utilities.Avalonia\Core2D.Utilities.Avalonia.csproj", "{C6DBD1FD-C462-4005-B382-97BB4AEF26F2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Utilities.Wpf", "utilities\Core2D.Utilities.Wpf\Core2D.Utilities.Wpf.csproj", "{E8D9036D-7E08-4405-B767-FB1E654EF66A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Utilities.Wpf", "src\Core2D.Utilities.Wpf\Core2D.Utilities.Wpf.csproj", "{E8D9036D-7E08-4405-B767-FB1E654EF66A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{8756F874-0C1B-4AB8-83E0-0BEDA782D212}"
 EndProject
@@ -97,9 +97,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.Utilities.Wpf.UnitTe
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "apps", "apps", "{4322259E-219C-4F6C-9A1B-3DEB14B224A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.Wpf", "apps\Core2D.Wpf\Core2D.Wpf.csproj", "{12889680-3769-4914-BE60-5D09E83DF5B2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.Wpf", "src\Core2D.Wpf\Core2D.Wpf.csproj", "{12889680-3769-4914-BE60-5D09E83DF5B2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Avalonia", "apps\Core2D.Avalonia\Core2D.Avalonia.csproj", "{0C7EA04E-94D8-49B7-B387-C031B2422F3B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Avalonia", "src\Core2D.Avalonia\Core2D.Avalonia.csproj", "{0C7EA04E-94D8-49B7-B387-C031B2422F3B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{C7162582-C1FD-45FB-99FD-6770D67B5A21}"
 EndProject

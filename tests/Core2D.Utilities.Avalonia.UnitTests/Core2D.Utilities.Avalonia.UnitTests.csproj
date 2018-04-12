@@ -13,7 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Core2D\Core2D.csproj" />
-    <ProjectReference Include="..\..\utilities\Core2D.Utilities.Avalonia\Core2D.Utilities.Avalonia.csproj" />
+    <ProjectReference Include="..\..\src\Core2D.Utilities.Avalonia\Core2D.Utilities.Avalonia.csproj" />
   </ItemGroup>
 
   <ItemGroup>

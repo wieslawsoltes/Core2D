@@ -59,7 +59,7 @@ var UnitTestsFramework = "net461";
 // .NET Core Projects
 ///////////////////////////////////////////////////////////////////////////////
 
-var netCoreAppsRoot= "./apps";
+var netCoreAppsRoot= "./src";
 var netCoreApps = new string[] { "Core2D.Avalonia" };
 var netCoreProjects = netCoreApps.Select(name => 
     new {
@@ -97,24 +97,20 @@ if (IsRunningOnWindows())
 var buildDirs = 
     GetDirectories("./src/**/bin/**") + 
     GetDirectories("./src/**/obj/**") + 
-    GetDirectories("./utilities/**/bin/**") + 
-    GetDirectories("./utilities/**/obj/**") + 
     GetDirectories("./tests/**/bin/**") + 
-    GetDirectories("./tests/**/obj/**") + 
-    GetDirectories("./apps/**/bin/**") + 
-    GetDirectories("./apps/**/obj/**");
+    GetDirectories("./tests/**/obj/**");
 var artifactsDir = (DirectoryPath)Directory("./artifacts");
 var testResultsDir = artifactsDir.Combine("test-results");	
 var zipRootDir = artifactsDir.Combine("zip");
 var dirSuffixZip = platform + "/" + configuration;
 var fileZipSuffix = version + ".zip";
-var zipSourceWpfDir = (DirectoryPath)Directory("./apps/Core2D.Wpf/bin/" + dirSuffixZip);
+var zipSourceWpfDir = (DirectoryPath)Directory("./src/Core2D.Wpf/bin/" + dirSuffixZip);
 var zipTargetWpfFile = zipRootDir.CombineWithFilePath("Core2D.Wpf-" + fileZipSuffix);
-var msvcp140_x86 = @"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.12.25810\x86\Microsoft.VC141.CRT\msvcp140.dll";
-var msvcp140_x64 = @"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.12.25810\x64\Microsoft.VC141.CRT\msvcp140.dll";
-var vcruntime140_x86 = @"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.12.25810\x86\Microsoft.VC141.CRT\vcruntime140.dll";
-var vcruntime140_x64 = @"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.12.25810\x64\Microsoft.VC141.CRT\vcruntime140.dll";
-var editbin = @"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.12.25827\bin\HostX86\x86\editbin.exe";
+var msvcp140_x86 = @"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.13.26020\x86\Microsoft.VC141.CRT\msvcp140.dll";
+var msvcp140_x64 = @"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.13.26020\x64\Microsoft.VC141.CRT\msvcp140.dll";
+var vcruntime140_x86 = @"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.13.26020\x86\Microsoft.VC141.CRT\vcruntime140.dll";
+var vcruntime140_x64 = @"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.13.26020\x64\Microsoft.VC141.CRT\vcruntime140.dll";
+var editbin = @"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\editbin.exe";
 
 ///////////////////////////////////////////////////////////////////////////////
 // VALIDATE

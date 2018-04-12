@@ -13,7 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Core2D\Core2D.csproj" />
-    <ProjectReference Include="..\..\utilities\Core2D.Renderer.SkiaSharp\Core2D.Renderer.SkiaSharp.csproj" />
+    <ProjectReference Include="..\..\src\Core2D.Renderer.SkiaSharp\Core2D.Renderer.SkiaSharp.csproj" />
   </ItemGroup>
 
   <ItemGroup>

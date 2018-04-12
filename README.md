@@ -66,14 +66,14 @@ $ ./build.sh --target "Default" --platform "AnyCPU" --configuration "Release"
 
 Open up a Powershell prompt and execute:
 ```PowerShell
-cd apps/Core2D.Avalonia
+cd src/Core2D.Avalonia
 dotnet restore
 dotnet build
 ```
 
 Open up a terminal prompt and execute:
 ```Bash
-cd apps/Core2D.Avalonia
+cd src/Core2D.Avalonia
 dotnet restore
 dotnet build
 ```
@@ -84,21 +84,21 @@ You can publish self-contained `Core2D` application and all of its dependencies 
 
 Open up a Powershell prompt and execute:
 ```PowerShell
-cd apps/Core2D.Avalonia
+cd src/Core2D.Avalonia
 dotnet restore
 dotnet publish -r win7-x64 -o win7-x64
 ```
 
 Open up a Powershell prompt and execute:
 ```PowerShell
-cd apps/Core2D.Avalonia
+cd src/Core2D.Avalonia
 dotnet restore
 dotnet publish -r win7-x86 -o win7-x86
 ```
 
 Open up a terminal prompt and execute:
 ```Bash
-cd apps/Core2D.Avalonia
+cd src/Core2D.Avalonia
 dotnet restore
 dotnet publish -r ubuntu.16.10-x64 -o ubuntu.16.10-x64
 ```
