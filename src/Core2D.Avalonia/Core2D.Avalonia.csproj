@@ -6,10 +6,17 @@
     <RuntimeIdentifiers>win7-x64</RuntimeIdentifiers>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <EnableDefaultCompileItems>False</EnableDefaultCompileItems>
+    <CoreRT>False</CoreRT>
   </PropertyGroup>
 
+  <ItemGroup Condition="'$(CoreRT)' == 'True'">
+    <RdXmlFile Include="$(MSBuildThisFileDirectory)..\..\build\native\rd.xml" />
+    <IlcArg Include="--stacktracedata" />
+  </ItemGroup>
+
   <Import Project="..\..\build\Default.targets" />
-  <Import Project="..\..\build\NETCore.props" />
+  <Import Project="..\..\build\ILCompiler.props" Condition="'$(CoreRT)' == 'True'" />
+  <Import Project="..\..\build\NETCore.props" Condition="'$(CoreRT)' == 'False'" />
   <Import Project="..\..\build\NuGet.props" />
   <Import Project="..\..\build\Base.props" />
   <Import Project="..\..\build\Autofac.props" />

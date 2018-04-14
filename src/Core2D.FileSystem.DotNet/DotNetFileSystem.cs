@@ -15,6 +15,7 @@ namespace Core2D.FileSystem.DotNet
         /// <inheritdoc/>
         string IFileSystem.GetAssemblyPath(Type type)
         {
+            /*
 #if NETSTANDARD2_0 || NETCORE5_0
             string codeBase = type.GetTypeInfo().Assembly.FullName;
 #else
@@ -23,6 +24,8 @@ namespace Core2D.FileSystem.DotNet
             var uri = new UriBuilder(codeBase);
             string path = Uri.UnescapeDataString(uri.Path);
             return System.IO.Path.GetDirectoryName(path);
+            */
+            return "";
         }
 
         /// <inheritdoc/>

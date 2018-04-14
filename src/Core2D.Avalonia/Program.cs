@@ -2,7 +2,9 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Diagnostics;
+using System.Linq;
 using Autofac;
+using Autofac.Core;
 using Avalonia;
 using Avalonia.Logging.Serilog;
 using Core2D.Avalonia.Modules;
@@ -40,9 +42,44 @@ namespace Core2D.Avalonia
                 builder.RegisterModule<ViewModule>();
                 using (IContainer container = builder.Build())
                 {
+                    var services = container.ComponentRegistry.Registrations
+                            .SelectMany(x => x.Services)
+                            .OfType<IServiceWithType>()
+                            .Select(x => x.ServiceType);
+                    Console.WriteLine("Registered services:");
+                    foreach (var service in services)
+                    {
+                        Console.WriteLine(service);
+                    }
                     using (ILog log = container.Resolve<ILog>())
                     {
-                        var appBuilder = BuildAvaloniaApp().SetupWithoutStarting();
+                        var appBuilder = BuildAvaloniaApp();
+                        if (args.Length > 0)
+                        {
+                            foreach (var arg in args)
+                            {
+                                switch (arg)
+                                {
+                                    case "--d2d":
+                                        appBuilder.UseDirect2D1();
+                                        break;
+                                    case "--skia":
+                                        appBuilder.UseSkia();
+                                        break;
+                                    case "--win32":
+                                        appBuilder.UseWin32();
+                                        break;
+                                    case "--gtk3":
+                                        appBuilder.UseGtk3();
+                                        break;
+                                    case "--mac":
+                                        appBuilder.UseMonoMac();
+                                        break;
+
+                                }
+                            }
+                        }
+                        appBuilder.SetupWithoutStarting();
                         var app = appBuilder.Instance as App;
                         var aboutInfo = app.CreateAboutInfo(
                             appBuilder.RuntimePlatform.GetRuntimeInfo(),
