@@ -37,6 +37,8 @@
         <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.ObjectBrowserCommand}" Gesture="Ctrl+J"/>
         <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.DocumentViewerCommand}" Gesture="Ctrl+D"/>
     </UserControl.KeyBindings>
+    <views:EditorViewControl DataContext="{Binding CurrentView}"/>
+    <!--
     <Carousel Items="{Binding Views}" SelectedItem="{Binding CurrentView, Mode=TwoWay}" IsVirtualized="False">
         <Carousel.DataTemplates>
             <DataTemplate DataType="Views:DashboardView">
@@ -56,4 +58,5 @@
             </DataTemplate>
         </Carousel.DataTemplates>
     </Carousel>
+    -->
 </UserControl>
