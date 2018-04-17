@@ -75,7 +75,6 @@ namespace Core2D.Avalonia
                                     case "--mac":
                                         appBuilder.UseMonoMac();
                                         break;
-
                                 }
                             }
                         }
