@@ -85,6 +85,7 @@ namespace Core2D.Log.Trace
         void ILog.LogInformation(string message)
         {
             SD.Trace.TraceInformation(message);
+            Console.WriteLine(message);
             SetLastMessage(InformationPrefix + message);
         }
 
@@ -92,6 +93,7 @@ namespace Core2D.Log.Trace
         void ILog.LogInformation(string format, params object[] args)
         {
             SD.Trace.TraceInformation(format, args);
+            Console.WriteLine(format, args);
             SetLastMessage(InformationPrefix + string.Format(format, args));
         }
 
@@ -99,6 +101,7 @@ namespace Core2D.Log.Trace
         void ILog.LogWarning(string message)
         {
             SD.Trace.TraceWarning(message);
+            Console.WriteLine(message);
             SetLastMessage(WarningPrefix + message);
         }
 
@@ -106,6 +109,7 @@ namespace Core2D.Log.Trace
         void ILog.LogWarning(string format, params object[] args)
         {
             SD.Trace.TraceWarning(format, args);
+            Console.WriteLine(format, args);
             SetLastMessage(WarningPrefix + string.Format(format, args));
         }
 
@@ -113,6 +117,7 @@ namespace Core2D.Log.Trace
         void ILog.LogError(string message)
         {
             SD.Trace.TraceError(message);
+            Console.WriteLine(message);
             SetLastMessage(ErrorPrefix + message);
         }
 
@@ -120,6 +125,7 @@ namespace Core2D.Log.Trace
         void ILog.LogError(string format, params object[] args)
         {
             SD.Trace.TraceError(format, args);
+            Console.WriteLine(format, args);
             SetLastMessage(ErrorPrefix + string.Format(format, args));
         }
 
