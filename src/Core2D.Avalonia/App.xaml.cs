@@ -126,7 +126,8 @@ namespace Core2D.Avalonia
 
                 editor.AboutInfo = aboutInfo;
 
-                var window = serviceProvider.GetService<Windows.MainWindow>();
+                //var window = serviceProvider.GetService<Windows.MainWindow>();
+                var window = new Windows.MainWindow();
                 window.Closed += (sender, e) => editor.OnSaveRecent(path);
                 window.DataContext = editor;
                 window.Show();
