@@ -236,7 +236,9 @@ Task("Restore-NetCore")
 {
     foreach (var project in netCoreProjects)
     {
-        DotNetCoreRestore(project.Path);
+        DotNetCoreRestore(project.Path, new DotNetCoreRestoreSettings {
+            MSBuildSettings = new DotNetCoreMSBuildSettings().WithProperty("CoreRT", "False")
+        });
     }
 });
 
@@ -303,7 +305,69 @@ Task("Publish-NetCore")
             }
         }
     }
+});
 
+Task("Copy-Redist-Files-NetCore")
+    .IsDependentOn("Publish-NetCore")
+    .Does(() =>
+{
+    foreach (var project in netCoreProjects)
+    {
+        foreach(var runtime in project.Runtimes)
+        {
+            var outputDir = zipRootDir.Combine(project.Name + "-" + runtime);
+            if (IsRunningOnWindows() && runtime == "win7-x86")
+            {
+                Information("Copying redist files for: {0}, runtime: {1}", project.Name, runtime);
+                CopyFileToDirectory(msvcp140_x86, outputDir);
+                CopyFileToDirectory(vcruntime140_x86, outputDir);
+            }
+            if (IsRunningOnWindows() && runtime == "win7-x64")
+            {
+                Information("Copying redist files for: {0}, runtime: {1}", project.Name, runtime);
+                CopyFileToDirectory(msvcp140_x64, outputDir);
+                CopyFileToDirectory(vcruntime140_x64, outputDir);
+            }
+        }
+    }
+});
+
+Task("Zip-Files-NetCore")
+    .IsDependentOn("Publish-NetCore")
+    .Does(() =>
+{
+    foreach (var project in netCoreProjects)
+    {
+        foreach(var runtime in project.Runtimes)
+        {
+            var outputDir = zipRootDir.Combine(project.Name + "-" + runtime);
+            var zipFile = zipRootDir.CombineWithFilePath(project.Name + "-" + runtime + "-" + version + ".zip");
+            Information("Zip files for: {0}, runtime: {1}", project.Name, runtime);
+            Zip(outputDir.FullPath, zipFile);
+        }
+    }
+});
+
+///////////////////////////////////////////////////////////////////////////////
+// TASKS: .NET CoreRT
+///////////////////////////////////////////////////////////////////////////////
+
+Task("Restore-NetCoreRT")
+    .IsDependentOn("Clean")
+    .Does(() =>
+{
+    foreach (var project in netCoreRTProjects)
+    {
+        DotNetCoreRestore(project.Path, new DotNetCoreRestoreSettings {
+            MSBuildSettings = new DotNetCoreMSBuildSettings().WithProperty("CoreRT", "True")
+        });
+    }
+});
+
+Task("Publish-NetCoreRT")
+    .IsDependentOn("Restore-NetCoreRT")
+    .Does(() =>
+{
     foreach (var project in netCoreRTProjects)
     {
         foreach(var runtime in project.Runtimes)
@@ -331,30 +395,10 @@ Task("Publish-NetCore")
     }
 });
 
-Task("Copy-Redist-Files-NetCore")
-    .IsDependentOn("Publish-NetCore")
+Task("Copy-Redist-Files-NetCoreRT")
+    .IsDependentOn("Publish-NetCoreRT")
     .Does(() =>
 {
-    foreach (var project in netCoreProjects)
-    {
-        foreach(var runtime in project.Runtimes)
-        {
-            var outputDir = zipRootDir.Combine(project.Name + "-" + runtime);
-            if (IsRunningOnWindows() && runtime == "win7-x86")
-            {
-                Information("Copying redist files for: {0}, runtime: {1}", project.Name, runtime);
-                CopyFileToDirectory(msvcp140_x86, outputDir);
-                CopyFileToDirectory(vcruntime140_x86, outputDir);
-            }
-            if (IsRunningOnWindows() && runtime == "win7-x64")
-            {
-                Information("Copying redist files for: {0}, runtime: {1}", project.Name, runtime);
-                CopyFileToDirectory(msvcp140_x64, outputDir);
-                CopyFileToDirectory(vcruntime140_x64, outputDir);
-            }
-        }
-    }
-
     foreach (var project in netCoreRTProjects)
     {
         foreach(var runtime in project.Runtimes)
@@ -373,21 +417,10 @@ Task("Copy-Redist-Files-NetCore")
     }
 });
 
-Task("Zip-Files-NetCore")
-    .IsDependentOn("Publish-NetCore")
+Task("Zip-Files-NetCoreRT")
+    .IsDependentOn("Publish-NetCoreRT")
     .Does(() =>
 {
-    foreach (var project in netCoreProjects)
-    {
-        foreach(var runtime in project.Runtimes)
-        {
-            var outputDir = zipRootDir.Combine(project.Name + "-" + runtime);
-            var zipFile = zipRootDir.CombineWithFilePath(project.Name + "-" + runtime + "-" + version + ".zip");
-            Information("Zip files for: {0}, runtime: {1}", project.Name, runtime);
-            Zip(outputDir.FullPath, zipFile);
-        }
-    }
-
     foreach (var project in netCoreRTProjects)
     {
         foreach(var runtime in project.Runtimes)
@@ -419,6 +452,9 @@ Task("AppVeyor")
   .IsDependentOn("Publish-NetCore")
   .IsDependentOn("Copy-Redist-Files-NetCore")
   .IsDependentOn("Zip-Files-NetCore")
+  .IsDependentOn("Publish-NetCoreRT")
+  .IsDependentOn("Copy-Redist-Files-NetCoreRT")
+  .IsDependentOn("Zip-Files-NetCoreRT")
   .IsDependentOn("Run-Unit-Tests")
   .IsDependentOn("Copy-Redist-Files")
   .IsDependentOn("Zip-Files");
