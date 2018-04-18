@@ -24,15 +24,15 @@
         <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.ExportCommand}" Gesture="Ctrl+E"/>
         <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.ExitCommand}" Gesture="Alt+F4"/>
         <!-- Edit -->
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.UndoCommand}" Gesture="Ctrl+Z"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.RedoCommand}" Gesture="Ctrl+Y"/>
+        <KeyBinding Command="{Binding OnUndo}" Gesture="Ctrl+Z"/>
+        <KeyBinding Command="{Binding OnRedo}" Gesture="Ctrl+Y"/>
         <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.CopyAsEmfCommand}" Gesture="Ctrl+Shift+C"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.CutCommand}" Gesture="Ctrl+X"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.CopyCommand}" Gesture="Ctrl+C"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.PasteCommand}" Gesture="Ctrl+V"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.SelectAllCommand}" Gesture="Ctrl+A"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.GroupCommand}" Gesture="Ctrl+G"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.UngroupCommand}" Gesture="Ctrl+U"/>
+        <KeyBinding Command="{Binding OnCut}" Gesture="Ctrl+X"/>
+        <KeyBinding Command="{Binding OnCopy}" Gesture="Ctrl+C"/>
+        <KeyBinding Command="{Binding OnPaste}" Gesture="Ctrl+V"/>
+        <KeyBinding Command="{Binding OnSelectAll}" Gesture="Ctrl+A"/>
+        <KeyBinding Command="{Binding OnGroupSelected}" Gesture="Ctrl+G"/>
+        <KeyBinding Command="{Binding OnUngroupSelected}" Gesture="Ctrl+U"/>
         <!-- View -->
         <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.ObjectBrowserCommand}" Gesture="Ctrl+J"/>
         <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.DocumentViewerCommand}" Gesture="Ctrl+D"/>

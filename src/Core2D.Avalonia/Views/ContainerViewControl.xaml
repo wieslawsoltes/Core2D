@@ -23,44 +23,46 @@
     </i:Interaction.Behaviors>
     <UserControl.KeyBindings>
         <!-- Edit -->
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.DeleteCommand}" CommandParameter="{Binding}" Gesture="Delete"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.DeselectAllCommand}" Gesture="Escape"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.SendToBackCommand}" Gesture="Shift+OemMinus"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.SendBackwardCommand}" Gesture="OemMinus"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.BringForwardCommand}" Gesture="OemPlus"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.BringToFrontCommand}" Gesture="Shift+OemPlus"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.SendToBackCommand}" Gesture="Shift+Subtract"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.SendBackwardCommand}" Gesture="Subtract"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.BringForwardCommand}" Gesture="Add"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.BringToFrontCommand}" Gesture="Shift+Add"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.MoveUpCommand}" Gesture="Up"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.MoveDownCommand}" Gesture="Down"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.MoveLeftCommand}" Gesture="Left"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.MoveRightCommand}" Gesture="Right"/>
+        <KeyBinding Command="{Binding OnDeleteSelected}" CommandParameter="{Binding}" Gesture="Delete"/>
+        <KeyBinding Command="{Binding OnDeselectAll}" Gesture="Escape"/>
+        <KeyBinding Command="{Binding OnSendToBackSelected}" Gesture="Shift+OemMinus"/>
+        <KeyBinding Command="{Binding OnSendBackwardSelected}" Gesture="OemMinus"/>
+        <KeyBinding Command="{Binding OnBringForwardSelected}" Gesture="OemPlus"/>
+        <KeyBinding Command="{Binding OnBringToFrontSelected}" Gesture="Shift+OemPlus"/>
+        <KeyBinding Command="{Binding OnSendToBackSelected}" Gesture="Shift+Subtract"/>
+        <KeyBinding Command="{Binding OnSendBackwardSelected}" Gesture="Subtract"/>
+        <KeyBinding Command="{Binding OnBringForwardSelected}" Gesture="Add"/>
+        <KeyBinding Command="{Binding OnBringToFrontSelected}" Gesture="Shift+Add"/>
+        <KeyBinding Command="{Binding OnMoveUpSelected}" Gesture="Up"/>
+        <KeyBinding Command="{Binding OnMoveDownSelected}" Gesture="Down"/>
+        <KeyBinding Command="{Binding OnMoveLeftSelected}" Gesture="Left"/>
+        <KeyBinding Command="{Binding OnMoveRightSelected}" Gesture="Right"/>
         <!-- View -->
+        <!--
         <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.ZoomResetCommand}" Gesture="Z"/>
         <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.ZoomAutoFitCommand}" Gesture="X"/>
+        -->
         <!-- Tool -->
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.ToolNoneCommand}" Gesture="N"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.ToolSelectionCommand}" Gesture="S"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.ToolPointCommand}" Gesture="P"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.ToolLineCommand}" Gesture="L"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.ToolArcCommand}" Gesture="A"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.ToolCubicBezierCommand}" Gesture="B"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.ToolQuadraticBezierCommand}" Gesture="Q"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.ToolPathCommand}" Gesture="H"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.ToolMoveCommand}" Gesture="M"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.ToolRectangleCommand}" Gesture="R"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.ToolEllipseCommand}" Gesture="E"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.ToolTextCommand}" Gesture="T"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.ToolImageCommand}" Gesture="I"/>
+        <KeyBinding Command="{Binding OnToolNone}" Gesture="N"/>
+        <KeyBinding Command="{Binding OnToolSelection}" Gesture="S"/>
+        <KeyBinding Command="{Binding OnToolPoint}" Gesture="P"/>
+        <KeyBinding Command="{Binding OnToolLine}" Gesture="L"/>
+        <KeyBinding Command="{Binding OnToolArc}" Gesture="A"/>
+        <KeyBinding Command="{Binding OnToolCubicBezier}" Gesture="B"/>
+        <KeyBinding Command="{Binding OnToolQuadraticBezier}" Gesture="Q"/>
+        <KeyBinding Command="{Binding OnToolPath}" Gesture="H"/>
+        <KeyBinding Command="{Binding OnToolMove}" Gesture="M"/>
+        <KeyBinding Command="{Binding OnToolRectangle}" Gesture="R"/>
+        <KeyBinding Command="{Binding OnToolEllipse}" Gesture="E"/>
+        <KeyBinding Command="{Binding OnToolText}" Gesture="T"/>
+        <KeyBinding Command="{Binding OnToolImage}" Gesture="I"/>
         <!-- Options -->
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.DefaultIsStrokedCommand}" Gesture="K"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.DefaultIsFilledCommand}" Gesture="F"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.DefaultIsClosedCommand}" Gesture="D"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.DefaultIsSmoothJoinCommand}" Gesture="J"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.SnapToGridCommand}" Gesture="G"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.TryToConnectCommand}" Gesture="C"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.CloneStyleCommand}" Gesture="Y"/>
+        <KeyBinding Command="{Binding OnToggleDefaultIsStroked}" Gesture="K"/>
+        <KeyBinding Command="{Binding OnToggleDefaultIsFilled}" Gesture="F"/>
+        <KeyBinding Command="{Binding OnToggleDefaultIsClosed}" Gesture="D"/>
+        <KeyBinding Command="{Binding OnToggleDefaultIsSmoothJoin}" Gesture="J"/>
+        <KeyBinding Command="{Binding OnToggleSnapToGrid}" Gesture="G"/>
+        <KeyBinding Command="{Binding OnToggleTryToConnect}" Gesture="C"/>
+        <KeyBinding Command="{Binding OnToggleCloneStyle}" Gesture="Y"/>
     </UserControl.KeyBindings>
 </UserControl>
