@@ -15,17 +15,19 @@
              Design.Width="1000" Design.Height="800">
     <Grid MaxWidth="800" MaxHeight="600" RowDefinitions="0.2*,50,30,1*,30,1*,30,1*,20,0.2*" ColumnDefinitions="5*,50*,30,40*,5*">
         <TextBlock Text="Core2D" Classes="title" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="1"/>
-        <Button Content="New Project" Classes="project" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="1" Grid.RowSpan="1" Command="{x:Static Editor:ProjectEditorCommands.NewCommand}" CommandParameter="{Binding}">
+        <Button Content="New Project" Classes="project" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="1" Grid.RowSpan="1" Command="{Binding OnNewProject}">
             <i:Interaction.Behaviors>
                 <iac:FocusOnPointerMovedBehavior/>
             </i:Interaction.Behaviors>
         </Button>
+        <!--
         <Button Content="Open Project" Classes="project" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="1" Grid.RowSpan="1" Command="{x:Static Editor:ProjectEditorCommands.OpenCommand}">
             <i:Interaction.Behaviors>
                 <iac:FocusOnPointerMovedBehavior/>
             </i:Interaction.Behaviors>
         </Button>
-        <Button Content="Open Recent" Classes="project" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="1" Grid.RowSpan="1" Command="{x:Static Editor:ProjectEditorCommands.OpenCommand}" CommandParameter="{Binding CurrentRecentProject.Path}">
+        -->
+        <Button Content="Open Recent" Classes="project" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="1" Grid.RowSpan="1" Command="{Binding OnOpenProject}" CommandParameter="{Binding CurrentRecentProject.Path}">
             <i:Interaction.Behaviors>
                 <iac:FocusOnPointerMovedBehavior/>
             </i:Interaction.Behaviors>
@@ -38,7 +40,7 @@
                         <i:Interaction.Behaviors>
                             <iac:SelectListBoxItemOnPointerMovedBehavior/>
                             <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #grid}">
-                                <ia:InvokeCommandAction Command="{x:Static Editor:ProjectEditorCommands.OpenCommand}" CommandParameter="{Binding Path}"/>
+                                <ia:InvokeCommandAction Command="{Binding $parent[ListBox].DataContext.OnOpenProject}" CommandParameter="{Binding Path}"/>
                             </ia:EventTriggerBehavior>
                         </i:Interaction.Behaviors>
                         <TextBlock Text="{Binding Name}" Classes="recents" Grid.Column="0" ToolTip.Tip="{Binding Path}"/>
