@@ -50,6 +50,12 @@
         <Assembly Name="Avalonia.Skia" Dynamic="Required All" />
         <Assembly Name="SkiaSharp" Dynamic="Required All" />
 
+        <!-- AvaloniaBehaviors -->
+
+        <Assembly Name="Avalonia.Xaml.Interactivity" Dynamic="Required All" />
+        <Assembly Name="Avalonia.Xaml.Interactions" Dynamic="Required All" />
+        <Assembly Name="Avalonia.Xaml.Interactions.Custom" Dynamic="Required All" />
+
         <!-- PanAndZoom -->
 
         <Assembly Name="PanAndZoom" Dynamic="Required All">
