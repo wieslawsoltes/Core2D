@@ -69,6 +69,14 @@ var netCoreProjects = netCoreApps.Select(name =>
         Runtimes = XmlPeek(string.Format("{0}/{1}/{1}.csproj", netCoreAppsRoot, name), "//*[local-name()='RuntimeIdentifiers']/text()").Split(';')
     }).ToList();
 
+var netCoreRTProjects = netCoreApps.Select(name => 
+    new {
+        Path = string.Format("{0}/{1}", netCoreAppsRoot, name),
+        Name = name,
+        Framework = XmlPeek(string.Format("{0}/{1}/{1}.csproj", netCoreAppsRoot, name), "//*[local-name()='TargetFramework']/text()"),
+        Runtimes = new string[] { "win-x64" }
+    }).ToList();
+
 ///////////////////////////////////////////////////////////////////////////////
 // .NET Core UnitTests
 ///////////////////////////////////////////////////////////////////////////////
@@ -111,6 +119,9 @@ var msvcp140_x64 = @"C:\Program Files (x86)\Microsoft Visual Studio\2017\Communi
 var vcruntime140_x86 = @"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.13.26020\x86\Microsoft.VC141.CRT\vcruntime140.dll";
 var vcruntime140_x64 = @"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.13.26020\x64\Microsoft.VC141.CRT\vcruntime140.dll";
 var editbin = @"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\editbin.exe";
+DirectoryPath profilePath = EnvironmentVariable("USERPROFILE") ?? EnvironmentVariable("HOME");
+DirectoryPath nugetPackages = EnvironmentVariable("NUGET_PACKAGES") ?? profilePath.Combine(".nuget/packages");
+var libSkiaSharp = nugetPackages.Combine("skiasharp/1.57.1/runtimes/win7-x64/native").CombineWithFilePath("libSkiaSharp.dll");
 
 ///////////////////////////////////////////////////////////////////////////////
 // VALIDATE
@@ -277,7 +288,8 @@ Task("Publish-NetCore")
                 Framework = project.Framework,
                 Configuration = configuration,
                 Runtime = runtime,
-                OutputDirectory = outputDir.FullPath
+                OutputDirectory = outputDir.FullPath,
+                MSBuildSettings = new DotNetCoreMSBuildSettings().WithProperty("CoreRT", "False")
             });
 
             if (IsRunningOnWindows() && (runtime == "win7-x86" || runtime == "win7-x64"))
@@ -289,6 +301,32 @@ Task("Publish-NetCore")
                 });
                 Information("The editbin command exit code: {0}", exitCodeWithArgument);
             }
+        }
+    }
+
+    foreach (var project in netCoreRTProjects)
+    {
+        foreach(var runtime in project.Runtimes)
+        {
+            var outputDir = zipRootDir.Combine(project.Name + "-" + runtime);
+            Information("Publishing: {0}, runtime: {1}", project.Name, runtime);
+            DotNetCorePublish(project.Path, new DotNetCorePublishSettings {
+                Framework = project.Framework,
+                Configuration = configuration,
+                Runtime = runtime,
+                OutputDirectory = outputDir.FullPath,
+                MSBuildSettings = new DotNetCoreMSBuildSettings().WithProperty("CoreRT", "True")
+            });
+
+            //if (IsRunningOnWindows() && runtime == "win-x64")
+            //{
+            //    Information("Patching executable subsystem for: {0}, runtime: {1}", project.Name, runtime);
+            //    var targetExe = outputDir.CombineWithFilePath(project.Name + ".exe");
+            //    var exitCodeWithArgument = StartProcess(editbin, new ProcessSettings { 
+            //        Arguments = "/subsystem:windows " + targetExe.FullPath
+            //    });
+            //    Information("The editbin command exit code: {0}", exitCodeWithArgument);
+            //}
         }
     }
 });
@@ -316,6 +354,23 @@ Task("Copy-Redist-Files-NetCore")
             }
         }
     }
+
+    foreach (var project in netCoreRTProjects)
+    {
+        foreach(var runtime in project.Runtimes)
+        {
+            var outputDir = zipRootDir.Combine(project.Name + "-" + runtime);
+            if (IsRunningOnWindows() && runtime == "win-x64")
+            {
+                Information("Copying redist files for: {0}, runtime: {1}", project.Name, runtime);
+                CopyFileToDirectory(msvcp140_x64, outputDir);
+                CopyFileToDirectory(vcruntime140_x64, outputDir);
+
+                Information("Copying SkiaSharp files for: {0}, runtime: {1}", project.Name, runtime);
+                CopyFileToDirectory(libSkiaSharp, outputDir);
+            }
+        }
+    }
 });
 
 Task("Zip-Files-NetCore")
@@ -323,6 +378,17 @@ Task("Zip-Files-NetCore")
     .Does(() =>
 {
     foreach (var project in netCoreProjects)
+    {
+        foreach(var runtime in project.Runtimes)
+        {
+            var outputDir = zipRootDir.Combine(project.Name + "-" + runtime);
+            var zipFile = zipRootDir.CombineWithFilePath(project.Name + "-" + runtime + "-" + version + ".zip");
+            Information("Zip files for: {0}, runtime: {1}", project.Name, runtime);
+            Zip(outputDir.FullPath, zipFile);
+        }
+    }
+
+    foreach (var project in netCoreRTProjects)
     {
         foreach(var runtime in project.Runtimes)
         {
