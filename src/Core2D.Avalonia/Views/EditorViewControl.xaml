@@ -7,7 +7,7 @@
              xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"
              xmlns:views="clr-namespace:Core2D.Avalonia.Views;assembly=Core2D.Avalonia">
     <Grid RowDefinitions="Auto,*">
-        <views:EditorMenuControl Grid.Row="0" DataContext="{Binding Context}"/>
+        <!-- <views:EditorMenuControl Grid.Row="0" DataContext="{Binding Context}"/> -->
         <views:EditorControl Grid.Row="1" DataContext="{Binding Context}"/>
     </Grid>
 </UserControl>
