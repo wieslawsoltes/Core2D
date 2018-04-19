@@ -690,12 +690,12 @@ namespace Core2D.Editor
                 {
                     if (Renderers?[0]?.State?.SelectedShape != null)
                     {
-                        OnCopy(Enumerable.Repeat(Renderers[0].State.SelectedShape, 1).ToList());
+                        OnCopyShapes(Enumerable.Repeat(Renderers[0].State.SelectedShape, 1).ToList());
                     }
 
                     if (Renderers?[0]?.State?.SelectedShapes != null)
                     {
-                        OnCopy(Renderers[0].State.SelectedShapes.ToList());
+                        OnCopyShapes(Renderers[0].State.SelectedShapes.ToList());
                     }
                 }
             }
@@ -717,7 +717,7 @@ namespace Core2D.Editor
                     var text = await (TextClipboard?.GetText() ?? Task.FromResult(string.Empty));
                     if (!string.IsNullOrEmpty(text))
                     {
-                        OnPaste(text);
+                        OnTryPaste(text);
                     }
                 }
             }
@@ -2116,7 +2116,7 @@ namespace Core2D.Editor
         /// Copy selected shapes to clipboard.
         /// </summary>
         /// <param name="shapes"></param>
-        public void OnCopy(IList<BaseShape> shapes)
+        public void OnCopyShapes(IList<BaseShape> shapes)
         {
             try
             {
@@ -2136,7 +2136,7 @@ namespace Core2D.Editor
         /// Paste text from clipboard as shapes.
         /// </summary>
         /// <param name="text">The text string.</param>
-        public void OnPaste(string text)
+        public void OnTryPaste(string text)
         {
             try
             {
@@ -2156,7 +2156,7 @@ namespace Core2D.Editor
                             Project.Options.DefaultIsStroked,
                             Project.Options.DefaultIsFilled);
 
-                        OnPaste(Enumerable.Repeat(path, 1));
+                        OnPasteShapes(Enumerable.Repeat(path, 1));
                         return;
                     }
                 }
@@ -2185,7 +2185,7 @@ namespace Core2D.Editor
                     var shapes = JsonSerializer?.Deserialize<IList<BaseShape>>(text);
                     if (shapes?.Count() > 0)
                     {
-                        OnPaste(shapes);
+                        OnPasteShapes(shapes);
                         return;
                     }
                 }
@@ -2334,7 +2334,7 @@ namespace Core2D.Editor
         /// Paste shapes to current container.
         /// </summary>
         /// <param name="shapes">The shapes collection.</param>
-        public void OnPaste(IEnumerable<BaseShape> shapes)
+        public void OnPasteShapes(IEnumerable<BaseShape> shapes)
         {
             try
             {
