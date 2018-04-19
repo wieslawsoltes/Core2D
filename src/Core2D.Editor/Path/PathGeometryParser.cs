@@ -24,40 +24,37 @@ namespace Core2D.Editor.Path
             var fillRule = FillRule.EvenOdd;
             var geometry = PathGeometry.Create(ImmutableArray.Create<PathFigure>(), fillRule);
 
-            if (source != null)
+            int curIndex = 0;
+            while ((curIndex < source.Length) && Char.IsWhiteSpace(source, curIndex))
             {
-                int curIndex = 0;
-                while ((curIndex < source.Length) && Char.IsWhiteSpace(source, curIndex))
+                curIndex++;
+            }
+
+            if (curIndex < source.Length)
+            {
+                if (source[curIndex] == 'F')
                 {
                     curIndex++;
-                }
 
-                if (curIndex < source.Length)
-                {
-                    if (source[curIndex] == 'F')
+                    while ((curIndex < source.Length) && Char.IsWhiteSpace(source, curIndex))
                     {
                         curIndex++;
-
-                        while ((curIndex < source.Length) && Char.IsWhiteSpace(source, curIndex))
-                        {
-                            curIndex++;
-                        }
-
-                        if ((curIndex == source.Length) || ((source[curIndex] != '0') && (source[curIndex] != '1')))
-                        {
-                            throw new FormatException("Illegal token.");
-                        }
-
-                        fillRule = source[curIndex] == '0' ? FillRule.EvenOdd : FillRule.Nonzero;
-                        curIndex++;
                     }
+
+                    if ((curIndex == source.Length) || ((source[curIndex] != '0') && (source[curIndex] != '1')))
+                    {
+                        throw new FormatException("Illegal token.");
+                    }
+
+                    fillRule = source[curIndex] == '0' ? FillRule.EvenOdd : FillRule.Nonzero;
+                    curIndex++;
                 }
-
-                var parser = new SvgToPathGeometryParser();
-                var context = new PathGeometryContext(geometry);
-
-                parser.Parse(context, source, curIndex);
             }
+
+            var parser = new SvgToPathGeometryParser();
+            var context = new PathGeometryContext(geometry);
+
+            parser.Parse(context, source, curIndex);
 
             geometry.FillRule = fillRule;
 
