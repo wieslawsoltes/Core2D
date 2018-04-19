@@ -42,15 +42,6 @@ namespace Core2D.Avalonia
                 builder.RegisterModule<ViewModule>();
                 using (IContainer container = builder.Build())
                 {
-                    //var services = container.ComponentRegistry.Registrations
-                    //        .SelectMany(x => x.Services)
-                    //        .OfType<IServiceWithType>()
-                    //        .Select(x => x.ServiceType);
-                    //Console.WriteLine("Registered services:");
-                    //foreach (var service in services)
-                    //{
-                    //    Console.WriteLine(service);
-                    //}
                     using (ILog log = container.Resolve<ILog>())
                     {
                         var appBuilder = BuildAvaloniaApp();

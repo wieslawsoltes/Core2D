@@ -20,13 +20,11 @@
                 <iac:FocusOnPointerMovedBehavior/>
             </i:Interaction.Behaviors>
         </Button>
-        <!--
-        <Button Content="Open Project" Classes="project" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="1" Grid.RowSpan="1" Command="{x:Static Editor:ProjectEditorCommands.OpenCommand}">
+        <Button Content="Open Project" Classes="project" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="1" Grid.RowSpan="1" Command="{Binding Platform.OnOpen}">
             <i:Interaction.Behaviors>
                 <iac:FocusOnPointerMovedBehavior/>
             </i:Interaction.Behaviors>
         </Button>
-        -->
         <Button Content="Open Recent" Classes="project" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="1" Grid.RowSpan="1" Command="{Binding OnOpenProject}" CommandParameter="{Binding CurrentRecentProject.Path}">
             <i:Interaction.Behaviors>
                 <iac:FocusOnPointerMovedBehavior/>

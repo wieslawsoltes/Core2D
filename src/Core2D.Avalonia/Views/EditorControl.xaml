@@ -21,7 +21,7 @@
              Design.DataContext="{x:Static Designer:DesignerContext.Editor}"
              Design.Width="1200" Design.Height="540">
     <Grid Name="rootPanel" ColumnDefinitions="180,Auto,*,Auto,240" RowDefinitions="*,Auto" Margin="6,6,6,2">
-        <!-- <GridSplitter Name="leftPanelVSplitter" Classes="vertical" Grid.Column="1" Grid.Row="0" Width="6"/> -->
+        <GridSplitter Name="leftPanelVSplitter" Classes="vertical" Grid.Column="1" Grid.Row="0" Width="6"/>
         <Grid Name="containerPanel" Grid.Row="0" Grid.Column="2">
             <Border Classes="container">
                 <Border Classes="transparent" ClipToBounds="True">
@@ -31,7 +31,7 @@
                 </Border>
             </Border>
         </Grid>
-        <!-- <Grid Name="leftPanel" RowDefinitions="50*,Auto,50*" Grid.Column="0" Grid.Row="0">
+        <Grid Name="leftPanel" RowDefinitions="50*,Auto,50*" Grid.Column="0" Grid.Row="0">
             <Border Name="leftPanelTop" Classes="leftTop" Grid.Row="0">
                 <TabControl Classes="bottom">
                     <TabItem Header="Project" Classes="property">
@@ -85,8 +85,8 @@
                                         <TextBlock Text="{Binding #zoomBorder.OffsetX, Mode=OneWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
                                         <TextBlock Text="OffsetY:" Classes="left" Grid.Row="3" Grid.Column="0"/>
                                         <TextBlock Text="{Binding #zoomBorder.OffsetY, Mode=OneWay}" Classes="left" Grid.Row="3" Grid.Column="1"/>
-                                        <Button Content="Reset" Command="{x:Static Editor:ProjectEditorCommands.ZoomResetCommand}" Classes="default" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"/>
-                                        <Button Content="AutoFit" Command="{x:Static Editor:ProjectEditorCommands.ZoomAutoFitCommand}" Classes="default" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"/>  
+                                        <Button Content="Reset" Command="{Binding Platform.OnZoomReset}" Classes="default" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"/>
+                                        <Button Content="AutoFit" Command="{Binding Platform.OnZoomAutoFit}" Classes="default" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"/>  
                                     </Grid>
                                 </ScrollViewer>
                             </TabItem>
@@ -203,6 +203,6 @@
                 <CheckBox Classes="options" Content="Connect" IsChecked="{Binding Project.Options.TryToConnect, Mode=TwoWay}"/>
                 <CheckBox Classes="options" Content="CloneStyle" IsChecked="{Binding Project.Options.CloneStyle, Mode=TwoWay}"/>
             </WrapPanel>
-        </Grid>  -->
+        </Grid>
     </Grid>
 </UserControl>

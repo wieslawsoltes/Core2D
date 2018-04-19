@@ -23,7 +23,7 @@
     </i:Interaction.Behaviors>
     <UserControl.KeyBindings>
         <!-- Edit -->
-        <KeyBinding Command="{Binding OnDeleteSelected}" CommandParameter="{Binding}" Gesture="Delete"/>
+        <KeyBinding Command="{Binding OnDelete}" CommandParameter="{Binding}" Gesture="Delete"/>
         <KeyBinding Command="{Binding OnDeselectAll}" Gesture="Escape"/>
         <KeyBinding Command="{Binding OnSendToBackSelected}" Gesture="Shift+OemMinus"/>
         <KeyBinding Command="{Binding OnSendBackwardSelected}" Gesture="OemMinus"/>
@@ -38,10 +38,8 @@
         <KeyBinding Command="{Binding OnMoveLeftSelected}" Gesture="Left"/>
         <KeyBinding Command="{Binding OnMoveRightSelected}" Gesture="Right"/>
         <!-- View -->
-        <!--
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.ZoomResetCommand}" Gesture="Z"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.ZoomAutoFitCommand}" Gesture="X"/>
-        -->
+        <KeyBinding Command="{Binding Platform.OnZoomReset}" Gesture="Z"/>
+        <KeyBinding Command="{Binding Platform.OnZoomAutoFit}" Gesture="X"/>
         <!-- Tool -->
         <KeyBinding Command="{Binding OnToolNone}" Gesture="N"/>
         <KeyBinding Command="{Binding OnToolSelection}" Gesture="S"/>

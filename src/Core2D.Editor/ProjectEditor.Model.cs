@@ -15,6 +15,130 @@ using Core2D.Renderer;
 namespace Core2D.Editor
 {
     /// <summary>
+    /// Defines project editor platform contract.
+    /// </summary>
+    public interface IProjectEditorPlatform
+    {
+        /// <summary>
+        /// Open project.
+        /// </summary>
+        /// <param name="path">The project file path.</param>
+        void OnOpen(string path);
+
+        /// <summary>
+        /// Save project.
+        /// </summary>
+        void OnSave();
+
+        /// <summary>
+        /// Save project as.
+        /// </summary>
+        void OnSaveAs();
+
+        /// <summary>
+        /// Import json.
+        /// </summary>
+        /// <param name="path">The project json path.</param>
+        void OnImportJson(string path);
+
+        /// <summary>
+        /// Import object.
+        /// </summary>
+        /// <param name="path">The object file path.</param>
+        void OnImportObject(string path);
+
+        /// <summary>
+        /// Import xaml.
+        /// </summary>
+        /// <param name="path">The xaml file path.</param>
+        void OnImportXaml(string path);
+
+        /// <summary>
+        /// Export json.
+        /// </summary>
+        /// <param name="item">The object to export.</param>
+        void OnExportJson(object item);
+
+        /// <summary>
+        /// Export object.
+        /// </summary>
+        /// <param name="item">The object to export.</param>
+        void OnExportObject(object item);
+
+        /// <summary>
+        /// Export xaml.
+        /// </summary>
+        /// <param name="item">The object to export.</param>
+        void OnExportXaml(object item);
+
+        /// <summary>
+        /// Export project, document or page.
+        /// </summary>
+        /// <param name="item">The object to export.</param>
+        void OnExport(object item);
+
+        /// <summary>
+        /// Execute script.
+        /// </summary>
+        /// <param name="path">The script file path.</param>
+        void OnExecuteScript(string path);
+
+        /// <summary>
+        /// Close application view.
+        /// </summary>
+        void OnExit();
+
+        /// <summary>
+        /// Copy page or selected shapes to clipboard as Emf.
+        /// </summary>
+        /// <param name="item">The object to copy as EMF.</param>
+        void OnCopyAsEmf(object item);
+
+        /// <summary>
+        /// Import database.
+        /// </summary>
+        /// <param name="project">The target project.</param>
+        void OnImportData(ProjectContainer project);
+
+        /// <summary>
+        /// Export database.
+        /// </summary>
+        /// <param name="db">The database to export.</param>
+        void OnExportData(Database db);
+
+        /// <summary>
+        /// Update database.
+        /// </summary>
+        /// <param name="db">The database to update.</param>
+        void OnUpdateData(Database db);
+
+        /// <summary>
+        /// Show document viewer.
+        /// </summary>
+        void OnDocumentViewer();
+
+        /// <summary>
+        /// Show object browser.
+        /// </summary>
+        void OnObjectBrowser();
+
+        /// <summary>
+        /// Show about dialog.
+        /// </summary>
+        void OnAboutDialog();
+
+        /// <summary>
+        /// Auto-fit view to the available extents.
+        /// </summary>
+        void OnZoomAutoFit();
+
+        /// <summary>
+        /// Reset view size to defaults.
+        /// </summary>
+        void OnZoomReset();
+    }
+
+    /// <summary>
     /// Project editor model.
     /// </summary>
     public partial class ProjectEditor : ObservableObject
@@ -27,9 +151,6 @@ namespace Core2D.Editor
         private Action _invalidate;
         private Action _resetZoom;
         private Action _extentZoom;
-        private Action _loadLayout;
-        private Action _saveLayout;
-        private Action _resetLayout;
         private bool _isToolIdle;
         private ToolBase _currentTool;
         private PathToolBase _currentPathTool;
@@ -53,7 +174,7 @@ namespace Core2D.Editor
         private readonly Lazy<ITextFieldReader<Database>> _csvReader;
         private readonly Lazy<ITextFieldWriter<Database>> _csvWriter;
         private readonly Lazy<IImageImporter> _imageImporter;
-        private readonly Lazy<ProjectEditorCommands> _editorCommands;
+        private readonly Lazy<IProjectEditorPlatform> _platform;
 
         /// <summary>
         /// Gets or sets current project.
@@ -119,36 +240,6 @@ namespace Core2D.Editor
         {
             get => _extentZoom;
             set => Update(ref _extentZoom, value);
-        }
-
-        /// <summary>
-        /// Gets or sets load layout action.
-        /// </summary>
-        /// <remarks>Auto-fit view to the available extents.</remarks>
-        public Action LoadLayout
-        {
-            get => _loadLayout;
-            set => Update(ref _loadLayout, value);
-        }
-
-        /// <summary>
-        /// Gets or sets save layout action.
-        /// </summary>
-        /// <remarks>Auto-fit view to the available extents.</remarks>
-        public Action SaveLayout
-        {
-            get => _saveLayout;
-            set => Update(ref _saveLayout, value);
-        }
-
-        /// <summary>
-        /// Gets or sets reset layout action.
-        /// </summary>
-        /// <remarks>Reset editor layout.</remarks>
-        public Action ResetLayout
-        {
-            get => _resetLayout;
-            set => Update(ref _resetLayout, value);
         }
 
         /// <summary>
@@ -295,9 +386,9 @@ namespace Core2D.Editor
         public IImageImporter ImageImporter => _imageImporter.Value;
 
         /// <summary>
-        /// Gets project editor commands.
+        /// Gets project editor platform.
         /// </summary>
-        public ProjectEditorCommands EditorCommands => _editorCommands.Value;
+        public IProjectEditorPlatform Platform => _platform.Value;
 
         /// <summary>
         /// Initialize new instance of <see cref="ProjectEditor"/> class.
@@ -324,7 +415,7 @@ namespace Core2D.Editor
             _csvReader = _serviceProvider.GetServiceLazily<ITextFieldReader<Database>>();
             _csvWriter = _serviceProvider.GetServiceLazily<ITextFieldWriter<Database>>();
             _imageImporter = _serviceProvider.GetServiceLazily<IImageImporter>();
-            _editorCommands = _serviceProvider.GetServiceLazily<ProjectEditorCommands>();
+            _platform = _serviceProvider.GetServiceLazily<IProjectEditorPlatform>();
         }
     }
 }

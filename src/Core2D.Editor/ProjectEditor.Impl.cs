@@ -3567,15 +3567,6 @@ namespace Core2D.Editor
         }
 
         /// <summary>
-        /// Checks if edit mode is active.
-        /// </summary>
-        /// <returns>Return true if edit mode is active.</returns>
-        public bool IsEditMode()
-        {
-            return true;
-        }
-
-        /// <summary>
         /// Change current view.
         /// </summary>
         /// <param name="view">The view instance.</param>

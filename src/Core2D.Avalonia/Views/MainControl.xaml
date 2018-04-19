@@ -14,19 +14,19 @@
              Design.Width="1200" Design.Height="580">
     <UserControl.KeyBindings>
         <!-- File -->
-        <!--<KeyBinding Command="{x:Static Editor:ProjectEditorCommands.NewCommand}" CommandParameter="{Binding}" Gesture="Ctrl+N"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.OpenCommand}" Gesture="Ctrl+O"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.CloseCommand}" Gesture="Ctrl+F4"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.SaveCommand}" Gesture="Ctrl+S"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.SaveAsCommand}" Gesture="Ctrl+Shift+S"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.ImportXamlCommand}" Gesture="Ctrl+Shift+X"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.ImportJsonCommand}" Gesture="Ctrl+Shift+J"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.ExportCommand}" Gesture="Ctrl+E"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.ExitCommand}" Gesture="Alt+F4"/>-->
+        <KeyBinding Command="{Binding OnNew}" CommandParameter="{Binding}" Gesture="Ctrl+N"/>
+        <KeyBinding Command="{Binding Platform.OnOpen}" Gesture="Ctrl+O"/>
+        <KeyBinding Command="{Binding OnCloseProject}" Gesture="Ctrl+F4"/>
+        <KeyBinding Command="{Binding Platform.OnSave}" Gesture="Ctrl+S"/>
+        <KeyBinding Command="{Binding Platform.OnSaveAs}" Gesture="Ctrl+Shift+S"/>
+        <KeyBinding Command="{Binding Platform.OnImportXaml}" Gesture="Ctrl+Shift+X"/>
+        <KeyBinding Command="{Binding Platform.OnImportJson}" Gesture="Ctrl+Shift+J"/>
+        <KeyBinding Command="{Binding Platform.OnExport}" Gesture="Ctrl+E"/>
+        <KeyBinding Command="{Binding Platform.OnExit}" Gesture="Alt+F4"/>
         <!-- Edit -->
         <KeyBinding Command="{Binding OnUndo}" Gesture="Ctrl+Z"/>
         <KeyBinding Command="{Binding OnRedo}" Gesture="Ctrl+Y"/>
-        <!--<KeyBinding Command="{x:Static Editor:ProjectEditorCommands.CopyAsEmfCommand}" Gesture="Ctrl+Shift+C"/>-->
+        <KeyBinding Command="{Binding Platform.OnCopyAsEmf}" Gesture="Ctrl+Shift+C"/>
         <KeyBinding Command="{Binding OnCut}" Gesture="Ctrl+X"/>
         <KeyBinding Command="{Binding OnCopy}" Gesture="Ctrl+C"/>
         <KeyBinding Command="{Binding OnPaste}" Gesture="Ctrl+V"/>
@@ -34,8 +34,8 @@
         <KeyBinding Command="{Binding OnGroupSelected}" Gesture="Ctrl+G"/>
         <KeyBinding Command="{Binding OnUngroupSelected}" Gesture="Ctrl+U"/>
         <!-- View -->
-        <!--<KeyBinding Command="{x:Static Editor:ProjectEditorCommands.ObjectBrowserCommand}" Gesture="Ctrl+J"/>
-        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.DocumentViewerCommand}" Gesture="Ctrl+D"/>-->
+        <KeyBinding Command="{Binding Platform.OnObjectBrowser}" Gesture="Ctrl+J"/>
+        <KeyBinding Command="{Binding Platform.OnDocumentViewer}" Gesture="Ctrl+D"/>
     </UserControl.KeyBindings>
     <Carousel Items="{Binding Views}" SelectedItem="{Binding CurrentView, Mode=TwoWay}" IsVirtualized="False">
         <Carousel.DataTemplates>
