@@ -173,7 +173,7 @@
                         <CheckBox IsChecked="{Binding CurrentPathTool.Title, Converter={x:Static converters:ObjectEqualsConverter.Instance}, ConverterParameter=Arc, Mode=OneWay}" Classes="menu"/>
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="Cubic _Bezier" Command="{Binding OnToolCubicBezier}"">
+                <MenuItem Header="Cubic _Bezier" Command="{Binding OnToolCubicBezier}">
                     <MenuItem.Icon>
                         <CheckBox IsChecked="{Binding CurrentPathTool.Title, Converter={x:Static converters:ObjectEqualsConverter.Instance}, ConverterParameter=CubicBezier, Mode=OneWay}" Classes="menu"/>
                     </MenuItem.Icon>
