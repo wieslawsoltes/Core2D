@@ -5,11 +5,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Avalonia.Controls;
 using Core2D.Avalonia.Windows;
+using Core2D.Containers;
+using Core2D.Data;
 using Core2D.Editor;
 using Core2D.Editor.Input;
 using Core2D.Editor.Views.Interfaces;
 using Core2D.Interfaces;
-using Core2D.Containers;
 
 namespace Core2D.Avalonia.Editor
 {
