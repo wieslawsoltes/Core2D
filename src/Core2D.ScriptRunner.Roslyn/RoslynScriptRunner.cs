@@ -46,7 +46,6 @@ namespace Core2D.ScriptRunner.Roslyn
 
             using Core2D.Editor;
             using Core2D.Editor.Bounds;
-            using Core2D.Editor.Commands;
             using Core2D.Editor.Designer;
             using Core2D.Editor.Factories;
             using Core2D.Editor.Input;

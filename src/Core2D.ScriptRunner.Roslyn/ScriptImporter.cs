@@ -9,6 +9,7 @@ using System.Linq;
 using System.Reflection;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using Spatial;
 
 namespace Core2D.ScriptRunner.Roslyn
 {
@@ -28,17 +29,22 @@ namespace Core2D.ScriptRunner.Roslyn
 #else
             var assemblyPath = System.IO.Path.GetDirectoryName(typeof(object).GetTypeInfo().Assembly.Location);
             var immutableCollectionsPath = System.IO.Path.GetDirectoryName(typeof(ImmutableArray<>).GetTypeInfo().Assembly.Location);
+            var mathSpatialPath = System.IO.Path.GetDirectoryName(typeof(Point2).GetTypeInfo().Assembly.Location);
             var executingPath = System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
             return new[]
             {
                 MetadataReference.CreateFromFile(System.IO.Path.Combine(assemblyPath, "mscorlib.dll")),
+#if NETSTANDARD2_0
+                MetadataReference.CreateFromFile(System.IO.Path.Combine(assemblyPath, "netstandard.dll")),
+                MetadataReference.CreateFromFile(System.IO.Path.Combine(assemblyPath, "System.Private.CoreLib.dll")),
+#endif
                 MetadataReference.CreateFromFile(System.IO.Path.Combine(assemblyPath, "System.dll")),
                 MetadataReference.CreateFromFile(System.IO.Path.Combine(assemblyPath, "System.Core.dll")),
                 MetadataReference.CreateFromFile(System.IO.Path.Combine(assemblyPath, "System.Runtime.dll")),
                 MetadataReference.CreateFromFile(System.IO.Path.Combine(immutableCollectionsPath, "System.Collections.Immutable.dll")),
                 MetadataReference.CreateFromFile(System.IO.Path.Combine(executingPath, "Core2D.dll")),
                 MetadataReference.CreateFromFile(System.IO.Path.Combine(executingPath, "Core2D.Editor.dll")),
-                MetadataReference.CreateFromFile(System.IO.Path.Combine(executingPath, "Math.Spatial.dll")),
+                MetadataReference.CreateFromFile(System.IO.Path.Combine(mathSpatialPath, "Math.Spatial.dll")),
                 MetadataReference.CreateFromFile(Assembly.GetEntryAssembly().Location)
             };
 #endif
