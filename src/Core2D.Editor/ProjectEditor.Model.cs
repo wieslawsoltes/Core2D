@@ -24,9 +24,6 @@ namespace Core2D.Editor
         private string _projectPath;
         private bool _isProjectDirty;
         private ProjectObserver _observer;
-        private Action _invalidate;
-        private Action _resetZoom;
-        private Action _extentZoom;
         private bool _isToolIdle;
         private ToolBase _currentTool;
         private PathToolBase _currentPathTool;
@@ -51,6 +48,7 @@ namespace Core2D.Editor
         private readonly Lazy<ITextFieldWriter<Database>> _csvWriter;
         private readonly Lazy<IImageImporter> _imageImporter;
         private readonly Lazy<IProjectEditorPlatform> _platform;
+        private readonly Lazy<IEditorCanvasPlatform> _canvas;
 
         /// <summary>
         /// Gets or sets current project.
@@ -86,36 +84,6 @@ namespace Core2D.Editor
         {
             get => _observer;
             set => Update(ref _observer, value);
-        }
-
-        /// <summary>
-        /// Gets or sets invalidate action.
-        /// </summary>
-        /// <remarks>Invalidate current container control.</remarks>
-        public Action Invalidate
-        {
-            get => _invalidate;
-            set => Update(ref _invalidate, value);
-        }
-
-        /// <summary>
-        /// Gets or sets reset zoom action.
-        /// </summary>
-        /// <remarks>Reset view size to defaults.</remarks>
-        public Action ResetZoom
-        {
-            get => _resetZoom;
-            set => Update(ref _resetZoom, value);
-        }
-
-        /// <summary>
-        /// Gets or sets extent zoom action.
-        /// </summary>
-        /// <remarks>Auto-fit view to the available extents.</remarks>
-        public Action AutoFitZoom
-        {
-            get => _extentZoom;
-            set => Update(ref _extentZoom, value);
         }
 
         /// <summary>
@@ -267,6 +235,11 @@ namespace Core2D.Editor
         public IProjectEditorPlatform Platform => _platform.Value;
 
         /// <summary>
+        /// Gets editor canvas platform.
+        /// </summary>
+        public IEditorCanvasPlatform Canvas => _canvas.Value;
+
+        /// <summary>
         /// Initialize new instance of <see cref="ProjectEditor"/> class.
         /// </summary>
         /// <param name="serviceProvider">The service provider.</param>
@@ -292,6 +265,7 @@ namespace Core2D.Editor
             _csvWriter = _serviceProvider.GetServiceLazily<ITextFieldWriter<Database>>();
             _imageImporter = _serviceProvider.GetServiceLazily<IImageImporter>();
             _platform = _serviceProvider.GetServiceLazily<IProjectEditorPlatform>();
+            _canvas = _serviceProvider.GetServiceLazily<IEditorCanvasPlatform>();
         }
     }
 }

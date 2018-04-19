@@ -43,7 +43,7 @@ namespace Core2D.Avalonia.Editor
                 {
                     var editor = _serviceProvider.GetService<ProjectEditor>();
                     editor.OnOpenProject(result.FirstOrDefault());
-                    editor.Invalidate?.Invoke();
+                    editor.Canvas?.Invalidate?.Invoke();
                 }
             }
             else
@@ -427,13 +427,13 @@ namespace Core2D.Avalonia.Editor
         /// <inheritdoc/>
         public void OnZoomAutoFit()
         {
-            _serviceProvider.GetService<ProjectEditor>().AutoFitZoom?.Invoke();
+            _serviceProvider.GetService<ProjectEditor>().Canvas?.AutoFitZoom?.Invoke();
         }
 
         /// <inheritdoc/>
         public void OnZoomReset()
         {
-            _serviceProvider.GetService<ProjectEditor>().ResetZoom?.Invoke();
+            _serviceProvider.GetService<ProjectEditor>().Canvas?.ResetZoom?.Invoke();
         }
     }
 }

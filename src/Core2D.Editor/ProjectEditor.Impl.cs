@@ -184,7 +184,7 @@ namespace Core2D.Editor
             OnUnload();
             OnLoad(ProjectFactory?.GetProject() ?? ProjectContainer.Create(), string.Empty);
             OnChangeCurrentView(Views.FirstOrDefault(view => view.Title == "Editor"));
-            Invalidate?.Invoke();
+            Canvas?.Invalidate?.Invoke();
         }
 
         /// <summary>
@@ -2855,7 +2855,7 @@ namespace Core2D.Editor
             }
             else
             {
-                Invalidate?.Invoke();
+                Canvas?.Invalidate?.Invoke();
             }
         }
 
@@ -2879,7 +2879,7 @@ namespace Core2D.Editor
             }
             else
             {
-                Invalidate?.Invoke();
+                Canvas?.Invalidate?.Invoke();
             }
         }
 
@@ -2902,9 +2902,9 @@ namespace Core2D.Editor
             }
             else
             {
-                if (Invalidate != null)
+                if (Canvas?.Invalidate != null)
                 {
-                    Invalidate();
+                    Canvas?.Invalidate();
                 }
             }
         }
