@@ -56,7 +56,7 @@ namespace Core2D.Avalonia.Editor
         }
 
         /// <inheritdoc/>
-        public async void OnSave()
+        public void OnSave()
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
             if (!string.IsNullOrEmpty(editor.ProjectPath))
@@ -65,7 +65,7 @@ namespace Core2D.Avalonia.Editor
             }
             else
             {
-                await OnSaveAs();
+                OnSaveAs();
             }
         }
 
