@@ -112,8 +112,6 @@ var testResultsDir = artifactsDir.Combine("test-results");
 var zipRootDir = artifactsDir.Combine("zip");
 var dirSuffixZip = platform + "/" + configuration;
 var fileZipSuffix = version + ".zip";
-var zipSourceWpfDir = (DirectoryPath)Directory("./src/Core2D.Wpf/bin/" + dirSuffixZip);
-var zipTargetWpfFile = zipRootDir.CombineWithFilePath("Core2D.Wpf-" + fileZipSuffix);
 var msvcp140_x86 = @"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.13.26020\x86\Microsoft.VC141.CRT\msvcp140.dll";
 var msvcp140_x64 = @"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.13.26020\x64\Microsoft.VC141.CRT\msvcp140.dll";
 var vcruntime140_x86 = @"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.13.26020\x86\Microsoft.VC141.CRT\vcruntime140.dll";
@@ -203,27 +201,6 @@ Task("Run-Unit-Tests")
     {
         XUnit2(assembly.FullPath, settings);
     }
-});
-
-Task("Copy-Redist-Files")
-    .IsDependentOn("Run-Unit-Tests")
-    .Does(() =>
-{
-    if (IsRunningOnWindows() && (isPlatformAnyCPU || isPlatformX86 || isPlatformX64))
-    {
-        var msvcp140 = (isPlatformAnyCPU || isPlatformX86) ? msvcp140_x86 : msvcp140_x64;
-        var vcruntime140 = (isPlatformAnyCPU || isPlatformX86) ? vcruntime140_x86 : vcruntime140_x64;
-
-        CopyFileToDirectory(msvcp140, zipSourceWpfDir);
-        CopyFileToDirectory(vcruntime140, zipSourceWpfDir);
-    }
-});
-
-Task("Zip-Files")
-    .IsDependentOn("Run-Unit-Tests")
-    .Does(() =>
-{
-    Zip(zipSourceWpfDir.FullPath, zipTargetWpfFile);
 });
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -439,9 +416,7 @@ Task("Zip-Files-NetCoreRT")
 
 Task("Package")
   .IsDependentOn("Copy-Redist-Files-NetCore")
-  .IsDependentOn("Zip-Files-NetCore")
-  .IsDependentOn("Copy-Redist-Files")
-  .IsDependentOn("Zip-Files");
+  .IsDependentOn("Zip-Files-NetCore");
 
 Task("Default")
   .IsDependentOn("Run-Unit-Tests");
@@ -455,9 +430,7 @@ Task("AppVeyor")
   .IsDependentOn("Publish-NetCoreRT")
   .IsDependentOn("Copy-Redist-Files-NetCoreRT")
   .IsDependentOn("Zip-Files-NetCoreRT")
-  .IsDependentOn("Run-Unit-Tests")
-  .IsDependentOn("Copy-Redist-Files")
-  .IsDependentOn("Zip-Files");
+  .IsDependentOn("Run-Unit-Tests");
 
 Task("Travis")
   .IsDependentOn("Run-Unit-Tests-NetCore")
