@@ -51,41 +51,41 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{8756F874
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.FileSystem.DotNet.UnitTests", "tests\Core2D.FileSystem.DotNet.UnitTests\Core2D.FileSystem.DotNet.UnitTests.csproj", "{E9C30F6F-00DD-494A-8E7C-253A5C76E999}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.FileWriter.Dxf.UnitTests", "tests\Core2D.FileWriter.Dxf.UnitTests\Core2D.FileWriter.Dxf.UnitTests.csproj", "{DE9590DA-EAD9-4139-A45D-AE84B363F411}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.FileWriter.Dxf.UnitTests", "tests\Core2D.FileWriter.Dxf.UnitTests\Core2D.FileWriter.Dxf.UnitTests.csproj", "{DE9590DA-EAD9-4139-A45D-AE84B363F411}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.FileWriter.Emf.UnitTests", "tests\Core2D.FileWriter.Emf.UnitTests\Core2D.FileWriter.Emf.UnitTests.csproj", "{90BDDA9E-DB51-4055-8226-C798D862684E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.FileWriter.Emf.UnitTests", "tests\Core2D.FileWriter.Emf.UnitTests\Core2D.FileWriter.Emf.UnitTests.csproj", "{90BDDA9E-DB51-4055-8226-C798D862684E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.FileWriter.PdfSharp.UnitTests", "tests\Core2D.FileWriter.PdfSharp.UnitTests\Core2D.FileWriter.PdfSharp.UnitTests.csproj", "{69DE084C-DEBB-46E0-B844-467406673610}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.FileWriter.PdfSharp.UnitTests", "tests\Core2D.FileWriter.PdfSharp.UnitTests\Core2D.FileWriter.PdfSharp.UnitTests.csproj", "{69DE084C-DEBB-46E0-B844-467406673610}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.FileWriter.SkiaSharp.UnitTests", "tests\Core2D.FileWriter.SkiaSharp.UnitTests\Core2D.FileWriter.SkiaSharp.UnitTests.csproj", "{26FC44B3-8D00-4071-A006-D0B2A1D93AE5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.FileWriter.SkiaSharp.UnitTests", "tests\Core2D.FileWriter.SkiaSharp.UnitTests\Core2D.FileWriter.SkiaSharp.UnitTests.csproj", "{26FC44B3-8D00-4071-A006-D0B2A1D93AE5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.Log.Trace.UnitTests", "tests\Core2D.Log.Trace.UnitTests\Core2D.Log.Trace.UnitTests.csproj", "{E8968A54-ADBC-4A66-8FAC-85B3D8975481}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Log.Trace.UnitTests", "tests\Core2D.Log.Trace.UnitTests\Core2D.Log.Trace.UnitTests.csproj", "{E8968A54-ADBC-4A66-8FAC-85B3D8975481}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.Renderer.Avalonia.UnitTests", "tests\Core2D.Renderer.Avalonia.UnitTests\Core2D.Renderer.Avalonia.UnitTests.csproj", "{099402A4-F525-47D9-B885-9B8271DAC417}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Renderer.Avalonia.UnitTests", "tests\Core2D.Renderer.Avalonia.UnitTests\Core2D.Renderer.Avalonia.UnitTests.csproj", "{099402A4-F525-47D9-B885-9B8271DAC417}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.Renderer.Dxf.UnitTests", "tests\Core2D.Renderer.Dxf.UnitTests\Core2D.Renderer.Dxf.UnitTests.csproj", "{FA74CE51-6488-4D56-936F-3CF4D2C087F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Renderer.Dxf.UnitTests", "tests\Core2D.Renderer.Dxf.UnitTests\Core2D.Renderer.Dxf.UnitTests.csproj", "{FA74CE51-6488-4D56-936F-3CF4D2C087F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.Renderer.PdfSharp.UnitTests", "tests\Core2D.Renderer.PdfSharp.UnitTests\Core2D.Renderer.PdfSharp.UnitTests.csproj", "{2D4D7521-C999-4FB5-8EE2-F5A938ED59BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Renderer.PdfSharp.UnitTests", "tests\Core2D.Renderer.PdfSharp.UnitTests\Core2D.Renderer.PdfSharp.UnitTests.csproj", "{2D4D7521-C999-4FB5-8EE2-F5A938ED59BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.Renderer.SkiaSharp.UnitTests", "tests\Core2D.Renderer.SkiaSharp.UnitTests\Core2D.Renderer.SkiaSharp.UnitTests.csproj", "{93FFAD3C-E234-421C-AB63-C3B2F37252A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Renderer.SkiaSharp.UnitTests", "tests\Core2D.Renderer.SkiaSharp.UnitTests\Core2D.Renderer.SkiaSharp.UnitTests.csproj", "{93FFAD3C-E234-421C-AB63-C3B2F37252A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.Renderer.WinForms.UnitTests", "tests\Core2D.Renderer.WinForms.UnitTests\Core2D.Renderer.WinForms.UnitTests.csproj", "{9E5AB444-01F3-4DE2-A895-AC63203DABEA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Renderer.WinForms.UnitTests", "tests\Core2D.Renderer.WinForms.UnitTests\Core2D.Renderer.WinForms.UnitTests.csproj", "{9E5AB444-01F3-4DE2-A895-AC63203DABEA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.ScriptRunner.Roslyn.UnitTests", "tests\Core2D.ScriptRunner.Roslyn.UnitTests\Core2D.ScriptRunner.Roslyn.UnitTests.csproj", "{2B11DDF3-72F4-4963-8407-CB02864C2141}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.ScriptRunner.Roslyn.UnitTests", "tests\Core2D.ScriptRunner.Roslyn.UnitTests\Core2D.ScriptRunner.Roslyn.UnitTests.csproj", "{2B11DDF3-72F4-4963-8407-CB02864C2141}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.Serializer.Newtonsoft.UnitTests", "tests\Core2D.Serializer.Newtonsoft.UnitTests\Core2D.Serializer.Newtonsoft.UnitTests.csproj", "{A3192E1D-B92A-4DCB-B4F5-FA6CCF24762E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Serializer.Newtonsoft.UnitTests", "tests\Core2D.Serializer.Newtonsoft.UnitTests\Core2D.Serializer.Newtonsoft.UnitTests.csproj", "{A3192E1D-B92A-4DCB-B4F5-FA6CCF24762E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.Serializer.Xaml.UnitTests", "tests\Core2D.Serializer.Xaml.UnitTests\Core2D.Serializer.Xaml.UnitTests.csproj", "{18A5D24D-39AA-431F-84A3-BC6CFA76DB57}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Serializer.Xaml.UnitTests", "tests\Core2D.Serializer.Xaml.UnitTests\Core2D.Serializer.Xaml.UnitTests.csproj", "{18A5D24D-39AA-431F-84A3-BC6CFA76DB57}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.ServiceProvider.Autofac.UnitTests", "tests\Core2D.ServiceProvider.Autofac.UnitTests\Core2D.ServiceProvider.Autofac.UnitTests.csproj", "{7F06D650-0C2D-4258-B06E-270A73617774}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.ServiceProvider.Autofac.UnitTests", "tests\Core2D.ServiceProvider.Autofac.UnitTests\Core2D.ServiceProvider.Autofac.UnitTests.csproj", "{7F06D650-0C2D-4258-B06E-270A73617774}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.TextFieldReader.CsvHelper.UnitTests", "tests\Core2D.TextFieldReader.CsvHelper.UnitTests\Core2D.TextFieldReader.CsvHelper.UnitTests.csproj", "{BCE06A45-280A-4399-985C-7C7E64F43D3B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.TextFieldReader.CsvHelper.UnitTests", "tests\Core2D.TextFieldReader.CsvHelper.UnitTests\Core2D.TextFieldReader.CsvHelper.UnitTests.csproj", "{BCE06A45-280A-4399-985C-7C7E64F43D3B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.TextFieldWriter.CsvHelper.UnitTests", "tests\Core2D.TextFieldWriter.CsvHelper.UnitTests\Core2D.TextFieldWriter.CsvHelper.UnitTests.csproj", "{7B4D5F28-ADDA-495A-B133-45602C55592C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.TextFieldWriter.CsvHelper.UnitTests", "tests\Core2D.TextFieldWriter.CsvHelper.UnitTests\Core2D.TextFieldWriter.CsvHelper.UnitTests.csproj", "{7B4D5F28-ADDA-495A-B133-45602C55592C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.UnitTests", "tests\Core2D.UnitTests\Core2D.UnitTests.csproj", "{AB31E0E2-9090-4461-84BE-5C5AAA19758F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.Utilities.Avalonia.UnitTests", "tests\Core2D.Utilities.Avalonia.UnitTests\Core2D.Utilities.Avalonia.UnitTests.csproj", "{74E77113-796F-4F50-945F-8836BE9043DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Utilities.Avalonia.UnitTests", "tests\Core2D.Utilities.Avalonia.UnitTests\Core2D.Utilities.Avalonia.UnitTests.csproj", "{74E77113-796F-4F50-945F-8836BE9043DE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "apps", "apps", "{4322259E-219C-4F6C-9A1B-3DEB14B224A7}"
 EndProject
@@ -123,6 +123,11 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuget", "nuget", "{DDE59F10-F84A-4919-B221-38414B958103}"
 	ProjectSection(SolutionItems) = preProject
 		NuGet.Config = NuGet.Config
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "native", "native", "{0DD5491E-0BDA-4366-A353-549820A65E12}"
+	ProjectSection(SolutionItems) = preProject
+		build\native\rd.xml = build\native\rd.xml
 	EndProjectSection
 EndProject
 Global
@@ -211,18 +216,10 @@ Global
 		{C6DBD1FD-C462-4005-B382-97BB4AEF26F2}.Debug|AnyCPU.Build.0 = Debug|Any CPU
 		{C6DBD1FD-C462-4005-B382-97BB4AEF26F2}.Release|AnyCPU.ActiveCfg = Release|Any CPU
 		{C6DBD1FD-C462-4005-B382-97BB4AEF26F2}.Release|AnyCPU.Build.0 = Release|Any CPU
-		{AB31E0E2-9090-4461-84BE-5C5AAA19758F}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
-		{AB31E0E2-9090-4461-84BE-5C5AAA19758F}.Debug|AnyCPU.Build.0 = Debug|Any CPU
-		{AB31E0E2-9090-4461-84BE-5C5AAA19758F}.Release|AnyCPU.ActiveCfg = Release|Any CPU
-		{AB31E0E2-9090-4461-84BE-5C5AAA19758F}.Release|AnyCPU.Build.0 = Release|Any CPU
 		{E9C30F6F-00DD-494A-8E7C-253A5C76E999}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
 		{E9C30F6F-00DD-494A-8E7C-253A5C76E999}.Debug|AnyCPU.Build.0 = Debug|Any CPU
 		{E9C30F6F-00DD-494A-8E7C-253A5C76E999}.Release|AnyCPU.ActiveCfg = Release|Any CPU
 		{E9C30F6F-00DD-494A-8E7C-253A5C76E999}.Release|AnyCPU.Build.0 = Release|Any CPU
-		{0C7EA04E-94D8-49B7-B387-C031B2422F3B}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
-		{0C7EA04E-94D8-49B7-B387-C031B2422F3B}.Debug|AnyCPU.Build.0 = Debug|Any CPU
-		{0C7EA04E-94D8-49B7-B387-C031B2422F3B}.Release|AnyCPU.ActiveCfg = Release|Any CPU
-		{0C7EA04E-94D8-49B7-B387-C031B2422F3B}.Release|AnyCPU.Build.0 = Release|Any CPU
 		{DE9590DA-EAD9-4139-A45D-AE84B363F411}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
 		{DE9590DA-EAD9-4139-A45D-AE84B363F411}.Debug|AnyCPU.Build.0 = Debug|Any CPU
 		{DE9590DA-EAD9-4139-A45D-AE84B363F411}.Release|AnyCPU.ActiveCfg = Release|Any CPU
@@ -287,10 +284,18 @@ Global
 		{7B4D5F28-ADDA-495A-B133-45602C55592C}.Debug|AnyCPU.Build.0 = Debug|Any CPU
 		{7B4D5F28-ADDA-495A-B133-45602C55592C}.Release|AnyCPU.ActiveCfg = Release|Any CPU
 		{7B4D5F28-ADDA-495A-B133-45602C55592C}.Release|AnyCPU.Build.0 = Release|Any CPU
+		{AB31E0E2-9090-4461-84BE-5C5AAA19758F}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
+		{AB31E0E2-9090-4461-84BE-5C5AAA19758F}.Debug|AnyCPU.Build.0 = Debug|Any CPU
+		{AB31E0E2-9090-4461-84BE-5C5AAA19758F}.Release|AnyCPU.ActiveCfg = Release|Any CPU
+		{AB31E0E2-9090-4461-84BE-5C5AAA19758F}.Release|AnyCPU.Build.0 = Release|Any CPU
 		{74E77113-796F-4F50-945F-8836BE9043DE}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
 		{74E77113-796F-4F50-945F-8836BE9043DE}.Debug|AnyCPU.Build.0 = Debug|Any CPU
 		{74E77113-796F-4F50-945F-8836BE9043DE}.Release|AnyCPU.ActiveCfg = Release|Any CPU
 		{74E77113-796F-4F50-945F-8836BE9043DE}.Release|AnyCPU.Build.0 = Release|Any CPU
+		{0C7EA04E-94D8-49B7-B387-C031B2422F3B}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
+		{0C7EA04E-94D8-49B7-B387-C031B2422F3B}.Debug|AnyCPU.Build.0 = Debug|Any CPU
+		{0C7EA04E-94D8-49B7-B387-C031B2422F3B}.Release|AnyCPU.ActiveCfg = Release|Any CPU
+		{0C7EA04E-94D8-49B7-B387-C031B2422F3B}.Release|AnyCPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -317,13 +322,7 @@ Global
 		{F215ADF5-74C1-4E26-9045-B6BBDA736092} = {02F7371B-FFDA-46ED-B5FE-9D643EA3354A}
 		{AE7FF1B5-ABE3-45BF-87CC-44AC580A666A} = {02F7371B-FFDA-46ED-B5FE-9D643EA3354A}
 		{C6DBD1FD-C462-4005-B382-97BB4AEF26F2} = {02F7371B-FFDA-46ED-B5FE-9D643EA3354A}
-		{AB31E0E2-9090-4461-84BE-5C5AAA19758F} = {8756F874-0C1B-4AB8-83E0-0BEDA782D212}
 		{E9C30F6F-00DD-494A-8E7C-253A5C76E999} = {8756F874-0C1B-4AB8-83E0-0BEDA782D212}
-		{4322259E-219C-4F6C-9A1B-3DEB14B224A7} = {BC6BAFE6-1735-4549-A7CC-819274780B38}
-		{0C7EA04E-94D8-49B7-B387-C031B2422F3B} = {4322259E-219C-4F6C-9A1B-3DEB14B224A7}
-		{3C45CABF-3E2E-455B-AACF-1FB63D331F9C} = {C7162582-C1FD-45FB-99FD-6770D67B5A21}
-		{C5B55AFD-7C8E-4071-ACD8-81DB364765DA} = {C7162582-C1FD-45FB-99FD-6770D67B5A21}
-		{DDE59F10-F84A-4919-B221-38414B958103} = {C7162582-C1FD-45FB-99FD-6770D67B5A21}
 		{DE9590DA-EAD9-4139-A45D-AE84B363F411} = {8756F874-0C1B-4AB8-83E0-0BEDA782D212}
 		{90BDDA9E-DB51-4055-8226-C798D862684E} = {8756F874-0C1B-4AB8-83E0-0BEDA782D212}
 		{69DE084C-DEBB-46E0-B844-467406673610} = {8756F874-0C1B-4AB8-83E0-0BEDA782D212}
@@ -340,7 +339,14 @@ Global
 		{7F06D650-0C2D-4258-B06E-270A73617774} = {8756F874-0C1B-4AB8-83E0-0BEDA782D212}
 		{BCE06A45-280A-4399-985C-7C7E64F43D3B} = {8756F874-0C1B-4AB8-83E0-0BEDA782D212}
 		{7B4D5F28-ADDA-495A-B133-45602C55592C} = {8756F874-0C1B-4AB8-83E0-0BEDA782D212}
+		{AB31E0E2-9090-4461-84BE-5C5AAA19758F} = {8756F874-0C1B-4AB8-83E0-0BEDA782D212}
 		{74E77113-796F-4F50-945F-8836BE9043DE} = {8756F874-0C1B-4AB8-83E0-0BEDA782D212}
+		{4322259E-219C-4F6C-9A1B-3DEB14B224A7} = {BC6BAFE6-1735-4549-A7CC-819274780B38}
+		{0C7EA04E-94D8-49B7-B387-C031B2422F3B} = {4322259E-219C-4F6C-9A1B-3DEB14B224A7}
+		{3C45CABF-3E2E-455B-AACF-1FB63D331F9C} = {C7162582-C1FD-45FB-99FD-6770D67B5A21}
+		{C5B55AFD-7C8E-4071-ACD8-81DB364765DA} = {C7162582-C1FD-45FB-99FD-6770D67B5A21}
+		{DDE59F10-F84A-4919-B221-38414B958103} = {C7162582-C1FD-45FB-99FD-6770D67B5A21}
+		{0DD5491E-0BDA-4366-A353-549820A65E12} = {C7162582-C1FD-45FB-99FD-6770D67B5A21}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2614B90F-C6F8-435C-8BD0-09AEE3ABAD2B}
