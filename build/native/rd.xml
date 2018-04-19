@@ -3,7 +3,26 @@
 
         <!-- App -->
 
-        <Assembly Name="Core2D" Dynamic="Required All" />
+        <Assembly Name="Core2D" Dynamic="Required All">
+            <Type Name="Core2D.Style.LineCap" Dynamic="Required All"/>
+            <Type Name="Core2D.Style.LineCap[]" Dynamic="Required All"/>
+            <Type Name="Core2D.Style.CurveOrientation" Dynamic="Required All"/>
+            <Type Name="Core2D.Style.CurveOrientation[]" Dynamic="Required All"/>
+            <Type Name="Core2D.Style.ArrowType" Dynamic="Required All"/>
+            <Type Name="Core2D.Style.ArrowType[]" Dynamic="Required All"/>
+            <Type Name="Core2D.Style.TextHAlignment" Dynamic="Required All"/>
+            <Type Name="Core2D.Style.TextHAlignment[]" Dynamic="Required All"/>
+            <Type Name="Core2D.Style.TextVAlignment" Dynamic="Required All"/>
+            <Type Name="Core2D.Style.TextVAlignment[]" Dynamic="Required All"/>
+            <Type Name="Core2D.Containers.MoveMode" Dynamic="Required All"/>
+            <Type Name="Core2D.Containers.MoveMode[]" Dynamic="Required All"/>
+            <Type Name="Core2D.Path.FillRule" Dynamic="Required All"/>
+            <Type Name="Core2D.Path.FillRule[]" Dynamic="Required All"/>
+            <Type Name="Core2D.Path.SweepDirection" Dynamic="Required All"/>
+            <Type Name="Core2D.Path.SweepDirection[]" Dynamic="Required All"/>
+            <Type Name="Core2D.Shape.PointAlignment" Dynamic="Required All"/>
+            <Type Name="Core2D.Shape.PointAlignment[]" Dynamic="Required All"/>
+        </Assembly>
         <Assembly Name="Core2D.Avalonia" Dynamic="Required All" />
         <Assembly Name="Core2D.Editor" Dynamic="Required All" />
         <Assembly Name="Core2D.FileSystem.DotNet" Dynamic="Required All" />
