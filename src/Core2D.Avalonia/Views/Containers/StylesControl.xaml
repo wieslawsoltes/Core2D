@@ -34,7 +34,7 @@
         </Menu>
         <ListBox Name="styles" Items="{Binding CurrentStyleLibrary.Items}" SelectedItem="{Binding CurrentStyleLibrary.Selected, Mode=TwoWay}" Grid.Row="3" Classes="default">
             <ListBox.KeyBindings>
-                <KeyBinding Command="{{Binding $parent[UserControl;1].DataContext.OnAddStyle}" CommandParameter="{Binding #styles.DataContext.CurrentStyleLibrary, Mode=OneWay}" Gesture="Ctrl+N"/>
+                <KeyBinding Command="{Binding $parent[UserControl;1].DataContext.OnAddStyle}" CommandParameter="{Binding #styles.DataContext.CurrentStyleLibrary, Mode=OneWay}" Gesture="Ctrl+N"/>
                 <KeyBinding Command="{Binding $parent[UserControl;1].DataContext.OnRemoveStyle}" CommandParameter="{Binding #styles.SelectedItem}" Gesture="Delete"/>
                 <KeyBinding Command="{Binding $parent[UserControl;1].DataContext.Platform.OnExportObject}" CommandParameter="{Binding #styles.SelectedItem}" Gesture="Ctrl+E"/>
             </ListBox.KeyBindings>
