@@ -1748,29 +1748,11 @@ namespace Core2D.Editor
         }
 
         /// <summary>
-        /// Dispose unmanaged resources.
+        /// Dispose resources.
         /// </summary>
         public void Dispose()
         {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        /// <summary>
-        /// Dispose unmanaged resources.
-        /// </summary>
-        ~ProjectObserver()
-        {
-            Dispose(false);
-        }
-
-        /// <summary>
-        /// Dispose unmanaged resources.
-        /// </summary>
-        /// <param name="disposing">The flag indicating whether disposing.</param>
-        private void Dispose(bool disposing)
-        {
-            if (disposing && _editor?.Project != null)
+            if (_editor?.Project != null)
             {
                 Remove(_editor.Project);
             }

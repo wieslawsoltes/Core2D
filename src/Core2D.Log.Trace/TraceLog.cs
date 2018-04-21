@@ -130,32 +130,11 @@ namespace Core2D.Log.Trace
         }
 
         /// <summary>
-        /// Dispose unmanaged resources.
+        /// Dispose resources.
         /// </summary>
         public void Dispose()
         {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        /// <summary>
-        /// Dispose unmanaged resources.
-        /// </summary>
-        ~TraceLog()
-        {
-            Dispose(false);
-        }
-
-        /// <summary>
-        /// Dispose unmanaged resources.
-        /// </summary>
-        /// <param name="disposing">The flag indicating whether disposing.</param>
-        private void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                (this as ILog).Close();
-            }
+            (this as ILog).Close();
         }
     }
 }

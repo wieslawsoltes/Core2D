@@ -69,36 +69,15 @@ namespace Core2D.Editor.Input
         }
 
         /// <summary>
-        /// Dispose unmanaged resources.
+        /// Dispose resources.
         /// </summary>
         public void Dispose()
         {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        /// <summary>
-        /// Dispose unmanaged resources.
-        /// </summary>
-        ~InputProcessor()
-        {
-            Dispose(false);
-        }
-
-        /// <summary>
-        /// Dispose unmanaged resources.
-        /// </summary>
-        /// <param name="disposing">The flag indicating whether disposing.</param>
-        private void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                _leftDownDisposable.Dispose();
-                _leftUpDisposable.Dispose();
-                _rightDownDisposable.Dispose();
-                _rightUpDisposable.Dispose();
-                _moveDisposable.Dispose();
-            }
+            _leftDownDisposable.Dispose();
+            _leftUpDisposable.Dispose();
+            _rightDownDisposable.Dispose();
+            _rightUpDisposable.Dispose();
+            _moveDisposable.Dispose();
         }
     }
 }
