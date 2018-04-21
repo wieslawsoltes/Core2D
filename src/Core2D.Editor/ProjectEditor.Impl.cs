@@ -1916,8 +1916,11 @@ namespace Core2D.Editor
         /// </summary>
         public void OnUnload()
         {
-            Observer?.Dispose();
-            Observer = null;
+            if (Observer != null)
+            {
+                Observer?.Dispose();
+                Observer = null;
+            }
 
             if (Project?.History != null)
             {
@@ -1925,15 +1928,17 @@ namespace Core2D.Editor
                 Project.History = null;
             }
 
-            Project?.PurgeUnusedImages(Enumerable.Empty<string>().ToImmutableHashSet());
+            if (Project != null)
+            {
+                Project?.PurgeUnusedImages(Enumerable.Empty<string>().ToImmutableHashSet());
 
-            Deselect();
-            SetRenderersImageCache(null);
-            Project = null;
-            ProjectPath = string.Empty;
-            IsProjectDirty = false;
-
-            GC.Collect();
+                Deselect();
+                SetRenderersImageCache(null);
+                Project = null;
+                ProjectPath = string.Empty;
+                IsProjectDirty = false;
+                GC.Collect();
+            }
         }
 
         /// <summary>
