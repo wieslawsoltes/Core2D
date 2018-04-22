@@ -67,8 +67,7 @@ namespace Core2D.ScriptRunner.Roslyn
             ";
 
         private static string HostClassFooter =
-            @"
-                } 
+            @"                }
             }";
 
         /// <summary>
