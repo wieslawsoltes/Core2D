@@ -25,9 +25,13 @@ namespace Core2D.ScriptRunner.Roslyn
         public static PortableExecutableReference[] GetReferences()
         {
             var assemblyPath = System.IO.Path.GetDirectoryName(typeof(object).GetTypeInfo().Assembly.Location);
+            Console.WriteLine($"assemblyPath: {assemblyPath}");
             var immutableCollectionsPath = System.IO.Path.GetDirectoryName(typeof(ImmutableArray<>).GetTypeInfo().Assembly.Location);
+            Console.WriteLine($"immutableCollectionsPath: {immutableCollectionsPath}");
             var mathSpatialPath = System.IO.Path.GetDirectoryName(typeof(Point2).GetTypeInfo().Assembly.Location);
+            Console.WriteLine($"mathSpatialPath: {mathSpatialPath}");
             var executingPath = System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+            Console.WriteLine($"executingPath: {executingPath}");
             return new[]
             {
                 MetadataReference.CreateFromFile(System.IO.Path.Combine(assemblyPath, "mscorlib.dll")),
@@ -90,20 +94,18 @@ namespace Core2D.ScriptRunner.Roslyn
             using (var ms = new System.IO.MemoryStream())
             {
                 var result = compilation.Emit(ms);
+
+                foreach (var diagnostic in result.Diagnostics)
+                {
+                    Console.WriteLine(diagnostic);
+                }
+
                 if (result.Success)
                 {
                     var assembly = Assembly.Load(ms.GetBuffer());
                     if (assembly != null)
                     {
                         return Compose<T>(assembly);
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Failed to compile script:");
-                    foreach (var diagnostic in result.Diagnostics)
-                    {
-                        Console.WriteLine(diagnostic);
                     }
                 }
             }
