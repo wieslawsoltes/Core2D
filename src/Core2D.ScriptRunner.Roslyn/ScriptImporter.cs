@@ -1,10 +1,10 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Composition.Convention;
 using System.Composition.Hosting;
-using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using Microsoft.CodeAnalysis;
@@ -24,9 +24,6 @@ namespace Core2D.ScriptRunner.Roslyn
         /// <returns>The portable references array.</returns>
         public static PortableExecutableReference[] GetReferences()
         {
-#if NETCORE5_0
-            return new PortableExecutableReference[] { };
-#else
             var assemblyPath = System.IO.Path.GetDirectoryName(typeof(object).GetTypeInfo().Assembly.Location);
             var immutableCollectionsPath = System.IO.Path.GetDirectoryName(typeof(ImmutableArray<>).GetTypeInfo().Assembly.Location);
             var mathSpatialPath = System.IO.Path.GetDirectoryName(typeof(Point2).GetTypeInfo().Assembly.Location);
@@ -47,7 +44,6 @@ namespace Core2D.ScriptRunner.Roslyn
                 MetadataReference.CreateFromFile(System.IO.Path.Combine(mathSpatialPath, "Math.Spatial.dll")),
                 MetadataReference.CreateFromFile(Assembly.GetEntryAssembly().Location)
             };
-#endif
         }
 
         /// <summary>
@@ -102,16 +98,14 @@ namespace Core2D.ScriptRunner.Roslyn
                         return Compose<T>(assembly);
                     }
                 }
-#if DEBUG
                 else
                 {
-                    Debug.WriteLine("Failed to compile script:");
+                    Console.WriteLine("Failed to compile script:");
                     foreach (var diagnostic in result.Diagnostics)
                     {
-                        Debug.WriteLine(diagnostic);
+                        Console.WriteLine(diagnostic);
                     }
                 }
-#endif
             }
             return null;
         }
