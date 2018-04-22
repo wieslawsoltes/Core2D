@@ -15,8 +15,9 @@ namespace Core2D.FileSystem.DotNet
         /// <inheritdoc/>
         string IFileSystem.GetAssemblyPath(Type type)
         {
+            // HACK: Commented to get CoreRT working.
             /*
-#if NETSTANDARD2_0 || NETCORE5_0
+#if NETSTANDARD2_0
             string codeBase = type.GetTypeInfo().Assembly.FullName;
 #else
             string codeBase = type == null ? Assembly.GetEntryAssembly().CodeBase : type.GetTypeInfo().Assembly.FullName;
