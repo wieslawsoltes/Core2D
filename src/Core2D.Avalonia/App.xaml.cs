@@ -125,6 +125,9 @@ namespace Core2D.Avalonia
                 editor.IsToolIdle = true;
                 editor.AboutInfo = aboutInfo;
 
+                // HACK: https://github.com/dotnet/corert/issues/5736
+                System.Runtime.GCSettings.LatencyMode = System.Runtime.GCLatencyMode.Batch;
+
                 var window = serviceProvider.GetService<Windows.MainWindow>();
                 window.Closed += (sender, e) => editor.OnSaveRecent(path);
                 window.DataContext = editor;
