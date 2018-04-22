@@ -96,12 +96,7 @@ namespace Core2D.ScriptRunner.Roslyn
                 var result = compilation.Emit(ms);
                 if (result.Success)
                 {
-                    Assembly assembly = null;
-#if NET461
-                    assembly = Assembly.Load(ms.GetBuffer());
-#elif NETSTANDARD2_0
-                    assembly = System.Runtime.Loader.AssemblyLoadContext.Default.LoadFromStream(ms);
-#endif
+                    var assembly = Assembly.Load(ms.GetBuffer());
                     if (assembly != null)
                     {
                         return Compose<T>(assembly);
