@@ -116,8 +116,9 @@ namespace Core2D.ScriptRunner.Roslyn
                     assemblyIdentityComparer: DesktopAssemblyIdentityComparer.Default));
 
             using (var ms = new System.IO.MemoryStream())
+            using (var pdb = new System.IO.MemoryStream())
             {
-                var result = compilation.Emit(ms);
+                var result = compilation.Emit(ms, pdb);
 
                 foreach (var diagnostic in result.Diagnostics)
                 {
@@ -126,7 +127,7 @@ namespace Core2D.ScriptRunner.Roslyn
 
                 if (result.Success)
                 {
-                    var assembly = Assembly.Load(ms.GetBuffer());
+                    var assembly = Assembly.Load(ms.GetBuffer(), pdb.GetBuffer());
                     if (assembly != null)
                     {
                         return Compose<T>(assembly);
