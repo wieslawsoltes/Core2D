@@ -25,13 +25,13 @@ namespace Core2D.ScriptRunner.Roslyn
         public static PortableExecutableReference[] GetReferences()
         {
             var assemblyPath = System.IO.Path.GetDirectoryName(typeof(object).GetTypeInfo().Assembly.Location);
-            Console.WriteLine($"assemblyPath: {assemblyPath}");
-            var immutableCollectionsPath = System.IO.Path.GetDirectoryName(typeof(ImmutableArray<>).GetTypeInfo().Assembly.Location);
-            Console.WriteLine($"immutableCollectionsPath: {immutableCollectionsPath}");
-            var mathSpatialPath = System.IO.Path.GetDirectoryName(typeof(Point2).GetTypeInfo().Assembly.Location);
-            Console.WriteLine($"mathSpatialPath: {mathSpatialPath}");
             var executingPath = System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+            var mathSpatialPath = System.IO.Path.GetDirectoryName(typeof(Point2).GetTypeInfo().Assembly.Location);
+            var immutableCollectionsPath = System.IO.Path.GetDirectoryName(typeof(ImmutableArray<>).GetTypeInfo().Assembly.Location);
+            Console.WriteLine($"assemblyPath: {assemblyPath}");
             Console.WriteLine($"executingPath: {executingPath}");
+            Console.WriteLine($"mathSpatialPath: {mathSpatialPath}");
+            Console.WriteLine($"immutableCollectionsPath: {immutableCollectionsPath}");
             return new[]
             {
                 MetadataReference.CreateFromFile(System.IO.Path.Combine(assemblyPath, "mscorlib.dll")),
@@ -42,10 +42,10 @@ namespace Core2D.ScriptRunner.Roslyn
                 MetadataReference.CreateFromFile(System.IO.Path.Combine(assemblyPath, "System.dll")),
                 MetadataReference.CreateFromFile(System.IO.Path.Combine(assemblyPath, "System.Core.dll")),
                 MetadataReference.CreateFromFile(System.IO.Path.Combine(assemblyPath, "System.Runtime.dll")),
-                MetadataReference.CreateFromFile(System.IO.Path.Combine(immutableCollectionsPath, "System.Collections.Immutable.dll")),
                 MetadataReference.CreateFromFile(System.IO.Path.Combine(executingPath, "Core2D.dll")),
                 MetadataReference.CreateFromFile(System.IO.Path.Combine(executingPath, "Core2D.Editor.dll")),
                 MetadataReference.CreateFromFile(System.IO.Path.Combine(mathSpatialPath, "Math.Spatial.dll")),
+                MetadataReference.CreateFromFile(System.IO.Path.Combine(immutableCollectionsPath, "System.Collections.Immutable.dll")),
                 MetadataReference.CreateFromFile(Assembly.GetEntryAssembly().Location)
             };
         }
