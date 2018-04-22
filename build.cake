@@ -124,7 +124,7 @@ DirectoryPath nugetPackages = EnvironmentVariable("NUGET_PACKAGES") ?? profilePa
 var libSkiaSharp = nugetPackages.Combine("skiasharp/1.57.1/runtimes/win7-x64/native").CombineWithFilePath("libSkiaSharp.dll");
 
 // HACK: https://github.com/dotnet/corert/issues/5496
-var ilcompilerTools = GetDirectories(nugetPackages.Combine("runtime.win-x64.microsoft.dotnet.ilcompiler/**/tools")).LastOrDefault();
+var ilcompilerTools = GetDirectories(nugetPackages.FullPath + "/runtime.win-x64.microsoft.dotnet.ilcompiler/**/tools").LastOrDefault();
 var clrcompression = ilcompilerTools.CombineWithFilePath("clrcompression.dll");
 
 ///////////////////////////////////////////////////////////////////////////////
