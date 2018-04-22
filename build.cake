@@ -276,9 +276,21 @@ Task("Publish-NetCore")
                 OutputDirectory = outputDir.FullPath,
                 MSBuildSettings = new DotNetCoreMSBuildSettings().WithProperty("CoreRT", "False")
             });
+        }
+    }
+});
 
+Task("Patch-NetCore")
+    .IsDependentOn("Publish-NetCore")
+    .Does(() =>
+{
+    foreach (var project in netCoreProjects)
+    {
+        foreach(var runtime in project.Runtimes)
+        {
             if (IsRunningOnWindows() && (runtime == "win7-x86" || runtime == "win7-x64"))
             {
+                var outputDir = zipRootDir.Combine(project.Name + "-" + runtime);
                 Information("Patching executable subsystem for: {0}, runtime: {1}", project.Name, runtime);
                 var targetExe = outputDir.CombineWithFilePath(project.Name + ".exe");
                 var exitCodeWithArgument = StartProcess(editbin, new ProcessSettings { 
@@ -364,16 +376,28 @@ Task("Publish-NetCoreRT")
                 OutputDirectory = outputDir.FullPath,
                 MSBuildSettings = new DotNetCoreMSBuildSettings().WithProperty("CoreRT", "True")
             });
+        }
+    }
+});
 
-            //if (IsRunningOnWindows() && runtime == "win-x64")
-            //{
-            //    Information("Patching executable subsystem for: {0}, runtime: {1}", project.Name, runtime);
-            //    var targetExe = outputDir.CombineWithFilePath(project.Name + ".exe");
-            //    var exitCodeWithArgument = StartProcess(editbin, new ProcessSettings { 
-            //        Arguments = "/subsystem:windows " + targetExe.FullPath
-            //    });
-            //    Information("The editbin command exit code: {0}", exitCodeWithArgument);
-            //}
+Task("Patch-NetCoreRT")
+    .IsDependentOn("Publish-NetCoreRT")
+    .Does(() =>
+{
+    foreach (var project in netCoreRTProjects)
+    {
+        foreach(var runtime in project.Runtimes)
+        {
+            var outputDir = zipRootDir.Combine(project.Name + "-" + runtime);
+            if (IsRunningOnWindows() && runtime == "win-x64")
+            {
+                Information("Patching executable subsystem for: {0}, runtime: {1}", project.Name, runtime);
+                var targetExe = outputDir.CombineWithFilePath(project.Name + ".exe");
+                var exitCodeWithArgument = StartProcess(editbin, new ProcessSettings { 
+                    Arguments = "/subsystem:windows " + targetExe.FullPath
+                });
+                Information("The editbin command exit code: {0}", exitCodeWithArgument);
+            }
         }
     }
 });
@@ -434,9 +458,11 @@ Task("AppVeyor")
   .IsDependentOn("Run-Unit-Tests-NetCore")
   .IsDependentOn("Build-NetCore")
   .IsDependentOn("Publish-NetCore")
+  //.IsDependentOn("Patch-NetCore")
   .IsDependentOn("Copy-Redist-Files-NetCore")
   .IsDependentOn("Zip-Files-NetCore")
   .IsDependentOn("Publish-NetCoreRT")
+  //.IsDependentOn("Patch-NetCoreRT")
   .IsDependentOn("Copy-Redist-Files-NetCoreRT")
   .IsDependentOn("Zip-Files-NetCoreRT")
   .IsDependentOn("Run-Unit-Tests");
