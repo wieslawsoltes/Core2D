@@ -118,15 +118,6 @@ var vcruntime140_x86 = @"C:\Program Files (x86)\Microsoft Visual Studio\2017\Com
 var vcruntime140_x64 = @"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.13.26020\x64\Microsoft.VC141.CRT\vcruntime140.dll";
 var editbin = @"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\editbin.exe";
 
-// HACK:
-DirectoryPath profilePath = EnvironmentVariable("USERPROFILE") ?? EnvironmentVariable("HOME");
-DirectoryPath nugetPackages = EnvironmentVariable("NUGET_PACKAGES") ?? profilePath.Combine(".nuget/packages");
-var libSkiaSharp = nugetPackages.Combine("skiasharp/1.57.1/runtimes/win7-x64/native").CombineWithFilePath("libSkiaSharp.dll");
-
-// HACK: https://github.com/dotnet/corert/issues/5496
-var ilcompilerTools = GetDirectories(nugetPackages.FullPath + "/runtime.win-x64.microsoft.dotnet.ilcompiler/**/tools").LastOrDefault();
-var clrcompression = ilcompilerTools.CombineWithFilePath("clrcompression.dll");
-
 ///////////////////////////////////////////////////////////////////////////////
 // VALIDATE
 ///////////////////////////////////////////////////////////////////////////////
@@ -406,6 +397,15 @@ Task("Copy-Redist-Files-NetCoreRT")
     .IsDependentOn("Publish-NetCoreRT")
     .Does(() =>
 {
+    // HACK:
+    DirectoryPath profilePath = EnvironmentVariable("USERPROFILE") ?? EnvironmentVariable("HOME");
+    DirectoryPath nugetPackages = EnvironmentVariable("NUGET_PACKAGES") ?? profilePath.Combine(".nuget/packages");
+    var libSkiaSharp = nugetPackages.Combine("skiasharp/1.57.1/runtimes/win7-x64/native").CombineWithFilePath("libSkiaSharp.dll");
+
+    // HACK: https://github.com/dotnet/corert/issues/5496
+    var ilcompilerTools = GetDirectories(nugetPackages.FullPath + "/runtime.win-x64.microsoft.dotnet.ilcompiler/**/tools").LastOrDefault();
+    var clrcompression = ilcompilerTools.CombineWithFilePath("clrcompression.dll");
+
     foreach (var project in netCoreRTProjects)
     {
         foreach(var runtime in project.Runtimes)
