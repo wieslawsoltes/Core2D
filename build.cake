@@ -117,9 +117,15 @@ var msvcp140_x64 = @"C:\Program Files (x86)\Microsoft Visual Studio\2017\Communi
 var vcruntime140_x86 = @"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.13.26020\x86\Microsoft.VC141.CRT\vcruntime140.dll";
 var vcruntime140_x64 = @"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.13.26020\x64\Microsoft.VC141.CRT\vcruntime140.dll";
 var editbin = @"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\editbin.exe";
+
+// HACK:
 DirectoryPath profilePath = EnvironmentVariable("USERPROFILE") ?? EnvironmentVariable("HOME");
 DirectoryPath nugetPackages = EnvironmentVariable("NUGET_PACKAGES") ?? profilePath.Combine(".nuget/packages");
 var libSkiaSharp = nugetPackages.Combine("skiasharp/1.57.1/runtimes/win7-x64/native").CombineWithFilePath("libSkiaSharp.dll");
+
+// HACK: https://github.com/dotnet/corert/issues/5496
+var ilcompilerTools = GetDirectories(nugetPackages.Combine("runtime.win-x64.microsoft.dotnet.ilcompiler/**/tools")).LastOrDefault();
+var clrcompression = ilcompilerTools.CombineWithFilePath("clrcompression.dll");
 
 ///////////////////////////////////////////////////////////////////////////////
 // VALIDATE
@@ -387,8 +393,11 @@ Task("Copy-Redist-Files-NetCoreRT")
                 CopyFileToDirectory(msvcp140_x64, outputDir);
                 CopyFileToDirectory(vcruntime140_x64, outputDir);
 
-                Information("Copying SkiaSharp files for: {0}, runtime: {1}", project.Name, runtime);
+                Information("Copying native files for: {0}, runtime: {1}", project.Name, runtime);
+                // HACK: 
                 CopyFileToDirectory(libSkiaSharp, outputDir);
+                // HACK: 
+                CopyFileToDirectory(clrcompression, outputDir);
             }
         }
     }
