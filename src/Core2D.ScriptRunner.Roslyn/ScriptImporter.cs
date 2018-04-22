@@ -24,30 +24,54 @@ namespace Core2D.ScriptRunner.Roslyn
         /// <returns>The portable references array.</returns>
         public static PortableExecutableReference[] GetReferences()
         {
-            var assemblyPath = System.IO.Path.GetDirectoryName(typeof(object).GetTypeInfo().Assembly.Location);
-            var executingPath = System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
-            var mathSpatialPath = System.IO.Path.GetDirectoryName(typeof(Point2).GetTypeInfo().Assembly.Location);
-            var immutableCollectionsPath = System.IO.Path.GetDirectoryName(typeof(ImmutableArray<>).GetTypeInfo().Assembly.Location);
-            Console.WriteLine($"assemblyPath: {assemblyPath}");
-            Console.WriteLine($"executingPath: {executingPath}");
-            Console.WriteLine($"mathSpatialPath: {mathSpatialPath}");
-            Console.WriteLine($"immutableCollectionsPath: {immutableCollectionsPath}");
-            return new[]
+            var objectAssemblyDir = System.IO.Path.GetDirectoryName(typeof(object).GetTypeInfo().Assembly.Location);
+            var entryAssemblyPath = Assembly.GetEntryAssembly().Location;
+            var entryAssemblyDir = System.IO.Path.GetDirectoryName(entryAssemblyPath);
+            var mathSpatialDir = System.IO.Path.GetDirectoryName(typeof(Point2).GetTypeInfo().Assembly.Location);
+            var immutableCollectionsDir = System.IO.Path.GetDirectoryName(typeof(ImmutableArray<>).GetTypeInfo().Assembly.Location);
+
+            Console.WriteLine($"{nameof(objectAssemblyDir)}: {objectAssemblyDir}");
+            Console.WriteLine($"{nameof(entryAssemblyPath)}: {entryAssemblyPath}");
+            Console.WriteLine($"{nameof(entryAssemblyDir)}: {entryAssemblyDir}");
+            Console.WriteLine($"{nameof(mathSpatialDir)}: {mathSpatialDir}");
+            Console.WriteLine($"{nameof(immutableCollectionsDir)}: {immutableCollectionsDir}");
+
+            var references = new List<PortableExecutableReference>();
+
+            if (objectAssemblyDir != null)
             {
-                MetadataReference.CreateFromFile(System.IO.Path.Combine(assemblyPath, "mscorlib.dll")),
+                references.Add(MetadataReference.CreateFromFile(System.IO.Path.Combine(objectAssemblyDir, "mscorlib.dll")));
 #if NETSTANDARD2_0
-                MetadataReference.CreateFromFile(System.IO.Path.Combine(assemblyPath, "netstandard.dll")),
-                MetadataReference.CreateFromFile(System.IO.Path.Combine(assemblyPath, "System.Private.CoreLib.dll")),
+                references.Add(MetadataReference.CreateFromFile(System.IO.Path.Combine(objectAssemblyDir, "netstandard.dll")));
+                references.Add(MetadataReference.CreateFromFile(System.IO.Path.Combine(objectAssemblyDir, "System.Private.CoreLib.dll")));
 #endif
-                MetadataReference.CreateFromFile(System.IO.Path.Combine(assemblyPath, "System.dll")),
-                MetadataReference.CreateFromFile(System.IO.Path.Combine(assemblyPath, "System.Core.dll")),
-                MetadataReference.CreateFromFile(System.IO.Path.Combine(assemblyPath, "System.Runtime.dll")),
-                MetadataReference.CreateFromFile(System.IO.Path.Combine(executingPath, "Core2D.dll")),
-                MetadataReference.CreateFromFile(System.IO.Path.Combine(executingPath, "Core2D.Editor.dll")),
-                MetadataReference.CreateFromFile(System.IO.Path.Combine(mathSpatialPath, "Math.Spatial.dll")),
-                MetadataReference.CreateFromFile(System.IO.Path.Combine(immutableCollectionsPath, "System.Collections.Immutable.dll")),
-                MetadataReference.CreateFromFile(Assembly.GetEntryAssembly().Location)
-            };
+                references.Add(MetadataReference.CreateFromFile(System.IO.Path.Combine(objectAssemblyDir, "System.dll")));
+                references.Add(MetadataReference.CreateFromFile(System.IO.Path.Combine(objectAssemblyDir, "System.Core.dll")));
+                references.Add(MetadataReference.CreateFromFile(System.IO.Path.Combine(objectAssemblyDir, "System.Runtime.dll")));
+            }
+
+            if (entryAssemblyDir != null)
+            {
+                references.Add(MetadataReference.CreateFromFile(System.IO.Path.Combine(entryAssemblyDir, "Core2D.dll")));
+                references.Add(MetadataReference.CreateFromFile(System.IO.Path.Combine(entryAssemblyDir, "Core2D.Editor.dll")));
+            }
+
+            if (mathSpatialDir != null)
+            {
+                references.Add(MetadataReference.CreateFromFile(System.IO.Path.Combine(mathSpatialDir, "Math.Spatial.dll")));
+            }
+
+            if (immutableCollectionsDir != null)
+            {
+                references.Add(MetadataReference.CreateFromFile(System.IO.Path.Combine(immutableCollectionsDir, "System.Collections.Immutable.dll")));
+            }
+
+            if (entryAssemblyPath != null)
+            {
+                references.Add(MetadataReference.CreateFromFile(entryAssemblyPath));
+            }
+
+            return references.ToArray();
         }
 
         /// <summary>
