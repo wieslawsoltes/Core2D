@@ -22,7 +22,7 @@ namespace Core2D.TextFieldWriter.CsvHelper
         {
             using (var writer = new System.IO.StringWriter())
             {
-                var configuration = new CSV.Configuration.CsvConfiguration();
+                var configuration = new CSV.Configuration.Configuration();
                 configuration.Delimiter = CultureInfo.CurrentCulture.TextInfo.ListSeparator;
                 configuration.CultureInfo = CultureInfo.CurrentCulture;
 
