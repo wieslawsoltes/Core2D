@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
@@ -11,13 +12,30 @@ namespace Core2D.Avalonia.Views
     /// </summary>
     public class DashboardMenuControl : UserControl
     {
+        public static readonly StyledProperty<bool> DrawDirtyRectsProperty =
+            AvaloniaProperty.Register<DashboardMenuControl, bool>(nameof(DrawDirtyRects));
+
+        public bool DrawDirtyRects
+        {
+            get { return GetValue(DrawDirtyRectsProperty); }
+            set { SetValue(DrawDirtyRectsProperty, value); }
+        }
+
+        public static readonly StyledProperty<bool> DrawFpsProperty =
+            AvaloniaProperty.Register<DashboardMenuControl, bool>(nameof(DrawFps));
+
+        public bool DrawFps
+        {
+            get { return GetValue(DrawFpsProperty); }
+            set { SetValue(DrawFpsProperty, value); }
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="DashboardMenuControl"/> class.
         /// </summary>
         public DashboardMenuControl()
         {
             this.InitializeComponent();
-            this.InitializeControl();
         }
 
         /// <summary>
@@ -28,37 +46,29 @@ namespace Core2D.Avalonia.Views
             AvaloniaXamlLoader.Load(this);
         }
 
-        /// <summary>
-        /// Initializes the control.
-        /// </summary>
-        private void InitializeControl()
+        protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
         {
-            this.FindControl<MenuItem>("DebugDrawDirtyRects").Click += DebugDrawDirtyRects_Click;
-            this.FindControl<MenuItem>("DebugDrawFps").Click += DebugDrawFps_Click;
+            base.OnAttachedToVisualTree(e);
+
+            DrawDirtyRects = VisualRoot.Renderer.DrawDirtyRects;
+            DrawFps = VisualRoot.Renderer.DrawFps;
+        }
+
+        protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
+        {
+            base.OnDetachedFromVisualTree(e);
         }
 
         private void DebugDrawDirtyRects_Click(object sender, RoutedEventArgs e)
         {
-            ToggleDrawDirtyRects();
+            VisualRoot.Renderer.DrawDirtyRects = !VisualRoot.Renderer.DrawDirtyRects;
+            DrawDirtyRects = VisualRoot.Renderer.DrawDirtyRects;
         }
 
         private void DebugDrawFps_Click(object sender, RoutedEventArgs e)
         {
-            ToggleDrawFps();
-        }
-
-        private void ToggleDrawDirtyRects()
-        {
-            bool value = !VisualRoot.Renderer.DrawDirtyRects;
-            VisualRoot.Renderer.DrawDirtyRects = value;
-            this.FindControl<CheckBox>("DebugDrawDirtyRectsCheckBox").IsChecked = value;
-        }
-
-        private void ToggleDrawFps()
-        {
-            bool value = !VisualRoot.Renderer.DrawFps;
-            VisualRoot.Renderer.DrawFps = value;
-            this.FindControl<CheckBox>("DebugDrawFpsCheckBox").IsChecked = value;
+            VisualRoot.Renderer.DrawFps = !VisualRoot.Renderer.DrawFps;
+            DrawFps = VisualRoot.Renderer.DrawFps;
         }
     }
 }

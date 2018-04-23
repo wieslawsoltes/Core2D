@@ -9,6 +9,7 @@
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:local="clr-namespace:Core2D.Avalonia;assembly=Core2D.Avalonia"
              xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"
+             xmlns:views="clr-namespace:Core2D.Avalonia.Views;assembly=Core2D.Avalonia"
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor"
              xmlns:Recent="clr-namespace:Core2D.Editor.Recent;assembly=Core2D.Editor"
              xmlns:Containers="clr-namespace:Core2D.Containers;assembly=Core2D"
@@ -67,14 +68,15 @@
             </MenuItem>
         </MenuItem>
         <MenuItem Header="_Debug">
-            <MenuItem Header="DrawDirtyRects" x:Name="DebugDrawDirtyRects">
+            <MenuItem Header="Draw_DirtyRects" Click="DebugDrawDirtyRects_Click">
                 <MenuItem.Icon>
-                    <CheckBox Classes="menu" IsChecked="False" x:Name="DebugDrawDirtyRectsCheckBox"/>
+                    <CheckBox Classes="menu" IsChecked="{Binding $parent[views:DashboardMenuControl].DrawDirtyRects}"/>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="DrawFps" x:Name="DebugDrawFps">
+            <Separator/>
+            <MenuItem Header="Draw_Fps" Click="DebugDrawFps_Click">
                 <MenuItem.Icon>
-                    <CheckBox Classes="menu" IsChecked="False" x:Name="DebugDrawFpsCheckBox"/>
+                    <CheckBox Classes="menu" IsChecked="{Binding $parent[views:DashboardMenuControl].DrawFps}"/>
                 </MenuItem.Icon>
             </MenuItem>
         </MenuItem>
