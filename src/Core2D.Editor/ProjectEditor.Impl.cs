@@ -623,6 +623,24 @@ namespace Core2D.Editor
         }
 
         /// <summary>
+        /// Export item.
+        /// </summary>
+        /// <param name="path">The file path.</param>
+        /// <param name="item">The item to export.</param>
+        /// <param name="writer">The file writer.</param>
+        public void OnExport(string path, object item, IFileWriter writer)
+        {
+            try
+            {
+                writer?.Save(path, item, Project);
+            }
+            catch (Exception ex)
+            {
+                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+            }
+        }
+
+        /// <summary>
         /// Execute code script.
         /// </summary>
         /// <param name="path">The script code.</param>
@@ -670,24 +688,6 @@ namespace Core2D.Editor
             foreach (var path in paths)
             {
                 OnExecuteScript(path);
-            }
-        }
-
-        /// <summary>
-        /// Export item.
-        /// </summary>
-        /// <param name="path">The file path.</param>
-        /// <param name="item">The item to export.</param>
-        /// <param name="writer">The file writer.</param>
-        public void OnExport(string path, object item, IFileWriter writer)
-        {
-            try
-            {
-                writer?.Save(path, item, Project);
-            }
-            catch (Exception ex)
-            {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
 
@@ -2027,24 +2027,6 @@ namespace Core2D.Editor
                 }
 
                 Project?.CurrentContainer?.Invalidate();
-            }
-            catch (Exception ex)
-            {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
-            }
-        }
-
-        /// <summary>
-        /// Export item.
-        /// </summary>
-        /// <param name="path">The file path.</param>
-        /// <param name="item">The item to export.</param>
-        /// <param name="writer">The file writer.</param>
-        public void OnExport(string path, object item, IFileWriter writer)
-        {
-            try
-            {
-                writer?.Save(path, item, Project);
             }
             catch (Exception ex)
             {
