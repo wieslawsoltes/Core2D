@@ -454,6 +454,7 @@ Task("Package")
 Task("Default")
   .IsDependentOn("Run-Unit-Tests");
 
+/*
 Task("AppVeyor")
   .IsDependentOn("Run-Unit-Tests-NetCore")
   .IsDependentOn("Build-NetCore")
@@ -466,6 +467,10 @@ Task("AppVeyor")
   .IsDependentOn("Copy-Redist-Files-NetCoreRT")
   .IsDependentOn("Zip-Files-NetCoreRT")
   .IsDependentOn("Run-Unit-Tests");
+*/
+
+Task("AppVeyor")
+  .IsDependentOn("Zip-Files-NetCore");
 
 Task("Travis")
   .IsDependentOn("Run-Unit-Tests-NetCore")
