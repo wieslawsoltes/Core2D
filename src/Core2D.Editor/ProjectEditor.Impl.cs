@@ -33,6 +33,15 @@ namespace Core2D.Editor
         private DocumentContainer _documentToCopy = default(DocumentContainer);
         private BaseShape _hover = default(BaseShape);
 
+        private void LogError(Exception ex)
+        {
+            Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+            if (ex.InnerException != null)
+            {
+                LogError(ex.InnerException);
+            }
+        }
+
         /// <summary>
         /// Snap value by specified snap amount.
         /// </summary>
@@ -209,7 +218,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
         }
 
@@ -232,7 +241,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+               LogError(ex);
             }
         }
 
@@ -269,7 +278,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
         }
 
@@ -294,7 +303,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
         }
 
@@ -320,7 +329,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
         }
 
@@ -341,7 +350,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
         }
 
@@ -530,7 +539,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
         }
 
@@ -564,7 +573,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
         }
 
@@ -584,7 +593,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
         }
 
@@ -618,7 +627,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
         }
 
@@ -636,7 +645,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
         }
 
@@ -655,7 +664,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
         }
 
@@ -675,7 +684,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
         }
 
@@ -706,7 +715,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
         }
 
@@ -725,7 +734,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
         }
 
@@ -744,7 +753,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
         }
 
@@ -770,7 +779,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
         }
 
@@ -792,7 +801,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
         }
 
@@ -946,7 +955,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
         }
 
@@ -961,7 +970,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
         }
 
@@ -988,7 +997,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
         }
 
@@ -2030,7 +2039,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
         }
 
@@ -2098,7 +2107,7 @@ namespace Core2D.Editor
                 }
                 catch (Exception ex)
                 {
-                    Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                    LogError(ex);
                 }
             }
         }
@@ -2119,7 +2128,7 @@ namespace Core2D.Editor
                 }
                 catch (Exception ex)
                 {
-                    Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                    LogError(ex);
                 }
             }
         }
@@ -2163,7 +2172,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
             return false;
         }
@@ -2184,7 +2193,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
         }
 
@@ -2254,7 +2263,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
         }
 
@@ -2325,7 +2334,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
         }
 
@@ -2382,7 +2391,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
         }
 
@@ -2405,7 +2414,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
         }
 
@@ -2450,7 +2459,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
 
             return default(T);
@@ -2482,7 +2491,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
 
             return default(PageContainer);
@@ -2518,7 +2527,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
 
             return default(DocumentContainer);
@@ -2570,7 +2579,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
 
             return false;
@@ -2629,7 +2638,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
         }
 
@@ -2671,7 +2680,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
         }
 
@@ -2709,7 +2718,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
         }
 
@@ -2796,7 +2805,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
         }
 

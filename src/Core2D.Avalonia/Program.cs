@@ -17,14 +17,15 @@ namespace Core2D.Avalonia
     /// </summary>
     class Program
     {
-        /// <summary>
-        /// Builds Avalonia app.
-        /// </summary>
-        /// <returns>The Avalonia app builder.</returns>
-        public static AppBuilder BuildAvaloniaApp()
-            => AppBuilder.Configure<App>()
-                         .UsePlatformDetect()
-                         .LogToDebug();
+        static void Print(Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            Console.WriteLine(ex.StackTrace);
+            if (ex.InnerException != null)
+            {
+                Print(ex.InnerException);
+            }
+        }
 
         /// <summary>
         /// Program entry point.
@@ -82,9 +83,18 @@ namespace Core2D.Avalonia
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                Console.WriteLine(ex.StackTrace);
+                Print(ex);
             }
         }
+
+        /// <summary>
+        /// Builds Avalonia app.
+        /// </summary>
+        /// <returns>The Avalonia app builder.</returns>
+        public static AppBuilder BuildAvaloniaApp()
+            => AppBuilder.Configure<App>()
+                         .UsePlatformDetect()
+                         .LogToDebug();
+
     }
 }
