@@ -6,14 +6,14 @@ using Avalonia.Markup.Xaml;
 namespace Core2D.Avalonia.Views
 {
     /// <summary>
-    /// Interaction logic for <see cref="EditorViewControl"/> xaml.
+    /// Interaction logic for <see cref="DocumentControl"/> xaml.
     /// </summary>
-    public class EditorViewControl : UserControl
+    public class DocumentControl : UserControl
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="EditorViewControl"/> class.
+        /// Initializes a new instance of the <see cref="DocumentControl"/> class.
         /// </summary>
-        public EditorViewControl()
+        public DocumentControl()
         {
             this.InitializeComponent();
         }

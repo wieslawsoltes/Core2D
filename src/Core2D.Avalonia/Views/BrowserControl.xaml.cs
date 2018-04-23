@@ -6,14 +6,14 @@ using Avalonia.Markup.Xaml;
 namespace Core2D.Avalonia.Views
 {
     /// <summary>
-    /// Interaction logic for <see cref="AboutViewControl"/> xaml.
+    /// Interaction logic for <see cref="BrowserControl"/> xaml.
     /// </summary>
-    public class AboutViewControl : UserControl
+    public class BrowserControl : UserControl
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="AboutViewControl"/> class.
+        /// Initializes a new instance of the <see cref="BrowserControl"/> class.
         /// </summary>
-        public AboutViewControl()
+        public BrowserControl()
         {
             this.InitializeComponent();
         }

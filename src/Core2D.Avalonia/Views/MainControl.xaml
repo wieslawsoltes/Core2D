@@ -40,19 +40,31 @@
     <Carousel Items="{Binding Views}" SelectedItem="{Binding CurrentView, Mode=TwoWay}" IsVirtualized="False">
         <Carousel.DataTemplates>
             <DataTemplate DataType="Views:DashboardView">
-                <views:DashboardViewControl/>
+                <Grid RowDefinitions="Auto,*">
+                    <views:DashboardMenuControl Grid.Row="0" DataContext="{Binding Context}"/>
+                    <views:DashboardControl Grid.Row="1" DataContext="{Binding Context}"/>
+                </Grid>
             </DataTemplate>
             <DataTemplate DataType="Views:EditorView">
-                <views:EditorViewControl/>
+                <Grid RowDefinitions="Auto,*">
+                    <views:EditorMenuControl Grid.Row="0" DataContext="{Binding Context}"/>
+                    <views:EditorControl Grid.Row="1" DataContext="{Binding Context}"/>
+                </Grid>
             </DataTemplate>
-            <DataTemplate DataType="Views:BrowserView">
-                <views:BrowserViewControl/>
+            <DataTemplate DataType="Views:BrowserControl">
+                <Grid RowDefinitions="Auto,*">
+                    <views:BrowserControl Grid.Row="1" DataContext="{Binding Context}"/>
+                </Grid>
             </DataTemplate>
             <DataTemplate DataType="Views:DocumentView">
-                <views:DocumentViewControl/>
+                <Grid RowDefinitions="Auto,*">
+                    <views:DocumentControl Grid.Row="1" DataContext="{Binding Context}"/>
+                </Grid>
             </DataTemplate>
             <DataTemplate DataType="Views:AboutView">
-                <views:AboutViewControl/>
+                <Grid RowDefinitions="Auto,*">
+                    <views:AboutControl Grid.Row="1" DataContext="{Binding Context}"/>
+                </Grid>
             </DataTemplate>
         </Carousel.DataTemplates>
     </Carousel>

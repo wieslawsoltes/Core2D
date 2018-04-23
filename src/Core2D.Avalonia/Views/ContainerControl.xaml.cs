@@ -12,9 +12,9 @@ using Core2D.Renderer.Presenters;
 namespace Core2D.Avalonia.Views
 {
     /// <summary>
-    /// Interaction logic for <see cref="ContainerViewControl"/> xaml.
+    /// Interaction logic for <see cref="ContainerControl"/> xaml.
     /// </summary>
-    public class ContainerViewControl : UserControl
+    public class ContainerControl : UserControl
     {
         private static ContainerPresenter _editorPresenter = new EditorPresenter();
         private static ContainerPresenter _templatePresenter = new TemplatePresenter();
@@ -23,13 +23,13 @@ namespace Core2D.Avalonia.Views
         /// Gets or sets container property.
         /// </summary>
         public static readonly AvaloniaProperty<PageContainer> ContainerProperty =
-            AvaloniaProperty.Register<ContainerViewControl, PageContainer>(nameof(Container));
+            AvaloniaProperty.Register<ContainerControl, PageContainer>(nameof(Container));
 
         /// <summary>
         /// Gets or sets renderer property.
         /// </summary>
         public static readonly AvaloniaProperty<ShapeRenderer> RendererProperty =
-            AvaloniaProperty.Register<ContainerViewControl, ShapeRenderer>(nameof(Renderer));
+            AvaloniaProperty.Register<ContainerControl, ShapeRenderer>(nameof(Renderer));
 
         /// <summary>
         /// Gets or sets container property.
@@ -50,9 +50,9 @@ namespace Core2D.Avalonia.Views
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ContainerViewControl"/> class.
+        /// Initializes a new instance of the <see cref="ContainerControl"/> class.
         /// </summary>
-        public ContainerViewControl()
+        public ContainerControl()
         {
             this.InitializeComponent();
         }

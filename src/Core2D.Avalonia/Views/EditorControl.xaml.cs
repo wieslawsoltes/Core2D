@@ -18,7 +18,7 @@ namespace Core2D.Avalonia.Views
     {
         private ProjectEditor _projectEditor;
         private InputProcessor _inputProcessor;
-        private ContainerViewControl _containerControl;
+        private ContainerControl _containerControl;
         private ZoomBorder _zoomBorder;
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace Core2D.Avalonia.Views
         public void AttachEditor()
         {
             _projectEditor = this.DataContext as ProjectEditor;
-            _containerControl = this.Find<ContainerViewControl>("containerControl");
+            _containerControl = this.Find<ContainerControl>("containerControl");
             _zoomBorder = this.Find<ZoomBorder>("zoomBorder");
 
             if (_projectEditor != null && _containerControl != null && _zoomBorder != null)

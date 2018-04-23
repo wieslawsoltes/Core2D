@@ -13,5 +13,5 @@
         Design.DataContext="{x:Static Designer:DesignerContext.Editor}"
         Design.Width="1000" Design.Height="600"
         Title="Object Browser">
-    <views:BrowserViewControl/>
+    <views:BrowserControl/>
 </Window>

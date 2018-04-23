@@ -1,6 +1,6 @@
 ﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
 <!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
-<UserControl x:Class="Core2D.Avalonia.Views.DocumentViewControl"
+<UserControl x:Class="Core2D.Avalonia.Views.DocumentControl"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Core2D.Avalonia;assembly=Core2D.Avalonia"
@@ -43,7 +43,7 @@
                         <ItemsControl VerticalAlignment="Stretch" Items="{Binding Pages}">
                             <ItemsControl.DataTemplates>
                                 <DataTemplate DataType="Containers:PageContainer">
-                                    <views:ContainerViewControl Container="{Binding}" ClipToBounds="False" Margin="0,4,0,4"/>
+                                    <views:ContainerControl Container="{Binding}" ClipToBounds="False" Margin="0,4,0,4"/>
                                 </DataTemplate>
                             </ItemsControl.DataTemplates>
                         </ItemsControl>
