@@ -319,7 +319,7 @@ Task("Copy-Redist-Files-NetCore")
 });
 
 Task("Zip-Files-NetCore")
-    .IsDependentOn("Publish-NetCore")
+    .IsDependentOn("Copy-Redist-Files-NetCore")
     .Does(() =>
 {
     foreach (var project in netCoreProjects)
@@ -428,7 +428,7 @@ Task("Copy-Redist-Files-NetCoreRT")
 });
 
 Task("Zip-Files-NetCoreRT")
-    .IsDependentOn("Publish-NetCoreRT")
+    .IsDependentOn("Copy-Redist-Files-NetCoreRT")
     .Does(() =>
 {
     foreach (var project in netCoreRTProjects)
