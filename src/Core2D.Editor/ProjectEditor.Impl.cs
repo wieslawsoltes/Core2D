@@ -623,6 +623,75 @@ namespace Core2D.Editor
         }
 
         /// <summary>
+        /// Execute code script.
+        /// </summary>
+        /// <param name="path">The script code.</param>
+        public void OnExecuteCode(string csharp)
+        {
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(csharp))
+                {
+                    ScriptRunner?.Execute(csharp);
+                }
+            }
+            catch (Exception ex)
+            {
+                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+            }
+        }
+
+        /// <summary>
+        /// Execute code script from file.
+        /// </summary>
+        /// <param name="path">The code file path.</param>
+        public void OnExecuteScript(string path)
+        {
+            try
+            {
+                var csharp = FileIO?.ReadUtf8Text(path);
+                if (!string.IsNullOrWhiteSpace(csharp))
+                {
+                    OnExecuteCode(csharp);
+                }
+            }
+            catch (Exception ex)
+            {
+                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+            }
+        }
+
+        /// <summary>
+        /// Execute code scripts from files.
+        /// </summary>
+        /// <param name="paths">The code file paths.</param>
+        public void OnExecuteScript(string[] paths)
+        {
+            foreach (var path in paths)
+            {
+                OnExecuteScript(path);
+            }
+        }
+
+        /// <summary>
+        /// Export item.
+        /// </summary>
+        /// <param name="path">The file path.</param>
+        /// <param name="item">The item to export.</param>
+        /// <param name="writer">The file writer.</param>
+        public void OnExport(string path, object item, IFileWriter writer)
+        {
+            try
+            {
+                writer?.Save(path, item, Project);
+            }
+            catch (Exception ex)
+            {
+                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+            }
+        }
+
+        /// <summary>
         /// Undo last action.
         /// </summary>
         public void OnUndo()

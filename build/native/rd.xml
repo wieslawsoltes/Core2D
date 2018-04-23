@@ -98,14 +98,10 @@
         <Assembly Name="CsvHelper" Dynamic="Required All" />
         <Assembly Name="Portable.Xaml" Dynamic="Required All" />
         <Assembly Name="Microsoft.CodeAnalysis.CSharp" Dynamic="Required All" />
-
         <Assembly Name="System.Collections.Immutable" Dynamic="Required All" />
         <Assembly Name="System.ComponentModel" Dynamic="Required All" />
-        <Assembly Name="System.Composition.Convention" Dynamic="Required All" />
-        <Assembly Name="System.Composition.Hosting" Dynamic="Required All" /> -->
         <Assembly Name="System.Dynamic.Runtime" Dynamic="Required All" />
         <Assembly Name="System.IO.Compression" Dynamic="Required All" />
-        <Assembly Name="System.Runtime.Loader" Dynamic="Required All" />
         <Assembly Name="System.Runtime.Serialization.Primitives" Dynamic="Required All" />
 
         <!-- .NET Core -->

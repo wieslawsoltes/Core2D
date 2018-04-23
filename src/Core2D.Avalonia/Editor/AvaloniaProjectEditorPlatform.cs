@@ -306,26 +306,8 @@ namespace Core2D.Avalonia.Editor
                 var result = await dlg.ShowAsync(_serviceProvider.GetService<MainWindow>());
                 if (result != null)
                 {
-                    ExecuteScript(result);
+                    _serviceProvider.GetService<ProjectEditor>().OnExecuteScript(result);
                 }
-            }
-        }
-
-        private void ExecuteScript(string[] paths)
-        {
-            foreach (var path in paths)
-            {
-                ExecuteScript(path);
-            }
-        }
-
-        private void ExecuteScript(string path)
-        {
-            var fileIO = _serviceProvider.GetService<IFileSystem>();
-            var csharp = fileIO.ReadUtf8Text(path);
-            if (!string.IsNullOrEmpty(csharp))
-            {
-                _serviceProvider.GetService<IScriptRunner>().Execute(csharp);
             }
         }
 

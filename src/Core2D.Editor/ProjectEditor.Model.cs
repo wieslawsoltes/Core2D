@@ -47,6 +47,7 @@ namespace Core2D.Editor
         private readonly Lazy<ITextFieldReader<Database>> _csvReader;
         private readonly Lazy<ITextFieldWriter<Database>> _csvWriter;
         private readonly Lazy<IImageImporter> _imageImporter;
+        private readonly Lazy<IScriptRunner> _scriptRunner;
         private readonly Lazy<IProjectEditorPlatform> _platform;
         private readonly Lazy<IEditorCanvasPlatform> _canvas;
 
@@ -230,6 +231,11 @@ namespace Core2D.Editor
         public IImageImporter ImageImporter => _imageImporter.Value;
 
         /// <summary>
+        /// Gets code script runner.
+        /// </summary>
+        public IScriptRunner ScriptRunner => _scriptRunner.Value;
+
+        /// <summary>
         /// Gets project editor platform.
         /// </summary>
         public IProjectEditorPlatform Platform => _platform.Value;
@@ -264,6 +270,7 @@ namespace Core2D.Editor
             _csvReader = _serviceProvider.GetServiceLazily<ITextFieldReader<Database>>();
             _csvWriter = _serviceProvider.GetServiceLazily<ITextFieldWriter<Database>>();
             _imageImporter = _serviceProvider.GetServiceLazily<IImageImporter>();
+            _scriptRunner = _serviceProvider.GetServiceLazily<IScriptRunner>();
             _platform = _serviceProvider.GetServiceLazily<IProjectEditorPlatform>();
             _canvas = _serviceProvider.GetServiceLazily<IEditorCanvasPlatform>();
         }
