@@ -33,7 +33,7 @@ namespace Core2D.ScriptRunner.Roslyn
             var globals = new ScriptBase 
             { 
                 Editor = _serviceProvider.GetService<ProjectEditor>() 
-            }
+            };
 
             try
             {
