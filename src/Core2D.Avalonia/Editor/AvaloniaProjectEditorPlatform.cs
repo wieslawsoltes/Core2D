@@ -390,6 +390,16 @@ namespace Core2D.Avalonia.Editor
         }
 
         /// <inheritdoc/>
+        public void OnScriptEditor()
+        {
+            new ScriptWindow()
+            {
+                DataContext = _serviceProvider.GetService<ProjectEditor>()
+            }
+            .Show();
+        }
+
+        /// <inheritdoc/>
         public void OnAboutDialog()
         {
             new AboutWindow()

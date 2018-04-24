@@ -88,6 +88,8 @@
             <Separator/>
             <MenuItem Header="_Document Viewer..." Command="{Binding Platform.OnDocumentViewer}"/>
             <Separator/>
+            <MenuItem Header="_Script Editor..." Command="{Binding Platform.OnScriptEditor}"/>
+            <Separator/>
             <MenuItem Header="_Reset Zoom" Command="{Binding Platform.OnZoomReset}"/>
             <Separator/>
             <MenuItem Header="_AutoFit Zoom" Command="{Binding Platform.OnZoomAutoFit}"/>

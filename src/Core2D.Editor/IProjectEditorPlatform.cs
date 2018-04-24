@@ -114,6 +114,11 @@ namespace Core2D.Editor
         void OnObjectBrowser();
 
         /// <summary>
+        /// Show script editor.
+        /// </summary>
+        void OnScriptEditor();
+
+        /// <summary>
         /// Show about dialog.
         /// </summary>
         void OnAboutDialog();

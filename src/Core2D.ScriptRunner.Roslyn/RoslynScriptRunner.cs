@@ -45,5 +45,43 @@ namespace Core2D.ScriptRunner.Roslyn
                 Console.WriteLine(string.Join(Environment.NewLine, e.Diagnostics));
             }
         }
+
+        /// <inheritdoc/>
+        public object Execute(string code, object state)
+        {
+            ScriptState<object> next = null;
+
+            if (state is ScriptState<object> previous)
+            {
+                try
+                {
+                    next = previous.ContinueWithAsync(code).Result;
+                }
+                catch (CompilationErrorException e)
+                {
+                    Console.WriteLine(string.Join(Environment.NewLine, e.Diagnostics));
+                }
+                return next;
+            }
+
+            var options = ScriptOptions.Default
+                .WithImports("System");
+
+            var globals = new ScriptBase
+            {
+                Editor = _serviceProvider.GetService<ProjectEditor>()
+            };
+
+            try
+            {
+                next = CSharpScript.RunAsync(code, options, globals).Result;
+            }
+            catch (CompilationErrorException e)
+            {
+                Console.WriteLine(string.Join(Environment.NewLine, e.Diagnostics));
+            }
+
+            return next;
+        }
     }
 }

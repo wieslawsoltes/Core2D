@@ -22,6 +22,8 @@
             <MenuItem Header="E_xit" Command="{Binding Platform.OnExit}"/>
         </MenuItem>
         <MenuItem Header="_View">
+            <MenuItem Header="_Script Editor..." Command="{Binding Platform.OnScriptEditor}"/>
+            <Separator/>
             <MenuItem Header="_Views" Items="{Binding Views}">
                 <MenuItem.Styles>
                     <Style Selector="MenuItem">

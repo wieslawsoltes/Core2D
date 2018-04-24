@@ -652,7 +652,7 @@ namespace Core2D.Editor
         /// <summary>
         /// Execute code script.
         /// </summary>
-        /// <param name="path">The script code.</param>
+        /// <param name="csharp">The script code.</param>
         public void OnExecuteCode(string csharp)
         {
             try
@@ -666,6 +666,35 @@ namespace Core2D.Editor
             {
                 LogError(ex);
             }
+        }
+
+        private object _state;
+
+        /// <summary>
+        /// Execute code script in repl.
+        /// </summary>
+        /// <param name="path">The script code.</param>
+        public void OnExecuteRepl(string csharp)
+        {
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(csharp))
+                {
+                    _state = ScriptRunner?.Execute(csharp, _state);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogError(ex);
+            }
+        }
+
+        /// <summary>
+        /// Reset previous script repl.
+        /// </summary>
+        public void OnResetRepl()
+        {
+            _state = null;
         }
 
         /// <summary>

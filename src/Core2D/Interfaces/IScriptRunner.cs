@@ -13,5 +13,13 @@ namespace Core2D.Interfaces
         /// </summary>
         /// <param name="code">The script code.</param>
         void Execute(string code);
+
+        /// <summary>
+        /// Executes code script and return current script state.
+        /// </summary>
+        /// <param name="code">The script code.</param>
+        /// <param name="state">The script state to continue execution from a previous state.</param>
+        /// <returns>The next script state.</returns>
+        object Execute(string code, object state);
     }
 }

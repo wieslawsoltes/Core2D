@@ -112,6 +112,11 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
+        <!-- Button.code -->
+        <Style Selector="Button.code">
+            <Setter Property="Margin" Value="3,0,3,0"/>
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
         <!-- CheckBox.default -->
         <Style Selector="CheckBox.default">
             <Setter Property="Margin" Value="0,1,0,1"/>
@@ -464,6 +469,23 @@
         </Style>
         <Style Selector="TextBox.project:focus /template/ Border#border">
             <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+        <!-- TextBox.code -->
+        <Style Selector="TextBox.code">
+            <Setter Property="Padding" Value="4"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="TextAlignment" Value="Left"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="AcceptsReturn" Value="True"/>
+            <Setter Property="TextWrapping" Value="NoWrap"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+        </Style>
+        <Style Selector="TextBox.code:pointerover /template/ Border#border">
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+        <Style Selector="TextBox.code:focus /template/ Border#border">
+            <Setter Property="BorderThickness" Value="1"/>
         </Style>
         <!-- ToolTip -->
         <Style Selector="ToolTip">
