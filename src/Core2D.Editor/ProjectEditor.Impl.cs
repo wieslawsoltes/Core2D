@@ -739,73 +739,6 @@ namespace Core2D.Editor
         }
 
         /// <summary>
-        /// Cut selected document, page or shapes to clipboard.
-        /// </summary>
-        public void OnCut()
-        {
-            try
-            {
-                if (CanCopy())
-                {
-                    OnCopy();
-                    OnDeleteSelected();
-                }
-            }
-            catch (Exception ex)
-            {
-                LogError(ex);
-            }
-        }
-
-        /// <summary>
-        /// Copy document, page or shapes to clipboard.
-        /// </summary>
-        public void OnCopy()
-        {
-            try
-            {
-                if (CanCopy())
-                {
-                    if (Renderers?[0]?.State?.SelectedShape != null)
-                    {
-                        OnCopyShapes(Enumerable.Repeat(Renderers[0].State.SelectedShape, 1).ToList());
-                    }
-
-                    if (Renderers?[0]?.State?.SelectedShapes != null)
-                    {
-                        OnCopyShapes(Renderers[0].State.SelectedShapes.ToList());
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                LogError(ex);
-            }
-        }
-
-        /// <summary>
-        /// Paste text from clipboard as document, page or shapes.
-        /// </summary>
-        public async void OnPaste()
-        {
-            try
-            {
-                if (await CanPaste())
-                {
-                    var text = await (TextClipboard?.GetText() ?? Task.FromResult(string.Empty));
-                    if (!string.IsNullOrEmpty(text))
-                    {
-                        OnTryPaste(text);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                LogError(ex);
-            }
-        }
-
-        /// <summary>
         /// Cut selected document, page or shapes.
         /// </summary>
         /// <param name="item">The item to cut.</param>
@@ -832,7 +765,11 @@ namespace Core2D.Editor
             }
             else if (item is ProjectEditor || item == null)
             {
-                OnCut();
+                if (CanCopy())
+                {
+                    OnCopy(item);
+                    OnDeleteSelected();
+                }
             }
         }
 
@@ -856,7 +793,18 @@ namespace Core2D.Editor
             }
             else if (item is ProjectEditor || item == null)
             {
-                OnCopy();
+                if (CanCopy())
+                {
+                    if (Renderers?[0]?.State?.SelectedShape != null)
+                    {
+                        OnCopyShapes(Enumerable.Repeat(Renderers[0].State.SelectedShape, 1).ToList());
+                    }
+
+                    if (Renderers?[0]?.State?.SelectedShapes != null)
+                    {
+                        OnCopyShapes(Renderers[0].State.SelectedShapes.ToList());
+                    }
+                }
             }
         }
 
@@ -864,7 +812,7 @@ namespace Core2D.Editor
         /// Paste text from clipboard as document, page or shapes.
         /// </summary>
         /// <param name="item">The item to paste.</param>
-        public void OnPaste(object item)
+        public async void OnPaste(object item)
         {
             if (Project != null && item is PageContainer)
             {
@@ -902,7 +850,14 @@ namespace Core2D.Editor
             }
             else if (item is ProjectEditor || item == null)
             {
-                OnPaste();
+                if (await CanPaste())
+                {
+                    var text = await(TextClipboard?.GetText() ?? Task.FromResult(string.Empty));
+                    if (!string.IsNullOrEmpty(text))
+                    {
+                        OnTryPaste(text);
+                    }
+                }
             }
         }
 
