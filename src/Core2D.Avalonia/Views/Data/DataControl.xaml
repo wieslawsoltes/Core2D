@@ -14,7 +14,7 @@
         <TabItem Header="Record" Classes="property">
             <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                 <Menu Grid.Row="0" HorizontalAlignment="Right" IsVisible="{Binding Record, Converter={x:Static converters:IsNotNullConverter.Instance}}">
-                    <MenuItem Header="X" Command="{Binding $parent[UserControl;1].DataContext.OnResetRecord}" CommandParameter="{Binding}"/>
+                    <MenuItem Header="X" Command="{Binding $parent[Window].DataContext.OnResetRecord}" CommandParameter="{Binding}"/>
                 </Menu>
                 <ContentControl Content="{Binding Record}" Grid.Row="1"/>
             </Grid>

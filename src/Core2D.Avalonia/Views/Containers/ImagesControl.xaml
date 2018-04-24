@@ -13,7 +13,7 @@
     <ScrollViewer>
         <Grid RowDefinitions="Auto,Auto,*" ColumnDefinitions="*" >
             <Menu Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right">
-                <MenuItem Command="{Binding $parent[UserControl;1].DataContext.OnAddImageKey}" Header="+"/>
+                <MenuItem Command="{Binding $parent[Window].DataContext.OnAddImageKey}" Header="+"/>
             </Menu>
             <TextBlock Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" Text="Key" Classes="default"/>
             <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="2" Items="{Binding Keys}">
@@ -21,7 +21,7 @@
                     <DataTemplate DataType="Renderer:ImageKey">
                         <Grid VerticalAlignment="Top" ColumnDefinitions="*,30">
                             <TextBox VerticalAlignment="Center" Text="{Binding Key, Mode=OneWay}" Classes="property" Grid.Column="0"/>
-                            <Button VerticalAlignment="Center" Content="-" Classes="property" Grid.Column="1" Command="{Binding $parent[UserControl;1].DataContext.OnRemoveImageKey}" CommandParameter="{Binding Key}"/>
+                            <Button VerticalAlignment="Center" Content="-" Classes="property" Grid.Column="1" Command="{Binding $parent[Window].DataContext.OnRemoveImageKey}" CommandParameter="{Binding Key}"/>
                         </Grid>
                     </DataTemplate>
                 </ItemsControl.DataTemplates>
