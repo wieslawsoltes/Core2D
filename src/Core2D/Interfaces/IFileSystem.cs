@@ -10,10 +10,10 @@ namespace Core2D.Interfaces
     public interface IFileSystem
     {
         /// <summary>
-        /// Gets the path of the entry assembly.
+        /// Gets the base directory path.
         /// </summary>
-        /// <returns>The path of the entry assembly.</returns>
-        string GetEntryAssemblyPath();
+        /// <returns>The base directory path.</returns>
+        string GetBaseDirectory();
 
         /// <summary>
         /// Determines whether the specified file exists.
