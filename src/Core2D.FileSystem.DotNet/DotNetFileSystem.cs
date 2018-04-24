@@ -13,20 +13,12 @@ namespace Core2D.FileSystem.DotNet
     public sealed class DotNetFileSystem : IFileSystem
     {
         /// <inheritdoc/>
-        string IFileSystem.GetAssemblyPath(Type type)
+        string IFileSystem.GetEntryAssemblyPath()
         {
-            // HACK: Commented to get CoreRT working.
-            /*
-#if NETSTANDARD2_0
-            string codeBase = type.GetTypeInfo().Assembly.FullName;
-#else
-            string codeBase = type == null ? Assembly.GetEntryAssembly().CodeBase : type.GetTypeInfo().Assembly.FullName;
-#endif
+            string codeBase = Assembly.GetEntryAssembly().CodeBase;
             var uri = new UriBuilder(codeBase);
             string path = Uri.UnescapeDataString(uri.Path);
             return System.IO.Path.GetDirectoryName(path);
-            */
-            return "";
         }
 
         /// <inheritdoc/>
