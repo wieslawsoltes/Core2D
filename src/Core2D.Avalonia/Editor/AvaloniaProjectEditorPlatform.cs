@@ -300,7 +300,7 @@ namespace Core2D.Avalonia.Editor
             if (path == null)
             {
                 var dlg = new OpenFileDialog();
-                dlg.Filters.Add(new FileDialogFilter() { Name = "Script", Extensions = { "cs" } });
+                dlg.Filters.Add(new FileDialogFilter() { Name = "Script", Extensions = { "csx", "cs" } });
                 dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
                 dlg.AllowMultiple = true;
                 var result = await dlg.ShowAsync(_serviceProvider.GetService<MainWindow>());
