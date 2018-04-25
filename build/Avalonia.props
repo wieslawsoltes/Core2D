@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="0.6.1" />
+    <PackageReference Include="Avalonia" Version="0.6.2-build4929-beta" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Serilog" Version="2.5.0" />
@@ -10,10 +10,10 @@
     <PackageReference Include="System.ValueTuple" Version="4.3.1" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Avalonia.Xaml.Interactions" Version="0.6.1" />
-    <PackageReference Include="Avalonia.Xaml.Interactions.Custom" Version="0.6.1" />
+    <PackageReference Include="Avalonia.Xaml.Interactions" Version="0.6.2-build501-alpha" />
+    <PackageReference Include="Avalonia.Xaml.Interactions.Custom" Version="0.6.2-build501-alpha" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Avalonia.Controls.PanAndZoom" Version="1.0.1" />
+    <PackageReference Include="Avalonia.Controls.PanAndZoom" Version="1.0.2-build227-alpha" />
   </ItemGroup>
 </Project>
