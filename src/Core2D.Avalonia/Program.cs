@@ -48,10 +48,18 @@ namespace Core2D.Avalonia
                         var appBuilder = BuildAvaloniaApp();
                         if (args.Length > 0)
                         {
+                            bool deferredRendering = true;
+
                             foreach (var arg in args)
                             {
                                 switch (arg)
                                 {
+                                    case "--immediate":
+                                        deferredRendering = false;
+                                        break;
+                                    case "--deferred":
+                                        deferredRendering = true;
+                                        break;
                                     case "--d2d":
                                         appBuilder.UseDirect2D1();
                                         break;
@@ -59,13 +67,13 @@ namespace Core2D.Avalonia
                                         appBuilder.UseSkia();
                                         break;
                                     case "--win32":
-                                        appBuilder.UseWin32();
+                                        appBuilder.UseWin32(deferredRendering);
                                         break;
                                     case "--gtk3":
-                                        appBuilder.UseGtk3();
+                                        appBuilder.UseGtk3(deferredRendering);
                                         break;
                                     case "--mac":
-                                        appBuilder.UseMonoMac();
+                                        appBuilder.UseMonoMac(deferredRendering);
                                         break;
                                 }
                             }
