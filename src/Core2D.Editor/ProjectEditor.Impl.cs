@@ -1032,7 +1032,7 @@ namespace Core2D.Editor
         }
 
         /// <summary>
-        /// Move selected shapes one step closer to the front of the stack.
+        /// Bring selected shapes one step closer to the front of the stack.
         /// </summary>
         public void OnBringForwardSelected()
         {
@@ -1053,7 +1053,7 @@ namespace Core2D.Editor
         }
 
         /// <summary>
-        /// Move selected shapes one step down within the stack.
+        /// Bring selected shapes one step down within the stack.
         /// </summary>
         public void OnSendBackwardSelected()
         {
@@ -1074,7 +1074,7 @@ namespace Core2D.Editor
         }
 
         /// <summary>
-        /// Move selected shapes to the bottom of the stack.
+        /// Bring selected shapes to the bottom of the stack.
         /// </summary>
         public void OnSendToBackSelected()
         {

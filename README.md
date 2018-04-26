@@ -33,6 +33,198 @@ Core2D is a multi-platform application for making data driven 2D diagrams.
 
 The core libraries are portable and should work on all platforms where C# is supported.
 
+## Keyboard Shortcuts
+
+### MainControl
+
+#### File
+
+| Shortcut          | Description                                                                   |
+|-------------------|-------------------------------------------------------------------------------|
+| Ctrl+N            | Create new project, document or page.                                         |
+| Ctrl+O            | Open project.                                                                 |
+| Ctrl+F4           | Close project.                                                                |
+| Ctrl+S            | Save project.                                                                 |
+| Ctrl+Shift+S      | Save project as.                                                              |
+| Ctrl+Shift+X      | Import xaml.                                                                  |
+| Ctrl+Shift+J      | Import json.                                                                  |
+| Ctrl+E            | Export project, document or page.                                             |
+| Alt+F4            | Close application view.                                                       |
+
+#### Edit
+
+| Shortcut          | Description                                                                   |
+|-------------------|-------------------------------------------------------------------------------|
+| Ctrl+Z            | Undo last action.                                                             |
+| Ctrl+Y            | Redo last action.                                                             |
+| Ctrl+Shift+C      | Copy page or selected shapes to clipboard as Emf.                             |
+| Ctrl+X            | Cut selected document, page or shapes.                                        |
+| Ctrl+C            | Copy document, page or shapes to clipboard.                                   |
+| Ctrl+V            | Paste text from clipboard as document, page or shapes.                        |
+| Ctrl+A            | Select all shapes.                                                            |
+| Ctrl+G            | Group selected shapes.                                                        |
+| Ctrl+U            | Ungroup selected shapes.                                                      |
+
+#### View
+
+| Shortcut          | Description                                                                   |
+|-------------------|-------------------------------------------------------------------------------|
+| Ctrl+J            | Show object browser.                                                          |
+| Ctrl+D            | Show document viewer.                                                         |
+| Ctrl+R            | Show script editor.                                                           |
+
+### ContainerControl
+
+#### Edit
+
+| Shortcut          | Description                                                                   |
+|-------------------|-------------------------------------------------------------------------------|
+| Delete            | Delete selected document, page, layer or shapes.                              |
+| Escape            | De-select all shapes.                                                         |
+| Shift+-           | Bring selected shapes to the bottom of the stack.                             |
+| Shift++           | Bring selected shapes to the top of the stack.                                |
+| -                 | Bring selected shapes one step down within the stack.                         |
+| +                 | Bring selected shapes one step closer to the front of the stack.              |
+| Up                | Move selected shapes up.                                                      |
+| Down              | Move selected shapes down.                                                    |
+| Left              | Move selected shapes left.                                                    |
+| Right             | Move selected shapes right.                                                   |
+
+#### View
+
+| Shortcut          | Description                                                                   |
+|-------------------|-------------------------------------------------------------------------------|
+| Z                 | Reset view size to defaults.                                                  |
+| X                 | Auto-fit view to the available extents.                                       |
+
+#### Tool
+
+| Shortcut          | Description                                                                   |
+|-------------------|-------------------------------------------------------------------------------|
+| N                 | Set current tool to `None`.                                                   |
+| S                 | Set current tool to `Selection`.                                              |
+| P                 | Set current tool to `Point`.                                                  |
+| L                 | Set current tool or path tool to `Line`.                                      |
+| A                 | Set current tool or path tool to `Arc`.                                       |
+| B                 | Set current tool or path tool to `CubicBezier`.                               |
+| Q                 | Set current tool or path tool to `QuadraticBezier`.                           |
+| H                 | Set current tool to `Path`.                                                   |
+| M                 | Set current path tool to `Move`.                                              |
+| R                 | Set current tool to `Rectangle`.                                              |
+| E                 | Set current tool to `Ellipse`.                                                |
+| T                 | Set current tool to `Text`.                                                   |
+| I                 | Set current tool to `Image`.                                                  |
+
+#### Options
+
+| Shortcut          | Description                                                                   |
+|-------------------|-------------------------------------------------------------------------------|
+| K                 | Toggle `DefaultIsStroked` option.                                             |
+| F                 | Toggle `DefaultIsFilled` option.                                              |
+| D                 | Toggle `DefaultIsClosed` option.                                              |
+| J                 | Toggle `DefaultIsSmoothJoin` option.                                          |
+| G                 | Toggle `SnapToGrid` option.                                                   |
+| C                 | Toggle `TryToConnect` option.                                                 |
+| Y                 | Toggle `CloneStyle` option.                                                   |
+
+### BrowserControl
+
+#### Tree
+
+| Shortcut          | Description                                                                   |
+|-------------------|-------------------------------------------------------------------------------|
+| Ctrl+E            | Export object.                                                                |
+
+#### Xaml Text
+
+| Shortcut          | Description                                                                   |
+|-------------------|-------------------------------------------------------------------------------|
+| Ctrl+E            | Export xaml.                                                                  |
+
+#### Json Text
+
+| Shortcut          | Description                                                                   |
+|-------------------|-------------------------------------------------------------------------------|
+| Ctrl+E            | Export json.                                                                  |
+
+### GroupsControl
+
+#### List
+
+| Shortcut          | Description                                                                   |
+|-------------------|-------------------------------------------------------------------------------|
+| Ctrl+N            | Add group.                                                                    |
+| Delete            | Remove group.                                                                 |
+| Ctrl+E            | Export group.                                                                 |
+
+### LayersControl
+
+#### List
+
+| Shortcut          | Description                                                                   |
+|-------------------|-------------------------------------------------------------------------------|
+| Ctrl+N            | Add layer to container.                                                       |
+| Delete            | Remove layer.                                                                 |
+
+### ProjectControl
+
+#### Tree
+
+| Shortcut          | Description                                                                   |
+|-------------------|-------------------------------------------------------------------------------|
+| Ctrl+N            | Create new project, document or page.                                         |
+| Ctrl+X            | Cut selected document, page.                                                  |
+| Ctrl+C            | Copy document, page to clipboard.                                             |
+| Ctrl+V            | Paste text from clipboard as document, page.                                  |
+| Delete            | Delete selected document, page.                                               |
+| Ctrl+E            | Export project, document or page.                                             |
+
+### ShapesControl
+
+#### List
+
+| Shortcut          | Description                                                                   |
+|-------------------|-------------------------------------------------------------------------------|
+| Delete            | Remove shape.                                                                 |
+
+### StylesControl
+
+#### List
+
+| Shortcut          | Description                                                                   |
+|-------------------|-------------------------------------------------------------------------------|
+| Ctrl+N            | Add style.                                                                    |
+| Delete            | Remove style.                                                                 |
+| Ctrl+E            | Export style.                                                                 |
+
+### TemplatesControl
+
+#### List
+
+| Shortcut          | Description                                                                   |
+|-------------------|-------------------------------------------------------------------------------|
+| Ctrl+N            | Set page template.                                                            |
+| Ctrl+T            | Edit template.                                                                |
+| Delete            | Remove template.                                                              |
+| Ctrl+E            | Export template.                                                              |
+
+### RecordsControl
+
+#### List
+
+| Shortcut          | Description                                                                   |
+|-------------------|-------------------------------------------------------------------------------|
+| Ctrl+N            | Add record to database.                                                       |
+| Delete            | Remove record from database.                                                  |
+
+### ScriptWindow
+
+#### List
+
+| Shortcut          | Description                                                                   |
+|-------------------|-------------------------------------------------------------------------------|
+| Ctrl+Enter        | Execute code script in repl.                                                  |
+
 ## Building Core2D
 
 First, clone the repository or download the latest zip.
