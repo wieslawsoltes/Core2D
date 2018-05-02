@@ -37,6 +37,9 @@
         </Button>
         <TextBlock Text="recent" Classes="recent" Grid.Column="3" Grid.ColumnSpan="1" Grid.Row="2" Grid.RowSpan="1"/>
         <ListBox Items="{Binding RecentProjects}" SelectedItem="{Binding CurrentRecentProject, Mode=TwoWay}" Classes="recents" Grid.Column="3" Grid.Row="3" Grid.ColumnSpan="1" Grid.RowSpan="5">
+            <i:Interaction.Behaviors>
+                <behaviors:DropBehavior/>
+            </i:Interaction.Behaviors>
             <ListBox.DataTemplates>
                 <DataTemplate DataType="Recent:RecentFile">
                     <Grid Name="grid" Cursor="Hand" Background="Transparent" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
@@ -46,6 +49,7 @@
                                 <ia:InvokeCommandAction Command="{Binding $parent[ListBox].DataContext.OnOpenProject}" CommandParameter="{Binding Path}"/>
                             </ia:EventTriggerBehavior>
                             <behaviors:DragBehavior/>
+                            <behaviors:DropBehavior/>
                         </i:Interaction.Behaviors>
                         <TextBlock Text="{Binding Name}" Classes="recents" Grid.Column="0" ToolTip.Tip="{Binding Path}"/>
                     </Grid>
