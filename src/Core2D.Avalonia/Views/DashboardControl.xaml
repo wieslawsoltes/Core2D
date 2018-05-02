@@ -15,6 +15,9 @@
              Background="Transparent"
              Design.DataContext="{x:Static Designer:DesignerContext.Editor}"
              Design.Width="1000" Design.Height="800">
+    <i:Interaction.Behaviors>
+        <behaviors:DropBehavior/>
+    </i:Interaction.Behaviors>
     <Grid MaxWidth="800" MaxHeight="600" RowDefinitions="0.2*,50,30,1*,30,1*,30,1*,20,0.2*" ColumnDefinitions="5*,50*,30,40*,5*">
         <TextBlock Text="Core2D" Classes="title" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="1"/>
         <Button Content="New Project" Classes="project" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="1" Grid.RowSpan="1" Command="{Binding OnNewProject}">
