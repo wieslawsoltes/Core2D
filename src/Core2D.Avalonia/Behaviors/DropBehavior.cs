@@ -34,7 +34,7 @@ namespace Core2D.Avalonia.Behaviors
             //if (!e.Data.Contains(DataFormats.Text) && !e.Data.Contains(DataFormats.FileNames))
             //    e.DragEffects = DragDropEffects.None;
 
-            Console.WriteLine("DragOver");
+            Console.WriteLine($"DragOver {sender}");
         }
 
         private void DragEnter(object sender, DragEventArgs e)
@@ -44,12 +44,12 @@ namespace Core2D.Avalonia.Behaviors
             //if (!e.Data.Contains(DataFormats.Text) && !e.Data.Contains(DataFormats.FileNames))
             //    e.DragEffects = DragDropEffects.None;
 
-            Console.WriteLine("DragEnter");
+            Console.WriteLine($"DragEnter {sender}");
         }
 
         private void Drop(object sender, DragEventArgs e)
         {
-            Console.WriteLine("Drop");
+            Console.WriteLine($"Drop {sender}");
 
             foreach (var format in e.Data.GetDataFormats())
             {

@@ -34,6 +34,8 @@ namespace Core2D.Avalonia.Behaviors
 
         private void AssociatedObject_PointerPressed(object sender, PointerPressedEventArgs e)
         {
+            Console.WriteLine($"PointerPressed {sender}");
+
             if (e.MouseButton == MouseButton.Left)
             {
                 _dragStartPoint = e.GetPosition(AssociatedObject);
@@ -45,6 +47,8 @@ namespace Core2D.Avalonia.Behaviors
 
         private void AssociatedObject_PointerReleased(object sender, PointerReleasedEventArgs e)
         {
+            Console.WriteLine($"PointerReleased {sender}");
+
             if (e.MouseButton == MouseButton.Left)
             {
                 _pressed = false;
@@ -55,6 +59,8 @@ namespace Core2D.Avalonia.Behaviors
 
         private void AssociatedObject_PointerMoved(object sender, PointerEventArgs e)
         {
+            Console.WriteLine($"PointerMoved {sender}");
+
             Point point = e.GetPosition(AssociatedObject);
             Vector diff = _dragStartPoint - point;
             if (_pressed == true && _drag == false &&
