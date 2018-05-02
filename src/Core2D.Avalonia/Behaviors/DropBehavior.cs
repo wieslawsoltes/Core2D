@@ -13,16 +13,28 @@ namespace Core2D.Avalonia.Behaviors
         {
             base.OnAttached();
             DragDrop.SetAllowDrop(AssociatedObject, true);
-            AssociatedObject.AddHandler(DragDrop.DropEvent, Drop);
             AssociatedObject.AddHandler(DragDrop.DragEnterEvent, DragEnter);
+            AssociatedObject.AddHandler(DragDrop.DragOverEvent, DragOver);
+            AssociatedObject.AddHandler(DragDrop.DropEvent, Drop);
         }
 
         protected override void OnDetaching()
         {
             base.OnDetaching();
             DragDrop.SetAllowDrop(AssociatedObject, false);
-            AssociatedObject.RemoveHandler(DragDrop.DropEvent, Drop);
             AssociatedObject.RemoveHandler(DragDrop.DragEnterEvent, DragEnter);
+            AssociatedObject.RemoveHandler(DragDrop.DragOverEvent, DragOver);
+            AssociatedObject.RemoveHandler(DragDrop.DropEvent, Drop);
+        }
+
+        private void DragOver(object sender, DragEventArgs e)
+        {
+            e.DragEffects = e.DragEffects & (DragDropEffects.Copy | DragDropEffects.Link);
+
+            //if (!e.Data.Contains(DataFormats.Text) && !e.Data.Contains(DataFormats.FileNames))
+            //    e.DragEffects = DragDropEffects.None;
+
+            Console.WriteLine("DragOver");
         }
 
         private void DragEnter(object sender, DragEventArgs e)
