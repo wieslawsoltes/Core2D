@@ -12,6 +12,7 @@
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor"
              xmlns:Recent="clr-namespace:Core2D.Editor.Recent;assembly=Core2D.Editor"
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
+             Background="Transparent"
              Design.DataContext="{x:Static Designer:DesignerContext.Editor}"
              Design.Width="1000" Design.Height="800">
     <Grid MaxWidth="800" MaxHeight="600" RowDefinitions="0.2*,50,30,1*,30,1*,30,1*,20,0.2*" ColumnDefinitions="5*,50*,30,40*,5*">
@@ -35,7 +36,7 @@
         <ListBox Items="{Binding RecentProjects}" SelectedItem="{Binding CurrentRecentProject, Mode=TwoWay}" Classes="recents" Grid.Column="3" Grid.Row="3" Grid.ColumnSpan="1" Grid.RowSpan="5">
             <ListBox.DataTemplates>
                 <DataTemplate DataType="Recent:RecentFile">
-                    <Grid Name="grid" Cursor="Hand">
+                    <Grid Name="grid" Cursor="Hand" Background="Transparent" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                         <i:Interaction.Behaviors>
                             <iac:SelectListBoxItemOnPointerMovedBehavior/>
                             <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #grid}">
