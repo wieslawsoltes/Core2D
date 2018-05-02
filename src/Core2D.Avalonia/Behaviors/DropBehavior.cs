@@ -55,6 +55,7 @@ namespace Core2D.Avalonia.Behaviors
             foreach (var format in e.Data.GetDataFormats())
             {
                 Console.WriteLine($"Drop format: {format}");
+                Console.WriteLine($"Drop data: {e.Data.Get(format)}");
             }
 
             if (e.Data.Contains(DataFormats.Text))
