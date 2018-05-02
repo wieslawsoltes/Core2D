@@ -49,16 +49,18 @@ namespace Core2D.Avalonia.Behaviors
 
         private void Drop(object sender, DragEventArgs e)
         {
-            Console.WriteLine($"Drop {sender}");
+            Console.WriteLine($"Drop sender {sender}");
+            Console.WriteLine($"Drop source {e.Source}");
 
             foreach (var format in e.Data.GetDataFormats())
             {
-                Console.WriteLine(format);
+                Console.WriteLine($"Drop format: {format}");
             }
 
             if (e.Data.Contains(DataFormats.Text))
             {
                 var text = e.Data.GetText();
+                Console.WriteLine($"Drop text: {text}");
                 Console.WriteLine(text);
             }
 
@@ -66,7 +68,7 @@ namespace Core2D.Avalonia.Behaviors
             {
                 foreach (var file in e.Data.GetFileNames())
                 {
-                    Console.WriteLine(file);
+                    Console.WriteLine($"Drop file: {file}");
                 }
             }
 
