@@ -29,6 +29,7 @@ namespace Core2D.Editor
     /// </summary>
     public partial class ProjectEditor
     {
+        private object _scriptState;
         private PageContainer _pageToCopy = default(PageContainer);
         private DocumentContainer _documentToCopy = default(DocumentContainer);
         private BaseShape _hover = default(BaseShape);
@@ -668,8 +669,6 @@ namespace Core2D.Editor
             }
         }
 
-        private object _state;
-
         /// <summary>
         /// Execute code script in repl.
         /// </summary>
@@ -680,7 +679,7 @@ namespace Core2D.Editor
             {
                 if (!string.IsNullOrWhiteSpace(csharp))
                 {
-                    _state = ScriptRunner?.Execute(csharp, _state);
+                    _scriptState = ScriptRunner?.Execute(csharp, _scriptState);
                 }
             }
             catch (Exception ex)
@@ -694,7 +693,7 @@ namespace Core2D.Editor
         /// </summary>
         public void OnResetRepl()
         {
-            _state = null;
+            _scriptState = null;
         }
 
         /// <summary>
