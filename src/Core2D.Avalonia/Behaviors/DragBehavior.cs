@@ -48,7 +48,6 @@ namespace Core2D.Avalonia.Behaviors
         {
             if (e.MouseButton == MouseButton.Left)
             {
-                _dragStartPoint = e.GetPosition(AssociatedObject);
                 _pointerPressed = false;
                 _doDragDrop = false;
                 Console.WriteLine($"PointerReleased sender: {sender}, source: {e.Source}");
