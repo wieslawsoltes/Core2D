@@ -1,14 +1,26 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
+using System.Linq;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Xaml.Interactivity;
+using Core2D.Editor;
 
 namespace Core2D.Avalonia.Behaviors
 {
     public sealed class DropBehavior : Behavior<Control>
     {
+        public static readonly AvaloniaProperty EditorProperty =
+            AvaloniaProperty.Register<DropBehavior, ProjectEditor>(nameof(Editor));
+
+        public ProjectEditor Editor
+        {
+            get => (ProjectEditor)GetValue(EditorProperty);
+            set => SetValue(EditorProperty, value);
+        }
+
         protected override void OnAttached()
         {
             base.OnAttached();
@@ -34,7 +46,7 @@ namespace Core2D.Avalonia.Behaviors
             //if (!e.Data.Contains(DataFormats.Text) && !e.Data.Contains(DataFormats.FileNames))
             //    e.DragEffects = DragDropEffects.None;
 
-            Console.WriteLine($"DragOver {sender}");
+            Console.WriteLine($"DragOver sender: {sender}, source: {e.Source}");
         }
 
         private void DragEnter(object sender, DragEventArgs e)
@@ -44,33 +56,35 @@ namespace Core2D.Avalonia.Behaviors
             //if (!e.Data.Contains(DataFormats.Text) && !e.Data.Contains(DataFormats.FileNames))
             //    e.DragEffects = DragDropEffects.None;
 
-            Console.WriteLine($"DragEnter {sender}");
+            Console.WriteLine($"DragEnter sender: {sender}, source: {e.Source}");
         }
 
         private void Drop(object sender, DragEventArgs e)
         {
-            Console.WriteLine($"Drop sender {sender}");
-            Console.WriteLine($"Drop source {e.Source}");
+            Console.WriteLine($"Drop sender: {sender}, source: {e.Source}");
 
             foreach (var format in e.Data.GetDataFormats())
             {
-                Console.WriteLine($"Drop format: {format}");
-                Console.WriteLine($"Drop data: {e.Data.Get(format)}");
+                Console.WriteLine($"[{format}] : {e.Data.Get(format)}");
             }
 
             if (e.Data.Contains(DataFormats.Text))
             {
                 var text = e.Data.GetText();
-                Console.WriteLine($"Drop text: {text}");
+                Console.WriteLine($"[{DataFormats.Text}] : {text}");
                 Console.WriteLine(text);
             }
 
             if (e.Data.Contains(DataFormats.FileNames))
             {
-                foreach (var file in e.Data.GetFileNames())
+                var files = e.Data.GetFileNames().ToArray();
+
+                foreach (var file in files)
                 {
-                    Console.WriteLine($"Drop file: {file}");
+                    Console.WriteLine($"[{DataFormats.FileNames}] : {file}");
                 }
+
+                Editor?.OnDropFiles(files);
             }
 
             e.DragEffects = DragDropEffects.None;

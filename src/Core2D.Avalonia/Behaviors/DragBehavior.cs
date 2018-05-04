@@ -10,11 +10,12 @@ namespace Core2D.Avalonia.Behaviors
 {
     public sealed class DragBehavior : Behavior<Control>
     {
-        private double _minimumHorizontalDragDistance = 5;
-        private double _minimumVerticalDragDistance = 5;
         private Point _dragStartPoint;
-        private bool _pressed;
-        private bool _drag;
+        private bool _pointerPressed;
+        private bool _doDragDrop;
+
+        public static double _minimumHorizontalDragDistance = 5;
+        public static double _minimumVerticalDragDistance = 5;
 
         protected override void OnAttached()
         {
@@ -37,9 +38,9 @@ namespace Core2D.Avalonia.Behaviors
             if (e.MouseButton == MouseButton.Left)
             {
                 _dragStartPoint = e.GetPosition(AssociatedObject);
-                _pressed = true;
-                _drag = false;
-                Console.WriteLine($"PointerPressed {sender}");
+                _pointerPressed = true;
+                _doDragDrop = false;
+                Console.WriteLine($"PointerPressed sender: {sender}, source: {e.Source}");
             }
         }
 
@@ -47,9 +48,10 @@ namespace Core2D.Avalonia.Behaviors
         {
             if (e.MouseButton == MouseButton.Left)
             {
-                _pressed = false;
-                _drag = false;
-                Console.WriteLine($"PointerReleased {sender}");
+                _dragStartPoint = e.GetPosition(AssociatedObject);
+                _pointerPressed = false;
+                _doDragDrop = false;
+                Console.WriteLine($"PointerReleased sender: {sender}, source: {e.Source}");
             }
         }
 
@@ -57,26 +59,23 @@ namespace Core2D.Avalonia.Behaviors
         {
             Point point = e.GetPosition(AssociatedObject);
             Vector diff = _dragStartPoint - point;
-            if (_pressed == true && _drag == false &&
-                (Math.Abs(diff.X) > _minimumHorizontalDragDistance || Math.Abs(diff.Y) > _minimumVerticalDragDistance))
+            bool min = (Math.Abs(diff.X) > _minimumHorizontalDragDistance || Math.Abs(diff.Y) > _minimumVerticalDragDistance);
+            if (_pointerPressed == true && _doDragDrop == false && min == true)
             {
-                Console.WriteLine($"PointerMoved {sender}");
-
-                _drag = true;
+                _doDragDrop = true;
 
                 var data = new DataObject();
 
-                data.Set(e.Source.GetType().ToString(), e.Source);
-                data.Set(sender.GetType().ToString(), sender);
-
-                data.Set(AssociatedObject.GetType().ToString(), AssociatedObject);
-                data.Set(AssociatedObject.DataContext.GetType().ToString(), AssociatedObject.DataContext);
-
-                data.Set(AssociatedObject.Parent.GetType().ToString(), AssociatedObject.Parent);
-                data.Set(AssociatedObject.Parent.DataContext.GetType().ToString(), AssociatedObject.Parent.DataContext);
+                data.Set(CustomDataFormats.Source, e.Source);
+                data.Set(CustomDataFormats.Sender, sender);
+                data.Set(CustomDataFormats.Object, AssociatedObject);
+                data.Set(CustomDataFormats.ObjectData, AssociatedObject.DataContext);
+                data.Set(CustomDataFormats.Parent, AssociatedObject.Parent);
+                data.Set(CustomDataFormats.ParentData, AssociatedObject.Parent.DataContext);
 
                 DragDrop.DoDragDrop(data, DragDropEffects.Link);
-                Console.WriteLine("DoDragDrop");
+
+                Console.WriteLine($"PointerMoved sender: {sender}, source: {e.Source}");
             }
         }
     }
