@@ -74,7 +74,7 @@ namespace Core2D.Avalonia.Behaviors
 
                 DragDrop.DoDragDrop(data, DragDropEffects.Link);
 
-                Console.WriteLine($"PointerMoved sender: {sender}, source: {e.Source}");
+                Console.WriteLine($"PointerMoved sender: {sender}, source: {e.Source}, point: {point}, diff: {diff}");
             }
         }
     }
