@@ -8,6 +8,7 @@ using Avalonia.Input;
 using Avalonia.VisualTree;
 using Avalonia.Xaml.Interactivity;
 using Core2D.Editor;
+using Core2D.Style;
 
 namespace Core2D.Avalonia.Behaviors
 {
@@ -40,12 +41,13 @@ namespace Core2D.Avalonia.Behaviors
             AssociatedObject.RemoveHandler(DragDrop.DropEvent, Drop);
         }
 
-        private void Debug(object sender)
+        private Point GetPoint(object sender)
         {
             var root = sender as IControl;
             var point = (root.VisualRoot as IInputRoot)?.MouseDevice?.GetPosition(root) ?? default(Point);
             var control = root.GetVisualsAt(point, x => x.IsVisible).FirstOrDefault();
             Console.WriteLine($"[{control}] : {point}");
+            return point;
         }
 
         private void DragOver(object sender, DragEventArgs e)
@@ -56,7 +58,7 @@ namespace Core2D.Avalonia.Behaviors
             //    e.DragEffects = DragDropEffects.None;
 
             Console.WriteLine($"DragOver sender: {sender}, source: {e.Source}");
-            Debug(sender);
+            GetPoint(sender);
         }
 
         private void DragEnter(object sender, DragEventArgs e)
@@ -67,17 +69,29 @@ namespace Core2D.Avalonia.Behaviors
             //    e.DragEffects = DragDropEffects.None;
 
             Console.WriteLine($"DragEnter sender: {sender}, source: {e.Source}");
-            Debug(sender);
+            GetPoint(sender);
         }
 
         private void Drop(object sender, DragEventArgs e)
         {
             Console.WriteLine($"Drop sender: {sender}, source: {e.Source}");
-            Debug(sender);
+
+            var point = GetPoint(sender);
 
             foreach (var format in e.Data.GetDataFormats())
             {
-                Console.WriteLine($"[{format}] : {e.Data.Get(format)}");
+                var data = e.Data.Get(format);
+
+                Console.WriteLine($"[{format}] : {data}");
+
+                switch (data)
+                {
+                    case ShapeStyle style:
+                        {
+                            Editor?.OnDropStyle(style, point.X, point.Y);
+                        }
+                        break;
+                }
             }
 
             if (e.Data.Contains(DataFormats.Text))

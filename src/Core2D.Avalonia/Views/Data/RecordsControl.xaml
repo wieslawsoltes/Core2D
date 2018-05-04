@@ -7,6 +7,7 @@
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
              xmlns:local="clr-namespace:Core2D.Avalonia;assembly=Core2D.Avalonia"
              xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"
+             xmlns:behaviors="clr-namespace:Core2D.Avalonia.Behaviors;assembly=Core2D.Avalonia"
              xmlns:Data="clr-namespace:Core2D.Data;assembly=Core2D"
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor"
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
@@ -30,10 +31,11 @@
             </ListBox.KeyBindings>
             <ListBox.DataTemplates>
                 <DataTemplate DataType="Data:Record">
-                    <TextBlock Name="record" Text="{Binding Mode=OneWay, Converter={x:Static converters:ObjectToTypeStringConverter.Instance}}" Classes="list">
+                    <TextBlock Name="record" Text="{Binding Mode=OneWay, Converter={x:Static converters:ObjectToTypeStringConverter.Instance}}" Classes="list drag">
                         <i:Interaction.Behaviors>
                             <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #record}">
                                 <ia:InvokeCommandAction Command="{Binding $parent[Window].DataContext.OnApplyRecord}" CommandParameter="{Binding Mode=OneWay}"/>
+                                <behaviors:DragBehavior/>
                             </ia:EventTriggerBehavior>
                         </i:Interaction.Behaviors>
                         <TextBlock.ContextMenu>

@@ -42,7 +42,7 @@
             </i:Interaction.Behaviors>
             <ListBox.DataTemplates>
                 <DataTemplate DataType="Recent:RecentFile">
-                    <Grid Name="grid" Cursor="Hand" Background="Transparent" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <Grid Name="grid" Cursor="Hand" Classes="drag">
                         <i:Interaction.Behaviors>
                             <iac:SelectListBoxItemOnPointerMovedBehavior/>
                             <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #grid}">
