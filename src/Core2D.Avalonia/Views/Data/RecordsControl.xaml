@@ -35,8 +35,8 @@
                         <i:Interaction.Behaviors>
                             <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #record}">
                                 <ia:InvokeCommandAction Command="{Binding $parent[Window].DataContext.OnApplyRecord}" CommandParameter="{Binding Mode=OneWay}"/>
-                                <behaviors:DragBehavior/>
                             </ia:EventTriggerBehavior>
+                            <behaviors:DragBehavior/>
                         </i:Interaction.Behaviors>
                         <TextBlock.ContextMenu>
                             <ContextMenu Classes="default">
