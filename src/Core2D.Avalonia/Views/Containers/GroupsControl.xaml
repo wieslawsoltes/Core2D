@@ -11,31 +11,34 @@
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor"
              xmlns:Shapes="clr-namespace:Core2D.Shapes;assembly=Core2D" 
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
-             Design.DataContext="{x:Static Designer:DesignerContext.Project}"
+             Design.DataContext="{x:Static Designer:DesignerContext.CurrentStyleLibrary}"
              Design.Width="250" Design.Height="400">
     <Grid RowDefinitions="Auto,Auto,Auto,*,Auto">
         <Grid RowDefinitions="*" ColumnDefinitions="*,Auto" Grid.Row="0">
-            <TextBox Text="{Binding CurrentGroupLibrary.Name, Mode=TwoWay}" Classes="left" Grid.Column="0" IsVisible="{Binding CurrentGroupLibrary, Converter={x:Static converters:IsNotNullConverter.Instance}}"/>
+            <TextBox Text="{Binding Name, Mode=TwoWay}" Classes="left" Grid.Column="0" IsVisible="{Binding Converter={x:Static converters:IsNotNullConverter.Instance}}"/>
             <Menu Grid.Column="1" HorizontalAlignment="Right">
                 <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddGroupLibrary}"/>
-                <MenuItem Header="-" Command="{Binding $parent[Window].DataContext.OnRemoveGroupLibrary}" CommandParameter="{Binding CurrentGroupLibrary}" IsVisible="{Binding CurrentGroupLibrary, Converter={x:Static converters:IsNotNullConverter.Instance}}"/>
+                <MenuItem Header="-" Command="{Binding $parent[Window].DataContext.OnRemoveGroupLibrary}" CommandParameter="{Binding}" IsVisible="{Binding Converter={x:Static converters:IsNotNullConverter.Instance}}"/>
             </Menu>
         </Grid>
-        <DropDown Items="{Binding GroupLibraries}" SelectedItem="{Binding CurrentGroupLibrary, Mode=TwoWay}" Classes="default" Grid.Row="1" IsVisible="{Binding CurrentGroupLibrary, Converter={x:Static converters:IsNotNullConverter.Instance}}">
+        <DropDown Items="{Binding $parent[Window].DataContext.Project.GroupLibraries}" SelectedItem="{Binding $parent[Window].DataContext.Project.CurrentGroupLibrary, Mode=TwoWay}" Classes="default" Grid.Row="1" IsVisible="{Binding Converter={x:Static converters:IsNotNullConverter.Instance}}">
             <DropDown.DataTemplates>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}" Classes="default"/>
                 </DataTemplate>
             </DropDown.DataTemplates>
         </DropDown>
-        <Menu Grid.Row="2" HorizontalAlignment="Right" IsVisible="{Binding CurrentGroupLibrary, Converter={x:Static converters:IsNotNullConverter.Instance}}">
-            <MenuItem Header="insert" Command="{Binding $parent[Window].DataContext.OnInsertGroup}" CommandParameter="{Binding CurrentGroupLibrary.Selected}" IsVisible="{Binding CurrentGroupLibrary.Selected, Converter={x:Static converters:IsNotNullConverter.Instance}}"/>
-            <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddGroup}" CommandParameter="{Binding CurrentGroupLibrary}" IsVisible="{Binding CurrentContainer.CurrentShape, Converter={x:Static converters:IsGroupConverter.Instance}}"/>
-            <MenuItem Header="-" Command="{Binding $parent[Window].DataContext.OnRemoveGroup}" CommandParameter="{Binding CurrentGroupLibrary.Selected}" IsVisible="{Binding CurrentGroupLibrary.Selected, Converter={x:Static converters:IsNotNullConverter.Instance}}"/>
+        <Menu Grid.Row="2" HorizontalAlignment="Right" IsVisible="{Binding Converter={x:Static converters:IsNotNullConverter.Instance}}">
+            <MenuItem Header="insert" Command="{Binding $parent[Window].DataContext.OnInsertGroup}" CommandParameter="{Binding Selected}" IsVisible="{Binding Selected, Converter={x:Static converters:IsNotNullConverter.Instance}}"/>
+            <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddGroup}" CommandParameter="{Binding}" IsVisible="{Binding CurrentContainer.CurrentShape, Converter={x:Static converters:IsGroupConverter.Instance}}"/>
+            <MenuItem Header="-" Command="{Binding $parent[Window].DataContext.OnRemoveGroup}" CommandParameter="{Binding Selected}" IsVisible="{Binding Selected, Converter={x:Static converters:IsNotNullConverter.Instance}}"/>
         </Menu>
-        <ListBox Name="groups" Items="{Binding CurrentGroupLibrary.Items}" SelectedItem="{Binding CurrentGroupLibrary.Selected, Mode=TwoWay}" Grid.Row="3" Classes="default">
+        <ListBox Name="groups" Items="{Binding Items}" SelectedItem="{Binding Selected, Mode=TwoWay}" Grid.Row="3" Classes="default">
+            <i:Interaction.Behaviors>
+                <behaviors:DropBehavior Editor="{Binding $parent[Window].DataContext}"/>
+            </i:Interaction.Behaviors>
             <ListBox.KeyBindings>
-                <KeyBinding Command="{Binding $parent[Window].DataContext.OnAddGroup}" CommandParameter="{Binding #groups.DataContext.CurrentGroupLibrary}" Gesture="Ctrl+N"/>
+                <KeyBinding Command="{Binding $parent[Window].DataContext.OnAddGroup}" CommandParameter="{Binding #groups.DataContext}" Gesture="Ctrl+N"/>
                 <KeyBinding Command="{Binding $parent[Window].DataContext.OnRemoveGroup}" CommandParameter="{Binding #groups.SelectedItem}" Gesture="Delete"/>
                 <KeyBinding Command="{Binding $parent[Window].DataContext.Platform.OnExportObject}" CommandParameter="{Binding #groups.SelectedItem}" Gesture="Ctrl+E"/>
             </ListBox.KeyBindings>

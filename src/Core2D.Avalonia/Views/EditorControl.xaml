@@ -56,7 +56,7 @@
             <Border Name="leftPanelBottom" Classes="leftBottom" Grid.Row="2">
                 <TabControl Classes="bottom">
                     <TabItem Header="Groups" Classes="property">
-                        <project:GroupsControl DataContext="{Binding Project}"/>
+                        <project:GroupsControl DataContext="{Binding Project.CurrentGroupLibrary}"/>
                     </TabItem>
                     <TabItem Header="Databases" Classes="property">
                         <project:DatabasesControl DataContext="{Binding Project}"/>
@@ -69,7 +69,7 @@
             <Border Name="rightPanelTop" Classes="rightTop" Grid.Row="0">
                 <TabControl Classes="bottom">
                     <TabItem Header="Styles" Classes="property">
-                        <project:StylesControl DataContext="{Binding Project}"/>
+                        <project:StylesControl DataContext="{Binding Project.CurrentStyleLibrary}"/>
                     </TabItem>
                     <TabItem Header="Templates" Classes="property">
                         <project:TemplatesControl DataContext="{Binding Project}"/>

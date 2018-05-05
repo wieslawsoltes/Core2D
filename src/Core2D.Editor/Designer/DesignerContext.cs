@@ -62,6 +62,16 @@ namespace Core2D.Editor.Designer
         public static ProjectContainer Project { get; set; }
 
         /// <summary>
+        /// The design time <see cref="Library{ShapeStyle}"/>.
+        /// </summary>
+        public static Library<ShapeStyle> CurrentStyleLibrary { get; set; }
+
+        /// <summary>
+        /// The design time <see cref="Library{GroupShape}"/>.
+        /// </summary>
+        public static Library<GroupShape> CurrentGroupLibrary { get; set; }
+
+        /// <summary>
         /// The design time <see cref="Core2D.Shape.ShapeState"/>.
         /// </summary>
         public static ShapeState State { get; set; }
@@ -279,6 +289,9 @@ namespace Core2D.Editor.Designer
             Document = DocumentContainer.Create();
             Layer = LayerContainer.Create();
             Options = Options.Create();
+
+            CurrentStyleLibrary = Project.CurrentStyleLibrary;
+            CurrentGroupLibrary = Project.CurrentGroupLibrary;
 
             // State
 
