@@ -14,8 +14,8 @@ namespace Core2D.Avalonia.Behaviors
         private bool _pointerPressed;
         private bool _doDragDrop;
 
-        public static double _minimumHorizontalDragDistance = 5;
-        public static double _minimumVerticalDragDistance = 5;
+        public static double MinimumHorizontalDragDistance = 5;
+        public static double MinimumVerticalDragDistance = 5;
 
         protected override void OnAttached()
         {
@@ -58,7 +58,7 @@ namespace Core2D.Avalonia.Behaviors
         {
             Point point = e.GetPosition(AssociatedObject);
             Vector diff = _dragStartPoint - point;
-            bool min = (Math.Abs(diff.X) > _minimumHorizontalDragDistance || Math.Abs(diff.Y) > _minimumVerticalDragDistance);
+            bool min = (Math.Abs(diff.X) > MinimumHorizontalDragDistance || Math.Abs(diff.Y) > MinimumVerticalDragDistance);
             if (_pointerPressed == true && _doDragDrop == false && min == true)
             {
                 _doDragDrop = true;
