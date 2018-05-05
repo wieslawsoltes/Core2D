@@ -91,93 +91,108 @@ namespace Core2D.Avalonia.Behaviors
             GetPoint(sender);
         }
 
+        private void Move<T>(int sourceIndex, int targetIndex, Library<T> library)
+        {
+            if (sourceIndex < targetIndex)
+            {
+                var item1 = library.Items[sourceIndex];
+                var builder = library.Items.ToBuilder();
+                builder.Insert(targetIndex + 1, item1);
+                builder.RemoveAt(sourceIndex);
+
+                var previous = library.Items;
+                var next = builder.ToImmutable();
+                Editor?.Project?.History?.Snapshot(previous, next, (p) => library.Items = p);
+                library.Items = next;
+            }
+            else
+            {
+                int removeIndex = sourceIndex + 1;
+                if (library.Items.Length + 1 > removeIndex)
+                {
+                    var item1 = library.Items[sourceIndex];
+                    var builder = library.Items.ToBuilder();
+                    builder.Insert(targetIndex, item1);
+                    builder.RemoveAt(removeIndex);
+
+                    var previous = library.Items;
+                    var next = builder.ToImmutable();
+                    Editor?.Project?.History?.Snapshot(previous, next, (p) => library.Items = p);
+                    library.Items = next;
+                }
+            }
+        }
+
+
+        private void Swap<T>(int sourceIndex, int targetIndex, Library<T> library)
+        {
+            var item1 = library.Items[sourceIndex];
+            var item2 = library.Items[targetIndex];
+            var builder = library.Items.ToBuilder();
+            builder[targetIndex] = item1;
+            builder[sourceIndex] = item2;
+
+            var previous = library.Items;
+            var next = builder.ToImmutable();
+            Editor?.Project?.History?.Snapshot(previous, next, (p) => library.Items = p);
+            library.Items = next;
+        }
+
         private void Drop(object sender, DragEventArgs e)
         {
             Console.WriteLine($"Drop sender: {sender}, source: {e.Source}");
 
             var point = GetPoint(sender);
 
-            if (sender is ListBox list)
+            switch (sender)
             {
-                var parent = e.Data.Get(CustomDataFormats.Parent);
-                if (parent is ListBoxItem source)
-                {
-                    if ((e.Source as IControl).Parent is ListBoxItem target)
+                case ListBox list:
                     {
-                        int sourceIndex = list.ItemContainerGenerator.IndexFromContainer(source);
-                        int targetIndex = list.ItemContainerGenerator.IndexFromContainer(target);
-                        Console.WriteLine($"sourceIndex : {sourceIndex}");
-                        Console.WriteLine($"targetIndex : {targetIndex}");
-
-                        switch (list.Items)
+                        var parent = e.Data.Get(CustomDataFormats.Parent);
+                        if (parent is ListBoxItem source)
                         {
-                            case ImmutableArray<ShapeStyle> styles:
+                            if ((e.Source as IControl).Parent is ListBoxItem target)
+                            {
+                                int sourceIndex = list.ItemContainerGenerator.IndexFromContainer(source);
+                                int targetIndex = list.ItemContainerGenerator.IndexFromContainer(target);
+
+                                Console.WriteLine($"sourceIndex : {sourceIndex}");
+                                Console.WriteLine($"targetIndex : {targetIndex}");
+                                Console.WriteLine($"Items type : {list.Items.GetType()}");
+
+                                switch (list.Items)
                                 {
-                                    if (list.DataContext is Library<ShapeStyle> library)
-                                    {
-                                        switch (ListBoxDropMode)
+                                    case ImmutableArray<ShapeStyle> styles:
                                         {
-                                            case ListBoxDropMode.Move:
+                                            if (list.DataContext is Library<ShapeStyle> library)
+                                            {
+                                                switch (ListBoxDropMode)
                                                 {
-                                                    if (sourceIndex < targetIndex)
-                                                    {
-                                                        var item1 = library.Items[sourceIndex];
-                                                        var builder = library.Items.ToBuilder();
-                                                        builder.Insert(targetIndex + 1, item1);
-                                                        builder.RemoveAt(sourceIndex);
-
-                                                        var previous = library.Items;
-                                                        var next = builder.ToImmutable();
-                                                        Editor?.Project?.History?.Snapshot(previous, next, (p) => library.Items = p);
-                                                        library.Items = next;
-                                                    }
-                                                    else
-                                                    {
-                                                        int removeIndex = sourceIndex + 1;
-                                                        if (styles.Length + 1 > removeIndex)
+                                                    case ListBoxDropMode.Move:
                                                         {
-                                                            var item1 = library.Items[sourceIndex];
-                                                            var builder = library.Items.ToBuilder();
-                                                            builder.Insert(targetIndex, item1);
-                                                            builder.RemoveAt(removeIndex);
+                                                            Move(sourceIndex, targetIndex, library);
 
-                                                            var previous = library.Items;
-                                                            var next = builder.ToImmutable();
-                                                            Editor?.Project?.History?.Snapshot(previous, next, (p) => library.Items = p);
-                                                            library.Items = next;
+                                                            e.DragEffects = DragDropEffects.None;
+                                                            e.Handled = true;
                                                         }
-                                                    }
-                                                }
-                                                break;
-                                            case ListBoxDropMode.Swap:
-                                                {
-                                                    var item1 = library.Items[sourceIndex];
-                                                    var item2 = library.Items[targetIndex];
-                                                    var builder = library.Items.ToBuilder();
-                                                    builder[targetIndex] = item1;
-                                                    builder[sourceIndex] = item2;
+                                                        return;
+                                                    case ListBoxDropMode.Swap:
+                                                        {
+                                                            Swap(sourceIndex, targetIndex, library);
 
-                                                    var previous = library.Items;
-                                                    var next = builder.ToImmutable();
-                                                    Editor?.Project?.History?.Snapshot(previous, next, (p) => library.Items = p);
-                                                    library.Items = next;
+                                                            e.DragEffects = DragDropEffects.None;
+                                                            e.Handled = true;
+                                                        }
+                                                        return;
                                                 }
-                                                break;
+                                            }
                                         }
-
-                                    }
-                                }
-                                break;
+                                        break;
+                                }   
+                            }
                         }
-
-                        Console.WriteLine($"Items type : {list.Items.GetType()}");
-
-                        e.DragEffects = DragDropEffects.None;
-                        e.Handled = true;
-                        return;
                     }
-                    
-                }
+                    break;
             }
 
             foreach (var format in e.Data.GetDataFormats())
