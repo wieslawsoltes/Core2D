@@ -231,6 +231,8 @@ namespace Core2D.Avalonia.Behaviors
                 var text = e.Data.GetText();
                 Console.WriteLine($"[{DataFormats.Text}] : {text}");
                 Console.WriteLine(text);
+
+                Editor?.OnPaste(text);
             }
 
             if (e.Data.Contains(DataFormats.FileNames))
