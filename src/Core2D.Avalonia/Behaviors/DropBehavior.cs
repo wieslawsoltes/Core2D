@@ -12,6 +12,7 @@ using Core2D.Containers;
 using Core2D.Data;
 using Core2D.Editor;
 using Core2D.Shape;
+using Core2D.Shapes;
 using Core2D.Style;
 
 namespace Core2D.Avalonia.Behaviors
@@ -187,7 +188,33 @@ namespace Core2D.Avalonia.Behaviors
                                             }
                                         }
                                         break;
-                                }   
+                                    case ImmutableArray<GroupShape> groups:
+                                        {
+                                            if (list.DataContext is Library<GroupShape> library)
+                                            {
+                                                switch (ListBoxDropMode)
+                                                {
+                                                    case ListBoxDropMode.Move:
+                                                        {
+                                                            Move(sourceIndex, targetIndex, library);
+
+                                                            e.DragEffects = DragDropEffects.None;
+                                                            e.Handled = true;
+                                                        }
+                                                        return;
+                                                    case ListBoxDropMode.Swap:
+                                                        {
+                                                            Swap(sourceIndex, targetIndex, library);
+
+                                                            e.DragEffects = DragDropEffects.None;
+                                                            e.Handled = true;
+                                                        }
+                                                        return;
+                                                }
+                                            }
+                                        }
+                                        break;
+                                }
                             }
                         }
                     }
