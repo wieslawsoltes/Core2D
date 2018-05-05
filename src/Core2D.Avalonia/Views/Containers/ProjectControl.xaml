@@ -24,6 +24,9 @@
             </Menu>
         </Grid>
         <TreeView Name="documents" Items="{Binding Documents}" SelectedItem="{Binding Selected, Mode=TwoWay}" Grid.Row="1" Classes="default">
+            <i:Interaction.Behaviors>
+                <behaviors:DropBehavior Editor="{Binding $parent[Window].DataContext}"/>
+            </i:Interaction.Behaviors>
             <TreeView.KeyBindings>
                 <KeyBinding Command="{Binding $parent[Window].DataContext.OnNew}" CommandParameter="{Binding #documents.SelectedItem}" Gesture="Ctrl+N"/>
                 <KeyBinding Command="{Binding $parent[Window].DataContext.OnCut}" CommandParameter="{Binding #documents.SelectedItem}" Gesture="Ctrl+X"/>
