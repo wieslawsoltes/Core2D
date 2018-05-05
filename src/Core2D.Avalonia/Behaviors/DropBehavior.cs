@@ -123,7 +123,6 @@ namespace Core2D.Avalonia.Behaviors
             }
         }
 
-
         private void Swap<T>(int sourceIndex, int targetIndex, Library<T> library)
         {
             var item1 = library.Items[sourceIndex];
