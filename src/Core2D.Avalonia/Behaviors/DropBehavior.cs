@@ -7,7 +7,9 @@ using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.VisualTree;
 using Avalonia.Xaml.Interactivity;
+using Core2D.Data;
 using Core2D.Editor;
+using Core2D.Shape;
 using Core2D.Style;
 
 namespace Core2D.Avalonia.Behaviors
@@ -86,9 +88,24 @@ namespace Core2D.Avalonia.Behaviors
 
                 switch (data)
                 {
+                    case BaseShape shape:
+                        {
+                            Editor?.OnDropShape(shape, point.X, point.Y);
+                        }
+                        break;
+                    case Record record:
+                        {
+                            Editor?.OnDropRecord(record, point.X, point.Y);
+                        }
+                        break;
                     case ShapeStyle style:
                         {
                             Editor?.OnDropStyle(style, point.X, point.Y);
+                        }
+                        break;
+                    default:
+                        {
+                            Console.WriteLine($"Drop type not handled: {data}");
                         }
                         break;
                 }

@@ -3,6 +3,9 @@
 <UserControl x:Class="Core2D.Avalonia.Views.Data.RecordControl"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+             xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+             xmlns:behaviors="clr-namespace:Core2D.Avalonia.Behaviors;assembly=Core2D.Avalonia"
              xmlns:local="clr-namespace:Core2D.Avalonia;assembly=Core2D.Avalonia"
              xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"
              xmlns:Data="clr-namespace:Core2D.Data;assembly=Core2D"
@@ -16,7 +19,10 @@
         <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding Owner.Columns}">
             <ItemsControl.DataTemplates>
                 <DataTemplate DataType="Data:Column">
-                    <Grid VerticalAlignment="Top">
+                    <Grid VerticalAlignment="Top" Classes="drag">
+                        <i:Interaction.Behaviors>
+                            <behaviors:DragBehavior/>
+                        </i:Interaction.Behaviors>
                         <TextBox VerticalAlignment="Center" Text="{Binding Name, Mode=TwoWay}" Classes="property"/>
                     </Grid>
                 </DataTemplate>
@@ -25,7 +31,10 @@
         <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="1" Items="{Binding Values}">
             <ItemsControl.DataTemplates>
                 <DataTemplate DataType="Data:Value">
-                    <Grid VerticalAlignment="Top">
+                    <Grid VerticalAlignment="Top" Classes="drag">
+                        <i:Interaction.Behaviors>
+                            <behaviors:DragBehavior/>
+                        </i:Interaction.Behaviors>
                         <TextBox VerticalAlignment="Center" Text="{Binding Content, Mode=TwoWay}" Classes="property"/>
                     </Grid>
                 </DataTemplate>

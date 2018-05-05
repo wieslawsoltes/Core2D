@@ -6,6 +6,7 @@
              xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
              xmlns:iac="clr-namespace:Avalonia.Xaml.Interactions.Custom;assembly=Avalonia.Xaml.Interactions.Custom"
+             xmlns:behaviors="clr-namespace:Core2D.Avalonia.Behaviors;assembly=Core2D.Avalonia"
              xmlns:local="clr-namespace:Core2D.Avalonia;assembly=Core2D.Avalonia"
              xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor"
@@ -45,12 +46,11 @@
             </TreeView.Styles>
             <TreeView.DataTemplates>
                 <TreeDataTemplate DataType="Containers:DocumentContainer" ItemsSource="{Binding Pages}">
-                    <Grid>
-                        <!--
+                    <Grid Classes="drag">
                         <i:Interaction.Behaviors>
-                            <iac:ToggleIsExpandedOnDoubleTappedBehavior/>
+                            <!--<iac:ToggleIsExpandedOnDoubleTappedBehavior/>-->
+                            <behaviors:DragBehavior/>
                         </i:Interaction.Behaviors>
-                        -->
                         <TextBlock Text="{Binding Name}" Classes="tree">
                             <TextBlock.ContextMenu>
                                 <ContextMenu Classes="default">
@@ -72,10 +72,11 @@
                     </Grid>
                 </TreeDataTemplate>
                 <TreeDataTemplate DataType="Containers:PageContainer" ItemsSource="{Binding Layers}">
-                    <Grid Name="root">
+                    <Grid Name="root" Classes="drag">
                         <i:Interaction.Behaviors>
                             <iac:BindTagToVisualRootDataContextBehavior/>
                             <!--<iac:ToggleIsExpandedOnDoubleTappedBehavior/>-->
+                            <behaviors:DragBehavior/>
                         </i:Interaction.Behaviors>
                         <TextBlock Text="{Binding Name}" Classes="tree">
                             <TextBlock.ContextMenu>
@@ -121,7 +122,10 @@
                     </Grid>
                 </TreeDataTemplate>
                 <DataTemplate DataType="Containers:LayerContainer">
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch">
+                    <StackPanel Orientation="Horizontal" Classes="drag">
+                        <i:Interaction.Behaviors>
+                            <behaviors:DragBehavior/>
+                        </i:Interaction.Behaviors>
                         <StackPanel.ContextMenu>
                             <ContextMenu Classes="default">
                                 <MenuItem Header="_Add Layer" Command="{Binding $parent[Window].DataContext.OnAddLayer}" CommandParameter="{Binding Owner, Mode=OneWay}"/>
