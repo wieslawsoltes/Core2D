@@ -219,7 +219,16 @@ namespace Core2D.Avalonia.Behaviors
                         }
                     }
                     break;
-            }
+                case TreeView tree:
+                    {
+                        var parent = e.Data.Get(CustomDataFormats.Parent);
+                        if (parent is TreeViewItem source)
+                        {
+                            // TODO:
+                        }
+                    }
+                    break;
+            };
 
             foreach (var format in e.Data.GetDataFormats())
             {
