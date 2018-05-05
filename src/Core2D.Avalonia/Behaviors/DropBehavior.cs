@@ -71,7 +71,7 @@ namespace Core2D.Avalonia.Behaviors
 
         private void DragOver(object sender, DragEventArgs e)
         {
-            e.DragEffects = e.DragEffects & (DragDropEffects.Copy | DragDropEffects.Link);
+            e.DragEffects = e.DragEffects & (DragDropEffects.Copy | DragDropEffects.Move | DragDropEffects.Link);
 
             //if (!e.Data.Contains(DataFormats.Text) && !e.Data.Contains(DataFormats.FileNames))
             //    e.DragEffects = DragDropEffects.None;
@@ -82,7 +82,7 @@ namespace Core2D.Avalonia.Behaviors
 
         private void DragEnter(object sender, DragEventArgs e)
         {
-            e.DragEffects = e.DragEffects & (DragDropEffects.Copy | DragDropEffects.Link);
+            e.DragEffects = e.DragEffects & (DragDropEffects.Copy | DragDropEffects.Move | DragDropEffects.Link);
 
             //if (!e.Data.Contains(DataFormats.Text) && !e.Data.Contains(DataFormats.FileNames))
             //    e.DragEffects = DragDropEffects.None;
