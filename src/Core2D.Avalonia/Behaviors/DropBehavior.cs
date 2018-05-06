@@ -4,6 +4,7 @@ using System;
 using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.PanAndZoom;
 using Avalonia.Input;
 using Avalonia.VisualTree;
 using Avalonia.Xaml.Interactivity;
@@ -60,11 +61,18 @@ namespace Core2D.Avalonia.Behaviors
             AssociatedObject.RemoveHandler(DragDrop.DropEvent, Drop);
         }
 
-        private Point GetPoint(IControl relativeTo)
+        public Point FixInvalidPointPosition(IControl control, Point point)
         {
-            var point = (relativeTo.GetVisualRoot() as IInputRoot)?.MouseDevice?.GetPosition(relativeTo) ?? default(Point);
+            var matrix = control?.RenderTransform?.Value;
+            return matrix != null ? MatrixHelper.TransformPoint(matrix.Value.Invert(), point) : point;
+        }
+
+        private Point GetPoint(object sender, DragEventArgs e)
+        {
+            var relativeTo = e.Source as IControl;
+            var point = e.GetPosition(relativeTo);
             Console.WriteLine($"Point: [{relativeTo}] : {point}");
-            return point;
+            return FixInvalidPointPosition(relativeTo, point);
         }
 
         private void ValidateDrag(object sender, DragEventArgs e)
@@ -74,7 +82,7 @@ namespace Core2D.Avalonia.Behaviors
             //if (!e.Data.Contains(DataFormats.Text) && !e.Data.Contains(DataFormats.FileNames))
             //    e.DragEffects = DragDropEffects.None;
 
-            GetPoint(e.Source as IControl);
+            GetPoint(sender, e);
         }
 
         private void DragOver(object sender, DragEventArgs e)
@@ -99,7 +107,7 @@ namespace Core2D.Avalonia.Behaviors
         {
             Console.WriteLine($"Drop sender: {sender}, source: {e.Source}");
 
-            var point = GetPoint(e.Source as IControl);
+            var point = GetPoint(sender, e);
 
             switch (sender)
             {
