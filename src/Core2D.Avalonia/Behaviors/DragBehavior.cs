@@ -14,8 +14,8 @@ namespace Core2D.Avalonia.Behaviors
         private bool _pointerPressed;
         private bool _doDragDrop;
 
-        public static double MinimumHorizontalDragDistance = 5;
-        public static double MinimumVerticalDragDistance = 5;
+        public static double MinimumHorizontalDragDistance = 4;
+        public static double MinimumVerticalDragDistance = 4;
 
         protected override void OnAttached()
         {
