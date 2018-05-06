@@ -3625,5 +3625,65 @@ namespace Core2D.Editor
                 CurrentView = view;
             }
         }
+
+        /// <summary>
+        /// Move items in the library.
+        /// </summary>
+        /// <typeparam name="T">The type of the library.</typeparam>
+        /// <param name="library">The items library.</param>
+        /// <param name="sourceIndex">The source item index.</param>
+        /// <param name="targetIndex">The target item index.</param>
+        public void MoveItem<T>(Library<T> library, int sourceIndex, int targetIndex)
+        {
+            if (sourceIndex < targetIndex)
+            {
+                var item = library.Items[sourceIndex];
+                var builder = library.Items.ToBuilder();
+                builder.Insert(targetIndex + 1, item);
+                builder.RemoveAt(sourceIndex);
+
+                var previous = library.Items;
+                var next = builder.ToImmutable();
+                Project?.History?.Snapshot(previous, next, (p) => library.Items = p);
+                library.Items = next;
+            }
+            else
+            {
+                int removeIndex = sourceIndex + 1;
+                if (library.Items.Length + 1 > removeIndex)
+                {
+                    var item1 = library.Items[sourceIndex];
+                    var builder = library.Items.ToBuilder();
+                    builder.Insert(targetIndex, item1);
+                    builder.RemoveAt(removeIndex);
+
+                    var previous = library.Items;
+                    var next = builder.ToImmutable();
+                    Project?.History?.Snapshot(previous, next, (p) => library.Items = p);
+                    library.Items = next;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Swap items in the library.
+        /// </summary>
+        /// <typeparam name="T">The type of the library.</typeparam>
+        /// <param name="library">The items library.</param>
+        /// <param name="sourceIndex">The source item index.</param>
+        /// <param name="targetIndex">The target item index.</param>
+        public void SwapItem<T>(Library<T> library, int sourceIndex, int targetIndex)
+        {
+            var item1 = library.Items[sourceIndex];
+            var item2 = library.Items[targetIndex];
+            var builder = library.Items.ToBuilder();
+            builder[targetIndex] = item1;
+            builder[sourceIndex] = item2;
+
+            var previous = library.Items;
+            var next = builder.ToImmutable();
+            Project?.History?.Snapshot(previous, next, (p) => library.Items = p);
+            library.Items = next;
+        }
     }
 }

@@ -66,76 +66,36 @@ namespace Core2D.Avalonia.Behaviors
             var root = sender as IControl;
             var point = (root.VisualRoot as IInputRoot)?.MouseDevice?.GetPosition(root) ?? default(Point);
             var control = root.GetVisualsAt(point, x => x.IsVisible).FirstOrDefault();
-            Console.WriteLine($"[{control}] : {point}");
+            Console.WriteLine($"Point: [{control}] : {point}");
             return point;
+        }
+
+        private void ValidateDrag(object sender, DragEventArgs e)
+        {
+            // TODO: Validate drop source and target.
+
+            //if (!e.Data.Contains(DataFormats.Text) && !e.Data.Contains(DataFormats.FileNames))
+            //    e.DragEffects = DragDropEffects.None;
+
+            GetPoint(sender);
         }
 
         private void DragOver(object sender, DragEventArgs e)
         {
             e.DragEffects = e.DragEffects & (DragDropEffects.Copy | DragDropEffects.Move | DragDropEffects.Link);
 
-            //if (!e.Data.Contains(DataFormats.Text) && !e.Data.Contains(DataFormats.FileNames))
-            //    e.DragEffects = DragDropEffects.None;
-
             Console.WriteLine($"DragOver sender: {sender}, source: {e.Source}");
-            GetPoint(sender);
+
+            ValidateDrag(sender, e); 
         }
 
         private void DragEnter(object sender, DragEventArgs e)
         {
             e.DragEffects = e.DragEffects & (DragDropEffects.Copy | DragDropEffects.Move | DragDropEffects.Link);
 
-            //if (!e.Data.Contains(DataFormats.Text) && !e.Data.Contains(DataFormats.FileNames))
-            //    e.DragEffects = DragDropEffects.None;
-
             Console.WriteLine($"DragEnter sender: {sender}, source: {e.Source}");
-            GetPoint(sender);
-        }
 
-        private void Move<T>(int sourceIndex, int targetIndex, Library<T> library)
-        {
-            if (sourceIndex < targetIndex)
-            {
-                var item1 = library.Items[sourceIndex];
-                var builder = library.Items.ToBuilder();
-                builder.Insert(targetIndex + 1, item1);
-                builder.RemoveAt(sourceIndex);
-
-                var previous = library.Items;
-                var next = builder.ToImmutable();
-                Editor?.Project?.History?.Snapshot(previous, next, (p) => library.Items = p);
-                library.Items = next;
-            }
-            else
-            {
-                int removeIndex = sourceIndex + 1;
-                if (library.Items.Length + 1 > removeIndex)
-                {
-                    var item1 = library.Items[sourceIndex];
-                    var builder = library.Items.ToBuilder();
-                    builder.Insert(targetIndex, item1);
-                    builder.RemoveAt(removeIndex);
-
-                    var previous = library.Items;
-                    var next = builder.ToImmutable();
-                    Editor?.Project?.History?.Snapshot(previous, next, (p) => library.Items = p);
-                    library.Items = next;
-                }
-            }
-        }
-
-        private void Swap<T>(int sourceIndex, int targetIndex, Library<T> library)
-        {
-            var item1 = library.Items[sourceIndex];
-            var item2 = library.Items[targetIndex];
-            var builder = library.Items.ToBuilder();
-            builder[targetIndex] = item1;
-            builder[sourceIndex] = item2;
-
-            var previous = library.Items;
-            var next = builder.ToImmutable();
-            Editor?.Project?.History?.Snapshot(previous, next, (p) => library.Items = p);
-            library.Items = next;
+            ValidateDrag(sender, e);
         }
 
         private void Drop(object sender, DragEventArgs e)
@@ -148,73 +108,56 @@ namespace Core2D.Avalonia.Behaviors
             {
                 case ListBox list:
                     {
-                        var parent = e.Data.Get(CustomDataFormats.Parent);
-                        if (parent is ListBoxItem source)
+                        if (e.Data.Get(CustomDataFormats.Parent) is ListBoxItem source &&
+                            (e.Source as IControl).Parent is ListBoxItem target &&
+                            source.Parent == target.Parent)
                         {
-                            if ((e.Source as IControl).Parent is ListBoxItem target)
+                            int sourceIndex = list.ItemContainerGenerator.IndexFromContainer(source);
+                            int targetIndex = list.ItemContainerGenerator.IndexFromContainer(target);
+
+                            Console.WriteLine($"sourceIndex : {sourceIndex}");
+                            Console.WriteLine($"targetIndex : {targetIndex}");
+                            Console.WriteLine($"DataContext type : {list.DataContext.GetType()}");
+
+                            switch (list.DataContext)
                             {
-                                int sourceIndex = list.ItemContainerGenerator.IndexFromContainer(source);
-                                int targetIndex = list.ItemContainerGenerator.IndexFromContainer(target);
-
-                                Console.WriteLine($"sourceIndex : {sourceIndex}");
-                                Console.WriteLine($"targetIndex : {targetIndex}");
-                                Console.WriteLine($"Items type : {list.Items.GetType()}");
-
-                                switch (list.Items)
-                                {
-                                    case ImmutableArray<ShapeStyle> styles:
+                                case Library<ShapeStyle> library:
+                                    {
+                                        switch (ListBoxDropMode)
                                         {
-                                            if (list.DataContext is Library<ShapeStyle> library)
-                                            {
-                                                switch (ListBoxDropMode)
-                                                {
-                                                    case ListBoxDropMode.Move:
-                                                        {
-                                                            Move(sourceIndex, targetIndex, library);
-
-                                                            e.DragEffects = DragDropEffects.None;
-                                                            e.Handled = true;
-                                                        }
-                                                        return;
-                                                    case ListBoxDropMode.Swap:
-                                                        {
-                                                            Swap(sourceIndex, targetIndex, library);
-
-                                                            e.DragEffects = DragDropEffects.None;
-                                                            e.Handled = true;
-                                                        }
-                                                        return;
-                                                }
-                                            }
+                                            case ListBoxDropMode.Move:
+                                                Editor?.MoveItem(library, sourceIndex, targetIndex);
+                                                e.DragEffects = DragDropEffects.None;
+                                                e.Handled = true;
+                                                return;
+                                            case ListBoxDropMode.Swap:
+                                                Editor?.SwapItem(library, sourceIndex, targetIndex);
+                                                e.DragEffects = DragDropEffects.None;
+                                                e.Handled = true;
+                                                return;
                                         }
-                                        break;
-                                    case ImmutableArray<GroupShape> groups:
+                                    }
+                                    break;
+                                case Library<GroupShape> library:
+                                    {
+                                        switch (ListBoxDropMode)
                                         {
-                                            if (list.DataContext is Library<GroupShape> library)
-                                            {
-                                                switch (ListBoxDropMode)
-                                                {
-                                                    case ListBoxDropMode.Move:
-                                                        {
-                                                            Move(sourceIndex, targetIndex, library);
-
-                                                            e.DragEffects = DragDropEffects.None;
-                                                            e.Handled = true;
-                                                        }
-                                                        return;
-                                                    case ListBoxDropMode.Swap:
-                                                        {
-                                                            Swap(sourceIndex, targetIndex, library);
-
-                                                            e.DragEffects = DragDropEffects.None;
-                                                            e.Handled = true;
-                                                        }
-                                                        return;
-                                                }
-                                            }
+                                            case ListBoxDropMode.Move:
+                                                Editor?.MoveItem(library, sourceIndex, targetIndex);
+                                                e.DragEffects = DragDropEffects.None;
+                                                e.Handled = true;
+                                                return;
+                                            case ListBoxDropMode.Swap:
+                                                Editor?.SwapItem(library, sourceIndex, targetIndex);
+                                                e.DragEffects = DragDropEffects.None;
+                                                e.Handled = true;
+                                                return;
                                         }
-                                        break;
-                                }
+                                    }
+                                    break;
+                                default:
+                                    Console.WriteLine($"List DataContext drop type was not handled: {list.DataContext}");
+                                    break;
                             }
                         }
                     }
@@ -239,24 +182,16 @@ namespace Core2D.Avalonia.Behaviors
                 switch (data)
                 {
                     case BaseShape shape:
-                        {
-                            Editor?.OnDropShape(shape, point.X, point.Y);
-                        }
+                        Editor?.OnDropShape(shape, point.X, point.Y);
                         break;
                     case Record record:
-                        {
-                            Editor?.OnDropRecord(record, point.X, point.Y);
-                        }
+                        Editor?.OnDropRecord(record, point.X, point.Y);
                         break;
                     case ShapeStyle style:
-                        {
-                            Editor?.OnDropStyle(style, point.X, point.Y);
-                        }
+                        Editor?.OnDropStyle(style, point.X, point.Y);
                         break;
                     default:
-                        {
-                            Console.WriteLine($"Drop type not handled: {data}");
-                        }
+                        Console.WriteLine($"Drop type was not handled: {data}");
                         break;
                 }
             }
@@ -264,6 +199,7 @@ namespace Core2D.Avalonia.Behaviors
             if (e.Data.Contains(DataFormats.Text))
             {
                 var text = e.Data.GetText();
+
                 Console.WriteLine($"[{DataFormats.Text}] : {text}");
                 Console.WriteLine(text);
 
