@@ -2456,6 +2456,36 @@ namespace Core2D.Editor
         }
 
         /// <summary>
+        /// Clone the <see cref="LayerContainer"/> object.
+        /// </summary>
+        /// <param name="container">The <see cref="LayerContainer"/> object.</param>
+        /// <returns>The cloned <see cref="LayerContainer"/> object.</returns>
+        public LayerContainer Clone(LayerContainer container)
+        {
+            try
+            {
+                var json = JsonSerializer?.Serialize(container);
+                if (!string.IsNullOrEmpty(json))
+                {
+                    var clone = JsonSerializer?.Deserialize<LayerContainer>(json);
+                    if (clone != null)
+                    {
+                        var shapes = clone.Shapes;
+                        TryToRestoreStyles(shapes);
+                        TryToRestoreRecords(shapes);
+                        return clone;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogError(ex);
+            }
+
+            return default(LayerContainer);
+        }
+
+        /// <summary>
         /// Clone the <see cref="PageContainer"/> object.
         /// </summary>
         /// <param name="container">The <see cref="PageContainer"/> object.</param>
