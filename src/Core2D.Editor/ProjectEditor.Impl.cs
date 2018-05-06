@@ -880,11 +880,18 @@ namespace Core2D.Editor
             {
                 if (await CanPaste())
                 {
-                    var text = await(TextClipboard?.GetText() ?? Task.FromResult(string.Empty));
+                    var text = await (TextClipboard?.GetText() ?? Task.FromResult(string.Empty));
                     if (!string.IsNullOrEmpty(text))
                     {
                         OnTryPaste(text);
                     }
+                }
+            }
+            else if (item is string text)
+            {
+                if (!string.IsNullOrEmpty(text))
+                {
+                    OnTryPaste(text);
                 }
             }
         }
