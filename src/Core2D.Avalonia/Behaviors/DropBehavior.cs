@@ -6,7 +6,6 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.PanAndZoom;
 using Avalonia.Input;
-using Avalonia.VisualTree;
 using Avalonia.Xaml.Interactivity;
 using Core2D.Containers;
 using Core2D.Data;
