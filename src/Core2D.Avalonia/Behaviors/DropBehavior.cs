@@ -60,12 +60,10 @@ namespace Core2D.Avalonia.Behaviors
             AssociatedObject.RemoveHandler(DragDrop.DropEvent, Drop);
         }
 
-        private Point GetPoint(object sender)
+        private Point GetPoint(IControl relativeTo)
         {
-            var root = sender as IControl;
-            var point = (root.VisualRoot as IInputRoot)?.MouseDevice?.GetPosition(root) ?? default(Point);
-            var control = root.GetVisualsAt(point, x => x.IsVisible).FirstOrDefault();
-            Console.WriteLine($"Point: [{control}] : {point}");
+            var point = (relativeTo.GetVisualRoot() as IInputRoot)?.MouseDevice?.GetPosition(relativeTo) ?? default(Point);
+            Console.WriteLine($"Point: [{relativeTo}] : {point}");
             return point;
         }
 
@@ -76,7 +74,7 @@ namespace Core2D.Avalonia.Behaviors
             //if (!e.Data.Contains(DataFormats.Text) && !e.Data.Contains(DataFormats.FileNames))
             //    e.DragEffects = DragDropEffects.None;
 
-            GetPoint(sender);
+            GetPoint(e.Source as IControl);
         }
 
         private void DragOver(object sender, DragEventArgs e)
@@ -101,7 +99,7 @@ namespace Core2D.Avalonia.Behaviors
         {
             Console.WriteLine($"Drop sender: {sender}, source: {e.Source}");
 
-            var point = GetPoint(sender);
+            var point = GetPoint(e.Source as IControl);
 
             switch (sender)
             {
