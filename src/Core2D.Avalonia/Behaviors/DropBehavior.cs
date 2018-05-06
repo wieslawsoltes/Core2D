@@ -187,6 +187,9 @@ namespace Core2D.Avalonia.Behaviors
                     case ShapeStyle style:
                         Editor?.OnDropStyle(style, point.X, point.Y);
                         break;
+                    case PageContainer page:
+                        Editor?.OnApplyTemplate(page);
+                        break;
                     default:
                         Console.WriteLine($"Drop type was not handled: {data}");
                         break;
