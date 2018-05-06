@@ -54,7 +54,7 @@ namespace Core2D.Avalonia.Behaviors
             }
         }
 
-        private void AssociatedObject_PointerMoved(object sender, PointerEventArgs e)
+        private async void AssociatedObject_PointerMoved(object sender, PointerEventArgs e)
         {
             Point point = e.GetPosition(AssociatedObject);
             Vector diff = _dragStartPoint - point;
@@ -72,9 +72,11 @@ namespace Core2D.Avalonia.Behaviors
                 data.Set(CustomDataFormats.Parent, AssociatedObject.Parent);
                 data.Set(CustomDataFormats.ParentData, AssociatedObject.Parent.DataContext);
 
-                DragDrop.DoDragDrop(data, DragDropEffects.Link);
-
                 Console.WriteLine($"PointerMoved sender: {sender}, source: {e.Source}, point: {point}, diff: {diff}");
+
+                var result = await DragDrop.DoDragDrop(data, DragDropEffects.Link);
+
+                Console.WriteLine($"DoDragDrop result: {result}");
             }
         }
     }
