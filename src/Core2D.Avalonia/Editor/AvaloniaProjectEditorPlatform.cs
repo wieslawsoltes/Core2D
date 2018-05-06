@@ -2,15 +2,16 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Linq;
-using System.Threading.Tasks;
 using Avalonia.Controls;
 using Core2D.Avalonia.Windows;
 using Core2D.Containers;
 using Core2D.Data;
 using Core2D.Editor;
-using Core2D.Editor.Input;
-using Core2D.Editor.Views.Interfaces;
 using Core2D.Interfaces;
+
+#if NET461
+using Core2D.FileWriter.Emf;
+#endif
 
 namespace Core2D.Avalonia.Editor
 {
@@ -320,6 +321,41 @@ namespace Core2D.Avalonia.Editor
         /// <inheritdoc/>
         public void OnCopyAsEmf(object item)
         {
+#if NET461
+            var editor = _serviceProvider.GetService<ProjectEditor>();
+            var page = editor.Project?.CurrentContainer;
+            if (page != null)
+            {
+                if (editor.Renderers[0]?.State?.SelectedShape != null)
+                {
+                    var shapes = Enumerable.Repeat(editor.Renderers[0].State.SelectedShape, 1).ToList();
+                    EmfWriter.SetClipboard(
+                        shapes,
+                        page.Template.Width,
+                        page.Template.Height,
+                        page.Data.Properties,
+                        page.Data.Record,
+                        editor.Project);
+                }
+                else if (editor.Renderers?[0]?.State?.SelectedShapes != null)
+                {
+                    var shapes = editor.Renderers[0].State.SelectedShapes.ToList();
+                    EmfWriter.SetClipboard(
+                        shapes,
+                        page.Template.Width,
+                        page.Template.Height,
+                        page.Data.Properties,
+                        page.Data.Record,
+                        editor.Project);
+                }
+                else
+                {
+                    EmfWriter.SetClipboard(page, editor.Project);
+                }
+            }
+#else
+            Console.WriteLine("Not implemented for netcoreapp2.0 framework.");
+#endif
         }
 
         /// <inheritdoc/>

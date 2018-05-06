@@ -65,7 +65,7 @@ var netCoreProjects = netCoreApps.Select(name =>
     new {
         Path = string.Format("{0}/{1}", netCoreAppsRoot, name),
         Name = name,
-        Framework = XmlPeek(string.Format("{0}/{1}/{1}.csproj", netCoreAppsRoot, name), "//*[local-name()='TargetFramework']/text()"),
+        Framework = XmlPeek(string.Format("{0}/{1}/{1}.csproj", netCoreAppsRoot, name), "//*[local-name()='TargetFrameworks']/text()").Split(';').FirstOrDefault(),
         Runtimes = XmlPeek(string.Format("{0}/{1}/{1}.csproj", netCoreAppsRoot, name), "//*[local-name()='RuntimeIdentifiers']/text()").Split(';')
     }).ToList();
 
@@ -73,7 +73,7 @@ var netCoreRTProjects = netCoreApps.Select(name =>
     new {
         Path = string.Format("{0}/{1}", netCoreAppsRoot, name),
         Name = name,
-        Framework = XmlPeek(string.Format("{0}/{1}/{1}.csproj", netCoreAppsRoot, name), "//*[local-name()='TargetFramework']/text()"),
+        Framework = XmlPeek(string.Format("{0}/{1}/{1}.csproj", netCoreAppsRoot, name), "//*[local-name()='TargetFrameworks']/text()").Split(';').FirstOrDefault(),
         Runtimes = new string[] { "win-x64" }
     }).ToList();
 

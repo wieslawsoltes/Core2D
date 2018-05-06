@@ -24,6 +24,12 @@ using Core2D.TextFieldReader.CsvHelper;
 using Core2D.TextFieldWriter.CsvHelper;
 using Core2D.Utilities.Avalonia;
 
+#if NET461
+using Core2D.FileWriter.Dxf;
+using Core2D.FileWriter.Emf;
+using Core2D.FileWriter.PdfSharp;
+#endif
+
 namespace Core2D.Avalonia.Modules
 {
     /// <summary>
@@ -51,6 +57,11 @@ namespace Core2D.Avalonia.Modules
             builder.RegisterType<SvgSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
             builder.RegisterType<WbmpSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
             builder.RegisterType<WebpSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
+#if NET461
+            builder.RegisterType<DxfWriter>().As<IFileWriter>().InstancePerLifetimeScope();
+            builder.RegisterType<EmfWriter>().As<IFileWriter>().InstancePerLifetimeScope();
+            builder.RegisterType<PdfSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
+#endif 
             builder.RegisterType<CsvHelperReader>().As<ITextFieldReader<Database>>().InstancePerLifetimeScope();
             builder.RegisterType<CsvHelperWriter>().As<ITextFieldWriter<Database>>().InstancePerLifetimeScope();
         }
