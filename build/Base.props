@@ -1,4 +1,10 @@
 ﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition="'$(OS)' == 'Windows_NT'">
+    <DefineConstants>_WINDOWS</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(CoreRT)' == 'True'">
+    <DefineConstants>_CORERT</DefineConstants>
+  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="System.Collections.Immutable" Version="1.4.0" />
     <PackageReference Include="System.IO.Compression" Version="4.3.0" />
