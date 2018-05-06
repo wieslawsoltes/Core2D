@@ -86,7 +86,7 @@ namespace Core2D.Avalonia.Behaviors
 
             Console.WriteLine($"DragOver sender: {sender}, source: {e.Source}");
 
-            ValidateDrag(sender, e); 
+            ValidateDrag(sender, e);
         }
 
         private void DragEnter(object sender, DragEventArgs e)
