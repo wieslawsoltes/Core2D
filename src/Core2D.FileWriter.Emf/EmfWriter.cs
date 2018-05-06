@@ -252,7 +252,7 @@ namespace Core2D.FileWriter.Emf
 #if _WINDOWS
                 Save(path, item as PageContainer, ic);
 #else
-                throw new NotImplementedException("Save method is not implemented for this platform.");
+                throw new NotImplementedException("Not implemented for this platform.");
 #endif
             }
             else if (item is DocumentContainer)

@@ -321,7 +321,7 @@ namespace Core2D.Avalonia.Editor
         /// <inheritdoc/>
         public void OnCopyAsEmf(object item)
         {
-#if NET461
+#if NET461 && _WINDOWS
             var editor = _serviceProvider.GetService<ProjectEditor>();
             var page = editor.Project?.CurrentContainer;
             if (page != null)
@@ -354,7 +354,7 @@ namespace Core2D.Avalonia.Editor
                 }
             }
 #else
-            Console.WriteLine("Not implemented for netcoreapp2.0 framework.");
+            throw new NotImplementedException("Not implemented for this platform.");
 #endif
         }
 
