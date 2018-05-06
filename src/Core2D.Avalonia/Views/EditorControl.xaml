@@ -54,16 +54,24 @@
                         </TabItem.Header>
                         <containers:ProjectControl DataContext="{Binding Project}"/>
                     </TabItem>
-                    <TabItem Header="Options" Classes="property">
-                        <i:Interaction.Behaviors>
-                            <behaviors:DragBehavior/>
-                        </i:Interaction.Behaviors>
+                    <TabItem Classes="property">
+                        <TabItem.Header>
+                            <TextBlock Text="Options" Classes="drag">
+                                <i:Interaction.Behaviors>
+                                    <behaviors:DragBehavior/>
+                                </i:Interaction.Behaviors>
+                            </TextBlock>
+                        </TabItem.Header>
                         <ContentControl Content="{Binding Project.Options}"/>
                     </TabItem>
-                    <TabItem Header="Images" Classes="property">
-                        <i:Interaction.Behaviors>
-                            <behaviors:DragBehavior/>
-                        </i:Interaction.Behaviors>
+                    <TabItem Classes="property">
+                        <TabItem.Header>
+                            <TextBlock Text="Images" Classes="drag">
+                                <i:Interaction.Behaviors>
+                                    <behaviors:DragBehavior/>
+                                </i:Interaction.Behaviors>
+                            </TextBlock>
+                        </TabItem.Header>
                         <containers:ImagesControl DataContext="{Binding Project}"/>
                     </TabItem>
                 </TabControl>
