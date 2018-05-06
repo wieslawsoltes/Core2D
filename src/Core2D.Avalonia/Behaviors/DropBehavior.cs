@@ -129,12 +129,10 @@ namespace Core2D.Avalonia.Behaviors
                                         {
                                             case ListBoxDropMode.Move:
                                                 Editor?.MoveItem(library, sourceIndex, targetIndex);
-
                                                 e.Handled = true;
                                                 return;
                                             case ListBoxDropMode.Swap:
                                                 Editor?.SwapItem(library, sourceIndex, targetIndex);
-
                                                 e.Handled = true;
                                                 return;
                                         }
@@ -146,12 +144,10 @@ namespace Core2D.Avalonia.Behaviors
                                         {
                                             case ListBoxDropMode.Move:
                                                 Editor?.MoveItem(library, sourceIndex, targetIndex);
-
                                                 e.Handled = true;
                                                 return;
                                             case ListBoxDropMode.Swap:
                                                 Editor?.SwapItem(library, sourceIndex, targetIndex);
-
                                                 e.Handled = true;
                                                 return;
                                         }
@@ -221,7 +217,6 @@ namespace Core2D.Avalonia.Behaviors
                                                         var page = Editor?.Clone(sourcePage);
                                                         Editor?.Project.AddPage(targetDocument, page);
                                                         Editor?.Project?.SetCurrentContainer(page);
-
                                                         e.Handled = true;
                                                         return;
                                                     }
@@ -230,7 +225,6 @@ namespace Core2D.Avalonia.Behaviors
                                                         Editor?.Project?.RemovePage(sourcePage);
                                                         Editor?.Project.AddPage(targetDocument, sourcePage);
                                                         Editor?.Project?.SetCurrentContainer(sourcePage);
-
                                                         e.Handled = true;
                                                         return;
                                                     }
@@ -238,7 +232,6 @@ namespace Core2D.Avalonia.Behaviors
                                                     {
                                                         Editor?.Project.AddPage(targetDocument, sourcePage);
                                                         Editor?.Project?.SetCurrentContainer(sourcePage);
-
                                                         e.DragEffects = DragDropEffects.None;
                                                         e.Handled = true;
                                                         return;
@@ -301,16 +294,20 @@ namespace Core2D.Avalonia.Behaviors
                 {
                     case BaseShape shape:
                         Editor?.OnDropShape(shape, point.X, point.Y);
-                        break;
+                        e.Handled = true;
+                        return;
                     case Record record:
                         Editor?.OnDropRecord(record, point.X, point.Y);
-                        break;
+                        e.Handled = true;
+                        return;
                     case ShapeStyle style:
                         Editor?.OnDropStyle(style, point.X, point.Y);
-                        break;
+                        e.Handled = true;
+                        return;
                     case PageContainer page:
                         Editor?.OnApplyTemplate(page);
-                        break;
+                        e.Handled = true;
+                        return;
                     default:
                         Console.WriteLine($"Drop type was not handled: {data}");
                         break;
