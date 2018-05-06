@@ -72,9 +72,20 @@ namespace Core2D.Avalonia.Behaviors
                 data.Set(CustomDataFormats.Parent, AssociatedObject.Parent);
                 data.Set(CustomDataFormats.ParentData, AssociatedObject.Parent.DataContext);
 
-                Console.WriteLine($"PointerMoved sender: {sender}, source: {e.Source}, point: {point}, diff: {diff}");
+                var effect = DragDropEffects.None;
 
-                var result = await DragDrop.DoDragDrop(data, DragDropEffects.Link);
+                if (e.InputModifiers.HasFlag(InputModifiers.Alt))
+                    effect |= DragDropEffects.Link;
+                else if (e.InputModifiers.HasFlag(InputModifiers.Shift))
+                    effect |= DragDropEffects.Move;
+                else if (e.InputModifiers.HasFlag(InputModifiers.Control))
+                    effect |= DragDropEffects.Copy;
+                else
+                    effect |= DragDropEffects.Move;
+
+                Console.WriteLine($"PointerMoved effect: {effect}, sender: {sender}, source: {e.Source}, point: {point}, diff: {diff}");
+
+                var result = await DragDrop.DoDragDrop(data, effect);
 
                 Console.WriteLine($"DoDragDrop result: {result}");
             }
