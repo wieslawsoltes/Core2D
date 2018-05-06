@@ -185,7 +185,27 @@ namespace Core2D.Avalonia.Behaviors
                                                 break;
                                             case PageContainer targetPage:
                                                 {
-
+                                                    if (e.DragEffects == DragDropEffects.Copy)
+                                                    {
+                                                        var layer = Editor?.Clone(sourceLayer);
+                                                        Editor?.Project.AddLayer(targetPage, layer);
+                                                        e.Handled = true;
+                                                        return;
+                                                    }
+                                                    else if (e.DragEffects == DragDropEffects.Move)
+                                                    {
+                                                        Editor?.Project?.RemoveLayer(sourceLayer);
+                                                        Editor?.Project.AddLayer(targetPage, sourceLayer);
+                                                        e.Handled = true;
+                                                        return;
+                                                    }
+                                                    else if (e.DragEffects == DragDropEffects.Link)
+                                                    {
+                                                        Editor?.Project.AddLayer(targetPage, sourceLayer);
+                                                        e.DragEffects = DragDropEffects.None;
+                                                        e.Handled = true;
+                                                        return;
+                                                    }
                                                 }
                                                 break;
                                             case DocumentContainer targetDocument:
