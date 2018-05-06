@@ -82,12 +82,12 @@ namespace Core2D.Avalonia.Behaviors
             //    e.DragEffects = DragDropEffects.None;
 
             GetPoint(sender, e);
+
+            Console.WriteLine($"DragEffects: {e.DragEffects}");
         }
 
         private void DragOver(object sender, DragEventArgs e)
         {
-            e.DragEffects = e.DragEffects & (DragDropEffects.Copy | DragDropEffects.Move | DragDropEffects.Link);
-
             Console.WriteLine($"DragOver sender: {sender}, source: {e.Source}");
 
             ValidateDrag(sender, e);
@@ -95,8 +95,6 @@ namespace Core2D.Avalonia.Behaviors
 
         private void DragEnter(object sender, DragEventArgs e)
         {
-            e.DragEffects = e.DragEffects & (DragDropEffects.Copy | DragDropEffects.Move | DragDropEffects.Link);
-
             Console.WriteLine($"DragEnter sender: {sender}, source: {e.Source}");
 
             ValidateDrag(sender, e);
@@ -131,12 +129,12 @@ namespace Core2D.Avalonia.Behaviors
                                         {
                                             case ListBoxDropMode.Move:
                                                 Editor?.MoveItem(library, sourceIndex, targetIndex);
-                                                e.DragEffects = DragDropEffects.None;
+
                                                 e.Handled = true;
                                                 return;
                                             case ListBoxDropMode.Swap:
                                                 Editor?.SwapItem(library, sourceIndex, targetIndex);
-                                                e.DragEffects = DragDropEffects.None;
+
                                                 e.Handled = true;
                                                 return;
                                         }
@@ -148,12 +146,12 @@ namespace Core2D.Avalonia.Behaviors
                                         {
                                             case ListBoxDropMode.Move:
                                                 Editor?.MoveItem(library, sourceIndex, targetIndex);
-                                                e.DragEffects = DragDropEffects.None;
+
                                                 e.Handled = true;
                                                 return;
                                             case ListBoxDropMode.Swap:
                                                 Editor?.SwapItem(library, sourceIndex, targetIndex);
-                                                e.DragEffects = DragDropEffects.None;
+
                                                 e.Handled = true;
                                                 return;
                                         }
@@ -168,14 +166,130 @@ namespace Core2D.Avalonia.Behaviors
                     break;
                 case TreeView tree:
                     {
-                        var parent = e.Data.Get(CustomDataFormats.Parent);
-                        if (parent is TreeViewItem source)
+                        if (e.Data.Get(CustomDataFormats.Parent) is TreeViewItem source &&
+                            (e.Source as IControl).Parent.Parent is TreeViewItem target)
                         {
+                            var sourceData = source.DataContext;
+                            var targetData = target.DataContext;
+
+                            Console.WriteLine($"sourceData : {sourceData}");
+                            Console.WriteLine($"targetData : {targetData}");
+                            Console.WriteLine($"DataContext type : {tree.DataContext.GetType()}");
+
+                            switch (sourceData)
+                            {
+                                case LayerContainer sourceLayer:
+                                    {
+                                        switch (targetData)
+                                        {
+                                            case LayerContainer targetLayer:
+                                                {
+
+                                                }
+                                                break;
+                                            case PageContainer targetPage:
+                                                {
+
+                                                }
+                                                break;
+                                            case DocumentContainer targetDocument:
+                                                {
+
+                                                }
+                                                break;
+                                        }
+                                    }
+                                    break;
+                                case PageContainer sourcePage:
+                                    {
+                                        switch (targetData)
+                                        {
+                                            case LayerContainer targetLayer:
+                                                {
+
+                                                }
+                                                break;
+                                            case PageContainer targetPage:
+                                                {
+
+                                                }
+                                                break;
+                                            case DocumentContainer targetDocument:
+                                                {
+                                                    if (e.DragEffects == DragDropEffects.Copy)
+                                                    {
+                                                        var page = Editor?.Clone(sourcePage);
+                                                        Editor?.Project.AddPage(targetDocument, page);
+                                                        Editor?.Project?.SetCurrentContainer(page);
+
+                                                        e.Handled = true;
+                                                        return;
+                                                    }
+                                                    else if (e.DragEffects == DragDropEffects.Move)
+                                                    {
+                                                        Editor?.Project?.RemovePage(sourcePage);
+                                                        Editor?.Project.AddPage(targetDocument, sourcePage);
+                                                        Editor?.Project?.SetCurrentContainer(sourcePage);
+
+                                                        e.Handled = true;
+                                                        return;
+                                                    }
+                                                    else if (e.DragEffects == DragDropEffects.Link)
+                                                    {
+                                                        Editor?.Project.AddPage(targetDocument, sourcePage);
+                                                        Editor?.Project?.SetCurrentContainer(sourcePage);
+
+                                                        e.DragEffects = DragDropEffects.None;
+                                                        e.Handled = true;
+                                                        return;
+                                                    }
+                                                }
+                                                break;
+                                        }
+                                    }
+                                    break;
+                                case DocumentContainer sourceDocument:
+                                    {
+                                        switch (targetData)
+                                        {
+                                            case LayerContainer targetLayer:
+                                                {
+
+                                                }
+                                                break;
+                                            case PageContainer targetPage:
+                                                {
+
+                                                }
+                                                break;
+                                            case DocumentContainer targetDocument:
+                                                {
+
+                                                }
+                                                break;
+                                        }
+                                    }
+                                    break;
+                            }
+
                             // TODO:
                         }
                     }
                     break;
             };
+
+            if (e.Data.Contains(DataFormats.Text))
+            {
+                var text = e.Data.GetText();
+
+                Console.WriteLine($"[{DataFormats.Text}] : {text}");
+                Console.WriteLine(text);
+
+                Editor?.OnTryPaste(text);
+
+                e.Handled = true;
+                return;
+            }
 
             foreach (var format in e.Data.GetDataFormats())
             {
@@ -203,16 +317,6 @@ namespace Core2D.Avalonia.Behaviors
                 }
             }
 
-            if (e.Data.Contains(DataFormats.Text))
-            {
-                var text = e.Data.GetText();
-
-                Console.WriteLine($"[{DataFormats.Text}] : {text}");
-                Console.WriteLine(text);
-
-                Editor?.OnPaste(text);
-            }
-
             if (e.Data.Contains(DataFormats.FileNames))
             {
                 var files = e.Data.GetFileNames().ToArray();
@@ -223,10 +327,10 @@ namespace Core2D.Avalonia.Behaviors
                 }
 
                 Editor?.OnDropFiles(files);
-            }
 
-            e.DragEffects = DragDropEffects.None;
-            e.Handled = true;
+                e.Handled = true;
+                return;
+            }
         }
     }
 }
