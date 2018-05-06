@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <Import Project="..\..\build\Default.targets" />
+  <Import Project="..\..\build\NetFX.props" />
   <Import Project="..\..\build\ILCompiler.props" Condition="'$(CoreRT)' == 'True'" />
   <Import Project="..\..\build\NETCore.props" Condition="'$(CoreRT)' == 'False'" />
   <Import Project="..\..\build\NuGet.props" />
