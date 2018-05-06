@@ -5,6 +5,7 @@ using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.PanAndZoom;
+using Avalonia.Controls.Primitives;
 using Avalonia.Input;
 using Avalonia.Xaml.Interactivity;
 using Core2D.Containers;
@@ -286,6 +287,23 @@ namespace Core2D.Avalonia.Behaviors
                             }
 
                             // TODO:
+                        }
+                    }
+                    break;
+                case TabControl tab:
+                    {
+                        if (e.Data.Get(CustomDataFormats.Parent) is TabStripItem source &&
+                            (e.Source as IControl).Parent is TabStripItem target)
+                        {
+                            if (tab.TabStrip is TabStrip strip)
+                            {
+                                int sourceIndex = strip.ItemContainerGenerator.IndexFromContainer(source);
+                                int targetIndex = strip.ItemContainerGenerator.IndexFromContainer(target);
+
+                                Console.WriteLine($"sourceIndex : {sourceIndex}");
+                                Console.WriteLine($"targetIndex : {targetIndex}");
+                                Console.WriteLine($"DataContext type : {strip.DataContext.GetType()}");
+                            }
                         }
                     }
                     break;
