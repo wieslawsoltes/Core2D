@@ -2562,6 +2562,11 @@ namespace Core2D.Editor
                             OnImportXaml(path);
                             result = true;
                         }
+                        else if (string.Compare(ext, Constants.ScriptExtension, StringComparison.OrdinalIgnoreCase) == 0)
+                        {
+                            OnExecuteScript(path);
+                            result = true;
+                        }
                     }
 
                     return result;
