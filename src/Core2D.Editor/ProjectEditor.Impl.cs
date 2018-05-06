@@ -1750,7 +1750,7 @@ namespace Core2D.Editor
         public void OnApplyTemplate(PageContainer template)
         {
             var page = Project?.CurrentContainer;
-            if (page != null && template != null)
+            if (page != null && template != null && page != template)
             {
                 Project.ApplyTemplate(page, template);
                 Project.CurrentContainer.Invalidate();
