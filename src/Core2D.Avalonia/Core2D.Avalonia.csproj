@@ -28,13 +28,7 @@
     <Compile Include="**\*.cs" Exclude="obj\**" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="**\*.xaml.cs">
-      <DependentUpon>%(Filename)</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <EmbeddedResource Include="**\*.xaml" />
-  </ItemGroup>
+  <Import Project="..\..\build\EmbedXaml.props" />
 
   <ItemGroup>
     <ProjectReference Include="..\Core2D.Editor\Core2D.Editor.csproj" />
