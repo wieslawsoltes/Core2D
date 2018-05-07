@@ -44,7 +44,7 @@ var isPlatformX64 = StringComparer.OrdinalIgnoreCase.Equals(platform, "x64");
 ///////////////////////////////////////////////////////////////////////////////
 
 var suffix = BuildSystem.AppVeyor.IsRunningOnAppVeyor ? "-build" + EnvironmentVariable("APPVEYOR_BUILD_NUMBER") : "";
-var version = XmlPeek("./build/NuGet.props", "//*[local-name()='Version']/text()") + suffix;
+var version = XmlPeek("./build/Base.props", "//*[local-name()='Version']/text()") + suffix;
 
 Information("Version: {0}", version);
 

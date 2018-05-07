@@ -6,8 +6,6 @@
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
   </PropertyGroup>
 
-  <Import Project="..\..\build\Default.targets" />
-  <Import Project="..\..\build\NuGet.props" />
   <Import Project="..\..\build\Base.props" />
   <Import Project="..\..\build\Math.Spatial.props" />
 

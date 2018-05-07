@@ -7,8 +7,6 @@
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
   </PropertyGroup>
 
-  <Import Project="..\..\build\Default.targets" />
-  <Import Project="..\..\build\NuGet.props" />
   <Import Project="..\..\build\Base.props" />
   <Import Project="..\..\build\Rx.props" />
 
