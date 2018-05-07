@@ -3,6 +3,7 @@
 using System;
 using System.Linq;
 using Avalonia;
+using Avalonia.Collections;
 using Avalonia.Controls;
 using Avalonia.Controls.PanAndZoom;
 using Avalonia.Controls.Primitives;
@@ -299,6 +300,16 @@ namespace Core2D.Avalonia.Behaviors
                             {
                                 int sourceIndex = strip.ItemContainerGenerator.IndexFromContainer(source);
                                 int targetIndex = strip.ItemContainerGenerator.IndexFromContainer(target);
+
+                                var items = strip.Items as AvaloniaList<object>;
+
+                                var sourceItem = items[sourceIndex];
+                                var targetItem = items[targetIndex];
+
+                                items[sourceIndex] = targetItem;
+                                items[targetIndex] = sourceItem;
+
+                                //strip.InvalidateVisual();
 
                                 Console.WriteLine($"sourceIndex : {sourceIndex}");
                                 Console.WriteLine($"targetIndex : {targetIndex}");
