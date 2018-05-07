@@ -3,7 +3,6 @@
 using System;
 using System.Linq;
 using Avalonia;
-using Avalonia.Collections;
 using Avalonia.Controls;
 using Avalonia.Controls.PanAndZoom;
 using Avalonia.Controls.Primitives;
@@ -12,7 +11,6 @@ using Avalonia.Xaml.Interactivity;
 using Core2D.Containers;
 using Core2D.Data;
 using Core2D.Editor;
-using Core2D.Editor.Views;
 using Core2D.Shape;
 using Core2D.Shapes;
 using Core2D.Style;
