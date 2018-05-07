@@ -54,7 +54,6 @@ namespace Core2D.Avalonia
                         if (args.Length > 0)
                         {
                             bool deferredRendering = true;
-
                             foreach (var arg in args)
                             {
                                 switch (arg)
@@ -108,6 +107,5 @@ namespace Core2D.Avalonia
             => AppBuilder.Configure<App>()
                          .UsePlatformDetect()
                          .LogToDebug();
-
     }
 }
