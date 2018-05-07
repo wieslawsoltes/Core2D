@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
-using System.Diagnostics;
 using System.Threading;
 using Autofac;
 using Avalonia;
@@ -38,6 +37,41 @@ namespace Core2D.Avalonia
 #if !NET461
             Thread.CurrentThread.TrySetApartmentState(ApartmentState.STA);
 #endif
+            bool deferredRendering = true;
+            bool useDirect2D1 = false;
+            bool useSkia = false;
+            bool useWin32 = false;
+            bool useGtk3 = false;
+            bool useMonoMac = false;
+
+            foreach (var arg in args)
+            {
+                switch (arg)
+                {
+                    case "--immediate":
+                        deferredRendering = false;
+                        break;
+                    case "--deferred":
+                        deferredRendering = true;
+                        break;
+                    case "--d2d":
+                        useDirect2D1 = true;
+                        break;
+                    case "--skia":
+                        useSkia = true;
+                        break;
+                    case "--win32":
+                        useWin32 = true;
+                        break;
+                    case "--gtk3":
+                        useGtk3 = true;
+                        break;
+                    case "--mac":
+                        useMonoMac = true;
+                        break;
+                }
+            }
+
             try
             {
                 var builder = new ContainerBuilder();
@@ -51,36 +85,25 @@ namespace Core2D.Avalonia
                     using (ILog log = container.Resolve<ILog>())
                     {
                         var appBuilder = BuildAvaloniaApp();
-                        if (args.Length > 0)
+                        if (useDirect2D1 == true)
                         {
-                            bool deferredRendering = true;
-                            foreach (var arg in args)
-                            {
-                                switch (arg)
-                                {
-                                    case "--immediate":
-                                        deferredRendering = false;
-                                        break;
-                                    case "--deferred":
-                                        deferredRendering = true;
-                                        break;
-                                    case "--d2d":
-                                        appBuilder.UseDirect2D1();
-                                        break;
-                                    case "--skia":
-                                        appBuilder.UseSkia();
-                                        break;
-                                    case "--win32":
-                                        appBuilder.UseWin32(deferredRendering);
-                                        break;
-                                    case "--gtk3":
-                                        appBuilder.UseGtk3(deferredRendering);
-                                        break;
-                                    case "--mac":
-                                        appBuilder.UseMonoMac(deferredRendering);
-                                        break;
-                                }
-                            }
+                            appBuilder.UseDirect2D1();
+                        }
+                        if (useSkia == true)
+                        {
+                            appBuilder.UseSkia();
+                        }
+                        if (useWin32 == true)
+                        {
+                            appBuilder.UseWin32(deferredRendering);
+                        }
+                        if (useGtk3 == true)
+                        {
+                            appBuilder.UseGtk3(deferredRendering);
+                        }
+                        if (useMonoMac == true)
+                        {
+                            appBuilder.UseMonoMac(deferredRendering);
                         }
                         appBuilder.SetupWithoutStarting();
                         var app = appBuilder.Instance as App;
@@ -88,7 +111,7 @@ namespace Core2D.Avalonia
                             appBuilder.RuntimePlatform.GetRuntimeInfo(),
                             appBuilder.WindowingSubsystemName,
                             appBuilder.RenderingSubsystemName);
-                        Debug.Write(aboutInfo);
+                        Console.WriteLine(aboutInfo);
                         app.Start(container.Resolve<IServiceProvider>(), aboutInfo);
                     }
                 }
