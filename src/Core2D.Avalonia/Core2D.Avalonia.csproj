@@ -55,7 +55,7 @@
     <ProjectReference Include="..\Core2D.Utilities.Avalonia\Core2D.Utilities.Avalonia.csproj" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net461'">
+  <ItemGroup Condition="'$(TargetFramework)' == 'net461'">
     <ProjectReference Include="..\Core2D.FileWriter.Dxf\Core2D.FileWriter.Dxf.csproj" />
     <ProjectReference Include="..\Core2D.FileWriter.Emf\Core2D.FileWriter.Emf.csproj" />
     <ProjectReference Include="..\Core2D.FileWriter.PdfSharp\Core2D.FileWriter.PdfSharp.csproj" />
