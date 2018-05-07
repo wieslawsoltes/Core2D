@@ -3681,9 +3681,9 @@ namespace Core2D.Editor
                 int removeIndex = sourceIndex + 1;
                 if (panel.Views.Length + 1 > removeIndex)
                 {
-                    var item1 = panel.Views[sourceIndex];
+                    var item = panel.Views[sourceIndex];
                     var builder = panel.Views.ToBuilder();
-                    builder.Insert(targetIndex, item1);
+                    builder.Insert(targetIndex, item);
                     builder.RemoveAt(removeIndex);
 
                     var previous = panel.Views;
@@ -3713,6 +3713,60 @@ namespace Core2D.Editor
             Project?.History?.Snapshot(previous, next, (p) => panel.Views = p);
             panel.Views = next;
         }
+
+        /// <summary>
+        /// Move views into another panel.
+        /// </summary>
+        /// <param name="sourcePanel">The source views panel.</param>
+        /// <param name="targetPanel">The target views panel.</param>
+        /// <param name="sourceIndex">The source view index.</param>
+        /// <param name="targetIndex">The target view index.</param>
+        public void MoveView(ViewsPanel sourcePanel, ViewsPanel targetPanel, int sourceIndex, int targetIndex)
+        {
+                var item = sourcePanel.Views[sourceIndex];
+                var sourceBuilder = sourcePanel.Views.ToBuilder();
+                var targetBuilder = targetPanel.Views.ToBuilder();
+                sourceBuilder.RemoveAt(sourceIndex);
+                targetBuilder.Insert(targetIndex, item);
+
+                var previousSource = sourcePanel.Views;
+                var nextSource = sourceBuilder.ToImmutable();
+                Project?.History?.Snapshot(previousSource, nextSource, (p) => sourcePanel.Views = p);
+                sourcePanel.Views = nextSource;
+
+                var previousTarget = targetPanel.Views;
+                var nextTarget = targetBuilder.ToImmutable();
+                Project?.History?.Snapshot(previousTarget, nextSource, (p) => targetPanel.Views = p);
+                targetPanel.Views = nextTarget;
+        }
+
+        /// <summary>
+        /// Swap views into another panel.
+        /// </summary>
+        /// <param name="sourcePanel">The source views panel.</param>
+        /// <param name="targetPanel">The target views panel.</param>
+        /// <param name="sourceIndex">The source view index.</param>
+        /// <param name="targetIndex">The target view index.</param>
+        public void SwapView(ViewsPanel sourcePanel, ViewsPanel targetPanel, int sourceIndex, int targetIndex)
+        {
+            var item1 = sourcePanel.Views[sourceIndex];
+            var item2 = targetPanel.Views[targetIndex];
+            var sourceBuilder = sourcePanel.Views.ToBuilder();
+            var targetBuilder = targetPanel.Views.ToBuilder();
+            sourceBuilder[sourceIndex] = item2;
+            targetBuilder[targetIndex] = item1;
+
+            var previousSource = sourcePanel.Views;
+            var nextSource = sourceBuilder.ToImmutable();
+            Project?.History?.Snapshot(previousSource, nextSource, (p) => sourcePanel.Views = p);
+            sourcePanel.Views = nextSource;
+
+            var previousTarget = targetPanel.Views;
+            var nextTarget = targetBuilder.ToImmutable();
+            Project?.History?.Snapshot(previousTarget, nextSource, (p) => targetPanel.Views = p);
+            targetPanel.Views = nextTarget;
+        }
+
 
         /// <summary>
         /// Change current view.
@@ -3752,9 +3806,9 @@ namespace Core2D.Editor
                 int removeIndex = sourceIndex + 1;
                 if (library.Items.Length + 1 > removeIndex)
                 {
-                    var item1 = library.Items[sourceIndex];
+                    var item = library.Items[sourceIndex];
                     var builder = library.Items.ToBuilder();
-                    builder.Insert(targetIndex, item1);
+                    builder.Insert(targetIndex, item);
                     builder.RemoveAt(removeIndex);
 
                     var previous = library.Items;

@@ -293,23 +293,50 @@ namespace Core2D.Avalonia.Behaviors
                         if (e.Data.Get(CustomDataFormats.Parent) is TabStripItem source &&
                             (e.Source as IControl).Parent is TabStripItem target)
                         {
-                            int sourceIndex = strip.ItemContainerGenerator.IndexFromContainer(source);
-                            int targetIndex = strip.ItemContainerGenerator.IndexFromContainer(target);
-
-                            Console.WriteLine($"sourceIndex : {sourceIndex}");
-                            Console.WriteLine($"targetIndex : {targetIndex}");
-                            Console.WriteLine($"DataContext type : {strip.DataContext.GetType()}");
-
-                            if (strip.DataContext is ViewsPanel panel)
+                            if (source.Parent == target.Parent)
                             {
+                                int sourceIndex = strip.ItemContainerGenerator.IndexFromContainer(source);
+                                int targetIndex = strip.ItemContainerGenerator.IndexFromContainer(target);
+
+                                Console.WriteLine($"sourceIndex : {sourceIndex}");
+                                Console.WriteLine($"targetIndex : {targetIndex}");
+                                Console.WriteLine($"DataContext type : {strip.DataContext.GetType()}");
+
+                                if (strip.DataContext is ViewsPanel panel)
+                                {
+                                    switch (DropMode)
+                                    {
+                                        case DropMode.Move:
+                                            Editor?.MoveView(panel, sourceIndex, targetIndex);
+                                            e.Handled = true;
+                                            return;
+                                        case DropMode.Swap:
+                                            Editor?.SwapView(panel, sourceIndex, targetIndex);
+                                            e.Handled = true;
+                                            return;
+                                    }
+                                }
+                            }
+                            else if (source.Parent is TabStrip sourceStrip 
+                                && target.Parent is TabStrip targetStrip 
+                                && sourceStrip.DataContext is ViewsPanel sourcePanel
+                                && targetStrip.DataContext is ViewsPanel targetPanel)
+                            {
+                                int sourceIndex = sourceStrip.ItemContainerGenerator.IndexFromContainer(source);
+                                int targetIndex = targetStrip.ItemContainerGenerator.IndexFromContainer(target);
+
+                                Console.WriteLine($"sourceIndex : {sourceIndex}");
+                                Console.WriteLine($"targetIndex : {targetIndex}");
+                                Console.WriteLine($"DataContext type : {strip.DataContext.GetType()}");
+
                                 switch (DropMode)
                                 {
                                     case DropMode.Move:
-                                        Editor?.MoveView(panel, sourceIndex, targetIndex);
+                                        Editor?.MoveView(sourcePanel, targetPanel, sourceIndex, targetIndex);
                                         e.Handled = true;
                                         return;
                                     case DropMode.Swap:
-                                        Editor?.SwapView(panel, sourceIndex, targetIndex);
+                                        Editor?.SwapView(sourcePanel, targetPanel, sourceIndex, targetIndex);
                                         e.Handled = true;
                                         return;
                                 }
