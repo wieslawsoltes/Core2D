@@ -97,5 +97,10 @@ namespace Core2D.Editor
         /// Json file extension.
         /// </summary>
         public const string JsonExtension = ".json";
+
+        /// <summary>
+        /// Script file extension.
+        /// </summary>
+        public const string ScriptExtension = ".csx";
     }
 }

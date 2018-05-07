@@ -1,0 +1,630 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="MenuEditCopyAsEmf" xml:space="preserve">
+    <value>Copy As _Metafile</value>
+  </data>
+  <data name="MenuEditDeselectAll" xml:space="preserve">
+    <value>De_select All</value>
+  </data>
+  <data name="MenuEditUngroup" xml:space="preserve">
+    <value>U_ngroup</value>
+  </data>
+  <data name="MenuEditGroup" xml:space="preserve">
+    <value>_Group</value>
+  </data>
+  <data name="MenuEditOrderBringToFront" xml:space="preserve">
+    <value>Bring to _Front</value>
+  </data>
+  <data name="MenuEditOrderBringForward" xml:space="preserve">
+    <value>Bring Fo_rward</value>
+  </data>
+  <data name="MenuEditOrderSendToBack" xml:space="preserve">
+    <value>Send to _Back</value>
+  </data>
+  <data name="MenuEditOrderSendBackward" xml:space="preserve">
+    <value>Send Ba_ckward</value>
+  </data>
+  <data name="MenuEditClearAll" xml:space="preserve">
+    <value>Cl_ear All</value>
+  </data>
+  <data name="MenuEditCopy" xml:space="preserve">
+    <value>_Copy</value>
+  </data>
+  <data name="MenuEditCut" xml:space="preserve">
+    <value>Cu_t</value>
+  </data>
+  <data name="MenuEditDelete" xml:space="preserve">
+    <value>_Delete</value>
+  </data>
+  <data name="MenuEditPaste" xml:space="preserve">
+    <value>_Paste</value>
+  </data>
+  <data name="MenuEditRedo" xml:space="preserve">
+    <value>_Redo</value>
+  </data>
+  <data name="MenuEditSelectAll" xml:space="preserve">
+    <value>Select _All</value>
+  </data>
+  <data name="MenuEditUndo" xml:space="preserve">
+    <value>_Undo</value>
+  </data>
+  <data name="MenuEdit" xml:space="preserve">
+    <value>_Edit</value>
+  </data>
+  <data name="MenuEditOrder" xml:space="preserve">
+    <value>_Order</value>
+  </data>
+  <data name="MenuFile" xml:space="preserve">
+    <value>_File</value>
+  </data>
+  <data name="MenuView" xml:space="preserve">
+    <value>_View</value>
+  </data>
+  <data name="MenuTool" xml:space="preserve">
+    <value>_Tool</value>
+  </data>
+  <data name="MenuData" xml:space="preserve">
+    <value>_Data</value>
+  </data>
+  <data name="MenuTemplate" xml:space="preserve">
+    <value>Te_mplate</value>
+  </data>
+  <data name="MenuOptions" xml:space="preserve">
+    <value>_Options</value>
+  </data>
+  <data name="MenuWindow" xml:space="preserve">
+    <value>_Window</value>
+  </data>
+  <data name="MenuFileNew" xml:space="preserve">
+    <value>_New</value>
+  </data>
+  <data name="MenuFileOpen" xml:space="preserve">
+    <value>_Open...</value>
+  </data>
+  <data name="MenuFileSave" xml:space="preserve">
+    <value>_Save</value>
+  </data>
+  <data name="MenuFileSaveAs" xml:space="preserve">
+    <value>Save _As...</value>
+  </data>
+  <data name="MenuFileExport" xml:space="preserve">
+    <value>_Export...</value>
+  </data>
+  <data name="MenuFileRecent" xml:space="preserve">
+    <value>_Recent</value>
+  </data>
+  <data name="MenuViewZoom" xml:space="preserve">
+    <value>_Zoom</value>
+  </data>
+  <data name="MenuViewZoomReset" xml:space="preserve">
+    <value>_Reset Zoom</value>
+  </data>
+  <data name="MenuViewZoomAutoFit" xml:space="preserve">
+    <value>_AutoFit Zoom</value>
+  </data>
+  <data name="MenuViewProjectWindow" xml:space="preserve">
+    <value>Project E_xplorer</value>
+  </data>
+  <data name="MenuViewOptionsWindow" xml:space="preserve">
+    <value>_Options</value>
+  </data>
+  <data name="MenuViewTemplatesWindow" xml:space="preserve">
+    <value>_Templates</value>
+  </data>
+  <data name="MenuViewGroupsWindow" xml:space="preserve">
+    <value>_Groups</value>
+  </data>
+  <data name="MenuViewDatabasesWindow" xml:space="preserve">
+    <value>_Databases</value>
+  </data>
+  <data name="MenuViewDatabaseWindow" xml:space="preserve">
+    <value>Data_base Window</value>
+  </data>
+  <data name="MenuViewContainerWindow" xml:space="preserve">
+    <value>Co_ntainer</value>
+  </data>
+  <data name="MenuViewDocumentWindow" xml:space="preserve">
+    <value>Doc_ument Window</value>
+  </data>
+  <data name="MenuViewStylesWindow" xml:space="preserve">
+    <value>_Styles</value>
+  </data>
+  <data name="MenuViewLayersWindow" xml:space="preserve">
+    <value>_Layers</value>
+  </data>
+  <data name="MenuViewShapesWindow" xml:space="preserve">
+    <value>Sh_apes</value>
+  </data>
+  <data name="MenuViewTemplateWindow" xml:space="preserve">
+    <value>Te_mplate Window</value>
+  </data>
+  <data name="MenuViewStateWindow" xml:space="preserve">
+    <value>State _Window</value>
+  </data>
+  <data name="MenuViewDataWindow" xml:space="preserve">
+    <value>Data W_indow</value>
+  </data>
+  <data name="MenuViewStyleWindow" xml:space="preserve">
+    <value>St_yle Window</value>
+  </data>
+  <data name="MenuViewPropertiesWindow" xml:space="preserve">
+    <value>Prop_erties Window</value>
+  </data>
+  <data name="MenuToolNone" xml:space="preserve">
+    <value>_None</value>
+  </data>
+  <data name="MenuToolSelection" xml:space="preserve">
+    <value>_Selection</value>
+  </data>
+  <data name="MenuToolPoint" xml:space="preserve">
+    <value>_Point</value>
+  </data>
+  <data name="MenuToolLine" xml:space="preserve">
+    <value>_Line</value>
+  </data>
+  <data name="MenuToolArc" xml:space="preserve">
+    <value>_Arc</value>
+  </data>
+  <data name="MenuToolCubicBezier" xml:space="preserve">
+    <value>Cubic _Bezier</value>
+  </data>
+  <data name="MenuToolQuadraticBezier" xml:space="preserve">
+    <value>_Quadratic Bezier</value>
+  </data>
+  <data name="MenuToolPath" xml:space="preserve">
+    <value>Pat_h</value>
+  </data>
+  <data name="MenuToolRectangle" xml:space="preserve">
+    <value>_Rectangle</value>
+  </data>
+  <data name="MenuToolEllipse" xml:space="preserve">
+    <value>_Ellipse</value>
+  </data>
+  <data name="MenuToolText" xml:space="preserve">
+    <value>_Text</value>
+  </data>
+  <data name="MenuToolImage" xml:space="preserve">
+    <value>_Image</value>
+  </data>
+  <data name="MenuDataImport" xml:space="preserve">
+    <value>_Import...</value>
+  </data>
+  <data name="MenuDataExport" xml:space="preserve">
+    <value>_Export...</value>
+  </data>
+  <data name="MenuOptionsDefaultIsFilled" xml:space="preserve">
+    <value>Default is _Filled</value>
+  </data>
+  <data name="MenuOptionsSnapToGrid" xml:space="preserve">
+    <value>Snap to _Grid</value>
+  </data>
+  <data name="MenuOptionsTryToConnect" xml:space="preserve">
+    <value>Try To _Connect</value>
+  </data>
+  <data name="MenuWindowLoadLayout" xml:space="preserve">
+    <value>_Load Layout...</value>
+  </data>
+  <data name="MenuWindowSaveLayout" xml:space="preserve">
+    <value>_Save Layout...</value>
+  </data>
+  <data name="MenuWindowResetLayout" xml:space="preserve">
+    <value>_Reset Layout</value>
+  </data>
+  <data name="MenuFileExit" xml:space="preserve">
+    <value>E_xit</value>
+  </data>
+  <data name="OptionsDefaultFillRule" xml:space="preserve">
+    <value>FillRule</value>
+  </data>
+  <data name="OptionsDefaultIsClosed" xml:space="preserve">
+    <value>IsClosed</value>
+  </data>
+  <data name="OptionsDefaultIsFilled" xml:space="preserve">
+    <value>IsFilled</value>
+  </data>
+  <data name="OptionsDefaultIsSmoothJoin" xml:space="preserve">
+    <value>IsSmoothJoin</value>
+  </data>
+  <data name="OptionsDefaultIsStroked" xml:space="preserve">
+    <value>IsStroked</value>
+  </data>
+  <data name="OptionsHeaderAdvanced" xml:space="preserve">
+    <value>Advanced</value>
+  </data>
+  <data name="OptionsHeaderDefaults" xml:space="preserve">
+    <value>Defaults</value>
+  </data>
+  <data name="OptionsHeaderGeneral" xml:space="preserve">
+    <value>General</value>
+  </data>
+  <data name="OptionsHelperStyle" xml:space="preserve">
+    <value>HelperStyle</value>
+  </data>
+  <data name="OptionsHitThreshold" xml:space="preserve">
+    <value>HitThreshold</value>
+  </data>
+  <data name="OptionsMoveMode" xml:space="preserve">
+    <value>MoveMode</value>
+  </data>
+  <data name="OptionsPointShape" xml:space="preserve">
+    <value>PointShape</value>
+  </data>
+  <data name="OptionsSelectionStyle" xml:space="preserve">
+    <value>SelectionStyle</value>
+  </data>
+  <data name="OptionsSnapToGrid" xml:space="preserve">
+    <value>SnapToGrid</value>
+  </data>
+  <data name="OptionsSnapX" xml:space="preserve">
+    <value>SnapX</value>
+  </data>
+  <data name="OptionsSnapY" xml:space="preserve">
+    <value>SnapY</value>
+  </data>
+  <data name="OptionsTryToConnect" xml:space="preserve">
+    <value>TryToConnect</value>
+  </data>
+  <data name="WindowTitleContainer" xml:space="preserve">
+    <value>Container</value>
+  </data>
+  <data name="WindowTitleData" xml:space="preserve">
+    <value>Data</value>
+  </data>
+  <data name="WindowTitleRecords" xml:space="preserve">
+    <value>Records</value>
+  </data>
+  <data name="WindowTitleDatabases" xml:space="preserve">
+    <value>Databases</value>
+  </data>
+  <data name="WindowTitleDocument" xml:space="preserve">
+    <value>Document</value>
+  </data>
+  <data name="WindowTitleGroups" xml:space="preserve">
+    <value>Groups</value>
+  </data>
+  <data name="WindowTitleLayers" xml:space="preserve">
+    <value>Layers</value>
+  </data>
+  <data name="WindowTitleOptions" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="WindowTitleProject" xml:space="preserve">
+    <value>Project</value>
+  </data>
+  <data name="WindowTitleShape" xml:space="preserve">
+    <value>Shape</value>
+  </data>
+  <data name="WindowTitleShapes" xml:space="preserve">
+    <value>Shapes</value>
+  </data>
+  <data name="WindowTitleStyle" xml:space="preserve">
+    <value>Style</value>
+  </data>
+  <data name="WindowTitleStyles" xml:space="preserve">
+    <value>Styles</value>
+  </data>
+  <data name="WindowTitleTemplate" xml:space="preserve">
+    <value>Template</value>
+  </data>
+  <data name="WindowTitleTemplates" xml:space="preserve">
+    <value>Templates</value>
+  </data>
+  <data name="ProjectOptions" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="ProjectName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="DocumentName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="ContainerName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="ContainerData" xml:space="preserve">
+    <value>Data</value>
+  </data>
+  <data name="ContainerWidth" xml:space="preserve">
+    <value>Width</value>
+  </data>
+  <data name="ContainerHeight" xml:space="preserve">
+    <value>Height</value>
+  </data>
+  <data name="ContainerBackground" xml:space="preserve">
+    <value>Background</value>
+  </data>
+  <data name="MenuFileClose" xml:space="preserve">
+    <value>_Close</value>
+  </data>
+  <data name="MenuOptionsDefaultIsClosed" xml:space="preserve">
+    <value>Default is Close_d</value>
+  </data>
+  <data name="MenuOptionsDefaultIsSmoothJoin" xml:space="preserve">
+    <value>Default is Smooth _Join</value>
+  </data>
+  <data name="MenuOptionsDefaultIsStroked" xml:space="preserve">
+    <value>Default is Stro_ked</value>
+  </data>
+  <data name="OptionsPointStyle" xml:space="preserve">
+    <value>PointStyle</value>
+  </data>
+  <data name="MenuPathTool" xml:space="preserve">
+    <value>Path T_ool</value>
+  </data>
+  <data name="MenuPathToolArc" xml:space="preserve">
+    <value>_Arc</value>
+  </data>
+  <data name="MenuPathToolCubicBezier" xml:space="preserve">
+    <value>Cubic _Bezier</value>
+  </data>
+  <data name="MenuPathToolLine" xml:space="preserve">
+    <value>_Line</value>
+  </data>
+  <data name="MenuPathToolMove" xml:space="preserve">
+    <value>_Move</value>
+  </data>
+  <data name="MenuPathToolQuadraticBezier" xml:space="preserve">
+    <value>_Quadratic Bezier</value>
+  </data>
+  <data name="StatusPages" xml:space="preserve">
+    <value>Pages</value>
+  </data>
+  <data name="StatusDocuments" xml:space="preserve">
+    <value>Documents</value>
+  </data>
+  <data name="StatusLayers" xml:space="preserve">
+    <value>Layers</value>
+  </data>
+  <data name="StatusNoPages" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="StatusNoDocuments" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="StatusNoLayers" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="StatusNoSelected" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="StatusNoShapes" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="StatusOptionsAutofit" xml:space="preserve">
+    <value>Auto-fit</value>
+  </data>
+  <data name="StatusOptionsClosed" xml:space="preserve">
+    <value>Closed</value>
+  </data>
+  <data name="StatusOptionsConnect" xml:space="preserve">
+    <value>Connect</value>
+  </data>
+  <data name="StatusOptionsFilled" xml:space="preserve">
+    <value>Filled</value>
+  </data>
+  <data name="StatusOptionsSmoothJoin" xml:space="preserve">
+    <value>SmoothJoin</value>
+  </data>
+  <data name="StatusOptionsSnap" xml:space="preserve">
+    <value>Snap</value>
+  </data>
+  <data name="StatusOptionsStroked" xml:space="preserve">
+    <value>Stroked</value>
+  </data>
+  <data name="StatusPathToolArc" xml:space="preserve">
+    <value>Arc</value>
+  </data>
+  <data name="StatusPathToolCubicBezier" xml:space="preserve">
+    <value>CubicBezier</value>
+  </data>
+  <data name="StatusPathToolLine" xml:space="preserve">
+    <value>Line</value>
+  </data>
+  <data name="StatusPathToolMove" xml:space="preserve">
+    <value>Move</value>
+  </data>
+  <data name="StatusPathToolQuadraticBezier" xml:space="preserve">
+    <value>QuadraticBezier</value>
+  </data>
+  <data name="StatusSelected" xml:space="preserve">
+    <value>Selected</value>
+  </data>
+  <data name="StatusSelectedOne" xml:space="preserve">
+    <value>Selected: 1</value>
+  </data>
+  <data name="StatusShapes" xml:space="preserve">
+    <value>Shapes</value>
+  </data>
+  <data name="StatusToolArc" xml:space="preserve">
+    <value>Arc</value>
+  </data>
+  <data name="StatusToolCubicBezier" xml:space="preserve">
+    <value>Cubic Bezier</value>
+  </data>
+  <data name="StatusToolEllipse" xml:space="preserve">
+    <value>Ellipse</value>
+  </data>
+  <data name="StatusToolImage" xml:space="preserve">
+    <value>Image</value>
+  </data>
+  <data name="StatusToolLine" xml:space="preserve">
+    <value>Line</value>
+  </data>
+  <data name="StatusToolNone" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="StatusToolPath" xml:space="preserve">
+    <value>Path</value>
+  </data>
+  <data name="StatusToolPoint" xml:space="preserve">
+    <value>Point</value>
+  </data>
+  <data name="StatusToolQuadraticBezier" xml:space="preserve">
+    <value>Quadratic Bezier</value>
+  </data>
+  <data name="StatusToolRectangle" xml:space="preserve">
+    <value>Rectangle</value>
+  </data>
+  <data name="StatusToolSelection" xml:space="preserve">
+    <value>Selection</value>
+  </data>
+  <data name="StatusToolText" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="WindowTitleCanvas" xml:space="preserve">
+    <value>Canvas</value>
+  </data>
+  <data name="ContainerTemplate" xml:space="preserve">
+    <value>Template</value>
+  </data>
+  <data name="ContainerSize" xml:space="preserve">
+    <value>Size</value>
+  </data>
+  <data name="WindowTitlePage" xml:space="preserve">
+    <value>Page</value>
+  </data>
+  <data name="MenuDataUpdate" xml:space="preserve">
+    <value>_Update...</value>
+  </data>
+  <data name="MenuFileImportXaml" xml:space="preserve">
+    <value>Import Xa_ml...</value>
+  </data>
+  <data name="MenuFileImportJson" xml:space="preserve">
+    <value>Import _Json...</value>
+  </data>
+  <data name="MenuOptionsCloneStyle" xml:space="preserve">
+    <value>Clone St_yle</value>
+  </data>
+  <data name="OptionsCloneStyle" xml:space="preserve">
+    <value>CloneStyle</value>
+  </data>
+  <data name="StatusOptionsCloneStyle" xml:space="preserve">
+    <value>CloneStyle</value>
+  </data>
+  <data name="MenuViewViews" xml:space="preserve">
+    <value>_Views</value>
+  </data>
+  <data name="WindowTitleImages" xml:space="preserve">
+    <value>Images</value>
+  </data>
+  <data name="MenuFileExecuteScript" xml:space="preserve">
+    <value>Execu_te Script...</value>
+  </data>
+</root>

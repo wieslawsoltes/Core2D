@@ -29,6 +29,7 @@ namespace Core2D.Editor
     /// </summary>
     public partial class ProjectEditor
     {
+        private object _scriptState;
         private PageContainer _pageToCopy = default(PageContainer);
         private DocumentContainer _documentToCopy = default(DocumentContainer);
         private BaseShape _hover = default(BaseShape);
@@ -668,8 +669,6 @@ namespace Core2D.Editor
             }
         }
 
-        private object _state;
-
         /// <summary>
         /// Execute code script in repl.
         /// </summary>
@@ -680,7 +679,7 @@ namespace Core2D.Editor
             {
                 if (!string.IsNullOrWhiteSpace(csharp))
                 {
-                    _state = ScriptRunner?.Execute(csharp, _state);
+                    _scriptState = ScriptRunner?.Execute(csharp, _scriptState);
                 }
             }
             catch (Exception ex)
@@ -694,7 +693,7 @@ namespace Core2D.Editor
         /// </summary>
         public void OnResetRepl()
         {
-            _state = null;
+            _scriptState = null;
         }
 
         /// <summary>
@@ -881,11 +880,18 @@ namespace Core2D.Editor
             {
                 if (await CanPaste())
                 {
-                    var text = await(TextClipboard?.GetText() ?? Task.FromResult(string.Empty));
+                    var text = await (TextClipboard?.GetText() ?? Task.FromResult(string.Empty));
                     if (!string.IsNullOrEmpty(text))
                     {
                         OnTryPaste(text);
                     }
+                }
+            }
+            else if (item is string text)
+            {
+                if (!string.IsNullOrEmpty(text))
+                {
+                    OnTryPaste(text);
                 }
             }
         }
@@ -1751,7 +1757,7 @@ namespace Core2D.Editor
         public void OnApplyTemplate(PageContainer template)
         {
             var page = Project?.CurrentContainer;
-            if (page != null && template != null)
+            if (page != null && template != null && page != template)
             {
                 Project.ApplyTemplate(page, template);
                 Project.CurrentContainer.Invalidate();
@@ -2450,6 +2456,36 @@ namespace Core2D.Editor
         }
 
         /// <summary>
+        /// Clone the <see cref="LayerContainer"/> object.
+        /// </summary>
+        /// <param name="container">The <see cref="LayerContainer"/> object.</param>
+        /// <returns>The cloned <see cref="LayerContainer"/> object.</returns>
+        public LayerContainer Clone(LayerContainer container)
+        {
+            try
+            {
+                var json = JsonSerializer?.Serialize(container);
+                if (!string.IsNullOrEmpty(json))
+                {
+                    var clone = JsonSerializer?.Deserialize<LayerContainer>(json);
+                    if (clone != null)
+                    {
+                        var shapes = clone.Shapes;
+                        TryToRestoreStyles(shapes);
+                        TryToRestoreRecords(shapes);
+                        return clone;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogError(ex);
+            }
+
+            return default(LayerContainer);
+        }
+
+        /// <summary>
         /// Clone the <see cref="PageContainer"/> object.
         /// </summary>
         /// <param name="container">The <see cref="PageContainer"/> object.</param>
@@ -2554,6 +2590,11 @@ namespace Core2D.Editor
                         else if (string.Compare(ext, Constants.XamlExtension, StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             OnImportXaml(path);
+                            result = true;
+                        }
+                        else if (string.Compare(ext, Constants.ScriptExtension, StringComparison.OrdinalIgnoreCase) == 0)
+                        {
+                            OnExecuteScript(path);
                             result = true;
                         }
                     }
@@ -3625,6 +3666,66 @@ namespace Core2D.Editor
             {
                 CurrentView = view;
             }
+        }
+
+        /// <summary>
+        /// Move items in the library.
+        /// </summary>
+        /// <typeparam name="T">The type of the library.</typeparam>
+        /// <param name="library">The items library.</param>
+        /// <param name="sourceIndex">The source item index.</param>
+        /// <param name="targetIndex">The target item index.</param>
+        public void MoveItem<T>(Library<T> library, int sourceIndex, int targetIndex)
+        {
+            if (sourceIndex < targetIndex)
+            {
+                var item = library.Items[sourceIndex];
+                var builder = library.Items.ToBuilder();
+                builder.Insert(targetIndex + 1, item);
+                builder.RemoveAt(sourceIndex);
+
+                var previous = library.Items;
+                var next = builder.ToImmutable();
+                Project?.History?.Snapshot(previous, next, (p) => library.Items = p);
+                library.Items = next;
+            }
+            else
+            {
+                int removeIndex = sourceIndex + 1;
+                if (library.Items.Length + 1 > removeIndex)
+                {
+                    var item1 = library.Items[sourceIndex];
+                    var builder = library.Items.ToBuilder();
+                    builder.Insert(targetIndex, item1);
+                    builder.RemoveAt(removeIndex);
+
+                    var previous = library.Items;
+                    var next = builder.ToImmutable();
+                    Project?.History?.Snapshot(previous, next, (p) => library.Items = p);
+                    library.Items = next;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Swap items in the library.
+        /// </summary>
+        /// <typeparam name="T">The type of the library.</typeparam>
+        /// <param name="library">The items library.</param>
+        /// <param name="sourceIndex">The source item index.</param>
+        /// <param name="targetIndex">The target item index.</param>
+        public void SwapItem<T>(Library<T> library, int sourceIndex, int targetIndex)
+        {
+            var item1 = library.Items[sourceIndex];
+            var item2 = library.Items[targetIndex];
+            var builder = library.Items.ToBuilder();
+            builder[targetIndex] = item1;
+            builder[sourceIndex] = item2;
+
+            var previous = library.Items;
+            var next = builder.ToImmutable();
+            Project?.History?.Snapshot(previous, next, (p) => library.Items = p);
+            library.Items = next;
         }
     }
 }

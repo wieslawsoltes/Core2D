@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFrameworks>netcoreapp2.0;net461</TargetFrameworks>
     <RuntimeIdentifiers>win7-x64</RuntimeIdentifiers>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <EnableDefaultCompileItems>False</EnableDefaultCompileItems>
@@ -53,6 +53,15 @@
     <ProjectReference Include="..\Core2D.TextFieldReader.CsvHelper\Core2D.TextFieldReader.CsvHelper.csproj" />
     <ProjectReference Include="..\Core2D.TextFieldWriter.CsvHelper\Core2D.TextFieldWriter.CsvHelper.csproj" />
     <ProjectReference Include="..\Core2D.Utilities.Avalonia\Core2D.Utilities.Avalonia.csproj" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net461'">
+    <ProjectReference Include="..\Core2D.FileWriter.Dxf\Core2D.FileWriter.Dxf.csproj" />
+    <ProjectReference Include="..\Core2D.FileWriter.Emf\Core2D.FileWriter.Emf.csproj" />
+    <ProjectReference Include="..\Core2D.FileWriter.PdfSharp\Core2D.FileWriter.PdfSharp.csproj" />
+    <ProjectReference Include="..\Core2D.Renderer.Dxf\Core2D.Renderer.Dxf.csproj" />
+    <ProjectReference Include="..\Core2D.Renderer.PdfSharp\Core2D.Renderer.PdfSharp.csproj" />
+    <ProjectReference Include="..\Core2D.Renderer.WinForms\Core2D.Renderer.WinForms.csproj" />
   </ItemGroup>
 
 </Project>

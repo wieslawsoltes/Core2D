@@ -3,6 +3,9 @@
 <UserControl x:Class="Core2D.Avalonia.Views.Containers.LayersControl"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+             xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+             xmlns:behaviors="clr-namespace:Core2D.Avalonia.Behaviors;assembly=Core2D.Avalonia"
              xmlns:local="clr-namespace:Core2D.Avalonia;assembly=Core2D.Avalonia"
              xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor"
@@ -24,7 +27,10 @@
                     </ListBox.KeyBindings>
                     <ListBox.DataTemplates>
                         <DataTemplate DataType="Containers:LayerContainer">
-                            <Grid ColumnDefinitions="Auto,*">
+                            <Grid ColumnDefinitions="Auto,*" Classes="drag">
+                                <i:Interaction.Behaviors>
+                                    <behaviors:DragBehavior/>
+                                </i:Interaction.Behaviors>
                                 <Grid.ContextMenu>
                                     <ContextMenu Classes="default">
                                         <MenuItem Header="_Delete" Command="{Binding $parent[Window].DataContext.OnRemoveLayer}" CommandParameter="{Binding Mode=OneWay}"/>

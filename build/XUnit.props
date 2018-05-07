@@ -25,5 +25,4 @@
       <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
     </PropertyGroup>
   </Target>
-  <Import Project="$(MSBuildThisFileDirectory)\NetFX.props" />
 </Project>

@@ -18,7 +18,7 @@
              xmlns:Style="clr-namespace:Core2D.Style;assembly=Core2D" 
              xmlns:data="clr-namespace:Core2D.Avalonia.Views.Data;assembly=Core2D.Avalonia"
              xmlns:path="clr-namespace:Core2D.Avalonia.Views.Path;assembly=Core2D.Avalonia"
-             xmlns:project="clr-namespace:Core2D.Avalonia.Views.Containers;assembly=Core2D.Avalonia"
+             xmlns:containers="clr-namespace:Core2D.Avalonia.Views.Containers;assembly=Core2D.Avalonia"
              xmlns:renderer="clr-namespace:Core2D.Avalonia.Views.Renderer;assembly=Core2D.Avalonia"
              xmlns:settingsTools="clr-namespace:Core2D.Avalonia.Views.Settings.Tools;assembly=Core2D.Avalonia"
              xmlns:settingsPath="clr-namespace:Core2D.Avalonia.Views.Settings.Tools.Path;assembly=Core2D.Avalonia"
@@ -205,6 +205,12 @@
         <Style Selector="DropDown.autofit:focus /template/ Border#border">
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
+        <!-- Grid -->
+        <Style Selector="Grid.drag">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        </Style>
         <!-- GridSplitter.vertical -->
         <Style Selector="GridSplitter:vertical">
             <Setter Property="Width" Value="6"/>
@@ -260,6 +266,12 @@
             <Setter Property="VerticalAlignment" Value="Stretch"/>
             <Setter Property="IsSnapToTickEnabled" Value="True"/>
             <Setter Property="TickFrequency" Value="0.1"/>
+        </Style>
+        <!-- StackPanel -->
+        <Style Selector="StackPanel.drag">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
         </Style>
         <!-- TabControl -->
         <Style Selector="TabControl.default">
@@ -362,6 +374,11 @@
         <Style Selector="TextBlock.project">
             <Setter Property="Margin" Value="1"/>
             <Setter Property="FontSize" Value="12"/>
+        </Style>
+        <Style Selector="TextBlock.drag">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
         </Style>
         <!-- TextBox.default -->
         <Style Selector="TextBox.default">
@@ -707,22 +724,22 @@
         </DataTemplate>
         <!-- Containers -->
         <DataTemplate DataType="Containers:ILibrary">
-            <project:LibraryControl/>
+            <containers:LibraryControl/>
         </DataTemplate>
         <DataTemplate DataType="Containers:Options">
-            <project:OptionsControl/>
+            <containers:OptionsControl/>
         </DataTemplate>
         <DataTemplate DataType="Containers:ProjectContainer">
-            <project:ProjectControl/>
+            <containers:ProjectControl/>
         </DataTemplate>
         <DataTemplate DataType="Containers:DocumentContainer">
-            <project:DocumentControl/>
+            <containers:DocumentControl/>
         </DataTemplate>
         <DataTemplate DataType="Containers:PageContainer">
-            <project:ContainerControl/>
+            <containers:ContainerControl/>
         </DataTemplate>
         <DataTemplate DataType="Containers:LayerContainer">
-            <project:LayerControl/>
+            <containers:LayerControl/>
         </DataTemplate>
     </Application.DataTemplates>
 </Application>

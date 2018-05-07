@@ -55,6 +55,8 @@
             <MenuItem Header="_Undo" Command="{Binding OnUndo}"/>
             <MenuItem Header="_Redo" Command="{Binding OnRedo}"/>
             <Separator/>
+            <MenuItem Header="Copy As _Metafile" Command="{Binding Platform.OnCopyAsEmf}"/>
+            <Separator/>
             <MenuItem Header="Cu_t" Command="{Binding OnCut}"/>
             <MenuItem Header="_Copy" Command="{Binding OnCopy}"/>
             <MenuItem Header="_Paste" Command="{Binding OnPaste}"/>

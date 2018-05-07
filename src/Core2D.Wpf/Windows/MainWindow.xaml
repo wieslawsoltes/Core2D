@@ -1,0 +1,76 @@
+<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
+<!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
+<Window x:Class="Core2D.Wpf.Windows.MainWindow" 
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:local="clr-namespace:Core2D.Wpf" 
+        xmlns:converters="clr-namespace:Core2D.Wpf.Converters" 
+        xmlns:designer="clr-namespace:Core2D.Wpf.Designer"
+        xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor" 
+        xmlns:Views="clr-namespace:Core2D.Editor.Views;assembly=Core2D.Editor" 
+        xmlns:views="clr-namespace:Core2D.Wpf.Views"
+        xmlns:p="clr-namespace:Core2D.Wpf.Properties" 
+        mc:Ignorable="d" 
+        d:DataContext="{x:Static designer:DesignerHelper.Editor}"
+        Width="1324" Height="724"
+        Background="{StaticResource BackgroundColor}" 
+        WindowStartupLocation="CenterScreen" WindowState="Maximized" 
+        UseLayoutRounding="True" SnapsToDevicePixels="True" 
+        TextOptions.TextFormattingMode="Display" TextOptions.TextHintingMode="Auto" TextOptions.TextRenderingMode="Auto">
+    <Window.Title>
+        <MultiBinding StringFormat="{}{0}{1} - Core2D" FallbackValue="Core2D" TargetNullValue="Core2D">
+            <Binding Path="Project.Name"/>
+            <Binding Path="IsProjectDirty" Converter="{StaticResource BooleanToStarConverter}"/>
+        </MultiBinding>
+    </Window.Title>
+    <Window.InputBindings>
+        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.NewCommand}" CommandParameter="{Binding}" Gesture="Ctrl+N"/>
+        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.OpenCommand}" Gesture="Ctrl+O"/>
+        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.CloseCommand}" Gesture="Ctrl+F4"/>
+        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.SaveCommand}" Gesture="Ctrl+S"/>
+        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.SaveAsCommand}" Gesture="Ctrl+Shift+S"/>
+        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.ImportXamlCommand}" Gesture="Ctrl+Shift+X"/>
+        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.ImportJsonCommand}" Gesture="Ctrl+Shift+J"/>
+        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.ExportCommand}" Gesture="Ctrl+E"/>
+        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.ExitCommand}" Gesture="Alt+F4"/>
+        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.UndoCommand}" Gesture="Ctrl+Z"/>
+        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.RedoCommand}" Gesture="Ctrl+Y"/>
+        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.CopyAsEmfCommand}" Gesture="Ctrl+Shift+C"/>
+        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.CutCommand}" Gesture="Ctrl+X"/>
+        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.CopyCommand}" Gesture="Ctrl+C"/>
+        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.PasteCommand}" Gesture="Ctrl+V"/>
+        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.SelectAllCommand}" Gesture="Ctrl+A"/>
+        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.GroupCommand}" Gesture="Ctrl+G"/>
+        <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.UngroupCommand}" Gesture="Ctrl+U"/>
+    </Window.InputBindings>
+    <ContentControl Content="{Binding CurrentView, Mode=TwoWay}">
+        <ContentControl.Resources>
+            <DataTemplate DataType="{x:Type Views:DashboardView}">
+                <Grid FocusVisualStyle="{x:Null}" DataContext="{Binding Context}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="3"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="3"/>
+                    </Grid.RowDefinitions>
+                    <views:DashboardMenuControl Grid.Row="0"/>
+                    <views:DashboardControl Grid.Row="2"/>
+                </Grid>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type Views:EditorView}">
+                <Grid FocusVisualStyle="{x:Null}" DataContext="{Binding Context}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="3"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="3"/>
+                    </Grid.RowDefinitions>
+                    <views:EditorMenuControl Grid.Row="0"/>
+                    <views:EditorControl Grid.Row="2"/>
+                </Grid>
+            </DataTemplate>
+        </ContentControl.Resources>
+    </ContentControl>
+</Window>

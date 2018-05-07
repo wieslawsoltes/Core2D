@@ -6,13 +6,18 @@
              xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
              xmlns:iac="clr-namespace:Avalonia.Xaml.Interactions.Custom;assembly=Avalonia.Xaml.Interactions.Custom"
+             xmlns:behaviors="clr-namespace:Core2D.Avalonia.Behaviors;assembly=Core2D.Avalonia"
              xmlns:local="clr-namespace:Core2D.Avalonia;assembly=Core2D.Avalonia"
              xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor"
              xmlns:Recent="clr-namespace:Core2D.Editor.Recent;assembly=Core2D.Editor"
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
+             Background="Transparent"
              Design.DataContext="{x:Static Designer:DesignerContext.Editor}"
              Design.Width="1000" Design.Height="800">
+    <i:Interaction.Behaviors>
+        <behaviors:DropBehavior Editor="{Binding}"/>
+    </i:Interaction.Behaviors>
     <Grid MaxWidth="800" MaxHeight="600" RowDefinitions="0.2*,50,30,1*,30,1*,30,1*,20,0.2*" ColumnDefinitions="5*,50*,30,40*,5*">
         <TextBlock Text="Core2D" Classes="title" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="1"/>
         <Button Content="New Project" Classes="project" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="1" Grid.RowSpan="1" Command="{Binding OnNewProject}">
@@ -32,14 +37,19 @@
         </Button>
         <TextBlock Text="recent" Classes="recent" Grid.Column="3" Grid.ColumnSpan="1" Grid.Row="2" Grid.RowSpan="1"/>
         <ListBox Items="{Binding RecentProjects}" SelectedItem="{Binding CurrentRecentProject, Mode=TwoWay}" Classes="recents" Grid.Column="3" Grid.Row="3" Grid.ColumnSpan="1" Grid.RowSpan="5">
+            <i:Interaction.Behaviors>
+                <behaviors:DropBehavior Editor="{Binding}"/>
+            </i:Interaction.Behaviors>
             <ListBox.DataTemplates>
                 <DataTemplate DataType="Recent:RecentFile">
-                    <Grid Name="grid" Cursor="Hand">
+                    <Grid Name="grid" Cursor="Hand" Classes="drag">
                         <i:Interaction.Behaviors>
                             <iac:SelectListBoxItemOnPointerMovedBehavior/>
                             <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #grid}">
                                 <ia:InvokeCommandAction Command="{Binding $parent[ListBox].DataContext.OnOpenProject}" CommandParameter="{Binding Path}"/>
                             </ia:EventTriggerBehavior>
+                            <behaviors:DragBehavior/>
+                            <behaviors:DropBehavior Editor="{Binding $parent[ListBox].DataContext}"/>
                         </i:Interaction.Behaviors>
                         <TextBlock Text="{Binding Name}" Classes="recents" Grid.Column="0" ToolTip.Tip="{Binding Path}"/>
                     </Grid>

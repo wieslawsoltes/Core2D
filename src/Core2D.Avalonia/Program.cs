@@ -2,9 +2,8 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Diagnostics;
-using System.Linq;
+using System.Threading;
 using Autofac;
-using Autofac.Core;
 using Avalonia;
 using Avalonia.Logging.Serilog;
 using Core2D.Avalonia.Modules;
@@ -31,8 +30,14 @@ namespace Core2D.Avalonia
         /// Program entry point.
         /// </summary>
         /// <param name="args">The program arguments.</param>
+#if NET461
+       [STAThread]
+#endif
         static void Main(string[] args)
         {
+#if !NET461
+            Thread.CurrentThread.TrySetApartmentState(ApartmentState.STA);
+#endif
             try
             {
                 var builder = new ContainerBuilder();

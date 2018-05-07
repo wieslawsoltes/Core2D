@@ -1,0 +1,69 @@
+﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
+<!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
+<UserControl x:Class="Core2D.Avalonia.Views.Containers.ZoomControl"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+             xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+             xmlns:behaviors="clr-namespace:Core2D.Avalonia.Behaviors;assembly=Core2D.Avalonia"
+             xmlns:local="clr-namespace:Core2D.Avalonia;assembly=Core2D.Avalonia"
+             xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"
+             xmlns:paz="clr-namespace:Avalonia.Controls.PanAndZoom;assembly=Avalonia.Controls.PanAndZoom"
+             Design.Width="250" Design.Height="400">
+    <TabControl Classes="default">
+        <TabItem Header="Status" Classes="property">
+            <ScrollViewer>
+                <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
+                    <TextBlock Text="ZoomX:" Classes="left" Grid.Row="0" Grid.Column="0"/>
+                    <TextBlock Text="{Binding ZoomX, Mode=OneWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                    <TextBlock Text="ZoomY:" Classes="left" Grid.Row="1" Grid.Column="0"/>
+                    <TextBlock Text="{Binding ZoomY, Mode=OneWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
+                    <TextBlock Text="OffsetX:" Classes="left" Grid.Row="2" Grid.Column="0"/>
+                    <TextBlock Text="{Binding OffsetX, Mode=OneWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
+                    <TextBlock Text="OffsetY:" Classes="left" Grid.Row="3" Grid.Column="0"/>
+                    <TextBlock Text="{Binding OffsetY, Mode=OneWay}" Classes="left" Grid.Row="3" Grid.Column="1"/>
+                    <Button Content="Reset" Command="{Binding $parent[Window].DataContext.Platform.OnZoomReset}" Classes="default" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"/>
+                    <Button Content="AutoFit" Command="{Binding $parent[Window].DataContext.Platform.OnZoomAutoFit}" Classes="default" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"/>
+                </Grid>
+            </ScrollViewer>
+        </TabItem>
+        <TabItem Header="Options" Classes="property">
+            <ScrollViewer>
+                <Grid RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
+                    <TextBlock Text="PanButton:" Classes="left" Grid.Row="0" Grid.Column="0"/>
+                    <DropDown Items="{x:Static paz:ZoomBorder.ButtonNames}" SelectedItem="{Binding PanButton, Mode=TwoWay}" Classes="default" Grid.Row="0" Grid.Column="1"/>
+                    <TextBlock Text="Stretch:" Classes="left" Grid.Row="1" Grid.Column="0"/>
+                    <DropDown Items="{x:Static paz:ZoomBorder.StretchModes}" SelectedItem="{Binding Stretch, Mode=TwoWay}" Classes="default" Grid.Row="1" Grid.Column="1"/>
+                    <TextBlock Text="ZoomSpeed:" Classes="left" Grid.Row="2" Grid.Column="0"/>
+                    <TextBox Text="{Binding ZoomSpeed, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
+                    <TextBlock Text="EnableInput:" Classes="left" Grid.Row="3" Grid.Column="0"/>
+                    <CheckBox IsChecked="{Binding EnableInput}" Content="" Classes="default" Grid.Row="3" Grid.Column="1"/>
+                </Grid>
+            </ScrollViewer>
+        </TabItem>
+        <TabItem Header="Constrains" Classes="property">
+            <ScrollViewer>
+                <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
+                    <TextBlock Text="MinZoomX:" Classes="left" Grid.Row="0" Grid.Column="0"/>
+                    <TextBox Text="{Binding MinZoomX, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                    <TextBlock Text="MaxZoomX:" Classes="left" Grid.Row="1" Grid.Column="0"/>
+                    <TextBox Text="{Binding MaxZoomX, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
+                    <TextBlock Text="MinZoomY:" Classes="left" Grid.Row="2" Grid.Column="0"/>
+                    <TextBox Text="{Binding MinZoomY, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
+                    <TextBlock Text="MaxZoomY:" Classes="left" Grid.Row="3" Grid.Column="0"/>
+                    <TextBox Text="{Binding MaxZoomY, Mode=TwoWay}" Classes="left" Grid.Row="3" Grid.Column="1"/>
+                    <TextBlock Text="MinOffsetY:" Classes="left" Grid.Row="4" Grid.Column="0"/>
+                    <TextBox Text="{Binding MinOffsetY, Mode=TwoWay}" Classes="left" Grid.Row="4" Grid.Column="1"/>
+                    <TextBlock Text="MaxOffsetX:" Classes="left" Grid.Row="5" Grid.Column="0"/>
+                    <TextBox Text="{Binding MaxOffsetX, Mode=TwoWay}" Classes="left" Grid.Row="5" Grid.Column="1"/>
+                    <TextBlock Text="MinOffsetX:" Classes="left" Grid.Row="6" Grid.Column="0"/>
+                    <TextBox Text="{Binding MinOffsetX, Mode=TwoWay}" Classes="left" Grid.Row="6" Grid.Column="1"/>
+                    <TextBlock Text="MaxOffsetY:" Classes="left" Grid.Row="7" Grid.Column="0"/>
+                    <TextBox Text="{Binding MaxOffsetY, Mode=TwoWay}" Classes="left" Grid.Row="7" Grid.Column="1"/>
+                    <TextBlock Text="EnableConstrains:" Classes="left" Grid.Row="8" Grid.Column="0"/>
+                    <CheckBox IsChecked="{Binding EnableConstrains}" Content="" Classes="default" Grid.Row="8" Grid.Column="1"/>
+                </Grid>
+            </ScrollViewer>
+        </TabItem>
+    </TabControl>
+</UserControl>

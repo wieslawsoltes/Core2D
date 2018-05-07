@@ -15,7 +15,10 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Drawing.Text;
 using System.IO;
+
+#if _WINDOWS
 using WPF = System.Windows;
+#endif
 
 namespace Core2D.FileWriter.Emf
 {
@@ -30,6 +33,7 @@ namespace Core2D.FileWriter.Emf
         /// <inheritdoc/>
         string IFileWriter.Extension { get; } = "emf";
 
+#if _WINDOWS
         /// <summary>
         /// 
         /// </summary>
@@ -232,7 +236,7 @@ namespace Core2D.FileWriter.Emf
                 }
             }
         }
-
+#endif
         /// <inheritdoc/>
         void IFileWriter.Save(string path, object item, object options)
         {
@@ -245,7 +249,11 @@ namespace Core2D.FileWriter.Emf
 
             if (item is PageContainer)
             {
+#if _WINDOWS
                 Save(path, item as PageContainer, ic);
+#else
+                throw new NotImplementedException("Not implemented for this platform.");
+#endif
             }
             else if (item is DocumentContainer)
             {
