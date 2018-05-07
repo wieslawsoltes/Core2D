@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Reflection;
 using Autofac;
@@ -13,6 +14,7 @@ using Core2D.Avalonia.Modules;
 using Core2D.Avalonia.Views;
 using Core2D.Editor;
 using Core2D.Editor.Designer;
+using Core2D.Editor.Views;
 using Core2D.Interfaces;
 
 namespace Core2D.Avalonia
@@ -118,6 +120,52 @@ namespace Core2D.Avalonia
                 {
                     editor.OnLoadRecent(path);
                 }
+
+                editor.LeftPanelTop = new ViewsPanel
+                {
+                    Views = new[]
+                    {
+                        editor.Views.FirstOrDefault(v => v.Title == "Project"),
+                        editor.Views.FirstOrDefault(v => v.Title == "Options"),
+                        editor.Views.FirstOrDefault(v => v.Title == "Images")
+                    }.ToImmutableArray(),
+                    CurrentView = editor.Views.FirstOrDefault(v => v.Title == "Project")
+                };
+
+                editor.LeftPanelBottom = new ViewsPanel
+                {
+                    Views = new[]
+                    {
+                        editor.Views.FirstOrDefault(v => v.Title == "Groups"),
+                        editor.Views.FirstOrDefault(v => v.Title == "Databases")
+                    }.ToImmutableArray(),
+                    CurrentView = editor.Views.FirstOrDefault(v => v.Title == "Groups")
+                };
+
+                editor.RightPanelTop = new ViewsPanel
+                {
+                    Views = new[]
+                    {
+                        editor.Views.FirstOrDefault(v => v.Title == "Styles"),
+                        editor.Views.FirstOrDefault(v => v.Title == "Templates"),
+                        editor.Views.FirstOrDefault(v => v.Title == "Container"),
+                        editor.Views.FirstOrDefault(v => v.Title == "Zoom")
+                    }.ToImmutableArray(),
+                    CurrentView = editor.Views.FirstOrDefault(v => v.Title == "Styles")
+                };
+
+                editor.RightPanelBottom = new ViewsPanel
+                {
+                    Views = new[]
+                    {
+                        editor.Views.FirstOrDefault(v => v.Title == "Tools"),
+                        editor.Views.FirstOrDefault(v => v.Title == "Shape"),
+                        editor.Views.FirstOrDefault(v => v.Title == "Data"),
+                        editor.Views.FirstOrDefault(v => v.Title == "Style"),
+                        editor.Views.FirstOrDefault(v => v.Title == "Template")
+                    }.ToImmutableArray(),
+                    CurrentView = editor.Views.FirstOrDefault(v => v.Title == "Tools")
+                };
 
                 editor.CurrentView = editor.Views.FirstOrDefault(v => v.Title == "Dashboard");
                 editor.CurrentTool = editor.Tools.FirstOrDefault(t => t.Title == "Selection");

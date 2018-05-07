@@ -15,16 +15,20 @@
              xmlns:SettingsPath="clr-namespace:Core2D.Editor.Tools.Path.Settings;assembly=Core2D.Editor"
              xmlns:Shape="clr-namespace:Core2D.Shape;assembly=Core2D" 
              xmlns:Shapes="clr-namespace:Core2D.Shapes;assembly=Core2D" 
-             xmlns:Style="clr-namespace:Core2D.Style;assembly=Core2D" 
+             xmlns:Style="clr-namespace:Core2D.Style;assembly=Core2D"
+             xmlns:Views="clr-namespace:Core2D.Editor.Views;assembly=Core2D.Editor"
              xmlns:data="clr-namespace:Core2D.Avalonia.Views.Data;assembly=Core2D.Avalonia"
+             xmlns:editor="clr-namespace:Core2D.Avalonia.Views.Editor;assembly=Core2D.Avalonia"
              xmlns:path="clr-namespace:Core2D.Avalonia.Views.Path;assembly=Core2D.Avalonia"
              xmlns:containers="clr-namespace:Core2D.Avalonia.Views.Containers;assembly=Core2D.Avalonia"
+             xmlns:settings="clr-namespace:Core2D.Avalonia.Views.Settings;assembly=Core2D.Avalonia"  
              xmlns:renderer="clr-namespace:Core2D.Avalonia.Views.Renderer;assembly=Core2D.Avalonia"
              xmlns:settingsTools="clr-namespace:Core2D.Avalonia.Views.Settings.Tools;assembly=Core2D.Avalonia"
              xmlns:settingsPath="clr-namespace:Core2D.Avalonia.Views.Settings.Tools.Path;assembly=Core2D.Avalonia"
              xmlns:shapes="clr-namespace:Core2D.Avalonia.Views.Shapes;assembly=Core2D.Avalonia"
              xmlns:state="clr-namespace:Core2D.Avalonia.Views.State;assembly=Core2D.Avalonia"
-             xmlns:style="clr-namespace:Core2D.Avalonia.Views.Style;assembly=Core2D.Avalonia">
+             xmlns:style="clr-namespace:Core2D.Avalonia.Views.Style;assembly=Core2D.Avalonia"
+             xmlns:views="clr-namespace:Core2D.Avalonia.Views;assembly=Core2D.Avalonia">
     <Application.Styles>
         <!-- Theme -->
         <StyleInclude Source="resm:Avalonia.Themes.Default.DefaultTheme.xaml?assembly=Avalonia.Themes.Default"/>
@@ -740,6 +744,93 @@
         </DataTemplate>
         <DataTemplate DataType="Containers:LayerContainer">
             <containers:LayerControl/>
+        </DataTemplate>
+        <!-- Views: MainControl -->
+        <DataTemplate DataType="Views:DashboardView">
+            <Grid RowDefinitions="Auto,*">
+                <views:DashboardMenuControl Grid.Row="0" DataContext="{Binding Context}"/>
+                <views:DashboardControl Grid.Row="1" DataContext="{Binding Context}"/>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate DataType="Views:EditorView">
+            <Grid RowDefinitions="Auto,*">
+                <views:EditorMenuControl Grid.Row="0" DataContext="{Binding Context}"/>
+                <views:EditorControl Grid.Row="1" DataContext="{Binding Context}"/>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate DataType="Views:BrowserView">
+            <Grid RowDefinitions="Auto,*">
+                <views:BrowserMenuControl Grid.Row="0" DataContext="{Binding Context}"/>
+                <views:BrowserControl Grid.Row="1" DataContext="{Binding Context}"/>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate DataType="Views:DocumentView">
+            <Grid RowDefinitions="Auto,*">
+                <views:DocumentMenuControl Grid.Row="0" DataContext="{Binding Context}"/>
+                <views:DocumentControl Grid.Row="1" DataContext="{Binding Context}"/>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate DataType="Views:AboutView">
+            <Grid RowDefinitions="Auto,*">
+                <views:AboutMenuControl Grid.Row="0" DataContext="{Binding Context}"/>
+                <views:AboutControl Grid.Row="1" DataContext="{Binding Context}"/>
+            </Grid>
+        </DataTemplate>
+        <!-- Views: LeftPanelTop -->
+        <DataTemplate DataType="Views:ProjectView">
+            <containers:ProjectControl DataContext="{Binding Context.Project}"/>
+        </DataTemplate>
+        <DataTemplate DataType="Views:OptionsView">
+            <ContentControl Content="{Binding Context.Project.Options}"/>
+        </DataTemplate>
+        <DataTemplate DataType="Views:ImagesView">
+            <containers:ImagesControl DataContext="{Binding Context.Project}"/>
+        </DataTemplate>
+        <!-- Views: LeftPanelBottom -->
+        <DataTemplate DataType="Views:GroupsView">
+            <containers:GroupsControl DataContext="{Binding Context.Project.CurrentGroupLibrary}"/>
+        </DataTemplate>
+        <DataTemplate DataType="Views:DatabasesView">
+            <containers:DatabasesControl DataContext="{Binding Context.Project}"/>
+        </DataTemplate>
+        <!-- Views: RightPanelTop -->
+        <DataTemplate DataType="Views:StylesView">
+            <containers:StylesControl DataContext="{Binding Context.Project.CurrentStyleLibrary}"/>
+        </DataTemplate>
+        <DataTemplate DataType="Views:TemplatesView">
+            <containers:TemplatesControl DataContext="{Binding Context.Project}"/>
+        </DataTemplate>
+        <DataTemplate DataType="Views:ContainerView">
+            <ScrollViewer>
+                <ContentControl Content="{Binding Context.Project.CurrentContainer}"/>
+            </ScrollViewer>
+        </DataTemplate>
+        <DataTemplate DataType="Views:ZoomView">
+            <containers:ZoomControl/>
+        </DataTemplate>
+        <!-- Views: RightPanelBottom -->
+        <DataTemplate DataType="Views:ToolsView">
+            <settings:ToolsControl DataContext="{Binding Context}"/>
+        </DataTemplate>
+        <DataTemplate DataType="Views:ShapeView">
+            <ScrollViewer>
+                <ContentControl Content="{Binding Context.Project.CurrentContainer.CurrentShape}"/>
+            </ScrollViewer>
+        </DataTemplate>
+        <DataTemplate DataType="Views:DataView">
+            <ScrollViewer>
+                <data:DataControl DataContext="{Binding Context.Renderers[0].State.SelectedShape.Data}"/>
+            </ScrollViewer>
+        </DataTemplate>
+        <DataTemplate DataType="Views:StyleView">
+            <ScrollViewer>
+                <style:ShapeStyleControl DataContext="{Binding Context.Project.CurrentStyleLibrary.Selected}"/>
+            </ScrollViewer>
+        </DataTemplate>
+        <DataTemplate DataType="Views:TemplateView">
+            <ScrollViewer>
+                <ContentControl Content="{Binding Context.Project.CurrentTemplate}"/>
+            </ScrollViewer>
         </DataTemplate>
     </Application.DataTemplates>
 </Application>

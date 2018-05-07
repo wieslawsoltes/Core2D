@@ -11,6 +11,7 @@ using Core2D.Editor.Views.Interfaces;
 using Core2D.Interfaces;
 using Core2D.Containers;
 using Core2D.Renderer;
+using Core2D.Editor.Views;
 
 namespace Core2D.Editor
 {
@@ -29,6 +30,10 @@ namespace Core2D.Editor
         private PathToolBase _currentPathTool;
         private ImmutableArray<RecentFile> _recentProjects;
         private RecentFile _currentRecentProject;
+        private ViewsPanel _leftPanelTop;
+        private ViewsPanel _leftPanelBottom;
+        private ViewsPanel _rightPanelTop;
+        private ViewsPanel _rightPanelBottom;
         private IView _currentView;
         private AboutInfo _aboutInfo;
         private readonly Lazy<ImmutableArray<ToolBase>> _tools;
@@ -130,6 +135,42 @@ namespace Core2D.Editor
         {
             get => _currentRecentProject;
             set => Update(ref _currentRecentProject, value);
+        }
+
+        /// <summary>
+        /// Gets or sets current left panel top.
+        /// </summary>
+        public ViewsPanel LeftPanelTop
+        {
+            get => _leftPanelTop;
+            set => Update(ref _leftPanelTop, value);
+        }
+
+        /// <summary>
+        /// Gets or sets current left panel bottom.
+        /// </summary>
+        public ViewsPanel LeftPanelBottom
+        {
+            get => _leftPanelBottom;
+            set => Update(ref _leftPanelBottom, value);
+        }
+
+        /// <summary>
+        /// Gets or sets current right panel top.
+        /// </summary>
+        public ViewsPanel RightPanelTop
+        {
+            get => _rightPanelTop;
+            set => Update(ref _rightPanelTop, value);
+        }
+
+        /// <summary>
+        /// Gets or sets current right panel bottom.
+        /// </summary>
+        public ViewsPanel RightPanelBottom
+        {
+            get => _rightPanelBottom;
+            set => Update(ref _rightPanelBottom, value);
         }
 
         /// <summary>

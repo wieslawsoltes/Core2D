@@ -3657,6 +3657,64 @@ namespace Core2D.Editor
         }
 
         /// <summary>
+        /// Move views in the panel.
+        /// </summary>
+        /// <param name="panel">The views panel.</param>
+        /// <param name="sourceIndex">The source view index.</param>
+        /// <param name="targetIndex">The target view index.</param>
+        public void MoveView(ViewsPanel panel, int sourceIndex, int targetIndex)
+        {
+            if (sourceIndex < targetIndex)
+            {
+                var item = panel.Views[sourceIndex];
+                var builder = panel.Views.ToBuilder();
+                builder.Insert(targetIndex + 1, item);
+                builder.RemoveAt(sourceIndex);
+
+                var previous = panel.Views;
+                var next = builder.ToImmutable();
+                Project?.History?.Snapshot(previous, next, (p) => panel.Views = p);
+                panel.Views = next;
+            }
+            else
+            {
+                int removeIndex = sourceIndex + 1;
+                if (panel.Views.Length + 1 > removeIndex)
+                {
+                    var item1 = panel.Views[sourceIndex];
+                    var builder = panel.Views.ToBuilder();
+                    builder.Insert(targetIndex, item1);
+                    builder.RemoveAt(removeIndex);
+
+                    var previous = panel.Views;
+                    var next = builder.ToImmutable();
+                    Project?.History?.Snapshot(previous, next, (p) => panel.Views = p);
+                    panel.Views = next;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Swap views in the panel.
+        /// </summary>
+        /// <param name="panel">The views panel.</param>
+        /// <param name="sourceIndex">The source view index.</param>
+        /// <param name="targetIndex">The target view index.</param>
+        public void SwapView(ViewsPanel panel, int sourceIndex, int targetIndex)
+        {
+            var item1 = panel.Views[sourceIndex];
+            var item2 = panel.Views[targetIndex];
+            var builder = panel.Views.ToBuilder();
+            builder[targetIndex] = item1;
+            builder[sourceIndex] = item2;
+
+            var previous = panel.Views;
+            var next = builder.ToImmutable();
+            Project?.History?.Snapshot(previous, next, (p) => panel.Views = p);
+            panel.Views = next;
+        }
+
+        /// <summary>
         /// Change current view.
         /// </summary>
         /// <param name="view">The view instance.</param>

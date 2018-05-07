@@ -7,8 +7,6 @@
              xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"
              xmlns:views="clr-namespace:Core2D.Avalonia.Views;assembly=Core2D.Avalonia"
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
-             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor"
-             xmlns:Views="clr-namespace:Core2D.Editor.Views;assembly=Core2D.Editor"
              UseLayoutRounding="True"
              Design.DataContext="{x:Static Designer:DesignerContext.Editor}"
              Design.Width="1200" Design.Height="580">
@@ -38,38 +36,5 @@
         <KeyBinding Command="{Binding Platform.OnDocumentViewer}" Gesture="Ctrl+D"/>
         <KeyBinding Command="{Binding Platform.OnScriptEditor}" Gesture="Ctrl+R"/>
     </UserControl.KeyBindings>
-    <Carousel Items="{Binding Views}" SelectedItem="{Binding CurrentView, Mode=TwoWay}" IsVirtualized="False">
-        <Carousel.DataTemplates>
-            <DataTemplate DataType="Views:DashboardView">
-                <Grid RowDefinitions="Auto,*">
-                    <views:DashboardMenuControl Grid.Row="0" DataContext="{Binding Context}"/>
-                    <views:DashboardControl Grid.Row="1" DataContext="{Binding Context}"/>
-                </Grid>
-            </DataTemplate>
-            <DataTemplate DataType="Views:EditorView">
-                <Grid RowDefinitions="Auto,*">
-                    <views:EditorMenuControl Grid.Row="0" DataContext="{Binding Context}"/>
-                    <views:EditorControl Grid.Row="1" DataContext="{Binding Context}"/>
-                </Grid>
-            </DataTemplate>
-            <DataTemplate DataType="Views:BrowserView">
-                <Grid RowDefinitions="Auto,*">
-                    <views:BrowserMenuControl Grid.Row="0" DataContext="{Binding Context}"/>
-                    <views:BrowserControl Grid.Row="1" DataContext="{Binding Context}"/>
-                </Grid>
-            </DataTemplate>
-            <DataTemplate DataType="Views:DocumentView">
-                <Grid RowDefinitions="Auto,*">
-                    <views:DocumentMenuControl Grid.Row="0" DataContext="{Binding Context}"/>
-                    <views:DocumentControl Grid.Row="1" DataContext="{Binding Context}"/>
-                </Grid>
-            </DataTemplate>
-            <DataTemplate DataType="Views:AboutView">
-                <Grid RowDefinitions="Auto,*">
-                    <views:AboutMenuControl Grid.Row="0" DataContext="{Binding Context}"/>
-                    <views:AboutControl Grid.Row="1" DataContext="{Binding Context}"/>
-                </Grid>
-            </DataTemplate>
-        </Carousel.DataTemplates>
-    </Carousel>
+    <Carousel Items="{Binding Views}" SelectedItem="{Binding CurrentView, Mode=TwoWay}" IsVirtualized="False"/>
 </UserControl>

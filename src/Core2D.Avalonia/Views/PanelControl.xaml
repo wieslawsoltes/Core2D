@@ -1,0 +1,44 @@
+﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
+<!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
+<UserControl x:Class="Core2D.Avalonia.Views.PanelControl"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+             xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+             xmlns:behaviors="clr-namespace:Core2D.Avalonia.Behaviors;assembly=Core2D.Avalonia"
+             xmlns:local="clr-namespace:Core2D.Avalonia;assembly=Core2D.Avalonia"
+             xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"
+             xmlns:Interfaces="clr-namespace:Core2D.Editor.Views.Interfaces;assembly=Core2D.Editor"
+             Design.Width="1200" Design.Height="540">
+    <DockPanel>
+        <TabStrip Name="views" Items="{Binding Views}" SelectedItem="{Binding CurrentView, Mode=TwoWay}" Focusable="false" DockPanel.Dock="Bottom">
+            <i:Interaction.Behaviors>
+                <behaviors:DropBehavior Editor="{Binding $parent[Window].DataContext}"/>
+            </i:Interaction.Behaviors>
+            <TabStrip.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel/>
+                </ItemsPanelTemplate>
+            </TabStrip.ItemsPanel>
+            <TabStrip.Styles>
+                <Style Selector="TabStripItem">
+                    <Setter Property="Margin" Value="0 0 0 -1"/>
+                    <Setter Property="Padding" Value="4 0 4 0"/>
+                    <Setter Property="FontSize" Value="12"/>
+                    <Setter Property="Height" Value="20"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                </Style>
+            </TabStrip.Styles>
+            <TabStrip.DataTemplates>
+                <DataTemplate DataType="Interfaces:IView">
+                    <TextBlock Text="{Binding Title}" Margin="2">
+                        <i:Interaction.Behaviors>
+                            <behaviors:DragBehavior/>
+                        </i:Interaction.Behaviors>
+                    </TextBlock>
+                </DataTemplate>
+            </TabStrip.DataTemplates>
+        </TabStrip>
+        <Carousel Items="{Binding Views}" SelectedItem="{Binding CurrentView, Mode=TwoWay}" IsVirtualized="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="2"/>
+    </DockPanel>
+</UserControl>

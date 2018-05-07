@@ -12,14 +12,6 @@
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor"
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
              xmlns:paz="clr-namespace:Avalonia.Controls.PanAndZoom;assembly=Avalonia.Controls.PanAndZoom"
-             xmlns:data="clr-namespace:Core2D.Avalonia.Views.Data;assembly=Core2D.Avalonia"
-             xmlns:path="clr-namespace:Core2D.Avalonia.Views.Path;assembly=Core2D.Avalonia"
-             xmlns:containers="clr-namespace:Core2D.Avalonia.Views.Containers;assembly=Core2D.Avalonia"
-             xmlns:settings="clr-namespace:Core2D.Avalonia.Views.Settings;assembly=Core2D.Avalonia"
-             xmlns:shapes="clr-namespace:Core2D.Avalonia.Views.Shapes;assembly=Core2D.Avalonia"
-             xmlns:state="clr-namespace:Core2D.Avalonia.Views.State;assembly=Core2D.Avalonia"
-             xmlns:style="clr-namespace:Core2D.Avalonia.Views.Style;assembly=Core2D.Avalonia"
-             xmlns:editor="clr-namespace:Core2D.Avalonia.Views.Editor;assembly=Core2D.Avalonia"
              xmlns:views="clr-namespace:Core2D.Avalonia.Views;assembly=Core2D.Avalonia"
              Design.DataContext="{x:Static Designer:DesignerContext.Editor}"
              Design.Width="1200" Design.Height="540">
@@ -40,77 +32,21 @@
         </Grid>
         <Grid Name="leftPanel" RowDefinitions="50*,Auto,50*" Grid.Column="0" Grid.Row="0">
             <Border Name="leftPanelTop" Classes="leftTop" Grid.Row="0">
-                <TabControl Classes="bottom">
-                    <TabItem Header="Project" Classes="property">
-                        <containers:ProjectControl DataContext="{Binding Project}"/>
-                    </TabItem>
-                    <TabItem Header="Options" Classes="property">
-                        <ContentControl Content="{Binding Project.Options}"/>
-                    </TabItem>
-                    <TabItem Header="Images" Classes="property">
-                        <containers:ImagesControl DataContext="{Binding Project}"/>
-                    </TabItem>
-                </TabControl>
+                <views:PanelControl DataContext="{Binding LeftPanelTop}"/>
             </Border>
             <GridSplitter Name="leftPanelHSplitter" Classes="horizontal" Grid.Row="1" Height="7"/>
             <Border Name="leftPanelBottom" Classes="leftBottom" Grid.Row="2">
-                <TabControl Classes="bottom">
-                    <TabItem Header="Groups" Classes="property">
-                        <containers:GroupsControl DataContext="{Binding Project.CurrentGroupLibrary}"/>
-                    </TabItem>
-                    <TabItem Header="Databases" Classes="property">
-                        <containers:DatabasesControl DataContext="{Binding Project}"/>
-                    </TabItem>
-                </TabControl>
+                <views:PanelControl DataContext="{Binding LeftPanelBottom}"/>
             </Border>
         </Grid>
         <GridSplitter Name="rightPanelVSplitter" Classes="vertical" Grid.Column="3" Grid.Row="0" Width="6"/>
         <Grid Name="rightPanel" RowDefinitions="50*,Auto,50*" Grid.Column="4" Grid.Row="0">
             <Border Name="rightPanelTop" Classes="rightTop" Grid.Row="0">
-                <TabControl Classes="bottom">
-                    <TabItem Header="Styles" Classes="property">
-                        <containers:StylesControl DataContext="{Binding Project.CurrentStyleLibrary}"/>
-                    </TabItem>
-                    <TabItem Header="Templates" Classes="property">
-                        <containers:TemplatesControl DataContext="{Binding Project}"/>
-                    </TabItem>
-                    <TabItem Header="Container" Classes="property">
-                        <ScrollViewer>
-                            <ContentControl Content="{Binding Project.CurrentContainer}"/>
-                        </ScrollViewer>
-                    </TabItem>
-                    <TabItem Header="Zoom" Classes="property" DataContext="{Binding #zoomBorder}">
-                        <containers:ZoomControl/>
-                    </TabItem>
-                </TabControl>
+                <views:PanelControl DataContext="{Binding RightPanelTop}"/>
             </Border>
             <GridSplitter Name="rightPanelHSplitter" Classes="horizontal" Grid.Row="1" Height="7"/>
             <Border Name="rightPanelBottom" Classes="rightBottom" Grid.Row="2">
-                <TabControl Classes="bottom">
-                    <TabItem Header="Tools" Classes="property">
-                        <settings:ToolsControl DataContext="{Binding}"/>
-                    </TabItem>
-                    <TabItem Header="Shape" Classes="property">
-                        <ScrollViewer>
-                            <ContentControl Content="{Binding Project.CurrentContainer.CurrentShape}"/>
-                        </ScrollViewer>
-                    </TabItem>
-                    <TabItem Header="Data" Classes="property">
-                        <ScrollViewer>
-                            <data:DataControl DataContext="{Binding Renderers[0].State.SelectedShape.Data}"/>
-                        </ScrollViewer>
-                    </TabItem>
-                    <TabItem Header="Style" Classes="property">
-                        <ScrollViewer>
-                            <style:ShapeStyleControl DataContext="{Binding Project.CurrentStyleLibrary.Selected}"/>
-                        </ScrollViewer>
-                    </TabItem>
-                    <TabItem Header="Template" Classes="property">
-                        <ScrollViewer>
-                            <ContentControl Content="{Binding Project.CurrentTemplate}"/>
-                        </ScrollViewer>
-                    </TabItem>
-                </TabControl>
+                <views:PanelControl DataContext="{Binding RightPanelBottom}"/>
             </Border>
         </Grid>
         <Grid ColumnDefinitions="Auto,*" Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="1" Margin="0,2,0,0">

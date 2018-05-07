@@ -12,13 +12,14 @@ using Avalonia.Xaml.Interactivity;
 using Core2D.Containers;
 using Core2D.Data;
 using Core2D.Editor;
+using Core2D.Editor.Views;
 using Core2D.Shape;
 using Core2D.Shapes;
 using Core2D.Style;
 
 namespace Core2D.Avalonia.Behaviors
 {
-    public enum ListBoxDropMode
+    public enum DropMode
     {
         Move,
         Swap
@@ -29,8 +30,8 @@ namespace Core2D.Avalonia.Behaviors
         public static readonly AvaloniaProperty EditorProperty =
             AvaloniaProperty.Register<DropBehavior, ProjectEditor>(nameof(Editor));
 
-        public static readonly AvaloniaProperty ListBoxDropModeProperty =
-            AvaloniaProperty.Register<DropBehavior, ListBoxDropMode>(nameof(ListBoxDropMode));
+        public static readonly AvaloniaProperty DropModeProperty =
+            AvaloniaProperty.Register<DropBehavior, DropMode>(nameof(Behaviors.DropMode));
 
         public ProjectEditor Editor
         {
@@ -38,10 +39,10 @@ namespace Core2D.Avalonia.Behaviors
             set => SetValue(EditorProperty, value);
         }
 
-        public ListBoxDropMode ListBoxDropMode
+        public DropMode DropMode
         {
-            get => (ListBoxDropMode)GetValue(ListBoxDropModeProperty);
-            set => SetValue(ListBoxDropModeProperty, value);
+            get => (DropMode)GetValue(DropModeProperty);
+            set => SetValue(DropModeProperty, value);
         }
 
         protected override void OnAttached()
@@ -127,13 +128,13 @@ namespace Core2D.Avalonia.Behaviors
                             {
                                 case Library<ShapeStyle> library:
                                     {
-                                        switch (ListBoxDropMode)
+                                        switch (DropMode)
                                         {
-                                            case ListBoxDropMode.Move:
+                                            case DropMode.Move:
                                                 Editor?.MoveItem(library, sourceIndex, targetIndex);
                                                 e.Handled = true;
                                                 return;
-                                            case ListBoxDropMode.Swap:
+                                            case DropMode.Swap:
                                                 Editor?.SwapItem(library, sourceIndex, targetIndex);
                                                 e.Handled = true;
                                                 return;
@@ -142,13 +143,13 @@ namespace Core2D.Avalonia.Behaviors
                                     break;
                                 case Library<GroupShape> library:
                                     {
-                                        switch (ListBoxDropMode)
+                                        switch (DropMode)
                                         {
-                                            case ListBoxDropMode.Move:
+                                            case DropMode.Move:
                                                 Editor?.MoveItem(library, sourceIndex, targetIndex);
                                                 e.Handled = true;
                                                 return;
-                                            case ListBoxDropMode.Swap:
+                                            case DropMode.Swap:
                                                 Editor?.SwapItem(library, sourceIndex, targetIndex);
                                                 e.Handled = true;
                                                 return;
@@ -286,8 +287,35 @@ namespace Core2D.Avalonia.Behaviors
                                     }
                                     break;
                             }
+                        }
+                    }
+                    break;
+                case TabStrip strip:
+                    {
+                        if (e.Data.Get(CustomDataFormats.Parent) is TabStripItem source &&
+                            (e.Source as IControl).Parent is TabStripItem target)
+                        {
+                            int sourceIndex = strip.ItemContainerGenerator.IndexFromContainer(source);
+                            int targetIndex = strip.ItemContainerGenerator.IndexFromContainer(target);
 
-                            // TODO:
+                            Console.WriteLine($"sourceIndex : {sourceIndex}");
+                            Console.WriteLine($"targetIndex : {targetIndex}");
+                            Console.WriteLine($"DataContext type : {strip.DataContext.GetType()}");
+
+                            if (strip.DataContext is ViewsPanel panel)
+                            {
+                                switch (DropMode)
+                                {
+                                    case DropMode.Move:
+                                        Editor?.MoveView(panel, sourceIndex, targetIndex);
+                                        e.Handled = true;
+                                        return;
+                                    case DropMode.Swap:
+                                        Editor?.SwapView(panel, sourceIndex, targetIndex);
+                                        e.Handled = true;
+                                        return;
+                                }
+                            }
                         }
                     }
                     break;
