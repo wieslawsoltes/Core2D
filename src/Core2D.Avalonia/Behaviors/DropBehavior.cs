@@ -291,33 +291,6 @@ namespace Core2D.Avalonia.Behaviors
                         }
                     }
                     break;
-                case TabControl tab:
-                    {
-                        if (e.Data.Get(CustomDataFormats.Parent) is TabStripItem source &&
-                            (e.Source as IControl).Parent is TabStripItem target)
-                        {
-                            if (tab.TabStrip is TabStrip strip)
-                            {
-                                int sourceIndex = strip.ItemContainerGenerator.IndexFromContainer(source);
-                                int targetIndex = strip.ItemContainerGenerator.IndexFromContainer(target);
-
-                                var items = strip.Items as AvaloniaList<object>;
-
-                                var sourceItem = items[sourceIndex];
-                                var targetItem = items[targetIndex];
-
-                                items[sourceIndex] = targetItem;
-                                items[targetIndex] = sourceItem;
-
-                                //strip.InvalidateVisual();
-
-                                Console.WriteLine($"sourceIndex : {sourceIndex}");
-                                Console.WriteLine($"targetIndex : {targetIndex}");
-                                Console.WriteLine($"DataContext type : {strip.DataContext.GetType()}");
-                            }
-                        }
-                    }
-                    break;
             };
 
             if (e.Data.Contains(DataFormats.Text))

@@ -41,37 +41,13 @@
         <Grid Name="leftPanel" RowDefinitions="50*,Auto,50*" Grid.Column="0" Grid.Row="0">
             <Border Name="leftPanelTop" Classes="leftTop" Grid.Row="0">
                 <TabControl Classes="bottom">
-                    <i:Interaction.Behaviors>
-                        <behaviors:DropBehavior Editor="{Binding}"/>
-                    </i:Interaction.Behaviors>
-                    <TabItem Classes="property">
-                        <TabItem.Header>
-                            <TextBlock Text="Project" Classes="drag">
-                                <i:Interaction.Behaviors>
-                                    <behaviors:DragBehavior/>
-                                </i:Interaction.Behaviors>
-                            </TextBlock>
-                        </TabItem.Header>
+                    <TabItem Header="Project" Classes="property">
                         <containers:ProjectControl DataContext="{Binding Project}"/>
                     </TabItem>
-                    <TabItem Classes="property">
-                        <TabItem.Header>
-                            <TextBlock Text="Options" Classes="drag">
-                                <i:Interaction.Behaviors>
-                                    <behaviors:DragBehavior/>
-                                </i:Interaction.Behaviors>
-                            </TextBlock>
-                        </TabItem.Header>
+                    <TabItem Header="Options" Classes="property">
                         <ContentControl Content="{Binding Project.Options}"/>
                     </TabItem>
-                    <TabItem Classes="property">
-                        <TabItem.Header>
-                            <TextBlock Text="Images" Classes="drag">
-                                <i:Interaction.Behaviors>
-                                    <behaviors:DragBehavior/>
-                                </i:Interaction.Behaviors>
-                            </TextBlock>
-                        </TabItem.Header>
+                    <TabItem Header="Images" Classes="property">
                         <containers:ImagesControl DataContext="{Binding Project}"/>
                     </TabItem>
                 </TabControl>
