@@ -113,6 +113,7 @@ namespace Core2D.Avalonia.Behaviors
                                     {
                                         if (e.DragEffects == DragDropEffects.Copy)
                                         {
+                                            // TODO: Clone item.
                                             e.Handled = true;
                                             return;
                                         }
@@ -134,6 +135,7 @@ namespace Core2D.Avalonia.Behaviors
                                     {
                                         if (e.DragEffects == DragDropEffects.Copy)
                                         {
+                                            // TODO: Clone item.
                                             e.Handled = true;
                                             return;
                                         }
@@ -295,6 +297,7 @@ namespace Core2D.Avalonia.Behaviors
                                 {
                                     if (e.DragEffects == DragDropEffects.Copy)
                                     {
+                                        // TODO: Clone item.
                                         e.Handled = true;
                                         return;
                                     }
@@ -326,6 +329,7 @@ namespace Core2D.Avalonia.Behaviors
 
                                 if (e.DragEffects == DragDropEffects.Copy)
                                 {
+                                    // TODO: Clone item.
                                     e.Handled = true;
                                     return;
                                 }
