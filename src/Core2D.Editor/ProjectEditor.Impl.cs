@@ -3723,21 +3723,21 @@ namespace Core2D.Editor
         /// <param name="targetIndex">The target view index.</param>
         public void MoveView(ViewsPanel sourcePanel, ViewsPanel targetPanel, int sourceIndex, int targetIndex)
         {
-                var item = sourcePanel.Views[sourceIndex];
-                var sourceBuilder = sourcePanel.Views.ToBuilder();
-                var targetBuilder = targetPanel.Views.ToBuilder();
-                sourceBuilder.RemoveAt(sourceIndex);
-                targetBuilder.Insert(targetIndex, item);
+            var item = sourcePanel.Views[sourceIndex];
+            var sourceBuilder = sourcePanel.Views.ToBuilder();
+            var targetBuilder = targetPanel.Views.ToBuilder();
+            sourceBuilder.RemoveAt(sourceIndex);
+            targetBuilder.Insert(targetIndex, item);
 
-                var previousSource = sourcePanel.Views;
-                var nextSource = sourceBuilder.ToImmutable();
-                Project?.History?.Snapshot(previousSource, nextSource, (p) => sourcePanel.Views = p);
-                sourcePanel.Views = nextSource;
+            var previousSource = sourcePanel.Views;
+            var nextSource = sourceBuilder.ToImmutable();
+            Project?.History?.Snapshot(previousSource, nextSource, (p) => sourcePanel.Views = p);
+            sourcePanel.Views = nextSource;
 
-                var previousTarget = targetPanel.Views;
-                var nextTarget = targetBuilder.ToImmutable();
-                Project?.History?.Snapshot(previousTarget, nextSource, (p) => targetPanel.Views = p);
-                targetPanel.Views = nextTarget;
+            var previousTarget = targetPanel.Views;
+            var nextTarget = targetBuilder.ToImmutable();
+            Project?.History?.Snapshot(previousTarget, nextSource, (p) => targetPanel.Views = p);
+            targetPanel.Views = nextTarget;
         }
 
         /// <summary>
