@@ -1,0 +1,57 @@
+﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
+<!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
+<UserControl x:Class="Core2D.Avalonia.Views.StatusControl"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+             xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+             xmlns:behaviors="clr-namespace:Core2D.Avalonia.Behaviors;assembly=Core2D.Avalonia"
+             xmlns:local="clr-namespace:Core2D.Avalonia;assembly=Core2D.Avalonia"
+             xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"
+             xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
+             Design.DataContext="{x:Static Designer:DesignerContext.Editor}"
+             Design.Width="1200" Design.Height="540">
+    <Grid ColumnDefinitions="Auto,*">
+        <TextBlock Classes="stats" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <TextBlock.Text>
+                <MultiBinding Mode="OneWay" Converter="{x:Static converters:EditorToStatsMultiConverter.Instance}">
+                    <Binding Path="Project.Documents.Length"/>
+                    <Binding Path="Project.CurrentDocument.Pages.Length"/>
+                    <Binding Path="Project.CurrentContainer.Layers.Length"/>
+                    <Binding Path="Project.CurrentContainer.CurrentLayer.Shapes.Length"/>
+                    <Binding Path="Renderers[0].State.SelectedShape" Converter="{x:Static converters:ObjectToObjectConverter.Instance}"/>
+                    <Binding Path="Renderers[0].State.SelectedShapes" Converter="{x:Static converters:ObjectToObjectConverter.Instance}"/>
+                </MultiBinding>
+            </TextBlock.Text>
+        </TextBlock>
+        <WrapPanel Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center">
+            <DropDown Classes="tool" Items="{Binding Tools}" SelectedItem="{Binding CurrentTool, Mode=TwoWay}">
+                <DropDown.DataTemplates>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Title}"/>
+                    </DataTemplate>
+                </DropDown.DataTemplates>
+            </DropDown>
+            <DropDown Classes="tool" Items="{Binding PathTools}" SelectedItem="{Binding CurrentPathTool, Mode=TwoWay}">
+                <DropDown.DataTemplates>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Title}"/>
+                    </DataTemplate>
+                </DropDown.DataTemplates>
+                <DropDown.IsVisible>
+                    <MultiBinding Mode="OneWay" Converter="{x:Static converters:ObjectEqualityMultiConverter.Instance}">
+                        <Binding Path="CurrentTool.Title"/>
+                        <Binding Source="Path"/>
+                    </MultiBinding>
+                </DropDown.IsVisible>
+            </DropDown>
+            <CheckBox Classes="options" Content="Stroked" IsChecked="{Binding Project.Options.DefaultIsStroked, Mode=TwoWay}"/>
+            <CheckBox Classes="options" Content="Filled" IsChecked="{Binding Project.Options.DefaultIsFilled, Mode=TwoWay}"/>
+            <CheckBox Classes="options" Content="Closed" IsChecked="{Binding Project.Options.DefaultIsClosed, Mode=TwoWay}"/>
+            <CheckBox Classes="options" Content="SmoothJoin" IsChecked="{Binding Project.Options.DefaultIsSmoothJoin, Mode=TwoWay}"/>
+            <CheckBox Classes="options" Content="Snap" IsChecked="{Binding Project.Options.SnapToGrid, Mode=TwoWay}"/>
+            <CheckBox Classes="options" Content="Connect" IsChecked="{Binding Project.Options.TryToConnect, Mode=TwoWay}"/>
+            <CheckBox Classes="options" Content="CloneStyle" IsChecked="{Binding Project.Options.CloneStyle, Mode=TwoWay}"/>
+        </WrapPanel>
+    </Grid>
+</UserControl>

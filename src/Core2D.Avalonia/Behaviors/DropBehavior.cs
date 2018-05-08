@@ -291,7 +291,7 @@ namespace Core2D.Avalonia.Behaviors
                 case TabStrip strip:
                     {
                         if (e.Data.Get(CustomDataFormats.Parent) is TabStripItem source &&
-                            (e.Source as IControl).Parent is TabStripItem target)
+                            (e.Source as IControl).Parent.Parent is TabStripItem target)
                         {
                             if (source.Parent == target.Parent)
                             {

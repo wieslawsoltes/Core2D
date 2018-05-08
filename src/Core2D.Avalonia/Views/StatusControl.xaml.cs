@@ -6,14 +6,14 @@ using Avalonia.Markup.Xaml;
 namespace Core2D.Avalonia.Views
 {
     /// <summary>
-    /// Interaction logic for <see cref="PanelControl"/> xaml.
+    /// Interaction logic for <see cref="StatusControl"/> xaml.
     /// </summary>
-    public class PanelControl : UserControl
+    public class StatusControl : UserControl
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PanelControl"/> class.
+        /// Initializes a new instance of the <see cref="StatusControl"/> class.
         /// </summary>
-        public PanelControl()
+        public StatusControl()
         {
             this.InitializeComponent();
         }
