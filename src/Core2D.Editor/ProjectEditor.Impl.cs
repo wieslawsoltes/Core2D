@@ -2784,13 +2784,13 @@ namespace Core2D.Editor
                 }
             }
 
-            var rectangle = RectangleShape.Create(sx, sy, sx + width, sy + length * height, style, point);
+            var rectangle = RectangleShape.Create(sx, sy, sx + width, sy + (length * height), style, point);
             g.AddShape(rectangle);
 
-            var pt = PointShape.Create(sx + width / 2, sy, point);
-            var pb = PointShape.Create(sx + width / 2, sy + length * height, point);
-            var pl = PointShape.Create(sx, sy + (length * height) / 2, point);
-            var pr = PointShape.Create(sx + width, sy + (length * height) / 2, point);
+            var pt = PointShape.Create(sx + (width / 2), sy, point);
+            var pb = PointShape.Create(sx + (width / 2), sy + (length * height), point);
+            var pl = PointShape.Create(sx, sy + ((length * height) / 2), point);
+            var pr = PointShape.Create(sx + width, sy + ((length * height) / 2), point);
 
             g.AddConnectorAsNone(pt);
             g.AddConnectorAsNone(pb);
