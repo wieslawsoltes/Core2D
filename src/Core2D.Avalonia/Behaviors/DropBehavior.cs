@@ -29,7 +29,7 @@ namespace Core2D.Avalonia.Behaviors
             AvaloniaProperty.Register<DropBehavior, ProjectEditor>(nameof(Editor));
 
         public static readonly AvaloniaProperty DropModeProperty =
-            AvaloniaProperty.Register<DropBehavior, DropMode>(nameof(Behaviors.DropMode));
+            AvaloniaProperty.Register<DropBehavior, DropMode>(nameof(DropMode));
 
         public ProjectEditor Editor
         {

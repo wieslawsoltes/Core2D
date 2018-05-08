@@ -11,7 +11,7 @@
              xmlns:Interfaces="clr-namespace:Core2D.Editor.Views.Interfaces;assembly=Core2D.Editor"
              Design.Width="1200" Design.Height="540">
     <DockPanel>
-        <TabStrip Name="views" Items="{Binding Views}" SelectedItem="{Binding CurrentView, Mode=TwoWay}" Focusable="false" DockPanel.Dock="Bottom" ClipToBounds="False" ZIndex="1">
+        <TabStrip Items="{Binding Views}" SelectedItem="{Binding CurrentView, Mode=TwoWay}" Focusable="false" DockPanel.Dock="Bottom" ClipToBounds="False" ZIndex="1">
             <i:Interaction.Behaviors>
                 <behaviors:DropBehavior Editor="{Binding $parent[Window].DataContext}"/>
             </i:Interaction.Behaviors>
