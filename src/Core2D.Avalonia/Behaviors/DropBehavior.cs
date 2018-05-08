@@ -348,7 +348,7 @@ namespace Core2D.Avalonia.Behaviors
                         }
                     }
                     break;
-            };
+            }
 
             if (e.Data.Contains(DataFormats.Text))
             {
