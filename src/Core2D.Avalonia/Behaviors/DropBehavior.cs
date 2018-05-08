@@ -17,30 +17,15 @@ using Core2D.Style;
 
 namespace Core2D.Avalonia.Behaviors
 {
-    public enum DropMode
-    {
-        Move,
-        Swap
-    }
-
     public sealed class DropBehavior : Behavior<Control>
     {
         public static readonly AvaloniaProperty EditorProperty =
             AvaloniaProperty.Register<DropBehavior, ProjectEditor>(nameof(Editor));
 
-        public static readonly AvaloniaProperty DropModeProperty =
-            AvaloniaProperty.Register<DropBehavior, DropMode>(nameof(DropMode));
-
         public ProjectEditor Editor
         {
             get => (ProjectEditor)GetValue(EditorProperty);
             set => SetValue(EditorProperty, value);
-        }
-
-        public DropMode DropMode
-        {
-            get => (DropMode)GetValue(DropModeProperty);
-            set => SetValue(DropModeProperty, value);
         }
 
         protected override void OnAttached()
@@ -126,31 +111,43 @@ namespace Core2D.Avalonia.Behaviors
                             {
                                 case Library<ShapeStyle> library:
                                     {
-                                        switch (DropMode)
+                                        if (e.DragEffects == DragDropEffects.Copy)
                                         {
-                                            case DropMode.Move:
-                                                Editor?.MoveItem(library, sourceIndex, targetIndex);
-                                                e.Handled = true;
-                                                return;
-                                            case DropMode.Swap:
-                                                Editor?.SwapItem(library, sourceIndex, targetIndex);
-                                                e.Handled = true;
-                                                return;
+                                            e.Handled = true;
+                                            return;
+                                        }
+                                        else if (e.DragEffects == DragDropEffects.Move)
+                                        {
+                                            Editor?.MoveItem(library, sourceIndex, targetIndex);
+                                            e.Handled = true;
+                                            return;
+                                        }
+                                        else if (e.DragEffects == DragDropEffects.Link)
+                                        {
+                                            Editor?.SwapItem(library, sourceIndex, targetIndex);
+                                            e.Handled = true;
+                                            return;
                                         }
                                     }
                                     break;
                                 case Library<GroupShape> library:
                                     {
-                                        switch (DropMode)
+                                        if (e.DragEffects == DragDropEffects.Copy)
                                         {
-                                            case DropMode.Move:
-                                                Editor?.MoveItem(library, sourceIndex, targetIndex);
-                                                e.Handled = true;
-                                                return;
-                                            case DropMode.Swap:
-                                                Editor?.SwapItem(library, sourceIndex, targetIndex);
-                                                e.Handled = true;
-                                                return;
+                                            e.Handled = true;
+                                            return;
+                                        }
+                                        else if (e.DragEffects == DragDropEffects.Move)
+                                        {
+                                            Editor?.MoveItem(library, sourceIndex, targetIndex);
+                                            e.Handled = true;
+                                            return;
+                                        }
+                                        else if (e.DragEffects == DragDropEffects.Link)
+                                        {
+                                            Editor?.SwapItem(library, sourceIndex, targetIndex);
+                                            e.Handled = true;
+                                            return;
                                         }
                                     }
                                     break;
@@ -253,7 +250,6 @@ namespace Core2D.Avalonia.Behaviors
                                                     {
                                                         Editor?.Project.AddPage(targetDocument, sourcePage);
                                                         Editor?.Project?.SetCurrentContainer(sourcePage);
-                                                        e.DragEffects = DragDropEffects.None;
                                                         e.Handled = true;
                                                         return;
                                                     }
@@ -304,16 +300,22 @@ namespace Core2D.Avalonia.Behaviors
 
                                 if (strip.DataContext is ViewsPanel panel)
                                 {
-                                    switch (DropMode)
+                                    if (e.DragEffects == DragDropEffects.Copy)
                                     {
-                                        case DropMode.Move:
-                                            Editor?.MoveView(panel, sourceIndex, targetIndex);
-                                            e.Handled = true;
-                                            return;
-                                        case DropMode.Swap:
-                                            Editor?.SwapView(panel, sourceIndex, targetIndex);
-                                            e.Handled = true;
-                                            return;
+                                        e.Handled = true;
+                                        return;
+                                    }
+                                    else if (e.DragEffects == DragDropEffects.Move)
+                                    {
+                                        Editor?.MoveView(panel, sourceIndex, targetIndex);
+                                        e.Handled = true;
+                                        return;
+                                    }
+                                    else if (e.DragEffects == DragDropEffects.Link)
+                                    {
+                                        Editor?.SwapView(panel, sourceIndex, targetIndex);
+                                        e.Handled = true;
+                                        return;
                                     }
                                 }
                             }
@@ -329,16 +331,25 @@ namespace Core2D.Avalonia.Behaviors
                                 Console.WriteLine($"targetIndex : {targetIndex}");
                                 Console.WriteLine($"DataContext type : {strip.DataContext.GetType()}");
 
-                                switch (DropMode)
+                                if (e.DragEffects == DragDropEffects.Copy)
                                 {
-                                    case DropMode.Move:
+                                    e.Handled = true;
+                                    return;
+                                }
+                                else if (e.DragEffects == DragDropEffects.Move)
+                                {
+                                    if (sourcePanel.Views.Length > 1)
+                                    {
                                         Editor?.MoveView(sourcePanel, targetPanel, sourceIndex, targetIndex);
-                                        e.Handled = true;
-                                        return;
-                                    case DropMode.Swap:
-                                        Editor?.SwapView(sourcePanel, targetPanel, sourceIndex, targetIndex);
-                                        e.Handled = true;
-                                        return;
+                                    }
+                                    e.Handled = true;
+                                    return;
+                                }
+                                else if (e.DragEffects == DragDropEffects.Link)
+                                {
+                                    Editor?.SwapView(sourcePanel, targetPanel, sourceIndex, targetIndex);
+                                    e.Handled = true;
+                                    return;
                                 }
                             }
                         }
