@@ -15,9 +15,9 @@
              xmlns:views="clr-namespace:Core2D.Avalonia.Views;assembly=Core2D.Avalonia"
              Design.DataContext="{x:Static Designer:DesignerContext.Editor}"
              Design.Width="1200" Design.Height="540">
-    <Grid Name="rootPanel" ColumnDefinitions="180,Auto,*,Auto,240" RowDefinitions="*,Auto" Margin="6,6,6,2">
-        <GridSplitter Name="leftPanelVSplitter" Classes="vertical" Grid.Column="1" Grid.Row="0" Width="6"/>
-        <Grid Name="containerPanel" Grid.Row="0" Grid.Column="2">
+    <Grid ColumnDefinitions="180,Auto,*,Auto,240" RowDefinitions="*,Auto" Margin="6,6,6,2">
+        <GridSplitter Classes="vertical" Grid.Column="1" Grid.Row="0" Width="6"/>
+        <Grid Grid.Row="0" Grid.Column="2">
             <Border Classes="container">
                 <Border Classes="transparent" ClipToBounds="True">
                     <paz:ZoomBorder Name="zoomBorder" Stretch="None" ZoomSpeed="1.2" PanButton="Right" EnableInput="{Binding IsToolIdle}" Background="Transparent" ClipToBounds="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
@@ -30,27 +30,19 @@
                 </Border>
             </Border>
         </Grid>
-        <Grid Name="leftPanel" RowDefinitions="50*,Auto,50*" Grid.Column="0" Grid.Row="0">
-            <Border Name="leftPanelTop" Classes="leftTop" Grid.Row="0">
-                <views:PanelControl DataContext="{Binding LeftPanelTop}"/>
-            </Border>
-            <GridSplitter Name="leftPanelHSplitter" Classes="horizontal" Grid.Row="1" Height="7"/>
-            <Border Name="leftPanelBottom" Classes="leftBottom" Grid.Row="2">
-                <views:PanelControl DataContext="{Binding LeftPanelBottom}"/>
-            </Border>
+        <Grid  RowDefinitions="50*,Auto,50*" Grid.Column="0" Grid.Row="0">
+            <views:PanelControl DataContext="{Binding LeftPanelTop}" Grid.Row="0"/>
+            <GridSplitter Classes="horizontal" Grid.Row="1" Height="7"/>
+            <views:PanelControl DataContext="{Binding LeftPanelBottom}" Grid.Row="2"/>
         </Grid>
-        <GridSplitter Name="rightPanelVSplitter" Classes="vertical" Grid.Column="3" Grid.Row="0" Width="6"/>
-        <Grid Name="rightPanel" RowDefinitions="50*,Auto,50*" Grid.Column="4" Grid.Row="0">
-            <Border Name="rightPanelTop" Classes="rightTop" Grid.Row="0">
-                <views:PanelControl DataContext="{Binding RightPanelTop}"/>
-            </Border>
-            <GridSplitter Name="rightPanelHSplitter" Classes="horizontal" Grid.Row="1" Height="7"/>
-            <Border Name="rightPanelBottom" Classes="rightBottom" Grid.Row="2">
-                <views:PanelControl DataContext="{Binding RightPanelBottom}"/>
-            </Border>
+        <GridSplitter Classes="vertical" Grid.Column="3" Grid.Row="0" Width="6"/>
+        <Grid RowDefinitions="50*,Auto,50*" Grid.Column="4" Grid.Row="0">
+            <views:PanelControl DataContext="{Binding RightPanelTop}" Grid.Row="0"/>
+            <GridSplitter Classes="horizontal" Grid.Row="1" Height="7"/>
+            <views:PanelControl DataContext="{Binding RightPanelBottom}" Grid.Row="2"/>
         </Grid>
         <Grid ColumnDefinitions="Auto,*" Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="1" Margin="0,2,0,0">
-            <TextBlock Name="statsPanel" Classes="stats" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <TextBlock Classes="stats" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center">
                 <TextBlock.Text>
                     <MultiBinding Mode="OneWay" Converter="{x:Static converters:EditorToStatsMultiConverter.Instance}">
                         <Binding Path="Project.Documents.Length"/>
@@ -62,7 +54,7 @@
                     </MultiBinding>
                 </TextBlock.Text>
             </TextBlock>
-            <WrapPanel Name="optionsPanel" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center">
+            <WrapPanel Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center">
                 <DropDown Classes="tool" Items="{Binding Tools}" SelectedItem="{Binding CurrentTool, Mode=TwoWay}">
                     <DropDown.DataTemplates>
                         <DataTemplate>

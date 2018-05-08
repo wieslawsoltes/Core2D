@@ -34,27 +34,9 @@
         <StyleInclude Source="resm:Avalonia.Themes.Default.DefaultTheme.xaml?assembly=Avalonia.Themes.Default"/>
         <StyleInclude Source="resm:Avalonia.Themes.Default.Accents.BaseLight.xaml?assembly=Avalonia.Themes.Default"/>
         <!-- Border -->
-        <Style Selector="Border.leftTop">
-            <Setter Property="Margin" Value="1"/>
-            <Setter Property="Padding" Value="3,3,3,3"/>
-            <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderLightBrush}"/>
-            <Setter Property="BorderThickness" Value="1"/>
-        </Style>
-        <Style Selector="Border.leftBottom">
-            <Setter Property="Margin" Value="1"/>
-            <Setter Property="Padding" Value="3,3,3,3"/>
-            <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderLightBrush}"/>
-            <Setter Property="BorderThickness" Value="1"/>
-        </Style>
-        <Style Selector="Border.rightTop">
-            <Setter Property="Margin" Value="1"/>
-            <Setter Property="Padding" Value="3,3,3,3"/>
-            <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderLightBrush}"/>
-            <Setter Property="BorderThickness" Value="1"/>
-        </Style>
-        <Style Selector="Border.rightBottom">
-            <Setter Property="Margin" Value="1"/>
-            <Setter Property="Padding" Value="3,3,3,3"/>
+        <Style Selector="Border.panel">
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="Padding" Value="4"/>
             <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderLightBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
@@ -386,7 +368,7 @@
         </Style>
         <!-- TextBox.default -->
         <Style Selector="TextBox.default">
-            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Padding" Value="2"/>
             <Setter Property="Margin" Value="0"/>
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="BorderThickness" Value="1"/>
@@ -399,7 +381,7 @@
         </Style>
         <!-- TextBox.left -->
         <Style Selector="TextBox.left">
-            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Padding" Value="2"/>
             <Setter Property="Margin" Value="0"/>
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="TextAlignment" Value="Left"/>
@@ -414,7 +396,7 @@
         </Style>
         <!-- TextBox.center -->
         <Style Selector="TextBox.center">
-            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Padding" Value="2"/>
             <Setter Property="Margin" Value="0"/>
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="TextAlignment" Value="Center"/>
@@ -429,7 +411,7 @@
         </Style>
         <!-- TextBox.property -->
         <Style Selector="TextBox.property">
-            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Padding" Value="2"/>
             <Setter Property="Margin" Value="3,1,3,1"/>
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="TextAlignment" Value="Left"/>
@@ -476,7 +458,7 @@
         </Style>
         <!-- TextBox.project -->
         <Style Selector="TextBox.project">
-            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Padding" Value="2"/>
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="TextAlignment" Value="Left"/>
             <Setter Property="BorderThickness" Value="0"/>
