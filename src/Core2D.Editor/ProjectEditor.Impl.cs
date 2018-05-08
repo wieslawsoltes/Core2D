@@ -3731,13 +3731,27 @@ namespace Core2D.Editor
 
             var previousSource = sourcePanel.Views;
             var nextSource = sourceBuilder.ToImmutable();
-            Project?.History?.Snapshot(previousSource, nextSource, (p) => sourcePanel.Views = p);
-            sourcePanel.Views = nextSource;
+
+            var previousSourceCurrentView = sourcePanel.CurrentView;
+            var nextSourceCurrentView = nextSource[sourceIndex > 0 ? sourceIndex - 1 : 0];
 
             var previousTarget = targetPanel.Views;
             var nextTarget = targetBuilder.ToImmutable();
+
+            var previousTargetCurrentView = targetPanel.CurrentView;
+            var nextTargetCurrentView = nextTarget[targetIndex];
+
+            Project?.History?.Snapshot(previousSource, nextSource, (p) => sourcePanel.Views = p);
+            sourcePanel.Views = nextSource;
+
+            Project?.History?.Snapshot(previousSourceCurrentView, nextSourceCurrentView, (p) => sourcePanel.CurrentView = p);
+            sourcePanel.CurrentView = nextSourceCurrentView;
+
             Project?.History?.Snapshot(previousTarget, nextSource, (p) => targetPanel.Views = p);
             targetPanel.Views = nextTarget;
+
+            Project?.History?.Snapshot(previousTargetCurrentView, nextTargetCurrentView, (p) => targetPanel.CurrentView = p);
+            targetPanel.CurrentView = nextTargetCurrentView;
         }
 
         /// <summary>
@@ -3758,15 +3772,28 @@ namespace Core2D.Editor
 
             var previousSource = sourcePanel.Views;
             var nextSource = sourceBuilder.ToImmutable();
-            Project?.History?.Snapshot(previousSource, nextSource, (p) => sourcePanel.Views = p);
-            sourcePanel.Views = nextSource;
 
             var previousTarget = targetPanel.Views;
             var nextTarget = targetBuilder.ToImmutable();
+
+            var previousSourceCurrentView = item1;
+            var nextSourceCurrentView = item2;
+
+            var previousTargetCurrentView = item2;
+            var nextTargetCurrentView = item1;
+
+            Project?.History?.Snapshot(previousSource, nextSource, (p) => sourcePanel.Views = p);
+            sourcePanel.Views = nextSource;
+
             Project?.History?.Snapshot(previousTarget, nextSource, (p) => targetPanel.Views = p);
             targetPanel.Views = nextTarget;
-        }
 
+            Project?.History?.Snapshot(previousSourceCurrentView, nextSourceCurrentView, (p) => sourcePanel.CurrentView = p);
+            sourcePanel.CurrentView = nextSourceCurrentView;
+
+            Project?.History?.Snapshot(previousTargetCurrentView, nextTargetCurrentView, (p) => targetPanel.CurrentView = p);
+            targetPanel.CurrentView = nextTargetCurrentView;
+        }
 
         /// <summary>
         /// Change current view.
