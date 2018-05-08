@@ -178,7 +178,6 @@ namespace Core2D.Avalonia.Behaviors
                                         {
                                             case LayerContainer targetLayer:
                                                 {
-
                                                 }
                                                 break;
                                             case PageContainer targetPage:
@@ -208,7 +207,6 @@ namespace Core2D.Avalonia.Behaviors
                                                 break;
                                             case DocumentContainer targetDocument:
                                                 {
-
                                                 }
                                                 break;
                                         }
@@ -220,12 +218,10 @@ namespace Core2D.Avalonia.Behaviors
                                         {
                                             case LayerContainer targetLayer:
                                                 {
-
                                                 }
                                                 break;
                                             case PageContainer targetPage:
                                                 {
-
                                                 }
                                                 break;
                                             case DocumentContainer targetDocument:
@@ -264,17 +260,14 @@ namespace Core2D.Avalonia.Behaviors
                                         {
                                             case LayerContainer targetLayer:
                                                 {
-
                                                 }
                                                 break;
                                             case PageContainer targetPage:
                                                 {
-
                                                 }
                                                 break;
                                             case DocumentContainer targetDocument:
                                                 {
-
                                                 }
                                                 break;
                                         }
