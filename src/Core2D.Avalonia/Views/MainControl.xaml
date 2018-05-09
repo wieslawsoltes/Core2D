@@ -3,6 +3,9 @@
 <UserControl x:Class="Core2D.Avalonia.Views.MainControl"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+             xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+             xmlns:behaviors="clr-namespace:Core2D.Avalonia.Behaviors;assembly=Core2D.Avalonia"
              xmlns:local="clr-namespace:Core2D.Avalonia;assembly=Core2D.Avalonia"
              xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"
              xmlns:views="clr-namespace:Core2D.Avalonia.Views;assembly=Core2D.Avalonia"
@@ -10,6 +13,9 @@
              UseLayoutRounding="True"
              Design.DataContext="{x:Static Designer:DesignerContext.Editor}"
              Design.Width="1200" Design.Height="580">
+    <i:Interaction.Behaviors>
+        <behaviors:DropBehavior Editor="{Binding}"/>
+    </i:Interaction.Behaviors>
     <UserControl.KeyBindings>
         <!-- File -->
         <KeyBinding Command="{Binding OnNew}" CommandParameter="{Binding}" Gesture="Ctrl+N"/>
