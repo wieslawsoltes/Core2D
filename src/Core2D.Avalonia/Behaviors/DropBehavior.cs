@@ -374,7 +374,7 @@ namespace Core2D.Avalonia.Behaviors
 
                     return false;
                 }
-                else if (source.Parent is TabStrip sourceStrip 
+                else if (source.Parent is TabStrip sourceStrip
                     && target.Parent is TabStrip targetStrip
                     && sourceStrip.DataContext is ViewsPanel sourcePanel
                     && targetStrip.DataContext is ViewsPanel targetPanel)
