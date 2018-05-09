@@ -16,30 +16,39 @@
              Design.Width="1200" Design.Height="540">
     <DockPanel renderer:RendererOptions.Renderer="{Binding Renderers[1]}">
         <StackPanel DockPanel.Dock="Top">
-            <TabStrip Name="documents" Items="{Binding Project.Documents}" SelectedItem="{Binding Project.CurrentDocument, Mode=OneTime}" SelectedIndex="0" Focusable="false">
+            <TabStrip Name="documents" Items="{Binding Project.Documents}" SelectedItem="{Binding Project.CurrentDocument, Mode=OneTime}" Focusable="false" ClipToBounds="False" ZIndex="1">
                 <TabStrip.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <WrapPanel/>
+                        <WrapPanel ClipToBounds="False"/>
                     </ItemsPanelTemplate>
                 </TabStrip.ItemsPanel>
                 <TabStrip.Styles>
                     <Style Selector="TabStripItem">
-                        <Setter Property="Margin" Value="0 0 0 -1"/>
-                        <Setter Property="Padding" Value="4 0 4 0"/>
+                        <Setter Property="Margin" Value="0 0 0 0"/>
+                        <Setter Property="Padding" Value="4 1 4 1"/>
                         <Setter Property="FontSize" Value="12"/>
-                        <Setter Property="Height" Value="20"/>
+                        <Setter Property="FontWeight" Value="Normal"/>
+                        <Setter Property="Height" Value="24"/>
                         <Setter Property="BorderThickness" Value="0"/>
+                    </Style>
+                    <Style Selector="TabStripItem:pointerover">
+                        <Setter Property="FontWeight" Value="Normal"/>
+                        <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush4}"/>
+                    </Style>
+                    <Style Selector="TabStripItem:selected">
+                        <Setter Property="FontWeight" Value="Normal"/>
                     </Style>
                 </TabStrip.Styles>
                 <TabStrip.DataTemplates>
                     <DataTemplate DataType="Containers:DocumentContainer">
-                        <TextBlock Text="{Binding Name}" Margin="2"/>
+                        <StackPanel Orientation="Horizontal" Gap="2">
+                            <TextBlock Text="{Binding Name}" Margin="2"/>
+                        </StackPanel>
                     </DataTemplate>
                 </TabStrip.DataTemplates>
             </TabStrip>
-            <Grid Background="{DynamicResource ThemeBorderMidBrush}" Height="2"/>
         </StackPanel>
-        <ScrollViewer>
+        <ScrollViewer ZIndex="-1">
             <Carousel Items="{Binding Project.Documents}" SelectedIndex="{Binding #documents.SelectedIndex}" IsVirtualized="False" VerticalAlignment="Center" Margin="2">
                 <Carousel.DataTemplates>
                     <DataTemplate DataType="Containers:DocumentContainer">
