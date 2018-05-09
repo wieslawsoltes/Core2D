@@ -107,8 +107,9 @@ namespace Core2D.Avalonia.Behaviors
                                             }
                                             return true;
                                         }
+
+                                        return false;
                                     }
-                                    break;
                                 case Library<GroupShape> library:
                                     {
                                         if (e.DragEffects == DragDropEffects.Copy)
@@ -135,15 +136,17 @@ namespace Core2D.Avalonia.Behaviors
                                             }
                                             return true;
                                         }
+
+                                        return false;
                                     }
-                                    break;
                                 default:
                                     Console.WriteLine($"List DataContext drop type was not handled: {list.DataContext}");
-                                    break;
+                                    return false;
                             }
                         }
+
+                        return false;
                     }
-                    break;
                 case TreeView tree:
                     {
                         if (e.Data.Get(CustomDataFormats.Parent) is TreeViewItem source &&
@@ -170,7 +173,6 @@ namespace Core2D.Avalonia.Behaviors
                                                     }
                                                     return true;
                                                 }
-                                                break;
                                             case PageContainer targetPage:
                                                 {
                                                     if (e.DragEffects == DragDropEffects.Copy)
@@ -200,8 +202,8 @@ namespace Core2D.Avalonia.Behaviors
                                                         }
                                                         return true;
                                                     }
+                                                    return false;
                                                 }
-                                                break;
                                             case DocumentContainer targetDocument:
                                                 {
                                                     if (bExecute)
@@ -210,10 +212,10 @@ namespace Core2D.Avalonia.Behaviors
                                                     }
                                                     return true;
                                                 }
-                                                break;
                                         }
+
+                                        return false;
                                     }
-                                    break;
                                 case PageContainer sourcePage:
                                     {
                                         switch (targetData)
@@ -226,7 +228,6 @@ namespace Core2D.Avalonia.Behaviors
                                                     }
                                                     return true;
                                                 }
-                                                break;
                                             case PageContainer targetPage:
                                                 {
                                                     if (bExecute)
@@ -235,7 +236,6 @@ namespace Core2D.Avalonia.Behaviors
                                                     }
                                                     return true;
                                                 }
-                                                break;
                                             case DocumentContainer targetDocument:
                                                 {
                                                     if (e.DragEffects == DragDropEffects.Copy)
@@ -267,11 +267,12 @@ namespace Core2D.Avalonia.Behaviors
                                                         }
                                                         return true;
                                                     }
+                                                    return false;
                                                 }
-                                                break;
                                         }
+
+                                        return false;
                                     }
-                                    break;
                                 case DocumentContainer sourceDocument:
                                     {
                                         switch (targetData)
@@ -284,7 +285,6 @@ namespace Core2D.Avalonia.Behaviors
                                                     }
                                                     return true;
                                                 }
-                                                break;
                                             case PageContainer targetPage:
                                                 {
                                                     if (bExecute)
@@ -293,7 +293,6 @@ namespace Core2D.Avalonia.Behaviors
                                                     }
                                                     return true;
                                                 }
-                                                break;
                                             case DocumentContainer targetDocument:
                                                 {
                                                     if (bExecute)
@@ -302,14 +301,15 @@ namespace Core2D.Avalonia.Behaviors
                                                     }
                                                     return true;
                                                 }
-                                                break;
                                         }
+
+                                        return false;
                                     }
-                                    break;
                             }
                         }
+
+                        return false;
                     }
-                    break;
                 case TabStrip strip:
                     {
                         if (e.Data.Get(CustomDataFormats.Parent) is TabStripItem source &&
@@ -350,7 +350,10 @@ namespace Core2D.Avalonia.Behaviors
                                         }
                                         return true;
                                     }
+                                    return false;
                                 }
+
+                                return false;
                             }
                             else if (source.Parent is TabStrip sourceStrip 
                                 && target.Parent is TabStrip targetStrip 
@@ -392,10 +395,15 @@ namespace Core2D.Avalonia.Behaviors
                                     }
                                     return true;
                                 }
+
+                                return false;
                             }
+
+                            return false;
                         }
+
+                        return false;
                     }
-                    break;
             }
 
             if (e.Data.Contains(DataFormats.Text))
@@ -408,6 +416,7 @@ namespace Core2D.Avalonia.Behaviors
                 {
                     Editor?.OnTryPaste(text);
                 }
+
                 return true;
             }
 
