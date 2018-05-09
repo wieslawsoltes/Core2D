@@ -10,28 +10,32 @@
              Design.Width="250" Design.Height="400">
     <TabControl Classes="default">
         <TabItem Header="Arc" Classes="property">
-            <Grid RowDefinitions="Auto,Auto,Auto,*" ColumnDefinitions="Auto,*">
-                <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                <TextBox Text="{Binding Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
-                <TextBlock Text="IsStroked" Classes="left" Grid.Row="1" Grid.Column="0"/>
-                <CheckBox IsChecked="{Binding IsStroked, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
-                <TextBlock Text="IsFilled" Classes="left" Grid.Row="2" Grid.Column="0"/>
-                <CheckBox IsChecked="{Binding IsFilled, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
-                <TabControl Classes="default" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
-                    <TabItem Header="Point1" Classes="property">
-                        <ContentControl Content="{Binding Point1}"/>
-                    </TabItem>
-                    <TabItem Header="Point2" Classes="property">
-                        <ContentControl Content="{Binding Point2}"/>
-                    </TabItem>
-                    <TabItem Header="Point3" Classes="property">
-                        <ContentControl Content="{Binding Point3}"/>
-                    </TabItem>
-                    <TabItem Header="Point4" Classes="property">
-                        <ContentControl Content="{Binding Point4}"/>
-                    </TabItem>
-                </TabControl>
-            </Grid>
+            <ScrollViewer>
+                <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto,*">
+                    <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
+                    <TextBox Text="{Binding Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                    <TextBlock Text="IsStroked" Classes="left" Grid.Row="1" Grid.Column="0"/>
+                    <CheckBox IsChecked="{Binding IsStroked, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
+                    <TextBlock Text="IsFilled" Classes="left" Grid.Row="2" Grid.Column="0"/>
+                    <CheckBox IsChecked="{Binding IsFilled, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
+                </Grid>
+            </ScrollViewer>
+        </TabItem>
+        <TabItem Header="Points" Classes="property">
+            <TabControl Classes="default">
+                <TabItem Header="Point1" Classes="property">
+                    <ContentControl Content="{Binding Point1}"/>
+                </TabItem>
+                <TabItem Header="Point2" Classes="property">
+                    <ContentControl Content="{Binding Point2}"/>
+                </TabItem>
+                <TabItem Header="Point3" Classes="property">
+                    <ContentControl Content="{Binding Point3}"/>
+                </TabItem>
+                <TabItem Header="Point4" Classes="property">
+                    <ContentControl Content="{Binding Point4}"/>
+                </TabItem>
+            </TabControl>
         </TabItem>
         <TabItem Header="State" Classes="property">
             <ContentControl Content="{Binding State}"/>

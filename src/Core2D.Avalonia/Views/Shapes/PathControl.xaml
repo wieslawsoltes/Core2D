@@ -10,14 +10,16 @@
              Design.Width="250" Design.Height="400">
     <TabControl Classes="default">
         <TabItem Header="Path" Classes="property">
-            <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto,*">
-                <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                <TextBox Text="{Binding Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
-                <TextBlock Text="IsStroked" Classes="left" Grid.Row="1" Grid.Column="0"/>
-                <CheckBox IsChecked="{Binding IsStroked, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
-                <TextBlock Text="IsFilled" Classes="left" Grid.Row="2" Grid.Column="0"/>
-                <CheckBox IsChecked="{Binding IsFilled, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
-            </Grid>
+            <ScrollViewer>
+                <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto,*">
+                    <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
+                    <TextBox Text="{Binding Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                    <TextBlock Text="IsStroked" Classes="left" Grid.Row="1" Grid.Column="0"/>
+                    <CheckBox IsChecked="{Binding IsStroked, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
+                    <TextBlock Text="IsFilled" Classes="left" Grid.Row="2" Grid.Column="0"/>
+                    <CheckBox IsChecked="{Binding IsFilled, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
+                </Grid>
+            </ScrollViewer>
         </TabItem>
         <TabItem Header="Geometry" Classes="property">
             <ContentControl Content="{Binding Geometry}"/>

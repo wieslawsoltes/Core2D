@@ -12,33 +12,35 @@
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
              Design.DataContext="{x:Static Designer:DesignerContext.Record}"
              Design.Width="250" Design.Height="400">
-    <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*">
-        <GridSplitter Classes="vertical" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Width="6"/>
-        <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Text="Name" Classes="default"/>
-        <TextBlock Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Text="Value" Classes="default"/>
-        <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding Owner.Columns}">
-            <ItemsControl.DataTemplates>
-                <DataTemplate DataType="Data:Column">
-                    <Grid VerticalAlignment="Top" Classes="drag">
-                        <i:Interaction.Behaviors>
-                            <behaviors:DragBehavior/>
-                        </i:Interaction.Behaviors>
-                        <TextBox VerticalAlignment="Center" Text="{Binding Name, Mode=TwoWay}" Classes="property"/>
-                    </Grid>
-                </DataTemplate>
-            </ItemsControl.DataTemplates>
-        </ItemsControl>
-        <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="1" Items="{Binding Values}">
-            <ItemsControl.DataTemplates>
-                <DataTemplate DataType="Data:Value">
-                    <Grid VerticalAlignment="Top" Classes="drag">
-                        <i:Interaction.Behaviors>
-                            <behaviors:DragBehavior/>
-                        </i:Interaction.Behaviors>
-                        <TextBox VerticalAlignment="Center" Text="{Binding Content, Mode=TwoWay}" Classes="property"/>
-                    </Grid>
-                </DataTemplate>
-            </ItemsControl.DataTemplates>
-        </ItemsControl>
-    </Grid>
+    <ScrollViewer>
+        <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*">
+            <GridSplitter Classes="vertical" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Width="6"/>
+            <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Text="Name" Classes="default"/>
+            <TextBlock Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Text="Value" Classes="default"/>
+            <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding Owner.Columns}">
+                <ItemsControl.DataTemplates>
+                    <DataTemplate DataType="Data:Column">
+                        <Grid VerticalAlignment="Top" Classes="drag">
+                            <i:Interaction.Behaviors>
+                                <behaviors:DragBehavior/>
+                            </i:Interaction.Behaviors>
+                            <TextBox VerticalAlignment="Center" Text="{Binding Name, Mode=TwoWay}" Classes="property"/>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.DataTemplates>
+            </ItemsControl>
+            <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="1" Items="{Binding Values}">
+                <ItemsControl.DataTemplates>
+                    <DataTemplate DataType="Data:Value">
+                        <Grid VerticalAlignment="Top" Classes="drag">
+                            <i:Interaction.Behaviors>
+                                <behaviors:DragBehavior/>
+                            </i:Interaction.Behaviors>
+                            <TextBox VerticalAlignment="Center" Text="{Binding Content, Mode=TwoWay}" Classes="property"/>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.DataTemplates>
+            </ItemsControl>
+        </Grid>
+    </ScrollViewer>
 </UserControl>

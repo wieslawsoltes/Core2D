@@ -11,16 +11,18 @@
              Design.Width="250" Design.Height="400">
     <TabControl Classes="default">
         <TabItem Header="Point" Classes="property">
-            <Grid RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
-                <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                <TextBox Text="{Binding Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
-                <TextBlock Text="X" Classes="left" Grid.Row="1" Grid.Column="0"/>
-                <TextBox Text="{Binding X, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
-                <TextBlock Text="Y" Classes="left" Grid.Row="2" Grid.Column="0"/>
-                <TextBox Text="{Binding Y, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
-                <TextBlock Text="Alignment" Classes="left" Grid.Row="3" Grid.Column="0"/>
-                <DropDown Items="{x:Static Editor:Enums.PointAlignmentValues}" SelectedItem="{Binding Alignment, Mode=TwoWay}" Classes="default" Grid.Row="3" Grid.Column="1"/>
-            </Grid>
+            <ScrollViewer>
+                <Grid RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
+                    <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
+                    <TextBox Text="{Binding Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                    <TextBlock Text="X" Classes="left" Grid.Row="1" Grid.Column="0"/>
+                    <TextBox Text="{Binding X, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
+                    <TextBlock Text="Y" Classes="left" Grid.Row="2" Grid.Column="0"/>
+                    <TextBox Text="{Binding Y, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
+                    <TextBlock Text="Alignment" Classes="left" Grid.Row="3" Grid.Column="0"/>
+                    <DropDown Items="{x:Static Editor:Enums.PointAlignmentValues}" SelectedItem="{Binding Alignment, Mode=TwoWay}" Classes="default" Grid.Row="3" Grid.Column="1"/>
+                </Grid>
+            </ScrollViewer>
         </TabItem>
         <TabItem Header="State" Classes="property">
             <ContentControl Content="{Binding State}"/>

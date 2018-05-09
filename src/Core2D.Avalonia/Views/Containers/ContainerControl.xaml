@@ -22,14 +22,16 @@
                         <containers:ShapesControl/>
                     </TabItem>
                     <TabItem Header="Size" Classes="property">
-                        <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,50,*">
-                            <TextBlock Text="Width" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                            <TextBox Text="{Binding Width, Mode=TwoWay}" Classes="center" Grid.Row="0" Grid.Column="1"/>
-                            <Slider Classes="slider" Value="{Binding Width, Mode=TwoWay}" Minimum="0" Maximum="10000" Grid.Row="0" Grid.Column="2"/>
-                            <TextBlock Text="Height" Classes="left" Grid.Row="1" Grid.Column="0"/>
-                            <TextBox Text="{Binding Height, Mode=TwoWay}" Classes="center" Grid.Row="1" Grid.Column="1"/>
-                            <Slider Classes="slider" Value="{Binding Height, Mode=TwoWay}" Minimum="0" Maximum="10000" Grid.Row="1" Grid.Column="2"/>
-                        </Grid>
+                        <ScrollViewer>
+                            <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,50,*">
+                                <TextBlock Text="Width" Classes="left" Grid.Row="0" Grid.Column="0"/>
+                                <TextBox Text="{Binding Width, Mode=TwoWay}" Classes="center" Grid.Row="0" Grid.Column="1"/>
+                                <Slider Classes="slider" Value="{Binding Width, Mode=TwoWay}" Minimum="0" Maximum="10000" Grid.Row="0" Grid.Column="2"/>
+                                <TextBlock Text="Height" Classes="left" Grid.Row="1" Grid.Column="0"/>
+                                <TextBox Text="{Binding Height, Mode=TwoWay}" Classes="center" Grid.Row="1" Grid.Column="1"/>
+                                <Slider Classes="slider" Value="{Binding Height, Mode=TwoWay}" Minimum="0" Maximum="10000" Grid.Row="1" Grid.Column="2"/>
+                            </Grid>
+                        </ScrollViewer>
                     </TabItem>
                     <TabItem Header="Background" Classes="property">
                         <ContentControl Content="{Binding Background}"/>

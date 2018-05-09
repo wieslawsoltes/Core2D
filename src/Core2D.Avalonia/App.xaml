@@ -263,6 +263,15 @@
         <Style Selector="TabControl.default">
             <Setter Property="Margin" Value="0"/>
         </Style>
+        <Style Selector="TabControl.default /template/ TabStrip">
+            <Setter Property="ItemsPanel">
+                <Setter.Value>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
         <Style Selector="TabControl.top">
             <Setter Property="Margin" Value="0"/>
             <Setter Property="TabStripPlacement" Value="Top"/>
@@ -780,9 +789,7 @@
             <containers:TemplatesControl DataContext="{Binding Context.Project}"/>
         </DataTemplate>
         <DataTemplate DataType="Views:ContainerView">
-            <ScrollViewer>
-                <ContentControl Content="{Binding Context.Project.CurrentContainer}"/>
-            </ScrollViewer>
+            <ContentControl Content="{Binding Context.Project.CurrentContainer}"/>
         </DataTemplate>
         <DataTemplate DataType="Views:ZoomView">
             <containers:ZoomControl DataContext="{Binding Context.Canvas.Zoom}"/>
@@ -791,24 +798,16 @@
             <settings:ToolsControl DataContext="{Binding Context}"/>
         </DataTemplate>
         <DataTemplate DataType="Views:ShapeView">
-            <ScrollViewer>
-                <ContentControl Content="{Binding Context.Project.CurrentContainer.CurrentShape}"/>
-            </ScrollViewer>
+            <ContentControl Content="{Binding Context.Project.CurrentContainer.CurrentShape}"/>
         </DataTemplate>
         <DataTemplate DataType="Views:DataView">
-            <ScrollViewer>
-                <data:DataControl DataContext="{Binding Context.Renderers[0].State.SelectedShape.Data}"/>
-            </ScrollViewer>
+            <data:DataControl DataContext="{Binding Context.Renderers[0].State.SelectedShape.Data}"/>
         </DataTemplate>
         <DataTemplate DataType="Views:StyleView">
-            <ScrollViewer>
-                <style:ShapeStyleControl DataContext="{Binding Context.Project.CurrentStyleLibrary.Selected}"/>
-            </ScrollViewer>
+            <style:ShapeStyleControl DataContext="{Binding Context.Project.CurrentStyleLibrary.Selected}"/>
         </DataTemplate>
         <DataTemplate DataType="Views:TemplateView">
-            <ScrollViewer>
-                <ContentControl Content="{Binding Context.Project.CurrentTemplate}"/>
-            </ScrollViewer>
+            <ContentControl Content="{Binding Context.Project.CurrentTemplate}"/>
         </DataTemplate>
     </Application.DataTemplates>
 </Application>

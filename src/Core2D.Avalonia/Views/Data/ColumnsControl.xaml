@@ -18,18 +18,20 @@
             <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddColumn}" CommandParameter="{Binding}"/>
         </Menu>
         <TextBlock Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" Text="Name" Classes="default"/>
-        <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="2" Items="{Binding Columns}">
-            <ItemsControl.DataTemplates>
-                <DataTemplate DataType="Data:Column">
-                    <Grid VerticalAlignment="Top" ColumnDefinitions="*,30" Classes="drag">
-                        <i:Interaction.Behaviors>
-                            <behaviors:DragBehavior/>
-                        </i:Interaction.Behaviors>
-                        <TextBox VerticalAlignment="Center" Text="{Binding Name, Mode=TwoWay}" Classes="property" Grid.Column="0"/>
-                        <Button VerticalAlignment="Center" Content="-" Classes="property" Grid.Column="1" Command="{Binding $parent[Window].DataContext.OnRemoveColumn}" CommandParameter="{Binding}"/>
-                    </Grid>
-                </DataTemplate>
-            </ItemsControl.DataTemplates>
-        </ItemsControl>
+        <ScrollViewer Grid.Column="0" Grid.Row="2">
+            <ItemsControl Items="{Binding Columns}" VerticalAlignment="Stretch">
+                <ItemsControl.DataTemplates>
+                    <DataTemplate DataType="Data:Column">
+                        <Grid VerticalAlignment="Top" ColumnDefinitions="*,30" Classes="drag">
+                            <i:Interaction.Behaviors>
+                                <behaviors:DragBehavior/>
+                            </i:Interaction.Behaviors>
+                            <TextBox VerticalAlignment="Center" Text="{Binding Name, Mode=TwoWay}" Classes="property" Grid.Column="0"/>
+                            <Button VerticalAlignment="Center" Content="-" Classes="property" Grid.Column="1" Command="{Binding $parent[Window].DataContext.OnRemoveColumn}" CommandParameter="{Binding}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.DataTemplates>
+            </ItemsControl>
+        </ScrollViewer>
     </Grid>
 </UserControl>

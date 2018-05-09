@@ -13,12 +13,14 @@
              Design.Width="250" Design.Height="400">
     <TabControl Classes="default">
         <TabItem Header="PolyQuadraticBezierSegment" Classes="property">
-            <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*">
-                <TextBlock Text="IsStroked" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                <CheckBox IsChecked="{Binding IsStroked, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
-                <TextBlock Text="IsSmoothJoin" Classes="left" Grid.Row="1" Grid.Column="0"/>
-                <CheckBox IsChecked="{Binding IsSmoothJoin, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
-            </Grid>
+            <ScrollViewer>
+                <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*">
+                    <TextBlock Text="IsStroked" Classes="left" Grid.Row="0" Grid.Column="0"/>
+                    <CheckBox IsChecked="{Binding IsStroked, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                    <TextBlock Text="IsSmoothJoin" Classes="left" Grid.Row="1" Grid.Column="0"/>
+                    <CheckBox IsChecked="{Binding IsSmoothJoin, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
+                </Grid>
+            </ScrollViewer>
         </TabItem>
         <TabItem Header="Points" Classes="property">
             <ListBox Name="points" Items="{Binding Points}" Classes="default">
