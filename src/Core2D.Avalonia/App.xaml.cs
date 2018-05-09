@@ -16,6 +16,7 @@ using Core2D.Avalonia.Views;
 using Core2D.Editor;
 using Core2D.Editor.Designer;
 using Core2D.Editor.Views;
+using Core2D.Editor.Views.Interfaces;
 using Core2D.Interfaces;
 
 namespace Core2D.Avalonia
