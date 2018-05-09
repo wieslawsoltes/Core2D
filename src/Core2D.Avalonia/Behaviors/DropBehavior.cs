@@ -60,313 +60,26 @@ namespace Core2D.Avalonia.Behaviors
             return FixInvalidPointPosition(relativeTo, point);
         }
 
-        private bool ValidateDrag(object sender, DragEventArgs e, bool bExecute)
+        private bool ValidateDragListBox(DragEventArgs e, bool bExecute, ListBox list)
         {
-            var point = GetPoint(sender, e);
+            var sourceItem = e.Data.Get(CustomDataFormats.Parent);
+            var targetItem = (e.Source as IControl)?.Parent;
 
-            switch (sender)
+            if (sourceItem is ListBoxItem source && targetItem is ListBoxItem target)
             {
-                case ListBox list:
+                if (source.Parent == target.Parent)
+                {
+                    int sourceIndex = list.ItemContainerGenerator.IndexFromContainer(source);
+                    int targetIndex = list.ItemContainerGenerator.IndexFromContainer(target);
+
+                    Console.WriteLine($"sourceIndex : {sourceIndex}");
+                    Console.WriteLine($"targetIndex : {targetIndex}");
+                    Console.WriteLine($"DataContext type : {list.DataContext.GetType()}");
+
+                    switch (list.DataContext)
                     {
-                        if (e.Data.Get(CustomDataFormats.Parent) is ListBoxItem source &&
-                            (e.Source as IControl).Parent is ListBoxItem target &&
-                            source.Parent == target.Parent)
-                        {
-                            int sourceIndex = list.ItemContainerGenerator.IndexFromContainer(source);
-                            int targetIndex = list.ItemContainerGenerator.IndexFromContainer(target);
-
-                            Console.WriteLine($"sourceIndex : {sourceIndex}");
-                            Console.WriteLine($"targetIndex : {targetIndex}");
-                            Console.WriteLine($"DataContext type : {list.DataContext.GetType()}");
-
-                            switch (list.DataContext)
+                        case Library<ShapeStyle> library:
                             {
-                                case Library<ShapeStyle> library:
-                                    {
-                                        if (e.DragEffects == DragDropEffects.Copy)
-                                        {
-                                            if (bExecute)
-                                            {
-                                                // TODO: Clone item.
-                                            }
-                                            return true;
-                                        }
-                                        else if (e.DragEffects == DragDropEffects.Move)
-                                        {
-                                            if (bExecute)
-                                            {
-                                                Editor?.MoveItem(library, sourceIndex, targetIndex);
-                                            }
-                                            return true;
-                                        }
-                                        else if (e.DragEffects == DragDropEffects.Link)
-                                        {
-                                            if (bExecute)
-                                            {
-                                                Editor?.SwapItem(library, sourceIndex, targetIndex);
-                                            }
-                                            return true;
-                                        }
-
-                                        return false;
-                                    }
-                                case Library<GroupShape> library:
-                                    {
-                                        if (e.DragEffects == DragDropEffects.Copy)
-                                        {
-                                            if (bExecute)
-                                            {
-                                                // TODO: Clone item.
-                                            }
-                                            return true;
-                                        }
-                                        else if (e.DragEffects == DragDropEffects.Move)
-                                        {
-                                            if (bExecute)
-                                            {
-                                                Editor?.MoveItem(library, sourceIndex, targetIndex);
-                                            }
-                                            return true;
-                                        }
-                                        else if (e.DragEffects == DragDropEffects.Link)
-                                        {
-                                            if (bExecute)
-                                            {
-                                                Editor?.SwapItem(library, sourceIndex, targetIndex);
-                                            }
-                                            return true;
-                                        }
-
-                                        return false;
-                                    }
-                                default:
-                                    Console.WriteLine($"List DataContext drop type was not handled: {list.DataContext}");
-                                    return false;
-                            }
-                        }
-
-                        return false;
-                    }
-                case TreeView tree:
-                    {
-                        if (e.Data.Get(CustomDataFormats.Parent) is TreeViewItem source &&
-                            (e.Source as IControl).Parent.Parent is TreeViewItem target)
-                        {
-                            var sourceData = source.DataContext;
-                            var targetData = target.DataContext;
-
-                            Console.WriteLine($"sourceData : {sourceData}");
-                            Console.WriteLine($"targetData : {targetData}");
-                            Console.WriteLine($"DataContext type : {tree.DataContext.GetType()}");
-
-                            switch (sourceData)
-                            {
-                                case LayerContainer sourceLayer:
-                                    {
-                                        switch (targetData)
-                                        {
-                                            case LayerContainer targetLayer:
-                                                {
-                                                    if (bExecute)
-                                                    {
-                                                        // TODO:
-                                                    }
-                                                    return true;
-                                                }
-                                            case PageContainer targetPage:
-                                                {
-                                                    if (e.DragEffects == DragDropEffects.Copy)
-                                                    {
-                                                        if (bExecute)
-                                                        {
-                                                            var layer = Editor?.Clone(sourceLayer);
-                                                            Editor?.Project.AddLayer(targetPage, layer);
-                                                        }
-                                                        return true;
-                                                    }
-                                                    else if (e.DragEffects == DragDropEffects.Move)
-                                                    {
-                                                        if (bExecute)
-                                                        {
-                                                            Editor?.Project?.RemoveLayer(sourceLayer);
-                                                            Editor?.Project.AddLayer(targetPage, sourceLayer);
-                                                        }
-                                                        return true;
-                                                    }
-                                                    else if (e.DragEffects == DragDropEffects.Link)
-                                                    {
-                                                        if (bExecute)
-                                                        {
-                                                            Editor?.Project.AddLayer(targetPage, sourceLayer);
-                                                            e.DragEffects = DragDropEffects.None;
-                                                        }
-                                                        return true;
-                                                    }
-                                                    return false;
-                                                }
-                                            case DocumentContainer targetDocument:
-                                                {
-                                                    if (bExecute)
-                                                    {
-                                                        // TODO:
-                                                    }
-                                                    return true;
-                                                }
-                                        }
-
-                                        return false;
-                                    }
-                                case PageContainer sourcePage:
-                                    {
-                                        switch (targetData)
-                                        {
-                                            case LayerContainer targetLayer:
-                                                {
-                                                    if (bExecute)
-                                                    {
-                                                        // TODO:
-                                                    }
-                                                    return true;
-                                                }
-                                            case PageContainer targetPage:
-                                                {
-                                                    if (bExecute)
-                                                    {
-                                                        // TODO:
-                                                    }
-                                                    return true;
-                                                }
-                                            case DocumentContainer targetDocument:
-                                                {
-                                                    if (e.DragEffects == DragDropEffects.Copy)
-                                                    {
-                                                        if (bExecute)
-                                                        {
-                                                            var page = Editor?.Clone(sourcePage);
-                                                            Editor?.Project.AddPage(targetDocument, page);
-                                                            Editor?.Project?.SetCurrentContainer(page);
-                                                        }
-                                                        return true;
-                                                    }
-                                                    else if (e.DragEffects == DragDropEffects.Move)
-                                                    {
-                                                        if (bExecute)
-                                                        {
-                                                            Editor?.Project?.RemovePage(sourcePage);
-                                                            Editor?.Project.AddPage(targetDocument, sourcePage);
-                                                            Editor?.Project?.SetCurrentContainer(sourcePage);
-                                                        }
-                                                        return true;
-                                                    }
-                                                    else if (e.DragEffects == DragDropEffects.Link)
-                                                    {
-                                                        if (bExecute)
-                                                        {
-                                                            Editor?.Project.AddPage(targetDocument, sourcePage);
-                                                            Editor?.Project?.SetCurrentContainer(sourcePage);
-                                                        }
-                                                        return true;
-                                                    }
-                                                    return false;
-                                                }
-                                        }
-
-                                        return false;
-                                    }
-                                case DocumentContainer sourceDocument:
-                                    {
-                                        switch (targetData)
-                                        {
-                                            case LayerContainer targetLayer:
-                                                {
-                                                    if (bExecute)
-                                                    {
-                                                        // TODO:
-                                                    }
-                                                    return true;
-                                                }
-                                            case PageContainer targetPage:
-                                                {
-                                                    if (bExecute)
-                                                    {
-                                                        // TODO:
-                                                    }
-                                                    return true;
-                                                }
-                                            case DocumentContainer targetDocument:
-                                                {
-                                                    if (bExecute)
-                                                    {
-                                                        // TODO:
-                                                    }
-                                                    return true;
-                                                }
-                                        }
-
-                                        return false;
-                                    }
-                            }
-                        }
-
-                        return false;
-                    }
-                case TabStrip strip:
-                    {
-                        if (e.Data.Get(CustomDataFormats.Parent) is TabStripItem source &&
-                            (e.Source as IControl).Parent.Parent is TabStripItem target)
-                        {
-                            if (source.Parent == target.Parent)
-                            {
-                                int sourceIndex = strip.ItemContainerGenerator.IndexFromContainer(source);
-                                int targetIndex = strip.ItemContainerGenerator.IndexFromContainer(target);
-
-                                Console.WriteLine($"sourceIndex : {sourceIndex}");
-                                Console.WriteLine($"targetIndex : {targetIndex}");
-                                Console.WriteLine($"DataContext type : {strip.DataContext.GetType()}");
-
-                                if (strip.DataContext is ViewsPanel panel)
-                                {
-                                    if (e.DragEffects == DragDropEffects.Copy)
-                                    {
-                                        if (bExecute)
-                                        {
-                                            // TODO: Clone item.
-                                        }
-                                        return true;
-                                    }
-                                    else if (e.DragEffects == DragDropEffects.Move)
-                                    {
-                                        if (bExecute)
-                                        {
-                                            Editor?.MoveView(panel, sourceIndex, targetIndex);
-                                        }
-                                        return true;
-                                    }
-                                    else if (e.DragEffects == DragDropEffects.Link)
-                                    {
-                                        if (bExecute)
-                                        {
-                                            Editor?.SwapView(panel, sourceIndex, targetIndex);
-                                        }
-                                        return true;
-                                    }
-                                    return false;
-                                }
-
-                                return false;
-                            }
-                            else if (source.Parent is TabStrip sourceStrip 
-                                && target.Parent is TabStrip targetStrip 
-                                && sourceStrip.DataContext is ViewsPanel sourcePanel
-                                && targetStrip.DataContext is ViewsPanel targetPanel)
-                            {
-                                int sourceIndex = sourceStrip.ItemContainerGenerator.IndexFromContainer(source);
-                                int targetIndex = targetStrip.ItemContainerGenerator.IndexFromContainer(target);
-
-                                Console.WriteLine($"sourceIndex : {sourceIndex}");
-                                Console.WriteLine($"targetIndex : {targetIndex}");
-                                Console.WriteLine($"DataContext type : {strip.DataContext.GetType()}");
-
                                 if (e.DragEffects == DragDropEffects.Copy)
                                 {
                                     if (bExecute)
@@ -377,33 +90,352 @@ namespace Core2D.Avalonia.Behaviors
                                 }
                                 else if (e.DragEffects == DragDropEffects.Move)
                                 {
-                                    if (sourcePanel.Views.Length > 1)
+                                    if (bExecute)
                                     {
-                                        if (bExecute)
-                                        {
-                                            Editor?.MoveView(sourcePanel, targetPanel, sourceIndex, targetIndex);
-                                        }
-                                        return true;
+                                        Editor?.MoveItem(library, sourceIndex, targetIndex);
                                     }
-                                    return false;
+                                    return true;
                                 }
                                 else if (e.DragEffects == DragDropEffects.Link)
                                 {
                                     if (bExecute)
                                     {
-                                        Editor?.SwapView(sourcePanel, targetPanel, sourceIndex, targetIndex);
+                                        Editor?.SwapItem(library, sourceIndex, targetIndex);
                                     }
                                     return true;
                                 }
 
                                 return false;
                             }
+                        case Library<GroupShape> library:
+                            {
+                                if (e.DragEffects == DragDropEffects.Copy)
+                                {
+                                    if (bExecute)
+                                    {
+                                        // TODO: Clone item.
+                                    }
+                                    return true;
+                                }
+                                else if (e.DragEffects == DragDropEffects.Move)
+                                {
+                                    if (bExecute)
+                                    {
+                                        Editor?.MoveItem(library, sourceIndex, targetIndex);
+                                    }
+                                    return true;
+                                }
+                                else if (e.DragEffects == DragDropEffects.Link)
+                                {
+                                    if (bExecute)
+                                    {
+                                        Editor?.SwapItem(library, sourceIndex, targetIndex);
+                                    }
+                                    return true;
+                                }
+
+                                return false;
+                            }
+                        default:
+                            Console.WriteLine($"List DataContext drop type was not handled: {list.DataContext}");
+                            return false;
+                    }
+                }
+                else if (source.Parent is ListBox sourceList && target.Parent is ListBox targetList)
+                {
+                    if (sourceList.DataContext?.GetType() == targetList.DataContext?.GetType())
+                    {
+                        if (bExecute)
+                        {
+                            // TODO: Exchange items between lists.
+                        }
+                        return true;
+                    }
+
+                    return false;
+                }
+
+                return false;
+            }
+
+            return false;
+        }
+
+        private bool ValidateDragTreeView(DragEventArgs e, bool bExecute, TreeView tree)
+        {
+            var sourceItem = e.Data.Get(CustomDataFormats.Parent);
+            var targetItem = (e.Source as IControl)?.Parent?.Parent;
+
+            if (sourceItem is TreeViewItem source && targetItem is TreeViewItem target)
+            {
+                var sourceData = source.DataContext;
+                var targetData = target.DataContext;
+
+                Console.WriteLine($"sourceData : {sourceData}");
+                Console.WriteLine($"targetData : {targetData}");
+                Console.WriteLine($"DataContext type : {tree.DataContext.GetType()}");
+
+                switch (sourceData)
+                {
+                    case LayerContainer sourceLayer:
+                        {
+                            switch (targetData)
+                            {
+                                case LayerContainer targetLayer:
+                                    {
+                                        if (bExecute)
+                                        {
+                                            // TODO:
+                                        }
+                                        return true;
+                                    }
+                                case PageContainer targetPage:
+                                    {
+                                        if (e.DragEffects == DragDropEffects.Copy)
+                                        {
+                                            if (bExecute)
+                                            {
+                                                var layer = Editor?.Clone(sourceLayer);
+                                                Editor?.Project.AddLayer(targetPage, layer);
+                                            }
+                                            return true;
+                                        }
+                                        else if (e.DragEffects == DragDropEffects.Move)
+                                        {
+                                            if (bExecute)
+                                            {
+                                                Editor?.Project?.RemoveLayer(sourceLayer);
+                                                Editor?.Project.AddLayer(targetPage, sourceLayer);
+                                            }
+                                            return true;
+                                        }
+                                        else if (e.DragEffects == DragDropEffects.Link)
+                                        {
+                                            if (bExecute)
+                                            {
+                                                Editor?.Project.AddLayer(targetPage, sourceLayer);
+                                                e.DragEffects = DragDropEffects.None;
+                                            }
+                                            return true;
+                                        }
+                                        return false;
+                                    }
+                                case DocumentContainer targetDocument:
+                                    {
+                                        if (bExecute)
+                                        {
+                                            // TODO:
+                                        }
+                                        return true;
+                                    }
+                            }
 
                             return false;
                         }
+                    case PageContainer sourcePage:
+                        {
+                            switch (targetData)
+                            {
+                                case LayerContainer targetLayer:
+                                    {
+                                        if (bExecute)
+                                        {
+                                            // TODO:
+                                        }
+                                        return true;
+                                    }
+                                case PageContainer targetPage:
+                                    {
+                                        if (bExecute)
+                                        {
+                                            // TODO:
+                                        }
+                                        return true;
+                                    }
+                                case DocumentContainer targetDocument:
+                                    {
+                                        if (e.DragEffects == DragDropEffects.Copy)
+                                        {
+                                            if (bExecute)
+                                            {
+                                                var page = Editor?.Clone(sourcePage);
+                                                Editor?.Project.AddPage(targetDocument, page);
+                                                Editor?.Project?.SetCurrentContainer(page);
+                                            }
+                                            return true;
+                                        }
+                                        else if (e.DragEffects == DragDropEffects.Move)
+                                        {
+                                            if (bExecute)
+                                            {
+                                                Editor?.Project?.RemovePage(sourcePage);
+                                                Editor?.Project.AddPage(targetDocument, sourcePage);
+                                                Editor?.Project?.SetCurrentContainer(sourcePage);
+                                            }
+                                            return true;
+                                        }
+                                        else if (e.DragEffects == DragDropEffects.Link)
+                                        {
+                                            if (bExecute)
+                                            {
+                                                Editor?.Project.AddPage(targetDocument, sourcePage);
+                                                Editor?.Project?.SetCurrentContainer(sourcePage);
+                                            }
+                                            return true;
+                                        }
+                                        return false;
+                                    }
+                            }
 
+                            return false;
+                        }
+                    case DocumentContainer sourceDocument:
+                        {
+                            switch (targetData)
+                            {
+                                case LayerContainer targetLayer:
+                                    {
+                                        if (bExecute)
+                                        {
+                                            // TODO:
+                                        }
+                                        return true;
+                                    }
+                                case PageContainer targetPage:
+                                    {
+                                        if (bExecute)
+                                        {
+                                            // TODO:
+                                        }
+                                        return true;
+                                    }
+                                case DocumentContainer targetDocument:
+                                    {
+                                        if (bExecute)
+                                        {
+                                            // TODO:
+                                        }
+                                        return true;
+                                    }
+                            }
+
+                            return false;
+                        }
+                }
+            }
+
+            return false;
+        }
+
+        private bool ValidateDragTabStrip(DragEventArgs e, bool bExecute, TabStrip strip)
+        {
+            var sourceItem = e.Data.Get(CustomDataFormats.Parent);
+            var targetItem = (e.Source as IControl)?.Parent?.Parent;
+
+            if (sourceItem is TabStripItem source && targetItem is TabStripItem target)
+            {
+                if (source.Parent == target.Parent)
+                {
+                    int sourceIndex = strip.ItemContainerGenerator.IndexFromContainer(source);
+                    int targetIndex = strip.ItemContainerGenerator.IndexFromContainer(target);
+
+                    Console.WriteLine($"sourceIndex : {sourceIndex}");
+                    Console.WriteLine($"targetIndex : {targetIndex}");
+                    Console.WriteLine($"DataContext type : {strip.DataContext.GetType()}");
+
+                    if (strip.DataContext is ViewsPanel panel)
+                    {
+                        if (e.DragEffects == DragDropEffects.Copy)
+                        {
+                            if (bExecute)
+                            {
+                                // TODO: Clone item.
+                            }
+                            return true;
+                        }
+                        else if (e.DragEffects == DragDropEffects.Move)
+                        {
+                            if (bExecute)
+                            {
+                                Editor?.MoveView(panel, sourceIndex, targetIndex);
+                            }
+                            return true;
+                        }
+                        else if (e.DragEffects == DragDropEffects.Link)
+                        {
+                            if (bExecute)
+                            {
+                                Editor?.SwapView(panel, sourceIndex, targetIndex);
+                            }
+                            return true;
+                        }
                         return false;
                     }
+
+                    return false;
+                }
+                else if (source.Parent is TabStrip sourceStrip 
+                    && target.Parent is TabStrip targetStrip
+                    && sourceStrip.DataContext is ViewsPanel sourcePanel
+                    && targetStrip.DataContext is ViewsPanel targetPanel)
+                {
+                    int sourceIndex = sourceStrip.ItemContainerGenerator.IndexFromContainer(source);
+                    int targetIndex = targetStrip.ItemContainerGenerator.IndexFromContainer(target);
+
+                    Console.WriteLine($"sourceIndex : {sourceIndex}");
+                    Console.WriteLine($"targetIndex : {targetIndex}");
+                    Console.WriteLine($"DataContext type : {strip.DataContext.GetType()}");
+
+                    if (e.DragEffects == DragDropEffects.Copy)
+                    {
+                        if (bExecute)
+                        {
+                            // TODO: Clone item.
+                        }
+                        return true;
+                    }
+                    else if (e.DragEffects == DragDropEffects.Move)
+                    {
+                        if (sourcePanel.Views.Length > 1)
+                        {
+                            if (bExecute)
+                            {
+                                Editor?.MoveView(sourcePanel, targetPanel, sourceIndex, targetIndex);
+                            }
+                            return true;
+                        }
+                        return false;
+                    }
+                    else if (e.DragEffects == DragDropEffects.Link)
+                    {
+                        if (bExecute)
+                        {
+                            Editor?.SwapView(sourcePanel, targetPanel, sourceIndex, targetIndex);
+                        }
+                        return true;
+                    }
+
+                    return false;
+                }
+
+                return false;
+            }
+
+            return false;
+        }
+
+        private bool ValidateDrag(object sender, DragEventArgs e, bool bExecute)
+        {
+            var point = GetPoint(sender, e);
+
+            switch (sender)
+            {
+                case ListBox list:
+                    return ValidateDragListBox(e, bExecute, list);
+                case TreeView tree:
+                    return ValidateDragTreeView(e, bExecute, tree);
+                case TabStrip strip:
+                    return ValidateDragTabStrip(e, bExecute, strip);
             }
 
             if (e.Data.Contains(DataFormats.Text))
@@ -429,29 +461,13 @@ namespace Core2D.Avalonia.Behaviors
                 switch (data)
                 {
                     case BaseShape shape:
-                        if (bExecute)
-                        {
-                            Editor?.OnDropShape(shape, point.X, point.Y);
-                        }
-                        return true;
+                        return Editor?.OnDropShape(shape, point.X, point.Y, bExecute) == true;
                     case Record record:
-                        if (bExecute)
-                        {
-                            Editor?.OnDropRecord(record, point.X, point.Y);
-                        }
-                        return true;
+                        return Editor?.OnDropRecord(record, point.X, point.Y, bExecute) == true;
                     case ShapeStyle style:
-                        if (bExecute)
-                        {
-                            Editor?.OnDropStyle(style, point.X, point.Y);
-                        }
-                        return true;
+                        return Editor?.OnDropStyle(style, point.X, point.Y, bExecute) == true;
                     case PageContainer page:
-                        if (bExecute)
-                        {
-                            Editor?.OnApplyTemplate(page);
-                        }
-                        return true;
+                        return Editor?.OnDropTemplate(page, point.X, point.Y, bExecute) == true;
                     default:
                         Console.WriteLine($"Drop type was not handled: {data}");
                         break;

@@ -2660,7 +2660,9 @@ namespace Core2D.Editor
         /// <param name="shape">The <see cref="BaseShape"/> object.</param>
         /// <param name="x">The X coordinate in container.</param>
         /// <param name="y">The Y coordinate in container.</param>
-        public void OnDropShape(BaseShape shape, double x, double y)
+        /// <param name="bExecute">The flag indicating whether to execute action.</param>
+        /// <returns>Returns true if success.</returns>
+        public bool OnDropShape(BaseShape shape, double x, double y, bool bExecute = true)
         {
             try
             {
@@ -2671,7 +2673,11 @@ namespace Core2D.Editor
                     {
                         if (target is PointShape point)
                         {
-                            point.Shape = shape;
+                            if (bExecute == true)
+                            {
+                                point.Shape = shape;
+                            }
+                            return true;
                         }
                     }
                 }
@@ -2683,7 +2689,14 @@ namespace Core2D.Editor
                         {
                             if (target is PointShape point)
                             {
-                                point.Shape = shape;
+                                if (bExecute == true)
+                                {
+                                    point.Shape = shape;
+                                }
+                                else
+                                {
+                                    return true;
+                                }
                             }
                         }
                     }
@@ -2696,11 +2709,22 @@ namespace Core2D.Editor
                         var point = HitTest.TryToGetPoint(layer.Shapes, new Point2(x, y), Project.Options.HitThreshold);
                         if (point != null)
                         {
-                            point.Shape = shape;
+                            if (bExecute == true)
+                            {
+                                point.Shape = shape;
+                            }
+                            else
+                            {
+                                return true;
+                            }
                         }
                         else
                         {
-                            OnDropShapeAsClone(shape, x, y);
+                            if (bExecute == true)
+                            {
+                                OnDropShapeAsClone(shape, x, y);
+                            }
+                            return true;
                         }
                     }
                 }
@@ -2709,6 +2733,7 @@ namespace Core2D.Editor
             {
                 LogError(ex);
             }
+            return false;
         }
 
         /// <summary>
@@ -2759,14 +2784,20 @@ namespace Core2D.Editor
         /// <param name="record">The <see cref="Record"/> object.</param>
         /// <param name="x">The X coordinate in container.</param>
         /// <param name="y">The Y coordinate in container.</param>
-        public void OnDropRecord(Record record, double x, double y)
+        /// <param name="bExecute">The flag indicating whether to execute action.</param>
+        /// <returns>Returns true if success.</returns>
+        public bool OnDropRecord(Record record, double x, double y, bool bExecute = true)
         {
             try
             {
                 if (Renderers?[0]?.State?.SelectedShape != null
                     || (Renderers?[0]?.State?.SelectedShapes != null && Renderers?[0]?.State?.SelectedShapes.Count > 0))
                 {
-                    OnApplyRecord(record);
+                    if (bExecute)
+                    {
+                        OnApplyRecord(record);
+                    }
+                    return true;
                 }
                 else
                 {
@@ -2776,11 +2807,19 @@ namespace Core2D.Editor
                         var result = HitTest.TryToGetShape(layer.Shapes, new Point2(x, y), Project.Options.HitThreshold);
                         if (result != null)
                         {
-                            Project?.ApplyRecord(result.Data, record);
+                            if (bExecute)
+                            {
+                                Project?.ApplyRecord(result.Data, record);
+                            }
+                            return true;
                         }
                         else
                         {
-                            OnDropRecordAsGroup(record, x, y);
+                            if (bExecute)
+                            {
+                                OnDropRecordAsGroup(record, x, y);
+                            }
+                            return true;
                         }
                     }
                 }
@@ -2789,6 +2828,7 @@ namespace Core2D.Editor
             {
                 LogError(ex);
             }
+            return false;
         }
 
         /// <summary>
@@ -2850,14 +2890,20 @@ namespace Core2D.Editor
         /// <param name="style">The <see cref="ShapeStyle"/> object.</param>
         /// <param name="x">The X coordinate in container.</param>
         /// <param name="y">The Y coordinate in container.</param>
-        public void OnDropStyle(ShapeStyle style, double x, double y)
+        /// <param name="bExecute">The flag indicating whether to execute action.</param>
+        /// <returns>Returns true if success.</returns>
+        public bool OnDropStyle(ShapeStyle style, double x, double y, bool bExecute = true)
         {
             try
             {
                 if (Renderers?[0]?.State?.SelectedShape != null
                     || (Renderers?[0]?.State?.SelectedShapes != null && Renderers?[0]?.State?.SelectedShapes.Count > 0))
                 {
-                    OnApplyStyle(style);
+                    if (bExecute == true)
+                    {
+                        OnApplyStyle(style);
+                    }
+                    return true;
                 }
                 else
                 {
@@ -2867,7 +2913,11 @@ namespace Core2D.Editor
                         var result = HitTest.TryToGetShape(layer.Shapes, new Point2(x, y), Project.Options.HitThreshold);
                         if (result != null)
                         {
-                            Project.ApplyStyle(result, style);
+                            if (bExecute == true)
+                            {
+                                Project.ApplyStyle(result, style);
+                            }
+                            return true;
                         }
                     }
                 }
@@ -2876,6 +2926,36 @@ namespace Core2D.Editor
             {
                 LogError(ex);
             }
+            return false;
+        }
+
+        /// <summary>
+        /// Drop <see cref="PageContainer"/> object in current container at specified location.
+        /// </summary>
+        /// <param name="template">The template object.</param>
+        /// <param name="x">The X coordinate in container.</param>
+        /// <param name="y">The Y coordinate in container.</param>
+        /// <param name="bExecute">The flag indicating whether to execute action.</param>
+        /// <returns>Returns true if success.</returns>
+        public bool OnDropTemplate(PageContainer template, double x, double y, bool bExecute = true)
+        {
+            try
+            {
+                var page = Project?.CurrentContainer;
+                if (page != null && template != null && page != template)
+                {
+                    if (bExecute)
+                    {
+                        OnApplyTemplate(template);
+                    }
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogError(ex);
+            }
+            return false;
         }
 
         /// <summary>
