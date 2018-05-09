@@ -30,11 +30,7 @@ namespace Core2D.Editor
         private PathToolBase _currentPathTool;
         private ImmutableArray<RecentFile> _recentProjects;
         private RecentFile _currentRecentProject;
-        private ViewsPanel _leftPanelTop;
-        private ViewsPanel _leftPanelBottom;
-        private ViewsPanel _rightPanelTop;
-        private ViewsPanel _rightPanelBottom;
-        private IView _currentView;
+        private ViewsLayout _layout;
         private AboutInfo _aboutInfo;
         private readonly Lazy<ImmutableArray<ToolBase>> _tools;
         private readonly Lazy<ImmutableArray<PathToolBase>> _pathTools;
@@ -138,48 +134,12 @@ namespace Core2D.Editor
         }
 
         /// <summary>
-        /// Gets or sets current left panel top.
+        /// Gets or sets current layout configuration.
         /// </summary>
-        public ViewsPanel LeftPanelTop
+        public ViewsLayout Layout
         {
-            get => _leftPanelTop;
-            set => Update(ref _leftPanelTop, value);
-        }
-
-        /// <summary>
-        /// Gets or sets current left panel bottom.
-        /// </summary>
-        public ViewsPanel LeftPanelBottom
-        {
-            get => _leftPanelBottom;
-            set => Update(ref _leftPanelBottom, value);
-        }
-
-        /// <summary>
-        /// Gets or sets current right panel top.
-        /// </summary>
-        public ViewsPanel RightPanelTop
-        {
-            get => _rightPanelTop;
-            set => Update(ref _rightPanelTop, value);
-        }
-
-        /// <summary>
-        /// Gets or sets current right panel bottom.
-        /// </summary>
-        public ViewsPanel RightPanelBottom
-        {
-            get => _rightPanelBottom;
-            set => Update(ref _rightPanelBottom, value);
-        }
-
-        /// <summary>
-        /// Gets or sets current view.
-        /// </summary>
-        public IView CurrentView
-        {
-            get => _currentView;
-            set => Update(ref _currentView, value);
+            get => _layout;
+            set => Update(ref _layout, value);
         }
 
         /// <summary>

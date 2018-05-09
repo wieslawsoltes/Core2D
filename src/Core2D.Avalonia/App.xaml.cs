@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Reflection;
@@ -97,6 +98,90 @@ namespace Core2D.Avalonia
             };
         }
 
+        private void UpdatePanel(ViewsPanel panel, IList<IView> views)
+        {
+            var list = new List<IView>();
+
+            foreach (var view in panel.Views)
+            {
+                list.Add(views.FirstOrDefault(v => v.Title == view.Title));
+            }
+            panel.Views = list.ToImmutableArray();
+
+            panel.CurrentView = views.FirstOrDefault(v => v.Title == panel.CurrentView.Title);
+        }
+
+        private void CreateOrUpdateLayout(ProjectEditor editor)
+        {
+            var views = editor.Views;
+
+            if (editor.Layout != null)
+            {
+                var layout = editor.Layout;
+
+                UpdatePanel(layout.LeftPanelTop, views);
+                UpdatePanel(layout.LeftPanelBottom, views);
+                UpdatePanel(layout.RightPanelTop, views);
+                UpdatePanel(layout.RightPanelBottom, views);
+
+                layout.CurrentView = views.FirstOrDefault(v => v.Title == layout.CurrentView.Title);
+            }
+            else
+            {
+                var layout = new ViewsLayout();
+
+                layout.LeftPanelTop = new ViewsPanel
+                {
+                    Views = new[]
+                    {
+                        views.FirstOrDefault(v => v.Title == "Project"),
+                        views.FirstOrDefault(v => v.Title == "Options"),
+                        views.FirstOrDefault(v => v.Title == "Images")
+                    }.ToImmutableArray(),
+                    CurrentView = views.FirstOrDefault(v => v.Title == "Project")
+                };
+    
+                layout.LeftPanelBottom = new ViewsPanel
+                {
+                    Views = new[]
+                    {
+                        views.FirstOrDefault(v => v.Title == "Groups"),
+                        views.FirstOrDefault(v => v.Title == "Databases")
+                    }.ToImmutableArray(),
+                    CurrentView = views.FirstOrDefault(v => v.Title == "Groups")
+                };
+    
+                layout.RightPanelTop = new ViewsPanel
+                {
+                    Views = new[]
+                    {
+                        views.FirstOrDefault(v => v.Title == "Styles"),
+                        views.FirstOrDefault(v => v.Title == "Templates"),
+                        views.FirstOrDefault(v => v.Title == "Container"),
+                        views.FirstOrDefault(v => v.Title == "Zoom")
+                    }.ToImmutableArray(),
+                    CurrentView = views.FirstOrDefault(v => v.Title == "Styles")
+                };
+    
+                layout.RightPanelBottom = new ViewsPanel
+                {
+                    Views = new[]
+                    {
+                        views.FirstOrDefault(v => v.Title == "Tools"),
+                        views.FirstOrDefault(v => v.Title == "Shape"),
+                        views.FirstOrDefault(v => v.Title == "Data"),
+                        views.FirstOrDefault(v => v.Title == "Style"),
+                        views.FirstOrDefault(v => v.Title == "Template")
+                    }.ToImmutableArray(),
+                    CurrentView = views.FirstOrDefault(v => v.Title == "Tools")
+                };
+    
+                layout.CurrentView = views.FirstOrDefault(v => v.Title == "Dashboard");
+
+                editor.Layout = layout;
+            }
+        }
+
         /// <summary>
         /// Initialize application context and displays main window.
         /// </summary>
@@ -115,66 +200,31 @@ namespace Core2D.Avalonia
             {
                 var editor = serviceProvider.GetService<ProjectEditor>();
 
-                var path = System.IO.Path.Combine(fileIO.GetBaseDirectory(), "Core2D.recent");
-                if (fileIO.Exists(path))
+                var recentPath = System.IO.Path.Combine(fileIO.GetBaseDirectory(), "Core2D.recent");
+                if (fileIO.Exists(recentPath))
                 {
-                    editor.OnLoadRecent(path);
+                    editor.OnLoadRecent(recentPath);
                 }
 
-                editor.LeftPanelTop = new ViewsPanel
+                var layoutPath = System.IO.Path.Combine(fileIO.GetBaseDirectory(), "Core2D.layout");
+                if (fileIO.Exists(layoutPath))
                 {
-                    Views = new[]
-                    {
-                        editor.Views.FirstOrDefault(v => v.Title == "Project"),
-                        editor.Views.FirstOrDefault(v => v.Title == "Options"),
-                        editor.Views.FirstOrDefault(v => v.Title == "Images")
-                    }.ToImmutableArray(),
-                    CurrentView = editor.Views.FirstOrDefault(v => v.Title == "Project")
-                };
+                    editor.OnLoadLayout(layoutPath);
+                }
 
-                editor.LeftPanelBottom = new ViewsPanel
-                {
-                    Views = new[]
-                    {
-                        editor.Views.FirstOrDefault(v => v.Title == "Groups"),
-                        editor.Views.FirstOrDefault(v => v.Title == "Databases")
-                    }.ToImmutableArray(),
-                    CurrentView = editor.Views.FirstOrDefault(v => v.Title == "Groups")
-                };
+                CreateOrUpdateLayout(editor);
 
-                editor.RightPanelTop = new ViewsPanel
-                {
-                    Views = new[]
-                    {
-                        editor.Views.FirstOrDefault(v => v.Title == "Styles"),
-                        editor.Views.FirstOrDefault(v => v.Title == "Templates"),
-                        editor.Views.FirstOrDefault(v => v.Title == "Container"),
-                        editor.Views.FirstOrDefault(v => v.Title == "Zoom")
-                    }.ToImmutableArray(),
-                    CurrentView = editor.Views.FirstOrDefault(v => v.Title == "Styles")
-                };
-
-                editor.RightPanelBottom = new ViewsPanel
-                {
-                    Views = new[]
-                    {
-                        editor.Views.FirstOrDefault(v => v.Title == "Tools"),
-                        editor.Views.FirstOrDefault(v => v.Title == "Shape"),
-                        editor.Views.FirstOrDefault(v => v.Title == "Data"),
-                        editor.Views.FirstOrDefault(v => v.Title == "Style"),
-                        editor.Views.FirstOrDefault(v => v.Title == "Template")
-                    }.ToImmutableArray(),
-                    CurrentView = editor.Views.FirstOrDefault(v => v.Title == "Tools")
-                };
-
-                editor.CurrentView = editor.Views.FirstOrDefault(v => v.Title == "Dashboard");
                 editor.CurrentTool = editor.Tools.FirstOrDefault(t => t.Title == "Selection");
                 editor.CurrentPathTool = editor.PathTools.FirstOrDefault(t => t.Title == "Line");
                 editor.IsToolIdle = true;
                 editor.AboutInfo = aboutInfo;
 
                 var window = serviceProvider.GetService<Windows.MainWindow>();
-                window.Closed += (sender, e) => editor.OnSaveRecent(path);
+                window.Closed += (sender, e) => 
+                {
+                    editor.OnSaveRecent(recentPath);
+                    editor.OnSaveLayout(layoutPath);
+                };
                 window.DataContext = editor;
                 window.Show();
                 Run(window);
@@ -205,7 +255,8 @@ namespace Core2D.Avalonia
 
             var editor = serviceProvider.GetService<ProjectEditor>();
 
-            editor.CurrentView = editor.Views.FirstOrDefault(v => v.Title == "Dashboard");
+            CreateOrUpdateLayout(editor);
+
             editor.CurrentTool = editor.Tools.FirstOrDefault(t => t.Title == "Selection");
             editor.CurrentPathTool = editor.PathTools.FirstOrDefault(t => t.Title == "Line");
             editor.IsToolIdle = true;

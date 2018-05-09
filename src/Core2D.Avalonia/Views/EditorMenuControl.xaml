@@ -111,7 +111,7 @@
                                     <CheckBox.IsChecked>
                                         <MultiBinding Mode="OneWay" Converter="{x:Static converters:ObjectEqualityMultiConverter.Instance}">
                                             <Binding ElementName="icon" Path="DataContext" Converter="{x:Static converters:ObjectToObjectConverter.Instance}"/>
-                                            <Binding ElementName="icon" Path="Tag.CurrentView" Converter="{x:Static converters:ObjectToObjectConverter.Instance}"/>
+                                            <Binding ElementName="icon" Path="Tag.Layout.CurrentView" Converter="{x:Static converters:ObjectToObjectConverter.Instance}"/>
                                         </MultiBinding>
                                     </CheckBox.IsChecked>
                                 </CheckBox>

@@ -2124,6 +2124,50 @@ namespace Core2D.Editor
         }
 
         /// <summary>
+        /// Load layout configuration.
+        /// </summary>
+        /// <param name="path">The layout configuration path.</param>
+        public void OnLoadLayout(string path)
+        {
+            if (JsonSerializer != null)
+            {
+                try
+                {
+                    var json = FileIO.ReadUtf8Text(path);
+                    var layout = JsonSerializer.Deserialize<ViewsLayout>(json);
+                    if (layout != null)
+                    {
+                        Layout = layout;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    LogError(ex);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Save layout configuration.
+        /// </summary>
+        /// <param name="path">The layout configuration path.</param>
+        public void OnSaveLayout(string path)
+        {
+            if (JsonSerializer != null)
+            {
+                try
+                {
+                    var json = JsonSerializer.Serialize(_layout);
+                    FileIO.WriteUtf8Text(path, json);
+                }
+                catch (Exception ex)
+                {
+                    LogError(ex);
+                }
+            }
+        }
+
+        /// <summary>
         /// Check if undo action is available.
         /// </summary>
         /// <returns>Returns true if undo action is available.</returns>
@@ -3801,9 +3845,9 @@ namespace Core2D.Editor
         /// <param name="view">The view instance.</param>
         public void OnChangeCurrentView(IView view)
         {
-            if (view != null && _currentView != view)
+            if (view != null && _layout.CurrentView != view)
             {
-                CurrentView = view;
+                _layout.CurrentView = view;
             }
         }
 
