@@ -48,7 +48,7 @@
                 </TabStrip.DataTemplates>
             </TabStrip>
         </StackPanel>
-        <ScrollViewer ZIndex="-1">
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" ZIndex="-1">
             <Carousel Items="{Binding Project.Documents}" SelectedIndex="{Binding #documents.SelectedIndex}" IsVirtualized="False" VerticalAlignment="Center" Margin="2">
                 <Carousel.DataTemplates>
                     <DataTemplate DataType="Containers:DocumentContainer">
