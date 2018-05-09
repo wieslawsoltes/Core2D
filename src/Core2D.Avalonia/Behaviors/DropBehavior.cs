@@ -438,6 +438,37 @@ namespace Core2D.Avalonia.Behaviors
                     return ValidateDragTabStrip(e, bExecute, strip);
             }
 
+            if (e.Data.Get(CustomDataFormats.Parent) is TabStripItem item)
+            {
+                var strip = item.Parent as TabStrip;
+                if (strip.DataContext is ViewsPanel panel)
+                {
+                    if (bExecute)
+                    {
+                        int itemIndex = strip.ItemContainerGenerator.IndexFromContainer(item);
+
+                        Console.WriteLine($"itemIndex : {itemIndex}");
+                        Console.WriteLine($"DataContext type : {strip.DataContext.GetType()}");
+
+                        var view = panel.Views[itemIndex];
+                        var window = new Window()
+                        {
+                            DataContext = Editor,
+                            Width = 300,
+                            Height = 500,
+                            Title = view.Title,
+                            Content = new ContentControl()
+                            {
+                                Content = view
+                            }
+                        };
+                        window.Show();
+                        return true;
+                    }
+                    return true;
+                }
+            }
+
             if (e.Data.Contains(DataFormats.Text))
             {
                 var text = e.Data.GetText();
