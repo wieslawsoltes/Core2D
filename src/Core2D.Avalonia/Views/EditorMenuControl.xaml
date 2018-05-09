@@ -15,7 +15,7 @@
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
              Design.DataContext="{x:Static Designer:DesignerContext.Editor}"
              Design.Width="800" Design.Height="20">
-    <Menu>
+    <Menu Classes="default">
         <Menu.ItemsPanel>
             <ItemsPanelTemplate>
                 <WrapPanel/>
