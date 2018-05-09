@@ -15,5 +15,17 @@ namespace Core2D.Editor
 
         /// <inheritdoc/>
         public abstract object Context { get; }
+
+        /// <summary>
+        /// Check whether the <see cref="Title"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public virtual bool ShouldSerializeTitle() => true;
+
+        /// <summary>
+        /// Check whether the <see cref="Context"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public virtual bool ShouldSerializeContext() => false;
     }
 }
