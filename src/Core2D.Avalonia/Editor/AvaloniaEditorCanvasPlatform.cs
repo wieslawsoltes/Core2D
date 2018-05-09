@@ -15,6 +15,7 @@ namespace Core2D.Avalonia.Editor
         private Action _invalidate;
         private Action _resetZoom;
         private Action _extentZoom;
+        private object _zoom;
 
         /// <summary>
         /// Initialize new instance of <see cref="AvaloniaEditorCanvasPlatform"/> class.
@@ -44,6 +45,13 @@ namespace Core2D.Avalonia.Editor
         {
             get => _extentZoom;
             set => Update(ref _extentZoom, value);
+        }
+
+        /// <inheritdoc/>
+        public object Zoom
+        {
+            get => _zoom;
+            set => Update(ref _zoom, value);
         }
     }
 }

@@ -10,13 +10,9 @@
              xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor"
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
+             Width="{Binding $self.Container.Width}"
+             Height="{Binding $self.Container.Height}"
              Focusable="True">
-    <UserControl.Width>
-        <Binding RelativeSource="{RelativeSource Self}" Path="Container.Width"/>
-    </UserControl.Width>
-    <UserControl.Height>
-        <Binding RelativeSource="{RelativeSource Self}" Path="Container.Height"/>
-    </UserControl.Height>
     <i:Interaction.Behaviors>
         <iac:FocusOnAttachedToVisualTreeBehavior/>
         <iac:FocusOnPointerMovedBehavior/>

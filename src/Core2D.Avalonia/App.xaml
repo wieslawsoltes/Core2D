@@ -785,7 +785,7 @@
             </ScrollViewer>
         </DataTemplate>
         <DataTemplate DataType="Views:ZoomView">
-            <containers:ZoomControl/>
+            <containers:ZoomControl DataContext="{Binding Context.Canvas.Zoom}"/>
         </DataTemplate>
         <DataTemplate DataType="Views:ToolsView">
             <settings:ToolsControl DataContext="{Binding Context}"/>
