@@ -11,6 +11,7 @@
              xmlns:Core="clr-namespace:Core2D;assembly=Core2D"
              xmlns:Data="clr-namespace:Core2D.Data;assembly=Core2D"
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor"
+             xmlns:Interfaces="clr-namespace:Core2D.Editor.Views.Interfaces;assembly=Core2D.Editor"
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
              xmlns:Containers="clr-namespace:Core2D.Containers;assembly=Core2D"
              xmlns:Shape="clr-namespace:Core2D.Shape;assembly=Core2D"
@@ -330,6 +331,33 @@
                         </ContextMenu>
                     </TreeViewItem.ContextMenu>
                 </TreeViewItem>
+            </TreeViewItem>
+            <!-- Views -->
+            <TreeViewItem Header="Views" DataContext="{Binding Views}" Items="{Binding}">
+                <TreeViewItem.ContextMenu>
+                    <ContextMenu Classes="default">
+                        <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
+                    </ContextMenu>
+                </TreeViewItem.ContextMenu>
+                <TreeViewItem.Styles>
+                    <Style Selector="TreeViewItem">
+                        <Setter Property="IsExpanded" Value="False"/>
+                    </Style>
+                </TreeViewItem.Styles>
+                <TreeViewItem.DataTemplates>
+                    <DataTemplate DataType="Interfaces:IView">
+                        <TextBlock Text="{Binding Title}" Classes="tree drag">
+                            <i:Interaction.Behaviors>
+                                <behaviors:DragBehavior/>
+                            </i:Interaction.Behaviors>
+                            <TextBlock.ContextMenu>
+                                <ContextMenu Classes="default">
+                                    <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
+                                </ContextMenu>
+                            </TextBlock.ContextMenu>
+                        </TextBlock>
+                    </DataTemplate>
+                </TreeViewItem.DataTemplates>
             </TreeViewItem>
         </TreeView>
         <GridSplitter Classes="vertical" Grid.Column="1" Grid.Row="0" Width="6"/>
