@@ -45,10 +45,7 @@
                     <DataTemplate DataType="Containers:DocumentContainer">
                         <ItemsControl VerticalAlignment="Stretch" Items="{Binding Pages}">
                             <ItemsControl.DataTemplates>
-                                <DataTemplate DataType="Containers:PageContainer" Classes="drag">
-                                    <i:Interaction.Behaviors>
-                                        <behaviors:DragBehavior/>
-                                    </i:Interaction.Behaviors>
+                                <DataTemplate DataType="Containers:PageContainer">
                                     <views:ContainerControl Container="{Binding}" ClipToBounds="False" Margin="0,4,0,4"/>
                                 </DataTemplate>
                             </ItemsControl.DataTemplates>
