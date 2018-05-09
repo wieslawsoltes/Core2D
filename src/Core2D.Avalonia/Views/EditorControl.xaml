@@ -31,15 +31,15 @@
             </Border>
         </Grid>
         <Grid RowDefinitions="50*,Auto,50*" Grid.Column="0" Grid.Row="0">
-            <views:ViewsControl DataContext="{Binding LeftPanelTop}" Grid.Row="0"/>
+            <views:ViewsControl DataContext="{Binding Layout.LeftPanelTop}" Grid.Row="0"/>
             <GridSplitter Classes="horizontal" Grid.Row="1" Height="7"/>
-            <views:ViewsControl DataContext="{Binding LeftPanelBottom}" Grid.Row="2"/>
+            <views:ViewsControl DataContext="{Binding Layout.LeftPanelBottom}" Grid.Row="2"/>
         </Grid>
         <GridSplitter Classes="vertical" Grid.Column="3" Grid.Row="0" Width="6"/>
         <Grid RowDefinitions="50*,Auto,50*" Grid.Column="4" Grid.Row="0">
-            <views:ViewsControl DataContext="{Binding RightPanelTop}" Grid.Row="0"/>
+            <views:ViewsControl DataContext="{Binding Layout.RightPanelTop}" Grid.Row="0"/>
             <GridSplitter Classes="horizontal" Grid.Row="1" Height="7"/>
-            <views:ViewsControl DataContext="{Binding RightPanelBottom}" Grid.Row="2"/>
+            <views:ViewsControl DataContext="{Binding Layout.RightPanelBottom}" Grid.Row="2"/>
         </Grid>
         <views:StatusControl Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="1" Margin="0,2,0,0"/>
     </Grid>

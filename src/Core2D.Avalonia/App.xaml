@@ -727,7 +727,7 @@
         <DataTemplate DataType="Containers:LayerContainer">
             <containers:LayerControl/>
         </DataTemplate>
-        <!-- Views: MainControl -->
+        <!-- Views -->
         <DataTemplate DataType="Views:DashboardView">
             <Grid RowDefinitions="Auto,*">
                 <views:DashboardMenuControl Grid.Row="0" DataContext="{Binding Context}"/>
@@ -758,7 +758,6 @@
                 <views:AboutControl Grid.Row="1" DataContext="{Binding Context}"/>
             </Grid>
         </DataTemplate>
-        <!-- Views: LeftPanelTop -->
         <DataTemplate DataType="Views:ProjectView">
             <containers:ProjectControl DataContext="{Binding Context.Project}"/>
         </DataTemplate>
@@ -768,14 +767,12 @@
         <DataTemplate DataType="Views:ImagesView">
             <containers:ImagesControl DataContext="{Binding Context.Project}"/>
         </DataTemplate>
-        <!-- Views: LeftPanelBottom -->
         <DataTemplate DataType="Views:GroupsView">
             <containers:GroupsControl DataContext="{Binding Context.Project.CurrentGroupLibrary}"/>
         </DataTemplate>
         <DataTemplate DataType="Views:DatabasesView">
             <containers:DatabasesControl DataContext="{Binding Context.Project}"/>
         </DataTemplate>
-        <!-- Views: RightPanelTop -->
         <DataTemplate DataType="Views:StylesView">
             <containers:StylesControl DataContext="{Binding Context.Project.CurrentStyleLibrary}"/>
         </DataTemplate>
@@ -790,7 +787,6 @@
         <DataTemplate DataType="Views:ZoomView">
             <containers:ZoomControl/>
         </DataTemplate>
-        <!-- Views: RightPanelBottom -->
         <DataTemplate DataType="Views:ToolsView">
             <settings:ToolsControl DataContext="{Binding Context}"/>
         </DataTemplate>
