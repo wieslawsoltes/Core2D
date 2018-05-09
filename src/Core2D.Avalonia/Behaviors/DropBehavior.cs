@@ -60,36 +60,8 @@ namespace Core2D.Avalonia.Behaviors
             return FixInvalidPointPosition(relativeTo, point);
         }
 
-        private void ValidateDrag(object sender, DragEventArgs e)
+        private bool ValidateDrag(object sender, DragEventArgs e, bool bExecute)
         {
-            // TODO: Validate drop source and target.
-
-            //if (!e.Data.Contains(DataFormats.Text) && !e.Data.Contains(DataFormats.FileNames))
-            //    e.DragEffects = DragDropEffects.None;
-
-            GetPoint(sender, e);
-
-            Console.WriteLine($"DragEffects: {e.DragEffects}");
-        }
-
-        private void DragOver(object sender, DragEventArgs e)
-        {
-            Console.WriteLine($"DragOver sender: {sender}, source: {e.Source}");
-
-            ValidateDrag(sender, e);
-        }
-
-        private void DragEnter(object sender, DragEventArgs e)
-        {
-            Console.WriteLine($"DragEnter sender: {sender}, source: {e.Source}");
-
-            ValidateDrag(sender, e);
-        }
-
-        private void Drop(object sender, DragEventArgs e)
-        {
-            Console.WriteLine($"Drop sender: {sender}, source: {e.Source}");
-
             var point = GetPoint(sender, e);
 
             switch (sender)
@@ -113,21 +85,27 @@ namespace Core2D.Avalonia.Behaviors
                                     {
                                         if (e.DragEffects == DragDropEffects.Copy)
                                         {
-                                            // TODO: Clone item.
-                                            e.Handled = true;
-                                            return;
+                                            if (bExecute)
+                                            {
+                                                // TODO: Clone item.
+                                            }
+                                            return true;
                                         }
                                         else if (e.DragEffects == DragDropEffects.Move)
                                         {
-                                            Editor?.MoveItem(library, sourceIndex, targetIndex);
-                                            e.Handled = true;
-                                            return;
+                                            if (bExecute)
+                                            {
+                                                Editor?.MoveItem(library, sourceIndex, targetIndex);
+                                            }
+                                            return true;
                                         }
                                         else if (e.DragEffects == DragDropEffects.Link)
                                         {
-                                            Editor?.SwapItem(library, sourceIndex, targetIndex);
-                                            e.Handled = true;
-                                            return;
+                                            if (bExecute)
+                                            {
+                                                Editor?.SwapItem(library, sourceIndex, targetIndex);
+                                            }
+                                            return true;
                                         }
                                     }
                                     break;
@@ -135,21 +113,27 @@ namespace Core2D.Avalonia.Behaviors
                                     {
                                         if (e.DragEffects == DragDropEffects.Copy)
                                         {
-                                            // TODO: Clone item.
-                                            e.Handled = true;
-                                            return;
+                                            if (bExecute)
+                                            {
+                                                // TODO: Clone item.
+                                            }
+                                            return true;
                                         }
                                         else if (e.DragEffects == DragDropEffects.Move)
                                         {
-                                            Editor?.MoveItem(library, sourceIndex, targetIndex);
-                                            e.Handled = true;
-                                            return;
+                                            if (bExecute)
+                                            {
+                                                Editor?.MoveItem(library, sourceIndex, targetIndex);
+                                            }
+                                            return true;
                                         }
                                         else if (e.DragEffects == DragDropEffects.Link)
                                         {
-                                            Editor?.SwapItem(library, sourceIndex, targetIndex);
-                                            e.Handled = true;
-                                            return;
+                                            if (bExecute)
+                                            {
+                                                Editor?.SwapItem(library, sourceIndex, targetIndex);
+                                            }
+                                            return true;
                                         }
                                     }
                                     break;
@@ -180,35 +164,51 @@ namespace Core2D.Avalonia.Behaviors
                                         {
                                             case LayerContainer targetLayer:
                                                 {
+                                                    if (bExecute)
+                                                    {
+                                                        // TODO:
+                                                    }
+                                                    return true;
                                                 }
                                                 break;
                                             case PageContainer targetPage:
                                                 {
                                                     if (e.DragEffects == DragDropEffects.Copy)
                                                     {
-                                                        var layer = Editor?.Clone(sourceLayer);
-                                                        Editor?.Project.AddLayer(targetPage, layer);
-                                                        e.Handled = true;
-                                                        return;
+                                                        if (bExecute)
+                                                        {
+                                                            var layer = Editor?.Clone(sourceLayer);
+                                                            Editor?.Project.AddLayer(targetPage, layer);
+                                                        }
+                                                        return true;
                                                     }
                                                     else if (e.DragEffects == DragDropEffects.Move)
                                                     {
-                                                        Editor?.Project?.RemoveLayer(sourceLayer);
-                                                        Editor?.Project.AddLayer(targetPage, sourceLayer);
-                                                        e.Handled = true;
-                                                        return;
+                                                        if (bExecute)
+                                                        {
+                                                            Editor?.Project?.RemoveLayer(sourceLayer);
+                                                            Editor?.Project.AddLayer(targetPage, sourceLayer);
+                                                        }
+                                                        return true;
                                                     }
                                                     else if (e.DragEffects == DragDropEffects.Link)
                                                     {
-                                                        Editor?.Project.AddLayer(targetPage, sourceLayer);
-                                                        e.DragEffects = DragDropEffects.None;
-                                                        e.Handled = true;
-                                                        return;
+                                                        if (bExecute)
+                                                        {
+                                                            Editor?.Project.AddLayer(targetPage, sourceLayer);
+                                                            e.DragEffects = DragDropEffects.None;
+                                                        }
+                                                        return true;
                                                     }
                                                 }
                                                 break;
                                             case DocumentContainer targetDocument:
                                                 {
+                                                    if (bExecute)
+                                                    {
+                                                        // TODO:
+                                                    }
+                                                    return true;
                                                 }
                                                 break;
                                         }
@@ -220,36 +220,52 @@ namespace Core2D.Avalonia.Behaviors
                                         {
                                             case LayerContainer targetLayer:
                                                 {
+                                                    if (bExecute)
+                                                    {
+                                                        // TODO:
+                                                    }
+                                                    return true;
                                                 }
                                                 break;
                                             case PageContainer targetPage:
                                                 {
+                                                    if (bExecute)
+                                                    {
+                                                        // TODO:
+                                                    }
+                                                    return true;
                                                 }
                                                 break;
                                             case DocumentContainer targetDocument:
                                                 {
                                                     if (e.DragEffects == DragDropEffects.Copy)
                                                     {
-                                                        var page = Editor?.Clone(sourcePage);
-                                                        Editor?.Project.AddPage(targetDocument, page);
-                                                        Editor?.Project?.SetCurrentContainer(page);
-                                                        e.Handled = true;
-                                                        return;
+                                                        if (bExecute)
+                                                        {
+                                                            var page = Editor?.Clone(sourcePage);
+                                                            Editor?.Project.AddPage(targetDocument, page);
+                                                            Editor?.Project?.SetCurrentContainer(page);
+                                                        }
+                                                        return true;
                                                     }
                                                     else if (e.DragEffects == DragDropEffects.Move)
                                                     {
-                                                        Editor?.Project?.RemovePage(sourcePage);
-                                                        Editor?.Project.AddPage(targetDocument, sourcePage);
-                                                        Editor?.Project?.SetCurrentContainer(sourcePage);
-                                                        e.Handled = true;
-                                                        return;
+                                                        if (bExecute)
+                                                        {
+                                                            Editor?.Project?.RemovePage(sourcePage);
+                                                            Editor?.Project.AddPage(targetDocument, sourcePage);
+                                                            Editor?.Project?.SetCurrentContainer(sourcePage);
+                                                        }
+                                                        return true;
                                                     }
                                                     else if (e.DragEffects == DragDropEffects.Link)
                                                     {
-                                                        Editor?.Project.AddPage(targetDocument, sourcePage);
-                                                        Editor?.Project?.SetCurrentContainer(sourcePage);
-                                                        e.Handled = true;
-                                                        return;
+                                                        if (bExecute)
+                                                        {
+                                                            Editor?.Project.AddPage(targetDocument, sourcePage);
+                                                            Editor?.Project?.SetCurrentContainer(sourcePage);
+                                                        }
+                                                        return true;
                                                     }
                                                 }
                                                 break;
@@ -262,14 +278,29 @@ namespace Core2D.Avalonia.Behaviors
                                         {
                                             case LayerContainer targetLayer:
                                                 {
+                                                    if (bExecute)
+                                                    {
+                                                        // TODO:
+                                                    }
+                                                    return true;
                                                 }
                                                 break;
                                             case PageContainer targetPage:
                                                 {
+                                                    if (bExecute)
+                                                    {
+                                                        // TODO:
+                                                    }
+                                                    return true;
                                                 }
                                                 break;
                                             case DocumentContainer targetDocument:
                                                 {
+                                                    if (bExecute)
+                                                    {
+                                                        // TODO:
+                                                    }
+                                                    return true;
                                                 }
                                                 break;
                                         }
@@ -297,21 +328,27 @@ namespace Core2D.Avalonia.Behaviors
                                 {
                                     if (e.DragEffects == DragDropEffects.Copy)
                                     {
-                                        // TODO: Clone item.
-                                        e.Handled = true;
-                                        return;
+                                        if (bExecute)
+                                        {
+                                            // TODO: Clone item.
+                                        }
+                                        return true;
                                     }
                                     else if (e.DragEffects == DragDropEffects.Move)
                                     {
-                                        Editor?.MoveView(panel, sourceIndex, targetIndex);
-                                        e.Handled = true;
-                                        return;
+                                        if (bExecute)
+                                        {
+                                            Editor?.MoveView(panel, sourceIndex, targetIndex);
+                                        }
+                                        return true;
                                     }
                                     else if (e.DragEffects == DragDropEffects.Link)
                                     {
-                                        Editor?.SwapView(panel, sourceIndex, targetIndex);
-                                        e.Handled = true;
-                                        return;
+                                        if (bExecute)
+                                        {
+                                            Editor?.SwapView(panel, sourceIndex, targetIndex);
+                                        }
+                                        return true;
                                     }
                                 }
                             }
@@ -329,24 +366,31 @@ namespace Core2D.Avalonia.Behaviors
 
                                 if (e.DragEffects == DragDropEffects.Copy)
                                 {
-                                    // TODO: Clone item.
-                                    e.Handled = true;
-                                    return;
+                                    if (bExecute)
+                                    {
+                                        // TODO: Clone item.
+                                    }
+                                    return true;
                                 }
                                 else if (e.DragEffects == DragDropEffects.Move)
                                 {
                                     if (sourcePanel.Views.Length > 1)
                                     {
-                                        Editor?.MoveView(sourcePanel, targetPanel, sourceIndex, targetIndex);
+                                        if (bExecute)
+                                        {
+                                            Editor?.MoveView(sourcePanel, targetPanel, sourceIndex, targetIndex);
+                                        }
+                                        return true;
                                     }
-                                    e.Handled = true;
-                                    return;
+                                    return false;
                                 }
                                 else if (e.DragEffects == DragDropEffects.Link)
                                 {
-                                    Editor?.SwapView(sourcePanel, targetPanel, sourceIndex, targetIndex);
-                                    e.Handled = true;
-                                    return;
+                                    if (bExecute)
+                                    {
+                                        Editor?.SwapView(sourcePanel, targetPanel, sourceIndex, targetIndex);
+                                    }
+                                    return true;
                                 }
                             }
                         }
@@ -359,12 +403,12 @@ namespace Core2D.Avalonia.Behaviors
                 var text = e.Data.GetText();
 
                 Console.WriteLine($"[{DataFormats.Text}] : {text}");
-                Console.WriteLine(text);
 
-                Editor?.OnTryPaste(text);
-
-                e.Handled = true;
-                return;
+                if (bExecute)
+                {
+                    Editor?.OnTryPaste(text);
+                }
+                return true;
             }
 
             foreach (var format in e.Data.GetDataFormats())
@@ -376,21 +420,29 @@ namespace Core2D.Avalonia.Behaviors
                 switch (data)
                 {
                     case BaseShape shape:
-                        Editor?.OnDropShape(shape, point.X, point.Y);
-                        e.Handled = true;
-                        return;
+                        if (bExecute)
+                        {
+                            Editor?.OnDropShape(shape, point.X, point.Y);
+                        }
+                        return true;
                     case Record record:
-                        Editor?.OnDropRecord(record, point.X, point.Y);
-                        e.Handled = true;
-                        return;
+                        if (bExecute)
+                        {
+                            Editor?.OnDropRecord(record, point.X, point.Y);
+                        }
+                        return true;
                     case ShapeStyle style:
-                        Editor?.OnDropStyle(style, point.X, point.Y);
-                        e.Handled = true;
-                        return;
+                        if (bExecute)
+                        {
+                            Editor?.OnDropStyle(style, point.X, point.Y);
+                        }
+                        return true;
                     case PageContainer page:
-                        Editor?.OnApplyTemplate(page);
-                        e.Handled = true;
-                        return;
+                        if (bExecute)
+                        {
+                            Editor?.OnApplyTemplate(page);
+                        }
+                        return true;
                     default:
                         Console.WriteLine($"Drop type was not handled: {data}");
                         break;
@@ -406,10 +458,61 @@ namespace Core2D.Avalonia.Behaviors
                     Console.WriteLine($"[{DataFormats.FileNames}] : {file}");
                 }
 
-                Editor?.OnDropFiles(files);
+                if (bExecute)
+                {
+                    Editor?.OnDropFiles(files);
+                }
 
+                return true;
+            }
+
+            Console.WriteLine($"DragEffects: {e.DragEffects}");
+
+            return false;
+        }
+
+        private void DragOver(object sender, DragEventArgs e)
+        {
+            Console.WriteLine($"DragOver sender: {sender}, source: {e.Source}");
+
+            if (ValidateDrag(sender, e, false) == false)
+            {
+                e.DragEffects = DragDropEffects.None;
                 e.Handled = true;
-                return;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void DragEnter(object sender, DragEventArgs e)
+        {
+            Console.WriteLine($"DragEnter sender: {sender}, source: {e.Source}");
+
+            if (ValidateDrag(sender, e, false) == false)
+            {
+                e.DragEffects = DragDropEffects.None;
+                e.Handled = true;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void Drop(object sender, DragEventArgs e)
+        {
+            Console.WriteLine($"Drop sender: {sender}, source: {e.Source}");
+
+            if (ValidateDrag(sender, e, true) == false)
+            {
+                e.DragEffects = DragDropEffects.None;
+                e.Handled = true;
+            }
+            else
+            {
+                e.Handled = true;
             }
         }
     }
