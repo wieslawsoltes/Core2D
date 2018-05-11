@@ -133,6 +133,8 @@ namespace Core2D.Avalonia
 
                 layout.LeftPanelTop = new ViewsPanel
                 {
+                    Row = 0,
+                    Column = 0,
                     Views = new[]
                     {
                         views.FirstOrDefault(v => v.Title == "Project"),
@@ -144,6 +146,8 @@ namespace Core2D.Avalonia
     
                 layout.LeftPanelBottom = new ViewsPanel
                 {
+                    Row = 2,
+                    Column = 0,
                     Views = new[]
                     {
                         views.FirstOrDefault(v => v.Title == "Groups"),
@@ -154,6 +158,8 @@ namespace Core2D.Avalonia
     
                 layout.RightPanelTop = new ViewsPanel
                 {
+                    Row = 0,
+                    Column = 0,
                     Views = new[]
                     {
                         views.FirstOrDefault(v => v.Title == "Styles"),
@@ -166,6 +172,8 @@ namespace Core2D.Avalonia
     
                 layout.RightPanelBottom = new ViewsPanel
                 {
+                    Row = 2,
+                    Column = 0,
                     Views = new[]
                     {
                         views.FirstOrDefault(v => v.Title == "Tools"),
