@@ -8,7 +8,7 @@
              xmlns:behaviors="clr-namespace:Core2D.Avalonia.Behaviors;assembly=Core2D.Avalonia"
              xmlns:local="clr-namespace:Core2D.Avalonia;assembly=Core2D.Avalonia"
              xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"
-             xmlns:Interfaces="clr-namespace:Core2D.Editor.Views.Interfaces;assembly=Core2D.Editor"
+             xmlns:Interfaces="clr-namespace:Core2D.Editor.Views.Core;assembly=Core2D.Editor"
              Design.Width="1200" Design.Height="540">
     <DockPanel>
         <TabStrip Items="{Binding Views}" SelectedItem="{Binding CurrentView, Mode=TwoWay}" Focusable="false" DockPanel.Dock="Bottom" ClipToBounds="False" ZIndex="1">

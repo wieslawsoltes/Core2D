@@ -12,7 +12,7 @@ using Core2D.Editor.Input;
 using Core2D.Editor.Path;
 using Core2D.Editor.Recent;
 using Core2D.Editor.Tools;
-using Core2D.Editor.Views.Interfaces;
+using Core2D.Editor.Views.Core;
 using Core2D.History;
 using Core2D.Interfaces;
 using Core2D.Renderer;

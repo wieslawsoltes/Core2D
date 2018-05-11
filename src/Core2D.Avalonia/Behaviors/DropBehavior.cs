@@ -11,6 +11,7 @@ using Avalonia.Xaml.Interactivity;
 using Core2D.Containers;
 using Core2D.Data;
 using Core2D.Editor;
+using Core2D.Editor.Views.Core;
 using Core2D.Shape;
 using Core2D.Shapes;
 using Core2D.Style;

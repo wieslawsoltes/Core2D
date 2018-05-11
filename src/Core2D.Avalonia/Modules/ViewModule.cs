@@ -4,7 +4,7 @@ using System.Reflection;
 using System.Windows.Input;
 using Autofac;
 using Core2D.Avalonia.Windows;
-using Core2D.Editor.Views.Interfaces;
+using Core2D.Editor.Views.Core;
 
 namespace Core2D.Avalonia.Modules
 {

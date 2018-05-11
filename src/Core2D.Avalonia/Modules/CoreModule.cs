@@ -5,7 +5,7 @@ using Autofac;
 using Core2D.Editor;
 using Core2D.Editor.Bounds;
 using Core2D.Editor.Factories;
-using Core2D.Editor.Views.Interfaces;
+using Core2D.Editor.Views.Core;
 
 namespace Core2D.Avalonia.Modules
 {
