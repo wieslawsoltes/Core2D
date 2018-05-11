@@ -4,26 +4,36 @@ using System.Collections.Immutable;
 
 namespace Core2D.Editor.Views.Core
 {
-    /// <summary>
-    /// Views panel.
-    /// </summary>
-    public class ViewsPanel : ObservableObject
+    /// <inheritdoc/>
+    public class ViewsPanel : ObservableObject, IViewsPanel
     {
+        private int _row;
+        private int _column;
         private ImmutableArray<IView> _views;
         private IView _currentView;
 
-        /// <summary>
-        /// Gets or sets views.
-        /// </summary>
+        /// <inheritdoc/>
+        public int Row
+        {
+            get => _row;
+            set => Update(ref _row, value);
+        }
+
+        /// <inheritdoc/>
+        public int Column
+        {
+            get => _column;
+            set => Update(ref _column, value);
+        }
+
+        /// <inheritdoc/>
         public ImmutableArray<IView> Views
         {
             get => _views;
             set => Update(ref _views, value);
         }
 
-        /// <summary>
-        /// Gets or sets current view.
-        /// </summary>
+        /// <inheritdoc/>
         public IView CurrentView
         {
             get => _currentView;
