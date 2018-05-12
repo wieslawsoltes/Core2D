@@ -98,7 +98,7 @@ namespace Core2D.Avalonia
             };
         }
 
-        private void UpdatePanel(ViewsPanel panel, IList<IView> views)
+        private void UpdatePanel(IViewsPanel panel, IList<IView> views)
         {
             var list = new List<IView>();
 
@@ -119,67 +119,70 @@ namespace Core2D.Avalonia
             {
                 var layout = editor.Layout;
 
-                UpdatePanel(layout.LeftPanelTop, views);
-                UpdatePanel(layout.LeftPanelBottom, views);
-                UpdatePanel(layout.RightPanelTop, views);
-                UpdatePanel(layout.RightPanelBottom, views);
+                foreach (var panel in layout.Panels)
+                {
+                    UpdatePanel(panel, views);
+                }
 
-                layout.CurrentView = views.FirstOrDefault(v => v.Title == layout.CurrentView.Title);
+                layout.CurrentView = views.FirstOrDefault(v => v.Title == "Dashboard"); // v.Title == layout.CurrentView.Title
             }
             else
             {
                 var layout = new ViewsLayout
                 {
-                    LeftPanelTop = new ViewsPanel
+                    Panels = new[]
                     {
-                        Row = 0,
-                        Column = 0,
-                        Views = new[]
+                        new ViewsPanel
                         {
-                            views.FirstOrDefault(v => v.Title == "Project"),
-                            views.FirstOrDefault(v => v.Title == "Options"),
-                            views.FirstOrDefault(v => v.Title == "Images")
-                        }.ToImmutableArray(),
-                        CurrentView = views.FirstOrDefault(v => v.Title == "Project")
-                    },
-                    LeftPanelBottom = new ViewsPanel
-                    {
-                        Row = 2,
-                        Column = 0,
-                        Views = new[]
+                            Row = 0,
+                            Column = 0,
+                            Views = new[]
+                            {
+                                views.FirstOrDefault(v => v.Title == "Project"),
+                                views.FirstOrDefault(v => v.Title == "Options"),
+                                views.FirstOrDefault(v => v.Title == "Images")
+                            }.ToImmutableArray(),
+                            CurrentView = views.FirstOrDefault(v => v.Title == "Project")
+                        },
+                        new ViewsPanel
                         {
-                            views.FirstOrDefault(v => v.Title == "Groups"),
-                            views.FirstOrDefault(v => v.Title == "Databases")
-                        }.ToImmutableArray(),
-                        CurrentView = views.FirstOrDefault(v => v.Title == "Groups")
-                    },
-                    RightPanelTop = new ViewsPanel
-                    {
-                        Row = 0,
-                        Column = 0,
-                        Views = new[]
+                            Row = 2,
+                            Column = 0,
+                            Views = new[]
+                            {
+                                views.FirstOrDefault(v => v.Title == "Groups"),
+                                views.FirstOrDefault(v => v.Title == "Databases")
+                            }.ToImmutableArray(),
+                            CurrentView = views.FirstOrDefault(v => v.Title == "Groups")
+                        },
+                        new ViewsPanel
                         {
-                            views.FirstOrDefault(v => v.Title == "Styles"),
-                            views.FirstOrDefault(v => v.Title == "Templates"),
-                            views.FirstOrDefault(v => v.Title == "Container"),
-                            views.FirstOrDefault(v => v.Title == "Zoom")
-                        }.ToImmutableArray(),
-                        CurrentView = views.FirstOrDefault(v => v.Title == "Styles")
-                    },
-                    RightPanelBottom = new ViewsPanel
-                    {
-                        Row = 2,
-                        Column = 0,
-                        Views = new[]
+                            Row = 0,
+                            Column = 0,
+                            Views = new[]
+                            {
+                                views.FirstOrDefault(v => v.Title == "Styles"),
+                                views.FirstOrDefault(v => v.Title == "Templates"),
+                                views.FirstOrDefault(v => v.Title == "Container"),
+                                views.FirstOrDefault(v => v.Title == "Zoom")
+                            }.ToImmutableArray(),
+                            CurrentView = views.FirstOrDefault(v => v.Title == "Styles")
+                        },
+                        new ViewsPanel
                         {
-                            views.FirstOrDefault(v => v.Title == "Tools"),
-                            views.FirstOrDefault(v => v.Title == "Shape"),
-                            views.FirstOrDefault(v => v.Title == "Data"),
-                            views.FirstOrDefault(v => v.Title == "Style"),
-                            views.FirstOrDefault(v => v.Title == "Template")
-                        }.ToImmutableArray(),
-                        CurrentView = views.FirstOrDefault(v => v.Title == "Tools")
-                    },
+                            Row = 2,
+                            Column = 0,
+                            Views = new[]
+                            {
+                                views.FirstOrDefault(v => v.Title == "Tools"),
+                                views.FirstOrDefault(v => v.Title == "Shape"),
+                                views.FirstOrDefault(v => v.Title == "Data"),
+                                views.FirstOrDefault(v => v.Title == "Style"),
+                                views.FirstOrDefault(v => v.Title == "Template")
+                            }.ToImmutableArray(),
+                            CurrentView = views.FirstOrDefault(v => v.Title == "Tools")
+                        },
+                    }.ToImmutableArray<IViewsPanel>(),
                     CurrentView = views.FirstOrDefault(v => v.Title == "Dashboard")
                 };
 

@@ -1,58 +1,25 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System.Collections.Immutable;
 
 namespace Core2D.Dock
 {
     /// <summary>
-    /// Views layout.
+    /// Views layout contract.
     /// </summary>
-    public class ViewsLayout : ObservableObject
+    public class ViewsLayout : ObservableObject, IViewsLayout
     {
-        private ViewsPanel _leftPanelTop;
-        private ViewsPanel _leftPanelBottom;
-        private ViewsPanel _rightPanelTop;
-        private ViewsPanel _rightPanelBottom;
+        private ImmutableArray<IViewsPanel> _panels;
         private IView _currentView;
 
-        /// <summary>
-        /// Gets or sets current left panel top.
-        /// </summary>
-        public ViewsPanel LeftPanelTop
+        /// <inheritdoc/>
+        public ImmutableArray<IViewsPanel> Panels
         {
-            get => _leftPanelTop;
-            set => Update(ref _leftPanelTop, value);
+            get => _panels;
+            set => Update(ref _panels, value);
         }
 
-        /// <summary>
-        /// Gets or sets current left panel bottom.
-        /// </summary>
-        public ViewsPanel LeftPanelBottom
-        {
-            get => _leftPanelBottom;
-            set => Update(ref _leftPanelBottom, value);
-        }
-
-        /// <summary>
-        /// Gets or sets current right panel top.
-        /// </summary>
-        public ViewsPanel RightPanelTop
-        {
-            get => _rightPanelTop;
-            set => Update(ref _rightPanelTop, value);
-        }
-
-        /// <summary>
-        /// Gets or sets current right panel bottom.
-        /// </summary>
-        public ViewsPanel RightPanelBottom
-        {
-            get => _rightPanelBottom;
-            set => Update(ref _rightPanelBottom, value);
-        }
-
-        /// <summary>
-        /// Gets or sets current view.
-        /// </summary>
+        /// <inheritdoc/>
         public IView CurrentView
         {
             get => _currentView;
@@ -60,28 +27,10 @@ namespace Core2D.Dock
         }
 
         /// <summary>
-        /// Check whether the <see cref="CurrentView"/> property has changed from its default value.
+        /// Check whether the <see cref="Panels"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeLeftPanelTop() => _leftPanelTop != null;
-
-        /// <summary>
-        /// Check whether the <see cref="CurrentView"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeLeftPanelBottom() => _leftPanelBottom != null;
-
-        /// <summary>
-        /// Check whether the <see cref="CurrentView"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeRightPanelTop() => _rightPanelTop != null;
-
-        /// <summary>
-        /// Check whether the <see cref="CurrentView"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeRightPanelBottom() => _rightPanelBottom != null;
+        public virtual bool ShouldSerializeLeftPanels() => _panels.IsEmpty == false;
 
         /// <summary>
         /// Check whether the <see cref="CurrentView"/> property has changed from its default value.
