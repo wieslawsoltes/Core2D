@@ -5,7 +5,7 @@ using System.Collections.Immutable;
 namespace Core2D.Editor.Views.Core
 {
     /// <inheritdoc/>
-    public class ViewsPanel : ObservableObject, IViewsPanel
+    public class ViewsPanel : ObservableObject, IGridPanel, IViewsPanel
     {
         private int _row;
         private int _column;
@@ -39,6 +39,18 @@ namespace Core2D.Editor.Views.Core
             get => _currentView;
             set => Update(ref _currentView, value);
         }
+
+        /// <summary>
+        /// Check whether the <see cref="Row"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public virtual bool ShouldSerializeRow() => true;
+
+        /// <summary>
+        /// Check whether the <see cref="Column"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public virtual bool ShouldSerializeColumn() => true;
 
         /// <summary>
         /// Check whether the <see cref="Views"/> property has changed from its default value.
