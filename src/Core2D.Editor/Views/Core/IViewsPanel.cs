@@ -5,7 +5,7 @@ using System.Collections.Immutable;
 namespace Core2D.Editor.Views.Core
 {
     /// <summary>
-    /// Define views panel contract.
+    /// Views panel contract.
     /// </summary>
     public interface IViewsPanel
     {
