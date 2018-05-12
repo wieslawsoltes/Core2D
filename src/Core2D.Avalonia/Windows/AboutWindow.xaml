@@ -9,5 +9,5 @@
         UseLayoutRounding="True"
         WindowState="Normal"
         Title="About Core2D">
-    <views:AboutViewControl VerticalAlignment="Center" HorizontalAlignment="Center"/>
+    <views:AboutControl VerticalAlignment="Center" HorizontalAlignment="Center"/>
 </Window>

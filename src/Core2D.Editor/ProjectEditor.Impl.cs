@@ -12,7 +12,7 @@ using Core2D.Editor.Input;
 using Core2D.Editor.Path;
 using Core2D.Editor.Recent;
 using Core2D.Editor.Tools;
-using Core2D.Editor.Views.Interfaces;
+using Core2D.Editor.Views.Core;
 using Core2D.History;
 using Core2D.Interfaces;
 using Core2D.Renderer;
@@ -29,9 +29,19 @@ namespace Core2D.Editor
     /// </summary>
     public partial class ProjectEditor
     {
+        private object _scriptState;
         private PageContainer _pageToCopy = default(PageContainer);
         private DocumentContainer _documentToCopy = default(DocumentContainer);
         private BaseShape _hover = default(BaseShape);
+
+        private void LogError(Exception ex)
+        {
+            Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+            if (ex.InnerException != null)
+            {
+                LogError(ex.InnerException);
+            }
+        }
 
         /// <summary>
         /// Snap value by specified snap amount.
@@ -184,7 +194,7 @@ namespace Core2D.Editor
             OnUnload();
             OnLoad(ProjectFactory?.GetProject() ?? ProjectContainer.Create(), string.Empty);
             OnChangeCurrentView(Views.FirstOrDefault(view => view.Title == "Editor"));
-            Invalidate?.Invoke();
+            Canvas?.Invalidate?.Invoke();
         }
 
         /// <summary>
@@ -209,7 +219,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
         }
 
@@ -232,7 +242,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+               LogError(ex);
             }
         }
 
@@ -269,7 +279,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
         }
 
@@ -294,7 +304,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
         }
 
@@ -320,7 +330,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
         }
 
@@ -341,7 +351,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
         }
 
@@ -530,7 +540,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
         }
 
@@ -564,7 +574,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
         }
 
@@ -584,7 +594,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
         }
 
@@ -618,7 +628,103 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
+            }
+        }
+
+        /// <summary>
+        /// Export item.
+        /// </summary>
+        /// <param name="path">The file path.</param>
+        /// <param name="item">The item to export.</param>
+        /// <param name="writer">The file writer.</param>
+        public void OnExport(string path, object item, IFileWriter writer)
+        {
+            try
+            {
+                writer?.Save(path, item, Project);
+            }
+            catch (Exception ex)
+            {
+                LogError(ex);
+            }
+        }
+
+        /// <summary>
+        /// Execute code script.
+        /// </summary>
+        /// <param name="csharp">The script code.</param>
+        public void OnExecuteCode(string csharp)
+        {
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(csharp))
+                {
+                    ScriptRunner?.Execute(csharp);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogError(ex);
+            }
+        }
+
+        /// <summary>
+        /// Execute code script in repl.
+        /// </summary>
+        /// <param name="path">The script code.</param>
+        public void OnExecuteRepl(string csharp)
+        {
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(csharp))
+                {
+                    _scriptState = ScriptRunner?.Execute(csharp, _scriptState);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogError(ex);
+            }
+        }
+
+        /// <summary>
+        /// Reset previous script repl.
+        /// </summary>
+        public void OnResetRepl()
+        {
+            _scriptState = null;
+        }
+
+        /// <summary>
+        /// Execute code script from file.
+        /// </summary>
+        /// <param name="path">The code file path.</param>
+        public void OnExecuteScript(string path)
+        {
+            try
+            {
+                var csharp = FileIO?.ReadUtf8Text(path);
+                if (!string.IsNullOrWhiteSpace(csharp))
+                {
+                    OnExecuteCode(csharp);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogError(ex);
+            }
+        }
+
+        /// <summary>
+        /// Execute code scripts from files.
+        /// </summary>
+        /// <param name="paths">The code file paths.</param>
+        public void OnExecuteScript(string[] paths)
+        {
+            foreach (var path in paths)
+            {
+                OnExecuteScript(path);
             }
         }
 
@@ -637,7 +743,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
         }
 
@@ -656,74 +762,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
-            }
-        }
-
-        /// <summary>
-        /// Cut selected document, page or shapes to clipboard.
-        /// </summary>
-        public void OnCut()
-        {
-            try
-            {
-                if (CanCopy())
-                {
-                    OnCopy();
-                    OnDeleteSelected();
-                }
-            }
-            catch (Exception ex)
-            {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
-            }
-        }
-
-        /// <summary>
-        /// Copy document, page or shapes to clipboard.
-        /// </summary>
-        public void OnCopy()
-        {
-            try
-            {
-                if (CanCopy())
-                {
-                    if (Renderers?[0]?.State?.SelectedShape != null)
-                    {
-                        OnCopy(Enumerable.Repeat(Renderers[0].State.SelectedShape, 1).ToList());
-                    }
-
-                    if (Renderers?[0]?.State?.SelectedShapes != null)
-                    {
-                        OnCopy(Renderers[0].State.SelectedShapes.ToList());
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
-            }
-        }
-
-        /// <summary>
-        /// Paste text from clipboard as document, page or shapes.
-        /// </summary>
-        public async void OnPaste()
-        {
-            try
-            {
-                if (await CanPaste())
-                {
-                    var text = await (TextClipboard?.GetText() ?? Task.FromResult(string.Empty));
-                    if (!string.IsNullOrEmpty(text))
-                    {
-                        OnPaste(text);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
         }
 
@@ -754,7 +793,11 @@ namespace Core2D.Editor
             }
             else if (item is ProjectEditor || item == null)
             {
-                OnCut();
+                if (CanCopy())
+                {
+                    OnCopy(item);
+                    OnDeleteSelected();
+                }
             }
         }
 
@@ -778,7 +821,18 @@ namespace Core2D.Editor
             }
             else if (item is ProjectEditor || item == null)
             {
-                OnCopy();
+                if (CanCopy())
+                {
+                    if (Renderers?[0]?.State?.SelectedShape != null)
+                    {
+                        OnCopyShapes(Enumerable.Repeat(Renderers[0].State.SelectedShape, 1).ToList());
+                    }
+
+                    if (Renderers?[0]?.State?.SelectedShapes != null)
+                    {
+                        OnCopyShapes(Renderers[0].State.SelectedShapes.ToList());
+                    }
+                }
             }
         }
 
@@ -786,7 +840,7 @@ namespace Core2D.Editor
         /// Paste text from clipboard as document, page or shapes.
         /// </summary>
         /// <param name="item">The item to paste.</param>
-        public void OnPaste(object item)
+        public async void OnPaste(object item)
         {
             if (Project != null && item is PageContainer)
             {
@@ -824,7 +878,21 @@ namespace Core2D.Editor
             }
             else if (item is ProjectEditor || item == null)
             {
-                OnPaste();
+                if (await CanPaste())
+                {
+                    var text = await (TextClipboard?.GetText() ?? Task.FromResult(string.Empty));
+                    if (!string.IsNullOrEmpty(text))
+                    {
+                        OnTryPaste(text);
+                    }
+                }
+            }
+            else if (item is string text)
+            {
+                if (!string.IsNullOrEmpty(text))
+                {
+                    OnTryPaste(text);
+                }
             }
         }
 
@@ -877,7 +945,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
         }
 
@@ -892,7 +960,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
         }
 
@@ -919,7 +987,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
         }
 
@@ -970,7 +1038,7 @@ namespace Core2D.Editor
         }
 
         /// <summary>
-        /// Move selected shapes one step closer to the front of the stack.
+        /// Bring selected shapes one step closer to the front of the stack.
         /// </summary>
         public void OnBringForwardSelected()
         {
@@ -991,7 +1059,7 @@ namespace Core2D.Editor
         }
 
         /// <summary>
-        /// Move selected shapes one step down within the stack.
+        /// Bring selected shapes one step down within the stack.
         /// </summary>
         public void OnSendBackwardSelected()
         {
@@ -1012,7 +1080,7 @@ namespace Core2D.Editor
         }
 
         /// <summary>
-        /// Move selected shapes to the bottom of the stack.
+        /// Bring selected shapes to the bottom of the stack.
         /// </summary>
         public void OnSendToBackSelected()
         {
@@ -1689,7 +1757,7 @@ namespace Core2D.Editor
         public void OnApplyTemplate(PageContainer template)
         {
             var page = Project?.CurrentContainer;
-            if (page != null && template != null)
+            if (page != null && template != null && page != template)
             {
                 Project.ApplyTemplate(page, template);
                 Project.CurrentContainer.Invalidate();
@@ -1916,8 +1984,11 @@ namespace Core2D.Editor
         /// </summary>
         public void OnUnload()
         {
-            Observer?.Dispose();
-            Observer = null;
+            if (Observer != null)
+            {
+                Observer?.Dispose();
+                Observer = null;
+            }
 
             if (Project?.History != null)
             {
@@ -1925,15 +1996,17 @@ namespace Core2D.Editor
                 Project.History = null;
             }
 
-            Project?.PurgeUnusedImages(Enumerable.Empty<string>().ToImmutableHashSet());
+            if (Project != null)
+            {
+                Project?.PurgeUnusedImages(Enumerable.Empty<string>().ToImmutableHashSet());
 
-            Deselect();
-            SetRenderersImageCache(null);
-            Project = null;
-            ProjectPath = string.Empty;
-            IsProjectDirty = false;
-
-            GC.Collect();
+                Deselect();
+                SetRenderersImageCache(null);
+                Project = null;
+                ProjectPath = string.Empty;
+                IsProjectDirty = false;
+                GC.Collect();
+            }
         }
 
         /// <summary>
@@ -1956,25 +2029,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
-            }
-        }
-
-        /// <summary>
-        /// Export item.
-        /// </summary>
-        /// <param name="path">The file path.</param>
-        /// <param name="item">The item to export.</param>
-        /// <param name="writer">The file writer.</param>
-        public void OnExport(string path, object item, IFileWriter writer)
-        {
-            try
-            {
-                writer?.Save(path, item, Project);
-            }
-            catch (Exception ex)
-            {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
         }
 
@@ -2042,7 +2097,7 @@ namespace Core2D.Editor
                 }
                 catch (Exception ex)
                 {
-                    Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                    LogError(ex);
                 }
             }
         }
@@ -2063,7 +2118,51 @@ namespace Core2D.Editor
                 }
                 catch (Exception ex)
                 {
-                    Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                    LogError(ex);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Load layout configuration.
+        /// </summary>
+        /// <param name="path">The layout configuration path.</param>
+        public void OnLoadLayout(string path)
+        {
+            if (JsonSerializer != null)
+            {
+                try
+                {
+                    var json = FileIO.ReadUtf8Text(path);
+                    var layout = JsonSerializer.Deserialize<ViewsLayout>(json);
+                    if (layout != null)
+                    {
+                        Layout = layout;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    LogError(ex);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Save layout configuration.
+        /// </summary>
+        /// <param name="path">The layout configuration path.</param>
+        public void OnSaveLayout(string path)
+        {
+            if (JsonSerializer != null)
+            {
+                try
+                {
+                    var json = JsonSerializer.Serialize(_layout);
+                    FileIO.WriteUtf8Text(path, json);
+                }
+                catch (Exception ex)
+                {
+                    LogError(ex);
                 }
             }
         }
@@ -2107,7 +2206,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
             return false;
         }
@@ -2116,7 +2215,7 @@ namespace Core2D.Editor
         /// Copy selected shapes to clipboard.
         /// </summary>
         /// <param name="shapes"></param>
-        public void OnCopy(IList<BaseShape> shapes)
+        public void OnCopyShapes(IList<BaseShape> shapes)
         {
             try
             {
@@ -2128,7 +2227,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
         }
 
@@ -2136,7 +2235,7 @@ namespace Core2D.Editor
         /// Paste text from clipboard as shapes.
         /// </summary>
         /// <param name="text">The text string.</param>
-        public void OnPaste(string text)
+        public void OnTryPaste(string text)
         {
             try
             {
@@ -2156,7 +2255,7 @@ namespace Core2D.Editor
                             Project.Options.DefaultIsStroked,
                             Project.Options.DefaultIsFilled);
 
-                        OnPaste(Enumerable.Repeat(path, 1));
+                        OnPasteShapes(Enumerable.Repeat(path, 1));
                         return;
                     }
                 }
@@ -2185,7 +2284,7 @@ namespace Core2D.Editor
                     var shapes = JsonSerializer?.Deserialize<IList<BaseShape>>(text);
                     if (shapes?.Count() > 0)
                     {
-                        OnPaste(shapes);
+                        OnPasteShapes(shapes);
                         return;
                     }
                 }
@@ -2198,7 +2297,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
         }
 
@@ -2269,7 +2368,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
         }
 
@@ -2326,7 +2425,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
         }
 
@@ -2334,7 +2433,7 @@ namespace Core2D.Editor
         /// Paste shapes to current container.
         /// </summary>
         /// <param name="shapes">The shapes collection.</param>
-        public void OnPaste(IEnumerable<BaseShape> shapes)
+        public void OnPasteShapes(IEnumerable<BaseShape> shapes)
         {
             try
             {
@@ -2349,7 +2448,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
         }
 
@@ -2394,10 +2493,40 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
 
             return default(T);
+        }
+
+        /// <summary>
+        /// Clone the <see cref="LayerContainer"/> object.
+        /// </summary>
+        /// <param name="container">The <see cref="LayerContainer"/> object.</param>
+        /// <returns>The cloned <see cref="LayerContainer"/> object.</returns>
+        public LayerContainer Clone(LayerContainer container)
+        {
+            try
+            {
+                var json = JsonSerializer?.Serialize(container);
+                if (!string.IsNullOrEmpty(json))
+                {
+                    var clone = JsonSerializer?.Deserialize<LayerContainer>(json);
+                    if (clone != null)
+                    {
+                        var shapes = clone.Shapes;
+                        TryToRestoreStyles(shapes);
+                        TryToRestoreRecords(shapes);
+                        return clone;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogError(ex);
+            }
+
+            return default(LayerContainer);
         }
 
         /// <summary>
@@ -2426,7 +2555,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
 
             return default(PageContainer);
@@ -2462,7 +2591,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
 
             return default(DocumentContainer);
@@ -2507,6 +2636,11 @@ namespace Core2D.Editor
                             OnImportXaml(path);
                             result = true;
                         }
+                        else if (string.Compare(ext, Constants.ScriptExtension, StringComparison.OrdinalIgnoreCase) == 0)
+                        {
+                            OnExecuteScript(path);
+                            result = true;
+                        }
                     }
 
                     return result;
@@ -2514,7 +2648,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
 
             return false;
@@ -2526,7 +2660,9 @@ namespace Core2D.Editor
         /// <param name="shape">The <see cref="BaseShape"/> object.</param>
         /// <param name="x">The X coordinate in container.</param>
         /// <param name="y">The Y coordinate in container.</param>
-        public void OnDropShape(BaseShape shape, double x, double y)
+        /// <param name="bExecute">The flag indicating whether to execute action.</param>
+        /// <returns>Returns true if success.</returns>
+        public bool OnDropShape(BaseShape shape, double x, double y, bool bExecute = true)
         {
             try
             {
@@ -2537,7 +2673,11 @@ namespace Core2D.Editor
                     {
                         if (target is PointShape point)
                         {
-                            point.Shape = shape;
+                            if (bExecute == true)
+                            {
+                                point.Shape = shape;
+                            }
+                            return true;
                         }
                     }
                 }
@@ -2549,7 +2689,14 @@ namespace Core2D.Editor
                         {
                             if (target is PointShape point)
                             {
-                                point.Shape = shape;
+                                if (bExecute == true)
+                                {
+                                    point.Shape = shape;
+                                }
+                                else
+                                {
+                                    return true;
+                                }
                             }
                         }
                     }
@@ -2562,19 +2709,31 @@ namespace Core2D.Editor
                         var point = HitTest.TryToGetPoint(layer.Shapes, new Point2(x, y), Project.Options.HitThreshold);
                         if (point != null)
                         {
-                            point.Shape = shape;
+                            if (bExecute == true)
+                            {
+                                point.Shape = shape;
+                            }
+                            else
+                            {
+                                return true;
+                            }
                         }
                         else
                         {
-                            OnDropShapeAsClone(shape, x, y);
+                            if (bExecute == true)
+                            {
+                                OnDropShapeAsClone(shape, x, y);
+                            }
+                            return true;
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
+            return false;
         }
 
         /// <summary>
@@ -2615,7 +2774,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
         }
 
@@ -2625,14 +2784,20 @@ namespace Core2D.Editor
         /// <param name="record">The <see cref="Record"/> object.</param>
         /// <param name="x">The X coordinate in container.</param>
         /// <param name="y">The Y coordinate in container.</param>
-        public void OnDropRecord(Record record, double x, double y)
+        /// <param name="bExecute">The flag indicating whether to execute action.</param>
+        /// <returns>Returns true if success.</returns>
+        public bool OnDropRecord(Record record, double x, double y, bool bExecute = true)
         {
             try
             {
                 if (Renderers?[0]?.State?.SelectedShape != null
                     || (Renderers?[0]?.State?.SelectedShapes != null && Renderers?[0]?.State?.SelectedShapes.Count > 0))
                 {
-                    OnApplyRecord(record);
+                    if (bExecute)
+                    {
+                        OnApplyRecord(record);
+                    }
+                    return true;
                 }
                 else
                 {
@@ -2642,19 +2807,28 @@ namespace Core2D.Editor
                         var result = HitTest.TryToGetShape(layer.Shapes, new Point2(x, y), Project.Options.HitThreshold);
                         if (result != null)
                         {
-                            Project?.ApplyRecord(result.Data, record);
+                            if (bExecute)
+                            {
+                                Project?.ApplyRecord(result.Data, record);
+                            }
+                            return true;
                         }
                         else
                         {
-                            OnDropRecordAsGroup(record, x, y);
+                            if (bExecute)
+                            {
+                                OnDropRecordAsGroup(record, x, y);
+                            }
+                            return true;
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
+            return false;
         }
 
         /// <summary>
@@ -2694,13 +2868,13 @@ namespace Core2D.Editor
                 }
             }
 
-            var rectangle = RectangleShape.Create(sx, sy, sx + width, sy + length * height, style, point);
+            var rectangle = RectangleShape.Create(sx, sy, sx + width, sy + (length * height), style, point);
             g.AddShape(rectangle);
 
-            var pt = PointShape.Create(sx + width / 2, sy, point);
-            var pb = PointShape.Create(sx + width / 2, sy + length * height, point);
-            var pl = PointShape.Create(sx, sy + (length * height) / 2, point);
-            var pr = PointShape.Create(sx + width, sy + (length * height) / 2, point);
+            var pt = PointShape.Create(sx + (width / 2), sy, point);
+            var pb = PointShape.Create(sx + (width / 2), sy + (length * height), point);
+            var pl = PointShape.Create(sx, sy + ((length * height) / 2), point);
+            var pr = PointShape.Create(sx + width, sy + ((length * height) / 2), point);
 
             g.AddConnectorAsNone(pt);
             g.AddConnectorAsNone(pb);
@@ -2716,14 +2890,20 @@ namespace Core2D.Editor
         /// <param name="style">The <see cref="ShapeStyle"/> object.</param>
         /// <param name="x">The X coordinate in container.</param>
         /// <param name="y">The Y coordinate in container.</param>
-        public void OnDropStyle(ShapeStyle style, double x, double y)
+        /// <param name="bExecute">The flag indicating whether to execute action.</param>
+        /// <returns>Returns true if success.</returns>
+        public bool OnDropStyle(ShapeStyle style, double x, double y, bool bExecute = true)
         {
             try
             {
                 if (Renderers?[0]?.State?.SelectedShape != null
                     || (Renderers?[0]?.State?.SelectedShapes != null && Renderers?[0]?.State?.SelectedShapes.Count > 0))
                 {
-                    OnApplyStyle(style);
+                    if (bExecute == true)
+                    {
+                        OnApplyStyle(style);
+                    }
+                    return true;
                 }
                 else
                 {
@@ -2733,15 +2913,49 @@ namespace Core2D.Editor
                         var result = HitTest.TryToGetShape(layer.Shapes, new Point2(x, y), Project.Options.HitThreshold);
                         if (result != null)
                         {
-                            Project.ApplyStyle(result, style);
+                            if (bExecute == true)
+                            {
+                                Project.ApplyStyle(result, style);
+                            }
+                            return true;
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                Log?.LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                LogError(ex);
             }
+            return false;
+        }
+
+        /// <summary>
+        /// Drop <see cref="PageContainer"/> object in current container at specified location.
+        /// </summary>
+        /// <param name="template">The template object.</param>
+        /// <param name="x">The X coordinate in container.</param>
+        /// <param name="y">The Y coordinate in container.</param>
+        /// <param name="bExecute">The flag indicating whether to execute action.</param>
+        /// <returns>Returns true if success.</returns>
+        public bool OnDropTemplate(PageContainer template, double x, double y, bool bExecute = true)
+        {
+            try
+            {
+                var page = Project?.CurrentContainer;
+                if (page != null && template != null && page != template)
+                {
+                    if (bExecute)
+                    {
+                        OnApplyTemplate(template);
+                    }
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogError(ex);
+            }
+            return false;
         }
 
         /// <summary>
@@ -2855,7 +3069,7 @@ namespace Core2D.Editor
             }
             else
             {
-                Invalidate?.Invoke();
+                Canvas?.Invalidate?.Invoke();
             }
         }
 
@@ -2879,7 +3093,7 @@ namespace Core2D.Editor
             }
             else
             {
-                Invalidate?.Invoke();
+                Canvas?.Invalidate?.Invoke();
             }
         }
 
@@ -2902,9 +3116,9 @@ namespace Core2D.Editor
             }
             else
             {
-                if (Invalidate != null)
+                if (Canvas?.Invalidate != null)
                 {
-                    Invalidate();
+                    Canvas?.Invalidate();
                 }
             }
         }
@@ -3567,12 +3781,142 @@ namespace Core2D.Editor
         }
 
         /// <summary>
-        /// Checks if edit mode is active.
+        /// Move views in the panel.
         /// </summary>
-        /// <returns>Return true if edit mode is active.</returns>
-        public bool IsEditMode()
+        /// <param name="panel">The views panel.</param>
+        /// <param name="sourceIndex">The source view index.</param>
+        /// <param name="targetIndex">The target view index.</param>
+        public void MoveView(ViewsPanel panel, int sourceIndex, int targetIndex)
         {
-            return true;
+            if (sourceIndex < targetIndex)
+            {
+                var item = panel.Views[sourceIndex];
+                var builder = panel.Views.ToBuilder();
+                builder.Insert(targetIndex + 1, item);
+                builder.RemoveAt(sourceIndex);
+
+                var previous = panel.Views;
+                var next = builder.ToImmutable();
+                Project?.History?.Snapshot(previous, next, (p) => panel.Views = p);
+                panel.Views = next;
+            }
+            else
+            {
+                int removeIndex = sourceIndex + 1;
+                if (panel.Views.Length + 1 > removeIndex)
+                {
+                    var item = panel.Views[sourceIndex];
+                    var builder = panel.Views.ToBuilder();
+                    builder.Insert(targetIndex, item);
+                    builder.RemoveAt(removeIndex);
+
+                    var previous = panel.Views;
+                    var next = builder.ToImmutable();
+                    Project?.History?.Snapshot(previous, next, (p) => panel.Views = p);
+                    panel.Views = next;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Swap views in the panel.
+        /// </summary>
+        /// <param name="panel">The views panel.</param>
+        /// <param name="sourceIndex">The source view index.</param>
+        /// <param name="targetIndex">The target view index.</param>
+        public void SwapView(ViewsPanel panel, int sourceIndex, int targetIndex)
+        {
+            var item1 = panel.Views[sourceIndex];
+            var item2 = panel.Views[targetIndex];
+            var builder = panel.Views.ToBuilder();
+            builder[targetIndex] = item1;
+            builder[sourceIndex] = item2;
+
+            var previous = panel.Views;
+            var next = builder.ToImmutable();
+            Project?.History?.Snapshot(previous, next, (p) => panel.Views = p);
+            panel.Views = next;
+        }
+
+        /// <summary>
+        /// Move views into another panel.
+        /// </summary>
+        /// <param name="sourcePanel">The source views panel.</param>
+        /// <param name="targetPanel">The target views panel.</param>
+        /// <param name="sourceIndex">The source view index.</param>
+        /// <param name="targetIndex">The target view index.</param>
+        public void MoveView(ViewsPanel sourcePanel, ViewsPanel targetPanel, int sourceIndex, int targetIndex)
+        {
+            var item = sourcePanel.Views[sourceIndex];
+            var sourceBuilder = sourcePanel.Views.ToBuilder();
+            var targetBuilder = targetPanel.Views.ToBuilder();
+            sourceBuilder.RemoveAt(sourceIndex);
+            targetBuilder.Insert(targetIndex, item);
+
+            var previousSource = sourcePanel.Views;
+            var nextSource = sourceBuilder.ToImmutable();
+
+            var previousSourceCurrentView = sourcePanel.CurrentView;
+            var nextSourceCurrentView = nextSource[sourceIndex > 0 ? sourceIndex - 1 : 0];
+
+            var previousTarget = targetPanel.Views;
+            var nextTarget = targetBuilder.ToImmutable();
+
+            var previousTargetCurrentView = targetPanel.CurrentView;
+            var nextTargetCurrentView = nextTarget[targetIndex];
+
+            Project?.History?.Snapshot(previousSource, nextSource, (p) => sourcePanel.Views = p);
+            sourcePanel.Views = nextSource;
+
+            Project?.History?.Snapshot(previousSourceCurrentView, nextSourceCurrentView, (p) => sourcePanel.CurrentView = p);
+            sourcePanel.CurrentView = nextSourceCurrentView;
+
+            Project?.History?.Snapshot(previousTarget, nextSource, (p) => targetPanel.Views = p);
+            targetPanel.Views = nextTarget;
+
+            Project?.History?.Snapshot(previousTargetCurrentView, nextTargetCurrentView, (p) => targetPanel.CurrentView = p);
+            targetPanel.CurrentView = nextTargetCurrentView;
+        }
+
+        /// <summary>
+        /// Swap views into another panel.
+        /// </summary>
+        /// <param name="sourcePanel">The source views panel.</param>
+        /// <param name="targetPanel">The target views panel.</param>
+        /// <param name="sourceIndex">The source view index.</param>
+        /// <param name="targetIndex">The target view index.</param>
+        public void SwapView(ViewsPanel sourcePanel, ViewsPanel targetPanel, int sourceIndex, int targetIndex)
+        {
+            var item1 = sourcePanel.Views[sourceIndex];
+            var item2 = targetPanel.Views[targetIndex];
+            var sourceBuilder = sourcePanel.Views.ToBuilder();
+            var targetBuilder = targetPanel.Views.ToBuilder();
+            sourceBuilder[sourceIndex] = item2;
+            targetBuilder[targetIndex] = item1;
+
+            var previousSource = sourcePanel.Views;
+            var nextSource = sourceBuilder.ToImmutable();
+
+            var previousTarget = targetPanel.Views;
+            var nextTarget = targetBuilder.ToImmutable();
+
+            var previousSourceCurrentView = item1;
+            var nextSourceCurrentView = item2;
+
+            var previousTargetCurrentView = item2;
+            var nextTargetCurrentView = item1;
+
+            Project?.History?.Snapshot(previousSource, nextSource, (p) => sourcePanel.Views = p);
+            sourcePanel.Views = nextSource;
+
+            Project?.History?.Snapshot(previousTarget, nextSource, (p) => targetPanel.Views = p);
+            targetPanel.Views = nextTarget;
+
+            Project?.History?.Snapshot(previousSourceCurrentView, nextSourceCurrentView, (p) => sourcePanel.CurrentView = p);
+            sourcePanel.CurrentView = nextSourceCurrentView;
+
+            Project?.History?.Snapshot(previousTargetCurrentView, nextTargetCurrentView, (p) => targetPanel.CurrentView = p);
+            targetPanel.CurrentView = nextTargetCurrentView;
         }
 
         /// <summary>
@@ -3581,10 +3925,70 @@ namespace Core2D.Editor
         /// <param name="view">The view instance.</param>
         public void OnChangeCurrentView(IView view)
         {
-            if (view != null && _currentView != view)
+            if (view != null && _layout.CurrentView != view)
             {
-                CurrentView = view;
+                _layout.CurrentView = view;
             }
+        }
+
+        /// <summary>
+        /// Move items in the library.
+        /// </summary>
+        /// <typeparam name="T">The type of the library.</typeparam>
+        /// <param name="library">The items library.</param>
+        /// <param name="sourceIndex">The source item index.</param>
+        /// <param name="targetIndex">The target item index.</param>
+        public void MoveItem<T>(Library<T> library, int sourceIndex, int targetIndex)
+        {
+            if (sourceIndex < targetIndex)
+            {
+                var item = library.Items[sourceIndex];
+                var builder = library.Items.ToBuilder();
+                builder.Insert(targetIndex + 1, item);
+                builder.RemoveAt(sourceIndex);
+
+                var previous = library.Items;
+                var next = builder.ToImmutable();
+                Project?.History?.Snapshot(previous, next, (p) => library.Items = p);
+                library.Items = next;
+            }
+            else
+            {
+                int removeIndex = sourceIndex + 1;
+                if (library.Items.Length + 1 > removeIndex)
+                {
+                    var item = library.Items[sourceIndex];
+                    var builder = library.Items.ToBuilder();
+                    builder.Insert(targetIndex, item);
+                    builder.RemoveAt(removeIndex);
+
+                    var previous = library.Items;
+                    var next = builder.ToImmutable();
+                    Project?.History?.Snapshot(previous, next, (p) => library.Items = p);
+                    library.Items = next;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Swap items in the library.
+        /// </summary>
+        /// <typeparam name="T">The type of the library.</typeparam>
+        /// <param name="library">The items library.</param>
+        /// <param name="sourceIndex">The source item index.</param>
+        /// <param name="targetIndex">The target item index.</param>
+        public void SwapItem<T>(Library<T> library, int sourceIndex, int targetIndex)
+        {
+            var item1 = library.Items[sourceIndex];
+            var item2 = library.Items[targetIndex];
+            var builder = library.Items.ToBuilder();
+            builder[targetIndex] = item1;
+            builder[sourceIndex] = item2;
+
+            var previous = library.Items;
+            var next = builder.ToImmutable();
+            Project?.History?.Snapshot(previous, next, (p) => library.Items = p);
+            library.Items = next;
         }
     }
 }

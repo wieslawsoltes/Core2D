@@ -1,9 +1,8 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Core2D.Interfaces;
 using System;
-using System.Reflection;
 using System.Text;
+using Core2D.Interfaces;
 
 namespace Core2D.FileSystem.DotNet
 {
@@ -13,16 +12,9 @@ namespace Core2D.FileSystem.DotNet
     public sealed class DotNetFileSystem : IFileSystem
     {
         /// <inheritdoc/>
-        string IFileSystem.GetAssemblyPath(Type type)
+        string IFileSystem.GetBaseDirectory()
         {
-#if NETSTANDARD2_0 || NETCORE5_0
-            string codeBase = type.GetTypeInfo().Assembly.FullName;
-#else
-            string codeBase = type == null ? Assembly.GetEntryAssembly().CodeBase : type.GetTypeInfo().Assembly.FullName;
-#endif
-            var uri = new UriBuilder(codeBase);
-            string path = Uri.UnescapeDataString(uri.Path);
-            return System.IO.Path.GetDirectoryName(path);
+            return AppContext.BaseDirectory;
         }
 
         /// <inheritdoc/>

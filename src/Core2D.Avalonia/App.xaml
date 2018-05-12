@@ -15,42 +15,28 @@
              xmlns:SettingsPath="clr-namespace:Core2D.Editor.Tools.Path.Settings;assembly=Core2D.Editor"
              xmlns:Shape="clr-namespace:Core2D.Shape;assembly=Core2D" 
              xmlns:Shapes="clr-namespace:Core2D.Shapes;assembly=Core2D" 
-             xmlns:Style="clr-namespace:Core2D.Style;assembly=Core2D" 
+             xmlns:Style="clr-namespace:Core2D.Style;assembly=Core2D"
+             xmlns:Views="clr-namespace:Core2D.Editor.Views;assembly=Core2D.Editor"
              xmlns:data="clr-namespace:Core2D.Avalonia.Views.Data;assembly=Core2D.Avalonia"
+             xmlns:editor="clr-namespace:Core2D.Avalonia.Views.Editor;assembly=Core2D.Avalonia"
              xmlns:path="clr-namespace:Core2D.Avalonia.Views.Path;assembly=Core2D.Avalonia"
-             xmlns:project="clr-namespace:Core2D.Avalonia.Views.Containers;assembly=Core2D.Avalonia"
+             xmlns:containers="clr-namespace:Core2D.Avalonia.Views.Containers;assembly=Core2D.Avalonia"
+             xmlns:settings="clr-namespace:Core2D.Avalonia.Views.Settings;assembly=Core2D.Avalonia"  
              xmlns:renderer="clr-namespace:Core2D.Avalonia.Views.Renderer;assembly=Core2D.Avalonia"
              xmlns:settingsTools="clr-namespace:Core2D.Avalonia.Views.Settings.Tools;assembly=Core2D.Avalonia"
              xmlns:settingsPath="clr-namespace:Core2D.Avalonia.Views.Settings.Tools.Path;assembly=Core2D.Avalonia"
              xmlns:shapes="clr-namespace:Core2D.Avalonia.Views.Shapes;assembly=Core2D.Avalonia"
              xmlns:state="clr-namespace:Core2D.Avalonia.Views.State;assembly=Core2D.Avalonia"
-             xmlns:style="clr-namespace:Core2D.Avalonia.Views.Style;assembly=Core2D.Avalonia">
+             xmlns:style="clr-namespace:Core2D.Avalonia.Views.Style;assembly=Core2D.Avalonia"
+             xmlns:views="clr-namespace:Core2D.Avalonia.Views;assembly=Core2D.Avalonia">
     <Application.Styles>
         <!-- Theme -->
         <StyleInclude Source="resm:Avalonia.Themes.Default.DefaultTheme.xaml?assembly=Avalonia.Themes.Default"/>
         <StyleInclude Source="resm:Avalonia.Themes.Default.Accents.BaseLight.xaml?assembly=Avalonia.Themes.Default"/>
         <!-- Border -->
-        <Style Selector="Border.leftTop">
-            <Setter Property="Margin" Value="1"/>
-            <Setter Property="Padding" Value="3,3,3,3"/>
-            <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderLightBrush}"/>
-            <Setter Property="BorderThickness" Value="1"/>
-        </Style>
-        <Style Selector="Border.leftBottom">
-            <Setter Property="Margin" Value="1"/>
-            <Setter Property="Padding" Value="3,3,3,3"/>
-            <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderLightBrush}"/>
-            <Setter Property="BorderThickness" Value="1"/>
-        </Style>
-        <Style Selector="Border.rightTop">
-            <Setter Property="Margin" Value="1"/>
-            <Setter Property="Padding" Value="3,3,3,3"/>
-            <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderLightBrush}"/>
-            <Setter Property="BorderThickness" Value="1"/>
-        </Style>
-        <Style Selector="Border.rightBottom">
-            <Setter Property="Margin" Value="1"/>
-            <Setter Property="Padding" Value="3,3,3,3"/>
+        <Style Selector="Border.panel">
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="Padding" Value="4"/>
             <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderLightBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
@@ -111,6 +97,11 @@
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+        <!-- Button.code -->
+        <Style Selector="Button.code">
+            <Setter Property="Margin" Value="3,0,3,0"/>
+            <Setter Property="FontSize" Value="12"/>
         </Style>
         <!-- CheckBox.default -->
         <Style Selector="CheckBox.default">
@@ -200,6 +191,12 @@
         <Style Selector="DropDown.autofit:focus /template/ Border#border">
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
+        <!-- Grid -->
+        <Style Selector="Grid.drag">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        </Style>
         <!-- GridSplitter.vertical -->
         <Style Selector="GridSplitter:vertical">
             <Setter Property="Width" Value="6"/>
@@ -242,6 +239,10 @@
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="AutoScrollToSelectedItem" Value="True"/>
         </Style>
+        <!-- Menu -->
+        <Style Selector="Menu.default">
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
         <!-- MenuItem -->
         <Style Selector="MenuItem">
             <Setter Property="BorderThickness" Value="0"/>
@@ -256,9 +257,24 @@
             <Setter Property="IsSnapToTickEnabled" Value="True"/>
             <Setter Property="TickFrequency" Value="0.1"/>
         </Style>
+        <!-- StackPanel -->
+        <Style Selector="StackPanel.drag">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        </Style>
         <!-- TabControl -->
         <Style Selector="TabControl.default">
             <Setter Property="Margin" Value="0"/>
+        </Style>
+        <Style Selector="TabControl.default /template/ TabStrip">
+            <Setter Property="ItemsPanel">
+                <Setter.Value>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
         <Style Selector="TabControl.top">
             <Setter Property="Margin" Value="0"/>
@@ -358,9 +374,14 @@
             <Setter Property="Margin" Value="1"/>
             <Setter Property="FontSize" Value="12"/>
         </Style>
+        <Style Selector="TextBlock.drag">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        </Style>
         <!-- TextBox.default -->
         <Style Selector="TextBox.default">
-            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Padding" Value="2"/>
             <Setter Property="Margin" Value="0"/>
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="BorderThickness" Value="1"/>
@@ -373,7 +394,7 @@
         </Style>
         <!-- TextBox.left -->
         <Style Selector="TextBox.left">
-            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Padding" Value="2"/>
             <Setter Property="Margin" Value="0"/>
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="TextAlignment" Value="Left"/>
@@ -388,7 +409,7 @@
         </Style>
         <!-- TextBox.center -->
         <Style Selector="TextBox.center">
-            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Padding" Value="2"/>
             <Setter Property="Margin" Value="0"/>
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="TextAlignment" Value="Center"/>
@@ -403,7 +424,7 @@
         </Style>
         <!-- TextBox.property -->
         <Style Selector="TextBox.property">
-            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Padding" Value="2"/>
             <Setter Property="Margin" Value="3,1,3,1"/>
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="TextAlignment" Value="Left"/>
@@ -450,7 +471,7 @@
         </Style>
         <!-- TextBox.project -->
         <Style Selector="TextBox.project">
-            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Padding" Value="2"/>
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="TextAlignment" Value="Left"/>
             <Setter Property="BorderThickness" Value="0"/>
@@ -464,6 +485,23 @@
         </Style>
         <Style Selector="TextBox.project:focus /template/ Border#border">
             <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+        <!-- TextBox.code -->
+        <Style Selector="TextBox.code">
+            <Setter Property="Padding" Value="4"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="TextAlignment" Value="Left"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="AcceptsReturn" Value="True"/>
+            <Setter Property="TextWrapping" Value="NoWrap"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+        </Style>
+        <Style Selector="TextBox.code:pointerover /template/ Border#border">
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+        <Style Selector="TextBox.code:focus /template/ Border#border">
+            <Setter Property="BorderThickness" Value="1"/>
         </Style>
         <!-- ToolTip -->
         <Style Selector="ToolTip">
@@ -685,22 +723,95 @@
         </DataTemplate>
         <!-- Containers -->
         <DataTemplate DataType="Containers:ILibrary">
-            <project:LibraryControl/>
+            <containers:LibraryControl/>
         </DataTemplate>
         <DataTemplate DataType="Containers:Options">
-            <project:OptionsControl/>
+            <containers:OptionsControl/>
         </DataTemplate>
         <DataTemplate DataType="Containers:ProjectContainer">
-            <project:ProjectControl/>
+            <containers:ProjectControl/>
         </DataTemplate>
         <DataTemplate DataType="Containers:DocumentContainer">
-            <project:DocumentControl/>
+            <containers:DocumentControl/>
         </DataTemplate>
         <DataTemplate DataType="Containers:PageContainer">
-            <project:ContainerControl/>
+            <containers:ContainerControl/>
         </DataTemplate>
         <DataTemplate DataType="Containers:LayerContainer">
-            <project:LayerControl/>
+            <containers:LayerControl/>
+        </DataTemplate>
+        <!-- Views -->
+        <DataTemplate DataType="Views:DashboardView">
+            <Grid RowDefinitions="Auto,*">
+                <views:DashboardMenuControl Grid.Row="0" DataContext="{Binding Context}"/>
+                <views:DashboardControl Grid.Row="1" DataContext="{Binding Context}"/>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate DataType="Views:EditorView">
+            <Grid RowDefinitions="Auto,*">
+                <views:EditorMenuControl Grid.Row="0" DataContext="{Binding Context}"/>
+                <views:EditorControl Grid.Row="1" DataContext="{Binding Context}"/>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate DataType="Views:BrowserView">
+            <Grid RowDefinitions="Auto,*">
+                <views:BrowserMenuControl Grid.Row="0" DataContext="{Binding Context}"/>
+                <views:BrowserControl Grid.Row="1" DataContext="{Binding Context}"/>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate DataType="Views:DocumentView">
+            <Grid RowDefinitions="Auto,*">
+                <views:DocumentMenuControl Grid.Row="0" DataContext="{Binding Context}"/>
+                <views:DocumentControl Grid.Row="1" DataContext="{Binding Context}"/>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate DataType="Views:AboutView">
+            <Grid RowDefinitions="Auto,*">
+                <views:AboutMenuControl Grid.Row="0" DataContext="{Binding Context}"/>
+                <views:AboutControl Grid.Row="1" DataContext="{Binding Context}"/>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate DataType="Views:ProjectView">
+            <containers:ProjectControl DataContext="{Binding Context.Project}"/>
+        </DataTemplate>
+        <DataTemplate DataType="Views:OptionsView">
+            <ContentControl Content="{Binding Context.Project.Options}"/>
+        </DataTemplate>
+        <DataTemplate DataType="Views:ImagesView">
+            <containers:ImagesControl DataContext="{Binding Context.Project}"/>
+        </DataTemplate>
+        <DataTemplate DataType="Views:GroupsView">
+            <containers:GroupsControl DataContext="{Binding Context.Project.CurrentGroupLibrary}"/>
+        </DataTemplate>
+        <DataTemplate DataType="Views:DatabasesView">
+            <containers:DatabasesControl DataContext="{Binding Context.Project}"/>
+        </DataTemplate>
+        <DataTemplate DataType="Views:StylesView">
+            <containers:StylesControl DataContext="{Binding Context.Project.CurrentStyleLibrary}"/>
+        </DataTemplate>
+        <DataTemplate DataType="Views:TemplatesView">
+            <containers:TemplatesControl DataContext="{Binding Context.Project}"/>
+        </DataTemplate>
+        <DataTemplate DataType="Views:ContainerView">
+            <ContentControl Content="{Binding Context.Project.CurrentContainer}"/>
+        </DataTemplate>
+        <DataTemplate DataType="Views:ZoomView">
+            <containers:ZoomControl DataContext="{Binding Context.Canvas.Zoom}"/>
+        </DataTemplate>
+        <DataTemplate DataType="Views:ToolsView">
+            <settings:ToolsControl DataContext="{Binding Context}"/>
+        </DataTemplate>
+        <DataTemplate DataType="Views:ShapeView">
+            <ContentControl Content="{Binding Context.Project.CurrentContainer.CurrentShape}"/>
+        </DataTemplate>
+        <DataTemplate DataType="Views:DataView">
+            <data:DataControl DataContext="{Binding Context.Renderers[0].State.SelectedShape.Data}"/>
+        </DataTemplate>
+        <DataTemplate DataType="Views:StyleView">
+            <style:ShapeStyleControl DataContext="{Binding Context.Project.CurrentStyleLibrary.Selected}"/>
+        </DataTemplate>
+        <DataTemplate DataType="Views:TemplateView">
+            <ContentControl Content="{Binding Context.Project.CurrentTemplate}"/>
         </DataTemplate>
     </Application.DataTemplates>
 </Application>

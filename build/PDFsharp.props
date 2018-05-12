@@ -1,5 +1,5 @@
 ﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <PackageReference Include="PDFsharp" Version="1.50.4000-beta3b" />
+    <PackageReference Include="PDFsharp" Version="1.50.4845-rc2a" />
   </ItemGroup>
 </Project>

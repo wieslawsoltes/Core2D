@@ -3,6 +3,9 @@
 <UserControl x:Class="Core2D.Avalonia.Views.Path.PolyCubicBezierSegmentControl"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+             xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+             xmlns:behaviors="clr-namespace:Core2D.Avalonia.Behaviors;assembly=Core2D.Avalonia"
              xmlns:local="clr-namespace:Core2D.Avalonia;assembly=Core2D.Avalonia"
              xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
@@ -10,15 +13,27 @@
              Design.Width="250" Design.Height="400">
     <TabControl Classes="default">
         <TabItem Header="PolyCubicBezierSegment" Classes="property">
-            <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*">
-                <TextBlock Text="IsStroked" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                <CheckBox IsChecked="{Binding IsStroked, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
-                <TextBlock Text="IsSmoothJoin" Classes="left" Grid.Row="1" Grid.Column="0"/>
-                <CheckBox IsChecked="{Binding IsSmoothJoin, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
-            </Grid>
+            <ScrollViewer>
+                <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*">
+                    <TextBlock Text="IsStroked" Classes="left" Grid.Row="0" Grid.Column="0"/>
+                    <CheckBox IsChecked="{Binding IsStroked, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                    <TextBlock Text="IsSmoothJoin" Classes="left" Grid.Row="1" Grid.Column="0"/>
+                    <CheckBox IsChecked="{Binding IsSmoothJoin, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
+                </Grid>
+            </ScrollViewer>
         </TabItem>
         <TabItem Header="Points" Classes="property">
-            <ListBox Name="points" Items="{Binding Points}" Classes="default"/>
+            <ListBox Name="points" Items="{Binding Points}" Classes="default">
+                <ListBox.DataTemplates>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Mode=OneWay, Converter={x:Static converters:ObjectToTypeStringConverter.Instance}}" Classes="list drag">
+                            <i:Interaction.Behaviors>
+                                <behaviors:DragBehavior/>
+                            </i:Interaction.Behaviors>
+                        </TextBlock>
+                    </DataTemplate>
+                </ListBox.DataTemplates>
+            </ListBox>
         </TabItem>
         <TabItem Header="Selected" Classes="property">
             <ContentControl Content="{Binding #points.SelectedItem}"/>

@@ -6,9 +6,8 @@
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
   </PropertyGroup>
 
-  <Import Project="..\..\build\Default.targets" />
-  <Import Project="..\..\build\NuGet.props" />
   <Import Project="..\..\build\Base.props" />
+  <Import Project="..\..\build\System.Diagnostics.props" />
 
   <ItemGroup Condition="$(TargetFramework.StartsWith('net4'))">
     <Reference Include="System" />
@@ -18,11 +17,6 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-  </ItemGroup>
-
-  <ItemGroup Condition="!$(TargetFramework.StartsWith('net4'))">
-    <PackageReference Include="System.Diagnostics.TextWriterTraceListener" Version="4.3.0" />
-    <PackageReference Include="System.Diagnostics.TraceSource" Version="4.3.0" />
   </ItemGroup>
 
   <ItemGroup>

@@ -6,12 +6,13 @@
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
   </PropertyGroup>
 
-  <Import Project="..\..\build\Default.targets" />
-  <Import Project="..\..\build\NuGet.props" />
   <Import Project="..\..\build\Base.props" />
 
-  <ItemGroup Condition="$(TargetFramework.StartsWith('net4'))">
+  <ItemGroup Condition="$(TargetFramework.StartsWith('net4')) and '$(OS)' == 'Windows_NT'">
     <Reference Include="PresentationCore" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$(TargetFramework.StartsWith('net4'))">
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />

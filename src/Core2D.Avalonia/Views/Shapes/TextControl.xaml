@@ -10,20 +10,24 @@
              Design.Width="250" Design.Height="400">
     <TabControl Classes="default">
         <TabItem Header="Text" Classes="property">
-            <Grid RowDefinitions="Auto,Auto,*" ColumnDefinitions="Auto,*">
-                <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                <TextBox Text="{Binding Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
-                <TextBlock Text="Text" Classes="left" Grid.Row="1" Grid.Column="0"/>
-                <TextBox Text="{Binding Text, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
-                <TabControl Classes="default" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
-                    <TabItem Header="TopLeft" Classes="property">
-                        <ContentControl Content="{Binding TopLeft}"/>
-                    </TabItem>
-                    <TabItem Header="BottomRight" Classes="property">
-                        <ContentControl Content="{Binding BottomRight}"/>
-                    </TabItem>
-                </TabControl>
-            </Grid>
+            <ScrollViewer>
+                <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*">
+                    <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
+                    <TextBox Text="{Binding Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                    <TextBlock Text="Text" Classes="left" Grid.Row="1" Grid.Column="0"/>
+                    <TextBox Text="{Binding Text, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
+                </Grid>
+            </ScrollViewer>
+        </TabItem>
+        <TabItem Header="Points" Classes="property">
+            <TabControl Classes="default">
+                <TabItem Header="TopLeft" Classes="property">
+                    <ContentControl Content="{Binding TopLeft}"/>
+                </TabItem>
+                <TabItem Header="BottomRight" Classes="property">
+                    <ContentControl Content="{Binding BottomRight}"/>
+                </TabItem>
+            </TabControl>
         </TabItem>
         <TabItem Header="State" Classes="property">
             <ContentControl Content="{Binding State}"/>

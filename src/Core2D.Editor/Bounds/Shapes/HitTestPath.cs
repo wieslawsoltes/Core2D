@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Core2D.Shape;
 using Core2D.Shapes;
 using Spatial;
@@ -37,7 +38,10 @@ namespace Core2D.Editor.Bounds.Shapes
             if (path == null)
                 throw new ArgumentNullException(nameof(shape));
 
-            return HitTestHelper.Contains(path.GetPoints(), target);
+            var points = path.GetPoints();
+            if (points.Count() > 0)
+                return HitTestHelper.Contains(points, target);
+            return false;
         }
 
         public override bool Overlaps(BaseShape shape, Rect2 target, double radius, IDictionary<Type, HitTestBase> registered)
@@ -46,7 +50,10 @@ namespace Core2D.Editor.Bounds.Shapes
             if (path == null)
                 throw new ArgumentNullException(nameof(shape));
 
-            return HitTestHelper.Overlap(path.GetPoints(), target);
+            var points = path.GetPoints();
+            if (points.Count() > 0)
+                return HitTestHelper.Overlap(points, target);
+            return false;
         }
     }
 }

@@ -5,6 +5,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+             xmlns:behaviors="clr-namespace:Core2D.Avalonia.Behaviors;assembly=Core2D.Avalonia"
              xmlns:local="clr-namespace:Core2D.Avalonia;assembly=Core2D.Avalonia"
              xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor"
@@ -14,28 +15,33 @@
              Design.Width="250" Design.Height="400">
     <Grid RowDefinitions="Auto,*,Auto">
         <ListBox Name="templates" Items="{Binding Templates}" SelectedItem="{Binding CurrentTemplate, Mode=TwoWay}" Grid.Row="1" Classes="default">
+            <i:Interaction.Behaviors>
+                <behaviors:DropBehavior Editor="{Binding $parent[Window].DataContext}"/>
+            </i:Interaction.Behaviors>
             <ListBox.KeyBindings>
-                <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.AddTemplateCommand}" Gesture="Ctrl+N"/>
-                <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.RemoveTemplateCommand}" CommandParameter="{Binding #templates.SelectedItem}" Gesture="Delete"/>
-                <KeyBinding Command="{x:Static Editor:ProjectEditorCommands.ExportObjectCommand}" CommandParameter="{Binding #templates.SelectedItem}" Gesture="Ctrl+E"/>
+                <KeyBinding Command="{Binding $parent[Window].DataContext.OnApplyTemplate}" Gesture="Ctrl+N"/>
+                <KeyBinding Command="{Binding $parent[Window].DataContext.OnEditTemplate}" CommandParameter="{Binding #templates.SelectedItem}" Gesture="Ctrl+T"/>
+                <KeyBinding Command="{Binding $parent[Window].DataContext.OnRemoveTemplate}" CommandParameter="{Binding #templates.SelectedItem}" Gesture="Delete"/>
+                <KeyBinding Command="{Binding $parent[Window].DataContext.Platform.OnExportObject}" CommandParameter="{Binding #templates.SelectedItem}" Gesture="Ctrl+E"/>
             </ListBox.KeyBindings>
             <ListBox.DataTemplates>
                 <DataTemplate DataType="Containers:PageContainer">
-                    <TextBlock Name="template" Text="{Binding Name}" Classes="list">
+                    <TextBlock Name="template" Text="{Binding Name}" Classes="list drag">
                         <i:Interaction.Behaviors>
                             <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #template}">
-                                <ia:InvokeCommandAction Command="{x:Static Editor:ProjectEditorCommands.ApplyTemplateCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                <ia:InvokeCommandAction Command="{Binding $parent[Window].DataContext.OnApplyTemplate}" CommandParameter="{Binding Mode=OneWay}"/>
                             </ia:EventTriggerBehavior>
+                            <behaviors:DragBehavior/>
                         </i:Interaction.Behaviors>
                         <TextBlock.ContextMenu>
                             <ContextMenu Classes="default">
-                                <MenuItem Header="_Edit Template" Command="{x:Static Editor:ProjectEditorCommands.EditTemplateCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                <MenuItem Header="_Edit Template" Command="{Binding $parent[Window].DataContext.OnEditTemplate}" CommandParameter="{Binding Mode=OneWay}"/>
                                 <Separator/>
-                                <MenuItem Header="_Add Template" Command="{x:Static Editor:ProjectEditorCommands.AddTemplateCommand}"/>
+                                <MenuItem Header="_Add Template" Command="{Binding $parent[Window].DataContext.OnAddTemplate}"/>
                                 <Separator/>
-                                <MenuItem Header="_Delete" Command="{x:Static Editor:ProjectEditorCommands.RemoveTemplateCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                <MenuItem Header="_Delete" Command="{Binding $parent[Window].DataContext.OnRemoveTemplate}" CommandParameter="{Binding Mode=OneWay}"/>
                                 <Separator/>
-                                <MenuItem Header="E_xport" Command="{x:Static Editor:ProjectEditorCommands.ExportObjectCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                <MenuItem Header="E_xport" Command="{Binding $parent[Window].DataContext.Platform.OnExportObject}" CommandParameter="{Binding Mode=OneWay}"/>
                             </ContextMenu>
                         </TextBlock.ContextMenu>
                     </TextBlock>
@@ -43,10 +49,10 @@
             </ListBox.DataTemplates>
         </ListBox>
         <Menu Grid.Row="0" HorizontalAlignment="Right">
-            <MenuItem Header="apply" Command="{x:Static Editor:ProjectEditorCommands.ApplyTemplateCommand}" CommandParameter="{Binding CurrentTemplate}" IsVisible="{Binding #templates.SelectedItem, Converter={x:Static converters:IsNotNullConverter.Instance}}"/>
-            <MenuItem Header="edit" Command="{x:Static Editor:ProjectEditorCommands.EditTemplateCommand}" CommandParameter="{Binding CurrentTemplate}" IsVisible="{Binding #templates.SelectedItem, Converter={x:Static converters:IsNotNullConverter.Instance}}"/>
-            <MenuItem Header="+" Command="{x:Static Editor:ProjectEditorCommands.AddTemplateCommand}"/>
-            <MenuItem Header="-" Command="{x:Static Editor:ProjectEditorCommands.RemoveTemplateCommand}" CommandParameter="{Binding CurrentTemplate}" IsVisible="{Binding #templates.SelectedItem, Converter={x:Static converters:IsNotNullConverter.Instance}}"/>
+            <MenuItem Header="apply" Command="{Binding $parent[Window].DataContext.OnApplyTemplate}" CommandParameter="{Binding CurrentTemplate}" IsVisible="{Binding #templates.SelectedItem, Converter={x:Static converters:IsNotNullConverter.Instance}}"/>
+            <MenuItem Header="edit" Command="{Binding $parent[Window].DataContext.OnEditTemplate}" CommandParameter="{Binding CurrentTemplate}" IsVisible="{Binding #templates.SelectedItem, Converter={x:Static converters:IsNotNullConverter.Instance}}"/>
+            <MenuItem Header="+" Command="{Binding $parent[Window].DataContext.OnAddTemplate}"/>
+            <MenuItem Header="-" Command="{Binding $parent[Window].DataContext.OnRemoveTemplate}" CommandParameter="{Binding CurrentTemplate}" IsVisible="{Binding #templates.SelectedItem, Converter={x:Static converters:IsNotNullConverter.Instance}}"/>
         </Menu>
         <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="2" IsVisible="{Binding #templates.SelectedItem, Converter={x:Static converters:IsNotNullConverter.Instance}}">
             <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>

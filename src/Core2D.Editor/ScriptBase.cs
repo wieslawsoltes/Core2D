@@ -6,16 +6,11 @@ namespace Core2D.Editor
     /// <summary>
     /// Script base class.
     /// </summary>
-    public abstract class ScriptBase
+    public class ScriptBase
     {
         /// <summary>
         /// Gets or sets project editor.
         /// </summary>
         public ProjectEditor Editor { get; set; }
-
-        /// <summary>
-        /// Runs script.
-        /// </summary>
-        public abstract void Run();
     }
 }

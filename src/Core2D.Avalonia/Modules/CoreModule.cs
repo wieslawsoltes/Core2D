@@ -1,12 +1,11 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System.Reflection;
-using System.Windows.Input;
 using Autofac;
 using Core2D.Editor;
 using Core2D.Editor.Bounds;
 using Core2D.Editor.Factories;
-using Core2D.Editor.Views.Interfaces;
+using Core2D.Editor.Views.Core;
 
 namespace Core2D.Avalonia.Modules
 {
@@ -25,8 +24,6 @@ namespace Core2D.Avalonia.Modules
             builder.RegisterAssemblyTypes(typeof(PathToolBase).GetTypeInfo().Assembly).As<PathToolBase>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<HitTest>().As<HitTest>().InstancePerLifetimeScope();
             builder.RegisterAssemblyTypes(typeof(HitTestBase).GetTypeInfo().Assembly).As<HitTestBase>().AsSelf().InstancePerLifetimeScope();
-            builder.RegisterType<ProjectEditorCommands>().AutoActivate().PropertiesAutowired().InstancePerLifetimeScope();
-            builder.RegisterAssemblyTypes(typeof(ProjectEditorCommands).GetTypeInfo().Assembly).AssignableTo<ICommand>().AsImplementedInterfaces().AsSelf().PropertiesAutowired().InstancePerLifetimeScope();
             builder.RegisterAssemblyTypes(typeof(IView).GetTypeInfo().Assembly).As<IView>().InstancePerLifetimeScope();
         }
     }

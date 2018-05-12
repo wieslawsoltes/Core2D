@@ -8,10 +8,12 @@
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
              Design.DataContext="{x:Static Designer:DesignerContext.PathSize}"
              Design.Width="250" Design.Height="400">
-    <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*">
-        <TextBlock Text="Width" Classes="left" Grid.Row="0" Grid.Column="0"/>
-        <TextBox Text="{Binding Width, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
-        <TextBlock Text="Height" Classes="left" Grid.Row="1" Grid.Column="0"/>
-        <TextBox Text="{Binding Height, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
-    </Grid>
+    <ScrollViewer>
+        <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*">
+            <TextBlock Text="Width" Classes="left" Grid.Row="0" Grid.Column="0"/>
+            <TextBox Text="{Binding Width, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+            <TextBlock Text="Height" Classes="left" Grid.Row="1" Grid.Column="0"/>
+            <TextBox Text="{Binding Height, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
+        </Grid>
+    </ScrollViewer>
 </UserControl>

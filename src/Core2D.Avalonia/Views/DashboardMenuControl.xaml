@@ -6,46 +6,48 @@
              xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
              xmlns:iac="clr-namespace:Avalonia.Xaml.Interactions.Custom;assembly=Avalonia.Xaml.Interactions.Custom"
-             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:local="clr-namespace:Core2D.Avalonia;assembly=Core2D.Avalonia"
              xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"
+             xmlns:views="clr-namespace:Core2D.Avalonia.Views;assembly=Core2D.Avalonia"
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor"
              xmlns:Recent="clr-namespace:Core2D.Editor.Recent;assembly=Core2D.Editor"
              xmlns:Containers="clr-namespace:Core2D.Containers;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
              Design.DataContext="{x:Static Designer:DesignerContext.Editor}"
              Design.Width="800" Design.Height="20">
-    <Menu>
+    <Menu Classes="default">
         <Menu.ItemsPanel>
             <ItemsPanelTemplate>
                 <WrapPanel/>
             </ItemsPanelTemplate>
         </Menu.ItemsPanel>
         <MenuItem Header="_File">
-            <MenuItem Header="_New" Command="{x:Static Editor:ProjectEditorCommands.NewCommand}" CommandParameter="{Binding}"/>
+            <MenuItem Header="_New" Command="{Binding OnNew}" CommandParameter="{Binding}"/>
             <Separator/>
-            <MenuItem Header="_Open..." Command="{x:Static Editor:ProjectEditorCommands.OpenCommand}"/>
+            <MenuItem Header="_Open..." Command="{Binding Platform.OnOpen}"/>
             <Separator/>
-            <MenuItem Header="Execu_te Script..." Command="{x:Static Editor:ProjectEditorCommands.ExecuteScriptCommand}"/>
+            <MenuItem Header="Execu_te Script..." Command="{Binding Platform.OnExecuteScript}"/>
             <Separator/>
             <MenuItem Header="_Recent" Items="{Binding RecentProjects}">
                 <MenuItem.Styles>
                     <Style Selector="MenuItem">
                         <Setter Property="Header" Value="{Binding Name}"/>
-                        <Setter Property="Command" Value="{x:Static Editor:ProjectEditorCommands.OpenCommand}"/>
+                        <Setter Property="Command" Value="{Binding $parent[UserControl].DataContext.Platform.OnOpen}"/>
                         <Setter Property="CommandParameter" Value="{Binding Path}"/>
                     </Style>
                 </MenuItem.Styles>
             </MenuItem>
             <Separator/>
-            <MenuItem Header="E_xit" Command="{x:Static Editor:ProjectEditorCommands.ExitCommand}"/>
+            <MenuItem Header="E_xit" Command="{Binding Platform.OnExit}"/>
         </MenuItem>
         <MenuItem Header="_View">
+            <MenuItem Header="_Script Editor..." Command="{Binding Platform.OnScriptEditor}"/>
+            <Separator/>
             <MenuItem Header="_Views" Items="{Binding Views}">
                 <MenuItem.Styles>
                     <Style Selector="MenuItem">
                         <Setter Property="Header" Value="{Binding Title}"/>
-                        <Setter Property="Command" Value="{x:Static Editor:ProjectEditorCommands.ChangeCurrentViewCommand}"/>
+                        <Setter Property="Command" Value="{Binding $parent[UserControl].DataContext.OnChangeCurrentView}"/>
                         <Setter Property="CommandParameter" Value="{Binding}"/>
                         <Setter Property="Icon">
                             <Template>
@@ -56,7 +58,7 @@
                                     <CheckBox.IsChecked>
                                         <MultiBinding Mode="OneWay" Converter="{x:Static converters:ObjectEqualityMultiConverter.Instance}">
                                             <Binding ElementName="icon" Path="DataContext" Converter="{x:Static converters:ObjectToObjectConverter.Instance}"/>
-                                            <Binding ElementName="icon" Path="Tag.CurrentView" Converter="{x:Static converters:ObjectToObjectConverter.Instance}"/>
+                                            <Binding ElementName="icon" Path="Tag.Layout.CurrentView" Converter="{x:Static converters:ObjectToObjectConverter.Instance}"/>
                                         </MultiBinding>
                                     </CheckBox.IsChecked>
                                 </CheckBox>
@@ -67,19 +69,20 @@
             </MenuItem>
         </MenuItem>
         <MenuItem Header="_Debug">
-            <MenuItem Header="DrawDirtyRects" x:Name="DebugDrawDirtyRects">
+            <MenuItem Header="Draw_DirtyRects" Click="DebugDrawDirtyRects_Click">
                 <MenuItem.Icon>
-                    <CheckBox Classes="menu" IsChecked="False" x:Name="DebugDrawDirtyRectsCheckBox"/>
+                    <CheckBox Classes="menu" IsChecked="{Binding $parent[views:DashboardMenuControl].DrawDirtyRects}"/>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="DrawFps" x:Name="DebugDrawFps">
+            <Separator/>
+            <MenuItem Header="Draw_Fps" Click="DebugDrawFps_Click">
                 <MenuItem.Icon>
-                    <CheckBox Classes="menu" IsChecked="False" x:Name="DebugDrawFpsCheckBox"/>
+                    <CheckBox Classes="menu" IsChecked="{Binding $parent[views:DashboardMenuControl].DrawFps}"/>
                 </MenuItem.Icon>
             </MenuItem>
         </MenuItem>
         <MenuItem Header="_Help">
-            <MenuItem Header="_About Core2D" Command="{x:Static Editor:ProjectEditorCommands.AboutDialogCommand}"/>
+            <MenuItem Header="_About Core2D" Command="{Binding Platform.OnAboutDialog}"/>
         </MenuItem>
     </Menu>
 </UserControl>

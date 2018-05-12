@@ -18,7 +18,7 @@ namespace Core2D.TextFieldReader.CsvHelper
         {
             using (var reader = new System.IO.StreamReader(stream))
             {
-                var configuration = new CSV.Configuration.CsvConfiguration();
+                var configuration = new CSV.Configuration.Configuration();
                 configuration.Delimiter = CultureInfo.CurrentCulture.TextInfo.ListSeparator;
                 configuration.CultureInfo = CultureInfo.CurrentCulture;
                 configuration.AllowComments = true;

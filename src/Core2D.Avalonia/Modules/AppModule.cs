@@ -1,7 +1,9 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Autofac;
+using Core2D.Avalonia.Editor;
 using Core2D.Avalonia.Importers;
+using Core2D.Editor;
 using Core2D.Interfaces;
 
 namespace Core2D.Avalonia.Modules
@@ -15,6 +17,8 @@ namespace Core2D.Avalonia.Modules
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<AvaloniaImageImporter>().As<IImageImporter>().InstancePerLifetimeScope();
+            builder.RegisterType<AvaloniaProjectEditorPlatform>().As<IProjectEditorPlatform>().InstancePerLifetimeScope();
+            builder.RegisterType<AvaloniaEditorCanvasPlatform>().As<IEditorCanvasPlatform>().InstancePerLifetimeScope();
         }
     }
 }

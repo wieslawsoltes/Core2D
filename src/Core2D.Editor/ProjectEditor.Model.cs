@@ -7,10 +7,11 @@ using Core2D.Data;
 using Core2D.Editor.Bounds;
 using Core2D.Editor.Factories;
 using Core2D.Editor.Recent;
-using Core2D.Editor.Views.Interfaces;
+using Core2D.Editor.Views.Core;
 using Core2D.Interfaces;
 using Core2D.Containers;
 using Core2D.Renderer;
+using Core2D.Editor.Views;
 
 namespace Core2D.Editor
 {
@@ -24,18 +25,12 @@ namespace Core2D.Editor
         private string _projectPath;
         private bool _isProjectDirty;
         private ProjectObserver _observer;
-        private Action _invalidate;
-        private Action _resetZoom;
-        private Action _extentZoom;
-        private Action _loadLayout;
-        private Action _saveLayout;
-        private Action _resetLayout;
         private bool _isToolIdle;
         private ToolBase _currentTool;
         private PathToolBase _currentPathTool;
         private ImmutableArray<RecentFile> _recentProjects;
         private RecentFile _currentRecentProject;
-        private IView _currentView;
+        private ViewsLayout _layout;
         private AboutInfo _aboutInfo;
         private readonly Lazy<ImmutableArray<ToolBase>> _tools;
         private readonly Lazy<ImmutableArray<PathToolBase>> _pathTools;
@@ -53,7 +48,9 @@ namespace Core2D.Editor
         private readonly Lazy<ITextFieldReader<Database>> _csvReader;
         private readonly Lazy<ITextFieldWriter<Database>> _csvWriter;
         private readonly Lazy<IImageImporter> _imageImporter;
-        private readonly Lazy<ProjectEditorCommands> _editorCommands;
+        private readonly Lazy<IScriptRunner> _scriptRunner;
+        private readonly Lazy<IProjectEditorPlatform> _platform;
+        private readonly Lazy<IEditorCanvasPlatform> _canvas;
 
         /// <summary>
         /// Gets or sets current project.
@@ -89,66 +86,6 @@ namespace Core2D.Editor
         {
             get => _observer;
             set => Update(ref _observer, value);
-        }
-
-        /// <summary>
-        /// Gets or sets invalidate action.
-        /// </summary>
-        /// <remarks>Invalidate current container control.</remarks>
-        public Action Invalidate
-        {
-            get => _invalidate;
-            set => Update(ref _invalidate, value);
-        }
-
-        /// <summary>
-        /// Gets or sets reset zoom action.
-        /// </summary>
-        /// <remarks>Reset view size to defaults.</remarks>
-        public Action ResetZoom
-        {
-            get => _resetZoom;
-            set => Update(ref _resetZoom, value);
-        }
-
-        /// <summary>
-        /// Gets or sets extent zoom action.
-        /// </summary>
-        /// <remarks>Auto-fit view to the available extents.</remarks>
-        public Action AutoFitZoom
-        {
-            get => _extentZoom;
-            set => Update(ref _extentZoom, value);
-        }
-
-        /// <summary>
-        /// Gets or sets load layout action.
-        /// </summary>
-        /// <remarks>Auto-fit view to the available extents.</remarks>
-        public Action LoadLayout
-        {
-            get => _loadLayout;
-            set => Update(ref _loadLayout, value);
-        }
-
-        /// <summary>
-        /// Gets or sets save layout action.
-        /// </summary>
-        /// <remarks>Auto-fit view to the available extents.</remarks>
-        public Action SaveLayout
-        {
-            get => _saveLayout;
-            set => Update(ref _saveLayout, value);
-        }
-
-        /// <summary>
-        /// Gets or sets reset layout action.
-        /// </summary>
-        /// <remarks>Reset editor layout.</remarks>
-        public Action ResetLayout
-        {
-            get => _resetLayout;
-            set => Update(ref _resetLayout, value);
         }
 
         /// <summary>
@@ -197,12 +134,12 @@ namespace Core2D.Editor
         }
 
         /// <summary>
-        /// Gets or sets current view.
+        /// Gets or sets current layout configuration.
         /// </summary>
-        public IView CurrentView
+        public ViewsLayout Layout
         {
-            get => _currentView;
-            set => Update(ref _currentView, value);
+            get => _layout;
+            set => Update(ref _layout, value);
         }
 
         /// <summary>
@@ -295,9 +232,19 @@ namespace Core2D.Editor
         public IImageImporter ImageImporter => _imageImporter.Value;
 
         /// <summary>
-        /// Gets project editor commands.
+        /// Gets code script runner.
         /// </summary>
-        public ProjectEditorCommands EditorCommands => _editorCommands.Value;
+        public IScriptRunner ScriptRunner => _scriptRunner.Value;
+
+        /// <summary>
+        /// Gets project editor platform.
+        /// </summary>
+        public IProjectEditorPlatform Platform => _platform.Value;
+
+        /// <summary>
+        /// Gets editor canvas platform.
+        /// </summary>
+        public IEditorCanvasPlatform Canvas => _canvas.Value;
 
         /// <summary>
         /// Initialize new instance of <see cref="ProjectEditor"/> class.
@@ -324,7 +271,9 @@ namespace Core2D.Editor
             _csvReader = _serviceProvider.GetServiceLazily<ITextFieldReader<Database>>();
             _csvWriter = _serviceProvider.GetServiceLazily<ITextFieldWriter<Database>>();
             _imageImporter = _serviceProvider.GetServiceLazily<IImageImporter>();
-            _editorCommands = _serviceProvider.GetServiceLazily<ProjectEditorCommands>();
+            _scriptRunner = _serviceProvider.GetServiceLazily<IScriptRunner>();
+            _platform = _serviceProvider.GetServiceLazily<IProjectEditorPlatform>();
+            _canvas = _serviceProvider.GetServiceLazily<IEditorCanvasPlatform>();
         }
     }
 }

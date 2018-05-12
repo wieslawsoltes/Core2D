@@ -1,0 +1,62 @@
+﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
+<!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
+<UserControl x:Class="Core2D.Avalonia.Views.ContainerControl"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+             xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+             xmlns:iac="clr-namespace:Avalonia.Xaml.Interactions.Custom;assembly=Avalonia.Xaml.Interactions.Custom"
+             xmlns:local="clr-namespace:Core2D.Avalonia;assembly=Core2D.Avalonia"
+             xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"
+             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor"
+             xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
+             Width="{Binding $self.Container.Width}"
+             Height="{Binding $self.Container.Height}"
+             Focusable="True">
+    <i:Interaction.Behaviors>
+        <iac:FocusOnAttachedToVisualTreeBehavior/>
+        <iac:FocusOnPointerMovedBehavior/>
+    </i:Interaction.Behaviors>
+    <UserControl.KeyBindings>
+        <!-- Edit -->
+        <KeyBinding Command="{Binding OnDelete}" CommandParameter="{Binding}" Gesture="Delete"/>
+        <KeyBinding Command="{Binding OnDeselectAll}" Gesture="Escape"/>
+        <KeyBinding Command="{Binding OnSendToBackSelected}" Gesture="Shift+OemMinus"/>
+        <KeyBinding Command="{Binding OnSendBackwardSelected}" Gesture="OemMinus"/>
+        <KeyBinding Command="{Binding OnBringForwardSelected}" Gesture="OemPlus"/>
+        <KeyBinding Command="{Binding OnBringToFrontSelected}" Gesture="Shift+OemPlus"/>
+        <KeyBinding Command="{Binding OnSendToBackSelected}" Gesture="Shift+Subtract"/>
+        <KeyBinding Command="{Binding OnSendBackwardSelected}" Gesture="Subtract"/>
+        <KeyBinding Command="{Binding OnBringForwardSelected}" Gesture="Add"/>
+        <KeyBinding Command="{Binding OnBringToFrontSelected}" Gesture="Shift+Add"/>
+        <KeyBinding Command="{Binding OnMoveUpSelected}" Gesture="Up"/>
+        <KeyBinding Command="{Binding OnMoveDownSelected}" Gesture="Down"/>
+        <KeyBinding Command="{Binding OnMoveLeftSelected}" Gesture="Left"/>
+        <KeyBinding Command="{Binding OnMoveRightSelected}" Gesture="Right"/>
+        <!-- View -->
+        <KeyBinding Command="{Binding Platform.OnZoomReset}" Gesture="Z"/>
+        <KeyBinding Command="{Binding Platform.OnZoomAutoFit}" Gesture="X"/>
+        <!-- Tool -->
+        <KeyBinding Command="{Binding OnToolNone}" Gesture="N"/>
+        <KeyBinding Command="{Binding OnToolSelection}" Gesture="S"/>
+        <KeyBinding Command="{Binding OnToolPoint}" Gesture="P"/>
+        <KeyBinding Command="{Binding OnToolLine}" Gesture="L"/>
+        <KeyBinding Command="{Binding OnToolArc}" Gesture="A"/>
+        <KeyBinding Command="{Binding OnToolCubicBezier}" Gesture="B"/>
+        <KeyBinding Command="{Binding OnToolQuadraticBezier}" Gesture="Q"/>
+        <KeyBinding Command="{Binding OnToolPath}" Gesture="H"/>
+        <KeyBinding Command="{Binding OnToolMove}" Gesture="M"/>
+        <KeyBinding Command="{Binding OnToolRectangle}" Gesture="R"/>
+        <KeyBinding Command="{Binding OnToolEllipse}" Gesture="E"/>
+        <KeyBinding Command="{Binding OnToolText}" Gesture="T"/>
+        <KeyBinding Command="{Binding OnToolImage}" Gesture="I"/>
+        <!-- Options -->
+        <KeyBinding Command="{Binding OnToggleDefaultIsStroked}" Gesture="K"/>
+        <KeyBinding Command="{Binding OnToggleDefaultIsFilled}" Gesture="F"/>
+        <KeyBinding Command="{Binding OnToggleDefaultIsClosed}" Gesture="D"/>
+        <KeyBinding Command="{Binding OnToggleDefaultIsSmoothJoin}" Gesture="J"/>
+        <KeyBinding Command="{Binding OnToggleSnapToGrid}" Gesture="G"/>
+        <KeyBinding Command="{Binding OnToggleTryToConnect}" Gesture="C"/>
+        <KeyBinding Command="{Binding OnToggleCloneStyle}" Gesture="Y"/>
+    </UserControl.KeyBindings>
+</UserControl>

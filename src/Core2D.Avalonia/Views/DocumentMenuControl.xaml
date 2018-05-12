@@ -1,0 +1,53 @@
+﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
+<!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
+<UserControl x:Class="Core2D.Avalonia.Views.DocumentMenuControl"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+             xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+             xmlns:iac="clr-namespace:Avalonia.Xaml.Interactions.Custom;assembly=Avalonia.Xaml.Interactions.Custom"
+             xmlns:local="clr-namespace:Core2D.Avalonia;assembly=Core2D.Avalonia"
+             xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"
+             xmlns:views="clr-namespace:Core2D.Avalonia.Views;assembly=Core2D.Avalonia"
+             xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
+             Design.DataContext="{x:Static Designer:DesignerContext.Editor}"
+             Design.Width="800" Design.Height="20">
+    <Menu Classes="default">
+        <Menu.ItemsPanel>
+            <ItemsPanelTemplate>
+                <WrapPanel/>
+            </ItemsPanelTemplate>
+        </Menu.ItemsPanel>
+        <MenuItem Header="_File">
+            <MenuItem Header="E_xit" Command="{Binding Platform.OnExit}"/>
+        </MenuItem>
+        <MenuItem Header="_View">
+            <MenuItem Header="_Script Editor..." Command="{Binding Platform.OnScriptEditor}"/>
+            <Separator/>
+            <MenuItem Header="_Views" Items="{Binding Views}">
+                <MenuItem.Styles>
+                    <Style Selector="MenuItem">
+                        <Setter Property="Header" Value="{Binding Title}"/>
+                        <Setter Property="Command" Value="{Binding $parent[UserControl].DataContext.OnChangeCurrentView}"/>
+                        <Setter Property="CommandParameter" Value="{Binding}"/>
+                        <Setter Property="Icon">
+                            <Template>
+                                <CheckBox Name="icon" Classes="menu">
+                                    <i:Interaction.Behaviors>
+                                        <iac:BindTagToVisualRootDataContextBehavior/>
+                                    </i:Interaction.Behaviors>
+                                    <CheckBox.IsChecked>
+                                        <MultiBinding Mode="OneWay" Converter="{x:Static converters:ObjectEqualityMultiConverter.Instance}">
+                                            <Binding ElementName="icon" Path="DataContext" Converter="{x:Static converters:ObjectToObjectConverter.Instance}"/>
+                                            <Binding ElementName="icon" Path="Tag.Layout.CurrentView" Converter="{x:Static converters:ObjectToObjectConverter.Instance}"/>
+                                        </MultiBinding>
+                                    </CheckBox.IsChecked>
+                                </CheckBox>
+                            </Template>
+                        </Setter>
+                    </Style>
+                </MenuItem.Styles>
+            </MenuItem>
+        </MenuItem>
+    </Menu>
+</UserControl>
