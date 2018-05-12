@@ -1,21 +1,26 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Core2D.Editor.Views.Core
+namespace Core2D.Dock
 {
     /// <summary>
-    /// View contract.
+    /// Main view contract.
     /// </summary>
-    public interface IView
+    public interface IMainView
     {
         /// <summary>
-        /// Gets view title.
-        /// </summary>
-        string Title { get; }
-
-        /// <summary>
-        /// Gets view context.
+        /// Gets main view context.
         /// </summary>
         object Context { get; }
+
+        /// <summary>
+        /// Presents view.
+        /// </summary>
+        void Present();
+
+        /// <summary>
+        /// Destroys view.
+        /// </summary>
+        void Destroy();
     }
 }

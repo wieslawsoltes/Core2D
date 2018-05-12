@@ -5,7 +5,7 @@ using Autofac;
 using Core2D.Editor;
 using Core2D.Editor.Bounds;
 using Core2D.Editor.Factories;
-using Core2D.Editor.Views.Core;
+using Core2D.Dock;
 
 namespace Core2D.Avalonia.Modules
 {
@@ -24,7 +24,7 @@ namespace Core2D.Avalonia.Modules
             builder.RegisterAssemblyTypes(typeof(PathToolBase).GetTypeInfo().Assembly).As<PathToolBase>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<HitTest>().As<HitTest>().InstancePerLifetimeScope();
             builder.RegisterAssemblyTypes(typeof(HitTestBase).GetTypeInfo().Assembly).As<HitTestBase>().AsSelf().InstancePerLifetimeScope();
-            builder.RegisterAssemblyTypes(typeof(IView).GetTypeInfo().Assembly).As<IView>().InstancePerLifetimeScope();
+            builder.RegisterAssemblyTypes(typeof(ProjectEditor).GetTypeInfo().Assembly).As<IView>().InstancePerLifetimeScope();
         }
     }
 }

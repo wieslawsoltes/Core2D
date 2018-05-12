@@ -1,21 +1,22 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System.Collections.Immutable;
 
-namespace Core2D.Editor.Views.Core
+namespace Core2D.Dock
 {
     /// <summary>
-    /// Grid panel contract.
+    /// Views panel contract.
     /// </summary>
-    public interface IGridPanel
+    public interface IViewsPanel
     {
         /// <summary>
-        /// Gets or sets row.
+        /// Gets or sets views.
         /// </summary>
-        int Row { get; set; }
+        ImmutableArray<IView> Views { get; set; }
 
         /// <summary>
-        /// Gets or sets column.
+        /// Gets or sets current view.
         /// </summary>
-        int Column { get; set; }
+        IView CurrentView { get; set; }
     }
 }

@@ -2,7 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System.Collections.Immutable;
 
-namespace Core2D.Editor.Views.Core
+namespace Core2D.Dock
 {
     /// <inheritdoc/>
     public class ViewsPanel : ObservableObject, IGridPanel, IViewsPanel

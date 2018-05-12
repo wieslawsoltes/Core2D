@@ -111,7 +111,6 @@ namespace Core2D.Avalonia
                             appBuilder.RuntimePlatform.GetRuntimeInfo(),
                             appBuilder.WindowingSubsystemName,
                             appBuilder.RenderingSubsystemName);
-                        Console.WriteLine(aboutInfo);
                         app.Start(container.Resolve<IServiceProvider>(), aboutInfo);
                     }
                 }

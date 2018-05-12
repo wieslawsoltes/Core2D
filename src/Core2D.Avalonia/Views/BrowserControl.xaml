@@ -11,7 +11,7 @@
              xmlns:Core="clr-namespace:Core2D;assembly=Core2D"
              xmlns:Data="clr-namespace:Core2D.Data;assembly=Core2D"
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor"
-             xmlns:Interfaces="clr-namespace:Core2D.Editor.Views.Core;assembly=Core2D.Editor"
+             xmlns:Dock="clr-namespace:Core2D.Dock;assembly=Core2D.Dock"
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
              xmlns:Containers="clr-namespace:Core2D.Containers;assembly=Core2D"
              xmlns:Shape="clr-namespace:Core2D.Shape;assembly=Core2D"
