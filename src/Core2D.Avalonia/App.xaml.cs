@@ -15,7 +15,6 @@ using Core2D.Avalonia.Modules;
 using Core2D.Avalonia.Views;
 using Core2D.Editor;
 using Core2D.Editor.Designer;
-using Core2D.Editor.Views;
 using Core2D.Editor.Views.Core;
 using Core2D.Interfaces;
 
@@ -129,63 +128,60 @@ namespace Core2D.Avalonia
             }
             else
             {
-                var layout = new ViewsLayout();
-
-                layout.LeftPanelTop = new ViewsPanel
+                var layout = new ViewsLayout
                 {
-                    Row = 0,
-                    Column = 0,
-                    Views = new[]
+                    LeftPanelTop = new ViewsPanel
                     {
-                        views.FirstOrDefault(v => v.Title == "Project"),
-                        views.FirstOrDefault(v => v.Title == "Options"),
-                        views.FirstOrDefault(v => v.Title == "Images")
-                    }.ToImmutableArray(),
-                    CurrentView = views.FirstOrDefault(v => v.Title == "Project")
-                };
-    
-                layout.LeftPanelBottom = new ViewsPanel
-                {
-                    Row = 2,
-                    Column = 0,
-                    Views = new[]
+                        Row = 0,
+                        Column = 0,
+                        Views = new[]
+                        {
+                            views.FirstOrDefault(v => v.Title == "Project"),
+                            views.FirstOrDefault(v => v.Title == "Options"),
+                            views.FirstOrDefault(v => v.Title == "Images")
+                        }.ToImmutableArray(),
+                        CurrentView = views.FirstOrDefault(v => v.Title == "Project")
+                    },
+                    LeftPanelBottom = new ViewsPanel
                     {
-                        views.FirstOrDefault(v => v.Title == "Groups"),
-                        views.FirstOrDefault(v => v.Title == "Databases")
-                    }.ToImmutableArray(),
-                    CurrentView = views.FirstOrDefault(v => v.Title == "Groups")
-                };
-    
-                layout.RightPanelTop = new ViewsPanel
-                {
-                    Row = 0,
-                    Column = 0,
-                    Views = new[]
+                        Row = 2,
+                        Column = 0,
+                        Views = new[]
+                        {
+                            views.FirstOrDefault(v => v.Title == "Groups"),
+                            views.FirstOrDefault(v => v.Title == "Databases")
+                        }.ToImmutableArray(),
+                        CurrentView = views.FirstOrDefault(v => v.Title == "Groups")
+                    },
+                    RightPanelTop = new ViewsPanel
                     {
-                        views.FirstOrDefault(v => v.Title == "Styles"),
-                        views.FirstOrDefault(v => v.Title == "Templates"),
-                        views.FirstOrDefault(v => v.Title == "Container"),
-                        views.FirstOrDefault(v => v.Title == "Zoom")
-                    }.ToImmutableArray(),
-                    CurrentView = views.FirstOrDefault(v => v.Title == "Styles")
-                };
-    
-                layout.RightPanelBottom = new ViewsPanel
-                {
-                    Row = 2,
-                    Column = 0,
-                    Views = new[]
+                        Row = 0,
+                        Column = 0,
+                        Views = new[]
+                        {
+                            views.FirstOrDefault(v => v.Title == "Styles"),
+                            views.FirstOrDefault(v => v.Title == "Templates"),
+                            views.FirstOrDefault(v => v.Title == "Container"),
+                            views.FirstOrDefault(v => v.Title == "Zoom")
+                        }.ToImmutableArray(),
+                        CurrentView = views.FirstOrDefault(v => v.Title == "Styles")
+                    },
+                    RightPanelBottom = new ViewsPanel
                     {
-                        views.FirstOrDefault(v => v.Title == "Tools"),
-                        views.FirstOrDefault(v => v.Title == "Shape"),
-                        views.FirstOrDefault(v => v.Title == "Data"),
-                        views.FirstOrDefault(v => v.Title == "Style"),
-                        views.FirstOrDefault(v => v.Title == "Template")
-                    }.ToImmutableArray(),
-                    CurrentView = views.FirstOrDefault(v => v.Title == "Tools")
+                        Row = 2,
+                        Column = 0,
+                        Views = new[]
+                        {
+                            views.FirstOrDefault(v => v.Title == "Tools"),
+                            views.FirstOrDefault(v => v.Title == "Shape"),
+                            views.FirstOrDefault(v => v.Title == "Data"),
+                            views.FirstOrDefault(v => v.Title == "Style"),
+                            views.FirstOrDefault(v => v.Title == "Template")
+                        }.ToImmutableArray(),
+                        CurrentView = views.FirstOrDefault(v => v.Title == "Tools")
+                    },
+                    CurrentView = views.FirstOrDefault(v => v.Title == "Dashboard")
                 };
-    
-                layout.CurrentView = views.FirstOrDefault(v => v.Title == "Dashboard");
 
                 editor.Layout = layout;
             }
@@ -229,7 +225,7 @@ namespace Core2D.Avalonia
                 editor.AboutInfo = aboutInfo;
 
                 var window = serviceProvider.GetService<Windows.MainWindow>();
-                window.Closed += (sender, e) => 
+                window.Closed += (sender, e) =>
                 {
                     editor.OnSaveRecent(recentPath);
                     editor.OnSaveLayout(layoutPath);
