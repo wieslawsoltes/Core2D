@@ -31,6 +31,7 @@
   <Import Project="..\..\build\EmbedXaml.props" />
 
   <ItemGroup>
+    <ProjectReference Include="..\Core2D.Avalonia.Behaviors\Core2D.Avalonia.Behaviors.csproj" />
     <ProjectReference Include="..\Core2D.Dock\Core2D.Dock.csproj" />
     <ProjectReference Include="..\Core2D.Editor\Core2D.Editor.csproj" />
     <ProjectReference Include="..\Core2D\Core2D.csproj" />
