@@ -14,8 +14,9 @@ using Core2D.Dock;
 using Core2D.Shape;
 using Core2D.Shapes;
 using Core2D.Style;
+using Core2D.Avalonia.Behaviors;
 
-namespace Core2D.Avalonia.Behaviors
+namespace Core2D.Avalonia.Editor
 {
     public class EditorDropHandler : IDropHandler
     {

@@ -6,6 +6,7 @@
              xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
              xmlns:behaviors="clr-namespace:Core2D.Avalonia.Behaviors;assembly=Core2D.Avalonia"
+             xmlns:editor="clr-namespace:Core2D.Avalonia.Editor;assembly=Core2D.Avalonia"
              xmlns:local="clr-namespace:Core2D.Avalonia;assembly=Core2D.Avalonia"
              xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"
              xmlns:views="clr-namespace:Core2D.Avalonia.Views;assembly=Core2D.Avalonia"
@@ -14,7 +15,7 @@
              Design.DataContext="{x:Static Designer:DesignerContext.Editor}"
              Design.Width="1200" Design.Height="580">
     <i:Interaction.Behaviors>
-        <behaviors:DropBehavior Context="{Binding}" Handler="{x:Static behaviors:EditorDropHandler.Instance}"/>
+        <behaviors:DropBehavior Context="{Binding}" Handler="{x:Static editor:EditorDropHandler.Instance}"/>
     </i:Interaction.Behaviors>
     <UserControl.KeyBindings>
         <!-- File -->
