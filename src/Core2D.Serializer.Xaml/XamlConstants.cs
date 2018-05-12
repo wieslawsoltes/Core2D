@@ -5,10 +5,12 @@ namespace Core2D.Serializer.Xaml
 {
     public static class XamlConstants
     {
-        public const string CoreNamespace = "https://github.com/Core2D";
+        public const string CoreNamespace = "https://github.com/wieslawsoltes/Core2D";
 
-        public const string EditorNamespace = "https://github.com/Core2D.Editor";
+        public const string EditorNamespace = "https://github.com/wieslawsoltes/Core2D.Editor";
 
-        public const string SpatialNamespace = "https://github.com/Math.Spatial";
+        public const string DockNamespace = "https://github.com/wieslawsoltes/Core2D.Dock";
+
+        public const string SpatialNamespace = "https://github.com/wieslawsoltes/Math.Spatial";
     }
 }

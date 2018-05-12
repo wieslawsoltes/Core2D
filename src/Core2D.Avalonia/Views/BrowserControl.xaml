@@ -345,7 +345,7 @@
                     </Style>
                 </TreeViewItem.Styles>
                 <TreeViewItem.DataTemplates>
-                    <DataTemplate DataType="Interfaces:IView">
+                    <DataTemplate DataType="Dock:IView">
                         <TextBlock Text="{Binding Title}" Classes="tree drag">
                             <i:Interaction.Behaviors>
                                 <behaviors:DragBehavior/>

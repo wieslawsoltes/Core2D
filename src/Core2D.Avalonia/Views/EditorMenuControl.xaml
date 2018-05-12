@@ -99,7 +99,7 @@
                 <MenuItem.Styles>
                     <Style Selector="MenuItem">
                         <Setter Property="Header" Value="{Binding Title}"/>
-                        <Setter Property="Command" Value="{Binding $parent[UserControl].DataContext.OnChangeCurrentView}"/>
+                        <Setter Property="Command" Value="{Binding $parent[UserControl].DataContext.Layout.OnChangeCurrentView}"/>
                         <Setter Property="CommandParameter" Value="{Binding}"/>
                         <Setter Property="Icon">
                             <Template>

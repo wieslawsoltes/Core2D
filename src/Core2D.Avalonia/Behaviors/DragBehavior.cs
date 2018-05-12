@@ -65,12 +65,12 @@ namespace Core2D.Avalonia.Behaviors
 
                 var data = new DataObject();
 
-                data.Set(CustomDataFormats.Source, e.Source);
-                data.Set(CustomDataFormats.Sender, sender);
-                data.Set(CustomDataFormats.Object, AssociatedObject);
-                data.Set(CustomDataFormats.ObjectData, AssociatedObject.DataContext);
-                data.Set(CustomDataFormats.Parent, AssociatedObject.Parent);
-                data.Set(CustomDataFormats.ParentData, AssociatedObject.Parent.DataContext);
+                data.Set(DragDataFormats.Source, e.Source);
+                data.Set(DragDataFormats.Sender, sender);
+                data.Set(DragDataFormats.Object, AssociatedObject);
+                data.Set(DragDataFormats.ObjectData, AssociatedObject.DataContext);
+                data.Set(DragDataFormats.Parent, AssociatedObject.Parent);
+                data.Set(DragDataFormats.ParentData, AssociatedObject.Parent.DataContext);
 
                 var effect = DragDropEffects.None;
 

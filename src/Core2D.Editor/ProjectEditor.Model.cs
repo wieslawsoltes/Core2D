@@ -11,7 +11,6 @@ using Core2D.Dock;
 using Core2D.Interfaces;
 using Core2D.Containers;
 using Core2D.Renderer;
-using Core2D.Editor.Views;
 
 namespace Core2D.Editor
 {
@@ -30,7 +29,7 @@ namespace Core2D.Editor
         private PathToolBase _currentPathTool;
         private ImmutableArray<RecentFile> _recentProjects;
         private RecentFile _currentRecentProject;
-        private ViewsLayout _layout;
+        private IViewsLayout _layout;
         private AboutInfo _aboutInfo;
         private readonly Lazy<ImmutableArray<ToolBase>> _tools;
         private readonly Lazy<ImmutableArray<PathToolBase>> _pathTools;
@@ -136,7 +135,7 @@ namespace Core2D.Editor
         /// <summary>
         /// Gets or sets current layout configuration.
         /// </summary>
-        public ViewsLayout Layout
+        public IViewsLayout Layout
         {
             get => _layout;
             set => Update(ref _layout, value);

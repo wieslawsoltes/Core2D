@@ -14,7 +14,7 @@
              Design.DataContext="{x:Static Designer:DesignerContext.Editor}"
              Design.Width="1200" Design.Height="580">
     <i:Interaction.Behaviors>
-        <behaviors:DropBehavior Editor="{Binding}"/>
+        <behaviors:DropBehavior Context="{Binding}" Handler="{x:Static behaviors:EditorDropHandler.Instance}"/>
     </i:Interaction.Behaviors>
     <UserControl.KeyBindings>
         <!-- File -->

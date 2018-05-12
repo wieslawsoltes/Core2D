@@ -16,7 +16,7 @@
     <Grid RowDefinitions="Auto,*,Auto">
         <ListBox Name="templates" Items="{Binding Templates}" SelectedItem="{Binding CurrentTemplate, Mode=TwoWay}" Grid.Row="1" Classes="default">
             <i:Interaction.Behaviors>
-                <behaviors:DropBehavior Editor="{Binding $parent[Window].DataContext}"/>
+                <behaviors:DropBehavior Context="{Binding $parent[Window].DataContext}" Handler="{x:Static behaviors:EditorDropHandler.Instance}"/>
             </i:Interaction.Behaviors>
             <ListBox.KeyBindings>
                 <KeyBinding Command="{Binding $parent[Window].DataContext.OnApplyTemplate}" Gesture="Ctrl+N"/>

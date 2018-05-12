@@ -3,7 +3,7 @@
 
 namespace Core2D.Avalonia.Behaviors
 {
-    public static class CustomDataFormats
+    public static class DragDataFormats
     {
         public static string Source = nameof(Source);
         public static string Sender = nameof(Sender);

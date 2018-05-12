@@ -18,7 +18,7 @@
             <paz:ZoomBorder Name="zoomBorder" Stretch="None" ZoomSpeed="1.2" PanButton="Right" EnableInput="{Binding IsToolIdle}" Background="Transparent" ClipToBounds="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                 <views:ContainerControl Name="containerControl" Renderer="{Binding Renderers[0]}" Container="{Binding Project.CurrentContainer}" ClipToBounds="False">
                     <i:Interaction.Behaviors>
-                        <behaviors:DropBehavior Editor="{Binding}"/>
+                        <behaviors:DropBehavior Context="{Binding}" Handler="{x:Static behaviors:EditorDropHandler.Instance}"/>
                     </i:Interaction.Behaviors>
                 </views:ContainerControl>
             </paz:ZoomBorder>
