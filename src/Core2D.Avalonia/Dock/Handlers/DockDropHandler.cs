@@ -1,6 +1,5 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using System;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Input;
@@ -25,10 +24,6 @@ namespace Core2D.Avalonia.Dock.Handlers
                 {
                     int sourceIndex = strip.ItemContainerGenerator.IndexFromContainer(source);
                     int targetIndex = strip.ItemContainerGenerator.IndexFromContainer(target);
-
-                    Console.WriteLine($"sourceIndex : {sourceIndex}");
-                    Console.WriteLine($"targetIndex : {targetIndex}");
-                    Console.WriteLine($"DataContext type : {strip.DataContext.GetType()}");
 
                     if (strip.DataContext is ViewsPanel panel)
                     {
@@ -68,10 +63,6 @@ namespace Core2D.Avalonia.Dock.Handlers
                 {
                     int sourceIndex = sourceStrip.ItemContainerGenerator.IndexFromContainer(source);
                     int targetIndex = targetStrip.ItemContainerGenerator.IndexFromContainer(target);
-
-                    Console.WriteLine($"sourceIndex : {sourceIndex}");
-                    Console.WriteLine($"targetIndex : {targetIndex}");
-                    Console.WriteLine($"DataContext type : {strip.DataContext.GetType()}");
 
                     if (e.DragEffects == DragDropEffects.Copy)
                     {
@@ -130,9 +121,6 @@ namespace Core2D.Avalonia.Dock.Handlers
                     {
                         int itemIndex = strip.ItemContainerGenerator.IndexFromContainer(item);
 
-                        Console.WriteLine($"itemIndex : {itemIndex}");
-                        Console.WriteLine($"DataContext type : {strip.DataContext.GetType()}");
-
                         var view = panel.Views[itemIndex];
                         var window = new Window()
                         {
@@ -151,8 +139,6 @@ namespace Core2D.Avalonia.Dock.Handlers
                     return true;
                 }
             }
-
-            Console.WriteLine($"DragEffects: {e.DragEffects}");
 
             return false;
         }

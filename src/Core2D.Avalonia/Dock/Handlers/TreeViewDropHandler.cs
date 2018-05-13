@@ -1,6 +1,5 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using System;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Core2D.Containers;
@@ -22,10 +21,6 @@ namespace Core2D.Avalonia.Dock.Handlers
             {
                 var sourceData = source.DataContext;
                 var targetData = target.DataContext;
-
-                Console.WriteLine($"sourceData : {sourceData}");
-                Console.WriteLine($"targetData : {targetData}");
-                Console.WriteLine($"DataContext type : {tree.DataContext.GetType()}");
 
                 switch (sourceData)
                 {
@@ -188,8 +183,6 @@ namespace Core2D.Avalonia.Dock.Handlers
                 case TreeView tree:
                     return ValidateTreeView(editor, e, bExecute, tree);
             }
-
-            Console.WriteLine($"DragEffects: {e.DragEffects}");
 
             return false;
         }

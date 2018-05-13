@@ -40,7 +40,6 @@ namespace Dock.Avalonia
                 _dragStartPoint = e.GetPosition(AssociatedObject);
                 _pointerPressed = true;
                 _doDragDrop = false;
-                Console.WriteLine($"PointerPressed sender: {sender}, source: {e.Source}");
             }
         }
 
@@ -50,7 +49,6 @@ namespace Dock.Avalonia
             {
                 _pointerPressed = false;
                 _doDragDrop = false;
-                Console.WriteLine($"PointerReleased sender: {sender}, source: {e.Source}");
             }
         }
 
@@ -83,11 +81,7 @@ namespace Dock.Avalonia
                 else
                     effect |= DragDropEffects.Move;
 
-                Console.WriteLine($"PointerMoved effect: {effect}, sender: {sender}, source: {e.Source}, point: {point}, diff: {diff}");
-
                 var result = await DragDrop.DoDragDrop(data, effect);
-
-                Console.WriteLine($"DoDragDrop result: {result}");
             }
         }
     }

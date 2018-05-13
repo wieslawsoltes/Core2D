@@ -1,6 +1,5 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using System;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Core2D.Containers;
@@ -26,10 +25,6 @@ namespace Core2D.Avalonia.Dock.Handlers
                 {
                     int sourceIndex = list.ItemContainerGenerator.IndexFromContainer(source);
                     int targetIndex = list.ItemContainerGenerator.IndexFromContainer(target);
-
-                    Console.WriteLine($"sourceIndex : {sourceIndex}");
-                    Console.WriteLine($"targetIndex : {targetIndex}");
-                    Console.WriteLine($"DataContext type : {list.DataContext.GetType()}");
 
                     switch (list.DataContext)
                     {
@@ -92,7 +87,6 @@ namespace Core2D.Avalonia.Dock.Handlers
                                 return false;
                             }
                         default:
-                            Console.WriteLine($"List DataContext drop type was not handled: {list.DataContext}");
                             return false;
                     }
                 }
@@ -125,8 +119,6 @@ namespace Core2D.Avalonia.Dock.Handlers
                 case ListBox list:
                     return ValidateListBox(editor, e, bExecute, list);
             }
-
-            Console.WriteLine($"DragEffects: {e.DragEffects}");
 
             return false;
         }

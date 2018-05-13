@@ -1,6 +1,5 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using System;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.PanAndZoom;
@@ -20,7 +19,6 @@ namespace Core2D.Avalonia.Dock.Handlers
         {
             var relativeTo = e.Source as IControl;
             var point = e.GetPosition(relativeTo);
-            Console.WriteLine($"Point: [{relativeTo}] : {point}");
             return FixInvalidPosition(relativeTo, point);
         }
     }

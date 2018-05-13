@@ -1,6 +1,5 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using System;
 using System.Linq;
 using Avalonia.Input;
 using Core2D.Containers;
@@ -24,8 +23,6 @@ namespace Core2D.Avalonia.Dock.Handlers
             {
                 var text = e.Data.GetText();
 
-                Console.WriteLine($"[{DataFormats.Text}] : {text}");
-
                 if (bExecute)
                 {
                     editor?.OnTryPaste(text);
@@ -38,8 +35,6 @@ namespace Core2D.Avalonia.Dock.Handlers
             {
                 var data = e.Data.Get(format);
 
-                Console.WriteLine($"[{format}] : {data}");
-
                 switch (data)
                 {
                     case BaseShape shape:
@@ -51,7 +46,6 @@ namespace Core2D.Avalonia.Dock.Handlers
                     case PageContainer page:
                         return editor?.OnDropTemplate(page, point.X, point.Y, bExecute) == true;
                     default:
-                        Console.WriteLine($"Drop type was not handled: {data}");
                         break;
                 }
             }
@@ -59,21 +53,12 @@ namespace Core2D.Avalonia.Dock.Handlers
             if (e.Data.Contains(DataFormats.FileNames))
             {
                 var files = e.Data.GetFileNames().ToArray();
-
-                foreach (var file in files)
-                {
-                    Console.WriteLine($"[{DataFormats.FileNames}] : {file}");
-                }
-
                 if (bExecute)
                 {
                     editor?.OnDropFiles(files);
                 }
-
                 return true;
             }
-
-            Console.WriteLine($"DragEffects: {e.DragEffects}");
 
             return false;
         }
