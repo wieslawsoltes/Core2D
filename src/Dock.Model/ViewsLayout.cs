@@ -26,6 +26,14 @@ namespace Dock.Model
             set => Update(ref _currentView, value);
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ViewsLayout"/> class.
+        /// </summary>
+        public ViewsLayout()
+        {
+            _panels = ImmutableArray<IViewsPanel>.Empty;
+        }
+
         /// <inheritdoc/>
         public void MoveView(IViewsPanel panel, int sourceIndex, int targetIndex)
         {

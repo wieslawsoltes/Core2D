@@ -43,6 +43,14 @@ namespace Dock.Model
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="ViewsPanel"/> class.
+        /// </summary>
+        public ViewsPanel()
+        {
+            _views = ImmutableArray<IView>.Empty;
+        }
+
+        /// <summary>
         /// Check whether the <see cref="Row"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>

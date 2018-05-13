@@ -24,6 +24,14 @@ namespace Dock.Model
         /// <inheritdoc/>
         public abstract object Context { get; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ViewBase"/> class.
+        /// </summary>
+        public ViewBase()
+        {
+            _windows = ImmutableArray<IViewsWindow>.Empty;
+        }
+
         /// <inheritdoc/>
         public virtual void ShowWindows()
         {

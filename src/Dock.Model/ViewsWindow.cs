@@ -1,6 +1,5 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using System;
 
 namespace Dock.Model
 {
@@ -9,7 +8,6 @@ namespace Dock.Model
     /// </summary>
     public class ViewsWindow : ObservableObject, IViewsWindow
     {
-        private readonly IServiceProvider _serviceProvider;
         private IDockWindow _window;
         private double _x;
         private double _y;

@@ -7,6 +7,7 @@
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
              xmlns:id="clr-namespace:Dock.Avalonia;assembly=Dock.Avalonia"
              xmlns:dock="clr-namespace:Core2D.Avalonia.Dock;assembly=Core2D.Avalonia"
+        xmlns:handlers="clr-namespace:Core2D.Avalonia.Dock.Handlers;assembly=Core2D.Avalonia"
              xmlns:local="clr-namespace:Core2D.Avalonia;assembly=Core2D.Avalonia"
              xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"
              xmlns:Dock="clr-namespace:Dock.Model;assembly=Dock.Model"
@@ -14,7 +15,7 @@
     <DockPanel>
         <TabStrip Items="{Binding Views}" SelectedItem="{Binding CurrentView, Mode=TwoWay}" Focusable="false" DockPanel.Dock="Bottom" ClipToBounds="False" ZIndex="1">
             <i:Interaction.Behaviors>
-                <id:DropBehavior Context="{Binding $parent[Window].DataContext}" Handler="{x:Static dock:DockDropHandler.Instance}"/>
+                <id:DropBehavior Context="{Binding $parent[Window].DataContext}" Handler="{x:Static handlers:DockDropHandler.Instance}"/>
             </i:Interaction.Behaviors>
             <TabStrip.ItemsPanel>
                 <ItemsPanelTemplate>
