@@ -4,7 +4,9 @@ using System.Collections.Immutable;
 
 namespace Dock.Model
 {
-    /// <inheritdoc/>
+    /// <summary>
+    /// Views panel.
+    /// </summary>
     public class ViewsPanel : ObservableObject, IGridPanel, IViewsPanel
     {
         private int _row;

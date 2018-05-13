@@ -5,7 +5,7 @@ using System.Collections.Immutable;
 namespace Dock.Model
 {
     /// <summary>
-    /// Views layout contract.
+    /// Views layout.
     /// </summary>
     public class ViewsLayout : ObservableObject, IViewsLayout
     {
