@@ -139,14 +139,7 @@ namespace Core2D.Containers
         public DocumentContainer CurrentDocument
         {
             get => _currentDocument;
-            set
-            {
-                Update(ref _currentDocument, value);
-                if (value != _selected)
-                {
-                    Selected = value;
-                }
-            }
+            set => Update(ref _currentDocument, value);
         }
 
         /// <summary>
@@ -155,14 +148,7 @@ namespace Core2D.Containers
         public PageContainer CurrentContainer
         {
             get => _currentContainer;
-            set
-            {
-                Update(ref _currentContainer, value);
-                if (value != _selected)
-                {
-                    Selected = value;
-                }
-            }
+            set => Update(ref _currentContainer, value);
         }
 
         /// <summary>
@@ -234,51 +220,45 @@ namespace Core2D.Containers
         /// <param name="value">The value instance.</param>
         public void SetSelected(SelectableObject value)
         {
-            if (value != null)
+            if (value is LayerContainer layer)
             {
-                if (value is LayerContainer)
+                var owner = layer?.Owner;
+                if (owner != null)
                 {
-                    var layer = value as LayerContainer;
-                    var owner = layer?.Owner;
-                    if (owner != null)
+                    if (owner.CurrentLayer != layer)
                     {
-                        if (owner.CurrentLayer != layer)
-                        {
-                            owner.CurrentLayer = layer;
-                        }
+                        owner.CurrentLayer = layer;
                     }
                 }
-                else if (value is PageContainer && _documents != null)
+            }
+            else if (value is PageContainer container && _documents != null)
+            {
+                var document = _documents.FirstOrDefault(d => d.Pages.Contains(container));
+                if (document != null)
                 {
-                    var container = value as PageContainer;
-                    var document = _documents.FirstOrDefault(d => d.Pages.Contains(container));
-                    if (document != null)
-                    {
-                        if (CurrentDocument != document)
-                        {
-                            CurrentDocument = document;
-                        }
-
-                        if (CurrentContainer != container)
-                        {
-                            CurrentContainer = container;
-                            CurrentContainer.Invalidate();
-                        }
-                    }
-                }
-                else if (value is DocumentContainer)
-                {
-                    var document = value as DocumentContainer;
                     if (CurrentDocument != document)
                     {
                         CurrentDocument = document;
-                        if (!CurrentDocument?.Pages.Contains(CurrentContainer) ?? false)
+                    }
+
+                    if (CurrentContainer != container)
+                    {
+                        CurrentContainer = container;
+                        CurrentContainer.Invalidate();
+                    }
+                }
+            }
+            else if (value is DocumentContainer document)
+            {
+                if (CurrentDocument != document)
+                {
+                    CurrentDocument = document;
+                    if (!CurrentDocument?.Pages.Contains(CurrentContainer) ?? false)
+                    {
+                        var container = CurrentDocument.Pages.FirstOrDefault();
+                        if (CurrentContainer != container)
                         {
-                            var container = CurrentDocument.Pages.FirstOrDefault();
-                            if (CurrentContainer != container)
-                            {
-                                CurrentContainer = container;
-                            }
+                            CurrentContainer = container;
                         }
                     }
                 }
