@@ -10,7 +10,7 @@ namespace Dock.Model
     public class ViewsWindow : ObservableObject, IViewsWindow
     {
         private readonly IServiceProvider _serviceProvider;
-        private Lazy<IDockWindow> _window;
+        private IDockWindow _window;
         private double _x;
         private double _y;
         private double _width;
@@ -71,35 +71,28 @@ namespace Dock.Model
         /// <summary>
         /// Initialize new instance of <see cref="ViewsWindow"/> class.
         /// </summary>
-        /// <param name="serviceProvider">The service provider.</param>
-        public ViewsWindow(IServiceProvider serviceProvider) : base()
+        /// <param name="window">The dock window.</param>
+        public ViewsWindow(IDockWindow window) : base()
         {
-            _serviceProvider = serviceProvider;
-            _window = serviceProvider.GetServiceLazily<IDockWindow>();
+            _window = window;
         }
 
         /// <inheritdoc/>
         public void Present()
         {
-            if (_window.Value is IDockWindow dock)
-            {
-                dock.SetPosition(_x, _y);
-                dock.SetSize(_width, _height);
-                dock.SetTitle(_title);
-                dock.SetContext(_context);
-                dock.Present();
-            }
+            _window?.SetPosition(_x, _y);
+            _window?.SetSize(_width, _height);
+            _window?.SetTitle(_title);
+            _window?.SetContext(_context);
+            _window?.Present();
         }
 
         /// <inheritdoc/>
         public void Destroy()
         {
-            if (_window.Value is IDockWindow dock)
-            {
-                dock.GetPosition(ref _x, ref _y);
-                dock.GetSize(ref _width, ref _height);
-                dock.Destroy();
-            }
+            _window?.GetPosition(ref _x, ref _y);
+            _window?.GetSize(ref _width, ref _height);
+            _window?.Destroy();
         }
 
         /// <summary>
@@ -136,7 +129,7 @@ namespace Dock.Model
         /// Check whether the <see cref="Context"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeContext() => _context != null;
+        public virtual bool ShouldSerializeContext() => false;
 
         /// <summary>
         /// Check whether the <see cref="Layout"/> property has changed from its default value.
