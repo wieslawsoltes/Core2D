@@ -1,12 +1,12 @@
 ﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
 <!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
-<UserControl x:Class="Core2D.Avalonia.Views.PanelControl"
+<UserControl x:Class="Core2D.Avalonia.Dock.PanelControl"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
-             xmlns:behaviors="clr-namespace:Dock.Avalonia;assembly=Dock.Avalonia"
-             xmlns:editor="clr-namespace:Core2D.Avalonia.Editor;assembly=Core2D.Avalonia"
+             xmlns:id="clr-namespace:Dock.Avalonia;assembly=Dock.Avalonia"
+             xmlns:dock="clr-namespace:Core2D.Avalonia.Dock;assembly=Core2D.Avalonia"
              xmlns:local="clr-namespace:Core2D.Avalonia;assembly=Core2D.Avalonia"
              xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"
              xmlns:Dock="clr-namespace:Dock.Model;assembly=Dock.Model"
@@ -14,7 +14,7 @@
     <DockPanel>
         <TabStrip Items="{Binding Views}" SelectedItem="{Binding CurrentView, Mode=TwoWay}" Focusable="false" DockPanel.Dock="Bottom" ClipToBounds="False" ZIndex="1">
             <i:Interaction.Behaviors>
-                <behaviors:DropBehavior Context="{Binding $parent[Window].DataContext}" Handler="{x:Static editor:DockDropHandler.Instance}"/>
+                <id:DropBehavior Context="{Binding $parent[Window].DataContext}" Handler="{x:Static dock:DockDropHandler.Instance}"/>
             </i:Interaction.Behaviors>
             <TabStrip.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -42,7 +42,7 @@
                 <DataTemplate DataType="Dock:IView">
                     <StackPanel Orientation="Horizontal" Gap="2">
                         <i:Interaction.Behaviors>
-                            <behaviors:DragBehavior/>
+                            <id:DragBehavior/>
                         </i:Interaction.Behaviors>
                         <TextBlock Text="{Binding Title}" Classes="drag" Margin="2"/>
                     </StackPanel>

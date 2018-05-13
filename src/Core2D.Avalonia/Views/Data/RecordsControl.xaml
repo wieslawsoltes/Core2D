@@ -5,7 +5,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
-             xmlns:behaviors="clr-namespace:Dock.Avalonia;assembly=Dock.Avalonia"
+             xmlns:id="clr-namespace:Dock.Avalonia;assembly=Dock.Avalonia"
              xmlns:local="clr-namespace:Core2D.Avalonia;assembly=Core2D.Avalonia"
              xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"
              xmlns:Data="clr-namespace:Core2D.Data;assembly=Core2D"
@@ -36,7 +36,7 @@
                             <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #record}">
                                 <ia:InvokeCommandAction Command="{Binding $parent[Window].DataContext.OnApplyRecord}" CommandParameter="{Binding Mode=OneWay}"/>
                             </ia:EventTriggerBehavior>
-                            <behaviors:DragBehavior/>
+                            <id:DragBehavior/>
                         </i:Interaction.Behaviors>
                         <TextBlock.ContextMenu>
                             <ContextMenu Classes="default">

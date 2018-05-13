@@ -10,7 +10,7 @@ using Core2D.Editor;
 using Dock.Avalonia;
 using Dock.Model;
 
-namespace Core2D.Avalonia.Editor
+namespace Core2D.Avalonia.Dock
 {
     public class DockDropHandler : IDropHandler
     {

@@ -5,7 +5,7 @@ using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Dock.Model;
 
-namespace Core2D.Avalonia.Windows
+namespace Core2D.Avalonia.Dock
 {
     /// <summary>
     /// Interaction logic for <see cref="DockWindow"/> xaml.

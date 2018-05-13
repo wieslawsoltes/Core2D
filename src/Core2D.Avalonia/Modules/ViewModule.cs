@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System.Reflection;
 using Autofac;
+using Core2D.Avalonia.Dock;
 using Core2D.Avalonia.Windows;
 using Dock.Model;
 

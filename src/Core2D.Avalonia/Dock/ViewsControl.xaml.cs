@@ -3,7 +3,7 @@
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace Core2D.Avalonia.Views
+namespace Core2D.Avalonia.Dock
 {
     /// <summary>
     /// Interaction logic for <see cref="ViewsControl"/> xaml.

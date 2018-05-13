@@ -5,7 +5,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
-             xmlns:behaviors="clr-namespace:Dock.Avalonia;assembly=Dock.Avalonia"
+             xmlns:id="clr-namespace:Dock.Avalonia;assembly=Dock.Avalonia"
              xmlns:local="clr-namespace:Core2D.Avalonia;assembly=Core2D.Avalonia"
              xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"
              xmlns:Core="clr-namespace:Core2D;assembly=Core2D"
@@ -47,7 +47,7 @@
                         <TreeDataTemplate DataType="Containers:ILibrary" ItemsSource="{Binding Items}">
                             <TextBlock Text="{Binding Name}" Classes="tree drag">
                                 <i:Interaction.Behaviors>
-                                    <behaviors:DragBehavior/>
+                                    <id:DragBehavior/>
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
                                     <ContextMenu Classes="default">
@@ -59,7 +59,7 @@
                         <DataTemplate DataType="Style:ShapeStyle">
                             <TextBlock Text="{Binding Name}" Classes="tree drag">
                                 <i:Interaction.Behaviors>
-                                    <behaviors:DragBehavior/>
+                                    <id:DragBehavior/>
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
                                     <ContextMenu Classes="default">
@@ -86,7 +86,7 @@
                         <TreeDataTemplate DataType="Containers:ILibrary" ItemsSource="{Binding Items}">
                             <TextBlock Text="{Binding Name}" Classes="tree drag">
                                 <i:Interaction.Behaviors>
-                                    <behaviors:DragBehavior/>
+                                    <id:DragBehavior/>
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
                                     <ContextMenu Classes="default">
@@ -98,7 +98,7 @@
                         <TreeDataTemplate DataType="Shapes:GroupShape" ItemsSource="{Binding Resources}">
                             <TextBlock Text="{Binding Name}" Classes="tree drag">
                                 <i:Interaction.Behaviors>
-                                    <behaviors:DragBehavior/>
+                                    <id:DragBehavior/>
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
                                     <ContextMenu Classes="default">
@@ -110,7 +110,7 @@
                         <DataTemplate DataType="Core:ObservableObject">
                             <TextBlock Text="{Binding Mode=OneWay, Converter={x:Static converters:ObjectToTypeStringConverter.Instance}}" Classes="tree drag">
                                 <i:Interaction.Behaviors>
-                                    <behaviors:DragBehavior/>
+                                    <id:DragBehavior/>
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
                                     <ContextMenu Classes="default">
@@ -137,7 +137,7 @@
                         <DataTemplate DataType="Data:Database">
                             <TextBlock Text="{Binding Name}" Classes="tree drag">
                                 <i:Interaction.Behaviors>
-                                    <behaviors:DragBehavior/>
+                                    <id:DragBehavior/>
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
                                     <ContextMenu Classes="default">
@@ -164,7 +164,7 @@
                         <TreeDataTemplate DataType="Containers:PageContainer" ItemsSource="{Binding Layers}">
                             <TextBlock Text="{Binding Name}" Classes="tree drag">
                                 <i:Interaction.Behaviors>
-                                    <behaviors:DragBehavior/>
+                                    <id:DragBehavior/>
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
                                     <ContextMenu Classes="default">
@@ -176,7 +176,7 @@
                         <TreeDataTemplate DataType="Containers:LayerContainer" ItemsSource="{Binding Shapes}">
                             <TextBlock Text="{Binding Name}" Classes="tree drag">
                                 <i:Interaction.Behaviors>
-                                    <behaviors:DragBehavior/>
+                                    <id:DragBehavior/>
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
                                     <ContextMenu Classes="default">
@@ -188,7 +188,7 @@
                         <TreeDataTemplate DataType="Shape:BaseShape" ItemsSource="{Binding Resources}">
                             <TextBlock Text="{Binding Mode=OneWay, Converter={x:Static converters:ObjectToTypeStringConverter.Instance}}" Classes="tree drag">
                                 <i:Interaction.Behaviors>
-                                    <behaviors:DragBehavior/>
+                                    <id:DragBehavior/>
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
                                     <ContextMenu Classes="default">
@@ -200,7 +200,7 @@
                         <DataTemplate DataType="Core:ObservableObject">
                             <TextBlock Text="{Binding Mode=OneWay, Converter={x:Static converters:ObjectToTypeStringConverter.Instance}}" Classes="tree drag">
                                 <i:Interaction.Behaviors>
-                                    <behaviors:DragBehavior/>
+                                    <id:DragBehavior/>
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
                                     <ContextMenu Classes="default">
@@ -227,7 +227,7 @@
                         <TreeDataTemplate DataType="Containers:DocumentContainer" ItemsSource="{Binding Pages}">
                             <TextBlock Text="{Binding Name}" Classes="tree drag">
                                 <i:Interaction.Behaviors>
-                                    <behaviors:DragBehavior/>
+                                    <id:DragBehavior/>
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
                                     <ContextMenu Classes="default">
@@ -239,7 +239,7 @@
                         <TreeDataTemplate DataType="Containers:PageContainer" ItemsSource="{Binding Layers}">
                             <TextBlock Text="{Binding Name}" Classes="tree drag">
                                 <i:Interaction.Behaviors>
-                                    <behaviors:DragBehavior/>
+                                    <id:DragBehavior/>
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
                                     <ContextMenu Classes="default">
@@ -251,7 +251,7 @@
                         <TreeDataTemplate DataType="Containers:LayerContainer" ItemsSource="{Binding Shapes}">
                             <TextBlock Text="{Binding Name}" Classes="tree drag">
                                 <i:Interaction.Behaviors>
-                                    <behaviors:DragBehavior/>
+                                    <id:DragBehavior/>
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
                                     <ContextMenu Classes="default">
@@ -263,7 +263,7 @@
                         <TreeDataTemplate DataType="Shape:BaseShape" ItemsSource="{Binding Resources}">
                             <TextBlock Text="{Binding Mode=OneWay, Converter={x:Static converters:ObjectToTypeStringConverter.Instance}}" Classes="tree drag">
                                 <i:Interaction.Behaviors>
-                                    <behaviors:DragBehavior/>
+                                    <id:DragBehavior/>
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
                                     <ContextMenu Classes="default">
@@ -275,7 +275,7 @@
                         <DataTemplate DataType="Core:ObservableObject">
                             <TextBlock Text="{Binding Mode=OneWay, Converter={x:Static converters:ObjectToTypeStringConverter.Instance}}" Classes="tree drag">
                                 <i:Interaction.Behaviors>
-                                    <behaviors:DragBehavior/>
+                                    <id:DragBehavior/>
                                 </i:Interaction.Behaviors>
                                 <TextBlock.ContextMenu>
                                     <ContextMenu Classes="default">
@@ -348,7 +348,7 @@
                     <DataTemplate DataType="Dock:IView">
                         <TextBlock Text="{Binding Title}" Classes="tree drag">
                             <i:Interaction.Behaviors>
-                                <behaviors:DragBehavior/>
+                                <id:DragBehavior/>
                             </i:Interaction.Behaviors>
                             <TextBlock.ContextMenu>
                                 <ContextMenu Classes="default">

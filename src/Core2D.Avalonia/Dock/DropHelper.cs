@@ -7,7 +7,7 @@ using Avalonia.Controls.PanAndZoom;
 using Avalonia.Controls.Primitives;
 using Avalonia.Input;
 
-namespace Core2D.Avalonia.Editor
+namespace Core2D.Avalonia.Dock
 {
     public static class DropHelper
     {

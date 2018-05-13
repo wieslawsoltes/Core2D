@@ -5,7 +5,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
-             xmlns:behaviors="clr-namespace:Dock.Avalonia;assembly=Dock.Avalonia"
+             xmlns:id="clr-namespace:Dock.Avalonia;assembly=Dock.Avalonia"
              xmlns:local="clr-namespace:Core2D.Avalonia;assembly=Core2D.Avalonia"
              xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"
              xmlns:Data="clr-namespace:Core2D.Data;assembly=Core2D"
@@ -34,7 +34,7 @@
                             <DataTemplate DataType="Data:Property">
                                 <Grid VerticalAlignment="Top" Classes="drag">
                                     <i:Interaction.Behaviors>
-                                        <behaviors:DragBehavior/>
+                                        <id:DragBehavior/>
                                     </i:Interaction.Behaviors>
                                     <TextBox VerticalAlignment="Center" Text="{Binding Name, Mode=TwoWay}" Classes="property"/>
                                 </Grid>
@@ -46,7 +46,7 @@
                             <DataTemplate DataType="Data:Property">
                                 <Grid VerticalAlignment="Top" Classes="drag">
                                     <i:Interaction.Behaviors>
-                                        <behaviors:DragBehavior/>
+                                        <id:DragBehavior/>
                                     </i:Interaction.Behaviors>
                                     <TextBox VerticalAlignment="Center" Text="{Binding Value, Mode=TwoWay}" Classes="property"/>
                                 </Grid>
@@ -64,7 +64,7 @@
                             <DataTemplate DataType="Shape:BaseShape">
                                 <TextBlock Text="{Binding Mode=OneWay, Converter={x:Static converters:ObjectToTypeStringConverter.Instance}}" Classes="list drag">
                                     <i:Interaction.Behaviors>
-                                        <behaviors:DragBehavior/>
+                                        <id:DragBehavior/>
                                     </i:Interaction.Behaviors>
                                 </TextBlock>
                             </DataTemplate>
@@ -84,7 +84,7 @@
                             <DataTemplate DataType="Shapes:PointShape">
                                 <TextBlock Text="{Binding Mode=OneWay, Converter={x:Static converters:ObjectToTypeStringConverter.Instance}}" Classes="list drag">
                                     <i:Interaction.Behaviors>
-                                        <behaviors:DragBehavior/>
+                                        <id:DragBehavior/>
                                     </i:Interaction.Behaviors>
                                 </TextBlock>
                             </DataTemplate>
