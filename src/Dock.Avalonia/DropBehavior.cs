@@ -3,6 +3,7 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
+using Avalonia.Interactivity;
 using Avalonia.Xaml.Interactivity;
 
 namespace Dock.Avalonia
@@ -32,6 +33,7 @@ namespace Dock.Avalonia
             base.OnAttached();
             DragDrop.SetAllowDrop(AssociatedObject, true);
             AssociatedObject.AddHandler(DragDrop.DragEnterEvent, DragEnter);
+            AssociatedObject.AddHandler(DragDrop.DragLeaveEvent, DragLeave);
             AssociatedObject.AddHandler(DragDrop.DragOverEvent, DragOver);
             AssociatedObject.AddHandler(DragDrop.DropEvent, Drop);
         }
@@ -41,11 +43,12 @@ namespace Dock.Avalonia
             base.OnDetaching();
             DragDrop.SetAllowDrop(AssociatedObject, false);
             AssociatedObject.RemoveHandler(DragDrop.DragEnterEvent, DragEnter);
+            AssociatedObject.RemoveHandler(DragDrop.DragLeaveEvent, DragLeave);
             AssociatedObject.RemoveHandler(DragDrop.DragOverEvent, DragOver);
             AssociatedObject.RemoveHandler(DragDrop.DropEvent, Drop);
         }
 
-        private void DragOver(object sender, DragEventArgs e)
+        private void DragEnter(object sender, DragEventArgs e)
         {
             if (Handler?.Validate(Context, sender, e) == false)
             {
@@ -58,7 +61,11 @@ namespace Dock.Avalonia
             }
         }
 
-        private void DragEnter(object sender, DragEventArgs e)
+        private void DragLeave(object sender, RoutedEventArgs e)
+        {
+        }
+
+        private void DragOver(object sender, DragEventArgs e)
         {
             if (Handler?.Validate(Context, sender, e) == false)
             {
