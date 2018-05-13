@@ -56,6 +56,7 @@ namespace Dock.Avalonia
             }
             else
             {
+                e.DragEffects |= DragDropEffects.Copy | DragDropEffects.Move | DragDropEffects.Link;
                 e.Handled = true;
             }
         }
@@ -70,6 +71,7 @@ namespace Dock.Avalonia
             }
             else
             {
+                e.DragEffects |= DragDropEffects.Copy | DragDropEffects.Move | DragDropEffects.Link;
                 e.Handled = true;
             }
         }

@@ -36,7 +36,6 @@
         </Menu>
         <ListBox Name="groups" Items="{Binding Items}" SelectedItem="{Binding Selected, Mode=TwoWay}" Grid.Row="3" Classes="default">
             <i:Interaction.Behaviors>
-                <behaviors:DropBehavior Context="{Binding $parent[Window].DataContext}" Handler="{x:Static editor:EditorDropHandler.Instance}"/>
                 <behaviors:DropBehavior Context="{Binding $parent[Window].DataContext}" Handler="{x:Static editor:ListBoxDropHandler.Instance}"/>
             </i:Interaction.Behaviors>
             <ListBox.KeyBindings>

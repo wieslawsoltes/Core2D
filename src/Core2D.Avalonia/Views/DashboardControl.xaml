@@ -40,7 +40,6 @@
         <ListBox Items="{Binding RecentProjects}" SelectedItem="{Binding CurrentRecentProject, Mode=TwoWay}" Classes="recents" Grid.Column="3" Grid.Row="3" Grid.ColumnSpan="1" Grid.RowSpan="5">
             <i:Interaction.Behaviors>
                 <behaviors:DropBehavior Context="{Binding}" Handler="{x:Static editor:ListBoxDropHandler.Instance}"/>
-                <behaviors:DropBehavior Context="{Binding}" Handler="{x:Static editor:EditorDropHandler.Instance}"/>
             </i:Interaction.Behaviors>
             <ListBox.DataTemplates>
                 <DataTemplate DataType="Recent:RecentFile">
@@ -51,7 +50,6 @@
                                 <ia:InvokeCommandAction Command="{Binding $parent[ListBox].DataContext.OnOpenProject}" CommandParameter="{Binding Path}"/>
                             </ia:EventTriggerBehavior>
                             <behaviors:DragBehavior/>
-                            <behaviors:DropBehavior Context="{Binding $parent[ListBox].DataContext}" Handler="{x:Static editor:EditorDropHandler.Instance}"/>
                         </i:Interaction.Behaviors>
                         <TextBlock Text="{Binding Name}" Classes="recents" Grid.Column="0" ToolTip.Tip="{Binding Path}"/>
                     </Grid>
