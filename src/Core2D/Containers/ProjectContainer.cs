@@ -255,10 +255,10 @@ namespace Core2D.Containers
                     CurrentDocument = document;
                     if (!CurrentDocument?.Pages.Contains(CurrentContainer) ?? false)
                     {
-                        var container = CurrentDocument.Pages.FirstOrDefault();
-                        if (CurrentContainer != container)
+                        var current = CurrentDocument.Pages.FirstOrDefault();
+                        if (CurrentContainer != current)
                         {
-                            CurrentContainer = container;
+                            CurrentContainer = current;
                         }
                     }
                 }
