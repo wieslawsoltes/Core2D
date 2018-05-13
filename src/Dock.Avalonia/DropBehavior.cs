@@ -54,8 +54,10 @@ namespace Dock.Avalonia
             {
                 e.DragEffects = DragDropEffects.None;
             }
-
-            e.Handled = true;
+            else
+            {
+                e.Handled = true;
+            }
         }
 
         private void DragEnter(object sender, DragEventArgs e)
@@ -66,8 +68,10 @@ namespace Dock.Avalonia
             {
                 e.DragEffects = DragDropEffects.None;
             }
-
-            e.Handled = true;
+            else
+            {
+                e.Handled = true;
+            }
         }
 
         private void Drop(object sender, DragEventArgs e)
@@ -78,8 +82,10 @@ namespace Dock.Avalonia
             {
                 e.DragEffects = DragDropEffects.None;
             }
-
-            e.Handled = true;
+            else
+            {
+                e.Handled = true;
+            }
         }
     }
 }

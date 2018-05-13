@@ -26,6 +26,7 @@
         <TreeView Name="documents" Items="{Binding Documents}" SelectedItem="{Binding Selected, Mode=TwoWay}" Grid.Row="1" Classes="default">
             <i:Interaction.Behaviors>
                 <behaviors:DropBehavior Context="{Binding $parent[Window].DataContext}" Handler="{x:Static editor:EditorDropHandler.Instance}"/>
+                <behaviors:DropBehavior Context="{Binding $parent[Window].DataContext}" Handler="{x:Static editor:TreeViewDropHandler.Instance}"/>
             </i:Interaction.Behaviors>
             <TreeView.KeyBindings>
                 <KeyBinding Command="{Binding $parent[Window].DataContext.OnNew}" CommandParameter="{Binding #documents.SelectedItem}" Gesture="Ctrl+N"/>

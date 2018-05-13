@@ -16,6 +16,7 @@
              Design.Width="1200" Design.Height="580">
     <i:Interaction.Behaviors>
         <behaviors:DropBehavior Context="{Binding}" Handler="{x:Static editor:EditorDropHandler.Instance}"/>
+        <behaviors:DropBehavior Context="{Binding}" Handler="{x:Static editor:DockDropHandler.Instance}"/>
     </i:Interaction.Behaviors>
     <UserControl.KeyBindings>
         <!-- File -->
