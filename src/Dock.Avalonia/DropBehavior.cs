@@ -2,14 +2,19 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.Primitives;
+using Avalonia.Controls.Shapes;
 using Avalonia.Input;
 using Avalonia.Interactivity;
+using Avalonia.Media;
 using Avalonia.Xaml.Interactivity;
 
 namespace Dock.Avalonia
 {
     public sealed class DropBehavior : Behavior<Control>
     {
+        private Control _adorner;
+
         public static readonly AvaloniaProperty ContextProperty =
             AvaloniaProperty.Register<DropBehavior, object>(nameof(Context));
 
@@ -48,6 +53,37 @@ namespace Dock.Avalonia
             AssociatedObject.RemoveHandler(DragDrop.DropEvent, Drop);
         }
 
+        private void AddAdorner(DockPanel dock)
+        {
+            var layer = AdornerLayer.GetAdornerLayer(dock);
+
+            if (layer != null)
+            {
+                if (_adorner?.Parent is Panel panel)
+                {
+                    panel.Children.Remove(_adorner);
+                    _adorner = null;
+                }
+
+                _adorner = new Rectangle
+                {
+                    Fill = new SolidColorBrush(0x80a0c5e8),
+                    [AdornerLayer.AdornedElementProperty] = dock,
+                };
+
+                layer.Children.Add(_adorner);
+            }
+        }
+
+        private void RemoveAdorner(DockPanel dock)
+        {
+            if (_adorner?.Parent is Panel panel)
+            {
+                panel.Children.Remove(_adorner);
+                _adorner = null;
+            }
+        }
+
         private void DragEnter(object sender, DragEventArgs e)
         {
             if (Handler?.Validate(Context, sender, e) == false)
@@ -56,6 +92,11 @@ namespace Dock.Avalonia
             }
             else
             {
+                if (sender is DockPanel panel)
+                {
+                    AddAdorner(panel);
+                }
+
                 e.DragEffects |= DragDropEffects.Copy | DragDropEffects.Move | DragDropEffects.Link;
                 e.Handled = true;
             }
@@ -63,6 +104,10 @@ namespace Dock.Avalonia
 
         private void DragLeave(object sender, RoutedEventArgs e)
         {
+            if (sender is DockPanel panel)
+            {
+                RemoveAdorner(panel);
+            }
         }
 
         private void DragOver(object sender, DragEventArgs e)
@@ -80,6 +125,11 @@ namespace Dock.Avalonia
 
         private void Drop(object sender, DragEventArgs e)
         {
+            if (sender is DockPanel panel)
+            {
+                RemoveAdorner(panel);
+            }
+
             if (Handler?.Execute(Context, sender, e) == false)
             {
                 e.DragEffects = DragDropEffects.None;

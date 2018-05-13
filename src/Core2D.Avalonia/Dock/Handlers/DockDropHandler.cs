@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System.Collections.Immutable;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Input;
@@ -102,6 +103,50 @@ namespace Core2D.Avalonia.Dock.Handlers
             return false;
         }
 
+        private bool ValidateDockPanel(IViewsLayout layout, DragEventArgs e, bool bExecute, DockPanel panel)
+        {
+            var sourceItem = e.Data.Get(DragDataFormats.Parent);
+
+            if (sourceItem is TabStripItem source
+                && source.Parent is TabStrip sourceStrip
+                && sourceStrip.DataContext is ViewsPanel sourcePanel
+                && panel.DataContext is ViewsPanel targetPanel
+                && sourcePanel != targetPanel)
+            {
+                int sourceIndex = sourceStrip.ItemContainerGenerator.IndexFromContainer(source);
+                int targetIndex = targetPanel.Views.Length;
+
+                if (e.DragEffects == DragDropEffects.Copy)
+                {
+                    if (bExecute)
+                    {
+                        // TODO: Clone item.
+                    }
+                    return true;
+                }
+                else if (e.DragEffects == DragDropEffects.Move)
+                {
+                    if (bExecute)
+                    {
+                        layout?.MoveView(sourcePanel, targetPanel, sourceIndex, targetIndex);
+                    }
+                    return true;
+                }
+                else if (e.DragEffects == DragDropEffects.Link)
+                {
+                    if (bExecute)
+                    {
+                        layout?.SwapView(sourcePanel, targetPanel, sourceIndex, targetIndex);
+                    }
+                    return true;
+                }
+
+                return false;
+            }
+
+            return false;
+        }
+
         private bool Validate(ProjectEditor editor, object sender, DragEventArgs e, bool bExecute)
         {
             var point = DropHelper.GetPosition(sender, e);
@@ -110,6 +155,8 @@ namespace Core2D.Avalonia.Dock.Handlers
             {
                 case TabStrip strip:
                     return ValidateTabStrip(editor?.Layout, e, bExecute, strip);
+                case DockPanel panel:
+                    return ValidateDockPanel(editor?.Layout, e, bExecute, panel);
             }
 
             if (e.Data.Get(DragDataFormats.Parent) is TabStripItem item)
@@ -122,17 +169,35 @@ namespace Core2D.Avalonia.Dock.Handlers
                         int itemIndex = strip.ItemContainerGenerator.IndexFromContainer(item);
 
                         var view = panel.Views[itemIndex];
-                        var window = new Window()
+
+                        editor?.Layout.RemoveView(panel, itemIndex);
+
+                        var layout = new ViewsLayout
                         {
-                            DataContext = editor,
-                            Width = 300,
-                            Height = 500,
-                            Title = view.Title,
-                            Content = new ContentControl()
+                            Panels = new[]
                             {
-                                Content = view
-                            }
+                                new ViewsPanel
+                                {
+                                    Row = 0,
+                                    Column = 0,
+                                    Views = new[] { view }.ToImmutableArray(),
+                                    CurrentView = view
+                                }
+                            }.ToImmutableArray<IViewsPanel>(),
+                            CurrentView = view
                         };
+
+                        var window = new DockWindow()
+                        {
+                            DataContext = editor
+                        };
+
+                        var views = window.FindControl<ViewsControl>("views");
+                        if (views != null)
+                        {
+                            views.DataContext = layout.Panels[0];
+                        }
+
                         window.Show();
                         return true;
                     }

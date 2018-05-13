@@ -20,6 +20,13 @@ namespace Dock.Model
         IView CurrentView { get; set; }
 
         /// <summary>
+        /// Remove view from the panel.
+        /// </summary>
+        /// <param name="panel">The views panel.</param>
+        /// <param name="index">The source view index.</param>
+        void RemoveView(IViewsPanel panel, int index);
+
+        /// <summary>
         /// Move views in the panel.
         /// </summary>
         /// <param name="panel">The views panel.</param>

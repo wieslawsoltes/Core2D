@@ -12,6 +12,9 @@
              xmlns:Dock="clr-namespace:Dock.Model;assembly=Dock.Model"
              Design.Width="1200" Design.Height="540">
     <DockPanel>
+        <i:Interaction.Behaviors>
+            <id:DropBehavior Context="{Binding $parent[Window].DataContext}" Handler="{x:Static handlers:DockDropHandler.Instance}"/>
+        </i:Interaction.Behaviors>
         <TabStrip Items="{Binding Views}" SelectedItem="{Binding CurrentView, Mode=TwoWay}" Focusable="false" DockPanel.Dock="Bottom" ClipToBounds="False" ZIndex="1">
             <i:Interaction.Behaviors>
                 <id:DropBehavior Context="{Binding $parent[Window].DataContext}" Handler="{x:Static handlers:DockDropHandler.Instance}"/>

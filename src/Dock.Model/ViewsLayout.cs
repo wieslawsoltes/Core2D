@@ -35,6 +35,20 @@ namespace Dock.Model
         }
 
         /// <inheritdoc/>
+        public void RemoveView(IViewsPanel panel, int index)
+        {
+            var item = panel.Views[index];
+            var builder = panel.Views.ToBuilder();
+            builder.RemoveAt(index);
+            panel.Views = builder.ToImmutable();
+
+            if (panel.Views.Length > 0)
+            {
+                panel.CurrentView = panel.Views[index > 0 ? index - 1 : 0];
+            }
+        }
+
+        /// <inheritdoc/>
         public void MoveView(IViewsPanel panel, int sourceIndex, int targetIndex)
         {
             if (sourceIndex < targetIndex)
@@ -83,9 +97,16 @@ namespace Dock.Model
             targetBuilder.Insert(targetIndex, item);
 
             sourcePanel.Views = sourceBuilder.ToImmutable();
-            sourcePanel.CurrentView = sourcePanel.Views[sourceIndex > 0 ? sourceIndex - 1 : 0];
+            if (sourcePanel.Views.Length > 0)
+            {
+                sourcePanel.CurrentView = sourcePanel.Views[sourceIndex > 0 ? sourceIndex - 1 : 0];
+            }
+
             targetPanel.Views = targetBuilder.ToImmutable();
-            targetPanel.CurrentView = targetPanel.Views[targetIndex];
+            if (targetPanel.Views.Length > 0)
+            {
+                targetPanel.CurrentView = targetPanel.Views[targetIndex];
+            }
         }
 
         /// <inheritdoc/>
