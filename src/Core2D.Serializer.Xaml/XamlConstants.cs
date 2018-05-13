@@ -9,7 +9,7 @@ namespace Core2D.Serializer.Xaml
 
         public const string EditorNamespace = "https://github.com/wieslawsoltes/Core2D.Editor";
 
-        public const string DockNamespace = "https://github.com/wieslawsoltes/Dock.Model;
+        public const string DockNamespace = "https://github.com/wieslawsoltes/Dock.Model";
 
         public const string SpatialNamespace = "https://github.com/wieslawsoltes/Math.Spatial";
     }
