@@ -188,7 +188,11 @@ namespace Core2D.Containers
         /// Set current container.
         /// </summary>
         /// <param name="container">The container instance.</param>
-        public void SetCurrentContainer(PageContainer container) => CurrentContainer = container;
+        public void SetCurrentContainer(PageContainer container)
+        {
+            CurrentContainer = container;
+            SetSelected(container);
+        }
 
         /// <summary>
         /// Set current template.
