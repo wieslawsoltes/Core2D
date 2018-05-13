@@ -31,8 +31,6 @@
   <Import Project="..\..\build\EmbedXaml.props" />
 
   <ItemGroup>
-    <ProjectReference Include="..\Core2D.Avalonia.Behaviors\Core2D.Avalonia.Behaviors.csproj" />
-    <ProjectReference Include="..\Core2D.Dock\Core2D.Dock.csproj" />
     <ProjectReference Include="..\Core2D.Editor\Core2D.Editor.csproj" />
     <ProjectReference Include="..\Core2D\Core2D.csproj" />
     <ProjectReference Include="..\Core2D.FileSystem.DotNet\Core2D.FileSystem.DotNet.csproj" />
@@ -47,6 +45,8 @@
     <ProjectReference Include="..\Core2D.TextFieldReader.CsvHelper\Core2D.TextFieldReader.CsvHelper.csproj" />
     <ProjectReference Include="..\Core2D.TextFieldWriter.CsvHelper\Core2D.TextFieldWriter.CsvHelper.csproj" />
     <ProjectReference Include="..\Core2D.Utilities.Avalonia\Core2D.Utilities.Avalonia.csproj" />
+    <ProjectReference Include="..\Dock.Avalonia\Dock.Avalonia.csproj" />
+    <ProjectReference Include="..\Dock.Model\Dock.Model.csproj" />
   </ItemGroup>
 
   <ItemGroup Condition="$(TargetFramework.StartsWith('net4'))">

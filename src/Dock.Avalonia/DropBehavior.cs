@@ -6,7 +6,7 @@ using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Xaml.Interactivity;
 
-namespace Core2D.Avalonia.Behaviors
+namespace Dock.Avalonia
 {
     public sealed class DropBehavior : Behavior<Control>
     {

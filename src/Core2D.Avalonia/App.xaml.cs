@@ -15,8 +15,8 @@ using Core2D.Avalonia.Modules;
 using Core2D.Avalonia.Views;
 using Core2D.Editor;
 using Core2D.Editor.Designer;
-using Core2D.Dock;
 using Core2D.Interfaces;
+using Dock.Model;
 
 namespace Core2D.Avalonia
 {

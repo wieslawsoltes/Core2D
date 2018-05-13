@@ -2,7 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Avalonia.Input;
 
-namespace Core2D.Avalonia.Behaviors
+namespace Dock.Avalonia
 {
     public interface IDropHandler
     {

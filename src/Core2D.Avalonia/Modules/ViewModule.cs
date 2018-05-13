@@ -3,7 +3,7 @@
 using System.Reflection;
 using Autofac;
 using Core2D.Avalonia.Windows;
-using Core2D.Dock;
+using Dock.Model;
 
 namespace Core2D.Avalonia.Modules
 {

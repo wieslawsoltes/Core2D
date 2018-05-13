@@ -1,21 +1,26 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Core2D.Dock
+namespace Dock.Model
 {
     /// <summary>
-    /// Grid panel contract.
+    /// Main view contract.
     /// </summary>
-    public interface IGridPanel
+    public interface IMainView
     {
         /// <summary>
-        /// Gets or sets row.
+        /// Gets main view context.
         /// </summary>
-        int Row { get; set; }
+        object Context { get; }
 
         /// <summary>
-        /// Gets or sets column.
+        /// Presents view.
         /// </summary>
-        int Column { get; set; }
+        void Present();
+
+        /// <summary>
+        /// Destroys view.
+        /// </summary>
+        void Destroy();
     }
 }

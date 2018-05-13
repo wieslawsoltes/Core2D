@@ -1,21 +1,22 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using System.Collections.Immutable;
 
-namespace Core2D.Dock
+namespace Dock.Model
 {
     /// <summary>
-    /// View contract.
+    /// Views panel contract.
     /// </summary>
-    public interface IView
+    public interface IViewsPanel
     {
         /// <summary>
-        /// Gets view title.
+        /// Gets or sets views.
         /// </summary>
-        string Title { get; }
+        ImmutableArray<IView> Views { get; set; }
 
         /// <summary>
-        /// Gets view context.
+        /// Gets or sets current view.
         /// </summary>
-        object Context { get; }
+        IView CurrentView { get; set; }
     }
 }

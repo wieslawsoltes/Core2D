@@ -7,10 +7,10 @@ using Core2D.Data;
 using Core2D.Editor.Bounds;
 using Core2D.Editor.Factories;
 using Core2D.Editor.Recent;
-using Core2D.Dock;
 using Core2D.Interfaces;
 using Core2D.Containers;
 using Core2D.Renderer;
+using Dock.Model;
 
 namespace Core2D.Editor
 {

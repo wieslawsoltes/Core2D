@@ -3,6 +3,6 @@
 using Portable.Xaml.Markup;
 using Core2D.Serializer.Xaml;
 
-[assembly: XmlnsDefinition(XamlConstants.DockNamespace, "Core2D.Dock", AssemblyName = "Core2D.Dock")]
+[assembly: XmlnsDefinition(XamlConstants.DockNamespace, "Dock.Model", AssemblyName = "Dock.Model")]
 
 [assembly: XmlnsPrefix(XamlConstants.DockNamespace, "c")]

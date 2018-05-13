@@ -10,11 +10,11 @@ using Avalonia.Input;
 using Core2D.Containers;
 using Core2D.Data;
 using Core2D.Editor;
-using Core2D.Dock;
 using Core2D.Shape;
 using Core2D.Shapes;
 using Core2D.Style;
-using Core2D.Avalonia.Behaviors;
+using Dock.Avalonia;
+using Dock.Model;
 
 namespace Core2D.Avalonia.Editor
 {
@@ -137,7 +137,7 @@ namespace Core2D.Avalonia.Editor
             return false;
         }
 
-        private bool ValidateTreeView(ProjectEditor editor, DragEventArgs e, bool bExecute, TreeView tree)
+        private bool ValidateTreeView(ProjectEditor layout, DragEventArgs e, bool bExecute, TreeView tree)
         {
             var sourceItem = e.Data.Get(DragDataFormats.Parent);
             var targetItem = (e.Source as IControl)?.Parent?.Parent;
@@ -303,7 +303,7 @@ namespace Core2D.Avalonia.Editor
             return false;
         }
 
-        private bool ValidateTabStrip(ProjectEditor editor, DragEventArgs e, bool bExecute, TabStrip strip)
+        private bool ValidateTabStrip(IViewsLayout editor, DragEventArgs e, bool bExecute, TabStrip strip)
         {
             var sourceItem = e.Data.Get(DragDataFormats.Parent);
             var targetItem = (e.Source as IControl)?.Parent?.Parent;
@@ -333,7 +333,7 @@ namespace Core2D.Avalonia.Editor
                         {
                             if (bExecute)
                             {
-                                editor?.Layout?.MoveView(panel, sourceIndex, targetIndex);
+                                layout?.MoveView(panel, sourceIndex, targetIndex);
                             }
                             return true;
                         }
@@ -341,7 +341,7 @@ namespace Core2D.Avalonia.Editor
                         {
                             if (bExecute)
                             {
-                                editor?.Layout?.SwapView(panel, sourceIndex, targetIndex);
+                                layout?.SwapView(panel, sourceIndex, targetIndex);
                             }
                             return true;
                         }
@@ -376,7 +376,7 @@ namespace Core2D.Avalonia.Editor
                         {
                             if (bExecute)
                             {
-                                editor?.Layout?.MoveView(sourcePanel, targetPanel, sourceIndex, targetIndex);
+                                layout?.MoveView(sourcePanel, targetPanel, sourceIndex, targetIndex);
                             }
                             return true;
                         }
@@ -386,7 +386,7 @@ namespace Core2D.Avalonia.Editor
                     {
                         if (bExecute)
                         {
-                            editor?.Layout?.SwapView(sourcePanel, targetPanel, sourceIndex, targetIndex);
+                            layout?.SwapView(sourcePanel, targetPanel, sourceIndex, targetIndex);
                         }
                         return true;
                     }
@@ -411,7 +411,7 @@ namespace Core2D.Avalonia.Editor
                 case TreeView tree:
                     return ValidateTreeView(editor, e, bExecute, tree);
                 case TabStrip strip:
-                    return ValidateTabStrip(editor, e, bExecute, strip);
+                    return ValidateTabStrip(editor?.Layout, e, bExecute, strip);
             }
 
             if (e.Data.Get(DragDataFormats.Parent) is TabStripItem item)
