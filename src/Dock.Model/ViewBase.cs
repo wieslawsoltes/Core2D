@@ -14,7 +14,7 @@ namespace Dock.Model
         /// <inheritdoc/>
         public ImmutableArray<IViewsWindow> Windows
         {
-            get => _panels;
+            get => _windows;
             set => Update(ref _windows, value);
         }
 
@@ -29,7 +29,6 @@ namespace Dock.Model
         {
             foreach (var window in _windows)
             {
-                window.Create();
                 window.Present();
             }
         }
