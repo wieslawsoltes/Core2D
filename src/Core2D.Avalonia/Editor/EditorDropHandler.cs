@@ -137,7 +137,7 @@ namespace Core2D.Avalonia.Editor
             return false;
         }
 
-        private bool ValidateTreeView(ProjectEditor layout, DragEventArgs e, bool bExecute, TreeView tree)
+        private bool ValidateTreeView(ProjectEditor editor, DragEventArgs e, bool bExecute, TreeView tree)
         {
             var sourceItem = e.Data.Get(DragDataFormats.Parent);
             var targetItem = (e.Source as IControl)?.Parent?.Parent;
@@ -303,7 +303,7 @@ namespace Core2D.Avalonia.Editor
             return false;
         }
 
-        private bool ValidateTabStrip(IViewsLayout editor, DragEventArgs e, bool bExecute, TabStrip strip)
+        private bool ValidateTabStrip(IViewsLayout layout, DragEventArgs e, bool bExecute, TabStrip strip)
         {
             var sourceItem = e.Data.Get(DragDataFormats.Parent);
             var targetItem = (e.Source as IControl)?.Parent?.Parent;
