@@ -44,7 +44,7 @@
                         <i:Interaction.Behaviors>
                             <behaviors:DragBehavior/>
                         </i:Interaction.Behaviors>
-                        <TextBlock Text="{Binding Title}" Margin="2"/>
+                        <TextBlock Text="{Binding Title}" Classes="drag" Margin="2"/>
                     </StackPanel>
                 </DataTemplate>
             </TabStrip.DataTemplates>
