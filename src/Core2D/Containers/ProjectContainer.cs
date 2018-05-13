@@ -182,7 +182,11 @@ namespace Core2D.Containers
         /// Set current document.
         /// </summary>
         /// <param name="document">The document instance.</param>
-        public void SetCurrentDocument(DocumentContainer document) => CurrentDocument = document;
+        public void SetCurrentDocument(DocumentContainer document)
+        {
+            CurrentDocument = document;
+            Selected = document;
+        }
 
         /// <summary>
         /// Set current container.
@@ -191,7 +195,7 @@ namespace Core2D.Containers
         public void SetCurrentContainer(PageContainer container)
         {
             CurrentContainer = container;
-            SetSelected(container);
+            Selected = container;
         }
 
         /// <summary>
