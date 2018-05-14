@@ -8,7 +8,7 @@ namespace Core2D.Editor.Views
     /// <summary>
     /// Project view.
     /// </summary>
-    public class ProjectView : ViewBase
+    public class ProjectView : DockView
     {
         private readonly IServiceProvider _serviceProvider;
         private Lazy<ProjectEditor> _context;

@@ -14,7 +14,7 @@ namespace Core2D.Avalonia.Dock.Handlers
     {
         public static IDropHandler Instance = new DockDropHandler();
 
-        private bool ValidateTabStrip(IViewsLayout layout, DragEventArgs e, bool bExecute, TabStrip strip)
+        private bool ValidateTabStrip(IDockLayout layout, DragEventArgs e, bool bExecute, TabStrip strip)
         {
             var sourceItem = e.Data.Get(DragDataFormats.Parent);
             var targetItem = (e.Source as IControl)?.Parent?.Parent;
@@ -26,7 +26,7 @@ namespace Core2D.Avalonia.Dock.Handlers
                     int sourceIndex = strip.ItemContainerGenerator.IndexFromContainer(source);
                     int targetIndex = strip.ItemContainerGenerator.IndexFromContainer(target);
 
-                    if (strip.DataContext is ViewsPanel panel)
+                    if (strip.DataContext is DockContainer container)
                     {
                         if (e.DragEffects == DragDropEffects.Copy)
                         {
@@ -40,7 +40,7 @@ namespace Core2D.Avalonia.Dock.Handlers
                         {
                             if (bExecute)
                             {
-                                layout?.MoveView(panel, sourceIndex, targetIndex);
+                                layout?.MoveView(container, sourceIndex, targetIndex);
                             }
                             return true;
                         }
@@ -48,7 +48,7 @@ namespace Core2D.Avalonia.Dock.Handlers
                         {
                             if (bExecute)
                             {
-                                layout?.SwapView(panel, sourceIndex, targetIndex);
+                                layout?.SwapView(container, sourceIndex, targetIndex);
                             }
                             return true;
                         }
@@ -59,8 +59,8 @@ namespace Core2D.Avalonia.Dock.Handlers
                 }
                 else if (source.Parent is TabStrip sourceStrip
                     && target.Parent is TabStrip targetStrip
-                    && sourceStrip.DataContext is ViewsPanel sourcePanel
-                    && targetStrip.DataContext is ViewsPanel targetPanel)
+                    && sourceStrip.DataContext is DockContainer sourcePanel
+                    && targetStrip.DataContext is DockContainer targetPanel)
                 {
                     int sourceIndex = sourceStrip.ItemContainerGenerator.IndexFromContainer(source);
                     int targetIndex = targetStrip.ItemContainerGenerator.IndexFromContainer(target);
@@ -103,18 +103,18 @@ namespace Core2D.Avalonia.Dock.Handlers
             return false;
         }
 
-        private bool ValidateDockPanel(IViewsLayout layout, DragEventArgs e, bool bExecute, DockPanel panel)
+        private bool ValidateDockPanel(IDockLayout layout, DragEventArgs e, bool bExecute, DockPanel panel)
         {
             var sourceItem = e.Data.Get(DragDataFormats.Parent);
 
             if (sourceItem is TabStripItem source
                 && source.Parent is TabStrip sourceStrip
-                && sourceStrip.DataContext is ViewsPanel sourcePanel
-                && panel.DataContext is ViewsPanel targetPanel
-                && sourcePanel != targetPanel)
+                && sourceStrip.DataContext is DockContainer sourceContainer
+                && panel.DataContext is DockContainer targetContainer
+                && sourceContainer != targetContainer)
             {
                 int sourceIndex = sourceStrip.ItemContainerGenerator.IndexFromContainer(source);
-                int targetIndex = targetPanel.Views.Count;
+                int targetIndex = targetContainer.Views.Count;
 
                 if (e.DragEffects == DragDropEffects.Copy)
                 {
@@ -128,7 +128,7 @@ namespace Core2D.Avalonia.Dock.Handlers
                 {
                     if (bExecute)
                     {
-                        layout?.MoveView(sourcePanel, targetPanel, sourceIndex, targetIndex);
+                        layout?.MoveView(sourceContainer, targetContainer, sourceIndex, targetIndex);
                     }
                     return true;
                 }
@@ -136,7 +136,7 @@ namespace Core2D.Avalonia.Dock.Handlers
                 {
                     if (bExecute)
                     {
-                        layout?.SwapView(sourcePanel, targetPanel, sourceIndex, targetIndex);
+                        layout?.SwapView(sourceContainer, targetContainer, sourceIndex, targetIndex);
                     }
                     return true;
                 }
@@ -162,59 +162,49 @@ namespace Core2D.Avalonia.Dock.Handlers
             if (e.Data.Get(DragDataFormats.Parent) is TabStripItem item)
             {
                 var strip = item.Parent as TabStrip;
-                if (strip.DataContext is ViewsPanel panel)
+                if (strip.DataContext is DockContainer container)
                 {
                     if (bExecute)
                     {
                         int itemIndex = strip.ItemContainerGenerator.IndexFromContainer(item);
 
-                        var view = panel.Views[itemIndex];
+                        var view = container.Views[itemIndex];
 
-                        editor?.Layout.RemoveView(panel, itemIndex);
+                        editor?.Layout.RemoveView(container, itemIndex);
 
-                        var layout = new ViewsLayout
+                        var window = new DockWindow()
                         {
-                            Views = new ObservableCollection<IView>(),
-                            Panels = new ObservableCollection<IViewsPanel>
-                            {
-                                new ViewsPanel
-                                {
-                                    Row = 0,
-                                    Column = 0,
-                                    Views = new ObservableCollection<IView> { view },
-                                    CurrentView = view
-                                }
-                            },
-                            CurrentView = view
-                        };
-
-                        var dock = new DockWindow()
-                        {
-                            DataContext = editor
-                        };
-
-                        var window = new ViewsWindow()
-                        {
+                            X = point.X,
+                            Y = point.Y,
+                            Width = 300,
+                            Height = 400,
                             Title = "Dock",
                             Context = editor,
-                            Layout = layout,
-                            Window = dock
+                            Layout = new DockLayout
+                            {
+                                Containers = new ObservableCollection<IDockContainer>
+                                {
+                                    new DockContainer
+                                    {
+                                        Row = 0,
+                                        Column = 0,
+                                        Views = new ObservableCollection<IDockView> { view },
+                                        CurrentView = view
+                                    }
+                                },
+                                Views = new ObservableCollection<IDockView>(),
+                                CurrentView = view
+                            },
+                            Host = new HostWindow()
                         };
 
                         if (editor?.Layout.CurrentView.Windows == null)
                         {
-                            editor.Layout.CurrentView.Windows = new ObservableCollection<IViewsWindow>();
+                            editor.Layout.CurrentView.Windows = new ObservableCollection<IDockWindow>();
                         }
-
                         editor?.Layout.CurrentView.AddWindow(window);
 
-                        var control = dock.FindControl<ViewsControl>("control");
-                        if (control != null)
-                        {
-                            control.DataContext = layout.Panels[0];
-                        }
-
-                        dock.Show();
+                        window.Present();
                         return true;
                     }
                     return true;

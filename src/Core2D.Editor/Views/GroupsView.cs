@@ -8,7 +8,7 @@ namespace Core2D.Editor.Views
     /// <summary>
     /// Groups view.
     /// </summary>
-    public class GroupsView : ViewBase
+    public class GroupsView : DockView
     {
         private readonly IServiceProvider _serviceProvider;
         private Lazy<ProjectEditor> _context;

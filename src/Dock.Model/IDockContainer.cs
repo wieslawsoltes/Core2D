@@ -5,18 +5,28 @@ using System.Collections.Generic;
 namespace Dock.Model
 {
     /// <summary>
-    /// Views panel contract.
+    /// Dock container contract.
     /// </summary>
-    public interface IViewsPanel
+    public interface IDockContainer
     {
+        /// <summary>
+        /// Gets or sets row.
+        /// </summary>
+        int Row { get; set; }
+
+        /// <summary>
+        /// Gets or sets column.
+        /// </summary>
+        int Column { get; set; }
+
         /// <summary>
         /// Gets or sets views.
         /// </summary>
-        IList<IView> Views { get; set; }
+        IList<IDockView> Views { get; set; }
 
         /// <summary>
         /// Gets or sets current view.
         /// </summary>
-        IView CurrentView { get; set; }
+        IDockView CurrentView { get; set; }
     }
 }

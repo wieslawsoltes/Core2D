@@ -5,24 +5,24 @@ using System.Collections.Generic;
 namespace Dock.Model
 {
     /// <summary>
-    /// View base class.
+    /// Dock view.
     /// </summary>
-    public abstract class ViewBase : ObservableObject, IView
+    public abstract class DockView : ObservableObject, IDockView
     {
-        private IList<IViewsWindow> _windows;
-
-        /// <inheritdoc/>
-        public IList<IViewsWindow> Windows
-        {
-            get => _windows;
-            set => Update(ref _windows, value);
-        }
+        private IList<IDockWindow> _windows;
 
         /// <inheritdoc/>
         public abstract string Title { get; }
 
         /// <inheritdoc/>
         public abstract object Context { get; }
+
+        /// <inheritdoc/>
+        public IList<IDockWindow> Windows
+        {
+            get => _windows;
+            set => Update(ref _windows, value);
+        }
 
         /// <inheritdoc/>
         public virtual void ShowWindows()
@@ -49,13 +49,13 @@ namespace Dock.Model
         }
 
         /// <inheritdoc/>
-        public virtual void AddWindow(IViewsWindow window)
+        public virtual void AddWindow(IDockWindow window)
         {
             _windows?.Add(window);
         }
 
         /// <inheritdoc/>
-        public virtual void RemoveWindow(IViewsWindow window)
+        public virtual void RemoveWindow(IDockWindow window)
         {
             _windows?.Remove(window);
         }

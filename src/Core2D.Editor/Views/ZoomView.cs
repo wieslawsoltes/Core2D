@@ -8,7 +8,7 @@ namespace Core2D.Editor.Views
     /// <summary>
     /// Zoom view.
     /// </summary>
-    public class ZoomView : ViewBase
+    public class ZoomView : DockView
     {
         private readonly IServiceProvider _serviceProvider;
         private Lazy<ProjectEditor> _context;

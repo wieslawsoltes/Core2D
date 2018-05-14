@@ -8,7 +8,7 @@ namespace Core2D.Editor.Views
     /// <summary>
     /// Dashboard view.
     /// </summary>
-    public class DashboardView : ViewBase
+    public class DashboardView : DockView
     {
         private readonly IServiceProvider _serviceProvider;
         private Lazy<ProjectEditor> _context;

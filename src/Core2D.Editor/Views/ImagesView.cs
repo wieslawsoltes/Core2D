@@ -8,7 +8,7 @@ namespace Core2D.Editor.Views
     /// <summary>
     /// Images view.
     /// </summary>
-    public class ImagesView : ViewBase
+    public class ImagesView : DockView
     {
         private readonly IServiceProvider _serviceProvider;
         private Lazy<ProjectEditor> _context;

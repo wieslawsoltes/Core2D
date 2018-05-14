@@ -8,7 +8,7 @@ namespace Core2D.Editor.Views
     /// <summary>
     /// Options view.
     /// </summary>
-    public class OptionsView : ViewBase
+    public class OptionsView : DockView
     {
         private readonly IServiceProvider _serviceProvider;
         private Lazy<ProjectEditor> _context;

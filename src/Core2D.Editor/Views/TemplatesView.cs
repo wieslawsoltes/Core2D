@@ -8,7 +8,7 @@ namespace Core2D.Editor.Views
     /// <summary>
     /// Templates view.
     /// </summary>
-    public class TemplatesView : ViewBase
+    public class TemplatesView : DockView
     {
         private readonly IServiceProvider _serviceProvider;
         private Lazy<ProjectEditor> _context;

@@ -5,9 +5,9 @@ using System.Collections.Generic;
 namespace Dock.Model
 {
     /// <summary>
-    /// View contract.
+    /// Dock view contract.
     /// </summary>
-    public interface IView
+    public interface IDockView
     {
         /// <summary>
         /// Gets view title.
@@ -22,7 +22,7 @@ namespace Dock.Model
         /// <summary>
         /// Gets or sets windows.
         /// </summary>
-        IList<IViewsWindow> Windows { get; set; }
+        IList<IDockWindow> Windows { get; set; }
 
         /// <summary>
         /// Show windows.
@@ -38,12 +38,12 @@ namespace Dock.Model
         /// Adds window.
         /// </summary>
         /// <param name="window">The window to add.</param>
-        void AddWindow(IViewsWindow window);
+        void AddWindow(IDockWindow window);
 
         /// <summary>
         /// Removes window.
         /// </summary>
         /// <param name="window">The window to remove.</param>
-        void RemoveWindow(IViewsWindow window);
+        void RemoveWindow(IDockWindow window);
     }
 }

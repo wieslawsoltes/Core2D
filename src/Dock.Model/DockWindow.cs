@@ -4,9 +4,9 @@
 namespace Dock.Model
 {
     /// <summary>
-    /// Views window.
+    /// Dock window.
     /// </summary>
-    public class ViewsWindow : ObservableObject, IViewsWindow
+    public class DockWindow : ObservableObject, IDockWindow
     {
         private double _x;
         private double _y;
@@ -14,8 +14,8 @@ namespace Dock.Model
         private double _height;
         private string _title;
         private object _context;
-        private IViewsLayout _layout;
-        private IDockWindow _window;
+        private IDockLayout _layout;
+        private IDockHost _host;
 
         /// <inheritdoc/>
         public double X
@@ -60,35 +60,36 @@ namespace Dock.Model
         }
 
         /// <inheritdoc/>
-        public IViewsLayout Layout
+        public IDockLayout Layout
         {
             get => _layout;
             set => Update(ref _layout, value);
         }
 
         /// <inheritdoc/>
-        public IDockWindow Window
+        public IDockHost Host
         {
-            get => _window;
-            set => Update(ref _window, value);
+            get => _host;
+            set => Update(ref _host, value);
         }
 
         /// <inheritdoc/>
         public void Present()
         {
-            _window?.SetPosition(_x, _y);
-            _window?.SetSize(_width, _height);
-            _window?.SetTitle(_title);
-            _window?.SetContext(_context);
-            _window?.Present();
+            _host?.SetPosition(_x, _y);
+            _host?.SetSize(_width, _height);
+            _host?.SetTitle(_title);
+            _host?.SetContext(_context);
+            _host?.SetLayout(_layout);
+            _host?.Present();
         }
 
         /// <inheritdoc/>
         public void Destroy()
         {
-            _window?.GetPosition(ref _x, ref _y);
-            _window?.GetSize(ref _width, ref _height);
-            _window?.Destroy();
+            _host?.GetPosition(ref _x, ref _y);
+            _host?.GetSize(ref _width, ref _height);
+            _host?.Destroy();
         }
 
         /// <summary>
@@ -134,9 +135,9 @@ namespace Dock.Model
         public virtual bool ShouldSerializeLayout() => _layout != null;
 
         /// <summary>
-        /// Check whether the <see cref="Window"/> property has changed from its default value.
+        /// Check whether the <see cref="Host"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeWindow() => false;
+        public virtual bool ShouldSerializeHost() => false;
     }
 }

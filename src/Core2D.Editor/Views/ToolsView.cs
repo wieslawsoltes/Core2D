@@ -8,7 +8,7 @@ namespace Core2D.Editor.Views
     /// <summary>
     /// Tools view.
     /// </summary>
-    public class ToolsView : ViewBase
+    public class ToolsView : DockView
     {
         private readonly IServiceProvider _serviceProvider;
         private Lazy<ProjectEditor> _context;

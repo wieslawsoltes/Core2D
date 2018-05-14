@@ -8,7 +8,7 @@ namespace Core2D.Editor.Views
     /// <summary>
     /// Shape view.
     /// </summary>
-    public class ShapeView : ViewBase
+    public class ShapeView : DockView
     {
         private readonly IServiceProvider _serviceProvider;
         private Lazy<ProjectEditor> _context;

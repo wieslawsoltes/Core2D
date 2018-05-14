@@ -1,6 +1,6 @@
 ﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
 <!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
-<UserControl x:Class="Core2D.Avalonia.Dock.PanelControl"
+<UserControl x:Class="Core2D.Avalonia.Dock.DockControl"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
@@ -43,7 +43,7 @@
                     </Style>
                 </TabStrip.Styles>
                 <TabStrip.DataTemplates>
-                    <DataTemplate DataType="Dock:IView">
+                    <DataTemplate DataType="Dock:IDockView">
                         <StackPanel Orientation="Horizontal" Gap="2">
                             <i:Interaction.Behaviors>
                                 <id:DragBehavior/>

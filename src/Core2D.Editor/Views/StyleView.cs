@@ -8,7 +8,7 @@ namespace Core2D.Editor.Views
     /// <summary>
     /// Style view.
     /// </summary>
-    public class StyleView : ViewBase
+    public class StyleView : DockView
     {
         private readonly IServiceProvider _serviceProvider;
         private Lazy<ProjectEditor> _context;

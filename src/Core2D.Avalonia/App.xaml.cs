@@ -22,6 +22,147 @@ using Dock.Model;
 namespace Core2D.Avalonia
 {
     /// <summary>
+    /// Layout factory.
+    /// </summary>
+    public class LayoutFactory
+    {
+        private readonly IServiceProvider _serviceProvider;
+
+        public LayoutFactory(IServiceProvider serviceProvider)
+        {
+            _serviceProvider = serviceProvider;
+        }
+
+        public void UpdateWindows(IList<IDockWindow> windows, IList<IDockView> views, object context)
+        {
+            foreach (var window in windows)
+            {
+                var host = _serviceProvider.GetService<IDockHost>();
+
+                window.Host = host;
+                window.Context = context;
+
+                UpdateLayout(window.Layout, views, context);
+            }
+        }
+
+        public void UpdateViews(IList<IDockView> source, IList<IDockView> views, object context)
+        {
+            for (int i = 0; i < source.Count; i++)
+            {
+                var original = source[i];
+                source[i] = views.FirstOrDefault(v => v.Title == original.Title);
+                source[i].Windows = original.Windows;
+
+                if (original.Windows != null)
+                {
+                    UpdateWindows(original.Windows, views, context);
+                }
+            }
+        }
+
+        public void UpdateContainer(IDockContainer container, IList<IDockView> views, object context)
+        {
+            UpdateViews(container.Views, views, context);
+
+            container.CurrentView = views.FirstOrDefault(v => v.Title == container.CurrentView?.Title);
+        }
+
+        public void UpdateLayout(IDockLayout layout, IList<IDockView> views, object context)
+        {
+            UpdateViews(layout.Views, views, context);
+
+            foreach (var panel in layout.Containers)
+            {
+                UpdateContainer(panel, views, context);
+            }
+
+            layout.CurrentView = views.FirstOrDefault(v => v.Title == layout.CurrentView.Title);
+        }
+
+        public IDockLayout CreateLayout(IList<IDockView> views)
+        {
+            return new DockLayout
+            {
+                Views = new ObservableCollection<IDockView>(views),
+                Containers = new ObservableCollection<IDockContainer>
+                {
+                    new DockContainer
+                    {
+                        Row = 0,
+                        Column = 0,
+                        Views = new ObservableCollection<IDockView>
+                        {
+                            views.FirstOrDefault(v => v.Title == "Project"),
+                            views.FirstOrDefault(v => v.Title == "Options"),
+                            views.FirstOrDefault(v => v.Title == "Images")
+                        },
+                        CurrentView = views.FirstOrDefault(v => v.Title == "Project")
+                    },
+                    new DockContainer
+                    {
+                        Row = 2,
+                        Column = 0,
+                        Views = new ObservableCollection<IDockView>
+                        {
+                            views.FirstOrDefault(v => v.Title == "Groups"),
+                            views.FirstOrDefault(v => v.Title == "Databases")
+                        },
+                        CurrentView = views.FirstOrDefault(v => v.Title == "Groups")
+                    },
+                    new DockContainer
+                    {
+                        Row = 0,
+                        Column = 0,
+                        Views = new ObservableCollection<IDockView>
+                        {
+                            views.FirstOrDefault(v => v.Title == "Styles"),
+                            views.FirstOrDefault(v => v.Title == "Templates"),
+                            views.FirstOrDefault(v => v.Title == "Container"),
+                            views.FirstOrDefault(v => v.Title == "Zoom")
+                        },
+                        CurrentView = views.FirstOrDefault(v => v.Title == "Styles")
+                    },
+                    new DockContainer
+                    {
+                        Row = 2,
+                        Column = 0,
+                        Views = new ObservableCollection<IDockView>
+                        {
+                            views.FirstOrDefault(v => v.Title == "Tools"),
+                            views.FirstOrDefault(v => v.Title == "Shape"),
+                            views.FirstOrDefault(v => v.Title == "Data"),
+                            views.FirstOrDefault(v => v.Title == "Style"),
+                            views.FirstOrDefault(v => v.Title == "Template")
+                        },
+                        CurrentView = views.FirstOrDefault(v => v.Title == "Tools")
+                    },
+                },
+                CurrentView = views.FirstOrDefault(v => v.Title == "Dashboard")
+            };
+        }
+
+        public void CreateOrUpdateLayout()
+        {
+            var editor = _serviceProvider.GetService<ProjectEditor>();
+            var views = editor.Views;
+
+            if (editor.Layout != null)
+            {
+                var layout = editor.Layout;
+
+                UpdateLayout(layout, views, editor);
+
+                layout.CurrentView = views.FirstOrDefault(v => v.Title == "Dashboard");
+            }
+            else
+            {
+                editor.Layout = CreateLayout(views);
+            }
+        }
+    }
+
+    /// <summary>
     /// Encapsulates an Avalonia application.
     /// </summary>
     public partial class App : Application
@@ -99,142 +240,6 @@ namespace Core2D.Avalonia
             };
         }
 
-        private void UpdateWindows(IList<IViewsWindow> windows, IList<IView> views, ProjectEditor editor)
-        {
-            foreach (var window in windows)
-            {
-                var dock = new DockWindow()
-                {
-                    DataContext = editor
-                };
-
-                window.Window = dock;
-
-                window.Context = editor;
-
-                var layout = window.Layout;
-
-                UpdateLayout(layout, views, editor);
-
-                var control = dock.FindControl<ViewsControl>("control");
-                if (control != null)
-                {
-                    control.DataContext = layout.Panels[0];
-                }
-            }
-        }
-
-        private void UpdateViews(IList<IView> source, IList<IView> views, ProjectEditor editor)
-        {
-            for (int i = 0; i < source.Count; i++)
-            {
-                var original = source[i];
-                source[i] = views.FirstOrDefault(v => v.Title == original.Title);
-                source[i].Windows = original.Windows;
-
-                if (original.Windows != null)
-                {
-                    UpdateWindows(original.Windows, views, editor);
-                }
-            }
-        }
-
-        private void UpdatePanel(IViewsPanel panel, IList<IView> views, ProjectEditor editor)
-        {
-            UpdateViews(panel.Views, views, editor);
-
-            panel.CurrentView = views.FirstOrDefault(v => v.Title == panel.CurrentView.Title);
-        }
-
-        private void UpdateLayout(IViewsLayout layout, IList<IView> views, ProjectEditor editor)
-        {
-            UpdateViews(layout.Views, views, editor);
-
-            foreach (var panel in layout.Panels)
-            {
-                UpdatePanel(panel, views, editor);
-            }
-
-            layout.CurrentView = views.FirstOrDefault(v => v.Title == layout.CurrentView.Title);
-        }
-
-        private void CreateOrUpdateLayout(ProjectEditor editor)
-        {
-            var views = editor.Views;
-
-            if (editor.Layout != null)
-            {
-                var layout = editor.Layout;
-
-                UpdateLayout(layout, views, editor);
-
-                layout.CurrentView = views.FirstOrDefault(v => v.Title == "Dashboard");
-            }
-            else
-            {
-                var layout = new ViewsLayout
-                {
-                    Views = new ObservableCollection<IView>(views),
-                    Panels = new ObservableCollection<IViewsPanel>
-                    {
-                        new ViewsPanel
-                        {
-                            Row = 0,
-                            Column = 0,
-                            Views = new ObservableCollection<IView>
-                            {
-                                views.FirstOrDefault(v => v.Title == "Project"),
-                                views.FirstOrDefault(v => v.Title == "Options"),
-                                views.FirstOrDefault(v => v.Title == "Images")
-                            },
-                            CurrentView = views.FirstOrDefault(v => v.Title == "Project")
-                        },
-                        new ViewsPanel
-                        {
-                            Row = 2,
-                            Column = 0,
-                            Views = new ObservableCollection<IView>
-                            {
-                                views.FirstOrDefault(v => v.Title == "Groups"),
-                                views.FirstOrDefault(v => v.Title == "Databases")
-                            },
-                            CurrentView = views.FirstOrDefault(v => v.Title == "Groups")
-                        },
-                        new ViewsPanel
-                        {
-                            Row = 0,
-                            Column = 0,
-                            Views = new ObservableCollection<IView>
-                            {
-                                views.FirstOrDefault(v => v.Title == "Styles"),
-                                views.FirstOrDefault(v => v.Title == "Templates"),
-                                views.FirstOrDefault(v => v.Title == "Container"),
-                                views.FirstOrDefault(v => v.Title == "Zoom")
-                            },
-                            CurrentView = views.FirstOrDefault(v => v.Title == "Styles")
-                        },
-                        new ViewsPanel
-                        {
-                            Row = 2,
-                            Column = 0,
-                            Views = new ObservableCollection<IView>
-                            {
-                                views.FirstOrDefault(v => v.Title == "Tools"),
-                                views.FirstOrDefault(v => v.Title == "Shape"),
-                                views.FirstOrDefault(v => v.Title == "Data"),
-                                views.FirstOrDefault(v => v.Title == "Style"),
-                                views.FirstOrDefault(v => v.Title == "Template")
-                            },
-                            CurrentView = views.FirstOrDefault(v => v.Title == "Tools")
-                        },
-                    },
-                    CurrentView = views.FirstOrDefault(v => v.Title == "Dashboard")
-                };
-
-                editor.Layout = layout;
-            }
-        }
-
         /// <summary>
         /// Initialize application context and displays main window.
         /// </summary>
@@ -259,7 +264,8 @@ namespace Core2D.Avalonia
                     editor.OnLoadLayout(layoutPath);
                 }
 
-                CreateOrUpdateLayout(editor);
+                var layoutFactory = new LayoutFactory(serviceProvider);
+                layoutFactory.CreateOrUpdateLayout();
 
                 var recentPath = System.IO.Path.Combine(fileIO.GetBaseDirectory(), "Core2D.recent");
                 if (fileIO.Exists(recentPath))
@@ -310,7 +316,8 @@ namespace Core2D.Avalonia
 
             var editor = serviceProvider.GetService<ProjectEditor>();
 
-            CreateOrUpdateLayout(editor);
+            var layoutFactory = new LayoutFactory(serviceProvider);
+            layoutFactory.CreateOrUpdateLayout();
 
             editor.CurrentTool = editor.Tools.FirstOrDefault(t => t.Title == "Selection");
             editor.CurrentPathTool = editor.PathTools.FirstOrDefault(t => t.Title == "Line");

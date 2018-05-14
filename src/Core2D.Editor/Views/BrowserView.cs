@@ -8,7 +8,7 @@ namespace Core2D.Editor.Views
     /// <summary>
     /// Browser view.
     /// </summary>
-    public class BrowserView : ViewBase
+    public class BrowserView : DockView
     {
         private readonly IServiceProvider _serviceProvider;
         private Lazy<ProjectEditor> _context;

@@ -8,7 +8,7 @@ namespace Core2D.Editor.Views
     /// <summary>
     /// Databases view.
     /// </summary>
-    public class DatabasesView : ViewBase
+    public class DatabasesView : DockView
     {
         private readonly IServiceProvider _serviceProvider;
         private Lazy<ProjectEditor> _context;

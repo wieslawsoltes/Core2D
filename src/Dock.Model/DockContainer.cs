@@ -5,14 +5,14 @@ using System.Collections.Generic;
 namespace Dock.Model
 {
     /// <summary>
-    /// Views panel.
+    /// Dock container.
     /// </summary>
-    public class ViewsPanel : ObservableObject, IGridPanel, IViewsPanel
+    public class DockContainer : ObservableObject, IDockContainer
     {
         private int _row;
         private int _column;
-        private IList<IView> _views;
-        private IView _currentView;
+        private IList<IDockView> _views;
+        private IDockView _currentView;
 
         /// <inheritdoc/>
         public int Row
@@ -29,14 +29,14 @@ namespace Dock.Model
         }
 
         /// <inheritdoc/>
-        public IList<IView> Views
+        public IList<IDockView> Views
         {
             get => _views;
             set => Update(ref _views, value);
         }
 
         /// <inheritdoc/>
-        public IView CurrentView
+        public IDockView CurrentView
         {
             get => _currentView;
             set => Update(ref _currentView, value);
