@@ -8,7 +8,7 @@
         xmlns:views="clr-namespace:Core2D.Avalonia.Views;assembly=Core2D.Avalonia"
         Width="1000" Height="600"
         UseLayoutRounding="True"
-        WindowState="Normal"
+        WindowState="Normal" WindowStartupLocation="CenterScreen"
         Design.DataContext="{x:Static Designer:DesignerContext.Editor}"
         Design.Width="1000" Design.Height="600"
         Title="Object Browser">

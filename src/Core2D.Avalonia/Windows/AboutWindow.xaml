@@ -6,7 +6,7 @@
         xmlns:views="clr-namespace:Core2D.Avalonia.Views;assembly=Core2D.Avalonia"
         Width="700" Height="340"
         UseLayoutRounding="True"
-        WindowState="Normal"
+        WindowState="Normal" WindowStartupLocation="CenterScreen"
         Title="About Core2D">
     <views:AboutControl VerticalAlignment="Center" HorizontalAlignment="Center"/>
 </Window>
