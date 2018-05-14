@@ -38,7 +38,8 @@ namespace Core2D.Avalonia.Dock
         /// <inheritdoc/>
         public void Destroy()
         {
-            this.Close();
+            //this.Close();
+            this.Hide();
         }
 
         /// <inheritdoc/>
