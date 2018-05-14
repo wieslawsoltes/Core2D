@@ -3,14 +3,14 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
-using Dock.Model;
+using Dock.Avalonia;
 
 namespace Core2D.Avalonia.Dock
 {
     /// <summary>
     /// Interaction logic for <see cref="HostWindow"/> xaml.
     /// </summary>
-    public class HostWindow : Window, IDockHost
+    public class HostWindow : HostWindowBase
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="HostWindow"/> class.
@@ -27,68 +27,6 @@ namespace Core2D.Avalonia.Dock
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
-        }
-
-        /// <inheritdoc/>
-        public void Present()
-        {
-            this.Show();
-        }
-
-        /// <inheritdoc/>
-        public void Destroy()
-        {
-            //this.Close();
-            this.Hide();
-        }
-
-        /// <inheritdoc/>
-        public void SetPosition(double x, double y)
-        {
-            Position = new Point(x, y);
-        }
-
-        /// <inheritdoc/>
-        public void GetPosition(ref double x, ref double y)
-        {
-            x = this.Position.X;
-            y = this.Position.Y;
-        }
-
-        /// <inheritdoc/>
-        public void SetSize(double width, double height)
-        {
-            this.Width = width;
-            this.Height = height;
-        }
-
-        /// <inheritdoc/>
-        public void GetSize(ref double width, ref double height)
-        {
-            width = this.Width;
-            height = this.Height;
-        }
-
-        /// <inheritdoc/>
-        public void SetTitle(string title)
-        {
-            this.Title = title;
-        }
-
-        /// <inheritdoc/>
-        public void SetContext(object context)
-        {
-            this.DataContext = context;
-        }
-
-        /// <inheritdoc/>
-        public void SetLayout(IDockLayout layout)
-        {
-            var dock = this.FindControl<DockControl>("dock");
-            if (dock != null)
-            {
-                dock.DataContext = layout.Containers[0];
-            }
         }
     }
 }

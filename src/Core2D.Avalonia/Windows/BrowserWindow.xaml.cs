@@ -3,13 +3,14 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using Dock.Avalonia;
 
 namespace Core2D.Avalonia.Windows
 {
     /// <summary>
     /// Interaction logic for <see cref="BrowserWindow"/> xaml.
     /// </summary>
-    public class BrowserWindow : Window
+    public class BrowserWindow : HostWindowBase
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="BrowserWindow"/> class.

@@ -19,6 +19,11 @@ namespace Dock.Model
         void Destroy();
 
         /// <summary>
+        /// Exits host.
+        /// </summary>
+        void Exit();
+
+        /// <summary>
         /// Sets host position.
         /// </summary>
         /// <param name="x">The X coordinate of host.</param>

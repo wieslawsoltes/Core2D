@@ -3,13 +3,14 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using Dock.Avalonia;
 
 namespace Core2D.Avalonia.Windows
 {
     /// <summary>
     /// Interaction logic for <see cref="MainWindow"/> xaml.
     /// </summary>
-    public class MainWindow : Window
+    public class MainWindow : HostWindowBase
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="MainWindow"/> class.
