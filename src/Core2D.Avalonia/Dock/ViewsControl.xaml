@@ -15,43 +15,45 @@
         <i:Interaction.Behaviors>
             <id:DropBehavior Context="{Binding $parent[Window].DataContext}" Handler="{x:Static handlers:DockDropHandler.Instance}"/>
         </i:Interaction.Behaviors>
-        <TabStrip Items="{Binding Views}" SelectedItem="{Binding CurrentView, Mode=TwoWay}" Focusable="false" DockPanel.Dock="Bottom" ClipToBounds="False" ZIndex="1">
-            <i:Interaction.Behaviors>
-                <id:DropBehavior Context="{Binding $parent[Window].DataContext}" Handler="{x:Static handlers:DockDropHandler.Instance}"/>
-            </i:Interaction.Behaviors>
-            <TabStrip.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel ClipToBounds="False"/>
-                </ItemsPanelTemplate>
-            </TabStrip.ItemsPanel>
-            <TabStrip.Styles>
-                <Style Selector="TabStripItem">
-                    <Setter Property="Margin" Value="0 0 0 0"/>
-                    <Setter Property="Padding" Value="4 1 4 1"/>
-                    <Setter Property="FontSize" Value="12"/>
-                    <Setter Property="FontWeight" Value="Normal"/>
-                    <Setter Property="Height" Value="24"/>
-                    <Setter Property="BorderThickness" Value="0"/>
-                </Style>
-                <Style Selector="TabStripItem:pointerover">
-                    <Setter Property="FontWeight" Value="Normal"/>
-                    <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush4}"/>
-                </Style>
-                <Style Selector="TabStripItem:selected">
-                    <Setter Property="FontWeight" Value="Normal"/>
-                </Style>
-            </TabStrip.Styles>
-            <TabStrip.DataTemplates>
-                <DataTemplate DataType="Dock:IView">
-                    <StackPanel Orientation="Horizontal" Gap="2">
-                        <i:Interaction.Behaviors>
-                            <id:DragBehavior/>
-                        </i:Interaction.Behaviors>
-                        <TextBlock Text="{Binding Title}" Classes="drag" Margin="2"/>
-                    </StackPanel>
-                </DataTemplate>
-            </TabStrip.DataTemplates>
-        </TabStrip>
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" DockPanel.Dock="Bottom">
+            <TabStrip Items="{Binding Views}" SelectedItem="{Binding CurrentView, Mode=TwoWay}" Focusable="false" ClipToBounds="False" ZIndex="1">
+                <i:Interaction.Behaviors>
+                    <id:DropBehavior Context="{Binding $parent[Window].DataContext}" Handler="{x:Static handlers:DockDropHandler.Instance}"/>
+                </i:Interaction.Behaviors>
+                <TabStrip.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel ClipToBounds="False"/>
+                    </ItemsPanelTemplate>
+                </TabStrip.ItemsPanel>
+                <TabStrip.Styles>
+                    <Style Selector="TabStripItem">
+                        <Setter Property="Margin" Value="0 0 0 0"/>
+                        <Setter Property="Padding" Value="4 1 4 1"/>
+                        <Setter Property="FontSize" Value="12"/>
+                        <Setter Property="FontWeight" Value="Normal"/>
+                        <Setter Property="Height" Value="24"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                    </Style>
+                    <Style Selector="TabStripItem:pointerover">
+                        <Setter Property="FontWeight" Value="Normal"/>
+                        <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush4}"/>
+                    </Style>
+                    <Style Selector="TabStripItem:selected">
+                        <Setter Property="FontWeight" Value="Normal"/>
+                    </Style>
+                </TabStrip.Styles>
+                <TabStrip.DataTemplates>
+                    <DataTemplate DataType="Dock:IView">
+                        <StackPanel Orientation="Horizontal" Gap="2">
+                            <i:Interaction.Behaviors>
+                                <id:DragBehavior/>
+                            </i:Interaction.Behaviors>
+                            <TextBlock Text="{Binding Title}" Classes="drag" Margin="2"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </TabStrip.DataTemplates>
+            </TabStrip>
+        </ScrollViewer>
         <Border Classes="panel" ZIndex="-1">
             <!--
             <Carousel Items="{Binding Views}" SelectedItem="{Binding CurrentView, Mode=TwoWay}" IsVirtualized="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
