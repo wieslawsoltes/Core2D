@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
 
@@ -19,7 +19,7 @@ namespace Core2D.Serializer.Newtonsoft
             if (type.GetTypeInfo().IsGenericType && type.GetGenericTypeDefinition() == typeof(IList<>))
             {
                 return base
-                    .ResolveContract(typeof(ImmutableArray<>)
+                    .ResolveContract(typeof(ObservableCollection<>)
                     .MakeGenericType(type.GenericTypeArguments[0]));
             }
             return base.ResolveContract(type);
