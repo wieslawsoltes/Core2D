@@ -11,11 +11,11 @@
         Width="300" Height="500"
         UseLayoutRounding="True"
         WindowState="Normal"
-        Title="Dock">
+        Title="{Binding #control.DataContext.CurrentView.Title, FallbackValue=Dock}">
     <i:Interaction.Behaviors>
         <id:DropBehavior Context="{Binding}" Handler="{x:Static handlers:DockDropHandler.Instance}"/>
     </i:Interaction.Behaviors>
     <Grid ColumnDefinitions="*" RowDefinitions="*">
-        <dock:ViewsControl x:Name="views" Grid.Column="{Binding Column}" Grid.Row="{Binding Row}"/>
+        <dock:ViewsControl x:Name="control" Grid.Column="{Binding Column}" Grid.Row="{Binding Row}"/>
     </Grid>
 </Window>

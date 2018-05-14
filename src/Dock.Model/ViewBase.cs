@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using System.Collections.Immutable;
+using System.Collections.Generic;
 
 namespace Dock.Model
 {
@@ -9,10 +9,10 @@ namespace Dock.Model
     /// </summary>
     public abstract class ViewBase : ObservableObject, IView
     {
-        private ImmutableArray<IViewsWindow> _windows;
+        private IList<IViewsWindow> _windows;
 
         /// <inheritdoc/>
-        public ImmutableArray<IViewsWindow> Windows
+        public IList<IViewsWindow> Windows
         {
             get => _windows;
             set => Update(ref _windows, value);
@@ -24,30 +24,40 @@ namespace Dock.Model
         /// <inheritdoc/>
         public abstract object Context { get; }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ViewBase"/> class.
-        /// </summary>
-        public ViewBase()
-        {
-            _windows = ImmutableArray<IViewsWindow>.Empty;
-        }
-
         /// <inheritdoc/>
         public virtual void ShowWindows()
         {
-            foreach (var window in _windows)
+            if (_windows != null)
             {
-                window.Present();
+                foreach (var window in _windows)
+                {
+                    window.Present();
+                }
             }
         }
 
         /// <inheritdoc/>
         public virtual void CloseWindows()
         {
-            foreach (var window in _windows)
+            if (_windows != null)
             {
-                window.Destroy();
+                foreach (var window in _windows)
+                {
+                    window.Destroy();
+                }
             }
+        }
+
+        /// <inheritdoc/>
+        public virtual void AddWindow(IViewsWindow window)
+        {
+            _windows?.Add(window);
+        }
+
+        /// <inheritdoc/>
+        public virtual void RemoveWindow(IViewsWindow window)
+        {
+            _windows?.Remove(window);
         }
 
         /// <summary>
@@ -66,6 +76,6 @@ namespace Dock.Model
         /// Check whether the <see cref="Windows"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeWindows() => _windows.IsEmpty == false;
+        public virtual bool ShouldSerializeWindows() => _windows != null;
     }
 }

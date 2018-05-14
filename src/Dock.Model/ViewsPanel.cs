@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using System.Collections.Immutable;
+using System.Collections.Generic;
 
 namespace Dock.Model
 {
@@ -11,7 +11,7 @@ namespace Dock.Model
     {
         private int _row;
         private int _column;
-        private ImmutableArray<IView> _views;
+        private IList<IView> _views;
         private IView _currentView;
 
         /// <inheritdoc/>
@@ -29,7 +29,7 @@ namespace Dock.Model
         }
 
         /// <inheritdoc/>
-        public ImmutableArray<IView> Views
+        public IList<IView> Views
         {
             get => _views;
             set => Update(ref _views, value);
@@ -40,14 +40,6 @@ namespace Dock.Model
         {
             get => _currentView;
             set => Update(ref _currentView, value);
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ViewsPanel"/> class.
-        /// </summary>
-        public ViewsPanel()
-        {
-            _views = ImmutableArray<IView>.Empty;
         }
 
         /// <summary>
@@ -66,7 +58,7 @@ namespace Dock.Model
         /// Check whether the <see cref="Views"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeViews() => _views.IsEmpty == false;
+        public virtual bool ShouldSerializeViews() => _views != null;
 
         /// <summary>
         /// Check whether the <see cref="CurrentView"/> property has changed from its default value.

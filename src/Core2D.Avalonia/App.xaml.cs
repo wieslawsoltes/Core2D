@@ -2,7 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
 using Autofac;
@@ -11,6 +11,7 @@ using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.Platform;
 using Core2D.Avalonia.Converters;
+using Core2D.Avalonia.Dock;
 using Core2D.Avalonia.Modules;
 using Core2D.Avalonia.Views;
 using Core2D.Editor;
@@ -98,17 +99,63 @@ namespace Core2D.Avalonia
             };
         }
 
-        private void UpdatePanel(IViewsPanel panel, IList<IView> views)
+        private void UpdateWindows(IList<IViewsWindow> windows, IList<IView> views, ProjectEditor editor)
         {
-            var list = new List<IView>();
-
-            foreach (var view in panel.Views)
+            foreach (var window in windows)
             {
-                list.Add(views.FirstOrDefault(v => v.Title == view.Title));
+                var dock = new DockWindow()
+                {
+                    DataContext = editor
+                };
+
+                window.Window = dock;
+
+                window.Context = editor;
+
+                var layout = window.Layout;
+
+                UpdateLayout(layout, views, editor);
+
+                var control = dock.FindControl<ViewsControl>("control");
+                if (control != null)
+                {
+                    control.DataContext = layout.Panels[0];
+                }
             }
-            panel.Views = list.ToImmutableArray();
+        }
+
+        private void UpdateViews(IList<IView> source, IList<IView> views, ProjectEditor editor)
+        {
+            for (int i = 0; i < source.Count; i++)
+            {
+                var original = source[i];
+                source[i] = views.FirstOrDefault(v => v.Title == original.Title);
+                source[i].Windows = original.Windows;
+
+                if (original.Windows != null)
+                {
+                    UpdateWindows(original.Windows, views, editor);
+                }
+            }
+        }
+
+        private void UpdatePanel(IViewsPanel panel, IList<IView> views, ProjectEditor editor)
+        {
+            UpdateViews(panel.Views, views, editor);
 
             panel.CurrentView = views.FirstOrDefault(v => v.Title == panel.CurrentView.Title);
+        }
+
+        private void UpdateLayout(IViewsLayout layout, IList<IView> views, ProjectEditor editor)
+        {
+            UpdateViews(layout.Views, views, editor);
+
+            foreach (var panel in layout.Panels)
+            {
+                UpdatePanel(panel, views, editor);
+            }
+
+            layout.CurrentView = views.FirstOrDefault(v => v.Title == layout.CurrentView.Title);
         }
 
         private void CreateOrUpdateLayout(ProjectEditor editor)
@@ -119,70 +166,68 @@ namespace Core2D.Avalonia
             {
                 var layout = editor.Layout;
 
-                foreach (var panel in layout.Panels)
-                {
-                    UpdatePanel(panel, views);
-                }
+                UpdateLayout(layout, views, editor);
 
-                layout.CurrentView = views.FirstOrDefault(v => v.Title == "Dashboard"); // v.Title == layout.CurrentView.Title
+                layout.CurrentView = views.FirstOrDefault(v => v.Title == "Dashboard");
             }
             else
             {
                 var layout = new ViewsLayout
                 {
-                    Panels = new[]
+                    Views = new ObservableCollection<IView>(views),
+                    Panels = new ObservableCollection<IViewsPanel>
                     {
                         new ViewsPanel
                         {
                             Row = 0,
                             Column = 0,
-                            Views = new[]
+                            Views = new ObservableCollection<IView>
                             {
                                 views.FirstOrDefault(v => v.Title == "Project"),
                                 views.FirstOrDefault(v => v.Title == "Options"),
                                 views.FirstOrDefault(v => v.Title == "Images")
-                            }.ToImmutableArray(),
+                            },
                             CurrentView = views.FirstOrDefault(v => v.Title == "Project")
                         },
                         new ViewsPanel
                         {
                             Row = 2,
                             Column = 0,
-                            Views = new[]
+                            Views = new ObservableCollection<IView>
                             {
                                 views.FirstOrDefault(v => v.Title == "Groups"),
                                 views.FirstOrDefault(v => v.Title == "Databases")
-                            }.ToImmutableArray(),
+                            },
                             CurrentView = views.FirstOrDefault(v => v.Title == "Groups")
                         },
                         new ViewsPanel
                         {
                             Row = 0,
                             Column = 0,
-                            Views = new[]
+                            Views = new ObservableCollection<IView>
                             {
                                 views.FirstOrDefault(v => v.Title == "Styles"),
                                 views.FirstOrDefault(v => v.Title == "Templates"),
                                 views.FirstOrDefault(v => v.Title == "Container"),
                                 views.FirstOrDefault(v => v.Title == "Zoom")
-                            }.ToImmutableArray(),
+                            },
                             CurrentView = views.FirstOrDefault(v => v.Title == "Styles")
                         },
                         new ViewsPanel
                         {
                             Row = 2,
                             Column = 0,
-                            Views = new[]
+                            Views = new ObservableCollection<IView>
                             {
                                 views.FirstOrDefault(v => v.Title == "Tools"),
                                 views.FirstOrDefault(v => v.Title == "Shape"),
                                 views.FirstOrDefault(v => v.Title == "Data"),
                                 views.FirstOrDefault(v => v.Title == "Style"),
                                 views.FirstOrDefault(v => v.Title == "Template")
-                            }.ToImmutableArray(),
+                            },
                             CurrentView = views.FirstOrDefault(v => v.Title == "Tools")
                         },
-                    }.ToImmutableArray<IViewsPanel>(),
+                    },
                     CurrentView = views.FirstOrDefault(v => v.Title == "Dashboard")
                 };
 
@@ -208,12 +253,6 @@ namespace Core2D.Avalonia
             {
                 var editor = serviceProvider.GetService<ProjectEditor>();
 
-                var recentPath = System.IO.Path.Combine(fileIO.GetBaseDirectory(), "Core2D.recent");
-                if (fileIO.Exists(recentPath))
-                {
-                    editor.OnLoadRecent(recentPath);
-                }
-
                 var layoutPath = System.IO.Path.Combine(fileIO.GetBaseDirectory(), "Core2D.layout");
                 if (fileIO.Exists(layoutPath))
                 {
@@ -221,6 +260,12 @@ namespace Core2D.Avalonia
                 }
 
                 CreateOrUpdateLayout(editor);
+
+                var recentPath = System.IO.Path.Combine(fileIO.GetBaseDirectory(), "Core2D.recent");
+                if (fileIO.Exists(recentPath))
+                {
+                    editor.OnLoadRecent(recentPath);
+                }
 
                 editor.CurrentTool = editor.Tools.FirstOrDefault(t => t.Title == "Selection");
                 editor.CurrentPathTool = editor.PathTools.FirstOrDefault(t => t.Title == "Line");
@@ -230,8 +275,10 @@ namespace Core2D.Avalonia
                 var window = serviceProvider.GetService<Windows.MainWindow>();
                 window.Closed += (sender, e) =>
                 {
-                    editor.OnSaveRecent(recentPath);
+                    editor.Layout.CurrentView.CloseWindows();
                     editor.OnSaveLayout(layoutPath);
+
+                    editor.OnSaveRecent(recentPath);
                 };
                 window.DataContext = editor;
                 window.Show();

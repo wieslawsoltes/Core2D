@@ -44,6 +44,11 @@ namespace Dock.Model
         IViewsLayout Layout { get; set; }
 
         /// <summary>
+        /// Gets or sets dock window.
+        /// </summary>
+        IDockWindow Window { get; set; }
+
+        /// <summary>
         /// Presents window.
         /// </summary>
         void Present();

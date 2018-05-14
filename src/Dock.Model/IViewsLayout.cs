@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using System.Collections.Immutable;
+using System.Collections.Generic;
 
 namespace Dock.Model
 {
@@ -10,9 +10,14 @@ namespace Dock.Model
     public interface IViewsLayout
     {
         /// <summary>
+        /// Gets or sets views.
+        /// </summary>
+        IList<IView> Views { get; set; }
+
+        /// <summary>
         /// Gets or sets panels.
         /// </summary>
-        ImmutableArray<IViewsPanel> Panels { get; set; }
+        IList<IViewsPanel> Panels { get; set; }
 
         /// <summary>
         /// Gets or sets current view.

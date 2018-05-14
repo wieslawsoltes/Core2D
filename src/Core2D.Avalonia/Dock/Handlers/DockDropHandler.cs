@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using System.Collections.Immutable;
+using System.Collections.ObjectModel;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Input;
@@ -75,7 +75,7 @@ namespace Core2D.Avalonia.Dock.Handlers
                     }
                     else if (e.DragEffects == DragDropEffects.Move)
                     {
-                        if (sourcePanel.Views.Length > 1)
+                        if (sourcePanel.Views.Count > 1)
                         {
                             if (bExecute)
                             {
@@ -114,7 +114,7 @@ namespace Core2D.Avalonia.Dock.Handlers
                 && sourcePanel != targetPanel)
             {
                 int sourceIndex = sourceStrip.ItemContainerGenerator.IndexFromContainer(source);
-                int targetIndex = targetPanel.Views.Length;
+                int targetIndex = targetPanel.Views.Count;
 
                 if (e.DragEffects == DragDropEffects.Copy)
                 {
@@ -174,31 +174,47 @@ namespace Core2D.Avalonia.Dock.Handlers
 
                         var layout = new ViewsLayout
                         {
-                            Panels = new[]
+                            Views = new ObservableCollection<IView>(),
+                            Panels = new ObservableCollection<IViewsPanel>
                             {
                                 new ViewsPanel
                                 {
                                     Row = 0,
                                     Column = 0,
-                                    Views = new[] { view }.ToImmutableArray(),
+                                    Views = new ObservableCollection<IView> { view },
                                     CurrentView = view
                                 }
-                            }.ToImmutableArray<IViewsPanel>(),
+                            },
                             CurrentView = view
                         };
 
-                        var window = new DockWindow()
+                        var dock = new DockWindow()
                         {
                             DataContext = editor
                         };
 
-                        var views = window.FindControl<ViewsControl>("views");
-                        if (views != null)
+                        var window = new ViewsWindow()
                         {
-                            views.DataContext = layout.Panels[0];
+                            Title = "Dock",
+                            Context = editor,
+                            Layout = layout,
+                            Window = dock
+                        };
+
+                        if (editor?.Layout.CurrentView.Windows == null)
+                        {
+                            editor.Layout.CurrentView.Windows = new ObservableCollection<IViewsWindow>();
                         }
 
-                        window.Show();
+                        editor?.Layout.CurrentView.AddWindow(window);
+
+                        var control = dock.FindControl<ViewsControl>("control");
+                        if (control != null)
+                        {
+                            control.DataContext = layout.Panels[0];
+                        }
+
+                        dock.Show();
                         return true;
                     }
                     return true;

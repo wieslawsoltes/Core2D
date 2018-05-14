@@ -8,7 +8,6 @@ namespace Dock.Model
     /// </summary>
     public class ViewsWindow : ObservableObject, IViewsWindow
     {
-        private IDockWindow _window;
         private double _x;
         private double _y;
         private double _width;
@@ -16,6 +15,7 @@ namespace Dock.Model
         private string _title;
         private object _context;
         private IViewsLayout _layout;
+        private IDockWindow _window;
 
         /// <inheritdoc/>
         public double X
@@ -66,13 +66,11 @@ namespace Dock.Model
             set => Update(ref _layout, value);
         }
 
-        /// <summary>
-        /// Initialize new instance of <see cref="ViewsWindow"/> class.
-        /// </summary>
-        /// <param name="window">The dock window.</param>
-        public ViewsWindow(IDockWindow window) : base()
+        /// <inheritdoc/>
+        public IDockWindow Window
         {
-            _window = window;
+            get => _window;
+            set => Update(ref _window, value);
         }
 
         /// <inheritdoc/>
@@ -134,5 +132,11 @@ namespace Dock.Model
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeLayout() => _layout != null;
+
+        /// <summary>
+        /// Check whether the <see cref="Window"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public virtual bool ShouldSerializeWindow() => false;
     }
 }
