@@ -70,5 +70,11 @@ namespace Dock.Model
         /// </summary>
         /// <param name="view">The view instance.</param>
         void OnChangeCurrentView(IDockView view);
+
+        /// <summary>
+        /// Change current view.
+        /// </summary>
+        /// <param name="title">The view title.</param>
+        void OnChangeCurrentView(string title);
     }
 }

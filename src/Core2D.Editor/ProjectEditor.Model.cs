@@ -34,7 +34,6 @@ namespace Core2D.Editor
         private readonly Lazy<ImmutableArray<ToolBase>> _tools;
         private readonly Lazy<ImmutableArray<PathToolBase>> _pathTools;
         private readonly Lazy<HitTest> _hitTest;
-        private readonly Lazy<ImmutableArray<IDockView>> _views;
         private readonly Lazy<ILog> _log;
         private readonly Lazy<ShapeRenderer[]> _renderers;
         private readonly Lazy<IFileSystem> _fileIO;
@@ -166,11 +165,6 @@ namespace Core2D.Editor
         public HitTest HitTest => _hitTest.Value;
 
         /// <summary>
-        /// Gets or sets registered views.
-        /// </summary>
-        public ImmutableArray<IDockView> Views => _views.Value;
-
-        /// <summary>
         /// Gets current log.
         /// </summary>
         public ILog Log => _log.Value;
@@ -257,7 +251,6 @@ namespace Core2D.Editor
             _tools = _serviceProvider.GetServiceLazily<ToolBase[], ImmutableArray<ToolBase>>((tools) => tools.Where(tool => !tool.GetType().Name.StartsWith("PathTool")).ToImmutableArray());
             _pathTools = _serviceProvider.GetServiceLazily<PathToolBase[], ImmutableArray<PathToolBase>>((tools) => tools.ToImmutableArray());
             _hitTest = _serviceProvider.GetServiceLazily<HitTest>(hitTests => hitTests.Register(_serviceProvider.GetService<HitTestBase[]>()));
-            _views = _serviceProvider.GetServiceLazily<IDockView[], ImmutableArray<IDockView>>((views) => views.ToImmutableArray());
             _log = _serviceProvider.GetServiceLazily<ILog>();
             _renderers = new Lazy<ShapeRenderer[]>(() => new[] { _serviceProvider.GetService<ShapeRenderer>(), _serviceProvider.GetService<ShapeRenderer>() });
             _fileIO = _serviceProvider.GetServiceLazily<IFileSystem>();

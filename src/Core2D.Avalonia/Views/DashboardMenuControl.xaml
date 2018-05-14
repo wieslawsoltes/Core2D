@@ -42,7 +42,7 @@
         <MenuItem Header="_View">
             <MenuItem Header="_Script Editor..." Command="{Binding Platform.OnScriptEditor}"/>
             <Separator/>
-            <MenuItem Header="_Views" Items="{Binding Views}">
+            <MenuItem Header="_Views" Items="{Binding Layout.Views}">
                 <MenuItem.Styles>
                     <Style Selector="MenuItem">
                         <Setter Property="Header" Value="{Binding Title}"/>

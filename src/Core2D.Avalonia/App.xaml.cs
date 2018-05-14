@@ -145,7 +145,7 @@ namespace Core2D.Avalonia
         public void CreateOrUpdateLayout()
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
-            var views = editor.Views;
+            var views = _serviceProvider.GetService<IDockView[], IList<IDockView>>((c) => new ObservableCollection<IDockView>(c));
 
             if (editor.Layout != null)
             {

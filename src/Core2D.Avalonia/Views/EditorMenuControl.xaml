@@ -94,7 +94,7 @@
             <Separator/>
             <MenuItem Header="_AutoFit Zoom" Command="{Binding Platform.OnZoomAutoFit}"/>
             <Separator/>
-            <MenuItem Header="_Views" Items="{Binding Views}">
+            <MenuItem Header="_Views" Items="{Binding Layout.Views}">
                 <MenuItem.Styles>
                     <Style Selector="MenuItem">
                         <Setter Property="Header" Value="{Binding Title}"/>

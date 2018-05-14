@@ -193,7 +193,7 @@ namespace Core2D.Editor
         {
             OnUnload();
             OnLoad(ProjectFactory?.GetProject() ?? ProjectContainer.Create(), string.Empty);
-            Layout?.OnChangeCurrentView(Views.FirstOrDefault(view => view.Title == "Editor"));
+            Layout?.OnChangeCurrentView("Editor");
             Canvas?.Invalidate?.Invoke();
         }
 
@@ -237,7 +237,7 @@ namespace Core2D.Editor
                     OnUnload();
                     OnLoad(project, path);
                     OnAddRecent(path, project.Name);
-                    Layout?.OnChangeCurrentView(Views.FirstOrDefault(view => view.Title == "Editor"));
+                    Layout?.OnChangeCurrentView("Editor");
                 }
             }
             catch (Exception ex)
@@ -251,7 +251,7 @@ namespace Core2D.Editor
         /// </summary>
         public void OnCloseProject()
         {
-            Layout?.OnChangeCurrentView(Views.FirstOrDefault(view => view.Title == "Dashboard"));
+            Layout?.OnChangeCurrentView("Dashboard");
             Project?.History?.Reset();
             OnUnload();
         }
