@@ -51,17 +51,19 @@ namespace Dock.Model
             if (sourceIndex < targetIndex)
             {
                 var item = panel.Views[sourceIndex];
-                panel.Views.Insert(targetIndex + 1, item);
                 panel.Views.RemoveAt(sourceIndex);
+                panel.Views.Insert(targetIndex, item);
+                panel.CurrentView = item;
             }
             else
             {
-                int removeIndex = sourceIndex + 1;
-                if (panel.Views.Count + 1 > removeIndex)
+                int removeIndex = sourceIndex;
+                if (panel.Views.Count > removeIndex)
                 {
                     var item = panel.Views[sourceIndex];
-                    panel.Views.Insert(targetIndex, item);
                     panel.Views.RemoveAt(removeIndex);
+                    panel.Views.Insert(targetIndex, item);
+                    panel.CurrentView = item;
                 }
             }
         }
@@ -73,6 +75,7 @@ namespace Dock.Model
             var item2 = panel.Views[targetIndex];
             panel.Views[targetIndex] = item1;
             panel.Views[sourceIndex] = item2;
+            panel.CurrentView = item2;
         }
 
         /// <inheritdoc/>
