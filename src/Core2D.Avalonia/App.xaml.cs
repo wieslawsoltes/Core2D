@@ -61,36 +61,32 @@ namespace Core2D.Avalonia
             }
         }
 
-        public void UpdateDock(IDockBase dock, IList<IDockView> views, object context)
-        {
-            UpdateViews(dock.Views, views, context);
-
-            dock.CurrentView = views.FirstOrDefault(v => v.Title == dock.CurrentView?.Title);
-        }
-
-        public void UpdateLayout(IDockBase layout, IList<IDockView> views, object context)
+        public void UpdateLayout(IDockLayout layout, IList<IDockView> views, object context)
         {
             UpdateViews(layout.Views, views, context);
 
-            foreach (var child in layout.Children)
-            {
-                UpdateDock(child, views, context);
-            }
+            layout.CurrentView = views.FirstOrDefault(v => v.Title == layout.CurrentView?.Title);
 
-            layout.CurrentView = views.FirstOrDefault(v => v.Title == layout.CurrentView.Title);
+            if (layout.Children != null)
+            {
+                foreach (var child in layout.Children)
+                {
+                    UpdateLayout(child, views, context);
+                }
+            }
         }
 
-        public IDockBase CreateLayout(IList<IDockView> views)
+        public IDockLayout CreateDefaultLayout(IList<IDockView> views)
         {
-            return new DockBase
+            return new DockLayout
             {
                 Row = 0,
                 Column = 0,
                 Views = new ObservableCollection<IDockView>(views),
                 CurrentView = views.FirstOrDefault(v => v.Title == "Dashboard"),
-                Children = new ObservableCollection<IDockBase>
+                Children = new ObservableCollection<IDockLayout>
                 {
-                    new DockBase
+                    new DockLayout
                     {
                         Row = 0,
                         Column = 0,
@@ -102,7 +98,7 @@ namespace Core2D.Avalonia
                         },
                         CurrentView = views.FirstOrDefault(v => v.Title == "Project")
                     },
-                    new DockBase
+                    new DockLayout
                     {
                         Row = 2,
                         Column = 0,
@@ -113,7 +109,7 @@ namespace Core2D.Avalonia
                         },
                         CurrentView = views.FirstOrDefault(v => v.Title == "Groups")
                     },
-                    new DockBase
+                    new DockLayout
                     {
                         Row = 0,
                         Column = 0,
@@ -126,7 +122,7 @@ namespace Core2D.Avalonia
                         },
                         CurrentView = views.FirstOrDefault(v => v.Title == "Styles")
                     },
-                    new DockBase
+                    new DockLayout
                     {
                         Row = 2,
                         Column = 0,
@@ -159,7 +155,7 @@ namespace Core2D.Avalonia
             }
             else
             {
-                editor.Layout = CreateLayout(views);
+                editor.Layout = CreateDefaultLayout(views);
             }
         }
     }

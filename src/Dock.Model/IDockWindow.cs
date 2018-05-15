@@ -41,7 +41,7 @@ namespace Dock.Model
         /// <summary>
         /// Gets or sets views layout.
         /// </summary>
-        IDockBase Layout { get; set; }
+        IDockLayout Layout { get; set; }
 
         /// <summary>
         /// Gets or sets dock window.

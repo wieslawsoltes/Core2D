@@ -14,21 +14,21 @@ namespace Core2D.Avalonia.Dock.Handlers
     {
         public static IDropHandler Instance = new DockDropHandler();
 
-        private void CreateDockWindow(IDockBase layout, object context, IDockBase container, int viewIndex, double x, double y)
+        private void CreateDockWindow(IDockLayout layout, object context, IDockLayout container, int viewIndex, double x, double y)
         {
             var view = container.Views[viewIndex];
 
             layout.RemoveView(container, viewIndex);
 
-            var dockLayout = new DockBase
+            var dockLayout = new DockLayout
             {
                 Row = 0,
                 Column = 0,
                 Views = new ObservableCollection<IDockView>(),
                 CurrentView = view,
-                Children = new ObservableCollection<IDockBase>
+                Children = new ObservableCollection<IDockLayout>
                 {
-                    new DockBase
+                    new DockLayout
                     {
                         Row = 0,
                         Column = 0,
@@ -47,7 +47,7 @@ namespace Core2D.Avalonia.Dock.Handlers
                 Title = "Dock",
                 Context = context,
                 Layout = dockLayout,
-                Host = new HostWindow()
+                Host = new HostWindow() // TODO: Use IServiceProvider.
             };
 
             if (layout.CurrentView.Windows == null)
@@ -56,10 +56,10 @@ namespace Core2D.Avalonia.Dock.Handlers
             }
             layout.CurrentView.AddWindow(dockWindow);
 
-            dockWindow.Present();
+            return dockWindow;
         }
 
-        private bool ValidateTabStrip(IDockBase layout, DragEventArgs e, bool bExecute, TabStrip strip)
+        private bool ValidateTabStrip(IDockLayout layout, DragEventArgs e, bool bExecute, TabStrip strip)
         {
             var sourceItem = e.Data.Get(DragDataFormats.Parent);
             var targetItem = (e.Source as IControl)?.Parent?.Parent;
@@ -71,7 +71,7 @@ namespace Core2D.Avalonia.Dock.Handlers
                     int sourceIndex = strip.ItemContainerGenerator.IndexFromContainer(source);
                     int targetIndex = strip.ItemContainerGenerator.IndexFromContainer(target);
 
-                    if (strip.DataContext is IDockBase container)
+                    if (strip.DataContext is IDockLayout container)
                     {
                         if (e.DragEffects == DragDropEffects.Copy)
                         {
@@ -104,8 +104,8 @@ namespace Core2D.Avalonia.Dock.Handlers
                 }
                 else if (source.Parent is TabStrip sourceStrip
                     && target.Parent is TabStrip targetStrip
-                    && sourceStrip.DataContext is IDockBase sourcePanel
-                    && targetStrip.DataContext is IDockBase targetPanel)
+                    && sourceStrip.DataContext is IDockLayout sourcePanel
+                    && targetStrip.DataContext is IDockLayout targetPanel)
                 {
                     int sourceIndex = sourceStrip.ItemContainerGenerator.IndexFromContainer(source);
                     int targetIndex = targetStrip.ItemContainerGenerator.IndexFromContainer(target);
@@ -148,14 +148,14 @@ namespace Core2D.Avalonia.Dock.Handlers
             return false;
         }
 
-        private bool ValidateDockPanel(IDockBase layout, DragEventArgs e, bool bExecute, DockPanel panel)
+        private bool ValidateDockPanel(IDockLayout layout, DragEventArgs e, bool bExecute, DockPanel panel)
         {
             var sourceItem = e.Data.Get(DragDataFormats.Parent);
 
             if (sourceItem is TabStripItem source
                 && source.Parent is TabStrip sourceStrip
-                && sourceStrip.DataContext is IDockBase sourceContainer
-                && panel.DataContext is IDockBase targetContainer
+                && sourceStrip.DataContext is IDockLayout sourceContainer
+                && panel.DataContext is IDockLayout targetContainer
                 && sourceContainer != targetContainer)
             {
                 int sourceIndex = sourceStrip.ItemContainerGenerator.IndexFromContainer(source);
@@ -192,7 +192,7 @@ namespace Core2D.Avalonia.Dock.Handlers
             return false;
         }
 
-        private bool Validate(IDockBase layout, object context, object sender, DragEventArgs e, bool bExecute)
+        private bool Validate(IDockLayout layout, object context, object sender, DragEventArgs e, bool bExecute)
         {
             var point = DropHelper.GetPosition(sender, e);
 
@@ -207,14 +207,15 @@ namespace Core2D.Avalonia.Dock.Handlers
             if (e.Data.Get(DragDataFormats.Parent) is TabStripItem item)
             {
                 var strip = item.Parent as TabStrip;
-                if (strip.DataContext is IDockBase container)
+                if (strip.DataContext is IDockLayout container)
                 {
                     if (bExecute)
                     {
                         int itemIndex = strip.ItemContainerGenerator.IndexFromContainer(item);
-                        Point position = DropHelper.GetPositionScreen(sender, e);
+                        var position = DropHelper.GetPositionScreen(sender, e);
 
-                        CreateDockWindow(layout, context, container, itemIndex, position.X, position.Y);
+                        var window = CreateDockWindow(layout, context, container, itemIndex, position.X, position.Y);
+                        window.Present();
 
                         return true;
                     }

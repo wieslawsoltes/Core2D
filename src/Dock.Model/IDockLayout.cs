@@ -7,7 +7,7 @@ namespace Dock.Model
     /// <summary>
     /// Dock base contract.
     /// </summary>
-    public interface IDockBase
+    public interface IDockLayout
     {
         /// <summary>
         /// Gets or sets row.
@@ -32,48 +32,48 @@ namespace Dock.Model
         /// <summary>
         /// Gets or sets children.
         /// </summary>
-        IList<IDockBase> Children { get; set; }
+        IList<IDockLayout> Children { get; set; }
 
         /// <summary>
-        /// Remove view from the dock.
+        /// Remove view from the layout.
         /// </summary>
-        /// <param name="dock">The views dock.</param>
+        /// <param name="layout">The views layout.</param>
         /// <param name="index">The source view index.</param>
-        void RemoveView(IDockBase dock, int index);
+        void RemoveView(IDockLayout layout, int index);
 
         /// <summary>
-        /// Move views in the dock.
+        /// Move views in the layout.
         /// </summary>
-        /// <param name="dock">The views dock.</param>
+        /// <param name="layout">The views layout.</param>
         /// <param name="sourceIndex">The source view index.</param>
         /// <param name="targetIndex">The target view index.</param>
-        void MoveView(IDockBase dock, int sourceIndex, int targetIndex);
+        void MoveView(IDockLayout layout, int sourceIndex, int targetIndex);
 
         /// <summary>
-        /// Swap views in the dock.
+        /// Swap views in the layout.
         /// </summary>
-        /// <param name="dock">The views dock.</param>
+        /// <param name="layout">The views layout.</param>
         /// <param name="sourceIndex">The source view index.</param>
         /// <param name="targetIndex">The target view index.</param>
-        void SwapView(IDockBase dock, int sourceIndex, int targetIndex);
+        void SwapView(IDockLayout layout, int sourceIndex, int targetIndex);
 
         /// <summary>
-        /// Move views into another dock.
+        /// Move views into another layout.
         /// </summary>
-        /// <param name="sourceDock">The source views dock.</param>
-        /// <param name="targetDock">The target views dock.</param>
+        /// <param name="sourceLayout">The source views layout.</param>
+        /// <param name="targetLayout">The target views layout.</param>
         /// <param name="sourceIndex">The source view index.</param>
         /// <param name="targetIndex">The target view index.</param>
-        void MoveView(IDockBase sourceDock, IDockBase targetDock, int sourceIndex, int targetIndex);
+        void MoveView(IDockLayout sourceLayout, IDockLayout targetLayout, int sourceIndex, int targetIndex);
 
         /// <summary>
-        /// Swap views into another dock.
+        /// Swap views into another layout.
         /// </summary>
-        /// <param name="sourceDock">The source views dock.</param>
-        /// <param name="targetDock">The target views dock.</param>
+        /// <param name="sourceLayout">The source views layout.</param>
+        /// <param name="targetLayout">The target views layout.</param>
         /// <param name="sourceIndex">The source view index.</param>
         /// <param name="targetIndex">The target view index.</param>
-        void SwapView(IDockBase sourceDock, IDockBase targetDock, int sourceIndex, int targetIndex);
+        void SwapView(IDockLayout sourceLayout, IDockLayout targetLayout, int sourceIndex, int targetIndex);
 
         /// <summary>
         /// Change current view.

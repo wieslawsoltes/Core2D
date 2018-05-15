@@ -67,6 +67,6 @@ namespace Dock.Model
         /// Sets host layout.
         /// </summary>
         /// <param name="layout">The host layout.</param>
-        void SetLayout(IDockBase layout);
+        void SetLayout(IDockLayout layout);
     }
 }

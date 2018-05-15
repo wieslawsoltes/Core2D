@@ -29,7 +29,7 @@ namespace Core2D.Editor
         private PathToolBase _currentPathTool;
         private ImmutableArray<RecentFile> _recentProjects;
         private RecentFile _currentRecentProject;
-        private IDockBase _layout;
+        private IDockLayout _layout;
         private AboutInfo _aboutInfo;
         private readonly Lazy<ImmutableArray<ToolBase>> _tools;
         private readonly Lazy<ImmutableArray<PathToolBase>> _pathTools;
@@ -134,7 +134,7 @@ namespace Core2D.Editor
         /// <summary>
         /// Gets or sets current layout configuration.
         /// </summary>
-        public IDockBase Layout
+        public IDockLayout Layout
         {
             get => _layout;
             set => Update(ref _layout, value);

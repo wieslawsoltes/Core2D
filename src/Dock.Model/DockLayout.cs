@@ -8,13 +8,13 @@ namespace Dock.Model
     /// <summary>
     /// Dock base.
     /// </summary>
-    public class DockBase : ObservableObject, IDockBase
+    public class DockLayout : ObservableObject, IDockLayout
     {
         private int _row;
         private int _column;
         private IList<IDockView> _views;
         private IDockView _currentView;
-        private IList<IDockBase> _children;
+        private IList<IDockLayout> _children;
 
         /// <inheritdoc/>
         public int Row
@@ -45,84 +45,84 @@ namespace Dock.Model
         }
 
         /// <inheritdoc/>
-        public IList<IDockBase> Children
+        public IList<IDockLayout> Children
         {
             get => _children;
             set => Update(ref _children, value);
         }
 
         /// <inheritdoc/>
-        public void RemoveView(IDockBase dock, int index)
+        public void RemoveView(IDockLayout layout, int index)
         {
-            dock.Views.RemoveAt(index);
+            layout.Views.RemoveAt(index);
 
-            if (dock.Views.Count > 0)
+            if (layout.Views.Count > 0)
             {
-                dock.CurrentView = dock.Views[index > 0 ? index - 1 : 0];
+                layout.CurrentView = layout.Views[index > 0 ? index - 1 : 0];
             }
         }
 
         /// <inheritdoc/>
-        public void MoveView(IDockBase dock, int sourceIndex, int targetIndex)
+        public void MoveView(IDockLayout layout, int sourceIndex, int targetIndex)
         {
             if (sourceIndex < targetIndex)
             {
-                var item = dock.Views[sourceIndex];
-                dock.Views.RemoveAt(sourceIndex);
-                dock.Views.Insert(targetIndex, item);
-                dock.CurrentView = item;
+                var item = layout.Views[sourceIndex];
+                layout.Views.RemoveAt(sourceIndex);
+                layout.Views.Insert(targetIndex, item);
+                layout.CurrentView = item;
             }
             else
             {
                 int removeIndex = sourceIndex;
-                if (dock.Views.Count > removeIndex)
+                if (layout.Views.Count > removeIndex)
                 {
-                    var item = dock.Views[sourceIndex];
-                    dock.Views.RemoveAt(removeIndex);
-                    dock.Views.Insert(targetIndex, item);
-                    dock.CurrentView = item;
+                    var item = layout.Views[sourceIndex];
+                    layout.Views.RemoveAt(removeIndex);
+                    layout.Views.Insert(targetIndex, item);
+                    layout.CurrentView = item;
                 }
             }
         }
 
         /// <inheritdoc/>
-        public void SwapView(IDockBase dock, int sourceIndex, int targetIndex)
+        public void SwapView(IDockLayout layout, int sourceIndex, int targetIndex)
         {
-            var item1 = dock.Views[sourceIndex];
-            var item2 = dock.Views[targetIndex];
-            dock.Views[targetIndex] = item1;
-            dock.Views[sourceIndex] = item2;
-            dock.CurrentView = item2;
+            var item1 = layout.Views[sourceIndex];
+            var item2 = layout.Views[targetIndex];
+            layout.Views[targetIndex] = item1;
+            layout.Views[sourceIndex] = item2;
+            layout.CurrentView = item2;
         }
 
         /// <inheritdoc/>
-        public void MoveView(IDockBase sourceDock, IDockBase targetDock, int sourceIndex, int targetIndex)
+        public void MoveView(IDockLayout sourceLayout, IDockLayout targetLayout, int sourceIndex, int targetIndex)
         {
-            var item = sourceDock.Views[sourceIndex];
-            sourceDock.Views.RemoveAt(sourceIndex);
-            targetDock.Views.Insert(targetIndex, item);
+            var item = sourceLayout.Views[sourceIndex];
+            sourceLayout.Views.RemoveAt(sourceIndex);
+            targetLayout.Views.Insert(targetIndex, item);
 
-            if (sourceDock.Views.Count > 0)
+            if (sourceLayout.Views.Count > 0)
             {
-                sourceDock.CurrentView = sourceDock.Views[sourceIndex > 0 ? sourceIndex - 1 : 0];
+                sourceLayout.CurrentView = sourceLayout.Views[sourceIndex > 0 ? sourceIndex - 1 : 0];
             }
 
-            if (targetDock.Views.Count > 0)
+            if (targetLayout.Views.Count > 0)
             {
-                targetDock.CurrentView = targetDock.Views[targetIndex];
+                targetLayout.CurrentView = targetLayout.Views[targetIndex];
             }
         }
 
         /// <inheritdoc/>
-        public void SwapView(IDockBase sourceDock, IDockBase targetDock, int sourceIndex, int targetIndex)
+        public void SwapView(IDockLayout sourceLayout, IDockLayout targetLayout, int sourceIndex, int targetIndex)
         {
-            var item1 = sourceDock.Views[sourceIndex];
-            var item2 = targetDock.Views[targetIndex];
-            sourceDock.Views[sourceIndex] = item2;
-            targetDock.Views[targetIndex] = item1;
+            var item1 = sourceLayout.Views[sourceIndex];
+            var item2 = targetLayout.Views[targetIndex];
+            sourceLayout.Views[sourceIndex] = item2;
+            targetLayout.Views[targetIndex] = item1;
 
-            sourceDock.CurrentView = item2;
-            targetDock.CurrentView = item1;
+            sourceLayout.CurrentView = item2;
+            targetLayout.CurrentView = item1;
         }
 
         /// <inheritdoc/>
