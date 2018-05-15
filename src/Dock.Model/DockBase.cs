@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Dock.Model
 {
@@ -46,8 +47,8 @@ namespace Dock.Model
         /// <inheritdoc/>
         public IList<IDockBase> Children
         {
-            get => _containers;
-            set => Update(ref _containers, value);
+            get => _children;
+            set => Update(ref _children, value);
         }
 
         /// <inheritdoc/>
