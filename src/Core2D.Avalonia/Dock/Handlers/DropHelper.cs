@@ -4,6 +4,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.PanAndZoom;
 using Avalonia.Input;
+using Avalonia.VisualTree;
 
 namespace Core2D.Avalonia.Dock.Handlers
 {
