@@ -14,7 +14,7 @@ namespace Core2D.Avalonia.Dock.Handlers
     {
         public static IDropHandler Instance = new DockDropHandler();
 
-        private void CreateDockWindow(IDockLayout layout, object context, IDockLayout container, int viewIndex, double x, double y)
+        private IDockWindow CreateDockWindow(IDockLayout layout, object context, IDockLayout container, int viewIndex, double x, double y)
         {
             var view = container.Views[viewIndex];
 
