@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Core2D.Editor;
+using Dock.Avalonia.Factories;
 using Dock.Model;
 
 namespace Core2D.Avalonia.Dock.Factories

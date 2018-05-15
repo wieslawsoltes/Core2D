@@ -1,24 +1,21 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
-using Dock.Avalonia;
 
-namespace Core2D.Avalonia.Dock
+namespace Dock.Avalonia.Dock
 {
     /// <summary>
-    /// Interaction logic for <see cref="HostWindow"/> xaml.
+    /// Interaction logic for <see cref="DockControl"/> xaml.
     /// </summary>
-    public class HostWindow : HostWindowBase
+    public class DockControl : UserControl
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="HostWindow"/> class.
+        /// Initializes a new instance of the <see cref="DockControl"/> class.
         /// </summary>
-        public HostWindow()
+        public DockControl()
         {
             this.InitializeComponent();
-            this.AttachDevTools();
         }
 
         /// <summary>

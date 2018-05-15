@@ -3,12 +3,10 @@
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Input;
-using Core2D.Avalonia.Dock.Helpers;
-using Core2D.Editor;
-using Dock.Avalonia;
+using Dock.Avalonia.Helpers;
 using Dock.Model;
 
-namespace Core2D.Avalonia.Dock.Handlers
+namespace Dock.Avalonia.Handlers
 {
     public class DockDropHandler : IDropHandler
     {
@@ -183,18 +181,18 @@ namespace Core2D.Avalonia.Dock.Handlers
 
         public bool Validate(object context, object sender, DragEventArgs e)
         {
-            if (context is ProjectEditor editor)
+            if (context is IDockLayout layout)
             {
-                return Validate(editor?.Layout, context, sender, e, false);
+                return Validate(layout, context, sender, e, false);
             }
             return false;
         }
 
         public bool Execute(object context, object sender, DragEventArgs e)
         {
-            if (context is ProjectEditor editor)
+            if (context is IDockLayout layout)
             {
-                return Validate(editor?.Layout, context, sender, e, true);
+                return Validate(layout, context, sender, e, true);
             }
             return false;
         }

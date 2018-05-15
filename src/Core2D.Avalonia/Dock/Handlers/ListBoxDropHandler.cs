@@ -2,12 +2,12 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Avalonia.Controls;
 using Avalonia.Input;
-using Core2D.Avalonia.Dock.Helpers;
 using Core2D.Containers;
 using Core2D.Editor;
 using Core2D.Shapes;
 using Core2D.Style;
 using Dock.Avalonia;
+using Dock.Avalonia.Helpers;
 
 namespace Core2D.Avalonia.Dock.Handlers
 {

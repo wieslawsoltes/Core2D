@@ -6,7 +6,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using Dock.Model;
 
-namespace Core2D.Avalonia.Dock.Factories
+namespace Dock.Avalonia.Factories
 {
     /// <summary>
     /// Dock factory base.
@@ -29,7 +29,7 @@ namespace Core2D.Avalonia.Dock.Factories
         {
             foreach (var window in windows)
             {
-                var host = _serviceProvider.GetService<IDockHost>();
+                var host = (IDockHost)_serviceProvider.GetService(typeof(IDockHost));
 
                 window.Host = host;
                 window.Context = context;
@@ -98,7 +98,7 @@ namespace Core2D.Avalonia.Dock.Factories
                 Factory = this
             };
 
-            var host = _serviceProvider.GetService<IDockHost>();
+            var host = (IDockHost)_serviceProvider.GetService(typeof(IDockHost));
 
             var dockWindow = new DockWindow()
             {
