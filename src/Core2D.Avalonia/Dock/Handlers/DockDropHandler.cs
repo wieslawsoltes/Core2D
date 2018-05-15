@@ -14,6 +14,51 @@ namespace Core2D.Avalonia.Dock.Handlers
     {
         public static IDropHandler Instance = new DockDropHandler();
 
+        private void CreateDockWindow(IDockLayout layout, object context, IDockContainer container, int viewIndex, double x, double y)
+        {
+            var view = container.Views[viewIndex];
+
+            layout.RemoveView(container, viewIndex);
+
+            var dockLayout = new DockLayout
+            {
+                Row = 0,
+                Column = 0,
+                Views = new ObservableCollection<IDockView>(),
+                CurrentView = view,
+                Children = new ObservableCollection<IDockBase>
+                {
+                    new DockContainer
+                    {
+                        Row = 0,
+                        Column = 0,
+                        Views = new ObservableCollection<IDockView> { view },
+                        CurrentView = view
+                    }
+                }
+            };
+
+            var dockWindow = new DockWindow()
+            {
+                X = x,
+                Y = y,
+                Width = 300,
+                Height = 400,
+                Title = "Dock",
+                Context = context,
+                Layout = dockLayout,
+                Host = new HostWindow()
+            };
+
+            if (layout.CurrentView.Windows == null)
+            {
+                layout.CurrentView.Windows = new ObservableCollection<IDockWindow>();
+            }
+            layout.CurrentView.AddWindow(dockWindow);
+
+            dockWindow.Present();
+        }
+
         private bool ValidateTabStrip(IDockLayout layout, DragEventArgs e, bool bExecute, TabStrip strip)
         {
             var sourceItem = e.Data.Get(DragDataFormats.Parent);
@@ -26,7 +71,7 @@ namespace Core2D.Avalonia.Dock.Handlers
                     int sourceIndex = strip.ItemContainerGenerator.IndexFromContainer(source);
                     int targetIndex = strip.ItemContainerGenerator.IndexFromContainer(target);
 
-                    if (strip.DataContext is DockContainer container)
+                    if (strip.DataContext is IDockContainer container)
                     {
                         if (e.DragEffects == DragDropEffects.Copy)
                         {
@@ -59,8 +104,8 @@ namespace Core2D.Avalonia.Dock.Handlers
                 }
                 else if (source.Parent is TabStrip sourceStrip
                     && target.Parent is TabStrip targetStrip
-                    && sourceStrip.DataContext is DockContainer sourcePanel
-                    && targetStrip.DataContext is DockContainer targetPanel)
+                    && sourceStrip.DataContext is IDockContainer sourcePanel
+                    && targetStrip.DataContext is IDockContainer targetPanel)
                 {
                     int sourceIndex = sourceStrip.ItemContainerGenerator.IndexFromContainer(source);
                     int targetIndex = targetStrip.ItemContainerGenerator.IndexFromContainer(target);
@@ -109,8 +154,8 @@ namespace Core2D.Avalonia.Dock.Handlers
 
             if (sourceItem is TabStripItem source
                 && source.Parent is TabStrip sourceStrip
-                && sourceStrip.DataContext is DockContainer sourceContainer
-                && panel.DataContext is DockContainer targetContainer
+                && sourceStrip.DataContext is IDockContainer sourceContainer
+                && panel.DataContext is IDockContainer targetContainer
                 && sourceContainer != targetContainer)
             {
                 int sourceIndex = sourceStrip.ItemContainerGenerator.IndexFromContainer(source);
@@ -147,68 +192,30 @@ namespace Core2D.Avalonia.Dock.Handlers
             return false;
         }
 
-        private bool Validate(ProjectEditor editor, object sender, DragEventArgs e, bool bExecute)
+        private bool Validate(IDockLayout layout, object context, object sender, DragEventArgs e, bool bExecute)
         {
             var point = DropHelper.GetPosition(sender, e);
 
             switch (sender)
             {
                 case TabStrip strip:
-                    return ValidateTabStrip(editor?.Layout, e, bExecute, strip);
+                    return ValidateTabStrip(layout, e, bExecute, strip);
                 case DockPanel panel:
-                    return ValidateDockPanel(editor?.Layout, e, bExecute, panel);
+                    return ValidateDockPanel(layout, e, bExecute, panel);
             }
 
             if (e.Data.Get(DragDataFormats.Parent) is TabStripItem item)
             {
                 var strip = item.Parent as TabStrip;
-                if (strip.DataContext is DockContainer container)
+                if (strip.DataContext is IDockContainer container)
                 {
                     if (bExecute)
                     {
                         int itemIndex = strip.ItemContainerGenerator.IndexFromContainer(item);
+                        Point position = DropHelper.GetPositionScreen(sender, e);
 
-                        var view = container.Views[itemIndex];
+                        CreateDockWindow(layout, context, container, itemIndex, position.X, position.Y);
 
-                        editor?.Layout.RemoveView(container, itemIndex);
-
-                        var position = DropHelper.GetPositionScreen(sender, e);
-
-                        var window = new DockWindow()
-                        {
-                            X = position.X,
-                            Y = position.Y,
-                            Width = 300,
-                            Height = 400,
-                            Title = "Dock",
-                            Context = editor,
-                            Layout = new DockLayout
-                            {
-                                Row = 0,
-                                Column = 0,
-                                Views = new ObservableCollection<IDockView>(),
-                                CurrentView = view,
-                                Children = new ObservableCollection<IDockBase>
-                                {
-                                    new DockContainer
-                                    {
-                                        Row = 0,
-                                        Column = 0,
-                                        Views = new ObservableCollection<IDockView> { view },
-                                        CurrentView = view
-                                    }
-                                }
-                            },
-                            Host = new HostWindow()
-                        };
-
-                        if (editor?.Layout.CurrentView.Windows == null)
-                        {
-                            editor.Layout.CurrentView.Windows = new ObservableCollection<IDockWindow>();
-                        }
-                        editor?.Layout.CurrentView.AddWindow(window);
-
-                        window.Present();
                         return true;
                     }
                     return true;
@@ -222,7 +229,7 @@ namespace Core2D.Avalonia.Dock.Handlers
         {
             if (context is ProjectEditor editor)
             {
-                return Validate(editor, sender, e, false);
+                return Validate(editor?.Layout, context, sender, e, false);
             }
             return false;
         }
@@ -231,7 +238,7 @@ namespace Core2D.Avalonia.Dock.Handlers
         {
             if (context is ProjectEditor editor)
             {
-                return Validate(editor, sender, e, true);
+                return Validate(editor?.Layout, context, sender, e, true);
             }
             return false;
         }
