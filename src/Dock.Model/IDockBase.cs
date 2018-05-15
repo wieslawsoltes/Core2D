@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace Dock.Model
 {
     /// <summary>
-    /// Dock base object contract.
+    /// Dock base contract.
     /// </summary>
     public interface IDockBase
     {

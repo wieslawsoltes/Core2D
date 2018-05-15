@@ -68,7 +68,7 @@ namespace Core2D.Avalonia
             dock.CurrentView = views.FirstOrDefault(v => v.Title == dock.CurrentView?.Title);
         }
 
-        public void UpdateLayout(IDockLayout layout, IList<IDockView> views, object context)
+        public void UpdateLayout(IDockBase layout, IList<IDockView> views, object context)
         {
             UpdateViews(layout.Views, views, context);
 
@@ -80,9 +80,9 @@ namespace Core2D.Avalonia
             layout.CurrentView = views.FirstOrDefault(v => v.Title == layout.CurrentView.Title);
         }
 
-        public IDockLayout CreateLayout(IList<IDockView> views)
+        public IDockBase CreateLayout(IList<IDockView> views)
         {
-            return new DockLayout
+            return new DockBase
             {
                 Row = 0,
                 Column = 0,
@@ -90,7 +90,7 @@ namespace Core2D.Avalonia
                 CurrentView = views.FirstOrDefault(v => v.Title == "Dashboard"),
                 Children = new ObservableCollection<IDockBase>
                 {
-                    new DockContainer
+                    new DockBase
                     {
                         Row = 0,
                         Column = 0,
@@ -102,7 +102,7 @@ namespace Core2D.Avalonia
                         },
                         CurrentView = views.FirstOrDefault(v => v.Title == "Project")
                     },
-                    new DockContainer
+                    new DockBase
                     {
                         Row = 2,
                         Column = 0,
@@ -113,7 +113,7 @@ namespace Core2D.Avalonia
                         },
                         CurrentView = views.FirstOrDefault(v => v.Title == "Groups")
                     },
-                    new DockContainer
+                    new DockBase
                     {
                         Row = 0,
                         Column = 0,
@@ -126,7 +126,7 @@ namespace Core2D.Avalonia
                         },
                         CurrentView = views.FirstOrDefault(v => v.Title == "Styles")
                     },
-                    new DockContainer
+                    new DockBase
                     {
                         Row = 2,
                         Column = 0,

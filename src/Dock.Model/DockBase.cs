@@ -6,9 +6,9 @@ using System.Linq;
 namespace Dock.Model
 {
     /// <summary>
-    /// Dock base object.
+    /// Dock base.
     /// </summary>
-    public abstract class DockBase : ObservableObject, IDockBase
+    public class DockBase : ObservableObject, IDockBase
     {
         private int _row;
         private int _column;
