@@ -15,6 +15,7 @@ namespace Dock.Model
         private IList<IDockView> _views;
         private IDockView _currentView;
         private IList<IDockLayout> _children;
+        private IDockFactory _factory;
 
         /// <inheritdoc/>
         public int Row
@@ -49,6 +50,13 @@ namespace Dock.Model
         {
             get => _children;
             set => Update(ref _children, value);
+        }
+
+        /// <inheritdoc/>
+        public IDockFactory Factory
+        {
+            get => _factory;
+            set => Update(ref _factory, value);
         }
 
         /// <inheritdoc/>
@@ -179,5 +187,11 @@ namespace Dock.Model
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeChildren() => _children != null;
+
+        /// <summary>
+        /// Check whether the <see cref="Factory"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public virtual bool ShouldSerializeFactory() => false;
     }
 }

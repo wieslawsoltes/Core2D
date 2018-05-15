@@ -15,6 +15,7 @@ using Core2D.Avalonia.Views;
 using Core2D.Editor;
 using Core2D.Editor.Designer;
 using Core2D.Interfaces;
+using Dock.Model;
 
 namespace Core2D.Avalonia
 {
@@ -120,8 +121,8 @@ namespace Core2D.Avalonia
                     editor.OnLoadLayout(layoutPath);
                 }
 
-                var layoutFactory = new LayoutFactory(serviceProvider);
-                layoutFactory.CreateOrUpdateLayout();
+                var dockFactory = serviceProvider.GetService<IDockFactory>();
+                dockFactory.CreateOrUpdateLayout();
 
                 var recentPath = System.IO.Path.Combine(fileIO.GetBaseDirectory(), "Core2D.recent");
                 if (fileIO.Exists(recentPath))
@@ -172,8 +173,8 @@ namespace Core2D.Avalonia
 
             var editor = serviceProvider.GetService<ProjectEditor>();
 
-            var layoutFactory = new LayoutFactory(serviceProvider);
-            layoutFactory.CreateOrUpdateLayout();
+            var dockFactory = serviceProvider.GetService<IDockFactory>();
+            dockFactory.CreateOrUpdateLayout();
 
             editor.CurrentTool = editor.Tools.FirstOrDefault(t => t.Title == "Selection");
             editor.CurrentPathTool = editor.PathTools.FirstOrDefault(t => t.Title == "Line");

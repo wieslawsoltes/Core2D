@@ -35,6 +35,11 @@ namespace Dock.Model
         IList<IDockLayout> Children { get; set; }
 
         /// <summary>
+        /// Gets or sets dock factory.
+        /// </summary>
+        IDockFactory Factory { get; set; }
+
+        /// <summary>
         /// Remove view from the layout.
         /// </summary>
         /// <param name="layout">The views layout.</param>

@@ -14,51 +14,6 @@ namespace Core2D.Avalonia.Dock.Handlers
     {
         public static IDropHandler Instance = new DockDropHandler();
 
-        private IDockWindow CreateDockWindow(IDockLayout layout, object context, IDockLayout container, int viewIndex, double x, double y)
-        {
-            var view = container.Views[viewIndex];
-
-            layout.RemoveView(container, viewIndex);
-
-            var dockLayout = new DockLayout
-            {
-                Row = 0,
-                Column = 0,
-                Views = new ObservableCollection<IDockView>(),
-                CurrentView = view,
-                Children = new ObservableCollection<IDockLayout>
-                {
-                    new DockLayout
-                    {
-                        Row = 0,
-                        Column = 0,
-                        Views = new ObservableCollection<IDockView> { view },
-                        CurrentView = view
-                    }
-                }
-            };
-
-            var dockWindow = new DockWindow()
-            {
-                X = x,
-                Y = y,
-                Width = 300,
-                Height = 400,
-                Title = "Dock",
-                Context = context,
-                Layout = dockLayout,
-                Host = new HostWindow() // TODO: Use IServiceProvider.
-            };
-
-            if (layout.CurrentView.Windows == null)
-            {
-                layout.CurrentView.Windows = new ObservableCollection<IDockWindow>();
-            }
-            layout.CurrentView.AddWindow(dockWindow);
-
-            return dockWindow;
-        }
-
         private bool ValidateTabStrip(IDockLayout layout, DragEventArgs e, bool bExecute, TabStrip strip)
         {
             var sourceItem = e.Data.Get(DragDataFormats.Parent);
@@ -214,8 +169,8 @@ namespace Core2D.Avalonia.Dock.Handlers
                         int itemIndex = strip.ItemContainerGenerator.IndexFromContainer(item);
                         var position = DropHelper.GetPositionScreen(sender, e);
 
-                        var window = CreateDockWindow(layout, context, container, itemIndex, position.X, position.Y);
-                        window.Present();
+                        var window = layout.Factory?.CreateDockWindow(layout, context, container, itemIndex, position.X, position.Y);
+                        window?.Present();
 
                         return true;
                     }

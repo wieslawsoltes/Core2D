@@ -3,6 +3,7 @@
 using System.Reflection;
 using Autofac;
 using Core2D.Avalonia.Dock;
+using Core2D.Avalonia.Dock.Factories;
 using Core2D.Avalonia.Windows;
 using Dock.Model;
 
@@ -17,6 +18,7 @@ namespace Core2D.Avalonia.Modules
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterAssemblyTypes(typeof(App).GetTypeInfo().Assembly).As<IDockView>().InstancePerLifetimeScope();
+            builder.RegisterType<EditorDockFactory>().As<IDockFactory>().InstancePerDependency();
             builder.RegisterType<HostWindow>().As<IDockHost>().InstancePerDependency();
             builder.RegisterType<MainWindow>().As<MainWindow>().InstancePerLifetimeScope();
         }
