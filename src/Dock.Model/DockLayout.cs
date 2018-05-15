@@ -6,7 +6,7 @@ using System.Linq;
 namespace Dock.Model
 {
     /// <summary>
-    /// Dock base.
+    /// Dock layout.
     /// </summary>
     public class DockLayout : ObservableObject, IDockLayout
     {
