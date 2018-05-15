@@ -7,26 +7,7 @@ namespace Dock.Model
     /// <summary>
     /// Dock container contract.
     /// </summary>
-    public interface IDockContainer
+    public interface IDockContainer : IDockBase
     {
-        /// <summary>
-        /// Gets or sets row.
-        /// </summary>
-        int Row { get; set; }
-
-        /// <summary>
-        /// Gets or sets column.
-        /// </summary>
-        int Column { get; set; }
-
-        /// <summary>
-        /// Gets or sets views.
-        /// </summary>
-        IList<IDockView> Views { get; set; }
-
-        /// <summary>
-        /// Gets or sets current view.
-        /// </summary>
-        IDockView CurrentView { get; set; }
     }
 }

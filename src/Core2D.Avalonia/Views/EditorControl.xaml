@@ -17,15 +17,15 @@
         <GridSplitter Classes="vertical" Grid.Column="1" Grid.Row="0" Width="6"/>
         <views:PageControl Grid.Row="0" Grid.Column="2"/>
         <Grid RowDefinitions="50*,Auto,50*" Grid.Column="0" Grid.Row="0">
-            <dock:DockControl DataContext="{Binding Layout.Containers[0]}" Grid.Column="{Binding Column}" Grid.Row="{Binding Row}"/>
+            <dock:DockControl DataContext="{Binding Layout.Children[0]}" Grid.Column="{Binding Column}" Grid.Row="{Binding Row}"/>
             <GridSplitter Classes="horizontal" Grid.Column="0" Grid.Row="1" Height="7"/>
-            <dock:DockControl DataContext="{Binding Layout.Containers[1]}" Grid.Column="{Binding Column}" Grid.Row="{Binding Row}"/>
+            <dock:DockControl DataContext="{Binding Layout.Children[1]}" Grid.Column="{Binding Column}" Grid.Row="{Binding Row}"/>
         </Grid>
         <GridSplitter Classes="vertical" Grid.Column="3" Grid.Row="0" Width="6"/>
         <Grid RowDefinitions="50*,Auto,50*" Grid.Column="4" Grid.Row="0">
-            <dock:DockControl DataContext="{Binding Layout.Containers[2]}" Grid.Column="{Binding Column}" Grid.Row="{Binding Row}"/>
+            <dock:DockControl DataContext="{Binding Layout.Children[2]}" Grid.Column="{Binding Column}" Grid.Row="{Binding Row}"/>
             <GridSplitter Classes="horizontal" Grid.Column="0" Grid.Row="1" Height="7"/>
-            <dock:DockControl DataContext="{Binding Layout.Containers[3]}" Grid.Column="{Binding Column}" Grid.Row="{Binding Row}"/>
+            <dock:DockControl DataContext="{Binding Layout.Children[3]}" Grid.Column="{Binding Column}" Grid.Row="{Binding Row}"/>
         </Grid>
         <views:StatusControl Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="1" Margin="0,2,0,0"/>
     </Grid>

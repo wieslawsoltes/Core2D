@@ -172,17 +172,23 @@ namespace Core2D.Avalonia.Dock.Handlers
 
                         editor?.Layout.RemoveView(container, itemIndex);
 
+                        var position = DropHelper.GetPositionScreen(sender, e);
+
                         var window = new DockWindow()
                         {
-                            X = point.X,
-                            Y = point.Y,
+                            X = position.X,
+                            Y = position.Y,
                             Width = 300,
                             Height = 400,
                             Title = "Dock",
                             Context = editor,
                             Layout = new DockLayout
                             {
-                                Containers = new ObservableCollection<IDockContainer>
+                                Row = 0,
+                                Column = 0,
+                                Views = new ObservableCollection<IDockView>(),
+                                CurrentView = view,
+                                Children = new ObservableCollection<IDockBase>
                                 {
                                     new DockContainer
                                     {
@@ -191,9 +197,7 @@ namespace Core2D.Avalonia.Dock.Handlers
                                         Views = new ObservableCollection<IDockView> { view },
                                         CurrentView = view
                                     }
-                                },
-                                Views = new ObservableCollection<IDockView>(),
-                                CurrentView = view
+                                }
                             },
                             Host = new HostWindow()
                         };

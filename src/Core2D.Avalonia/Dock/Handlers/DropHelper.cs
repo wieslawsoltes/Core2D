@@ -21,5 +21,14 @@ namespace Core2D.Avalonia.Dock.Handlers
             var point = e.GetPosition(relativeTo);
             return FixInvalidPosition(relativeTo, point);
         }
+
+        public static Point GetPositionScreen(object sender, DragEventArgs e)
+        {
+            var relativeTo = e.Source as IControl;
+            var point = e.GetPosition(relativeTo);
+            var visual = relativeTo as IVisual;
+            var screenPoint = visual.PointToScreen(point);
+            return FixInvalidPosition(relativeTo, screenPoint);
+        }
     }
 }

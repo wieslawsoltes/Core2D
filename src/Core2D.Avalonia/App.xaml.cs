@@ -61,20 +61,20 @@ namespace Core2D.Avalonia
             }
         }
 
-        public void UpdateContainer(IDockContainer container, IList<IDockView> views, object context)
+        public void UpdateDock(IDockBase dock, IList<IDockView> views, object context)
         {
-            UpdateViews(container.Views, views, context);
+            UpdateViews(dock.Views, views, context);
 
-            container.CurrentView = views.FirstOrDefault(v => v.Title == container.CurrentView?.Title);
+            dock.CurrentView = views.FirstOrDefault(v => v.Title == dock.CurrentView?.Title);
         }
 
         public void UpdateLayout(IDockLayout layout, IList<IDockView> views, object context)
         {
             UpdateViews(layout.Views, views, context);
 
-            foreach (var panel in layout.Containers)
+            foreach (var child in layout.Children)
             {
-                UpdateContainer(panel, views, context);
+                UpdateDock(child, views, context);
             }
 
             layout.CurrentView = views.FirstOrDefault(v => v.Title == layout.CurrentView.Title);
@@ -84,8 +84,11 @@ namespace Core2D.Avalonia
         {
             return new DockLayout
             {
+                Row = 0,
+                Column = 0,
                 Views = new ObservableCollection<IDockView>(views),
-                Containers = new ObservableCollection<IDockContainer>
+                CurrentView = views.FirstOrDefault(v => v.Title == "Dashboard"),
+                Children = new ObservableCollection<IDockBase>
                 {
                     new DockContainer
                     {
@@ -137,8 +140,7 @@ namespace Core2D.Avalonia
                         },
                         CurrentView = views.FirstOrDefault(v => v.Title == "Tools")
                     },
-                },
-                CurrentView = views.FirstOrDefault(v => v.Title == "Dashboard")
+                }
             };
         }
 
