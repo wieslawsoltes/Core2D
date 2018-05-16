@@ -7,6 +7,7 @@ using Avalonia.Controls.Shapes;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Media;
+using Avalonia.VisualTree;
 using Avalonia.Xaml.Interactivity;
 
 namespace Dock.Avalonia
@@ -53,10 +54,9 @@ namespace Dock.Avalonia
             AssociatedObject.RemoveHandler(DragDrop.DropEvent, Drop);
         }
 
-        private void AddAdorner(DockPanel dock)
+        private void AddAdorner(IVisual visual)
         {
-            var layer = AdornerLayer.GetAdornerLayer(dock);
-
+            var layer = AdornerLayer.GetAdornerLayer(visual);
             if (layer != null)
             {
                 if (_adorner?.Parent is Panel panel)
@@ -67,15 +67,15 @@ namespace Dock.Avalonia
 
                 _adorner = new Rectangle
                 {
-                    Fill = new SolidColorBrush(0x80a0c5e8),
-                    [AdornerLayer.AdornedElementProperty] = dock,
+                    Fill = new SolidColorBrush(0x80A0C5E8),
+                    [AdornerLayer.AdornedElementProperty] = visual,
                 };
 
                 layer.Children.Add(_adorner);
             }
         }
 
-        private void RemoveAdorner(DockPanel dock)
+        private void RemoveAdorner(IVisual visual)
         {
             if (_adorner?.Parent is Panel panel)
             {
@@ -89,6 +89,7 @@ namespace Dock.Avalonia
             if (Handler?.Validate(Context, sender, e) == false)
             {
                 e.DragEffects = DragDropEffects.None;
+                e.Handled = false;
             }
             else
             {
@@ -115,6 +116,7 @@ namespace Dock.Avalonia
             if (Handler?.Validate(Context, sender, e) == false)
             {
                 e.DragEffects = DragDropEffects.None;
+                e.Handled = false;
             }
             else
             {
@@ -133,6 +135,7 @@ namespace Dock.Avalonia
             if (Handler?.Execute(Context, sender, e) == false)
             {
                 e.DragEffects = DragDropEffects.None;
+                e.Handled = false;
             }
             else
             {
