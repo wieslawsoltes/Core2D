@@ -16,12 +16,7 @@
              Design.Width="1200" Design.Height="540">
     <Grid ColumnDefinitions="180,Auto,*,Auto,240" RowDefinitions="*,Auto" Margin="6,6,6,2">
         <GridSplitter Classes="vertical" Grid.Column="1" Grid.Row="0" Width="6"/>
-        <views:PageControl Background="Transparent" Grid.Row="0" Grid.Column="2">
-            <i:Interaction.Behaviors>
-                <id:DropBehavior Context="{Binding Layout}" Handler="{x:Static handlers:EditorDropHandler.Instance}"/>
-                <id:DropBehavior Context="{Binding Layout}" Handler="{x:Static idh:DockDropHandler.Instance}" IsTunneled="True"/>
-            </i:Interaction.Behaviors>
-        </views:PageControl>
+        <views:PageControl Grid.Row="0" Grid.Column="2"/>
         <Grid RowDefinitions="50*,Auto,50*" Grid.Column="0" Grid.Row="0">
             <idd:DockControl DataContext="{Binding Layout.Children[0]}" Grid.Column="{Binding Column}" Grid.Row="{Binding Row}"/>
             <GridSplitter Classes="horizontal" Grid.Column="0" Grid.Row="1" Height="7"/>
