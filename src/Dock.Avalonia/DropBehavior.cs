@@ -75,7 +75,7 @@ namespace Dock.Avalonia
             }
         }
 
-        private void RemoveAdorner(IVisual visual)
+        private void RemoveAdorner()
         {
             if (_adorner?.Parent is Panel panel)
             {
@@ -93,9 +93,11 @@ namespace Dock.Avalonia
             }
             else
             {
-                if (sender is DockPanel panel)
+                //if (sender is DockPanel panel)
+                if (sender is IVisual visual)
                 {
-                    AddAdorner(panel);
+                    //AddAdorner(panel);
+                    AddAdorner(visual);
                 }
 
                 e.DragEffects |= DragDropEffects.Copy | DragDropEffects.Move | DragDropEffects.Link;
@@ -105,10 +107,7 @@ namespace Dock.Avalonia
 
         private void DragLeave(object sender, RoutedEventArgs e)
         {
-            if (sender is DockPanel panel)
-            {
-                RemoveAdorner(panel);
-            }
+            RemoveAdorner();
         }
 
         private void DragOver(object sender, DragEventArgs e)
@@ -127,10 +126,7 @@ namespace Dock.Avalonia
 
         private void Drop(object sender, DragEventArgs e)
         {
-            if (sender is DockPanel panel)
-            {
-                RemoveAdorner(panel);
-            }
+            RemoveAdorner();
 
             if (Handler?.Execute(Context, sender, e) == false)
             {
