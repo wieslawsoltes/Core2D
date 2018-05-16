@@ -22,6 +22,9 @@ namespace Dock.Avalonia
         public static readonly AvaloniaProperty HandlerProperty =
             AvaloniaProperty.Register<DropBehavior, IDropHandler>(nameof(Handler));
 
+        public static readonly AvaloniaProperty IsTunneledProperty =
+            AvaloniaProperty.Register<DropBehavior, bool>(nameof(IsTunneled));
+
         public object Context
         {
             get => (object)GetValue(ContextProperty);
@@ -34,14 +37,27 @@ namespace Dock.Avalonia
             set => SetValue(HandlerProperty, value);
         }
 
+        public bool IsTunneled
+        {
+            get => (bool)GetValue(IsTunneledProperty);
+            set => SetValue(IsTunneledProperty, value);
+        }
+
         protected override void OnAttached()
         {
             base.OnAttached();
             DragDrop.SetAllowDrop(AssociatedObject, true);
-            AssociatedObject.AddHandler(DragDrop.DragEnterEvent, DragEnter, RoutingStrategies.Direct | RoutingStrategies.Bubble, handledEventsToo: true);
-            AssociatedObject.AddHandler(DragDrop.DragLeaveEvent, DragLeave, RoutingStrategies.Direct | RoutingStrategies.Bubble, handledEventsToo: true);
-            AssociatedObject.AddHandler(DragDrop.DragOverEvent, DragOver, RoutingStrategies.Direct | RoutingStrategies.Bubble, handledEventsToo: true);
-            AssociatedObject.AddHandler(DragDrop.DropEvent, Drop, RoutingStrategies.Direct | RoutingStrategies.Bubble, handledEventsToo: true);
+
+            var routes = RoutingStrategies.Direct | RoutingStrategies.Bubble;
+            if (IsTunneled)
+            {
+                routes |= RoutingStrategies.Tunnel;
+            }
+
+            AssociatedObject.AddHandler(DragDrop.DragEnterEvent, DragEnter, routes, handledEventsToo: true);
+            AssociatedObject.AddHandler(DragDrop.DragLeaveEvent, DragLeave, routes, handledEventsToo: true);
+            AssociatedObject.AddHandler(DragDrop.DragOverEvent, DragOver, routes, handledEventsToo: true);
+            AssociatedObject.AddHandler(DragDrop.DropEvent, Drop, routes, handledEventsToo: true);
         }
 
         protected override void OnDetaching()

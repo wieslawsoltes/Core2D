@@ -19,7 +19,7 @@
         <views:PageControl Background="Transparent" Grid.Row="0" Grid.Column="2">
             <i:Interaction.Behaviors>
                 <id:DropBehavior Context="{Binding Layout}" Handler="{x:Static handlers:EditorDropHandler.Instance}"/>
-                <id:DropBehavior Context="{Binding Layout}" Handler="{x:Static idh:DockDropHandler.Instance}"/>
+                <id:DropBehavior Context="{Binding Layout}" Handler="{x:Static idh:DockDropHandler.Instance}" IsTunneled="True"/>
             </i:Interaction.Behaviors>
         </views:PageControl>
         <Grid RowDefinitions="50*,Auto,50*" Grid.Column="0" Grid.Row="0">

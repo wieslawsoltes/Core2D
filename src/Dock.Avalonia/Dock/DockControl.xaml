@@ -24,12 +24,12 @@
     </UserControl.Styles>
     <DockPanel ZIndex="1" Background="Transparent">
         <i:Interaction.Behaviors>
-            <id:DropBehavior Context="{Binding $parent[Window].DataContext.Layout}" Handler="{x:Static idh:DockDropHandler.Instance}"/>
+            <id:DropBehavior Context="{Binding $parent[Window].DataContext.Layout}" Handler="{x:Static idh:DockDropHandler.Instance}" IsTunneled="True"/>
         </i:Interaction.Behaviors>
         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" DockPanel.Dock="Bottom">
             <TabStrip Items="{Binding Views}" SelectedItem="{Binding CurrentView, Mode=TwoWay}" Focusable="false" ClipToBounds="False" ZIndex="1">
                 <i:Interaction.Behaviors>
-                    <id:DropBehavior Context="{Binding $parent[Window].DataContext.Layout}" Handler="{x:Static idh:DockDropHandler.Instance}"/>
+                    <id:DropBehavior Context="{Binding $parent[Window].DataContext.Layout}" Handler="{x:Static idh:DockDropHandler.Instance}" IsTunneled="True"/>
                 </i:Interaction.Behaviors>
                 <TabStrip.ItemsPanel>
                     <ItemsPanelTemplate>

@@ -14,7 +14,7 @@
         WindowState="Normal"
         Title="{Binding #dock.DataContext.CurrentView.Title, FallbackValue=Dock}">
     <i:Interaction.Behaviors>
-        <id:DropBehavior Context="{Binding Layout}" Handler="{x:Static idh:DockDropHandler.Instance}"/>
+        <id:DropBehavior Context="{Binding Layout}" Handler="{x:Static idh:DockDropHandler.Instance}" IsTunneled="True"/>
     </i:Interaction.Behaviors>
     <Grid ColumnDefinitions="*" RowDefinitions="*">
         <idd:DockControl x:Name="dock" Grid.Column="{Binding Column}" Grid.Row="{Binding Row}"/>
