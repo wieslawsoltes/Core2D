@@ -21,7 +21,7 @@
                 <id:DropBehavior Context="{Binding Layout}" Handler="{x:Static handlers:EditorDropHandler.Instance}"/>
                 <id:DropBehavior Context="{Binding Layout}" Handler="{x:Static idh:DockDropHandler.Instance}"/>
             </i:Interaction.Behaviors>
-        </views:PageControl/>
+        </views:PageControl>
         <Grid RowDefinitions="50*,Auto,50*" Grid.Column="0" Grid.Row="0">
             <idd:DockControl DataContext="{Binding Layout.Children[0]}" Grid.Column="{Binding Column}" Grid.Row="{Binding Row}"/>
             <GridSplitter Classes="horizontal" Grid.Column="0" Grid.Row="1" Height="7"/>
