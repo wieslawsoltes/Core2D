@@ -54,10 +54,10 @@ namespace Dock.Avalonia
                 routes |= RoutingStrategies.Tunnel;
             }
 
-            AssociatedObject.AddHandler(DragDrop.DragEnterEvent, DragEnter, routes, handledEventsToo: true);
-            AssociatedObject.AddHandler(DragDrop.DragLeaveEvent, DragLeave, routes, handledEventsToo: true);
-            AssociatedObject.AddHandler(DragDrop.DragOverEvent, DragOver, routes, handledEventsToo: true);
-            AssociatedObject.AddHandler(DragDrop.DropEvent, Drop, routes, handledEventsToo: true);
+            AssociatedObject.AddHandler(DragDrop.DragEnterEvent, DragEnter, routes);
+            AssociatedObject.AddHandler(DragDrop.DragLeaveEvent, DragLeave, routes);
+            AssociatedObject.AddHandler(DragDrop.DragOverEvent, DragOver, routes);
+            AssociatedObject.AddHandler(DragDrop.DropEvent, Drop, routes);
         }
 
         protected override void OnDetaching()
