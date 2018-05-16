@@ -17,23 +17,39 @@ namespace Dock.Avalonia
         public static double MinimumHorizontalDragDistance = 4;
         public static double MinimumVerticalDragDistance = 4;
 
+        public static readonly AvaloniaProperty IsTunneledProperty =
+            AvaloniaProperty.Register<DragBehavior, bool>(nameof(IsTunneled), true);
+
+        public bool IsTunneled
+        {
+            get => (bool)GetValue(IsTunneledProperty);
+            set => SetValue(IsTunneledProperty, value);
+        }
+
         protected override void OnAttached()
         {
             base.OnAttached();
-            AssociatedObject.PointerPressed += AssociatedObject_PointerPressed;
-            AssociatedObject.PointerReleased += AssociatedObject_PointerReleased;
-            AssociatedObject.PointerMoved += AssociatedObject_PointerMoved;
+
+            var routes = RoutingStrategies.Direct | RoutingStrategies.Bubble;
+            if (IsTunneled)
+            {
+                routes |= RoutingStrategies.Tunnel;
+            }
+
+            AssociatedObject.AddHandler(InputElement.PointerPressedEvent, PointerPressed, routes);
+            AssociatedObject.AddHandler(InputElement.PointerReleasedEvent, PointerReleased, routes);
+            AssociatedObject.AddHandler(InputElement.PointerMovedEvent, PointerMoved, routes);
         }
 
         protected override void OnDetaching()
         {
             base.OnDetaching();
-            AssociatedObject.PointerPressed -= AssociatedObject_PointerPressed;
-            AssociatedObject.PointerReleased -= AssociatedObject_PointerReleased;
-            AssociatedObject.PointerMoved -= AssociatedObject_PointerMoved;
+            AssociatedObject.RemoveHandler(InputElement.PointerPressedEvent, PointerPressed);
+            AssociatedObject.RemoveHandler(InputElement.PointerReleasedEvent, PointerReleased);
+            AssociatedObject.RemoveHandler(InputElement.PointerMovedEvent, PointerMoved);
         }
 
-        private void AssociatedObject_PointerPressed(object sender, PointerPressedEventArgs e)
+        private void PointerPressed(object sender, PointerPressedEventArgs e)
         {
             if (e.MouseButton == MouseButton.Left)
             {
@@ -43,7 +59,7 @@ namespace Dock.Avalonia
             }
         }
 
-        private void AssociatedObject_PointerReleased(object sender, PointerReleasedEventArgs e)
+        private void PointerReleased(object sender, PointerReleasedEventArgs e)
         {
             if (e.MouseButton == MouseButton.Left)
             {
@@ -52,7 +68,7 @@ namespace Dock.Avalonia
             }
         }
 
-        private async void AssociatedObject_PointerMoved(object sender, PointerEventArgs e)
+        private async void PointerMoved(object sender, PointerEventArgs e)
         {
             Point point = e.GetPosition(AssociatedObject);
             Vector diff = _dragStartPoint - point;

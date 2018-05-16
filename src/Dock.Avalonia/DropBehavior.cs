@@ -23,7 +23,7 @@ namespace Dock.Avalonia
             AvaloniaProperty.Register<DropBehavior, IDropHandler>(nameof(Handler));
 
         public static readonly AvaloniaProperty IsTunneledProperty =
-            AvaloniaProperty.Register<DropBehavior, bool>(nameof(IsTunneled));
+            AvaloniaProperty.Register<DropBehavior, bool>(nameof(IsTunneled), true);
 
         public object Context
         {

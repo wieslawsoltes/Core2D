@@ -19,7 +19,7 @@
     <Border Classes="container">
         <i:Interaction.Behaviors>
             <id:DropBehavior Context="{Binding Layout}" Handler="{x:Static handlers:EditorDropHandler.Instance}"/>
-            <id:DropBehavior Context="{Binding Layout}" Handler="{x:Static idh:DockDropHandler.Instance}" IsTunneled="True"/>
+            <id:DropBehavior Context="{Binding Layout}" Handler="{x:Static idh:DockDropHandler.Instance}"/>
         </i:Interaction.Behaviors>
         <Border Classes="transparent" ClipToBounds="True">
             <paz:ZoomBorder Name="zoomBorder" Stretch="None" ZoomSpeed="1.2" PanButton="Right" EnableInput="{Binding IsToolIdle}" Background="Transparent" ClipToBounds="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
