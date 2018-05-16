@@ -38,10 +38,10 @@ namespace Dock.Avalonia
         {
             base.OnAttached();
             DragDrop.SetAllowDrop(AssociatedObject, true);
-            AssociatedObject.AddHandler(DragDrop.DragEnterEvent, DragEnter);
-            AssociatedObject.AddHandler(DragDrop.DragLeaveEvent, DragLeave);
-            AssociatedObject.AddHandler(DragDrop.DragOverEvent, DragOver);
-            AssociatedObject.AddHandler(DragDrop.DropEvent, Drop);
+            AssociatedObject.AddHandler(DragDrop.DragEnterEvent, DragEnter, RoutingStrategies.Direct | RoutingStrategies.Bubble, handledEventsToo: true);
+            AssociatedObject.AddHandler(DragDrop.DragLeaveEvent, DragLeave, RoutingStrategies.Direct | RoutingStrategies.Bubble, handledEventsToo: true);
+            AssociatedObject.AddHandler(DragDrop.DragOverEvent, DragOver, RoutingStrategies.Direct | RoutingStrategies.Bubble, handledEventsToo: true);
+            AssociatedObject.AddHandler(DragDrop.DropEvent, Drop, RoutingStrategies.Direct | RoutingStrategies.Bubble, handledEventsToo: true);
         }
 
         protected override void OnDetaching()
