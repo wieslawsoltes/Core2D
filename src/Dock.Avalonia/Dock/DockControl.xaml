@@ -9,7 +9,7 @@
              xmlns:idh="clr-namespace:Dock.Avalonia.Handlers;assembly=Dock.Avalonia"
              xmlns:Dock="clr-namespace:Dock.Model;assembly=Dock.Model"
              Design.Width="1200" Design.Height="540">
-    <DockPanel>
+    <DockPanel ZIndex="1">
         <i:Interaction.Behaviors>
             <id:DropBehavior Context="{Binding $parent[Window].DataContext.Layout}" Handler="{x:Static idh:DockDropHandler.Instance}"/>
         </i:Interaction.Behaviors>
