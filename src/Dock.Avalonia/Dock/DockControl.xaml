@@ -55,7 +55,7 @@
                 </TabStrip.Styles>
                 <TabStrip.DataTemplates>
                     <DataTemplate DataType="Dock:IDockView">
-                        <StackPanel Orientation="Horizontal" Gap="2">
+                        <StackPanel Orientation="Horizontal" Background="Transparent" Gap="2">
                             <i:Interaction.Behaviors>
                                 <id:DragBehavior/>
                             </i:Interaction.Behaviors>
