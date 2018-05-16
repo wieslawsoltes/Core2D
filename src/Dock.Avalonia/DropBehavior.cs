@@ -102,20 +102,25 @@ namespace Dock.Avalonia
 
         private void DragEnter(object sender, DragEventArgs e)
         {
+            bool isDock = e.Data.Get(DragDataFormats.Parent) is TabStripItem item;
+            if (isDock && sender is DockPanel panel)
+            {
+                if (sender is IVisual visual)
+                {
+                    AddAdorner(visual);
+                }
+            }
+
             if (Handler?.Validate(Context, sender, e) == false)
             {
-                e.DragEffects = DragDropEffects.None;
-                e.Handled = false;
+                if (!isDock)
+                {
+                    e.DragEffects = DragDropEffects.None;
+                    e.Handled = true;
+                }
             }
             else
             {
-                //if (sender is DockPanel panel)
-                if (sender is IVisual visual)
-                {
-                    //AddAdorner(panel);
-                    AddAdorner(visual);
-                }
-
                 e.DragEffects |= DragDropEffects.Copy | DragDropEffects.Move | DragDropEffects.Link;
                 e.Handled = true;
             }
@@ -128,10 +133,23 @@ namespace Dock.Avalonia
 
         private void DragOver(object sender, DragEventArgs e)
         {
+            bool isDock = e.Data.Get(DragDataFormats.Parent) is TabStripItem item;
+            if (isDock && sender is DockPanel panel)
+            {
+                RemoveAdorner();
+                if (sender is IVisual visual)
+                {
+                    AddAdorner(visual);
+                }
+            }
+
             if (Handler?.Validate(Context, sender, e) == false)
             {
-                e.DragEffects = DragDropEffects.None;
-                e.Handled = false;
+                if (!isDock)
+                {
+                    e.DragEffects = DragDropEffects.None;
+                    e.Handled = true;
+                }
             }
             else
             {
@@ -142,15 +160,23 @@ namespace Dock.Avalonia
 
         private void Drop(object sender, DragEventArgs e)
         {
-            RemoveAdorner();
+            bool isDock = e.Data.Get(DragDataFormats.Parent) is TabStripItem item;
+            if (isDock && sender is DockPanel panel)
+            {
+                RemoveAdorner();
+            }
 
             if (Handler?.Execute(Context, sender, e) == false)
             {
-                e.DragEffects = DragDropEffects.None;
-                e.Handled = false;
+                if (!isDock)
+                {
+                    e.DragEffects = DragDropEffects.None;
+                    e.Handled = true;
+                }
             }
             else
             {
+                e.DragEffects |= DragDropEffects.Copy | DragDropEffects.Move | DragDropEffects.Link;
                 e.Handled = true;
             }
         }
