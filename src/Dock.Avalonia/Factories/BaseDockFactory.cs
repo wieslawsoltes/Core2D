@@ -45,10 +45,11 @@ namespace Dock.Avalonia.Factories
             {
                 var original = target[i];
                 target[i] = views.FirstOrDefault(v => v.Title == original.Title);
-                target[i].Windows = original.Windows;
 
                 if (original.Windows != null)
                 {
+                    target[i].Windows = original.Windows;
+
                     UpdateWindows(original.Windows, views, context);
                 }
             }

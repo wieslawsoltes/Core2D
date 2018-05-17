@@ -35,6 +35,8 @@ namespace Core2D.Avalonia.Dock.Factories
                 CurrentView = views.FirstOrDefault(v => v.Title == "Dashboard"),
                 Children = new ObservableCollection<IDock>
                 {
+                    views.FirstOrDefault(v => v.Title == "Dashboard"),
+                    views.FirstOrDefault(v => v.Title == "Editor"),
                     new DockLayout
                     {
                         Dock = "Left",

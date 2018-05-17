@@ -28,7 +28,7 @@
                     <ItemsControl Items="{Binding Children}" DockPanel.Dock="{Binding Dock}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <DockPanel Background="Red"/>
+                                <DockPanel/>
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.DataTemplates>
