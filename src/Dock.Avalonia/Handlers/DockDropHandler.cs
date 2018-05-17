@@ -57,8 +57,8 @@ namespace Dock.Avalonia.Handlers
                 }
                 else if (source.Parent is TabStrip sourceStrip
                     && target.Parent is TabStrip targetStrip
-                    && sourceStrip.DataContext is IDockLayout sourcePanel
-                    && targetStrip.DataContext is IDockLayout targetPanel)
+                    && sourceStrip.DataContext is IDockLayout sourceLayout
+                    && targetStrip.DataContext is IDockLayout targetLayout)
                 {
                     int sourceIndex = sourceStrip.ItemContainerGenerator.IndexFromContainer(source);
                     int targetIndex = targetStrip.ItemContainerGenerator.IndexFromContainer(target);
@@ -73,11 +73,11 @@ namespace Dock.Avalonia.Handlers
                     }
                     else if (e.DragEffects == DragDropEffects.Move)
                     {
-                        if (sourcePanel.Views.Count > 1)
+                        if (sourceLayout.Views.Count > 1)
                         {
                             if (bExecute)
                             {
-                                layout?.MoveView(sourcePanel, targetPanel, sourceIndex, targetIndex);
+                                layout?.MoveView(sourceLayout, targetLayout, sourceIndex, targetIndex);
                             }
                             return true;
                         }
@@ -87,7 +87,7 @@ namespace Dock.Avalonia.Handlers
                     {
                         if (bExecute)
                         {
-                            layout?.SwapView(sourcePanel, targetPanel, sourceIndex, targetIndex);
+                            layout?.SwapView(sourceLayout, targetLayout, sourceIndex, targetIndex);
                         }
                         return true;
                     }
