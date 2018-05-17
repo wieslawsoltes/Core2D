@@ -73,7 +73,7 @@ namespace Dock.Avalonia.Handlers
                     }
                     else if (e.DragEffects == DragDropEffects.Move)
                     {
-                        if (sourceLayout.Views.Count > 1)
+                        if (sourceLayout.Children.Count > 1)
                         {
                             if (bExecute)
                             {
@@ -112,7 +112,7 @@ namespace Dock.Avalonia.Handlers
                 && sourceLayout != targetLayout)
             {
                 int sourceIndex = sourceStrip.ItemContainerGenerator.IndexFromContainer(source);
-                int targetIndex = targetLayout.Views.Count;
+                int targetIndex = targetLayout.Children.Count;
 
                 if (e.DragEffects == DragDropEffects.Copy)
                 {

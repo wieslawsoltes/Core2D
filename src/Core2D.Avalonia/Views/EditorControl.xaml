@@ -11,10 +11,40 @@
              xmlns:handlers="clr-namespace:Core2D.Avalonia.Dock.Handlers;assembly=Core2D.Avalonia"
              xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"
              xmlns:views="clr-namespace:Core2D.Avalonia.Views;assembly=Core2D.Avalonia"
+             xmlns:Dock="clr-namespace:Dock.Model;assembly=Dock.Model"
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
              Design.DataContext="{x:Static Designer:DesignerContext.Editor}"
              Design.Width="1200" Design.Height="540">
-    <Grid ColumnDefinitions="180,Auto,*,Auto,240" RowDefinitions="*,Auto" Margin="6,6,6,2">
+
+
+
+    <Grid ColumnDefinitions="*" RowDefinitions="*,Auto" Margin="6,6,6,2">
+        <ContentControl Content="{Binding Layout}" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <ContentControl.DataTemplates>
+                <DataTemplate DataType="Dock:IDockView">
+                    <idd:DockControl DockPanel.Dock="{Binding Dock}"/>
+                </DataTemplate>
+                <DataTemplate DataType="Dock:IDockLayout">
+                    <ItemsControl Items="{Binding Children}" DockPanel.Dock="{Binding Dock}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <DockPanel Background="Red"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.DataTemplates>
+                            <DataTemplate DataType="Dock:IDockView">
+                                <idd:DockControl DockPanel.Dock="{Binding Dock}"/>
+                            </DataTemplate>
+                        </ItemsControl.DataTemplates>
+                    </ItemsControl>
+                </DataTemplate>
+            </ContentControl.DataTemplates>
+        </ContentControl>
+        <views:StatusControl Grid.Column="0" Grid.Row="1" Margin="0,2,0,0"/>
+    </Grid>
+
+
+    <!--<Grid ColumnDefinitions="180,Auto,*,Auto,240" RowDefinitions="*,Auto" Margin="6,6,6,2">
         <GridSplitter Classes="vertical" Grid.Column="1" Grid.Row="0" Width="6"/>
         <views:PageControl Grid.Row="0" Grid.Column="2"/>
         <Grid RowDefinitions="50*,Auto,50*" Grid.Column="0" Grid.Row="0">
@@ -29,5 +59,6 @@
             <idd:DockControl DataContext="{Binding Layout.Children[3]}" Grid.Column="{Binding Column}" Grid.Row="{Binding Row}"/>
         </Grid>
         <views:StatusControl Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="1" Margin="0,2,0,0"/>
-    </Grid>
+    </Grid>-->
+
 </UserControl>

@@ -7,43 +7,7 @@ namespace Dock.Model
     /// <summary>
     /// Dock view contract.
     /// </summary>
-    public interface IDockView
+    public interface IDockView : IDock
     {
-        /// <summary>
-        /// Gets view title.
-        /// </summary>
-        string Title { get; }
-
-        /// <summary>
-        /// Gets view context.
-        /// </summary>
-        object Context { get; }
-
-        /// <summary>
-        /// Gets or sets windows.
-        /// </summary>
-        IList<IDockWindow> Windows { get; set; }
-
-        /// <summary>
-        /// Show windows.
-        /// </summary>
-        void ShowWindows();
-
-        /// <summary>
-        /// Close windows.
-        /// </summary>
-        void CloseWindows();
-
-        /// <summary>
-        /// Adds window.
-        /// </summary>
-        /// <param name="window">The window to add.</param>
-        void AddWindow(IDockWindow window);
-
-        /// <summary>
-        /// Removes window.
-        /// </summary>
-        /// <param name="window">The window to remove.</param>
-        void RemoveWindow(IDockWindow window);
     }
 }

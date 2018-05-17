@@ -332,7 +332,7 @@
                 </TreeViewItem>
             </TreeViewItem>
             <!-- Views -->
-            <TreeViewItem Header="Views" DataContext="{Binding Layout.Views}" Items="{Binding}">
+            <TreeViewItem Header="Views" DataContext="{Binding Layout.Children}" Items="{Binding}">
                 <TreeViewItem.ContextMenu>
                     <ContextMenu Classes="default">
                         <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>

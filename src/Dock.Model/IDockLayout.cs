@@ -7,32 +7,17 @@ namespace Dock.Model
     /// <summary>
     /// Dock layout contract.
     /// </summary>
-    public interface IDockLayout
+    public interface IDockLayout : IDock
     {
-        /// <summary>
-        /// Gets or sets row.
-        /// </summary>
-        int Row { get; set; }
-
-        /// <summary>
-        /// Gets or sets column.
-        /// </summary>
-        int Column { get; set; }
-
-        /// <summary>
-        /// Gets or sets views.
-        /// </summary>
-        IList<IDockView> Views { get; set; }
-
         /// <summary>
         /// Gets or sets current view.
         /// </summary>
-        IDockView CurrentView { get; set; }
+        IDock CurrentView { get; set; }
 
         /// <summary>
         /// Gets or sets children.
         /// </summary>
-        IList<IDockLayout> Children { get; set; }
+        IList<IDock> Children { get; set; }
 
         /// <summary>
         /// Gets or sets dock factory.
@@ -84,7 +69,7 @@ namespace Dock.Model
         /// Change current view.
         /// </summary>
         /// <param name="view">The view instance.</param>
-        void OnChangeCurrentView(IDockView view);
+        void OnChangeCurrentView(IDock view);
 
         /// <summary>
         /// Change current view.

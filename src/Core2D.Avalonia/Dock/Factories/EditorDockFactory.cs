@@ -31,17 +31,14 @@ namespace Core2D.Avalonia.Dock.Factories
         {
             return new DockLayout
             {
-                Row = 0,
-                Column = 0,
-                Views = new ObservableCollection<IDockView>(views),
+                Dock = "",
                 CurrentView = views.FirstOrDefault(v => v.Title == "Dashboard"),
-                Children = new ObservableCollection<IDockLayout>
+                Children = new ObservableCollection<IDock>
                 {
                     new DockLayout
                     {
-                        Row = 0,
-                        Column = 0,
-                        Views = new ObservableCollection<IDockView>
+                        Dock = "Left",
+                        Children = new ObservableCollection<IDock>
                         {
                             views.FirstOrDefault(v => v.Title == "Project"),
                             views.FirstOrDefault(v => v.Title == "Options"),
@@ -52,9 +49,8 @@ namespace Core2D.Avalonia.Dock.Factories
                     },
                     new DockLayout
                     {
-                        Row = 2,
-                        Column = 0,
-                        Views = new ObservableCollection<IDockView>
+                        Dock = "Left",
+                        Children = new ObservableCollection<IDock>
                         {
                             views.FirstOrDefault(v => v.Title == "Groups"),
                             views.FirstOrDefault(v => v.Title == "Databases")
@@ -64,9 +60,8 @@ namespace Core2D.Avalonia.Dock.Factories
                     },
                     new DockLayout
                     {
-                        Row = 0,
-                        Column = 0,
-                        Views = new ObservableCollection<IDockView>
+                        Dock = "Right",
+                        Children = new ObservableCollection<IDock>
                         {
                             views.FirstOrDefault(v => v.Title == "Styles"),
                             views.FirstOrDefault(v => v.Title == "Templates"),
@@ -78,9 +73,8 @@ namespace Core2D.Avalonia.Dock.Factories
                     },
                     new DockLayout
                     {
-                        Row = 2,
-                        Column = 0,
-                        Views = new ObservableCollection<IDockView>
+                        Dock = "Right",
+                        Children = new ObservableCollection<IDock>
                         {
                             views.FirstOrDefault(v => v.Title == "Tools"),
                             views.FirstOrDefault(v => v.Title == "Shape"),

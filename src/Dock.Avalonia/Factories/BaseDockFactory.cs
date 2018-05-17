@@ -39,7 +39,7 @@ namespace Dock.Avalonia.Factories
         }
 
         /// <inheritdoc/>
-        public virtual void UpdateViews(IList<IDockView> target, IList<IDockView> views, object context)
+        public virtual void UpdateViews(IList<IDock> target, IList<IDockView> views, object context)
         {
             for (int i = 0; i < target.Count; i++)
             {
@@ -57,7 +57,7 @@ namespace Dock.Avalonia.Factories
         /// <inheritdoc/>
         public virtual void UpdateLayout(IDockLayout layout, IList<IDockView> views, object context)
         {
-            UpdateViews(layout.Views, views, context);
+            UpdateViews(layout.Children, views, context);
 
             layout.CurrentView = views.FirstOrDefault(v => v.Title == layout.CurrentView?.Title);
             layout.Factory = this;
@@ -66,7 +66,10 @@ namespace Dock.Avalonia.Factories
             {
                 foreach (var child in layout.Children)
                 {
-                    UpdateLayout(child, views, context);
+                    if (child is IDockLayout childLayout)
+                    {
+                        UpdateLayout(childLayout, views, context);
+                    }
                 }
             }
         }
@@ -74,23 +77,20 @@ namespace Dock.Avalonia.Factories
         /// <inheritdoc/>
         public virtual IDockWindow CreateDockWindow(IDockLayout layout, object context, IDockLayout container, int viewIndex, double x, double y)
         {
-            var view = container.Views[viewIndex];
+            var view = container.Children[viewIndex];
 
             layout.RemoveView(container, viewIndex);
 
             var dockLayout = new DockLayout
             {
-                Row = 0,
-                Column = 0,
-                Views = new ObservableCollection<IDockView>(),
+                Dock = "",
                 CurrentView = view,
-                Children = new ObservableCollection<IDockLayout>
+                Children = new ObservableCollection<IDock>
                 {
                     new DockLayout
                     {
-                        Row = 0,
-                        Column = 0,
-                        Views = new ObservableCollection<IDockView> { view },
+                        Dock = "",
+                        Children = new ObservableCollection<IDock> { view },
                         CurrentView = view,
                         Factory = this
                     }

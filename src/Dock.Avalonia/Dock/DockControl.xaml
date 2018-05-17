@@ -27,7 +27,7 @@
             <id:DropBehavior Context="{Binding $parent[Window].DataContext.Layout}" Handler="{x:Static idh:DockDropHandler.Instance}"/>
         </i:Interaction.Behaviors>
         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" DockPanel.Dock="Bottom">
-            <TabStrip Items="{Binding Views}" SelectedItem="{Binding CurrentView, Mode=TwoWay}" Background="Transparent" Focusable="false" ClipToBounds="False" ZIndex="1">
+            <TabStrip Items="{Binding Children}" SelectedItem="{Binding CurrentView, Mode=TwoWay}" Background="Transparent" Focusable="false" ClipToBounds="False" ZIndex="1">
                 <i:Interaction.Behaviors>
                     <id:DropBehavior Context="{Binding $parent[Window].DataContext.Layout}" Handler="{x:Static idh:DockDropHandler.Instance}"/>
                 </i:Interaction.Behaviors>
@@ -67,7 +67,7 @@
         </ScrollViewer>
         <Border Classes="panel" ZIndex="-1">
             <!--
-            <Carousel Items="{Binding Views}" SelectedItem="{Binding CurrentView, Mode=TwoWay}" IsVirtualized="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            <Carousel Items="{Binding Children}" SelectedItem="{Binding CurrentView, Mode=TwoWay}" IsVirtualized="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
             -->
             <ContentControl Content="{Binding CurrentView}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
         </Border>

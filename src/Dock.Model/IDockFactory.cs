@@ -23,7 +23,7 @@ namespace Dock.Model
         /// <param name="target">The target views to update.</param>
         /// <param name="views">The source views.</param>
         /// <param name="context">The context object.</param>
-        void UpdateViews(IList<IDockView> target, IList<IDockView> views, object context);
+        void UpdateViews(IList<IDock> target, IList<IDockView> views, object context);
 
         /// <summary>
         /// Updates layout.

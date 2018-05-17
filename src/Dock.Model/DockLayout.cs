@@ -8,45 +8,27 @@ namespace Dock.Model
     /// <summary>
     /// Dock layout.
     /// </summary>
-    public class DockLayout : ObservableObject, IDockLayout
+    public class DockLayout : DockBase, IDockLayout
     {
-        private int _row;
-        private int _column;
-        private IList<IDockView> _views;
-        private IDockView _currentView;
-        private IList<IDockLayout> _children;
+        private IDock _currentView;
+        private IList<IDock> _children;
         private IDockFactory _factory;
 
         /// <inheritdoc/>
-        public int Row
-        {
-            get => _row;
-            set => Update(ref _row, value);
-        }
+        public override string Title { get; }
 
         /// <inheritdoc/>
-        public int Column
-        {
-            get => _column;
-            set => Update(ref _column, value);
-        }
+        public override object Context { get; }
 
         /// <inheritdoc/>
-        public IList<IDockView> Views
-        {
-            get => _views;
-            set => Update(ref _views, value);
-        }
-
-        /// <inheritdoc/>
-        public IDockView CurrentView
+        public IDock CurrentView
         {
             get => _currentView;
             set => Update(ref _currentView, value);
         }
 
         /// <inheritdoc/>
-        public IList<IDockLayout> Children
+        public IList<IDock> Children
         {
             get => _children;
             set => Update(ref _children, value);
@@ -62,11 +44,11 @@ namespace Dock.Model
         /// <inheritdoc/>
         public void RemoveView(IDockLayout layout, int index)
         {
-            layout.Views.RemoveAt(index);
+            layout.Children.RemoveAt(index);
 
-            if (layout.Views.Count > 0)
+            if (layout.Children.Count > 0)
             {
-                layout.CurrentView = layout.Views[index > 0 ? index - 1 : 0];
+                layout.CurrentView = layout.Children[index > 0 ? index - 1 : 0];
             }
         }
 
@@ -75,19 +57,19 @@ namespace Dock.Model
         {
             if (sourceIndex < targetIndex)
             {
-                var item = layout.Views[sourceIndex];
-                layout.Views.RemoveAt(sourceIndex);
-                layout.Views.Insert(targetIndex, item);
+                var item = layout.Children[sourceIndex];
+                layout.Children.RemoveAt(sourceIndex);
+                layout.Children.Insert(targetIndex, item);
                 layout.CurrentView = item;
             }
             else
             {
                 int removeIndex = sourceIndex;
-                if (layout.Views.Count > removeIndex)
+                if (layout.Children.Count > removeIndex)
                 {
-                    var item = layout.Views[sourceIndex];
-                    layout.Views.RemoveAt(removeIndex);
-                    layout.Views.Insert(targetIndex, item);
+                    var item = layout.Children[sourceIndex];
+                    layout.Children.RemoveAt(removeIndex);
+                    layout.Children.Insert(targetIndex, item);
                     layout.CurrentView = item;
                 }
             }
@@ -96,45 +78,45 @@ namespace Dock.Model
         /// <inheritdoc/>
         public void SwapView(IDockLayout layout, int sourceIndex, int targetIndex)
         {
-            var item1 = layout.Views[sourceIndex];
-            var item2 = layout.Views[targetIndex];
-            layout.Views[targetIndex] = item1;
-            layout.Views[sourceIndex] = item2;
+            var item1 = layout.Children[sourceIndex];
+            var item2 = layout.Children[targetIndex];
+            layout.Children[targetIndex] = item1;
+            layout.Children[sourceIndex] = item2;
             layout.CurrentView = item2;
         }
 
         /// <inheritdoc/>
         public void MoveView(IDockLayout sourceLayout, IDockLayout targetLayout, int sourceIndex, int targetIndex)
         {
-            var item = sourceLayout.Views[sourceIndex];
-            sourceLayout.Views.RemoveAt(sourceIndex);
-            targetLayout.Views.Insert(targetIndex, item);
+            var item = sourceLayout.Children[sourceIndex];
+            sourceLayout.Children.RemoveAt(sourceIndex);
+            targetLayout.Children.Insert(targetIndex, item);
 
-            if (sourceLayout.Views.Count > 0)
+            if (sourceLayout.Children.Count > 0)
             {
-                sourceLayout.CurrentView = sourceLayout.Views[sourceIndex > 0 ? sourceIndex - 1 : 0];
+                sourceLayout.CurrentView = sourceLayout.Children[sourceIndex > 0 ? sourceIndex - 1 : 0];
             }
 
-            if (targetLayout.Views.Count > 0)
+            if (targetLayout.Children.Count > 0)
             {
-                targetLayout.CurrentView = targetLayout.Views[targetIndex];
+                targetLayout.CurrentView = targetLayout.Children[targetIndex];
             }
         }
 
         /// <inheritdoc/>
         public void SwapView(IDockLayout sourceLayout, IDockLayout targetLayout, int sourceIndex, int targetIndex)
         {
-            var item1 = sourceLayout.Views[sourceIndex];
-            var item2 = targetLayout.Views[targetIndex];
-            sourceLayout.Views[sourceIndex] = item2;
-            targetLayout.Views[targetIndex] = item1;
+            var item1 = sourceLayout.Children[sourceIndex];
+            var item2 = targetLayout.Children[targetIndex];
+            sourceLayout.Children[sourceIndex] = item2;
+            targetLayout.Children[targetIndex] = item1;
 
             sourceLayout.CurrentView = item2;
             targetLayout.CurrentView = item1;
         }
 
         /// <inheritdoc/>
-        public void OnChangeCurrentView(IDockView view)
+        public void OnChangeCurrentView(IDock view)
         {
             if (view != null && _currentView != null && view != _currentView)
             {
@@ -155,26 +137,8 @@ namespace Dock.Model
         /// <inheritdoc/>
         public void OnChangeCurrentView(string title)
         {
-            OnChangeCurrentView(_views.FirstOrDefault(view => view.Title == title));
+            OnChangeCurrentView(_children.FirstOrDefault(view => view.Title == title));
         }
-
-        /// <summary>
-        /// Check whether the <see cref="Row"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeRow() => true;
-
-        /// <summary>
-        /// Check whether the <see cref="Column"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeColumn() => true;
-
-        /// <summary>
-        /// Check whether the <see cref="Views"/> property has changed from its default value.
-        /// </summary>
-        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeViews() => _views != null;
 
         /// <summary>
         /// Check whether the <see cref="CurrentView"/> property has changed from its default value.
