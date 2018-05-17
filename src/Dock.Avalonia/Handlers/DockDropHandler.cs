@@ -107,12 +107,12 @@ namespace Dock.Avalonia.Handlers
 
             if (sourceItem is TabStripItem source
                 && source.Parent is TabStrip sourceStrip
-                && sourceStrip.DataContext is IDockLayout sourceContainer
-                && panel.DataContext is IDockLayout targetContainer
-                && sourceContainer != targetContainer)
+                && sourceStrip.DataContext is IDockLayout sourceLayout
+                && panel.DataContext is IDockLayout targetLayout
+                && sourceLayout != targetLayout)
             {
                 int sourceIndex = sourceStrip.ItemContainerGenerator.IndexFromContainer(source);
-                int targetIndex = targetContainer.Views.Count;
+                int targetIndex = targetLayout.Views.Count;
 
                 if (e.DragEffects == DragDropEffects.Copy)
                 {
@@ -126,7 +126,7 @@ namespace Dock.Avalonia.Handlers
                 {
                     if (bExecute)
                     {
-                        layout?.MoveView(sourceContainer, targetContainer, sourceIndex, targetIndex);
+                        layout?.MoveView(sourceLayout, targetLayout, sourceIndex, targetIndex);
                     }
                     return true;
                 }
@@ -134,7 +134,7 @@ namespace Dock.Avalonia.Handlers
                 {
                     if (bExecute)
                     {
-                        layout?.SwapView(sourceContainer, targetContainer, sourceIndex, targetIndex);
+                        layout?.SwapView(sourceLayout, targetLayout, sourceIndex, targetIndex);
                     }
                     return true;
                 }
