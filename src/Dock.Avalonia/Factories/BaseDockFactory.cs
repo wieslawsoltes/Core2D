@@ -25,78 +25,67 @@ namespace Dock.Avalonia.Factories
         }
 
         /// <inheritdoc/>
-        public virtual void UpdateWindows(IList<IDockWindow> windows, IList<IDock> views, object context)
+        public virtual void UpdateWindow(IDockWindow window, object context)
+        {
+            var host = (IDockHost)_serviceProvider.GetService(typeof(IDockHost));
+
+            window.Host = host;
+            window.Context = context;
+
+            UpdateView(window.Layout, context);
+        }
+
+        /// <inheritdoc/>
+        public virtual void UpdateWindows(IList<IDockWindow> windows, object context)
         {
             foreach (var window in windows)
             {
-                var host = (IDockHost)_serviceProvider.GetService(typeof(IDockHost));
-
-                window.Host = host;
-                window.Context = context;
-
-                UpdateLayout(window.Layout, views, context);
+                UpdateWindow(window, context);
             }
         }
 
         /// <inheritdoc/>
-        public virtual void UpdateViews(IList<IDock> target, IList<IDock> views, object context)
+        public virtual void UpdateView(IDock view, object context)
         {
-            for (int i = 0; i < target.Count; i++)
+            view.CurrentView.Context = context;
+            view.Context = context;
+            view.Factory = this;
+
+            if (view.Windows != null)
             {
-                var original = target[i];
-                target[i] = views.FirstOrDefault(v => v.Title == original.Title);
-
-                if (original.Windows != null)
-                {
-                    target[i].Windows = original.Windows;
-
-                    UpdateWindows(original.Windows, views, context);
-                }
+                UpdateWindows(view.Windows, context);
             }
-        }
 
-        /// <inheritdoc/>
-        public virtual void UpdateLayout(IDock layout, IList<IDock> views, object context)
-        {
-            UpdateViews(layout.Views, views, context);
-
-            layout.CurrentView = views.FirstOrDefault(v => v.Title == layout.CurrentView?.Title);
-            layout.Factory = this;
-
-            if (layout.Views != null)
+            if (view.Views != null)
             {
-                foreach (var view in layout.Views)
-                {
-                    if (view is IDock childLayout)
-                    {
-                        UpdateLayout(childLayout, views, context);
-                    }
-                }
+                UpdateViews(view.Views, context);
             }
         }
 
         /// <inheritdoc/>
-        public virtual IDockWindow CreateDockWindow(IDock layout, object context, IDock container, int viewIndex, double x, double y)
+        public virtual void UpdateViews(IList<IDock> views, object context)
         {
-            var view = container.Views[viewIndex];
+            if (view.Views != null)
+            {
+                UpdateView(view.Views, context);
+            }
+        }
 
-            layout.RemoveView(container, viewIndex);
+        /// <inheritdoc/>
+        public virtual IDockWindow CreateDockWindow(IDock layout, object context, IDock source, int viewIndex, double x, double y)
+        {
+            var view = source.Views[viewIndex];
+
+            source.RemoveView(source, viewIndex);
 
             var dockLayout = new DockLayout
             {
                 Dock = "",
+                Title = "",,
+                Context = context,
+                Factory = this,
                 CurrentView = view,
-                Views = new ObservableCollection<IDock>
-                {
-                    new DockLayout
-                    {
-                        Dock = "",
-                        Views = new ObservableCollection<IDock> { view },
-                        CurrentView = view,
-                        Factory = this
-                    }
-                },
-                Factory = this
+                Views = new ObservableCollection<IDock> { view }
             };
 
             var host = (IDockHost)_serviceProvider.GetService(typeof(IDockHost));
@@ -123,7 +112,7 @@ namespace Dock.Avalonia.Factories
         }
 
         /// <inheritdoc/>
-        public abstract IDock CreateDefaultLayout(IList<IDock> views);
+        public abstract IDock CreateDefaultLayout(object context);
 
         /// <inheritdoc/>
         public abstract void CreateOrUpdateLayout();

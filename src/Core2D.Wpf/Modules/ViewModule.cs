@@ -2,7 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System.Windows.Input;
 using Autofac;
-using Core2D.Editor.Views.Interfaces;
+using Core2D.Avalonia.Dock.Views.Interfaces;
 using Core2D.Wpf.Windows;
 
 namespace Core2D.Wpf.Modules

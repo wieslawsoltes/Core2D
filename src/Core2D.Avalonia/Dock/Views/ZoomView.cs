@@ -3,12 +3,12 @@
 using System;
 using Dock.Model;
 
-namespace Core2D.Editor.Views
+namespace Core2D.Avalonia.Dock.Views
 {
     /// <summary>
-    /// Browser view.
+    /// Zoom view.
     /// </summary>
-    public class BrowserView : DockView
+    public class ZoomView : DockView
     {
     }
 }

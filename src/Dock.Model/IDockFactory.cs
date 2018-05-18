@@ -12,45 +12,42 @@ namespace Dock.Model
         /// <summary>
         /// Updates windows.
         /// </summary>
-        /// <param name="windows">The target windows to update.</param>
-        /// <param name="views">The source views.</param>
+        /// <param name="windows">The windows to update.</param>
         /// <param name="context">The context object.</param>
-        void UpdateWindows(IList<IDockWindow> windows, IList<IDock> views, object context);
+        void UpdateWindows(IList<IDockWindow> windows, object context);
 
         /// <summary>
         /// Updates views.
         /// </summary>
-        /// <param name="target">The target views to update.</param>
-        /// <param name="views">The source views.</param>
+        /// <param name="views">The views to update.</param>
         /// <param name="context">The context object.</param>
-        void UpdateViews(IList<IDock> target, IList<IDock> views, object context);
+        void UpdateViews(IList<IDock> views, object context);
 
         /// <summary>
         /// Updates layout.
         /// </summary>
-        /// <param name="layout">The target layout to update.</param>
-        /// <param name="views">The source views.</param>
+        /// <param name="layout">The layout to update.</param>
         /// <param name="context">The context object.</param>
-        void UpdateLayout(IDock layout, IList<IDock> views, object context);
+        void UpdateLayout(IDock layout, object context);
 
         /// <summary>
         /// Creates dock window from view.
         /// </summary>
-        /// <param name="layout">The target layout.</param>
+        /// <param name="layout">The owner layout.</param>
         /// <param name="context">The context object.</param>
-        /// <param name="container">The views container.</param>
-        /// <param name="viewIndex">The view index.</param>
+        /// <param name="source">The source layout.</param>
+        /// <param name="viewIndex">The view layout.</param>
         /// <param name="x">The X coordinate of window.</param>
         /// <param name="y">The Y coordinate of window.</param>
         /// <returns>The new instance of the <see cref="IDockWindow"/> class.</returns>
-        IDockWindow CreateDockWindow(IDock layout, object context, IDock container, int viewIndex, double x, double y);
+        IDockWindow CreateDockWindow(IDock layout, object context, IDock source, int viewIndex, double x, double y);
 
         /// <summary>
         /// Creates default layout.
         /// </summary>
-        /// <param name="views">The source views.</param>
+        /// <param name="context">The context object.</param>
         /// <returns>The new instance of the <see cref="IDock"/> class.</returns>
-        IDock CreateDefaultLayout(IList<IDockView> views);
+        IDock CreateDefaultLayout(object context);
 
         /// <summary>
         /// Creates or updates current layout.

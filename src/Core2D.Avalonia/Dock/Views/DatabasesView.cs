@@ -3,12 +3,12 @@
 using System;
 using Dock.Model;
 
-namespace Core2D.Editor.Views
+namespace Core2D.Avalonia.Dock.Views
 {
     /// <summary>
-    /// About view.
+    /// Databases view.
     /// </summary>
-    public class AboutView : DockView
+    public class DatabasesView : DockView
     {
     }
 }

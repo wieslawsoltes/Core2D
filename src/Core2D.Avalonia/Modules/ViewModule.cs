@@ -17,7 +17,7 @@ namespace Core2D.Avalonia.Modules
         /// <inheritdoc/>
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterAssemblyTypes(typeof(App).GetTypeInfo().Assembly).As<IDockView>().InstancePerLifetimeScope();
+            builder.RegisterAssemblyTypes(typeof(App).GetTypeInfo().Assembly).As<IDock>().InstancePerLifetimeScope();
             builder.RegisterType<EditorDockFactory>().As<IDockFactory>().InstancePerDependency();
             builder.RegisterType<HostWindow>().As<IDockHost>().InstancePerDependency();
             builder.RegisterType<MainWindow>().As<MainWindow>().InstancePerLifetimeScope();

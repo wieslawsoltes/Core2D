@@ -3,12 +3,12 @@
 using System;
 using Dock.Model;
 
-namespace Core2D.Editor.Views
+namespace Core2D.Avalonia.Dock.Views
 {
     /// <summary>
-    /// Options view.
+    /// Container view.
     /// </summary>
-    public class OptionsView : DockView
+    public class ContainerView : DockView
     {
     }
 }
