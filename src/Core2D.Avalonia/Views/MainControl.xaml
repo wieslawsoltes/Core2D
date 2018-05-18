@@ -44,9 +44,9 @@
     </UserControl.KeyBindings>
     <ContentControl Content="{Binding Layout}">
         <ContentControl.DataTemplates>
-            <DataTemplate DataType="Dock:IDockView">
+            <!--<DataTemplate DataType="Dock:IDockView">
                 <ContentControl Content="{Binding}"/>
-            </DataTemplate>
+            </DataTemplate>-->
             <DataTemplate DataType="Dock:IDockStrip">
                 <idd:DockControl DockPanel.Dock="{Binding Dock}"/>
             </DataTemplate>

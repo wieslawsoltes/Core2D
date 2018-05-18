@@ -7,9 +7,8 @@
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
              Design.DataContext="{x:Static Designer:DesignerContext.Editor}"
              Design.Width="1200" Design.Height="540">
-    <Grid ColumnDefinitions="*" RowDefinitions="*,Auto" Margin="6,6,6,2">
-        <ContentControl Content="{Binding Layout.CurrentView.CurrentView}" Grid.Column="0" Grid.Row="0"/>
-        <views:StatusControl Grid.Column="0" Grid.Row="1" Margin="0,2,0,0"/>
+    <Grid ColumnDefinitions="*" RowDefinitions="*,Auto">
+        <ContentControl Content="{Binding CurrentView}" Grid.Column="0" Grid.Row="0"/>
     </Grid>
     <!--<Grid ColumnDefinitions="180,Auto,*,Auto,240" RowDefinitions="*,Auto" Margin="6,6,6,2">
         <GridSplitter Classes="vertical" Grid.Column="1" Grid.Row="0" Width="6"/>
