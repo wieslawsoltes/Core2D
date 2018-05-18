@@ -81,7 +81,7 @@ namespace Dock.Avalonia.Factories
             var dockLayout = new DockLayout
             {
                 Dock = "",
-                Title = "",,
+                Title = "",
                 Context = context,
                 Factory = this,
                 CurrentView = view,
