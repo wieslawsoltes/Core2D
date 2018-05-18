@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Dock.Model
 {
@@ -10,7 +11,12 @@ namespace Dock.Model
     public abstract class DockBase : ObservableObject, IDock
     {
         private string _dock;
+        private string _title;
+        private object _context;
+        private IList<IDock> _views;
+        private IDock _currentView;
         private IList<IDockWindow> _windows;
+        private IDockFactory _factory;
 
         /// <inheritdoc/>
         public string Dock
@@ -20,16 +26,144 @@ namespace Dock.Model
         }
 
         /// <inheritdoc/>
-        public abstract string Title { get; }
+        public string Title
+        {
+            get => _title;
+            set => Update(ref _title, value);
+        }
 
         /// <inheritdoc/>
-        public abstract object Context { get; }
+        public object Context
+        {
+            get => _context;
+            set => Update(ref _context, value);
+        }
+
+        /// <inheritdoc/>
+        public IList<IDock> Views
+        {
+            get => _views;
+            set => Update(ref _views, value);
+        }
+
+        /// <inheritdoc/>
+        public IDock CurrentView
+        {
+            get => _currentView;
+            set => Update(ref _currentView, value);
+        }
 
         /// <inheritdoc/>
         public IList<IDockWindow> Windows
         {
             get => _windows;
             set => Update(ref _windows, value);
+        }
+
+        /// <inheritdoc/>
+        public IDockFactory Factory
+        {
+            get => _factory;
+            set => Update(ref _factory, value);
+        }
+
+        /// <inheritdoc/>
+        public void RemoveView(IDock dock, int index)
+        {
+            dock.Views.RemoveAt(index);
+
+            if (dock.Views.Count > 0)
+            {
+                dock.CurrentView = dock.Views[index > 0 ? index - 1 : 0];
+            }
+        }
+
+        /// <inheritdoc/>
+        public void MoveView(IDock dock, int sourceIndex, int targetIndex)
+        {
+            if (sourceIndex < targetIndex)
+            {
+                var item = dock.Views[sourceIndex];
+                dock.Views.RemoveAt(sourceIndex);
+                dock.Views.Insert(targetIndex, item);
+                dock.CurrentView = item;
+            }
+            else
+            {
+                int removeIndex = sourceIndex;
+                if (dock.Views.Count > removeIndex)
+                {
+                    var item = dock.Views[sourceIndex];
+                    dock.Views.RemoveAt(removeIndex);
+                    dock.Views.Insert(targetIndex, item);
+                    dock.CurrentView = item;
+                }
+            }
+        }
+
+        /// <inheritdoc/>
+        public void SwapView(IDock dock, int sourceIndex, int targetIndex)
+        {
+            var item1 = dock.Views[sourceIndex];
+            var item2 = dock.Views[targetIndex];
+            dock.Views[targetIndex] = item1;
+            dock.Views[sourceIndex] = item2;
+            dock.CurrentView = item2;
+        }
+
+        /// <inheritdoc/>
+        public void MoveView(IDock sourceDock, IDock targetDock, int sourceIndex, int targetIndex)
+        {
+            var item = sourceDock.Views[sourceIndex];
+            sourceDock.Views.RemoveAt(sourceIndex);
+            targetDock.Views.Insert(targetIndex, item);
+
+            if (sourceDock.Views.Count > 0)
+            {
+                sourceDock.CurrentView = sourceDock.Views[sourceIndex > 0 ? sourceIndex - 1 : 0];
+            }
+
+            if (targetDock.Views.Count > 0)
+            {
+                targetDock.CurrentView = targetDock.Views[targetIndex];
+            }
+        }
+
+        /// <inheritdoc/>
+        public void SwapView(IDock sourceDock, IDock targetDock, int sourceIndex, int targetIndex)
+        {
+            var item1 = sourceDock.Views[sourceIndex];
+            var item2 = targetDock.Views[targetIndex];
+            sourceDock.Views[sourceIndex] = item2;
+            targetDock.Views[targetIndex] = item1;
+
+            sourceDock.CurrentView = item2;
+            targetDock.CurrentView = item1;
+        }
+
+        /// <inheritdoc/>
+        public void OnChangeCurrentView(IDock view)
+        {
+            if (view != null && _currentView != null && view != _currentView)
+            {
+                _currentView.CloseWindows();
+            }
+
+            if (view != null && _currentView != view)
+            {
+                CurrentView = view;
+            }
+
+            if (_currentView != null)
+            {
+                _currentView.ShowWindows();
+            }
+        }
+
+        /// <inheritdoc/>
+        public void OnChangeCurrentView(string title)
+        {
+            OnChangeCurrentView(_views.FirstOrDefault(view => view.Title == title));
         }
 
         /// <inheritdoc/>
@@ -72,13 +206,13 @@ namespace Dock.Model
         /// Check whether the <see cref="Dock"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeDock() => true;
+        public virtual bool ShouldSerializeDock() => !string.IsNullOrEmpty(_dock);
 
         /// <summary>
         /// Check whether the <see cref="Title"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
-        public virtual bool ShouldSerializeTitle() => true;
+        public virtual bool ShouldSerializeTitle() => !string.IsNullOrEmpty(_title);
 
         /// <summary>
         /// Check whether the <see cref="Context"/> property has changed from its default value.
@@ -87,9 +221,27 @@ namespace Dock.Model
         public virtual bool ShouldSerializeContext() => false;
 
         /// <summary>
+        /// Check whether the <see cref="Views"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public virtual bool ShouldSerializeViews() => _views != null;
+
+        /// <summary>
+        /// Check whether the <see cref="CurrentView"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public virtual bool ShouldSerializeCurrentView() => _currentView != null;
+
+        /// <summary>
         /// Check whether the <see cref="Windows"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
         public virtual bool ShouldSerializeWindows() => _windows != null;
+
+        /// <summary>
+        /// Check whether the <see cref="Factory"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public virtual bool ShouldSerializeFactory() => false;
     }
 }

@@ -25,7 +25,7 @@ namespace Dock.Avalonia.Factories
         }
 
         /// <inheritdoc/>
-        public virtual void UpdateWindows(IList<IDockWindow> windows, IList<IDockView> views, object context)
+        public virtual void UpdateWindows(IList<IDockWindow> windows, IList<IDock> views, object context)
         {
             foreach (var window in windows)
             {
@@ -39,7 +39,7 @@ namespace Dock.Avalonia.Factories
         }
 
         /// <inheritdoc/>
-        public virtual void UpdateViews(IList<IDock> target, IList<IDockView> views, object context)
+        public virtual void UpdateViews(IList<IDock> target, IList<IDock> views, object context)
         {
             for (int i = 0; i < target.Count; i++)
             {
@@ -56,18 +56,18 @@ namespace Dock.Avalonia.Factories
         }
 
         /// <inheritdoc/>
-        public virtual void UpdateLayout(IDockLayout layout, IList<IDockView> views, object context)
+        public virtual void UpdateLayout(IDock layout, IList<IDock> views, object context)
         {
-            UpdateViews(layout.Children, views, context);
+            UpdateViews(layout.Views, views, context);
 
             layout.CurrentView = views.FirstOrDefault(v => v.Title == layout.CurrentView?.Title);
             layout.Factory = this;
 
-            if (layout.Children != null)
+            if (layout.Views != null)
             {
-                foreach (var child in layout.Children)
+                foreach (var view in layout.Views)
                 {
-                    if (child is IDockLayout childLayout)
+                    if (view is IDock childLayout)
                     {
                         UpdateLayout(childLayout, views, context);
                     }
@@ -76,9 +76,9 @@ namespace Dock.Avalonia.Factories
         }
 
         /// <inheritdoc/>
-        public virtual IDockWindow CreateDockWindow(IDockLayout layout, object context, IDockLayout container, int viewIndex, double x, double y)
+        public virtual IDockWindow CreateDockWindow(IDock layout, object context, IDock container, int viewIndex, double x, double y)
         {
-            var view = container.Children[viewIndex];
+            var view = container.Views[viewIndex];
 
             layout.RemoveView(container, viewIndex);
 
@@ -86,12 +86,12 @@ namespace Dock.Avalonia.Factories
             {
                 Dock = "",
                 CurrentView = view,
-                Children = new ObservableCollection<IDock>
+                Views = new ObservableCollection<IDock>
                 {
                     new DockLayout
                     {
                         Dock = "",
-                        Children = new ObservableCollection<IDock> { view },
+                        Views = new ObservableCollection<IDock> { view },
                         CurrentView = view,
                         Factory = this
                     }
@@ -123,7 +123,7 @@ namespace Dock.Avalonia.Factories
         }
 
         /// <inheritdoc/>
-        public abstract IDockLayout CreateDefaultLayout(IList<IDockView> views);
+        public abstract IDock CreateDefaultLayout(IList<IDock> views);
 
         /// <inheritdoc/>
         public abstract void CreateOrUpdateLayout();

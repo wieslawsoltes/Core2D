@@ -69,12 +69,12 @@ namespace Dock.Avalonia
         }
 
         /// <inheritdoc/>
-        public void SetLayout(IDockLayout layout)
+        public void SetLayout(IDock layout)
         {
             var dock = this.FindControl<IControl>("dock");
             if (dock != null)
             {
-                dock.DataContext = layout.Children[0];
+                dock.DataContext = layout.Views[0];
             }
         }
     }

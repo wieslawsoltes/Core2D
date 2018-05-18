@@ -15,7 +15,7 @@ namespace Dock.Model
         /// <param name="windows">The target windows to update.</param>
         /// <param name="views">The source views.</param>
         /// <param name="context">The context object.</param>
-        void UpdateWindows(IList<IDockWindow> windows, IList<IDockView> views, object context);
+        void UpdateWindows(IList<IDockWindow> windows, IList<IDock> views, object context);
 
         /// <summary>
         /// Updates views.
@@ -23,7 +23,7 @@ namespace Dock.Model
         /// <param name="target">The target views to update.</param>
         /// <param name="views">The source views.</param>
         /// <param name="context">The context object.</param>
-        void UpdateViews(IList<IDock> target, IList<IDockView> views, object context);
+        void UpdateViews(IList<IDock> target, IList<IDock> views, object context);
 
         /// <summary>
         /// Updates layout.
@@ -31,7 +31,7 @@ namespace Dock.Model
         /// <param name="layout">The target layout to update.</param>
         /// <param name="views">The source views.</param>
         /// <param name="context">The context object.</param>
-        void UpdateLayout(IDockLayout layout, IList<IDockView> views, object context);
+        void UpdateLayout(IDock layout, IList<IDock> views, object context);
 
         /// <summary>
         /// Creates dock window from view.
@@ -43,14 +43,14 @@ namespace Dock.Model
         /// <param name="x">The X coordinate of window.</param>
         /// <param name="y">The Y coordinate of window.</param>
         /// <returns>The new instance of the <see cref="IDockWindow"/> class.</returns>
-        IDockWindow CreateDockWindow(IDockLayout layout, object context, IDockLayout container, int viewIndex, double x, double y);
+        IDockWindow CreateDockWindow(IDock layout, object context, IDock container, int viewIndex, double x, double y);
 
         /// <summary>
         /// Creates default layout.
         /// </summary>
         /// <param name="views">The source views.</param>
-        /// <returns>The new instance of the <see cref="IDockLayout"/> class.</returns>
-        IDockLayout CreateDefaultLayout(IList<IDockView> views);
+        /// <returns>The new instance of the <see cref="IDock"/> class.</returns>
+        IDock CreateDefaultLayout(IList<IDockView> views);
 
         /// <summary>
         /// Creates or updates current layout.

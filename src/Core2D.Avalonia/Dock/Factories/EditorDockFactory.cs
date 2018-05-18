@@ -27,20 +27,23 @@ namespace Core2D.Avalonia.Dock.Factories
         }
 
         /// <inheritdoc/>
-        public override IDockLayout CreateDefaultLayout(IList<IDockView> views)
+        public override IDock CreateDefaultLayout(IList<IDock> views)
         {
             return new DockLayout
             {
                 Dock = "",
                 CurrentView = views.FirstOrDefault(v => v.Title == "Dashboard"),
-                Children = new ObservableCollection<IDock>
+                Views = new ObservableCollection<IDock>
                 {
                     views.FirstOrDefault(v => v.Title == "Dashboard"),
                     views.FirstOrDefault(v => v.Title == "Editor"),
+
+
+
                     new DockLayout
                     {
                         Dock = "Left",
-                        Children = new ObservableCollection<IDock>
+                        Views = new ObservableCollection<IDock>
                         {
                             views.FirstOrDefault(v => v.Title == "Project"),
                             views.FirstOrDefault(v => v.Title == "Options"),
@@ -52,7 +55,7 @@ namespace Core2D.Avalonia.Dock.Factories
                     new DockLayout
                     {
                         Dock = "Left",
-                        Children = new ObservableCollection<IDock>
+                        Views = new ObservableCollection<IDock>
                         {
                             views.FirstOrDefault(v => v.Title == "Groups"),
                             views.FirstOrDefault(v => v.Title == "Databases")
@@ -60,10 +63,14 @@ namespace Core2D.Avalonia.Dock.Factories
                         CurrentView = views.FirstOrDefault(v => v.Title == "Groups"),
                         Factory = this
                     },
+
+
+
+
                     new DockLayout
                     {
                         Dock = "Right",
-                        Children = new ObservableCollection<IDock>
+                        Views = new ObservableCollection<IDock>
                         {
                             views.FirstOrDefault(v => v.Title == "Styles"),
                             views.FirstOrDefault(v => v.Title == "Templates"),
@@ -76,7 +83,7 @@ namespace Core2D.Avalonia.Dock.Factories
                     new DockLayout
                     {
                         Dock = "Right",
-                        Children = new ObservableCollection<IDock>
+                        Views = new ObservableCollection<IDock>
                         {
                             views.FirstOrDefault(v => v.Title == "Tools"),
                             views.FirstOrDefault(v => v.Title == "Shape"),
@@ -86,7 +93,10 @@ namespace Core2D.Avalonia.Dock.Factories
                         },
                         CurrentView = views.FirstOrDefault(v => v.Title == "Tools"),
                         Factory = this
-                    },
+                    }
+
+
+ 
                 },
                 Factory = this
             };
@@ -96,7 +106,7 @@ namespace Core2D.Avalonia.Dock.Factories
         public override void CreateOrUpdateLayout()
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
-            var views = _serviceProvider.GetService<IDockView[], IList<IDockView>>((c) => new ObservableCollection<IDockView>(c));
+            var views = _serviceProvider.GetService<IDock[], IList<IDock>>((c) => new ObservableCollection<IDock>(c));
 
             if (editor.Layout != null)
             {

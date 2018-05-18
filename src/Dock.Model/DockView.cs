@@ -7,7 +7,7 @@ namespace Dock.Model
     /// <summary>
     /// Dock view.
     /// </summary>
-    public abstract class DockView : DockBase, IDockView
+    public class DockView : DockBase, IDockView
     {
     }
 }
