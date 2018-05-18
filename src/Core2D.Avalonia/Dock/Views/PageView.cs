@@ -6,9 +6,9 @@ using Dock.Model;
 namespace Core2D.Avalonia.Dock.Views
 {
     /// <summary>
-    /// About view.
+    /// Page view.
     /// </summary>
-    public class AboutView : DockView
+    public class PageView : DockView
     {
     }
 }
