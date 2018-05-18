@@ -252,17 +252,30 @@ namespace Core2D.Avalonia.Dock.Factories
 
             // Editor
 
+            var editorLayout = new DockLayout
+            {
+                Dock = "",
+                Context = context,
+                Factory = this,
+                CurrentView = null,
+                Views = new ObservableCollection<IDock>
+                {
+                    leftPane,
+                    pageView,
+                    rightPane
+                }
+            };
+
             var editorView = new EditorView
             {
                 Dock = "",
                 Title = "Editor",
                 Context = context,
                 Factory = this,
+                CurrentView = editorLayout,
                 Views = new ObservableCollection<IDock>
                 {
-                    leftPane,
-                    pageView,
-                    rightPane
+                   editorLayout
                 }
             };
 
