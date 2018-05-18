@@ -104,7 +104,7 @@ namespace Core2D.Avalonia.Dock.Factories
                 CurrentView = null,
                 Views = new ObservableCollection<IDock>
                 {
-                    new DockLayout
+                    new DockStrip
                     {
                         Dock = "Top",
                         Context = context,
@@ -117,7 +117,7 @@ namespace Core2D.Avalonia.Dock.Factories
                             imagesView
                         }
                     },
-                    new DockLayout
+                    new DockStrip
                     {
                         Dock = "Bottom",
                         Context = context,
@@ -218,7 +218,7 @@ namespace Core2D.Avalonia.Dock.Factories
                 CurrentView = null,
                 Views = new ObservableCollection<IDock>
                 {
-                    new DockLayout
+                    new DockStrip
                     {
                         Dock = "Top",
                         Context = context,
@@ -232,7 +232,7 @@ namespace Core2D.Avalonia.Dock.Factories
                             zoomView
                         }
                     },
-                    new DockLayout
+                    new DockStrip
                     {
                         Dock = "Bottom",
                         Context = context,
@@ -298,7 +298,7 @@ namespace Core2D.Avalonia.Dock.Factories
 
             // Main
 
-            var layout = new DockLayout
+            var layout = new DockRoot
             {
                 Dock = "",
                 Context = context,
