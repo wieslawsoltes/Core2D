@@ -40,7 +40,7 @@ namespace Dock.Model
         }
 
         /// <inheritdoc/>
-        public IList<IDock> Views
+view        public IList<IDock> Views
         {
             get => _views;
             set => Update(ref _views, value);

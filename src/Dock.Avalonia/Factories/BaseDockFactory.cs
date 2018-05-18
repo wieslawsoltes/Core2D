@@ -27,12 +27,13 @@ namespace Dock.Avalonia.Factories
         /// <inheritdoc/>
         public virtual void UpdateWindow(IDockWindow window, object context)
         {
-            var host = (IDockHost)_serviceProvider.GetService(typeof(IDockHost));
-
-            window.Host = host;
+            window.Host = (IDockHost)_serviceProvider.GetService(typeof(IDockHost));
             window.Context = context;
 
-            UpdateView(window.Layout, context);
+            if (window.Layout != null)
+            {
+                UpdateView(window.Layout, context);
+            }
         }
 
         /// <inheritdoc/>
@@ -47,7 +48,6 @@ namespace Dock.Avalonia.Factories
         /// <inheritdoc/>
         public virtual void UpdateView(IDock view, object context)
         {
-            view.CurrentView.Context = context;
             view.Context = context;
             view.Factory = this;
 
@@ -65,9 +65,9 @@ namespace Dock.Avalonia.Factories
         /// <inheritdoc/>
         public virtual void UpdateViews(IList<IDock> views, object context)
         {
-            if (view.Views != null)
+            foreach (var view in views)
             {
-                UpdateView(view.Views, context);
+                UpdateView(view, context);
             }
         }
 

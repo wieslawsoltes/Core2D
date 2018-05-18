@@ -17,12 +17,12 @@ namespace Dock.Model
         /// <summary>
         /// Gets view title.
         /// </summary>
-        string Title { get; }
+        string Title { get; set; }
 
         /// <summary>
         /// Gets view context.
         /// </summary>
-        object Context { get; }
+        object Context { get; set; }
 
         /// <summary>
         /// Gets or sets views.
