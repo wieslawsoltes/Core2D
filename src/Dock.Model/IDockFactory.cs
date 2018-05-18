@@ -10,11 +10,25 @@ namespace Dock.Model
     public interface IDockFactory
     {
         /// <summary>
+        /// Updates window.
+        /// </summary>
+        /// <param name="window">The window to update.</param>
+        /// <param name="context">The context object.</param>
+        void UpdateWindow(IDockWindow window, object context);
+
+        /// <summary>
         /// Updates windows.
         /// </summary>
         /// <param name="windows">The windows to update.</param>
         /// <param name="context">The context object.</param>
         void UpdateWindows(IList<IDockWindow> windows, object context);
+
+        /// <summary>
+        /// Update view.
+        /// </summary>
+        /// <param name="view">The view to update.</param>
+        /// <param name="context">The context object.</param>
+        void UpdateView(IDock view, object context);
 
         /// <summary>
         /// Updates views.
@@ -24,19 +38,12 @@ namespace Dock.Model
         void UpdateViews(IList<IDock> views, object context);
 
         /// <summary>
-        /// Updates layout.
-        /// </summary>
-        /// <param name="layout">The layout to update.</param>
-        /// <param name="context">The context object.</param>
-        void UpdateLayout(IDock layout, object context);
-
-        /// <summary>
         /// Creates dock window from view.
         /// </summary>
         /// <param name="layout">The owner layout.</param>
         /// <param name="context">The context object.</param>
         /// <param name="source">The source layout.</param>
-        /// <param name="viewIndex">The view layout.</param>
+        /// <param name="viewIndex">The source view index.</param>
         /// <param name="x">The X coordinate of window.</param>
         /// <param name="y">The Y coordinate of window.</param>
         /// <returns>The new instance of the <see cref="IDockWindow"/> class.</returns>
