@@ -769,6 +769,9 @@
                 <views:AboutControl Grid.Row="1" DataContext="{Binding Context}"/>
             </Grid>
         </DataTemplate>
+        <DataTemplate DataType="Views:PageView">
+            <views:PageControl DataContext="{Binding Context}"/>
+        </DataTemplate>
         <DataTemplate DataType="Views:ProjectView">
             <containers:ProjectControl DataContext="{Binding Context.Project}"/>
         </DataTemplate>
