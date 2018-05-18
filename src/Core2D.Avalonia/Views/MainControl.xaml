@@ -10,7 +10,7 @@
              Design.Width="1200" Design.Height="580">
     <UserControl.DataTemplates>
         <DataTemplate DataType="Dock:IDockView">
-            <ContentControl Content="{Binding}">
+            <ContentControl Content="{Binding}"/>
         </DataTemplate>
         <DataTemplate DataType="Dock:IDockStrip">
             <idd:DockControl DockPanel.Dock="{Binding Dock}"/>
