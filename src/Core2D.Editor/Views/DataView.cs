@@ -10,23 +10,5 @@ namespace Core2D.Editor.Views
     /// </summary>
     public class DataView : DockView
     {
-        private readonly IServiceProvider _serviceProvider;
-        private Lazy<ProjectEditor> _context;
-
-        /// <inheritdoc/>
-        public override string Title => "Data";
-
-        /// <inheritdoc/>
-        public override object Context => _context.Value;
-
-        /// <summary>
-        /// Initialize new instance of <see cref="DataView"/> class.
-        /// </summary>
-        /// <param name="serviceProvider">The service provider.</param>
-        public DataView(IServiceProvider serviceProvider) : base()
-        {
-            _serviceProvider = serviceProvider;
-            _context = serviceProvider.GetServiceLazily<ProjectEditor>();
-        }
     }
 }
