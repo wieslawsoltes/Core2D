@@ -16,26 +16,6 @@
              UseLayoutRounding="True"
              Design.DataContext="{x:Static Designer:DesignerContext.Editor}"
              Design.Width="1200" Design.Height="580">
-    <UserControl.DataTemplates>
-        <DataTemplate DataType="Dock:IDockView">
-            <ContentControl Content="{Binding}"/>
-        </DataTemplate>
-        <DataTemplate DataType="Dock:IDockStrip">
-            <idd:DockControl DockPanel.Dock="{Binding Dock}"/>
-        </DataTemplate>
-        <DataTemplate DataType="Dock:IDockLayout">
-            <ItemsControl Items="{Binding Views}" DockPanel.Dock="{Binding Dock}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <DockPanel/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>
-        </DataTemplate>
-        <DataTemplate DataType="Dock:IDockRoot">
-            <Carousel Items="{Binding Views}" SelectedItem="{Binding CurrentView, Mode=TwoWay}" IsVirtualized="False"/>
-        </DataTemplate>
-    <UserControl.DataTemplates>
     <UserControl.KeyBindings>
         <!-- File -->
         <KeyBinding Command="{Binding OnNew}" CommandParameter="{Binding}" Gesture="Ctrl+N"/>
@@ -62,5 +42,26 @@
         <KeyBinding Command="{Binding Platform.OnDocumentViewer}" Gesture="Ctrl+D"/>
         <KeyBinding Command="{Binding Platform.OnScriptEditor}" Gesture="Ctrl+R"/>
     </UserControl.KeyBindings>
-    <ContentControl Content="{Binding Layout}"/>
+    <ContentControl Content="{Binding Layout}">
+        <ContentControl.DataTemplates>
+            <DataTemplate DataType="Dock:IDockView">
+                <ContentControl Content="{Binding}"/>
+            </DataTemplate>
+            <DataTemplate DataType="Dock:IDockStrip">
+                <idd:DockControl DockPanel.Dock="{Binding Dock}"/>
+            </DataTemplate>
+            <DataTemplate DataType="Dock:IDockLayout">
+                <ItemsControl Items="{Binding Views}" DockPanel.Dock="{Binding Dock}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <DockPanel/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+            </DataTemplate>
+            <DataTemplate DataType="Dock:IDockRoot">
+                <Carousel Items="{Binding Views}" SelectedItem="{Binding CurrentView, Mode=TwoWay}" IsVirtualized="False"/>
+            </DataTemplate>
+        </ContentControl.DataTemplates>
+    </ContentControl>
 </UserControl>
