@@ -68,7 +68,7 @@ namespace Core2D.Avalonia.Dock.Factories
                 Factory = this
             };
 
-            var iagesView = new ImagesView
+            var imagesView = new ImagesView
             {
                 Dock = "",
                 Title = "Images",
