@@ -16,7 +16,7 @@
              Design.DataContext="{x:Static Designer:DesignerContext.Editor}"
              Design.Width="1200" Design.Height="540">
     <Grid ColumnDefinitions="*" RowDefinitions="*,Auto" Margin="6,6,6,2">
-        <ContentControl Content="{Binding CurrentView}" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <ContentControl Content="{Binding Layout.CurrentView}" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <ContentControl.DataTemplates>
                 <DataTemplate DataType="Dock:IDockView">
                     <idd:DockControl DockPanel.Dock="{Binding Dock}"/>
