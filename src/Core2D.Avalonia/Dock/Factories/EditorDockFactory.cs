@@ -45,6 +45,8 @@ namespace Core2D.Avalonia.Dock.Factories
             var pageView = new PageView
             {
                 Dock = "",
+                Width = 300,
+                Height = 300,
                 Title = "Page",
                 Context = context,
                 Factory = this
@@ -55,7 +57,8 @@ namespace Core2D.Avalonia.Dock.Factories
             var projectView = new ProjectView
             {
                 Dock = "",
-                Width = 180,
+                Width = 200,
+                Height = 200,
                 Title = "Project",
                 Context = context,
                 Factory = this
@@ -64,7 +67,8 @@ namespace Core2D.Avalonia.Dock.Factories
             var optionsView = new OptionsView
             {
                 Dock = "",
-                Width = 180,
+                Width = 200,
+                Height = 200,
                 Title = "Options",
                 Context = context,
                 Factory = this
@@ -73,7 +77,8 @@ namespace Core2D.Avalonia.Dock.Factories
             var imagesView = new ImagesView
             {
                 Dock = "",
-                Width = 180,
+                Width = 200,
+                Height = 200,
                 Title = "Images",
                 Context = context,
                 Factory = this
@@ -84,7 +89,8 @@ namespace Core2D.Avalonia.Dock.Factories
             var groupsView = new GroupsView
             {
                 Dock = "",
-                Width = 180,
+                Width = 200,
+                Height = 200,
                 Title = "Groups",
                 Context = context,
                 Factory = this
@@ -93,8 +99,103 @@ namespace Core2D.Avalonia.Dock.Factories
             var databasesView = new DatabasesView
             {
                 Dock = "",
-                Width = 180,
+                Width = 200,
+                Height = 200,
                 Title = "Databases",
+                Context = context,
+                Factory = this
+            };
+
+            // Right / Top
+
+            var stylesView = new StylesView
+            {
+                Dock = "",
+                Width = 200,
+                Height = 200,
+                Title = "Styles",
+                Context = context,
+                Factory = this
+            };
+
+            var templatesView = new TemplatesView
+            {
+                Dock = "",
+                Width = 200,
+                Height = 200,
+                Title = "Templates",
+                Context = context,
+                Factory = this
+            };
+
+            var containerView = new ContainerView
+            {
+                Dock = "",
+                Width = 200,
+                Height = 200,
+                Title = "Container",
+                Context = context,
+                Factory = this
+            };
+
+            var zoomView = new ZoomView
+            {
+                Dock = "",
+                Width = 200,
+                Height = 200,
+                Title = "Zoom",
+                Context = context,
+                Factory = this
+            };
+
+            // Right / Bottom
+
+            var toolsView = new ToolsView
+            {
+                Dock = "",
+                Width = 200,
+                Height = 200,
+                Title = "Tools",
+                Context = context,
+                Factory = this
+            };
+
+            var shapeView = new ShapeView
+            {
+                Dock = "",
+                Width = 200,
+                Height = 200,
+                Title = "Shape",
+                Context = context,
+                Factory = this
+            };
+
+            var dataView = new DataView
+            {
+                Dock = "",
+                Width = 200,
+                Height = 200,
+                Title = "Data",
+                Context = context,
+                Factory = this
+            };
+
+            var styleView = new StyleView
+            {
+                Dock = "",
+                Width = 200,
+                Height = 200,
+                Title = "Style",
+                Context = context,
+                Factory = this
+            };
+
+            var templateView = new TemplateView
+            {
+                Dock = "",
+                Width = 200,
+                Height = 200,
+                Title = "Template",
                 Context = context,
                 Factory = this
             };
@@ -104,7 +205,8 @@ namespace Core2D.Avalonia.Dock.Factories
             var leftPane = new DockLayout
             {
                 Dock = "Left",
-                Width = 180,
+                Width = 200,
+                Height = 500,
                 Context = context,
                 Factory = this,
                 CurrentView = null,
@@ -113,7 +215,8 @@ namespace Core2D.Avalonia.Dock.Factories
                     new DockStrip
                     {
                         Dock = "Top",
-                        Width = 180,
+                        Width = 200,
+                        Height = 200,
                         Context = context,
                         Factory = this,
                         CurrentView = projectView,
@@ -127,7 +230,8 @@ namespace Core2D.Avalonia.Dock.Factories
                     new DockStrip
                     {
                         Dock = "Bottom",
-                        Width = 180,
+                        Width = 200,
+                        Height = 200,
                         Context = context,
                         Factory = this,
                         CurrentView = groupsView,
@@ -140,97 +244,13 @@ namespace Core2D.Avalonia.Dock.Factories
                 }
             };
 
-            // Right / Top
-
-            var stylesView = new StylesView
-            {
-                Dock = "",
-                Width = 240,
-                Title = "Styles",
-                Context = context,
-                Factory = this
-            };
-
-            var templatesView = new TemplatesView
-            {
-                Dock = "",
-                Width = 240,
-                Title = "Templates",
-                Context = context,
-                Factory = this
-            };
-
-            var containerView = new ContainerView
-            {
-                Dock = "",
-                Width = 240,
-                Title = "Container",
-                Context = context,
-                Factory = this
-            };
-
-            var zoomView = new ZoomView
-            {
-                Dock = "",
-                Width = 240,
-                Title = "Zoom",
-                Context = context,
-                Factory = this
-            };
-
-            // Right / Bottom
-
-            var toolsView = new ToolsView
-            {
-                Dock = "",
-                Width = 240,
-                Title = "Tools",
-                Context = context,
-                Factory = this
-            };
-
-            var shapeView = new ShapeView
-            {
-                Dock = "",
-                Width = 240,
-                Title = "Shape",
-                Context = context,
-                Factory = this
-            };
-
-            var dataView = new DataView
-            {
-                Dock = "",
-                Width = 240,
-                Title = "Data",
-                Context = context,
-                Factory = this
-            };
-
-            var styleView = new StyleView
-            {
-                Dock = "",
-                Width = 240,
-                Title = "Style",
-                Context = context,
-                Factory = this
-            };
-
-            var templateView = new TemplateView
-            {
-                Dock = "",
-                Width = 240,
-                Title = "Template",
-                Context = context,
-                Factory = this
-            };
-
             // Right
 
             var rightPane = new DockLayout
             {
                 Dock = "Right",
-                Width = 240,
+                Width = 200,
+                Height = 500,
                 Context = context,
                 Factory = this,
                 CurrentView = null,
@@ -239,7 +259,8 @@ namespace Core2D.Avalonia.Dock.Factories
                     new DockStrip
                     {
                         Dock = "Top",
-                        Width = 240,
+                        Width = 200,
+                        Height = 200,
                         Context = context,
                         Factory = this,
                         CurrentView = stylesView,
@@ -254,7 +275,8 @@ namespace Core2D.Avalonia.Dock.Factories
                     new DockStrip
                     {
                         Dock = "Bottom",
-                        Width = 240,
+                        Width = 200,
+                        Height = 200,
                         Context = context,
                         Factory = this,
                         CurrentView = toolsView,
@@ -275,6 +297,8 @@ namespace Core2D.Avalonia.Dock.Factories
             var editorLayout = new DockLayout
             {
                 Dock = "",
+                Width = 900,
+                Height = 500,
                 Context = context,
                 Factory = this,
                 CurrentView = null,
@@ -282,7 +306,7 @@ namespace Core2D.Avalonia.Dock.Factories
                 {
                     leftPane,
                     pageView,
-                    rightPane
+                    rightPane,
                 }
             };
 

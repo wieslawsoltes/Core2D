@@ -11,6 +11,7 @@
              xmlns:dock="clr-namespace:Core2D.Avalonia.Dock;assembly=Core2D.Avalonia"
              xmlns:handlers="clr-namespace:Core2D.Avalonia.Dock.Handlers;assembly=Core2D.Avalonia"
              xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"
+             xmlns:Views="clr-namespace:Core2D.Avalonia.Dock.Views;assembly=Core2D.Avalonia"
              xmlns:Dock="clr-namespace:Dock.Model;assembly=Dock.Model"
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
              UseLayoutRounding="True"
@@ -42,5 +43,49 @@
         <KeyBinding Command="{Binding Platform.OnDocumentViewer}" Gesture="Ctrl+D"/>
         <KeyBinding Command="{Binding Platform.OnScriptEditor}" Gesture="Ctrl+R"/>
     </UserControl.KeyBindings>
-    <idd:LayoutControl DataContext="{Binding Layout}"/>
+    <!--<idd:LayoutControl DataContext="{Binding Layout}"/>-->
+    <!--
+    <DockPanel LastChildFill="True" Background="Pink" Width="900" Height="500">
+        <DockPanel LastChildFill="True" Width="200" Height="500" DockPanel.Dock="Left">
+            <Border Background="Red" Width="200" Height="250" DockPanel.Dock="Top"/>
+            <Border Background="Blue" Width="200" Height="250" DockPanel.Dock="Bottom"/>
+        </DockPanel>
+        <DockPanel LastChildFill="True" Width="200" Height="500" DockPanel.Dock="Right">
+            <Border Background="Green" Width="200" Height="250" DockPanel.Dock="Top"/>
+            <Border Background="Orange" Width="200" Height="250" DockPanel.Dock="Bottom"/>
+        </DockPanel>
+        <Grid>
+            <Border Background="Gray" Width="300" Height="300"/>
+        </Grid>
+    </DockPanel>
+    -->
+    <ContentControl Content="{Binding Layout}">
+        <ContentControl.DataTemplates>
+            <DataTemplate DataType="Views:PageView">
+                <Border Background="Gray" Width="{Binding Width}" Height="{Binding Height}">
+                    <TextBlock Text="{Binding Dock}"/>
+                </Border>
+            </DataTemplate>
+            <DataTemplate DataType="Dock:IDockStrip">
+                <Border Background="Red" DockPanel.Dock="{Binding Dock}" Width="{Binding Width}" Height="{Binding Height}">
+                    <TextBlock Text="{Binding Dock}"/>
+                </Border>
+            </DataTemplate>
+            <DataTemplate DataType="Dock:IDockLayout">
+                <Grid RowDefinitions="Auto,*" Background="Orange" DockPanel.Dock="{Binding Dock}" Width="{Binding Width}" Height="{Binding Height}">
+                    <TextBlock Background="Yellow" Text="{Binding Dock}" Grid.Row="0"/>
+                    <ItemsControl Items="{Binding Views}" Grid.Row="1">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <DockPanel Background="Pink" LastChildFill="True" Width="{Binding Width}" Height="{Binding Height}"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </Grid>
+            </DataTemplate>
+            <DataTemplate DataType="Dock:IDockRoot">
+                <Carousel Items="{Binding Views}" SelectedItem="{Binding CurrentView, Mode=TwoWay}" IsVirtualized="False"/>
+            </DataTemplate>
+        </ContentControl.DataTemplates>
+    </ContentControl>
 </UserControl>

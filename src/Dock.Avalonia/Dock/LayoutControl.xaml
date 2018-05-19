@@ -13,13 +13,13 @@
     <ContentControl Content="{Binding}">
         <ContentControl.DataTemplates>
             <DataTemplate DataType="Dock:IDockStrip">
-                <idd:StripControl DockPanel.Dock="{Binding Dock}" Width="{Binding Width}"/>
+                <idd:StripControl Background="Blue" DockPanel.Dock="{Binding Dock}" Width="{Binding Width}" Height="{Binding Height}"/>
             </DataTemplate>
             <DataTemplate DataType="Dock:IDockLayout">
-                <ItemsControl Items="{Binding Views}" DockPanel.Dock="{Binding Dock}">
+                <ItemsControl Items="{Binding Views}" DockPanel.Dock="{Binding Dock}" Width="{Binding Width}" Height="{Binding Height}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <DockPanel/>
+                            <DockPanel Background="Pink" LastChildFill="True" DockPanel.Dock="{Binding Dock}" Width="{Binding Width}" Height="{Binding Height}"/>
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                 </ItemsControl>

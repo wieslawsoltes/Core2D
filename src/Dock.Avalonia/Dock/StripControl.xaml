@@ -22,7 +22,7 @@
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
     </UserControl.Styles>
-    <DockPanel ZIndex="1" Background="Transparent" Width="{Binding Width}">
+    <DockPanel ZIndex="1" Background="Transparent" DockPanel.Dock="{Binding Dock}">
         <i:Interaction.Behaviors>
             <id:DropBehavior Context="{Binding $parent[Window].DataContext.Layout}" Handler="{x:Static idh:DockDropHandler.Instance}"/>
         </i:Interaction.Behaviors>
