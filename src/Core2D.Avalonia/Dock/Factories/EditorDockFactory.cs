@@ -360,7 +360,7 @@ namespace Core2D.Avalonia.Dock.Factories
                 Dock = "",
                 Context = context,
                 Factory = this,
-                CurrentView = dashboardView,
+                CurrentView = editorView, //dashboardView,
                 Views = new ObservableCollection<IDock>
                 {
                     dashboardView,
