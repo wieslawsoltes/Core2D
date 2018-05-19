@@ -225,6 +225,18 @@ namespace Dock.Model
         public virtual bool ShouldSerializeDock() => !string.IsNullOrEmpty(_dock);
 
         /// <summary>
+        /// Check whether the <see cref="Width"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public virtual bool ShouldSerializeWidth() => true;
+
+        /// <summary>
+        /// Check whether the <see cref="Height"/> property has changed from its default value.
+        /// </summary>
+        /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
+        public virtual bool ShouldSerializeHeight() => true;
+
+        /// <summary>
         /// Check whether the <see cref="Title"/> property has changed from its default value.
         /// </summary>
         /// <returns>Returns true if the property has changed; otherwise, returns false.</returns>
