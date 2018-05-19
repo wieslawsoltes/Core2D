@@ -15,6 +15,16 @@ namespace Dock.Model
         string Dock { get; set; }
 
         /// <summary>
+        /// Gets or sets width.
+        /// </summary>
+        double Width { get; set; }
+
+        /// <summary>
+        /// Gets or sets height.
+        /// </summary>
+        double Height { get; set; }
+
+        /// <summary>
         /// Gets view title.
         /// </summary>
         string Title { get; set; }

@@ -11,6 +11,8 @@ namespace Dock.Model
     public abstract class DockBase : ObservableObject, IDock
     {
         private string _dock;
+        private double _width;
+        private double _height;
         private string _title;
         private object _context;
         private IList<IDock> _views;
@@ -23,6 +25,20 @@ namespace Dock.Model
         {
             get => _dock;
             set => Update(ref _dock, value);
+        }
+
+        /// <inheritdoc/>
+        public double Width
+        {
+            get => _width;
+            set => Update(ref _width, value);
+        }
+
+        /// <inheritdoc/>
+        public double Height
+        {
+            get => _height;
+            set => Update(ref _height, value);
         }
 
         /// <inheritdoc/>

@@ -55,6 +55,7 @@ namespace Core2D.Avalonia.Dock.Factories
             var projectView = new ProjectView
             {
                 Dock = "",
+                Width = 180,
                 Title = "Project",
                 Context = context,
                 Factory = this
@@ -63,6 +64,7 @@ namespace Core2D.Avalonia.Dock.Factories
             var optionsView = new OptionsView
             {
                 Dock = "",
+                Width = 180,
                 Title = "Options",
                 Context = context,
                 Factory = this
@@ -71,16 +73,18 @@ namespace Core2D.Avalonia.Dock.Factories
             var imagesView = new ImagesView
             {
                 Dock = "",
+                Width = 180,
                 Title = "Images",
                 Context = context,
                 Factory = this
             };
 
-            // Left / Top
+            // Left / Bottom
 
             var groupsView = new GroupsView
             {
                 Dock = "",
+                Width = 180,
                 Title = "Groups",
                 Context = context,
                 Factory = this
@@ -89,6 +93,7 @@ namespace Core2D.Avalonia.Dock.Factories
             var databasesView = new DatabasesView
             {
                 Dock = "",
+                Width = 180,
                 Title = "Databases",
                 Context = context,
                 Factory = this
@@ -99,6 +104,7 @@ namespace Core2D.Avalonia.Dock.Factories
             var leftPane = new DockLayout
             {
                 Dock = "Left",
+                Width = 180,
                 Context = context,
                 Factory = this,
                 CurrentView = null,
@@ -107,6 +113,7 @@ namespace Core2D.Avalonia.Dock.Factories
                     new DockStrip
                     {
                         Dock = "Top",
+                        Width = 180,
                         Context = context,
                         Factory = this,
                         CurrentView = projectView,
@@ -120,6 +127,7 @@ namespace Core2D.Avalonia.Dock.Factories
                     new DockStrip
                     {
                         Dock = "Bottom",
+                        Width = 180,
                         Context = context,
                         Factory = this,
                         CurrentView = groupsView,
@@ -137,6 +145,7 @@ namespace Core2D.Avalonia.Dock.Factories
             var stylesView = new StylesView
             {
                 Dock = "",
+                Width = 240,
                 Title = "Styles",
                 Context = context,
                 Factory = this
@@ -145,6 +154,7 @@ namespace Core2D.Avalonia.Dock.Factories
             var templatesView = new TemplatesView
             {
                 Dock = "",
+                Width = 240,
                 Title = "Templates",
                 Context = context,
                 Factory = this
@@ -153,6 +163,7 @@ namespace Core2D.Avalonia.Dock.Factories
             var containerView = new ContainerView
             {
                 Dock = "",
+                Width = 240,
                 Title = "Container",
                 Context = context,
                 Factory = this
@@ -161,6 +172,7 @@ namespace Core2D.Avalonia.Dock.Factories
             var zoomView = new ZoomView
             {
                 Dock = "",
+                Width = 240,
                 Title = "Zoom",
                 Context = context,
                 Factory = this
@@ -171,6 +183,7 @@ namespace Core2D.Avalonia.Dock.Factories
             var toolsView = new ToolsView
             {
                 Dock = "",
+                Width = 240,
                 Title = "Tools",
                 Context = context,
                 Factory = this
@@ -179,6 +192,7 @@ namespace Core2D.Avalonia.Dock.Factories
             var shapeView = new ShapeView
             {
                 Dock = "",
+                Width = 240,
                 Title = "Shape",
                 Context = context,
                 Factory = this
@@ -187,6 +201,7 @@ namespace Core2D.Avalonia.Dock.Factories
             var dataView = new DataView
             {
                 Dock = "",
+                Width = 240,
                 Title = "Data",
                 Context = context,
                 Factory = this
@@ -195,6 +210,7 @@ namespace Core2D.Avalonia.Dock.Factories
             var styleView = new StyleView
             {
                 Dock = "",
+                Width = 240,
                 Title = "Style",
                 Context = context,
                 Factory = this
@@ -203,6 +219,7 @@ namespace Core2D.Avalonia.Dock.Factories
             var templateView = new TemplateView
             {
                 Dock = "",
+                Width = 240,
                 Title = "Template",
                 Context = context,
                 Factory = this
@@ -213,6 +230,7 @@ namespace Core2D.Avalonia.Dock.Factories
             var rightPane = new DockLayout
             {
                 Dock = "Right",
+                Width = 240,
                 Context = context,
                 Factory = this,
                 CurrentView = null,
@@ -221,6 +239,7 @@ namespace Core2D.Avalonia.Dock.Factories
                     new DockStrip
                     {
                         Dock = "Top",
+                        Width = 240,
                         Context = context,
                         Factory = this,
                         CurrentView = stylesView,
@@ -235,6 +254,7 @@ namespace Core2D.Avalonia.Dock.Factories
                     new DockStrip
                     {
                         Dock = "Bottom",
+                        Width = 240,
                         Context = context,
                         Factory = this,
                         CurrentView = toolsView,

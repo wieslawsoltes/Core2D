@@ -1,6 +1,6 @@
 ﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
 <!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
-<UserControl x:Class="Dock.Avalonia.Dock.DockControl"
+<UserControl x:Class="Dock.Avalonia.Dock.StripControl"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
@@ -22,7 +22,7 @@
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
     </UserControl.Styles>
-    <DockPanel ZIndex="1" Background="Transparent">
+    <DockPanel ZIndex="1" Background="Transparent" Width="{Binding Width}">
         <i:Interaction.Behaviors>
             <id:DropBehavior Context="{Binding $parent[Window].DataContext.Layout}" Handler="{x:Static idh:DockDropHandler.Instance}"/>
         </i:Interaction.Behaviors>
