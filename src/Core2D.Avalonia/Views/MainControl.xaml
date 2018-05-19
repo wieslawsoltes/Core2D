@@ -89,7 +89,7 @@
                 </Border>
             </DataTemplate>
             <DataTemplate DataType="Dock:IDockLayout">
-                <StackPanel DockPanel.Dock="{Binding Dock}">
+                <StackPanel Background="Purple" DockPanel.Dock="{Binding Dock}">
                     <TextBlock Text="{Binding $self.DataContext}"/>
                     <TextBlock Text="{Binding Dock}"/>
                     <TextBlock Text="{Binding Width}"/>
@@ -97,7 +97,7 @@
                     <ItemsControl Items="{Binding Views}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <DockPanel Background="Orange" DockPanel.Dock="{Binding Dock}" LastChildFill="True"/>
+                                <DockPanel Background="Orange" DockPanel.Dock="{Binding Dock}" Width="{Binding Width}" Height="{Binding Height}" LastChildFill="True"/>
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                     </ItemsControl>
