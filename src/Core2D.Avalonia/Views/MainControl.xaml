@@ -77,7 +77,7 @@
                     <ItemsControl Items="{Binding Views}" Grid.Row="1">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <DockPanel Background="Pink" LastChildFill="True" Width="{Binding Width}" Height="{Binding Height}"/>
+                                <DockPanel Background="Pink" LastChildFill="True"/>
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                     </ItemsControl>
