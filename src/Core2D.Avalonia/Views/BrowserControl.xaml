@@ -11,6 +11,7 @@
              xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"
              xmlns:Core="clr-namespace:Core2D;assembly=Core2D"
              xmlns:Data="clr-namespace:Core2D.Data;assembly=Core2D"
+             xmlns:Dock="clr-namespace:Dock.Model;assembly=Dock.Model"
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor"
              xmlns:Dock="clr-namespace:Dock.Model;assembly=Dock.Model"
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
@@ -18,6 +19,7 @@
              xmlns:Shape="clr-namespace:Core2D.Shape;assembly=Core2D"
              xmlns:Shapes="clr-namespace:Core2D.Shapes;assembly=Core2D"
              xmlns:Style="clr-namespace:Core2D.Style;assembly=Core2D"
+             xmlns:dock="clr-namespace:Core2D.Avalonia.Views.Dock;assembly=Core2D.Avalonia"
              Design.DataContext="{x:Static Designer:DesignerContext.Editor}"
              Design.Width="1000" Design.Height="600">
     <Grid ColumnDefinitions="250,Auto,*" RowDefinitions="*">
@@ -365,7 +367,14 @@
         <Border Classes="project" Grid.Column="2" Grid.Row="0" Margin="0,6,6,6">
             <TabControl Classes="top">
                 <TabItem Header="Properties" Classes="property">
-                    <ContentControl Content="{Binding #project.SelectedItem, Converter={x:Static converters:TreeViewSelectedItemToObjectConverter.Instance}}" Classes="project" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                    <ContentControl Content="{Binding #project.SelectedItem, Converter={x:Static converters:TreeViewSelectedItemToObjectConverter.Instance}}" Classes="project" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <ContentControl.DataTemplates>
+                            <!-- Dock -->
+                            <DataTemplate DataType="Dock:IDock">
+                                <dock:DockControl/>
+                            </DataTemplate>
+                        </ContentControl.DataTemplates>
+                    </ContentControl>
                 </TabItem>
                 <TabItem Header="Xaml" Classes="property">
                     <TextBox DataContext="{Binding #project.SelectedItem, Converter={x:Static converters:TreeViewSelectedItemToObjectConverter.Instance}}" Text="{Binding Mode=OneWay, Converter={x:Static converters:ObjectToXamlStringConverter.Instance}}" Classes="project" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">

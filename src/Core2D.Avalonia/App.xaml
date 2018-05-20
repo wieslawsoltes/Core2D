@@ -740,10 +740,6 @@
         <DataTemplate DataType="Containers:LayerContainer">
             <containers:LayerControl/>
         </DataTemplate>
-        <!-- Dock -->
-        <DataTemplate DataType="Dock:IDock">
-            <dock:DockControl/>
-        </DataTemplate>
         <!-- Views -->
         <DataTemplate DataType="Views:DashboardView">
             <Grid RowDefinitions="Auto,*">
