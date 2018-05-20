@@ -38,6 +38,11 @@
         <Assembly Name="Core2D.TextFieldWriter.CsvHelper" Dynamic="Required All" />
         <Assembly Name="Core2D.Utilities.Avalonia" Dynamic="Required All" />
 
+        <!-- Dock -->
+
+        <Assembly Name="Dock.Model" Dynamic="Required All" />
+        <Assembly Name="Dock.Avalonia" Dynamic="Required All" />
+
         <!-- Avalonia -->
 
         <Assembly Name="Avalonia.Animation" Dynamic="Required All" />
