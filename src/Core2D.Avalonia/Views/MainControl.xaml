@@ -44,111 +44,100 @@
         <KeyBinding Command="{Binding Platform.OnScriptEditor}" Gesture="Ctrl+R"/>
     </UserControl.KeyBindings>
 
-    <!--<idd:LayoutControl DataContext="{Binding Layout}"/>-->
+    <TabControl>
 
-    <!--
-    <DockPanel LastChildFill="True" Background="Pink" Width="900" Height="500">
-        <DockPanel LastChildFill="True" Width="200" Height="500" DockPanel.Dock="Left">
-            <Border Background="Red" Width="200" Height="250" DockPanel.Dock="Top"/>
-            <Border Background="Blue" Width="200" Height="250" DockPanel.Dock="Bottom"/>
-        </DockPanel>
-        <DockPanel LastChildFill="True" Width="200" Height="500" DockPanel.Dock="Right">
-            <Border Background="Green" Width="200" Height="250" DockPanel.Dock="Top"/>
-            <Border Background="Orange" Width="200" Height="250" DockPanel.Dock="Bottom"/>
-        </DockPanel>
-        <Grid>
-            <Border Background="Gray" Width="300" Height="300"/>
-        </Grid>
-    </DockPanel>
-    -->
+        <TabItem Header="LayoutControl">
 
-    <ItemsControl Items="{Binding Layout.CurrentView.CurrentView.Views}" 
-                  Width="{Binding Layout.CurrentView.CurrentView.Width}" 
-                  Height="{Binding Layout.CurrentView.CurrentView.Height}">
-        <ItemsControl.ItemsPanel>
-            <ItemsPanelTemplate>
-                <DockPanel Background="Pink" LastChildFill="True"/>
-            </ItemsPanelTemplate>
-        </ItemsControl.ItemsPanel>
-        <ItemsControl.Styles>
-            <Style Selector="ItemsControl > ContentPresenter">
-                <Setter Property="DockPanel.Dock" Value="{Binding Dock}"/>
-            </Style>
-        </ItemsControl.Styles>
-        <ItemsControl.DataTemplates>
-            <DataTemplate DataType="Views:PageView">
-                <Border Background="Gray" Width="{Binding Width}" Height="{Binding Height}">
-                    <StackPanel>
-                        <TextBlock Text="{Binding $self.DataContext}"/>
-                        <TextBlock Text="{Binding Dock}"/>
-                        <TextBlock Text="{Binding Width}"/>
-                        <TextBlock Text="{Binding Height}"/>
-                    </StackPanel>
-                </Border>
-            </DataTemplate>
-            <DataTemplate DataType="Dock:IDockStrip">
-                <Border Background="Red" Width="{Binding Width}" Height="{Binding Height}">
-                    <StackPanel>
-                        <TextBlock Text="{Binding $self.DataContext}"/>
-                        <TextBlock Text="{Binding Dock}"/>
-                        <TextBlock Text="{Binding Width}"/>
-                        <TextBlock Text="{Binding Height}"/>
-                    </StackPanel>
-                </Border>
-            </DataTemplate>
-            <DataTemplate DataType="Dock:IDockLayout">
-                <StackPanel Background="Purple" Width="{Binding Width}">
+
+<idd:LayoutControl DataContext="{Binding Layout}"/>
+
+
+        </TabItem>
+
+        <TabItem Header="ItemsControl">
+
+
+<ItemsControl DataContext="{Binding Layout.CurrentView.CurrentView}"
+              Items="{Binding Views}"
+              Width="{Binding Width}"
+              Height="{Binding Height}">
+    <ItemsControl.Styles>
+        <Style Selector="ItemsControl > ContentPresenter">
+            <Setter Property="DockPanel.Dock" Value="{Binding Dock}"/>
+        </Style>
+    </ItemsControl.Styles>
+    <ItemsControl.ItemsPanel>
+        <ItemsPanelTemplate>
+            <DockPanel Background="Pink" Width="{Binding Width}" Height="{Binding Height}" LastChildFill="True"/>
+        </ItemsPanelTemplate>
+    </ItemsControl.ItemsPanel>
+    <ItemsControl.DataTemplates>
+        <DataTemplate DataType="Views:PageView">
+            <Border Background="Gray" Width="{Binding Width}" Height="{Binding Height}">
+                <StackPanel>
                     <TextBlock Text="{Binding $self.DataContext}"/>
                     <TextBlock Text="{Binding Dock}"/>
                     <TextBlock Text="{Binding Width}"/>
                     <TextBlock Text="{Binding Height}"/>
-                    <ItemsControl Items="{Binding Views}">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <DockPanel Background="Orange" Width="{Binding Width}" Height="{Binding Height}" LastChildFill="True"/>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                        <ItemsControl.Styles>
-                            <Style Selector="ItemsControl > ContentPresenter">
-                                <Setter Property="DockPanel.Dock" Value="{Binding Dock}"/>
-                            </Style>
-                        </ItemsControl.Styles>
-                    </ItemsControl>
-                </StackPanel> 
-            </DataTemplate>
-         </ItemsControl.DataTemplates>
-    </ItemsControl>
+                </StackPanel>
+            </Border>
+        </DataTemplate>
+        <DataTemplate DataType="Dock:IDockStrip">
+            <Border Background="Red" Width="{Binding Width}" Height="{Binding Height}">
+                <StackPanel>
+                    <TextBlock Text="{Binding $self.DataContext}"/>
+                    <TextBlock Text="{Binding Dock}"/>
+                    <TextBlock Text="{Binding Width}"/>
+                    <TextBlock Text="{Binding Height}"/>
+                </StackPanel>
+            </Border>
+        </DataTemplate>
+        <DataTemplate DataType="Dock:IDockLayout">
+            <StackPanel Background="Purple" Width="{Binding Width}">
+                <TextBlock Text="{Binding $self.DataContext}"/>
+                <TextBlock Text="{Binding Dock}"/>
+                <TextBlock Text="{Binding Width}"/>
+                <TextBlock Text="{Binding Height}"/>
+                <ItemsControl Items="{Binding Views}">
+                    <ItemsControl.Styles>
+                        <Style Selector="ItemsControl > ContentPresenter">
+                            <Setter Property="DockPanel.Dock" Value="{Binding Dock}"/>
+                        </Style>
+                    </ItemsControl.Styles>
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <DockPanel Background="Orange" Width="{Binding Width}" Height="{Binding Height}" LastChildFill="True"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+            </StackPanel>
+        </DataTemplate>
+     </ItemsControl.DataTemplates>
+</ItemsControl>
 
-    <!--
-    <ContentControl Content="{Binding Layout}">
-        <ContentControl.DataTemplates>
-            <DataTemplate DataType="Views:PageView">
-                <Border Background="Gray" Width="{Binding Width}" Height="{Binding Height}">
-                    <TextBlock Text="{Binding Dock}"/>
-                </Border>
-            </DataTemplate>
-            <DataTemplate DataType="Dock:IDockStrip">
-                <Border Background="Red" DockPanel.Dock="{Binding Dock}" Width="{Binding Width}" Height="{Binding Height}">
-                    <TextBlock Text="{Binding Dock}"/>
-                </Border>
-            </DataTemplate>
-            <DataTemplate DataType="Dock:IDockLayout">
-                <Grid RowDefinitions="Auto,*" Background="Orange" DockPanel.Dock="{Binding Dock}" Width="{Binding Width}" Height="{Binding Height}">
-                    <TextBlock Background="Yellow" Text="{Binding Dock}" Grid.Row="0"/>
-                    <ItemsControl Items="{Binding Views}" Grid.Row="1">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <DockPanel Background="Pink" LastChildFill="True"/>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                    </ItemsControl>
-                </Grid>
-            </DataTemplate>
-            <DataTemplate DataType="Dock:IDockRoot">
-                <Carousel Items="{Binding Views}" SelectedItem="{Binding CurrentView, Mode=TwoWay}" IsVirtualized="False"/>
-            </DataTemplate>
-        </ContentControl.DataTemplates>
-    </ContentControl>
-    -->
+
+        </TabItem>
+
+        <TabItem Header="DockPanel">
+
+
+<DockPanel LastChildFill="True" Background="Pink" Width="900" Height="500">
+    <DockPanel LastChildFill="True" Width="200" Height="500" DockPanel.Dock="Left">
+        <Border Background="Red" Width="200" Height="250" DockPanel.Dock="Top"/>
+        <Border Background="Blue" Width="200" Height="250" DockPanel.Dock="Bottom"/>
+    </DockPanel>
+    <DockPanel LastChildFill="True" Width="200" Height="500" DockPanel.Dock="Right">
+        <Border Background="Green" Width="200" Height="250" DockPanel.Dock="Top"/>
+        <Border Background="Orange" Width="200" Height="250" DockPanel.Dock="Bottom"/>
+    </DockPanel>
+    <Grid>
+        <Border Background="Gray" Width="300" Height="300"/>
+    </Grid>
+</DockPanel>
+
+
+        </TabItem>
+
+    </TabControl>
 
 </UserControl>
