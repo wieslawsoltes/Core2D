@@ -9,6 +9,7 @@ jobs:
       DOTNET_CLI_TELEMETRY_OPTOUT: 1
     steps:
       - checkout
+      - run: git submodule update --init
       - run: dotnet restore src/Core2D.Editor
       - run: dotnet build src/Core2D.Editor/Core2D.Editor.csproj -c Release -f netstandard2.0
       - run: dotnet restore tests/Core2D.UnitTests
