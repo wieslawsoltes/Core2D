@@ -350,6 +350,12 @@ namespace Core2D.Avalonia.Dock.Factories
             if (editor.Layout != null)
             {
                 Update(editor.Layout, editor);
+
+                var dashboard = editor.Layout.Views.FirstOrDefault(v => v.Title == "Dashboard");
+                if (dashboard != null)
+                {
+                    editor.Layout.CurrentView = dashboard;
+                }
             }
             else
             {
