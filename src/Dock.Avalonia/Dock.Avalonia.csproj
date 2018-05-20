@@ -18,21 +18,7 @@
   <Import Project="..\..\build\EmbedXaml.props" />
 
   <ItemGroup>
-    <None Remove="Dock\LayoutControl.xaml" />
-    <None Remove="Dock\StripControl - Copy.xaml.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Dock.Model\Dock.Model.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="Dock\StripControl - Copy.xaml.cs">
-      <DependentUpon>StripControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Dock\StripControl.xaml.cs">
-      <DependentUpon>StripControl.xaml</DependentUpon>
-    </Compile>
   </ItemGroup>
 
 </Project>
