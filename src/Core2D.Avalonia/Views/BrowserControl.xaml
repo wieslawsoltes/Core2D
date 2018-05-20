@@ -13,7 +13,6 @@
              xmlns:Data="clr-namespace:Core2D.Data;assembly=Core2D"
              xmlns:Dock="clr-namespace:Dock.Model;assembly=Dock.Model"
              xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor"
-             xmlns:Dock="clr-namespace:Dock.Model;assembly=Dock.Model"
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
              xmlns:Containers="clr-namespace:Core2D.Containers;assembly=Core2D"
              xmlns:Shape="clr-namespace:Core2D.Shape;assembly=Core2D"
@@ -336,7 +335,7 @@
                 </TreeViewItem>
             </TreeViewItem>
             <!-- Layout -->
-            <TreeViewItem Header="Layout" DataContext="{Binding Layout}" Items="{Binding Layout.Views}">
+            <TreeViewItem Header="Layout" DataContext="{Binding Layout}" Items="{Binding Views}">
                 <TreeViewItem.ContextMenu>
                     <ContextMenu Classes="default">
                         <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
