@@ -201,6 +201,7 @@ namespace Core2D.Avalonia.Dock.Factories
                             imagesView
                         }
                     },
+                    new DockSplitter() { Dock = "Top", Title = "LeftTopSplitter" },
                     new DockStrip
                     {
                         Dock = "Bottom",
@@ -243,6 +244,7 @@ namespace Core2D.Avalonia.Dock.Factories
                             zoomView
                         }
                     },
+                    new DockSplitter() { Dock = "Top", Title = "RightTopSplitter" },
                     new DockStrip
                     {
                         Dock = "Bottom",
@@ -274,7 +276,9 @@ namespace Core2D.Avalonia.Dock.Factories
                 Views = new ObservableCollection<IDock>
                 {
                     leftPane,
+                    new DockSplitter() { Dock = "Left", Title = "LeftSplitter" },
                     rightPane,
+                    new DockSplitter() { Dock = "Right", Title = "RightSplitter" },
                     pageView
                 }
             };
