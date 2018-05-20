@@ -16,7 +16,5 @@
     <i:Interaction.Behaviors>
         <id:DropBehavior Context="{Binding Layout}" Handler="{x:Static idh:DockDropHandler.Instance}"/>
     </i:Interaction.Behaviors>
-    <Grid ColumnDefinitions="*" RowDefinitions="*">
-        <idd:StripControl x:Name="dock" Grid.Column="{Binding Column}" Grid.Row="{Binding Row}"/>
-    </Grid>
+    <idd:StripControl x:Name="dock"/>
 </Window>
