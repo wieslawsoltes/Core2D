@@ -9,7 +9,6 @@ using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.Platform;
 using Core2D.Avalonia.Converters;
-using Core2D.Avalonia.Dock;
 using Core2D.Avalonia.Modules;
 using Core2D.Avalonia.Views;
 using Core2D.Editor;
