@@ -25,10 +25,16 @@ namespace Core2D.Avalonia.Dock.Factories
         public EditorDockFactory(IServiceProvider serviceProvider) : base(serviceProvider)
         {
             _serviceProvider = serviceProvider;
+
+            ContextLocator = new Dictionary<Type, Func<object>>
+            {
+                [typeof(IDock)] = () => _serviceProvider.GetService<ProjectEditor>(),
+                [typeof(IDockWindow)] = () => _serviceProvider.GetService<ProjectEditor>()
+            };
         }
 
         /// <inheritdoc/>
-        public override IDock CreateDefaultLayout(object context)
+        public override IDock CreateDefaultLayout()
         {
             // Dashboard
 
@@ -37,9 +43,7 @@ namespace Core2D.Avalonia.Dock.Factories
                 Dock = "",
                 Width = double.NaN,
                 Height = double.NaN,
-                Title = "Dashboard",
-                Context = context,
-                Factory = this
+                Title = "Dashboard"
             };
 
             // Page
@@ -49,9 +53,7 @@ namespace Core2D.Avalonia.Dock.Factories
                 Dock = "",
                 Width = double.NaN,
                 Height = double.NaN,
-                Title = "Page",
-                Context = context,
-                Factory = this
+                Title = "Page"
             };
 
             // Left / Top
@@ -61,9 +63,7 @@ namespace Core2D.Avalonia.Dock.Factories
                 Dock = "",
                 Width = double.NaN,
                 Height = double.NaN,
-                Title = "Project",
-                Context = context,
-                Factory = this
+                Title = "Project"
             };
 
             var optionsView = new OptionsView
@@ -71,9 +71,7 @@ namespace Core2D.Avalonia.Dock.Factories
                 Dock = "",
                 Width = 200,
                 Height = 200,
-                Title = "Options",
-                Context = context,
-                Factory = this
+                Title = "Options"
             };
 
             var imagesView = new ImagesView
@@ -81,9 +79,7 @@ namespace Core2D.Avalonia.Dock.Factories
                 Dock = "",
                 Width = double.NaN,
                 Height = double.NaN,
-                Title = "Images",
-                Context = context,
-                Factory = this
+                Title = "Images"
             };
 
             // Left / Bottom
@@ -93,9 +89,7 @@ namespace Core2D.Avalonia.Dock.Factories
                 Dock = "",
                 Width = double.NaN,
                 Height = double.NaN,
-                Title = "Groups",
-                Context = context,
-                Factory = this
+                Title = "Groups"
             };
 
             var databasesView = new DatabasesView
@@ -103,9 +97,7 @@ namespace Core2D.Avalonia.Dock.Factories
                 Dock = "",
                 Width = double.NaN,
                 Height = double.NaN,
-                Title = "Databases",
-                Context = context,
-                Factory = this
+                Title = "Databases"
             };
 
             // Right / Top
@@ -115,9 +107,7 @@ namespace Core2D.Avalonia.Dock.Factories
                 Dock = "",
                 Width = double.NaN,
                 Height = double.NaN,
-                Title = "Styles",
-                Context = context,
-                Factory = this
+                Title = "Styles"
             };
 
             var templatesView = new TemplatesView
@@ -125,9 +115,7 @@ namespace Core2D.Avalonia.Dock.Factories
                 Dock = "",
                 Width = double.NaN,
                 Height = double.NaN,
-                Title = "Templates",
-                Context = context,
-                Factory = this
+                Title = "Templates"
             };
 
             var containerView = new ContainerView
@@ -135,9 +123,7 @@ namespace Core2D.Avalonia.Dock.Factories
                 Dock = "",
                 Width = double.NaN,
                 Height = double.NaN,
-                Title = "Container",
-                Context = context,
-                Factory = this
+                Title = "Container"
             };
 
             var zoomView = new ZoomView
@@ -145,9 +131,7 @@ namespace Core2D.Avalonia.Dock.Factories
                 Dock = "",
                 Width = double.NaN,
                 Height = double.NaN,
-                Title = "Zoom",
-                Context = context,
-                Factory = this
+                Title = "Zoom"
             };
 
             // Right / Bottom
@@ -157,9 +141,7 @@ namespace Core2D.Avalonia.Dock.Factories
                 Dock = "",
                 Width = double.NaN,
                 Height = double.NaN,
-                Title = "Tools",
-                Context = context,
-                Factory = this
+                Title = "Tools"
             };
 
             var shapeView = new ShapeView
@@ -167,9 +149,7 @@ namespace Core2D.Avalonia.Dock.Factories
                 Dock = "",
                 Width = double.NaN,
                 Height = double.NaN,
-                Title = "Shape",
-                Context = context,
-                Factory = this
+                Title = "Shape"
             };
 
             var dataView = new DataView
@@ -177,9 +157,7 @@ namespace Core2D.Avalonia.Dock.Factories
                 Dock = "",
                 Width = double.NaN,
                 Height = double.NaN,
-                Title = "Data",
-                Context = context,
-                Factory = this
+                Title = "Data"
             };
 
             var styleView = new StyleView
@@ -187,9 +165,7 @@ namespace Core2D.Avalonia.Dock.Factories
                 Dock = "",
                 Width = double.NaN,
                 Height = double.NaN,
-                Title = "Style",
-                Context = context,
-                Factory = this
+                Title = "Style"
             };
 
             var templateView = new TemplateView
@@ -197,9 +173,7 @@ namespace Core2D.Avalonia.Dock.Factories
                 Dock = "",
                 Width = double.NaN,
                 Height = double.NaN,
-                Title = "Template",
-                Context = context,
-                Factory = this
+                Title = "Template"
             };
 
             // Left
@@ -210,8 +184,6 @@ namespace Core2D.Avalonia.Dock.Factories
                 Width = 200,
                 Height = double.NaN,
                 Title = "EditorLeft",
-                Context = context,
-                Factory = this,
                 CurrentView = null,
                 Views = new ObservableCollection<IDock>
                 {
@@ -221,8 +193,6 @@ namespace Core2D.Avalonia.Dock.Factories
                         Width = double.NaN,
                         Height = 340,
                         Title = "EditorLeftTop",
-                        Context = context,
-                        Factory = this,
                         CurrentView = projectView,
                         Views = new ObservableCollection<IDock>
                         {
@@ -237,8 +207,6 @@ namespace Core2D.Avalonia.Dock.Factories
                         Width = double.NaN,
                         Height = double.NaN,
                         Title = "EditorLeftBottom",
-                        Context = context,
-                        Factory = this,
                         CurrentView = groupsView,
                         Views = new ObservableCollection<IDock>
                         {
@@ -257,8 +225,6 @@ namespace Core2D.Avalonia.Dock.Factories
                 Width = 240,
                 Height = double.NaN,
                 Title = "EditorRight",
-                Context = context,
-                Factory = this,
                 CurrentView = null,
                 Views = new ObservableCollection<IDock>
                 {
@@ -268,8 +234,6 @@ namespace Core2D.Avalonia.Dock.Factories
                         Width = double.NaN,
                         Height = 340,
                         Title = "EditorRightTop",
-                        Context = context,
-                        Factory = this,
                         CurrentView = stylesView,
                         Views = new ObservableCollection<IDock>
                         {
@@ -285,8 +249,6 @@ namespace Core2D.Avalonia.Dock.Factories
                         Width = double.NaN,
                         Height = double.NaN,
                         Title = "EditorRightBottom",
-                        Context = context,
-                        Factory = this,
                         CurrentView = toolsView,
                         Views = new ObservableCollection<IDock>
                         {
@@ -308,8 +270,6 @@ namespace Core2D.Avalonia.Dock.Factories
                 Width = double.NaN,
                 Height = double.NaN,
                 Title = "EditorLayout",
-                Context = context,
-                Factory = this,
                 CurrentView = null,
                 Views = new ObservableCollection<IDock>
                 {
@@ -325,8 +285,6 @@ namespace Core2D.Avalonia.Dock.Factories
                 Width = double.NaN,
                 Height = double.NaN,
                 Title = "Editor",
-                Context = context,
-                Factory = this,
                 CurrentView = editorLayout,
                 Views = new ObservableCollection<IDock>
                 {
@@ -341,9 +299,7 @@ namespace Core2D.Avalonia.Dock.Factories
                 Dock = "",
                 Width = double.NaN,
                 Height = double.NaN,
-                Title = "About",
-                Context = context,
-                Factory = this
+                Title = "About"
             };
 
             // Browser
@@ -353,9 +309,7 @@ namespace Core2D.Avalonia.Dock.Factories
                 Dock = "",
                 Width = double.NaN,
                 Height = double.NaN,
-                Title = "Browser",
-                Context = context,
-                Factory = this
+                Title = "Browser"
             };
 
             // Document
@@ -365,9 +319,7 @@ namespace Core2D.Avalonia.Dock.Factories
                 Dock = "",
                 Width = double.NaN,
                 Height = double.NaN,
-                Title = "Document",
-                Context = context,
-                Factory = this
+                Title = "Document"
             };
 
             // Main
@@ -377,8 +329,6 @@ namespace Core2D.Avalonia.Dock.Factories
                 Dock = "",
                 Width = double.NaN,
                 Height = double.NaN,
-                Context = context,
-                Factory = this,
                 CurrentView = dashboardView,
                 Views = new ObservableCollection<IDock>
                 {
@@ -399,11 +349,13 @@ namespace Core2D.Avalonia.Dock.Factories
             var editor = _serviceProvider.GetService<ProjectEditor>();
             if (editor.Layout != null)
             {
-                UpdateView(editor.Layout, editor);
+                Update(editor.Layout, editor);
             }
             else
             {
-                editor.Layout = CreateDefaultLayout(editor);
+                var layout = CreateDefaultLayout();
+                Update(layout, editor);
+                editor.Layout = layout;
             }
         }
     }

@@ -167,7 +167,7 @@ namespace Dock.Avalonia.Handlers
                         int itemIndex = strip.ItemContainerGenerator.IndexFromContainer(item);
                         var position = DropHelper.GetPositionScreen(sender, e);
 
-                        var window = layout.Factory?.CreateDockWindow(layout, context, container, itemIndex, position.X, position.Y);
+                        var window = layout.Factory?.CreateWindow(layout, context, container, itemIndex, position.X, position.Y);
                         window?.Present();
 
                         return true;

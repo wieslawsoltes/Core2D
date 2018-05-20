@@ -15,6 +15,9 @@ namespace Dock.Avalonia.Factories
     {
         private readonly IServiceProvider _serviceProvider;
 
+        /// <inheritdoc/>
+        public virtual IDictionary<Type, Func<object>> ContextLocator { get; set; }
+
         /// <summary>
         /// Initialize new instance of <see cref="BaseDockFactory"/> class.
         /// </summary>
@@ -25,54 +28,65 @@ namespace Dock.Avalonia.Factories
         }
 
         /// <inheritdoc/>
-        public virtual void UpdateWindow(IDockWindow window, object context)
+        public virtual object GetContext(object source, object context)
+        {
+            Func<object> locator = null;
+            if (ContextLocator?.TryGetValue(source?.GetType(), out locator) == true)
+            {
+                return locator?.Invoke();
+            }
+            return context;
+        }
+
+        /// <inheritdoc/>
+        public virtual void Update(IDockWindow window, object context)
         {
             window.Host = (IDockHost)_serviceProvider.GetService(typeof(IDockHost));
-            window.Context = context;
+            window.Context = GetContext(window, context);
 
             if (window.Layout != null)
             {
-                UpdateView(window.Layout, context);
+                Update(window.Layout, context);
             }
         }
 
         /// <inheritdoc/>
-        public virtual void UpdateWindows(IList<IDockWindow> windows, object context)
+        public virtual void Update(IList<IDockWindow> windows, object context)
         {
             foreach (var window in windows)
             {
-                UpdateWindow(window, context);
+                Update(window, context);
             }
         }
 
         /// <inheritdoc/>
-        public virtual void UpdateView(IDock view, object context)
+        public virtual void Update(IDock view, object context)
         {
-            view.Context = context;
+            view.Context = GetContext(view, context);
             view.Factory = this;
 
             if (view.Windows != null)
             {
-                UpdateWindows(view.Windows, context);
+                Update(view.Windows, context);
             }
 
             if (view.Views != null)
             {
-                UpdateViews(view.Views, context);
+                Update(view.Views, context);
             }
         }
 
         /// <inheritdoc/>
-        public virtual void UpdateViews(IList<IDock> views, object context)
+        public virtual void Update(IList<IDock> views, object context)
         {
             foreach (var view in views)
             {
-                UpdateView(view, context);
+                Update(view, context);
             }
         }
 
         /// <inheritdoc/>
-        public virtual IDockWindow CreateDockWindow(IDock layout, object context, IDock source, int viewIndex, double x, double y)
+        public virtual IDockWindow CreateWindow(IDock layout, object context, IDock source, int viewIndex, double x, double y)
         {
             var view = source.Views[viewIndex];
 
@@ -82,13 +96,9 @@ namespace Dock.Avalonia.Factories
             {
                 Dock = "",
                 Title = "",
-                Context = context,
-                Factory = this,
                 CurrentView = view,
                 Views = new ObservableCollection<IDock> { view }
             };
-
-            var host = (IDockHost)_serviceProvider.GetService(typeof(IDockHost));
 
             var dockWindow = new DockWindow()
             {
@@ -97,10 +107,10 @@ namespace Dock.Avalonia.Factories
                 Width = 300,
                 Height = 400,
                 Title = "Dock",
-                Context = context,
-                Layout = dockLayout,
-                Host = host
+                Layout = dockLayout
             };
+
+            Update(dockWindow, context);
 
             if (layout.CurrentView.Windows == null)
             {
@@ -112,7 +122,7 @@ namespace Dock.Avalonia.Factories
         }
 
         /// <inheritdoc/>
-        public abstract IDock CreateDefaultLayout(object context);
+        public abstract IDock CreateDefaultLayout();
 
         /// <inheritdoc/>
         public abstract void CreateOrUpdateLayout();
