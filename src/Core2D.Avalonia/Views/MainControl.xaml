@@ -44,22 +44,22 @@
         <KeyBinding Command="{Binding Platform.OnDocumentViewer}" Gesture="Ctrl+D"/>
         <KeyBinding Command="{Binding Platform.OnScriptEditor}" Gesture="Ctrl+R"/>
     </UserControl.KeyBindings>
-    <!--<idd:LayoutControl DataContext="{Binding Layout}"/>-->
-    <DockPanel LastChildFill="True" Background="Pink">
+    <idd:LayoutControl DataContext="{Binding Layout}"/>
+    <!--<DockPanel LastChildFill="True" Background="Pink">
         <DockPanel x:Name="Left1" LastChildFill="True" Width="180" MinWidth="0" DockPanel.Dock="Left">
             <Border x:Name="Top1" Background="Red" Height="250" MinHeight="100" DockPanel.Dock="Top"/>
-            <idc:DockPanelSplitter DockPanel.Dock="Top"/>
+            <idc:DockPanelSplitter Background="Black" DockPanel.Dock="Top"/>
             <Border x:Name="Bottom1" Background="Blue" Height="NaN" MinHeight="100" DockPanel.Dock="Bottom"/>
         </DockPanel>
-        <idc:DockPanelSplitter DockPanel.Dock="Left"/>
+        <idc:DockPanelSplitter Background="Black" DockPanel.Dock="Left"/>
         <DockPanel x:Name="Right1" LastChildFill="True" Width="240" MinWidth="0" DockPanel.Dock="Right">
             <Border x:Name="Top2" Background="Green" Height="250" MinHeight="100" DockPanel.Dock="Top"/>
-            <idc:DockPanelSplitter DockPanel.Dock="Top"/>
+            <idc:DockPanelSplitter Background="Black" DockPanel.Dock="Top"/>
             <Border x:Name="Bottom2" Background="Orange" Height="NaN" MinHeight="100" DockPanel.Dock="Bottom"/>
         </DockPanel>
-        <idc:DockPanelSplitter DockPanel.Dock="Right"/>
+        <idc:DockPanelSplitter Background="Black" DockPanel.Dock="Right"/>
         <Grid x:Name="Grid1">
             <Border Background="Gray" Width="300" Height="300"/>
         </Grid>
-    </DockPanel>
+    </DockPanel>-->
 </UserControl>
