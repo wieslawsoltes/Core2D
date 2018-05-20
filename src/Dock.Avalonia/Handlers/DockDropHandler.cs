@@ -183,7 +183,7 @@ namespace Dock.Avalonia.Handlers
         {
             if (context is IDock layout)
             {
-                return Validate(layout, context, sender, e, false);
+                return Validate(layout, layout.Context, sender, e, false);
             }
             return false;
         }
@@ -192,7 +192,7 @@ namespace Dock.Avalonia.Handlers
         {
             if (context is IDock layout)
             {
-                return Validate(layout, context, sender, e, true);
+                return Validate(layout, layout.Context, sender, e, true);
             }
             return false;
         }
