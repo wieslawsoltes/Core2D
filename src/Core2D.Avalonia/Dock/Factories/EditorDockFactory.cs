@@ -379,7 +379,7 @@ namespace Core2D.Avalonia.Dock.Factories
                 Height = double.NaN,
                 Context = context,
                 Factory = this,
-                CurrentView = editorView, //dashboardView,
+                CurrentView = dashboardView,
                 Views = new ObservableCollection<IDock>
                 {
                     dashboardView,
