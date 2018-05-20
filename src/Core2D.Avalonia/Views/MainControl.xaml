@@ -43,7 +43,9 @@
         <KeyBinding Command="{Binding Platform.OnDocumentViewer}" Gesture="Ctrl+D"/>
         <KeyBinding Command="{Binding Platform.OnScriptEditor}" Gesture="Ctrl+R"/>
     </UserControl.KeyBindings>
+
     <!--<idd:LayoutControl DataContext="{Binding Layout}"/>-->
+
     <!--
     <DockPanel LastChildFill="True" Background="Pink" Width="900" Height="500">
         <DockPanel LastChildFill="True" Width="200" Height="500" DockPanel.Dock="Left">
@@ -59,6 +61,7 @@
         </Grid>
     </DockPanel>
     -->
+
     <ItemsControl Items="{Binding Layout.CurrentView.CurrentView.Views}" 
                   Width="{Binding Layout.CurrentView.CurrentView.Width}" 
                   Height="{Binding Layout.CurrentView.CurrentView.Height}">
@@ -67,6 +70,11 @@
                 <DockPanel Background="Pink" LastChildFill="True"/>
             </ItemsPanelTemplate>
         </ItemsControl.ItemsPanel>
+        <ItemsControl.Styles>
+            <Style Selector="ItemsControl > ContentPresenter">
+                <Setter Property="DockPanel.Dock" Value="{Binding Dock}"/>
+            </Style>
+        </ItemsControl.Styles>
         <ItemsControl.DataTemplates>
             <DataTemplate DataType="Views:PageView">
                 <Border Background="Gray" Width="{Binding Width}" Height="{Binding Height}">
@@ -79,7 +87,7 @@
                 </Border>
             </DataTemplate>
             <DataTemplate DataType="Dock:IDockStrip">
-                <Border Background="Red" DockPanel.Dock="{Binding Dock}" Width="{Binding Width}" Height="{Binding Height}">
+                <Border Background="Red" Width="{Binding Width}" Height="{Binding Height}">
                     <StackPanel>
                         <TextBlock Text="{Binding $self.DataContext}"/>
                         <TextBlock Text="{Binding Dock}"/>
@@ -89,7 +97,7 @@
                 </Border>
             </DataTemplate>
             <DataTemplate DataType="Dock:IDockLayout">
-                <StackPanel Background="Purple" DockPanel.Dock="{Binding Dock}" Width="{Binding Width}">
+                <StackPanel Background="Purple" Width="{Binding Width}">
                     <TextBlock Text="{Binding $self.DataContext}"/>
                     <TextBlock Text="{Binding Dock}"/>
                     <TextBlock Text="{Binding Width}"/>
@@ -97,17 +105,22 @@
                     <ItemsControl Items="{Binding Views}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <!--<DockPanel Background="Orange" DockPanel.Dock="{Binding Dock}" Width="{Binding Width}" Height="{Binding Height}" LastChildFill="True"/>-->
-                                <StackPanel Background="Orange" DockPanel.Dock="{Binding Dock}"/>
+                                <DockPanel Background="Orange" Width="{Binding Width}" Height="{Binding Height}" LastChildFill="True"/>
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
+                        <ItemsControl.Styles>
+                            <Style Selector="ItemsControl > ContentPresenter">
+                                <Setter Property="DockPanel.Dock" Value="{Binding Dock}"/>
+                            </Style>
+                        </ItemsControl.Styles>
                     </ItemsControl>
                 </StackPanel> 
             </DataTemplate>
          </ItemsControl.DataTemplates>
     </ItemsControl>
 
-    <!--<ContentControl Content="{Binding Layout}">
+    <!--
+    <ContentControl Content="{Binding Layout}">
         <ContentControl.DataTemplates>
             <DataTemplate DataType="Views:PageView">
                 <Border Background="Gray" Width="{Binding Width}" Height="{Binding Height}">
@@ -135,5 +148,7 @@
                 <Carousel Items="{Binding Views}" SelectedItem="{Binding CurrentView, Mode=TwoWay}" IsVirtualized="False"/>
             </DataTemplate>
         </ContentControl.DataTemplates>
-    </ContentControl>-->
+    </ContentControl>
+    -->
+
 </UserControl>
