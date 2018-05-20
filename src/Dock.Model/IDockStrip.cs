@@ -5,9 +5,9 @@ using System.Collections.Generic;
 namespace Dock.Model
 {
     /// <summary>
-    /// Dock view contract.
+    /// Dock strip contract.
     /// </summary>
-    public interface IDockView : IDock
+    public interface IDockStrip : IDock
     {
     }
 }

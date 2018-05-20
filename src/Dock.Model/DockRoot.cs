@@ -5,9 +5,9 @@ using System.Collections.Generic;
 namespace Dock.Model
 {
     /// <summary>
-    /// Dock view contract.
+    /// Dock root.
     /// </summary>
-    public interface IDockView : IDock
+    public class DockRoot : DockBase, IDockRoot
     {
     }
 }

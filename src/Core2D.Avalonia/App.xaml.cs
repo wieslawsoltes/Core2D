@@ -9,7 +9,6 @@ using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.Platform;
 using Core2D.Avalonia.Converters;
-using Core2D.Avalonia.Dock;
 using Core2D.Avalonia.Modules;
 using Core2D.Avalonia.Views;
 using Core2D.Editor;
@@ -138,9 +137,8 @@ namespace Core2D.Avalonia
                 var window = serviceProvider.GetService<Windows.MainWindow>();
                 window.Closed += (sender, e) =>
                 {
-                    editor.Layout.CurrentView.CloseWindows();
+                    editor.Layout?.CurrentView?.CloseWindows();
                     editor.OnSaveLayout(layoutPath);
-
                     editor.OnSaveRecent(recentPath);
                 };
                 window.DataContext = editor;

@@ -12,7 +12,7 @@ namespace Dock.Avalonia.Handlers
     {
         public static IDropHandler Instance = new DockDropHandler();
 
-        private bool ValidateTabStrip(IDockLayout layout, DragEventArgs e, bool bExecute, TabStrip strip)
+        private bool ValidateTabStrip(IDock layout, DragEventArgs e, bool bExecute, TabStrip strip)
         {
             var sourceItem = e.Data.Get(DragDataFormats.Parent);
             var targetItem = (e.Source as IControl)?.Parent?.Parent;
@@ -24,7 +24,7 @@ namespace Dock.Avalonia.Handlers
                     int sourceIndex = strip.ItemContainerGenerator.IndexFromContainer(source);
                     int targetIndex = strip.ItemContainerGenerator.IndexFromContainer(target);
 
-                    if (strip.DataContext is IDockLayout container)
+                    if (strip.DataContext is IDock container)
                     {
                         if (e.DragEffects == DragDropEffects.Copy)
                         {
@@ -57,8 +57,8 @@ namespace Dock.Avalonia.Handlers
                 }
                 else if (source.Parent is TabStrip sourceStrip
                     && target.Parent is TabStrip targetStrip
-                    && sourceStrip.DataContext is IDockLayout sourceLayout
-                    && targetStrip.DataContext is IDockLayout targetLayout)
+                    && sourceStrip.DataContext is IDock sourceLayout
+                    && targetStrip.DataContext is IDock targetLayout)
                 {
                     int sourceIndex = sourceStrip.ItemContainerGenerator.IndexFromContainer(source);
                     int targetIndex = targetStrip.ItemContainerGenerator.IndexFromContainer(target);
@@ -101,14 +101,14 @@ namespace Dock.Avalonia.Handlers
             return false;
         }
 
-        private bool ValidateDockPanel(IDockLayout layout, DragEventArgs e, bool bExecute, DockPanel panel)
+        private bool ValidateDockPanel(IDock layout, DragEventArgs e, bool bExecute, DockPanel panel)
         {
             var sourceItem = e.Data.Get(DragDataFormats.Parent);
 
             if (sourceItem is TabStripItem source
                 && source.Parent is TabStrip sourceStrip
-                && sourceStrip.DataContext is IDockLayout sourceLayout
-                && panel.DataContext is IDockLayout targetLayout
+                && sourceStrip.DataContext is IDock sourceLayout
+                && panel.DataContext is IDock targetLayout
                 && sourceLayout != targetLayout)
             {
                 int sourceIndex = sourceStrip.ItemContainerGenerator.IndexFromContainer(source);
@@ -145,7 +145,7 @@ namespace Dock.Avalonia.Handlers
             return false;
         }
 
-        private bool Validate(IDockLayout layout, object context, object sender, DragEventArgs e, bool bExecute)
+        private bool Validate(IDock layout, object context, object sender, DragEventArgs e, bool bExecute)
         {
             var point = DropHelper.GetPosition(sender, e);
 
@@ -160,7 +160,7 @@ namespace Dock.Avalonia.Handlers
             if (e.Data.Get(DragDataFormats.Parent) is TabStripItem item)
             {
                 var strip = item.Parent as TabStrip;
-                if (strip.DataContext is IDockLayout container)
+                if (strip.DataContext is IDock container)
                 {
                     if (bExecute)
                     {
@@ -181,18 +181,18 @@ namespace Dock.Avalonia.Handlers
 
         public bool Validate(object context, object sender, DragEventArgs e)
         {
-            if (context is IDockLayout layout)
+            if (context is IDock layout)
             {
-                return Validate(layout, context, sender, e, false);
+                return Validate(layout, layout.Context, sender, e, false);
             }
             return false;
         }
 
         public bool Execute(object context, object sender, DragEventArgs e)
         {
-            if (context is IDockLayout layout)
+            if (context is IDock layout)
             {
-                return Validate(layout, context, sender, e, true);
+                return Validate(layout, layout.Context, sender, e, true);
             }
             return false;
         }

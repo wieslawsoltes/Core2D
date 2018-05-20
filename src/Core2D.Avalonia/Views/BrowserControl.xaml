@@ -6,16 +6,19 @@
              xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
              xmlns:id="clr-namespace:Dock.Avalonia;assembly=Dock.Avalonia"
+             xmlns:idd="clr-namespace:Dock.Avalonia.Dock;assembly=Dock.Avalonia"
+             xmlns:idh="clr-namespace:Dock.Avalonia.Handlers;assembly=Dock.Avalonia"
              xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"
              xmlns:Core="clr-namespace:Core2D;assembly=Core2D"
              xmlns:Data="clr-namespace:Core2D.Data;assembly=Core2D"
-             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor"
              xmlns:Dock="clr-namespace:Dock.Model;assembly=Dock.Model"
+             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D.Editor"
              xmlns:Designer="clr-namespace:Core2D.Editor.Designer;assembly=Core2D.Editor"
              xmlns:Containers="clr-namespace:Core2D.Containers;assembly=Core2D"
              xmlns:Shape="clr-namespace:Core2D.Shape;assembly=Core2D"
              xmlns:Shapes="clr-namespace:Core2D.Shapes;assembly=Core2D"
              xmlns:Style="clr-namespace:Core2D.Style;assembly=Core2D"
+             xmlns:dock="clr-namespace:Core2D.Avalonia.Views.Dock;assembly=Core2D.Avalonia"
              Design.DataContext="{x:Static Designer:DesignerContext.Editor}"
              Design.Width="1000" Design.Height="600">
     <Grid ColumnDefinitions="250,Auto,*" RowDefinitions="*">
@@ -331,8 +334,8 @@
                     </TreeViewItem.ContextMenu>
                 </TreeViewItem>
             </TreeViewItem>
-            <!-- Views -->
-            <TreeViewItem Header="Views" DataContext="{Binding Layout.Views}" Items="{Binding}">
+            <!-- Layout -->
+            <TreeViewItem Header="Layout" DataContext="{Binding Layout}" Items="{Binding Views}">
                 <TreeViewItem.ContextMenu>
                     <ContextMenu Classes="default">
                         <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
@@ -344,7 +347,7 @@
                     </Style>
                 </TreeViewItem.Styles>
                 <TreeViewItem.DataTemplates>
-                    <DataTemplate DataType="Dock:IDockView">
+                    <TreeDataTemplate DataType="Dock:IDock" ItemsSource="{Binding Views}">
                         <TextBlock Text="{Binding Title}" Classes="tree drag">
                             <i:Interaction.Behaviors>
                                 <id:DragBehavior/>
@@ -355,7 +358,7 @@
                                 </ContextMenu>
                             </TextBlock.ContextMenu>
                         </TextBlock>
-                    </DataTemplate>
+                    </TreeDataTemplate>
                 </TreeViewItem.DataTemplates>
             </TreeViewItem>
         </TreeView>
@@ -363,7 +366,14 @@
         <Border Classes="project" Grid.Column="2" Grid.Row="0" Margin="0,6,6,6">
             <TabControl Classes="top">
                 <TabItem Header="Properties" Classes="property">
-                    <ContentControl Content="{Binding #project.SelectedItem, Converter={x:Static converters:TreeViewSelectedItemToObjectConverter.Instance}}" Classes="project" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                    <ContentControl Content="{Binding #project.SelectedItem, Converter={x:Static converters:TreeViewSelectedItemToObjectConverter.Instance}}" Classes="project" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <ContentControl.DataTemplates>
+                            <!-- Dock -->
+                            <DataTemplate DataType="Dock:IDock">
+                                <dock:DockControl/>
+                            </DataTemplate>
+                        </ContentControl.DataTemplates>
+                    </ContentControl>
                 </TabItem>
                 <TabItem Header="Xaml" Classes="property">
                     <TextBox DataContext="{Binding #project.SelectedItem, Converter={x:Static converters:TreeViewSelectedItemToObjectConverter.Instance}}" Text="{Binding Mode=OneWay, Converter={x:Static converters:ObjectToXamlStringConverter.Instance}}" Classes="project" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">

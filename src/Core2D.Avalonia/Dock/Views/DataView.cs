@@ -1,13 +1,14 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using System.Collections.Generic;
+using System;
+using Dock.Model;
 
-namespace Dock.Model
+namespace Core2D.Avalonia.Dock.Views
 {
     /// <summary>
-    /// Dock view contract.
+    /// Data view.
     /// </summary>
-    public interface IDockView : IDock
+    public class DataView : DockView
     {
     }
 }

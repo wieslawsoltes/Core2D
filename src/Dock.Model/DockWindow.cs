@@ -14,7 +14,7 @@ namespace Dock.Model
         private double _height;
         private string _title;
         private object _context;
-        private IDockLayout _layout;
+        private IDock _layout;
         private IDockHost _host;
 
         /// <inheritdoc/>
@@ -60,7 +60,7 @@ namespace Dock.Model
         }
 
         /// <inheritdoc/>
-        public IDockLayout Layout
+        public IDock Layout
         {
             get => _layout;
             set => Update(ref _layout, value);
