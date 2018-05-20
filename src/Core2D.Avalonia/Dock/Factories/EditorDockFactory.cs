@@ -305,8 +305,8 @@ namespace Core2D.Avalonia.Dock.Factories
                 Views = new ObservableCollection<IDock>
                 {
                     leftPane,
-                    pageView,
                     rightPane,
+                    pageView
                 }
             };
 
