@@ -33,6 +33,8 @@
         <!-- Theme -->
         <StyleInclude Source="resm:Avalonia.Themes.Default.DefaultTheme.xaml?assembly=Avalonia.Themes.Default"/>
         <StyleInclude Source="resm:Avalonia.Themes.Default.Accents.BaseLight.xaml?assembly=Avalonia.Themes.Default"/>
+        <!-- DockPanelSplitter -->
+        <StyleInclude Source="resm:Dock.Avalonia.Controls.DockPanelSplitter.xaml?assembly=Dock.Avalonia"/>
         <!-- Border -->
         <Style Selector="Border.panel">
             <Setter Property="Margin" Value="2"/>
