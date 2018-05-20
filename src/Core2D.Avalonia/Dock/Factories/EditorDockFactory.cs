@@ -35,6 +35,9 @@ namespace Core2D.Avalonia.Dock.Factories
             var dashboardView = new DashboardView
             {
                 Dock = "",
+                Width = double.NaN,
+                Height = double.NaN,
+                Height = 300,
                 Title = "Dashboard",
                 Context = context,
                 Factory = this
@@ -207,6 +210,7 @@ namespace Core2D.Avalonia.Dock.Factories
                 Dock = "Left",
                 Width = 200,
                 Height = 500,
+                Title = "EditorLeft",
                 Context = context,
                 Factory = this,
                 CurrentView = null,
@@ -217,6 +221,7 @@ namespace Core2D.Avalonia.Dock.Factories
                         Dock = "Top",
                         Width = 200,
                         Height = 200,
+                        Title = "EditorLeftTop",
                         Context = context,
                         Factory = this,
                         CurrentView = projectView,
@@ -232,6 +237,7 @@ namespace Core2D.Avalonia.Dock.Factories
                         Dock = "Bottom",
                         Width = 200,
                         Height = 200,
+                        Title = "EditorLeftBottom",
                         Context = context,
                         Factory = this,
                         CurrentView = groupsView,
@@ -251,6 +257,7 @@ namespace Core2D.Avalonia.Dock.Factories
                 Dock = "Right",
                 Width = 200,
                 Height = 500,
+                Title = "EditorRight",
                 Context = context,
                 Factory = this,
                 CurrentView = null,
@@ -261,6 +268,7 @@ namespace Core2D.Avalonia.Dock.Factories
                         Dock = "Top",
                         Width = 200,
                         Height = 200,
+                        Title = "EditorRightTop",
                         Context = context,
                         Factory = this,
                         CurrentView = stylesView,
@@ -277,6 +285,7 @@ namespace Core2D.Avalonia.Dock.Factories
                         Dock = "Bottom",
                         Width = 200,
                         Height = 200,
+                        Title = "EditorRightBottom",
                         Context = context,
                         Factory = this,
                         CurrentView = toolsView,
@@ -299,6 +308,7 @@ namespace Core2D.Avalonia.Dock.Factories
                 Dock = "",
                 Width = 900,
                 Height = 500,
+                Title = "EditorLayout",
                 Context = context,
                 Factory = this,
                 CurrentView = null,
@@ -313,6 +323,8 @@ namespace Core2D.Avalonia.Dock.Factories
             var editorView = new EditorView
             {
                 Dock = "",
+                Width = double.NaN,
+                Height = double.NaN,
                 Title = "Editor",
                 Context = context,
                 Factory = this,
@@ -328,6 +340,8 @@ namespace Core2D.Avalonia.Dock.Factories
             var aboutView = new AboutView
             {
                 Dock = "",
+                Width = double.NaN,
+                Height = double.NaN,
                 Title = "About",
                 Context = context,
                 Factory = this
@@ -338,6 +352,8 @@ namespace Core2D.Avalonia.Dock.Factories
             var browserView = new BrowserView
             {
                 Dock = "",
+                Width = double.NaN,
+                Height = double.NaN,
                 Title = "Browser",
                 Context = context,
                 Factory = this
@@ -348,6 +364,8 @@ namespace Core2D.Avalonia.Dock.Factories
             var documentView = new DocumentView
             {
                 Dock = "",
+                Width = double.NaN,
+                Height = double.NaN,
                 Title = "Document",
                 Context = context,
                 Factory = this
@@ -358,6 +376,8 @@ namespace Core2D.Avalonia.Dock.Factories
             var layout = new DockRoot
             {
                 Dock = "",
+                Width = double.NaN,
+                Height = double.NaN,
                 Context = context,
                 Factory = this,
                 CurrentView = editorView, //dashboardView,
