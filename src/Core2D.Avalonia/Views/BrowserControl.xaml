@@ -6,6 +6,8 @@
              xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
              xmlns:id="clr-namespace:Dock.Avalonia;assembly=Dock.Avalonia"
+             xmlns:idd="clr-namespace:Dock.Avalonia.Dock;assembly=Dock.Avalonia"
+             xmlns:idh="clr-namespace:Dock.Avalonia.Handlers;assembly=Dock.Avalonia"
              xmlns:converters="clr-namespace:Core2D.Avalonia.Converters;assembly=Core2D.Avalonia"
              xmlns:Core="clr-namespace:Core2D;assembly=Core2D"
              xmlns:Data="clr-namespace:Core2D.Data;assembly=Core2D"
@@ -331,8 +333,8 @@
                     </TreeViewItem.ContextMenu>
                 </TreeViewItem>
             </TreeViewItem>
-            <!-- Views -->
-            <TreeViewItem Header="Views" DataContext="{Binding Layout.Views}" Items="{Binding}">
+            <!-- Layout -->
+            <TreeViewItem Header="Layout" DataContext="{Binding Layout}" Items="{Binding}">
                 <TreeViewItem.ContextMenu>
                     <ContextMenu Classes="default">
                         <MenuItem Header="E_xport" Command="{Binding $parent[UserControl].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}"/>
@@ -344,7 +346,7 @@
                     </Style>
                 </TreeViewItem.Styles>
                 <TreeViewItem.DataTemplates>
-                    <DataTemplate DataType="Dock:IDockView">
+                    <TreeDataTemplate DataType="Dock:IDock" ItemsSource="{Binding Views}">
                         <TextBlock Text="{Binding Title}" Classes="tree drag">
                             <i:Interaction.Behaviors>
                                 <id:DragBehavior/>
@@ -355,7 +357,7 @@
                                 </ContextMenu>
                             </TextBlock.ContextMenu>
                         </TextBlock>
-                    </DataTemplate>
+                    </TreeDataTemplate>
                 </TreeViewItem.DataTemplates>
             </TreeViewItem>
         </TreeView>
