@@ -74,7 +74,7 @@ namespace Dock.Avalonia
             var dock = this.FindControl<IControl>("dock");
             if (dock != null)
             {
-                dock.DataContext = layout.Views[0];
+                dock.DataContext = layout;
             }
         }
     }
