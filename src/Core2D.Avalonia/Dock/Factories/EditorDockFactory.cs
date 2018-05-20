@@ -47,8 +47,8 @@ namespace Core2D.Avalonia.Dock.Factories
             var pageView = new PageView
             {
                 Dock = "",
-                Width = 300,
-                Height = 300,
+                Width = double.NaN,
+                Height = double.NaN,
                 Title = "Page",
                 Context = context,
                 Factory = this
@@ -59,8 +59,8 @@ namespace Core2D.Avalonia.Dock.Factories
             var projectView = new ProjectView
             {
                 Dock = "",
-                Width = 200,
-                Height = 200,
+                Width = double.NaN,
+                Height = double.NaN,
                 Title = "Project",
                 Context = context,
                 Factory = this
@@ -79,8 +79,8 @@ namespace Core2D.Avalonia.Dock.Factories
             var imagesView = new ImagesView
             {
                 Dock = "",
-                Width = 200,
-                Height = 200,
+                Width = double.NaN,
+                Height = double.NaN,
                 Title = "Images",
                 Context = context,
                 Factory = this
@@ -91,8 +91,8 @@ namespace Core2D.Avalonia.Dock.Factories
             var groupsView = new GroupsView
             {
                 Dock = "",
-                Width = 200,
-                Height = 200,
+                Width = double.NaN,
+                Height = double.NaN,
                 Title = "Groups",
                 Context = context,
                 Factory = this
@@ -101,8 +101,8 @@ namespace Core2D.Avalonia.Dock.Factories
             var databasesView = new DatabasesView
             {
                 Dock = "",
-                Width = 200,
-                Height = 200,
+                Width = double.NaN,
+                Height = double.NaN,
                 Title = "Databases",
                 Context = context,
                 Factory = this
@@ -113,8 +113,8 @@ namespace Core2D.Avalonia.Dock.Factories
             var stylesView = new StylesView
             {
                 Dock = "",
-                Width = 200,
-                Height = 200,
+                Width = double.NaN,
+                Height = double.NaN,
                 Title = "Styles",
                 Context = context,
                 Factory = this
@@ -123,8 +123,8 @@ namespace Core2D.Avalonia.Dock.Factories
             var templatesView = new TemplatesView
             {
                 Dock = "",
-                Width = 200,
-                Height = 200,
+                Width = double.NaN,
+                Height = double.NaN,
                 Title = "Templates",
                 Context = context,
                 Factory = this
@@ -133,8 +133,8 @@ namespace Core2D.Avalonia.Dock.Factories
             var containerView = new ContainerView
             {
                 Dock = "",
-                Width = 200,
-                Height = 200,
+                Width = double.NaN,
+                Height = double.NaN,
                 Title = "Container",
                 Context = context,
                 Factory = this
@@ -143,8 +143,8 @@ namespace Core2D.Avalonia.Dock.Factories
             var zoomView = new ZoomView
             {
                 Dock = "",
-                Width = 200,
-                Height = 200,
+                Width = double.NaN,
+                Height = double.NaN,
                 Title = "Zoom",
                 Context = context,
                 Factory = this
@@ -155,8 +155,8 @@ namespace Core2D.Avalonia.Dock.Factories
             var toolsView = new ToolsView
             {
                 Dock = "",
-                Width = 200,
-                Height = 200,
+                Width = double.NaN,
+                Height = double.NaN,
                 Title = "Tools",
                 Context = context,
                 Factory = this
@@ -165,8 +165,8 @@ namespace Core2D.Avalonia.Dock.Factories
             var shapeView = new ShapeView
             {
                 Dock = "",
-                Width = 200,
-                Height = 200,
+                Width = double.NaN,
+                Height = double.NaN,
                 Title = "Shape",
                 Context = context,
                 Factory = this
@@ -175,8 +175,8 @@ namespace Core2D.Avalonia.Dock.Factories
             var dataView = new DataView
             {
                 Dock = "",
-                Width = 200,
-                Height = 200,
+                Width = double.NaN,
+                Height = double.NaN,
                 Title = "Data",
                 Context = context,
                 Factory = this
@@ -185,8 +185,8 @@ namespace Core2D.Avalonia.Dock.Factories
             var styleView = new StyleView
             {
                 Dock = "",
-                Width = 200,
-                Height = 200,
+                Width = double.NaN,
+                Height = double.NaN,
                 Title = "Style",
                 Context = context,
                 Factory = this
@@ -195,8 +195,8 @@ namespace Core2D.Avalonia.Dock.Factories
             var templateView = new TemplateView
             {
                 Dock = "",
-                Width = 200,
-                Height = 200,
+                Width = double.NaN,
+                Height = double.NaN,
                 Title = "Template",
                 Context = context,
                 Factory = this
@@ -208,7 +208,7 @@ namespace Core2D.Avalonia.Dock.Factories
             {
                 Dock = "Left",
                 Width = 200,
-                Height = 500,
+                Height = double.NaN,
                 Title = "EditorLeft",
                 Context = context,
                 Factory = this,
@@ -218,8 +218,8 @@ namespace Core2D.Avalonia.Dock.Factories
                     new DockStrip
                     {
                         Dock = "Top",
-                        Width = 200,
-                        Height = 200,
+                        Width = double.NaN,
+                        Height = 340,
                         Title = "EditorLeftTop",
                         Context = context,
                         Factory = this,
@@ -234,8 +234,8 @@ namespace Core2D.Avalonia.Dock.Factories
                     new DockStrip
                     {
                         Dock = "Bottom",
-                        Width = 200,
-                        Height = 200,
+                        Width = double.NaN,
+                        Height = double.NaN,
                         Title = "EditorLeftBottom",
                         Context = context,
                         Factory = this,
@@ -254,8 +254,8 @@ namespace Core2D.Avalonia.Dock.Factories
             var rightPane = new DockLayout
             {
                 Dock = "Right",
-                Width = 200,
-                Height = 500,
+                Width = 240,
+                Height = double.NaN,
                 Title = "EditorRight",
                 Context = context,
                 Factory = this,
@@ -265,8 +265,8 @@ namespace Core2D.Avalonia.Dock.Factories
                     new DockStrip
                     {
                         Dock = "Top",
-                        Width = 200,
-                        Height = 200,
+                        Width = double.NaN,
+                        Height = 340,
                         Title = "EditorRightTop",
                         Context = context,
                         Factory = this,
@@ -282,8 +282,8 @@ namespace Core2D.Avalonia.Dock.Factories
                     new DockStrip
                     {
                         Dock = "Bottom",
-                        Width = 200,
-                        Height = 200,
+                        Width = double.NaN,
+                        Height = double.NaN,
                         Title = "EditorRightBottom",
                         Context = context,
                         Factory = this,
@@ -305,8 +305,8 @@ namespace Core2D.Avalonia.Dock.Factories
             var editorLayout = new DockLayout
             {
                 Dock = "",
-                Width = 900,
-                Height = 500,
+                Width = double.NaN,
+                Height = double.NaN,
                 Title = "EditorLayout",
                 Context = context,
                 Factory = this,
