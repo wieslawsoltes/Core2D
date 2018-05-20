@@ -139,7 +139,7 @@ namespace Core2D.Avalonia
                 window.Closed += (sender, e) =>
                 {
                     editor.Layout?.CurrentView?.CloseWindows();
-                    //editor.OnSaveLayout(layoutPath);
+                    editor.OnSaveLayout(layoutPath);
                     editor.OnSaveRecent(recentPath);
                 };
                 window.DataContext = editor;
