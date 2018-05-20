@@ -37,7 +37,6 @@ namespace Core2D.Avalonia.Dock.Factories
                 Dock = "",
                 Width = double.NaN,
                 Height = double.NaN,
-                Height = 300,
                 Title = "Dashboard",
                 Context = context,
                 Factory = this
