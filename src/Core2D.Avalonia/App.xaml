@@ -534,7 +534,7 @@
     </Application.Styles>
     <Application.Resources>
         <!-- Fonts -->
-        <FontFamily x:Key="UiFont">resm:Core2D.Avalonia.Assets.selaw*.ttf?assembly=Core2D.Avalonia#Selawik</FontFamily>
+        <FontFamily x:Key="UiFont">resm:Core2D.Avalonia.Assets.selaw*.ttf?assembly=Core2D.Avalonia#Selawik Light</FontFamily>
         <!-- Brushes -->
         <SolidColorBrush x:Key="TransparentBrush">#00FFFFFF</SolidColorBrush>
         <VisualBrush x:Key="ColorCheckerBoard" TileMode="Tile" Stretch="None" AlignmentX="Left" AlignmentY="Top" SourceRect="0,0,20,20" DestinationRect="0,0,20,20">
